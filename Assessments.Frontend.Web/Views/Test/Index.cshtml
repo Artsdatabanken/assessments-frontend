@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Assessments.Api.Data.DataRepository.Models.Rodliste2015>
+
+@{
+    ViewBag.Title = "OData client test";
+}
+
+<h3>
+    @Model.Count() redlist items from assessments api
+</h3>
+
+<table>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>VurdertVitenskapeligNavn</td>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.VurdertVitenskapeligNavn</td>
+        </tr>
+    }
+</table>

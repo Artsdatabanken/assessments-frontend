@@ -1,3 +1,4 @@
+using Assessments.Frontend.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -13,11 +14,15 @@ namespace Assessments.Frontend.Web
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddTransient<AssessmentApiService>();
+
+            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

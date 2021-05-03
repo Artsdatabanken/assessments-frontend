@@ -10,7 +10,7 @@
     "IncludeT4File": false,
     "ExcludedOperationImports": [],
     "ExcludedBoundOperations": [],
-    "ServiceName": "Assessments OData Service",
+    "ServiceName": "AssessmentODataService",
     "Endpoint": "https://assessmentsapi.test.artsdatabanken.no/api/$metadata",
     "EdmxVersion": {
       "Major": 4,
@@ -20,7 +20,7 @@
       "MajorRevision": 0,
       "MinorRevision": 0
     },
-    "GeneratedFileNamePrefix": "AssessmentsODataService",
+    "GeneratedFileNamePrefix": "AssessmentODataService",
     "UseNamespacePrefix": false,
     "NamespacePrefix": null,
     "UseDataServiceCollection": true,

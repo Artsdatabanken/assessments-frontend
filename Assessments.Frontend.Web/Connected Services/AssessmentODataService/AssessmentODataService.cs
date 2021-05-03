@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 30.04.2021 15:42:48
-namespace Assessments.Api.Data.DataRepository.Models
+// Generation date: 03.05.2021 15:00:00
+namespace Assessments.Api.Data.Models.Redlist
 {
         /// <summary>
         /// There are no comments for Rodliste2015Single in the schema.
@@ -39,8 +39,8 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Referanser")]
-        public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.DataRepository.Models.Reference> Referanser
+        [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
+        public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Reference> Referanser
         {
             get
             {
@@ -50,13 +50,13 @@ namespace Assessments.Api.Data.DataRepository.Models
                 }
                 if ((this._Referanser == null))
                 {
-                    this._Referanser = Context.CreateQuery<global::Assessments.Api.Data.DataRepository.Models.Reference>(GetPath("Referanser"));
+                    this._Referanser = Context.CreateQuery<global::Assessments.Api.Data.Models.Redlist.Reference>(GetPath("referanser"));
                 }
                 return this._Referanser;
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.DataRepository.Models.Reference> _Referanser;
+        private global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Reference> _Referanser;
     }
         /// <summary>
         /// There are no comments for Rodliste2015 in the schema.
@@ -64,7 +64,7 @@ namespace Assessments.Api.Data.DataRepository.Models
     /// <KeyProperties>
     /// Id
     /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("Id")]
+    [global::Microsoft.OData.Client.Key("id")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("Rodliste2015")]
     public partial class Rodliste2015 : global::Microsoft.OData.Client.BaseEntityType, global::System.ComponentModel.INotifyPropertyChanged
     {
@@ -76,7 +76,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// <param name="vurderingsår">Initial value of Vurderingsår.</param>
         /// <param name="vurderingsId2010">Initial value of VurderingsId2010.</param>
         /// <param name="troligUtdodd">Initial value of TroligUtdodd.</param>
-        /// <param name="iUCNVurdert">Initial value of IUCNVurdert.</param>
+        /// <param name="iucnVurdert">Initial value of IucnVurdert.</param>
         /// <param name="tilførselFraNaboland">Initial value of TilførselFraNaboland.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         public static Rodliste2015 CreateRodliste2015(string ID, 
@@ -84,7 +84,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                     int vurderingsår, 
                     int vurderingsId2010, 
                     bool troligUtdodd, 
-                    bool iUCNVurdert, 
+                    bool iucnVurdert, 
                     bool tilførselFraNaboland)
         {
             Rodliste2015 rodliste2015 = new Rodliste2015();
@@ -93,7 +93,7 @@ namespace Assessments.Api.Data.DataRepository.Models
             rodliste2015.Vurderingsår = vurderingsår;
             rodliste2015.VurderingsId2010 = vurderingsId2010;
             rodliste2015.TroligUtdodd = troligUtdodd;
-            rodliste2015.IUCNVurdert = iUCNVurdert;
+            rodliste2015.IucnVurdert = iucnVurdert;
             rodliste2015.TilførselFraNaboland = tilførselFraNaboland;
             return rodliste2015;
         }
@@ -101,7 +101,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Id in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("id")]
         public virtual string Id
         {
             get
@@ -113,7 +113,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnIdChanging(value);
                 this._Id = value;
                 this.OnIdChanged();
-                this.OnPropertyChanged("Id");
+                this.OnPropertyChanged("id");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -124,7 +124,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property LatinsknavnId in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("LatinsknavnId")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("latinsknavnId")]
         public virtual int LatinsknavnId
         {
             get
@@ -136,7 +136,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnLatinsknavnIdChanging(value);
                 this._LatinsknavnId = value;
                 this.OnLatinsknavnIdChanged();
-                this.OnPropertyChanged("LatinsknavnId");
+                this.OnPropertyChanged("latinsknavnId");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -147,7 +147,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Vurderingsår in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Vurderingsår")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("vurderingsår")]
         public virtual int Vurderingsår
         {
             get
@@ -159,7 +159,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnVurderingsårChanging(value);
                 this._Vurderingsår = value;
                 this.OnVurderingsårChanged();
-                this.OnPropertyChanged("Vurderingsår");
+                this.OnPropertyChanged("vurderingsår");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -170,7 +170,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property VurdertVitenskapeligNavn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("VurdertVitenskapeligNavn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("vurdertVitenskapeligNavn")]
         public virtual string VurdertVitenskapeligNavn
         {
             get
@@ -182,7 +182,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnVurdertVitenskapeligNavnChanging(value);
                 this._VurdertVitenskapeligNavn = value;
                 this.OnVurdertVitenskapeligNavnChanged();
-                this.OnPropertyChanged("VurdertVitenskapeligNavn");
+                this.OnPropertyChanged("vurdertVitenskapeligNavn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -193,7 +193,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property VurderingsId2010 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("VurderingsId2010")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("vurderingsId2010")]
         public virtual int VurderingsId2010
         {
             get
@@ -205,7 +205,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnVurderingsId2010Changing(value);
                 this._VurderingsId2010 = value;
                 this.OnVurderingsId2010Changed();
-                this.OnPropertyChanged("VurderingsId2010");
+                this.OnPropertyChanged("vurderingsId2010");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -216,7 +216,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Ekspertgruppe in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Ekspertgruppe")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ekspertgruppe")]
         public virtual string Ekspertgruppe
         {
             get
@@ -228,7 +228,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnEkspertgruppeChanging(value);
                 this._Ekspertgruppe = value;
                 this.OnEkspertgruppeChanged();
-                this.OnPropertyChanged("Ekspertgruppe");
+                this.OnPropertyChanged("ekspertgruppe");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -239,7 +239,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Artsgruppe in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Artsgruppe")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("artsgruppe")]
         public virtual string Artsgruppe
         {
             get
@@ -251,7 +251,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnArtsgruppeChanging(value);
                 this._Artsgruppe = value;
                 this.OnArtsgruppeChanged();
-                this.OnPropertyChanged("Artsgruppe");
+                this.OnPropertyChanged("artsgruppe");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -262,7 +262,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property VurderingsContext in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("VurderingsContext")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("vurderingsContext")]
         public virtual string VurderingsContext
         {
             get
@@ -274,7 +274,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnVurderingsContextChanging(value);
                 this._VurderingsContext = value;
                 this.OnVurderingsContextChanged();
-                this.OnPropertyChanged("VurderingsContext");
+                this.OnPropertyChanged("vurderingsContext");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -285,7 +285,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property BegrensetForekomstNA in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("BegrensetForekomstNA")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("begrensetForekomstNA")]
         public virtual string BegrensetForekomstNA
         {
             get
@@ -297,7 +297,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnBegrensetForekomstNAChanging(value);
                 this._BegrensetForekomstNA = value;
                 this.OnBegrensetForekomstNAChanged();
-                this.OnPropertyChanged("BegrensetForekomstNA");
+                this.OnPropertyChanged("begrensetForekomstNA");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -308,7 +308,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property KunnskapsStatusNE in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("KunnskapsStatusNE")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kunnskapsStatusNE")]
         public virtual string KunnskapsStatusNE
         {
             get
@@ -320,7 +320,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnKunnskapsStatusNEChanging(value);
                 this._KunnskapsStatusNE = value;
                 this.OnKunnskapsStatusNEChanged();
-                this.OnPropertyChanged("KunnskapsStatusNE");
+                this.OnPropertyChanged("kunnskapsStatusNE");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -331,7 +331,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property RodlisteVurdertArt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("RodlisteVurdertArt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("rodlisteVurdertArt")]
         public virtual string RodlisteVurdertArt
         {
             get
@@ -343,7 +343,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnRodlisteVurdertArtChanging(value);
                 this._RodlisteVurdertArt = value;
                 this.OnRodlisteVurdertArtChanged();
-                this.OnPropertyChanged("RodlisteVurdertArt");
+                this.OnPropertyChanged("rodlisteVurdertArt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -354,7 +354,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property TroligUtdodd in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("TroligUtdodd")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("troligUtdodd")]
         public virtual bool TroligUtdodd
         {
             get
@@ -366,7 +366,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnTroligUtdoddChanging(value);
                 this._TroligUtdodd = value;
                 this.OnTroligUtdoddChanged();
-                this.OnPropertyChanged("TroligUtdodd");
+                this.OnPropertyChanged("troligUtdodd");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -377,7 +377,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property ArtenVurderesIkkeBegrunnelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ArtenVurderesIkkeBegrunnelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("artenVurderesIkkeBegrunnelse")]
         public virtual string ArtenVurderesIkkeBegrunnelse
         {
             get
@@ -389,7 +389,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnArtenVurderesIkkeBegrunnelseChanging(value);
                 this._ArtenVurderesIkkeBegrunnelse = value;
                 this.OnArtenVurderesIkkeBegrunnelseChanged();
-                this.OnPropertyChanged("ArtenVurderesIkkeBegrunnelse");
+                this.OnPropertyChanged("artenVurderesIkkeBegrunnelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -400,7 +400,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Generasjonslengde in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Generasjonslengde")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("generasjonslengde")]
         public virtual string Generasjonslengde
         {
             get
@@ -412,7 +412,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnGenerasjonslengdeChanging(value);
                 this._Generasjonslengde = value;
                 this.OnGenerasjonslengdeChanged();
-                this.OnPropertyChanged("Generasjonslengde");
+                this.OnPropertyChanged("generasjonslengde");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -420,79 +420,79 @@ namespace Assessments.Api.Data.DataRepository.Models
         partial void OnGenerasjonslengdeChanging(string value);
         partial void OnGenerasjonslengdeChanged();
         /// <summary>
-        /// There are no comments for Property BERN in the schema.
+        /// There are no comments for Property Bern in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("BERN")]
-        public virtual string BERN
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bern")]
+        public virtual string Bern
         {
             get
             {
-                return this._BERN;
+                return this._Bern;
             }
             set
             {
-                this.OnBERNChanging(value);
-                this._BERN = value;
-                this.OnBERNChanged();
-                this.OnPropertyChanged("BERN");
+                this.OnBernChanging(value);
+                this._Bern = value;
+                this.OnBernChanged();
+                this.OnPropertyChanged("bern");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _BERN;
-        partial void OnBERNChanging(string value);
-        partial void OnBERNChanged();
+        private string _Bern;
+        partial void OnBernChanging(string value);
+        partial void OnBernChanged();
         /// <summary>
-        /// There are no comments for Property BONN in the schema.
+        /// There are no comments for Property Bonn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("BONN")]
-        public virtual string BONN
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bonn")]
+        public virtual string Bonn
         {
             get
             {
-                return this._BONN;
+                return this._Bonn;
             }
             set
             {
-                this.OnBONNChanging(value);
-                this._BONN = value;
-                this.OnBONNChanged();
-                this.OnPropertyChanged("BONN");
+                this.OnBonnChanging(value);
+                this._Bonn = value;
+                this.OnBonnChanged();
+                this.OnPropertyChanged("bonn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _BONN;
-        partial void OnBONNChanging(string value);
-        partial void OnBONNChanged();
+        private string _Bonn;
+        partial void OnBonnChanging(string value);
+        partial void OnBonnChanged();
         /// <summary>
-        /// There are no comments for Property CITES in the schema.
+        /// There are no comments for Property Cites in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("CITES")]
-        public virtual string CITES
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cites")]
+        public virtual string Cites
         {
             get
             {
-                return this._CITES;
+                return this._Cites;
             }
             set
             {
-                this.OnCITESChanging(value);
-                this._CITES = value;
-                this.OnCITESChanged();
-                this.OnPropertyChanged("CITES");
+                this.OnCitesChanging(value);
+                this._Cites = value;
+                this.OnCitesChanged();
+                this.OnPropertyChanged("cites");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _CITES;
-        partial void OnCITESChanging(string value);
-        partial void OnCITESChanged();
+        private string _Cites;
+        partial void OnCitesChanging(string value);
+        partial void OnCitesChanged();
         /// <summary>
         /// There are no comments for Property StatusIHenholdTilNaturvernloven in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("StatusIHenholdTilNaturvernloven")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("statusIHenholdTilNaturvernloven")]
         public virtual string StatusIHenholdTilNaturvernloven
         {
             get
@@ -504,7 +504,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnStatusIHenholdTilNaturvernlovenChanging(value);
                 this._StatusIHenholdTilNaturvernloven = value;
                 this.OnStatusIHenholdTilNaturvernlovenChanged();
-                this.OnPropertyChanged("StatusIHenholdTilNaturvernloven");
+                this.OnPropertyChanged("statusIHenholdTilNaturvernloven");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -515,7 +515,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property StatusIHenholdTilNaturmangfoldloven in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("StatusIHenholdTilNaturmangfoldloven")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("statusIHenholdTilNaturmangfoldloven")]
         public virtual string StatusIHenholdTilNaturmangfoldloven
         {
             get
@@ -527,7 +527,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnStatusIHenholdTilNaturmangfoldlovenChanging(value);
                 this._StatusIHenholdTilNaturmangfoldloven = value;
                 this.OnStatusIHenholdTilNaturmangfoldlovenChanged();
-                this.OnPropertyChanged("StatusIHenholdTilNaturmangfoldloven");
+                this.OnPropertyChanged("statusIHenholdTilNaturmangfoldloven");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -538,7 +538,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property MaxAndelAvEuropeiskBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("MaxAndelAvEuropeiskBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("maxAndelAvEuropeiskBestand")]
         public virtual string MaxAndelAvEuropeiskBestand
         {
             get
@@ -550,7 +550,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnMaxAndelAvEuropeiskBestandChanging(value);
                 this._MaxAndelAvEuropeiskBestand = value;
                 this.OnMaxAndelAvEuropeiskBestandChanged();
-                this.OnPropertyChanged("MaxAndelAvEuropeiskBestand");
+                this.OnPropertyChanged("maxAndelAvEuropeiskBestand");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -561,7 +561,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property MaxAndelAvGlobalBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("MaxAndelAvGlobalBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("maxAndelAvGlobalBestand")]
         public virtual string MaxAndelAvGlobalBestand
         {
             get
@@ -573,7 +573,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnMaxAndelAvGlobalBestandChanging(value);
                 this._MaxAndelAvGlobalBestand = value;
                 this.OnMaxAndelAvGlobalBestandChanged();
-                this.OnPropertyChanged("MaxAndelAvGlobalBestand");
+                this.OnPropertyChanged("maxAndelAvGlobalBestand");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -584,7 +584,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property AndelNåværendeBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("AndelNåværendeBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("andelNåværendeBestand")]
         public virtual string AndelNåværendeBestand
         {
             get
@@ -596,7 +596,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnAndelNåværendeBestandChanging(value);
                 this._AndelNåværendeBestand = value;
                 this.OnAndelNåværendeBestandChanged();
-                this.OnPropertyChanged("AndelNåværendeBestand");
+                this.OnPropertyChanged("andelNåværendeBestand");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -604,33 +604,33 @@ namespace Assessments.Api.Data.DataRepository.Models
         partial void OnAndelNåværendeBestandChanging(string value);
         partial void OnAndelNåværendeBestandChanged();
         /// <summary>
-        /// There are no comments for Property IUCNVurdert in the schema.
+        /// There are no comments for Property IucnVurdert in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("IUCNVurdert")]
-        public virtual bool IUCNVurdert
+        [global::Microsoft.OData.Client.OriginalNameAttribute("iucnVurdert")]
+        public virtual bool IucnVurdert
         {
             get
             {
-                return this._IUCNVurdert;
+                return this._IucnVurdert;
             }
             set
             {
-                this.OnIUCNVurdertChanging(value);
-                this._IUCNVurdert = value;
-                this.OnIUCNVurdertChanged();
-                this.OnPropertyChanged("IUCNVurdert");
+                this.OnIucnVurdertChanging(value);
+                this._IucnVurdert = value;
+                this.OnIucnVurdertChanged();
+                this.OnPropertyChanged("iucnVurdert");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private bool _IUCNVurdert;
-        partial void OnIUCNVurdertChanging(bool value);
-        partial void OnIUCNVurdertChanged();
+        private bool _IucnVurdert;
+        partial void OnIucnVurdertChanging(bool value);
+        partial void OnIucnVurdertChanged();
         /// <summary>
         /// There are no comments for Property A1OpphørtOgReversibel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("A1OpphørtOgReversibel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a1OpphørtOgReversibel")]
         public virtual string A1OpphørtOgReversibel
         {
             get
@@ -642,7 +642,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnA1OpphørtOgReversibelChanging(value);
                 this._A1OpphørtOgReversibel = value;
                 this.OnA1OpphørtOgReversibelChanged();
-                this.OnPropertyChanged("A1OpphørtOgReversibel");
+                this.OnPropertyChanged("a1OpphørtOgReversibel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -653,7 +653,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property A1EndringBasertpåKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("A1EndringBasertpåKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a1EndringBasertpåKode")]
         public virtual global::System.Collections.ObjectModel.ObservableCollection<string> A1EndringBasertpåKode
         {
             get
@@ -665,7 +665,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnA1EndringBasertpåKodeChanging(value);
                 this._A1EndringBasertpåKode = value;
                 this.OnA1EndringBasertpåKodeChanged();
-                this.OnPropertyChanged("A1EndringBasertpåKode");
+                this.OnPropertyChanged("a1EndringBasertpåKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -676,7 +676,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property A2Forutgående10År in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("A2Forutgående10År")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a2Forutgående10År")]
         public virtual string A2Forutgående10År
         {
             get
@@ -688,7 +688,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnA2Forutgående10ÅrChanging(value);
                 this._A2Forutgående10År = value;
                 this.OnA2Forutgående10ÅrChanged();
-                this.OnPropertyChanged("A2Forutgående10År");
+                this.OnPropertyChanged("a2Forutgående10År");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -699,7 +699,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property A2EndringBasertpåKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("A2EndringBasertpåKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a2EndringBasertpåKode")]
         public virtual global::System.Collections.ObjectModel.ObservableCollection<string> A2EndringBasertpåKode
         {
             get
@@ -711,7 +711,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnA2EndringBasertpåKodeChanging(value);
                 this._A2EndringBasertpåKode = value;
                 this.OnA2EndringBasertpåKodeChanged();
-                this.OnPropertyChanged("A2EndringBasertpåKode");
+                this.OnPropertyChanged("a2EndringBasertpåKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -722,7 +722,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property A3Kommende10År in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("A3Kommende10År")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a3Kommende10År")]
         public virtual string A3Kommende10År
         {
             get
@@ -734,7 +734,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnA3Kommende10ÅrChanging(value);
                 this._A3Kommende10År = value;
                 this.OnA3Kommende10ÅrChanged();
-                this.OnPropertyChanged("A3Kommende10År");
+                this.OnPropertyChanged("a3Kommende10År");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -745,7 +745,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property A3EndringBasertpåKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("A3EndringBasertpåKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a3EndringBasertpåKode")]
         public virtual global::System.Collections.ObjectModel.ObservableCollection<string> A3EndringBasertpåKode
         {
             get
@@ -757,7 +757,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnA3EndringBasertpåKodeChanging(value);
                 this._A3EndringBasertpåKode = value;
                 this.OnA3EndringBasertpåKodeChanged();
-                this.OnPropertyChanged("A3EndringBasertpåKode");
+                this.OnPropertyChanged("a3EndringBasertpåKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -768,7 +768,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property A4Intervall10År in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("A4Intervall10År")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a4Intervall10År")]
         public virtual string A4Intervall10År
         {
             get
@@ -780,7 +780,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnA4Intervall10ÅrChanging(value);
                 this._A4Intervall10År = value;
                 this.OnA4Intervall10ÅrChanged();
-                this.OnPropertyChanged("A4Intervall10År");
+                this.OnPropertyChanged("a4Intervall10År");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -791,7 +791,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property A4EndringBasertpåKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("A4EndringBasertpåKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a4EndringBasertpåKode")]
         public virtual global::System.Collections.ObjectModel.ObservableCollection<string> A4EndringBasertpåKode
         {
             get
@@ -803,7 +803,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnA4EndringBasertpåKodeChanging(value);
                 this._A4EndringBasertpåKode = value;
                 this.OnA4EndringBasertpåKodeChanged();
-                this.OnPropertyChanged("A4EndringBasertpåKode");
+                this.OnPropertyChanged("a4EndringBasertpåKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -814,7 +814,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property B1UtbredelsesområdeKjentAndel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeKjentAndel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeKjentAndel")]
         public virtual string B1UtbredelsesområdeKjentAndel
         {
             get
@@ -826,7 +826,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnB1UtbredelsesområdeKjentAndelChanging(value);
                 this._B1UtbredelsesområdeKjentAndel = value;
                 this.OnB1UtbredelsesområdeKjentAndelChanged();
-                this.OnPropertyChanged("B1UtbredelsesområdeKjentAndel");
+                this.OnPropertyChanged("b1UtbredelsesområdeKjentAndel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -837,7 +837,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property B1UtbredelsesområdeMørketall in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeMørketall")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeMørketall")]
         public virtual string B1UtbredelsesområdeMørketall
         {
             get
@@ -849,7 +849,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnB1UtbredelsesområdeMørketallChanging(value);
                 this._B1UtbredelsesområdeMørketall = value;
                 this.OnB1UtbredelsesområdeMørketallChanged();
-                this.OnPropertyChanged("B1UtbredelsesområdeMørketall");
+                this.OnPropertyChanged("b1UtbredelsesområdeMørketall");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -860,7 +860,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property B1UtbredelsesområdeProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeProdukt")]
         public virtual string B1UtbredelsesområdeProdukt
         {
             get
@@ -872,7 +872,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnB1UtbredelsesområdeProduktChanging(value);
                 this._B1UtbredelsesområdeProdukt = value;
                 this.OnB1UtbredelsesområdeProduktChanged();
-                this.OnPropertyChanged("B1UtbredelsesområdeProdukt");
+                this.OnPropertyChanged("b1UtbredelsesområdeProdukt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -883,7 +883,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property B1UtbredelsesområdeKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeKode")]
         public virtual string B1UtbredelsesområdeKode
         {
             get
@@ -895,7 +895,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnB1UtbredelsesområdeKodeChanging(value);
                 this._B1UtbredelsesområdeKode = value;
                 this.OnB1UtbredelsesområdeKodeChanged();
-                this.OnPropertyChanged("B1UtbredelsesområdeKode");
+                this.OnPropertyChanged("b1UtbredelsesområdeKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -906,7 +906,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property B2ForekomstarealKjentAndel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealKjentAndel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealKjentAndel")]
         public virtual string B2ForekomstarealKjentAndel
         {
             get
@@ -918,7 +918,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnB2ForekomstarealKjentAndelChanging(value);
                 this._B2ForekomstarealKjentAndel = value;
                 this.OnB2ForekomstarealKjentAndelChanged();
-                this.OnPropertyChanged("B2ForekomstarealKjentAndel");
+                this.OnPropertyChanged("b2ForekomstarealKjentAndel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -929,7 +929,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property B2ForekomstarealMørketall in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealMørketall")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealMørketall")]
         public virtual string B2ForekomstarealMørketall
         {
             get
@@ -941,7 +941,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnB2ForekomstarealMørketallChanging(value);
                 this._B2ForekomstarealMørketall = value;
                 this.OnB2ForekomstarealMørketallChanged();
-                this.OnPropertyChanged("B2ForekomstarealMørketall");
+                this.OnPropertyChanged("b2ForekomstarealMørketall");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -952,7 +952,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property B2ForekomstarealProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealProdukt")]
         public virtual string B2ForekomstarealProdukt
         {
             get
@@ -964,7 +964,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnB2ForekomstarealProduktChanging(value);
                 this._B2ForekomstarealProdukt = value;
                 this.OnB2ForekomstarealProduktChanged();
-                this.OnPropertyChanged("B2ForekomstarealProdukt");
+                this.OnPropertyChanged("b2ForekomstarealProdukt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -975,7 +975,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property B2ForekomstarealKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealKode")]
         public virtual string B2ForekomstarealKode
         {
             get
@@ -987,7 +987,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnB2ForekomstarealKodeChanging(value);
                 this._B2ForekomstarealKode = value;
                 this.OnB2ForekomstarealKodeChanged();
-                this.OnPropertyChanged("B2ForekomstarealKode");
+                this.OnPropertyChanged("b2ForekomstarealKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -998,7 +998,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property BA1KraftigFragmenteringKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("BA1KraftigFragmenteringKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bA1KraftigFragmenteringKode")]
         public virtual string BA1KraftigFragmenteringKode
         {
             get
@@ -1010,7 +1010,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnBA1KraftigFragmenteringKodeChanging(value);
                 this._BA1KraftigFragmenteringKode = value;
                 this.OnBA1KraftigFragmenteringKodeChanged();
-                this.OnPropertyChanged("BA1KraftigFragmenteringKode");
+                this.OnPropertyChanged("bA1KraftigFragmenteringKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1021,7 +1021,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property BA2FåLokaliteterKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("BA2FåLokaliteterKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bA2FåLokaliteterKode")]
         public virtual string BA2FåLokaliteterKode
         {
             get
@@ -1033,7 +1033,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnBA2FåLokaliteterKodeChanging(value);
                 this._BA2FåLokaliteterKode = value;
                 this.OnBA2FåLokaliteterKodeChanged();
-                this.OnPropertyChanged("BA2FåLokaliteterKode");
+                this.OnPropertyChanged("bA2FåLokaliteterKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1041,56 +1041,56 @@ namespace Assessments.Api.Data.DataRepository.Models
         partial void OnBA2FåLokaliteterKodeChanging(string value);
         partial void OnBA2FåLokaliteterKodeChanged();
         /// <summary>
-        /// There are no comments for Property BBPågåendeArealreduksjonKode in the schema.
+        /// There are no comments for Property BbPågåendeArealreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("BBPågåendeArealreduksjonKode")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> BBPågåendeArealreduksjonKode
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bbPågåendeArealreduksjonKode")]
+        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> BbPågåendeArealreduksjonKode
         {
             get
             {
-                return this._BBPågåendeArealreduksjonKode;
+                return this._BbPågåendeArealreduksjonKode;
             }
             set
             {
-                this.OnBBPågåendeArealreduksjonKodeChanging(value);
-                this._BBPågåendeArealreduksjonKode = value;
-                this.OnBBPågåendeArealreduksjonKodeChanged();
-                this.OnPropertyChanged("BBPågåendeArealreduksjonKode");
+                this.OnBbPågåendeArealreduksjonKodeChanging(value);
+                this._BbPågåendeArealreduksjonKode = value;
+                this.OnBbPågåendeArealreduksjonKodeChanged();
+                this.OnPropertyChanged("bbPågåendeArealreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _BBPågåendeArealreduksjonKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnBBPågåendeArealreduksjonKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
-        partial void OnBBPågåendeArealreduksjonKodeChanged();
+        private global::System.Collections.ObjectModel.ObservableCollection<string> _BbPågåendeArealreduksjonKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
+        partial void OnBbPågåendeArealreduksjonKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        partial void OnBbPågåendeArealreduksjonKodeChanged();
         /// <summary>
-        /// There are no comments for Property BCEksterneFluktuasjonerKode in the schema.
+        /// There are no comments for Property BcEksterneFluktuasjonerKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("BCEksterneFluktuasjonerKode")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> BCEksterneFluktuasjonerKode
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bcEksterneFluktuasjonerKode")]
+        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> BcEksterneFluktuasjonerKode
         {
             get
             {
-                return this._BCEksterneFluktuasjonerKode;
+                return this._BcEksterneFluktuasjonerKode;
             }
             set
             {
-                this.OnBCEksterneFluktuasjonerKodeChanging(value);
-                this._BCEksterneFluktuasjonerKode = value;
-                this.OnBCEksterneFluktuasjonerKodeChanged();
-                this.OnPropertyChanged("BCEksterneFluktuasjonerKode");
+                this.OnBcEksterneFluktuasjonerKodeChanging(value);
+                this._BcEksterneFluktuasjonerKode = value;
+                this.OnBcEksterneFluktuasjonerKodeChanged();
+                this.OnPropertyChanged("bcEksterneFluktuasjonerKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _BCEksterneFluktuasjonerKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnBCEksterneFluktuasjonerKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
-        partial void OnBCEksterneFluktuasjonerKodeChanged();
+        private global::System.Collections.ObjectModel.ObservableCollection<string> _BcEksterneFluktuasjonerKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
+        partial void OnBcEksterneFluktuasjonerKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        partial void OnBcEksterneFluktuasjonerKodeChanged();
         /// <summary>
         /// There are no comments for Property CKjentPopulasjonsstørrelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("CKjentPopulasjonsstørrelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cKjentPopulasjonsstørrelse")]
         public virtual string CKjentPopulasjonsstørrelse
         {
             get
@@ -1102,7 +1102,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnCKjentPopulasjonsstørrelseChanging(value);
                 this._CKjentPopulasjonsstørrelse = value;
                 this.OnCKjentPopulasjonsstørrelseChanged();
-                this.OnPropertyChanged("CKjentPopulasjonsstørrelse");
+                this.OnPropertyChanged("cKjentPopulasjonsstørrelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1113,7 +1113,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property CKjentPopulasjonsstørrelseMørketall in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("CKjentPopulasjonsstørrelseMørketall")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cKjentPopulasjonsstørrelseMørketall")]
         public virtual string CKjentPopulasjonsstørrelseMørketall
         {
             get
@@ -1125,7 +1125,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnCKjentPopulasjonsstørrelseMørketallChanging(value);
                 this._CKjentPopulasjonsstørrelseMørketall = value;
                 this.OnCKjentPopulasjonsstørrelseMørketallChanged();
-                this.OnPropertyChanged("CKjentPopulasjonsstørrelseMørketall");
+                this.OnPropertyChanged("cKjentPopulasjonsstørrelseMørketall");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1136,7 +1136,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property CKjentPopulasjonsstørrelseProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("CKjentPopulasjonsstørrelseProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cKjentPopulasjonsstørrelseProdukt")]
         public virtual string CKjentPopulasjonsstørrelseProdukt
         {
             get
@@ -1148,7 +1148,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnCKjentPopulasjonsstørrelseProduktChanging(value);
                 this._CKjentPopulasjonsstørrelseProdukt = value;
                 this.OnCKjentPopulasjonsstørrelseProduktChanged();
-                this.OnPropertyChanged("CKjentPopulasjonsstørrelseProdukt");
+                this.OnPropertyChanged("cKjentPopulasjonsstørrelseProdukt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1159,7 +1159,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property CVurdertpopulasjonsstørrelseMin in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("CVurdertpopulasjonsstørrelseMin")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseMin")]
         public virtual string CVurdertpopulasjonsstørrelseMin
         {
             get
@@ -1171,7 +1171,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnCVurdertpopulasjonsstørrelseMinChanging(value);
                 this._CVurdertpopulasjonsstørrelseMin = value;
                 this.OnCVurdertpopulasjonsstørrelseMinChanged();
-                this.OnPropertyChanged("CVurdertpopulasjonsstørrelseMin");
+                this.OnPropertyChanged("cVurdertpopulasjonsstørrelseMin");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1182,7 +1182,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property CVurdertpopulasjonsstørrelseMax in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("CVurdertpopulasjonsstørrelseMax")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseMax")]
         public virtual string CVurdertpopulasjonsstørrelseMax
         {
             get
@@ -1194,7 +1194,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnCVurdertpopulasjonsstørrelseMaxChanging(value);
                 this._CVurdertpopulasjonsstørrelseMax = value;
                 this.OnCVurdertpopulasjonsstørrelseMaxChanged();
-                this.OnPropertyChanged("CVurdertpopulasjonsstørrelseMax");
+                this.OnPropertyChanged("cVurdertpopulasjonsstørrelseMax");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1205,7 +1205,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property CVurdertpopulasjonsstørrelseProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("CVurdertpopulasjonsstørrelseProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseProdukt")]
         public virtual string CVurdertpopulasjonsstørrelseProdukt
         {
             get
@@ -1217,7 +1217,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnCVurdertpopulasjonsstørrelseProduktChanging(value);
                 this._CVurdertpopulasjonsstørrelseProdukt = value;
                 this.OnCVurdertpopulasjonsstørrelseProduktChanged();
-                this.OnPropertyChanged("CVurdertpopulasjonsstørrelseProdukt");
+                this.OnPropertyChanged("cVurdertpopulasjonsstørrelseProdukt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1228,7 +1228,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property CDirekteFastsattEtterSkjønn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("CDirekteFastsattEtterSkjønn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cDirekteFastsattEtterSkjønn")]
         public virtual string CDirekteFastsattEtterSkjønn
         {
             get
@@ -1240,7 +1240,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnCDirekteFastsattEtterSkjønnChanging(value);
                 this._CDirekteFastsattEtterSkjønn = value;
                 this.OnCDirekteFastsattEtterSkjønnChanged();
-                this.OnPropertyChanged("CDirekteFastsattEtterSkjønn");
+                this.OnPropertyChanged("cDirekteFastsattEtterSkjønn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1251,7 +1251,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property C1PågåendePopulasjonsreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("C1PågåendePopulasjonsreduksjonKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("c1PågåendePopulasjonsreduksjonKode")]
         public virtual string C1PågåendePopulasjonsreduksjonKode
         {
             get
@@ -1263,7 +1263,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnC1PågåendePopulasjonsreduksjonKodeChanging(value);
                 this._C1PågåendePopulasjonsreduksjonKode = value;
                 this.OnC1PågåendePopulasjonsreduksjonKodeChanged();
-                this.OnPropertyChanged("C1PågåendePopulasjonsreduksjonKode");
+                this.OnPropertyChanged("c1PågåendePopulasjonsreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1274,7 +1274,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property C2A1PågåendePopulasjonsreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("C2A1PågåendePopulasjonsreduksjonKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("c2A1PågåendePopulasjonsreduksjonKode")]
         public virtual string C2A1PågåendePopulasjonsreduksjonKode
         {
             get
@@ -1286,7 +1286,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnC2A1PågåendePopulasjonsreduksjonKodeChanging(value);
                 this._C2A1PågåendePopulasjonsreduksjonKode = value;
                 this.OnC2A1PågåendePopulasjonsreduksjonKodeChanged();
-                this.OnPropertyChanged("C2A1PågåendePopulasjonsreduksjonKode");
+                this.OnPropertyChanged("c2A1PågåendePopulasjonsreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1297,7 +1297,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property C2A2PågåendePopulasjonsreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("C2A2PågåendePopulasjonsreduksjonKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("c2A2PågåendePopulasjonsreduksjonKode")]
         public virtual string C2A2PågåendePopulasjonsreduksjonKode
         {
             get
@@ -1309,7 +1309,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnC2A2PågåendePopulasjonsreduksjonKodeChanging(value);
                 this._C2A2PågåendePopulasjonsreduksjonKode = value;
                 this.OnC2A2PågåendePopulasjonsreduksjonKodeChanged();
-                this.OnPropertyChanged("C2A2PågåendePopulasjonsreduksjonKode");
+                this.OnPropertyChanged("c2A2PågåendePopulasjonsreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1317,33 +1317,33 @@ namespace Assessments.Api.Data.DataRepository.Models
         partial void OnC2A2PågåendePopulasjonsreduksjonKodeChanging(string value);
         partial void OnC2A2PågåendePopulasjonsreduksjonKodeChanged();
         /// <summary>
-        /// There are no comments for Property C2BPågåendePopulasjonsreduksjonKode in the schema.
+        /// There are no comments for Property C2bPågåendePopulasjonsreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("C2BPågåendePopulasjonsreduksjonKode")]
-        public virtual string C2BPågåendePopulasjonsreduksjonKode
+        [global::Microsoft.OData.Client.OriginalNameAttribute("c2bPågåendePopulasjonsreduksjonKode")]
+        public virtual string C2bPågåendePopulasjonsreduksjonKode
         {
             get
             {
-                return this._C2BPågåendePopulasjonsreduksjonKode;
+                return this._C2bPågåendePopulasjonsreduksjonKode;
             }
             set
             {
-                this.OnC2BPågåendePopulasjonsreduksjonKodeChanging(value);
-                this._C2BPågåendePopulasjonsreduksjonKode = value;
-                this.OnC2BPågåendePopulasjonsreduksjonKodeChanged();
-                this.OnPropertyChanged("C2BPågåendePopulasjonsreduksjonKode");
+                this.OnC2bPågåendePopulasjonsreduksjonKodeChanging(value);
+                this._C2bPågåendePopulasjonsreduksjonKode = value;
+                this.OnC2bPågåendePopulasjonsreduksjonKodeChanged();
+                this.OnPropertyChanged("c2bPågåendePopulasjonsreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _C2BPågåendePopulasjonsreduksjonKode;
-        partial void OnC2BPågåendePopulasjonsreduksjonKodeChanging(string value);
-        partial void OnC2BPågåendePopulasjonsreduksjonKodeChanged();
+        private string _C2bPågåendePopulasjonsreduksjonKode;
+        partial void OnC2bPågåendePopulasjonsreduksjonKodeChanging(string value);
+        partial void OnC2bPågåendePopulasjonsreduksjonKodeChanged();
         /// <summary>
         /// There are no comments for Property D1FåReproduserendeIndividKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("D1FåReproduserendeIndividKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("d1FåReproduserendeIndividKode")]
         public virtual string D1FåReproduserendeIndividKode
         {
             get
@@ -1355,7 +1355,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnD1FåReproduserendeIndividKodeChanging(value);
                 this._D1FåReproduserendeIndividKode = value;
                 this.OnD1FåReproduserendeIndividKodeChanged();
-                this.OnPropertyChanged("D1FåReproduserendeIndividKode");
+                this.OnPropertyChanged("d1FåReproduserendeIndividKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1366,7 +1366,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property D2MegetBegrensetForekomstarealKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("D2MegetBegrensetForekomstarealKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("d2MegetBegrensetForekomstarealKode")]
         public virtual string D2MegetBegrensetForekomstarealKode
         {
             get
@@ -1378,7 +1378,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnD2MegetBegrensetForekomstarealKodeChanging(value);
                 this._D2MegetBegrensetForekomstarealKode = value;
                 this.OnD2MegetBegrensetForekomstarealKodeChanged();
-                this.OnPropertyChanged("D2MegetBegrensetForekomstarealKode");
+                this.OnPropertyChanged("d2MegetBegrensetForekomstarealKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1389,7 +1389,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property EKvantitativUtryddingsmodellKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("EKvantitativUtryddingsmodellKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("eKvantitativUtryddingsmodellKode")]
         public virtual string EKvantitativUtryddingsmodellKode
         {
             get
@@ -1401,7 +1401,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnEKvantitativUtryddingsmodellKodeChanging(value);
                 this._EKvantitativUtryddingsmodellKode = value;
                 this.OnEKvantitativUtryddingsmodellKodeChanged();
-                this.OnPropertyChanged("EKvantitativUtryddingsmodellKode");
+                this.OnPropertyChanged("eKvantitativUtryddingsmodellKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1412,7 +1412,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property OverordnetKlassifiseringGruppeKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OverordnetKlassifiseringGruppeKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("overordnetKlassifiseringGruppeKode")]
         public virtual string OverordnetKlassifiseringGruppeKode
         {
             get
@@ -1424,7 +1424,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOverordnetKlassifiseringGruppeKodeChanging(value);
                 this._OverordnetKlassifiseringGruppeKode = value;
                 this.OnOverordnetKlassifiseringGruppeKodeChanged();
-                this.OnPropertyChanged("OverordnetKlassifiseringGruppeKode");
+                this.OnPropertyChanged("overordnetKlassifiseringGruppeKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1435,7 +1435,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property OverordnetKlassifiseringTekst in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OverordnetKlassifiseringTekst")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("overordnetKlassifiseringTekst")]
         public virtual string OverordnetKlassifiseringTekst
         {
             get
@@ -1447,7 +1447,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOverordnetKlassifiseringTekstChanging(value);
                 this._OverordnetKlassifiseringTekst = value;
                 this.OnOverordnetKlassifiseringTekstChanged();
-                this.OnPropertyChanged("OverordnetKlassifiseringTekst");
+                this.OnPropertyChanged("overordnetKlassifiseringTekst");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1458,7 +1458,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property OppsummeringAKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringAKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringAKriterier")]
         public virtual string OppsummeringAKriterier
         {
             get
@@ -1470,7 +1470,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOppsummeringAKriterierChanging(value);
                 this._OppsummeringAKriterier = value;
                 this.OnOppsummeringAKriterierChanged();
-                this.OnPropertyChanged("OppsummeringAKriterier");
+                this.OnPropertyChanged("oppsummeringAKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1481,7 +1481,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property OppsummeringBKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringBKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringBKriterier")]
         public virtual string OppsummeringBKriterier
         {
             get
@@ -1493,7 +1493,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOppsummeringBKriterierChanging(value);
                 this._OppsummeringBKriterier = value;
                 this.OnOppsummeringBKriterierChanged();
-                this.OnPropertyChanged("OppsummeringBKriterier");
+                this.OnPropertyChanged("oppsummeringBKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1504,7 +1504,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property OppsummeringCKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringCKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringCKriterier")]
         public virtual string OppsummeringCKriterier
         {
             get
@@ -1516,7 +1516,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOppsummeringCKriterierChanging(value);
                 this._OppsummeringCKriterier = value;
                 this.OnOppsummeringCKriterierChanged();
-                this.OnPropertyChanged("OppsummeringCKriterier");
+                this.OnPropertyChanged("oppsummeringCKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1527,7 +1527,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property OppsummeringDKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringDKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringDKriterier")]
         public virtual string OppsummeringDKriterier
         {
             get
@@ -1539,7 +1539,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOppsummeringDKriterierChanging(value);
                 this._OppsummeringDKriterier = value;
                 this.OnOppsummeringDKriterierChanged();
-                this.OnPropertyChanged("OppsummeringDKriterier");
+                this.OnPropertyChanged("oppsummeringDKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1550,7 +1550,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property OppsummeringEKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringEKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringEKriterier")]
         public virtual string OppsummeringEKriterier
         {
             get
@@ -1562,7 +1562,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOppsummeringEKriterierChanging(value);
                 this._OppsummeringEKriterier = value;
                 this.OnOppsummeringEKriterierChanged();
-                this.OnPropertyChanged("OppsummeringEKriterier");
+                this.OnPropertyChanged("oppsummeringEKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1573,7 +1573,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Kriteriedokumentasjon in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Kriteriedokumentasjon")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kriteriedokumentasjon")]
         public virtual string Kriteriedokumentasjon
         {
             get
@@ -1585,7 +1585,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnKriteriedokumentasjonChanging(value);
                 this._Kriteriedokumentasjon = value;
                 this.OnKriteriedokumentasjonChanged();
-                this.OnPropertyChanged("Kriteriedokumentasjon");
+                this.OnPropertyChanged("kriteriedokumentasjon");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1596,7 +1596,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property TilførselFraNaboland in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("TilførselFraNaboland")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("tilførselFraNaboland")]
         public virtual bool TilførselFraNaboland
         {
             get
@@ -1608,7 +1608,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnTilførselFraNabolandChanging(value);
                 this._TilførselFraNaboland = value;
                 this.OnTilførselFraNabolandChanged();
-                this.OnPropertyChanged("TilførselFraNaboland");
+                this.OnPropertyChanged("tilførselFraNaboland");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1619,7 +1619,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property ÅrsakTilNedgraderingAvKategori in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ÅrsakTilNedgraderingAvKategori")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("årsakTilNedgraderingAvKategori")]
         public virtual string ÅrsakTilNedgraderingAvKategori
         {
             get
@@ -1631,7 +1631,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnÅrsakTilNedgraderingAvKategoriChanging(value);
                 this._ÅrsakTilNedgraderingAvKategori = value;
                 this.OnÅrsakTilNedgraderingAvKategoriChanged();
-                this.OnPropertyChanged("ÅrsakTilNedgraderingAvKategori");
+                this.OnPropertyChanged("årsakTilNedgraderingAvKategori");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1642,7 +1642,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property ÅrsakTilEndringAvKategori in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ÅrsakTilEndringAvKategori")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("årsakTilEndringAvKategori")]
         public virtual string ÅrsakTilEndringAvKategori
         {
             get
@@ -1654,7 +1654,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnÅrsakTilEndringAvKategoriChanging(value);
                 this._ÅrsakTilEndringAvKategori = value;
                 this.OnÅrsakTilEndringAvKategoriChanged();
-                this.OnPropertyChanged("ÅrsakTilEndringAvKategori");
+                this.OnPropertyChanged("årsakTilEndringAvKategori");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1665,7 +1665,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property UtdøingSterktPåvirket in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("UtdøingSterktPåvirket")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("utdøingSterktPåvirket")]
         public virtual string UtdøingSterktPåvirket
         {
             get
@@ -1677,7 +1677,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnUtdøingSterktPåvirketChanging(value);
                 this._UtdøingSterktPåvirket = value;
                 this.OnUtdøingSterktPåvirketChanged();
-                this.OnPropertyChanged("UtdøingSterktPåvirket");
+                this.OnPropertyChanged("utdøingSterktPåvirket");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1688,7 +1688,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Kategori in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Kategori")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kategori")]
         public virtual string Kategori
         {
             get
@@ -1700,7 +1700,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnKategoriChanging(value);
                 this._Kategori = value;
                 this.OnKategoriChanged();
-                this.OnPropertyChanged("Kategori");
+                this.OnPropertyChanged("kategori");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1711,7 +1711,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Kriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Kriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kriterier")]
         public virtual string Kriterier
         {
             get
@@ -1723,7 +1723,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnKriterierChanging(value);
                 this._Kriterier = value;
                 this.OnKriterierChanged();
-                this.OnPropertyChanged("Kriterier");
+                this.OnPropertyChanged("kriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1734,7 +1734,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property HovedKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("HovedKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("hovedKriterier")]
         public virtual global::System.Collections.ObjectModel.ObservableCollection<string> HovedKriterier
         {
             get
@@ -1746,7 +1746,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnHovedKriterierChanging(value);
                 this._HovedKriterier = value;
                 this.OnHovedKriterierChanged();
-                this.OnPropertyChanged("HovedKriterier");
+                this.OnPropertyChanged("hovedKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1757,7 +1757,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property KategoriFraForrigeListe in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("KategoriFraForrigeListe")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kategoriFraForrigeListe")]
         public virtual string KategoriFraForrigeListe
         {
             get
@@ -1769,7 +1769,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnKategoriFraForrigeListeChanging(value);
                 this._KategoriFraForrigeListe = value;
                 this.OnKategoriFraForrigeListeChanged();
-                this.OnPropertyChanged("KategoriFraForrigeListe");
+                this.OnPropertyChanged("kategoriFraForrigeListe");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1780,7 +1780,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property KriterierFraForrigeListe in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("KriterierFraForrigeListe")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kriterierFraForrigeListe")]
         public virtual string KriterierFraForrigeListe
         {
             get
@@ -1792,7 +1792,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnKriterierFraForrigeListeChanging(value);
                 this._KriterierFraForrigeListe = value;
                 this.OnKriterierFraForrigeListeChanged();
-                this.OnPropertyChanged("KriterierFraForrigeListe");
+                this.OnPropertyChanged("kriterierFraForrigeListe");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1803,7 +1803,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property KategoriEndretFra in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("KategoriEndretFra")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kategoriEndretFra")]
         public virtual string KategoriEndretFra
         {
             get
@@ -1815,7 +1815,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnKategoriEndretFraChanging(value);
                 this._KategoriEndretFra = value;
                 this.OnKategoriEndretFraChanged();
-                this.OnPropertyChanged("KategoriEndretFra");
+                this.OnPropertyChanged("kategoriEndretFra");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1826,7 +1826,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property GlobalRødlistestatusKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("GlobalRødlistestatusKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("globalRødlistestatusKode")]
         public virtual string GlobalRødlistestatusKode
         {
             get
@@ -1838,7 +1838,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnGlobalRødlistestatusKodeChanging(value);
                 this._GlobalRødlistestatusKode = value;
                 this.OnGlobalRødlistestatusKodeChanged();
-                this.OnPropertyChanged("GlobalRødlistestatusKode");
+                this.OnPropertyChanged("globalRødlistestatusKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1849,8 +1849,8 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Påvirkningsfaktorer in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorer")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Pavirkningsfaktor> Påvirkningsfaktorer
+        [global::Microsoft.OData.Client.OriginalNameAttribute("påvirkningsfaktorer")]
+        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor> Påvirkningsfaktorer
         {
             get
             {
@@ -1861,19 +1861,19 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnPåvirkningsfaktorerChanging(value);
                 this._Påvirkningsfaktorer = value;
                 this.OnPåvirkningsfaktorerChanged();
-                this.OnPropertyChanged("Påvirkningsfaktorer");
+                this.OnPropertyChanged("påvirkningsfaktorer");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Pavirkningsfaktor>();
-        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Pavirkningsfaktor> value);
+        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor>();
+        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor> value);
         partial void OnPåvirkningsfaktorerChanged();
         /// <summary>
         /// There are no comments for Property Fylkesforekomster in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Fylkesforekomster")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Fylkesforekomst> Fylkesforekomster
+        [global::Microsoft.OData.Client.OriginalNameAttribute("fylkesforekomster")]
+        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Fylkesforekomst> Fylkesforekomster
         {
             get
             {
@@ -1884,19 +1884,19 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnFylkesforekomsterChanging(value);
                 this._Fylkesforekomster = value;
                 this.OnFylkesforekomsterChanged();
-                this.OnPropertyChanged("Fylkesforekomster");
+                this.OnPropertyChanged("fylkesforekomster");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Fylkesforekomst> _Fylkesforekomster = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Fylkesforekomst>();
-        partial void OnFylkesforekomsterChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Fylkesforekomst> value);
+        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Fylkesforekomst> _Fylkesforekomster = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Fylkesforekomst>();
+        partial void OnFylkesforekomsterChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Fylkesforekomst> value);
         partial void OnFylkesforekomsterChanged();
         /// <summary>
         /// There are no comments for Property NaturtypeHovedenhet in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("NaturtypeHovedenhet")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Naturtype> NaturtypeHovedenhet
+        [global::Microsoft.OData.Client.OriginalNameAttribute("naturtypeHovedenhet")]
+        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Naturtype> NaturtypeHovedenhet
         {
             get
             {
@@ -1907,19 +1907,19 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnNaturtypeHovedenhetChanging(value);
                 this._NaturtypeHovedenhet = value;
                 this.OnNaturtypeHovedenhetChanged();
-                this.OnPropertyChanged("NaturtypeHovedenhet");
+                this.OnPropertyChanged("naturtypeHovedenhet");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Naturtype> _NaturtypeHovedenhet = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Naturtype>();
-        partial void OnNaturtypeHovedenhetChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.DataRepository.Models.Naturtype> value);
+        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Naturtype> _NaturtypeHovedenhet = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Naturtype>();
+        partial void OnNaturtypeHovedenhetChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Naturtype> value);
         partial void OnNaturtypeHovedenhetChanged();
         /// <summary>
         /// There are no comments for Property Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Referanser")]
-        public virtual global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.DataRepository.Models.Reference> Referanser
+        [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
+        public virtual global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.Models.Redlist.Reference> Referanser
         {
             get
             {
@@ -1930,12 +1930,12 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnReferanserChanging(value);
                 this._Referanser = value;
                 this.OnReferanserChanged();
-                this.OnPropertyChanged("Referanser");
+                this.OnPropertyChanged("referanser");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.DataRepository.Models.Reference> _Referanser = new global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.DataRepository.Models.Reference>(null, global::Microsoft.OData.Client.TrackingMode.None);
-        partial void OnReferanserChanging(global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.DataRepository.Models.Reference> value);
+        private global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.Models.Redlist.Reference> _Referanser = new global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.Models.Redlist.Reference>(null, global::Microsoft.OData.Client.TrackingMode.None);
+        partial void OnReferanserChanging(global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.Models.Redlist.Reference> value);
         partial void OnReferanserChanged();
         /// <summary>
         /// This event is raised when the value of the property is changed
@@ -1965,7 +1965,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property OverordnetTittel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OverordnetTittel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("overordnetTittel")]
         public virtual string OverordnetTittel
         {
             get
@@ -1977,7 +1977,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOverordnetTittelChanging(value);
                 this._OverordnetTittel = value;
                 this.OnOverordnetTittelChanged();
-                this.OnPropertyChanged("OverordnetTittel");
+                this.OnPropertyChanged("overordnetTittel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1988,7 +1988,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Beskrivelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Beskrivelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("beskrivelse")]
         public virtual string Beskrivelse
         {
             get
@@ -2000,7 +2000,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnBeskrivelseChanging(value);
                 this._Beskrivelse = value;
                 this.OnBeskrivelseChanged();
-                this.OnPropertyChanged("Beskrivelse");
+                this.OnPropertyChanged("beskrivelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2011,7 +2011,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Tidspunkt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Tidspunkt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("tidspunkt")]
         public virtual string Tidspunkt
         {
             get
@@ -2023,7 +2023,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnTidspunktChanging(value);
                 this._Tidspunkt = value;
                 this.OnTidspunktChanged();
-                this.OnPropertyChanged("Tidspunkt");
+                this.OnPropertyChanged("tidspunkt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2034,7 +2034,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Omfang in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Omfang")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("omfang")]
         public virtual string Omfang
         {
             get
@@ -2046,7 +2046,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnOmfangChanging(value);
                 this._Omfang = value;
                 this.OnOmfangChanged();
-                this.OnPropertyChanged("Omfang");
+                this.OnPropertyChanged("omfang");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2057,7 +2057,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Alvorlighetsgrad in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Alvorlighetsgrad")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("alvorlighetsgrad")]
         public virtual string Alvorlighetsgrad
         {
             get
@@ -2069,7 +2069,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnAlvorlighetsgradChanging(value);
                 this._Alvorlighetsgrad = value;
                 this.OnAlvorlighetsgradChanged();
-                this.OnPropertyChanged("Alvorlighetsgrad");
+                this.OnPropertyChanged("alvorlighetsgrad");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2080,7 +2080,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Tittel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Tittel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("tittel")]
         public virtual string Tittel
         {
             get
@@ -2092,7 +2092,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnTittelChanging(value);
                 this._Tittel = value;
                 this.OnTittelChanged();
-                this.OnPropertyChanged("Tittel");
+                this.OnPropertyChanged("tittel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2103,7 +2103,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property ØversteTittel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ØversteTittel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("øversteTittel")]
         public virtual string ØversteTittel
         {
             get
@@ -2115,7 +2115,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnØversteTittelChanging(value);
                 this._ØversteTittel = value;
                 this.OnØversteTittelChanged();
-                this.OnPropertyChanged("ØversteTittel");
+                this.OnPropertyChanged("øversteTittel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2126,7 +2126,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Forkortelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Forkortelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("forkortelse")]
         public virtual string Forkortelse
         {
             get
@@ -2138,7 +2138,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnForkortelseChanging(value);
                 this._Forkortelse = value;
                 this.OnForkortelseChanged();
-                this.OnPropertyChanged("Forkortelse");
+                this.OnPropertyChanged("forkortelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2194,7 +2194,7 @@ namespace Assessments.Api.Data.DataRepository.Models
     /// <KeyProperties>
     /// ReferenceId
     /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("ReferenceId")]
+    [global::Microsoft.OData.Client.Key("referenceId")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("Reference")]
     public partial class Reference : global::Microsoft.OData.Client.BaseEntityType, global::System.ComponentModel.INotifyPropertyChanged
     {
@@ -2213,7 +2213,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Type in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Type")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("type")]
         public virtual string Type
         {
             get
@@ -2225,7 +2225,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnTypeChanging(value);
                 this._Type = value;
                 this.OnTypeChanged();
-                this.OnPropertyChanged("Type");
+                this.OnPropertyChanged("type");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2236,7 +2236,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property ReferenceId in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ReferenceId")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("referenceId")]
         public virtual global::System.Guid ReferenceId
         {
             get
@@ -2248,7 +2248,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnReferenceIdChanging(value);
                 this._ReferenceId = value;
                 this.OnReferenceIdChanged();
-                this.OnPropertyChanged("ReferenceId");
+                this.OnPropertyChanged("referenceId");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2259,7 +2259,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property FormattedReference in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("FormattedReference")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("formattedReference")]
         public virtual string FormattedReference
         {
             get
@@ -2271,7 +2271,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnFormattedReferenceChanging(value);
                 this._FormattedReference = value;
                 this.OnFormattedReferenceChanged();
-                this.OnPropertyChanged("FormattedReference");
+                this.OnPropertyChanged("formattedReference");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2317,7 +2317,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Fylke in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Fylke")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("fylke")]
         public virtual string Fylke
         {
             get
@@ -2329,7 +2329,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnFylkeChanging(value);
                 this._Fylke = value;
                 this.OnFylkeChanged();
-                this.OnPropertyChanged("Fylke");
+                this.OnPropertyChanged("fylke");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2340,7 +2340,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Sikker in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Sikker")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("sikker")]
         public virtual bool Sikker
         {
             get
@@ -2352,7 +2352,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnSikkerChanging(value);
                 this._Sikker = value;
                 this.OnSikkerChanged();
-                this.OnPropertyChanged("Sikker");
+                this.OnPropertyChanged("sikker");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2387,7 +2387,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Navn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Navn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("navn")]
         public virtual string Navn
         {
             get
@@ -2399,7 +2399,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnNavnChanging(value);
                 this._Navn = value;
                 this.OnNavnChanged();
-                this.OnPropertyChanged("Navn");
+                this.OnPropertyChanged("navn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2410,7 +2410,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property NavnR2010 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("NavnR2010")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("navnR2010")]
         public virtual string NavnR2010
         {
             get
@@ -2422,7 +2422,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnNavnR2010Changing(value);
                 this._NavnR2010 = value;
                 this.OnNavnR2010Changed();
-                this.OnPropertyChanged("NavnR2010");
+                this.OnPropertyChanged("navnR2010");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2433,7 +2433,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Forkortelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Forkortelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("forkortelse")]
         public virtual string Forkortelse
         {
             get
@@ -2445,7 +2445,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnForkortelseChanging(value);
                 this._Forkortelse = value;
                 this.OnForkortelseChanged();
-                this.OnPropertyChanged("Forkortelse");
+                this.OnPropertyChanged("forkortelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2456,7 +2456,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property Kortnavn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Kortnavn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kortnavn")]
         public virtual string Kortnavn
         {
             get
@@ -2468,7 +2468,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnKortnavnChanging(value);
                 this._Kortnavn = value;
                 this.OnKortnavnChanged();
-                this.OnPropertyChanged("Kortnavn");
+                this.OnPropertyChanged("kortnavn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2479,7 +2479,7 @@ namespace Assessments.Api.Data.DataRepository.Models
         /// There are no comments for Property HovedøkosystemKLD in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("HovedøkosystemKLD")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("hovedøkosystemKLD")]
         public virtual string HovedøkosystemKLD
         {
             get
@@ -2491,7 +2491,7 @@ namespace Assessments.Api.Data.DataRepository.Models
                 this.OnHovedøkosystemKLDChanging(value);
                 this._HovedøkosystemKLD = value;
                 this.OnHovedøkosystemKLDChanged();
-                this.OnPropertyChanged("HovedøkosystemKLD");
+                this.OnPropertyChanged("hovedøkosystemKLD");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2522,50 +2522,50 @@ namespace Assessments.Api.Data.DataRepository.Models
     public static class ExtensionMethods
     {
         /// <summary>
-        /// Get an entity of type global::Assessments.Api.Data.DataRepository.Models.Rodliste2015 as global::Assessments.Api.Data.DataRepository.Models.Rodliste2015Single specified by key from an entity set
+        /// Get an entity of type global::Assessments.Api.Data.Models.Redlist.Rodliste2015 as global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="_keys">dictionary with the names and values of keys</param>
-        public static global::Assessments.Api.Data.DataRepository.Models.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.DataRepository.Models.Rodliste2015> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
+        public static global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
         {
-            return new global::Assessments.Api.Data.DataRepository.Models.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+            return new global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
-        /// Get an entity of type global::Assessments.Api.Data.DataRepository.Models.Rodliste2015 as global::Assessments.Api.Data.DataRepository.Models.Rodliste2015Single specified by key from an entity set
+        /// Get an entity of type global::Assessments.Api.Data.Models.Redlist.Rodliste2015 as global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="id">The value of id</param>
-        public static global::Assessments.Api.Data.DataRepository.Models.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.DataRepository.Models.Rodliste2015> _source,
+        public static global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015> _source,
             string id)
         {
             global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
             {
-                { "Id", id }
+                { "id", id }
             };
-            return new global::Assessments.Api.Data.DataRepository.Models.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+            return new global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
-        /// Get an entity of type global::Assessments.Api.Data.DataRepository.Models.Reference as global::Assessments.Api.Data.DataRepository.Models.ReferenceSingle specified by key from an entity set
+        /// Get an entity of type global::Assessments.Api.Data.Models.Redlist.Reference as global::Assessments.Api.Data.Models.Redlist.ReferenceSingle specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="_keys">dictionary with the names and values of keys</param>
-        public static global::Assessments.Api.Data.DataRepository.Models.ReferenceSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.DataRepository.Models.Reference> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
+        public static global::Assessments.Api.Data.Models.Redlist.ReferenceSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Reference> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
         {
-            return new global::Assessments.Api.Data.DataRepository.Models.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+            return new global::Assessments.Api.Data.Models.Redlist.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
-        /// Get an entity of type global::Assessments.Api.Data.DataRepository.Models.Reference as global::Assessments.Api.Data.DataRepository.Models.ReferenceSingle specified by key from an entity set
+        /// Get an entity of type global::Assessments.Api.Data.Models.Redlist.Reference as global::Assessments.Api.Data.Models.Redlist.ReferenceSingle specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="referenceId">The value of referenceId</param>
-        public static global::Assessments.Api.Data.DataRepository.Models.ReferenceSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.DataRepository.Models.Reference> _source,
+        public static global::Assessments.Api.Data.Models.Redlist.ReferenceSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Reference> _source,
             global::System.Guid referenceId)
         {
             global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
             {
-                { "ReferenceId", referenceId }
+                { "referenceId", referenceId }
             };
-            return new global::Assessments.Api.Data.DataRepository.Models.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+            return new global::Assessments.Api.Data.Models.Redlist.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
     }
 }
@@ -2599,7 +2599,7 @@ namespace Default
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         protected global::System.Type ResolveTypeFromName(string typeName)
         {
-            global::System.Type resolvedType = this.DefaultResolveType(typeName, "Assessments.Api.Data.DataRepository.Models", "Assessments.Api.Data.DataRepository.Models");
+            global::System.Type resolvedType = this.DefaultResolveType(typeName, "Assessments.Api.Data.Models.Redlist", "Assessments.Api.Data.Models.Redlist");
             if ((resolvedType != null))
             {
                 return resolvedType;
@@ -2620,13 +2620,13 @@ namespace Default
         protected string ResolveNameFromType(global::System.Type clientType)
         {
             global::Microsoft.OData.Client.OriginalNameAttribute originalNameAttribute = (global::Microsoft.OData.Client.OriginalNameAttribute)global::System.Linq.Enumerable.SingleOrDefault(global::Microsoft.OData.Client.Utility.GetCustomAttributes(clientType, typeof(global::Microsoft.OData.Client.OriginalNameAttribute), true));
-            if (clientType.Namespace.Equals("Assessments.Api.Data.DataRepository.Models", global::System.StringComparison.Ordinal))
+            if (clientType.Namespace.Equals("Assessments.Api.Data.Models.Redlist", global::System.StringComparison.Ordinal))
             {
                 if (originalNameAttribute != null)
                 {
-                    return string.Concat("Assessments.Api.Data.DataRepository.Models.", originalNameAttribute.OriginalName);
+                    return string.Concat("Assessments.Api.Data.Models.Redlist.", originalNameAttribute.OriginalName);
                 }
-                return string.Concat("Assessments.Api.Data.DataRepository.Models.", clientType.Name);
+                return string.Concat("Assessments.Api.Data.Models.Redlist.", clientType.Name);
             }
             if (clientType.Namespace.Equals("Default", global::System.StringComparison.Ordinal))
             {
@@ -2643,24 +2643,24 @@ namespace Default
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("Redlist")]
-        public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.DataRepository.Models.Rodliste2015> Redlist
+        public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015> Redlist
         {
             get
             {
                 if ((this._Redlist == null))
                 {
-                    this._Redlist = base.CreateQuery<global::Assessments.Api.Data.DataRepository.Models.Rodliste2015>("Redlist");
+                    this._Redlist = base.CreateQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015>("Redlist");
                 }
                 return this._Redlist;
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.DataRepository.Models.Rodliste2015> _Redlist;
+        private global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015> _Redlist;
         /// <summary>
         /// There are no comments for Redlist in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public virtual void AddToRedlist(global::Assessments.Api.Data.DataRepository.Models.Rodliste2015 rodliste2015)
+        public virtual void AddToRedlist(global::Assessments.Api.Data.Models.Redlist.Rodliste2015 rodliste2015)
         {
             base.AddObject("Redlist", rodliste2015);
         }
@@ -2671,7 +2671,7 @@ namespace Default
             private static global::Microsoft.OData.Edm.IEdmModel ParsedModel = LoadModelFromString();
 
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-            private const string filePath = @"Assessments OData ServiceCsdl.xml";
+            private const string filePath = @"AssessmentODataServiceCsdl.xml";
 
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
             public static global::Microsoft.OData.Edm.IEdmModel GetInstance()

@@ -8,11 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Connected Services\Assessments OData Service\Assessments OData ServiceCsdl.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Connected Services\Assessments OData Service\Assessments OData ServiceCsdl.xml" />
+    <EmbeddedResource Include="Connected Services\AssessmentODataService\AssessmentODataServiceCsdl.xml" />
   </ItemGroup>
 
   <ItemGroup>

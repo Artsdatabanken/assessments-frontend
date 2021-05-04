@@ -1,6 +1,6 @@
 <edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
   <edmx:DataServices>
-    <Schema Namespace="Assessments.Api.Data.Models.Redlist" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+    <Schema Namespace="Artsdatabanken" xmlns="http://docs.oasis-open.org/odata/ns/edm">
       <EntityType Name="Rodliste2015">
         <Key>
           <PropertyRef Name="id" />
@@ -81,10 +81,10 @@
         <Property Name="kriterierFraForrigeListe" Type="Edm.String" />
         <Property Name="kategoriEndretFra" Type="Edm.String" />
         <Property Name="globalRødlistestatusKode" Type="Edm.String" />
-        <Property Name="påvirkningsfaktorer" Type="Collection(Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor)" />
-        <Property Name="fylkesforekomster" Type="Collection(Assessments.Api.Data.Models.Redlist.Fylkesforekomst)" />
-        <Property Name="naturtypeHovedenhet" Type="Collection(Assessments.Api.Data.Models.Redlist.Naturtype)" />
-        <NavigationProperty Name="referanser" Type="Collection(Assessments.Api.Data.Models.Redlist.Reference)" />
+        <Property Name="påvirkningsfaktorer" Type="Collection(Artsdatabanken.Pavirkningsfaktor)" />
+        <Property Name="fylkesforekomster" Type="Collection(Artsdatabanken.Fylkesforekomst)" />
+        <Property Name="naturtypeHovedenhet" Type="Collection(Artsdatabanken.Naturtype)" />
+        <NavigationProperty Name="referanser" Type="Collection(Artsdatabanken.Reference)" />
       </EntityType>
       <ComplexType Name="Pavirkningsfaktor">
         <Property Name="overordnetTittel" Type="Edm.String" />
@@ -115,10 +115,8 @@
         <Property Name="kortnavn" Type="Edm.String" />
         <Property Name="hovedøkosystemKLD" Type="Edm.String" />
       </ComplexType>
-    </Schema>
-    <Schema Namespace="Default" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-      <EntityContainer Name="Container">
-        <EntitySet Name="Redlist" EntityType="Assessments.Api.Data.Models.Redlist.Rodliste2015" />
+      <EntityContainer Name="Assessments">
+        <EntitySet Name="Redlist2015" EntityType="Artsdatabanken.Rodliste2015" />
       </EntityContainer>
     </Schema>
   </edmx:DataServices>

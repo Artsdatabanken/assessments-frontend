@@ -1,5 +1,4 @@
-﻿using Assessments.Api.Data.Models.Redlist;
-using Default;
+﻿using Artsdatabanken;
 using Microsoft.Extensions.Options;
 using Microsoft.OData.Client;
 
@@ -7,22 +6,15 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public class AssessmentApiService
     {
+        private static IOptions<ApplicationSettings> _settings;
         public readonly DataServiceQuery<Rodliste2015> Redlist2015;
 
-        private static IOptions<ApplicationSettings> _applicationSettings;
-
-        public AssessmentApiService(IOptions<ApplicationSettings> applicationSettings)
+        public AssessmentApiService(IOptions<ApplicationSettings> settings)
         {
-            _applicationSettings = applicationSettings;
-            
-            Redlist2015 = Container().Redlist;
+            _settings = settings;
+            Redlist2015 = Assessments().Redlist2015;
         }
 
-        private static Container Container()
-        {
-            var container = new Container(_applicationSettings.Value.AssessmentsApi.EndpointUrl);
-
-            return container;
-        }
+        private static Artsdatabanken.Assessments Assessments() => new (_settings.Value.AssessmentsApi.EndpointUrl);
     }
 }

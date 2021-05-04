@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using Assessments.Api.Data.Models.Redlist;
+using Artsdatabanken;
 using Assessments.Frontend.Web.Infrastructure;
 
 namespace Assessments.Frontend.Web.Controllers
@@ -29,7 +29,9 @@ namespace Assessments.Frontend.Web.Controllers
         {
             try
             {
-                var result = await _assessmentApi.Redlist2015.ByKey(HttpUtility.UrlDecode(id)).GetValueAsync();
+                var key = HttpUtility.UrlDecode(id);
+
+                var result = await _assessmentApi.Redlist2015.ByKey(key).GetValueAsync();
                 
                 return View(result);
             }

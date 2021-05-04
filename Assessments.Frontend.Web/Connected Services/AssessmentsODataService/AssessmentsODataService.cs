@@ -8,9 +8,153 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 03.05.2021 15:00:00
-namespace Assessments.Api.Data.Models.Redlist
+// Generation date: 04.05.2021 10:11:58
+namespace Artsdatabanken
 {
+        /// <summary>
+        /// There are no comments for Assessments in the schema.
+        /// </summary>
+    [global::Microsoft.OData.Client.OriginalNameAttribute("Assessments")]
+    public partial class Assessments : global::Microsoft.OData.Client.DataServiceContext
+    {
+        /// <summary>
+        /// Initialize a new Assessments object.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        public Assessments(global::System.Uri serviceRoot) :
+                base(serviceRoot, global::Microsoft.OData.Client.ODataProtocolVersion.V4)
+        {
+            this.ResolveName = new global::System.Func<global::System.Type, string>(this.ResolveNameFromType);
+            this.ResolveType = new global::System.Func<string, global::System.Type>(this.ResolveTypeFromName);
+            this.OnContextCreated();
+            this.Format.LoadServiceModel = GeneratedEdmModel.GetInstance;
+            this.Format.UseJson();
+        }
+        partial void OnContextCreated();
+        /// <summary>
+        /// Since the namespace configured for this service reference
+        /// in Visual Studio is different from the one indicated in the
+        /// server schema, use type-mappers to map between the two.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        protected global::System.Type ResolveTypeFromName(string typeName)
+        {
+            global::System.Type resolvedType = this.DefaultResolveType(typeName, "Artsdatabanken", "Artsdatabanken");
+            if ((resolvedType != null))
+            {
+                return resolvedType;
+            }
+            return null;
+        }
+        /// <summary>
+        /// Since the namespace configured for this service reference
+        /// in Visual Studio is different from the one indicated in the
+        /// server schema, use type-mappers to map between the two.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        protected string ResolveNameFromType(global::System.Type clientType)
+        {
+            global::Microsoft.OData.Client.OriginalNameAttribute originalNameAttribute = (global::Microsoft.OData.Client.OriginalNameAttribute)global::System.Linq.Enumerable.SingleOrDefault(global::Microsoft.OData.Client.Utility.GetCustomAttributes(clientType, typeof(global::Microsoft.OData.Client.OriginalNameAttribute), true));
+            if (clientType.Namespace.Equals("Artsdatabanken", global::System.StringComparison.Ordinal))
+            {
+                if (originalNameAttribute != null)
+                {
+                    return string.Concat("Artsdatabanken.", originalNameAttribute.OriginalName);
+                }
+                return string.Concat("Artsdatabanken.", clientType.Name);
+            }
+            return null;
+        }
+        /// <summary>
+        /// There are no comments for Redlist2015 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Redlist2015")]
+        public virtual global::Microsoft.OData.Client.DataServiceQuery<Rodliste2015> Redlist2015
+        {
+            get
+            {
+                if ((this._Redlist2015 == null))
+                {
+                    this._Redlist2015 = base.CreateQuery<Rodliste2015>("Redlist2015");
+                }
+                return this._Redlist2015;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::Microsoft.OData.Client.DataServiceQuery<Rodliste2015> _Redlist2015;
+        /// <summary>
+        /// There are no comments for Redlist2015 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        public virtual void AddToRedlist2015(Rodliste2015 rodliste2015)
+        {
+            base.AddObject("Redlist2015", rodliste2015);
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private abstract class GeneratedEdmModel
+        {
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+            private static global::Microsoft.OData.Edm.IEdmModel ParsedModel = LoadModelFromString();
+
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+            private const string filePath = @"AssessmentsODataServiceCsdl.xml";
+
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+            public static global::Microsoft.OData.Edm.IEdmModel GetInstance()
+            {
+                return ParsedModel;
+            }
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+            private static global::Microsoft.OData.Edm.IEdmModel LoadModelFromString()
+            {
+                global::System.Xml.XmlReader reader = CreateXmlReader();
+                try
+                {
+                    global::System.Collections.Generic.IEnumerable<global::Microsoft.OData.Edm.Validation.EdmError> errors;
+                    global::Microsoft.OData.Edm.IEdmModel edmModel;
+
+                    if (!global::Microsoft.OData.Edm.Csdl.CsdlReader.TryParse(reader, true, out edmModel, out errors))
+                    {
+	                    global::System.Text.StringBuilder errorMessages = new global::System.Text.StringBuilder();
+	                    foreach (var error in errors)
+	                    {
+		                    errorMessages.Append(error.ErrorMessage);
+		                    errorMessages.Append("; ");
+	                    }
+	                    throw new global::System.InvalidOperationException(errorMessages.ToString());
+                    }
+
+                    return edmModel;
+                }
+                finally
+                {
+                    ((global::System.IDisposable)(reader)).Dispose();
+                }
+            }
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+            private static global::System.Xml.XmlReader CreateXmlReader(string edmxToParse)
+            {
+                return global::System.Xml.XmlReader.Create(new global::System.IO.StringReader(edmxToParse));
+            }
+
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+            private static global::System.Xml.XmlReader CreateXmlReader()
+            {
+                try
+                {
+                    var assembly = global::System.Reflection.Assembly.GetExecutingAssembly();
+                    var resourcePath = global::System.Linq.Enumerable.Single(assembly.GetManifestResourceNames(), str => str.EndsWith(filePath));
+                    global::System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath);
+                    return global::System.Xml.XmlReader.Create(new global::System.IO.StreamReader(stream));
+                }
+                catch(global::System.Xml.XmlException e)
+                {
+                    throw new global::System.Xml.XmlException("Failed to create an XmlReader from the stream. Check if the resource exists.", e);
+                }
+            }
+        }
+    }
         /// <summary>
         /// There are no comments for Rodliste2015Single in the schema.
         /// </summary>
@@ -40,7 +184,7 @@ namespace Assessments.Api.Data.Models.Redlist
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
-        public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Reference> Referanser
+        public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Reference> Referanser
         {
             get
             {
@@ -50,13 +194,13 @@ namespace Assessments.Api.Data.Models.Redlist
                 }
                 if ((this._Referanser == null))
                 {
-                    this._Referanser = Context.CreateQuery<global::Assessments.Api.Data.Models.Redlist.Reference>(GetPath("referanser"));
+                    this._Referanser = Context.CreateQuery<global::Artsdatabanken.Reference>(GetPath("referanser"));
                 }
                 return this._Referanser;
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Reference> _Referanser;
+        private global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Reference> _Referanser;
     }
         /// <summary>
         /// There are no comments for Rodliste2015 in the schema.
@@ -65,6 +209,7 @@ namespace Assessments.Api.Data.Models.Redlist
     /// Id
     /// </KeyProperties>
     [global::Microsoft.OData.Client.Key("id")]
+    [global::Microsoft.OData.Client.EntitySet("Redlist2015")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("Rodliste2015")]
     public partial class Rodliste2015 : global::Microsoft.OData.Client.BaseEntityType, global::System.ComponentModel.INotifyPropertyChanged
     {
@@ -1850,7 +1995,7 @@ namespace Assessments.Api.Data.Models.Redlist
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("påvirkningsfaktorer")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor> Påvirkningsfaktorer
+        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Pavirkningsfaktor> Påvirkningsfaktorer
         {
             get
             {
@@ -1865,15 +2010,15 @@ namespace Assessments.Api.Data.Models.Redlist
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor>();
-        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Pavirkningsfaktor> value);
+        private global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Pavirkningsfaktor>();
+        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Pavirkningsfaktor> value);
         partial void OnPåvirkningsfaktorerChanged();
         /// <summary>
         /// There are no comments for Property Fylkesforekomster in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("fylkesforekomster")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Fylkesforekomst> Fylkesforekomster
+        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Fylkesforekomst> Fylkesforekomster
         {
             get
             {
@@ -1888,15 +2033,15 @@ namespace Assessments.Api.Data.Models.Redlist
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Fylkesforekomst> _Fylkesforekomster = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Fylkesforekomst>();
-        partial void OnFylkesforekomsterChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Fylkesforekomst> value);
+        private global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Fylkesforekomst> _Fylkesforekomster = new global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Fylkesforekomst>();
+        partial void OnFylkesforekomsterChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Fylkesforekomst> value);
         partial void OnFylkesforekomsterChanged();
         /// <summary>
         /// There are no comments for Property NaturtypeHovedenhet in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("naturtypeHovedenhet")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Naturtype> NaturtypeHovedenhet
+        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Naturtype> NaturtypeHovedenhet
         {
             get
             {
@@ -1911,15 +2056,15 @@ namespace Assessments.Api.Data.Models.Redlist
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Naturtype> _NaturtypeHovedenhet = new global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Naturtype>();
-        partial void OnNaturtypeHovedenhetChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Assessments.Api.Data.Models.Redlist.Naturtype> value);
+        private global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Naturtype> _NaturtypeHovedenhet = new global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Naturtype>();
+        partial void OnNaturtypeHovedenhetChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Naturtype> value);
         partial void OnNaturtypeHovedenhetChanged();
         /// <summary>
         /// There are no comments for Property Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
-        public virtual global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.Models.Redlist.Reference> Referanser
+        public virtual global::Microsoft.OData.Client.DataServiceCollection<global::Artsdatabanken.Reference> Referanser
         {
             get
             {
@@ -1934,8 +2079,8 @@ namespace Assessments.Api.Data.Models.Redlist
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.Models.Redlist.Reference> _Referanser = new global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.Models.Redlist.Reference>(null, global::Microsoft.OData.Client.TrackingMode.None);
-        partial void OnReferanserChanging(global::Microsoft.OData.Client.DataServiceCollection<global::Assessments.Api.Data.Models.Redlist.Reference> value);
+        private global::Microsoft.OData.Client.DataServiceCollection<global::Artsdatabanken.Reference> _Referanser = new global::Microsoft.OData.Client.DataServiceCollection<global::Artsdatabanken.Reference>(null, global::Microsoft.OData.Client.TrackingMode.None);
+        partial void OnReferanserChanging(global::Microsoft.OData.Client.DataServiceCollection<global::Artsdatabanken.Reference> value);
         partial void OnReferanserChanged();
         /// <summary>
         /// This event is raised when the value of the property is changed
@@ -2522,210 +2667,50 @@ namespace Assessments.Api.Data.Models.Redlist
     public static class ExtensionMethods
     {
         /// <summary>
-        /// Get an entity of type global::Assessments.Api.Data.Models.Redlist.Rodliste2015 as global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single specified by key from an entity set
+        /// Get an entity of type global::Artsdatabanken.Rodliste2015 as global::Artsdatabanken.Rodliste2015Single specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="_keys">dictionary with the names and values of keys</param>
-        public static global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
+        public static global::Artsdatabanken.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Rodliste2015> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
         {
-            return new global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+            return new global::Artsdatabanken.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
-        /// Get an entity of type global::Assessments.Api.Data.Models.Redlist.Rodliste2015 as global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single specified by key from an entity set
+        /// Get an entity of type global::Artsdatabanken.Rodliste2015 as global::Artsdatabanken.Rodliste2015Single specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="id">The value of id</param>
-        public static global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015> _source,
+        public static global::Artsdatabanken.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Rodliste2015> _source,
             string id)
         {
             global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
             {
                 { "id", id }
             };
-            return new global::Assessments.Api.Data.Models.Redlist.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+            return new global::Artsdatabanken.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
-        /// Get an entity of type global::Assessments.Api.Data.Models.Redlist.Reference as global::Assessments.Api.Data.Models.Redlist.ReferenceSingle specified by key from an entity set
+        /// Get an entity of type global::Artsdatabanken.Reference as global::Artsdatabanken.ReferenceSingle specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="_keys">dictionary with the names and values of keys</param>
-        public static global::Assessments.Api.Data.Models.Redlist.ReferenceSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Reference> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
+        public static global::Artsdatabanken.ReferenceSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Reference> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
         {
-            return new global::Assessments.Api.Data.Models.Redlist.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+            return new global::Artsdatabanken.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
-        /// Get an entity of type global::Assessments.Api.Data.Models.Redlist.Reference as global::Assessments.Api.Data.Models.Redlist.ReferenceSingle specified by key from an entity set
+        /// Get an entity of type global::Artsdatabanken.Reference as global::Artsdatabanken.ReferenceSingle specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="referenceId">The value of referenceId</param>
-        public static global::Assessments.Api.Data.Models.Redlist.ReferenceSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Reference> _source,
+        public static global::Artsdatabanken.ReferenceSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Reference> _source,
             global::System.Guid referenceId)
         {
             global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
             {
                 { "referenceId", referenceId }
             };
-            return new global::Assessments.Api.Data.Models.Redlist.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
-        }
-    }
-}
-namespace Default
-{
-        /// <summary>
-        /// There are no comments for Container in the schema.
-        /// </summary>
-    [global::Microsoft.OData.Client.OriginalNameAttribute("Container")]
-    public partial class Container : global::Microsoft.OData.Client.DataServiceContext
-    {
-        /// <summary>
-        /// Initialize a new Container object.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public Container(global::System.Uri serviceRoot) :
-                base(serviceRoot, global::Microsoft.OData.Client.ODataProtocolVersion.V4)
-        {
-            this.ResolveName = new global::System.Func<global::System.Type, string>(this.ResolveNameFromType);
-            this.ResolveType = new global::System.Func<string, global::System.Type>(this.ResolveTypeFromName);
-            this.OnContextCreated();
-            this.Format.LoadServiceModel = GeneratedEdmModel.GetInstance;
-            this.Format.UseJson();
-        }
-        partial void OnContextCreated();
-        /// <summary>
-        /// Since the namespace configured for this service reference
-        /// in Visual Studio is different from the one indicated in the
-        /// server schema, use type-mappers to map between the two.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        protected global::System.Type ResolveTypeFromName(string typeName)
-        {
-            global::System.Type resolvedType = this.DefaultResolveType(typeName, "Assessments.Api.Data.Models.Redlist", "Assessments.Api.Data.Models.Redlist");
-            if ((resolvedType != null))
-            {
-                return resolvedType;
-            }
-            resolvedType = this.DefaultResolveType(typeName, "Default", "Default");
-            if ((resolvedType != null))
-            {
-                return resolvedType;
-            }
-            return null;
-        }
-        /// <summary>
-        /// Since the namespace configured for this service reference
-        /// in Visual Studio is different from the one indicated in the
-        /// server schema, use type-mappers to map between the two.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        protected string ResolveNameFromType(global::System.Type clientType)
-        {
-            global::Microsoft.OData.Client.OriginalNameAttribute originalNameAttribute = (global::Microsoft.OData.Client.OriginalNameAttribute)global::System.Linq.Enumerable.SingleOrDefault(global::Microsoft.OData.Client.Utility.GetCustomAttributes(clientType, typeof(global::Microsoft.OData.Client.OriginalNameAttribute), true));
-            if (clientType.Namespace.Equals("Assessments.Api.Data.Models.Redlist", global::System.StringComparison.Ordinal))
-            {
-                if (originalNameAttribute != null)
-                {
-                    return string.Concat("Assessments.Api.Data.Models.Redlist.", originalNameAttribute.OriginalName);
-                }
-                return string.Concat("Assessments.Api.Data.Models.Redlist.", clientType.Name);
-            }
-            if (clientType.Namespace.Equals("Default", global::System.StringComparison.Ordinal))
-            {
-                if (originalNameAttribute != null)
-                {
-                    return string.Concat("Default.", originalNameAttribute.OriginalName);
-                }
-                return string.Concat("Default.", clientType.Name);
-            }
-            return null;
-        }
-        /// <summary>
-        /// There are no comments for Redlist in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Redlist")]
-        public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015> Redlist
-        {
-            get
-            {
-                if ((this._Redlist == null))
-                {
-                    this._Redlist = base.CreateQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015>("Redlist");
-                }
-                return this._Redlist;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceQuery<global::Assessments.Api.Data.Models.Redlist.Rodliste2015> _Redlist;
-        /// <summary>
-        /// There are no comments for Redlist in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public virtual void AddToRedlist(global::Assessments.Api.Data.Models.Redlist.Rodliste2015 rodliste2015)
-        {
-            base.AddObject("Redlist", rodliste2015);
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private abstract class GeneratedEdmModel
-        {
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-            private static global::Microsoft.OData.Edm.IEdmModel ParsedModel = LoadModelFromString();
-
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-            private const string filePath = @"AssessmentODataServiceCsdl.xml";
-
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-            public static global::Microsoft.OData.Edm.IEdmModel GetInstance()
-            {
-                return ParsedModel;
-            }
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-            private static global::Microsoft.OData.Edm.IEdmModel LoadModelFromString()
-            {
-                global::System.Xml.XmlReader reader = CreateXmlReader();
-                try
-                {
-                    global::System.Collections.Generic.IEnumerable<global::Microsoft.OData.Edm.Validation.EdmError> errors;
-                    global::Microsoft.OData.Edm.IEdmModel edmModel;
-
-                    if (!global::Microsoft.OData.Edm.Csdl.CsdlReader.TryParse(reader, true, out edmModel, out errors))
-                    {
-	                    global::System.Text.StringBuilder errorMessages = new global::System.Text.StringBuilder();
-	                    foreach (var error in errors)
-	                    {
-		                    errorMessages.Append(error.ErrorMessage);
-		                    errorMessages.Append("; ");
-	                    }
-	                    throw new global::System.InvalidOperationException(errorMessages.ToString());
-                    }
-
-                    return edmModel;
-                }
-                finally
-                {
-                    ((global::System.IDisposable)(reader)).Dispose();
-                }
-            }
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-            private static global::System.Xml.XmlReader CreateXmlReader(string edmxToParse)
-            {
-                return global::System.Xml.XmlReader.Create(new global::System.IO.StringReader(edmxToParse));
-            }
-
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-            private static global::System.Xml.XmlReader CreateXmlReader()
-            {
-                try
-                {
-                    var assembly = global::System.Reflection.Assembly.GetExecutingAssembly();
-                    var resourcePath = global::System.Linq.Enumerable.Single(assembly.GetManifestResourceNames(), str => str.EndsWith(filePath));
-                    global::System.IO.Stream stream = assembly.GetManifestResourceStream(resourcePath);
-                    return global::System.Xml.XmlReader.Create(new global::System.IO.StreamReader(stream));
-                }
-                catch(global::System.Xml.XmlException e)
-                {
-                    throw new global::System.Xml.XmlException("Failed to create an XmlReader from the stream. Check if the resource exists.", e);
-                }
-            }
+            return new global::Artsdatabanken.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
     }
 }

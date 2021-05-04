@@ -18,6 +18,8 @@ namespace Assessments.Frontend.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddRouting(options => options.LowercaseUrls = true);
+
             services.AddControllersWithViews();
 
             services.AddTransient<AssessmentApiService>();

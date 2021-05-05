@@ -1,0 +1,12 @@
+﻿@using Assessments.Frontend.Web.Infrastructure
+
+@inject AssessmentsApiClient _apiClient
+
+@{
+    ViewBag.Title = "Assessments api httpclient test";
+
+    var categories = await _apiClient
+        .Get<AssessmentsApiClient.Response<AssessmentsApiClient.Category>>("Redlist2015?$filter=length(kategori) eq 2&$apply=groupby((kategori))");
+}
+
+<select asp-items="@new SelectList(categories.Value.Select(x => x.Kategori))"></select>

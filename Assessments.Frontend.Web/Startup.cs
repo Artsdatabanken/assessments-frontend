@@ -1,3 +1,4 @@
+using System;
 using Assessments.Frontend.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,11 @@ namespace Assessments.Frontend.Web
             services.AddTransient<AssessmentApiService>();
 
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+
+            var applicationSettings = new ApplicationSettings();
+            Configuration.GetSection(nameof(ApplicationSettings)).Bind(applicationSettings);
+
+            services.AddHttpClient<AssessmentsApiClient>(client => client.BaseAddress = applicationSettings.AssessmentsApi.EndpointUrl);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -39,7 +45,7 @@ namespace Assessments.Frontend.Web
             }
 
             app.UseHttpsRedirection();
-            
+
             app.UseStaticFiles();
 
             app.UseRouting();

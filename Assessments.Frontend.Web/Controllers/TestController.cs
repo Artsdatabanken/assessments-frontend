@@ -39,5 +39,10 @@ namespace Assessments.Frontend.Web.Controllers
                 return NotFound();
             }
         }
+
+        public IActionResult HttpClient()
+        {
+            return View();
+        }
     }
 }

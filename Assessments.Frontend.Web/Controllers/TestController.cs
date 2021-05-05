@@ -2,18 +2,20 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Artsdatabanken;
 using Assessments.Frontend.Web.Infrastructure;
+using Microsoft.Extensions.Logging;
 
 namespace Assessments.Frontend.Web.Controllers
 {
     public class TestController : Controller
     {
         private readonly AssessmentApiService _assessmentApi;
+        private readonly ILogger<TestController> _logger;
 
-        public TestController(AssessmentApiService assessmentApi)
+        public TestController(AssessmentApiService assessmentApi, ILogger<TestController> logger)
         {
+            _logger = logger;
             _assessmentApi = assessmentApi;
         }
 
@@ -24,19 +26,16 @@ namespace Assessments.Frontend.Web.Controllers
             return View(results.ToList());
         }
 
-        [Route("[controller]/{id:required}")]
-        public async Task<IActionResult> Detail(string id)
+        [Route("[controller]/{id:required:int}")]
+        public async Task<IActionResult> Detail(int id)
         {
             try
             {
-                var key = HttpUtility.UrlDecode(id);
-
-                var result = await _assessmentApi.Redlist2015.ByKey(key).GetValueAsync();
-                
-                return View(result);
+                return View(await _assessmentApi.Redlist2015.ByKey(id).GetValueAsync());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return NotFound();
             }
         }

@@ -3,9 +3,8 @@
     <Schema Namespace="Artsdatabanken" xmlns="http://docs.oasis-open.org/odata/ns/edm">
       <EntityType Name="Rodliste2015">
         <Key>
-          <PropertyRef Name="id" />
+          <PropertyRef Name="latinsknavnId" />
         </Key>
-        <Property Name="id" Type="Edm.String" Nullable="false" />
         <Property Name="latinsknavnId" Type="Edm.Int32" Nullable="false" />
         <Property Name="vurderingsår" Type="Edm.Int32" Nullable="false" />
         <Property Name="vurdertVitenskapeligNavn" Type="Edm.String" />

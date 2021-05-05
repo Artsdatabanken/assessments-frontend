@@ -7,6 +7,8 @@ namespace Assessments.Frontend.Web.Infrastructure
     public class AssessmentApiService
     {
         private static IOptions<ApplicationSettings> _settings;
+        private static Artsdatabanken.Assessments Assessments() => new (_settings.Value.AssessmentsApi.EndpointUrl);
+
         public readonly DataServiceQuery<Rodliste2015> Redlist2015;
 
         public AssessmentApiService(IOptions<ApplicationSettings> settings)
@@ -14,7 +16,5 @@ namespace Assessments.Frontend.Web.Infrastructure
             _settings = settings;
             Redlist2015 = Assessments().Redlist2015;
         }
-
-        private static Artsdatabanken.Assessments Assessments() => new (_settings.Value.AssessmentsApi.EndpointUrl);
     }
 }

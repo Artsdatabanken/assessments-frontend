@@ -11,7 +11,7 @@
 <table>
     <thead>
         <tr>
-            <td>Id</td>
+            <td>LatinsknavnId</td>
             <td>VurdertVitenskapeligNavn</td>
             <td>Kategori</td>
         </tr>
@@ -19,7 +19,7 @@
     @foreach (var item in Model.ToList())
     {
         <tr>
-            <td><a asp-action="Detail" asp-route-id="@item.Id">@item.Id</a></td>
+            <td><a asp-action="Detail" asp-route-id="@item.LatinsknavnId">@item.LatinsknavnId</a></td>
             <td>@item.VurdertVitenskapeligNavn</td>
             <td>@item.Kategori</td>
         </tr>

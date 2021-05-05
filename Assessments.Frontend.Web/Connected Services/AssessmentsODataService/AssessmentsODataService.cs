@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 04.05.2021 10:11:58
+// Generation date: 05.05.2021 10:32:58
 namespace Artsdatabanken
 {
         /// <summary>
@@ -206,17 +206,15 @@ namespace Artsdatabanken
         /// There are no comments for Rodliste2015 in the schema.
         /// </summary>
     /// <KeyProperties>
-    /// Id
+    /// LatinsknavnId
     /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("id")]
-    [global::Microsoft.OData.Client.EntitySet("Redlist2015")]
+    [global::Microsoft.OData.Client.Key("latinsknavnId")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("Rodliste2015")]
-    public partial class Rodliste2015 : global::Microsoft.OData.Client.BaseEntityType, global::System.ComponentModel.INotifyPropertyChanged
+    public partial class Rodliste2015 : global::Microsoft.OData.Client.BaseEntityType
     {
         /// <summary>
         /// Create a new Rodliste2015 object.
         /// </summary>
-        /// <param name="ID">Initial value of Id.</param>
         /// <param name="latinsknavnId">Initial value of LatinsknavnId.</param>
         /// <param name="vurderingsår">Initial value of Vurderingsår.</param>
         /// <param name="vurderingsId2010">Initial value of VurderingsId2010.</param>
@@ -224,8 +222,7 @@ namespace Artsdatabanken
         /// <param name="iucnVurdert">Initial value of IucnVurdert.</param>
         /// <param name="tilførselFraNaboland">Initial value of TilførselFraNaboland.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public static Rodliste2015 CreateRodliste2015(string ID, 
-                    int latinsknavnId, 
+        public static Rodliste2015 CreateRodliste2015(int latinsknavnId, 
                     int vurderingsår, 
                     int vurderingsId2010, 
                     bool troligUtdodd, 
@@ -233,7 +230,6 @@ namespace Artsdatabanken
                     bool tilførselFraNaboland)
         {
             Rodliste2015 rodliste2015 = new Rodliste2015();
-            rodliste2015.Id = ID;
             rodliste2015.LatinsknavnId = latinsknavnId;
             rodliste2015.Vurderingsår = vurderingsår;
             rodliste2015.VurderingsId2010 = vurderingsId2010;
@@ -242,29 +238,6 @@ namespace Artsdatabanken
             rodliste2015.TilførselFraNaboland = tilførselFraNaboland;
             return rodliste2015;
         }
-        /// <summary>
-        /// There are no comments for Property Id in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("id")]
-        public virtual string Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this._Id = value;
-                this.OnIdChanged();
-                this.OnPropertyChanged("id");
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Id;
-        partial void OnIdChanging(string value);
-        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for Property LatinsknavnId in the schema.
         /// </summary>
@@ -281,7 +254,6 @@ namespace Artsdatabanken
                 this.OnLatinsknavnIdChanging(value);
                 this._LatinsknavnId = value;
                 this.OnLatinsknavnIdChanged();
-                this.OnPropertyChanged("latinsknavnId");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -304,7 +276,6 @@ namespace Artsdatabanken
                 this.OnVurderingsårChanging(value);
                 this._Vurderingsår = value;
                 this.OnVurderingsårChanged();
-                this.OnPropertyChanged("vurderingsår");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -327,7 +298,6 @@ namespace Artsdatabanken
                 this.OnVurdertVitenskapeligNavnChanging(value);
                 this._VurdertVitenskapeligNavn = value;
                 this.OnVurdertVitenskapeligNavnChanged();
-                this.OnPropertyChanged("vurdertVitenskapeligNavn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -350,7 +320,6 @@ namespace Artsdatabanken
                 this.OnVurderingsId2010Changing(value);
                 this._VurderingsId2010 = value;
                 this.OnVurderingsId2010Changed();
-                this.OnPropertyChanged("vurderingsId2010");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -373,7 +342,6 @@ namespace Artsdatabanken
                 this.OnEkspertgruppeChanging(value);
                 this._Ekspertgruppe = value;
                 this.OnEkspertgruppeChanged();
-                this.OnPropertyChanged("ekspertgruppe");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -396,7 +364,6 @@ namespace Artsdatabanken
                 this.OnArtsgruppeChanging(value);
                 this._Artsgruppe = value;
                 this.OnArtsgruppeChanged();
-                this.OnPropertyChanged("artsgruppe");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -419,7 +386,6 @@ namespace Artsdatabanken
                 this.OnVurderingsContextChanging(value);
                 this._VurderingsContext = value;
                 this.OnVurderingsContextChanged();
-                this.OnPropertyChanged("vurderingsContext");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -442,7 +408,6 @@ namespace Artsdatabanken
                 this.OnBegrensetForekomstNAChanging(value);
                 this._BegrensetForekomstNA = value;
                 this.OnBegrensetForekomstNAChanged();
-                this.OnPropertyChanged("begrensetForekomstNA");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -465,7 +430,6 @@ namespace Artsdatabanken
                 this.OnKunnskapsStatusNEChanging(value);
                 this._KunnskapsStatusNE = value;
                 this.OnKunnskapsStatusNEChanged();
-                this.OnPropertyChanged("kunnskapsStatusNE");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -488,7 +452,6 @@ namespace Artsdatabanken
                 this.OnRodlisteVurdertArtChanging(value);
                 this._RodlisteVurdertArt = value;
                 this.OnRodlisteVurdertArtChanged();
-                this.OnPropertyChanged("rodlisteVurdertArt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -511,7 +474,6 @@ namespace Artsdatabanken
                 this.OnTroligUtdoddChanging(value);
                 this._TroligUtdodd = value;
                 this.OnTroligUtdoddChanged();
-                this.OnPropertyChanged("troligUtdodd");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -534,7 +496,6 @@ namespace Artsdatabanken
                 this.OnArtenVurderesIkkeBegrunnelseChanging(value);
                 this._ArtenVurderesIkkeBegrunnelse = value;
                 this.OnArtenVurderesIkkeBegrunnelseChanged();
-                this.OnPropertyChanged("artenVurderesIkkeBegrunnelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -557,7 +518,6 @@ namespace Artsdatabanken
                 this.OnGenerasjonslengdeChanging(value);
                 this._Generasjonslengde = value;
                 this.OnGenerasjonslengdeChanged();
-                this.OnPropertyChanged("generasjonslengde");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -580,7 +540,6 @@ namespace Artsdatabanken
                 this.OnBernChanging(value);
                 this._Bern = value;
                 this.OnBernChanged();
-                this.OnPropertyChanged("bern");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -603,7 +562,6 @@ namespace Artsdatabanken
                 this.OnBonnChanging(value);
                 this._Bonn = value;
                 this.OnBonnChanged();
-                this.OnPropertyChanged("bonn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -626,7 +584,6 @@ namespace Artsdatabanken
                 this.OnCitesChanging(value);
                 this._Cites = value;
                 this.OnCitesChanged();
-                this.OnPropertyChanged("cites");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -649,7 +606,6 @@ namespace Artsdatabanken
                 this.OnStatusIHenholdTilNaturvernlovenChanging(value);
                 this._StatusIHenholdTilNaturvernloven = value;
                 this.OnStatusIHenholdTilNaturvernlovenChanged();
-                this.OnPropertyChanged("statusIHenholdTilNaturvernloven");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -672,7 +628,6 @@ namespace Artsdatabanken
                 this.OnStatusIHenholdTilNaturmangfoldlovenChanging(value);
                 this._StatusIHenholdTilNaturmangfoldloven = value;
                 this.OnStatusIHenholdTilNaturmangfoldlovenChanged();
-                this.OnPropertyChanged("statusIHenholdTilNaturmangfoldloven");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -695,7 +650,6 @@ namespace Artsdatabanken
                 this.OnMaxAndelAvEuropeiskBestandChanging(value);
                 this._MaxAndelAvEuropeiskBestand = value;
                 this.OnMaxAndelAvEuropeiskBestandChanged();
-                this.OnPropertyChanged("maxAndelAvEuropeiskBestand");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -718,7 +672,6 @@ namespace Artsdatabanken
                 this.OnMaxAndelAvGlobalBestandChanging(value);
                 this._MaxAndelAvGlobalBestand = value;
                 this.OnMaxAndelAvGlobalBestandChanged();
-                this.OnPropertyChanged("maxAndelAvGlobalBestand");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -741,7 +694,6 @@ namespace Artsdatabanken
                 this.OnAndelNåværendeBestandChanging(value);
                 this._AndelNåværendeBestand = value;
                 this.OnAndelNåværendeBestandChanged();
-                this.OnPropertyChanged("andelNåværendeBestand");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -764,7 +716,6 @@ namespace Artsdatabanken
                 this.OnIucnVurdertChanging(value);
                 this._IucnVurdert = value;
                 this.OnIucnVurdertChanged();
-                this.OnPropertyChanged("iucnVurdert");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -787,7 +738,6 @@ namespace Artsdatabanken
                 this.OnA1OpphørtOgReversibelChanging(value);
                 this._A1OpphørtOgReversibel = value;
                 this.OnA1OpphørtOgReversibelChanged();
-                this.OnPropertyChanged("a1OpphørtOgReversibel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -799,7 +749,7 @@ namespace Artsdatabanken
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("a1EndringBasertpåKode")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> A1EndringBasertpåKode
+        public virtual global::System.Collections.ObjectModel.Collection<string> A1EndringBasertpåKode
         {
             get
             {
@@ -810,12 +760,11 @@ namespace Artsdatabanken
                 this.OnA1EndringBasertpåKodeChanging(value);
                 this._A1EndringBasertpåKode = value;
                 this.OnA1EndringBasertpåKodeChanged();
-                this.OnPropertyChanged("a1EndringBasertpåKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _A1EndringBasertpåKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnA1EndringBasertpåKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        private global::System.Collections.ObjectModel.Collection<string> _A1EndringBasertpåKode = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnA1EndringBasertpåKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnA1EndringBasertpåKodeChanged();
         /// <summary>
         /// There are no comments for Property A2Forutgående10År in the schema.
@@ -833,7 +782,6 @@ namespace Artsdatabanken
                 this.OnA2Forutgående10ÅrChanging(value);
                 this._A2Forutgående10År = value;
                 this.OnA2Forutgående10ÅrChanged();
-                this.OnPropertyChanged("a2Forutgående10År");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -845,7 +793,7 @@ namespace Artsdatabanken
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("a2EndringBasertpåKode")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> A2EndringBasertpåKode
+        public virtual global::System.Collections.ObjectModel.Collection<string> A2EndringBasertpåKode
         {
             get
             {
@@ -856,12 +804,11 @@ namespace Artsdatabanken
                 this.OnA2EndringBasertpåKodeChanging(value);
                 this._A2EndringBasertpåKode = value;
                 this.OnA2EndringBasertpåKodeChanged();
-                this.OnPropertyChanged("a2EndringBasertpåKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _A2EndringBasertpåKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnA2EndringBasertpåKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        private global::System.Collections.ObjectModel.Collection<string> _A2EndringBasertpåKode = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnA2EndringBasertpåKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnA2EndringBasertpåKodeChanged();
         /// <summary>
         /// There are no comments for Property A3Kommende10År in the schema.
@@ -879,7 +826,6 @@ namespace Artsdatabanken
                 this.OnA3Kommende10ÅrChanging(value);
                 this._A3Kommende10År = value;
                 this.OnA3Kommende10ÅrChanged();
-                this.OnPropertyChanged("a3Kommende10År");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -891,7 +837,7 @@ namespace Artsdatabanken
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("a3EndringBasertpåKode")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> A3EndringBasertpåKode
+        public virtual global::System.Collections.ObjectModel.Collection<string> A3EndringBasertpåKode
         {
             get
             {
@@ -902,12 +848,11 @@ namespace Artsdatabanken
                 this.OnA3EndringBasertpåKodeChanging(value);
                 this._A3EndringBasertpåKode = value;
                 this.OnA3EndringBasertpåKodeChanged();
-                this.OnPropertyChanged("a3EndringBasertpåKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _A3EndringBasertpåKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnA3EndringBasertpåKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        private global::System.Collections.ObjectModel.Collection<string> _A3EndringBasertpåKode = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnA3EndringBasertpåKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnA3EndringBasertpåKodeChanged();
         /// <summary>
         /// There are no comments for Property A4Intervall10År in the schema.
@@ -925,7 +870,6 @@ namespace Artsdatabanken
                 this.OnA4Intervall10ÅrChanging(value);
                 this._A4Intervall10År = value;
                 this.OnA4Intervall10ÅrChanged();
-                this.OnPropertyChanged("a4Intervall10År");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -937,7 +881,7 @@ namespace Artsdatabanken
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("a4EndringBasertpåKode")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> A4EndringBasertpåKode
+        public virtual global::System.Collections.ObjectModel.Collection<string> A4EndringBasertpåKode
         {
             get
             {
@@ -948,12 +892,11 @@ namespace Artsdatabanken
                 this.OnA4EndringBasertpåKodeChanging(value);
                 this._A4EndringBasertpåKode = value;
                 this.OnA4EndringBasertpåKodeChanged();
-                this.OnPropertyChanged("a4EndringBasertpåKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _A4EndringBasertpåKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnA4EndringBasertpåKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        private global::System.Collections.ObjectModel.Collection<string> _A4EndringBasertpåKode = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnA4EndringBasertpåKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnA4EndringBasertpåKodeChanged();
         /// <summary>
         /// There are no comments for Property B1UtbredelsesområdeKjentAndel in the schema.
@@ -971,7 +914,6 @@ namespace Artsdatabanken
                 this.OnB1UtbredelsesområdeKjentAndelChanging(value);
                 this._B1UtbredelsesområdeKjentAndel = value;
                 this.OnB1UtbredelsesområdeKjentAndelChanged();
-                this.OnPropertyChanged("b1UtbredelsesområdeKjentAndel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -994,7 +936,6 @@ namespace Artsdatabanken
                 this.OnB1UtbredelsesområdeMørketallChanging(value);
                 this._B1UtbredelsesområdeMørketall = value;
                 this.OnB1UtbredelsesområdeMørketallChanged();
-                this.OnPropertyChanged("b1UtbredelsesområdeMørketall");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1017,7 +958,6 @@ namespace Artsdatabanken
                 this.OnB1UtbredelsesområdeProduktChanging(value);
                 this._B1UtbredelsesområdeProdukt = value;
                 this.OnB1UtbredelsesområdeProduktChanged();
-                this.OnPropertyChanged("b1UtbredelsesområdeProdukt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1040,7 +980,6 @@ namespace Artsdatabanken
                 this.OnB1UtbredelsesområdeKodeChanging(value);
                 this._B1UtbredelsesområdeKode = value;
                 this.OnB1UtbredelsesområdeKodeChanged();
-                this.OnPropertyChanged("b1UtbredelsesområdeKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1063,7 +1002,6 @@ namespace Artsdatabanken
                 this.OnB2ForekomstarealKjentAndelChanging(value);
                 this._B2ForekomstarealKjentAndel = value;
                 this.OnB2ForekomstarealKjentAndelChanged();
-                this.OnPropertyChanged("b2ForekomstarealKjentAndel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1086,7 +1024,6 @@ namespace Artsdatabanken
                 this.OnB2ForekomstarealMørketallChanging(value);
                 this._B2ForekomstarealMørketall = value;
                 this.OnB2ForekomstarealMørketallChanged();
-                this.OnPropertyChanged("b2ForekomstarealMørketall");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1109,7 +1046,6 @@ namespace Artsdatabanken
                 this.OnB2ForekomstarealProduktChanging(value);
                 this._B2ForekomstarealProdukt = value;
                 this.OnB2ForekomstarealProduktChanged();
-                this.OnPropertyChanged("b2ForekomstarealProdukt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1132,7 +1068,6 @@ namespace Artsdatabanken
                 this.OnB2ForekomstarealKodeChanging(value);
                 this._B2ForekomstarealKode = value;
                 this.OnB2ForekomstarealKodeChanged();
-                this.OnPropertyChanged("b2ForekomstarealKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1155,7 +1090,6 @@ namespace Artsdatabanken
                 this.OnBA1KraftigFragmenteringKodeChanging(value);
                 this._BA1KraftigFragmenteringKode = value;
                 this.OnBA1KraftigFragmenteringKodeChanged();
-                this.OnPropertyChanged("bA1KraftigFragmenteringKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1178,7 +1112,6 @@ namespace Artsdatabanken
                 this.OnBA2FåLokaliteterKodeChanging(value);
                 this._BA2FåLokaliteterKode = value;
                 this.OnBA2FåLokaliteterKodeChanged();
-                this.OnPropertyChanged("bA2FåLokaliteterKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1190,7 +1123,7 @@ namespace Artsdatabanken
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("bbPågåendeArealreduksjonKode")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> BbPågåendeArealreduksjonKode
+        public virtual global::System.Collections.ObjectModel.Collection<string> BbPågåendeArealreduksjonKode
         {
             get
             {
@@ -1201,19 +1134,18 @@ namespace Artsdatabanken
                 this.OnBbPågåendeArealreduksjonKodeChanging(value);
                 this._BbPågåendeArealreduksjonKode = value;
                 this.OnBbPågåendeArealreduksjonKodeChanged();
-                this.OnPropertyChanged("bbPågåendeArealreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _BbPågåendeArealreduksjonKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnBbPågåendeArealreduksjonKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        private global::System.Collections.ObjectModel.Collection<string> _BbPågåendeArealreduksjonKode = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnBbPågåendeArealreduksjonKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnBbPågåendeArealreduksjonKodeChanged();
         /// <summary>
         /// There are no comments for Property BcEksterneFluktuasjonerKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("bcEksterneFluktuasjonerKode")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> BcEksterneFluktuasjonerKode
+        public virtual global::System.Collections.ObjectModel.Collection<string> BcEksterneFluktuasjonerKode
         {
             get
             {
@@ -1224,12 +1156,11 @@ namespace Artsdatabanken
                 this.OnBcEksterneFluktuasjonerKodeChanging(value);
                 this._BcEksterneFluktuasjonerKode = value;
                 this.OnBcEksterneFluktuasjonerKodeChanged();
-                this.OnPropertyChanged("bcEksterneFluktuasjonerKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _BcEksterneFluktuasjonerKode = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnBcEksterneFluktuasjonerKodeChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        private global::System.Collections.ObjectModel.Collection<string> _BcEksterneFluktuasjonerKode = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnBcEksterneFluktuasjonerKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnBcEksterneFluktuasjonerKodeChanged();
         /// <summary>
         /// There are no comments for Property CKjentPopulasjonsstørrelse in the schema.
@@ -1247,7 +1178,6 @@ namespace Artsdatabanken
                 this.OnCKjentPopulasjonsstørrelseChanging(value);
                 this._CKjentPopulasjonsstørrelse = value;
                 this.OnCKjentPopulasjonsstørrelseChanged();
-                this.OnPropertyChanged("cKjentPopulasjonsstørrelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1270,7 +1200,6 @@ namespace Artsdatabanken
                 this.OnCKjentPopulasjonsstørrelseMørketallChanging(value);
                 this._CKjentPopulasjonsstørrelseMørketall = value;
                 this.OnCKjentPopulasjonsstørrelseMørketallChanged();
-                this.OnPropertyChanged("cKjentPopulasjonsstørrelseMørketall");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1293,7 +1222,6 @@ namespace Artsdatabanken
                 this.OnCKjentPopulasjonsstørrelseProduktChanging(value);
                 this._CKjentPopulasjonsstørrelseProdukt = value;
                 this.OnCKjentPopulasjonsstørrelseProduktChanged();
-                this.OnPropertyChanged("cKjentPopulasjonsstørrelseProdukt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1316,7 +1244,6 @@ namespace Artsdatabanken
                 this.OnCVurdertpopulasjonsstørrelseMinChanging(value);
                 this._CVurdertpopulasjonsstørrelseMin = value;
                 this.OnCVurdertpopulasjonsstørrelseMinChanged();
-                this.OnPropertyChanged("cVurdertpopulasjonsstørrelseMin");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1339,7 +1266,6 @@ namespace Artsdatabanken
                 this.OnCVurdertpopulasjonsstørrelseMaxChanging(value);
                 this._CVurdertpopulasjonsstørrelseMax = value;
                 this.OnCVurdertpopulasjonsstørrelseMaxChanged();
-                this.OnPropertyChanged("cVurdertpopulasjonsstørrelseMax");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1362,7 +1288,6 @@ namespace Artsdatabanken
                 this.OnCVurdertpopulasjonsstørrelseProduktChanging(value);
                 this._CVurdertpopulasjonsstørrelseProdukt = value;
                 this.OnCVurdertpopulasjonsstørrelseProduktChanged();
-                this.OnPropertyChanged("cVurdertpopulasjonsstørrelseProdukt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1385,7 +1310,6 @@ namespace Artsdatabanken
                 this.OnCDirekteFastsattEtterSkjønnChanging(value);
                 this._CDirekteFastsattEtterSkjønn = value;
                 this.OnCDirekteFastsattEtterSkjønnChanged();
-                this.OnPropertyChanged("cDirekteFastsattEtterSkjønn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1408,7 +1332,6 @@ namespace Artsdatabanken
                 this.OnC1PågåendePopulasjonsreduksjonKodeChanging(value);
                 this._C1PågåendePopulasjonsreduksjonKode = value;
                 this.OnC1PågåendePopulasjonsreduksjonKodeChanged();
-                this.OnPropertyChanged("c1PågåendePopulasjonsreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1431,7 +1354,6 @@ namespace Artsdatabanken
                 this.OnC2A1PågåendePopulasjonsreduksjonKodeChanging(value);
                 this._C2A1PågåendePopulasjonsreduksjonKode = value;
                 this.OnC2A1PågåendePopulasjonsreduksjonKodeChanged();
-                this.OnPropertyChanged("c2A1PågåendePopulasjonsreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1454,7 +1376,6 @@ namespace Artsdatabanken
                 this.OnC2A2PågåendePopulasjonsreduksjonKodeChanging(value);
                 this._C2A2PågåendePopulasjonsreduksjonKode = value;
                 this.OnC2A2PågåendePopulasjonsreduksjonKodeChanged();
-                this.OnPropertyChanged("c2A2PågåendePopulasjonsreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1477,7 +1398,6 @@ namespace Artsdatabanken
                 this.OnC2bPågåendePopulasjonsreduksjonKodeChanging(value);
                 this._C2bPågåendePopulasjonsreduksjonKode = value;
                 this.OnC2bPågåendePopulasjonsreduksjonKodeChanged();
-                this.OnPropertyChanged("c2bPågåendePopulasjonsreduksjonKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1500,7 +1420,6 @@ namespace Artsdatabanken
                 this.OnD1FåReproduserendeIndividKodeChanging(value);
                 this._D1FåReproduserendeIndividKode = value;
                 this.OnD1FåReproduserendeIndividKodeChanged();
-                this.OnPropertyChanged("d1FåReproduserendeIndividKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1523,7 +1442,6 @@ namespace Artsdatabanken
                 this.OnD2MegetBegrensetForekomstarealKodeChanging(value);
                 this._D2MegetBegrensetForekomstarealKode = value;
                 this.OnD2MegetBegrensetForekomstarealKodeChanged();
-                this.OnPropertyChanged("d2MegetBegrensetForekomstarealKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1546,7 +1464,6 @@ namespace Artsdatabanken
                 this.OnEKvantitativUtryddingsmodellKodeChanging(value);
                 this._EKvantitativUtryddingsmodellKode = value;
                 this.OnEKvantitativUtryddingsmodellKodeChanged();
-                this.OnPropertyChanged("eKvantitativUtryddingsmodellKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1569,7 +1486,6 @@ namespace Artsdatabanken
                 this.OnOverordnetKlassifiseringGruppeKodeChanging(value);
                 this._OverordnetKlassifiseringGruppeKode = value;
                 this.OnOverordnetKlassifiseringGruppeKodeChanged();
-                this.OnPropertyChanged("overordnetKlassifiseringGruppeKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1592,7 +1508,6 @@ namespace Artsdatabanken
                 this.OnOverordnetKlassifiseringTekstChanging(value);
                 this._OverordnetKlassifiseringTekst = value;
                 this.OnOverordnetKlassifiseringTekstChanged();
-                this.OnPropertyChanged("overordnetKlassifiseringTekst");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1615,7 +1530,6 @@ namespace Artsdatabanken
                 this.OnOppsummeringAKriterierChanging(value);
                 this._OppsummeringAKriterier = value;
                 this.OnOppsummeringAKriterierChanged();
-                this.OnPropertyChanged("oppsummeringAKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1638,7 +1552,6 @@ namespace Artsdatabanken
                 this.OnOppsummeringBKriterierChanging(value);
                 this._OppsummeringBKriterier = value;
                 this.OnOppsummeringBKriterierChanged();
-                this.OnPropertyChanged("oppsummeringBKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1661,7 +1574,6 @@ namespace Artsdatabanken
                 this.OnOppsummeringCKriterierChanging(value);
                 this._OppsummeringCKriterier = value;
                 this.OnOppsummeringCKriterierChanged();
-                this.OnPropertyChanged("oppsummeringCKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1684,7 +1596,6 @@ namespace Artsdatabanken
                 this.OnOppsummeringDKriterierChanging(value);
                 this._OppsummeringDKriterier = value;
                 this.OnOppsummeringDKriterierChanged();
-                this.OnPropertyChanged("oppsummeringDKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1707,7 +1618,6 @@ namespace Artsdatabanken
                 this.OnOppsummeringEKriterierChanging(value);
                 this._OppsummeringEKriterier = value;
                 this.OnOppsummeringEKriterierChanged();
-                this.OnPropertyChanged("oppsummeringEKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1730,7 +1640,6 @@ namespace Artsdatabanken
                 this.OnKriteriedokumentasjonChanging(value);
                 this._Kriteriedokumentasjon = value;
                 this.OnKriteriedokumentasjonChanged();
-                this.OnPropertyChanged("kriteriedokumentasjon");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1753,7 +1662,6 @@ namespace Artsdatabanken
                 this.OnTilførselFraNabolandChanging(value);
                 this._TilførselFraNaboland = value;
                 this.OnTilførselFraNabolandChanged();
-                this.OnPropertyChanged("tilførselFraNaboland");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1776,7 +1684,6 @@ namespace Artsdatabanken
                 this.OnÅrsakTilNedgraderingAvKategoriChanging(value);
                 this._ÅrsakTilNedgraderingAvKategori = value;
                 this.OnÅrsakTilNedgraderingAvKategoriChanged();
-                this.OnPropertyChanged("årsakTilNedgraderingAvKategori");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1799,7 +1706,6 @@ namespace Artsdatabanken
                 this.OnÅrsakTilEndringAvKategoriChanging(value);
                 this._ÅrsakTilEndringAvKategori = value;
                 this.OnÅrsakTilEndringAvKategoriChanged();
-                this.OnPropertyChanged("årsakTilEndringAvKategori");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1822,7 +1728,6 @@ namespace Artsdatabanken
                 this.OnUtdøingSterktPåvirketChanging(value);
                 this._UtdøingSterktPåvirket = value;
                 this.OnUtdøingSterktPåvirketChanged();
-                this.OnPropertyChanged("utdøingSterktPåvirket");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1845,7 +1750,6 @@ namespace Artsdatabanken
                 this.OnKategoriChanging(value);
                 this._Kategori = value;
                 this.OnKategoriChanged();
-                this.OnPropertyChanged("kategori");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1868,7 +1772,6 @@ namespace Artsdatabanken
                 this.OnKriterierChanging(value);
                 this._Kriterier = value;
                 this.OnKriterierChanged();
-                this.OnPropertyChanged("kriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1880,7 +1783,7 @@ namespace Artsdatabanken
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("hovedKriterier")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<string> HovedKriterier
+        public virtual global::System.Collections.ObjectModel.Collection<string> HovedKriterier
         {
             get
             {
@@ -1891,12 +1794,11 @@ namespace Artsdatabanken
                 this.OnHovedKriterierChanging(value);
                 this._HovedKriterier = value;
                 this.OnHovedKriterierChanged();
-                this.OnPropertyChanged("hovedKriterier");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<string> _HovedKriterier = new global::System.Collections.ObjectModel.ObservableCollection<string>();
-        partial void OnHovedKriterierChanging(global::System.Collections.ObjectModel.ObservableCollection<string> value);
+        private global::System.Collections.ObjectModel.Collection<string> _HovedKriterier = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnHovedKriterierChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnHovedKriterierChanged();
         /// <summary>
         /// There are no comments for Property KategoriFraForrigeListe in the schema.
@@ -1914,7 +1816,6 @@ namespace Artsdatabanken
                 this.OnKategoriFraForrigeListeChanging(value);
                 this._KategoriFraForrigeListe = value;
                 this.OnKategoriFraForrigeListeChanged();
-                this.OnPropertyChanged("kategoriFraForrigeListe");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1937,7 +1838,6 @@ namespace Artsdatabanken
                 this.OnKriterierFraForrigeListeChanging(value);
                 this._KriterierFraForrigeListe = value;
                 this.OnKriterierFraForrigeListeChanged();
-                this.OnPropertyChanged("kriterierFraForrigeListe");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1960,7 +1860,6 @@ namespace Artsdatabanken
                 this.OnKategoriEndretFraChanging(value);
                 this._KategoriEndretFra = value;
                 this.OnKategoriEndretFraChanged();
-                this.OnPropertyChanged("kategoriEndretFra");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1983,7 +1882,6 @@ namespace Artsdatabanken
                 this.OnGlobalRødlistestatusKodeChanging(value);
                 this._GlobalRødlistestatusKode = value;
                 this.OnGlobalRødlistestatusKodeChanged();
-                this.OnPropertyChanged("globalRødlistestatusKode");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -1995,7 +1893,7 @@ namespace Artsdatabanken
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("påvirkningsfaktorer")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Pavirkningsfaktor> Påvirkningsfaktorer
+        public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Pavirkningsfaktor> Påvirkningsfaktorer
         {
             get
             {
@@ -2006,19 +1904,18 @@ namespace Artsdatabanken
                 this.OnPåvirkningsfaktorerChanging(value);
                 this._Påvirkningsfaktorer = value;
                 this.OnPåvirkningsfaktorerChanged();
-                this.OnPropertyChanged("påvirkningsfaktorer");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Pavirkningsfaktor>();
-        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Pavirkningsfaktor> value);
+        private global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Pavirkningsfaktor>();
+        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Pavirkningsfaktor> value);
         partial void OnPåvirkningsfaktorerChanged();
         /// <summary>
         /// There are no comments for Property Fylkesforekomster in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("fylkesforekomster")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Fylkesforekomst> Fylkesforekomster
+        public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Fylkesforekomst> Fylkesforekomster
         {
             get
             {
@@ -2029,19 +1926,18 @@ namespace Artsdatabanken
                 this.OnFylkesforekomsterChanging(value);
                 this._Fylkesforekomster = value;
                 this.OnFylkesforekomsterChanged();
-                this.OnPropertyChanged("fylkesforekomster");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Fylkesforekomst> _Fylkesforekomster = new global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Fylkesforekomst>();
-        partial void OnFylkesforekomsterChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Fylkesforekomst> value);
+        private global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Fylkesforekomst> _Fylkesforekomster = new global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Fylkesforekomst>();
+        partial void OnFylkesforekomsterChanging(global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Fylkesforekomst> value);
         partial void OnFylkesforekomsterChanged();
         /// <summary>
         /// There are no comments for Property NaturtypeHovedenhet in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("naturtypeHovedenhet")]
-        public virtual global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Naturtype> NaturtypeHovedenhet
+        public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Naturtype> NaturtypeHovedenhet
         {
             get
             {
@@ -2052,19 +1948,18 @@ namespace Artsdatabanken
                 this.OnNaturtypeHovedenhetChanging(value);
                 this._NaturtypeHovedenhet = value;
                 this.OnNaturtypeHovedenhetChanged();
-                this.OnPropertyChanged("naturtypeHovedenhet");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Naturtype> _NaturtypeHovedenhet = new global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Naturtype>();
-        partial void OnNaturtypeHovedenhetChanging(global::System.Collections.ObjectModel.ObservableCollection<global::Artsdatabanken.Naturtype> value);
+        private global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Naturtype> _NaturtypeHovedenhet = new global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Naturtype>();
+        partial void OnNaturtypeHovedenhetChanging(global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Naturtype> value);
         partial void OnNaturtypeHovedenhetChanged();
         /// <summary>
         /// There are no comments for Property Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
-        public virtual global::Microsoft.OData.Client.DataServiceCollection<global::Artsdatabanken.Reference> Referanser
+        public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Reference> Referanser
         {
             get
             {
@@ -2075,36 +1970,18 @@ namespace Artsdatabanken
                 this.OnReferanserChanging(value);
                 this._Referanser = value;
                 this.OnReferanserChanged();
-                this.OnPropertyChanged("referanser");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceCollection<global::Artsdatabanken.Reference> _Referanser = new global::Microsoft.OData.Client.DataServiceCollection<global::Artsdatabanken.Reference>(null, global::Microsoft.OData.Client.TrackingMode.None);
-        partial void OnReferanserChanging(global::Microsoft.OData.Client.DataServiceCollection<global::Artsdatabanken.Reference> value);
+        private global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Reference> _Referanser = new global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Reference>();
+        partial void OnReferanserChanging(global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Reference> value);
         partial void OnReferanserChanged();
-        /// <summary>
-        /// This event is raised when the value of the property is changed
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// The value of the property is changed
-        /// </summary>
-        /// <param name="property">property name</param>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        protected virtual void OnPropertyChanged(string property)
-        {
-            if ((this.PropertyChanged != null))
-            {
-                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
-            }
-        }
     }
         /// <summary>
         /// There are no comments for Pavirkningsfaktor in the schema.
         /// </summary>
     [global::Microsoft.OData.Client.OriginalNameAttribute("Pavirkningsfaktor")]
-    public partial class Pavirkningsfaktor : global::System.ComponentModel.INotifyPropertyChanged
+    public partial class Pavirkningsfaktor
     {
         /// <summary>
         /// There are no comments for Property OverordnetTittel in the schema.
@@ -2122,7 +1999,6 @@ namespace Artsdatabanken
                 this.OnOverordnetTittelChanging(value);
                 this._OverordnetTittel = value;
                 this.OnOverordnetTittelChanged();
-                this.OnPropertyChanged("overordnetTittel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2145,7 +2021,6 @@ namespace Artsdatabanken
                 this.OnBeskrivelseChanging(value);
                 this._Beskrivelse = value;
                 this.OnBeskrivelseChanged();
-                this.OnPropertyChanged("beskrivelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2168,7 +2043,6 @@ namespace Artsdatabanken
                 this.OnTidspunktChanging(value);
                 this._Tidspunkt = value;
                 this.OnTidspunktChanged();
-                this.OnPropertyChanged("tidspunkt");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2191,7 +2065,6 @@ namespace Artsdatabanken
                 this.OnOmfangChanging(value);
                 this._Omfang = value;
                 this.OnOmfangChanged();
-                this.OnPropertyChanged("omfang");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2214,7 +2087,6 @@ namespace Artsdatabanken
                 this.OnAlvorlighetsgradChanging(value);
                 this._Alvorlighetsgrad = value;
                 this.OnAlvorlighetsgradChanged();
-                this.OnPropertyChanged("alvorlighetsgrad");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2237,7 +2109,6 @@ namespace Artsdatabanken
                 this.OnTittelChanging(value);
                 this._Tittel = value;
                 this.OnTittelChanged();
-                this.OnPropertyChanged("tittel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2260,7 +2131,6 @@ namespace Artsdatabanken
                 this.OnØversteTittelChanging(value);
                 this._ØversteTittel = value;
                 this.OnØversteTittelChanged();
-                this.OnPropertyChanged("øversteTittel");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2283,30 +2153,12 @@ namespace Artsdatabanken
                 this.OnForkortelseChanging(value);
                 this._Forkortelse = value;
                 this.OnForkortelseChanged();
-                this.OnPropertyChanged("forkortelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private string _Forkortelse;
         partial void OnForkortelseChanging(string value);
         partial void OnForkortelseChanged();
-        /// <summary>
-        /// This event is raised when the value of the property is changed
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// The value of the property is changed
-        /// </summary>
-        /// <param name="property">property name</param>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        protected virtual void OnPropertyChanged(string property)
-        {
-            if ((this.PropertyChanged != null))
-            {
-                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
-            }
-        }
     }
         /// <summary>
         /// There are no comments for ReferenceSingle in the schema.
@@ -2341,7 +2193,7 @@ namespace Artsdatabanken
     /// </KeyProperties>
     [global::Microsoft.OData.Client.Key("referenceId")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("Reference")]
-    public partial class Reference : global::Microsoft.OData.Client.BaseEntityType, global::System.ComponentModel.INotifyPropertyChanged
+    public partial class Reference : global::Microsoft.OData.Client.BaseEntityType
     {
         /// <summary>
         /// Create a new Reference object.
@@ -2370,7 +2222,6 @@ namespace Artsdatabanken
                 this.OnTypeChanging(value);
                 this._Type = value;
                 this.OnTypeChanged();
-                this.OnPropertyChanged("type");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2393,7 +2244,6 @@ namespace Artsdatabanken
                 this.OnReferenceIdChanging(value);
                 this._ReferenceId = value;
                 this.OnReferenceIdChanged();
-                this.OnPropertyChanged("referenceId");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2416,36 +2266,18 @@ namespace Artsdatabanken
                 this.OnFormattedReferenceChanging(value);
                 this._FormattedReference = value;
                 this.OnFormattedReferenceChanged();
-                this.OnPropertyChanged("formattedReference");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private string _FormattedReference;
         partial void OnFormattedReferenceChanging(string value);
         partial void OnFormattedReferenceChanged();
-        /// <summary>
-        /// This event is raised when the value of the property is changed
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// The value of the property is changed
-        /// </summary>
-        /// <param name="property">property name</param>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        protected virtual void OnPropertyChanged(string property)
-        {
-            if ((this.PropertyChanged != null))
-            {
-                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
-            }
-        }
     }
         /// <summary>
         /// There are no comments for Fylkesforekomst in the schema.
         /// </summary>
     [global::Microsoft.OData.Client.OriginalNameAttribute("Fylkesforekomst")]
-    public partial class Fylkesforekomst : global::System.ComponentModel.INotifyPropertyChanged
+    public partial class Fylkesforekomst
     {
         /// <summary>
         /// Create a new Fylkesforekomst object.
@@ -2474,7 +2306,6 @@ namespace Artsdatabanken
                 this.OnFylkeChanging(value);
                 this._Fylke = value;
                 this.OnFylkeChanged();
-                this.OnPropertyChanged("fylke");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2497,36 +2328,18 @@ namespace Artsdatabanken
                 this.OnSikkerChanging(value);
                 this._Sikker = value;
                 this.OnSikkerChanged();
-                this.OnPropertyChanged("sikker");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private bool _Sikker;
         partial void OnSikkerChanging(bool value);
         partial void OnSikkerChanged();
-        /// <summary>
-        /// This event is raised when the value of the property is changed
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// The value of the property is changed
-        /// </summary>
-        /// <param name="property">property name</param>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        protected virtual void OnPropertyChanged(string property)
-        {
-            if ((this.PropertyChanged != null))
-            {
-                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
-            }
-        }
     }
         /// <summary>
         /// There are no comments for Naturtype in the schema.
         /// </summary>
     [global::Microsoft.OData.Client.OriginalNameAttribute("Naturtype")]
-    public partial class Naturtype : global::System.ComponentModel.INotifyPropertyChanged
+    public partial class Naturtype
     {
         /// <summary>
         /// There are no comments for Property Navn in the schema.
@@ -2544,7 +2357,6 @@ namespace Artsdatabanken
                 this.OnNavnChanging(value);
                 this._Navn = value;
                 this.OnNavnChanged();
-                this.OnPropertyChanged("navn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2567,7 +2379,6 @@ namespace Artsdatabanken
                 this.OnNavnR2010Changing(value);
                 this._NavnR2010 = value;
                 this.OnNavnR2010Changed();
-                this.OnPropertyChanged("navnR2010");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2590,7 +2401,6 @@ namespace Artsdatabanken
                 this.OnForkortelseChanging(value);
                 this._Forkortelse = value;
                 this.OnForkortelseChanged();
-                this.OnPropertyChanged("forkortelse");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2613,7 +2423,6 @@ namespace Artsdatabanken
                 this.OnKortnavnChanging(value);
                 this._Kortnavn = value;
                 this.OnKortnavnChanged();
-                this.OnPropertyChanged("kortnavn");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -2636,30 +2445,12 @@ namespace Artsdatabanken
                 this.OnHovedøkosystemKLDChanging(value);
                 this._HovedøkosystemKLD = value;
                 this.OnHovedøkosystemKLDChanged();
-                this.OnPropertyChanged("hovedøkosystemKLD");
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private string _HovedøkosystemKLD;
         partial void OnHovedøkosystemKLDChanging(string value);
         partial void OnHovedøkosystemKLDChanged();
-        /// <summary>
-        /// This event is raised when the value of the property is changed
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public event global::System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        /// <summary>
-        /// The value of the property is changed
-        /// </summary>
-        /// <param name="property">property name</param>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        protected virtual void OnPropertyChanged(string property)
-        {
-            if ((this.PropertyChanged != null))
-            {
-                this.PropertyChanged(this, new global::System.ComponentModel.PropertyChangedEventArgs(property));
-            }
-        }
     }
     /// <summary>
     /// Class containing all extension methods
@@ -2679,13 +2470,13 @@ namespace Artsdatabanken
         /// Get an entity of type global::Artsdatabanken.Rodliste2015 as global::Artsdatabanken.Rodliste2015Single specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
-        /// <param name="id">The value of id</param>
+        /// <param name="latinsknavnId">The value of latinsknavnId</param>
         public static global::Artsdatabanken.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Rodliste2015> _source,
-            string id)
+            int latinsknavnId)
         {
             global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
             {
-                { "id", id }
+                { "latinsknavnId", latinsknavnId }
             };
             return new global::Artsdatabanken.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }

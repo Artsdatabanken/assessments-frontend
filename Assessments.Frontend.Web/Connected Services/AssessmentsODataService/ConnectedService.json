@@ -23,7 +23,7 @@
     "GeneratedFileNamePrefix": "AssessmentsODataService",
     "UseNamespacePrefix": false,
     "NamespacePrefix": null,
-    "UseDataServiceCollection": true,
+    "UseDataServiceCollection": false,
     "MakeTypesInternal": false,
     "OpenGeneratedFilesInIDE": false,
     "GenerateMultipleFiles": false,

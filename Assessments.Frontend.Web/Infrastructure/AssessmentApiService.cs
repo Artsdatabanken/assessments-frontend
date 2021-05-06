@@ -11,10 +11,13 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public readonly DataServiceQuery<Rodliste2015> Redlist2015;
 
+        public readonly DataServiceQuery<Redlist2006Assessment> Redlist2006;
+
         public AssessmentApiService(IOptions<ApplicationSettings> settings)
         {
             _settings = settings;
             Redlist2015 = Assessments().Redlist2015;
+            Redlist2006 = Assessments().Redlist2006;
         }
     }
 }

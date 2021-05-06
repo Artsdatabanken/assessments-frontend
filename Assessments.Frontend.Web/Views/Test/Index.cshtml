@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Artsdatabanken.Rodliste2015>
+﻿@model Assessments.Frontend.Web.Models.TestViewModel
 
 @{
     ViewBag.Title = "Assessments api client test";
 }
 
 <h3>
-    @Model.Count() redlist 2015 items
+    @Model.Redlist2015Results.Count redlist 2015 items
 </h3>
 
 <table>
@@ -16,11 +16,37 @@
             <td>Kategori</td>
         </tr>
     </thead>
-    @foreach (var item in Model.ToList())
+    @foreach (var item in Model.Redlist2015Results)
     {
         <tr>
-            <td><a asp-action="Detail" asp-route-id="@item.LatinsknavnId">@item.LatinsknavnId</a></td>
+            <td><a asp-action="Detail" asp-route-id="@item.LatinsknavnId" asp-route-year="2015">
+                @item.LatinsknavnId
+            </a></td>
             <td>@item.VurdertVitenskapeligNavn</td>
+            <td>@item.Kategori</td>
+        </tr>
+    }
+</table>
+
+<h3>
+    @Model.Redlist2006Results.Count redlist 2006 items
+</h3>
+
+<table>
+    <thead>
+        <tr>
+            <td>ArtsID</td>
+            <td>LatinskArtsnavn</td>
+            <td>Kategori</td>
+        </tr>
+    </thead>
+    @foreach (var item in Model.Redlist2006Results)
+    {
+        <tr>
+            <td><a asp-action="Detail" asp-route-id="@item.ArtsID" asp-route-year="2006">
+                @item.ArtsID
+            </a></td>
+            <td>@item.LatinskArtsnavn</td>
             <td>@item.Kategori</td>
         </tr>
     }

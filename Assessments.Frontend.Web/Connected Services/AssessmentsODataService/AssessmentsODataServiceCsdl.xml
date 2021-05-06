@@ -6,6 +6,7 @@
           <PropertyRef Name="latinsknavnId" />
         </Key>
         <Property Name="latinsknavnId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="id" Type="Edm.String" />
         <Property Name="vurderingsår" Type="Edm.Int32" Nullable="false" />
         <Property Name="vurdertVitenskapeligNavn" Type="Edm.String" />
         <Property Name="vurderingsId2010" Type="Edm.Int32" Nullable="false" />
@@ -85,6 +86,55 @@
         <Property Name="naturtypeHovedenhet" Type="Collection(Artsdatabanken.Naturtype)" />
         <NavigationProperty Name="referanser" Type="Collection(Artsdatabanken.Reference)" />
       </EntityType>
+      <EntityType Name="Redlist2006Assessment">
+        <Key>
+          <PropertyRef Name="artsID" />
+        </Key>
+        <Property Name="artsID" Type="Edm.String" Nullable="false" />
+        <Property Name="latinskArtsnavn" Type="Edm.String" />
+        <Property Name="norskArtsnavnBrukRødlista" Type="Edm.String" />
+        <Property Name="artgruppenavn" Type="Edm.String" />
+        <Property Name="kategori" Type="Edm.String" />
+        <Property Name="kriterierIUCN" Type="Edm.String" />
+        <Property Name="kriterier" Type="Edm.String" />
+        <Property Name="kriteriedokumentasjon" Type="Edm.String" />
+        <Property Name="årsakTilEndringAvKategori" Type="Edm.String" />
+        <Property Name="generasjonslengde" Type="Edm.String" />
+        <Property Name="cVurdertpopulasjonsstørrelseMin" Type="Edm.Int32" Nullable="false" />
+        <Property Name="cVurdertpopulasjonsstørrelseMax" Type="Edm.Int32" Nullable="false" />
+        <Property Name="cDirekteFastsattEtterSkjønn" Type="Edm.Int32" Nullable="false" />
+        <Property Name="b1UtbredelsesområdeProdukt" Type="Edm.String" />
+        <Property Name="b2ForekomstarealProdukt" Type="Edm.String" />
+        <Property Name="globalRødliste2006" Type="Edm.String" />
+        <Property Name="artsgruppeID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="author" Type="Edm.String" />
+        <Property Name="illustrasjon" Type="Edm.Binary" />
+        <Property Name="a1" Type="Edm.String" />
+        <Property Name="a2" Type="Edm.String" />
+        <Property Name="fredet" Type="Edm.String" />
+        <Property Name="bern1" Type="Edm.String" />
+        <Property Name="bern2" Type="Edm.String" />
+        <Property Name="bern3" Type="Edm.String" />
+        <Property Name="bonn1" Type="Edm.String" />
+        <Property Name="bonn2" Type="Edm.String" />
+        <Property Name="cites1" Type="Edm.String" />
+        <Property Name="cites2" Type="Edm.String" />
+        <Property Name="habitatkoder" Type="Edm.String" />
+        <Property Name="substratkoder" Type="Edm.String" />
+        <Property Name="påvirkningsfaktorkoder" Type="Edm.String" />
+        <Property Name="c1" Type="Edm.String" />
+        <Property Name="maxAndelAvEuropeiskBestand" Type="Edm.String" />
+        <Property Name="maxAndelAvGlobalBestand" Type="Edm.String" />
+        <Property Name="andelNåværenedBestand" Type="Edm.String" />
+        <Property Name="underartKode" Type="Edm.String" />
+        <Property Name="lC_NA_NE_Forklaring" Type="Edm.String" />
+        <Property Name="habitatForklaring" Type="Collection(Edm.String)" />
+        <Property Name="forfattere" Type="Collection(Edm.String)" />
+        <Property Name="referanser" Type="Collection(Edm.String)" />
+        <Property Name="påvirkningsfaktorer" Type="Collection(Edm.String)" />
+        <Property Name="artsGruppeBildeUrl" Type="Edm.String" />
+        <Property Name="originalUrl" Type="Edm.String" />
+      </EntityType>
       <ComplexType Name="Pavirkningsfaktor">
         <Property Name="overordnetTittel" Type="Edm.String" />
         <Property Name="beskrivelse" Type="Edm.String" />
@@ -116,6 +166,7 @@
       </ComplexType>
       <EntityContainer Name="Assessments">
         <EntitySet Name="Redlist2015" EntityType="Artsdatabanken.Rodliste2015" />
+        <EntitySet Name="Redlist2006" EntityType="Artsdatabanken.Redlist2006Assessment" />
       </EntityContainer>
     </Schema>
   </edmx:DataServices>

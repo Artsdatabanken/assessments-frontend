@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 05.05.2021 10:32:58
+// Generation date: 06.05.2021 09:46:31
 namespace Artsdatabanken
 {
         /// <summary>
@@ -84,12 +84,38 @@ namespace Artsdatabanken
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private global::Microsoft.OData.Client.DataServiceQuery<Rodliste2015> _Redlist2015;
         /// <summary>
+        /// There are no comments for Redlist2006 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Redlist2006")]
+        public virtual global::Microsoft.OData.Client.DataServiceQuery<Redlist2006Assessment> Redlist2006
+        {
+            get
+            {
+                if ((this._Redlist2006 == null))
+                {
+                    this._Redlist2006 = base.CreateQuery<Redlist2006Assessment>("Redlist2006");
+                }
+                return this._Redlist2006;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::Microsoft.OData.Client.DataServiceQuery<Redlist2006Assessment> _Redlist2006;
+        /// <summary>
         /// There are no comments for Redlist2015 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         public virtual void AddToRedlist2015(Rodliste2015 rodliste2015)
         {
             base.AddObject("Redlist2015", rodliste2015);
+        }
+        /// <summary>
+        /// There are no comments for Redlist2006 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        public virtual void AddToRedlist2006(Redlist2006Assessment redlist2006Assessment)
+        {
+            base.AddObject("Redlist2006", redlist2006Assessment);
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private abstract class GeneratedEdmModel
@@ -260,6 +286,28 @@ namespace Artsdatabanken
         private int _LatinsknavnId;
         partial void OnLatinsknavnIdChanging(int value);
         partial void OnLatinsknavnIdChanged();
+        /// <summary>
+        /// There are no comments for Property Id in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("id")]
+        public virtual string Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                this.OnIdChanging(value);
+                this._Id = value;
+                this.OnIdChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Id;
+        partial void OnIdChanging(string value);
+        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for Property Vurderingsår in the schema.
         /// </summary>
@@ -1978,6 +2026,1029 @@ namespace Artsdatabanken
         partial void OnReferanserChanged();
     }
         /// <summary>
+        /// There are no comments for Redlist2006AssessmentSingle in the schema.
+        /// </summary>
+    [global::Microsoft.OData.Client.OriginalNameAttribute("Redlist2006AssessmentSingle")]
+    public partial class Redlist2006AssessmentSingle : global::Microsoft.OData.Client.DataServiceQuerySingle<Redlist2006Assessment>
+    {
+        /// <summary>
+        /// Initialize a new Redlist2006AssessmentSingle object.
+        /// </summary>
+        public Redlist2006AssessmentSingle(global::Microsoft.OData.Client.DataServiceContext context, string path)
+            : base(context, path) {}
+
+        /// <summary>
+        /// Initialize a new Redlist2006AssessmentSingle object.
+        /// </summary>
+        public Redlist2006AssessmentSingle(global::Microsoft.OData.Client.DataServiceContext context, string path, bool isComposable)
+            : base(context, path, isComposable) {}
+
+        /// <summary>
+        /// Initialize a new Redlist2006AssessmentSingle object.
+        /// </summary>
+        public Redlist2006AssessmentSingle(global::Microsoft.OData.Client.DataServiceQuerySingle<Redlist2006Assessment> query)
+            : base(query) {}
+
+    }
+        /// <summary>
+        /// There are no comments for Redlist2006Assessment in the schema.
+        /// </summary>
+    /// <KeyProperties>
+    /// ArtsID
+    /// </KeyProperties>
+    [global::Microsoft.OData.Client.Key("artsID")]
+    [global::Microsoft.OData.Client.OriginalNameAttribute("Redlist2006Assessment")]
+    public partial class Redlist2006Assessment : global::Microsoft.OData.Client.BaseEntityType
+    {
+        /// <summary>
+        /// Create a new Redlist2006Assessment object.
+        /// </summary>
+        /// <param name="artsID">Initial value of ArtsID.</param>
+        /// <param name="cVurdertpopulasjonsstørrelseMin">Initial value of CVurdertpopulasjonsstørrelseMin.</param>
+        /// <param name="cVurdertpopulasjonsstørrelseMax">Initial value of CVurdertpopulasjonsstørrelseMax.</param>
+        /// <param name="cDirekteFastsattEtterSkjønn">Initial value of CDirekteFastsattEtterSkjønn.</param>
+        /// <param name="artsgruppeID">Initial value of ArtsgruppeID.</param>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        public static Redlist2006Assessment CreateRedlist2006Assessment(string artsID, int cVurdertpopulasjonsstørrelseMin, int cVurdertpopulasjonsstørrelseMax, int cDirekteFastsattEtterSkjønn, int artsgruppeID)
+        {
+            Redlist2006Assessment redlist2006Assessment = new Redlist2006Assessment();
+            redlist2006Assessment.ArtsID = artsID;
+            redlist2006Assessment.CVurdertpopulasjonsstørrelseMin = cVurdertpopulasjonsstørrelseMin;
+            redlist2006Assessment.CVurdertpopulasjonsstørrelseMax = cVurdertpopulasjonsstørrelseMax;
+            redlist2006Assessment.CDirekteFastsattEtterSkjønn = cDirekteFastsattEtterSkjønn;
+            redlist2006Assessment.ArtsgruppeID = artsgruppeID;
+            return redlist2006Assessment;
+        }
+        /// <summary>
+        /// There are no comments for Property ArtsID in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("artsID")]
+        public virtual string ArtsID
+        {
+            get
+            {
+                return this._ArtsID;
+            }
+            set
+            {
+                this.OnArtsIDChanging(value);
+                this._ArtsID = value;
+                this.OnArtsIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _ArtsID;
+        partial void OnArtsIDChanging(string value);
+        partial void OnArtsIDChanged();
+        /// <summary>
+        /// There are no comments for Property LatinskArtsnavn in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("latinskArtsnavn")]
+        public virtual string LatinskArtsnavn
+        {
+            get
+            {
+                return this._LatinskArtsnavn;
+            }
+            set
+            {
+                this.OnLatinskArtsnavnChanging(value);
+                this._LatinskArtsnavn = value;
+                this.OnLatinskArtsnavnChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _LatinskArtsnavn;
+        partial void OnLatinskArtsnavnChanging(string value);
+        partial void OnLatinskArtsnavnChanged();
+        /// <summary>
+        /// There are no comments for Property NorskArtsnavnBrukRødlista in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("norskArtsnavnBrukRødlista")]
+        public virtual string NorskArtsnavnBrukRødlista
+        {
+            get
+            {
+                return this._NorskArtsnavnBrukRødlista;
+            }
+            set
+            {
+                this.OnNorskArtsnavnBrukRødlistaChanging(value);
+                this._NorskArtsnavnBrukRødlista = value;
+                this.OnNorskArtsnavnBrukRødlistaChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _NorskArtsnavnBrukRødlista;
+        partial void OnNorskArtsnavnBrukRødlistaChanging(string value);
+        partial void OnNorskArtsnavnBrukRødlistaChanged();
+        /// <summary>
+        /// There are no comments for Property Artgruppenavn in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("artgruppenavn")]
+        public virtual string Artgruppenavn
+        {
+            get
+            {
+                return this._Artgruppenavn;
+            }
+            set
+            {
+                this.OnArtgruppenavnChanging(value);
+                this._Artgruppenavn = value;
+                this.OnArtgruppenavnChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Artgruppenavn;
+        partial void OnArtgruppenavnChanging(string value);
+        partial void OnArtgruppenavnChanged();
+        /// <summary>
+        /// There are no comments for Property Kategori in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kategori")]
+        public virtual string Kategori
+        {
+            get
+            {
+                return this._Kategori;
+            }
+            set
+            {
+                this.OnKategoriChanging(value);
+                this._Kategori = value;
+                this.OnKategoriChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Kategori;
+        partial void OnKategoriChanging(string value);
+        partial void OnKategoriChanged();
+        /// <summary>
+        /// There are no comments for Property KriterierIUCN in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kriterierIUCN")]
+        public virtual string KriterierIUCN
+        {
+            get
+            {
+                return this._KriterierIUCN;
+            }
+            set
+            {
+                this.OnKriterierIUCNChanging(value);
+                this._KriterierIUCN = value;
+                this.OnKriterierIUCNChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _KriterierIUCN;
+        partial void OnKriterierIUCNChanging(string value);
+        partial void OnKriterierIUCNChanged();
+        /// <summary>
+        /// There are no comments for Property Kriterier in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kriterier")]
+        public virtual string Kriterier
+        {
+            get
+            {
+                return this._Kriterier;
+            }
+            set
+            {
+                this.OnKriterierChanging(value);
+                this._Kriterier = value;
+                this.OnKriterierChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Kriterier;
+        partial void OnKriterierChanging(string value);
+        partial void OnKriterierChanged();
+        /// <summary>
+        /// There are no comments for Property Kriteriedokumentasjon in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("kriteriedokumentasjon")]
+        public virtual string Kriteriedokumentasjon
+        {
+            get
+            {
+                return this._Kriteriedokumentasjon;
+            }
+            set
+            {
+                this.OnKriteriedokumentasjonChanging(value);
+                this._Kriteriedokumentasjon = value;
+                this.OnKriteriedokumentasjonChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Kriteriedokumentasjon;
+        partial void OnKriteriedokumentasjonChanging(string value);
+        partial void OnKriteriedokumentasjonChanged();
+        /// <summary>
+        /// There are no comments for Property ÅrsakTilEndringAvKategori in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("årsakTilEndringAvKategori")]
+        public virtual string ÅrsakTilEndringAvKategori
+        {
+            get
+            {
+                return this._ÅrsakTilEndringAvKategori;
+            }
+            set
+            {
+                this.OnÅrsakTilEndringAvKategoriChanging(value);
+                this._ÅrsakTilEndringAvKategori = value;
+                this.OnÅrsakTilEndringAvKategoriChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _ÅrsakTilEndringAvKategori;
+        partial void OnÅrsakTilEndringAvKategoriChanging(string value);
+        partial void OnÅrsakTilEndringAvKategoriChanged();
+        /// <summary>
+        /// There are no comments for Property Generasjonslengde in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("generasjonslengde")]
+        public virtual string Generasjonslengde
+        {
+            get
+            {
+                return this._Generasjonslengde;
+            }
+            set
+            {
+                this.OnGenerasjonslengdeChanging(value);
+                this._Generasjonslengde = value;
+                this.OnGenerasjonslengdeChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Generasjonslengde;
+        partial void OnGenerasjonslengdeChanging(string value);
+        partial void OnGenerasjonslengdeChanged();
+        /// <summary>
+        /// There are no comments for Property CVurdertpopulasjonsstørrelseMin in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseMin")]
+        public virtual int CVurdertpopulasjonsstørrelseMin
+        {
+            get
+            {
+                return this._CVurdertpopulasjonsstørrelseMin;
+            }
+            set
+            {
+                this.OnCVurdertpopulasjonsstørrelseMinChanging(value);
+                this._CVurdertpopulasjonsstørrelseMin = value;
+                this.OnCVurdertpopulasjonsstørrelseMinChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private int _CVurdertpopulasjonsstørrelseMin;
+        partial void OnCVurdertpopulasjonsstørrelseMinChanging(int value);
+        partial void OnCVurdertpopulasjonsstørrelseMinChanged();
+        /// <summary>
+        /// There are no comments for Property CVurdertpopulasjonsstørrelseMax in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseMax")]
+        public virtual int CVurdertpopulasjonsstørrelseMax
+        {
+            get
+            {
+                return this._CVurdertpopulasjonsstørrelseMax;
+            }
+            set
+            {
+                this.OnCVurdertpopulasjonsstørrelseMaxChanging(value);
+                this._CVurdertpopulasjonsstørrelseMax = value;
+                this.OnCVurdertpopulasjonsstørrelseMaxChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private int _CVurdertpopulasjonsstørrelseMax;
+        partial void OnCVurdertpopulasjonsstørrelseMaxChanging(int value);
+        partial void OnCVurdertpopulasjonsstørrelseMaxChanged();
+        /// <summary>
+        /// There are no comments for Property CDirekteFastsattEtterSkjønn in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cDirekteFastsattEtterSkjønn")]
+        public virtual int CDirekteFastsattEtterSkjønn
+        {
+            get
+            {
+                return this._CDirekteFastsattEtterSkjønn;
+            }
+            set
+            {
+                this.OnCDirekteFastsattEtterSkjønnChanging(value);
+                this._CDirekteFastsattEtterSkjønn = value;
+                this.OnCDirekteFastsattEtterSkjønnChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private int _CDirekteFastsattEtterSkjønn;
+        partial void OnCDirekteFastsattEtterSkjønnChanging(int value);
+        partial void OnCDirekteFastsattEtterSkjønnChanged();
+        /// <summary>
+        /// There are no comments for Property B1UtbredelsesområdeProdukt in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeProdukt")]
+        public virtual string B1UtbredelsesområdeProdukt
+        {
+            get
+            {
+                return this._B1UtbredelsesområdeProdukt;
+            }
+            set
+            {
+                this.OnB1UtbredelsesområdeProduktChanging(value);
+                this._B1UtbredelsesområdeProdukt = value;
+                this.OnB1UtbredelsesområdeProduktChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _B1UtbredelsesområdeProdukt;
+        partial void OnB1UtbredelsesområdeProduktChanging(string value);
+        partial void OnB1UtbredelsesområdeProduktChanged();
+        /// <summary>
+        /// There are no comments for Property B2ForekomstarealProdukt in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealProdukt")]
+        public virtual string B2ForekomstarealProdukt
+        {
+            get
+            {
+                return this._B2ForekomstarealProdukt;
+            }
+            set
+            {
+                this.OnB2ForekomstarealProduktChanging(value);
+                this._B2ForekomstarealProdukt = value;
+                this.OnB2ForekomstarealProduktChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _B2ForekomstarealProdukt;
+        partial void OnB2ForekomstarealProduktChanging(string value);
+        partial void OnB2ForekomstarealProduktChanged();
+        /// <summary>
+        /// There are no comments for Property GlobalRødliste2006 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("globalRødliste2006")]
+        public virtual string GlobalRødliste2006
+        {
+            get
+            {
+                return this._GlobalRødliste2006;
+            }
+            set
+            {
+                this.OnGlobalRødliste2006Changing(value);
+                this._GlobalRødliste2006 = value;
+                this.OnGlobalRødliste2006Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _GlobalRødliste2006;
+        partial void OnGlobalRødliste2006Changing(string value);
+        partial void OnGlobalRødliste2006Changed();
+        /// <summary>
+        /// There are no comments for Property ArtsgruppeID in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("artsgruppeID")]
+        public virtual int ArtsgruppeID
+        {
+            get
+            {
+                return this._ArtsgruppeID;
+            }
+            set
+            {
+                this.OnArtsgruppeIDChanging(value);
+                this._ArtsgruppeID = value;
+                this.OnArtsgruppeIDChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private int _ArtsgruppeID;
+        partial void OnArtsgruppeIDChanging(int value);
+        partial void OnArtsgruppeIDChanged();
+        /// <summary>
+        /// There are no comments for Property Author in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("author")]
+        public virtual string Author
+        {
+            get
+            {
+                return this._Author;
+            }
+            set
+            {
+                this.OnAuthorChanging(value);
+                this._Author = value;
+                this.OnAuthorChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Author;
+        partial void OnAuthorChanging(string value);
+        partial void OnAuthorChanged();
+        /// <summary>
+        /// There are no comments for Property Illustrasjon in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("illustrasjon")]
+        public virtual byte[] Illustrasjon
+        {
+            get
+            {
+                return this._Illustrasjon;
+            }
+            set
+            {
+                this.OnIllustrasjonChanging(value);
+                this._Illustrasjon = value;
+                this.OnIllustrasjonChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private byte[] _Illustrasjon;
+        partial void OnIllustrasjonChanging(byte[] value);
+        partial void OnIllustrasjonChanged();
+        /// <summary>
+        /// There are no comments for Property A1 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a1")]
+        public virtual string A1
+        {
+            get
+            {
+                return this._A1;
+            }
+            set
+            {
+                this.OnA1Changing(value);
+                this._A1 = value;
+                this.OnA1Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _A1;
+        partial void OnA1Changing(string value);
+        partial void OnA1Changed();
+        /// <summary>
+        /// There are no comments for Property A2 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("a2")]
+        public virtual string A2
+        {
+            get
+            {
+                return this._A2;
+            }
+            set
+            {
+                this.OnA2Changing(value);
+                this._A2 = value;
+                this.OnA2Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _A2;
+        partial void OnA2Changing(string value);
+        partial void OnA2Changed();
+        /// <summary>
+        /// There are no comments for Property Fredet in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("fredet")]
+        public virtual string Fredet
+        {
+            get
+            {
+                return this._Fredet;
+            }
+            set
+            {
+                this.OnFredetChanging(value);
+                this._Fredet = value;
+                this.OnFredetChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Fredet;
+        partial void OnFredetChanging(string value);
+        partial void OnFredetChanged();
+        /// <summary>
+        /// There are no comments for Property Bern1 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bern1")]
+        public virtual string Bern1
+        {
+            get
+            {
+                return this._Bern1;
+            }
+            set
+            {
+                this.OnBern1Changing(value);
+                this._Bern1 = value;
+                this.OnBern1Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Bern1;
+        partial void OnBern1Changing(string value);
+        partial void OnBern1Changed();
+        /// <summary>
+        /// There are no comments for Property Bern2 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bern2")]
+        public virtual string Bern2
+        {
+            get
+            {
+                return this._Bern2;
+            }
+            set
+            {
+                this.OnBern2Changing(value);
+                this._Bern2 = value;
+                this.OnBern2Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Bern2;
+        partial void OnBern2Changing(string value);
+        partial void OnBern2Changed();
+        /// <summary>
+        /// There are no comments for Property Bern3 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bern3")]
+        public virtual string Bern3
+        {
+            get
+            {
+                return this._Bern3;
+            }
+            set
+            {
+                this.OnBern3Changing(value);
+                this._Bern3 = value;
+                this.OnBern3Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Bern3;
+        partial void OnBern3Changing(string value);
+        partial void OnBern3Changed();
+        /// <summary>
+        /// There are no comments for Property Bonn1 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bonn1")]
+        public virtual string Bonn1
+        {
+            get
+            {
+                return this._Bonn1;
+            }
+            set
+            {
+                this.OnBonn1Changing(value);
+                this._Bonn1 = value;
+                this.OnBonn1Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Bonn1;
+        partial void OnBonn1Changing(string value);
+        partial void OnBonn1Changed();
+        /// <summary>
+        /// There are no comments for Property Bonn2 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("bonn2")]
+        public virtual string Bonn2
+        {
+            get
+            {
+                return this._Bonn2;
+            }
+            set
+            {
+                this.OnBonn2Changing(value);
+                this._Bonn2 = value;
+                this.OnBonn2Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Bonn2;
+        partial void OnBonn2Changing(string value);
+        partial void OnBonn2Changed();
+        /// <summary>
+        /// There are no comments for Property Cites1 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cites1")]
+        public virtual string Cites1
+        {
+            get
+            {
+                return this._Cites1;
+            }
+            set
+            {
+                this.OnCites1Changing(value);
+                this._Cites1 = value;
+                this.OnCites1Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Cites1;
+        partial void OnCites1Changing(string value);
+        partial void OnCites1Changed();
+        /// <summary>
+        /// There are no comments for Property Cites2 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("cites2")]
+        public virtual string Cites2
+        {
+            get
+            {
+                return this._Cites2;
+            }
+            set
+            {
+                this.OnCites2Changing(value);
+                this._Cites2 = value;
+                this.OnCites2Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Cites2;
+        partial void OnCites2Changing(string value);
+        partial void OnCites2Changed();
+        /// <summary>
+        /// There are no comments for Property Habitatkoder in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("habitatkoder")]
+        public virtual string Habitatkoder
+        {
+            get
+            {
+                return this._Habitatkoder;
+            }
+            set
+            {
+                this.OnHabitatkoderChanging(value);
+                this._Habitatkoder = value;
+                this.OnHabitatkoderChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Habitatkoder;
+        partial void OnHabitatkoderChanging(string value);
+        partial void OnHabitatkoderChanged();
+        /// <summary>
+        /// There are no comments for Property Substratkoder in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("substratkoder")]
+        public virtual string Substratkoder
+        {
+            get
+            {
+                return this._Substratkoder;
+            }
+            set
+            {
+                this.OnSubstratkoderChanging(value);
+                this._Substratkoder = value;
+                this.OnSubstratkoderChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Substratkoder;
+        partial void OnSubstratkoderChanging(string value);
+        partial void OnSubstratkoderChanged();
+        /// <summary>
+        /// There are no comments for Property Påvirkningsfaktorkoder in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("påvirkningsfaktorkoder")]
+        public virtual string Påvirkningsfaktorkoder
+        {
+            get
+            {
+                return this._Påvirkningsfaktorkoder;
+            }
+            set
+            {
+                this.OnPåvirkningsfaktorkoderChanging(value);
+                this._Påvirkningsfaktorkoder = value;
+                this.OnPåvirkningsfaktorkoderChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Påvirkningsfaktorkoder;
+        partial void OnPåvirkningsfaktorkoderChanging(string value);
+        partial void OnPåvirkningsfaktorkoderChanged();
+        /// <summary>
+        /// There are no comments for Property C1 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("c1")]
+        public virtual string C1
+        {
+            get
+            {
+                return this._C1;
+            }
+            set
+            {
+                this.OnC1Changing(value);
+                this._C1 = value;
+                this.OnC1Changed();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _C1;
+        partial void OnC1Changing(string value);
+        partial void OnC1Changed();
+        /// <summary>
+        /// There are no comments for Property MaxAndelAvEuropeiskBestand in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("maxAndelAvEuropeiskBestand")]
+        public virtual string MaxAndelAvEuropeiskBestand
+        {
+            get
+            {
+                return this._MaxAndelAvEuropeiskBestand;
+            }
+            set
+            {
+                this.OnMaxAndelAvEuropeiskBestandChanging(value);
+                this._MaxAndelAvEuropeiskBestand = value;
+                this.OnMaxAndelAvEuropeiskBestandChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _MaxAndelAvEuropeiskBestand;
+        partial void OnMaxAndelAvEuropeiskBestandChanging(string value);
+        partial void OnMaxAndelAvEuropeiskBestandChanged();
+        /// <summary>
+        /// There are no comments for Property MaxAndelAvGlobalBestand in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("maxAndelAvGlobalBestand")]
+        public virtual string MaxAndelAvGlobalBestand
+        {
+            get
+            {
+                return this._MaxAndelAvGlobalBestand;
+            }
+            set
+            {
+                this.OnMaxAndelAvGlobalBestandChanging(value);
+                this._MaxAndelAvGlobalBestand = value;
+                this.OnMaxAndelAvGlobalBestandChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _MaxAndelAvGlobalBestand;
+        partial void OnMaxAndelAvGlobalBestandChanging(string value);
+        partial void OnMaxAndelAvGlobalBestandChanged();
+        /// <summary>
+        /// There are no comments for Property AndelNåværenedBestand in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("andelNåværenedBestand")]
+        public virtual string AndelNåværenedBestand
+        {
+            get
+            {
+                return this._AndelNåværenedBestand;
+            }
+            set
+            {
+                this.OnAndelNåværenedBestandChanging(value);
+                this._AndelNåværenedBestand = value;
+                this.OnAndelNåværenedBestandChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _AndelNåværenedBestand;
+        partial void OnAndelNåværenedBestandChanging(string value);
+        partial void OnAndelNåværenedBestandChanged();
+        /// <summary>
+        /// There are no comments for Property UnderartKode in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("underartKode")]
+        public virtual string UnderartKode
+        {
+            get
+            {
+                return this._UnderartKode;
+            }
+            set
+            {
+                this.OnUnderartKodeChanging(value);
+                this._UnderartKode = value;
+                this.OnUnderartKodeChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _UnderartKode;
+        partial void OnUnderartKodeChanging(string value);
+        partial void OnUnderartKodeChanged();
+        /// <summary>
+        /// There are no comments for Property LC_NA_NE_Forklaring in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("lC_NA_NE_Forklaring")]
+        public virtual string LC_NA_NE_Forklaring
+        {
+            get
+            {
+                return this._LC_NA_NE_Forklaring;
+            }
+            set
+            {
+                this.OnLC_NA_NE_ForklaringChanging(value);
+                this._LC_NA_NE_Forklaring = value;
+                this.OnLC_NA_NE_ForklaringChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _LC_NA_NE_Forklaring;
+        partial void OnLC_NA_NE_ForklaringChanging(string value);
+        partial void OnLC_NA_NE_ForklaringChanged();
+        /// <summary>
+        /// There are no comments for Property HabitatForklaring in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("habitatForklaring")]
+        public virtual global::System.Collections.ObjectModel.Collection<string> HabitatForklaring
+        {
+            get
+            {
+                return this._HabitatForklaring;
+            }
+            set
+            {
+                this.OnHabitatForklaringChanging(value);
+                this._HabitatForklaring = value;
+                this.OnHabitatForklaringChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Collections.ObjectModel.Collection<string> _HabitatForklaring = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnHabitatForklaringChanging(global::System.Collections.ObjectModel.Collection<string> value);
+        partial void OnHabitatForklaringChanged();
+        /// <summary>
+        /// There are no comments for Property Forfattere in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("forfattere")]
+        public virtual global::System.Collections.ObjectModel.Collection<string> Forfattere
+        {
+            get
+            {
+                return this._Forfattere;
+            }
+            set
+            {
+                this.OnForfattereChanging(value);
+                this._Forfattere = value;
+                this.OnForfattereChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Collections.ObjectModel.Collection<string> _Forfattere = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnForfattereChanging(global::System.Collections.ObjectModel.Collection<string> value);
+        partial void OnForfattereChanged();
+        /// <summary>
+        /// There are no comments for Property Referanser in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
+        public virtual global::System.Collections.ObjectModel.Collection<string> Referanser
+        {
+            get
+            {
+                return this._Referanser;
+            }
+            set
+            {
+                this.OnReferanserChanging(value);
+                this._Referanser = value;
+                this.OnReferanserChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Collections.ObjectModel.Collection<string> _Referanser = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnReferanserChanging(global::System.Collections.ObjectModel.Collection<string> value);
+        partial void OnReferanserChanged();
+        /// <summary>
+        /// There are no comments for Property Påvirkningsfaktorer in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("påvirkningsfaktorer")]
+        public virtual global::System.Collections.ObjectModel.Collection<string> Påvirkningsfaktorer
+        {
+            get
+            {
+                return this._Påvirkningsfaktorer;
+            }
+            set
+            {
+                this.OnPåvirkningsfaktorerChanging(value);
+                this._Påvirkningsfaktorer = value;
+                this.OnPåvirkningsfaktorerChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Collections.ObjectModel.Collection<string> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.Collection<string> value);
+        partial void OnPåvirkningsfaktorerChanged();
+        /// <summary>
+        /// There are no comments for Property ArtsGruppeBildeUrl in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("artsGruppeBildeUrl")]
+        public virtual string ArtsGruppeBildeUrl
+        {
+            get
+            {
+                return this._ArtsGruppeBildeUrl;
+            }
+            set
+            {
+                this.OnArtsGruppeBildeUrlChanging(value);
+                this._ArtsGruppeBildeUrl = value;
+                this.OnArtsGruppeBildeUrlChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _ArtsGruppeBildeUrl;
+        partial void OnArtsGruppeBildeUrlChanging(string value);
+        partial void OnArtsGruppeBildeUrlChanged();
+        /// <summary>
+        /// There are no comments for Property OriginalUrl in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("originalUrl")]
+        public virtual string OriginalUrl
+        {
+            get
+            {
+                return this._OriginalUrl;
+            }
+            set
+            {
+                this.OnOriginalUrlChanging(value);
+                this._OriginalUrl = value;
+                this.OnOriginalUrlChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _OriginalUrl;
+        partial void OnOriginalUrlChanging(string value);
+        partial void OnOriginalUrlChanged();
+    }
+        /// <summary>
         /// There are no comments for Pavirkningsfaktor in the schema.
         /// </summary>
     [global::Microsoft.OData.Client.OriginalNameAttribute("Pavirkningsfaktor")]
@@ -2479,6 +3550,29 @@ namespace Artsdatabanken
                 { "latinsknavnId", latinsknavnId }
             };
             return new global::Artsdatabanken.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+        }
+        /// <summary>
+        /// Get an entity of type global::Artsdatabanken.Redlist2006Assessment as global::Artsdatabanken.Redlist2006AssessmentSingle specified by key from an entity set
+        /// </summary>
+        /// <param name="_source">source entity set</param>
+        /// <param name="_keys">dictionary with the names and values of keys</param>
+        public static global::Artsdatabanken.Redlist2006AssessmentSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Redlist2006Assessment> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
+        {
+            return new global::Artsdatabanken.Redlist2006AssessmentSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+        }
+        /// <summary>
+        /// Get an entity of type global::Artsdatabanken.Redlist2006Assessment as global::Artsdatabanken.Redlist2006AssessmentSingle specified by key from an entity set
+        /// </summary>
+        /// <param name="_source">source entity set</param>
+        /// <param name="artsID">The value of artsID</param>
+        public static global::Artsdatabanken.Redlist2006AssessmentSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Redlist2006Assessment> _source,
+            string artsID)
+        {
+            global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
+            {
+                { "artsID", artsID }
+            };
+            return new global::Artsdatabanken.Redlist2006AssessmentSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
         /// Get an entity of type global::Artsdatabanken.Reference as global::Artsdatabanken.ReferenceSingle specified by key from an entity set

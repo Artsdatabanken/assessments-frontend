@@ -6,7 +6,7 @@
     ViewBag.Title = "Assessments api httpclient test";
 
     var categories = await _apiClient
-        .Get<AssessmentsApiClient.Response<AssessmentsApiClient.Category>>("Redlist2015?$filter=length(kategori) eq 2&$apply=groupby((kategori))");
+        .Get<IList<AssessmentsApiClient.Category>>("redlist2015?$filter=length(Kategori) eq 2&$apply=groupby((Kategori))&orderby=Kategori");
 }
 
-<select asp-items="@new SelectList(categories.Value.Select(x => x.Kategori))"></select>
+<select asp-items="@new SelectList(categories.Select(x => x.Kategori))"></select>

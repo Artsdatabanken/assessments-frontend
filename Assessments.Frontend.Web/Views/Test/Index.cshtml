@@ -19,7 +19,7 @@
     @foreach (var item in Model.Redlist2015Results)
     {
         <tr>
-            <td><a asp-action="Detail" asp-route-id="@item.LatinsknavnId" asp-route-year="2015">
+            <td><a asp-action="Detail" asp-route-id="@item.LatinsknavnId" asp-route-vurderingscontext="@item.VurderingsContext" asp-route-year="2015">
                 @item.LatinsknavnId
             </a></td>
             <td>@item.VurdertVitenskapeligNavn</td>

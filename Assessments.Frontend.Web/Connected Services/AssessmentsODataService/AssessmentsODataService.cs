@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 06.05.2021 09:46:31
+// Generation date: 07.05.2021 08:32:17
 namespace Artsdatabanken
 {
         /// <summary>
@@ -209,7 +209,7 @@ namespace Artsdatabanken
         /// There are no comments for Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Referanser")]
         public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Reference> Referanser
         {
             get
@@ -220,7 +220,7 @@ namespace Artsdatabanken
                 }
                 if ((this._Referanser == null))
                 {
-                    this._Referanser = Context.CreateQuery<global::Artsdatabanken.Reference>(GetPath("referanser"));
+                    this._Referanser = Context.CreateQuery<global::Artsdatabanken.Reference>(GetPath("Referanser"));
                 }
                 return this._Referanser;
             }
@@ -233,8 +233,9 @@ namespace Artsdatabanken
         /// </summary>
     /// <KeyProperties>
     /// LatinsknavnId
+    /// VurderingsContext
     /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("latinsknavnId")]
+    [global::Microsoft.OData.Client.Key("LatinsknavnId", "VurderingsContext")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("Rodliste2015")]
     public partial class Rodliste2015 : global::Microsoft.OData.Client.BaseEntityType
     {
@@ -242,25 +243,28 @@ namespace Artsdatabanken
         /// Create a new Rodliste2015 object.
         /// </summary>
         /// <param name="latinsknavnId">Initial value of LatinsknavnId.</param>
+        /// <param name="vurderingsContext">Initial value of VurderingsContext.</param>
         /// <param name="vurderingsår">Initial value of Vurderingsår.</param>
         /// <param name="vurderingsId2010">Initial value of VurderingsId2010.</param>
         /// <param name="troligUtdodd">Initial value of TroligUtdodd.</param>
-        /// <param name="iucnVurdert">Initial value of IucnVurdert.</param>
+        /// <param name="iUCNVurdert">Initial value of IUCNVurdert.</param>
         /// <param name="tilførselFraNaboland">Initial value of TilførselFraNaboland.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         public static Rodliste2015 CreateRodliste2015(int latinsknavnId, 
+                    string vurderingsContext, 
                     int vurderingsår, 
                     int vurderingsId2010, 
                     bool troligUtdodd, 
-                    bool iucnVurdert, 
+                    bool iUCNVurdert, 
                     bool tilførselFraNaboland)
         {
             Rodliste2015 rodliste2015 = new Rodliste2015();
             rodliste2015.LatinsknavnId = latinsknavnId;
+            rodliste2015.VurderingsContext = vurderingsContext;
             rodliste2015.Vurderingsår = vurderingsår;
             rodliste2015.VurderingsId2010 = vurderingsId2010;
             rodliste2015.TroligUtdodd = troligUtdodd;
-            rodliste2015.IucnVurdert = iucnVurdert;
+            rodliste2015.IUCNVurdert = iUCNVurdert;
             rodliste2015.TilførselFraNaboland = tilførselFraNaboland;
             return rodliste2015;
         }
@@ -268,7 +272,7 @@ namespace Artsdatabanken
         /// There are no comments for Property LatinsknavnId in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("latinsknavnId")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("LatinsknavnId")]
         public virtual int LatinsknavnId
         {
             get
@@ -287,10 +291,32 @@ namespace Artsdatabanken
         partial void OnLatinsknavnIdChanging(int value);
         partial void OnLatinsknavnIdChanged();
         /// <summary>
+        /// There are no comments for Property VurderingsContext in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("VurderingsContext")]
+        public virtual string VurderingsContext
+        {
+            get
+            {
+                return this._VurderingsContext;
+            }
+            set
+            {
+                this.OnVurderingsContextChanging(value);
+                this._VurderingsContext = value;
+                this.OnVurderingsContextChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _VurderingsContext;
+        partial void OnVurderingsContextChanging(string value);
+        partial void OnVurderingsContextChanged();
+        /// <summary>
         /// There are no comments for Property Id in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("id")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
         public virtual string Id
         {
             get
@@ -312,7 +338,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Vurderingsår in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("vurderingsår")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Vurderingsår")]
         public virtual int Vurderingsår
         {
             get
@@ -334,7 +360,7 @@ namespace Artsdatabanken
         /// There are no comments for Property VurdertVitenskapeligNavn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("vurdertVitenskapeligNavn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("VurdertVitenskapeligNavn")]
         public virtual string VurdertVitenskapeligNavn
         {
             get
@@ -356,7 +382,7 @@ namespace Artsdatabanken
         /// There are no comments for Property VurderingsId2010 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("vurderingsId2010")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("VurderingsId2010")]
         public virtual int VurderingsId2010
         {
             get
@@ -378,7 +404,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Ekspertgruppe in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ekspertgruppe")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Ekspertgruppe")]
         public virtual string Ekspertgruppe
         {
             get
@@ -400,7 +426,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Artsgruppe in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("artsgruppe")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Artsgruppe")]
         public virtual string Artsgruppe
         {
             get
@@ -419,32 +445,10 @@ namespace Artsdatabanken
         partial void OnArtsgruppeChanging(string value);
         partial void OnArtsgruppeChanged();
         /// <summary>
-        /// There are no comments for Property VurderingsContext in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("vurderingsContext")]
-        public virtual string VurderingsContext
-        {
-            get
-            {
-                return this._VurderingsContext;
-            }
-            set
-            {
-                this.OnVurderingsContextChanging(value);
-                this._VurderingsContext = value;
-                this.OnVurderingsContextChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _VurderingsContext;
-        partial void OnVurderingsContextChanging(string value);
-        partial void OnVurderingsContextChanged();
-        /// <summary>
         /// There are no comments for Property BegrensetForekomstNA in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("begrensetForekomstNA")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("BegrensetForekomstNA")]
         public virtual string BegrensetForekomstNA
         {
             get
@@ -466,7 +470,7 @@ namespace Artsdatabanken
         /// There are no comments for Property KunnskapsStatusNE in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kunnskapsStatusNE")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("KunnskapsStatusNE")]
         public virtual string KunnskapsStatusNE
         {
             get
@@ -488,7 +492,7 @@ namespace Artsdatabanken
         /// There are no comments for Property RodlisteVurdertArt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("rodlisteVurdertArt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("RodlisteVurdertArt")]
         public virtual string RodlisteVurdertArt
         {
             get
@@ -510,7 +514,7 @@ namespace Artsdatabanken
         /// There are no comments for Property TroligUtdodd in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("troligUtdodd")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("TroligUtdodd")]
         public virtual bool TroligUtdodd
         {
             get
@@ -532,7 +536,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ArtenVurderesIkkeBegrunnelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("artenVurderesIkkeBegrunnelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ArtenVurderesIkkeBegrunnelse")]
         public virtual string ArtenVurderesIkkeBegrunnelse
         {
             get
@@ -554,7 +558,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Generasjonslengde in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("generasjonslengde")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Generasjonslengde")]
         public virtual string Generasjonslengde
         {
             get
@@ -573,76 +577,76 @@ namespace Artsdatabanken
         partial void OnGenerasjonslengdeChanging(string value);
         partial void OnGenerasjonslengdeChanged();
         /// <summary>
-        /// There are no comments for Property Bern in the schema.
+        /// There are no comments for Property BERN in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bern")]
-        public virtual string Bern
+        [global::Microsoft.OData.Client.OriginalNameAttribute("BERN")]
+        public virtual string BERN
         {
             get
             {
-                return this._Bern;
+                return this._BERN;
             }
             set
             {
-                this.OnBernChanging(value);
-                this._Bern = value;
-                this.OnBernChanged();
+                this.OnBERNChanging(value);
+                this._BERN = value;
+                this.OnBERNChanged();
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Bern;
-        partial void OnBernChanging(string value);
-        partial void OnBernChanged();
+        private string _BERN;
+        partial void OnBERNChanging(string value);
+        partial void OnBERNChanged();
         /// <summary>
-        /// There are no comments for Property Bonn in the schema.
+        /// There are no comments for Property BONN in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bonn")]
-        public virtual string Bonn
+        [global::Microsoft.OData.Client.OriginalNameAttribute("BONN")]
+        public virtual string BONN
         {
             get
             {
-                return this._Bonn;
+                return this._BONN;
             }
             set
             {
-                this.OnBonnChanging(value);
-                this._Bonn = value;
-                this.OnBonnChanged();
+                this.OnBONNChanging(value);
+                this._BONN = value;
+                this.OnBONNChanged();
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Bonn;
-        partial void OnBonnChanging(string value);
-        partial void OnBonnChanged();
+        private string _BONN;
+        partial void OnBONNChanging(string value);
+        partial void OnBONNChanged();
         /// <summary>
-        /// There are no comments for Property Cites in the schema.
+        /// There are no comments for Property CITES in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cites")]
-        public virtual string Cites
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CITES")]
+        public virtual string CITES
         {
             get
             {
-                return this._Cites;
+                return this._CITES;
             }
             set
             {
-                this.OnCitesChanging(value);
-                this._Cites = value;
-                this.OnCitesChanged();
+                this.OnCITESChanging(value);
+                this._CITES = value;
+                this.OnCITESChanged();
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Cites;
-        partial void OnCitesChanging(string value);
-        partial void OnCitesChanged();
+        private string _CITES;
+        partial void OnCITESChanging(string value);
+        partial void OnCITESChanged();
         /// <summary>
         /// There are no comments for Property StatusIHenholdTilNaturvernloven in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("statusIHenholdTilNaturvernloven")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("StatusIHenholdTilNaturvernloven")]
         public virtual string StatusIHenholdTilNaturvernloven
         {
             get
@@ -664,7 +668,7 @@ namespace Artsdatabanken
         /// There are no comments for Property StatusIHenholdTilNaturmangfoldloven in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("statusIHenholdTilNaturmangfoldloven")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("StatusIHenholdTilNaturmangfoldloven")]
         public virtual string StatusIHenholdTilNaturmangfoldloven
         {
             get
@@ -686,7 +690,7 @@ namespace Artsdatabanken
         /// There are no comments for Property MaxAndelAvEuropeiskBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("maxAndelAvEuropeiskBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("MaxAndelAvEuropeiskBestand")]
         public virtual string MaxAndelAvEuropeiskBestand
         {
             get
@@ -708,7 +712,7 @@ namespace Artsdatabanken
         /// There are no comments for Property MaxAndelAvGlobalBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("maxAndelAvGlobalBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("MaxAndelAvGlobalBestand")]
         public virtual string MaxAndelAvGlobalBestand
         {
             get
@@ -730,7 +734,7 @@ namespace Artsdatabanken
         /// There are no comments for Property AndelNåværendeBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("andelNåværendeBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("AndelNåværendeBestand")]
         public virtual string AndelNåværendeBestand
         {
             get
@@ -749,32 +753,32 @@ namespace Artsdatabanken
         partial void OnAndelNåværendeBestandChanging(string value);
         partial void OnAndelNåværendeBestandChanged();
         /// <summary>
-        /// There are no comments for Property IucnVurdert in the schema.
+        /// There are no comments for Property IUCNVurdert in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("iucnVurdert")]
-        public virtual bool IucnVurdert
+        [global::Microsoft.OData.Client.OriginalNameAttribute("IUCNVurdert")]
+        public virtual bool IUCNVurdert
         {
             get
             {
-                return this._IucnVurdert;
+                return this._IUCNVurdert;
             }
             set
             {
-                this.OnIucnVurdertChanging(value);
-                this._IucnVurdert = value;
-                this.OnIucnVurdertChanged();
+                this.OnIUCNVurdertChanging(value);
+                this._IUCNVurdert = value;
+                this.OnIUCNVurdertChanged();
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private bool _IucnVurdert;
-        partial void OnIucnVurdertChanging(bool value);
-        partial void OnIucnVurdertChanged();
+        private bool _IUCNVurdert;
+        partial void OnIUCNVurdertChanging(bool value);
+        partial void OnIUCNVurdertChanged();
         /// <summary>
         /// There are no comments for Property A1OpphørtOgReversibel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a1OpphørtOgReversibel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A1OpphørtOgReversibel")]
         public virtual string A1OpphørtOgReversibel
         {
             get
@@ -796,7 +800,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A1EndringBasertpåKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a1EndringBasertpåKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A1EndringBasertpåKode")]
         public virtual global::System.Collections.ObjectModel.Collection<string> A1EndringBasertpåKode
         {
             get
@@ -818,7 +822,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A2Forutgående10År in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a2Forutgående10År")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A2Forutgående10År")]
         public virtual string A2Forutgående10År
         {
             get
@@ -840,7 +844,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A2EndringBasertpåKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a2EndringBasertpåKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A2EndringBasertpåKode")]
         public virtual global::System.Collections.ObjectModel.Collection<string> A2EndringBasertpåKode
         {
             get
@@ -862,7 +866,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A3Kommende10År in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a3Kommende10År")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A3Kommende10År")]
         public virtual string A3Kommende10År
         {
             get
@@ -884,7 +888,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A3EndringBasertpåKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a3EndringBasertpåKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A3EndringBasertpåKode")]
         public virtual global::System.Collections.ObjectModel.Collection<string> A3EndringBasertpåKode
         {
             get
@@ -906,7 +910,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A4Intervall10År in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a4Intervall10År")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A4Intervall10År")]
         public virtual string A4Intervall10År
         {
             get
@@ -928,7 +932,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A4EndringBasertpåKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a4EndringBasertpåKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A4EndringBasertpåKode")]
         public virtual global::System.Collections.ObjectModel.Collection<string> A4EndringBasertpåKode
         {
             get
@@ -950,7 +954,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B1UtbredelsesområdeKjentAndel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeKjentAndel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeKjentAndel")]
         public virtual string B1UtbredelsesområdeKjentAndel
         {
             get
@@ -972,7 +976,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B1UtbredelsesområdeMørketall in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeMørketall")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeMørketall")]
         public virtual string B1UtbredelsesområdeMørketall
         {
             get
@@ -994,7 +998,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B1UtbredelsesområdeProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeProdukt")]
         public virtual string B1UtbredelsesområdeProdukt
         {
             get
@@ -1016,7 +1020,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B1UtbredelsesområdeKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeKode")]
         public virtual string B1UtbredelsesområdeKode
         {
             get
@@ -1038,7 +1042,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B2ForekomstarealKjentAndel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealKjentAndel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealKjentAndel")]
         public virtual string B2ForekomstarealKjentAndel
         {
             get
@@ -1060,7 +1064,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B2ForekomstarealMørketall in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealMørketall")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealMørketall")]
         public virtual string B2ForekomstarealMørketall
         {
             get
@@ -1082,7 +1086,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B2ForekomstarealProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealProdukt")]
         public virtual string B2ForekomstarealProdukt
         {
             get
@@ -1104,7 +1108,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B2ForekomstarealKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealKode")]
         public virtual string B2ForekomstarealKode
         {
             get
@@ -1126,7 +1130,7 @@ namespace Artsdatabanken
         /// There are no comments for Property BA1KraftigFragmenteringKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bA1KraftigFragmenteringKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("BA1KraftigFragmenteringKode")]
         public virtual string BA1KraftigFragmenteringKode
         {
             get
@@ -1148,7 +1152,7 @@ namespace Artsdatabanken
         /// There are no comments for Property BA2FåLokaliteterKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bA2FåLokaliteterKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("BA2FåLokaliteterKode")]
         public virtual string BA2FåLokaliteterKode
         {
             get
@@ -1167,54 +1171,54 @@ namespace Artsdatabanken
         partial void OnBA2FåLokaliteterKodeChanging(string value);
         partial void OnBA2FåLokaliteterKodeChanged();
         /// <summary>
-        /// There are no comments for Property BbPågåendeArealreduksjonKode in the schema.
+        /// There are no comments for Property BBPågåendeArealreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bbPågåendeArealreduksjonKode")]
-        public virtual global::System.Collections.ObjectModel.Collection<string> BbPågåendeArealreduksjonKode
+        [global::Microsoft.OData.Client.OriginalNameAttribute("BBPågåendeArealreduksjonKode")]
+        public virtual global::System.Collections.ObjectModel.Collection<string> BBPågåendeArealreduksjonKode
         {
             get
             {
-                return this._BbPågåendeArealreduksjonKode;
+                return this._BBPågåendeArealreduksjonKode;
             }
             set
             {
-                this.OnBbPågåendeArealreduksjonKodeChanging(value);
-                this._BbPågåendeArealreduksjonKode = value;
-                this.OnBbPågåendeArealreduksjonKodeChanged();
+                this.OnBBPågåendeArealreduksjonKodeChanging(value);
+                this._BBPågåendeArealreduksjonKode = value;
+                this.OnBBPågåendeArealreduksjonKodeChanged();
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.Collection<string> _BbPågåendeArealreduksjonKode = new global::System.Collections.ObjectModel.Collection<string>();
-        partial void OnBbPågåendeArealreduksjonKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
-        partial void OnBbPågåendeArealreduksjonKodeChanged();
+        private global::System.Collections.ObjectModel.Collection<string> _BBPågåendeArealreduksjonKode = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnBBPågåendeArealreduksjonKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
+        partial void OnBBPågåendeArealreduksjonKodeChanged();
         /// <summary>
-        /// There are no comments for Property BcEksterneFluktuasjonerKode in the schema.
+        /// There are no comments for Property BCEksterneFluktuasjonerKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bcEksterneFluktuasjonerKode")]
-        public virtual global::System.Collections.ObjectModel.Collection<string> BcEksterneFluktuasjonerKode
+        [global::Microsoft.OData.Client.OriginalNameAttribute("BCEksterneFluktuasjonerKode")]
+        public virtual global::System.Collections.ObjectModel.Collection<string> BCEksterneFluktuasjonerKode
         {
             get
             {
-                return this._BcEksterneFluktuasjonerKode;
+                return this._BCEksterneFluktuasjonerKode;
             }
             set
             {
-                this.OnBcEksterneFluktuasjonerKodeChanging(value);
-                this._BcEksterneFluktuasjonerKode = value;
-                this.OnBcEksterneFluktuasjonerKodeChanged();
+                this.OnBCEksterneFluktuasjonerKodeChanging(value);
+                this._BCEksterneFluktuasjonerKode = value;
+                this.OnBCEksterneFluktuasjonerKodeChanged();
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.Collection<string> _BcEksterneFluktuasjonerKode = new global::System.Collections.ObjectModel.Collection<string>();
-        partial void OnBcEksterneFluktuasjonerKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
-        partial void OnBcEksterneFluktuasjonerKodeChanged();
+        private global::System.Collections.ObjectModel.Collection<string> _BCEksterneFluktuasjonerKode = new global::System.Collections.ObjectModel.Collection<string>();
+        partial void OnBCEksterneFluktuasjonerKodeChanging(global::System.Collections.ObjectModel.Collection<string> value);
+        partial void OnBCEksterneFluktuasjonerKodeChanged();
         /// <summary>
         /// There are no comments for Property CKjentPopulasjonsstørrelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cKjentPopulasjonsstørrelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CKjentPopulasjonsstørrelse")]
         public virtual string CKjentPopulasjonsstørrelse
         {
             get
@@ -1236,7 +1240,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CKjentPopulasjonsstørrelseMørketall in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cKjentPopulasjonsstørrelseMørketall")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CKjentPopulasjonsstørrelseMørketall")]
         public virtual string CKjentPopulasjonsstørrelseMørketall
         {
             get
@@ -1258,7 +1262,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CKjentPopulasjonsstørrelseProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cKjentPopulasjonsstørrelseProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CKjentPopulasjonsstørrelseProdukt")]
         public virtual string CKjentPopulasjonsstørrelseProdukt
         {
             get
@@ -1280,7 +1284,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CVurdertpopulasjonsstørrelseMin in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseMin")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CVurdertpopulasjonsstørrelseMin")]
         public virtual string CVurdertpopulasjonsstørrelseMin
         {
             get
@@ -1302,7 +1306,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CVurdertpopulasjonsstørrelseMax in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseMax")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CVurdertpopulasjonsstørrelseMax")]
         public virtual string CVurdertpopulasjonsstørrelseMax
         {
             get
@@ -1324,7 +1328,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CVurdertpopulasjonsstørrelseProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CVurdertpopulasjonsstørrelseProdukt")]
         public virtual string CVurdertpopulasjonsstørrelseProdukt
         {
             get
@@ -1346,7 +1350,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CDirekteFastsattEtterSkjønn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cDirekteFastsattEtterSkjønn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CDirekteFastsattEtterSkjønn")]
         public virtual string CDirekteFastsattEtterSkjønn
         {
             get
@@ -1368,7 +1372,7 @@ namespace Artsdatabanken
         /// There are no comments for Property C1PågåendePopulasjonsreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("c1PågåendePopulasjonsreduksjonKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("C1PågåendePopulasjonsreduksjonKode")]
         public virtual string C1PågåendePopulasjonsreduksjonKode
         {
             get
@@ -1390,7 +1394,7 @@ namespace Artsdatabanken
         /// There are no comments for Property C2A1PågåendePopulasjonsreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("c2A1PågåendePopulasjonsreduksjonKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("C2A1PågåendePopulasjonsreduksjonKode")]
         public virtual string C2A1PågåendePopulasjonsreduksjonKode
         {
             get
@@ -1412,7 +1416,7 @@ namespace Artsdatabanken
         /// There are no comments for Property C2A2PågåendePopulasjonsreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("c2A2PågåendePopulasjonsreduksjonKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("C2A2PågåendePopulasjonsreduksjonKode")]
         public virtual string C2A2PågåendePopulasjonsreduksjonKode
         {
             get
@@ -1431,32 +1435,32 @@ namespace Artsdatabanken
         partial void OnC2A2PågåendePopulasjonsreduksjonKodeChanging(string value);
         partial void OnC2A2PågåendePopulasjonsreduksjonKodeChanged();
         /// <summary>
-        /// There are no comments for Property C2bPågåendePopulasjonsreduksjonKode in the schema.
+        /// There are no comments for Property C2BPågåendePopulasjonsreduksjonKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("c2bPågåendePopulasjonsreduksjonKode")]
-        public virtual string C2bPågåendePopulasjonsreduksjonKode
+        [global::Microsoft.OData.Client.OriginalNameAttribute("C2BPågåendePopulasjonsreduksjonKode")]
+        public virtual string C2BPågåendePopulasjonsreduksjonKode
         {
             get
             {
-                return this._C2bPågåendePopulasjonsreduksjonKode;
+                return this._C2BPågåendePopulasjonsreduksjonKode;
             }
             set
             {
-                this.OnC2bPågåendePopulasjonsreduksjonKodeChanging(value);
-                this._C2bPågåendePopulasjonsreduksjonKode = value;
-                this.OnC2bPågåendePopulasjonsreduksjonKodeChanged();
+                this.OnC2BPågåendePopulasjonsreduksjonKodeChanging(value);
+                this._C2BPågåendePopulasjonsreduksjonKode = value;
+                this.OnC2BPågåendePopulasjonsreduksjonKodeChanged();
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _C2bPågåendePopulasjonsreduksjonKode;
-        partial void OnC2bPågåendePopulasjonsreduksjonKodeChanging(string value);
-        partial void OnC2bPågåendePopulasjonsreduksjonKodeChanged();
+        private string _C2BPågåendePopulasjonsreduksjonKode;
+        partial void OnC2BPågåendePopulasjonsreduksjonKodeChanging(string value);
+        partial void OnC2BPågåendePopulasjonsreduksjonKodeChanged();
         /// <summary>
         /// There are no comments for Property D1FåReproduserendeIndividKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("d1FåReproduserendeIndividKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("D1FåReproduserendeIndividKode")]
         public virtual string D1FåReproduserendeIndividKode
         {
             get
@@ -1478,7 +1482,7 @@ namespace Artsdatabanken
         /// There are no comments for Property D2MegetBegrensetForekomstarealKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("d2MegetBegrensetForekomstarealKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("D2MegetBegrensetForekomstarealKode")]
         public virtual string D2MegetBegrensetForekomstarealKode
         {
             get
@@ -1500,7 +1504,7 @@ namespace Artsdatabanken
         /// There are no comments for Property EKvantitativUtryddingsmodellKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("eKvantitativUtryddingsmodellKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("EKvantitativUtryddingsmodellKode")]
         public virtual string EKvantitativUtryddingsmodellKode
         {
             get
@@ -1522,7 +1526,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OverordnetKlassifiseringGruppeKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("overordnetKlassifiseringGruppeKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OverordnetKlassifiseringGruppeKode")]
         public virtual string OverordnetKlassifiseringGruppeKode
         {
             get
@@ -1544,7 +1548,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OverordnetKlassifiseringTekst in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("overordnetKlassifiseringTekst")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OverordnetKlassifiseringTekst")]
         public virtual string OverordnetKlassifiseringTekst
         {
             get
@@ -1566,7 +1570,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OppsummeringAKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringAKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringAKriterier")]
         public virtual string OppsummeringAKriterier
         {
             get
@@ -1588,7 +1592,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OppsummeringBKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringBKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringBKriterier")]
         public virtual string OppsummeringBKriterier
         {
             get
@@ -1610,7 +1614,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OppsummeringCKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringCKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringCKriterier")]
         public virtual string OppsummeringCKriterier
         {
             get
@@ -1632,7 +1636,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OppsummeringDKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringDKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringDKriterier")]
         public virtual string OppsummeringDKriterier
         {
             get
@@ -1654,7 +1658,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OppsummeringEKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("oppsummeringEKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OppsummeringEKriterier")]
         public virtual string OppsummeringEKriterier
         {
             get
@@ -1676,7 +1680,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Kriteriedokumentasjon in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kriteriedokumentasjon")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Kriteriedokumentasjon")]
         public virtual string Kriteriedokumentasjon
         {
             get
@@ -1698,7 +1702,7 @@ namespace Artsdatabanken
         /// There are no comments for Property TilførselFraNaboland in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("tilførselFraNaboland")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("TilførselFraNaboland")]
         public virtual bool TilførselFraNaboland
         {
             get
@@ -1720,7 +1724,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ÅrsakTilNedgraderingAvKategori in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("årsakTilNedgraderingAvKategori")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ÅrsakTilNedgraderingAvKategori")]
         public virtual string ÅrsakTilNedgraderingAvKategori
         {
             get
@@ -1742,7 +1746,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ÅrsakTilEndringAvKategori in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("årsakTilEndringAvKategori")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ÅrsakTilEndringAvKategori")]
         public virtual string ÅrsakTilEndringAvKategori
         {
             get
@@ -1764,7 +1768,7 @@ namespace Artsdatabanken
         /// There are no comments for Property UtdøingSterktPåvirket in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("utdøingSterktPåvirket")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("UtdøingSterktPåvirket")]
         public virtual string UtdøingSterktPåvirket
         {
             get
@@ -1786,7 +1790,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Kategori in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kategori")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Kategori")]
         public virtual string Kategori
         {
             get
@@ -1808,7 +1812,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Kriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Kriterier")]
         public virtual string Kriterier
         {
             get
@@ -1830,7 +1834,7 @@ namespace Artsdatabanken
         /// There are no comments for Property HovedKriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("hovedKriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("HovedKriterier")]
         public virtual global::System.Collections.ObjectModel.Collection<string> HovedKriterier
         {
             get
@@ -1852,7 +1856,7 @@ namespace Artsdatabanken
         /// There are no comments for Property KategoriFraForrigeListe in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kategoriFraForrigeListe")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("KategoriFraForrigeListe")]
         public virtual string KategoriFraForrigeListe
         {
             get
@@ -1874,7 +1878,7 @@ namespace Artsdatabanken
         /// There are no comments for Property KriterierFraForrigeListe in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kriterierFraForrigeListe")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("KriterierFraForrigeListe")]
         public virtual string KriterierFraForrigeListe
         {
             get
@@ -1896,7 +1900,7 @@ namespace Artsdatabanken
         /// There are no comments for Property KategoriEndretFra in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kategoriEndretFra")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("KategoriEndretFra")]
         public virtual string KategoriEndretFra
         {
             get
@@ -1918,7 +1922,7 @@ namespace Artsdatabanken
         /// There are no comments for Property GlobalRødlistestatusKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("globalRødlistestatusKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("GlobalRødlistestatusKode")]
         public virtual string GlobalRødlistestatusKode
         {
             get
@@ -1940,7 +1944,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Påvirkningsfaktorer in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("påvirkningsfaktorer")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorer")]
         public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Pavirkningsfaktor> Påvirkningsfaktorer
         {
             get
@@ -1962,7 +1966,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Fylkesforekomster in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("fylkesforekomster")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Fylkesforekomster")]
         public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Fylkesforekomst> Fylkesforekomster
         {
             get
@@ -1984,7 +1988,7 @@ namespace Artsdatabanken
         /// There are no comments for Property NaturtypeHovedenhet in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("naturtypeHovedenhet")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("NaturtypeHovedenhet")]
         public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Naturtype> NaturtypeHovedenhet
         {
             get
@@ -2006,7 +2010,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Referanser")]
         public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.Reference> Referanser
         {
             get
@@ -2056,7 +2060,7 @@ namespace Artsdatabanken
     /// <KeyProperties>
     /// ArtsID
     /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("artsID")]
+    [global::Microsoft.OData.Client.Key("ArtsID")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("Redlist2006Assessment")]
     public partial class Redlist2006Assessment : global::Microsoft.OData.Client.BaseEntityType
     {
@@ -2083,7 +2087,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ArtsID in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("artsID")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ArtsID")]
         public virtual string ArtsID
         {
             get
@@ -2105,7 +2109,7 @@ namespace Artsdatabanken
         /// There are no comments for Property LatinskArtsnavn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("latinskArtsnavn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("LatinskArtsnavn")]
         public virtual string LatinskArtsnavn
         {
             get
@@ -2127,7 +2131,7 @@ namespace Artsdatabanken
         /// There are no comments for Property NorskArtsnavnBrukRødlista in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("norskArtsnavnBrukRødlista")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("NorskArtsnavnBrukRødlista")]
         public virtual string NorskArtsnavnBrukRødlista
         {
             get
@@ -2149,7 +2153,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Artgruppenavn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("artgruppenavn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Artgruppenavn")]
         public virtual string Artgruppenavn
         {
             get
@@ -2171,7 +2175,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Kategori in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kategori")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Kategori")]
         public virtual string Kategori
         {
             get
@@ -2193,7 +2197,7 @@ namespace Artsdatabanken
         /// There are no comments for Property KriterierIUCN in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kriterierIUCN")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("KriterierIUCN")]
         public virtual string KriterierIUCN
         {
             get
@@ -2215,7 +2219,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Kriterier in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kriterier")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Kriterier")]
         public virtual string Kriterier
         {
             get
@@ -2237,7 +2241,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Kriteriedokumentasjon in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kriteriedokumentasjon")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Kriteriedokumentasjon")]
         public virtual string Kriteriedokumentasjon
         {
             get
@@ -2259,7 +2263,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ÅrsakTilEndringAvKategori in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("årsakTilEndringAvKategori")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ÅrsakTilEndringAvKategori")]
         public virtual string ÅrsakTilEndringAvKategori
         {
             get
@@ -2281,7 +2285,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Generasjonslengde in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("generasjonslengde")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Generasjonslengde")]
         public virtual string Generasjonslengde
         {
             get
@@ -2303,7 +2307,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CVurdertpopulasjonsstørrelseMin in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseMin")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CVurdertpopulasjonsstørrelseMin")]
         public virtual int CVurdertpopulasjonsstørrelseMin
         {
             get
@@ -2325,7 +2329,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CVurdertpopulasjonsstørrelseMax in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cVurdertpopulasjonsstørrelseMax")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CVurdertpopulasjonsstørrelseMax")]
         public virtual int CVurdertpopulasjonsstørrelseMax
         {
             get
@@ -2347,7 +2351,7 @@ namespace Artsdatabanken
         /// There are no comments for Property CDirekteFastsattEtterSkjønn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cDirekteFastsattEtterSkjønn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("CDirekteFastsattEtterSkjønn")]
         public virtual int CDirekteFastsattEtterSkjønn
         {
             get
@@ -2369,7 +2373,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B1UtbredelsesområdeProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b1UtbredelsesområdeProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B1UtbredelsesområdeProdukt")]
         public virtual string B1UtbredelsesområdeProdukt
         {
             get
@@ -2391,7 +2395,7 @@ namespace Artsdatabanken
         /// There are no comments for Property B2ForekomstarealProdukt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("b2ForekomstarealProdukt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("B2ForekomstarealProdukt")]
         public virtual string B2ForekomstarealProdukt
         {
             get
@@ -2413,7 +2417,7 @@ namespace Artsdatabanken
         /// There are no comments for Property GlobalRødliste2006 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("globalRødliste2006")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("GlobalRødliste2006")]
         public virtual string GlobalRødliste2006
         {
             get
@@ -2435,7 +2439,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ArtsgruppeID in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("artsgruppeID")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ArtsgruppeID")]
         public virtual int ArtsgruppeID
         {
             get
@@ -2457,7 +2461,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Author in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("author")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Author")]
         public virtual string Author
         {
             get
@@ -2479,7 +2483,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Illustrasjon in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("illustrasjon")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Illustrasjon")]
         public virtual byte[] Illustrasjon
         {
             get
@@ -2501,7 +2505,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A1 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a1")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A1")]
         public virtual string A1
         {
             get
@@ -2523,7 +2527,7 @@ namespace Artsdatabanken
         /// There are no comments for Property A2 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("a2")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("A2")]
         public virtual string A2
         {
             get
@@ -2545,7 +2549,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Fredet in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("fredet")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Fredet")]
         public virtual string Fredet
         {
             get
@@ -2567,7 +2571,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Bern1 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bern1")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Bern1")]
         public virtual string Bern1
         {
             get
@@ -2589,7 +2593,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Bern2 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bern2")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Bern2")]
         public virtual string Bern2
         {
             get
@@ -2611,7 +2615,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Bern3 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bern3")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Bern3")]
         public virtual string Bern3
         {
             get
@@ -2633,7 +2637,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Bonn1 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bonn1")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Bonn1")]
         public virtual string Bonn1
         {
             get
@@ -2655,7 +2659,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Bonn2 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("bonn2")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Bonn2")]
         public virtual string Bonn2
         {
             get
@@ -2677,7 +2681,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Cites1 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cites1")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Cites1")]
         public virtual string Cites1
         {
             get
@@ -2699,7 +2703,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Cites2 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("cites2")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Cites2")]
         public virtual string Cites2
         {
             get
@@ -2721,7 +2725,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Habitatkoder in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("habitatkoder")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Habitatkoder")]
         public virtual string Habitatkoder
         {
             get
@@ -2743,7 +2747,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Substratkoder in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("substratkoder")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Substratkoder")]
         public virtual string Substratkoder
         {
             get
@@ -2765,7 +2769,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Påvirkningsfaktorkoder in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("påvirkningsfaktorkoder")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorkoder")]
         public virtual string Påvirkningsfaktorkoder
         {
             get
@@ -2787,7 +2791,7 @@ namespace Artsdatabanken
         /// There are no comments for Property C1 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("c1")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("C1")]
         public virtual string C1
         {
             get
@@ -2809,7 +2813,7 @@ namespace Artsdatabanken
         /// There are no comments for Property MaxAndelAvEuropeiskBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("maxAndelAvEuropeiskBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("MaxAndelAvEuropeiskBestand")]
         public virtual string MaxAndelAvEuropeiskBestand
         {
             get
@@ -2831,7 +2835,7 @@ namespace Artsdatabanken
         /// There are no comments for Property MaxAndelAvGlobalBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("maxAndelAvGlobalBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("MaxAndelAvGlobalBestand")]
         public virtual string MaxAndelAvGlobalBestand
         {
             get
@@ -2853,7 +2857,7 @@ namespace Artsdatabanken
         /// There are no comments for Property AndelNåværenedBestand in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("andelNåværenedBestand")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("AndelNåværenedBestand")]
         public virtual string AndelNåværenedBestand
         {
             get
@@ -2875,7 +2879,7 @@ namespace Artsdatabanken
         /// There are no comments for Property UnderartKode in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("underartKode")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("UnderartKode")]
         public virtual string UnderartKode
         {
             get
@@ -2897,7 +2901,7 @@ namespace Artsdatabanken
         /// There are no comments for Property LC_NA_NE_Forklaring in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("lC_NA_NE_Forklaring")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("LC_NA_NE_Forklaring")]
         public virtual string LC_NA_NE_Forklaring
         {
             get
@@ -2919,7 +2923,7 @@ namespace Artsdatabanken
         /// There are no comments for Property HabitatForklaring in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("habitatForklaring")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("HabitatForklaring")]
         public virtual global::System.Collections.ObjectModel.Collection<string> HabitatForklaring
         {
             get
@@ -2941,7 +2945,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Forfattere in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("forfattere")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Forfattere")]
         public virtual global::System.Collections.ObjectModel.Collection<string> Forfattere
         {
             get
@@ -2963,7 +2967,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("referanser")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Referanser")]
         public virtual global::System.Collections.ObjectModel.Collection<string> Referanser
         {
             get
@@ -2985,7 +2989,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Påvirkningsfaktorer in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("påvirkningsfaktorer")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorer")]
         public virtual global::System.Collections.ObjectModel.Collection<string> Påvirkningsfaktorer
         {
             get
@@ -3007,7 +3011,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ArtsGruppeBildeUrl in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("artsGruppeBildeUrl")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ArtsGruppeBildeUrl")]
         public virtual string ArtsGruppeBildeUrl
         {
             get
@@ -3029,7 +3033,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OriginalUrl in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("originalUrl")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OriginalUrl")]
         public virtual string OriginalUrl
         {
             get
@@ -3058,7 +3062,7 @@ namespace Artsdatabanken
         /// There are no comments for Property OverordnetTittel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("overordnetTittel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OverordnetTittel")]
         public virtual string OverordnetTittel
         {
             get
@@ -3080,7 +3084,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Beskrivelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("beskrivelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Beskrivelse")]
         public virtual string Beskrivelse
         {
             get
@@ -3102,7 +3106,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Tidspunkt in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("tidspunkt")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Tidspunkt")]
         public virtual string Tidspunkt
         {
             get
@@ -3124,7 +3128,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Omfang in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("omfang")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Omfang")]
         public virtual string Omfang
         {
             get
@@ -3146,7 +3150,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Alvorlighetsgrad in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("alvorlighetsgrad")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Alvorlighetsgrad")]
         public virtual string Alvorlighetsgrad
         {
             get
@@ -3168,7 +3172,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Tittel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("tittel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Tittel")]
         public virtual string Tittel
         {
             get
@@ -3190,7 +3194,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ØversteTittel in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("øversteTittel")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ØversteTittel")]
         public virtual string ØversteTittel
         {
             get
@@ -3212,7 +3216,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Forkortelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("forkortelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Forkortelse")]
         public virtual string Forkortelse
         {
             get
@@ -3262,7 +3266,7 @@ namespace Artsdatabanken
     /// <KeyProperties>
     /// ReferenceId
     /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("referenceId")]
+    [global::Microsoft.OData.Client.Key("ReferenceId")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("Reference")]
     public partial class Reference : global::Microsoft.OData.Client.BaseEntityType
     {
@@ -3281,7 +3285,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Type in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("type")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Type")]
         public virtual string Type
         {
             get
@@ -3303,7 +3307,7 @@ namespace Artsdatabanken
         /// There are no comments for Property ReferenceId in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("referenceId")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ReferenceId")]
         public virtual global::System.Guid ReferenceId
         {
             get
@@ -3325,7 +3329,7 @@ namespace Artsdatabanken
         /// There are no comments for Property FormattedReference in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("formattedReference")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("FormattedReference")]
         public virtual string FormattedReference
         {
             get
@@ -3365,7 +3369,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Fylke in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("fylke")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Fylke")]
         public virtual string Fylke
         {
             get
@@ -3387,7 +3391,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Sikker in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("sikker")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Sikker")]
         public virtual bool Sikker
         {
             get
@@ -3416,7 +3420,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Navn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("navn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Navn")]
         public virtual string Navn
         {
             get
@@ -3438,7 +3442,7 @@ namespace Artsdatabanken
         /// There are no comments for Property NavnR2010 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("navnR2010")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("NavnR2010")]
         public virtual string NavnR2010
         {
             get
@@ -3460,7 +3464,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Forkortelse in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("forkortelse")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Forkortelse")]
         public virtual string Forkortelse
         {
             get
@@ -3482,7 +3486,7 @@ namespace Artsdatabanken
         /// There are no comments for Property Kortnavn in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("kortnavn")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Kortnavn")]
         public virtual string Kortnavn
         {
             get
@@ -3504,7 +3508,7 @@ namespace Artsdatabanken
         /// There are no comments for Property HovedøkosystemKLD in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("hovedøkosystemKLD")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("HovedøkosystemKLD")]
         public virtual string HovedøkosystemKLD
         {
             get
@@ -3542,12 +3546,15 @@ namespace Artsdatabanken
         /// </summary>
         /// <param name="_source">source entity set</param>
         /// <param name="latinsknavnId">The value of latinsknavnId</param>
+        /// <param name="vurderingsContext">The value of vurderingsContext</param>
         public static global::Artsdatabanken.Rodliste2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.Rodliste2015> _source,
-            int latinsknavnId)
+            int latinsknavnId, 
+            string vurderingsContext)
         {
             global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
             {
-                { "latinsknavnId", latinsknavnId }
+                { "LatinsknavnId", latinsknavnId }, 
+                { "VurderingsContext", vurderingsContext }
             };
             return new global::Artsdatabanken.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
@@ -3570,7 +3577,7 @@ namespace Artsdatabanken
         {
             global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
             {
-                { "artsID", artsID }
+                { "ArtsID", artsID }
             };
             return new global::Artsdatabanken.Redlist2006AssessmentSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
@@ -3593,7 +3600,7 @@ namespace Artsdatabanken
         {
             global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
             {
-                { "referenceId", referenceId }
+                { "ReferenceId", referenceId }
             };
             return new global::Artsdatabanken.ReferenceSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }

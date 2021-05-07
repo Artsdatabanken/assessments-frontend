@@ -32,7 +32,7 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [Route("[controller]/{id:required}")]
-        public async Task<IActionResult> Detail(string id, int year)
+        public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Assessments.Frontend.Web.Controllers
                 {
                     case 2015:
 
-                        var rodliste2015 = await _assessmentApi.Redlist2015.ByKey(Convert.ToInt32(id)).GetValueAsync();
+                        var rodliste2015 = await _assessmentApi.Redlist2015.ByKey(Convert.ToInt32(id), vurderingscontext).GetValueAsync();
 
                         return View("Detail2015", rodliste2015);
                     

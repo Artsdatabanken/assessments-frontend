@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Artsdatabanken;
@@ -21,14 +22,20 @@ namespace Assessments.Frontend.Web.Controllers
             _assessmentApi = assessmentApi;
         }
 
-        public IActionResult Index(int? page)
+        public IActionResult Index(int? page, string name)
         {
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
+            IQueryable<Rodliste2015> query = _assessmentApi.Redlist2015;
+
+            if (!string.IsNullOrEmpty(name))
+                query = query.Where(x => x.VurdertVitenskapeligNavn.ToLower().Contains(name.Trim().ToLower()));
+
             var viewModel = new TestViewModel
             {
-                Redlist2015Results = _assessmentApi.Redlist2015.ToPagedList(pageNumber, pageSize),
+                Redlist2015Results = query.ToPagedList(pageNumber, pageSize),
+                Name = name
             };
 
             return View(viewModel);

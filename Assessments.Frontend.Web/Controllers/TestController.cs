@@ -1,14 +1,15 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using System.Threading.Tasks;
 using Artsdatabanken;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
 using Microsoft.Extensions.Logging;
+using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
 {
+    [Route("[controller]")]
     public class TestController : Controller
     {
         private readonly AssessmentApiService _assessmentApi;
@@ -20,18 +21,20 @@ namespace Assessments.Frontend.Web.Controllers
             _assessmentApi = assessmentApi;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? page)
         {
+            const int pageSize = 25;
+            var pageNumber = page ?? 1;
+
             var viewModel = new TestViewModel
             {
-                Redlist2015Results = _assessmentApi.Redlist2015.Take(10).ToList(),
-                Redlist2006Results = _assessmentApi.Redlist2006.Take(10).ToList()
+                Redlist2015Results = _assessmentApi.Redlist2015.ToPagedList(pageNumber, pageSize),
             };
 
             return View(viewModel);
         }
 
-        [Route("[controller]/{id:required}")]
+        [Route("{id:required}")]
         public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
         {
             try
@@ -60,7 +63,7 @@ namespace Assessments.Frontend.Web.Controllers
             return BadRequest();
         }
 
-        [Route("[controller]/httpclient")]
+        [Route("httpclient")]
         public IActionResult HttpClient()
         {
             return View();

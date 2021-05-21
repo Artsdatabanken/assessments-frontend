@@ -1,53 +1,52 @@
 ﻿@model Assessments.Frontend.Web.Models.TestViewModel
 
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common
+
 @{
     ViewBag.Title = "Assessments api client test";
 }
 
-<h3>
-    @Model.Redlist2015Results.Count redlist 2015 items
-</h3>
+<div class="col-md-12">
 
-<table>
-    <thead>
-        <tr>
-            <td>LatinsknavnId</td>
-            <td>VurdertVitenskapeligNavn</td>
-            <td>Kategori</td>
-        </tr>
-    </thead>
-    @foreach (var item in Model.Redlist2015Results)
+    <div class="row">
+
+        <h3>
+            Rødliste 2015
+            <small class="text-muted">viser @Model.Redlist2015Results.Count av @Model.Redlist2015Results.TotalItemCount på side @(Model.Redlist2015Results.PageCount < Model.Redlist2015Results.PageNumber ? 0 : Model.Redlist2015Results.PageNumber) av @Model.Redlist2015Results.PageCount</small>
+        </h3>
+
+        <table class="table table-striped table-hover">
+           
+            <thead>
+                <tr>
+                    <td>LatinsknavnId</td>
+                    <td>VurdertVitenskapeligNavn</td>
+                    <td>Kategori</td>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model.Redlist2015Results)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Detail" asp-route-id="@item.LatinsknavnId" asp-route-vurderingscontext="@item.VurderingsContext" asp-route-year="2015">
+                            @item.LatinsknavnId
+                        </a>
+                    </td>
+                    <td>@item.VurdertVitenskapeligNavn</td>
+                    <td>@item.Kategori</td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+    @Html.PagedListPager(Model.Redlist2015Results, page => Url.Action("Index", new { page }), new PagedListRenderOptions
     {
-        <tr>
-            <td><a asp-action="Detail" asp-route-id="@item.LatinsknavnId" asp-route-vurderingscontext="@item.VurderingsContext" asp-route-year="2015">
-                @item.LatinsknavnId
-            </a></td>
-            <td>@item.VurdertVitenskapeligNavn</td>
-            <td>@item.Kategori</td>
-        </tr>
-    }
-</table>
+        PageClasses = new[] { "page-link" }, UlElementClasses = new[] { "pagination" }, LiElementClasses = new[] { "page-item" }
 
-<h3>
-    @Model.Redlist2006Results.Count redlist 2006 items
-</h3>
+    })
 
-<table>
-    <thead>
-        <tr>
-            <td>ArtsID</td>
-            <td>LatinskArtsnavn</td>
-            <td>Kategori</td>
-        </tr>
-    </thead>
-    @foreach (var item in Model.Redlist2006Results)
-    {
-        <tr>
-            <td><a asp-action="Detail" asp-route-id="@item.ArtsID" asp-route-year="2006">
-                @item.ArtsID
-            </a></td>
-            <td>@item.LatinskArtsnavn</td>
-            <td>@item.Kategori</td>
-        </tr>
-    }
-</table>
+</div>

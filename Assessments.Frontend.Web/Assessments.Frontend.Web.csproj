@@ -12,11 +12,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.5" />
-		<PackageReference Include="Microsoft.OData.Client" Version="7.8.3" />
-		<PackageReference Include="Microsoft.OData.Core" Version="7.8.3" />
-		<PackageReference Include="Microsoft.OData.Edm" Version="7.8.3" />
-		<PackageReference Include="Microsoft.Spatial" Version="7.8.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.6" />
+		<PackageReference Include="Microsoft.OData.Client" Version="7.9.0" />
+		<PackageReference Include="Microsoft.OData.Core" Version="7.9.0" />
+		<PackageReference Include="Microsoft.OData.Edm" Version="7.9.0" />
+		<PackageReference Include="Microsoft.Spatial" Version="7.9.0" />
 		<PackageReference Include="System.Text.Json" Version="5.0.2" />
 	</ItemGroup>
 

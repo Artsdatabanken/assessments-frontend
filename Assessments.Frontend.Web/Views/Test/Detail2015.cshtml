@@ -3,8 +3,57 @@
     ViewBag.Title = Model.LatinsknavnId;
 }
 
-<h3>@ViewBag.Title</h3>
+<div class="breadcrumbs">
+    <ul>
+        <li class="lead in-breadcrumb">
+            <a href="/">
+                Rødlista
+            </a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb">
+            <a href="/test">2015</a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb currentcrumb">
+            @Model.VurdertVitenskapeligNavn
+        </li>
+    </ul>
+</div>
 
-<p>
-    @Model.VurdertVitenskapeligNavn
-</p>
+
+<div class="sidebarmenu"></div>
+
+<div class="content-placer">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+        </h1>
+    </div>
+    <div class="mid">
+        <div class="ingress">
+            <p>
+                @Model.VurdertVitenskapeligNavn
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Underoverskrift</h2>
+            <p>
+                <a href="/test">LINK TIL TESTSIDEN</a>
+            </p>
+        </div>
+
+    </div>
+    <div class="sidebar">
+        <div class="section">
+            <h2>
+                Faktaboks
+            </h2>
+            <p>
+                Boksinnhold
+            </p>
+        </div>
+
+    </div>
+</div>

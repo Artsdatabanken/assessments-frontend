@@ -1,7 +1,63 @@
 ﻿@{
-    ViewBag.Title = "Home";
+    ViewBag.Title = "Rødlista 2021";
 }
 
-<h3>
-    @ViewBag.Title
-</h3>
+
+<header class="header">
+    <div class="width-adjuster">
+        <a href="https://artsdatabanken.no" class="header-logo">
+            <img alt="Artsdatabanken" src="https://artsdatabanken.no/Files/20973" class="normal">
+            <img alt="Artsdatabanken" src="https://artsdatabanken.no/Files/20978" class="mobile">
+        </a>
+        <button id="navbar-mobile" class='material-icons'>menu</button>
+        <nav id="headermenu" class="hide"></nav>
+    </div>
+</header>
+
+
+<div class="main">
+    <div class="main-content width-adjuster">
+        <div class="sidebarmenu"></div>
+
+        <div class="content-placer">
+            <div class="page-header">
+                <h1>
+                    @ViewBag.Title
+                </h1>
+            </div>
+            <div class="mid">
+                <div id="nodata">
+                    <h2>
+                        Oversikt
+                    </h2>
+                </div>
+                <div class="ingress">
+                    <p>
+                        Her kan man putte litt ingress om rødlista.
+                    </p>
+                </div>
+
+                <div class="section">
+                    <h2>Underoverskrift</h2>
+                    <p>
+                        Sample text
+                    </p>
+                </div>             
+
+            </div>
+            <div class="sidebar">
+                <div class="section">
+                    <h2>
+                        Faktaboks
+                    </h2>
+                    <p>
+                        Boksinnhold
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+</footer>

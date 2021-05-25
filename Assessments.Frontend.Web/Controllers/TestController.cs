@@ -24,8 +24,8 @@ namespace Assessments.Frontend.Web.Controllers
         {
             var viewModel = new TestViewModel
             {
-                Redlist2015Results = _assessmentApi.Redlist2015.Take(10).ToList(),
-                Redlist2006Results = _assessmentApi.Redlist2006.Take(10).ToList()
+                Redlist2015Results = _assessmentApi.Redlist2015.Take(100).ToList(),
+                Redlist2006Results = _assessmentApi.Redlist2006.Take(100).ToList()
             };
 
             return View(viewModel);

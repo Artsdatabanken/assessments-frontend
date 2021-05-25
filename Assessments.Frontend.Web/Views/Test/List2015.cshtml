@@ -1,0 +1,66 @@
+﻿@model Assessments.Frontend.Web.Models.RL2015ViewModel
+
+@{
+    ViewBag.Title = "2015";
+}
+<div class="breadcrumbs">
+    <ul>
+        <li class="lead in-breadcrumb">
+            <a href="/">
+                Rødlista
+            </a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb currentcrumb">
+            @ViewBag.Title
+        </li>
+    </ul>
+</div>
+
+<div class="sidebarmenu"></div>
+
+<div class="content-placer">
+    <div class="page-header">
+        <h1>
+            Norsk Rødliste for arter 2015
+        </h1>
+        <h2>@ViewBag.Title</h2>
+        <span class="byline">
+            Publisert 01.10.2015 12:33 Sist endret 23.03.2020 13:58
+        </span>
+    </div>
+
+    <div class="mid">
+        <div class="ingress">
+            <p>
+                Norsk rødliste for arter 2015 er en oversikt over arter som har risiko for å dø ut fra Norge. Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
+            </p>
+        </div>
+
+        <h3>
+            @Model.Redlist2015Results.Count redlist 2015 items
+        </h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>LatinsknavnId</td>
+                    <td>VurdertVitenskapeligNavn</td>
+                    <td>Kategori</td>
+                </tr>
+            </thead>
+            @foreach (var item in Model.Redlist2015Results)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Detail" asp-route-id="@item.LatinsknavnId" asp-route-vurderingscontext="@item.VurderingsContext" asp-route-year="2015">
+                            @item.LatinsknavnId
+                        </a>
+                    </td>
+                    <td>@item.VurdertVitenskapeligNavn</td>
+                    <td>@item.Kategori</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

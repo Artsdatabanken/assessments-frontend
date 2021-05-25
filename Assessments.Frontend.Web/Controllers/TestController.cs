@@ -24,11 +24,32 @@ namespace Assessments.Frontend.Web.Controllers
         {
             var viewModel = new TestViewModel
             {
-                Redlist2015Results = _assessmentApi.Redlist2015.Take(100).ToList(),
-                Redlist2006Results = _assessmentApi.Redlist2006.Take(100).ToList()
+                
             };
 
             return View(viewModel);
+        }
+
+        [Route("[controller]/2015")]
+        public IActionResult Index2015()
+        {
+            var viewModel = new RL2015ViewModel
+            {
+                Redlist2015Results = _assessmentApi.Redlist2015.Take(100).ToList()
+            };
+
+            return View("List2015", viewModel);
+        }
+
+        [Route("[controller]/2006")]
+        public IActionResult Index2006()
+        {
+            var viewModel = new RL2006ViewModel
+            {
+                Redlist2006Results = _assessmentApi.Redlist2006.Take(100).ToList()
+            };
+
+            return View("List2006", viewModel);
         }
 
         [Route("[controller]/{id:required}")]
@@ -42,13 +63,13 @@ namespace Assessments.Frontend.Web.Controllers
 
                         var rodliste2015 = await _assessmentApi.Redlist2015.ByKey(Convert.ToInt32(id), vurderingscontext).GetValueAsync();
 
-                        return View("Detail2015", rodliste2015);
+                        return View("SpeciesAssessment2015", rodliste2015);
                     
                     case 2006:
                         
                         var redlist2006Assessment = await _assessmentApi.Redlist2006.ByKey(id).GetValueAsync();
 
-                        return View("Detail2006", redlist2006Assessment);
+                        return View("SpeciesAssessment2006", redlist2006Assessment);
                 }
             }
             catch (Exception ex)

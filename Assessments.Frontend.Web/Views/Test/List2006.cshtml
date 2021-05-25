@@ -1,0 +1,56 @@
+﻿@model Assessments.Frontend.Web.Models.RL2006ViewModel
+
+@{
+    ViewBag.Title = "Assessments api client test";
+}
+<div class="breadcrumbs">
+    <ul>
+        <li class="lead in-breadcrumb">
+            <a href="/">
+                Rødlista
+            </a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb currentcrumb">
+            2006
+        </li>
+    </ul>
+</div>
+
+<div class="sidebarmenu"></div>
+
+<div class="content-placer">
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+        </h1>
+    </div>
+    <div class="mid">
+
+        <h3>
+            @Model.Redlist2006Results.Count redlist 2006 items
+        </h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <td>ArtsID</td>
+                    <td>LatinskArtsnavn</td>
+                    <td>Kategori</td>
+                </tr>
+            </thead>
+            @foreach (var item in Model.Redlist2006Results)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Detail" asp-route-id="@item.ArtsID" asp-route-year="2006">
+                            @item.ArtsID
+                        </a>
+                    </td>
+                    <td>@item.LatinskArtsnavn</td>
+                    <td>@item.Kategori</td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

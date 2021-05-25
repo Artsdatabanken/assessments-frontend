@@ -22,60 +22,14 @@
 <div class="content-placer">
     <div class="page-header">
         <h1>
-            @ViewBag.Title
+            Velg år
         </h1>
     </div>
     <div class="mid">
-        <h3>
-            @Model.Redlist2015Results.Count redlist 2015 items
-        </h3>
+        <p>
+            <a href="/test/2006">2006</a>
+            <a href="/test/2015">2015</a>
+        </p>
 
-        <table>
-            <thead>
-                <tr>
-                    <td>LatinsknavnId</td>
-                    <td>VurdertVitenskapeligNavn</td>
-                    <td>Kategori</td>
-                </tr>
-            </thead>
-            @foreach (var item in Model.Redlist2015Results)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Detail" asp-route-id="@item.LatinsknavnId" asp-route-vurderingscontext="@item.VurderingsContext" asp-route-year="2015">
-                            @item.LatinsknavnId
-                        </a>
-                    </td>
-                    <td>@item.VurdertVitenskapeligNavn</td>
-                    <td>@item.Kategori</td>
-                </tr>
-            }
-        </table>
-
-        <h3>
-            @Model.Redlist2006Results.Count redlist 2006 items
-        </h3>
-
-        <table>
-            <thead>
-                <tr>
-                    <td>ArtsID</td>
-                    <td>LatinskArtsnavn</td>
-                    <td>Kategori</td>
-                </tr>
-            </thead>
-            @foreach (var item in Model.Redlist2006Results)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Detail" asp-route-id="@item.ArtsID" asp-route-year="2006">
-                            @item.ArtsID
-                        </a>
-                    </td>
-                    <td>@item.LatinskArtsnavn</td>
-                    <td>@item.Kategori</td>
-                </tr>
-            }
-        </table>
     </div>
 </div>

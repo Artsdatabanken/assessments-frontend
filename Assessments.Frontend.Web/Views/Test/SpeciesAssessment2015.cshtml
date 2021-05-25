@@ -1,0 +1,57 @@
+﻿@model Artsdatabanken.Rodliste2015
+@{
+    ViewBag.Title = Model.VurdertVitenskapeligNavn;
+}
+
+<div class="breadcrumbs">
+    <ul>
+        <li class="lead in-breadcrumb">
+            <a href="/">
+                Rødlista
+            </a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb">
+            <a href="/test/2015">2015</a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb currentcrumb">
+            @Model.VurdertVitenskapeligNavn
+        </li>
+    </ul>
+</div>
+
+<div class="content-placer">
+    <div class="page-header">
+        <h1>
+            Norsk Rødliste for arter 2015
+        </h1>
+        <h2>@ViewBag.Title</h2>
+        <span class="byline">
+            Publisert 01.10.2015 12:33 Sist endret 23.03.2020 13:58
+        </span>
+    </div>
+
+    <div class="mid">
+        <div class="ingress">
+            <p>
+                Norsk rødliste for arter 2015 er en oversikt over arter som har risiko for å dø ut fra Norge. Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Vurderingsinnhold</h2>
+            <p>
+            <p>
+                Latinsknavn: @Model.VurdertVitenskapeligNavn (id:  @Model.LatinsknavnId) <br />
+                Vurderingscontext: @Model.VurderingsContext <br />
+                Vurderingsår: @Model.Vurderingsår <br />
+                VurderingsId2010: @Model.VurderingsId2010 <br />
+                TroligUtdodd: @Model.TroligUtdodd <br />
+                IUCNVurdert: @Model.IUCNVurdert<br />
+                TilførselFraNaboland: @Model.TilførselFraNaboland <br />
+            </p>
+            </p>
+        </div>
+    </div>
+</div>

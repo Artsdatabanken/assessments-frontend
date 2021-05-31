@@ -1,6 +1,144 @@
 <edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
   <edmx:DataServices>
     <Schema Namespace="Artsdatabanken" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityType Name="RL2021">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.Int32" Nullable="false" />
+        <Property Name="LastUpdatedOn" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="LastUpdatedBy" Type="Edm.String" />
+        <Property Name="LatinsknavnId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Vurderingsår" Type="Edm.Int32" Nullable="false" />
+        <Property Name="VurdertVitenskapeligNavn" Type="Edm.String" />
+        <Property Name="VurdertVitenskapeligNavnAutor" Type="Edm.String" />
+        <Property Name="VurdertVitenskapeligNavnHierarki" Type="Edm.String" />
+        <Property Name="VurdertVitenskapeligNavnId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="TaxonId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="TaxonRank" Type="Edm.String" />
+        <Property Name="Ekspertgruppe" Type="Edm.String" />
+        <Property Name="VurderingsContext" Type="Edm.String" />
+        <Property Name="UtdoddINorgeRE" Type="Edm.String" />
+        <Property Name="BegrensetForekomstNA" Type="Edm.String" />
+        <Property Name="KunnskapsStatusNE" Type="Edm.String" />
+        <Property Name="RodlisteVurdertArt" Type="Edm.String" />
+        <Property Name="TroligUtdodd" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="ArtenVurderesIkkeBegrunnelse" Type="Edm.String" />
+        <Property Name="Generasjonslengde" Type="Edm.String" />
+        <Property Name="BERN" Type="Edm.String" />
+        <Property Name="BONN" Type="Edm.String" />
+        <Property Name="CITES" Type="Edm.String" />
+        <Property Name="StatusIHenholdTilNaturvernloven" Type="Edm.String" />
+        <Property Name="StatusIHenholdTilNaturmangfoldloven" Type="Edm.String" />
+        <Property Name="MaxAndelAvEuropeiskBestand" Type="Edm.String" />
+        <Property Name="MaxAndelAvGlobalBestand" Type="Edm.String" />
+        <Property Name="AndelNåværendeBestand" Type="Edm.String" />
+        <Property Name="IUCNVurdert" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="A1OpphørtOgReversibel" Type="Edm.String" />
+        <Property Name="A1OpphørtOgReversibelAntatt" Type="Artsdatabanken.RL2021MinMaxProbable" />
+        <Property Name="A1EndringBasertpåKode" Type="Collection(Edm.String)" />
+        <Property Name="A2Forutgående10År" Type="Edm.String" />
+        <Property Name="A2Forutgående10ÅrAntatt" Type="Artsdatabanken.RL2021MinMaxProbable" />
+        <Property Name="A2EndringBasertpåKode" Type="Collection(Edm.String)" />
+        <Property Name="A3Kommende10År" Type="Edm.String" />
+        <Property Name="A3Kommende10ÅrAntatt" Type="Artsdatabanken.RL2021MinMaxProbable" />
+        <Property Name="A3EndringBasertpåKode" Type="Collection(Edm.String)" />
+        <Property Name="A4Intervall10År" Type="Edm.String" />
+        <Property Name="A4Intervall10ÅrAntatt" Type="Artsdatabanken.RL2021MinMaxProbable" />
+        <Property Name="A4EndringBasertpåKode" Type="Collection(Edm.String)" />
+        <Property Name="B1UtbredelsesområdeKjentAndel" Type="Edm.String" />
+        <Property Name="B1UtbredelsesområdeMørketall" Type="Edm.String" />
+        <Property Name="B1UtbredelsesområdeProdukt" Type="Edm.String" />
+        <Property Name="B1IntervallUtbredelsesområde" Type="Artsdatabanken.RL2021MinMaxProbableIntervall" />
+        <Property Name="UtbredelsesområdePunktestimat" Type="Edm.String" />
+        <Property Name="ForekomstarealPunktestimat" Type="Edm.String" />
+        <Property Name="AntallLokaliteterPunktestimat" Type="Edm.String" />
+        <Property Name="B2IntervallForekomstareal" Type="Artsdatabanken.RL2021MinMaxProbableIntervall" />
+        <Property Name="BA2FåLokaliteterProdukt" Type="Edm.String" />
+        <Property Name="B1BeregnetAreal" Type="Edm.String" />
+        <Property Name="B2BeregnetAreal" Type="Edm.String" />
+        <Property Name="B1UtbredelsesområdeKode" Type="Edm.String" />
+        <Property Name="B2ForekomstarealKjentAndel" Type="Edm.String" />
+        <Property Name="B2ForekomstarealMørketall" Type="Edm.String" />
+        <Property Name="B2ForekomstarealProdukt" Type="Edm.String" />
+        <Property Name="B2ForekomstarealKode" Type="Edm.String" />
+        <Property Name="BA1KraftigFragmenteringKode" Type="Edm.String" />
+        <Property Name="BA2FåLokaliteterKode" Type="Edm.String" />
+        <Property Name="BaIntervallAntallLokaliteter" Type="Artsdatabanken.RL2021MinMaxProbableIntervall" />
+        <Property Name="BBPågåendeArealreduksjonKode" Type="Collection(Edm.String)" />
+        <Property Name="BCEksterneFluktuasjonerKode" Type="Collection(Edm.String)" />
+        <Property Name="CReproductionDefinitionType" Type="Edm.String" />
+        <Property Name="CPopulasjonsstørrelse" Type="Edm.String" />
+        <Property Name="CReproductionDefinitionTemplateScale" Type="Edm.String" />
+        <Property Name="CReproductionDefinitionTemplate" Type="Edm.String" />
+        <Property Name="CReproductionDefinitionPerTree" Type="Edm.String" />
+        <Property Name="CReproductionDefinitionPerLocation" Type="Edm.String" />
+        <Property Name="CNumberOfLocations" Type="Edm.String" />
+        <Property Name="CSubstratenheter" Type="Edm.String" />
+        <Property Name="CAntallRameter" Type="Edm.String" />
+        <Property Name="CAntallGeneter" Type="Edm.String" />
+        <Property Name="CKjentPopulasjonsstørrelse" Type="Edm.String" />
+        <Property Name="CKjentPopulasjonsstørrelseMørketall" Type="Edm.String" />
+        <Property Name="CKjentPopulasjonsstørrelseProdukt" Type="Edm.String" />
+        <Property Name="CVurdertpopulasjonsstørrelseProdukt" Type="Edm.String" />
+        <Property Name="CDirekteFastsattEtterSkjønn" Type="Edm.String" />
+        <Property Name="CPopulasjonsstørrelseAntatt" Type="Artsdatabanken.RL2021MinMaxProbableIntervall" />
+        <Property Name="PopulasjonsstørrelsePunktestimat" Type="Edm.String" />
+        <Property Name="CPopulasjonsstørrelseKode" Type="Edm.String" />
+        <Property Name="C1PågåendePopulasjonsreduksjonKode" Type="Edm.String" />
+        <Property Name="C1PågåendePopulasjonsreduksjonAntatt" Type="Artsdatabanken.RL2021MinMaxProbable" />
+        <Property Name="C2A1PågåendePopulasjonsreduksjonKode" Type="Edm.String" />
+        <Property Name="C2A1PågåendePopulasjonsreduksjonAntatt" Type="Artsdatabanken.RL2021MinMaxProbable" />
+        <Property Name="C2A2PågåendePopulasjonsreduksjonKode" Type="Edm.String" />
+        <Property Name="C2A2SannhetsverdiKode" Type="Edm.String" />
+        <Property Name="C2A2ReproduksjonsdyktigeIndivid" Type="Edm.String" />
+        <Property Name="C2BPågåendePopulasjonsreduksjonKode" Type="Edm.String" />
+        <Property Name="D1FåReproduserendeIndividKode" Type="Edm.String" />
+        <Property Name="D2MegetBegrensetForekomstarealKode" Type="Edm.String" />
+        <Property Name="EKvantitativUtryddingsmodellKode" Type="Edm.String" />
+        <Property Name="OverordnetKlassifiseringGruppeKode" Type="Edm.String" />
+        <Property Name="OverordnetKlassifiseringTekst" Type="Edm.String" />
+        <Property Name="OppsummeringAKriterier" Type="Edm.String" />
+        <Property Name="OppsummeringBKriterier" Type="Edm.String" />
+        <Property Name="OppsummeringCKriterier" Type="Edm.String" />
+        <Property Name="OppsummeringDKriterier" Type="Edm.String" />
+        <Property Name="OppsummeringEKriterier" Type="Edm.String" />
+        <Property Name="Kriteriedokumentasjon" Type="Edm.String" />
+        <Property Name="TilførselFraNaboland" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="ÅrsakTilNedgraderingAvKategori" Type="Edm.String" />
+        <Property Name="ÅrsakTilEndringAvKategori" Type="Edm.String" />
+        <Property Name="UtdøingSterktPåvirket" Type="Edm.String" />
+        <Property Name="Kategori" Type="Edm.String" />
+        <Property Name="Kriterier" Type="Edm.String" />
+        <Property Name="HovedKriterier" Type="Collection(Edm.String)" />
+        <Property Name="KategoriFraForrigeListe" Type="Edm.String" />
+        <Property Name="KriterierFraForrigeListe" Type="Edm.String" />
+        <Property Name="KategoriEndretTil" Type="Edm.String" />
+        <Property Name="KategoriEndretFra" Type="Edm.String" />
+        <Property Name="GlobalRødlistestatusKode" Type="Edm.String" />
+        <Property Name="ArtskartAdded" Type="Edm.String" />
+        <Property Name="ArtskartRemoved" Type="Edm.String" />
+        <Property Name="ArtskartManuellKommentar" Type="Edm.String" />
+        <Property Name="ArtskartSistOverført" Type="Edm.String" />
+        <Property Name="ArtskartModel" Type="Artsdatabanken.RL2021ArtskartModel" />
+        <Property Name="Referanser" Type="Collection(Artsdatabanken.RL2021Reference)" />
+        <Property Name="Fylkesforekomster" Type="Collection(Artsdatabanken.Rl2021Fylkesforekomst)" />
+        <Property Name="NaturtypeHovedenhet" Type="Collection(Edm.String)" />
+        <Property Name="LockedForEditAt" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="LockedForEditByUser" Type="Edm.String" />
+        <Property Name="EvaluationStatus" Type="Edm.String" />
+        <Property Name="PopularName" Type="Edm.String" />
+        <Property Name="Kommentarer" Type="Edm.String" />
+        <Property Name="Tilbakemeldinger" Type="Edm.String" />
+        <Property Name="WktPolygon" Type="Edm.String" />
+        <Property Name="ArtskartSelectionGeometry" Type="Edm.String" />
+        <Property Name="SistVurdertAr" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Slettet" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="TaxonomicHistory" Type="Collection(Artsdatabanken.RL2021TaxonHistory)" />
+        <Property Name="ImportInfo" Type="Artsdatabanken.RL2021TrackInfo" />
+        <Property Name="Regioner" Type="Collection(Edm.String)" />
+        <NavigationProperty Name="Påvirkningsfaktorer" Type="Collection(Artsdatabanken.RL2021Pavirkningsfaktor)" />
+      </EntityType>
       <EntityType Name="Rodliste2015">
         <Key>
           <PropertyRef Name="LatinsknavnId" />
@@ -82,10 +220,20 @@
         <Property Name="KriterierFraForrigeListe" Type="Edm.String" />
         <Property Name="KategoriEndretFra" Type="Edm.String" />
         <Property Name="GlobalRødlistestatusKode" Type="Edm.String" />
-        <Property Name="Påvirkningsfaktorer" Type="Collection(Artsdatabanken.Pavirkningsfaktor)" />
-        <Property Name="Fylkesforekomster" Type="Collection(Artsdatabanken.Fylkesforekomst)" />
-        <Property Name="NaturtypeHovedenhet" Type="Collection(Artsdatabanken.Naturtype)" />
-        <NavigationProperty Name="Referanser" Type="Collection(Artsdatabanken.Reference)" />
+        <Property Name="Påvirkningsfaktorer" Type="Collection(Artsdatabanken.Rodliste2015Pavirkningsfaktor)" />
+        <Property Name="Referanser" Type="Collection(Artsdatabanken.Rodliste2015Reference)" />
+        <Property Name="Fylkesforekomster" Type="Collection(Artsdatabanken.Rodliste2015Fylkesforekomst)" />
+        <Property Name="NaturtypeHovedenhet" Type="Collection(Artsdatabanken.Rodliste2015Naturtype)" />
+      </EntityType>
+      <EntityType Name="SpeciesAssessment2015">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.String" Nullable="false" />
+        <Property Name="ScientificNameId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ScientificName" Type="Edm.String" />
+        <Property Name="AssessmentYear" Type="Edm.Int32" Nullable="false" />
+        <Property Name="AssessmentContext" Type="Edm.String" />
       </EntityType>
       <EntityType Name="Redlist2006Assessment">
         <Key>
@@ -136,7 +284,88 @@
         <Property Name="ArtsGruppeBildeUrl" Type="Edm.String" />
         <Property Name="OriginalUrl" Type="Edm.String" />
       </EntityType>
-      <ComplexType Name="Pavirkningsfaktor">
+      <ComplexType Name="RL2021MinMaxProbable">
+        <Property Name="Min" Type="Edm.String" />
+        <Property Name="Probable" Type="Edm.String" />
+        <Property Name="Max" Type="Edm.String" />
+        <Property Name="Quantile" Type="Edm.String" />
+        <Property Name="Calculated" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="RL2021MinMaxProbableIntervall">
+        <Property Name="Min" Type="Edm.String" />
+        <Property Name="Minintervall" Type="Edm.String" />
+        <Property Name="Probable" Type="Edm.String" />
+        <Property Name="Max" Type="Edm.String" />
+        <Property Name="Maxintervall" Type="Edm.String" />
+        <Property Name="Quantile" Type="Edm.String" />
+        <Property Name="Punktestimat" Type="Edm.String" />
+        <Property Name="Calculated" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="RL2021ArtskartModel">
+        <Property Name="ObservationFromYear" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ObservationToYear" Type="Edm.Int32" Nullable="false" />
+        <Property Name="FromMonth" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ToMonth" Type="Edm.Int32" Nullable="false" />
+        <Property Name="IncludeObjects" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IncludeObservations" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IncludeNorge" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="IncludeSvalbard" Type="Edm.Boolean" Nullable="false" />
+        <Property Name="ExcludeGbif" Type="Edm.Boolean" Nullable="false" />
+      </ComplexType>
+      <EntityType Name="RL2021Pavirkningsfaktor">
+        <Key>
+          <PropertyRef Name="Id" />
+        </Key>
+        <Property Name="Id" Type="Edm.String" Nullable="false" />
+        <Property Name="OverordnetTittel" Type="Edm.String" />
+        <Property Name="Beskrivelse" Type="Edm.String" />
+        <Property Name="Tidspunkt" Type="Edm.String" />
+        <Property Name="Omfang" Type="Edm.String" />
+        <Property Name="Alvorlighetsgrad" Type="Edm.String" />
+        <Property Name="Tittel" Type="Edm.String" />
+        <Property Name="ØversteTittel" Type="Edm.String" />
+        <Property Name="Forkortelse" Type="Edm.String" />
+      </EntityType>
+      <ComplexType Name="RL2021Reference">
+        <Property Name="Type" Type="Edm.String" />
+        <Property Name="ReferenceId" Type="Edm.Guid" Nullable="false" />
+        <Property Name="FormattedReference" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="Rl2021Fylkesforekomst">
+        <Property Name="Fylke" Type="Edm.String" />
+        <Property Name="State" Type="Edm.Int32" Nullable="false" />
+      </ComplexType>
+      <ComplexType Name="RL2021TaxonHistory">
+        <Property Name="date" Type="Edm.DateTimeOffset" Nullable="false" />
+        <Property Name="username" Type="Edm.String" />
+        <Property Name="VitenskapeligNavn" Type="Edm.String" />
+        <Property Name="VitenskapeligNavnAutor" Type="Edm.String" />
+        <Property Name="VitenskapeligNavnHierarki" Type="Edm.String" />
+        <Property Name="VitenskapeligNavnId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="TaxonId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="TaxonRank" Type="Edm.String" />
+        <Property Name="Ekspertgruppe" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="RL2021TrackInfo">
+        <Property Name="VurderingsId2015" Type="Edm.String" />
+        <Property Name="OrgVitenskapeligNavnId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="OrgVitenskapeligNavn" Type="Edm.String" />
+        <Property Name="Url2015" Type="Edm.String" />
+        <Property Name="Kategori2015" Type="Edm.String" />
+        <Property Name="Kriterier2015" Type="Edm.String" />
+        <Property Name="ScientificNameId2015" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ScientificName2015" Type="Edm.String" />
+        <Property Name="MultipleUrl2015" Type="Edm.String" />
+        <Property Name="VurderingsId2010" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Url2010" Type="Edm.String" />
+        <Property Name="Kategori2010" Type="Edm.String" />
+        <Property Name="Kriterier2010" Type="Edm.String" />
+        <Property Name="ScientificNameId2010" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ScientificName2010" Type="Edm.String" />
+        <Property Name="MultipleUrl2010" Type="Edm.String" />
+        <Property Name="VurderingsId2015Databank" Type="Edm.String" />
+      </ComplexType>
+      <ComplexType Name="Rodliste2015Pavirkningsfaktor">
         <Property Name="OverordnetTittel" Type="Edm.String" />
         <Property Name="Beskrivelse" Type="Edm.String" />
         <Property Name="Tidspunkt" Type="Edm.String" />
@@ -146,27 +375,31 @@
         <Property Name="ØversteTittel" Type="Edm.String" />
         <Property Name="Forkortelse" Type="Edm.String" />
       </ComplexType>
-      <EntityType Name="Reference">
-        <Key>
-          <PropertyRef Name="ReferenceId" />
-        </Key>
+      <ComplexType Name="Rodliste2015Reference">
         <Property Name="Type" Type="Edm.String" />
         <Property Name="ReferenceId" Type="Edm.Guid" Nullable="false" />
         <Property Name="FormattedReference" Type="Edm.String" />
-      </EntityType>
-      <ComplexType Name="Fylkesforekomst">
+      </ComplexType>
+      <ComplexType Name="Rodliste2015Fylkesforekomst">
         <Property Name="Fylke" Type="Edm.String" />
         <Property Name="Sikker" Type="Edm.Boolean" Nullable="false" />
       </ComplexType>
-      <ComplexType Name="Naturtype">
+      <ComplexType Name="Rodliste2015Naturtype">
         <Property Name="Navn" Type="Edm.String" />
         <Property Name="NavnR2010" Type="Edm.String" />
         <Property Name="Forkortelse" Type="Edm.String" />
         <Property Name="Kortnavn" Type="Edm.String" />
         <Property Name="HovedøkosystemKLD" Type="Edm.String" />
       </ComplexType>
+      <Function Name="Search" IsBound="true">
+        <Parameter Name="bindingParameter" Type="Collection(Artsdatabanken.Rodliste2015)" />
+        <Parameter Name="term" Type="Edm.String" />
+        <ReturnType Type="Collection(Artsdatabanken.Rodliste2015)" />
+      </Function>
       <EntityContainer Name="Assessments">
+        <EntitySet Name="Redlist2021" EntityType="Artsdatabanken.RL2021" />
         <EntitySet Name="Redlist2015" EntityType="Artsdatabanken.Rodliste2015" />
+        <EntitySet Name="SpeciesAssessments2015" EntityType="Artsdatabanken.SpeciesAssessment2015" />
         <EntitySet Name="Redlist2006" EntityType="Artsdatabanken.Redlist2006Assessment" />
       </EntityContainer>
     </Schema>

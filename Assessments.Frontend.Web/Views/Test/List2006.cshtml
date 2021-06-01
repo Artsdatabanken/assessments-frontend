@@ -1,5 +1,6 @@
 ﻿@model Assessments.Frontend.Web.Models.RL2006ViewModel
-
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common
 @{
     ViewBag.Title = "Assessments api client test";
 }
@@ -53,4 +54,13 @@
             }
         </table>
     </div>
+
+
+    @Html.PagedListPager(Model.Redlist2006Results, page => Url.Action("2006", new { page }), new PagedListRenderOptions
+    {
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination" },
+        LiElementClasses = new[] { "page-item" }
+
+    })
 </div>

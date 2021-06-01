@@ -1,14 +1,16 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+//using System.Linq;
 using System.Threading.Tasks;
 using Artsdatabanken;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
 using Microsoft.Extensions.Logging;
+using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
 {
+    [Route("[controller]")]
     public class TestController : Controller
     {
         private readonly AssessmentApiService _assessmentApi;
@@ -30,29 +32,33 @@ namespace Assessments.Frontend.Web.Controllers
             return View(viewModel);
         }
 
-        [Route("[controller]/2015")]
-        public IActionResult Index2015()
+        [Route("2015")]
+        public IActionResult Index2015(int? page)
         {
+            const int pageSize = 25;
+            var pageNumber = page ?? 1;
             var viewModel = new RL2015ViewModel
             {
-                Redlist2015Results = _assessmentApi.Redlist2015.Take(100).ToList()
+                Redlist2015Results = _assessmentApi.Redlist2015.ToPagedList(pageNumber, pageSize),
             };
 
             return View("List2015", viewModel);
         }
 
-        [Route("[controller]/2006")]
-        public IActionResult Index2006()
+        [Route("2006")]
+        public IActionResult Index2006(int? page)
         {
+            const int pageSize = 25;
+            var pageNumber = page ?? 1;
             var viewModel = new RL2006ViewModel
             {
-                Redlist2006Results = _assessmentApi.Redlist2006.Take(100).ToList()
+                Redlist2006Results = _assessmentApi.Redlist2006.ToPagedList(pageNumber, pageSize),
             };
 
             return View("List2006", viewModel);
         }
 
-        [Route("[controller]/{id:required}")]
+        [Route("{id:required}")]
         public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
         {
             try
@@ -81,7 +87,7 @@ namespace Assessments.Frontend.Web.Controllers
             return BadRequest();
         }
 
-        [Route("[controller]/httpclient")]
+        [Route("httpclient")]
         public IActionResult HttpClient()
         {
             return View();

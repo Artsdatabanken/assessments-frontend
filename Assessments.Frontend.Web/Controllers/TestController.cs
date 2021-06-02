@@ -110,11 +110,11 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 switch (year)
                 {
-                    //case 2021:
+                    case 2021:
 
-                      //  var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id), vurderingscontext).GetValueAsync();
+                        var RL2021 = await _assessmentApi.Redlist2015.ByKey(Convert.ToInt32(id), vurderingscontext).GetValueAsync();
 
-                        //return View("SpeciesAssessment2021", RL2021);
+                        return View("SpeciesAssessment2021", RL2021);
 
                     case 2015:
 

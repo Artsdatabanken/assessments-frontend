@@ -1,5 +1,9 @@
 ﻿@model Assessments.Frontend.Web.Models.RL2015ViewModel
 
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common
+@using Assessments.Frontend.Web.Infrastructure
+
 @{
     ViewBag.Title = "2015";
 }
@@ -41,7 +45,14 @@
             @Model.Redlist2015Results.Count redlist 2015 items
         </h3>
 
-        <table>
+        <!-- FILTER FORM -->
+        <form asp-action="2015" method="get">
+            <label asp-for="Name"></label><input asp-for="Name" />
+        </form>
+
+        <!-- Data from model -->
+        <table class="table table-striped table-hover">
+
             <thead>
                 <tr>
                     <td>LatinsknavnId</td>
@@ -49,6 +60,7 @@
                     <td>Kategori</td>
                 </tr>
             </thead>
+
             @foreach (var item in Model.Redlist2015Results)
             {
                 <tr>
@@ -61,7 +73,17 @@
                     <td>@item.Kategori</td>
                 </tr>
             }
+
         </table>
 
     </div>
+
+    <!-- Pageinator buttons -->
+
+    @Html.PagedListPager(Model.Redlist2015Results, page => Url.Action("2015", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
+        {
+            PageClasses = new[] { "page-link" },
+            UlElementClasses = new[] { "pagination" },
+            LiElementClasses = new[] { "page-item" }
+        })
 </div>

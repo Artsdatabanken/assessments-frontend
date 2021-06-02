@@ -9,3 +9,47 @@
     text-decoration: none !important;
     color: grey !important;
 }
+
+/* PAGINATOR */
+
+.pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    font-size: 10pt;
+    list-style: none;
+}
+
+.page-link {
+    padding: .375rem .75rem;
+    position: relative;
+    display: block;
+    color: #4c4a48;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.page-item:not(:first-child) .page-link {
+    margin-left: -1px;
+}
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #4c4a48;
+    border-color: #4c4a48;
+}
+
+.page-link:hover {
+    background-color: gray;
+    border-color: #4c4a48;
+    color:white;
+}
+
+/* Styling table slightly while working with it */
+
+td{
+    padding:10px;
+}

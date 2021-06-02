@@ -1,5 +1,7 @@
 ﻿@model Assessments.Frontend.Web.Models.RL2006ViewModel
-
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common
+@using Assessments.Frontend.Web.Infrastructure
 @{
     ViewBag.Title = "Assessments api client test";
 }
@@ -31,6 +33,12 @@
             @Model.Redlist2006Results.Count redlist 2006 items
         </h3>
 
+        <!-- Filter from -->
+        <form asp-action="2006" method="get">
+            <label asp-for="Name"></label><input asp-for="Name" />
+        </form>
+
+        <!-- Data form model -->
         <table>
             <thead>
                 <tr>
@@ -53,4 +61,12 @@
             }
         </table>
     </div>
+
+    <!-- Pageinator -->
+    @Html.PagedListPager(Model.Redlist2006Results, page => Url.Action("2006", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
+        {
+            PageClasses = new[] { "page-link" },
+            UlElementClasses = new[] { "pagination" },
+            LiElementClasses = new[] { "page-item" }
+        })
 </div>

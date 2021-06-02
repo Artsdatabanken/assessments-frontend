@@ -56,13 +56,25 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [Route("2006")]
-        public IActionResult Index2006(int? page)
+        public IActionResult Index2006(int? page, string name)
         {
+            // Pageination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
+
+            // Filter
+            IQueryable<Redlist2006Assessment> query = _assessmentApi.Redlist2006;
+
+            // TODO: Check if this is the correct field to match
+            if (!string.IsNullOrEmpty(name))
+                query = query.Where(x => x.LatinskArtsnavn.ToLower().Contains(name.Trim().ToLower()));
+
+
             var viewModel = new RL2006ViewModel
             {
-                Redlist2006Results = _assessmentApi.Redlist2006.ToPagedList(pageNumber, pageSize),
+                //Redlist2006Results = _assessmentApi.Redlist2006.ToPagedList(pageNumber, pageSize),
+                Redlist2006Results = query.ToPagedList(pageNumber, pageSize),
+                Name = name
             };
 
             return View("List2006", viewModel);

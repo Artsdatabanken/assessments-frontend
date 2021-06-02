@@ -1,4 +1,7 @@
-﻿using Artsdatabanken;
+﻿
+using System.ComponentModel.DataAnnotations;
+using Artsdatabanken;
+using Microsoft.AspNetCore.Mvc;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
@@ -7,6 +10,12 @@ namespace Assessments.Frontend.Web.Models
     {
         //public List<Redlist2006Assessment> Redlist2006Results { get; set; } = new();
         public IPagedList<Redlist2006Assessment> Redlist2006Results { get; set; }
+
+        // Filter
+        [Display(Name = "Navn"), FromQuery(Name = "name")]
+        public string Name { get; set; }
     }
 
 }
+
+

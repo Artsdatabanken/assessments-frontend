@@ -32,6 +32,29 @@ namespace Assessments.Frontend.Web.Controllers
             return View(viewModel);
         }
 
+        [Route("2021")]
+        public IActionResult Index2021(int? page, string name)
+        {
+            // Pageination
+            const int pageSize = 25;
+            var pageNumber = page ?? 1;
+
+            // Filter
+            IQueryable<RL2021> query = _assessmentApi.Redlist2021;
+            if (!string.IsNullOrEmpty(name))
+                query = query.Where(x => x.VurdertVitenskapeligNavn.ToLower().Contains(name.Trim().ToLower()));
+
+
+            var viewModel = new RL2021ViewModel
+            {
+                //Redlist2015Results = _assessmentApi.Redlist2015.ToPagedList(pageNumber, pageSize),
+                Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
+                Name = name
+            };
+
+            return View("List2021", viewModel);
+        }
+
         [Route("2015")]
         public IActionResult Index2015(int? page, string name)
         {
@@ -87,12 +110,18 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 switch (year)
                 {
+                    //case 2021:
+
+                      //  var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id), vurderingscontext).GetValueAsync();
+
+                        //return View("SpeciesAssessment2021", RL2021);
+
                     case 2015:
 
                         var rodliste2015 = await _assessmentApi.Redlist2015.ByKey(Convert.ToInt32(id), vurderingscontext).GetValueAsync();
 
                         return View("SpeciesAssessment2015", rodliste2015);
-                    
+
                     case 2006:
                         
                         var redlist2006Assessment = await _assessmentApi.Redlist2006.ByKey(id).GetValueAsync();

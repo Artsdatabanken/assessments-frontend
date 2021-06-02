@@ -47,3 +47,9 @@
     border-color: #4c4a48;
     color:white;
 }
+
+/* Styling table slightly while working with it */
+
+td{
+    padding:10px;
+}

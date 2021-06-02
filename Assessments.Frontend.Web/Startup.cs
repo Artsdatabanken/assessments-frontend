@@ -1,4 +1,3 @@
-using System;
 using Assessments.Frontend.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

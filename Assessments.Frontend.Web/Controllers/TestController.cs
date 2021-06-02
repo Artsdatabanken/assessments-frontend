@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-//using System.Linq;
+using System.Linq;
 using System.Threading.Tasks;
 using Artsdatabanken;
 using Assessments.Frontend.Web.Infrastructure;
@@ -33,13 +33,23 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [Route("2015")]
-        public IActionResult Index2015(int? page)
+        public IActionResult Index2015(int? page, string name)
         {
+            // Pageination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
+
+            // Filter
+            IQueryable<Rodliste2015> query = _assessmentApi.Redlist2015;
+            if (!string.IsNullOrEmpty(name))
+                query = query.Where(x => x.VurdertVitenskapeligNavn.ToLower().Contains(name.Trim().ToLower()));
+
+
             var viewModel = new RL2015ViewModel
             {
-                Redlist2015Results = _assessmentApi.Redlist2015.ToPagedList(pageNumber, pageSize),
+                //Redlist2015Results = _assessmentApi.Redlist2015.ToPagedList(pageNumber, pageSize),
+                Redlist2015Results = query.ToPagedList(pageNumber, pageSize),
+                Name = name
             };
 
             return View("List2015", viewModel);

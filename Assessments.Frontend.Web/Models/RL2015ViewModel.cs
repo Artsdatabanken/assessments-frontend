@@ -10,7 +10,7 @@ namespace Assessments.Frontend.Web.Models
         public IPagedList<Rodliste2015> Redlist2015Results { get; set; }
 
         // Filter
-        [Display(Name = "Navn"), FromQuery(Name = "name")]
+        [Display(Name = "Navn"), FromQuery]
         public string Name { get; set; }
 
     }

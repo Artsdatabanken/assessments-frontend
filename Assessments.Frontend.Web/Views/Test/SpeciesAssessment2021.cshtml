@@ -1,6 +1,6 @@
 ﻿@model Artsdatabanken.RL2021
 @{
-    ViewBag.Title = "navn";
+    ViewBag.Title = @Model.VurdertVitenskapeligNavn;
 }
 
 <div class="breadcrumbs">
@@ -16,7 +16,7 @@
         </li>
         <span class="breadcrumbdivider">&gt; </span>
         <li class="in-breadcrumb currentcrumb">
-            crumbnavn
+            @Model.VurdertVitenskapeligNavn
         </li>
     </ul>
 </div>

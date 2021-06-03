@@ -37,7 +37,7 @@
     <div class="mid">
         <div class="ingress">
             <p>
-                Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge. 
+                Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge.
                 Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
             </p>
         </div>
@@ -47,37 +47,59 @@
         </h3>
 
         <!-- FILTER FORM -->
-        <form asp-action="2021" method="get">
-            <label asp-for="Name"></label><input asp-for="Name" />
+        <form class="list-search" asp-action="2021" method="get">
+           <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
+           <button class="btn" type="submit">
+               <span class="material-icons">
+                   search
+               </span>
+
+                Søk
+           </button>
         </form>
 
+       <!-- List controls -->
+        <div class="controls">
+            <button id="listview" class="material-icons" type="button">list</button>
+            <button id="gridview" class="material-icons" type="button">grid_on </button>
+        </div>
+
         <!-- Data from model -->
-        <table class="table table-striped table-hover">
 
-            <thead>
-                <tr>
-                    <td>LatinsknavnId</td>
-                    <td>VurdertVitenskapeligNavn</td>
-                    <td>Kategori</td>
-                </tr>
-            </thead>
 
-            @foreach (var item in Model.Redlist2021Results)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
+        <div class="listwrapper">
+            <ul class="redlist" id="redlist">
+                <li class="listheader" id="listheader">
+                    <span>LatinsknavnId</span>
+                    <span>VurdertVitenskapeligNavn</span>
+                    <span>Kategori</span>
+                </li>
+
+
+                @foreach (var item in Model.Redlist2021Results)
+                {
+                    <li class="list">
+                        <span>
+                            <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
                             @item.LatinsknavnId
-                        </a>
-                    </td>
-                    <td>@item.VurdertVitenskapeligNavn</td>
-                    <td>@item.Kategori</td>
-                </tr>
-            }
+                            </a>
+                        </span>         
+                        <span>@item.VurdertVitenskapeligNavn</span>
+                        <span>@item.Kategori</span>
+                    </li>
+                }
 
-        </table>
 
-    </div>
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
 
     <!-- Pageinator buttons -->
 

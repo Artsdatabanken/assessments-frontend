@@ -46,7 +46,7 @@
         </h3>
 
         <!-- FILTER FORM -->
-        <form asp-action="2015" method="get">
+        <form asp-action="Index2015" method="get">
             <label asp-for="Name"></label><input asp-for="Name" />
         </form>
 
@@ -80,7 +80,7 @@
 
     <!-- Pageinator buttons -->
 
-    @Html.PagedListPager(Model.Redlist2015Results, page => Url.Action("2015", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
+    @Html.PagedListPager(Model.Redlist2015Results, page => Url.Action("Index2015", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
         {
             PageClasses = new[] { "page-link" },
             UlElementClasses = new[] { "pagination" },

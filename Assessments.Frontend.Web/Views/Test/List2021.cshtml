@@ -47,18 +47,18 @@
         </h3>
 
         <!-- FILTER FORM -->
-        <form class="list-search" asp-action="2021" method="get">
-           <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
-           <button class="btn" type="submit">
-               <span class="material-icons">
-                   search
-               </span>
+        <form class="list-search" asp-action="Index2021" method="get">
+            <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
+            <button class="btn" type="submit">
+                <span class="material-icons">
+                    search
+                </span>
 
                 Søk
-           </button>
+            </button>
         </form>
 
-       <!-- List controls -->
+        <!-- List controls -->
         <div class="controls">
             <button id="listview" class="material-icons" type="button">list</button>
             <button id="gridview" class="material-icons" type="button">grid_on </button>
@@ -81,7 +81,7 @@
                     <li class="list">
                         <span>
                             <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
-                            @item.LatinsknavnId
+                                @item.LatinsknavnId
                             </a>
                         </span>         
                         <span>@item.VurdertVitenskapeligNavn</span>
@@ -101,12 +101,14 @@
 
 
 
-    <!-- Pageinator buttons -->
+        <!-- Pageinator buttons -->
 
-    @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("2021", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
+        @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
         {
             PageClasses = new[] { "page-link" },
             UlElementClasses = new[] { "pagination" },
             LiElementClasses = new[] { "page-item" }
         })
+    </div>
+
 </div>

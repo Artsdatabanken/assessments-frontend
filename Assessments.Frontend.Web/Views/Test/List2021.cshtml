@@ -1,0 +1,112 @@
+﻿@model Assessments.Frontend.Web.Models.RL2021ViewModel
+
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common
+@using Assessments.Frontend.Web.Infrastructure
+
+@{
+    ViewBag.Title = "2021";
+}
+<div class="breadcrumbs">
+    <ul>
+        <li class="lead in-breadcrumb">
+            <a href="/">
+                Rødlista
+            </a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb currentcrumb">
+            @ViewBag.Title
+        </li>
+    </ul>
+</div>
+
+<div class="sidebarmenu"></div>
+
+<div class="content-placer">
+    <div class="page-header">
+        <h1>
+            Norsk Rødliste for arter 2021
+        </h1>
+        <h2>@ViewBag.Title</h2>
+        <span class="byline">
+            Publisert .. ikke ennå
+        </span>
+    </div>
+
+    <div class="mid">
+        <div class="ingress">
+            <p>
+                Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge.
+                Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
+            </p>
+        </div>
+
+        <h3>
+            @Model.Redlist2021Results.Count redlist 2021 items
+        </h3>
+
+        <!-- FILTER FORM -->
+        <form class="list-search" asp-action="2021" method="get">
+           <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
+           <button class="btn" type="submit">
+               <span class="material-icons">
+                   search
+               </span>
+
+                Søk
+           </button>
+        </form>
+
+       <!-- List controls -->
+        <div class="controls">
+            <button id="listview" class="material-icons" type="button">list</button>
+            <button id="gridview" class="material-icons" type="button">grid_on </button>
+        </div>
+
+        <!-- Data from model -->
+
+
+        <div class="listwrapper">
+            <ul class="redlist" id="redlist">
+                <li class="listheader" id="listheader">
+                    <span>LatinsknavnId</span>
+                    <span>VurdertVitenskapeligNavn</span>
+                    <span>Kategori</span>
+                </li>
+
+
+                @foreach (var item in Model.Redlist2021Results)
+                {
+                    <li class="list">
+                        <span>
+                            <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
+                            @item.LatinsknavnId
+                            </a>
+                        </span>         
+                        <span>@item.VurdertVitenskapeligNavn</span>
+                        <span>@item.Kategori</span>
+                    </li>
+                }
+
+
+            </ul>
+        </div>
+
+
+
+
+
+
+
+
+
+    <!-- Pageinator buttons -->
+
+    @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("2021", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
+        {
+            PageClasses = new[] { "page-link" },
+            UlElementClasses = new[] { "pagination" },
+            LiElementClasses = new[] { "page-item" }
+        })
+</div>

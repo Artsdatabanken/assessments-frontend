@@ -1,13 +1,13 @@
 ﻿<!-- Add  category-selected to active tab -->
-
+@model Artsdatabanken.RL2021
 @{
-    ViewBag.category = "KATEGORI";
+    ViewBag.category = @Model.Kategori;
 }
 
 <h2>@ViewBag.category</h2>
 
 <div class="categorybar">
-    
+
     <div class="categorybar-centerline"></div>
     <div class="categorybar-categorycontainer">
         <div class="categorybar-category ">
@@ -32,6 +32,8 @@
     <div class="categorybar-categorycontainer">
         <div class="categorybar-category"><p>LC</p></div>
     </div>
+
+
     <div class="categorybar-range top categorybar-range-redlisted">&nbsp;</div>
 
     <div class="categorybar-range-legend categorybar-range-redlisted"><span>&nbsp;&nbsp;Rødlistet&nbsp;&nbsp;</span></div>
@@ -41,3 +43,15 @@
     <div class="categorybar-range-legend bottom categorybar-range-threathened"><span>&nbsp;&nbsp;Truet&nbsp;&nbsp;</span></div>
 </div>
 <br />
+
+
+<ul class="category_displayer">
+    <li class="category_rl start_line"><div class="category_item">RE <span>Regionalt utdødd</span></div></li>
+    <li class="category_rl category_threatened start_line"><div class="category_item">CR <span>Kritisk truet</span></div></li>
+    <li class="category_rl category_threatened"><div class="category_item">EN <span>Sterkt truet</span></div></li>
+    <li class="category_rl category_threatened stop_line"><div class="category_item">VU <span>Sårbar</span></div></li>
+    <li class="category_rl "><div class="category_item">NT <span>Nær<br/>truet</span></div></li>
+    <li class="category_rl stop_line"><div class="category_item">DD <span>Data- mangel</span></div></li>
+    <li><div class="category_item">LC <span>Livs- kraftig</span></div></li>
+    <li><div class="category_item">NE <span>Ikke vurdert</span></div></li>
+</ul>

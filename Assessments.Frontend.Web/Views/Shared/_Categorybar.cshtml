@@ -1,11 +1,17 @@
-﻿
-<!-- Add  category-selected to active tab -->
+﻿<!-- Add  category-selected to active tab -->
+
+@{
+    ViewBag.category = "KATEGORI";
+}
+
+<h2>@ViewBag.category</h2>
 
 <div class="categorybar">
+    
     <div class="categorybar-centerline"></div>
     <div class="categorybar-categorycontainer">
         <div class="categorybar-category ">
-        <p>RE</p>
+            <p>RE</p>
         </div>
     </div>
     <div class="categorybar-categorycontainer">
@@ -34,4 +40,4 @@
 
     <div class="categorybar-range-legend bottom categorybar-range-threathened"><span>&nbsp;&nbsp;Truet&nbsp;&nbsp;</span></div>
 </div>
-<br/>
+<br />

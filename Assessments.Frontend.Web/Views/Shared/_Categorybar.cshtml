@@ -4,54 +4,65 @@
     ViewBag.category = @Model.Kategori;
 }
 
+
+@functions {
+    public string setActive(string first, string second)
+    {
+        if (first == second)
+        {
+            return "active";
+        }
+        else
+        {
+            return "notactive";
+        }
+    }
+} 
+
+
 <h2>@ViewBag.category</h2>
 
-<div class="categorybar">
-
-    <div class="categorybar-centerline"></div>
-    <div class="categorybar-categorycontainer">
-        <div class="categorybar-category ">
-            <p>RE</p>
-        </div>
-    </div>
-    <div class="categorybar-categorycontainer">
-        <div class="categorybar-category "><p>CR</p></div>
-    </div>
-    <div class="categorybar-categorycontainer">
-        <div class="categorybar-category "><p>EN</p></div>
-    </div>
-    <div class="categorybar-categorycontainer">
-        <div class="categorybar-category "><p>VU</p></div>
-    </div>
-    <div class="categorybar-categorycontainer">
-        <div class="categorybar-category "><p>NT</p></div>
-    </div>
-    <div class="categorybar-categorycontainer">
-        <div class="categorybar-category "><p>DD</p></div>
-    </div>
-    <div class="categorybar-categorycontainer">
-        <div class="categorybar-category"><p>LC</p></div>
-    </div>
-
-
-    <div class="categorybar-range top categorybar-range-redlisted">&nbsp;</div>
-
-    <div class="categorybar-range-legend categorybar-range-redlisted"><span>&nbsp;&nbsp;Rødlistet&nbsp;&nbsp;</span></div>
-
-    <div class="categorybar-range bottom categorybar-range-threathened">&nbsp;</div>
-
-    <div class="categorybar-range-legend bottom categorybar-range-threathened"><span>&nbsp;&nbsp;Truet&nbsp;&nbsp;</span></div>
-</div>
-<br />
-
-
 <ul class="category_displayer">
-    <li class="category_rl start_line"><div class="category_item">RE <span>Regionalt utdødd</span></div></li>
-    <li class="category_rl category_threatened start_line"><div class="category_item">CR <span>Kritisk truet</span></div></li>
-    <li class="category_rl category_threatened"><div class="category_item">EN <span>Sterkt truet</span></div></li>
-    <li class="category_rl category_threatened stop_line"><div class="category_item">VU <span>Sårbar</span></div></li>
-    <li class="category_rl "><div class="category_item">NT <span>Nær<br/>truet</span></div></li>
-    <li class="category_rl stop_line"><div class="category_item">DD <span>Data- mangel</span></div></li>
-    <li><div class="category_item">LC <span>Livs- kraftig</span></div></li>
-    <li><div class="category_item">NE <span>Ikke vurdert</span></div></li>
+    <li class="category_rl start_line">
+        <div class="category_item  @setActive("RE", @ViewBag.category)">
+            RE <span>Regionalt utdødd</span>
+        </div>
+        <div class="topbar_label">Rødlistet</div>
+    </li>
+    <li class="category_rl category_threatened start_line">
+        <div class="category_item  @setActive("CR", @ViewBag.category)">
+            CR <span>Kritisk truet</span>
+        </div>
+        <div class="bottombar_label">Truet</div>
+    </li>
+    <li class="category_rl category_threatened">
+        <div class="category_item  @setActive("EN", @ViewBag.category)">
+            EN <span>Sterkt truet</span>
+        </div>
+    </li>
+    <li class="category_rl category_threatened stop_line">
+        <div class="category_item  @setActive("VU", @ViewBag.category)">
+            VU <span>Sårbar</span>
+        </div>
+    </li>
+    <li class="category_rl ">
+        <div class="category_item  @setActive("VU", @ViewBag.category)">
+            NT <span>Nær<br />truet</span>
+        </div>
+    </li>
+    <li class="category_rl stop_line">
+        <div class="category_item  @setActive("DD", @ViewBag.category)">
+            DD <span>Data- mangel</span>
+        </div>
+    </li>
+    <li>
+        <div class="category_item  @setActive("LC", @ViewBag.category)">
+            LC <span>Livs- kraftig</span>
+        </div>
+    </li>
+    <li>
+        <div class="category_item  @setActive("NE", @ViewBag.category)">
+            NE <span>Ikke vurdert</span>
+        </div>
+    </li>
 </ul>

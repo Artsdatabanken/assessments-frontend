@@ -1,6 +1,7 @@
 ﻿@model Artsdatabanken.RL2021
 @{
     ViewBag.Title = @Model.VurdertVitenskapeligNavn;
+    var naturtypehovedenhet = @Model.NaturtypeHovedenhet;
 }
 
 <div class="breadcrumbs">
@@ -45,12 +46,28 @@
 
             <p>KOMMER HER</p>
 
-            <partial name="/Views/Test/partials_2021/_bestand.cshtml" />
+            <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
 
 
             <p>Kommer her</p>
 
             <partial name="/Views/Shared/_Categorybar.cshtml" />
+
+
+            @*
+        @if (Model.Fylkesforekomster != null)
+        {
+            @Html.Partial("Partial/Fylkesforekomster", Model.Fylkesforekomster)
+        }
+            *@
+
+            @if (Model.NaturtypeHovedenhet != null)
+            {
+                @Html.Partial("/Views/Test/partials_2021/_Naturtyper.cshtml", Model.NaturtypeHovedenhet)
+            }
+
+
+
         </div>
     </div>
 </div>

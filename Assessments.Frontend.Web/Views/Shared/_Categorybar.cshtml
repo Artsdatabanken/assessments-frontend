@@ -17,7 +17,9 @@
             return "notactive";
         }
     }
-} 
+}
+
+<partial name="/Views/Shared/_CategoryDescription.cshtml" />
 
 
 <h2>@ViewBag.category</h2>
@@ -46,7 +48,7 @@
         </div>
     </li>
     <li class="category_rl ">
-        <div class="category_item  @setActive("VU", @ViewBag.category)">
+        <div class="category_item  @setActive("NT", @ViewBag.category)">
             NT <span>Nær<br />truet</span>
         </div>
     </li>

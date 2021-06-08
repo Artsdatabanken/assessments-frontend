@@ -1,0 +1,76 @@
+﻿@model Artsdatabanken.RL2021
+@{
+    ViewBag.category = @Model.Kategori;
+}
+
+@*
+ 
+    Simplified from Innsynsløsning 2021.
+    Should probably be changed into helper functions instead.
+    But while making old stuff work it will be allowed to live here.
+
+*@
+
+@functions {
+    public string categoryMatcher(string category)
+    {
+        // Takes in category as presented in the model
+        // Returns name of category (whyever for?)
+        return category.Substring(0, 2);
+
+    }
+}
+
+@functions {
+    public string categoryDescription(string category)
+    {
+        // Takes in category as presented in the model
+        // uses categoryMatcher to remove degrees etc.
+        // Returns name of category (whatever for?)
+        var actual_category = @categoryMatcher(category);
+
+
+        if (actual_category == "CR")
+        {
+            return " - kritisk truet ";
+        }
+        else if (actual_category == "EN")
+        {
+            return " - sterkt truet ";
+        }
+        else if (actual_category == "VU")
+        {
+            return " - sårbar ";
+        }
+        else if (actual_category == "NT")
+        {
+            return " - nær truet ";
+        }
+        else if (actual_category == "DD")
+        {
+            return " - datamangel ";
+        }
+        else if (actual_category == "LC")
+        {
+            return " - livskraftig ";
+        }
+        else if (actual_category == "NA")
+        {
+            return " - ikke egnet ";
+        }
+        else if (actual_category == "NE")
+        {
+            return " - ikke vurdert ";
+        }
+        else if (actual_category == "RE")
+        {
+            return " - regionalt utdødd ";
+        }
+        else
+        {
+            return "";
+        }
+    }
+}
+
+<h1>@categoryMatcher(@Model.Kategori) @categoryDescription(ViewBag.category ) </h1>

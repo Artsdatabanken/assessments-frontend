@@ -54,18 +54,19 @@
             <partial name="/Views/Shared/_Categorybar.cshtml" />
 
 
-            @*
+            
         @if (Model.Fylkesforekomster != null)
         {
-            @Html.Partial("Partial/Fylkesforekomster", Model.Fylkesforekomster)
+            @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster.cshtml", Model.Fylkesforekomster)
         }
-            *@
+            
 
             @if (Model.NaturtypeHovedenhet != null)
             {
                 @Html.Partial("/Views/Test/partials_2021/_Naturtyper.cshtml", Model.NaturtypeHovedenhet)
             }
 
+            
             @if (Model.Referanser != null && Model.Referanser.Count > 0)
             {
                 @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)

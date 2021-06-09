@@ -36,7 +36,7 @@
     var hasCDirekteFastsattEtterSkjønn = !string.IsNullOrWhiteSpace(Model.CDirekteFastsattEtterSkjønn);
     var hasBakgrunnsdata = hasBeregnetPopulasjonstørrelse || hasCDirekteFastsattEtterSkjønn;
 
-    bool vurdert = ViewBag.Vurdert;
+    //bool vurdert = true;//ViewBag.Vurdert;
     string ekspertgruppe = char.ToLower(assessment.Ekspertgruppe[0]) + assessment.Ekspertgruppe.Substring(1);
     string popularName = "";
     if (assessment.PopularName != string.Empty && !string.IsNullOrEmpty(assessment.PopularName))
@@ -842,6 +842,8 @@
 
 
 {
+<div class="section">
+    <h1> Partial Rl2021</h1>
     <div class="panel panel-default">
         <div class="panel-body">
             @if (true)
@@ -911,24 +913,30 @@
                     {
                         <span> | </span> <a href="#detaljer"> Om gjeldende kriterier &#x25BA; </a>
                     }
-                    @if (ViewBag.Vurdert && Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
-                    {
-                        <span> | </span> <a href="#pavirkningsfaktor"> Påvirkningsfaktorer &#x25BA; </a>
-                    }
 
-                    @if (ViewBag.Vurdert && Model.Fylkesforekomster != null)
-                    {
-                        <span> | </span> <a href="#fylkesforekomst"> Regioner og havområder &#x25BA; </a>
-                    }
+                    @*
+                        @if (ViewBag.Vurdert && Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
+                        {
+                            <span> | </span> <a href="#pavirkningsfaktor"> Påvirkningsfaktorer &#x25BA; </a>
+                        }
 
-                    @if (ViewBag.Vurdert && Model.NaturtypeHovedenhet != null)
-                    {
-                        <span> | </span> <a href="#naturtyper"> Hovedhabitater arten finnes i &#x25BA; </a>
-                    }
-                    @if (ViewBag.Vurdert && (Model.AndelNåværendeBestand != null && Model.AndelNåværendeBestand != " " && Model.AndelNåværendeBestand != "-") || (Model.MaxAndelAvEuropeiskBestand != null && Model.MaxAndelAvEuropeiskBestand != " " && Model.MaxAndelAvEuropeiskBestand != "-") || (Model.MaxAndelAvGlobalBestand != null && Model.MaxAndelAvGlobalBestand != " " && Model.MaxAndelAvGlobalBestand != "-"))
-                    {
-                        <span> | </span> <a href="#popStr"> Informasjon om populasjonsstørrelse &#x25BA; </a>
-                    }
+
+
+                                    @if (ViewBag.Vurdert && Model.Fylkesforekomster != null)
+                                    {
+                                        <span> | </span> <a href="#fylkesforekomst"> Regioner og havområder &#x25BA; </a>
+                                    }
+
+                                    @if (ViewBag.Vurdert && Model.NaturtypeHovedenhet != null)
+                                    {
+                                        <span> | </span> <a href="#naturtyper"> Hovedhabitater arten finnes i &#x25BA; </a>
+                                    }
+                                    @if (ViewBag.Vurdert && (Model.AndelNåværendeBestand != null && Model.AndelNåværendeBestand != " " && Model.AndelNåværendeBestand != "-") || (Model.MaxAndelAvEuropeiskBestand != null && Model.MaxAndelAvEuropeiskBestand != " " && Model.MaxAndelAvEuropeiskBestand != "-") || (Model.MaxAndelAvGlobalBestand != null && Model.MaxAndelAvGlobalBestand != " " && Model.MaxAndelAvGlobalBestand != "-"))
+                                    {
+                                        <span> | </span> <a href="#popStr"> Informasjon om populasjonsstørrelse &#x25BA; </a>
+                                    }
+
+                    *@
 
                     @if (Model.Referanser != null && Model.Referanser.Count > 0)
                     {
@@ -950,16 +958,16 @@
 
                         @if (!string.IsNullOrEmpty(Model.UtdoddINorgeRE))
                         {
-                           @if (@assessment.UtdoddINorgeRE == "etablertBestandINorge")
+                            @if (@assessment.UtdoddINorgeRE == "etablertBestandINorge")
                             {
                                 <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten er dokumentert eller antatt å ha vært etablert med fast reproduserende bestand og hadde ikke opphav i introduserte individer.</dl>
                             }
                             else @if (@assessment.UtdoddINorgeRE == "ikkeReproduserendeINorge")
-                       {
+                      {
                         <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten var ikke fast reproduserende, men > 2 % av individene som utgjorde global populasjonsstørrelse oppholdt seg regelmessig innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") i deler av sin års-/livssyklus (gjester).</dl>
                     }
                     else @if (@assessment.UtdoddINorgeRE == "etablertFør1800")
-                   {
+                  {
                     <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten er fremmed, men er antatt eller dokumentert å ha vært etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800.</dl>
                 }
                 }
@@ -982,25 +990,25 @@
                 <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er en gjest som uregelmessig dukker opp naturlig innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard").</dl>
             }
             else @if (@assessment.BegrensetForekomstNA == "ikkeDokumentertForekomstNA")
-                   {
-                    <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten har ikke dokumentert forekomst innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard").</dl>
-                }
-                else @if (@assessment.BegrensetForekomstNA == "hybridartUtenReproduksjonNA")
-                       {
-                        <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart uten reproduksjon.</dl>
-                    }
-                    else @if (@assessment.BegrensetForekomstNA == "hybridartUvisstOmReproduserendeNA")
-                           {
-                            <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart, men uvisst om den er reproduserende.</dl>
-                        }
-                        else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonNA")
-                               {
-                                <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten forekommer bare i hybridkombinasjon i vurderingsområdet.</dl>
-                            }
-                    }
+           {
+            <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten har ikke dokumentert forekomst innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard").</dl>
+        }
+        else @if (@assessment.BegrensetForekomstNA == "hybridartUtenReproduksjonNA")
+       {
+        <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart uten reproduksjon.</dl>
+    }
+    else @if (@assessment.BegrensetForekomstNA == "hybridartUvisstOmReproduserendeNA")
+   {
+    <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart, men uvisst om den er reproduserende.</dl>
+}
+else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonNA")
+{
+<dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten forekommer bare i hybridkombinasjon i vurderingsområdet.</dl>
+}
+}
                         @if (!string.IsNullOrEmpty(Model.KunnskapsStatusNE))
                         {
-                            
+
                             @if (@assessment.KunnskapsStatusNE == "mangelfullKunnskapNE")
                             {
                                 <dl>Arten er ikke forsøkt rødlistevurdert (NE) på grunn av svært mangelfull kunnskap.</dl>
@@ -1018,9 +1026,9 @@
                 <dl>Arten er ikke forsøkt rødlistevurdert (NE) fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021.</dl>
             }
             else @if (@assessment.KunnskapsStatusNE == "annetNE")
-                   {
-                    <dl>Arten er ikke forsøkt rødlistevurdert (NE).</dl>
-                }
+           {
+            <dl>Arten er ikke forsøkt rødlistevurdert (NE).</dl>
+        }
         }
                         @if (@assessment.OverordnetKlassifiseringGruppeKode == "fremmedArtNA")
                         {
@@ -1053,7 +1061,7 @@
                         {
                             <dl>Arten har vært gjennom full rødlistevurdering.</dl>
                         }
-                      
+
                     </div>
 
                     <div class="row historyBox">
@@ -1061,7 +1069,7 @@
                         <div class="col-md-6">
 
                             <div class="panel panel-default" style="border: 5px solid #ddd">
-                            
+
                                 <h3 class="panel-title" style="color: #4c4a48; position: relative; top: -12px; left: 80px; width: 55%; background-color: white; padding-left: 30px;" id="historikk">
                                     Historikk <button class="detaljer" style="margin-left: 10px" onclick="togglePopup('history')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
                                 </h3>
@@ -1183,10 +1191,10 @@
                                 </div>
                             </dd>
                         }
-                     </dl>
+                    </dl>
                 }
 
-               
+
 
 
 
@@ -1198,7 +1206,7 @@
 
                 @if (!string.IsNullOrWhiteSpace(assessment.Kriteriedokumentasjon))
                 {
-                    
+
                     <div id="kriteriedokumentasjon" class="panel-preview">
                         @Html.Raw(assessment.Kriteriedokumentasjon)
                     </div>
@@ -1206,7 +1214,7 @@
                 @if (assessment.UtdøingSterktPåvirket == "Ja")
                 {
 
-                  
+
                     @if (assessment.KategoriEndretFra != "" && assessment.KategoriEndretFra != null)
                     {
                         <dl class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert fra @assessment.KategoriEndretFra til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</dl>
@@ -1252,308 +1260,308 @@
 
                 @if (!string.IsNullOrEmpty(Model.OppsummeringAKriterier) && Model.Kriterier.IndexOf("A") >= 0)
                 {
-        <div class="criterium">
-            @if (gjeldende("A1") && (!string.IsNullOrEmpty(Model.A1OpphørtOgReversibel) || Model.A1EndringBasertpåKode.Count > 0 || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Max) || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Min) || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Probable)))
-            {
-
-                @*// TODO FIX:
-            MMP("A1", "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel", Model.A1OpphørtOgReversibelAntatt);
-                *@
-                <dl class="responsive condenced width40">
-                    @{CondDT("A1 reduksjon", A1def(Model.A1OpphørtOgReversibel));}
-                    @if (Model.A1EndringBasertpåKode.Count > 0)
-                    {
-                        <div>Vurderingen er basert på:</div>
-                        @foreach (var s in Model.A1EndringBasertpåKode)
+                    <div class="criterium">
+                        @if (gjeldende("A1") && (!string.IsNullOrEmpty(Model.A1OpphørtOgReversibel) || Model.A1EndringBasertpåKode.Count > 0 || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Max) || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Min) || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Probable)))
                         {
-                            <div style="margin-left: 30px">- @A1basertdef(s)</div>
-                        }
-                    }
 
-                </dl>
-                CatLine(Model.A1OpphørtOgReversibel);
-            }
+                            @*// TODO FIX:
+                                MMP("A1", "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel", Model.A1OpphørtOgReversibelAntatt);
+                            *@
+                            <dl class="responsive condenced width40">
+                                @{CondDT("A1 reduksjon", A1def(Model.A1OpphørtOgReversibel));}
+                                @if (Model.A1EndringBasertpåKode.Count > 0)
+                                {
+                                    <div>Vurderingen er basert på:</div>
+                                    @foreach (var s in Model.A1EndringBasertpåKode)
+                                    {
+                                        <div style="margin-left: 30px">- @A1basertdef(s)</div>
+                                    }
+                                }
 
-
-            @if (gjeldende("A2") && (!string.IsNullOrEmpty(Model.A2Forutgående10År) || Model.A2EndringBasertpåKode.Count > 0))
-            {
-                @*// TODO FIX:
-            MMP("A2", "Reduksjon de siste 10 år/3 generasjoner", Model.A2Forutgående10ÅrAntatt);
-                *@
-                <dl class="responsive condenced width40">
-                    @{CondDT("A2 reduksjon", A2def(Model.A2Forutgående10År));
-                    }
-                    @if (Model.A2EndringBasertpåKode.Count > 0)
-                    {
-                        <div>Vurderingen er basert på:</div>
-                        @foreach (var s in Model.A2EndringBasertpåKode)
-                        {
-                            <div style="margin-left: 30px">- @A2basertdef(s)</div>
-                        }
-                    }
-
-                </dl>
-                CatLine(Model.A2Forutgående10År);
-            }
-
-
-
-            @if (gjeldende("A3") && (!string.IsNullOrEmpty(Model.A3Kommende10År) || Model.A3EndringBasertpåKode.Count > 0))
-            {
-                @*// TODO FIX:
-            MMP("A3", "Framtidig reduksjon kommende 10 år/3 generasjoner", Model.A3Kommende10ÅrAntatt);*@
-                <dl class="responsive condenced width40">
-                    @{CondDT("A3 reduksjon", A3def(Model.A3Kommende10År));}
-
-                    @if (Model.A3EndringBasertpåKode.Count > 0)
-                    {
-                        <div>Vurderingen er basert på:</div>
-                        @foreach (var s in Model.A3EndringBasertpåKode)
-                        {
-                            <div style="margin-left: 30px">- @A3basertdef(s)</div>
+                            </dl>
+                            CatLine(Model.A1OpphørtOgReversibel);
                         }
 
-                    }
 
-                </dl>
-                CatLine(Model.A3Kommende10År);
-            }
-
-
-
-            @if (gjeldende("A4") && (!string.IsNullOrEmpty(Model.A4Intervall10År) && Model.A4EndringBasertpåKode.Count > 0))
-            {
-                @*// TODO FIX:
-                    MMP("A4", "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid", Model.A4Intervall10ÅrAntatt);*@
-                    <dl class="responsive condenced width40">
-                        @{CondDT("A4 reduksjon", A4def(Model.A4Intervall10År));}
-                        @if (Model.A4EndringBasertpåKode.Count > 0)
+                        @if (gjeldende("A2") && (!string.IsNullOrEmpty(Model.A2Forutgående10År) || Model.A2EndringBasertpåKode.Count > 0))
                         {
-                            <div>Vurderingen er basert på:</div>
-                            @foreach (var s in Model.A4EndringBasertpåKode)
+                            @*// TODO FIX:
+                                MMP("A2", "Reduksjon de siste 10 år/3 generasjoner", Model.A2Forutgående10ÅrAntatt);
+                            *@
+                            <dl class="responsive condenced width40">
+                                @{CondDT("A2 reduksjon", A2def(Model.A2Forutgående10År));
+                                }
+                                @if (Model.A2EndringBasertpåKode.Count > 0)
+                                {
+                                    <div>Vurderingen er basert på:</div>
+                                    @foreach (var s in Model.A2EndringBasertpåKode)
+                                    {
+                                        <div style="margin-left: 30px">- @A2basertdef(s)</div>
+                                    }
+                                }
+
+                            </dl>
+                            CatLine(Model.A2Forutgående10År);
+                        }
+
+
+
+                        @if (gjeldende("A3") && (!string.IsNullOrEmpty(Model.A3Kommende10År) || Model.A3EndringBasertpåKode.Count > 0))
+                        {
+                            @*// TODO FIX:
+                                MMP("A3", "Framtidig reduksjon kommende 10 år/3 generasjoner", Model.A3Kommende10ÅrAntatt);*@
+                            <dl class="responsive condenced width40">
+                                @{CondDT("A3 reduksjon", A3def(Model.A3Kommende10År));}
+
+                                @if (Model.A3EndringBasertpåKode.Count > 0)
+                                {
+                                    <div>Vurderingen er basert på:</div>
+                                    @foreach (var s in Model.A3EndringBasertpåKode)
+                                    {
+                                        <div style="margin-left: 30px">- @A3basertdef(s)</div>
+                                    }
+
+                                }
+
+                            </dl>
+                            CatLine(Model.A3Kommende10År);
+                        }
+
+
+
+                        @if (gjeldende("A4") && (!string.IsNullOrEmpty(Model.A4Intervall10År) && Model.A4EndringBasertpåKode.Count > 0))
+                        {
+                            @*// TODO FIX:
+                                MMP("A4", "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid", Model.A4Intervall10ÅrAntatt);*@
+                            <dl class="responsive condenced width40">
+                                @{CondDT("A4 reduksjon", A4def(Model.A4Intervall10År));}
+                                @if (Model.A4EndringBasertpåKode.Count > 0)
+                                {
+                                    <div>Vurderingen er basert på:</div>
+                                    @foreach (var s in Model.A4EndringBasertpåKode)
+                                    {
+                                        <div style="margin-left: 30px">- @A4basertdef(s)</div>
+                                    }
+                                }
+
+                            </dl>
+                            CatLine(Model.A4Intervall10År);
+                        }
+
+                    </div>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.OppsummeringBKriterier) && Model.Kriterier.IndexOf("B") >= 0)
+                {
+                    <div class="criterium">
+
+                        @if (gjeldende("B1") && (!string.IsNullOrEmpty(assessment.B1UtbredelsesområdeKode) && assessment.B1UtbredelsesområdeKode != "-"))
+                        {
+                            @*// TODO FIX:
+                                MMPI("B1", "Utbredelsesområde", Model.B1IntervallUtbredelsesområde);*@
+                            <div>B1 @terskelverdi("B1UtbredelsesområdeKode", Model.B1UtbredelsesområdeKode) tilsvarer i utgangspunktet @Model.B1UtbredelsesområdeKode</div>
+                            CatLine(Model.B1UtbredelsesområdeKode);
+
+                            <br />
+                        }
+                        @if (gjeldende("B2") && (!string.IsNullOrEmpty(assessment.B2ForekomstarealKode) && assessment.B2ForekomstarealKode != "-"))
+                        {
+                            @*// TODO FIX:
+                                MMPI("B2", "Forekomstareal", Model.B2IntervallForekomstareal);*@
+
+                            <div>B2 Forekomstareal @terskelverdi("B2ForekomstarealKode", Model.B2ForekomstarealKode)tilsvarer i utgangspunktet @Model.B2ForekomstarealKode</div>
+                            CatLine(Model.B2ForekomstarealKode);
+                            <br />
+                        }
+                        <dl class="responsive condenced width40">
+                            @if (gjeldende("Ba(i") || gjeldende("B1a((i") || gjeldende("B2a((i"))
                             {
-                                <div style="margin-left: 30px">- @A4basertdef(s)</div>
+                                CondDT("B.a.i", Model.BA1KraftigFragmenteringKode == "ja" ? "Kraftig fragmentert populasjon" : "");
+                                CondDT("B.a.((i))", Model.BA1KraftigFragmenteringKode == "jaTrolig" ? "Trolig kraftig fragmentert populasjon" : "");
                             }
+
+                        </dl>
+
+                        @if (gjeldende("Ba"))
+                        {
+                            @*// TODO FIX:
+                                MMPI("B.a", "Antall trusseldefinerte lokaliteter (ii)", Model.BaIntervallAntallLokaliteter);*@
                         }
 
-                    </dl>
-                    CatLine(Model.A4Intervall10År);
-                }
+                        @if ((gjeldende("Ba(ii)") || gjeldende("Ba(i,ii)")) && (!string.IsNullOrEmpty(assessment.BA2FåLokaliteterKode) && assessment.BA2FåLokaliteterKode != "-"))
+                        {
+                            <div>B.a (ii) Antall trusseldefinerte lokaliteter @terskelverdi("BA2FåLokaliteterKode", Model.BA2FåLokaliteterKode) tilsvarer i utgangspunktet @Model.BA2FåLokaliteterKode</div>
+                            CatLine(Model.BA2FåLokaliteterKode);
+                            <br />
+                        }
 
-            </div>
-                    }
+                        @if (gjeldende("Bb") && Model.BBPågåendeArealreduksjonKode.Count > 0)
+                        {
+                            <b>B.b Pågående nedgang</b><button class="detaljer" onclick="togglePopup('nedgang')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
+                            <div class="popuptext" id="nedgang">
+                                <button class="closePopup" onclick="closePopup('nedgang')"> x </button>
+                                <div>
+                                    Bedømt, observert, estimert eller prosjektert nedgang som har skjedd nylig, er pågående og/eller er forventet å skje. Nedgangen kan være jevn, irregulær eller sporadisk, og man antar den vil fortsette dersom ikke nødvendige tiltak iverksettes.
+                                </div>
+                            </div>
+                            <dl class="responsive condenced width40">
+                                @foreach (string s in Model.BBPågåendeArealreduksjonKode) //@*Pågående nedgang*@
+                                {
+                                    <div style="margin-left: 30px"> - @BBdef(s)</div>
+                                }
 
-                    @if (!string.IsNullOrEmpty(Model.OppsummeringBKriterier) && Model.Kriterier.IndexOf("B") >= 0)
-                    {
-        <div class="criterium">
+                            </dl>
+                        }
+                        @if (gjeldende("Bc") && Model.BCEksterneFluktuasjonerKode.Count > 0)
+                        {
+                            <b>B.c Ekstreme fluktuasjoner</b><button class="detaljer" onclick="togglePopup('flukt')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
+                            <div class="popuptext" id="flukt">
+                                <button class="closePopup" onclick="closePopup('flukt')"> x </button>
+                                <div>
+                                    Ekstreme fluktuasjoner gjelder arter der eks. populasjonsstørrelse eller geografisk utbredelse varierer mye, raskt og ofte, typisk med mer enn en tifoldig økning eller reduksjon (dvs. maksimum er minst 10 ganger større enn minimum).
+                                    Ekstreme fluktuasjoner brukes bare der det er relativt stor sikkerhet for at nedgang vil følges av vekst innen en eller to generasjoner og hvor det er rimelig sikkert av fluktuasjoner i antall reproduksjonsdyktige individ representerer fluktuasjoner i den totale populasjonen.
+                                </div>
+                            </div>
+                            <dl class="responsive condenced width40">
 
-            @if (gjeldende("B1") && (!string.IsNullOrEmpty(assessment.B1UtbredelsesområdeKode) && assessment.B1UtbredelsesområdeKode != "-"))
-            {
-                @*// TODO FIX:
-            MMPI("B1", "Utbredelsesområde", Model.B1IntervallUtbredelsesområde);*@
-                <div>B1 @terskelverdi("B1UtbredelsesområdeKode", Model.B1UtbredelsesområdeKode) tilsvarer i utgangspunktet @Model.B1UtbredelsesområdeKode</div>
-                CatLine(Model.B1UtbredelsesområdeKode);
-
-                <br />
-            }
-            @if (gjeldende("B2") && (!string.IsNullOrEmpty(assessment.B2ForekomstarealKode) && assessment.B2ForekomstarealKode != "-"))
-            {
-                @*// TODO FIX:
-            MMPI("B2", "Forekomstareal", Model.B2IntervallForekomstareal);*@
-
-                <div>B2 Forekomstareal @terskelverdi("B2ForekomstarealKode", Model.B2ForekomstarealKode)tilsvarer i utgangspunktet @Model.B2ForekomstarealKode</div>
-                CatLine(Model.B2ForekomstarealKode);
-                <br />
-            }
-            <dl class="responsive condenced width40">
-                @if (gjeldende("Ba(i") || gjeldende("B1a((i") || gjeldende("B2a((i"))
-                {
-                    CondDT("B.a.i", Model.BA1KraftigFragmenteringKode == "ja" ? "Kraftig fragmentert populasjon" : "");
-                    CondDT("B.a.((i))", Model.BA1KraftigFragmenteringKode == "jaTrolig" ? "Trolig kraftig fragmentert populasjon" : "");
-                }
-
-            </dl>
-
-            @if (gjeldende("Ba"))
-            {
-                @*// TODO FIX:
-                MMPI("B.a", "Antall trusseldefinerte lokaliteter (ii)", Model.BaIntervallAntallLokaliteter);*@
-            }
-
-            @if ((gjeldende("Ba(ii)") || gjeldende("Ba(i,ii)")) && (!string.IsNullOrEmpty(assessment.BA2FåLokaliteterKode) && assessment.BA2FåLokaliteterKode != "-"))
-            {
-                <div>B.a (ii) Antall trusseldefinerte lokaliteter @terskelverdi("BA2FåLokaliteterKode", Model.BA2FåLokaliteterKode) tilsvarer i utgangspunktet @Model.BA2FåLokaliteterKode</div>
-                CatLine(Model.BA2FåLokaliteterKode);
-                <br />
-            }
-
-            @if (gjeldende("Bb") && Model.BBPågåendeArealreduksjonKode.Count > 0)
-            {
-                <b>B.b Pågående nedgang</b><button class="detaljer" onclick="togglePopup('nedgang')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                <div class="popuptext" id="nedgang">
-                    <button class="closePopup" onclick="closePopup('nedgang')"> x </button>
-                    <div>
-                        Bedømt, observert, estimert eller prosjektert nedgang som har skjedd nylig, er pågående og/eller er forventet å skje. Nedgangen kan være jevn, irregulær eller sporadisk, og man antar den vil fortsette dersom ikke nødvendige tiltak iverksettes.
+                                @foreach (string s in Model.BCEksterneFluktuasjonerKode) //@*Ekstreme fluktuasjoner*@
+                                {
+                                    <div style="margin-left: 30px"> - @BCdef(s)</div>
+                                }
+                            </dl>
+                        }
                     </div>
-                </div>
-                <dl class="responsive condenced width40">
-                    @foreach (string s in Model.BBPågåendeArealreduksjonKode) //@*Pågående nedgang*@
-                {
-                    <div style="margin-left: 30px"> - @BBdef(s)</div>
-                }
-
-                </dl>
-            }
-            @if (gjeldende("Bc") && Model.BCEksterneFluktuasjonerKode.Count > 0)
-            {
-                <b>B.c Ekstreme fluktuasjoner</b><button class="detaljer" onclick="togglePopup('flukt')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                <div class="popuptext" id="flukt">
-                    <button class="closePopup" onclick="closePopup('flukt')"> x </button>
-                    <div>
-                        Ekstreme fluktuasjoner gjelder arter der eks. populasjonsstørrelse eller geografisk utbredelse varierer mye, raskt og ofte, typisk med mer enn en tifoldig økning eller reduksjon (dvs. maksimum er minst 10 ganger større enn minimum).
-                        Ekstreme fluktuasjoner brukes bare der det er relativt stor sikkerhet for at nedgang vil følges av vekst innen en eller to generasjoner og hvor det er rimelig sikkert av fluktuasjoner i antall reproduksjonsdyktige individ representerer fluktuasjoner i den totale populasjonen.
-                    </div>
-                </div>
-                <dl class="responsive condenced width40">
-
-                    @foreach (string s in Model.BCEksterneFluktuasjonerKode) //@*Ekstreme fluktuasjoner*@
-                    {
-                        <div style="margin-left: 30px"> - @BCdef(s)</div>
-                    }
-                </dl>
-            }
-        </div>
                 }
 
                 @if (!string.IsNullOrEmpty(Model.OppsummeringCKriterier) && Model.Kriterier.IndexOf("C") >= 0)
 
                 {
-        <div class="criterium">
+                    <div class="criterium">
 
 
-            @if (gjeldende("C") && (!string.IsNullOrEmpty(assessment.CPopulasjonsstørrelseKode) && assessment.CPopulasjonsstørrelseKode != "-"))
-            {
-                @*// TODO FIX:
-            MMPI("C", "Populasjonsstørrelse", Model.CPopulasjonsstørrelseAntatt);*@
+                        @if (gjeldende("C") && (!string.IsNullOrEmpty(assessment.CPopulasjonsstørrelseKode) && assessment.CPopulasjonsstørrelseKode != "-"))
+                        {
+                            @*// TODO FIX:
+                                MMPI("C", "Populasjonsstørrelse", Model.CPopulasjonsstørrelseAntatt);*@
 
-                <br />
-            }
-            @if (gjeldende("C1"))
-            {
-                @*// TODO FIX:
-            MMP("C1", "Pågående nedgang", Model.C1PågåendePopulasjonsreduksjonAntatt);*@
+                            <br />
+                        }
+                        @if (gjeldende("C1"))
+                        {
+                            @*// TODO FIX:
+                                MMP("C1", "Pågående nedgang", Model.C1PågåendePopulasjonsreduksjonAntatt);*@
 
-                @if (!string.IsNullOrEmpty(Model.C1PågåendePopulasjonsreduksjonKode))
-                {
+                            @if (!string.IsNullOrEmpty(Model.C1PågåendePopulasjonsreduksjonKode))
+                            {
 
-                    <div>C1 Pågående nedgang på @terskelverdi("C1PågåendePopulasjonsreduksjonKode", Model.C1PågåendePopulasjonsreduksjonKode) tilsvarer i utgangspunktet @findCValue(Model.C1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode)</div>
-                    CatLine(findCValue(Model.C1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode));
+                                <div>C1 Pågående nedgang på @terskelverdi("C1PågåendePopulasjonsreduksjonKode", Model.C1PågåendePopulasjonsreduksjonKode) tilsvarer i utgangspunktet @findCValue(Model.C1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode)</div>
+                                CatLine(findCValue(Model.C1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode));
 
+                            }
+                        }
+
+                        @if (gjeldende("C2a(i"))
+                        {
+                            @*// TODO FIX:
+                                MMP("C2a(i)", "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon", Model.C2A1PågåendePopulasjonsreduksjonAntatt);*@
+                            <div>C2a(i) Største delpopulasjon @terskelverdi("C2A1PågåendePopulasjonsreduksjonKode", Model.C2A1PågåendePopulasjonsreduksjonKode) tilsvarer i utgangspunktet @findCValue(Model.C2A1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode)</div>
+                            CatLine(findCValue(Model.C2A1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode));
+                        }
+
+                        @if (gjeldende("Ca(ii") && !string.IsNullOrEmpty(Model.C2A2PågåendePopulasjonsreduksjonKode))
+                        {
+                            <dl class="responsive condenced width40">
+                                @{CondDT("C2a(ii)", C2aiidef(Model.C2A2PågåendePopulasjonsreduksjonKode)); } @*Prosent av reproduserende individ i en delpopulasjon*@
+                                <div>(Minst) @Model.C2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon.</div>
+                            </dl>
+                        }
+                        @if (gjeldende("Cb") && !string.IsNullOrEmpty(Model.C2BPågåendePopulasjonsreduksjonKode) && Model.C2BPågåendePopulasjonsreduksjonKode == "JA")
+                        {
+                            <dl class="responsive condenced width40">
+                                @{ CondDT("C2b", C2bdef(Model.C2BPågåendePopulasjonsreduksjonKode)); }  @*Ekstrem populasjonsfluktuasjon*@
+                            </dl>
+
+                        }
+
+
+
+
+                    </div>
                 }
-            }
-
-            @if (gjeldende("C2a(i"))
-            {
-                @*// TODO FIX:
-                 MMP("C2a(i)", "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon", Model.C2A1PågåendePopulasjonsreduksjonAntatt);*@
-                 <div>C2a(i) Største delpopulasjon @terskelverdi("C2A1PågåendePopulasjonsreduksjonKode", Model.C2A1PågåendePopulasjonsreduksjonKode) tilsvarer i utgangspunktet @findCValue(Model.C2A1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode)</div>
-                 CatLine(findCValue(Model.C2A1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode));
-             }
-
-            @if (gjeldende("Ca(ii") && !string.IsNullOrEmpty(Model.C2A2PågåendePopulasjonsreduksjonKode))
-             {
-                 <dl class="responsive condenced width40">
-                     @{CondDT("C2a(ii)", C2aiidef(Model.C2A2PågåendePopulasjonsreduksjonKode)); } @*Prosent av reproduserende individ i en delpopulasjon*@
-                <div>(Minst) @Model.C2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon.</div>
-                </dl>
-            }
-            @if (gjeldende("Cb") && !string.IsNullOrEmpty(Model.C2BPågåendePopulasjonsreduksjonKode) && Model.C2BPågåendePopulasjonsreduksjonKode == "JA")
-            {
-                <dl class="responsive condenced width40">
-                    @{ CondDT("C2b", C2bdef(Model.C2BPågåendePopulasjonsreduksjonKode)); }  @*Ekstrem populasjonsfluktuasjon*@
-                </dl>
-
-            }
 
 
-
-
-        </div>
-                }
-
-             
                 @if (!string.IsNullOrEmpty(Model.OppsummeringDKriterier) && Model.Kriterier.IndexOf("D") >= 0)
                 {
-        <div class="criterium">
-            @if (!string.IsNullOrEmpty(Model.D1FåReproduserendeIndividKode) && Model.Kriterier.IndexOf("D1") >= 0)
-            {
-                @if (!gjeldende("C"))
-                {
-                    @*// TODO FIX:
-                        MMPI("C", "Populasjonsstørrelse", Model.CPopulasjonsstørrelseAntatt);*@
+                    <div class="criterium">
+                        @if (!string.IsNullOrEmpty(Model.D1FåReproduserendeIndividKode) && Model.Kriterier.IndexOf("D1") >= 0)
+                        {
+                            @if (!gjeldende("C"))
+                            {
+                                @*// TODO FIX:
+                                    MMPI("C", "Populasjonsstørrelse", Model.CPopulasjonsstørrelseAntatt);*@
 
-                    }
+                            }
 
-                    <b>D1 Få reproduksjonsdyktige individ</b><button class="detaljer" onclick="togglePopup('fåInd')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                    <div class="popuptext" id="fåInd">
-                        <button class="closePopup" onclick="closePopup('fåInd')"> x </button>
-                        <div>
-                            Arten har få reproduksjonsdyktige individ/liten populasjonsstørrelse, men er ikke nødvendigvis i nedgang.
-                            For kjønnede arter kan antall reproduksjonsdyktige individ tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere.
-                            Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd.
-                            For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering.
-                            Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.
-                        </div>
-                    </div>
-                    @if (!string.IsNullOrEmpty(Model.CVurdertpopulasjonsstørrelseProdukt) && Model.Kriterier.IndexOf("C") < 0)
-                    {
-                        <br /><span>Beregnet populasjonsstørrelse, med føre-var forbehold: @Model.CVurdertpopulasjonsstørrelseProdukt individer</span> <button class="detaljer" onclick="togglePopup('begrPopStr')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                        <div class="popuptext" id="begrPopStr">
-                            <button class="closePopup" onclick="closePopup('begrPopStr')"> x </button>
-                            <div>
-                                IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp.
-                                Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon.
-                                På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene.
-                                Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12.
-                                Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent).
+                            <b>D1 Få reproduksjonsdyktige individ</b><button class="detaljer" onclick="togglePopup('fåInd')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
+                            <div class="popuptext" id="fåInd">
+                                <button class="closePopup" onclick="closePopup('fåInd')"> x </button>
+                                <div>
+                                    Arten har få reproduksjonsdyktige individ/liten populasjonsstørrelse, men er ikke nødvendigvis i nedgang.
+                                    For kjønnede arter kan antall reproduksjonsdyktige individ tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere.
+                                    Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd.
+                                    For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering.
+                                    Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.
+                                </div>
                             </div>
-                        </div>
-                    }
+                            @if (!string.IsNullOrEmpty(Model.CVurdertpopulasjonsstørrelseProdukt) && Model.Kriterier.IndexOf("C") < 0)
+                            {
+                                <br /><span>Beregnet populasjonsstørrelse, med føre-var forbehold: @Model.CVurdertpopulasjonsstørrelseProdukt individer</span> <button class="detaljer" onclick="togglePopup('begrPopStr')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
+                                <div class="popuptext" id="begrPopStr">
+                                    <button class="closePopup" onclick="closePopup('begrPopStr')"> x </button>
+                                    <div>
+                                        IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp.
+                                        Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon.
+                                        På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene.
+                                        Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12.
+                                        Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent).
+                                    </div>
+                                </div>
+                            }
 
-                    <dl class="responsive condenced width40">
+                            <dl class="responsive condenced width40">
 
-                        @{CondDT("D1 Antall reproduksjonsdyktige individ", D1def(Model.D1FåReproduserendeIndividKode)); }
-                    </dl>
-                    CatLine(Model.D1FåReproduserendeIndividKode);
+                                @{CondDT("D1 Antall reproduksjonsdyktige individ", D1def(Model.D1FåReproduserendeIndividKode)); }
+                            </dl>
+                            CatLine(Model.D1FåReproduserendeIndividKode);
 
-                }
-                @if (!string.IsNullOrEmpty(Model.D2MegetBegrensetForekomstarealKode) && Model.Kriterier.IndexOf("D2") >= 0)
-                {
-                    <b>D2 Begrenset forekomstareal eller antall trusseldefinerte lokaliteter</b><button class="detaljer" onclick="togglePopup('begrensetForekomst')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                    <div class="popuptext" id="begrensetForekomst">
-                        <button class="closePopup" onclick="closePopup('begrensetForekomst')"> x </button>
-                        <div>
-                            D2-kriteriet kan brukes om man har identifisert en sannsynlig trussel mot populasjonen av en slik alvorlighetsgrad at arten kan bli kritisk truet (CR) eller regionalt utdødd (RE) innen få år etter at trusselen inntreffer.
-                        </div>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.D2MegetBegrensetForekomstarealKode) && Model.Kriterier.IndexOf("D2") >= 0)
+                        {
+                            <b>D2 Begrenset forekomstareal eller antall trusseldefinerte lokaliteter</b><button class="detaljer" onclick="togglePopup('begrensetForekomst')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
+                            <div class="popuptext" id="begrensetForekomst">
+                                <button class="closePopup" onclick="closePopup('begrensetForekomst')"> x </button>
+                                <div>
+                                    D2-kriteriet kan brukes om man har identifisert en sannsynlig trussel mot populasjonen av en slik alvorlighetsgrad at arten kan bli kritisk truet (CR) eller regionalt utdødd (RE) innen få år etter at trusselen inntreffer.
+                                </div>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.B2BeregnetAreal))
+                            {
+                                <br /><b>Beregnet forekomstareal: @Model.B2BeregnetAreal km²</b>
+                            }
+                            @if (!string.IsNullOrEmpty(Model.BA2FåLokaliteterProdukt))
+                            {
+                                <br /><b>Beregnet antall trusseldefinerte lokaliteter: @Model.BA2FåLokaliteterProdukt</b>
+                            }
+
+                            <dl class="responsive condenced width40">
+                                @{CondDT("D2 Den begrensede forekomsten tilsvarer:", D2def(Model.D2MegetBegrensetForekomstarealKode)); } @*Meget begrenset forekomst*@
+                                @*Få reproduserende individ*@
+
+                            </dl>
+                            CatLine(Model.D2MegetBegrensetForekomstarealKode);
+
+                        }
                     </div>
-                    @if (!string.IsNullOrEmpty(Model.B2BeregnetAreal))
-                    {
-                        <br /><b>Beregnet forekomstareal: @Model.B2BeregnetAreal km²</b>
-                    }
-                    @if (!string.IsNullOrEmpty(Model.BA2FåLokaliteterProdukt))
-                    {
-                        <br /><b>Beregnet antall trusseldefinerte lokaliteter: @Model.BA2FåLokaliteterProdukt</b>
-                    }
-
-                    <dl class="responsive condenced width40">
-                        @{CondDT("D2 Den begrensede forekomsten tilsvarer:", D2def(Model.D2MegetBegrensetForekomstarealKode)); } @*Meget begrenset forekomst*@
-                    @*Få reproduserende individ*@
-
-                    </dl>
-                    CatLine(Model.D2MegetBegrensetForekomstarealKode);
-
-                }
-            </div>
                 }
 
 
@@ -1585,10 +1593,10 @@
 
                 </div>
             }
-                       
+
         </div>
     </div>
-
+</div>
 }
 
 

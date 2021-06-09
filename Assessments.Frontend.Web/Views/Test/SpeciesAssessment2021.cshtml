@@ -45,7 +45,7 @@
 
 
         <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
-        
+
         <div class="section">PÅvirkningsfaktorer: modellens lengde = @Model.Påvirkningsfaktorer.Count</div>
         @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
         {
@@ -69,6 +69,10 @@
         {
             @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
         }
+
+
+        @Html.Partial("/Views/Test/partials_2021/_RL2021.cshtml", Model)}
+
 
     </div>
 </div>

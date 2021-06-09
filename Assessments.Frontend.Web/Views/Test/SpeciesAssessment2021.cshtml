@@ -44,30 +44,31 @@
         <partial name="/Views/Shared/_Categorybar.cshtml" />
 
 
-           <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
-
-            @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
-            {
-                @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
-            }
-
-
-            @if (Model.Fylkesforekomster != null)
-            {
-                @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster.cshtml", Model.Fylkesforekomster)
-            }
+        <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
+        
+        <div class="section">PÅvirkningsfaktorer: modellens lengde = @Model.Påvirkningsfaktorer.Count</div>
+        @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
+        {
+            @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
+        }
 
 
-            @if (Model.NaturtypeHovedenhet != null)
-            {
-                @Html.Partial("/Views/Test/partials_2021/_Naturtyper.cshtml", Model.NaturtypeHovedenhet)
-            }
+        @if (Model.Fylkesforekomster != null)
+        {
+            @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster.cshtml", Model.Fylkesforekomster)
+        }
 
 
-            @if (Model.Referanser != null && Model.Referanser.Count > 0)
-            {
-                @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
-            }
+        @if (Model.NaturtypeHovedenhet != null)
+        {
+            @Html.Partial("/Views/Test/partials_2021/_Naturtyper.cshtml", Model.NaturtypeHovedenhet)
+        }
 
-            </div>
+
+        @if (Model.Referanser != null && Model.Referanser.Count > 0)
+        {
+            @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
+        }
+
+    </div>
 </div>

@@ -1,22 +1,9 @@
 ﻿@model Artsdatabanken.RL2021
 @{
     ViewBag.Title = "Vurdering";
-
     string category = "NA"; //Model.Kategori == null ? "" : Model.Kategori.Length > 2 ? Model.Kategori.Substring(0, 2) : Model.Kategori;
-
     var assessment = Model;
-
-
-    // Dictionary<string, IEnumerable<Databank.Domain.Code>> labels = ViewBag.Codes;
-
-    //ViewBag.Labels = labels;
-
-   // var codes = labels; 
-    //ViewBag.CondLabel = new Func<string, Func<string, string>>(kodeid => new Func<string, string>(key => (string.IsNullOrEmpty(key) ? "" : (labels[kodeid].Where(code => code.Value == key).Select(code => code.Text).FirstOrDefault()))));
-    //ViewBag.CondKode = new Func<string, Func<string, string>>(kodeid => new Func<string, string>(key => (string.IsNullOrEmpty(key) ? "" : (codes[kodeid].Where(code => code.Value == key).Select(code => code.Text).FirstOrDefault()))));
-
     ViewBag.NtLabels = ViewBag.CondLabel("NatureType");
-
     var vurdertIUCN = ViewBag.Vurdert;
 }
 
@@ -31,12 +18,6 @@
     @if (vurdertIUCN)
     {
         <div class="row">
-    @*
-        @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
-        {
-            @Html.Partial("Partial/Pavirkningsfaktorer", Model.Påvirkningsfaktorer)
-        }
-    *@
         </div>
 
 

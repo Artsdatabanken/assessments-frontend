@@ -36,44 +36,38 @@
     <div class="mid">
         <div class="ingress">
             <p>
-                Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge. 
+                Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge.
                 Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
             </p>
         </div>
 
-        <div class="section">
-            <h2>Vurderingsinnhold</h2>
-
-            <p>KOMMER HER</p>
-
-            <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
+        <partial name="/Views/Shared/_Categorybar.cshtml" />
 
 
-            <p>Kommer her</p>
+           <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
 
-            <partial name="/Views/Shared/_Categorybar.cshtml" />
+            @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
+            {
+                @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
+            }
 
 
-            
-        @if (Model.Fylkesforekomster != null)
-        {
-            @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster.cshtml", Model.Fylkesforekomster)
-        }
-            
+            @if (Model.Fylkesforekomster != null)
+            {
+                @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster.cshtml", Model.Fylkesforekomster)
+            }
+
 
             @if (Model.NaturtypeHovedenhet != null)
             {
                 @Html.Partial("/Views/Test/partials_2021/_Naturtyper.cshtml", Model.NaturtypeHovedenhet)
             }
 
-            
+
             @if (Model.Referanser != null && Model.Referanser.Count > 0)
             {
                 @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
             }
 
-
-
-        </div>
-    </div>
+            </div>
 </div>

@@ -9,76 +9,33 @@
 
     }*@
 
-<h3 class="panel-title" style="color: #4c4a48" id="references">
-    Referanser
-</h3>
-@if (Model != null && Model.Count() > 0)
-{
-    <div class="panel panel-default">
-        <div class="panel-heading">
+<div class="section">
+    <h3 class="panel-title" style="color: #4c4a48" id="references">
+        Referanser
+    </h3>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="panel panel-default">
+            <div class="panel-heading">
 
-        </div>
-        <div id="references">
-            @*class="panel-collapse collapse">*@
-            <ul class="panel-body list-unstyled" style="margin-bottom: 0">
-                @if (Model.Count() > 0)
-                {
-                    <li>
-                        @* <h4>Publikasjoner</h4>*@
-                        <ul class="list-unstyled">
-                            @foreach (var pub in Model)
-                            {
-                                <li style="word-break: break-word; margin-bottom: 5px;">@pub.FormattedReference</li>
-                            }
-                        </ul>
-                    </li>
-                }
-                @*@if (persons.Count() > 0)
+            </div>
+            <div id="references">
+                @*class="panel-collapse collapse">*@
+                <ul class="panel-body list-unstyled" style="margin-bottom: 0">
+                    @if (Model.Count() > 0)
                     {
                         <li>
-                            <h4>Personer</h4>
+                            @* <h4>Publikasjoner</h4>*@
                             <ul class="list-unstyled">
-                                @foreach (var r in persons)
+                                @foreach (var pub in Model)
                                 {
-                                    <li style="word-break: break-word;">@r.FormattedReference</li>
+                                    <li style="word-break: break-word; margin-bottom: 5px;">@pub.FormattedReference</li>
                                 }
                             </ul>
                         </li>
-                    }*@
-                @*@if (urls.Count() > 0)
-                    {
-                        <li>
-                            <h4>URI</h4>
-                            <ul class="list-unstyled">
-                                @foreach (var r in urls)
-                                {
-                                    <li style="word-break: break-word;">@r.FormattedReference</li>
-                                }
-                            </ul>
-                        </li>
-                    }*@
-                @*@if (other.Count() > 0)
-                    {
-                    <li>
-                        <ul class="list-unstyled">
-                            @foreach (var r in other)
-                            {
-                                @if (r.Type != "Person") {
-                                    <li style="word-break: break-word;">@r.FormattedReference</li>
-                                }
-                            }
-                        </ul>
-                    </li>
-                    }*@
-            </ul>
+                    }
+                </ul>
+            </div>
         </div>
-    </div>
-}
-
-@*<script>
-        $("h2#references").click(function () {
-            $("div.references").toggle(300);
-        });
-
-        $("div.references").hide();
-    </script>*@
+    }
+</div>

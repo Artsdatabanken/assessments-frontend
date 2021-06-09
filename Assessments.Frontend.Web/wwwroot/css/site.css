@@ -194,3 +194,8 @@ td{
     vertical-align: bottom;
     font-size: 16pt;
 }
+
+.section{
+    border:1px solid grey;
+    padding:20px;
+}

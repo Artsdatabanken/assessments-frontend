@@ -66,6 +66,11 @@
                 @Html.Partial("/Views/Test/partials_2021/_Naturtyper.cshtml", Model.NaturtypeHovedenhet)
             }
 
+            @if (Model.Referanser != null && Model.Referanser.Count > 0)
+            {
+                @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
+            }
+
 
 
         </div>

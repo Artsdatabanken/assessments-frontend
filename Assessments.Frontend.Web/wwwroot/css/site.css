@@ -282,9 +282,11 @@ td{
 }
 
 /* OVERRIDE STYLES */
-.content-placer .mid {
+.bigmid .mid {
     width: 100%;
 }
+
+/* Other */
 
 .checklist {
     display: block;

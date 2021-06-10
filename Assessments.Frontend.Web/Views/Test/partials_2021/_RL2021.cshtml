@@ -38,9 +38,7 @@
 
     //bool vurdert = true;//ViewBag.Vurdert;
     string ekspertgruppe = char.ToLower(assessment.Ekspertgruppe[0]) + assessment.Ekspertgruppe.Substring(1);
-    string popularName = "";
-    if (assessment.PopularName != string.Empty && !string.IsNullOrEmpty(assessment.PopularName))
-        popularName = char.ToUpper(assessment.PopularName[0]) + assessment.PopularName.Substring(1);
+    
 }
 
 
@@ -849,17 +847,11 @@
             @if (true)
             {
 
-                <div class="nameBlock">
-                    @if (!string.IsNullOrEmpty(Model.PopularName))
-                    {
-                        <h1 style="margin-right:15px"><b> @popularName </b><i><b>@assessment.VurdertVitenskapeligNavn</b></i> @assessment.VurdertVitenskapeligNavnAutor</h1>
-                    }
-                    else
-                    {
-                        <h1><i><b>@assessment.VurdertVitenskapeligNavn</b></i> @assessment.VurdertVitenskapeligNavnAutor  </h1>
-                    }
-
-                </div>
+                @*
+                    <<-------- FLYTTA HERFRA
+                
+                    *@
+                
                 <a data-toggle="collapse" id="writeFeedback" href="#othereffects">Gi tilbakemelding</a>
                 <div style="color: #80736b; font-size: x-large">
                     Kategori Rødlista 2021: @if (assessment.Kategori != "")
@@ -867,6 +859,8 @@
                         <i> @categoryDescription(assessment.Kategori)</i> @assessment.Kategori
                     }
                 </div>
+
+
                 @if (assessment.Kategori == "CR" && assessment.TroligUtdodd == true)
                 {
                     <div style="display: flex">

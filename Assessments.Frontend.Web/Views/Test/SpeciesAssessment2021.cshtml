@@ -22,12 +22,15 @@
     </ul>
 </div>
 
-<div class="content-placer">
+<div class="content-placer bigmid">
     <div class="page-header">
         <h1>
             Norsk Rødliste for arter 2021
         </h1>
         <h2>@ViewBag.Title</h2>
+
+       
+
         <span class="byline">
             Ikke publisert ennå
         </span>
@@ -41,8 +44,9 @@
             </p>
         </div>
 
-        <partial name="/Views/Shared/_Categorybar.cshtml" />
+        <partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" />
 
+        <partial name="/Views/Shared/_Categorybar.cshtml" />
 
         <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
 
@@ -68,6 +72,8 @@
         {
             @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
         }
+
+
 
 
         @*@Html.Partial("/Views/Test/partials_2021/_RL2021.cshtml", Model)}*@

@@ -4,7 +4,7 @@
     <h2>Påvirkningsfaktorer </h2>
 
     <div class="section">
-        <h3>Informasjonsboks - popup</h3>
+        <h3>Informasjonsboks - popup (midlertidig faktaboks)</h3>
         @*
         <button class="detaljer" onclick="togglePopup('påvirkningMobile')">
             <img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" />
@@ -24,7 +24,7 @@
 
     </div><!-- End section -->
 
-    <div class="section factors">
+    <div class="factors">
         @{string currentøverste = "";
             foreach (var pfaktor in Model)
             {
@@ -33,45 +33,47 @@
                     @if (pfaktor.ØversteTittel != currentøverste)
                     {
                         currentøverste = pfaktor.ØversteTittel;
-                        <h3>@pfaktor.ØversteTittel</h3>
+                        <h3 class="øverstetittel">@pfaktor.ØversteTittel</h3>
                     }
 
-                    <h4 class="apparently-a-header">
-                        <!-- TODO: Figure out what this is, as it appears to be the same as that above?-->
-                        @{
-                            string ReplaceLastOccurrence(string Source, string Find, string Replace)
-                            {
-                                int place = Source.LastIndexOf(Find);
 
-                                if (place == -1)
-                                    return Source;
-
-                                string result = Source.Remove(place, Find.Length).Insert(place, Replace);
-                                return result;
-                            }
-                            var tittels = ReplaceLastOccurrence(pfaktor.Tittel, " - ", " > ").Split(">").Select(s => s.Trim()).ToList();
-                            for (var n = 0; n < tittels.Count; n++)
-                            {
-                                <span class="pvftittel pvfintend@(n)" style="margin-left: @(n)0px">@tittels[n]</span>
-                            }
+                    <!-- TODO: Figure out what this is, as it appears to be the same as that above?
+                         GOOD SPECIES EXAMPLE: Najas flexilis -->
+                    @{
+                        string ReplaceLastOccurrence(string Source, string Find, string Replace)
+                        {
+                            // Example of pre-formatted look: Landbruk > Jordbruk - Drenering (grøfting)
+                            // Splits string at keypoints and turns into list. 
+                            int place = Source.LastIndexOf(Find);
+                            if (place == -1)
+                                return Source;
+                            string result = Source.Remove(place, Find.Length).Insert(place, Replace);
+                            return result;
                         }
-                    </h4>
 
+                        var tittels = ReplaceLastOccurrence(pfaktor.Tittel, " - ", " > ").Split(">").Select(s => s.Trim()).ToList();
+                        for (var n = 0; n < tittels.Count; n++)
+                        {
+                            <h4 class="subtittel">@tittels[n]</h4>
+                        }
+                    }
 
 
                     @{
                         string omfang = pfaktor.Omfang.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
-                        <h3>Omfang</h3>
+                        <h5>Omfang</h5>
                         <p>@Html.Raw(omfang)</p>
 
                     }
                     @{
                         string alvorlighetsgrad = pfaktor.Alvorlighetsgrad.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
-                        <h3>Alvorlighetsgrad</h3>
+                        <h5>Alvorlighetsgrad</h5>
                         <p>@Html.Raw(alvorlighetsgrad)</p>
                     }
-                    <h3>Tidspunkt</h3>
+                    <h5>Tidspunkt</h5>
                     <p>@pfaktor.Tidspunkt</p>
+
+                    <hr/>
                 </div>
 
             }

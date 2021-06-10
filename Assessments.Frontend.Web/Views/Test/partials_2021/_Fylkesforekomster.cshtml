@@ -18,50 +18,37 @@
 }
 
 <div class="section">
-    <h1>FYLKESFOREKOMST</h1>
+    <h2>Fylkesforekomster</h2>
+
+    <div class="mobileHeader section">
+        <h3>
+            Regioner og havområder - popup (Midlertidig faktaboks)
+            @*
+                <button class="detaljer" onclick="togglePopup('regionerMobile')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
+            *@
+        </h3>
+        <div class="popuptext" id="regionerMobile">
+            @*<button class="closePopup" onclick="closePopup('regionerMobile')"> x </button>*@
+            <div>
+                En art er forekommende i et (historisk) fylke eller havområde hvis én eller flere vesentlige deler av livssyklusen foregår der.
+                "Kjent" forekomst betyr kjent eller sannsynlig nåværende forekomst, "antatt" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser), "antatt utdødd" forekomst brukes når arten muligens har dødd ut lokalt, mens "utdødd forekomst" brukes når det er overveiende sannsynlig at arten har dødd ut.
+                Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Av praktiske årsaker presenteres forekomster etter fylkesinndelingen per 1. januar 2018.
+            </div>
+        </div>
+    </div>
 
     <div class="panel panel-default">
         <div id="fylkesforekomst" class="collapse in">
             @if (tableVisible)
             {
-                @*<dl class="panel-body responsive condenced width160 unbold" id="table">*@
-                <div class="mobileHeader">
-                    <h3>
-                        Regioner og havområder
-                        <button class="detaljer" onclick="togglePopup('regionerMobile')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-
-                    </h3>
-                    <div class="popuptext" id="regionerMobile" style="width: 80%; font-weight: normal; margin-top: 30px; margin-left: 1em">
-                        <button class="closePopup" onclick="closePopup('regionerMobile')"> x </button>
-                        <div>
-                            En art er forekommende i et (historisk) fylke eller havområde hvis én eller flere vesentlige deler av livssyklusen foregår der.
-                            "Kjent" forekomst betyr kjent eller sannsynlig nåværende forekomst, "antatt" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser), "antatt utdødd" forekomst brukes når arten muligens har dødd ut lokalt, mens "utdødd forekomst" brukes når det er overveiende sannsynlig at arten har dødd ut.
-                            Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Av praktiske årsaker presenteres forekomster etter fylkesinndelingen per 1. januar 2018.
-                        </div>
-                    </div>
-                </div>
                 <table class="table table-striped table-hover">
                     <thead>
-                        <tr style="background-color: #f5f5f5">
-                            <th>
-                                <h3>
-                                    Regioner og havområder
-                                    <button class="detaljer" onclick="togglePopup('regioner')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-
-                                </h3>
-                                <div class="popuptext" id="regioner" style="width: 18%; font-weight: normal; margin-top: -1px; margin-left: 1em">
-                                    <button class="closePopup" onclick="closePopup('regioner')"> x </button>
-                                    <div>
-                                        En art er forekommende i et (historisk) fylke eller havområde hvis én eller flere vesentlige deler av livssyklusen foregår der.
-                                        "Kjent" forekomst betyr kjent eller sannsynlig nåværende forekomst, "antatt" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser), "antatt utdødd" forekomst brukes når arten muligens har dødd ut lokalt, mens "utdødd forekomst" brukes når det er overveiende sannsynlig at arten har dødd ut.
-                                        Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Av praktiske årsaker presenteres forekomster etter fylkesinndelingen per 1. januar 2018.
-                                    </div>
-                                </div>
-                            </th>
-                            <th style="vertical-align:top"> <h3>Kjent </h3></th>
-                            <th style="vertical-align:top"><h3>Antatt</h3>  </th>
-                            <th style="vertical-align:top"> <h3>Utdødd</h3>  </th>
-                            <th style="vertical-align:top"> <h3>Antatt utdødd</h3> </th>
+                        <tr>
+                            <th style="min-width:100px;">Regioner og havområder</th>
+                            <th>Kjent</th>
+                            <th>Antatt</th>
+                            <th>Utdødd</th>
+                            <th>Antatt utdødd</th>
                         </tr>
                     </thead>
                     <tbody data-bind="foreach: speciesSearchResult">
@@ -76,14 +63,10 @@
                                 <td class="adjustable">@Html.Raw(region.State == 3 ? check : string.Empty)</td>
                             </tr>
                         }
-
-
                     </tbody>
                 </table>
 
-
-                @*</dl>*@
-            }
+             }
             @if (!tableVisible)
             {
                 <dl class="panel-body responsive condenced width160 unbold" id="map" data-bind="visible: !tableVisible" style="color: white">
@@ -93,38 +76,5 @@
 
         </div>
     </div>
-    </div>
+</div>
 
-
-    @*  Need to move this, because it interfer with the grid flow!
-        <script>$(document).ready(function () { replaceRodliste2015Fylker(); });</script>
-    *@
-    <script>
-    var activePopups = document.getElementsByClassName('show');
-    function togglePopup(id) {
-        if (activePopups.length > 0) {
-            //console.log(activePopups[0].id);
-            if (activePopups[0].id != id) {
-                activePopups[0].classList.remove('show');
-            }
-        }
-        var popup = document.getElementById(id);
-        popup.classList.toggle("show");
-    }
-
-    function closePopup(id) {
-        var popuptext = document.getElementById(id);
-        popuptext.classList.remove("show");
-    }
-   @* function closeHint() {
-        var popuptext = document.getElementsByClassName('show');
-        console.log(popuptext);
-        if (popuptext.length > 1) {
-            for (var i = 0; i < popuptext.length - 1; i++) {
-                popuptext[i].classList.remove('show');
-                popuptext = document.getElementsByClassName('show');
-            }
-        }
-
-    }*@
-    </script>

@@ -25,59 +25,86 @@
     </div><!-- End section -->
 
     <div class="factors">
-        @{string currentøverste = "";
-            foreach (var pfaktor in Model)
-            {
 
-                <div class="pavirknings-boks">
-                    @if (pfaktor.ØversteTittel != currentøverste)
-                    {
-                        currentøverste = pfaktor.ØversteTittel;
-                        <h3 class="øverstetittel">@pfaktor.ØversteTittel</h3>
-                    }
+        <table>
+            <!-- TODO: Fiks responsivitet i tabeller. Eksempel på https://artsdatabanken.no/Rodliste2015/rodliste2015/Norge/99338 -->
+            <thead>
+                <tr>
+                    <th>Beskrivelse</th>
+                    <th>Omfang</th>
+                    <th>Alvorlighetsgrad</th>
+                    <th>Tidspunkt</th>
+                </tr>
+            </thead>
+            @{string currentøverste = "";
+                foreach (var pfaktor in Model)
+                {
 
+                    <tr class="pavirknings-boks">
 
-                    <!-- TODO: Figure out what this is, as it appears to be the same as that above?
-                         GOOD SPECIES EXAMPLE: Najas flexilis -->
-                    @{
-                        string ReplaceLastOccurrence(string Source, string Find, string Replace)
-                        {
-                            // Example of pre-formatted look: Landbruk > Jordbruk - Drenering (grøfting)
-                            // Splits string at keypoints and turns into list. 
-                            int place = Source.LastIndexOf(Find);
-                            if (place == -1)
-                                return Source;
-                            string result = Source.Remove(place, Find.Length).Insert(place, Replace);
-                            return result;
-                        }
-
-                        var tittels = ReplaceLastOccurrence(pfaktor.Tittel, " - ", " > ").Split(">").Select(s => s.Trim()).ToList();
-                        for (var n = 0; n < tittels.Count; n++)
-                        {
-                            <h4 class="subtittel">@tittels[n]</h4>
-                        }
-                    }
+                        <td>
+                            <span class="mobile-table-header">Beskrivelse</span>
+                            @if (pfaktor.ØversteTittel != currentøverste)
+                            {
+                                currentøverste = pfaktor.ØversteTittel;
+                                @pfaktor.ØversteTittel
+                            }
 
 
-                    @{
-                        string omfang = pfaktor.Omfang.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
-                        <h5>Omfang</h5>
-                        <p>@Html.Raw(omfang)</p>
+                            <!-- TODO: Figure out what this is, as it appears to be the same as that above?
+                    GOOD SPECIES EXAMPLE: Najas flexilis -->
+                            @{
+                                string ReplaceLastOccurrence(string Source, string Find, string Replace)
+                                {
+                                    // Example of pre-formatted look: Landbruk > Jordbruk - Drenering (grøfting)
+                                    // Splits string at keypoints and turns into list.
+                                    int place = Source.LastIndexOf(Find);
+                                    if (place == -1)
+                                        return Source;
+                                    string result = Source.Remove(place, Find.Length).Insert(place, Replace);
+                                    return result;
+                                }
 
-                    }
-                    @{
-                        string alvorlighetsgrad = pfaktor.Alvorlighetsgrad.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
-                        <h5>Alvorlighetsgrad</h5>
-                        <p>@Html.Raw(alvorlighetsgrad)</p>
-                    }
-                    <h5>Tidspunkt</h5>
-                    <p>@pfaktor.Tidspunkt</p>
+                                var tittels = ReplaceLastOccurrence(pfaktor.Tittel, " - ", " > ").Split(">").Select(s => s.Trim()).ToList();
+                                for (var n = 0; n < tittels.Count; n++)
+                                {
+                                    <span class="table-subtittel">@tittels[n]</span>
+                                }
+                            }
 
-                    <hr/>
-                </div>
+                        </td>
+                        <td>
 
+                            @{
+                                string omfang = pfaktor.Omfang.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
+                                <span class="mobile-table-header">Omfang</span>
+                                @Html.Raw(omfang)
+
+                            }
+                        </td>
+                        <td>
+                            @{
+                                string alvorlighetsgrad = pfaktor.Alvorlighetsgrad.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
+                                <span class="mobile-table-header">Alvorlighetsgrad</span>
+                                @Html.Raw(alvorlighetsgrad)
+                            }
+                        </td>
+                        <td>
+                            <span class="mobile-table-header">Tidspunkt</span>
+                            @pfaktor.Tidspunkt
+                        </td>
+
+
+
+
+
+
+                    </tr>
+
+                }
             }
-        }
+
+        </table>
     </div> <!-- end pavirkningsboks -->
 </div> <!-- end factors -->
 

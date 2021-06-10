@@ -1,90 +1,86 @@
 ﻿@model IEnumerable< Artsdatabanken.RL2021Pavirkningsfaktor>
 
+<div class="section">
+    <h2>Påvirkningsfaktorer </h2>
+
     <div class="section">
-        <h1>PÅVIRKNINGSFAKTOR</h1>
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div id="pavirkningsfaktor" class="collapse in">
-                    <div class="mobileHeader">
-                        <h3>Påvirkningsfaktorer </h3>
-                        <button class="detaljer" onclick="togglePopup('påvirkningMobile')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                        <div class="popuptext" id="påvirkningMobile" style="width: 90%; margin-left: 0; margin-top: 40px">
-                            <button class="closePopup" onclick="closePopup('påvirkningMobile')"> x </button>
-                            <div>
-                                Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt.
-                                Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. "Påvirkning på habitat" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten.
-                                For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row header" style="width: 100%; margin-left: 0">
-                        <div class="col-md-3" style="display: flex">
-                            <h3>Påvirkningsfaktorer </h3>
-                            <button class="detaljer" onclick="togglePopup('påvirkning')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                            <div class="popuptext" id="påvirkning" style="width: 95%; margin-left: 0; margin-top: 20px">
-                                <button class="closePopup" onclick="closePopup('påvirkning')"> x </button>
-                                <div>
-                                    Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt.
-                                    Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. "Påvirkning på habitat" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten.
-                                    For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3"><h3>Omfang</h3></div>
-                        <div class="col-md-3"><h3>Alvorlighetsgrad</h3></div>
-                        <div class="col-md-3"><h3>Tidspunkt</h3></div>
-                    </div>
-                    @{string currentøverste = "";
-                        foreach (var pfaktor in Model)
-                        {
+        <h3>Informasjonsboks - popup</h3>
+        @*
+        <button class="detaljer" onclick="togglePopup('påvirkningMobile')">
+            <img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" />
+        </button>
+        *@
 
-                            if (pfaktor.ØversteTittel != currentøverste)
-                            {
-                                currentøverste = pfaktor.ØversteTittel;
-                                <div class="upper">
-                                    <strong>@pfaktor.ØversteTittel</strong>
-                                </div>
+        <!-- Start Popup -->
+        <div class="popuptext" id="påvirkningMobile">
 
-                            }
-                            <div class="row" style="margin-bottom: 5px">
-                                <div class="col-md-3">
-                                    @*@pfaktor.Tittel*@
-                                    @{
-                                        string ReplaceLastOccurrence(string Source, string Find, string Replace)
-                                        {
-                                            int place = Source.LastIndexOf(Find);
-
-                                            if (place == -1)
-                                                return Source;
-
-                                            string result = Source.Remove(place, Find.Length).Insert(place, Replace);
-                                            return result;
-                                        }
-                                        var tittels = ReplaceLastOccurrence(pfaktor.Tittel, " - ", " > ").Split(">").Select(s => s.Trim()).ToList();
-                                        for (var n = 0; n < tittels.Count; n++)
-                                        {
-                                            <div class="pvftittel pvfintend@(n)" style="margin-left: @(n)0px">@tittels[n]</div>
-                                        }
-                                    }
-
-                                </div>
-                                @{
-                                    string omfang = pfaktor.Omfang.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
-                                    <div class="col-md-3">@Html.Raw(omfang)</div>
-                                    @*<div class="col-md-3">@omfang</div>*@
-                                }
-                                @{
-                                    string alvorlighetsgrad = pfaktor.Alvorlighetsgrad.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
-                                    <div class="col-md-3">@Html.Raw(alvorlighetsgrad)</div>
-                                }
-                                <div class="col-md-3">@pfaktor.Tidspunkt</div>
-                            </div>
-
-                        }
-                    }
-                </div>
+            @*<button class="closePopup" onclick="closePopup('påvirkningMobile')"> x </button>*@
+            <div>
+                Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt.
+                Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. "Påvirkning på habitat" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten.
+                For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.
             </div>
-        </div>
+        </div><!-- End Popup -->
 
-       </div>
+    </div><!-- End section -->
+
+    <div class="section factors">
+        @{string currentøverste = "";
+            foreach (var pfaktor in Model)
+            {
+
+                <div class="pavirknings-boks">
+                    @if (pfaktor.ØversteTittel != currentøverste)
+                    {
+                        currentøverste = pfaktor.ØversteTittel;
+                        <h3>@pfaktor.ØversteTittel</h3>
+                    }
+
+                    <h4 class="apparently-a-header">
+                        <!-- TODO: Figure out what this is, as it appears to be the same as that above?-->
+                        @{
+                            string ReplaceLastOccurrence(string Source, string Find, string Replace)
+                            {
+                                int place = Source.LastIndexOf(Find);
+
+                                if (place == -1)
+                                    return Source;
+
+                                string result = Source.Remove(place, Find.Length).Insert(place, Replace);
+                                return result;
+                            }
+                            var tittels = ReplaceLastOccurrence(pfaktor.Tittel, " - ", " > ").Split(">").Select(s => s.Trim()).ToList();
+                            for (var n = 0; n < tittels.Count; n++)
+                            {
+                                <span class="pvftittel pvfintend@(n)" style="margin-left: @(n)0px">@tittels[n]</span>
+                            }
+                        }
+                    </h4>
+
+
+
+                    @{
+                        string omfang = pfaktor.Omfang.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
+                        <h3>Omfang</h3>
+                        <p>@Html.Raw(omfang)</p>
+
+                    }
+                    @{
+                        string alvorlighetsgrad = pfaktor.Alvorlighetsgrad.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
+                        <h3>Alvorlighetsgrad</h3>
+                        <p>@Html.Raw(alvorlighetsgrad)</p>
+                    }
+                    <h3>Tidspunkt</h3>
+                    <p>@pfaktor.Tidspunkt</p>
+                </div>
+
+            }
+        }
+    </div> <!-- end pavirkningsboks -->
+</div> <!-- end factors -->
+
+
+
+
+
 

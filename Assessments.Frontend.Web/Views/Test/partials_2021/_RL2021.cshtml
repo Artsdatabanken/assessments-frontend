@@ -70,49 +70,6 @@
         return false;
     }
 
-    public string categoryDescription(string category)
-    {
-        if (category == "CR" || category == "CRº")
-        {
-            return "kritisk truet ";
-        }
-        else if (category == "EN" || category == "ENº")
-        {
-            return "sterkt truet ";
-        }
-        else if (category == "VU" || category == "VUº")
-        {
-            return "sårbar ";
-        }
-        else if (category == "NT" || category == "NTº")
-        {
-            return "nær truet ";
-        }
-        else if (category == "DD" || category == "DDº")
-        {
-            return "datamangel ";
-        }
-        else if (category == "LC" || category == "LCº")
-        {
-            return "livskraftig ";
-        }
-        else if (category == "NA" || category == "NAº")
-        {
-            return "ikke egnet ";
-        }
-        else if (category == "NE" || category == "NEº")
-        {
-            return "ikke vurdert ";
-        }
-        else if (category == "RE" || category == "REº")
-        {
-            return "regionalt utdødd ";
-        }
-        else
-        {
-            return "";
-        }
-    }
 
     public string setClassName(string cat)
     {
@@ -848,50 +805,37 @@
             {
 
                 @*
-                    <<-------- FLYTTA HERFRA
+            <<-------- FLYTTA HERFRA
+
+                *@
+
+                <!--<a data-toggle="collapse" id="writeFeedback" href="#othereffects">Gi tilbakemelding</a>
+        -->
+
+                <!-- DUPLIKAT AV EKSISTERENDE KODE
+
+            <div style="color: #80736b; font-size: x-large">
+            Kategori Rødlista 2021: @if (assessment.Kategori != "")
+            {
                 
-                    *@
-                
-                <a data-toggle="collapse" id="writeFeedback" href="#othereffects">Gi tilbakemelding</a>
-                <div style="color: #80736b; font-size: x-large">
-                    Kategori Rødlista 2021: @if (assessment.Kategori != "")
-                    {
-                        <i> @categoryDescription(assessment.Kategori)</i> @assessment.Kategori
-                    }
-                </div>
+            }
+        </div>-->
 
+                <!-- NOT RELEVANT, REMADE NEW VERSION in categorybar
+        <div class="category-band">
+            @Html.Raw(setClassName("re"))
+            @Html.Raw(setClassName("cr"))
+            @Html.Raw(setClassName("en"))
+            @Html.Raw(setClassName("vu"))
+            @Html.Raw(setClassName("nt"))
+            @Html.Raw(setClassName("dd"))
+            @Html.Raw(setClassName("lc"))
+            @Html.Raw(setClassName("na"))
+            @Html.Raw(setClassName("ne"))
+        </div>
+        -->
 
-                @if (assessment.Kategori == "CR" && assessment.TroligUtdodd == true)
-                {
-                    <div style="display: flex">
-                        <dl style="margin-top: 20px">
-                            Arten er trolig utdødd.
-                        </dl>
-                        <button class="detaljer" style="margin-bottom: 10px; margin-top: 10px" onclick="togglePopup('dead')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-
-                        <div class="popuptext" style="margin-left: 12px; margin-top: 40px; width: 10%" id="dead">
-                            <button class="closePopup" onclick="closePopup('dead')"> x </button>
-                            <div>
-                                <i>Trolig utdødd</i> er ikke en kategori, men en merkelapp som settes på arter som er vurdert som kritisk truet (CR) og som trolig er utdødd. Dette gjøres når med dagens kunnskap ikke med sikkerhet fastslå at arten er utødd.
-                                En art vurderes som regionalt utdødd (RE) når gjentatte undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn.
-                            </div>
-                        </div>
-
-                    </div>
-
-                }
-
-                <div class="category-band">
-                    @Html.Raw(setClassName("re"))
-                    @Html.Raw(setClassName("cr"))
-                    @Html.Raw(setClassName("en"))
-                    @Html.Raw(setClassName("vu"))
-                    @Html.Raw(setClassName("nt"))
-                    @Html.Raw(setClassName("dd"))
-                    @Html.Raw(setClassName("lc"))
-                    @Html.Raw(setClassName("na"))
-                    @Html.Raw(setClassName("ne"))
-                </div>
+                @* // TABLE OF CONTENTS - ikke direkte overførbar
 
                 <div class="contents">
                     Innhold: <a href="#assessmentInfo">Informasjon om vurderingen &#x25BA;</a>
@@ -908,259 +852,55 @@
                         <span> | </span> <a href="#detaljer"> Om gjeldende kriterier &#x25BA; </a>
                     }
 
-                    @*
-                        @if (ViewBag.Vurdert && Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
+
+            @if (ViewBag.Vurdert && Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
+            {
+                <span> | </span> <a href="#pavirkningsfaktor"> Påvirkningsfaktorer &#x25BA; </a>
+            }
+
+
+
+                        @if (ViewBag.Vurdert && Model.Fylkesforekomster != null)
                         {
-                            <span> | </span> <a href="#pavirkningsfaktor"> Påvirkningsfaktorer &#x25BA; </a>
+                            <span> | </span> <a href="#fylkesforekomst"> Regioner og havområder &#x25BA; </a>
+                        }
+
+                        @if (ViewBag.Vurdert && Model.NaturtypeHovedenhet != null)
+                        {
+                            <span> | </span> <a href="#naturtyper"> Hovedhabitater arten finnes i &#x25BA; </a>
+                        }
+                        @if (ViewBag.Vurdert && (Model.AndelNåværendeBestand != null && Model.AndelNåværendeBestand != " " && Model.AndelNåværendeBestand != "-") || (Model.MaxAndelAvEuropeiskBestand != null && Model.MaxAndelAvEuropeiskBestand != " " && Model.MaxAndelAvEuropeiskBestand != "-") || (Model.MaxAndelAvGlobalBestand != null && Model.MaxAndelAvGlobalBestand != " " && Model.MaxAndelAvGlobalBestand != "-"))
+                        {
+                            <span> | </span> <a href="#popStr"> Informasjon om populasjonsstørrelse &#x25BA; </a>
                         }
 
 
 
-                                    @if (ViewBag.Vurdert && Model.Fylkesforekomster != null)
-                                    {
-                                        <span> | </span> <a href="#fylkesforekomst"> Regioner og havområder &#x25BA; </a>
-                                    }
+                @if (Model.Referanser != null && Model.Referanser.Count > 0)
+                {
+                    <span> | </span> <a href="#references"> Referanser &#x25BA; </a>
+                }
+            </div>
 
-                                    @if (ViewBag.Vurdert && Model.NaturtypeHovedenhet != null)
-                                    {
-                                        <span> | </span> <a href="#naturtyper"> Hovedhabitater arten finnes i &#x25BA; </a>
-                                    }
-                                    @if (ViewBag.Vurdert && (Model.AndelNåværendeBestand != null && Model.AndelNåværendeBestand != " " && Model.AndelNåværendeBestand != "-") || (Model.MaxAndelAvEuropeiskBestand != null && Model.MaxAndelAvEuropeiskBestand != " " && Model.MaxAndelAvEuropeiskBestand != "-") || (Model.MaxAndelAvGlobalBestand != null && Model.MaxAndelAvGlobalBestand != " " && Model.MaxAndelAvGlobalBestand != "-"))
-                                    {
-                                        <span> | </span> <a href="#popStr"> Informasjon om populasjonsstørrelse &#x25BA; </a>
-                                    }
+                *@
 
-                    *@
 
-                    @if (Model.Referanser != null && Model.Referanser.Count > 0)
-                    {
-                        <span> | </span> <a href="#references"> Referanser &#x25BA; </a>
-                    }
-                </div>
+
+
                 <h3>Informasjon om vurderingen</h3>
                 <div class="infoAndHistory">
-                    <div class="assessmentInfo" id="assessmentInfo">
-                        <dl>Vurderingen er gjort i forbindelse med Rødlista  @(ekspertgruppe == "spretthaler" || ekspertgruppe == "spretthaler (Svalbard)" ? assessment.SistVurdertAr : 2021) og utført av ekspertkomité for @ekspertgruppe.</dl>
-                        @if (@assessment.VurderingsContext == "N")
-                        {
-                            <dl>Vurderingen gjelder for Norge, dvs. Fastlands-Norge og nærliggende øyer, norsk territorialfarvann og norsk økonomisk sone, samt fiskevernsonen rundt Svalbard og fiskerisonen rundt Jan Mayen.</dl>
-                        }
-                        else if (@assessment.VurderingsContext == "S")
-                        {
-                            <dl>Vurderingen gjelder for Svalbard, dvs. Spitsbergen og øyene omkring, samt Bjørnøya og Hopen slik det er definert i Svalbardtraktaten.</dl>
-                        }
-
-                        @if (!string.IsNullOrEmpty(Model.UtdoddINorgeRE))
-                        {
-                            @if (@assessment.UtdoddINorgeRE == "etablertBestandINorge")
-                            {
-                                <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten er dokumentert eller antatt å ha vært etablert med fast reproduserende bestand og hadde ikke opphav i introduserte individer.</dl>
-                            }
-                            else @if (@assessment.UtdoddINorgeRE == "ikkeReproduserendeINorge")
-                      {
-                        <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten var ikke fast reproduserende, men > 2 % av individene som utgjorde global populasjonsstørrelse oppholdt seg regelmessig innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") i deler av sin års-/livssyklus (gjester).</dl>
-                    }
-                    else @if (@assessment.UtdoddINorgeRE == "etablertFør1800")
-                  {
-                    <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten er fremmed, men er antatt eller dokumentert å ha vært etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800.</dl>
-                }
-                }
-                        @if (!string.IsNullOrEmpty(Model.BegrensetForekomstNA))
-                        {
-                            @if (@assessment.BegrensetForekomstNA == "ikkeReproduserendeGjestNA")
-                            {
-                                <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er ikke etablert med fast reproduserende bestand og &lt; 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (gjest).</dl>
-                            }
-                            else @if (@assessment.BegrensetForekomstNA == "observertReproduserendeIkkeEtablertNA")
-                       {
-                        <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er observert reproduserende innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard"), men antas å ikke være etablert med fast reproduserende bestand.</dl>
-                    }
-                    else @if (@assessment.BegrensetForekomstNA == "observertReproduktivIkkeEtablertNA")
-                   {
-                    <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er observert i reproduktivt stadium innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard"), men antas å ikke være etablert med fast reproduserende bestand.</dl>
-                }
-                else @if (@assessment.BegrensetForekomstNA == "uregelmessigGjestIkkeReproduserendeNA")
-               {
-                <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er en gjest som uregelmessig dukker opp naturlig innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard").</dl>
-            }
-            else @if (@assessment.BegrensetForekomstNA == "ikkeDokumentertForekomstNA")
-           {
-            <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten har ikke dokumentert forekomst innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard").</dl>
-        }
-        else @if (@assessment.BegrensetForekomstNA == "hybridartUtenReproduksjonNA")
-       {
-        <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart uten reproduksjon.</dl>
-    }
-    else @if (@assessment.BegrensetForekomstNA == "hybridartUvisstOmReproduserendeNA")
-   {
-    <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart, men uvisst om den er reproduserende.</dl>
-}
-else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonNA")
-{
-<dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten forekommer bare i hybridkombinasjon i vurderingsområdet.</dl>
-}
-}
-                        @if (!string.IsNullOrEmpty(Model.KunnskapsStatusNE))
-                        {
-
-                            @if (@assessment.KunnskapsStatusNE == "mangelfullKunnskapNE")
-                            {
-                                <dl>Arten er ikke forsøkt rødlistevurdert (NE) på grunn av svært mangelfull kunnskap.</dl>
-                            }
-                            else @if (@assessment.KunnskapsStatusNE == "uavklartSystematikkNE")
-                       {
-                        <dl>Arten er ikke forsøkt rødlistevurdert (NE) fordi arten eller artsgruppen den tilhører har uavklart systematikk.</dl>
-                    }
-                    else @if (@assessment.KunnskapsStatusNE == "uklartOmReproduserendeBestandNE")
-                   {
-                    <dl>Arten er ikke forsøkt rødlistevurdert (NE) fordi det er uavklart om arten er etablert med en fast reproduserende bestand i vurderingsområdet.</dl>
-                }
-                else @if (@assessment.KunnskapsStatusNE == "artsgruppeIkkeRisikovurdertNE")
-               {
-                <dl>Arten er ikke forsøkt rødlistevurdert (NE) fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021.</dl>
-            }
-            else @if (@assessment.KunnskapsStatusNE == "annetNE")
-           {
-            <dl>Arten er ikke forsøkt rødlistevurdert (NE).</dl>
-        }
-        }
-                        @if (@assessment.OverordnetKlassifiseringGruppeKode == "fremmedArtNA")
-                        {
-                            <span>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er fremmed, og ble enten etablert innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") etter år 1800 eller antas å kunne etablere seg innen 50 år <a href="https://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa">(dørstokkart)</a>.</span>
-                        }
-
-                        @if (!string.IsNullOrEmpty(Model.RodlisteVurdertArt))
-                        {
-
-                            @if (assessment.RodlisteVurdertArt == "etablertBestandINorge")
-                            {
-                                <dl>Arten er dokumentert eller antatt å være etablert med fast reproduserende bestand innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") og har ikke opphav i introduserte individer.</dl>
-                            }
-                            else @if (assessment.RodlisteVurdertArt == "ikkeReproduserendeINorge")
-                       {
-                        <dl>Arten er ikke fast reproduserende innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard"), men > 2 % av individene som utgjør global populasjonsstørrelse oppholder seg regelmessig her i deler av sin års-/livssyklus (gjester).</dl>
-                    }
-                    else @if (assessment.RodlisteVurdertArt == "etablertFør1800")
-                   {
-                    <dl>Arten er fremmed, men er antatt eller dokumentert etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800.</dl>
-                }
-                }
-
-                        @if (@assessment.OverordnetKlassifiseringGruppeKode == "sikkerBestandLC")
-                        {
-                            <dl>Arten er vurdert til å være livskraftig (LC).</dl>
-                        }
-
-                        @if (@assessment.OverordnetKlassifiseringGruppeKode == "rodlisteVurdertArt")
-                        {
-                            <dl>Arten har vært gjennom full rødlistevurdering.</dl>
-                        }
-
-                    </div>
-
-                    <div class="row historyBox">
-
-                        <div class="col-md-6">
-
-                            <div class="panel panel-default" style="border: 5px solid #ddd">
-
-                                <h3 class="panel-title" style="color: #4c4a48; position: relative; top: -12px; left: 80px; width: 55%; background-color: white; padding-left: 30px;" id="historikk">
-                                    Historikk <button class="detaljer" style="margin-left: 10px" onclick="togglePopup('history')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                                </h3>
-                                <div class="popuptext" style="margin-left: 50px; width:65%" id="history">
-                                    <button class="closePopup" onclick="closePopup('history')"> x </button>
-                                    <div>
-                                        Hvis arten har blitt vurdert til Rødlista for arter 2010 og Rødlista for arter 2015 kan du se vurderingene her. Arter uten historikk er vurdert for første gang til Rødlista for arter 2021.
-                                    </div>
-                                </div>
-
-                                @if (Model.SistVurdertAr == 2021 || Model.SistVurdertAr == 0)
-                                {
-                                    @if (Model.Kategori == "NE" || Model.Kategori == "NA")
-                                    {
-                                        <div class="row" style="margin-left: 10px; margin-bottom: 10px">
-                                            <div style="text-align: center">Arten er behandlet for første gang i 2021.</div>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                        <div class="row" style="margin-left: 10px; margin-bottom: 10px">
-                                            <div style="text-align: center">Arten er vurdert for første gang i 2021.</div>
-                                        </div>
-                                    }
-
-                                }
-                                else
-                                {
-                                    <div class="row history" style="margin-top: 10px">
 
 
-                                        @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010) && !string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
-                                        {
-                                            <div class="col-md-3">
-                                                <div class="row">
-                                                    <b>Rødlista 2010</b>
-                                                </div>
-                                                <div class="row second">
-                                                    <a target="_blank" href="@Model.ImportInfo.Url2010"><span class="icon-@Model.ImportInfo.Kategori2010"> &nbsp;</span>@Model.ImportInfo.Kategori2010 @categoryDescription(Model.ImportInfo.Kategori2010)</a>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <div class="row">
-                                                    <b>Rødlista 2015</b>
-                                                </div>
-                                                <div class="row second">
-                                                    <a target="_blank" href="@Model.ImportInfo.Url2015"><span class="icon-@Model.ImportInfo.Kategori2015"> &nbsp;</span>@Model.ImportInfo.Kategori2015 @categoryDescription(Model.ImportInfo.Kategori2015)</a>
-                                                </div>
-                                            </div>
-                                        }
-                                        else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
-                                        {
-                                            <div class="col-md-3" style="width: 100%; margin-left: 0">
-                                                <div class="row">
-                                                    <b>Rødlista 2010</b>
-                                                </div>
-                                                <div class="row second">
-                                                    <a target="_blank" href="@Model.ImportInfo.Url2010"><span class="icon-@Model.ImportInfo.Kategori2010"> &nbsp;</span>@Model.ImportInfo.Kategori2010 @categoryDescription(Model.ImportInfo.Kategori2010)</a>
-                                                </div>
-                                            </div>
-                                        }
-                                        else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
-                                        {
-                                            <div class="col-md-3" style="width: 100%; margin-left: 0">
-                                                <div class="row">
-                                                    <b>Rødlista 2015</b>
-                                                </div>
-                                                <div class="row second">
-                                                    <a target="_blank" href="@Model.ImportInfo.Url2015"><span class="icon-@Model.ImportInfo.Kategori2015"> &nbsp;</span>@Model.ImportInfo.Kategori2015 @categoryDescription(Model.ImportInfo.Kategori2015)</a>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                    <br />
-                                    @if (Model.Ekspertgruppe.ToLower() == "spretthaler" || Model.Ekspertgruppe.ToLower() == "havedderkopper")
-                                    {
-                                        <div class="row" style="margin-left: 10px; margin-bottom: 10px">
-                                            <div>Sist vurdert i: @Model.SistVurdertAr</div>
-                                        </div>
-                                    }
-                                }
+                    
 
 
 
-                                @if (Model.GlobalRødlistestatusKode != null)
-                                {
-                                    <div class="row" style="text-align: center; margin-bottom: 10px">
-                                        Global Rødlistestatus: @Model.GlobalRødlistestatusKode
-                                    </div>
-                                }
 
-                            </div>
-                        </div>
+                    <!-- stopp-->
 
 
-                    </div>
+
+                    <!--- STOPP HISTORIKK-->
                 </div>
 
                 @if (!((Model.Kategori == "NA" || Model.Kategori == "NE" || Model.Kategori == "LC") && (Model.Kriteriedokumentasjon == "" || Model.Kriteriedokumentasjon == null)))
@@ -1259,7 +999,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         {
 
                             @*// TODO FIX:
-                                MMP("A1", "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel", Model.A1OpphørtOgReversibelAntatt);
+                        MMP("A1", "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel", Model.A1OpphørtOgReversibelAntatt);
                             *@
                             <dl class="responsive condenced width40">
                                 @{CondDT("A1 reduksjon", A1def(Model.A1OpphørtOgReversibel));}
@@ -1280,7 +1020,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         @if (gjeldende("A2") && (!string.IsNullOrEmpty(Model.A2Forutgående10År) || Model.A2EndringBasertpåKode.Count > 0))
                         {
                             @*// TODO FIX:
-                                MMP("A2", "Reduksjon de siste 10 år/3 generasjoner", Model.A2Forutgående10ÅrAntatt);
+                        MMP("A2", "Reduksjon de siste 10 år/3 generasjoner", Model.A2Forutgående10ÅrAntatt);
                             *@
                             <dl class="responsive condenced width40">
                                 @{CondDT("A2 reduksjon", A2def(Model.A2Forutgående10År));
@@ -1303,7 +1043,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         @if (gjeldende("A3") && (!string.IsNullOrEmpty(Model.A3Kommende10År) || Model.A3EndringBasertpåKode.Count > 0))
                         {
                             @*// TODO FIX:
-                                MMP("A3", "Framtidig reduksjon kommende 10 år/3 generasjoner", Model.A3Kommende10ÅrAntatt);*@
+                        MMP("A3", "Framtidig reduksjon kommende 10 år/3 generasjoner", Model.A3Kommende10ÅrAntatt);*@
                             <dl class="responsive condenced width40">
                                 @{CondDT("A3 reduksjon", A3def(Model.A3Kommende10År));}
 
@@ -1326,7 +1066,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         @if (gjeldende("A4") && (!string.IsNullOrEmpty(Model.A4Intervall10År) && Model.A4EndringBasertpåKode.Count > 0))
                         {
                             @*// TODO FIX:
-                                MMP("A4", "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid", Model.A4Intervall10ÅrAntatt);*@
+                        MMP("A4", "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid", Model.A4Intervall10ÅrAntatt);*@
                             <dl class="responsive condenced width40">
                                 @{CondDT("A4 reduksjon", A4def(Model.A4Intervall10År));}
                                 @if (Model.A4EndringBasertpåKode.Count > 0)
@@ -1352,7 +1092,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         @if (gjeldende("B1") && (!string.IsNullOrEmpty(assessment.B1UtbredelsesområdeKode) && assessment.B1UtbredelsesområdeKode != "-"))
                         {
                             @*// TODO FIX:
-                                MMPI("B1", "Utbredelsesområde", Model.B1IntervallUtbredelsesområde);*@
+                        MMPI("B1", "Utbredelsesområde", Model.B1IntervallUtbredelsesområde);*@
                             <div>B1 @terskelverdi("B1UtbredelsesområdeKode", Model.B1UtbredelsesområdeKode) tilsvarer i utgangspunktet @Model.B1UtbredelsesområdeKode</div>
                             CatLine(Model.B1UtbredelsesområdeKode);
 
@@ -1361,7 +1101,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         @if (gjeldende("B2") && (!string.IsNullOrEmpty(assessment.B2ForekomstarealKode) && assessment.B2ForekomstarealKode != "-"))
                         {
                             @*// TODO FIX:
-                                MMPI("B2", "Forekomstareal", Model.B2IntervallForekomstareal);*@
+                        MMPI("B2", "Forekomstareal", Model.B2IntervallForekomstareal);*@
 
                             <div>B2 Forekomstareal @terskelverdi("B2ForekomstarealKode", Model.B2ForekomstarealKode)tilsvarer i utgangspunktet @Model.B2ForekomstarealKode</div>
                             CatLine(Model.B2ForekomstarealKode);
@@ -1379,7 +1119,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         @if (gjeldende("Ba"))
                         {
                             @*// TODO FIX:
-                                MMPI("B.a", "Antall trusseldefinerte lokaliteter (ii)", Model.BaIntervallAntallLokaliteter);*@
+                        MMPI("B.a", "Antall trusseldefinerte lokaliteter (ii)", Model.BaIntervallAntallLokaliteter);*@
                         }
 
                         @if ((gjeldende("Ba(ii)") || gjeldende("Ba(i,ii)")) && (!string.IsNullOrEmpty(assessment.BA2FåLokaliteterKode) && assessment.BA2FåLokaliteterKode != "-"))
@@ -1436,14 +1176,14 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         @if (gjeldende("C") && (!string.IsNullOrEmpty(assessment.CPopulasjonsstørrelseKode) && assessment.CPopulasjonsstørrelseKode != "-"))
                         {
                             @*// TODO FIX:
-                                MMPI("C", "Populasjonsstørrelse", Model.CPopulasjonsstørrelseAntatt);*@
+                        MMPI("C", "Populasjonsstørrelse", Model.CPopulasjonsstørrelseAntatt);*@
 
                             <br />
                         }
                         @if (gjeldende("C1"))
                         {
                             @*// TODO FIX:
-                                MMP("C1", "Pågående nedgang", Model.C1PågåendePopulasjonsreduksjonAntatt);*@
+                        MMP("C1", "Pågående nedgang", Model.C1PågåendePopulasjonsreduksjonAntatt);*@
 
                             @if (!string.IsNullOrEmpty(Model.C1PågåendePopulasjonsreduksjonKode))
                             {
@@ -1457,7 +1197,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                         @if (gjeldende("C2a(i"))
                         {
                             @*// TODO FIX:
-                                MMP("C2a(i)", "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon", Model.C2A1PågåendePopulasjonsreduksjonAntatt);*@
+                        MMP("C2a(i)", "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon", Model.C2A1PågåendePopulasjonsreduksjonAntatt);*@
                             <div>C2a(i) Største delpopulasjon @terskelverdi("C2A1PågåendePopulasjonsreduksjonKode", Model.C2A1PågåendePopulasjonsreduksjonKode) tilsvarer i utgangspunktet @findCValue(Model.C2A1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode)</div>
                             CatLine(findCValue(Model.C2A1PågåendePopulasjonsreduksjonKode, Model.CPopulasjonsstørrelseKode));
                         }
@@ -1492,7 +1232,7 @@ else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonN
                             @if (!gjeldende("C"))
                             {
                                 @*// TODO FIX:
-                                    MMPI("C", "Populasjonsstørrelse", Model.CPopulasjonsstørrelseAntatt);*@
+                            MMPI("C", "Populasjonsstørrelse", Model.CPopulasjonsstørrelseAntatt);*@
 
                             }
 

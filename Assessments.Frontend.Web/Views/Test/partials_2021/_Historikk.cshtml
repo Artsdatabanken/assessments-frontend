@@ -1,0 +1,161 @@
+﻿@model Artsdatabanken.RL2021
+@* SEE example by searching species Carex elata *@
+
+@{
+    Artsdatabanken.RL2021 assessment = Model;
+ }
+
+
+@functions{
+    public string categoryDescription(string category)
+    {
+        if (category == "CR" || category == "CRº")
+        {
+            return "kritisk truet ";
+        }
+        else if (category == "EN" || category == "ENº")
+        {
+            return "sterkt truet ";
+        }
+        else if (category == "VU" || category == "VUº")
+        {
+            return "sårbar ";
+        }
+        else if (category == "NT" || category == "NTº")
+        {
+            return "nær truet ";
+        }
+        else if (category == "DD" || category == "DDº")
+        {
+            return "datamangel ";
+        }
+        else if (category == "LC" || category == "LCº")
+        {
+            return "livskraftig ";
+        }
+        else if (category == "NA" || category == "NAº")
+        {
+            return "ikke egnet ";
+        }
+        else if (category == "NE" || category == "NEº")
+        {
+            return "ikke vurdert ";
+        }
+        else if (category == "RE" || category == "REº")
+        {
+            return "regionalt utdødd ";
+        }
+        else
+        {
+            return "";
+        }
+    }
+}
+
+
+<div class="section">
+    <h2>Historikk (tidligere vurderinger)</h2>
+
+
+    <div>
+
+        <div >
+
+            <div >
+
+                <div class="popuptext" >
+                    @*<button class="closePopup" onclick="closePopup('history')"> x </button>*@
+                    <div>
+                        Hvis arten har blitt vurdert til Rødlista for arter 2010 og Rødlista for arter 2015 kan du se vurderingene her. Arter uten historikk er vurdert for første gang til Rødlista for arter 2021.
+                    </div>
+                </div>
+
+                @if (Model.SistVurdertAr == 2021 || Model.SistVurdertAr == 0)
+                {
+                    @if (Model.Kategori == "NE" || Model.Kategori == "NA")
+                    {
+                        <div class="row" >
+                            <div >Arten er behandlet for første gang i 2021.</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row" >
+                            <div >Arten er vurdert for første gang i 2021.</div>
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    <div class="row history" style="margin-top: 10px">
+
+
+                        @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010) && !string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
+                        {
+                            <div>
+                                <div >
+                                    <b>Rødlista 2010</b>
+                                </div>
+                                <div >
+                                    <a target="_blank" href="@Model.ImportInfo.Url2010"><span class="icon-@Model.ImportInfo.Kategori2010"> &nbsp;</span>@Model.ImportInfo.Kategori2010 @categoryDescription(Model.ImportInfo.Kategori2010)</a>
+                                </div>
+                            </div>
+
+                            <div >
+                                <div>
+                                    <b>Rødlista 2015</b>
+                                </div>
+                                <div >
+                                    <a target="_blank" href="@Model.ImportInfo.Url2015"><span class="icon-@Model.ImportInfo.Kategori2015"> &nbsp;</span>@Model.ImportInfo.Kategori2015 @categoryDescription(Model.ImportInfo.Kategori2015)</a>
+                                </div>
+                            </div>
+                        }
+                        else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
+                        {
+                            <div class="col-md-3" style="width: 100%; margin-left: 0">
+                                <div class="row">
+                                    <b>Rødlista 2010</b>
+                                </div>
+                                <div class="row second">
+                                    <a target="_blank" href="@Model.ImportInfo.Url2010"><span class="icon-@Model.ImportInfo.Kategori2010"> &nbsp;</span>@Model.ImportInfo.Kategori2010 @categoryDescription(Model.ImportInfo.Kategori2010)</a>
+                                </div>
+                            </div>
+                        }
+                        else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
+                        {
+                            <div class="col-md-3" style="width: 100%; margin-left: 0">
+                                <div class="row">
+                                    <b>Rødlista 2015</b>
+                                </div>
+                                <div class="row second">
+                                    <a target="_blank" href="@Model.ImportInfo.Url2015"><span class="icon-@Model.ImportInfo.Kategori2015"> &nbsp;</span>@Model.ImportInfo.Kategori2015 @categoryDescription(Model.ImportInfo.Kategori2015)</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <br />
+                    @if (Model.Ekspertgruppe.ToLower() == "spretthaler" || Model.Ekspertgruppe.ToLower() == "havedderkopper")
+                    {
+                        <div class="row" style="margin-left: 10px; margin-bottom: 10px">
+                            <div>Sist vurdert i: @Model.SistVurdertAr</div>
+                        </div>
+                    }
+                }
+
+
+
+                @if (Model.GlobalRødlistestatusKode != null)
+                {
+                    <div class="row" style="text-align: center; margin-bottom: 10px">
+                        Global Rødlistestatus: @Model.GlobalRødlistestatusKode
+                    </div>
+                }
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div><!-- End section -->

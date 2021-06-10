@@ -4,10 +4,8 @@
 }
 
 @*
- 
-    Simplified from Innsynsløsning 2021.
-    Should probably be changed into helper functions instead.
-    But while making old stuff work it will be allowed to live here.
+
+    Good example species: Nitidula rufipes
 
 *@
 
@@ -76,4 +74,26 @@
 <div class="section">
     <h2>Category description</h2>
     <h3>@categoryMatcher(@Model.Kategori) @categoryDescription(ViewBag.category) </h3>
+
+    @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
+    {
+        <div>
+            Arten er trolig utdødd.
+            @*<button class="detaljer" style="margin-bottom: 10px; margin-top: 10px" onclick="togglePopup('dead')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
+            *@
+            <div>
+                @*<button class="closePopup" onclick="closePopup('dead')"> x </button>*@
+                <dl class="section">
+                    <dt><i>Trolig utdødd</i></dt>
+                    <dd>
+                        er ikke en kategori, men en merkelapp som settes på arter som er vurdert som kritisk truet (CR) og som trolig er utdødd. Dette gjøres når med dagens kunnskap ikke med sikkerhet fastslå at arten er utødd.
+                        En art vurderes som regionalt utdødd (RE) når gjentatte undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn.
+                    </dd>
+                    </dl>
+            </div>
+
+        </div>
+
+    }
+
 </div>

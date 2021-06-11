@@ -305,3 +305,17 @@ td{
     width: 50px;
 }
 
+/* categori  things */
+
+.category-line{
+    width:300px;
+}
+
+.category-line div{
+    display:inline-block;
+    padding:10px;
+}
+
+.category-line .active{
+    border:4px solid black;
+}

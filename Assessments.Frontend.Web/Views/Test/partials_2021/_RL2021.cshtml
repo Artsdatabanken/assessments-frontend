@@ -817,7 +817,7 @@
             <div style="color: #80736b; font-size: x-large">
             Kategori Rødlista 2021: @if (assessment.Kategori != "")
             {
-                
+
             }
         </div>-->
 
@@ -891,104 +891,37 @@
                 <div class="infoAndHistory">
 
 
-                    
+
 
 
 
 
                     <!-- stopp-->
-
-
-
                     <!--- STOPP HISTORIKK-->
                 </div>
 
-                @if (!((Model.Kategori == "NA" || Model.Kategori == "NE" || Model.Kategori == "LC") && (Model.Kriteriedokumentasjon == "" || Model.Kriteriedokumentasjon == null)))
-                {
-
-                    <h3>Oppsummering</h3>
-                    <dl class="responsive width160" id="summary">
-                        @if (Model.Kategori.IndexOf("CR") >= 0 || Model.Kategori.IndexOf("EN") >= 0 || Model.Kategori.IndexOf("VU") >= 0 || Model.Kategori.IndexOf("NT") >= 0)
-                        {
-                            <dt>Gjeldende kriterier</dt>
-                            <dd>
-                                <div>
-                                    <span style="margin-top: 0;"><b>@Model.Kriterier</b></span>
-                                    <button class="detaljer" onclick="togglePopup('gjeldende')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                                    <div class="popuptext" id="gjeldende" style="margin-left: 0; margin-top: 0">
-                                        <button class="closePopup" onclick="closePopup('gjeldende')"> x </button>
-                                        <div>
-                                            En art behøver kun oppfylle én av IUCNs kriterier A-E for å bli rødlistet, men skal i utgangspunktet testes mot alle kriterier så langt det finnes informasjon.
-                                            En art kan dermed ha én eller flere gjeldende kriterier, dvs. kriterier som har vært utslagsgivende for kategori.
-                                        </div>
-                                    </div>
-                                </div>
-                            </dd>
-                        }
-                    </dl>
-                }
 
 
 
 
-
-                @if (!string.IsNullOrEmpty(Model.KategoriEndretTil) && Model.UtdøingSterktPåvirket == "Ja")
-                {
-                    <dl>Kategori endret til: @assessment.KategoriEndretTil</dl>
-                }
+                <!--- OPPSUMERING FJERNET-->
 
 
-                @if (!string.IsNullOrWhiteSpace(assessment.Kriteriedokumentasjon))
-                {
-
-                    <div id="kriteriedokumentasjon" class="panel-preview">
-                        @Html.Raw(assessment.Kriteriedokumentasjon)
-                    </div>
-                }
-                @if (assessment.UtdøingSterktPåvirket == "Ja")
-                {
-
-
-                    @if (assessment.KategoriEndretFra != "" && assessment.KategoriEndretFra != null)
-                    {
-                        <dl class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert fra @assessment.KategoriEndretFra til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</dl>
-                    }
-                    else
-                    {
-                        <dl class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</dl>
-                    }
-
-                }
-                @if (!string.IsNullOrWhiteSpace(assessment.ÅrsakTilEndringAvKategori) && assessment.KategoriFraForrigeListe != assessment.Kategori)
-                {
-                    <br />
-                    <dl class="changedCat">Kategorien er endret fra forrige rødlistevurdering på grunn av @assessment.ÅrsakTilEndringAvKategori.Substring(0, 1).ToLower()@assessment.ÅrsakTilEndringAvKategori.Substring(1).</dl>
-                }
+                <!-- Denne ifsetningen gir lite mening. -->
 
                 @if ((!string.IsNullOrEmpty(Model.Kriterier)) || (Model.Kategori != "NA" && Model.Kategori != "NE" && Model.Kategori != "RE" && Model.Kategori != "DD" && Model.Kategori != "LC"))
                 {
-                    <h3 id="detaljer" style="margin-top: 0">Om gjeldende kriterier</h3>
+                    <h3>Om gjeldende kriterier</h3>
                 }
                 else if (Model.Generasjonslengde != "" && Model.Generasjonslengde != null && (Model.Kategori == "RE" || Model.Kategori == "DD" || Model.Kategori == "LC"))
                 {
-                    <h3 style="margin-top: 10px">Generasjonstid</h3>
+                    <h3>Generasjonstid</h3>
                 }
 
-                @if (Model.Generasjonslengde != "" && Model.Generasjonslengde != null)
-                {
-                    <div class="criterium" style="display: flex">
-                        <dl style="margin-bottom: 10px; margin-top: 10px">Generasjonstid: @assessment.Generasjonslengde år</dl>
-                        <button class="detaljer" style="margin-bottom: 10px; margin-top: 10px" onclick="togglePopup('genTid')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                    </div>
-                    <div class="popuptext" id="genTid">
-                        <button class="closePopup" onclick="closePopup('genTid')"> x </button>
-                        <div>
-                            Generasjonstid er gjennomsnittsalder for alle reproduserende individ, dvs. foreldre til alle avkom i populasjonen.
-                            Om generasjonstiden hos en populasjon har blitt endret som følge av høsting el.lign. skal den naturlige generasjonslengden før høsting benyttes.
-                            Generasjonstid og generasjonslengde brukes synonymt.
-                        </div>
-                    </div>
-                }
+
+
+                <!--- fjernet generasjonstid-->
+
 
 
 

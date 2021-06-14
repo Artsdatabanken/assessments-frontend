@@ -39,7 +39,7 @@
     <!-- A KRITERIE -->
     @if (!string.IsNullOrEmpty(Model.OppsummeringAKriterier) && Model.Kriterier.IndexOf("A") >= 0)
     {
-    <div class="criterium">
+<div class="criterium">
     @if (gjeldende("A1") && (!string.IsNullOrEmpty(Model.A1OpphørtOgReversibel) || Model.A1EndringBasertpåKode.Count > 0 || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Max) || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Min) || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Probable)))
     {
 
@@ -96,12 +96,16 @@
     }
 
 
+    @{
+        ViewData["tag"] = "A3";
+        ViewData["desc"] = "Framtidig reduksjon kommende 10 år/3 generasjoner";
+    }
 
     @if (gjeldende("A3") && (!string.IsNullOrEmpty(Model.A3Kommende10År) || Model.A3EndringBasertpåKode.Count > 0))
     {
-        @*// TODO FIX:
-            MMP("A3", "Framtidig reduksjon kommende 10 år/3 generasjoner", Model.A3Kommende10ÅrAntatt);*@
-        <dl class="responsive condenced width40">
+        <partial name="/Views/Shared/_MMP.cshtml" model=Model.A3Kommende10ÅrAntatt view-data="ViewData" />
+
+        <div class="responsive condenced width40">
             @*// TODO
                 @{CondDT("A3 reduksjon", A3def(Model.A3Kommende10År));}
             *@
@@ -115,7 +119,7 @@
 
             }
 
-        </dl>
+        </div>
         <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.A3Kommende10År />
     }
 

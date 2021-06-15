@@ -1,0 +1,69 @@
+﻿{
+  "IUCN": {
+    "helpertext": "IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp. Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon. På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene. Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12. Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent).",
+  },
+  "A": {
+    "spantext": "Hvilket gir beregnet reduksjon, med føre-var forbehold, på: ",
+    "spantext-end": "%",
+
+    "A1": {
+      "tagline": "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel",
+      "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år). For å benytte A1 må årsaken(e) til reduksjonen være både opphørt og forstått, og reduksjonen må være reversibel.Om en eller flere av vilkårene (opphørt, forstått og reversibel) ikke er innfridd for ≥ 10 % av populasjonen skal ikke A1 benyttes."
+    },
+    "A2": {
+      "tagline": "Reduksjon de siste 10 år/3 generasjoner",
+      "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år). For A2 behøver ikke årsaken(e) eller reduksjonen nødvendigvis være verken opphørt, forstått eller reversibel."
+    },
+    "A3": {
+      "tagline": "Framtidig reduksjon kommende 10 år/3 generasjoner",
+      "description": "Bedømt, antatt eller prosjektert framtidig reduksjon i populasjonsstørrelse over de kommende 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år)."
+
+    },
+    "A4": {
+      "tagline": "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid",
+      "description": "Bedømt, antatt, observert, estimert eller prosjektert pågående reduksjon i populasjonsstørrelse over 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år) som inkluderer både fortid og framtid."
+    }
+
+  },
+  "B": {
+    "B1": {
+      "tagline": "Utbredelsesområde"
+    },
+    "B2": {
+      "tagline": "Forekomstareal"
+    },
+    "BC": {
+      "tagline": "Ekstreme fluktuasjoner"
+    }
+  },
+  "C": {
+    "tagline": "Populasjonsstørrelse",
+    "C1": {
+      "tagline": "Pågående nedgang",
+      "description": "Bedømt, antatt, observert, estimert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. Pågående nedgang på C1-kriteriet beregnes på samme måte som på A-kriteriet, men kan gjelde for en kortere tidsperiode.",
+      "spantext": "Hvilket gir beregnet nedgang, med føre-var forbehold, på:",
+      "spantext-end": "%"
+    },
+    "C2": {
+      "spantext": "Hvilket gir beregnet antall, med føre-var forbehold, på:",
+      "spantext-end": "individer",
+      "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.",
+      "C2a(i)": {
+        "tagline": "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon",
+        "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer."
+      }
+    }
+  },
+  "D": {
+    "D1": {
+      "tagline": "Få reproduksjonsdyktige individ",
+      "description": "Arten har få reproduksjonsdyktige individ/liten populasjonsstørrelse, men er ikke nødvendigvis i nedgang. For kjønnede arter kan antall reproduksjonsdyktige individ tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ."
+    }
+  },
+  "E": {
+    "tagline": "Kvantitativ analyse",
+    "description":  "Risiko for utdøing er beregnet gjennom en kvantitativ modell. E-kriteriet er det eneste kriteriet som potensielt kan inkorporere alle faktorer og symptomer på utdøingsrisiko. Terskelverdiene på E kan derfor ikke brukes for å utlede en arts sannsynlighet for utdøing om den vurderes etter kriteriene A-D."
+  }
+}
+
+

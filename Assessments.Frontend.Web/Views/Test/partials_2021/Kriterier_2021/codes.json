@@ -1,0 +1,1496 @@
+﻿{
+  "Id": "labels",
+  "Value": null,
+  "Text": null,
+  "Children": {
+    "General": [
+      {
+        "Value": "yes",
+        "Text": "Ja"
+      },
+      {
+        "Value": "no",
+        "Text": "Nei"
+      },
+      {
+        "Value": "unknown",
+        "Text": "Vet ikke"
+      },
+      {
+        "Value": "ok",
+        "Text": "Ok"
+      },
+      {
+        "Value": "cancel",
+        "Text": "Avbryt"
+      },
+      {
+        "Value": "add",
+        "Text": "Legg til"
+      },
+      {
+        "Value": "remove",
+        "Text": "Fjern"
+      },
+      {
+        "Value": "delete",
+        "Text": "Slett"
+      },
+      {
+        "Value": "edit",
+        "Text": "Rediger"
+      },
+      {
+        "Value": "search",
+        "Text": "Søk"
+      },
+      {
+        "Value": "searchSpecies",
+        "Text": "Søk etter art"
+      },
+      {
+        "Value": "nextPage",
+        "Text": "Neste Side"
+      },
+      {
+        "Value": "previousPage",
+        "Text": "Forrige side"
+      },
+      {
+        "Value": "showDetails",
+        "Text": "Vis detaljer"
+      },
+      {
+        "Value": "noneSelected",
+        "Text": "Ingen valgt"
+      },
+      {
+        "Value": "multipleSelected",
+        "Text": "Flere valgt"
+      }
+    ],
+    "AcritSelect": [
+      {
+        "Value": "a",
+        "Text": "a) Levedyktighetsanalyse"
+      },
+      {
+        "Value": "b",
+        "Text": "b) Numerisk estimering"
+      },
+      {
+        "Value": "c",
+        "Text": "c) Rødlistekriterier"
+      }
+    ],
+    "BcritSelect": [
+      {
+        "Value": "a",
+        "Text": "a) Datasett med tid- og stedfesta observasjoner"
+      },
+      {
+        "Value": "b",
+        "Text": "gamle 'b' skal ikke vises!!! - b) Tidsserie på forekomstareal"
+      },
+      {
+        "Value": "c",
+        "Text": "b) Literaturdata på spredningshastighet"
+      },
+      {
+        "Value": "d",
+        "Text": "c) Anslått økning i forekomstareal siste året"
+      }
+    ],
+    "AlienSpecie": [
+      {
+        "Value": "UncertainIfEstablishedBefore1800",
+        "Text": "Usikkert om arten er etablert i Norge før 1800"
+      },
+      {
+        "Value": "UncertainAntropochor",
+        "Text": "Usikkert om arten kom til Norge med eller uten menneskelig hjelp"
+      },
+      {
+        "Value": "UncertainDescription",
+        "Text": "Beskriv usikkerheten"
+      }
+    ],
+    "NatureType": [
+      {
+        "Value": "code",
+        "Text": "Kode"
+      },
+      {
+        "Value": "name",
+        "Text": "Navn"
+      },
+      {
+        "Value": "dominanceForrest",
+        "Text": "Dominans skog"
+      },
+      {
+        "Value": "timeHorizon",
+        "Text": "Tidshorisont"
+      },
+      {
+        "Value": "colonizedArea",
+        "Text": "Kolonisert areal (%)"
+      },
+      {
+        "Value": "stateChange",
+        "Text": "Tydelig tilstandsendring"
+      },
+      {
+        "Value": "affectedArea",
+        "Text": "Tydelig påvirka areal (%)"
+      },
+      {
+        "Value": "redlisteName",
+        "Text": "Navn"
+      },
+      {
+        "Value": "category",
+        "Text": "Kategori"
+      },
+      {
+        "Value": "heading",
+        "Text": "Naturtyper"
+      },
+      {
+        "Value": "redlistedNaturetypesHeading",
+        "Text": "Rødlistede naturtyper"
+      },
+      {
+        "Value": "otherNaturetypesHeading",
+        "Text": "Øvrige naturtyper"
+      }
+    ],
+    "ObservedEstablished": [
+      {
+        "Value": "nonReproductive",
+        "Text": "Ikke-forplantningsdyktige individ"
+      },
+      {
+        "Value": "reproduktive",
+        "Text": "Forplantningsdyktige individ"
+      },
+      {
+        "Value": "viableOffspring",
+        "Text": "Levedyktig avkom"
+      },
+      {
+        "Value": "population",
+        "Text": "Bestand"
+      },
+      {
+        "Value": "year",
+        "Text": "År"
+      },
+      {
+        "Value": "place",
+        "Text": "Sted"
+      },
+      {
+        "Value": "individualCount",
+        "Text": "Antall individ"
+      },
+      {
+        "Value": "indoor",
+        "Text": "Innendørs"
+      },
+      {
+        "Value": "outdoor",
+        "Text": "Produksjonsareal (utendørs)"
+      },
+      {
+        "Value": "domesticNature",
+        "Text": "Norsk natur"
+      }
+    ],
+    "Reproduction": [
+      {
+        "Value": "reproduction",
+        "Text": "Reproduksjon"
+      },
+      {
+        "Value": "sexual",
+        "Text": "Seksuell reproduksjon"
+      },
+      {
+        "Value": "asexual",
+        "Text": "Aseksuell reproduksjon"
+      },
+      {
+        "Value": "generationTime",
+        "Text": "Generasjonstid (år)"
+      }
+    ],
+    "SelectAssessment": [
+      {
+        "Value": "assessedBy",
+        "Text": "Vurderes av"
+      },
+      {
+        "Value": "startAssessment",
+        "Text": "Start vurdering"
+      },
+      {
+        "Value": "assessmentClosed",
+        "Text": "Ferdigstilt"
+      },
+      {
+        "Value": "releaseAssessment",
+        "Text": "Frigi vurdering"
+      },
+      {
+        "Value": "scientificName",
+        "Text": "Vitenskapelig navn"
+      },
+      {
+        "Value": "duration",
+        "Text": "Varighet"
+      },
+      {
+        "Value": "lastSaved",
+        "Text": "Sist lagret"
+      },
+      {
+        "Value": "expertgroup",
+        "Text": "Ekspertkomité"
+      },
+      {
+        "Value": "filter",
+        "Text": "Filter"
+      },
+      {
+        "Value": "createAssessment",
+        "Text": "Opprett vurdering"
+      },
+      {
+        "Value": "moveAssessment",
+        "Text": "Flytt vurdering til nytt navn"
+      },
+      {
+        "Value": "count",
+        "Text": "Antall"
+      },
+      {
+        "Value": "percent",
+        "Text": "Prosent"
+      },
+      {
+        "Value": "table",
+        "Text": "Tabell"
+      },
+      {
+        "Value": "notStarted",
+        "Text": "Ikke påbegynt"
+      },
+      {
+        "Value": "started",
+        "Text": "Påbegynt"
+      },
+      {
+        "Value": "underWork",
+        "Text": "Under arbeid"
+      },
+      {
+        "Value": "completed",
+        "Text": "Ferdigstilt"
+      },
+      {
+        "Value": "total",
+        "Text": "Totalt"
+      },
+      {
+        "Value": "statistics",
+        "Text": "Statistikk"
+      }
+    ],
+    "Timing": [
+      {
+        "Value": "justNow",
+        "Text": "akkurat nå"
+      },
+      {
+        "Value": "secondsago",
+        "Text": "sekunder siden"
+      },
+      {
+        "Value": "minutesago",
+        "Text": "minutter siden"
+      },
+      {
+        "Value": "hoursago",
+        "Text": "timer siden"
+      },
+      {
+        "Value": "daysago",
+        "Text": "dager siden"
+      },
+      {
+        "Value": "weeksago",
+        "Text": "uker siden"
+      },
+      {
+        "Value": "monthsago",
+        "Text": "måneder siden"
+      },
+      {
+        "Value": "yearsago",
+        "Text": "år siden"
+      }
+    ],
+    "Tabs": [
+      {
+        "Value": "main30",
+        "Text": "1 Artsinformasjon"
+      },
+      {
+        "Value": "main31",
+        "Text": "1.1 Artens status"
+      },
+      {
+        "Value": "main32",
+        "Text": "1.2 Artsegenskaper"
+      },
+      {
+        "Value": "main33",
+        "Text": "1.3 Import"
+      },
+      {
+        "Value": "main34",
+        "Text": "1.4 Spredningsveier"
+      },
+      {
+        "Value": "main35",
+        "Text": "1.5 Utbredelseshistorikk"
+      },
+      {
+        "Value": "main40",
+        "Text": "2 Naturtyper"
+      },
+      {
+        "Value": "main50",
+        "Text": "3 Risikovurdering"
+      },
+      {
+        "Value": "main51",
+        "Text": "3.1 Invasjonspotensiale"
+      },
+      {
+        "Value": "main52",
+        "Text": "3.2 Økologisk effekt"
+      },
+      {
+        "Value": "main53",
+        "Text": "3.3 Geografisk variasjon"
+      },
+      {
+        "Value": "main54",
+        "Text": "3.4 Klimaeffekter"
+      },
+      {
+        "Value": "main55",
+        "Text": "3.5 Kriteriedokumentasjon"
+      },
+      {
+        "Value": "mainReferences",
+        "Text": "Referanser"
+      },
+      {
+        "Value": "mainSelectAssessment",
+        "Text": "Velg vurdering"
+      },
+      {
+        "Value": "mainCreateAssessment",
+        "Text": "Opprett ny vurdering"
+      },
+      {
+        "Value": "mainStatistics",
+        "Text": "Statistikk"
+      },
+      {
+        "Value": "mainReport",
+        "Text": "Rapport"
+      }
+    ],
+    "FirstObservation": [
+      {
+        "Value": "firstobservation",
+        "Text": "Første observasjon"
+      },
+      {
+        "Value": "firstregionalobservation",
+        "Text": "Første observasjon utenfor naturlig utbredelsesområde"
+      },
+      {
+        "Value": "dontknow",
+        "Text": "Vet ikke"
+      },
+      {
+        "Value": "nonReproductive",
+        "Text": "Ikke-forplantningsdyktige individ"
+      },
+      {
+        "Value": "reproduktive",
+        "Text": "Forplantningsdyktige individ"
+      },
+      {
+        "Value": "viableOffspring",
+        "Text": "Levedyktig avkom"
+      },
+      {
+        "Value": "population",
+        "Text": "Bestand"
+      },
+      {
+        "Value": "year",
+        "Text": "År"
+      },
+      {
+        "Value": "place",
+        "Text": "Sted"
+      },
+      {
+        "Value": "individualCount",
+        "Text": "Antall individ"
+      },
+      {
+        "Value": "indoor",
+        "Text": "Innendørs"
+      },
+      {
+        "Value": "outdoor",
+        "Text": "Produksjonsareal (utendørs)"
+      },
+      {
+        "Value": "domesticNature",
+        "Text": "Norsk natur"
+      }
+    ],
+    "PreviousAssessment": [
+      {
+        "Value": "previousassessment",
+        "Text": "Tidligere økologisk risikovurdering"
+      },
+      {
+        "Value": "domestic",
+        "Text": "I Norge"
+      },
+      {
+        "Value": "abroad",
+        "Text": "I annet land"
+      }
+    ],
+    "StatusUncertainty": [
+      {
+        "Value": "uncertainIfEstablishedBefore1800",
+        "Text": "Usikkert om arten er etablert i Norge før 1800"
+      },
+      {
+        "Value": "uncertainAntropochor",
+        "Text": "Usikkert om arten kom til Norge med eller uten menneskelig hjelp"
+      },
+      {
+        "Value": "uncertainDescription",
+        "Text": "Beskriv usikkerheten"
+      },
+      {
+        "Value": "furtherSpecification",
+        "Text": "Nærmere begrunnelse"
+      }
+    ],
+    "NaturalOrigin": [
+      {
+        "Value": "europe",
+        "Text": "Europa"
+      },
+      {
+        "Value": "asia",
+        "Text": "Asia"
+      },
+      {
+        "Value": "africa",
+        "Text": "Afrika"
+      },
+      {
+        "Value": "oseania",
+        "Text": "Oseania"
+      },
+      {
+        "Value": "northAndCentralAmerica",
+        "Text": "Nord- og Mellom-Amerika"
+      },
+      {
+        "Value": "southAmerica",
+        "Text": "Sør-Amerika"
+      },
+      {
+        "Value": "noKnown",
+        "Text": "Ingen kjent utbredelse"
+      },
+      {
+        "Value": "transfer",
+        "Text": "Overfør til Nåværende utbredelse"
+      },
+      {
+        "Value": "describe",
+        "Text": "Gi utdypende informasjon ved behov (påkrevd for \"Ukjent\" )"
+      },
+      {
+        "Value": "naturalOrigin",
+        "Text": "Naturlig utbredelse"
+      },
+      {
+        "Value": "currentExistenceAria",
+        "Text": "Nåværende utbredelse"
+      },
+      {
+        "Value": "survivalBelow5c",
+        "Text": "Arten overlever ved temperaturer < 5°C"
+      },
+      {
+        "Value": "describeMarine",
+        "Text": "Gi utdypende informasjon ved behov"
+      },
+      {
+        "Value": "arrivedCountryFrom",
+        "Text": "Kom til vurderingsområdet fra"
+      },
+      {
+        "Value": "arrivedCountryFromDetails",
+        "Text": "Nærmere spesifisering"
+      },
+      {
+        "Value": "global",
+        "Text": "Global Utbredelse"
+      }
+    ],
+    "OtherEffects": [
+      {
+        "Value": "otherEffects",
+        "Text": "Øvrige effekter"
+      },
+      {
+        "Value": "fillNoKnown",
+        "Text": "Fyll ut"
+      },
+      {
+        "Value": "noKnownValue",
+        "Text": "Ingen kjent effekt"
+      },
+      {
+        "Value": "healthEffects",
+        "Text": "Helseeffekter"
+      },
+      {
+        "Value": "economicEffects",
+        "Text": "Økonomiske effekter"
+      },
+      {
+        "Value": "ecosystemEffects",
+        "Text": "Effekter på økosystemtjenester"
+      },
+      {
+        "Value": "ecoBasic",
+        "Text": "Grunnleggende livsprosesser"
+      },
+      {
+        "Value": "ecoSupport",
+        "Text": "Forsynende tjenester"
+      },
+      {
+        "Value": "ecoRegulating",
+        "Text": "Regulerende tjenest"
+      },
+      {
+        "Value": "ecoKnowledge",
+        "Text": "Opplevelses - og kunnskapstjenester"
+      },
+      {
+        "Value": "positiveEffects",
+        "Text": "Positive økologiske effekter"
+      },
+      {
+        "Value": "effectsOnPopulationOfOrigin",
+        "Text": "Effekter på opphavsbestanden"
+      }
+    ],
+    "Import": [
+      {
+        "Value": "importIndoor",
+        "Text": "Importert til Innendørs-Norge eller produksjonsareal"
+      },
+      {
+        "Value": "importAdd",
+        "Text": "Legg til importveier"
+      },
+      {
+        "Value": "____exportCountry",
+        "Text": "Utførselsland"
+      },
+      {
+        "Value": "____migrationPathway",
+        "Text": "Spredningsvei"
+      },
+      {
+        "Value": "____timeOfIncident",
+        "Text": "Tidspunkt"
+      },
+      {
+        "Value": "____frequency",
+        "Text": "Hyppighet"
+      },
+      {
+        "Value": "____abundance",
+        "Text": "Abundans"
+      }
+    ],
+    "MigrationPathway": [
+      {
+        "Value": "heading",
+        "Text": "Spredningsveier"
+      },
+      {
+        "Value": "category",
+        "Text": "Kategori"
+      },
+      {
+        "Value": "codeItem",
+        "Text": "Underkategori"
+      },
+      {
+        "Value": "influenceFactor",
+        "Text": "Hyppighet"
+      },
+      {
+        "Value": "magnitude",
+        "Text": "Abundans"
+      },
+      {
+        "Value": "timeOfIncident",
+        "Text": "Tidspunkt"
+      },
+      {
+        "Value": "introductionSpread",
+        "Text": "Introduksjon til eller spredning i norsk natur"
+      },
+      {
+        "Value": "elaborateInformation",
+        "Text": "Utdypende informasjon"
+      }
+    ],
+    "NatureTypes": [
+      {
+        "Value": "colonizedAreaHeading",
+        "Text": "Kolonisert areal av naturtyper og effekter på naturtyper som ikke er truete, sjeldne eller sterkt endret"
+      },
+      {
+        "Value": "code",
+        "Text": "Kode"
+      },
+      {
+        "Value": "name",
+        "Text": "Navn"
+      },
+      {
+        "Value": "dominanceForrest",
+        "Text": "Dominans skog"
+      },
+      {
+        "Value": "timeHorizon",
+        "Text": "Tidshorisont"
+      },
+      {
+        "Value": "colonizedArea",
+        "Text": "Kolonisert areal (%)"
+      },
+      {
+        "Value": "stateChange",
+        "Text": "Tydelig tilstandsendring"
+      },
+      {
+        "Value": "affectedArea",
+        "Text": "Tydelig påvirka areal (%)"
+      },
+      {
+        "Value": "redlistName",
+        "Text": "Navn"
+      },
+      {
+        "Value": "category",
+        "Text": "Kategori"
+      },
+      {
+        "Value": "chooseNT",
+        "Text": "Velg blant følgende naturtyper (NiN 2.0)"
+      },
+      {
+        "Value": "chooseLM",
+        "Text": "Velg blant følgende livsmedium (NiN 1.0)"
+      },
+      {
+        "Value": "critCHeading",
+        "Text": "Kolonisert areal av naturtype (overføres til C-kriteriet)"
+      },
+      {
+        "Value": "critGHeading",
+        "Text": "Effekter på naturtyper som hverken er trua, sjeldne eller sterkt endra (overføres til G-kriteriet)"
+      },
+      {
+        "Value": "commonNatureTypesAffectedDomestic",
+        "Text": "Gi en beskrivelse av eventuelle tilstandsendringer"
+      },
+      {
+        "Value": "abroad",
+        "Text": "Utlandet"
+      },
+      {
+        "Value": "commonNatureTypesAffectedAbroad",
+        "Text": "Gi en beskrivelse av eventuelle tilstandsendringer i utlandet"
+      },
+      {
+        "Value": "effectOnThreatenedNatureTypes",
+        "Text": "Effekter på truete/sjeldne naturtyper"
+      },
+      {
+        "Value": "critFHeading",
+        "Text": "Effekter på truete/sjeldne naturtyper (overføres til F-kriteriet)"
+      },
+      {
+        "Value": "threatenedNatureTypesChangeDomestic",
+        "Text": "Gi en beskrivelse av eventuelle tilstandsendringer"
+      },
+      {
+        "Value": "threatenedNatureTypesChangeAbroad",
+        "Text": "Gi en beskrivelse av eventuelle tilstandsendringer i utlandet"
+      },
+      {
+        "Value": "parasiteHabitat",
+        "Text": "Parasittens livsmedium"
+      },
+      {
+        "Value": "chooseRedlistedNT",
+        "Text": "Velg blant følgende naturtyper (NiN 1.0)"
+      },
+      {
+        "Value": "commonNatureTypesForeignDocumented",
+        "Text": "Dokumentert effekt på øvrige naturtyper"
+      },
+      {
+        "Value": "threatenedNatureTypesForeignDocumented",
+        "Text": "Dokumentert effekt på truete/sjeldne naturtyper"
+      },
+      {
+        "Value": "usesLivingSpeciesAsHabitat",
+        "Text": "Bruker levende arter som livsmedium"
+      },
+      {
+        "Value": "usesLivingSpeciesAsHabitatScientificName",
+        "Text": "Vertens artsnavn"
+      }
+    ],
+    "Reference": [
+      {
+        "Value": "hasReferences",
+        "Text": "Referanser knyttet til vurderingen"
+      },
+      {
+        "Value": "noReferences",
+        "Text": "Ingen referanser knyttet til vurderingen..."
+      },
+      {
+        "Value": "reference",
+        "Text": "Referanse"
+      },
+      {
+        "Value": "referenceType",
+        "Text": "Type"
+      },
+      {
+        "Value": "searchHeading",
+        "Text": "Søk referanser"
+      },
+      {
+        "Value": "search",
+        "Text": "Søkefelt"
+      },
+      {
+        "Value": "sort",
+        "Text": "Sortering"
+      },
+      {
+        "Value": "referenceTypes",
+        "Text": "Typer"
+      },
+      {
+        "Value": "referenceChoose",
+        "Text": "Velg"
+      },
+      {
+        "Value": "referenceDetails",
+        "Text": "Vis/rediger"
+      },
+      {
+        "Value": "editPaneHeading",
+        "Text": "Rediger/Ny referanse"
+      },
+      {
+        "Value": "referenceNew",
+        "Text": "Ny referanse"
+      },
+      {
+        "Value": "referenceDelete",
+        "Text": "Slett referanse"
+      },
+      {
+        "Value": "canNotEdit",
+        "Text": "Kan ikke redigere"
+      }
+    ],
+    "DistributionHistory": [
+      {
+        "Value": "heading",
+        "Text": "Utbredelse- og spredningshistorikk"
+      },
+      {
+        "Value": "distributionHistory",
+        "Text": "Utbredelseshistorikk"
+      },
+      {
+        "Value": "domesticDescribe",
+        "Text": "Beskriv hvordan arten historisk har spredd seg"
+      },
+      {
+        "Value": "domesticAddHistory",
+        "Text": "Legg til historikk"
+      },
+      {
+        "Value": "domesticDataset",
+        "Text": "Datasett"
+      },
+      {
+        "Value": "previousInfo",
+        "Text": "Tidligere innlagt informasjon"
+      },
+      {
+        "Value": "mustTransfer",
+        "Text": "Må overføres"
+      },
+      {
+        "Value": "transfer",
+        "Text": "Overfør"
+      },
+      {
+        "Value": "distributionHistoryAbroad",
+        "Text": "Utbredelseshistorikk i utlandet"
+      },
+      {
+        "Value": "noDocuments",
+        "Text": "Ingen dokumenter"
+      },
+      {
+        "Value": "filename",
+        "Text": "Filnavn"
+      },
+      {
+        "Value": "fileDescription",
+        "Text": "Beskrivelse"
+      },
+      {
+        "Value": "historyFrom",
+        "Text": "Fra"
+      },
+      {
+        "Value": "historyTo",
+        "Text": "Til og med"
+      },
+      {
+        "Value": "historyLocation",
+        "Text": "Sted"
+      },
+      {
+        "Value": "historyCount",
+        "Text": "Antall individ"
+      },
+      {
+        "Value": "historyAreaOccupancy",
+        "Text": "Forekomstareal"
+      },
+      {
+        "Value": "historyExtentOfOccurrence",
+        "Text": "Utbredelsesområde"
+      },
+      {
+        "Value": "historyComment",
+        "Text": "Kommentar"
+      },
+      {
+        "Value": "historyCounty",
+        "Text": "Fylker"
+      },
+      {
+        "Value": "expandShowMap",
+        "Text": "Hent fra Artskart"
+      },
+      {
+        "Value": "expandValue",
+        "Text": "Verdi"
+      },
+      {
+        "Value": "expandDarkFigure",
+        "Text": "Mørketall"
+      },
+      {
+        "Value": "expandOccurrence",
+        "Text": "Fylkesforekomst"
+      },
+      {
+        "Value": "expandCopyTo",
+        "Text": "Kopier til nåværende/potensiell utbredelse"
+      },
+      {
+        "Value": "currentAndFutureSpreadSituation",
+        "Text": "Nåværende og potensiell utbredelse (om 50 år)"
+      },
+      {
+        "Value": "currentKnown",
+        "Text": "Kjent"
+      },
+      {
+        "Value": "currentDarkFigure",
+        "Text": "Mørketall (faktor)"
+      },
+      {
+        "Value": "currentTotal",
+        "Text": "Estimert totaltall (kjent * mørketall)"
+      },
+      {
+        "Value": "currentLow",
+        "Text": "Lavt anslag"
+      },
+      {
+        "Value": "currentBest",
+        "Text": "Beste anslag"
+      },
+      {
+        "Value": "currentHigh",
+        "Text": "Høyt anslag"
+      },
+      {
+        "Value": "currentPopulationCount",
+        "Text": "Bestandsstørrelse"
+      },
+      {
+        "Value": "futureAarea",
+        "Text": "Areal om 50 år"
+      },
+      {
+        "Value": "futureAreaOccupancy",
+        "Text": "Potensielt forekomstareal"
+      },
+      {
+        "Value": "currentDistribution",
+        "Text": "Kjent og antatt utbredelse i dag"
+      },
+      {
+        "Value": "futureDistribution",
+        "Text": "Potensiell om 50 år"
+      },
+      {
+        "Value": "describeAsumption",
+        "Text": "Beskriv grunnlaget for og/eller antagelsene bak anslagene"
+      },
+      {
+        "Value": "currentPropotionMajorChangedNaturetypes",
+        "Text": "Andel i sterkt endret natur"
+      },
+      {
+        "Value": "distributionCounty",
+        "Text": "fylke"
+      },
+      {
+        "Value": "distributionNone",
+        "Text": "ingen"
+      },
+      {
+        "Value": "distributionKnown",
+        "Text": "kjent"
+      },
+      {
+        "Value": "distributionAssumed",
+        "Text": "antatt"
+      },
+      {
+        "Value": "distributionPotential",
+        "Text": "potensiell"
+      }
+    ],
+    "AppHeader": [
+      {
+        "Value": "appName",
+        "Text": "Rødlista 2021"
+      },
+      {
+        "Value": "information",
+        "Text": "Informasjon"
+      },
+      {
+        "Value": "chooseSpecies",
+        "Text": "Velg art"
+      },
+      {
+        "Value": "assessmentSave",
+        "Text": "Lagre"
+      },
+      {
+        "Value": "assessmentSaveOk",
+        "Text": "Lagring Ok"
+      },
+      {
+        "Value": "assessmentSaveFail",
+        "Text": "Lagring Feilet"
+      },
+      {
+        "Value": "assessmentSaveFailTryAgain",
+        "Text": "Prøv på nytt om et minutt"
+      },
+      {
+        "Value": "administration",
+        "Text": "Administrasjon"
+      },
+      {
+        "Value": "logout",
+        "Text": "Logg ut"
+      },
+      {
+        "Value": "guidelines",
+        "Text": "Retningslinjer 2017"
+      },
+      {
+        "Value": "oldAssessmets",
+        "Text": "Rødlista 2015"
+      },
+      {
+        "Value": "inquiry",
+        "Text": "Henvendelser"
+      },
+      {
+        "Value": "developedBy",
+        "Text": "Utviklet av"
+      },
+      {
+        "Value": "nbic",
+        "Text": "Artsdatabanken"
+      },
+      {
+        "Value": "iucnCatAndCrit",
+        "Text": "IUCN Categories and Criteria v. 3.1"
+      },
+      {
+        "Value": "redListguidelines14",
+        "Text": " IUCN Guidelines v. 14"
+      },
+      {
+        "Value": "iucnRegionalGuides4",
+        "Text": "IUCN Regional Guidelines v. 4"
+      },
+      {
+        "Value": "norskVeileder20212251",
+        "Text": "Norsk veileder 2021 v. 2.2.5.1"
+      }
+    ],
+    "TaxonInfo": [
+      {
+        "Value": "updateTaxonInfo",
+        "Text": "Endre artsnavn"
+      },
+      {
+        "Value": "existingTaxonInfo",
+        "Text": "Eksisterende artsnavn"
+      },
+      {
+        "Value": "newTaxonInfo",
+        "Text": "Nytt artsnavn"
+      },
+      {
+        "Value": "searchSpecies",
+        "Text": "Søk art"
+      },
+      {
+        "Value": "confirmChange",
+        "Text": "Er du sikker på at du vil oppdatere artsnavn for vurderingen"
+      }
+    ],
+    "Login": [
+      {
+        "Value": "login",
+        "Text": "Logg på"
+      },
+      {
+        "Value": "loginUserName",
+        "Text": "Brukernavn"
+      },
+      {
+        "Value": "loginPassword",
+        "Text": "Passord"
+      },
+      {
+        "Value": "loginResetPassword",
+        "Text": "glemt passord / lag brukerkonto..."
+      }
+    ],
+    "RiskLevelCode": [
+      {
+        "Value": "0",
+        "Text": "NK"
+      },
+      {
+        "Value": "1",
+        "Text": "LO"
+      },
+      {
+        "Value": "2",
+        "Text": "PH"
+      },
+      {
+        "Value": "3",
+        "Text": "HI"
+      },
+      {
+        "Value": "4",
+        "Text": "SE"
+      }
+    ],
+    "RiskLevelText": [
+      {
+        "Value": "0",
+        "Text": "Ingen kjent risiko"
+      },
+      {
+        "Value": "1",
+        "Text": "Lav risiko"
+      },
+      {
+        "Value": "2",
+        "Text": "Potensielt høy risiko"
+      },
+      {
+        "Value": "3",
+        "Text": "Høy risiko"
+      },
+      {
+        "Value": "4",
+        "Text": "Svært høy risiko"
+      }
+    ],
+    "feedback": [
+      {
+        "Value": "confirmationFrom",
+        "Text": "no-reply@artsdatabanken.no"
+      },
+      {
+        "Value": "confirmationSubject",
+        "Text": "Rødlista 2021 - tilbakemelding"
+      },
+      {
+        "Value": "confirmationWeHaveRecieved",
+        "Text": "Dette er en automatisk generert e-post. Du mottar den fordi Artsdatabanken har mottatt en tilbakemelding på den foreløpige rødlistevurderingen av "
+      },
+      {
+        "Value": "confirmationSecondPart",
+        "Text": "Tilbakemeldingen har blitt registrert på e-postadressen denne meldingen blir sendt til."
+      },
+      {
+        "Value": "confirmationConfirm",
+        "Text": "Hvis det er du som har lagt inn tilbakemeldingen, klikk her for å bekrefte:"
+      },
+      {
+        "Value": "confirmationReject",
+        "Text": "Hvis det IKKE er du som har lagt inn tilbakemelding, klikk her:"
+      },
+      {
+        "Value": "confirmationQuestion",
+        "Text": "Kontakt <a href=\"mailto:rodliste@artsdatabanken.no\">rodliste@artsdatabanken.no</a> ved spørsmål."
+      },
+      {
+        "Value": "confirmationBestRegards",
+        "Text": "Vennilg hilsen"
+      },
+      {
+        "Value": "confirmationArtsdatabanken",
+        "Text": "Artsdatabanken"
+      },
+      {
+        "Value": "confirmationThankYouHead",
+        "Text": "Takk for din tilbakemelding"
+      },
+      {
+        "Value": "confirmationThankYouBody",
+        "Text": "Din tilbakemelding på vurderingen vil bli gjennomgått av eksperter for artsgruppen ........."
+      },
+      {
+        "Value": "confirmationYouHaveRejected",
+        "Text": "Du har nå avvist tilbakemeldingen for vurderingen"
+      },
+      {
+        "Value": "homeContribute",
+        "Text": "Bidra med kunnskap til Rødlista&nbsp;2021"
+      },
+      {
+        "Value": "homeGiveInput",
+        "Text": "Her kan du gi ditt innspill til Rødlista 2021&nbsp;2021 &raquo;"
+      },
+      {
+        "Value": "searchFeedbackExplanation",
+        "Text": "<p>I november 2021 lanserer Artsdatabanken en ny utgave av Norsk rødliste for arter. Nå åpner vi for innsyn i de foreløpige rødlistevurderingene. Hensikten med innsynet er å øke kunnskapsgrunnlaget for vurderingene. Vi ønsker innspill fra alle som har utfyllende og relevant kunnskap. Innsynet er åpent fra torsdag 25. mars 2021.</p> <p>Rødlistevurderingene blir utført av <a href=\"//artsdatabanken.no/Pages/300749\">19 ekspertkomitéer</a> som består av 94 eksperter. Hver komité har en ansvarlig leder og arbeidet er kontraktsfestet med den institusjonen ekspertkomitélederen tilhører. </p>"
+      },
+      {
+        "Value": "searchFeedbackDeadline",
+        "Text": "<p><b>Fristen for å sende inn innspill er 2. mai 2021.</b></p>"
+      },
+      {
+        "Value": "searchHeading",
+        "Text": "Norsk rødliste for arter 2021 – innsyn"
+      },
+      {
+        "Value": "searchSubHeading",
+        "Text": "Innsyn i de foreløpige vurderingene"
+      },
+      {
+        "Value": "searchHowHeading",
+        "Text": "Slik gjør du for å se en vurdering og gi tilbakemelding"
+      },
+      {
+        "Value": "searchHow1",
+        "Text": "Skriv inn navn på en art (eller slekt) i tekstfeltet «Søk art/slekt» eller bruk øvrige filter for å finne arten du vil lese om."
+      },
+      {
+        "Value": "searchHow2",
+        "Text": "Klikk på linjen for å komme til vurderingen."
+      },
+      {
+        "Value": "searchHow3",
+        "Text": "Nederst i de foreløpige vurderingene finner du skjemaet «Tilbakemelding på vurdering». Fyll inn navn, e-postadresse og skriv din tilbakemelding. Når du har sendt tilbakemeldingen vil du motta en e-post hvor du blir bedt om å bekrefte e-postadressen. <a href=\"#\" onclick=\"togglePopup('info')\">Se hvordan Artsdatabanken behandler dine personopplysninger.</a>"
+      },
+      {
+        "Value": "searchHow4",
+        "Text": ""
+      },
+      {
+        "Value": "searchHow5",
+        "Text": ""
+      },
+      {
+        "Value": "searchHow6",
+        "Text": ""
+      },
+      {
+        "Value": "searchHow7",
+        "Text": ""
+      },
+      {
+        "Value": "searchHow8",
+        "Text": ""
+      },
+      {
+        "Value": "searchHow9",
+        "Text": ""
+      },
+      {
+        "Value": "searchEmailPre",
+        "Text": "Hvis du ønsker å gi en tilbakemelding som ikke er relatert til en spesifikk art gjøres det via"
+      },
+      {
+        "Value": "searchEmailAdress",
+        "Text": "rodliste@artsdatabanken.no"
+      },
+      {
+        "Value": "searchEmailPost",
+        "Text": "epost"
+      },
+      {
+        "Value": "searchChooseSpecies",
+        "Text": "Finn art"
+      },
+      {
+        "Value": "searchChooseSpeciesGroup",
+        "Text": "Artsgruppe"
+      },
+      {
+        "Value": "searchChooseCategory",
+        "Text": "Kategori"
+      },
+      {
+        "Value": "searchChooseCriteria",
+        "Text": "Kriterier"
+      },
+      {
+        "Value": "searchChooseArea",
+        "Text": "Vurderingsområde"
+      },
+      {
+        "Value": "searchFilterSpecies",
+        "Text": "Søk art/slekt"
+      },
+      {
+        "Value": "searchChooseHabitat",
+        "Text": "Hovedhabitat"
+      },
+      {
+        "Value": "searchChooseMunicipality",
+        "Text": "Regioner og havområder"
+      },
+      {
+        "Value": "searchChooseTaxonomy",
+        "Text": "Taksonomisk nivå"
+      },
+      {
+        "Value": "searchChoosePercentage",
+        "Text": "Andel av europeisk populasjon"
+      },
+      {
+        "Value": "searchChooseExtinct",
+        "Text": "Trolig utdødd"
+      },
+      {
+        "Value": "searchFilterSpeciesHint",
+        "Text": "Bruk norsk eller vitenskapelig navn"
+      },
+      {
+        "Value": "searchTableVernacularName",
+        "Text": "Norsk navn"
+      },
+      {
+        "Value": "searchTableScientificName",
+        "Text": "Vitenskapelig navn"
+      },
+      {
+        "Value": "searchTableCategory",
+        "Text": "Kategori"
+      },
+      {
+        "Value": "searchTableCriteria",
+        "Text": "Kriterier"
+      },
+      {
+        "Value": "searchTableSpeciesGroup",
+        "Text": "Artsgruppe"
+      },
+      {
+        "Value": "searchTableViewAssessment",
+        "Text": "Se vurdering"
+      },
+      {
+        "Value": "searchDataLoading",
+        "Text": "Laster"
+      },
+      {
+        "Value": "searchHintFilter",
+        "Text": "NB: Bruk «Søk art/slekt» for å redusere antall treff."
+      },
+      {
+        "Value": "searchIncludes",
+        "Text": "Søket inneholder "
+      },
+
+      {
+        "Value": "observations",
+        "Text": " treff."
+      },
+      {
+        "Value": "searchChangedCategory",
+        "Text": "Vis arter med endret kategori fra 2015"
+      },
+      {
+        "Value": "resetAllFilters",
+        "Text": "Nullstill filtre"
+      },
+      {
+        "Value": "organisationName",
+        "Text": "Artsdatabanken"
+      },
+      {
+        "Value": "assessmentFeedbacks",
+        "Text": "Tilbakemeldinger"
+      },
+      {
+        "Value": "assessmentFeedbackHeading",
+        "Text": "Tilbakemelding på vurderingen"
+      },
+      {
+        "Value": "assessmentFeedbackChaptcha",
+        "Text": "Bildekode"
+      },
+      {
+        "Value": "assessmentFeedbackChaptchaPlaceholder",
+        "Text": "Skriv inn koden"
+      },
+      {
+        "Value": "assessmentFeedbackFullName",
+        "Text": "Fullt navn"
+      },
+      {
+        "Value": "assessmentFeedbackFullNamePlaceholder",
+        "Text": "Skriv fullt navn"
+      },
+      {
+        "Value": "assessmentFeedbackUserEmail",
+        "Text": "E-postadresse"
+      },
+      {
+        "Value": "assessmentFeedbackUserEmailPlaceholder",
+        "Text": "Skriv din e-postadresse"
+      },
+      {
+        "Value": "assessmentFeedbackComment",
+        "Text": "Kommentar"
+      },
+      {
+        "Value": "assessmentFeedbackCommentHint",
+        "Text": "Skriv din kommentar her. Minimum antall tegn er 20."
+      },
+      {
+        "Value": "GDPRForklaring",
+        "Text": "Jeg har lest og forstått "
+      },
+      {
+        "Value": "assessmentFeedbackSend",
+        "Text": "Send"
+      },
+      {
+        "Value": "feedbackErrorHeading",
+        "Text": "Oooops, noe gikk galt!"
+      },
+      {
+        "Value": "feedbackErrorMessage",
+        "Text": "<p>Noe gikk galt med lagring av din tilbakemelding.</p><p>Prøv igjen senere.</p>"
+      },
+      {
+        "Value": "feedbackConformationHeading",
+        "Text": "Takk for din tilbakemelding"
+      },
+      {
+        "Value": "feedbackConformationMessage",
+        "Text": "<p>Du vil nå motta en e-post der du må bekrefte at det er du som har lagt inn denne tilbakemeldingen ved å klikke på en lenke.</p>"
+      },
+      {
+        "Value": "feedbackAcceptConfirmationHeading",
+        "Text": "Takk for din tilbakemelding"
+      },
+      {
+        "Value": "feedbackAcceptConformationMessage",
+        "Text": "<span>Din tilbakemelding på vurderingen vil bli gjennomgått av eksperter for artsgruppen </span>"
+      },
+      {
+        "Value": "feedbackRejectConfirmationHeading",
+        "Text": "Du har nå avvist tilbakemeldingen for vurderingen"
+      },
+      {
+        "Value": "feedbackRejectConformationMessage",
+        "Text": ""
+      }
+    ]
+  }
+}

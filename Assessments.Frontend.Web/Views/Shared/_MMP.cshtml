@@ -16,141 +16,50 @@
 
     @if (!string.IsNullOrEmpty(mmp.Min) || !string.IsNullOrEmpty(mmp.Max) || !string.IsNullOrEmpty(mmp.Probable))
     {
-        <p class="mmp">
-            <b>@tag @desc </b> <button class="detaljer" onclick="togglePopup('@tag')">
-            <img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-            <div class="popuptext" id=@tag>
-                <button class="closePopup" onclick="closePopup('@tag')"> x </button>
+<p class="mmp">
+    <b>@tag @desc </b>
 
-                @if (tag == "C2")
-                {
-                    <div>
-                        Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes.
-                        I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.
-                    </div>
-                }
+    <div class="popuptext mmp">
+       {@* USED TO CONTAIN text marked as mmp in json*@}
+    </div>
 
-                @if (tag == "C2a(i)")
-                {
-                    <div>
-                        Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes.
-                        I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.
-                    </div>
-                }
 
-                @if (tag == "C1")
-                {
-                    <div>
-                        Bedømt, antatt, observert, estimert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes.
-                        Pågående nedgang på C1-kriteriet beregnes på samme måte som på A-kriteriet, men kan gjelde for en kortere tidsperiode.
-                    </div>
-                }
+    @*set "%" after the number unless the criterion is C2*@
+    @if (tag != "C2a(i)")
+    {
+    <div class="parameters">
+        @if (!string.IsNullOrEmpty(mmp.Min))
+        {
+            <div>- minimum: @mmp.Min %</div>
+        }
 
-                @if (tag == "A1")
-                {
-                    <div>
-                        Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år). For å benytte A1 må årsaken(e) til reduksjonen være både opphørt og forstått, og reduksjonen må være reversibel.
-                        Om en eller flere av vilkårene (opphørt, forstått og reversibel) ikke er innfridd for ≥ 10 % av populasjonen skal ikke A1 benyttes.
-                    </div>
-                }
+        @if (!string.IsNullOrEmpty(mmp.Probable))
+        {
+            <div>- mest trolig: @mmp.Probable %</div>
+        }
 
-                @if (tag == "A2")
-                {
-                    <div>
-                        Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år).
-                        For A2 behøver ikke årsaken(e) eller reduksjonen nødvendigvis være verken opphørt, forstått eller reversibel.
-                    </div>
-                }
+        @if (!string.IsNullOrEmpty(mmp.Max))
+        {
+            <div>- maksimum: @mmp.Max %</div>
+        }
+        </div>
 
-                @if (tag == "A3")
-                {
-                    <div>
-                        Bedømt, antatt eller prosjektert framtidig reduksjon i populasjonsstørrelse over de kommende 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år).
-                    </div>
-                }
-
-                @if (tag == "A4")
-                {
-                    <div>
-                        Bedømt, antatt, observert, estimert eller prosjektert pågående reduksjon i populasjonsstørrelse over 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år) som inkluderer både fortid og framtid.
-                    </div>
-                }
-
-            </div>
-            @*set "%" after the number unless the criterion is C2*@
-            @if (tag != "C2a(i)")
+        @if (tag.StartsWith('A')){
+            <span>@{ /*A SPANTEXT*/ } @mmp.Calculated @{ /*A SPANTEXT-end*/ }@{ /*IUCN HELPERTEXT*/ }</span>
+        }
+        else{
+            @if (tag == "C1")
             {
-                <div class="parameters">
-                    @if (!string.IsNullOrEmpty(mmp.Min))
-                    {
-                        <div>- minimum: @mmp.Min %</div>
-                    }
-
-                    @if (!string.IsNullOrEmpty(mmp.Probable))
-                    {
-                        <div>- mest trolig: @mmp.Probable %</div>
-                    }
-
-                    @if (!string.IsNullOrEmpty(mmp.Max))
-                    {
-                        <div>- maksimum: @mmp.Max %</div>
-                    }
-
-
-                    @if (tag.StartsWith('A'))
-                    {
-                        var id = "berReduksjon" + tag;
-                        <span>Hvilket gir beregnet reduksjon, med føre-var forbehold, på: @mmp.Calculated %</span> <button class="detaljer" onclick="togglePopup('@id')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                        <div class="popuptext" id=@id>
-                            <button class="closePopup" onclick="closePopup('@id')"> x </button>
-                            <div>
-                                IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp.
-                                Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon.
-                                På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene.
-                                Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12.
-                                Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent).
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        @if (tag == "C1")
-                        {
-                            <span>Hvilket gir beregnet nedgang, med føre-var forbehold, på: @mmp.Calculated %</span> <button class="detaljer" onclick="togglePopup('berNedgang')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                            <div class="popuptext" id="berNedgang">
-                                <button class="closePopup" onclick="closePopup('berNedgang')"> x </button>
-                                <div>
-                                    IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp.
-                                    Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon.
-                                    På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene.
-                                    Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12.
-                                    Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent).
-                                </div>
-                            </div>
-                        }
-                        @if (tag == "C2")
-                        {
-                <span>
-                    Hvilket gir beregnet antall, med føre-var forbehold, på:
-                    @* @FormatNumber(mmp.Calculated)*@ individer
-                </span>
-        <button class="detaljer" onclick="togglePopup('berAntall')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                            <div class="popuptext" id="berAntall">
-                                <button class="closePopup" onclick="closePopup('berAntall')"> x </button>
-                                <div>
-                                    IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp.
-                                    Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon.
-                                    På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene.
-                                    Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12.
-                                    Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent).
-                                </div>
-                            </div>
-                        }
-                    }
-                </div>
+                <span>@{ /*C1 SPANTEXT*/ } @mmp.Calculated @{ /*C1 SPANTEXT-end*/ }@{ /*IUCN HELPERTEXT*/ }</span>
             }
-            else
+            @if (tag == "C2")
             {
+<span> @{ /*C2 SPANTEXT*/ }@* @FormatNumber(mmp.Calculated)*@ @{ /*C2 SPANTEXT-end*/ }@{ /*IUCN HELPERTEXT*/ }</span>
+            }
+        }
+    }
+    else
+    {
         <div class="parameters">
             @if (!string.IsNullOrEmpty(mmp.Min))
             {
@@ -178,9 +87,9 @@
                 </div>
             </div>
         </div>
-            }
+    }
 
-        </p>
+</p>
     }
     }
     }

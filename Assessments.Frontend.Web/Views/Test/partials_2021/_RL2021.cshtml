@@ -8,8 +8,28 @@
     Dictionary<string, IEnumerable<Databank.Domain.Code>> labels = ViewBag.Labels;
     Dictionary<string, IEnumerable<Databank.Domain.Code>> codes = ViewBag.Codes;
 
-    var condLabel = new Func<string, Func<string, string>>(kodeid => new Func<string, string>(key => (string.IsNullOrEmpty(key) ? "" : (labels[kodeid].Where(code => code.Value == key).Select(code => code.Text).FirstOrDefault()))));
-    var condKode = new Func<string, Func<string, string>>(kodeid => new Func<string, string>(key => (string.IsNullOrEmpty(key) ? "" : (codes[kodeid].Where(code => code.Value == key).Select(code => code.Text).FirstOrDefault()))));
+    var condLabel = new Func<string, Func<string, string>>
+        (kodeid => new Func<string, string>
+            (key => (string.IsNullOrEmpty(key) ? "" : 
+                (labels[kodeid].Where
+                    (code => code.Value == key)
+                        .Select(code => code.Text)
+                        .FirstOrDefault()
+                    )
+                )
+            )
+        );
+    var condKode = new Func<string, Func<string, string>>
+        (kodeid => new Func<string, string>
+            (key => (string.IsNullOrEmpty(key) ? "" : 
+                (codes[kodeid].Where
+                    (code => code.Value == key)
+                        .Select(code => code.Text)
+                        .FirstOrDefault()
+                    )
+                )
+            )
+        );
     var A1def = condKode("a1OpphørtOgReversibelKode");
     var A1basertdef = condKode("a1EndringBasertpåKode");
     var A2def = condKode("a2Forutgående10ÅrKode");
@@ -637,37 +657,7 @@
             @if (true)
             {
 
-                @*
-            <<-------- FLYTTA HERFRA
-
-                *@
-
-                <!--<a data-toggle="collapse" id="writeFeedback" href="#othereffects">Gi tilbakemelding</a>
-        -->
-
-                <!-- DUPLIKAT AV EKSISTERENDE KODE
-
-            <div style="color: #80736b; font-size: x-large">
-            Kategori Rødlista 2021: @if (assessment.Kategori != "")
-            {
-
-            }
-        </div>-->
-
-                <!-- NOT RELEVANT, REMADE NEW VERSION in categorybar
-        <div class="category-band">
-            @Html.Raw(setClassName("re"))
-            @Html.Raw(setClassName("cr"))
-            @Html.Raw(setClassName("en"))
-            @Html.Raw(setClassName("vu"))
-            @Html.Raw(setClassName("nt"))
-            @Html.Raw(setClassName("dd"))
-            @Html.Raw(setClassName("lc"))
-            @Html.Raw(setClassName("na"))
-            @Html.Raw(setClassName("ne"))
-        </div>
-        -->
-
+               
                 @* // TABLE OF CONTENTS - ikke direkte overførbar
 
                 <div class="contents">
@@ -716,29 +706,6 @@
             </div>
 
                 *@
-
-
-
-
-                <h3>Informasjon om vurderingen</h3>
-                <div class="infoAndHistory">
-
-
-
-
-
-
-
-                    <!-- stopp-->
-                    <!--- STOPP HISTORIKK-->
-                </div>
-
-
-
-
-
-                <!--- OPPSUMERING FJERNET-->
-
 
                 <!-- Denne ifsetningen gir lite mening. -->
 

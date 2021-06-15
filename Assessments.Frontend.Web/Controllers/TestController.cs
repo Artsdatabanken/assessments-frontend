@@ -117,7 +117,10 @@ namespace Assessments.Frontend.Web.Controllers
 
                         var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id)).GetValueAsync();
                         string json = System.IO.File.ReadAllText("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
-                        Console.WriteLine(json);
+                        var jsondata = Newtonsoft.Json.Linq.JObject.Parse(json);
+
+                        Console.WriteLine(jsondata["A"]["A1"]);
+                        ViewBag.kriterier = jsondata;
                         return View("SpeciesAssessment2021", RL2021);
 
                     case 2015:

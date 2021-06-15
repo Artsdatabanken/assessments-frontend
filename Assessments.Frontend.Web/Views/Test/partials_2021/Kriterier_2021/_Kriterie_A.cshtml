@@ -27,15 +27,17 @@
 
         <b>HAR A-KRITERIE</b>
 
+
+
         if (kriterier.Contains("A1"))
         {
             <h4>Inneholder A1</h4>
 
             @if (!string.IsNullOrEmpty(Model.A1OpphørtOgReversibel)
-      || Model.A1EndringBasertpåKode.Count > 0
-      || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Max)
-      || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Min)
-      || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Probable))
+                  || Model.A1EndringBasertpåKode.Count > 0
+                  || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Max)
+                  || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Min)
+                  || !string.IsNullOrEmpty(Model.A1OpphørtOgReversibelAntatt.Probable))
             {
                 <h4>den store sjekken gikk gjennom</h4>
                 @if (Model.A1EndringBasertpåKode.Count > 0)
@@ -50,6 +52,7 @@
                         <p>
                            @{ 
                                //A1 desc
+
                                //A1 mmp
                            }
                         </p>

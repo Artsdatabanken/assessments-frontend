@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Text.Json;
+using System.IO;
 using System.Threading.Tasks;
 using Artsdatabanken;
 using Assessments.Frontend.Web.Infrastructure;
@@ -105,6 +107,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
+
         {
             try
             {
@@ -113,7 +116,8 @@ namespace Assessments.Frontend.Web.Controllers
                     case 2021:
 
                         var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id)).GetValueAsync();
-
+                        string json = System.IO.File.ReadAllText("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
+                        Console.WriteLine(json);
                         return View("SpeciesAssessment2021", RL2021);
 
                     case 2015:

@@ -1,14 +1,13 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using System.Text.Json;
-using System.IO;
 using System.Threading.Tasks;
 using Artsdatabanken;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
 using Microsoft.Extensions.Logging;
 using X.PagedList;
+using System.Collections.Generic;
 
 namespace Assessments.Frontend.Web.Controllers
 {
@@ -114,13 +113,11 @@ namespace Assessments.Frontend.Web.Controllers
                 switch (year)
                 {
                     case 2021:
-
                         var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id)).GetValueAsync();
                         string json = System.IO.File.ReadAllText("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
                         var jsondata = Newtonsoft.Json.Linq.JObject.Parse(json);
-
-                        Console.WriteLine(jsondata["A"]["A1"]);
                         ViewBag.kriterier = jsondata;
+
                         return View("SpeciesAssessment2021", RL2021);
 
                     case 2015:

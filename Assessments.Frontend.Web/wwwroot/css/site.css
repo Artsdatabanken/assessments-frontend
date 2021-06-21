@@ -21,8 +21,12 @@
     padding: 5px;
 }
 
-.element .active {
-    background:lightgreen;
+.subcriteria .active {
+    background: lightgreen;
+}
+
+.suboptions .active{
+    background:lightblue;
 }
 
 .mid table {

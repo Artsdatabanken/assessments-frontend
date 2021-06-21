@@ -114,6 +114,7 @@ namespace Assessments.Frontend.Web.Controllers
                 {
                     case 2021:
                         var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id)).GetValueAsync();
+
                         string json = System.IO.File.ReadAllText("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
                         var jsondata = Newtonsoft.Json.Linq.JObject.Parse(json);
                         ViewBag.kriterier = jsondata;
@@ -127,7 +128,7 @@ namespace Assessments.Frontend.Web.Controllers
                         return View("SpeciesAssessment2015", rodliste2015);
 
                     case 2006:
-                        
+
                         var redlist2006Assessment = await _assessmentApi.Redlist2006.ByKey(id).GetValueAsync();
 
                         return View("SpeciesAssessment2006", redlist2006Assessment);
@@ -135,6 +136,7 @@ namespace Assessments.Frontend.Web.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine("Caught it!");
                 _logger.LogError(ex, ex.Message);
                 return NotFound();
             }

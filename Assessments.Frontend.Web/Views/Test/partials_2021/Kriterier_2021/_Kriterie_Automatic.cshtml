@@ -25,14 +25,15 @@
     }
     <br />
     
-        @foreach (string element in keys)
-        {
+    @foreach (string element in keys)
+    {
 <div class="tempsection">
     @{
         var elementname = @ViewBag.kriterier["criteria"][@element];
         var subcriteria = elementname["subcriteria"];
         var suboptions = elementname["options"];
         var currentCriteria = "none";
+
         foreach (var subsub in criterialist)
         {
             if (subsub.Contains(element))
@@ -44,6 +45,7 @@
         if (currentCriteria.Contains("+"))
         {
             var formatted = "";
+            // Untill formatting is completed from api, detatch and reassemble criteria string here
             foreach (var splititem in currentCriteria.Split("+"))
             {
                 if (splititem.Contains(element))
@@ -54,105 +56,92 @@
                 {
                     formatted = formatted + " AND " + element + splititem;
                 }
-
             }
             currentCriteria = formatted;
         }
     }
 
-
+    <!-- OUTER CRITERIA LOOP ( A, B, C, D, E) -->
 
     <h2>@element</h2>
     <h2>CURRENTCRITERIA = @currentCriteria</h2>
     <h3>@elementname["summary"]</h3>
-
-    @elementname["description"]
+    <span class="description">@elementname["description"]</span>
+    
     <hr />
-    @elementname["spantext"]
-    @elementname["model-variable"]
-    @elementname["spantext-end"]
     <br />
-  
+
+    <!-- SUB OPTIONS -->
     <div class="suboptions">
         @if (suboptions != null)
         {
-            
             @foreach (string subelement in @suboptions["keys"])
             {
                 <div class="element">
-           
-            @{
-                var thesubelement = @ViewBag.kriterier["criteria"][@element]["options"][subelement];
-                var optionsClassName = thesubelement;
-                var isContained = "none";
-                if (currentCriteria.Contains(subelement))
-                {
-                    isContained = currentCriteria;
-                }
-
-            }
-            <div class="@optionsClassName">
-                <h3> @subelement - @thesubelement["tagline"]</h3>
-                @thesubelement["description"]
-
-            </div>
-            
-        </div>
-
-        }
-            
-            }
-        </div>
-           
-            <div class="subcriteria">
-                @if (subcriteria != null)
-                {
-                    @foreach (string subelement in @subcriteria["keys"])
-                    {
-
-                        <div class="element">
-                            @{
-                                var thesubelement = @ViewBag.kriterier["criteria"][@element]["subcriteria"][subelement];
-                                var className = "nonactive";
-                                if (Model.Kriterier.Contains(subelement))
-                                {   
-                                    // TODO: WHEN CHECK IS FIXED, add active classes.
-                                    className = "_active";
-                                }
-                            }
-                            <div class="@className">
-                                <h3> @subelement - @thesubelement["tagline"]</h3>
-                                @thesubelement["description"]
-                                
-                                <br />
-                                <br />
-                                <b>Hent ut og fiks<br /></b>
-                                @if (@thesubelement["content"] != null)
-                                {
-                                    @foreach (string content_element in @thesubelement["content"])
-                                    {
-                                        <p>@content_element</p>
-                                    }
-                                }
-
-
-                                <br />
-                                @thesubelement["based-on"]<br />
-
-
-
-                            </div>
-
-                        </div>
-
+                    @{
+                        var thesubelement = @ViewBag.kriterier["criteria"][@element]["options"][subelement];
+                        var optionsClassName = thesubelement;
+                        var isContained = "none";
+                        if (currentCriteria.Contains(subelement))
+                        {
+                            isContained = currentCriteria;
+                        }
                     }
-                }
-            </div>
 
+                    <div class="@optionsClassName">
+                        <h3> @subelement - @thesubelement["tagline"]</h3>
+                        <span class="description">@thesubelement["description"]</span>
+                    </div>
 
-
-        </div>
+                </div>
+            }
         }
+    </div>
+    <!-- SUB CRITERIA -->
+    <div class="subcriteria">
+        @if (subcriteria != null)
+        {
+            @foreach (string subelement in @subcriteria["keys"])
+            {
+                <div class="element">
+                    @{
+                        var thesubelement = @ViewBag.kriterier["criteria"][@element]["subcriteria"][subelement];
+                        var className = "nonactive";
+                        if (Model.Kriterier.Contains(subelement))
+                        {
+                            // TODO: WHEN CHECK IS FIXED, add active classes.
+                            className = "_active";
+                        }
+                    }
+                    <div class="@className">
+                        <h3> @subelement - @thesubelement["tagline"]</h3>
+                        @thesubelement["description"]
+
+                        <br />
+                        <br />
+                        <h4>Tall-elementer som må matches mot databasefelt</h4>
+                        @if (@thesubelement["content"] != null)
+                        {
+                            @foreach(object e in @thesubelement["content"])
+                            {
+                                // TODO: Add check for punktestimat vs. intervall from db, 
+                                // fetch corresponding text from probable. 
+
+                                <p>@e</p>
+                            }
+                        }
+                        <br />
+                        @thesubelement["based-on"]<br />
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+
+
+</div>
+            }
 
     
 </div> <!-- end section -->

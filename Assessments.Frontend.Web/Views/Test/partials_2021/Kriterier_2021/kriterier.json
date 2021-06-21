@@ -31,7 +31,7 @@
           "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år). For å benytte A1 må årsaken(e) til reduksjonen være både opphørt og forstått, og reduksjonen må være reversibel. Om en eller flere av vilkårene (opphørt, forstått og reversibel) ikke er innfridd for ≥ 10 % av populasjonen skal ikke A1 benyttes.",
           "content": {
             "min": "Minst: a1OpphørtOgReversibelAntatt(min) %",
-            "probable": "Mest trolig: a1OpphørtOgReversibelAntatt(probable) %",
+            "probable": { "intervall": "Mest trolig: a1OpphørtOgReversibelAntatt(probable) %" },
             "max": "Maksimum: a1OpphørtOgReversibelAntatt(max) %",
             "quantile": "Beregnet reduksjon, med føre-var forbehold: a1OpphørtOgReversibelAntatt(quantile) % (?) ",
             "conclusion": "A1 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
@@ -43,7 +43,7 @@
           "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år). For A2 behøver ikke årsaken(e) eller reduksjonen nødvendigvis være verken opphørt, forstått eller reversibel. ",
           "content": {
             "min": "Minst: a2Forutgående10År(min) %",
-            "probable": "Mest trolig: a2Forutgående10År(probable) % ",
+            "probable": { "intervall": "Mest trolig: a2Forutgående10År(probable) %" },
             "max": "Maksimum: a2Forutgående10År(max) %",
             "quantile": "Beregnet reduksjon, med føre-var forbehold: a2Forutgående10År(quantile) % (?)",
             "conclusion": "A2 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
@@ -55,7 +55,7 @@
           "description": "Bedømt, antatt eller prosjektert framtidig reduksjon i populasjonsstørrelse over de kommende 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år).",
           "content": {
             "min": "Minst: a3Intervall10ÅrAntatt(min) % ",
-            "probable": "Mest trolig: a3Intervall10ÅrAntatt(probable) %",
+            "probable": { "intervall": "Mest trolig: a3Intervall10ÅrAntatt(probable) %" },
             "max": "Maksimum: a3Intervall10ÅrAntatt(max) %",
             "quantile": "Beregnet reduksjon, med føre-var forbehold: a3Intervall10ÅrAntatt(quantile) % (?)",
             "conclusion": "A3 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
@@ -67,7 +67,7 @@
           "description": "Bedømt, antatt, observert, estimert eller prosjektert pågående reduksjon i populasjonsstørrelse over 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år) som inkluderer både fortid og framtid.",
           "content": {
             "min": "Minst: a4Intervall10ÅrAntatt(min) %",
-            "probable": "Mest trolig: a4Intervall10ÅrAntatt(probable) %",
+            "probable": { "intervall": "Mest trolig: a4Intervall10ÅrAntatt(probable) %" },
             "max": "Maksimum: a4Intervall10ÅrAntatt(max) %",
             "quantile": "Beregnet reduksjon, med føre-var forbehold: a4Intervall10ÅrAntatt(quantile) % (?)",
             "conclusion":"A4 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
@@ -96,7 +96,16 @@
             "ii": {
               "tagline": "Antall trusseldefinerte lokaliteter",
               "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en arte. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
-              "content": "Hvis punktestimat = true: Minst: baIntervallAntallLokaliteter(min) Mest trolig: baIntervallAntallLokaliteter(probable)  Maksimum: baIntervallAntallLokaliteter(max)// Alternativt hvis punktestimat = false: Minst: baIntervallAntallLokaliteter(min) Mest trolig: baIntervallAntallLokaliteter(minintervall)- baIntervallAntallLokaliteter(maxintervall) Maksimum: baIntervallAntallLokaliteter(max) // Beregnet antall, med føre-var forbehold: baIntervallAntallLokaliteter(quantile) (?)// Ba(ii). Antall trusseldefinerte lokaliteter ≤ <terskelverdi> tilsvarer i utgangspunktet <kategori>// "
+              "content": {
+                "min": "Minst: baIntervallAntallLokaliteter(min)",
+                "max": "Maksimum: baIntervallAntallLokaliteter(max)",
+                "probable": {
+                  "punktestimat": "Mest trolig: baIntervallAntallLokaliteter(probable)",
+                  "intervall": "Mest trolig: baIntervallAntallLokaliteter(minintervall)- baIntervallAntallLokaliteter(maxintervall)"
+                },
+                "quantile": "Beregnet antall, med føre-var forbehold: baIntervallAntallLokaliteter(quantile)",
+                "conclusion": "Ba(ii). Antall trusseldefinerte lokaliteter ≤ <terskelverdi> tilsvarer i utgangspunktet <kategori>"
+              }
             }
           }
         },

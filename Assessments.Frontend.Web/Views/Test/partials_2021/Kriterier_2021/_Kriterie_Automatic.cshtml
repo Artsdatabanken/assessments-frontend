@@ -15,7 +15,7 @@
 
 <div class="section">
     <h2>Kriterier</h2>
-    <h3> Alle autmatisk utdytta kriterier</h3>
+    <h3>Alle autmatisk utdytta kriterier</h3>
     <h4>Faktiske kriterier:</h4>
 
 
@@ -110,27 +110,31 @@
                     @foreach (string subelement in @subcriteria["keys"])
                     {
 
-                        <span class="element">
+                        <div class="element">
                             @{
                                 var thesubelement = @ViewBag.kriterier["criteria"][@element]["subcriteria"][subelement];
                                 var className = "nonactive";
                                 if (Model.Kriterier.Contains(subelement))
-                                {
-                                    className = "active";
+                                {   
+                                    // TODO: WHEN CHECK IS FIXED, add active classes.
+                                    className = "_active";
                                 }
                             }
                             <div class="@className">
-
-
                                 <h3> @subelement - @thesubelement["tagline"]</h3>
-
-                                <b>
-
-                                </b>
-                                @thesubelement["description"]<br />
+                                @thesubelement["description"]
+                                
+                                <br />
                                 <br />
                                 <b>Hent ut og fiks<br /></b>
-                                @thesubelement["content"]<br />
+                                @if (@thesubelement["content"] != null)
+                                {
+                                    @foreach (string content_element in @thesubelement["content"])
+                                    {
+                                        <p>@content_element</p>
+                                    }
+                                }
+
 
                                 <br />
                                 @thesubelement["based-on"]<br />
@@ -139,7 +143,7 @@
 
                             </div>
 
-                        </span>
+                        </div>
 
                     }
                 }

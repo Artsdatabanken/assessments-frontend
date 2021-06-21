@@ -67,8 +67,19 @@
     <h2>CURRENTCRITERIA = @currentCriteria</h2>
     <h3>@elementname["summary"]</h3>
     <span class="description">@elementname["description"]</span>
-    
     <hr />
+    @if (elementname["content"] != null)
+    {
+        @foreach (object e in @elementname["content"])
+        {
+            // TODO: Add check for punktestimat vs. intervall from db,
+            // fetch corresponding text from probable.
+
+            <p>@e</p>
+        }
+    }
+    <br />
+
     <br />
 
     <!-- SUB OPTIONS -->
@@ -122,10 +133,10 @@
                         <h4>Tall-elementer som må matches mot databasefelt</h4>
                         @if (@thesubelement["content"] != null)
                         {
-                            @foreach(object e in @thesubelement["content"])
+                            @foreach (object e in @thesubelement["content"])
                             {
-                                // TODO: Add check for punktestimat vs. intervall from db, 
-                                // fetch corresponding text from probable. 
+                                // TODO: Add check for punktestimat vs. intervall from db,
+                                // fetch corresponding text from probable.
 
                                 <p>@e</p>
                             }

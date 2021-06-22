@@ -29,10 +29,9 @@
         <h1>
             Norsk Rødliste for arter 2021
         </h1>
-        <h2>@ViewBag.Title</h2>
-
+        
+        <partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" /> 
        
-
         <span class="byline">
             Ikke publisert ennå
         </span>
@@ -45,10 +44,13 @@
                 Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
             </p>
         </div>
-        
-        <partial name="/Views/Test/partials_2021/Kriterier_2021/_Kriterie_Automatic.cshtml" />
-        <partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" />
+        <partial name="/Views/Shared/_CategoryDescription.cshtml" />
         <partial name="/Views/Shared/_Categorybar.cshtml" />
+
+        <hr />
+
+        <partial name="/Views/Test/partials_2021/Kriterier_2021/_Kriterie_Automatic.cshtml" />
+
         <partial name="/Views/Test/partials_2021/_Informasjon.cshtml" />
         <partial name="/Views/Test/partials_2021/_Historikk.cshtml" />
         <partial name="/Views/Test/partials_2021/_Oppsumering.cshtml" />

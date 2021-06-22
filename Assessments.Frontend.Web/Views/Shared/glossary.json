@@ -1,0 +1,50 @@
+﻿{
+  "IUCN": {
+    "tagline": "Beregnet XX, med føre-var forbehold: XX ",
+    "description": "IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp. Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon. På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene. Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12. Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent). "
+  },
+  "generasjonstid": {
+    "tagline": "Generasjonstid X år",
+    "description": "Generasjonstid er gjennomsnittsalder for alle reproduserende individ, dvs. foreldre til alle avkom i populasjonen. Om generasjonstiden hos en populasjon har blitt endret som følge av høsting el.lign. skal den naturlige generasjonslengden før høsting benyttes. Generasjonstid og generasjonslengde brukes synonymt."
+  },
+  "TroligUtdodd": {
+    "tagline": "Trolig utdødd",
+    "description": "er ikke en kategori, men en merkelapp som settes på arter som er vurdert som kritisk truet (CR) og som trolig er utdødd. Dette gjøres når det med dagens kunnskap ikke med sikkerhet kan fastslås at arten er utødd. En art vurderes som regionalt utdødd (RE) når gjentatte undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn."
+  },
+  "RE": {
+    "tagline": "Regionalt utdødd",
+    "description": "–skal bare brukes dersom det er svært liten tvil om at arten er døddut/har emigrert fra Norge (IUCN sier at det skal være \\\"no reasonable doubt\\\"). For at arten skal settes i denne kategorien må det dokumenteres eller sannsynliggjøres at artenhar vært fastreproduserende i Norge etter år1799, eller at arten var en besøkende art(se avsnittet hvilke arter kan vurderes?). Bruk av denne kategorien betinger at gjentatte undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn av arten. Disse undersøkelsen skal ha foregått ved fornuftige tidspunkt (f.eks. hver sesong, årlig) og ha pågått over et tidsrom som er egnet for artens livssyklus og livsform (se IUCN 2019, side80-86)."
+  },
+  "CR": {
+    "tagline": "Kritisk truet",
+    "description": "–skal brukes når det er ekstremt høy risiko for utdøing, altså når best tilgjengelig kunnskap tilsier at arten møter etav kriteriene A-E for CR (ved bruk av E-kriteriet kvantifisert til 50 % sannsynlighet for utdøing innen 3 generasjoner eller 10 år –maks. 100 år*)."
+  },
+  "EN": {
+    "tagline": "Sterkt truet",
+    "description": "–skal brukes når det er svært høy risiko for utdøing, altså når best tilgjengelig kunnskap tilsier at arten møter etav kriteriene A-E for EN (ved bruk av E-kriteriet kvantifisert til 20 % sannsynlighet for utdøing innen 5 generasjoner eller 20 år –maks.100 år*)."
+  },
+  "VU": {
+    "tagline": "Sårbar",
+    "description": "-skal brukes når det er høy risiko for utdøing, altså når best tilgjengelig kunnskap tilsier at arten møter etav kriteriene A-E for VU(ved bruk av E-kriteriet kvantifisert til 10 % sannsynlighet for utdøing innen 100 år)."
+  },
+  "NT": {
+    "tagline": "Nær truet",
+    "description": " –skal brukes når en art er vurdert å ligge tett opp til å kvalifisere til CR, EN eller VU, eller trolig vil det i nær framtid. IUCN har ingen faste grenseverdier for NT (men se kap. 10.1, IUCN 2019), men vi bruker det samme kriteriesettet som ble bruktiRødlista 2006, 2010 og 2015 (ved bruk av E-kriteriet kvantifisert til 5 % sannsynlighet for utdøing innen 100 år*). Det kan være aktuelt å bruke NT for arter der arten i dagens situasjon er avhengig av forvaltningstiltak (se kap. 10.1, samt side 66 i IUCN2019). I så fall må dette spesifiseres i tekstboksen for Oppsummering av vurderingeni RødlisteBasen."
+  },
+  "DD": {
+    "tagline": "Datamangel",
+    "description": "–bør brukes i begrenset omfang. Kategorien DD benyttes der usikkerhet om artens korrekte kategoriplassering,basert på tilgjengelig kunnskap om artens utbredelse og/eller populasjonsstatus,er svært stor oginkluderer hele spekteret av mulige kategorier fra og med CR til og med LC."
+  },
+  "NE": {
+    "tagline": "Ikke vurdert",
+    "description": "–betyr at det ikke er gjort noen vurdering mot IUCN-kriteriene. Dette kan for eksempel skyldes dårlig utredet taksonomi, eller at man velger å ikke gjøre en vurdering av hele artsgruppen arten tilhører (men også i enkelte tilfeller for enkeltarter) på grunn av for dårlig kunnskapsgrunnlag. I utgangspunktet gjøres slike vurderinger på et mer overordnet nivå før selve utvalget av arter som skal rødlistevurderes fastsettes."
+  },
+  "NA": {
+    "tagline": "Ikke egnet ",
+    "description": "–skal brukes på arter som ifølge IUCN sitt regelverk ikke skal vurderes ved nasjonal rødlisting. Dette er for eksempel fremmede arter og tilfeldige gjester (se avsnitt «Hvilke arter og bestander skal ikke vurderes?»)."
+  },
+  "LC": {
+    "tagline": "Livskraftig bestand",
+    "description": "–skal brukes når arter ikke oppfyller noen av kriteriene for å bli vurdert til kategoriene CR, EN, VU, NT, eller som ikke er satt i kategorien RE, DD, NA eller NE."
+  }
+}

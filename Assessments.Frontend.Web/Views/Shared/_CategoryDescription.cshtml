@@ -4,10 +4,11 @@
 }
 
 @*
-
-    Good example species: Nitidula rufipes
-
+    Codeblock from Innsynsløsninga 2021 by SN. 
+    Slightly modified by HEM for launch.
 *@
+
+
 
 @functions {
     public string categoryMatcher(string category)
@@ -71,29 +72,41 @@
     }
 }
 
-<div class="section">
-    <h2>Category description</h2>
-    <h3>@categoryMatcher(@Model.Kategori) @categoryDescription(ViewBag.category) </h3>
+<div class="page_section">
+    <h3>
+        Rødlistekategori: @categoryMatcher(@Model.Kategori) @categoryDescription(ViewBag.category)
+        @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
+        {
+            <span>og arten er trolig utdødd</span>
+        }
+    </h3>
+
+    @if (@ViewBag.glossary[@Model.Kategori]!= null)
+    {   
+    <p class="imaged_paragraph">
+        <span class="graphic_element @Model.Kategori">
+            @Model.Kategori
+        </span>
+        <span class="right_text">
+            @ViewBag.glossary[@Model.Kategori]["tagline"]
+            @ViewBag.glossary[@Model.Kategori]["description"]
+        </span>
+    </p>
+    }
+
+
 
     @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
     {
-        <div>
-            Arten er trolig utdødd.
-            @*<button class="detaljer" style="margin-bottom: 10px; margin-top: 10px" onclick="togglePopup('dead')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-            *@
-            <div>
-                @*<button class="closePopup" onclick="closePopup('dead')"> x </button>*@
-                <dl class="section">
-                    <dt><i>Trolig utdødd</i></dt>
-                    <dd>
-                        er ikke en kategori, men en merkelapp som settes på arter som er vurdert som kritisk truet (CR) og som trolig er utdødd. Dette gjøres når med dagens kunnskap ikke med sikkerhet fastslå at arten er utødd.
-                        En art vurderes som regionalt utdødd (RE) når gjentatte undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn.
-                    </dd>
-                    </dl>
-            </div>
 
-        </div>
+        <p class="imaged_paragraph">
+            <span class="graphic_element material-icons utdodd">
+                <span  class="material-icons">image_search</span>
+            </span>
+            <span class="right_text">
+                @ViewBag.glossary["TroligUtdodd"]["tagline"] @ViewBag.glossary["TroligUtdodd"]["description"]
+            </span>
+        </p>
 
     }
-
 </div>

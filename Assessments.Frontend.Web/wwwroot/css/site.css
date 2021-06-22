@@ -2,13 +2,78 @@
    
 }
 
+.imaged_paragraph {
+    display: flex;
+    align-items:center;
+}
+
+.graphic_element {
+    display: inline-block;
+    border-radius: 2px;
+    padding: 15px;
+    margin-right: 20px;
+    font-size: 20pt;
+    background: grey;
+    height: 64px;
+    width: 64px;
+    color: white;
+}
+
+.graphic_element .material-icons {
+    font-size: 20pt;
+    line-height: inherit;
+    padding: 4px;
+    padding-top: 0px;
+}
+
+.right_text {
+    display: inline-block;
+    flex: 1;
+}
+
+.RE {
+    background: #5a5b5d;
+}
+
+.CR {
+    background: #99191a;
+}
+.EN {
+    background: #d80f27;
+}
+.VU {
+    background: #e94f33;
+}
+.NT {
+    background: #ed6c26;
+}
+
+.DD {
+    background: #f7a520;
+}
+.LC {
+    background: #60beb2;
+}
+
+.NA {
+    background: #939598;
+}
+
+.NE {
+    background: #d1d3d4;
+}
+
+.utdodd {
+    background: #4c4a48;
+}
+
 
 .tempsection {
     border-top: 2px solid darkred;
     border-bottom: 2px solid darkred;
     padding: 5px;
     margin-bottom: 5px;
-    margin-top:5px;
+    margin-top: 5px;
 }
 
 .subcriteria {

@@ -115,9 +115,11 @@ namespace Assessments.Frontend.Web.Controllers
                     case 2021:
                         var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id)).GetValueAsync();
 
-                        string json = System.IO.File.ReadAllText("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
-                        var jsondata = Newtonsoft.Json.Linq.JObject.Parse(json);
-                        ViewBag.kriterier = jsondata;
+                        string json_kriterier = System.IO.File.ReadAllText("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
+                        ViewBag.kriterier = Newtonsoft.Json.Linq.JObject.Parse(json_kriterier);
+
+                        string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
+                        ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
 
                         return View("SpeciesAssessment2021", RL2021);
 

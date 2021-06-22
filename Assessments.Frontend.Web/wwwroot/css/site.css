@@ -2,8 +2,35 @@
    
 }
 
-.mid table{
-    font-size:12pt;
+
+.tempsection {
+    border-top: 2px solid darkred;
+    border-bottom: 2px solid darkred;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-top:5px;
+}
+
+.subcriteria {
+    border: 1px solid #f7f2f2;
+    padding:5px;
+}
+
+.suboptions {
+    border: 1px solid #ebf0f7;
+    padding: 5px;
+}
+
+.subcriteria .active {
+    background: lightgreen;
+}
+
+.suboptions .active{
+    background:lightblue;
+}
+
+.mid table {
+    font-size: 12pt;
 }
 .currentcrumb {
     text-decoration: none !important;

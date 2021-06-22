@@ -174,7 +174,7 @@
           "intervall": "Mest trolig: cPopulasjonsstørrelseAntatt(minintervall) - cPopulasjonsstørrelseAntatt(maxintervall) "
         },
         "quantile": "Beregnet populasjonsstørrelse, med føre-var forbehold: cPopulasjonsstørrelseAntatt(quantile)",
-        "conclusion": "C Antall reproduksjonsdyktige individ < <terskelverdi> tilsvarer i utgangspunktet <kategori>",
+        "conclusion": "C Antall reproduksjonsdyktige individ < <terskelverdi> tilsvarer i utgangspunktet <kategori>"
       },
       "tagline": "Populasjonsstørrelse",
       "subcriteria": {
@@ -183,15 +183,14 @@
           "tagline": "Pågående nedgang",
           "description": "Bedømt, antatt, observert, estimert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. Pågående nedgang på C1-kriteriet beregnes på samme måte som på A-kriteriet, men kan gjelde for en kortere tidsperiode.",
           "content": {
-            "min": "",
-            "max": "",
+            "min": "Minst: c1PågåendePopulasjonsreduksjonAntatt(min) %",
+            "max": "Maksimum: c1PågåendePopulasjonsreduksjonAntatt(max) %",
             "probable": {
-              "punktestimat": "",
+              "punktestimat": "Mest trolig: c1PågåendePopulasjonsreduksjonAntatt(probable) %",
               "intervall": ""
             },
-            "quantile": "",
-            "conclusion": "",
-            "element": "Minst: c1PågåendePopulasjonsreduksjonAntatt(min) %         Mest trolig: c1PågåendePopulasjonsreduksjonAntatt(probable) %   Maksimum: c1PågåendePopulasjonsreduksjonAntatt(max) %// Beregnet nedgang, med føre-var forbehold: c1PågåendePopulasjonsreduksjonAntatt(quantile) % (?)// C1 Pågående nedgang på <terskelverdi> tilsvarer i utgangspunktet <kategori>// "
+            "quantile": "Beregnet nedgang, med føre-var forbehold: c1PågåendePopulasjonsreduksjonAntatt(quantile) % ",
+            "conclusion": "C1 Pågående nedgang på <terskelverdi> tilsvarer i utgangspunktet <kategori>"
           }
         },
         "C2": {
@@ -200,22 +199,21 @@
             "tagline": "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon",
             "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.  ",
             "content": {
-              "min": "",
-              "max": "",
+              "min": "Minst: c2A1PågåendePopulasjonsreduksjonAntatt(min) individer ",
+              "max": "Maksimum: c2A1PågåendePopulasjonsreduksjonAntatt(max) individer",
               "probable": {
-                "punktestimat": "",
+                "punktestimat": "Mest trolig: c2A1PågåendePopulasjonsreduksjonAntatt(probable) individer",
                 "intervall": ""
               },
-              "quantile": "",
-              "conclusion": "",
-              "element": "Minst: c2A1PågåendePopulasjonsreduksjonAntatt(min) individer Mest trolig: c2A1PågåendePopulasjonsreduksjonAntatt(probable) individer Maksimum: c2A1PågåendePopulasjonsreduksjonAntatt(max) individer//\t Beregnet antall, med føre-var forbehold: c2A1PågåendePopulasjonsreduksjonAntatt(quantile) individer (?)// C2a(i) Største delpopulasjon ≤<terskelverdi> tilsvarer i utgangspunktet <kategori>//"
+              "quantile": "Beregnet antall, med føre-var forbehold: c2A1PågåendePopulasjonsreduksjonAntatt(quantile) individer ",
+              "conclusion": "C2a(i) Største delpopulasjon ≤<terskelverdi> tilsvarer i utgangspunktet <kategori>"
             }
-            },
+          },
           "a(ii)": {
             "tagline": "Pågående nedgang og andel reproduksjonsdyktige individ i én og samme delpopulasjon",
             "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg finnes en stor andel av populasjonen i én og samme delpopulasjon (alle egg i én kurv).   ",
             "content": {
-              "element": "(Minst) c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon//"
+              "min": "Minst :c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon"
             }
             },
           "b": {
@@ -234,32 +232,24 @@
           "tagline": "Få reproduksjonsdyktige individ",
           "description": "Arten har få reproduksjonsdyktige individ/liten populasjonsstørrelse, men er ikke nødvendigvis i nedgang. For kjønnede arter kan antall reproduksjonsdyktige individ tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.  ",
           "content": {
-            "min": "",
-            "max": "",
+            "min": "Minst: cPopulasjonsstørrelseAntatt(min)",
+            "max": "Maksimum: cPopulasjonsstørrelseAntatt(max)",
             "probable": {
-              "punktestimat": "",
-              "intervall": ""
+              "punktestimat": "Mest trolig: cPopulasjonsstørrelseAntatt(probable)",
+              "intervall": "Mest trolig: cPopulasjonsstørrelseAntatt(minintervall) - cPopulasjonsstørrelseAntatt(maxintervall)"
             },
-            "quantile": "",
-            "conclusion": "",
-            "element": "Hvis punktestimat = true Minst: cPopulasjonsstørrelseAntatt(min)   Mest trolig: cPopulasjonsstørrelseAntatt(probable)  Maksimum: cPopulasjonsstørrelseAntatt(max)// Hvis punktestimat = false Minst: cPopulasjonsstørrelseAntatt(min)   Mest trolig: cPopulasjonsstørrelseAntatt(minintervall) - cPopulasjonsstørrelseAntatt(maxintervall)  Maksimum: cPopulasjonsstørrelseAntatt(max)// Beregnet populasjonsstørrelse, med føre-var forbehold: cPopulasjonsstørrelseAntatt(quantile) (?)// D1 Antall reproduksjonsdyktige individ < <terskelverdi> tilsvarer <kategori> "
+            "quantile": "Beregnet populasjonsstørrelse, med føre-var forbehold: cPopulasjonsstørrelseAntatt(quantile)",
+            "conclusion": "D1 Antall reproduksjonsdyktige individ < <terskelverdi> tilsvarer <kategori> "
           }
-          },
+        },
         "D2": {
           "tagline": "Begrenset forekomstareal eller antall trusseldefinerte lokaliteter",
           "description": "D2-kriteriet kan brukes om man har identifisert en sannsynlig trussel mot populasjonen av en slik alvorlighetsgrad at arten kan bli kritisk truet (CR) eller regionalt utdødd (RE) innen få år etter at trusselen inntreffer.   ",
           "content": {
-            "min": "",
-            "max": "",
-            "probable": {
-              "punktestimat": "",
-              "intervall": ""
-            },
-            "quantile": "",
-            "conclusion": "",
-            "element": "Beregnet forekomstareal: b2IntervallForekomstareal(quantile) km2 Beregnet antall trusseldefinerte lokaliteter: baIntervallAntallLokaliteter(quantile) D2 Den begrensede forekomsten tilsvarer <kategori> "
+            "quantile": "Beregnet forekomstareal: b2IntervallForekomstareal(quantile) km2 ",
+            "conclusion": "Beregnet antall trusseldefinerte lokaliteter: baIntervallAntallLokaliteter(quantile) D2 Den begrensede forekomsten tilsvarer <kategori> "
           }
-          }
+        }
       }
 
     },

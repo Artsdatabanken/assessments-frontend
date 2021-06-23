@@ -73,25 +73,27 @@
 }
 
 <div class="page_section">
-    <h3>
-        Rødlistekategori: @categoryMatcher(@Model.Kategori) @categoryDescription(ViewBag.category)
+    <h2>
+        Kategori Rødlista 2021: @categoryMatcher(@Model.Kategori) @categoryDescription(ViewBag.category)
         @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
         {
             <span>og arten er trolig utdødd</span>
         }
-    </h3>
+    </h2>
 
-    @if (@ViewBag.glossary[@Model.Kategori]!= null)
-    {   
-    <p class="imaged_paragraph">
-        <span class="graphic_element @Model.Kategori">
-            @Model.Kategori
-        </span>
-        <span class="right_text">
-            @ViewBag.glossary[@Model.Kategori]["tagline"]
-            @ViewBag.glossary[@Model.Kategori]["description"]
-        </span>
-    </p>
+    <partial name="/Views/Shared/_Categorybar.cshtml" />
+
+    @if (@ViewBag.glossary[@Model.Kategori] != null)
+    {
+        <p class="imaged_paragraph">
+            <span class="graphic_element @Model.Kategori">
+                @Model.Kategori
+            </span>
+            <span class="right_text">
+                <b>@ViewBag.glossary[@Model.Kategori]["tagline"]</b>
+                @ViewBag.glossary[@Model.Kategori]["description"]
+            </span>
+        </p>
     }
 
 
@@ -101,10 +103,10 @@
 
         <p class="imaged_paragraph">
             <span class="graphic_element material-icons utdodd">
-                <span  class="material-icons">image_search</span>
+                <span class="material-icons">image_search</span>
             </span>
             <span class="right_text">
-                @ViewBag.glossary["TroligUtdodd"]["tagline"] @ViewBag.glossary["TroligUtdodd"]["description"]
+                <b>@ViewBag.glossary["TroligUtdodd"]["tagline"]</b> @ViewBag.glossary["TroligUtdodd"]["description"]
             </span>
         </p>
 

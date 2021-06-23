@@ -1,132 +1,166 @@
 ﻿@model Artsdatabanken.RL2021
-@* SEE example by searching species Carex elata *@
+@* 
+// Information about the assesment    
+*@
 
 @{
     Artsdatabanken.RL2021 assessment = Model;
     string ekspertgruppe = char.ToLower(assessment.Ekspertgruppe[0]) + assessment.Ekspertgruppe.Substring(1);
 }
-<div class="section">
-    <h2>Informasjon om vurderingen</h2>
+<div class="secpage_sectiontion">
 
-    <h3>Generell informasjon om vurderingen</h3>
 
-    <div class="assessmentInfo" id="assessmentInfo">
-        <dl>Vurderingen er gjort i forbindelse med Rødlista  @(ekspertgruppe == "spretthaler" || ekspertgruppe == "spretthaler (Svalbard)" ? assessment.SistVurdertAr : 2021) og utført av ekspertkomité for @ekspertgruppe.</dl>
-        @if (@assessment.VurderingsContext == "N")
-        {
-            <dl>Vurderingen gjelder for Norge, dvs. Fastlands-Norge og nærliggende øyer, norsk territorialfarvann og norsk økonomisk sone, samt fiskevernsonen rundt Svalbard og fiskerisonen rundt Jan Mayen.</dl>
-        }
-        else if (@assessment.VurderingsContext == "S")
-        {
-            <dl>Vurderingen gjelder for Svalbard, dvs. Spitsbergen og øyene omkring, samt Bjørnøya og Hopen slik det er definert i Svalbardtraktaten.</dl>
-        }
+    <div class="assessmentInfo">
+        <p>
+            <!-- UTFØRT AV -->
+            Vurderingen er gjort i forbindelse med Rødlista
+            @(ekspertgruppe == "spretthaler" || ekspertgruppe == "spretthaler (Svalbard)" ? assessment.SistVurdertAr : 2021)
+            og utført av ekspertkomité for @ekspertgruppe.
+
+            <!-- GEOGRAFI -->
+            @if (@assessment.VurderingsContext == "N")
+            {
+                <span>@ViewBag.glossary["vurdert_N"]["description"]</span>
+            }
+            else if (@assessment.VurderingsContext == "S")
+            {
+                <span>@ViewBag.glossary["vurdert_S"]["description"]</span>
+            }
+            <!-- FULL VURDERING/LC -->
+            @if (@assessment.OverordnetKlassifiseringGruppeKode == "sikkerBestandLC")
+            {
+                <span>@ViewBag.glossary["oneliners"]["vurdert_livskraftig"]</span>
+            }
+
+            @if (@assessment.OverordnetKlassifiseringGruppeKode == "rodlisteVurdertArt")
+            {
+                <span>@ViewBag.glossary["oneliners"]["full_vurdering"]</span>
+            }
+        </p>
+
+
+        <!-- Finnes i norge? -->
 
         @if (!string.IsNullOrEmpty(Model.UtdoddINorgeRE))
         {
-            @if (@assessment.UtdoddINorgeRE == "etablertBestandINorge")
-            {
-                <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten er dokumentert eller antatt å ha vært etablert med fast reproduserende bestand og hadde ikke opphav i introduserte individer.</dl>
-            }
-            else @if (@assessment.UtdoddINorgeRE == "ikkeReproduserendeINorge")
-       {
-        <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten var ikke fast reproduserende, men > 2 % av individene som utgjorde global populasjonsstørrelse oppholdt seg regelmessig innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") i deler av sin års-/livssyklus (gjester).</dl>
-    }
-    else @if (@assessment.UtdoddINorgeRE == "etablertFør1800")
-   {
-    <dl>Det er svært liten tvil om at arten er utdødd fra @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE). Arten er fremmed, men er antatt eller dokumentert å ha vært etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800.</dl>
-}
-}
+            <p>
+                @if (@assessment.UtdoddINorgeRE == "etablertBestandINorge")
+                {
+                    <span>
+                        @ViewBag.glossary["oneliners"]["litentvil"]
+                        @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE).
+                        @ViewBag.glossary["oneliners"]["etablertBestandINorge"]
+                    </span>
+                }
+                else @if (@assessment.UtdoddINorgeRE == "ikkeReproduserendeINorge")
+               {
+                <span>
+                    @ViewBag.glossary["oneliners"]["litentvil"]
+                    @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE).
+                    @ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"]
+
+                </span>
+                }
+                else @if (@assessment.UtdoddINorgeRE == "etablertFør1800")
+               {
+                <span>
+                    @ViewBag.glossary["oneliners"]["litentvil"]
+                    @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE).
+                    @ViewBag.glossary["oneliners"]["etablertFør1800"]
+                </span>
+                }
+            </p>
+        }
+
+        <p>
+        <!-- Begrenset forekomst -->
         @if (!string.IsNullOrEmpty(Model.BegrensetForekomstNA))
         {
             @if (@assessment.BegrensetForekomstNA == "ikkeReproduserendeGjestNA")
             {
-                <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er ikke etablert med fast reproduserende bestand og &lt; 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (gjest).</dl>
+                <span> @ViewBag.glossary["oneliners"]["ikkeReproduserendeGjestNA"]</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "observertReproduserendeIkkeEtablertNA")
-       {
-        <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er observert reproduserende innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard"), men antas å ikke være etablert med fast reproduserende bestand.</dl>
-    }
-    else @if (@assessment.BegrensetForekomstNA == "observertReproduktivIkkeEtablertNA")
-   {
-    <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er observert i reproduktivt stadium innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard"), men antas å ikke være etablert med fast reproduserende bestand.</dl>
-}
-else @if (@assessment.BegrensetForekomstNA == "uregelmessigGjestIkkeReproduserendeNA")
-       {
-        <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er en gjest som uregelmessig dukker opp naturlig innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard").</dl>
-    }
-    else @if (@assessment.BegrensetForekomstNA == "ikkeDokumentertForekomstNA")
-           {
-            <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten har ikke dokumentert forekomst innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard").</dl>
-        }
-        else @if (@assessment.BegrensetForekomstNA == "hybridartUtenReproduksjonNA")
-           {
-            <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart uten reproduksjon.</dl>
-        }
-        else @if (@assessment.BegrensetForekomstNA == "hybridartUvisstOmReproduserendeNA")
-               {
-                <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart, men uvisst om den er reproduserende.</dl>
+            {
+            <span> @ViewBag.glossary["oneliners"]["observertReproduserendeIkkeEtablertNA"]</span>
+            }
+            else @if (@assessment.BegrensetForekomstNA == "observertReproduktivIkkeEtablertNA")
+            {
+            <span> @ViewBag.glossary["oneliners"]["observertReproduktivIkkeEtablertNA"]</span>
+            }
+            else @if (@assessment.BegrensetForekomstNA == "uregelmessigGjestIkkeReproduserendeNA")
+            {
+                <span> @ViewBag.glossary["oneliners"]["uregelmessigGjestIkkeReproduserendeNA"]</span>
+            }
+            else @if (@assessment.BegrensetForekomstNA == "ikkeDokumentertForekomstNA")
+            {
+                <span> @ViewBag.glossary["oneliners"]["ikkeDokumentertForekomstNA"]</span>
+            }
+            else @if (@assessment.BegrensetForekomstNA == "hybridartUtenReproduksjonNA")
+            {
+                <span> @ViewBag.glossary["oneliners"]["hybridartUtenReproduksjonNA"]</span>
+            }
+            else @if (@assessment.BegrensetForekomstNA == "hybridartUvisstOmReproduserendeNA")
+            {
+                <span> @ViewBag.glossary["oneliners"]["hybridartUvisstOmReproduserendeNA"]</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonNA")
-           {
-            <dl>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten forekommer bare i hybridkombinasjon i vurderingsområdet.</dl>
+            {
+                <span> @ViewBag.glossary["oneliners"]["forekommerBareIHybridkombinasjonNA"]</span>
+            }
         }
-        }
+
+        <!-- KUNNSKAPSSTATUS -->
         @if (!string.IsNullOrEmpty(Model.KunnskapsStatusNE))
         {
 
             @if (@assessment.KunnskapsStatusNE == "mangelfullKunnskapNE")
             {
-                <dl>Arten er ikke forsøkt rødlistevurdert (NE) på grunn av svært mangelfull kunnskap.</dl>
+                <span> @ViewBag.glossary["oneliners"]["mangelfullKunnskapNE"]</span>
             }
             else @if (@assessment.KunnskapsStatusNE == "uavklartSystematikkNE")
-       {
-        <dl>Arten er ikke forsøkt rødlistevurdert (NE) fordi arten eller artsgruppen den tilhører har uavklart systematikk.</dl>
-    }
-    else @if (@assessment.KunnskapsStatusNE == "uklartOmReproduserendeBestandNE")
-   {
-    <dl>Arten er ikke forsøkt rødlistevurdert (NE) fordi det er uavklart om arten er etablert med en fast reproduserende bestand i vurderingsområdet.</dl>
-}
-else @if (@assessment.KunnskapsStatusNE == "artsgruppeIkkeRisikovurdertNE")
-       {
-        <dl>Arten er ikke forsøkt rødlistevurdert (NE) fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021.</dl>
-    }
-    else @if (@assessment.KunnskapsStatusNE == "annetNE")
-           {
-            <dl>Arten er ikke forsøkt rødlistevurdert (NE).</dl>
+            {
+                <span> @ViewBag.glossary["oneliners"]["uavklartSystematikkNE"]</span>
+            }
+            else@if (@assessment.KunnskapsStatusNE == "uklartOmReproduserendeBestandNE")
+            {
+                <span> @ViewBag.glossary["oneliners"]["uklartOmReproduserendeBestandNE"]</span>
+            }
+            else@if (@assessment.KunnskapsStatusNE == "artsgruppeIkkeRisikovurdertNE")
+            {
+                <span> @ViewBag.glossary["oneliners"]["artsgruppeIkkeRisikovurdertNE"]</span>
+            }
+            else@if (@assessment.KunnskapsStatusNE == "annetNE")
+            {
+                <span> @ViewBag.glossary["oneliners"]["annetNE"]</span>
+            }
         }
-}
+
+        <!-- FREMMEDART -->
         @if (@assessment.OverordnetKlassifiseringGruppeKode == "fremmedArtNA")
         {
-            <span>Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er fremmed, og ble enten etablert innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") etter år 1800 eller antas å kunne etablere seg innen 50 år <a href="https://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa">(dørstokkart)</a>.</span>
+            <span>
+                @ViewBag.glossary["oneliners"]["fremmedArtNA"]
+                <a href="https://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa"> les mer </a>
+            </span>
         }
 
         @if (!string.IsNullOrEmpty(Model.RodlisteVurdertArt))
         {
-
             @if (assessment.RodlisteVurdertArt == "etablertBestandINorge")
             {
-                <dl>Arten er dokumentert eller antatt å være etablert med fast reproduserende bestand innenfor @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") og har ikke opphav i introduserte individer.</dl>
+            <span>@ViewBag.glossary["oneliners"]["etablertBestandINorge"]</span>
             }
-            else @if (assessment.RodlisteVurdertArt == "ikkeReproduserendeINorge")
-       {
-        <dl>Arten er ikke fast reproduserende innenfor @(assessment.VurderingsContext == "N" ? "Norge" : "Svalbard"), men > 2 % av individene som utgjør global populasjonsstørrelse oppholder seg regelmessig her i deler av sin års-/livssyklus (gjester).</dl>
-    }
-    else @if (assessment.RodlisteVurdertArt == "etablertFør1800")
-   {
-    <dl>Arten er fremmed, men er antatt eller dokumentert etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800.</dl>
-}
-}
-
-        @if (@assessment.OverordnetKlassifiseringGruppeKode == "sikkerBestandLC")
-        {
-            <dl>Arten er vurdert til å være livskraftig (LC).</dl>
+            else@if (assessment.RodlisteVurdertArt == "ikkeReproduserendeINorge")
+           {
+            <span>@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"]</span>
+            }
+           else@if (assessment.RodlisteVurdertArt == "etablertFør1800")
+           {
+            <span>@ViewBag.glossary["oneliners"]["etablertFør1800"]</span>
+            }
         }
-
-        @if (@assessment.OverordnetKlassifiseringGruppeKode == "rodlisteVurdertArt")
-        {
-            <dl>Arten har vært gjennom full rødlistevurdering.</dl>
-        }
-
+        </p>
     </div>
 
 

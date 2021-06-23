@@ -46,5 +46,37 @@
   "LC": {
     "tagline": "Livskraftig bestand",
     "description": "–skal brukes når arter ikke oppfyller noen av kriteriene for å bli vurdert til kategoriene CR, EN, VU, NT, eller som ikke er satt i kategorien RE, DD, NA eller NE."
+  },
+  "vurdert_N": {
+    "tagline": "Vurdert for Norge",
+    "description": "Vurderingen gjelder for Norge, dvs. Fastlands-Norge og nærliggende øyer, norsk territorialfarvann og norsk økonomisk sone, samt fiskevernsonen rundt Svalbard og fiskerisonen rundt Jan Mayen."
+  },
+  "vurdert_S": {
+    "tagline": "Vurdert for Svalbard",
+    "description": "Vurderingen gjelder for Svalbard, dvs. Spitsbergen og øyene omkring, samt Bjørnøya og Hopen slik det er definert i Svalbardtraktaten."
+  },
+  "oneliners": {
+    "litentvil": "Det er svært liten tvil om at arten er utdødd fra",
+    "etablertFør1800": "Arten er fremmed, men er antatt eller dokumentert etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800.",
+    "vurdert_livskraftig": "Arten er vurdert til å være livskraftig (LC).",
+    "full_vurdering": "Arten har vært gjennom full rødlistevurdering.",
+    "etablertBestandINorge": "Arten er dokumentert eller antatt å ha vært etablert med fast reproduserende bestand og hadde ikke opphav i introduserte individer.",
+    "ikkeReproduserendeINorge": "Arten var ikke fast reproduserende, men > 2 % av individene som utgjorde global populasjonsstørrelse oppholdt seg regelmessig innenfor gjeldende område i deler av sin års-/livssyklus (gjester).",
+    "ikkeReproduserendeGjestNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er ikke etablert med fast reproduserende bestand og &lt; 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor gjeldende område (gjest).",
+    "observertReproduserendeIkkeEtablertNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er observert reproduserende innenfor gjeldende område , men antas å ikke være etablert med fast reproduserende bestand.",
+    "observertReproduktivIkkeEtablertNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er observert i reproduktivt stadium innenfor gjeldende område , men antas å ikke være etablert med fast reproduserende bestand.",
+    "uregelmessigGjestIkkeReproduserendeNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er en gjest som uregelmessig dukker opp naturlig innenfor gjeldende område .",
+    "ikkeDokumentertForekomstNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten har ikke dokumentert forekomst innenfor gjeldende område .",
+    "hybridartUtenReproduksjonNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart uten reproduksjon.",
+    "hybridartUvisstOmReproduserendeNA": " Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart, men uvisst om den er reproduserende.",
+    "forekommerBareIHybridkombinasjonNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten forekommer bare i hybridkombinasjon i vurderingsområdet.",
+    "mangelfullKunnskapNE": "Arten er ikke forsøkt rødlistevurdert (NE) på grunn av svært mangelfull kunnskap.",
+    "uavklartSystematikkNE": "Arten er ikke forsøkt rødlistevurdert(NE) fordi arten eller artsgruppen den tilhører har uavklart systematikk.",
+    "uklartOmReproduserendeBestandNE": "Arten er ikke forsøkt rødlistevurdert(NE) fordi det er uavklart om arten er etablert med en fast reproduserende bestand i vurderingsområdet.",
+    "artsgruppeIkkeRisikovurdertNE": "Arten er ikke forsøkt rødlistevurdert(NE) fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021.",
+    "annetNE": "Arten er ikke forsøkt rødlistevurdert(NE).",
+    "fremmedArtNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er fremmed, og ble enten etablert innenfor gjeldende område etter år 1800 eller antas å kunne etablere seg innen 50 år (dørstokkart)."
+
+
   }
 }

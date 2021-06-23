@@ -2,9 +2,13 @@
    
 }
 
+.ingress p{
+    font-size:22.5px;
+}
+
 .imaged_paragraph {
     display: flex;
-    align-items:center;
+    align-items: center;
 }
 
 .graphic_element {

@@ -33,7 +33,7 @@
             "min": "Minst: a1OpphørtOgReversibelAntatt(min) %",
             "probable": { "intervall": "Mest trolig: a1OpphørtOgReversibelAntatt(probable) %" },
             "max": "Maksimum: a1OpphørtOgReversibelAntatt(max) %",
-            "quantile": "Beregnet reduksjon, med føre-var forbehold: a1OpphørtOgReversibelAntatt(quantile) % (?) ",
+            "quantile": "Beregnet reduksjon, med føre-var forbehold: a1OpphørtOgReversibelAntatt(quantile) %",
             "conclusion": "A1 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
           },
           "based-on": "A1EndringBasertpåKode"

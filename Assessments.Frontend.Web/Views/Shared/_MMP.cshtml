@@ -1,13 +1,13 @@
-﻿@model Artsdatabanken.RL2021;
+﻿@model Artsdatabanken.RL2021MinMaxProbable;
 
 @{
-    Artsdatabanken.RL2021MinMaxProbable mmp = @Model.A2Forutgående10ÅrAntatt;
+    Artsdatabanken.RL2021MinMaxProbable mmp = @Model;
     var tag ="A2";
     var desc = "tekst";
 }
 
 
-{
+
     @*if (mmp != null)*@
 @if (!string.IsNullOrEmpty(mmp.Min) || !string.IsNullOrEmpty(mmp.Max) || !string.IsNullOrEmpty(mmp.Probable))
 {
@@ -89,6 +89,5 @@
     }
 
 </p>
-        }
-    }
 }
+

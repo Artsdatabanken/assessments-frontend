@@ -7,152 +7,148 @@
 
 @{
     Artsdatabanken.RL2021 assessment = Model;
-    var criteria = @Model.OppsummeringAKriterier;
     var kriterier = Model.Kriterier;
     var criterialist = kriterier.Split(";");
     var keys = @ViewBag.kriterier["criteria"]["keys"];
 }
 
 <div class="section">
-    <h2>Kriterier</h2>
-    <h3>Alle autmatisk utdytta kriterier</h3>
-    <h4>Faktiske kriterier:</h4>
+    <h2>
+        Kriterier:
+        @foreach (var el in criterialist)
+        {
+            <b>@el</b>
+        }
+    </h2>
 
-
-    @foreach (var el in criterialist)
-    {
-        <b>@el</b>
-    }
-    <br />
-    
     @foreach (string element in keys)
     {
-<div class="tempsection">
-    @{
-        var elementname = @ViewBag.kriterier["criteria"][@element];
-        var subcriteria = elementname["subcriteria"];
-        var suboptions = elementname["options"];
-        var currentCriteria = "none";
+        <div class="tempsection">
+            @{
+                var elementname = @ViewBag.kriterier["criteria"][@element];
+                var subcriteria = elementname["subcriteria"];
+                var suboptions = elementname["options"];
+                var currentCriteria = "none";
 
-        foreach (var subsub in criterialist)
-        {
-            if (subsub.Contains(element))
-            {
-                currentCriteria = subsub;
-            }
-        }
-
-        if (currentCriteria.Contains("+"))
-        {
-            var formatted = "";
-            // Untill formatting is completed from api, detatch and reassemble criteria string here
-            foreach (var splititem in currentCriteria.Split("+"))
-            {
-                if (splititem.Contains(element))
+                foreach (var subsub in criterialist)
                 {
-                    formatted = splititem;
+                    if (subsub.Contains(element))
+                    {
+                        currentCriteria = subsub;
+                    }
                 }
-                else
+
+                if (currentCriteria.Contains("+"))
                 {
-                    formatted = formatted + " AND " + element + splititem;
-                }
-            }
-            currentCriteria = formatted;
-        }
-    }
-
-    <!-- OUTER CRITERIA LOOP ( A, B, C, D, E) -->
-
-    <h2>@element</h2>
-    <h2>CURRENTCRITERIA = @currentCriteria</h2>
-    <h3>@elementname["summary"]</h3>
-    <span class="description">@elementname["description"]</span>
-    <hr />
-    @if (elementname["content"] != null)
-    {
-        @foreach (object e in @elementname["content"])
-        {
-            // TODO: Add check for punktestimat vs. intervall from db,
-            // fetch corresponding text from probable.
-
-            <p>@e</p>
-        }
-    }
-    <br />
-
-    <br />
-
-    <!-- SUB OPTIONS -->
-    <div class="suboptions">
-        @if (suboptions != null)
-        {
-            @foreach (string subelement in @suboptions["keys"])
-            {
-                <div class="element">
-                    @{
-                        var thesubelement = @ViewBag.kriterier["criteria"][@element]["options"][subelement];
-                        var optionsClassName = thesubelement;
-                        var isContained = "none";
-                        if (currentCriteria.Contains(subelement))
+                    var formatted = "";
+                    // Untill formatting is completed from api, detatch and reassemble criteria string here
+                    foreach (var splititem in currentCriteria.Split("+"))
+                    {
+                        if (splititem.Contains(element))
                         {
-                            isContained = currentCriteria;
+                            formatted = splititem;
+                        }
+                        else
+                        {
+                            formatted = formatted + " AND " + element + splititem;
                         }
                     }
-
-                    <div class="@optionsClassName">
-                        <h3> @subelement - @thesubelement["tagline"]</h3>
-                        <span class="description">@thesubelement["description"]</span>
-                    </div>
-
-                </div>
+                    currentCriteria = formatted;
+                }
             }
-        }
-    </div>
-    <!-- SUB CRITERIA -->
-    <div class="subcriteria">
-        @if (subcriteria != null)
-        {
-            @foreach (string subelement in @subcriteria["keys"])
+
+            <!-- OUTER CRITERIA LOOP ( A, B, C, D, E) -->
+
+            <h2>@element</h2>
+            <h3>@elementname["summary"]</h3>
+            <span class="description">@elementname["description"]</span>
+            <hr />
+            @if (elementname["content"] != null)
             {
-                <div class="element">
-                    @{
-                        var thesubelement = @ViewBag.kriterier["criteria"][@element]["subcriteria"][subelement];
-                        var className = "nonactive";
-                        if (Model.Kriterier.Contains(subelement))
-                        {
-                            // TODO: WHEN CHECK IS FIXED, add active classes.
-                            className = "_active";
-                        }
+                <p class="TODO">
+                    @foreach (object e in @elementname["content"])
+                    {
+                        // TODO: Add check for punktestimat vs. intervall from db,
+                        // fetch corresponding text from probable.
+
+                        <span>@e</span><br />
                     }
-                    <div class="@className">
-                        <h3> @subelement - @thesubelement["tagline"]</h3>
-                        @thesubelement["description"]
+                </p>
+            }
 
-                        <br />
-                        <br />
-                        <h4>Tall-elementer som må matches mot databasefelt</h4>
-                        @if (@thesubelement["content"] != null)
-                        {
-                            @foreach (object e in @thesubelement["content"])
-                            {
-                                // TODO: Add check for punktestimat vs. intervall from db,
-                                // fetch corresponding text from probable.
-
-                                <p>@e</p>
+            <!-- SUB OPTIONS -->
+            <div>
+                @if (suboptions != null)
+                {
+                    <h3>Options</h3>
+                    @foreach (string subelement in @suboptions["keys"])
+                    {
+                        <div class="element">
+                            @{
+                                var thesubelement = @ViewBag.kriterier["criteria"][@element]["options"][subelement];
+                                var optionsClassName = thesubelement;
+                                var isContained = "none";
+                                if (currentCriteria.Contains(subelement))
+                                {
+                                    isContained = currentCriteria;
+                                }
                             }
-                        }
-                        <br />
-                        @thesubelement["based-on"]<br />
-                    </div>
-                </div>
-            }
-        }
-    </div>
+
+                            <div class="@optionsClassName">
+                                <h4> @subelement - @thesubelement["tagline"]</h4>
+                                <span class="description">@thesubelement["description"]</span>
+                            </div>
+
+                        </div>
+                    }
+                }
+            </div>
+
+            <!-- SUB CRITERIA -->
+            <div>
+                @if (subcriteria != null)
+                {
+                    <h3>Tallkriterie</h3>
+                    @foreach (string subelement in @subcriteria["keys"])
+                    {
+                        <div class="element">
+                            @{
+                                var thesubelement = @ViewBag.kriterier["criteria"][@element]["subcriteria"][subelement];
+                                var className = "nonactive";
+                                if (Model.Kriterier.Contains(subelement))
+                                {
+                                    // TODO: WHEN CHECK IS FIXED, add active classes.
+                                    className = "_active";
+                                }
+                            }
+                            <div class="@className">
+                                <h4> @subelement - @thesubelement["tagline"]</h4>
+                                @thesubelement["description"]
+
+                                <!-- TODO: FIX THE SUB ELEMENTS-->
+                                <p class="TODO">
+                                    @if (@thesubelement["content"] != null)
+                                    {
+                                        @foreach (object e in @thesubelement["content"])
+                                        {
+                                            // TODO: Add check for punktestimat vs. intervall from db,
+                                            // fetch corresponding text from probable.
+
+                                            <span>@e</span><br />
+                                        }
+                                    }
+                                    @thesubelement["based-on"]
+                                </p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
 
 
 
-</div>
-            }
+        </div>
+    }
 
-    
+
 </div> <!-- end section -->

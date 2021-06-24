@@ -2,92 +2,58 @@
 
 @{
     Artsdatabanken.RL2021MinMaxProbable mmp = @Model;
-    var tag ="A2";
-    var desc = "tekst";
+    var tag = "A";
+    string ending = "%";
+
+    var min = @mmp.Min;
+    var probable = @mmp.Probable;
+    var max = @mmp.Max;
+    var calc = @mmp.Calculated;
+
+
+    if(tag == "C2")
+    {
+        ending = "individer";
+    }else if (tag == "C2a(i)")
+    {
+        ending = "individ";
+        // TODO: Format for c2-whatnot
+        //@FormatNumber(mmp.Min)
+    }
 }
 
 
-
-    @*if (mmp != null)*@
+MMP
+@*if (mmp != null)*@
 @if (!string.IsNullOrEmpty(mmp.Min) || !string.IsNullOrEmpty(mmp.Max) || !string.IsNullOrEmpty(mmp.Probable))
 {
-<p class="mmp">
-    <b>@tag @desc </b> 
-    <span>beskrivelse er duplikat. fjernet.</span>
+    <p class="mmp">
+
+        @if (!string.IsNullOrEmpty(@min))
+        {
+            <span>minimum: @min @ending</span>
+        }
+        @if (!string.IsNullOrEmpty(@probable))
+        {
+            <span>mest trolig: @probable %</span>
+        }
+        @if (!string.IsNullOrEmpty(@max))
+        {
+            <span>maksimum: @max %</span>
+        }
+
+    </p>
+
+    <span>
+        Hvilket gir beregnet reduksjon, med føre-var forbehold,
+        på: @calc @ending
+    </span>
+
+
+    <div>
+        @ViewBag.glossary["IUCN"]["description"]
+    </div>
+
     
-    @*set "%" after the number unless the criterion is C2*@
-    @if (tag != "C2a(i)")
-    {
-<div class="parameters">
-    @if (!string.IsNullOrEmpty(mmp.Min))
-    {
-        <div>minimum: @mmp.Min %</div>
-    }
-
-    @if (!string.IsNullOrEmpty(mmp.Probable))
-    {
-        <div>mest trolig: @mmp.Probable %</div>
-    }
-
-    @if (!string.IsNullOrEmpty(mmp.Max))
-    {
-        <div>maksimum: @mmp.Max %</div>
-    }
-
-
-    @if (tag.StartsWith('A'))
-    {
-        var id = "berReduksjon" + tag;
-        <span>Hvilket gir beregnet reduksjon, med føre-var forbehold, på: @mmp.Calculated %</span>
-        <div>
-            @ViewBag.glossary["IUCN"]["description"]
-        </div>
-    }
-    else
-    {
-        @if (tag == "C1")
-        {
-            <span>Hvilket gir beregnet nedgang, med føre-var forbehold, på: @mmp.Calculated %</span> 
-            <button class="detaljer" onclick="togglePopup('berNedgang')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-            <div>
-                @ViewBag.glossary["IUCN"]["description"]
-            </div>
-        }
-        @if (tag == "C2")
-        {
-            <span>Hvilket gir beregnet antall, med føre-var forbehold, på: @*FormatNumber(mmp.Calculated)*@ individer</span> <button class="detaljer" onclick="togglePopup('berAntall')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-            <div>
-                @ViewBag.glossary["IUCN"]["description"]
-            </div>
-        }
-    }
-</div>
-    }
-    else
-    {
-        <div class="parameters">
-            @*<div>Nedgangen ligger på: </div>*@
-            @if (!string.IsNullOrEmpty(mmp.Min))
-            {
-            <div>- minimum: @*@FormatNumber(mmp.Min)*@ individer</div>
-            }
-
-            @if (!string.IsNullOrEmpty(mmp.Probable))
-            {
-        <div>- mest trolig: @*@FormatNumber(mmp.Probable)*@ individer</div>
-            }
-
-            @if (!string.IsNullOrEmpty(mmp.Max))
-            {
-        <div>- maksimum: @*@FormatNumber(mmp.Max) *@individer</div>
-            }
-            <span>Hvilket gir beregnet antall, med føre-var forbehold, på: @mmp.Calculated individer</span> <button class="detaljer" onclick="togglePopup('nedgangC')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-            <div>
-                    @ViewBag.glossary["IUCN"]["description"]
-            </div>
-        </div>
-    }
-
-</p>
 }
 

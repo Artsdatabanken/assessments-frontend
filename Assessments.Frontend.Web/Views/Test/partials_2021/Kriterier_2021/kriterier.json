@@ -30,10 +30,11 @@
           "tagline": "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel",
           "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år). For å benytte A1 må årsaken(e) til reduksjonen være både opphørt og forstått, og reduksjonen må være reversibel. Om en eller flere av vilkårene (opphørt, forstått og reversibel) ikke er innfridd for ≥ 10 % av populasjonen skal ikke A1 benyttes.",
           "content": {
-            "min": "Minst: a1OpphørtOgReversibelAntatt(min) %",
-            "probable": { "intervall": "Mest trolig: a1OpphørtOgReversibelAntatt(probable) %" },
-            "max": "Maksimum: a1OpphørtOgReversibelAntatt(max) %",
-            "quantile": "Beregnet reduksjon, med føre-var forbehold: a1OpphørtOgReversibelAntatt(quantile) %",
+            "field": " Model.A1OpphørtOgReversibelAntatt",
+            "min": "Minst: <field>(min) %",
+            "probable": { "intervall": "Mest trolig: <field>(probable) %" },
+            "max": "Maksimum: <field>(max) %",
+            "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) %",
             "conclusion": "A1 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
           },
           "based-on": "A1EndringBasertpåKode"
@@ -42,10 +43,11 @@
           "tagline": "Reduksjon de siste 10 år/3 generasjoner",
           "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år). For A2 behøver ikke årsaken(e) eller reduksjonen nødvendigvis være verken opphørt, forstått eller reversibel. ",
           "content": {
-            "min": "Minst: a2Forutgående10År(min) %",
-            "probable": { "intervall": "Mest trolig: a2Forutgående10År(probable) %" },
-            "max": "Maksimum: a2Forutgående10År(max) %",
-            "quantile": "Beregnet reduksjon, med føre-var forbehold: a2Forutgående10År(quantile) % (?)",
+            "field": "Model.A2Forutgående10ÅrAntatt",
+            "min": "Minst: <field>(min) %",
+            "probable": { "intervall": "Mest trolig: <field>(probable) %" },
+            "max": "Maksimum: <field>(max) %",
+            "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
             "conclusion": "A2 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
           },
           "based-on": "A2EndringBasertpåKode"
@@ -54,10 +56,11 @@
           "tagline": "Framtidig reduksjon kommende 10 år/3 generasjoner",
           "description": "Bedømt, antatt eller prosjektert framtidig reduksjon i populasjonsstørrelse over de kommende 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år).",
           "content": {
-            "min": "Minst: a3Intervall10ÅrAntatt(min) % ",
-            "probable": { "intervall": "Mest trolig: a3Intervall10ÅrAntatt(probable) %" },
-            "max": "Maksimum: a3Intervall10ÅrAntatt(max) %",
-            "quantile": "Beregnet reduksjon, med føre-var forbehold: a3Intervall10ÅrAntatt(quantile) % (?)",
+            "field": "Model.A3Kommende10ÅrAntatt",
+            "min": "Minst: <field>(min) % ",
+            "probable": { "intervall": "Mest trolig: <field>(probable) %" },
+            "max": "Maksimum: <field>(max) %",
+            "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
             "conclusion": "A3 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
           },
             "based-on": "A3EndringBasertpåKode"
@@ -66,11 +69,12 @@
           "tagline": "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid",
           "description": "Bedømt, antatt, observert, estimert eller prosjektert pågående reduksjon i populasjonsstørrelse over 10 år eller tre generasjoner (lengste tidsperiode av de to, men maks 100 år) som inkluderer både fortid og framtid.",
           "content": {
-            "min": "Minst: a4Intervall10ÅrAntatt(min) %",
-            "probable": { "intervall": "Mest trolig: a4Intervall10ÅrAntatt(probable) %" },
-            "max": "Maksimum: a4Intervall10ÅrAntatt(max) %",
-            "quantile": "Beregnet reduksjon, med føre-var forbehold: a4Intervall10ÅrAntatt(quantile) % (?)",
-            "conclusion":"A4 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
+            "field": "Model.A4Intervall10ÅrAntatt",
+            "min": "Minst: <field>(min) %",
+            "probable": { "intervall": "Mest trolig: <field>(probable) %" },
+            "max": "Maksimum: <field>(max) %",
+            "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
+            "conclusion": "A4 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
           },
           "based-on": "A4EndringBasertpåKode"
         }
@@ -199,7 +203,8 @@
             "tagline": "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon",
             "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.  ",
             "content": {
-              "min": "Minst: c2A1PågåendePopulasjonsreduksjonAntatt(min) individer ",
+              "field": "C2A1PågåendePopulasjonsreduksjonAntatt",
+              "min": "Minst: <field.min> individer ",
               "max": "Maksimum: c2A1PågåendePopulasjonsreduksjonAntatt(max) individer",
               "probable": {
                 "punktestimat": "Mest trolig: c2A1PågåendePopulasjonsreduksjonAntatt(probable) individer",

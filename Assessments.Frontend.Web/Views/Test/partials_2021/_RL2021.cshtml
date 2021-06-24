@@ -681,22 +681,25 @@
 
                         @if (gjeldende("B1") && (!string.IsNullOrEmpty(assessment.B1UtbredelsesområdeKode) && assessment.B1UtbredelsesområdeKode != "-"))
                         {
-                            @*// TODO FIX:
-                        MMPI("B1", "Utbredelsesområde", Model.B1IntervallUtbredelsesområde);*@
-                            <div>B1 @terskelverdi("B1UtbredelsesområdeKode", Model.B1UtbredelsesområdeKode) 
-                        tilsvarer i utgangspunktet @Model.B1UtbredelsesområdeKode</div>
-                            CatLine(Model.B1UtbredelsesområdeKode);
 
-                            <br />
+                            <div>
+                                B1 @terskelverdi("B1UtbredelsesområdeKode", Model.B1UtbredelsesområdeKode) 
+                                tilsvarer i utgangspunktet @Model.B1UtbredelsesområdeKode
+                             </div>
+                            
                         }
+
+
+
                         @if (gjeldende("B2") && (!string.IsNullOrEmpty(assessment.B2ForekomstarealKode) && assessment.B2ForekomstarealKode != "-"))
                         {
-                            @*// TODO FIX:
-                        MMPI("B2", "Forekomstareal", Model.B2IntervallForekomstareal);*@
+                          
+                            <div>
+                                B2 Forekomstareal 
+                                @terskelverdi("B2ForekomstarealKode", Model.B2ForekomstarealKode)
+                                tilsvarer i utgangspunktet @Model.B2ForekomstarealKode
+                            </div>
 
-                            <div>B2 Forekomstareal @terskelverdi("B2ForekomstarealKode", Model.B2ForekomstarealKode)tilsvarer i utgangspunktet @Model.B2ForekomstarealKode</div>
-                            CatLine(Model.B2ForekomstarealKode);
-                            <br />
                         }
                         <dl class="responsive condenced width40">
                             @if (gjeldende("Ba(i") || gjeldende("B1a((i") || gjeldende("B2a((i"))

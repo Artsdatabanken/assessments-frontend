@@ -87,7 +87,7 @@
         "keys": [ "a", "b", "c" ],
         "a": {
           "tagline": "Kraftig fragmenteringeller få lokaliteter(avgrenset av trussel)",
-          "description": "Mangler beskrivelse",
+          "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en art. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
           "subcategory": {
             "i": {
               "tagline": "Kraftig fragmentert populasjon",
@@ -141,6 +141,7 @@
           "tagline": "Utbredelsesområde",
           "description": "Utbredelsesområdet er et mål for hvor vid geografisk utbredelse en art har, om må ikke forveksles med okkupert eller potensielt forekomstareal. Utbredelsesområdet tilsvarer arealet av en minimum konveks polygon der de rette linjene i polygonen omringer alle kjente og antatte nåværende forekomster.",
           "content": {
+            "field": "Model.B1IntervallUtbredelsesområde",
             "min": "Minst: b1IntervallUtbredelsesområde(min) km2",
             "max": "Maksimum: b1IntervallUtbredelsesområde(max) km2",
             "probable": {
@@ -155,6 +156,7 @@
           "tagline": "Forekomstareal",
           "description": "Forekomstarealet er et mål for det spesifikke arealet som arten lever på, standardisert som summen av areal av 2 km x 2 km (4 km2) ruter som inneholder kjent eller antatt forekomst av arten.",
           "content": {
+            "field": "Model.B2IntervallForekomstareal",
             "min": "Minst: b2IntervallForekomstareal(min) km2",
             "max": "Maksimum: b2IntervallForekomstareal(max) km2",
             "probable": {

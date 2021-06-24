@@ -196,7 +196,7 @@
                             {
                                 <!-- A4 -->
                                 @Html.Partial("/Views/Shared/_MMP.cshtml", Model.A4Intervall10ÅrAntatt)
-                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.A4Intervall10År />
+
                                 <!-- Regnsammen konklusjon basert på tallene fra "max-min-probable"-->
                                 <b>A4 reduksjon: </b> @Model.A4Intervall10År
                                 // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
@@ -207,6 +207,29 @@
                                 {
                                     <div>@s - @elementname["options"][@s]["tagline"]</div>
                                 }
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.A4Intervall10År />
+                            }
+                            else if (@thesubelement["content"]["field"] == "Model.B1IntervallUtbredelsesområde")
+                            {
+                                <!-- A4 -->
+                                @Html.Partial("/Views/Shared/_MMPI.cshtml", Model.B1IntervallUtbredelsesområde)
+
+                                // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
+
+                                <!-- SETT INN TERSKELVERDI-KODE HER -->
+
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.B1UtbredelsesområdeKode />
+                            }
+                            else if (@thesubelement["content"]["field"] == "Model.B2IntervallForekomstareal")
+                            {
+                                <!-- A4 -->
+                                @Html.Partial("/Views/Shared/_MMPI.cshtml", Model.B2IntervallForekomstareal)
+
+                                // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
+
+                                <!-- SETT INN TERSKELVERDI-KODE HER -->
+
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.B2ForekomstarealKode />
                             }
 
                             <hr />

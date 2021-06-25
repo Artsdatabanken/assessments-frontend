@@ -10,16 +10,12 @@
     font-size: 22.5px;
 }
 
-.imaged_paragraph {
-    display: flex;
-    align-items: center;
-}
-
 .graphic_element {
-    display: inline-block;
+    display: block;
     border-radius: 2px;
     padding: 15px;
-    margin-right: 20px;
+    margin-right: auto;
+    margin-left: auto;
     font-size: 20pt;
     background: grey;
     height: 64px;
@@ -34,29 +30,59 @@
     padding-top: 0px;
 }
 
-.right_text {
-    display: inline-block;
-    flex: 1;
+.imaged_paragraph .material-icons {
+    display: block;
 }
 
+.right_text {
+    display: block;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media only screen and (min-width: 350px) {
+    .imaged_paragraph {
+        display: flex;
+        align-items: center;
+    }
+
+    .graphic_element {
+        display: inline-block;
+        margin-right:20px;
+    }
+    .right_text {
+        display: inline-block;
+        flex: 1;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    .graphic_element {
+        width: 100%;
+        text-align: center;
+    }
+}
 
 .RE {
     background: #5a5b5d;
-    color:white;
+    color: white;
 }
 
 .CR {
     background: #99191a;
     color: white;
 }
+
 .EN {
     background: #d80f27;
     color: white;
 }
+
 .VU {
     background: #e94f33;
     color: white;
 }
+
 .NT {
     background: #ed6c26;
     color: white;
@@ -66,6 +92,7 @@
     background: #f7a520;
     color: white;
 }
+
 .LC {
     background: #60beb2;
     color: black;
@@ -96,7 +123,7 @@
 
 .subcriteria {
     border: 1px solid #f7f2f2;
-    padding:5px;
+    padding: 5px;
 }
 
 .suboptions {
@@ -108,13 +135,14 @@
     background: lightgreen;
 }
 
-.suboptions .active{
-    background:lightblue;
+.suboptions .active {
+    background: lightblue;
 }
 
 .mid table {
     font-size: 12pt;
 }
+
 .currentcrumb {
     text-decoration: none !important;
     color: grey !important;
@@ -155,13 +183,13 @@
 .page-link:hover {
     background-color: gray;
     border-color: #4c4a48;
-    color:white;
+    color: white;
 }
 
 /* Styling table slightly while working with it */
 
-td{
-    padding:10px;
+td {
+    padding: 10px;
 }
 
 /* REDLIST VIEW */
@@ -169,10 +197,10 @@ td{
 .listwrapper {
     min-height: 20px;
     width: 100%;
-    max-width:100%;
+    max-width: 100%;
     font-size: 12pt;
-    padding-top:20px;
-    padding-bottom:20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 
@@ -190,18 +218,18 @@ td{
     display: flex;
 }
 
-.redlist li span {
-    padding: 10px;
-    width:33%;
-}
+    .redlist li span {
+        padding: 10px;
+        width: 33%;
+    }
 
-.redlist li span:last-child {
-   text-align:right;
-}
+        .redlist li span:last-child {
+            text-align: right;
+        }
 
-.redlist li:nth-child(even) {
-    background:  #fafafa;
-}
+    .redlist li:nth-child(even) {
+        background: #fafafa;
+    }
 
 .listheader {
     font-size: 15px;
@@ -210,7 +238,7 @@ td{
 }
 
 /* GRID VIEW */
-.redlist  .listheader.grid {
+.redlist .listheader.grid {
     display: none;
 }
 
@@ -224,31 +252,31 @@ td{
     margin-left: 5px;
     vertical-align: top;
     border: 1px solid #d4d4d4;
-    text-align:center;
-}
-
-.redlist.grid li span {
-    width: 100%;
-    display: block;
-    height: 50%;
     text-align: center;
 }
 
-.redlist.grid li span:first-child {
-    height: 20%;
-}
+    .redlist.grid li span {
+        width: 100%;
+        display: block;
+        height: 50%;
+        text-align: center;
+    }
 
-.redlist.grid li span:last-child {
-    height: 35px;
-    background: #e0dddd;
-    border-radius: 50%;
-    width: 35px;
-    margin: auto;
-    padding: 5px;
-    padding-top: 5px;
-    text-align: center;
-    padding-top: 10px;
-}
+        .redlist.grid li span:first-child {
+            height: 20%;
+        }
+
+        .redlist.grid li span:last-child {
+            height: 35px;
+            background: #e0dddd;
+            border-radius: 50%;
+            width: 35px;
+            margin: auto;
+            padding: 5px;
+            padding-top: 5px;
+            text-align: center;
+            padding-top: 10px;
+        }
 
 /* SEARCH FIELD REDLIST */
 
@@ -261,22 +289,22 @@ td{
     text-align: center;
 }
 
-.list-search input {
-    display:inline-block;
-    border: 1px solid rgb(204, 204, 204);
-    border-radius:2px;
-    box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px 0px inset;
-    box-sizing: border-box;
-    color: rgb(85, 85, 85);
-    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;    
-    font-size: 15px;
-    font-weight: 400;
-    height: 45px;
-    line-height: 21.4333px;
-    margin-bottom: 0px;
-    width:385px;
-    max-width:100%;
-}
+    .list-search input {
+        display: inline-block;
+        border: 1px solid rgb(204, 204, 204);
+        border-radius: 2px;
+        box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px 0px inset;
+        box-sizing: border-box;
+        color: rgb(85, 85, 85);
+        font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        height: 45px;
+        line-height: 21.4333px;
+        margin-bottom: 0px;
+        width: 385px;
+        max-width: 100%;
+    }
 
 .btn {
     padding: 6px 12px;
@@ -297,55 +325,55 @@ td{
     border-radius: 2px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    height:45px;
+    height: 45px;
 }
 
-.btn .material-icons {
-    vertical-align: bottom;
-    font-size: 16pt;
-}
+    .btn .material-icons {
+        vertical-align: bottom;
+        font-size: 16pt;
+    }
 
-.section{
-    border:1px solid grey;
-    padding:20px;
+.section {
+    border: 1px solid grey;
+    padding: 20px;
 }
 
 /* TABLES */
 
-.data-table{
+.data-table {
     width: 100%;
     box-sizing: border-box;
     table-layout: fixed;
     border-collapse: collapse;
-    margin-top:20px;
-    margin-bottom:20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
     .data-table th, .data-table td {
         word-wrap: break-word;
     }
 
-.data-table td {
-    vertical-align: top;
-    box-sizing: border-box;
+    .data-table td {
+        vertical-align: top;
+        box-sizing: border-box;
+    }
+
+    .data-table tr {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .data-table thead {
+        font-weight: bold;
+    }
+
+.table-subtittel {
+    display: block;
+    font-size: 10pt;
 }
 
-.data-table tr {
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.data-table thead {
-    font-weight: bold;
-}
-
-.table-subtittel{
-    display:block;
-    font-size:10pt;
-}
-
-.mobile-table-header{
-    display:none;
+.mobile-table-header {
+    display: none;
 }
 
 
@@ -386,9 +414,9 @@ td{
 }
 
 
-.natur p, .natur a{
-    color:grey;
-    font-size:8pt;
+.natur p, .natur a {
+    color: grey;
+    font-size: 8pt;
 }
 
 /* OVERRIDE STYLES */
@@ -407,25 +435,26 @@ td{
         background: #e4f2e4;
     }
 
-.checklist span {
-    display: inline-block;
-    width: calc(100% - 55px);
-}
-.checklist span:first-child {
-    width: 50px;
-}
+    .checklist span {
+        display: inline-block;
+        width: calc(100% - 55px);
+    }
+
+        .checklist span:first-child {
+            width: 50px;
+        }
 
 /* categori  things */
 
-.category-line{
-    width:300px;
+.category-line {
+    width: 300px;
 }
 
-.category-line div{
-    display:inline-block;
-    padding:10px;
-}
+    .category-line div {
+        display: inline-block;
+        padding: 10px;
+    }
 
-.category-line .active{
-    border:4px solid black;
-}
+    .category-line .active {
+        border: 4px solid black;
+    }

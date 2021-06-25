@@ -5,31 +5,19 @@
     Artsdatabanken.RL2021 assessment = Model;
 }
 
-<div class="section">
-    <h2>Oppsumering av vurdering</h2>
 
-    @if (!((Model.Kategori == "NA" || Model.Kategori == "NE" || Model.Kategori == "LC") && (Model.Kriteriedokumentasjon == "" || Model.Kriteriedokumentasjon == null)))
-    {
 
-        <h3>Oppsummering</h3>
+@if (!((Model.Kategori == "NA" || Model.Kategori == "NE" || Model.Kategori == "LC") && (Model.Kriteriedokumentasjon == "" || Model.Kriteriedokumentasjon == null)))
+{
+
+    <div class="page_section">
+        <h2>Oppsumering av vurdering</h2>
 
         @if (Model.Kategori.IndexOf("CR") >= 0 || Model.Kategori.IndexOf("EN") >= 0 || Model.Kategori.IndexOf("VU") >= 0 || Model.Kategori.IndexOf("NT") >= 0)
         {
-            <h4>Gjeldende kriterier</h4>
-            <div>
-                <div>
-                    <p>Gjeldende kriterier : @Model.Kriterier</p>
-                    @*<button class="detaljer" onclick="togglePopup('gjeldende')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                    *@
-                    <div class="popuptext" id="gjeldende" style="margin-left: 0; margin-top: 0">
-                        @*<button class="closePopup" onclick="closePopup('gjeldende')"> x </button>*@
-                        <div>
-                            En art behøver kun oppfylle én av IUCNs kriterier A-E for å bli rødlistet, men skal i utgangspunktet testes mot alle kriterier så langt det finnes informasjon.
-                            En art kan dermed ha én eller flere gjeldende kriterier, dvs. kriterier som har vært utslagsgivende for kategori.
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h3>Gjeldende kriterier</h3>
+            <p><b>@Model.Kriterier</b></p>
+            <p>@ViewBag.glossary["oneliners"]["gjeldendekriterier"]</p>
         }
 
         <!-- Kategori endring -->
@@ -73,21 +61,12 @@
         <!-- Generasjonslengde-->
         @if (Model.Generasjonslengde != "" && Model.Generasjonslengde != null)
         {
-            <h3>Generasjonstid</h3>
-            <div class="criterium" style="display: flex">
-                <div>Generasjonstid: @assessment.Generasjonslengde år</div>
-                @*<button class="detaljer" style="margin-bottom: 10px; margin-top: 10px" onclick="togglePopup('genTid')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
-                *@
-            </div>
-            <div class="popuptext" id="genTid">
-                @*<button class="closePopup" onclick="closePopup('genTid')"> x </button>*@
-                <div>
-                    Generasjonstid er gjennomsnittsalder for alle reproduserende individ, dvs. foreldre til alle avkom i populasjonen.
-                    Om generasjonstiden hos en populasjon har blitt endret som følge av høsting el.lign. skal den naturlige generasjonslengden før høsting benyttes.
-                    Generasjonstid og generasjonslengde brukes synonymt.
-                </div>
-            </div>
+            <h3>Generasjonstid: @assessment.Generasjonslengde år</h3>
+            <p>
+                Generasjonstid er gjennomsnittsalder for alle reproduserende individ, dvs. foreldre til alle avkom i populasjonen.
+                Om generasjonstiden hos en populasjon har blitt endret som følge av høsting el.lign. skal den naturlige generasjonslengden før høsting benyttes.
+                Generasjonstid og generasjonslengde brukes synonymt.
+            </p>
         }
-
-    }
-</div><!-- End section -->
+    </div><!-- End section -->
+}

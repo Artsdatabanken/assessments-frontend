@@ -10,6 +10,32 @@
     font-size: 22.5px;
 }
 
+.stats_element_container {
+    display: inline-block;
+    width: 70px;
+}
+
+.stats_element_text {
+    display: inline-block;
+    width: calc(100% - 80px);
+}
+
+.stats_element {
+    width: 64px;
+    height: 64px;
+    border-radius:2px;
+    background: #4c4a48;
+    display: flex;
+    align-items: center;
+}
+
+.stats_element span {
+    color: white;
+    width:100%;
+    display:block;
+    text-align: center;
+}
+
 .graphic_element {
     display: block;
     border-radius: 2px;

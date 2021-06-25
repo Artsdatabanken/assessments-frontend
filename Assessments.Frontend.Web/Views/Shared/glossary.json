@@ -85,8 +85,7 @@
     "artsgruppeIkkeRisikovurdertNE": "Arten er ikke forsøkt rødlistevurdert(NE) fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021.",
     "annetNE": "Arten er ikke forsøkt rødlistevurdert(NE).",
     "fremmedArtNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er fremmed, og ble enten etablert innenfor gjeldende område etter år 1800 eller antas å kunne etablere seg innen 50 år (dørstokkart).",
-    "history": "Hvis arten har blitt vurdert til Rødlista for arter 2010 og Rødlista for arter 2015 kan du se vurderingene her. Arter uten historikk er vurdert for første gang til Rødlista for arter 2021."
-
-
+    "history": "Hvis arten har blitt vurdert til Rødlista for arter 2010 og Rødlista for arter 2015 kan du se vurderingene her. Arter uten historikk er vurdert for første gang til Rødlista for arter 2021.",
+    "gjeldendekriterier": "En art behøver kun oppfylle én av IUCNs kriterier A-E for å bli rødlistet, men skal i utgangspunktet testes mot alle kriterier så langt det finnes informasjon. En art kan dermed ha én eller flere gjeldende kriterier, dvs. kriterier som har vært utslagsgivende for kategori."
   }
 }

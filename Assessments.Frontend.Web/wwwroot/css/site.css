@@ -39,36 +39,46 @@
     flex: 1;
 }
 
+
 .RE {
     background: #5a5b5d;
+    color:white;
 }
 
 .CR {
     background: #99191a;
+    color: white;
 }
 .EN {
     background: #d80f27;
+    color: white;
 }
 .VU {
     background: #e94f33;
+    color: white;
 }
 .NT {
     background: #ed6c26;
+    color: white;
 }
 
 .DD {
     background: #f7a520;
+    color: white;
 }
 .LC {
     background: #60beb2;
+    color: black;
 }
 
 .NA {
     background: #939598;
+    color: black;
 }
 
 .NE {
     background: #d1d3d4;
+    color: black;
 }
 
 .utdodd {

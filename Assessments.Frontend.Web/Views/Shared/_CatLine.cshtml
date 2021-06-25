@@ -21,6 +21,8 @@
     }
 }
 
+@if(!string.IsNullOrEmpty(category)&&@category!="-") { 
+@category
 <div class="category-line">
     <div class=@setActive("CR", category) style="background-color: #990013">CR</div>
     <div class=@setActive("EN", category) style="background-color: #D80024">EN</div>
@@ -28,5 +30,6 @@
     <div class=@setActive("NT", category) style="background-color: #F36C21">NT</div>
     <div class=@setActive("LC", category) style="background-color: #60BDb1">LC</div>
 </div>
+}
 
 

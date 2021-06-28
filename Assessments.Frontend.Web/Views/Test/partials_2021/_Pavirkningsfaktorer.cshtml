@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Artsdatabanken.RL2021Pavirkningsfaktor>
+
+
+
+@functions {
+    public string iconfinder(string factor)
+    {
+        @if (factor == "Forurensning")
+        {
+            return"delete_sweep";
+        }
+        else if (factor == "Tilfeldig mortalitet")
+        {
+            return "free_cancellation";
+        }
+        else
+        {
+            return "delete";
+        }
+    }
+}
+
+
+<div class="page_section">
+    <h2>Påvirkningsfaktorer </h2>
+
+    <p class="fact_box"> @ViewBag.glossary["oneliners"]["Påvirkningsfaktorer"]</p>
+
+    <div class="factors">
+        @{foreach (var pfaktor in Model)
+            {
+                <div>
+                    <h3>Beskrivelse</h3>
+
+                    <div class="stats_element_container">
+                        <span class="stats_element material-icons">
+                            <span>
+                                    @iconfinder(@pfaktor.ØversteTittel)
+                            </span>
+                        </span>
+                    </div>
+                    <span class="stats_element_text">
+                        @pfaktor.ØversteTittel
+                    </span>
+
+
+
+                    <hr />
+                    @pfaktor.Tittel
+                    <hr />
+                    @pfaktor.Forkortelse
+                </div>
+
+                <div>
+                    <h3>Omfang</h3>
+                    <span>@pfaktor.Omfang</span>
+                </div>
+                <div>
+                    <h3>Alvorlighetsgrad</h3>
+                    <span>@pfaktor.Alvorlighetsgrad</span>
+                </div>
+                <div>
+                    <h3>Tidspunkt</h3>
+                    <span class="mobile-table-header">Tidspunkt</span>
+                    @pfaktor.Tidspunkt
+                </div>
+            }
+        }
+
+    </div> <!-- end pavirkningsboks -->
+</div> <!-- end factors -->

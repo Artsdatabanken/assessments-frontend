@@ -1,0 +1,85 @@
+﻿@model Artsdatabanken.RL2021MinMaxProbableIntervall;
+
+@functions{
+    private static string FormatNumber(string text)
+    {
+        // FORMAT IS COPIED IN AND STUFF MAY BE MISSING.
+        //var culture = new CultureInfo("nb-NO") { NumberFormat = { NumberDecimalDigits = 0 } };
+        return Math.Round(double.Parse(text)).ToString();
+    }
+ }
+
+@{
+    Artsdatabanken.RL2021MinMaxProbableIntervall mmpi = @Model;
+    var tag = "B1";
+    var description = "Utbredelsesområde";
+    string ending = "";
+    var min = @mmpi.Min;
+    var probable = @mmpi.Probable;
+    var max = @mmpi.Max;
+    var calc = @mmpi.Calculated;
+    if(tag.StartsWith('B'))
+    {
+        ending = "individer";
+        if (tag == "B1" || tag == "B2")
+        {
+            ending = "km²";
+        }
+    }
+
+    if(!string.IsNullOrEmpty(mmpi.Minintervall) && !string.IsNullOrEmpty(mmpi.Maxintervall) && mmpi.Punktestimat != "true")
+    {
+        probable = @FormatNumber(mmpi.Minintervall)+ " - "+ @FormatNumber(mmpi.Maxintervall);
+    }
+    else if (!string.IsNullOrEmpty(mmpi.Minintervall) && mmpi.Punktestimat != "true")
+    {
+        probable = @FormatNumber(mmpi.Minintervall);
+    }
+    else if (!string.IsNullOrEmpty(mmpi.Maxintervall) && mmpi.Punktestimat != "true")
+    {
+        probable = @FormatNumber(mmpi.Maxintervall);
+    }
+
+}
+
+<p class="mmpi">
+    MMPI
+
+    <!-- for B1 & B2 ? Or all -->
+    @if (!string.IsNullOrEmpty(@min))
+    {
+        <div>minimum: @min @ending</div>
+    }
+    @if (!string.IsNullOrEmpty(@max))
+    {
+        <div>maximum: @max @ending</div>
+    }
+
+    @if (!string.IsNullOrEmpty(@probable))
+    {
+        <div>mest trolig: @probable @ending</div>
+    }
+
+
+    @if (!string.IsNullOrWhiteSpace(@calc))
+    { 
+        <span>
+            Hvilket gir et beregnet
+            @if (tag == "B.a")
+            {
+                <span>antall trusseldefinerte lokaliteter</span>
+            }else if (tag.StartsWith("B"))
+            {
+                <span>populasjonsstørrelse, med føre-var forbehold</span>
+            }
+            else
+            {
+                <span>areal, med føre-var forbehold</span>
+            }
+            på @calc @ending
+        </span>
+
+        <div>
+            @ViewBag.glossary["IUCN"]["description"]
+        </div>
+    }

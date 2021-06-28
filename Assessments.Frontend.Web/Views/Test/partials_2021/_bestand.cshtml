@@ -1,0 +1,65 @@
+﻿@model Artsdatabanken.RL2021
+@* SEE example by searching species Carex elata *@
+
+<div class="page_section">
+
+    @if (Model.Kategori != "NE" && Model.Kategori != "NA")
+    {
+        @if ((Model.AndelNåværendeBestand != null && Model.AndelNåværendeBestand != " "
+       && Model.AndelNåværendeBestand != "-") || (Model.MaxAndelAvEuropeiskBestand != null
+       && Model.MaxAndelAvEuropeiskBestand != " " && Model.MaxAndelAvEuropeiskBestand != "-")
+       || (Model.MaxAndelAvGlobalBestand != null && Model.MaxAndelAvGlobalBestand != " "
+       && Model.MaxAndelAvGlobalBestand != "-"))
+        {
+
+            <h3>Informasjon om populasjonsstørrelse </h3>
+
+
+            @if (Model.AndelNåværendeBestand != null
+             && Model.AndelNåværendeBestand != " "
+             && Model.AndelNåværendeBestand != "-")
+            {
+                <p>
+                    <div class="stats_element_container">
+                        <span class="stats_element">
+                            <span>@Model.AndelNåværendeBestand</span>
+                        </span>
+                    </div>
+                    <span class="stats_element_text">
+                        @ViewBag.glossary["oneliners"]["AndelNåværendeBestand"]
+                    </span>
+                </p>
+            }
+            @if (Model.MaxAndelAvEuropeiskBestand != null
+              && Model.MaxAndelAvEuropeiskBestand != " "
+              && Model.MaxAndelAvEuropeiskBestand != "-")
+            {
+                <p>
+                    <div class="stats_element_container">
+                        <span class="stats_element">
+                            <span>@Model.MaxAndelAvEuropeiskBestand</span>
+                        </span>
+                    </div>
+                    <span class="stats_element_text">
+                        @ViewBag.glossary["oneliners"]["MaxAndelAvEuropeiskBestand"]
+                    </span>
+                </p>
+            }
+            @if (Model.MaxAndelAvGlobalBestand != null
+              && Model.MaxAndelAvGlobalBestand != " "
+              && Model.MaxAndelAvGlobalBestand != "-")
+            {                
+                <p>
+                    <div class="stats_element_container">
+                        <span class="stats_element">
+                            <span>@Model.MaxAndelAvGlobalBestand</span>
+                        </span>
+                    </div>
+                    <span class="stats_element_text">
+                        @ViewBag.glossary["oneliners"]["MaxAndelAvGlobalBestand"]
+                    </span>
+                </p>
+            }
+        }
+    }
+</div><!-- End section -->>

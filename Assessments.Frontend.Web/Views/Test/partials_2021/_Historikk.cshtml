@@ -1,0 +1,99 @@
+﻿@model Artsdatabanken.RL2021
+@* SEE example by searching species Carex elata *@
+
+@{
+    Artsdatabanken.RL2021 assessment = Model;
+ }
+
+
+@functions{
+
+    public string categoryDescription(string category)
+    {
+        // Takes in category as presented in the model
+        // uses categoryMatcher to remove degrees etc.
+        // Returns name of category (whatever for?)
+        var actual_category = category.Substring(0, 2); 
+        var final_string = @ViewBag.glossary[actual_category]["presentationstring"];
+        return final_string;
+    }
+}
+
+
+<div class="page_section">
+    <h2>Tidligere vurderinger</h2>
+    <p>
+        @ViewBag.glossary["oneliners"]["history"]
+    </p>
+
+
+        
+    @if (Model.SistVurdertAr == 2021 || Model.SistVurdertAr == 0)
+    {            
+        <span >Arten er vurdert for første gang i 2021.</span>
+    }
+    else
+    {
+        @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010) && !string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
+        {
+
+            <p >
+                <b>Rødlista 2010</b> 
+                <a target="_blank" href="@Model.ImportInfo.Url2010">
+                    <span class="icon-@Model.ImportInfo.Kategori2010"> &nbsp;</span>
+                    @Model.ImportInfo.Kategori2010 
+                    @categoryDescription(Model.ImportInfo.Kategori2010)
+                </a>
+            </p>
+
+            <p >
+                        
+                <b>Rødlista 2015</b>
+                <a target="_blank" href="@Model.ImportInfo.Url2015">
+                    <span class="icon-@Model.ImportInfo.Kategori2015"> &nbsp;</span>
+                    @Model.ImportInfo.Kategori2015 @categoryDescription(Model.ImportInfo.Kategori2015)
+                </a>
+                        
+            </p>
+        }
+        else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
+        {
+            
+            <p>
+                <b>Rødlista 2010</b>
+                <a target="_blank" href="@Model.ImportInfo.Url2010">
+                    <span class="icon-@Model.ImportInfo.Kategori2010"> &nbsp;</span>
+                    @Model.ImportInfo.Kategori2010 @categoryDescription(Model.ImportInfo.Kategori2010)
+                </a>
+            </p>
+        }
+        else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
+        {
+            <p>
+                <b>Rødlista 2015</b>
+                <a target="_blank" href="@Model.ImportInfo.Url2015">
+                    <span class="icon-@Model.ImportInfo.Kategori2015"> &nbsp;</span>
+                    @Model.ImportInfo.Kategori2015 @categoryDescription(Model.ImportInfo.Kategori2015)
+                </a>
+                
+            </p>
+        }
+
+        @if (Model.Ekspertgruppe.ToLower() == "spretthaler" || Model.Ekspertgruppe.ToLower() == "havedderkopper")
+        {
+            <p>
+                Sist vurdert i: @Model.SistVurdertAr
+            </p>
+        }
+    }
+
+    @if (Model.GlobalRødlistestatusKode != null)
+    {
+        <p>
+            Global Rødlistestatus: @Model.GlobalRødlistestatusKode
+        </p>
+    }
+
+            
+
+</div><!-- End section -->

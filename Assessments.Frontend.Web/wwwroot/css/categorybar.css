@@ -28,12 +28,9 @@
 .category_displayer li {
     display: inline-block;
     margin-bottom: 15px;
-    color: black;
     margin: 0px;
     vertical-align: top;
-    border-top: 4px solid transparent;
-    border-bottom: 4px solid transparent;
-    padding: 5px;
+    padding: 0px;
     padding-top:20px;
     padding-bottom:20px;
     margin-bottom:20px;
@@ -42,15 +39,15 @@
 }
 
 .category_displayer .category_item {
-    height: 54px;
-    width: 54px;
-    border-radius: 5px;
-    border: 2px solid grey;
+    height: 65px;
+    width: 65px;
+    padding:5px;
+    padding-top:2px;
+    border-radius: 2px;
+    border: 5px solid white;
     text-align: center;
     font-size: 22px;
-    color: grey;
     vertical-align: middle;
-    background-color: white;
 }
 
 .category_displayer .category_item span {
@@ -60,68 +57,116 @@
     width: 100%;
      
 }
-
-.category_displayer .category_rl {
-    border-top: 4px solid grey;
-}
-
-.category_displayer .category_threatened {
-    border-bottom: 4px solid red;
-}
-
-.category_displayer .category_rl.start_line:before,
-.category_displayer .category_rl.stop_line:after {
-    content: "";
-    background: grey;
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 10px;
-    width: 4px;
-}
-
-.category_displayer .category_rl.start_line:before {    
-    left: 0;
-}
-
-
-.category_displayer .category_rl.category_threatened.start_line:before,
-.category_displayer .category_rl.category_threatened.stop_line:after {    
-    background: red;
-    bottom: 0;
-    top:auto;
-    right: 0;
-    background:red;
-}
-
-.category_displayer category_rl.category_threatened.start_line:before {
-    left: 0;
-}
-
-.topbar_label,
-.bottombar_label {
-    position: absolute;
-    background: white;
-    left: 150px;
-    padding-left: 10px;
-    padding-right: 10px;
-    z-index:1;
-}
-
-.topbar_label {
-    top: -10px;
-    left: 120px;
-}
-
-
-.bottombar_label {
-    bottom: -10px;
-    left: 67px;;
-    
-}
-
 .category_item.active {
     border-color: black;
-    background: #4c4a48;
-    color: white;
+}
+
+@media only screen and (min-width: 651px) {
+
+    .category_displayer li {
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+    }
+
+    .category_displayer .category_rl {
+        border-top: 4px solid red;
+    }
+
+    .category_displayer .category_threatened {
+        border-bottom: 4px solid black;
+    }
+
+    .category_displayer .category_rl.start_line:before,
+    .category_displayer .category_rl.stop_line:after {
+        content: "";
+        background: red;
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 10px;
+        width: 4px;
+    }
+
+    .category_displayer .category_rl.start_line:before {
+        left: 0;
+    }
+
+    .category_displayer .category_rl.category_threatened.start_line:before,
+    .category_displayer .category_rl.category_threatened.stop_line:after {
+        background: black;
+        bottom: 0;
+        top: auto;
+        right: 0;
+    }
+
+    .category_displayer category_rl.category_threatened.start_line:before {
+        left: 0;
+    }
+
+    .topbar_label,
+    .bottombar_label {
+        position: absolute;
+        background: white;
+        left: 150px;
+        padding-left: 10px;
+        padding-right: 10px;
+        z-index: 1;
+    }
+
+    .topbar_label {
+        top: -10px;
+        left: 120px;
+    }
+
+    .bottombar_label {
+        bottom: -10px;
+        left: 67px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .category_displayer{
+        padding-bottom:50px;
+    }
+
+    .category_displayer li {
+        position: relative;
+        display: block;
+        height: 50px;
+        max-width: 100%;
+        margin: 0px;
+        padding:0px;
+        padding-left: 10px;
+        border-left: 4px solid transparent;
+    }
+
+    .category_displayer .category_item {
+        width: 50px;
+        height: 50px;
+    }
+
+    .category_displayer .category_item span {
+        position: absolute;
+        left: 70px;
+        color: black;
+        font-size: 12pt;
+        text-align: left;
+        top: 50%;
+    }
+
+    .topbar_label {
+        display:none;
+    }
+
+    .bottombar_label {
+        display:none;
+    }
+
+    .category_displayer .category_rl {
+        border-left: 4px solid red;
+    }
+
+    .category_displayer .category_threatened {
+        border-left: 4px solid black;
+    }
 }

@@ -1,7 +1,10 @@
 ﻿@model Artsdatabanken.RL2021
 @{
     ViewBag.Title = @Model.VurdertVitenskapeligNavn;
+    var naturtypehovedenhet = @Model.NaturtypeHovedenhet;
 }
+
+
 
 <div class="breadcrumbs">
     <ul>
@@ -21,12 +24,14 @@
     </ul>
 </div>
 
-<div class="content-placer">
+<div class="content-placer bigmid">
     <div class="page-header">
         <h1>
             Norsk Rødliste for arter 2021
         </h1>
-        <h2>@ViewBag.Title</h2>
+        
+        <partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" /> 
+       
         <span class="byline">
             Ikke publisert ennå
         </span>
@@ -35,16 +40,47 @@
     <div class="mid">
         <div class="ingress">
             <p>
-                Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge. 
-                Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
+                Arten har blitt vurdert til <partial name="/Views/Shared/_Category.cshtml" /> i vurderingen fra
+                Norsk rødliste for arter 2021.
+                Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter,
+                og er en oversikt over arter som har risiko for å dø ut fra Norge.
             </p>
         </div>
 
-        <div class="section">
-            <h2>Vurderingsinnhold</h2>
-            <p>Kommer her</p>
+        <partial name="/Views/Test/partials_2021/_Informasjon.cshtml" />
+        <partial name="/Views/Shared/_CategoryDescription.cshtml" />
+        <partial name="/Views/Test/partials_2021/_Historikk.cshtml" />
+        <partial name="/Views/Test/partials_2021/_Oppsumering.cshtml" />
+        <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
 
-            <partial name="/Views/Shared/_Categorybar.cshtml" />
-        </div>
+        @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
+        {
+            @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
+        }
+
+
+        @if (Model.Fylkesforekomster != null)
+        {
+            @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster.cshtml", Model.Fylkesforekomster)
+        }
+
+
+        @if (Model.NaturtypeHovedenhet != null)
+        {
+            @Html.Partial("/Views/Test/partials_2021/_Naturtyper.cshtml", Model.NaturtypeHovedenhet)
+        }
+
+
+        @if (Model.Referanser != null && Model.Referanser.Count > 0)
+        {
+            @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
+        }
+
+        <partial name="/Views/Test/partials_2021/Kriterier_2021/_Kriterie_Automatic.cshtml" />
+
+
+        @*@Html.Partial("/Views/Test/partials_2021/_RL2021.cshtml", Model)}*@
+
+
     </div>
 </div>

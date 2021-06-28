@@ -1,0 +1,39 @@
+﻿@model Artsdatabanken.RL2021
+@{
+    ViewBag.category = @Model.Kategori;
+}
+
+@*
+    Codeblock from Innsynsløsninga 2021 by SN. 
+    Slightly modified by HEM for launch.
+*@
+
+@functions {
+    public string categoryMatcher(string category)
+    {
+        // Takes in category as presented in the model
+        // Returns name of category (whyever for?)
+        return category.Substring(0, 2);
+
+    }
+}
+
+@functions {
+    public string categoryDescription(string category)
+    {
+        // Takes in category as presented in the model
+        // uses categoryMatcher to remove degrees etc.
+        // Returns name of category (whatever for?)
+        var actual_category = @categoryMatcher(category);
+        var final_string = @ViewBag.glossary[actual_category]["presentationstring"];
+        return final_string;
+    }
+}
+
+<span>
+    @categoryMatcher(@Model.Kategori) @categoryDescription(ViewBag.category)
+    @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
+    {
+        <span>og er trolig utdødd</span>
+    }
+</span>

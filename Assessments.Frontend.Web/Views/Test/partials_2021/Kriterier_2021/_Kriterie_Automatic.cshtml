@@ -1,0 +1,252 @@
+﻿@model Artsdatabanken.RL2021
+@*
+
+    // REFERENCES: https://www.artsdatabanken.no/files/33528
+
+*@
+
+@{
+    Artsdatabanken.RL2021 assessment = Model;
+    var kriterier = Model.Kriterier;
+    var criterialist = kriterier.Split(";");
+    var keys = @ViewBag.kriterier["criteria"]["keys"];
+}
+
+<div class="section">
+    <h2>
+        Kriterier:
+        @foreach (var el in criterialist)
+        {
+            <b>@el</b>
+        }
+    </h2>
+
+    @foreach (string element in keys)
+    {
+<div class="tempsection">
+    @{
+        var elementname = @ViewBag.kriterier["criteria"][@element];
+        var subcriteria = elementname["subcriteria"];
+        var suboptions = elementname["options"];
+        var currentCriteria = "none";
+
+        foreach (var subsub in criterialist)
+        {
+            if (subsub.Contains(element))
+            {
+                currentCriteria = subsub;
+            }
+        }
+
+        if (currentCriteria.Contains("+"))
+        {
+            var formatted = "";
+            // Untill formatting is completed from api, detatch and reassemble criteria string here
+            foreach (var splititem in currentCriteria.Split("+"))
+            {
+                if (splititem.Contains(element))
+                {
+                    formatted = splititem;
+                }
+                else
+                {
+                    formatted = formatted + " AND " + element + splititem;
+                }
+            }
+            currentCriteria = formatted;
+        }
+    }
+
+    <!-- OUTER CRITERIA LOOP ( A, B, C, D, E) -->
+
+    <h2>@element</h2>
+    <h3>@elementname["summary"]</h3>
+    <span class="description">@elementname["description"]</span>
+    <hr />
+    @if (elementname["content"] != null)
+    {
+        <p class="TODO">
+            @foreach (object e in @elementname["content"])
+            {
+                // TODO: Add check for punktestimat vs. intervall from db,
+                // fetch corresponding text from probable.
+
+                <span>@e</span><br />
+            }
+        </p>
+    }
+
+    <!-- SUB OPTIONS -->
+    <div>
+        @if (suboptions != null)
+        {
+            <h3>Options</h3>
+            @foreach (string subelement in @suboptions["keys"])
+            {
+                <div class="element">
+                    @{
+                        var thesubelement = @ViewBag.kriterier["criteria"][@element]["options"][subelement];
+                        var optionsClassName = thesubelement;
+                        var isContained = "none";
+                        if (currentCriteria.Contains(subelement))
+                        {
+                            isContained = currentCriteria;
+                        }
+                    }
+
+                    <div class="@optionsClassName">
+                        <h4> @subelement - @thesubelement["tagline"]</h4>
+                        <span class="description">@thesubelement["description"]</span>
+                    </div>
+
+                </div>
+            }
+        }
+    </div>
+
+    <!-- SUB CRITERIA -->
+    <div>
+        @if (subcriteria != null)
+        {
+            <h3>Tallkriterie</h3>
+            @foreach (string subelement in @subcriteria["keys"])
+            {
+                <div class="element">
+                    @{
+                        var thesubelement = @ViewBag.kriterier["criteria"][@element]["subcriteria"][subelement];
+                        var className = "nonactive";
+                        if (Model.Kriterier.Contains(subelement))
+                        {
+                            // TODO: WHEN CHECK IS FIXED, add active classes.
+                            className = "_active";
+                        }
+                    }
+                    <div class="@className">
+                        <h4> @subelement - @thesubelement["tagline"]</h4>
+                        @thesubelement["description"]
+
+                        <!-- TODO: FIX THE SUB ELEMENTS-->
+                    <p class="TODO">
+                        @if (@thesubelement["content"] != null)
+                        {
+
+                            @foreach (object e in @thesubelement["content"])
+                            {
+                                // TODO: Add check for punktestimat vs. intervall from db,
+                                // fetch corresponding text from probable.
+
+                                <span>@e</span><br />
+                            }
+
+                            <hr />
+                            @if (@thesubelement["content"]["field"] == "Model.A1OpphørtOgReversibelAntatt")
+                            {
+                                <!-- A1 -->
+                                @Html.Partial("/Views/Shared/_MMP.cshtml", Model.A1OpphørtOgReversibelAntatt)
+
+
+                                <!-- Regnsammen konklusjon basert på tallene fra "max-min-probable"-->
+                                <b>"A1 reduksjon"</b> @Model.A1OpphørtOgReversibel
+                                // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
+                                <!-- Iterer og gi ut options relatert til vurderingen -->
+                                @if (Model.A1EndringBasertpåKode.Count > 0)
+                                {
+                                    <h5>Vurdering basert på option</h5>
+                                    @foreach (var s in Model.A1EndringBasertpåKode)
+                                    {
+                                        <div>@s - @elementname["options"][@s]["tagline"]</div>
+                                    }
+                                }
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.A1OpphørtOgReversibel />
+                            }
+                            else if (@thesubelement["content"]["field"] == "Model.A2Forutgående10ÅrAntatt")
+                            {
+                                <!-- A2 -->
+                                @Html.Partial("/Views/Shared/_MMP.cshtml", Model.A2Forutgående10ÅrAntatt)
+
+                                <!-- Regnsammen konklusjon basert på tallene fra "max-min-probable"-->
+                                <b>A2 reduksjon: </b> @Model.A2Forutgående10År
+                                // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
+
+                                <!-- Iterer og gi ut options relatert til vurderingen -->
+                                <h5>Vurdering basert på option</h5>
+                                @foreach (var s in Model.A2EndringBasertpåKode)
+                                {
+                                    <div>@s - @elementname["options"][@s]["tagline"]</div>
+                                }
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.A2Forutgående10År />
+                            }
+                            else if (@thesubelement["content"]["field"] == "Model.A3Kommende10ÅrAntatt")
+                            {
+                                <!-- A3 -->
+                                @Html.Partial("/Views/Shared/_MMP.cshtml", Model.A3Kommende10ÅrAntatt)
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.A3Kommende10År />
+                                <!-- Regnsammen konklusjon basert på tallene fra "max-min-probable"-->
+                                <b>A3 reduksjon: </b> @Model.A3Kommende10År
+                                // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
+
+                                <!-- Iterer og gi ut options relatert til vurderingen -->
+                                <h5>Vurdering basert på option</h5>
+                                @foreach (var s in Model.A3EndringBasertpåKode)
+                                {
+                                    <div>@s - @elementname["options"][@s]["tagline"]</div>
+                                }
+                            }
+                            else if (@thesubelement["content"]["field"] == "Model.A4Intervall10ÅrAntatt")
+                            {
+                                <!-- A4 -->
+                                @Html.Partial("/Views/Shared/_MMP.cshtml", Model.A4Intervall10ÅrAntatt)
+
+                                <!-- Regnsammen konklusjon basert på tallene fra "max-min-probable"-->
+                                <b>A4 reduksjon: </b> @Model.A4Intervall10År
+                                // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
+
+                                <!-- Iterer og gi ut options relatert til vurderingen -->
+                                <h5>Vurdering basert på option</h5>
+                                @foreach (var s in Model.A4EndringBasertpåKode)
+                                {
+                                    <div>@s - @elementname["options"][@s]["tagline"]</div>
+                                }
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.A4Intervall10År />
+                            }
+                            else if (@thesubelement["content"]["field"] == "Model.B1IntervallUtbredelsesområde")
+                            {
+                                <!-- A4 -->
+                                @Html.Partial("/Views/Shared/_MMPI.cshtml", Model.B1IntervallUtbredelsesområde)
+
+                                // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
+
+                                <!-- SETT INN TERSKELVERDI-KODE HER -->
+
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.B1UtbredelsesområdeKode />
+                            }
+                            else if (@thesubelement["content"]["field"] == "Model.B2IntervallForekomstareal")
+                            {
+                                <!-- A4 -->
+                                @Html.Partial("/Views/Shared/_MMPI.cshtml", Model.B2IntervallForekomstareal)
+
+                                // TODO: MATCH MOT KODESTRENG I JSONFILA "KODER"
+
+                                <!-- SETT INN TERSKELVERDI-KODE HER -->
+
+                                <partial name="/Views/Shared/_CatLine.cshtml" , model=Model.B1UtbredelsesområdeKode />
+                            }
+
+                            <hr />
+
+                        }
+                        @thesubelement["based-on"]
+                    </p>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+
+
+</div>
+    }
+
+
+</div> <!-- end section -->

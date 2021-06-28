@@ -121,6 +121,7 @@
         <Property Name="ArtskartManuellKommentar" Type="Edm.String" />
         <Property Name="ArtskartSistOverført" Type="Edm.String" />
         <Property Name="ArtskartModel" Type="Artsdatabanken.RL2021ArtskartModel" />
+        <Property Name="Påvirkningsfaktorer" Type="Collection(Artsdatabanken.RL2021Pavirkningsfaktor)" />
         <Property Name="Referanser" Type="Collection(Artsdatabanken.RL2021Reference)" />
         <Property Name="Fylkesforekomster" Type="Collection(Artsdatabanken.Rl2021Fylkesforekomst)" />
         <Property Name="NaturtypeHovedenhet" Type="Collection(Edm.String)" />
@@ -137,7 +138,6 @@
         <Property Name="TaxonomicHistory" Type="Collection(Artsdatabanken.RL2021TaxonHistory)" />
         <Property Name="ImportInfo" Type="Artsdatabanken.RL2021TrackInfo" />
         <Property Name="Regioner" Type="Collection(Edm.String)" />
-        <NavigationProperty Name="Påvirkningsfaktorer" Type="Collection(Artsdatabanken.RL2021Pavirkningsfaktor)" />
       </EntityType>
       <EntityType Name="Rodliste2015">
         <Key>
@@ -312,11 +312,7 @@
         <Property Name="IncludeSvalbard" Type="Edm.Boolean" Nullable="false" />
         <Property Name="ExcludeGbif" Type="Edm.Boolean" Nullable="false" />
       </ComplexType>
-      <EntityType Name="RL2021Pavirkningsfaktor">
-        <Key>
-          <PropertyRef Name="Id" />
-        </Key>
-        <Property Name="Id" Type="Edm.String" Nullable="false" />
+      <ComplexType Name="RL2021Pavirkningsfaktor">
         <Property Name="OverordnetTittel" Type="Edm.String" />
         <Property Name="Beskrivelse" Type="Edm.String" />
         <Property Name="Tidspunkt" Type="Edm.String" />
@@ -325,7 +321,7 @@
         <Property Name="Tittel" Type="Edm.String" />
         <Property Name="ØversteTittel" Type="Edm.String" />
         <Property Name="Forkortelse" Type="Edm.String" />
-      </EntityType>
+      </ComplexType>
       <ComplexType Name="RL2021Reference">
         <Property Name="Type" Type="Edm.String" />
         <Property Name="ReferenceId" Type="Edm.Guid" Nullable="false" />

@@ -1,0 +1,44 @@
+﻿@model Artsdatabanken.RL2021
+@{
+    ViewBag.category = @Model.Kategori;
+}
+
+@*
+    Codeblock from Innsynsløsninga 2021 by SN. 
+    Slightly modified by HEM for launch.
+*@
+
+<div class="page_section">
+    <h2>
+        Rødlistekategori: <partial name="/Views/Shared/_Category.cshtml" />
+    </h2>
+
+    @if (@ViewBag.glossary[@Model.Kategori] != null)
+    {
+        <p class="imaged_paragraph">
+            <span class="graphic_element @Model.Kategori">
+                @Model.Kategori
+            </span>
+            <span class="right_text">
+                <b>@ViewBag.glossary[@Model.Kategori]["tagline"]</b>
+                @ViewBag.glossary[@Model.Kategori]["description"]
+            </span>
+        </p>
+    }
+
+    @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
+    {
+
+        <p class="imaged_paragraph">
+            <span class="graphic_element material-icons utdodd">
+                <span class="material-icons">image_search</span>
+            </span>
+            <span class="right_text">
+                <b>@ViewBag.glossary["TroligUtdodd"]["tagline"]</b> @ViewBag.glossary["TroligUtdodd"]["description"]
+            </span>
+        </p>
+
+    }
+
+    <partial name="/Views/Shared/_Categorybar.cshtml" />
+</div>

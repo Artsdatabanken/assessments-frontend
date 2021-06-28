@@ -1,5 +1,14 @@
 ﻿<!-- Add  category-selected to active tab -->
 @model Artsdatabanken.RL2021
+@*
+    Category-displayer, purely visual css-element. 
+    Needs the corresponding css to be viewed properly.
+    CSS is in the file categorybar.css.
+    Re-made completely for launch 2021.
+
+    TODO: Mobile-friendly version.
+*@
+
 @{
     ViewBag.category = @Model.Kategori;
 }
@@ -17,52 +26,60 @@
             return "notactive";
         }
     }
-} 
+}
 
 
-<h2>@ViewBag.category</h2>
 
-<ul class="category_displayer">
-    <li class="category_rl start_line">
-        <div class="category_item  @setActive("RE", @ViewBag.category)">
-            RE <span>Regionalt utdødd</span>
-        </div>
-        <div class="topbar_label">Rødlistet</div>
-    </li>
-    <li class="category_rl category_threatened start_line">
-        <div class="category_item  @setActive("CR", @ViewBag.category)">
-            CR <span>Kritisk truet</span>
-        </div>
-        <div class="bottombar_label">Truet</div>
-    </li>
-    <li class="category_rl category_threatened">
-        <div class="category_item  @setActive("EN", @ViewBag.category)">
-            EN <span>Sterkt truet</span>
-        </div>
-    </li>
-    <li class="category_rl category_threatened stop_line">
-        <div class="category_item  @setActive("VU", @ViewBag.category)">
-            VU <span>Sårbar</span>
-        </div>
-    </li>
-    <li class="category_rl ">
-        <div class="category_item  @setActive("VU", @ViewBag.category)">
-            NT <span>Nær<br />truet</span>
-        </div>
-    </li>
-    <li class="category_rl stop_line">
-        <div class="category_item  @setActive("DD", @ViewBag.category)">
-            DD <span>Data- mangel</span>
-        </div>
-    </li>
-    <li>
-        <div class="category_item  @setActive("LC", @ViewBag.category)">
-            LC <span>Livs- kraftig</span>
-        </div>
-    </li>
-    <li>
-        <div class="category_item  @setActive("NE", @ViewBag.category)">
-            NE <span>Ikke vurdert</span>
-        </div>
-    </li>
-</ul>
+<div class="page_section">
+
+    <ul class="category_displayer">
+        <li class="category_rl start_line">
+            <div class="category_item  RE @setActive("RE", @ViewBag.category)">
+                RE <span>Regionalt utdødd</span>
+            </div>
+            <div class="topbar_label">Rødlistet</div>
+        </li>
+        <li class="category_rl category_threatened start_line">
+            <div class="category_item CR  @setActive("CR", @ViewBag.category)">
+                CR <span>Kritisk truet</span>
+            </div>
+            <div class="bottombar_label">Truet</div>
+        </li>
+        <li class="category_rl category_threatened">
+            <div class="category_item  EN @setActive("EN", @ViewBag.category)">
+                EN <span>Sterkt truet</span>
+            </div>
+        </li>
+        <li class="category_rl category_threatened stop_line">
+            <div class="category_item  VU @setActive("VU", @ViewBag.category)">
+                VU <span>Sårbar</span>
+            </div>
+        </li>
+        <li class="category_rl ">
+            <div class="category_item  NT @setActive("NT", @ViewBag.category)">
+                NT <span>Nær<br />truet</span>
+            </div>
+        </li>
+        <li class="category_rl stop_line">
+            <div class="category_item  DD @setActive("DD", @ViewBag.category)">
+                DD <span>Data- mangel</span>
+            </div>
+        </li>
+        <li>
+            <div class="category_item  LC @setActive("LC", @ViewBag.category)">
+                LC <span>Livs- kraftig</span>
+            </div>
+        </li>
+        <li>
+            <div class="category_item  NA @setActive("NA", @ViewBag.category)">
+                NA <span>Ikke egnet</span>
+            </div>
+        </li>
+        <li>
+            <div class="category_item  NE @setActive("NE", @ViewBag.category)">
+                NE <span>Ikke vurdert</span>
+            </div>
+        </li>
+
+    </ul>
+</div>

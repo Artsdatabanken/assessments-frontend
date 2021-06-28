@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Artsdatabanken.Rl2021Fylkesforekomst>
+@{
+
+    var tableVisible = true;
+    string GetState(int regionState)
+    {
+        switch (regionState)
+        {
+            case 0: return "kjent";
+            case 1: return "antatt";
+            case 2: return "";
+            case 3: return "antatt utdødd";
+            case 4: return "utdødd";
+        }
+        return string.Empty;
+    }
+    var check = "&#10003;";
+}
+
+<div class="section">
+    <h2>Fylkesforekomster</h2>
+
+    <div class="mobileHeader section">
+        <h3>
+            Regioner og havområder - popup (Midlertidig faktaboks)
+            @*
+                <button class="detaljer" onclick="togglePopup('regionerMobile')"><img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" /></button>
+            *@
+        </h3>
+        <div class="popuptext" id="regionerMobile">
+            @*<button class="closePopup" onclick="closePopup('regionerMobile')"> x </button>*@
+            <div>
+                En art er forekommende i et (historisk) fylke eller havområde hvis én eller flere vesentlige deler av livssyklusen foregår der.
+                "Kjent" forekomst betyr kjent eller sannsynlig nåværende forekomst, "antatt" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser), "antatt utdødd" forekomst brukes når arten muligens har dødd ut lokalt, mens "utdødd forekomst" brukes når det er overveiende sannsynlig at arten har dødd ut.
+                Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Av praktiske årsaker presenteres forekomster etter fylkesinndelingen per 1. januar 2018.
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div id="fylkesforekomst" class="collapse in">
+            @if (tableVisible)
+            {
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width:100px;">Regioner og havområder</th>
+                            <th>Kjent</th>
+                            <th>Antatt</th>
+                            <th>Utdødd</th>
+                            <th>Antatt utdødd</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: speciesSearchResult">
+                        @foreach (var region in Model)
+                        {
+                            <tr>
+                                @*<td class="adjustable"><i><span data-bind="text: scientificName"></span></i><span data-bind="text: author"></span></td>*@
+                                <td class="adjustable">@region.Fylke</td>
+                                <td class="adjustable">@Html.Raw(region.State == 0 ? check : string.Empty)</td>
+                                <td class="adjustable">@Html.Raw(region.State == 1 ? check : string.Empty)</td>
+                                <td class="adjustable">@Html.Raw(region.State == 4 ? check : string.Empty)</td>
+                                <td class="adjustable">@Html.Raw(region.State == 3 ? check : string.Empty)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+             }
+            @if (!tableVisible)
+            {
+                <dl class="panel-body responsive condenced width160 unbold" id="map" data-bind="visible: !tableVisible" style="color: white">
+                    Her skal det være et kart
+                </dl>
+            }
+
+        </div>
+    </div>
+</div>
+

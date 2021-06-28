@@ -1,0 +1,59 @@
+﻿@model Artsdatabanken.RL2021MinMaxProbable;
+
+@{
+    Artsdatabanken.RL2021MinMaxProbable mmp = @Model;
+    var tag = "A";
+    string ending = "%";
+
+    var min = @mmp.Min;
+    var probable = @mmp.Probable;
+    var max = @mmp.Max;
+    var calc = @mmp.Calculated;
+
+
+    if(tag == "C2")
+    {
+        ending = "individer";
+    }else if (tag == "C2a(i)")
+    {
+        ending = "individ";
+        // TODO: Format for c2-whatnot
+        //@FormatNumber(mmp.Min)
+    }
+}
+
+
+MMP
+@*if (mmp != null)*@
+@if (!string.IsNullOrEmpty(mmp.Min) || !string.IsNullOrEmpty(mmp.Max) || !string.IsNullOrEmpty(mmp.Probable))
+{
+    <p class="mmp">
+
+        @if (!string.IsNullOrEmpty(@min))
+        {
+            <span>minimum: @min @ending</span>
+        }
+        @if (!string.IsNullOrEmpty(@probable))
+        {
+            <span>mest trolig: @probable %</span>
+        }
+        @if (!string.IsNullOrEmpty(@max))
+        {
+            <span>maksimum: @max %</span>
+        }
+
+    </p>
+
+    <span>
+        Hvilket gir beregnet reduksjon, med føre-var forbehold,
+        på: @calc @ending
+    </span>
+
+
+    <div>
+        @ViewBag.glossary["IUCN"]["description"]
+    </div>
+
+    
+}
+

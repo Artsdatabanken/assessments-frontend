@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 31.05.2021 12:34:37
+// Generation date: 09.06.2021 13:36:07
 namespace Artsdatabanken
 {
         /// <summary>
@@ -257,28 +257,6 @@ namespace Artsdatabanken
         public RL2021Single(global::Microsoft.OData.Client.DataServiceQuerySingle<RL2021> query)
             : base(query) {}
 
-        /// <summary>
-        /// There are no comments for Påvirkningsfaktorer in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorer")]
-        public virtual global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.RL2021Pavirkningsfaktor> Påvirkningsfaktorer
-        {
-            get
-            {
-                if (!this.IsComposable)
-                {
-                    throw new global::System.NotSupportedException("The previous function is not composable.");
-                }
-                if ((this._Påvirkningsfaktorer == null))
-                {
-                    this._Påvirkningsfaktorer = Context.CreateQuery<global::Artsdatabanken.RL2021Pavirkningsfaktor>(GetPath("Påvirkningsfaktorer"));
-                }
-                return this._Påvirkningsfaktorer;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.RL2021Pavirkningsfaktor> _Påvirkningsfaktorer;
     }
         /// <summary>
         /// There are no comments for RL2021 in the schema.
@@ -2887,6 +2865,28 @@ namespace Artsdatabanken
         partial void OnArtskartModelChanging(global::Artsdatabanken.RL2021ArtskartModel value);
         partial void OnArtskartModelChanged();
         /// <summary>
+        /// There are no comments for Property Påvirkningsfaktorer in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorer")]
+        public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> Påvirkningsfaktorer
+        {
+            get
+            {
+                return this._Påvirkningsfaktorer;
+            }
+            set
+            {
+                this.OnPåvirkningsfaktorerChanging(value);
+                this._Påvirkningsfaktorer = value;
+                this.OnPåvirkningsfaktorerChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor>();
+        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> value);
+        partial void OnPåvirkningsfaktorerChanged();
+        /// <summary>
         /// There are no comments for Property Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -3238,28 +3238,6 @@ namespace Artsdatabanken
         private global::System.Collections.ObjectModel.Collection<string> _Regioner = new global::System.Collections.ObjectModel.Collection<string>();
         partial void OnRegionerChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnRegionerChanged();
-        /// <summary>
-        /// There are no comments for Property Påvirkningsfaktorer in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorer")]
-        public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> Påvirkningsfaktorer
-        {
-            get
-            {
-                return this._Påvirkningsfaktorer;
-            }
-            set
-            {
-                this.OnPåvirkningsfaktorerChanging(value);
-                this._Påvirkningsfaktorer = value;
-                this.OnPåvirkningsfaktorerChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor>();
-        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> value);
-        partial void OnPåvirkningsfaktorerChanged();
     }
         /// <summary>
         /// There are no comments for Rodliste2015Single in the schema.
@@ -6812,73 +6790,11 @@ namespace Artsdatabanken
         partial void OnExcludeGbifChanged();
     }
         /// <summary>
-        /// There are no comments for RL2021PavirkningsfaktorSingle in the schema.
-        /// </summary>
-    [global::Microsoft.OData.Client.OriginalNameAttribute("RL2021PavirkningsfaktorSingle")]
-    public partial class RL2021PavirkningsfaktorSingle : global::Microsoft.OData.Client.DataServiceQuerySingle<RL2021Pavirkningsfaktor>
-    {
-        /// <summary>
-        /// Initialize a new RL2021PavirkningsfaktorSingle object.
-        /// </summary>
-        public RL2021PavirkningsfaktorSingle(global::Microsoft.OData.Client.DataServiceContext context, string path)
-            : base(context, path) {}
-
-        /// <summary>
-        /// Initialize a new RL2021PavirkningsfaktorSingle object.
-        /// </summary>
-        public RL2021PavirkningsfaktorSingle(global::Microsoft.OData.Client.DataServiceContext context, string path, bool isComposable)
-            : base(context, path, isComposable) {}
-
-        /// <summary>
-        /// Initialize a new RL2021PavirkningsfaktorSingle object.
-        /// </summary>
-        public RL2021PavirkningsfaktorSingle(global::Microsoft.OData.Client.DataServiceQuerySingle<RL2021Pavirkningsfaktor> query)
-            : base(query) {}
-
-    }
-        /// <summary>
         /// There are no comments for RL2021Pavirkningsfaktor in the schema.
         /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("Id")]
     [global::Microsoft.OData.Client.OriginalNameAttribute("RL2021Pavirkningsfaktor")]
-    public partial class RL2021Pavirkningsfaktor : global::Microsoft.OData.Client.BaseEntityType
+    public partial class RL2021Pavirkningsfaktor
     {
-        /// <summary>
-        /// Create a new RL2021Pavirkningsfaktor object.
-        /// </summary>
-        /// <param name="ID">Initial value of Id.</param>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public static RL2021Pavirkningsfaktor CreateRL2021Pavirkningsfaktor(string ID)
-        {
-            RL2021Pavirkningsfaktor rL2021Pavirkningsfaktor = new RL2021Pavirkningsfaktor();
-            rL2021Pavirkningsfaktor.Id = ID;
-            return rL2021Pavirkningsfaktor;
-        }
-        /// <summary>
-        /// There are no comments for Property Id in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
-        public virtual string Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this._Id = value;
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Id;
-        partial void OnIdChanging(string value);
-        partial void OnIdChanged();
         /// <summary>
         /// There are no comments for Property OverordnetTittel in the schema.
         /// </summary>
@@ -8365,29 +8281,6 @@ namespace Artsdatabanken
                 { "ArtsID", artsID }
             };
             return new global::Artsdatabanken.Redlist2006AssessmentSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
-        }
-        /// <summary>
-        /// Get an entity of type global::Artsdatabanken.RL2021Pavirkningsfaktor as global::Artsdatabanken.RL2021PavirkningsfaktorSingle specified by key from an entity set
-        /// </summary>
-        /// <param name="_source">source entity set</param>
-        /// <param name="_keys">dictionary with the names and values of keys</param>
-        public static global::Artsdatabanken.RL2021PavirkningsfaktorSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.RL2021Pavirkningsfaktor> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
-        {
-            return new global::Artsdatabanken.RL2021PavirkningsfaktorSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
-        }
-        /// <summary>
-        /// Get an entity of type global::Artsdatabanken.RL2021Pavirkningsfaktor as global::Artsdatabanken.RL2021PavirkningsfaktorSingle specified by key from an entity set
-        /// </summary>
-        /// <param name="_source">source entity set</param>
-        /// <param name="id">The value of id</param>
-        public static global::Artsdatabanken.RL2021PavirkningsfaktorSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.RL2021Pavirkningsfaktor> _source,
-            string id)
-        {
-            global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
-            {
-                { "Id", id }
-            };
-            return new global::Artsdatabanken.RL2021PavirkningsfaktorSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
         /// There are no comments for Search in the schema.

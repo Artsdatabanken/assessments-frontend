@@ -1,0 +1,35 @@
+﻿@model string;
+@{
+    var category = @Model;
+}
+
+@*
+    SEE example by searching species Carex elata
+*@
+
+@functions{
+    public string setActive(string first, string second)
+    {
+        if (first == second)
+        {
+            return "active";
+        }
+        else
+        {
+            return "notactive";
+        }
+    }
+}
+
+@if(!string.IsNullOrEmpty(category)&&@category!="-") { 
+@category
+<div class="category-line">
+    <div class=@setActive("CR", category) style="background-color: #990013">CR</div>
+    <div class=@setActive("EN", category) style="background-color: #D80024">EN</div>
+    <div class=@setActive("VU", category) style="background-color: #FF4C29">VU</div>
+    <div class=@setActive("NT", category) style="background-color: #F36C21">NT</div>
+    <div class=@setActive("LC", category) style="background-color: #60BDb1">LC</div>
+</div>
+}
+
+

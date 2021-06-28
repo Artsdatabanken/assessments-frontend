@@ -6,6 +6,10 @@
     color:hotpink;
 }
 
+.fact_box{
+    color:grey;
+}
+
 .ingress p {
     font-size: 22.5px;
 }

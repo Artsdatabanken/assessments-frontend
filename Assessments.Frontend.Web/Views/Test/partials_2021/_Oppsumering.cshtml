@@ -17,7 +17,7 @@
         {
             <h3>Gjeldende kriterier</h3>
             <p><b>@Model.Kriterier</b></p>
-            <p>@ViewBag.glossary["oneliners"]["gjeldendekriterier"]</p>
+            <p class="fact_box">@ViewBag.glossary["oneliners"]["gjeldendekriterier"]</p>
         }
 
         <!-- Kategori endring -->
@@ -62,10 +62,8 @@
         @if (Model.Generasjonslengde != "" && Model.Generasjonslengde != null)
         {
             <h3>Generasjonstid: @assessment.Generasjonslengde år</h3>
-            <p>
-                Generasjonstid er gjennomsnittsalder for alle reproduserende individ, dvs. foreldre til alle avkom i populasjonen.
-                Om generasjonstiden hos en populasjon har blitt endret som følge av høsting el.lign. skal den naturlige generasjonslengden før høsting benyttes.
-                Generasjonstid og generasjonslengde brukes synonymt.
+            <p class="fact_box">
+                @ViewBag.glossary["generasjonstid"]["description"]
             </p>
         }
     </div><!-- End section -->

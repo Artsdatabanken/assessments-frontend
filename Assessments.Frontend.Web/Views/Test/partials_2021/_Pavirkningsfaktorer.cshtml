@@ -1,115 +1,71 @@
-﻿@model IEnumerable< Artsdatabanken.RL2021Pavirkningsfaktor>
+﻿@model IEnumerable<Artsdatabanken.RL2021Pavirkningsfaktor>
 
-<div class="section">
+
+
+@functions {
+    public string iconfinder(string factor)
+    {
+        @if (factor == "Forurensning")
+        {
+            return"delete_sweep";
+        }
+        else if (factor == "Tilfeldig mortalitet")
+        {
+            return "free_cancellation";
+        }
+        else
+        {
+            return "delete";
+        }
+    }
+}
+
+
+<div class="page_section">
     <h2>Påvirkningsfaktorer </h2>
 
-    <div class="section">
-        <h3>Informasjonsboks - popup (midlertidig faktaboks)</h3>
-        @*
-        <button class="detaljer" onclick="togglePopup('påvirkningMobile')">
-            <img src="/Content/images/help_outline.png" style="height: 18px" alt="Question mark" />
-        </button>
-        *@
-
-        <!-- Start Popup -->
-        <div class="popuptext" id="påvirkningMobile">
-
-            @*<button class="closePopup" onclick="closePopup('påvirkningMobile')"> x </button>*@
-            <div>
-                Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt.
-                Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. "Påvirkning på habitat" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten.
-                For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.
-            </div>
-        </div><!-- End Popup -->
-
-    </div><!-- End section -->
+    <p class="fact_box"> @ViewBag.glossary["oneliners"]["Påvirkningsfaktorer"]</p>
 
     <div class="factors">
+        @{foreach (var pfaktor in Model)
+            {
+                <div>
+                    <h3>Beskrivelse</h3>
 
-        <table class="data-table">
-            <!-- TODO: Fiks responsivitet i tabeller. Eksempel på https://artsdatabanken.no/Rodliste2015/rodliste2015/Norge/99338 -->
-            <thead>
-                <tr>
-                    <th>Beskrivelse</th>
-                    <th>Omfang</th>
-                    <th>Alvorlighetsgrad</th>
-                    <th>Tidspunkt</th>
-                </tr>
-            </thead>
-            @{string currentøverste = "";
-                foreach (var pfaktor in Model)
-                {
-
-                    <tr class="pavirknings-boks">
-
-                        <td>
-                            <span class="mobile-table-header">Beskrivelse</span>
-                            @if (pfaktor.ØversteTittel != currentøverste)
-                            {
-                                currentøverste = pfaktor.ØversteTittel;
-                                @pfaktor.ØversteTittel
-                            }
-
-
-                            <!-- TODO: Figure out what this is, as it appears to be the same as that above?
-                    GOOD SPECIES EXAMPLE: Najas flexilis -->
-                            @{
-                                string ReplaceLastOccurrence(string Source, string Find, string Replace)
-                                {
-                                    // Example of pre-formatted look: Landbruk > Jordbruk - Drenering (grøfting)
-                                    // Splits string at keypoints and turns into list.
-                                    int place = Source.LastIndexOf(Find);
-                                    if (place == -1)
-                                        return Source;
-                                    string result = Source.Remove(place, Find.Length).Insert(place, Replace);
-                                    return result;
-                                }
-
-                                var tittels = ReplaceLastOccurrence(pfaktor.Tittel, " - ", " > ").Split(">").Select(s => s.Trim()).ToList();
-                                for (var n = 0; n < tittels.Count; n++)
-                                {
-                                    <span class="table-subtittel">@tittels[n]</span>
-                                }
-                            }
-
-                        </td>
-                        <td>
-
-                            @{
-                                string omfang = pfaktor.Omfang.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
-                                <span class="mobile-table-header">Omfang</span>
-                                @Html.Raw(omfang)
-
-                            }
-                        </td>
-                        <td>
-                            @{
-                                string alvorlighetsgrad = pfaktor.Alvorlighetsgrad.Replace("< ", "<&nbsp;").Replace("> ", ">&nbsp;");
-                                <span class="mobile-table-header">Alvorlighetsgrad</span>
-                                @Html.Raw(alvorlighetsgrad)
-                            }
-                        </td>
-                        <td>
-                            <span class="mobile-table-header">Tidspunkt</span>
-                            @pfaktor.Tidspunkt
-                        </td>
+                    <div class="stats_element_container">
+                        <span class="stats_element material-icons">
+                            <span>
+                                    @iconfinder(@pfaktor.ØversteTittel)
+                            </span>
+                        </span>
+                    </div>
+                    <span class="stats_element_text">
+                        @pfaktor.ØversteTittel
+                    </span>
 
 
 
+                    <hr />
+                    @pfaktor.Tittel
+                    <hr />
+                    @pfaktor.Forkortelse
+                </div>
 
-
-
-                    </tr>
-
-                }
+                <div>
+                    <h3>Omfang</h3>
+                    <span>@pfaktor.Omfang</span>
+                </div>
+                <div>
+                    <h3>Alvorlighetsgrad</h3>
+                    <span>@pfaktor.Alvorlighetsgrad</span>
+                </div>
+                <div>
+                    <h3>Tidspunkt</h3>
+                    <span class="mobile-table-header">Tidspunkt</span>
+                    @pfaktor.Tidspunkt
+                </div>
             }
+        }
 
-        </table>
     </div> <!-- end pavirkningsboks -->
 </div> <!-- end factors -->
-
-
-
-
-
-

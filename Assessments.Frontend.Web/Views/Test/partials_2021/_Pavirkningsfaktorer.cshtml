@@ -5,13 +5,57 @@
 @functions {
     public string iconfinder(string factor)
     {
-        @if (factor == "Forurensning")
+        @if (factor == "Ingen trussel")
         {
             return"delete_sweep";
         }
+        else if (factor == "Påvirkning på habitat")
+        {
+            return "close";
+        }
+        else if (factor == "Forurensning")
+        {
+            return "recycling";
+        }
+        else if (factor == "Høsting")
+        {
+            return "gradient";
+        }
         else if (factor == "Tilfeldig mortalitet")
         {
-            return "free_cancellation";
+            return "close";
+        }
+        else if (factor == "Fremmede arter")
+        {
+            return "pest_control";
+        }
+        else if (factor == "Påvirkning fra stedegne arter")
+        {
+            return "nature";
+        }
+        else if (factor == "Klimatiske endringer")
+        {
+            return "cloud";
+        }
+        else if (factor == "Naturkatastrofer")
+        {
+            return "air";
+        }
+        else if (factor == "Menneskelig forstyrrelse")
+        {
+            return "engineering";
+        }
+        else if (factor == "Andre")
+        {
+            return "lens_blur";
+        }
+        else if (factor == "Ukjent")
+        {
+            return "lens_blur";
+        }
+        else if (factor == "Påvirkning utenfor Norge")
+        {
+            return "public";
         }
         else
         {
@@ -35,7 +79,7 @@
                     <div class="stats_element_container">
                         <span class="stats_element material-icons">
                             <span>
-                                    @iconfinder(@pfaktor.ØversteTittel)
+                                 @iconfinder(@pfaktor.ØversteTittel)
                             </span>
                         </span>
                     </div>

@@ -25,6 +25,6 @@ Nyttig lenke om man er ny til teknologien: https://docs.microsoft.com/en-us/aspn
 ## Deployment
 Deployment er delt i test og produksjon og skjer via github actions. Deployment til test skjer automatisk ved innsjekk av alle brancher som ikke er main/master. Ønsker du av en eller annen grunn å utelate din branch fra bygging/deployment til test, må du legge til denne i lista i fila: .github/workflows/test.yml formatet er altså mellomrom inn til - '!dinbranch'. 
 
-Dockerimage bygges og sendes til artdatabankens dockerhub:https://hub.docker.com/repository/docker/artsdatabanken/assessments-fe - det er foreløpig to tags, test og latest - henholdsvis test/produksjon. 
+Dockerimage bygges og sendes til artdatabankens dockerhub:https://hub.docker.com/repository/docker/artsdatabanken/assessments-fe - det er foreløpig to tags; test og latest - henholdsvis test/produksjon. 
 
 For å dytte ut gjeldende versjon til produksjon, gå til #crocotta og bruk kommandoen deploy assessments-fe - da hentes image med tag "latest" fra dockerhub. 

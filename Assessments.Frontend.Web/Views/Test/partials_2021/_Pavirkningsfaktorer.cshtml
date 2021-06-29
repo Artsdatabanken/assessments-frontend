@@ -7,11 +7,11 @@
     {
         @if (factor == "Ingen trussel")
         {
-            return"delete_sweep";
+            return "delete_sweep";
         }
         else if (factor == "Påvirkning på habitat")
         {
-            return "close";
+            return "nature";
         }
         else if (factor == "Forurensning")
         {
@@ -73,40 +73,82 @@
     <div class="factors">
         @{foreach (var pfaktor in Model)
             {
-                <div>
-                    <h3>Beskrivelse</h3>
-
+                <div class="fake_table_header">
                     <div class="stats_element_container">
                         <span class="stats_element material-icons">
-                            <span>
-                                 @iconfinder(@pfaktor.ØversteTittel)
+                            <span class="paavirk">
+                                @iconfinder(@pfaktor.ØversteTittel)
                             </span>
                         </span>
                     </div>
-                    <span class="stats_element_text">
-                        @pfaktor.ØversteTittel
-                    </span>
-
-
-
-                    <hr />
-                    @pfaktor.Tittel
-                    <hr />
-                    @pfaktor.Forkortelse
+                    <div class="stats_element_text topalign">
+                        <h3>@pfaktor.ØversteTittel</h3>
+                        <b>@pfaktor.Tittel - @pfaktor.Forkortelse</b>
+                    </div>
                 </div>
+                <div class="fake_table">
+                    <div>
+                        <h3>Omfang</h3>
 
-                <div>
-                    <h3>Omfang</h3>
-                    <span>@pfaktor.Omfang</span>
-                </div>
-                <div>
-                    <h3>Alvorlighetsgrad</h3>
-                    <span>@pfaktor.Alvorlighetsgrad</span>
-                </div>
-                <div>
-                    <h3>Tidspunkt</h3>
-                    <span class="mobile-table-header">Tidspunkt</span>
-                    @pfaktor.Tidspunkt
+                        @{
+
+                            var omfang_text = @pfaktor.Omfang;
+                            var omfang_numbers = "";
+
+                            if(omfang_text.Contains("("))
+                            {
+                                // Split out the percentages etc. from the main string.
+                                // Percentages appear to always be enclosed in "()".
+                                omfang_text = omfang_text.Split("(")[0];
+                                omfang_numbers = @pfaktor.Omfang.Split("(")[1].Replace(")", "");
+                            }
+
+                        }
+                        <span>@omfang_text</span><br />
+                        @if (omfang_text.Contains("("))
+                            {
+                                <span class="stats_element">
+                                    <span>@omfang_numbers</span>
+                                </span>
+                            }
+                        
+
+                    </div>
+                    <div class="sideborders">
+                        <h3>Alvorlighetsgrad</h3>
+
+                        @{
+                            var alv_text = @pfaktor.Alvorlighetsgrad;
+                            var alv_perc = "";
+                            var alv_numbers = "";
+
+                            if (alv_text.Contains("("))
+                            {
+                                // Split out the percentages etc. from the main string.
+                                // Percentages appear to always be enclosed in "()".
+                                alv_text = alv_text.Split("(")[0];
+                                alv_perc = @pfaktor.Alvorlighetsgrad.Split("(")[1].Replace(")", "");
+                                if (@pfaktor.Alvorlighetsgrad.Contains("%"))
+                                {
+                                    alv_numbers = alv_perc.Split("%")[1];
+                                    alv_perc = alv_perc.Split("%")[0] + "%";
+                                }
+                            }
+                        }
+                        <span>@alv_text</span><br />
+                        @if (@pfaktor.Alvorlighetsgrad.Contains("("))
+                        {
+                            <span class="stats_element">
+                                <span>@alv_perc</span>
+                            </span>
+                            <span>@alv_numbers</span>
+                        }
+
+                    </div>
+                    <div>
+                        <h3>Tidspunkt</h3>
+                        @pfaktor.Tidspunkt
+                    </div>
                 </div>
             }
         }

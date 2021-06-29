@@ -24,13 +24,57 @@
     width: calc(100% - 80px);
 }
 
+.topalign {
+    vertical-align: top;
+}
+
+.stats_element_text h3{
+    margin:0;
+}
+
+.fake_table_header {
+    background: #f1f1f1;
+    border: 1px solid lightgray;
+    border-bottom:0;
+    padding:5px;
+    padding-top:10px;
+}
+
+.fake_table {
+    display: flex;
+    background: #fcfcfc;
+    margin-bottom: 20px;
+    padding: 10px;
+    padding-bottom: 20px;
+    border: 1px solid lightgray;
+}
+
+.fake_table div{
+    flex:1;
+    padding:5px;
+    text-align:center
+}
+
+    .fake_table .sideborders {
+        border-left: 1px solid #d3d3d3;
+        border-right: 1px solid #d3d3d3;
+    }
+
+
 .stats_element {
     width: 64px;
     height: 64px;
-    border-radius:2px;
+    border-radius: 2px;
     background: #4c4a48;
     display: flex;
     align-items: center;
+}
+
+.fake_table .stats_element {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    background: #f1f1f1;
 }
 
 .stats_element span {
@@ -38,6 +82,16 @@
     width:100%;
     display:block;
     text-align: center;
+}
+
+.fake_table .stats_element span{
+   
+    color: black;
+}
+
+.stats_element .paavirk {
+    padding-top: 9px;
+    font-size: 35pt;
 }
 
 .graphic_element {

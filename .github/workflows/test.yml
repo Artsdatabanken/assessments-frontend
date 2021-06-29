@@ -31,6 +31,6 @@ jobs:
         password: ${{ secrets.ORG_DOCKER_PASS }}
         dockerfile: Assessments.Frontend.Web/Dockerfile
         repository: artsdatabanken/assessments-fe
-        tags: latest
+        tags: test
     - name: Post to slack
       run: .github/workflows/slack.sh ${{ secrets.POST_SLACK }}

@@ -116,14 +116,8 @@
     text-align: center;
 }
 
-.fake_table .stats_element span{
-   
+.fake_table .stats_element span{   
     color: black;
-}
-
-.stats_element .paavirk {
-    padding-top: 9px;
-    font-size: 35pt;
 }
 
 .graphic_element {

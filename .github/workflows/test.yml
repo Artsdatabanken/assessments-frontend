@@ -3,13 +3,10 @@ name: .NET Core
 
 on:
   push:
-    branches: 
-      - '!main'
-      - '!master'
-  pull_request:
-    branches: 
-      - '!main'
-      - '!master'
+    branches-ignore:
+      - master
+      - main 
+   
 jobs:
   build:
 

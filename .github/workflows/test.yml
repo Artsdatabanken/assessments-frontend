@@ -1,0 +1,39 @@
+
+name: .NET Core
+
+on:
+  push:
+    branches: 
+      - '!main'
+      - '!master'
+  pull_request:
+    branches: 
+      - '!main'
+      - '!master'
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.102
+    - name: Install dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Test
+      run: dotnet test --no-restore --verbosity normal
+    - name: Build and push Docker image api
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.ORG_DOCKER_USER }}
+        password: ${{ secrets.ORG_DOCKER_PASS }}
+        dockerfile: Assessments.Frontend.Web/Dockerfile
+        repository: artsdatabanken/assessments-fe
+        tags: latest
+    - name: Post to slack
+      run: .github/workflows/slack.sh ${{ secrets.POST_SLACK }}

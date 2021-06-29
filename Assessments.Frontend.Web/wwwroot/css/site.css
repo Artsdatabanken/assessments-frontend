@@ -55,10 +55,42 @@
     text-align:center
 }
 
-    .fake_table .sideborders {
-        border-left: 1px solid #d3d3d3;
-        border-right: 1px solid #d3d3d3;
+.fake_table .sideborders {
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+}
+
+@media only screen and (max-width: 650px) {
+    .fake_table {
+        flex-direction:column;
     }
+
+    .fake_table .sideborders {
+        border:0px;
+        margin-top:5px;
+        margin-bottom:5px;
+        border-top: 1px solid #d3d3d3;
+        border-bottom: 1px solid #d3d3d3;
+    }
+
+    .fake_table_header{
+        text-align:center;
+    }
+
+    .fake_table_header .stats_element_container {
+        display: block;
+        margin: auto;
+        margin-bottom:10px;
+    }
+
+    .fake_table_header .stats_element_text{
+        width:100%;
+    }
+
+    .stats_element_container{
+        vertical-align:top;
+    }
+}
 
 
 .stats_element {

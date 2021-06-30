@@ -10,61 +10,67 @@
     string ImpactIcon(string mainTitle, string subtitle)
     {
 
+        // 0. ingen trussel / no factor  has no image, as it is never displayed.
         if (mainTitle == "Forurensing")
-        {
+        { // 2 
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "forurensing" + ".png";
         }
         else if (mainTitle == "Høsting")
-        {
+        { // 3 
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "høsting" + ".png";
         }
+        else if (mainTitle == "Tilfeldig mortalitet")
+        { // 4 
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png"; // TODO - MISSING
+        }
+        else if (mainTitle == "Fremmede arter")
+        { // 5
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "fremmedarter" + ".png";
+        }
+        else if (subtitle.Contains("stedegne"))
+        { // 6 "påvirkning fra stedegne arter"
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "stedegne" + ".png";
+        }
         else if (mainTitle == "Klimatiske endringer")
-        {
+        { // 7
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "klima" + ".png";
         }
+        else if (mainTitle == "Naturkatastrofer")
+        { // 8
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "naturkatastrofe" + ".png";
+        }
         else if (mainTitle == "Menneskelig forstyrrelse")
-        {
+        { // 9
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "menneske" + ".png";
         }
         else if (mainTitle == "Andre")
-        {
+        { // 10
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "andre" + ".png";
         }
-        else if (mainTitle == "Naturkatastrofer")
-        {
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "naturkatastrofe" + ".png";
+        else if (subtitle.Contains("Ukjent"))
+        { // 11 ukjent
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png";
         }
-        else if (mainTitle == "Fremmede arter")
-        {
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "fremmedarter" + ".png";
-        }
-        else if (mainTitle.Contains("stedegne"))
-        {
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "stedegne" + ".png";
-        }
-        else if (subtitle.Contains("stedegne"))
-        {
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "stedegne" + ".png";
-        }
-        else if (subtitle.Contains("terrestrisk"))
-        {
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "terrestisk" + ".png";
+        else if (subtitle.Contains("Påvirkning utenfor Norge"))
+        { // 12
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png"; // TODO - MISSING
         }
         else if (subtitle.Contains("Landbruk"))
-        {
+        { // 1.1 habitat
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "landbruk" + ".png";
         }
+        else if (subtitle.Contains("terrestrisk"))
+        { // 1.2 habitat
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "terrestisk" + ".png";
+        }
         else if (subtitle.Contains("limnisk"))
-        {
+        { // 1.3 habitat
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "limnisk" + ".png";
         }
-        else if (subtitle.Contains("marin"))
-        {
+        else if (subtitle.Contains("marine"))
+        {// 1.4 habitat
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "marint" + ".png";
         }
-
-
-
         else
         {
             return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png";

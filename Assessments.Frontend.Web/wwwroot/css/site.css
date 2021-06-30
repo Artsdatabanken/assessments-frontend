@@ -116,14 +116,8 @@
     text-align: center;
 }
 
-.fake_table .stats_element span{
-   
+.fake_table .stats_element span{   
     color: black;
-}
-
-.stats_element .paavirk {
-    padding-top: 9px;
-    font-size: 35pt;
 }
 
 .graphic_element {
@@ -574,3 +568,11 @@ td {
     .category-line .active {
         border: 4px solid black;
     }
+
+.fylke span {
+    display: inline-block;
+    padding: 5px;
+    background: lightgrey;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}

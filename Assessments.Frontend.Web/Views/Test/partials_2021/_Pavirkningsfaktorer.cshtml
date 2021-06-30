@@ -1,6 +1,87 @@
 ﻿@model IEnumerable<Artsdatabanken.RL2021Pavirkningsfaktor>
 
 
+@functions{
+
+    // Snatched and shortened from 2018 nature red list,
+    // Not yet ready for use. 
+    // https://github.com/Artsdatabanken/RodlisteNaturtyper2018visning/blob/2019update/Views/Home/Partials/impact-factors.cshtml
+
+    string ImpactIcon(string mainTitle, string subtitle)
+    {
+
+        // 0. ingen trussel / no factor  has no image, as it is never displayed.
+        if (mainTitle == "Forurensing")
+        { // 2 
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "forurensing" + ".png";
+        }
+        else if (mainTitle == "Høsting")
+        { // 3 
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "høsting" + ".png";
+        }
+        else if (mainTitle == "Tilfeldig mortalitet")
+        { // 4 
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png"; // TODO - MISSING
+        }
+        else if (mainTitle == "Fremmede arter")
+        { // 5
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "fremmedarter" + ".png";
+        }
+        else if (subtitle.Contains("stedegne"))
+        { // 6 "påvirkning fra stedegne arter"
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "stedegne" + ".png";
+        }
+        else if (mainTitle == "Klimatiske endringer")
+        { // 7
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "klima" + ".png";
+        }
+        else if (mainTitle == "Naturkatastrofer")
+        { // 8
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "naturkatastrofe" + ".png";
+        }
+        else if (mainTitle == "Menneskelig forstyrrelse")
+        { // 9
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "menneske" + ".png";
+        }
+        else if (mainTitle == "Andre")
+        { // 10
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "andre" + ".png";
+        }
+        else if (subtitle.Contains("Ukjent"))
+        { // 11 ukjent
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png";
+        }
+        else if (subtitle.Contains("Påvirkning utenfor Norge"))
+        { // 12
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png"; // TODO - MISSING
+        }
+        else if (subtitle.Contains("Landbruk"))
+        { // 1.1 habitat
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "landbruk" + ".png";
+        }
+        else if (subtitle.Contains("terrestrisk"))
+        { // 1.2 habitat
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "terrestisk" + ".png";
+        }
+        else if (subtitle.Contains("limnisk"))
+        { // 1.3 habitat
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "limnisk" + ".png";
+        }
+        else if (subtitle.Contains("marine"))
+        {// 1.4 habitat
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "marint" + ".png";
+        }
+        else
+        {
+            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png";
+        }
+    }
+
+    }
+}
+
+
+
 
 @functions {
     public string iconfinder(string factor)
@@ -75,15 +156,12 @@
             {
                 <div class="fake_table_header">
                     <div class="stats_element_container">
-                        <span class="stats_element material-icons">
-                            <span class="paavirk">
-                                @iconfinder(@pfaktor.ØversteTittel)
-                            </span>
-                        </span>
+                        <img src="@ImpactIcon(@pfaktor.ØversteTittel,@pfaktor.Tittel)" class="paavirk"/>
                     </div>
                     <div class="stats_element_text topalign">
                         <h3>@pfaktor.ØversteTittel</h3>
                         <b>@pfaktor.Tittel - @pfaktor.Forkortelse</b>
+                       
                     </div>
                 </div>
                 <div class="fake_table">
@@ -95,7 +173,7 @@
                             var omfang_text = @pfaktor.Omfang;
                             var omfang_numbers = "";
 
-                            if(omfang_text.Contains("("))
+                            if (omfang_text.Contains("("))
                             {
                                 // Split out the percentages etc. from the main string.
                                 // Percentages appear to always be enclosed in "()".
@@ -106,11 +184,11 @@
                         }
                         <span>@omfang_text</span><br />
                         @if (omfang_text.Contains("("))
-                            {
+                        {
                                 <span class="stats_element">
                                     <span>@omfang_numbers</span>
                                 </span>
-                            }
+                        }
                         
 
                     </div>
@@ -150,7 +228,7 @@
                         @pfaktor.Tidspunkt
                     </div>
                 </div>
-            }
+                            }
         }
 
     </div> <!-- end pavirkningsboks -->

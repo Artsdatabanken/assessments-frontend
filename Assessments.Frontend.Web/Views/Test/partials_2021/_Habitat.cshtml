@@ -1,0 +1,66 @@
+﻿@*
+    Habitat was re-made completely for launch 2021.
+    Existing inline text is re-used from innsynet 2021, which
+    has been moved to the json resource file for this partial.
+
+    TODO: Mobile-friendly version.
+*@
+
+@{
+    @model IEnumerable<string>
+    Dictionary<string, Dictionary<string, string>> dictObj = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
+}
+
+
+<div class="page_section">
+    <h2>Habitat</h2>
+
+
+    @foreach (var modelelement in Model)
+    {
+        <span>
+            - @modelelement
+
+        </span>
+        <br />
+    }
+    <hr />
+
+    <div class="habitat_container">
+        @foreach (var key in dictObj.Keys)
+        {
+            <div class="habitat_element @Html.Raw(Model.Contains(key) ? "active" : "inactive")">
+                <div class="habitat_icon">
+                    @if (@dictObj[key]["image"] != null)
+                    {
+                        <img src=@dictObj[key]["image"] />
+                    }
+                </div>
+                @if (@dictObj[key]["name"] != null)
+                {
+                    <h4>@dictObj[key]["name"]</h4>
+                }
+                <span class="habitat_exists">@Html.Raw(Model.Contains(key) ? "Artens habitat" : "Ikke hovedhabitat")</span>
+
+                @if (@dictObj[key]["description"] != null)
+                {
+                    <p>
+                        @{
+                            // Obtaining HTML from json. Probably not the safest due to code injection,
+                            // but as nothing is posted - where's the harm?
+                            string str = @dictObj[key]["description"];
+                        }
+                        @Html.Raw(str)
+
+                    </p>
+                }
+
+
+            </div>
+
+            <br />
+        }
+    </div>
+
+</div>
+

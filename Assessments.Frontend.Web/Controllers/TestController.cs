@@ -121,6 +121,9 @@ namespace Assessments.Frontend.Web.Controllers
                         string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
                         ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
 
+                        string json_habitat = System.IO.File.ReadAllText("Views/Test/partials_2021/habitat.json");
+                        ViewBag.habitat = Newtonsoft.Json.Linq.JObject.Parse(json_habitat);
+
                         return View("SpeciesAssessment2021", RL2021);
 
                     case 2015:

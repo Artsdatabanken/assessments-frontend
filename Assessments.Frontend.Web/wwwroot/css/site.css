@@ -707,9 +707,11 @@ td {
     float:right;
 }
 
-.criteria_conclusions{
-    max-width:100%;
-    max-height:600px;
-    overflow-y:auto;
-    display:block;
+.criteria_conclusions {
+    max-width: 100%;
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: block;
 }
+

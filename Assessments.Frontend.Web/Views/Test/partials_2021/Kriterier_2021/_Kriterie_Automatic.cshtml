@@ -12,19 +12,11 @@
     var keys = @ViewBag.kriterier["criteria"]["keys"];
 }
 
-<div class="section">
-    <h2>
-        Kriterier:
-        @foreach (var el in criterialist)
-        {
-            <b>@el</b>
-        }
-    </h2>
-
+<div class="criteria_container">
 
     @foreach (string element in keys)
     {
-<div class="tempsection">
+<div class="">
     @{
         var elementname = @ViewBag.kriterier["criteria"][@element];
         var subcriteria = elementname["subcriteria"];
@@ -60,8 +52,7 @@
 
     <!-- OUTER CRITERIA LOOP ( A, B, C, D, E) -->
 
-    <h2>@element</h2>
-    <h3>@elementname["summary"]</h3>
+    <h3>@element - @elementname["summary"]</h3>
     <span class="description">@elementname["description"]</span>
     <hr />
     @if (elementname["content"] != null)

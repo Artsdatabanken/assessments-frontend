@@ -4,12 +4,16 @@
 @{
     Artsdatabanken.RL2021 assessment = Model;
 
-    var kriteriedok =  assessment.Kriteriedokumentasjon;
-    kriteriedok = "<p>" + kriteriedok.Replace("<br/>", "</p><p>")+"<p>";
-    kriteriedok = kriteriedok.Replace("<b>", "<h3>");
-    kriteriedok = kriteriedok.Replace("</b>", "</h3>");
-    kriteriedok = kriteriedok.Replace("<u>", "<h3>");
-    kriteriedok = kriteriedok.Replace("</u>", "</h3>");
+    var kriteriedok = assessment.Kriteriedokumentasjon;
+    @if (!string.IsNullOrWhiteSpace(kriteriedok))
+    {
+        kriteriedok = "<p>" + kriteriedok.Replace("<br/>", "</p><p>") + "<p>";
+        kriteriedok = kriteriedok.Replace("<b>", "<h3>");
+        kriteriedok = kriteriedok.Replace("</b>", "</h3>");
+        kriteriedok = kriteriedok.Replace("<u>", "<h3>");
+        kriteriedok = kriteriedok.Replace("</u>", "</h3>");
+    }
+
 
 
 }
@@ -22,11 +26,11 @@
     <div class="page_section">
         <h2>Oppsumering av vurdering</h2>
 
-     <!-- Kategori Kriteriedokumentasjon -->
+        <!-- Kategori Kriteriedokumentasjon -->
         @if (!string.IsNullOrWhiteSpace(assessment.Kriteriedokumentasjon))
         {
-             @Html.Raw(kriteriedok)
-           
+            @Html.Raw(kriteriedok)
+
         }
 
         @if (Model.Kategori.IndexOf("CR") >= 0 || Model.Kategori.IndexOf("EN") >= 0 || Model.Kategori.IndexOf("VU") >= 0 || Model.Kategori.IndexOf("NT") >= 0)
@@ -42,7 +46,7 @@
             <div>Kategori endret til: @assessment.KategoriEndretTil</div>
         }
 
-       
+
 
         <!-- Kategori UtdøingSterktPåvirket -->
         @if (assessment.UtdøingSterktPåvirket == "Ja")

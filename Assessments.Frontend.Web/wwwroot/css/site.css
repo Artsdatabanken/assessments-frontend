@@ -709,9 +709,16 @@ td {
 
 .criteria_conclusions {
     max-width: 100%;
-    
     overflow-y: auto;
     overflow-x: hidden;
     display: block;
 }
 
+.criteria_outer_level.active {
+    color: black;
+}
+
+.criteria_outer_level.inactive {
+    opacity:0.3;
+    font-size:9pt;
+}

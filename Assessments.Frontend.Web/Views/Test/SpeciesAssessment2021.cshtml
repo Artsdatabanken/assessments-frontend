@@ -2,9 +2,8 @@
 @{
     ViewBag.Title = @Model.VurdertVitenskapeligNavn;
     var naturtypehovedenhet = @Model.NaturtypeHovedenhet;
+    string ekspertgruppe = char.ToLower(@Model.Ekspertgruppe[0]) + @Model.Ekspertgruppe.Substring(1);
 }
-
-
 
 <div class="breadcrumbs">
     <ul>
@@ -33,7 +32,8 @@
         <partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" /> 
        
         <span class="byline">
-            Ikke publisert ennå
+            Ekspertkomité for @ekspertgruppe,  @(ekspertgruppe == "spretthaler" || ekspertgruppe == "spretthaler (Svalbard)" ? @Model.SistVurdertAr : 2021)
+
         </span>
     </div>
 
@@ -41,9 +41,7 @@
         <div class="ingress">
             <p>
                 Arten har blitt vurdert til <partial name="/Views/Shared/_Category.cshtml" /> i vurderingen fra
-                Norsk rødliste for arter 2021.
-                Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter,
-                og er en oversikt over arter som har risiko for å dø ut fra Norge.
+                Norsk rødliste for arter 2021 som viser arters risiko for å dø ut fra Norge.
             </p>
         </div>
 
@@ -58,12 +56,7 @@
             @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
         }
 
-
-        @if (Model.Fylkesforekomster != null)
-        {
-            @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster.cshtml", Model.Fylkesforekomster)
-        }
-
+        <partial name="/Views/Test/partials_2021/_Fylkesforekomster.cshtml" />
 
         @if (Model.NaturtypeHovedenhet != null)
         {

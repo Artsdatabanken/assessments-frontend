@@ -1,0 +1,117 @@
+﻿@*
+    Habitat was re-made completely for launch 2021.
+    Existing inline text is re-used from innsynet 2021, which
+    has been moved to the json resource file for this partial.
+
+    TODO: Mobile-friendly version.
+    TODO: one section for where species exist, one for others. others needn't be as big and flashy.
+*@
+
+@{
+    @model IEnumerable<string>
+    Dictionary<string, Dictionary<string, string>> dictObj = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
+}
+
+<div class="page_section">
+    <h2>Habitat</h2>
+    <h3>Arten finnes i disse habitatene</h3>
+    <div class="habitat_container">
+        @foreach (var modelelement in Model)
+        {
+            // THIS CODE BELOW IS DUPLICATED IN THE PARAGRAPH BELOW IT.
+            // SHOULD BE ITS OWN PARTIAL OR FUNCTION.
+            <div class="habitat_element">
+                
+                @if (@ViewBag.habitat[modelelement]["name"] != null)
+                {
+                    <h4 class="habitat_header">@ViewBag.habitat[modelelement]["name"]</h4>
+                }
+                <div class="habitat_icon">
+                    @if (@ViewBag.habitat[modelelement]["image"] != null)
+                    {
+                        <img src=@ViewBag.habitat[modelelement]["image"] />
+                    }
+                </div>
+                @if (@ViewBag.habitat[modelelement]["description"] != null)
+                {
+                    <p>
+                        @{
+                            // Obtaining HTML from json. Probably not the safest due to code injection,
+                            // but as nothing is posted - where's the harm?
+                            string str = @ViewBag.habitat[modelelement]["description"];
+                        }
+                        @Html.Raw(str)
+
+                    </p>
+                    <button class="seemore" onclick="expand(this)">
+                        <span class="more">Se mer</span>
+                        <span class="less">Se mindre</span>
+                    </button>
+                }
+            </div>
+        }
+        <div />
+        <h3>Andre habitat</h3><br />
+        <div class="habitat_container">
+
+            @foreach (var key in dictObj.Keys)
+            {
+                @if (!Model.Contains(key))
+                {
+                    <div class="habitat_element @Html.Raw(Model.Contains(key) ? "active" : "inactive")">
+                         @if (@dictObj[key]["name"] != null)
+                        {
+                            <h4 class="habitat_header">@dictObj[key]["name"]</h4>
+                        }
+                        <div class="habitat_icon">
+                            @if (@dictObj[key]["image"] != null)
+                            {
+                                <img src=@dictObj[key]["image"] />
+                            }
+                        </div>
+                       
+
+
+                        @if (@dictObj[key]["description"] != null)
+                        {
+                            <p>
+                                @{
+                                    // Obtaining HTML from json. Probably not the safest due to code injection,
+                                    // but as nothing is posted - where's the harm?
+                                    string str = @dictObj[key]["description"];
+                                }
+                                @Html.Raw(str)
+                            </p>
+                            <button class="seemore" onclick="expand(this)">
+                                <span class="more">Se mer</span>
+                                <span class="less">Se mindre</span>
+                            </button>
+                        }
+
+                    </div>
+                }
+            }
+
+        </div>
+
+    </div>
+
+
+
+    <script>
+
+    var seemorebuttons = document.getElementsByClassName('seemore');
+
+    function expand(element) {       
+        console.log("element clicketty,", element);
+        if (element.parentElement.classList.contains("expanded")) {
+            element.parentElement.classList.remove("expanded");
+        } else {
+            element.parentElement.classList.add("expanded");
+        }
+        
+        //popup
+    }
+
+
+    </script>

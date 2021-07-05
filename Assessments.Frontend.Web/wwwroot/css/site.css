@@ -588,19 +588,15 @@ td {
     margin-bottom: 10px;
     text-align: center;
     position: relative;
+    border: 1px solid lightgrey;
+    max-height: 250px;
+    padding-bottom: 10px;
 }
 
 .habitat_element.inactive{
-    opacity:0.5;
+    max-width:125px;
 }
 
-.habitat_element.inactive {
-    border: 4px solid lightgrey;
-}
-
-.habitat_element.active {
-    border: 4px solid #4c4a48;
-}
 .habitat_icon{
     height:160px;
     width:100%;
@@ -616,12 +612,16 @@ td {
     overflow: hidden;
 }
 
-.habitat_exists {
+.habitat_header {
     position: absolute;
     background: white;
-    padding: 5px;
+    padding: 2px;
+    padding-top:5px;
+    padding-bottom:5px;
     top: 0;
     left: 0;
+    width:100%;
+    font-size:10pt;
 }
 
 .habitat_element p, .habitat_element a {
@@ -633,4 +633,40 @@ td {
 .habitat_element.active p, 
 .habitat_element.active a {
     color: #4c4a48;
+}
+
+.habitat_element p {
+    padding: 5px;
+    padding-bottom: 0; /* otherwise trunctuation line clamp is wrong */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom:5px;
+}
+
+.habitat_element .seemore {
+    display:block;
+    margin:auto;
+}
+
+.habitat_element.expanded{
+    max-height:100%;
+}
+
+.habitat_element.expanded p {
+    -webkit-line-clamp: initial;
+    -webkit-box-orient: vertical;
+    overflow: auto;
+    height: auto;
+}
+
+.habitat_element .more,
+.habitat_element.expanded .less {
+    display: block;
+}
+
+.habitat_element.expanded .more,
+.habitat_element .less {
+    display: none;
 }

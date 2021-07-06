@@ -22,14 +22,16 @@
 
     @foreach (string key in dictObj.Keys)
     {
-
         @if (@dictObj[key] != null)
         {
-            <div class="criteria_outer_level @Html.Raw(@Model.Kriterier.Contains(key) ? "active" : "inactive")">
-                <h3>@key - @dictObj[key]["summary"]</h3>
-                <span class="description">@dictObj[key]["description"]</span>
-           
-            </div>
+            <!-- OUTER LOOP ( THE MAIN CRITERIA) -->
+    <div class="criteria_outer_level @Html.Raw(@Model.Kriterier.Contains(key) ? "active" : "inactive")">
+        <h3>@key - @dictObj[key]["summary"]</h3>
+        <span class="description">@dictObj[key]["description"]</span>
+
+
+       
+    </div>
             <hr />
         }
     }

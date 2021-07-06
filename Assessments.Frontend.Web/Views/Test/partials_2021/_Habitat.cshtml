@@ -9,7 +9,7 @@
 
 @{
     @model IEnumerable<string>
-    Dictionary<string, Dictionary<string, string>> dictObj = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
+    Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
 }
 
 <div class="page_section">
@@ -54,31 +54,31 @@
         <h3>Andre habitat</h3><br />
         <div class="habitat_container">
 
-            @foreach (var key in dictObj.Keys)
+            @foreach (var key in habitat.Keys)
             {
                 @if (!Model.Contains(key))
                 {
                     <div class="habitat_element @Html.Raw(Model.Contains(key) ? "active" : "inactive")">
-                         @if (@dictObj[key]["name"] != null)
+                         @if (@habitat[key]["name"] != null)
                         {
-                            <h4 class="habitat_header">@dictObj[key]["name"]</h4>
+                            <h4 class="habitat_header">@habitat[key]["name"]</h4>
                         }
                         <div class="habitat_icon">
-                            @if (@dictObj[key]["image"] != null)
+                            @if (@habitat[key]["image"] != null)
                             {
-                                <img src=@dictObj[key]["image"] />
+                                <img src=@habitat[key]["image"] />
                             }
                         </div>
                        
 
 
-                        @if (@dictObj[key]["description"] != null)
+                        @if (@habitat[key]["description"] != null)
                         {
                             <p>
                                 @{
                                     // Obtaining HTML from json. Probably not the safest due to code injection,
                                     // but as nothing is posted - where's the harm?
-                                    string str = @dictObj[key]["description"];
+                                    string str = @habitat[key]["description"];
                                 }
                                 @Html.Raw(str)
                             </p>

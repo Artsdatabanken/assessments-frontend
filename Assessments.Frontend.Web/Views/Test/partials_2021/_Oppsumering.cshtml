@@ -3,6 +3,16 @@
 
 @{
     Artsdatabanken.RL2021 assessment = Model;
+
+    var kriteriedok = assessment.Kriteriedokumentasjon;
+    @if (!string.IsNullOrWhiteSpace(kriteriedok))
+    {
+        kriteriedok = "<p>" + kriteriedok.Replace("<br/>", "</p><p>") + "<p>";
+        kriteriedok = kriteriedok.Replace("<b>", "<h3>");
+        kriteriedok = kriteriedok.Replace("</b>", "</h3>");
+        kriteriedok = kriteriedok.Replace("<u>", "<h3>");
+        kriteriedok = kriteriedok.Replace("</u>", "</h3>");
+    }
 }
 
 
@@ -13,49 +23,72 @@
     <div class="page_section">
         <h2>Oppsumering av vurdering</h2>
 
-        @if (Model.Kategori.IndexOf("CR") >= 0 || Model.Kategori.IndexOf("EN") >= 0 || Model.Kategori.IndexOf("VU") >= 0 || Model.Kategori.IndexOf("NT") >= 0)
-        {
-            <h3>Gjeldende kriterier</h3>
-            <p><b>@Model.Kriterier</b></p>
-            <p class="fact_box">@ViewBag.glossary["oneliners"]["gjeldendekriterier"]</p>
-        }
-
-        <!-- Kategori endring -->
-        @if (!string.IsNullOrEmpty(Model.KategoriEndretTil) && Model.UtdøingSterktPåvirket == "Ja")
-        {<h3>Kategori-endring</h3>
-            <div>Kategori endret til: @assessment.KategoriEndretTil</div>
-        }
-
         <!-- Kategori Kriteriedokumentasjon -->
         @if (!string.IsNullOrWhiteSpace(assessment.Kriteriedokumentasjon))
         {
-            <h3>Kriteriedokumentasjon</h3>
-            <div id="kriteriedokumentasjon" class="panel-preview">
-                @Html.Raw(assessment.Kriteriedokumentasjon)
+            <div class="expert_assesment">
+        
+                <div class="quoatedtext">
+                     <span class="quotationmark">“</span>
+                    @Html.Raw(kriteriedok)
+                <span class="quotationmark">”</span>
+                </div>
+        
+                <div class="quoatedtext_side">
+
+
+                    <!-- Kategori endring -->
+                    @if (!string.IsNullOrEmpty(Model.KategoriEndretTil) && Model.UtdøingSterktPåvirket == "Ja")
+                    {<h3>Kategori-endring</h3>
+                        <div>Kategori endret til: @assessment.KategoriEndretTil</div>
+                    }
+
+                    <!-- Kategori UtdøingSterktPåvirket -->
+                    @if (assessment.UtdøingSterktPåvirket == "Ja")
+                    {
+                        <h3>Er utdøing Påvirket?</h3>
+                        @if (assessment.KategoriEndretFra != "" && assessment.KategoriEndretFra != null)
+                        {
+                            <div class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert fra @assessment.KategoriEndretFra til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</div>
+                        }
+                        else
+                        {
+                            <div class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</div>
+                        }
+
+                    }
+
+                    <!-- Årsak til endring av kategori -->
+                    @if (!string.IsNullOrWhiteSpace(assessment.ÅrsakTilEndringAvKategori) && assessment.KategoriFraForrigeListe != assessment.Kategori)
+                    {
+                        <h3>Årsak til endring av kategori</h3>
+                        <div class="changedCat">Kategorien er endret fra forrige rødlistevurdering på grunn av @assessment.ÅrsakTilEndringAvKategori.Substring(0, 1).ToLower()@assessment.ÅrsakTilEndringAvKategori.Substring(1).</div>
+                    }
+
+                    @if (Model.Kategori.IndexOf("CR") >= 0 || Model.Kategori.IndexOf("EN") >= 0 || Model.Kategori.IndexOf("VU") >= 0 || Model.Kategori.IndexOf("NT") >= 0)
+                    {
+                        <h3>Gjeldende kriterier</h3>
+                        <p><b>@Model.Kriterier</b></p>
+                        <p class="fact_box">@ViewBag.glossary["oneliners"]["gjeldendekriterier"]</p>
+                    }
+
+                    <span class="criteria_conclusions">
+                        <partial name="/Views/Test/partials_2021/Kriterier_2021/_Kriterie_Automatic.cshtml" />
+                    </span>
+
+
+                </div>
             </div>
-        }
-
-        <!-- Kategori UtdøingSterktPåvirket -->
-        @if (assessment.UtdøingSterktPåvirket == "Ja")
-        {
-            <h3>Er utdøing Påvirket?</h3>
-            @if (assessment.KategoriEndretFra != "" && assessment.KategoriEndretFra != null)
-            {
-                <div class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert fra @assessment.KategoriEndretFra til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</div>
-            }
-            else
-            {
-                <div class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</div>
-            }
 
         }
 
-        <!-- Årsak til endring av kategori -->
-        @if (!string.IsNullOrWhiteSpace(assessment.ÅrsakTilEndringAvKategori) && assessment.KategoriFraForrigeListe != assessment.Kategori)
-        {
-            <h3>Årsak til endring av kategori</h3>
-            <div class="changedCat">Kategorien er endret fra forrige rødlistevurdering på grunn av @assessment.ÅrsakTilEndringAvKategori.Substring(0, 1).ToLower()@assessment.ÅrsakTilEndringAvKategori.Substring(1).</div>
-        }
+       
+
+       
+
+
+
+       
 
 
         <!-- Generasjonslengde-->

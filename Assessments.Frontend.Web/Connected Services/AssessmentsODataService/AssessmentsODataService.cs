@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// Generation date: 09.06.2021 13:36:07
+// Generation date: 06.07.2021 08:39:22
 namespace Artsdatabanken
 {
         /// <summary>
@@ -102,24 +102,6 @@ namespace Artsdatabanken
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private global::Microsoft.OData.Client.DataServiceQuery<Rodliste2015> _Redlist2015;
         /// <summary>
-        /// There are no comments for SpeciesAssessments2015 in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("SpeciesAssessments2015")]
-        public virtual global::Microsoft.OData.Client.DataServiceQuery<SpeciesAssessment2015> SpeciesAssessments2015
-        {
-            get
-            {
-                if ((this._SpeciesAssessments2015 == null))
-                {
-                    this._SpeciesAssessments2015 = base.CreateQuery<SpeciesAssessment2015>("SpeciesAssessments2015");
-                }
-                return this._SpeciesAssessments2015;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::Microsoft.OData.Client.DataServiceQuery<SpeciesAssessment2015> _SpeciesAssessments2015;
-        /// <summary>
         /// There are no comments for Redlist2006 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -138,6 +120,42 @@ namespace Artsdatabanken
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private global::Microsoft.OData.Client.DataServiceQuery<Redlist2006Assessment> _Redlist2006;
         /// <summary>
+        /// There are no comments for Species2021 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Species2021")]
+        public virtual global::Microsoft.OData.Client.DataServiceQuery<SpeciesAssessment2021> Species2021
+        {
+            get
+            {
+                if ((this._Species2021 == null))
+                {
+                    this._Species2021 = base.CreateQuery<SpeciesAssessment2021>("Species2021");
+                }
+                return this._Species2021;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::Microsoft.OData.Client.DataServiceQuery<SpeciesAssessment2021> _Species2021;
+        /// <summary>
+        /// There are no comments for RedlistExpertGroup in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("RedlistExpertGroup")]
+        public virtual global::Microsoft.OData.Client.DataServiceQuery<EkspertgruppeMedlem> RedlistExpertGroup
+        {
+            get
+            {
+                if ((this._RedlistExpertGroup == null))
+                {
+                    this._RedlistExpertGroup = base.CreateQuery<EkspertgruppeMedlem>("RedlistExpertGroup");
+                }
+                return this._RedlistExpertGroup;
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::Microsoft.OData.Client.DataServiceQuery<EkspertgruppeMedlem> _RedlistExpertGroup;
+        /// <summary>
         /// There are no comments for Redlist2021 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -154,20 +172,28 @@ namespace Artsdatabanken
             base.AddObject("Redlist2015", rodliste2015);
         }
         /// <summary>
-        /// There are no comments for SpeciesAssessments2015 in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public virtual void AddToSpeciesAssessments2015(SpeciesAssessment2015 speciesAssessment2015)
-        {
-            base.AddObject("SpeciesAssessments2015", speciesAssessment2015);
-        }
-        /// <summary>
         /// There are no comments for Redlist2006 in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         public virtual void AddToRedlist2006(Redlist2006Assessment redlist2006Assessment)
         {
             base.AddObject("Redlist2006", redlist2006Assessment);
+        }
+        /// <summary>
+        /// There are no comments for Species2021 in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        public virtual void AddToSpecies2021(SpeciesAssessment2021 speciesAssessment2021)
+        {
+            base.AddObject("Species2021", speciesAssessment2021);
+        }
+        /// <summary>
+        /// There are no comments for RedlistExpertGroup in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        public virtual void AddToRedlistExpertGroup(EkspertgruppeMedlem ekspertgruppeMedlem)
+        {
+            base.AddObject("RedlistExpertGroup", ekspertgruppeMedlem);
         }
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
         private abstract class GeneratedEdmModel
@@ -334,6 +360,28 @@ namespace Artsdatabanken
         private int _Id;
         partial void OnIdChanging(int value);
         partial void OnIdChanged();
+        /// <summary>
+        /// There are no comments for Property Påvirkningsfaktorer in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorer")]
+        public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> Påvirkningsfaktorer
+        {
+            get
+            {
+                return this._Påvirkningsfaktorer;
+            }
+            set
+            {
+                this.OnPåvirkningsfaktorerChanging(value);
+                this._Påvirkningsfaktorer = value;
+                this.OnPåvirkningsfaktorerChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor>();
+        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> value);
+        partial void OnPåvirkningsfaktorerChanged();
         /// <summary>
         /// There are no comments for Property LastUpdatedOn in the schema.
         /// </summary>
@@ -2865,28 +2913,6 @@ namespace Artsdatabanken
         partial void OnArtskartModelChanging(global::Artsdatabanken.RL2021ArtskartModel value);
         partial void OnArtskartModelChanged();
         /// <summary>
-        /// There are no comments for Property Påvirkningsfaktorer in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Påvirkningsfaktorer")]
-        public virtual global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> Påvirkningsfaktorer
-        {
-            get
-            {
-                return this._Påvirkningsfaktorer;
-            }
-            set
-            {
-                this.OnPåvirkningsfaktorerChanging(value);
-                this._Påvirkningsfaktorer = value;
-                this.OnPåvirkningsfaktorerChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> _Påvirkningsfaktorer = new global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor>();
-        partial void OnPåvirkningsfaktorerChanging(global::System.Collections.ObjectModel.Collection<global::Artsdatabanken.RL2021Pavirkningsfaktor> value);
-        partial void OnPåvirkningsfaktorerChanged();
-        /// <summary>
         /// There are no comments for Property Referanser in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
@@ -3238,6 +3264,211 @@ namespace Artsdatabanken
         private global::System.Collections.ObjectModel.Collection<string> _Regioner = new global::System.Collections.ObjectModel.Collection<string>();
         partial void OnRegionerChanging(global::System.Collections.ObjectModel.Collection<string> value);
         partial void OnRegionerChanged();
+    }
+        /// <summary>
+        /// There are no comments for RL2021Pavirkningsfaktor in the schema.
+        /// </summary>
+    [global::Microsoft.OData.Client.OriginalNameAttribute("RL2021Pavirkningsfaktor")]
+    public partial class RL2021Pavirkningsfaktor
+    {
+        /// <summary>
+        /// There are no comments for Property Id in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
+        public virtual string Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                this.OnIdChanging(value);
+                this._Id = value;
+                this.OnIdChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Id;
+        partial void OnIdChanging(string value);
+        partial void OnIdChanged();
+        /// <summary>
+        /// There are no comments for Property OverordnetTittel in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("OverordnetTittel")]
+        public virtual string OverordnetTittel
+        {
+            get
+            {
+                return this._OverordnetTittel;
+            }
+            set
+            {
+                this.OnOverordnetTittelChanging(value);
+                this._OverordnetTittel = value;
+                this.OnOverordnetTittelChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _OverordnetTittel;
+        partial void OnOverordnetTittelChanging(string value);
+        partial void OnOverordnetTittelChanged();
+        /// <summary>
+        /// There are no comments for Property Beskrivelse in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Beskrivelse")]
+        public virtual string Beskrivelse
+        {
+            get
+            {
+                return this._Beskrivelse;
+            }
+            set
+            {
+                this.OnBeskrivelseChanging(value);
+                this._Beskrivelse = value;
+                this.OnBeskrivelseChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Beskrivelse;
+        partial void OnBeskrivelseChanging(string value);
+        partial void OnBeskrivelseChanged();
+        /// <summary>
+        /// There are no comments for Property Tidspunkt in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Tidspunkt")]
+        public virtual string Tidspunkt
+        {
+            get
+            {
+                return this._Tidspunkt;
+            }
+            set
+            {
+                this.OnTidspunktChanging(value);
+                this._Tidspunkt = value;
+                this.OnTidspunktChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Tidspunkt;
+        partial void OnTidspunktChanging(string value);
+        partial void OnTidspunktChanged();
+        /// <summary>
+        /// There are no comments for Property Omfang in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Omfang")]
+        public virtual string Omfang
+        {
+            get
+            {
+                return this._Omfang;
+            }
+            set
+            {
+                this.OnOmfangChanging(value);
+                this._Omfang = value;
+                this.OnOmfangChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Omfang;
+        partial void OnOmfangChanging(string value);
+        partial void OnOmfangChanged();
+        /// <summary>
+        /// There are no comments for Property Alvorlighetsgrad in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Alvorlighetsgrad")]
+        public virtual string Alvorlighetsgrad
+        {
+            get
+            {
+                return this._Alvorlighetsgrad;
+            }
+            set
+            {
+                this.OnAlvorlighetsgradChanging(value);
+                this._Alvorlighetsgrad = value;
+                this.OnAlvorlighetsgradChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Alvorlighetsgrad;
+        partial void OnAlvorlighetsgradChanging(string value);
+        partial void OnAlvorlighetsgradChanged();
+        /// <summary>
+        /// There are no comments for Property Tittel in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Tittel")]
+        public virtual string Tittel
+        {
+            get
+            {
+                return this._Tittel;
+            }
+            set
+            {
+                this.OnTittelChanging(value);
+                this._Tittel = value;
+                this.OnTittelChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Tittel;
+        partial void OnTittelChanging(string value);
+        partial void OnTittelChanged();
+        /// <summary>
+        /// There are no comments for Property ØversteTittel in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ØversteTittel")]
+        public virtual string ØversteTittel
+        {
+            get
+            {
+                return this._ØversteTittel;
+            }
+            set
+            {
+                this.OnØversteTittelChanging(value);
+                this._ØversteTittel = value;
+                this.OnØversteTittelChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _ØversteTittel;
+        partial void OnØversteTittelChanging(string value);
+        partial void OnØversteTittelChanged();
+        /// <summary>
+        /// There are no comments for Property Forkortelse in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Forkortelse")]
+        public virtual string Forkortelse
+        {
+            get
+            {
+                return this._Forkortelse;
+            }
+            set
+            {
+                this.OnForkortelseChanging(value);
+                this._Forkortelse = value;
+                this.OnForkortelseChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Forkortelse;
+        partial void OnForkortelseChanging(string value);
+        partial void OnForkortelseChanged();
     }
         /// <summary>
         /// There are no comments for Rodliste2015Single in the schema.
@@ -5066,167 +5297,6 @@ namespace Artsdatabanken
         partial void OnNaturtypeHovedenhetChanged();
     }
         /// <summary>
-        /// There are no comments for SpeciesAssessment2015Single in the schema.
-        /// </summary>
-    [global::Microsoft.OData.Client.OriginalNameAttribute("SpeciesAssessment2015Single")]
-    public partial class SpeciesAssessment2015Single : global::Microsoft.OData.Client.DataServiceQuerySingle<SpeciesAssessment2015>
-    {
-        /// <summary>
-        /// Initialize a new SpeciesAssessment2015Single object.
-        /// </summary>
-        public SpeciesAssessment2015Single(global::Microsoft.OData.Client.DataServiceContext context, string path)
-            : base(context, path) {}
-
-        /// <summary>
-        /// Initialize a new SpeciesAssessment2015Single object.
-        /// </summary>
-        public SpeciesAssessment2015Single(global::Microsoft.OData.Client.DataServiceContext context, string path, bool isComposable)
-            : base(context, path, isComposable) {}
-
-        /// <summary>
-        /// Initialize a new SpeciesAssessment2015Single object.
-        /// </summary>
-        public SpeciesAssessment2015Single(global::Microsoft.OData.Client.DataServiceQuerySingle<SpeciesAssessment2015> query)
-            : base(query) {}
-
-    }
-        /// <summary>
-        /// There are no comments for SpeciesAssessment2015 in the schema.
-        /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::Microsoft.OData.Client.Key("Id")]
-    [global::Microsoft.OData.Client.OriginalNameAttribute("SpeciesAssessment2015")]
-    public partial class SpeciesAssessment2015 : global::Microsoft.OData.Client.BaseEntityType
-    {
-        /// <summary>
-        /// Create a new SpeciesAssessment2015 object.
-        /// </summary>
-        /// <param name="ID">Initial value of Id.</param>
-        /// <param name="scientificNameId">Initial value of ScientificNameId.</param>
-        /// <param name="assessmentYear">Initial value of AssessmentYear.</param>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        public static SpeciesAssessment2015 CreateSpeciesAssessment2015(string ID, int scientificNameId, int assessmentYear)
-        {
-            SpeciesAssessment2015 speciesAssessment2015 = new SpeciesAssessment2015();
-            speciesAssessment2015.Id = ID;
-            speciesAssessment2015.ScientificNameId = scientificNameId;
-            speciesAssessment2015.AssessmentYear = assessmentYear;
-            return speciesAssessment2015;
-        }
-        /// <summary>
-        /// There are no comments for Property Id in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
-        public virtual string Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this._Id = value;
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Id;
-        partial void OnIdChanging(string value);
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for Property ScientificNameId in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ScientificNameId")]
-        public virtual int ScientificNameId
-        {
-            get
-            {
-                return this._ScientificNameId;
-            }
-            set
-            {
-                this.OnScientificNameIdChanging(value);
-                this._ScientificNameId = value;
-                this.OnScientificNameIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private int _ScientificNameId;
-        partial void OnScientificNameIdChanging(int value);
-        partial void OnScientificNameIdChanged();
-        /// <summary>
-        /// There are no comments for Property ScientificName in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ScientificName")]
-        public virtual string ScientificName
-        {
-            get
-            {
-                return this._ScientificName;
-            }
-            set
-            {
-                this.OnScientificNameChanging(value);
-                this._ScientificName = value;
-                this.OnScientificNameChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _ScientificName;
-        partial void OnScientificNameChanging(string value);
-        partial void OnScientificNameChanged();
-        /// <summary>
-        /// There are no comments for Property AssessmentYear in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("AssessmentYear")]
-        public virtual int AssessmentYear
-        {
-            get
-            {
-                return this._AssessmentYear;
-            }
-            set
-            {
-                this.OnAssessmentYearChanging(value);
-                this._AssessmentYear = value;
-                this.OnAssessmentYearChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private int _AssessmentYear;
-        partial void OnAssessmentYearChanging(int value);
-        partial void OnAssessmentYearChanged();
-        /// <summary>
-        /// There are no comments for Property AssessmentContext in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("AssessmentContext")]
-        public virtual string AssessmentContext
-        {
-            get
-            {
-                return this._AssessmentContext;
-            }
-            set
-            {
-                this.OnAssessmentContextChanging(value);
-                this._AssessmentContext = value;
-                this.OnAssessmentContextChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _AssessmentContext;
-        partial void OnAssessmentContextChanging(string value);
-        partial void OnAssessmentContextChanged();
-    }
-        /// <summary>
         /// There are no comments for Redlist2006AssessmentSingle in the schema.
         /// </summary>
     [global::Microsoft.OData.Client.OriginalNameAttribute("Redlist2006AssessmentSingle")]
@@ -6250,6 +6320,344 @@ namespace Artsdatabanken
         partial void OnOriginalUrlChanged();
     }
         /// <summary>
+        /// There are no comments for SpeciesAssessment2021Single in the schema.
+        /// </summary>
+    [global::Microsoft.OData.Client.OriginalNameAttribute("SpeciesAssessment2021Single")]
+    public partial class SpeciesAssessment2021Single : global::Microsoft.OData.Client.DataServiceQuerySingle<SpeciesAssessment2021>
+    {
+        /// <summary>
+        /// Initialize a new SpeciesAssessment2021Single object.
+        /// </summary>
+        public SpeciesAssessment2021Single(global::Microsoft.OData.Client.DataServiceContext context, string path)
+            : base(context, path) {}
+
+        /// <summary>
+        /// Initialize a new SpeciesAssessment2021Single object.
+        /// </summary>
+        public SpeciesAssessment2021Single(global::Microsoft.OData.Client.DataServiceContext context, string path, bool isComposable)
+            : base(context, path, isComposable) {}
+
+        /// <summary>
+        /// Initialize a new SpeciesAssessment2021Single object.
+        /// </summary>
+        public SpeciesAssessment2021Single(global::Microsoft.OData.Client.DataServiceQuerySingle<SpeciesAssessment2021> query)
+            : base(query) {}
+
+    }
+        /// <summary>
+        /// There are no comments for SpeciesAssessment2021 in the schema.
+        /// </summary>
+    /// <KeyProperties>
+    /// Id
+    /// </KeyProperties>
+    [global::Microsoft.OData.Client.Key("Id")]
+    [global::Microsoft.OData.Client.OriginalNameAttribute("SpeciesAssessment2021")]
+    public partial class SpeciesAssessment2021 : global::Microsoft.OData.Client.BaseEntityType
+    {
+        /// <summary>
+        /// Create a new SpeciesAssessment2021 object.
+        /// </summary>
+        /// <param name="ID">Initial value of Id.</param>
+        /// <param name="scientificNameId">Initial value of ScientificNameId.</param>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        public static SpeciesAssessment2021 CreateSpeciesAssessment2021(int ID, int scientificNameId)
+        {
+            SpeciesAssessment2021 speciesAssessment2021 = new SpeciesAssessment2021();
+            speciesAssessment2021.Id = ID;
+            speciesAssessment2021.ScientificNameId = scientificNameId;
+            return speciesAssessment2021;
+        }
+        /// <summary>
+        /// There are no comments for Property Id in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Id")]
+        public virtual int Id
+        {
+            get
+            {
+                return this._Id;
+            }
+            set
+            {
+                this.OnIdChanging(value);
+                this._Id = value;
+                this.OnIdChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private int _Id;
+        partial void OnIdChanging(int value);
+        partial void OnIdChanged();
+        /// <summary>
+        /// There are no comments for Property ScientificNameId in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ScientificNameId")]
+        public virtual int ScientificNameId
+        {
+            get
+            {
+                return this._ScientificNameId;
+            }
+            set
+            {
+                this.OnScientificNameIdChanging(value);
+                this._ScientificNameId = value;
+                this.OnScientificNameIdChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private int _ScientificNameId;
+        partial void OnScientificNameIdChanging(int value);
+        partial void OnScientificNameIdChanged();
+        /// <summary>
+        /// There are no comments for Property ScientificName in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("ScientificName")]
+        public virtual string ScientificName
+        {
+            get
+            {
+                return this._ScientificName;
+            }
+            set
+            {
+                this.OnScientificNameChanging(value);
+                this._ScientificName = value;
+                this.OnScientificNameChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _ScientificName;
+        partial void OnScientificNameChanging(string value);
+        partial void OnScientificNameChanged();
+    }
+        /// <summary>
+        /// There are no comments for EkspertgruppeMedlemSingle in the schema.
+        /// </summary>
+    [global::Microsoft.OData.Client.OriginalNameAttribute("EkspertgruppeMedlemSingle")]
+    public partial class EkspertgruppeMedlemSingle : global::Microsoft.OData.Client.DataServiceQuerySingle<EkspertgruppeMedlem>
+    {
+        /// <summary>
+        /// Initialize a new EkspertgruppeMedlemSingle object.
+        /// </summary>
+        public EkspertgruppeMedlemSingle(global::Microsoft.OData.Client.DataServiceContext context, string path)
+            : base(context, path) {}
+
+        /// <summary>
+        /// Initialize a new EkspertgruppeMedlemSingle object.
+        /// </summary>
+        public EkspertgruppeMedlemSingle(global::Microsoft.OData.Client.DataServiceContext context, string path, bool isComposable)
+            : base(context, path, isComposable) {}
+
+        /// <summary>
+        /// Initialize a new EkspertgruppeMedlemSingle object.
+        /// </summary>
+        public EkspertgruppeMedlemSingle(global::Microsoft.OData.Client.DataServiceQuerySingle<EkspertgruppeMedlem> query)
+            : base(query) {}
+
+    }
+        /// <summary>
+        /// There are no comments for EkspertgruppeMedlem in the schema.
+        /// </summary>
+    /// <KeyProperties>
+    /// Ekspertgruppe
+    /// </KeyProperties>
+    [global::Microsoft.OData.Client.Key("Ekspertgruppe")]
+    [global::Microsoft.OData.Client.OriginalNameAttribute("EkspertgruppeMedlem")]
+    public partial class EkspertgruppeMedlem : global::Microsoft.OData.Client.BaseEntityType
+    {
+        /// <summary>
+        /// Create a new EkspertgruppeMedlem object.
+        /// </summary>
+        /// <param name="ekspertgruppe">Initial value of Ekspertgruppe.</param>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        public static EkspertgruppeMedlem CreateEkspertgruppeMedlem(string ekspertgruppe)
+        {
+            EkspertgruppeMedlem ekspertgruppeMedlem = new EkspertgruppeMedlem();
+            ekspertgruppeMedlem.Ekspertgruppe = ekspertgruppe;
+            return ekspertgruppeMedlem;
+        }
+        /// <summary>
+        /// There are no comments for Property Ekspertgruppe in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Ekspertgruppe")]
+        public virtual string Ekspertgruppe
+        {
+            get
+            {
+                return this._Ekspertgruppe;
+            }
+            set
+            {
+                this.OnEkspertgruppeChanging(value);
+                this._Ekspertgruppe = value;
+                this.OnEkspertgruppeChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Ekspertgruppe;
+        partial void OnEkspertgruppeChanging(string value);
+        partial void OnEkspertgruppeChanged();
+        /// <summary>
+        /// There are no comments for Property RodlisteAr in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("RodlisteAr")]
+        public virtual global::System.Nullable<int> RodlisteAr
+        {
+            get
+            {
+                return this._RodlisteAr;
+            }
+            set
+            {
+                this.OnRodlisteArChanging(value);
+                this._RodlisteAr = value;
+                this.OnRodlisteArChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private global::System.Nullable<int> _RodlisteAr;
+        partial void OnRodlisteArChanging(global::System.Nullable<int> value);
+        partial void OnRodlisteArChanged();
+        /// <summary>
+        /// There are no comments for Property RodlistebaseEkspertgruppe in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("RodlistebaseEkspertgruppe")]
+        public virtual string RodlistebaseEkspertgruppe
+        {
+            get
+            {
+                return this._RodlistebaseEkspertgruppe;
+            }
+            set
+            {
+                this.OnRodlistebaseEkspertgruppeChanging(value);
+                this._RodlistebaseEkspertgruppe = value;
+                this.OnRodlistebaseEkspertgruppeChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _RodlistebaseEkspertgruppe;
+        partial void OnRodlistebaseEkspertgruppeChanging(string value);
+        partial void OnRodlistebaseEkspertgruppeChanged();
+        /// <summary>
+        /// There are no comments for Property EkspertgruppeRolle in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("EkspertgruppeRolle")]
+        public virtual string EkspertgruppeRolle
+        {
+            get
+            {
+                return this._EkspertgruppeRolle;
+            }
+            set
+            {
+                this.OnEkspertgruppeRolleChanging(value);
+                this._EkspertgruppeRolle = value;
+                this.OnEkspertgruppeRolleChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _EkspertgruppeRolle;
+        partial void OnEkspertgruppeRolleChanging(string value);
+        partial void OnEkspertgruppeRolleChanged();
+        /// <summary>
+        /// There are no comments for Property FulltNavn in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("FulltNavn")]
+        public virtual string FulltNavn
+        {
+            get
+            {
+                return this._FulltNavn;
+            }
+            set
+            {
+                this.OnFulltNavnChanging(value);
+                this._FulltNavn = value;
+                this.OnFulltNavnChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _FulltNavn;
+        partial void OnFulltNavnChanging(string value);
+        partial void OnFulltNavnChanged();
+        /// <summary>
+        /// There are no comments for Property Etternavn in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Etternavn")]
+        public virtual string Etternavn
+        {
+            get
+            {
+                return this._Etternavn;
+            }
+            set
+            {
+                this.OnEtternavnChanging(value);
+                this._Etternavn = value;
+                this.OnEtternavnChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Etternavn;
+        partial void OnEtternavnChanging(string value);
+        partial void OnEtternavnChanged();
+        /// <summary>
+        /// There are no comments for Property FornavnInit in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("FornavnInit")]
+        public virtual string FornavnInit
+        {
+            get
+            {
+                return this._FornavnInit;
+            }
+            set
+            {
+                this.OnFornavnInitChanging(value);
+                this._FornavnInit = value;
+                this.OnFornavnInitChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _FornavnInit;
+        partial void OnFornavnInitChanging(string value);
+        partial void OnFornavnInitChanged();
+        /// <summary>
+        /// There are no comments for Property Institusjon in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        [global::Microsoft.OData.Client.OriginalNameAttribute("Institusjon")]
+        public virtual string Institusjon
+        {
+            get
+            {
+                return this._Institusjon;
+            }
+            set
+            {
+                this.OnInstitusjonChanging(value);
+                this._Institusjon = value;
+                this.OnInstitusjonChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
+        private string _Institusjon;
+        partial void OnInstitusjonChanging(string value);
+        partial void OnInstitusjonChanged();
+    }
+        /// <summary>
         /// There are no comments for RL2021MinMaxProbable in the schema.
         /// </summary>
     [global::Microsoft.OData.Client.OriginalNameAttribute("RL2021MinMaxProbable")]
@@ -6788,189 +7196,6 @@ namespace Artsdatabanken
         private bool _ExcludeGbif;
         partial void OnExcludeGbifChanging(bool value);
         partial void OnExcludeGbifChanged();
-    }
-        /// <summary>
-        /// There are no comments for RL2021Pavirkningsfaktor in the schema.
-        /// </summary>
-    [global::Microsoft.OData.Client.OriginalNameAttribute("RL2021Pavirkningsfaktor")]
-    public partial class RL2021Pavirkningsfaktor
-    {
-        /// <summary>
-        /// There are no comments for Property OverordnetTittel in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("OverordnetTittel")]
-        public virtual string OverordnetTittel
-        {
-            get
-            {
-                return this._OverordnetTittel;
-            }
-            set
-            {
-                this.OnOverordnetTittelChanging(value);
-                this._OverordnetTittel = value;
-                this.OnOverordnetTittelChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _OverordnetTittel;
-        partial void OnOverordnetTittelChanging(string value);
-        partial void OnOverordnetTittelChanged();
-        /// <summary>
-        /// There are no comments for Property Beskrivelse in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Beskrivelse")]
-        public virtual string Beskrivelse
-        {
-            get
-            {
-                return this._Beskrivelse;
-            }
-            set
-            {
-                this.OnBeskrivelseChanging(value);
-                this._Beskrivelse = value;
-                this.OnBeskrivelseChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Beskrivelse;
-        partial void OnBeskrivelseChanging(string value);
-        partial void OnBeskrivelseChanged();
-        /// <summary>
-        /// There are no comments for Property Tidspunkt in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Tidspunkt")]
-        public virtual string Tidspunkt
-        {
-            get
-            {
-                return this._Tidspunkt;
-            }
-            set
-            {
-                this.OnTidspunktChanging(value);
-                this._Tidspunkt = value;
-                this.OnTidspunktChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Tidspunkt;
-        partial void OnTidspunktChanging(string value);
-        partial void OnTidspunktChanged();
-        /// <summary>
-        /// There are no comments for Property Omfang in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Omfang")]
-        public virtual string Omfang
-        {
-            get
-            {
-                return this._Omfang;
-            }
-            set
-            {
-                this.OnOmfangChanging(value);
-                this._Omfang = value;
-                this.OnOmfangChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Omfang;
-        partial void OnOmfangChanging(string value);
-        partial void OnOmfangChanged();
-        /// <summary>
-        /// There are no comments for Property Alvorlighetsgrad in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Alvorlighetsgrad")]
-        public virtual string Alvorlighetsgrad
-        {
-            get
-            {
-                return this._Alvorlighetsgrad;
-            }
-            set
-            {
-                this.OnAlvorlighetsgradChanging(value);
-                this._Alvorlighetsgrad = value;
-                this.OnAlvorlighetsgradChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Alvorlighetsgrad;
-        partial void OnAlvorlighetsgradChanging(string value);
-        partial void OnAlvorlighetsgradChanged();
-        /// <summary>
-        /// There are no comments for Property Tittel in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Tittel")]
-        public virtual string Tittel
-        {
-            get
-            {
-                return this._Tittel;
-            }
-            set
-            {
-                this.OnTittelChanging(value);
-                this._Tittel = value;
-                this.OnTittelChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Tittel;
-        partial void OnTittelChanging(string value);
-        partial void OnTittelChanged();
-        /// <summary>
-        /// There are no comments for Property ØversteTittel in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("ØversteTittel")]
-        public virtual string ØversteTittel
-        {
-            get
-            {
-                return this._ØversteTittel;
-            }
-            set
-            {
-                this.OnØversteTittelChanging(value);
-                this._ØversteTittel = value;
-                this.OnØversteTittelChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _ØversteTittel;
-        partial void OnØversteTittelChanging(string value);
-        partial void OnØversteTittelChanged();
-        /// <summary>
-        /// There are no comments for Property Forkortelse in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        [global::Microsoft.OData.Client.OriginalNameAttribute("Forkortelse")]
-        public virtual string Forkortelse
-        {
-            get
-            {
-                return this._Forkortelse;
-            }
-            set
-            {
-                this.OnForkortelseChanging(value);
-                this._Forkortelse = value;
-                this.OnForkortelseChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.OData.Client.Design.T4", "#VersionNumber#")]
-        private string _Forkortelse;
-        partial void OnForkortelseChanging(string value);
-        partial void OnForkortelseChanged();
     }
         /// <summary>
         /// There are no comments for RL2021Reference in the schema.
@@ -8237,29 +8462,6 @@ namespace Artsdatabanken
             return new global::Artsdatabanken.Rodliste2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
-        /// Get an entity of type global::Artsdatabanken.SpeciesAssessment2015 as global::Artsdatabanken.SpeciesAssessment2015Single specified by key from an entity set
-        /// </summary>
-        /// <param name="_source">source entity set</param>
-        /// <param name="_keys">dictionary with the names and values of keys</param>
-        public static global::Artsdatabanken.SpeciesAssessment2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.SpeciesAssessment2015> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
-        {
-            return new global::Artsdatabanken.SpeciesAssessment2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
-        }
-        /// <summary>
-        /// Get an entity of type global::Artsdatabanken.SpeciesAssessment2015 as global::Artsdatabanken.SpeciesAssessment2015Single specified by key from an entity set
-        /// </summary>
-        /// <param name="_source">source entity set</param>
-        /// <param name="id">The value of id</param>
-        public static global::Artsdatabanken.SpeciesAssessment2015Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.SpeciesAssessment2015> _source,
-            string id)
-        {
-            global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
-            {
-                { "Id", id }
-            };
-            return new global::Artsdatabanken.SpeciesAssessment2015Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
-        }
-        /// <summary>
         /// Get an entity of type global::Artsdatabanken.Redlist2006Assessment as global::Artsdatabanken.Redlist2006AssessmentSingle specified by key from an entity set
         /// </summary>
         /// <param name="_source">source entity set</param>
@@ -8281,6 +8483,52 @@ namespace Artsdatabanken
                 { "ArtsID", artsID }
             };
             return new global::Artsdatabanken.Redlist2006AssessmentSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+        }
+        /// <summary>
+        /// Get an entity of type global::Artsdatabanken.SpeciesAssessment2021 as global::Artsdatabanken.SpeciesAssessment2021Single specified by key from an entity set
+        /// </summary>
+        /// <param name="_source">source entity set</param>
+        /// <param name="_keys">dictionary with the names and values of keys</param>
+        public static global::Artsdatabanken.SpeciesAssessment2021Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.SpeciesAssessment2021> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
+        {
+            return new global::Artsdatabanken.SpeciesAssessment2021Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+        }
+        /// <summary>
+        /// Get an entity of type global::Artsdatabanken.SpeciesAssessment2021 as global::Artsdatabanken.SpeciesAssessment2021Single specified by key from an entity set
+        /// </summary>
+        /// <param name="_source">source entity set</param>
+        /// <param name="id">The value of id</param>
+        public static global::Artsdatabanken.SpeciesAssessment2021Single ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.SpeciesAssessment2021> _source,
+            int id)
+        {
+            global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
+            {
+                { "Id", id }
+            };
+            return new global::Artsdatabanken.SpeciesAssessment2021Single(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+        }
+        /// <summary>
+        /// Get an entity of type global::Artsdatabanken.EkspertgruppeMedlem as global::Artsdatabanken.EkspertgruppeMedlemSingle specified by key from an entity set
+        /// </summary>
+        /// <param name="_source">source entity set</param>
+        /// <param name="_keys">dictionary with the names and values of keys</param>
+        public static global::Artsdatabanken.EkspertgruppeMedlemSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.EkspertgruppeMedlem> _source, global::System.Collections.Generic.IDictionary<string, object> _keys)
+        {
+            return new global::Artsdatabanken.EkspertgruppeMedlemSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
+        }
+        /// <summary>
+        /// Get an entity of type global::Artsdatabanken.EkspertgruppeMedlem as global::Artsdatabanken.EkspertgruppeMedlemSingle specified by key from an entity set
+        /// </summary>
+        /// <param name="_source">source entity set</param>
+        /// <param name="ekspertgruppe">The value of ekspertgruppe</param>
+        public static global::Artsdatabanken.EkspertgruppeMedlemSingle ByKey(this global::Microsoft.OData.Client.DataServiceQuery<global::Artsdatabanken.EkspertgruppeMedlem> _source,
+            string ekspertgruppe)
+        {
+            global::System.Collections.Generic.IDictionary<string, object> _keys = new global::System.Collections.Generic.Dictionary<string, object>
+            {
+                { "Ekspertgruppe", ekspertgruppe }
+            };
+            return new global::Artsdatabanken.EkspertgruppeMedlemSingle(_source.Context, _source.GetKeyPath(global::Microsoft.OData.Client.Serializer.GetKeyString(_source.Context, _keys)));
         }
         /// <summary>
         /// There are no comments for Search in the schema.

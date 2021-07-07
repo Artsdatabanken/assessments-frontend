@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = @Model.VurdertVitenskapeligNavn;
     var naturtypehovedenhet = @Model.NaturtypeHovedenhet;
-    string ekspertgruppe = char.ToLower(@Model.Ekspertgruppe[0]) + @Model.Ekspertgruppe.Substring(1);
+   
 }
 
 <div class="breadcrumbs">
@@ -28,13 +28,10 @@
         <h1>
             Norsk rødliste for arter 2021
         </h1>
-        
-        <partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" /> 
-       
-        <span class="byline">
-            Ekspertkomité for @ekspertgruppe,  @(ekspertgruppe == "spretthaler" || ekspertgruppe == "spretthaler (Svalbard)" ? @Model.SistVurdertAr : 2021)
 
-        </span>
+        <partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" />
+        <partial name="/Views/Shared/_Byline.cshtml" />
+       
     </div>
 
     <div class="mid">

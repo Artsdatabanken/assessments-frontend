@@ -31,7 +31,7 @@
 }
 
 <span>
-    @categoryMatcher(@Model.Kategori) @categoryDescription(ViewBag.category)
+    <i>@categoryDescription(ViewBag.category)</i> @categoryMatcher(@Model.Kategori)
     @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
     {
         <span>og er trolig utdødd</span>

@@ -4,7 +4,7 @@
 *@
 
 <div class="page_section">
-    <h2>Utberedelse</h2>
+    <h2>Vurderingsområde og artens utbredelse</h2>
     <p>
         <!-- GEOGRAFI -->
         @if (@Model.VurderingsContext == "N")
@@ -15,16 +15,7 @@
         {
             <span>@ViewBag.glossary["vurdert_S"]["description"]</span>
         }
-        <!-- FULL VURDERING/LC -->
-        @if (@Model.OverordnetKlassifiseringGruppeKode == "sikkerBestandLC")
-        {
-            <span>@ViewBag.glossary["oneliners"]["vurdert_livskraftig"]</span>
-        }
 
-        @if (@Model.OverordnetKlassifiseringGruppeKode == "rodlisteVurdertArt")
-        {
-            <span>@ViewBag.glossary["oneliners"]["full_vurdering"]</span>
-        }
     </p>
 
 

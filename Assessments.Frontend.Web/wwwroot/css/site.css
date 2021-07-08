@@ -591,6 +591,7 @@ td {
     border: 1px solid lightgrey;
     max-height: 250px;
     padding-bottom: 10px;
+    vertical-align: top;
 }
 
 .habitat_element.inactive{
@@ -661,22 +662,27 @@ td {
     height: auto;
 }
 
-.habitat_element .more,
-.habitat_element.expanded .less {
+.more,
+.expanded .less {
     display: block;
 }
 
-.habitat_element.expanded .more,
-.habitat_element .less {
+.expanded .more,
+.less {
     display: none;
 }
 
+.other_habitats .hidden{
+    display:none;
+}
 
+.other_habitats.expanded .hidden{
+    display:block;
+}
 /* EXPERT ASSESMENT */
-
 .expert_assesment {
     padding: 5px;
-    padding-top:0px;
+    padding-top: 0px;
 }
 
 .expert_assesment .quotationmark{
@@ -696,14 +702,12 @@ td {
 
 .quoatedtext {
     padding: 20px;
-    width: calc(100% - 350px);
     display: inline-block;
     background: #f8f7f7;
 }
 
 .quoatedtext_side{
     padding:20px;
-    max-width:350px;
     float:right;
 }
 

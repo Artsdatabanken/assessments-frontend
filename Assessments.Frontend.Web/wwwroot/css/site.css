@@ -661,22 +661,27 @@ td {
     height: auto;
 }
 
-.habitat_element .more,
-.habitat_element.expanded .less {
+.more,
+.expanded .less {
     display: block;
 }
 
-.habitat_element.expanded .more,
-.habitat_element .less {
+.expanded .more,
+.less {
     display: none;
 }
 
+.other_habitats .hidden{
+    display:none;
+}
 
+.other_habitats.expanded .hidden{
+    display:block;
+}
 /* EXPERT ASSESMENT */
-
 .expert_assesment {
     padding: 5px;
-    padding-top:0px;
+    padding-top: 0px;
 }
 
 .expert_assesment .quotationmark{

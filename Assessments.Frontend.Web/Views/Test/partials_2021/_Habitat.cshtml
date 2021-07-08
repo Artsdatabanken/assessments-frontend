@@ -11,11 +11,12 @@
     Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
 }
 
-<div class="habitat">
+<div class="habitat page_section">
     @if (Model.Count() != 0)
     {
         <h2>Habitat</h2>
-        <div class="page_section">
+        <div>
+            [TODO: Her burde det være en forklarende tekst om hva et hovedhabitat er på et par linjer]
             <h3>Arten finnes i disse habitatene</h3>
             @foreach (var modelelement in Model)
             {
@@ -51,46 +52,53 @@
                 </div>
             }
         </div>
-        <div class="page_section">
-            <h3>Andre habitat</h3><br />
-            <div class="habitat_container">
+        <div class="other_habitats">
+            <button class="seemore" onclick="expand(this)">
+                <span class="more">Se alle habitatinndelinger i Rødlista 2021</span>
+                <span class="less">Se kun habitat arten forekommer i</span>
+            </button>
+            <span class="hidden">
+                <h3>Andre habitat</h3><br />
+                <div class="habitat_container">
 
-                @foreach (var key in habitat.Keys)
-                {
-                    @if (!Model.Contains(key))
+                    @foreach (var key in habitat.Keys)
                     {
-                        <div class="habitat_element @Html.Raw(Model.Contains(key) ? "active" : "inactive")">
-                            @if (@habitat[key]["name"] != null)
-                            {
-                                <h4 class="habitat_header">@habitat[key]["name"]</h4>
-                            }
-                            <div class="habitat_icon">
-                                @if (@habitat[key]["image"] != null)
+                        @if (!Model.Contains(key))
+                        {
+                            <div class="habitat_element @Html.Raw(Model.Contains(key) ? "active" : "inactive")">
+                                @if (@habitat[key]["name"] != null)
                                 {
-                                    <img src=@habitat[key]["image"] />
+                                    <h4 class="habitat_header">@habitat[key]["name"]</h4>
                                 }
-                            </div>
-                            @if (@habitat[key]["description"] != null)
-                            {
-                                <p>
-                                    @{
-                                        // Obtaining HTML from json. Probably not the safest due to code injection,
-                                        // but as nothing is posted - where's the harm?
-                                        string str = @habitat[key]["description"];
+                                <div class="habitat_icon">
+                                    @if (@habitat[key]["image"] != null)
+                                    {
+                                        <img src=@habitat[key]["image"] />
                                     }
-                                    @Html.Raw(str)
-                                </p>
-                                <button class="seemore" onclick="expand(this)">
-                                    <span class="more">Se mer</span>
-                                    <span class="less">Se mindre</span>
-                                </button>
-                            }
+                                </div>
+                                @if (@habitat[key]["description"] != null)
+                                {
+                                    <p>
+                                        @{
+                                            // Obtaining HTML from json. Probably not the safest due to code injection,
+                                            // but as nothing is posted - where's the harm?
+                                            string str = @habitat[key]["description"];
+                                        }
+                                        @Html.Raw(str)
+                                    </p>
+                                    <button class="seemore" onclick="expand(this)">
+                                        <span class="more">Se mer</span>
+                                        <span class="less">Se mindre</span>
+                                    </button>
+                                }
 
-                        </div>
+                            </div>
+                        }
                     }
-                }
 
-            </div>
+                </div>
+
+            </span>
         </div>
 
 }
@@ -106,6 +114,7 @@
             element.parentElement.classList.add("expanded");
         }
     }
+
 
 
 </script>

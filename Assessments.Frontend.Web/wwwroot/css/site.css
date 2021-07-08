@@ -591,6 +591,7 @@ td {
     border: 1px solid lightgrey;
     max-height: 250px;
     padding-bottom: 10px;
+    vertical-align: top;
 }
 
 .habitat_element.inactive{

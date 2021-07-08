@@ -16,7 +16,7 @@
     {
         <h2>Habitat</h2>
         <div>
-            [TODO: Her burde det være en forklarende tekst om hva et hovedhabitat er på et par linjer]
+            @ViewBag.glossary["habitat"]["description"]
             <h3>Arten finnes i disse habitatene</h3>
             @foreach (var modelelement in Model)
             {
@@ -53,12 +53,8 @@
             }
         </div>
         <div class="other_habitats">
-            <button class="seemore" onclick="expand(this)">
-                <span class="more">Se alle habitatinndelinger i Rødlista 2021</span>
-                <span class="less">Se kun habitat arten forekommer i</span>
-            </button>
             <span class="hidden">
-                <h3>Andre habitat</h3><br />
+                <h3>Resterende habitatinndelinger</h3><br />
                 <div class="habitat_container">
 
                     @foreach (var key in habitat.Keys)
@@ -97,10 +93,12 @@
                     }
 
                 </div>
-
             </span>
+            <button class="seemore" onclick="expand(this)">
+                <span class="more">Se alle habitatinndelinger i Rødlista 2021</span>
+                <span class="less">Se kun habitat arten forekommer i</span>
+            </button>
         </div>
-
 }
            
 <script>

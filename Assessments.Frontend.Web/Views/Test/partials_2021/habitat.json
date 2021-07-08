@@ -1,38 +1,13 @@
 ﻿{
-  "Saltvannssystemer": {
-    "name": "Saltvannssystemer",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Marine_vannmasser/foto_408.jpg",
-    "description": "Tilsvarer hovedtypegruppene <a href=\"https://artsdatabanken.no/artsdatabanken.no/Pages/172020/Saltvannsbunnsystemer\" target=\"_new\" rel=\"noopener\">M Saltvannsbunnsystemer</a> og <a href=\"https://artsdatabanken.no/artsdatabanken.no/Pages/172052/Marine_vannmasser\" target=\"_new\" rel=\"noopener\"> H Marine vannmasser</a> i NiN 2.0"
+  "Arktisk": {
+    "name": "Arktisk",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Arktisk_steppe/foto_408.jpg",
+    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171928/Mosetundra\" target=\"_new\" rel=\"noopener\">T9 Mosetundra</a>, <a href=\"//artsdatabanken.no/Pages/169415/Arktisk_steppe\" target=\"_new\" rel=\"noopener\">T10 Arktisk steppe</a> og <a href=\"//artsdatabanken.no/Pages/171946/Polaroerken\" target=\"_new\" rel=\"noopener\">T28 Polarørken</a> i NiN 2.0"
   },
-  "Fjæresone": {
-    "name": "Fjæresone",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Saltvannsbunnsystemer/foto_408.jpg",
-    "description": "Tilsvarer hovedtypegruppene <a href=\"https://artsdatabanken.no/Pages/172020/Saltvannsbunnsystemer\" target=\"_new\" rel=\"noopener\">M Saltvannsbunnsystemer</a> og <a href=\"https://artsdatabanken.no/Pages/172052/Marine_vannmasser\" target=\"_new\" rel=\"noopener\"> H Marine vannmasser</a> i NiN 2.0"
-  },
-  "Ferskvannssystemer": {
-    "name": "Ferskvannssystemer",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Limniske_vannmasser/foto_408.jpg",
-    "description": "Tilsvarer hovedtypegruppene <a href=\"https://artsdatabanken.no/Pages/172024/Ferskvannsbunnsystemer\" target=\"_new\" rel=\"noopener\">L Ferskvannsbunnsystemer</a> og <a href= \"https://artsdatabanken.no/Pages/172053/Limniske_vannmasser\" target =\"_new\" rel=\"noopener\">F Limniske vannmasser</a> i NiN 2.0"
-  },
-  "Våtmarkssystemer": {
-    "name": "Våtmarkssystemer",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/V%C3%A5tmarkssystemer/foto_408.jpg",
-    "description": "Tilsvarer hovedtypegruppen <a href=\"https://artsdatabanken.no/Pages/172028/Vaatmarkssystemer\" target=\"_new\" rel=\"noopener\">V Våtmarkssystemer</a> i NiN 2.0"
-  },
-  "KysttilknyttedeFastmarkssystemer": {
-    "name": "Kysttilknyttede fastmarkssystemer",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Strandeng/foto_408.jpg",
-    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171927/Fuglefjell-eng_og_fugletopp\" target=\"_new\" rel=\"noopener\">T8 Fuglefjell-eng og fugletopp</a>, <a href= \"https://artsdatabanken.no/Pages/171930/Strandeng\" target =\"_new\" rel=\"noopener\">T12 Strandeng</a>, <a href=\"//artsdatabanken.no/Pages/171939/Sanddynemark\" target=\"_new\" rel=\"noopener\">T21 Sanddynemark</a>, <a href=\"//artsdatabanken.no/Pages/171942/Driftvoll\" target=\"_new\" rel=\"noopener\">T24 Driftvoll</a> og <a href=\"//artsdatabanken.no/Pages/171947/Grus-_og_steindominert_strand_og\" target=\"_new\" rel=\"noopener\">T29 Grus- og steindominert strand og strandlinje</a> i NiN 2.0"
-  },
-  "Flomsone": {
-    "name": "Flomsone",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Ferskvannsdriftvoll/foto_408.jpg",
-    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171948/Flomskogsmark\" target=\"_new\" rel=\"noopener\">T30 Flomskogsmark</a>, <a href= \"https://artsdatabanken.no/Pages/171936/aapen_flomfastmark\" target =\"_new\" rel=\"noopener\">T18 Åpen flomfastmark</a> og <a href=\"//artsdatabanken.no/Pages/171941/Ferskvannsdriftvoll\" target=\"_new\" rel=\"noopener\">T23 Ferskvannsdriftvoll</a> i NiN 2.0"
-  },
-  "IsSnøBreforland": {
-    "name": "Is og snø",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Sn%C3%B8-_og_issystemer/foto_408.jpg",
-    "description": "Tilsvarer hovedtypegruppen <a href=\"https://artsdatabanken.no/Pages/172054/Snoe-_og_issystemer\" target=\"_new\" rel=\"noopener\"> I Snø- og issystemer </a> i NiN 2.0"
+  "ArktiskAlpineJorddektFastmark": {
+    "name": "Alpin jorddekt fastmark",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Fjellhei,_leside_og_tundra/foto_408.jpg",
+    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171922/Fjellhei__leside_og_tundra\" target=\"_new\" rel=\"noopener\">T3 Fjellhei, leside og tundra</a>, <a href=\"//artsdatabanken.no/Pages/171926/Snoeleie\" target=\"_new\" rel=\"noopener\">T7 Snøleie</a>, <a href=\"//artsdatabanken.no/Pages/171937/Oppfrysingsmark\" target=\"_new\" rel=\"noopener\">T19 Oppfrysingsmark</a>, <a href=\"//artsdatabanken.no/Pages/171940/Fjellgrashei_og_grastundra\" target=\"_new\" rel=\"noopener\">T22 Fjellgrashei og grastundra</a> og <a href=\"//artsdatabanken.no/Pages/171944/Breforland_og_snoeavsmeltingsomraade\" target=\"_new\" rel=\"noopener\">T26 Breforland og snøavsmeltingsområde</a> i NiN 2.0"
   },
   "BergUrAndreGrunnjordsystemer": {
     "name": "Berg, ur og andre grunnjordsystemer",
@@ -44,24 +19,49 @@
     "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Fastmarksskogsmark/foto_408.jpg",
     "description": "Tilsvarer hovedtypen <a href=\"https://artsdatabanken.no/Pages/171923/Fastmarksskogsmark\" target=\"_new\" rel=\"noopener\">T4 Fastmarksskogsmark</a> i NiN 2.0"
   },
-  "ArktiskAlpineJorddektFastmark": {
-    "name": "Alpin jorddekt fastmark",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Fjellhei,_leside_og_tundra/foto_408.jpg",
-    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171922/Fjellhei__leside_og_tundra\" target=\"_new\" rel=\"noopener\">T3 Fjellhei, leside og tundra</a>, <a href=\"//artsdatabanken.no/Pages/171926/Snoeleie\" target=\"_new\" rel=\"noopener\">T7 Snøleie</a>, <a href=\"//artsdatabanken.no/Pages/171937/Oppfrysingsmark\" target=\"_new\" rel=\"noopener\">T19 Oppfrysingsmark</a>, <a href=\"//artsdatabanken.no/Pages/171940/Fjellgrashei_og_grastundra\" target=\"_new\" rel=\"noopener\">T22 Fjellgrashei og grastundra</a> og <a href=\"//artsdatabanken.no/Pages/171944/Breforland_og_snoeavsmeltingsomraade\" target=\"_new\" rel=\"noopener\">T26 Breforland og snøavsmeltingsområde</a> i NiN 2.0"
+  "Ferskvannssystemer": {
+    "name": "Ferskvannssystemer",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Limniske_vannmasser/foto_408.jpg",
+    "description": "Tilsvarer hovedtypegruppene <a href=\"https://artsdatabanken.no/Pages/172024/Ferskvannsbunnsystemer\" target=\"_new\" rel=\"noopener\">L Ferskvannsbunnsystemer</a> og <a href= \"https://artsdatabanken.no/Pages/172053/Limniske_vannmasser\" target =\"_new\" rel=\"noopener\">F Limniske vannmasser</a> i NiN 2.0"
   },
-  "SterktEndretFastmark": {
-    "name": "Sterkt endret fastmark",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Sterkt_endret_fastmark_med_l%C3%B8smassedekke/foto_408.jpg",
-    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171953/Sterkt_endret_fastmark_med_loesmassedekke\" target=\"_new\" rel=\"noopener\">T35 Sterkt endret fastmark med løsmassedekke</a>, <a href=\"//artsdatabanken.no/Pages/171954/Ny_fastmark_paa_tidligere_vaatmark\" target=\"_new\" rel=\"noopener\">T36 Ny fastmark på tidligere våtmark og ferskvannsbunn</a>, <a href=\"//artsdatabanken.no/Pages/171955/Ny_fastmark_paa_sterkt_modifiserte\" target=\"_new\" rel=\"noopener\">T37 Ny fastmark på sterkt modifiserte og syntetiske substrater, rask suksesjon</a>, <a href=\"//artsdatabanken.no/Pages/180600/Treplantasje\" target=\"_new\" rel=\"noopener\">T38 Treplantasje</a>, <a href=\"//artsdatabanken.no/Pages/171956/Sterkt_endret_og_ny_fastmark\" target=\"_new\" rel=\"noopener\">T39 Sterkt endret og ny fastmark i langsom suksesjon</a>, <a href=\"//artsdatabanken.no/Pages/171957/Sterkt_endret_fastmark_med_preg\" target=\"_new\" rel=\"noopener\">T40 Sterkt endret fastmark med preg av semi-naturlig eng</a>, <a href=\"//artsdatabanken.no/Pages/171958/Oppdyrket_mark_med_preg_av\" target=\"_new\" rel=\"noopener\">T41 Oppdyrket mark med preg av semi-naturlig eng</a>, <a href=\"//artsdatabanken.no/Pages/171959/Sterkt_endret__hyppig_bearbeidet_fastmark\" target=\"_new\" rel=\"noopener\">T42 Sterkt endret, hyppig bearbeidet fastmark med intensivt hevdpreg</a>, <a href=\"//artsdatabanken.no/Pages/171960/Sterkt_endret__varig_fastmark_med\" target=\"_new\" rel=\"noopener\">T43 Sterkt endret, varig fastmark med intensivt hevdpreg</a>, <a href=\"//artsdatabanken.no/Pages/171961/aaker\" target=\"_new\" rel=\"noopener\">T44 Åker</a> og <a href=\"//artsdatabanken.no/Pages/171962/Oppdyrket_varig_eng\" target=\"_new\" rel=\"noopener\">T45 Oppdyrket varig eng</a> i NiN 2.0"
+  "Fjæresone": {
+    "name": "Fjæresone",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Strandberg/foto_408.jpg",
+    "description": "Tilsvarer hovedtypegruppene <a href=\\\"https://artsdatabanken.no/Pages/171925/Strandberg\" \"target=\\\"_new\\\" rel=\\\"noopener\\\">T6 Strandberg</a> og \"<a href=\\\"https://artsdatabanken.no/Pages/171929/Saltanrikingsmark_i_fjaeresonen\\\" target=\\\"_new\\\" rel=\\\"noopener\\\"> T11 Saltanrikingsmark i fjæresonen</a> i NiN 2.0\""
+  },
+  "Flomsone": {
+    "name": "Flomsone",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Ferskvannsdriftvoll/foto_408.jpg",
+    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171948/Flomskogsmark\" target=\"_new\" rel=\"noopener\">T30 Flomskogsmark</a>, <a href= \"https://artsdatabanken.no/Pages/171936/aapen_flomfastmark\" target =\"_new\" rel=\"noopener\">T18 Åpen flomfastmark</a> og <a href=\"//artsdatabanken.no/Pages/171941/Ferskvannsdriftvoll\" target=\"_new\" rel=\"noopener\">T23 Ferskvannsdriftvoll</a> i NiN 2.0"
+  },
+  "IsSnøBreforland": {
+    "name": "Is og snø",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Sn%C3%B8-_og_issystemer/foto_408.jpg",
+    "description": "Tilsvarer hovedtypegruppen <a href=\"https://artsdatabanken.no/Pages/172054/Snoe-_og_issystemer\" target=\"_new\" rel=\"noopener\"> I Snø- og issystemer </a> i NiN 2.0"
+  },
+  "KysttilknyttedeFastmarkssystemer": {
+    "name": "Kysttilknyttede fastmarkssystemer",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Strandeng/foto_408.jpg",
+    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171927/Fuglefjell-eng_og_fugletopp\" target=\"_new\" rel=\"noopener\">T8 Fuglefjell-eng og fugletopp</a>, <a href= \"https://artsdatabanken.no/Pages/171930/Strandeng\" target =\"_new\" rel=\"noopener\">T12 Strandeng</a>, <a href=\"//artsdatabanken.no/Pages/171939/Sanddynemark\" target=\"_new\" rel=\"noopener\">T21 Sanddynemark</a>, <a href=\"//artsdatabanken.no/Pages/171942/Driftvoll\" target=\"_new\" rel=\"noopener\">T24 Driftvoll</a> og <a href=\"//artsdatabanken.no/Pages/171947/Grus-_og_steindominert_strand_og\" target=\"_new\" rel=\"noopener\">T29 Grus- og steindominert strand og strandlinje</a> i NiN 2.0"
+  },
+  "Saltvannssystemer": {
+    "name": "Saltvannssystemer",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Marine_vannmasser/foto_408.jpg",
+    "description": "Tilsvarer hovedtypegruppene <a href=\"https://artsdatabanken.no/artsdatabanken.no/Pages/172020/Saltvannsbunnsystemer\" target=\"_new\" rel=\"noopener\">M Saltvannsbunnsystemer</a> og <a href=\"https://artsdatabanken.no/artsdatabanken.no/Pages/172052/Marine_vannmasser\" target=\"_new\" rel=\"noopener\"> H Marine vannmasser</a> i NiN 2.0"
   },
   "Semi-naturlig fastmark": {
     "name": "Semi-naturlig fastmark",
     "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Kystlynghei/foto_408.jpg",
     "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171949/Boreal_hei\" target=\"_new\" rel=\"noopener\">T31 Boreal hei</a>, <a href=\"//artsdatabanken.no/Pages/171950/Semi-naturlig_eng\" target=\"_new\" rel=\"noopener\">T32 Semi-naturlig eng</a>, <a href=\"//artsdatabanken.no/Pages/171951/Semi-naturlig_strandeng\" target=\"_new\" rel=\"noopener\">T33 Semi-naturlig strandeng</a> og <a href=\"//artsdatabanken.no/Pages/171952/Kystlynghei\" target=\"_new\" rel=\"noopener\">T34 Kystlynghei</a> i NiN 2.0"
   },
-  "Arktisk": {
-    "name": "Arktisk",
-    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Arktisk_steppe/foto_408.jpg",
-    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171928/Mosetundra\" target=\"_new\" rel=\"noopener\">T9 Mosetundra</a>, <a href=\"//artsdatabanken.no/Pages/169415/Arktisk_steppe\" target=\"_new\" rel=\"noopener\">T10 Arktisk steppe</a> og <a href=\"//artsdatabanken.no/Pages/171946/Polaroerken\" target=\"_new\" rel=\"noopener\">T28 Polarørken</a> i NiN 2.0"
+  "SterktEndretFastmark": {
+    "name": "Sterkt endret fastmark",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Sterkt_endret_fastmark_med_l%C3%B8smassedekke/foto_408.jpg",
+    "description": "Tilsvarer hovedtypene <a href=\"https://artsdatabanken.no/Pages/171953/Sterkt_endret_fastmark_med_loesmassedekke\" target=\"_new\" rel=\"noopener\">T35 Sterkt endret fastmark med løsmassedekke</a>, <a href=\"//artsdatabanken.no/Pages/171954/Ny_fastmark_paa_tidligere_vaatmark\" target=\"_new\" rel=\"noopener\">T36 Ny fastmark på tidligere våtmark og ferskvannsbunn</a>, <a href=\"//artsdatabanken.no/Pages/171955/Ny_fastmark_paa_sterkt_modifiserte\" target=\"_new\" rel=\"noopener\">T37 Ny fastmark på sterkt modifiserte og syntetiske substrater, rask suksesjon</a>, <a href=\"//artsdatabanken.no/Pages/180600/Treplantasje\" target=\"_new\" rel=\"noopener\">T38 Treplantasje</a>, <a href=\"//artsdatabanken.no/Pages/171956/Sterkt_endret_og_ny_fastmark\" target=\"_new\" rel=\"noopener\">T39 Sterkt endret og ny fastmark i langsom suksesjon</a>, <a href=\"//artsdatabanken.no/Pages/171957/Sterkt_endret_fastmark_med_preg\" target=\"_new\" rel=\"noopener\">T40 Sterkt endret fastmark med preg av semi-naturlig eng</a>, <a href=\"//artsdatabanken.no/Pages/171958/Oppdyrket_mark_med_preg_av\" target=\"_new\" rel=\"noopener\">T41 Oppdyrket mark med preg av semi-naturlig eng</a>, <a href=\"//artsdatabanken.no/Pages/171959/Sterkt_endret__hyppig_bearbeidet_fastmark\" target=\"_new\" rel=\"noopener\">T42 Sterkt endret, hyppig bearbeidet fastmark med intensivt hevdpreg</a>, <a href=\"//artsdatabanken.no/Pages/171960/Sterkt_endret__varig_fastmark_med\" target=\"_new\" rel=\"noopener\">T43 Sterkt endret, varig fastmark med intensivt hevdpreg</a>, <a href=\"//artsdatabanken.no/Pages/171961/aaker\" target=\"_new\" rel=\"noopener\">T44 Åker</a> og <a href=\"//artsdatabanken.no/Pages/171962/Oppdyrket_varig_eng\" target=\"_new\" rel=\"noopener\">T45 Oppdyrket varig eng</a> i NiN 2.0"
+  },
+  "Våtmarkssystemer": {
+    "name": "Våtmarkssystemer",
+    "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/V%C3%A5tmarkssystemer/foto_408.jpg",
+    "description": "Tilsvarer hovedtypegruppen <a href=\"https://artsdatabanken.no/Pages/172028/Vaatmarkssystemer\" target=\"_new\" rel=\"noopener\">V Våtmarkssystemer</a> i NiN 2.0"
   }
 }

@@ -7,7 +7,16 @@
     Artsdatabanken.RL2021 assessment = Model;
 }
 <div class="page_section">
+            <!-- FULL VURDERING/LC -->
+        @if (@Model.OverordnetKlassifiseringGruppeKode == "sikkerBestandLC")
+        {
+            <span>@ViewBag.glossary["oneliners"]["vurdert_livskraftig"]</span>
+        }
 
+        @if (@Model.OverordnetKlassifiseringGruppeKode == "rodlisteVurdertArt")
+        {
+            <span>@ViewBag.glossary["oneliners"]["full_vurdering"]</span>
+        }
 
         <!-- Finnes i norge? -->
 

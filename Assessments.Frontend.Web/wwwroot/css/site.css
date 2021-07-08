@@ -702,14 +702,12 @@ td {
 
 .quoatedtext {
     padding: 20px;
-    width: calc(100% - 350px);
     display: inline-block;
     background: #f8f7f7;
 }
 
 .quoatedtext_side{
     padding:20px;
-    max-width:350px;
     float:right;
 }
 

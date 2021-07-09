@@ -104,6 +104,16 @@ namespace Assessments.Frontend.Web.Controllers
             return View("List2006", viewModel);
         }
 
+        [Route("habitat")]
+        public IActionResult Habitat()
+        {
+            var viewModel = new TestViewModel
+            {
+
+            };
+            return View("Habitat", viewModel);
+        }
+
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
 

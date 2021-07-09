@@ -10,7 +10,7 @@
             <!-- FULL VURDERING/LC -->
         @if (@Model.OverordnetKlassifiseringGruppeKode == "sikkerBestandLC")
         {
-            <span>@ViewBag.glossary["oneliners"]["vurdert_livskraftig"]</span>
+            <span>@Html.Raw(@ViewBag.glossary["oneliners"]["vurdert_livskraftig"])</span>
         }
 
         @if (@Model.OverordnetKlassifiseringGruppeKode == "rodlisteVurdertArt")
@@ -28,7 +28,7 @@
                     <span>
                         @ViewBag.glossary["oneliners"]["litentvil"]
                         @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE).
-                        @ViewBag.glossary["oneliners"]["etablertBestandINorge"]
+                        @Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])
                     </span>
                 }
                 else @if (@assessment.UtdoddINorgeRE == "ikkeReproduserendeINorge")
@@ -36,7 +36,7 @@
                 <span>
                     @ViewBag.glossary["oneliners"]["litentvil"]
                     @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE).
-                    @ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"]
+                    @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])
 
                 </span>
                 }
@@ -45,7 +45,7 @@
                 <span>
                     @ViewBag.glossary["oneliners"]["litentvil"]
                     @(assessment.VurderingsContext == "N" ? "Norge " : "Svalbard ") (RE).
-                    @ViewBag.glossary["oneliners"]["etablertFør1800"]
+                    @Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])
                 </span>
                 }
             </p>
@@ -57,35 +57,35 @@
         {
             @if (@assessment.BegrensetForekomstNA == "ikkeReproduserendeGjestNA")
             {
-                <span> @ViewBag.glossary["oneliners"]["ikkeReproduserendeGjestNA"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeGjestNA"])</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "observertReproduserendeIkkeEtablertNA")
             {
-            <span> @ViewBag.glossary["oneliners"]["observertReproduserendeIkkeEtablertNA"]</span>
+            <span> @Html.Raw(@ViewBag.glossary["oneliners"]["observertReproduserendeIkkeEtablertNA"])</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "observertReproduktivIkkeEtablertNA")
             {
-            <span> @ViewBag.glossary["oneliners"]["observertReproduktivIkkeEtablertNA"]</span>
+            <span> @Html.Raw(@ViewBag.glossary["oneliners"]["observertReproduktivIkkeEtablertNA"])</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "uregelmessigGjestIkkeReproduserendeNA")
             {
-                <span> @ViewBag.glossary["oneliners"]["uregelmessigGjestIkkeReproduserendeNA"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uregelmessigGjestIkkeReproduserendeNA"])</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "ikkeDokumentertForekomstNA")
             {
-                <span> @ViewBag.glossary["oneliners"]["ikkeDokumentertForekomstNA"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeDokumentertForekomstNA"])</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "hybridartUtenReproduksjonNA")
             {
-                <span> @ViewBag.glossary["oneliners"]["hybridartUtenReproduksjonNA"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["hybridartUtenReproduksjonNA"])</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "hybridartUvisstOmReproduserendeNA")
             {
-                <span> @ViewBag.glossary["oneliners"]["hybridartUvisstOmReproduserendeNA"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["hybridartUvisstOmReproduserendeNA"])</span>
             }
             else @if (@assessment.BegrensetForekomstNA == "forekommerBareIHybridkombinasjonNA")
             {
-                <span> @ViewBag.glossary["oneliners"]["forekommerBareIHybridkombinasjonNA"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["forekommerBareIHybridkombinasjonNA"])</span>
             }
         }
 
@@ -95,23 +95,23 @@
 
             @if (@assessment.KunnskapsStatusNE == "mangelfullKunnskapNE")
             {
-                <span> @ViewBag.glossary["oneliners"]["mangelfullKunnskapNE"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["mangelfullKunnskapNE"])</span>
             }
             else @if (@assessment.KunnskapsStatusNE == "uavklartSystematikkNE")
             {
-                <span> @ViewBag.glossary["oneliners"]["uavklartSystematikkNE"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uavklartSystematikkNE"])</span>
             }
             else@if (@assessment.KunnskapsStatusNE == "uklartOmReproduserendeBestandNE")
             {
-                <span> @ViewBag.glossary["oneliners"]["uklartOmReproduserendeBestandNE"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uklartOmReproduserendeBestandNE"])</span>
             }
             else@if (@assessment.KunnskapsStatusNE == "artsgruppeIkkeRisikovurdertNE")
             {
-                <span> @ViewBag.glossary["oneliners"]["artsgruppeIkkeRisikovurdertNE"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["artsgruppeIkkeRisikovurdertNE"])</span>
             }
             else@if (@assessment.KunnskapsStatusNE == "annetNE")
             {
-                <span> @ViewBag.glossary["oneliners"]["annetNE"]</span>
+                <span> @Html.Raw(@ViewBag.glossary["oneliners"]["annetNE"])</span>
             }
         }
 
@@ -119,7 +119,7 @@
         @if (@assessment.OverordnetKlassifiseringGruppeKode == "fremmedArtNA")
         {
             <span>
-                @ViewBag.glossary["oneliners"]["fremmedArtNA"]
+                @Html.Raw(@ViewBag.glossary["oneliners"]["fremmedArtNA"])
                 <a href="https://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa"> les mer </a>
             </span>
         }
@@ -128,15 +128,15 @@
         {
             @if (assessment.RodlisteVurdertArt == "etablertBestandINorge")
             {
-            <span>@ViewBag.glossary["oneliners"]["etablertBestandINorge"]</span>
+            <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])</span>
             }
             else@if (assessment.RodlisteVurdertArt == "ikkeReproduserendeINorge")
            {
-            <span>@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"]</span>
+            <span>@Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])</span>
             }
            else@if (assessment.RodlisteVurdertArt == "etablertFør1800")
            {
-            <span>@ViewBag.glossary["oneliners"]["etablertFør1800"]</span>
+            <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])</span>
             }
         }
         </p>

@@ -119,6 +119,21 @@ namespace Assessments.Frontend.Web.Controllers
             return View("Habitat", viewModel);
         }
 
+        [Route("speciesgroup")]
+        public IActionResult SpeciesGroup()
+        {
+            var viewModel = new TestViewModel
+            {
+
+            };
+            string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
+            ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
+
+            string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
+            ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
+            return View("SpeciesGroup", viewModel);
+        }
+
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
 

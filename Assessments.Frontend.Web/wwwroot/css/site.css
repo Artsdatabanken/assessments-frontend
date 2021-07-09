@@ -602,7 +602,7 @@ td {
     height:160px;
     width:100%;
     display:block;
-    background:green;
+    background:white;
     margin:auto;
 }
 
@@ -613,16 +613,20 @@ td {
     overflow: hidden;
 }
 
-.habitat_header {
-    position: absolute;
+.speciesgroup_header,
+.habitat_header {    
     background: white;
     padding: 2px;
-    padding-top:5px;
-    padding-bottom:5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 100%;
+    font-size: 10pt;
+}
+
+.habitat_header {
+    position: absolute;
     top: 0;
     left: 0;
-    width:100%;
-    font-size:10pt;
 }
 
 .habitat_element p, .habitat_element a {

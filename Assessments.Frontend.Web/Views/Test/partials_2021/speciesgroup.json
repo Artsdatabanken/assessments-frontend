@@ -1,0 +1,172 @@
+﻿{
+  "Alger": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Alger",
+    "tagline": "Cyanophyta, Rhodophyta, Chlorophyta og Ochrophyta",
+    "image": "https://artsdatabanken.no/Media/F12296"
+  },
+  "Amfibier og reptiler": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/AmfibierReptiler",
+    "tagline": "Amphibia og Reptilia",
+    "image": "https://artsdatabanken.no/Media/F12265"
+  },
+  "Biller": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Biller",
+    "tagline": "Coleoptera",
+    "image": "https://artsdatabanken.no/Media/F12266"
+  },
+  "Bløtdyr": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Blotdyr",
+    "tagline": "Mollusca",
+    "image": "https://artsdatabanken.no/Media/F12267"
+  },
+  "Døgnfluer": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Dognfluer",
+    "image": "https://artsdatabanken.no/Media/F12268",
+    "tagline": "Ephemeroptera"
+  },
+  "Edderkoppdyr": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Edderkoppdyr",
+    "image": "https://artsdatabanken.no/Media/F12269",
+    "tagline": "Arachnida"
+  },
+  "Fisker": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Fisker",
+    "image": "https://artsdatabanken.no/Media/F12270",
+    "tagline": "Myxini, Petromyzontiformes, Chondrichthyes og Osteichthyes",
+  },
+  "Fugler": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Fugler",
+    "image": "https://artsdatabanken.no/Media/F12271",
+    "tagline": "Aves"
+  },
+  "Kakerlakker":{
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Kakerlakker",
+    "image": "https://artsdatabanken.no/Media/F12272",
+    "tagline": "Blattodea"
+  },
+  "Kamelhalsfluer": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Kamelhalsfluer",
+    "image": "https://artsdatabanken.no/Media/F12273",
+    "tagline": "Raphidioptera"
+  },
+  "Karplanter": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Karplanter",
+    "image": "https://artsdatabanken.no/Media/F12274",
+    "tagline": "Pteridophyta, Pinophyta og Magnoliophyta"
+  },
+  "Koralldyr": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Koralldyr",
+    "image": "https://artsdatabanken.no/Media/F12275",
+    "tagline": "Anthozoa"
+  },
+  "Krepsdyr": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Krepsdyr",
+    "image": "https://artsdatabanken.no/Media/F12276",
+    "tagline": "Crustacea"
+  },
+  "Lav": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Lav",
+    "image": "https://artsdatabanken.no/Media/F12277",
+    "tagline": "'Lichenes'"
+  },
+  "Leddormer": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Leddormer",
+    "image": "https://artsdatabanken.no/Media/F12278",
+    "tagline": "Annelida"
+  },
+  "Mangefotinger": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Mangefotinger",
+    "image": "https://artsdatabanken.no/Media/F12279",
+    "tagline": "Myriapoda"
+  },
+  "Mosdyr": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Mosdyr",
+    "image": "https://artsdatabanken.no/Media/F12280",
+    "tagline": "Ectoprocta"
+  },
+  "Moser": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Moser",
+    "image": "https://artsdatabanken.no/Media/F12281",
+    "tagline": "Anthocerotophyta, Marchantiophyta og&nbsp;Bryophyta"
+  },
+  "Mudderfluer": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Mudderfluer",
+    "image": "https://artsdatabanken.no/Media/F12282",
+    "tagline": "Megaloptera"
+  },
+  "Nebbfluer": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Nebbfluer",
+    "image": "https://artsdatabanken.no/Media/F12283",
+    "tagline": "Mecoptera"
+  },
+  "Nebbmunner":{
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Nebbmunner",
+    "image": "https://artsdatabanken.no/Media/F12284",
+    "tagline": "Hemiptera"
+  },
+  "Nettvinger": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Nettvinger",
+    "image": "https://artsdatabanken.no/Media/F12285",
+    "tagline": "Neuroptera"
+  },
+  "Pattedyr": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Pattedyr",
+    "image": "https://artsdatabanken.no/Media/F12286",
+    "tagline": "Mammalia"
+  },
+  "Rettvinger": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Rettvinger",
+    "image": "https://artsdatabanken.no/Media/F12287",
+    "tagline": "Orthoptera"
+  },
+  "Saksedyr": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Saksedyr",
+    "image": "https://artsdatabanken.no/Media/F12288",
+    "tagline": "Dermaptera"
+  },
+  "Sommerfugler": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Sommerfugler",
+    "image": "https://artsdatabanken.no/Media/F12291",
+    "tagline": "Lepidoptera"
+  },
+  "Sopper": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Sopper",
+    "image": "https://artsdatabanken.no/Media/F12292",
+    "tagline": "Fungi"
+  },
+  "Steinfluer": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Steinfluer",
+    "image": "https://artsdatabanken.no/Media/F12293",
+    "tagline": "Plecoptera"
+  },
+  "Stormaneter": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Stormaneter",
+    "image": "https://artsdatabanken.no/Media/F12294",
+    "tagline": "Scyphozoa"
+  },
+  "Svamper": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Svamper",
+    "image": "https://artsdatabanken.no/Media/F12295",
+    "tagline": "Porifera"
+  },
+  "Tovinger": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Tovinger",
+    "image": "https://artsdatabanken.no/Media/F12297",
+    "tagline": "Diptera"
+  },
+  "Vepser": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Vepser",
+    "image": "https://artsdatabanken.no/Media/F12298",
+    "tagline": "Hymenoptera"
+  },
+  "Vårfluer": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Varfluer",
+    "image": "https://artsdatabanken.no/Media/F12299",
+    "tagline": "Trichoptera"
+  },
+  "Øyenstikkere": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Oyenstikkere",
+    "image": "https://artsdatabanken.no/Media/F12300",
+    "tagline": "Odonata"
+  }
+}

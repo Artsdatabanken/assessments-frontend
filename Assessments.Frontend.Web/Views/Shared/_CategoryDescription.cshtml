@@ -1,11 +1,13 @@
 ﻿@model Artsdatabanken.RL2021
 @{
     ViewBag.category = @Model.Kategori;
+    var utd = @ViewBag.glossary["TroligUtdodd"]["description"];
 }
 
 @*
     Codeblock from Innsynsløsninga 2021 by SN. 
     Slightly modified by HEM for launch.
+    
 *@
 
 <div class="page_section">
@@ -34,7 +36,7 @@
                 <span class="material-icons">image_search</span>
             </span>
             <span class="right_text">
-                <b>@ViewBag.glossary["TroligUtdodd"]["tagline"]</b> @ViewBag.glossary["TroligUtdodd"]["description"]
+                <b> @ViewBag.glossary["TroligUtdodd"]["tagline"]</b> @Html.Raw(utd)
             </span>
         </p>
 

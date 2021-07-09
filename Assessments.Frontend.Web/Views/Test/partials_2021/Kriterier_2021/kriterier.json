@@ -1,7 +1,7 @@
 ﻿{  
   "A": {
     "summary": "Kraftig reduksjon i populasjonsstørrelse [2015]",
-    "description": "Sterk reduksjon i populasjonsstørrelse, ≥ 30 % reduksjon over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år). A-kriteriene anvendes på arter som nylig har gjennomgått en sterk nedgang i populasjonsstørrelse, eller der det er sterk grunn til å forvente en betydelig nedgang i nærmeste framtid. [2015]",
+    "description": "Sterk reduksjon i populasjonsstørrelse, ≥ 15 % reduksjon over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år). A-kriteriene anvendes på arter som nylig har gjennomgått en sterk nedgang i populasjonsstørrelse, eller der det er sterk grunn til å forvente en betydelig nedgang i nærmeste framtid. [2015]",
     "options": {
       "keys": [ "a", "b", "c", "d", "e" ],
       "a": {
@@ -80,11 +80,11 @@
   },
   "B": {
     "summary": "Begrenset utbredelse i kombinasjon med fragmentering eller nedgang [2015]",
-    "description": "Begrenset utbredelsesområde (< 20 000 km2) eller forekomstareal (< 2000 km2) kombinert med minst to av følgende underkriterier: a kraftig fragmentering eller få lokaliteter; b pågående nedgang i populasjonstørrelse eller areal; c ekstreme fluktuasjoner[2015]",
+    "description": "Begrenset utbredelsesområde (< 40 000 km2) eller forekomstareal (< 4000 km2) kombinert med minst to av følgende underkriterier: a kraftig fragmentering eller få lokaliteter; b pågående nedgang i populasjonstørrelse eller areal; c ekstreme fluktuasjoner[2015]",
     "options": {
       "keys": [ "a", "b", "c" ],
       "a": {
-        "tagline": "Kraftig fragmenteringeller få lokaliteter(avgrenset av trussel)",
+        "tagline": "Kraftig fragmentering eller få lokaliteter (avgrenset av trussel)",
         "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en art. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
         "subcategory": {
           "i": {
@@ -97,7 +97,7 @@
           },
           "ii": {
             "tagline": "Antall trusseldefinerte lokaliteter",
-            "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en arte. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
+            "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en art. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
             "content": {
               "min": "Minst: baIntervallAntallLokaliteter(min)",
               "max": "Maksimum: baIntervallAntallLokaliteter(max)",
@@ -168,7 +168,7 @@
     }
   },
   "C": {
-    "summary": "Populasjonsstørrelse ",
+    "summary": "Liten populasjonsstørrelse og pågående nedgang",
     "description": "Populasjonsstørrelse er antall reproduksjonsdyktige individ. For kjønnede arter kan det tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.",
     "content": {
       "min": "Minst: cPopulasjonsstørrelseAntatt(min)",
@@ -230,7 +230,7 @@
   },
   "D": {
     "summary": "Svært liten populasjonsstørrelse eller forekomst [2015]",
-    "description": "Svært få reproduksjonsdyktige individ (< 1000) eller svært begrenset forekomstareal eller få lokaliteter (< 20 km2 eller ≤ 5 lokaliteter). Arter med begrenset forekomstareal/få lokaliteter kan kun rødlistes hvis det også finnes en potensiell trussel mot lokaliteten. Arter kan bli rødlistet etter D-kriteriet selv om det ikke er en pågående negang i populasjonsstørrelse. [2015]",
+    "description": "Svært få reproduksjonsdyktige individ (< 2000) eller svært begrenset forekomstareal eller få lokaliteter (< 40 km2 eller ≤ 10 lokaliteter). Arter med begrenset forekomstareal/få lokaliteter kan kun rødlistes hvis det også finnes en potensiell trussel mot lokaliteten. Arter kan bli rødlistet etter D-kriteriet selv om det ikke er en pågående negang i populasjonsstørrelse. [2015]",
     "subcriteria": {
       "keys": [ "D1", "D2" ],
       "D1": {

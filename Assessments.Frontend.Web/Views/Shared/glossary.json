@@ -13,40 +13,40 @@
   },
   "generasjonstid": {
     "tagline": "Generasjonstid X år",
-    "description": "Generasjonstid er gjennomsnittsalder for alle reproduserende individ, dvs. foreldre til alle avkom i populasjonen. Om generasjonstiden hos en populasjon har blitt endret som følge av høsting el.lign. skal den naturlige generasjonslengden før høsting benyttes. Generasjonstid og generasjonslengde brukes synonymt."
+    "description": "Generasjonstid er gjennomsnittsalder for alle reproduserende individ, dvs. foreldre til alle avkom i populasjonen. Om generasjonstiden hos en populasjon har blitt endret som følge av høsting eller lignende skal den naturlige generasjonslengden før høsting benyttes. Generasjonstid og generasjonslengde brukes synonymt."
   },
   "TroligUtdodd": {
     "tagline": "Trolig utdødd",
-    "description": "er ikke en kategori, men en merkelapp som settes på arter som er vurdert som kritisk truet (CR) og som trolig er utdødd. Dette gjøres når det med dagens kunnskap ikke med sikkerhet kan fastslås at arten er utødd. En art vurderes som regionalt utdødd (RE) når gjentatte undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn."
+    "description": "er ikke en kategori, men en merkelapp som settes på arter som er vurdert som <i>kritisk truet</i> CR og som trolig er utdødd. Dette gjøres når det med dagens kunnskap ikke kan fastslås med sikkerhet at arten er regionalt utødd."
   },
   "RE": {
     "tagline": "Regionalt utdødd",
-    "description": "–skal bare brukes dersom det er svært liten tvil om at arten er døddut/har emigrert fra Norge (IUCN sier at det skal være \\\"no reasonable doubt\\\"). For at arten skal settes i denne kategorien må det dokumenteres eller sannsynliggjøres at artenhar vært fastreproduserende i Norge etter år1799, eller at arten var en besøkende art(se avsnittet hvilke arter kan vurderes?). Bruk av denne kategorien betinger at gjentatte undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn av arten. Disse undersøkelsen skal ha foregått ved fornuftige tidspunkt (f.eks. hver sesong, årlig) og ha pågått over et tidsrom som er egnet for artens livssyklus og livsform (se IUCN 2019, side80-86).",
+    "description": "– brukes dersom det er svært liten tvil om at arten er dødd ut/har emigrert fra vurderingsområdet. For at arten skal settes i denne kategorien må det dokumenteres eller sannsynliggjøres at arten innfridde de nasjonale kravene for å bli rødlistevurdert før den døde ut (jf. \"Hvilke arter kan vurderes?\" i Veileder til rødlistevurdering for Norsk rødliste for arter 2021). Bruk av denne kategorien betinger at gjentatte, systematiske undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn av arten.",
     "presentationstring": "regionalt utdødd "
   },
   "CR": {
     "tagline": "Kritisk truet",
-    "description": "– skal brukes når det er ekstremt høy risiko for utdøing, altså når best tilgjengelig kunnskap tilsier at arten møter et av kriteriene A-E for CR.",
+    "description": "– brukes når det er ekstremt høy risiko for utdøing, altså når beste tilgjengelige kunnskap tilsier at arten møter et av kriteriene A-E for CR.",
     "presentationstring": "kritisk truet "
   },
   "EN": {
     "tagline": "Sterkt truet",
-    "description": "– skal brukes når det er svært høy risiko for utdøing, altså når best tilgjengelig kunnskap tilsier at arten møter etav kriteriene A-E for EN.",
+    "description": "– brukes når det er svært høy risiko for utdøing, altså når beste tilgjengelige kunnskap tilsier at arten møter et av kriteriene A-E for EN.",
     "presentationstring": "sterkt truet "
   },
   "VU": {
     "tagline": "Sårbar",
-    "description": "- skal brukes når det er høy risiko for utdøing, altså når best tilgjengelig kunnskap tilsier at arten møter etav kriteriene A-E for VU",
+    "description": "- brukes når det er høy risiko for utdøing, altså når beste tilgjengelige kunnskap tilsier at arten møter et av kriteriene A-E for VU",
     "presentationstring": "sårbar "
   },
   "NT": {
     "tagline": "Nær truet",
-    "description": " – skal brukes når en art er vurdert å ligge tett opp til å kvalifisere til CR, EN eller VU, eller trolig vil det i nær framtid. IUCN har ingen faste grenseverdier for NT, men vi bruker det samme kriteriesettet som ble bruktiRødlista 2006, 2010 og 2015. Det kan være aktuelt å bruke NT for arter der arten i dagens situasjon er avhengig av forvaltningstiltak.",
+    "description": " – brukes når en art er vurdert å ligge tett opp til å kvalifisere til CR, EN eller VU, eller trolig vil det i nær framtid. IUCN har hittil ingen faste grenseverdier for NT, men vi bruker det samme kriteriesettet som ble brukt i Rødlista 2006, 2010 og 2015. Det kan være aktuelt å bruke NT for arter der arten i dagens situasjon er avhengig av forvaltningstiltak.",
     "presentationstring": "nær truet "
   },
   "DD": {
     "tagline": "Datamangel",
-    "description": "– bør brukes i begrenset omfang. Kategorien DD benyttes der usikkerhet om artens korrekte kategori plassering, basert på tilgjengelig kunnskap om artens utbredelse og/eller populasjonsstatus, er svært stor og inkluderer hele spekteret av mulige kategorier fra og med CR til og med LC.",
+    "description": "– brukes der usikkerhet om artens korrekte kategoriplassering, basert på tilgjengelig kunnskap om artens utbredelse og/eller populasjonsstatus, er svært stor og inkluderer hele spekteret av mulige kategorier fra og med CR til og med LC.",
     "presentationstring": "datamangel "
   },
   "NE": {
@@ -55,13 +55,13 @@
     "presentationstring": "ikke vurdert "
   },
   "NA": {
-    "tagline": "Ikke egnet ",
-    "description": "–skal brukes på arter som ifølge IUCN sitt regelverk ikke skal vurderes ved nasjonal rødlisting. Dette er for eksempel fremmede arter og tilfeldige gjester (se avsnitt «Hvilke arter og bestander skal ikke vurderes?»).",
+    "tagline": "Ikke egnet",
+    "description": "– brukes på arter som ifølge IUCN sitt regelverk og de nasjonale avgrensningene ikke skal vurderes for Rødlista.",
     "presentationstring": "ikke egnet "
   },
   "LC": {
-    "tagline": "Livskraftig bestand",
-    "description": "–skal brukes når arter ikke oppfyller noen av kriteriene for å bli vurdert til kategoriene CR, EN, VU, NT, eller som ikke er satt i kategorien RE, DD, NA eller NE.",
+    "tagline": "Livskraftig",
+    "description": "– brukes på arter som innfrir de nasjonale kravene for å bli vurdert (jf. \"Hvilke arter kan vurderes?\" i Veileder til rødlistevurdering for Norsk rødliste for arter 2021), men som ikke oppfyller noen av kriteriene A-E for kategoriene CR, EN, VU, NT, eller kravene for å bli satt i kategorien RE eller DD.",
     "presentationstring": "livskraftig "
   },
   "vurdert_N": {
@@ -73,36 +73,36 @@
     "description": "Vurderingen gjelder for Svalbard, dvs. Spitsbergen og øyene omkring, samt Bjørnøya og Hopen slik det er definert i Svalbardtraktaten."
   },
   "vurdert_S_pattedyr": {
-    "tagline": "Vurderto for Svalbard",
-    "description": "Vurderingen gjelder for Svalbard, dvs. Spitsbergen og øyene omkring, samt Bjørnøya og Hopen inklusiv kyst innen 12 nautiske mil. Arten har vært gjennom full rødlistevurdering."
+    "tagline": "Vurdert for Svalbard",
+    "description": "Vurderingen gjelder for Svalbard, dvs. Spitsbergen og øyene omkring, samt Bjørnøya og Hopen inklusiv kyst innen 12 nautiske mil."
   },
   "oneliners": {
     "litentvil": "Det er svært liten tvil om at arten er utdødd fra",
-    "etablertFør1800": "Arten er fremmed, men er antatt eller dokumentert etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800.",
-    "vurdert_livskraftig": "Arten er vurdert til å være livskraftig (LC).",
-    "full_vurdering": "Arten har vært gjennom full rødlistevurdering.",
-    "etablertBestandINorge": "Arten er dokumentert eller antatt å ha vært etablert med fast reproduserende bestand og hadde ikke opphav i introduserte individer.",
-    "ikkeReproduserendeINorge": "Arten var ikke fast reproduserende, men > 2 % av individene som utgjorde global populasjonsstørrelse oppholdt seg regelmessig innenfor gjeldende område i deler av sin års-/livssyklus (gjester).",
-    "ikkeReproduserendeGjestNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er ikke etablert med fast reproduserende bestand og &lt; 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor gjeldende område (gjest).",
-    "observertReproduserendeIkkeEtablertNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er observert reproduserende innenfor gjeldende område , men antas å ikke være etablert med fast reproduserende bestand.",
-    "observertReproduktivIkkeEtablertNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er observert i reproduktivt stadium innenfor gjeldende område , men antas å ikke være etablert med fast reproduserende bestand.",
-    "uregelmessigGjestIkkeReproduserendeNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er en gjest som uregelmessig dukker opp naturlig innenfor gjeldende område .",
-    "ikkeDokumentertForekomstNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten har ikke dokumentert forekomst innenfor gjeldende område .",
-    "hybridartUtenReproduksjonNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart uten reproduksjon.",
-    "hybridartUvisstOmReproduserendeNA": " Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Hybridart, men uvisst om den er reproduserende.",
-    "forekommerBareIHybridkombinasjonNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten forekommer bare i hybridkombinasjon i vurderingsområdet.",
-    "mangelfullKunnskapNE": "Arten er ikke forsøkt rødlistevurdert (NE) på grunn av svært mangelfull kunnskap.",
-    "uavklartSystematikkNE": "Arten er ikke forsøkt rødlistevurdert(NE) fordi arten eller artsgruppen den tilhører har uavklart systematikk.",
-    "uklartOmReproduserendeBestandNE": "Arten er ikke forsøkt rødlistevurdert(NE) fordi det er uavklart om arten er etablert med en fast reproduserende bestand i vurderingsområdet.",
-    "artsgruppeIkkeRisikovurdertNE": "Arten er ikke forsøkt rødlistevurdert(NE) fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021.",
-    "annetNE": "Arten er ikke forsøkt rødlistevurdert(NE).",
-    "fremmedArtNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert (NA). Arten er fremmed, og ble enten etablert innenfor gjeldende område etter år 1800 eller antas å kunne etablere seg innen 50 år (dørstokkart).",
+    "etablertFør1800": "Arten er fremmed, men er antatt eller dokumentert etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800 og kan derfor vurderes.",
+    "vurdert_livskraftig": "Arten er vurdert til å være <i>livskraftig</i> LC fordi det anslagsvis er mer enn 80 % sannsynlighet for at arten er livskraftig.",
+    "full_vurdering": "Arten har vært gjennom fullstendig rødlistevurdering.",
+    "etablertBestandINorge": "Arten er dokumentert eller antatt etablert med fast reproduserende bestand og har ikke opphav i introduserte individer.",
+    "ikkeReproduserendeINorge": "Arten er ikke fast reproduserende, men bestander som utgjør mer enn 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor vurderingsområdet i deler av sin års-/livssyklus (besøkende arter).",
+    "ikkeReproduserendeGjestNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Arten er ikke etablert med fast reproduserende bestand og mindre enn 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor vurderingsområdet (gjest).",
+    "observertReproduserendeIkkeEtablertNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Arten er observert reproduserende innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende bestand.",
+    "observertReproduktivIkkeEtablertNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Arten er observert i reproduktivt stadium innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende bestand.",
+    "uregelmessigGjestIkkeReproduserendeNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Arten er en gjest som uregelmessig dukker opp naturlig innenfor vurderingsområdet.",
+    "ikkeDokumentertForekomstNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Arten har ikke dokumentert forekomst innenfor vurderingsområdet.",
+    "hybridartUtenReproduksjonNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Hybridart uten reproduksjon.",
+    "hybridartUvisstOmReproduserendeNA": " Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Hybridart, men uvisst om den er reproduserende.",
+    "forekommerBareIHybridkombinasjonNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Arten forekommer bare i hybridkombinasjon i vurderingsområdet.",
+    "mangelfullKunnskapNE": "Arten er ikke forsøkt rødlistevurdert og er satt til <i>ikke egnet</i> NE på grunn av svært mangelfull kunnskap.",
+    "uavklartSystematikkNE": "Arten er ikke forsøkt rødlistevurdert og er satt til <i>ikke egnet</i> NE fordi arten eller artsgruppen den tilhører har uavklart systematikk.",
+    "uklartOmReproduserendeBestandNE": "Arten er ikke forsøkt rødlistevurdert og er satt til <i>ikke egnet</i> NE fordi det er uavklart om arten er etablert med en fast reproduserende bestand i vurderingsområdet.",
+    "artsgruppeIkkeRisikovurdertNE": "Arten er ikke forsøkt rødlistevurdert og er satt til <i>ikke egnet</i> NE fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021.",
+    "annetNE": "Arten er ikke forsøkt rødlistevurdert og er satt til <i>ikke egnet</i> NE.",
+    "fremmedArtNA": "Arten oppfyller ikke kravene for å bli rødlistevurdert og er derfor satt til <i>ikke vurdert</i> NA. Arten er fremmed, og ble enten etablert innenfor vurderingsområdet etter år 1800 eller antas å kunne etablere seg innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokkart</a>).",
     "history": "Hvis arten har blitt vurdert til Rødlista for arter 2010 og Rødlista for arter 2015 kan du se vurderingene her. Arter uten historikk er vurdert for første gang til Rødlista for arter 2021.",
-    "gjeldendekriterier": "En art behøver kun oppfylle én av IUCNs kriterier A-E for å bli rødlistet, men skal i utgangspunktet testes mot alle kriterier så langt det finnes informasjon. En art kan dermed ha én eller flere gjeldende kriterier, dvs. kriterier som har vært utslagsgivende for kategori.",
-    "AndelNåværendeBestand": "Nåværende populasjonsstørrelse som andel av maks. populasjonsstørrelse etter 1900",
+    "gjeldendekriterier": "En art behøver kun oppfylle ett av IUCNs kriterier A-E for å bli rødlistet, men skal i utgangspunktet testes mot alle kriterier så langt det finnes informasjon. En art kan dermed ha ett eller flere gjeldende kriterier, dvs. kriterier som er utslagsgivende for kategori.",
+    "AndelNåværendeBestand": "Nåværende populasjonsstørrelse som andel av maksimum populasjonsstørrelse etter 1900",
     "MaxAndelAvEuropeiskBestand": "Andel av europeisk populasjonsstørrelse i Norge",
     "MaxAndelAvGlobalBestand": "Andel av global populasjonsstørrelse i Norge",
-    "Påvirkningsfaktorer": "Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt. Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. \"Påvirkning på habitat\" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten.For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.",
+    "Påvirkningsfaktorer": "Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt. Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. \"Påvirkning på habitat\" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten. For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.",
     "habitat_description_2015": "<p>I Rødlista 2015 benyttes Naturtyper i Norge (NiN 1.0) som klassifiseringssystem for å beskrive artenes leveområder (Halvorsen mfl. 2009). Dette klassifiseringssystemet har 4 naturtypenivå: i) landskap, ii) landskapsdel, iii) natursystem, og iv) livsmedium. Mer detaljert informasjon finnes i <a href=\"http://artsdatabanken.no/Files/16095\">veilederen til rødlistevurdering</a>(pdf) og <a href=\"http://www.artsdatabanken.no/NaturiNorge\">Naturtypebasen</a>. Ved registrering av artenes leveområde (hovedhabitat), inkluderes bare de leveområdene som er viktigst for arten. Det innebærer at habitatet skal være relevant for mer enn 20 % av bestanden.</p>"
 
   }

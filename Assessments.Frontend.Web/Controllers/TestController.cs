@@ -104,6 +104,21 @@ namespace Assessments.Frontend.Web.Controllers
             return View("List2006", viewModel);
         }
 
+        [Route("habitat")]
+        public IActionResult Habitat()
+        {
+            var viewModel = new TestViewModel
+            {
+
+            };
+            string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
+            ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
+
+            string json_habitat = System.IO.File.ReadAllText("Views/Test/partials_2021/habitat.json");
+            ViewBag.habitat = Newtonsoft.Json.Linq.JObject.Parse(json_habitat);
+            return View("Habitat", viewModel);
+        }
+
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
 

@@ -5,7 +5,7 @@
   },
   "habitat": {
     "tagline": "hovedhabitat",
-    "description":  "Artens habitat er der den hovedsaklig forekommer, og i Rødlista 2021 er de vurdert etter noen predefinerte habitat. Disse er definert med grunnlag fra natursystemene slik de er gitt i Natur i Norge (NiN) og presentert på Artsdatabankens nettsted https://www.artsdatabanken.no/NiN/Natursystem/Typeinndeling."
+    "description":  "Artens habitat er dens viktigste leveområder. I vurderingene er det laget noen predefinerte habitat basert på inndeling etter <a href=\"https://artsdatabanken.no/NiN/Natursystem/Typeinndeling\">Natur i Norge (NiN)</a> systemet."
   },
   "region": {
     "tagline": "Regioner og havområder ",
@@ -102,7 +102,8 @@
     "AndelNåværendeBestand": "Nåværende populasjonsstørrelse som andel av maks. populasjonsstørrelse etter 1900",
     "MaxAndelAvEuropeiskBestand": "Andel av europeisk populasjonsstørrelse i Norge",
     "MaxAndelAvGlobalBestand": "Andel av global populasjonsstørrelse i Norge",
-    "Påvirkningsfaktorer": "Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt. Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. \"Påvirkning på habitat\" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten.For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet."
+    "Påvirkningsfaktorer": "Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt. Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. \"Påvirkning på habitat\" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten.For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.",
+    "habitat_description_2015": "<p>I Rødlista 2015 benyttes Naturtyper i Norge (NiN 1.0) som klassifiseringssystem for å beskrive artenes leveområder (Halvorsen mfl. 2009). Dette klassifiseringssystemet har 4 naturtypenivå: i) landskap, ii) landskapsdel, iii) natursystem, og iv) livsmedium. Mer detaljert informasjon finnes i <a href=\"http://artsdatabanken.no/Files/16095\">veilederen til rødlistevurdering</a>(pdf) og <a href=\"http://www.artsdatabanken.no/NaturiNorge\">Naturtypebasen</a>. Ved registrering av artenes leveområde (hovedhabitat), inkluderes bare de leveområdene som er viktigst for arten. Det innebærer at habitatet skal være relevant for mer enn 20 % av bestanden.</p>"
 
   }
 }

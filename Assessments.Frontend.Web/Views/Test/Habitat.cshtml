@@ -1,0 +1,115 @@
+﻿@{
+   
+        ViewBag.Title = "Habitat";
+    
+    Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
+}
+
+<div class="breadcrumbs">
+    <ul>
+        <li class="lead in-breadcrumb">
+            <a href="/">
+                Rødlista
+            </a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb">
+            <a href="/test/2021">2021</a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb currentcrumb">
+            Habitat
+        </li>
+    </ul>
+</div>
+
+
+<div class="content-placer bigmid">
+    <div class="page-header">
+
+        <h2 class="nameBlock">
+            Data her er hentet fra 2015 og BØR sjekkes opp. Muligens mye feil.
+        </h2>
+        <h1>
+            Norsk rødliste for arter 2021
+        </h1>
+
+        <h2 class="nameBlock">
+            Habitat 
+        </h2>
+
+        <span class="byline">
+            Publisert: 24.November 2021.
+        </span>
+
+    </div>
+
+    <div class="mid">
+        <div class="ingress">
+            <p>
+               
+
+                @{
+                    // Obtaining HTML from json. Probably not the safest due to code injection,
+                    // but as nothing is posted - where's the harm?
+                    string desc = @ViewBag.glossary["habitat"]["description"];
+                    string paragraph = @ViewBag.glossary["oneliners"]["habitat_description_2015"];
+                }
+                @Html.Raw(desc)
+            </p>
+        </div>
+        <p> @Html.Raw(paragraph)</p>
+        <div class="other_habitats">
+            <div class="habitat_container">
+
+                @foreach (var key in habitat.Keys)
+                {
+                    <div class="habitat_element active">
+                        @if (@habitat[key]["name"] != null)
+                        {
+                            <h4 class="habitat_header">@habitat[key]["name"]</h4>
+                        }
+                        <div class="habitat_icon">
+                            @if (@habitat[key]["image"] != null)
+                            {
+                                <img src=@habitat[key]["image"] />
+                            }
+                        </div>
+                        @if (@habitat[key]["description"] != null)
+                        {
+                            <p>
+                                @{
+                                    // Obtaining HTML from json. Probably not the safest due to code injection,
+                                    // but as nothing is posted - where's the harm?
+                                    string str = @habitat[key]["description"];
+                                }
+                                @Html.Raw(str)
+                            </p>
+                            <button class="seemore" onclick="expand(this)">
+                                <span class="more">Se mer</span>
+                                <span class="less">Se mindre</span>
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // See more text by altering css of the clicked element's top parent node
+    var seemorebuttons = document.getElementsByClassName('seemore');
+
+    function expand(element) {
+        if (element.parentElement.classList.contains("expanded")) {
+            element.parentElement.classList.remove("expanded");
+        } else {
+            element.parentElement.classList.add("expanded");
+        }
+    }
+
+
+
+</script>

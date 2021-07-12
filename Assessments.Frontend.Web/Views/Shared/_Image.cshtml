@@ -5,45 +5,39 @@
 
     var hierarki = @Model.VurdertVitenskapeligNavnHierarki.Split("/");
     string hierarkitext = @Model.VurdertVitenskapeligNavnHierarki.Replace("/", " > ");
+    string ekspertgruppe = @Model.Ekspertgruppe;
 
     // TODO: When there is no taxonomic hierarchy - obtain the taxon level elsewhere.
 
 }
 
+
+@foreach (var key in speciesgroup.Keys)
+{
 <div class="sidebar_image_info">
-    <h2> STI </h2>
-    @hierarkitext
-    </div>
+    @if (key != null && key == @Model.Ekspertgruppe){
 
-    @foreach (var key in speciesgroup.Keys)
-    {
-        <div class="sidebar_image_info">
-            @foreach (var taxonlevel in hierarki)
+        <h2>@key</h2>
+        @if (speciesgroup[key]["tagline"] != null)
+        {
+            <span class="tagline">
+                @speciesgroup[key]["tagline"]
+            </span>
+        }
+        <span class="habitat_icon">
+            @if (speciesgroup[key]["image"] != null)
             {
-                @if (speciesgroup[key]["tagline"] != null && @speciesgroup[key]["tagline"].Contains(taxonlevel))
-                {
-
-                    <h2>@key</h2>
-                    @if (speciesgroup[key]["tagline"] != null)
-                    {
-                        <span class="tagline">
-                            @speciesgroup[key]["tagline"]
-                        </span>
-                    }
-                    <span class="habitat_icon">
-                        @if (speciesgroup[key]["image"] != null)
-                        {
-                            <img src=@speciesgroup[key]["image"] />
-                        }
-                    </span>
-                    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
-                    {
-                        <p>
-                            @hierarkitext
-                        </p>
-                    }
-
-                }
+                <img src=@speciesgroup[key]["image"] />
             }
-        </div>
+        </span>
+        @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+        {
+            <p>
+                @hierarkitext
+            </p>
+        }
+
+    }
+    
+</div>
     }

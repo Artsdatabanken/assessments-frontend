@@ -1,52 +1,44 @@
 ﻿@model Artsdatabanken.RL2021
 @{
-    //string ekspertgruppe = char.ToLower(@Model.Ekspertgruppe[0]) + @Model.Ekspertgruppe.Substring(1);
 
     Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
-    // TODO: ADD THE LINK TO EXPERT COMMITTEE (Not in existence yet)
 
     var hierarki = @Model.VurdertVitenskapeligNavnHierarki.Split("/");
+    string hierarkitext = @Model.VurdertVitenskapeligNavnHierarki.Replace("/", " > ");
+
+    // TODO: When there is no taxonomic hierarchy - obtain the taxon level elsewhere.
+
 }
 
-<div class="other_habitats">
-    <div class="habitat_container speciesgroup">
-
-        @foreach (var key in speciesgroup.Keys)
+@foreach (var key in speciesgroup.Keys)
+{
+    <div class="sidebar_image_info">
+        @foreach (var taxonlevel in hierarki)
         {
-        <span>
-            @foreach (var taxonlevel in hierarki)
+            @if (speciesgroup[key]["tagline"] != null && @speciesgroup[key]["tagline"].Contains(taxonlevel))
             {
-
-                @if (speciesgroup[key]["tagline"] != null && @speciesgroup[key]["tagline"].Contains(taxonlevel))
+                    
+                <h2>@key</h2>
+                @if (speciesgroup[key]["tagline"] != null)
                 {
-                    <div class="habitat_element expanded">
-
-                        <h4 class="speciesgroup_header">@key</h4>
-
-                        <div class="habitat_icon">
-                            @if (speciesgroup[key]["image"] != null)
-                            {
-                                <img src=@speciesgroup[key]["image"] />
-                            }
-                        </div>
-                        @if (speciesgroup[key]["tagline"] != null)
-                        {
-                            <p>
-                                @speciesgroup[key]["tagline"]
-                            </p>
-                            <p>
-                                @Model.VurdertVitenskapeligNavnHierarki
-                            </p>
-
-                        }
-                    </div>
-
-
+                    <span class="tagline">
+                        @speciesgroup[key]["tagline"]
+                    </span>                   
                 }
+                <span class="habitat_icon">
+                    @if (speciesgroup[key]["image"] != null)
+                    {
+                        <img src=@speciesgroup[key]["image"] />
+                    }
+                </span>
+                @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+                {
+                    <p>
+                        @hierarkitext
+                    </p>
+                }
+                    
             }
-        </span>
-
-                        
         }
-    </div>
-</div>
+    </div>                        
+}

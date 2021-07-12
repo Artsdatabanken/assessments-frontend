@@ -5,17 +5,23 @@
 
     var hierarki = @Model.VurdertVitenskapeligNavnHierarki.Split("/");
     string hierarkitext = @Model.VurdertVitenskapeligNavnHierarki.Replace("/", " > ");
+
+    // Expert committee field should always be present.
+    // By the time we arrive here, the actual committe name has been split into correct species group,
+    // and is thus now species group and not actually committtee group.
     string ekspertgruppe = @Model.Ekspertgruppe;
 
-    // TODO: When there is no taxonomic hierarchy - obtain the taxon level elsewhere.
+    // As long as expert committees contain area, it needs to be stripped away to use the field.
 
+    ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
+    ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
 }
-
 
 @foreach (var key in speciesgroup.Keys)
 {
 <div class="sidebar_image_info">
-    @if (key != null && key == @Model.Ekspertgruppe){
+    @if (key != null && key == @ekspertgruppe)
+    {
 
         <h2>@key</h2>
         @if (speciesgroup[key]["tagline"] != null)

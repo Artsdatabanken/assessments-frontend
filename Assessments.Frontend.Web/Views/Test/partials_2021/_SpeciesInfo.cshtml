@@ -17,33 +17,30 @@
     ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
 }
 
-@foreach (var key in speciesgroup.Keys)
-{
 <div class="sidebar_image_info">
-    @if (key != null && key == @ekspertgruppe)
+    <h2>@ekspertgruppe</h2>
+    @foreach (var key in speciesgroup.Keys)
     {
-
-        <h2>@key</h2>
-        @if (speciesgroup[key]["tagline"] != null)
+        @if (key != null && key == @ekspertgruppe)
         {
-            <span class="tagline">
-                @speciesgroup[key]["tagline"]
+            @if (speciesgroup[key]["tagline"] != null)
+            {
+                <span class="tagline">
+                    @speciesgroup[key]["tagline"]
+                </span>
+            }
+            <span class="habitat_icon">
+                @if (speciesgroup[key]["image"] != null)
+                {
+                    <img src=@speciesgroup[key]["image"] />
+                }
             </span>
         }
-        <span class="habitat_icon">
-            @if (speciesgroup[key]["image"] != null)
-            {
-                <img src=@speciesgroup[key]["image"] />
-            }
-        </span>
-        @if (@Model.VurdertVitenskapeligNavnHierarki != null)
-        {
-            <p>
-                @hierarkitext
-            </p>
-        }
-
     }
-    
+    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+    {
+        <p>
+            @hierarkitext
+        </p>
+    }
 </div>
-    }

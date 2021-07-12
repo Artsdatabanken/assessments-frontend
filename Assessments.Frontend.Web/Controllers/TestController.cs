@@ -53,6 +53,8 @@ namespace Assessments.Frontend.Web.Controllers
                 Name = name
             };
 
+            string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
+            ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
             return View("List2021", viewModel);
         }
 

@@ -154,6 +154,9 @@ namespace Assessments.Frontend.Web.Controllers
                         string json_habitat = System.IO.File.ReadAllText("Views/Test/partials_2021/habitat.json");
                         ViewBag.habitat = Newtonsoft.Json.Linq.JObject.Parse(json_habitat);
 
+                        string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
+                        ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
+
                         return View("SpeciesAssessment2021", RL2021);
 
                     case 2015:

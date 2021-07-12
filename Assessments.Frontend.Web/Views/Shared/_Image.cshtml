@@ -10,35 +10,40 @@
 
 }
 
-@foreach (var key in speciesgroup.Keys)
-{
-    <div class="sidebar_image_info">
-        @foreach (var taxonlevel in hierarki)
-        {
-            @if (speciesgroup[key]["tagline"] != null && @speciesgroup[key]["tagline"].Contains(taxonlevel))
+<div class="sidebar_image_info">
+    <h2> STI </h2>
+    @hierarkitext
+    </div>
+
+    @foreach (var key in speciesgroup.Keys)
+    {
+        <div class="sidebar_image_info">
+            @foreach (var taxonlevel in hierarki)
             {
-                    
-                <h2>@key</h2>
-                @if (speciesgroup[key]["tagline"] != null)
+                @if (speciesgroup[key]["tagline"] != null && @speciesgroup[key]["tagline"].Contains(taxonlevel))
                 {
-                    <span class="tagline">
-                        @speciesgroup[key]["tagline"]
-                    </span>                   
-                }
-                <span class="habitat_icon">
-                    @if (speciesgroup[key]["image"] != null)
+
+                    <h2>@key</h2>
+                    @if (speciesgroup[key]["tagline"] != null)
                     {
-                        <img src=@speciesgroup[key]["image"] />
+                        <span class="tagline">
+                            @speciesgroup[key]["tagline"]
+                        </span>
                     }
-                </span>
-                @if (@Model.VurdertVitenskapeligNavnHierarki != null)
-                {
-                    <p>
-                        @hierarkitext
-                    </p>
+                    <span class="habitat_icon">
+                        @if (speciesgroup[key]["image"] != null)
+                        {
+                            <img src=@speciesgroup[key]["image"] />
+                        }
+                    </span>
+                    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+                    {
+                        <p>
+                            @hierarkitext
+                        </p>
+                    }
+
                 }
-                    
             }
-        }
-    </div>                        
-}
+        </div>
+    }

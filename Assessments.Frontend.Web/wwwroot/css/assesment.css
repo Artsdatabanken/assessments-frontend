@@ -13,6 +13,20 @@
 }
 
 
+@media only screen and (max-width: 550px) {
+    .side {
+        float: none;
+        width: 100%;
+        height: auto;
+        border-left: none;
+        padding: 10px;
+        margin-left: 0px;
+    }
+}
+
+
+
+
 /* Sidebar element*/
 .sidebar_image_info h2{
     margin:0;

@@ -6,6 +6,8 @@
 
 @{
     ViewBag.Title = "2021";
+    Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+
 }
 <div class="breadcrumbs">
     <ul>
@@ -78,15 +80,47 @@
 
                 @foreach (var item in Model.Redlist2021Results)
                 {
-                    <li class="list">
-                        <span>
-                            <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
-                                @item.LatinsknavnId
-                            </a>
-                        </span>         
-                        <span>@item.VurdertVitenskapeligNavn</span>
-                        <span>@item.Kategori</span>
-                    </li>
+                    
+                    
+            <li class="list">
+                @{
+                    // TODO: The number of fields contained in the box does not add up. Fix.
+                    // Makes it very strange and overflowy in grid view.
+
+
+
+                    // Expert committee field should always be present.
+                    // By the time we arrive here, the actual committe name has been split into correct species group,
+                    // and is thus now species group and not actually committtee group.
+                    string ekspertgruppe = item.Ekspertgruppe;
+
+                    // As long as expert committees contain area, it needs to be stripped away to use the field.
+
+                    ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
+                    ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
+                }
+                <span>
+                    <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
+                        @item.LatinsknavnId
+                    </a>
+                </span>
+                <span>@item.VurdertVitenskapeligNavn</span>
+                <span>@item.Kategori</span>
+                <span>@ekspertgruppe</span>
+                @foreach (var key in speciesgroup.Keys)
+                {
+                    @if (key != null && key == @ekspertgruppe)
+                    {
+                       
+                    @if (speciesgroup[key]["image"] != null)
+                    {
+                        <img src=@speciesgroup[key]["image"] class="list_icon"/>
+                    }
+                        
+                    }
+                }
+
+            </li>
                 }
 
 

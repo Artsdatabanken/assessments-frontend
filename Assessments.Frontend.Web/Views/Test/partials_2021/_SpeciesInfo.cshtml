@@ -1,0 +1,46 @@
+﻿@model Artsdatabanken.RL2021
+@{
+
+    Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+
+    var hierarki = @Model.VurdertVitenskapeligNavnHierarki.Split("/");
+    string hierarkitext = @Model.VurdertVitenskapeligNavnHierarki.Replace("/", " > ");
+
+    // Expert committee field should always be present.
+    // By the time we arrive here, the actual committe name has been split into correct species group,
+    // and is thus now species group and not actually committtee group.
+    string ekspertgruppe = @Model.Ekspertgruppe;
+
+    // As long as expert committees contain area, it needs to be stripped away to use the field.
+
+    ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
+    ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
+}
+
+<div class="sidebar_image_info">
+    <h2>@ekspertgruppe</h2>
+    @foreach (var key in speciesgroup.Keys)
+    {
+        @if (key != null && key == @ekspertgruppe)
+        {
+            @if (speciesgroup[key]["tagline"] != null)
+            {
+                <span class="tagline">
+                    @speciesgroup[key]["tagline"]
+                </span>
+            }
+            <span class="habitat_icon">
+                @if (speciesgroup[key]["image"] != null)
+                {
+                    <img src=@speciesgroup[key]["image"] />
+                }
+            </span>
+        }
+    }
+    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+    {
+        <p>
+            @hierarkitext
+        </p>
+    }
+</div>

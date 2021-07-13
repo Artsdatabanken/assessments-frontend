@@ -16,7 +16,7 @@
     {
         <h2>Habitat</h2>
         <div>
-            @ViewBag.glossary["habitat"]["description"]
+            @Html.Raw(@ViewBag.glossary["habitat"]["description"])
             <h3>Arten finnes i disse habitatene</h3>
             @foreach (var modelelement in Model)
             {
@@ -36,13 +36,10 @@
                     @if (@ViewBag.habitat[modelelement]["description"] != null)
                     {
                         <p>
-                            @{
-                                // Obtaining HTML from json. Probably not the safest due to code injection,
-                                // but as nothing is posted - where's the harm?
-                                string str = @ViewBag.habitat[modelelement]["description"];
-                            }
-                            @Html.Raw(str)
-
+                            @Html.Raw(@ViewBag.habitat[modelelement]["description"])
+                        </p>
+                        <p>
+                            @Html.Raw(@ViewBag.habitat[modelelement]["mapping"])
                         </p>
                         <button class="seemore" onclick="expand(this)">
                             <span class="more">Se mer</span>

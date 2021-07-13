@@ -5,6 +5,15 @@
     Artsdatabanken.RL2021 assessment = Model;
 
     var kriteriedok = assessment.Kriteriedokumentasjon;
+    var hasp = kriteriedok.Length;
+    if (!kriteriedok.Contains("<br/>") && kriteriedok.Length>500)
+    {
+        // IN cases with big blocks of text with no line breaks, detect when a sentence ends in
+        // parenhesis and create line break. These sentences are often of concluding nature 
+        // such as references or summarising some content, which is a nice time to take a break. 
+        kriteriedok = kriteriedok.Replace(").", ").<br/>");
+    }
+
     @if (!string.IsNullOrWhiteSpace(kriteriedok))
     {
         kriteriedok = "<p>" + kriteriedok.Replace("<br/>", "</p><p>") + "<p>";
@@ -13,7 +22,9 @@
         kriteriedok = kriteriedok.Replace("<u>", "<h3>");
         kriteriedok = kriteriedok.Replace("</u>", "</h3>");
     }
-}
+
+    
+    }
 
 
 
@@ -21,7 +32,7 @@
 {
 
     <div class="page_section">
-        <h2>Oppsumering av vurdering</h2>
+        <h2>Oppsumering av vurdering @hasp</h2>
 
         <!-- Kategori Kriteriedokumentasjon -->
         @if (!string.IsNullOrWhiteSpace(assessment.Kriteriedokumentasjon))

@@ -415,6 +415,7 @@
     max-height:1000px;
     overflow-y:scroll;
     display:block;
+    padding-bottom:10px;
 }
 
 .quoatedtext {

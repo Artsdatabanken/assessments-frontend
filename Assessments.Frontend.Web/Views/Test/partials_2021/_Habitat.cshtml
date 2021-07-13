@@ -37,10 +37,12 @@
                     {
                         <p>
                             @Html.Raw(@ViewBag.habitat[modelelement]["description"])
-                        </p>
-                        <p>
+
+                            <br/><br/>
+
                             @Html.Raw(@ViewBag.habitat[modelelement]["mapping"])
                         </p>
+                       
                         <button class="seemore" onclick="expand(this)">
                             <span class="more">Se mer</span>
                             <span class="less">Se mindre</span>
@@ -71,14 +73,14 @@
                                 </div>
                                 @if (@habitat[key]["description"] != null)
                                 {
-                                    <p>
-                                        @{
-                                            // Obtaining HTML from json. Probably not the safest due to code injection,
-                                            // but as nothing is posted - where's the harm?
-                                            string str = @habitat[key]["description"];
-                                        }
-                                        @Html.Raw(str)
-                                    </p>
+                            <p>
+                               
+                                @Html.Raw(@habitat[key]["description"])
+
+                                <br /><br />
+
+                                @Html.Raw(@habitat[key]["mapping"])
+                            </p>
                                     <button class="seemore" onclick="expand(this)">
                                         <span class="more">Se mer</span>
                                         <span class="less">Se mindre</span>

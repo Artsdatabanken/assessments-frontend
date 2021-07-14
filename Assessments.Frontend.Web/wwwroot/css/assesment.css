@@ -413,7 +413,7 @@
 
 .expert_text{
     max-height:1000px;
-    overflow-y:scroll;
+    overflow-y:auto;
     display:block;
     padding-bottom:10px;
 }

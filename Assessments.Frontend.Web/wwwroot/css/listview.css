@@ -109,7 +109,6 @@ td {
     display: none;
 }
 
-.redlist.grid li:nth-child(even),
 .redlist.grid li {
     display: inline-block;
     width: 150px;
@@ -122,28 +121,6 @@ td {
     text-align: center;
 }
 
-.redlist.grid li span {
-    width: 100%;
-    display: block;
-    height: 58%;
-    text-align: center;
-}
-
-.redlist.grid li span:first-child {
-    height: 20%;
-}
-
-.redlist.grid li span:last-child {
-    height: 35px;
-    background: #e0dddd;
-    border-radius: 50%;
-    width: 35px;
-    margin: auto;
-    padding: 5px;
-    padding-top: 5px;
-    text-align: center;
-    padding-top: 10px;
-}
 
 /* SEARCH FIELD REDLIST */
 

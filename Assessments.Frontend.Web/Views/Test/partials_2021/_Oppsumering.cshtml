@@ -6,17 +6,20 @@
     string ekspertgruppe = char.ToLower(@Model.Ekspertgruppe[0]) + @Model.Ekspertgruppe.Substring(1);
 
     var kriteriedok = assessment.Kriteriedokumentasjon;
-    if (!kriteriedok.Contains("<br/>") && kriteriedok.Length > 500)
-    {
-        // IN cases with big blocks of text with no line breaks, detect when a sentence ends in
-        // parenhesis and create line break. These sentences are often of concluding nature
-        // such as references or summarising some content, which is a nice time to take a break.
-        kriteriedok = kriteriedok.Replace(").", ").<br/>");
-    }
 
-
-    @if (!string.IsNullOrWhiteSpace(kriteriedok))
+    if (!string.IsNullOrWhiteSpace(kriteriedok))
     {
+        if (kriteriedok.Length > 600)
+        {
+            var count = kriteriedok.Split("<br/>").Length; // Detect nr of line breaks.
+            if (count<3) // Allow a few strays - such as beginning or end etc. But 2 is still to few to make sense.
+            {
+                // IN cases with big blocks of text with no line breaks, detect when a sentence ends in
+                // parenhesis and create line break. These sentences are often of concluding nature
+                // such as references or summarising some content, which is a nice time to take a break.
+                kriteriedok = kriteriedok.Replace(").", ").<br/>");
+            }
+        }
 
         // Remove weird
         kriteriedok = kriteriedok.Replace("<u><br/></u>", "");
@@ -35,15 +38,13 @@
         kriteriedok = kriteriedok.Replace("<u></u>", "");
         kriteriedok = kriteriedok.Replace("<h3></h3>", "");
         kriteriedok = kriteriedok.Replace("<i> </i>", " ");
-                
+
         // Br into paragraphs
         kriteriedok = kriteriedok.Replace("<br/><br/>", "<br/>");
         kriteriedok = "<p>" + kriteriedok.Replace("<br/>", "</p><p>") + "<p>";
 
     }
 }
-
-
 
 @if (!((Model.Kategori == "NA" || Model.Kategori == "NE" || Model.Kategori == "LC") && (Model.Kriteriedokumentasjon == "" || Model.Kriteriedokumentasjon == null)))
 {
@@ -108,13 +109,6 @@
             </span>
 
         }
-
-
-
-
-
-
-
 
 
 

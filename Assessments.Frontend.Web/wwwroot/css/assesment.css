@@ -25,8 +25,6 @@
 }
 
 
-
-
 /* Sidebar element*/
 .sidebar_image_info h2{
     margin:0;
@@ -369,12 +367,12 @@
     max-height: 100%;
 }
 
-    .habitat_element.expanded p {
-        -webkit-line-clamp: initial;
-        -webkit-box-orient: vertical;
-        overflow: auto;
-        height: auto;
-    }
+.habitat_element.expanded p {
+    -webkit-line-clamp: initial;
+    -webkit-box-orient: vertical;
+    overflow: auto;
+    height: auto;
+}
 
 .more,
 .expanded .less {
@@ -413,6 +411,12 @@
     width: 100%;
 }
 
+.expert_text{
+    max-height:1000px;
+    overflow-y:auto;
+    display:block;
+    padding-bottom:10px;
+}
 
 .quoatedtext {
     padding: 20px;

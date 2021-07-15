@@ -444,3 +444,13 @@
     opacity: 0.3;
     font-size: 9pt;
 }
+
+/* REFERENCES */
+
+.reference {
+    display: block;
+    word-break: break-word;
+    margin-bottom: 5px;
+    text-indent: -36px;
+    padding-left: 36px;
+}

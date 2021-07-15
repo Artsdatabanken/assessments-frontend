@@ -110,18 +110,35 @@
                     <span class="element_name">@item.VurdertVitenskapeligNavn</span>
                     <span class="element_category"> <span class="@item.Kategori">@item.Kategori</span></span>
                     <span class="element_group">@ekspertgruppe</span>
-                    @foreach (var key in speciesgroup.Keys)
-                    {
-                        @if (key != null && key == @ekspertgruppe)
+                    <span class="element_area">
+                        @item.VurderingsContext
+                        @if (@item.VurderingsContext == "N")
                         {
+                            <img src="~/images/norge.png" />
+                        }
+                        else if (@item.VurderingsContext == "S")
+                        {
+                            <img src="~/images/svalbard.png" />
+                        }
 
-                            @if (speciesgroup[key]["image"] != null)
+
+                    </span>
+                    <div class="element_icon" >
+
+                        @foreach (var key in speciesgroup.Keys)
+                        {
+                            @if (key != null && key == @ekspertgruppe)
                             {
-                                <img src=@speciesgroup[key]["image"] class="element_icon" />
+
+                                @if (speciesgroup[key]["image"] != null)
+                                {
+                                    <img src=@speciesgroup[key]["image"] />
+                                }
+
                             }
 
                         }
-                    }
+                    </div>
                 </a>
             </li>
                 }

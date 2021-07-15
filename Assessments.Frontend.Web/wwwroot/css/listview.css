@@ -115,20 +115,38 @@ td {
 
 }
 
+.redlist.grid span {
+    display: none;
+}
+
 .element_icon {
     width: 50px;
     height: 50px;
     position: relative;
     display: inline-block;
+    background: #f4f4f4;
+    flex: none;
 }
 
-.redlist.grid span {
-    display: none;
+.element_icon img {
+    width: 100%;
+    height: auto;
 }
 .grid .element_icon {
     width: 100%;
     height: auto;
+    height: 150px;
 }
+
+.redlist .element_area img {
+    display:none;
+    width: 39px;
+    height:39px;
+
+}
+
+
+
 
 .redlist.grid .element_name {
     display: block;
@@ -146,10 +164,20 @@ td {
     right: 5px;
     z-index: 1;
 }
+.redlist.grid .element_area,
+.redlist.grid .element_area img {
+    display: inline;
+    position: absolute;
+    bottom: 2px;
+    left: 3px;
+    z-index: 1;
+}
+
 
 .redlist.grid .element_category span{
     display: inline;
 }
+
 
 
 

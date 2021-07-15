@@ -1,16 +1,4 @@
-﻿.list_icon {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    display: inline-block;
-}
-
-.grid .list_icon {
-    position: absolute;
-    top: 50%;
-    left: calc(50% - 25px);
-}
-
+﻿
 
 /* PAGINATOR FOR LIST PAGE*/
 
@@ -74,14 +62,19 @@ td {
 
 .redlist li {
     width: 100%;
-    line-height: 1;
     display: block;
+}
+
+.redlist li a {
+    line-height: 1;
     font-size: 12pt;
-    position:relative;
+    position: relative;
+    text-decoration:none;
+    color:inherit;
 }
 
 
-.redlist li {
+.redlist li a{
     display: flex;
 }
 
@@ -98,28 +91,66 @@ td {
     background: #fafafa;
 }
 
-.listheader {
-    font-size: 15px;
-    font-weight: bold;
-    background: none;
-}
-
 /* GRID VIEW */
 .redlist .listheader.grid {
     display: none;
 }
 
-.redlist.grid li {
+.redlist.grid li{
+    width:auto;
+    display:inline;
+}
+
+.redlist.grid li a {
     display: inline-block;
     width: 150px;
-    height: 150px;
+    height: auto;
     background: #fbfbfb;
     margin-bottom: 15px;
     margin-left: 5px;
     vertical-align: top;
     border: 1px solid #d4d4d4;
     text-align: center;
+    padding-top:50px;
+
 }
+
+.element_icon {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    display: inline-block;
+}
+
+.redlist.grid span {
+    display: none;
+}
+.grid .element_icon {
+    width: 100%;
+    height: auto;
+}
+
+.redlist.grid .element_name {
+    display: block;
+    width: 100%;
+    background: white;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.redlist.grid .element_category {
+    display: block;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    z-index: 1;
+}
+
+.redlist.grid .element_category span{
+    display: inline;
+}
+
 
 
 /* SEARCH FIELD REDLIST */

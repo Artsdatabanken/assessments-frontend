@@ -25,7 +25,7 @@
 
 <div class="sidebarmenu"></div>
 
-<div class="content-placer">
+<div class="content-placer bigmid">
     <div class="page-header">
         <h1>
             Norsk Rødliste for arter 2021
@@ -72,9 +72,11 @@
         <div class="listwrapper">
             <ul class="redlist" id="redlist">
                 <li class="listheader" id="listheader">
-                    <span>LatinsknavnId</span>
-                    <span>VurdertVitenskapeligNavn</span>
+                    <span>Id</span>
+                    <span>Artsnavn</span>
                     <span>Kategori</span>
+                    <span>Artsgruppe</span>
+                    <span>Ikon</span>
                 </li>
 
 
@@ -83,43 +85,44 @@
                     
                     
             <li class="list">
-                @{
-                    // TODO: The number of fields contained in the box does not add up. Fix.
-                    // Makes it very strange and overflowy in grid view.
+                <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
+                    @{
+                        // TODO: The number of fields contained in the box does not add up. Fix.
+                        // Makes it very strange and overflowy in grid view.
 
 
 
-                    // Expert committee field should always be present.
-                    // By the time we arrive here, the actual committe name has been split into correct species group,
-                    // and is thus now species group and not actually committtee group.
-                    string ekspertgruppe = item.Ekspertgruppe;
+                        // Expert committee field should always be present.
+                        // By the time we arrive here, the actual committe name has been split into correct species group,
+                        // and is thus now species group and not actually committtee group.
+                        string ekspertgruppe = item.Ekspertgruppe;
 
-                    // As long as expert committees contain area, it needs to be stripped away to use the field.
+                        // As long as expert committees contain area, it needs to be stripped away to use the field.
 
-                    ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
-                    ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
-                }
-                <span>
-                    <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
+                        ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
+                        ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
+                    }
+                    <span class="element_id">
+
                         @item.LatinsknavnId
-                    </a>
-                </span>
-                <span>@item.VurdertVitenskapeligNavn</span>
-                <span>@item.Kategori</span>
-                <span>@ekspertgruppe</span>
-                @foreach (var key in speciesgroup.Keys)
-                {
-                    @if (key != null && key == @ekspertgruppe)
-                    {
-                       
-                    @if (speciesgroup[key]["image"] != null)
-                    {
-                        <img src=@speciesgroup[key]["image"] class="list_icon"/>
-                    }
-                        
-                    }
-                }
 
+                    </span>
+                    <span class="element_name">@item.VurdertVitenskapeligNavn</span>
+                    <span class="element_category"> <span class="@item.Kategori">@item.Kategori</span></span>
+                    <span class="element_group">@ekspertgruppe</span>
+                    @foreach (var key in speciesgroup.Keys)
+                    {
+                        @if (key != null && key == @ekspertgruppe)
+                        {
+
+                            @if (speciesgroup[key]["image"] != null)
+                            {
+                                <img src=@speciesgroup[key]["image"] class="element_icon" />
+                            }
+
+                        }
+                    }
+                </a>
             </li>
                 }
 

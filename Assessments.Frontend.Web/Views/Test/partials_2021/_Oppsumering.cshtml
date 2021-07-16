@@ -39,10 +39,14 @@
         kriteriedok = kriteriedok.Replace("<h3></h3>", "");
         kriteriedok = kriteriedok.Replace("<i> </i>", " ");
 
-        // Br into paragraphs
+        // Br into paragraphs, remove duplicates and those with spaces inside
         kriteriedok = kriteriedok.Replace("<br/><br/>", "<br/>");
-        kriteriedok = "<p>" + kriteriedok.Replace("<br/>", "</p><p>") + "<p>";
-
+        kriteriedok = kriteriedok.Replace("<br/>", "</p><p>");
+        kriteriedok = kriteriedok.Replace("<p> ", "<p>");
+        kriteriedok = kriteriedok.Replace(" </p>", "</p>");
+        kriteriedok = kriteriedok.Replace("<p><p>", "<p>");
+        kriteriedok = "<p>" + kriteriedok + "</p>";
+        kriteriedok = kriteriedok.Replace("<p></p>", "");
     }
 }
 
@@ -53,18 +57,15 @@
         <h2>
             Oppsumering av vurdering
         </h2>
-        <!-- Kategori Kriteriedokumentasjon -->
+        
+            <!-- Kategori Kriteriedokumentasjon -->
         @if (!string.IsNullOrWhiteSpace(assessment.Kriteriedokumentasjon))
         {
             <div class="expert_assesment">
-
-                <div class="quoatedtext">
-                    <span class="quotationmark">“</span>
-                    <div class="expert_text">@Html.Raw(kriteriedok)</div>
-                    <br />
-                    -
-                    Ekspertkomité for @ekspertgruppe<span class="quotationmark">”</span>
-                </div>
+                <div class="expert_text">
+                   @Html.Raw(kriteriedok)
+                    <p class="quote_by">- Ekspertkomité for @ekspertgruppe</p>
+                </div>         
             </div>
 
 

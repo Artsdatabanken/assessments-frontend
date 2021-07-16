@@ -5,16 +5,12 @@
 }
 
 @*
-    Codeblock from Innsynsløsninga 2021 by SN. 
-    Slightly modified by HEM for launch.
-    
+    Mostly similar to category description for now
+
 *@
 
 <div class="page_section">
-    <h2>
-        Kategori Rødlista 2021: <partial name="/Views/Shared/_Category.cshtml" />
-    </h2>
-
+   
     @if (@ViewBag.glossary[@Model.Kategori] != null)
     {
         <p class="imaged_paragraph">
@@ -23,7 +19,7 @@
             </span>
             <span class="right_text">
                 <b>@ViewBag.glossary[@Model.Kategori]["tagline"]</b>
-                @ViewBag.glossary[@Model.Kategori]["description"]
+                <span class="tag_explanation">@ViewBag.glossary[@Model.Kategori]["description"]</span>
             </span>
         </p>
     }
@@ -36,11 +32,10 @@
                 <span class="material-icons">image_search</span>
             </span>
             <span class="right_text">
-                <b> @ViewBag.glossary["TroligUtdodd"]["tagline"]</b> @Html.Raw(utd)
+                <b> @ViewBag.glossary["TroligUtdodd"]["tagline"]</b> 
+                <span class="tag_explanation">@Html.Raw(utd)</span>
             </span>
         </p>
 
     }
-
-    <partial name="/Views/Shared/_Categorybar.cshtml" />
 </div>

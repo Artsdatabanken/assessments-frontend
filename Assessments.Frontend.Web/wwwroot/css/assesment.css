@@ -1,6 +1,12 @@
 ﻿
-/* Page setup */
+.header_geo {
+    font-size: 16pt;
+}
 
+.side .tag_explanation{
+    display:none;
+}
+/* Page setup */
 .side {
     float: right;
     width: 200px;
@@ -8,8 +14,8 @@
     height: 100%;
     border-left: 1px solid lightgrey;
     padding: 10px;
-    padding-top:0;
-    margin-left:10px;
+    padding-top: 0;
+    margin-left: 10px;
 }
 
 
@@ -392,43 +398,43 @@
     display: block;
 }
 /* EXPERT ASSESMENT */
-.expert_assesment {
-    padding: 5px;
-    padding-top: 0px;
+.expert_assesment p {
+    background: #f8f7f7;
+    padding:10px;
+    margin:0;
 }
 
-.expert_assesment .quotationmark {
+.expert_assesment p:first-child:before,
+.expert_assesment p:last-child:after {
+    content: "\“\a";
     font-size: 70pt;
+    height: 70px;
     font-family: 'Times New Roman';
-    display: inline-block;
-    height: 60px;
-    overflow: hidden;
     color: #929292;
+    display: block;
 }
 
-.expert_assesment .quotationmark:last-child {
-    text-align: right;
-    width: 100%;
+
+.expert_assesment p:last-child:after {
+    text-align:right;
+    content: "\” ";
 }
 
 .expert_text{
     max-height:1000px;
     overflow-y:auto;
     display:block;
-    padding-bottom:10px;
+    padding:0;
+    margin:0;
 }
 
-.quoatedtext {
-    padding: 20px;
-    display: inline-block;
-    background: #f8f7f7;
+.quote_by{
+    display:inline-block;
+    width:100%;
 }
 
-.quoatedtext_side {
-    padding: 20px;
-    float: right;
-}
 
+/*criteria*/
 .criteria_conclusions {
     max-width: 100%;
     overflow-y: auto;

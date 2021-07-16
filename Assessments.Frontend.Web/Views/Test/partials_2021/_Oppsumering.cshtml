@@ -29,6 +29,8 @@
         kriteriedok = kriteriedok.Replace("</b>", "</h3>");
         kriteriedok = kriteriedok.Replace("<u>", "<h3>");
         kriteriedok = kriteriedok.Replace("</u>", "</h3>");
+        kriteriedok = kriteriedok.Replace("</h3>", "</h3><p>");
+
 
         // Fix specific cases it went wrong
         kriteriedok = kriteriedok.Replace("<h3>)</h3>", ")");
@@ -63,7 +65,7 @@
         {
             <div class="expert_assesment">
                 <div class="expert_text">
-                   @Html.Raw(kriteriedok)
+                    @Html.Raw(kriteriedok)
                     <p class="quote_by">- Ekspertkomité for @ekspertgruppe</p>
                 </div>         
             </div>

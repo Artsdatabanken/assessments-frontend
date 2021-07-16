@@ -398,11 +398,13 @@
     display: block;
 }
 /* EXPERT ASSESMENT */
+.expert_assesment h3,
 .expert_assesment p {
     background: #f8f7f7;
-    padding:10px;
-    margin:0;
+    padding: 10px;
+    margin: 0;
 }
+
 
 .expert_assesment p:first-child:before,
 .expert_assesment p:last-child:after {

@@ -18,7 +18,7 @@ Begge sites er beskyttet og krever VPN.
 - Løsningen kjører i nyeste versjon av visual studio 
 - Krever muligens noen installering før kjøring, trenger støtte for ASP.NET Core 5.0 
 - Åpne assesment-frontend.sln og trykk kjør
-- Krever ikke vpn.
+- Krever vpn.
 
 Nyttig lenke om man er ny til teknologien: https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio
 

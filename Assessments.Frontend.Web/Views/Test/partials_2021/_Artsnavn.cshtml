@@ -10,7 +10,7 @@
     if (assessment.PopularName != string.Empty && !string.IsNullOrEmpty(assessment.PopularName))
         popularName = char.ToUpper(assessment.PopularName[0]) + assessment.PopularName.Substring(1);    }
 
-        <h2 class="nameBlock">
+        <span class="nameBlock">
             @if (!string.IsNullOrEmpty(Model.PopularName))
             {
                 <span><b> @popularName </b><i><b>@assessment.VurdertVitenskapeligNavn</b></i> @assessment.VurdertVitenskapeligNavnAutor</span>
@@ -19,4 +19,4 @@
             {
                 <span><i><b>@assessment.VurdertVitenskapeligNavn</b></i> @assessment.VurdertVitenskapeligNavnAutor</span>
             }
-        </h2>
+        </span>

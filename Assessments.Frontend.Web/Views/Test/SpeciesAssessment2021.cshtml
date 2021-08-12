@@ -2,85 +2,34 @@
 @{
     ViewBag.Title = @Model.VurdertVitenskapeligNavn;
     var naturtypehovedenhet = @Model.NaturtypeHovedenhet;
-    string geografi = @Model.VurderingsContext;
-
-    if (geografi == "N")
-    {
-        geografi = "Norge";
-    }
-    else if (geografi == "S")
-    {
-        geografi = "Svalbard";
-        if (@Model.Ekspertgruppe == "Pattedyr (Svalbard)")
-        {
-            geografi = "Svalbard med kyst";
-        }
-    }
-
 }
 
-<div class="breadcrumbs">
-    <ul>
-        <li class="lead in-breadcrumb">
-            <a href="/">
-                Rødlista
-            </a>
-        </li>
-        <span class="breadcrumbdivider">&gt; </span>
-        <li class="in-breadcrumb">
-            <a href="/test/2021">2021</a>
-        </li>
-        <span class="breadcrumbdivider">&gt; </span>
-        <li class="in-breadcrumb currentcrumb">
-            @Model.VurdertVitenskapeligNavn
-        </li>
-    </ul>
-</div>
-
+<partial name="/Views/Test/partials_2021/_Breadcrumb.cshtml" />
 <div class="content-placer bigmid">
-    <div class="page-header">
 
-
-        <h1>
-            Norsk rødliste for arter 2021 <span class="header_geo">for @geografi</span>
-        </h1>
-        <partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" />
-        <partial name="/Views/Shared/_Byline.cshtml" />
-
-    </div>
-
-
-    <div class="mid">
-        <div class="side">
-            <partial name="/Views/Test/partials_2021/_SpeciesInfo.cshtml" />
+    <div class="side">
+        <div class="mobileversion">            
+            <partial name="/Views/Test/partials_2021/_Header.cshtml" />
+        </div>
+        <partial name="/Views/Test/partials_2021/_SpeciesInfo.cshtml" />
+        <div class="history">
             <h2>
-                Kategori 
+                Kategori
             </h2>
-
             <h3>Rødlista 2021</h3>
             <partial name="/Views/Shared/_CategoryTags.cshtml" />
             <partial name="/Views/Test/partials_2021/_Historikk.cshtml" />
         </div>
-        <div class="ingress">
+    </div>
 
-
-            <p>
-                Arten er
-                @if (Model.Kategori != "NA" && Model.Kategori != "NE")
-                {
-                    <span>vurdert til</span>
-                }
-                <partial name="/Views/Shared/_Category.cshtml" /> for
-                Norsk rødliste for arter 2021. Rødlista for arter er en oversikt over arter som har risiko for å dø ut fra Norge.
-            </p>
-
+    <div class="mid-content">
+        <div class="fullscreenversion">
+            <partial name="/Views/Test/partials_2021/_Header.cshtml" />
         </div>
 
-
+        <partial name="/Views/Test/partials_2021/_Ingress.cshtml" />
         <partial name="/Views/Test/partials_2021/_Informasjon.cshtml" />
         <partial name="/Views/Test/partials_2021/_CategoryDescription.cshtml" />
-
-        
         <partial name="/Views/Test/partials_2021/_Oppsumering.cshtml" />
         <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
 
@@ -102,11 +51,6 @@
             @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
         }
 
-
-
-
-        @*@Html.Partial("/Views/Test/partials_2021/_RL2021.cshtml", Model)}*@
-
-
     </div>
+
 </div>

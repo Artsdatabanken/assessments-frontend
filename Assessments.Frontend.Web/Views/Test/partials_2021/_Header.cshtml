@@ -1,0 +1,31 @@
+﻿@model Artsdatabanken.RL2021
+@*
+    HEADER BLOCK FOR PAGE
+*@
+
+@{
+   
+    string geografi = @Model.VurderingsContext;
+
+    if (geografi == "N")
+    {
+        geografi = "Norge";
+    }
+    else if (geografi == "S")
+    {
+        geografi = "Svalbard";
+        if (@Model.Ekspertgruppe == "Pattedyr (Svalbard)")
+        {
+            geografi = "Svalbard med kyst";
+        }
+    }
+
+}
+
+<div class="page-header">
+    <h1>
+        Norsk rødliste for arter 2021 <span class="header_geo">for @geografi</span>
+    </h1>
+    <h2><partial name="/Views/Test/partials_2021/_Artsnavn.cshtml" /></h2>
+    <partial name="/Views/Shared/_Byline.cshtml" />
+</div>

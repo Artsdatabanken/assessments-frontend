@@ -2,21 +2,23 @@
 @{
 
     // There seems to be no automatic sorting into different lists from the api and models per now
-    // Thus added a quick check if the elements exist. 
-    // This used to be a big table which was difficult to read on mobile platforms. 
+    // Thus added a quick check if the elements exist.
+    // This used to be a big table which was difficult to read on mobile platforms.
     // This may not be an optimal solution, but it is more universal than a checkbox that sometimes is included and sometimes not.
 
     var has_element = "";
     @foreach (var region in Model)
     {
-        if (region.State != 2) {
+        if (region.State != 2)
+        {
             // don't add status 2 = ingen forekomst / no record
             has_element = has_element += region.State;
         }
     }
 }
 
-@if(has_element != "") { // No content would imply it exists nowhere or is recorded nowhere
+@if (has_element != "")
+{ // No content would imply it exists nowhere or is recorded nowhere
     <h3>
         @ViewBag.glossary["region"]["tagline"]
     </h3>
@@ -24,7 +26,11 @@
         @ViewBag.glossary["region"]["description"]
     </div>
 
-    
+    <div class="map">
+
+
+        <partial name="/Views/Test/partials_2021/_Map.cshtml" />
+    </div>
     <div class="fylke">
         @if (@has_element.Contains("0"))
         {
@@ -96,15 +102,15 @@
                     }
                 }
             </div>
-         }
+        }
 
 
 
-        </div>
-    }
-    else
-    {
-        //TODO: Text here for items LC etc with no records.
-    }
+    </div>
+}
+else
+{
+    //TODO: Text here for items LC etc with no records.
+}
 
-    @* MAP HERE *@
+@* MAP HERE *@

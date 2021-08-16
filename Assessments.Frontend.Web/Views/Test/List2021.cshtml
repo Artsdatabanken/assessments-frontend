@@ -1,4 +1,4 @@
-﻿@model Assessments.Frontend.Web.Models.RL2021ViewModel
+﻿@model RL2021ViewModel
 
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
@@ -95,7 +95,7 @@
                         // Expert committee field should always be present.
                         // By the time we arrive here, the actual committe name has been split into correct species group,
                         // and is thus now species group and not actually committtee group.
-                        string ekspertgruppe = item.Ekspertgruppe;
+                        string ekspertgruppe = item.ExpertCommittee;
 
                         // As long as expert committees contain area, it needs to be stripped away to use the field.
 
@@ -104,19 +104,21 @@
                     }
                     <span class="element_id">
 
-                        @item.LatinsknavnId
+                        @item.ScientificNameId
 
                     </span>
-                    <span class="element_name">@item.VurdertVitenskapeligNavn</span>
-                    <span class="element_category"> <span class="@item.Kategori">@item.Kategori</span></span>
+                    <span class="element_name">@item.ScientificName</span>
+                    <span class="element_category">
+                         @*<span class="@item.Kategori">@item.Kategori</span>*@
+                    </span>
                     <span class="element_group">@ekspertgruppe</span>
                     <span class="element_area">
-                        @item.VurderingsContext
-                        @if (@item.VurderingsContext == "N")
+                        @item.AssessmentArea
+                        @if (@item.AssessmentArea == "N")
                         {
                             <img src="~/images/norge.png" />
                         }
-                        else if (@item.VurderingsContext == "S")
+                        else if (@item.AssessmentArea == "S")
                         {
                             <img src="~/images/svalbard.png" />
                         }

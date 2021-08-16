@@ -16,9 +16,11 @@ namespace Assessments.Frontend.Web.Controllers
     {
         private readonly AssessmentApiService _assessmentApi;
         private readonly ILogger<TestController> _logger;
+        private readonly DataRepository _dataRepository;
 
-        public TestController(AssessmentApiService assessmentApi, ILogger<TestController> logger)
+        public TestController(AssessmentApiService assessmentApi, ILogger<TestController> logger, DataRepository dataRepository)
         {
+            _dataRepository = dataRepository;
             _logger = logger;
             _assessmentApi = assessmentApi;
         }
@@ -34,27 +36,27 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [Route("2021")]
-        public IActionResult Index2021(int? page, string name)
+        public async Task<IActionResult> Index2021(int? page, string name)
         {
-            // Pageination
+            // Pagination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
+            var query = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>("species-2021.json");
+            
             // Filter
-            IQueryable<RL2021> query = _assessmentApi.Redlist2021;
             if (!string.IsNullOrEmpty(name))
-                query = query.Where(x => x.VurdertVitenskapeligNavn.ToLower().Contains(name.Trim().ToLower()));
-
-
+                query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
+            
             var viewModel = new RL2021ViewModel
             {
-                //Redlist2015Results = _assessmentApi.Redlist2015.ToPagedList(pageNumber, pageSize),
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
                 Name = name
             };
 
             string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
             ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
+            
             return View("List2021", viewModel);
         }
 
@@ -158,6 +160,7 @@ namespace Assessments.Frontend.Web.Controllers
 
                         string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
                         ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
+
 
                         return View("SpeciesAssessment2021", RL2021);
 

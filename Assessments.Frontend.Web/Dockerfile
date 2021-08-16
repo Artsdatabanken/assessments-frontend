@@ -17,7 +17,12 @@ RUN dotnet publish "Assessments.Frontend.Web.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 RUN groupadd -r --gid 1007 dockerrunner && useradd -r -g dockerrunner dockerrunner
+
+RUN mkdir /app/Cache
+RUN chown dockerrunner:dockerrunner /app/Cache
+
 USER dockerrunner
 EXPOSE 3001
 ENTRYPOINT ["dotnet", "Assessments.Frontend.Web.dll"]

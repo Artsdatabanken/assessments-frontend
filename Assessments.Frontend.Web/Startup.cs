@@ -1,3 +1,4 @@
+using System.IO;
 using Assessments.Frontend.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,7 +30,9 @@ namespace Assessments.Frontend.Web
             var applicationSettings = new ApplicationSettings();
             Configuration.GetSection(nameof(ApplicationSettings)).Bind(applicationSettings);
 
-            services.AddHttpClient<AssessmentsApiClient>(client => client.BaseAddress = applicationSettings.AssessmentsApi.EndpointUrl);
+            services.AddLazyCache();
+            
+            services.AddSingleton<DataRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -57,6 +60,11 @@ namespace Assessments.Frontend.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var cachedFilesFolder = Path.Combine(env.ContentRootPath, "Cache"); // NOTE: add name to ApplicationSettings?
+
+            if (!Directory.Exists(cachedFilesFolder))
+                Directory.CreateDirectory(cachedFilesFolder);
         }
     }
 }

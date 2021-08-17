@@ -32,6 +32,15 @@
         <partial name="/Views/Test/partials_2021/_Map.cshtml" />
     </div>
     <div class="fylke">
+          <div>
+                <h3>For test</h3>
+                @foreach (var region in Model)
+                {
+          <span>@region.Fylke</span>
+                }
+            </div>
+
+
         @if (@has_element.Contains("0"))
         {
             <div>

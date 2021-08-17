@@ -8,6 +8,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Views\Test\partials_2021\Map.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Views\Test\partials_2021\Map.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<EmbeddedResource Include="Connected Services\AssessmentsODataService\AssessmentsODataServiceCsdl.xml" />
 	</ItemGroup>
 

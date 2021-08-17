@@ -240,6 +240,7 @@
     padding: 10px;
     padding-bottom: 20px;
     border: 1px solid lightgray;
+    font-size: 10pt;
 }
 
     .fake_table div {
@@ -334,6 +335,7 @@
     background: lightgrey;
     margin-right: 5px;
     margin-bottom: 5px;
+    font-size:12pt;
 }
 
 
@@ -512,3 +514,14 @@
     padding-left: 36px;
 }
 
+
+.map{
+    display:inline-block;
+    font-size:12pt;
+}
+
+figure #layer1 {
+    fill: #FFFFFF;
+    stroke: #000000;
+    stroke-width: 0.5291667;
+}

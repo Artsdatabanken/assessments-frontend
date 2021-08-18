@@ -7,7 +7,6 @@ using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
 using Microsoft.Extensions.Logging;
 using X.PagedList;
-using System.Collections.Generic;
 
 namespace Assessments.Frontend.Web.Controllers
 {
@@ -27,12 +26,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         public IActionResult Index()
         {
-            var viewModel = new TestViewModel
-            {
-                
-            };
-
-            return View(viewModel);
+            return View();
         }
 
         [Route("2021")]
@@ -43,11 +37,11 @@ namespace Assessments.Frontend.Web.Controllers
             var pageNumber = page ?? 1;
 
             var query = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>("species-2021.json");
-            
+
             // Filter
             if (!string.IsNullOrEmpty(name))
                 query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
-            
+
             var viewModel = new RL2021ViewModel
             {
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
@@ -56,26 +50,25 @@ namespace Assessments.Frontend.Web.Controllers
 
             string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
             ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
-            
+
             return View("List2021", viewModel);
         }
 
         [Route("2015")]
-        public IActionResult Index2015(int? page, string name)
+        public async Task<IActionResult> Index2015(int? page, string name)
         {
-            // Pageination
+            // Pagination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
+            var query = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>("species-2015.json");
+
             // Filter
-            IQueryable<Rodliste2015> query = _assessmentApi.Redlist2015;
             if (!string.IsNullOrEmpty(name))
                 query = query.Where(x => x.VurdertVitenskapeligNavn.ToLower().Contains(name.Trim().ToLower()));
 
-
             var viewModel = new RL2015ViewModel
             {
-                //Redlist2015Results = _assessmentApi.Redlist2015.ToPagedList(pageNumber, pageSize),
                 Redlist2015Results = query.ToPagedList(pageNumber, pageSize),
                 Name = name
             };
@@ -84,23 +77,20 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [Route("2006")]
-        public IActionResult Index2006(int? page, string name)
+        public async Task<IActionResult> Index2006(int? page, string name)
         {
-            // Pageination
+            // Pagination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            // Filter
-            IQueryable<Redlist2006Assessment> query = _assessmentApi.Redlist2006;
+            var query = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>("species-2006.json");
 
-            // TODO: Check if this is the correct field to match
+            // Filter
             if (!string.IsNullOrEmpty(name))
                 query = query.Where(x => x.LatinskArtsnavn.ToLower().Contains(name.Trim().ToLower()));
 
-
             var viewModel = new RL2006ViewModel
             {
-                //Redlist2006Results = _assessmentApi.Redlist2006.ToPagedList(pageNumber, pageSize),
                 Redlist2006Results = query.ToPagedList(pageNumber, pageSize),
                 Name = name
             };
@@ -111,42 +101,37 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("habitat")]
         public IActionResult Habitat()
         {
-            var viewModel = new TestViewModel
-            {
-
-            };
             string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
             ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
 
             string json_habitat = System.IO.File.ReadAllText("Views/Test/partials_2021/habitat.json");
             ViewBag.habitat = Newtonsoft.Json.Linq.JObject.Parse(json_habitat);
-            return View("Habitat", viewModel);
+            return View("Habitat");
         }
 
         [Route("speciesgroup")]
         public IActionResult SpeciesGroup()
         {
-            var viewModel = new TestViewModel
-            {
-
-            };
             string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
             ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
 
             string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
             ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
-            return View("SpeciesGroup", viewModel);
+            return View("SpeciesGroup");
         }
 
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
-
         {
             try
             {
                 switch (year)
                 {
                     case 2021:
+
+                        // TODO: erstatte (og slette) assessmentApi med dataRepository - på samme måte som 2015 og 2006
+                        // var species2021 = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>("species-2021.json");
+
                         var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id)).GetValueAsync();
 
                         string json_kriterier = System.IO.File.ReadAllText("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
@@ -166,15 +151,17 @@ namespace Assessments.Frontend.Web.Controllers
 
                     case 2015:
 
-                        var rodliste2015 = await _assessmentApi.Redlist2015.ByKey(Convert.ToInt32(id), vurderingscontext).GetValueAsync();
+                        var species2015 = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>("species-2015.json");
+                        var species2015Model = species2015.FirstOrDefault(x => x.LatinsknavnId == Convert.ToInt32(id) && x.VurderingsContext == vurderingscontext);
 
-                        return View("SpeciesAssessment2015", rodliste2015);
+                        return species2015Model != null ? View("SpeciesAssessment2015", species2015Model) : NotFound();
 
                     case 2006:
 
-                        var redlist2006Assessment = await _assessmentApi.Redlist2006.ByKey(id).GetValueAsync();
+                        var species2006 = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>("species-2006.json");
+                        var species2006Model = species2006.FirstOrDefault(x => x.ArtsID == id);
 
-                        return View("SpeciesAssessment2006", redlist2006Assessment);
+                        return species2006Model != null ? View("SpeciesAssessment2006", species2006Model) : NotFound();
                 }
             }
             catch (Exception ex)
@@ -185,12 +172,6 @@ namespace Assessments.Frontend.Web.Controllers
             }
 
             return BadRequest();
-        }
-
-        [Route("httpclient")]
-        public IActionResult HttpClient()
-        {
-            return View();
         }
     }
 }

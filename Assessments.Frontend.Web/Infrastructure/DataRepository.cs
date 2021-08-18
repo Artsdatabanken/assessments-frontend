@@ -10,6 +10,7 @@ using CsvHelper.Configuration;
 using LazyCache;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -18,11 +19,13 @@ namespace Assessments.Frontend.Web.Infrastructure
         private readonly IAppCache _appCache;
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _environment;
+        private readonly ILogger<DataRepository> _logger;
 
         private static CsvConfiguration CsvConfiguration => new(CultureInfo.InvariantCulture) { Delimiter = ";" };
 
-        public DataRepository(IAppCache appCache, IConfiguration configuration, IWebHostEnvironment environment)
+        public DataRepository(IAppCache appCache, IConfiguration configuration, IWebHostEnvironment environment, ILogger<DataRepository> logger)
         {
+            _logger = logger;
             _environment = environment;
             _configuration = configuration;
             _appCache = appCache;
@@ -49,6 +52,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
                     await using var writer = new StreamWriter(fileName);
                     await writer.WriteAsync(fileContent);
+
+                    _logger.LogDebug($"Downloaded {fileName}");
                 }
 
                 if (!name.EndsWith(".csv")) // handle json

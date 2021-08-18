@@ -36,7 +36,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>("species-2021.json");
+            var query = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Helpers.Filenames.Species2021);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -61,7 +61,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>("species-2015.json");
+            var query = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Helpers.Filenames.Species2015);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -83,7 +83,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>("species-2006.json");
+            var query = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Helpers.Filenames.Species2006);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -130,7 +130,7 @@ namespace Assessments.Frontend.Web.Controllers
                     case 2021:
 
                         // TODO: erstatte (og slette) assessmentApi med dataRepository - på samme måte som 2015 og 2006
-                        // var species2021 = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>("species-2021.json");
+                        // var species2021 = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Helpers.Filenames.Species2021);
 
                         var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id)).GetValueAsync();
 
@@ -151,14 +151,14 @@ namespace Assessments.Frontend.Web.Controllers
 
                     case 2015:
 
-                        var species2015 = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>("species-2015.json");
+                        var species2015 = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Helpers.Filenames.Species2015);
                         var species2015Model = species2015.FirstOrDefault(x => x.LatinsknavnId == Convert.ToInt32(id) && x.VurderingsContext == vurderingscontext);
 
                         return species2015Model != null ? View("SpeciesAssessment2015", species2015Model) : NotFound();
 
                     case 2006:
 
-                        var species2006 = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>("species-2006.json");
+                        var species2006 = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Helpers.Filenames.Species2006);
                         var species2006Model = species2006.FirstOrDefault(x => x.ArtsID == id);
 
                         return species2006Model != null ? View("SpeciesAssessment2006", species2006Model) : NotFound();

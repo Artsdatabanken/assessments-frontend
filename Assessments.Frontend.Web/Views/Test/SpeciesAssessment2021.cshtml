@@ -7,9 +7,8 @@
 <partial name="/Views/Test/partials_2021/_Breadcrumb.cshtml" />
 
 <div class="content-placer bigmid">
-
-    @*<div class="side">
-        <div class="mobileversion">            
+    <div class="side">
+        <div class="mobileversion">
             <partial name="/Views/Test/partials_2021/_Header.cshtml" />
         </div>
         <partial name="/Views/Test/partials_2021/_SpeciesInfo.cshtml" />
@@ -22,24 +21,23 @@
             <partial name="/Views/Test/partials_2021/_Historikk.cshtml" />
         </div>
     </div>
-
     <div class="mid-content">
         <div class="fullscreenversion">
             <partial name="/Views/Test/partials_2021/_Header.cshtml" />
         </div>
-
         <partial name="/Views/Test/partials_2021/_Ingress.cshtml" />
         <partial name="/Views/Test/partials_2021/_Informasjon.cshtml" />
         <partial name="/Views/Test/partials_2021/_CategoryDescription.cshtml" />
-        <partial name="/Views/Test/partials_2021/_Oppsumering.cshtml" />
+        @*<partial name="/Views/Test/partials_2021/_Oppsumering.cshtml" />*@
         <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
-
+        <partial name="/Views/Test/partials_2021/_Fylkesforekomster.cshtml" />
+    </div>
+        @*
         @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
         {
             @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
         }
-
-        <partial name="/Views/Test/partials_2021/_Fylkesforekomster.cshtml" />
+                
 
         @if (Model.NaturtypeHovedenhet != null)
         {
@@ -51,7 +49,6 @@
         {
             @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
         }
+    *@
 
-    </div>*@
-
-</div>
+    </div>

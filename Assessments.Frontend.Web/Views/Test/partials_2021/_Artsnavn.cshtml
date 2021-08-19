@@ -8,15 +8,16 @@
     SpeciesAssessment2021 assessment = Model;
     string popularName = "";
     if (assessment.PopularName != string.Empty && !string.IsNullOrEmpty(assessment.PopularName))
-        popularName = char.ToUpper(assessment.PopularName[0]) + assessment.PopularName.Substring(1);    }
+        popularName = char.ToUpper(assessment.PopularName[0]) + assessment.PopularName.Substring(1);    
+}
 
-        @*<span class="nameBlock">
-            @if (!string.IsNullOrEmpty(Model.PopularName))
-            {
-                <span><b> @popularName </b><i><b>@assessment.VurdertVitenskapeligNavn</b></i> @assessment.VurdertVitenskapeligNavnAutor</span>
-            }
-            else
-            {
-                <span><i><b>@assessment.VurdertVitenskapeligNavn</b></i> @assessment.VurdertVitenskapeligNavnAutor</span>
-            }
-        </span>*@
+<span class="nameBlock">
+    @if (!string.IsNullOrEmpty(Model.PopularName))
+    {
+        <span><b> @popularName </b><i><b>@assessment.ScientificName</b></i> @assessment.ScientificNameAuthor</span>
+    }
+    else
+    {
+        <span><i><b>@assessment.ScientificName</b></i> @assessment.ScientificNameAuthor</span>
+    }
+</span>

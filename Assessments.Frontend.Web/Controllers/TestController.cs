@@ -11,6 +11,7 @@ using X.PagedList;
 namespace Assessments.Frontend.Web.Controllers
 {
     [Route("[controller]")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class TestController : Controller
     {
         private readonly AssessmentApiService _assessmentApi;
@@ -36,7 +37,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Helpers.Filenames.Species2021);
+            var query = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Helpers.Constants.Species2021);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -61,7 +62,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Helpers.Filenames.Species2015);
+            var query = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Helpers.Constants.Species2015);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -83,7 +84,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Helpers.Filenames.Species2006);
+            var query = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Helpers.Constants.Species2006);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -151,14 +152,14 @@ namespace Assessments.Frontend.Web.Controllers
 
                     case 2015:
 
-                        var species2015 = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Helpers.Filenames.Species2015);
+                        var species2015 = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Helpers.Constants.Species2015);
                         var species2015Model = species2015.FirstOrDefault(x => x.LatinsknavnId == Convert.ToInt32(id) && x.VurderingsContext == vurderingscontext);
 
                         return species2015Model != null ? View("SpeciesAssessment2015", species2015Model) : NotFound();
 
                     case 2006:
 
-                        var species2006 = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Helpers.Filenames.Species2006);
+                        var species2006 = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Helpers.Constants.Species2006);
                         var species2006Model = species2006.FirstOrDefault(x => x.ArtsID == id);
 
                         return species2006Model != null ? View("SpeciesAssessment2006", species2006Model) : NotFound();

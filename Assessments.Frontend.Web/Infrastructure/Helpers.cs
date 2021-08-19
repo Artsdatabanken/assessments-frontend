@@ -36,12 +36,9 @@ namespace Assessments.Frontend.Web.Infrastructure
         public static class Constants
         {
             public const string CacheFolder = "Cache";
+            
+            public const string AssessmentsMappingAssembly = "Assessments.Mapping";
 
-            public static Filenames Filenames { get; set; }
-        }
-
-        public class Filenames
-        {
             public const string Species2021= "species-2021.json";
 
             public const string Species2015= "species-2015.json";

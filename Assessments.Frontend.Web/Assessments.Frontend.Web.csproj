@@ -5,6 +5,8 @@
 		<CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
 		<UserSecretsId>c4874954-865b-4751-8136-63cfc8ec0883</UserSecretsId>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -34,6 +36,8 @@
 		<PackageReference Include="LazyCache.AspNetCore" Version="2.1.3" />
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.9.1" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.11.1" />
+		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
 	</ItemGroup>
 
 	<ItemGroup>

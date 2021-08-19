@@ -1,10 +1,14 @@
+using System;
 using System.IO;
+using System.Reflection;
 using Assessments.Frontend.Web.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Assessments.Frontend.Web
 {
@@ -21,7 +25,17 @@ namespace Assessments.Frontend.Web
         {
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddOData(options =>
+            {
+                options.AddRouteComponents("api", ODataModelConfiguration.EdmModel()).EnableQueryFeatures();
+            });
+
+            services.AddSwaggerGen(options =>
+            {
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Helpers.Constants.AssessmentsMappingAssembly}.xml"));
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Assessments api", Version = "v1", Description = "Species, alien species and naturetype assessments" });
+            });
 
             services.AddTransient<AssessmentApiService>();
 
@@ -33,6 +47,8 @@ namespace Assessments.Frontend.Web
             services.AddLazyCache();
             
             services.AddSingleton<DataRepository>();
+
+            services.AddAutoMapper(cfg => cfg.AddMaps(Helpers.Constants.AssessmentsMappingAssembly));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,6 +56,7 @@ namespace Assessments.Frontend.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseODataRouteDebug();
             }
             else
             {
@@ -56,9 +73,18 @@ namespace Assessments.Frontend.Web
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
+            });
+
+            app.UseODataQueryRequest();
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(options =>
+            {
+                options.RoutePrefix = "swagger";
+                options.SwaggerEndpoint("v1/swagger.json", "Assessments api");
+                options.InjectJavascript("/js/swagger.js");
             });
 
             var cachedFilesFolder = Path.Combine(env.ContentRootPath, Helpers.Constants.CacheFolder);

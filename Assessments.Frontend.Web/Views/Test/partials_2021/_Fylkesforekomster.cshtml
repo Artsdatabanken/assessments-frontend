@@ -28,14 +28,12 @@
     <p>
         <!-- GEOGRAFI -->
         @distribution
-        </p>
+    </p>
 
 
-        @if (Model.Fylkesforekomster != null)
-        {
-            @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster_visning.cshtml", Model.Fylkesforekomster)
-        }
+     <partial name="/Views/Test/partials_2021/_Fylkesforekomster_visning.cshtml" />
 
 
 
-    </div><!-- End section -->
+
+</div><!-- End section -->

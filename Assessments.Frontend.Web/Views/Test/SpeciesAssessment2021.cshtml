@@ -32,6 +32,7 @@
         <partial name="/Views/Test/partials_2021/_Bestand.cshtml" />
         <partial name="/Views/Test/partials_2021/_Fylkesforekomster.cshtml" />
         <partial name="/Views/Test/partials_2021/_Habitat.cshtml" />
+        <partial name="/Views/Test/partials_2021/_Reference.cshtml" />
     </div>
         @*
         @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
@@ -39,12 +40,6 @@
             @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
         }
                 
-
-        @if (Model.NaturtypeHovedenhet != null)
-        {
-            @Html.Partial("/Views/Test/partials_2021/_Habitat.cshtml", Model.NaturtypeHovedenhet)
-        }
-
 
         @if (Model.Referanser != null && Model.Referanser.Count > 0)
         {

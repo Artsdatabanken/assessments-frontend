@@ -10,18 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Views\Test\partials_2021\Map.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Content Include="Views\Test\partials_2021\Map.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Connected Services\AssessmentsODataService\AssessmentsODataServiceCsdl.xml" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
 		<PackageReference Include="Microsoft.OData.Client" Version="7.9.0" />
 		<PackageReference Include="Microsoft.OData.Core" Version="7.9.0" />
@@ -43,9 +31,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<WCFMetadata Include="Connected Services" />
-	</ItemGroup>
-
+	
 </Project>

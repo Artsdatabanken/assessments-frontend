@@ -1,4 +1,4 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 
     @{
 
@@ -9,7 +9,7 @@
 
         var has_element = "";
 
-        foreach (var element in @Model.Fylkesforekomster)
+        foreach (var element in Model.RegionOccurrences)
         {
             has_element += element.State;
         }
@@ -29,7 +29,7 @@
             </div>
             <div class="fylke">
                 <h3>For test</h3>
-                @foreach (var region in @Model.Fylkesforekomster)
+                @foreach (var region in Model.RegionOccurrences)
                 {
                     <span><b>@region.Fylke</b>
                 

@@ -1,13 +1,14 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @{
-    ViewBag.Title = @Model.VurdertVitenskapeligNavn;
-    var naturtypehovedenhet = @Model.NaturtypeHovedenhet;
+    ViewBag.Title = Model.ScientificName;
+    var naturtypehovedenhet = Model.MainHabitat;
 }
 
 <partial name="/Views/Test/partials_2021/_Breadcrumb.cshtml" />
+
 <div class="content-placer bigmid">
 
-    <div class="side">
+    @*<div class="side">
         <div class="mobileversion">            
             <partial name="/Views/Test/partials_2021/_Header.cshtml" />
         </div>
@@ -51,6 +52,6 @@
             @Html.Partial("/Views/Test/partials_2021/_Reference.cshtml", Model.Referanser)
         }
 
-    </div>
+    </div>*@
 
 </div>

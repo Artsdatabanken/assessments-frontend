@@ -32,13 +32,16 @@ namespace Assessments.Frontend.Web.Infrastructure
                 return this;
             }
         }
+    }
 
-        public static class Constants
-        {
-            public const string CacheFolder = "Cache";
+    public static class Constants
+    {
+        public const string CacheFolder = "Cache";
             
-            public const string AssessmentsMappingAssembly = "Assessments.Mapping";
-
+        public const string AssessmentsMappingAssembly = "Assessments.Mapping";
+            
+        public class Filename
+        {
             public const string Species2021= "species-2021.json";
 
             public const string Species2015= "species-2015.json";

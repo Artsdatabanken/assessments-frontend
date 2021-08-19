@@ -1,15 +1,14 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @{
-    ViewBag.category = @Model.Kategori;
+    //ViewBag.category = @Model.Kategori; // TODO: missing kategori mapping
     var utd = @ViewBag.glossary["TroligUtdodd"]["description"];
 }
 
 @*
     Mostly similar to category description for now
-
 *@
 
-<div class="page_section">
+@*<div class="page_section">
    
     @if (@ViewBag.glossary[@Model.Kategori] != null)
     {
@@ -38,4 +37,4 @@
         </p>
 
     }
-</div>
+</div>*@

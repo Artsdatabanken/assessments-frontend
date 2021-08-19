@@ -1,4 +1,4 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @{
     ViewBag.Title = "Vurdering";
     string category = "NA"; //Model.Kategori == null ? "" : Model.Kategori.Length > 2 ? Model.Kategori.Substring(0, 2) : Model.Kategori;
@@ -7,7 +7,9 @@
     var vurdertIUCN = ViewBag.Vurdert;
 }
 
-<partial name="/Views/Shared/_CategoryDescription.cshtml" />
+@*<partial name="/Views/Shared/_CategoryDescription.cshtml" />*@
+
+
 
 
 <div>
@@ -39,7 +41,7 @@
 
     }
 
-    @if (Model.Kategori != "NE" && Model.Kategori != "NA")
+    @*@if (Model.Kategori != "NE" && Model.Kategori != "NA")
     {
         @if ((Model.AndelNåværendeBestand != null && Model.AndelNåværendeBestand != " " && Model.AndelNåværendeBestand != "-") || (Model.MaxAndelAvEuropeiskBestand != null && Model.MaxAndelAvEuropeiskBestand != " " && Model.MaxAndelAvEuropeiskBestand != "-") || (Model.MaxAndelAvGlobalBestand != null && Model.MaxAndelAvGlobalBestand != " " && Model.MaxAndelAvGlobalBestand != "-"))
         {
@@ -72,7 +74,7 @@
         }
 
 
-    }
+    }*@
 
     @*
 

@@ -2,15 +2,15 @@
 @using System.Globalization
 @using System.Linq;
 
-@model Artsdatabanken.RL2021
+@model SpeciesAssessment2021
 @{
-    Artsdatabanken.RL2021 assessment = Model;
+    SpeciesAssessment2021 assessment = Model;
     Dictionary<string, IEnumerable<Databank.Domain.Code>> labels = ViewBag.Labels;
     Dictionary<string, IEnumerable<Databank.Domain.Code>> codes = ViewBag.Codes;
 
     var condLabel = new Func<string, Func<string, string>>
         (kodeid => new Func<string, string>
-            (key => (string.IsNullOrEmpty(key) ? "" : 
+            (key => (string.IsNullOrEmpty(key) ? "" :
                 (labels[kodeid].Where
                     (code => code.Value == key)
                         .Select(code => code.Text)
@@ -21,7 +21,7 @@
         );
     var condKode = new Func<string, Func<string, string>>
         (kodeid => new Func<string, string>
-            (key => (string.IsNullOrEmpty(key) ? "" : 
+            (key => (string.IsNullOrEmpty(key) ? "" :
                 (codes[kodeid].Where
                     (code => code.Value == key)
                         .Select(code => code.Text)
@@ -58,7 +58,7 @@
 
     //bool vurdert = true;//ViewBag.Vurdert;
     string ekspertgruppe = char.ToLower(assessment.Ekspertgruppe[0]) + assessment.Ekspertgruppe.Substring(1);
-    
+
 }
 
 

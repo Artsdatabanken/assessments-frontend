@@ -1,6 +1,6 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @{
-    ViewBag.category = @Model.Kategori;
+    // ViewBag.category = Model.Kategori; // TODO: missing kategori mapping
 }
 
 @*
@@ -30,10 +30,10 @@
     }
 }
 
-<span>
+@*<span>
     <i>@categoryDescription(ViewBag.category)</i> @categoryMatcher(@Model.Kategori)
     @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
     {
         <span>og er trolig utdødd</span>
     }
-</span>
+</span>*@

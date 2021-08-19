@@ -1,11 +1,11 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @*
     HEADER BLOCK FOR PAGE
 *@
 
 @{
    
-    string geografi = @Model.VurderingsContext;
+    string geografi = Model.AssessmentArea;
 
     if (geografi == "N")
     {
@@ -14,7 +14,7 @@
     else if (geografi == "S")
     {
         geografi = "Svalbard";
-        if (@Model.Ekspertgruppe == "Pattedyr (Svalbard)")
+        if (@Model.ExpertCommittee == "Pattedyr (Svalbard)")
         {
             geografi = "Svalbard med kyst";
         }

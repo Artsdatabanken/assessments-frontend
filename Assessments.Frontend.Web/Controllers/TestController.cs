@@ -2,29 +2,19 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
-using Artsdatabanken;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Linq;
 using X.PagedList;
+// ReSharper disable InconsistentNaming
 
 namespace Assessments.Frontend.Web.Controllers
 {
     [Route("[controller]")]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class TestController : Controller
+    public class TestController : BaseController<TestController>
     {
-        private readonly AssessmentApiService _assessmentApi;
-        private readonly ILogger<TestController> _logger;
-        private readonly DataRepository _dataRepository;
-
-        public TestController(AssessmentApiService assessmentApi, ILogger<TestController> logger, DataRepository dataRepository)
-        {
-            _dataRepository = dataRepository;
-            _logger = logger;
-            _assessmentApi = assessmentApi;
-        }
-
         public IActionResult Index()
         {
             return View();
@@ -37,7 +27,9 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Helpers.Constants.Species2021);
+            var query =
+                await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename
+                    .Species2021);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -49,8 +41,8 @@ namespace Assessments.Frontend.Web.Controllers
                 Name = name
             };
 
-            string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
-            ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
+            var json_speciesgroup = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/speciesgroup.json");
+            ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
 
             return View("List2021", viewModel);
         }
@@ -62,7 +54,8 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Helpers.Constants.Species2015);
+            var query =
+                await DataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Constants.Filename.Species2015);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -84,7 +77,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Helpers.Constants.Species2006);
+            var query = await DataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Constants.Filename.Species2006);
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -99,28 +92,6 @@ namespace Assessments.Frontend.Web.Controllers
             return View("List2006", viewModel);
         }
 
-        [Route("habitat")]
-        public IActionResult Habitat()
-        {
-            string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
-            ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
-
-            string json_habitat = System.IO.File.ReadAllText("Views/Test/partials_2021/habitat.json");
-            ViewBag.habitat = Newtonsoft.Json.Linq.JObject.Parse(json_habitat);
-            return View("Habitat");
-        }
-
-        [Route("speciesgroup")]
-        public IActionResult SpeciesGroup()
-        {
-            string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
-            ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
-
-            string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
-            ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
-            return View("SpeciesGroup");
-        }
-
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(string id, int year, string vurderingscontext)
         {
@@ -130,36 +101,33 @@ namespace Assessments.Frontend.Web.Controllers
                 {
                     case 2021:
 
-                        // TODO: erstatte (og slette) assessmentApi med dataRepository - på samme måte som 2015 og 2006
-                        // var species2021 = await _dataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Helpers.Filenames.Species2021);
+                        var species2021 = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
+                        var species2021Model = species2021.FirstOrDefault(x => x.Id == Convert.ToInt32(id));
 
-                        var RL2021 = await _assessmentApi.Redlist2021.ByKey(Convert.ToInt32(id)).GetValueAsync();
+                        var json_kriterier = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
+                        ViewBag.kriterier = JObject.Parse(json_kriterier);
 
-                        string json_kriterier = System.IO.File.ReadAllText("Views/Test/partials_2021/Kriterier_2021/kriterier.json");
-                        ViewBag.kriterier = Newtonsoft.Json.Linq.JObject.Parse(json_kriterier);
+                        var json_glossary = await System.IO.File.ReadAllTextAsync("Views/Shared/glossary.json");
+                        ViewBag.glossary = JObject.Parse(json_glossary);
 
-                        string json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
-                        ViewBag.glossary = Newtonsoft.Json.Linq.JObject.Parse(json_glossary);
+                        var json_habitat = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/habitat.json");
+                        ViewBag.habitat = JObject.Parse(json_habitat);
 
-                        string json_habitat = System.IO.File.ReadAllText("Views/Test/partials_2021/habitat.json");
-                        ViewBag.habitat = Newtonsoft.Json.Linq.JObject.Parse(json_habitat);
+                        var json_speciesgroup = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/speciesgroup.json");
+                        ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
 
-                        string json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
-                        ViewBag.speciesgroup = Newtonsoft.Json.Linq.JObject.Parse(json_speciesgroup);
-
-
-                        return View("SpeciesAssessment2021", RL2021);
+                        return View("SpeciesAssessment2021", species2021Model);
 
                     case 2015:
 
-                        var species2015 = await _dataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Helpers.Constants.Species2015);
+                        var species2015 = await DataRepository.GetData<Mapping.Models.Species.Rodliste2015>(Constants.Filename.Species2015);
                         var species2015Model = species2015.FirstOrDefault(x => x.LatinsknavnId == Convert.ToInt32(id) && x.VurderingsContext == vurderingscontext);
 
                         return species2015Model != null ? View("SpeciesAssessment2015", species2015Model) : NotFound();
 
                     case 2006:
 
-                        var species2006 = await _dataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Helpers.Constants.Species2006);
+                        var species2006 = await DataRepository.GetData<Mapping.Models.Species.Redlist2006Assessment>(Constants.Filename.Species2006);
                         var species2006Model = species2006.FirstOrDefault(x => x.ArtsID == id);
 
                         return species2006Model != null ? View("SpeciesAssessment2006", species2006Model) : NotFound();
@@ -168,11 +136,33 @@ namespace Assessments.Frontend.Web.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine("Caught it!");
-                _logger.LogError(ex, ex.Message);
+                Logger.LogError(ex, ex.Message);
                 return NotFound();
             }
 
             return BadRequest();
+        }
+
+        [Route("habitat")]
+        public IActionResult Habitat()
+        {
+            var json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
+            ViewBag.glossary = JObject.Parse(json_glossary);
+
+            var json_habitat = System.IO.File.ReadAllText("Views/Test/partials_2021/habitat.json");
+            ViewBag.habitat = JObject.Parse(json_habitat);
+            return View("Habitat");
+        }
+
+        [Route("speciesgroup")]
+        public IActionResult SpeciesGroup()
+        {
+            var json_glossary = System.IO.File.ReadAllText("Views/Shared/glossary.json");
+            ViewBag.glossary = JObject.Parse(json_glossary);
+
+            var json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
+            ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
+            return View("SpeciesGroup");
         }
     }
 }

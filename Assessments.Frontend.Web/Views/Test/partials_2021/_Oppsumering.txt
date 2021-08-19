@@ -1,55 +1,55 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @* SEE example by searching species Bombus hyperboreus *@
 
 @{
-    Artsdatabanken.RL2021 assessment = Model;
-    string ekspertgruppe = char.ToLower(@Model.Ekspertgruppe[0]) + @Model.Ekspertgruppe.Substring(1);
+    SpeciesAssessment2021 assessment = Model;
+    string ekspertgruppe = char.ToLower(Model.ExpertCommittee[0]) + Model.ExpertCommittee.Substring(1);
 
-    var kriteriedok = assessment.Kriteriedokumentasjon;
+    //var kriteriedok = assessment.Kriteriedokumentasjon;
 
-    if (!string.IsNullOrWhiteSpace(kriteriedok))
-    {
-        if (kriteriedok.Length > 600)
-        {
-            var count = kriteriedok.Split("<br/>").Length; // Detect nr of line breaks.
-            if (count<3) // Allow a few strays - such as beginning or end etc. But 2 is still to few to make sense.
-            {
-                // IN cases with big blocks of text with no line breaks, detect when a sentence ends in
-                // parenhesis and create line break. These sentences are often of concluding nature
-                // such as references or summarising some content, which is a nice time to take a break.
-                kriteriedok = kriteriedok.Replace(").", ").<br/>");
-            }
-        }
+    //if (!string.IsNullOrWhiteSpace(kriteriedok))
+    //{
+    //    if (kriteriedok.Length > 600)
+    //    {
+    //        var count = kriteriedok.Split("<br/>").Length; // Detect nr of line breaks.
+    //        if (count<3) // Allow a few strays - such as beginning or end etc. But 2 is still to few to make sense.
+    //        {
+    //            // IN cases with big blocks of text with no line breaks, detect when a sentence ends in
+    //            // parenhesis and create line break. These sentences are often of concluding nature
+    //            // such as references or summarising some content, which is a nice time to take a break.
+    //            kriteriedok = kriteriedok.Replace(").", ").<br/>");
+    //        }
+    //    }
 
-        // Remove weird
-        kriteriedok = kriteriedok.Replace("<u><br/></u>", "");
+    //    // Remove weird
+    //    kriteriedok = kriteriedok.Replace("<u><br/></u>", "");
 
-        // Turn u and b into headings
-        kriteriedok = kriteriedok.Replace("<b>", "<h3>");
-        kriteriedok = kriteriedok.Replace("</b>", "</h3>");
-        kriteriedok = kriteriedok.Replace("<u>", "<h3>");
-        kriteriedok = kriteriedok.Replace("</u>", "</h3>");
-        kriteriedok = kriteriedok.Replace("</h3>", "</h3><p>");
+    //    // Turn u and b into headings
+    //    kriteriedok = kriteriedok.Replace("<b>", "<h3>");
+    //    kriteriedok = kriteriedok.Replace("</b>", "</h3>");
+    //    kriteriedok = kriteriedok.Replace("<u>", "<h3>");
+    //    kriteriedok = kriteriedok.Replace("</u>", "</h3>");
+    //    kriteriedok = kriteriedok.Replace("</h3>", "</h3><p>");
 
 
-        // Fix specific cases it went wrong
-        kriteriedok = kriteriedok.Replace("<h3>)</h3>", ")");
+    //    // Fix specific cases it went wrong
+    //    kriteriedok = kriteriedok.Replace("<h3>)</h3>", ")");
 
-        // Remove empty tags
-        kriteriedok = kriteriedok.Replace("<b></b>", "");
-        kriteriedok = kriteriedok.Replace("<u></u>", "");
-        kriteriedok = kriteriedok.Replace("<h3></h3>", "");
-        kriteriedok = kriteriedok.Replace("<i> </i>", " ");
+    //    // Remove empty tags
+    //    kriteriedok = kriteriedok.Replace("<b></b>", "");
+    //    kriteriedok = kriteriedok.Replace("<u></u>", "");
+    //    kriteriedok = kriteriedok.Replace("<h3></h3>", "");
+    //    kriteriedok = kriteriedok.Replace("<i> </i>", " ");
 
-        // Br into paragraphs, remove duplicates and those with spaces inside
-        kriteriedok = kriteriedok.Replace("<br/><br/>", "<br/>");
-        kriteriedok = kriteriedok.Replace("<br/>", "</p><p>");
-        kriteriedok = kriteriedok.Replace("<p> ", "<p>");
-        kriteriedok = kriteriedok.Replace(" </p>", "</p>");
-        kriteriedok = kriteriedok.Replace("<p><p>", "<p>");
-        kriteriedok = "<p>" + kriteriedok + "</p>";
-        kriteriedok = kriteriedok.Replace("<p></p>", "");
-    }
+    //    // Br into paragraphs, remove duplicates and those with spaces inside
+    //    kriteriedok = kriteriedok.Replace("<br/><br/>", "<br/>");
+    //    kriteriedok = kriteriedok.Replace("<br/>", "</p><p>");
+    //    kriteriedok = kriteriedok.Replace("<p> ", "<p>");
+    //    kriteriedok = kriteriedok.Replace(" </p>", "</p>");
+    //    kriteriedok = kriteriedok.Replace("<p><p>", "<p>");
+    //    kriteriedok = "<p>" + kriteriedok + "</p>";
+    //    kriteriedok = kriteriedok.Replace("<p></p>", "");
+    //}
 }
 
 @if (!((Model.Kategori == "NA" || Model.Kategori == "NE" || Model.Kategori == "LC") && (Model.Kriteriedokumentasjon == "" || Model.Kriteriedokumentasjon == null)))

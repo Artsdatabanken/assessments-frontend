@@ -1,16 +1,16 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @* 
    Norwegian name and scientific name with and without autor.
    Codeblock from Innsynsløsninga 2021 by SN. Modified by HEM for launch.
 *@
 
 @{
-    Artsdatabanken.RL2021 assessment = Model;
+    SpeciesAssessment2021 assessment = Model;
     string popularName = "";
     if (assessment.PopularName != string.Empty && !string.IsNullOrEmpty(assessment.PopularName))
         popularName = char.ToUpper(assessment.PopularName[0]) + assessment.PopularName.Substring(1);    }
 
-        <span class="nameBlock">
+        @*<span class="nameBlock">
             @if (!string.IsNullOrEmpty(Model.PopularName))
             {
                 <span><b> @popularName </b><i><b>@assessment.VurdertVitenskapeligNavn</b></i> @assessment.VurdertVitenskapeligNavnAutor</span>
@@ -19,4 +19,4 @@
             {
                 <span><i><b>@assessment.VurdertVitenskapeligNavn</b></i> @assessment.VurdertVitenskapeligNavnAutor</span>
             }
-        </span>
+        </span>*@

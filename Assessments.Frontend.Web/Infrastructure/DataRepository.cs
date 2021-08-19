@@ -36,7 +36,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             async Task<IQueryable<T>> DeserializeData()
             {
-                var fileName = Path.Combine(_environment.ContentRootPath, Helpers.Constants.CacheFolder, name);
+                var fileName = Path.Combine(_environment.ContentRootPath, Constants.CacheFolder, name);
                 string fileContent;
 
                 if (File.Exists(fileName)) // use cached file

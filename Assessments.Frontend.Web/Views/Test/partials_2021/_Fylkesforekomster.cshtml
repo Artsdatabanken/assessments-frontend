@@ -1,26 +1,26 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @*
     // Information about the assesment
 
 *@
 @{
-    string distribution = "Arten har ingen utberedelse";
+    var distribution = "Arten har ingen utberedelse";
 
-    @if (@Model.VurderingsContext == "N")
+    if (Model.AssessmentArea == "N")
     {
-        distribution = @ViewBag.glossary["vurdert_N"]["description"];
+        distribution = ViewBag.glossary["vurdert_N"]["description"];
     }
-    else@if(@Model.VurderingsContext == "S")
+    else if (Model.AssessmentArea == "S")
     {
-        @if (@Model.Ekspertgruppe == "Pattedyr (Svalbard)")
+        if (Model.ExpertCommittee == "Pattedyr (Svalbard)")
         {
-            distribution = @ViewBag.glossary["vurdert_S_pattedyr"]["description"];
+            distribution = ViewBag.glossary["vurdert_S_pattedyr"]["description"];
         }
         else
         {
-            distribution = @ViewBag.glossary["vurdert_S"]["description"];
+            distribution = ViewBag.glossary["vurdert_S"]["description"];
         }
-    }      
+    }
 }
 
 <div class="page_section">
@@ -28,14 +28,14 @@
     <p>
         <!-- GEOGRAFI -->
         @distribution
-        </p>
+    </p>
 
 
-        @if (Model.Fylkesforekomster != null)
+    @*@if (Model.Fylkesforekomster != null)
         {
             @Html.Partial("/Views/Test/partials_2021/_Fylkesforekomster_visning.cshtml", Model.Fylkesforekomster)
-        }
+        }*@
 
 
 
-    </div><!-- End section -->
+</div><!-- End section -->

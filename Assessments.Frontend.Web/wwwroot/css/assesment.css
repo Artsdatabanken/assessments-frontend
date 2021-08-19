@@ -240,6 +240,7 @@
     padding: 10px;
     padding-bottom: 20px;
     border: 1px solid lightgray;
+    font-size: 10pt;
 }
 
     .fake_table div {
@@ -334,6 +335,7 @@
     background: lightgrey;
     margin-right: 5px;
     margin-bottom: 5px;
+    font-size:12pt;
 }
 
 
@@ -512,3 +514,49 @@
     padding-left: 36px;
 }
 
+.fylke{
+    width:200px;
+}
+
+.map{
+    display:inline-block;
+    font-size:12pt;
+    width:300px;
+    float:right;
+}
+
+/* MAP COLOURS */
+
+
+
+.extinct {
+    fill: #cd4646;
+}
+
+.sea.extinct {
+    fill: #f68888;
+}
+
+.known {
+    fill: #51b051;
+}
+
+.sea.known {
+    fill: #7ae57a;
+}
+
+.presumed_extinct {
+    fill: #ff9b00;
+}
+
+.sea.presumed_extinct {
+    fill: #f0ae74;
+}
+
+.presumed {
+    fill: #cbd03c;
+}
+
+.sea.presumed {
+    fill: #edf176;
+}

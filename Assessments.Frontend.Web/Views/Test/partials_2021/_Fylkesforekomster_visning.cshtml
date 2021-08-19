@@ -1,106 +1,66 @@
-﻿@model IEnumerable<SpeciesAssessment2021RegionOccurrence>
-@{
+﻿@model Artsdatabanken.RL2021
 
-    // There seems to be no automatic sorting into different lists from the api and models per now
-    // Thus added a quick check if the elements exist. 
-    // This used to be a big table which was difficult to read on mobile platforms. 
-    // This may not be an optimal solution, but it is more universal than a checkbox that sometimes is included and sometimes not.
+    @{
 
-    var has_element = "";
-    @foreach (var region in Model)
-    {
-        if (region.State != 2) {
-            // don't add status 2 = ingen forekomst / no record
-            has_element = has_element += region.State;
+        // There seems to be no automatic sorting into different lists from the api and models per now
+        // Thus added a quick check if the elements exist.
+        // This used to be a big table which was difficult to read on mobile platforms.
+        // This may not be an optimal solution, but it is more universal than a checkbox that sometimes is included and sometimes not.
+
+        var has_element = "";
+
+        foreach (var element in @Model.Fylkesforekomster)
+        {
+            has_element += element.State;
         }
     }
-}
 
-@if(has_element != "") { // No content would imply it exists nowhere or is recorded nowhere
-    <h3>
-        @ViewBag.glossary["region"]["tagline"]
-    </h3>
-    <div class="fact_box">
-        @ViewBag.glossary["region"]["description"]
-    </div>
-
-    
-    <div class="fylke">
-        @if (@has_element.Contains("0"))
-        {
-            <div>
-                <h3>Kjent forekomst</h3>
-                @foreach (var region in Model)
-                {
-                    @if (region.State == 0)
-                    {
-                        <span>@region.Fylke</span>
-                    }
-                }
-            </div>
-        }
-
-        @if (@has_element.Contains("1"))
-        {
-            <div>
-                <h3>Antatt forekomst</h3>
-                @foreach (var region in Model)
-                {
-                    int count = 0;
-                    @if (region.State == 1)
-                    {
-                        count += 1;
-                        <span>@region.Fylke</span>
-                    }
-                }
-            </div>
-        }
-
-        @if (@has_element.Contains("3"))
-        {
-            <div>
-                <h3>Antatt Utdødd forekomst</h3>
-                @foreach (var region in Model)
-                {
-                    @if (region.State == 3)
-                    {
-                        <span>@region.Fylke</span>
-                    }
-                }
-            </div>
-        }
-
-        @if (@has_element.Contains("4"))
-        {
-            <div>
-                <h3>Utdødd forekomst</h3>
-                @foreach (var region in Model)
-                {
-                    @if (region.State == 4)
-                    {
-                        <span>@region.Fylke</span>
-                    }
-                }
-            </div>
-        }
-
-        @if (@has_element.Contains("2"))
-        {
-            <div>
-                <h3>Ingen forekomst</h3>
-                @foreach (var region in Model)
-                {
-                    @if (region.State == 2)
-                    {
-                        <span>@region.Fylke</span>
-                    }
-                }
-            </div>
-         }
-
-
-
+    @if (has_element != "")
+    { // No content would imply it exists nowhere or is recorded nowhere
+        <h3>
+            @ViewBag.glossary["region"]["tagline"]
+        </h3>
+        <div class="fact_box">
+            @ViewBag.glossary["region"]["description"]
         </div>
+        <div class="map_container">
+            <div class="map">
+                <partial name="/Views/Test/partials_2021/_Map.cshtml" />
+            </div>
+            <div class="fylke">
+                <h3>For test</h3>
+                @foreach (var region in @Model.Fylkesforekomster)
+                {
+                    <span><b>@region.Fylke</b>
+                
+                        @if (region.State == 0)
+                        {
+                            <i>Kjent forekomst</i>
+                        }
+                        else if (region.State == 1)
+                        {
+                            <i>Antatt forekomst</i>
+                        }
+                        else if (region.State == 2)
+                        {
+                            <i>Ingen forekomst</i>
+                        }
+                        else if (region.State == 3)
+                        {
+                            <i>Antatt Utdødd forekomst</i>
+                        }
+                        else if (region.State == 4)
+                        {
+                            <i>Utdødd forekomst</i>
+                        }
+                    
+                </span>
+                    
+                }
+            </div>
+        </div>
+        
+        
     }
     else
     {

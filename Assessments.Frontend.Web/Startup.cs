@@ -61,7 +61,7 @@ namespace Assessments.Frontend.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            var cachedFilesFolder = Path.Combine(env.ContentRootPath, "Cache"); // NOTE: add name to ApplicationSettings?
+            var cachedFilesFolder = Path.Combine(env.ContentRootPath, Helpers.Constants.CacheFolder);
 
             if (!Directory.Exists(cachedFilesFolder))
                 Directory.CreateDirectory(cachedFilesFolder);

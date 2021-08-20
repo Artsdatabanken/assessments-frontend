@@ -17,13 +17,21 @@ namespace Assessments.Frontend.Web.Controllers.Api
     {
         [HttpGet, EnableQuery(PageSize = 100)]
         [ProducesResponseType(typeof(IList<SpeciesAssessment2021>), Status200OK)]
-        public async Task<IActionResult> Get() => Ok(await DataRepository.GetData<SpeciesAssessment2021>(Constants.Filename.Species2021));
+        public async Task<IActionResult> Get()
+        {
+            // var data = await DataRepository.GetData<SpeciesAssessment2021>(Constants.Filename.Species2021); // ferdig transformert modell
+            var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+
+            return Ok(data);
+        }
 
         [HttpGet, EnableQuery]
         [ProducesResponseType(typeof(SpeciesAssessment2021), Status200OK), ProducesResponseType(Status404NotFound)]
         public async Task<IActionResult> Get(int key)
         {
-            var data = await DataRepository.GetData<SpeciesAssessment2021>(Constants.Filename.Species2021);
+            // var data = await DataRepository.GetData<SpeciesAssessment2021>(Constants.Filename.Species2021); // ferdig transformert modell
+            var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen
+
             var result = data.Where(x => x.Id == key);
 
             return Ok(SingleResult.Create(result.AsQueryable()));

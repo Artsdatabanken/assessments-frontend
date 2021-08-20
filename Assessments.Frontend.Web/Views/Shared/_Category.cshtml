@@ -1,7 +1,4 @@
-﻿@model Artsdatabanken.RL2021
-@{
-    ViewBag.category = @Model.Kategori;
-}
+﻿@model SpeciesAssessment2021
 
 @*
     Codeblock from Innsynsløsninga 2021 by SN. 
@@ -13,7 +10,7 @@
     {
         // Takes in category as presented in the model
         // Returns name of category (whyever for?)
-        return category.Substring(0, 2);
+        return category.Substring(0,2);
 
     }
 }
@@ -24,15 +21,20 @@
         // Takes in category as presented in the model
         // uses categoryMatcher to remove degrees etc.
         // Returns name of category (whatever for?)
-        var actual_category = @categoryMatcher(category);
-        var final_string = @ViewBag.glossary[actual_category]["presentationstring"];
-        return final_string;
+        if(category != "" && category != null)
+        {
+            var actual_category = @categoryMatcher(category);
+            var final_string = @ViewBag.glossary[actual_category]["presentationstring"];
+            return final_string;
+        }
+        return category+ "mangler";
+
     }
 }
 
 <span>
-    <i>@categoryDescription(ViewBag.category)</i> @categoryMatcher(@Model.Kategori)
-    @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
+    <i>@categoryDescription(@Model.Category)</i> @categoryMatcher(@Model.Category)
+    @if (@Model.Category == "CR" && @Model.PresumedExtinct == true)
     {
         <span>og er trolig utdødd</span>
     }

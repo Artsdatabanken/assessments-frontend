@@ -1,27 +1,31 @@
-﻿
-@model IEnumerable<Artsdatabanken.RL2021Reference>
-@{
-    // Copied unfinished code from innsynet2021. Leave in case relevant later.
-    //var publications = Model.Where(x => x.Type == "Publication");
-    //var urls = Model.Where(x => x.Type == "Url");
-    //var persons = Model.Where(x => x.Type == "Person");
-    //var other = Model.Where(x => x.Type != "Publication" && x.Type != "Url" && x.Type != "Person");
-}
+﻿@model SpeciesAssessment2021
+@*
+    @model IEnumerable<Artsdatabanken.RL2021Reference>
+    @{
+        // Copied unfinished code from innsynet2021. Leave in case relevant later.
+        //var publications = Model.Where(x => x.Type == "Publication");
+        //var urls = Model.Where(x => x.Type == "Url");
+        //var persons = Model.Where(x => x.Type == "Person");
+        //var other = Model.Where(x => x.Type != "Publication" && x.Type != "Url" && x.Type != "Person");
+    }
+*@
 
+
+@if (@Model.References != null && Model.References.Count() > 0)
+{
 <div class="page_section">
     <h2>
         Referanser
     </h2>
-    @if (Model != null && Model.Count() > 0)
+    @if (Model.References.Count() > 0)
     {
-     @if (Model.Count() > 0)
-        {                        
         <ul>
-            @foreach (var pub in Model)
+            @foreach (var pub in Model.References)
             {
-             <li class="reference">@pub.FormattedReference</li>
+                <li class="reference">@pub.FormattedReference</li>
             }
-        </ul>                        
-        }        
+        </ul>
     }
 </div>
+}
+    

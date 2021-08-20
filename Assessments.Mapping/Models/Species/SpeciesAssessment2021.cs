@@ -210,6 +210,8 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public int ScientificNameId { get; set; } // VurdertVitenskapeligNavnId
 
+        public string Category { get; set; } // TODO: rename?
+
         // TODO public string ÅrsakTilEndringAvKategori { get; set; } // ÅrsakTilEndringAvKategori
 
         // TODO public string ÅrsakTilNedgraderingAvKategori { get; set; } // ÅrsakTilNedgraderingAvKategori

@@ -1,4 +1,4 @@
-﻿@model Artsdatabanken.RL2021MinMaxProbableIntervall;
+﻿@model SpeciesAssessment2021MinMaxProbableIntervall
 
 @functions{
     private static string FormatNumber(string text)
@@ -10,15 +10,15 @@
  }
 
 @{
-    Artsdatabanken.RL2021MinMaxProbableIntervall mmpi = @Model;
+    SpeciesAssessment2021MinMaxProbableIntervall mmpi = Model;
     var tag = "B1";
     var description = "Utbredelsesområde";
     string ending = "";
     var min = @mmpi.Min;
     var probable = @mmpi.Probable;
     var max = @mmpi.Max;
-    var calc = @mmpi.Calculated;
-    if(tag.StartsWith('B'))
+    //var calc = @mmpi.Calculated;  // TODO: missing calculated mapping
+    if (tag.StartsWith('B'))
     {
         ending = "individer";
         if (tag == "B1" || tag == "B2")
@@ -61,7 +61,7 @@
     }
 
 
-    @if (!string.IsNullOrWhiteSpace(@calc))
+    @*@if (!string.IsNullOrWhiteSpace(@calc))
     { 
         <span>
             Hvilket gir et beregnet
@@ -82,4 +82,4 @@
         <div>
             @ViewBag.glossary["IUCN"]["description"]
         </div>
-    }
+    }*@

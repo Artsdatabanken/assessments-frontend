@@ -1,4 +1,4 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @*
 
     // REFERENCES: https://www.artsdatabanken.no/files/33528
@@ -12,9 +12,9 @@
 }
 
 @{
-    Artsdatabanken.RL2021 assessment = Model;
-    var kriterier = Model.Kriterier;
-    var criterialist = kriterier.Split(";");
+    SpeciesAssessment2021 assessment = Model;
+    //var kriterier = Model.Kriterier;
+    //var criterialist = kriterier.Split(";");
     //var keys = @ViewBag.kriterier["criteria"]["keys"];
 
 }
@@ -25,13 +25,13 @@
         @if (@dictObj[key] != null)
         {
             <!-- OUTER LOOP ( THE MAIN CRITERIA) -->
-    <div class="criteria_outer_level @Html.Raw(@Model.Kriterier.Contains(key) ? "active" : "inactive")">
+    @*<div class="criteria_outer_level @Html.Raw(@Model.Kriterier.Contains(key) ? "active" : "inactive")">
         <h3>@key - @dictObj[key]["summary"]</h3>
         <span class="description">@dictObj[key]["description"]</span>
 
 
        
-    </div>
+    </div>*@
             <hr />
         }
     }

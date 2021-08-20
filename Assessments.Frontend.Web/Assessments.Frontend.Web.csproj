@@ -10,15 +10,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Views\Test\partials_2021\Map.svg" />
+	  <Content Remove="Views\Test\partials_2021\_Oppsumering.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Views\Test\partials_2021\Map.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<EmbeddedResource Include="Connected Services\AssessmentsODataService\AssessmentsODataServiceCsdl.xml" />
+	  <None Include="Views\Test\partials_2021\_Oppsumering.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -43,9 +39,5 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<WCFMetadata Include="Connected Services" />
-	</ItemGroup>
-
+	
 </Project>

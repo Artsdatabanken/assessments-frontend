@@ -33,22 +33,15 @@ namespace Assessments.Frontend.Web
             services.AddSwaggerGen(options =>
             {
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Helpers.Constants.AssessmentsMappingAssembly}.xml"));
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Constants.AssessmentsMappingAssembly}.xml"));
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Assessments api", Version = "v1", Description = "Species, alien species and naturetype assessments" });
             });
-
-            services.AddTransient<AssessmentApiService>();
-
-            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-
-            var applicationSettings = new ApplicationSettings();
-            Configuration.GetSection(nameof(ApplicationSettings)).Bind(applicationSettings);
 
             services.AddLazyCache();
             
             services.AddSingleton<DataRepository>();
 
-            services.AddAutoMapper(cfg => cfg.AddMaps(Helpers.Constants.AssessmentsMappingAssembly));
+            services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -87,7 +80,7 @@ namespace Assessments.Frontend.Web
                 options.InjectJavascript("/js/swagger.js");
             });
 
-            var cachedFilesFolder = Path.Combine(env.ContentRootPath, Helpers.Constants.CacheFolder);
+            var cachedFilesFolder = Path.Combine(env.ContentRootPath, Constants.CacheFolder);
 
             if (!Directory.Exists(cachedFilesFolder))
                 Directory.CreateDirectory(cachedFilesFolder);

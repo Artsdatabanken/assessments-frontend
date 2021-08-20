@@ -1,28 +1,28 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @* SEE example by searching species Carex elata *@
 
 <div class="page_section">
 
-    @if (Model.Kategori != "NE" && Model.Kategori != "NA")
+    @if (Model.Category != "NE" && Model.Category != "NA")
     {
-        @if ((Model.AndelNåværendeBestand != null && Model.AndelNåværendeBestand != " "
-       && Model.AndelNåværendeBestand != "-") || (Model.MaxAndelAvEuropeiskBestand != null
-       && Model.MaxAndelAvEuropeiskBestand != " " && Model.MaxAndelAvEuropeiskBestand != "-")
-       || (Model.MaxAndelAvGlobalBestand != null && Model.MaxAndelAvGlobalBestand != " "
-       && Model.MaxAndelAvGlobalBestand != "-"))
+        @if ((Model.ProportionOfMaxPopulation != null && Model.ProportionOfMaxPopulation != " "
+       && Model.ProportionOfMaxPopulation != "-") || (Model.PercentageEuropeanPopulation != null
+       && Model.PercentageEuropeanPopulation != " " && Model.PercentageEuropeanPopulation != "-")
+       || (Model.PercentageGlobalPopulation != null && Model.PercentageGlobalPopulation != " "
+       && Model.PercentageGlobalPopulation != "-"))
         {
 
             <h3>Informasjon om populasjonsstørrelse </h3>
 
 
-            @if (Model.AndelNåværendeBestand != null
-             && Model.AndelNåværendeBestand != " "
-             && Model.AndelNåværendeBestand != "-")
+            @if (Model.ProportionOfMaxPopulation != null
+             && Model.ProportionOfMaxPopulation != " "
+             && Model.ProportionOfMaxPopulation != "-")
             {
                 <p>
                     <div class="stats_element_container">
                         <span class="stats_element">
-                            <span>@Model.AndelNåværendeBestand</span>
+                            <span>@Model.ProportionOfMaxPopulation</span>
                         </span>
                     </div>
                     <span class="stats_element_text">
@@ -30,14 +30,14 @@
                     </span>
                 </p>
             }
-            @if (Model.MaxAndelAvEuropeiskBestand != null
-              && Model.MaxAndelAvEuropeiskBestand != " "
-              && Model.MaxAndelAvEuropeiskBestand != "-")
+            @if (Model.PercentageEuropeanPopulation != null
+              && Model.PercentageEuropeanPopulation != " "
+              && Model.PercentageEuropeanPopulation != "-")
             {
                 <p>
                     <div class="stats_element_container">
                         <span class="stats_element">
-                            <span>@Model.MaxAndelAvEuropeiskBestand</span>
+                            <span>@Model.PercentageEuropeanPopulation</span>
                         </span>
                     </div>
                     <span class="stats_element_text">
@@ -45,14 +45,14 @@
                     </span>
                 </p>
             }
-            @if (Model.MaxAndelAvGlobalBestand != null
-              && Model.MaxAndelAvGlobalBestand != " "
-              && Model.MaxAndelAvGlobalBestand != "-")
+            @if (Model.PercentageGlobalPopulation != null
+              && Model.PercentageGlobalPopulation != " "
+              && Model.PercentageGlobalPopulation != "-")
             {                
                 <p>
                     <div class="stats_element_container">
                         <span class="stats_element">
-                            <span>@Model.MaxAndelAvGlobalBestand</span>
+                            <span>@Model.PercentageGlobalPopulation</span>
                         </span>
                     </div>
                     <span class="stats_element_text">
@@ -62,4 +62,4 @@
             }
         }
     }
-</div><!-- End section -->>
+</div>

@@ -17,13 +17,13 @@ namespace Assessments.Frontend.Web.Controllers.Api
     {
         [HttpGet, EnableQuery(PageSize = 100)]
         [ProducesResponseType(typeof(IList<Redlist2006Assessment>), Status200OK)]
-        public async Task<IActionResult> Get() => Ok(await DataRepository.GetData<Redlist2006Assessment>(Helpers.Constants.Species2006));
+        public async Task<IActionResult> Get() => Ok(await DataRepository.GetData<Redlist2006Assessment>(Constants.Filename.Species2006));
 
         [HttpGet, EnableQuery]
         [ProducesResponseType(typeof(Redlist2006Assessment), Status200OK), ProducesResponseType(Status404NotFound)]
         public async Task<IActionResult> Get(string key)
         {
-            var data = await DataRepository.GetData<Redlist2006Assessment>(Helpers.Constants.Species2006);
+            var data = await DataRepository.GetData<Redlist2006Assessment>(Constants.Filename.Species2006);
 
             var result = data.Where(x => x.ArtsID == key);
 

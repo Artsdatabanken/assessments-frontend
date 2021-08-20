@@ -1,17 +1,17 @@
-﻿@model Artsdatabanken.RL2021MinMaxProbable;
+﻿@model SpeciesAssessment2021MinMaxProbable
 
 @{
-    Artsdatabanken.RL2021MinMaxProbable mmp = @Model;
+    SpeciesAssessment2021MinMaxProbable mmp = Model;
     var tag = "A";
     string ending = "%";
 
     var min = @mmp.Min;
     var probable = @mmp.Probable;
     var max = @mmp.Max;
-    var calc = @mmp.Calculated;
+    // var calc = @mmp.Calculated; // TODO: missing calculated mapping
 
 
-    if(tag == "C2")
+    if (tag == "C2")
     {
         ending = "individer";
     }else if (tag == "C2a(i)")
@@ -27,7 +27,7 @@ MMP
 @*if (mmp != null)*@
 @if (!string.IsNullOrEmpty(mmp.Min) || !string.IsNullOrEmpty(mmp.Max) || !string.IsNullOrEmpty(mmp.Probable))
 {
-    <p class="mmp">
+    @*<p class="mmp">
 
         @if (!string.IsNullOrEmpty(@min))
         {
@@ -52,7 +52,7 @@ MMP
 
     <div>
         @ViewBag.glossary["IUCN"]["description"]
-    </div>
+    </div>*@
 
     
 }

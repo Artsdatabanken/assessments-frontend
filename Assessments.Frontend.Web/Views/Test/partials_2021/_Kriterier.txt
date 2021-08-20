@@ -1,34 +1,34 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @* SEE example by searching species Carex elata *@
 
 @{
-    Artsdatabanken.RL2021 assessment = Model;
+    SpeciesAssessment2021 assessment = Model;
 
 
 }
 
 
 @functions{
-    public bool gjeldende(string criteria)
-    {
-        var start = criteria.ElementAt(0);
-        var rest = criteria.Substring(1, criteria.Length - 1);
-        var kriterier = Model.Kriterier.Split(";");
-        if (Model.Kriterier.IndexOf(criteria) >= 0)
-        {
-            return true;
-        }
+    //public bool gjeldende(string criteria)
+    //{
+    //    var start = criteria.ElementAt(0);
+    //    var rest = criteria.Substring(1, criteria.Length - 1);
+    //    var kriterier = Model.Kriterier.Split(";");
+    //    if (Model.Kriterier.IndexOf(criteria) >= 0)
+    //    {
+    //        return true;
+    //    }
 
-        for (var i = 0; i < kriterier.Length; i++)
-        {
-            if (kriterier[i].StartsWith(start) && kriterier[i].IndexOf(rest) >= 0)
-            {
-                return true;
-            }
-        }
+    //    for (var i = 0; i < kriterier.Length; i++)
+    //    {
+    //        if (kriterier[i].StartsWith(start) && kriterier[i].IndexOf(rest) >= 0)
+    //        {
+    //            return true;
+    //        }
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
 }
 

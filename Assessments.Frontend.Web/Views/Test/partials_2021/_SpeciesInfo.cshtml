@@ -1,15 +1,12 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @{
 
     Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
 
-    var hierarki = @Model.VurdertVitenskapeligNavnHierarki.Split("/");
-    string hierarkitext = @Model.VurdertVitenskapeligNavnHierarki.Replace("/", " > ");
-
     // Expert committee field should always be present.
     // By the time we arrive here, the actual committe name has been split into correct species group,
     // and is thus now species group and not actually committtee group.
-    string ekspertgruppe = @Model.Ekspertgruppe;
+    string ekspertgruppe = @Model.ExpertCommittee;
 
     // As long as expert committees contain area, it needs to be stripped away to use the field.
 
@@ -37,10 +34,17 @@
             </span>
         }
     }
-    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
-    {
-        <p class="taxonomy">
-            @hierarkitext
-        </p>
-    }
+    <!-- TODO FIX TAXON CURRENTLY NOT WORKING-->
+    @*
+
+        @if (@Model.TaxonomicHistory != null)
+        {
+            <p class="taxonomy">
+                @foreach (var taxon in @Model.TaxonomicHistory)
+                {
+                    <span>@taxon element</span>
+                }
+            </p>
+        }
+    *@
 </div>

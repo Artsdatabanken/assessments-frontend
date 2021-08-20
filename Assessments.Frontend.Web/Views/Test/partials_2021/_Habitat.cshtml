@@ -1,4 +1,5 @@
-﻿@*
+﻿@model SpeciesAssessment2021
+@*
     Habitat was re-made completely for launch 2021.
     Existing inline text is re-used from innsynet 2021, which
     has been moved to the json resource file for this partial.
@@ -7,18 +8,18 @@
 *@
 
 @{
-    @model IEnumerable<string>
-    Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
+//model IEnumerable<string>
+Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
 }
 
 <div class="habitat page_section">
-    @if (Model.Count() != 0)
+    @if (@Model.MainHabitat.Count() != 0)
     {
         <h2>Habitat</h2>
         <div>
             @Html.Raw(@ViewBag.glossary["habitat"]["description"])
             <h3>Arten finnes i disse habitatene</h3>
-            @foreach (var modelelement in Model)
+            @foreach (var modelelement in @Model.MainHabitat)
             {
                 // THIS CODE BELOW IS DUPLICATED IN THE PARAGRAPH BELOW IT.
                 // SHOULD BE ITS OWN PARTIAL OR FUNCTION.
@@ -38,11 +39,11 @@
                         <p>
                             @Html.Raw(@ViewBag.habitat[modelelement]["description"])
 
-                            <br/><br/>
+                            <br /><br />
 
                             @Html.Raw(@ViewBag.habitat[modelelement]["mapping"])
                         </p>
-                       
+
                         <button class="seemore" onclick="expand(this)">
                             <span class="more">Se mer</span>
                             <span class="less">Se mindre</span>
@@ -58,9 +59,9 @@
 
                     @foreach (var key in habitat.Keys)
                     {
-                        @if (!Model.Contains(key))
+                        @if (!@Model.MainHabitat.Contains(key))
                         {
-                            <div class="habitat_element @Html.Raw(Model.Contains(key) ? "active" : "inactive")">
+                            <div class="habitat_element @Html.Raw(@Model.MainHabitat.Contains(key) ? "active" : "inactive")">
                                 @if (@habitat[key]["name"] != null)
                                 {
                                     <h4 class="habitat_header">@habitat[key]["name"]</h4>
@@ -73,14 +74,14 @@
                                 </div>
                                 @if (@habitat[key]["description"] != null)
                                 {
-                            <p>
-                               
-                                @Html.Raw(@habitat[key]["description"])
+                                    <p>
 
-                                <br /><br />
+                                        @Html.Raw(@habitat[key]["description"])
 
-                                @Html.Raw(@habitat[key]["mapping"])
-                            </p>
+                                        <br /><br />
+
+                                        @Html.Raw(@habitat[key]["mapping"])
+                                    </p>
                                     <button class="seemore" onclick="expand(this)">
                                         <span class="more">Se mer</span>
                                         <span class="less">Se mindre</span>
@@ -98,20 +99,20 @@
                 <span class="less">Se kun habitat arten forekommer i</span>
             </button>
         </div>
-}
-           
-<script>
-    // See more text by altering css of the clicked element's top parent node
-    var seemorebuttons = document.getElementsByClassName('seemore');
-
-    function expand(element) {
-        if (element.parentElement.classList.contains("expanded")) {
-            element.parentElement.classList.remove("expanded");
-        } else {
-            element.parentElement.classList.add("expanded");
-        }
     }
 
+    <script>
+        // See more text by altering css of the clicked element's top parent node
+        var seemorebuttons = document.getElementsByClassName('seemore');
+
+        function expand(element) {
+            if (element.parentElement.classList.contains("expanded")) {
+                element.parentElement.classList.remove("expanded");
+            } else {
+                element.parentElement.classList.add("expanded");
+            }
+        }
 
 
-</script>
+
+    </script>

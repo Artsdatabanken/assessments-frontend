@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assessments.Mapping.Models.Source.Species;
+using Assessments.Mapping.Models.Species;
+using AutoMapper;
 using Azure.Storage.Blobs;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -20,11 +23,13 @@ namespace Assessments.Frontend.Web.Infrastructure
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _environment;
         private readonly ILogger<DataRepository> _logger;
+        private readonly IMapper _mapper;
 
         private static CsvConfiguration CsvConfiguration => new(CultureInfo.InvariantCulture) { Delimiter = ";" };
 
-        public DataRepository(IAppCache appCache, IConfiguration configuration, IWebHostEnvironment environment, ILogger<DataRepository> logger)
+        public DataRepository(IAppCache appCache, IConfiguration configuration, IWebHostEnvironment environment, ILogger<DataRepository> logger, IMapper mapper)
         {
+            _mapper = mapper;
             _logger = logger;
             _environment = environment;
             _configuration = configuration;
@@ -36,7 +41,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             async Task<IQueryable<T>> DeserializeData()
             {
-                var fileName = Path.Combine(_environment.ContentRootPath, Helpers.Constants.CacheFolder, name);
+                var fileName = Path.Combine(_environment.ContentRootPath, Constants.CacheFolder, name);
                 string fileContent;
 
                 if (File.Exists(fileName)) // use cached file
@@ -66,6 +71,24 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
 
             return _appCache.GetOrAddAsync($"{nameof(DataRepository)}-{name}", DeserializeData);
+        }
+        
+        /// <summary>
+        /// Metode som henter data som "RL2019" og transformerer til "SpeciesAssessment2021"
+        /// litt tregere (ved oppstart), kan brukes for å teste mapping
+        /// </summary>
+        public Task<IQueryable<SpeciesAssessment2021>> GetMappedSpeciesAssessments()
+        {
+            // NOTE: legg til hvilken metode som skal brukes i innstillingene?
+
+            async Task<IQueryable<SpeciesAssessment2021>> Get()
+            {
+                var data = await GetData<Rodliste2019>(Constants.Filename.Species2021Temp);
+            
+                return _mapper.Map<IEnumerable<SpeciesAssessment2021>>(data).AsQueryable();
+            }
+
+            return _appCache.GetOrAddAsync($"{nameof(GetMappedSpeciesAssessments)}", Get);
         }
     }
 }

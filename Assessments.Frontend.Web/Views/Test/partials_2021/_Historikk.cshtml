@@ -1,19 +1,18 @@
-﻿@model Artsdatabanken.RL2021
+﻿@model SpeciesAssessment2021
 @* SEE example by searching species Carex elata *@
 
 @{
-    Artsdatabanken.RL2021 assessment = Model;
- }
+    SpeciesAssessment2021 assessment = Model;
+}
 
 
 @functions{
-
     public string categoryDescription(string category)
     {
         // Takes in category as presented in the model
         // uses categoryMatcher to remove degrees etc.
         // Returns name of category (whatever for?)
-        var actual_category = category.Substring(0, 2); 
+        var actual_category = category.Substring(0, 2);
         var final_string = @ViewBag.glossary[actual_category]["presentationstring"];
         return final_string;
     }
@@ -23,99 +22,93 @@
 <div class="page_section">
 
 
-    @if (Model.SistVurdertAr == 2021 || Model.SistVurdertAr == 0)
-    {
-        <h3>Tidligere vurderinger</h3>
-        <span>Arten er vurdert for første gang i 2021.</span>
-    }
-    else
-    {
-        @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010) && !string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
+        @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
         {
-
-
-            @if (@ViewBag.glossary[@Model.ImportInfo.Kategori2010] != null)
+            <h3>Tidligere vurderinger</h3>
+            <span>Arten er vurdert for første gang i 2021.</span>
+        }
+        else
+        {
+            @*
+            @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010) && !string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
             {
-                <h3>Rødlista 2015</h3>
-                <p class="imaged_paragraph">
-                    <span class="graphic_element @Model.ImportInfo.Kategori2015">
-                        @Model.ImportInfo.Kategori2015
-                    </span>
-                    <span class="right_text">
-                        <b>@ViewBag.glossary[@Model.ImportInfo.Kategori2015]["tagline"]</b>
-                        <span class="tag_explanation">
-                            @ViewBag.glossary[@Model.ImportInfo.Kategori2015]["description"]
 
+
+                @if (@ViewBag.glossary[@Model.ImportInfo.Kategori2010] != null)
+                {
+                    <h3>Rødlista 2015</h3>
+                    <p class="imaged_paragraph">
+                        <span class="graphic_element @Model.ImportInfo.Kategori2015">
+                            @Model.ImportInfo.Kategori2015
                         </span>
-                        <br />
-                        <a target="_blank" href="@Model.ImportInfo.Url2015">
-                            Se vurdering
-                        </a>
-                    </span>
+                        <span class="right_text">
+                            <b>@ViewBag.glossary[@Model.ImportInfo.Kategori2015]["tagline"]</b>
+                            <span class="tag_explanation">
+                                @ViewBag.glossary[@Model.ImportInfo.Kategori2015]["description"]
+
+                            </span>
+                            <br />
+                            <a target="_blank" href="@Model.ImportInfo.Url2015">
+                                Se vurdering
+                            </a>
+                        </span>
+                    </p>
+                }
+
+
+                @if (@ViewBag.glossary[@Model.ImportInfo.Kategori2010] != null)
+                {
+                    <h3> Rødlista 2010 </h3>
+                    <p class="imaged_paragraph">
+                        <span class="graphic_element @Model.ImportInfo.Kategori2010">
+                            @Model.ImportInfo.Kategori2010
+                        </span>
+                        <span class="right_text">
+                            <b>@ViewBag.glossary[@Model.ImportInfo.Kategori2010]["tagline"]</b>
+                            <span class="tag_explanation">
+                                @ViewBag.glossary[@Model.ImportInfo.Kategori2010]["description"]
+
+                            </span>
+                            <br />
+                            <a target="_blank" href="@Model.ImportInfo.Url2010">
+                                Se vurdering
+                            </a>
+                        </span>
+                    </p>
+                }
+
+            }
+            else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
+            {
+
+                <p>
+                    <b>Rødlista 2010</b>
+                    <a target="_blank" href="@Model.ImportInfo.Url2010">
+                        <span class="icon-@Model.ImportInfo.Kategori2010"> &nbsp;</span>
+                        @Model.ImportInfo.Kategori2010 @categoryDescription(Model.ImportInfo.Kategori2010)
+                    </a>
+                </p>
+            }
+            else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
+            {
+                <p>
+                    <b>Rødlista 2015</b>
+                    <a target="_blank" href="@Model.ImportInfo.Url2015">
+                        <span class="icon-@Model.ImportInfo.Kategori2015"> &nbsp;</span>
+                        @Model.ImportInfo.Kategori2015 @categoryDescription(Model.ImportInfo.Kategori2015)
+                    </a>
+
                 </p>
             }
 
-
-            @if (@ViewBag.glossary[@Model.ImportInfo.Kategori2010] != null)
+            @if (Model.ExpertCommittee.ToLower() == "spretthaler" || Model.ExpertCommittee.ToLower() == "havedderkopper")
             {
-                <h3> Rødlista 2010 </h3>
-                <p class="imaged_paragraph">
-                    <span class="graphic_element @Model.ImportInfo.Kategori2010">
-                        @Model.ImportInfo.Kategori2010
-                    </span>
-                    <span class="right_text">
-                        <b>@ViewBag.glossary[@Model.ImportInfo.Kategori2010]["tagline"]</b>
-                        <span class="tag_explanation">
-                            @ViewBag.glossary[@Model.ImportInfo.Kategori2010]["description"]
-
-                        </span>
-                        <br />
-                        <a target="_blank" href="@Model.ImportInfo.Url2010">
-                            Se vurdering
-                        </a>
-                    </span>
+                <p>
+                    Sist vurdert i: @Model.YearPreviousAssessment
                 </p>
             }
-
-        }
-        else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
-        {
-
-            <p>
-                <b>Rødlista 2010</b>
-                <a target="_blank" href="@Model.ImportInfo.Url2010">
-                    <span class="icon-@Model.ImportInfo.Kategori2010"> &nbsp;</span>
-                    @Model.ImportInfo.Kategori2010 @categoryDescription(Model.ImportInfo.Kategori2010)
-                </a>
-            </p>
-        }
-        else if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
-        {
-            <p>
-                <b>Rødlista 2015</b>
-                <a target="_blank" href="@Model.ImportInfo.Url2015">
-                    <span class="icon-@Model.ImportInfo.Kategori2015"> &nbsp;</span>
-                    @Model.ImportInfo.Kategori2015 @categoryDescription(Model.ImportInfo.Kategori2015)
-                </a>
-
-            </p>
+            *@
         }
 
-        @if (Model.Ekspertgruppe.ToLower() == "spretthaler" || Model.Ekspertgruppe.ToLower() == "havedderkopper")
-        {
-            <p>
-                Sist vurdert i: @Model.SistVurdertAr
-            </p>
-        }
-    }
 
-    @if (Model.GlobalRødlistestatusKode != null)
-    {
-        <p>
-            Global Rødlistestatus: @Model.GlobalRødlistestatusKode
-        </p>
-    }
-
-
-
-</div><!-- End section -->
+    </div><!-- End section -->

@@ -94,11 +94,10 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ExpertCommittee, opt => opt.MapFrom(src => src.Ekspertgruppe))
                 .ForMember(dest => dest.EPreliminaryCategory, opt => opt.MapFrom(src => src.EKvantitativUtryddingsmodellKode))
                 
-
-
-                
-
                 .ForMember(dest => dest.GenerationLength, opt => opt.MapFrom(src => src.Generasjonslengde))
+                
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Kategori))
+
                 .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => src.Kriteriedokumentasjon.Trim()))
 
                 .ForMember(dest => dest.CriteriaSummarized, opt => opt.MapFrom(src => src.Kriterier))

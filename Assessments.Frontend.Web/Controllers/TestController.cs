@@ -27,9 +27,8 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query =
-                await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename
-                    .Species2021);
+            // var query = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
+            var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
             // Filter
             if (!string.IsNullOrEmpty(name))
@@ -101,7 +100,9 @@ namespace Assessments.Frontend.Web.Controllers
                 {
                     case 2021:
 
-                        var species2021 = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
+                        //var species2021 = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
+                        var species2021 = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+
                         var species2021Model = species2021.FirstOrDefault(x => x.Id == Convert.ToInt32(id));
 
                         var json_kriterier = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/Kriterier_2021/kriterier.json");

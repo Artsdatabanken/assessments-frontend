@@ -34,18 +34,17 @@
             </span>
         }
     }
-
     <!-- TODO FIX TAXON CURRENTLY NOT WORKING-->
     @*
-        <span>@Model.TaxonomicHistory</span>
-            @if (@Model.TaxonomicHistory != null)
-            {
-                <p class="taxonomy">
-                    @foreach (var taxon in @Model.TaxonomicHistory)
-                    {
-                        <span>@taxon element</span>
-                    }
-                </p>
-            }
+
+        @if (@Model.TaxonomicHistory != null)
+        {
+            <p class="taxonomy">
+                @foreach (var taxon in @Model.TaxonomicHistory)
+                {
+                    <span>@taxon element</span>
+                }
+            </p>
+        }
     *@
 </div>

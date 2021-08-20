@@ -5,7 +5,7 @@
     // TODO: ADD THE LINK TO EXPERT COMMITTEE (Not in existence yet)
 }
 
-@*<span class="byline">
-    Publisert: @(ekspertgruppe == "spretthaler" || ekspertgruppe == "spretthaler (Svalbard)" ? @Model.SistVurdertAr : "24.November 2021").
+<span class="byline">
+    Publisert: @(ekspertgruppe == "spretthaler" || ekspertgruppe == "spretthaler (Svalbard)" ? @Model.YearPreviousAssessment : "24.November 2021").
     Vurdert av <a href=""> Ekspertkomité for @ekspertgruppe </a> for Artsdatabanken
-</span>*@
+</span>

@@ -50,34 +50,29 @@
     }
 }
 
-@* // TODO: FIX WHEN CRITERIA
-    @if (!((Model.Kategori == "NA" || Model.Kategori == "NE" || Model.Kategori == "LC")
-    && (Model.Kriteriedokumentasjon == "" || Model.Kriteriedokumentasjon == null)))
-       {
-*@
 
-@if (!string.IsNullOrWhiteSpace(kriteriedok))
-{
-    <div class="page_section">
-        <h2>
-            Oppsumering av vurdering
-        </h2>
+@if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
+    {
+    @if (!string.IsNullOrWhiteSpace(kriteriedok))
+    {
+        <div class="page_section">
+            <h2>
+                Oppsumering av vurdering
+            </h2>
 
-        <div class="expert_assesment">
-            <div class="expert_text">
-                @Html.Raw(kriteriedok)
-                <p class="quote_by">- Ekspertkomité for @ekspertgruppe</p>
+            <div class="expert_assesment">
+                <div class="expert_text">
+                    @Html.Raw(kriteriedok)
+                    <p class="quote_by">- Ekspertkomité for @ekspertgruppe</p>
+                </div>
             </div>
         </div>
-    </div>
+    }
+
 }
 
-@*// TODO: FIX WHEN CRITERIA
-    }
-*@
 
-@*
-
+@* // TODO: NOT YET MAPPED IN MAIN DATA
 <!-- Kategori Kriteriedokumentasjon -->
 @if (!string.IsNullOrWhiteSpace(assessment.Kriteriedokumentasjon))
 {

@@ -1,6 +1,6 @@
 ﻿@model SpeciesAssessment2021
 @{
-    //ViewBag.category = @Model.Kategori; // TODO: missing kategori mapping
+    ViewBag.category = @Model.Category; // TODO: missing Category mapping
     var utd = @ViewBag.glossary["TroligUtdodd"]["description"];
 }
 
@@ -8,22 +8,22 @@
     Mostly similar to category description for now
 *@
 
-@*<div class="page_section">
+<div class="page_section">
    
-    @if (@ViewBag.glossary[@Model.Kategori] != null)
+    @if (@ViewBag.glossary[@Model.Category] != null)
     {
         <p class="imaged_paragraph">
-            <span class="graphic_element @Model.Kategori">
-                @Model.Kategori
+            <span class="graphic_element @Model.Category">
+                @Model.Category
             </span>
             <span class="right_text">
-                <b>@ViewBag.glossary[@Model.Kategori]["tagline"]</b>
-                <span class="tag_explanation">@ViewBag.glossary[@Model.Kategori]["description"]</span>
+                <b>@ViewBag.glossary[@Model.Category]["tagline"]</b>
+                <span class="tag_explanation">@ViewBag.glossary[@Model.Category]["description"]</span>
             </span>
         </p>
     }
 
-    @if (@Model.Kategori == "CR" && @Model.TroligUtdodd == true)
+    @if (@Model.Category == "CR" && @Model.PresumedExtinct == true)
     {
 
         <p class="imaged_paragraph">
@@ -37,4 +37,4 @@
         </p>
 
     }
-</div>*@
+</div>

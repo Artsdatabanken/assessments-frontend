@@ -21,6 +21,15 @@
 
         // Remove weird
         kriteriedok = kriteriedok.Replace("<u><br/></u>", "");
+        kriteriedok = kriteriedok.Replace("<div>", "");
+        kriteriedok = kriteriedok.Replace("</div>", "");
+        kriteriedok = kriteriedok.Replace("font-family:=", "");
+        kriteriedok = kriteriedok.Replace("roboto,=", "");
+        kriteriedok = kriteriedok.Replace("sans-serif;", "");
+        kriteriedok = kriteriedok.Replace("=\"", "");
+        kriteriedok = kriteriedok.Replace("\" \"", "");
+        kriteriedok = kriteriedok.Replace("\"\"", "");
+        kriteriedok = kriteriedok.Replace("<b >", "<b>");
 
         // Turn u and b into headings
         kriteriedok = kriteriedok.Replace("<b>", "<h3>");
@@ -48,13 +57,13 @@
         kriteriedok = "<p>" + kriteriedok + "</p>";
         kriteriedok = kriteriedok.Replace("<p></p>", "");
     }
-}
+        }
 
 
-@if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
+        @if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
 {
     @if (!string.IsNullOrWhiteSpace(kriteriedok))
-    {
+        {
         <div class="page_section">
             <h2>
                 Oppsumering av vurdering
@@ -62,6 +71,7 @@
 
             <div class="expert_assesment">
                 <div class="expert_text">
+                    @*@kriteriedok<br />*@
                     @Html.Raw(kriteriedok)
                     <p class="quote_by">- Ekspertkomité for @ekspertgruppe</p>
                 </div>

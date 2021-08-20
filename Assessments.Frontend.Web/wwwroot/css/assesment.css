@@ -333,13 +333,18 @@
     border: 4px solid black;
 }
 
-.fylke span {
+.region {
+    padding-top: 2px;
+    font-size: 10pt;
+    width: 100%;
+    max-width: 350px;
     display: inline-block;
-    padding: 5px;
-    background: lightgrey;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    font-size:12pt;
+}
+
+.region b{
+    width:120px;
+    
+    display:inline-block;
 }
 
 
@@ -532,35 +537,58 @@
 /* MAP COLOURS */
 
 
-
 .extinct {
+    background: #cd4646;
     fill: #cd4646;
 }
 
 .sea.extinct {
+    background: #f68888;
     fill: #f68888;
 }
 
 .known {
+    background: #51b051;
     fill: #51b051;
 }
 
 .sea.known {
+    background: #7ae57a;
     fill: #7ae57a;
 }
 
 .presumed_extinct {
+    background: #ff9b00;
     fill: #ff9b00;
 }
 
 .sea.presumed_extinct {
+    background: #f0ae74;
     fill: #f0ae74;
 }
 
 .presumed {
+    background: #cbd03c;
     fill: #cbd03c;
 }
 
 .sea.presumed {
+    background: #edf176;
     fill: #edf176;
+}
+
+.indicator {
+    display:inline-block;
+    width: 15px;
+    height: 15px;
+    border:1px solid grey;
+    margin:0px;
+    flex:none;
+    font-size:0;
+}
+
+.indicatorcontent {
+    display: inline-block;
+    width: 50%;
+    height: 100%;
 }

@@ -25,7 +25,7 @@
 
 <div class="sidebarmenu"></div>
 
-<div class="content-placer bigmid">
+<div class="bigmid">
     <div class="page-header">
         <h1>
             Norsk Rødliste for arter 2021
@@ -48,17 +48,6 @@
             @Model.Redlist2021Results.Count redlist 2021 items
         </h3>
 
-        <!-- FILTER FORM -->
-        <form class="list-search" asp-action="Index2021" method="get">
-            <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
-            <button class="btn" type="submit">
-                <span class="material-icons">
-                    search
-                </span>
-
-                Søk
-            </button>
-        </form>
 
         <!-- List controls -->
         <div class="controls">
@@ -70,6 +59,19 @@
 
 
         <div class="listwrapper">
+            <!-- FILTER FORM -->
+            <div class="search-and-filter">
+                <form class="list-search" asp-action="Index2021" method="get">
+                    <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
+                    <button class="btn" type="submit">
+                        <span class="material-icons">
+                            search
+                        </span>
+                        Søk
+                    </button>
+                </form>
+                <partial name="/Views/Test/partials_2021/_Filters.cshtml" />
+            </div>
             <ul class="redlist" id="redlist">
                 <li class="listheader" id="listheader">
                     <span>Id</span>

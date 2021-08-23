@@ -74,8 +74,8 @@
             </div>
             <ul class="redlist" id="redlist">
                 <li class="listheader" id="listheader">
-                    <span>Id</span>
                     <span>Artsnavn</span>
+                    <span>Vurdering</span>
                     <span>Kategori</span>
                     <span>Artsgruppe</span>
                     <span>Ikon</span>
@@ -104,11 +104,6 @@
                         ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
                         ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
                     }
-                    <span class="element_id">
-
-                        @item.ScientificNameId
-
-                    </span>
                     <span class="element_name">@item.ScientificName</span>
                     <span class="element_category">
                          <span class="@item.Category">@item.Category</span>
@@ -127,22 +122,24 @@
 
 
                     </span>
-                    <div class="element_icon" >
+                    <span class="element_icon">
+                        <div>
 
-                        @foreach (var key in speciesgroup.Keys)
-                        {
-                            @if (key != null && key == @ekspertgruppe)
+                            @foreach (var key in speciesgroup.Keys)
                             {
-
-                                @if (speciesgroup[key]["image"] != null)
+                                @if (key != null && key == @ekspertgruppe)
                                 {
-                                    <img src=@speciesgroup[key]["image"] />
+
+                                    @if (speciesgroup[key]["image"] != null)
+                                    {
+                                        <img src=@speciesgroup[key]["image"] />
+                                    }
+
                                 }
 
                             }
-
-                        }
-                    </div>
+                        </div>
+                    </span>
                 </a>
             </li>
                 }

@@ -81,6 +81,7 @@ td {
 .redlist li {
     width: 100%;
     list-style-type: none;
+    hover: 
 }
 
 .redlist li a {
@@ -98,6 +99,12 @@ td {
 .listheader {
     display: inline-grid;
     grid-template-columns: 1.5fr .8fr 1fr .5fr .5fr;
+    position: sticky;
+    position: -webkit-sticky;
+    top: -1px;
+    background-color: #fff;
+    z-index: 1000;
+    font-weight: bold;
 }
 
 .redlist li span {

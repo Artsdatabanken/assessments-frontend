@@ -26,7 +26,7 @@
     display:block;
 }
 
-@media only screen and (min-width: 550px) {
+@media only screen and (min-width: 650px) {
     .mid-content {
         width: calc(100% - 210px);
     }
@@ -49,7 +49,7 @@
 }
 
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 650px) {
     .side {
         float: none;
         width: 100%;
@@ -402,6 +402,42 @@
     top: 0;
     left: 0;
 }
+
+
+@media only screen and (min-width: 250px) and (max-width: 550px) {
+
+    .habitat_icon {
+        and height: 100px;
+        width: 100px;
+        display: inline;
+        margin: auto;
+    }
+
+    .habitat_element {
+        max-width: 100%;
+        padding-bottom: 0px;
+    }
+
+        .habitat_element p,
+        .habitat_header {
+            position: relative;
+            max-width: calc(100% - 100px);
+            float: right;
+            top: auto;
+            left: auto;
+        }
+
+    .habitat_icon img {
+        width: 100px;
+        height: 100px;
+        float: left;
+    }
+
+    .habitat_element button {
+        float: none;
+    }
+}
+
 
 .habitat_element p, .habitat_element a {
     color: grey;

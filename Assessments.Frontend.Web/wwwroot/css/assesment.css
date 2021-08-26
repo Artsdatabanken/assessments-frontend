@@ -624,6 +624,12 @@
     fill: #edf176;
 }
 
+.current:hover{
+    stroke-width:1;
+    fill:green;
+    cursor:pointer;
+}
+
 .indicator {
     display:inline-block;
     width: 15px;

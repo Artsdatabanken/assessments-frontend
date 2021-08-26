@@ -25,7 +25,6 @@ namespace Assessments.Mapping
                 
                 .ForMember(dest => dest.RegionOccurrences, opt => opt.MapFrom(src => src.Fylkesforekomster))
 
-
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
 
                 .ForPath(dest => dest.A1.ReductionBasedOn, opt => opt.MapFrom(src => src.A1EndringBasertpåKode))
@@ -46,22 +45,19 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.ProportionOfMaxPopulation, opt => opt.MapFrom(src => src.AndelNåværendeBestand))
 
-                .ForPath(dest => dest.B1.Quantile, opt => opt.MapFrom(src => src.B1BeregnetAreal))
                 .ForPath(dest => dest.B1.Statistics, opt => opt.MapFrom(src => src.B1IntervallUtbredelsesområde))
                 .ForPath(dest => dest.B1.PreliminaryCategory, opt => opt.MapFrom(src => src.B1UtbredelsesområdeKode))
 
-                .ForPath(dest => dest.B2.Quantile, opt => opt.MapFrom(src => src.B2BeregnetAreal))
                 .ForPath(dest => dest.B2.PreliminaryCategory, opt => opt.MapFrom(src => src.B2ForekomstarealKode))
                 .ForPath(dest => dest.B2.Statistics, opt => opt.MapFrom(src => src.B2IntervallForekomstareal))
 
                 .ForMember(dest => dest.BaiSevereFragmentation, opt => opt.MapFrom(src => src.BA1KraftigFragmenteringKode))
 
                 .ForPath(dest => dest.BAii.PreliminaryCategory, opt => opt.MapFrom(src => src.BA2FåLokaliteterKode))
-                .ForPath(dest => dest.BAii.Quantile, opt => opt.MapFrom(src => src.BA2FåLokaliteterProdukt))
                 .ForPath(dest => dest.BAii.Statistics, opt => opt.MapFrom(src => src.BaIntervallAntallLokaliteter))
 
-                .ForMember(dest => dest.BbContinuingDecline, opt => opt.MapFrom(src => src.BBPågåendeArealreduksjonKode))
-                .ForMember(dest => dest.ExtremeFluctuations, opt => opt.MapFrom(src => src.BCEksterneFluktuasjonerKode))
+                .ForMember(dest => dest.BBOptions, opt => opt.MapFrom(src => src.BBPågåendeArealreduksjonKode))
+                .ForMember(dest => dest.BCOptions, opt => opt.MapFrom(src => src.BCEksterneFluktuasjonerKode))
                 .ForMember(dest => dest.RationaleNotApplicable, opt => opt.MapFrom(src => src.BegrensetForekomstNA))
 
                 .ForPath(dest => dest.C1.Statistics, opt => opt.MapFrom(src => src.C1PågåendePopulasjonsreduksjonAntatt))
@@ -80,7 +76,7 @@ namespace Assessments.Mapping
                 .ForPath(dest => dest.C.RametsPerGenet, opt => opt.MapFrom(src => src.CAntallRameter))
                 .ForPath(dest => dest.C.KnownPopulationSize, opt => opt.MapFrom(src => src.CKjentPopulasjonsstørrelse))
                 .ForPath(dest => dest.C.NumberOfLocations, opt => opt.MapFrom(src => src.CNumberOfLocations))
-                .ForPath(dest => dest.C.CPopulasjonsstørrelse, opt => opt.MapFrom(src => src.CPopulasjonsstørrelse))
+                .ForPath(dest => dest.C.IndirectEstimate, opt => opt.MapFrom(src => src.CPopulasjonsstørrelse))
                 .ForPath(dest => dest.C.Statistics, opt => opt.MapFrom(src => src.CPopulasjonsstørrelseAntatt))
                 .ForPath(dest => dest.C.PreliminaryCategory, opt => opt.MapFrom(src => src.CPopulasjonsstørrelseKode))
                 .ForPath(dest => dest.C.IndividualsPerLocation, opt => opt.MapFrom(src => src.CReproductionDefinitionPerLocation))
@@ -97,6 +93,8 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.GenerationLength, opt => opt.MapFrom(src => src.Generasjonslengde))
                 
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Kategori))
+                .ForMember(dest => dest.CategoryAdjustedFrom, opt => opt.MapFrom(src => src.KategoriEndretFra))
+                .ForMember(dest => dest.CategoryAdjustedTo, opt => opt.MapFrom(src => src.KategoriEndretTil))
 
                 .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => src.Kriteriedokumentasjon.Trim()))
 
@@ -107,7 +105,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.PercentageGlobalPopulation, opt => opt.MapFrom(src => src.MaxAndelAvGlobalBestand))
                 .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => src.NaturtypeHovedenhet))
 
-                .ForMember(dest => dest.RedlistAssessmentClassification, opt => opt.MapFrom(src => src.OverordnetKlassifiseringGruppeKode))
+                .ForMember(dest => dest.AssessmentInitialClassification, opt => opt.MapFrom(src => src.OverordnetKlassifiseringGruppeKode))
                 .ForMember(dest => dest.PopularName, opt => opt.MapFrom(src => src.PopularName))
 
                 .ForMember(dest => dest.References, opt => opt.MapFrom(src => src.Referanser))
@@ -122,9 +120,9 @@ namespace Assessments.Mapping
                 // TODO .ForMember(dest => dest.TilførselFraNaboland, opt => opt.MapFrom(src => src.TilførselFraNaboland))
 
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.TroligUtdodd))
-                .ForMember(dest => dest.RationaleRE, opt => opt.MapFrom(src => src.UtdoddINorgeRE))
+                .ForMember(dest => dest.RationaleRegionallyExtinct, opt => opt.MapFrom(src => src.UtdoddINorgeRE))
 
-                // TODO .ForMember(dest => dest.UtdøingSterktPåvirket, opt => opt.MapFrom(src => src.UtdøingSterktPåvirket))
+                .ForMember(dest => dest.ExtinctionRiskAffected, opt => opt.MapFrom(src => src.UtdøingSterktPåvirket))
 
                 .ForMember(dest => dest.AssessmentArea, opt => opt.MapFrom(src => src.VurderingsContext))
                 .ForMember(dest => dest.AssessmentYear, opt => opt.MapFrom(src => src.Vurderingsår))
@@ -136,8 +134,8 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnId))
 
-                // TODO .ForMember(dest => dest.ÅrsakTilEndringAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilEndringAvKategori))
-                // TODO .ForMember(dest => dest.ÅrsakTilNedgraderingAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilNedgraderingAvKategori))
+                .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ÅrsakTilEndringAvKategori))
+                .ForMember(dest => dest.ÅrsakTilNedgraderingAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilNedgraderingAvKategori))
 
                 // .ForAllOtherMembers(opts => opts.Ignore())
                 ;

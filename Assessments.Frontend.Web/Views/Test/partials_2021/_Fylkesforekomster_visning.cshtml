@@ -1,70 +1,89 @@
 ﻿@model SpeciesAssessment2021
 
-    @{
+@{
 
-        // There seems to be no automatic sorting into different lists from the api and models per now
-        // Thus added a quick check if the elements exist.
-        // This used to be a big table which was difficult to read on mobile platforms.
-        // This may not be an optimal solution, but it is more universal than a checkbox that sometimes is included and sometimes not.
+    // There seems to be no automatic sorting into different lists from the api and models per now
+    // Thus added a quick check if the elements exist.
+    // This used to be a big table which was difficult to read on mobile platforms.
+    // This may not be an optimal solution, but it is more universal than a checkbox that sometimes is included and sometimes not.
 
-        var has_element = "";
+    var has_element = "";
 
-        foreach (var element in Model.RegionOccurrences)
-        {
-            has_element += element.State;
-        }
+    foreach (var element in Model.RegionOccurrences)
+    {
+        has_element += element.State;
     }
+}
 
-    @if (has_element != "")
-    { // No content would imply it exists nowhere or is recorded nowhere
-        <h3>
-            @ViewBag.glossary["region"]["tagline"]
-        </h3>
-        <div class="fact_box">
-            @ViewBag.glossary["region"]["description"]
-        </div>
-        <div class="map_container">
-            <div class="map">
-                <partial name="/Views/Test/partials_2021/_Map.cshtml" />
-            </div>
-            <div class="fylke">
-                <h3>For test</h3>
-                @foreach (var region in Model.RegionOccurrences)
-                {
-                    <span><b>@region.Fylke</b>
-                
+@if (has_element != "")
+{ // No content would imply it exists nowhere or is recorded nowhere
+    <h3>
+        @ViewBag.glossary["region"]["tagline"]
+    </h3>
+    <div class="fact_box">
+        @ViewBag.glossary["region"]["description"]
+    </div>
+    <h2>Geografisk distribusjon</h2>
+
+    <div class="region_distributions">
+
+        <div class="regionlist">
+            @foreach (var region in Model.RegionOccurrences)
+            {
+                <span class="region">
+                    <b>@region.Fylke</b>
+                    <span>
                         @if (region.State == 0)
                         {
+                            <span class="indicator">
+                                <span class="indicatorcontent sea known"></span>
+                                <span class="indicatorcontent known"></span>
+                            </span>
                             <i>Kjent forekomst</i>
                         }
                         else if (region.State == 1)
                         {
+                            <span class="indicator">
+                                <span class="indicatorcontent sea presumed"></span>
+                                <span class="indicatorcontent presumed"></span>
+                            </span>
                             <i>Antatt forekomst</i>
                         }
                         else if (region.State == 2)
                         {
+                            <span class="indicator"></span>
                             <i>Ingen forekomst</i>
                         }
                         else if (region.State == 3)
                         {
+                            <span class="indicator">
+                                <span class="indicatorcontent sea presumed_extinct"></span>
+                                <span class="indicatorcontent presumed_extinct"></span>
+                            </span>
                             <i>Antatt Utdødd forekomst</i>
                         }
                         else if (region.State == 4)
                         {
+                            <span class="indicator">
+                                <span class="indicatorcontent sea extinct"></span>
+                                <span class="indicatorcontent extinct"></span>
+                            </span>
                             <i>Utdødd forekomst</i>
                         }
-                    
+                    </span>
                 </span>
-                    
-                }
-            </div>
+            }
         </div>
-        
-        
-    }
-    else
-    {
-        //TODO: Text here for items LC etc with no records.
-    }
+        <div class="map">
+            <partial name="/Views/Test/partials_2021/_Map.cshtml" />
+        </div>
+    </div>
 
-    @* MAP HERE *@
+
+}
+else
+{
+    //TODO: Text here for items LC etc with no records.
+}
+
+@* MAP HERE *@

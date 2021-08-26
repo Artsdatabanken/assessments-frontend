@@ -23,9 +23,9 @@
         public string NumberOfLocations { get; set; } // CNumberOfLocations // TODO
 
         /// <summary>
-        /// Whether or not the number of mature individuals were estimated indirectly. 
+        /// Whether the number of mature individuals were estimated indirectly = "Aktuelt" or not = "Ikke aktuelt".
         /// </summary>
-        public string CPopulasjonsstørrelse { get; set; } = "Ikke aktuelt"; // CPopulasjonsstørrelse
+        public string IndirectEstimate { get; set; } = "Ikke aktuelt"; // CPopulasjonsstørrelse
 
         public SpeciesAssessment2021MinMaxProbableIntervall Statistics { get; set; } = new(); // CPopulasjonsstørrelseAntatt
 

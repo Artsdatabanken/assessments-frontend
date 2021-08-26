@@ -195,8 +195,6 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string TaxonRank { get; set; }
         
-        public bool TilførselFraNaboland { get; set; } // TODO: oversett og gi nytt navn
-
         /// <summary>
         /// The tag "Possibly Extinct" is used on Critically Endangered CR taxa that assessors suspect to be extinct.
         /// </summary>
@@ -232,8 +230,8 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string ScientificNameAuthor { get; set; } // VurdertVitenskapeligNavnAutor
 
-        // TODO public string VurdertVitenskapeligNavnHierarki { get; set; } // Må ha nytt navn
-        public string VurdertVitenskapeligNavnHierarki { get; set; } // VurdertVitenskapeligNavnAutor
+        // TODO Må ha nytt navn
+        public string VurdertVitenskapeligNavnHierarki { get; set; }
 
         /// <summary>
         /// An identifier for the nomenclatural (not taxonomic) details of a scientific name
@@ -245,6 +243,9 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string ReasonCategoryChange { get; set; } // ÅrsakTilEndringAvKategori
 
+        /// <summary>
+        /// Rationale for adjusting the category based on significant effect from populations outside the region.
+        /// </summary>
         public string ÅrsakTilNedgraderingAvKategori { get; set; } // ÅrsakTilNedgraderingAvKategori
     }
 }

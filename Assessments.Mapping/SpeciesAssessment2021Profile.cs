@@ -125,8 +125,6 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.TaxonRank, opt => opt.MapFrom(src => src.TaxonRank))
 
-                .ForMember(dest => dest.TilførselFraNaboland, opt => opt.MapFrom(src => src.TilførselFraNaboland))
-
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.TroligUtdodd))
                 .ForMember(dest => dest.RationaleRegionallyExtinct, opt => opt.MapFrom(src => src.UtdoddINorgeRE))
 
@@ -143,10 +141,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnId))
 
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ÅrsakTilEndringAvKategori))
-                .ForMember(dest => dest.ÅrsakTilNedgraderingAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilNedgraderingAvKategori))
-
-                // .ForAllOtherMembers(opts => opts.Ignore())
-                ;
+                .ForMember(dest => dest.ÅrsakTilNedgraderingAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilNedgraderingAvKategori));
         }
 
         private static string ResolveRegion(string fylke)

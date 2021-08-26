@@ -12,22 +12,22 @@
 
 <div class="page_section">
     <!-- FULL VURDERING/LC -->
-    @if (@Model.RedlistAssessmentClassification == "sikkerBestandLC")
+    @if (@Model.AssessmentInitialClassification == "sikkerBestandLC")
     {
         <span>@Html.Raw(@ViewBag.glossary["oneliners"]["vurdert_livskraftig"])</span>
     }
 
-    @if (@Model.RedlistAssessmentClassification == "rodlisteVurdertArt")
+    @if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt")
     {
         <span>@ViewBag.glossary["oneliners"]["full_vurdering"]</span>
     }
 
     <!-- Finnes i norge? -->
 
-    @if (!string.IsNullOrEmpty(Model.RationaleRE))
+    @if (!string.IsNullOrEmpty(Model.RationaleRegionallyExtinct))
     {
         <p>
-            @if (@assessment.RationaleRE == "etablertBestandINorge")
+            @if (@assessment.RationaleRegionallyExtinct == "etablertBestandINorge")
             {
                 <span>
                     @ViewBag.glossary["oneliners"]["litentvil"]
@@ -35,7 +35,7 @@
                     @Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])
                 </span>
             }
-            else @if (@assessment.RationaleRE == "ikkeReproduserendeINorge")
+            else @if (@assessment.RationaleRegionallyExtinct == "ikkeReproduserendeINorge")
             {
                 <span>
                     @ViewBag.glossary["oneliners"]["litentvil"]
@@ -44,7 +44,7 @@
 
                 </span>
             }
-            else @if (@assessment.RationaleRE == "etablertFør1800")
+            else @if (@assessment.RationaleRegionallyExtinct == "etablertFør1800")
             {
             <span>
                 @ViewBag.glossary["oneliners"]["litentvil"]
@@ -119,7 +119,7 @@
     }
   
     <!-- FREMMEDART -->
-    @if (@assessment.RedlistAssessmentClassification == "fremmedArtNA")
+    @if (@assessment.AssessmentInitialClassification == "fremmedArtNA")
     {
         <span>
             @Html.Raw(@ViewBag.glossary["oneliners"]["fremmedArtNA"])

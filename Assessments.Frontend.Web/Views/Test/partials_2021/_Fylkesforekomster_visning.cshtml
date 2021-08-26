@@ -24,20 +24,15 @@
         @ViewBag.glossary["region"]["description"]
     </div>
     <h2>Geografisk distribusjon</h2>
-    <div class="map_container">
-        <div class="map">
-            <partial name="/Views/Test/partials_2021/_Map.cshtml" />
-        </div>
 
+    <div class="region_distributions">
 
         <div class="regionlist">
             @foreach (var region in Model.RegionOccurrences)
             {
                 <span class="region">
                     <b>@region.Fylke</b>
-
                     <span>
-
                         @if (region.State == 0)
                         {
                             <span class="indicator">
@@ -76,10 +71,11 @@
                             <i>Utdødd forekomst</i>
                         }
                     </span>
-
                 </span>
-
             }
+        </div>
+        <div class="map">
+            <partial name="/Views/Test/partials_2021/_Map.cshtml" />
         </div>
     </div>
 

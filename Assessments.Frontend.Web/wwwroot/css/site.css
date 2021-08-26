@@ -1,5 +1,10 @@
-﻿/* PAGE CRUMB*/
+﻿html {
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
+
+/* PAGE CRUMB*/
 .currentcrumb {
     text-decoration: none !important;
     color: grey !important;

@@ -26,7 +26,7 @@
     display:block;
 }
 
-@media only screen and (min-width: 550px) {
+@media only screen and (min-width: 650px) {
     .mid-content {
         width: calc(100% - 210px);
     }
@@ -49,7 +49,7 @@
 }
 
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 650px) {
     .side {
         float: none;
         width: 100%;
@@ -403,6 +403,42 @@
     left: 0;
 }
 
+
+@media only screen and (min-width: 250px) and (max-width: 550px) {
+
+    .habitat_icon {
+        and height: 100px;
+        width: 100px;
+        display: inline;
+        margin: auto;
+    }
+
+    .habitat_element {
+        max-width: 100%;
+        padding-bottom: 0px;
+    }
+
+        .habitat_element p,
+        .habitat_header {
+            position: relative;
+            max-width: calc(100% - 100px);
+            float: right;
+            top: auto;
+            left: auto;
+        }
+
+    .habitat_icon img {
+        width: 100px;
+        height: 100px;
+        float: left;
+    }
+
+    .habitat_element button {
+        float: none;
+    }
+}
+
+
 .habitat_element p, .habitat_element a {
     color: grey;
     font-size: 8pt;
@@ -523,16 +559,32 @@
     padding-left: 36px;
 }
 
-.fylke{
-    width:200px;
+.region_distributions {
+    width: 100%;
+    display: block;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    
 }
 
-.map{
+.regionlist {
+    width: 300px;
     display:inline-block;
-    font-size:12pt;
-    width:300px;
-    float:right;
+    padding:5px;
 }
+
+.map {
+    max-width: 400px;
+}
+
+
+@media only screen and (max-width: 550px) {
+    .fullscreenversion {
+        display: none;
+    }
+}
+
 
 /* MAP COLOURS */
 
@@ -575,6 +627,16 @@
 .sea.presumed {
     background: #edf176;
     fill: #edf176;
+}
+
+.extinct:hover,
+.known:hover,
+.presumed_extinct:hover,
+.presumed:hover,
+.current:hover {
+    stroke-width: 1;
+    filter:brightness(70%);
+    cursor: pointer;
 }
 
 .indicator {

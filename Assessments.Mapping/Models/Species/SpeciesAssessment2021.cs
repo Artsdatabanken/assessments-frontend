@@ -232,7 +232,8 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string ScientificNameAuthor { get; set; } // VurdertVitenskapeligNavnAutor
 
-        // TODO public string VurdertVitenskapeligNavnHierarki { get; set; } // Helene skal endre denne selv
+        // TODO public string VurdertVitenskapeligNavnHierarki { get; set; } // Må ha nytt navn
+        public string VurdertVitenskapeligNavnHierarki { get; set; } // VurdertVitenskapeligNavnAutor
 
         /// <summary>
         /// An identifier for the nomenclatural (not taxonomic) details of a scientific name

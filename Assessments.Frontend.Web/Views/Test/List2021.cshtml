@@ -113,11 +113,11 @@
                         @item.AssessmentArea
                         @if (@item.AssessmentArea == "N")
                         {
-                            <img src="~/images/norge.png" />
+                            <img src="~/images/norge.png" alt="Bilde av Norge" />
                         }
                         else if (@item.AssessmentArea == "S")
                         {
-                            <img src="~/images/svalbard.png" />
+                            <img src="~/images/svalbard.png" alt="Bilde av Svalbard"/>
                         }
 
 
@@ -132,7 +132,7 @@
 
                                     @if (speciesgroup[key]["image"] != null)
                                     {
-                                        <img src=@speciesgroup[key]["image"] />
+                                        <img src=@speciesgroup[key]["image"] alt="Bilde av @key" />
                                     }
 
                                 }

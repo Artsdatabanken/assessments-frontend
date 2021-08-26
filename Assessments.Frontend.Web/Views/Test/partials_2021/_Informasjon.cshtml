@@ -10,8 +10,6 @@
     SpeciesAssessment2021 assessment = Model;
 }
 
-
-
 <div class="page_section">
     <!-- FULL VURDERING/LC -->
     @if (@Model.RedlistAssessmentClassification == "sikkerBestandLC")
@@ -119,33 +117,32 @@
         <span> @Html.Raw(@ViewBag.glossary["oneliners"]["annetNE"])</span>
         }
     }
-       @*
-            <!-- FREMMEDART -->
-            @if (@assessment.OverordnetKlassifiseringGruppeKode == "fremmedArtNA")
-            {
-                <span>
-                    @Html.Raw(@ViewBag.glossary["oneliners"]["fremmedArtNA"])
-                </span>
-            }
+  
+    <!-- FREMMEDART -->
+    @if (@assessment.RedlistAssessmentClassification == "fremmedArtNA")
+    {
+        <span>
+            @Html.Raw(@ViewBag.glossary["oneliners"]["fremmedArtNA"])
+        </span>
+    }
 
-            @if (!string.IsNullOrEmpty(Model.RodlisteVurdertArt))
-            {
-                @if (assessment.RodlisteVurdertArt == "etablertBestandINorge")
-                {
-                    <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])</span>
-                }
-                else@if (assessment.RodlisteVurdertArt == "ikkeReproduserendeINorge")
-                {
-                    <span>@Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])</span>
-                }
-                else@if (assessment.RodlisteVurdertArt == "etablertFør1800")
-             {
-                <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])</span>
-            }
-            }
-        </p>
+    @if (!string.IsNullOrEmpty(Model.EvaluationJustification))
+    {
+        @if (assessment.EvaluationJustification == "etablertBestandINorge")
+        {
+            <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])</span>
+        }
+        else@if (assessment.EvaluationJustification == "ikkeReproduserendeINorge")
+        {
+            <span>@Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])</span>
+        }
+        else@if (assessment.EvaluationJustification == "etablertFør1800")
+        {
+            <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])</span>
+        }
+    }
+</p>
 
-    </div><!-- End section -->
+</div><!-- End section -->
 
 
-       *@

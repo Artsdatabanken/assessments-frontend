@@ -12,6 +12,8 @@
 
     ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
     ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
+
+
 }
 
 <div class="sidebar_image_info">
@@ -35,18 +37,13 @@
         }
     }
 
-  
-    <!-- TODO FIX TAXON CURRENTLY NOT WORKING-->
-    @*
-
-        @if (@Model.TaxonomicHistory != null)
-        {
-            <p class="taxonomy">
-                @foreach (var taxon in @Model.TaxonomicHistory)
-                {
-                    <span>@taxon element</span>
-                }
-            </p>
-        }
-    *@
+    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+    {
+        <p class="taxonomy">
+            @foreach (var taxon in @Model.VurdertVitenskapeligNavnHierarki.Split("/"))
+            {
+                <span>@taxon > </span>
+            }
+        </p>
+    }   
 </div>

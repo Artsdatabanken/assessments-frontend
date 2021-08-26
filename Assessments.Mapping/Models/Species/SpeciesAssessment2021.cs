@@ -120,7 +120,7 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string GenerationLength { get; set; } // Generasjonslengde
 
-        // TODO public TrackInfo ImportInfo { get; set; } = new(); 
+        public SpeciesAssessment2021TrackInfo ImportInfo { get; set; } = new(); 
         
         /// <summary>
         /// Final category according to IUCN categories and criteria.
@@ -174,7 +174,7 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string PopularName { get; set; }
 
-        // TODO public List<Pavirkningsfaktor> Påvirkningsfaktorer { get; set; } = new();
+        public List<SpeciesAssessment2021ImpactFactor> ImpactFactors { get; set; } = new(); // Påvirkningsfaktorer
 
         public List<SpeciesAssessment2021Reference> References { get; set; } = new(); // Referanser
 
@@ -195,7 +195,7 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string TaxonRank { get; set; }
         
-        // TODO public bool TilførselFraNaboland { get; set; } 
+        public bool TilførselFraNaboland { get; set; } // TODO: oversett og gi nytt navn
 
         /// <summary>
         /// The tag "Possibly Extinct" is used on Critically Endangered CR taxa that assessors suspect to be extinct.
@@ -247,62 +247,4 @@ namespace Assessments.Mapping.Models.Species
 
         public string ÅrsakTilNedgraderingAvKategori { get; set; } // ÅrsakTilNedgraderingAvKategori
     }
-
-    //public class Pavirkningsfaktor
-    //{
-    //    public string Alvorlighetsgrad { get; set; }
-
-    //    public string Beskrivelse { get; set; }
-
-    //    public string Forkortelse { get; set; }
-
-    //    public string Id { get; set; }
-
-    //    public string Omfang { get; set; }
-
-    //    public string OverordnetTittel { get; set; }
-
-    //    public string Tidspunkt { get; set; }
-
-    //    public string Tittel { get; set; }
-
-    //    public string ØversteTittel { get; set; }
-    //}
-
-    //public class TrackInfo
-    //{
-    //    public string Kategori2010 { get; set; }
-
-    //    public string Kategori2015 { get; set; }
-
-    //    public string Kriterier2010 { get; set; }
-
-    //    public string Kriterier2015 { get; set; }
-
-    //    public string MultipleUrl2010 { get; set; }
-
-    //    public string MultipleUrl2015 { get; set; }
-
-    //    public string OrgVitenskapeligNavn { get; set; }
-
-    //    public int OrgVitenskapeligNavnId { get; set; }
-
-    //    public string ScientificName2010 { get; set; }
-
-    //    public string ScientificName2015 { get; set; }
-
-    //    public int ScientificNameId2010 { get; set; }
-
-    //    public int ScientificNameId2015 { get; set; }
-
-    //    public string Url2010 { get; set; }
-
-    //    public string Url2015 { get; set; }
-
-    //    public int VurderingsId2010 { get; set; }
-
-    //    public string VurderingsId2015 { get; set; }
-
-    //    public string VurderingsId2015Databank { get; set; }
-    //}
 }

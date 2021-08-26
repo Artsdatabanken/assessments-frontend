@@ -8,6 +8,12 @@ namespace Assessments.Mapping
     {
         public SpeciesAssessment2021Profile()
         {
+            CreateMap<Rodliste2019.Pavirkningsfaktor, SpeciesAssessment2021ImpactFactor>()
+                .ForMember(dest => dest.Severity, opt => opt.MapFrom(src => src.Alvorlighetsgrad))
+                .ForMember(dest => dest.PopulationScope, opt => opt.MapFrom(src => src.Omfang))
+                .ForMember(dest => dest.TimeScope, opt => opt.MapFrom(src => src.Tidspunkt));
+            
+            CreateMap<Rodliste2019.TrackInfo, SpeciesAssessment2021TrackInfo>();
             CreateMap<Rodliste2019.MinMaxProbable, SpeciesAssessment2021MinMaxProbable>();
             CreateMap<Rodliste2019.MinMaxProbableIntervall, SpeciesAssessment2021MinMaxProbableIntervall>();
             CreateMap<Rodliste2019.Reference, SpeciesAssessment2021Reference>();
@@ -107,6 +113,8 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.AssessmentInitialClassification, opt => opt.MapFrom(src => src.OverordnetKlassifiseringGruppeKode))
                 .ForMember(dest => dest.PopularName, opt => opt.MapFrom(src => src.PopularName))
+                
+                .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => src.Påvirkningsfaktorer))
 
                 .ForMember(dest => dest.References, opt => opt.MapFrom(src => src.Referanser))
 
@@ -117,7 +125,7 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.TaxonRank, opt => opt.MapFrom(src => src.TaxonRank))
 
-                // TODO .ForMember(dest => dest.TilførselFraNaboland, opt => opt.MapFrom(src => src.TilførselFraNaboland))
+                .ForMember(dest => dest.TilførselFraNaboland, opt => opt.MapFrom(src => src.TilførselFraNaboland))
 
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.TroligUtdodd))
                 .ForMember(dest => dest.RationaleRegionallyExtinct, opt => opt.MapFrom(src => src.UtdoddINorgeRE))
@@ -130,7 +138,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavn))
                 .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnAutor))
 
-                // TODO .ForMember(dest => dest.VurdertVitenskapeligNavnHierarki, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnHierarki))
+                .ForMember(dest => dest.VurdertVitenskapeligNavnHierarki, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnHierarki))
 
                 .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnId))
 

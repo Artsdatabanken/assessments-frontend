@@ -559,20 +559,25 @@
     padding-left: 36px;
 }
 
-
-
-@media only screen and (min-width: 550px) {
-    .regionlist {
-        width: 200px;
-    }
-
-    .map {
-        display: inline-block;
-        font-size: 12pt;
-        width: 300px;
-        float: right;
-    }
+.region_distributions {
+    width: 100%;
+    display: block;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    align-items: center;
+    
 }
+
+.regionlist {
+    width: 300px;
+    display:inline-block;
+    padding:5px;
+}
+
+.map {
+    max-width: 400px;
+}
+
 
 @media only screen and (max-width: 550px) {
     .fullscreenversion {
@@ -624,10 +629,14 @@
     fill: #edf176;
 }
 
-.current:hover{
-    stroke-width:1;
-    fill:green;
-    cursor:pointer;
+.extinct:hover,
+.known:hover,
+.presumed_extinct:hover,
+.presumed:hover,
+.current:hover {
+    stroke-width: 1;
+    filter:brightness(70%);
+    cursor: pointer;
 }
 
 .indicator {

@@ -1,4 +1,5 @@
-﻿using Assessments.Mapping.Models.Source.Species;
+﻿using System;
+using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
 using AutoMapper;
 
@@ -179,7 +180,8 @@ namespace Assessments.Mapping
 
         private static string ResolveExpertCommitteeName(Rodliste2019 rl2021)
         {
-            // https://github.com/Artsdatabanken/Rodliste2019/blob/4918668043d7d5b2e5978e29e5028bc68fd1a643/Prod.LoadingCSharp/TransformRodliste2019toDatabankRL2021.cs#L510
+            // basert på https://github.com/Artsdatabanken/Rodliste2019/blob/4918668043d7d5b2e5978e29e5028bc68fd1a643/Prod.LoadingCSharp/TransformRodliste2019toDatabankRL2021.cs#L510
+            
             if (rl2021.Ekspertgruppe == "Nebbfluer, kamelhalsfluer, mudderfluer, nettvinger")
             {
                 if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Mecoptera"))
@@ -214,7 +216,11 @@ namespace Assessments.Mapping
                     rl2021.Ekspertgruppe = "Saksedyr";
             }
 
-            return rl2021.Ekspertgruppe;
+            return rl2021.Ekspertgruppe
+
+                // ta bort vurderingsområde fra navn
+                .Replace("(Svalbard)", string.Empty, StringComparison.InvariantCultureIgnoreCase)
+                .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
         }
     }
 }

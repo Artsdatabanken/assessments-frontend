@@ -128,9 +128,9 @@ td {
     flex: none;
 }
 
-.element_icon img {
+.element_icon svg {
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 .grid .element_icon {
     width: 100%;

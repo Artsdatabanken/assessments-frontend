@@ -14,12 +14,24 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// Population reduction in the past 10 years or 3 generations (whichever is longer), where the causes of the reduction are clearly reversible and understood and have ceased.
+        /// </summary>
         public SpeciesAssessment2021A1 A1 { get; set; } = new();
 
+        /// <summary>
+        /// Population reduction in the past 10 years or 3 generations (whichever is longer), where the causes of reduction may not have ceased or may not be understood or may not be reversible.
+        /// </summary>
         public SpeciesAssessment2021A2 A2 { get; set; } = new();
 
+        /// <summary>
+        /// Population reduction over 10 years or 3 generations (whichever is longer) into the future.
+        /// </summary>
         public SpeciesAssessment2021A3 A3 { get; set; } = new();
 
+        /// <summary>
+        /// Population reduction over a period of 10 years or 3 generations (whichever is longer) that includes both the past and the future.
+        /// </summary>
         public SpeciesAssessment2021A4 A4 { get; set; } = new();
 
         /// <summary>
@@ -32,31 +44,43 @@ namespace Assessments.Mapping.Models.Species
         public SpeciesAssessment2021B2 B2 { get; set; } = new();
 
         /// <summary>
-        /// Whether or not the taxon is severely fragmented, and if "yes" to what degree of certainty - Ba(i) or Ba(ii).
+        /// Whether or not the taxon is severely fragmented, and to what degree of certainty: "ja"= yes, "jaTrolig" = uncertain if severe fragmentation, "nei" = no.
         /// </summary>
         public string BaiSevereFragmentation { get; set; } // BA1KraftigFragmenteringKode
 
+        /// <summary>
+        /// Number of locations (defined by a threat)
+        /// </summary>
         public SpeciesAssessment2021BAii BAii { get; set; } = new();
 
         /// <summary>
         /// Continuing decline observed, estimated, inferred or projected in any of: (i) extent of occurence; (ii) area of occupancy; (iii) area, extent and/or quality of habitat; (iv) number of locations or subpopulations; (v) number of mature individuals
         /// </summary>
-        public List<string> BbContinuingDecline { get; set; } = new(); // BBPågåendeArealreduksjonKode
+        public List<string> BBOptions { get; set; } = new(); // BBPågåendeArealreduksjonKode
 
         /// <summary>
         /// Extreme fluctuations in any of: (i) extent of occurence; (ii) area of occupancy; (iii) number of locations or subpopulations; (iv) number of mature individuals
         /// </summary>
-        public List<string> ExtremeFluctuations { get; set; } = new(); // BCEksterneFluktuasjonerKode
+        public List<string> BCOptions { get; set; } = new(); // BCEksterneFluktuasjonerKode
 
         /// <summary>
         /// For reasons specified herein, the taxon is Not Applicable (NA) for Red list evaluation in the AssessmentArea.
         /// </summary>
         public string RationaleNotApplicable { get; set; } // BegrensetForekomstNA
 
+        /// <summary>
+        /// A quantified continuing decline
+        /// </summary>
         public SpeciesAssessment2021C1 C1 { get; set; } = new();
 
+        /// <summary>
+        /// A continuing decline and few mature individuals in each subpopulation
+        /// </summary>
         public SpeciesAssessment2021C2Ai C2Ai { get; set; } = new();
 
+        /// <summary>
+        /// A continuing decline and a high proportion of all mature individuals in one subpopulations
+        /// </summary>
         public SpeciesAssessment2021C2Aii C2Aii { get; set; } = new();
 
         /// <summary>
@@ -64,6 +88,9 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string C2bExtremeFluctuations { get; set; } // C2BPågåendePopulasjonsreduksjonKode
 
+        /// <summary>
+        /// Number of mature individuals
+        /// </summary>
         public SpeciesAssessment2021C C { get; set; } = new();
 
         /// <summary>
@@ -93,13 +120,22 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string GenerationLength { get; set; } // Generasjonslengde
 
-        // TODO public TrackInfo ImportInfo { get; set; } = new(); 
+        public SpeciesAssessment2021TrackInfo ImportInfo { get; set; } = new(); 
+        
+        /// <summary>
+        /// Final category according to IUCN categories and criteria.
+        /// </summary>
+        public string Category { get; set; } // Kategori
 
-        // TODO public string Kategori { get; set; } 
+        /// <summary>
+        /// Preliminary category based on evaluation against the IUCN criteria for the regional population in the specified AssessmentArea. If populations outside the region does not significantly affect the extinction risk within the region (i.e., adjustment of category is not warranted), this becomes the final category.
+        /// </summary>
+        public string CategoryAdjustedFrom { get; set; } // KategoriEndretFra
 
-        // TODO public string KategoriEndretFra { get; set; } 
-
-        // TODO public string KategoriEndretTil { get; set; } 
+        /// <summary>
+        /// Final category after adjustment of category due to populations outside the region.
+        /// </summary>
+        public string CategoryAdjustedTo { get; set; } // KategoriEndretTil
 
         public string ExpertStatement { get; set; } // Kriteriedokumentasjon
 
@@ -127,28 +163,18 @@ namespace Assessments.Mapping.Models.Species
         /// The habitat type(s) of importance for the taxon. A MainHabitat type corresponds to one or several EcoSyst (Natur i Norge version 2.0) codes.
         /// </summary>
         public List<string> MainHabitat { get; set; } = new(); // NaturtypeHovedenhet
-
-        // TODO public string OppsummeringAKriterier { get; set; } 
-
-        // TODO public string OppsummeringBKriterier { get; set; } 
-
-        // TODO public string OppsummeringCKriterier { get; set; } 
-
-        // TODO public string OppsummeringDKriterier { get; set; } 
-
-        // TODO public string OppsummeringEKriterier { get; set; } 
-
+        
         /// <summary>
         /// Initial assessment of the taxon, either (in)directly to a category or to be thoroughly evaluated against Red List criteria.
         /// </summary>
-        public string RedlistAssessmentClassification { get; set; } // OverordnetKlassifiseringGruppeKode
+        public string AssessmentInitialClassification { get; set; } // OverordnetKlassifiseringGruppeKode
 
         /// <summary>
         /// Norwegian common names
         /// </summary>
         public string PopularName { get; set; }
 
-        // TODO public List<Pavirkningsfaktor> Påvirkningsfaktorer { get; set; } = new();
+        public List<SpeciesAssessment2021ImpactFactor> ImpactFactors { get; set; } = new(); // Påvirkningsfaktorer
 
         public List<SpeciesAssessment2021Reference> References { get; set; } = new(); // Referanser
 
@@ -168,9 +194,7 @@ namespace Assessments.Mapping.Models.Species
         /// Taxonomic level of the assessed taxon, either "Species" or "SubSpecies". Note that "SubSpecies" encompasses different forms of within-species taxonomic levels (e.g., subspecies and varieties).
         /// </summary>
         public string TaxonRank { get; set; }
-
-        // TODO public bool TilførselFraNaboland { get; set; }
-
+        
         /// <summary>
         /// The tag "Possibly Extinct" is used on Critically Endangered CR taxa that assessors suspect to be extinct.
         /// </summary>
@@ -179,9 +203,12 @@ namespace Assessments.Mapping.Models.Species
         /// <summary>
         /// Justification for why the taxon is evaluated, i.e., which one of the three Norwegian inclusion criteria that was met before the taxon became regionally extinct.
         /// </summary>
-        public string RationaleRE { get; set; } // UtdoddINorgeRE
+        public string RationaleRegionallyExtinct { get; set; } // UtdoddINorgeRE
 
-        // TODO public string UtdøingSterktPåvirket { get; set; } 
+        /// <summary>
+        /// Whether or not the taxon's extinction risk of within the region is significantly affected by the taxon's populations outside of the region. If "yes", adjustment of category is warranted. 
+        /// </summary>
+        public string ExtinctionRiskAffected { get; set; } // UtdøingSterktPåvirket
 
         /// <summary>
         /// Geographic area assessed
@@ -203,76 +230,22 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string ScientificNameAuthor { get; set; } // VurdertVitenskapeligNavnAutor
 
-        // TODO public string VurdertVitenskapeligNavnHierarki { get; set; } // Må ha nytt navn
-        public string VurdertVitenskapeligNavnHierarki { get; set; } // VurdertVitenskapeligNavnAutor
+        // TODO Må ha nytt navn
+        public string VurdertVitenskapeligNavnHierarki { get; set; }
 
         /// <summary>
         /// An identifier for the nomenclatural (not taxonomic) details of a scientific name
         /// </summary>
         public int ScientificNameId { get; set; } // VurdertVitenskapeligNavnId
+        
+        /// <summary>
+        /// Reason for category transfer compared to previous lists, provided when a taxon has a different category on the current Red List than on its preceding Red List assessment.
+        /// </summary>
+        public string ReasonCategoryChange { get; set; } // ÅrsakTilEndringAvKategori
 
-        public string Category { get; set; } // TODO: rename?
-
-        // TODO public string ÅrsakTilEndringAvKategori { get; set; } // ÅrsakTilEndringAvKategori
-
-        // TODO public string ÅrsakTilNedgraderingAvKategori { get; set; } // ÅrsakTilNedgraderingAvKategori
+        /// <summary>
+        /// Rationale for adjusting the category based on significant effect from populations outside the region.
+        /// </summary>
+        public string ÅrsakTilNedgraderingAvKategori { get; set; } // ÅrsakTilNedgraderingAvKategori
     }
-
-    //public class Pavirkningsfaktor
-    //{
-    //    public string Alvorlighetsgrad { get; set; }
-
-    //    public string Beskrivelse { get; set; }
-
-    //    public string Forkortelse { get; set; }
-
-    //    public string Id { get; set; }
-
-    //    public string Omfang { get; set; }
-
-    //    public string OverordnetTittel { get; set; }
-
-    //    public string Tidspunkt { get; set; }
-
-    //    public string Tittel { get; set; }
-
-    //    public string ØversteTittel { get; set; }
-    //}
-
-    //public class TrackInfo
-    //{
-    //    public string Kategori2010 { get; set; }
-
-    //    public string Kategori2015 { get; set; }
-
-    //    public string Kriterier2010 { get; set; }
-
-    //    public string Kriterier2015 { get; set; }
-
-    //    public string MultipleUrl2010 { get; set; }
-
-    //    public string MultipleUrl2015 { get; set; }
-
-    //    public string OrgVitenskapeligNavn { get; set; }
-
-    //    public int OrgVitenskapeligNavnId { get; set; }
-
-    //    public string ScientificName2010 { get; set; }
-
-    //    public string ScientificName2015 { get; set; }
-
-    //    public int ScientificNameId2010 { get; set; }
-
-    //    public int ScientificNameId2015 { get; set; }
-
-    //    public string Url2010 { get; set; }
-
-    //    public string Url2015 { get; set; }
-
-    //    public int VurderingsId2010 { get; set; }
-
-    //    public string VurderingsId2015 { get; set; }
-
-    //    public string VurderingsId2015Databank { get; set; }
-    //}
 }

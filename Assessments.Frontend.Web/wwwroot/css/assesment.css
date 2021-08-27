@@ -72,21 +72,25 @@
     font-weight: bold;
 }
 
+.sidebar_image_info svg {
+    width: 150px;
+    height: 150px;
+    padding: 5px;
+    border-radius: 50%;
+    background: #e7e7e7;
+    margin: 10px;
+    margin-bottom:20px;
+    display: block;
+}
+
 @media only screen and (max-width: 550px) {
     .sidebar_image_info h2 {
        display:inline-block;
     }
 }
 
-
-@media only screen and (min-width: 550px) {
-    .sidebar_image_info .habitat_icon {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-}
 @media only screen and (max-width: 550px) {
-    .sidebar_image_info .habitat_icon {
+    .sidebar_image_info svg {
         height:100px;
         width:100px;
         float:left;

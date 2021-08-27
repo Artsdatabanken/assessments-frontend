@@ -20,7 +20,8 @@
     <h2>@ekspertgruppe</h2>
     @foreach (var key in speciesgroup.Keys)
     {
-        @if (key != null && key == @ekspertgruppe)
+       
+        @if (key != null && (@ekspertgruppe == key || @ekspertgruppe.Contains(key)))
         {
             @if (speciesgroup[key]["tagline"] != null)
             {
@@ -28,10 +29,11 @@
                     @speciesgroup[key]["tagline"]
                 </span>
             }
-            <span class="habitat_icon">
+            <span>
+
                 @if (speciesgroup[key]["image"] != null)
                 {
-                    <img src=@speciesgroup[key]["image"] />
+                    @Html.Partial(@speciesgroup[key]["image"])
                 }
             </span>
         }
@@ -45,5 +47,5 @@
                 <span>@taxon > </span>
             }
         </p>
-    }   
+    }
 </div>

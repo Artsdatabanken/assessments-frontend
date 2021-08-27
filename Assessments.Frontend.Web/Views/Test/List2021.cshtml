@@ -122,29 +122,21 @@
 
 
                     </span>
-                    <span class="element_icon">
-                        <div>
-
-                            @foreach (var key in speciesgroup.Keys)
+                    <div class="element_icon">
+                        @foreach (var key in speciesgroup.Keys)
+                        {
+                            @if (key != null && (@ekspertgruppe == key || @ekspertgruppe.Contains(key)))
                             {
                                 @if (key != null && key == @ekspertgruppe)
                                 {
-
-                                    @if (speciesgroup[key]["image"] != null)
-                                    {
-                                        <img src=@speciesgroup[key]["image"] alt="Bilde av @key" />
-                                    }
-
+                                    @Html.Partial(@speciesgroup[key]["image"])
                                 }
-
                             }
                         </div>
                     </span>
                 </a>
             </li>
                 }
-
-
             </ul>
         </div>
 

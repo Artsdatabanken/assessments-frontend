@@ -93,7 +93,9 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.D1PreliminaryCategory, opt => opt.MapFrom(src => src.D1FåReproduserendeIndividKode))
                 .ForMember(dest => dest.D2PreliminaryCategory, opt => opt.MapFrom(src => src.D2MegetBegrensetForekomstarealKode))
-                .ForMember(dest => dest.ExpertCommittee, opt => opt.MapFrom(src => src.Ekspertgruppe))
+                
+                .ForMember(dest => dest.ExpertCommittee, opt => opt.MapFrom(src => ResolveExpertCommitteeName(src)))
+                
                 .ForMember(dest => dest.EPreliminaryCategory, opt => opt.MapFrom(src => src.EKvantitativUtryddingsmodellKode))
                 
                 .ForMember(dest => dest.GenerationLength, opt => opt.MapFrom(src => src.Generasjonslengde))
@@ -173,6 +175,46 @@ namespace Assessments.Mapping
                 "øs" => "Østfold",
                 _ => string.Empty
             };
+        }
+
+        private static string ResolveExpertCommitteeName(Rodliste2019 rl2021)
+        {
+            // https://github.com/Artsdatabanken/Rodliste2019/blob/4918668043d7d5b2e5978e29e5028bc68fd1a643/Prod.LoadingCSharp/TransformRodliste2019toDatabankRL2021.cs#L510
+            if (rl2021.Ekspertgruppe == "Nebbfluer, kamelhalsfluer, mudderfluer, nettvinger")
+            {
+                if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Mecoptera"))
+                    rl2021.Ekspertgruppe = "Nebbfluer";
+                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Raphidioptera"))
+                    rl2021.Ekspertgruppe = "Kamelhalsfluer";
+                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Megaloptera"))
+                    rl2021.Ekspertgruppe = "Mudderfluer";
+                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Neuroptera"))
+                    rl2021.Ekspertgruppe = "Nettvinger";
+            }
+
+            if (rl2021.Ekspertgruppe == "Døgnfluer, øyenstikkere, steinfluer, vårfluer")
+            {
+                if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Ephemeroptera"))
+                    rl2021.Ekspertgruppe = "Døgnfluer";
+                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Odonata"))
+                    rl2021.Ekspertgruppe = "Øyenstikkere";
+                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Plecoptera"))
+                    rl2021.Ekspertgruppe = "Steinfluer";
+                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Trichoptera"))
+                    rl2021.Ekspertgruppe = "Vårfluer";
+            }
+
+            if (rl2021.Ekspertgruppe == "Rettvinger, kakerlakker, saksedyr")
+            {
+                if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Orthoptera"))
+                    rl2021.Ekspertgruppe = "Rettvinger";
+                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Blattodea"))
+                    rl2021.Ekspertgruppe = "Kakerlakker";
+                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Dermaptera"))
+                    rl2021.Ekspertgruppe = "Saksedyr";
+            }
+
+            return rl2021.Ekspertgruppe;
         }
     }
 }

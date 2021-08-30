@@ -12,5 +12,8 @@ namespace Assessments.Frontend.Web.Models
         // Filter
         [Display(Name = "Navn"), FromQuery]
         public string Name { get; set; }
+        public string[] Categories { get; set; }
+        public string CriteriaSummarized { get; set; }
+        public string Area { get; set; }
     }
 }

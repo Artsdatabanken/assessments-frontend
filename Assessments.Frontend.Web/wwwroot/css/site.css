@@ -23,9 +23,119 @@
 }
 
 /* OVERRIDE STYLES */
+
+.breadcrumbs{
+    max-width:100%;
+}
+
+.title_header {
+    width: 100%;
+    background: darkred;
+    margin: 0;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    font-size: 20pt;
+}
+
 .bigmid .mid {
     width: 100%;
 }
+
+.side{
+    background:lightblue;
+}
+
+
+/* FULLSCREEN above 940px*/
+@media only screen and (min-width: 940px) {
+    .mid-content {
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 75%!important;
+    }
+
+    /* Page setup */
+    .side {
+        float: right;
+        width: 200px;
+        display: inline-block;
+        height: 100%;
+        border-left: 1px solid lightgrey;
+        padding: 10px;
+        padding-top: 0;
+        margin-left: 10px;
+        height:100%;
+        width:25%;
+    }
+
+    .content-placer {
+        width: 85%;
+    }
+
+}
+/* PAD-SIZE 940px */
+@media only screen and (max-width: 940px) {
+
+    .mid-content {
+        width: 100%;
+        background: #f4f1f1;
+    }
+
+    .side {
+        width:100%;
+    }
+}
+
+/* BIG MOBILE SIZE: 766px  */
+@media only screen and (max-width: 766px) {
+    .mid-content {
+    }
+
+    .side {
+        background: red
+    }
+
+    .taxonomy {
+        font-size: 10pt;
+    }
+
+    .history {
+        display: none;
+    }
+}
+
+
+/* MOBILE SIZE: 650px  */
+@media only screen and (max-width: 650px) {
+    .side {
+        background: lightpink;
+    }  
+}
+
+
+/* Tiny mobile : 550px */
+@media only screen and (max-width: 550px) {
+    .side {
+        background: lightyellow;
+    }  
+
+}
+
+
+/* SUPER-tiny: 300px*/
+@media only screen and (max-width: 300px) {
+
+    .side {
+        background: lightgreen
+    }
+
+}
+
+
+/* other stuff*/
+
+
 
 .species_main_colour {
     fill: #4c4a48 !important;

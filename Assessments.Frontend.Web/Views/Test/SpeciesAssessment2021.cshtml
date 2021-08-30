@@ -2,7 +2,27 @@
 @{
     ViewBag.Title = Model.ScientificName;
     var naturtypehovedenhet = Model.MainHabitat;
+    
+
+        string geografi = Model.AssessmentArea;
+
+        if (geografi == "N")
+        {
+            geografi = "Norge";
+        }
+        else if (geografi == "S")
+        {
+            geografi = "Svalbard";
+            if (@Model.ExpertCommittee == "Pattedyr (Svalbard)")
+            {
+                geografi = "Svalbard med kyst";
+            }
+        }
+
+    
 }
+
+
 
 <partial name="/Views/Test/partials_2021/_Breadcrumb.cshtml" />
 
@@ -34,14 +54,14 @@
         <partial name="/Views/Test/partials_2021/_Habitat.cshtml" />
 
         @*
-        @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
-        {
-            @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
-        }
+            @if (Model.Påvirkningsfaktorer != null && Model.Påvirkningsfaktorer.Count > 0)
+            {
+                @Html.Partial("/Views/Test/partials_2021/_Pavirkningsfaktorer.cshtml", Model.Påvirkningsfaktorer)
+            }
 
         *@
         <partial name="/Views/Test/partials_2021/_Reference.cshtml" />
     </div>
 
 
-    </div>
+</div>

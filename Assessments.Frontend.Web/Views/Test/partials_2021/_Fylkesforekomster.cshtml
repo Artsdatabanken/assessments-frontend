@@ -30,8 +30,10 @@
         @distribution
     </p>
 
-
-     <partial name="/Views/Test/partials_2021/_Fylkesforekomster_visning.cshtml" />
+    @if (Model.Category != "LC")
+    {
+        <partial name="/Views/Test/partials_2021/_Fylkesforekomster_visning.cshtml" />
+    }
 
 
 

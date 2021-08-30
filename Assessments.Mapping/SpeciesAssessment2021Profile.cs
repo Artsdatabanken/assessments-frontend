@@ -223,4 +223,12 @@ namespace Assessments.Mapping
                 .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
         }
     }
+
+    public class SpeciesAssessment2021ExportProfile : Profile
+    {
+        public SpeciesAssessment2021ExportProfile()
+        {
+            CreateMap<SpeciesAssessment2021, SpeciesAssessment2021Export>();
+        }
+    }
 }

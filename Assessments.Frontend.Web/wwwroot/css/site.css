@@ -24,8 +24,12 @@
 
 /* OVERRIDE STYLES */
 
-.breadcrumbs{
-    max-width:100%;
+.page_section h2{
+    margin-top:40px;
+}
+
+.breadcrumbs {
+    max-width: 100%;
 }
 
 .title_header {
@@ -41,11 +45,6 @@
 .bigmid .mid {
     width: 100%;
 }
-
-.side{
-    background:lightblue;
-}
-
 
 /* FULLSCREEN above 940px*/
 @media only screen and (min-width: 940px) {
@@ -79,21 +78,26 @@
 
     .mid-content {
         width: 100%;
-        background: #f4f1f1;
     }
 
     .side {
-        width:100%;
+        padding: 30px;
+        margin-top:50px;
+        background: #f2f1f1;
+        width: 100vw;
+        margin-bottom: -14px;
+        margin-left: -30px;
+    }
+
+    .content-placer {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 
 /* BIG MOBILE SIZE: 766px  */
 @media only screen and (max-width: 766px) {
     .mid-content {
-    }
-
-    .side {
-        background: red
     }
 
     .taxonomy {
@@ -108,27 +112,14 @@
 
 /* MOBILE SIZE: 650px  */
 @media only screen and (max-width: 650px) {
-    .side {
-        background: lightpink;
-    }  
 }
-
 
 /* Tiny mobile : 550px */
 @media only screen and (max-width: 550px) {
-    .side {
-        background: lightyellow;
-    }  
-
 }
-
 
 /* SUPER-tiny: 300px*/
 @media only screen and (max-width: 300px) {
-
-    .side {
-        background: lightgreen
-    }
 
 }
 

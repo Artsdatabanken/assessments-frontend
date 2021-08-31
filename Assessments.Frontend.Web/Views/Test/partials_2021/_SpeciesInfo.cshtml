@@ -30,11 +30,7 @@
                 </span>
             }
             <span>
-
-                @if (speciesgroup[key]["image"] != null)
-                {
-                    @Html.Partial(@speciesgroup[key]["image"])
-                }
+                <img species-group-name="@Model.ExpertCommittee" alt="@Model.ExpertCommittee" />
             </span>
         }
     }

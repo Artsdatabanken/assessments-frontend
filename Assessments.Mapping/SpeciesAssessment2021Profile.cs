@@ -102,6 +102,8 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.GenerationLength, opt => opt.MapFrom(src => src.Generasjonslengde))
                 
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Kategori))
+                .ForMember(destination => destination.Category, opt => opt.NullSubstitute(string.Empty))
+
                 .ForMember(dest => dest.CategoryAdjustedFrom, opt => opt.MapFrom(src => src.KategoriEndretFra))
                 .ForMember(dest => dest.CategoryAdjustedTo, opt => opt.MapFrom(src => src.KategoriEndretTil))
 
@@ -115,7 +117,9 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => src.NaturtypeHovedenhet))
 
                 .ForMember(dest => dest.AssessmentInitialClassification, opt => opt.MapFrom(src => src.OverordnetKlassifiseringGruppeKode))
+                
                 .ForMember(dest => dest.PopularName, opt => opt.MapFrom(src => src.PopularName))
+                .ForMember(destination => destination.PopularName, opt => opt.NullSubstitute(string.Empty))
                 
                 .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => src.Påvirkningsfaktorer))
 

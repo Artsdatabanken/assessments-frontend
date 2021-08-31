@@ -294,12 +294,22 @@
     padding-top: 2px;
     width: 100%;
     max-width: 350px;
-    display: inline-block;
+    display: flex;
 }
 
 .region b{
     width:120px;    
     display:inline-block;
+}
+
+.region .area{
+    display:flex;
+    max-width: calc(100% - 125px);
+}
+
+.region .area i{
+    padding-left:5px;
+    display: inline-block;
 }
 
 
@@ -536,6 +546,8 @@
 }
 
 
+
+
 /* MOBILE SIZE: 550px til 650px  */
 @media only screen and (max-width: 650px) {
     .regionlist,
@@ -556,13 +568,9 @@
     }
 }
 
-
-@media only screen and (max-width: 550px) {
-    .fullscreenversion {
-        display: none;
-    }
-
-
+.regionlist.region_borders .area,
+.geographic_facts.region_borders {
+    display: none;
 }
 
 
@@ -634,3 +642,4 @@
     width: 50%;
     height: 100%;
 }
+

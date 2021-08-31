@@ -2,7 +2,7 @@
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
-    [HtmlTargetElement("img", Attributes = "speciesgroup")]
+    [HtmlTargetElement("img", Attributes = "species-group-name")]
     public class SpeciesGroupImageSrcTagHelper : TagHelper
     {
         public string SpeciesGroupName { get; set; }

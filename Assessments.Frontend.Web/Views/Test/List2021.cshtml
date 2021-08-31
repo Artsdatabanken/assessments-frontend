@@ -50,7 +50,7 @@
 
         <!-- FILTER FORM -->
         <form class="list-search" asp-action="Index2021" method="get">
-            <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
+            <input asp-for="Name" placeholder="Søk i vitenskapelig navn" />
             <button class="btn" type="submit">
                 <span class="material-icons">
                     search
@@ -58,6 +58,7 @@
 
                 Søk
             </button>
+            <button class="btn" type="submit" name="Export" value="true">Eksport</button>
         </form>
 
         <!-- List controls -->

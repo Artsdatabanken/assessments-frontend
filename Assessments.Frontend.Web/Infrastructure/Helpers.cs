@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Assessments.Mapping;
+using Assessments.Mapping.Models.Species;
 using Microsoft.AspNetCore.Http;
 
 namespace Assessments.Frontend.Web.Infrastructure
@@ -32,6 +35,24 @@ namespace Assessments.Frontend.Web.Infrastructure
                 return this;
             }
         }
+
+        public static MemoryStream GenerateExcel(IEnumerable<SpeciesAssessment2021Export> assessments)
+        {
+            MemoryStream memoryStream;
+            using (var workbook = new ClosedXML.Excel.XLWorkbook())
+            {
+                var worksheet = workbook.AddWorksheet();
+                
+                worksheet.Cell(1, 1).InsertTable(assessments);
+
+                memoryStream = new MemoryStream();
+                workbook.SaveAs(memoryStream);
+            }
+
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            return memoryStream;
+        }
     }
 
     public static class Constants
@@ -51,5 +72,6 @@ namespace Assessments.Frontend.Web.Infrastructure
                                             
             public const string Species2006 = "species-2006.json";
         }
+
     }
 }

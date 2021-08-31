@@ -86,22 +86,10 @@
                     
                     
             <li class="list">
-                <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
+                <a asp-action="Detail" asp-route-id="@item.Id">
                     @{
                         // TODO: The number of fields contained in the box does not add up. Fix.
                         // Makes it very strange and overflowy in grid view.
-
-
-
-                        // Expert committee field should always be present.
-                        // By the time we arrive here, the actual committe name has been split into correct species group,
-                        // and is thus now species group and not actually committtee group.
-                        string ekspertgruppe = item.ExpertCommittee;
-
-                        // As long as expert committees contain area, it needs to be stripped away to use the field.
-
-                        ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
-                        ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
                     }
                     <span class="element_id">
 
@@ -112,7 +100,7 @@
                     <span class="element_category">
                          <span class="@item.Category">@item.Category</span>
                     </span>
-                    <span class="element_group">@ekspertgruppe</span>
+                    <span class="element_group">@item.ExpertCommittee</span>
                     <span class="element_area">
                         @item.AssessmentArea
                         @if (@item.AssessmentArea == "N")
@@ -127,20 +115,12 @@
 
                     </span>
                     <div class="element_icon">
-
                         @foreach (var key in speciesgroup.Keys)
                         {
-                            @if (key != null && (@ekspertgruppe == key || @ekspertgruppe.Contains(key)))
+                            if (key != null && (item.ExpertCommittee == key || item.ExpertCommittee.Contains(key)) && speciesgroup[key]["image"] != null)
                             {
-
-                                @if (speciesgroup[key]["image"] != null)
-                                {
-                                    @Html.Partial(@speciesgroup[key]["image"])
-
-                                }
-
+                                @await Html.PartialAsync(speciesgroup[key]["image"])
                             }
-
                         }
                     </div>
                 </a>

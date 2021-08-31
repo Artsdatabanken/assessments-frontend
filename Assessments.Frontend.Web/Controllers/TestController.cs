@@ -44,13 +44,10 @@ namespace Assessments.Frontend.Web.Controllers
             var viewModel = new RL2021ViewModel
             {
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
-                Name = name,
+                Name = name
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);
-
-            var json_speciesgroup = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/speciesgroup.json");
-            ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
 
             return View("List2021", viewModel);
         }

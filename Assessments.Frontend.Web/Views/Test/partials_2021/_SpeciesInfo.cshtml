@@ -6,22 +6,15 @@
     // Expert committee field should always be present.
     // By the time we arrive here, the actual committe name has been split into correct species group,
     // and is thus now species group and not actually committtee group.
-    string ekspertgruppe = @Model.ExpertCommittee;
-
-    // As long as expert committees contain area, it needs to be stripped away to use the field.
-
-    ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
-    ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
-
-
+    string ekspertgruppe = Model.ExpertCommittee;
 }
 
 <div class="sidebar_image_info">
     <h2>@ekspertgruppe</h2>
     @foreach (var key in speciesgroup.Keys)
     {
-       
-        @if (key != null && (@ekspertgruppe == key || @ekspertgruppe.Contains(key)))
+
+        @if (key != null && (ekspertgruppe == key || ekspertgruppe.Contains(key)))
         {
             @if (speciesgroup[key]["tagline"] != null)
             {
@@ -30,15 +23,15 @@
                 </span>
             }
             <span>
-                <img species-group-name="@Model.ExpertCommittee" alt="@Model.ExpertCommittee" />
+                <img species-group-name="@ekspertgruppe" alt="@ekspertgruppe" />
             </span>
         }
     }
 
-    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+    @if (Model.VurdertVitenskapeligNavnHierarki != null)
     {
         <p class="taxonomy">
-            @foreach (var taxon in @Model.VurdertVitenskapeligNavnHierarki.Split("/"))
+            @foreach (var taxon in Model.VurdertVitenskapeligNavnHierarki.Split("/"))
             {
                 <span>@taxon > </span>
             }

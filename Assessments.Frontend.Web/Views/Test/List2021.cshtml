@@ -2,13 +2,11 @@
 
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
-@using Assessments.Frontend.Web.Infrastructure
 
 @{
     ViewBag.Title = "2021";
-    Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
-
 }
+
 <div class="breadcrumbs">
     <ul>
         <li class="lead in-breadcrumb">
@@ -25,7 +23,7 @@
 
 <div class="sidebarmenu"></div>
 
-<div class="content-placer bigmid">
+<div class="bigmid">
     <div class="page-header">
         <h1>
             Norsk Rødliste for arter 2021
@@ -36,7 +34,7 @@
         </span>
     </div>
 
-    <div class="mid">
+    <div>
         <div class="ingress">
             <p>
                 Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge.
@@ -45,20 +43,8 @@
         </div>
 
         <h3>
-            @Model.Redlist2021Results.Count redlist 2021 items
+            @Model.Redlist2021ResultsCount
         </h3>
-
-        <!-- FILTER FORM -->
-        <form class="list-search" asp-action="Index2021" method="get">
-            <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
-            <button class="btn" type="submit">
-                <span class="material-icons">
-                    search
-                </span>
-
-                Søk
-            </button>
-        </form>
 
         <!-- List controls -->
         <div class="controls">
@@ -70,97 +56,74 @@
 
 
         <div class="listwrapper">
+            <!-- FILTER FORM -->
+            <div class="search-and-filter">
+                <form class="list-search" asp-action="Index2021" method="get">
+                    <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
+                    <button class="btn" type="submit">
+                        <span class="material-icons">
+                            search
+                        </span>
+                        Søk
+                    </button>
+                    <button class="btn" type="submit" name="Export" value="true">Eksport</button>
+                </form>
+                <partial name="/Views/Test/partials_2021/_Filters.cshtml" />
+            </div>
             <ul class="redlist" id="redlist">
                 <li class="listheader" id="listheader">
-                    <span>Id</span>
                     <span>Artsnavn</span>
                     <span>Kategori</span>
                     <span>Artsgruppe</span>
+                    <span>Område</span>
                     <span>Ikon</span>
                 </li>
 
-
                 @foreach (var item in Model.Redlist2021Results)
                 {
-                    
-                    
-            <li class="list">
-                <a asp-action="Detail" asp-route-id="@item.Id" asp-route-year="2021">
-                    @{
-                        // TODO: The number of fields contained in the box does not add up. Fix.
-                        // Makes it very strange and overflowy in grid view.
 
-
-
-                        // Expert committee field should always be present.
-                        // By the time we arrive here, the actual committe name has been split into correct species group,
-                        // and is thus now species group and not actually committtee group.
-                        string ekspertgruppe = item.ExpertCommittee;
-
-                        // As long as expert committees contain area, it needs to be stripped away to use the field.
-
-                        ekspertgruppe = ekspertgruppe.Replace(" (Norge)", "");
-                        ekspertgruppe = ekspertgruppe.Replace(" (Svalbard)", "");
-                    }
-                    <span class="element_id">
-
-                        @item.ScientificNameId
-
-                    </span>
-                    <span class="element_name">@item.ScientificName</span>
-                    <span class="element_category">
-                         <span class="@item.Category">@item.Category</span>
-                    </span>
-                    <span class="element_group">@ekspertgruppe</span>
-                    <span class="element_area">
-                        @item.AssessmentArea
-                        @if (@item.AssessmentArea == "N")
-                        {
-                            <img src="~/images/norge.png" />
-                        }
-                        else if (@item.AssessmentArea == "S")
-                        {
-                            <img src="~/images/svalbard.png" />
-                        }
-
-
-                    </span>
-                    <div class="element_icon">
-
-                        @foreach (var key in speciesgroup.Keys)
-                        {
-                            @if (key != null && (@ekspertgruppe == key || @ekspertgruppe.Contains(key)))
-                            {
-                                @*
-                            @if (speciesgroup[key]["image"] != null)
-                            {
-                                 @Html.Partial(@speciesgroup[key]["image"])
-                                 <partial name="/Views/Test/partials_2021/icons/Temp.cshtml" />
-
+                    <li class="list">
+                        <a asp-action="Detail" asp-route-id="@item.Id">
+                            @{
+                                // TODO: The number of fields contained in the box does not add up. Fix.
+                                // Makes it very strange and overflowy in grid view.
                             }
-                                *@
-                            }
+                            <span class="element_name">@item.ScientificName</span>
+                            <span class="element_category">
+                                <span class="@item.Category">@item.Category</span>
+                            </span>
+                            <span class="element_group">@item.ExpertCommittee</span>
+                            <span class="element_area">
+                                @item.AssessmentArea
+                                @if (@item.AssessmentArea == "N")
+                                {
+                                    <img src="~/images/norge.png" alt="Bilde av Norge" />
+                                }
+                                else if (@item.AssessmentArea == "S")
+                                {
+                                    <img src="~/images/svalbard.png" alt="Bilde av Svalbard"/>
+                                }
 
-                        }
-                    </div>
-                </a>
-            </li>
+                            </span>
+                            <span>
+                                <div class="element_icon">
+                                 @*
+                                  @if (speciesgroup[key]["image"] != null)
+                                  {
+                                       @Html.Partial(@speciesgroup[key]["image"])
+                                       <partial name="/Views/Test/partials_2021/icons/Temp.cshtml" />
+
+                                  }
+                                      *@
+                                </div>
+                            </span>
+                        </a>
+                    </li>
                 }
-
-
             </ul>
         </div>
 
-
-
-
-
-
-
-
-
         <!-- Pageinator buttons -->
-
         @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
         {
             PageClasses = new[] { "page-link" },

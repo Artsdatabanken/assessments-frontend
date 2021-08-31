@@ -18,7 +18,7 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult Index() => View();
 
         [Route("2021")]
-        public async Task<IActionResult> Index2021(int? page, string name, bool export)
+        public async Task<IActionResult> Index2021(int? page, string name, bool export, string[] categories, string criteria, string[] assessmentAreas)
         {
             // Pagination
             const int pageSize = 25;
@@ -27,9 +27,19 @@ namespace Assessments.Frontend.Web.Controllers
             // var query = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
             var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
-            // Filter
+            // Søk
             if (!string.IsNullOrEmpty(name))
                 query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
+
+            // Filter
+            if (categories?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && categories.Contains(x.Category));
+
+            if (!string.IsNullOrEmpty(criteria))
+                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.ToLower().Equals(criteria.Trim().ToLower()));
+
+            if (assessmentAreas?.Any() == true)
+                query = query.Where(x => assessmentAreas.Contains(x.AssessmentArea));
 
             if (export)
             {
@@ -44,7 +54,10 @@ namespace Assessments.Frontend.Web.Controllers
             var viewModel = new RL2021ViewModel
             {
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
-                Name = name
+                Name = name,
+                Categories = categories,
+                CriteriaSummarized = criteria,
+                AssessmentAreas = assessmentAreas
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);

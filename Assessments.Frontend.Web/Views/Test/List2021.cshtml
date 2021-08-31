@@ -23,7 +23,7 @@
 
 <div class="sidebarmenu"></div>
 
-<div class="content-placer bigmid">
+<div class="bigmid">
     <div class="page-header">
         <h1>
             Norsk Rødliste for arter 2021
@@ -34,7 +34,7 @@
         </span>
     </div>
 
-    <div class="mid">
+    <div>
         <div class="ingress">
             <p>
                 Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge.
@@ -46,19 +46,6 @@
             @Model.Redlist2021ResultsCount
         </h3>
 
-        <!-- FILTER FORM -->
-        <form class="list-search" asp-action="Index2021" method="get">
-            <input asp-for="Name" placeholder="Søk i vitenskapelig navn" />
-            <button class="btn" type="submit">
-                <span class="material-icons">
-                    search
-                </span>
-
-                Søk
-            </button>
-            <button class="btn" type="submit" name="Export" value="true">Eksport</button>
-        </form>
-
         <!-- List controls -->
         <div class="controls">
             <button id="listview" class="material-icons" type="button">list</button>
@@ -69,15 +56,28 @@
 
 
         <div class="listwrapper">
+            <!-- FILTER FORM -->
+            <div class="search-and-filter">
+                <form class="list-search" asp-action="Index2021" method="get">
+                    <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
+                    <button class="btn" type="submit">
+                        <span class="material-icons">
+                            search
+                        </span>
+                        Søk
+                    </button>
+                    <button class="btn" type="submit" name="Export" value="true">Eksport</button>
+                </form>
+                <partial name="/Views/Test/partials_2021/_Filters.cshtml" />
+            </div>
             <ul class="redlist" id="redlist">
                 <li class="listheader" id="listheader">
-                    <span>Id</span>
                     <span>Artsnavn</span>
                     <span>Kategori</span>
                     <span>Artsgruppe</span>
+                    <span>Område</span>
                     <span>Ikon</span>
                 </li>
-
 
                 @foreach (var item in Model.Redlist2021Results)
                 {
@@ -87,40 +87,36 @@
                                 // TODO: The number of fields contained in the box does not add up. Fix.
                                 // Makes it very strange and overflowy in grid view.
                             }
-                            <span class="element_id">
-                                @item.ScientificNameId
-                            </span>
-                            <span class="element_name">
-                                @item.ScientificName
-                            </span>
+                            <span class="element_name">@item.ScientificName</span>
                             <span class="element_category">
-                                <span class="@item.Category">
-                                    @item.Category
-                                </span>
+                                <span class="@item.Category">@item.Category</span>
                             </span>
-                            <span class="element_group">
-                                @item.ExpertCommittee
-                            </span>
+                            <span class="element_group">@item.ExpertCommittee</span>
                             <span class="element_area">
                                 @item.AssessmentArea
-                                @if (item.AssessmentArea == "N")
+                                @if (@item.AssessmentArea == "N")
                                 {
-                                    <img src="~/images/norge.png" />
+                                    <img src="~/images/norge.png" alt="Bilde av Norge" />
                                 }
-                                else if (item.AssessmentArea == "S")
+                                else if (@item.AssessmentArea == "S")
                                 {
-                                    <img src="~/images/svalbard.png" />
+                                    <img src="~/images/svalbard.png" alt="Bilde av Svalbard"/>
                                 }
+
+
                             </span>
-                            <img species-group-name="@item.ExpertCommittee" alt="@item.ExpertCommittee" class="element_icon" />
+                            <span>
+                                <div class="element_icon">
+                                <img species-group-name="@item.ExpertCommittee" alt="@item.ExpertCommittee" class="element_icon" />
+                                </div>
+                            </span>
                         </a>
                     </li>
                 }
-
             </ul>
         </div>
 
-        <!-- Paginator buttons -->
+        <!-- Pageinator buttons -->
         @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
         {
             PageClasses = new[] { "page-link" },

@@ -15,7 +15,7 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult Index() => View();
 
         [Route("2021")]
-        public async Task<IActionResult> Index2021(int? page, string name, string[] categories, string criteria, string area)
+        public async Task<IActionResult> Index2021(int? page, string name, string[] categories, string criteria, string[] assessmentAreas)
         {
             // Pagination
             const int pageSize = 25;
@@ -30,19 +30,13 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Filter
             if (categories?.Any() == true)
-            {
-                for (var i = 0; i < categories.Length; i++) 
-                {
-                    categories[i] = categories[i].Trim().ToLower();
-                    query = query.Where(x => !string.IsNullOrEmpty(x.Category) && categories.Contains(x.Category.ToLower()));
-                }
-            }
+                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && categories.Contains(x.Category));
 
             if (!string.IsNullOrEmpty(criteria))
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.ToLower().Equals(criteria.Trim().ToLower()));
 
-            if (!string.IsNullOrEmpty(area))
-                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.ToLower().Equals(criteria.Trim().ToLower()));
+            if (assessmentAreas?.Any() == true)
+                query = query.Where(x => assessmentAreas.Contains(x.AssessmentArea));
 
 
             var viewModel = new RL2021ViewModel
@@ -51,7 +45,7 @@ namespace Assessments.Frontend.Web.Controllers
                 Name = name,
                 Categories = categories,
                 CriteriaSummarized = criteria,
-                Area = area,
+                AssessmentAreas = assessmentAreas,
             };
 
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/speciesgroup.json");

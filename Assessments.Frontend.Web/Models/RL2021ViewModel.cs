@@ -14,6 +14,6 @@ namespace Assessments.Frontend.Web.Models
         public string Name { get; set; }
         public string[] Categories { get; set; }
         public string CriteriaSummarized { get; set; }
-        public string Area { get; set; }
+        public string[] AssessmentAreas { get; set; }
     }
 }

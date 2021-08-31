@@ -103,13 +103,22 @@ namespace Assessments.Frontend.Web.Controllers
             return View("SpeciesGroup");
         }
 
-        private static void SetupStatisticsViewModel(IEnumerable<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
+        private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
         {
             var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new {
                     Category = x.Category[..2] // ignore degrees, ie "VUº = VU"
                 }).Select(x => new KeyValuePair<string, int>(x.Key.Category, x.Count()));
+            
+            viewModel.Statistics.Categories = categories.ToList();
 
-            viewModel.Statistics.Categories = categories;
+            var criteriaCategories = new List<string> { "CR", "EN", "VU", "NT " }; // trua og nær trua 
+
+            var criteriaStrings = data.Where(x => x.Category.Length >= 2 && criteriaCategories.Contains(x.Category[..2]))
+                .Select(x => x.CriteriaSummarized);
+
+            var criteria = new List<string> {"A", "B", "C", "D"}.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
+
+            viewModel.Statistics.Criteria = criteria.ToList();
         }
     }
 }

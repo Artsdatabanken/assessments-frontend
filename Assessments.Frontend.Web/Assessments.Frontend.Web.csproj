@@ -10,7 +10,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="Views\Test\partials_2021\icons\Temp.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Content Include="Views\Test\partials_2021\icons\Alger.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Views\Test\partials_2021\icons\Temp.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>

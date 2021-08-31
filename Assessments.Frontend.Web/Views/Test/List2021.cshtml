@@ -2,13 +2,11 @@
 
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
-@using Assessments.Frontend.Web.Infrastructure
 
 @{
     ViewBag.Title = "2021";
-    Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
-
 }
+
 <div class="breadcrumbs">
     <ul>
         <li class="lead in-breadcrumb">
@@ -108,15 +106,7 @@
 
                             </span>
                             <span>
-                            <div class="element_icon">
-                                @foreach (var key in speciesgroup.Keys)
-                                {
-                                    if (key != null && (item.ExpertCommittee == key || item.ExpertCommittee.Contains(key)) && speciesgroup[key]["image"] != null)
-                                    {
-                                        @await Html.PartialAsync(speciesgroup[key]["image"])
-                                    }
-                                }
-                            </div>
+                                <img species-group-name="@item.ExpertCommittee" alt="@item.ExpertCommittee" class="element_icon" />
                             </span>
                         </a>
                     </li>
@@ -125,7 +115,6 @@
         </div>
 
         <!-- Pageinator buttons -->
-
         @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
         {
             PageClasses = new[] { "page-link" },

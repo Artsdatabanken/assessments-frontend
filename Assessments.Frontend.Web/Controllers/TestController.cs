@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
-using Assessments.Mapping;
 using Assessments.Mapping.Models.Species;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
@@ -51,18 +50,17 @@ namespace Assessments.Frontend.Web.Controllers
                     FileDownloadName = "rødliste-2021.xlsx"
                 };
             }
-
+            
             var viewModel = new RL2021ViewModel
             {
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
                 Name = name,
                 Categories = categories,
                 CriteriaSummarized = criteria,
-                AssessmentAreas = assessmentAreas,
+                AssessmentAreas = assessmentAreas
             };
 
-            var json_speciesgroup = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/speciesgroup.json");
-            ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
+            SetupStatisticsViewModel(query.ToList(), viewModel);
 
             return View("List2021", viewModel);
         }
@@ -113,6 +111,24 @@ namespace Assessments.Frontend.Web.Controllers
             var json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
             return View("SpeciesGroup");
+        }
+
+        private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
+        {
+            var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new {
+                    Category = x.Category[..2] // ignore degrees, ie "VUº = VU"
+                }).Select(x => new KeyValuePair<string, int>(x.Key.Category, x.Count()));
+            
+            viewModel.Statistics.Categories = categories.ToList();
+
+            var criteriaCategories = new List<string> { "CR", "EN", "VU", "NT " }; // trua og nær trua 
+
+            var criteriaStrings = data.Where(x => x.Category.Length >= 2 && criteriaCategories.Contains(x.Category[..2]))
+                .Select(x => x.CriteriaSummarized);
+
+            var criteria = new List<string> {"A", "B", "C", "D"}.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
+
+            viewModel.Statistics.Criteria = criteria.ToList();
         }
     }
 }

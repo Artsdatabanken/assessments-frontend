@@ -1,4 +1,5 @@
-﻿using Assessments.Mapping.Models.Species;
+﻿using System.Collections.Generic;
+using Assessments.Mapping.Models.Species;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
@@ -14,5 +15,14 @@ namespace Assessments.Frontend.Web.Models
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 
                 $"Viser {Redlist2021Results.Count} av {Redlist2021Results.TotalItemCount:N0}" : "Ingen resulater";
+
+        public Species2001StatisticsViewModel Statistics { get; set; } = new();
+    }
+
+    public class Species2001StatisticsViewModel
+    {
+        public List<KeyValuePair<string, int>> Categories { get; set; }
+
+        public List<KeyValuePair<string, int>> Criteria { get; set; }
     }
 }

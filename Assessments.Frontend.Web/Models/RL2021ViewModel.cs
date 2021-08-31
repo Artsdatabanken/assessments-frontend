@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Assessments.Mapping.Models.Species;
-using Microsoft.AspNetCore.Mvc;
+﻿using Assessments.Mapping.Models.Species;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
@@ -8,9 +6,11 @@ namespace Assessments.Frontend.Web.Models
     public class RL2021ViewModel
     {
         public IPagedList<SpeciesAssessment2021> Redlist2021Results { get; set; }
-
-        // Filter
-        [Display(Name = "Navn"), FromQuery]
+        
         public string Name { get; set; }
+
+        public string Redlist2021ResultsCount =>
+            Redlist2021Results.Count > 0 ? 
+                $"Viser {Redlist2021Results.Count} av {Redlist2021Results.TotalItemCount:N0}" : "Ingen resulater";
     }
 }

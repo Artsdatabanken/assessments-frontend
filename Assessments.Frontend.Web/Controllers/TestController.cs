@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
-using Assessments.Mapping;
 using Assessments.Mapping.Models.Species;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
@@ -41,12 +40,14 @@ namespace Assessments.Frontend.Web.Controllers
                     FileDownloadName = "rødliste-2021.xlsx"
                 };
             }
-
+            
             var viewModel = new RL2021ViewModel
             {
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
                 Name = name,
             };
+
+            SetupStatisticsViewModel(query.ToList(), viewModel);
 
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
@@ -100,6 +101,15 @@ namespace Assessments.Frontend.Web.Controllers
             var json_speciesgroup = System.IO.File.ReadAllText("Views/Test/partials_2021/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
             return View("SpeciesGroup");
+        }
+
+        private static void SetupStatisticsViewModel(IEnumerable<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
+        {
+            var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new {
+                    Category = x.Category[..2] // ignore degrees, ie "VUº = VU"
+                }).Select(x => new KeyValuePair<string, int>(x.Key.Category, x.Count()));
+
+            viewModel.Statistics.Categories = categories;
         }
     }
 }

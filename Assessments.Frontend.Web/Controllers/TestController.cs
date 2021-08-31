@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
+using Assessments.Mapping;
+using Assessments.Mapping.Models.Species;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
 // ReSharper disable InconsistentNaming
@@ -15,7 +19,7 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult Index() => View();
 
         [Route("2021")]
-        public async Task<IActionResult> Index2021(int? page, string name, string[] categories, string criteria, string[] assessmentAreas)
+        public async Task<IActionResult> Index2021(int? page, string name, bool export, string[] categories, string criteria, string[] assessmentAreas)
         {
             // Pagination
             const int pageSize = 25;
@@ -38,6 +42,15 @@ namespace Assessments.Frontend.Web.Controllers
             if (assessmentAreas?.Any() == true)
                 query = query.Where(x => assessmentAreas.Contains(x.AssessmentArea));
 
+            if (export)
+            {
+                var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());
+
+                return new FileStreamResult(Helpers.GenerateExcel(assessmentsForExport), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                {
+                    FileDownloadName = "rødliste-2021.xlsx"
+                };
+            }
 
             var viewModel = new RL2021ViewModel
             {

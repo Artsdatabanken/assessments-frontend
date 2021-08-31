@@ -2,13 +2,11 @@
 
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
-@using Assessments.Frontend.Web.Infrastructure
 
 @{
     ViewBag.Title = "2021";
-    Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
-
 }
+
 <div class="breadcrumbs">
     <ul>
         <li class="lead in-breadcrumb">
@@ -43,6 +41,8 @@
                 Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
             </p>
         </div>
+        
+        <img species-group />
 
         <h3>
             @Model.Redlist2021ResultsCount
@@ -83,64 +83,46 @@
 
                 @foreach (var item in Model.Redlist2021Results)
                 {
-                    
-                    
-            <li class="list">
-                <a asp-action="Detail" asp-route-id="@item.Id">
-                    @{
-                        // TODO: The number of fields contained in the box does not add up. Fix.
-                        // Makes it very strange and overflowy in grid view.
-                    }
-                    <span class="element_id">
-
-                        @item.ScientificNameId
-
-                    </span>
-                    <span class="element_name">@item.ScientificName</span>
-                    <span class="element_category">
-                         <span class="@item.Category">@item.Category</span>
-                    </span>
-                    <span class="element_group">@item.ExpertCommittee</span>
-                    <span class="element_area">
-                        @item.AssessmentArea
-                        @if (@item.AssessmentArea == "N")
-                        {
-                            <img src="~/images/norge.png" />
-                        }
-                        else if (@item.AssessmentArea == "S")
-                        {
-                            <img src="~/images/svalbard.png" />
-                        }
-
-
-                    </span>
-                    <div class="element_icon">
-                        @foreach (var key in speciesgroup.Keys)
-                        {
-                            if (key != null && (item.ExpertCommittee == key || item.ExpertCommittee.Contains(key)) && speciesgroup[key]["image"] != null)
-                            {
-                                @await Html.PartialAsync(speciesgroup[key]["image"])
+                    <li class="list">
+                        <a asp-action="Detail" asp-route-id="@item.Id">
+                            @{
+                                // TODO: The number of fields contained in the box does not add up. Fix.
+                                // Makes it very strange and overflowy in grid view.
                             }
-                        }
-                    </div>
-                </a>
-            </li>
+                            <span class="element_id">
+                                @item.ScientificNameId
+                            </span>
+                            <span class="element_name">
+                                @item.ScientificName
+                            </span>
+                            <span class="element_category">
+                                <span class="@item.Category">
+                                    @item.Category
+                                </span>
+                            </span>
+                            <span class="element_group">
+                                @item.ExpertCommittee
+                            </span>
+                            <span class="element_area">
+                                @item.AssessmentArea
+                                @if (item.AssessmentArea == "N")
+                                {
+                                    <img src="~/images/norge.png" />
+                                }
+                                else if (item.AssessmentArea == "S")
+                                {
+                                    <img src="~/images/svalbard.png" />
+                                }
+                            </span>
+                            <img species-group-name="@item.ExpertCommittee" alt="@item.ExpertCommittee" class="element_icon" />
+                        </a>
+                    </li>
                 }
-
 
             </ul>
         </div>
 
-
-
-
-
-
-
-
-
-        <!-- Pageinator buttons -->
-
+        <!-- Paginator buttons -->
         @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", Context.GetQueryParameters(new Dictionary<string, string> { { "Page", page.ToString() } })), new PagedListRenderOptions
         {
             PageClasses = new[] { "page-link" },

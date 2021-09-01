@@ -132,7 +132,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public class SearchAndFilter
         {
-            public const string ChooseEndangered = "Alle truete arter";
+            public const string ChooseEndangered = "Marker alle truede arter";
             public const string ChooseRedlisted = "Marker alle rødlistearter";
             public const string ResetAllFilters = "Nullstill filtre";
             public const string SearchChangedCategory = "Vis arter med endret kategori fra 2015";

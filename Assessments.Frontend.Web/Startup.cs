@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using Assessments.Frontend.Web.Infrastructure;
@@ -84,6 +85,8 @@ namespace Assessments.Frontend.Web
 
             if (!Directory.Exists(cachedFilesFolder))
                 Directory.CreateDirectory(cachedFilesFolder);
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
         }
     }
 }

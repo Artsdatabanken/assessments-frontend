@@ -133,25 +133,24 @@ li a span.element_icon {
     display:inline;
 }
 
-.redlist.grid li a {
-    display: inline-block;
-    width: 150px;
-    height: auto;
-    background: #fbfbfb;
-    margin-bottom: 15px;
-    margin-left: 5px;
-    vertical-align: top;
-    border: 1px solid #d4d4d4;
-    text-align: center;
-    padding-top:50px;
-
-}
+    .redlist.grid li a {
+        display: inline-block;
+        width: 150px;
+        height: 180px;
+        background: #fbfbfb;
+        margin-bottom: 15px;
+        margin-left: 5px;
+        vertical-align: top;
+        border: 1px solid #d4d4d4;
+        text-align: center;
+        padding-top: 50px;
+    }
 
 .redlist.grid span {
     display: none;
 }
 
-div.element_icon {
+.element_icon {
     width: 50px;
     height: 50px;
     position: relative;
@@ -162,11 +161,13 @@ div.element_icon {
 .element_icon img {
     width: 100%;
     height: 100%;
+    padding:5px;
 }
 .grid .element_icon {
-    width: 100%;
-    height: auto;
+    width: 150px;
     height: 150px;
+    background: #eee;
+    border-radius: 50%;
 }
 
 .redlist .element_area img {

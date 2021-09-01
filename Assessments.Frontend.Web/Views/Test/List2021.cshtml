@@ -5,6 +5,8 @@
 
 @{
     ViewBag.Title = "2021";
+    Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+
 }
 
 <div class="breadcrumbs">
@@ -105,18 +107,14 @@
                                 }
 
                             </span>
-                            <span>
-                                <div class="element_icon">
-                                 @*
-                                  @if (speciesgroup[key]["image"] != null)
-                                  {
-                                       @Html.Partial(@speciesgroup[key]["image"])
-                                       <partial name="/Views/Test/partials_2021/icons/Temp.cshtml" />
-
-                                  }
-                                      *@
-                                </div>
-                            </span>
+                            
+                            <div class="element_icon">
+                                @if (speciesgroup[item.ExpertCommittee]["image"] != null)
+                                {
+                                    <partial name="@speciesgroup[item.ExpertCommittee]["image"]" />
+                                }
+                                                    </div>
+                           
                         </a>
                     </li>
                 }

@@ -26,3 +26,31 @@ document.addEventListener('click', function (e) {
         }
     }
 })
+
+// Filters
+function addFilter(filter) {
+    if (document.URL.includes("?")) {
+        return document.URL + "&" + filter;
+    }
+    return document.URL + "?" + filter;
+}
+
+function removeFilter(filter) {
+    isOnlyFilter = !document.URL.includes("&");
+    if (isOnlyFilter) {
+        return  document.URL.replace("?" + filter, "");
+    }
+    if (document.URL.includes("&" + filter)) {
+        return document.URL.replace("&" + filter, "")
+    }
+    return document.URL.replace(filter + "&", "");
+}
+
+function applyFilter(filter) {
+    if (!document.URL.includes(filter)) {
+        url = addFilter(filter);
+    } else {
+        url = removeFilter(filter);
+    }
+    window.location.replace(url);
+}

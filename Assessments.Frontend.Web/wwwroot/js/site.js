@@ -54,3 +54,17 @@ function applyFilter(filter) {
     }
     window.location.replace(url);
 }
+
+function initialChecks() {
+    filtersString = document.URL.split("?")[1];
+    if (filtersString) {
+        filters = filtersString.split("&");
+        filters.forEach(filter => {
+            if (!filter.includes("Name=")) {
+                document.getElementById(filter).checked = true;
+            }
+        });
+    }
+}
+
+initialChecks();

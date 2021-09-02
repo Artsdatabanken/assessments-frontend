@@ -4,45 +4,19 @@
 @using X.PagedList.Web.Common
 
 @{
-    ViewBag.Title = "2021";
     Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
 
 }
 
-<div class="breadcrumbs">
-    <ul>
-        <li class="lead in-breadcrumb">
-            <a href="/">
-                Rødlista
-            </a>
-        </li>
-        <span class="breadcrumbdivider">&gt; </span>
-        <li class="in-breadcrumb currentcrumb">
-            @ViewBag.Title
-        </li>
-    </ul>
-</div>
 
-<div class="sidebarmenu"></div>
+<partial name="/Views/Redlist/List/partials/_Breadcrumb.cshtml" />
 
-<div class="bigmid">
-    <div class="page-header">
-        <h1>
-            Norsk Rødliste for arter 2021
-        </h1>
-        <h2>@ViewBag.Title</h2>
-        <span class="byline">
-            Publisert: 24.November 2021
-        </span>
-    </div>
+<div  class="content-placer bigmid">
 
-    <div>
-        <div class="ingress">
-            <p>
-                Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge.
-                Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
-            </p>
-        </div>
+    <div class="">
+        <partial name="/Views/Redlist/List/partials/_Header.cshtml" />
+        <partial name="/Views/Redlist/List/partials/_Introduction.cshtml" />
+
 
         <h3>
             @Model.Redlist2021ResultsCount
@@ -52,6 +26,7 @@
         <div class="controls">
             <button id="listview" class="material-icons" type="button">list</button>
             <button id="gridview" class="material-icons" type="button">grid_on </button>
+            <button id="stats" class="material-icons" type="button">bar_chart </button>
         </div>
 
         <!-- Data from model -->
@@ -60,7 +35,7 @@
         <div class="listwrapper">
             <!-- FILTER FORM -->
             <partial name="/Views/Redlist/List/partials/_Filters.cshtml" />
-            
+
             <ul class="redlist" id="redlist">
                 <li class="listheader" id="listheader">
                     <span>Artsnavn</span>
@@ -92,18 +67,18 @@
                                 }
                                 else if (@item.AssessmentArea == "S")
                                 {
-                                    <img src="~/images/svalbard.png" alt="Bilde av Svalbard"/>
+                                    <img src="~/images/svalbard.png" alt="Bilde av Svalbard" />
                                 }
 
                             </span>
-                            
+
                             <div class="element_icon">
                                 @if (speciesgroup[item.ExpertCommittee]["image"] != null)
                                 {
                                     <img src="@speciesgroup[item.ExpertCommittee]["image"]" />
                                 }
-                                                    </div>
-                           
+                            </div>
+
                         </a>
                     </li>
                 }

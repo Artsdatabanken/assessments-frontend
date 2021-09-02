@@ -8,16 +8,12 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
-	<ItemGroup>
-	  <Content Remove="Views\Test\partials_2021\icons\Temp.cshtml" />
-	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Views\Test\partials_2021\icons\Alger.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="Views\Test\partials_2021\icons\Temp.cshtml" />
+	  <Compile Remove="Views\Test\**" />
+	  <Content Remove="Views\Test\**" />
+	  <EmbeddedResource Remove="Views\Test\**" />
+	  <None Remove="Views\Test\**" />
 	</ItemGroup>
 
 	<ItemGroup>

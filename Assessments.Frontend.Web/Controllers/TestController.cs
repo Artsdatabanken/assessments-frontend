@@ -41,6 +41,9 @@ namespace Assessments.Frontend.Web.Controllers
             if (assessmentAreas?.Any() == true)
                 query = query.Where(x => assessmentAreas.Contains(x.AssessmentArea));
 
+            var json_speciesgroup = await System.IO.File.ReadAllTextAsync("Views/Test/partials_2021/speciesgroup.json");
+            ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
+
             if (export)
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());

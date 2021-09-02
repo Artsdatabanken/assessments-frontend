@@ -2,176 +2,176 @@
   "Alger": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Alger",
     "tagline": "Cyanophyta, Rhodophyta, Chlorophyta og Ochrophyta",
-    "image": "~/Views/Test/partials_2021/icons/Alger.svg"
+    "image": "https://design.artsdatabanken.no/icons/Alger.svg"
   },
   "Amfibier, reptiler": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/AmfibierReptiler",
     "tagline": "Amphibia og Reptilia",
-    "image": "~/Views/Test/partials_2021/icons/Amfibier.svg"
+    "image": "https://design.artsdatabanken.no/icons/Amfibier.svg"
   },
   "Biller": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Biller",
     "tagline": "Coleoptera",
-    "image": "~/Views/Test/partials_2021/icons/Biller.svg"
+    "image": "https://design.artsdatabanken.no/icons/Biller.svg"
   },
   "Bløtdyr": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Blotdyr",
     "tagline": "Mollusca",
-    "image": "~/Views/Test/partials_2021/icons/Bløtdyr.svg"
+    "image": "https://design.artsdatabanken.no/icons/Bløtdyr.svg"
   },
   "Døgnfluer": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Dognfluer",
-    "image": "~/Views/Test/partials_2021/icons/Døgnfluer.svg",
+    "image": "https://design.artsdatabanken.no/icons/Døgnfluer.svg",
     "tagline": "Ephemeroptera"
   },
   "Edderkoppdyr": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Edderkoppdyr",
-    "image": "~/Views/Test/partials_2021/icons/Edderkoppdyr.svg",
+    "image": "https://design.artsdatabanken.no/icons/Edderkoppdyr.svg",
     "tagline": "Arachnida"
   },
   "Fisker": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Fisker",
-    "image": "~/Views/Test/partials_2021/icons/Fisker.svg",
+    "image": "https://design.artsdatabanken.no/icons/Fisker.svg",
     "tagline": "Myxini, Petromyzontiformes, Chondrichthyes og Osteichthyes"
   },
   "Fugler": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Fugler",
-    "image": "~/Views/Test/partials_2021/icons/Fugler.svg",
+    "image": "https://design.artsdatabanken.no/icons/Fugler.svg",
     "tagline": "Aves"
   },
   "Kakerlakker": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Kakerlakker",
-    "image": "~/Views/Test/partials_2021/icons/Kakerlakker.svg",
+    "image": "https://design.artsdatabanken.no/icons/Kakerlakker.svg",
     "tagline": "Blattodea"
   },
   "Kamelhalsfluer": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Kamelhalsfluer",
-    "image": "~/Views/Test/partials_2021/icons/Kamelhalsfluer.svg",
+    "image": "https://design.artsdatabanken.no/icons/Kamelhalsfluer.svg",
     "tagline": "Raphidioptera"
   },
   "Karplanter": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Karplanter",
-    "image": "~/Views/Test/partials_2021/icons/Karplanter.svg",
+    "image": "https://design.artsdatabanken.no/icons/Karplanter.svg",
     "tagline": "Pteridophyta, Pinophyta og Magnoliophyta"
   },
   "Koralldyr": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Koralldyr",
-    "image": "~/Views/Test/partials_2021/icons/Koralldyr.svg",
+    "image": "https://design.artsdatabanken.no/icons/Koralldyr.svg",
     "tagline": "Anthozoa"
   },
   "Krepsdyr": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Krepsdyr",
-    "image": "~/Views/Test/partials_2021/icons/Krepsdyr.svg",
+    "image": "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
     "tagline": "Crustacea"
   },
   "Laver": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Lav",
-    "image": "~/Views/Test/partials_2021/icons/Laver.svg",
+    "image": "https://design.artsdatabanken.no/icons/Laver.svg",
     "tagline": "'Lichenes'"
   },
   "Leddormer": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Leddormer",
-    "image": "~/Views/Test/partials_2021/icons/Leddormer.svg",
+    "image": "https://design.artsdatabanken.no/icons/Leddormer.svg",
     "tagline": "Annelida"
   },
   "Mangefotinger": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Mangefotinger",
-    "image": "~/Views/Test/partials_2021/icons/Mangefotinger.svg",
+    "image": "https://design.artsdatabanken.no/icons/Mangefotinger.svg",
     "tagline": "Myriapoda"
   },
   "Mosdyr": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Mosdyr",
-    "image": "~/Views/Test/partials_2021/icons/Mosdyr.svg",
+    "image": "https://design.artsdatabanken.no/icons/Mosdyr.svg",
     "tagline": "Ectoprocta"
   },
   "Moser": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Moser",
-    "image": "~/Views/Test/partials_2021/icons/Moser.svg",
+    "image": "https://design.artsdatabanken.no/icons/Moser.svg",
     "tagline": "Anthocerotophyta, Marchantiophyta og Bryophyta"
   },
   "Mudderfluer": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Mudderfluer",
-    "image": "~/Views/Test/partials_2021/icons/Mudderfluer.svg",
+    "image": "https://design.artsdatabanken.no/icons/Mudderfluer.svg",
     "tagline": "Megaloptera"
   },
   "Nebbfluer": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Nebbfluer",
-    "image": "~/Views/Test/partials_2021/icons/Nebbfluer.svg",
+    "image": "https://design.artsdatabanken.no/icons/Nebbfluer.svg",
     "tagline": "Mecoptera"
   },
   "Nebbmunner": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Nebbmunner",
-    "image": "~/Views/Test/partials_2021/icons/Nebbmunner.svg",
+    "image": "https://design.artsdatabanken.no/icons/Nebbmunner.svg",
     "tagline": "Hemiptera"
   },
   "Nettvinger": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Nettvinger",
-    "image": "~/Views/Test/partials_2021/icons/Nettvinger.svg",
+    "image": "https://design.artsdatabanken.no/icons/Nettvinger.svg",
     "tagline": "Neuroptera"
   },
   "Pattedyr": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Pattedyr",
-    "image": "~/Views/Test/partials_2021/icons/Pattedyr.svg",
+    "image": "https://design.artsdatabanken.no/icons/Pattedyr.svg",
     "tagline": "Mammalia"
   },
   "Rettvinger": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Rettvinger",
-    "image": "~/Views/Test/partials_2021/icons/Rettvinger.svg",
+    "image": "https://design.artsdatabanken.no/icons/Rettvinger.svg",
     "tagline": "Orthoptera"
   },
   "Saksedyr": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Saksedyr",
-    "image": "~/Views/Test/partials_2021/icons/Saksedyr.svg",
+    "image": "https://design.artsdatabanken.no/icons/Saksedyr.svg",
     "tagline": "Dermaptera"
   },
   "Sommerfugler": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Sommerfugler",
-    "image": "~/Views/Test/partials_2021/icons/Sommerfugler.svg",
+    "image": "https://design.artsdatabanken.no/icons/Sommerfugler.svg",
     "tagline": "Lepidoptera"
   },
   "Sopper": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Sopper",
-    "image": "~/Views/Test/partials_2021/icons/Sopper.svg",
+    "image": "https://design.artsdatabanken.no/icons/Sopper.svg",
     "tagline": "Fungi"
   },
   "Spretthaler": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Spretthaler",
-    "image": "~/Views/Test/partials_2021/icons/Spretthaler.svg",
+    "image": "https://design.artsdatabanken.no/icons/Spretthaler.svg",
     "tagline": "Collembola"
   },
   "Steinfluer": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Steinfluer",
-    "image": "~/Views/Test/partials_2021/icons/Steinfluer.svg",
+    "image": "https://design.artsdatabanken.no/icons/Steinfluer.svg",
     "tagline": "Plecoptera"
   },
   "Stormaneter": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Stormaneter",
-    "image": "~/Views/Test/partials_2021/icons/Stormaneter.svg",
+    "image": "https://design.artsdatabanken.no/icons/Stormaneter.svg",
     "tagline": "Scyphozoa"
   },
   "Svamper": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Svamper",
-    "image": "~/Views/Test/partials_2021/icons/Svamper.svg",
+    "image": "https://design.artsdatabanken.no/icons/Svamper.svg",
     "tagline": "Porifera"
   },
   "Tovinger": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Tovinger",
-    "image": "~/Views/Test/partials_2021/icons/Tovinger.svg",
+    "image": "https://design.artsdatabanken.no/icons/Tovinger.svg",
     "tagline": "Diptera"
   },
   "Vepser": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Vepser",
-    "image": "~/Views/Test/partials_2021/icons/Vepser.svg",
+    "image": "https://design.artsdatabanken.no/icons/Vepser.svg",
     "tagline": "Hymenoptera"
   },
   "Vårfluer": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Varfluer",
-    "image": "~/Views/Test/partials_2021/icons/Vårfluer.svg",
+    "image": "https://design.artsdatabanken.no/icons/Vårfluer.svg",
     "tagline": "Trichoptera"
   },
   "Øyenstikkere": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Oyenstikkere",
-    "image": "~/Views/Test/partials_2021/icons/Øyenstikkere.svg",
+    "image": "https://design.artsdatabanken.no/icons/Øyenstikkere.svg",
     "tagline": "Odonata"
   }
 }

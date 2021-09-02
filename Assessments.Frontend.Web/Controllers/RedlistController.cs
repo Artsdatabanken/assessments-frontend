@@ -65,7 +65,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             SetupStatisticsViewModel(query.ToList(), viewModel);
 
-            return View("List2021", viewModel);
+            return View("List/List2021", viewModel);
         }
 
         [Route("{id:required}")]
@@ -91,7 +91,7 @@ namespace Assessments.Frontend.Web.Controllers
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
 
-            return View("SpeciesAssessment2021", assessment);
+            return View("Assessment/SpeciesAssessment2021", assessment);
         }
 
         [Route("habitat")]

@@ -458,17 +458,17 @@
 .other_habitats.expanded .hidden {
     display: block;
 }
-/* EXPERT ASSESMENT */
-.expert_assesment h3,
-.expert_assesment p {
+/* EXPERT Assessment */
+.expert_Assessment h3,
+.expert_Assessment p {
     background: #f8f7f7;
     padding: 10px;
     margin: 0;
 }
 
 
-.expert_assesment p:first-child:before,
-.expert_assesment p:last-child:after {
+.expert_Assessment p:first-child:before,
+.expert_Assessment p:last-child:after {
     content: "\“\a";
     font-size: 70pt;
     height: 70px;
@@ -478,7 +478,7 @@
 }
 
 
-.expert_assesment p:last-child:after {
+.expert_Assessment p:last-child:after {
     text-align:right;
     content: "\” ";
 }

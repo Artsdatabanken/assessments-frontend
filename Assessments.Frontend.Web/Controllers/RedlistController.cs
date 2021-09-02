@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,9 +11,9 @@ using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [Route("[controller]")]
+    [Route("species")]
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class TestController : BaseController<TestController>
+    public class RedlistController : BaseController<RedlistController>
     {
         public IActionResult Index() => View();
 
@@ -53,7 +53,7 @@ namespace Assessments.Frontend.Web.Controllers
                     FileDownloadName = "rødliste-2021.xlsx"
                 };
             }
-            
+
             var viewModel = new RL2021ViewModel
             {
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
@@ -118,10 +118,11 @@ namespace Assessments.Frontend.Web.Controllers
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
         {
-            var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new {
-                    Category = x.Category[..2] // ignore degrees, ie "VUº = VU"
-                }).Select(x => new KeyValuePair<string, int>(x.Key.Category, x.Count()));
-            
+            var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new
+            {
+                Category = x.Category[..2] // ignore degrees, ie "VUº = VU"
+            }).Select(x => new KeyValuePair<string, int>(x.Key.Category, x.Count()));
+
             viewModel.Statistics.Categories = categories.ToList();
 
             var criteriaCategories = new List<string> { "CR", "EN", "VU", "NT " }; // trua og nær trua 
@@ -129,7 +130,7 @@ namespace Assessments.Frontend.Web.Controllers
             var criteriaStrings = data.Where(x => x.Category.Length >= 2 && criteriaCategories.Contains(x.Category[..2]))
                 .Select(x => x.CriteriaSummarized);
 
-            var criteria = new List<string> {"A", "B", "C", "D"}.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
+            var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
 
             viewModel.Statistics.Criteria = criteria.ToList();
         }

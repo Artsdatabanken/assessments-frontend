@@ -1,12 +1,48 @@
 @model RL2021ViewModel
 
-<div class="ingress">
-    <p>
-        Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge.
-        Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
-    </p>
-</div>
+@{
+    int maxval = 0;
+    @foreach (var (key, value) in Model.Statistics.Categories)
+    {
+        if (value > maxval)
+        {
+            maxval = value;
+        }
+    }
 
-<div class="page_section">
-    <p>Presentasjon av utvalgte data her?</p>
-</div>
+}
+
+@functions{
+    string percentage(float max, float now)
+    {
+        string calculated = (now / max * 100).ToString();
+        calculated = calculated.Replace(",", ".");
+        return calculated + "%";
+    }
+    }
+
+    <div class="ingress">
+        <p>
+            Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge.
+            Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
+        </p>
+    </div>
+
+    <div class="page_section">
+        <h2>Antall vurderinger per kategori - @maxval</h2>
+        @foreach (var (key, value) in Model.Statistics.Categories)
+        {
+    <div class="statelement">
+        <div class="heightbar_blank">
+            <div class="heightbar_indicator @key" style="height:@percentage(@maxval, @value)">
+
+            </div>
+        </div>
+        <span class="statbox @key">
+            @key
+        </span>
+        @value
+    </div>
+        }
+
+    </div>

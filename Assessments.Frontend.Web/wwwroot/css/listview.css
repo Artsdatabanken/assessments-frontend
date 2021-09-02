@@ -295,3 +295,28 @@ li a span.element_icon {
         padding: 0 10px;
     }
 }
+
+.statelement{
+    display:inline-block;
+    padding:10px;
+}
+
+.heightbar_blank,
+.heightbar_indicator{
+    height:100px;
+    display:block;
+    margin-bottom:2px;
+    position:relative;
+    width:100%;
+}
+
+.heightbar_indicator{
+    bottom:0;
+    margin-bottom:0;
+    margin-top:auto;
+    position:absolute;
+}
+.statbox {
+    display: block;
+    padding: 10px;
+}

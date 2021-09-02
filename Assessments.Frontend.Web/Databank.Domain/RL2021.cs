@@ -237,7 +237,7 @@ namespace Databank.Domain
         public class TaxonHistory
         {
             public DateTime date { get; set; }
-            public string username { get; set; } // The user that changed the name of the assesment to a new name (not this name)
+            public string username { get; set; } // The user that changed the name of the Assessment to a new name (not this name)
             public string VitenskapeligNavn { get; set; }
             public string VitenskapeligNavnAutor { get; set; }
             public string VitenskapeligNavnHierarki { get; set; }

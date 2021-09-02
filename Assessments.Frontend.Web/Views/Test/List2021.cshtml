@@ -57,19 +57,8 @@
 
         <div class="listwrapper">
             <!-- FILTER FORM -->
-            <div class="search-and-filter">
-                <form class="list-search" asp-action="Index2021" method="get">
-                    <input asp-for="Name" placeholder="Søk i vitenskapelig navn"/>
-                    <button class="btn" type="submit">
-                        <span class="material-icons">
-                            search
-                        </span>
-                        Søk
-                    </button>
-                    <button class="btn" type="submit" name="Export" value="true">Eksport</button>
-                </form>
-                <partial name="/Views/Test/partials_2021/_Filters.cshtml" />
-            </div>
+            <partial name="/Views/Test/partials_2021/_Filters.cshtml" />
+            
             <ul class="redlist" id="redlist">
                 <li class="listheader" id="listheader">
                     <span>Artsnavn</span>

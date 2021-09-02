@@ -18,7 +18,8 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult Index() => View();
 
         [Route("2021")]
-        public async Task<IActionResult> Index2021(int? page, string name, bool export, string[] categories, string criteria, string[] assessmentAreas)
+        public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, 
+        bool VU, bool NT, bool DD, bool LC, bool NE, bool NA, bool Redlisted, bool Endangered, string criteria, string[] assessmentAreas)
         {
             // Pagination
             const int pageSize = 25;
@@ -32,8 +33,18 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
 
             // Filter
-            if (categories?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && categories.Contains(x.Category));
+            List<string> categories = new List<string>{ "RE", "CR", "EN", "VU", "NT", "DD", "LC", "NE", "NA" };
+            bool[] categoryBools = { RE, CR, EN, VU, NT, DD, LC, NE, NA };
+            List<string> chosenCategories = new List<string>();
+
+            for (var i = 0; i < categories.Count; i++)
+            {
+                if (categoryBools[i])
+                    chosenCategories.Add(categories[i]);
+            }
+
+            if (categoryBools.Contains(true))
+                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Contains(x.Category));
 
             if (!string.IsNullOrEmpty(criteria))
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.ToLower().Equals(criteria.Trim().ToLower()));
@@ -58,7 +69,17 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
                 Name = name,
-                Categories = categories,
+                RE = RE,
+                CR = CR,
+                EN = EN,
+                VU = VU,
+                NT = NT,
+                DD = DD,
+                LC = LC,
+                NE = NE,
+                NA = NA,
+                Redlisted = Redlisted,
+                Endangered = Endangered,
                 CriteriaSummarized = criteria,
                 AssessmentAreas = assessmentAreas
             };

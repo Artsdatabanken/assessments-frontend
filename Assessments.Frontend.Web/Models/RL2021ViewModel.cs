@@ -9,7 +9,17 @@ namespace Assessments.Frontend.Web.Models
         public IPagedList<SpeciesAssessment2021> Redlist2021Results { get; set; }
         
         public string Name { get; set; }
-        public string[] Categories { get; set; }
+        public bool RE { get; set; }
+        public bool CR { get; set; }
+        public bool EN { get; set; }
+        public bool VU { get; set; }
+        public bool NT { get; set; }
+        public bool DD { get; set; }
+        public bool LC { get; set; }
+        public bool NE { get; set; }
+        public bool NA { get; set; }
+        public bool Redlisted { get; set; }
+        public bool Endangered { get; set; }
         public string CriteriaSummarized { get; set; }
         public string[] AssessmentAreas { get; set; }
         public string Redlist2021ResultsCount =>

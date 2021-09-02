@@ -95,7 +95,7 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [Route("habitat")]
-        public IActionResult Habitat()
+        public async Task<IActionResult> Habitat()
         {
             var json_glossary = System.IO.File.ReadAllText("wwwroot/json/glossary.json");
             ViewBag.glossary = JObject.Parse(json_glossary);
@@ -106,7 +106,7 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [Route("speciesgroup")]
-        public IActionResult SpeciesGroup()
+        public async Task<IActionResult> SpeciesGroup()
         {
             var json_glossary = System.IO.File.ReadAllText("wwwroot/json/glossary.json");
             ViewBag.glossary = JObject.Parse(json_glossary);

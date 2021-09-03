@@ -19,7 +19,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         [Route("2021")]
         public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, 
-        bool VU, bool NT, bool DD, bool LC, bool NE, bool NA, bool Redlisted, bool Endangered, string criteria, string[] assessmentAreas)
+        bool VU, bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, string criteria, string[] assessmentAreas)
         {
             // Pagination
             const int pageSize = 25;
@@ -33,17 +33,22 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
 
             // Filter
-            List<string> categories = new List<string>{ "RE", "CR", "EN", "VU", "NT", "DD", "LC", "NE", "NA" };
-            bool[] categoryBools = { RE, CR, EN, VU, NT, DD, LC, NE, NA };
-            List<string> chosenCategories = new List<string>();
-
-            for (var i = 0; i < categories.Count; i++)
+            Dictionary<string, bool> categories = new Dictionary<string, bool>
             {
-                if (categoryBools[i])
-                    chosenCategories.Add(categories[i]);
-            }
+                { Constants.SpeciesCategories.Extinct.ShortHand, RE },
+                { Constants.SpeciesCategories.CriticallyEndangered.ShortHand, CR },
+                { Constants.SpeciesCategories.Endangered.ShortHand, EN },
+                { Constants.SpeciesCategories.Vulnerable.ShortHand, VU },
+                { Constants.SpeciesCategories.NearThreatened.ShortHand, NT },
+                { Constants.SpeciesCategories.DataDeficient.ShortHand, DD },
+                { Constants.SpeciesCategories.Viable.ShortHand, LC },
+                { Constants.SpeciesCategories.NotEvalueted.ShortHand, NE },
+                { Constants.SpeciesCategories.NotAppropriate.ShortHand, NA }
+            };
+            List<string> chosenCategories = Helpers.findSelectedCategories(categories, redlisted, endangered);
 
-            if (categoryBools.Contains(true))
+
+            if (chosenCategories?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Contains(x.Category));
 
             if (!string.IsNullOrEmpty(criteria))
@@ -78,8 +83,8 @@ namespace Assessments.Frontend.Web.Controllers
                 LC = LC,
                 NE = NE,
                 NA = NA,
-                Redlisted = Redlisted,
-                Endangered = Endangered,
+                Redlisted = redlisted,
+                Endangered = endangered,
                 CriteriaSummarized = criteria,
                 AssessmentAreas = assessmentAreas
             };

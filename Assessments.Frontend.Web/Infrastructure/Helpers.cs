@@ -53,6 +53,41 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             return memoryStream;
         }
+
+        public static List<string> findSelectedCategories(Dictionary<string, bool> categories, bool redlisted, bool endangered) 
+        {
+            List<string> selectedCategories = new List<string>();
+
+            List<string> redlist = new List<string>
+            {
+                Constants.SpeciesCategories.Extinct.ShortHand,
+                Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
+                Constants.SpeciesCategories.Endangered.ShortHand,
+                Constants.SpeciesCategories.Vulnerable.ShortHand,
+                Constants.SpeciesCategories.NearThreatened.ShortHand,
+                Constants.SpeciesCategories.DataDeficient.ShortHand
+            };
+
+            List<string> endangeredList = new List<string>
+            {
+                Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
+                Constants.SpeciesCategories.Endangered.ShortHand,
+                Constants.SpeciesCategories.Vulnerable.ShortHand
+            };
+
+            if (redlisted) 
+                foreach (var category in redlist)
+                    categories[category] = true;
+            else if (endangered) 
+                foreach (var category in endangeredList)
+                    categories[category] = true;
+
+            foreach (var entry in categories)
+                if (entry.Value)
+                    selectedCategories.Add(entry.Key);
+
+            return selectedCategories;
+        }
     }
 
     public static class Constants

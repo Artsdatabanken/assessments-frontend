@@ -17,6 +17,28 @@
             <button data-bind="click: resetFilters, disable: filterIsEmpty, style: { backgroundColor: filterIsEmpty() ? 'lightgray' : 'lightcyan' }">@SearchAndFilter.ResetAllFilters</button>
             <div class="checkboxes">
                 <div class="row" style="margin: 0; padding-top: 10px">
+                    <span>@SearchAndFilter.SearchChooseArea</span>
+                    <button class="arrow-down" data-bind="click: toggleSvalbardVisible">
+                        <img src="/images/icon_down_20x14.png" alt="Arrow down">
+                    </button>
+                </div>
+                <div style="cursor: pointer" data-bind="visible: svalbardVisible">
+                    <ul style="margin-top: 10px; padding-left: 0">
+                        <li class="checkbox" style="margin-top: 0;">
+                            <label class="checkbox"
+                                style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                <input type="checkbox" asp-for="Fastland" />Fastland
+                            </label>
+                        </li>
+                        <li class="checkbox" style="margin-top: 0;">
+                            <label class="checkbox"
+                                style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                <input type="checkbox" asp-for="Svalbard" />Svalbard
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="row" style="margin: 0; padding-top: 10px">
 
                     <span>@SearchAndFilter.SearchChooseCategory</span>
                     <button class="arrow-down" data-bind="click: toggleCategoryVisible"><img src="/images/icon_down_20x14.png" alt="Arrow down"></button>
@@ -71,38 +93,17 @@
                         </li>
                         <li class="checkbox" style="margin-top: 0;" >
                             <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                <input type="checkbox" asp-for="Redlisted" id="ChooseRedlisted" />@SearchAndFilter.ChooseRedlisted
+                                <input type="checkbox" asp-for="Redlisted" />@SearchAndFilter.ChooseRedlisted
                             </label>
                         </li>
                         <li class="checkbox" style="margin-top: 0;" >
                             <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                <input type="checkbox" asp-for="Endangered" id="ChooseEndangered" />@SearchAndFilter.ChooseEndangered
+                                <input type="checkbox" asp-for="Endangered" />@SearchAndFilter.ChooseEndangered
                             </label>
                         </li>
                     </ul>
                 </div>
             
-                <div class="row" style="margin: 0; padding-top: 10px">
-                    <span>@SearchAndFilter.SearchChooseArea</span>
-                    <button class="arrow-down" data-bind="click: toggleSvalbardVisible">
-                        <img src="/images/icon_down_20x14.png" alt="Arrow down">
-                    </button>
-                </div>
-                <div style="cursor: pointer" data-bind="visible: svalbardVisible">
-                    <ul style="margin-top: 10px; padding-left: 0">
-                        <li class="checkbox" style="margin-top: 0;">
-                            <label class="checkbox"
-                                style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                <input type="checkbox" data-bind="click: setSvalbard('F')" />Fastland
-                            </label>
-                        </li>
-                        <li class="checkbox" style="margin-top: 0;">
-                            <label class="checkbox"
-                                style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal"><input
-                                    type="checkbox" data-bind="click: setSvalbard('S')" />Svalbard</label>
-                        </li>
-                    </ul>
-                </div>
                 <div class="row" style="margin: 0; padding-top: 10px">
                     <span>@SearchAndFilter.SearchChooseCriteria</span>
                     <button class="arrow-down" data-bind="click: toggleCriteriaVisible"><img src="/images/icon_down_20x14.png" alt="Arrow down"></button>

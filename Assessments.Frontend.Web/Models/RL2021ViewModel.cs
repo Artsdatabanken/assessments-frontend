@@ -20,6 +20,8 @@ namespace Assessments.Frontend.Web.Models
         public bool NA { get; set; }
         public bool Redlisted { get; set; }
         public bool Endangered { get; set; }
+        public bool Fastland { get; set; }
+        public bool Svalbard { get; set; }
         public string CriteriaSummarized { get; set; }
         public string[] AssessmentAreas { get; set; }
         public string Redlist2021ResultsCount =>

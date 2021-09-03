@@ -19,7 +19,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         [Route("2021")]
         public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, 
-        bool VU, bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, string criteria, string[] assessmentAreas)
+        bool VU, bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, bool fastland, bool svalbard, string criteria, string[] assessmentAreas)
         {
             // Pagination
             const int pageSize = 25;
@@ -85,6 +85,8 @@ namespace Assessments.Frontend.Web.Controllers
                 NA = NA,
                 Redlisted = redlisted,
                 Endangered = endangered,
+                Fastland = fastland,
+                Svalbard = svalbard,
                 CriteriaSummarized = criteria,
                 AssessmentAreas = assessmentAreas
             };

@@ -303,7 +303,7 @@ li a span.element_icon {
 
 .heightbar_blank,
 .heightbar_indicator{
-    height:100px;
+    height:200px;
     display:block;
     margin-bottom:2px;
     position:relative;

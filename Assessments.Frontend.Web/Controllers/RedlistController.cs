@@ -140,7 +140,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
 
-            viewModel.Statistics.Criteria = criteria.ToList();
+            viewModel.Statistics.Criteria = criteria.ToDictionary(x => x.Key, x => x.Value);
         }
     }
 }

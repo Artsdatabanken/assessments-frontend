@@ -1,101 +1,40 @@
-﻿.pieContainer {
-    height: 150px;
+﻿.pie {
+    border-radius: 100%;
+    height: calc(var(--size, 200) * 1px);
+    overflow: hidden;
     position: relative;
+    width: calc(var(--size, 200) * 1px);
 }
 
-.pieBackground {
+.pie__segment {
+    --a: calc(var(--over50, 0) * -100%);
+    --b: calc((1 + var(--over50, 0)) * 100%);
+    --degrees: calc((var(--offset, 0) / 100) * 360);
+    -webkit-clip-path: polygon(var(--a) var(--a), var(--b) var(--a), var(--b) var(--b), var(--a) var(--b));
+    clip-path: polygon(var(--a) var(--a), var(--b) var(--a), var(--b) var(--b), var(--a) var(--b));
+    height: 100%;
     position: absolute;
-    width: 150px;
-    height: 150px;
-    border-radius: 100%;
-    box-shadow: 0px 0px 8px rgba(0,0,0,0.5);
+    transform: translate(0, -50%) rotate(90deg) rotate(calc(var(--degrees) * 1deg));
+    transform-origin: 50% 100%;
+    width: 100%;
+    z-index: calc(1 + var(--over50));
 }
 
-.pie {
-    transition: all 1s;
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    border-radius: 100%;
-    clip: rect(0px, 75px, 150px, 0px);
-}
-
-.hold {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    border-radius: 100%;
-    clip: rect(0px, 150px, 150px, 75px);
-}
-
-#pieSlice1 .pie {
-    background-color: #1b458b;
-    transform: rotate(30deg);
-}
-
-#pieSlice2 {
-    transform: rotate(30deg);
-}
-
-    #pieSlice2 .pie {
-        background-color: #0a0;
-        transform: rotate(60deg);
-    }
-
-#pieSlice3 {
-    transform: rotate(90deg);
-}
-
-    #pieSlice3 .pie {
-        background-color: #f80;
-        transform: rotate(120deg);
-    }
-
-#pieSlice4 {
-    transform: rotate(210deg);
-}
-
-    #pieSlice4 .pie {
-        background-color: #08f;
-        transform: rotate(10deg);
-    }
-
-#pieSlice5 {
-    transform: rotate(220deg);
-}
-
-    #pieSlice5 .pie {
-        background-color: #a04;
-        transform: rotate(70deg);
-    }
-
-#pieSlice6 {
-    transform: rotate(290deg);
-}
-
-    #pieSlice6 .pie {
-        background-color: #ffd700;
-        transform: rotate(70deg);
-    }
-
-.innerCircle {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    background-color: #444;
-    border-radius: 100%;
-    top: 15px;
-    left: 15px;
-    box-shadow: 0px 0px 8px rgba(0,0,0,0.5) inset;
-    color: white;
-}
-
-    .innerCircle .content {
+    .pie__segment:after,
+    .pie__segment:before {
+        background: var(--bg, #e74c3c);
+        content: '';
+        height: 100%;
         position: absolute;
-        display: block;
-        width: 120px;
-        top: 30px;
-        left: 0;
-        text-align: center;
-        font-size: 14px;
+        width: 100%;
+    }
+
+    .pie__segment:before {
+        --degrees: calc((var(--value, 45) / 100) * 360);
+        transform: translate(0, 100%) rotate(calc(var(--degrees) * 1deg));
+        transform-origin: 50% 0%;
+    }
+
+    .pie__segment:after {
+        opacity: var(--over50, 0);
     }

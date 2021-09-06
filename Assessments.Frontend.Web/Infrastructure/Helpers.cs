@@ -88,6 +88,24 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             return selectedCategories;
         }
+
+        public static char[] findSelectedCriterias(Dictionary<char, bool> criterias)
+        {
+            List<char> selectedCriterias = new List<char>();
+            foreach (var item in criterias)
+                if (item.Value)
+                    selectedCriterias.Add(item.Key);
+            return selectedCriterias.ToArray();
+        }
+
+        public static List<string> findSelectedAreas(Dictionary<string, bool> assessmentAreas)
+        {
+            List<string> selectedAreas = new List<string>();
+            foreach (var item in assessmentAreas)
+                if (item.Value)
+                    selectedAreas.Add(item.Key);
+            return selectedAreas;
+        }
     }
 
     public static class Constants

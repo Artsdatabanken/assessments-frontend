@@ -18,8 +18,9 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult Index() => View();
 
         [Route("2021")]
-        public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, 
-        bool VU, bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, bool fastland, bool svalbard, string criteria, string[] assessmentAreas)
+        public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, bool VU, 
+        bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, bool criteriaA, bool criteriaB, 
+        bool criteriaC, bool criteriaD, bool fastland, bool svalbard)
         {
             // Pagination
             const int pageSize = 25;
@@ -47,15 +48,32 @@ namespace Assessments.Frontend.Web.Controllers
             };
             List<string> chosenCategories = Helpers.findSelectedCategories(categories, redlisted, endangered);
 
+            Dictionary<char, bool> criterias = new Dictionary<char, bool>
+            {
+                { 'A', criteriaA },
+                { 'B', criteriaB },
+                { 'C', criteriaC },
+                { 'D', criteriaD },
+            };
+
+            char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
+
+            Dictionary<string, bool> assessmentAreas = new Dictionary<string, bool>
+            {
+                { "N", fastland },
+                { "S", svalbard }
+            };
+
+            List<string> chosenAreas = Helpers.findSelectedAreas(assessmentAreas);
 
             if (chosenCategories?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Contains(x.Category));
 
-            if (!string.IsNullOrEmpty(criteria))
-                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.ToLower().Equals(criteria.Trim().ToLower()));
+            if (chosenCriterias?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(chosenCriterias) != -1);
 
-            if (assessmentAreas?.Any() == true)
-                query = query.Where(x => assessmentAreas.Contains(x.AssessmentArea));
+            if (chosenAreas?.Any() == true)
+                query = query.Where(x => chosenAreas.Contains(x.AssessmentArea));
 
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
@@ -85,10 +103,12 @@ namespace Assessments.Frontend.Web.Controllers
                 NA = NA,
                 Redlisted = redlisted,
                 Endangered = endangered,
+                CriteriaA = criteriaA,
+                CriteriaB = criteriaB,
+                CriteriaC = criteriaC,
+                CriteriaD = criteriaD,
                 Fastland = fastland,
                 Svalbard = svalbard,
-                CriteriaSummarized = criteria,
-                AssessmentAreas = assessmentAreas
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);

@@ -110,20 +110,25 @@
                 </div>
                 <div style="cursor: pointer" data-bind="visible: criteriaVisible">
                     <ul style="margin-top: 10px; padding-left: 0">
-                        <li class="checkbox" style="margin-top: 0;">
-                            <label class="checkbox" style="margin-top: 5px; margin-left: 25px; cursor: pointer; font-weight: normal"><input type="checkbox" data-bind="click: chooseCriteria('A')" />A</label>
+                        <li class="checkbox" style="margin-top: 0;" >
+                            <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                <input type="checkbox" asp-for="CriteriaA" onclick="this.form.submit();" />A
+                            </label>
                         </li>
                         <li class="checkbox" style="margin-top: 0;">
-                            <label class="checkbox" style="margin-top: 5px; margin-left: 25px; cursor: pointer; font-weight: normal"><input type="checkbox" data-bind="click: chooseCriteria('B')" />B</label>
+                            <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                <input type="checkbox" asp-for="CriteriaB" onclick="this.form.submit();" />B
+                            </label>
                         </li>
-
-
-                        <li class="checkbox" style="margin-top: 0;">
-                            <label class="checkbox" style="margin-top: 5px; margin-left: 25px; cursor: pointer; font-weight: normal"><input type="checkbox" data-bind="click: chooseCriteria('C')" />C</label>
+                        <li class="checkbox" style="margin-top: 0;" >
+                            <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                <input type="checkbox" asp-for="CriteriaC" onclick="this.form.submit();" />C
+                            </label>
                         </li>
-
-                        <li class="checkbox" style="margin-top: 0;">
-                            <label class="checkbox" style="margin-top: 5px; margin-left: 25px; cursor: pointer; font-weight: normal"><input type="checkbox" data-bind="click: chooseCriteria('D')" />D</label>
+                        <li class="checkbox" style="margin-top: 0;" >
+                            <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                <input type="checkbox" asp-for="CriteriaD" onclick="this.form.submit();" />D
+                            </label>
                         </li>
                     </ul>
                 </div>

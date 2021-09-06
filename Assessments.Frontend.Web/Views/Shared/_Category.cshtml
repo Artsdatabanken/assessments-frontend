@@ -24,7 +24,7 @@
         if(category != "" && category != null)
         {
             var actual_category = @categoryMatcher(category);
-            var final_string = @ViewBag.glossary[actual_category]["presentationstring"];
+            var final_string = @ViewBag.categories[actual_category]["presentationstring"];
             return final_string;
         }
         return category+ "mangler";

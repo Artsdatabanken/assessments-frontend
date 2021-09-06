@@ -10,15 +10,15 @@
 
 <div class="page_section">
    
-    @if (@ViewBag.glossary[@Model.Category] != null)
+    @if (@ViewBag.categories[@Model.Category] != null)
     {
         <p class="imaged_paragraph">
             <span class="graphic_element @Model.Category">
                 @Model.Category
             </span>
             <span class="right_text">
-                <b>@ViewBag.glossary[@Model.Category]["tagline"]</b>
-                <span class="tag_explanation">@ViewBag.glossary[@Model.Category]["description"]</span>
+                <b>@ViewBag.categories[@Model.Category]["tagline"]</b>
+                <span class="tag_explanation">@ViewBag.categories[@Model.Category]["description"]</span>
             </span>
         </p>
     }

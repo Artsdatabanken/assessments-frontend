@@ -21,7 +21,7 @@ namespace Assessments.Frontend.Web.Models
 
     public class Species2001StatisticsViewModel
     {
-        public List<KeyValuePair<string, int>> Categories { get; set; }
+        public Dictionary<string, int> Categories { get; set; }
 
         public List<KeyValuePair<string, int>> Criteria { get; set; }
     }

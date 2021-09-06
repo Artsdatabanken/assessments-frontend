@@ -44,6 +44,10 @@ namespace Assessments.Frontend.Web.Controllers
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
 
+
+            var json_categories = await System.IO.File.ReadAllTextAsync("wwwroot/json/categories.json");
+            ViewBag.categories = JObject.Parse(json_categories);
+
             if (export)
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());
@@ -85,6 +89,9 @@ namespace Assessments.Frontend.Web.Controllers
             var json_glossary = await System.IO.File.ReadAllTextAsync("wwwroot/json/glossary.json");
             ViewBag.glossary = JObject.Parse(json_glossary);
 
+            var json_categories = await System.IO.File.ReadAllTextAsync("wwwroot/json/categories.json");
+            ViewBag.categories = JObject.Parse(json_categories);
+
             var json_habitat = await System.IO.File.ReadAllTextAsync("wwwroot/json/habitat.json");
             ViewBag.habitat = JObject.Parse(json_habitat);
 
@@ -123,7 +130,8 @@ namespace Assessments.Frontend.Web.Controllers
                 Category = x.Category[..2] // ignore degrees, ie "VUº = VU"
             }).Select(x => new KeyValuePair<string, int>(x.Key.Category, x.Count()));
 
-            viewModel.Statistics.Categories = categories.ToList();
+            viewModel.Statistics.Categories = categories.ToDictionary(x => x.Key, x => x.Value);
+
 
             var criteriaCategories = new List<string> { "CR", "EN", "VU", "NT " }; // trua og nær trua 
 

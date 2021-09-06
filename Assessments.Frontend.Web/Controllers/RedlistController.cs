@@ -18,7 +18,9 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult Index() => View();
 
         [Route("2021")]
-        public async Task<IActionResult> Index2021(int? page, string name, bool export, string[] categories, string criteria, string[] assessmentAreas)
+        public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, bool VU, 
+        bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, bool criteriaA, bool criteriaB, 
+        bool criteriaC, bool criteriaD, bool fastland, bool svalbard)
         {
             // Pagination
             const int pageSize = 25;
@@ -32,14 +34,46 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
 
             // Filter
-            if (categories?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && categories.Contains(x.Category));
+            Dictionary<string, bool> categories = new Dictionary<string, bool>
+            {
+                { Constants.SpeciesCategories.Extinct.ShortHand, RE },
+                { Constants.SpeciesCategories.CriticallyEndangered.ShortHand, CR },
+                { Constants.SpeciesCategories.Endangered.ShortHand, EN },
+                { Constants.SpeciesCategories.Vulnerable.ShortHand, VU },
+                { Constants.SpeciesCategories.NearThreatened.ShortHand, NT },
+                { Constants.SpeciesCategories.DataDeficient.ShortHand, DD },
+                { Constants.SpeciesCategories.Viable.ShortHand, LC },
+                { Constants.SpeciesCategories.NotEvalueted.ShortHand, NE },
+                { Constants.SpeciesCategories.NotAppropriate.ShortHand, NA }
+            };
+            List<string> chosenCategories = Helpers.findSelectedCategories(categories, redlisted, endangered);
 
-            if (!string.IsNullOrEmpty(criteria))
-                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.ToLower().Equals(criteria.Trim().ToLower()));
+            Dictionary<char, bool> criterias = new Dictionary<char, bool>
+            {
+                { 'A', criteriaA },
+                { 'B', criteriaB },
+                { 'C', criteriaC },
+                { 'D', criteriaD },
+            };
 
-            if (assessmentAreas?.Any() == true)
-                query = query.Where(x => assessmentAreas.Contains(x.AssessmentArea));
+            char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
+
+            Dictionary<string, bool> assessmentAreas = new Dictionary<string, bool>
+            {
+                { "N", fastland },
+                { "S", svalbard }
+            };
+
+            List<string> chosenAreas = Helpers.findSelectedAreas(assessmentAreas);
+
+            if (chosenCategories?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Contains(x.Category));
+
+            if (chosenCriterias?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(chosenCriterias) != -1);
+
+            if (chosenAreas?.Any() == true)
+                query = query.Where(x => chosenAreas.Contains(x.AssessmentArea));
 
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
@@ -62,9 +96,23 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
                 Name = name,
-                Categories = categories,
-                CriteriaSummarized = criteria,
-                AssessmentAreas = assessmentAreas
+                RE = RE,
+                CR = CR,
+                EN = EN,
+                VU = VU,
+                NT = NT,
+                DD = DD,
+                LC = LC,
+                NE = NE,
+                NA = NA,
+                Redlisted = redlisted,
+                Endangered = endangered,
+                CriteriaA = criteriaA,
+                CriteriaB = criteriaB,
+                CriteriaC = criteriaC,
+                CriteriaD = criteriaD,
+                Fastland = fastland,
+                Svalbard = svalbard,
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);

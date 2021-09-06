@@ -65,15 +65,6 @@ function removeFilter(filter, url) {
     return url.replace(filter + "&", "");
 }
 
-function applyFilter(filter) {
-    if (!document.URL.includes(filter)) {
-        url = addFilter(filter, document.URL);
-    } else {
-        url = removeFilter(filter, document.URL);
-    }
-    window.location.replace(url);
-}
-
 function addSpecialFilter(appropriateFilters) {
     appropriateFilters.forEach(filter => {
         if (document.getElementById(filter).checked != true) {
@@ -107,39 +98,3 @@ function applySpecialFilter(filterType) {
     }
     window.location.replace(url);
 }
-
-function checkSpecialFilters(allFilters) {
-    shouldApplyRedlistFilter = true;
-    shouldApplyEndangeredFilter = true;
-    redlistFilter.forEach(filter => {
-        if (!allFilters.includes(filter)) {
-            shouldApplyRedlistFilter = false;
-        }
-    });
-    endangeredFilter.forEach(filter => {
-        if (!allFilters.includes(filter)) {
-            shouldApplyEndangeredFilter = false;
-        }
-    });
-    if (shouldApplyRedlistFilter) {
-        document.getElementById(chooseRedlisted).checked = true;
-    }
-    if (shouldApplyEndangeredFilter) {
-        document.getElementById(chooseEndangered).checked = true;
-    }
-}
-
-function initialChecks() {
-    filtersString = document.URL.split("?")[1];
-    if (filtersString) {
-        allFilters = filtersString.split("&");
-        allFilters.forEach(filter => {
-            if (!filter.includes("Name=")) {
-                document.getElementById(filter).checked = true;
-            }
-        });
-        checkSpecialFilters(allFilters);
-    }
-}
-
-initialChecks();

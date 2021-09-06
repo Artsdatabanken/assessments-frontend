@@ -81,7 +81,6 @@ td {
 .redlist li {
     width: 100%;
     list-style-type: none;
-    hover: 
 }
 
 .redlist li a {
@@ -124,16 +123,16 @@ li a span.element_icon {
 } 
 
 /* GRID VIEW */
-.redlist .listheader.grid {
+.viewselector.grid .listheader {
     display: none;
 }
 
-.redlist.grid li{
-    width:auto;
-    display:inline;
+.viewselector.grid li {
+    width: auto;
+    display: inline;
 }
 
-    .redlist.grid li a {
+    .viewselector.grid li a {
         display: inline-block;
         width: 150px;
         height: 180px;
@@ -146,7 +145,7 @@ li a span.element_icon {
         padding-top: 50px;
     }
 
-.redlist.grid span {
+.viewselector.grid span {
     display: none;
 }
 
@@ -177,7 +176,7 @@ li a span.element_icon {
 
 }
 
-.redlist.grid .element_name {
+.listwrapper.grid .element_name {
     display: block;
     width: 100%;
     background: white;
@@ -186,15 +185,15 @@ li a span.element_icon {
     z-index: 1;
 }
 
-.redlist.grid .element_category {
+.listwrapper.grid .element_category {
     display: block;
     position: absolute;
     bottom: 5px;
     right: 5px;
     z-index: 1;
 }
-.redlist.grid .element_area,
-.redlist.grid .element_area img {
+.viewselector.grid .element_area,
+.viewselector.grid .element_area img {
     display: inline;
     position: absolute;
     bottom: 2px;
@@ -203,7 +202,7 @@ li a span.element_icon {
 }
 
 
-.redlist.grid .element_category span{
+.viewselector.grid .element_category span {
     display: inline;
 }
 
@@ -319,4 +318,19 @@ li a span.element_icon {
 .statbox {
     display: block;
     padding: 10px;
+}
+
+.viewselector.stats .redlist,
+.viewselector .graphs {
+    display: none;
+}
+
+.viewselector.stats .graphs {
+    display: block;
+}
+
+
+
+.graphs .statelement {
+    padding: 2px;
 }

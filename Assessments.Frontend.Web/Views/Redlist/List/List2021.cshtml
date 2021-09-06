@@ -3,15 +3,11 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
 
-@{
-    Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
-
-}
 
 
 <partial name="/Views/Redlist/List/partials/_Breadcrumb.cshtml" />
 
-<div  class="content-placer bigmid">
+<div class="content-placer bigmid">
 
     <div class="">
         <partial name="/Views/Redlist/List/partials/_Header.cshtml" />
@@ -26,63 +22,15 @@
         <div class="controls">
             <button id="listview" class="material-icons" type="button">list</button>
             <button id="gridview" class="material-icons" type="button">grid_on </button>
-            <button id="stats" class="material-icons" type="button">bar_chart </button>
+            <button id="statsview" class="material-icons" type="button">bar_chart </button>
         </div>
-
-        <!-- Data from model -->
-
-
         <div class="listwrapper">
             <!-- FILTER FORM -->
             <partial name="/Views/Redlist/List/partials/_Filters.cshtml" />
-
-            <ul class="redlist" id="redlist">
-                <li class="listheader" id="listheader">
-                    <span>Artsnavn</span>
-                    <span>Kategori</span>
-                    <span>Artsgruppe</span>
-                    <span>Område</span>
-                    <span>Ikon</span>
-                </li>
-
-                @foreach (var item in Model.Redlist2021Results)
-                {
-
-                    <li class="list">
-                        <a asp-action="Detail" asp-route-id="@item.Id">
-                            @{
-                                // TODO: The number of fields contained in the box does not add up. Fix.
-                                // Makes it very strange and overflowy in grid view.
-                            }
-                            <span class="element_name">@item.ScientificName</span>
-                            <span class="element_category">
-                                <span class="@item.Category">@item.Category</span>
-                            </span>
-                            <span class="element_group">@item.ExpertCommittee</span>
-                            <span class="element_area">
-                                @item.AssessmentArea
-                                @if (@item.AssessmentArea == "N")
-                                {
-                                    <img src="~/images/norge.png" alt="Bilde av Norge" />
-                                }
-                                else if (@item.AssessmentArea == "S")
-                                {
-                                    <img src="~/images/svalbard.png" alt="Bilde av Svalbard" />
-                                }
-
-                            </span>
-
-                            <div class="element_icon">
-                                @if (speciesgroup[item.ExpertCommittee]["image"] != null)
-                                {
-                                    <img src="@speciesgroup[item.ExpertCommittee]["image"]" />
-                                }
-                            </div>
-
-                        </a>
-                    </li>
-                }
-            </ul>
+            <div id="viewselector" class="viewselector">
+                <partial name="/Views/Redlist/List/partials/_Graphs.cshtml" />
+                <partial name="/Views/Redlist/List/partials/_ListView.cshtml" />
+            </div>
         </div>
 
         <!-- Pageinator buttons -->
@@ -92,6 +40,10 @@
             UlElementClasses = new[] { "pagination" },
             LiElementClasses = new[] { "page-item" }
         })
-    </div>
 
+
+
+
+
+    </div>
 </div>

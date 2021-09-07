@@ -314,10 +314,12 @@ li a span.element_icon {
     margin-bottom:0;
     margin-top:auto;
     position:absolute;
+    background:grey;
 }
 .statbox {
     display: block;
     padding: 10px;
+    background:grey;
 }
 
 .viewselector.stats .redlist,
@@ -328,8 +330,6 @@ li a span.element_icon {
 .viewselector.stats .graphs {
     display: block;
 }
-
-
 
 .graphs .statelement {
     padding: 2px;

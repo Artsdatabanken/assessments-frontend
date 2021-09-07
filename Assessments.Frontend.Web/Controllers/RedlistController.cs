@@ -20,7 +20,7 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("2021")]
         public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, bool VU, 
         bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, bool criteriaA, bool criteriaB, 
-        bool criteriaC, bool criteriaD, bool fastland, bool svalbard)
+        bool criteriaC, bool criteriaD, bool Norge, bool svalbard, bool presumedExtinct)
         {
             // Pagination
             const int pageSize = 25;
@@ -60,7 +60,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             Dictionary<string, bool> assessmentAreas = new Dictionary<string, bool>
             {
-                { "N", fastland },
+                { "N", Norge },
                 { "S", svalbard }
             };
 
@@ -75,9 +75,11 @@ namespace Assessments.Frontend.Web.Controllers
             if (chosenAreas?.Any() == true)
                 query = query.Where(x => chosenAreas.Contains(x.AssessmentArea));
 
+            if (presumedExtinct)
+                query = query.Where(x => x.PresumedExtinct);
+
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
-
 
             var json_categories = await System.IO.File.ReadAllTextAsync("wwwroot/json/categories.json");
             ViewBag.categories = JObject.Parse(json_categories);
@@ -111,8 +113,9 @@ namespace Assessments.Frontend.Web.Controllers
                 CriteriaB = criteriaB,
                 CriteriaC = criteriaC,
                 CriteriaD = criteriaD,
-                Fastland = fastland,
+                Norge = Norge,
                 Svalbard = svalbard,
+                PresumedExtinct = presumedExtinct,
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);

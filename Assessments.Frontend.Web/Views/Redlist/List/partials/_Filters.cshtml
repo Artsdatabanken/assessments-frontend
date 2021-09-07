@@ -14,9 +14,7 @@
             <button class="btn" type="submit" name="Export" value="true">Eksport</button>
         </div>
         <div>
-            <button data-bind="click: resetFilters, disable: filterIsEmpty, style: { backgroundColor: filterIsEmpty() ? 'lightgray' : 'lightcyan' }">@SearchAndFilter.ResetAllFilters</button>
-            
-            
+            <input type="reset" value="@SearchAndFilter.ResetAllFilters" />
             <div class="filter_groups">
                 <h3>Filter</h3>
 
@@ -24,13 +22,12 @@
                     <h4>
                         <span>@SearchAndFilter.SearchChooseArea</span>
                     </h4>
-
                     <div style="cursor: pointer" data-bind="visible: svalbardVisible">
                         <ul style="margin-top: 10px; padding-left: 0">
                             <li class="checkbox" style="margin-top: 0;">
                                 <label class="checkbox"
                                        style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                    <input type="checkbox" asp-for="Fastland" onclick="this.form.submit();" />Fastland
+                                    <input type="checkbox" asp-for="Norge" onclick="this.form.submit();" />Norge
                                 </label>
                             </li>
                             <li class="checkbox" style="margin-top: 0;">
@@ -43,13 +40,10 @@
                     </div>
                 </div>
 
-
-
                 <div class="filter_group">
                     <h4>
                         <span>@SearchAndFilter.SearchChooseCategory</span>
                     </h4>
-
                     <div style="cursor: pointer" data-bind="visible: categoryVisible">
                         <ul style="margin-top: 10px; padding-left: 0">
                             <li class="checkbox" style="margin-top: 0;">
@@ -140,11 +134,23 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-                <div  style="cursor: pointer; background-color: powderblue; margin-top: 10px;">
-                    <label class="checkbox" style="margin-top: 5px; margin-left: 45px; cursor: pointer"><input type="checkbox" /> @SearchAndFilter.SearchChangedCategory</label>
+
+                <div class="filter_group">
+                    <h4>
+                        <span>Trolig utdødd</span>
+                    </h4>
+                    <div style="cursor: pointer">
+                        <ul style="margin-top: 10px; padding-left: 0">
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="PresumedExtinct" onclick="this.form.submit();" />Trolig utdødd
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
     </form>
 </div>
         

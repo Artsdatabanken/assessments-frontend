@@ -185,12 +185,21 @@ namespace Assessments.Frontend.Web.Controllers
 
             viewModel.Statistics.Categories = categories.ToDictionary(x => x.Key, x => x.Value);
 
-            // HABITAT
-            var habitat = data.Select(x => x.MainHabitat).SelectMany(x => x).Distinct().ToList(); // Hent navn på alle habitat
-            for (int i = 0; i < habitat.Count; ++i)
+            // Species main HABITAT
+
+            // Fetch all habitat lists, flatten the lists and make it distinct to obtain all currently possible habitat names.
+            var habitatNames = data.Select(x => x.MainHabitat).SelectMany(x => x).Distinct().ToList(); 
+
+            // For each of the habitatnames - count each occurence in the main dataset
+            var habitatStats = habitatNames.Select(name => new KeyValuePair<string, int>(name, data.Count(x => x.MainHabitat.Contains(name))))
+                .ToDictionary(x => x.Key, x => x.Value);
+            viewModel.Statistics.Habitat = habitatStats;
+            /*
+            for (int i = 0; i < habitatNames.Count; ++i)
             {
-                Console.WriteLine(habitat[i]);
-            }
+                Console.WriteLine(habitatNames[i] + ": " + habitatStats[habitatNames[i]].ToString());
+            }*/
+
 
 
             // CRITERIA

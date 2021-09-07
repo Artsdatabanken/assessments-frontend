@@ -3,14 +3,17 @@
 @{
 
     // Calculating max and total values for use in graph drawing
-    int category_totalval = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category 
+    int category_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category 
     int category_max = Model.Statistics.Categories.Values.Max();
-    int criteria_totalval = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a criteria 
+    int criteria_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a criteria 
     int criteria_max = Model.Statistics.Criteria.Values.Max();
 
     // Obtaining the proper order and amount of items in case there are things with 0 or null values
-    Dictionary<string, Dictionary<string, string>> category = ViewBag.categories.ToObject<Dictionary<string, Dictionary<string, string>>>();
-    string[] criteria = { "A", "B", "C", "D", "E" };
+    Dictionary<string, object> category = ViewBag.categories.ToObject<Dictionary<string, object>>();
+
+    Dictionary<string, object> criteria = ViewBag.kriterier.ToObject<Dictionary<string, object>>();
+
+
 
 }
 
@@ -21,7 +24,8 @@
         {
             return "0";
         }
-        string calculated = (now / max * 100).ToString();
+        string calculated = (now / max * 100).ToString("0.00");
+        
         calculated = calculated.Replace(",", ".");
         return calculated + "%";
     }
@@ -44,7 +48,7 @@
 <div class="page_section graphs">
     <h2>Statistikk</h2>
 
-    Totalt antall vurderinger i utvalget @criteria_totalval
+    Totalt antall vurderinger i utvalget @criteria_total
 
     <h3>Antall vurderinger per kategori</h3>
 
@@ -54,7 +58,7 @@
             <div class="statelement">
                 <div class="heightbar_blank">
                     <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key,@Model.Statistics.Categories))">
-
+                        <span class="percent">@percentage(@category_total, @getNumber(@key, @Model.Statistics.Categories))</span>
                     </div>
                 </div>
                 <span class="statbox @key">
@@ -72,12 +76,12 @@
    
 
     <div class="graph">
-        @foreach (string key in criteria)
+        @foreach (string key in criteria.Keys)
         {
             <div class="statelement">
                 <div class="heightbar_blank">
                     <div class="heightbar_indicator @key" style="height:@percentage(@criteria_max, @getNumber(@key,@Model.Statistics.Criteria))">
-
+                        <span class="percent">@percentage(@criteria_total, @getNumber(@key, @Model.Statistics.Criteria))</span>
                     </div>
                 </div>
                 <span class="statbox @key">

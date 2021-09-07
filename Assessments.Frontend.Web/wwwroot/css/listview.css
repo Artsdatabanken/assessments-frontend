@@ -58,10 +58,6 @@ td {
     padding-bottom: 20px;
 }
 
-.redlist {
-    width: 85%;
-}
-
 .search-and-filter {
     box-sizing: border-box;
     margin-right: 15px;
@@ -130,7 +126,11 @@ td {
 
 li a span.element_icon {
     padding: 0;
-} 
+}
+
+.viewselector{
+    width:100%;
+}
 
 /* GRID VIEW */
 .viewselector.grid .listheader {
@@ -383,3 +383,12 @@ li a span.element_icon {
     background: grey;
 }
 
+.percent{
+    position:absolute;
+    top:-15px;
+    color:black;
+    left:0px;
+    font-size:8pt;
+    text-align:center;
+    width:100%;
+}

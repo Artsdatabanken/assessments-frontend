@@ -7,6 +7,7 @@ using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.Models.Species;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
+using System;
 // ReSharper disable InconsistentNaming
 
 namespace Assessments.Frontend.Web.Controllers
@@ -77,6 +78,9 @@ namespace Assessments.Frontend.Web.Controllers
 
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
+
+            var json_kriterier = await System.IO.File.ReadAllTextAsync("wwwroot/json/kriterier.json");
+            ViewBag.kriterier = JObject.Parse(json_kriterier);
 
 
             var json_categories = await System.IO.File.ReadAllTextAsync("wwwroot/json/categories.json");
@@ -173,6 +177,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
         {
+            // CATEGORY
             var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new
             {
                 Category = x.Category[..2] // ignore degrees, ie "VUº = VU"
@@ -180,7 +185,15 @@ namespace Assessments.Frontend.Web.Controllers
 
             viewModel.Statistics.Categories = categories.ToDictionary(x => x.Key, x => x.Value);
 
+            // HABITAT
+            var habitat = data.Select(x => x.MainHabitat).SelectMany(x => x).Distinct().ToList(); // Hent navn på alle habitat
+            for (int i = 0; i < habitat.Count; ++i)
+            {
+                Console.WriteLine(habitat[i]);
+            }
 
+
+            // CRITERIA
             var criteriaCategories = new List<string> { "CR", "EN", "VU", "NT " }; // trua og nær trua 
 
             var criteriaStrings = data.Where(x => x.Category.Length >= 2 && criteriaCategories.Contains(x.Category[..2]))

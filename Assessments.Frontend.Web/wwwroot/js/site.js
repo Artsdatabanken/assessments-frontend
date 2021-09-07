@@ -15,7 +15,6 @@ const filters = {
 
 const chooseEndangered = "ChooseEndangered";
 const chooseRedlisted = "ChooseRedlisted";
-
 const endangeredFilter = [filters.CR, filters.EN, filters.VU];
 const redlistFilter = [filters.RE, filters.CR, filters.EN, filters.VU, filters.NT, filters.DD];
 
@@ -25,11 +24,17 @@ document.addEventListener('click', function (e) {
     if (document.getElementById('listview')) {
         if (e.target.id == "listview") {
             console.log("set list")
-            document.getElementById('listheader').classList.remove("grid");
-            document.getElementById('redlist').classList.remove("grid");
-           
+            document.getElementById('viewselector').classList.remove("grid");
+            document.getElementById('viewselector').classList.remove("stats");
+        }
+    }
 
-            
+    // Check if the item exists
+    if (document.getElementById('statsview')) {
+        if (e.target.id == "statsview") {
+            console.log("set stats")
+            document.getElementById('viewselector').classList.remove("grid");
+            document.getElementById('viewselector').classList.add("stats");
         }
     }
 
@@ -37,8 +42,8 @@ document.addEventListener('click', function (e) {
     if (document.getElementById('gridview')) {
         if (e.target.id == "gridview") {
             console.log("set grid")
-            document.getElementById('listheader').classList.add("grid");
-            document.getElementById('redlist').classList.add("grid");
+            document.getElementById('viewselector').classList.add("grid");
+            document.getElementById('viewselector').classList.remove("stats");
         }
     }
 })

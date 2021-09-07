@@ -19,51 +19,6 @@
     "tagline": "Trolig utdødd",
     "description": "er ikke en kategori, men en merkelapp som settes på arter som er vurdert som <i>kritisk truet</i> CR og som trolig er utdødd. Dette gjøres når det med dagens kunnskap ikke kan fastslås med sikkerhet at arten er regionalt utødd."
   },
-  "RE": {
-    "tagline": "Regionalt utdødd",
-    "description": "– brukes når det er svært liten tvil om at arten er dødd ut/har emigrert fra vurderingsområdet. Bruk av denne kategorien betinger at gjentatte, systematiske undersøkelser i tidligere kjente og forventede habitat ikke har resultert i funn av arten.",
-    "presentationstring": "regionalt utdødd "
-  },
-  "CR": {
-    "tagline": "Kritisk truet",
-    "description": "– brukes når det er ekstremt høy risiko for utdøing, altså når beste tilgjengelige kunnskap tilsier at arten møter et av kriteriene A-E for CR.",
-    "presentationstring": "kritisk truet "
-  },
-  "EN": {
-    "tagline": "Sterkt truet",
-    "description": "– brukes når det er svært høy risiko for utdøing, altså når beste tilgjengelige kunnskap tilsier at arten møter et av kriteriene A-E for EN.",
-    "presentationstring": "sterkt truet "
-  },
-  "VU": {
-    "tagline": "Sårbar",
-    "description": "- brukes når det er høy risiko for utdøing, altså når beste tilgjengelige kunnskap tilsier at arten møter et av kriteriene A-E for VU.",
-    "presentationstring": "sårbar "
-  },
-  "NT": {
-    "tagline": "Nær truet",
-    "description": " – brukes når en art er vurdert å ligge tett opp til å kvalifisere til CR, EN eller VU, eller trolig vil det i nær framtid. IUCN har ingen faste grenseverdier for NT, men vi bruker det samme kriteriesettet som ble brukt i Rødlista 2006, 2010 og 2015. Det kan være aktuelt å bruke NT for arter som er avhengige av forvaltningstiltak.",
-    "presentationstring": "nær truet "
-  },
-  "DD": {
-    "tagline": "Datamangel",
-    "description": "– brukes der usikkerhet om artens korrekte kategoriplassering, basert på tilgjengelig kunnskap om artens utbredelse og/eller populasjonsstatus, er svært stor og inkluderer hele spekteret av mulige kategorier fra og med CR til og med LC.",
-    "presentationstring": "datamangel "
-  },
-  "NE": {
-    "tagline": "Ikke vurdert",
-    "description": "– betyr at det ikke er gjort noen vurdering mot IUCN-kriteriene. Dette kan for eksempel skyldes dårlig utredet taksonomi, eller at man velger å ikke gjøre en vurdering av hele artsgruppen arten tilhører (men også i enkelte tilfeller for enkeltarter) på grunn av for dårlig kunnskapsgrunnlag. I utgangspunktet gjøres slike vurderinger på et mer overordnet nivå før selve utvalget av arter som skal rødlistevurderes fastsettes.",
-    "presentationstring": "ikke vurdert "
-  },
-  "NA": {
-    "tagline": "Ikke egnet",
-    "description": "– brukes på arter som ifølge IUCN sitt regelverk og de nasjonale avgrensningene ikke skal vurderes for Rødlista.",
-    "presentationstring": "ikke egnet "
-  },
-  "LC": {
-    "tagline": "Livskraftig",
-    "description": "– brukes på arter som innfrir de nasjonale kravene for å bli vurdert, men som ikke oppfyller noen av kriteriene A-E for kategoriene CR, EN, VU, NT, eller kravene for å bli satt i kategoriene RE eller DD.",
-    "presentationstring": "livskraftig "
-  },
   "vurdert_N": {
     "tagline": "Vurdert for Norge",
     "description": "Vurderingen gjelder for Norge, dvs. Fastlands-Norge og nærliggende øyer, norsk territorialfarvann og norsk økonomisk sone, samt fiskevernsonen rundt Svalbard og fiskerisonen rundt Jan Mayen."

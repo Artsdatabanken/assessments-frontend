@@ -5,19 +5,18 @@
 *@
 
 @{
-    SpeciesAssessment2021 assessment = Model;
     string popularName = "";
-    if (assessment.PopularName != string.Empty && !string.IsNullOrEmpty(assessment.PopularName))
-        popularName = char.ToUpper(assessment.PopularName[0]) + assessment.PopularName.Substring(1);    
+    if (Model.PopularName != string.Empty && !string.IsNullOrEmpty(Model.PopularName))
+        popularName = char.ToUpper(Model.PopularName[0]) + Model.PopularName.Substring(1);    
 }
 
 <span class="nameBlock">
     @if (!string.IsNullOrEmpty(Model.PopularName))
     {
-        <span><b> @popularName </b><i><b>@assessment.ScientificName</b></i> @assessment.ScientificNameAuthor</span>
+        <span><b> @popularName </b><i><b>@Model.ScientificName</b></i> @Model.ScientificNameAuthor</span>
     }
     else
     {
-        <span><i><b>@assessment.ScientificName</b></i> @assessment.ScientificNameAuthor</span>
+        <span><i><b>@Model.ScientificName</b></i> @Model.ScientificNameAuthor</span>
     }
 </span>

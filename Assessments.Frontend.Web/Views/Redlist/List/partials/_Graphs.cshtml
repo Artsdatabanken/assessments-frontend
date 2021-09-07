@@ -1,0 +1,65 @@
+@model RL2021ViewModel
+
+@{
+    int maxval = 0;
+    int totalval = 0;
+    @foreach (var (key, value) in Model.Statistics.Categories)
+    {
+        totalval += value;
+        if (value > maxval)
+        {
+            maxval = value;
+        }
+    }
+
+    Dictionary<string, Dictionary<string, string>> category = ViewBag.categories.ToObject<Dictionary<string, Dictionary<string, string>>>();
+}
+
+@functions{
+    string percentage(float max, float now)
+    {
+        string calculated = (now / max * 100).ToString();
+        calculated = calculated.Replace(",", ".");
+        return calculated + "%";
+    }
+}
+
+@functions{
+    int getNumber(string dictkey)
+    {
+        if (@Model.Statistics.Categories.ContainsKey(dictkey))
+        {
+            return @Model.Statistics.Categories[dictkey];
+        }
+       
+        return 0;
+        
+
+    }
+}
+
+<div class="page_section graphs" >
+    <h2>Totalt antall vurderinger </h2>
+    @totalval
+    <h2>Antall vurderinger per kategori</h2>
+
+
+
+
+
+    @foreach (var key in category.Keys)
+    {
+        <div class="statelement">
+            <div class="heightbar_blank">
+                <div class="heightbar_indicator @key" style="height:@percentage(@maxval, @getNumber(@key))">
+
+                </div>
+            </div>
+            <span class="statbox @key">
+                @key
+            </span>
+            @getNumber(@key)
+        </div>
+    }
+
+</div>

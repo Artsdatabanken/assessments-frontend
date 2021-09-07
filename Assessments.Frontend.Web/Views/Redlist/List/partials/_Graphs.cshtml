@@ -3,8 +3,9 @@
 @{
 
     // Calculating max and total values for use in graph drawing
-    int totalval = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category 
+    int category_totalval = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category 
     int category_max = Model.Statistics.Categories.Values.Max();
+    int criteria_totalval = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a criteria 
     int criteria_max = Model.Statistics.Criteria.Values.Max();
 
     // Obtaining the proper order and amount of items in case there are things with 0 or null values
@@ -16,6 +17,10 @@
 @functions{
     string percentage(float max, float now)
     {
+        if(max == 0)
+        {
+            return "0";
+        }
         string calculated = (now / max * 100).ToString();
         calculated = calculated.Replace(",", ".");
         return calculated + "%";
@@ -38,46 +43,50 @@
 
 <div class="page_section graphs">
     <h2>Statistikk</h2>
-    Totalt antall vurderinger i utvalget @totalval
 
-    <h2>Antall vurderinger per kategori</h2>
+    Totalt antall vurderinger i utvalget @criteria_totalval
 
-    @foreach (var key in category.Keys)
-    {
-        <div class="statelement">
-            <div class="heightbar_blank">
-                <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key,@Model.Statistics.Categories))">
+    <h3>Antall vurderinger per kategori</h3>
 
+    <div class="graph">
+        @foreach (var key in category.Keys)
+        {
+            <div class="statelement">
+                <div class="heightbar_blank">
+                    <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key,@Model.Statistics.Categories))">
+
+                    </div>
                 </div>
+                <span class="statbox @key">
+                    @key
+                </span>
+                @getNumber(@key, @Model.Statistics.Categories)
             </div>
-            <span class="statbox @key">
-                @key
-            </span>
-            @getNumber(@key, @Model.Statistics.Categories)
-        </div>
-    }
+        }
+    </div>
 
 
 
-    <h2>Antall vurderinger per Kriterie</h2>
+    <h3>Antall vurderinger per Kriterie</h3>
 
+   
 
+    <div class="graph">
+        @foreach (string key in criteria)
+        {
+            <div class="statelement">
+                <div class="heightbar_blank">
+                    <div class="heightbar_indicator @key" style="height:@percentage(@criteria_max, @getNumber(@key,@Model.Statistics.Criteria))">
 
-
-    @foreach (string key in criteria)
-    {
-        <div class="statelement">
-            <div class="heightbar_blank">
-                <div class="heightbar_indicator @key" style="height:@percentage(@criteria_max, @getNumber(@key,@Model.Statistics.Criteria))">
-
+                    </div>
                 </div>
+                <span class="statbox @key">
+                    @key
+                </span>
+                @getNumber(@key, @Model.Statistics.Criteria)
             </div>
-            <span class="statbox @key">
-                @key
-            </span>
-            @getNumber(@key, @Model.Statistics.Criteria)
-        </div>
-    }
+        }
+    </div>
 
 
 </div>

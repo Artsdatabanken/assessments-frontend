@@ -63,10 +63,8 @@ td {
 }
 
 .search-and-filter {
-    flex: row;
     box-sizing: border-box;
     margin-right: 15px;
-    padding: 20px;
     max-width: 220px;
     border-right: 1px solid #dadada;
 }
@@ -109,8 +107,17 @@ td {
     font-weight: bold;
 }
 
-.redlist li span {
-    padding: 10px;
+
+.redlist span {
+    padding-left: 2px;
+}
+
+.redlist .category_tag {
+        padding: 10px;
+    }
+
+.redlist li {
+    padding-left:10px;
 }
 
 .redlist li span:last-child {
@@ -138,19 +145,15 @@ li a span.element_icon {
     .viewselector.grid li a {
         display: inline-block;
         width: 150px;
-        height: 180px;
+        height: 230px;
         background: #fbfbfb;
         margin-bottom: 15px;
         margin-left: 5px;
         vertical-align: top;
         border: 1px solid #d4d4d4;
         text-align: center;
-        padding-top: 50px;
     }
 
-.viewselector.grid span {
-    display: none;
-}
 
 .element_icon {
     width: 50px;
@@ -207,6 +210,10 @@ li a span.element_icon {
 
 .viewselector.grid .element_category span {
     display: inline;
+    position: absolute;
+    bottom: 5px;
+    right:5px;
+    z-index: 1;
 }
 
 
@@ -290,67 +297,18 @@ li a span.element_icon {
     }
 }
 
-@media only screen and (max-width: 550px) {
-    body {
-        position: absolute;
-    }
 
-    
+/* FILTER */
 
-    div.breadcrumbs, .page-header, .ingress, .bigmid h3, .controls {
-        padding: 0 10px;
-    }
-}
-
-.statelement{
-    display:inline-block;
-    padding:10px;
-}
-
-.heightbar_blank,
-.heightbar_indicator{
-    height:200px;
-    display:block;
-    margin-bottom:2px;
-    position:relative;
-    width:100%;
-}
-
-.heightbar_indicator{
-    bottom:0;
-    margin-bottom:0;
-    margin-top:auto;
-    position:absolute;
-    background:grey;
-}
-.statbox {
-    display: block;
-    padding: 10px;
-    background:grey;
-}
-
-.viewselector.stats .redlist,
-.viewselector .graphs {
-    display: none;
-}
-
-.viewselector.stats .graphs {
-    display: block;
-}
-
-.graphs .statelement {
-    padding: 2px;
-}
-
-.filter_group{
+.filter_group {
     margin: 2px;
     margin-bottom: 10px;
 }
 
-.filter_group .h4 {
-    padding: 5px;
-    font-weight: bold;
-}
+    .filter_group .h4 {
+        padding: 5px;
+        font-weight: bold;
+    }
 
 @media only screen and (max-width: 750px) {
     .filter_groups {
@@ -372,5 +330,56 @@ li a span.element_icon {
         flex:1;
         justify-content:space-evenly;
     }
+}
+
+/* STATISTICS AND GRAPHS */
+
+.viewselector.stats .redlist,
+.viewselector .graphs {
+    display: none;
+}
+
+.viewselector.stats .graphs {
+    display: block;
+}
+
+.graphs .statelement {
+    padding: 2px;
+}
+
+
+.graph{
+    width:100%;
+    display:flex;
+}
+
+.statelement {
+    display: inline-block;
+    padding: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+.heightbar_blank,
+.heightbar_indicator {
+    height: 200px;
+    display: block;
+    margin-bottom: 2px;
+    position: relative;
+    width: 100%;
+}
+
+.heightbar_indicator {
+    bottom: 0;
+    margin-bottom: 0;
+    margin-top: auto;
+    position: absolute;
+    background: grey;
+}
+
+.statbox {
+    display: block;
+    padding: 10px;
+    background: grey;
 }
 

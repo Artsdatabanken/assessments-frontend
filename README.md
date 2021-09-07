@@ -26,6 +26,7 @@ Alle sites er beskyttet og krever VPN (man trenger ikke være koblet på for å 
 - Krever muligens noen installering før kjøring, trenger støtte for ASP.NET Core 5.0 
 - Åpne assesment-frontend.sln og trykk kjør
 - Krever vpn.
+- Datafiler hentes fra Azure storage og man MÅ ha en nøkkel for tilgang ("ConnectionStrings:AzureBlobStorage"), den må man få fra en av utviklerene på prosjektet (vi trenger helst annen løsning på sikt - muligens Azure key vault?) - se https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets
 
 Nyttig lenke om man er ny til teknologien: https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio
 

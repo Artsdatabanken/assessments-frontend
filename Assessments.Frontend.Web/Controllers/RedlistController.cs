@@ -7,6 +7,7 @@ using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.Models.Species;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
+using System;
 // ReSharper disable InconsistentNaming
 
 namespace Assessments.Frontend.Web.Controllers
@@ -78,6 +79,11 @@ namespace Assessments.Frontend.Web.Controllers
             var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
             ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
 
+            var json_kriterier = await System.IO.File.ReadAllTextAsync("wwwroot/json/kriterier.json");
+            ViewBag.kriterier = JObject.Parse(json_kriterier);
+
+            var json_habitat = await System.IO.File.ReadAllTextAsync("wwwroot/json/habitat.json");
+            ViewBag.habitat = JObject.Parse(json_habitat);
 
             var json_categories = await System.IO.File.ReadAllTextAsync("wwwroot/json/categories.json");
             ViewBag.categories = JObject.Parse(json_categories);
@@ -173,6 +179,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
         {
+            // CATEGORY
             var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new
             {
                 Category = x.Category[..2] // ignore degrees, ie "VUº = VU"
@@ -180,7 +187,24 @@ namespace Assessments.Frontend.Web.Controllers
 
             viewModel.Statistics.Categories = categories.ToDictionary(x => x.Key, x => x.Value);
 
+            // Species main HABITAT
 
+            // Fetch all habitat lists, flatten the lists and make it distinct to obtain all currently possible habitat names.
+            var habitatNames = data.Select(x => x.MainHabitat).SelectMany(x => x).Distinct().ToList(); 
+
+            // For each of the habitatnames - count each occurence in the main dataset
+            var habitatStats = habitatNames.Select(name => new KeyValuePair<string, int>(name, data.Count(x => x.MainHabitat.Contains(name))))
+                .ToDictionary(x => x.Key, x => x.Value);
+            viewModel.Statistics.Habitat = habitatStats;
+            /*
+            for (int i = 0; i < habitatNames.Count; ++i)
+            {
+                Console.WriteLine(habitatNames[i] + ": " + habitatStats[habitatNames[i]].ToString());
+            }*/
+
+
+
+            // CRITERIA
             var criteriaCategories = new List<string> { "CR", "EN", "VU", "NT " }; // trua og nær trua 
 
             var criteriaStrings = data.Where(x => x.Category.Length >= 2 && criteriaCategories.Contains(x.Category[..2]))

@@ -1,10 +1,9 @@
 @model RL2021ViewModel
 
+
 @{
 
-
-
-    // Calculating max and total values for use in graph drawing
+     // Calculating max and total values for use in graph drawing
     int category_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category
     int category_max = Model.Statistics.Categories.Values.Max();
     int criteria_total = Model.Statistics.Criteria.Sum(x => x.Value); // #of assesments with a criteria
@@ -51,7 +50,7 @@
         string calculated = (verdi / utvalg).ToString("0.00");
 
         calculated = calculated.Replace(",", ".");
-        return calculated ;
+        return calculated;
     }
 }
 
@@ -70,7 +69,7 @@
 }
 
 <div class="page_section graphs">
-    <h2>Statistikk</h2>
+    <h2>Statistikk </h2>
 
     Totalt antall vurderinger i utvalget - dette er data vi mangler ennå.
 

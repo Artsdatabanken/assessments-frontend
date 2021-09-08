@@ -84,8 +84,9 @@ namespace Assessments.Frontend.Web.Infrastructure
             async Task<IQueryable<SpeciesAssessment2021>> Get()
             {
                 var data = await GetData<Rodliste2019>(Constants.Filename.Species2021Temp);
-            
-                return _mapper.Map<IEnumerable<SpeciesAssessment2021>>(data).AsQueryable();
+                // todo: remove moser svalbard from source file
+                var filteredData = data.Where(x => x.Ekspertgruppe != "Moser (Svalbard)");
+                return _mapper.Map<IEnumerable<SpeciesAssessment2021>>(filteredData).AsQueryable(); 
             }
 
             return _appCache.GetOrAddAsync($"{nameof(GetMappedSpeciesAssessments)}", Get);

@@ -82,6 +82,8 @@ namespace Assessments.Frontend.Web.Controllers
             var json_kriterier = await System.IO.File.ReadAllTextAsync("wwwroot/json/kriterier.json");
             ViewBag.kriterier = JObject.Parse(json_kriterier);
 
+            var json_habitat = await System.IO.File.ReadAllTextAsync("wwwroot/json/habitat.json");
+            ViewBag.habitat = JObject.Parse(json_habitat);
 
             var json_categories = await System.IO.File.ReadAllTextAsync("wwwroot/json/categories.json");
             ViewBag.categories = JObject.Parse(json_categories);

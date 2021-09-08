@@ -7,11 +7,15 @@
     int category_max = Model.Statistics.Categories.Values.Max();
     int criteria_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a criteria 
     int criteria_max = Model.Statistics.Criteria.Values.Max();
+    int habitat_total = Model.Statistics.Habitat.Sum(x => x.Value); // #of assesments with a criteria 
+    int habitat_max = Model.Statistics.Habitat.Values.Max();
 
     // Obtaining the proper order and amount of items in case there are things with 0 or null values
     Dictionary<string, object> category = ViewBag.categories.ToObject<Dictionary<string, object>>();
 
     Dictionary<string, object> criteria = ViewBag.kriterier.ToObject<Dictionary<string, object>>();
+
+    Dictionary<string, Dictionary<string, object>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, object>>>();
 
 
 
@@ -58,13 +62,13 @@
             <div class="statelement">
                 <div class="heightbar_blank">
                     <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key,@Model.Statistics.Categories))">
-                        <span class="percent">@percentage(@category_total, @getNumber(@key, @Model.Statistics.Categories))</span>
+                        <span class="percent">@getNumber(@key, @Model.Statistics.Categories)</span>
                     </div>
                 </div>
                 <span class="statbox @key">
                     @key
                 </span>
-                @getNumber(@key, @Model.Statistics.Categories)
+                
             </div>
         }
     </div>
@@ -73,7 +77,7 @@
 
     <h3>Antall vurderinger per Kriterie</h3>
 
-   
+
 
     <div class="graph">
         @foreach (string key in criteria.Keys)
@@ -81,16 +85,39 @@
             <div class="statelement">
                 <div class="heightbar_blank">
                     <div class="heightbar_indicator @key" style="height:@percentage(@criteria_max, @getNumber(@key,@Model.Statistics.Criteria))">
-                        <span class="percent">@percentage(@criteria_total, @getNumber(@key, @Model.Statistics.Criteria))</span>
+                        <span class="percent">@getNumber(@key, @Model.Statistics.Criteria)</span>
                     </div>
                 </div>
                 <span class="statbox @key">
                     @key
                 </span>
-                @getNumber(@key, @Model.Statistics.Criteria)
+                
             </div>
         }
     </div>
 
 
+    <h3>Antall vurderinger per Habitat</h3>
+
+
+
+    <div class="graph">
+        @foreach (string key in habitat.Keys)
+        {
+        <div class="statelement" style="max-width:60px;">
+            <div class="heightbar_blank">
+                <div class="heightbar_indicator @key" style="height:@percentage(@habitat_max, @getNumber(@key,@Model.Statistics.Habitat))">
+                    <span class="percent">@getNumber(@key, @Model.Statistics.Habitat)</span>
+                </div>
+            </div>
+
+            
+            <span class="downboxcontainer statbox @key">
+                <span  class="downtext">@habitat[@key]["name"]</span> 
+            </span>
+        </div>
+        }
+    </div>
+
+    <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
 </div>

@@ -202,13 +202,20 @@ namespace Assessments.Frontend.Web.Controllers
                 Console.WriteLine(habitatNames[i] + ": " + habitatStats[habitatNames[i]].ToString());
             }*/
 
+            // REGION
+            var regionNames = data.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().ToList();
+            var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data.Select(x => x.RegionOccurrences).SelectMany(x => x).Where(x => x.Fylke == name && (x.State ==0 || x.State==1)).Count()))
+                .ToDictionary(x => x.Key, x => x.Value);
+            viewModel.Statistics.Region = regionStats;
+
+            viewModel.Statistics.RegionNames = regionNames;
+
+
 
 
             // CRITERIA
-            var criteriaCategories = new List<string> { "CR", "EN", "VU", "NT " }; // trua og nær trua 
 
-            var criteriaStrings = data.Where(x => x.Category.Length >= 2 && criteriaCategories.Contains(x.Category[..2]))
-                .Select(x => x.CriteriaSummarized);
+            var criteriaStrings = data.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized)).Select(x => x.CriteriaSummarized);
 
             var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
 

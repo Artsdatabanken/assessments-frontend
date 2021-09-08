@@ -248,6 +248,9 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string ÅrsakTilNedgraderingAvKategori { get; set; } // ÅrsakTilNedgraderingAvKategori
 
+        /// <summary>
+        /// Group the species belongs to, in most cases a taxonomic group
+        /// </summary>
         public string SpeciesGroup { get; set; }
     }
 }

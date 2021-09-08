@@ -7,7 +7,7 @@
     // Calculating max and total values for use in graph drawing
     int category_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category
     int category_max = Model.Statistics.Categories.Values.Max();
-    int criteria_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a criteria
+    int criteria_total = Model.Statistics.Criteria.Sum(x => x.Value); // #of assesments with a criteria
     int criteria_max = Model.Statistics.Criteria.Values.Max();
     int habitat_total = Model.Statistics.Habitat.Sum(x => x.Value); // #of assesments with a criteria
     int habitat_max = Model.Statistics.Habitat.Values.Max();

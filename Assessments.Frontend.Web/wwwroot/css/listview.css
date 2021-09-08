@@ -351,6 +351,8 @@ li a span.element_icon {
 .graph{
     width:100%;
     display:flex;
+    margin-top:50px;
+    margin-bottom:50px;
 }
 
 .statelement {

@@ -1,0 +1,113 @@
+﻿@model SpeciesAssessment2021
+@*
+
+*@
+
+@{
+    string a = "";
+    string b = "";
+    string c = "";
+    string d = "";
+    string e = "";
+
+
+
+    void placeCriteria(string criteria) {
+
+        if (criteria.Contains("A"))
+        {
+            a = criteria;
+        }
+        else if (criteria.Contains("B"))
+        {
+            b = criteria;
+        }
+        else if (criteria.Contains("C"))
+        {
+            c = criteria;
+        }
+        else if (criteria.Contains("D"))
+        {
+            d = criteria;
+        }
+        else if (criteria.Contains("E"))
+        {
+            e = criteria;
+        }
+
+    }
+
+
+    if (@Model.CriteriaSummarized.Contains(";"))
+    {
+        // SPLIT THE LIST AND LOOP THEM
+        foreach (string criteria in @Model.CriteriaSummarized.Split(";"))
+        {
+            placeCriteria(criteria);
+        }
+    }
+    else
+    {
+        placeCriteria(@Model.CriteriaSummarized);
+    }
+
+
+    // A CRITERIA: 
+    // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
+
+    string a_subcriteria = "";
+    string a_options = "";
+
+    a = a.Replace("+", ",A");
+    a = a.Replace("(", ",(");
+    var distinctlist = a.Split(",").Distinct();
+    a = string.Join(",", distinctlist);
+
+    // STUPID WAY TO DO IT BUT ITS LATE IN THE DAY.
+
+    if (a.Contains("("))
+    {
+        a_subcriteria = a.Split(",(")[0];
+        a_options = a.Split(",(")[1];
+        a_subcriteria += a_options.Split(")")[1];
+        a_options = a_options.Split(")")[0];
+        a = a_subcriteria + "," + a_options;
+
+    }
+
+
+    // B CRITERIA
+
+    // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
+
+    string b_subcriteria = "";
+    string b_options = "";
+
+    b = b.Replace("+", ",B");
+    b = b.Replace("B1", "B1,");
+    b = b.Replace("B2", "B2,");
+
+
+    // D CRITERIA:
+    // NO OPTIONS ONLY SUBCRITERIA
+
+    d = d.Replace("+",",D");
+
+
+    // E CRITERIA: 
+    // Actually never in use, so no need to worry bout this one
+
+
+
+
+}
+
+<div class="page_section">
+    @Model.CriteriaSummarized<hr />
+
+    A: @a | Options: @a_options | Subcriteria: @a_subcriteria <br />
+    B: @b <br />
+    C: @c <br />
+    D: @d <br />
+    E: @e <br />
+</div>

@@ -41,5 +41,9 @@ namespace Assessments.Frontend.Web.Models
         public Dictionary<string, int> Criteria { get; set; }
 
         public Dictionary<string, int> Habitat { get; set; }
+
+        public Dictionary<string, int> Region { get; set; }
+
+        public List<string> RegionNames { get; set; }
     }
 }

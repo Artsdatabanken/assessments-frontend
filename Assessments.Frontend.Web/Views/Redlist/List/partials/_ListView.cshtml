@@ -32,7 +32,7 @@
                     <span class="element_category">
                         <span class="@item.Category category_tag">@item.Category</span>
                     </span>
-                    <span class="element_group">@item.ExpertCommittee</span>
+                    <span class="element_group">@item.SpeciesGroup</span>
                     <span class="element_area">
                         @item.AssessmentArea
                         @if (@item.AssessmentArea == "N")
@@ -47,9 +47,9 @@
                     </span>
 
                     <div class="element_icon">
-                        @if (speciesgroup[item.ExpertCommittee]["image"] != null)
+                        @if (speciesgroup[item.SpeciesGroup]["image"] != null)
                         {
-                            <img src="@speciesgroup[item.ExpertCommittee]["image"]" />
+                            <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
                         }
                     </div>
 

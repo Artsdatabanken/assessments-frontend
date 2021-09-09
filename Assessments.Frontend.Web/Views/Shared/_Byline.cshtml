@@ -1,11 +1,11 @@
 ﻿@model SpeciesAssessment2021
 @{
-    string ekspertgruppe = char.ToLower(Model.ExpertCommittee[0]) + Model.ExpertCommittee.Substring(1);
+    string artsgruppe = char.ToLower(Model.SpeciesGroup[0]) + Model.SpeciesGroup.Substring(1);
 
     // TODO: ADD THE LINK TO EXPERT COMMITTEE (Not in existence yet)
 }
 
 <span class="byline">
-    Publisert: @(ekspertgruppe == "spretthaler" || ekspertgruppe == "spretthaler (Svalbard)" ? @Model.YearPreviousAssessment : "24.November 2021").
-    Vurdert av <a href=""> Ekspertkomité for @ekspertgruppe </a> for Artsdatabanken
+    Publisert: @(artsgruppe == "spretthaler"  ? @Model.YearPreviousAssessment : "24.November 2021").
+    Vurdert av <a href=""> Ekspertkomité for @artsgruppe </a> for Artsdatabanken
 </span>

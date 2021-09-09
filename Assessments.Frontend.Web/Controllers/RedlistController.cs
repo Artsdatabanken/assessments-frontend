@@ -20,7 +20,9 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("2021")]
         public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, bool VU, 
         bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, bool criteriaA, bool criteriaB, 
-        bool criteriaC, bool criteriaD, bool Norge, bool svalbard, bool presumedExtinct)
+        bool criteriaC, bool criteriaD, bool Norge, bool svalbard, bool presumedExtinct, bool Agder, bool Innlandet, 
+        bool VestFoldTelemark, bool MoreRomsdal, bool Nordland, bool Rogaland, bool TromsFinnmark, bool Trondelag, 
+        bool Vestland, bool VikenOslo, bool Havomroder)
         {
             // Pagination
             const int pageSize = 25;
@@ -55,7 +57,6 @@ namespace Assessments.Frontend.Web.Controllers
                 { 'C', criteriaC },
                 { 'D', criteriaD },
             };
-
             char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
 
             Dictionary<string, bool> assessmentAreas = new Dictionary<string, bool>
@@ -63,17 +64,35 @@ namespace Assessments.Frontend.Web.Controllers
                 { "N", Norge },
                 { "S", svalbard }
             };
-
             List<string> chosenAreas = Helpers.findSelectedAreas(assessmentAreas);
 
+            Dictionary<string, bool> regions = new Dictionary<string, bool>
+            {
+                {Constants.Regions.Agder, Agder},
+                {Constants.Regions.Innlandet, Innlandet},
+                {Constants.Regions.VestfoldTelemark, VestFoldTelemark},
+                {Constants.Regions.MoreRomsdal, MoreRomsdal},
+                {Constants.Regions.Nordland, Nordland},
+                {Constants.Regions.Rogaland, Rogaland},
+                {Constants.Regions.TromsFinnmark, TromsFinnmark},
+                {Constants.Regions.Trondelag, Trondelag},
+                {Constants.Regions.Vestland, Vestland},
+                {Constants.Regions.VikenOslo, VikenOslo},
+                {Constants.Regions.Havomraader, Havomroder}
+            };
+            List<string> chosenRegions = Helpers.findSelectedRegions(regions);
+
             if (chosenCategories?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Contains(x.Category));
+                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Any(y => x.Category.Contains(y)));
 
             if (chosenCriterias?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(chosenCriterias) != -1);
 
             if (chosenAreas?.Any() == true)
                 query = query.Where(x => chosenAreas.Contains(x.AssessmentArea));
+
+            if (chosenRegions?.Any() == true)
+                query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
 
             if (presumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
@@ -116,6 +135,17 @@ namespace Assessments.Frontend.Web.Controllers
                 Norge = Norge,
                 Svalbard = svalbard,
                 PresumedExtinct = presumedExtinct,
+                Agder = Agder,
+                Innlandet = Innlandet,
+                VestFoldTelemark = VestFoldTelemark,
+                MoreRomsdal = MoreRomsdal,
+                Nordland = Nordland,
+                Rogaland = Rogaland,
+                TromsFinnmark = TromsFinnmark,
+                Trondelag = Trondelag,
+                Vestland = Vestland,
+                VikenOslo = VikenOslo,
+                Havomroder = Havomroder
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);

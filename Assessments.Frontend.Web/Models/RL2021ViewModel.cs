@@ -26,6 +26,17 @@ namespace Assessments.Frontend.Web.Models
         public bool Endangered { get; set; }
         public bool Norge { get; set; }
         public bool Svalbard { get; set; }
+        public bool Agder { get; set; }
+        public bool Innlandet { get; set; }
+        public bool VestFoldTelemark { get; set; }
+        public bool MoreRomsdal { get; set; }
+        public bool Nordland { get; set; }
+        public bool Rogaland { get; set; }
+        public bool TromsFinnmark { get; set; }
+        public bool Trondelag { get; set; }
+        public bool Vestland { get; set; }
+        public bool VikenOslo { get; set; }
+        public bool Havomroder { get; set; }
         public bool PresumedExtinct { get; set; }
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 

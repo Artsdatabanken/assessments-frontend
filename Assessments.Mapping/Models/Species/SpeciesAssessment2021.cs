@@ -113,6 +113,9 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string EPreliminaryCategory { get; set; } // EKvantitativUtryddingsmodellKode
 
+        /// <summary>
+        /// Species' occurrence in counties/regions.
+        /// </summary>
         public List<SpeciesAssessment2021RegionOccurrence> RegionOccurrences { get; set; } = new();
 
         /// <summary>

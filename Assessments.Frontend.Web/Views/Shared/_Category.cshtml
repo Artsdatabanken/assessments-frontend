@@ -10,8 +10,11 @@
     {
         // Takes in category as presented in the model
         // Returns name of category (whyever for?)
-        return category.Substring(0,2);
-
+        if (category.Length > 0)
+        {
+            return category.Substring(0, 2);
+        }
+        return "";
     }
 }
 
@@ -21,14 +24,16 @@
         // Takes in category as presented in the model
         // uses categoryMatcher to remove degrees etc.
         // Returns name of category (whatever for?)
-        if(category != "" && category != null)
+
+        if(category != "" || category != null)
+        {
+            return "manglende vurdering ";
+        }else
         {
             var actual_category = @categoryMatcher(category);
             var final_string = @ViewBag.categories[actual_category]["presentationstring"];
             return final_string;
         }
-        return category+ "mangler";
-
     }
 }
 

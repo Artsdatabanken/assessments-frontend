@@ -12,7 +12,8 @@
 
 
 
-    void placeCriteria(string criteria) {
+    void placeCriteria(string criteria)
+    {
 
         if (criteria.Contains("A"))
         {
@@ -52,7 +53,7 @@
     }
 
 
-    // A CRITERIA: 
+    // A CRITERIA:
     // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
 
     string a_subcriteria = "";
@@ -84,30 +85,91 @@
     string b_options = "";
 
     b = b.Replace("+", ",B");
-    b = b.Replace("B1", "B1,");
-    b = b.Replace("B2", "B2,");
+    if (b.Contains("B1"))
+    {
+        b_subcriteria += "B1,";
+        b = b.Replace("B1", "");
+    }
+    if (b.Contains("B2"))
+    {
+        b_subcriteria += "B2";
+        b = b.Replace("B2", "");
+    }
+
+    b = b.Replace("b", ",b");
+    b = b.Replace("c", ",c");
+    var b_distinctlist = b.Split(",").Distinct();
+    b_options = string.Join(",", b_distinctlist);
+    b = b_subcriteria + "," + b_options;
 
 
     // D CRITERIA:
     // NO OPTIONS ONLY SUBCRITERIA
 
-    d = d.Replace("+",",D");
+    d = d.Replace("+", ",D");
 
 
-    // E CRITERIA: 
+    // E CRITERIA:
     // Actually never in use, so no need to worry bout this one
 
 
-
+    string inString(string element, string bigstring)
+    {
+        if (bigstring.Contains(element))
+        {
+            return "active";
+        }
+        return "inactive";
+    }
+}
 
 }
+
+
 
 <div class="page_section">
     @Model.CriteriaSummarized<hr />
 
     A: @a | Options: @a_options | Subcriteria: @a_subcriteria <br />
-    B: @b <br />
+    B: @b | Options: @b_options | Subcriteria : @b_subcriteria <br />
     C: @c <br />
     D: @d <br />
     E: @e <br />
+</div>
+
+<hr />
+<div class="page_section criteria">
+    <h2>A: @ViewBag.kriterier["A"]["summary"]</h2>
+
+    @if (a.Length > 0)
+    {
+        <p>
+            @ViewBag.kriterier["A"]["description"]
+        </p>
+
+        <h3>
+            A Subcriteria:
+        </h3>
+        <ul>
+            <li class="@inString("A1", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A1"]["tagline"]</li>
+            <li class="@inString("A2", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A2"]["tagline"]</li>
+            <li class="@inString("A3", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A3"]["tagline"]</li>
+            <li class="@inString("A4", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A4"]["tagline"]</li>
+        </ul>
+
+        <h3>A Options:</h3>
+
+
+        <ul>
+            <li class="@inString("a", a_options)">@ViewBag.kriterier["A"]["options"]["a"]["tagline"]</li>
+            <li class="@inString("b", a_options)">@ViewBag.kriterier["A"]["options"]["b"]["tagline"]</li>
+            <li class="@inString("c", a_options)">@ViewBag.kriterier["A"]["options"]["c"]["tagline"]</li>
+            <li class="@inString("d", a_options)">@ViewBag.kriterier["A"]["options"]["d"]["tagline"]</li>
+            <li class="@inString("e", a_options)">@ViewBag.kriterier["A"]["options"]["e"]["tagline"]</li>
+        </ul>
+
+        <hr />
+    }
+
+
 </div>

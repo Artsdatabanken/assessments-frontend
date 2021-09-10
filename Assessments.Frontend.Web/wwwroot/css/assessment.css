@@ -498,20 +498,19 @@
 
 
 /*criteria*/
-.criteria_conclusions {
-    max-width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: block;
+
+.criteria li{
+    display:block;
+    padding:5px;
+    padding-left:0;
 }
 
-.criteria_outer_level.active {
-    color: black;
+.criteria .active {
+    font-weight:bold;
 }
 
-.criteria_outer_level.inactive {
-    opacity: 0.3;
-    font-size: 9pt;
+.criteria .inactive {
+    opacity: 0.5;
 }
 
 /* REFERENCES */

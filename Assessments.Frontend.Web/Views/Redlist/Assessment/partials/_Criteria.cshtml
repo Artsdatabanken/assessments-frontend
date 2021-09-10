@@ -1,9 +1,15 @@
-﻿@model SpeciesAssessment2021
+﻿
+@model SpeciesAssessment2021
 @*
+
 
 *@
 
 @{
+
+    Dictionary<string, Dictionary<string, object>> criteria = ViewBag.kriterier.ToObject<Dictionary<string, Dictionary<string, object>>>();
+
+
     string a = "";
     string b = "";
     string c = "";
@@ -42,9 +48,9 @@
     if (@Model.CriteriaSummarized.Contains(";"))
     {
         // SPLIT THE LIST AND LOOP THEM
-        foreach (string criteria in @Model.CriteriaSummarized.Split(";"))
+        foreach (string crit in @Model.CriteriaSummarized.Split(";"))
         {
-            placeCriteria(criteria);
+            placeCriteria(crit);
         }
     }
     else
@@ -139,7 +145,49 @@
 
 <hr />
 <div class="page_section criteria">
-    <h2>A: @ViewBag.kriterier["A"]["summary"]</h2>
+
+    @foreach (var (key, value) in criteria)
+    {
+
+        <h3>@key -  @value["title"]</h3>
+        <p>
+            @value["description"]
+        </p>
+
+        @if (@value.ContainsKey("options"))
+        {
+            <h4> OPTIONS </h4>
+
+            <p>
+                @{
+                    
+                    var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+
+                }
+
+
+                @foreach (var (k,v) in newDictionary)
+                {
+                <span>@k  - </span><span>@v["title"]</span><br/>
+                }
+            
+
+            </p>
+
+            <br /><br />
+        }
+        @if (@value.ContainsKey("subcriteria"))
+        {
+            <h4>SUBCRITERIA</h4>
+            <span>@value["subcriteria"]</span>
+            <br /><br />
+        }
+
+
+    }
+
+    <hr />
+    <h3>A: @ViewBag.kriterier["A"]["summary"]</h3>
 
     @if (a.Length > 0)
     {
@@ -147,9 +195,9 @@
             @ViewBag.kriterier["A"]["description"]
         </p>
 
-        <h3>
+        <h4>
             A Subcriteria:
-        </h3>
+        </h4>
         <ul>
             <li class="@inString("A1", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A1"]["tagline"]</li>
             <li class="@inString("A2", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A2"]["tagline"]</li>
@@ -157,7 +205,7 @@
             <li class="@inString("A4", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A4"]["tagline"]</li>
         </ul>
 
-        <h3>A Options:</h3>
+        <h4>A Options:</h4>
 
 
         <ul>
@@ -170,6 +218,8 @@
 
         <hr />
     }
+
+
 
 
 </div>

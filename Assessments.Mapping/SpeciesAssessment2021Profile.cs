@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
 using AutoMapper;
@@ -7,13 +9,96 @@ namespace Assessments.Mapping
 {
     public class SpeciesAssessment2021Profile : Profile
     {
+        private static Dictionary<string, string> _replaceTextDictionary = new()
+        {
+            {
+                "Skogbruk/avvirkning",
+                "Skogbruk (kommersielt)"
+            },
+            {
+                "Åpne hogstformer (flatehogst og frøtrehogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)",
+                "Åpne hogstformer (flatehogst og frøtrestillingshogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)"
+            },
+            {
+                "Habitatpåvirkning på ikke landbruksarealer (terrestrisk)",
+                "Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk)"
+            },
+            {
+                "Oppdemming / vannstandsregulering / overføring av vassdrag",
+                "Oppdemming/vannstandsregulering/overføring av vassdrag"
+            },
+            {
+                "Tynning, vedhogst, avvirkning av spesielle type trær (gamle, hule, brannskade)",
+                "Vedhogst, avvirkning av spesielle type trær (gamle, hule, brannskade)"
+            }
+        };
+        private static Dictionary<string, string> _replaceIdDictionary = new()
+        {
+            {
+                "10.1",
+                "10."
+            },
+            {
+                "11.1",
+                "11."
+            },
+            {
+                "12.1",
+                "12."
+            },
+            {
+                "0.1",
+                "0."
+            },
+            {
+                "0.1.",
+                "0."
+            }
+        };
+
+        private static string _uttakAvDødVedStåendeGaddOgLiggendeLæger = "Uttak av død ved (stående \"gadd\" og liggende \"læger\")";
+
         public SpeciesAssessment2021Profile()
         {
             CreateMap<Rodliste2019.Pavirkningsfaktor, SpeciesAssessment2021ImpactFactor>()
                 .ForMember(dest => dest.Severity, opt => opt.MapFrom(src => src.Alvorlighetsgrad))
                 .ForMember(dest => dest.PopulationScope, opt => opt.MapFrom(src => src.Omfang))
-                .ForMember(dest => dest.TimeScope, opt => opt.MapFrom(src => src.Tidspunkt));
-            
+                .ForMember(dest => dest.TimeScope, opt => opt.MapFrom(src => src.Tidspunkt))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .AfterMap((src, dest) =>
+                {
+                    var pOverordnetTittel = src.OverordnetTittel;
+                    var pBeskrivelse = src.Beskrivelse;
+
+                    foreach (var item in _replaceTextDictionary.Where(item => pOverordnetTittel.IndexOf(item.Key, StringComparison.InvariantCulture) > -1))
+                    {
+                        pOverordnetTittel = pOverordnetTittel.Replace(item.Key, item.Value, StringComparison.InvariantCulture);
+                    }
+                    foreach (var item in _replaceTextDictionary.Where(item => pBeskrivelse.IndexOf(item.Key, StringComparison.InvariantCulture) > -1))
+                    {
+                        pBeskrivelse = pBeskrivelse.Replace(item.Key, item.Value, StringComparison.InvariantCulture);
+                    }
+                    
+                    foreach (var item in _replaceIdDictionary.Where(item => dest.Id == item.Key))
+                    {
+                        dest.Id = item.Value;
+                    }
+
+                    var level = dest.Id.Split(".", StringSplitOptions.RemoveEmptyEntries).Length;
+
+                    if (dest.Id == "1.1.2.1.4.") // søk og replace funker ikke med stjerne o.l
+                    {
+                        pBeskrivelse = _uttakAvDødVedStåendeGaddOgLiggendeLæger;
+                    }
+
+                    // todo: kanskje bruke denne.... inneholder sti, men Factorpath er hele stien...
+                    var under = level > 1 ? string.Join(" > ", pOverordnetTittel.Split(" > ").Skip(1)) + " - " + pBeskrivelse : pBeskrivelse;
+
+                    dest.Factor = pBeskrivelse;
+                    dest.FactorPath = pOverordnetTittel.Split(" > ").Where(x => !string.IsNullOrWhiteSpace(x)).ToArray(); //.Union(new[] { pBeskrivelse }).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+                    dest.GroupingFactor = pOverordnetTittel == "" ? pBeskrivelse : pOverordnetTittel.Split(" > ")[0];
+                });
+
             CreateMap<Rodliste2019.TrackInfo, SpeciesAssessment2021TrackInfo>();
             CreateMap<Rodliste2019.MinMaxProbable, SpeciesAssessment2021MinMaxProbable>();
             CreateMap<Rodliste2019.MinMaxProbableIntervall, SpeciesAssessment2021MinMaxProbableIntervall>();

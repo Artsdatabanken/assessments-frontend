@@ -8,10 +8,13 @@
         /// </summary>
         public string Severity { get; set; } // Alvorlighetsgrad
 
-        public string Beskrivelse { get; set; }
+        //public string Beskrivelse { get; set; }
 
-        public string Forkortelse { get; set; }
+        //public string Forkortelse { get; set; }
 
+        /// <summary>
+        /// Hierarchical id of impactfactor
+        /// </summary>
         public string Id { get; set; }
 
         /// <summary>
@@ -19,15 +22,26 @@
         /// </summary>
         public string PopulationScope { get; set; } // Omfang
 
-        public string OverordnetTittel { get; set; }
+        //public string OverordnetTittel { get; set; }
 
         /// <summary>
         /// Timing of the threat
         /// </summary>
         public string TimeScope { get; set; } // Tidspunkt
 
-        public string Tittel { get; set; }
+        /// <summary>
+        /// The ImpackFactor
+        /// </summary>
+        public string Factor { get; set; } // Tittel
+        
+        /// <summary>
+        /// Hierarchical classification of impactfactor. eg. ["top GroupingFactor","subgroup","factor"]
+        /// </summary>
+        public string[] FactorPath { get; set; } // Tittel
 
-        public string ØversteTittel { get; set; }
+        /// <summary>
+        /// Top grouping of factor
+        /// </summary>
+        public string GroupingFactor { get; set; } // ØversteTittel
     }
 }

@@ -16,6 +16,7 @@ namespace Assessments.Frontend.Web.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class RedlistController : BaseController<RedlistController>
     {
+        private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
         public IActionResult Index() => View();
 
         [Route("2021")]
@@ -76,17 +77,13 @@ namespace Assessments.Frontend.Web.Controllers
             if (chosenAreas?.Any() == true)
                 query = query.Where(x => chosenAreas.Contains(x.AssessmentArea));
 
-            var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
-            ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
+            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
 
-            var json_kriterier = await System.IO.File.ReadAllTextAsync("wwwroot/json/kriterier.json");
-            ViewBag.kriterier = JObject.Parse(json_kriterier);
+            ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
 
-            var json_habitat = await System.IO.File.ReadAllTextAsync("wwwroot/json/habitat.json");
-            ViewBag.habitat = JObject.Parse(json_habitat);
+            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
 
-            var json_categories = await System.IO.File.ReadAllTextAsync("wwwroot/json/categories.json");
-            ViewBag.categories = JObject.Parse(json_categories);
+            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
 
             if (export)
             {
@@ -137,43 +134,36 @@ namespace Assessments.Frontend.Web.Controllers
             if (assessment == null)
                 return NotFound();
 
-            var json_kriterier = await System.IO.File.ReadAllTextAsync("wwwroot/json/kriterier.json");
-            ViewBag.kriterier = JObject.Parse(json_kriterier);
-
-            var json_glossary = await System.IO.File.ReadAllTextAsync("wwwroot/json/glossary.json");
-            ViewBag.glossary = JObject.Parse(json_glossary);
-
-            var json_categories = await System.IO.File.ReadAllTextAsync("wwwroot/json/categories.json");
-            ViewBag.categories = JObject.Parse(json_categories);
-
-            var json_habitat = await System.IO.File.ReadAllTextAsync("wwwroot/json/habitat.json");
-            ViewBag.habitat = JObject.Parse(json_habitat);
-
-            var json_speciesgroup = await System.IO.File.ReadAllTextAsync("wwwroot/json/speciesgroup.json");
-            ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
+            ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
+            
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json"); 
+            
+            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
+            
+            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
+            
+            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
 
             return View("Assessment/SpeciesAssessment2021", assessment);
         }
-
+        
         [Route("habitat")]
         public async Task<IActionResult> Habitat()
         {
-            var json_glossary = System.IO.File.ReadAllText("wwwroot/json/glossary.json");
-            ViewBag.glossary = JObject.Parse(json_glossary);
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
 
-            var json_habitat = System.IO.File.ReadAllText("wwwroot/json/habitat.json");
-            ViewBag.habitat = JObject.Parse(json_habitat);
+            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
+
             return View("Habitat");
         }
 
         [Route("speciesgroup")]
         public async Task<IActionResult> SpeciesGroup()
         {
-            var json_glossary = System.IO.File.ReadAllText("wwwroot/json/glossary.json");
-            ViewBag.glossary = JObject.Parse(json_glossary);
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
 
-            var json_speciesgroup = System.IO.File.ReadAllText("wwwroot/json/speciesgroup.json");
-            ViewBag.speciesgroup = JObject.Parse(json_speciesgroup);
+            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
+
             return View("SpeciesGroup");
         }
 
@@ -213,6 +203,19 @@ namespace Assessments.Frontend.Web.Controllers
             var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
 
             viewModel.Statistics.Criteria = criteria.ToDictionary(x => x.Key, x => x.Value);
+        }
+
+        private static async Task<JObject> GetResource(string resourcePath)
+        {
+#if (DEBUG == true)
+            if (_resourceCache.ContainsKey(resourcePath)) return _resourceCache[resourcePath];
+#endif
+            var json = await System.IO.File.ReadAllTextAsync(resourcePath);
+            var jObject = JObject.Parse(json);
+#if (DEBUG == true)
+            if (!_resourceCache.ContainsKey(resourcePath)) _resourceCache.Add(resourcePath, jObject);
+#endif            
+            return jObject;
         }
     }
 }

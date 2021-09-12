@@ -22,14 +22,14 @@
 <div class="page_section">
 
 
-        @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
-        {
-            <h3>Tidligere vurderinger</h3>
-            <span>Arten er vurdert for første gang i 2021.</span>
-        }
-        else
-        {
-            @*
+    @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
+    {
+        <h3>Tidligere vurderinger</h3>
+        <span>Arten er vurdert for første gang i 2021.</span>
+    }
+    else
+    {
+        @*
             @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010) && !string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
             {
 
@@ -101,14 +101,14 @@
                 </p>
             }
 
-            @if (Model.ExpertCommittee.ToLower() == "spretthaler" || Model.ExpertCommittee.ToLower() == "havedderkopper")
+            @if (Model.SpeciesGroup.ToLower() == "spretthaler" || Model.SpeciesGroup.ToLower() == "havedderkopper")
             {
                 <p>
                     Sist vurdert i: @Model.YearPreviousAssessment
                 </p>
             }
-            *@
-        }
+        *@
+    }
 
 
-    </div><!-- End section -->
+</div><!-- End section -->

@@ -209,7 +209,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.PopularName, opt => opt.MapFrom(src => src.PopularName))
                 .ForMember(destination => destination.PopularName, opt => opt.NullSubstitute(string.Empty))
                 
-                .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => src.Påvirkningsfaktorer))
+                .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => src.Påvirkningsfaktorer.OrderBy(x=>x.Id)))
 
                 .ForMember(dest => dest.References, opt => opt.MapFrom(src => src.Referanser))
 

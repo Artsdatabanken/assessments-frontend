@@ -179,56 +179,103 @@
     {
 
 
-        <div class="criteria_element @inString(key, @Model.CriteriaSummarized)">
+        <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
+            @if (@inString(key, @Model.CriteriaSummarized) == "active")
+                {
+                    <h3 class="material-icons">
+                        done 
+                    </h3>
+                }
+                else
+                {
+                    <h3 class="material-icons">
+                        close 
+                    </h3>
+                }
+                <div class="listitem_text_field">
+                    <h3>@key -  @value["title"]</h3>
 
-            <h3>@key -  @value["title"]</h3>
-
-            <p class="criteria_description">
-                @value["description"]
-            </p>
+                    <p class="criteria_description">
+                        @value["description"]
+                    </p>
 
 
 
 
-            @if (@value.ContainsKey("subcriteria"))
-            {
-                <div class="criteria_subcriteria">
-                    @{
-                        var newDictionary2 = Newtonsoft.Json.Linq.JObject.Parse(value["subcriteria"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-                    }
-                    @foreach (var (k, v) in newDictionary2)
-                    {
-
-                        <div class="optionselement @inString(k, subcriteria[key])">
-                            <h5>@k <span>@v["title"]</span></h5><br />
-                            @if (v.ContainsKey("description"))
-                            {
-                                <p>@v["description"]</p>
-                            }
-                        </div>
-                    }
-                </div>
-            }
-
-            @if (@value.ContainsKey("options"))
-            {
-                <div class="criteria_options">
-                    @{
-                        var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-                    }
-                    <h4> Underkriterier </h4>
-                    <p>
-
-                        @foreach (var (k, v) in newDictionary)
+                @if (@value.ContainsKey("subcriteria"))
+                {
+                    <div class="criteria_subcriteria">
+                        @{
+                            var newDictionary2 = Newtonsoft.Json.Linq.JObject.Parse(value["subcriteria"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                        }
+                        @foreach (var (k, v) in newDictionary2)
                         {
 
-                            <div class="optionselement @inString(k, options[key])">
-                                <h5>@k) <span>@v["title"]</span></h5><br />
+                            <div class=" @inString(k, subcriteria[key]) listitem_criteria">
+
+
+                                @if (@inString(k, subcriteria[key]) == "active")
+                                {
+                                    <span class="material-icons">
+                                        done
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="material-icons">
+                                        close
+                                    </span>
+                                }
+
+                                <div class="listitem_text_field">
+
+                                    <h5>@k <span>@v["title"]</span></h5><br />
+                                    @if (v.ContainsKey("description"))
+                                    {
+                                        <p>@v["description"]</p>
+                                    }
+                                </div>
                             </div>
                         }
-                    </p>
-                </div>
-            }
+                    </div>
+                }
+
+                @if (@value.ContainsKey("options"))
+                {
+                    <div class="criteria_options">
+                        @{
+                            var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                        }
+                        <h4> Underkriterier </h4>
+                        <p>
+
+                            @foreach (var (k, v) in newDictionary)
+                            {
+
+                                <div class="listitem_criteria @inString(k, options[key])">
+                                    @if (@inString(k, options[key]) == "active")
+                                    {
+                                        <span class="material-icons">
+                                            done
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="material-icons">
+                                            close
+                                        </span>
+                                    }
+                                    <div class="listitem_text_field">
+                                        <h5>@k. <span>@v["title"]</span></h5>
+
+                                    </div>
+
+                                </div>
+                            }
+                        </p>
+                    </div>
+                }
+            </div>
         </div>
 
 

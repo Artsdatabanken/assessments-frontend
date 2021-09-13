@@ -497,26 +497,6 @@
 }
 
 
-/*criteria*/
-
-.criteria li{
-    display:block;
-    padding:5px;
-    padding-left:0;
-}
-
-.criteria_element.active h3 {
-}
-
-.criteria .inactive {
-    opacity: 0.5;
-}
-
-.criteria .inactive .criteria_description,
-.criteria .inactive .criteria_options,
-.criteria .inactive .criteria_subcriteria{
-    display:none;
-}
 
 /* REFERENCES */
 .reference {
@@ -646,3 +626,25 @@
     height: 100%;
 }
 
+/*criteria*/
+
+.criteria_element.active h3 {
+}
+
+.criteria .inactive {
+    opacity: 0.5;
+}
+
+.criteria .inactive .criteria_description,
+.criteria .inactive .criteria_options,
+.criteria .inactive .criteria_subcriteria {
+    display: none;
+}
+
+.listitem_criteria {
+    display: flex;
+}
+
+.listitem_text_field{
+    padding-left:10px;
+}

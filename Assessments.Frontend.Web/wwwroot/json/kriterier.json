@@ -1,7 +1,7 @@
 ﻿{  
   "A": {
-    "title": "Kraftig reduksjon i populasjonsstørrelse [2015]",
-    "description": "Sterk reduksjon i populasjonsstørrelse, ≥ 15 % reduksjon over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år). A-kriteriene anvendes på arter som nylig har gjennomgått en sterk nedgang i populasjonsstørrelse, eller der det er sterk grunn til å forvente en betydelig nedgang i nærmeste framtid. [2015]",
+    "title": "Kraftig reduksjon i populasjonsstørrelse",
+    "description": "Sterk reduksjon i populasjonsstørrelse, ≥ 15 % reduksjon over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år). A-kriteriene anvendes på arter som nylig har gjennomgått en sterk nedgang i populasjonsstørrelse, eller der det er sterk grunn til å forvente en betydelig nedgang i nærmeste framtid.",
     "options": {
       "a": {
         "title": "Direkte observasjoner"

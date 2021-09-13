@@ -60,7 +60,7 @@
         }
 
 
-        @if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
+@if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
 {
     @if (!string.IsNullOrWhiteSpace(kriteriedok))
         {
@@ -71,7 +71,7 @@
 
             <div class="expert_Assessment">
                 <div class="expert_text">
-                    @*@kriteriedok<br />*@
+                    @kriteriedok<br />
                     @Html.Raw(kriteriedok)
                     <p class="quote_by">- Ekspertkomité for @ekspertgruppe</p>
                 </div>

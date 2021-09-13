@@ -59,6 +59,9 @@
     }
 
 
+
+
+
     // A CRITERIA:
     // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
 
@@ -109,6 +112,11 @@
     b = b_subcriteria + "," + b_options;
 
 
+
+    // C CRITERIA:
+
+
+
     // D CRITERIA:
     // NO OPTIONS ONLY SUBCRITERIA
 
@@ -117,6 +125,21 @@
 
     // E CRITERIA:
     // Actually never in use, so no need to worry bout this one
+
+    var subcriteria = new Dictionary<string, string>(){
+    {"A", a_subcriteria},
+    {"B", b_subcriteria},
+    {"C", c},
+    {"D", d},
+    {"E", e},
+    };
+
+
+    var options = new Dictionary<string, string>(){
+    {"A", a_options},
+    {"B", b_options},
+    };
+
 
 
     string inString(string element, string bigstring)
@@ -149,7 +172,11 @@
     @foreach (var (key, value) in criteria)
     {
 
+
+    <div class="criteria_element @inString(key, @Model.CriteriaSummarized)">
+
         <h3>@key -  @value["title"]</h3>
+
         <p>
             @value["description"]
         </p>
@@ -157,69 +184,47 @@
         @if (@value.ContainsKey("options"))
         {
             <h4> OPTIONS </h4>
-
             <p>
                 @{
-                    
                     var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-
                 }
-
-
-                @foreach (var (k,v) in newDictionary)
+                @foreach (var (k, v) in newDictionary)
                 {
-                <span>@k  - </span><span>@v["title"]</span><br/>
+
+                <div class="optionselement @inString(k, options[key])">
+                    <h5>@k)  - <span>@v["title"]</span></h5><br />
+                </div>
                 }
-            
-
             </p>
-
-            <br /><br />
         }
+
+
         @if (@value.ContainsKey("subcriteria"))
         {
-            <h4>SUBCRITERIA</h4>
-            <span>@value["subcriteria"]</span>
-            <br /><br />
-        }
+            <h4> SUBCRITERIA </h4>
+            <p>
+                @{
+                    var newDictionary2 = Newtonsoft.Json.Linq.JObject.Parse(value["subcriteria"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                }
+                @foreach (var (k, v) in newDictionary2)
+                {
+                    
+                    <div class="optionselement @inString(k, subcriteria[key])">
+                        <h5>@k  - <span>@v["title"]</span></h5><br />
+                        @if (v.ContainsKey("description"))
+                        {
+                        <p>@v["description"]</p>
+                        }
+                    </div>
+
+
+                }
+                </p>
+            }
+    </div>
 
 
     }
 
-    <hr />
-    <h3>A: @ViewBag.kriterier["A"]["summary"]</h3>
-
-    @if (a.Length > 0)
-    {
-        <p>
-            @ViewBag.kriterier["A"]["description"]
-        </p>
-
-        <h4>
-            A Subcriteria:
-        </h4>
-        <ul>
-            <li class="@inString("A1", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A1"]["tagline"]</li>
-            <li class="@inString("A2", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A2"]["tagline"]</li>
-            <li class="@inString("A3", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A3"]["tagline"]</li>
-            <li class="@inString("A4", a_subcriteria)">@ViewBag.kriterier["A"]["subcriteria"]["A4"]["tagline"]</li>
-        </ul>
-
-        <h4>A Options:</h4>
-
-
-        <ul>
-            <li class="@inString("a", a_options)">@ViewBag.kriterier["A"]["options"]["a"]["tagline"]</li>
-            <li class="@inString("b", a_options)">@ViewBag.kriterier["A"]["options"]["b"]["tagline"]</li>
-            <li class="@inString("c", a_options)">@ViewBag.kriterier["A"]["options"]["c"]["tagline"]</li>
-            <li class="@inString("d", a_options)">@ViewBag.kriterier["A"]["options"]["d"]["tagline"]</li>
-            <li class="@inString("e", a_options)">@ViewBag.kriterier["A"]["options"]["e"]["tagline"]</li>
-        </ul>
-
-        <hr />
-    }
-
-
-
-
+   
 </div>

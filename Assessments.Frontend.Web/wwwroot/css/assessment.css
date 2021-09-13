@@ -505,8 +505,7 @@
     padding-left:0;
 }
 
-.criteria .active {
-    font-weight:bold;
+.criteria_element.active h3 {
 }
 
 .criteria .inactive {

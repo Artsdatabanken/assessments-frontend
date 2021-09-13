@@ -23,7 +23,8 @@ namespace Assessments.Frontend.Web.Controllers
         bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, bool criteriaA, bool criteriaB, 
         bool criteriaC, bool criteriaD, bool Norge, bool svalbard, bool presumedExtinct, bool Agder, bool Innlandet, 
         bool VestFoldTelemark, bool MoreRomsdal, bool Nordland, bool Rogaland, bool TromsFinnmark, bool Trondelag, 
-        bool Vestland, bool VikenOslo, bool Havomroder)
+        bool Vestland, bool VikenOslo, bool Havomroder, bool europeanPopLt5, bool europeanPopRange5To25, 
+        bool europeanPopRange25To50, bool europeanPopGt50)
         {
             // Pagination
             const int pageSize = 25;
@@ -37,6 +38,8 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
 
             // Filter
+
+            // Categories
             Dictionary<string, bool> categories = new Dictionary<string, bool>
             {
                 { Constants.SpeciesCategories.Extinct.ShortHand, RE },
@@ -51,6 +54,7 @@ namespace Assessments.Frontend.Web.Controllers
             };
             List<string> chosenCategories = Helpers.findSelectedCategories(categories, redlisted, endangered);
 
+            // Criterias
             Dictionary<char, bool> criterias = new Dictionary<char, bool>
             {
                 { 'A', criteriaA },
@@ -60,6 +64,7 @@ namespace Assessments.Frontend.Web.Controllers
             };
             char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
 
+            // Areas
             Dictionary<string, bool> assessmentAreas = new Dictionary<string, bool>
             {
                 { "N", Norge },
@@ -67,6 +72,7 @@ namespace Assessments.Frontend.Web.Controllers
             };
             List<string> chosenAreas = Helpers.findSelectedAreas(assessmentAreas);
 
+            // Regions
             Dictionary<string, bool> regions = new Dictionary<string, bool>
             {
                 {Constants.Regions.Agder, Agder},
@@ -83,6 +89,16 @@ namespace Assessments.Frontend.Web.Controllers
             };
             List<string> chosenRegions = Helpers.findSelectedRegions(regions);
 
+            // European population percentages
+            Dictionary<string, bool> europeanPopulation = new Dictionary<string, bool>
+            {
+                {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, europeanPopLt5},
+                {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, europeanPopRange5To25},
+                {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, europeanPopRange25To50},
+                {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, europeanPopGt50}
+            };
+            List<string> chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(europeanPopulation);
+
             if (chosenCategories?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Any(y => x.Category.Contains(y)));
 
@@ -94,6 +110,9 @@ namespace Assessments.Frontend.Web.Controllers
 
             if (chosenRegions?.Any() == true)
                 query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
+
+            if (chosenEuropeanPopulation?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.PercentageEuropeanPopulation) && chosenEuropeanPopulation.Contains(x.PercentageEuropeanPopulation));
 
             if (presumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
@@ -152,7 +171,11 @@ namespace Assessments.Frontend.Web.Controllers
                 Trondelag = Trondelag,
                 Vestland = Vestland,
                 VikenOslo = VikenOslo,
-                Havomroder = Havomroder
+                Havomroder = Havomroder,
+                EuropeanPopLt5 = europeanPopLt5,
+                EuropeanPopRange5To25 = europeanPopRange5To25,
+                EuropeanPopRange25To50 = europeanPopRange25To50,
+                EuropeanPopGt50 = europeanPopGt50
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);

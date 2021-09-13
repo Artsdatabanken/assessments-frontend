@@ -170,6 +170,26 @@ namespace Assessments.Frontend.Web.Infrastructure
             
             return regions;
         }
+
+        public static List<string> findEuropeanPopProcentages(Dictionary<string, bool> europeanPopulation)
+        {
+            List<string> selectedPercenteges = new List<string>();
+            
+            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopLt5]) 
+            {
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Lt1);
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Lt5);
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range1To5);
+            }
+            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25])
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range5To25);
+            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50])
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range25To50);
+            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopGt50])
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Gt50);
+
+            return selectedPercenteges;
+        }
     }
 
     public static class Constants
@@ -177,6 +197,20 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string CacheFolder = "Cache";
 
         public const string AssessmentsMappingAssembly = "Assessments.Mapping";
+
+        public class EuropeanPopulationPercentages
+        {
+            public const string EuropeanPopLt5 = "europeanPopLt5";
+            public const string EuropeanPopRange5To25 = "europeanPopRange5To25";
+            public const string EuropeanPopRange25To50 = "europeanPopRange25To50";
+            public const string EuropeanPopGt50 = "europeanPopGt50";
+            public const string Lt1 = "< 1 %";
+            public const string Lt5 = "< 5 %";
+            public const string Gt50 = "> 50 %";
+            public const string Range1To5 = "1 - 5 %";
+            public const string Range5To25 = "5 - 25 %";
+            public const string Range25To50 = "25 - 50 %";
+        }
 
         public class Regions
         {

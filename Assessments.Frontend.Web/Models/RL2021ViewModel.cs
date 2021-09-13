@@ -37,6 +37,10 @@ namespace Assessments.Frontend.Web.Models
         public bool Vestland { get; set; }
         public bool VikenOslo { get; set; }
         public bool Havomroder { get; set; }
+        public bool EuropeanPopLt5 { get; set; }
+        public bool EuropeanPopRange5To25 { get; set; }
+        public bool EuropeanPopRange25To50 { get; set; }
+        public bool EuropeanPopGt50 { get; set; }
         public bool PresumedExtinct { get; set; }
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 

@@ -6,3 +6,36 @@
 li.checkbox {
     list-style-type: none;
 }
+
+.collapse_checkbox {
+    display: none;
+}
+
+input[type=checkbox]:checked#show_area~.filter_area {
+  display: none;
+}
+
+input[type=checkbox]:checked#show_category~.filter_category {
+  display: block;
+}
+
+input[type=checkbox]:checked#show_region~.filter_region {
+  display: block;
+}
+
+input[type=checkbox]:checked#show_european_population~.filter_european_population {
+  display: block;
+}
+
+input[type=checkbox]:checked#show_criteria~.filter_criteria {
+  display: block;
+}
+
+input[type=checkbox]:checked#show_extinct~.filter_extinct {
+  display: block;
+}
+
+.filter_category, .filter_region, .filter_european_population,
+.filter_criteria, .filter_extinct {
+    display: none;
+}

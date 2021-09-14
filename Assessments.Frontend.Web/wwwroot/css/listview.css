@@ -305,10 +305,10 @@ li a span.element_icon {
     margin-bottom: 10px;
 }
 
-    .filter_group .h4 {
-        padding: 5px;
-        font-weight: bold;
-    }
+.filter_group .h4 {
+    padding: 5px;
+    font-weight: bold;
+}
 
 @media only screen and (max-width: 750px) {
     .filter_groups {

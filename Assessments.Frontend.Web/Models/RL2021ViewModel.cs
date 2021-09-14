@@ -29,12 +29,23 @@ namespace Assessments.Frontend.Web.Models
         public bool EuropeanPopRange5To25 { get; set; }
         public bool EuropeanPopRange25To50 { get; set; }
         public bool EuropeanPopGt50 { get; set; }
+        public FilterCollapsible Collapsible { get; set; }
         
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 
                 $"Viser {Redlist2021Results.Count} av {Redlist2021Results.TotalItemCount:N0}" : "Ingen resulater";
 
         public Species2001StatisticsViewModel Statistics { get; set; } = new();
+    }
+
+    public class FilterCollapsible
+    {
+        public bool Area { get; set; }
+        public bool Category { get; set; }
+        public bool Region { get; set; }
+        public bool EuropeanPopulation { get; set; }
+        public bool Criteria { get; set; }
+        public bool Extinct { get; set; }
     }
 
     public class FilterCriterias

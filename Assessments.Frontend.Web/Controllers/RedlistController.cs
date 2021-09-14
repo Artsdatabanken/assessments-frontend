@@ -23,7 +23,7 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, bool VU, 
         bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, FilterCriterias Criterias, bool Norge, 
         bool svalbard, bool presumedExtinct, FilterRegions Regions, bool europeanPopLt5, bool europeanPopRange5To25, 
-        bool europeanPopRange25To50, bool europeanPopGt50)
+        bool europeanPopRange25To50, bool europeanPopGt50, FilterCollapsible Collapsible)
         {
             // Pagination
             const int pageSize = 25;
@@ -158,6 +158,7 @@ namespace Assessments.Frontend.Web.Controllers
                 EuropeanPopRange5To25 = europeanPopRange5To25,
                 EuropeanPopRange25To50 = europeanPopRange25To50,
                 EuropeanPopGt50 = europeanPopGt50,
+                Collapsible = Collapsible
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);

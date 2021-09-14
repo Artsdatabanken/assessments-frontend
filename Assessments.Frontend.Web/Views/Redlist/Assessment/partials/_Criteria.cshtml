@@ -181,6 +181,12 @@
                 done
             </span>
         }
+        else if (@compare == "maybe")
+        {
+            <span class="material-icons">
+                pause
+            </span>
+        }
         else
         {
             <span class="material-icons">
@@ -214,11 +220,9 @@
             E: @e <br />
         </div>
 
-
+        <!-- MAIN CRITERIA -->
         @foreach (var (key, value) in criteria)
         {
-
-
             <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
                 <h3>
                     @{ iconChooser(@inString(key, @Model.CriteriaSummarized)); }
@@ -233,7 +237,7 @@
 
 
 
-
+                    <!-- SUB CRITERIA : obtain and reformat necessary data -->
                     @if (@value.ContainsKey("subcriteria"))
                     {
                         <div class="criteria_subcriteria">
@@ -242,95 +246,126 @@
                             }
                             @foreach (var (k, v) in newDictionary2)
                             {
+                                <!-- ITERATE THROUGH ALL SUBCRITERIA -->
+                                <div class=" @inString(k, subcriteria[key]) listitem_criteria">
 
-                            <div class=" @inString(k, subcriteria[key]) listitem_criteria">
+                                    @{ iconChooser(@inString(k, subcriteria[key])); }
 
-                                @{ iconChooser(@inString(k, subcriteria[key])); }
+                                    <div class="listitem_text_field">
 
-                                <div class="listitem_text_field">
+                                        <h5>@k <span>@v["title"]</span></h5><br />
 
-                                    <!-- SUBCRITERIA -->
-                                    <h5>@k <span>@v["title"]</span></h5><br />
-
-                                    @if (v.ContainsKey("description"))
-                                    {
-                                        <p>@v["description"]</p>
-
-                                    }
-
-                                    <!-- SUBCRITERIA SUBOPTIONS FOR C-CRITERIA -->
-
-                                    @{
-                                        // THIS IS ONLY RELEVANT FOR C2,
-                                        // AS ONLY C CONTAINS SUBCATEGORIES FOR CRITERIA
-                                        // AND ONLY FOR THE a. category
-                                        // key = c
-                                        // subcriteria[key] = all subcriterias for c
-                                        // k = current criteria
-                                        var splitlist = subcriteria[key].Split(";");
-                                        var current_element = "";
-                                        foreach (string element in splitlist)
+                                        @if (v.ContainsKey("description"))
                                         {
-                                            if (element.Contains(k))
-                                            {
-                                                current_element = element;
-                                            }
+                                            <p>@v["description"]</p>
+
                                         }
-                                        current_element = current_element.Replace(k, "");
-                                        // Don't look at it. It works :|
-                                        current_element = current_element.Replace("a(i,ii)", "a(i)a(ii)");
-                                        current_element = current_element.Replace(")", ");");
-                                        current_element = current_element.Replace(" ", "");
-                                        var currentlist = current_element.Split(";");
 
-                                    }
-
-                                    @if (v.ContainsKey("subsub"))
-                                    {
-                                        <div class="subsub_list">
-                                            @{
-                                                var subdict = Newtonsoft.Json.Linq.JObject.Parse(@v["subsub"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-                                            }
-
-                                            @foreach (var (subkey, subval) in subdict)
+                                        <!-- SUBCRITERIA SUBOPTIONS FOR C-CRITERIA -->
+                                        @{
+                                            // THIS IS ONLY RELEVANT FOR C2
+                                            var splitlist = subcriteria[key].Split(";");
+                                            var current_element = "";
+                                            foreach (string element in splitlist)
                                             {
-                                            <div class="@inList(subkey, currentlist) listitem_criteria">
-                                                @{ iconChooser(@inList(subkey, currentlist)); }
-                                                <div class="listitem_text_field">
-                                                    <b>@subkey</b>
-                                                    <span>@subval["title"]</span>
-                                                </div>
-                                            </div>
+                                                // k = current criteria
+                                                if (element.Contains(k))
+                                                {
+                                                    current_element = element;
+                                                }
                                             }
+                                            current_element = current_element.Replace(k, "");
+                                            // Don't look at it. It works :|
+                                            current_element = current_element.Replace("a(i,ii)", "a(i)a(ii)");
+                                            current_element = current_element.Replace(")", ");");
+                                            current_element = current_element.Replace(" ", "");
+                                            var currentlist = current_element.Split(";");
+                                        }
 
-                                        </div>
-                                    }
+                                        <!--- ITERATE SUBOPTIONS FOR Ca2 -->
+                                        @if (v.ContainsKey("subsub"))
+                                        {
+                                            <div class="subsub_list">
+                                                @{
+                                                    var subdict = Newtonsoft.Json.Linq.JObject.Parse(@v["subsub"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                }
+
+                                                @foreach (var (subkey, subval) in subdict)
+                                                {
+                                                    <div class="@inList(subkey, currentlist) listitem_criteria">
+                                                        @{ iconChooser(@inList(subkey, currentlist)); }
+                                                        <div class="listitem_text_field">
+                                                            <b>@subkey</b>
+                                                            <span>@subval["title"]</span>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
-                            </div>
                             }
                         </div>
                     }
 
+                    <!-- OPTIONS-->
                     @if (@value.ContainsKey("options"))
                     {
                         <div class="criteria_options">
                             @{
                                 var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
                             }
-                            <h4> Underkriterier </h4>
+                            <h4> Underkriterier </h4><br />
 
                             @foreach (var (k, v) in newDictionary)
                             {
 
-                                <div class="listitem_criteria @inString(k, options[key])">                                    
+                                <div class="listitem_criteria @inString(k, options[key])">
                                     @{ iconChooser(@inString(k, options[key])); }
                                     <div class="listitem_text_field">
                                         <h5>@k. <span>@v["title"]</span></h5>
+                                        @if (v.ContainsKey("description"))
+                                        {
+                                            <p>@v["description"] </p>
+
+                                        }
+                                        @if (v.ContainsKey("sub"))
+                                        {
+
+                                            <div class="subsub_list">
+                                                @{
+                                                    // var currentlist = subcriteria[key].Split(",");
+
+                                                    var subsub = Newtonsoft.Json.Linq.JObject.Parse(@v["sub"].ToString());
+                                                    var subdict = subsub.ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                }
+
+                                                @foreach (var (subkey, subvalue) in subdict)
+                                                {
+                                                    <div class="listitem_criteria">
+                                                        @{ iconChooser("maybe"); }
+                                                        <div class="listitem_text_field">
+                                                            <span>@subkey </span>
+                                                            <span>@subvalue["title"]</span>
+                                                        </div>
+                                                    </div>
+
+                                                }
+                                                <br />
+
+                                            </div>
+
+                                        }
+
+
                                     </div>
                                 </div>
+
+
                             }
                         </div>
-                    }
+                    }<!-- END OPTIONS-->
                 </div>
             </div>
 

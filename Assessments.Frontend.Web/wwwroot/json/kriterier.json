@@ -83,7 +83,7 @@
       "a": {
         "title": "Kraftig fragmentering eller få lokaliteter (avgrenset av trussel)",
         "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en art. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
-        "subcategory": {
+        "sub": {
           "i": {
             "title": "Kraftig fragmentert populasjon",
             "description": "En populasjon er kraftig fragmentert når over halvparten av individene finnes eller antas å finnes i små og relativt isolerte delpopulasjoner der det er store muligheter for at delpopulasjoner ikke rekoloniseres om de dør ut. "
@@ -111,22 +111,40 @@
       "b": {
         "title": "pågående nedgangi populasjonsstørrelse, antall delpopulasjoner, kvalitet på habitat eller areal",
         "description": "Bedømt, observert, estimert eller prosjektert nedgang som har skjedd nylig, er pågående og/eller er forventet å skje. Nedgangen kan være jevn, irregulær eller sporadisk, og man antar den vil fortsette dersom ikke nødvendige tiltak iverksettes.   ",
-        "subcategory": {
-          "i": "utbredelsesområde",
-          "ii": "forekomstareal",
-          "iii": "areal eller kvalitet på artens habitat",
-          "iv": "antall lokaliteter6eller delpopulasjoner",
-          "v": "antall reproduksjonsdyktige individ"
-        }
+        "sub": {
+          "i": {
+            "title": "utbredelsesområde" 
+          },
+          "ii": {
+            "title": "forekomstareal"
+          },
+          "iii": {
+            "title": "areal eller kvalitet på artens habitat"
+          },
+          "iv": {
+            "title": "antall lokaliteter6eller delpopulasjoner"
+          },
+          "v": {
+            "title": "antall reproduksjonsdyktige individ"
+          }
+          }
       },
       "c": {
         "title": "Ekstreme fluktuasjoner ",
         "description": "Ekstreme fluktuasjoner gjelder arter der eks. populasjonsstørrelse eller geografisk utbredelse varierer mye, raskt og ofte, typisk med mer enn en tifoldig økning eller reduksjon (dvs. maksimum er minst 10 ganger større enn minimum). Ekstreme fluktuasjoner brukes bare der det er relativt stor sikkerhet for at nedgang vil følges av vekst innen en eller to generasjoner og hvor det er rimelig sikkert av fluktuasjoner i antall reproduksjonsdyktige individ representerer fluktuasjoner i den totale populasjonen.   ",
-        "subcategory": {
-          "i": "utbredelsesområde",
-          "ii": "forekomstareal",
-          "iii": "antall lokaliteter eller delpopulasjoner",
-          "iv": "antall reproduksjonsdyktige individ."
+        "sub": {
+          "i": {
+            "title": "utbredelsesområde"
+          },
+          "ii": {
+            "title": "forekomstareal"
+          },
+          "iii": {
+            "title": "antall lokaliteter eller delpopulasjoner"
+          },
+          "iv": {
+            "title": "antall reproduksjonsdyktige individ."
+          }
         }
       }
     },

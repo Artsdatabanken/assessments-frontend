@@ -236,7 +236,14 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnId))
 
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ÅrsakTilEndringAvKategori))
-                .ForMember(dest => dest.ÅrsakTilNedgraderingAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilNedgraderingAvKategori));
+                .ForMember(dest => dest.ÅrsakTilNedgraderingAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilNedgraderingAvKategori))
+                .AfterMap((src, dest) =>
+                {
+                    if (dest.Category == "LCº")
+                    {
+                        dest.CriteriaSummarized = string.Empty;
+                    }
+                });
         }
     }
 

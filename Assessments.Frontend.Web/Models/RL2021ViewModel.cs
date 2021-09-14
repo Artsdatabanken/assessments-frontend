@@ -18,14 +18,35 @@ namespace Assessments.Frontend.Web.Models
         public bool LC { get; set; }
         public bool NE { get; set; }
         public bool NA { get; set; }
-        public bool CriteriaA { get; set; }
-        public bool CriteriaB { get; set; }
-        public bool CriteriaC { get; set; }
-        public bool CriteriaD { get; set; }
         public bool Redlisted { get; set; }
         public bool Endangered { get; set; }
         public bool Norge { get; set; }
         public bool Svalbard { get; set; }
+        public bool PresumedExtinct { get; set; }
+        public FilterCriterias Criterias { get; set; }
+        public FilterRegions Regions { get; set; }
+        public bool EuropeanPopLt5 { get; set; }
+        public bool EuropeanPopRange5To25 { get; set; }
+        public bool EuropeanPopRange25To50 { get; set; }
+        public bool EuropeanPopGt50 { get; set; }
+        
+        public string Redlist2021ResultsCount =>
+            Redlist2021Results.Count > 0 ? 
+                $"Viser {Redlist2021Results.Count} av {Redlist2021Results.TotalItemCount:N0}" : "Ingen resulater";
+
+        public Species2001StatisticsViewModel Statistics { get; set; } = new();
+    }
+
+    public class FilterCriterias
+    {
+        public bool CriteriaA { get; set; }
+        public bool CriteriaB { get; set; }
+        public bool CriteriaC { get; set; }
+        public bool CriteriaD { get; set; }
+    }
+
+    public class FilterRegions
+    {
         public bool Agder { get; set; }
         public bool Innlandet { get; set; }
         public bool VestFoldTelemark { get; set; }
@@ -37,16 +58,6 @@ namespace Assessments.Frontend.Web.Models
         public bool Vestland { get; set; }
         public bool VikenOslo { get; set; }
         public bool Havomroder { get; set; }
-        public bool EuropeanPopLt5 { get; set; }
-        public bool EuropeanPopRange5To25 { get; set; }
-        public bool EuropeanPopRange25To50 { get; set; }
-        public bool EuropeanPopGt50 { get; set; }
-        public bool PresumedExtinct { get; set; }
-        public string Redlist2021ResultsCount =>
-            Redlist2021Results.Count > 0 ? 
-                $"Viser {Redlist2021Results.Count} av {Redlist2021Results.TotalItemCount:N0}" : "Ingen resulater";
-
-        public Species2001StatisticsViewModel Statistics { get; set; } = new();
     }
 
     public class Species2001StatisticsViewModel

@@ -20,10 +20,8 @@ namespace Assessments.Frontend.Web.Controllers
 
         [Route("2021")]
         public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, bool VU, 
-        bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, bool criteriaA, bool criteriaB, 
-        bool criteriaC, bool criteriaD, bool Norge, bool svalbard, bool presumedExtinct, bool Agder, bool Innlandet, 
-        bool VestFoldTelemark, bool MoreRomsdal, bool Nordland, bool Rogaland, bool TromsFinnmark, bool Trondelag, 
-        bool Vestland, bool VikenOslo, bool Havomroder, bool europeanPopLt5, bool europeanPopRange5To25, 
+        bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, FilterCriterias Criterias, bool Norge, 
+        bool svalbard, bool presumedExtinct, FilterRegions Regions, bool europeanPopLt5, bool europeanPopRange5To25, 
         bool europeanPopRange25To50, bool europeanPopGt50)
         {
             // Pagination
@@ -57,10 +55,10 @@ namespace Assessments.Frontend.Web.Controllers
             // Criterias
             Dictionary<char, bool> criterias = new Dictionary<char, bool>
             {
-                { 'A', criteriaA },
-                { 'B', criteriaB },
-                { 'C', criteriaC },
-                { 'D', criteriaD },
+                { 'A', Criterias.CriteriaA },
+                { 'B', Criterias.CriteriaB },
+                { 'C', Criterias.CriteriaC },
+                { 'D', Criterias.CriteriaD },
             };
             char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
 
@@ -75,17 +73,17 @@ namespace Assessments.Frontend.Web.Controllers
             // Regions
             Dictionary<string, bool> regions = new Dictionary<string, bool>
             {
-                {Constants.Regions.Agder, Agder},
-                {Constants.Regions.Innlandet, Innlandet},
-                {Constants.Regions.VestfoldTelemark, VestFoldTelemark},
-                {Constants.Regions.MoreRomsdal, MoreRomsdal},
-                {Constants.Regions.Nordland, Nordland},
-                {Constants.Regions.Rogaland, Rogaland},
-                {Constants.Regions.TromsFinnmark, TromsFinnmark},
-                {Constants.Regions.Trondelag, Trondelag},
-                {Constants.Regions.Vestland, Vestland},
-                {Constants.Regions.VikenOslo, VikenOslo},
-                {Constants.Regions.Havomraader, Havomroder}
+                {Constants.Regions.Agder, Regions.Agder},
+                {Constants.Regions.Innlandet, Regions.Innlandet},
+                {Constants.Regions.VestfoldTelemark, Regions.VestFoldTelemark},
+                {Constants.Regions.MoreRomsdal, Regions.MoreRomsdal},
+                {Constants.Regions.Nordland, Regions.Nordland},
+                {Constants.Regions.Rogaland, Regions.Rogaland},
+                {Constants.Regions.TromsFinnmark, Regions.TromsFinnmark},
+                {Constants.Regions.Trondelag, Regions.Trondelag},
+                {Constants.Regions.Vestland, Regions.Vestland},
+                {Constants.Regions.VikenOslo, Regions.VikenOslo},
+                {Constants.Regions.Havomraader, Regions.Havomroder}
             };
             List<string> chosenRegions = Helpers.findSelectedRegions(regions);
 
@@ -154,28 +152,15 @@ namespace Assessments.Frontend.Web.Controllers
                 NA = NA,
                 Redlisted = redlisted,
                 Endangered = endangered,
-                CriteriaA = criteriaA,
-                CriteriaB = criteriaB,
-                CriteriaC = criteriaC,
-                CriteriaD = criteriaD,
+                Criterias = Criterias,
                 Norge = Norge,
                 Svalbard = svalbard,
                 PresumedExtinct = presumedExtinct,
-                Agder = Agder,
-                Innlandet = Innlandet,
-                VestFoldTelemark = VestFoldTelemark,
-                MoreRomsdal = MoreRomsdal,
-                Nordland = Nordland,
-                Rogaland = Rogaland,
-                TromsFinnmark = TromsFinnmark,
-                Trondelag = Trondelag,
-                Vestland = Vestland,
-                VikenOslo = VikenOslo,
-                Havomroder = Havomroder,
+                Regions = Regions,
                 EuropeanPopLt5 = europeanPopLt5,
                 EuropeanPopRange5To25 = europeanPopRange5To25,
                 EuropeanPopRange25To50 = europeanPopRange25To50,
-                EuropeanPopGt50 = europeanPopGt50
+                EuropeanPopGt50 = europeanPopGt50,
             };
 
             SetupStatisticsViewModel(query.ToList(), viewModel);

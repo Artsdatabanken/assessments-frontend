@@ -157,6 +157,22 @@
         }
         return "inactive";
     }
+
+    string inList(string element, string[] bigstring)
+    {
+
+        @foreach (string el in bigstring)
+        {
+            if (bigstring.Contains(element))
+            {
+                return "active";
+            }
+        }
+
+
+        return "inactive";
+    }
+
 }
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized))
@@ -259,25 +275,27 @@
                                     @if (v.ContainsKey("description"))
                                     {
                                         <p>@v["description"]</p>
+
                                     }
 
 
-                                    
-                                    @*
-                                        TODO: 
-                                        THis loop only prints out relevant elements from the list.
-                                        we actually wanna print out all relevant elements, BUT bold these elements.
-                                        So this was just to check that the division works as intended. Which it does.
-                                    *@
-
-                                    @foreach (string subsuboption in currentlist)
+                                    @if (v.ContainsKey("subsub"))
                                     {
-                                        @if (criteria_json["C"]["subcriteria"]["C2"]["subsub"].ContainsKey(subsuboption))
-                                        {
-                                            <b>@subsuboption </b><span>@criteria_json[key]["subcriteria"][k]["subsub"][subsuboption]["title"]</span>
-                                            <br/>
+                                        <div class="subsub_list">
+                                            @{
+                                                var subdict = Newtonsoft.Json.Linq.JObject.Parse(@v["subsub"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                            }
+
+                                            @foreach (var (subkey, subval) in subdict)
+                                            {
+                                            <div class="subsub_element @inList(subkey, currentlist)">
+                                                <b>@subkey</b>
+                                                <span>@subval["title"]</span><br />
+                                            </div>
+                                            }
+
+                                        </div>
                                         }
-                                    }                                
 
 
 

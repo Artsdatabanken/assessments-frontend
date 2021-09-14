@@ -77,8 +77,8 @@
     }
   },
   "B": {
-    "title": "Begrenset utbredelse i kombinasjon med fragmentering eller nedgang [2015]",
-    "description": "Begrenset utbredelsesområde (< 40 000 km2) eller forekomstareal (< 4000 km2) kombinert med minst to av følgende underkriterier: a kraftig fragmentering eller få lokaliteter; b pågående nedgang i populasjonstørrelse eller areal; c ekstreme fluktuasjoner[2015]",
+    "title": "Begrenset utbredelse i kombinasjon med fragmentering eller nedgang ",
+    "description": "Begrenset utbredelsesområde (< 40 000 km2) eller forekomstareal (< 4000 km2) kombinert med minst to av følgende underkriterier: a kraftig fragmentering eller få lokaliteter; b pågående nedgang i populasjonstørrelse eller areal; c ekstreme fluktuasjoner",
     "options": {
       "a": {
         "title": "Kraftig fragmentering eller få lokaliteter (avgrenset av trussel)",
@@ -193,38 +193,40 @@
       },
       "C2": {
         "title": "Liten poulasjonsstørrelse",
-        "a(i)": {
-          "title": "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon",
-          "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.  ",
-          "content": {
-            "field": "C2A1PågåendePopulasjonsreduksjonAntatt",
-            "min": "Minst: <field.min> individer ",
-            "max": "Maksimum: c2A1PågåendePopulasjonsreduksjonAntatt(max) individer",
-            "probable": {
-              "punktestimat": "Mest trolig: c2A1PågåendePopulasjonsreduksjonAntatt(probable) individer",
-              "intervall": ""
-            },
-            "quantile": "Beregnet antall, med føre-var forbehold: c2A1PågåendePopulasjonsreduksjonAntatt(quantile) individer ",
-            "conclusion": "C2a(i) Største delpopulasjon ≤<terskelverdi> tilsvarer i utgangspunktet <kategori>"
-          }
-        },
-        "a(ii)": {
-          "title": "Pågående nedgang og andel reproduksjonsdyktige individ i én og samme delpopulasjon",
-          "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg finnes en stor andel av populasjonen i én og samme delpopulasjon (alle egg i én kurv).   ",
-          "content": {
-            "min": "Minst :c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon"
-          }
+        "subsub": {
+          "a(i)": {
+            "title": "Pågående nedgang og antall reproduksjonsdyktige individer i største delpopulasjon",
+            "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.  ",
+            "content": {
+              "field": "C2A1PågåendePopulasjonsreduksjonAntatt",
+              "min": "Minst: <field.min> individer ",
+              "max": "Maksimum: c2A1PågåendePopulasjonsreduksjonAntatt(max) individer",
+              "probable": {
+                "punktestimat": "Mest trolig: c2A1PågåendePopulasjonsreduksjonAntatt(probable) individer",
+                "intervall": ""
+              },
+              "quantile": "Beregnet antall, med føre-var forbehold: c2A1PågåendePopulasjonsreduksjonAntatt(quantile) individer ",
+              "conclusion": "C2a(i) Største delpopulasjon ≤<terskelverdi> tilsvarer i utgangspunktet <kategori>"
+            }
           },
-        "b": {
-          "title": "Ekstreme fluktuasjoner i antall reproduksjonsdyktige individ",
-          "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg er det ekstreme fluktuasjoner (mer enn en tifoldig økning eller reduksjon) i artens populasjonsstørrelse. Ekstreme fluktuasjoner brukes bare der det er relativt stor sikkerhet for at nedgang vil følges av vekst innen en eller to generasjoner og hvor det er rimelig sikkert av fluktuasjoner i antall reproduksjonsdyktige individ representerer fluktuasjoner i den totale populasjonen.  "
-        }
+          "a(ii)": {
+            "title": "Pågående nedgang og andel reproduksjonsdyktige individ i én og samme delpopulasjon",
+            "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg finnes en stor andel av populasjonen i én og samme delpopulasjon (alle egg i én kurv).   ",
+            "content": {
+              "min": "Minst :c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon"
+            }
+          },
+          "b": {
+            "title": "Ekstreme fluktuasjoner i antall reproduksjonsdyktige individ",
+            "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg er det ekstreme fluktuasjoner (mer enn en tifoldig økning eller reduksjon) i artens populasjonsstørrelse. Ekstreme fluktuasjoner brukes bare der det er relativt stor sikkerhet for at nedgang vil følges av vekst innen en eller to generasjoner og hvor det er rimelig sikkert av fluktuasjoner i antall reproduksjonsdyktige individ representerer fluktuasjoner i den totale populasjonen.  "
+          }
+        }       
       }
     }
   },
   "D": {
-    "title": "Svært liten populasjonsstørrelse eller forekomst [2015]",
-    "description": "Svært få reproduksjonsdyktige individ (< 2000) eller svært begrenset forekomstareal eller få lokaliteter (< 40 km2 eller ≤ 10 lokaliteter). Arter med begrenset forekomstareal/få lokaliteter kan kun rødlistes hvis det også finnes en potensiell trussel mot lokaliteten. Arter kan bli rødlistet etter D-kriteriet selv om det ikke er en pågående negang i populasjonsstørrelse. [2015]",
+    "title": "Svært liten populasjonsstørrelse eller forekomst",
+    "description": "Svært få reproduksjonsdyktige individ (< 2000) eller svært begrenset forekomstareal eller få lokaliteter (< 40 km2 eller ≤ 10 lokaliteter). Arter med begrenset forekomstareal/få lokaliteter kan kun rødlistes hvis det også finnes en potensiell trussel mot lokaliteten. Arter kan bli rødlistet etter D-kriteriet selv om det ikke er en pågående negang i populasjonsstørrelse.",
     "subcriteria": {
       "D1": {
         "title": "Få reproduksjonsdyktige individ",

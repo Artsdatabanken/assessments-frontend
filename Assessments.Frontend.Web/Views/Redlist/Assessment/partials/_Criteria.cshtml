@@ -8,7 +8,7 @@
 @{
 
     Dictionary<string, Dictionary<string, object>> criteria = ViewBag.kriterier.ToObject<Dictionary<string, Dictionary<string, object>>>();
-
+    var criteria_json = ViewBag.kriterier;
 
     string a = "";
     string b = "";
@@ -61,7 +61,7 @@
 
     string subCriteria(string element, string bigstring)
     {
-        return bigstring.Replace("+", "," + element);
+        return bigstring.Replace("+", ";" + element);
     }
 
 
@@ -74,19 +74,19 @@
     string a_options = "";
 
     a = subCriteria("A", a);
-    a = a.Replace("(", ",(");
-    var distinctlist = a.Split(",").Distinct();
-    a = string.Join(",", distinctlist);
+    a = a.Replace("(", ";(");
+    var distinctlist = a.Split(";").Distinct();
+    a = string.Join(";", distinctlist);
 
     // STUPID WAY TO DO IT BUT ITS LATE IN THE DAY.
 
     if (a.Contains("("))
     {
-        a_subcriteria = a.Split(",(")[0];
-        a_options = a.Split(",(")[1];
+        a_subcriteria = a.Split(";(")[0];
+        a_options = a.Split(";(")[1];
         a_subcriteria += a_options.Split(")")[1];
         a_options = a_options.Split(")")[0];
-        a = a_subcriteria + "," + a_options;
+        a = a_subcriteria + ";" + a_options;
 
     }
 
@@ -101,7 +101,7 @@
     b = subCriteria("B", b);
     if (b.Contains("B1"))
     {
-        b_subcriteria += "B1,";
+        b_subcriteria += "B1;";
         b = b.Replace("B1", "");
     }
     if (b.Contains("B2"))
@@ -110,11 +110,11 @@
         b = b.Replace("B2", "");
     }
 
-    b = b.Replace("b", ",b");
-    b = b.Replace("c", ",c");
-    var b_distinctlist = b.Split(",").Distinct();
-    b_options = string.Join(",", b_distinctlist);
-    b = b_subcriteria + "," + b_options;
+    b = b.Replace("b", ";b");
+    b = b.Replace("c", ";c");
+    var b_distinctlist = b.Split(";").Distinct();
+    b_options = string.Join(";", b_distinctlist);
+    b = b_subcriteria + ";" + b_options;
 
 
 
@@ -159,37 +159,38 @@
     }
 }
 
+@if (!string.IsNullOrEmpty(Model.CriteriaSummarized))
+{
+    <div class="page_section criteria">
+
+        <h2>Hvilke kriterier gjør at denne arten er rødlistet?</h2>
+        <p> En fin plass å oppsummere bittelitt om kriteriene, og si en slags introsetning. </p>
+        <div class="page_section">
+            <p>@Model.CriteriaSummarized<br /></p>
+
+            A: @a <br />
+            B: @b<br />
+            C: @c <br />
+            D: @d <br />
+            E: @e <br />
+        </div>
 
 
-<div class="page_section criteria">
-
-    <h2>Hvilke kriterier gjør at denne arten er rødlistet?</h2>
-    <p> En fin plass å oppsummere bittelitt om kriteriene, og si en slags introsetning. </p>
-    <div class="page_section">
-        <p>@Model.CriteriaSummarized<br /></p>
-
-        A: @a <br />
-        B: @b<br />
-        C: @c <br />
-        D: @d <br />
-        E: @e <br />
-    </div>
-
-    @foreach (var (key, value) in criteria)
-    {
+        @foreach (var (key, value) in criteria)
+        {
 
 
-        <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
-            @if (@inString(key, @Model.CriteriaSummarized) == "active")
+            <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
+                @if (@inString(key, @Model.CriteriaSummarized) == "active")
                 {
                     <h3 class="material-icons">
-                        done 
+                        done
                     </h3>
                 }
                 else
                 {
                     <h3 class="material-icons">
-                        close 
+                        close
                     </h3>
                 }
                 <div class="listitem_text_field">
@@ -202,58 +203,19 @@
 
 
 
-                @if (@value.ContainsKey("subcriteria"))
-                {
-                    <div class="criteria_subcriteria">
-                        @{
-                            var newDictionary2 = Newtonsoft.Json.Linq.JObject.Parse(value["subcriteria"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-                        }
-                        @foreach (var (k, v) in newDictionary2)
-                        {
-
-                            <div class=" @inString(k, subcriteria[key]) listitem_criteria">
-
-
-                                @if (@inString(k, subcriteria[key]) == "active")
-                                {
-                                    <span class="material-icons">
-                                        done
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="material-icons">
-                                        close
-                                    </span>
-                                }
-
-                                <div class="listitem_text_field">
-
-                                    <h5>@k <span>@v["title"]</span></h5><br />
-                                    @if (v.ContainsKey("description"))
-                                    {
-                                        <p>@v["description"]</p>
-                                    }
-                                </div>
-                            </div>
-                        }
-                    </div>
-                }
-
-                @if (@value.ContainsKey("options"))
-                {
-                    <div class="criteria_options">
-                        @{
-                            var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-                        }
-                        <h4> Underkriterier </h4>
-                        <p>
-
-                            @foreach (var (k, v) in newDictionary)
+                    @if (@value.ContainsKey("subcriteria"))
+                    {
+                        <div class="criteria_subcriteria">
+                            @{
+                                var newDictionary2 = Newtonsoft.Json.Linq.JObject.Parse(value["subcriteria"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                            }
+                            @foreach (var (k, v) in newDictionary2)
                             {
 
-                                <div class="listitem_criteria @inString(k, options[key])">
-                                    @if (@inString(k, options[key]) == "active")
+                                <div class=" @inString(k, subcriteria[key]) listitem_criteria">
+
+
+                                    @if (@inString(k, subcriteria[key]) == "active")
                                     {
                                         <span class="material-icons">
                                             done
@@ -265,21 +227,107 @@
                                             close
                                         </span>
                                     }
-                                    <div class="listitem_text_field">
-                                        <h5>@k. <span>@v["title"]</span></h5>
 
-                                    </div>
+                                <div class="listitem_text_field">
+                                    @{
+                                        // THIS IS ONLY RELEVANT FOR C2,
+                                        // AS ONLY C CONTAINS SUBCATEGORIES FOR CRITERIA
+                                        // AND ONLY FOR THE a. category
+                                        // key = c
+                                        // subcriteria[key] = all subcriterias for c
+                                        // k = current criteria
+                                        var splitlist = subcriteria[key].Split(";");
+                                        var current_element = "";
+                                        foreach (string element in splitlist)
+                                        {
+                                            if (element.Contains(k))
+                                            {
+                                                current_element = element;
+                                            }
+                                        }
+                                        current_element = current_element.Replace(k, "");
+                                        // Don't look at it. It works :|
+                                        current_element = current_element.Replace("a(i,ii)", "a(i)a(ii)");
+                                        current_element = current_element.Replace(")", ");");
+                                        current_element = current_element.Replace(" ", "");
+                                        var currentlist = current_element.Split(";");
+
+                                    }
+
+                                    <h5>@k <span>@v["title"]</span></h5><br />
+
+                                    @if (v.ContainsKey("description"))
+                                    {
+                                        <p>@v["description"]</p>
+                                    }
+
+
+                                    
+                                    @*
+                                        TODO: 
+                                        THis loop only prints out relevant elements from the list.
+                                        we actually wanna print out all relevant elements, BUT bold these elements.
+                                        So this was just to check that the division works as intended. Which it does.
+                                    *@
+
+                                    @foreach (string subsuboption in currentlist)
+                                    {
+                                        @if (criteria_json["C"]["subcriteria"]["C2"]["subsub"].ContainsKey(subsuboption))
+                                        {
+                                            <b>@subsuboption </b><span>@criteria_json[key]["subcriteria"][k]["subsub"][subsuboption]["title"]</span>
+                                            <br/>
+                                        }
+                                    }                                
+
+
 
                                 </div>
+                                </div>
                             }
-                        </p>
-                    </div>
-                }
+                        </div>
+                    }
+
+                    @if (@value.ContainsKey("options"))
+                    {
+                        <div class="criteria_options">
+                            @{
+                                var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                            }
+                            <h4> Underkriterier </h4>
+                            <p>
+
+                                @foreach (var (k, v) in newDictionary)
+                                {
+
+                                    <div class="listitem_criteria @inString(k, options[key])">
+                                        @if (@inString(k, options[key]) == "active")
+                                        {
+                                            <span class="material-icons">
+                                                done
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="material-icons">
+                                                close
+                                            </span>
+                                        }
+                                        <div class="listitem_text_field">
+                                            <h5>@k. <span>@v["title"]</span></h5>
+
+                                        </div>
+
+                                    </div>
+                                }
+                            </p>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
 
 
-    }
+        }
 
 
-</div>
+    </div>
+}

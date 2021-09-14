@@ -173,7 +173,30 @@
         return "inactive";
     }
 
+    void iconChooser(string compare)
+    {
+        @if (@compare == "active")
+        {
+            <span class="material-icons">
+                done
+            </span>
+        }
+        else
+        {
+            <span class="material-icons">
+                close
+            </span>
+        }
+    }
+
+
 }
+
+@{
+
+}
+
+
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized))
 {
@@ -197,18 +220,10 @@
 
 
             <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
-                @if (@inString(key, @Model.CriteriaSummarized) == "active")
-                {
-                    <h3 class="material-icons">
-                        done
-                    </h3>
-                }
-                else
-                {
-                    <h3 class="material-icons">
-                        close
-                    </h3>
-                }
+                <h3>
+                    @{ iconChooser(@inString(key, @Model.CriteriaSummarized)); }
+                </h3>
+
                 <div class="listitem_text_field">
                     <h3>@key -  @value["title"]</h3>
 
@@ -228,23 +243,23 @@
                             @foreach (var (k, v) in newDictionary2)
                             {
 
-                                <div class=" @inString(k, subcriteria[key]) listitem_criteria">
+                            <div class=" @inString(k, subcriteria[key]) listitem_criteria">
 
-
-                                    @if (@inString(k, subcriteria[key]) == "active")
-                                    {
-                                        <span class="material-icons">
-                                            done
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span class="material-icons">
-                                            close
-                                        </span>
-                                    }
+                                @{ iconChooser(@inString(k, subcriteria[key])); }
 
                                 <div class="listitem_text_field">
+
+                                    <!-- SUBCRITERIA -->
+                                    <h5>@k <span>@v["title"]</span></h5><br />
+
+                                    @if (v.ContainsKey("description"))
+                                    {
+                                        <p>@v["description"]</p>
+
+                                    }
+
+                                    <!-- SUBCRITERIA SUBOPTIONS FOR C-CRITERIA -->
+
                                     @{
                                         // THIS IS ONLY RELEVANT FOR C2,
                                         // AS ONLY C CONTAINS SUBCATEGORIES FOR CRITERIA
@@ -270,15 +285,6 @@
 
                                     }
 
-                                    <h5>@k <span>@v["title"]</span></h5><br />
-
-                                    @if (v.ContainsKey("description"))
-                                    {
-                                        <p>@v["description"]</p>
-
-                                    }
-
-
                                     @if (v.ContainsKey("subsub"))
                                     {
                                         <div class="subsub_list">
@@ -288,19 +294,19 @@
 
                                             @foreach (var (subkey, subval) in subdict)
                                             {
-                                            <div class="subsub_element @inList(subkey, currentlist)">
-                                                <b>@subkey</b>
-                                                <span>@subval["title"]</span><br />
+                                            <div class="@inList(subkey, currentlist) listitem_criteria">
+                                                @{ iconChooser(@inList(subkey, currentlist)); }
+                                                <div class="listitem_text_field">
+                                                    <b>@subkey</b>
+                                                    <span>@subval["title"]</span>
+                                                </div>
                                             </div>
                                             }
 
                                         </div>
-                                        }
-
-
-
+                                    }
                                 </div>
-                                </div>
+                            </div>
                             }
                         </div>
                     }
@@ -312,32 +318,17 @@
                                 var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
                             }
                             <h4> Underkriterier </h4>
-                            <p>
 
-                                @foreach (var (k, v) in newDictionary)
-                                {
+                            @foreach (var (k, v) in newDictionary)
+                            {
 
-                                    <div class="listitem_criteria @inString(k, options[key])">
-                                        @if (@inString(k, options[key]) == "active")
-                                        {
-                                            <span class="material-icons">
-                                                done
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span class="material-icons">
-                                                close
-                                            </span>
-                                        }
-                                        <div class="listitem_text_field">
-                                            <h5>@k. <span>@v["title"]</span></h5>
-
-                                        </div>
-
+                                <div class="listitem_criteria @inString(k, options[key])">                                    
+                                    @{ iconChooser(@inString(k, options[key])); }
+                                    <div class="listitem_text_field">
+                                        <h5>@k. <span>@v["title"]</span></h5>
                                     </div>
-                                }
-                            </p>
+                                </div>
+                            }
                         </div>
                     }
                 </div>

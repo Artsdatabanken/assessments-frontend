@@ -85,7 +85,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             {
                 var data = await GetData<Rodliste2019>(Constants.Filename.Species2021Temp);
                 // todo: remove moser svalbard from source file
-                var filteredData = data.Where(x => x.Ekspertgruppe != "Moser (Svalbard)");
+                var filteredData = data.Where(x => !string.IsNullOrEmpty(x.Ekspertgruppe) && x.Ekspertgruppe != "Moser (Svalbard)");
                 return _mapper.Map<IEnumerable<SpeciesAssessment2021>>(filteredData).AsQueryable(); 
             }
 

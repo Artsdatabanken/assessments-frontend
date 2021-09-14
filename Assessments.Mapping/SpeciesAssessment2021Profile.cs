@@ -195,7 +195,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.CategoryAdjustedFrom, opt => opt.MapFrom(src => src.KategoriEndretFra))
                 .ForMember(dest => dest.CategoryAdjustedTo, opt => opt.MapFrom(src => src.KategoriEndretTil))
 
-                .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.Kriteriedokumentasjon.Trim(), true)))
+                .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.Kriteriedokumentasjon, true)))
 
                 .ForMember(dest => dest.CriteriaSummarized, opt => opt.MapFrom(src => src.Kriterier))
 

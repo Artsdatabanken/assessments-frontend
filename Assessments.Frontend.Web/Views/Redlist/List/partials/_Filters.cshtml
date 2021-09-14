@@ -1,5 +1,6 @@
 @model RL2021ViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Constants
+@using static Assessments.Frontend.Web.Infrastructure.FilterViewHelpers
 
 <div class="search-and-filter">
     <form asp-action="Index2021" method="get">
@@ -14,9 +15,7 @@
             <button class="btn" type="submit" name="Export" value="true">Eksport</button>
         </div>
         <div>
-            <button data-bind="click: resetFilters, disable: filterIsEmpty, style: { backgroundColor: filterIsEmpty() ? 'lightgray' : 'lightcyan' }">@SearchAndFilter.ResetAllFilters</button>
-            
-            
+            <input type="reset" value="@SearchAndFilter.ResetAllFilters" />
             <div class="filter_groups">
                 <h3>Filter</h3>
 
@@ -24,18 +23,17 @@
                     <h4>
                         <span>@SearchAndFilter.SearchChooseArea</span>
                     </h4>
-
                     <div style="cursor: pointer" data-bind="visible: svalbardVisible">
                         <ul style="margin-top: 10px; padding-left: 0">
                             <li class="checkbox" style="margin-top: 0;">
                                 <label class="checkbox"
-                                       style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                    <input type="checkbox" asp-for="Fastland" onclick="this.form.submit();" />Fastland
+                                        style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Norge" onclick="this.form.submit();" />Norge
                                 </label>
                             </li>
                             <li class="checkbox" style="margin-top: 0;">
                                 <label class="checkbox"
-                                       style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                        style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
                                     <input type="checkbox" asp-for="Svalbard" onclick="this.form.submit();" />Svalbard
                                 </label>
                             </li>
@@ -43,13 +41,10 @@
                     </div>
                 </div>
 
-
-
                 <div class="filter_group">
                     <h4>
                         <span>@SearchAndFilter.SearchChooseCategory</span>
                     </h4>
-
                     <div style="cursor: pointer" data-bind="visible: categoryVisible">
                         <ul style="margin-top: 10px; padding-left: 0">
                             <li class="checkbox" style="margin-top: 0;">
@@ -113,38 +108,146 @@
 
                 <div class="filter_group">
                     <h4>
+                        <span>Regioner og havområder</span>
+                    </h4>
+                    <div style="cursor: pointer">
+                        <ul style="margin-top: 10px; padding-left: 0">
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.Agder" onclick="this.form.submit();" />Agder
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.Innlandet" onclick="this.form.submit();" />Innlandet
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.VestFoldTelemark" onclick="this.form.submit();" />Vestfold og Telemark
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.MoreRomsdal" onclick="this.form.submit();" />Møre og Romsdal
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.Nordland" onclick="this.form.submit();" />Nordland
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.Rogaland" onclick="this.form.submit();" />Rogaland
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.TromsFinnmark" onclick="this.form.submit();" />Troms og Finnmark
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.Trondelag" onclick="this.form.submit();" />Trøndelag
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.Vestland" onclick="this.form.submit();" />Vestland
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.VikenOslo" onclick="this.form.submit();" />Viken og Oslo
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="Regions.Havomroder" onclick="this.form.submit();" />Havområder
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="filter_group">
+                    <h4>
+                        <span>Andel av europeisk populasjon</span>
+                    </h4>
+                    <div style="cursor: pointer" data-bind="visible: criteriaVisible">
+                        <ul style="margin-top: 10px; padding-left: 0">
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="EuropeanPopLt5" onclick="this.form.submit();" />&lt; 5 %
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="EuropeanPopRange5To25" onclick="this.form.submit();" />5 - 25 %
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="EuropeanPopRange25To50" onclick="this.form.submit();" />25 - 50 %
+                                </label>
+                            </li>
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="EuropeanPopGt50" onclick="this.form.submit();" />&gt; 50 %
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="filter_group">
+                    <h4>
                         <span>@SearchAndFilter.SearchChooseCriteria</span>
                     </h4>
                     <div style="cursor: pointer" data-bind="visible: criteriaVisible">
                         <ul style="margin-top: 10px; padding-left: 0">
                             <li class="checkbox" style="margin-top: 0;">
                                 <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                    <input type="checkbox" asp-for="CriteriaA" onclick="this.form.submit();" />A
+                                    <input type="checkbox" asp-for="Criterias.CriteriaA" onclick="this.form.submit();" />A - populasjonsreduksjon
                                 </label>
                             </li>
                             <li class="checkbox" style="margin-top: 0;">
                                 <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                    <input type="checkbox" asp-for="CriteriaB" onclick="this.form.submit();" />B
+                                    <input type="checkbox" asp-for="Criterias.CriteriaB" onclick="this.form.submit();" />B - lite areal
                                 </label>
                             </li>
                             <li class="checkbox" style="margin-top: 0;">
                                 <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                    <input type="checkbox" asp-for="CriteriaC" onclick="this.form.submit();" />C
+                                    <input type="checkbox" asp-for="Criterias.CriteriaC" onclick="this.form.submit();" />C - liten populasjon
                                 </label>
                             </li>
                             <li class="checkbox" style="margin-top: 0;">
                                 <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                    <input type="checkbox" asp-for="CriteriaD" onclick="this.form.submit();" />D
+                                    <input type="checkbox" asp-for="Criterias.CriteriaD" onclick="this.form.submit();" />D - svært liten populasjon eller forekomst
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="filter_group">
+                    <h4>
+                        <span>Trolig utdødd</span>
+                    </h4>
+                    <div style="cursor: pointer">
+                        <ul style="margin-top: 10px; padding-left: 0">
+                            <li class="checkbox" style="margin-top: 0;">
+                                <label class="checkbox"
+                                    style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
+                                    <input type="checkbox" asp-for="PresumedExtinct" onclick="this.form.submit();" />Trolig utdødd
                                 </label>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-                <div  style="cursor: pointer; background-color: powderblue; margin-top: 10px;">
-                    <label class="checkbox" style="margin-top: 5px; margin-left: 45px; cursor: pointer"><input type="checkbox" /> @SearchAndFilter.SearchChangedCategory</label>
-                </div>
-            </div>
+        </div>
     </form>
 </div>
         

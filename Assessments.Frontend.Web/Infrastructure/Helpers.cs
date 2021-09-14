@@ -106,6 +106,90 @@ namespace Assessments.Frontend.Web.Infrastructure
                     selectedAreas.Add(item.Key);
             return selectedAreas;
         }
+
+        public static List<string> findSelectedRegions(Dictionary<string, bool> selectedRegions)
+        {
+            List<string> regions = new List<string>();
+            if (selectedRegions[Constants.Regions.Agder])
+            {
+                regions.Add(Constants.Regions.VestAgder);
+                regions.Add(Constants.Regions.AustAgder);
+            }
+
+            if (selectedRegions[Constants.Regions.Innlandet])
+            {
+                regions.Add(Constants.Regions.Oppland);
+                regions.Add(Constants.Regions.Hedmark);
+            }
+
+            if (selectedRegions[Constants.Regions.VestfoldTelemark])
+            {
+                regions.Add(Constants.Regions.Vestfold);
+                regions.Add(Constants.Regions.Telemark);
+            }
+
+            if (selectedRegions[Constants.Regions.MoreRomsdal])
+                regions.Add(Constants.Regions.MoreRomsdal);
+
+            if (selectedRegions[Constants.Regions.Nordland])
+                regions.Add(Constants.Regions.Nordland);
+
+            if (selectedRegions[Constants.Regions.Rogaland])
+                regions.Add(Constants.Regions.Rogaland);
+
+            if (selectedRegions[Constants.Regions.TromsFinnmark])
+            {
+                regions.Add(Constants.Regions.Troms);
+                regions.Add(Constants.Regions.Finnmark);
+            }
+
+            if (selectedRegions[Constants.Regions.Trondelag])
+                regions.Add(Constants.Regions.Trondelag);
+
+            if (selectedRegions[Constants.Regions.Vestland])
+            {
+                regions.Add(Constants.Regions.SognFjordane);
+                regions.Add(Constants.Regions.Hordaland);
+            }
+
+            if (selectedRegions[Constants.Regions.VikenOslo])
+            {
+                regions.Add(Constants.Regions.OsloAkershus);
+                regions.Add(Constants.Regions.Buskerud);
+                regions.Add(Constants.Regions.Ostfold);
+            }
+
+            if (selectedRegions[Constants.Regions.Havomraader])
+            {
+                regions.Add(Constants.Regions.Nordsjoen);
+                regions.Add(Constants.Regions.Norskehavet);
+                regions.Add(Constants.Regions.Gronlandshavet);
+                regions.Add(Constants.Regions.Polhavet);
+                regions.Add(Constants.Regions.Barentshavet);
+            }
+            
+            return regions;
+        }
+
+        public static List<string> findEuropeanPopProcentages(Dictionary<string, bool> europeanPopulation)
+        {
+            List<string> selectedPercenteges = new List<string>();
+            
+            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopLt5]) 
+            {
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Lt1);
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Lt5);
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range1To5);
+            }
+            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25])
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range5To25);
+            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50])
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range25To50);
+            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopGt50])
+                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Gt50);
+
+            return selectedPercenteges;
+        }
     }
 
     public static class Constants
@@ -113,6 +197,63 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string CacheFolder = "Cache";
 
         public const string AssessmentsMappingAssembly = "Assessments.Mapping";
+
+        public class EuropeanPopulationPercentages
+        {
+            public const string EuropeanPopLt5 = "europeanPopLt5";
+            public const string EuropeanPopRange5To25 = "europeanPopRange5To25";
+            public const string EuropeanPopRange25To50 = "europeanPopRange25To50";
+            public const string EuropeanPopGt50 = "europeanPopGt50";
+            public const string Lt1 = "< 1 %";
+            public const string Lt5 = "< 5 %";
+            public const string Gt50 = "> 50 %";
+            public const string Range1To5 = "1 - 5 %";
+            public const string Range5To25 = "5 - 25 %";
+            public const string Range25To50 = "25 - 50 %";
+        }
+
+        public class Regions
+        {
+            public const string Agder = "Agder";
+            public const string VestAgder = "Vest-Agder";
+            public const string AustAgder = "Aust-Agder";
+
+            public const string Innlandet = "Innlandet";
+            public const string Oppland = "Oppland";
+            public const string Hedmark = "Hedmark";
+
+            public const string VestfoldTelemark = "Vestfold og Telemark";
+            public const string Vestfold = "Vestfold";
+            public const string Telemark = "Telemark";
+
+            public const string MoreRomsdal = "Møre og Romsdal";
+
+            public const string Nordland = "Nordland";
+
+            public const string Rogaland = "Rogaland";
+
+            public const string TromsFinnmark = "Troms og Finnmark";
+            public const string Troms = "Troms";
+            public const string Finnmark = "Finnmark";
+
+            public const string Trondelag = "Trøndelag";
+
+            public const string Vestland = "Vestland";
+            public const string SognFjordane = "Sogn og Fjordane";
+            public const string Hordaland = "Hordaland";
+
+            public const string VikenOslo = "Viken og Oslo";
+            public const string OsloAkershus = "Oslo og Akershus";
+            public const string Buskerud = "Buskerud";
+            public const string Ostfold = "Østfold";
+
+            public const string Havomraader = "Havområder";
+            public const string Nordsjoen = "Nordsjøen";
+            public const string Norskehavet = "Norskehavet";
+            public const string Gronlandshavet = "Grønlandshavet";
+            public const string Polhavet = "Polhavet";
+            public const string Barentshavet = "Barentshavet";
+        }
 
         public class Filename
         {
@@ -194,6 +335,15 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string SearchChooseCriteria = "Kriterier";
             public const string SearchChooseSpeciesGroup = "Artsgruppe";
             public const string SearchFilterSpecies = "Søk art/slekt";
+        }
+
+    }
+
+    public static class FilterViewHelpers
+    {
+        public static class Filters
+        {
+            public static string[] AssessmentAreas = new string[] {"Norge", "Svalbard"};
         }
     }
 }

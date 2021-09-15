@@ -7,136 +7,19 @@
 
     string ImpactIcon(string id, string subtitle)
     {
-        // TODO: Move images to folder in graphic profile project instead, whit automatic naming.
         var number = id.Substring(0, 1);
-        var biggernumber = id;
+        var biggernumber = id.Substring(0, 3);
+
         // 0. ingen trussel / no factor  has no image, as it is never displayed.
-        if (number == "2")
-        { // 2
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "forurensing" + ".png";
-        }
-        else if (number == "3")
-        { // 3
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "høsting" + ".png";
-        }
-        else if (number == "4")
-        { // 4
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png"; // TODO - MISSING
-        }
-        else if (number == "5")
-        { // 5
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "fremmedarter" + ".png";
-        }
-        else if (number == "6")
-        { // 6 "påvirkning fra stedegne arter"
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "stedegne" + ".png";
-        }
-        else if (number == "7")
-        { // 7
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "klima" + ".png";
-        }
-        else if (number == "8")
-        { // 8
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "naturkatastrofe" + ".png";
-        }
-        else if (number == "9")
-        { // 9
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "menneske" + ".png";
-        }
-        else if (number == "10")
-        { // 10
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "andre" + ".png";
-        }
-        else if (number == "11")
-        { // 11 ukjent
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png";
-        }
-        else if (number == "12")
-        { // 12
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png"; 
-            // TODO - MISSING ICON. 
-        }
-        else if (id.Contains("1.1"))
-        { // 1.1 habitat
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "landbruk" + ".png";
-        }
-        else if (id.Contains("1.2"))
-        { // 1.2 habitat
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "terrestisk" + ".png";
-        }
-        else if (id.Contains("1.3"))
-        { // 1.3 habitat
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "limnisk" + ".png";
-        }
-        else if (id.Contains("1.4"))
-        {// 1.4 habitat
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "marint" + ".png";
-        }
-        else
+        if (number == "1")
         {
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png";
+            // habitat icons are divided further
+            number = biggernumber;
         }
+
+        return "https://design.artsdatabanken.no/impact-icons/" + number + ".png";
     }
 
-    public string iconfinder(string factor)
-    {
-        @if (factor == "Ingen trussel")
-        {
-            return "delete_sweep";
-        }
-        else if (factor == "Påvirkning på habitat")
-        {
-            return "nature";
-        }
-        else if (factor == "Forurensning")
-        {
-            return "recycling";
-        }
-        else if (factor == "Høsting")
-        {
-            return "gradient";
-        }
-        else if (factor == "Tilfeldig mortalitet")
-        {
-            return "close";
-        }
-        else if (factor == "Fremmede arter")
-        {
-            return "pest_control";
-        }
-        else if (factor == "Påvirkning fra stedegne arter")
-        {
-            return "nature";
-        }
-        else if (factor == "Klimatiske endringer")
-        {
-            return "cloud";
-        }
-        else if (factor == "Naturkatastrofer")
-        {
-            return "air";
-        }
-        else if (factor == "Menneskelig forstyrrelse")
-        {
-            return "engineering";
-        }
-        else if (factor == "Andre")
-        {
-            return "lens_blur";
-        }
-        else if (factor == "Ukjent")
-        {
-            return "lens_blur";
-        }
-        else if (factor == "Påvirkning utenfor Norge")
-        {
-            return "public";
-        }
-        else
-        {
-            return "delete";
-        }
-    }
 }
 
 

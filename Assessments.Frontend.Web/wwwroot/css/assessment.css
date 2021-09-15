@@ -628,7 +628,8 @@
 
 /*criteria*/
 
-.criteria_element.active h3 {
+.criteria_options{
+    padding-bottom:20px;
 }
 
 .criteria .inactive {

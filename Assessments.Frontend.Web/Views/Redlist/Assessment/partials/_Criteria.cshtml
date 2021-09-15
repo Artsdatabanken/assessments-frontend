@@ -1,22 +1,20 @@
 ﻿
 @model SpeciesAssessment2021
 @*
+    TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
 
-
+    This component takes in the json file of criteria and displays it
+    It also takes in the unhandled criteriasummarized string and trasforms it 
+    into two useable dictionaries which are then matched to relevant places in the json.
 *@
 
 @{
-
+    // Cast JSON to dictionary for easy iteration.
     Dictionary<string, Dictionary<string, object>> criteria = ViewBag.kriterier.ToObject<Dictionary<string, Dictionary<string, object>>>();
-    var criteria_json = ViewBag.kriterier;
-
-    string a = "";
-    string b = "";
-    string c = "";
-    string d = "";
-    string e = "";
 
 
+    // Each criteria by letter is handled differently.
+    string a = "", b = "", c ="", d ="", e = "";
 
     void placeCriteria(string criteria)
     {
@@ -44,7 +42,7 @@
 
     }
 
-
+    // Iterate the criteria string and place each separate criteria in its correct container.
     if (@Model.CriteriaSummarized.Contains(";"))
     {
         // SPLIT THE LIST AND LOOP THEM
@@ -58,15 +56,7 @@
         placeCriteria(@Model.CriteriaSummarized);
     }
 
-
-    string subCriteria(string element, string bigstring)
-    {
-        return bigstring.Replace("+", ";" + element);
-    }
-
-
-
-
+    // STRING HANDLING
     // A CRITERIA:
     // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
 
@@ -78,8 +68,6 @@
     var distinctlist = a.Split(";").Distinct();
     a = string.Join(";", distinctlist);
 
-    // STUPID WAY TO DO IT BUT ITS LATE IN THE DAY.
-
     if (a.Contains("("))
     {
         a_subcriteria = a.Split(";(")[0];
@@ -90,10 +78,9 @@
 
     }
 
-
     // B CRITERIA
-
     // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
+    // options may contain sub-options
 
     string b_subcriteria = "";
     string b_options = "";
@@ -116,22 +103,20 @@
     b_options = string.Join(";", b_distinctlist);
     b = b_subcriteria + ";" + b_options;
 
-
-
-    // C CRITERIA:
+    // C CRITERIA
+    // All options are only relevant for C2 - handle in code.
     c = subCriteria("C", c);
 
-
-
     // D CRITERIA:
-    // NO OPTIONS ONLY SUBCRITERIA
-
+    // ONLY subcriteria.
     d = subCriteria("D", d);
 
 
     // E CRITERIA:
-    // Actually never in use, so no need to worry bout this one
+    // Actually never in use, so no need to worry bout this one. Be as is.
 
+
+    // The dictionaries used in the view
 
     var subcriteria = new Dictionary<string, string>(){
     {"A", a_subcriteria},
@@ -149,6 +134,13 @@
 
 
 
+    // Functions relevant to string separation
+
+    string subCriteria(string element, string bigstring)
+    {
+        return bigstring.Replace("+", ";" + element);
+    }
+
     string inString(string element, string bigstring)
     {
         if (bigstring.Contains(element))
@@ -160,7 +152,6 @@
 
     string inList(string element, string[] bigstring)
     {
-
         @foreach (string el in bigstring)
         {
             if (bigstring.Contains(element))
@@ -168,8 +159,6 @@
                 return "active";
             }
         }
-
-
         return "inactive";
     }
 
@@ -194,8 +183,6 @@
             </span>
         }
     }
-
-
 }
 
 
@@ -204,32 +191,33 @@
     <div class="page_section criteria">
 
         <h2>Hvilke kriterier gjør at denne arten er rødlistet?</h2>
-        <p> En fin plass å oppsummere bittelitt om kriteriene, og si en slags introsetning. </p>
+        <p> 
+            Denne teksten er noe H putter inn i påvente av noe bedre.
+            Kriteriene som benyttes i Rødlista er basert på internasjonale kriterier som spenner seg fra A-E. 
+            De norske kriteriene har i tillegg noen ekstra underkriterier, som i stor gjør at vi fanger opp ting
+            som i andre land ville ha falt under E-kriteriet på et tidligere nivå. E-kriteriet har ennå ikke blitt brukt 
+            i norsk rødlistesammenheng.
+        </p>
         <div class="page_section">
+            <h3>Offisiell kriteriestreng på internasjonal skrivemåte</h3>
             <p>@Model.CriteriaSummarized<br /></p>
-
-            A: @a <br />
-            B: @b<br />
-            C: @c <br />
-            D: @d <br />
-            E: @e <br />
         </div>
+        <h3>Kriteriefordeling</h3>
 
         <!-- MAIN CRITERIA -->
         @foreach (var (key, value) in criteria)
         {
             <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
-                <h3>
-                    @{ iconChooser(@inString(key, @Model.CriteriaSummarized)); }
-                </h3>
+                <h4>
+                    @{ iconChooser(inString(key, Model.CriteriaSummarized)); }
+                </h4>
 
                 <div class="listitem_text_field">
-                    <h3>@key -  @value["title"]</h3>
+                    <h4>@key -  @value["title"]</h4>
 
                     <p class="criteria_description">
                         @value["description"]
                     </p>
-
 
 
                     <!-- SUB CRITERIA : obtain and reformat necessary data -->
@@ -288,11 +276,11 @@
                                                 @foreach (var (subkey, subval) in subdict)
                                                 {
                                                     <div class="@inList(subkey, currentlist) listitem_criteria">
-                                                        @{ iconChooser(@inList(subkey, currentlist)); }
-                                                        <div class="listitem_text_field">
+                                                        @{ iconChooser(inList(subkey, currentlist)); }
+                                                        <h6 class="listitem_text_field">
                                                             <b>@subkey</b>
                                                             <span>@subval["title"]</span>
-                                                        </div>
+                                                        </h6>
                                                     </div>
                                                 }
 
@@ -316,8 +304,8 @@
                             @foreach (var (k, v) in newDictionary)
                             {
 
-                                <div class="listitem_criteria @inString(k, options[key])">
-                                    @{ iconChooser(@inString(k, options[key])); }
+                                <div class="listitem_criteria @inString(k, options[key]) s\">
+                                    @{ iconChooser(inString(k, options[key])); }
                                     <div class="listitem_text_field">
                                         <h5>@k. <span>@v["title"]</span></h5>
                                         @if (v.ContainsKey("description"))
@@ -358,34 +346,23 @@
                                         @foreach (var (subkey, subvalue) in subdict)
                                         {
                                             <div class="listitem_criteria @inList(subkey, clean_list)">
-                                                @{ iconChooser(@inList(subkey, clean_list)); }
-                                                <div class="listitem_text_field">
+                                                @{ iconChooser(inList(subkey, clean_list)); }
+                                                <h6 class="listitem_text_field">
                                                     <span>@subkey </span>
                                                     <span>@subvalue["title"]</span>
-                                                </div>
+                                                </h6>
                                             </div>
-
                                         }
-                                        <br />
-
+                                    
                                     </div>
-
                                         }
-
-
                                     </div>
                                 </div>
-
-
                             }
                         </div>
                     }<!-- END OPTIONS-->
                 </div>
             </div>
-
-
         }
-
-
     </div>
 }

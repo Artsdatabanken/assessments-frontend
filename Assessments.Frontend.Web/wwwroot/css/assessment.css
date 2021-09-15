@@ -372,7 +372,7 @@
 @media only screen and (min-width: 250px) and (max-width: 550px) {
 
     .habitat_icon {
-        and height: 100px;
+        height: 100px;
         width: 100px;
         display: inline;
         margin: auto;

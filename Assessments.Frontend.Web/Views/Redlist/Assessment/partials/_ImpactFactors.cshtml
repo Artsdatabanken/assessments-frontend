@@ -21,6 +21,21 @@
     }
 }
 
+@{ 
+    Dictionary<string, Dictionary<string, object>> impactfactors_json = ViewBag.impactfactors.ToObject<Dictionary<string, Dictionary<string, object>>>();
+
+}
+
+<div>
+    <h2>Påvirkningsfaktor som vist i JSON. </h2>
+
+    @foreach (var (key,value) in impactfactors_json)
+    {
+        <p>@key @value["title"] </p>
+    }
+
+</div>
+
 
 <div class="page_section">
     <h2>Påvirkningsfaktorer </h2>
@@ -30,7 +45,7 @@
     <div class="factors">
         @{foreach (var pfaktor in Model.ImpactFactors)
             {
-                <div class="fake_table_header" style=" background:lightpink;":>
+                <div class="fake_table_header" style=" ":>
 
 
                     <div class="stats_element_container">
@@ -50,7 +65,7 @@
                 </div>
 
 
-                <div class="fake_table" style=" background:lightblue;">
+                <div class="fake_table" style=" ">
                     <div>
                         <h3>Omfang</h3>
 

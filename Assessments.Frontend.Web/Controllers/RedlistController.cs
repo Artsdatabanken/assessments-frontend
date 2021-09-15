@@ -183,8 +183,10 @@ namespace Assessments.Frontend.Web.Controllers
             ViewBag.categories = await GetResource("wwwroot/json/categories.json");
             
             ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
-            
+
             ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
+
+            ViewBag.impactfactors = await GetResource("wwwroot/json/impactfactors.json");
 
             return View("Assessment/SpeciesAssessment2021", assessment);
         }

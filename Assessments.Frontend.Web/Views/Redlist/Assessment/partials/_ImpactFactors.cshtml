@@ -19,7 +19,6 @@
 
         return "https://design.artsdatabanken.no/impact-icons/" + number + ".png";
     }
-
 }
 
 
@@ -31,19 +30,27 @@
     <div class="factors">
         @{foreach (var pfaktor in Model.ImpactFactors)
             {
-                <div class="fake_table_header">
+                <div class="fake_table_header" style=" background:lightpink;":>
+
+
                     <div class="stats_element_container">
                         <img src="@ImpactIcon(@pfaktor.Id,@pfaktor.Factor)" class="paavirk" />
                     </div>
+
+
+
                     <div class="stats_element_text topalign">
                         <h3>@pfaktor.GroupingFactor</h3>
-                        @* todo: se om stien skal brukes, inneholder også toppnivå - kan fjernes under ved å skrive pfaktor.FactorPath.Skip(1)   *@
-                        <h5> Sti: @string.Join(" > ", pfaktor.FactorPath.Skip(1))</h5>
                         <b>@pfaktor.Id - @pfaktor.Factor</b>
+                        @* todo: se om stien skal brukes, inneholder også toppnivå - kan fjernes under ved å skrive pfaktor.FactorPath.Skip(1)   *@
+                        <h5> @string.Join(" > ", pfaktor.FactorPath.Skip(1))</h5>
+
 
                     </div>
                 </div>
-                <div class="fake_table">
+
+
+                <div class="fake_table" style=" background:lightblue;">
                     <div>
                         <h3>Omfang</h3>
 

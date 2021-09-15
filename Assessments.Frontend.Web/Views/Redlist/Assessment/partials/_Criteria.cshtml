@@ -14,7 +14,7 @@
 
 
     // Each criteria by letter is handled differently.
-    string a = "", b = "", c ="", d ="", e = "";
+    string a = "", b = "", c ="", d ="";
 
     void placeCriteria(string criteria)
     {
@@ -34,10 +34,6 @@
         else if (criteria.Contains("D"))
         {
             d = criteria;
-        }
-        else if (criteria.Contains("E"))
-        {
-            e = criteria;
         }
 
     }
@@ -111,19 +107,13 @@
     // ONLY subcriteria.
     d = subCriteria("D", d);
 
-
-    // E CRITERIA:
-    // Actually never in use, so no need to worry bout this one. Be as is.
-
-
     // The dictionaries used in the view
 
     var subcriteria = new Dictionary<string, string>(){
     {"A", a_subcriteria},
     {"B", b_subcriteria},
     {"C", c},
-    {"D", d},
-    {"E", e},
+    {"D", d}
     };
 
 

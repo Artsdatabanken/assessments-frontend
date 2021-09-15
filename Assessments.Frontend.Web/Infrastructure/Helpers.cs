@@ -54,7 +54,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             return memoryStream;
         }
 
-        public static List<string> findSelectedCategories(Dictionary<string, bool> categories, bool redlisted, bool endangered) 
+        public static List<string> findSelectedCategories( bool redlisted, bool endangered,
+            string[] categoriesSelected) 
         {
             List<string> selectedCategories = new List<string>();
 
@@ -77,14 +78,20 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             if (redlisted) 
                 foreach (var category in redlist)
-                    categories[category] = true;
+                    selectedCategories.Add(category);
             else if (endangered) 
                 foreach (var category in endangeredList)
-                    categories[category] = true;
-
-            foreach (var entry in categories)
-                if (entry.Value)
-                    selectedCategories.Add(entry.Key);
+                    selectedCategories.Add(category);
+            foreach (var s in categoriesSelected)
+            {
+                if (!selectedCategories.Contains(s))
+                {
+                    selectedCategories.Add(s);
+                }
+            }
+            //foreach (var entry in categories)
+            //    if (entry.Value)
+            //        selectedCategories.Add(entry.Key);
 
             return selectedCategories;
         }

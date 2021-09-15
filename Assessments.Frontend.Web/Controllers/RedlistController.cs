@@ -17,14 +17,25 @@ namespace Assessments.Frontend.Web.Controllers
     public class RedlistController : BaseController<RedlistController>
     {
         private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
+
+        private static readonly string[] _allCategories = new[]
+        {
+            Constants.SpeciesCategories.Extinct.ShortHand,
+            Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
+            Constants.SpeciesCategories.Endangered.ShortHand,
+            Constants.SpeciesCategories.Vulnerable.ShortHand,
+            Constants.SpeciesCategories.NearThreatened.ShortHand,
+            Constants.SpeciesCategories.DataDeficient.ShortHand,
+            Constants.SpeciesCategories.Viable.ShortHand,
+            Constants.SpeciesCategories.NotEvalueted.ShortHand,
+            Constants.SpeciesCategories.NotAppropriate.ShortHand
+        };
         public IActionResult Index() => View();
 
         [Route("2021")]
-        public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, bool VU, 
-        bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, FilterCriterias Criterias, bool Norge, 
-        bool svalbard, bool presumedExtinct, FilterRegions Regions, bool europeanPopLt5, bool europeanPopRange5To25, 
-        bool europeanPopRange25To50, bool europeanPopGt50)
+        public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
+            viewModel ??= new RL2021ViewModel();
             // Pagination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
@@ -33,68 +44,58 @@ namespace Assessments.Frontend.Web.Controllers
             var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
             // Søk
-            if (!string.IsNullOrEmpty(name))
-                query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
+            if (!string.IsNullOrEmpty(viewModel.Name))
+                query = query.Where(x => x.ScientificName.ToLower().Contains(viewModel.Name.Trim().ToLower()));
 
             // Filter
 
             // Categories
-            Dictionary<string, bool> categories = new Dictionary<string, bool>
-            {
-                { Constants.SpeciesCategories.Extinct.ShortHand, RE },
-                { Constants.SpeciesCategories.CriticallyEndangered.ShortHand, CR },
-                { Constants.SpeciesCategories.Endangered.ShortHand, EN },
-                { Constants.SpeciesCategories.Vulnerable.ShortHand, VU },
-                { Constants.SpeciesCategories.NearThreatened.ShortHand, NT },
-                { Constants.SpeciesCategories.DataDeficient.ShortHand, DD },
-                { Constants.SpeciesCategories.Viable.ShortHand, LC },
-                { Constants.SpeciesCategories.NotEvalueted.ShortHand, NE },
-                { Constants.SpeciesCategories.NotAppropriate.ShortHand, NA }
-            };
-            List<string> chosenCategories = Helpers.findSelectedCategories(categories, redlisted, endangered);
+            
+            ViewBag.AllCategories = _allCategories;
+            List<string> chosenCategories = Helpers.findSelectedCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
 
             // Criterias
             Dictionary<char, bool> criterias = new Dictionary<char, bool>
             {
-                { 'A', Criterias.CriteriaA },
-                { 'B', Criterias.CriteriaB },
-                { 'C', Criterias.CriteriaC },
-                { 'D', Criterias.CriteriaD },
+                { 'A', viewModel.Criterias.CriteriaA },
+                { 'B', viewModel.Criterias.CriteriaB },
+                { 'C', viewModel.Criterias.CriteriaC },
+                { 'D', viewModel.Criterias.CriteriaD },
             };
             char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
 
             // Areas
             Dictionary<string, bool> assessmentAreas = new Dictionary<string, bool>
             {
-                { "N", Norge },
-                { "S", svalbard }
+                { "N", viewModel.Norge },
+                { "S", viewModel.Svalbard }
             };
             List<string> chosenAreas = Helpers.findSelectedAreas(assessmentAreas);
 
             // Regions
             Dictionary<string, bool> regions = new Dictionary<string, bool>
             {
-                {Constants.Regions.Agder, Regions.Agder},
-                {Constants.Regions.Innlandet, Regions.Innlandet},
-                {Constants.Regions.VestfoldTelemark, Regions.VestFoldTelemark},
-                {Constants.Regions.MoreRomsdal, Regions.MoreRomsdal},
-                {Constants.Regions.Nordland, Regions.Nordland},
-                {Constants.Regions.Rogaland, Regions.Rogaland},
-                {Constants.Regions.TromsFinnmark, Regions.TromsFinnmark},
-                {Constants.Regions.Trondelag, Regions.Trondelag},
-                {Constants.Regions.Vestland, Regions.Vestland},
-                {Constants.Regions.VikenOslo, Regions.VikenOslo},
-                {Constants.Regions.Havomraader, Regions.Havomroder}
+                {Constants.Regions.Agder, viewModel.Regions.Agder},
+                {Constants.Regions.Innlandet, viewModel.Regions.Innlandet},
+                {Constants.Regions.VestfoldTelemark, viewModel.Regions.VestFoldTelemark},
+                {Constants.Regions.MoreRomsdal, viewModel.Regions.MoreRomsdal},
+                {Constants.Regions.Nordland, viewModel.Regions.Nordland},
+                {Constants.Regions.Rogaland, viewModel.Regions.Rogaland},
+                {Constants.Regions.TromsFinnmark, viewModel.Regions.TromsFinnmark},
+                {Constants.Regions.Trondelag, viewModel.Regions.Trondelag},
+                {Constants.Regions.Vestland, viewModel.Regions.Vestland},
+                {Constants.Regions.VikenOslo, viewModel.Regions.VikenOslo},
+                {Constants.Regions.Havomraader, viewModel.Regions.Havomroder}
             };
             List<string> chosenRegions = Helpers.findSelectedRegions(regions);
 
             // European population percentages
             Dictionary<string, bool> europeanPopulation = new Dictionary<string, bool>
             {
-                {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, europeanPopLt5},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, europeanPopRange5To25},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, europeanPopRange25To50},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, europeanPopGt50}
+                {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, viewModel.EuropeanPopLt5},
+                {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, viewModel.EuropeanPopRange5To25},
+                {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, viewModel.EuropeanPopRange25To50},
+                {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, viewModel.EuropeanPopGt50}
             };
             List<string> chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(europeanPopulation);
 
@@ -113,7 +114,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (chosenEuropeanPopulation?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.PercentageEuropeanPopulation) && chosenEuropeanPopulation.Contains(x.PercentageEuropeanPopulation));
 
-            if (presumedExtinct)
+            if (viewModel.PresumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
 
             ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
@@ -134,31 +135,31 @@ namespace Assessments.Frontend.Web.Controllers
                 };
             }
 
-            var viewModel = new RL2021ViewModel
-            {
-                Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
-                Name = name,
-                RE = RE,
-                CR = CR,
-                EN = EN,
-                VU = VU,
-                NT = NT,
-                DD = DD,
-                LC = LC,
-                NE = NE,
-                NA = NA,
-                Redlisted = redlisted,
-                Endangered = endangered,
-                Criterias = Criterias,
-                Norge = Norge,
-                Svalbard = svalbard,
-                PresumedExtinct = presumedExtinct,
-                Regions = Regions,
-                EuropeanPopLt5 = europeanPopLt5,
-                EuropeanPopRange5To25 = europeanPopRange5To25,
-                EuropeanPopRange25To50 = europeanPopRange25To50,
-                EuropeanPopGt50 = europeanPopGt50,
-            };
+            //viewModel = new RL2021ViewModel
+            //{
+            viewModel.Redlist2021Results = query.ToPagedList(pageNumber, pageSize);
+            //    Name = name,
+            //    RE = RE,
+            //    CR = CR,
+            //    EN = EN,
+            //    VU = VU,
+            //    NT = NT,
+            //    DD = DD,
+            //    LC = LC,
+            //    NE = NE,
+            //    NA = NA,
+            //    Redlisted = redlisted,
+            //    Endangered = endangered,
+            //    Criterias = Criterias,
+            //    Norge = Norge,
+            //    Svalbard = svalbard,
+            //    PresumedExtinct = presumedExtinct,
+            //    Regions = Regions,
+            //    EuropeanPopLt5 = europeanPopLt5,
+            //    EuropeanPopRange5To25 = europeanPopRange5To25,
+            //    EuropeanPopRange25To50 = europeanPopRange25To50,
+            //    EuropeanPopGt50 = europeanPopGt50,
+            //};
 
             SetupStatisticsViewModel(query.ToList(), viewModel);
 

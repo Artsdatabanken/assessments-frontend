@@ -1,0 +1,368 @@
+﻿
+@model SpeciesAssessment2021
+@*
+    TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
+
+    This component takes in the json file of criteria and displays it
+    It also takes in the unhandled criteriasummarized string and trasforms it 
+    into two useable dictionaries which are then matched to relevant places in the json.
+*@
+
+@{
+    // Cast JSON to dictionary for easy iteration.
+    Dictionary<string, Dictionary<string, object>> criteria = ViewBag.kriterier.ToObject<Dictionary<string, Dictionary<string, object>>>();
+
+
+    // Each criteria by letter is handled differently.
+    string a = "", b = "", c ="", d ="", e = "";
+
+    void placeCriteria(string criteria)
+    {
+
+        if (criteria.Contains("A"))
+        {
+            a = criteria;
+        }
+        else if (criteria.Contains("B"))
+        {
+            b = criteria;
+        }
+        else if (criteria.Contains("C"))
+        {
+            c = criteria;
+        }
+        else if (criteria.Contains("D"))
+        {
+            d = criteria;
+        }
+        else if (criteria.Contains("E"))
+        {
+            e = criteria;
+        }
+
+    }
+
+    // Iterate the criteria string and place each separate criteria in its correct container.
+    if (@Model.CriteriaSummarized.Contains(";"))
+    {
+        // SPLIT THE LIST AND LOOP THEM
+        foreach (string crit in @Model.CriteriaSummarized.Split(";"))
+        {
+            placeCriteria(crit);
+        }
+    }
+    else
+    {
+        placeCriteria(@Model.CriteriaSummarized);
+    }
+
+    // STRING HANDLING
+    // A CRITERIA:
+    // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
+
+    string a_subcriteria = "";
+    string a_options = "";
+
+    a = subCriteria("A", a);
+    a = a.Replace("(", ";(");
+    var distinctlist = a.Split(";").Distinct();
+    a = string.Join(";", distinctlist);
+
+    if (a.Contains("("))
+    {
+        a_subcriteria = a.Split(";(")[0];
+        a_options = a.Split(";(")[1];
+        a_subcriteria += a_options.Split(")")[1];
+        a_options = a_options.Split(")")[0];
+        a = a_subcriteria + ";" + a_options;
+
+    }
+
+    // B CRITERIA
+    // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
+    // options may contain sub-options
+
+    string b_subcriteria = "";
+    string b_options = "";
+
+    b = subCriteria("B", b);
+    if (b.Contains("B1"))
+    {
+        b_subcriteria += "B1;";
+        b = b.Replace("B1", "");
+    }
+    if (b.Contains("B2"))
+    {
+        b_subcriteria += "B2";
+        b = b.Replace("B2", "");
+    }
+
+    b = b.Replace("b", ";b");
+    b = b.Replace("c", ";c");
+    var b_distinctlist = b.Split(";").Distinct();
+    b_options = string.Join(";", b_distinctlist);
+    b = b_subcriteria + ";" + b_options;
+
+    // C CRITERIA
+    // All options are only relevant for C2 - handle in code.
+    c = subCriteria("C", c);
+
+    // D CRITERIA:
+    // ONLY subcriteria.
+    d = subCriteria("D", d);
+
+
+    // E CRITERIA:
+    // Actually never in use, so no need to worry bout this one. Be as is.
+
+
+    // The dictionaries used in the view
+
+    var subcriteria = new Dictionary<string, string>(){
+    {"A", a_subcriteria},
+    {"B", b_subcriteria},
+    {"C", c},
+    {"D", d},
+    {"E", e},
+    };
+
+
+    var options = new Dictionary<string, string>(){
+    {"A", a_options},
+    {"B", b_options},
+    };
+
+
+
+    // Functions relevant to string separation
+
+    string subCriteria(string element, string bigstring)
+    {
+        return bigstring.Replace("+", ";" + element);
+    }
+
+    string inString(string element, string bigstring)
+    {
+        if (bigstring.Contains(element))
+        {
+            return "active";
+        }
+        return "inactive";
+    }
+
+    string inList(string element, string[] bigstring)
+    {
+        @foreach (string el in bigstring)
+        {
+            if (bigstring.Contains(element))
+            {
+                return "active";
+            }
+        }
+        return "inactive";
+    }
+
+    void iconChooser(string compare)
+    {
+        @if (@compare == "active")
+        {
+            <span class="material-icons">
+                done
+            </span>
+        }
+        else if (@compare == "maybe")
+        {
+            <span class="material-icons">
+                pause
+            </span>
+        }
+        else
+        {
+            <span class="material-icons">
+                close
+            </span>
+        }
+    }
+}
+
+
+@if (!string.IsNullOrEmpty(Model.CriteriaSummarized))
+{
+    <div class="page_section criteria">
+
+        <h2>Hvilke kriterier gjør at denne arten er rødlistet?</h2>
+        <p> 
+            Denne teksten er noe H putter inn i påvente av noe bedre.
+            Kriteriene som benyttes i Rødlista er basert på internasjonale kriterier som spenner seg fra A-E. 
+            De norske kriteriene har i tillegg noen ekstra underkriterier, som i stor gjør at vi fanger opp ting
+            som i andre land ville ha falt under E-kriteriet på et tidligere nivå. E-kriteriet har ennå ikke blitt brukt 
+            i norsk rødlistesammenheng.
+        </p>
+        <div class="page_section">
+            <h3>Offisiell kriteriestreng på internasjonal skrivemåte</h3>
+            <p>@Model.CriteriaSummarized<br /></p>
+        </div>
+        <h3>Kriteriefordeling</h3>
+
+        <!-- MAIN CRITERIA -->
+        @foreach (var (key, value) in criteria)
+        {
+            <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
+                <h4>
+                    @{ iconChooser(inString(key, Model.CriteriaSummarized)); }
+                </h4>
+
+                <div class="listitem_text_field">
+                    <h4>@key -  @value["title"]</h4>
+
+                    <p class="criteria_description">
+                        @value["description"]
+                    </p>
+
+
+                    <!-- SUB CRITERIA : obtain and reformat necessary data -->
+                    @if (@value.ContainsKey("subcriteria"))
+                    {
+                        <div class="criteria_subcriteria">
+                            @{
+                                var newDictionary2 = Newtonsoft.Json.Linq.JObject.Parse(value["subcriteria"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                            }
+                            @foreach (var (k, v) in newDictionary2)
+                            {
+                                <!-- ITERATE THROUGH ALL SUBCRITERIA -->
+                                <div class=" @inString(k, subcriteria[key]) listitem_criteria">
+
+                                    @{ iconChooser(@inString(k, subcriteria[key])); }
+
+                                    <div class="listitem_text_field">
+
+                                        <h5>@k <span>@v["title"]</span></h5><br />
+
+                                        @if (v.ContainsKey("description"))
+                                        {
+                                            <p>@v["description"]</p>
+
+                                        }
+
+                                        <!-- SUBCRITERIA SUBOPTIONS FOR C-CRITERIA -->
+                                        @{
+                                            // THIS IS ONLY RELEVANT FOR C2
+                                            var splitlist = subcriteria[key].Split(";");
+                                            var current_element = "";
+                                            foreach (string element in splitlist)
+                                            {
+                                                // k = current criteria
+                                                if (element.Contains(k))
+                                                {
+                                                    current_element = element;
+                                                }
+                                            }
+                                            current_element = current_element.Replace(k, "");
+                                            // Don't look at it. It works :|
+                                            current_element = current_element.Replace("a(i,ii)", "a(i)a(ii)");
+                                            current_element = current_element.Replace(")", ");");
+                                            current_element = current_element.Replace(" ", "");
+                                            var currentlist = current_element.Split(";");
+                                        }
+
+                                        <!--- ITERATE SUBOPTIONS FOR Ca2 -->
+                                        @if (v.ContainsKey("subsub"))
+                                        {
+                                            <div class="subsub_list">
+                                                @{
+                                                    var subdict = Newtonsoft.Json.Linq.JObject.Parse(@v["subsub"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                }
+
+                                                @foreach (var (subkey, subval) in subdict)
+                                                {
+                                                    <div class="@inList(subkey, currentlist) listitem_criteria">
+                                                        @{ iconChooser(inList(subkey, currentlist)); }
+                                                        <h6 class="listitem_text_field">
+                                                            <b>@subkey</b>
+                                                            <span>@subval["title"]</span>
+                                                        </h6>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    <!-- OPTIONS-->
+                    @if (@value.ContainsKey("options"))
+                    {
+                        <div class="criteria_options">
+                            @{
+                                var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                            }
+                            <h4> Underkriterier </h4><br />
+
+                            @foreach (var (k, v) in newDictionary)
+                            {
+
+                                <div class="listitem_criteria @inString(k, options[key]) s\">
+                                    @{ iconChooser(inString(k, options[key])); }
+                                    <div class="listitem_text_field">
+                                        <h5>@k. <span>@v["title"]</span></h5>
+                                        @if (v.ContainsKey("description"))
+                                        {
+                                            <p>@v["description"] </p>
+
+                                        }
+                                        @if (v.ContainsKey("sub"))
+                                        {
+
+                                    <div class="subsub_list">
+                                        @{
+                                            var currentlist = options[key].Split(";");
+                                            var current_element = "";
+                                            foreach (string element in currentlist)
+                                            {
+                                                // k = current criteria
+                                                if (element.Contains(k))
+                                                {
+                                                    current_element = element;
+                                                }
+                                            }
+                                            current_element = current_element.Replace(k, "");
+                                            if (current_element.Length > 2)
+                                            {
+                                                if (current_element.StartsWith("(") && current_element.EndsWith(")"))
+                                                {
+                                                    current_element = current_element.Substring(1, current_element.Length - 2);
+                                                }
+                                            }
+                                            var clean_list = current_element.Split(",");
+
+                                            var subsub = Newtonsoft.Json.Linq.JObject.Parse(@v["sub"].ToString());
+                                            var subdict = subsub.ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                        }
+                        
+
+                                        @foreach (var (subkey, subvalue) in subdict)
+                                        {
+                                            <div class="listitem_criteria @inList(subkey, clean_list)">
+                                                @{ iconChooser(inList(subkey, clean_list)); }
+                                                <h6 class="listitem_text_field">
+                                                    <span>@subkey </span>
+                                                    <span>@subvalue["title"]</span>
+                                                </h6>
+                                            </div>
+                                        }
+                                    
+                                    </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }<!-- END OPTIONS-->
+                </div>
+            </div>
+        }
+    </div>
+}

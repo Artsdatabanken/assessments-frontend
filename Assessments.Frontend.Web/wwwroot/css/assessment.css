@@ -372,7 +372,7 @@
 @media only screen and (min-width: 250px) and (max-width: 550px) {
 
     .habitat_icon {
-        and height: 100px;
+        height: 100px;
         width: 100px;
         display: inline;
         margin: auto;
@@ -497,25 +497,8 @@
 }
 
 
-/*criteria*/
-.criteria_conclusions {
-    max-width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    display: block;
-}
-
-.criteria_outer_level.active {
-    color: black;
-}
-
-.criteria_outer_level.inactive {
-    opacity: 0.3;
-    font-size: 9pt;
-}
 
 /* REFERENCES */
-
 .reference {
     display: block;
     word-break: break-word;
@@ -643,3 +626,26 @@
     height: 100%;
 }
 
+/*criteria*/
+
+.criteria_options{
+    padding-bottom:20px;
+}
+
+.criteria .inactive {
+    opacity: 0.5;
+}
+
+.criteria .inactive .criteria_description,
+.criteria .inactive .criteria_options,
+.criteria .inactive .criteria_subcriteria {
+    display: none;
+}
+
+.listitem_criteria {
+    display: flex;
+}
+
+.listitem_text_field{
+    padding-left:10px;
+}

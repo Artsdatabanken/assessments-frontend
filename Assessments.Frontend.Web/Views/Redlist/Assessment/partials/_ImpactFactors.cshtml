@@ -19,6 +19,18 @@
 
         return "https://design.artsdatabanken.no/impact-icons/" + number + ".png";
     }
+
+    string activeOrNot(string element)
+    {
+        @foreach (var factor in Model.ImpactFactors)
+            {
+                @if(factor.Id.StartsWith(element)){
+                    return "active";
+                }
+            }
+
+        return "inactive";
+    }
 }
 
 @{ 
@@ -26,14 +38,78 @@
 
 }
 
-<div>
-    <h2>Påvirkningsfaktor som vist i JSON. </h2>
+<div class="page_section impact">
+    <h2>Påvirkningsfaktor som vist i JSON -> TIl diskusjon om fremstilling. </h2>
+    <p>
+        Per nå er det som vises i denne lista slik at hvis et element er aktivt eller har et aktivt barn, åpnes lista på dette punktet.
+        Ethvert inaktivt underpunkt lukkes.
+    </p>
+    <ul class="outer" >
+        @foreach (var (key, value) in impactfactors_json)
+        {
+            <li class="@activeOrNot(key)">
 
-    @foreach (var (key,value) in impactfactors_json)
-    {
-        <p>@key @value["title"] </p>
-    }
-
+                @key @value["title"]<br />
+                @if (value.ContainsKey("subelement"))
+                {
+                    <ul class="second">
+                        @{
+                            var first_layer = Newtonsoft.Json.Linq.JObject.Parse(value["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                        }
+                        @foreach (var (first_k, first_v) in first_layer)
+                        {
+                        <li class="@activeOrNot(first_k)">
+                            @first_k @first_v["title"]
+                            @if (first_v.ContainsKey("subelement"))
+                            {
+                                <ul class="third">
+                                    @{
+                                        var second_layer = Newtonsoft.Json.Linq.JObject.Parse(first_v["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                    }
+                                    @foreach (var (second_k, second_v) in second_layer)
+                                    {
+                                    <li class="@activeOrNot(second_k)">
+                                        @second_k @second_v["title"]
+                                        @if (second_v.ContainsKey("subelement"))
+                                        {
+                                            <ul class="fourth">
+                                                @{
+                                                    var third_layer = Newtonsoft.Json.Linq.JObject.Parse(second_v["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                }
+                                                @foreach (var (third_k, third_v) in third_layer)
+                                                {
+                                                <li  class="@activeOrNot(third_k)">
+                                                    @third_k @third_v["title"]
+                                                    @if (third_v.ContainsKey("subelement"))
+                                                    {
+                                                        <ul class="fifth">
+                                                            @{
+                                                                var fourth_layer = Newtonsoft.Json.Linq.JObject.Parse(third_v["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                            }
+                                                            @foreach (var (fourth_k, fourth_v) in fourth_layer)
+                                                            {
+                                                                <li  class="@activeOrNot(fourth_k)">
+                                                                    @fourth_k @fourth_v["title"]
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    }
+                                                </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+    </ul>
+    
 </div>
 
 
@@ -43,22 +119,24 @@
     <p class="fact_box"> @ViewBag.glossary["oneliners"]["Påvirkningsfaktorer"]</p>
 
     <div class="factors">
-        @{foreach (var pfaktor in Model.ImpactFactors)
+        @{foreach (var factor in Model.ImpactFactors)
             {
+
+                @factor.Id
                 <div class="fake_table_header" style=" ":>
 
 
                     <div class="stats_element_container">
-                        <img src="@ImpactIcon(@pfaktor.Id,@pfaktor.Factor)" class="paavirk" />
+                        <img src="@ImpactIcon(@factor.Id,@factor.Factor)" class="paavirk" />
                     </div>
 
 
 
                     <div class="stats_element_text topalign">
-                        <h3>@pfaktor.GroupingFactor</h3>
-                        <b>@pfaktor.Id - @pfaktor.Factor</b>
-                        @* todo: se om stien skal brukes, inneholder også toppnivå - kan fjernes under ved å skrive pfaktor.FactorPath.Skip(1)   *@
-                        <h5> @string.Join(" > ", pfaktor.FactorPath.Skip(1))</h5>
+                        <h3>@factor.GroupingFactor</h3>
+                        <b>@factor.Id - @factor.Factor</b>
+                        @* todo: se om stien skal brukes, inneholder også toppnivå - kan fjernes under ved å skrive factor.FactorPath.Skip(1)   *@
+                        <h5> @string.Join(" > ", factor.FactorPath.Skip(1))</h5>
 
 
                     </div>
@@ -71,7 +149,7 @@
 
                         @{
 
-                            var omfang_text = @pfaktor.PopulationScope;
+                            var omfang_text = @factor.PopulationScope;
                             var omfang_numbers = "";
 
                             if (omfang_text.Contains("("))
@@ -79,7 +157,7 @@
                                 // Split out the percentages etc. from the main string.
                                 // Percentages appear to always be enclosed in "()".
                                 omfang_text = omfang_text.Split("(")[0];
-                                omfang_numbers = @pfaktor.PopulationScope.Split("(")[1].Replace(")", "");
+                                omfang_numbers = @factor.PopulationScope.Split("(")[1].Replace(")", "");
                             }
 
                         }
@@ -97,7 +175,7 @@
                         <h3>Alvorlighetsgrad</h3>
 
                         @{
-                            var alv_text = @pfaktor.Severity;
+                            var alv_text = @factor.Severity;
                             var alv_perc = "";
                             var alv_numbers = "";
 
@@ -106,8 +184,8 @@
                                 // Split out the percentages etc. from the main string.
                                 // Percentages appear to always be enclosed in "()".
                                 alv_text = alv_text.Split("(")[0];
-                                alv_perc = @pfaktor.Severity.Split("(")[1].Replace(")", "");
-                                if (@pfaktor.Severity.Contains("%"))
+                                alv_perc = @factor.Severity.Split("(")[1].Replace(")", "");
+                                if (@factor.Severity.Contains("%"))
                                 {
                                     alv_numbers = alv_perc.Split("%")[1];
                                     alv_perc = alv_perc.Split("%")[0] + "%";
@@ -115,7 +193,7 @@
                             }
                         }
                         <span>@alv_text</span><br />
-                        @if (@pfaktor.Severity.Contains("("))
+                        @if (@factor.Severity.Contains("("))
                         {
                             <span class="stats_element">
                                 <span>@alv_perc</span>
@@ -126,7 +204,7 @@
                     </div>
                     <div>
                         <h3>Tidspunkt</h3>
-                        @pfaktor.TimeScope
+                        @factor.TimeScope
                     </div>
                 </div>
             }

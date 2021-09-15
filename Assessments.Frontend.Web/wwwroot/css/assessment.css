@@ -649,3 +649,32 @@
 .listitem_text_field{
     padding-left:10px;
 }
+
+
+/* IMPACT FACTORS */
+.impact ul{
+    display:block;
+}
+
+.impact li{
+    display:block;
+    padding:5px;
+    padding-left:20px;
+}
+
+.impact li.active {
+    color: black;
+    display: block;
+    font-weight:bold;
+}
+
+
+.impact li.inactive li.inactive {
+   display:none;
+}
+
+
+.impact li.inactive {
+    color: grey;
+    font-weight:normal;
+}

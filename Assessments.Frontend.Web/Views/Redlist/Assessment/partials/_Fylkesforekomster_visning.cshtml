@@ -25,14 +25,14 @@
 
 @if (has_element != "")
 { // No content would imply it exists nowhere or is recorded nowhere
-    <div class="geographic_facts @map_type">
-        <h3>
-            @ViewBag.glossary["region"]["tagline"]
-        </h3>
-        <div class="fact_box">
-            @ViewBag.glossary["region"]["description"]
-        </div>
+<div class="geographic_facts @map_type">
+    <h3>
+        @ViewBag.glossary["region"]["tagline"]
+    </h3>
+    <div class="fact_box">
+        @ViewBag.glossary["region"]["description"]
     </div>
+
     <h3>Geografisk distribusjon</h3>
 
     <div class="region_distributions">
@@ -84,10 +84,12 @@
                 </span>
             }
         </div>
+
         <div class="map  @map_type">
             <partial name="/Views/Redlist/Assessment/partials/_Map.cshtml" />
         </div>
     </div>
+</div>
 
 
 }

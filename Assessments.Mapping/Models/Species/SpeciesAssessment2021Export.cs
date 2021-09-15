@@ -1,9 +1,15 @@
-﻿namespace Assessments.Mapping.Models.Species
+﻿using System.ComponentModel;
+
+namespace Assessments.Mapping.Models.Species
 {
     public class SpeciesAssessment2021Export
     {
-        public int Id { get; set; }
+        [DisplayName("Vurderingsområde")]
+        [Description("Er arten vurdert for Norge eller Svalbard")]
+        public string AssessmentArea { get; set; }
 
-        public string ScientificName { get; set; }
+        [DisplayName("Populærnavn")]
+        [Description("Prioritert norsk populærnavn i henhold til Artsnavnebase")]
+        public string PopularName { get; set; }
     }
 }

@@ -18,6 +18,12 @@ namespace Assessments.Frontend.Web.Controllers
     {
         private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
 
+        private static readonly Dictionary<string, string> _allAreas = new Dictionary<string, string>
+        {
+            {"Norge", "N"},
+            {"Svalbard", "S"}
+        };
+
         private static readonly string[] _allCategories = new[]
         {
             Constants.SpeciesCategories.Extinct.ShortHand,
@@ -40,7 +46,6 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            // var query = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
             var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
             // Søk
@@ -49,10 +54,13 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Filter
 
+            // Areas
+            ViewBag.AllAreas = _allAreas;
+
             // Categories
             
             ViewBag.AllCategories = _allCategories;
-            List<string> chosenCategories = Helpers.findSelectedCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
+            viewModel.Category = Helpers.findSelectedCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
 
             // Criterias
             Dictionary<char, bool> criterias = new Dictionary<char, bool>
@@ -91,8 +99,8 @@ namespace Assessments.Frontend.Web.Controllers
             };
             List<string> chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(europeanPopulation);
 
-            if (chosenCategories?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Any(y => x.Category.Contains(y)));
+            if (viewModel.Category?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));
 
             if (chosenCriterias?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(chosenCriterias) != -1);
@@ -137,7 +145,6 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
-            //var data = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
             var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
             var assessment = data.FirstOrDefault(x => x.Id == id);

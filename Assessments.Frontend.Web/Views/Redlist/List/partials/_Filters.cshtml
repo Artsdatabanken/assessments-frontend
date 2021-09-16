@@ -1,6 +1,7 @@
 @model RL2021ViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Constants
 @{
+    var AllAreas = ViewBag.AllAreas;
     var AllCategories = ViewBag.AllCategories;
 }
 @functions{
@@ -31,40 +32,38 @@
                 <button class="btn" type="submit" name="Export" value="true">Eksport</button>
             </div>
             <div class="filters">
-                <input asp-for="Collapsible.Filters" class="collapse_checkbox" id="show_filters" type="checkbox" />
+                <input class="collapse_checkbox" id="show_filters" @CategoryCheck("IsCheck", Model.IsCheck, "Filters") type="checkbox" />
                 <label class="show_filters" for="show_filters"><h3 class="toggle_filter">Filter</h3></label>
                 <div class="filters_scrollable">
                     <div class="filter_groups">
                         <input type="reset" value="@SearchAndFilter.ResetAllFilters" />
                         <div class="filter_group">
                             <label for="show_area"><h4>@SearchAndFilter.SearchChooseArea</h4></label>
-                            <input asp-for="Collapsible.Area" class="collapse_checkbox" id="show_area" type="checkbox" />
+                            <input class="collapse_checkbox" id="show_area" @CategoryCheck("IsCheck", Model.IsCheck, "Area") type="checkbox" />
                             <div class="filter_area">
                                 <ul>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" @CategoryCheck("Area", Model.Area, "N")  onclick="this.form.submit();" />Norge
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" @CategoryCheck("Area", Model.Area, "S")  onclick="this.form.submit();" />Svalbard
-                                        </label>
-                                    </li>
+                                    @foreach (var area in AllAreas)
+                                    {
+                                        <li class="checkbox" style="margin-top: 0;">
+                                            <label class="checkbox">
+                                                <input type="checkbox" @CategoryCheck("Area", Model.Area, area.Value) onclick="this.form.submit();"/>@area.Key
+                                            </label>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </div>
 
                         <div class="filter_group">
                             <label for="show_category"><h4>@SearchAndFilter.SearchChooseCategory</h4></label>
-                            <input asp-for="Collapsible.Category" class="collapse_checkbox" id="show_category" type="checkbox" />
+                            <input class="collapse_checkbox" id="show_category" @CategoryCheck("IsCheck", Model.IsCheck, "Category") type="checkbox" />
                             <div class="filter_category" >
                                 <ul>
                                     @foreach (var category in AllCategories)
                                     {
                                         <li class="checkbox" style="margin-top: 0;">
-                                            <label class="checkbox" style="margin-top: 5px; margin-left: 15px; cursor: pointer; font-weight: normal">
-                                                <input type="checkbox" @CategoryCheck("Category", Model.Category, category) onclick="this.form.submit();" onclick="this.form.submit();"/>@category
+                                            <label class="checkbox">
+                                                <input type="checkbox" @CategoryCheck("Category", Model.Category, category) onclick="this.form.submit();"/>@category
                                             </label>
                                         </li>
                                     }
@@ -84,7 +83,7 @@
 
                         <div class="filter_group">
                             <label for="show_region"><h4>Regioner og havområder</h4></span>
-                            <input asp-for="Collapsible.Region" type="checkbox" class="collapse_checkbox" id="show_region" />
+                            <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
                             <div class="filter_region">
                                 <ul>
                                     <li class="checkbox">
@@ -148,7 +147,7 @@
 
                         <div class="filter_group">
                             <label for="show_european_population"><h4>Andel av europeisk populasjon</h4></span>
-                            <input asp-for="Collapsible.EuropeanPopulation" type="checkbox" class="collapse_checkbox" id="show_european_population" />
+                            <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuropeanPopulation") id="show_european_population" />
                             <div class="filter_european_population">
                                 <ul>
                                     <li class="checkbox">
@@ -177,7 +176,7 @@
 
                         <div class="filter_group">
                             <label for="show_criteria"><h4>@SearchAndFilter.SearchChooseCriteria</h4></span>
-                            <input asp-for="Collapsible.Criteria" type="checkbox" class="collapse_checkbox" id="show_criteria" />
+                            <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
                             <div class="filter_criteria">
                                 <ul>
                                     <li class="checkbox">
@@ -206,7 +205,7 @@
 
                         <div class="filter_group">
                             <label for="show_extinct"><h4>Trolig utdødd</h4></label>
-                            <input asp-for="Collapsible.Extinct" type="checkbox" class="collapse_checkbox" id="show_extinct" />
+                            <input type="checkbox" class="collapse_checkbox" id="show_extinct" @CategoryCheck("IsCheck", Model.IsCheck, "Extinct") />
                             <div class="filter_extinct">
                                 <ul>
                                     <li class="checkbox">

@@ -12,6 +12,7 @@ namespace Assessments.Frontend.Web.Models
             this.Criterias = new FilterCriterias();
             this.Regions = new FilterRegions();
             this.Area = Array.Empty<string>();
+            this.IsCheck = Array.Empty<string>();
             this.Region = Array.Empty<string>();
             this.Category = Array.Empty<string>();
         }
@@ -28,7 +29,7 @@ namespace Assessments.Frontend.Web.Models
         public bool EuropeanPopRange5To25 { get; set; }
         public bool EuropeanPopRange25To50 { get; set; }
         public bool EuropeanPopGt50 { get; set; }
-        public FilterCollapsible Collapsible { get; set; }
+        public string[] IsCheck { get; set; }
         
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 
@@ -38,24 +39,13 @@ namespace Assessments.Frontend.Web.Models
         public string[] Category { get; set; }
     }
 
-    public class FilterCollapsible
-    {
-        public bool Filters { get; set; }
-        public bool Area { get; set; }
-        public bool Category { get; set; }
-        public bool Region { get; set; }
-        public bool EuropeanPopulation { get; set; }
-        public bool Criteria { get; set; }
-        public bool Extinct { get; set; }
-    }
-
     public class FilterCriterias
     {
         public bool CriteriaA { get; set; }
         public bool CriteriaB { get; set; }
         public bool CriteriaC { get; set; }
         public bool CriteriaD { get; set; }
-    }
+    } 
 
     public class FilterRegions
     {

@@ -40,6 +40,7 @@ namespace Assessments.Frontend.Web.Models
 
     public class FilterCollapsible
     {
+        public bool Filters { get; set; }
         public bool Area { get; set; }
         public bool Category { get; set; }
         public bool Region { get; set; }

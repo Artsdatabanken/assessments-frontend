@@ -7,6 +7,112 @@ li.checkbox {
     list-style-type: none;
 }
 
+
+.filter_group {
+    margin: 2px;
+    margin-bottom: 10px;
+}
+
+.filter_group .h4 {
+    padding: 5px;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 750px) {
+    .filter_groups {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .filters h3{
+        flex:none;
+        width:100%;
+        padding: 10px;
+    }
+
+    .filter_group {
+        display: inline-block;
+        max-width: 250px;
+        vertical-align: top;
+        padding: 10px;
+        flex:1;
+        justify-content:space-evenly;
+    }
+
+    .filters {
+        background: #f7f7f7;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+  .show_filters {
+    width: 50%;
+    background-color: #dadada;
+    display: inline-block;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 10001;
+  }
+  
+  .toggle_filter {
+    margin: 0;
+  }
+  
+  input[type=checkbox]:checked#show_filters~.filters_scrollable>.filter_groups {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  
+  input[type=checkbox]:not(:checked)#show_filters+.show_filters>h3::before {
+    content: "Vis ";
+  }
+
+  input[type=checkbox]:checked#show_filters+.show_filters>h3::before {
+    content: "Skjul ";
+  }
+
+  .filters {
+    flex-direction: column;
+    text-align: center;
+    width: 85vw;
+    margin: 0 10px; 
+    position: fixed;
+    bottom: 0;
+    z-index: 10000;
+    background: #fff0;
+  }
+
+  .filter_groups {
+    display: none;
+    background-color: #f7f7f7;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding-top: 15px;
+  }
+
+  .filter_group {
+    width: 100%;
+  }
+
+  .filters_scrollable {
+    max-height: 90vh;
+    overflow-y: scroll;
+  }
+
+  .filters label {
+    position: sticky;
+    top: 0;
+  }
+
+  li.checkbox {
+    margin: 5px;
+  }
+} 
+
+/* Collapsible */
+
 .collapse_checkbox {
     display: none;
 }

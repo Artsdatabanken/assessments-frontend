@@ -8,6 +8,7 @@
     list-style: none;
     font-size: 10pt;
     list-style: none;
+    flex-wrap: wrap;
 }
 
 .page-link {
@@ -294,41 +295,6 @@ li a span.element_icon {
         width: 100%;
         max-width:100%;
         border-right:0;
-    }
-}
-
-
-/* FILTER */
-
-.filter_group {
-    margin: 2px;
-    margin-bottom: 10px;
-}
-
-.filter_group .h4 {
-    padding: 5px;
-    font-weight: bold;
-}
-
-@media only screen and (max-width: 750px) {
-    .filter_groups {
-        display: flex;
-        flex-wrap: wrap;
-        background: #f7f7f7;
-    }
-
-    .filter_groups h3{
-        flex:none;
-        width:100%;
-        padding-left:10px;
-    }
-    .filter_group {
-        display: inline-block;
-        max-width: 250px;
-        vertical-align: top;
-        padding: 10px;
-        flex:1;
-        justify-content:space-evenly;
     }
 }
 

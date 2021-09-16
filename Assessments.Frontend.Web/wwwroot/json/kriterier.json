@@ -270,11 +270,7 @@
       }
     }
 
-  },
-  "E": {
-    "title": "Kvantitativ analyse",
-    "description": "Risiko for utdøing er beregnet gjennom en kvantitativ modell. E-kriteriet er det eneste kriteriet som kan inkorporere alle faktorer som fører høyere utdøingsrisiko og deres symptomer. Terskelverdiene på E kan derfor ikke brukes for å utlede en arts sannsynlighet for utdøing om kategori er fastsatt ved vurdering etter kriteriene A-D. "
-  } 
+  }
 }
 
 

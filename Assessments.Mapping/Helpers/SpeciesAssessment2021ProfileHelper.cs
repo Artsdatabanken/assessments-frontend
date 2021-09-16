@@ -1,10 +1,142 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assessments.Mapping.Models.Source.Species;
+using Assessments.Mapping.Models.Species;
 
 namespace Assessments.Mapping.Helpers
 {
     internal static class SpeciesAssessment2021ProfileHelper
     {
+        private static readonly Dictionary<string, string> _impactFactorsReplaceTextDictionary = new()
+        {
+            {
+                "Skogbruk/avvirkning",
+                "Skogbruk (kommersielt)"
+            },
+            {
+                "Åpne hogstformer (flatehogst og frøtrehogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)",
+                "Åpne hogstformer (flatehogst og frøtrestillingshogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)"
+            },
+            {
+                "Habitatpåvirkning på ikke landbruksarealer (terrestrisk)",
+                "Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk)"
+            },
+            {
+                "Oppdemming / vannstandsregulering / overføring av vassdrag",
+                "Oppdemming/vannstandsregulering/overføring av vassdrag"
+            },
+            {
+                "Tynning, vedhogst, avvirkning av spesielle type trær (gamle, hule, brannskade)",
+                "Vedhogst, avvirkning av spesielle type trær (gamle, hule, brannskade)"
+            }
+        };
+
+        private static readonly Dictionary<string, string> _impactFactorsReplaceIdDictionary = new()
+        {
+            {
+                "10.1",
+                "10."
+            },
+            {
+                "11.1",
+                "11."
+            },
+            {
+                "12.1",
+                "12."
+            },
+            {
+                "0.1",
+                "0."
+            },
+            {
+                "0.1.",
+                "0."
+            }
+        };
+
+        private static readonly Dictionary<string, Tuple<string, string, string>> _impactFactorsRemapFrom2010Dictionary =
+                new()
+                {
+                    {
+                        "1.1.2.Skogbruk/avvirkning",
+                        new Tuple<string, string, string>("1.1.2.1.",
+                            "Skogsdrift, hogst og skjøtsel",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt)")
+                    },
+                    {
+                        "1.1.2.1.Flatehogst",
+                        new Tuple<string, string, string>("1.1.2.1.1.",
+                            "Åpne hogstformer (flatehogst og frøtrehogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                    },
+                    {
+                        "1.1.2.2.Plukkhogst, tynning, vedhogst",
+                        new Tuple<string, string, string>("1.1.2.1.2",
+                            "Lukkede hogstformer (plukkhogst, skjermstilling, tynning, uttak av enkelttrær, inkludert uttak av rotvelt, råtne trær, tørrgran etc.)",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                    },
+                    {
+                        "1.1.2.3.Fjerning av dødt virke", new Tuple<string, string, string>("1.1.2.1.3.",
+                            "Ungskogrydding (rydding i ungskog)",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                    },
+                    //{
+                    //    "1.2.4.1.Fjerning av dødt virke", new Tuple<string, string, string>("1.1.2.1.4.",
+                    //    "Uttak av død ved (stående *gadd* og liggende *læger*)",
+                    //    "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat")
+                    //},
+                    {
+                        "4.2.Andre",
+                        new Tuple<string, string, string>("4.",
+                            "Tilfeldig mortalitet",
+                            "")
+                    }
+                };
+
+        private static readonly Dictionary<string, Tuple<string, string>> _impactFactorFixTextIn2010Dictionary =
+            new()
+            {
+                {
+                    "1.1.2.1.",
+                    new Tuple<string, string>(
+                        "Skogsdrift, hogst og skjøtsel",
+                        "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt)")
+                },
+                {
+                    "1.1.2.1.1.",
+                    new Tuple<string, string>(
+                        "Åpne hogstformer (flatehogst og frøtrehogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)",
+                        "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                },
+                {
+                    "1.1.2.1.2",
+                    new Tuple<string, string>(
+                        "Lukkede hogstformer (plukkhogst, skjermstilling, tynning, uttak av enkelttrær, inkludert uttak av rotvelt, råtne trær, tørrgran etc.)",
+                        "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                },
+                {
+                    "1.1.2.1.3.", new Tuple<string, string>(
+                        "Ungskogrydding (rydding i ungskog)",
+                        "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                },
+                {
+                    "1.2.4.1.", new Tuple<string, string>(
+                        "Uttak av død ved (stående *gadd* og liggende *læger*)",
+                        "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat")
+                },
+                {
+                    "4.",
+                    new Tuple<string, string>(
+                        "Tilfeldig mortalitet",
+                        "")
+                }
+            };
+
+        private static readonly string _uttakAvDødVedStåendeGaddOgLiggendeLæger =
+            "Uttak av død ved (stående gadd og liggende læger)";
+
         internal static string ResolveRegion(string fylke)
         {
             return fylke.ToLowerInvariant() switch
@@ -84,6 +216,75 @@ namespace Assessments.Mapping.Helpers
             return src
                 .Replace("(Svalbard)", string.Empty, StringComparison.InvariantCultureIgnoreCase)
                 .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
+        }
+
+        public static void CorrectImpactFactors(Rodliste2019.Pavirkningsfaktor src,
+            SpeciesAssessment2021ImpactFactor dest)
+        {
+            var pOverordnetTittel = src.OverordnetTittel;
+            var pBeskrivelse = src.Beskrivelse;
+            var pId = src.Id;
+
+            // map old 2010 factors to correct id and text
+            foreach (var item in _impactFactorsRemapFrom2010Dictionary.Where(item =>
+                item.Key == pId.Trim() + pBeskrivelse.Trim()))
+            {
+                //Console.WriteLine(assessment.VurdertVitenskapeligNavn);
+                pBeskrivelse = item.Value.Item2;
+                pId = item.Value.Item1;
+                pOverordnetTittel = item.Value.Item3;
+            }
+
+            // fix som old texts 
+            foreach (var item in _impactFactorFixTextIn2010Dictionary.Where(item => item.Key == pId.Trim()))
+            {
+                //Console.WriteLine(assessment.VurdertVitenskapeligNavn);
+                if (pBeskrivelse != item.Value.Item1) pBeskrivelse = item.Value.Item1;
+
+                //pId = item.Value.Item1;
+                if (pOverordnetTittel == item.Value.Item2) pOverordnetTittel = item.Value.Item2;
+            }
+
+            foreach (var item in _impactFactorsReplaceTextDictionary.Where(item =>
+                pOverordnetTittel.IndexOf(item.Key, StringComparison.InvariantCulture) > -1))
+                pOverordnetTittel = pOverordnetTittel.Replace(item.Key, item.Value, StringComparison.InvariantCulture);
+
+            foreach (var item in _impactFactorsReplaceTextDictionary.Where(item =>
+                pBeskrivelse.IndexOf(item.Key, StringComparison.InvariantCulture) > -1))
+                pBeskrivelse = pBeskrivelse.Replace(item.Key, item.Value, StringComparison.InvariantCulture);
+
+            foreach (var item in _impactFactorsReplaceIdDictionary.Where(item => pId == item.Key)) pId = item.Value;
+
+            var level = dest.Id.Split(".", StringSplitOptions.RemoveEmptyEntries).Length;
+
+            if (pId == "1.1.2.1.4." || pId == "1.2.4.1.")
+                // fjern alternativ med * og " brukt i disse
+                pBeskrivelse = _uttakAvDødVedStåendeGaddOgLiggendeLæger;
+
+            // todo: kanskje bruke denne.... inneholder sti, men Factorpath er hele stien...
+            //var under = level > 1
+            //    ? string.Join(" > ", pOverordnetTittel.Split(" > ").Skip(1)) + " - " + pBeskrivelse
+            //    : pBeskrivelse;
+
+            dest.Id = pId;
+            dest.Factor = pBeskrivelse;
+            dest.FactorPath =
+                pOverordnetTittel.Split(" > ").Where(x => !string.IsNullOrWhiteSpace(x))
+                    .ToArray(); //.Union(new[] { pBeskrivelse }).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
+            dest.GroupingFactor = pOverordnetTittel == "" ? pBeskrivelse : pOverordnetTittel.Split(" > ")[0];
+        }
+
+        private static string[] _CategoriesToBlank = new[] { "LC", "NA", "NE" };
+        public static void BlankCriteriaSumarizedBasedOnCategory(SpeciesAssessment2021 dest)
+        {
+            foreach (var s in _CategoriesToBlank)
+            {
+                if (dest.Category.StartsWith(s) && !string.IsNullOrWhiteSpace(dest.CriteriaSummarized))
+                {
+                    dest.CriteriaSummarized = string.Empty;
+                }
+
+            }
         }
     }
 }

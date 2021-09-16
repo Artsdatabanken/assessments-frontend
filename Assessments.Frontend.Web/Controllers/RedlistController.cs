@@ -36,6 +36,14 @@ namespace Assessments.Frontend.Web.Controllers
             Constants.SpeciesCategories.NotEvalueted.ShortHand,
             Constants.SpeciesCategories.NotAppropriate.ShortHand
         };
+
+        private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = new Dictionary<string, string>
+        {
+            {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, "< 5 %"},
+            {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, "5 - 25 %"},
+            {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, "25 - 50 %"},
+            {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, "> 50 %"}
+        };
         public IActionResult Index() => View();
 
         [Route("2021")]
@@ -90,14 +98,8 @@ namespace Assessments.Frontend.Web.Controllers
             List<string> chosenRegions = Helpers.findSelectedRegions(regions);
 
             // European population percentages
-            Dictionary<string, bool> europeanPopulation = new Dictionary<string, bool>
-            {
-                {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, viewModel.EuropeanPopLt5},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, viewModel.EuropeanPopRange5To25},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, viewModel.EuropeanPopRange25To50},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, viewModel.EuropeanPopGt50}
-            };
-            List<string> chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(europeanPopulation);
+            ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;
+            string[] chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(viewModel.EuroPop);
 
             if (viewModel.Category?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));

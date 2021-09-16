@@ -3,6 +3,7 @@
 @{
     var AllAreas = ViewBag.AllAreas;
     var AllCategories = ViewBag.AllCategories;
+    var AllEuroPop = ViewBag.AllEuroPop;
 }
 @functions{
     string CategoryCheck(string name, string[] element, string value)
@@ -147,29 +148,17 @@
 
                         <div class="filter_group">
                             <label for="show_european_population"><h4>Andel av europeisk populasjon</h4></span>
-                            <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuropeanPopulation") id="show_european_population" />
+                            <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
                             <div class="filter_european_population">
                                 <ul>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="EuropeanPopLt5" onclick="this.form.submit();" />&lt; 5 %
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="EuropeanPopRange5To25" onclick="this.form.submit();" />5 - 25 %
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="EuropeanPopRange25To50" onclick="this.form.submit();" />25 - 50 %
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="EuropeanPopGt50" onclick="this.form.submit();" />&gt; 50 %
-                                        </label>
-                                    </li>
+                                    @foreach (var pop in AllEuroPop)
+                                    {
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" @CategoryCheck("EuroPop", Model.EuroPop, pop.Key) onclick="this.form.submit();" />@pop.Value
+                                            </label>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </div>

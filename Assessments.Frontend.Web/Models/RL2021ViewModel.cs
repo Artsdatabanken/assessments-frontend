@@ -12,6 +12,7 @@ namespace Assessments.Frontend.Web.Models
             this.Criterias = new FilterCriterias();
             this.Regions = new FilterRegions();
             this.Area = Array.Empty<string>();
+            this.EuroPop = Array.Empty<string>();
             this.IsCheck = Array.Empty<string>();
             this.Region = Array.Empty<string>();
             this.Category = Array.Empty<string>();
@@ -25,10 +26,7 @@ namespace Assessments.Frontend.Web.Models
         public bool PresumedExtinct { get; set; }
         public FilterCriterias Criterias { get; set; }
         public FilterRegions Regions { get; set; }
-        public bool EuropeanPopLt5 { get; set; }
-        public bool EuropeanPopRange5To25 { get; set; }
-        public bool EuropeanPopRange25To50 { get; set; }
-        public bool EuropeanPopGt50 { get; set; }
+        public string[] EuroPop { get; set; }
         public string[] IsCheck { get; set; }
         
         public string Redlist2021ResultsCount =>

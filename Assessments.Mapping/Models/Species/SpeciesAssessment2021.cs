@@ -249,7 +249,7 @@ namespace Assessments.Mapping.Models.Species
         /// <summary>
         /// Rationale for adjusting the category based on significant effect from populations outside the region.
         /// </summary>
-        public string ÅrsakTilNedgraderingAvKategori { get; set; } // ÅrsakTilNedgraderingAvKategori
+        public string RationaleCategoryAdjustment { get; set; } // RationaleCategoryAdjustment
 
         /// <summary>
         /// Group the species belongs to, in most cases a taxonomic group

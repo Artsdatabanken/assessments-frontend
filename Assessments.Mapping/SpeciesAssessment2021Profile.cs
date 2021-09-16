@@ -69,8 +69,8 @@ namespace Assessments.Mapping
                 .ForPath(dest => dest.BAii.PreliminaryCategory, opt => opt.MapFrom(src => src.BA2FåLokaliteterKode))
                 .ForPath(dest => dest.BAii.Statistics, opt => opt.MapFrom(src => src.BaIntervallAntallLokaliteter))
 
-                .ForMember(dest => dest.BBOptions, opt => opt.MapFrom(src => src.BBPågåendeArealreduksjonKode))
-                .ForMember(dest => dest.BCOptions, opt => opt.MapFrom(src => src.BCEksterneFluktuasjonerKode))
+                .ForMember(dest => dest.BBOptions, opt => opt.MapFrom(src => src.BBPågåendeArealreduksjonKode.OrderBy(SpeciesAssessment2021ProfileHelper.RomanNumberSort)))
+                .ForMember(dest => dest.BCOptions, opt => opt.MapFrom(src => src.BCEksterneFluktuasjonerKode.OrderBy(SpeciesAssessment2021ProfileHelper.RomanNumberSort)))
                 .ForMember(dest => dest.RationaleNotApplicable, opt => opt.MapFrom(src => src.BegrensetForekomstNA))
 
                 .ForPath(dest => dest.C1.Statistics, opt => opt.MapFrom(src => src.C1PågåendePopulasjonsreduksjonAntatt))
@@ -130,7 +130,7 @@ namespace Assessments.Mapping
                 
                 .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => src.Påvirkningsfaktorer.OrderBy(x=>x.Id)))
 
-                .ForMember(dest => dest.References, opt => opt.MapFrom(src => src.Referanser))
+                .ForMember(dest => dest.References, opt => opt.MapFrom(src => src.Referanser.Where(r => r.Type != "Person"))) // ikke ta med personreferanser
 
                 .ForMember(dest => dest.EvaluationJustification, opt => opt.MapFrom(src => src.RodlisteVurdertArt))
                 .ForMember(dest => dest.YearPreviousAssessment, opt => opt.MapFrom(src => src.SistVurdertAr))
@@ -145,7 +145,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ExtinctionRiskAffected, opt => opt.MapFrom(src => src.UtdøingSterktPåvirket))
 
                 .ForMember(dest => dest.AssessmentArea, opt => opt.MapFrom(src => src.VurderingsContext))
-                .ForMember(dest => dest.AssessmentYear, opt => opt.MapFrom(src => src.Vurderingsår))
+                .ForMember(dest => dest.AssessmentYear, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.GetAssessmentYear(src.Ekspertgruppe)))
 
                 .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavn))
                 .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnAutor))
@@ -155,8 +155,12 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnId))
 
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ÅrsakTilEndringAvKategori))
-                .ForMember(dest => dest.ÅrsakTilNedgraderingAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilNedgraderingAvKategori))
-                .AfterMap((src, dest) => { SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest); });
+                .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.ÅrsakTilNedgraderingAvKategori,true)))
+                .AfterMap((src, dest) =>
+                {
+                    SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest);
+                    SpeciesAssessment2021ProfileHelper.CalculateQuantiles(dest);
+                });
         }
     }
 }

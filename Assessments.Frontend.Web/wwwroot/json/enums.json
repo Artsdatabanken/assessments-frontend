@@ -1,0 +1,47 @@
+{
+  "CategoryChangeReason": {
+    "NoChange": {
+      "title": "Ingen endring"
+    },
+    "RealPopulationChange":
+    {
+      "title": "Reell populasjonsendring"
+    },
+    "NewKnowledge":
+    {
+      "title": "Endret (ny eller annen) kunnskap"
+    },
+    "CriteriaAdjustments":
+    {
+      "title": "Endrete kriterier eller tilpasning til regler"
+    },
+    "NewIntepretation":
+    {
+      "title": "Ny tolkning av tidligere data"
+    },
+    "NewSpecies":
+    {
+      "title": "Arten nyoppdaget eller nybeskrevet for landet"
+    },
+    "TaxonomicChange":
+    {
+      "title": "Endret taksonomisk status"
+    },
+    "AssessmentareaChange":
+    {
+      "title": "Endring i vurderingsområde"
+    },
+    "NotEvaluated2010":
+    {
+      "title": "Ikke vurdert: NA/NE art 2010"
+    },
+    "NotEvaluated2015":
+    {
+      "title": "Ikke vurdert: NA/NE art 2015"
+    },
+    "NotEvaluated2021":
+    {
+      "title": "Ikke vurdert: NA/NE art 2021"
+    }
+  }
+}

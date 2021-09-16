@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Xml.Serialization;
 using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
 
@@ -527,6 +528,45 @@ namespace Assessments.Mapping.Helpers
 
             SetQuantile(dest.C1.Statistics, 0.7); // rl2021.C1PågåendePopulasjonsreduksjonAntatt
             SetQuantile(dest.C2Ai.Statistics, 0.3); //  rl2021.C2A1PågåendePopulasjonsreduksjonAntatt
+        }
+
+        public static void BlankReasonCategoryChangeWhenNoChange(Rodliste2019 src, SpeciesAssessment2021 dest)
+        {
+            if (dest.Category == src.KategoriFraForrigeListe)
+            {
+                dest.ReasonCategoryChange = CategoryChangeReason.NoChange;
+            }
+        }
+
+        public static CategoryChangeReason EvaluateCategoryChangeReason(Rodliste2019 src)
+        {
+            if (string.IsNullOrWhiteSpace(src.ÅrsakTilEndringAvKategori))
+            {
+                return CategoryChangeReason.NoChange;
+            }
+            switch (src.ÅrsakTilEndringAvKategori.Trim())
+            {
+                case "Reell populasjonsendring":
+                    return CategoryChangeReason.RealPopulationChange;
+                case "Endret (ny eller annen) kunnskap":
+                        return CategoryChangeReason.NewKnowledge;
+                case "Endrete kriterier eller tilpasning til regler":return CategoryChangeReason.CriteriaAdjustments;
+                case "Ny tolkning av tidligere data":
+                    return CategoryChangeReason.NewIntepretation;
+                case "Arten nyoppdaget eller nybeskrevet for landet":
+                    return CategoryChangeReason.NewSpecies;
+                case "Endret taksonomisk status":
+                    return CategoryChangeReason.TaxonomicChange;
+                case "Endring i vurderingsområde":
+                    return CategoryChangeReason.AssessmentareChange;
+                case "Ikke vurdert: NA/NE art 2010":
+                    return CategoryChangeReason.NotEvaluated2010;
+                case "Ikke vurdert: NA/NE art 2015":
+                    return CategoryChangeReason.NotEvaluated2015;
+                case "Ikke vurdert: NA/NE art 2021":
+                    return CategoryChangeReason.NotEvaluated2021;
+                default: return CategoryChangeReason.NoChange;
+            }
         }
     }
 }

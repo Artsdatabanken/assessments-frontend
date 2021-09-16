@@ -4,6 +4,13 @@
 
 <div class="search-and-filter">
     <form asp-action="Index2021" method="get">
+        <!-- View controls -->
+        <div class="controls">
+            <button id="listview" name="view" value="list" class="material-icons" type="submit">list</button>
+            <button id="gridview" name="view" value="grid" class="material-icons" type="submit">grid_on </button>
+            <button id="statsview" name="view" value="stat" class="material-icons" type="submit">bar_chart </button>
+        </div>
+        <!-- Search -->
         <div class="list-search">
             <input asp-for="Name" placeholder="Søk i vitenskapelig navn" />
             <button class="btn" type="submit">

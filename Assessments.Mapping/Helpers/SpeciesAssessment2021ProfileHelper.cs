@@ -82,11 +82,66 @@ namespace Assessments.Mapping.Helpers
                             "Ungskogrydding (rydding i ungskog)",
                             "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
                     },
-                    //{
-                    //    "1.2.4.1.Fjerning av dødt virke", new Tuple<string, string, string>("1.1.2.1.4.",
-                    //    "Uttak av død ved (stående *gadd* og liggende *læger*)",
-                    //    "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat")
-                    //},
+                    {
+                        "1.1.2.4.Avvirking av spesielle typer trær (gamle, hule, brannskade)",
+                        new Tuple<string, string, string>("1.1.2.1.10.",
+                            "Andre faktorer",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                    },
+                    {
+                        "1.1.2.5.Skogsbilveier",
+                        new Tuple<string, string, string>("1.1.2.1.8.",
+                            "Skogsbilveger og kjørespor etter skogsmaskiner (den direkte effekten av inngrepet)",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                    },
+                    {
+                        "1.1.2.6.Motorferdsel",
+                        new Tuple<string, string, string>("1.1.2.1.8.",
+                            "Skogsbilveger og kjørespor etter skogsmaskiner (den direkte effekten av inngrepet)",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                    },
+                    {
+                        "1.1.2.7.Andre",
+                        new Tuple<string, string, string>("1.1.2.1.10.",
+                            "Andre faktorer",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
+                    },
+                    {
+                        "1.1.3.Skogreising/treplantasjer",
+                        new Tuple<string, string, string>("1.1.2.2.",
+                        "Skogreising/treslagskifte",
+                        "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt)")
+                    },
+                    {
+                        "1.1.3.1.Treslagskifte",
+                        new Tuple<string, string, string>("1.1.2.2.1.",
+                            "Treslagsskifte (gran på Vestlandet og nord for Saltfjellet, fremmede treslag)",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogreising/treslagskifte")
+                    },
+                    {
+                        "1.1.3.2.Skogplanting",
+                        new Tuple<string, string, string>("1.1.2.2.2.",
+                            "Skogreising (aktiv gjenplanting av tidligere åpen mark)",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogreising/treslagskifte")
+                    },
+                    {
+                        "1.1.3.4.Skogbrannslukking/gjenplanting av brannflater",
+                        new Tuple<string, string, string>("1.1.2.3.",
+                            "Skogbrannslukking",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt)")
+                    },
+                    {
+                        "1.1.3.5.Drenering (grøfting)",
+                        new Tuple<string, string, string>("1.1.2.2.3.",
+                            "Grøfting og grøfterens (f.eks. myr og sumpskog)",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogreising/treslagskifte")
+                    },
+                    {
+                        "1.1.3.6.Andre",
+                        new Tuple<string, string, string>("1.1.2.2.4.",
+                            "Andre faktorer",
+                            "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogreising/treslagskifte")
+                    },
                     {
                         "4.2.Andre",
                         new Tuple<string, string, string>("4.",
@@ -218,6 +273,9 @@ namespace Assessments.Mapping.Helpers
                 .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
         }
 
+        /// <summary>
+        /// Mapper om bl.a. 2010 id'er og beskrivelser over til 2015 versjonen av påvirkningsfaktorer - samt fixer eldre tekster som er blitt endret
+        /// </summary>
         public static void CorrectImpactFactors(Rodliste2019.Pavirkningsfaktor src,
             SpeciesAssessment2021ImpactFactor dest)
         {

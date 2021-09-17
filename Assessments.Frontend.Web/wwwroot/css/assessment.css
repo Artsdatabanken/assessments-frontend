@@ -543,8 +543,12 @@
 
 .subsub_list{
     margin-bottom:20px;
-
 }
+
+.subsub_list h6{
+    margin-bottom: 5px;
+}
+
 /* IMPACT FACTORS */
 .impact_table {
     display: flex;

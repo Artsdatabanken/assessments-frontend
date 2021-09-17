@@ -17,33 +17,10 @@ namespace Assessments.Frontend.Web.Controllers
     public class RedlistController : BaseController<RedlistController>
     {
         private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
-
-        private static readonly Dictionary<string, string> _allAreas = new Dictionary<string, string>
-        {
-            {"Norge", "N"},
-            {"Svalbard", "S"}
-        };
-
-        private static readonly string[] _allCategories = new[]
-        {
-            Constants.SpeciesCategories.Extinct.ShortHand,
-            Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
-            Constants.SpeciesCategories.Endangered.ShortHand,
-            Constants.SpeciesCategories.Vulnerable.ShortHand,
-            Constants.SpeciesCategories.NearThreatened.ShortHand,
-            Constants.SpeciesCategories.DataDeficient.ShortHand,
-            Constants.SpeciesCategories.Viable.ShortHand,
-            Constants.SpeciesCategories.NotEvalueted.ShortHand,
-            Constants.SpeciesCategories.NotAppropriate.ShortHand
-        };
-
-        private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = new Dictionary<string, string>
-        {
-            {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, "< 5 %"},
-            {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, "5 - 25 %"},
-            {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, "25 - 50 %"},
-            {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, "> 50 %"}
-        };
+        private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
+        private static readonly string[] _allCategories = Constants.AllCategories;
+        private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
+        private static readonly Dictionary<string, string> _allRegions = Constants.AllRegions;
         public IActionResult Index() => View();
 
         [Route("2021")]
@@ -81,21 +58,8 @@ namespace Assessments.Frontend.Web.Controllers
             char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
 
             // Regions
-            Dictionary<string, bool> regions = new Dictionary<string, bool>
-            {
-                {Constants.Regions.Agder, viewModel.Regions.Agder},
-                {Constants.Regions.Innlandet, viewModel.Regions.Innlandet},
-                {Constants.Regions.VestfoldTelemark, viewModel.Regions.VestFoldTelemark},
-                {Constants.Regions.MoreRomsdal, viewModel.Regions.MoreRomsdal},
-                {Constants.Regions.Nordland, viewModel.Regions.Nordland},
-                {Constants.Regions.Rogaland, viewModel.Regions.Rogaland},
-                {Constants.Regions.TromsFinnmark, viewModel.Regions.TromsFinnmark},
-                {Constants.Regions.Trondelag, viewModel.Regions.Trondelag},
-                {Constants.Regions.Vestland, viewModel.Regions.Vestland},
-                {Constants.Regions.VikenOslo, viewModel.Regions.VikenOslo},
-                {Constants.Regions.Havomraader, viewModel.Regions.Havomroder}
-            };
-            List<string> chosenRegions = Helpers.findSelectedRegions(regions);
+            ViewBag.AllRegions = _allRegions;
+            string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions);
 
             // European population percentages
             ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;

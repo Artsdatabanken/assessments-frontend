@@ -4,6 +4,7 @@
     var AllAreas = ViewBag.AllAreas;
     var AllCategories = ViewBag.AllCategories;
     var AllEuroPop = ViewBag.AllEuroPop;
+    var AllRegions = ViewBag.AllRegions;
 }
 @functions{
     string CategoryCheck(string name, string[] element, string value)
@@ -68,6 +69,7 @@
                                             </label>
                                         </li>
                                     }
+                                    <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
                                     <li class="checkbox">
                                         <label>
                                             <input type="checkbox" asp-for="Redlisted" onclick="this.form.submit();" />@SearchAndFilter.ChooseRedlisted
@@ -87,61 +89,14 @@
                             <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
                             <div class="filter_region">
                                 <ul>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.Agder" onclick="this.form.submit();" />Agder
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.Innlandet" onclick="this.form.submit();" />Innlandet
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.VestFoldTelemark" onclick="this.form.submit();" />Vestfold og Telemark
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.MoreRomsdal" onclick="this.form.submit();" />Møre og Romsdal
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.Nordland" onclick="this.form.submit();" />Nordland
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.Rogaland" onclick="this.form.submit();" />Rogaland
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.TromsFinnmark" onclick="this.form.submit();" />Troms og Finnmark
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.Trondelag" onclick="this.form.submit();" />Trøndelag
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.Vestland" onclick="this.form.submit();" />Vestland
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.VikenOslo" onclick="this.form.submit();" />Viken og Oslo
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Regions.Havomroder" onclick="this.form.submit();" />Havområder
-                                        </label>
-                                    </li>
+                                    @foreach (var region in AllRegions)
+                                    {
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" @CategoryCheck("Regions", Model.Regions, region.Key) onclick="this.form.submit();" />@region.Value
+                                            </label>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </div>

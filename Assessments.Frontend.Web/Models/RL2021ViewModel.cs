@@ -10,22 +10,20 @@ namespace Assessments.Frontend.Web.Models
         public RL2021ViewModel()
         {
             this.Criterias = new FilterCriterias();
-            this.Regions = new FilterRegions();
             this.Area = Array.Empty<string>();
             this.EuroPop = Array.Empty<string>();
             this.IsCheck = Array.Empty<string>();
-            this.Region = Array.Empty<string>();
+            this.Regions = Array.Empty<string>();
             this.Category = Array.Empty<string>();
         }
         public IPagedList<SpeciesAssessment2021> Redlist2021Results { get; set; }
         public string[] Area { get; set; }
-        public string[] Region { get; set; }
         public string Name { get; set; }
         public bool Redlisted { get; set; }
         public bool Endangered { get; set; }
         public bool PresumedExtinct { get; set; }
         public FilterCriterias Criterias { get; set; }
-        public FilterRegions Regions { get; set; }
+        public string[] Regions { get; set; }
         public string[] EuroPop { get; set; }
         public string[] IsCheck { get; set; }
         
@@ -44,21 +42,6 @@ namespace Assessments.Frontend.Web.Models
         public bool CriteriaC { get; set; }
         public bool CriteriaD { get; set; }
     } 
-
-    public class FilterRegions
-    {
-        public bool Agder { get; set; }
-        public bool Innlandet { get; set; }
-        public bool VestFoldTelemark { get; set; }
-        public bool MoreRomsdal { get; set; }
-        public bool Nordland { get; set; }
-        public bool Rogaland { get; set; }
-        public bool TromsFinnmark { get; set; }
-        public bool Trondelag { get; set; }
-        public bool Vestland { get; set; }
-        public bool VikenOslo { get; set; }
-        public bool Havomroder { get; set; }
-    }
 
     public class Species2001StatisticsViewModel
     {

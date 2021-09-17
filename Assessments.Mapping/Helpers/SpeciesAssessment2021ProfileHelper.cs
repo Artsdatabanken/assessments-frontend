@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Xml.Serialization;
 using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
 
@@ -197,8 +199,8 @@ namespace Assessments.Mapping.Helpers
             return fylke.ToLowerInvariant() switch
             {
                 "aa" => "Aust-Agder",
-                "bn" => "Polhavet",
-                "bs" => "Barentshavet",
+                "bn" => "Barentshavet nord og Polhavet",
+                "bs" => "Barentshavet sør",
                 "bu" => "Buskerud",
                 "fi" => "Finnmark",
                 "gh" => "Grønlandshavet",
@@ -342,6 +344,286 @@ namespace Assessments.Mapping.Helpers
                     dest.CriteriaSummarized = string.Empty;
                 }
 
+            }
+        }
+        public static int GetAssessmentYear(string ekspertgruppenavn)
+        {
+            if (ekspertgruppenavn == "Spretthaler"
+                || ekspertgruppenavn == "Spretthaler (Svalbard)")
+            {
+                return 2010;
+            }
+            else
+            {
+                return 2021;
+            }
+
+        }
+        private static string[] _romanNumbers = new[] { "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x" };
+        public static int RomanNumberSort(string roman)
+        {
+            // for this purpose this is enough
+            var result = Array.IndexOf<string>(_romanNumbers, roman);
+            return result;
+        }
+
+        private static void SetQuantile(SpeciesAssessment2021MinMaxProbable minmaxprobable, double quantileValue)
+        {
+            var q = GetQuantile(minmaxprobable, quantileValue);
+            //minmaxprobable.Calculated = q == null ? "" : (Math.Round((double)q)).ToString("#,0.##");
+            minmaxprobable.Calculated = q == null ? "" : q.ToString();
+        }
+
+        private static void SetQuantile(SpeciesAssessment2021MinMaxProbableIntervall minmaxprobable, double quantileValue)
+        {
+            var q = GetQuantile(minmaxprobable, quantileValue);
+            //minmaxprobable.Calculated = q == null ? "" : (Math.Round((double)q)).ToString("#,0.##");
+            minmaxprobable.Calculated = q == null ? "" : q.ToString();
+        }
+
+        private static int? GetQuantile(SpeciesAssessment2021MinMaxProbableIntervall minmaxprobable, double quantileValue)
+        {
+            if (minmaxprobable == null)
+            {
+                throw new Exception("missing minmaxprobable");
+            }
+
+            var min = parseNullableInt(minmaxprobable.Min);
+            var minintervall = parseNullableInt(minmaxprobable.Minintervall);
+            int? max = parseNullableInt(minmaxprobable.Max);
+            int? maxintervall = parseNullableInt(minmaxprobable.Maxintervall);
+            int? probable = parseNullableInt(minmaxprobable.Probable);
+            bool punktestimat = minmaxprobable.Punktestimat == "true";
+
+            //double? test = 
+            //    min == null && max == null
+            //    ? minintervall == null
+            //        ? maxintervall
+            //        : maxintervall == null
+            //        ? minintervall
+            //        : minintervall < maxintervall
+            //        ? MyQuantile(quantileValue, minintervall, maxintervall)
+            //        : (double?)null
+            //    : (double?)null;
+
+            double? q =
+                punktestimat
+                ? min == null && max == null
+                    ? probable
+                    : min == null && probable == null
+                    ? max
+                    : max == null && probable == null
+                    ? min
+                    : probable == null && min <= max
+                    ? MyQuantile(quantileValue, min, max)
+                    : min == null && probable <= max
+                    ? MyQuantile(quantileValue, max, probable)
+                    : max == null && min <= probable
+                    ? MyQuantile(quantileValue, min, probable)
+                    : min != null && max != null && probable != null && min < max && probable > min && probable < max
+                    ? MyQuantile(quantileValue, min, probable, max)
+                    : (double?)null
+
+                // intervall (ikke punktestimat)
+                : min == null && max == null
+                ? minintervall == null
+                    ? maxintervall
+                    : maxintervall == null
+                    ? minintervall
+                    : minintervall < maxintervall
+                    ? MyQuantile(quantileValue, minintervall, maxintervall)
+                    : (double?)null
+
+                : minintervall == null && maxintervall == null
+                ? min == null
+                    ? max
+                    : max == null
+                    ? min
+                    : min < max
+                    ? MyQuantile(quantileValue, min, max)
+                    : (double?)null
+                : minintervall == null
+                ? min < maxintervall //(min < max)&& (maxintervall < max) && (min < maxintervall)
+                    ? MyQuantile(quantileValue, min, maxintervall)
+                    : (double?)null
+                : maxintervall == null
+                ? min < minintervall //(min < max) && (maxintervall < max) && (min < maxintervall)
+                    ? MyQuantile(quantileValue, min, minintervall, max)
+                    : (double?)null
+                : min < max && maxintervall < max && min < minintervall && minintervall < maxintervall
+                    ? MyQuantile(quantileValue, min, minintervall, maxintervall, max)
+                    : (double?)null;
+
+            //if (q != null)
+            //{
+            //    double a = (double)q * 100d;
+            //    double b = Math.Round(a);
+            //    double c = b / 100d;
+            //    q = c;
+            //    //Console.WriteLine("q " + q);
+            //}
+            int? result = q == null ? (int?)null : (int)(q + 0.500000001d);
+            return result;
+        }
+
+        private static int? GetQuantile(SpeciesAssessment2021MinMaxProbable minmaxprobable, double quantileValue)
+        {
+            if (minmaxprobable == null)
+            {
+                throw new Exception("missing minmaxprobable");
+            }
+            var min = parseNullableInt(minmaxprobable.Min);
+            int? max = parseNullableInt(minmaxprobable.Max);
+            int? probable = parseNullableInt(minmaxprobable.Probable);
+            double? q =
+                min == null && max == null
+                    ? probable
+                    : min == null && probable == null
+                        ? max
+                        : max == null && probable == null
+                            ? min
+                            : probable == null && min <= max
+                                ? MyQuantile(quantileValue, min, max)
+                                : min == null && probable <= max
+                                    ? MyQuantile(quantileValue, max, probable)
+                                    : max == null && min <= probable
+                                        ? MyQuantile(quantileValue, min, probable)
+                                        : min != null && max != null && probable != null && min < max && probable > min && probable < max
+                                            ? MyQuantile(quantileValue, min, probable, max)
+                                            : (double?)null;
+            //if (q != null)
+            //{
+            //    double a = (double)q * 100d;
+            //    double b = Math.Round(a);
+            //    double c = b / 100d;
+            //    q = c;
+            //    //Console.WriteLine("q " + q);
+            //}
+            int? result = q == null ? (int?)null : (int)(q + 0.500000001d);
+            return result;
+        }
+
+        private static int? parseNullableInt(string s)
+        {
+            return string.IsNullOrWhiteSpace(s) ? (int?)null : Convert.ToInt32(double.Parse(s.Replace(" ", "", StringComparison.InvariantCultureIgnoreCase).Replace(",", ".", StringComparison.InvariantCultureIgnoreCase).Trim(), NumberStyles.Float, CultureInfo.InvariantCulture)); // balla mye søppel i fritekst tall gitt
+        }
+
+        private static double MyQuantile(double percentile, int? int1, int? int2)
+        {
+            if (int1 == null || int2 == null)
+            {
+                throw new ArgumentException("MyQuantile");
+            }
+            var arr = new double[] { (double)int1, (double)int2 };
+            var result = Percentile(arr, percentile);
+            return result;
+        }
+
+        private static double Percentile(double[] sequence, double percentile)
+        {
+            Array.Sort(sequence);
+            int N = sequence.Length;
+            double n = (N - 1) * percentile + 1;
+            if (n == 1d)
+            {
+                return sequence[0];
+            }
+            else if (n == N)
+            {
+                return sequence[N - 1];
+            }
+            else
+            {
+                int k = (int)n;
+                double d = n - k;
+                return sequence[k - 1] + d * (sequence[k] - sequence[k - 1]);
+            }
+        }
+
+        private static double MyQuantile(double percentile, int? int1, int? int2, int? int3)
+        {
+            if (int1 == null || int2 == null || int3 == null)
+            {
+                throw new ArgumentException("MyQuantile");
+            }
+            var arr = new double[] { (double)int1, (double)int2, (double)int3 };
+            var result = Percentile(arr, percentile);
+            return result;
+        }
+
+        private static double MyQuantile(double percentile, int? int1, int? int2, int? int3, int? int4)
+        {
+            if (int1 == null || int2 == null || int3 == null || int4 == null)
+            {
+                throw new ArgumentException("MyQuantile");
+            }
+            var arr = new double[] { (double)int1, (double)int2, (double)int3, (double)int4 };
+            var result = Percentile(arr, percentile);
+            return result;
+        }
+
+        public static void CalculateQuantiles(SpeciesAssessment2021 dest)
+        {
+            SetQuantile(dest.A1.QuantifiedReduction, 0.7);
+            SetQuantile(dest.A2.QuantifiedReduction, 0.7);
+            SetQuantile(dest.A3.QuantifiedReduction, 0.7);
+            SetQuantile(dest.A4.QuantifiedReduction, 0.7);
+
+            SetQuantile(dest.B1.Statistics, 0.3); //.B1IntervallUtbredelsesområde
+            SetQuantile(dest.B2.Statistics , 0.3); // rl2021.B2IntervallForekomstareal
+
+            // I henhold til IUCNs retningslinjer skal EOO (utbredelsesområdet) settes likt AOO (forekomstareal) når AOO>EOO.
+            if (GetQuantile(dest.B1.Statistics, 0.3) < GetQuantile(dest.B2.Statistics, 0.3))
+            {
+                dest.B1.Statistics.Calculated = dest.B2.Statistics.Calculated;
+            }
+
+
+
+            SetQuantile(dest.BAii.Statistics , 0.3); // rl2021.BaIntervallAntallLokaliteter
+
+            SetQuantile(dest.C.Statistics, 0.3); //  rl2021.CPopulasjonsstørrelseAntatt
+
+            SetQuantile(dest.C1.Statistics, 0.7); // rl2021.C1PågåendePopulasjonsreduksjonAntatt
+            SetQuantile(dest.C2Ai.Statistics, 0.3); //  rl2021.C2A1PågåendePopulasjonsreduksjonAntatt
+        }
+
+        public static void BlankReasonCategoryChangeWhenNoChange(Rodliste2019 src, SpeciesAssessment2021 dest)
+        {
+            if (dest.Category == src.KategoriFraForrigeListe)
+            {
+                dest.ReasonCategoryChange = CategoryChangeReason.NoChange;
+            }
+        }
+
+        public static CategoryChangeReason EvaluateCategoryChangeReason(Rodliste2019 src)
+        {
+            if (string.IsNullOrWhiteSpace(src.ÅrsakTilEndringAvKategori))
+            {
+                return CategoryChangeReason.NoChange;
+            }
+            switch (src.ÅrsakTilEndringAvKategori.Trim())
+            {
+                case "Reell populasjonsendring":
+                    return CategoryChangeReason.RealPopulationChange;
+                case "Endret (ny eller annen) kunnskap":
+                        return CategoryChangeReason.NewKnowledge;
+                case "Endrete kriterier eller tilpasning til regler":return CategoryChangeReason.CriteriaAdjustments;
+                case "Ny tolkning av tidligere data":
+                    return CategoryChangeReason.NewIntepretation;
+                case "Arten nyoppdaget eller nybeskrevet for landet":
+                    return CategoryChangeReason.NewSpecies;
+                case "Endret taksonomisk status":
+                    return CategoryChangeReason.TaxonomicChange;
+                case "Endring i vurderingsområde":
+                    return CategoryChangeReason.AssessmentareChange;
+                case "Ikke vurdert: NA/NE art 2010":
+                    return CategoryChangeReason.NotEvaluated2010;
+                case "Ikke vurdert: NA/NE art 2015":
+                    return CategoryChangeReason.NotEvaluated2015;
+                case "Ikke vurdert: NA/NE art 2021":
+                    return CategoryChangeReason.NotEvaluated2021;
+                default: return CategoryChangeReason.NoChange;
             }
         }
     }

@@ -15,5 +15,6 @@
         public string Punktestimat { get; set; } = "true";
 
         public string Quantile { get; set; } = "";
+        public string Calculated { get; set; }
     }
 }

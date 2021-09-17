@@ -11,27 +11,6 @@
 }
 
 <div class="sidebar_image_info">
-    <h2>@Model.SpeciesGroup</h2>
-    @foreach (var key in speciesgroup.Keys)
-    {
-       
-        @if (key != null && (@Model.SpeciesGroup == key || @Model.SpeciesGroup.Contains(key)))
-        {
-            @if (speciesgroup[key]["tagline"] != null)
-            {
-                <span class="tagline">
-                    @speciesgroup[key]["tagline"]
-                </span>
-            }
-        <span class="image_background">
-            
-                @if (speciesgroup[key]["image"] != null)
-                {
-                     <img src="@speciesgroup[key]["image"]" />
-                }
-        </span>
-        }
-    }
 
     @if (@Model.VurdertVitenskapeligNavnHierarki != null)
     {

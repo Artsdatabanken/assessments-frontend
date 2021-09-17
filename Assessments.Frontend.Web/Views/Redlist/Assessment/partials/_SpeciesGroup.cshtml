@@ -1,0 +1,34 @@
+﻿@model SpeciesAssessment2021
+@{
+
+    Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+
+    // Expert committee field should always be present.
+    // By the time we arrive here, the actual committe name has been split into correct species group,
+    // and is thus now species group and not actually committtee group.
+
+
+}
+
+<div class="speciesgroup_container">
+    <div class="species_group_image">
+        @foreach (var key in speciesgroup.Keys)
+        {
+
+            @if (key != null && (@Model.SpeciesGroup == key || @Model.SpeciesGroup.Contains(key)))
+            {
+                <span class="image_background">
+
+                    @if (speciesgroup[key]["image"] != null)
+                    {
+                        <img src="@speciesgroup[key]["image"]" />
+                    }
+                </span>
+            }
+        }
+    </div>
+    <p>
+        Vurdert av <a href=""> Ekspertkomité for @Model.SpeciesGroup </a> <br />
+        <span class="date">Publisert: @(Model.AssessmentYear == 2010  ? @Model.YearPreviousAssessment : "24.November 2021")</span>
+    </p>
+</div>

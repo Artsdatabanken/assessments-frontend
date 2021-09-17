@@ -243,32 +243,7 @@ li a span.element_icon {
     max-width: 100%;
 }
 
-.btn {
-    padding: 6px 12px;
-    font-size: 15px;
-    line-height: 1.42857143;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    background: #4c4a48;
-    color: #fff;
-    border: none;
-    display: inline-block;
-    margin-left: -1px;
-    border-radius: 2px;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    height: 45px;
-}
 
-.btn .material-icons {
-    vertical-align: bottom;
-    font-size: 16pt;
-}
 
 .section {
     border: 1px solid grey;

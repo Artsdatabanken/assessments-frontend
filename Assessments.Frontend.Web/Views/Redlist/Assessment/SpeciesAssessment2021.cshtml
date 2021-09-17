@@ -26,21 +26,24 @@
 
 <div class="content-placer bigmid">
     <div class="side">
+        <button class="secondary">
+            <span class="material-icons">
+                mediation
+            </span>
+        Gå til taxonsiden</button>
         <partial name="/Views/Redlist/Assessment/partials/_SpeciesInfo.cshtml" />
         <div class="history">
-            <h2>
-                Kategori
-            </h2>
+            <p>Tidligere historikk</p>
             <h3>Rødlista 2021</h3>
             <partial name="/Views/Shared/_CategoryTags.cshtml" />
             <partial name="/Views/Redlist/Assessment/partials/_Historikk.cshtml" />
         </div>
     </div>
-    <div class="mid-content">
+    <div class="mid-content with_sidebar">
         <partial name="/Views/Redlist/Assessment/partials/_Header.cshtml" />
         <partial name="/Views/Redlist/Assessment/partials/_Ingress.cshtml" />
-        <partial name="/Views/Redlist/Assessment/partials/_Informasjon.cshtml" />
         <partial name="/Views/Redlist/Assessment/partials/_CategoryDescription.cshtml" />
+        <partial name="/Views/Redlist/Assessment/partials/_Informasjon.cshtml" />
         <partial name="/Views/Redlist/Assessment/partials/_Oppsumer.cshtml" />
         <partial name="/Views/Redlist/Assessment/partials/_Bestand.cshtml" />
         <partial name="/Views/Redlist/Assessment/partials/_Fylkesforekomster.cshtml" />

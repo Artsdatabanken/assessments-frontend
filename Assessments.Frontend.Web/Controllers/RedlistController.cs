@@ -19,6 +19,7 @@ namespace Assessments.Frontend.Web.Controllers
         private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
         private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
         private static readonly string[] _allCategories = Constants.AllCategories;
+        private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         private static readonly Dictionary<string, string> _allRegions = Constants.AllRegions;
         public IActionResult Index() => View();
@@ -42,44 +43,38 @@ namespace Assessments.Frontend.Web.Controllers
             // Areas
             ViewBag.AllAreas = _allAreas;
 
+            if (viewModel.Area?.Any() == true)
+                query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
+
             // Categories
-            
             ViewBag.AllCategories = _allCategories;
             viewModel.Category = Helpers.findSelectedCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
 
+            if (viewModel.Category?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));
+
             // Criterias
-            Dictionary<char, bool> criterias = new Dictionary<char, bool>
-            {
-                { 'A', viewModel.Criterias.CriteriaA },
-                { 'B', viewModel.Criterias.CriteriaB },
-                { 'C', viewModel.Criterias.CriteriaC },
-                { 'D', viewModel.Criterias.CriteriaD },
-            };
-            char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
+            ViewBag.AllCriterias = _allCriterias;
+            char[] criterias = viewModel.Criterias.ToString().ToCharArray();
+
+            if (viewModel.Criterias?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(criterias) != -1);
 
             // Regions
             ViewBag.AllRegions = _allRegions;
             string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions);
 
+            if (chosenRegions?.Any() == true)
+                query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
+
             // European population percentages
             ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;
             string[] chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(viewModel.EuroPop);
 
-            if (viewModel.Category?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));
-
-            if (chosenCriterias?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(chosenCriterias) != -1);
-
-            if (viewModel.Area?.Any() == true)
-                query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
-
-            if (chosenRegions?.Any() == true)
-                query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
-
             if (chosenEuropeanPopulation?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.PercentageEuropeanPopulation) && chosenEuropeanPopulation.Contains(x.PercentageEuropeanPopulation));
 
+            // Extinct
             if (viewModel.PresumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
 

@@ -92,24 +92,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedCategories.ToArray();
         }
 
-        public static char[] findSelectedCriterias(Dictionary<char, bool> criterias)
-        {
-            List<char> selectedCriterias = new List<char>();
-            foreach (var item in criterias)
-                if (item.Value)
-                    selectedCriterias.Add(item.Key);
-            return selectedCriterias.ToArray();
-        }
-
-        public static List<string> findSelectedAreas(Dictionary<string, bool> assessmentAreas)
-        {
-            List<string> selectedAreas = new List<string>();
-            foreach (var item in assessmentAreas)
-                if (item.Value)
-                    selectedAreas.Add(item.Key);
-            return selectedAreas;
-        }
-
         public static string[] findSelectedRegions(string[] selectedRegions)
         {
             List<string> regions = new List<string>();
@@ -225,6 +207,13 @@ namespace Assessments.Frontend.Web.Infrastructure
             Constants.SpeciesCategories.Viable.ShortHand,
             Constants.SpeciesCategories.NotEvalueted.ShortHand,
             Constants.SpeciesCategories.NotAppropriate.ShortHand
+        };
+        public static readonly Dictionary<string, string> AllCriterias = new Dictionary<string, string>
+        {
+            {"A", "populasjonsreduksjon"},
+            {"B", "lite areal"},
+            {"C", "liten populasjon"},
+            {"D", "svært liten populasjon eller forekomst"}
         };
 
         public static readonly Dictionary<string, string> AllEuropeanPopulationPercentages = new Dictionary<string, string>

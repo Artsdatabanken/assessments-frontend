@@ -3,6 +3,7 @@
 @{
     var AllAreas = ViewBag.AllAreas;
     var AllCategories = ViewBag.AllCategories;
+    var AllCriterias = ViewBag.AllCriterias;
     var AllEuroPop = ViewBag.AllEuroPop;
     var AllRegions = ViewBag.AllRegions;
 }
@@ -123,26 +124,14 @@
                             <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
                             <div class="filter_criteria">
                                 <ul>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Criterias.CriteriaA" onclick="this.form.submit();" />A - populasjonsreduksjon
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Criterias.CriteriaB" onclick="this.form.submit();" />B - lite areal
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Criterias.CriteriaC" onclick="this.form.submit();" />C - liten populasjon
-                                        </label>
-                                    </li>
-                                    <li class="checkbox">
-                                        <label>
-                                            <input type="checkbox" asp-for="Criterias.CriteriaD" onclick="this.form.submit();" />D - svært liten populasjon eller forekomst
-                                        </label>
-                                    </li>
+                                    @foreach (var criteria in AllCriterias)
+                                    {
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" @CategoryCheck("Criterias", Model.Criterias, criteria.Key) onclick="this.form.submit();" />@criteria.Key - @criteria.Value
+                                            </label>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         </div>

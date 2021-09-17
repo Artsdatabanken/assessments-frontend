@@ -54,25 +54,10 @@
 
     // STRING HANDLING
     // A CRITERIA:
-    // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
-
-    string a_subcriteria = "";
-    string a_options = "";
+    // OPTIONS AND SUBCRITERIA ARE NOT SEPARATE ENTITIES
 
     a = subCriteria("A", a);
-    a = a.Replace("(", ";(");
-    var distinctlist = a.Split(";").Distinct();
-    a = string.Join(";", distinctlist);
 
-    if (a.Contains("("))
-    {
-        a_subcriteria = a.Split(";(")[0];
-        a_options = a.Split(";(")[1];
-        a_subcriteria += a_options.Split(")")[1];
-        a_options = a_options.Split(")")[0];
-        a = a_subcriteria + ";" + a_options;
-
-    }
 
     // B CRITERIA
     // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
@@ -110,7 +95,7 @@
     // The dictionaries used in the view
 
     var subcriteria = new Dictionary<string, string>(){
-    {"A", a_subcriteria},
+    {"A", a},
     {"B", b_subcriteria},
     {"C", c},
     {"D", d}
@@ -118,7 +103,7 @@
 
 
     var options = new Dictionary<string, string>(){
-    {"A", a_options},
+    {"A", a},
     {"B", b_options},
     };
 
@@ -191,6 +176,11 @@
         <div class="page_section">
             <h3>Offisiell kriteriestreng på internasjonal skrivemåte</h3>
             <p>@Model.CriteriaSummarized<br /></p>
+            <br />
+            @a<br />
+            @subcriteria["A"]<br/>
+            @options["A"]
+
         </div>
         <h3>Kriteriefordeling</h3>
 

@@ -2,29 +2,28 @@
   "A": {
     "title": "Reduksjon i populasjonsstørrelse",
     "description": "Reduksjon i populasjonsstørrelse over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år). A-kriteriene anvendes på arter som nylig har gjennomgått en sterk nedgang i populasjonsstørrelse, eller der det er sterk grunn til å forvente en betydelig nedgang i nærmeste framtid.",
-    "options": {
-      "a": {
-        "title": "Direkte observasjoner"
-      },
-      "b": {
-        "title": "Egnet bestandsindeks for arten"
-      },
-      "c": {
-        "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
-      },
-      "d": {
-        "title": "faktisk eller potensiell høsting/utnytting av arten",
-        "optionaltext": "Reell eller potensiell utnytting av arten"            
-      },
-      "e": {
-        "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
-      }
-
-    },
     "subcriteria": {
       "A1": {
         "title": "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel",
         "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år). Faktorene som har forårsaket reduksjonen er klart reversible og forstått og har opphørt.",
+        "subsub": {
+          "a": {
+            "title": "Direkte observasjoner"
+          },
+          "b": {
+            "title": "Egnet bestandsindeks for arten"
+          },
+          "c": {
+            "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
+          },
+          "d": {
+            "title": "faktisk eller potensiell høsting/utnytting av arten",
+            "optionaltext": "Reell eller potensiell utnytting av arten"
+          },
+          "e": {
+            "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
+          }
+        },
         "content": {
           "field": " Model.A1OpphørtOgReversibelAntatt",
           "min": "Minst: <field>(min) %",
@@ -38,6 +37,24 @@
       "A2": {
         "title": "Reduksjon de siste 10 år/3 generasjoner",
         "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år). Reduksjonen eller faktorene som har forårsaket reduksjonen behøver ikke å ha opphørt eller være forstått eller reversible. ",
+        "subsub": {
+          "a": {
+            "title": "Direkte observasjoner"
+          },
+          "b": {
+            "title": "Egnet bestandsindeks for arten"
+          },
+          "c": {
+            "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
+          },
+          "d": {
+            "title": "faktisk eller potensiell høsting/utnytting av arten",
+            "optionaltext": "Reell eller potensiell utnytting av arten"
+          },
+          "e": {
+            "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
+          }
+        },
         "content": {
           "field": "Model.A2Forutgående10ÅrAntatt",
           "min": "Minst: <field>(min) %",
@@ -51,6 +68,21 @@
       "A3": {
         "title": "Framtidig reduksjon kommende 10 år/3 generasjoner",
         "description": "Bedømt, antatt eller prosjektert framtidig reduksjon i populasjonsstørrelse over de kommende 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år).",
+        "subsub": {
+          "b": {
+            "title": "Egnet bestandsindeks for arten"
+          },
+          "c": {
+            "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
+          },
+          "d": {
+            "title": "faktisk eller potensiell høsting/utnytting av arten",
+            "optionaltext": "Reell eller potensiell utnytting av arten"
+          },
+          "e": {
+            "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
+          }
+        },
         "content": {
           "field": "Model.A3Kommende10ÅrAntatt",
           "min": "Minst: <field>(min) % ",
@@ -59,11 +91,29 @@
           "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
           "conclusion": "A3 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
         },
-          "based-on": "A3EndringBasertpåKode"
-        },
+        "based-on": "A3EndringBasertpåKode"
+      },
       "A4": {
         "title": "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid",
         "description": "Bedømt, antatt, observert, estimert eller prosjektert pågående reduksjon i populasjonsstørrelse over en vurderingsperiode på 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år) som inkluderer både fortid og framtid.",
+        "subsub": {
+          "a": {
+            "title": "Direkte observasjoner"
+          },
+          "b": {
+            "title": "Egnet bestandsindeks for arten"
+          },
+          "c": {
+            "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
+          },
+          "d": {
+            "title": "faktisk eller potensiell høsting/utnytting av arten",
+            "optionaltext": "Reell eller potensiell utnytting av arten"
+          },
+          "e": {
+            "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
+          }
+        },
         "content": {
           "field": "Model.A4Intervall10ÅrAntatt",
           "min": "Minst: <field>(min) %",

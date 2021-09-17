@@ -541,9 +541,11 @@
     padding-left:10px;
 }
 
+.subsub_list{
+    margin-bottom:20px;
 
+}
 /* IMPACT FACTORS */
-
 .impact_table {
     display: flex;
     background: #fcfcfc;

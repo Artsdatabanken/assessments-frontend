@@ -2,96 +2,96 @@
   "1.": {
     "title": "Påvirkning på habitat",
     "subelement": {
-      "1.1": {
+      "1.1.": {
         "title": "Landbruk",
         "subelement": {
-          "1.1.1": {
+          "1.1.1.": {
             "title": "Jordbruk",
             "subelement": {
-              "1.1.1.1": {
+              "1.1.1.1.": {
                 "title": "Oppdyrking"
               },
-              "1.1.1.2": {
+              "1.1.1.2.": {
                 "title": "Drenering (grøfting)"
               },
-              "1.1.1.3": {
+              "1.1.1.3.": {
                 "title": "Slått"
               },
-              "1.1.1.4": {
+              "1.1.1.4.": {
                 "title": "Torvbryting"
               },
-              "1.1.1.5": {
+              "1.1.1.5.": {
                 "title": "Slått"
               },
-              "1.1.1.6": {
+              "1.1.1.6.": {
                 "title": "Endrede frøblandinger"
               },
-              "1.1.1.7": {
+              "1.1.1.7.": {
                 "title": "Motorferdsel"
               },
-              "1.1.1.8": {
+              "1.1.1.8.": {
                 "title": "Andre"
               }
             }
           },
-          "1.1.2": {
+          "1.1.2.": {
             "title": "Skogbruk (kommersielt)",
             "subelement": {
-              "1.1.2.1": {
+              "1.1.2.1.": {
                 "title": "Skogsdrift, hogst og skjøtsel",
                 "subelement": {
-                  "1.1.2.1.1": {
+                  "1.1.2.1.1.": {
                     "title": "Åpne hogstformer (flatehogst og frøtrestillingshogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)"
                   },
-                  "1.1.2.1.2": {
+                  "1.1.2.1.2.": {
                     "title": "Lukkede hogstformer (plukkhogst, skjermstilling, tynning, uttak av enkelttrær, inkludert uttak av rotvelt, råtne trær, tørrgran etc.)"
                   },
-                  "1.1.2.1.3": {
+                  "1.1.2.1.3.": {
                     "title": "Ungskogrydding (rydding i ungskog)"
                   },
-                  "1.1.2.1.4": {
+                  "1.1.2.1.4.": {
                     "title": "Uttak av død ved (stående gadd og liggende læger)"
                   },
-                  "1.1.2.1.5": {
+                  "1.1.2.1.5.": {
                     "title": "Markberedning (maskinell bearbeiding av marksjiktet etter hogst)"
                   },
-                  "1.1.2.1.6": {
+                  "1.1.2.1.6.": {
                     "title": "Gjødsling"
                   },
-                  "1.1.2.1.7": {
+                  "1.1.2.1.7.": {
                     "title": "Sprøyting (av plantefelt for fjerning av løv og gras)"
                   },
-                  "1.1.2.1.8": {
+                  "1.1.2.1.8.": {
                     "title": "Skogsbilveger og kjørespor etter skogsmaskiner (den direkte effekten av inngrepet)"
                   },
-                  "1.1.2.1.10": {
+                  "1.1.2.1.10.": {
                     "title": "Andre faktorer"
                   }
                 }
               },
-              "1.1.2.2": {
+              "1.1.2.2.": {
                 "title": "Skogreising/treslagskifte",
                 "subelement": {
-                  "1.1.2.2.1": {
+                  "1.1.2.2.1.": {
                     "title": "Treslagsskifte (gran på Vestlandet og nord for Saltfjellet, fremmede treslag)"
                   },
-                  "1.1.2.2.2": {
+                  "1.1.2.2.2.": {
                     "title": "Skogreising (aktiv gjenplanting av tidligere åpen mark)"
                   },
-                  "1.1.2.2.3": {
+                  "1.1.2.2.3.": {
                     "title": "Grøfting og grøfterens (f.eks. myr og sumpskog)"
                   },
-                  "1.1.2.2.4": {
+                  "1.1.2.2.4.": {
                     "title": "Andre faktorer"
                   }
                 }
               },
-              "1.1.2.3": {
+              "1.1.2.3.": {
                 "title": "Skogbrannslukking"
               }
             }
           },
-          "1.1.4": {
+          "1.1.4.": {
             "title": "Buskap/dyrehold",
             "subelement": {
               "1.1.4.1.": {
@@ -105,7 +105,7 @@
               }
             }
           },
-          "1.1.5": {
+          "1.1.5.": {
             "title": "Opphørt/redusert drift",
             "subelement": {
               "1.1.5.1.": {
@@ -142,10 +142,10 @@
           }
         }
       },
-      "1.2": {
+      "1.2.": {
         "title": "Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk)",
         "subelement": {
-          "1.2.1": {
+          "1.2.1.": {
             "title": "Utbygging/utvinning",
             "subelement": {
               "1.2.1.1.": {
@@ -183,7 +183,7 @@
               }
             }
           },
-          "1.2.3": {
+          "1.2.3.": {
             "title": "Opphørt drift",
             "subelement": {
               "1.2.3.1.": {
@@ -203,7 +203,7 @@
               }
             }
           },
-          "1.2.4": {
+          "1.2.4.": {
             "title": "Annen påvirkning på habitat",
             "subelement": {
               "1.2.4.1.": {
@@ -228,7 +228,7 @@
           }
         }
       },
-      "1.3": {
+      "1.3.": {
         "title": "Habitatpåvirkning i limnisk miljø",
         "subelement": {
           "1.3.1.": {

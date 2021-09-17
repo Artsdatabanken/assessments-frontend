@@ -62,7 +62,30 @@
         <span class="text_collection">
             <span class="impact-id">@key</span>
             @value["title"]
+            @foreach (var factor in Model.ImpactFactors)
+            {
+                @if (factor.Id == (key))
+                {
+                    <div class="impact_table">
+                        <div>
+                            <h4>Omfang</h4>
+                            <span>@factor.PopulationScope</span>
+                        </div>
+                        <div class="sideborders">
+                            <h4>Alvorlighetsgrad</h4>
+                            <span>@factor.Severity</span><br />
+                        </div>
+                        <div>
+                            <h4>Tidspunkt</h4>
+                            @factor.TimeScope
+                        </div>
+                    </div>
+                }
+            }
+
         </span>
+
+       
     </span>
     }
 
@@ -161,81 +184,3 @@
 
 </div>
 
-
-<div class="page_section">
-    <h2>Påvirkningsfaktorer </h2>
-
-    <p class="fact_box"> @ViewBag.glossary["oneliners"]["Påvirkningsfaktorer"]</p>
-
-    <div class="factors">
-        @{foreach (var factor in Model.ImpactFactors)
-            {
-
-                @factor.Id
-                <div class="fake_table_header" style=" " :>
-
-
-                    <div class="stats_element_container">
-                        <img src="@ImpactIcon(@factor.Id,@factor.Factor)" class="paavirk" />
-                    </div>
-
-
-
-                    <div class="stats_element_text topalign">
-                        <h3>@factor.GroupingFactor</h3>
-                        <b>@factor.Id - @factor.Factor</b>
-                        @* todo: se om stien skal brukes, inneholder også toppnivå - kan fjernes under ved å skrive factor.FactorPath.Skip(1)   *@
-                        <h5> @string.Join(" > ", factor.FactorPath.Skip(1))</h5>
-
-
-                    </div>
-                </div>
-
-
-                <div class="fake_table" style=" ">
-                    <div>
-                        <h3>Omfang</h3>
-
-                        @{
-
-                            var omfang_text = @factor.PopulationScope;
-                            var omfang_numbers = "";
-
-                            if (omfang_text.Contains("("))
-                            {
-                                // Split out the percentages etc. from the main string.
-                                // Percentages appear to always be enclosed in "()".
-                                omfang_text = omfang_text.Split("(")[0];
-                                omfang_numbers = @factor.PopulationScope.Split("(")[1].Replace(")", "");
-                            }
-
-                        }
-                        <span>@omfang_text</span><br />
-                        @if (omfang_text.Contains("("))
-                        {
-                            <span class="stats_element">
-                                <span>@omfang_numbers</span>
-                            </span>
-                        }
-
-
-                    </div>
-                    <div class="sideborders">
-                        <h3>Alvorlighetsgrad</h3>
-
-                        @{
-                            var alv_text = @factor.Severity;
-                        }
-                        <span>@alv_text</span><br />
-
-                    </div>
-                    <div>
-                        <h3>Tidspunkt</h3>
-                        @factor.TimeScope
-                    </div>
-                </div>
-            }
-        }
-
-    </div> <!-- end pavirkningsboks -->
-</div> <!-- end factors -->

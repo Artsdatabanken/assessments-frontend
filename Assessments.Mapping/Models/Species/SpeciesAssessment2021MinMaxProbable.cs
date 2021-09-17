@@ -9,5 +9,6 @@
         public string Probable { get; set; } = "";
 
         public string Quantile { get; set; } = "";
+        public string Calculated { get; set; } = "";
     }
 }

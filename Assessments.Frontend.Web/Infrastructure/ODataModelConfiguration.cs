@@ -14,8 +14,8 @@ namespace Assessments.Frontend.Web.Infrastructure
                 ContainerName = "Assessments"
             };
 
-            builder.EntitySet<SpeciesAssessment2021>("Species2021").EntityType.HasKey(x => x.Id);
-
+            builder.EntitySet<SpeciesAssessment2021>("Species2021").EntityType.HasKey(x => x.Id).CollectionProperty(x => x.ImpactFactors);
+            
             return builder.GetEdmModel();
         }
     }

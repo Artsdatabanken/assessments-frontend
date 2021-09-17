@@ -15,7 +15,6 @@ const filters = {
 
 const chooseEndangered = "ChooseEndangered";
 const chooseRedlisted = "ChooseRedlisted";
-
 const endangeredFilter = [filters.CR, filters.EN, filters.VU];
 const redlistFilter = [filters.RE, filters.CR, filters.EN, filters.VU, filters.NT, filters.DD];
 
@@ -25,11 +24,17 @@ document.addEventListener('click', function (e) {
     if (document.getElementById('listview')) {
         if (e.target.id == "listview") {
             console.log("set list")
-            document.getElementById('listheader').classList.remove("grid");
-            document.getElementById('redlist').classList.remove("grid");
-           
+            document.getElementById('viewselector').classList.remove("grid");
+            document.getElementById('viewselector').classList.remove("stats");
+        }
+    }
 
-            
+    // Check if the item exists
+    if (document.getElementById('statsview')) {
+        if (e.target.id == "statsview") {
+            console.log("set stats")
+            document.getElementById('viewselector').classList.remove("grid");
+            document.getElementById('viewselector').classList.add("stats");
         }
     }
 
@@ -37,8 +42,8 @@ document.addEventListener('click', function (e) {
     if (document.getElementById('gridview')) {
         if (e.target.id == "gridview") {
             console.log("set grid")
-            document.getElementById('listheader').classList.add("grid");
-            document.getElementById('redlist').classList.add("grid");
+            document.getElementById('viewselector').classList.add("grid");
+            document.getElementById('viewselector').classList.remove("stats");
         }
     }
 })
@@ -63,15 +68,6 @@ function removeFilter(filter, url) {
         return url.replace("&" + filter, "")
     }
     return url.replace(filter + "&", "");
-}
-
-function applyFilter(filter) {
-    if (!document.URL.includes(filter)) {
-        url = addFilter(filter, document.URL);
-    } else {
-        url = removeFilter(filter, document.URL);
-    }
-    window.location.replace(url);
 }
 
 function addSpecialFilter(appropriateFilters) {
@@ -107,39 +103,3 @@ function applySpecialFilter(filterType) {
     }
     window.location.replace(url);
 }
-
-function checkSpecialFilters(allFilters) {
-    shouldApplyRedlistFilter = true;
-    shouldApplyEndangeredFilter = true;
-    redlistFilter.forEach(filter => {
-        if (!allFilters.includes(filter)) {
-            shouldApplyRedlistFilter = false;
-        }
-    });
-    endangeredFilter.forEach(filter => {
-        if (!allFilters.includes(filter)) {
-            shouldApplyEndangeredFilter = false;
-        }
-    });
-    if (shouldApplyRedlistFilter) {
-        document.getElementById(chooseRedlisted).checked = true;
-    }
-    if (shouldApplyEndangeredFilter) {
-        document.getElementById(chooseEndangered).checked = true;
-    }
-}
-
-function initialChecks() {
-    filtersString = document.URL.split("?")[1];
-    if (filtersString) {
-        allFilters = filtersString.split("&");
-        allFilters.forEach(filter => {
-            if (!filter.includes("Name=")) {
-                document.getElementById(filter).checked = true;
-            }
-        });
-        checkSpecialFilters(allFilters);
-    }
-}
-
-initialChecks();

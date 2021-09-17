@@ -11,115 +11,90 @@
 }
 
 <div class="page_section">
+
     <!-- FULL VURDERING/LC -->
+
     @if (@Model.AssessmentInitialClassification == "sikkerBestandLC")
     {
-        <span>@Html.Raw(@ViewBag.glossary["oneliners"]["vurdert_livskraftig"])</span>
+        @*<span>@Html.Raw(@ViewBag.glossary["oneliners"]["vurdert_livskraftig"])</span>*@
+
+
     }
+    else if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt")
+{
+@*<span>@ViewBag.glossary["oneliners"]["full_vurdering"]</span>*@
+}
+else
+{
 
-    @if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt")
-    {
-        <span>@ViewBag.glossary["oneliners"]["full_vurdering"]</span>
-    }
 
-    <!-- Finnes i norge? -->
-
-    @if (!string.IsNullOrEmpty(Model.RationaleRegionallyExtinct))
-    {
-        <p>
-            @if (@assessment.RationaleRegionallyExtinct == "etablertBestandINorge")
-            {
-                <span>
-                    @ViewBag.glossary["oneliners"]["litentvil"]
-                    @(assessment.AssessmentArea == "N" ? "Norge " : "Svalbard ") (RE).
-                    @Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])
-                </span>
-            }
-            else @if (@assessment.RationaleRegionallyExtinct == "ikkeReproduserendeINorge")
-            {
-                <span>
-                    @ViewBag.glossary["oneliners"]["litentvil"]
-                    @(assessment.AssessmentArea == "N" ? "Norge " : "Svalbard ") (RE).
-                    @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])
-
-                </span>
-            }
-            else @if (@assessment.RationaleRegionallyExtinct == "etablertFør1800")
-            {
-            <span>
-                @ViewBag.glossary["oneliners"]["litentvil"]
-                @(assessment.AssessmentArea == "N" ? "Norge " : "Svalbard ") (RE).
-                @Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])
-            </span>
-            }
-        </p>
-    }
-
-    <p>
+<p>
     <!-- Begrenset forekomst -->
     @if (!string.IsNullOrEmpty(Model.RationaleNotApplicable))
     {
-        @if (@assessment.RationaleNotApplicable == "ikkeReproduserendeGjestNA")
+        @if (@Model.RationaleNotApplicable == "ikkeReproduserendeGjestNA")
         {
             <span> @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeGjestNA"])</span>
         }
-        else @if (@assessment.RationaleNotApplicable == "observertReproduserendeIkkeEtablertNA")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["observertReproduserendeIkkeEtablertNA"])</span>
-        }
-        else @if (@assessment.RationaleNotApplicable == "observertReproduktivIkkeEtablertNA")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["observertReproduktivIkkeEtablertNA"])</span>
-        }
-        else @if (@assessment.RationaleNotApplicable == "uregelmessigGjestIkkeReproduserendeNA")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uregelmessigGjestIkkeReproduserendeNA"])</span>
-        }
-        else @if (@assessment.RationaleNotApplicable == "ikkeDokumentertForekomstNA")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeDokumentertForekomstNA"])</span>
-        }
-        else @if (@assessment.RationaleNotApplicable == "hybridartUtenReproduksjonNA")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["hybridartUtenReproduksjonNA"])</span>
-        }
-        else @if (@assessment.RationaleNotApplicable == "hybridartUvisstOmReproduserendeNA")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["hybridartUvisstOmReproduserendeNA"])</span>
-        }
-        else @if (@assessment.RationaleNotApplicable == "forekommerBareIHybridkombinasjonNA")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["forekommerBareIHybridkombinasjonNA"])</span>
-        }
-    }
+        else if (@Model.RationaleNotApplicable == "observertReproduserendeIkkeEtablertNA")
+   {
+    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["observertReproduserendeIkkeEtablertNA"])</span>
+}
+else if (@Model.RationaleNotApplicable == "observertReproduktivIkkeEtablertNA")
+   {
+    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["observertReproduktivIkkeEtablertNA"])</span>
+}
+else if (@Model.RationaleNotApplicable == "uregelmessigGjestIkkeReproduserendeNA")
+   {
+    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uregelmessigGjestIkkeReproduserendeNA"])</span>
+}
+else if (@Model.RationaleNotApplicable == "ikkeDokumentertForekomstNA")
+   {
+    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeDokumentertForekomstNA"])</span>
+}
+else if (@Model.RationaleNotApplicable == "hybridartUtenReproduksjonNA")
+   {
+    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["hybridartUtenReproduksjonNA"])</span>
+}
+else if (@Model.RationaleNotApplicable == "hybridartUvisstOmReproduserendeNA")
+   {
+    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["hybridartUvisstOmReproduserendeNA"])</span>
+}
+else if (@Model.RationaleNotApplicable == "forekommerBareIHybridkombinasjonNA")
+   {
+    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["forekommerBareIHybridkombinasjonNA"])</span>
+}
+}
 
     <!-- KUNNSKAPSSTATUS -->
     @if (!string.IsNullOrEmpty(Model.RationaleNotEvaluated))
     {
-        @if (@assessment.RationaleNotEvaluated == "mangelfullKunnskapNE")
+        @if (@Model.RationaleNotEvaluated == "mangelfullKunnskapNE")
         {
             <span> @Html.Raw(@ViewBag.glossary["oneliners"]["mangelfullKunnskapNE"])</span>
         }
-        else @if (@assessment.RationaleNotEvaluated == "uavklartSystematikkNE")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uavklartSystematikkNE"])</span>
-        }
-        else@if (@assessment.RationaleNotEvaluated == "uklartOmReproduserendeBestandNE")
-        {
+        else if (@Model.RationaleNotEvaluated == "uavklartSystematikkNE")
+   {
+    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uavklartSystematikkNE"])</span>
+}
+else if (@Model.RationaleNotEvaluated == "uklartOmReproduserendeBestandNE")
+    {
         <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uklartOmReproduserendeBestandNE"])</span>
-        }
-        else@if (@assessment.RationaleNotEvaluated == "artsgruppeIkkeRisikovurdertNE")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["artsgruppeIkkeRisikovurdertNE"])</span>
-        }
-        else@if (@assessment.RationaleNotEvaluated == "annetNE")
-        {
-        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["annetNE"])</span>
-        }
     }
-  
+    else if (@Model.RationaleNotEvaluated == "artsgruppeIkkeRisikovurdertNE")
+    {
+        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["artsgruppeIkkeRisikovurdertNE"])</span>
+    }
+    else if (@Model.RationaleNotEvaluated == "annetNE")
+    {
+        <span> @Html.Raw(@ViewBag.glossary["oneliners"]["annetNE"])</span>
+    }
+}
+
+
+
     <!-- FREMMEDART -->
-    @if (@assessment.AssessmentInitialClassification == "fremmedArtNA")
+    @if (@Model.AssessmentInitialClassification == "fremmedArtNA")
     {
         <span>
             @Html.Raw(@ViewBag.glossary["oneliners"]["fremmedArtNA"])
@@ -132,16 +107,18 @@
         {
             <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])</span>
         }
-        else@if (assessment.EvaluationJustification == "ikkeReproduserendeINorge")
+        else if (assessment.EvaluationJustification == "ikkeReproduserendeINorge")
         {
             <span>@Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])</span>
         }
-        else@if (assessment.EvaluationJustification == "etablertFør1800")
+        else if (assessment.EvaluationJustification == "etablertFør1800")
         {
             <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])</span>
         }
     }
 </p>
+
+}
 
 </div><!-- End section -->
 

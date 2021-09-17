@@ -1,0 +1,47 @@
+﻿{
+  "RE": {
+    "tagline": "Regionalt utdødd",
+    "description": "– det er svært liten tvil om at arten er dødd ut/har emigrert fra vurderingsområdet.",
+    "presentationstring": "regionalt utdødd "
+  },
+  "CR": {
+    "tagline": "Kritisk truet",
+    "description": "– ekstremt høy risiko for utdøing.",
+    "presentationstring": "kritisk truet "
+  },
+  "EN": {
+    "tagline": "Sterkt truet",
+    "description": "– svært høy risiko for utdøing.",
+    "presentationstring": "sterkt truet "
+  },
+  "VU": {
+    "tagline": "Sårbar",
+    "description": "- høy risiko for utdøing.",
+    "presentationstring": "sårbar "
+  },
+  "NT": {
+    "tagline": "Nær truet",
+    "description": " – nær ved å kvalifisere til en <i>truet</i>-kategori.",
+    "presentationstring": "nær truet "
+  },
+  "DD": {
+    "tagline": "Datamangel",
+    "description": "– usikkerhet rundt riktig kategoriplassering er svært stor og inkluderer hele spekteret av mulige kategorier fra CR til LC.",
+    "presentationstring": "datamangel "
+  },
+  "LC": {
+    "tagline": "Livskraftig",
+    "description": "– vurdert for Rødlista, men oppfyller ikke noen av kriteriene eller kravene for rødlistekategori.",
+    "presentationstring": "livskraftig "
+  },
+  "NA": {
+    "tagline": "Ikke egnet",
+    "description": "– innfrir ikke kravene i de nasjonale avgrensningene, og er dermed ikke egnet for vurdering for Rødlista.",
+    "presentationstring": "ikke egnet "
+  },
+  "NE": {
+    "tagline": "Ikke vurdert",
+    "description": "– ikke vurdert mot IUCN-kriteriene.",
+    "presentationstring": "ikke vurdert "
+  }
+}

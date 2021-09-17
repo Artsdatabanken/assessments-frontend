@@ -113,6 +113,9 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string EPreliminaryCategory { get; set; } // EKvantitativUtryddingsmodellKode
 
+        /// <summary>
+        /// Species' occurrence in counties/regions.
+        /// </summary>
         public List<SpeciesAssessment2021RegionOccurrence> RegionOccurrences { get; set; } = new();
 
         /// <summary>
@@ -241,11 +244,16 @@ namespace Assessments.Mapping.Models.Species
         /// <summary>
         /// Reason for category transfer compared to previous lists, provided when a taxon has a different category on the current Red List than on its preceding Red List assessment.
         /// </summary>
-        public string ReasonCategoryChange { get; set; } // ÅrsakTilEndringAvKategori
+        public CategoryChangeReason ReasonCategoryChange { get; set; } // ÅrsakTilEndringAvKategori
 
         /// <summary>
         /// Rationale for adjusting the category based on significant effect from populations outside the region.
         /// </summary>
-        public string ÅrsakTilNedgraderingAvKategori { get; set; } // ÅrsakTilNedgraderingAvKategori
+        public string RationaleCategoryAdjustment { get; set; } // RationaleCategoryAdjustment
+
+        /// <summary>
+        /// Group the species belongs to, in most cases a taxonomic group
+        /// </summary>
+        public string SpeciesGroup { get; set; }
     }
 }

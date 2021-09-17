@@ -60,7 +60,7 @@
         }
 
 
-        @if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
+@if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
 {
     @if (!string.IsNullOrWhiteSpace(kriteriedok))
         {
@@ -100,11 +100,11 @@
             <h3>Er utdøing Påvirket?</h3>
             @if (assessment.KategoriEndretFra != "" && assessment.KategoriEndretFra != null)
             {
-                <div class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert fra @assessment.KategoriEndretFra til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</div>
+                <div class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert fra @assessment.KategoriEndretFra til @assessment.KategoriEndretTil. @Html.Raw(@assessment.RationaleCategoryAdjustment)</div>
             }
             else
             {
-                <div class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert til @assessment.KategoriEndretTil. @Html.Raw(@assessment.ÅrsakTilNedgraderingAvKategori)</div>
+                <div class="changedCat">Risiko for utdøing er sterkt påvirket av populasjoner i naboland. Kategori er derfor justert til @assessment.KategoriEndretTil. @Html.Raw(@assessment.RationaleCategoryAdjustment)</div>
             }
 
         }

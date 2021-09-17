@@ -39,5 +39,13 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\Redlist\Assessment\partials\_ImpactFactors.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\Redlist\Assessment\partials\_ImpactFactors.cshtml" />
+	</ItemGroup>
 	
 </Project>

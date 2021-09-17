@@ -1,0 +1,193 @@
+@model RL2021ViewModel
+
+
+@{
+
+    // Calculating max and total values for use in graph drawing
+    int category_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category
+    int category_max = Model.Statistics.Categories.Values.DefaultIfEmpty(0).Max();
+    int criteria_total = Model.Statistics.Criteria.Sum(x => x.Value); // #of assesments with a criteria
+    int criteria_max = Model.Statistics.Criteria.Values.DefaultIfEmpty(0).Max();
+    int habitat_total = Model.Statistics.Habitat.Sum(x => x.Value); // #of assesments with a criteria
+    int habitat_max = Model.Statistics.Habitat.Values.DefaultIfEmpty(0).Max();
+
+    int region_total = Model.Statistics.Region.Sum(x => x.Value); // #of assesments with a criteria
+    int region_max = Model.Statistics.Region.Values.DefaultIfEmpty(0).Max();
+
+    // OVERALL STATS - TODO. WHile waiting - use category, as it should be consistent with nr of assesments
+    int total = category_total;
+
+
+    // Obtaining the proper order and amount of items in case there are things with 0 or null values
+    Dictionary<string, object> category = ViewBag.categories.ToObject<Dictionary<string, object>>();
+
+    Dictionary<string, object> criteria = ViewBag.kriterier.ToObject<Dictionary<string, object>>();
+
+    Dictionary<string, Dictionary<string, object>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, object>>>();
+
+    
+
+
+
+}
+
+@functions{
+    string percentage(float max, float now)
+    {
+        if (max == 0)
+        {
+            return "0";
+        }
+        string calculated = (now / max * 100).ToString("0.00");
+
+        calculated = calculated.Replace(",", ".");
+        return calculated + "%";
+    }
+}
+
+@functions{
+    string average(float utvalg, float verdi)
+    {
+        if (utvalg == 0)
+        {
+            return "0";
+        }
+        string calculated = (verdi / utvalg).ToString("0.00");
+
+        calculated = calculated.Replace(",", ".");
+        return calculated;
+    }
+}
+
+@functions{
+    int getNumber(string dictkey, Dictionary<string, int> chosenlist)
+    {
+
+        if (chosenlist.ContainsKey(dictkey))
+        {
+            return chosenlist[dictkey];
+        }
+
+        return 0;
+
+    }
+}
+
+<div class="page_section graphs">
+    <h2>Statistikk - </h2>
+
+    Totalt antall vurderinger i utvalget - dette er data vi mangler ennå.
+
+    <h3>Antall vurderinger per kategori</h3>
+
+    <p>En vurdering skal utelukkende ha én kategori, derfor vil antall kategorier i utvalget  tilsvare antall vurderinger i utvalget nemlig @category_total</p>
+
+    <div class="graph">
+        @foreach (var key in category.Keys)
+        {
+            <div class="statelement">
+                <div class="heightbar_blank">
+                    <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key,@Model.Statistics.Categories))">
+                        <span class="percent">@getNumber(@key, @Model.Statistics.Categories)</span>
+                    </div>
+                </div>
+                <span class="statbox @key">
+                    @key
+                </span>
+
+            </div>
+        }
+    </div>
+
+
+
+    <h3>Antall vurderinger per Kriterie</h3>
+
+    <p>
+        En vurdering kan inneholde mer enn et kriterie. Den totale mengden kriterier i utvalget er derfor @criteria_total brukte kriterier,
+        som vil si at hver vurdering i snitt har brukt @average(@total, @criteria_total) kriterier.
+
+    </p>
+
+    <div class="graph">
+        @foreach (string key in criteria.Keys)
+        {
+            <div class="statelement">
+                <div class="heightbar_blank">
+                    <div class="heightbar_indicator @key" style="height:@percentage(@criteria_max, @getNumber(@key,@Model.Statistics.Criteria))">
+                        <span class="percent">@getNumber(@key, @Model.Statistics.Criteria)</span>
+                    </div>
+                </div>
+                <span class="statbox @key">
+                    @key
+                </span>
+
+            </div>
+        }
+    </div>
+
+
+    <h3>Antall vurderinger per Habitat</h3>
+
+    <p>
+        En vurdering kan inneholde mer enn et habitat. Den totale mengden habitat er derfor @habitat_total registrerte forekomster,
+        som vil si at hver vurdering i snitt har  @average(@total, @habitat_total) habitat.
+
+    </p>
+
+
+    <div class="graph">
+        @foreach (string key in habitat.Keys)
+        {
+            <div class="statelement" style="max-width:60px;">
+                <div class="heightbar_blank">
+                    <div class="heightbar_indicator @key" style="height:@percentage(@habitat_max, @getNumber(@key,@Model.Statistics.Habitat))">
+                        <span class="percent">@getNumber(@key, @Model.Statistics.Habitat)</span>
+                    </div>
+                </div>
+
+
+                <span class="downboxcontainer statbox @key">
+                    <span class="downtext">@habitat[@key]["name"]</span>
+                </span>
+            </div>
+        }
+    </div>
+
+    <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+
+    <h3>Antall vurderinger per Region</h3>
+
+    <p>
+        Denne grafen viser der verderingenes art forekommer eller er antatt å forekomme. De kan forekomme i mer enn en region om gangen, men informasjonen er bare 
+        registrert for arter som er rødlistet, det vil si ikke har kategoriene LC, NA eller NE. Arter som er regionalt utdødd skal heller ikke forekomme. 
+        <br /><b>
+    TODO: Filteret BURDE fjerne disse artsgruppene, ettersom det KAN ligge inne data der likevel. Men egentlig burde det vært skrelt vekk før vi kommer hit.
+    <br />
+</b>
+        Den totale artsmengden er @region_total, som i og for seg ikke er et informativt tall i seg selv.
+        For nåværende utvalg betyr det at vurderingene forekommer i @average(@total, @region_total) regioner per art.
+
+    </p>
+
+
+    <div class="graph">
+        @foreach (string key in Model.Statistics.Region.Keys)
+        {
+            <div class="statelement" style="max-width:60px;">
+                <div class="heightbar_blank">
+                    <div class="heightbar_indicator @key" style="height:@percentage(@region_max, @getNumber(@key,@Model.Statistics.Region))">
+                        <span class="percent">@getNumber(@key, @Model.Statistics.Region)</span>
+                    </div>
+                </div>
+
+
+                <span class="downboxcontainer statbox @key">
+                    <span class="downtext">@key</span>
+                </span>
+            </div>
+        }
+    </div>
+
+    <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+</div>

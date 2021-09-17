@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Assessments.Mapping.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
 using AutoMapper;
@@ -12,14 +15,17 @@ namespace Assessments.Mapping
             CreateMap<Rodliste2019.Pavirkningsfaktor, SpeciesAssessment2021ImpactFactor>()
                 .ForMember(dest => dest.Severity, opt => opt.MapFrom(src => src.Alvorlighetsgrad))
                 .ForMember(dest => dest.PopulationScope, opt => opt.MapFrom(src => src.Omfang))
-                .ForMember(dest => dest.TimeScope, opt => opt.MapFrom(src => src.Tidspunkt));
-            
+                .ForMember(dest => dest.TimeScope, opt => opt.MapFrom(src => src.Tidspunkt))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .AfterMap(SpeciesAssessment2021ProfileHelper.CorrectImpactFactors);
+
             CreateMap<Rodliste2019.TrackInfo, SpeciesAssessment2021TrackInfo>();
             CreateMap<Rodliste2019.MinMaxProbable, SpeciesAssessment2021MinMaxProbable>();
             CreateMap<Rodliste2019.MinMaxProbableIntervall, SpeciesAssessment2021MinMaxProbableIntervall>();
             CreateMap<Rodliste2019.Reference, SpeciesAssessment2021Reference>();
 
-            CreateMap<Rodliste2019.Fylkesforekomst, SpeciesAssessment2021RegionOccurrence>().ForMember(dest => dest.Fylke, opt => opt.MapFrom(src => ResolveRegion(src.Fylke)));
+            CreateMap<Rodliste2019.Fylkesforekomst, SpeciesAssessment2021RegionOccurrence>()
+                .ForMember(dest => dest.Fylke, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.ResolveRegion(src.Fylke)));
 
             CreateMap<Rodliste2019.TaxonHistory, SpeciesAssessment2021TaxonHistory>()
                 .ForMember(dest => dest.ExpertCommittee, opt => opt.MapFrom(src => src.Ekspertgruppe))
@@ -63,8 +69,8 @@ namespace Assessments.Mapping
                 .ForPath(dest => dest.BAii.PreliminaryCategory, opt => opt.MapFrom(src => src.BA2FåLokaliteterKode))
                 .ForPath(dest => dest.BAii.Statistics, opt => opt.MapFrom(src => src.BaIntervallAntallLokaliteter))
 
-                .ForMember(dest => dest.BBOptions, opt => opt.MapFrom(src => src.BBPågåendeArealreduksjonKode))
-                .ForMember(dest => dest.BCOptions, opt => opt.MapFrom(src => src.BCEksterneFluktuasjonerKode))
+                .ForMember(dest => dest.BBOptions, opt => opt.MapFrom(src => src.BBPågåendeArealreduksjonKode.OrderBy(SpeciesAssessment2021ProfileHelper.RomanNumberSort)))
+                .ForMember(dest => dest.BCOptions, opt => opt.MapFrom(src => src.BCEksterneFluktuasjonerKode.OrderBy(SpeciesAssessment2021ProfileHelper.RomanNumberSort)))
                 .ForMember(dest => dest.RationaleNotApplicable, opt => opt.MapFrom(src => src.BegrensetForekomstNA))
 
                 .ForPath(dest => dest.C1.Statistics, opt => opt.MapFrom(src => src.C1PågåendePopulasjonsreduksjonAntatt))
@@ -95,7 +101,8 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.D1PreliminaryCategory, opt => opt.MapFrom(src => src.D1FåReproduserendeIndividKode))
                 .ForMember(dest => dest.D2PreliminaryCategory, opt => opt.MapFrom(src => src.D2MegetBegrensetForekomstarealKode))
                 
-                .ForMember(dest => dest.ExpertCommittee, opt => opt.MapFrom(src => ResolveExpertCommitteeName(src)))
+                .ForMember(dest => dest.ExpertCommittee, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.RemoveAssessmentArea(src.Ekspertgruppe)))
+                .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.ResolveSpeciesGroupName(src)))
                 
                 .ForMember(dest => dest.EPreliminaryCategory, opt => opt.MapFrom(src => src.EKvantitativUtryddingsmodellKode))
                 
@@ -107,7 +114,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.CategoryAdjustedFrom, opt => opt.MapFrom(src => src.KategoriEndretFra))
                 .ForMember(dest => dest.CategoryAdjustedTo, opt => opt.MapFrom(src => src.KategoriEndretTil))
 
-                .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => src.Kriteriedokumentasjon.Trim()))
+                .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.Kriteriedokumentasjon, true)))
 
                 .ForMember(dest => dest.CriteriaSummarized, opt => opt.MapFrom(src => src.Kriterier))
 
@@ -121,9 +128,9 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.PopularName, opt => opt.MapFrom(src => src.PopularName))
                 .ForMember(destination => destination.PopularName, opt => opt.NullSubstitute(string.Empty))
                 
-                .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => src.Påvirkningsfaktorer))
+                .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => src.Påvirkningsfaktorer.OrderBy(x=>x.Id)))
 
-                .ForMember(dest => dest.References, opt => opt.MapFrom(src => src.Referanser))
+                .ForMember(dest => dest.References, opt => opt.MapFrom(src => src.Referanser.Where(r => r.Type != "Person"))) // ikke ta med personreferanser
 
                 .ForMember(dest => dest.EvaluationJustification, opt => opt.MapFrom(src => src.RodlisteVurdertArt))
                 .ForMember(dest => dest.YearPreviousAssessment, opt => opt.MapFrom(src => src.SistVurdertAr))
@@ -138,7 +145,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ExtinctionRiskAffected, opt => opt.MapFrom(src => src.UtdøingSterktPåvirket))
 
                 .ForMember(dest => dest.AssessmentArea, opt => opt.MapFrom(src => src.VurderingsContext))
-                .ForMember(dest => dest.AssessmentYear, opt => opt.MapFrom(src => src.Vurderingsår))
+                .ForMember(dest => dest.AssessmentYear, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.GetAssessmentYear(src.Ekspertgruppe)))
 
                 .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavn))
                 .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnAutor))
@@ -147,92 +154,14 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnId))
 
-                .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ÅrsakTilEndringAvKategori))
-                .ForMember(dest => dest.ÅrsakTilNedgraderingAvKategori, opt => opt.MapFrom(src => src.ÅrsakTilNedgraderingAvKategori));
-        }
-
-        private static string ResolveRegion(string fylke)
-        {
-            return fylke.ToLowerInvariant() switch
-            {
-                "aa" => "Aust-Agder",
-                "bn" => "Polhavet",
-                "bs" => "Barentshavet",
-                "bu" => "Buskerud",
-                "fi" => "Finnmark",
-                "gh" => "Grønlandshavet",
-                "he" => "Hedmark",
-                "ho" => "Hordaland",
-                "jm" => "Jan Mayen",
-                "mr" => "Møre og Romsdal",
-                "nh" => "Norskehavet",
-                "no" => "Nordland",
-                "ns" => "Nordsjøen",
-                "op" => "Oppland",
-                "osa" => "Oslo og Akershus",
-                "ro" => "Rogaland",
-                "sf" => "Sogn og Fjordane",
-                "te" => "Telemark",
-                "tr" => "Troms",
-                "tø" => "Trøndelag",
-                "va" => "Vest-Agder",
-                "ve" => "Vestfold",
-                "øs" => "Østfold",
-                _ => string.Empty
-            };
-        }
-
-        private static string ResolveExpertCommitteeName(Rodliste2019 rl2021)
-        {
-            // basert på https://github.com/Artsdatabanken/Rodliste2019/blob/4918668043d7d5b2e5978e29e5028bc68fd1a643/Prod.LoadingCSharp/TransformRodliste2019toDatabankRL2021.cs#L510
-            
-            if (rl2021.Ekspertgruppe == "Nebbfluer, kamelhalsfluer, mudderfluer, nettvinger")
-            {
-                if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Mecoptera"))
-                    rl2021.Ekspertgruppe = "Nebbfluer";
-                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Raphidioptera"))
-                    rl2021.Ekspertgruppe = "Kamelhalsfluer";
-                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Megaloptera"))
-                    rl2021.Ekspertgruppe = "Mudderfluer";
-                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Neuroptera"))
-                    rl2021.Ekspertgruppe = "Nettvinger";
-            }
-
-            if (rl2021.Ekspertgruppe == "Døgnfluer, øyenstikkere, steinfluer, vårfluer")
-            {
-                if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Ephemeroptera"))
-                    rl2021.Ekspertgruppe = "Døgnfluer";
-                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Odonata"))
-                    rl2021.Ekspertgruppe = "Øyenstikkere";
-                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Plecoptera"))
-                    rl2021.Ekspertgruppe = "Steinfluer";
-                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Trichoptera"))
-                    rl2021.Ekspertgruppe = "Vårfluer";
-            }
-
-            if (rl2021.Ekspertgruppe == "Rettvinger, kakerlakker, saksedyr")
-            {
-                if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Orthoptera"))
-                    rl2021.Ekspertgruppe = "Rettvinger";
-                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Blattodea"))
-                    rl2021.Ekspertgruppe = "Kakerlakker";
-                else if (rl2021.VurdertVitenskapeligNavnHierarki.Contains("/Dermaptera"))
-                    rl2021.Ekspertgruppe = "Saksedyr";
-            }
-
-            return rl2021.Ekspertgruppe
-
-                // ta bort vurderingsområde fra navn
-                .Replace("(Svalbard)", string.Empty, StringComparison.InvariantCultureIgnoreCase)
-                .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
-        }
-    }
-
-    public class SpeciesAssessment2021ExportProfile : Profile
-    {
-        public SpeciesAssessment2021ExportProfile()
-        {
-            CreateMap<SpeciesAssessment2021, SpeciesAssessment2021Export>();
+                .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.EvaluateCategoryChangeReason(src)))
+                .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.ÅrsakTilNedgraderingAvKategori,true)))
+                .AfterMap((src, dest) =>
+                {
+                    SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest);
+                    SpeciesAssessment2021ProfileHelper.BlankReasonCategoryChangeWhenNoChange(src, dest);
+                    SpeciesAssessment2021ProfileHelper.CalculateQuantiles(dest);
+                });
         }
     }
 }

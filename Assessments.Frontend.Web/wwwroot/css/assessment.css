@@ -519,12 +519,16 @@
 
 /*criteria*/
 
-.criteria_options{
-    padding-bottom:20px;
+.criteria_element.active h4{
+    color:black;
+}
+
+.criteria_options {
+    padding-bottom: 20px;
 }
 
 .criteria .inactive {
-    opacity: 0.5;
+    color:grey;
 }
 
 .criteria .inactive .criteria_description,
@@ -541,9 +545,15 @@
     padding-left:10px;
 }
 
+.subsub_list{
+    margin-bottom:20px;
+}
+
+.subheading{
+    margin-bottom: 5px;
+}
 
 /* IMPACT FACTORS */
-
 .impact_table {
     display: flex;
     background: #fcfcfc;

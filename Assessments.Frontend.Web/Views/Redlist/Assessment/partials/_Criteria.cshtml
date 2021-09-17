@@ -140,7 +140,7 @@
     {
         @if (@compare == "active")
         {
-            <span class="material-icons">
+            <span class="material-icons" style="color:darkgreen">
                 done
             </span>
         }
@@ -152,7 +152,7 @@
         }
         else
         {
-            <span class="material-icons">
+            <span class="material-icons" style="color:darkred">
                 close
             </span>
         }
@@ -269,7 +269,7 @@
                                                 }
 
                                                 @if(@current_element.Length>0){
-                                                    <h6>Kunnskapsgrunnlag</h6>
+                                                    <h6 class="subheading">Kunnskapsgrunnlag</h6>
 
                                                     @foreach (var (subkey, subval) in subdict)
                                                     {
@@ -298,8 +298,7 @@
                             @{
                                 var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
                             }
-                            <h4> Underkriterier </h4><br />
-
+                            <h5 class="subheading"> Underkriterier </h5>
                             @foreach (var (k, v) in newDictionary)
                             {
 

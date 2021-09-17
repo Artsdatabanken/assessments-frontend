@@ -23,17 +23,54 @@
     string activeOrNot(string element)
     {
         @foreach (var factor in Model.ImpactFactors)
+        {
+            @if (factor.Id.StartsWith(element))
             {
-                @if(factor.Id.StartsWith(element)){
-                    return "active";
-                }
+                return "active";
             }
+        }
 
         return "inactive";
     }
+
+    void iconChooser(string compare)
+    {
+        @if (@compare == "active")
+        {
+            <span class="material-icons" style="color:darkgreen">
+                done
+            </span>
+        }
+        else if (@compare == "maybe")
+        {
+            <span class="material-icons">
+                pause
+            </span>
+        }
+        else
+        {
+            <span class="material-icons" style="color:darkred">
+                close
+            </span>
+        }
+    }
+
+    void listHeaders(string key,Dictionary<string,object> value)
+    {
+    <span class="text_container">
+        @{iconChooser(activeOrNot(key));}
+        <span class="text_collection">
+            <span class="impact-id">@key</span>
+            @value["title"]
+        </span>
+    </span>
+    }
+
+
+
 }
 
-@{ 
+@{
     Dictionary<string, Dictionary<string, object>> impactfactors_json = ViewBag.impactfactors.ToObject<Dictionary<string, Dictionary<string, object>>>();
 
 }
@@ -47,32 +84,31 @@
     </p>
 
     <p>
-        TODO:<br/>
-        - Alltid vis ytterste lag<br/>
-        - X + h2 slik som kriterier<br/>
-        - ignorer ikon<br/>
-        - knapp for å vis full liste<br/>
+        TODO:<br />
+        - ignorer ikon<br />
+        - knapp for å vis full liste<br />
         - ikke tabell, hvis alt ukjent, skriv sammen til en streng. Hvis ikke, presenter det likevel som en p.
 
-
-    
     </p>
-    <ul class="outer" >
+    <button>Se full liste</button>
+    <br />
+    <div class="outer">
         @foreach (var (key, value) in impactfactors_json)
         {
-            <li class="@activeOrNot(key)">
 
-                @key @value["title"]<br />
-                @if (value.ContainsKey("subelement"))
-                {
-                    <ul class="second">
-                        @{
-                            var first_layer = Newtonsoft.Json.Linq.JObject.Parse(value["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-                        }
-                        @foreach (var (first_k, first_v) in first_layer)
-                        {
+            <h3 class="@activeOrNot(key)">
+                @{listHeaders(key, value);}
+            </h3>
+            @if (value.ContainsKey("subelement"))
+            {
+                <ul class="second @activeOrNot(key)">
+                    @{
+                        var first_layer = Newtonsoft.Json.Linq.JObject.Parse(value["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                    }
+                    @foreach (var (first_k, first_v) in first_layer)
+                    {
                         <li class="@activeOrNot(first_k)">
-                            @first_k @first_v["title"]
+                            @{listHeaders(first_k, first_v);}
                             @if (first_v.ContainsKey("subelement"))
                             {
                                 <ul class="third">
@@ -82,7 +118,8 @@
                                     @foreach (var (second_k, second_v) in second_layer)
                                     {
                                     <li class="@activeOrNot(second_k)">
-                                        @second_k @second_v["title"]
+                                        @{listHeaders(second_k, second_v);}
+
                                         @if (second_v.ContainsKey("subelement"))
                                         {
                                             <ul class="fourth">
@@ -91,23 +128,23 @@
                                                 }
                                                 @foreach (var (third_k, third_v) in third_layer)
                                                 {
-                                                <li  class="@activeOrNot(third_k)">
-                                                    @third_k @third_v["title"]
-                                                    @if (third_v.ContainsKey("subelement"))
-                                                    {
-                                                        <ul class="fifth">
-                                                            @{
-                                                                var fourth_layer = Newtonsoft.Json.Linq.JObject.Parse(third_v["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-                                                            }
-                                                            @foreach (var (fourth_k, fourth_v) in fourth_layer)
-                                                            {
-                                                                <li  class="@activeOrNot(fourth_k)">
-                                                                    @fourth_k @fourth_v["title"]
-                                                                </li>
-                                                            }
-                                                        </ul>
-                                                    }
-                                                </li>
+                                                    <li class="@activeOrNot(third_k)">
+                                                       @{listHeaders(third_k, third_v);}
+                                                        @if (third_v.ContainsKey("subelement"))
+                                                        {
+                                                            <ul class="fifth">
+                                                                @{
+                                                                    var fourth_layer = Newtonsoft.Json.Linq.JObject.Parse(third_v["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                                }
+                                                                @foreach (var (fourth_k, fourth_v) in fourth_layer)
+                                                                {
+                                                                    <li class="@activeOrNot(fourth_k)">
+                                                                         @{listHeaders(fourth_k, fourth_v);}
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        }
+                                                    </li>
                                                 }
                                             </ul>
                                         }
@@ -116,13 +153,12 @@
                                 </ul>
                             }
                         </li>
-                        }
-                    </ul>
-                }
-            </li>
+                    }
+                </ul>
+            }
         }
-    </ul>
-    
+    </div>
+
 </div>
 
 
@@ -136,7 +172,7 @@
             {
 
                 @factor.Id
-                <div class="fake_table_header" style=" ":>
+                <div class="fake_table_header" style=" " :>
 
 
                     <div class="stats_element_container">
@@ -188,7 +224,7 @@
                         <h3>Alvorlighetsgrad</h3>
 
                         @{
-                            var alv_text = @factor.Severity;                            
+                            var alv_text = @factor.Severity;
                         }
                         <span>@alv_text</span><br />
 

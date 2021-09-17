@@ -3,8 +3,6 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
 
-
-
 <partial name="/Views/Redlist/List/partials/_Breadcrumb.cshtml" />
 
 <div class="content-placer bigmid">
@@ -21,7 +19,7 @@
         <div class="listwrapper">
             <!-- FILTER FORM -->
             <partial name="/Views/Redlist/List/partials/_Filters.cshtml" />
-            <div id="viewselector" class="viewselector">
+            <div id="viewselector" class="viewselector @Model.View">
                 <partial name="/Views/Redlist/List/partials/_Graphs.cshtml" />
                 <partial name="/Views/Redlist/List/partials/_ListView.cshtml" />
             </div>

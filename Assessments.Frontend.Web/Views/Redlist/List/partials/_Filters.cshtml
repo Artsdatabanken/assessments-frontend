@@ -12,33 +12,66 @@
     {
         return $"name={name} value={value}" + (element.Contains(value) ? " checked=checked" : String.Empty);
     }
+
+    string ViewCheck(string name, string element, string value)
+    {
+        return $"name={name} value={value}" + (element == value ? " checked=checked" : String.Empty);
+    }
+
+    string GetViewClass(string element, string value)
+    {
+        return element == value ? "class=current_view" : String.Empty;
+    }
 }
 
 <div class="search-and-filter">
     <form asp-action="Index2021" method="get">
         <!-- View controls -->
         <div class="controls">
-            <button id="listview" name="view" value="list" class="material-icons" type="submit">list</button>
-            <button id="gridview" name="view" value="grid" class="material-icons" type="submit">grid_on </button>
-            <button id="statsview" name="view" value="stat" class="material-icons" type="submit">bar_chart </button>
+            <div class="controls_left">
+                    <button @GetViewClass(Model.View, "list")>
+                        <input class="collapse_checkbox" id="button-list" @ViewCheck("View", Model.View, "list") onchange="this.form.submit();" type="radio" />
+                        <label for="button-list" id="listview">Vis som liste 
+                            <span class="material-icons">list</span></label>
+                    </button>
+                    <button @GetViewClass(Model.View, "grid")>
+                        <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") onchange="this.form.submit();" type="radio" />
+                        <label for="button-grid" id="gridview">Vis som grid
+                            <span class="material-icons">grid_on</span></label>
+                    </button>
+                    <button @GetViewClass(Model.View, "stat")>
+                        <input class="collapse_checkbox" id="button-stat" @ViewCheck("View", Model.View, "stat") onchange="this.form.submit();" type="radio" />
+                        <label for="button-stat" id="statsview">Vis statistikk
+                            <span class="material-icons">bar_chart</span></label>
+                    </button>
+            </div>
+            <div class="controls_right">
+                <button class="toggle_search" type="button"><label class="show_search" for="show_search">Åpne søk 
+                    <span class="material-icons">search</span></label></button>
+                <button class="toggle_filter" type="button"><label class="show_filters" for="show_filters">Åpne filter
+                    <span class="material-icons">filter_alt</span></label></button>
+            </div>
         </div>
         <!-- Search -->
         <div>
+            <input class="collapse_checkbox" id="show_search" type="checkbox" />
             <div class="list-search">
-                <input asp-for="Name" placeholder="Søk i vitenskapelig navn" />
-                <button class="btn" type="submit">
-                    <span class="material-icons">
-                        search
-                    </span>
-                    Søk
-                </button>
-                <button class="btn" type="submit" name="Export" value="true">Eksport</button>
+                <div>
+                    <input asp-for="Name" placeholder="Søk i vitenskapelig navn" />
+                    <button class="btn" type="submit">
+                        <span class="material-icons">
+                            search
+                        </span>
+                        Søk
+                    </button>
+                    <button class="btn" type="submit" name="Export" value="true">Eksport</button>
+                </div>
             </div>
             <div class="filters">
                 <input class="collapse_checkbox" id="show_filters" @CategoryCheck("IsCheck", Model.IsCheck, "Filters") type="checkbox" />
-                <label class="show_filters" for="show_filters"><h3 class="toggle_filter">Filter</h3></label>
                 <div class="filters_scrollable">
                     <div class="filter_groups">
+                        <label class="show_filters"><h3 class="toggle_filter">Filter</h3></label>
                         <input type="reset" value="@SearchAndFilter.ResetAllFilters" />
                         <div class="filter_group">
                             <label for="show_area"><h4>@SearchAndFilter.SearchChooseArea</h4></label>

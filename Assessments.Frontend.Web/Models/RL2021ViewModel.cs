@@ -21,6 +21,7 @@ namespace Assessments.Frontend.Web.Models
         public string Name { get; set; }
         public bool PresumedExtinct { get; set; }
         public bool Redlisted { get; set; }
+        public string View { get; set; }
         public string[] Area { get; set; }
         public string[] Category { get; set; }
         public string[] Criterias { get; set; }

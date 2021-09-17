@@ -47,7 +47,20 @@ td {
     padding: 10px;
 }
 
+/* View control bar */
+@media only screen and (max-width: 650px) {
+    .controls {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
 /* REDLIST VIEW */
+
+.current_view {
+    background-color: lightgreen;
+    border: 0;
+}
 
 .listwrapper {
     display: flex;
@@ -100,7 +113,7 @@ td {
     position: -webkit-sticky;
     top: -1px;
     background-color: #fff;
-    z-index: 1000;
+    z-index: 1;
     font-weight: bold;
 }
 
@@ -300,12 +313,12 @@ li a span.element_icon {
 
 /* STATISTICS AND GRAPHS */
 
-.viewselector.stats .redlist,
+.viewselector.stat .redlist,
 .viewselector .graphs {
     display: none;
 }
 
-.viewselector.stats .graphs {
+.viewselector.stat .graphs {
     display: block;
 }
 

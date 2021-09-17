@@ -18,6 +18,14 @@ li.checkbox {
     font-weight: bold;
 }
 
+.controls label {
+
+}
+
+.controls_right {
+  display: none;
+}
+
 @media only screen and (max-width: 750px) {
     .filter_groups {
         display: flex;
@@ -45,13 +53,53 @@ li.checkbox {
 }
 
 @media only screen and (max-width: 650px) {
+  .controls {
+    background-color: #fff;
+  }
+
+  .controls_right {
+    display: block;
+  }
+
+  .controls_left, .controls_right {
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+  }
+
+  .controls button {
+    margin: 3px;
+  }
+
+  .controls button>label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .list-search {
+    margin: 0;
+    border-bottom: 1px solid lightgray;
+    padding: 10px 0;
+  }
+
+  .search-and-filter {
+    position: sticky;
+    top: -1px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid lightgray;
+    z-index: 10;
+    background-color: #fff;
+  }
+  
   .show_filters {
     width: 50%;
-    background-color: #dadada;
     display: inline-block;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    z-index: 10001;
+    z-index: 10;
   }
   
   .toggle_filter {
@@ -64,13 +112,13 @@ li.checkbox {
     flex-wrap: nowrap;
     align-items: center;
   }
-  
-  input[type=checkbox]:not(:checked)#show_filters+.show_filters>h3::before {
-    content: "Vis ";
+
+  input[type=checkbox]:checked#show_search~.list-search {
+    display: block;
   }
 
-  input[type=checkbox]:checked#show_filters+.show_filters>h3::before {
-    content: "Skjul ";
+  .list-search {
+    display: none;
   }
 
   .filters {
@@ -79,8 +127,7 @@ li.checkbox {
     width: 85vw;
     margin: 0 10px; 
     position: fixed;
-    bottom: 0;
-    z-index: 10000;
+    top: 0;
     background: #fff0;
   }
 

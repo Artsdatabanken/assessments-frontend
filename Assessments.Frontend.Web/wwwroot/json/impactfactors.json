@@ -1,1129 +1,608 @@
 {
-  "OverordnetTittel": "",
-  "Beskrivelse": "Påvirkningsfaktorer",
-  "Detaljer": [
-    {
-      "Id": "0.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Ingen trussel",
-      "Detaljer": []
-    },
-    {
-      "Id": "1.",
-      "OverordnetTittel": "Påvirkning på habitat",
-      "Beskrivelse": "",
-      "Detaljer": [
-        {
-          "Id": "1.1.",
-          "OverordnetTittel": "Påvirkning på habitat",
-          "Beskrivelse": "Landbruk",
-          "Detaljer": [
-            {
-              "Id": "1.1.1.",
-              "OverordnetTittel": "Påvirkning på habitat > Landbruk",
-              "Beskrivelse": "Jordbruk",
-              "Detaljer": [
-                {
-                  "Id": "1.1.1.1.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Jordbruk",
-                  "Beskrivelse": "Oppdyrking",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.1.2.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Jordbruk",
-                  "Beskrivelse": "Drenering (grøfting)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.1.3.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Jordbruk",
-                  "Beskrivelse": "Irrigasjon",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.1.4.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Jordbruk",
-                  "Beskrivelse": "Torvbryting",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.1.5.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Jordbruk",
-                  "Beskrivelse": "Slått",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.1.6.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Jordbruk",
-                  "Beskrivelse": "Endrede frøblandinger",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.1.7.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Jordbruk",
-                  "Beskrivelse": "Motorferdsel",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.1.8.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Jordbruk",
-                  "Beskrivelse": "Andre",
-                  "Detaljer": []
+  "1.": {
+    "title": "Påvirkning på habitat",
+    "subelement": {
+      "1.1.": {
+        "title": "Landbruk",
+        "subelement": {
+          "1.1.1.": {
+            "title": "Jordbruk",
+            "subelement": {
+              "1.1.1.1.": {
+                "title": "Oppdyrking"
+              },
+              "1.1.1.2.": {
+                "title": "Drenering (grøfting)"
+              },
+              "1.1.1.3.": {
+                "title": "Slått"
+              },
+              "1.1.1.4.": {
+                "title": "Torvbryting"
+              },
+              "1.1.1.5.": {
+                "title": "Slått"
+              },
+              "1.1.1.6.": {
+                "title": "Endrede frøblandinger"
+              },
+              "1.1.1.7.": {
+                "title": "Motorferdsel"
+              },
+              "1.1.1.8.": {
+                "title": "Andre"
+              }
+            }
+          },
+          "1.1.2.": {
+            "title": "Skogbruk (kommersielt)",
+            "subelement": {
+              "1.1.2.1.": {
+                "title": "Skogsdrift, hogst og skjøtsel",
+                "subelement": {
+                  "1.1.2.1.1.": {
+                    "title": "Åpne hogstformer (flatehogst og frøtrestillingshogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)"
+                  },
+                  "1.1.2.1.2.": {
+                    "title": "Lukkede hogstformer (plukkhogst, skjermstilling, tynning, uttak av enkelttrær, inkludert uttak av rotvelt, råtne trær, tørrgran etc.)"
+                  },
+                  "1.1.2.1.3.": {
+                    "title": "Ungskogrydding (rydding i ungskog)"
+                  },
+                  "1.1.2.1.4.": {
+                    "title": "Uttak av død ved (stående gadd og liggende læger)"
+                  },
+                  "1.1.2.1.5.": {
+                    "title": "Markberedning (maskinell bearbeiding av marksjiktet etter hogst)"
+                  },
+                  "1.1.2.1.6.": {
+                    "title": "Gjødsling"
+                  },
+                  "1.1.2.1.7.": {
+                    "title": "Sprøyting (av plantefelt for fjerning av løv og gras)"
+                  },
+                  "1.1.2.1.8.": {
+                    "title": "Skogsbilveger og kjørespor etter skogsmaskiner (den direkte effekten av inngrepet)"
+                  },
+                  "1.1.2.1.10.": {
+                    "title": "Andre faktorer"
+                  }
                 }
-              ]
-            },
-            {
-              "Id": "1.1.2.",
-              "OverordnetTittel": "Påvirkning på habitat > Landbruk",
-              "Beskrivelse": "Skogbruk (kommersielt)",
-              "Detaljer": [
-                {
-                  "Id": "1.1.2.1.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt)",
-                  "Beskrivelse": "Skogsdrift, hogst og skjøtsel",
-                  "Detaljer": [
-                    {
-                      "Id": "1.1.2.1.1.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Åpne hogstformer (flatehogst og frøtrestillingshogst som også inkluderer uttak av rotvelt, råtne trær, tørrgran etc.)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.1.2.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Lukkede hogstformer (plukkhogst, skjermstilling, tynning, uttak av enkelttrær, inkludert uttak av rotvelt, råtne trær, tørrgran etc.)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.1.3.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Ungskogrydding (rydding i ungskog)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.1.4.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Uttak av død ved (stående gadd og liggende læger)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.1.5.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Markberedning (maskinell bearbeiding av marksjiktet etter hogst)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.1.6.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Gjødsling",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.1.7.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Sprøyting (av plantefelt for fjerning av løv og gras)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.1.8.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Skogsbilveger og kjørespor etter skogsmaskiner (den direkte effekten av inngrepet)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.1.10.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel",
-                      "Beskrivelse": "Andre faktorer",
-                      "Detaljer": []
-                    }
-                  ]
-                },
-                {
-                  "Id": "1.1.2.2.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt)",
-                  "Beskrivelse": "Skogreising/treslagskifte ",
-                  "Detaljer": [
-                    {
-                      "Id": "1.1.2.2.1.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogreising/treslagskifte",
-                      "Beskrivelse": "Treslagsskifte (gran på Vestlandet og nord for Saltfjellet, fremmede treslag)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.2.2.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogreising/treslagskifte",
-                      "Beskrivelse": "Skogreising (aktiv gjenplanting av tidligere åpen mark)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.2.3.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogreising/treslagskifte",
-                      "Beskrivelse": "Grøfting og grøfterens (f.eks. myr og sumpskog)",
-                      "Detaljer": []
-                    },
-                    {
-                      "Id": "1.1.2.2.4.",
-                      "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogreising/treslagskifte",
-                      "Beskrivelse": "Andre faktorer",
-                      "Detaljer": []
-                    }
-                  ]
-                },
-                {
-                  "Id": "1.1.2.3.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt)",
-                  "Beskrivelse": "Skogbrannslukking",
-                  "Detaljer": []
+              },
+              "1.1.2.2.": {
+                "title": "Skogreising/treslagskifte",
+                "subelement": {
+                  "1.1.2.2.1.": {
+                    "title": "Treslagsskifte (gran på Vestlandet og nord for Saltfjellet, fremmede treslag)"
+                  },
+                  "1.1.2.2.2.": {
+                    "title": "Skogreising (aktiv gjenplanting av tidligere åpen mark)"
+                  },
+                  "1.1.2.2.3.": {
+                    "title": "Grøfting og grøfterens (f.eks. myr og sumpskog)"
+                  },
+                  "1.1.2.2.4.": {
+                    "title": "Andre faktorer"
+                  }
                 }
-              ]
-            },
-            {
-              "Id": "1.1.4.",
-              "OverordnetTittel": "Påvirkning på habitat > Landbruk",
-              "Beskrivelse": "Buskap/dyrehold",
-              "Detaljer": [
-                {
-                  "Id": "1.1.4.1.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Buskap/dyrehold",
-                  "Beskrivelse": "Tråkk",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.4.2.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Buskap/dyrehold",
-                  "Beskrivelse": "Beite",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.4.3.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Buskap/dyrehold",
-                  "Beskrivelse": "Andre",
-                  "Detaljer": []
-                }
-              ]
-            },
-            {
-              "Id": "1.1.5.",
-              "OverordnetTittel": "Påvirkning på habitat > Landbruk",
-              "Beskrivelse": "Opphørt/redusert drift",
-              "Detaljer": [
-                {
-                  "Id": "1.1.5.1.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Slått",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.2.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Beite",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.3.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Tråkk og motorferdsel",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.4.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Lyngbrenning",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.5.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Plukkhogst",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.6.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Tynning",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.7.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Vedhogst",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.8.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Styving",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.9.",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Endret bygningstruktur (mangel på høyløer, staller, jordkjellere, rest mm.)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.1.5.10",
-                  "OverordnetTittel": "Påvirkning på habitat > Landbruk > Opphørt/redusert drift",
-                  "Beskrivelse": "Andre",
-                  "Detaljer": []
-                }
-              ]
+              },
+              "1.1.2.3.": {
+                "title": "Skogbrannslukking"
+              }
             }
-          ]
-        },
-        {
-          "Id": "1.2.",
-          "OverordnetTittel": "Påvirkning på habitat",
-          "Beskrivelse": "Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk)",
-          "Detaljer": [
-            {
-              "Id": "1.2.1.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk)",
-              "Beskrivelse": "Utbygging/utvinning",
-              "Detaljer": [
-                {
-                  "Id": "1.2.1.1.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Infrastruktur (veier, broer, flyplasser mm.)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.2.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Industri/næringsutbygging",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.3.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Boligbebyggelse/boligutbygging",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.4.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Turisme/rekreasjon (parker, idrettsanlegg, stier/løyper mm.)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.5.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Utvinning (gruvedrift og steinbrudd)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.6.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Masseuttak (leire, sand og grustak)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.7.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Deponering (dumping, utfyllinger og avfallsdeponier)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.8.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Kraftledninger",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.9.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Vindkraftutbygging",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.10.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Rassikring",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.1.11.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Utbygging/utvinning",
-                  "Beskrivelse": "Andre",
-                  "Detaljer": []
-                }
-              ]
-            },
-            {
-              "Id": "1.2.3.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk)",
-              "Beskrivelse": "Opphørt drift",
-              "Detaljer": [
-                {
-                  "Id": "1.2.3.1.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Opphørt drift",
-                  "Beskrivelse": "Opphør av masseuttak (leire, sand og grustak)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.3.2.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Opphørt drift",
-                  "Beskrivelse": "Opphørt tråkk og motorferdsel",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.3.3.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Opphørt drift",
-                  "Beskrivelse": "Endring i avfallshåndtering (mangel på kompost, sagflis, slaktavfall mm.)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.3.4.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Opphørt drift",
-                  "Beskrivelse": "Endret bygningstruktur ",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.3.5.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Opphørt drift",
-                  "Beskrivelse": "Andre",
-                  "Detaljer": []
-                }
-              ]
-            },
-            {
-              "Id": "1.2.4.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk)",
-              "Beskrivelse": "Annen påvirkning på habitat",
-              "Detaljer": [
-                {
-                  "Id": "1.2.4.1.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat",
-                  "Beskrivelse": "Uttak av død ved (stående gadd og liggende læger)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.4.2.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat",
-                  "Beskrivelse": "Vedhogst, avvirkning av spesielle type trær (gamle, hule, brannskade)",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.4.3.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat",
-                  "Beskrivelse": "Forbedret hygiene innendørs",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.4.4.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat",
-                  "Beskrivelse": "Branner",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.4.5.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat",
-                  "Beskrivelse": "Motorferdsel",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "1.2.4.6.",
-                  "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk) > Annen påvirkning på habitat",
-                  "Beskrivelse": "Andre",
-                  "Detaljer": []
-                }
-              ]
+          },
+          "1.1.4.": {
+            "title": "Buskap/dyrehold",
+            "subelement": {
+              "1.1.4.1.": {
+                "title": "Tråkk"
+              },
+              "1.1.4.2.": {
+                "title": "Beite"
+              },
+              "1.1.4.3.": {
+                "title": "Andre"
+              }
             }
-          ]
-        },
-        {
-          "Id": "1.3.",
-          "OverordnetTittel": "Påvirkning på habitat",
-          "Beskrivelse": "Habitatpåvirkning i limnisk miljø",
-          "Detaljer": [
-            {
-              "Id": "1.3.1.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i limnisk miljø",
-              "Beskrivelse": "Ferskvannsakvakultur",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.3.2.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i limnisk miljø",
-              "Beskrivelse": "Mudring, dumping og utfyllinger i strandsonen",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.3.3.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i limnisk miljø",
-              "Beskrivelse": "Oppdemming/vannstandsregulering/overføring av vassdrag",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.3.4.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i limnisk miljø",
-              "Beskrivelse": "Vannløpsendring (flomhindring, kanalisering, utretting, moloer, terskler mm.)",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.3.5.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i limnisk miljø",
-              "Beskrivelse": "Gjennfylling av dammer, bekkelukking og tørrlegging",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.3.6.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i limnisk miljø",
-              "Beskrivelse": "Andre",
-              "Detaljer": []
+          },
+          "1.1.5.": {
+            "title": "Opphørt/redusert drift",
+            "subelement": {
+              "1.1.5.1.": {
+                "title": "Slått"
+              },
+              "1.1.5.2.": {
+                "title": "Beite"
+              },
+              "1.1.5.3.": {
+                "title": "Tråkk og motorferdsel"
+              },
+              "1.1.5.4.": {
+                "title": "Lyngbrenning"
+              },
+              "1.1.5.5.": {
+                "title": "Plukkhogst"
+              },
+              "1.1.5.6.": {
+                "title": "Tynning"
+              },
+              "1.1.5.7.": {
+                "title": "Vedhogst"
+              },
+              "1.1.5.8.": {
+                "title": "Styving"
+              },
+              "1.1.5.9.": {
+                "title": "Endret bygningstruktur (mangel på høyløer, staller, jordkjellere, rest mm.)"
+              },
+              "1.1.5.10.": {
+                "title": "Andre"
+              }
             }
-          ]
-        },
-        {
-          "Id": "1.4.",
-          "OverordnetTittel": "Påvirkning på habitat",
-          "Beskrivelse": "Habitatpåvirkning i marine miljø",
-          "Detaljer": [
-            {
-              "Id": "1.4.1.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i marine miljø",
-              "Beskrivelse": "Marin akvakultur",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.4.2.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i marine miljø",
-              "Beskrivelse": "Mudring, dumping og utfyllinger i strandsonen (inkl. moloer og havneanlegg)",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.4.3.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i marine miljø",
-              "Beskrivelse": "Åpning av innløp til poller",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.4.4.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i marine miljø",
-              "Beskrivelse": "Bunntråling",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.4.5.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i marine miljø",
-              "Beskrivelse": "Taretråling/tangskjering",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.4.6.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i marine miljø",
-              "Beskrivelse": "Petroleumsaktivitet (oljeboring, rørlegging, oppankring mm.)",
-              "Detaljer": []
-            },
-            {
-              "Id": "1.4.7.",
-              "OverordnetTittel": "Påvirkning på habitat > Habitatpåvirkning i marine miljø",
-              "Beskrivelse": "Andre",
-              "Detaljer": []
-            }
-          ]
+          }
         }
-      ]
-    },
-    {
-      "Id": "2.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Forurensing",
-      "Detaljer": [
-        {
-          "Id": "2.1.",
-          "OverordnetTittel": "Forurensing",
-          "Beskrivelse": "Terrestrisk",
-          "Detaljer": [
-            {
-              "Id": "2.1.1.",
-              "OverordnetTittel": "Forurensing > Terrestrisk",
-              "Beskrivelse": "Næringssalter og organiske næringsstoffer",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.1.2.",
-              "OverordnetTittel": "Forurensing > Terrestrisk",
-              "Beskrivelse": "Biocider",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.1.3.",
-              "OverordnetTittel": "Forurensing > Terrestrisk",
-              "Beskrivelse": "Uorganiske gifter (tungmetaller, arsen, fluor mm.)",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.1.4.",
-              "OverordnetTittel": "Forurensing > Terrestrisk",
-              "Beskrivelse": "Organiske gifter (PAH mm.)",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.1.5.",
-              "OverordnetTittel": "Forurensing > Terrestrisk",
-              "Beskrivelse": "Radioaktivitet",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.1.6.",
-              "OverordnetTittel": "Forurensing > Terrestrisk",
-              "Beskrivelse": "Tilsetninger i dyrefor/medisinering",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.1.7.",
-              "OverordnetTittel": "Forurensing > Terrestrisk",
-              "Beskrivelse": "Andre",
-              "Detaljer": []
+      },
+      "1.2.": {
+        "title": "Habitatpåvirkning - ikke jord- eller skogbruksaktivitet (terrestrisk)",
+        "subelement": {
+          "1.2.1.": {
+            "title": "Utbygging/utvinning",
+            "subelement": {
+              "1.2.1.1.": {
+                "title": "Infrastruktur (veier, broer, flyplasser mm.)"
+              },
+              "1.2.1.2.": {
+                "title": "Industri/næringsutbygging"
+              },
+              "1.2.1.3.": {
+                "title": "Boligbebyggelse/boligutbygging"
+              },
+              "1.2.1.4.": {
+                "title": "Turisme/rekreasjon (parker, idrettsanlegg, stier/løyper mm.)"
+              },
+              "1.2.1.5.": {
+                "title": "Utvinning (gruvedrift og steinbrudd)"
+              },
+              "1.2.1.6.": {
+                "title": "Masseuttak (leire, sand og grustak)"
+              },
+              "1.2.1.7.": {
+                "title": "Deponering (dumping, utfyllinger og avfallsdeponier)"
+              },
+              "1.2.1.8.": {
+                "title": "Kraftledninger"
+              },
+              "1.2.1.9.": {
+                "title": "Vindkraftutbygging"
+              },
+              "1.2.1.10.": {
+                "title": "Rassikring"
+              },
+              "1.2.1.11.": {
+                "title": "Andre"
+              }
             }
-          ]
-        },
-        {
-          "Id": "2.2.",
-          "OverordnetTittel": "Forurensing",
-          "Beskrivelse": "I vann",
-          "Detaljer": [
-            {
-              "Id": "2.2.1.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Næringssalter og organiske næringstoffer",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.2.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Biocider",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.3.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Uorganiske gifter (tungmetaller, arsen, fluor mm.)",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.4.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Organiske gifter (PAH mm.)",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.5.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Radioaktivitet",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.6.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Oljeutslipp",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.7.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Sur nedbør",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.8.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Kalking",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.9.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Tilsetninger i dyrefor/medisinering",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.2.10.",
-              "OverordnetTittel": "Forurensing > I vann",
-              "Beskrivelse": "Andre",
-              "Detaljer": []
+          },
+          "1.2.3.": {
+            "title": "Opphørt drift",
+            "subelement": {
+              "1.2.3.1.": {
+                "title": "Opphør av masseuttak (leire, sand og grustak)"
+              },
+              "1.2.3.2.": {
+                "title": "Opphørt tråkk og motorferdsel"
+              },
+              "1.2.3.3.": {
+                "title": "Endring i avfallshåndtering (mangel på kompost, sagflis, slaktavfall mm.)"
+              },
+              "1.2.3.4.": {
+                "title": "Endret bygningstruktur "
+              },
+              "1.2.3.5.": {
+                "title": "Andre"
+              }
             }
-          ]
-        },
-        {
-          "Id": "2.3.",
-          "OverordnetTittel": "Forurensing",
-          "Beskrivelse": "Atmosfærisk",
-          "Detaljer": [
-            {
-              "Id": "2.3.1.",
-              "OverordnetTittel": "Forurensing > Atmosfærisk",
-              "Beskrivelse": "Bakkenært ozon",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.3.2.",
-              "OverordnetTittel": "Forurensing > Atmosfærisk",
-              "Beskrivelse": "NOx-forbindelser",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.3.3.",
-              "OverordnetTittel": "Forurensing > Atmosfærisk",
-              "Beskrivelse": "Forsurende gasser (S-forbindelser)",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.3.4.",
-              "OverordnetTittel": "Forurensing > Atmosfærisk",
-              "Beskrivelse": "Ozonnedbrytende gasser (indirekte effekter av UV stråling)",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.3.5.",
-              "OverordnetTittel": "Forurensing > Atmosfærisk",
-              "Beskrivelse": "Utslipp av klimagasser (CO2), indirekte effekter",
-              "Detaljer": []
-            },
-            {
-              "Id": "2.3.6.",
-              "OverordnetTittel": "Forurensing > Atmosfærisk",
-              "Beskrivelse": "Andre",
-              "Detaljer": []
+          },
+          "1.2.4.": {
+            "title": "Annen påvirkning på habitat",
+            "subelement": {
+              "1.2.4.1.": {
+                "title": "Uttak av død ved (stående gadd og liggende læger)"
+              },
+              "1.2.4.2.": {
+                "title": "Vedhogst, avvirkning av spesielle type trær (gamle, hule, brannskade)"
+              },
+              "1.2.4.3.": {
+                "title": "Forbedret hygiene innendørs"
+              },
+              "1.2.4.4.": {
+                "title": "Branner"
+              },
+              "1.2.4.5.": {
+                "title": "Motorferdsel"
+              },
+              "1.2.4.6.": {
+                "title": "Andre"
+              }
             }
-          ]
+          }
         }
-      ]
-    },
-    {
-      "Id": "3.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Høsting",
-      "Detaljer": [
-        {
-          "Id": "3.1.",
-          "OverordnetTittel": "Høsting",
-          "Beskrivelse": "Regulert jakt, fangst eller fiske",
-          "Detaljer": []
-        },
-        {
-          "Id": "3.2.",
-          "OverordnetTittel": "Høsting",
-          "Beskrivelse": "Uregulert jakt, fangst eller fiske",
-          "Detaljer": []
-        },
-        {
-          "Id": "3.3.",
-          "OverordnetTittel": "Høsting",
-          "Beskrivelse": "Flora-/faunakriminalitet",
-          "Detaljer": []
-        },
-        {
-          "Id": "3.5.",
-          "OverordnetTittel": "Høsting",
-          "Beskrivelse": "Sanking/høsting",
-          "Detaljer": []
-        },
-        {
-          "Id": "3.7.",
-          "OverordnetTittel": "Høsting",
-          "Beskrivelse": "Indirekte via høsting av artens næring",
-          "Detaljer": []
-        },
-        {
-          "Id": "3.6.",
-          "OverordnetTittel": "Høsting",
-          "Beskrivelse": "Andre",
-          "Detaljer": []
+      },
+      "1.3.": {
+        "title": "Habitatpåvirkning i limnisk miljø",
+        "subelement": {
+          "1.3.1.": {
+            "title": "Ferskvannsakvakultur"
+          },
+          "1.3.2.": {
+            "title": "Mudring, dumping og utfyllinger i strandsonen"
+          },
+          "1.3.3.": {
+            "title": "Oppdemming/vannstandsregulering/overføring av vassdrag"
+          },
+          "1.3.4.": {
+            "title": "Vannløpsendring (flomhindring, kanalisering, utretting, moloer, terskler mm.)"
+          },
+          "1.3.5.": {
+            "title": "Gjennfylling av dammer, bekkelukking og tørrlegging"
+          },
+          "1.3.6.": {
+            "title": "Andre"
+          }
         }
-      ]
-    },
-    {
-      "Id": "4.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Tilfeldig mortalitet",
-      "Detaljer": [
-        {
-          "Id": "4.1.",
-          "OverordnetTittel": "Tilfeldig mortalitet",
-          "Beskrivelse": "Kollisjoner",
-          "Detaljer": [
-            {
-              "Id": "4.1.1.",
-              "OverordnetTittel": "Tilfeldig mortalitet > Kollisjoner",
-              "Beskrivelse": "Ledninger, master, byggninger",
-              "Detaljer": []
-            },
-            {
-              "Id": "4.1.2.",
-              "OverordnetTittel": "Tilfeldig mortalitet > Kollisjoner",
-              "Beskrivelse": "Vindmøller",
-              "Detaljer": []
-            },
-            {
-              "Id": "4.1.3.",
-              "OverordnetTittel": "Tilfeldig mortalitet > Kollisjoner",
-              "Beskrivelse": "Kjøretøy",
-              "Detaljer": []
-            },
-            {
-              "Id": "4.1.4.",
-              "OverordnetTittel": "Tilfeldig mortalitet > Kollisjoner",
-              "Beskrivelse": "Andre",
-              "Detaljer": []
-            }
-          ]
-        },
-        {
-          "Id": "4.2.",
-          "OverordnetTittel": "Tilfeldig mortalitet",
-          "Beskrivelse": "Bifangst",
-          "Detaljer": [
-            {
-              "Id": "4.2.1.",
-              "OverordnetTittel": "Tilfeldig mortalitet > Bifangst",
-              "Beskrivelse": "Fiskerelatert",
-              "Detaljer": [
-                {
-                  "Id": "4.2.1.1.",
-                  "OverordnetTittel": "Tilfeldig mortalitet > Bifangst > Fiskerelatert",
-                  "Beskrivelse": "Kroking",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "4.2.1.2.",
-                  "OverordnetTittel": "Tilfeldig mortalitet > Bifangst > Fiskerelatert",
-                  "Beskrivelse": "Garnfangst",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "4.2.1.3.",
-                  "OverordnetTittel": "Tilfeldig mortalitet > Bifangst > Fiskerelatert",
-                  "Beskrivelse": "Tråling",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "4.2.1.4.",
-                  "OverordnetTittel": "Tilfeldig mortalitet > Bifangst > Fiskerelatert",
-                  "Beskrivelse": "Dynamitt",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "4.2.1.5.",
-                  "OverordnetTittel": "Tilfeldig mortalitet > Bifangst > Fiskerelatert",
-                  "Beskrivelse": "Forgiftning",
-                  "Detaljer": []
-                }
-              ]
-            },
-            {
-              "Id": "4.2.2.",
-              "OverordnetTittel": "Tilfeldig mortalitet > Bifangst",
-              "Beskrivelse": "Terrestrisk",
-              "Detaljer": [
-                {
-                  "Id": "4.2.2.1.",
-                  "OverordnetTittel": "Tilfeldig mortalitet > Bifangst > Terrestrisk",
-                  "Beskrivelse": "Feller, snarer, nett",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "4.2.2.2.",
-                  "OverordnetTittel": "Tilfeldig mortalitet > Bifangst > Terrestrisk",
-                  "Beskrivelse": "Skyting",
-                  "Detaljer": []
-                },
-                {
-                  "Id": "4.2.2.3.",
-                  "OverordnetTittel": "Tilfeldig mortalitet > Bifangst > Terrestrisk",
-                  "Beskrivelse": "Forgiftning",
-                  "Detaljer": []
-                }
-              ]
-            }
-          ]
+      },
+      "1.4.": {
+        "title": "Habitatpåvirkning i marine miljø",
+        "subelement": {
+          "1.4.1.": {
+            "title": "Marin akvakultur"
+          },
+          "1.4.2.": {
+            "title": "Mudring, dumping og utfyllinger i strandsonen (inkl. moloer og havneanlegg)"
+          },
+          "1.4.3.": {
+            "title": "Åpning av innløp til poller"
+          },
+          "1.4.4.": {
+            "title": "Bunntråling"
+          },
+          "1.4.5.": {
+            "title": "Taretråling/tangskjering"
+          },
+          "1.4.6.": {
+            "title": "Petroleumsaktivitet (oljeboring, rørlegging, oppankring mm.)"
+          },
+          "1.4.7.": {
+            "title": "Andre"
+          }
         }
-      ]
-    },
-    {
-      "Id": "5.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Fremmede arter",
-      "Detaljer": [
-        {
-          "Id": "5.1.",
-          "OverordnetTittel": "Fremmede arter",
-          "Beskrivelse": "Konkurrenter",
-          "Detaljer": []
-        },
-        {
-          "Id": "5.2.",
-          "OverordnetTittel": "Fremmede arter",
-          "Beskrivelse": "Predatorer",
-          "Detaljer": []
-        },
-        {
-          "Id": "5.3.",
-          "OverordnetTittel": "Fremmede arter",
-          "Beskrivelse": "Hybridisering",
-          "Detaljer": []
-        },
-        {
-          "Id": "5.4.",
-          "OverordnetTittel": "Fremmede arter",
-          "Beskrivelse": "Patogener/parasitter",
-          "Detaljer": []
-        },
-        {
-          "Id": "5.5.",
-          "OverordnetTittel": "Fremmede arter",
-          "Beskrivelse": "Påvirker habitatet",
-          "Detaljer": []
-        },
-        {
-          "Id": "5.6.",
-          "OverordnetTittel": "Fremmede arter",
-          "Beskrivelse": "Andre",
-          "Detaljer": []
-        }
-      ]
-    },
-    {
-      "Id": "6.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Påvirkning fra stedegne arter",
-      "Detaljer": [
-        {
-          "Id": "6.1.",
-          "OverordnetTittel": "Påvirkning fra stedegne arter",
-          "Beskrivelse": "Konkurrenter",
-          "Detaljer": []
-        },
-        {
-          "Id": "6.2.",
-          "OverordnetTittel": "Påvirkning fra stedegne arter",
-          "Beskrivelse": "Predatorer",
-          "Detaljer": []
-        },
-        {
-          "Id": "6.3.",
-          "OverordnetTittel": "Påvirkning fra stedegne arter",
-          "Beskrivelse": "Byttedyr/næringskilde",
-          "Detaljer": []
-        },
-        {
-          "Id": "6.4.",
-          "OverordnetTittel": "Påvirkning fra stedegne arter",
-          "Beskrivelse": "Hybridisering",
-          "Detaljer": []
-        },
-        {
-          "Id": "6.5.",
-          "OverordnetTittel": "Påvirkning fra stedegne arter",
-          "Beskrivelse": "Patogener/parasitter",
-          "Detaljer": []
-        },
-        {
-          "Id": "6.6.",
-          "OverordnetTittel": "Påvirkning fra stedegne arter",
-          "Beskrivelse": "Mutualisme",
-          "Detaljer": []
-        },
-        {
-          "Id": "6.7.",
-          "OverordnetTittel": "Påvirkning fra stedegne arter",
-          "Beskrivelse": "Påvirker habitatet (beite tråkk mm.)",
-          "Detaljer": []
-        },
-        {
-          "Id": "6.8.",
-          "OverordnetTittel": "Påvirkning fra stedegne arter",
-          "Beskrivelse": "Andre",
-          "Detaljer": []
-        }
-      ]
-    },
-    {
-      "Id": "7.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Klimatiske endringer",
-      "Detaljer": [
-        {
-          "Id": "7.1.",
-          "OverordnetTittel": "Klimatiske endringer",
-          "Beskrivelse": "Regionale",
-          "Detaljer": [
-            {
-              "Id": "7.1.1.",
-              "OverordnetTittel": "Klimatiske endringer > Regionale",
-              "Beskrivelse": "Endringer i nedbørsmengde",
-              "Detaljer": []
-            },
-            {
-              "Id": "7.1.2.",
-              "OverordnetTittel": "Klimatiske endringer > Regionale",
-              "Beskrivelse": "Temperaturendring",
-              "Detaljer": []
-            }
-          ]
-        },
-        {
-          "Id": "7.2.",
-          "OverordnetTittel": "Klimatiske endringer",
-          "Beskrivelse": "Lokale",
-          "Detaljer": [
-            {
-              "Id": "7.2.1.",
-              "OverordnetTittel": "Klimatiske endringer > Lokale",
-              "Beskrivelse": "Endringer i lokale lysforhold",
-              "Detaljer": []
-            },
-            {
-              "Id": "7.2.2.",
-              "OverordnetTittel": "Klimatiske endringer > Lokale",
-              "Beskrivelse": "Endringer i lokale temperaturforhold",
-              "Detaljer": []
-            },
-            {
-              "Id": "7.2.3.",
-              "OverordnetTittel": "Klimatiske endringer > Lokale",
-              "Beskrivelse": "Endrede lokale fuktighetsforhold",
-              "Detaljer": []
-            }
-          ]
-        },
-        {
-          "Id": "7.3.",
-          "OverordnetTittel": "Klimatiske endringer",
-          "Beskrivelse": "Andre",
-          "Detaljer": []
-        }
-      ]
-    },
-    {
-      "Id": "8.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Naturkatastrofer",
-      "Detaljer": [
-        {
-          "Id": "8.1.",
-          "OverordnetTittel": "Naturkatastrofer",
-          "Beskrivelse": "Tørke",
-          "Detaljer": []
-        },
-        {
-          "Id": "8.2.",
-          "OverordnetTittel": "Naturkatastrofer",
-          "Beskrivelse": "Stormer",
-          "Detaljer": []
-        },
-        {
-          "Id": "8.3.",
-          "OverordnetTittel": "Naturkatastrofer",
-          "Beskrivelse": "Oversvømmelser",
-          "Detaljer": []
-        },
-        {
-          "Id": "8.4.",
-          "OverordnetTittel": "Naturkatastrofer",
-          "Beskrivelse": "Ekstreme temperaturer",
-          "Detaljer": []
-        },
-        {
-          "Id": "8.5.",
-          "OverordnetTittel": "Naturkatastrofer",
-          "Beskrivelse": "Branner",
-          "Detaljer": []
-        },
-        {
-          "Id": "8.6.",
-          "OverordnetTittel": "Naturkatastrofer",
-          "Beskrivelse": "Vulkaner",
-          "Detaljer": []
-        },
-        {
-          "Id": "8.7.",
-          "OverordnetTittel": "Naturkatastrofer",
-          "Beskrivelse": "Ras/skred",
-          "Detaljer": []
-        },
-        {
-          "Id": "8.8.",
-          "OverordnetTittel": "Naturkatastrofer",
-          "Beskrivelse": "Andre",
-          "Detaljer": []
-        }
-      ]
-    },
-    {
-      "Id": "9.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Menneskelig forstyrrelse",
-      "Detaljer": [
-        {
-          "Id": "9.1.",
-          "OverordnetTittel": "Menneskelig forstyrrelse",
-          "Beskrivelse": "Rekreasjon/turisme",
-          "Detaljer": []
-        },
-        {
-          "Id": "9.2.",
-          "OverordnetTittel": "Menneskelig forstyrrelse",
-          "Beskrivelse": "Forskning",
-          "Detaljer": []
-        },
-        {
-          "Id": "9.3.",
-          "OverordnetTittel": "Menneskelig forstyrrelse",
-          "Beskrivelse": "Krig/sivil uro",
-          "Detaljer": []
-        },
-        {
-          "Id": "9.4.",
-          "OverordnetTittel": "Menneskelig forstyrrelse",
-          "Beskrivelse": "Transport",
-          "Detaljer": []
-        },
-        {
-          "Id": "9.5.",
-          "OverordnetTittel": "Menneskelig forstyrrelse",
-          "Beskrivelse": "Branner",
-          "Detaljer": []
-        },
-        {
-          "Id": "9.6.",
-          "OverordnetTittel": "Menneskelig forstyrrelse",
-          "Beskrivelse": "Innsamling",
-          "Detaljer": []
-        },
-        {
-          "Id": "9.7.",
-          "OverordnetTittel": "Menneskelig forstyrrelse",
-          "Beskrivelse": "Støy og ferdsel (forstyrrelser i hekketid mm.)",
-          "Detaljer": []
-        },
-        {
-          "Id": "9.8.",
-          "OverordnetTittel": "Menneskelig forstyrrelse",
-          "Beskrivelse": "Andre",
-          "Detaljer": []
-        }
-      ]
-    },
-    {
-      "Id": "10.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Andre",
-      "Detaljer": []
-    },
-    {
-      "Id": "11.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Ukjent",
-      "Detaljer": []
-    },
-    {
-      "Id": "12.",
-      "OverordnetTittel": "",
-      "Beskrivelse": "Påvirkning utenfor Norge",
-      "Detaljer": []
+      }
     }
-  ]
+  },
+  "2.": {
+    "title": "Forurensing",
+    "subelement": {
+      "2.1.": {
+        "title": "Terrestrisk",
+        "subelement": {
+          "2.1.1.": {
+            "title": "Næringssalter og organiske næringsstoffer"
+          },
+          "2.1.2.": {
+            "title": "Biocider"
+          },
+          "2.1.3.": {
+            "title": "Uorganiske gifter (tungmetaller, arsen, fluor mm.)"
+          },
+          "2.1.4.": {
+            "title": "Organiske gifter (PAH mm.)"
+          },
+          "2.1.5.": {
+            "title": "Radioaktivitet"
+          },
+          "2.1.6.": {
+            "title": "Tilsetninger i dyrefor/medisinering"
+          },
+          "2.1.7.": {
+            "title": "Andre"
+          }
+        }
+      },
+      "2.2.": {
+        "title": "I vann",
+        "subelement": {
+          "2.2.1.": {
+            "title": "Næringssalter og organiske næringstoffer"
+          },
+          "2.2.2.": {
+            "title": "Biocider"
+          },
+          "2.2.3.": {
+            "title": "Uorganiske gifter (tungmetaller, arsen, fluor mm.)"
+          },
+          "2.2.4.": {
+            "title": "Organiske gifter (PAH mm.)"
+          },
+          "2.2.5.": {
+            "title": "Radioaktivitet"
+          },
+          "2.2.6.": {
+            "title": "Oljeutslipp"
+          },
+          "2.2.7.": {
+            "title": "Sur nedbør"
+          },
+          "2.2.8.": {
+            "title": "Kalking"
+          },
+          "2.2.9.": {
+            "title": "Tilsetninger i dyrefor/medisinering"
+          },
+          "2.2.10.": {
+            "title": "Andre"
+          }
+        }
+      },
+      "2.3.": {
+        "title": "Atmosfærisk",
+        "subelement": {
+          "2.3.1.": {
+            "title": "Bakkenært ozon"
+          },
+          "2.3.2.": {
+            "title": "NOx-forbindelser"
+          },
+          "2.3.3.": {
+            "title": "Forsurende gasser (S-forbindelser)"
+          },
+          "2.3.4.": {
+            "title": "Ozonnedbrytende gasser (indirekte effekter av UV stråling)"
+          },
+          "2.3.5.": {
+            "title": "Utslipp av klimagasser (CO2), indirekte effekter"
+          },
+          "2.3.6.": {
+            "title": "Andre"
+          }
+        }
+      }
+    }
+  },
+  "3.": {
+    "title": "Høsting",
+    "subelement": {
+      "3.1.": {
+        "title": "Regulert jakt, fangst eller fiske"
+      },
+      "3.2.": {
+        "title": "Uregulert jakt, fangst eller fiske"
+
+      },
+      "3.3.": {
+        "title": "Flora-/faunakriminalitet"
+      },
+      "3.5.": {
+        "title": "Sanking/høsting"
+      },
+      "3.7.": {
+        "title": "Indirekte via høsting av artens næring"
+      },
+      "3.6.": {
+        "title": "Andre"
+      }
+    }
+  },
+  "4.": {
+    "title": "Tilfeldig mortalitet",
+    "subelement": {
+      "4.1.": {
+        "title": "Kollisjoner",
+        "subelement": {
+          "4.1.1.": {
+            "title": "Ledninger, master, byggninger"
+          },
+          "4.1.2.": {
+            "title": "Vindmøller"
+          },
+          "4.1.3.": {
+            "title": "Kjøretøy"
+          },
+          "4.1.4.": {
+            "title": "Andre"
+          }
+        }
+      },
+      "4.2.": {
+        "title": "Bifangst",
+        "subelement": {
+          "4.2.1.": {
+            "title": "Fiskerelatert",
+            "subelement": {
+              "4.2.1.1.": {
+                "title": "Kroking"
+              },
+              "4.2.1.2.": {
+                "title": "Garnfangst"
+              },
+              "4.2.1.3.": {
+                "title": "Tråling"
+              },
+              "4.2.1.4.": {
+                "title": "Dynamitt"
+              },
+              "4.2.1.5.": {
+                "title": "Forgiftning"
+              }
+            }
+          },
+          "4.2.2.": {
+            "title": "Terrestrisk",
+            "subelement": {
+              "4.2.2.1.": {
+                "title": "Feller, snarer, nett"
+              },
+              "4.2.2.2.": {
+                "title": "Skyting"
+              },
+              "4.2.2.3.": {
+                "title": "Forgiftning"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "5.": {
+    "title": "Fremmede arter",
+    "subelement": {
+      "5.1.": {
+        "title": "Konkurrenter"
+      },
+      "5.2.": {
+        "title": "Predatorer"
+      },
+      "5.3.": {
+        "title": "Hybridisering"
+      },
+      "5.4.": {
+        "title": "Patogener/parasitter"
+      },
+      "5.5.": {
+        "title": "Påvirker habitatet"
+      },
+      "5.6.": {
+        "title": "Andre"
+      }
+    }
+  },
+  "6.": {
+    "title": "Påvirkning fra stedegne arter",
+    "subelement": {
+      "6.1.": {
+        "title": "Konkurrenter"
+      },
+      "6.2.": {
+        "title": "Predatorer"
+      },
+      "6.3.": {
+        "title": "Byttedyr/næringskilde"
+      },
+      "6.4.": {
+        "title": "Hybridisering"
+      },
+      "6.5.": {
+        "title": "Patogener/parasitter"
+      },
+      "6.6.": {
+        "title": "Mutualisme"
+      },
+      "6.7.": {
+        "title": "Påvirker habitatet (beite tråkk mm.)"
+      },
+      "6.8.": {
+        "title": "Andre"
+      }
+    }
+  },
+  "7.": {
+    "title": "Klimatiske endringer",
+    "subelement": {
+      "7.1.": {
+        "title": "Regionale",
+        "subelement": {
+          "7.1.1.": {
+            "title": "Endringer i nedbørsmengde"
+          },
+          "7.1.2.": {
+            "title": "Temperaturendring"
+          }
+        }
+      },
+      "7.2.": {
+        "title": "Lokale",
+        "subelement": {
+          "7.2.1.": {
+            "title": "Endringer i lokale lysforhold"
+          },
+          "7.2.2.": {
+            "title": "Endringer i lokale temperaturforhold"
+          },
+          "7.2.3.": {
+            "title": "Endrede lokale fuktighetsforhold"
+          }
+        }
+      },
+      "7.3.": {
+        "title": "Andre"
+      }
+    }
+  },
+  "8.": {
+    "title": "Naturkatastrofer",
+    "subelement": {
+      "8.1.": {
+        "title": "Tørke"
+      },
+      "8.2.": {
+        "title": "Stormer"
+      },
+      "8.3.": {
+        "title": "Oversvømmelser"
+      },
+      "8.4.": {
+        "title": "Ekstreme temperaturer"
+      },
+      "8.5.": {
+        "title": "Branner"
+      },
+      "8.6.": {
+        "title": "Vulkaner"
+      },
+      "8.7.": {
+        "title": "Ras/skred"
+      },
+      "8.8.": {
+        "title": "Andre"
+      }
+    }
+  },
+  "9.": {
+    "title": "Menneskelig forstyrrelse",
+    "subelement": {
+      "9.1.": {
+        "title": "Rekreasjon/turisme"
+      },
+      "9.2.": {
+        "title": "Forskning"
+      },
+      "9.3.": {
+        "title": "Krig/sivil uro"
+      },
+      "9.4.": {
+        "title": "Transport"
+      },
+      "9.5.": {
+        "title": "Branner"
+      },
+      "9.6.": {
+        "title": "Innsamling"
+      },
+      "9.7.": {
+        "title": "Støy og ferdsel (forstyrrelser i hekketid mm.)"
+      },
+      "9.8.": {
+        "title": "Andre"
+      }
+    }
+  },
+  "10.":{
+    "title": "Andre"
+  },
+  "11.": {
+    "title": "Ukjent"
+  },
+  "12." :{
+    "title": "Påvirkning utenfor Norge"
+  }
 }

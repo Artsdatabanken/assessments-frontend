@@ -166,115 +166,6 @@
 }
 
 
-/* IMPACT FACTORS */
-
-.stats_element_container {
-    display: inline-block;
-    width: 70px;
-}
-
-.stats_element_text {
-    display: inline-block;
-    width: calc(100% - 80px);
-}
-
-.topalign {
-    vertical-align: top;
-}
-
-.stats_element_text h3 {
-    margin: 0;
-}
-
-.fake_table_header {
-    background: #f1f1f1;
-    border: 1px solid lightgray;
-    border-bottom: 0;
-    padding: 5px;
-    padding-top: 10px;
-}
-
-.fake_table {
-    display: flex;
-    background: #fcfcfc;
-    margin-bottom: 20px;
-    padding: 10px;
-    padding-bottom: 20px;
-    border: 1px solid lightgray;
-    font-size: 10pt;
-}
-
-    .fake_table div {
-        flex: 1;
-        padding: 5px;
-        text-align: center
-    }
-
-    .fake_table .sideborders {
-        border-left: 1px solid #d3d3d3;
-        border-right: 1px solid #d3d3d3;
-    }
-
-@media only screen and (max-width: 650px) {
-    .fake_table {
-        flex-direction: column;
-    }
-
-    .fake_table .sideborders {
-        border: 0px;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        border-top: 1px solid #d3d3d3;
-        border-bottom: 1px solid #d3d3d3;
-    }
-
-    .fake_table_header {
-        text-align: center;
-    }
-
-    .fake_table_header .stats_element_container {
-        display: block;
-        margin: auto;
-        margin-bottom: 10px;
-    }
-
-    .fake_table_header .stats_element_text {
-        width: 100%;
-    }
-
-    .stats_element_container {
-        vertical-align: top;
-    }
-}
-
-.stats_element {
-    width: 64px;
-    height: 64px;
-    border-radius: 2px;
-    background: #4c4a48;
-    display: flex;
-    align-items: center;
-}
-
-.fake_table .stats_element {
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    background: #f1f1f1;
-}
-
-.stats_element span {
-    color: white;
-    width: 100%;
-    display: block;
-    text-align: center;
-}
-
-.fake_table .stats_element span {
-    color: black;
-}
-
-
 /* categori  things */
 
 .category-line {
@@ -648,4 +539,151 @@
 
 .listitem_text_field{
     padding-left:10px;
+}
+
+
+/* IMPACT FACTORS */
+
+.impact_table {
+    display: flex;
+    background: #fcfcfc;
+    margin: 5px;
+    padding: 5px;
+    font-size: 10pt;
+    font-weight: normal;
+}
+
+.impact_table div {
+    flex: 1;
+    padding: 5px;
+    text-align: center;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.impact_table .sideborders {
+    border-left: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+}
+
+@media only screen and (max-width: 650px) {
+    .impact_table {
+        flex-direction: column;
+    }
+
+    .impact_table .sideborders {
+        border: 0px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-top: 1px solid #d3d3d3;
+        border-bottom: 1px solid #d3d3d3;
+    }
+
+    .impact_table div {
+        text-align:left;
+    }
+}
+
+
+/* IMPACT FACTORS */
+
+.outer {
+    margin-top: 20px;
+}
+
+
+/* COMPACT (normal) version */
+.impact h3 {
+    display: block;
+    margin: 0px;
+    margin-top: 5px;
+    padding: 0px;
+}
+
+.impact h3.active {
+    color:black;
+}
+
+.impact .second.inactive {
+    display: none;
+}
+
+.impact li{
+    display:block;
+    padding:2px;
+    padding-left:20px;
+}
+
+.impact li.active {
+    color: black;
+    display: block;
+    font-weight:bold;
+}
+
+.impact li.inactive {
+    color: grey;
+    font-weight: normal;
+}
+
+.impact .impact-id,
+.impact li.inactive li.inactive {
+    display: none;
+}
+
+.impact .text_container {
+    display: flex;
+}
+
+.impact .text_collection {
+    align-self: center;
+    padding-left:5px;
+}
+
+.impact .final ul {
+    display: none;
+}
+
+/* SUMMARY VERSION */
+.summary li {    
+    padding: 0;
+    padding-top: 5px;
+}
+
+.summary .material-icons,
+.summary h3.inactive,
+.summary li.inactive {
+    display: none;
+}
+
+.summary h3.active {
+    color: #777368;
+}
+
+/* FULL VERSION */
+
+.full_list .impact-id {
+    display:inline-block;
+}
+
+.full_list .second.inactive,
+.full_list li.inactive li.inactive,
+.full_list .final ul{
+    display: block;    
+}
+
+/* All */
+
+.outer .text_collection {
+    padding: 0;
+}
+
+.impact button {
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.impact button.active {
+    background: black;
+    color: white;
+    
 }

@@ -7,225 +7,205 @@
 
     string ImpactIcon(string id, string subtitle)
     {
-        // TODO: Move images to folder in graphic profile project instead, whit automatic naming.
         var number = id.Substring(0, 1);
-        var biggernumber = id;
+        var biggernumber = id.Substring(0, 3);
+
         // 0. ingen trussel / no factor  has no image, as it is never displayed.
-        if (number == "2")
-        { // 2
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "forurensing" + ".png";
-        }
-        else if (number == "3")
-        { // 3
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "høsting" + ".png";
-        }
-        else if (number == "4")
-        { // 4
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png"; // TODO - MISSING
-        }
-        else if (number == "5")
-        { // 5
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "fremmedarter" + ".png";
-        }
-        else if (number == "6")
-        { // 6 "påvirkning fra stedegne arter"
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "stedegne" + ".png";
-        }
-        else if (number == "7")
-        { // 7
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "klima" + ".png";
-        }
-        else if (number == "8")
-        { // 8
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "naturkatastrofe" + ".png";
-        }
-        else if (number == "9")
-        { // 9
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "menneske" + ".png";
-        }
-        else if (number == "10")
-        { // 10
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "andre" + ".png";
-        }
-        else if (number == "11")
-        { // 11 ukjent
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png";
-        }
-        else if (number == "12")
-        { // 12
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png"; 
-            // TODO - MISSING ICON. 
-        }
-        else if (id.Contains("1.1"))
-        { // 1.1 habitat
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "landbruk" + ".png";
-        }
-        else if (id.Contains("1.2"))
-        { // 1.2 habitat
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "terrestisk" + ".png";
-        }
-        else if (id.Contains("1.3"))
-        { // 1.3 habitat
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "limnisk" + ".png";
-        }
-        else if (id.Contains("1.4"))
-        {// 1.4 habitat
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "marint" + ".png";
-        }
-        else
+        if (number == "1")
         {
-            return "https://artsdatabanken.no/RLN2018/media/impact/" + "ukjent" + ".png";
+            // habitat icons are divided further
+            number = biggernumber;
         }
+
+        return "https://design.artsdatabanken.no/impact-icons/" + number + ".png";
     }
 
-    public string iconfinder(string factor)
+    string activeOrNot(string element)
     {
-        @if (factor == "Ingen trussel")
+        @foreach (var factor in Model.ImpactFactors)
         {
-            return "delete_sweep";
-        }
-        else if (factor == "Påvirkning på habitat")
-        {
-            return "nature";
-        }
-        else if (factor == "Forurensning")
-        {
-            return "recycling";
-        }
-        else if (factor == "Høsting")
-        {
-            return "gradient";
-        }
-        else if (factor == "Tilfeldig mortalitet")
-        {
-            return "close";
-        }
-        else if (factor == "Fremmede arter")
-        {
-            return "pest_control";
-        }
-        else if (factor == "Påvirkning fra stedegne arter")
-        {
-            return "nature";
-        }
-        else if (factor == "Klimatiske endringer")
-        {
-            return "cloud";
-        }
-        else if (factor == "Naturkatastrofer")
-        {
-            return "air";
-        }
-        else if (factor == "Menneskelig forstyrrelse")
-        {
-            return "engineering";
-        }
-        else if (factor == "Andre")
-        {
-            return "lens_blur";
-        }
-        else if (factor == "Ukjent")
-        {
-            return "lens_blur";
-        }
-        else if (factor == "Påvirkning utenfor Norge")
-        {
-            return "public";
-        }
-        else
-        {
-            return "delete";
-        }
-    }
-}
-
-
-<div class="page_section">
-    <h2>Påvirkningsfaktorer </h2>
-
-    <p class="fact_box"> @ViewBag.glossary["oneliners"]["Påvirkningsfaktorer"]</p>
-
-    <div class="factors">
-        @{foreach (var pfaktor in Model.ImpactFactors)
+            @if (factor.Id == element)
             {
-                <div class="fake_table_header">
-                    <div class="stats_element_container">
-                        <img src="@ImpactIcon(@pfaktor.Id,@pfaktor.Factor)" class="paavirk" />
-                    </div>
-                    <div class="stats_element_text topalign">
-                        <h3>@pfaktor.GroupingFactor</h3>
-                        @* todo: se om stien skal brukes, inneholder også toppnivå - kan fjernes under ved å skrive pfaktor.FactorPath.Skip(1)   *@
-                        <h5> Sti: @string.Join(" > ", pfaktor.FactorPath.Skip(1))</h5>
-                        <b>@pfaktor.Id - @pfaktor.Factor</b>
-
-                    </div>
-                </div>
-                <div class="fake_table">
-                    <div>
-                        <h3>Omfang</h3>
-
-                        @{
-
-                            var omfang_text = @pfaktor.PopulationScope;
-                            var omfang_numbers = "";
-
-                            if (omfang_text.Contains("("))
-                            {
-                                // Split out the percentages etc. from the main string.
-                                // Percentages appear to always be enclosed in "()".
-                                omfang_text = omfang_text.Split("(")[0];
-                                omfang_numbers = @pfaktor.PopulationScope.Split("(")[1].Replace(")", "");
-                            }
-
-                        }
-                        <span>@omfang_text</span><br />
-                        @if (omfang_text.Contains("("))
-                        {
-                            <span class="stats_element">
-                                <span>@omfang_numbers</span>
-                            </span>
-                        }
-
-
-                    </div>
-                    <div class="sideborders">
-                        <h3>Alvorlighetsgrad</h3>
-
-                        @{
-                            var alv_text = @pfaktor.Severity;
-                            var alv_perc = "";
-                            var alv_numbers = "";
-
-                            if (alv_text.Contains("("))
-                            {
-                                // Split out the percentages etc. from the main string.
-                                // Percentages appear to always be enclosed in "()".
-                                alv_text = alv_text.Split("(")[0];
-                                alv_perc = @pfaktor.Severity.Split("(")[1].Replace(")", "");
-                                if (@pfaktor.Severity.Contains("%"))
-                                {
-                                    alv_numbers = alv_perc.Split("%")[1];
-                                    alv_perc = alv_perc.Split("%")[0] + "%";
-                                }
-                            }
-                        }
-                        <span>@alv_text</span><br />
-                        @if (@pfaktor.Severity.Contains("("))
-                        {
-                            <span class="stats_element">
-                                <span>@alv_perc</span>
-                            </span>
-                            <span>@alv_numbers</span>
-                        }
-
-                    </div>
-                    <div>
-                        <h3>Tidspunkt</h3>
-                        @pfaktor.TimeScope
-                    </div>
-                </div>
+                return "active final";
+            }
+            else if (factor.Id.StartsWith(element))
+            {
+                return "active";
             }
         }
 
-    </div> <!-- end pavirkningsboks -->
-</div> <!-- end factors -->
+        return "inactive";
+    }
+
+    void iconChooser(string compare)
+    {
+        @if (@compare == "active" || @compare == "active final")
+        {
+            <span class="material-icons" style="color:darkgreen">
+                done
+            </span>
+        }
+        else if (@compare == "maybe")
+        {
+            <span class="material-icons">
+                pause
+            </span>
+        }
+        else
+        {
+            <span class="material-icons" style="color:darkred">
+                close
+            </span>
+        }
+    }
+
+    void listHeaders(string key, Dictionary<string, object> value)
+    {
+        <span class="text_container">
+            @{iconChooser(activeOrNot(key));}
+            <span class="text_collection">
+                <span class="impact-id">@key</span>
+                @value["title"]
+                @foreach (var factor in Model.ImpactFactors)
+                {
+                    @if (factor.Id == (key))
+                    {
+                        <div class="impact_table">
+                            <div>
+                                <b>Omfang</b>
+                                <span>@factor.PopulationScope</span>
+                            </div>
+                            <div class="sideborders">
+                                <b>Alvorlighetsgrad</b>
+                                <span>@factor.Severity</span><br />
+                            </div>
+                            <div>
+                                <b>Tidspunkt</b>
+                                @factor.TimeScope
+                            </div>
+                        </div>
+                    }
+                }
+
+            </span>
+
+
+        </span>
+    }
+
+
+
+}
+
+@{
+    Dictionary<string, Dictionary<string, object>> impactfactors_json = ViewBag.impactfactors.ToObject<Dictionary<string, Dictionary<string, object>>>();
+
+}
+
+<div class="page_section impact" id="impactfactors">
+    <h2>Påvirkningsfaktorer </h2>
+    <p>
+        Nedenfor listes det opp forskjellige påvirkningsfaktorer som kan gi utslag for rødlisting av arten.
+
+    </p>
+
+    <button id="summary" class="active" onclick="impactlist('summary',this)">Oppsumering</button>
+    <button id="compact" onclick="impactlist('compact',this)">Kompakt liste</button>
+    <button id="full_list" onclick="impactlist('full_list',this)">Full liste</button>
+    <br />
+    <div class="outer">
+        @foreach (var (key, value) in impactfactors_json)
+        {
+
+            <h3 class="@activeOrNot(key)">
+                @{listHeaders(key, value);}
+            </h3>
+            @if (value.ContainsKey("subelement"))
+            {
+                <ul class="second @activeOrNot(key)">
+                    @{
+                        var first_layer = Newtonsoft.Json.Linq.JObject.Parse(value["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                    }
+                    @foreach (var (first_k, first_v) in first_layer)
+                    {
+                        <li class="@activeOrNot(first_k)">
+                            @{listHeaders(first_k, first_v);}
+                            @if (first_v.ContainsKey("subelement"))
+                            {
+                                <ul class="third">
+                                    @{
+                                        var second_layer = Newtonsoft.Json.Linq.JObject.Parse(first_v["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                    }
+                                    @foreach (var (second_k, second_v) in second_layer)
+                                    {
+                                        <li class="@activeOrNot(second_k)">
+                                            @{listHeaders(second_k, second_v);}
+
+                                            @if (second_v.ContainsKey("subelement"))
+                                            {
+                                                <ul class="fourth">
+                                                    @{
+                                                        var third_layer = Newtonsoft.Json.Linq.JObject.Parse(second_v["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                    }
+                                                    @foreach (var (third_k, third_v) in third_layer)
+                                                    {
+                                                        <li class="@activeOrNot(third_k)">
+                                                            @{listHeaders(third_k, third_v);}
+                                                            @if (third_v.ContainsKey("subelement"))
+                                                            {
+                                                                <ul class="fifth">
+                                                                    @{
+                                                                        var fourth_layer = Newtonsoft.Json.Linq.JObject.Parse(third_v["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                                    }
+                                                                    @foreach (var (fourth_k, fourth_v) in fourth_layer)
+                                                                    {
+                                                                        <li class="@activeOrNot(fourth_k)">
+                                                                            @{listHeaders(fourth_k, fourth_v);}
+                                                                        </li>
+                                                                    }
+                                                                </ul>
+                                                            }
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            }
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                </ul>
+            }
+        }
+    </div>
+
+</div>
+
+<script>
+    // See more text by altering css of the clicked element's top parent node
+    document.getElementById('impactfactors').classList.add("summary");
+
+    function impactlist(which, button) {
+        document.getElementById('summary').classList.remove("active");
+        document.getElementById('full_list').classList.remove("active");
+        document.getElementById('compact').classList.remove("active");
+
+        if (which == 'full_list') {
+            document.getElementById('impactfactors').classList.add("full_list");
+            document.getElementById('impactfactors').classList.remove("summary");
+        }
+        if (which == 'compact') {
+            document.getElementById('impactfactors').classList.remove("full_list");
+            document.getElementById('impactfactors').classList.remove("summary");
+        }
+        if (which == 'summary') {
+            document.getElementById('impactfactors').classList.add("summary");
+            document.getElementById('impactfactors').classList.remove("full_list");
+        }
+
+        
+        button.classList.add("active");
+       
+    }
+</script>

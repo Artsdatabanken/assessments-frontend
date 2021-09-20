@@ -7,16 +7,17 @@
 @{
     string popularName = "";
     if (Model.PopularName != string.Empty && !string.IsNullOrEmpty(Model.PopularName))
-        popularName = char.ToUpper(Model.PopularName[0]) + Model.PopularName.Substring(1);    
+        popularName = char.ToUpper(Model.PopularName[0]) + Model.PopularName.Substring(1);
 }
 
-<span class="nameBlock">
+<h1>
     @if (!string.IsNullOrEmpty(Model.PopularName))
-    {
-        <span><b> @popularName </b><i><b>@Model.ScientificName</b></i> @Model.ScientificNameAuthor</span>
-    }
-    else
-    {
-        <span><i><b>@Model.ScientificName</b></i> @Model.ScientificNameAuthor</span>
-    }
-</span>
+    {<b>@popularName </b>}
+    <i><b>@Model.ScientificName</b></i>
+    <span class="subtext_header">
+        @Model.ScientificNameAuthor
+    </span>
+</h1>
+
+ 
+

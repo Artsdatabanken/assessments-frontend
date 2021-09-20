@@ -4,6 +4,11 @@
 }
 
 
+h1{
+    margin-bottom:0;
+
+}
+
 /* PAGE CRUMB*/
 .currentcrumb {
     text-decoration: none !important;
@@ -56,19 +61,36 @@
     /* Page setup */
     .side {
         float: right;
-        width: 200px;
         display: inline-block;
         height: 100%;
-        border-left: 1px solid lightgrey;
         padding: 10px;
         padding-top: 0;
-        margin-left: 10px;
+        padding-left: 20px;
         height:100%;
         width:25%;
     }
 
+    .side button{
+        width:100%;
+    }
+
+    .with_sidebar {
+        width: 75%;
+        padding:20px;
+        padding-top:0;
+        border-right:2px solid lightgrey;
+    }
+
     .content-placer {
-        width: 85%;
+        padding-top: 20px;
+        width: calc(75% - 4px);
+        display: inline-block;
+    }
+
+
+    .sidebarmenu {
+        vertical-align: top;
+        display: inline-block;
     }
 
 }
@@ -91,6 +113,7 @@
     .content-placer {
         display: flex;
         flex-direction: column-reverse;
+        padding-top: 20px;
     }
 }
 
@@ -129,4 +152,48 @@
 
 .species_main_colour {
     fill: #4c4a48 !important;
+}
+
+.page-header{
+    border-bottom:0;
+}
+
+.main button {
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background: #ddd;
+    color: #000;
+    border: none;
+    display: inline-block;
+    border-radius: 2px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    min-height: 45px;
+    margin: 2px;
+    border: 1px solid #a6a6a6;
+    margin-bottom: 10px;
+}
+
+.main button .material-icons {
+    vertical-align: bottom;
+    font-size: 16pt;
+}
+
+.main button.primary {
+    background: #3d3b3a;
+    color: #fff;
+    border: none;
+}
+
+.main button:hover {
+    background: #4c4a48;
+    color: #fff;
 }

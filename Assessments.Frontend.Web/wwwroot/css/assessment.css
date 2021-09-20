@@ -61,57 +61,28 @@
 
 
 /* GRAPHIC ELEMENT FOR CATEGORY */
+.graphic_element.material-icons,
 .graphic_element {
-    display: block;
+    display: inline-block;
     border-radius: 2px;
     padding: 15px;
     margin-right: auto;
     margin-left: auto;
-    font-size: 20pt;
+    font-size: 10pt;
     background: grey;
-    height: 64px;
-    width: 64px;
-    color: white;
-}
-
-.graphic_element .material-icons {
-    font-size: 20pt;
-    line-height: inherit;
     padding: 4px;
-    padding-top: 0px;
+    color: white;
+    width: 26px;
+    height: 26px;
 }
 
-.imaged_paragraph .material-icons {
-    display: block;
-}
-
-.right_text {
-    display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-@media only screen and (min-width: 350px) {
-    .imaged_paragraph {
-        display: flex;
-        align-items: center;
-    }
-
-    .graphic_element {
-        display: inline-block;
-        margin-right:20px;
-    }
-    .right_text {
-        display: inline-block;
-        flex: 1;
-    }
+.graphic_element.material-icons {
+    font-size:12pt;
+    padding:5px;
 }
 
 @media only screen and (max-width: 350px) {
-    .graphic_element {
-        width: 100%;
-        text-align: center;
-    }
+
 }
 
 

@@ -2,23 +2,6 @@
     CODE DIRECTLY OBTAINED FROM "Inline stylesheet RL2015".
 */
 
-
-#risklevellegend {
-    width: 100%;
-    height: auto;
-}
-
-    #risklevellegend img {
-        zoom: 2;
-        display: block;
-        margin: auto;
-        height: auto;
-        max-height: 100%;
-        width: auto;
-        max-width: 100%;
-    }
-
-
 /* CATEGORY BAR */
 
 .category_displayer {
@@ -75,47 +58,6 @@
 }
 
 @media only screen and (min-width: 651px) {
-
-    .category_displayer li {
-        border-top: 4px solid transparent;
-        border-bottom: 4px solid transparent;
-    }
-
-    .category_displayer .category_rl {
-        border-top: 4px solid red;
-    }
-
-    .category_displayer .category_threatened {
-        border-bottom: 4px solid black;
-    }
-
-    .category_displayer .category_rl.start_line:before,
-    .category_displayer .category_rl.stop_line:after {
-        content: "";
-        background: red;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 10px;
-        width: 4px;
-    }
-
-    .category_displayer .category_rl.start_line:before {
-        left: 0;
-    }
-
-    .category_displayer .category_rl.category_threatened.start_line:before,
-    .category_displayer .category_rl.category_threatened.stop_line:after {
-        background: black;
-        bottom: 0;
-        top: auto;
-        right: 0;
-    }
-
-    .category_displayer category_rl.category_threatened.start_line:before {
-        left: 0;
-    }
-
     .topbar_label,
     .bottombar_label {
         position: absolute;
@@ -125,19 +67,9 @@
         padding-right: 10px;
         z-index: 1;
     }
-
-    .topbar_label {
-        top: -10px;
-        left: 120px;
-    }
-
-    .bottombar_label {
-        bottom: -10px;
-        left: 67px;
-    }
 }
 
-@media only screen and (min-width: 940px) and (max-width: 1015px) {
+@media only screen and (min-width: 940px) and (max-width: 1050px) {
     /* Tiny jump where sidebar makes page smaller */
     .category_displayer .category_item {
         width: 59px;
@@ -149,60 +81,45 @@
     }
 }
 
-    @media only screen and (max-width: 650px) {
-        .category_displayer::before {
-            content: "";
-            background: grey;
-            position: absolute;
-            top: 0;
-            left: 40px;
-            height: 100%;
-            width: 5px;
-        }
-
-        .category_displayer {
-            margin-bottom: 10px;
-        }
-
-            .category_displayer li {
-                position: relative;
-                display: block;
-                height: 50px;
-                max-width: 100%;
-                margin: 0px;
-                padding: 0px;
-                padding-left: 10px;
-                border-left: 4px solid transparent;
-            }
-
-            .category_displayer .category_item {
-                width: 50px;
-                height: 50px;
-            }
-
-                .category_displayer .category_item span {
-                    position: absolute;
-                    left: 70px;
-                    color: black;
-                    font-size: 12pt;
-                    text-align: left;
-                    top: 50%;
-                }
-
-        .topbar_label {
-            display: none;
-        }
-
-        .bottombar_label {
-            display: none;
-        }
-
-        .category_displayer .category_rl {
-            border-left: 4px solid red;
-        }
-
-        .category_displayer .category_threatened {
-            border-left: 4px solid black;
-        }
+@media only screen and (max-width: 650px) {
+    .category_displayer::before {
+        content: "";
+        background: grey;
+        position: absolute;
+        top: 0;
+        left: 40px;
+        height: 100%;
+        width: 5px;
     }
+
+    .category_displayer {
+        margin-bottom: 10px;
+    }
+
+    .category_displayer li {
+        position: relative;
+        display: block;
+        height: 50px;
+        max-width: 100%;
+        margin: 0px;
+        padding: 0px;
+        padding-left: 10px;
+        border-left: 4px solid transparent;
+    }
+
+    .category_displayer .category_item {
+        width: 50px;
+        height: 50px;
+    }
+
+    .category_displayer .category_item span {
+        position: absolute;
+        left: 70px;
+        color: black;
+        font-size: 12pt;
+        text-align: left;
+        top: 50%;
+    }
+       
+}
 

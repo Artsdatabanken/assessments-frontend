@@ -29,18 +29,18 @@
         <!-- View controls -->
         <div class="controls">
             <div class="controls_left">
-                    <button @GetViewClass(Model.View, "list")>
-                        <input class="collapse_checkbox" id="button-list" @ViewCheck("View", Model.View, "list") onchange="this.form.submit();" type="radio" />
+                    <button @GetViewClass(Model.View, "list") type="submit">
+                        <input class="collapse_checkbox" id="button-list" @ViewCheck("View", Model.View, "list") type="radio" />
                         <label for="button-list" id="listview">Vis som liste 
                             <span class="material-icons">list</span></label>
                     </button>
-                    <button @GetViewClass(Model.View, "grid")>
-                        <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") onchange="this.form.submit();" type="radio" />
+                    <button @GetViewClass(Model.View, "grid") type="submit">
+                        <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") type="radio" />
                         <label for="button-grid" id="gridview">Vis som grid
                             <span class="material-icons">grid_on</span></label>
                     </button>
-                    <button @GetViewClass(Model.View, "stat")>
-                        <input class="collapse_checkbox" id="button-stat" @ViewCheck("View", Model.View, "stat") onchange="this.form.submit();" type="radio" />
+                    <button @GetViewClass(Model.View, "stat") type="submit">
+                        <input class="collapse_checkbox" id="button-stat" @ViewCheck("View", Model.View, "stat") type="radio" />
                         <label for="button-stat" id="statsview">Vis statistikk
                             <span class="material-icons">bar_chart</span></label>
                     </button>

@@ -53,36 +53,62 @@ li.checkbox {
 }
 
 @media only screen and (max-width: 650px) {
-  .controls {
-    background-color: #fff;
-  }
+    .controls {
+        background-color: #fff;
+        display: flex;
+        flex-wrap: nowrap;
+        max-width:100%;
+    }
 
-  .controls_right {
-    display: block;
-  }
+    .controls_right {
+        padding-left: 5px;
+    }
 
-  .controls_left, .controls_right {
-    display: flex;
-    flex-direction: column;
-    white-space: nowrap;
-  }
+    .controls_left {
+        padding-right: 5px;
+    }
 
-  .controls button {
-    margin: 3px;
-  }
+    .controls_left, .controls_right {
+        display: flex;
+        flex-wrap:nowrap;
+        
+    }
 
-  .controls button>label {
-    display: flex;
+    .controls button {
+        margin: 3px;
+        margin: 0;
+        flex: 1;
+    }
+
+    .controls button > label {
+        /*display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-  }
+    justify-content: space-between;*/
+    }
 
   .list-search {
     margin: 0;
     border-bottom: 1px solid lightgray;
     padding: 10px 0;
+    background:lightgrey;
+    width:100%;
+    padding:10px;
   }
+
+.searchfield {
+    display: flex;
+    width: 100%;
+    vertical-align: top;
+    margin: 0;
+    height: 45px;
+}
+
+.searchfield button {
+    width: 100px;
+    vertical-align: top;
+    margin: 0;
+}
 
   .search-and-filter {
     position: sticky;
@@ -191,3 +217,4 @@ input[type=checkbox]:checked#show_extinct~.filter_extinct {
 .filter_criteria, .filter_extinct {
     display: none;
 }
+

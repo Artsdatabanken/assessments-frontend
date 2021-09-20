@@ -20,51 +20,67 @@
 
     string GetViewClass(string element, string value)
     {
-        return element == value ? "class=current_view" : String.Empty;
+        return element == value ? "class=active" : String.Empty;
     }
 }
 
 <div class="search-and-filter">
+
     <form asp-action="Index2021" method="get">
+        <button class="btn" type="submit" name="Export" value="true">Eksport</button>
         <!-- View controls -->
         <div class="controls">
             <div class="controls_left">
-                    <button @GetViewClass(Model.View, "list") type="submit">
-                        <input class="collapse_checkbox" id="button-list" @ViewCheck("View", Model.View, "list") type="radio" />
-                        <label for="button-list" id="listview">Vis som liste 
-                            <span class="material-icons">list</span></label>
-                    </button>
-                    <button @GetViewClass(Model.View, "grid") type="submit">
-                        <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") type="radio" />
-                        <label for="button-grid" id="gridview">Vis som grid
-                            <span class="material-icons">grid_on</span></label>
-                    </button>
-                    <button @GetViewClass(Model.View, "stat") type="submit">
-                        <input class="collapse_checkbox" id="button-stat" @ViewCheck("View", Model.View, "stat") type="radio" />
-                        <label for="button-stat" id="statsview">Vis statistikk
-                            <span class="material-icons">bar_chart</span></label>
-                    </button>
+                <button @GetViewClass(Model.View, "list") type="submit">
+                    <input class="collapse_checkbox" id="button-list" @ViewCheck("View", Model.View, "list") type="radio" />
+                    <label for="button-list" id="listview">
+                        Vis liste
+                        <span class="material-icons">list</span>
+                    </label>
+                </button>
+                <button @GetViewClass(Model.View, "grid") type="submit">
+                    <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") type="radio" />
+                    <label for="button-grid" id="gridview">
+                        Vis grid
+                        <span class="material-icons">grid_on</span>
+                    </label>
+                </button>
+                <button @GetViewClass(Model.View, "stat") type="submit">
+                    <input class="collapse_checkbox" id="button-stat" @ViewCheck("View", Model.View, "stat") type="radio" />
+                    <label for="button-stat" id="statsview">
+                        Vis statistikk
+                        <span class="material-icons">bar_chart</span>
+                    </label>
+                </button>
             </div>
             <div class="controls_right">
-                <button class="toggle_search" type="button"><label class="show_search" for="show_search">Åpne søk 
-                    <span class="material-icons">search</span></label></button>
-                <button class="toggle_filter" type="button"><label class="show_filters" for="show_filters">Åpne filter
-                    <span class="material-icons">filter_alt</span></label></button>
+                <button class="toggle_search" type="button">
+                    <label class="show_search" for="show_search">
+                        Åpne søk
+                        <span class="material-icons">search</span>
+                    </label>
+                </button>
+                <button class="toggle_filter" type="button">
+                    <label class="show_filters" for="show_filters">
+                        Åpne filter
+                        <span class="material-icons">filter_alt</span>
+                    </label>
+                </button>
             </div>
         </div>
         <!-- Search -->
         <div>
             <input class="collapse_checkbox" id="show_search" type="checkbox" />
             <div class="list-search">
-                <div>
+                <div class="searchfield">
                     <input asp-for="Name" placeholder="Søk i vitenskapelig navn" />
-                    <button class="btn" type="submit">
+                    <button class="primary" type="submit">
                         <span class="material-icons">
                             search
                         </span>
                         Søk
                     </button>
-                    <button class="btn" type="submit" name="Export" value="true">Eksport</button>
+
                 </div>
             </div>
             <div class="filters">
@@ -82,7 +98,7 @@
                                     {
                                         <li class="checkbox" style="margin-top: 0;">
                                             <label class="checkbox">
-                                                <input type="checkbox" @CategoryCheck("Area", Model.Area, area.Value) onclick="this.form.submit();"/>@area.Key
+                                                <input type="checkbox" @CategoryCheck("Area", Model.Area, area.Value) onclick="this.form.submit();" />@area.Key
                                             </label>
                                         </li>
                                     }
@@ -93,13 +109,13 @@
                         <div class="filter_group">
                             <label for="show_category"><h4>@SearchAndFilter.SearchChooseCategory</h4></label>
                             <input class="collapse_checkbox" id="show_category" @CategoryCheck("IsCheck", Model.IsCheck, "Category") type="checkbox" />
-                            <div class="filter_category" >
+                            <div class="filter_category">
                                 <ul>
                                     @foreach (var category in AllCategories)
                                     {
                                         <li class="checkbox" style="margin-top: 0;">
                                             <label class="checkbox">
-                                                <input type="checkbox" @CategoryCheck("Category", Model.Category, category) onclick="this.form.submit();"/>@category
+                                                <input type="checkbox" @CategoryCheck("Category", Model.Category, category) onclick="this.form.submit();" />@category
                                             </label>
                                         </li>
                                     }
@@ -119,54 +135,57 @@
                         </div>
 
                         <div class="filter_group">
-                            <label for="show_region"><h4>Regioner og havområder</h4></span>
-                            <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
-                            <div class="filter_region">
-                                <ul>
-                                    @foreach (var region in AllRegions)
-                                    {
-                                        <li class="checkbox">
-                                            <label>
-                                                <input type="checkbox" @CategoryCheck("Regions", Model.Regions, region.Key) onclick="this.form.submit();" />@region.Value
-                                            </label>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
+                            <label for="show_region">
+                                <h4>Regioner og havområder</h4></span>
+                                <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
+                                <div class="filter_region">
+                                    <ul>
+                                        @foreach (var region in AllRegions)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" @CategoryCheck("Regions", Model.Regions, region.Key) onclick="this.form.submit();" />@region.Value
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
                         </div>
 
                         <div class="filter_group">
-                            <label for="show_european_population"><h4>Andel av europeisk populasjon</h4></span>
-                            <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
-                            <div class="filter_european_population">
-                                <ul>
-                                    @foreach (var pop in AllEuroPop)
-                                    {
-                                        <li class="checkbox">
-                                            <label>
-                                                <input type="checkbox" @CategoryCheck("EuroPop", Model.EuroPop, pop.Key) onclick="this.form.submit();" />@pop.Value
-                                            </label>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
+                            <label for="show_european_population">
+                                <h4>Andel av europeisk populasjon</h4></span>
+                                <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
+                                <div class="filter_european_population">
+                                    <ul>
+                                        @foreach (var pop in AllEuroPop)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" @CategoryCheck("EuroPop", Model.EuroPop, pop.Key) onclick="this.form.submit();" />@pop.Value
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
                         </div>
 
                         <div class="filter_group">
-                            <label for="show_criteria"><h4>@SearchAndFilter.SearchChooseCriteria</h4></span>
-                            <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
-                            <div class="filter_criteria">
-                                <ul>
-                                    @foreach (var criteria in AllCriterias)
-                                    {
-                                        <li class="checkbox">
-                                            <label>
-                                                <input type="checkbox" @CategoryCheck("Criterias", Model.Criterias, criteria.Key) onclick="this.form.submit();" />@criteria.Key - @criteria.Value
-                                            </label>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
+                            <label for="show_criteria">
+                                <h4>@SearchAndFilter.SearchChooseCriteria</h4></span>
+                                <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
+                                <div class="filter_criteria">
+                                    <ul>
+                                        @foreach (var criteria in AllCriterias)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" @CategoryCheck("Criterias", Model.Criterias, criteria.Key) onclick="this.form.submit();" />@criteria.Key - @criteria.Value
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
                         </div>
 
                         <div class="filter_group">

@@ -4,14 +4,13 @@
 @using X.PagedList.Web.Common
 
 <partial name="/Views/Redlist/List/partials/_Breadcrumb.cshtml" />
+<partial name="/Views/Shared/_PageMenu.cshtml" />
 
 <div class="content-placer bigmid">
 
     <div class="mid-content">
         <partial name="/Views/Redlist/List/partials/_Header.cshtml" />
         <partial name="/Views/Redlist/List/partials/_Introduction.cshtml" />
-
-
         <h3>
             @Model.Redlist2021ResultsCount
         </h3>
@@ -32,10 +31,5 @@
             UlElementClasses = new[] { "pagination" },
             LiElementClasses = new[] { "page-item" }
         })
-
-
-
-
-
     </div>
 </div>

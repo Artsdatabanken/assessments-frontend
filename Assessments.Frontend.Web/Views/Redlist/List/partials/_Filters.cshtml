@@ -88,7 +88,16 @@
                 <div class="filters_scrollable">
                     <div class="filter_groups">
                         <label class="show_filters"><h3 class="toggle_filter">Filter</h3></label>
-                        <input type="reset" value="@SearchAndFilter.ResetAllFilters" />
+                        <div class="close_reset_filter">
+                            <a asp-controller="Redlist" asp-action="Index2021" asp-route-IsCheck=Model.IsCheck>
+                                <button>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></button></a>
+                            <button class="close_filters">
+                                <label for="show_filters">
+                                    Lukk filter
+                                    <span class="material-icons">close</span>
+                                </label>
+                            </button>
+                        </div>
                         <div class="filter_group">
                             <label for="show_area"><h4>@SearchAndFilter.SearchChooseArea</h4></label>
                             <input class="collapse_checkbox" id="show_area" @CategoryCheck("IsCheck", Model.IsCheck, "Area") type="checkbox" />

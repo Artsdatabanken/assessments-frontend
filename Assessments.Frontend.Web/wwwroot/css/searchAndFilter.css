@@ -18,11 +18,11 @@ li.checkbox {
     font-weight: bold;
 }
 
-.controls span {
+.controls span, a>button, {
   pointer-events: none;
 }
 
-.controls_right {
+.controls_right, .close_reset_filter>.close_filters {
   display: none;
 }
 
@@ -53,39 +53,39 @@ li.checkbox {
 }
 
 @media only screen and (max-width: 650px) {
-    .controls {
-        background-color: #fff;
-        display: flex;
-        flex-wrap: nowrap;
-        max-width:100%;
-    }
+  .controls {
+      background-color: #fff;
+      display: flex;
+      flex-wrap: nowrap;
+      max-width:100%;
+  }
 
-    .controls_right {
-        padding-left: 5px;
-    }
+  .controls_right {
+      padding-left: 5px;
+  }
 
-    .controls_left {
-        padding-right: 5px;
-    }
+  .controls_left {
+      padding-right: 5px;
+  }
 
-    .controls_left, .controls_right {
-        display: flex;
-        flex-wrap:nowrap;
-        
-    }
+  .controls_left, .controls_right {
+      display: flex;
+      flex-wrap:nowrap;
+      
+  }
 
-    .controls button {
-        margin: 3px;
-        margin: 0;
-        flex: 1;
-    }
+  .controls button {
+      margin: 3px;
+      margin: 0;
+      flex: 1;
+  }
 
-    .controls button > label {
-        /*display: flex;
+  .close_reset_filter {
+    display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;*/
-    }
+    justify-content: space-evenly;
+    width: 100%;
+  }
 
   .list-search {
     margin: 0;
@@ -96,19 +96,19 @@ li.checkbox {
     padding:10px;
   }
 
-.searchfield {
-    display: flex;
-    width: 100%;
-    vertical-align: top;
-    margin: 0;
-    height: 45px;
-}
+  .searchfield {
+      display: flex;
+      width: 100%;
+      vertical-align: top;
+      margin: 0;
+      height: 45px;
+  }
 
-.searchfield button {
-    width: 100px;
-    vertical-align: top;
-    margin: 0;
-}
+  .searchfield button {
+      width: 100px;
+      vertical-align: top;
+      margin: 0;
+  }
 
   .search-and-filter {
     position: sticky;
@@ -136,6 +136,10 @@ li.checkbox {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
+  }
+
+  input[type=checkbox]:checked#show_filters~.filters_scrollable>.filter_groups>div>button {
+    display: block;
   }
 
   input[type=checkbox]:checked#show_search~.list-search {

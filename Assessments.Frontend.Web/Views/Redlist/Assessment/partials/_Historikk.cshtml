@@ -1,10 +1,4 @@
 ﻿@model SpeciesAssessment2021
-@* SEE example by searching species Carex elata *@
-
-@{
-    SpeciesAssessment2021 assessment = Model;
-}
-
 
 @functions{
     public string categoryDescription(string category)
@@ -18,51 +12,47 @@
     }
 }
 
+<h3>Historikk</h3>
+<ul class="history_list">
 
-<div class="page_section">
+    <li>
+        <span class="text_content">
+            <h4>2021</h4>
+            <partial name="/Views/Shared/_CategoryTags.cshtml" />
+            @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
+            {
+                <span>Arten er vurdert for første gang i 2021.</span>
+            }
+        </span>
+    </li>
 
 
-    <h2>Historikk</h2>
-    <div class="history">
-        <h3>Rødlista 2021</h3>
-        <partial name="/Views/Shared/_CategoryTags.cshtml" />
-    </div>
-
-
-    @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
+    @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
     {
-        <span>Arten er vurdert for første gang i 2021.</span>
-    }
-    else
-    {
-
-        @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
-        {
-            <h3>Rødlista 2015</h3>
-            <span  class="graphic_element @Model.ImportInfo.Kategori2015">@Model.ImportInfo.Kategori2015</span> 
-            <b> @categoryDescription(Model.ImportInfo.Kategori2015)</b> <br />
+        <li class="withlink">
+            <span class="text_content">
+            <h4>Rødlista 2015</h4>
+            <span class="graphic_element @Model.ImportInfo.Kategori2015">@Model.ImportInfo.Kategori2015</span>
+            <b> @categoryDescription(Model.ImportInfo.Kategori2015)</b> 
+            </span>
             <a target="_blank" href="@Model.ImportInfo.Url2015">
-                Se vurdering  <span class="material-icons">open_in_new</span>
+                Gå til vurdering<span class="material-icons">open_in_new</span>
             </a>
-
-
-        }
-
-        <br />
-        @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
-        {
-            <h3>Rødlista 2010</h3>
-            <span  class="graphic_element @Model.ImportInfo.Kategori2010">@Model.ImportInfo.Kategori2010</span>
-    <b> @categoryDescription(Model.ImportInfo.Kategori2010)</b><br />
-            <a target="_blank" href="@Model.ImportInfo.Url2010">
-                Se vurdering  <span class="material-icons">open_in_new</span>
-            </a>
-
-        }
-        <br />
-
-        <hr />
+        </li>
     }
 
+    @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
+    {
+    <li class="withlink">
+        <span class="text_content">
+            <h4>Rødlista 2010</h4>
+            <span class="graphic_element @Model.ImportInfo.Kategori2010">@Model.ImportInfo.Kategori2010</span>
+            <b> @categoryDescription(Model.ImportInfo.Kategori2010)</b>
 
-</div><!-- End section -->
+        </span>
+        <a target="_blank" href="@Model.ImportInfo.Url2010">
+            Gå til vurdering<span class="material-icons">open_in_new</span>
+        </a>
+    </li>
+    }
+</ul>

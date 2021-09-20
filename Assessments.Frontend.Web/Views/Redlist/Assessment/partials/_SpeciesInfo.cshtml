@@ -11,7 +11,16 @@
 }
 
 <div class="sidebar_image_info">
+    <button class="secondary">
+        <span class="material-icons">
+            mediation
+        </span>
+        Gå til taxonsiden
+    </button>
 
+    <partial name="/Views/Redlist/Assessment/partials/_Historikk.cshtml" />
+
+    <h3>Taksonomi</h3>
     @if (@Model.VurdertVitenskapeligNavnHierarki != null)
     {
         <p class="taxonomy">

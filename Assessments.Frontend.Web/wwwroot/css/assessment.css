@@ -682,3 +682,31 @@
 .page-header h1 {
     margin-top: 0;
 }
+
+.history_list li {
+    display: flex;
+    font-size: 12pt;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    padding: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top:-1px;
+    justify-content:space-between;
+}
+
+.history_list .text_content {
+    display: inline-block;
+}
+
+
+.history_list li a {
+    display:inline-block;
+    max-width: 40px;
+    font-size: 7pt;
+    text-decoration: none;
+    background: lightgrey;
+    color: black;
+    padding: 4px;
+    text-align: center;
+}

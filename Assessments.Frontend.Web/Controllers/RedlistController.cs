@@ -120,8 +120,10 @@ namespace Assessments.Frontend.Web.Controllers
             ViewBag.categories = await GetResource("wwwroot/json/categories.json");
             
             ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
-            
+
             ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
+
+            ViewBag.impactfactors = await GetResource("wwwroot/json/impactfactors.json");
 
             return View("Assessment/SpeciesAssessment2021", assessment);
         }
@@ -148,6 +150,10 @@ namespace Assessments.Frontend.Web.Controllers
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
         {
+
+            // STATISTICS.
+            // INPUT dataset is an already filtered list, based on active filters in the view. 
+
             // CATEGORY
             var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new
             {
@@ -156,7 +162,14 @@ namespace Assessments.Frontend.Web.Controllers
 
             viewModel.Statistics.Categories = categories.ToDictionary(x => x.Key, x => x.Value);
 
-            // Species main HABITAT
+
+
+            // For the following statistics, the active input should be filtered by only redlisted assessments. 
+            // This needs to be re-inforced in the frontend-solution
+
+
+
+            // SPECIES MAIN HABITAT
 
             // Fetch all habitat lists, flatten the lists and make it distinct to obtain all currently possible habitat names.
             var habitatNames = data.Select(x => x.MainHabitat).SelectMany(x => x).Distinct().ToList(); 
@@ -165,15 +178,11 @@ namespace Assessments.Frontend.Web.Controllers
             var habitatStats = habitatNames.Select(name => new KeyValuePair<string, int>(name, data.Count(x => x.MainHabitat.Contains(name))))
                 .ToDictionary(x => x.Key, x => x.Value);
             viewModel.Statistics.Habitat = habitatStats;
-            /*
-            for (int i = 0; i < habitatNames.Count; ++i)
-            {
-                Console.WriteLine(habitatNames[i] + ": " + habitatStats[habitatNames[i]].ToString());
-            }*/
+
 
             // REGION
             var regionNames = data.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().ToList();
-            var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data.Select(x => x.RegionOccurrences).SelectMany(x => x).Where(x => x.Fylke == name && (x.State ==0 || x.State==1)).Count()))
+            var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data.Select(x => x.RegionOccurrences).SelectMany(x => x).Where(x => x.Fylke == name && x.State ==0).Count()))
                 .ToDictionary(x => x.Key, x => x.Value);
             viewModel.Statistics.Region = regionStats;
 
@@ -185,10 +194,16 @@ namespace Assessments.Frontend.Web.Controllers
             // CRITERIA
 
             var criteriaStrings = data.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized)).Select(x => x.CriteriaSummarized);
-
             var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
-
             viewModel.Statistics.Criteria = criteria.ToDictionary(x => x.Key, x => x.Value);
+
+            //Example on how to print out while working
+            /*
+            for (int i = 0; i < habitatNames.Count; ++i)
+            {
+                Console.WriteLine(habitatNames[i] + ": " + habitatStats[habitatNames[i]].ToString());
+            }
+            */
         }
 
         private static async Task<JObject> GetResource(string resourcePath)

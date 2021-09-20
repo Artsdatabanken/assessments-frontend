@@ -47,7 +47,7 @@
                     </span>
 
                     <div class="element_icon">
-                        @if (speciesgroup[item.SpeciesGroup]["image"] != null)
+                        @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
                         {
                             <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
                         }

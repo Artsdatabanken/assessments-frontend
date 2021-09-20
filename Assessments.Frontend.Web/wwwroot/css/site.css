@@ -193,6 +193,12 @@ h1{
     border: none;
 }
 
+.main button.active {
+    background: #8b0000;
+    color: #fff;
+    border: none;
+}
+
 .main button:hover {
     background: #4c4a48;
     color: #fff;

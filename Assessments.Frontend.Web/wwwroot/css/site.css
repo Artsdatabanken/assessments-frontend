@@ -83,6 +83,14 @@ h1{
 
     .content-placer {
         padding-top: 20px;
+        width: calc(75% - 4px);
+        display: inline-block;
+    }
+
+
+    .sidebarmenu {
+        vertical-align: top;
+        display: inline-block;
     }
 
 }
@@ -105,6 +113,7 @@ h1{
     .content-placer {
         display: flex;
         flex-direction: column-reverse;
+        padding-top: 20px;
     }
 }
 

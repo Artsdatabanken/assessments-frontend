@@ -2,35 +2,36 @@
 @{
     ViewBag.Title = Model.ScientificName;
     var naturtypehovedenhet = Model.MainHabitat;
-    
 
-        string geografi = Model.AssessmentArea;
 
-        if (geografi == "N")
+    string geografi = Model.AssessmentArea;
+
+    if (geografi == "N")
+    {
+        geografi = "Norge";
+    }
+    else if (geografi == "S")
+    {
+        geografi = "Svalbard";
+        if (@Model.ExpertCommittee == "Pattedyr (Svalbard)")
         {
-            geografi = "Norge";
+            geografi = "Svalbard med kyst";
         }
-        else if (geografi == "S")
-        {
-            geografi = "Svalbard";
-            if (@Model.ExpertCommittee == "Pattedyr (Svalbard)")
-            {
-                geografi = "Svalbard med kyst";
-            }
-        }
-
-    
+    }
 }
 
 <partial name="/Views/Redlist/Assessment/partials/_Breadcrumb.cshtml" />
+<partial name="/Views/Shared/_PageMenu.cshtml" />
 
 <div class="content-placer bigmid">
+
     <div class="side">
         <button class="secondary">
             <span class="material-icons">
                 mediation
             </span>
-        Gå til taxonsiden</button>
+            Gå til taxonsiden
+        </button>
         <partial name="/Views/Redlist/Assessment/partials/_SpeciesInfo.cshtml" />
         <div class="history">
             <p>Tidligere historikk</p>

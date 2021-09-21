@@ -117,14 +117,18 @@
 
 /* CRITERIA CATEGORY GRAPH */
 
+.criteria_results{
+    padding:20px;
+}
+
 .category_graph {
-    width: 300px;
+    width: 500px;
     max-width: 100%;
     height: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
     display: block;
     font-size: 0;
-    margin-top: 50px;
+    margin-top: 30px;
     position: relative;
     border-top: 2px solid black;
 }
@@ -173,7 +177,8 @@
     text-align: center;
     font-size: 10pt;
     margin-top: -1px;
-    background: #e0e5e7;
+    padding:2px;
+    padding-top:0;
 }
 
 .category_graph .dot_dot {
@@ -188,22 +193,28 @@
     margin-top: 23px;
 }
 
-.category_graph .indicator_dot:nth-child(3) .indicator_text {
-    margin-top: -18px;
+.category_graph .indicator_text.max,
+.category_graph .indicator_text.calc {
+    width: 100px;
+    margin-left: -98px;
+    text-align: right;
+    border-right: 2px solid black;
 }
 
-
-.category_graph .indicator_text.max {
-    width: 48px;
-    margin-left: -48px;
-}
-
+.category_graph .indicator_text.prob,
 .category_graph .indicator_text.min {
-    width: 48px;
-    margin-left: 2px;
+    width: 100px;
+    text-align: left;
+    border-left: 2px solid black;
+    margin-left: 0px;
 }
 
 
+.category_graph .indicator_text.calc ,
+.category_graph .indicator_text.prob {
+    margin-top: -18px;
+      
+}
 
 
 
@@ -611,8 +622,13 @@
 
 /*criteria*/
 
-.criteria_element.active h4{
-    color:black;
+.criteria_element h4 {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.criteria_element.active h4 {
+    color: black
 }
 
 .criteria_options {
@@ -623,20 +639,22 @@
     color:grey;
 }
 
-    .criteria .inactive .criteria_description,
-    .criteria .inactive .criteria_options,
-    .criteria .inactive .criteria_subcriteria,
-    .criteria .inactive .listitem_text_field p,
-    .criteria .inactive .listitem_text_field .category_graph{
-        display: none;
-    }
-
-.listitem_criteria {
-    display: flex;
+.criteria .inactive .criteria_description,
+.criteria .inactive .criteria_options,
+.criteria .inactive .criteria_subcriteria,
+.criteria .inactive .listitem_text_field p,
+.criteria .inactive .criteria_results {
+    display: none;
 }
 
-.listitem_text_field{
-    padding-left:10px;
+.listitem_criteria {
+    display: block;
+}
+
+.listitem_text_field {
+    display: inline-block;
+    width: calc(100% - 30px);
+    vertical-align: top;
 }
 
 .subsub_list{

@@ -6,6 +6,7 @@
     var AllCriterias = ViewBag.AllCriterias;
     var AllEuroPop = ViewBag.AllEuroPop;
     var AllRegions = ViewBag.AllRegions;
+    Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
     Dictionary<string, Dictionary<string, string>> AllSpeciesGroups = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
 }
 @functions{
@@ -145,57 +146,71 @@
                         </div>
 
                         <div class="filter_group">
-                            <label for="show_species_groups">
-                                <h4>Artsgruppe</h4></span></label>
-                                <input type="checkbox" class="collapse_checkbox" id="show_species_groups" @CategoryCheck("IsCheck", Model.IsCheck, "SpeciesGroups") />
-                                <div class="filter_species_groups">
-                                    <ul>
-                                        @foreach (var species in AllSpeciesGroups)
-                                        {
-                                            <li class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" @CategoryCheck("SpeciesGroups", Model.SpeciesGroups, species.Key) onclick="this.form.submit();" />@species.Key
-                                                </label>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
+                            <label for="show_species_groups"><h4>Artsgruppe</h4></span></label>
+                            <input type="checkbox" class="collapse_checkbox" id="show_species_groups" @CategoryCheck("IsCheck", Model.IsCheck, "SpeciesGroups") />
+                            <div class="filter_species_groups">
+                                <ul>
+                                    @foreach (var species in AllSpeciesGroups)
+                                    {
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" @CategoryCheck("SpeciesGroups", Model.SpeciesGroups, species.Key) onclick="this.form.submit();" />@species.Key
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="filter_group">
-                            <label for="show_region">
-                                <h4>Regioner og havområder</h4></span></label>
-                                <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
-                                <div class="filter_region">
-                                    <ul>
-                                        @foreach (var region in AllRegions)
-                                        {
-                                            <li class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" @CategoryCheck("Regions", Model.Regions, region.Key) onclick="this.form.submit();" />@region.Value
-                                                </label>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
+                            <label for="show_habitat"><h4>Hovedhabitat</h4></span></label>
+                            <input type="checkbox" class="collapse_checkbox" id="show_habitat" @CategoryCheck("IsCheck", Model.IsCheck, "Habitat") />
+                            <div class="filter_habitat">
+                                <ul>
+                                    @foreach (var habitat in AllHabitats)
+                                    {
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" @CategoryCheck("Habitats", Model.Habitats, habitat.Key) onclick="this.form.submit();" />@habitat.Value["name"]
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="filter_group">
-                            <label for="show_european_population">
-                                <h4>Andel av europeisk populasjon</h4></span></label>
-                                <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
-                                <div class="filter_european_population">
-                                    <ul>
-                                        @foreach (var pop in AllEuroPop)
-                                        {
-                                            <li class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" @CategoryCheck("EuroPop", Model.EuroPop, pop.Key) onclick="this.form.submit();" />@pop.Value
-                                                </label>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
+                            <label for="show_region"><h4>Regioner og havområder</h4></span></label>
+                            <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
+                            <div class="filter_region">
+                                <ul>
+                                    @foreach (var region in AllRegions)
+                                    {
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" @CategoryCheck("Regions", Model.Regions, region.Key) onclick="this.form.submit();" />@region.Value
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="filter_group">
+                            <label for="show_european_population"><h4>Andel av europeisk populasjon</h4></span></label>
+                            <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
+                            <div class="filter_european_population">
+                                <ul>
+                                    @foreach (var pop in AllEuroPop)
+                                    {
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" @CategoryCheck("EuroPop", Model.EuroPop, pop.Key) onclick="this.form.submit();" />@pop.Value
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="filter_group">

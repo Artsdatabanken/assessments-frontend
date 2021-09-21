@@ -18,7 +18,7 @@ li.checkbox {
     font-weight: bold;
 }
 
-.controls span, a>button, {
+.controls span, a>button {
   pointer-events: none;
 }
 
@@ -27,29 +27,29 @@ li.checkbox {
 }
 
 @media only screen and (max-width: 750px) {
-    .filter_groups {
-        display: flex;
-        flex-wrap: wrap;
-    }
+  .filter_groups {
+      display: flex;
+      flex-wrap: wrap;
+  }
 
-    .filters h3{
-        flex:none;
-        width:100%;
-        padding: 10px;
-    }
+  .filters h3{
+      flex:none;
+      width:100%;
+      padding: 10px;
+  }
 
-    .filter_group {
-        display: inline-block;
-        max-width: 250px;
-        vertical-align: top;
-        padding: 10px;
-        flex:1;
-        justify-content:space-evenly;
-    }
+  .filter_group {
+      display: inline-block;
+      max-width: 250px;
+      vertical-align: top;
+      padding: 10px;
+      flex:1;
+      justify-content:space-evenly;
+  }
 
-    .filters {
-        background: #f7f7f7;
-    }
+  .filters {
+      background: #f7f7f7;
+  }
 }
 
 @media only screen and (max-width: 650px) {
@@ -192,6 +192,7 @@ input[type=checkbox]:checked#show_category~.filter_category,
 input[type=checkbox]:checked#show_region~.filter_region,
 input[type=checkbox]:checked#show_european_population~.filter_european_population,
 input[type=checkbox]:checked#show_criteria~.filter_criteria,
+input[type=checkbox]:checked#show_habitat~.filter_habitat,
 input[type=checkbox]:checked#show_extinct~.filter_extinct,
 input[type=checkbox]:checked#show_species_groups~.filter_species_groups
  {
@@ -204,6 +205,7 @@ input[type=checkbox]:checked#show_area~.filter_area,
 .filter_european_population,
 .filter_criteria,
 .filter_extinct,
+.filter_habitat,
 .filter_species_groups,
 .collapse_checkbox {
     display: none;

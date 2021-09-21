@@ -256,7 +256,7 @@
 
                                         <div class="listitem_text_field">
 
-                                            <h5>@k <span>@v["title"]</span></h5><br />
+                                            <h5>@k <span>@v["title"]</span></h5>
 
                                             @if (v.ContainsKey("description"))
                                             {
@@ -267,52 +267,73 @@
                                             @if (quantile != null) // for denne har vi en slik
                                             {
 
-                                        <p class="quantile">
-                                            @if (v.ContainsKey("content"))
-                                            {
-                                                <span class="temp">@v["content"]</span><br />
-                                            }
-                                            @{
-                                                var json_quantile = Newtonsoft.Json.Linq.JObject.Parse(v["content"].ToString()).ToObject<Dictionary<string, object>>();
-                                                string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
-                                            }
+                                                <p class="quantile">
+                                                    @if (v.ContainsKey("content"))
+                                                    {
+                                                        <span class="temp">@v["content"]</span><br />
+                                                    }
+                                                    @{
+                                                        var json_quantile = Newtonsoft.Json.Linq.JObject.Parse(v["content"].ToString()).ToObject<Dictionary<string, object>>();
+                                                        string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
+                                                    }
 
+                                                    @if (!quantile.Punktestimat) // hvis ikke punktestimat - er det intervall...
+                                                    {
+                                                        <span> @ViewBag.glossary["oneliners"]["max"] @quantile.Maxintervall @unit</span>
+                                                        <span>@ViewBag.glossary["oneliners"]["min"] @quantile.Minintervall @unit</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>@ViewBag.glossary["oneliners"]["max"] @quantile.Max @unit</span>
+                                                        <span>@ViewBag.glossary["oneliners"]["min"] @quantile.Min @unit</span>
+                                                    }
 
+                                                    <span>@ViewBag.glossary["oneliners"]["probable"] @quantile.Probable @unit</span>
+                                                    <span> @ViewBag.glossary["oneliners"]["calculated"] @quantile.Calculated @unit</span>
+                                                    <span>@ViewBag.glossary["oneliners"]["conclusion"]</span>
+                                                </p>
 
-                                            @if (!quantile.Punktestimat) // hvis ikke punktestimat - er det intervall...
-                                            {
-                                                <span> @ViewBag.glossary["oneliners"]["max"] @quantile.Maxintervall @unit</span>
-                                                <span>@ViewBag.glossary["oneliners"]["min"] @quantile.Minintervall @unit</span>
-                                            }
-                                            else
-                                            {
-                                                <span>@ViewBag.glossary["oneliners"]["max"] @quantile.Max @unit</span>
-                                                <span>@ViewBag.glossary["oneliners"]["min"] @quantile.Min @unit</span>
-
-                                            }
-
-                                            <span>@ViewBag.glossary["oneliners"]["probable"] @quantile.Probable @unit</span>
-
-                                            <span>@ViewBag.glossary["oneliners"]["quantile"] @quantile.Quantile @unit</span>
-
-
-                                            @if (json_quantile.ContainsKey("threshold"))
-                                            {
-
-
-                                                var threshold_list = Newtonsoft.Json.Linq.JObject.Parse(json_quantile["threshold"].ToString()).ToObject<Dictionary<string, int>>();
-
-                                                foreach (var (category, threshold) in threshold_list)
+                                                @if (json_quantile.ContainsKey("threshold"))
                                                 {
-                                                    <span>@category >= @threshold</span>
-                                                }
+                                                    var thresholds = Newtonsoft.Json.Linq.JObject.Parse(json_quantile["threshold"].ToString()).ToObject<Dictionary<string, int>>();
 
-                                            }
-                                            <span> Konklusjon: @quantile.Calculated @unit</span>
-                                            <span>@ViewBag.glossary["oneliners"]["conclusion"]</span>
+                                                    <div class="category_graph LC">
+                                                        <span class="indicator_dot" style="right: @quantile.Max%">
+                                                            <span class="dot_dot"></span>
+                                                            <span class="indicator_text"> @quantile.Max</span>
+                                                        </span>
+                                                        <span class="indicator_dot" style="right: @quantile.Calculated%">
+                                                            <span class="dot_dot"></span>
+                                                            <span class="indicator_text"> @quantile.Calculated</span>
+                                                        </span>
+                                                        <span class="indicator_dot" style="right: @quantile.Probable%">
+                                                            <span class="dot_dot"></span>
+                                                            <span class="indicator_text"> @quantile.Probable</span>
+                                                        </span>
+                                                        <span class="indicator_dot" style="right: @quantile.Min%">
+                                                            <span class="dot_dot"></span>
+                                                            <span class="indicator_text"> @quantile.Min</span>
+                                                        </span>
+                                                        @{
+                                                            int startval = 0;
+                                                            int previous_threshold = 100;
+                                                            int width = 0;
 
-                                        </p>
-                                                }
+                                                        }
+
+                                                        @foreach (var (cat, catval) in thresholds)
+                                                        {
+                                                            width = previous_threshold - catval;
+                                                            <div class="@cat category_graph_element" style="width:@width%">
+                                                                @cat
+                                                                <br />
+                                                                <span>@catval</span>
+                                                            </div>
+                                                            previous_threshold = catval;
+                                                        }
+                                                    </div>
+                                                    }
+                                                  }
 
 
                                             <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA -->

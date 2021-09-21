@@ -61,8 +61,8 @@
     "min": "Minimum (min): ",
     "max": "Maximum (max): ",
     "probable": "Mest trolig",
-    "quantile": "Beregnet reduksjon, med føre-var forbehold:",
-    "conclusion": "A2 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
+    "calculated": "Beregnet reduksjon, med føre-var forbehold:",
+    "conclusion": "Kriteriets reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
 
   }
 }

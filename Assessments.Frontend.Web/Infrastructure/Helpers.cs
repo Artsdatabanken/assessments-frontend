@@ -43,7 +43,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             MemoryStream memoryStream;
             using (var workbook = new ClosedXML.Excel.XLWorkbook())
             {
-                var worksheet = workbook.AddWorksheet("Rødliste 2021");
+                var worksheet = workbook.AddWorksheet("Vurderinger");
                 
                 worksheet.Cell(1, 1).InsertTable(assessments);
 

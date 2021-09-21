@@ -26,9 +26,12 @@
         },
         "content": {
           "unit": "%",
-          "probable": "Mest trolig:",
-          "quantile": "Beregnet reduksjon, med føre-var forbehold:",
-          "conclusion": "A1 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
+          "threshold": {
+            "CR": 90,
+            "EN": 70,
+            "VU": 50,
+            "VT": 25
+          }
         }
       },
       "A2": {
@@ -54,9 +57,12 @@
         },
         "content": {
           "unit": "%",
-          "probable": { "intervall": "Mest trolig: <field>(probable) %" },
-          "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
-          "conclusion": "A2 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
+          "threshold": {
+            "CR": 80,
+            "EN": 50,
+            "VU": 30,
+            "VT": 15
+          }
         }
       },
       "A3": {
@@ -79,9 +85,12 @@
         },
         "content": {
           "unit": "%",
-          "probable": { "intervall": "Mest trolig: <field>(probable) %" },
-          "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
-          "conclusion": "A3 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
+          "threshold": {
+            "CR": 80,
+            "EN": 50,
+            "VU": 30,
+            "VT": 15
+          }
         }
       },
       "A4": {
@@ -107,9 +116,12 @@
         },
         "content": {
           "unit": "%",
-          "probable": { "intervall": "Mest trolig: <field>(probable) %" },
-          "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
-          "conclusion": "A4 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
+          "threshold": {
+            "CR": 80,
+            "EN": 50,
+            "VU": 30,
+            "VT": 15
+          }
         }
       }
     }

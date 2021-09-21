@@ -52,12 +52,17 @@
     "artsgruppeIkkeRisikovurdertNE": "Arten er ikke forsøkt rødlistevurdert, men satt til <i>ikke vurdert</i> NE fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021.",
     "annetNE": "Arten er ikke forsøkt rødlistevurdert og er satt til <i>ikke vurdert</i> NE.",
     "fremmedArtNA": "Arten er fremmed, og ble enten etablert innenfor vurderingsområdet etter år 1800 eller antas å kunne etablere seg innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokkart</a>). Dermed oppfyller den ikke kravene for å bli rødlistevurdert og er satt til <i>ikke egnet</i> NA.",
-     "gjeldendekriterier": "En art behøver kun oppfylle ett av IUCNs kriterier A-E for å bli rødlistet, men skal i utgangspunktet testes mot alle kriterier så langt det finnes informasjon. En art kan dermed ha ett eller flere gjeldende kriterier, dvs. kriterier som er utslagsgivende for kategori.",
+    "gjeldendekriterier": "En art behøver kun oppfylle ett av IUCNs kriterier A-E for å bli rødlistet, men skal i utgangspunktet testes mot alle kriterier så langt det finnes informasjon. En art kan dermed ha ett eller flere gjeldende kriterier, dvs. kriterier som er utslagsgivende for kategori.",
     "AndelNåværendeBestand": "Nåværende populasjonsstørrelse som andel av maksimum populasjonsstørrelse etter 1900",
     "MaxAndelAvEuropeiskBestand": "Andel av europeisk populasjonsstørrelse i Norge",
     "MaxAndelAvGlobalBestand": "Andel av global populasjonsstørrelse i Norge",
     "Påvirkningsfaktorer": "Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt. Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. \"Påvirkning på habitat\" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten. For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.",
-    "habitat_description_2015": "<p>I Rødlista 2015 benyttes Naturtyper i Norge (NiN 1.0) som klassifiseringssystem for å beskrive artenes leveområder (Halvorsen mfl. 2009). Dette klassifiseringssystemet har 4 naturtypenivå: i) landskap, ii) landskapsdel, iii) natursystem, og iv) livsmedium. Mer detaljert informasjon finnes i <a href=\"http://artsdatabanken.no/Files/16095\">veilederen til rødlistevurdering</a>(pdf) og <a href=\"http://www.artsdatabanken.no/NaturiNorge\">Naturtypebasen</a>. Ved registrering av artenes leveområde (hovedhabitat), inkluderes bare de leveområdene som er viktigst for arten. Det innebærer at habitatet skal være relevant for mer enn 20 % av bestanden.</p>"
+    "habitat_description_2015": "<p>I Rødlista 2015 benyttes Naturtyper i Norge (NiN 1.0) som klassifiseringssystem for å beskrive artenes leveområder (Halvorsen mfl. 2009). Dette klassifiseringssystemet har 4 naturtypenivå: i) landskap, ii) landskapsdel, iii) natursystem, og iv) livsmedium. Mer detaljert informasjon finnes i <a href=\"http://artsdatabanken.no/Files/16095\">veilederen til rødlistevurdering</a>(pdf) og <a href=\"http://www.artsdatabanken.no/NaturiNorge\">Naturtypebasen</a>. Ved registrering av artenes leveområde (hovedhabitat), inkluderes bare de leveområdene som er viktigst for arten. Det innebærer at habitatet skal være relevant for mer enn 20 % av bestanden.</p>",
+    "min": "Minimum (min): ",
+    "max": "Maximum (max): ",
+    "probable": "Mest trolig",
+    "quantile": "Beregnet reduksjon, med føre-var forbehold:",
+    "conclusion": "A2 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
 
   }
 }

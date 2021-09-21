@@ -25,14 +25,11 @@
           }
         },
         "content": {
-          "field": " Model.A1OpphørtOgReversibelAntatt",
-          "min": "Minst: <field>(min) %",
-          "probable": { "intervall": "Mest trolig: <field>(probable) %" },
-          "max": "Maksimum: <field>(max) %",
-          "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) %",
+          "unit": "%",
+          "probable": "Mest trolig:",
+          "quantile": "Beregnet reduksjon, med føre-var forbehold:",
           "conclusion": "A1 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
-        },
-        "based-on": "A1EndringBasertpåKode"
+        }
       },
       "A2": {
         "title": "Reduksjon de siste 10 år/3 generasjoner",
@@ -56,14 +53,11 @@
           }
         },
         "content": {
-          "field": "Model.A2Forutgående10ÅrAntatt",
-          "min": "Minst: <field>(min) %",
+          "unit": "%",
           "probable": { "intervall": "Mest trolig: <field>(probable) %" },
-          "max": "Maksimum: <field>(max) %",
           "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
           "conclusion": "A2 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
-        },
-        "based-on": "A2EndringBasertpåKode"
+        }
       },
       "A3": {
         "title": "Framtidig reduksjon kommende 10 år/3 generasjoner",
@@ -84,14 +78,11 @@
           }
         },
         "content": {
-          "field": "Model.A3Kommende10ÅrAntatt",
-          "min": "Minst: <field>(min) % ",
+          "unit": "%",
           "probable": { "intervall": "Mest trolig: <field>(probable) %" },
-          "max": "Maksimum: <field>(max) %",
           "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
           "conclusion": "A3 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
-        },
-        "based-on": "A3EndringBasertpåKode"
+        }
       },
       "A4": {
         "title": "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid",
@@ -115,14 +106,11 @@
           }
         },
         "content": {
-          "field": "Model.A4Intervall10ÅrAntatt",
-          "min": "Minst: <field>(min) %",
+          "unit": "%",
           "probable": { "intervall": "Mest trolig: <field>(probable) %" },
-          "max": "Maksimum: <field>(max) %",
           "quantile": "Beregnet reduksjon, med føre-var forbehold: <field>(quantile) % (?)",
           "conclusion": "A4 reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
-        },
-        "based-on": "A4EndringBasertpåKode"
+        }
       }
     }
   },
@@ -146,8 +134,7 @@
             "title": "Få trusseldefinerte lokaliteter",
             "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en art. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
             "content": {
-              "min": "Minst: baIntervallAntallLokaliteter(min)",
-              "max": "Maksimum: baIntervallAntallLokaliteter(max)",
+              "unit": "antall",
               "probable": {
                 "punktestimat": "Mest trolig: baIntervallAntallLokaliteter(probable)",
                 "intervall": "Mest trolig: baIntervallAntallLokaliteter(minintervall)- baIntervallAntallLokaliteter(maxintervall)"
@@ -203,9 +190,7 @@
         "title": "Utbredelsesområde",
         "description": "Utbredelsesområdet er et mål for hvor vid geografisk utbredelse en art har, om må ikke forveksles med okkupert eller potensielt forekomstareal. Utbredelsesområdet tilsvarer arealet av en minimum konveks polygon der de rette linjene i polygonen omringer alle kjente og antatte nåværende forekomster.",
         "content": {
-          "field": "Model.B1IntervallUtbredelsesområde",
-          "min": "Minst: b1IntervallUtbredelsesområde(min) km2",
-          "max": "Maksimum: b1IntervallUtbredelsesområde(max) km2",
+          "unit": "km2",
           "probable": {
             "punktestimat": "Mest trolig: b1IntervallUtbredelsesområde(probable) km2",
             "intervall": "Mest trolig: b1IntervallUtbredelsesområde(minintervall)- b1IntervallUtbredelsesområde(maxintervall) km2"
@@ -218,6 +203,7 @@
         "title": "Forekomstareal",
         "description": "Forekomstarealet er et mål for det spesifikke arealet som arten lever på, standardisert som summen av areal av 2 km x 2 km (4 km2) ruter som inneholder kjent eller antatt forekomst av arten.",
         "content": {
+          "unit": "km2",
           "field": "Model.B2IntervallForekomstareal",
           "min": "Minst: b2IntervallForekomstareal(min) km2",
           "max": "Maksimum: b2IntervallForekomstareal(max) km2",
@@ -235,6 +221,7 @@
     "title": "Liten populasjonsstørrelse og pågående nedgang",
     "description": "Populasjonsstørrelse er antall reproduksjonsdyktige individ. For kjønnede arter kan det tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.",
     "content": {
+      "unit": "individ",
       "min": "Minst: cPopulasjonsstørrelseAntatt(min)",
       "max": "Maksimum: cPopulasjonsstørrelseAntatt(max)",
       "probable": {
@@ -249,6 +236,7 @@
         "title": "Pågående nedgang",
         "description": "Bedømt, antatt, observert, estimert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. Pågående nedgang på C1-kriteriet beregnes på samme måte som på A-kriteriet, men kan gjelde for en kortere tidsperiode.",
         "content": {
+          "unit": "%",
           "min": "Minst: c1PågåendePopulasjonsreduksjonAntatt(min) %",
           "max": "Maksimum: c1PågåendePopulasjonsreduksjonAntatt(max) %",
           "probable": {
@@ -266,6 +254,7 @@
             "title": "Få reproduksjonsdyktige individer i største delpopulasjon",
             "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.  ",
             "content": {
+              "unit": "individ",
               "field": "C2A1PågåendePopulasjonsreduksjonAntatt",
               "min": "Minst: <field.min> individer ",
               "max": "Maksimum: c2A1PågåendePopulasjonsreduksjonAntatt(max) individer",
@@ -281,6 +270,7 @@
             "title": "Stor andel av alle reproduksjonsdyktige individ i én og samme delpopulasjon",
             "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg finnes en stor andel av populasjonen i én og samme delpopulasjon (alle egg i én kurv).   ",
             "content": {
+              "unit": "individ",
               "min": "Minst :c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon"
             }
           },
@@ -300,8 +290,7 @@
         "title": "Få reproduksjonsdyktige individ",
         "description": "Arten har få reproduksjonsdyktige individ/liten populasjonsstørrelse, men er ikke nødvendigvis i nedgang. For kjønnede arter kan antall reproduksjonsdyktige individ tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.  ",
         "content": {
-          "min": "Minst: cPopulasjonsstørrelseAntatt(min)",
-          "max": "Maksimum: cPopulasjonsstørrelseAntatt(max)",
+          "unit": "individ",
           "probable": {
             "punktestimat": "Mest trolig: cPopulasjonsstørrelseAntatt(probable)",
             "intervall": "Mest trolig: cPopulasjonsstørrelseAntatt(minintervall) - cPopulasjonsstørrelseAntatt(maxintervall)"
@@ -314,6 +303,7 @@
         "title": "Begrenset forekomstareal eller antall trusseldefinerte lokaliteter",
         "description": "Det foreligger en sannsynlig trussel mot populasjonen av en slik alvorlighetsgrad at arten kan bli kritisk truet (CR) eller regionalt utdødd (RE) innen få år etter at trusselen inntreffer.",
         "content": {
+          "unit": "individ",
           "quantile": "Beregnet forekomstareal: b2IntervallForekomstareal(quantile) km2 ",
           "conclusion": "Beregnet antall trusseldefinerte lokaliteter: baIntervallAntallLokaliteter(quantile) D2 Den begrensede forekomsten tilsvarer <kategori> "
         }

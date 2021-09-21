@@ -554,6 +554,18 @@
     margin-bottom: 5px;
 }
 
+.inactive .quantile{
+    display:none;
+}
+
+.quantile span{
+    display:block;
+}
+
+.temp{
+    color:lightblue;
+}
+
 /* IMPACT FACTORS */
 .impact_table {
     display: flex;

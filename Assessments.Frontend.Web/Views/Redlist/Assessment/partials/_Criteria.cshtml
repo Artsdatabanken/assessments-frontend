@@ -260,33 +260,43 @@
 
                                             @if (v.ContainsKey("description"))
                                             {
-
-
                                                 <p>@v["description"]</p>
-
                                             }
-                                            <p class="quantile">
-                                                @if (quantile != null) // for denne har vi en slik
-                                                {
-                                                    if (!quantile.Punktestimat) // hvis ikke punktestimat - er det intervall...
+
+
+                                            @if (quantile != null) // for denne har vi en slik
+                                            {
+
+                                                <p class="quantile">
+                                                    @if (v.ContainsKey("content"))
                                                     {
-                                                        <span>Max: @quantile.Maxintervall</span>
-                                                        <span>Min: @quantile.Minintervall</span>
+                                                        <span class="temp">@v["content"]</span><br />
+                                                    }
+                                                    @{
+                                                        var json_quantile = Newtonsoft.Json.Linq.JObject.Parse(v["content"].ToString()).ToObject<Dictionary<string, object>>();
+                                                        string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
+                                                    }
+
+                                                    @if (!quantile.Punktestimat) // hvis ikke punktestimat - er det intervall...
+                                                    {
+                                                        <span> @ViewBag.glossary["oneliners"]["max"] @quantile.Maxintervall @unit</span>
+                                                        <span>@ViewBag.glossary["oneliners"]["min"] @quantile.Minintervall @unit</span>
                                                     }
                                                     else
                                                     {
-                                                        <span>Max: @quantile.Max</span>
-                                                        <span>Min: @quantile.Min</span>
+                                                        <span>@ViewBag.glossary["oneliners"]["max"] @quantile.Max @unit</span>
+                                                        <span>@ViewBag.glossary["oneliners"]["min"] @quantile.Min @unit</span>
 
                                                     }
 
-                                                    <span>Probable: @quantile.Probable</span>
+                                                    <span>@ViewBag.glossary["oneliners"]["probable"] @quantile.Probable @unit</span>
 
-                                                    <span>Calculated: @quantile.Calculated</span>
-                                                    <span>Quantile: @quantile.Quantile</span>
+                                                    <span>@ViewBag.glossary["oneliners"]["quantile"] @quantile.Quantile @unit</span>
+                                                    <span>@ViewBag.glossary["oneliners"]["conclusion"] @quantile.Calculated @unit</span>
 
+                                                </p>
                                                 }
-                                            </p>
+
 
                                             <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA -->
                                             @{

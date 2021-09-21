@@ -10,11 +10,12 @@ namespace Assessments.Frontend.Web.Models
         public RL2021ViewModel()
         {
             this.Area = Array.Empty<string>();
+            this.Category = Array.Empty<string>();
             this.Criterias = Array.Empty<string>();
             this.EuroPop = Array.Empty<string>();
             this.IsCheck = Array.Empty<string>();
             this.Regions = Array.Empty<string>();
-            this.Category = Array.Empty<string>();
+            this.SpeciesGroups = Array.Empty<string>();
         }
         public IPagedList<SpeciesAssessment2021> Redlist2021Results { get; set; }
         public bool Endangered { get; set; }
@@ -28,6 +29,7 @@ namespace Assessments.Frontend.Web.Models
         public string[] EuroPop { get; set; }
         public string[] IsCheck { get; set; }
         public string[] Regions { get; set; }
+        public string[] SpeciesGroups { get; set; }
         
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 

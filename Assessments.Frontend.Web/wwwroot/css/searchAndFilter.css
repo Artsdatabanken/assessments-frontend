@@ -188,37 +188,24 @@ li.checkbox {
 } 
 
 /* Collapsible */
+input[type=checkbox]:checked#show_category~.filter_category,
+input[type=checkbox]:checked#show_region~.filter_region,
+input[type=checkbox]:checked#show_european_population~.filter_european_population,
+input[type=checkbox]:checked#show_criteria~.filter_criteria,
+input[type=checkbox]:checked#show_extinct~.filter_extinct,
+input[type=checkbox]:checked#show_species_groups~.filter_species_groups
+ {
+  display: block;
+}
 
+input[type=checkbox]:checked#show_area~.filter_area,
+.filter_category,
+.filter_region,
+.filter_european_population,
+.filter_criteria,
+.filter_extinct,
+.filter_species_groups,
 .collapse_checkbox {
-    display: none;
-}
-
-input[type=checkbox]:checked#show_area~.filter_area {
-  display: none;
-}
-
-input[type=checkbox]:checked#show_category~.filter_category {
-  display: block;
-}
-
-input[type=checkbox]:checked#show_region~.filter_region {
-  display: block;
-}
-
-input[type=checkbox]:checked#show_european_population~.filter_european_population {
-  display: block;
-}
-
-input[type=checkbox]:checked#show_criteria~.filter_criteria {
-  display: block;
-}
-
-input[type=checkbox]:checked#show_extinct~.filter_extinct {
-  display: block;
-}
-
-.filter_category, .filter_region, .filter_european_population,
-.filter_criteria, .filter_extinct {
     display: none;
 }
 

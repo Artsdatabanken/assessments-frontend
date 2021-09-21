@@ -118,7 +118,7 @@
 /* CRITERIA CATEGORY GRAPH */
 
 .criteria_results{
-    padding:20px;
+    padding-left:20px;
 }
 
 .category_graph {
@@ -128,7 +128,7 @@
     margin-bottom: 40px;
     display: block;
     font-size: 0;
-    margin-top: 30px;
+    margin-top: 60px;
     position: relative;
     border-top: 2px solid black;
 }
@@ -639,13 +639,14 @@
     color:grey;
 }
 
-.criteria .inactive .criteria_description,
-.criteria .inactive .criteria_options,
-.criteria .inactive .criteria_subcriteria,
-.criteria .inactive .listitem_text_field p,
-.criteria .inactive .criteria_results {
-    display: none;
-}
+    .criteria .inactive .criteria_description,
+    .criteria .inactive .criteria_options,
+    .criteria .inactive .criteria_subcriteria,
+    .criteria .inactive .listitem_text_field p,
+    .criteria .inactive .criteria_results,
+    .listitem_criteria.inactive .subsub_list {
+        display: none;
+    }
 
 .listitem_criteria {
     display: block;

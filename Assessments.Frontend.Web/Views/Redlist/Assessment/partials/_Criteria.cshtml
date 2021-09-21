@@ -291,7 +291,7 @@
 
                                                     @if (json_quantile.ContainsKey("threshold"))
                                                     {
-                                                        var thresholds = Newtonsoft.Json.Linq.JObject.Parse(json_quantile["threshold"].ToString()).ToObject<Dictionary<string, int>>();
+                                                        var thresholds = Newtonsoft.Json.Linq.JObject.Parse(json_quantile["threshold"].ToString()).ToObject<Dictionary<string, string>>();
 
                                                         <div class="category_graph LC">
                                                             <span class="indicator_dot" style="right: @quantile.Max%">
@@ -311,30 +311,39 @@
                                                                 <span class="dot_dot"></span>
                                                             </span>
                                                             @{
-                                                                int startval = 0;
+                                                               
                                                                 int previous_threshold = 100;
                                                                 int width = 0;
-
                                                             }
 
                                                             @foreach (var (cat, catval) in thresholds)
                                                             {
-                                                                width = previous_threshold - catval;
+
+                                                                int n;
+                                                                bool isNumeric = int.TryParse(catval, out n);
+
+                                                                if (isNumeric) { width = previous_threshold - n; }
+                                                                else { width = 25; }
+
+
+
                                                                 <div class="@cat category_graph_element" style="width:@width%">
                                                                     @cat
                                                                     <br />
                                                                     <span>@catval</span>
                                                                 </div>
-                                                                previous_threshold = catval;
+                                                               
+                                                                    previous_threshold = n;
+                                                                
+
                                                             }
                                                         </div>
                                                     }
 
                                                     <p>
                                                         <span>
-                                                            Populasjonsstørrelsen er antatt å ha en nedgang
-                                                            på mellom @min@unit og @max@unit, hvor den mest trolig ligger på @quantile.Probable@unit. Ved å bruke
-                                                            føre-var prinsippet i beregningene lander verdien @quantile.Calculated@unit som tilsvarer kategori [hent felt].
+                                                            Det antas en nedgang på mellom @min@unit og @max@unit, som mest trolig ligger på @quantile.Probable@unit. Ved å bruke
+                                                            føre-var prinsippet i beregningene blir verdien @quantile.Calculated@unit, som tilsvarer kategori [hent felt].
 
                                                         </span>
                                                     </p>

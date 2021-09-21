@@ -29,7 +29,7 @@
 <div class="search-and-filter">
 
     <form asp-action="Index2021" method="get">
-        <button class="btn" type="submit" name="Export" value="true">Eksport</button>
+
         <!-- View controls -->
         <div class="controls">
             <div class="controls_left">
@@ -40,7 +40,7 @@
                         <span class="material-icons">list</span>
                     </label>
                 </button>
-                <button @GetViewClass(Model.View, "grid") type="submit">
+                <button @GetViewClass(Model.View, "grid") type="submit" class="hideonmobile">
                     <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") type="radio" />
                     <label for="button-grid" id="gridview">
                         Vis grid
@@ -92,7 +92,8 @@
                         <label class="show_filters"><h3 class="toggle_filter">Filter</h3></label>
                         <div class="close_reset_filter">
                             <a asp-controller="Redlist" asp-action="Index2021" asp-route-IsCheck=Model.IsCheck>
-                                <button>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></button></a>
+                                <button>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></button>
+                            </a>
                             <button class="close_filters" type="button">
                                 <label for="show_filters">
                                     Lukk filter
@@ -101,7 +102,10 @@
                             </button>
                         </div>
                         <div class="filter_group">
-                            <label for="show_area"><h4>@SearchAndFilter.SearchChooseArea</h4></label>
+                            <label for="show_area">
+                                <h4>@SearchAndFilter.SearchChooseArea 
+                                    <span class="material-icons">expand_more</span>
+                                </h4></label>
                             <input class="collapse_checkbox" id="show_area" @CategoryCheck("IsCheck", Model.IsCheck, "Area") type="checkbox" />
                             <div class="filter_area">
                                 <ul>
@@ -215,20 +219,21 @@
 
                         <div class="filter_group">
                             <label for="show_criteria">
-                                <h4>@SearchAndFilter.SearchChooseCriteria</h4></span></label>
-                                <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
-                                <div class="filter_criteria">
-                                    <ul>
-                                        @foreach (var criteria in AllCriterias)
-                                        {
-                                            <li class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" @CategoryCheck("Criterias", Model.Criterias, criteria.Key) onclick="this.form.submit();" />@criteria.Key - @criteria.Value
-                                                </label>
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
+                                <h4>@SearchAndFilter.SearchChooseCriteria</h4></span>
+                            </label>
+                            <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
+                            <div class="filter_criteria">
+                                <ul>
+                                    @foreach (var criteria in AllCriterias)
+                                    {
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" @CategoryCheck("Criterias", Model.Criterias, criteria.Key) onclick="this.form.submit();" />@criteria.Key - @criteria.Value
+                                            </label>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="filter_group">
@@ -244,9 +249,14 @@
                                 </ul>
                             </div>
                         </div>
+                        <button class="btn" type="submit" name="Export" value="true">Eksport</button>
                     </div>
+                   
                 </div>
+                
             </div>
+            
         </div>
+        
     </form>
 </div>

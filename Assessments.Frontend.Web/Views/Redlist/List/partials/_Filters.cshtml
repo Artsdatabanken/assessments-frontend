@@ -6,6 +6,7 @@
     var AllCriterias = ViewBag.AllCriterias;
     var AllEuroPop = ViewBag.AllEuroPop;
     var AllRegions = ViewBag.AllRegions;
+    Dictionary<string, Dictionary<string, string>> AllSpeciesGroups = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
 }
 @functions{
     string CategoryCheck(string name, string[] element, string value)
@@ -144,8 +145,26 @@
                         </div>
 
                         <div class="filter_group">
+                            <label for="show_species_groups">
+                                <h4>Artsgruppe</h4></span></label>
+                                <input type="checkbox" class="collapse_checkbox" id="show_species_groups" @CategoryCheck("IsCheck", Model.IsCheck, "SpeciesGroups") />
+                                <div class="filter_species_groups">
+                                    <ul>
+                                        @foreach (var species in AllSpeciesGroups)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" @CategoryCheck("SpeciesGroups", Model.SpeciesGroups, species.Key) onclick="this.form.submit();" />@species.Key
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                        </div>
+
+                        <div class="filter_group">
                             <label for="show_region">
-                                <h4>Regioner og havområder</h4></span>
+                                <h4>Regioner og havområder</h4></span></label>
                                 <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
                                 <div class="filter_region">
                                     <ul>
@@ -163,7 +182,7 @@
 
                         <div class="filter_group">
                             <label for="show_european_population">
-                                <h4>Andel av europeisk populasjon</h4></span>
+                                <h4>Andel av europeisk populasjon</h4></span></label>
                                 <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
                                 <div class="filter_european_population">
                                     <ul>
@@ -181,7 +200,7 @@
 
                         <div class="filter_group">
                             <label for="show_criteria">
-                                <h4>@SearchAndFilter.SearchChooseCriteria</h4></span>
+                                <h4>@SearchAndFilter.SearchChooseCriteria</h4></span></label>
                                 <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
                                 <div class="filter_criteria">
                                     <ul>

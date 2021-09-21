@@ -67,6 +67,10 @@ namespace Assessments.Frontend.Web.Controllers
             if (chosenRegions?.Any() == true)
                 query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
 
+            // SpeciesGroups
+            if (viewModel.SpeciesGroups?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
+
             // European population percentages
             ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;
             string[] chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(viewModel.EuroPop);

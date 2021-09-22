@@ -98,7 +98,7 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());
 
-                return new FileStreamResult(Helpers.GenerateExcel(assessmentsForExport), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     FileDownloadName = "rødliste-2021.xlsx"
                 };

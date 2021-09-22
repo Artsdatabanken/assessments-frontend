@@ -27,15 +27,15 @@
         }
     }
 
-    if(!string.IsNullOrEmpty(mmpi.Minintervall) && !string.IsNullOrEmpty(mmpi.Maxintervall) && mmpi.Punktestimat != "true")
+    if(!string.IsNullOrEmpty(mmpi.Minintervall) && !string.IsNullOrEmpty(mmpi.Maxintervall) && mmpi.Punktestimat != true)
     {
         probable = @FormatNumber(mmpi.Minintervall)+ " - "+ @FormatNumber(mmpi.Maxintervall);
     }
-    else if (!string.IsNullOrEmpty(mmpi.Minintervall) && mmpi.Punktestimat != "true")
+    else if (!string.IsNullOrEmpty(mmpi.Minintervall) && mmpi.Punktestimat != true)
     {
         probable = @FormatNumber(mmpi.Minintervall);
     }
-    else if (!string.IsNullOrEmpty(mmpi.Maxintervall) && mmpi.Punktestimat != "true")
+    else if (!string.IsNullOrEmpty(mmpi.Maxintervall) && mmpi.Punktestimat != true)
     {
         probable = @FormatNumber(mmpi.Maxintervall);
     }

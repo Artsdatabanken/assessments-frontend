@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Frontend.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.OData;
@@ -41,6 +42,8 @@ namespace Assessments.Frontend.Web
             services.AddLazyCache();
             
             services.AddSingleton<DataRepository>();
+
+            services.AddTransient<ExpertCommitteeMemberService>();
 
             services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
         }

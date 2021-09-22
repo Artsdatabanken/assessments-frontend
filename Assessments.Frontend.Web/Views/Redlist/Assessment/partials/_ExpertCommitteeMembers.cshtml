@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using Assessments.Frontend.Web.Infrastructure.Services
+
+@model SpeciesAssessment2021
+
+@inject ExpertCommitteeMemberService _expertCommitteeMemberService
+
+@{
+    var expertCommitteeMembers = await _expertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
+}
+
+@if (expertCommitteeMembers.Any())
+{
+    <p>
+        Siden siteres som: @expertCommitteeMembers.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList().JoinAnd(", ", " og "). @Model.SpeciesGroup: Vurdering av @Model.PopularName @Model.ScientificName for @(Model.AssessmentArea == "N" ? "Norge" : "Svalbard"). Norsk rødliste for arter 2021. Artsdatabanken. @Context.Request.GetEncodedUrl()
+    </p>
+}

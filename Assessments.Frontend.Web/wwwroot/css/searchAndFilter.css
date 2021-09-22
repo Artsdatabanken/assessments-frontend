@@ -3,14 +3,15 @@
     background-color: #0000;
 }
 
-li.checkbox {
+li.checkbox, .filter_groups ul {
     list-style-type: none;
 }
 
 
 .filter_group {
-    margin: 2px;
-    margin-bottom: 10px;
+    /* margin: 2px;
+    margin-bottom: 10px;*/
+    margin-top:-1px;
 }
 
 .filter_group .h4 {
@@ -18,7 +19,7 @@ li.checkbox {
     font-weight: bold;
 }
 
-.controls span, a>button, {
+.controls span, a>button {
   pointer-events: none;
 }
 
@@ -26,30 +27,37 @@ li.checkbox {
   display: none;
 }
 
+.list_header_text {
+  overflow-wrap: normal;
+}
+
+.list_header {
+  align-items: center;
+}
+
 @media only screen and (max-width: 750px) {
-    .filter_groups {
-        display: flex;
-        flex-wrap: wrap;
-    }
+  .filter_groups {
+      display: flex;
+      flex-wrap: wrap;
+  }
 
-    .filters h3{
-        flex:none;
-        width:100%;
-        padding: 10px;
-    }
+  .filters h3{
+      flex:none;
+      width:100%;
+      padding: 10px;
+  }
 
-    .filter_group {
-        display: inline-block;
-        max-width: 250px;
-        vertical-align: top;
-        padding: 10px;
-        flex:1;
-        justify-content:space-evenly;
-    }
+  .filter_group {
+      display: inline-block;
+      vertical-align: top;
+      padding: 10px;
+      flex:1;
+      justify-content:space-evenly;
+  }
 
-    .filters {
-        background: #f7f7f7;
-    }
+  .filters {
+      background: #f7f7f7;
+  }
 }
 
 @media only screen and (max-width: 650px) {
@@ -85,6 +93,12 @@ li.checkbox {
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
+    position: sticky;
+    top: 0;
+    padding-top: 10px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid lightgray;
+    z-index: 10;
   }
 
   .list-search {
@@ -119,17 +133,37 @@ li.checkbox {
     background-color: #fff;
   }
   
-  .show_filters {
-    width: 50%;
-    display: inline-block;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    z-index: 10;
-  }
-  
   .toggle_filter {
     margin: 0;
   }
+
+.filter_group h4 {
+    width: 100%;
+    background: white;
+    text-align: left;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    border-right: 0;
+    border-left: 0;
+    margin: 0;
+}
+
+.list_header .material-icons {
+    float: right;
+}
+
+.filter_group {
+    padding-right: 5px;
+}
+
+.filter_group ul {
+    background: #f0f0f0;
+    padding: 5px;
+}
+
+
+
+
   
   input[type=checkbox]:checked#show_filters~.filters_scrollable>.filter_groups {
     display: flex;
@@ -163,10 +197,10 @@ li.checkbox {
   .filter_groups {
     display: none;
     background-color: #f7f7f7;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
     padding-top: 15px;
   }
+
+  /* Filter group */
 
   .filter_group {
     width: 100%;
@@ -192,6 +226,7 @@ input[type=checkbox]:checked#show_category~.filter_category,
 input[type=checkbox]:checked#show_region~.filter_region,
 input[type=checkbox]:checked#show_european_population~.filter_european_population,
 input[type=checkbox]:checked#show_criteria~.filter_criteria,
+input[type=checkbox]:checked#show_habitat~.filter_habitat,
 input[type=checkbox]:checked#show_extinct~.filter_extinct,
 input[type=checkbox]:checked#show_species_groups~.filter_species_groups
  {
@@ -204,8 +239,35 @@ input[type=checkbox]:checked#show_area~.filter_area,
 .filter_european_population,
 .filter_criteria,
 .filter_extinct,
+.filter_habitat,
 .filter_species_groups,
-.collapse_checkbox {
+.collapse_checkbox,
+.material-icons.more,
+.material-icons.less {
     display: none;
+}
+
+input[type=checkbox]:not(:checked)#show_area~label>.list_header>.material-icons.less,
+input[type=checkbox]:checked#show_category~label>.list_header>.material-icons.less,
+input[type=checkbox]:checked#show_region~label>.list_header>.material-icons.less,
+input[type=checkbox]:checked#show_european_population~label>.list_header>.material-icons.less,
+input[type=checkbox]:checked#show_criteria~label>.list_header>.material-icons.less,
+input[type=checkbox]:checked#show_habitat~label>.list_header>.material-icons.less,
+input[type=checkbox]:checked#show_extinct~label>.list_header>.material-icons.less,
+input[type=checkbox]:checked#show_species_groups~label>.list_header>.material-icons.less
+ {
+  display: inline-block;
+}
+
+input[type=checkbox]:checked#show_area~label>.list_header>.material-icons.more,
+input[type=checkbox]:not(:checked)#show_category~label>.list_header>.material-icons.more,
+input[type=checkbox]:not(:checked)#show_region~label>.list_header>.material-icons.more,
+input[type=checkbox]:not(:checked)#show_european_population~label>.list_header>.material-icons.more,
+input[type=checkbox]:not(:checked)#show_criteria~label>.list_header>.material-icons.more,
+input[type=checkbox]:not(:checked)#show_habitat~label>.list_header>.material-icons.more,
+input[type=checkbox]:not(:checked)#show_extinct~label>.list_header>.material-icons.more,
+input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.material-icons.more
+ {
+  display: inline-block;
 }
 

@@ -60,6 +60,10 @@ namespace Assessments.Frontend.Web.Controllers
             if (viewModel.Criterias?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(criterias) != -1);
 
+            // Habitat
+            if (viewModel.Habitats?.Any() == true)
+                query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
+
             // Regions
             ViewBag.AllRegions = _allRegions;
             string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions);

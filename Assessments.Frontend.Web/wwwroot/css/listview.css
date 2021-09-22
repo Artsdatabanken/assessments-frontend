@@ -96,7 +96,7 @@ td {
 
 .redlist li a {
     display: inline-grid;
-    grid-template-columns: 1.5fr .8fr 1fr .5fr .5fr;
+    grid-template-columns: 1fr 1fr .5fr .9fr .5fr .3fr;
     width: 100%;
     line-height: 1;
     font-size: 12pt;
@@ -104,17 +104,20 @@ td {
     text-decoration:none;
     color:inherit;
     align-items: center;
+    word-break: break-word;
 }
 
 .listheader {
     display: inline-grid;
-    grid-template-columns: 1.5fr .8fr 1fr .5fr .5fr;
+    grid-template-columns: 1fr 1fr .5fr .9fr .5fr .3fr;
     position: sticky;
     position: -webkit-sticky;
     top: -1px;
     background-color: #fff;
     z-index: 1;
     font-weight: bold;
+    padding: 5px 0;
+    border-bottom: 1px solid lightgray;
 }
 
 

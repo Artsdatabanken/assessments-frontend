@@ -21,7 +21,6 @@ namespace Assessments.Frontend.Web.Controllers
         private static readonly string[] _allCategories = Constants.AllCategories;
         private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
-        private static readonly Dictionary<string, string> _allRegions = Constants.AllRegions;
         public IActionResult Index() => View();
 
         [Route("2021")]
@@ -61,8 +60,10 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(criterias) != -1);
 
             // Regions
-            ViewBag.AllRegions = _allRegions;
-            string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions);
+            string[] regionNames = query.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().OrderBy(x => x).ToArray();
+
+            ViewBag.AllRegions = Helpers.getRegionsDict(regionNames);
+            string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions, ViewBag.AllRegions);
 
             if (chosenRegions?.Any() == true)
                 query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));

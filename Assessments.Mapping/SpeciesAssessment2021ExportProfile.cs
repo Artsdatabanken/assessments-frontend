@@ -43,7 +43,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.PercentageGlobalPopulation, opt => opt.MapFrom(src => src.PercentageGlobalPopulation))
                 .ForMember(dest => dest.ProportionOfMaxPopulation, opt => opt.MapFrom(src => src.ProportionOfMaxPopulation))
                 
-                .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => string.Join(",", src.MainHabitat)))
+                .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => string.Join(";", src.MainHabitat)))
                 
                 .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => string.Join(";", src.ImpactFactors.Select(x => $"{x.GroupingFactor} > {x.Factor}_{x.TimeScope}_{x.PopulationScope}_{x.Severity}"))))
 

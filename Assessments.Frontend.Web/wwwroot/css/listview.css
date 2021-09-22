@@ -53,6 +53,10 @@ td {
         display: flex;
         justify-content: space-between;
     }
+
+    .main button.hideonmobile {
+        display: none;
+    }
 }
 
 /* REDLIST VIEW */
@@ -371,3 +375,4 @@ li a span.element_icon {
     width: 180px;
     text-align: initial;
 }
+

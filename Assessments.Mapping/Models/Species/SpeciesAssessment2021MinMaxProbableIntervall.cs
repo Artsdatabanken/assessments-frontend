@@ -12,9 +12,9 @@
 
         public string Probable { get; set; } = "";
 
-        public string Punktestimat { get; set; } = "true";
+        public bool Punktestimat { get; set; } = true;
 
         public string Quantile { get; set; } = "";
-        public string Calculated { get; set; }
+        public string Calculated { get; set; } = "";
     }
 }

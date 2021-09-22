@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
 using System.Linq;
-using Assessments.Mapping;
-using Assessments.Mapping.Models.Species;
 using Microsoft.AspNetCore.Http;
 
 namespace Assessments.Frontend.Web.Infrastructure
@@ -37,54 +32,6 @@ namespace Assessments.Frontend.Web.Infrastructure
                 return this;
             }
         }
-
-        public static MemoryStream GenerateExcel(IEnumerable<SpeciesAssessment2021Export> assessments)
-        {
-            MemoryStream memoryStream;
-            using (var workbook = new ClosedXML.Excel.XLWorkbook())
-            {
-                var worksheet = workbook.AddWorksheet("Vurderinger");
-                
-                worksheet.Cell(1, 1).InsertTable(assessments);
-
-                var exportColumns = typeof(SpeciesAssessment2021Export).GetProperties().Select(p => new
-                {
-                    p.GetCustomAttributes(typeof(DisplayNameAttribute), false).Cast<DisplayNameAttribute>().Single().DisplayName, 
-                    p.GetCustomAttributes(typeof(DescriptionAttribute), false).Cast<DescriptionAttribute>().Single().Description
-                }).ToList(); 
-
-                var firstRow = worksheet.FirstRow();
-                var columnNumber = 1;
-
-                foreach (var column in exportColumns)
-                {
-                    firstRow.Cell(columnNumber).Value = column.DisplayName;		
-                    columnNumber++;
-                }
-
-                worksheet.SheetView.FreezeRows(1);
-
-                var table = new DataTable("Feltnavn og beskrivelser");
-                table.Columns.Add("Feltnavn");
-                table.Columns.Add("Beskrivelse");
-
-                foreach (var element in exportColumns)
-                    table.Rows.Add(element.DisplayName, element.Description);
-
-                workbook.Worksheets.Add(table);
-
-                workbook.Worksheet(2).SheetView.FreezeRows(1);
-                workbook.Worksheet(2).Columns().AdjustToContents();
-
-                memoryStream = new MemoryStream();
-                workbook.SaveAs(memoryStream);
-            }
-
-            memoryStream.Seek(0, SeekOrigin.Begin);
-
-            return memoryStream;
-        }
-
         public static string[] findSelectedCategories( bool redlisted, bool endangered,
             string[] categoriesSelected) 
         {
@@ -231,6 +178,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string Species2015 = "species-2015.json";
 
             public const string Species2006 = "species-2006.json";
+
+            public const string SpeciesExpertCommitteeMembers = "species-experts.csv";
         }
 
         public class SpeciesCategories

@@ -59,6 +59,10 @@ namespace Assessments.Frontend.Web.Controllers
             if (viewModel.Criterias?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(criterias) != -1);
 
+            // Habitat
+            if (viewModel.Habitats?.Any() == true)
+                query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
+
             // Regions
             string[] regionNames = query.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().OrderBy(x => x).ToArray();
 
@@ -95,7 +99,7 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());
 
-                return new FileStreamResult(Helpers.GenerateExcel(assessmentsForExport), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     FileDownloadName = "rødliste-2021.xlsx"
                 };

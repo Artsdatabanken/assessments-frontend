@@ -16,7 +16,9 @@ li.checkbox, .filter_groups ul {
 }
 
 .list_header_text {
-  overflow-wrap: normal;
+    overflow-wrap: normal;
+    width: calc(100% - 30px);
+    display: inline-block;
 }
 
 .list_header {

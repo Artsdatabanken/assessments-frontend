@@ -3,7 +3,7 @@
     background-color: #0000;
 }
 
-li.checkbox {
+li.checkbox, .filter_groups ul {
     list-style-type: none;
 }
 

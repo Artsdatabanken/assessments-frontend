@@ -103,13 +103,14 @@
                         </div>
                         <ul>
                             <li class="filter_group">
+                                <input class="collapse_checkbox" id="show_area" @CategoryCheck("IsCheck", Model.IsCheck, "Area") type="checkbox" />
                                 <label for="show_area">
-                                    <h4>@SearchAndFilter.SearchChooseArea 
-                                        <span class="material-icons">expand_more</span>
-                                        <span class="material-icons">expand_less</span>
+                                    <h4 class="list_header">
+                                        <span class="list_header_text">@SearchAndFilter.SearchChooseArea</span>
+                                        <span class="material-icons more">expand_more</span>
+                                        <span class="material-icons less">expand_less</span>
                                     </h4>
                                 </label>
-                                <input class="collapse_checkbox" id="show_area" @CategoryCheck("IsCheck", Model.IsCheck, "Area") type="checkbox" />
                                 <div class="filter_area">
                                     <ul>
                                         @foreach (var area in AllAreas)
@@ -125,8 +126,14 @@
                             </li>
 
                             <li class="filter_group">
-                                <label for="show_category"><h4>@SearchAndFilter.SearchChooseCategory</h4></label>
                                 <input class="collapse_checkbox" id="show_category" @CategoryCheck("IsCheck", Model.IsCheck, "Category") type="checkbox" />
+                                <label for="show_category">
+                                    <h4 class="list_header">
+                                        <span class="list_header_text">@SearchAndFilter.SearchChooseCategory</span>
+                                        <span class="material-icons more">expand_more</span>
+                                        <span class="material-icons less">expand_less</span>
+                                    </h4>
+                                    </label>
                                 <div class="filter_category">
                                     <ul>
                                         @foreach (var category in AllCategories)
@@ -153,8 +160,13 @@
                             </li>
 
                             <li class="filter_group">
-                                <label for="show_species_groups"><h4>Artsgruppe</h4></span></label>
                                 <input type="checkbox" class="collapse_checkbox" id="show_species_groups" @CategoryCheck("IsCheck", Model.IsCheck, "SpeciesGroups") />
+                                <label for="show_species_groups">
+                                    <h4 class="list_header">
+                                        <span class="list_header_text">Artsgruppe</span>
+                                        <span class="material-icons more">expand_more</span>
+                                        <span class="material-icons less">expand_less</span>
+                                    </h4></span></label>
                                 <div class="filter_species_groups">
                                     <ul>
                                         @foreach (var species in AllSpeciesGroups)
@@ -170,8 +182,13 @@
                             </li>
 
                             <li class="filter_group">
-                                <label for="show_habitat"><h4>Hovedhabitat</h4></span></label>
                                 <input type="checkbox" class="collapse_checkbox" id="show_habitat" @CategoryCheck("IsCheck", Model.IsCheck, "Habitat") />
+                                <label for="show_habitat">
+                                    <h4 class="list_header">
+                                        <span class="list_header_text">Hovedhabitat</span>
+                                        <span class="material-icons more">expand_more</span>
+                                        <span class="material-icons less">expand_less</span>
+                                    </h4></span></label>
                                 <div class="filter_habitat">
                                     <ul>
                                         @foreach (var habitat in AllHabitats)
@@ -187,8 +204,13 @@
                             </li>
 
                             <li class="filter_group">
-                                <label for="show_region"><h4>Regioner og havområder</h4></span></label>
                                 <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
+                                <label for="show_region">
+                                    <h4 class="list_header">
+                                        <span class="list_header_text">Regioner og havområder</span>
+                                        <span class="material-icons more">expand_more</span>
+                                        <span class="material-icons less">expand_less</span>
+                                    </h4></span></label>
                                 <div class="filter_region">
                                     <ul>
                                         @foreach (var region in AllRegions)
@@ -204,8 +226,13 @@
                             </li>
 
                             <li class="filter_group">
-                                <label for="show_european_population"><h4>Andel av europeisk populasjon</h4></span></label>
                                 <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
+                                <label for="show_european_population">
+                                    <h4 class="list_header">
+                                        <span class="list_header_text">Andel av europeisk populasjon</span>
+                                        <span class="material-icons more">expand_more</span>
+                                        <span class="material-icons less">expand_less</span>
+                                    </h4></span></label>
                                 <div class="filter_european_population">
                                     <ul>
                                         @foreach (var pop in AllEuroPop)
@@ -221,10 +248,14 @@
                             </li>
 
                             <li class="filter_group">
-                                <label for="show_criteria">
-                                    <h4>@SearchAndFilter.SearchChooseCriteria</h4></span>
-                                </label>
                                 <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
+                                <label for="show_criteria">
+                                    <h4 class="list_header">
+                                        <span class="list_header_text">@SearchAndFilter.SearchChooseCriteria</span>
+                                        <span class="material-icons more">expand_more</span>
+                                        <span class="material-icons less">expand_less</span>
+                                    </h4></span>
+                                </label>
                                 <div class="filter_criteria">
                                     <ul>
                                         @foreach (var criteria in AllCriterias)
@@ -240,8 +271,13 @@
                             </li>
 
                             <li class="filter_group">
-                                <label for="show_extinct"><h4>Trolig utdødd</h4></label>
                                 <input type="checkbox" class="collapse_checkbox" id="show_extinct" @CategoryCheck("IsCheck", Model.IsCheck, "Extinct") />
+                                <label for="show_extinct">
+                                    <h4 class="list_header">
+                                        <span class="list_header_text">Trolig utdødd</span>
+                                        <span class="material-icons more">expand_more</span>
+                                        <span class="material-icons less">expand_less</span>
+                                    </h4></label>
                                 <div class="filter_extinct">
                                     <ul>
                                         <li class="checkbox">

@@ -116,18 +116,28 @@ h1{
         padding-top: 20px;
     }
 
+    .main-content{
+        display:flex;
+        flex-direction:column;
+        padding-bottom:0;
+    }
+
+    footer{
+        margin-top:0;
+    }
+
     .sidebarmenu {
         display: block;
-        max-width: 100vw;
+        width: 100%;
+        max-width: 100%;
         margin: 0;
-        margin-left: 0px;
-        padding: 0;
         border: 0;
-        width: 100vw;
-        margin-left: -17px;
-        background: #f0f0f0;
+        border-top:2px solid lightgrey;
         padding: 10px;
-        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-bottom: 0;
+        order: 3;
+        padding: 20px;
     }
 
     .sidebarmenu ul {
@@ -137,32 +147,10 @@ h1{
         margin: 0;
         padding: 0;
         border: 0;
+        padding-bottom: 0;
     }
 
-    .sidebarmenu li {
-        display: inline-block;
-        width: auto;
-        border: 1px solid lightgrey;
-        margin: 2px;
-        padding: 5px;
-        background: whitesmoke;
-        color:black;
-    }
 
-    .sidebarmenu li a{
-        color: black;
-    }
-
-    .main-content, .main {
-        padding-top: 0;
-    }
-
-    .breadcrumbs {
-        max-width: 100%;
-        position: absolute;
-        top: 107px;
-        display:none;
-    }
 }
 
 
@@ -180,9 +168,7 @@ h1{
         display: none;
     }
 
-    .sidebarmenu {
-        margin-left: -15px;
-    }
+
 }
 
 
@@ -193,9 +179,7 @@ h1{
 
 /* Tiny mobile : 550px */
 @media only screen and (max-width: 527px) {
-        .sidebarmenu {
-        margin-left: -5px;
-    }
+
 }
 
 /* SUPER-tiny: 300px*/

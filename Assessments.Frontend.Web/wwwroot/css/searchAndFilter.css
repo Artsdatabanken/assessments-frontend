@@ -1,25 +1,23 @@
 .arrow-down {
-    border: 0px;
-    background-color: #0000;
+  border: 0px;
+  background-color: #0000;
 }
 
 li.checkbox, .filter_groups ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 
 .filter_group {
-    /* margin: 2px;
-    margin-bottom: 10px;*/
-    margin-top:-1px;
+  margin-top:-1px;
 }
 
 .filter_group .h4 {
-    padding: 5px;
-    font-weight: bold;
+  padding: 5px;
+  font-weight: bold;
 }
 
-.controls span, a>button {
+.controls span, a>button, .toggle_filter, .toggle_search {
   pointer-events: none;
 }
 
@@ -37,55 +35,54 @@ li.checkbox, .filter_groups ul {
 
 @media only screen and (max-width: 750px) {
   .filter_groups {
-      display: flex;
-      flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .filters h3{
-      flex:none;
-      width:100%;
-      padding: 10px;
+    flex:none;
+    width:100%;
+    padding: 10px;
   }
 
   .filter_group {
-      display: inline-block;
-      vertical-align: top;
-      padding: 10px;
-      flex:1;
-      justify-content:space-evenly;
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px;
+    flex:1;
+    justify-content:space-evenly;
   }
 
   .filters {
-      background: #f7f7f7;
+    background: #f7f7f7;
   }
 }
 
 @media only screen and (max-width: 650px) {
   .controls {
-      background-color: #fff;
-      display: flex;
-      flex-wrap: nowrap;
-      max-width:100%;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: nowrap;
+    max-width:100%;
   }
 
   .controls_right {
-      padding-left: 5px;
+    padding-left: 5px;
   }
 
   .controls_left {
-      padding-right: 5px;
+    padding-right: 5px;
   }
 
   .controls_left, .controls_right {
-      display: flex;
-      flex-wrap:nowrap;
-      
+    display: flex;
+    flex-wrap:nowrap;
   }
 
   .controls button {
-      margin: 3px;
-      margin: 0;
-      flex: 1;
+    margin: 3px;
+    margin: 0;
+    flex: 1;
   }
 
   .close_reset_filter {
@@ -111,17 +108,17 @@ li.checkbox, .filter_groups ul {
   }
 
   .searchfield {
-      display: flex;
-      width: 100%;
-      vertical-align: top;
-      margin: 0;
-      height: 45px;
+    display: flex;
+    width: 100%;
+    vertical-align: top;
+    margin: 0;
+    height: 45px;
   }
 
   .searchfield button {
-      width: 100px;
-      vertical-align: top;
-      margin: 0;
+    width: 100px;
+    vertical-align: top;
+    margin: 0;
   }
 
   .search-and-filter {
@@ -132,12 +129,16 @@ li.checkbox, .filter_groups ul {
     z-index: 10;
     background-color: #fff;
   }
+
+  .show_filters {
+    display: inline-block;
+  }
   
   .toggle_filter {
     margin: 0;
   }
 
-.filter_group h4 {
+  .filter_group h4 {
     width: 100%;
     background: white;
     text-align: left;
@@ -146,25 +147,21 @@ li.checkbox, .filter_groups ul {
     border-right: 0;
     border-left: 0;
     margin: 0;
-}
+  }
 
-.list_header .material-icons {
+  .list_header .material-icons {
     float: right;
-}
+  }
 
-.filter_group {
+  .filter_group {
     padding-right: 5px;
-}
+  }
 
-.filter_group ul {
+  .filter_group ul {
     background: #f0f0f0;
     padding: 5px;
-}
+  }
 
-
-
-
-  
   input[type=checkbox]:checked#show_filters~.filters_scrollable>.filter_groups {
     display: flex;
     flex-direction: column;
@@ -244,7 +241,7 @@ input[type=checkbox]:checked#show_area~.filter_area,
 .collapse_checkbox,
 .material-icons.more,
 .material-icons.less {
-    display: none;
+  display: none;
 }
 
 input[type=checkbox]:not(:checked)#show_area~label>.list_header>.material-icons.less,
@@ -270,4 +267,3 @@ input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.mater
  {
   display: inline-block;
 }
-

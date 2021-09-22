@@ -22,6 +22,10 @@
 
     string GetViewClass(string element, string value)
     {
+        if(String.IsNullOrEmpty(element) && value == "list")
+        {
+            return "class=active";
+        }
         return element == value ? "class=active" : String.Empty;
     }
 }
@@ -33,37 +37,36 @@
         <!-- View controls -->
         <div class="controls">
             <div class="controls_left">
-
-
                 <button @GetViewClass(Model.View, "list") type="submit">
                     <input class="collapse_checkbox" id="button-list" @ViewCheck("View", Model.View, "list") type="radio" />
                     <label for="button-list" id="listview">
-                        Vis liste
+                        Liste
                         <span class="material-icons">list</span>
                     </label>
                 </button>
-
-
                 <button @GetViewClass(Model.View, "grid") type="submit" class="hideonmobile">
                     <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") type="radio" />
                     <label for="button-grid" id="gridview">
-                        Vis grid
+                        Grid
                         <span class="material-icons">grid_on</span>
                     </label>
                 </button>
                 <button @GetViewClass(Model.View, "stat") type="submit">
                     <input class="collapse_checkbox" id="button-stat" @ViewCheck("View", Model.View, "stat") type="radio" />
                     <label for="button-stat" id="statsview">
-                        Vis statistikk
+                        Statistikk
                         <span class="material-icons">bar_chart</span>
                     </label>
                 </button>
+
             </div>
             <div class="controls_right">
                 <label class="show_filters" for="show_filters">
                     <button class="toggle_filter" type="button">
-                        Åpne filter
-                        <span class="material-icons">filter_alt</span>
+                        Filter
+                        <span class="material-icons"><span class="material-icons">
+                        filter_list
+                    </span></span>
                     </button>
                 </label>
             </div>

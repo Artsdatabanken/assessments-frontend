@@ -218,6 +218,15 @@
         <div class="page_section">
             <h3>Offisiell kriteriestreng på internasjonal skrivemåte</h3>
             <p>@Model.CriteriaSummarized<br /></p>
+
+            @Model.B1.Statistics.Calculated
+            @Model.B1.Statistics.Min
+            @Model.B1.Statistics.Probable
+            @Model.B1.Statistics.Minintervall
+            @Model.B1.Statistics.Maxintervall
+            @Model.B1.Statistics.Min
+            @Model.B1.Statistics.Punktestimat
+            @Model.B1.Statistics.Quantile
         </div>
         <h3>Kriteriefordeling</h3>
 
@@ -270,6 +279,7 @@
                                                         @{
                                                             var json_quantile = Newtonsoft.Json.Linq.JObject.Parse(v["content"].ToString()).ToObject<Dictionary<string, object>>();
                                                             string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
+                                                            string comparator = json_quantile.ContainsKey("comparator") ? json_quantile["comparator"].ToString() : "";
 
                                                             string min = "";
                                                             string max = "";
@@ -294,26 +304,35 @@
                                                         var thresholds = Newtonsoft.Json.Linq.JObject.Parse(json_quantile["threshold"].ToString()).ToObject<Dictionary<string, string>>();
 
                                                         <div class="category_graph LC">
-                                                            <span class="indicator_dot" style="right: @quantile.Max%">
-                                                                <span class="indicator_text max"> Max @quantile.Max@unit</span>
-                                                                <span class="dot_dot"></span>
-                                                            </span>
-                                                            <span class="indicator_dot" style="right: @quantile.Calculated%">
-                                                                <span class="indicator_text calc"> Calculated @quantile.Calculated@unit</span>
-                                                                <span class="dot_dot"></span>
-                                                            </span>
-                                                            <span class="indicator_dot" style="right: @quantile.Probable%">
-                                                                <span class="indicator_text prob">Probable @quantile.Probable@unit</span>
-                                                                <span class="dot_dot"></span>
-                                                            </span>
-                                                            <span class="indicator_dot" style="right: @quantile.Min%">
-                                                                <span class="indicator_text min"> Min @quantile.Min@unit</span>
-                                                                <span class="dot_dot"></span>
-                                                            </span>
+
+                                                            @if(unit == "%") { 
+                                                                <span class="indicator_dot" style="right: @quantile.Max%">
+                                                                    <span class="indicator_text max"> Max @quantile.Max@unit</span>
+                                                                    <span class="dot_dot"></span>
+                                                                </span>
+                                                                <span class="indicator_dot" style="right: @quantile.Calculated%">
+                                                                    <span class="indicator_text calc"> Calculated @quantile.Calculated@unit</span>
+                                                                    <span class="dot_dot"></span>
+                                                                </span>
+                                                                @if(@quantile.Probable.Length > 0)
+                                                                {
+                                                                    <span class="indicator_dot" style="right: @quantile.Probable%">
+                                                                        <span class="indicator_text prob">Probable @quantile.Probable@unit</span>
+                                                                        <span class="dot_dot"></span>
+                                                                    </span>
+                                                                }
+                                                                <span class="indicator_dot" style="right: @quantile.Min%">
+                                                                    <span class="indicator_text min"> Min @quantile.Min@unit</span>
+                                                                    <span class="dot_dot"></span>
+                                                                </span>
+                                                                }
+                                                                
+
                                                             @{
                                                                
                                                                 int previous_threshold = 100;
                                                                 int width = 0;
+                                                                int flex = 1;
                                                             }
 
                                                             @foreach (var (cat, catval) in thresholds)
@@ -322,15 +341,28 @@
                                                                 int n;
                                                                 bool isNumeric = int.TryParse(catval, out n);
 
-                                                                if (isNumeric) { width = previous_threshold - n; }
-                                                                else { width = 25; }
+                                                                if (isNumeric ) {
+                                                                    if(unit == "%")
+                                                                    {
+                                                                        width = previous_threshold - n;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                    width= 20;
+                                                                    flex = n;
+                                                                    }
+
+                                                                }
+                                                                else { width = 20;
+
+                                                                } 
 
 
 
-                                                                <div class="@cat category_graph_element" style="width:@width%">
+                                                                <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
                                                                     @cat
                                                                     <br />
-                                                                    <span>@catval</span>
+                                                                    <span>@comparator@catval@unit</span>
                                                                 </div>
                                                                
                                                                     previous_threshold = n;
@@ -342,8 +374,8 @@
 
                                                     <p>
                                                         <span>
-                                                            Det antas en nedgang på mellom @min@unit og @max@unit, som mest trolig ligger på @quantile.Probable@unit. Ved å bruke
-                                                            føre-var prinsippet i beregningene blir verdien @quantile.Calculated@unit, som tilsvarer kategori [hent felt].
+                                                            Det antas en nedgang på mellom @min@unit og @max@unit@if (@quantile.Probable.Length > 0) {<span>, som mest trolig ligger på @quantile.Probable @unit</span>}. Ved å bruke
+                                                                                        føre - var prinsippet i beregningene blir verdien @quantile.Calculated @unit, som tilsvarer kategori[hent felt].
 
                                                         </span>
                                                     </p>

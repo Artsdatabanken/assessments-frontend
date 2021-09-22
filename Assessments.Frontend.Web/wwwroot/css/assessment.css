@@ -118,14 +118,20 @@
     padding-top:5px;
 }
 
-.category_graph_element span{
-    position:absolute;
-    bottom:-20px;
-    color:black;
-    width:20px;
-    display:block;
-    right:-10px;
+.category_graph_element span {
+    position: absolute;
+    top: 28px;
+    color: black;
+    width: 100%;
+    display: block;
+    right: auto;
+    font-size: 8pt;
+    display: block;
+    width: 100%;
+    left: auto;
+    text-align: center;
 }
+
 
 .category_graph .indicator_dot {
     width: 2px;

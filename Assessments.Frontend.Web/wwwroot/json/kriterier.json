@@ -26,6 +26,7 @@
         },
         "content": {
           "unit": "%",
+          "comparator": ">=",
           "threshold": {
             "CR": "90",
             "EN": "70",
@@ -58,6 +59,7 @@
         },
         "content": {
           "unit": "%",
+          "comparator": ">=",
           "threshold": {
             "CR": "80",
             "EN": "50",
@@ -87,6 +89,7 @@
         },
         "content": {
           "unit": "%",
+          "comparator": ">=",
           "threshold": {
             "CR": "80",
             "EN": "50",
@@ -119,6 +122,7 @@
         },
         "content": {
           "unit": "%",
+          "comparator": ">=",
           "threshold": {
             "CR": "80",
             "EN": "50",
@@ -151,6 +155,7 @@
             "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en art. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
             "content": {
               "unit": "antall",
+              "comparator": "≤",
               "threshold": {
                 "CR": "1",
                 "EN": "5",
@@ -208,6 +213,7 @@
         "description": "Utbredelsesområdet er et mål for hvor vid geografisk utbredelse en art har, om må ikke forveksles med okkupert eller potensielt forekomstareal. Utbredelsesområdet tilsvarer arealet av en minimum konveks polygon der de rette linjene i polygonen omringer alle kjente og antatte nåværende forekomster.",
         "content": {
           "unit": "km2",
+          "comparator": "<",
           "threshold": {
             "CR": "100",
             "EN": "5000",
@@ -222,11 +228,12 @@
         "description": "Forekomstarealet er et mål for det spesifikke arealet som arten lever på, standardisert som summen av areal av 2 km x 2 km (4 km2) ruter som inneholder kjent eller antatt forekomst av arten.",
         "content": {
           "unit": "km2",
+          "comparator": "<",
           "threshold": {
             "CR": "10",
             "EN": "500",
             "VU": "2000",
-            "NT": "4000 km2* *eller >EN + et underkriterium"
+            "NT": "4000 km2 eller >EN + et underkriterium"
           },
           "conclusion": "B2 Forekomstareal < <terskelverdi> tilsvarer i utgangspunktet <kategori>"
         }
@@ -238,6 +245,7 @@
     "description": "Populasjonsstørrelse er antall reproduksjonsdyktige individ. For kjønnede arter kan det tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.",
     "content": {
       "unit": "individ",
+      "comparator": "<",
       "threshold": {
         "CR": "250",
         "EN": "2500",
@@ -269,6 +277,7 @@
             "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.  ",
             "content": {
               "unit": "individ",
+              "comparator": "≤",
               "threshold": {
                 "CR": "50",
                 "EN": "250",
@@ -282,12 +291,12 @@
             "title": "Stor andel av alle reproduksjonsdyktige individ i én og samme delpopulasjon",
             "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg finnes en stor andel av populasjonen i én og samme delpopulasjon (alle egg i én kurv).   ",
             "content": {
-              "unit": "individ",
+              "unit": "%",
               "threshold": {
-                "CR": "90-100 % ",
-                "EN": "95-100 % ",
-                "VU": "100 % ",
-                "NT": "100 % "
+                "CR": "90-100",
+                "EN": "95-100",
+                "VU": "100",
+                "NT": "100"
               },
               "min": "Minst :c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon"
             }
@@ -309,6 +318,7 @@
         "description": "Arten har få reproduksjonsdyktige individ/liten populasjonsstørrelse, men er ikke nødvendigvis i nedgang. For kjønnede arter kan antall reproduksjonsdyktige individ tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.  ",
         "content": {
           "unit": "individ",
+          "comparator": "<",
           "threshold": {
             "CR": "50",
             "EN": "250",
@@ -322,12 +332,13 @@
         "title": "Begrenset forekomstareal eller antall trusseldefinerte lokaliteter",
         "description": "Det foreligger en sannsynlig trussel mot populasjonen av en slik alvorlighetsgrad at arten kan bli kritisk truet (CR) eller regionalt utdødd (RE) innen få år etter at trusselen inntreffer.",
         "content": {
-          "unit": "individ",
+          "unit": "km2",
+          "comparator": "<",
           "threshold": {
             "CR": "",
             "EN": "",
-            "VU": "<20 km2 ≤ 5 lokaliteter",
-            "NT": "≤ 40 km2 ≤ 10 lokaliteter"
+            "VU": "<20 km2, ≤ 5 lokaliteter",
+            "NT": "≤ 40 km2, ≤ 10 lokaliteter"
           },
           "conclusion": "Beregnet antall trusseldefinerte lokaliteter: baIntervallAntallLokaliteter(quantile) D2 Den begrensede forekomsten tilsvarer <kategori> "
         }

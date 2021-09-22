@@ -17,7 +17,7 @@ li.checkbox, .filter_groups ul {
   font-weight: bold;
 }
 
-.controls span, a>button, .toggle_filter, .toggle_search {
+.controls span, a>button, .toggle_filter {
   pointer-events: none;
 }
 
@@ -99,7 +99,8 @@ li.checkbox, .filter_groups ul {
   }
 
   .list-search {
-    margin: 0;
+    margin-top: 10px;
+    margin-bottom: 0;
     border-bottom: 1px solid lightgray;
     padding: 10px 0;
     background:lightgrey;
@@ -136,6 +137,7 @@ li.checkbox, .filter_groups ul {
   
   .toggle_filter {
     margin: 0;
+    height: 100%;
   }
 
   .filter_group h4 {
@@ -171,14 +173,6 @@ li.checkbox, .filter_groups ul {
 
   input[type=checkbox]:checked#show_filters~.filters_scrollable>.filter_groups>div>button {
     display: block;
-  }
-
-  input[type=checkbox]:checked#show_search~.list-search {
-    display: block;
-  }
-
-  .list-search {
-    display: none;
   }
 
   .filters {

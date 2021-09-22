@@ -331,6 +331,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string Species2015 = "species-2015.json";
 
             public const string Species2006 = "species-2006.json";
+
+            public const string SpeciesExpertCommitteeMembers = "species-experts.csv";
         }
 
         public class SpeciesCategories

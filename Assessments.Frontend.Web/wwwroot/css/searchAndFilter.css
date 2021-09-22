@@ -95,6 +95,12 @@ li.checkbox, .filter_groups ul {
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
+    position: sticky;
+    top: 0;
+    padding-top: 10px;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid lightgray;
+    z-index: 10;
   }
 
   .list-search {
@@ -127,14 +133,6 @@ li.checkbox, .filter_groups ul {
     border-bottom: 1px solid lightgray;
     z-index: 10;
     background-color: #fff;
-  }
-  
-  .show_filters {
-    width: 50%;
-    display: inline-block;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    z-index: 10;
   }
   
   .toggle_filter {
@@ -173,8 +171,6 @@ li.checkbox, .filter_groups ul {
   .filter_groups {
     display: none;
     background-color: #f7f7f7;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
     padding-top: 15px;
   }
 

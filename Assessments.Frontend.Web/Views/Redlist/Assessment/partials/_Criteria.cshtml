@@ -2,6 +2,7 @@
 @model SpeciesAssessment2021
 
 @functions {
+
     private SpeciesAssessment2021MinMaxProbableIntervall GetQuantileForCriteria(string key)
     {
         switch (key)
@@ -219,14 +220,17 @@
             <h3>Offisiell kriteriestreng på internasjonal skrivemåte</h3>
             <p>@Model.CriteriaSummarized<br /></p>
 
-            @Model.B1.Statistics.Calculated
-            @Model.B1.Statistics.Min
-            @Model.B1.Statistics.Probable
-            @Model.B1.Statistics.Minintervall
-            @Model.B1.Statistics.Maxintervall
-            @Model.B1.Statistics.Min
-            @Model.B1.Statistics.Punktestimat
-            @Model.B1.Statistics.Quantile
+            @*
+        // TODO: switch not working when moving up one level due to type difference.
+        //
+        @Model.A1
+        @Model.A1.ReductionBasedOn
+
+        @Model.A1.QuantifiedReduction
+                @Model.A2.PreliminaryCategory
+            *@
+
+
         </div>
         <h3>Kriteriefordeling</h3>
 

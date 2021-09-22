@@ -384,7 +384,7 @@ li a span.element_icon {
     margin: 0;
 }
 
-.filter_group h4 .material-icons{
+.list_header .material-icons{
     float:right;
 }
 

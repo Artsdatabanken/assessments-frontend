@@ -32,7 +32,6 @@ li.checkbox, .filter_groups ul {
 }
 
 .list_header {
-  display: flex;
   align-items: center;
 }
 
@@ -50,7 +49,6 @@ li.checkbox, .filter_groups ul {
 
   .filter_group {
       display: inline-block;
-      max-width: 250px;
       vertical-align: top;
       padding: 10px;
       flex:1;
@@ -138,6 +136,34 @@ li.checkbox, .filter_groups ul {
   .toggle_filter {
     margin: 0;
   }
+
+.filter_group h4 {
+    width: 100%;
+    background: white;
+    text-align: left;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    border-right: 0;
+    border-left: 0;
+    margin: 0;
+}
+
+.list_header .material-icons {
+    float: right;
+}
+
+.filter_group {
+    padding-right: 5px;
+}
+
+.filter_group ul {
+    background: #f0f0f0;
+    padding: 5px;
+}
+
+
+
+
   
   input[type=checkbox]:checked#show_filters~.filters_scrollable>.filter_groups {
     display: flex;
@@ -173,6 +199,8 @@ li.checkbox, .filter_groups ul {
     background-color: #f7f7f7;
     padding-top: 15px;
   }
+
+  /* Filter group */
 
   .filter_group {
     width: 100%;
@@ -242,3 +270,4 @@ input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.mater
  {
   display: inline-block;
 }
+

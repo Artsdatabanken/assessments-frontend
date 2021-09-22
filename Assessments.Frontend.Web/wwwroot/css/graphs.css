@@ -1,0 +1,100 @@
+﻿
+/* STATISTICS AND GRAPHS */
+
+.viewselector.stat .redlist,
+.viewselector .graphs {
+    display: none;
+}
+
+.viewselector.stat .graphs {
+    display: block;
+}
+
+.graphs .statelement {
+    padding: 2px;
+}
+
+
+.graph {
+    width: 100%;
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.statelement {
+    display: inline-block;
+    padding: 10px;
+    flex: 1;
+    text-align: center;
+}
+
+.heightbar_blank,
+.heightbar_indicator {
+    height: 200px;
+    display: block;
+    margin-bottom: 2px;
+    position: relative;
+    width: 100%;
+}
+
+.heightbar_indicator {
+    bottom: 0;
+    margin-bottom: 0;
+    margin-top: auto;
+    position: absolute;
+    background: grey;
+}
+
+.statbox {
+    display: block;
+    padding: 10px;
+    background: grey;
+}
+
+.percent {
+    position: absolute;
+    top: -15px;
+    color: black;
+    left: 0px;
+    font-size: 8pt;
+    text-align: center;
+    width: 100%;
+}
+
+.downboxcontainer {
+    font-size: 10pt;
+    height: 179px;
+    display: block;
+    position: relative;
+    background: none;
+}
+
+.downtext {
+    transform: rotate(90deg);
+    display: block;
+    position: absolute;
+    top: 93px;
+    left: -62px;
+    z-index: 2;
+    height: 1vw;
+    width: 180px;
+    text-align: initial;
+}
+
+/* ROTATED GRAPH */
+
+.down_graph {
+    transform: rotate(-90deg);
+    width:auto;
+    max-height:calc(100vw - 20px);
+}
+
+.down_graph .heightbar_blank, 
+.down_graph .heightbar_indicator {
+    height: 50%;
+}
+
+.down_graph .downboxcontainer {
+    background: blue;
+}

@@ -88,10 +88,16 @@
                 <div class="filters_scrollable">
                     <div class="filter_groups">
                         <label class="show_filters"><h3 class="toggle_filter">Filter</h3></label>
+
+
                         <div class="close_reset_filter">
-                            <a asp-controller="Redlist" asp-action="Index2021" asp-route-IsCheck=Model.IsCheck>
-                                <button>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></button>
+
+
+                            <a class="button" asp-controller="Redlist" asp-action="Index2021" asp-route-IsCheck=Model.IsCheck>
+                                <span>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></span>
                             </a>
+
+
                             <button class="close_filters" type="button">
                                 <label for="show_filters">
                                     Lukk filter
@@ -99,6 +105,8 @@
                                 </label>
                             </button>
                         </div>
+
+
                         <ul>
                             <li class="filter_group">
                                 <input class="collapse_checkbox" id="show_area" @CategoryCheck("IsCheck", Model.IsCheck, "Area") type="checkbox" />

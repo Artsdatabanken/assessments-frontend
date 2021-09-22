@@ -200,6 +200,7 @@ h1{
     border-bottom:0;
 }
 
+.button,
 .main button {
     padding: 6px 12px;
     font-size: 15px;
@@ -218,30 +219,35 @@ h1{
     border-radius: 2px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    min-height: 45px;
     margin: 2px;
     border: 1px solid #a6a6a6;
     margin-bottom: 10px;
+    text-decoration:none;
 }
 
+.button .material-icons,
 .main button .material-icons {
     vertical-align: bottom;
     font-size: 16pt;
 }
 
+.button .main button.primary,
 .main button.primary {
     background: #3d3b3a;
     color: #fff;
     border: none;
 }
 
+.button.active,
 .main button.active {
     background: #8b0000;
     color: #fff;
     border: none;
 }
 
+.button:hover,
 .main button:hover {
     background: #4c4a48;
     color: #fff;
+    cursor:pointer;
 }

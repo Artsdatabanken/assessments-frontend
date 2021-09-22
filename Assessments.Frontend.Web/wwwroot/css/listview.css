@@ -373,27 +373,3 @@ li a span.element_icon {
     text-align: initial;
 }
 
-.filter_group h4 {
-    width: 100%;
-    background: white;
-    text-align: left;
-    border: 1px solid lightgrey;
-    padding: 10px;
-    border-right: 0;
-    border-left: 0;
-    margin: 0;
-}
-
-.list_header .material-icons{
-    float:right;
-}
-
-.filter_group {
-    padding-right: 5px;
-}
-
-.filter_group ul {
-    background: #f0f0f0;
-    padding: 5px;
-}
-

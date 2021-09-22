@@ -3,31 +3,22 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
 
-
-
 <partial name="/Views/Redlist/List/partials/_Breadcrumb.cshtml" />
+<partial name="/Views/Shared/_PageMenu.cshtml" />
 
 <div class="content-placer bigmid">
 
     <div class="mid-content">
         <partial name="/Views/Redlist/List/partials/_Header.cshtml" />
         <partial name="/Views/Redlist/List/partials/_Introduction.cshtml" />
-
-
         <h3>
             @Model.Redlist2021ResultsCount
         </h3>
 
-        <!-- List controls -->
-        <div class="controls">
-            <button id="listview" class="material-icons" type="button">list</button>
-            <button id="gridview" class="material-icons" type="button">grid_on </button>
-            <button id="statsview" class="material-icons" type="button">bar_chart </button>
-        </div>
         <div class="listwrapper">
             <!-- FILTER FORM -->
             <partial name="/Views/Redlist/List/partials/_Filters.cshtml" />
-            <div id="viewselector" class="viewselector">
+            <div id="viewselector" class="viewselector @Model.View">
                 <partial name="/Views/Redlist/List/partials/_Graphs.cshtml" />
                 <partial name="/Views/Redlist/List/partials/_ListView.cshtml" />
             </div>
@@ -40,10 +31,5 @@
             UlElementClasses = new[] { "pagination" },
             LiElementClasses = new[] { "page-item" }
         })
-
-
-
-
-
     </div>
 </div>

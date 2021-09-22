@@ -149,7 +149,6 @@ h1{
         color:black;
     }
 
-
     .sidebarmenu li a{
         color: black;
     }
@@ -180,15 +179,23 @@ h1{
     .history {
         display: none;
     }
+
+    .sidebarmenu {
+        margin-left: -15px;
+    }
 }
 
 
 /* MOBILE SIZE: 650px  */
 @media only screen and (max-width: 650px) {
+
 }
 
 /* Tiny mobile : 550px */
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 527px) {
+        .sidebarmenu {
+        margin-left: -5px;
+    }
 }
 
 /* SUPER-tiny: 300px*/

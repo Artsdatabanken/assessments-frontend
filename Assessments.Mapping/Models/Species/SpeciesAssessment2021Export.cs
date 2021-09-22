@@ -52,8 +52,8 @@ namespace Assessments.Mapping.Models.Species
         [Description("Dokumentasjonstekst for vurderingen")]
         public string ExpertStatement { get; set; }
 
-        [DisplayName("Begrunnelse nedgradering av kategori")] 
-        [Description("Dokumentasjonstekst dersom risiko for utdøing sterkt påvirket av populasjoner i naboland")] 
+        [DisplayName("Begrunnelse nedgradering av kategori")]
+        [Description("Dokumentasjonstekst dersom risiko for utdøing sterkt påvirket av populasjoner i naboland")]
         public string RationaleCategoryAdjustment { get; set; }
 
         [DisplayName("Risiko for utdøing sterkt påvirket av populasjoner i naboland")]
@@ -83,7 +83,7 @@ namespace Assessments.Mapping.Models.Species
         [DisplayName("Kriterier 2010")]
         [Description("Utslagsgivende kriterier 2010")]
         public string CriteriaSummarized2010 { get; set; }
-        
+
         [DisplayName("Andel av europeisk populasjon i Norge")]
         [Description("Andelen den norske populasjonen utgjør at europeisk populasjon. Predefinerte intervaller")]
         public string PercentageEuropeanPopulation { get; set; }
@@ -103,9 +103,97 @@ namespace Assessments.Mapping.Models.Species
         [DisplayName("Påvirkningsfaktorer")]
         [Description("Påvirkningsfaktorer, skilletegn for ny påvirkningsfaktor er ;")]
         public string ImpactFactors { get; set; }
+        
+        [DisplayName("Østfold")]
+        [Description("Østfold - tilstedeværelse i regionen")]
+        public string Ostfold { get; set; }
 
-        //[DisplayName("")]
-        //[Description("")]
-        //public string Xxx { get; set; }
+        [DisplayName("Oslo og Akershus")]
+        [Description("Oslo og Akershus - tilstedeværelse i regionen")]
+        public string OsloOgAkershus { get; set; }
+
+        [DisplayName("Hedmark")]
+        [Description("Hedmark - tilstedeværelse i regionen")]
+        public string Hedmark { get; set; }
+
+        [DisplayName("Oppland")]
+        [Description("Oppland - tilstedeværelse i regionen")]
+        public string Oppland { get; set; }
+
+        [DisplayName("Buskerud")]
+        [Description("Buskerud - tilstedeværelse i regionen")]
+        public string Buskerud { get; set; }
+
+        [DisplayName("Vestfold")]
+        [Description("Vestfold - tilstedeværelse i regionen")]
+        public string Vestfold { get; set; }
+
+        [DisplayName("Telemark")]
+        [Description("Telemark - tilstedeværelse i regionen")]
+        public string Telemark { get; set; }
+
+        [DisplayName("Aust-Agder")]
+        [Description("Aust-Agder - tilstedeværelse i regionen")]
+        public string AustAgder { get; set; }
+
+        [DisplayName("Vest-Agder")]
+        [Description("Vest-Agder - tilstedeværelse i regionen")]
+        public string VestAgder { get; set; }
+
+        [DisplayName("Rogaland")]
+        [Description("Rogaland - tilstedeværelse i regionen")]
+        public string Rogaland { get; set; }
+
+        [DisplayName("Hordaland")]
+        [Description("Hordaland - tilstedeværelse i regionen")]
+        public string Hordaland { get; set; }
+
+        [DisplayName("Sogn og Fjordane")]
+        [Description("Sogn og Fjordane - tilstedeværelse i regionen")]
+        public string SognOgFjordane { get; set; }
+
+        [DisplayName("Møre og Romsdal")]
+        [Description("Møre og Romsdale - tilstedeværelse i regionen")]
+        public string MoreOgRomsdal { get; set; }
+
+        [DisplayName("Trøndelag")]
+        [Description("Trøndelag - tilstedeværelse i regionen")]
+        public string Trondelag { get; set; }
+
+        [DisplayName("Nordland")]
+        [Description("Nordland - tilstedeværelse i regionen")]
+        public string Nordland { get; set; }
+
+        [DisplayName("Troms")]
+        [Description("Troms - tilstedeværelse i regionen")]
+        public string Troms { get; set; }
+
+        [DisplayName("Finnmark")]
+        [Description("Finnmark - tilstedeværelse i regionen")]
+        public string Finnmark { get; set; }
+
+        [DisplayName("Jan Mayen")]
+        [Description("Jan Mayen - tilstedeværelse i regionen")]
+        public string JanMayen { get; set; }
+        
+        [DisplayName("Nordsjøen")]
+        [Description("Nordsjøen - tilstedeværelse i regionen")]
+        public string Nordsjoen { get; set; }
+        
+        [DisplayName("Norskehavet")]
+        [Description("Norskehavet - tilstedeværelse i regionen")]
+        public string Norskehavet { get; set; } 
+        
+        [DisplayName("Barentshavet nord og Polhavet")]
+        [Description("Barentshavet nord og Polhavet - tilstedeværelse i regionen")]
+        public string BarentshavetNordOgPolhavet { get; set; }
+        
+        [DisplayName("Barentshavet sør")]
+        [Description("Barentshavet sør - tilstedeværelse i regionen")]
+        public string BarentshavetSor { get; set; } 
+        
+        [DisplayName("Grønlandshavet")]
+        [Description("Grønlandshavet - tilstedeværelse i regionen")]
+        public string Gronlandshavet { get; set; }
     }
 }

@@ -1,17 +1,40 @@
-﻿namespace Assessments.Mapping.Models.Species
+﻿using System.ComponentModel;
+
+namespace Assessments.Mapping.Models.Species
 {
     public enum CategoryChangeReason
     {
+        [Description("")]
         NoChange,
-        RealPopulationChange, //Reell populasjonsendring,
-        NewKnowledge, //Endret (ny eller annen) kunnskap,
-        CriteriaAdjustments, //Endrete kriterier eller tilpasning til regler,
-        NewIntepretation, //Ny tolkning av tidligere data,
-        NewSpecies, //Arten nyoppdaget eller nybeskrevet for landet,
-        TaxonomicChange, //Endret taksonomisk status,
-        AssessmentareChange, //Endring i vurderingsområde,
-        NotEvaluated2010, // Ikke vurdert: NA/NE art,
-        NotEvaluated2015, //Ikke vurdert: NA/NE art 2015
+        
+        [Description("Reell populasjonsendring")]
+        RealPopulationChange,
+        
+        [Description("Endret (ny eller annen) kunnskap")]
+        NewKnowledge, 
+
+        [Description("Endrete kriterier eller tilpasning til regler")]
+        CriteriaAdjustments,
+        
+        [Description("Ny tolkning av tidligere data")]
+        NewIntepretation,
+        
+        [Description("Arten nyoppdaget eller nybeskrevet for landet")]
+        NewSpecies, 
+        
+        [Description("Endret taksonomisk status")]
+        TaxonomicChange,
+        
+        [Description("Endring i vurderingsområde")]
+        AssessmentareChange, 
+        
+        [Description("Ikke vurdert: NA/NE art")]
+        NotEvaluated2010, 
+        
+        [Description("Ikke vurdert: NA/NE art 2015")]
+        NotEvaluated2015,
+        
+        [Description("Ikke vurdert: NA/NE art 2021")]
         NotEvaluated2021
     }
 }

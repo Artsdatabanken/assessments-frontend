@@ -1,5 +1,4 @@
 ﻿
-
 /* PAGINATOR FOR LIST PAGE*/
 
 .pagination {
@@ -100,20 +99,20 @@ td {
 
 .redlist li a {
     display: inline-grid;
-    grid-template-columns: 1fr 1fr .5fr .9fr .5fr .3fr;
+    grid-template-columns: 1fr 1fr .5fr .5fr .9fr.3fr;
     width: 100%;
     line-height: 1;
     font-size: 12pt;
     position: relative;
-    text-decoration:none;
-    color:inherit;
+    text-decoration: none;
+    color: inherit;
     align-items: center;
     word-break: break-word;
 }
 
 .listheader {
     display: inline-grid;
-    grid-template-columns: 1fr 1fr .5fr .9fr .5fr .3fr;
+    grid-template-columns: 1fr 1fr .5fr .5fr .9fr .3fr;
     position: sticky;
     position: -webkit-sticky;
     top: -1px;
@@ -124,23 +123,20 @@ td {
     border-bottom: 1px solid lightgray;
 }
 
-
-.redlist span {
-    padding-left: 2px;
-}
-
 .redlist .category_tag {
         padding: 10px;
     }
 
 .redlist li {
-    padding-left:10px;
+    max-width: 100%;
+    overflow: hidden;
 }
-
-.redlist li span:last-child {
-    text-align: right;
+@media only screen and (min-width: 750px) {
+    .redlist li span:last-child {
+        text-align: right;
+    }
 }
-
+   
 .redlist li:nth-child(even) {
     background: #fafafa;
 }
@@ -153,6 +149,58 @@ li a span.element_icon {
     width:100%;
 }
 
+
+/* LIST MOBILE VS FULL SIZE */
+
+.allsize,
+.fullsize {
+    display: inline-block;
+}
+
+.mobile{
+    display:none;
+}
+
+@media only screen and (max-width: 750px) {
+    .fullsize {
+        display: none;
+    }
+
+    .mobile {
+        display: inline-block;
+    }
+
+    .listheader {
+        text-align:center;
+        grid-template-columns: 1.5fr 5fr 3fr;
+    }
+
+    .redlist li a {
+        grid-template-columns: 1.5fr 5fr 2fr;
+    }
+
+    .element_popular_name{
+        font-weight:bold;
+    }
+
+    .element_speciesgroup{
+        display:block;
+        text-align:center;
+    }
+
+    .element_popular_name {
+        font-size: 12pt;
+        display: block;
+        padding-bottom: 5px;
+    }
+
+    .element_speciesgroup span {
+        padding-top: 5px;
+        display: block;
+        font-size: 8pt;
+    }
+}
+
 /* GRID VIEW */
 .viewselector.grid .listheader {
     display: none;
@@ -163,17 +211,17 @@ li a span.element_icon {
     display: inline;
 }
 
-    .viewselector.grid li a {
-        display: inline-block;
-        width: 150px;
-        height: 230px;
-        background: #fbfbfb;
-        margin-bottom: 15px;
-        margin-left: 5px;
-        vertical-align: top;
-        border: 1px solid #d4d4d4;
-        text-align: center;
-    }
+.viewselector.grid li a {
+    display: inline-block;
+    width: 150px;
+    height: 230px;
+    background: #fbfbfb;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    vertical-align: top;
+    border: 1px solid #d4d4d4;
+    text-align: center;
+}
 
 
 .element_icon {

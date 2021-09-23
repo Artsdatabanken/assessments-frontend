@@ -13,8 +13,8 @@
 {
     <h2>Sitering</h2>
     <p>
-        @expertCommitteeMembers.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList().JoinAnd(", ", " og "). 
-        @Model.SpeciesGroup: Vurdering av @Model.PopularName @Model.ScientificName for @(Model.AssessmentArea == "N" ? "Norge" : "Svalbard"). 
+        @expertCommitteeMembers.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList().JoinAnd(", ", " og ") (2021, 24. november).
+        @Model.SpeciesGroup: Vurdering av @Model.PopularName @Model.ScientificName for @(Model.AssessmentArea == "N" ? "Norge" : "Svalbard").
         Norsk rødliste for arter 2021. Artsdatabanken. @Context.Request.GetEncodedUrl()
     </p>
 }

@@ -16,6 +16,17 @@ namespace Assessments.Frontend.Web.Infrastructure
             {
                 var worksheet = workbook.AddWorksheet("Vurderinger");
                 
+                //var results = assessments.Select(x =>
+                //{
+                //    x.CiteAs = expertCommitteeMembers
+                //        .Where(y => y.ExpertCommittee == x.ExpertCommittee &&
+                //                    y.Year == Convert.ToInt32(x.AssessmentYear))
+                //        .Select(z => $"{z.LastName} {z.FirstNameInitals}").Distinct().ToList().JoinAnd(", ", " og ");
+                //    return x;
+                //}).ToList();
+
+                // NOTE: ^ eksport tar over 1 minutt, legge til ekspertgruppemedlemmer i eget ark?
+
                 worksheet.Cell(1, 1).InsertTable(assessments);
 
                 var exportColumns = typeof(SpeciesAssessment2021Export).GetProperties().Select(p => new

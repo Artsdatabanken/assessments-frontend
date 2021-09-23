@@ -38,6 +38,21 @@
     color: white;
 }
 
+/* ICON */
+
+.element_icon {
+    width: 45px;
+    height: 0;
+    position: relative;
+    display: inline-block;
+}
+
+.element_icon img {
+    width: 100%;
+    height: 45px;
+    padding: 5px;
+    margin-top: -30%;
+}
 
 
 /* Styling table slightly while working with it */
@@ -99,7 +114,7 @@ td {
 
 .redlist li a {
     display: inline-grid;
-    grid-template-columns: 1fr 4fr 1fr 2fr;
+    grid-template-columns: 1fr 4fr 2fr;
     width: 100%;
     line-height: 1;
     font-size: 12pt;
@@ -108,11 +123,12 @@ td {
     color: inherit;
     align-items: center;
     word-break: break-word;
+    padding: 8px 0;
 }
 
 .listheader {
     display: inline-grid;
-    grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
+    grid-template-columns: 1fr 2fr 2fr 2fr;
     position: sticky;
     position: -webkit-sticky;
     top: -1px;
@@ -121,8 +137,14 @@ td {
     font-weight: bold;
     padding: 5px 0;
     border-bottom: 1px solid lightgray;
-    text-align:center;
+    text-align: left;
 }
+
+.listheader span:last-child{
+    text-align:right;
+}
+
+
 
 @media only screen and (min-width: 750px) {
 
@@ -133,7 +155,8 @@ td {
 
     .element_speciesgroup{
         display: inline-grid;
-        grid-template-columns: 2fr 1fr;
+        grid-template-columns: 2fr 45px;
+        text-align:right;
     }
 
     .element_speciesgroup span,
@@ -146,8 +169,12 @@ td {
 
 
 .redlist .category_tag {
-        padding: 10px;
-    }
+    padding: 10px;
+    width: 41px;
+    display: block;
+    height: 41px;
+    overflow:hidden;
+}
 
 .redlist li {
     max-width: 100%;
@@ -191,13 +218,10 @@ li a span.element_icon {
         display: inline-block;
     }
 
-    .listheader {
-        text-align:center;
-        grid-template-columns: 1.5fr 5fr 3fr;
-    }
-
+    .listheader,
     .redlist li a {
-        grid-template-columns: 1.5fr 5fr 2fr;
+        grid-template-columns: 1.5fr 5fr 84px;
+        padding: 4px 0;
     }
 
     .element_popular_name{
@@ -216,7 +240,6 @@ li a span.element_icon {
     }
 
     .element_speciesgroup span {
-        padding-top: 5px;
         display: block;
         font-size: 8pt;
     }
@@ -226,6 +249,14 @@ li a span.element_icon {
         font-size: 10pt;
         color: gray;
         padding-top: 2px;
+    }
+
+    .element_icon img {
+        width: 100%;
+        height: 45px;
+        padding: 0px;
+        padding-top: 2px;
+        margin-top: 0%;
     }
 }
 
@@ -252,19 +283,7 @@ li a span.element_icon {
 }
 
 
-.element_icon {
-    width: 50px;
-    height: 50px;
-    position: relative;
-    display: inline-block;
-    flex: none;
-}
 
-.element_icon img {
-    width: 100%;
-    height: 100%;
-    padding:5px;
-}
 .grid .element_icon {
     width: 150px;
     height: 150px;

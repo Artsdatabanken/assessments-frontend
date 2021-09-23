@@ -26,7 +26,6 @@
             <span class="fullsize">Populærnavn</span>
             <span class="mobile">Art</span>
 
-            <span class="fullsize">Område</span>
             <span class="allsize">Artsgruppe</span>
 
         </li>
@@ -49,20 +48,19 @@
                     <span class="element_species">
                         <span class="element_popular_name">@Capitalize(item.PopularName)</span>
                         <span class="element_name">@item.ScientificName</span>
-             
+                        <span class="element_area mobile">
+                            @if (@item.AssessmentArea == "N")
+                            {
+                                <span> Norge </span >
+                            }
+                            else if (@item.AssessmentArea == "S")
+                            {
+                               <span>Svalbard</span>
+                            }
+
+                        </span>
                     </span>
 
-
-                    <span class="element_area fullsize">
-                        @if (@item.AssessmentArea == "N")
-                        {
-                            <span> Norge </span>
-                        }
-                        else if (@item.AssessmentArea == "S")
-                        {
-                            <span>Svalbard</span>
-                        }
-                    </span>
 
                     <span class="element_speciesgroup">
                         <span class="element_group">@item.SpeciesGroup</span>

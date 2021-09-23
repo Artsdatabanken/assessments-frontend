@@ -49,20 +49,19 @@
                     <span class="element_species">
                         <span class="element_popular_name">@Capitalize(item.PopularName)</span>
                         <span class="element_name">@item.ScientificName</span>
+             
                     </span>
 
 
                     <span class="element_area fullsize">
-                        @item.AssessmentArea
                         @if (@item.AssessmentArea == "N")
                         {
-                            <img src="~/images/norge.png" alt="Bilde av Norge" />
+                            <span> Norge </span>
                         }
                         else if (@item.AssessmentArea == "S")
                         {
-                            <img src="~/images/svalbard.png" alt="Bilde av Svalbard" />
+                            <span>Svalbard</span>
                         }
-
                     </span>
 
                     <span class="element_speciesgroup">

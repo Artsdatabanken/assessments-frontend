@@ -99,7 +99,7 @@ td {
 
 .redlist li a {
     display: inline-grid;
-    grid-template-columns: 1fr 1fr .5fr .5fr .9fr.3fr;
+    grid-template-columns: 1fr 4fr 1fr 2fr;
     width: 100%;
     line-height: 1;
     font-size: 12pt;
@@ -112,7 +112,7 @@ td {
 
 .listheader {
     display: inline-grid;
-    grid-template-columns: 1fr 1fr .5fr .5fr .9fr .3fr;
+    grid-template-columns: 1fr 2fr 2fr 1fr 2fr;
     position: sticky;
     position: -webkit-sticky;
     top: -1px;
@@ -121,7 +121,29 @@ td {
     font-weight: bold;
     padding: 5px 0;
     border-bottom: 1px solid lightgray;
+    text-align:center;
 }
+
+@media only screen and (min-width: 750px) {
+
+    .element_species {
+        display: inline-grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .element_speciesgroup{
+        display: inline-grid;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .element_speciesgroup span,
+    .element_species span {
+        
+        background:white;
+    }
+
+}
+
 
 .redlist .category_tag {
         padding: 10px;
@@ -130,16 +152,10 @@ td {
 .redlist li {
     max-width: 100%;
     overflow: hidden;
+    border-bottom: 1px solid #e9e9e9;
 }
-@media only screen and (min-width: 750px) {
-    .redlist li span:last-child {
-        text-align: right;
-    }
-}
-   
-.redlist li:nth-child(even) {
-    background: #fafafa;
-}
+
+
 
 li a span.element_icon {
     padding: 0;
@@ -160,6 +176,11 @@ li a span.element_icon {
 .mobile{
     display:none;
 }
+
+.element_name {
+    font-style: italic;
+}
+
 
 @media only screen and (max-width: 750px) {
     .fullsize {
@@ -198,6 +219,13 @@ li a span.element_icon {
         padding-top: 5px;
         display: block;
         font-size: 8pt;
+    }
+
+    .element_area.mobile {
+        display: block;
+        font-size: 10pt;
+        color: gray;
+        padding-top: 2px;
     }
 }
 

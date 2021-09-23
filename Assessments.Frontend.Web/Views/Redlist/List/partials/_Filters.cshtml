@@ -9,6 +9,7 @@
     Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
     Dictionary<string, Dictionary<string, string>> AllSpeciesGroups = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
 }
+}
 @functions{
     string CategoryCheck(string name, string[] element, string value)
     {
@@ -27,6 +28,18 @@
             return "class=active";
         }
         return element == value ? "class=active" : String.Empty;
+    }
+
+    Dictionary<string, string> GetIsChecked()
+    {
+        Dictionary<string, string> isChecked = new Dictionary<string, string>();
+        
+        foreach (var item in Model.IsCheck)
+        {
+            isChecked.Add("IsCheck", item);
+        }
+
+        return isChecked;
     }
 }
 
@@ -96,7 +109,7 @@
                         <div class="close_reset_filter">
 
 
-                            <a class="button" asp-controller="Redlist" asp-action="Index2021" asp-route-IsCheck=Model.IsCheck>
+                            <a class="button" asp-controller="Redlist" asp-action="Index2021" asp-all-route-data="GetIsChecked()">
                                 <span>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></span>
                             </a>
 

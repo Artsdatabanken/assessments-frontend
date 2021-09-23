@@ -122,7 +122,6 @@ td {
     text-decoration: none;
     color: inherit;
     align-items: center;
-    word-break: break-word;
     padding: 8px 0;
 }
 
@@ -169,11 +168,11 @@ td {
 
 
 .redlist .category_tag {
-    padding: 10px;
+    padding: 9px;
     width: 41px;
     display: block;
     height: 41px;
-    overflow:hidden;
+    padding-top: 13px;
 }
 
 .redlist li {

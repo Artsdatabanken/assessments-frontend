@@ -1,5 +1,4 @@
 ﻿
-
 /* PAGINATOR FOR LIST PAGE*/
 
 .pagination {
@@ -39,6 +38,21 @@
     color: white;
 }
 
+/* ICON */
+
+.element_icon {
+    width: 45px;
+    height: 0;
+    position: relative;
+    display: inline-block;
+}
+
+.element_icon img {
+    width: 100%;
+    height: 45px;
+    padding: 5px;
+    margin-top: -30%;
+}
 
 
 /* Styling table slightly while working with it */
@@ -100,20 +114,20 @@ td {
 
 .redlist li a {
     display: inline-grid;
-    grid-template-columns: 1fr 1fr .5fr .9fr .5fr .3fr;
+    grid-template-columns: 1fr 4fr 2fr;
     width: 100%;
     line-height: 1;
     font-size: 12pt;
     position: relative;
-    text-decoration:none;
-    color:inherit;
+    text-decoration: none;
+    color: inherit;
     align-items: center;
-    word-break: break-word;
+    padding: 8px 0;
 }
 
 .listheader {
     display: inline-grid;
-    grid-template-columns: 1fr 1fr .5fr .9fr .5fr .3fr;
+    grid-template-columns: 1fr 2fr 2fr 2fr;
     position: sticky;
     position: -webkit-sticky;
     top: -1px;
@@ -122,28 +136,52 @@ td {
     font-weight: bold;
     padding: 5px 0;
     border-bottom: 1px solid lightgray;
+    text-align: left;
+}
+
+.listheader span:last-child{
+    text-align:right;
 }
 
 
-.redlist span {
-    padding-left: 2px;
-}
 
-.redlist .category_tag {
-        padding: 10px;
+@media only screen and (min-width: 750px) {
+
+    .element_species {
+        display: inline-grid;
+        grid-template-columns: 1fr 1fr;
     }
 
+    .element_speciesgroup{
+        display: inline-grid;
+        grid-template-columns: 2fr 45px;
+        text-align:right;
+    }
+
+    .element_speciesgroup span,
+    .element_species span {
+        
+        background:white;
+    }
+
+}
+
+
+.redlist .category_tag {
+    padding: 9px;
+    width: 41px;
+    display: block;
+    height: 41px;
+    padding-top: 13px;
+}
+
 .redlist li {
-    padding-left:10px;
+    max-width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #e9e9e9;
 }
 
-.redlist li span:last-child {
-    text-align: right;
-}
 
-.redlist li:nth-child(even) {
-    background: #fafafa;
-}
 
 li a span.element_icon {
     padding: 0;
@@ -151,6 +189,74 @@ li a span.element_icon {
 
 .viewselector{
     width:100%;
+}
+
+
+/* LIST MOBILE VS FULL SIZE */
+
+.allsize,
+.fullsize {
+    display: inline-block;
+}
+
+.mobile{
+    display:none;
+}
+
+.element_name {
+    font-style: italic;
+}
+
+
+@media only screen and (max-width: 750px) {
+    .fullsize {
+        display: none;
+    }
+
+    .mobile {
+        display: inline-block;
+    }
+
+    .listheader,
+    .redlist li a {
+        grid-template-columns: 1.5fr 5fr 84px;
+        padding: 4px 0;
+    }
+
+    .element_popular_name{
+        font-weight:bold;
+    }
+
+    .element_speciesgroup{
+        display:block;
+        text-align:center;
+    }
+
+    .element_popular_name {
+        font-size: 12pt;
+        display: block;
+        padding-bottom: 5px;
+    }
+
+    .element_speciesgroup span {
+        display: block;
+        font-size: 8pt;
+    }
+
+    .element_area.mobile {
+        display: block;
+        font-size: 10pt;
+        color: gray;
+        padding-top: 2px;
+    }
+
+    .element_icon img {
+        width: 100%;
+        height: 45px;
+        padding: 0px;
+        padding-top: 2px;
+        margin-top: 0%;
+    }
 }
 
 /* GRID VIEW */
@@ -163,32 +269,20 @@ li a span.element_icon {
     display: inline;
 }
 
-    .viewselector.grid li a {
-        display: inline-block;
-        width: 150px;
-        height: 230px;
-        background: #fbfbfb;
-        margin-bottom: 15px;
-        margin-left: 5px;
-        vertical-align: top;
-        border: 1px solid #d4d4d4;
-        text-align: center;
-    }
-
-
-.element_icon {
-    width: 50px;
-    height: 50px;
-    position: relative;
+.viewselector.grid li a {
     display: inline-block;
-    flex: none;
+    width: 150px;
+    height: 230px;
+    background: #fbfbfb;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    vertical-align: top;
+    border: 1px solid #d4d4d4;
+    text-align: center;
 }
 
-.element_icon img {
-    width: 100%;
-    height: 100%;
-    padding:5px;
-}
+
+
 .grid .element_icon {
     width: 150px;
     height: 150px;

@@ -4,7 +4,16 @@
 <!-- Data from model -->
 @{
     Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+}
 
+@functions
+{
+    string Capitalize(string name)
+    {
+        if (!string.IsNullOrEmpty(name))
+            return char.ToUpper(name[0]) + name.Substring(1);
+        return name;
+    }
 }
 
 
@@ -12,6 +21,7 @@
     <ul class="redlist" id="redlist">
         <li class="listheader" id="listheader">
             <span>Artsnavn</span>
+            <span>Populærnavn</span>
             <span>Kategori</span>
             <span>Artsgruppe</span>
             <span>Område</span>
@@ -29,6 +39,7 @@
                         // Makes it very strange and overflowy in grid view.
                     }
                     <span class="element_name">@item.ScientificName</span>
+                    <span class="element_popular_name">@Capitalize(item.PopularName)</span>
                     <span class="element_category">
                         <span class="@item.Category category_tag">@item.Category</span>
                     </span>

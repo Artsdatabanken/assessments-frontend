@@ -70,71 +70,22 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedCategories.ToArray();
         }
 
-        public static string[] findSelectedRegions(string[] selectedRegions)
+        public static Dictionary<string, string> getRegionsDict(string[] regionNames)
+        {
+            Dictionary<string, string> allRegions = new Dictionary<string, string>();
+            for (int i = 0; i < regionNames.Length; i++)
+            {
+                allRegions.Add($"{i}", regionNames[i]);
+            }
+            return allRegions;
+        }
+
+        public static string[] findSelectedRegions(string[] selectedRegions, Dictionary<string, string> allRegions)
         {
             List<string> regions = new List<string>();
             foreach (var region in selectedRegions)
             {
-                switch (region)
-                {
-                    case Constants.Regions.Ag:
-                        regions.Add(Constants.Regions.VestAgder);
-                        regions.Add(Constants.Regions.AustAgder);
-                        break;
-
-                    case Constants.Regions.In:
-                        regions.Add(Constants.Regions.Oppland);
-                        regions.Add(Constants.Regions.Hedmark);
-                        break;
-
-                    case Constants.Regions.VT:
-                        regions.Add(Constants.Regions.Vestfold);
-                        regions.Add(Constants.Regions.Telemark);
-                        break;
-
-                    case Constants.Regions.MR:
-                        regions.Add(Constants.Regions.MoreRomsdal);
-                        break;
-
-                    case Constants.Regions.No:
-                        regions.Add(Constants.Regions.Nordland);
-                        break;
-
-                    case Constants.Regions.Ro:
-                        regions.Add(Constants.Regions.Rogaland);
-                        break;
-
-                    case Constants.Regions.TF:
-                        regions.Add(Constants.Regions.Troms);
-                        regions.Add(Constants.Regions.Finnmark);
-                        break;
-
-                    case Constants.Regions.Tr:
-                        regions.Add(Constants.Regions.Trondelag);
-                        break;
-
-                    case Constants.Regions.Ve:
-                        regions.Add(Constants.Regions.SognFjordane);
-                        regions.Add(Constants.Regions.Hordaland);
-                        break;
-
-                    case Constants.Regions.VO:
-                        regions.Add(Constants.Regions.OsloAkershus);
-                        regions.Add(Constants.Regions.Buskerud);
-                        regions.Add(Constants.Regions.Ostfold);
-                        break;
-
-                    case Constants.Regions.Ha:
-                        regions.Add(Constants.Regions.Nordsjoen);
-                        regions.Add(Constants.Regions.Norskehavet);
-                        regions.Add(Constants.Regions.Gronlandshavet);
-                        regions.Add(Constants.Regions.Polhavet);
-                        regions.Add(Constants.Regions.Barentshavet);
-                        break;
-
-                    default:
-                        break;
-                }
+                regions.Add(allRegions[region]);
             }
             return regions.ToArray();
         }
@@ -186,6 +137,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             Constants.SpeciesCategories.NotEvalueted.ShortHand,
             Constants.SpeciesCategories.NotAppropriate.ShortHand
         };
+
         public static readonly Dictionary<string, string> AllCriterias = new Dictionary<string, string>
         {
             {"A", "populasjonsreduksjon"},
@@ -201,22 +153,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, "25 - 50 %"},
             {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, "> 50 %"}
         };
-
-        public static readonly Dictionary<string, string> AllRegions = new Dictionary<string, string>
-        {
-            {Regions.Ag, "Agder"},
-            {Regions.In, "Innlandet"},
-            {Regions.VT, "Vestfold og Telemark"},
-            {Regions.MR, "Møre og Romsdal"},
-            {Regions.No, "Nordland"},
-            {Regions.Ro, "Rogaland"},
-            {Regions.TF, "Troms og Finnmark"},
-            {Regions.Tr, "Trøndelag"},
-            {Regions.Ve, "Vestland"},
-            {Regions.VO, "Viken og Oslo"},
-            {Regions.Ha, "Havområder"}
-        };
-
+        
         public class EuropeanPopulationPercentages
         {
             public const string EuropeanPopLt5 = "Lt5";
@@ -230,44 +167,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string Range5To25 = "5 - 25 %";
             public const string Range25To50 = "25 - 50 %";
         }
-
-        public class Regions
-        {
-            public const string Ag = "Ag";
-            public const string In = "In";
-            public const string VT = "VT";
-            public const string MR = "MR";
-            public const string No = "No";
-            public const string Ro = "Ro";
-            public const string TF = "TF";
-            public const string Tr = "Tr";
-            public const string Ve = "Ve";
-            public const string VO = "VO";
-            public const string Ha = "Ha";
-            public const string MoreRomsdal = "Møre og Romsdal";
-            public const string VestAgder = "Vest-Agder";
-            public const string AustAgder = "Aust-Agder";
-            public const string Oppland = "Oppland";
-            public const string Hedmark = "Hedmark";
-            public const string Vestfold = "Vestfold";
-            public const string Telemark = "Telemark";
-            public const string Nordland = "Nordland";
-            public const string Rogaland = "Rogaland";
-            public const string Troms = "Troms";
-            public const string Finnmark = "Finnmark";
-            public const string Trondelag = "Trøndelag";
-            public const string SognFjordane = "Sogn og Fjordane";
-            public const string Hordaland = "Hordaland";
-            public const string OsloAkershus = "Oslo og Akershus";
-            public const string Buskerud = "Buskerud";
-            public const string Ostfold = "Østfold";
-            public const string Nordsjoen = "Nordsjøen";
-            public const string Norskehavet = "Norskehavet";
-            public const string Gronlandshavet = "Grønlandshavet";
-            public const string Polhavet = "Polhavet";
-            public const string Barentshavet = "Barentshavet";
-        }
-
+        
         public class Filename
         {
             public const string Species2021 = "species-2021.json";

@@ -171,20 +171,22 @@
     </p>
 
 
-    <div class="graph">
+    <div class="down_graph">
         @foreach (string key in Model.Statistics.Region.Keys)
         {
-            <div class="statelement" style="max-width:60px;">
+            <div class="statelement">
+                 <span class="statbox @key">
+                    @key
+                </span>
+
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="height:@percentage(@region_max, @getNumber(@key,@Model.Statistics.Region))">
+                    <div class="heightbar_indicator @key" style="width:@percentage(@region_max, @getNumber(@key,@Model.Statistics.Region))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.Region)</span>
                     </div>
                 </div>
 
 
-                <span class="downboxcontainer statbox @key">
-                    <span class="downtext">@key</span>
-                </span>
+               
             </div>
         }
     </div>

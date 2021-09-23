@@ -55,11 +55,16 @@
     background: grey;
 }
 
+.greyscale .statelement:nth-child(even) .heightbar_indicator {
+    background: #3d3b3a;
+}
+
 .statbox {
     display: block;
     padding: 10px;
-    background: grey;
 }
+
+
 
 .percent {
     position: absolute;
@@ -141,3 +146,4 @@
     width: 1px;
     margin-left: 100%;
 }
+

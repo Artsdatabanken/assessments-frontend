@@ -1,11 +1,11 @@
-﻿{  
+﻿{
   "A": {
     "title": "Reduksjon i populasjonsstørrelse",
-    "description": "Reduksjon i populasjonsstørrelse over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år). A-kriteriene anvendes på arter som nylig har gjennomgått en sterk nedgang i populasjonsstørrelse, eller der det er sterk grunn til å forvente en betydelig nedgang i nærmeste framtid.",
+    "description": "Reduksjon i populasjonsstørrelse over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år).",
     "subcriteria": {
       "A1": {
-        "title": "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel",
-        "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år). Faktorene som har forårsaket reduksjonen er klart reversible og forstått og har opphørt.",
+        "title": "Reduksjon i fortid - har opphørt",
+        "description": "Reduksjon siste  3 generasjoner, men minimum 10 år. Årsakene til reduksjonen er klart reversible, forstått og har opphørt.",
         "subsub": {
           "a": {
             "title": "Direkte observasjoner"
@@ -37,8 +37,8 @@
         }
       },
       "A2": {
-        "title": "Reduksjon de siste 10 år/3 generasjoner",
-        "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år). Reduksjonen eller faktorene som har forårsaket reduksjonen behøver ikke å ha opphørt eller være forstått eller reversible. ",
+        "title": "Reduksjon i fortid",
+        "description": "Reduksjon siste  3 generasjoner, men minimum 10 år. Reduksjonen eller årsakene til reduksjonen trenger ikke å ha opphørt, være forstått eller reversible.",
         "subsub": {
           "a": {
             "title": "Direkte observasjoner"
@@ -70,8 +70,8 @@
         }
       },
       "A3": {
-        "title": "Framtidig reduksjon kommende 10 år/3 generasjoner",
-        "description": "Bedømt, antatt eller prosjektert framtidig reduksjon i populasjonsstørrelse over de kommende 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år).",
+        "title": "Framtidig reduksjon",
+        "description": "Fremtidig reduksjon over et tidsrom på 3 generasjoner, men minimum 10 år.",
         "subsub": {
           "b": {
             "title": "Egnet bestandsindeks for arten"
@@ -100,8 +100,8 @@
         }
       },
       "A4": {
-        "title": "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid",
-        "description": "Bedømt, antatt, observert, estimert eller prosjektert pågående reduksjon i populasjonsstørrelse over en vurderingsperiode på 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år) som inkluderer både fortid og framtid.",
+        "title": "Pågående reduksjon",
+        "description": "Pågående reduksjon over 3 generasjoner, men minimum 10 år, der tidsspennet inkluderer både fortid og fremtid. Reduksjonen eller årsakene til reduksjonen trenger ikke å ha opphørt, være forstått eller reversible.",
         "subsub": {
           "a": {
             "title": "Direkte observasjoner"

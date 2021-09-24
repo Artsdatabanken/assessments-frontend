@@ -207,3 +207,46 @@
 
 
 }
+
+@media only screen and (max-width: 280px) {
+    .color_graph {
+        flex-direction: column;
+    }
+
+    .color_graph .statelement{
+        display:flex;
+        margin:2px;
+        border-bottom: 1px solid lightgray;
+    }
+    .color_graph .heightbar_blank {
+        height: 20px;
+        display: inline-block;
+        order:2;
+        width:50%;
+    }
+
+    .color_graph .heightbar_indicator {
+        position: relative;
+        background:none;
+        height: 100% !important; /*Clean table view*/
+    }
+
+    .color_graph .statbox {
+        order:1;
+        width:50%;
+        display:inline-block;
+        color:black;
+        background:none;
+        text-align:right;
+    }
+
+    .color_graph .percent {
+        top: auto;
+        margin: auto;
+        text-align: left;
+        font-size: 12pt;
+        padding: 2px;
+    }
+
+
+}

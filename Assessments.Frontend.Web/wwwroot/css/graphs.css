@@ -62,9 +62,8 @@
 .statbox {
     display: block;
     padding: 10px;
+    hyphens: auto;
 }
-
-
 
 .percent {
     position: absolute;
@@ -94,8 +93,25 @@
     height: 1vw;
     width: 180px;
     text-align: initial;
+    font-size:9pt;
 }
 
+
+@media only screen and (max-width: 450px) {
+    .downboxcontainer {
+        height: 179px;
+    }
+    .downtext {
+        top: 151px;
+        left: -130px;
+        height: 1vw;
+        width: 300px;
+    }
+
+    .statbox {
+        padding: 2px;
+    }
+}
 
 /* downwards graph */
 .down_graph {
@@ -117,7 +133,7 @@
     background: none;
     display: inline-block;
     padding: 0;
-    padding-right: 5px;
+    margin-right: 5px;
     text-align: right;
     font-size: 10pt;
 }
@@ -146,4 +162,5 @@
     width: 1px;
     margin-left: 100%;
 }
+
 

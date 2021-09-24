@@ -115,7 +115,10 @@
 
 /* downwards graph */
 .down_graph {
-    padding-right:15px;
+    padding-right: 15px;
+    max-width: 500px;
+    margin-left: 0;
+    margin-right: 15px;
 }
 .down_graph .statelement {
     width: 100%;
@@ -136,6 +139,7 @@
     margin-right: 5px;
     text-align: right;
     font-size: 10pt;
+    flex:1;
 }
 
 .down_graph .heightbar_blank,
@@ -146,7 +150,7 @@
 
 .down_graph .statelement .heightbar_blank {
     width: calc(100% - 120px);
-    max-width: 300px;
+    flex:1;
     display: flex;
     align-items: stretch
 }
@@ -164,3 +168,42 @@
 }
 
 
+@media only screen and (max-width: 330px) {
+    .down_graph .statbox {
+        flex: none;
+        max-width: 50%;
+        width: 100%;
+        word-break: break-word;
+        hyphens: auto;
+        font-size: 8pt;
+    }
+}
+
+
+@media only screen and (max-width: 250px) {
+    .down_graph {
+        padding-right: 0;
+    }
+    .down_graph .statbox {
+        max-width:80%
+    }
+
+    .down_graph .statelement {
+        border-bottom: 1px solid lightgray;
+        padding-bottom: 5px;
+    }
+
+    .down_graph .statelement .heightbar_blank {
+        width: 20%
+    }
+
+    .down_graph .statelement .percent,
+    .down_graph .statelement .heightbar_indicator {
+        width: 100%!important;/*Clean table view*/
+        margin:0;
+        background:white;
+        padding:0;
+    }
+
+
+}

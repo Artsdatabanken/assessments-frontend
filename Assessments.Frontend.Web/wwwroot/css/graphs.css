@@ -29,28 +29,42 @@
     text-align: center;
 }
 
+
+.graph .heightbar_blank,
+.graph .heightbar_indicator {
+    height: 200px;
+}
+
 .heightbar_blank,
 .heightbar_indicator {
-    height: 200px;
-    display: block;
-    margin-bottom: 2px;
+    display: block;   
     position: relative;
     width: 100%;
 }
 
-.heightbar_indicator {
+
+.graph .heightbar_indicator {
     bottom: 0;
     margin-bottom: 0;
     margin-top: auto;
     position: absolute;
+    margin-bottom: 2px;
+}
+
+.heightbar_indicator {
     background: grey;
+}
+
+.greyscale .statelement:nth-child(even) .heightbar_indicator {
+    background: #3d3b3a;
 }
 
 .statbox {
     display: block;
     padding: 10px;
-    background: grey;
 }
+
+
 
 .percent {
     position: absolute;
@@ -82,19 +96,54 @@
     text-align: initial;
 }
 
-/* ROTATED GRAPH */
 
+/* downwards graph */
 .down_graph {
-    transform: rotate(-90deg);
-    width:auto;
-    max-height:calc(100vw - 20px);
+    padding-right:15px;
+}
+.down_graph .statelement {
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding: 0;
+    text-align: left;
+    margin: 2px;
+    align-items: stretch
 }
 
-.down_graph .heightbar_blank, 
+
+.down_graph .statbox {
+    width: 112px;
+    background: none;
+    display: inline-block;
+    padding: 0;
+    padding-right: 5px;
+    text-align: right;
+    font-size: 10pt;
+}
+
+.down_graph .heightbar_blank,
 .down_graph .heightbar_indicator {
-    height: 50%;
+    min-height: 20px;
+    height:auto;
 }
 
-.down_graph .downboxcontainer {
-    background: blue;
+.down_graph .statelement .heightbar_blank {
+    width: calc(100% - 120px);
+    max-width: 300px;
+    display: flex;
+    align-items: stretch
 }
+
+
+.down_graph .statelement .percent {
+    position: absolute;
+    top: 0;
+    text-align: right;
+    height: 100%;
+    padding: 4px;
+    width: 100%;
+    width: 1px;
+    margin-left: 100%;
+}
+

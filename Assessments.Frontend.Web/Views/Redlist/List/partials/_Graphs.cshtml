@@ -136,24 +136,6 @@
     </p>
 
 
-    <div class="graph greyscale" style="display:none;">
-        @foreach (string key in habitat.Keys)
-        {
-            <div class="statelement" style="max-width:60px;">
-                <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="height:@percentage(@habitat_max, @getNumber(@key,@Model.Statistics.Habitat))">
-                        <span class="percent">@getNumber(@key, @Model.Statistics.Habitat)</span>
-                    </div>
-                </div>
-
-
-                <span class="downboxcontainer statbox @key">
-                    <span class="downtext">@habitat[@key]["name"]</span>
-                </span>
-            </div>
-        }
-    </div>
-
     <div class="down_graph greyscale">
         @foreach (string key in habitat.Keys)
         {

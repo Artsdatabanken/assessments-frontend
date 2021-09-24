@@ -75,44 +75,6 @@
     width: 100%;
 }
 
-.downboxcontainer {
-    font-size: 10pt;
-    height: 179px;
-    display: block;
-    position: relative;
-    background: none;
-}
-
-.downtext {
-    transform: rotate(90deg);
-    display: block;
-    position: absolute;
-    top: 93px;
-    left: -62px;
-    z-index: 2;
-    height: 1vw;
-    width: 180px;
-    text-align: initial;
-    font-size:9pt;
-}
-
-
-@media only screen and (max-width: 450px) {
-    .downboxcontainer {
-        height: 179px;
-    }
-    .downtext {
-        top: 151px;
-        left: -130px;
-        height: 1vw;
-        width: 300px;
-    }
-
-    .statbox {
-        padding: 2px;
-    }
-}
-
 /* downwards graph */
 .down_graph {
     padding-right: 15px;

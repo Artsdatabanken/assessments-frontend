@@ -8,6 +8,8 @@ using Assessments.Mapping.Models.Species;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
 using System;
+using Assessments.Frontend.Web.Infrastructure.Services;
+
 // ReSharper disable InconsistentNaming
 
 namespace Assessments.Frontend.Web.Controllers
@@ -98,8 +100,10 @@ namespace Assessments.Frontend.Web.Controllers
             if (export)
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());
+                var expertCommitteeMembers = await DataRepository.GetData<ExpertCommitteeMember>(Constants.Filename.SpeciesExpertCommitteeMembers);
+                expertCommitteeMembers = expertCommitteeMembers.Where(x => x.Year == 2021);
 
-                return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport, expertCommitteeMembers.ToList()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     FileDownloadName = "rødliste-2021.xlsx"
                 };

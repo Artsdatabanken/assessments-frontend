@@ -7,7 +7,7 @@ namespace Assessments.Mapping.Helpers
 {
     internal static class Extensions
     {
-        public static string GetDisplayName(this MemberInfo property)
+        public static string DisplayName(this MemberInfo property)
         {
             var attribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).Cast<DisplayNameAttribute>().Single();
            

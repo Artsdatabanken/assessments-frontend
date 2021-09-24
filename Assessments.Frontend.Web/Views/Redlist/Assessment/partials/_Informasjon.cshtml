@@ -17,39 +17,54 @@
     Nå er forøvrig disse gitt av kategori, men det får så være...
 *@
 
+@{
 
+    bool assessed = false;
+
+    if(@Model.AssessmentInitialClassification == "rodlisteVurdertArt" ||
+       @Model.AssessmentInitialClassification == "sikkerBestandLC" ||
+       @Model.AssessmentInitialClassification == "utdoddINorgeRE" ||
+       @Model.AssessmentInitialClassification == "storUsikkerhetOmKorrektKategoriDD")
+    {
+        assessed = true;
+    }
+
+    if (@Model.AssessmentInitialClassification == "fremmedArtNA" ||
+      @Model.AssessmentInitialClassification == "begrensetForekomstNA" ||
+      @Model.AssessmentInitialClassification == "kunnskapsStatusNE")
+    {
+        assessed = false;
+    }
+
+}
 
 <div class="page_section">
-
-
-    @if (@Model.AssessmentInitialClassification != "rodlisteVurdertArt" && @Model.AssessmentInitialClassification != "sikkerBestandLC")
+    @if (!string.IsNullOrEmpty(Model.EvaluationJustification))
     {
-    <h2> Arten har ikke vært gjennom full rødlistevurdering. </h2>
-    
+        <h3>Hvorfor er denne arten med i vurderingsgrunnlaget?</h3>
+        <p class="EvaluationJustification">
+            @if (assessment.EvaluationJustification == "etablertBestandINorge")
+            {
+                <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])</span>
+            }
+            else if (assessment.EvaluationJustification == "ikkeReproduserendeINorge")
+            {
+                <span>@Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])</span>
+            }
+            else if (assessment.EvaluationJustification == "etablertFør1800")
+            {
+                <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])</span>
+            }
+        </p>
+    }
 
-    
+    @if (assessed)
+    {
 
-        @if (!string.IsNullOrEmpty(Model.EvaluationJustification))
-        {
-            <h3>Hvorfor er denne arten med i vurderingsgrunnlaget?</h3>
-            <p class="EvaluationJustification">
-                @if (assessment.EvaluationJustification == "etablertBestandINorge")
-                {
-                    <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])</span>
-                }
-                else if (assessment.EvaluationJustification == "ikkeReproduserendeINorge")
-                {
-                    <span>@Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])</span>
-                }
-                else if (assessment.EvaluationJustification == "etablertFør1800")
-                {
-                    <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])</span>
-                }
-            </p>
-        }
-
-        <h3>Denne gikk ikke gjennom full rødlistevurdering på grunn av</h3>
-
+    }
+    else
+    {
+        <h2> Arten er ikke vurdert for Rødlista </h2>
         <!-- Begrenset forekomst -->
         @if (!string.IsNullOrEmpty(Model.RationaleNotApplicable))
         {
@@ -126,7 +141,6 @@
                 @Html.Raw(@ViewBag.glossary["oneliners"]["fremmedArtNA"])
             </p>
         }
-
 
     }
 

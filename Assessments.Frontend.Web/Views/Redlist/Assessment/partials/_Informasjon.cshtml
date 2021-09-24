@@ -22,17 +22,12 @@
 <div class="page_section">
 
 
-    @if (@Model.AssessmentInitialClassification != "rodlisteVurdertArt")
+    @if (@Model.AssessmentInitialClassification != "rodlisteVurdertArt" && @Model.AssessmentInitialClassification != "sikkerBestandLC")
     {
     <h2> Arten har ikke vært gjennom full rødlistevurdering. </h2>
-    }
+    
 
-    @if (@Model.AssessmentInitialClassification == "sikkerBestandLC")
-    {
-        <p> Denne arten hadde tydelig sikker livskraftig bestand .</p>
-    }
-    else
-    {
+    
 
         @if (!string.IsNullOrEmpty(Model.EvaluationJustification))
         {

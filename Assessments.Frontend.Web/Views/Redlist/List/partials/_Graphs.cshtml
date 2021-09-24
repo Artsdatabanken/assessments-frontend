@@ -82,7 +82,7 @@
 
     <p>En vurdering skal utelukkende ha én kategori, derfor vil antall kategorier i utvalget  tilsvare antall vurderinger i utvalget nemlig @category_total</p>
 
-    <div class="graph">
+    <div class="graph color_graph">
         @foreach (var key in category.Keys)
         {
             <div class="statelement">
@@ -136,35 +136,33 @@
     </p>
 
 
-    <div class="graph greyscale">
+    <div class="down_graph greyscale">
         @foreach (string key in habitat.Keys)
         {
-            <div class="statelement" style="max-width:60px;">
+
+            <div class="statelement">
+                <span class="statbox @key">
+                    @habitat[@key]["name"]
+                </span>
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="height:@percentage(@habitat_max, @getNumber(@key,@Model.Statistics.Habitat))">
+                    <div class="heightbar_indicator @key" style="width:@percentage(@habitat_max, @getNumber(@key,@Model.Statistics.Habitat))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.Habitat)</span>
                     </div>
                 </div>
-
-
-                <span class="downboxcontainer statbox @key">
-                    <span class="downtext">@habitat[@key]["name"]</span>
-                </span>
             </div>
         }
     </div>
 
-    <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
 
     <h3>Antall vurderinger per Region</h3>
 
     <p>
-        Denne grafen viser der verderingenes art forekommer eller er antatt å forekomme. De kan forekomme i mer enn en region om gangen, men informasjonen er bare 
-        registrert for arter som er rødlistet, det vil si ikke har kategoriene LC, NA eller NE. Arter som er regionalt utdødd skal heller ikke forekomme. 
+        Denne grafen viser der verderingenes art forekommer eller er antatt å forekomme. De kan forekomme i mer enn en region om gangen, men informasjonen er bare
+        registrert for arter som er rødlistet, det vil si ikke har kategoriene LC, NA eller NE. Arter som er regionalt utdødd skal heller ikke forekomme.
         <br /><b>
-    TODO: Filteret BURDE fjerne disse artsgruppene, ettersom det KAN ligge inne data der likevel. Men egentlig burde det vært skrelt vekk før vi kommer hit.
-    <br />
-</b>
+            TODO: Filteret BURDE fjerne disse artsgruppene, ettersom det KAN ligge inne data der likevel. Men egentlig burde det vært skrelt vekk før vi kommer hit.
+            <br />
+        </b>
         Den totale artsmengden er @region_total, som i og for seg ikke er et informativt tall i seg selv.
         For nåværende utvalg betyr det at vurderingene forekommer i @average(@total, @region_total) regioner per art.
 
@@ -175,7 +173,7 @@
         @foreach (string key in Model.Statistics.Region.Keys)
         {
             <div class="statelement">
-                 <span class="statbox @key">
+                <span class="statbox @key">
                     @key
                 </span>
 
@@ -186,7 +184,7 @@
                 </div>
 
 
-               
+
             </div>
         }
     </div>

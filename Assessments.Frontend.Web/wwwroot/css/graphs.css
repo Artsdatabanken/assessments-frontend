@@ -62,9 +62,8 @@
 .statbox {
     display: block;
     padding: 10px;
+    hyphens: auto;
 }
-
-
 
 .percent {
     position: absolute;
@@ -76,30 +75,12 @@
     width: 100%;
 }
 
-.downboxcontainer {
-    font-size: 10pt;
-    height: 179px;
-    display: block;
-    position: relative;
-    background: none;
-}
-
-.downtext {
-    transform: rotate(90deg);
-    display: block;
-    position: absolute;
-    top: 93px;
-    left: -62px;
-    z-index: 2;
-    height: 1vw;
-    width: 180px;
-    text-align: initial;
-}
-
-
 /* downwards graph */
 .down_graph {
-    padding-right:15px;
+    padding-right: 15px;
+    max-width: 500px;
+    margin-left: 0;
+    margin-right: 15px;
 }
 .down_graph .statelement {
     width: 100%;
@@ -117,9 +98,10 @@
     background: none;
     display: inline-block;
     padding: 0;
-    padding-right: 5px;
+    margin-right: 5px;
     text-align: right;
     font-size: 10pt;
+    flex:1;
 }
 
 .down_graph .heightbar_blank,
@@ -130,7 +112,7 @@
 
 .down_graph .statelement .heightbar_blank {
     width: calc(100% - 120px);
-    max-width: 300px;
+    flex:1;
     display: flex;
     align-items: stretch
 }
@@ -147,3 +129,86 @@
     margin-left: 100%;
 }
 
+
+@media only screen and (max-width: 330px) {
+    .down_graph .statbox {
+        flex: none;
+        max-width: 50%;
+        width: 100%;
+        word-break: break-word;
+        hyphens: auto;
+        font-size: 8pt;
+    }
+}
+
+
+@media only screen and (max-width: 250px) {
+    .down_graph {
+        padding-right: 0;
+    }
+    .down_graph .statbox {
+        max-width:80%
+    }
+
+    .down_graph .statelement {
+        border-bottom: 1px solid lightgray;
+        padding-bottom: 5px;
+    }
+
+    .down_graph .statelement .heightbar_blank {
+        width: 20%
+    }
+
+    .down_graph .statelement .percent,
+    .down_graph .statelement .heightbar_indicator {
+        width: 100%!important;/*Clean table view*/
+        margin:0;
+        background:white;
+        padding:0;
+    }
+
+
+}
+
+@media only screen and (max-width: 280px) {
+    .color_graph {
+        flex-direction: column;
+    }
+
+    .color_graph .statelement{
+        display:flex;
+        margin:2px;
+        border-bottom: 1px solid lightgray;
+    }
+    .color_graph .heightbar_blank {
+        height: 20px;
+        display: inline-block;
+        order:2;
+        width:50%;
+    }
+
+    .color_graph .heightbar_indicator {
+        position: relative;
+        background:none;
+        height: 100% !important; /*Clean table view*/
+    }
+
+    .color_graph .statbox {
+        order:1;
+        width:50%;
+        display:inline-block;
+        color:black;
+        background:none;
+        text-align:right;
+    }
+
+    .color_graph .percent {
+        top: auto;
+        margin: auto;
+        text-align: left;
+        font-size: 12pt;
+        padding: 2px;
+    }
+
+
+}

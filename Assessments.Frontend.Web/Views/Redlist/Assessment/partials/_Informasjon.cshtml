@@ -15,133 +15,91 @@
     Ikke relevant for rødlistede arter // @Model.AssessmentInitialClassification == "rodlisteVurdertArt"
 
     Nå er forøvrig disse gitt av kategori, men det får så være...
+
+
+
+    1. Oppfølger vurderingen ett av de tre vurderingskriteriene? List opp kriteriene.
+    - Alle vurderinger som er satt som rødlistevurdert oppfyller minst et kriterie.
+    - Hvilket kriterie som innfris skal listes i EvaluationJustification
+
+    2. Er kategorien direkte satt? Isåfall har den en ANNEN verdi enn rodlisteVurdertArt for AssessmentInitialClassification.
+
+    3. Vurderinger som IKKE innfrir et av vurderingskriteriene skal sammenfalle ikkevurderte arter
+
+    4. For de ikkevurderte finnes det egne forklaringer. Feltet markert i AssessmentInitialClassification bestemmer hvilken
+        som er relevant der det er flere. Aldri gi ut andre forklaringer enn den det tilhører.
+
+    // TODO: MANGLER SJEKKER FOR OM TiNG FAKTISK FINNES I GLOSSARY
+    // TODO: LINK TIL INFOSIDE OM INKLUDERING
 *@
 
 @{
 
-    bool assessed = false;
-
-    if(@Model.AssessmentInitialClassification == "rodlisteVurdertArt" ||
-       @Model.AssessmentInitialClassification == "sikkerBestandLC" ||
-       @Model.AssessmentInitialClassification == "utdoddINorgeRE" ||
-       @Model.AssessmentInitialClassification == "storUsikkerhetOmKorrektKategoriDD")
+    string direkteSattKategori = "Denne arten har fått sin kategori satt direkte";
+    if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt")
     {
-        assessed = true;
+        direkteSattKategori = "Dette arten har fått sin kategori etter en full vurdering mot alle kriteriene .";
     }
 
-    if (@Model.AssessmentInitialClassification == "fremmedArtNA" ||
-      @Model.AssessmentInitialClassification == "begrensetForekomstNA" ||
-      @Model.AssessmentInitialClassification == "kunnskapsStatusNE")
-    {
-        assessed = false;
-    }
 
+    string inkluderingskriterie = "";
+
+    if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt" ||
+        @Model.AssessmentInitialClassification == "utdoddINorgeRE" ||
+        @Model.AssessmentInitialClassification == "sikkerBestandLC" ||
+        @Model.AssessmentInitialClassification == "storUsikkerhetOmKorrektKategoriDD")
+    {
+        inkluderingskriterie += "<h3>" + @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["title"] + "</h3>";
+        inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["description"];
+        if (!string.IsNullOrEmpty(Model.EvaluationJustification))
+        {
+            inkluderingskriterie += "<h4>" + @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["title"] +"</h4>";
+            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["description"];
+        }
+        else
+        {
+            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
+        }
+    }
+    else if(Model.AssessmentInitialClassification == "fremmedArtNA" ||
+        Model.AssessmentInitialClassification == "begrensetForekomstNA" ||
+        Model.AssessmentInitialClassification == "kunnskapsStatusNE")
+    {
+        inkluderingskriterie = "<h3>" + "Arten oppfyller ikke kravene for å bli rødlistevurdert" + "</h3>";
+
+        if (Model.AssessmentInitialClassification == "fremmedArtNA")
+        {
+            inkluderingskriterie += "<h4>" + @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["title"] + "</h4>";
+            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["description"];
+        }
+        else if (Model.AssessmentInitialClassification == "begrensetForekomstNA")
+        {
+            if (!string.IsNullOrEmpty(Model.RationaleNotApplicable))
+            {
+                inkluderingskriterie += "<h4>" + @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["title"] + "</h4>";
+                inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["description"];
+            }
+        }
+        else if (Model.AssessmentInitialClassification == "kunnskapsStatusNE")
+        {
+
+            if (!string.IsNullOrEmpty(Model.RationaleNotEvaluated))
+            {
+                inkluderingskriterie += "<h4>" + @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["title"] + "</h4>";
+                inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["description"];
+            }
+        }
+        else
+        {
+            inkluderingskriterie += "Arten oppfyller ingen av de tre inkluderingskriteriene for rødlista.";
+            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
+        }
+    }
 }
 
 <div class="page_section">
-    @if (!string.IsNullOrEmpty(Model.EvaluationJustification))
-    {
-        <h3>Hvorfor er denne arten med i vurderingsgrunnlaget?</h3>
-        <p class="EvaluationJustification">
-            @if (assessment.EvaluationJustification == "etablertBestandINorge")
-            {
-                <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertBestandINorge"])</span>
-            }
-            else if (assessment.EvaluationJustification == "ikkeReproduserendeINorge")
-            {
-                <span>@Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeINorge"])</span>
-            }
-            else if (assessment.EvaluationJustification == "etablertFør1800")
-            {
-                <span>@Html.Raw(@ViewBag.glossary["oneliners"]["etablertFør1800"])</span>
-            }
-        </p>
-    }
 
-    @if (assessed)
-    {
+    <p>@Html.Raw(inkluderingskriterie)</p><br />
+    <p>@Html.Raw(direkteSattKategori)</p><br />
 
-    }
-    else
-    {
-        <h2> Arten er ikke vurdert for Rødlista </h2>
-        <!-- Begrenset forekomst -->
-        @if (!string.IsNullOrEmpty(Model.RationaleNotApplicable))
-        {
-            <h4>Begrenset forekomst</h4>
-            <p class="RationaleNotApplicable">
-                @if (@Model.RationaleNotApplicable == "ikkeReproduserendeGjestNA")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeReproduserendeGjestNA"])</span>
-                }
-                else if (@Model.RationaleNotApplicable == "observertReproduserendeIkkeEtablertNA")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["observertReproduserendeIkkeEtablertNA"])</span>
-                }
-                else if (@Model.RationaleNotApplicable == "observertReproduktivIkkeEtablertNA")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["observertReproduktivIkkeEtablertNA"])</span>
-                }
-                else if (@Model.RationaleNotApplicable == "uregelmessigGjestIkkeReproduserendeNA")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uregelmessigGjestIkkeReproduserendeNA"])</span>
-                }
-                else if (@Model.RationaleNotApplicable == "ikkeDokumentertForekomstNA")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["ikkeDokumentertForekomstNA"])</span>
-                }
-                else if (@Model.RationaleNotApplicable == "hybridartUtenReproduksjonNA")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["hybridartUtenReproduksjonNA"])</span>
-                }
-                else if (@Model.RationaleNotApplicable == "hybridartUvisstOmReproduserendeNA")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["hybridartUvisstOmReproduserendeNA"])</span>
-                }
-                else if (@Model.RationaleNotApplicable == "forekommerBareIHybridkombinasjonNA")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["forekommerBareIHybridkombinasjonNA"])</span>
-                }
-            </p>
-        }
-
-        <!-- KUNNSKAPSSTATUS -->
-        @if (!string.IsNullOrEmpty(Model.RationaleNotEvaluated))
-        {
-            <h4>Kunsskapsstatus</h4>
-            <p class="RationaleNotEvaluated">
-                @if (@Model.RationaleNotEvaluated == "mangelfullKunnskapNE")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["mangelfullKunnskapNE"])</span>
-                }
-                else if (@Model.RationaleNotEvaluated == "uavklartSystematikkNE")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uavklartSystematikkNE"])</span>
-                }
-                else if (@Model.RationaleNotEvaluated == "uklartOmReproduserendeBestandNE")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["uklartOmReproduserendeBestandNE"])</span>
-                }
-                else if (@Model.RationaleNotEvaluated == "artsgruppeIkkeRisikovurdertNE")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["artsgruppeIkkeRisikovurdertNE"])</span>
-                }
-                else if (@Model.RationaleNotEvaluated == "annetNE")
-                {
-                    <span> @Html.Raw(@ViewBag.glossary["oneliners"]["annetNE"])</span>
-                }
-            </p>
-        }
-
-        <!-- FREMMEDART -->
-        @if (@Model.AssessmentInitialClassification == "fremmedArtNA")
-        {
-            <h4>Fremmedart</h4>
-            <p class="FA">
-                @Html.Raw(@ViewBag.glossary["oneliners"]["fremmedArtNA"])
-            </p>
-        }
-
-    }
-
-</div><!-- End section -->
+</div>

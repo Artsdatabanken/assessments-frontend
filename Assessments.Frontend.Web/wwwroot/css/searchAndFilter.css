@@ -17,7 +17,7 @@ li.checkbox, .filter_groups ul {
 
 .list_header_text {
     overflow-wrap: normal;
-    width: calc(100% - 30px);
+    width: calc(100% - 50px);
     display: inline-block;
 }
 
@@ -237,6 +237,8 @@ input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.mater
 }
 
 .filter_group h4 {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     background: white;
     text-align: left;

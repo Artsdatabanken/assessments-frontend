@@ -29,6 +29,65 @@
         }
         return element == value ? "class=active" : String.Empty;
     }
+
+    string GetActiveFiltersCount()
+    {
+        int count = 0;
+        count += Model.Area.Length;
+        count += Model.Category.Length;
+        count += Model.SpeciesGroups.Length;
+        count += Model.Habitats.Length;
+        count += Model.Regions.Length;
+        count += Model.EuroPop.Length;
+        count += Model.Criterias.Length;
+        if (Model.PresumedExtinct)
+            count ++;
+        
+        if (count > 0)
+            return $"({count})";
+        return String.Empty;
+    }
+
+    string GetActiveFilters(string filterType)
+    {
+        switch (filterType)
+        {
+            case "Area":
+                if (Model.Area?.Any() == true)
+                    return $"({Model.Area.Length})";
+                return String.Empty;
+            case "Category":
+                if (Model.Category?.Any() == true)
+                    return $"({Model.Category.Length})";
+                return String.Empty;
+            case "SpeciesGroups":
+                if (Model.SpeciesGroups?.Any() == true)
+                    return $"({Model.SpeciesGroups.Length})";
+                return String.Empty;
+            case "Habitats":
+                if (Model.Habitats?.Any() == true)
+                    return $"({Model.Habitats.Length})";
+                return String.Empty;
+            case "Regions":
+                if (Model.Regions?.Any() == true)
+                    return $"({Model.Regions.Length})";
+                return String.Empty;
+            case "EuroPop":
+                if (Model.EuroPop?.Any() == true)
+                    return $"({Model.EuroPop.Length})";
+                return String.Empty;
+            case "Criterias":
+                if (Model.Criterias?.Any() == true)
+                    return $"({Model.Criterias.Length})";
+                return String.Empty;
+            case "PresumedExtinct":
+                if (Model.PresumedExtinct == true)
+                    return $"(1)";
+                return String.Empty;
+            default:
+                return String.Empty;
+        }
+    }
 }
 
 <div class="search-and-filter">
@@ -65,6 +124,7 @@
                 <label class="show_filters" for="show_filters">
                     <button class="toggle_filter" type="button">
                         Filter
+                        <span>@GetActiveFiltersCount()</span>
                         <span class="material-icons"><span class="material-icons">
                         filter_list
                     </span></span>
@@ -92,7 +152,7 @@
                 <div class="filter_modal_background">
                     <div class="filters_scrollable">
                         <div class="filter_groups">
-                            <label class="show_filters"><h3 class="toggle_filter">Filter</h3></label>
+                            <label class="show_filters"><h3 class="toggle_filter">Filter <span>@GetActiveFiltersCount()</span></h3></label>
 
 
                             <div class="close_reset_filter">
@@ -118,6 +178,7 @@
                                     <label for="show_area">
                                         <h4 class="list_header">
                                             <span class="list_header_text">@SearchAndFilter.SearchChooseArea</span>
+                                            <span>@GetActiveFilters("Area")</span>
                                             <span class="material-icons more">expand_more</span>
                                             <span class="material-icons less">expand_less</span>
                                         </h4>
@@ -141,6 +202,7 @@
                                     <label for="show_category">
                                         <h4 class="list_header">
                                             <span class="list_header_text">@SearchAndFilter.SearchChooseCategory</span>
+                                            <span>@GetActiveFilters("Category")</span>
                                             <span class="material-icons more">expand_more</span>
                                             <span class="material-icons less">expand_less</span>
                                         </h4>
@@ -175,6 +237,7 @@
                                     <label for="show_species_groups">
                                         <h4 class="list_header">
                                             <span class="list_header_text">Artsgruppe</span>
+                                            <span>@GetActiveFilters("SpeciesGroups")</span>
                                             <span class="material-icons more">expand_more</span>
                                             <span class="material-icons less">expand_less</span>
                                         </h4></span>
@@ -198,6 +261,7 @@
                                     <label for="show_habitat">
                                         <h4 class="list_header">
                                             <span class="list_header_text">Hovedhabitat</span>
+                                            <span>@GetActiveFilters("Habitats")</span>
                                             <span class="material-icons more">expand_more</span>
                                             <span class="material-icons less">expand_less</span>
                                         </h4></span>
@@ -221,6 +285,7 @@
                                     <label for="show_region">
                                         <h4 class="list_header">
                                             <span class="list_header_text">Regioner og havområder</span>
+                                            <span>@GetActiveFilters("Regions")</span>
                                             <span class="material-icons more">expand_more</span>
                                             <span class="material-icons less">expand_less</span>
                                         </h4></span>
@@ -244,6 +309,7 @@
                                     <label for="show_european_population">
                                         <h4 class="list_header">
                                             <span class="list_header_text">Andel av europeisk populasjon</span>
+                                            <span>@GetActiveFilters("EuroPop")</span>
                                             <span class="material-icons more">expand_more</span>
                                             <span class="material-icons less">expand_less</span>
                                         </h4></span>
@@ -267,6 +333,7 @@
                                     <label for="show_criteria">
                                         <h4 class="list_header">
                                             <span class="list_header_text">@SearchAndFilter.SearchChooseCriteria</span>
+                                            <span>@GetActiveFilters("Criterias")</span>
                                             <span class="material-icons more">expand_more</span>
                                             <span class="material-icons less">expand_less</span>
                                         </h4></span>
@@ -290,6 +357,7 @@
                                     <label for="show_extinct">
                                         <h4 class="list_header">
                                             <span class="list_header_text">Trolig utdødd</span>
+                                            <span>@GetActiveFilters("PresumedExtinct")</span>
                                             <span class="material-icons more">expand_more</span>
                                             <span class="material-icons less">expand_less</span>
                                         </h4>

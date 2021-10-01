@@ -2,8 +2,7 @@
     font-size:12pt;
 }
 
-
-.inclusion_section h4 {
+ h4 {
     margin-bottom: 5px;
 }
 
@@ -12,6 +11,10 @@
    float:right;
 }
 
+.populationsize li {
+    margin: 10px;
+    margin-left: 15px;
+}
 
 
 @media only screen and (min-width: 550px) {

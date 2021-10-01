@@ -349,13 +349,16 @@ namespace Assessments.Mapping.Helpers
         private static string[] _CategoriesToBlank = new[] { "LC", "NA", "NE" };
         public static void BlankCriteriaSumarizedBasedOnCategory(SpeciesAssessment2021 dest)
         {
-            foreach (var s in _CategoriesToBlank)
+            if (_CategoriesToBlank.Contains(dest.Category.Substring(0, 2)) && !string.IsNullOrWhiteSpace(dest.CriteriaSummarized))
             {
-                if (dest.Category.StartsWith(s) && !string.IsNullOrWhiteSpace(dest.CriteriaSummarized))
+                dest.CriteriaSummarized = string.Empty;
+                foreach (var item in dest.RegionOccurrences)
                 {
-                    dest.CriteriaSummarized = string.Empty;
+                    if (item.State != 2)
+                    {
+                        item.State = 2;
+                    }
                 }
-
             }
         }
         public static int GetAssessmentYear(string ekspertgruppenavn)

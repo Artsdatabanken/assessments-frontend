@@ -17,7 +17,7 @@ li.checkbox, .filter_groups ul {
 
 .list_header_text {
     overflow-wrap: normal;
-    width: calc(100% - 50px);
+    width: calc(100% - 30px);
     display: inline-block;
 }
 
@@ -189,10 +189,13 @@ input[type=checkbox]:checked#show_area ~ .filter_area,
 .filter_extinct,
 .filter_habitat,
 .filter_species_groups,
-.collapse_checkbox,
 .material-icons.more,
 .material-icons.less {
     display: none;
+}
+
+.collapse_checkbox {
+    opacity: 0;
 }
 
 input[type=checkbox]:not(:checked)#show_area~label>.list_header>.material-icons.less,
@@ -237,8 +240,6 @@ input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.mater
 }
 
 .filter_group h4 {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     background: white;
     text-align: left;
@@ -249,7 +250,9 @@ input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.mater
     margin: 0;
 }
 
-.filter_group h4:hover {
+.filter_group h4:hover,
+input.collapse_checkbox:focus~label>.list_header,
+input.collapse_checkbox:active~label>.list_header {
     cursor: pointer;
     background: #7f7f7f;
     color:white;

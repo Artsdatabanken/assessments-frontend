@@ -1,11 +1,11 @@
-﻿{  
+﻿{
   "A": {
     "title": "Reduksjon i populasjonsstørrelse",
-    "description": "Reduksjon i populasjonsstørrelse over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år). A-kriteriene anvendes på arter som nylig har gjennomgått en sterk nedgang i populasjonsstørrelse, eller der det er sterk grunn til å forvente en betydelig nedgang i nærmeste framtid.",
+    "description": "Reduksjon i populasjonsstørrelse over en vurderingsperiode på 3 generasjoner (minimum 10 år og maksimum 100 år).",
     "subcriteria": {
       "A1": {
-        "title": "Reduksjon de siste 10 år/3 generasjoner hvor årsaken er både opphørt, forstått og reversibel",
-        "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år). Faktorene som har forårsaket reduksjonen er klart reversible og forstått og har opphørt.",
+        "title": "Reduksjon i fortid - har opphørt",
+        "description": "Reduksjon siste  3 generasjoner, men minimum 10 år. Årsakene til reduksjonen er klart reversible, forstått og har opphørt.",
         "subsub": {
           "a": {
             "title": "Direkte observasjoner"
@@ -37,8 +37,8 @@
         }
       },
       "A2": {
-        "title": "Reduksjon de siste 10 år/3 generasjoner",
-        "description": "Bedømt, antatt, observert eller estimert reduksjon i populasjonsstørrelse over de siste 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år). Reduksjonen eller faktorene som har forårsaket reduksjonen behøver ikke å ha opphørt eller være forstått eller reversible. ",
+        "title": "Reduksjon i fortid",
+        "description": "Reduksjon siste  3 generasjoner, men minimum 10 år. Reduksjonen eller årsakene til reduksjonen trenger ikke å ha opphørt, være forstått eller reversible.",
         "subsub": {
           "a": {
             "title": "Direkte observasjoner"
@@ -70,8 +70,8 @@
         }
       },
       "A3": {
-        "title": "Framtidig reduksjon kommende 10 år/3 generasjoner",
-        "description": "Bedømt, antatt eller prosjektert framtidig reduksjon i populasjonsstørrelse over de kommende 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år).",
+        "title": "Framtidig reduksjon",
+        "description": "Fremtidig reduksjon over et tidsrom på 3 generasjoner, men minimum 10 år.",
         "subsub": {
           "b": {
             "title": "Egnet bestandsindeks for arten"
@@ -100,8 +100,8 @@
         }
       },
       "A4": {
-        "title": "Pågående reduksjon over 10 år/3 generasjoner som inkluderer både fortid og framtid",
-        "description": "Bedømt, antatt, observert, estimert eller prosjektert pågående reduksjon i populasjonsstørrelse over en vurderingsperiode på 10 år eller tre generasjoner (lengste tidsperiode av de to, men maksimum 100 år) som inkluderer både fortid og framtid.",
+        "title": "Pågående reduksjon",
+        "description": "Pågående reduksjon over 3 generasjoner, men minimum 10 år, der tidsspennet inkluderer både fortid og fremtid. Reduksjonen eller årsakene til reduksjonen trenger ikke å ha opphørt, være forstått eller reversible.",
         "subsub": {
           "a": {
             "title": "Direkte observasjoner"
@@ -136,7 +136,8 @@
   },
   "B": {
     "title": "Begrenset geografisk utbredelse",
-    "description": "Begrenset utbredelsesområde og/eller eller forekomstareal kombinert med minst to av følgende underkriterier: a kraftig fragmentering eller få lokaliteter; b pågående nedgang i populasjonstørrelse eller areal; c ekstreme fluktuasjoner",
+    "description": "To forskjellige mål for geografisk utbredelse som må kombineres med underkriterier for å bli gyldig kriterium. ",
+    "options_description": "Gjelder samlet for både B1 og B2 dersom begge er utslagsgivende ",
     "options": {
       "a": {
         "title": "Kraftig fragmentering eller få lokaliteter (avgrenset av trussel)",
@@ -172,7 +173,7 @@
         "description": "Bedømt, observert, estimert eller prosjektert nedgang som har skjedd nylig, er pågående og/eller er forventet å skje. Nedgangen kan være jevn, irregulær eller sporadisk, og man antar den vil fortsette dersom ikke nødvendige tiltak iverksettes. Pågående nedgang av:  ",
         "sub": {
           "i": {
-            "title": "utbredelsesområde" 
+            "title": "utbredelsesområde"
           },
           "ii": {
             "title": "forekomstareal"
@@ -186,7 +187,7 @@
           "v": {
             "title": "antall reproduksjonsdyktige individ"
           }
-          }
+        }
       },
       "c": {
         "title": "Ekstreme fluktuasjoner ",
@@ -210,7 +211,7 @@
     "subcriteria": {
       "B1": {
         "title": "Utbredelsesområde",
-        "description": "Utbredelsesområdet er et mål for hvor vid geografisk utbredelse en art har, om må ikke forveksles med okkupert eller potensielt forekomstareal. Utbredelsesområdet tilsvarer arealet av en minimum konveks polygon der de rette linjene i polygonen omringer alle kjente og antatte nåværende forekomster.",
+        "description": "Utbredelsesområde er et mål for en arts geografiske utbredelse, og tilsvarer arealet av en minimum konveks polygon der de rette linjene i polygonen omfatter alle kjente og antatte nåværende forekomster. ",
         "content": {
           "unit": "km2",
           "comparator": "<",
@@ -225,7 +226,7 @@
       },
       "B2": {
         "title": "Forekomstareal",
-        "description": "Forekomstarealet er et mål for det spesifikke arealet som arten lever på, standardisert som summen av areal av 2 km x 2 km (4 km2) ruter som inneholder kjent eller antatt forekomst av arten.",
+        "description": "Forekomstareal er et mål for det spesifikke arealet arten lever i, standardisert som summen av alle 2 km x 2 km (4 km2) ruter som inneholder kjent eller antatt forekomst av arten. ",
         "content": {
           "unit": "km2",
           "comparator": "<",
@@ -242,7 +243,7 @@
   },
   "C": {
     "title": "Liten populasjonsstørrelse og pågående nedgang",
-    "description": "Populasjonsstørrelse er antall reproduksjonsdyktige individ. For kjønnede arter kan det tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.",
+    "description": "Liten populasjonsstørrelse kombinert med pågående nedgang, uheldig populasjonsstruktur eller ekstreme fluktuasjoner.",
     "content": {
       "unit": "individ",
       "comparator": "<",
@@ -256,8 +257,8 @@
     },
     "subcriteria": {
       "C1": {
-        "title": "Pågående nedgang",
-        "description": "Bedømt, antatt, observert, estimert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. Pågående nedgang på C1-kriteriet beregnes på samme måte som på A-kriteriet, men kan gjelde for en kortere tidsperiode.",
+        "title": "Kvantifisert pågående nedgang",
+        "description": "Liten populasjonsstørrelse kombinert med en kvantifisert pågående nedgang over en periode på 1-3 generasjoner.",
         "content": {
           "unit": "%",
           "threshold": {
@@ -270,11 +271,10 @@
         }
       },
       "C2": {
-        "title": "Liten poplasjonsstørrelse, pågående nedgang og a og/eller b",
+        "title": "Pågående nedgang og uheldig populasjonsstruktur i form av:",
         "subsub": {
           "a(i)": {
-            "title": "Få reproduksjonsdyktige individer i største delpopulasjon",
-            "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg består selv den største delpopulasjonen av få reproduksjonsdyktige individer.  ",
+            "title": "Få reproduksjonsdyktige individ i største delpopulasjon",
             "content": {
               "unit": "individ",
               "comparator": "≤",
@@ -288,8 +288,7 @@
             }
           },
           "a(ii)": {
-            "title": "Stor andel av alle reproduksjonsdyktige individ i én og samme delpopulasjon",
-            "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg finnes en stor andel av populasjonen i én og samme delpopulasjon (alle egg i én kurv).   ",
+            "title": "Stor andel (90 – 100 %) av alle reproduksjonsdyktige individ i én delpopulasjon",
             "content": {
               "unit": "%",
               "threshold": {
@@ -302,20 +301,17 @@
             }
           },
           "b": {
-            "title": "Ekstreme fluktuasjoner i antall reproduksjonsdyktige individ",
-            "description": "Bedømt, estimert, observert eller prosjektert nylig, pågående eller forventet nedgang (som kan være jevn, irregulær eller sporadisk), som en antar vil fortsette dersom ikke nødvendige tiltak iverksettes. I tillegg er det ekstreme fluktuasjoner (mer enn en tifoldig økning eller reduksjon) i artens populasjonsstørrelse. Ekstreme fluktuasjoner brukes bare der det er relativt stor sikkerhet for at nedgang vil følges av vekst innen en eller to generasjoner og hvor det er rimelig sikkert av fluktuasjoner i antall reproduksjonsdyktige individ representerer fluktuasjoner i den totale populasjonen.  "
+            "title": "Ekstreme fluktuasjoner i antall reproduksjonsdyktige individ"
           }
-        }       
+        }
       }
     }
   },
   "D": {
-    "title": "Svært liten populasjonsstørrelse eller arealmessig meget begrenset",
-    "description": "Svært få reproduksjonsdyktige individ eller svært begrenset forekomstareal/få trusseldefinerte lokaliteter.",
+    "title": "Svært liten populasjonsstørrelse eller svært begrenset areal",
     "subcriteria": {
       "D1": {
-        "title": "Få reproduksjonsdyktige individ",
-        "description": "Arten har få reproduksjonsdyktige individ/liten populasjonsstørrelse, men er ikke nødvendigvis i nedgang. For kjønnede arter kan antall reproduksjonsdyktige individ tilsvare antall kjønnsmodne hanner pluss antall kjønnsmodne hunner, men merk at ved skjev kjønnsratio og hvis reproduksjonsdyktige individer ikke får mulighet til å reprodusere, reduseres antall reproduksjonsdyktige individer ned mot det antall som reelt får reprodusere. Reproduksjonsdyktige individer som aldri vil reprodusere utelates fra populasjonsstørrelsen. Ved fluktuasjoner i populasjonsstørrelse brukes verdi ned mot laveste estimat. Reproduksjonsdyktige enheter i kloner telles som individ utenom tilfeller hvor slike enheter ikke kan overleve på egen hånd. For arter som er obligat avhengige av andre arter kan biologisk passende verdier for populasjonsstørrelse for vertstakson brukes. For arter som naturlig mister alle, eller en del av de reproduksjonsdyktige individene i løpet av sin livssyklus, skal estimatet gjøres på et tidspunkt når reproduksjonsdyktige individ er til stede for formering. Reintroduserte individ må ha produsert levedyktige avkom før de kan regnes som reproduksjonsdyktige individ.  ",
+        "title": "Antall reproduksjonsdyktige individ",
         "content": {
           "unit": "individ",
           "comparator": "<",
@@ -329,8 +325,8 @@
         }
       },
       "D2": {
-        "title": "Begrenset forekomstareal eller antall trusseldefinerte lokaliteter",
-        "description": "Det foreligger en sannsynlig trussel mot populasjonen av en slik alvorlighetsgrad at arten kan bli kritisk truet (CR) eller regionalt utdødd (RE) innen få år etter at trusselen inntreffer.",
+        "title": "Begrenset forekomstareal og/eller antall lokaliteter avgrenset av trussel ",
+        "description": "Forekomstarealet er svært lite (< 40 km2) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (< 10)",
         "content": {
           "unit": "km2",
           "comparator": "<",

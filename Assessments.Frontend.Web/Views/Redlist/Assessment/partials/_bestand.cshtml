@@ -1,23 +1,39 @@
 ﻿@model SpeciesAssessment2021
-@* SEE example by searching species Carex elata *@
+@*
+
+    // WHAT IS THIS
+
+
+
+*@
+@functions {
+
+    private bool isNotEmpty(string key)
+    {
+        @if (key != null && key != " " && key != "-" && key != "")
+            {
+            return true;
+            }
+        return false;
+    }
+
+}
+
+
 
 <div class="page_section">
 
     @if (Model.Category != "NE" && Model.Category != "NA")
     {
-        @if ((Model.ProportionOfMaxPopulation != null && Model.ProportionOfMaxPopulation != " "
-       && Model.ProportionOfMaxPopulation != "-") || (Model.PercentageEuropeanPopulation != null
-       && Model.PercentageEuropeanPopulation != " " && Model.PercentageEuropeanPopulation != "-")
-       || (Model.PercentageGlobalPopulation != null && Model.PercentageGlobalPopulation != " "
-       && Model.PercentageGlobalPopulation != "-"))
+        @if (isNotEmpty(Model.ProportionOfMaxPopulation) ||
+           isNotEmpty(Model.PercentageEuropeanPopulation) ||
+           isNotEmpty(Model.PercentageGlobalPopulation))
         {
 
             <h3>Informasjon om populasjonsstørrelse </h3>
 
 
-            @if (Model.ProportionOfMaxPopulation != null
-             && Model.ProportionOfMaxPopulation != " "
-             && Model.ProportionOfMaxPopulation != "-")
+            @if (isNotEmpty(Model.ProportionOfMaxPopulation))
             {
                 <p>
                     <div class="stats_element_container">
@@ -30,9 +46,7 @@
                     </span>
                 </p>
             }
-            @if (Model.PercentageEuropeanPopulation != null
-              && Model.PercentageEuropeanPopulation != " "
-              && Model.PercentageEuropeanPopulation != "-")
+            @if (isNotEmpty(Model.PercentageEuropeanPopulation))
             {
                 <p>
                     <div class="stats_element_container">
@@ -45,10 +59,8 @@
                     </span>
                 </p>
             }
-            @if (Model.PercentageGlobalPopulation != null
-              && Model.PercentageGlobalPopulation != " "
-              && Model.PercentageGlobalPopulation != "-")
-            {                
+            @if (isNotEmpty(Model.PercentageGlobalPopulation))
+            {
                 <p>
                     <div class="stats_element_container">
                         <span class="stats_element">

@@ -30,8 +30,12 @@
            isNotEmpty(Model.PercentageGlobalPopulation))
         {
 
-            <h3>Informasjon om populasjonsstørrelse </h3>
+            <h3>Hvor stor andel av populasjonene finner vi i Norge?</h3>
 
+            <p>
+                Norge er ikke nødvendigvis alene om å ha en art. Men bestanden i Norge utgjør noen ganger en betydelig
+                andel av de totale bestanden, som igjen kan påvirke rødlistestatusen.
+            </p>
 
             @if (isNotEmpty(Model.ProportionOfMaxPopulation))
             {
@@ -41,35 +45,21 @@
                             <span>@Model.ProportionOfMaxPopulation</span>
                         </span>
                     </div>
-                    <span class="stats_element_text">
-                        @ViewBag.glossary["oneliners"]["AndelNåværendeBestand"]
-                    </span>
+                    <span>@ViewBag.glossary["populationsize"]["AndelNåværendeBestand"]</span>
                 </p>
             }
             @if (isNotEmpty(Model.PercentageEuropeanPopulation))
             {
                 <p>
-                    <div class="stats_element_container">
-                        <span class="stats_element">
-                            <span>@Model.PercentageEuropeanPopulation</span>
-                        </span>
-                    </div>
-                    <span class="stats_element_text">
-                        @ViewBag.glossary["oneliners"]["MaxAndelAvEuropeiskBestand"]
-                    </span>
+                    <span>@Model.PercentageEuropeanPopulation</span>
+                    <span>@ViewBag.glossary["populationsize"]["MaxAndelAvEuropeiskBestand"]</span>
                 </p>
             }
             @if (isNotEmpty(Model.PercentageGlobalPopulation))
             {
                 <p>
-                    <div class="stats_element_container">
-                        <span class="stats_element">
-                            <span>@Model.PercentageGlobalPopulation</span>
-                        </span>
-                    </div>
-                    <span class="stats_element_text">
-                        @ViewBag.glossary["oneliners"]["MaxAndelAvGlobalBestand"]
-                    </span>
+                    <span>@Model.PercentageGlobalPopulation</span>
+                    <span>@ViewBag.glossary["populationsize"]["MaxAndelAvGlobalBestand"]</span>
                 </p>
             }
         }

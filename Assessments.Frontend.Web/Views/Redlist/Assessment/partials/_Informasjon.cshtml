@@ -1,9 +1,18 @@
 ﻿@model SpeciesAssessment2021
 @*
-    // Information about the Assessment
+    // Inclusion Criteria
 
-    MOST OF THESE FIELDS ARE MISSING MAPPING.
-    AWAIT TRANSFORMATION
+     1. Oppfølger vurderingen ett av de tre vurderingskriteriene? List opp kriteriene.
+    - Alle vurderinger som er satt som rødlistevurdert oppfyller minst et kriterie.
+    - Hvilket kriterie som innfris skal listes i EvaluationJustification
+
+    2. Vurderinger som IKKE innfrir et av vurderingskriteriene skal sammenfalle med ikkevurderte arter
+
+    4. For de ikkevurderte finnes det egne forklaringer. Feltet markert i AssessmentInitialClassification bestemmer hvilken
+        som er relevant der det er flere. Aldri gi ut andre forklaringer enn den det tilhører.
+
+    // TODO: MANGLER SJEKKER FOR OM TiNG FAKTISK FINNES I GLOSSARY
+    // TODO: LINK TIL INFOSIDE OM INKLUDERING som er up-to-date. 
 *@
 
 @{
@@ -11,41 +20,25 @@
 }
 
 @*
-    Ikke relevant for LC-arter // @Model.AssessmentInitialClassification == "sikkerBestandLC"
-    Ikke relevant for rødlistede arter // @Model.AssessmentInitialClassification == "rodlisteVurdertArt"
+    string direkteSattKategori = "Denne arten har fått sin kategori satt direkte";
 
-    Nå er forøvrig disse gitt av kategori, men det får så være...
+    if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt")
+    {
+        // Only the ones mentioned above are actually fully evaluated. Any else have directly set category.
+        // But as that also is considered an evaluation, this has no impact on other data presented.
+        // Optimally this could have been used to hide/show areas, but stricter hiding is often necessary.
+    
+        direkteSattKategori = "Dette arten har fått sin kategori etter en full vurdering mot alle kriteriene .";
+    }
 
-
-
-    1. Oppfølger vurderingen ett av de tre vurderingskriteriene? List opp kriteriene.
-    - Alle vurderinger som er satt som rødlistevurdert oppfyller minst et kriterie.
-    - Hvilket kriterie som innfris skal listes i EvaluationJustification
-
-    2. Er kategorien direkte satt? Isåfall har den en ANNEN verdi enn rodlisteVurdertArt for AssessmentInitialClassification.
-
-    3. Vurderinger som IKKE innfrir et av vurderingskriteriene skal sammenfalle ikkevurderte arter
-
-    4. For de ikkevurderte finnes det egne forklaringer. Feltet markert i AssessmentInitialClassification bestemmer hvilken
-        som er relevant der det er flere. Aldri gi ut andre forklaringer enn den det tilhører.
-
-    // TODO: MANGLER SJEKKER FOR OM TiNG FAKTISK FINNES I GLOSSARY
-    // TODO: LINK TIL INFOSIDE OM INKLUDERING
 *@
 
 @{
 
-    string direkteSattKategori = "Denne arten har fått sin kategori satt direkte";
-    if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt")
-    {
-        // HIDE FOR NOW: maybe forever.
-        direkteSattKategori = "Dette arten har fått sin kategori etter en full vurdering mot alle kriteriene .";
-    }
 
 
     string heading = "";
     string inclusion = "";
-
     string reason_heading = "";
     string reason_description = "";
 
@@ -66,7 +59,7 @@
             inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
         }
     }
-    else if(Model.AssessmentInitialClassification == "fremmedArtNA" ||
+    else if (Model.AssessmentInitialClassification == "fremmedArtNA" ||
         Model.AssessmentInitialClassification == "begrensetForekomstNA" ||
         Model.AssessmentInitialClassification == "kunnskapsStatusNE")
     {
@@ -103,10 +96,16 @@
     }
 }
 
-<div class="page_section">
+<div class="page_section inclusion_section">
     <h3>@heading</h3>
+    <a class="button" href="https://www.artsdatabanken.no/Rodliste/NasjonaleTilpasninger">Les mer 
+    <span class="material-icons">
+        launch
+    </span>
+    </a>
     <p>@inclusion</p>
+
+
     <h4>@reason_heading</h4>
     <p>@Html.Raw(reason_description)</p>
-    <p style="display:none">@Html.Raw(direkteSattKategori)</p>
 </div>

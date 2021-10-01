@@ -3,9 +3,13 @@
 }
 
 
-.page_section h5{
-    display:block;
-    margin-top:10px;
+.inclusion_section h4 {
+    margin-bottom: 5px;
+}
+
+.inclusion_section a {
+   display:inline-block;
+   float:right;
 }
 
 

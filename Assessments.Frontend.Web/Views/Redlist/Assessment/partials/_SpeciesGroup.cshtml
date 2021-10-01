@@ -17,13 +17,13 @@
 
             @if (key != null && (@Model.SpeciesGroup == key || @Model.SpeciesGroup.Contains(key)))
             {
-                <span class="image_background">
+                <div class="image_background">
 
                     @if (speciesgroup[key]["image"] != null)
                     {
                         <img src="@speciesgroup[key]["image"]" />
                     }
-                </span>
+                </div>
             }
         }
     </div>

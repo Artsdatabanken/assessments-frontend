@@ -37,7 +37,9 @@
     "description": "Vurderingen gjelder for Svalbard, dvs. Spitsbergen og øyene omkring, samt Bjørnøya og Hopen inklusiv kyst innen 12 nautiske mil."
   },
   "populationsize": {
-    "title": "Nåværende populasjonsstørrelse i vurderingsområdet utgjør:",
+    "title": "Populasjonsandel",
+    "description": "Norge er ikke nødvendigvis alene om å ha en art. Men bestanden i Norge utgjør noen ganger en betydelig andel av de totale bestanden, som igjen kan påvirke rødlistestatusen.",
+    "subtitle": "Nåværende populasjonsstørrelse i vurderingsområdet utgjør:",
     "AndelNåværendeBestand": "av maksimum populasjonsstørrelse etter år 1900 i samme område",
     "MaxAndelAvEuropeiskBestand": "av europeisk populasjonsstørrelse",
     "MaxAndelAvGlobalBestand": "av global populasjonsstørrelse"

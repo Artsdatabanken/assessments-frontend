@@ -3,17 +3,7 @@
 <div class="page_section">
     <h2> Detaljer</h2>
     <partial name="/Views/Redlist/Assessment/partials/_Informasjon.cshtml" />
-    <partial name="/Views/Redlist/Assessment/partials/_Bestand.cshtml" />
+    <partial name="/Views/Redlist/Assessment/partials/_PopulationProportions.cshtml" />
     <partial name="/Views/Redlist/Assessment/partials/_CategoryChange.cshtml" />
-
-
-    @if (Model.GenerationLength != "" && Model.GenerationLength != null)
-    {
-        <h3>Generasjonstid: @Model.GenerationLength år</h3>
-        <p style="color:blue;">
-            @ViewBag.glossary["generasjonstid"]["description"]
-        </p>
-    }
-
-
+    <partial name="/Views/Redlist/Assessment/partials/_GenerationLength.cshtml" />
 </div>

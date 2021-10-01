@@ -1,0 +1,46 @@
+﻿@model SpeciesAssessment2021
+
+@{ 
+    // example species include: 
+    // - endret kategori: 32041
+    // - nedgradert kategori: 31847
+
+
+    string previous_category = Model.ImportInfo.Kategori2015.Substring(0,2);
+    string current_category = Model.Category.Substring(0, 2);
+
+    //UTEN GRADER MATCH
+}
+
+<div class="page_section">
+
+    <!-- Kategori endring -->
+
+
+    @if (Model.ExtinctionRiskAffected == "Ja")
+    {
+
+
+        <h3>Nedgradering av kategori på grunn av påvirkning utenfra</h3>
+        <p>
+            @Model.RationaleCategoryAdjustment
+        </p>
+
+    }
+
+    @if (previous_category != current_category)
+    {
+        <h3>Årsak til endring av kategori</h3>
+        <p>
+            Kategorien for denne arten har endret seg fra @previous_category til @current_category siden rødlista 2015.
+            Endringen kommer på grunnlag av: @Model.ReasonCategoryChange
+
+        </p>
+
+    }
+
+
+
+
+
+</div>

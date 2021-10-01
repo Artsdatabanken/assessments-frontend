@@ -38,9 +38,6 @@
   },
   "oneliners": {
     "litentvil": "Det er svært liten tvil om at arten er utdødd fra",
-    "vurdert_livskraftig": "Arten er vurdert til å være <i>livskraftig</i> LC.",
-    "full_vurdering": "Arten har vært gjennom fullstendig rødlistevurdering.",
-    "gjeldendekriterier": "En art behøver kun oppfylle ett av IUCNs kriterier A-E for å bli rødlistet, men skal i utgangspunktet testes mot alle kriterier så langt det finnes informasjon. En art kan dermed ha ett eller flere gjeldende kriterier, dvs. kriterier som er utslagsgivende for kategori.",
     "AndelNåværendeBestand": "Nåværende populasjonsstørrelse som andel av maksimum populasjonsstørrelse etter 1900",
     "MaxAndelAvEuropeiskBestand": "Andel av europeisk populasjonsstørrelse i Norge",
     "MaxAndelAvGlobalBestand": "Andel av global populasjonsstørrelse i Norge",

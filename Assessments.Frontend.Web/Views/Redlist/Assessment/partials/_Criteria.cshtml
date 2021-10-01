@@ -204,30 +204,23 @@
 }
 
 
-@if (!string.IsNullOrEmpty(Model.CriteriaSummarized))
+@if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && 
+                (Model.Category.Contains("CR") ||
+               Model.Category.Contains("EN") ||
+               Model.Category.Contains("VU") ||
+               Model.Category.Contains("NT")
+     ))
 {
     <div class="page_section criteria">
 
         <h2>@ViewBag.glossary["criteria"]["tagline"]</h2>
         <p>@ViewBag.glossary["criteria"]["description"]</p>
-
-
-        
         
         <div class="page_section">
             <h3>@ViewBag.glossary["criteria"]["subheading"]</h3>
             <p>@Model.CriteriaSummarized<br /></p>
 
-            @if (Model.Category.Contains("CR") ||
-               Model.Category.Contains("EN") ||
-               Model.Category.Contains("VU") ||
-               Model.Category.Contains("NT"))
-            {
-                <h3 style="color:blue;">TODO: Slett eller oppdater Tekst fra innsynsløsning?</h3>
-                <p style="color:blue;">@ViewBag.glossary["oneliners"]["gjeldendekriterier"]</p>
-            }
-
-
+           
             @*
         // TODO: switch not working when moving up one level due to type difference.
         //

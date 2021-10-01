@@ -43,42 +43,47 @@
     }
 
 
-    string inkluderingskriterie = "";
+    string heading = "";
+    string inclusion = "";
+
+    string reason_heading = "";
+    string reason_description = "";
 
     if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt" ||
         @Model.AssessmentInitialClassification == "utdoddINorgeRE" ||
         @Model.AssessmentInitialClassification == "sikkerBestandLC" ||
         @Model.AssessmentInitialClassification == "storUsikkerhetOmKorrektKategoriDD")
     {
-        inkluderingskriterie += "<h3>" + @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["title"] + "</h3>";
-        inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["description"];
+        heading = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["title"];
+        inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["description"];
         if (!string.IsNullOrEmpty(Model.EvaluationJustification))
         {
-            inkluderingskriterie += "<h4>" + @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["title"] +"</h4>";
-            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["description"];
+            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["title"];
+            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["description"];
         }
         else
         {
-            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
+            inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
         }
     }
     else if(Model.AssessmentInitialClassification == "fremmedArtNA" ||
         Model.AssessmentInitialClassification == "begrensetForekomstNA" ||
         Model.AssessmentInitialClassification == "kunnskapsStatusNE")
     {
-        inkluderingskriterie = "<h3>" + @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["title"] + "</h3>";
+        heading = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["title"];
+        inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
 
         if (Model.AssessmentInitialClassification == "fremmedArtNA")
         {
-            inkluderingskriterie += "<h4>" + @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["title"] + "</h4>";
-            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["description"];
+            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["title"];
+            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["description"];
         }
         else if (Model.AssessmentInitialClassification == "begrensetForekomstNA")
         {
             if (!string.IsNullOrEmpty(Model.RationaleNotApplicable))
             {
-                inkluderingskriterie += "<h4>" + @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["title"] + "</h4>";
-                inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["description"];
+                reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["title"];
+                reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["description"];
             }
         }
         else if (Model.AssessmentInitialClassification == "kunnskapsStatusNE")
@@ -86,20 +91,22 @@
 
             if (!string.IsNullOrEmpty(Model.RationaleNotEvaluated))
             {
-                inkluderingskriterie += "<h4>" + @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["title"] + "</h4>";
-                inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["description"];
+                reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["title"];
+                reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["description"];
             }
         }
         else
         {
-            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
-            inkluderingskriterie += @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["else"];
+            inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
+            inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["else"];
         }
     }
 }
 
 <div class="page_section">
-
-    <p>@Html.Raw(inkluderingskriterie)</p>
+    <h3>@heading</h3>
+    <p>@inclusion</p>
+    <h4>@reason_heading</h4>
+    <p>@Html.Raw(reason_description)</p>
     <p style="display:none">@Html.Raw(direkteSattKategori)</p>
 </div>

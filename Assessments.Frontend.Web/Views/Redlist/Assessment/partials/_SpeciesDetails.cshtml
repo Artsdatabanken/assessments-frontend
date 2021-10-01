@@ -5,6 +5,7 @@
 
 <div class="page_section">
     <h2> Detaljer</h2>
+    <partial name="/Views/Redlist/Assessment/partials/_Informasjon.cshtml" />
     <partial name="/Views/Redlist/Assessment/partials/_Bestand.cshtml" />
 
 
@@ -15,7 +16,6 @@
             @ViewBag.glossary["generasjonstid"]["description"]
         </p>
     }
-
 
     <!-- Kategori endring -->
     @if (!string.IsNullOrEmpty(Model.CategoryAdjustedTo) && Model.ExtinctionRiskAffected == "Ja")
@@ -28,13 +28,13 @@
     <!-- Kategori UtdøingSterktPåvirket -->
     @if (Model.ExtinctionRiskAffected == "Ja")
     {
-            <span>
-                Risiko for utdøing er sterkt påvirket av populasjoner i naboland.
-                Kategori er derfor justert 
-                  @if (@Model.CategoryAdjustedFrom != "" && @Model.CategoryAdjustedTo != null)
-                    { <span> fra @Model.CategoryAdjustedFrom  </span>}                
-                til @Model.CategoryAdjustedTo.
-            </span>       
+        <span>
+            Risiko for utdøing er sterkt påvirket av populasjoner i naboland.
+            Kategori er derfor justert
+            @if (@Model.CategoryAdjustedFrom != "" && @Model.CategoryAdjustedTo != null)
+            {<span> fra @Model.CategoryAdjustedFrom  </span>}
+            til @Model.CategoryAdjustedTo.
+        </span>
 
         @Html.Raw(Model.RationaleCategoryAdjustment)
 

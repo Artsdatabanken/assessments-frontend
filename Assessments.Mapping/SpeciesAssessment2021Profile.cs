@@ -20,8 +20,9 @@ namespace Assessments.Mapping
                 .AfterMap(SpeciesAssessment2021ProfileHelper.CorrectImpactFactors);
 
             CreateMap<Rodliste2019.TrackInfo, SpeciesAssessment2021TrackInfo>();
-            CreateMap<Rodliste2019.MinMaxProbable, SpeciesAssessment2021MinMaxProbable>();
-            CreateMap<Rodliste2019.MinMaxProbableIntervall, SpeciesAssessment2021MinMaxProbableIntervall>();
+            CreateMap<Rodliste2019.MinMaxProbable, SpeciesAssessment2021MinMaxProbableIntervall>(); // use the one below - differentiate on punktestimat
+            CreateMap<Rodliste2019.MinMaxProbableIntervall, SpeciesAssessment2021MinMaxProbableIntervall>()
+                .ForMember(dest => dest.Punktestimat, opt => opt.MapFrom(src => (src.Punktestimat == "true")));
             CreateMap<Rodliste2019.Reference, SpeciesAssessment2021Reference>();
 
             CreateMap<Rodliste2019.Fylkesforekomst, SpeciesAssessment2021RegionOccurrence>()

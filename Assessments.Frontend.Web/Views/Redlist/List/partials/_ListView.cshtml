@@ -4,18 +4,30 @@
 <!-- Data from model -->
 @{
     Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+}
 
+@functions
+{
+    string Capitalize(string name)
+    {
+        if (!string.IsNullOrEmpty(name))
+            return char.ToUpper(name[0]) + name.Substring(1);
+        return name;
+    }
 }
 
 
 
     <ul class="redlist" id="redlist">
         <li class="listheader" id="listheader">
-            <span>Artsnavn</span>
-            <span>Kategori</span>
-            <span>Artsgruppe</span>
-            <span>Område</span>
-            <span>Ikon</span>
+            <span class="allsize">Kategori</span>
+
+            <span class="fullsize">Artsnavn</span>
+            <span class="fullsize">Populærnavn</span>
+            <span class="mobile">Art</span>
+
+            <span class="allsize">Artsgruppe</span>
+
         </li>
 
 
@@ -28,30 +40,37 @@
                         // TODO: The number of fields contained in the box does not add up. Fix.
                         // Makes it very strange and overflowy in grid view.
                     }
-                    <span class="element_name">@item.ScientificName</span>
+
                     <span class="element_category">
                         <span class="@item.Category category_tag">@item.Category</span>
                     </span>
-                    <span class="element_group">@item.SpeciesGroup</span>
-                    <span class="element_area">
-                        @item.AssessmentArea
-                        @if (@item.AssessmentArea == "N")
-                        {
-                            <img src="~/images/norge.png" alt="Bilde av Norge" />
-                        }
-                        else if (@item.AssessmentArea == "S")
-                        {
-                            <img src="~/images/svalbard.png" alt="Bilde av Svalbard" />
-                        }
 
+                    <span class="element_species">
+                        <span class="element_popular_name">@Capitalize(item.PopularName)</span>
+                        <span class="element_name">@item.ScientificName</span>
+                        <span class="element_area mobile">
+                            @if (@item.AssessmentArea == "N")
+                            {
+                                <span> Norge </span >
+                            }
+                            else if (@item.AssessmentArea == "S")
+                            {
+                               <span>Svalbard</span>
+                            }
+
+                        </span>
                     </span>
 
-                    <div class="element_icon">
-                        @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
-                        {
-                            <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
-                        }
-                    </div>
+
+                    <span class="element_speciesgroup">
+                        <span class="element_group">@item.SpeciesGroup</span>
+                        <div class="element_icon">
+                            @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
+                            {
+                                <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
+                            }
+                        </div>
+                    </span>
 
                 </a>
             </li>

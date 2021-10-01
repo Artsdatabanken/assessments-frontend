@@ -379,18 +379,22 @@ namespace Assessments.Mapping.Helpers
             return result;
         }
 
-        private static void SetQuantile(SpeciesAssessment2021MinMaxProbable minmaxprobable, double quantileValue)
-        {
-            var q = GetQuantile(minmaxprobable, quantileValue);
-            //minmaxprobable.Calculated = q == null ? "" : (Math.Round((double)q)).ToString("#,0.##");
-            minmaxprobable.Calculated = q == null ? "" : q.ToString();
-        }
+        //private static void SetQuantile(SpeciesAssessment2021MinMaxProbable minmaxprobable, double quantileValue)
+        //{
+        //    var q = GetQuantile(minmaxprobable, quantileValue);
+        //    //minmaxprobable.Calculated = q == null ? "" : (Math.Round((double)q)).ToString("#,0.##");
+        //    minmaxprobable.Calculated = q == null ? "" : q.ToString();
+        //}
 
         private static void SetQuantile(SpeciesAssessment2021MinMaxProbableIntervall minmaxprobable, double quantileValue)
         {
             var q = GetQuantile(minmaxprobable, quantileValue);
             //minmaxprobable.Calculated = q == null ? "" : (Math.Round((double)q)).ToString("#,0.##");
             minmaxprobable.Calculated = q == null ? "" : q.ToString();
+            if (!string.IsNullOrWhiteSpace(minmaxprobable.Calculated))
+            {
+                minmaxprobable.Quantile = quantileValue.ToString(CultureInfo.InvariantCulture);
+            }
         }
 
         private static int? GetQuantile(SpeciesAssessment2021MinMaxProbableIntervall minmaxprobable, double quantileValue)
@@ -405,7 +409,7 @@ namespace Assessments.Mapping.Helpers
             int? max = parseNullableInt(minmaxprobable.Max);
             int? maxintervall = parseNullableInt(minmaxprobable.Maxintervall);
             int? probable = parseNullableInt(minmaxprobable.Probable);
-            bool punktestimat = minmaxprobable.Punktestimat == "true";
+            bool punktestimat = minmaxprobable.Punktestimat;
 
             //double? test = 
             //    min == null && max == null
@@ -478,42 +482,42 @@ namespace Assessments.Mapping.Helpers
             return result;
         }
 
-        private static int? GetQuantile(SpeciesAssessment2021MinMaxProbable minmaxprobable, double quantileValue)
-        {
-            if (minmaxprobable == null)
-            {
-                throw new Exception("missing minmaxprobable");
-            }
-            var min = parseNullableInt(minmaxprobable.Min);
-            int? max = parseNullableInt(minmaxprobable.Max);
-            int? probable = parseNullableInt(minmaxprobable.Probable);
-            double? q =
-                min == null && max == null
-                    ? probable
-                    : min == null && probable == null
-                        ? max
-                        : max == null && probable == null
-                            ? min
-                            : probable == null && min <= max
-                                ? MyQuantile(quantileValue, min, max)
-                                : min == null && probable <= max
-                                    ? MyQuantile(quantileValue, max, probable)
-                                    : max == null && min <= probable
-                                        ? MyQuantile(quantileValue, min, probable)
-                                        : min != null && max != null && probable != null && min < max && probable > min && probable < max
-                                            ? MyQuantile(quantileValue, min, probable, max)
-                                            : (double?)null;
-            //if (q != null)
-            //{
-            //    double a = (double)q * 100d;
-            //    double b = Math.Round(a);
-            //    double c = b / 100d;
-            //    q = c;
-            //    //Console.WriteLine("q " + q);
-            //}
-            int? result = q == null ? (int?)null : (int)(q + 0.500000001d);
-            return result;
-        }
+        //private static int? GetQuantile(SpeciesAssessment2021MinMaxProbable minmaxprobable, double quantileValue)
+        //{
+        //    if (minmaxprobable == null)
+        //    {
+        //        throw new Exception("missing minmaxprobable");
+        //    }
+        //    var min = parseNullableInt(minmaxprobable.Min);
+        //    int? max = parseNullableInt(minmaxprobable.Max);
+        //    int? probable = parseNullableInt(minmaxprobable.Probable);
+        //    double? q =
+        //        min == null && max == null
+        //            ? probable
+        //            : min == null && probable == null
+        //                ? max
+        //                : max == null && probable == null
+        //                    ? min
+        //                    : probable == null && min <= max
+        //                        ? MyQuantile(quantileValue, min, max)
+        //                        : min == null && probable <= max
+        //                            ? MyQuantile(quantileValue, max, probable)
+        //                            : max == null && min <= probable
+        //                                ? MyQuantile(quantileValue, min, probable)
+        //                                : min != null && max != null && probable != null && min < max && probable > min && probable < max
+        //                                    ? MyQuantile(quantileValue, min, probable, max)
+        //                                    : (double?)null;
+        //    //if (q != null)
+        //    //{
+        //    //    double a = (double)q * 100d;
+        //    //    double b = Math.Round(a);
+        //    //    double c = b / 100d;
+        //    //    q = c;
+        //    //    //Console.WriteLine("q " + q);
+        //    //}
+        //    int? result = q == null ? (int?)null : (int)(q + 0.500000001d);
+        //    return result;
+        //}
 
         private static int? parseNullableInt(string s)
         {

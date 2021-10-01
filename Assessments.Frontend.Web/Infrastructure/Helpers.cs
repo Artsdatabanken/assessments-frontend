@@ -1,91 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Linq;
-using Assessments.Mapping;
-using Assessments.Mapping.Models.Species;
-using Microsoft.AspNetCore.Http;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class Helpers
     {
-        public static QueryParameters GetQueryParameters(this HttpContext context, Dictionary<string, string> parameters)
-        {
-            var dictionary = context.Request.Query.ToDictionary(d => d.Key, d => d.Value.ToString());
-
-            foreach (var (key, value) in parameters)
-            {
-                if (dictionary.ContainsKey(key))
-                    dictionary.Remove(key);
-
-                dictionary.Add(key, value);
-            }
-
-            return new QueryParameters(dictionary);
-        }
-
-        public class QueryParameters : Dictionary<string, string>
-        {
-            public QueryParameters(IDictionary<string, string> dictionary) : base(dictionary) { }
-
-            public QueryParameters WithRoute(string routeParam, string routeValue)
-            {
-                this[routeParam] = routeValue;
-
-                return this;
-            }
-        }
-
-        public static MemoryStream GenerateExcel(IEnumerable<SpeciesAssessment2021Export> assessments)
-        {
-            MemoryStream memoryStream;
-            using (var workbook = new ClosedXML.Excel.XLWorkbook())
-            {
-                var worksheet = workbook.AddWorksheet("Rødliste 2021");
-                
-                worksheet.Cell(1, 1).InsertTable(assessments);
-
-                var exportColumns = typeof(SpeciesAssessment2021Export).GetProperties().Select(p => new
-                {
-                    p.GetCustomAttributes(typeof(DisplayNameAttribute), false).Cast<DisplayNameAttribute>().Single().DisplayName, 
-                    p.GetCustomAttributes(typeof(DescriptionAttribute), false).Cast<DescriptionAttribute>().Single().Description
-                }).ToList(); 
-
-                var firstRow = worksheet.FirstRow();
-                var columnNumber = 1;
-
-                foreach (var column in exportColumns)
-                {
-                    firstRow.Cell(columnNumber).Value = column.DisplayName;		
-                    columnNumber++;
-                }
-
-                worksheet.SheetView.FreezeRows(1);
-
-                var table = new DataTable("Feltnavn og beskrivelser");
-                table.Columns.Add("Feltnavn");
-                table.Columns.Add("Beskrivelse");
-
-                foreach (var element in exportColumns)
-                    table.Rows.Add(element.DisplayName, element.Description);
-
-                workbook.Worksheets.Add(table);
-
-                workbook.Worksheet(2).SheetView.FreezeRows(1);
-                workbook.Worksheet(2).Columns().AdjustToContents();
-
-                memoryStream = new MemoryStream();
-                workbook.SaveAs(memoryStream);
-            }
-
-            memoryStream.Seek(0, SeekOrigin.Begin);
-
-            return memoryStream;
-        }
-
-        public static List<string> findSelectedCategories(Dictionary<string, bool> categories, bool redlisted, bool endangered) 
+        public static string[] findSelectedCategories( bool redlisted, bool endangered,
+            string[] categoriesSelected) 
         {
             List<string> selectedCategories = new List<string>();
 
@@ -108,118 +28,60 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             if (redlisted) 
                 foreach (var category in redlist)
-                    categories[category] = true;
+                    selectedCategories.Add(category);
             else if (endangered) 
                 foreach (var category in endangeredList)
-                    categories[category] = true;
-
-            foreach (var entry in categories)
-                if (entry.Value)
-                    selectedCategories.Add(entry.Key);
-
-            return selectedCategories;
+                    selectedCategories.Add(category);
+            foreach (var s in categoriesSelected)
+            {
+                if (!selectedCategories.Contains(s))
+                {
+                    selectedCategories.Add(s);
+                }
+            }
+            return selectedCategories.ToArray();
         }
 
-        public static char[] findSelectedCriterias(Dictionary<char, bool> criterias)
+        public static Dictionary<string, string> getRegionsDict(string[] regionNames)
         {
-            List<char> selectedCriterias = new List<char>();
-            foreach (var item in criterias)
-                if (item.Value)
-                    selectedCriterias.Add(item.Key);
-            return selectedCriterias.ToArray();
+            Dictionary<string, string> allRegions = new Dictionary<string, string>();
+            for (int i = 0; i < regionNames.Length; i++)
+            {
+                allRegions.Add($"{i}", regionNames[i]);
+            }
+            return allRegions;
         }
 
-        public static List<string> findSelectedAreas(Dictionary<string, bool> assessmentAreas)
-        {
-            List<string> selectedAreas = new List<string>();
-            foreach (var item in assessmentAreas)
-                if (item.Value)
-                    selectedAreas.Add(item.Key);
-            return selectedAreas;
-        }
-
-        public static List<string> findSelectedRegions(Dictionary<string, bool> selectedRegions)
+        public static string[] findSelectedRegions(string[] selectedRegions, Dictionary<string, string> allRegions)
         {
             List<string> regions = new List<string>();
-            if (selectedRegions[Constants.Regions.Agder])
+            foreach (var region in selectedRegions)
             {
-                regions.Add(Constants.Regions.VestAgder);
-                regions.Add(Constants.Regions.AustAgder);
+                regions.Add(allRegions[region]);
             }
-
-            if (selectedRegions[Constants.Regions.Innlandet])
-            {
-                regions.Add(Constants.Regions.Oppland);
-                regions.Add(Constants.Regions.Hedmark);
-            }
-
-            if (selectedRegions[Constants.Regions.VestfoldTelemark])
-            {
-                regions.Add(Constants.Regions.Vestfold);
-                regions.Add(Constants.Regions.Telemark);
-            }
-
-            if (selectedRegions[Constants.Regions.MoreRomsdal])
-                regions.Add(Constants.Regions.MoreRomsdal);
-
-            if (selectedRegions[Constants.Regions.Nordland])
-                regions.Add(Constants.Regions.Nordland);
-
-            if (selectedRegions[Constants.Regions.Rogaland])
-                regions.Add(Constants.Regions.Rogaland);
-
-            if (selectedRegions[Constants.Regions.TromsFinnmark])
-            {
-                regions.Add(Constants.Regions.Troms);
-                regions.Add(Constants.Regions.Finnmark);
-            }
-
-            if (selectedRegions[Constants.Regions.Trondelag])
-                regions.Add(Constants.Regions.Trondelag);
-
-            if (selectedRegions[Constants.Regions.Vestland])
-            {
-                regions.Add(Constants.Regions.SognFjordane);
-                regions.Add(Constants.Regions.Hordaland);
-            }
-
-            if (selectedRegions[Constants.Regions.VikenOslo])
-            {
-                regions.Add(Constants.Regions.OsloAkershus);
-                regions.Add(Constants.Regions.Buskerud);
-                regions.Add(Constants.Regions.Ostfold);
-            }
-
-            if (selectedRegions[Constants.Regions.Havomraader])
-            {
-                regions.Add(Constants.Regions.Nordsjoen);
-                regions.Add(Constants.Regions.Norskehavet);
-                regions.Add(Constants.Regions.Gronlandshavet);
-                regions.Add(Constants.Regions.Polhavet);
-                regions.Add(Constants.Regions.Barentshavet);
-            }
-            
-            return regions;
+            return regions.ToArray();
         }
 
-        public static List<string> findEuropeanPopProcentages(Dictionary<string, bool> europeanPopulation)
+        public static string[] findEuropeanPopProcentages(string[] europeanPopulation)
         {
             List<string> selectedPercenteges = new List<string>();
-            
-            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopLt5]) 
-            {
-                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Lt1);
-                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Lt5);
-                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range1To5);
-            }
-            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25])
-                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range5To25);
-            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50])
-                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range25To50);
-            if (europeanPopulation[Constants.EuropeanPopulationPercentages.EuropeanPopGt50])
-                selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Gt50);
 
-            return selectedPercenteges;
+            foreach (var item in europeanPopulation)
+            {
+                if (item == Constants.EuropeanPopulationPercentages.EuropeanPopLt5)
+                {
+                    selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Lt1);
+                    selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Lt5);
+                    selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range1To5);
+                }
+                else if (item == Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25)
+                    selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range5To25);
+                else if (item == Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50)
+                    selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Range25To50);
+                else if (item == Constants.EuropeanPopulationPercentages.EuropeanPopGt50)
+                    selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Gt50);
+            }
+            return selectedPercenteges.ToArray();
         }
     }
 
@@ -229,12 +91,47 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AssessmentsMappingAssembly = "Assessments.Mapping";
 
+        public static readonly Dictionary<string, string> AllAreas = new Dictionary<string, string>
+        {
+            {"Norge", "N"},
+            {"Svalbard", "S"}
+        };
+
+        public static readonly string[] AllCategories = new[]
+        {
+            Constants.SpeciesCategories.Extinct.ShortHand,
+            Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
+            Constants.SpeciesCategories.Endangered.ShortHand,
+            Constants.SpeciesCategories.Vulnerable.ShortHand,
+            Constants.SpeciesCategories.NearThreatened.ShortHand,
+            Constants.SpeciesCategories.DataDeficient.ShortHand,
+            Constants.SpeciesCategories.Viable.ShortHand,
+            Constants.SpeciesCategories.NotEvalueted.ShortHand,
+            Constants.SpeciesCategories.NotAppropriate.ShortHand
+        };
+
+        public static readonly Dictionary<string, string> AllCriterias = new Dictionary<string, string>
+        {
+            {"A", "populasjonsreduksjon"},
+            {"B", "lite areal"},
+            {"C", "liten populasjon"},
+            {"D", "svært liten populasjon eller forekomst"}
+        };
+
+        public static readonly Dictionary<string, string> AllEuropeanPopulationPercentages = new Dictionary<string, string>
+        {
+            {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, "< 5 %"},
+            {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, "5 - 25 %"},
+            {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, "25 - 50 %"},
+            {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, "> 50 %"}
+        };
+        
         public class EuropeanPopulationPercentages
         {
-            public const string EuropeanPopLt5 = "europeanPopLt5";
-            public const string EuropeanPopRange5To25 = "europeanPopRange5To25";
-            public const string EuropeanPopRange25To50 = "europeanPopRange25To50";
-            public const string EuropeanPopGt50 = "europeanPopGt50";
+            public const string EuropeanPopLt5 = "Lt5";
+            public const string EuropeanPopRange5To25 = "Fr5To25";
+            public const string EuropeanPopRange25To50 = "Fr25To50";
+            public const string EuropeanPopGt50 = "Gt50";
             public const string Lt1 = "< 1 %";
             public const string Lt5 = "< 5 %";
             public const string Gt50 = "> 50 %";
@@ -242,50 +139,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string Range5To25 = "5 - 25 %";
             public const string Range25To50 = "25 - 50 %";
         }
-
-        public class Regions
-        {
-            public const string Agder = "Agder";
-            public const string VestAgder = "Vest-Agder";
-            public const string AustAgder = "Aust-Agder";
-
-            public const string Innlandet = "Innlandet";
-            public const string Oppland = "Oppland";
-            public const string Hedmark = "Hedmark";
-
-            public const string VestfoldTelemark = "Vestfold og Telemark";
-            public const string Vestfold = "Vestfold";
-            public const string Telemark = "Telemark";
-
-            public const string MoreRomsdal = "Møre og Romsdal";
-
-            public const string Nordland = "Nordland";
-
-            public const string Rogaland = "Rogaland";
-
-            public const string TromsFinnmark = "Troms og Finnmark";
-            public const string Troms = "Troms";
-            public const string Finnmark = "Finnmark";
-
-            public const string Trondelag = "Trøndelag";
-
-            public const string Vestland = "Vestland";
-            public const string SognFjordane = "Sogn og Fjordane";
-            public const string Hordaland = "Hordaland";
-
-            public const string VikenOslo = "Viken og Oslo";
-            public const string OsloAkershus = "Oslo og Akershus";
-            public const string Buskerud = "Buskerud";
-            public const string Ostfold = "Østfold";
-
-            public const string Havomraader = "Havområder";
-            public const string Nordsjoen = "Nordsjøen";
-            public const string Norskehavet = "Norskehavet";
-            public const string Gronlandshavet = "Grønlandshavet";
-            public const string Polhavet = "Polhavet";
-            public const string Barentshavet = "Barentshavet";
-        }
-
+        
         public class Filename
         {
             public const string Species2021 = "species-2021.json";
@@ -296,6 +150,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string Species2015 = "species-2015.json";
 
             public const string Species2006 = "species-2006.json";
+
+            public const string SpeciesExpertCommitteeMembers = "species-experts.csv";
         }
 
         public class SpeciesCategories

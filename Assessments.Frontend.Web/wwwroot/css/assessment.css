@@ -3,6 +3,17 @@
 }
 
 
+.inclusion_section h4 {
+    margin-bottom: 5px;
+}
+
+.inclusion_section a {
+   display:inline-block;
+   float:right;
+}
+
+
+
 @media only screen and (min-width: 550px) {
     .mobileversion {
         display: none;
@@ -61,62 +72,141 @@
 
 
 /* GRAPHIC ELEMENT FOR CATEGORY */
+.graphic_element.material-icons,
 .graphic_element {
-    display: block;
+    display: inline-block;
     border-radius: 2px;
     padding: 15px;
     margin-right: auto;
     margin-left: auto;
-    font-size: 20pt;
+    font-size: 10pt;
     background: grey;
-    height: 64px;
-    width: 64px;
-    color: white;
-}
-
-.graphic_element .material-icons {
-    font-size: 20pt;
-    line-height: inherit;
     padding: 4px;
-    padding-top: 0px;
+    color: white;
+    width: 26px;
+    height: 26px;
 }
 
-.imaged_paragraph .material-icons {
-    display: block;
-}
-
-.right_text {
-    display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-@media only screen and (min-width: 350px) {
-    .imaged_paragraph {
-        display: flex;
-        align-items: center;
-    }
-
-    .graphic_element {
-        display: inline-block;
-        margin-right:20px;
-    }
-    .right_text {
-        display: inline-block;
-        flex: 1;
-    }
+.graphic_element.material-icons {
+    font-size:12pt;
+    padding:5px;
 }
 
 @media only screen and (max-width: 350px) {
-    .graphic_element {
-        width: 100%;
-        text-align: center;
-    }
+
 }
 
 
-/* CATEGORIES */
+/* CRITERIA CATEGORY GRAPH */
 
+.criteria_results{
+    padding-left:20px;
+}
+
+.category_graph {
+    width: 500px;
+    max-width: 100%;
+    height: 30px;
+    margin-bottom: 40px;
+    display: block;
+    font-size: 0;
+    margin-top: 60px;
+    position: relative;
+    border-top: 2px solid black;
+}
+
+.category_graph_element {
+    background: grey;
+    display: inline-block;
+    height: 100%;
+    width:25%;
+    font-size:12pt;
+    box-sizing:border-box;
+    border-right:2px solid black;
+    overflow:visible;
+    text-align:center;
+    position:relative;
+    padding-top:5px;
+}
+
+.category_graph_element span {
+    position: absolute;
+    top: 28px;
+    color: black;
+    width: 100%;
+    display: block;
+    right: auto;
+    font-size: 8pt;
+    display: block;
+    width: 100%;
+    left: auto;
+    text-align: center;
+}
+
+
+.category_graph .indicator_dot {
+    width: 2px;
+    text-align: center;
+    height: 28px;
+    background: black;
+    position: absolute;
+    top: -27px;
+    z-index: 1;
+    overflow: visible;
+}
+
+.category_graph .indicator_text {
+    overflow: visible;
+    position: absolute;
+    width: 17px;
+    display: block;
+    height: 18px;
+    margin-left: -7px;
+    text-align: center;
+    font-size: 10pt;
+    margin-top: -1px;
+    padding:2px;
+    padding-top:0;
+}
+
+.category_graph .dot_dot {
+    position: absolute;
+    width: 6px;
+    display: block;
+    height: 6px;
+    border-radius: 50%;
+    background: #400;
+    margin-left: -2px;
+    text-align: center;
+    margin-top: 23px;
+}
+
+.category_graph .indicator_text.max,
+.category_graph .indicator_text.calc {
+    width: 100px;
+    margin-left: -98px;
+    text-align: right;
+    border-right: 2px solid black;
+}
+
+.category_graph .indicator_text.prob,
+.category_graph .indicator_text.min {
+    width: 100px;
+    text-align: left;
+    border-left: 2px solid black;
+    margin-left: 0px;
+}
+
+
+.category_graph .indicator_text.calc ,
+.category_graph .indicator_text.prob {
+    margin-top: -18px;
+      
+}
+
+
+
+/* CATEGORIES */
 .RE {
     background: #5a5b5d;
     color: white;
@@ -520,8 +610,13 @@
 
 /*criteria*/
 
-.criteria_element.active h4{
-    color:black;
+.criteria_element h4 {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.criteria_element.active h4 {
+    color: black
 }
 
 .criteria_options {
@@ -534,19 +629,25 @@
 
 .criteria .inactive .criteria_description,
 .criteria .inactive .criteria_options,
-.criteria .inactive .criteria_subcriteria {
+.criteria .inactive .criteria_subcriteria,
+.criteria .inactive .listitem_text_field p,
+.criteria .inactive .criteria_results,
+.listitem_criteria.inactive .subsub_list {
     display: none;
 }
 
 .listitem_criteria {
-    display: flex;
+    display: block;
 }
 
-.listitem_text_field{
-    padding-left:10px;
+.listitem_text_field {
+    display: inline-block;
+    width: calc(100% - 30px);
+    vertical-align: top;
 }
 
 .subsub_list{
+    margin-top:10px;
     margin-bottom:20px;
 }
 
@@ -554,6 +655,21 @@
     margin-bottom: 5px;
 }
 
+.inactive .quantile{
+    display:none;
+}
+
+.quantile span{
+    display:block;
+}
+
+.temp{
+    color:lightblue;
+}
+
+.options_list p {
+    display:none;
+}
 /* IMPACT FACTORS */
 .impact_table {
     display: flex;
@@ -693,21 +809,57 @@
     display:flex;
 }
 
+
 .species_group_image {
     width: 62px;
     height: 62px;
     display: inline-block;
 }
 
-.species_group_image img{
-    width:100%;
+.species_group_image img,
+.image_background {
+    width: 100%;
+    height:100%;
 }
 
-.date{
-    font-size:8pt;
-    color:grey;
+.speciesgroup_container p{
+    margin-top:15px;
+}
+
+.date {
+    font-size: 8pt;
+    color: grey;
 }
 
 .page-header h1 {
     margin-top: 0;
+}
+
+
+.history_list li {
+    display: flex;
+    font-size: 12pt;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    padding: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top:-1px;
+    justify-content:space-between;
+}
+
+.history_list .text_content {
+    display: inline-block;
+}
+
+
+.history_list li a {
+    display:inline-block;
+    max-width: 40px;
+    font-size: 7pt;
+    text-decoration: none;
+    background: lightgrey;
+    color: black;
+    padding: 4px;
+    text-align: center;
 }

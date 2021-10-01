@@ -15,7 +15,7 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
 <div class="habitat page_section">
     @if (@Model.MainHabitat.Count() != 0)
     {
-        <h2>Habitat</h2>
+    <h2>@ViewBag.glossary["habitat"]["tagline"]</h2>
         <div>
             @Html.Raw(@ViewBag.glossary["habitat"]["description"])
             <h3>Arten finnes i disse habitatene</h3>

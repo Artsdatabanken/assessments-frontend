@@ -14,6 +14,6 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string PreliminaryCategory { get; set; } // A4Intervall10År
 
-        public SpeciesAssessment2021MinMaxProbable QuantifiedReduction { get; set; } = new(); // A4Intervall10ÅrAntatt
+        public SpeciesAssessment2021MinMaxProbableIntervall QuantifiedReduction { get; set; } = new(); // A4Intervall10ÅrAntatt
     }
 }

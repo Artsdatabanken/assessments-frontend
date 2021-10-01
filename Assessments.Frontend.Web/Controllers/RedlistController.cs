@@ -8,6 +8,8 @@ using Assessments.Mapping.Models.Species;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
 using System;
+using Assessments.Frontend.Web.Infrastructure.Services;
+
 // ReSharper disable InconsistentNaming
 
 namespace Assessments.Frontend.Web.Controllers
@@ -17,103 +19,77 @@ namespace Assessments.Frontend.Web.Controllers
     public class RedlistController : BaseController<RedlistController>
     {
         private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
+        private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
+        private static readonly string[] _allCategories = Constants.AllCategories;
+        private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
+        private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         public IActionResult Index() => View();
 
         [Route("2021")]
-        public async Task<IActionResult> Index2021(int? page, string name, bool export, bool RE, bool CR, bool EN, bool VU, 
-        bool NT, bool DD, bool LC, bool NE, bool NA, bool redlisted, bool endangered, FilterCriterias Criterias, bool Norge, 
-        bool svalbard, bool presumedExtinct, FilterRegions Regions, bool europeanPopLt5, bool europeanPopRange5To25, 
-        bool europeanPopRange25To50, bool europeanPopGt50)
+        public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
+            viewModel ??= new RL2021ViewModel();
             // Pagination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            // var query = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
             var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
             // Søk
-            if (!string.IsNullOrEmpty(name))
-                query = query.Where(x => x.ScientificName.ToLower().Contains(name.Trim().ToLower()));
+            if (!string.IsNullOrEmpty(viewModel.Name))
+                query = query.Where(x => x.ScientificName.ToLower().Contains(viewModel.Name.Trim().ToLower()) ||
+                x.PopularName.ToLower().Contains(viewModel.Name.Trim().ToLower()))
+                .OrderByDescending(x => x.PopularName.ToLower() == viewModel.Name.Trim().ToLower() ||
+                x.ScientificName.ToLower() == viewModel.Name.Trim().ToLower());
 
             // Filter
 
+            // Areas
+            ViewBag.AllAreas = _allAreas;
+
+            if (viewModel.Area?.Any() == true)
+                query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
+
             // Categories
-            Dictionary<string, bool> categories = new Dictionary<string, bool>
-            {
-                { Constants.SpeciesCategories.Extinct.ShortHand, RE },
-                { Constants.SpeciesCategories.CriticallyEndangered.ShortHand, CR },
-                { Constants.SpeciesCategories.Endangered.ShortHand, EN },
-                { Constants.SpeciesCategories.Vulnerable.ShortHand, VU },
-                { Constants.SpeciesCategories.NearThreatened.ShortHand, NT },
-                { Constants.SpeciesCategories.DataDeficient.ShortHand, DD },
-                { Constants.SpeciesCategories.Viable.ShortHand, LC },
-                { Constants.SpeciesCategories.NotEvalueted.ShortHand, NE },
-                { Constants.SpeciesCategories.NotAppropriate.ShortHand, NA }
-            };
-            List<string> chosenCategories = Helpers.findSelectedCategories(categories, redlisted, endangered);
+            ViewBag.AllCategories = _allCategories;
+            viewModel.Category = Helpers.findSelectedCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
+
+            if (viewModel.Category?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));
 
             // Criterias
-            Dictionary<char, bool> criterias = new Dictionary<char, bool>
-            {
-                { 'A', Criterias.CriteriaA },
-                { 'B', Criterias.CriteriaB },
-                { 'C', Criterias.CriteriaC },
-                { 'D', Criterias.CriteriaD },
-            };
-            char[] chosenCriterias = Helpers.findSelectedCriterias(criterias);
+            ViewBag.AllCriterias = _allCriterias;
+            char[] criterias = viewModel.Criterias.ToString().ToCharArray();
 
-            // Areas
-            Dictionary<string, bool> assessmentAreas = new Dictionary<string, bool>
-            {
-                { "N", Norge },
-                { "S", svalbard }
-            };
-            List<string> chosenAreas = Helpers.findSelectedAreas(assessmentAreas);
+            if (viewModel.Criterias?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(criterias) != -1);
+
+            // Habitat
+            if (viewModel.Habitats?.Any() == true)
+                query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
 
             // Regions
-            Dictionary<string, bool> regions = new Dictionary<string, bool>
-            {
-                {Constants.Regions.Agder, Regions.Agder},
-                {Constants.Regions.Innlandet, Regions.Innlandet},
-                {Constants.Regions.VestfoldTelemark, Regions.VestFoldTelemark},
-                {Constants.Regions.MoreRomsdal, Regions.MoreRomsdal},
-                {Constants.Regions.Nordland, Regions.Nordland},
-                {Constants.Regions.Rogaland, Regions.Rogaland},
-                {Constants.Regions.TromsFinnmark, Regions.TromsFinnmark},
-                {Constants.Regions.Trondelag, Regions.Trondelag},
-                {Constants.Regions.Vestland, Regions.Vestland},
-                {Constants.Regions.VikenOslo, Regions.VikenOslo},
-                {Constants.Regions.Havomraader, Regions.Havomroder}
-            };
-            List<string> chosenRegions = Helpers.findSelectedRegions(regions);
+            string[] regionNames = query.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().OrderBy(x => x).ToArray();
 
-            // European population percentages
-            Dictionary<string, bool> europeanPopulation = new Dictionary<string, bool>
-            {
-                {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, europeanPopLt5},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, europeanPopRange5To25},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, europeanPopRange25To50},
-                {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, europeanPopGt50}
-            };
-            List<string> chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(europeanPopulation);
-
-            if (chosenCategories?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.Category) && chosenCategories.Any(y => x.Category.Contains(y)));
-
-            if (chosenCriterias?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(chosenCriterias) != -1);
-
-            if (chosenAreas?.Any() == true)
-                query = query.Where(x => chosenAreas.Contains(x.AssessmentArea));
+            ViewBag.AllRegions = Helpers.getRegionsDict(regionNames);
+            string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions, ViewBag.AllRegions);
 
             if (chosenRegions?.Any() == true)
                 query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
 
+            // SpeciesGroups
+            if (viewModel.SpeciesGroups?.Any() == true)
+                query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
+
+            // European population percentages
+            ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;
+            string[] chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(viewModel.EuroPop);
+
             if (chosenEuropeanPopulation?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.PercentageEuropeanPopulation) && chosenEuropeanPopulation.Contains(x.PercentageEuropeanPopulation));
 
-            if (presumedExtinct)
+            // Extinct
+            if (viewModel.PresumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
 
             ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
@@ -127,38 +103,16 @@ namespace Assessments.Frontend.Web.Controllers
             if (export)
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());
+                var expertCommitteeMembers = await DataRepository.GetData<ExpertCommitteeMember>(Constants.Filename.SpeciesExpertCommitteeMembers);
+                expertCommitteeMembers = expertCommitteeMembers.Where(x => x.Year == 2021);
 
-                return new FileStreamResult(Helpers.GenerateExcel(assessmentsForExport), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport, expertCommitteeMembers.ToList()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     FileDownloadName = "rødliste-2021.xlsx"
                 };
             }
 
-            var viewModel = new RL2021ViewModel
-            {
-                Redlist2021Results = query.ToPagedList(pageNumber, pageSize),
-                Name = name,
-                RE = RE,
-                CR = CR,
-                EN = EN,
-                VU = VU,
-                NT = NT,
-                DD = DD,
-                LC = LC,
-                NE = NE,
-                NA = NA,
-                Redlisted = redlisted,
-                Endangered = endangered,
-                Criterias = Criterias,
-                Norge = Norge,
-                Svalbard = svalbard,
-                PresumedExtinct = presumedExtinct,
-                Regions = Regions,
-                EuropeanPopLt5 = europeanPopLt5,
-                EuropeanPopRange5To25 = europeanPopRange5To25,
-                EuropeanPopRange25To50 = europeanPopRange25To50,
-                EuropeanPopGt50 = europeanPopGt50,
-            };
+            viewModel.Redlist2021Results = query.ToPagedList(pageNumber, pageSize);
 
             SetupStatisticsViewModel(query.ToList(), viewModel);
 
@@ -168,7 +122,6 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
-            //var data = await DataRepository.GetData<Mapping.Models.Species.SpeciesAssessment2021>(Constants.Filename.Species2021);
             var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
             var assessment = data.FirstOrDefault(x => x.Id == id);

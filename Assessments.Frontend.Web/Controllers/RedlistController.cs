@@ -37,7 +37,10 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Søk
             if (!string.IsNullOrEmpty(viewModel.Name))
-                query = query.Where(x => x.ScientificName.ToLower().Contains(viewModel.Name.Trim().ToLower()));
+                query = query.Where(x => x.ScientificName.ToLower().Contains(viewModel.Name.Trim().ToLower()) ||
+                x.PopularName.ToLower().Contains(viewModel.Name.Trim().ToLower()))
+                .OrderByDescending(x => x.PopularName.ToLower() == viewModel.Name.Trim().ToLower() ||
+                x.ScientificName.ToLower() == viewModel.Name.Trim().ToLower());
 
             // Filter
 

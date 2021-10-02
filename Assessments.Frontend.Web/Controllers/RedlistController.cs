@@ -36,11 +36,14 @@ namespace Assessments.Frontend.Web.Controllers
             var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
             // Søk
+            string name = String.Empty;
             if (!string.IsNullOrEmpty(viewModel.Name))
-                query = query.Where(x => x.ScientificName.ToLower().Contains(viewModel.Name.Trim().ToLower()) ||
-                x.PopularName.ToLower().Contains(viewModel.Name.Trim().ToLower()))
-                .OrderByDescending(x => x.PopularName.ToLower() == viewModel.Name.Trim().ToLower() ||
-                x.ScientificName.ToLower() == viewModel.Name.Trim().ToLower());
+                name = viewModel.Name.Trim().ToLower();
+                query = query.Where(x => x.ScientificName.ToLower().Contains(name) ||
+                x.PopularName.ToLower().Contains(name) ||
+                x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name))
+                .OrderByDescending(x => x.PopularName.ToLower() == name ||
+                x.ScientificName.ToLower() == name);
 
             // Filter
 

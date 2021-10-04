@@ -255,9 +255,10 @@
         string min = @quantile.Min;
         string max = @quantile.Max;
         string estimated = "-";
+        <div class="criteria_results">
+            
 
-
-        if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
+        @if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
         {
             estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
         }
@@ -266,13 +267,13 @@
             estimated = @quantile.Probable;
         }
 
-        if (json_quantile.ContainsKey("threshold"))
+        @if (json_quantile.ContainsKey("threshold"))
         {
             var thresholds = parseDictString(json_quantile["threshold"].ToString());
 
             <div class="category_graph LC">
 
-                 <span>@{indicatordots(unit, quantile);}</span>
+                <span>@{indicatordots(unit, quantile);}</span>
                 @{
 
                     int previous_threshold = 100;
@@ -314,17 +315,19 @@
             Det antas en nedgang på mellom @min@unit og @max@unit@if (estimated.Length > 0)
             {<span>, som mest trolig ligger på @estimated @unit</span>}.
         </p>
+            LOL
+        </div>
 
-    }
-}
+    }<!-- END OF FUNCTION-->
+}<!-- END OF ALL-->
 
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized) &&
-            (Model.Category.Contains("CR") ||
-           Model.Category.Contains("EN") ||
-           Model.Category.Contains("VU") ||
-           Model.Category.Contains("NT")
- ))
+           (Model.Category.Contains("CR") ||
+          Model.Category.Contains("EN") ||
+          Model.Category.Contains("VU") ||
+          Model.Category.Contains("NT")
+))
 {
     <div class="page_section criteria">
 
@@ -334,15 +337,10 @@
         <div class="page_section">
             <h3>@ViewBag.glossary["criteria"]["subheading"]</h3>
 
-
-            @*
-                // TODO: FIX BUTTONS. MAKE URLS, make pretty, add link
-            *@
-
             <p>@Model.CriteriaSummarized<br /></p>
+            @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
             <button>Gå til ordliste</button>
             <button>Gå til metode</button>
-
 
             @*
                 // TODO: switch not working when moving up one level due to type difference.
@@ -353,8 +351,6 @@
                 @Model.A1.QuantifiedReduction
                         @Model.A2.PreliminaryCategory
             *@
-
-
         </div>
 
         <!-- MAIN CRITERIA -->
@@ -388,11 +384,7 @@
                                 <!-- ITERATE THROUGH ALL SUBCRITERIA -->
                                 <div class=" @inString(k, subcriteria[key]) listitem_criteria">
 
-                                    @{
-                                        var quantile = GetQuantileForCriteria(k);
-                                        iconChooser(@inString(k, subcriteria[key]));
-                                    }
-
+                                    @{iconChooser(@inString(k, subcriteria[key]));}
                                     <div class="listitem_text_field">
 
                                         <h5>@k <span>@v["title"]</span></h5>
@@ -401,14 +393,12 @@
                                             <p>@v["description"]</p>
                                         }
 
-
-                                        @if (quantile != null) // for denne har vi en slik
-                                        {
-                                            <div class="criteria_results">
-                                                <p>
-                                                    @{ mmpi(v["content"].ToString(), GetQuantileForCriteria(k)); }
-                                                </p>
-                                            </div>
+                                        @{ // CALCULATIONS, NUMBERS AND ALL FUN THINGS
+                                            var quantile = GetQuantileForCriteria(k);
+                                            if (quantile != null)
+                                            {
+                                                mmpi(v["content"].ToString(), GetQuantileForCriteria(k));
+                                            }
                                         }
 
 

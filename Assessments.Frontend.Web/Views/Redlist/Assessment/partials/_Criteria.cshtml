@@ -32,11 +32,12 @@
     }
 
 }
+
 @*
     TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
 
     This component takes in the json file of criteria and displays it
-    It also takes in the unhandled criteriasummarized string and trasforms it 
+    It also takes in the unhandled criteriasummarized string and trasforms it
     into two useable dictionaries which are then matched to relevant places in the json.
 *@
 
@@ -46,7 +47,7 @@
 
 
     // Each criteria by letter is handled differently.
-    string a = "", b = "", c ="", d ="";
+    string a = "", b = "", c = "", d = "";
 
     void placeCriteria(string criteria)
     {
@@ -201,34 +202,156 @@
         }
         return wrapped;
     }
+
+    Dictionary<string, Dictionary<string, object>> parseDictNested(string json)
+    {
+        return Newtonsoft.Json.Linq.JObject.Parse(json.ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+    }
+
+
+    Dictionary<string, object> parseDictObject(string json)
+    {
+        return Newtonsoft.Json.Linq.JObject.Parse(json.ToString()).ToObject<Dictionary<string, object>>();
+    }
+
+    Dictionary<string, string> parseDictString(string json)
+    {
+        return Newtonsoft.Json.Linq.JObject.Parse(json.ToString()).ToObject<Dictionary<string, string>>();
+    }
+
+    void indicatordots(string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile)
+    {
+        @if (unit == "%")
+        {
+            <span class="indicator_dot" style="right: @quantile.Max%">
+                <span class="indicator_text max"> Max @quantile.Max@unit</span>
+                <span class="dot_dot"></span>
+            </span>
+            <span class="indicator_dot" style="right: @quantile.Calculated%">
+                <span class="indicator_text calc"> Calculated @quantile.Calculated@unit</span>
+                <span class="dot_dot"></span>
+            </span>
+            @if (@quantile.Probable.Length > 0)
+            {
+                <span class="indicator_dot" style="right: @quantile.Probable%">
+                    <span class="indicator_text prob">Probable @quantile.Probable@unit</span>
+                    <span class="dot_dot"></span>
+                </span>
+            }
+            <span class="indicator_dot" style="right: @quantile.Min%">
+                <span class="indicator_text min"> Min @quantile.Min@unit</span>
+                <span class="dot_dot"></span>
+            </span>
+        }
+    }
+
+
+    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile)
+    {
+
+        var json_quantile = parseDictObject(value);
+        string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
+        string comparator = json_quantile.ContainsKey("comparator") ? json_quantile["comparator"].ToString() : "";
+        string min = @quantile.Min;
+        string max = @quantile.Max;
+        string estimated = "-";
+
+
+        if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
+        {
+            estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
+        }
+        else
+        {
+            estimated = @quantile.Probable;
+        }
+
+        if (json_quantile.ContainsKey("threshold"))
+        {
+            var thresholds = parseDictString(json_quantile["threshold"].ToString());
+
+            <div class="category_graph LC">
+
+                 <span>@{indicatordots(unit, quantile);}</span>
+                @{
+
+                    int previous_threshold = 100;
+                    int width = 0;
+                    int flex = 1;
+                }
+
+                @foreach (var (cat, catval) in thresholds)
+                {
+                    int n;
+                    bool isNumeric = int.TryParse(catval, out n);
+                    if (isNumeric)
+                    {
+                        if (unit == "%")
+                        {
+                            width = previous_threshold - n;
+                        }
+                        else
+                        {
+                            width = 20;
+                            flex = n;
+                        }
+                    }
+                    else
+                    {
+                        width = 20;
+                    }
+                    <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
+                        @cat
+                        <br />
+                        <span>@comparator@catval@unit</span>
+                    </div>
+                    previous_threshold = n;
+                }
+            </div>
+        }
+        <p>
+            Estimert verdi ligger på @quantile.Calculated @unit.
+            Det antas en nedgang på mellom @min@unit og @max@unit@if (estimated.Length > 0)
+            {<span>, som mest trolig ligger på @estimated @unit</span>}.
+        </p>
+
+    }
 }
 
 
-@if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && 
-                (Model.Category.Contains("CR") ||
-               Model.Category.Contains("EN") ||
-               Model.Category.Contains("VU") ||
-               Model.Category.Contains("NT")
-     ))
+@if (!string.IsNullOrEmpty(Model.CriteriaSummarized) &&
+            (Model.Category.Contains("CR") ||
+           Model.Category.Contains("EN") ||
+           Model.Category.Contains("VU") ||
+           Model.Category.Contains("NT")
+ ))
 {
     <div class="page_section criteria">
 
         <h2>@ViewBag.glossary["criteria"]["tagline"]</h2>
         <p>@ViewBag.glossary["criteria"]["description"]</p>
-        
+
         <div class="page_section">
             <h3>@ViewBag.glossary["criteria"]["subheading"]</h3>
-            <p>@Model.CriteriaSummarized<br /></p>
 
-           
+
             @*
-        // TODO: switch not working when moving up one level due to type difference.
-        //
-        @Model.A1
-        @Model.A1.ReductionBasedOn
+                // TODO: FIX BUTTONS. MAKE URLS, make pretty, add link
+            *@
 
-        @Model.A1.QuantifiedReduction
-                @Model.A2.PreliminaryCategory
+            <p>@Model.CriteriaSummarized<br /></p>
+            <button>Gå til ordliste</button>
+            <button>Gå til metode</button>
+
+
+            @*
+                // TODO: switch not working when moving up one level due to type difference.
+                //
+                @Model.A1
+                @Model.A1.ReductionBasedOn
+
+                @Model.A1.QuantifiedReduction
+                        @Model.A2.PreliminaryCategory
             *@
 
 
@@ -237,7 +360,7 @@
         <!-- MAIN CRITERIA -->
         @foreach (var (key, value) in criteria)
         {
-            
+
             <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
                 <h4>
                     @{ iconChooser(inString(key, Model.CriteriaSummarized)); }
@@ -258,7 +381,7 @@
                     {
                         <div class="criteria_subcriteria">
                             @{
-                                var newDictionary2 = Newtonsoft.Json.Linq.JObject.Parse(value["subcriteria"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                var newDictionary2 = parseDictNested(value["subcriteria"].ToString());
                             }
                             @foreach (var (k, v) in newDictionary2)
                             {
@@ -282,116 +405,9 @@
                                         @if (quantile != null) // for denne har vi en slik
                                         {
                                             <div class="criteria_results">
-                                                <p class="quantile">
-                                                    @{
-                                                        var json_quantile = Newtonsoft.Json.Linq.JObject.Parse(v["content"].ToString()).ToObject<Dictionary<string, object>>();
-                                                        string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
-                                                        string comparator = json_quantile.ContainsKey("comparator") ? json_quantile["comparator"].ToString() : "";
-
-                                                        string min = "";
-                                                        string max = "";
-
-                                                        if (!quantile.Punktestimat)
-                                                        {
-                                                            max = @quantile.Maxintervall;
-                                                            min = @quantile.Minintervall;
-                                                        }
-                                                        else
-                                                        {
-                                                            max = @quantile.Max;
-                                                            min = @quantile.Min;
-                                                        }
-                                                    }
-
-                                                </p>
-
-
-                                                @if (json_quantile.ContainsKey("threshold"))
-                                                {
-                                                    var thresholds = Newtonsoft.Json.Linq.JObject.Parse(json_quantile["threshold"].ToString()).ToObject<Dictionary<string, string>>();
-
-                                                    <div class="category_graph LC">
-
-                                                        @if (unit == "%")
-                                                        {
-                                                            <span class="indicator_dot" style="right: @quantile.Max%">
-                                                                <span class="indicator_text max"> Max @quantile.Max@unit</span>
-                                                                <span class="dot_dot"></span>
-                                                            </span>
-                                                            <span class="indicator_dot" style="right: @quantile.Calculated%">
-                                                                <span class="indicator_text calc"> Calculated @quantile.Calculated@unit</span>
-                                                                <span class="dot_dot"></span>
-                                                            </span>
-                                                            @if (@quantile.Probable.Length > 0)
-                                                            {
-                                                                <span class="indicator_dot" style="right: @quantile.Probable%">
-                                                                    <span class="indicator_text prob">Probable @quantile.Probable@unit</span>
-                                                                    <span class="dot_dot"></span>
-                                                                </span>
-                                                            }
-                                                            <span class="indicator_dot" style="right: @quantile.Min%">
-                                                                <span class="indicator_text min"> Min @quantile.Min@unit</span>
-                                                                <span class="dot_dot"></span>
-                                                            </span>
-                                                        }
-
-
-                                                        @{
-
-                                                            int previous_threshold = 100;
-                                                            int width = 0;
-                                                            int flex = 1;
-                                                        }
-
-                                                        @foreach (var (cat, catval) in thresholds)
-                                                        {
-
-                                                            int n;
-                                                            bool isNumeric = int.TryParse(catval, out n);
-
-                                                            if (isNumeric)
-                                                            {
-                                                                if (unit == "%")
-                                                                {
-                                                                    width = previous_threshold - n;
-                                                                }
-                                                                else
-                                                                {
-                                                                    width = 20;
-                                                                    flex = n;
-                                                                }
-
-                                                            }
-                                                            else
-                                                            {
-                                                                width = 20;
-
-                                                            }
-
-
-
-                                                            <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
-                                                                @cat
-                                                                <br />
-                                                                <span>@comparator@catval@unit</span>
-                                                            </div>
-
-                                                            previous_threshold = n;
-
-
-                                                        }
-                                                    </div>
-                                                }
-
                                                 <p>
-                                                    <span>
-                                                        Det antas en nedgang på mellom @min@unit og @max@unit@if (@quantile.Probable.Length > 0)
-                                                        {<span>, som mest trolig ligger på @quantile.Probable @unit</span>}. Ved å bruke
-                                                        føre - var prinsippet i beregningene blir verdien @quantile.Calculated @unit, som tilsvarer kategori[hent felt].
-
-                                                    </span>
+                                                    @{ mmpi(v["content"].ToString(), GetQuantileForCriteria(k)); }
                                                 </p>
-
                                             </div>
                                         }
 
@@ -431,7 +447,7 @@
                                         {
                                             <div class="subsub_list">
                                                 @{
-                                                    var subdict = Newtonsoft.Json.Linq.JObject.Parse(@v["subsub"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                    var subdict = parseDictNested(@v["subsub"].ToString());
                                                 }
 
                                                 @if (@current_element.Length > 0)
@@ -463,10 +479,10 @@
                     {
                         <div class="criteria_options">
                             @{
-                                var newDictionary = Newtonsoft.Json.Linq.JObject.Parse(value["options"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                var newDictionary = parseDictNested(value["options"].ToString());
                             }
                             <h5 class="subheading"> Underkriterier </h5>
-                            
+
                             @if (@value.ContainsKey("options_description"))
                             {
                                 <p class="criteria_description">
@@ -503,8 +519,7 @@
                                                     current_element = current_element.Replace(k, "");
                                                     current_element = removeOuterParenthesis(current_element);
                                                     var clean_list = current_element.Split(",");
-                                                    var subsub = Newtonsoft.Json.Linq.JObject.Parse(@v["sub"].ToString());
-                                                    var subdict = subsub.ToObject<Dictionary<string, Dictionary<string, object>>>();
+                                                    var subdict = parseDictNested(@v["sub"].ToString());
                                                 }
 
 

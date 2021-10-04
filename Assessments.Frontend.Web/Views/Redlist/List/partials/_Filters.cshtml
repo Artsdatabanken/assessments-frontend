@@ -18,7 +18,7 @@
 
     string ViewCheck(string name, string element, string value)
     {
-        return $"name={name} value={value}" + (element == value ? " checked=checked" : String.Empty);
+        return $"name={name} value={value}";// + (element == value ? " checked=checked" : String.Empty);
     }
 
     string GetViewClass(string element, string value)
@@ -97,28 +97,18 @@
         <!-- View controls -->
         <div class="controls">
             <div class="controls_left">
-                <button @GetViewClass(Model.View, "list") type="submit">
-                    <input class="collapse_checkbox" id="button-list" @ViewCheck("View", Model.View, "list") type="radio" />
-                    <label for="button-list" id="listview">
-                        Liste
-                        <span class="material-icons">list</span>
-                    </label>
+                <button @GetViewClass(Model.View, "list") type="submit" @ViewCheck("View", Model.View, "list")>
+                    Liste
+                    <span class="material-icons">list</span>
                 </button>
-                <button @GetViewClass(Model.View, "grid") type="submit" class="hideonmobile">
-                    <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") type="radio" />
-                    <label for="button-grid" id="gridview">
-                        Grid
-                        <span class="material-icons">grid_on</span>
-                    </label>
+                <button @GetViewClass(Model.View, "grid") type="submit" @ViewCheck("View", Model.View, "grid") class="hideonmobile">
+                    Grid
+                    <span class="material-icons">grid_on</span>
                 </button>
-                <button @GetViewClass(Model.View, "stat") type="submit">
-                    <input class="collapse_checkbox" id="button-stat" @ViewCheck("View", Model.View, "stat") type="radio" />
-                    <label for="button-stat" id="statsview">
-                        Statistikk
-                        <span class="material-icons">bar_chart</span>
-                    </label>
+                <button @GetViewClass(Model.View, "stat") type="submit" @ViewCheck("View", Model.View, "stat")>
+                    Statistikk
+                    <span class="material-icons">bar_chart</span>
                 </button>
-
             </div>
             <div class="controls_right">
                 <label class="show_filters" for="show_filters">

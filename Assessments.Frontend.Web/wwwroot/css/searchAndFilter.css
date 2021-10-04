@@ -298,9 +298,7 @@ input.collapse_checkbox:active~label>.list_header {
     }
 }
 
-.controls_left button{
-    padding:0;
-}
+
 .controls_left button label {
     display: block;
     padding: 6px 12px;

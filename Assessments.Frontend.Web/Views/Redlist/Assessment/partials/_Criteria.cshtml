@@ -42,7 +42,22 @@
 *@
 
 @{
-    // Cast JSON to dictionary for easy iteration.
+    Dictionary<string, Dictionary<string, object>> parseDictNested(string json)
+    {
+        return Newtonsoft.Json.Linq.JObject.Parse(json).ToObject<Dictionary<string, Dictionary<string, object>>>();
+    }
+
+    Dictionary<string, object> parseDictObject(string json)
+    {
+        return Newtonsoft.Json.Linq.JObject.Parse(json).ToObject<Dictionary<string, object>>();
+    }
+
+    Dictionary<string, string> parseDictString(string json)
+    {
+        return Newtonsoft.Json.Linq.JObject.Parse(json).ToObject<Dictionary<string, string>>();
+    }
+
+    // Cast JSON to dictionary for easy iteration. Cant use those above as it's not a string...
     Dictionary<string, Dictionary<string, object>> criteria = ViewBag.kriterier.ToObject<Dictionary<string, Dictionary<string, object>>>();
 
 
@@ -85,16 +100,19 @@
         placeCriteria(@Model.CriteriaSummarized);
     }
 
-    // STRING HANDLING
-    // A CRITERIA:
-    // OPTIONS AND SUBCRITERIA ARE NOT SEPARATE ENTITIES
 
-    a = subCriteria("A", a);
+    // Sort criteria contents
 
+    string subCriteria(string element, string bigstring)
+    {
+        return bigstring.Replace("+", ";" + element);
+    }
 
-    // B CRITERIA
-    // OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES
-    // options may contain sub-options
+    a = subCriteria("A", a); // A CRITERIA - OPTIONS AND SUBCRITERIA ARE NOT SEPARATE ENTITIES
+    c = subCriteria("C", c); // C CRITERIA - All options are only relevant for C2 - handle in code.
+    d = subCriteria("D", d); // D CRITERIA: - ONLY subcriteria.
+
+    // B CRITERIA - OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES, options may contain sub-options
 
     string b_subcriteria = "";
     string b_options = "";
@@ -117,15 +135,7 @@
     b_options = string.Join(";", b_distinctlist);
     b = b_subcriteria + ";" + b_options;
 
-    // C CRITERIA
-    // All options are only relevant for C2 - handle in code.
-    c = subCriteria("C", c);
-
-    // D CRITERIA:
-    // ONLY subcriteria.
-    d = subCriteria("D", d);
-
-    // The dictionaries used in the view
+    // The dictionaries used in the view <- two dicts made sense back when A was thought to have options as well. Now not as much
 
     var subcriteria = new Dictionary<string, string>(){
     {"A", a},
@@ -134,19 +144,11 @@
     {"D", d}
     };
 
-
     var options = new Dictionary<string, string>(){
     {"B", b_options},
     };
 
-
-
     // Functions relevant to string separation
-
-    string subCriteria(string element, string bigstring)
-    {
-        return bigstring.Replace("+", ";" + element);
-    }
 
     string inString(string element, string bigstring)
     {
@@ -169,6 +171,20 @@
         return "inactive";
     }
 
+    string removeOuterParenthesis(string wrapped)
+    {
+        if (wrapped.Length > 2)
+        {
+            if (wrapped.StartsWith("(") && wrapped.EndsWith(")"))
+            {
+                return wrapped.Substring(1, wrapped.Length - 2);
+            }
+        }
+        return wrapped;
+    }
+
+    // FUNCTIONAL COMPONENTS BECAUSE LETS PRETEND THIS IS REACT.
+
     void iconChooser(string compare)
     {
         if (compare == "active")
@@ -189,34 +205,6 @@
                 close
             </span>
         }
-    }
-
-    string removeOuterParenthesis(string wrapped)
-    {
-        if (wrapped.Length > 2)
-        {
-            if (wrapped.StartsWith("(") && wrapped.EndsWith(")"))
-            {
-                return wrapped.Substring(1, wrapped.Length - 2);
-            }
-        }
-        return wrapped;
-    }
-
-    Dictionary<string, Dictionary<string, object>> parseDictNested(string json)
-    {
-        return Newtonsoft.Json.Linq.JObject.Parse(json.ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-    }
-
-
-    Dictionary<string, object> parseDictObject(string json)
-    {
-        return Newtonsoft.Json.Linq.JObject.Parse(json.ToString()).ToObject<Dictionary<string, object>>();
-    }
-
-    Dictionary<string, string> parseDictString(string json)
-    {
-        return Newtonsoft.Json.Linq.JObject.Parse(json.ToString()).ToObject<Dictionary<string, string>>();
     }
 
     void indicatordots(string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile)
@@ -256,112 +244,99 @@
         string max = @quantile.Max;
         string estimated = "-";
         <div class="criteria_results">
-            
 
-        @if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
-        {
-            estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
-        }
-        else
-        {
-            estimated = @quantile.Probable;
-        }
 
-        @if (json_quantile.ContainsKey("threshold"))
-        {
-            var thresholds = parseDictString(json_quantile["threshold"].ToString());
+            @if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
+            {
+                estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
+            }
+            else
+            {
+                estimated = @quantile.Probable;
+            }
 
-            <div class="category_graph LC">
+            @if (json_quantile.ContainsKey("threshold"))
+            {
+                var thresholds = parseDictString(json_quantile["threshold"].ToString());
 
-                <span>@{indicatordots(unit, quantile);}</span>
-                @{
+                <div class="category_graph LC">
 
-                    int previous_threshold = 100;
-                    int width = 0;
-                    int flex = 1;
-                }
+                    <span>@{indicatordots(unit, quantile);}</span>
+                    @{
 
-                @foreach (var (cat, catval) in thresholds)
-                {
-                    int n;
-                    bool isNumeric = int.TryParse(catval, out n);
-                    if (isNumeric)
+                        int previous_threshold = 100;
+                        int width = 0;
+                        int flex = 1;
+                    }
+
+                    @foreach (var (cat, catval) in thresholds)
                     {
-                        if (unit == "%")
+                        int n;
+                        bool isNumeric = int.TryParse(catval, out n);
+                        if (isNumeric)
                         {
-                            width = previous_threshold - n;
+                            if (unit == "%")
+                            {
+                                width = previous_threshold - n;
+                            }
+                            else
+                            {
+                                width = 20;
+                                flex = n;
+                            }
                         }
                         else
                         {
                             width = 20;
-                            flex = n;
                         }
+                        <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
+                            @cat
+                            <br />
+                            <span>@comparator@catval@unit</span>
+                        </div>
+                        previous_threshold = n;
                     }
-                    else
-                    {
-                        width = 20;
-                    }
-                    <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
-                        @cat
-                        <br />
-                        <span>@comparator@catval@unit</span>
-                    </div>
-                    previous_threshold = n;
-                }
-            </div>
-        }
-        <p>
-            Estimert verdi ligger på @quantile.Calculated @unit.
-            Det antas en nedgang på mellom @min@unit og @max@unit@if (estimated.Length > 0)
-            {<span>, som mest trolig ligger på @estimated @unit</span>}.
-        </p>
-            LOL
+                </div>
+            }
+            <p>
+                Estimert verdi ligger på @quantile.Calculated @unit.
+                Det antas en nedgang på mellom @min@unit og @max@unit@if (estimated.Length > 0)
+                {<span>, som mest trolig ligger på @estimated @unit</span>}.
+            </p>
         </div>
 
     }<!-- END OF FUNCTION-->
 }<!-- END OF ALL-->
 
 
-@if (!string.IsNullOrEmpty(Model.CriteriaSummarized) &&
-           (Model.Category.Contains("CR") ||
-          Model.Category.Contains("EN") ||
-          Model.Category.Contains("VU") ||
-          Model.Category.Contains("NT")
-))
+@if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
+         Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 {
     <div class="page_section criteria">
+        <div class="criteria_description">
+            <h2>@ViewBag.glossary["criteria"]["tagline"]</h2>
+            <p>@ViewBag.glossary["criteria"]["description"]</p>
 
-        <h2>@ViewBag.glossary["criteria"]["tagline"]</h2>
-        <p>@ViewBag.glossary["criteria"]["description"]</p>
-
-        <div class="page_section">
             <h3>@ViewBag.glossary["criteria"]["subheading"]</h3>
-
             <p>@Model.CriteriaSummarized<br /></p>
             @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
             <button>Gå til ordliste</button>
             <button>Gå til metode</button>
-
             @*
-                // TODO: switch not working when moving up one level due to type difference.
-                //
+                TODO: switch not working when moving up one level due to type difference.
                 @Model.A1
                 @Model.A1.ReductionBasedOn
-
                 @Model.A1.QuantifiedReduction
-                        @Model.A2.PreliminaryCategory
+                @Model.A2.PreliminaryCategory
             *@
         </div>
 
         <!-- MAIN CRITERIA -->
         @foreach (var (key, value) in criteria)
         {
-
             <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
-                <h4>
-                    @{ iconChooser(inString(key, Model.CriteriaSummarized)); }
-                </h4>
 
+                @{ iconChooser(inString(key, Model.CriteriaSummarized)); }
                 <div class="listitem_text_field">
                     <h4>@key -  @value["title"]</h4>
 
@@ -377,9 +352,9 @@
                     {
                         <div class="criteria_subcriteria">
                             @{
-                                var newDictionary2 = parseDictNested(value["subcriteria"].ToString());
+                                var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
                             }
-                            @foreach (var (k, v) in newDictionary2)
+                            @foreach (var (k, v) in thesubcriteria)
                             {
                                 <!-- ITERATE THROUGH ALL SUBCRITERIA -->
                                 <div class=" @inString(k, subcriteria[key]) listitem_criteria">
@@ -388,10 +363,7 @@
                                     <div class="listitem_text_field">
 
                                         <h5>@k <span>@v["title"]</span></h5>
-                                        @if (v.ContainsKey("description"))
-                                        {
-                                            <p>@v["description"]</p>
-                                        }
+                                        @if (v.ContainsKey("description")){<p>@v["description"]</p>}
 
                                         @{ // CALCULATIONS, NUMBERS AND ALL FUN THINGS
                                             var quantile = GetQuantileForCriteria(k);
@@ -400,8 +372,6 @@
                                                 mmpi(v["content"].ToString(), GetQuantileForCriteria(k));
                                             }
                                         }
-
-
                                         <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA -->
                                         @{
                                             var splitlist = subcriteria[key].Split(";");
@@ -427,9 +397,7 @@
                                             {
                                                 current_element = current_element.Replace(",", ";");
                                             }
-
                                             var currentlist = current_element.Split(";");
-
                                         }
 
                                         <!--- ITERATE SUBOPTIONS FOR Ca2 -->
@@ -472,7 +440,6 @@
                                 var newDictionary = parseDictNested(value["options"].ToString());
                             }
                             <h5 class="subheading"> Underkriterier </h5>
-
                             @if (@value.ContainsKey("options_description"))
                             {
                                 <p class="criteria_description">
@@ -493,14 +460,12 @@
                                         }
                                         @if (v.ContainsKey("sub"))
                                         {
-
                                             <div class="subsub_list">
                                                 @{
                                                     var currentlist = options[key].Split(";");
                                                     var current_element = "";
                                                     foreach (string element in currentlist)
                                                     {
-                                                        // k = current criteria
                                                         if (element.Contains(k))
                                                         {
                                                             current_element = element;
@@ -511,8 +476,6 @@
                                                     var clean_list = current_element.Split(",");
                                                     var subdict = parseDictNested(@v["sub"].ToString());
                                                 }
-
-
                                                 @foreach (var (subkey, subvalue) in subdict)
                                                 {
                                                     <div class="listitem_criteria @inList(subkey, clean_list)">
@@ -523,7 +486,6 @@
                                                         </h6>
                                                     </div>
                                                 }
-
                                             </div>
                                         }
                                     </div>

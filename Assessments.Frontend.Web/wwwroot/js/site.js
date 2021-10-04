@@ -3,6 +3,7 @@ const filter_modal_background = document.getElementById("filter_modal_background
 const filters_scrollable = document.getElementById("filters_scrollable");
 const submitCheckInputs = document.getElementsByClassName("submitOnclick");
 const submit_filters = document.getElementById("submit_filters");
+const filters_close_buttons = document.getElementsByClassName("close_filters")
 
 const isSmallReader = () => {
     return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 750;
@@ -33,6 +34,10 @@ const showFilters = () => {
     filters_scrollable.style["width"] = "90vw";
     filters_scrollable.style["top"] = "5vh";
     filters_scrollable.style["left"] = "5vw";
+
+    Array.prototype.forEach.call(filters_close_buttons, el => {
+        el.style["display"] = "block";
+    });
 }
 
 const closeFilters = () => {

@@ -163,10 +163,6 @@ button.close_filters {
         margin: 5px;
     }
 
-    button.close_filters {
-        display: block;
-    }
-
     .filters_bottom {
         display: flex;
         justify-content: space-evenly;

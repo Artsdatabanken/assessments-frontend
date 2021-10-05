@@ -276,3 +276,17 @@ input.collapse_checkbox:active~label>.list_header {
 #open_filter {
     display: none;
 }
+
+#filters_scrollable{
+    position:relative;
+}
+
+.main .closebutton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 0px;
+    border: 0px;
+    background: none;
+    border-radius:2px;
+}

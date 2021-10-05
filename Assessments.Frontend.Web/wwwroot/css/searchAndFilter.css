@@ -176,56 +176,30 @@ button.close_filters {
 } 
 
 /* Collapsible */
+input[type=checkbox]:checked#show_area~.filter_area,
 input[type=checkbox]:checked#show_category~.filter_category,
 input[type=checkbox]:checked#show_region~.filter_region,
 input[type=checkbox]:checked#show_european_population~.filter_european_population,
 input[type=checkbox]:checked#show_criteria~.filter_criteria,
 input[type=checkbox]:checked#show_habitat~.filter_habitat,
 input[type=checkbox]:checked#show_extinct~.filter_extinct,
-input[type=checkbox]:checked#show_species_groups~.filter_species_groups
- {
-  display: block;
+input[type=checkbox]:checked#show_species_groups~.filter_species_groups {
+  display: none;
 }
 
-input[type=checkbox]:checked#show_area ~ .filter_area,
+.filter_area,
 .filter_category,
 .filter_region,
 .filter_european_population,
 .filter_criteria,
 .filter_extinct,
 .filter_habitat,
-.filter_species_groups,
-.material-icons.more,
-.material-icons.less {
-    display: none;
+.filter_species_groups {
+    display: block;
 }
 
 .collapse_checkbox {
-    opacity: 0;
-}
-
-input[type=checkbox]:not(:checked)#show_area~label>.list_header>.material-icons.less,
-input[type=checkbox]:checked#show_category~label>.list_header>.material-icons.less,
-input[type=checkbox]:checked#show_region~label>.list_header>.material-icons.less,
-input[type=checkbox]:checked#show_european_population~label>.list_header>.material-icons.less,
-input[type=checkbox]:checked#show_criteria~label>.list_header>.material-icons.less,
-input[type=checkbox]:checked#show_habitat~label>.list_header>.material-icons.less,
-input[type=checkbox]:checked#show_extinct~label>.list_header>.material-icons.less,
-input[type=checkbox]:checked#show_species_groups~label>.list_header>.material-icons.less
- {
-  display: inline-block;
-}
-
-input[type=checkbox]:checked#show_area~label>.list_header>.material-icons.more,
-input[type=checkbox]:not(:checked)#show_category~label>.list_header>.material-icons.more,
-input[type=checkbox]:not(:checked)#show_region~label>.list_header>.material-icons.more,
-input[type=checkbox]:not(:checked)#show_european_population~label>.list_header>.material-icons.more,
-input[type=checkbox]:not(:checked)#show_criteria~label>.list_header>.material-icons.more,
-input[type=checkbox]:not(:checked)#show_habitat~label>.list_header>.material-icons.more,
-input[type=checkbox]:not(:checked)#show_extinct~label>.list_header>.material-icons.more,
-input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.material-icons.more
- {
-  display: inline-block;
+    display: none;
 }
 
 /* FILTER GROUP */

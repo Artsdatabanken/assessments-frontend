@@ -92,6 +92,50 @@ const removeSubmitOnclick = () => {
     submit_filters.style["display"] = "block";
 }
 
+const collapse = (name) => {
+    item = document.getElementById(name);
+    if (item.checked) {
+        item.checked = false;
+    } else {
+        item.checked = true;
+    }
+    setCollapsibleIcon(name);
+}
+
+const setCollapsibleIcon = (name) => {
+    item = document.getElementById(name);
+    headerId = "list_header" + name.substring(4);
+    h4Item = document.getElementById(headerId);
+    // remove old and insert new icon
+    if (item.checked) {
+        removeId = headerId + "_less";
+        addId = headerId + "_more";
+        content = "expand_more";
+        classNames = "material-icons more";
+    } else {
+        removeId = headerId + "_more";
+        addId = headerId + "_less";
+        content = "expand_less";
+        classNames = "material-icons less";
+    }
+    remove = document.getElementById(removeId);
+    if (remove) {
+        h4Item.removeChild(remove);
+    }
+    span = document.createElement("span");
+    span.innerHTML = content;
+    span.setAttribute("id", addId);
+    span.setAttribute("class", classNames);
+    h4Item.appendChild(span);
+}
+
+const initialCollapsibleCheck = () => {
+    boxes = document.getElementsByClassName("collapse_checkbox");
+    Array.prototype.forEach.call(boxes, el => {
+        setCollapsibleIcon(el.id);
+    })
+}
+
 document.addEventListener('keydown', function(e) {
     if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader) {
         closeFilters();
@@ -113,3 +157,4 @@ const initialCheck = () => {
 window.addEventListener('resize', initialCheck);
 
 initialCheck();
+initialCollapsibleCheck();

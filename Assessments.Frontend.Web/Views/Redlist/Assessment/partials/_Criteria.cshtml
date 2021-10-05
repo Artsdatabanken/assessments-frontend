@@ -278,7 +278,7 @@
         }
     }
 
-    void fancyGraph(Dictionary<string,string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator)
+    void fancyGraph(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator)
     {
         <div class="category_graph LC">
 
@@ -320,6 +320,17 @@
     }
 
 
+    void getQuantile(Dictionary<string,object> value,string k, string key )
+    {       
+        // CALCULATIONS, NUMBERS AND ALL FUN THINGS
+        var quantile = GetQuantileForCriteria(k);
+        if (quantile != null)
+        {
+            mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key);
+        }
+    }
+
+
     void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key)
     {
 
@@ -340,17 +351,24 @@
                 estimated = @quantile.Probable;
             }
 
+            <p>
+
+                <span>Estimert verdi ligger på @quantile.Calculated @unit.</span><br />
+                <span>Det antas en nedgang på mellom @min@unit og @max@unit.</span><br />
+                <span>
+                    @if (estimated.Length > 0)
+                    {<span>Den mest trolige verdien er @estimated @unit</span>}.
+                </span>
+
+            </p>
+
             @if (json_quantile.ContainsKey("threshold") && key != "B")
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
                 fancyGraph(thresholds, unit, quantile, comparator);
             }
 
-            <p>
-                Estimert verdi ligger på @quantile.Calculated @unit.
-                Det antas en nedgang på mellom @min@unit og @max@unit@if (estimated.Length > 0)
-                {<span>, som mest trolig ligger på @estimated @unit</span>}.
-            </p>
+
         </div>
 
     }<!-- END OF FUNCTION-->
@@ -358,7 +376,7 @@
 
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
-       Model.Category.Contains("VU") || Model.Category.Contains("NT")))
+      Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 {
     <div class="page_section criteria">
         <div class="criteria_description">
@@ -389,6 +407,8 @@
                     <h4>@key -  @value["title"]</h4>
                     @{ hasKey("description", @value);}
 
+                    @{ getQuantile(value, key, key);}
+
                     <!-- SUB CRITERIA : obtain and reformat necessary data -->
                     @if (@value.ContainsKey("subcriteria"))
                     {
@@ -407,14 +427,8 @@
                                         <h5>@k <span>@v["title"]</span></h5>
                                         @{ hasKey("description", v);}
 
-                                        @{ // CALCULATIONS, NUMBERS AND ALL FUN THINGS
+                                        @{ getQuantile(v, k, key);}
 
-                                            var quantile = GetQuantileForCriteria(k);
-                                            if (quantile != null)
-                                            {
-                                                mmpi(v["content"].ToString(), GetQuantileForCriteria(k), key);
-                                            }
-                                        }
                                         <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
                                         @if (v.ContainsKey("subsub"))
                                         {

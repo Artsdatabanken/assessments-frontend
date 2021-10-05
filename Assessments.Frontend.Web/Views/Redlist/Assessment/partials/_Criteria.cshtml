@@ -108,6 +108,17 @@
         return bigstring.Replace("+", ";" + element);
     }
 
+    void hasKey(string key, Dictionary<string, object> field)
+    {
+        @if (field.ContainsKey(key))
+        {
+        <p class="@key">
+            @field[key] 
+        </p>
+        }
+
+    }
+
     a = subCriteria("A", a); // A CRITERIA - OPTIONS AND SUBCRITERIA ARE NOT SEPARATE ENTITIES
     c = subCriteria("C", c); // C CRITERIA - All options are only relevant for C2 - handle in code.
     d = subCriteria("D", d); // D CRITERIA: - ONLY subcriteria.
@@ -134,6 +145,40 @@
     var b_distinctlist = b.Split(";").Distinct();
     b_options = string.Join(";", b_distinctlist);
     b = b_subcriteria + ";" + b_options;
+
+
+    string handleCCriteria(string current_element, string key)
+    {
+        if (key == "C")
+        {
+            // THIS IS ONLY RELEVANT FOR C2
+            current_element = current_element.Replace("a(i,ii)", "a(i)a(ii)");
+            current_element = current_element.Replace(")", ");");
+            current_element = current_element.Replace(" ", "");
+        }
+        else
+        {
+            current_element = current_element.Replace(",", ";");
+        }
+        return current_element;
+    }
+
+
+    string[] obtainSubCriteriaList(string[] splitlist, string k)
+    {
+        var current_element = "";
+        @foreach (string element in splitlist)
+        {
+            if (element.Contains(k))// k = current criteria
+            {
+                current_element = element;
+            }
+        }
+        current_element = current_element.Replace(k, ""); // remove main criteria, leaving nested subcriteria
+        current_element = removeOuterParenthesis(current_element);
+        current_element = handleCCriteria(current_element, k);
+        return current_element.Split(";");
+    }
 
     // The dictionaries used in the view <- two dicts made sense back when A was thought to have options as well. Now not as much
 
@@ -310,7 +355,7 @@
 
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
-         Model.Category.Contains("VU") || Model.Category.Contains("NT")))
+        Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 {
     <div class="page_section criteria">
         <div class="criteria_description">
@@ -339,13 +384,7 @@
                 @{ iconChooser(inString(key, Model.CriteriaSummarized)); }
                 <div class="listitem_text_field">
                     <h4>@key -  @value["title"]</h4>
-
-                    @if (@value.ContainsKey("description"))
-                    {
-                        <p class="criteria_description">
-                            @value["description"]
-                        </p>
-                    }
+                    @{ hasKey("description", @value);}
 
                     <!-- SUB CRITERIA : obtain and reformat necessary data -->
                     @if (@value.ContainsKey("subcriteria"))
@@ -363,7 +402,7 @@
                                     <div class="listitem_text_field">
 
                                         <h5>@k <span>@v["title"]</span></h5>
-                                        @if (v.ContainsKey("description")){<p>@v["description"]</p>}
+                                        @{ hasKey("description", v);}
 
                                         @{ // CALCULATIONS, NUMBERS AND ALL FUN THINGS
                                             var quantile = GetQuantileForCriteria(k);
@@ -372,44 +411,14 @@
                                                 mmpi(v["content"].ToString(), GetQuantileForCriteria(k));
                                             }
                                         }
-                                        <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA -->
-                                        @{
-                                            var splitlist = subcriteria[key].Split(";");
-                                            var current_element = "";
-                                            foreach (string element in splitlist)
-                                            {
-                                                // k = current criteria
-                                                if (element.Contains(k))
-                                                {
-                                                    current_element = element;
-                                                }
-                                            }
-                                            current_element = current_element.Replace(k, "");
-                                            current_element = removeOuterParenthesis(current_element);
-                                            if (key == "C")
-                                            {
-                                                // THIS IS ONLY RELEVANT FOR C2
-                                                current_element = current_element.Replace("a(i,ii)", "a(i)a(ii)");
-                                                current_element = current_element.Replace(")", ");");
-                                                current_element = current_element.Replace(" ", "");
-                                            }
-                                            else
-                                            {
-                                                current_element = current_element.Replace(",", ";");
-                                            }
-                                            var currentlist = current_element.Split(";");
-                                        }
-
-                                        <!--- ITERATE SUBOPTIONS FOR Ca2 -->
+                                        <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
                                         @if (v.ContainsKey("subsub"))
                                         {
-                                            <div class="subsub_list">
-                                                @{
-                                                    var subdict = parseDictNested(@v["subsub"].ToString());
-                                                }
-
-                                                @if (@current_element.Length > 0)
-                                                {
+                                            string[] currentlist = obtainSubCriteriaList(subcriteria[key].Split(";"), k);
+                                            var subdict = parseDictNested(@v["subsub"].ToString());
+                                            @if (currentlist.Length > 0)
+                                            {
+                                                <div class="subsub_list">
                                                     <h6 class="subheading">Kunnskapsgrunnlag</h6>
 
                                                     @foreach (var (subkey, subval) in subdict)
@@ -422,9 +431,8 @@
                                                             </h6>
                                                         </div>
                                                     }
-                                                }
-
-                                            </div>
+                                                </div>
+                                            }
                                         }
                                     </div>
                                 </div>
@@ -435,29 +443,17 @@
                     <!-- OPTIONS-->
                     @if (@value.ContainsKey("options"))
                     {
+                        var newDictionary = parseDictNested(value["options"].ToString());
                         <div class="criteria_options">
-                            @{
-                                var newDictionary = parseDictNested(value["options"].ToString());
-                            }
                             <h5 class="subheading"> Underkriterier </h5>
-                            @if (@value.ContainsKey("options_description"))
-                            {
-                                <p class="criteria_description">
-                                    @value["options_description"]
-                                </p>
-                            }
+                            @{ hasKey("options_description", @value);}
                             @foreach (var (k, v) in newDictionary)
                             {
-
                                 <div class="listitem_criteria @inString(k, options[key]) ">
                                     @{ iconChooser(inString(k, options[key])); }
                                     <div class="listitem_text_field">
                                         <h5>@k. <span>@v["title"]</span></h5>
-                                        @if (v.ContainsKey("description"))
-                                        {
-                                            <p>@v["description"] </p>
-
-                                        }
+                                        @{ hasKey("description", v);}
                                         @if (v.ContainsKey("sub"))
                                         {
                                             <div class="subsub_list">

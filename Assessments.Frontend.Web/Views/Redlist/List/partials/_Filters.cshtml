@@ -104,19 +104,11 @@
                     <div id="filters_scrollable">
                         <div class="filter_groups">
                             <h3 class="toggle_filter">Filter <span>@GetActiveFiltersCount()</span></h3>
-
-
                             <div class="close_reset_filter">
 
-
-                                <button class="close_filters"  name="Lukk filtre" type="button" onclick="closeFilters()">
-                                    Lukk filter
+                                <button  class="close_filters closebutton"  name="Lukk filtre" type="button" onclick="closeFilters()">
                                     <span class="material-icons">close</span>
                                 </button>
-
-                                <a class="button" asp-controller="Redlist" asp-action="Index2021">
-                                    <span>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></span>
-                                </a>
 
                             </div>
 
@@ -322,17 +314,24 @@
                                     </div>
                                 </li>
                                 <div class="filters_bottom">
-                                    <button class="close_filters"  name="Lukk filtre" type="button" onclick="closeFilters()">
-                                        Lukk filter
+                                    <button class="close_filters" name="Lukk filtre" type="button" onclick="closeFilters()">
+                                        Avslutt
                                         <span class="material-icons">close</span>
                                     </button>
-                                    <button id="submit_filters" name="Påfør filter" type="submit">
-                                        Påfør filter
-                                        <span class="material-icons">done</span>
-                                        </button>
+
+
+
+                                    <a class="button" asp-controller="Redlist" asp-action="Index2021">
+                                        <span>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></span>
+                                    </a>
+
                                     <button type="submit" name="Export" value="true" formtarget="_blank">
-                                        Eksporter utvalg
+                                        Eksporter
                                         <span class="material-icons">file_download</span>
+                                    </button>
+                                    <button id="submit_filters" name="Påfør filter" type="submit" class="primary">
+                                        Påfør
+                                        <span class="material-icons">done</span>
                                     </button>
                                 </div>
                         </div>

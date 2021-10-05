@@ -9,10 +9,14 @@
     {
 
 
-        <h3>Nedgradering av kategori på grunn av påvirkning utenfra</h3>
+    <h3>
+        
+        @ViewBag.glossary["degrees"]["title"]
+    </h3>
         <p>
             @Model.RationaleCategoryAdjustment
         </p>
+        <p>@ViewBag.glossary["degrees"]["description"]</p>
 
     }
 
@@ -43,6 +47,8 @@
         string current_category = Model.Category.Substring(0, 2);
 
         //UTEN GRADER MATCH
+
+
 
 
 

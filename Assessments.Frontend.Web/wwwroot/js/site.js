@@ -3,7 +3,8 @@ const filter_modal_background = document.getElementById("filter_modal_background
 const filters_scrollable = document.getElementById("filters_scrollable");
 const submitCheckInputs = document.getElementsByClassName("submitOnclick");
 const submit_filters = document.getElementById("submit_filters");
-const filters_close_buttons = document.getElementsByClassName("close_filters")
+const filters_close_buttons = document.getElementsByClassName("close_filters");
+const filters_open_button = document.getElementById("open_filter");
 
 const isSmallReader = () => {
     return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 750;
@@ -38,11 +39,14 @@ const showFilters = () => {
     Array.prototype.forEach.call(filters_close_buttons, el => {
         el.style["display"] = "block";
     });
+
+    filters_close_buttons[0].focus();
 }
 
 const closeFilters = () => {
     filters.style["display"] = "none";
     filter_modal_background.style["display"] = "none";
+    filters_open_button.focus();
 }
 
 const addSubmitOnclick = () => {
@@ -54,7 +58,11 @@ const addSubmitOnclick = () => {
     submit_filters.style["display"] = "none";
 }
 
-
+document.addEventListener('keydown', function(e) {
+    if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader) {
+        closeFilters();
+    }
+});
 
 if (isSmallReader()) {
     showFilterButton();

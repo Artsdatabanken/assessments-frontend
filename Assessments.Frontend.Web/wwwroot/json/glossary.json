@@ -44,6 +44,9 @@
     "MaxAndelAvEuropeiskBestand": "av europeisk populasjonsstørrelse",
     "MaxAndelAvGlobalBestand": "av global populasjonsstørrelse"
   },
+  "degrees": {
+    "title": "Kategori med grader er kategori etter nedgradering/oppgradering av den opprinnelige kategorien (satt etter kriteriene) for vurderingsområdet. Denne justeringen blir gjort når utdøingsrisiko i vurderingsområdet er sterkt påvirket av bestander i naboregioner."
+  }
   "oneliners": {
     "litentvil": "Det er svært liten tvil om at arten er utdødd fra",   
     "Påvirkningsfaktorer": "Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt. Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. \"Påvirkning på habitat\" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten. For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.",

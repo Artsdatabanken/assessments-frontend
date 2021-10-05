@@ -233,4 +233,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static string[] AssessmentAreas = new string[] {"Norge", "Svalbard"};
         }
     }
+
+
 }

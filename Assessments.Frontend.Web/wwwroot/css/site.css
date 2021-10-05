@@ -9,6 +9,12 @@ h1{
 
 }
 
+.header-logo:active,
+.header-logo:focus {
+    border:2px solid blue;
+}
+
+
 /* PAGE CRUMB*/
 .currentcrumb {
     text-decoration: none !important;

@@ -14,11 +14,38 @@ const showFilterButton = () => {
     document.getElementById("open_filter").style["display"] = "block";
 }
 
+const hideFilterButton = () => {
+    document.getElementById("open_filter").style["display"] = "none";
+}
+
+const showFilters = () => {
+    filters.style["display"] = "block";
+
+    filter_modal_background.style["display"] = "block";
+    filter_modal_background.style["background"] = "rgba(0,0,0,0)";
+    filter_modal_background.style["top"] = "0";
+    filter_modal_background.style["bottom"] = "0";
+    filter_modal_background.style["position"] = "relative";
+    filter_modal_background.style["margin-left"] = "0";
+    filter_modal_background.style["width"] = "auto";
+    filter_modal_background.style["height"] = "auto";
+    filter_modal_background.style["z-index"] = "1";
+
+    filters_scrollable.style["position"] = "relative";
+    filters_scrollable.style["width"] = "auto";
+    filters_scrollable.style["top"] = "auto";
+    filters_scrollable.style["left"] = "auto";
+
+    Array.prototype.forEach.call(filters_close_buttons, el => {
+        el.style["display"] = "none";
+    });
+}
+
 const hideFilters = () => {
     document.getElementById("filters").style["display"] = "none";
 }
 
-const showFilters = () => {
+const openFilters = () => {
     filters.style["display"] = "block";
 
     filter_modal_background.style["display"] = "block";
@@ -58,15 +85,31 @@ const addSubmitOnclick = () => {
     submit_filters.style["display"] = "none";
 }
 
+const removeSubmitOnclick = () => {
+    Array.prototype.forEach.call(submitCheckInputs, el => {
+        el.onclick = null;
+    });
+    submit_filters.style["display"] = "block";
+}
+
 document.addEventListener('keydown', function(e) {
     if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader) {
         closeFilters();
     }
 });
 
-if (isSmallReader()) {
-    showFilterButton();
-    hideFilters();
-} else {
-    addSubmitOnclick();
+const initialCheck = () => {
+    if (isSmallReader()) {
+        showFilterButton();
+        hideFilters();
+        removeSubmitOnclick();
+    } else {
+        addSubmitOnclick();
+        showFilters();
+        hideFilterButton();
+    }
 }
+
+window.addEventListener('resize', initialCheck);
+
+initialCheck();

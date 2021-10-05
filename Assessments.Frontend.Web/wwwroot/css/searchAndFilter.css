@@ -7,22 +7,30 @@ li.checkbox, .filter_groups ul {
   list-style-type: none;
 }
 
-.controls span, a>button, .toggle_filter {
+.controls span, a>button {
   pointer-events: none;
 }
 
-.controls_right, .close_reset_filter>.close_filters {
+.controls_right {
   display: none;
 }
 
 .list_header_text {
     overflow-wrap: normal;
-    width: calc(100% - 50px);
+    width: calc(100% - 30px);
     display: inline-block;
 }
 
 .list_header {
   align-items: center;
+}
+
+button.close_filters {
+    display: none;
+}
+
+.filters_bottom {
+    margin-top: 10px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -57,12 +65,9 @@ li.checkbox, .filter_groups ul {
         flex-direction: row;
         justify-content: space-evenly;
         width: 100%;
-        position: sticky;
-        top: 0;
         padding-top: 10px;
         background-color: #f7f7f7;
         border-bottom: 1px solid lightgray;
-        z-index: 10;
     }
 
     .list-search {
@@ -83,88 +88,89 @@ li.checkbox, .filter_groups ul {
         height: 45px;
     }
 
-        .searchfield button {
-            width: 100px;
-            vertical-align: top;
-            margin: 0;
-        }
+    .searchfield button {
+        width: 100px;
+        vertical-align: top;
+        margin: 0;
+    }
 
     .search-and-filter {
-        position: sticky;
-        top: -1px;
         padding: 10px 0;
         border-bottom: 1px solid lightgray;
-        z-index: 10;
         background-color: #fff;
     }
 
     .show_filters {
         display: inline-block;
+        width: 100%;
+        text-align: center;
     }
 
     .toggle_filter {
         margin: 0;
         height: 100%;
-    }
-
-    input[type=checkbox]#show_filters ~ .filter_modal_background {
-        display: none;
-    }
-
-
-    input[type=checkbox]:checked#show_filters ~ .filter_modal_background {
-        display: block;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        padding: 20px;
-        top: 0;
-        bottom: 0;
-        position: fixed;
-        max-width: 100vw;
-        max-height: 100vh;
-    }
-
-        input[type=checkbox]:checked#show_filters ~ .filter_modal_background .filters_scrollable > .filter_groups {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            align-items: center;
-        }
-
-            input[type=checkbox]:checked#show_filters ~ .filter_modal_background .filters_scrollable > .filter_groups > div > button {
-                display: block;
-            }
-
-    .filters {
         text-align: center;
+    }
+
+    .filter_groups {
+        background-color: #f7f7f7;
+        padding-top: 15px;
+    }
+
+    .filter_group {
+        width: 100%;
+        padding: 0px;
+        padding-right: 5px;
+    }
+
+    .filter_group ul {
+        background: #f0f0f0;
+        padding: 5px;
+    }
+
+    .filter_group h4 {
+        width: 100%;
+        background: white;
+        text-align: left;
+        border: 1px solid lightgrey;
+        padding: 10px;
+        border-right: 0;
+        border-left: 0;
         margin: 0;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        padding: 0;
-        max-width: 100vw;
-        max-height: 100vh;
+    }
+
+    .controls button {
+        font-size: 10pt;
+    }
+
+    .controls .material-icons {
+        display: block;
+        font-size: 15pt;
     }
 
     #navbar-mobile {
         z-index: 1;
     }
 
-    .filters_scrollable {
+    #filters_scrollable {
         max-height: 90vh;
         overflow-y: scroll;
         background: white;
-        border: 1px solid black;
-    }
-
-    .filters label {
-        position: sticky;
-        top: 0;
+        border: 1px solid lightgray;
     }
 
     li.checkbox {
+        margin: 5px;
+    }
+
+    .filters_bottom {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 10px;
+
+    }
+
+    .filters_bottom button {
         margin: 5px;
     }
 } 
@@ -189,10 +195,13 @@ input[type=checkbox]:checked#show_area ~ .filter_area,
 .filter_extinct,
 .filter_habitat,
 .filter_species_groups,
-.collapse_checkbox,
 .material-icons.more,
 .material-icons.less {
     display: none;
+}
+
+.collapse_checkbox {
+    opacity: 0;
 }
 
 input[type=checkbox]:not(:checked)#show_area~label>.list_header>.material-icons.less,
@@ -237,8 +246,6 @@ input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.mater
 }
 
 .filter_group h4 {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     background: white;
     text-align: left;
@@ -249,55 +256,14 @@ input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.mater
     margin: 0;
 }
 
-.filter_group h4:hover {
+.filter_group h4:hover,
+input.collapse_checkbox:focus~label>.list_header,
+input.collapse_checkbox:active~label>.list_header {
     cursor: pointer;
     background: #7f7f7f;
     color:white;
 }
 
-@media only screen and (max-width: 750px) {
-
-    .filter_groups {
-        display: none;
-        background-color: #f7f7f7;
-        padding-top: 15px;
-    }
-
-    .filter_group {
-        width: 100%;
-        padding: 0px;
-        padding-right: 5px;
-    }
-
-        .filter_group ul {
-            background: #f0f0f0;
-            padding: 5px;
-        }
-
-        .filter_group h4 {
-            width: 100%;
-            background: white;
-            text-align: left;
-            border: 1px solid lightgrey;
-            padding: 10px;
-            border-right: 0;
-            border-left: 0;
-            margin: 0;
-        }
-
-    .controls button {
-        font-size: 10pt;
-    }
-
-    .controls .material-icons {
-        display: block;
-        font-size: 15pt;
-    }
-}
-
-.controls_left button{
-    padding:0;
-}
 .controls_left button label {
     display: block;
     padding: 6px 12px;
@@ -307,9 +273,6 @@ input[type=checkbox]:not(:checked)#show_species_groups~label>.list_header>.mater
     cursor:pointer;
 }
 
-
-
-
-
-
-
+#open_filter {
+    display: none;
+}

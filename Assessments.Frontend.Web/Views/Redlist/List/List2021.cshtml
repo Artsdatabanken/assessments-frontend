@@ -44,3 +44,15 @@
        })
     </div>
 </div>
+
+
+<script>
+    document.addEventListener('keydown', function (e) {
+        if (e.keyCode == "9") {
+
+            // LOGS OUT ACTIVE ELEMENT WHEN TABBING TO MORE EASILY FIND BUG
+            console.log("previous active element", document.activeElement)
+        }
+        
+    }); 
+</script>

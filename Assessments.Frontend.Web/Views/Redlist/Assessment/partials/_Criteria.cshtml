@@ -112,9 +112,9 @@
     {
         @if (field.ContainsKey(key))
         {
-        <p class="@key">
-            @field[key] 
-        </p>
+            <p class="@key">
+                @field[key]
+            </p>
         }
 
     }
@@ -278,8 +278,49 @@
         }
     }
 
+    void fancyGraph(Dictionary<string,string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator)
+    {
+        <div class="category_graph LC">
 
-    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile)
+            <span>@{indicatordots(unit, quantile);}</span>
+            @{
+                int previous_threshold = 100;
+                int width = 0;
+                int flex = 1;
+            }
+
+            @foreach (var (cat, catval) in thresholds)
+            {
+                int n;
+                bool isNumeric = int.TryParse(catval, out n);
+                if (isNumeric)
+                {
+                    if (unit == "%")
+                    {
+                        width = previous_threshold - n;
+                    }
+                    else
+                    {
+                        width = 20;
+                        flex = n;
+                    }
+                }
+                else
+                {
+                    width = 20;
+                }
+                <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
+                    @cat
+                    <br />
+                    <span>@comparator@catval@unit</span>
+                </div>
+                previous_threshold = n;
+            }
+        </div>
+    }
+
+
+    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key)
     {
 
         var json_quantile = parseDictObject(value);
@@ -288,9 +329,8 @@
         string min = @quantile.Min;
         string max = @quantile.Max;
         string estimated = "-";
+
         <div class="criteria_results">
-
-
             @if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
             {
                 estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
@@ -300,49 +340,12 @@
                 estimated = @quantile.Probable;
             }
 
-            @if (json_quantile.ContainsKey("threshold"))
+            @if (json_quantile.ContainsKey("threshold") && key != "B")
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
-
-                <div class="category_graph LC">
-
-                    <span>@{indicatordots(unit, quantile);}</span>
-                    @{
-
-                        int previous_threshold = 100;
-                        int width = 0;
-                        int flex = 1;
-                    }
-
-                    @foreach (var (cat, catval) in thresholds)
-                    {
-                        int n;
-                        bool isNumeric = int.TryParse(catval, out n);
-                        if (isNumeric)
-                        {
-                            if (unit == "%")
-                            {
-                                width = previous_threshold - n;
-                            }
-                            else
-                            {
-                                width = 20;
-                                flex = n;
-                            }
-                        }
-                        else
-                        {
-                            width = 20;
-                        }
-                        <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
-                            @cat
-                            <br />
-                            <span>@comparator@catval@unit</span>
-                        </div>
-                        previous_threshold = n;
-                    }
-                </div>
+                fancyGraph(thresholds, unit, quantile, comparator);
             }
+
             <p>
                 Estimert verdi ligger på @quantile.Calculated @unit.
                 Det antas en nedgang på mellom @min@unit og @max@unit@if (estimated.Length > 0)
@@ -355,7 +358,7 @@
 
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
-        Model.Category.Contains("VU") || Model.Category.Contains("NT")))
+       Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 {
     <div class="page_section criteria">
         <div class="criteria_description">
@@ -405,10 +408,11 @@
                                         @{ hasKey("description", v);}
 
                                         @{ // CALCULATIONS, NUMBERS AND ALL FUN THINGS
+
                                             var quantile = GetQuantileForCriteria(k);
                                             if (quantile != null)
                                             {
-                                                mmpi(v["content"].ToString(), GetQuantileForCriteria(k));
+                                                mmpi(v["content"].ToString(), GetQuantileForCriteria(k), key);
                                             }
                                         }
                                         <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->

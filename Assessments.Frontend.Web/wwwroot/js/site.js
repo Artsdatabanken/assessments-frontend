@@ -5,6 +5,9 @@ const submitCheckInputs = document.getElementsByClassName("submitOnclick");
 const submit_filters = document.getElementById("submit_filters");
 const filters_close_buttons = document.getElementsByClassName("close_filters");
 const filters_open_button = document.getElementById("open_filter");
+const init = document.getElementById("initial_check");
+const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
+
 
 const isSmallReader = () => {
     return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 750;
@@ -92,7 +95,65 @@ const removeSubmitOnclick = () => {
     submit_filters.style["display"] = "block";
 }
 
-document.addEventListener('keydown', function(e) {
+const collapse = (name) => {
+    item = document.getElementById(name);
+    if (item.checked) {
+        item.checked = false;
+    } else {
+        item.checked = true;
+    }
+    setCollapsibleIcon(name);
+}
+
+const setCollapsibleIcon = (name) => {
+    if (name == "initial_check") {
+        return;
+    }
+    item = document.getElementById(name);
+    headerId = "list_header" + name.substring(4);
+    headerItem = document.getElementById(headerId);
+    // remove old and insert new icon
+    if (item.checked) {
+        removeId = headerId + "_less";
+        addId = headerId + "_more";
+        content = "expand_more";
+        classNames = "material-icons more";
+    } else {
+        removeId = headerId + "_more";
+        addId = headerId + "_less";
+        content = "expand_less";
+        classNames = "material-icons less";
+    }
+    remove = document.getElementById(removeId);
+    if (remove) {
+        headerItem.removeChild(remove);
+    }
+    span = document.createElement("span");
+    span.innerHTML = content;
+    span.setAttribute("id", addId);
+    span.setAttribute("class", classNames);
+    headerItem.appendChild(span);
+}
+
+const initialCollapsibleCheck = () => {
+    Array.prototype.forEach.call(isCheckInputs, el => {
+        setCollapsibleIcon(el.id);
+    })
+}
+
+const hasVisited = () => {
+    return init.checked;
+}
+
+const handleFirstTime = () => {
+    Array.prototype.forEach.call(isCheckInputs, (e) => {
+        if (e.id != "show_area") {
+            e.checked = true;
+        }
+    })
+}
+
+document.addEventListener('keydown', (e) => {
     if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader) {
         closeFilters();
     }
@@ -113,3 +174,7 @@ const initialCheck = () => {
 window.addEventListener('resize', initialCheck);
 
 initialCheck();
+if (!hasVisited()) {
+    handleFirstTime();
+}
+initialCollapsibleCheck();

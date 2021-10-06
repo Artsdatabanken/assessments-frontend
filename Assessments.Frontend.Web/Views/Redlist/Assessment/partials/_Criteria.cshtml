@@ -378,16 +378,16 @@
             TODO: This should not be necessary, as thing SHOULD be in the same object, but alas.
         *@
 
-        var ReductionBasedOn = Model.A1.ReductionBasedOn;
-        string PreliminaryCategory = "";
-        string ThresholdValue = "";
+        List<string> ReductionBasedOn = null;
+        string PreliminaryCategory = null;
+        string ThresholdValue = null;
 
         if (key == "A1")
         {
             ReductionBasedOn = Model.A1.ReductionBasedOn;
             PreliminaryCategory = Model.A1.PreliminaryCategory;
         }
-        if (key == "A2")
+        else if (key == "A2")
         {
             ReductionBasedOn = Model.A2.ReductionBasedOn;
             PreliminaryCategory = Model.A2.PreliminaryCategory;
@@ -404,41 +404,33 @@
         }
         else if (key == "B1")
         {
-            ReductionBasedOn = null;
             PreliminaryCategory = Model.B1.PreliminaryCategory;
         }
         else if (key == "B2")
         {
-            ReductionBasedOn = null;
             PreliminaryCategory = Model.B2.PreliminaryCategory;
         }
         else if (key == "BAii")
         {
-            ReductionBasedOn = null;
             PreliminaryCategory = Model.BAii.PreliminaryCategory;
         }
         else if (key == "C")
         {
-            ReductionBasedOn = null;
             PreliminaryCategory = Model.C.PreliminaryCategory;
         }
         else if (key == "C1")
         {
-            ReductionBasedOn = null;
-            PreliminaryCategory = null;
             ThresholdValue = Model.C1.ThresholdValue;
         }
         else if (key == "C2Ai")
         {
-            ReductionBasedOn = null;
-            PreliminaryCategory = null;
             ThresholdValue = Model.C2Ai.ThresholdValue;
-        }
-        else
+        } else if (key == "D1")
         {
-            ReductionBasedOn = null;
-            PreliminaryCategory = null;
-            ThresholdValue = null;
+            PreliminaryCategory = Model.D1PreliminaryCategory;
+        }else if (key == "D2")
+        {
+            PreliminaryCategory = Model.D2PreliminaryCategory;
         }
 
         @if (ReductionBasedOn != null && PreliminaryCategory != null && ThresholdValue != null)
@@ -463,33 +455,7 @@
                 </p>
             </div>
         }
-
-        if (key == "C")
-        {
-            <div style="padding:10px; background:lightgreen;"><p>
-            <span>Kjent populasjonsstrørrelse: @Model.C.KnownPopulationSize individ</span>
-            <br />
-            <span>Kjent antall lokasjoner: @Model.C.NumberOfLocations</span>
-            <br />
-            <span>Individ per lokasjon: @Model.C.IndividualsPerLocation</span>
-            <br />
-            <span>Individ per substratenhet: @Model.C.IndividualsPerSubstrateUnit</span>
-            <br />
-            <span>Indirekte estimat: @Model.C.IndirectEstimate</span>
-            <br />
-            <span>GenetsPerLocation: @Model.C.GenetsPerLocation</span>
-            <br />
-            <span>RametsPerGenet: @Model.C.RametsPerGenet</span>
-            <br />
-            <span>IndividualsPerAreaUnit: @Model.C.IndividualsPerAreaUnit</span>
-            <br />
-            <span>IndividualsPerAreaValue: @Model.C.IndividualsPerAreaValue</span>
-            </p></div>
-        }
-
-       
-
-
+     
     }
 
 

@@ -1,0 +1,14 @@
+﻿@model SpeciesAssessment2021
+@* // Section containing info about generation length. *@
+
+
+@if (Model.GenerationLength != "" && Model.GenerationLength != null)
+{
+    <h3>Generasjonstid</h3>
+    <p>
+        <span> Artens generasjonstid er satt til @Model.GenerationLength år.</span><br/>
+        @ViewBag.glossary["generasjonstid"]["description"]
+    </p>
+
+
+}

@@ -2,53 +2,8 @@
 
 <div class="page_section">
     <h2> Detaljer</h2>
-    <partial name="/Views/Redlist/Assessment/partials/_Informasjon.cshtml" />
-    <partial name="/Views/Redlist/Assessment/partials/_Bestand.cshtml" />
-
-
-    @if (Model.GenerationLength != "" && Model.GenerationLength != null)
-    {
-        <h3>Generasjonstid: @Model.GenerationLength år</h3>
-        <p style="color:blue;">
-            @ViewBag.glossary["generasjonstid"]["description"]
-        </p>
-    }
-
-    <!-- Kategori endring -->
-    @if (!string.IsNullOrEmpty(Model.CategoryAdjustedTo) && Model.ExtinctionRiskAffected == "Ja")
-    {<h3>Kategori-endring</h3>
-        <div>Kategori endret fra: @Model.CategoryAdjustedFrom</div>
-        <div>Kategori endret til: @Model.CategoryAdjustedTo</div>
-    }
-
-    <h3 style="color:blue;">Er utdøing påvirket av naboland? @Model.ExtinctionRiskAffected</h3>
-    <!-- Kategori UtdøingSterktPåvirket -->
-    @if (Model.ExtinctionRiskAffected == "Ja")
-    {
-        <span>
-            Risiko for utdøing er sterkt påvirket av populasjoner i naboland.
-            Kategori er derfor justert
-            @if (@Model.CategoryAdjustedFrom != "" && @Model.CategoryAdjustedTo != null)
-            {<span> fra @Model.CategoryAdjustedFrom  </span>}
-            til @Model.CategoryAdjustedTo.
-        </span>
-
-        @Html.Raw(Model.RationaleCategoryAdjustment)
-
-    }
-
-    <h3 style="color:blue;">Årsak endring av kategori: @Model.ReasonCategoryChange.ToString()</h3>
-    <p style="color:blue;">
-        // TODO: feltet [Model.KategoriFraForrigeListe ikke tilgjengelig her. Finnes forøvrig andre steder...]
-        // && Model.KategoriFraForrigeListe != Model.Category)
-    </p>
-    @if (!string.IsNullOrWhiteSpace(Model.ReasonCategoryChange.ToString()) && true)
-    {
-        <p style="color:blue;">
-            Kategorien er endret fra forrige rødlistevurdering på grunn av
-            @Model.ReasonCategoryChange.ToString().Substring(0, 1).ToLower()@Model.ReasonCategoryChange.ToString().Substring(1).
-        </p>
-    }
-
-
+    <partial name="/Views/Redlist/Assessment/partials/_InclusionCriteria.cshtml" />
+    <partial name="/Views/Redlist/Assessment/partials/_PopulationProportions.cshtml" />
+    <partial name="/Views/Redlist/Assessment/partials/_CategoryChange.cshtml" />
+    <partial name="/Views/Redlist/Assessment/partials/_GenerationLength.cshtml" />
 </div>

@@ -6,19 +6,6 @@
 *@
 
 @functions {
-    public string categoryMatcher(string category)
-    {
-        // Takes in category as presented in the model
-        // Returns name of category (whyever for?)
-        if (category.Length > 0)
-        {
-            return category.Substring(0, 2);
-        }
-        return "";
-    }
-}
-
-@functions {
     public string categoryDescription(string category)
     {
         // Takes in category as presented in the model
@@ -30,7 +17,7 @@
             return "manglende vurdering ";
         }else
         {
-            var actual_category = @categoryMatcher(category);
+            var actual_category = category.Substring(0,2);
             var final_string = @ViewBag.categories[actual_category]["presentationstring"];
             return final_string;
         }
@@ -38,7 +25,7 @@
 }
 
 <span>
-    <i>@categoryDescription(@Model.Category)</i> @categoryMatcher(@Model.Category)
+    <i>@categoryDescription(@Model.Category)</i> @Model.Category
     @if (@Model.Category == "CR" && @Model.PresumedExtinct == true)
     {
         <span>og er trolig utdødd</span>

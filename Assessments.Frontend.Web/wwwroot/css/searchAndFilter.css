@@ -219,7 +219,7 @@ input[type=checkbox]:checked#show_species_groups~.filter_species_groups {
     float: right;
 }
 
-.filter_group h4 {
+.filter_group button {
     width: 100%;
     background: white;
     text-align: left;
@@ -230,9 +230,9 @@ input[type=checkbox]:checked#show_species_groups~.filter_species_groups {
     margin: 0;
 }
 
-.filter_group h4:hover,
-input.collapse_checkbox:focus~label>.list_header,
-input.collapse_checkbox:active~label>.list_header {
+.filter_group button:hover,
+.filter_group button:focus, 
+.filter_group button:active {
     cursor: pointer;
     background: #7f7f7f;
     color:white;

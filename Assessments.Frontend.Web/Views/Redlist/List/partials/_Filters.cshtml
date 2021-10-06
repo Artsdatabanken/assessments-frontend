@@ -79,7 +79,7 @@
 <div class="search-and-filter">
 
     <form asp-action="Index2021" method="get">
-
+        <input class="collapse_checkbox" id="initial_check" @CategoryCheck("IsCheck", Model.IsCheck, "Visited") type="checkbox" />
         <!-- View controls -->
         <div class="controls">
             <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
@@ -116,16 +116,16 @@
                             <ul>
                                 <li class="filter_group">
                                     <input class="collapse_checkbox" id="show_area" @CategoryCheck("IsCheck", Model.IsCheck, "Area") type="checkbox" />
-                                    <h4 class="list_header" id="list_header_area" onclick="collapse('show_area')">
+                                    <button name="områdefiltre" class="list_header" id="list_header_area" onclick="collapse('show_area')" type="button">
                                         <span class="list_header_text">@SearchAndFilter.SearchChooseArea</span>
                                         <span>@GetActiveFilters("Area")</span>
-                                    </h4>
+                                    </button>
                                     <div class="filter_area">
                                         <ul>
                                             @foreach (var area in AllAreas)
                                             {
                                                 <li class="checkbox" style="margin-top: 0;">
-                                                    <label class="checkbox">
+                                                    <label>
                                                         <input type="checkbox" class="submitOnclick" @CategoryCheck("Area", Model.Area, area.Value) />@area.Key
                                                     </label>
                                                 </li>
@@ -136,16 +136,16 @@
 
                                 <li class="filter_group">
                                     <input class="collapse_checkbox" id="show_category" @CategoryCheck("IsCheck", Model.IsCheck, "Category") type="checkbox" />
-                                    <h4 class="list_header" id="list_header_category" onclick="collapse('show_category')">
+                                    <button name="kategorifiltre" class="list_header" id="list_header_category" onclick="collapse('show_category')" type="button">
                                         <span class="list_header_text">@SearchAndFilter.SearchChooseCategory</span>
                                         <span>@GetActiveFilters("Category")</span>
-                                    </h4>
+                                    </button>
                                     <div class="filter_category">
                                         <ul>
                                             @foreach (var category in AllCategories)
                                             {
                                                 <li class="checkbox" style="margin-top: 0;">
-                                                    <label class="checkbox">
+                                                    <label>
                                                         <input type="checkbox" class="submitOnclick" @CategoryCheck("Category", Model.Category, category) />@category
                                                     </label>
                                                 </li>
@@ -167,10 +167,10 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_species_groups" @CategoryCheck("IsCheck", Model.IsCheck, "SpeciesGroups") />
-                                    <h4 class="list_header"  id="list_header_species_groups" onclick="collapse('show_species_groups')">
+                                    <button name="artsgruppefiltre" class="list_header"  id="list_header_species_groups" onclick="collapse('show_species_groups')" type="button">
                                         <span class="list_header_text">Artsgruppe</span>
                                         <span>@GetActiveFilters("SpeciesGroups")</span>
-                                    </h4>
+                                    </button>
                                     <div class="filter_species_groups">
                                         <ul>
                                             @foreach (var species in AllSpeciesGroups)
@@ -187,10 +187,10 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_habitat" @CategoryCheck("IsCheck", Model.IsCheck, "Habitat") />
-                                    <h4 class="list_header"  id="list_header_habitat" onclick="collapse('show_habitat')">
+                                    <button name="hovedhabitatfiltre" class="list_header"  id="list_header_habitat" onclick="collapse('show_habitat')" type="button">
                                         <span class="list_header_text">Hovedhabitat</span>
                                         <span>@GetActiveFilters("Habitats")</span>
-                                    </h4>
+                                    </button>
                                     <div class="filter_habitat">
                                         <ul>
                                             @foreach (var habitat in AllHabitats)
@@ -207,10 +207,10 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
-                                    <h4 class="list_header"  id="list_header_region" onclick="collapse('show_region')">
+                                    <button name="regionfiltre" class="list_header"  id="list_header_region" onclick="collapse('show_region')" type="button">
                                         <span class="list_header_text">Regioner og havområder</span>
                                         <span>@GetActiveFilters("Regions")</span>
-                                    </h4>
+                                    </button>
                                     <div class="filter_region">
                                         <ul>
                                             @foreach (var region in AllRegions)
@@ -227,10 +227,10 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
-                                    <h4 class="list_header"  id="list_header_european_population" onclick="collapse('show_european_population')">
+                                    <button name="'andel av europeisk populasjon'-filtre" class="list_header"  id="list_header_european_population" onclick="collapse('show_european_population')" type="button">
                                         <span class="list_header_text">Andel av europeisk populasjon</span>
                                         <span>@GetActiveFilters("EuroPop")</span>
-                                    </h4>
+                                    </button>
                                     <div class="filter_european_population">
                                         <ul>
                                             @foreach (var pop in AllEuroPop)
@@ -247,10 +247,10 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
-                                    <h4 class="list_header"  id="list_header_criteria" onclick="collapse('show_criteria')">
+                                    <button name="kriteriefiltre" class="list_header"  id="list_header_criteria" onclick="collapse('show_criteria')" type="button">
                                         <span class="list_header_text">@SearchAndFilter.SearchChooseCriteria</span>
                                         <span>@GetActiveFilters("Criterias")</span>
-                                    </h4>
+                                    </button>
                                     <div class="filter_criteria">
                                         <ul>
                                             @foreach (var criteria in AllCriterias)
@@ -267,10 +267,10 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_extinct" @CategoryCheck("IsCheck", Model.IsCheck, "Extinct") />
-                                    <h4 class="list_header"  id="list_header_extinct" onclick="collapse('show_extinct')">
+                                    <button name="'trolig utdødd'-filter" class="list_header"  id="list_header_extinct" onclick="collapse('show_extinct')" type="button">
                                         <span class="list_header_text">Trolig utdødd</span>
                                         <span>@GetActiveFilters("PresumedExtinct")</span>
-                                    </h4>
+                                    </button>
                                     <div class="filter_extinct">
                                         <ul>
                                             <li class="checkbox">

@@ -38,7 +38,14 @@
         }
         return null;
     }
-
+    private bool isNotEmpty(string key)
+    {
+        @if (key != null && key != " " && key != "-" && key != "" && key != "Helt ukjent")
+        {
+            return true;
+        }
+        return false;
+    }
 
 }
 
@@ -371,6 +378,7 @@
 
     }<!-- END OF FUNCTION-->
 
+
     void GetModel(string key)
     {
 
@@ -425,20 +433,21 @@
         else if (key == "C2Ai")
         {
             ThresholdValue = Model.C2Ai.ThresholdValue;
-        } else if (key == "D1")
+        }
+        else if (key == "D1")
         {
             PreliminaryCategory = Model.D1PreliminaryCategory;
-        }else if (key == "D2")
+        }
+        else if (key == "D2")
         {
             PreliminaryCategory = Model.D2PreliminaryCategory;
         }
 
-        @if (ReductionBasedOn != null && PreliminaryCategory != null && ThresholdValue != null)
-        {
-            <div style="padding:10px; background:lightblue;">
-                <h4> LITT YMSE TALL -> KEY @key  </h4>
-                <p>
+       
 
+        @if (isNotEmpty(PreliminaryCategory)|| isNotEmpty(ThresholdValue)|| ReductionBasedOn != null && ReductionBasedOn.Count!=0)
+        {
+            <div style="padding:10px; background:pink;">
                     @if (ReductionBasedOn != null)
                     {
                         <span>
@@ -446,16 +455,18 @@
                             @foreach (string el in ReductionBasedOn)
                             {<span>@el</span>}
                         </span>
+                        <br />
                     }
 
-                    <span>Som på dette kriteriet gir kategorien: @PreliminaryCategory</span>
-
-                    <span>Terskelverdi: @ThresholdValue</span>
-
-                </p>
+                    @if (isNotEmpty(ThresholdValue))
+                    {<span>Terskelverdi: @ThresholdValue</span><br />}
+                    @if (isNotEmpty(PreliminaryCategory))
+                    {<span>Kategori basert på kriterie: @PreliminaryCategory</span><br />}
             </div>
+
+
         }
-     
+
     }
 
 

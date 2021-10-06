@@ -1,5 +1,13 @@
 ﻿
 @model SpeciesAssessment2021
+@*
+    TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
+
+    This component takes in the json file of criteria and displays it
+    It also takes in the unhandled criteriasummarized string and trasforms it
+    into two useable dictionaries which are then matched to relevant places in the json.
+*@
+
 
 @functions {
 
@@ -31,15 +39,9 @@
         return null;
     }
 
+
 }
 
-@*
-    TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
-
-    This component takes in the json file of criteria and displays it
-    It also takes in the unhandled criteriasummarized string and trasforms it
-    into two useable dictionaries which are then matched to relevant places in the json.
-*@
 
 @{
     Dictionary<string, Dictionary<string, object>> parseDictNested(string json)
@@ -319,8 +321,8 @@
         </div>
     }
 
-    void getQuantile(Dictionary<string,object> value,string k, string key )
-    {       
+    void getQuantile(Dictionary<string, object> value, string k, string key)
+    {
         // CALCULATIONS, NUMBERS AND ALL FUN THINGS
         var quantile = GetQuantileForCriteria(k);
         if (quantile != null)
@@ -368,11 +370,135 @@
         </div>
 
     }<!-- END OF FUNCTION-->
+
+    void GetModel(string key)
+    {
+
+        @*
+            TODO: This should not be necessary, as thing SHOULD be in the same object, but alas.
+        *@
+
+        var ReductionBasedOn = Model.A1.ReductionBasedOn;
+        string PreliminaryCategory = "";
+        string ThresholdValue = "";
+
+        if (key == "A1")
+        {
+            ReductionBasedOn = Model.A1.ReductionBasedOn;
+            PreliminaryCategory = Model.A1.PreliminaryCategory;
+        }
+        if (key == "A2")
+        {
+            ReductionBasedOn = Model.A2.ReductionBasedOn;
+            PreliminaryCategory = Model.A2.PreliminaryCategory;
+        }
+        else if (key == "A3")
+        {
+            ReductionBasedOn = Model.A3.ReductionBasedOn;
+            PreliminaryCategory = Model.A3.PreliminaryCategory;
+        }
+        else if (key == "A4")
+        {
+            ReductionBasedOn = Model.A4.ReductionBasedOn;
+            PreliminaryCategory = Model.A4.PreliminaryCategory;
+        }
+        else if (key == "B1")
+        {
+            ReductionBasedOn = null;
+            PreliminaryCategory = Model.B1.PreliminaryCategory;
+        }
+        else if (key == "B2")
+        {
+            ReductionBasedOn = null;
+            PreliminaryCategory = Model.B2.PreliminaryCategory;
+        }
+        else if (key == "BAii")
+        {
+            ReductionBasedOn = null;
+            PreliminaryCategory = Model.BAii.PreliminaryCategory;
+        }
+        else if (key == "C")
+        {
+            ReductionBasedOn = null;
+            PreliminaryCategory = Model.C.PreliminaryCategory;
+        }
+        else if (key == "C1")
+        {
+            ReductionBasedOn = null;
+            PreliminaryCategory = null;
+            ThresholdValue = Model.C1.ThresholdValue;
+        }
+        else if (key == "C2Ai")
+        {
+            ReductionBasedOn = null;
+            PreliminaryCategory = null;
+            ThresholdValue = Model.C2Ai.ThresholdValue;
+        }
+        else
+        {
+            ReductionBasedOn = null;
+            PreliminaryCategory = null;
+            ThresholdValue = null;
+        }
+
+        @if (ReductionBasedOn != null && PreliminaryCategory != null && ThresholdValue != null)
+        {
+            <div style="padding:10px; background:lightblue;">
+                <h4> LITT YMSE TALL -> KEY @key  </h4>
+                <p>
+
+                    @if (ReductionBasedOn != null)
+                    {
+                        <span>
+                            Reduksjon baser på :
+                            @foreach (string el in ReductionBasedOn)
+                            {<span>@el</span>}
+                        </span>
+                    }
+
+                    <span>Som på dette kriteriet gir kategorien: @PreliminaryCategory</span>
+
+                    <span>Terskelverdi: @ThresholdValue</span>
+
+                </p>
+            </div>
+        }
+
+        if (key == "C")
+        {
+            <div style="padding:10px; background:lightgreen;"><p>
+            <span>Kjent populasjonsstrørrelse: @Model.C.KnownPopulationSize individ</span>
+            <br />
+            <span>Kjent antall lokasjoner: @Model.C.NumberOfLocations</span>
+            <br />
+            <span>Individ per lokasjon: @Model.C.IndividualsPerLocation</span>
+            <br />
+            <span>Individ per substratenhet: @Model.C.IndividualsPerSubstrateUnit</span>
+            <br />
+            <span>Indirekte estimat: @Model.C.IndirectEstimate</span>
+            <br />
+            <span>GenetsPerLocation: @Model.C.GenetsPerLocation</span>
+            <br />
+            <span>RametsPerGenet: @Model.C.RametsPerGenet</span>
+            <br />
+            <span>IndividualsPerAreaUnit: @Model.C.IndividualsPerAreaUnit</span>
+            <br />
+            <span>IndividualsPerAreaValue: @Model.C.IndividualsPerAreaValue</span>
+            </p></div>
+        }
+
+       
+
+
+    }
+
+
+
 }<!-- END OF ALL-->
 
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
-      Model.Category.Contains("VU") || Model.Category.Contains("NT")))
+Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 {
     <div class="page_section criteria">
         <div class="criteria_description">
@@ -384,13 +510,9 @@
             @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
             <button>Gå til ordliste</button>
             <button>Gå til metode</button>
-            @*
-                TODO: switch not working when moving up one level due to type difference.
-                @Model.A1
-                @Model.A1.ReductionBasedOn
-                @Model.A1.QuantifiedReduction
-                @Model.A2.PreliminaryCategory
-            *@
+
+
+
         </div>
 
         <!-- MAIN CRITERIA -->
@@ -402,8 +524,9 @@
                 <div class="listitem_text_field">
                     <h4>@key -  @value["title"]</h4>
                     @{ hasKey("description", @value);}
-
+                    @{ GetModel(key);}
                     @{ getQuantile(value, key, key);}
+
 
                     <!-- SUB CRITERIA : obtain and reformat necessary data -->
                     @if (@value.ContainsKey("subcriteria"))
@@ -422,7 +545,7 @@
 
                                         <h5>@k <span>@v["title"]</span></h5>
                                         @{ hasKey("description", v);}
-
+                                        @{ GetModel(k);}
                                         @{ getQuantile(v, k, key);}
 
                                         <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->

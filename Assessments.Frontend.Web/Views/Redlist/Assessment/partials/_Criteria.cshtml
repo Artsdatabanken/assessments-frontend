@@ -342,8 +342,8 @@
                 @if(cat != null && thresholdValue != null && cat.Contains(thresholdValue)){
                     className = "active";
                 }
-                <li style="display:block;padding:5px;" class=@className>
-                    <span class="@cat" style="padding: 5px;width: 30px;height: 30px;display:inline-block">@cat</span> 
+                <li class="thresholdlist @className">
+                    <span class="graphic_element @cat">@cat</span> 
                     <span>@comparator @catval @unit</span>
                 </li>
             }
@@ -389,13 +389,18 @@
                 </span>
             </p>
 
-            @if (json_quantile.ContainsKey("threshold") && key != "B")
+            @if (json_quantile.ContainsKey("threshold") )
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
                 string thresholdValue = GetThresholdValue(k);
+
                 fancyList(thresholds, unit, quantile, comparator, thresholdValue);
-                fancyGraph(thresholds, unit, quantile, comparator, thresholdValue);
-                
+                if (key != "B")
+                {
+                    fancyGraph(thresholds, unit, quantile, comparator, thresholdValue);
+                }
+
+
 
             }
 

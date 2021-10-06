@@ -866,3 +866,13 @@
     padding: 4px;
     text-align: center;
 }
+
+.thresholdlist {
+    display: block;
+    padding: 5px;
+    max-width:200px;
+}
+
+.thresholdlist.active {
+    background:lightgrey;
+}

@@ -336,10 +336,6 @@ li a span.element_icon {
 
 /* SEARCH FIELD REDLIST */
 
-.list-search {
-    margin-bottom: 50px;
-    text-align: center;
-}
 
 .list-search input {
     display: inline-block;
@@ -358,7 +354,24 @@ li a span.element_icon {
     max-width: 100%;
 }
 
+@media only screen and (min-width: 750px) {
+    .searchfield{
+        padding-right:5px;
+    }
+    .searchfield button {
+        margin: -5px;
+        max-width: 75px;
+        height: 45px;
+        padding: 6px 10px;
+    }
 
+    .list-search input {
+        max-width:calc(100% - 69px);
+        margin:0px;
+    }
+}
+
+/* OTHER THINGS */
 
 .section {
     border: 1px solid grey;
@@ -402,8 +415,8 @@ li a span.element_icon {
     width: 22px;
     height: 22px;
     text-align: center;
-    border:1px solid white;
-
+    border: 1px solid white;
+    background-clip: padding-box;
 }
 
 .filternumber:empty{

@@ -282,7 +282,7 @@ namespace Assessments.Mapping.Helpers
 
         internal static string RemoveAssessmentArea(string src)
         {
-            return src
+            return src.Replace("Amfibier, reptiler", "Amfibier og reptiler")
                 .Replace("(Svalbard)", string.Empty, StringComparison.InvariantCultureIgnoreCase)
                 .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
         }

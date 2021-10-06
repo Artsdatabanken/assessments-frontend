@@ -13,7 +13,7 @@
 @functions{
     string CategoryCheck(string name, string[] element, string value)
     {
-        return $"name={name} value={value}" + (element.Contains(value) ? " checked=checked" : String.Empty);
+        return "name=" +name + " value="+ value + (element.Contains(value) ? " checked=checked" : String.Empty);
     }
 
     string GetActiveFiltersCount()
@@ -189,7 +189,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("SpeciesGroups", Model.SpeciesGroups, species.Key) />@species.Key
+                                                        <input type="checkbox" class="submitOnclick" name="SpeciesGroups" value="@species.Key" @(Model.SpeciesGroups.Contains(species.Key) ? " checked=checked" : String.Empty) />@species.Key
                                                     </label>
                                                 </li>
                                             }

@@ -386,3 +386,26 @@ li a span.element_icon {
         border-right:0;
     }
 }
+
+.list_header{
+    position:relative;
+}
+
+.filternumber {
+    display: inline-block;
+    background: #333;
+    top: 7px;
+    left: -14px;
+    border-radius: 50%;
+    color: white;
+    font-size: 10pt;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    border:1px solid white;
+
+}
+
+.filternumber:empty{
+    display:none;
+}

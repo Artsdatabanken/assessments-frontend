@@ -82,7 +82,14 @@ namespace Assessments.Frontend.Web.Controllers
 
             // SpeciesGroups
             if (viewModel.SpeciesGroups?.Any() == true)
+            {
+                for (var i = 0; i < viewModel.SpeciesGroups.Length; i++)
+                {
+                    if (viewModel.SpeciesGroups[i].Contains("Amfibier"))
+                        viewModel.SpeciesGroups[i] = "Amfibier, reptiler";
+                }
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
+            }
 
             // European population percentages
             ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;

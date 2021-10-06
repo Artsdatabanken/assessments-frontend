@@ -287,10 +287,10 @@
         }
     }
 
-    void fancyGraph(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator)
+    void fancyGraph(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue)
     {
+        <p> VERDI: @thresholdValue</p>
         <div class="category_graph LC">
-
             <span>@{indicatordots(unit, quantile);}</span>
             @{
                 int previous_threshold = 100;
@@ -328,17 +328,39 @@
         </div>
     }
 
+
+    void fancyList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue)
+    {
+        <p> VERDI: @thresholdValue</p>
+        <ul>
+           
+           
+
+            @foreach (var (cat, catval) in thresholds)
+            {
+                string className = "inactive";
+                @if(cat != null && thresholdValue != null && cat.Contains(thresholdValue)){
+                    className = "active";
+                }
+                <li style="display:block;padding:5px;" class=@className>
+                    <span class="@cat" style="padding: 5px;width: 30px;height: 30px;display:inline-block">@cat</span> 
+                    <span>@comparator @catval @unit</span>
+                </li>
+            }
+        </ul>
+    }
+
     void getQuantile(Dictionary<string, object> value, string k, string key)
     {
         // CALCULATIONS, NUMBERS AND ALL FUN THINGS
         var quantile = GetQuantileForCriteria(k);
         if (quantile != null)
         {
-            mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key);
+            mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key, k);
         }
     }
 
-    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key)
+    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key, string k)
     {
 
         var json_quantile = parseDictObject(value);
@@ -370,7 +392,11 @@
             @if (json_quantile.ContainsKey("threshold") && key != "B")
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
-                fancyGraph(thresholds, unit, quantile, comparator);
+                string thresholdValue = GetThresholdValue(k);
+                fancyList(thresholds, unit, quantile, comparator, thresholdValue);
+                fancyGraph(thresholds, unit, quantile, comparator, thresholdValue);
+                
+
             }
 
 
@@ -443,30 +469,86 @@
             PreliminaryCategory = Model.D2PreliminaryCategory;
         }
 
-       
 
-        @if (isNotEmpty(PreliminaryCategory)|| isNotEmpty(ThresholdValue)|| ReductionBasedOn != null && ReductionBasedOn.Count!=0)
+
+        @if (isNotEmpty(PreliminaryCategory) || isNotEmpty(ThresholdValue) || ReductionBasedOn != null && ReductionBasedOn.Count != 0)
         {
             <div style="padding:10px; background:pink;">
-                    @if (ReductionBasedOn != null)
-                    {
-                        <span>
-                            Reduksjon baser på :
-                            @foreach (string el in ReductionBasedOn)
-                            {<span>@el</span>}
-                        </span>
-                        <br />
-                    }
+                @if (ReductionBasedOn != null)
+                {
+                    <span>
+                        Reduksjon baser på :
+                        @foreach (string el in ReductionBasedOn)
+                        {<span>@el</span>}
+                    </span>
+                    <br />
+                }
 
-                    @if (isNotEmpty(ThresholdValue))
-                    {<span>Terskelverdi: @ThresholdValue</span><br />}
-                    @if (isNotEmpty(PreliminaryCategory))
-                    {<span>Kategori basert på kriterie: @PreliminaryCategory</span><br />}
+                @if (isNotEmpty(ThresholdValue))
+                {<span>Terskelverdi: @ThresholdValue</span><br />}
+                @if (isNotEmpty(PreliminaryCategory))
+                {<span>Kategori basert på kriterie: @PreliminaryCategory</span><br />}
             </div>
 
 
         }
 
+    }
+
+
+    string GetThresholdValue(string key)
+    {
+        string ThresholdValue = null;
+
+        if (key == "A1")
+        {
+            ThresholdValue = Model.A1.PreliminaryCategory;
+        }
+        else if (key == "A2")
+        {
+            ThresholdValue = Model.A2.PreliminaryCategory;
+        }
+        else if (key == "A3")
+        {
+            ThresholdValue = Model.A3.PreliminaryCategory;
+        }
+        else if (key == "A4")
+        {
+            ThresholdValue = Model.A4.PreliminaryCategory;
+        }
+        else if (key == "B1")
+        {
+            ThresholdValue = Model.B1.PreliminaryCategory;
+        }
+        else if (key == "B2")
+        {
+            ThresholdValue = Model.B2.PreliminaryCategory;
+        }
+        else if (key == "BAii")
+        {
+            ThresholdValue = Model.BAii.PreliminaryCategory;
+        }
+        else if (key == "C")
+        {
+            ThresholdValue = Model.C.PreliminaryCategory;
+        }
+        else if (key == "C1")
+        {
+            ThresholdValue = Model.C1.ThresholdValue;
+        }
+        else if (key == "C2Ai")
+        {
+            ThresholdValue = Model.C2Ai.ThresholdValue;
+        }
+        else if (key == "D1")
+        {
+            ThresholdValue = Model.D1PreliminaryCategory;
+        }
+        else if (key == "D2")
+        {
+            ThresholdValue = Model.D2PreliminaryCategory;
+        }
+        return ThresholdValue;
     }
 
 

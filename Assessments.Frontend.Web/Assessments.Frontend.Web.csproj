@@ -47,5 +47,9 @@
 	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="Views\Redlist\Assessment\partials\_ImpactFactors.cshtml" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\Redlist\Assessment\partials\criteria\" />
+	</ItemGroup>
 	
 </Project>

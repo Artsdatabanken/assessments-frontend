@@ -1,0 +1,70 @@
+﻿@model SpeciesAssessment2021
+
+<div class="page_section">
+
+    <!-- Kategori endring -->
+
+
+    @if (Model.ExtinctionRiskAffected == "Ja")
+    {
+
+
+    <h3>
+        
+        @ViewBag.glossary["degrees"]["title"]
+    </h3>
+        <p>
+            @Model.RationaleCategoryAdjustment
+        </p>
+        <p>@ViewBag.glossary["degrees"]["description"]</p>
+
+    }
+
+    @if (!string.IsNullOrEmpty(Model.ImportInfo.Kategori2015))
+    {
+
+        // example species include:
+        // - endret kategori: 32041
+        // - nedgradert kategori: 31847
+
+        string previous_category = "-";
+        string which_redlist = "";
+
+        if (!string.IsNullOrEmpty(Model.ImportInfo.Kategori2015))
+        {
+            previous_category = Model.ImportInfo.Kategori2015.Substring(0, 2);
+            which_redlist = "2010";
+        }
+        else if (!string.IsNullOrEmpty(Model.ImportInfo.Kategori2010))
+        {
+            previous_category = Model.ImportInfo.Kategori2010.Substring(0, 2);
+            which_redlist = "2010";
+        }
+        else
+        {
+            which_redlist = "2021";
+        }
+        string current_category = Model.Category.Substring(0, 2);
+
+        //UTEN GRADER MATCH
+
+
+
+
+
+        @if (which_redlist != "2021" && previous_category != current_category)
+        {
+            <h3>Årsak til endring av kategori</h3>
+            <p>
+                Kategorien for denne arten har endret seg fra @previous_category til @current_category siden Rødlista @which_redlist.
+                Endringen kommer på grunnlag av: @Model.ReasonCategoryChange
+            </p>
+
+        }
+    }
+
+
+
+
+
+</div>

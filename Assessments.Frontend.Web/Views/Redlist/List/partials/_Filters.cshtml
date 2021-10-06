@@ -16,20 +16,6 @@
         return $"name={name} value={value}" + (element.Contains(value) ? " checked=checked" : String.Empty);
     }
 
-    string ViewCheck(string name, string element, string value)
-    {
-        return $"name={name} value={value}" + (element == value ? " checked=checked" : String.Empty);
-    }
-
-    string GetViewClass(string element, string value)
-    {
-        if(String.IsNullOrEmpty(element) && value == "list")
-        {
-            return "class=active";
-        }
-        return element == value ? "class=active" : String.Empty;
-    }
-
     string GetActiveFiltersCount()
     {
         int count = 0;
@@ -96,79 +82,34 @@
 
         <!-- View controls -->
         <div class="controls">
-            <div class="controls_left">
-                <button @GetViewClass(Model.View, "list") type="submit">
-                    <input class="collapse_checkbox" id="button-list" @ViewCheck("View", Model.View, "list") type="radio" />
-                    <label for="button-list" id="listview">
-                        Liste
-                        <span class="material-icons">list</span>
-                    </label>
-                </button>
-                <button @GetViewClass(Model.View, "grid") type="submit" class="hideonmobile">
-                    <input class="collapse_checkbox" id="button-grid" @ViewCheck("View", Model.View, "grid") type="radio" />
-                    <label for="button-grid" id="gridview">
-                        Grid
-                        <span class="material-icons">grid_on</span>
-                    </label>
-                </button>
-                <button @GetViewClass(Model.View, "stat") type="submit">
-                    <input class="collapse_checkbox" id="button-stat" @ViewCheck("View", Model.View, "stat") type="radio" />
-                    <label for="button-stat" id="statsview">
-                        Statistikk
-                        <span class="material-icons">bar_chart</span>
-                    </label>
-                </button>
-
-            </div>
+            <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
             <div class="controls_right">
-                <label class="show_filters" for="show_filters">
-                    <button class="toggle_filter" type="button">
-                        Filter
-                        <span>@GetActiveFiltersCount()</span>
-                        <span class="material-icons"><span class="material-icons">
-                        filter_list
-                    </span></span>
-                    </button>
-                </label>
+                <button class="toggle_filter" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
+                    Filter
+                    <span>@GetActiveFiltersCount()</span>
+                    <span class="material-icons">
+                        <span class="material-icons">
+                            filter_list
+                        </span>
+                    </span>
+                </button>
             </div>
         </div>
         <!-- Search -->
         <div>
-            <input class="collapse_checkbox" id="show_search" type="checkbox" />
-            <div class="list-search">
-                <div class="searchfield">
-                    <input asp-for="Name" placeholder="Søk i vitenskapelig navn" />
-                    <button class="primary" type="submit">
-                        <span class="material-icons">
-                            search
-                        </span>
-                        Søk
-                    </button>
+            <partial name="/Views/Redlist/List/partials/_Search.cshtml" />
 
-                </div>
-            </div>
-            <div class="filters">
-                <input class="collapse_checkbox" id="show_filters" @CategoryCheck("IsCheck", Model.IsCheck, "Filters") type="checkbox" />
-                <div class="filter_modal_background">
-                    <div class="filters_scrollable">
+            <div id="filters">
+                <div id="filter_modal_background">
+                    <div id="filters_scrollable">
                         <div class="filter_groups">
-                            <label class="show_filters"><h3 class="toggle_filter">Filter <span>@GetActiveFiltersCount()</span></h3></label>
-
-
+                            <h3 class="toggle_filter">Filter <span>@GetActiveFiltersCount()</span></h3>
                             <div class="close_reset_filter">
 
-
-
-                            <a class="button" asp-controller="Redlist" asp-action="Index2021">
-                                <span>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></span>
-                            </a>
-                              
-                                <button class="close_filters" type="button">
-                                    <label for="show_filters">
-                                        Lukk filter
-                                        <span class="material-icons">close</span>
-                                    </label>
+                                <button  class="close_filters closebutton"  name="Lukk filtre" type="button" onclick="closeFilters()">
+                                    <span class="material-icons">close</span>
                                 </button>
+
                             </div>
 
 
@@ -189,7 +130,7 @@
                                             {
                                                 <li class="checkbox" style="margin-top: 0;">
                                                     <label class="checkbox">
-                                                        <input type="checkbox" @CategoryCheck("Area", Model.Area, area.Value) onclick="this.form.submit();" />@area.Key
+                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Area", Model.Area, area.Value) />@area.Key
                                                     </label>
                                                 </li>
                                             }
@@ -213,19 +154,19 @@
                                             {
                                                 <li class="checkbox" style="margin-top: 0;">
                                                     <label class="checkbox">
-                                                        <input type="checkbox" @CategoryCheck("Category", Model.Category, category) onclick="this.form.submit();" />@category
+                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Category", Model.Category, category) />@category
                                                     </label>
                                                 </li>
                                             }
                                             <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
                                             <li class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" asp-for="Redlisted" onclick="this.form.submit();" />@SearchAndFilter.ChooseRedlisted
+                                                    <input type="checkbox" asp-for="Redlisted" class="submitOnclick" />@SearchAndFilter.ChooseRedlisted
                                                 </label>
                                             </li>
                                             <li class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" asp-for="Endangered" onclick="this.form.submit();" />@SearchAndFilter.ChooseEndangered
+                                                    <input type="checkbox" asp-for="Endangered" class="submitOnclick" />@SearchAndFilter.ChooseEndangered
                                                 </label>
                                             </li>
                                         </ul>
@@ -248,7 +189,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" @CategoryCheck("SpeciesGroups", Model.SpeciesGroups, species.Key) onclick="this.form.submit();" />@species.Key
+                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("SpeciesGroups", Model.SpeciesGroups, species.Key) />@species.Key
                                                     </label>
                                                 </li>
                                             }
@@ -272,7 +213,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" @CategoryCheck("Habitats", Model.Habitats, habitat.Key) onclick="this.form.submit();" />@habitat.Value["name"]
+                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Habitats", Model.Habitats, habitat.Key) />@habitat.Value["shortname"]
                                                     </label>
                                                 </li>
                                             }
@@ -296,7 +237,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" @CategoryCheck("Regions", Model.Regions, region.Key) onclick="this.form.submit();" />@region.Value
+                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Regions", Model.Regions, region.Key) />@region.Value
                                                     </label>
                                                 </li>
                                             }
@@ -320,7 +261,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" @CategoryCheck("EuroPop", Model.EuroPop, pop.Key) onclick="this.form.submit();" />@pop.Value
+                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("EuroPop", Model.EuroPop, pop.Key) />@pop.Value
                                                     </label>
                                                 </li>
                                             }
@@ -344,7 +285,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" @CategoryCheck("Criterias", Model.Criterias, criteria.Key) onclick="this.form.submit();" />@criteria.Key - @criteria.Value
+                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Criterias", Model.Criterias, criteria.Key) />@criteria.Key - @criteria.Value
                                                     </label>
                                                 </li>
                                             }
@@ -366,20 +307,40 @@
                                         <ul>
                                             <li class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" asp-for="PresumedExtinct" onclick="this.form.submit();" />Trolig utdødd
+                                                    <input type="checkbox" class="submitOnclick" asp-for="PresumedExtinct" />Trolig utdødd
                                                 </label>
                                             </li>
                                         </ul>
                                     </div>
                                 </li>
-                                <button class="btn" type="submit" name="Export" value="true" formtarget="_blank">Eksporter utvalg</button>
+                                <div class="filters_bottom">
+                                    <button class="close_filters" name="Lukk filtre" type="button" onclick="closeFilters()">
+                                        Avslutt
+                                        <span class="material-icons">close</span>
+                                    </button>
+
+
+
+                                    <a class="button" asp-controller="Redlist" asp-action="Index2021">
+                                        <span>@SearchAndFilter.ResetAllFilters <span class="material-icons">delete</span></span>
+                                    </a>
+
+                                    <button type="submit" name="Export" value="true" formtarget="_blank">
+                                        Eksporter
+                                        <span class="material-icons">file_download</span>
+                                    </button>
+                                    <button id="submit_filters" name="Påfør filter" type="submit" class="primary">
+                                        Påfør
+                                        <span class="material-icons">done</span>
+                                    </button>
+                                </div>
                         </div>
                         </ul>
                     </div>
                 </div>
-                
+
             </div>
-            
+
         </div>
         
     </form>

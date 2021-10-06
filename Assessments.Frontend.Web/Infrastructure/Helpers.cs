@@ -215,7 +215,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             public const string ChooseEndangered = "Marker alle truede arter";
             public const string ChooseRedlisted = "Marker alle rødlistearter";
-            public const string ResetAllFilters = "Nullstill filtre";
+            public const string ResetAllFilters = "Nullstill";
             public const string SearchChangedCategory = "Vis arter med endret kategori fra 2015";
             public const string SearchChooseArea = "Vurderingsområde";
             public const string SearchChooseCategory = "Kategori";
@@ -233,4 +233,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static string[] AssessmentAreas = new string[] {"Norge", "Svalbard"};
         }
     }
+
+
 }

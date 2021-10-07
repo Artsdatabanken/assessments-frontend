@@ -21,8 +21,7 @@
     }
     void InputTag(string name, string[] elements, string value)
     {
-        <input type="checkbox" class="submitOnclick" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)/>                            
-    //        return "name=" +name + " value=" + value.Replace(" ","%20") + "" + (element.Contains(value) ? " checked=checked" : String.Empty);
+        <input type="checkbox" class="submitOnclick" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)/> 
     }
 
     string GetActiveFiltersCount()
@@ -216,7 +215,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Habitats", Model.Habitats, habitat.Key) />@habitat.Value["shortname"]
+                                                        @{ InputTag("Habitats", Model.Habitats, habitat.Key); } @habitat.Value["shortname"]
                                                     </label>
                                                 </li>
                                             }

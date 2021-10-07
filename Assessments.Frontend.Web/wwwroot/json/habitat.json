@@ -48,7 +48,7 @@
     "description": " Samlebetegnelse på områder som jevnlig blir satt under vann ved flom, først og fremst langs større elver og langs innsjøer.",
     "mapping": "Omfatter NiN 2.0 hovedtypene <a href=\"https://artsdatabanken.no/Pages/171948/Flomskogsmark\" target=\"_new\" rel=\"noopener\">T30 Flomskogsmark</a>, <a href= \"https://artsdatabanken.no/Pages/171936/aapen_flomfastmark\" target =\"_new\" rel=\"noopener\">T18 Åpen flomfastmark</a> og <a href=\"//artsdatabanken.no/Pages/171941/Ferskvannsdriftvoll\" target=\"_new\" rel=\"noopener\">T23 Ferskvannsdriftvoll</a> i NiN 2.0"
   },
-  "IsSnøBreforland": {
+  "IsSnø": {
     "name": "Snø og is",
     "shortname": "Snø og is",
     "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Sn%C3%B8-_og_issystemer/foto_408.jpg",

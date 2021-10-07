@@ -74,7 +74,7 @@ namespace Assessments.Mapping
             {
                 "ArktiskAlpineJorddektFastmark" => "Alpin jorddekt fastmark",
                 "BergUrAndreGrunnjordsystemer" => "Berg, ur og andre grunnjordsystemer",
-                "IsSnøBreforland" => "Is og snø",
+                "IsSnø" => "Is og snø",
                 "KysttilknyttedeFastmarkssystemer" => "Kysttilknyttede fastmarkssystemer",
                 "SterktEndretFastmark" => "Sterkt endret fastmark",
                 _ => mainHabitat

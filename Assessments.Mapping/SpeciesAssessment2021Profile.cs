@@ -121,7 +121,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.RationaleNotEvaluated, opt => opt.MapFrom(src => src.KunnskapsStatusNE))
                 .ForMember(dest => dest.PercentageEuropeanPopulation, opt => opt.MapFrom(src => src.MaxAndelAvEuropeiskBestand))
                 .ForMember(dest => dest.PercentageGlobalPopulation, opt => opt.MapFrom(src => src.MaxAndelAvGlobalBestand))
-                .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => src.NaturtypeHovedenhet))
+                .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.ResolveMainHabitat(src.NaturtypeHovedenhet)))
 
                 .ForMember(dest => dest.AssessmentInitialClassification, opt => opt.MapFrom(src => src.OverordnetKlassifiseringGruppeKode))
                 

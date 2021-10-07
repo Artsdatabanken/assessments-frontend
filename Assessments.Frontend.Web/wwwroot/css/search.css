@@ -1,0 +1,49 @@
+
+/* SEARCH FIELD REDLIST */
+
+/* Container div for anything search*/
+.list-search {
+    margin-top: 10px;
+    margin-bottom: 0;
+    border-bottom: 1px solid lightgray;
+    padding: 10px 0;
+    background: lightgrey;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/* Container div for input + button*/
+.searchfield {
+    display: flex;
+    width: 100%;
+    vertical-align: top;
+    margin: 0;
+    height: 45px;
+}
+
+/* Input field */
+.list-search input {
+    display: inline-block;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 2px;
+    box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px 0px inset;
+    box-sizing: border-box;
+    color: rgb(85, 85, 85);
+    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    height: 45px;
+    line-height: 21.4333px;
+    margin-bottom: 0px;
+    width: 285px;
+    max-width: 100%;
+}
+
+/* Button*/
+.searchfield button {
+    width: 100px;
+    vertical-align: top;
+    margin: 0;
+}
+

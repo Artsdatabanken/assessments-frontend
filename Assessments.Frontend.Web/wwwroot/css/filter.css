@@ -82,30 +82,7 @@ button.close_filters {
         border-bottom: 1px solid lightgray;
     }
 
-    .list-search {
-        margin-top: 10px;
-        margin-bottom: 0;
-        border-bottom: 1px solid lightgray;
-        padding: 10px 0;
-        background: lightgrey;
-        width: 100%;
-        padding: 10px;
-    }
-
-    .searchfield {
-        display: flex;
-        width: 100%;
-        vertical-align: top;
-        margin: 0;
-        height: 45px;
-    }
-
-    .searchfield button {
-        width: 100px;
-        vertical-align: top;
-        margin: 0;
-    }
-
+    
     .search-and-filter {
         padding: 10px 0;
         border-bottom: 1px solid lightgray;
@@ -116,6 +93,7 @@ button.close_filters {
         display: inline-block;
         width: 100%;
         text-align: center;
+        background:hotpink;
     }
 
     .toggle_filter {

@@ -78,24 +78,24 @@
 
 <div class="search-and-filter">
 
-    <form asp-action="Index2021" method="get">
+    
         <input class="collapse_checkbox" id="initial_check" @CategoryCheck("IsCheck", Model.IsCheck, "Visited") type="checkbox" />
         <!-- View controls -->
         <div class="controls">
             <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
             <div class="controls_right">
                 <button class="toggle_filter" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-                    <span class="filternumber">@GetActiveFiltersCount()</span> 
+                    <span class="filternumber">@GetActiveFiltersCount()</span>
                     <span class="material-icons">
                         filter_list
                     </span>Filter
-                    
+
                 </button>
             </div>
         </div>
-        <!-- Search -->
+
         <div>
-            <partial name="/Views/Redlist/List/partials/_Search.cshtml" />
+
 
             <div id="filters">
                 <div id="filter_modal_background">
@@ -104,7 +104,7 @@
                             <h3 class="toggle_filter">Filter <span class="filternumber">@GetActiveFiltersCount()</span></h3>
                             <div class="close_reset_filter">
 
-                                <button  class="close_filters closebutton"  name="Lukk filtre" type="button" onclick="closeFilters()">
+                                <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
                                     <span class="material-icons">close</span>
                                 </button>
 
@@ -119,7 +119,7 @@
                                             @SearchAndFilter.SearchChooseArea
                                             <span class="filternumber">@GetActiveFilters("Area")</span>
                                         </span>
-                                        
+
                                     </button>
                                     <div class="filter_area">
                                         <ul>
@@ -142,7 +142,7 @@
                                             @SearchAndFilter.SearchChooseCategory
                                             <span class="filternumber">@GetActiveFilters("Category")</span>
                                         </span>
-                                        
+
                                     </button>
                                     <div class="filter_category">
                                         <ul>
@@ -171,12 +171,12 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_species_groups" @CategoryCheck("IsCheck", Model.IsCheck, "SpeciesGroups") />
-                                    <button name="artsgruppefiltre" class="list_header"  id="list_header_species_groups" onclick="collapse('show_species_groups')" type="button">
+                                    <button name="artsgruppefiltre" class="list_header" id="list_header_species_groups" onclick="collapse('show_species_groups')" type="button">
                                         <span class="list_header_text">
                                             Artsgruppe
                                             <span class="filternumber">@GetActiveFilters("SpeciesGroups")</span>
                                         </span>
-                                        
+
                                     </button>
                                     <div class="filter_species_groups">
                                         <ul>
@@ -194,12 +194,12 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_habitat" @CategoryCheck("IsCheck", Model.IsCheck, "Habitat") />
-                                    <button name="hovedhabitatfiltre" class="list_header"  id="list_header_habitat" onclick="collapse('show_habitat')" type="button">
+                                    <button name="hovedhabitatfiltre" class="list_header" id="list_header_habitat" onclick="collapse('show_habitat')" type="button">
                                         <span class="list_header_text">
                                             Hovedhabitat
                                             <span class="filternumber">@GetActiveFilters("Habitats")</span>
                                         </span>
-                                       
+
                                     </button>
                                     <div class="filter_habitat">
                                         <ul>
@@ -217,12 +217,12 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
-                                    <button name="regionfiltre" class="list_header"  id="list_header_region" onclick="collapse('show_region')" type="button">
+                                    <button name="regionfiltre" class="list_header" id="list_header_region" onclick="collapse('show_region')" type="button">
                                         <span class="list_header_text">
                                             Regioner og havområder
                                             <span class="filternumber">@GetActiveFilters("Regions")</span>
                                         </span>
-                                        
+
                                     </button>
                                     <div class="filter_region">
                                         <ul>
@@ -240,11 +240,11 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
-                                    <button name="'andel av europeisk populasjon'-filtre" class="list_header"  id="list_header_european_population" onclick="collapse('show_european_population')" type="button">
+                                    <button name="'andel av europeisk populasjon'-filtre" class="list_header" id="list_header_european_population" onclick="collapse('show_european_population')" type="button">
                                         <span class="list_header_text">
                                             Andel av europeisk populasjon
                                             <span class="filternumber">@GetActiveFilters("EuroPop")</span>
-                                        </span>                                        
+                                        </span>
                                     </button>
                                     <div class="filter_european_population">
                                         <ul>
@@ -262,12 +262,12 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
-                                    <button name="kriteriefiltre" class="list_header"  id="list_header_criteria" onclick="collapse('show_criteria')" type="button">
+                                    <button name="kriteriefiltre" class="list_header" id="list_header_criteria" onclick="collapse('show_criteria')" type="button">
                                         <span class="list_header_text">
                                             @SearchAndFilter.SearchChooseCriteria
                                             <span class="filternumber">@GetActiveFilters("Criterias")</span>
                                         </span>
-                                        
+
                                     </button>
                                     <div class="filter_criteria">
                                         <ul>
@@ -285,8 +285,9 @@
 
                                 <li class="filter_group">
                                     <input type="checkbox" class="collapse_checkbox" id="show_extinct" @CategoryCheck("IsCheck", Model.IsCheck, "Extinct") />
-                                    <button name="'trolig utdødd'-filter" class="list_header"  id="list_header_extinct" onclick="collapse('show_extinct')" type="button">
-                                        <span class="list_header_text">Trolig utdødd
+                                    <button name="'trolig utdødd'-filter" class="list_header" id="list_header_extinct" onclick="collapse('show_extinct')" type="button">
+                                        <span class="list_header_text">
+                                            Trolig utdødd
                                             <span class="filternumber">@GetActiveFilters("PresumedExtinct")</span>
                                         </span>
                                     </button>
@@ -326,6 +327,6 @@
             </div>
 
         </div>
-        
-    </form>
+
+    
 </div>

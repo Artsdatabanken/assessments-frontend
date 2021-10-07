@@ -19,7 +19,6 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .AfterMap(SpeciesAssessment2021ProfileHelper.CorrectImpactFactors);
 
-            CreateMap<Rodliste2019.TrackInfo, SpeciesAssessment2021TrackInfo>();
             CreateMap<Rodliste2019.MinMaxProbable, SpeciesAssessment2021MinMaxProbableIntervall>(); // use the one below - differentiate on punktestimat
             CreateMap<Rodliste2019.MinMaxProbableIntervall, SpeciesAssessment2021MinMaxProbableIntervall>()
                 .ForMember(dest => dest.Punktestimat, opt => opt.MapFrom(src => (src.Punktestimat == "true")));
@@ -157,7 +156,8 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.EvaluateCategoryChangeReason(src)))
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.ÅrsakTilNedgraderingAvKategori,true)))
-                .AfterMap((src, dest) =>
+                .ForMember(dest=> dest.PreviousAssessments, opt=> opt.MapFrom(src => Helpers.SpeciesAssessment2021ProfileHelper.GetPreviousAssessments(src.ImportInfo)))
+                    .AfterMap((src, dest) =>
                 {
                     SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest);
                     SpeciesAssessment2021ProfileHelper.BlankReasonCategoryChangeWhenNoChange(src, dest);

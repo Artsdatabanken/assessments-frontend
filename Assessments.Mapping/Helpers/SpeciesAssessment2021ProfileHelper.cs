@@ -646,5 +646,36 @@ namespace Assessments.Mapping.Helpers
             }
         }
 
+        public static PreviousAssessment[] GetPreviousAssessments(Rodliste2019.TrackInfo trackInfo)
+        {
+            var result = new List<PreviousAssessment>();
+            if (trackInfo == null) return result.ToArray();
+
+            if (trackInfo.Kategori2015 != null && trackInfo.Kategori2015.Length > 0)
+            {
+                result.Add(new PreviousAssessment()
+                {
+                    Year = 2015, 
+                    Category = trackInfo.Kategori2015.Replace("º", "°"),
+                    CriteriaSummarized = trackInfo.Kriterier2015,
+                    ScientificNameId = trackInfo.ScientificNameId2015,
+                    ScientificName = trackInfo.ScientificName2015,
+                    AssessmentUrl = trackInfo.Url2015
+                });
+            }
+            if (trackInfo.Kategori2010 != null && trackInfo.Kategori2010.Length > 0)
+            {
+                result.Add(new PreviousAssessment()
+                {
+                    Year = 2010,
+                    Category = trackInfo.Kategori2010.Replace("º", "°"),
+                    CriteriaSummarized = trackInfo.Kriterier2010,
+                    ScientificNameId = trackInfo.ScientificNameId2010,
+                    ScientificName = trackInfo.ScientificName2010,
+                    AssessmentUrl = trackInfo.Url2010
+                });
+            }
+            return result.ToArray();
+        }
     }
 }

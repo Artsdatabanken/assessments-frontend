@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Assessments.Mapping.Helpers;
@@ -33,10 +34,10 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ExtinctionRiskAffected, opt => opt.MapFrom(src => src.ExtinctionRiskAffected))
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.PresumedExtinct ? "Ja" : "Nei"))
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ReasonCategoryChange.Description()))
-                .ForMember(dest => dest.Category2015, opt => opt.MapFrom(src => src.ImportInfo.Kategori2015.Replace("º", "°")))
-                .ForMember(dest => dest.CriteriaSummarized2015, opt => opt.MapFrom(src => src.ImportInfo.Kriterier2015))
-                .ForMember(dest => dest.Category2010, opt => opt.MapFrom(src => src.ImportInfo.Kategori2010.Replace("º", "°")))
-                .ForMember(dest => dest.CriteriaSummarized2010, opt => opt.MapFrom(src => src.ImportInfo.Kriterier2010))
+                .ForMember(dest => dest.Category2015, opt => opt.MapFrom(src => src.PreviousAssessments.Any(x => x.Year == 2015) ? src.PreviousAssessments.Single(x => x.Year == 2015).Category : string.Empty))
+                .ForMember(dest => dest.CriteriaSummarized2015, opt => opt.MapFrom(src => src.PreviousAssessments.Any(x => x.Year == 2015) ? src.PreviousAssessments.Single(x => x.Year == 2015).CriteriaSummarized : string.Empty))
+                .ForMember(dest => dest.Category2010, opt => opt.MapFrom(src => src.PreviousAssessments.Any(x => x.Year == 2010) ? src.PreviousAssessments.Single(x => x.Year == 2010).Category : string.Empty))
+                .ForMember(dest => dest.CriteriaSummarized2010, opt => opt.MapFrom(src => src.PreviousAssessments.Any(x => x.Year == 2010) ? src.PreviousAssessments.Single(x => x.Year == 2010).CriteriaSummarized : string.Empty))
                 .ForMember(dest => dest.PercentageEuropeanPopulation, opt => opt.MapFrom(src => src.PercentageEuropeanPopulation != "NA" ? src.PercentageEuropeanPopulation : string.Empty))
                 .ForMember(dest => dest.PercentageGlobalPopulation, opt => opt.MapFrom(src => src.PercentageGlobalPopulation != "NA" ? src.PercentageGlobalPopulation : string.Empty))
                 .ForMember(dest => dest.ProportionOfMaxPopulation, opt => opt.MapFrom(src => src.ProportionOfMaxPopulation))

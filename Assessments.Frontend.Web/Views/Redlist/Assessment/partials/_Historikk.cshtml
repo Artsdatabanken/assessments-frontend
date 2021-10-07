@@ -26,33 +26,17 @@
         </span>
     </li>
 
-
-    @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
+    @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger
     {
         <li class="withlink">
             <span class="text_content">
-            <h4>Rødlista 2015</h4>
-            <span class="graphic_element @Model.ImportInfo.Kategori2015">@Model.ImportInfo.Kategori2015</span>
-            <b> @categoryDescription(Model.ImportInfo.Kategori2015)</b> 
+                <h4>Rødlista @prev.Year</h4>
+                <span class="graphic_element @prev.Category">@prev.Category</span>
+                <b> @categoryDescription(prev.Category)</b> 
             </span>
-            <a target="_blank" href="@Model.ImportInfo.Url2015">
+            <a target="_blank" href="@prev.AssessmentUrl">
                 Gå til vurdering<span class="material-icons">open_in_new</span>
             </a>
         </li>
-    }
-
-    @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
-    {
-    <li class="withlink">
-        <span class="text_content">
-            <h4>Rødlista 2010</h4>
-            <span class="graphic_element @Model.ImportInfo.Kategori2010">@Model.ImportInfo.Kategori2010</span>
-            <b> @categoryDescription(Model.ImportInfo.Kategori2010)</b>
-
-        </span>
-        <a target="_blank" href="@Model.ImportInfo.Url2010">
-            Gå til vurdering<span class="material-icons">open_in_new</span>
-        </a>
-    </li>
     }
 </ul>

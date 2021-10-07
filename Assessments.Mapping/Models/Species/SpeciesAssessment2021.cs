@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 // ReSharper disable InconsistentNaming
 
 namespace Assessments.Mapping.Models.Species
@@ -123,7 +124,7 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string GenerationLength { get; set; } // Generasjonslengde
 
-        public SpeciesAssessment2021TrackInfo ImportInfo { get; set; } = new(); 
+        public PreviousAssessment[] PreviousAssessments { get; set; } = Array.Empty<PreviousAssessment>(); 
         
         /// <summary>
         /// Final category according to IUCN categories and criteria.

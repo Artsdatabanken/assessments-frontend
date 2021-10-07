@@ -33,6 +33,8 @@
 
         @foreach (var item in Model.Redlist2021Results)
         {
+            if (item.SpeciesGroup == "Hydroider")
+                item.SpeciesGroup = "Hydrozoer";
 
             <li class="list">
                 <a asp-action="Detail" asp-route-id="@item.Id">
@@ -46,16 +48,16 @@
                     </span>
 
                     <span class="element_species">
-                        <span class="element_popular_name">@Capitalize(item.PopularName)</span>
                         <span class="element_name">@item.ScientificName</span>
+                        <span class="element_popular_name">@Capitalize(item.PopularName)</span>
                         <span class="element_area mobile">
                             @if (@item.AssessmentArea == "N")
                             {
-                                <span> Norge </span >
+                                <span> Norge </span>
                             }
                             else if (@item.AssessmentArea == "S")
                             {
-                               <span>Svalbard</span>
+                                <span>Svalbard</span>
                             }
 
                         </span>

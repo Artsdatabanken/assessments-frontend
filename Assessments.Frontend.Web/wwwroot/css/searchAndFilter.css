@@ -16,9 +16,21 @@ li.checkbox, .filter_groups ul {
 }
 
 .list_header_text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     overflow-wrap: normal;
     width: calc(100% - 30px);
-    display: inline-block;
+}
+
+button.list_header {
+    display: flex;
+    flex-direction: row;
+}
+
+h3.toggle_filter {
+        display: flex;
+        flex-direction: row;
 }
 
 .list_header {
@@ -109,7 +121,7 @@ button.close_filters {
     .toggle_filter {
         margin: 0;
         height: 100%;
-        text-align: center;
+        justify-content: center;
     }
 
     .filter_groups {

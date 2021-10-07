@@ -175,29 +175,6 @@ button.close_filters {
     }
 } 
 
-/* Collapsible */
-input[type=checkbox]:checked#show_area~.filter_area,
-input[type=checkbox]:checked#show_category~.filter_category,
-input[type=checkbox]:checked#show_region~.filter_region,
-input[type=checkbox]:checked#show_european_population~.filter_european_population,
-input[type=checkbox]:checked#show_criteria~.filter_criteria,
-input[type=checkbox]:checked#show_habitat~.filter_habitat,
-input[type=checkbox]:checked#show_extinct~.filter_extinct,
-input[type=checkbox]:checked#show_species_groups~.filter_species_groups {
-  display: none;
-}
-
-.filter_area,
-.filter_category,
-.filter_region,
-.filter_european_population,
-.filter_criteria,
-.filter_extinct,
-.filter_habitat,
-.filter_species_groups {
-    display: block;
-}
-
 .collapse_checkbox {
     display: none;
 }

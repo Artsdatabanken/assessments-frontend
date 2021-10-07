@@ -8,12 +8,18 @@
     var AllRegions = ViewBag.AllRegions;
     Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
     Dictionary<string, Dictionary<string, string>> AllSpeciesGroups = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+
 }
 
 @functions{
     string CategoryCheck(string name, string[] element, string value)
     {
-        return "name=" +name + " value="+ value + (element.Contains(value) ? " checked=checked" : String.Empty);
+        return "name=" +name + " value=" + value.Replace(" ","%20") + "" + (element.Contains(value) ? " checked=checked" : String.Empty);
+    }
+    void InputTag(string name, string[] elements, string value)
+    {
+        <input type="checkbox" class="submitOnclick" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)/>                            
+    //        return "name=" +name + " value=" + value.Replace(" ","%20") + "" + (element.Contains(value) ? " checked=checked" : String.Empty);
     }
 
     string GetActiveFiltersCount()
@@ -139,8 +145,8 @@
                                 </li>
 
                                 <li class="filter_group">
-                                    <input class="collapse_checkbox" id="show_category" @CategoryCheck("IsCheck", Model.IsCheck, "Category") type="checkbox" />
-                                    <label for="show_category">
+                                <input class="collapse_checkbox" id="show_category" @CategoryCheck("IsCheck", Model.IsCheck, "Category") type="checkbox" />
+                                <label for="show_category">
                                         <h4 class="list_header">
                                             <span class="list_header_text">@SearchAndFilter.SearchChooseCategory</span>
                                             <span>@GetActiveFilters("Category")</span>
@@ -189,7 +195,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" name="SpeciesGroups" value="@species.Key" @(Model.SpeciesGroups.Contains(species.Key) ? " checked=checked" : String.Empty) />@species.Key
+                                                        @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species.Key); } @species.Key
                                                     </label>
                                                 </li>
                                             }

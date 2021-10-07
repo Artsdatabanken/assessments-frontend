@@ -3,10 +3,26 @@
     overflow-x: hidden;
 }
 
+/* Graphic profile colours for reference - classes are not in use as is */
+.TextPrimary {
+    color: #4c4a48;
+}
+.TextSecondary,
+.ButtonActive{
+    /* Use color as bg for all active elements that should have a clicked/chosen status*/
+    color: #7f726b;
+}
+.TextAccentPrimary {
+    color:#eb6109;
+}
+.TextAccentSecondary {
+    color: #de8608;
+}
 
-h1{
-    margin-bottom:0;
+/* Actual page css */
 
+h1 {
+    margin-bottom: 0;
 }
 
 .header-logo:active,
@@ -246,7 +262,7 @@ h1{
 
 .button.active,
 .main button.active {
-    background: #8b0000;
+    background: #7f726b;
     color: #fff;
     border: none;
 }

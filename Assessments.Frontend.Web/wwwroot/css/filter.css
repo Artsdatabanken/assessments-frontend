@@ -16,9 +16,21 @@ li.checkbox, .filter_groups ul {
 }
 
 .list_header_text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     overflow-wrap: normal;
     width: calc(100% - 30px);
-    display: inline-block;
+}
+
+button.list_header {
+    display: flex;
+    flex-direction: row;
+}
+
+h3.toggle_filter {
+        display: flex;
+        flex-direction: row;
 }
 
 .list_header {
@@ -70,30 +82,7 @@ button.close_filters {
         border-bottom: 1px solid lightgray;
     }
 
-    .list-search {
-        margin-top: 10px;
-        margin-bottom: 0;
-        border-bottom: 1px solid lightgray;
-        padding: 10px 0;
-        background: lightgrey;
-        width: 100%;
-        padding: 10px;
-    }
-
-    .searchfield {
-        display: flex;
-        width: 100%;
-        vertical-align: top;
-        margin: 0;
-        height: 45px;
-    }
-
-    .searchfield button {
-        width: 100px;
-        vertical-align: top;
-        margin: 0;
-    }
-
+    
     .search-and-filter {
         padding: 10px 0;
         border-bottom: 1px solid lightgray;
@@ -104,12 +93,13 @@ button.close_filters {
         display: inline-block;
         width: 100%;
         text-align: center;
+        background:hotpink;
     }
 
     .toggle_filter {
         margin: 0;
         height: 100%;
-        text-align: center;
+        justify-content: center;
     }
 
     .filter_groups {
@@ -183,7 +173,9 @@ button.close_filters {
 
 .filter_group {
     margin-top: -1px;
-    padding-right: 5px;
+    border-left: 1px solid lightgray;
+    margin-right: 6px;
+    border-right: 1px solid lightgray;
 }
 
 .filter_group ul {
@@ -211,7 +203,7 @@ button.close_filters {
 .filter_group button:focus, 
 .filter_group button:active {
     cursor: pointer;
-    background: #7f7f7f;
+    background: #7f726b;
     color:white;
 }
 

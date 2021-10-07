@@ -9,7 +9,7 @@
   },
   "region": {
     "tagline": "Regioner og havområder ",
-    "description": " En art er forekommende i et (historisk) fylke eller havområde hvis én eller flere vesentlige deler av livssyklusen foregår der. \"Kjent\" forekomst betyr kjent eller sannsynlig nåværende forekomst, \"antatt\" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser), \"antatt utdødd\" forekomst brukes når arten muligens har dødd ut lokalt, mens \"utdødd forekomst\" betyr at det er overveiende sannsynlighet for at arten har dødd ut i området. Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
+    "description": " En art er forekommende i et (historisk) fylke eller havområde hvis vesentlige deler av livssyklusen foregår der. \"Kjent\" forekomst betyr kjent eller sannsynlig nåværende forekomst. \"Antatt\" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser). \"Antatt utdødd\" forekomst brukes når arten muligens har dødd ut lokalt, mens \"utdødd forekomst\" betyr at det er overveiende sannsynlighet for at arten har dødd ut i området. Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
   },
   "criteria": {
     "tagline": "Hvilke kriterier gjør at denne arten er rødlistet?",

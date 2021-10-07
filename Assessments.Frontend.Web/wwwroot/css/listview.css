@@ -414,15 +414,22 @@ li a span.element_icon {
     justify-content: center;
     align-items: center;
     margin-left: 5px;
-    background: #333;
+    background: #7f726b;
     border-radius: 50%;
     color: white;
     font-size: 10pt;
     width: 22px;
     min-width: 22px;
     height: 22px;
-    border: 1px solid white;
     background-clip: padding-box;
+}
+
+.filter_group button:hover .filternumber,
+.filter_group button:focus .filternumber,
+.filter_group button:active .filternumber {
+    
+    color: #7f726b;
+    background: white;
 }
 
 .filternumber:empty{

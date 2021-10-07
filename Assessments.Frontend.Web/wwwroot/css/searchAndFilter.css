@@ -248,7 +248,7 @@ input[type=checkbox]:checked#show_species_groups~.filter_species_groups {
 .filter_group button:focus, 
 .filter_group button:active {
     cursor: pointer;
-    background: #7f7f7f;
+    background: #7f726b;
     color:white;
 }
 

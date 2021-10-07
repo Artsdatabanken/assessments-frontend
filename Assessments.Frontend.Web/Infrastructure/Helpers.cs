@@ -223,15 +223,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string SearchChooseSpeciesGroup = "Artsgruppe";
             public const string SearchFilterSpecies = "Søk art/slekt";
         }
-
-    }
-
-    public static class FilterViewHelpers
-    {
-        public static class Filters
-        {
-            public static string[] AssessmentAreas = new string[] {"Norge", "Svalbard"};
-        }
     }
 
 

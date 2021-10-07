@@ -14,7 +14,10 @@
 @functions{
     string CategoryCheck(string name, string[] element, string value)
     {
-        return "name=" +name + " value=" + value.Replace(" ","%20") + "" + (element.Contains(value) ? " checked=checked" : String.Empty);
+        if (name == "SpeciesGroups" && value == "Hydrozoer") 
+            value = "Hydroider";
+            
+        return $"name={name} value={value}" + (element.Contains(value) ? " checked=checked" : String.Empty);
     }
     void InputTag(string name, string[] elements, string value)
     {

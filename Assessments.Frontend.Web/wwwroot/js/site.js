@@ -114,15 +114,15 @@ const setCollapsibleIcon = (name) => {
     headerItem = document.getElementById(headerId);
     // remove old and insert new icon
     if (item.checked) {
-        removeId = headerId + "_less";
-        addId = headerId + "_more";
-        content = "expand_more";
-        classNames = "material-icons more";
-    } else {
         removeId = headerId + "_more";
         addId = headerId + "_less";
         content = "expand_less";
         classNames = "material-icons less";
+    } else {
+        removeId = headerId + "_less";
+        addId = headerId + "_more";
+        content = "expand_more";
+        classNames = "material-icons more";
     }
     remove = document.getElementById(removeId);
     if (remove) {
@@ -147,8 +147,10 @@ const hasVisited = () => {
 
 const handleFirstTime = () => {
     Array.prototype.forEach.call(isCheckInputs, (e) => {
-        if (e.id != "show_area") {
+        if (e.id == "show_area" || e.id == "initial_check") {
             e.checked = true;
+        } else {
+            e.checked = false;
         }
     })
 }
@@ -172,6 +174,33 @@ const initialCheck = () => {
 }
 
 window.addEventListener('resize', initialCheck);
+
+const filterStyles = `
+input[type=checkbox]:not(:checked)#show_area~.filter_area,
+input[type=checkbox]:not(:checked)#show_category~.filter_category,
+input[type=checkbox]:not(:checked)#show_region~.filter_region,
+input[type=checkbox]:not(:checked)#show_european_population~.filter_european_population,
+input[type=checkbox]:not(:checked)#show_criteria~.filter_criteria,
+input[type=checkbox]:not(:checked)#show_habitat~.filter_habitat,
+input[type=checkbox]:not(:checked)#show_extinct~.filter_extinct,
+input[type=checkbox]:not(:checked)#show_species_groups~.filter_species_groups {
+    display: none;
+}
+
+.filter_area,
+.filter_category,
+.filter_region,
+.filter_european_population,
+.filter_criteria,
+.filter_extinct,
+.filter_habitat,
+.filter_species_groups {
+    display: block;
+}
+`
+const stylesheet = document.createElement("style");
+stylesheet.innerText = filterStyles;
+document.head.appendChild(stylesheet);
 
 initialCheck();
 if (!hasVisited()) {

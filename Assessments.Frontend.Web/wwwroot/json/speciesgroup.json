@@ -9,6 +9,11 @@
     "tagline": "Amphibia og Reptilia",
     "image": "https://design.artsdatabanken.no/icons/Amfibier.svg"
   },
+  "Armfotinger": {
+    "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Armfotinger",
+    "image": "https://design.artsdatabanken.no/icons/Armfotinger.svg",
+    "tagline": "Brachiopoda"
+  },
   "Biller": {
     "url": "https://artsdatabanken.no/Rodliste/Artsgruppene/Biller",
     "tagline": "Coleoptera",
@@ -38,6 +43,11 @@
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Fugler",
     "image": "https://design.artsdatabanken.no/icons/Fugler.svg",
     "tagline": "Aves"
+  },
+  "Hydrozoer": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Hydrozoer",
+    "image": "https://design.artsdatabanken.no/icons/Hydrozoer.svg",
+    "tagline": "Hydrozoa"
   },
   "Kakerlakker": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Kakerlakker",
@@ -113,6 +123,11 @@
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Pattedyr",
     "image": "https://design.artsdatabanken.no/icons/Pattedyr.svg",
     "tagline": "Mammalia"
+  },
+  "Pigghuder": {
+    "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Pigghuder",
+    "image": "https://design.artsdatabanken.no/icons/Pigghuder.svg",
+    "tagline": "Echinodermata"
   },
   "Rettvinger": {
     "url": " https://artsdatabanken.no/Rodliste/Artsgruppene/Rettvinger",

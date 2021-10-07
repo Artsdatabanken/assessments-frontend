@@ -13,6 +13,9 @@
 @functions{
     string CategoryCheck(string name, string[] element, string value)
     {
+        if (name == "SpeciesGroups" && value == "Hydrozoer") 
+            value = "Hydroider";
+            
         return $"name={name} value={value}" + (element.Contains(value) ? " checked=checked" : String.Empty);
     }
 

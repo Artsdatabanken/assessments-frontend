@@ -268,6 +268,18 @@ namespace Assessments.Mapping.Helpers
             return speciesGroupName;
         }
 
+        internal static void FixMissingCategoryChangedFrom(Rodliste2019 src, SpeciesAssessment2021 dest)
+        {
+            if (dest.Category.Length > 2 && string.IsNullOrWhiteSpace(dest.CategoryAdjustedFrom)) //Opp eller nedgradering
+            {
+                var calculated = CategoryAndCriteriaHelper.oppsummeringTotal(src);
+                if (!string.IsNullOrWhiteSpace(calculated.KategoriEndretFra))
+                {
+                    dest.CategoryAdjustedFrom = calculated.KategoriEndretFra;
+                }
+            }
+        }
+
         internal static string RemoveAssessmentArea(string src)
         {
             return src
@@ -630,5 +642,6 @@ namespace Assessments.Mapping.Helpers
                 default: return CategoryChangeReason.NoChange;
             }
         }
+
     }
 }

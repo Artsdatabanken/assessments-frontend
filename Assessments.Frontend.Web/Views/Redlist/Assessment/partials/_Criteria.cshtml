@@ -66,31 +66,33 @@
 
     void placeCriteria(string criteria)
     {
-
-        if (criteria.Contains("A"))
-        {
-            a = criteria;
+        if (!string.IsNullOrEmpty(criteria)){
+           if (criteria.Contains("A"))
+            {
+                a = criteria;
+            }
+            else if (criteria.Contains("B"))
+            {
+                b = criteria;
+            }
+            else if (criteria.Contains("C"))
+            {
+                c = criteria;
+            }
+            else if (criteria.Contains("D"))
+            {
+                d = criteria;
+            }
         }
-        else if (criteria.Contains("B"))
-        {
-            b = criteria;
-        }
-        else if (criteria.Contains("C"))
-        {
-            c = criteria;
-        }
-        else if (criteria.Contains("D"))
-        {
-            d = criteria;
-        }
+       
 
     }
 
     // Iterate the criteria string and place each separate criteria in its correct container.
-    if (@Model.CriteriaSummarized.Contains(";"))
+    if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && Model.CriteriaSummarized.Contains(";"))
     {
         // SPLIT THE LIST AND LOOP THEM
-        foreach (string crit in @Model.CriteriaSummarized.Split(";"))
+        foreach (string crit in Model.CriteriaSummarized.Split(";"))
         {
             placeCriteria(crit);
         }

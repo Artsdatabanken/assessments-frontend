@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace Assessments.Mapping.Helpers
+namespace Assessments.Shared.Helpers
 {
-    internal static class Extensions
+    public static class Extensions
     {
         public static string DisplayName(this MemberInfo property)
         {

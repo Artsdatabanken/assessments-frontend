@@ -45,10 +45,32 @@ button.close_filters {
     margin-top: 10px;
 }
 
+@media only screen and (min-width: 750px) {
+    .controls {
+        background-color: #f8f8f8;
+        border-bottom: 1px solid #7f726b;
+        padding-top: 10px;
+        padding-left: 200px;
+    }
+
+    .controls button {
+        margin-bottom: -1px;
+        border: 1px solid #7f726b;
+    }
+
+    .controls button.active {
+        border: 1px solid #7f726b;
+        color: black;
+        background: white;
+        border-bottom-color:white;
+    }
+
+}
+
 @media only screen and (max-width: 750px) {
     .controls {
-        background-color: #fff;
         display: flex;
+        background-color: #f3f3f3;
         flex-wrap: nowrap;
         max-width: 100%;
     }
@@ -174,7 +196,6 @@ button.close_filters {
 .filter_group {
     margin-top: -1px;
     border-left: 1px solid lightgray;
-    margin-right: 6px;
     border-right: 1px solid lightgray;
 }
 

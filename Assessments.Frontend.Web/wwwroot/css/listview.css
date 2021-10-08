@@ -86,7 +86,6 @@ td {
     width: 100%;
     max-width: 100%;
     font-size: 12pt;
-    padding-top: 20px;
     padding-bottom: 20px;
 }
 
@@ -95,9 +94,10 @@ td {
     margin-right: 15px;
     max-width: 220px;
     border-right: 1px solid #dadada;
+    background: #f8f8f8;
+    padding: 5px;
+    margin-top: -1px;
 }
-
-
 
 .filter {
     justify-content: flex-start;

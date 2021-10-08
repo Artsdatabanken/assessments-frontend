@@ -8,7 +8,6 @@
     background: #f3f3f3;
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
 }
 
 .list-search h2 {
@@ -24,6 +23,7 @@
     margin: 0;
     height: 45px;
     width: 385px;
+    max-width:100%;
     margin:auto;
 }
 

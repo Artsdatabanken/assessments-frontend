@@ -1,0 +1,23 @@
+﻿@model SpeciesAssessment2021
+
+<div class="page_section">
+
+    @if (Model.ExtinctionRiskAffected == "Ja")
+    {
+        // example species include 31847
+
+        <h3>
+
+            @ViewBag.glossary["degrees"]["title"]
+        </h3>
+        <p>
+            @Model.RationaleCategoryAdjustment
+        </p>
+        <p>@ViewBag.glossary["degrees"]["description"]</p>
+
+
+        <span>@Model.CategoryAdjustedFrom > @Model.CategoryAdjustedTo</span>
+
+    }
+
+</div>

@@ -8,23 +8,23 @@
         @if (Model.AssessmentYear == 2010)
         {
 
-        <span>
-            Ikke revidert siden 2010, hvor den ble vurdert til
-            <partial name="/Views/Shared/_Category.cshtml" />
-        </span>
+            <span>
+                Ikke revidert siden 2010, hvor den ble vurdert til
+                <partial name="/Views/Shared/_Category.cshtml" />
+            </span>
         }
         else
         {
             <span>Arten er </span>
-                @if(Model.Category != "NA" && Model.Category != "NE")
-                {
+            @if (Model.Category != "NA" && Model.Category != "NE")
+            {
                 <span>vurdert til </span>
             }
-                <partial name="/Views/Shared/_Category.cshtml" />
-                <span>
-                    for Norsk rødliste for arter 2021. 
-                    Rødlista for arter er en oversikt over arter som har risiko for å dø ut fra Norge.
-                </span>
-            }
-     </p>
+            <partial name="/Views/Shared/_Category.cshtml" />
+            <span>
+                for Norsk rødliste for arter 2021.
+                Rødlista for arter er en oversikt over arter som har risiko for å dø ut fra Norge.
+            </span>
+        }
+    </p>
 </div>

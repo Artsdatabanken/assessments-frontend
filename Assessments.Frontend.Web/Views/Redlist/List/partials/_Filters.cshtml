@@ -8,16 +8,19 @@
     var AllRegions = ViewBag.AllRegions;
     Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
     Dictionary<string, Dictionary<string, string>> AllSpeciesGroups = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+
 }
 
 @functions{
-    string CategoryCheck(string name, string[] element, string value)
+    void InputTag(string id, string _class, string name, string[] elements, string value)
     {
-        if (name == "SpeciesGroups" && value == "Hydrozoer") 
-            value = "Hydroider";
-            
-        return $"name={name} value={value}" + (element.Contains(value) ? " checked=checked" : String.Empty);
+        <input id=@id type="checkbox" class=@_class name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)/> 
     }
+    void InputTag(string name, string[] elements, string value)
+    {
+        InputTag(name, "submitOnclick", name, elements, value);
+    }
+        
 
     string GetActiveFiltersCount()
     {
@@ -81,8 +84,7 @@
 
 <div class="search-and-filter">
 
-    
-        <input class="collapse_checkbox" id="initial_check" @CategoryCheck("IsCheck", Model.IsCheck, "Visited") type="checkbox" />
+        @{ InputTag("initial_check", "collapse_checkbox", "IsCheck", Model.IsCheck, "Visited"); }
         <!-- View controls -->
         <div class="controls">
             <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
@@ -116,7 +118,7 @@
 
                             <ul>
                                 <li class="filter_group">
-                                    <input class="collapse_checkbox" id="show_area" @CategoryCheck("IsCheck", Model.IsCheck, "Area") type="checkbox" />
+                                    @{ InputTag("show_area", "collapse_checkbox", "IsCheck", Model.IsCheck, "Area");}
                                     <button name="områdefiltre" class="list_header" id="list_header_area" onclick="collapse('show_area')" type="button">
                                         <span class="list_header_text">
                                             @SearchAndFilter.SearchChooseArea
@@ -130,7 +132,7 @@
                                             {
                                                 <li class="checkbox" style="margin-top: 0;">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Area", Model.Area, area.Value) />@area.Key
+                                                        @{ InputTag("Area", Model.Area, area.Value);} @area.Key
                                                     </label>
                                                 </li>
                                             }
@@ -139,7 +141,7 @@
                                 </li>
 
                                 <li class="filter_group">
-                                    <input class="collapse_checkbox" id="show_category" @CategoryCheck("IsCheck", Model.IsCheck, "Category") type="checkbox" />
+                                    @{ InputTag("show_category", "collapse_checkbox", "IsCheck", Model.IsCheck, "Category");}
                                     <button name="kategorifiltre" class="list_header" id="list_header_category" onclick="collapse('show_category')" type="button">
                                         <span class="list_header_text">
                                             @SearchAndFilter.SearchChooseCategory
@@ -153,7 +155,7 @@
                                             {
                                                 <li class="checkbox" style="margin-top: 0;">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Category", Model.Category, category) />@category
+                                                        @{ InputTag("Category", Model.Category, category);} @category
                                                     </label>
                                                 </li>
                                             }
@@ -173,7 +175,7 @@
                                 </li>
 
                                 <li class="filter_group">
-                                    <input type="checkbox" class="collapse_checkbox" id="show_species_groups" @CategoryCheck("IsCheck", Model.IsCheck, "SpeciesGroups") />
+                                    @{ InputTag("show_species_groups", "collapse_checkbox", "IsCheck", Model.IsCheck, "SpeciesGroups");}
                                     <button name="artsgruppefiltre" class="list_header" id="list_header_species_groups" onclick="collapse('show_species_groups')" type="button">
                                         <span class="list_header_text">
                                             Artsgruppe
@@ -187,7 +189,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("SpeciesGroups", Model.SpeciesGroups, species.Key) />@species.Key
+                                                        @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species.Key); } @species.Key
                                                     </label>
                                                 </li>
                                             }
@@ -196,7 +198,7 @@
                                 </li>
 
                                 <li class="filter_group">
-                                    <input type="checkbox" class="collapse_checkbox" id="show_habitat" @CategoryCheck("IsCheck", Model.IsCheck, "Habitat") />
+                                    @{ InputTag("show_habitat", "collapse_checkbox", "IsCheck", Model.IsCheck, "Habitat");}
                                     <button name="hovedhabitatfiltre" class="list_header" id="list_header_habitat" onclick="collapse('show_habitat')" type="button">
                                         <span class="list_header_text">
                                             Hovedhabitat
@@ -210,7 +212,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Habitats", Model.Habitats, habitat.Key) />@habitat.Value["shortname"]
+                                                        @{ InputTag("Habitats", Model.Habitats, habitat.Key); } @habitat.Value["shortname"]
                                                     </label>
                                                 </li>
                                             }
@@ -219,7 +221,7 @@
                                 </li>
 
                                 <li class="filter_group">
-                                    <input type="checkbox" class="collapse_checkbox" id="show_region" @CategoryCheck("IsCheck", Model.IsCheck, "Region") />
+                                    @{ InputTag("show_region", "collapse_checkbox", "IsCheck", Model.IsCheck, "Region");}
                                     <button name="regionfiltre" class="list_header" id="list_header_region" onclick="collapse('show_region')" type="button">
                                         <span class="list_header_text">
                                             Regioner og havområder
@@ -233,7 +235,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Regions", Model.Regions, region.Key) />@region.Value
+                                                        @{ InputTag("Regions", Model.Regions, region.Key);} @region.Value
                                                     </label>
                                                 </li>
                                             }
@@ -242,7 +244,7 @@
                                 </li>
 
                                 <li class="filter_group">
-                                    <input type="checkbox" class="collapse_checkbox" @CategoryCheck("IsCheck", Model.IsCheck, "EuroPop") id="show_european_population" />
+                                    @{ InputTag("show_european_population", "collapse_checkbox", "IsCheck", Model.IsCheck, "EuroPop");}
                                     <button name="'andel av europeisk populasjon'-filtre" class="list_header" id="list_header_european_population" onclick="collapse('show_european_population')" type="button">
                                         <span class="list_header_text">
                                             Andel av europeisk populasjon
@@ -255,7 +257,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("EuroPop", Model.EuroPop, pop.Key) />@pop.Value
+                                                        @{ InputTag("EuroPop", Model.EuroPop, pop.Key);} @pop.Value
                                                     </label>
                                                 </li>
                                             }
@@ -264,7 +266,7 @@
                                 </li>
 
                                 <li class="filter_group">
-                                    <input type="checkbox" class="collapse_checkbox" id="show_criteria" @CategoryCheck("IsCheck", Model.IsCheck, "Criteria") />
+                                    @{ InputTag("show_criteria", "collapse_checkbox", "IsCheck", Model.IsCheck, "Criteria");}
                                     <button name="kriteriefiltre" class="list_header" id="list_header_criteria" onclick="collapse('show_criteria')" type="button">
                                         <span class="list_header_text">
                                             @SearchAndFilter.SearchChooseCriteria
@@ -278,7 +280,7 @@
                                             {
                                                 <li class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" class="submitOnclick" @CategoryCheck("Criterias", Model.Criterias, criteria.Key) />@criteria.Key - @criteria.Value
+                                                        @{ InputTag("Criterias", Model.Criterias, criteria.Key);} @criteria.Key - @criteria.Value
                                                     </label>
                                                 </li>
                                             }
@@ -287,7 +289,7 @@
                                 </li>
 
                                 <li class="filter_group">
-                                    <input type="checkbox" class="collapse_checkbox" id="show_extinct" @CategoryCheck("IsCheck", Model.IsCheck, "Extinct") />
+                                    @{ InputTag("show_extinct", "collapse_checkbox", "IsCheck", Model.IsCheck, "Extinct");}
                                     <button name="'trolig utdødd'-filter" class="list_header" id="list_header_extinct" onclick="collapse('show_extinct')" type="button">
                                         <span class="list_header_text">
                                             Trolig utdødd

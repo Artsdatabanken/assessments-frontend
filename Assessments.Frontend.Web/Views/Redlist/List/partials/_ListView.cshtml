@@ -33,9 +33,6 @@
 
         @foreach (var item in Model.Redlist2021Results)
         {
-            if (item.SpeciesGroup == "Hydroider")
-                item.SpeciesGroup = "Hydrozoer";
-
             <li class="list">
                 <a asp-action="Detail" asp-route-id="@item.Id">
                     @{

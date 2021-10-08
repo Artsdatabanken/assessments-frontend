@@ -20,7 +20,7 @@
 
     }
 
-    @if (!string.IsNullOrEmpty(Model.ImportInfo.Kategori2015))
+    @if (Model.PreviousAssessments.Any())
     {
 
         // example species include:
@@ -30,14 +30,14 @@
         string previous_category = "-";
         string which_redlist = "";
 
-        if (!string.IsNullOrEmpty(Model.ImportInfo.Kategori2015))
+        if (Model.PreviousAssessments.Any(x=>x.Year == 2015))
         {
-            previous_category = Model.ImportInfo.Kategori2015.Substring(0, 2);
-            which_redlist = "2010";
+            previous_category = Model.PreviousAssessments.Single(x => x.Year == 2015).Category.Substring(0, 2);
+            which_redlist = "2015";
         }
-        else if (!string.IsNullOrEmpty(Model.ImportInfo.Kategori2010))
+        else if (Model.PreviousAssessments.Any(x => x.Year == 2010))
         {
-            previous_category = Model.ImportInfo.Kategori2010.Substring(0, 2);
+            previous_category = Model.PreviousAssessments.Single(x => x.Year == 2010).Category.Substring(0, 2);
             which_redlist = "2010";
         }
         else

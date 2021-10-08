@@ -12,9 +12,13 @@ namespace Assessments.Frontend.Web.Infrastructure
             // NOTE: supress output if not "found"?
 
             if (SpeciesGroupName == "Amfibier, reptiler")
-                SpeciesGroupName = "Amfibier";
-
-            output.Attributes.SetAttribute("src", $"/images/icons/{SpeciesGroupName}.svg");
+            { 
+                output.Attributes.SetAttribute("src", $"/images/icons/Amfibier.svg"); 
+            }
+            else
+            {
+                output.Attributes.SetAttribute("src", $"/images/icons/{SpeciesGroupName}.svg");
+            }
 
             base.Process(context, output);
         }

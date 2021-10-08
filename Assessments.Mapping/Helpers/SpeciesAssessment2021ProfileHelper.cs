@@ -292,11 +292,17 @@ namespace Assessments.Mapping.Helpers
 
         internal static string RemoveAssessmentArea(string src)
         {
-            return src.Replace("Amfibier, reptiler", "Amfibier og reptiler")
+            return ReMapSpeciesGroup(src)
                 .Replace("(Svalbard)", string.Empty, StringComparison.InvariantCultureIgnoreCase)
                 .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
         }
-
+        internal static string ReMapSpeciesGroup(string mainHabitat) => mainHabitat switch
+        {
+            "Amfibier, reptiler" => "Amfibier og reptiler",
+            "Hydroider" => "Hydrozoer",
+            _ => mainHabitat
+        };
+    
         /// <summary>
         /// Mapper om bl.a. 2010 id'er og beskrivelser over til 2015 versjonen av påvirkningsfaktorer - samt fixer eldre tekster som er blitt endret
         /// </summary>

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Assessments.Mapping.Helpers;
 using Assessments.Mapping.Models.Species;
+using Assessments.Shared.Helpers;
 using AutoMapper;
 
 namespace Assessments.Mapping

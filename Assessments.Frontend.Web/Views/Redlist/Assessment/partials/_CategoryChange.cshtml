@@ -57,7 +57,7 @@
             <h3>Årsak til endring av kategori</h3>
             <p>
                 Kategorien for denne arten har endret seg fra @previous_category til @current_category siden Rødlista @which_redlist.
-                Endringen kommer på grunnlag av: @Model.ReasonCategoryChange
+                Endringen kommer på grunnlag av <span style="text-transform:lowercase">@Model.ReasonCategoryChange.Description()</span>
             </p>
 
         }

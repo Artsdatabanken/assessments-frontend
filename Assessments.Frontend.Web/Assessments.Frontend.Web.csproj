@@ -10,9 +10,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Views\Redlist\Assessment\partials\criteria\**" />
 	  <Compile Remove="Views\Test\**" />
+	  <Content Remove="Views\Redlist\Assessment\partials\criteria\**" />
 	  <Content Remove="Views\Test\**" />
+	  <EmbeddedResource Remove="Views\Redlist\Assessment\partials\criteria\**" />
 	  <EmbeddedResource Remove="Views\Test\**" />
+	  <None Remove="Views\Redlist\Assessment\partials\criteria\**" />
 	  <None Remove="Views\Test\**" />
 	</ItemGroup>
 
@@ -47,10 +51,6 @@
 
 	<ItemGroup>
 	  <_ContentIncludedByDefault Remove="Views\Redlist\Assessment\partials\_ImpactFactors.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Views\Redlist\Assessment\partials\criteria\" />
 	</ItemGroup>
 	
 </Project>

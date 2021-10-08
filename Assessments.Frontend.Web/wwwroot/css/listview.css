@@ -62,7 +62,7 @@ td {
 }
 
 /* View control bar */
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 750px) {
     .controls {
         display: flex;
         justify-content: space-between;

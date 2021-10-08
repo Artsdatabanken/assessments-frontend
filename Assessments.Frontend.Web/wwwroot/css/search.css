@@ -3,14 +3,17 @@
 
 /* Container div for anything search*/
 .list-search {
-    margin-top: 10px;
-    margin-bottom: 0;
-    border-bottom: 1px solid lightgray;
+    text-align: center;
     padding: 10px 0;
-    background: lightgrey;
+    background: #f3f3f3;
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
+}
+
+.list-search h2 {
+    color: #3d3b3a;
+    padding:0;
 }
 
 /* Container div for input + button*/
@@ -20,6 +23,8 @@
     vertical-align: top;
     margin: 0;
     height: 45px;
+    width: 385px;
+    margin:auto;
 }
 
 /* Input field */

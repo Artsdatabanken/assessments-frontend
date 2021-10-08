@@ -14,13 +14,14 @@
 @functions{
     void InputTag(string id, string _class, string name, string[] elements, string value)
     {
-        <input id=@id type="checkbox" class=@_class name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)/> 
+        <input id=@id type="checkbox" class=@_class name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
+
     }
     void InputTag(string name, string[] elements, string value)
     {
         InputTag(name, "submitOnclick", name, elements, value);
     }
-        
+
 
     string GetActiveFiltersCount()
     {
@@ -33,8 +34,8 @@
         count += Model.EuroPop.Length;
         count += Model.Criterias.Length;
         if (Model.PresumedExtinct)
-            count ++;
-        
+            count++;
+
         if (count > 0)
             return $"{count}";
         return String.Empty;
@@ -82,279 +83,270 @@
     }
 }
 
-<div class="search-and-filter">
 
+<div class="controls">
+    <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
+    <div class="controls_right">
+        <button class="toggle_filter" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
+            <span class="filternumber">@GetActiveFiltersCount()</span>
+            <span class="material-icons">
+                filter_list
+            </span>Filter
+        </button>
+    </div>
+</div>
+
+<div class="listwrapper">
+    <div class="search-and-filter">
         @{ InputTag("initial_check", "collapse_checkbox", "IsCheck", Model.IsCheck, "Visited"); }
         <!-- View controls -->
-        <div class="controls">
-            <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
-            <div class="controls_right">
-                <button class="toggle_filter" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-                    <span class="filternumber">@GetActiveFiltersCount()</span>
-                    <span class="material-icons">
-                        filter_list
-                    </span>Filter
+        <div id="filters">
+            <div id="filter_modal_background">
+                <div id="filters_scrollable">
+                    <div class="filter_groups">
+                        <h3 class="toggle_filter">Filter <span class="filternumber">@GetActiveFiltersCount()</span></h3>
+                        <div class="close_reset_filter">
+                            <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
+                                <span class="material-icons">close</span>
+                            </button>
+                        </div>
 
-                </button>
-            </div>
-        </div>
+                        <ul>
+                            <li class="filter_group">
+                                @{ InputTag("show_area", "collapse_checkbox", "IsCheck", Model.IsCheck, "Area");}
+                                <button name="områdefiltre" class="list_header" id="list_header_area" onclick="collapse('show_area')" type="button">
+                                    <span class="list_header_text">
+                                        @SearchAndFilter.SearchChooseArea
+                                        <span class="filternumber">@GetActiveFilters("Area")</span>
+                                    </span>
 
-        <div>
+                                </button>
+                                <div class="filter_area">
+                                    <ul>
+                                        @foreach (var area in AllAreas)
+                                        {
+                                            <li class="checkbox" style="margin-top: 0;">
+                                                <label>
+                                                    @{ InputTag("Area", Model.Area, area.Value);} @area.Key
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
 
+                            <li class="filter_group">
+                                @{ InputTag("show_category", "collapse_checkbox", "IsCheck", Model.IsCheck, "Category");}
+                                <button name="kategorifiltre" class="list_header" id="list_header_category" onclick="collapse('show_category')" type="button">
+                                    <span class="list_header_text">
+                                        @SearchAndFilter.SearchChooseCategory
+                                        <span class="filternumber">@GetActiveFilters("Category")</span>
+                                    </span>
 
-            <div id="filters">
-                <div id="filter_modal_background">
-                    <div id="filters_scrollable">
-                        <div class="filter_groups">
-                            <h3 class="toggle_filter">Filter <span class="filternumber">@GetActiveFiltersCount()</span></h3>
-                            <div class="close_reset_filter">
+                                </button>
+                                <div class="filter_category">
+                                    <ul>
+                                        @foreach (var category in AllCategories)
+                                        {
+                                            <li class="checkbox" style="margin-top: 0;">
+                                                <label>
+                                                    @{ InputTag("Category", Model.Category, category);} @category
+                                                </label>
+                                            </li>
+                                        }
+                                        <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" asp-for="Redlisted" class="submitOnclick" />@SearchAndFilter.ChooseRedlisted
+                                            </label>
+                                        </li>
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" asp-for="Endangered" class="submitOnclick" />@SearchAndFilter.ChooseEndangered
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
 
-                                <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
+                            <li class="filter_group">
+                                @{ InputTag("show_taxon_rank", "collapse_checkbox", "IsCheck", Model.IsCheck, "TaxonRank");}
+                                <button name="'taksonomisk nivå'-filtre" class="list_header" id="list_header_taxon_rank" onclick="collapse('show_taxon_rank')" type="button">
+                                    <span class="list_header_text">
+                                        @SearchAndFilter.SearchFilterTaxonRank
+                                        <span class="filternumber">@GetActiveFilters("TaxonRank")</span>
+                                    </span>
+
+                                </button>
+                                <div class="filter_taxon_rank">
+                                    <ul>
+                                        @foreach (var rank in AllTaxonRanks)
+                                        {
+                                            <li class="checkbox" style="margin-top: 0;">
+                                                <label>
+                                                    @{ InputTag("TaxonRank", Model.TaxonRank, rank.Key);} @rank.Value
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="filter_group">
+                                @{ InputTag("show_species_groups", "collapse_checkbox", "IsCheck", Model.IsCheck, "SpeciesGroups");}
+                                <button name="artsgruppefiltre" class="list_header" id="list_header_species_groups" onclick="collapse('show_species_groups')" type="button">
+                                    <span class="list_header_text">
+                                        Artsgruppe
+                                        <span class="filternumber">@GetActiveFilters("SpeciesGroups")</span>
+                                    </span>
+
+                                </button>
+                                <div class="filter_species_groups">
+                                    <ul>
+                                        @foreach (var species in AllSpeciesGroups)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species.Key); } @species.Key
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="filter_group">
+                                @{ InputTag("show_habitat", "collapse_checkbox", "IsCheck", Model.IsCheck, "Habitat");}
+                                <button name="hovedhabitatfiltre" class="list_header" id="list_header_habitat" onclick="collapse('show_habitat')" type="button">
+                                    <span class="list_header_text">
+                                        Hovedhabitat
+                                        <span class="filternumber">@GetActiveFilters("Habitats")</span>
+                                    </span>
+
+                                </button>
+                                <div class="filter_habitat">
+                                    <ul>
+                                        @foreach (var habitat in AllHabitats)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    @{ InputTag("Habitats", Model.Habitats, habitat.Key); } @habitat.Value["shortname"]
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="filter_group">
+                                @{ InputTag("show_region", "collapse_checkbox", "IsCheck", Model.IsCheck, "Region");}
+                                <button name="regionfiltre" class="list_header" id="list_header_region" onclick="collapse('show_region')" type="button">
+                                    <span class="list_header_text">
+                                        Regioner og havområder
+                                        <span class="filternumber">@GetActiveFilters("Regions")</span>
+                                    </span>
+
+                                </button>
+                                <div class="filter_region">
+                                    <ul>
+                                        @foreach (var region in AllRegions)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    @{ InputTag("Regions", Model.Regions, region.Key);} @region.Value
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="filter_group">
+                                @{ InputTag("show_european_population", "collapse_checkbox", "IsCheck", Model.IsCheck, "EuroPop");}
+                                <button name="'andel av europeisk populasjon'-filtre" class="list_header" id="list_header_european_population" onclick="collapse('show_european_population')" type="button">
+                                    <span class="list_header_text">
+                                        Andel av europeisk populasjon
+                                        <span class="filternumber">@GetActiveFilters("EuroPop")</span>
+                                    </span>
+                                </button>
+                                <div class="filter_european_population">
+                                    <ul>
+                                        @foreach (var pop in AllEuroPop)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    @{ InputTag("EuroPop", Model.EuroPop, pop.Key);} @pop.Value
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="filter_group">
+                                @{ InputTag("show_criteria", "collapse_checkbox", "IsCheck", Model.IsCheck, "Criteria");}
+                                <button name="kriteriefiltre" class="list_header" id="list_header_criteria" onclick="collapse('show_criteria')" type="button">
+                                    <span class="list_header_text">
+                                        @SearchAndFilter.SearchChooseCriteria
+                                        <span class="filternumber">@GetActiveFilters("Criterias")</span>
+                                    </span>
+
+                                </button>
+                                <div class="filter_criteria">
+                                    <ul>
+                                        @foreach (var criteria in AllCriterias)
+                                        {
+                                            <li class="checkbox">
+                                                <label>
+                                                    @{ InputTag("Criterias", Model.Criterias, criteria.Key);} @criteria.Key - @criteria.Value
+                                                </label>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="filter_group">
+                                @{ InputTag("show_extinct", "collapse_checkbox", "IsCheck", Model.IsCheck, "Extinct");}
+                                <button name="'trolig utdødd'-filter" class="list_header" id="list_header_extinct" onclick="collapse('show_extinct')" type="button">
+                                    <span class="list_header_text">
+                                        Trolig utdødd
+                                        <span class="filternumber">@GetActiveFilters("PresumedExtinct")</span>
+                                    </span>
+                                </button>
+                                <div class="filter_extinct">
+                                    <ul>
+                                        <li class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="submitOnclick" asp-for="PresumedExtinct" />Trolig utdødd
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <div class="filters_bottom">
+                                <button class="close_filters" name="Lukk filtre" type="button" onclick="closeFilters()">
+                                    Avslutt
                                     <span class="material-icons">close</span>
                                 </button>
 
-                            </div>
 
 
-                            <ul>
-                                <li class="filter_group">
-                                    @{ InputTag("show_area", "collapse_checkbox", "IsCheck", Model.IsCheck, "Area");}
-                                    <button name="områdefiltre" class="list_header" id="list_header_area" onclick="collapse('show_area')" type="button">
-                                        <span class="list_header_text">
-                                            @SearchAndFilter.SearchChooseArea
-                                            <span class="filternumber">@GetActiveFilters("Area")</span>
-                                        </span>
-
-                                    </button>
-                                    <div class="filter_area">
-                                        <ul>
-                                            @foreach (var area in AllAreas)
-                                            {
-                                                <li class="checkbox" style="margin-top: 0;">
-                                                    <label>
-                                                        @{ InputTag("Area", Model.Area, area.Value);} @area.Key
-                                                    </label>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="filter_group">
-                                    @{ InputTag("show_category", "collapse_checkbox", "IsCheck", Model.IsCheck, "Category");}
-                                    <button name="kategorifiltre" class="list_header" id="list_header_category" onclick="collapse('show_category')" type="button">
-                                        <span class="list_header_text">
-                                            @SearchAndFilter.SearchChooseCategory
-                                            <span class="filternumber">@GetActiveFilters("Category")</span>
-                                        </span>
-
-                                    </button>
-                                    <div class="filter_category">
-                                        <ul>
-                                            @foreach (var category in AllCategories)
-                                            {
-                                                <li class="checkbox" style="margin-top: 0;">
-                                                    <label>
-                                                        @{ InputTag("Category", Model.Category, category);} @category
-                                                    </label>
-                                                </li>
-                                            }
-                                            <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
-                                            <li class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" asp-for="Redlisted" class="submitOnclick" />@SearchAndFilter.ChooseRedlisted
-                                                </label>
-                                            </li>
-                                            <li class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" asp-for="Endangered" class="submitOnclick" />@SearchAndFilter.ChooseEndangered
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="filter_group">
-                                    @{ InputTag("show_taxon_rank", "collapse_checkbox", "IsCheck", Model.IsCheck, "TaxonRank");}
-                                    <button name="'taksonomisk nivå'-filtre" class="list_header" id="list_header_taxon_rank" onclick="collapse('show_taxon_rank')" type="button">
-                                        <span class="list_header_text">
-                                            @SearchAndFilter.SearchFilterTaxonRank
-                                            <span class="filternumber">@GetActiveFilters("TaxonRank")</span>
-                                        </span>
-
-                                    </button>
-                                    <div class="filter_taxon_rank">
-                                        <ul>
-                                            @foreach (var rank in AllTaxonRanks)
-                                            {
-                                                <li class="checkbox" style="margin-top: 0;">
-                                                    <label>
-                                                        @{ InputTag("TaxonRank", Model.TaxonRank, rank.Key);} @rank.Value
-                                                    </label>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="filter_group">
-                                    @{ InputTag("show_species_groups", "collapse_checkbox", "IsCheck", Model.IsCheck, "SpeciesGroups");}
-                                    <button name="artsgruppefiltre" class="list_header" id="list_header_species_groups" onclick="collapse('show_species_groups')" type="button">
-                                        <span class="list_header_text">
-                                            Artsgruppe
-                                            <span class="filternumber">@GetActiveFilters("SpeciesGroups")</span>
-                                        </span>
-
-                                    </button>
-                                    <div class="filter_species_groups">
-                                        <ul>
-                                            @foreach (var species in AllSpeciesGroups)
-                                            {
-                                                <li class="checkbox">
-                                                    <label>
-                                                        @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species.Key); } @species.Key
-                                                    </label>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="filter_group">
-                                    @{ InputTag("show_habitat", "collapse_checkbox", "IsCheck", Model.IsCheck, "Habitat");}
-                                    <button name="hovedhabitatfiltre" class="list_header" id="list_header_habitat" onclick="collapse('show_habitat')" type="button">
-                                        <span class="list_header_text">
-                                            Hovedhabitat
-                                            <span class="filternumber">@GetActiveFilters("Habitats")</span>
-                                        </span>
-
-                                    </button>
-                                    <div class="filter_habitat">
-                                        <ul>
-                                            @foreach (var habitat in AllHabitats)
-                                            {
-                                                <li class="checkbox">
-                                                    <label>
-                                                        @{ InputTag("Habitats", Model.Habitats, habitat.Key); } @habitat.Value["shortname"]
-                                                    </label>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="filter_group">
-                                    @{ InputTag("show_region", "collapse_checkbox", "IsCheck", Model.IsCheck, "Region");}
-                                    <button name="regionfiltre" class="list_header" id="list_header_region" onclick="collapse('show_region')" type="button">
-                                        <span class="list_header_text">
-                                            Regioner og havområder
-                                            <span class="filternumber">@GetActiveFilters("Regions")</span>
-                                        </span>
-
-                                    </button>
-                                    <div class="filter_region">
-                                        <ul>
-                                            @foreach (var region in AllRegions)
-                                            {
-                                                <li class="checkbox">
-                                                    <label>
-                                                        @{ InputTag("Regions", Model.Regions, region.Key);} @region.Value
-                                                    </label>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="filter_group">
-                                    @{ InputTag("show_european_population", "collapse_checkbox", "IsCheck", Model.IsCheck, "EuroPop");}
-                                    <button name="'andel av europeisk populasjon'-filtre" class="list_header" id="list_header_european_population" onclick="collapse('show_european_population')" type="button">
-                                        <span class="list_header_text">
-                                            Andel av europeisk populasjon
-                                            <span class="filternumber">@GetActiveFilters("EuroPop")</span>
-                                        </span>
-                                    </button>
-                                    <div class="filter_european_population">
-                                        <ul>
-                                            @foreach (var pop in AllEuroPop)
-                                            {
-                                                <li class="checkbox">
-                                                    <label>
-                                                        @{ InputTag("EuroPop", Model.EuroPop, pop.Key);} @pop.Value
-                                                    </label>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="filter_group">
-                                    @{ InputTag("show_criteria", "collapse_checkbox", "IsCheck", Model.IsCheck, "Criteria");}
-                                    <button name="kriteriefiltre" class="list_header" id="list_header_criteria" onclick="collapse('show_criteria')" type="button">
-                                        <span class="list_header_text">
-                                            @SearchAndFilter.SearchChooseCriteria
-                                            <span class="filternumber">@GetActiveFilters("Criterias")</span>
-                                        </span>
-
-                                    </button>
-                                    <div class="filter_criteria">
-                                        <ul>
-                                            @foreach (var criteria in AllCriterias)
-                                            {
-                                                <li class="checkbox">
-                                                    <label>
-                                                        @{ InputTag("Criterias", Model.Criterias, criteria.Key);} @criteria.Key - @criteria.Value
-                                                    </label>
-                                                </li>
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
-
-                                <li class="filter_group">
-                                    @{ InputTag("show_extinct", "collapse_checkbox", "IsCheck", Model.IsCheck, "Extinct");}
-                                    <button name="'trolig utdødd'-filter" class="list_header" id="list_header_extinct" onclick="collapse('show_extinct')" type="button">
-                                        <span class="list_header_text">
-                                            Trolig utdødd
-                                            <span class="filternumber">@GetActiveFilters("PresumedExtinct")</span>
-                                        </span>
-                                    </button>
-                                    <div class="filter_extinct">
-                                        <ul>
-                                            <li class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" class="submitOnclick" asp-for="PresumedExtinct" />Trolig utdødd
-                                                </label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <div class="filters_bottom">
-                                    <button class="close_filters" name="Lukk filtre" type="button" onclick="closeFilters()">
-                                        Avslutt
-                                        <span class="material-icons">close</span>
-                                    </button>
-
-
-
-                                    <a class="button" asp-controller="Redlist" asp-action="Index2021">
-                                        <span class="material-icons">delete</span> <span>@SearchAndFilter.ResetAllFilters </span>
-                                    </a>
-                                    <button class="hideonmobile" type="submit" name="Export" value="true" formtarget="_blank">
-                                        <span class="material-icons">file_download</span> Eksporter
-                                    </button>
-                                    <button id="submit_filters" name="Påfør filter" type="submit" class="primary">
-                                        <span class="material-icons">done</span> Påfør
-                                    </button>
-                                </div>
-                        </div>
-                        </ul>
-                    </div>
+                                <a class="button" asp-controller="Redlist" asp-action="Index2021">
+                                    <span class="material-icons">delete</span> <span>@SearchAndFilter.ResetAllFilters </span>
+                                </a>
+                                <button class="hideonmobile" type="submit" name="Export" value="true" formtarget="_blank">
+                                    <span class="material-icons">file_download</span> Eksporter
+                                </button>
+                                <button id="submit_filters" name="Påfør filter" type="submit" class="primary">
+                                    <span class="material-icons">done</span> Påfør
+                                </button>
+                            </div>                        
+                    </ul>
                 </div>
-
             </div>
-
         </div>
-
-    
+    </div>
+    <partial name="/Views/Redlist/List/partials/_View.cshtml" />
 </div>

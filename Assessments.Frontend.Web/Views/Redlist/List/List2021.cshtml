@@ -15,19 +15,10 @@
             @Model.Redlist2021ResultsCount
         </h3>
         <form asp-action="Index2021" method="get">
-
-            <!-- Search -->
-
             <partial name="/Views/Redlist/List/partials/_Search.cshtml" />
-
-            <div class="listwrapper">
-                <!-- FILTER FORM -->
+           
                 <partial name="/Views/Redlist/List/partials/_Filters.cshtml" />
-                <div id="viewselector" class="viewselector @Model.View">
-                    <partial name="/Views/Redlist/List/partials/_Graphs.cshtml" />
-                    <partial name="/Views/Redlist/List/partials/_ListView.cshtml" />
-                </div>
-            </div>
+            
         </form>
 
             <!-- Paginator buttons -->

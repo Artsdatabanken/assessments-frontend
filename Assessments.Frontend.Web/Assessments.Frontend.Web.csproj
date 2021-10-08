@@ -23,7 +23,7 @@
 	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.95.4" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.9" />
-		<PackageReference Include="Microsoft.OData.Client" Version="7.9.0" />
+		<PackageReference Include="Microsoft.OData.Client" Version="7.9.3" />
 		<PackageReference Include="Microsoft.OData.Core" Version="7.9.0" />
 		<PackageReference Include="Microsoft.OData.Edm" Version="7.9.0" />
 		<PackageReference Include="Microsoft.Spatial" Version="7.9.0" />

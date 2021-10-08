@@ -26,52 +26,59 @@
 <div class="page_section">
 
     <ul class="category_displayer">
-        <li class="category_rl start_line">
-            <div class="category_item  RE @setActive("RE", @Model.Category)">
-                RE <span>Regionalt utdødd</span>
+        <li class="@setActive("RE", @Model.Category)">
+            <div class="category_item  RE ">
+                <span>RE</span>
             </div>
-            <div class="topbar_label">Rødlistet</div>
+            <span>Regionalt utdødd</span>
         </li>
-        <li class="category_rl category_threatened start_line">
-            <div class="category_item CR  @setActive("CR", @Model.Category)">
-                CR <span>Kritisk truet</span>
+        <li class="@setActive("CR", @Model.Category)">
+            <div class="category_item CR  ">
+                <span>CR</span>
             </div>
-            <div class="bottombar_label">Truet</div>
+            <span>Kritisk truet</span>
         </li>
-        <li class="category_rl category_threatened">
-            <div class="category_item  EN @setActive("EN", @Model.Category)">
-                EN <span>Sterkt truet</span>
+        <li class="@setActive("EN", @Model.Category)">
+            <div class="category_item  EN ">
+                <span>EN</span>
             </div>
+            <span>Sterkt truet</span>
         </li>
-        <li class="category_rl category_threatened stop_line">
-            <div class="category_item  VU @setActive("VU", @Model.Category)">
-                VU <span>Sårbar</span>
+        <li class="@setActive("VU", @Model.Category)">
+            <div class="category_item  VU ">
+                <span>VU</span>
             </div>
+            <span>Sårbar</span>
         </li>
-        <li class="category_rl ">
-            <div class="category_item  NT @setActive("NT", @Model.Category)">
-                NT <span>Nær<br />truet</span>
+        <li class="@setActive("NT", @Model.Category) ">
+            <div class="category_item  NT">
+                <span>NT</span>
             </div>
+            <span>Nær<br />truet</span>
         </li>
-        <li class="category_rl stop_line">
-            <div class="category_item  DD @setActive("DD", @Model.Category)">
-                DD <span>Data- mangel</span>
+        <li class="@setActive("DD", @Model.Category)">
+            <div class="category_item  DD ">
+                <span>DD</span>
             </div>
+            <span>Data- mangel</span>
         </li>
-        <li>
-            <div class="category_item  LC @setActive("LC", @Model.Category)">
-                LC <span>Livs- kraftig</span>
+        <li class="@setActive("LC", @Model.Category)">
+            <div class="category_item  LC ">
+                <span>LC</span>
             </div>
+            <span>Livs- kraftig</span>
         </li>
-        <li>
-            <div class="category_item  NA @setActive("NA", @Model.Category)">
-                NA <span>Ikke egnet</span>
+        <li class="@setActive("NA", @Model.Category)">
+            <div class="category_item  NA">
+                <span>NA</span>
             </div>
+            <span>Ikke egnet</span>
         </li>
-        <li>
-            <div class="category_item  NE @setActive("NE", @Model.Category)">
-                NE <span>Ikke vurdert</span>
+        <li class="@setActive("NE", @Model.Category)">
+            <div class="category_item  NE ">
+                <span>NE</span>
             </div>
+            <span>Ikke vurdert</span>
         </li>
 
     </ul>

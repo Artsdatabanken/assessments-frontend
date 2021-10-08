@@ -8,7 +8,6 @@
     font-size: 0;
     max-width: 100%;
     position: relative;
-    display: flex;
     overflow-x:auto;
 }
 
@@ -16,7 +15,7 @@
     content: "";
     background: grey;
     position: absolute;
-    top: calc(50% - 10px);
+    top: calc(50% - 20px);
     right: 0;
     height: 5px;
     width: 100%;
@@ -24,39 +23,57 @@
 
 .category_displayer li {
     display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     margin: 0px;
     vertical-align: top;
-    padding: 0px;
-    padding-top:20px;
+    padding-top: 7px;
     padding-bottom:20px;
     margin-bottom:20px;
     height:auto;
     position: relative;
+    margin:3px;
+    width:40px;
 }
 
 .category_displayer .category_item {
-    height: 65px;
-    width: 65px;
-    padding: 5px;
-    padding-top: 2px;
+    height: 40px;
+    width: 40px;
     border-radius: 2px;
-    border: 5px solid transparent;
-    text-align: center;
-    font-size: 22px;
-    vertical-align: middle;
-    background-clip: padding-box;
+    margin:auto;
 }
 
 .category_displayer .category_item span {
+    margin: auto;
+    text-align: center;
+    font-size: 22px;
+    vertical-align: middle;
+    color: inherit;
+    line-height: 35px;
+}
+
+.category_displayer span {
     font-size: 8pt;
     display: block;
     line-height: 1;
     width: 100%;
-     
+    color:black;
+    text-align:center;
 }
-.category_item.active {
+
+.category_displayer li.active {
+    width: 55px;
+    padding-top:0;
+}
+
+.category_displayer li.active .category_item {
     border-color: black;
+    height: 55px;
+    width: 55px;
+}
+
+.category_displayer li.active .category_item span {
+    line-height: 55px;
+    font-size: 24pt;
 }
 
 @media only screen and (min-width: 651px) {

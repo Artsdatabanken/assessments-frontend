@@ -300,6 +300,7 @@ namespace Assessments.Mapping.Helpers
         {
             "Amfibier, reptiler" => "Amfibier og reptiler",
             "Hydroider" => "Hydrozoer",
+            "Maneter" => "Stormaneter",
             _ => mainHabitat
         };
     

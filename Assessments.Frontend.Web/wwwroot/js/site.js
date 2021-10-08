@@ -183,7 +183,8 @@ input[type=checkbox]:not(:checked)#show_european_population~.filter_european_pop
 input[type=checkbox]:not(:checked)#show_criteria~.filter_criteria,
 input[type=checkbox]:not(:checked)#show_habitat~.filter_habitat,
 input[type=checkbox]:not(:checked)#show_extinct~.filter_extinct,
-input[type=checkbox]:not(:checked)#show_species_groups~.filter_species_groups {
+input[type=checkbox]:not(:checked)#show_species_groups~.filter_species_groups,
+input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
     display: none;
 }
 
@@ -194,7 +195,8 @@ input[type=checkbox]:not(:checked)#show_species_groups~.filter_species_groups {
 .filter_criteria,
 .filter_extinct,
 .filter_habitat,
-.filter_species_groups {
+.filter_species_groups,
+.filter_taxon_rank {
     display: block;
 }
 `

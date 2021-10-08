@@ -29,11 +29,15 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
             viewModel ??= new RL2021ViewModel();
+
+
             // Pagination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
             var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+
+            ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks(query.Select(x => x.TaxonRank).Distinct().ToArray());
 
             // Søk
             string name = String.Empty;
@@ -85,6 +89,10 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
             }
+
+            // TaxonRank
+            if (viewModel.TaxonRank?.Any() == true)
+                query = query.Where(x => viewModel.TaxonRank.Contains(x.TaxonRank));
 
             // European population percentages
             ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;

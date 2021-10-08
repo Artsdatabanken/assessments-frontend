@@ -17,6 +17,7 @@ namespace Assessments.Frontend.Web.Models
             this.Regions = Array.Empty<string>();
             this.Habitats = Array.Empty<string>();
             this.SpeciesGroups = Array.Empty<string>();
+            this.TaxonRank = Array.Empty<string>();
         }
         public IPagedList<SpeciesAssessment2021> Redlist2021Results { get; set; }
         public bool Endangered { get; set; }
@@ -32,6 +33,7 @@ namespace Assessments.Frontend.Web.Models
         public string[] Habitats { get; set; }
         public string[] Regions { get; set; }
         public string[] SpeciesGroups { get; set; }
+        public string[] TaxonRank { get; set; }
         
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 

@@ -817,6 +817,8 @@
     width: 62px;
     height: 62px;
     display: inline-block;
+    margin-right: 5px;
+    padding-top: 10px;
 }
 
 .species_group_image img,

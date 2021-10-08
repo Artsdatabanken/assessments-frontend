@@ -14,6 +14,11 @@
     int region_total = Model.Statistics.Region.Sum(x => x.Value); // #of assesments with a criteria
     int region_max = Model.Statistics.Region.Values.DefaultIfEmpty(0).Max();
 
+    int impact_total = Model.Statistics.ImpactFactors.Sum(x => x.Value); // #of assesments with a criteria
+    int impact_max = Model.Statistics.ImpactFactors.Values.DefaultIfEmpty(0).Max();
+
+
+
     // OVERALL STATS - TODO. WHile waiting - use category, as it should be consistent with nr of assesments
     int total = category_total;
 
@@ -25,7 +30,7 @@
 
     Dictionary<string, Dictionary<string, object>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, object>>>();
 
-    
+
 
 
 
@@ -178,16 +183,37 @@
                 </span>
 
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="width:@percentage(@region_max, @getNumber(@key,@Model.Statistics.Region))">
+                    <div class="heightbar_indicator @key" style="width:@percentage(impact_max, @getNumber(@key,@Model.Statistics.Region))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.Region)</span>
                     </div>
                 </div>
-
-
-
             </div>
         }
     </div>
 
-    <p><br /></p><p><br /></p><p><br /></p><p><br /></p><p><br /></p>
+    <h3>Antall vurderinger per Påvirkningsfaktor</h3>
+
+    <p>
+        En vurdering kan inneholde mer enn en påvirkningsfaktorer, men de brukes kun på rødlistede arter. Den totale mengden påvirkningsfaktorer for utvalget er derfor @impact_total,
+        som vil si at hver vurdering i snitt har  @average(@total, @impact_total) faktorer.
+
+    </p>
+
+
+    <div class="down_graph greyscale">
+        @foreach (string key in Model.Statistics.ImpactFactors.Keys)
+        {
+            <div class="statelement">
+                <span class="statbox @key">
+                    @key
+                </span>
+
+                <div class="heightbar_blank">
+                    <div class="heightbar_indicator @key" style="width:@percentage(@region_max, @getNumber(@key,@Model.Statistics.ImpactFactors))">
+                        <span class="percent">@getNumber(@key, @Model.Statistics.ImpactFactors)</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

@@ -233,6 +233,25 @@ namespace Assessments.Frontend.Web.Controllers
                 Console.WriteLine(habitatNames[i] + ": " + habitatStats[habitatNames[i]].ToString());
             }
             */
+
+
+
+            // IMPACTFACTORS
+
+            var impactFactors = data.Select(x => x.ImpactFactors.Select(x => x.GroupingFactor).Distinct())
+                                .SelectMany(x => x)
+                                .GroupBy((x => x), (key, value) => new
+                                {
+                                    key = key,
+                                    value = value.Count()
+                                });
+
+            viewModel.Statistics.ImpactFactors = new Dictionary<string, int>();
+            
+            foreach (var item in impactFactors)
+            {
+                viewModel.Statistics.ImpactFactors.Add(item.key, item.value);
+            }
         }
 
         private static async Task<JObject> GetResource(string resourcePath)

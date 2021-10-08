@@ -694,5 +694,10 @@ namespace Assessments.Mapping.Helpers
             }
             return result.ToArray();
         }
+
+        public static string Capitalize(string str)
+        {
+            return char.ToUpper(str[0]) + str.Substring(1);
+        }
     }
 }

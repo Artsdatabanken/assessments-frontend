@@ -8,7 +8,7 @@
     var AllRegions = ViewBag.AllRegions;
     Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
     Dictionary<string, Dictionary<string, string>> AllSpeciesGroups = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
-
+    var AllTaxonRanks = ViewBag.AllTaxonRanks;
 }
 
 @functions{
@@ -170,6 +170,29 @@
                                                     <input type="checkbox" asp-for="Endangered" class="submitOnclick" />@SearchAndFilter.ChooseEndangered
                                                 </label>
                                             </li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                                <li class="filter_group">
+                                    @{ InputTag("show_taxon_rank", "collapse_checkbox", "IsCheck", Model.IsCheck, "TaxonRank");}
+                                    <button name="'taksonomisk nivå'-filtre" class="list_header" id="list_header_taxon_rank" onclick="collapse('show_taxon_rank')" type="button">
+                                        <span class="list_header_text">
+                                            @SearchAndFilter.SearchFilterTaxonRank
+                                            <span class="filternumber">@GetActiveFilters("TaxonRank")</span>
+                                        </span>
+
+                                    </button>
+                                    <div class="filter_taxon_rank">
+                                        <ul>
+                                            @foreach (var rank in AllTaxonRanks)
+                                            {
+                                                <li class="checkbox" style="margin-top: 0;">
+                                                    <label>
+                                                        @{ InputTag("TaxonRank", Model.TaxonRank, rank.Key);} @rank.Value
+                                                    </label>
+                                                </li>
+                                            }
                                         </ul>
                                     </div>
                                 </li>

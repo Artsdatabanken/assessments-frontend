@@ -137,7 +137,7 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.TaxonomicHistory, opt => opt.MapFrom(src => src.TaxonomicHistory))
 
-                .ForMember(dest => dest.TaxonRank, opt => opt.MapFrom(src => src.TaxonRank))
+                .ForMember(dest => dest.TaxonRank, opt => opt.MapFrom(src => Helpers.SpeciesAssessment2021ProfileHelper.Capitalize(src.TaxonRank)))
 
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.TroligUtdodd))
                 .ForMember(dest => dest.RationaleRegionallyExtinct, opt => opt.MapFrom(src => src.UtdoddINorgeRE))

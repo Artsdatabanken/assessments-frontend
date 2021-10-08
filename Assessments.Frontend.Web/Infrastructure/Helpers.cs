@@ -83,6 +83,17 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
             return selectedPercenteges.ToArray();
         }
+
+        public static Dictionary<string, string> getAllTaxonRanks(string[] ranks)
+        {
+            string[] displayNames = new string[] { "Art", "Underart/varietet" };
+            Dictionary<string, string> taxonRanks = new Dictionary<string, string>();
+            for (int i = 0; i < ranks.Length; i++)
+            {
+                taxonRanks.Add(ranks[i], displayNames[i]);
+            }
+            return taxonRanks;
+        }
     }
 
     public static class Constants
@@ -222,6 +233,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string SearchChooseCriteria = "Kriterier";
             public const string SearchChooseSpeciesGroup = "Artsgruppe";
             public const string SearchFilterSpecies = "Søk art/slekt";
+            public const string SearchFilterTaxonRank = "Taksonomisk nivå";
         }
     }
 

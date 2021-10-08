@@ -1,5 +1,5 @@
 
-name: .NET Core
+name: Feature branches .NET Core
 
 on:
   push:

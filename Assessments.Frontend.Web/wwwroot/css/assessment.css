@@ -444,44 +444,14 @@
     display: block;
 }
 /* EXPERT Assessment */
-.expert_Assessment h3,
-.expert_Assessment p {
-    background: #f8f7f7;
-    padding: 10px;
-    margin: 0;
+.expert_Assessment h3 {
+    font-size: 12pt;
+    color: black;
+    font-family: inherit;
+    font-weight: bold;
+    margin: auto;
+    padding: 0;
 }
-
-
-.expert_Assessment p:first-child:before,
-.expert_Assessment p:last-child:after {
-    content: "\“\a";
-    font-size: 70pt;
-    height: 70px;
-    font-family: 'Times New Roman';
-    color: #929292;
-    display: block;
-}
-
-
-.expert_Assessment p:last-child:after {
-    text-align:right;
-    content: "\” ";
-}
-
-.expert_text{
-    max-height:1000px;
-    overflow-y:auto;
-    display:block;
-    padding:0;
-    margin:0;
-}
-
-.quote_by{
-    display:inline-block;
-    width:100%;
-}
-
-
 
 /* REFERENCES */
 .reference {

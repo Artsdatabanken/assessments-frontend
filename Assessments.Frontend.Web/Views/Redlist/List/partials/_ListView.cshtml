@@ -20,13 +20,12 @@
 
     <ul class="redlist" id="redlist">
         <li class="listheader" id="listheader">
-            <span class="allsize">Kategori</span>
-
             <span class="fullsize">Artsnavn</span>
             <span class="fullsize">Populærnavn</span>
             <span class="mobile">Art</span>
-
             <span class="allsize">Artsgruppe</span>
+            <span class="allsize">Område</span>
+            <span class="allsize">Kategori</span>
 
         </li>
 
@@ -40,35 +39,47 @@
                         // Makes it very strange and overflowy in grid view.
                     }
 
-                    <span class="element_category">
-                        <span class="@item.Category.Substring(0,2) category_tag">@item.Category</span>
-                    </span>
+
+                    <div class="element_icon">
+                        @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
+                        {
+                            <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
+                        }
+                    </div>
+
 
                     <span class="element_species">
                         <span class="element_name">@item.ScientificName</span>
                         <span class="element_popular_name">@Capitalize(item.PopularName)</span>
-                        <span class="element_area mobile">
-                            @if (@item.AssessmentArea == "N")
-                            {
-                                <span> Norge </span>
-                            }
-                            else if (@item.AssessmentArea == "S")
-                            {
-                                <span>Svalbard</span>
-                            }
-
-                        </span>
                     </span>
 
 
                     <span class="element_speciesgroup">
                         <span class="element_group">@item.SpeciesGroup</span>
-                        <div class="element_icon">
-                            @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
-                            {
-                                <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
-                            }
-                        </div>
+                    </span>
+                    <span class="element_area">
+                        @if (@item.AssessmentArea == "N")
+                        {
+                            <span> Norge </span>
+                        }
+                        else if (@item.AssessmentArea == "S")
+                        {
+                            <span>Svalbard</span>
+                        }
+                    </span>
+
+
+                    <span class="category_element">
+
+                        @if (!string.IsNullOrEmpty(item.Category))
+                        {
+                            @ViewBag.categories[item.Category.Substring(0, 2)]["presentationstring"];
+                        }
+                    </span>
+                    <span class="category_element">
+
+                        <span class="@item.Category.Substring(0,2) category_tag">@item.Category</span>
+
                     </span>
 
                 </a>

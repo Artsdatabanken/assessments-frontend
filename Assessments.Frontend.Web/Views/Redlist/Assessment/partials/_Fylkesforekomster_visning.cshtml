@@ -38,7 +38,7 @@
     <div class="region_distributions">
 
         <div class="regionlist @map_type">
-            @foreach (var region in Model.RegionOccurrences)
+            @foreach (var region in Model.RegionOccurrences.OrderBy(x => Helpers.SortedRegions().IndexOf(x.Fylke)).Reverse())
             {
                 <span class="region">
                     <b>@region.Fylke</b>

@@ -98,36 +98,31 @@
 
 <div class="listwrapper">
     <div class="search-and-filter">
-        @{ InputTag("initial_check", "collapse_checkbox", "IsCheck", Model.IsCheck, "Visited");}
+        @{ InputTag("initial_check", "collapse_checkbox", "IsCheck", Model.IsCheck, "Visited");}
         <!-- View controls -->
         <div id="filters">
             <div id="filter_modal_background">
                 <div id="filters_scrollable">
                     <div class="filter_groups">
-
                         <h3 class="toggle_filter filter_header">
                             <span class="material-icons">
                                 filter_list
                             </span>
-                            <span>Filter</span>
-                            
+                            <span>Filter</span>                            
                             @if (!string.IsNullOrEmpty(@GetActiveFiltersCount()))
-                                {
+                            {
                             <a class="button tinybutton tertiary rightbutton" asp-controller="Redlist" asp-action="Index2021">
 
                                 <span>Fjern</span>
                                 <div class="filternumber"><span>@GetActiveFiltersCount()</span></div>
                             </a>
-                                }
-                            
+                            }                            
                         </h3>
                         <div class="close_reset_filter">
                             <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
                                 <span class="material-icons">close</span>
                             </button>
                         </div>
-
-
                         <ul>
                             <li class="filter_group">
                                 @{ InputTag("show_area", "collapse_checkbox", "IsCheck", Model.IsCheck, "Area");}
@@ -136,7 +131,6 @@
                                         @SearchAndFilter.SearchChooseArea
                                         <span class="filternumber">@GetActiveFilters("Area")</span>
                                     </span>
-
                                 </button>
                                 <div class="filter_area">
                                     <ul>
@@ -151,7 +145,6 @@
                                     </ul>
                                 </div>
                             </li>
-
                             <li class="filter_group">
                                 @{ InputTag("show_category", "collapse_checkbox", "IsCheck", Model.IsCheck, "Category");}
                                 <button name="kategorifiltre" class="list_header" id="list_header_category" onclick="collapse('show_category')" type="button">
@@ -355,7 +348,7 @@
                                     <span class="material-icons">done</span> Påfør
                                 </button>
                             </div>
-                    </div>
+                        </div>
                     </ul>
                 </div>
             </div>

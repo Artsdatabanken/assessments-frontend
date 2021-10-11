@@ -29,8 +29,12 @@ button.list_header {
 }
 
 h3.toggle_filter {
-        display: flex;
-        flex-direction: row;
+   display:block;
+}
+
+h3.togglefilter span{
+    display:inline;
+    justify-content:top;
 }
 
 .list_header {
@@ -44,11 +48,52 @@ button.close_filters {
 .filters_bottom {
     margin-top: 10px;
 }
+/*
+.filter_groups {
+    border: 1px solid lightgrey;
+}
+    */
+
+@media only screen and (min-width: 750px) {
+    .controls {
+        border-bottom: 1px solid #7f726b;
+        padding-top: 20px;
+        margin-left: 200px;
+    }
+
+    .controls button {
+        margin-bottom: -1px;
+        border: 1px solid #7f726b;
+        margin-left: 0;
+        margin-right: 4px;
+
+    }
+
+    .controls button.active {
+        border: 1px solid #7f726b;
+        color: black;
+        background: white;
+        border-bottom-color:white;
+    }
+
+    .controls button.active:first-child {
+        border-left-color: lightgray;
+    }
+
+    .filter_header {
+        padding: 0;
+        margin-top: 0;
+    }
+
+    .filter_header .material-icons{
+        padding-right: 5px;
+    }
+}
 
 @media only screen and (max-width: 750px) {
     .controls {
-        background-color: #fff;
         display: flex;
+        background-color: #f3f3f3;
         flex-wrap: nowrap;
         max-width: 100%;
     }
@@ -173,9 +218,6 @@ button.close_filters {
 
 .filter_group {
     margin-top: -1px;
-    border-left: 1px solid lightgray;
-    margin-right: 6px;
-    border-right: 1px solid lightgray;
 }
 
 .filter_group ul {
@@ -197,6 +239,8 @@ button.close_filters {
     border-right: 0;
     border-left: 0;
     margin: 0;
+    font-weight: normal;
+    text-transform: none;
 }
 
 .filter_group button:hover,
@@ -224,12 +268,44 @@ button.close_filters {
     position:relative;
 }
 
-.main .closebutton {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 0px;
-    border: 0px;
-    background: none;
-    border-radius:2px;
+.remove_number{
+    background: #147288;
+    color: white;
+    text-align:center;
+    width:20px;
+    height:20px;
+    display:inline-block;
+}
+
+.filternumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    background: #7f726b;
+    border-radius: 2px;
+    color: white;
+    font-size: 10pt;
+    width: 22px;
+    min-width: 22px;
+    height: 22px;
+    background-clip: padding-box;
+    background: #147288;
+    color: white;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+
+.filter_group button:hover .filternumber,
+.filter_group button:focus .filternumber,
+.filter_group button:active .filternumber {
+    color: #7f726b;
+    background: white;
+}
+
+.filternumber:empty {
+    display: none;
 }

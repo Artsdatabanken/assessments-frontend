@@ -19,6 +19,13 @@
     color: #de8608;
 }
 
+/* COLOURS ADDED AS ACCENT FOR THIS PROJECT */
+/* 
+    BUTTONBLUE #1d6171 
+    BACKGROUNDGREEN #147288
+*/
+
+
 /* Actual page css */
 
 h1 {
@@ -222,7 +229,13 @@ h1 {
     border-bottom:0;
 }
 
-.button,
+
+/* 
+    other stuff
+    Buttons on page have .main in front, to avoid clashing with footer and header code.
+*/
+
+.main .button,
 .main button {
     padding: 6px 12px;
     font-size: 15px;
@@ -244,19 +257,30 @@ h1 {
     margin: 2px;
     border: 1px solid #a6a6a6;
     margin-bottom: 10px;
-    text-decoration:none;
+    text-decoration: none;
+    text-transform:uppercase;
+    font-weight:bold;
 }
 
-.button .material-icons,
+
+.main .button .material-icons,
 .main button .material-icons {
     vertical-align: bottom;
     font-size: 16pt;
 }
 
-.button .main button.primary,
+.main .button.primary,
 .main button.primary {
     background: #3d3b3a;
     color: #fff;
+    border: none;
+}
+
+
+.main .button.tertiary,
+.main button.tertiary {
+    background: none;
+    color: #147288;
     border: none;
 }
 
@@ -272,4 +296,30 @@ h1 {
     background: #4c4a48;
     color: #fff;
     cursor:pointer;
+}
+
+.main .closebutton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 0px;
+    border: 0px;
+    background: none;
+    border-radius: 2px;
+}
+
+.main .tinybutton {
+    padding: 0;
+    font-size: 10pt;
+}
+
+.disabled {
+    color: #d7d7d7;
+    border-color: #d7d7d7;
+    background:none;
+}
+
+.rightbutton {
+    display: inline-block;
+    float: right;
 }

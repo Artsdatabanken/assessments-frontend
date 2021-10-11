@@ -3,14 +3,18 @@
 
 /* Container div for anything search*/
 .list-search {
-    margin-top: 10px;
-    margin-bottom: 0;
-    border-bottom: 1px solid lightgray;
+    text-align: center;
     padding: 10px 0;
-    background: lightgrey;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+    padding-bottom: 15px;
+    border-radius: 2px;
+    background: #d0e5de;
+}
+
+.list-search h2 {
+    color: #3d3b3a;
+    padding:0;
+    margin:5px;
 }
 
 /* Container div for input + button*/
@@ -20,12 +24,15 @@
     vertical-align: top;
     margin: 0;
     height: 45px;
+    width: 385px;
+    max-width:100%;
+    margin:auto;
 }
 
 /* Input field */
 .list-search input {
     display: inline-block;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid #3d3b3a;
     border-radius: 2px;
     box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px 0px inset;
     box-sizing: border-box;

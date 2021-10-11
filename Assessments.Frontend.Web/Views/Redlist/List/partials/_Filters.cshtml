@@ -98,7 +98,7 @@
 
 <div class="listwrapper">
     <div class="search-and-filter">
-        @{ InputTag("initial_check", "collapse_checkbox", "IsCheck", Model.IsCheck, "Visited"); }
+        @{ InputTag("initial_check", "collapse_checkbox", "IsCheck", Model.IsCheck, "Visited");}
         <!-- View controls -->
         <div id="filters">
             <div id="filter_modal_background">
@@ -108,8 +108,18 @@
                         <h3 class="toggle_filter filter_header">
                             <span class="material-icons">
                                 filter_list
-                            </span>Filter
-                            <span class="filternumber">@GetActiveFiltersCount()</span>
+                            </span>
+                            <span>Filter</span>
+                            
+                            @if (!string.IsNullOrEmpty(@GetActiveFiltersCount()))
+                                {
+                            <a class="button tinybutton tertiary rightbutton" asp-controller="Redlist" asp-action="Index2021">
+
+                                <span>Fjern</span>
+                                <div class="filternumber"><span>@GetActiveFiltersCount()</span></div>
+                            </a>
+                                }
+                            
                         </h3>
                         <div class="close_reset_filter">
                             <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
@@ -337,9 +347,7 @@
                                     <span class="material-icons">close</span>
                                 </button>
 
-                                <a class="button trashbutton" asp-controller="Redlist" asp-action="Index2021">
-                                    <span class="material-icons">delete</span> <span class="hidetext">@SearchAndFilter.ResetAllFilters </span>
-                                </a>
+
                                 <button class="hideonmobile tertiary" type="submit" name="Export" value="true" formtarget="_blank">
                                     <span class="material-icons">file_download</span> Eksporter
                                 </button>

@@ -42,14 +42,21 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Søk
             string name = String.Empty;
+
             if (!string.IsNullOrEmpty(viewModel.Name))
+            {
                 name = viewModel.Name.Trim().ToLower();
-                query = query.Where(x => x.ScientificName.ToLower().Contains(name) ||
-                x.PopularName.ToLower().Contains(name) ||
-                x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||
-                x.SpeciesGroup.ToLower().Contains(name))
-                .OrderByDescending(x => x.PopularName.ToLower() == name ||
-                x.ScientificName.ToLower() == name);
+                string[] speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
+
+                query = query.Where(x => 
+                    x.ScientificName.ToLower().Contains(name) ||                            // Match on scientific name.
+                    speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
+                    x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
+                    x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
+                    x.SpeciesGroup.ToLower().Contains(name))                                // Match on species group.
+                    .OrderByDescending(x => x.PopularName.ToLower() == name ||              // Exact match on populatname or by
+                    x.ScientificName.ToLower() == name);                                    // exact match on scientific name is sorted first.
+            }
 
             // Filter
 

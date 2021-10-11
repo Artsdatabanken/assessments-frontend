@@ -75,10 +75,6 @@ td {
 
 /* REDLIST VIEW */
 
-.redlist{
-    border-right:1px solid lightgrey;
-}
-
 .current_view {
     background-color: lightgreen;
     border: 0;
@@ -93,13 +89,18 @@ td {
     padding-bottom: 20px;
 }
 
+
 .search-and-filter {
     box-sizing: border-box;
-    margin-right: 15px;
-    max-width: 220px;
-    border-right: 1px solid #dadada;
+    max-width: 200px;
+    width: 200px;
+    /*
+        margin-right: 15px;
+        border-right: 1px solid #dadada;
+    */
     padding: 5px;
     margin-top: -1px;
+    flex: none;
 }
 
 .filter {
@@ -196,8 +197,11 @@ li a span.element_icon {
     padding: 0;
 }
 
-.viewselector{
-    width:100%;
+.viewselector {
+    width: 100%;
+    border-left: 1px solid lightgrey;
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
 

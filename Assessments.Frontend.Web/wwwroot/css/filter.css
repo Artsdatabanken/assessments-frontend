@@ -44,11 +44,11 @@ button.close_filters {
 .filters_bottom {
     margin-top: 10px;
 }
-
+/*
 .filter_groups {
     border: 1px solid lightgrey;
 }
-
+    */
 
 @media only screen and (min-width: 750px) {
     .controls {
@@ -60,6 +60,9 @@ button.close_filters {
     .controls button {
         margin-bottom: -1px;
         border: 1px solid #7f726b;
+        margin-left: 0;
+        margin-right: 4px;
+
     }
 
     .controls button.active {
@@ -69,6 +72,18 @@ button.close_filters {
         border-bottom-color:white;
     }
 
+    .controls button.active:first-child {
+        border-left-color: lightgray;
+    }
+
+    .filter_header {
+        padding: 0;
+        margin-top: 0;
+    }
+
+    .filter_header .material-icons{
+        padding-right: 5px;
+    }
 }
 
 @media only screen and (max-width: 750px) {
@@ -220,6 +235,8 @@ button.close_filters {
     border-right: 0;
     border-left: 0;
     margin: 0;
+    font-weight: normal;
+    text-transform: none;
 }
 
 .filter_group button:hover,
@@ -247,12 +264,3 @@ button.close_filters {
     position:relative;
 }
 
-.main .closebutton {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 0px;
-    border: 0px;
-    background: none;
-    border-radius:2px;
-}

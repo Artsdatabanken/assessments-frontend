@@ -104,7 +104,13 @@
             <div id="filter_modal_background">
                 <div id="filters_scrollable">
                     <div class="filter_groups">
-                        <h3 class="toggle_filter">Filter <span class="filternumber">@GetActiveFiltersCount()</span></h3>
+
+                        <h3 class="toggle_filter filter_header">
+                            <span class="material-icons">
+                                filter_list
+                            </span>Filter
+                            <span class="filternumber">@GetActiveFiltersCount()</span>
+                        </h3>
                         <div class="close_reset_filter">
                             <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
                                 <span class="material-icons">close</span>
@@ -331,12 +337,10 @@
                                     <span class="material-icons">close</span>
                                 </button>
 
-
-
-                                <a class="button" asp-controller="Redlist" asp-action="Index2021">
-                                    <span class="material-icons">delete</span> <span>@SearchAndFilter.ResetAllFilters </span>
+                                <a class="button trashbutton" asp-controller="Redlist" asp-action="Index2021">
+                                    <span class="material-icons">delete</span> <span class="hidetext">@SearchAndFilter.ResetAllFilters </span>
                                 </a>
-                                <button class="hideonmobile" type="submit" name="Export" value="true" formtarget="_blank">
+                                <button class="hideonmobile tertiary" type="submit" name="Export" value="true" formtarget="_blank">
                                     <span class="material-icons">file_download</span> Eksporter
                                 </button>
                                 <button id="submit_filters" name="Påfør filter" type="submit" class="primary">

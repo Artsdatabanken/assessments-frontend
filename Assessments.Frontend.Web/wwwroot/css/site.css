@@ -244,8 +244,11 @@ h1 {
     margin: 2px;
     border: 1px solid #a6a6a6;
     margin-bottom: 10px;
-    text-decoration:none;
+    text-decoration: none;
+    text-transform:uppercase;
+    font-weight:bold;
 }
+
 
 .button .material-icons,
 .main button .material-icons {
@@ -257,6 +260,13 @@ h1 {
 .main button.primary {
     background: #3d3b3a;
     color: #fff;
+    border: none;
+}
+
+.button .main button.tertiary,
+.main button.tertiary {
+    background: none;
+    color: #7f726b;
     border: none;
 }
 
@@ -272,4 +282,26 @@ h1 {
     background: #4c4a48;
     color: #fff;
     cursor:pointer;
+}
+
+.main .closebutton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 0px;
+    border: 0px;
+    background: none;
+    border-radius: 2px;
+}
+
+.trashbutton{
+    padding:0px;
+    position:absolute;
+    right:0;
+    top:0;
+    border-radius:5px;
+}
+
+.trashbutton .hidetext{
+    display:none;
 }

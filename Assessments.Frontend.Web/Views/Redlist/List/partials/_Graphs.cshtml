@@ -175,7 +175,7 @@
 
 
     <div class="down_graph greyscale">
-        @foreach (string key in Model.Statistics.Region.Keys)
+        @foreach (string key in Model.Statistics.Region.Keys.OrderBy(x => Helpers.SortedRegions().IndexOf(x)))
         {
             <div class="statelement">
                 <span class="statbox @key">
@@ -183,7 +183,7 @@
                 </span>
 
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="width:@percentage(impact_max, @getNumber(@key,@Model.Statistics.Region))">
+                    <div class="heightbar_indicator @key" style="width: @percentage(impact_max, @getNumber(@key, @Model.Statistics.Region))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.Region)</span>
                     </div>
                 </div>

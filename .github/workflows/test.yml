@@ -26,6 +26,7 @@ jobs:
       run: dotnet test --no-restore --verbosity normal
     - name: Build and push Docker image api
       uses: docker/build-push-action@v1
+      if: ${{ github.actor != "dependabot[bot]" }}
       with:
         username: ${{ secrets.ORG_DOCKER_USER }}
         password: ${{ secrets.ORG_DOCKER_PASS }}
@@ -33,4 +34,5 @@ jobs:
         repository: artsdatabanken/assessments-fe
         tags: test
     - name: Post to slack
+      if: ${{ github.actor != "dependabot[bot]" }}
       run: .github/workflows/slack.sh ${{ secrets.POST_SLACK }}

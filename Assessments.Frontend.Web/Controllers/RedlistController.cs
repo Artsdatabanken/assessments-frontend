@@ -45,7 +45,8 @@ namespace Assessments.Frontend.Web.Controllers
                 name = viewModel.Name.Trim().ToLower();
                 query = query.Where(x => x.ScientificName.ToLower().Contains(name) ||
                 x.PopularName.ToLower().Contains(name) ||
-                x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name))
+                x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||
+                x.SpeciesGroup.ToLower().Contains(name))
                 .OrderByDescending(x => x.PopularName.ToLower() == name ||
                 x.ScientificName.ToLower() == name);
 

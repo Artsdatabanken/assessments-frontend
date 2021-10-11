@@ -143,8 +143,8 @@
       "title": "Statistikk"
     },
     "category": {
-      "title": "Kategori",
-      "description": "En vurdering har kun én kategori. Totalantallet tilsvarer derfor antall vurderinger i utvalget, nemlig X."
+      "title": "Antall vurderinger per kategori",
+      "description": "En vurdering har kun én kategori. Totalantallet tilsvarer derfor antall vurderinger i utvalget, nemlig "
     },
     "criteria": {
       "title": "Antall vurderinger per kriterie",
@@ -158,7 +158,7 @@
       "title": "Antall vurderinger per region",
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per region eller havområde. Basert på kjent eller antatt forekomst."
     },
-    "påvirkningsfaktor": {
+    "impactfactor": {
       "title": "Antall vurderinger per påvirkningsfaktor",
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet som påvirkes negativt."
     }

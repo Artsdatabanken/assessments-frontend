@@ -79,13 +79,9 @@
 }
 
 <div class="page_section graphs">
-    <h2>Statistikk - </h2>
 
-    Totalt antall vurderinger i utvalget - dette er data vi mangler ennå.
+    <h3>@ViewBag.glossary["statistics"]["category"]["title"]</h3>
 
-    <h3>Antall vurderinger per kategori</h3>
-
-    <p>En vurdering skal utelukkende ha én kategori, derfor vil antall kategorier i utvalget  tilsvare antall vurderinger i utvalget nemlig @category_total</p>
 
     <div class="graph color_graph">
         @foreach (var key in category.Keys)
@@ -99,21 +95,11 @@
                 <span class="statbox @key">
                     @key
                 </span>
-
             </div>
         }
     </div>
-
-
-
-    <h3>Antall vurderinger per Kriterie</h3>
-
-    <p>
-        En vurdering kan inneholde mer enn et kriterie. Den totale mengden kriterier i utvalget er derfor @criteria_total brukte kriterier,
-        som vil si at hver vurdering i snitt har brukt @average(@total, @criteria_total) kriterier.
-
-    </p>
-
+    <p>@ViewBag.glossary["statistics"]["category"]["description"] @category_total.</p>
+    <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>
     <div class="graph greyscale">
         @foreach (string key in criteria.Keys)
         {
@@ -130,17 +116,8 @@
             </div>
         }
     </div>
-
-
-    <h3>Antall vurderinger per Habitat</h3>
-
-    <p>
-        En vurdering kan inneholde mer enn et habitat. Den totale mengden habitat er derfor @habitat_total registrerte forekomster,
-        som vil si at hver vurdering i snitt har  @average(@total, @habitat_total) habitat.
-
-    </p>
-
-
+    <p>@ViewBag.glossary["statistics"]["criteria"]["description"]</p>
+    <h3>@ViewBag.glossary["statistics"]["habitat"]["title"]</h3>
     <div class="down_graph greyscale">
         @foreach (string key in habitat.Keys)
         {
@@ -157,23 +134,8 @@
             </div>
         }
     </div>
-
-
-    <h3>Antall vurderinger per Region</h3>
-
-    <p>
-        Denne grafen viser der verderingenes art forekommer eller er antatt å forekomme. De kan forekomme i mer enn en region om gangen, men informasjonen er bare
-        registrert for arter som er rødlistet, det vil si ikke har kategoriene LC, NA eller NE. Arter som er regionalt utdødd skal heller ikke forekomme.
-        <br /><b>
-            TODO: Filteret BURDE fjerne disse artsgruppene, ettersom det KAN ligge inne data der likevel. Men egentlig burde det vært skrelt vekk før vi kommer hit.
-            <br />
-        </b>
-        Den totale artsmengden er @region_total, som i og for seg ikke er et informativt tall i seg selv.
-        For nåværende utvalg betyr det at vurderingene forekommer i @average(@total, @region_total) regioner per art.
-
-    </p>
-
-
+    <p>@ViewBag.glossary["statistics"]["habitat"]["description"]</p>
+    <h3>@ViewBag.glossary["statistics"]["region"]["title"]</h3>
     <div class="down_graph greyscale">
         @foreach (string key in Model.Statistics.Region.Keys.OrderBy(x => Helpers.SortedRegions().IndexOf(x)))
         {
@@ -190,16 +152,9 @@
             </div>
         }
     </div>
+    <p>@ViewBag.glossary["statistics"]["region"]["description"]</p>
 
-    <h3>Antall vurderinger per Påvirkningsfaktor</h3>
-
-    <p>
-        En vurdering kan inneholde mer enn en påvirkningsfaktorer, men de brukes kun på rødlistede arter. Den totale mengden påvirkningsfaktorer for utvalget er derfor @impact_total,
-        som vil si at hver vurdering i snitt har  @average(@total, @impact_total) faktorer.
-
-    </p>
-
-
+    <h3>@ViewBag.glossary["statistics"]["impactfactor"]["title"]</h3>
     <div class="down_graph greyscale">
         @foreach (string key in Model.Statistics.ImpactFactors.Keys)
         {
@@ -216,4 +171,7 @@
             </div>
         }
     </div>
+    <p>@ViewBag.glossary["statistics"]["impactfactor"]["description"]</p>
+
+
 </div>

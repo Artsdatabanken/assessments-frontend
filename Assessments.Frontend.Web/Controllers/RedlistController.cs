@@ -105,6 +105,8 @@ namespace Assessments.Frontend.Web.Controllers
             if (viewModel.PresumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
 
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
+
             ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
 
             ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");

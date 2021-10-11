@@ -431,6 +431,11 @@
     display: block;
 }
 
+span.material-icons.more,
+span.material-icons.less {
+    font-size: 20pt;
+}
+
 .expanded .more,
 .less {
     display: none;

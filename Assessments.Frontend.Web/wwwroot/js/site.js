@@ -116,12 +116,12 @@ const setCollapsibleIcon = (name) => {
     if (item.checked) {
         removeId = headerId + "_more";
         addId = headerId + "_less";
-        content = "expand_less";
+        content = "arrow_drop_down";
         classNames = "material-icons less";
     } else {
         removeId = headerId + "_less";
         addId = headerId + "_more";
-        content = "expand_more";
+        content = "arrow_right";
         classNames = "material-icons more";
     }
     remove = document.getElementById(removeId);
@@ -132,7 +132,7 @@ const setCollapsibleIcon = (name) => {
     span.innerHTML = content;
     span.setAttribute("id", addId);
     span.setAttribute("class", classNames);
-    headerItem.appendChild(span);
+    headerItem.insertBefore(span, headerItem.childNodes[0]);
 }
 
 const initialCollapsibleCheck = () => {

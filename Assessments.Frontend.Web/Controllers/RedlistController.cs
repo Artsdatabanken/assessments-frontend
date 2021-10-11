@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 using X.PagedList;
 using System;
 using Assessments.Frontend.Web.Infrastructure.Services;
-
 // ReSharper disable InconsistentNaming
 
 namespace Assessments.Frontend.Web.Controllers
@@ -76,9 +75,7 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
 
             // Regions
-            string[] regionNames = query.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().OrderBy(x => x).ToArray();
-
-            ViewBag.AllRegions = Helpers.getRegionsDict(regionNames);
+            ViewBag.AllRegions = Helpers.getRegionsDict();
             string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions, ViewBag.AllRegions);
 
             if (chosenRegions?.Any() == true)

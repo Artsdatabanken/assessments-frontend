@@ -381,3 +381,49 @@ li a span.element_icon {
 }
 
 
+/* INFOGRAPHICS */
+
+.infographics {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    font-size: 20px;
+    display: flex;
+    text-align: center;
+    justify-content: stretch;
+}
+
+.infograph_element {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 2px; 
+    flex:1;
+}
+
+.infograph_number {
+    font-size: 20pt;
+    font-weight: bold;
+}
+
+.total {
+    background: #cbd2d2;
+}
+.total .infograph_number {
+    font-size: 40pt;
+}
+
+.infograph_percent {
+    font-size: 30pt;
+    font-weight: bold;
+}
+
+.threatened {
+    background: #2d2d2f;
+    color: white;
+}
+
+.redlisted {
+    background: #8b0000;
+    color:white;
+}

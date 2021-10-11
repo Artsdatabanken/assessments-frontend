@@ -75,6 +75,10 @@ td {
 
 /* REDLIST VIEW */
 
+.redlist{
+    border-right:1px solid lightgrey;
+}
+
 .current_view {
     background-color: lightgreen;
     border: 0;
@@ -94,7 +98,6 @@ td {
     margin-right: 15px;
     max-width: 220px;
     border-right: 1px solid #dadada;
-    background: #f8f8f8;
     padding: 5px;
     margin-top: -1px;
 }
@@ -150,6 +153,7 @@ td {
 .redlist .listheader {
     border-bottom: 1px solid #4c4a48;
     padding-bottom:5px;
+    padding-right:5px;
 }
 
 

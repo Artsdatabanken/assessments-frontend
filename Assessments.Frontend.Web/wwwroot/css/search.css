@@ -5,14 +5,16 @@
 .list-search {
     text-align: center;
     padding: 10px 0;
-    background: #f3f3f3;
     width: 100%;
-    padding: 10px;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    background: #e5d6d0;
 }
 
 .list-search h2 {
     color: #3d3b3a;
     padding:0;
+    margin:5px;
 }
 
 /* Container div for input + button*/
@@ -30,7 +32,7 @@
 /* Input field */
 .list-search input {
     display: inline-block;
-    border: 1px solid rgb(204, 204, 204);
+    border: 1px solid #3d3b3a;
     border-radius: 2px;
     box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px 0px inset;
     box-sizing: border-box;

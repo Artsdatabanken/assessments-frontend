@@ -11,34 +11,34 @@
     <div class="mid-content">
         <partial name="/Views/Redlist/List/partials/_Header.cshtml" />
         <partial name="/Views/Redlist/List/partials/_Introduction.cshtml" />
+
+        <form asp-action="Index2021" method="get">
+            <partial name="/Views/Redlist/List/partials/_Search.cshtml" />
+
+            <partial name="/Views/Redlist/List/partials/_Filters.cshtml" />
+
+        </form>
         <h3>
             @Model.Redlist2021ResultsCount
         </h3>
-        <form asp-action="Index2021" method="get">
-            <partial name="/Views/Redlist/List/partials/_Search.cshtml" />
-           
-                <partial name="/Views/Redlist/List/partials/_Filters.cshtml" />
-            
-        </form>
-
-            <!-- Paginator buttons -->
-            @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", new
-           {
-               Page = page,
-               Area = Context.Request.Query["CateAreagory"],
-               Category = Context.Request.Query["Category"],
-               Criterias = Context.Request.Query["Criterias"],
-               EuroPop = Context.Request.Query["EuroPop"],
-               Regions = Context.Request.Query["Regions"],
-               Habitats = Context.Request.Query["Habitats"],
-               SpeciesGroups = Context.Request.Query["SpeciesGroups"],
-               PresumedExtinct = Context.Request.Query["PresumedExtinct"]
-           }), new PagedListRenderOptions
-           {
-               PageClasses = new[] { "page-link" },
-               UlElementClasses = new[] { "pagination" },
-               LiElementClasses = new[] { "page-item" }
-           })
+        <!-- Paginator buttons -->
+        @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", new
+       {
+           Page = page,
+           Area = Context.Request.Query["CateAreagory"],
+           Category = Context.Request.Query["Category"],
+           Criterias = Context.Request.Query["Criterias"],
+           EuroPop = Context.Request.Query["EuroPop"],
+           Regions = Context.Request.Query["Regions"],
+           Habitats = Context.Request.Query["Habitats"],
+           SpeciesGroups = Context.Request.Query["SpeciesGroups"],
+           PresumedExtinct = Context.Request.Query["PresumedExtinct"]
+       }), new PagedListRenderOptions
+       {
+           PageClasses = new[] { "page-link" },
+           UlElementClasses = new[] { "pagination" },
+           LiElementClasses = new[] { "page-item" }
+       })
     </div>
 </div>
 

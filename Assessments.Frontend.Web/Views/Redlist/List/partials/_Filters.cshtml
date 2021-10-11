@@ -52,6 +52,10 @@
                 if (Model.Category?.Any() == true)
                     return $"{Model.Category.Length}";
                 return String.Empty;
+            case "TaxonRank":
+                if (Model.TaxonRank?.Any() == true)
+                    return $"{Model.TaxonRank.Length}";
+                return String.Empty;
             case "SpeciesGroups":
                 if (Model.SpeciesGroups?.Any() == true)
                     return $"{Model.SpeciesGroups.Length}";

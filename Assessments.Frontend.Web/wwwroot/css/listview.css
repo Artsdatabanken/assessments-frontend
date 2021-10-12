@@ -69,6 +69,14 @@
 
 /* LIST VIEW */
 
+.element_icon {
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    font-size: 8px;
+    text-align: center;
+}
+
 /* ANYTHING GRID */
 
 .listheader,
@@ -86,25 +94,108 @@
     grid-template-columns: 1fr 4fr 100px 45px;
 }
 
+@media only screen and (max-width: 750px) {
+    .listheader,
+    .redlist li a {
+        padding: 4px 0;
+    }
+
+    .element_species .list_cell {
+        display:block;
+        padding:0;
+    }
+
+    .element_popular_name {
+        font-weight: bold;
+    }
+
+    .redlist li a {
+        grid-template-columns: 1fr 4fr 100px 45px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .categoryname {
+        font-size: 12px;
+    }
+
+    .redlist li a {
+        grid-template-columns: 15% 45% 25% 15%;
+    }
+
+    .redlist .category_tag {
+        max-width: 100%;
+    }
+
+
+    .element_popular_name {
+        font-weight: bold;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
+    }
+}
+
+
+@media only screen and (max-width: 320px) {
+
+    .redlist li a {
+        display: flex;
+        flex-wrap:wrap;
+        height:auto;
+        padding:5px;
+    }
+
+    .element_species {
+        width: 100%;
+    }
+
+
+    .element_icon {
+        order: 1;
+        font-size:12px;
+    }
+
+    .element_icon img{
+        display:none;
+    }
+
+    .categoryname {
+        order: 2;
+    }
+
+    .categorytag {
+        order: 3;
+    }
+
+    .redlist li a.S .svalbard {
+    display:none!important;
+}
+   
+}
+
+
+
 @media only screen and (min-width: 750px) {
 
     .element_species {
         display: flex;
     }
 
-    .element_species .list_cell{
-        width:50%;
+    .element_popular_name {
+        font-weight: bold;
+        word-break: break-word;
+
+    }
+
+    .element_species .list_cell {
+        width: 50%;
     }
 
 }
 
-@media only screen and (max-width: 750px) {
-    .listheader,
-    .redlist li a {
-        grid-template-columns: 1.5fr 5fr 84px;
-        padding: 4px 0;
-    }
-}
 
 .list_cell{
     padding:5px;
@@ -121,11 +212,11 @@
     padding: 2px;
     position: absolute;
     color: #fff;
-    top: 6px;
-    font-size: 12px;
-    left: -47px;
-    transform: rotate(-31deg);
-    width: 149px;
+    top: 3px;
+    font-size: 10px;
+    left: -44px;
+    transform: rotate(-34deg);
+    width: 127px;
 }
 
 /* HEADER OF LIST PRESENTATION*/
@@ -206,6 +297,14 @@ li a span.element_icon {
 }
 
 @media only screen and (max-width: 750px) {
+
+    .viewselector {
+        padding-left: 0;
+        padding-top: 0;
+        border:0;
+    }
+
+
     .listwrapper {
         flex-direction: column;
     }
@@ -237,36 +336,43 @@ li a span.element_icon {
     justify-content: stretch;
 }
 
-.infograph_element {
-    padding: 10px;
-    margin: 10px;
-    border-radius: 2px; 
-    flex:1;
-}
+@media only screen and (max-width: 750px) {
+    .infographics {
+        flex-direction:column;
+    }
+    }
 
-.infograph_number {
-    font-size: 20pt;
-    font-weight: bold;
-}
+    .infograph_element {
+        padding: 10px;
+        margin: 10px;
+        border-radius: 2px;
+        flex: 1;
+    }
 
-.total {
-    background: #cbd2d2;
-}
-.total .infograph_number {
-    font-size: 40pt;
-}
+    .infograph_number {
+        font-size: 20pt;
+        font-weight: bold;
+    }
 
-.infograph_percent {
-    font-size: 30pt;
-    font-weight: bold;
-}
+    .total {
+        background: #cbd2d2;
+    }
 
-.threatened {
-    background: #2d2d2f;
-    color: white;
-}
+        .total .infograph_number {
+            font-size: 40pt;
+        }
 
-.redlisted {
-    background: #8b0000;
-    color:white;
-}
+    .infograph_percent {
+        font-size: 30pt;
+        font-weight: bold;
+    }
+
+    .threatened {
+        background: #2d2d2f;
+        color: white;
+    }
+
+    .redlisted {
+        background: #8b0000;
+        color: white;
+    }

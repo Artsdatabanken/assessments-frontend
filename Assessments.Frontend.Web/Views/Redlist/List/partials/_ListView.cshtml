@@ -40,9 +40,7 @@
                     }
 
 
-                    <div class="element_icon list_cell"
-                         style="display:flex;flex-direction:column;height:50px;font-size:8px;
-                                            text-align:center;">
+                    <div class="element_icon list_cell">
                         <span class="svalbard">Svalbard</span>
                         @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
                         {
@@ -57,17 +55,14 @@
                         <span class="element_popular_name list_cell">@Capitalize(item.PopularName)</span>                       
                     </span>
 
-                    
-
-
-                    <span class="list_cell" style="text-align:right;padding-right:5px;">
+                    <span class="list_cell categoryname" style="text-align:right;padding-right:5px;">
                         @if (!string.IsNullOrEmpty(item.Category))
                         {
                             @ViewBag.categories[item.Category.Substring(0, 2)]["presentationstring"];
                         }
                     </span>
 
-                    <span  class="list_cell"  style="text-align:right;">
+                    <span  class="list_cell categorytag"  style="text-align:right;">
                         <span class="@item.Category.Substring(0,2) category_tag">@item.Category</span>
                     </span>
 

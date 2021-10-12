@@ -312,7 +312,7 @@ button.close_filters {
 }
 
 .remove_number{
-    background: #147288;
+    background: #098293;
     color: white;
     text-align:center;
     width:20px;
@@ -333,7 +333,7 @@ button.close_filters {
     min-width: 22px;
     height: 22px;
     background-clip: padding-box;
-    background: #147288;
+    background: #098293;
     color: white;
     text-align: center;
     width: 20px;

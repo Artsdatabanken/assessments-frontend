@@ -4,30 +4,9 @@
 }
 
 /* Graphic profile colours for reference - classes are not in use as is */
-.TextPrimary {
-    color: #4c4a48;
-}
-.TextSecondary,
-.ButtonActive{
-    /* Use color as bg for all active elements that should have a clicked/chosen status*/
-    color: #7f726b;
-}
-.TextAccentPrimary {
-    color:#eb6109;
-}
-.TextAccentSecondary {
-    color: #de8608;
-}
-
-/* COLOURS ADDED AS ACCENT FOR THIS PROJECT */
-/* 
-    BUTTONBLUE #1d6171 
-    BACKGROUNDGREEN #147288
-*/
-
+https://github.com/Artsdatabanken/grafiskprofil/wiki
 
 /* Actual page css */
-
 h1 {
     margin-bottom: 0;
 }
@@ -280,7 +259,7 @@ h1 {
 .main .button.tertiary,
 .main button.tertiary {
     background: none;
-    color: #147288;
+    color: #098293;
     border: none;
 }
 

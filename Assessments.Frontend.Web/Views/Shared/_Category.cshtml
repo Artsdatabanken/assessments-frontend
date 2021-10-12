@@ -15,11 +15,11 @@
         if(!string.IsNullOrEmpty(category))
         {
             return @ViewBag.categories[category.Substring(0, 2)]["presentationstring"];
-            }
-            else
-            {
-                return "vurdering mangler"
-            }
+        }
+        else
+        {
+            return "vurdering mangler";
+        }
     }
 }
 

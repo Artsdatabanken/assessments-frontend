@@ -83,14 +83,17 @@
 }
 
 .redlist li a {    
-    grid-template-columns: 1fr 11fr 2fr 45px;
+    grid-template-columns: 1fr 4fr 100px 45px;
 }
 
 @media only screen and (min-width: 750px) {
 
     .element_species {
-        display: inline-grid;
-        grid-template-columns: 5fr 5fr 1fr;
+        display: flex;
+    }
+
+    .element_species .list_cell{
+        width:50%;
     }
 
 }
@@ -105,6 +108,24 @@
 
 .list_cell{
     padding:5px;
+}
+
+.redlist li a.S {
+    background: #e1e8ea;
+}
+
+.svalbard{display:none;}
+.redlist li a.S .svalbard {
+    display: block;
+    background: #496571;
+    padding: 2px;
+    position: absolute;
+    color: #fff;
+    top: 6px;
+    font-size: 12px;
+    left: -47px;
+    transform: rotate(-31deg);
+    width: 149px;
 }
 
 /* HEADER OF LIST PRESENTATION*/

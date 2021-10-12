@@ -33,16 +33,17 @@
         @foreach (var item in Model.Redlist2021Results)
         {
             <li class="list">
-                <a asp-action="Detail" asp-route-id="@item.Id">
+                <a asp-action="Detail" asp-route-id="@item.Id" class="@item.AssessmentArea">
                     @{
                         // TODO: The number of fields contained in the box does not add up. Fix.
                         // Makes it very strange and overflowy in grid view.
                     }
 
 
-                    <div class="element_icon list_cell" 
+                    <div class="element_icon list_cell"
                          style="display:flex;flex-direction:column;height:50px;font-size:8px;
                                             text-align:center;">
+                        <span class="svalbard">Svalbard</span>
                         @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
                         {
                             <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
@@ -51,19 +52,9 @@
                     </div>
 
 
-                    <span class="element_species list_cell">
-                        <i class="element_name">@item.ScientificName</i>
-                        <span class="element_popular_name">@Capitalize(item.PopularName)</span>
-                        <span class="list_cell">
-                            @if (@item.AssessmentArea == "N")
-                            {
-                                <span> Norge </span>
-                            }
-                            else if (@item.AssessmentArea == "S")
-                            {
-                                <span>Svalbard</span>
-                            }
-                        </span>
+                    <span class="element_species">
+                        <i class="element_name list_cell">@item.ScientificName</i>
+                        <span class="element_popular_name list_cell">@Capitalize(item.PopularName)</span>                       
                     </span>
 
                     

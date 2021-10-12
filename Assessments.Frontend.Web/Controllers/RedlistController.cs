@@ -89,7 +89,7 @@ namespace Assessments.Frontend.Web.Controllers
             string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions, ViewBag.AllRegions);
 
             if (chosenRegions?.Any() == true)
-                query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
+                query = query.Where(x => x.RegionOccurrences.Any(y => y.State == 0 && chosenRegions.Contains(y.Fylke)));
 
             // SpeciesGroups
             if (viewModel.SpeciesGroups?.Any() == true)

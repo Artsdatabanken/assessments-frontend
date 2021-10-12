@@ -259,9 +259,18 @@ namespace Assessments.Frontend.Web.Controllers
 
             // IMPACTFACTORS
 
+            string excludedGroupingFactor = "Ingen trussel";
+            string excludedPopulationScope = "En ubetydelig del av populasjonen påvirkes";
+            string excludedSeverity = "Ubetydelig/ingen nedgang";
+
             var impactFactors = data
                 .Where(x => relevantCategories.Contains(x.Category))
-                .Select(x => x.ImpactFactors.Select(x => x.GroupingFactor).Distinct())
+                .Select(x => x.ImpactFactors
+                    .Where(x => x.GroupingFactor != excludedGroupingFactor &&
+                        x.PopulationScope != excludedPopulationScope &&
+                        x.Severity != excludedSeverity)
+                    .Select(x => x.GroupingFactor)
+                    .Distinct())
                 .SelectMany(x => x)
                 .GroupBy((x => x), (key, value) => new
                 {

@@ -219,7 +219,7 @@ namespace Assessments.Frontend.Web.Controllers
 
 
             // REGION
-            var regionNames = data.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().ToList();
+            var regionNames = Helpers.SortedRegions();
             var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data.Select(x => x.RegionOccurrences).SelectMany(x => x).Where(x => x.Fylke == name && x.State ==0).Count()))
                 .ToDictionary(x => x.Key, x => x.Value);
             viewModel.Statistics.Region = regionStats;

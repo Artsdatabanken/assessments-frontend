@@ -137,7 +137,7 @@
     <p>@ViewBag.glossary["statistics"]["habitat"]["description"]</p>
     <h3>@ViewBag.glossary["statistics"]["region"]["title"]</h3>
     <div class="down_graph greyscale">
-        @foreach (string key in Model.Statistics.Region.Keys.OrderBy(x => Helpers.SortedRegions().IndexOf(x)))
+        @foreach (string key in Model.Statistics.Region.Keys)
         {
             <div class="statelement">
                 <span class="statbox @key">

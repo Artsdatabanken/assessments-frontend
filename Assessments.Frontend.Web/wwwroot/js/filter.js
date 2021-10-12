@@ -138,7 +138,7 @@ const initialCollapsibleCheck = () => {
 
 const handleFirstTime = () => {
     Array.prototype.forEach.call(isCheckInputs, (e) => {
-        if (e.id == "show_area" || e.id == "initial_check") {
+        if (e.id == "show_area") {
             e.checked = true;
         } else {
             e.checked = false;
@@ -152,7 +152,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-const initialCheck = () => {
+const initialFilterCheck = () => {
     if (isSmallReader()) {
         showFilterButton();
         hideFilters();
@@ -164,14 +164,15 @@ const initialCheck = () => {
     }
 }
 
-window.addEventListener('resize', initialCheck);
+window.addEventListener('resize', initialFilterCheck);
 
 const stylesheet = document.createElement("style");
 stylesheet.innerText = filterStyles;
 document.head.appendChild(stylesheet);
 
-initialCheck();
+initialFilterCheck();
 if (!hasVisited()) {
+    setVisited();
     handleFirstTime();
 }
 initialCollapsibleCheck();

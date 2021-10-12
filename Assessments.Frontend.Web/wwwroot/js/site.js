@@ -7,6 +7,7 @@ const filters_close_buttons = document.getElementsByClassName("close_filters");
 const filters_open_button = document.getElementById("open_filter");
 const init = document.getElementById("initial_check");
 const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
+const scrollTo = document.getElementById("remember_scroll");
 
 
 const isSmallReader = () => {
@@ -17,9 +18,15 @@ const hasVisited = () => {
     return init.checked;
 }
 
+const setVisited = () => {
+    init.checked = true;
+}
+
 const addSubmitOnclick = () => {
     Array.prototype.forEach.call(submitCheckInputs, el => {
         el.onclick = function() {
+            scrollTo.value = "scroll_" + window.scrollY;
+            scrollTo.checked = true;
             this.form.submit();
         };
     });
@@ -32,3 +39,14 @@ const removeSubmitOnclick = () => {
     });
     submit_filters.style["display"] = "block";
 }
+
+const scrollToPreviousPosition = () => {
+    const position = scrollTo.value;
+    window.scrollTo(0, position);
+}
+
+const initialCheck = () => {
+    scrollToPreviousPosition();
+}
+
+initialCheck();

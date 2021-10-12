@@ -20,12 +20,10 @@
 
     <ul class="redlist" id="redlist">
         <li class="listheader" id="listheader">
-            <span class="fullsize">Artsnavn</span>
-            <span class="fullsize">Populærnavn</span>
-            <span class="mobile">Art</span>
-            <span class="allsize">Artsgruppe</span>
-            <span class="allsize">Område</span>
-            <span class="allsize">Kategori</span>
+            <span></span>
+            <span class="list_cell">Artsnavn</span>
+            <span class="list_cell">Populærnavn</span>
+            <span class="list_cell">Kategori</span>
 
         </li>
 
@@ -55,14 +53,14 @@
                         <span class="element_popular_name list_cell">@Capitalize(item.PopularName)</span>                       
                     </span>
 
-                    <span class="list_cell categoryname" style="text-align:right;padding-right:5px;">
+                    <span class="list_cell categoryname">
                         @if (!string.IsNullOrEmpty(item.Category))
                         {
                             @ViewBag.categories[item.Category.Substring(0, 2)]["presentationstring"];
                         }
                     </span>
 
-                    <span  class="list_cell categorytag"  style="text-align:right;">
+                    <span  class="list_cell categorytag">
                         <span class="@item.Category.Substring(0,2) category_tag">@item.Category</span>
                     </span>
 

@@ -20,7 +20,7 @@
                 if (item.Contains("scroll_"))
                     value = item.Replace("scroll_", "");
         }
-        <input id=@id type="checkbox" class=@_class name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
+        <input id=@id type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
     }
     void InputTag(string name, string[] elements, string value)
     {
@@ -171,19 +171,21 @@
                                         {
                                             <li class="checkbox" style="margin-top: 0;">
                                                 <label>
-                                                    @{ InputTag("Category", Model.Category, category);} @category
+                                                    @{
+                                                        InputTag("input_" + category, "submitOnclick", "Category", Model.Category, category);
+                                                    } @category
                                                 </label>
                                             </li>
                                         }
                                         <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
                                         <li class="checkbox">
                                             <label>
-                                                <input type="checkbox" asp-for="Redlisted" class="submitOnclick" />@SearchAndFilter.ChooseRedlisted
+                                                <input id="redlisted_check" type="checkbox" asp-for="Redlisted" class="submitOnclick" />@SearchAndFilter.ChooseRedlisted
                                             </label>
                                         </li>
                                         <li class="checkbox">
                                             <label>
-                                                <input type="checkbox" asp-for="Endangered" class="submitOnclick" />@SearchAndFilter.ChooseEndangered
+                                                <input id="endangered_check" type="checkbox" asp-for="Endangered" class="submitOnclick" />@SearchAndFilter.ChooseEndangered
                                             </label>
                                         </li>
                                     </ul>

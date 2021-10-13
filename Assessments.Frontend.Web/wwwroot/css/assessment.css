@@ -390,7 +390,7 @@
     background: #e2e9ec;
 }
 
-.expanded .expand_hide {
+.habitat_element.expanded .expand_hide {
     display: block;
 }
 t_element .seemore {

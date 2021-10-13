@@ -64,34 +64,37 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
                     {
                         @if (!@Model.MainHabitat.Contains(key))
                         {
-                            <div class="habitat_element @Html.Raw(@Model.MainHabitat.Contains(key) ? "active" : "inactive")">
-                                @if (@habitat[key]["shortname"] != null)
-                                {
-                                    <h4 class="habitat_header">@habitat[key]["shortname"]</h4>
-                                }
-                                <div class="habitat_icon">
-                                    @if (@habitat[key]["image"] != null)
-                                    {
-                                        <img src=@habitat[key]["image"] />
-                                    }
-                                </div>
-                                @if (@habitat[key]["description"] != null)
-                                {
-                                    <p>
+                    <div class="habitat_element @Html.Raw(@Model.MainHabitat.Contains(key) ? "active" : "inactive")">
 
-                                        @Html.Raw(@habitat[key]["description"])
+                        <div class="habitat_icon">
+                            @if (@habitat[key]["image"] != null)
+                            {
+                                <img src=@habitat[key]["image"] />
+                            }
+                        </div>
 
-                                        <br /><br />
+                        @if (@habitat[key]["shortname"] != null)
+                        {
+                            <b>@habitat[key]["shortname"]</b>
+                        }
 
-                                        @Html.Raw(@habitat[key]["mapping"])
-                                    </p>
-                                    <button class="seemore" onclick="expand(this)">
-                                        <span class="more">Se mer</span>
-                                        <span class="less">Se mindre</span>
-                                    </button>
-                                }
+                        @if (@habitat[key]["description"] != null)
+                        {
+                            <p>
+                                @Html.Raw(@habitat[key]["description"])
 
-                            </div>
+                            </p>
+
+                            <p class="expand_hide">
+                                @Html.Raw(@habitat[key]["mapping"])
+                            </p>
+                            <button class="tertiary tinybutton" onclick="expand(this)">
+                                <span class="more">Se NiN-koder</span>
+                                <span class="less">Skjul NiN-koder</span>
+                            </button>
+                        }
+
+                    </div>
                         }
                     }
 

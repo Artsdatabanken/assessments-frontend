@@ -811,6 +811,13 @@ span.material-icons.less {
     padding-bottom: 5px;
 }
 
+@media only screen and (max-width: 940px) {
+    .history_list li {        
+        display: block;
+        max-width:300px;
+    }
+}
+
 .history_list li:first-child {
     border:none;
 }

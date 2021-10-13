@@ -42,10 +42,15 @@
     <div class="region_distributions">
 
         <div class="regionlist @map_type">
+            <p class="region_list_header">
+                <b>Region</b>
+                <span class="indicator"></span>
+                <b>Forekomst</b>
+            </p>
             @foreach (var region in Model.RegionOccurrences.OrderBy(x => Helpers.SortedRegions().IndexOf(x.Fylke)).Reverse())
             {
                 <span class="region">
-                    <b>@region.Fylke</b>
+                    <p>@region.Fylke</p>
                     <span class="area">
                         @if (region.State == 0)
                         {
@@ -53,7 +58,7 @@
                                 <span class="indicatorcontent sea known"></span>
                                 <span class="indicatorcontent known"></span>
                             </span>
-                            <i>Kjent forekomst</i>
+                            <i>Kjent</i>
                         }
                         else if (region.State == 1)
                         {
@@ -61,12 +66,12 @@
                                 <span class="indicatorcontent sea presumed"></span>
                                 <span class="indicatorcontent presumed"></span>
                             </span>
-                            <i>Antatt forekomst</i>
+                            <i>Antatt</i>
                         }
                         else if (region.State == 2)
                         {
                             <span class="indicator"></span>
-                            <i>Ingen forekomst</i>
+                            <i>Ingen</i>
                         }
                         else if (region.State == 3)
                         {
@@ -74,7 +79,7 @@
                                 <span class="indicatorcontent sea presumed_extinct"></span>
                                 <span class="indicatorcontent presumed_extinct"></span>
                             </span>
-                            <i>Antatt Utdødd forekomst</i>
+                            <i>Antatt Utdødd</i>
                         }
                         else if (region.State == 4)
                         {
@@ -82,7 +87,7 @@
                                 <span class="indicatorcontent sea extinct"></span>
                                 <span class="indicatorcontent extinct"></span>
                             </span>
-                            <i>Utdødd forekomst</i>
+                            <i>Utdødd</i>
                         }
                     </span>
                 </span>
@@ -93,6 +98,9 @@
             <partial name="/Views/Redlist/Assessment/partials/_Map.cshtml" />
         </div>
     </div>
+    <br />
+    <p class="center-horizontal"><i>En lysere farge benyttes for å fremheve kystlinjen</i></p>
+
 </div>
 
 

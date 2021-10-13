@@ -280,11 +280,30 @@
     width: 100%;
     max-width: 350px;
     display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e9e9e9;
 }
 
-.region b{
-    width:120px;    
+.region_list_header {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    justify-content: space-between;
+}
+
+span.region p {
+    margin: 2px 0;
+    width:150px;    
     display:inline-block;
+}
+
+p.region_list_header b {
+    margin: 2px 0;
+    display:inline-block;
+}
+
+p.region_list_header {
+    margin-bottom: 5px;
 }
 
 .region .area{
@@ -488,6 +507,10 @@ span.material-icons.less {
     max-width: calc(100% - 285px);
 }
 
+.regionlist+p.list_header {
+    border-bottom: #4c4a48;
+}
+
 
 
 
@@ -505,7 +528,7 @@ span.material-icons.less {
     .region{
         margin-bottom:2px;
     }
-    .region b {
+    .region p {
         display: block;
         width:100%;
     }
@@ -567,16 +590,14 @@ span.material-icons.less {
 .current:hover {
     stroke-width: 1;
     filter:brightness(70%);
-    cursor: pointer;
+    /* cursor: pointer; Turning this off for now as nothing happens when you click on it */ 
 }
 
 .indicator {
     display:inline-block;
     width: 15px;
     height: 15px;
-    border:1px solid grey;
     margin:0px;
-    flex:none;
     font-size:0;
 }
 

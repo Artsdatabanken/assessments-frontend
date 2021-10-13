@@ -59,6 +59,10 @@ h1 {
     width: 100%;
 }
 
+.center-horizontal {
+    text-align: center;
+}
+
 /* FULLSCREEN above 940px*/
 @media only screen and (min-width: 940px) {
     .mid-content {

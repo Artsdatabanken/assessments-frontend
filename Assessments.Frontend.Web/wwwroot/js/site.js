@@ -23,6 +23,7 @@ const setVisited = () => {
 }
 
 const addSubmitOnclick = () => {
+    if (!submitCheckInputs) return;
     Array.prototype.forEach.call(submitCheckInputs, el => {
         el.onclick = function() {
             scrollTo.value = "scroll_" + window.scrollY;
@@ -34,6 +35,7 @@ const addSubmitOnclick = () => {
 }
 
 const removeSubmitOnclick = () => {
+    if (!submitCheckInputs) return;
     Array.prototype.forEach.call(submitCheckInputs, el => {
         el.onclick = null;
     });
@@ -41,6 +43,7 @@ const removeSubmitOnclick = () => {
 }
 
 const scrollToPreviousPosition = () => {
+    if (!scrollTo) return;
     const position = scrollTo.value;
     window.scrollTo(0, position);
 }

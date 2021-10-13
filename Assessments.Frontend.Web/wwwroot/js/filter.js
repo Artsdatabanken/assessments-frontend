@@ -164,15 +164,17 @@ const initialFilterCheck = () => {
     }
 }
 
-window.addEventListener('resize', initialFilterCheck);
+if (filters) {
+    window.addEventListener('resize', initialFilterCheck);
 
-const stylesheet = document.createElement("style");
-stylesheet.innerText = filterStyles;
-document.head.appendChild(stylesheet);
+    const stylesheet = document.createElement("style");
+    stylesheet.innerText = filterStyles;
+    document.head.appendChild(stylesheet);
 
-initialFilterCheck();
-if (!hasVisited()) {
-    setVisited();
-    handleFirstTime();
+    initialFilterCheck();
+    if (!hasVisited()) {
+        setVisited();
+        handleFirstTime();
+    }
+    initialCollapsibleCheck();
 }
-initialCollapsibleCheck();

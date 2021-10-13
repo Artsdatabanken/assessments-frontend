@@ -312,6 +312,8 @@
     margin-bottom: 10px;
     text-align: center;
     border: 1px solid lightgrey;
+    display: flex;
+    flex-direction: column;
 }
 
 .habitat_icon {
@@ -327,14 +329,30 @@
     overflow: hidden;
 }
 
+.habitat_element b {
+    display: block;
+}
+
 .habitat_element p,
 .habitat_element b {
     width: 100%;
     padding: 5px;
 }
 
-@media only screen and (min-width: 250px) and (max-width: 550px) {
+.habitat_element button{
+    
+}
 
+
+.habitat_element p, .habitat_element a {
+    color: black;
+    font-size: 8pt;
+    flex: 1;
+}
+
+.habita
+
+@media only screen and (min-width: 250px) and (max-width: 550px) {
     .habitat_icon {
         height: 100px;
         width: 100px;
@@ -369,18 +387,13 @@
 
 .expand_hide {
     display: none;
+    background: #e2e9ec;
 }
 
 .expanded .expand_hide {
     display: block;
 }
-
-.habitat_element p, .habitat_element a {
-    color: black;
-    font-size: 8pt;
-}
-
-.habitat_element .seemore {
+t_element .seemore {
     display: block;
     margin: auto;
 }

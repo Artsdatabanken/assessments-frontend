@@ -25,8 +25,6 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
                     // THIS CODE BELOW IS DUPLICATED IN THE PARAGRAPH BELOW IT.
                     // SHOULD BE ITS OWN PARTIAL OR FUNCTION.
                     <div class="habitat_element">
-
-
                         <div class="habitat_icon">
                             @if (@ViewBag.habitat[modelelement]["image"] != null)
                             {
@@ -48,9 +46,9 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
                                 @Html.Raw(@ViewBag.habitat[modelelement]["mapping"])
                             </p>
 
-                            <button class="tertiary" onclick="expand(this)">
-                                <span class="more">NiN-koder</span>
-                                <span class="less">Se mindre</span>
+                            <button class="tertiary tinybutton" onclick="expand(this)">
+                                <span class="more">Se NiN-koder</span>
+                                <span class="less">Skjul NiN-koder</span>
                             </button>
                         }
                     </div>

@@ -14,6 +14,7 @@ namespace Assessments.Frontend.Web.Models
             this.Criterias = Array.Empty<string>();
             this.EuroPop = Array.Empty<string>();
             this.IsCheck = Array.Empty<string>();
+            this.Meta = Array.Empty<string>();
             this.Regions = Array.Empty<string>();
             this.Habitats = Array.Empty<string>();
             this.SpeciesGroups = Array.Empty<string>();
@@ -31,6 +32,7 @@ namespace Assessments.Frontend.Web.Models
         public string[] EuroPop { get; set; }
         public string[] IsCheck { get; set; }
         public string[] Habitats { get; set; }
+        public string[] Meta { get; set; }
         public string[] Regions { get; set; }
         public string[] SpeciesGroups { get; set; }
         public string[] TaxonRank { get; set; }

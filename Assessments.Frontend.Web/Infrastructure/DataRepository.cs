@@ -79,14 +79,10 @@ namespace Assessments.Frontend.Web.Infrastructure
         /// </summary>
         public Task<IQueryable<SpeciesAssessment2021>> GetMappedSpeciesAssessments()
         {
-            // NOTE: legg til hvilken metode som skal brukes i innstillingene?
-
             async Task<IQueryable<SpeciesAssessment2021>> Get()
             {
                 var data = await GetData<Rodliste2019>(Constants.Filename.Species2021Temp);
-                // todo: remove moser svalbard from source file
-                var filteredData = data.Where(x => !string.IsNullOrEmpty(x.Ekspertgruppe) && x.Ekspertgruppe != "Moser (Svalbard)");
-                return _mapper.Map<IEnumerable<SpeciesAssessment2021>>(filteredData).AsQueryable(); 
+                return _mapper.Map<IEnumerable<SpeciesAssessment2021>>(data).AsQueryable(); 
             }
 
             return _appCache.GetOrAddAsync($"{nameof(GetMappedSpeciesAssessments)}", Get);

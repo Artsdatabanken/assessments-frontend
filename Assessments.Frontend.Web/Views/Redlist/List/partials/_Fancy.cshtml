@@ -1,0 +1,54 @@
+@model RL2021ViewModel
+
+@{ 
+    // TODO: Get nrs from db to stay updated with any changes in taxonomy
+    float total = 34174;
+    float redlisted = 5153;
+    float threatened = 2862;
+    float redlistpercent = redlisted / total * 100;
+    float threatenedpercent = threatened / total * 100;
+
+}
+
+<div class="infographics">
+
+    <div class="infograph_element total">
+        <div>
+            Antall vurderinger
+        </div>
+        <div class="infograph_number">
+           @total
+        </div>
+    </div>
+
+    <div class="infograph_element redlisted">
+        <div>
+            Rødlistede arter
+        </div>
+        <div class="infograph_percent">
+            @redlistpercent.ToString("0") %
+        </div>
+        <div class="infograph_number">
+            @redlisted
+        </div>
+
+    </div>
+
+    <div class="infograph_element threatened">
+        <div>
+            Trua arter
+        </div>
+        <div class="infograph_percent">
+            @threatenedpercent.ToString("0") %
+        </div>
+        <div class="infograph_number">
+            @threatened
+        </div>
+
+    </div>
+
+</div>
+
+    
+
+    

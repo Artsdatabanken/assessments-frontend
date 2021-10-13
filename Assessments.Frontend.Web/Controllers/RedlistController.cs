@@ -75,10 +75,9 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Criterias
             ViewBag.AllCriterias = _allCriterias;
-            char[] criterias = viewModel.Criterias.ToString().ToCharArray();
 
             if (viewModel.Criterias?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(criterias) != -1);
+                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && viewModel.Criterias.Any(y => x.CriteriaSummarized.Contains(y)));
 
             // Habitat
             if (viewModel.Habitats?.Any() == true)

@@ -488,23 +488,19 @@ span.material-icons.less {
 
 .region_distributions {
     width: 100%;
-    display: block;
     display: flex;
     flex-wrap: wrap-reverse;
-    max-width: 740px;
 }
 
 .regionlist {
-    width: 100%;
+    width: 35%;
     padding: 5px;
-    max-width: 285px;
     display: flex;
     flex-wrap: wrap;
 }
 
 .map {
-    width: 100%;
-    max-width: calc(100% - 285px);
+    width: 65%;
 }
 
 .regionlist+p.list_header {
@@ -516,9 +512,19 @@ span.material-icons.less {
 
 /* MOBILE SIZE: 550px til 650px  */
 @media only screen and (max-width: 650px) {
-    .regionlist,
+    .regionlist {
+        width: 100%;
+    }
+
     .map {
-        max-width: 100%;
+        width: 75%;
+    }
+}
+
+/* Special case for map */
+@media only screen and (max-width: 500px) {
+    .map {
+        width: 100%;
     }
 }
 
@@ -531,6 +537,11 @@ span.material-icons.less {
     .region p {
         display: block;
         width:100%;
+    }
+
+    .regionlist,
+    .map {
+        width: 100%;
     }
 }
 
@@ -599,6 +610,14 @@ span.material-icons.less {
     height: 15px;
     margin:0px;
     font-size:0;
+}
+
+.indicator:not(:empty) {
+    border: 1px solid #4c4a48;
+}
+
+span.area {
+    align-items: center;
 }
 
 .indicatorcontent {

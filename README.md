@@ -27,6 +27,7 @@ Alle sites er beskyttet og krever VPN (man trenger ikke være koblet på for å 
 - Åpne assesment-frontend.sln og trykk kjør
 - Krever vpn.
 - Datafiler hentes fra Azure storage og man MÅ ha en nøkkel for tilgang ("ConnectionStrings:AzureBlobStorage"), den må man få fra en av utviklerene på prosjektet (vi trenger helst annen løsning på sikt - muligens Azure key vault?) - se https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets
+- Datafiler som brukes til datagrunnlag lages i konsollapplikasjonen Assessments.Transformation. Applikasjonen henter vurderinger og transformerer de til en JSON fil som lagres på Azure storage. Prosjektet krever også nøkkel for database ("ConnectionStrings:Rodliste2020). Man trenger vpn for å bruke databasen.
 
 Nyttig lenke om man er ny til teknologien: https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio
 

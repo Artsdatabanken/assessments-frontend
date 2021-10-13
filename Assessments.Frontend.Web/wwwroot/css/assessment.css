@@ -304,16 +304,18 @@
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
-    justify-content:space-between;
+    justify-content: space-between;
 }
 
 .habitat_element {
-    max-width: 160px;
+    max-width: 32%;
     margin-bottom: 10px;
     text-align: center;
     border: 1px solid lightgrey;
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    background: #f4f4f4;
 }
 
 .habitat .inactive{
@@ -324,20 +326,13 @@
     display:flex;
 }
 
-.see_all .habitat_element.active,
-.see_all .active p{
-    background: #147288;
-    color: white;
+.see_all .habitat_element.active {
+    border: 5px solid #4c4a48;
 }
 
-.see_all .active .tertiary {
-    /* This is not in profile, but a lightened version */
-    color: #ffecc0;
-}
-
-.lol{
-    background:pink;
-    border:2px solid red;
+.see_all .habitat_element.active img {
+    border: 1px solid lightgrey;
+    border-bottom: 0;
 }
 
 .habitat_icon {
@@ -368,7 +363,6 @@
 }
 
 @media only screen and (min-width: 250px) and (max-width: 550px) {
-
     .habitat_icon {
         height: 100px;
         width: 100px;
@@ -379,6 +373,8 @@
     .habitat_element {
         max-width: 100%;
         padding-bottom: 0px;
+        display:inline-block;
+        width:100%;
     }
 
     .habitat_element p {

@@ -27,7 +27,7 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         }
         @if (description != null)
         {
-            <p>
+            <p class="expand_hide">
                 @description
 
             </p>
@@ -40,8 +40,8 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
             </p>
 
             <button class="tertiary tinybutton" onclick="expand(this, 'expanded')">
-                <span class="more">Se NiN-koder</span>
-                <span class="less">Skjul NiN-koder</span>
+                <span class="more">Se mer</span>
+                <span class="less">Se mer</span>
             </button>
         }
     </div>    
@@ -54,7 +54,6 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         <h2>@ViewBag.glossary["habitat"]["tagline"]</h2>
         <p>@Html.Raw(@ViewBag.glossary["habitat"]["description"])</p>
 
-
         <button class="changetab active" onclick="expand(this, 'see_all', 'remove')">
             Vurderingens habitat
         </button>
@@ -62,14 +61,8 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         <button class="changetab" onclick="expand(this, 'see_all','add')">
             Alle habitat
         </button>
-        <br />
 
-
-        <h3 class="active">Arten finnes i disse habitatene</h3>
-        <h3 class="inactive">Alle habitat</h3>
-
-
-        <div class="habitat_container">
+        <div class="habitat_container tabbed_element_container">
             @foreach (var key in habitat.Keys)
             {
                 var imageurl = @habitat[key]["image"];

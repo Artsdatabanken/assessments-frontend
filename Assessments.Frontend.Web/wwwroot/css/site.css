@@ -323,3 +323,26 @@ h1 {
     display: inline-block;
     float: right;
 }
+
+/* TAB STUFF */
+
+.main .changetab {
+    border-color: #7f726b;
+    margin-bottom: -1px;
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.main .changetab.active {
+    border: 1px solid #7f726b;
+    border-bottom-color: white;
+    color:black;
+    background:none;
+}
+
+.tabbed_element_container {    
+    padding: 10px;
+    border: 1px solid lightgrey;
+    padding-top: 30px;
+    border-top-color: #7f726b;
+}

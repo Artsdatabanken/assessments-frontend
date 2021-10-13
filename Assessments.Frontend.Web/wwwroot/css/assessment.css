@@ -739,6 +739,7 @@ span.material-icons.less {
     display: none;
 }
 
+
 /* SUMMARY VERSION */
 
 
@@ -760,8 +761,12 @@ span.material-icons.less {
     display: block;    
 }
 
-/* All */
+.show_expand ul{
+    visibility:hidden;
+}
 
+
+/* All */
 .outer .text_collection {
     padding: 0;
 }

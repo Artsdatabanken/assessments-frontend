@@ -16,26 +16,25 @@
 <ul class="history_list">
 
     <li>
-        <span class="text_content">
-            <h4>2021</h4>
-            <partial name="/Views/Shared/_CategoryTags.cshtml" />
-            @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
-            {
-                <span>Arten er vurdert for første gang i 2021.</span>
-            }
-        </span>
+        <b class="text_content"> 2021: </b>
+        <span class="graphic_element @Model.Category">@Model.Category</span>
+        <i> @categoryDescription(Model.Category)</i>
+
+        @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
+        {
+            <span>Arten er vurdert for første gang i 2021.</span>
+        }
     </li>
 
     @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger
     {
-        <li class="withlink">
-            <span class="text_content">
-                <h4>Rødlista @prev.Year</h4>
-                <span class="graphic_element @prev.Category">@prev.Category</span>
-                <b> @categoryDescription(prev.Category)</b> 
-            </span>
-            <a target="_blank" href="@prev.AssessmentUrl">
-                Gå til vurdering<span class="material-icons">open_in_new</span>
+        <li>
+            <b class="text_content"> @prev.Year: </b>
+            <span class="graphic_element @prev.Category">@prev.Category</span>
+            <i> @categoryDescription(prev.Category)</i>
+
+            <a target="_blank" href="@prev.AssessmentUrl" class="button tertiary tinybutton">
+                Se vurdering<span class="material-icons">open_in_new</span>
             </a>
         </li>
     }

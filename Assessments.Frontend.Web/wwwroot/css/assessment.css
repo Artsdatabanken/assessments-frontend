@@ -804,29 +804,34 @@ span.material-icons.less {
 
 
 .history_list li {
-    display: flex;
     font-size: 12pt;
-    border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    padding: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
-    margin-top:-1px;
-    justify-content:space-between;
+    display: inline-block;
+    border-top: 1px solid lightgray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.history_list li:first-child {
+    border:none;
 }
 
 .history_list .text_content {
     display: inline-block;
 }
 
-
-.history_list li a {
-    display:inline-block;
-    max-width: 40px;
+.history_list .graphic_element {
     font-size: 7pt;
-    text-decoration: none;
-    background: lightgrey;
-    color: black;
-    padding: 4px;
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: text-top;
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+    padding: 0;
     text-align: center;
+}
+
+.history_list .tinybutton{
+    float:right;
+    margin-bottom:0px;
 }

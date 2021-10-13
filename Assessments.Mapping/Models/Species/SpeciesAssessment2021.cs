@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 // ReSharper disable InconsistentNaming
 
 namespace Assessments.Mapping.Models.Species
@@ -64,10 +65,10 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public List<string> BCOptions { get; set; } = new(); // BCEksterneFluktuasjonerKode
 
-        /// <summary>
-        /// For reasons specified herein, the taxon is Not Applicable (NA) for Red list evaluation in the AssessmentArea.
-        /// </summary>
-        public string RationaleNotApplicable { get; set; } // BegrensetForekomstNA
+        ///// <summary>
+        ///// For reasons specified herein, the taxon is Not Applicable (NA) for Red list evaluation in the AssessmentArea.
+        ///// </summary>
+        //public string RationaleNotApplicable { get; set; } // BegrensetForekomstNA
 
         /// <summary>
         /// A quantified continuing decline
@@ -148,10 +149,10 @@ namespace Assessments.Mapping.Models.Species
         /// </summary>
         public string CriteriaSummarized { get; set; } // Kriterier
 
-        /// <summary>
-        /// Rationale for why a taxon is set to the category Not Evaluated NE, i.e., why it is not evaluated for the Red List
-        /// </summary>
-        public string RationaleNotEvaluated { get; set; } // KunnskapsStatusNE
+        ///// <summary>
+        ///// Rationale for why a taxon is set to the category Not Evaluated NE, i.e., why it is not evaluated for the Red List
+        ///// </summary>
+        //public string RationaleNotEvaluated { get; set; } // KunnskapsStatusNE
 
         /// <summary>
         /// Percentage of the European population that the taxon's population in the AssessmenArea constitutes.
@@ -172,6 +173,97 @@ namespace Assessments.Mapping.Models.Species
         /// Initial assessment of the taxon, either (in)directly to a category or to be thoroughly evaluated against Red List criteria.
         /// </summary>
         public string AssessmentInitialClassification { get; set; } // OverordnetKlassifiseringGruppeKode
+        /// <summary>
+        /// Sub classification of initial classification
+        /// </summary>
+        public string AssessmentInitialSubClassification { get; set; } // OverordnetKlassifiseringGruppeKode
+        public InitialClassification AssessmentInitialClassificationCode { get; set; } // OverordnetKlassifiseringGruppeKode
+        public InitialSubClassification AssessmentInitialSubClassificationCode { get; set; }
+        public enum InitialClassification
+        {
+            [Description("Full rødlistevurdering gjennomført")]
+            RodlisteVurdertArt,
+
+            [Description("Det er svært liten tvil om at arten er utdødd fra Norge (RE)")]
+            UtdoddINorgeRE,
+
+            [Description("Arten er vurdert til å være livskraftig (LC)")]
+            SikkerBestandLC,
+
+            [Description("DD: Usikkerheten om artens korrekte kategoriplassering er meget stor og inkluderer muligheten for at den kan være livskraftig (LC)")]
+            StorUsikkerhetOmKorrektKategoriDD,
+
+            [Description("Fremmed art (NA)")]
+            FremmedArtNA,
+
+            [Description("Art med begrenset forekomst i Norge (NA)")]
+            BegrensetForekomstNA,
+
+            [Description("Arten er ikke forsøkt rødlistevurdert (NE)")]
+            KunnskapsStatusNE
+        }
+        public enum InitialSubClassification
+        {
+            [Description("Arten er dokumentert eller antatt å være etablert med fast reproduserende bestand i Norge og har ikke opphav i introduserte individer")]
+            EtablertBestandINorge,
+
+            [Description("Arten er ikke fast reproduserende i Norge, men > 2 % av individene som utgjør global populasjonsstørrelse oppholder seg regelmessig i Norge i deler av sin års -/ livssyklus(gjester)")]
+            IkkeReproduserendeINorge,
+
+            [Description("Arten er fremmed, men er antatt eller dokumentert etablert med fast reproduserende bestand (reprodusert sammenhengende i mer enn 10 år) per år 1800")]
+            EtablertFør1800,
+
+            // begrensetForekomstNA
+            [Description("Arten er ikke etablert med fast reproduserende bestand hos oss, og < 2 % av global populasjonsstørrelse oppholder seg regelmessig i Norge (gjest) (NA))")]
+
+            IkkeReproduserendeGjestNA,
+
+            [Description("Arten er observert reproduserende i Norge, men antas å ikke være etablert med fast reproduserende bestand hos oss (NA))")]
+
+            ObservertReproduserendeIkkeEtablertNA,
+
+            [Description("Arten er observert i reproduktivt stadium i Norge, men antas å ikke være etablert med fast reproduserende bestand hos oss (NA))")]
+
+            ObservertReproduktivIkkeEtablertNA,
+
+            [Description("Gjest («vagrant») som uregelmessig dukker opp naturlig i Norge (NA))")]
+
+            UregelmessigGjestIkkeReproduserendeNA,
+
+            [Description("Arten har ikke dokumentert forekomst i Norge (NA)")]
+
+            IkkeDokumentertForekomstNA,
+
+            [Description("Hybridart; uten reproduksjon (NA)")]
+
+            HybridartUtenReproduksjonNA,
+
+            [Description("Hybridart, men uvisst om den er reproduserende (NA)")]
+
+            HybridartUvisstOmReproduserendeNA,
+
+            [Description("Arten forekommer bare i hybridkombinasjon i Norge (NA)")]
+
+            ForekommerBareIHybridkombinasjonNA,
+
+            // kunnskapsStatusNE
+            [Description("Fremmed art (NA)")]
+            FremmedArtNA,
+
+            [Description("Arten er ikke forsøkt vurdert på grunn av svært mangelfull kunnskap (NE)")]
+            MangelfullKunnskapNE,
+            [Description("Arten eller artsgruppen den tilhører har uavklart systematikk (NE)")]
+            UavklartSystematikkNE,
+            [Description("Det er uavklart om arten er etablert med fast reproduserende bestand i Norge (NE)")]
+            UklartOmReproduserendeBestandNE,
+            [Description("Arten tilhører en artsgruppe som ikke er rødlistevurdert etter IUCN sine kriterier til Rødlista 2021 (NE)")]
+            ArtsgruppeIkkeRisikovurdertNE,
+            [Description("Annet (NE)")]
+            AnnetNE
+
+
+        }
+
 
         /// <summary>
         /// Norwegian common names
@@ -182,10 +274,10 @@ namespace Assessments.Mapping.Models.Species
 
         public List<SpeciesAssessment2021Reference> References { get; set; } = new(); // Referanser
 
-        /// <summary>
-        /// Justification for why the taxon is evaluated, i.e., which one of the three Norwegian inclusion criteria that is met.
-        /// </summary>
-        public string EvaluationJustification { get; set; } // RodlisteVurdertArt
+        ///// <summary>
+        ///// Justification for why the taxon is evaluated, i.e., which one of the three Norwegian inclusion criteria that is met.
+        ///// </summary>
+        //public string EvaluationJustification { get; set; } // RodlisteVurdertArt men erstattet av AssessmentInitialSubCategory
 
         /// <summary>
         /// Publication year of the latest previous assessment of the taxon. 

@@ -35,58 +35,61 @@
     string inclusion = "";
     string reason_heading = "";
     string reason_description = "";
-
-    if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt" ||
-        @Model.AssessmentInitialClassification == "utdoddINorgeRE" ||
-        @Model.AssessmentInitialClassification == "sikkerBestandLC" ||
-        @Model.AssessmentInitialClassification == "storUsikkerhetOmKorrektKategoriDD")
+    
+    if (new[] { 
+        SpeciesAssessment2021.InitialClassification.RodlisteVurdertArt, 
+        SpeciesAssessment2021.InitialClassification.UtdoddINorgeRE,
+        SpeciesAssessment2021.InitialClassification.SikkerBestandLC,
+        SpeciesAssessment2021.InitialClassification.StorUsikkerhetOmKorrektKategoriDD }
+        .Contains(@Model.AssessmentInitialClassificationCode))
     {
         heading = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["title"];
         inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["description"];
-        if (!string.IsNullOrEmpty(Model.EvaluationJustification))
-        {
-            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["title"];
-            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["description"];
-        }
-        else
-        {
-            inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
-        }
+        //if (!string.IsNullOrEmpty(Model.AssessmentInitialSubClassificationCode.ToCamelString()))
+        //{
+            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"];
+            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
+        //}
+        //else
+        //{
+        //    inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
+        //}
     }
-    else if (Model.AssessmentInitialClassification == "fremmedArtNA" ||
-        Model.AssessmentInitialClassification == "begrensetForekomstNA" ||
-        Model.AssessmentInitialClassification == "kunnskapsStatusNE")
+    else if (new[] {SpeciesAssessment2021.InitialClassification.FremmedArtNA,
+        SpeciesAssessment2021.InitialClassification.BegrensetForekomstNA,
+        SpeciesAssessment2021.InitialClassification.KunnskapsStatusNE }
+        .Contains(@Model.AssessmentInitialClassificationCode))
     {
         heading = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["title"];
         inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
 
-        if (Model.AssessmentInitialClassification == "fremmedArtNA")
-        {
-            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["title"];
-            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["description"];
-        }
-        else if (Model.AssessmentInitialClassification == "begrensetForekomstNA")
-        {
-            if (!string.IsNullOrEmpty(Model.RationaleNotApplicable))
-            {
-                reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["title"];
-                reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["description"];
-            }
-        }
-        else if (Model.AssessmentInitialClassification == "kunnskapsStatusNE")
-        {
+        //if (Model.AssessmentInitialClassificationCode == SpeciesAssessment2021.InitialClassification.FremmedArtNA)
+        //{
+            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"]; // fjernet magic string kopling - potensielt rename termer
+            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
+        //}
+        //else if (Model.AssessmentInitialClassificationCode == SpeciesAssessment2021.InitialClassification.BegrensetForekomstNA)
+        //{
+        //    if (!string.IsNullOrEmpty(Model.AssessmentInitialSubClassificationCode.ToCamelString()))
+        //    {
+        //        reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"];
+        //        reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
+        //    }
+        //}
+        //else if (Model.AssessmentInitialClassificationCode == SpeciesAssessment2021.InitialClassification.KunnskapsStatusNE)
+        //{
 
-            if (!string.IsNullOrEmpty(Model.RationaleNotEvaluated))
-            {
-                reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["title"];
-                reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["description"];
-            }
-        }
-        else
-        {
-            inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
-            inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["else"];
-        }
+        //    if (!string.IsNullOrEmpty(Model.AssessmentInitialSubClassificationCode.ToCamelString()))
+        //    {
+        //        reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"];
+        //        reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
+        //    }
+        //}
+        //else
+        //{
+        //    inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
+        //    inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["else"];
+        //}
     }
 }
 

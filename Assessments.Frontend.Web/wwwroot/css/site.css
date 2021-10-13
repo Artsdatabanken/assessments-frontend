@@ -336,8 +336,9 @@ h1 {
 .main .changetab.active {
     border: 1px solid #7f726b;
     border-bottom-color: white;
-    color:black;
-    background:none;
+    border-left-color: lightgray;
+    color: black;
+    background: none;
 }
 
 .tabbed_element_container {    
@@ -345,4 +346,5 @@ h1 {
     border: 1px solid lightgrey;
     padding-top: 30px;
     border-top-color: #7f726b;
+    margin-top:0;
 }

@@ -112,17 +112,13 @@
 
             </p>
 
-            <button id="summary" class="primary" onclick="impactlist('summary',this)">Oppsummering</button>
-            <button id="compact" onclick="impactlist('compact',this)">Kompakt liste</button>
-            <button id="full_list" onclick="impactlist('full_list',this)">Full liste</button>
+            <button id="summary" class="changetab active" onclick="impactlist('summary',this)">Oppsummering</button>
+            <button id="compact" class="changetab" onclick="impactlist('compact',this)">Kompakt liste</button>
+            <button id="full_list" class="changetab" onclick="impactlist('full_list',this)">Full liste</button>
             <br />
-            <div class="outer">
+            <div class="outer tabbed_element_container">
                 @foreach (var (key, value) in impactfactors_json)
                 {
-
-                    <h3 class="@activeOrNot(key)">
-                        @{listHeaders(key, value);}
-                    </h3>
                     @if (value.ContainsKey("subelement"))
                     {
                         <ul class="second @activeOrNot(key)">
@@ -195,9 +191,9 @@
     document.getElementById('impactfactors').classList.add("summary");
 
     function impactlist(which, button) {
-        document.getElementById('summary').classList.remove("primary");
-        document.getElementById('full_list').classList.remove("primary");
-        document.getElementById('compact').classList.remove("primary");
+        document.getElementById('summary').classList.remove("active");
+        document.getElementById('full_list').classList.remove("active");
+        document.getElementById('compact').classList.remove("active");
 
         if (which == 'full_list') {
             document.getElementById('impactfactors').classList.add("full_list");
@@ -212,7 +208,7 @@
             document.getElementById('impactfactors').classList.remove("full_list");
         }
 
-        button.classList.add("primary");
+        button.classList.add("active");
 
     }
 </script>

@@ -19,41 +19,43 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         <div>
             @Html.Raw(@ViewBag.glossary["habitat"]["description"])
             <h3>Arten finnes i disse habitatene</h3>
-            @foreach (var modelelement in @Model.MainHabitat)
-            {
-                // THIS CODE BELOW IS DUPLICATED IN THE PARAGRAPH BELOW IT.
-                // SHOULD BE ITS OWN PARTIAL OR FUNCTION.
-        <div class="habitat_element">
-
-           
-            
-            @if (@ViewBag.habitat[modelelement]["shortname"] != null)
-            {
-                <h4 class="habitat_header">@ViewBag.habitat[modelelement]["shortname"]</h4>
-            }
-            <div class="habitat_icon">
-                @if (@ViewBag.habitat[modelelement]["image"] != null)
+            <div class="habitat_container">
+                @foreach (var modelelement in @Model.MainHabitat)
                 {
-                    <img src=@ViewBag.habitat[modelelement]["image"] />
+                    // THIS CODE BELOW IS DUPLICATED IN THE PARAGRAPH BELOW IT.
+                    // SHOULD BE ITS OWN PARTIAL OR FUNCTION.
+                    <div class="habitat_element">
+
+
+                        <div class="habitat_icon">
+                            @if (@ViewBag.habitat[modelelement]["image"] != null)
+                            {
+                                <img src=@ViewBag.habitat[modelelement]["image"] />
+                            }
+                        </div>
+                        @if (@ViewBag.habitat[modelelement]["shortname"] != null)
+                        {
+                            <b>@ViewBag.habitat[modelelement]["shortname"]</b>
+                        }
+                        @if (@ViewBag.habitat[modelelement]["description"] != null)
+                        {
+                            <p>
+                                @Html.Raw(@ViewBag.habitat[modelelement]["description"])
+
+                            </p>
+
+                            <p class="expand_hide">
+                                @Html.Raw(@ViewBag.habitat[modelelement]["mapping"])
+                            </p>
+
+                            <button class="tertiary" onclick="expand(this)">
+                                <span class="more">NiN-koder</span>
+                                <span class="less">Se mindre</span>
+                            </button>
+                        }
+                    </div>
                 }
             </div>
-            @if (@ViewBag.habitat[modelelement]["description"] != null)
-            {
-                <p>
-                    @Html.Raw(@ViewBag.habitat[modelelement]["description"])
-
-                    <br /><br />
-
-                    @Html.Raw(@ViewBag.habitat[modelelement]["mapping"])
-                </p>
-
-                <button class="seemore" onclick="expand(this)">
-                    <span class="more">Se mer</span>
-                    <span class="less">Se mindre</span>
-                </button>
-            }
-        </div>
-            }
         </div>
         <div class="other_habitats">
             <span class="hidden">

@@ -253,7 +253,8 @@ button.close_filters {
     }
 } 
 
-.collapse_checkbox {
+.collapse_checkbox,
+.meta_checkbox {
     display: none;
 }
 

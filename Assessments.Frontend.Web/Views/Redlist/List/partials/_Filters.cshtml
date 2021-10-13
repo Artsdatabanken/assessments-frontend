@@ -14,8 +14,13 @@
 @functions{
     void InputTag(string id, string _class, string name, string[] elements, string value)
     {
+        if (id == "remember_scroll")
+        {
+            foreach (var item in elements)
+                if (item.Contains("scroll_"))
+                    value = item.Replace("scroll_", "");
+        }
         <input id=@id type="checkbox" class=@_class name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
-
     }
     void InputTag(string name, string[] elements, string value)
     {
@@ -103,7 +108,8 @@
 
 <div class="listwrapper">
     <div class="filtercontainer">
-        @{ InputTag("initial_check", "collapse_checkbox", "IsCheck", Model.IsCheck, "Visited");}
+        @{ InputTag("initial_check", "meta_checkbox", "Meta", Model.Meta, "Visited");}
+        @{ InputTag("remember_scroll", "meta_checkbox", "Meta", Model.Meta, "0");}
         <!-- View controls -->
         <div id="filters">
             <div id="filter_modal_background">

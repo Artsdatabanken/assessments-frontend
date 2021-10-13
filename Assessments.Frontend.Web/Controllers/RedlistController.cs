@@ -89,7 +89,7 @@ namespace Assessments.Frontend.Web.Controllers
             string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions, ViewBag.AllRegions);
 
             if (chosenRegions?.Any() == true)
-                query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
+                query = query.Where(x => x.RegionOccurrences.Any(y => y.State == 0 && chosenRegions.Contains(y.Fylke)));
 
             // SpeciesGroups
             if (viewModel.SpeciesGroups?.Any() == true)
@@ -191,6 +191,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             // STATISTICS.
             // INPUT dataset is an already filtered list, based on active filters in the view. 
+            string[] relevantCategories = new string[]{"CR", "EN", "VU", "NT"};
 
             // CATEGORY
             var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new
@@ -210,7 +211,12 @@ namespace Assessments.Frontend.Web.Controllers
             // SPECIES MAIN HABITAT
 
             // Fetch all habitat lists, flatten the lists and make it distinct to obtain all currently possible habitat names.
-            var habitatNames = data.Select(x => x.MainHabitat).SelectMany(x => x).Distinct().ToList(); 
+            var habitatNames = data
+                .Where(x => relevantCategories.Contains(x.Category))
+                .Select(x => x.MainHabitat)
+                .SelectMany(x => x)
+                .Distinct()
+                .ToList(); 
 
             // For each of the habitatnames - count each occurence in the main dataset
             var habitatStats = habitatNames.Select(name => new KeyValuePair<string, int>(name, data.Count(x => x.MainHabitat.Contains(name))))
@@ -220,7 +226,11 @@ namespace Assessments.Frontend.Web.Controllers
 
             // REGION
             var regionNames = Helpers.SortedRegions();
-            var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data.Select(x => x.RegionOccurrences).SelectMany(x => x).Where(x => x.Fylke == name && x.State ==0).Count()))
+            var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data
+                .Where(x => relevantCategories.Contains(x.Category))
+                .Select(x => x.RegionOccurrences)
+                .SelectMany(x => x)
+                .Where(x => x.Fylke == name && x.State ==0).Count()))
                 .ToDictionary(x => x.Key, x => x.Value);
             viewModel.Statistics.Region = regionStats;
 
@@ -231,7 +241,9 @@ namespace Assessments.Frontend.Web.Controllers
 
             // CRITERIA
 
-            var criteriaStrings = data.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized)).Select(x => x.CriteriaSummarized);
+            var criteriaStrings = data
+                .Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && relevantCategories.Contains(x.Category))
+                .Select(x => x.CriteriaSummarized);
             var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
             viewModel.Statistics.Criteria = criteria.ToDictionary(x => x.Key, x => x.Value);
 
@@ -247,13 +259,24 @@ namespace Assessments.Frontend.Web.Controllers
 
             // IMPACTFACTORS
 
-            var impactFactors = data.Select(x => x.ImpactFactors.Select(x => x.GroupingFactor).Distinct())
-                                .SelectMany(x => x)
-                                .GroupBy((x => x), (key, value) => new
-                                {
-                                    key = key,
-                                    value = value.Count()
-                                });
+            string excludedGroupingFactor = "Ingen trussel";
+            string excludedPopulationScope = "En ubetydelig del av populasjonen påvirkes";
+            string excludedSeverity = "Ubetydelig/ingen nedgang";
+
+            var impactFactors = data
+                .Where(x => relevantCategories.Contains(x.Category))
+                .Select(x => x.ImpactFactors
+                    .Where(x => x.GroupingFactor != excludedGroupingFactor &&
+                        x.PopulationScope != excludedPopulationScope &&
+                        x.Severity != excludedSeverity)
+                    .Select(x => x.GroupingFactor)
+                    .Distinct())
+                .SelectMany(x => x)
+                .GroupBy((x => x), (key, value) => new
+                {
+                    key = key,
+                    value = value.Count()
+                });
 
             viewModel.Statistics.ImpactFactors = new Dictionary<string, int>();
             

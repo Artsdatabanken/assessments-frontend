@@ -312,14 +312,38 @@
     margin-bottom: 10px;
     text-align: center;
     border: 1px solid lightgrey;
-    display: flex;
-    flex-direction: column;
+    display:flex;
+    flex-direction:column;
+}
+
+.habitat .inactive{
+    display:none;
+}
+
+.see_all .inactive{
+    display:flex;
+}
+
+.see_all .habitat_element.active,
+.see_all .active p{
+    background: #147288;
+    color: white;
+}
+
+.see_all .active .tertiary {
+    /* This is not in profile, but a lightened version */
+    color: #ffecc0;
+}
+
+.lol{
+    background:pink;
+    border:2px solid red;
 }
 
 .habitat_icon {
     width: 100%;
     display: block;
-    height:112px;
+    height: 112px;
 }
 
 .habitat_icon img {
@@ -333,26 +357,18 @@
     display: block;
 }
 
+.habitat_element p {
+   flex:1;
+}
+
 .habitat_element p,
 .habitat_element b {
     width: 100%;
     padding: 5px;
 }
 
-.habitat_element button{
-    
-}
-
-
-.habitat_element p, .habitat_element a {
-    color: black;
-    font-size: 8pt;
-    flex: 1;
-}
-
-.habita
-
 @media only screen and (min-width: 250px) and (max-width: 550px) {
+
     .habitat_icon {
         height: 100px;
         width: 100px;
@@ -387,13 +403,18 @@
 
 .expand_hide {
     display: none;
-    background: #e2e9ec;
 }
 
-.habitat_element.expanded .expand_hide {
+.expanded .expand_hide {
     display: block;
 }
-t_element .seemore {
+
+.habitat_element p, .habitat_element a {
+    color: black;
+    font-size: 8pt;
+}
+
+.habitat_element .seemore {
     display: block;
     margin: auto;
 }

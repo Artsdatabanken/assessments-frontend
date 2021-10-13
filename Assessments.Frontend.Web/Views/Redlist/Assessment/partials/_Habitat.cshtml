@@ -10,100 +10,75 @@
 @{
 //model IEnumerable<string>
 Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
+
+
+    void habitatFunction(string imageurl, string title, string description, string mapping, string active)
+    {
+    <div class="habitat_element @active">
+        <div class="habitat_icon">
+            @if (imageurl != null)
+            {
+                <img src=@imageurl />
+            }
+        </div>
+        @if (title != null)
+        {
+            <b>@title</b>
+        }
+        @if (description != null)
+        {
+            <p>
+                @description
+
+            </p>
+        }
+        @if (mapping != null)
+        {
+
+            <p class="expand_hide">
+                @Html.Raw(mapping)
+            </p>
+
+            <button class="tertiary tinybutton" onclick="expand(this, 'expanded')">
+                <span class="more">Se NiN-koder</span>
+                <span class="less">Skjul NiN-koder</span>
+            </button>
+        }
+    </div>    
+    }
 }
 
-<div class="habitat page_section">
+<div class="habitat page_section ">
     @if (@Model.MainHabitat.Count() != 0)
     {
-    <h2>@ViewBag.glossary["habitat"]["tagline"]</h2>
-        <div>
-            @Html.Raw(@ViewBag.glossary["habitat"]["description"])
-            <h3>Arten finnes i disse habitatene</h3>
-            <div class="habitat_container">
-                @foreach (var modelelement in @Model.MainHabitat)
-                {
-                    // THIS CODE BELOW IS DUPLICATED IN THE PARAGRAPH BELOW IT.
-                    // SHOULD BE ITS OWN PARTIAL OR FUNCTION.
-                    <div class="habitat_element">
-                        <div class="habitat_icon">
-                            @if (@ViewBag.habitat[modelelement]["image"] != null)
-                            {
-                                <img src=@ViewBag.habitat[modelelement]["image"] />
-                            }
-                        </div>
-                        @if (@ViewBag.habitat[modelelement]["shortname"] != null)
-                        {
-                            <b>@ViewBag.habitat[modelelement]["shortname"]</b>
-                        }
-                        @if (@ViewBag.habitat[modelelement]["description"] != null)
-                        {
-                            <p>
-                                @Html.Raw(@ViewBag.habitat[modelelement]["description"])
+        <h2>@ViewBag.glossary["habitat"]["tagline"]</h2>
+        <p>@Html.Raw(@ViewBag.glossary["habitat"]["description"])</p>
 
-                            </p>
 
-                            <p class="expand_hide">
-                                @Html.Raw(@ViewBag.habitat[modelelement]["mapping"])
-                            </p>
+        <button class="changetab active" onclick="expand(this, 'see_all', 'remove')">
+            Vurderingens habitat
+        </button>
 
-                            <button class="tertiary tinybutton" onclick="expand(this)">
-                                <span class="more">Se NiN-koder</span>
-                                <span class="less">Skjul NiN-koder</span>
-                            </button>
-                        }
-                    </div>
-                }
-            </div>
-        </div>
-        <div class="other_habitats">
-            <span class="hidden">
-                <h3>Resterende habitatinndelinger</h3><br />
-                <div class="habitat_container">
+        <button class="changetab" onclick="expand(this, 'see_all','add')">
+            Alle habitat
+        </button>
+        <br />
 
-                    @foreach (var key in habitat.Keys)
-                    {
-                        @if (!@Model.MainHabitat.Contains(key))
-                        {
-                    <div class="habitat_element @Html.Raw(@Model.MainHabitat.Contains(key) ? "active" : "inactive")">
 
-                        <div class="habitat_icon">
-                            @if (@habitat[key]["image"] != null)
-                            {
-                                <img src=@habitat[key]["image"] />
-                            }
-                        </div>
+        <h3 class="active">Arten finnes i disse habitatene</h3>
+        <h3 class="inactive">Alle habitat</h3>
 
-                        @if (@habitat[key]["shortname"] != null)
-                        {
-                            <b>@habitat[key]["shortname"]</b>
-                        }
 
-                        @if (@habitat[key]["description"] != null)
-                        {
-                            <p>
-                                @Html.Raw(@habitat[key]["description"])
-
-                            </p>
-
-                            <p class="expand_hide">
-                                @Html.Raw(@habitat[key]["mapping"])
-                            </p>
-                            <button class="tertiary tinybutton" onclick="expand(this)">
-                                <span class="more">Se NiN-koder</span>
-                                <span class="less">Skjul NiN-koder</span>
-                            </button>
-                        }
-
-                    </div>
-                        }
-                    }
-
-                </div>
-            </span>
-            <button class="seemore" onclick="expand(this)">
-                <span class="more">Se alle habitatinndelinger i Rødlista 2021</span>
-                <span class="less">Se kun habitat arten forekommer i</span>
-            </button>
+        <div class="habitat_container">
+            @foreach (var key in habitat.Keys)
+            {
+                var imageurl = @habitat[key]["image"];
+                var title = @habitat[key]["shortname"];
+                var description = @habitat[key]["description"];
+                var mapping = @habitat[key]["mapping"];
+                var active = @Model.MainHabitat.Contains(key) ? "active" : "inactive";
+                habitatFunction(imageurl, title, description, mapping, active);
+            }
         </div>
     }
 
@@ -111,15 +86,23 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         // See more text by altering css of the clicked element's top parent node
         var seemorebuttons = document.getElementsByClassName('seemore');
 
-        function expand(element) {
-            if (element.parentElement.classList.contains("expanded")) {
-                element.parentElement.classList.remove("expanded");
-            } else {
-                element.parentElement.classList.add("expanded");
+        function expand(element, className, actiontype) {
+            if (actiontype == "remove") {
+                element.parentElement.classList.remove(className);
+                element.nextElementSibling.classList.remove("active");
+                element.classList.add("active");
+            } else if (actiontype == "add") {
+                element.parentElement.classList.add(className);
+                element.previousElementSibling.classList.remove("active");
+                element.classList.add("active");
+            } else {               
+                if (element.parentElement.classList.contains(className)) {
+                    element.parentElement.classList.remove(className);
+                } else {
+                    element.parentElement.classList.add(className);
+                }                
             }
+            
         }
-
-
-
     </script>
 </div>

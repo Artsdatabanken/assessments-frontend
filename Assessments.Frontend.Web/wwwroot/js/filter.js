@@ -36,14 +36,7 @@ const showFilters = () => {
     filters.style["display"] = "block";
 
     filter_modal_background.style["display"] = "block";
-    filter_modal_background.style["background"] = "rgba(0,0,0,0)";
-    filter_modal_background.style["top"] = "0";
-    filter_modal_background.style["bottom"] = "0";
-    filter_modal_background.style["position"] = "relative";
-    filter_modal_background.style["margin-left"] = "0";
-    filter_modal_background.style["width"] = "auto";
-    filter_modal_background.style["height"] = "auto";
-    filter_modal_background.style["z-index"] = "1";
+    filter_modal_background.classList.remove("modal_background_open");
 
     filters_scrollable.style["position"] = "relative";
     filters_scrollable.style["width"] = "auto";
@@ -63,14 +56,7 @@ const openFilters = () => {
     filters.style["display"] = "block";
 
     filter_modal_background.style["display"] = "block";
-    filter_modal_background.style["background"] = "rgba(0,0,0,0.5)";
-    filter_modal_background.style["top"] = "0";
-    filter_modal_background.style["bottom"] = "0";
-    filter_modal_background.style["position"] = "fixed";
-    filter_modal_background.style["margin-left"] = "-15px";
-    filter_modal_background.style["width"] = "100vw";
-    filter_modal_background.style["height"] = "100vh";
-    filter_modal_background.style["z-index"] = "10";
+    filter_modal_background.classList.add("modal_background_open");
 
     filters_scrollable.style["position"] = "fixed";
     filters_scrollable.style["width"] = "90vw";

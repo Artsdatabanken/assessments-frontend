@@ -54,29 +54,40 @@
     .toggle_filter .filternumber {
         position: absolute;
     }
+}
 
-    .filter_groups h3 {
-        width: 100%;
-        overflow: hidden;
-        text-align: center;
-    }
+button.close_filters {
+    display: none;
+}
+
+/* MOBILE OPEN MODAL */
+
+#filters_scrollable {
+    position: relative;
+}
+
+.modal_background_open {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+    top: 0px;
+    bottom: 0px;
+    position: fixed;
+    margin-left: -15px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+
 }
 
 /* FILTER */
-
 .arrow-down {
-  border: 0px;
-  background-color: #0000;
+    border: 0px;
+    background-color: #0000;
 }
 
 .filtercontainer{
     box-sizing: border-box;
     max-width: 200px;
     width: 200px;
-    /*
-        margin-right: 15px;
-        border-right: 1px solid #dadada;
-    */
     padding: 5px;
     margin-top: -1px;
     flex: none;
@@ -108,9 +119,7 @@ button.list_header {
   align-items: center;
 }
 
-button.close_filters {
-    display: none;
-}
+
 
 .filters_bottom {
     margin-top: 10px;
@@ -140,22 +149,6 @@ button.close_filters {
         justify-content: center;
     }
 
-    .filter_groups {
-        background-color: #f7f7f7;
-        padding-top: 15px;
-    }
-
-    .filter_group {
-        width: 100%;
-        padding: 0px;
-        padding-right: 5px;
-    }
-
-    .filter_group ul {
-        background: #f0f0f0;
-        padding: 5px;
-    }
-
     #navbar-mobile {
         z-index: 1;
     }
@@ -181,6 +174,12 @@ button.close_filters {
     .filters_bottom button {
         margin: 5px;
     }
+
+    .filter_groups h3 {
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+    }
 } 
 
 .collapse_checkbox,
@@ -198,6 +197,28 @@ button.close_filters {
     background: #f0f0f0;
     padding: 5px;
 }
+
+@media only screen and (max-width: 750px) {
+
+    .filter_groups {
+        background-color: #f7f7f7;
+        padding-top: 15px;
+    }
+
+    .filter_group {
+        width: 100%;
+        padding: 0px;
+        padding-right: 5px;
+    }
+
+    .filter_group ul {
+        background: #f0f0f0;
+        padding: 5px;
+    }
+
+}
+
+
 
 /* FILTER GROUP HEADING*/
 .list_header .material-icons {
@@ -225,13 +246,6 @@ button.close_filters {
     color:white;
 }
 
-#open_filter {
-    display: none;
-}
-
-#filters_scrollable{
-    position:relative;
-}
 
 /* FILTER NUMBER (count icon) */
 

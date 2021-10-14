@@ -308,7 +308,6 @@ p.region_list_header {
 
 .region .area{
     display:flex;
-    max-width: calc(100% - 125px);
 }
 
 .region .area i{
@@ -607,6 +606,7 @@ span.material-icons.less {
 .indicator {
     display:inline-block;
     width: 15px;
+    min-width: 15px;
     height: 15px;
     margin:0px;
     font-size:0;
@@ -624,6 +624,10 @@ span.area {
     display: inline-block;
     width: 50%;
     height: 100%;
+}
+
+span.area i {
+    text-align: end;
 }
 
 /*criteria*/

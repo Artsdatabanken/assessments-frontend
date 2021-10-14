@@ -21,22 +21,23 @@
         </h3>
         <!-- Paginator buttons -->
         @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", new
-       {
-           Page = page,
-           Area = Context.Request.Query["CateAreagory"],
-           Category = Context.Request.Query["Category"],
-           Criterias = Context.Request.Query["Criterias"],
-           EuroPop = Context.Request.Query["EuroPop"],
-           Regions = Context.Request.Query["Regions"],
-           Habitats = Context.Request.Query["Habitats"],
-           SpeciesGroups = Context.Request.Query["SpeciesGroups"],
-           PresumedExtinct = Context.Request.Query["PresumedExtinct"]
-       }), new PagedListRenderOptions
-       {
-           PageClasses = new[] { "page-link" },
-           UlElementClasses = new[] { "pagination" },
-           LiElementClasses = new[] { "page-item" }
-       })
+        {
+               Page = page,
+               Area = Context.Request.Query["Area"],
+               Category = Context.Request.Query["Category"],
+               Criterias = Context.Request.Query["Criterias"],
+               TaxonRank = Context.Request.Query["TaxonRank"],
+               EuroPop = Context.Request.Query["EuroPop"],
+               Regions = Context.Request.Query["Regions"],
+               Habitats = Context.Request.Query["Habitats"],
+               SpeciesGroups = Context.Request.Query["SpeciesGroups"],
+               PresumedExtinct = Context.Request.Query["PresumedExtinct"]
+           }), new PagedListRenderOptions
+           {
+               PageClasses = new[] { "page-link" },
+               UlElementClasses = new[] { "pagination" },
+               LiElementClasses = new[] { "page-item" }
+           })
     </div>
 </div>
 
@@ -48,6 +49,6 @@
             // LOGS OUT ACTIVE ELEMENT WHEN TABBING TO MORE EASILY FIND BUG
             console.log("previous active element", document.activeElement)
         }
-        
-    }); 
+
+    });
 </script>

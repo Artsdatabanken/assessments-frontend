@@ -119,6 +119,7 @@
             <div class="outer tabbed_element_container">
                 @foreach (var (key, value) in impactfactors_json)
                 {
+                    <h3 class="@activeOrNot(key)">@key @value["title"] </h3>
                     @if (value.ContainsKey("subelement"))
                     {
                         <ul class="second @activeOrNot(key)">
@@ -127,7 +128,7 @@
                             }
                             @foreach (var (first_k, first_v) in first_layer)
                             {
-                                <li class="@activeOrNot(first_k)">
+                                <li class="@activeOrNot(first_k)" onclick="expand(this, 'show_expand')">
                                     @{listHeaders(first_k, first_v);}
                                     @if (first_v.ContainsKey("subelement"))
                                     {
@@ -207,8 +208,14 @@
             document.getElementById('impactfactors').classList.add("summary");
             document.getElementById('impactfactors').classList.remove("full_list");
         }
-
         button.classList.add("active");
+    }
 
+    function expand(element, className) {
+        if (element.classList.contains(className)) {
+            element.classList.remove(className);
+        } else {
+            element.classList.add(className);
+        }   
     }
 </script>

@@ -1,3 +1,69 @@
+/* CONTROL BUTTONS */
+
+
+/* View control bar */
+
+.controls {
+    border-bottom: 1px solid #7f726b;
+    padding-top: 20px
+}
+
+@media only screen and (min-width: 750px) {
+    .controls {
+        margin-left: 200px;
+    }
+}
+
+.controls button {
+    margin-bottom: -1px;
+    border: 1px solid #7f726b;
+    margin-left: 0;
+    margin-right: 4px;
+}
+
+.controls button.active {
+    border: 1px solid #7f726b;
+    color: black;
+    background: white;
+    border-bottom-color: white;
+}
+
+.controls button.active:first-child {
+    border-left-color: lightgray;
+}
+
+
+@media only screen and (max-width: 750px) {
+    .controls button {
+        font-size: 10pt;
+    }
+
+    .controls .material-icons {
+        display: block;
+        font-size: 15pt;
+    }
+
+    /* Filter button */
+
+
+    .toggle_filter {
+        float: right;
+        position: relative;
+    }
+
+    .toggle_filter .filternumber {
+        position: absolute;
+    }
+
+    .filter_groups h3 {
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+    }
+}
+
+/* FILTER */
+
 .arrow-down {
   border: 0px;
   background-color: #0000;
@@ -16,19 +82,6 @@
     flex: none;
 }
 
-
-/* View control bar */
-@media only screen and (max-width: 750px) {
-    .controls {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .main button.hideonmobile {
-        display: none;
-    }
-}
-
 .filter {
     justify-content: flex-start;
     width: 15%;
@@ -36,14 +89,6 @@
 
 li.checkbox, .filter_groups ul {
   list-style-type: none;
-}
-
-.controls span, a>button {
-  pointer-events: none;
-}
-
-.controls_right {
-  display: none;
 }
 
 .list_header_text {
@@ -59,15 +104,6 @@ button.list_header {
     flex-direction: row;
 }
 
-h3.toggle_filter {
-   display:block;
-}
-
-h3.togglefilter span{
-    display:inline;
-    justify-content:top;
-}
-
 .list_header {
   align-items: center;
 }
@@ -80,102 +116,16 @@ button.close_filters {
     margin-top: 10px;
 }
 
-@media only screen and (max-width: 750px) {
-    .filtercontainer {
-        margin-right: 0px;
-        margin-bottom: 15px;
-        width: 100%;
-        max-width: 100%;
-        border-right: 0;
-    }
+.filter_header {
+    padding: 0;
+    margin-top: 0;
 }
-/*
-.filter_groups {
-    border: 1px solid lightgrey;
-}
-    */
 
-@media only screen and (min-width: 750px) {
-    .controls {
-        border-bottom: 1px solid #7f726b;
-        padding-top: 20px;
-        margin-left: 200px;
-    }
-
-    .controls button {
-        margin-bottom: -1px;
-        border: 1px solid #7f726b;
-        margin-left: 0;
-        margin-right: 4px;
-
-    }
-
-    .controls button.active {
-        border: 1px solid #7f726b;
-        color: black;
-        background: white;
-        border-bottom-color:white;
-    }
-
-    .controls button.active:first-child {
-        border-left-color: lightgray;
-    }
-
-    .filter_header {
-        padding: 0;
-        margin-top: 0;
-    }
-
-    .filter_header .material-icons{
-        padding-right: 5px;
-    }
+.filter_header .material-icons {
+    padding-right: 5px;
 }
 
 @media only screen and (max-width: 750px) {
-    .controls {
-        display: flex;
-        background-color: #f3f3f3;
-        flex-wrap: nowrap;
-        max-width: 100%;
-    }
-
-    .controls_right {
-        padding-left: 5px;
-    }
-
-    .controls_left {
-        padding-right: 5px;
-    }
-
-    .controls_left, .controls_right {
-        display: flex;
-        flex-wrap: nowrap;
-    }
-
-    .controls button {
-        margin: 3px;
-        margin: 0;
-        flex: 1;
-    }
-
-    .close_reset_filter {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        width: 100%;
-        padding-top: 10px;
-        background-color: #f7f7f7;
-        border-bottom: 1px solid lightgray;
-    }
-
-    
-    .filtercontainer {
-        padding: 10px 0;
-        border-bottom: 1px solid lightgray;
-        background-color: #fff;
-    }
-
-
 
     .show_filters {
         display: inline-block;
@@ -204,26 +154,6 @@ button.close_filters {
     .filter_group ul {
         background: #f0f0f0;
         padding: 5px;
-    }
-
-    .filter_group h4 {
-        width: 100%;
-        background: white;
-        text-align: left;
-        border: 1px solid lightgrey;
-        padding: 10px;
-        border-right: 0;
-        border-left: 0;
-        margin: 0;
-    }
-
-    .controls button {
-        font-size: 10pt;
-    }
-
-    .controls .material-icons {
-        display: block;
-        font-size: 15pt;
     }
 
     #navbar-mobile {
@@ -295,15 +225,6 @@ button.close_filters {
     color:white;
 }
 
-.controls_left button label {
-    display: block;
-    padding: 6px 12px;
-}
-
-.controls_left button label:hover{
-    cursor:pointer;
-}
-
 #open_filter {
     display: none;
 }
@@ -312,14 +233,7 @@ button.close_filters {
     position:relative;
 }
 
-.remove_number{
-    background: #098293;
-    color: white;
-    text-align:center;
-    width:20px;
-    height:20px;
-    display:inline-block;
-}
+/* FILTER NUMBER (count icon) */
 
 .filternumber {
     display: flex;
@@ -341,8 +255,6 @@ button.close_filters {
     height: 20px;
     display: inline-block;
 }
-
-
 .filter_group button:hover .filternumber,
 .filter_group button:focus .filternumber,
 .filter_group button:active .filternumber {

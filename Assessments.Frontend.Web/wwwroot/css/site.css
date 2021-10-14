@@ -6,7 +6,11 @@
 /* Graphic profile colours for reference - classes are not in use as is */
 https://github.com/Artsdatabanken/grafiskprofil/wiki
 
-/* Actual page css */
+
+.main {
+    position: relative;
+}
+
 h1 {
     margin-bottom: 0;
 }
@@ -89,10 +93,14 @@ h1 {
         border-right:2px solid lightgrey;
     }
 
+    .pagecontainer{
+        display:flex;
+    }
+
     .content-placer {
         padding-top: 20px;
         width: calc(75% - 4px);
-        display: inline-block;
+        display: flex;
     }
 
 
@@ -120,7 +128,7 @@ h1 {
 
     .content-placer {
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
         padding-top: 20px;
     }
 
@@ -135,17 +143,12 @@ h1 {
     }
 
     .sidebarmenu {
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        border: 0;
-        border-top:2px solid lightgrey;
-        padding: 10px;
-        margin-top: 20px;
-        margin-bottom: 0;
-        order: 3;
-        padding: 20px;
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+        left: auto;
+        top: -7px;
+        z-index: 2;
     }
 
     .sidebarmenu ul {
@@ -154,8 +157,9 @@ h1 {
         max-width: 100%;
         margin: 0;
         padding: 0;
-        border: 0;
+        border: 1px solid lightgrey;
         padding-bottom: 0;
+        background:white;
     }
 
 
@@ -330,3 +334,21 @@ h1 {
     border-top-color: #7f726b;
     margin-top:0;
 }
+
+
+@media only screen and (max-width: 940px) {
+    .sidebarmenu ul{
+        display: none;
+    }
+
+    .sidebarmenu.expand ul {
+        display: block;
+        width: 200px;
+        text-align: left;
+    }
+
+    .sidebarmenu button{
+        margin:0;
+    }
+}
+

@@ -313,8 +313,12 @@ p.region_list_header {
 .region .area i{
     padding-left:5px;
     display: inline-block;
+    white-space: nowrap;
 }
 
+.region .area i span {
+    white-space: normal;
+}
 
 /* habitat TYPES */
 
@@ -524,6 +528,14 @@ span.material-icons.less {
 @media only screen and (max-width: 500px) {
     .map {
         width: 100%;
+    }
+}
+
+/* Special case when map gets a lot smaller than the list */
+@media (max-width: 1200px) and (min-width: 940px) {
+    .regionlist span.region p,
+    .regionlist span.region i {
+        font-size: 10pt;
     }
 }
 

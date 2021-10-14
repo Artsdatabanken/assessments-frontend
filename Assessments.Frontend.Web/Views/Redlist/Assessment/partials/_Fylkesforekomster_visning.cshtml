@@ -54,40 +54,50 @@
                     <span class="area">
                         @if (region.State == 0)
                         {
-                            <span class="indicator">
-                                <span class="indicatorcontent sea known"></span>
-                                <span class="indicatorcontent known"></span>
-                            </span>
-                            <i>Kjent</i>
+                            <i>
+                                <span class="indicator">
+                                    <span class="indicatorcontent sea known"></span>
+                                    <span class="indicatorcontent known"></span>
+                                </span>
+                                <span>Kjent</span>
+                            </i>
                         }
                         else if (region.State == 1)
                         {
-                            <span class="indicator">
-                                <span class="indicatorcontent sea presumed"></span>
-                                <span class="indicatorcontent presumed"></span>
-                            </span>
-                            <i>Antatt</i>
+                            <i>
+                                <span class="indicator">
+                                    <span class="indicatorcontent sea presumed"></span>
+                                    <span class="indicatorcontent presumed"></span>
+                                </span>
+                                <span>Antatt</span>
+                            </i>
                         }
                         else if (region.State == 2)
                         {
-                            <span class="indicator"></span>
-                            <i>Ingen</i>
+                            <i>
+                                <span class="indicator"></span>
+                                <span>Ingen</span>
+                            </i>
                         }
                         else if (region.State == 3)
                         {
-                            <span class="indicator">
-                                <span class="indicatorcontent sea presumed_extinct"></span>
-                                <span class="indicatorcontent presumed_extinct"></span>
-                            </span>
-                            <i>Antatt Utdødd</i>
+                            <i>
+                                <span class="indicator">
+                                    <span class="indicatorcontent sea presumed_extinct"></span>
+                                    <span class="indicatorcontent presumed_extinct"></span>
+                                </span>
+                                <span>Antatt Utdødd</span>
+                            </i>
                         }
                         else if (region.State == 4)
                         {
-                            <span class="indicator">
-                                <span class="indicatorcontent sea extinct"></span>
-                                <span class="indicatorcontent extinct"></span>
-                            </span>
-                            <i>Utdødd</i>
+                            <i>
+                                <span class="indicator">
+                                    <span class="indicatorcontent sea extinct"></span>
+                                    <span class="indicatorcontent extinct"></span>
+                                </span>
+                                <span>Utdødd</span>
+                            </i>
                         }
                     </span>
                 </span>
@@ -99,7 +109,7 @@
         </div>
     </div>
     <br />
-    <p class="center-horizontal"><i>En mørkere farge benyttes her for å fremheve landområder</i></p>
+<p class="center-horizontal"><i>En mørkere farge benyttes her for å fremheve landområder</i></p>
 
 </div>
 

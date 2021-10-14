@@ -23,6 +23,7 @@
         @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", new
         {
                Page = page,
+               Name = Context.Request.Query["Name"],
                Area = Context.Request.Query["Area"],
                Category = Context.Request.Query["Category"],
                Criterias = Context.Request.Query["Criterias"],

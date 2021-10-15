@@ -539,6 +539,25 @@ span.material-icons.less {
     }
 }
 
+@media (max-width: 650px) and (min-width: 450px) {
+    .regionlist span.region p,
+    .regionlist span.region i {
+        font-size: 10pt;
+    }
+
+    .region_distributions {
+        flex-direction: row;
+    }
+
+    .regionlist {
+        width: 35%;
+    }
+
+    .map {
+        width: 65%;
+    }
+}
+
 /* SUPER-tiny: 300px*/
 @media only screen and (max-width: 300px) {
 

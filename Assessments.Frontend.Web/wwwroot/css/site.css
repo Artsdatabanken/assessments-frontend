@@ -346,6 +346,7 @@ ul a:active,
     margin-top:0;
 }
 
+
 @media only screen and (max-width: 940px) {
     .sidebarmenu ul{
         display: none;
@@ -447,6 +448,19 @@ ul a:active,
     }
 
     .full_title {
+        display: none;
+    }
+}
+
+
+@media only screen and (min-width: 750px) {
+    .only_mobile {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .main .hideonmobile {
         display: none;
     }
 }

@@ -96,14 +96,14 @@
 
 <div class="controls">
     <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
-    <div class="controls_right">
-        <button class="toggle_filter" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-            <span class="filternumber">@GetActiveFiltersCount()</span>
-            <span class="material-icons">
-                filter_list
-            </span>Filter
-        </button>
-    </div>
+
+    <button class="toggle_filter only_mobile" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
+        <span class="filternumber">@GetActiveFiltersCount()</span>
+        <span class="material-icons">
+            filter_list
+        </span>Filter
+    </button>
+
 </div>
 
 <div class="listwrapper">
@@ -122,7 +122,7 @@
                             <span>Filter</span>                            
                             @if (!string.IsNullOrEmpty(@GetActiveFiltersCount()))
                             {
-                            <a class="button tinybutton tertiary rightbutton" asp-controller="Redlist" asp-action="Index2021">
+                            <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
 
                                 <span>Fjern</span>
                                 <div class="filternumber"><span>@GetActiveFiltersCount()</span></div>

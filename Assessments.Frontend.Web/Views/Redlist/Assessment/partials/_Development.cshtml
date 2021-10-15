@@ -1,0 +1,37 @@
+﻿@model SpeciesAssessment2021
+
+@functions{
+    public string categoryDescription(string category)
+    {
+        // Takes in category as presented in the model
+        // uses categoryMatcher to remove degrees etc.
+        // Returns name of category (whatever for?)
+        var actual_category = category.Substring(0, 2);
+        var final_string = @ViewBag.categories[actual_category]["presentationstring"];
+        return final_string;
+    }
+}
+
+<h3>Utvikling</h3>
+<ul class="history_list">
+
+    <li>
+        <b class="text_content"> 2021: </b>
+        <span class="graphic_element @Model.Category">@Model.Category</span>
+        <i> @categoryDescription(Model.Category)</i>
+
+        @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
+        {
+            <span>Arten er vurdert for første gang i 2021.</span>
+        }
+    </li>
+
+    @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger
+    {
+        <li>
+            <b class="text_content"> @prev.Year: </b>
+            <span class="graphic_element @prev.Category">@prev.Category</span>
+            <i> @categoryDescription(prev.Category)</i>
+        </li>
+    }
+</ul>

@@ -469,7 +469,8 @@
                                     @{ iconChooser(inString(k, options[key])); }
                                     <div class="listitem_text_field">
                                         <h5>@k. <span>@v["title"]</span></h5>
-                                        @{ hasKey("description", v);}
+                                        @{ //hasKey("description", v)
+                                           ;}
                                         @if (v.ContainsKey("sub"))
                                         {
                                             <div class="subsub_list">

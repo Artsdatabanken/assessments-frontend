@@ -34,12 +34,19 @@
             <nav id="headermenu" class="hide"></nav>
         </div>
     </header>
-
-    <h1 class="title_header">
-        Norsk rødliste for arter 
-    </h1>
+    
+    <div class="title_header">
+        <h1 class="title_header" style="display:inline;">
+            <span class="full_title">Norsk rødliste for arter</span>
+            <span class="short_title">Rødlista</span>
+        </h1>
+        <partial name="/Views/Shared/_PageMenu.cshtml" />
+    </div>
+   
     <div class="main">
         <div class="main-content width-adjuster">
+
+
             @RenderBody()
             <script src="~/js/site.js" asp-append-version="true"></script>
             <script src="~/js/filter.js" asp-append-version="true"></script>

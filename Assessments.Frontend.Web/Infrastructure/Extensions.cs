@@ -46,10 +46,5 @@ namespace Assessments.Frontend.Web.Infrastructure
             return sb.ToString();
         }
 
-        public static string ToCamelString(this Enum value){
-            var text = value.ToString();
-            
-            return text.Substring(0,1).ToLowerInvariant() + text.Substring(1);
-        }
     }
 }

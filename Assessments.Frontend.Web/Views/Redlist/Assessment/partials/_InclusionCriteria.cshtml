@@ -35,9 +35,11 @@
     string inclusion = "";
     string reason_heading = "";
     string reason_description = "";
-    
-    if (new[] { 
-        SpeciesAssessment2021.InitialClassification.RodlisteVurdertArt, 
+    string initialSubClassificationCode = Model.AssessmentInitialSubClassificationCode.ToString();
+
+
+    if (new[] {
+        SpeciesAssessment2021.InitialClassification.RodlisteVurdertArt,
         SpeciesAssessment2021.InitialClassification.UtdoddINorgeRE,
         SpeciesAssessment2021.InitialClassification.SikkerBestandLC,
         SpeciesAssessment2021.InitialClassification.StorUsikkerhetOmKorrektKategoriDD }
@@ -45,20 +47,20 @@
     {
         heading = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["title"];
         inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["description"];
-        reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"];
-        reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
-        
+        reason_heading = @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["title"];
+        reason_description += @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["description"];
+
     }
     else if (new[] {SpeciesAssessment2021.InitialClassification.FremmedArtNA,
         SpeciesAssessment2021.InitialClassification.BegrensetForekomstNA,
         SpeciesAssessment2021.InitialClassification.KunnskapsStatusNE }
-        .Contains(@Model.AssessmentInitialClassificationCode))
+.Contains(@Model.AssessmentInitialClassificationCode))
     {
         heading = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["title"];
         inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
-        reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"]; // fjernet magic string kopling - potensielt rename termer
-        reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
-        
+        reason_heading = @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["title"]; 
+        reason_description += @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["description"];
+
     }
 }
 

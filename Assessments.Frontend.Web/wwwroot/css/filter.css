@@ -10,7 +10,7 @@
 
 @media only screen and (min-width: 750px) {
     .controls {
-        margin-left: 200px;
+        margin-left: 220px;
     }
 }
 
@@ -86,8 +86,8 @@ button.close_filters {
 
 .filtercontainer{
     box-sizing: border-box;
-    max-width: 200px;
-    width: 200px;
+    max-width: 220px;
+    width: 220px;
     padding: 5px;
     margin-top: -1px;
     flex: none;
@@ -98,8 +98,15 @@ button.close_filters {
     width: 15%;
 }
 
-li.checkbox, .filter_groups ul {
-  list-style-type: none;
+li.checkbox {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+}
+
+
+.filter_groups ul {
+    list-style-type: none;
 }
 
 .list_header_text {

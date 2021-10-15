@@ -14,9 +14,11 @@ namespace Assessments.Frontend.Web.Models
             this.Criterias = Array.Empty<string>();
             this.EuroPop = Array.Empty<string>();
             this.IsCheck = Array.Empty<string>();
+            this.Meta = Array.Empty<string>();
             this.Regions = Array.Empty<string>();
             this.Habitats = Array.Empty<string>();
             this.SpeciesGroups = Array.Empty<string>();
+            this.TaxonRank = Array.Empty<string>();
         }
         public IPagedList<SpeciesAssessment2021> Redlist2021Results { get; set; }
         public bool Endangered { get; set; }
@@ -30,8 +32,10 @@ namespace Assessments.Frontend.Web.Models
         public string[] EuroPop { get; set; }
         public string[] IsCheck { get; set; }
         public string[] Habitats { get; set; }
+        public string[] Meta { get; set; }
         public string[] Regions { get; set; }
         public string[] SpeciesGroups { get; set; }
+        public string[] TaxonRank { get; set; }
         
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 
@@ -47,6 +51,8 @@ namespace Assessments.Frontend.Web.Models
         public Dictionary<string, int> Criteria { get; set; }
 
         public Dictionary<string, int> Habitat { get; set; }
+
+        public Dictionary<string, int> ImpactFactors { get; set; }
 
         public Dictionary<string, int> Region { get; set; }
 

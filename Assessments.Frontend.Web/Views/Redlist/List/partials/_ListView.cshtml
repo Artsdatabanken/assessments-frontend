@@ -20,56 +20,48 @@
 
     <ul class="redlist" id="redlist">
         <li class="listheader" id="listheader">
-            <span class="allsize">Kategori</span>
-
-            <span class="fullsize">Artsnavn</span>
-            <span class="fullsize">Populærnavn</span>
-            <span class="mobile">Art</span>
-
-            <span class="allsize">Artsgruppe</span>
+            <span></span>
+            <span class="list_cell">Artsnavn</span>
+            <span class="list_cell">Populærnavn</span>
+            <span class="list_cell">Kategori</span>
 
         </li>
 
 
         @foreach (var item in Model.Redlist2021Results)
         {
-
             <li class="list">
-                <a asp-action="Detail" asp-route-id="@item.Id">
+                <a asp-action="Detail" asp-route-id="@item.Id" class="@item.AssessmentArea">
                     @{
                         // TODO: The number of fields contained in the box does not add up. Fix.
                         // Makes it very strange and overflowy in grid view.
                     }
 
-                    <span class="element_category">
-                        <span class="@item.Category.Substring(0,2) category_tag">@item.Category</span>
-                    </span>
+
+                    <div class="element_icon list_cell">
+                        <span class="svalbard">Svalbard</span>
+                        @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
+                        {
+                            <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
+                            <span>@item.SpeciesGroup</span>
+                        }
+                    </div>
+
 
                     <span class="element_species">
-                        <span class="element_popular_name">@Capitalize(item.PopularName)</span>
-                        <span class="element_name">@item.ScientificName</span>
-                        <span class="element_area mobile">
-                            @if (@item.AssessmentArea == "N")
-                            {
-                                <span> Norge </span >
-                            }
-                            else if (@item.AssessmentArea == "S")
-                            {
-                               <span>Svalbard</span>
-                            }
-
-                        </span>
+                        <i class="element_name list_cell">@item.ScientificName</i>
+                        <span class="element_popular_name list_cell">@Capitalize(item.PopularName)</span>                       
                     </span>
 
+                    <span class="list_cell categoryname">
+                        @if (!string.IsNullOrEmpty(item.Category))
+                        {
+                            @ViewBag.categories[item.Category.Substring(0, 2)]["presentationstring"];
+                        }
+                    </span>
 
-                    <span class="element_speciesgroup">
-                        <span class="element_group">@item.SpeciesGroup</span>
-                        <div class="element_icon">
-                            @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
-                            {
-                                <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
-                            }
-                        </div>
+                    <span  class="list_cell categorytag">
+                        <span class="@item.Category.Substring(0,2) category_tag">@item.Category</span>
                     </span>
 
                 </a>

@@ -24,7 +24,7 @@
     "name": "Fastmarksskogsmark",
     "shortname": "Skog",
     "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Fastmarksskogsmark/foto_408.jpg",
-    "description": "Skogarealer på fastmark, med unntak av treplantasjer, semi-naturlig eng som er tresatt og skog som påvirkes av flom. Til \"fastmarkssskogsmark\" hører også åpne hogstflater hvor utviklingen av ny skog ikke blir aktivt forhindret.",
+    "description": "Skogarealer, med unntak av treplantasjer, semi-naturlig eng som er tresatt og skog som påvirkes av flom.",
     "mapping": "Ensbetydende med NiN 2.0 hovedtypen <a href=\"https://artsdatabanken.no/Pages/171923/Fastmarksskogsmark\" target=\"_new\" rel=\"noopener\">T4 Fastmarksskogsmark</a>."
   },
   "Ferskvannssystemer": {
@@ -38,7 +38,7 @@
     "name": "Fjæresone",
     "shortname": "Fjæresone",
     "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Strandberg/foto_408.jpg",
-    "description": "Samlebetegnelse på området mellom laveste normale fjæremål og høyeste normale flomål, eller øvre grense for regelmessig påvirkning av bølgeslag eller sjøsprøyt, inkludert driftvoller.",
+    "description": "Samlebetegnelse på området mellom laveste normale fjæremål og høyeste normale flomål, eller øvre grense for regelmessig påvirkning av bølgeslag eller sjøsprøyt.",
     "mapping": "Omfatter NiN 2.0 hovedtypene <a href=\\\"https://artsdatabanken.no/Pages/171925/Strandberg\" \"target=\\\"_new\\\" rel=\\\"noopener\\\">T6 Strandberg</a> og \"<a href=\\\"https://artsdatabanken.no/Pages/171929/Saltanrikingsmark_i_fjaeresonen\\\" target=\\\"_new\\\" rel=\\\"noopener\\\"> T11 Saltanrikingsmark i fjæresonen</a>."
   },
   "Flomsone": {
@@ -48,9 +48,9 @@
     "description": " Samlebetegnelse på områder som jevnlig blir satt under vann ved flom, først og fremst langs større elver og langs innsjøer.",
     "mapping": "Omfatter NiN 2.0 hovedtypene <a href=\"https://artsdatabanken.no/Pages/171948/Flomskogsmark\" target=\"_new\" rel=\"noopener\">T30 Flomskogsmark</a>, <a href= \"https://artsdatabanken.no/Pages/171936/aapen_flomfastmark\" target =\"_new\" rel=\"noopener\">T18 Åpen flomfastmark</a> og <a href=\"//artsdatabanken.no/Pages/171941/Ferskvannsdriftvoll\" target=\"_new\" rel=\"noopener\">T23 Ferskvannsdriftvoll</a> i NiN 2.0"
   },
-  "IsSnøBreforland": {
-    "name": "Is og snø",
-    "shortname": "Is og snø",
+  "IsSnø": {
+    "name": "Snø og is",
+    "shortname": "Snø og is",
     "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Sn%C3%B8-_og_issystemer/foto_408.jpg",
     "description": "Snø- og issystemer omfatter økosystemer i og på varig snø og is, inkludert polarisen",
     "mapping": "Omfatter begge hovedtypene under NIN 2.0 hovedtypegruppe <a href=\"https://artsdatabanken.no/Pages/172054/Snoe-_og_issystemer\" target=\"_new\" rel=\"noopener\"> I Snø- og issystemer </a>."

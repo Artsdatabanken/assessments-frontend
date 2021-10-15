@@ -1,0 +1,281 @@
+/* CONTROL BUTTONS */
+
+
+/* View control bar */
+
+.controls {
+    border-bottom: 1px solid #7f726b;
+    padding-top: 20px
+}
+
+@media only screen and (min-width: 750px) {
+    .controls {
+        margin-left: 200px;
+    }
+}
+
+.controls button {
+    margin-bottom: -1px;
+    border: 1px solid #7f726b;
+    margin-left: 0;
+    margin-right: 4px;
+}
+
+.controls button.active {
+    border: 1px solid #7f726b;
+    color: black;
+    background: white;
+    border-bottom-color: white;
+}
+
+.controls button.active:first-child {
+    border-left-color: lightgray;
+}
+
+
+@media only screen and (max-width: 750px) {
+    .controls button {
+        font-size: 10pt;
+    }
+
+    .controls .material-icons {
+        display: block;
+        font-size: 15pt;
+    }
+
+    /* Filter button */
+
+
+    .toggle_filter {
+        float: right;
+        position: relative;
+    }
+
+    .toggle_filter .filternumber {
+        position: absolute;
+    }
+}
+
+button.close_filters {
+    display: none;
+}
+
+/* MOBILE OPEN MODAL */
+
+#filters_scrollable {
+    position: relative;
+}
+
+.modal_background_open {
+    background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+    top: 0px;
+    bottom: 0px;
+    position: fixed;
+    margin-left: -15px;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+
+}
+
+/* FILTER */
+.arrow-down {
+    border: 0px;
+    background-color: #0000;
+}
+
+.filtercontainer{
+    box-sizing: border-box;
+    max-width: 200px;
+    width: 200px;
+    padding: 5px;
+    margin-top: -1px;
+    flex: none;
+}
+
+.filter {
+    justify-content: flex-start;
+    width: 15%;
+}
+
+li.checkbox, .filter_groups ul {
+  list-style-type: none;
+}
+
+.list_header_text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-wrap: normal;
+    width: calc(100% - 30px);
+}
+
+button.list_header {
+    display: flex;
+    flex-direction: row;
+}
+
+.list_header {
+  align-items: center;
+}
+
+
+
+.filters_bottom {
+    margin-top: 10px;
+}
+
+.filter_header {
+    padding: 0;
+    margin-top: 0;
+}
+
+.filter_header .material-icons {
+    padding-right: 5px;
+}
+
+@media only screen and (max-width: 750px) {
+
+    .show_filters {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        background:hotpink;
+    }
+
+    .toggle_filter {
+        margin: 0;
+        height: 100%;
+        justify-content: center;
+    }
+
+    #navbar-mobile {
+        z-index: 1;
+    }
+
+    #filters_scrollable {
+        max-height: 90vh;
+        overflow-y: scroll;
+        background: white;
+        border: 1px solid lightgray;
+    }
+
+    li.checkbox {
+        margin: 5px;
+    }
+
+    .filters_bottom {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 10px;
+
+    }
+
+    .filters_bottom button {
+        margin: 5px;
+    }
+
+    .filter_groups h3 {
+        width: 100%;
+        overflow: hidden;
+        text-align: center;
+    }
+} 
+
+.collapse_checkbox,
+.meta_checkbox {
+    display: none;
+}
+
+/* FILTER GROUP */
+
+.filter_group {
+    margin-top: -1px;
+}
+
+.filter_group ul {
+    background: #f0f0f0;
+    padding: 5px;
+}
+
+@media only screen and (max-width: 750px) {
+
+    .filter_groups {
+        background-color: #f7f7f7;
+        padding-top: 15px;
+    }
+
+    .filter_group {
+        width: 100%;
+        padding: 0px;
+        padding-right: 5px;
+    }
+
+    .filter_group ul {
+        background: #f0f0f0;
+        padding: 5px;
+    }
+
+}
+
+
+
+/* FILTER GROUP HEADING*/
+.list_header .material-icons {
+    float: right;
+}
+
+.filter_group button {
+    width: 100%;
+    background: white;
+    text-align: left;
+    border: 1px solid lightgrey;
+    padding: 10px;
+    border-right: 0;
+    border-left: 0;
+    margin: 0;
+    font-weight: normal;
+    text-transform: none;
+}
+
+.filter_group button:hover,
+.filter_group button:focus, 
+.filter_group button:active {
+    cursor: pointer;
+    background: #7f726b;
+    color:white;
+}
+
+
+/* FILTER NUMBER (count icon) */
+
+.filternumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+    background: #7f726b;
+    border-radius: 2px;
+    color: white;
+    font-size: 10pt;
+    width: 22px;
+    min-width: 22px;
+    height: 22px;
+    background-clip: padding-box;
+    background: #098293;
+    color: white;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+.filter_group button:hover .filternumber,
+.filter_group button:focus .filternumber,
+.filter_group button:active .filternumber {
+    color: #7f726b;
+    background: white;
+}
+
+.filternumber:empty {
+    display: none;
+}

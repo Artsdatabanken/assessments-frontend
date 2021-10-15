@@ -7,6 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Frontend.Web", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Mapping", "Assessments.Mapping\Assessments.Mapping.csproj", "{27BFFD0F-B02F-4DC9-B409-691342F0CFC0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Shared", "Assessments.Shared\Assessments.Shared.csproj", "{F43215CE-7F68-4FBB-A51E-2736F490912F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Transformation", "Assessments.Transformation\Assessments.Transformation.csproj", "{A2B663AA-0357-46BD-BF7B-19C50DCF95B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{5ABC60EC-61F1-4433-888B-46DEB60B2464}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +30,14 @@ Global
 		{27BFFD0F-B02F-4DC9-B409-691342F0CFC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27BFFD0F-B02F-4DC9-B409-691342F0CFC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27BFFD0F-B02F-4DC9-B409-691342F0CFC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F43215CE-7F68-4FBB-A51E-2736F490912F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F43215CE-7F68-4FBB-A51E-2736F490912F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F43215CE-7F68-4FBB-A51E-2736F490912F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F43215CE-7F68-4FBB-A51E-2736F490912F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2B663AA-0357-46BD-BF7B-19C50DCF95B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B663AA-0357-46BD-BF7B-19C50DCF95B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B663AA-0357-46BD-BF7B-19C50DCF95B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B663AA-0357-46BD-BF7B-19C50DCF95B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

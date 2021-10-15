@@ -12,14 +12,13 @@
         // uses categoryMatcher to remove degrees etc.
         // Returns name of category (whatever for?)
 
-        if(category == "" || category == null)
+        if(!string.IsNullOrEmpty(category))
         {
-            return "manglende vurdering ";
-        }else
+            return @ViewBag.categories[category.Substring(0, 2)]["presentationstring"];
+        }
+        else
         {
-            var actual_category = category.Substring(0,2);
-            var final_string = @ViewBag.categories[actual_category]["presentationstring"];
-            return final_string;
+            return "vurdering mangler";
         }
     }
 }

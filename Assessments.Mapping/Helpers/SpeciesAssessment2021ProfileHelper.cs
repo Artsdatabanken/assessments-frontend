@@ -225,6 +225,16 @@ namespace Assessments.Mapping.Helpers
             };
         }
 
+        internal static List<string> ResolveMainHabitat(List<string> naturtypeHovedenhet)
+        {
+            static string GetProperDescription(string mainHabitat) => mainHabitat switch
+            {
+                "IsSnøBreforland" => "IsSnø", // denne er omdefinert og er bare Is og Snø
+                _ => mainHabitat
+            };
+            return naturtypeHovedenhet.Select(GetProperDescription).ToList();
+        }
+
         internal static string ResolveSpeciesGroupName(Rodliste2019 rl2021)
         {
             // https://github.com/Artsdatabanken/Rodliste2019/blob/4918668043d7d5b2e5978e29e5028bc68fd1a643/Prod.LoadingCSharp/TransformRodliste2019toDatabankRL2021.cs#L510
@@ -268,13 +278,32 @@ namespace Assessments.Mapping.Helpers
             return speciesGroupName;
         }
 
+        internal static void FixMissingCategoryChangedFrom(Rodliste2019 src, SpeciesAssessment2021 dest)
+        {
+            if (dest.Category.Length > 2 && string.IsNullOrWhiteSpace(dest.CategoryAdjustedFrom)) //Opp eller nedgradering
+            {
+                var calculated = CategoryAndCriteriaHelper.oppsummeringTotal(src);
+                if (!string.IsNullOrWhiteSpace(calculated.KategoriEndretFra))
+                {
+                    dest.CategoryAdjustedFrom = calculated.KategoriEndretFra;
+                }
+            }
+        }
+
         internal static string RemoveAssessmentArea(string src)
         {
-            return src
+            return ReMapSpeciesGroup(src)
                 .Replace("(Svalbard)", string.Empty, StringComparison.InvariantCultureIgnoreCase)
                 .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
         }
-
+        internal static string ReMapSpeciesGroup(string mainHabitat) => mainHabitat switch
+        {
+            "Amfibier, reptiler" => "Amfibier og reptiler",
+            "Hydroider" => "Hydrozoer",
+            "Maneter" => "Stormaneter",
+            _ => mainHabitat
+        };
+    
         /// <summary>
         /// Mapper om bl.a. 2010 id'er og beskrivelser over til 2015 versjonen av påvirkningsfaktorer - samt fixer eldre tekster som er blitt endret
         /// </summary>
@@ -337,13 +366,16 @@ namespace Assessments.Mapping.Helpers
         private static string[] _CategoriesToBlank = new[] { "LC", "NA", "NE" };
         public static void BlankCriteriaSumarizedBasedOnCategory(SpeciesAssessment2021 dest)
         {
-            foreach (var s in _CategoriesToBlank)
+            if (_CategoriesToBlank.Contains(dest.Category.Substring(0, 2)) && !string.IsNullOrWhiteSpace(dest.CriteriaSummarized))
             {
-                if (dest.Category.StartsWith(s) && !string.IsNullOrWhiteSpace(dest.CriteriaSummarized))
+                dest.CriteriaSummarized = string.Empty;
+                foreach (var item in dest.RegionOccurrences)
                 {
-                    dest.CriteriaSummarized = string.Empty;
+                    if (item.State != 2)
+                    {
+                        item.State = 2;
+                    }
                 }
-
             }
         }
         public static int GetAssessmentYear(string ekspertgruppenavn)
@@ -629,6 +661,43 @@ namespace Assessments.Mapping.Helpers
                     return CategoryChangeReason.NotEvaluated2021;
                 default: return CategoryChangeReason.NoChange;
             }
+        }
+
+        public static PreviousAssessment[] GetPreviousAssessments(Rodliste2019.TrackInfo trackInfo)
+        {
+            var result = new List<PreviousAssessment>();
+            if (trackInfo == null) return result.ToArray();
+
+            if (trackInfo.Kategori2015 != null && trackInfo.Kategori2015.Length > 0)
+            {
+                result.Add(new PreviousAssessment()
+                {
+                    Year = 2015, 
+                    Category = trackInfo.Kategori2015.Replace("º", "°"),
+                    CriteriaSummarized = trackInfo.Kriterier2015,
+                    ScientificNameId = trackInfo.ScientificNameId2015,
+                    ScientificName = trackInfo.ScientificName2015,
+                    AssessmentUrl = trackInfo.Url2015
+                });
+            }
+            if (trackInfo.Kategori2010 != null && trackInfo.Kategori2010.Length > 0)
+            {
+                result.Add(new PreviousAssessment()
+                {
+                    Year = 2010,
+                    Category = trackInfo.Kategori2010.Replace("º", "°"),
+                    CriteriaSummarized = trackInfo.Kriterier2010,
+                    ScientificNameId = trackInfo.ScientificNameId2010,
+                    ScientificName = trackInfo.ScientificName2010,
+                    AssessmentUrl = trackInfo.Url2010
+                });
+            }
+            return result.ToArray();
+        }
+
+        public static string Capitalize(string str)
+        {
+            return char.ToUpper(str[0]) + str.Substring(1);
         }
     }
 }

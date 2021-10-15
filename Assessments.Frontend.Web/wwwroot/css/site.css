@@ -3,10 +3,12 @@
     overflow-x: hidden;
 }
 
+/* Graphic profile colours for reference - classes are not in use as is */
+https://github.com/Artsdatabanken/grafiskprofil/wiki
 
-h1{
-    margin-bottom:0;
-
+/* Actual page css */
+h1 {
+    margin-bottom: 0;
 }
 
 .header-logo:active,
@@ -190,7 +192,10 @@ h1{
 
 /* SUPER-tiny: 300px*/
 @media only screen and (max-width: 300px) {
-
+    .content-placer {        
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 }
 
 
@@ -206,7 +211,13 @@ h1{
     border-bottom:0;
 }
 
-.button,
+
+/* 
+    other stuff
+    Buttons on page have .main in front, to avoid clashing with footer and header code.
+*/
+
+.main .button,
 .main button {
     padding: 6px 12px;
     font-size: 15px;
@@ -228,25 +239,36 @@ h1{
     margin: 2px;
     border: 1px solid #a6a6a6;
     margin-bottom: 10px;
-    text-decoration:none;
+    text-decoration: none;
+    text-transform:uppercase;
+    font-weight:bold;
 }
 
-.button .material-icons,
+
+.main .button .material-icons,
 .main button .material-icons {
     vertical-align: bottom;
     font-size: 16pt;
 }
 
-.button .main button.primary,
+.main .button.primary,
 .main button.primary {
     background: #3d3b3a;
     color: #fff;
     border: none;
 }
 
+
+.main .button.tertiary,
+.main button.tertiary {
+    background: none;
+    color: #098293;
+    border: none;
+}
+
 .button.active,
 .main button.active {
-    background: #8b0000;
+    background: #7f726b;
     color: #fff;
     border: none;
 }
@@ -256,4 +278,66 @@ h1{
     background: #4c4a48;
     color: #fff;
     cursor:pointer;
+}
+
+.main .closebutton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 0px;
+    border: 0px;
+    background: none;
+    border-radius: 2px;
+}
+
+.main .tinybutton {
+    padding: 0;
+    font-size: 10pt;
+}
+
+.disabled {
+    color: #d7d7d7;
+    border-color: #d7d7d7;
+    background:none;
+}
+
+.rightbutton {
+    display: inline-block;
+    float: right;
+}
+
+/* TAB STUFF */
+
+.main .changetab {
+    border-color: #7f726b;
+    margin-bottom: -1px;
+    margin-left: 0px;
+    margin-right: 4px;
+}
+
+.main .changetab.active {
+    border: 1px solid #7f726b;
+    border-bottom-color: white;
+    border-left-color: lightgray;
+    color: black;
+    background: none;
+}
+
+.tabbed_element_container {    
+    padding: 10px;
+    border: 1px solid lightgrey;
+    padding-top: 30px;
+    border-top-color: #7f726b;
+    margin-top:0;
+}
+@media only screen and (min-width: 750px) {
+    .only_mobile {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .main .hideonmobile {
+        display: none;
+    }
 }

@@ -42,8 +42,10 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedCategories.ToArray();
         }
 
-        public static Dictionary<string, string> getRegionsDict(string[] regionNames)
+        public static Dictionary<string, string> getRegionsDict()
         {
+            var regionNames = SortedRegions().ToArray();
+
             Dictionary<string, string> allRegions = new Dictionary<string, string>();
             for (int i = 0; i < regionNames.Length; i++)
             {
@@ -62,6 +64,11 @@ namespace Assessments.Frontend.Web.Infrastructure
             return regions.ToArray();
         }
 
+        /// <summary>
+        ///  Sortert liste med navn på regioner (etter gamle fylkesnummer)
+        /// </summary>
+        public static List<string> SortedRegions() => new() { "Østfold", "Oslo og Akershus", "Hedmark", "Oppland", "Buskerud", "Vestfold", "Telemark", "Aust-Agder", "Vest-Agder", "Rogaland", "Hordaland", "Sogn og Fjordane", "Møre og Romsdal", "Trøndelag", "Nordland", "Troms", "Finnmark", "Jan Mayen", "Nordsjøen", "Norskehavet", "Barentshavet sør", "Barentshavet nord og Polhavet", "Grønlandshavet" };
+        
         public static string[] findEuropeanPopProcentages(string[] europeanPopulation)
         {
             List<string> selectedPercenteges = new List<string>();
@@ -82,6 +89,17 @@ namespace Assessments.Frontend.Web.Infrastructure
                     selectedPercenteges.Add(Constants.EuropeanPopulationPercentages.Gt50);
             }
             return selectedPercenteges.ToArray();
+        }
+
+        public static Dictionary<string, string> getAllTaxonRanks(string[] ranks)
+        {
+            string[] displayNames = new string[] { "Art", "Underart/varietet" };
+            Dictionary<string, string> taxonRanks = new Dictionary<string, string>();
+            for (int i = 0; i < ranks.Length; i++)
+            {
+                taxonRanks.Add(ranks[i], displayNames[i]);
+            }
+            return taxonRanks;
         }
     }
 
@@ -222,15 +240,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string SearchChooseCriteria = "Kriterier";
             public const string SearchChooseSpeciesGroup = "Artsgruppe";
             public const string SearchFilterSpecies = "Søk art/slekt";
-        }
-
-    }
-
-    public static class FilterViewHelpers
-    {
-        public static class Filters
-        {
-            public static string[] AssessmentAreas = new string[] {"Norge", "Svalbard"};
+            public const string SearchFilterTaxonRank = "Taksonomisk nivå";
         }
     }
 

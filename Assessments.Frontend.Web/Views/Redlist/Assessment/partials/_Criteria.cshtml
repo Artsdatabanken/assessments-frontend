@@ -75,31 +75,33 @@
 
     void placeCriteria(string criteria)
     {
-
-        if (criteria.Contains("A"))
-        {
-            a = criteria;
+        if (!string.IsNullOrEmpty(criteria)){
+           if (criteria.Contains("A"))
+            {
+                a = criteria;
+            }
+            else if (criteria.Contains("B"))
+            {
+                b = criteria;
+            }
+            else if (criteria.Contains("C"))
+            {
+                c = criteria;
+            }
+            else if (criteria.Contains("D"))
+            {
+                d = criteria;
+            }
         }
-        else if (criteria.Contains("B"))
-        {
-            b = criteria;
-        }
-        else if (criteria.Contains("C"))
-        {
-            c = criteria;
-        }
-        else if (criteria.Contains("D"))
-        {
-            d = criteria;
-        }
+       
 
     }
 
     // Iterate the criteria string and place each separate criteria in its correct container.
-    if (@Model.CriteriaSummarized.Contains(";"))
+    if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && Model.CriteriaSummarized.Contains(";"))
     {
         // SPLIT THE LIST AND LOOP THEM
-        foreach (string crit in @Model.CriteriaSummarized.Split(";"))
+        foreach (string crit in Model.CriteriaSummarized.Split(";"))
         {
             placeCriteria(crit);
         }
@@ -566,10 +568,10 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 {
     <div class="page_section criteria">
         <div class="criteria_description">
-            <h2>@ViewBag.glossary["criteria"]["tagline"]</h2>
+            <h3>@ViewBag.glossary["criteria"]["tagline"]</h3>
             <p>@ViewBag.glossary["criteria"]["description"]</p>
 
-            <h3>@ViewBag.glossary["criteria"]["subheading"]</h3>
+            <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
             <p>@Model.CriteriaSummarized<br /></p>
             @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
             <button>Gå til ordliste</button>

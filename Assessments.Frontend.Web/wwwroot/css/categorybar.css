@@ -8,15 +8,16 @@
     font-size: 0;
     max-width: 100%;
     position: relative;
-    display: flex;
     overflow-x:auto;
+    display:flex;
+    justify-content:space-between;
 }
 
-.category_displayer::before{
+.category_displayer::before {
     content: "";
     background: grey;
     position: absolute;
-    top: calc(50% - 10px);
+    top: 30px;
     right: 0;
     height: 5px;
     width: 100%;
@@ -24,104 +25,117 @@
 
 .category_displayer li {
     display: inline-block;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
     margin: 0px;
     vertical-align: top;
-    padding: 0px;
-    padding-top:20px;
+    padding-top: 7px;
     padding-bottom:20px;
     margin-bottom:20px;
     height:auto;
     position: relative;
+    margin:3px;
+    width:40px;
 }
 
 .category_displayer .category_item {
-    height: 65px;
-    width: 65px;
-    padding: 5px;
-    padding-top: 2px;
+    height: 40px;
+    width: 40px;
     border-radius: 2px;
-    border: 5px solid transparent;
-    text-align: center;
-    font-size: 22px;
-    vertical-align: middle;
-    background-clip: padding-box;
+    margin:auto;
 }
 
-.category_displayer .category_item span {
+.category_displayer span {
     font-size: 8pt;
     display: block;
     line-height: 1;
     width: 100%;
-     
-}
-.category_item.active {
-    border-color: black;
-}
-
-@media only screen and (min-width: 651px) {
-    .topbar_label,
-    .bottombar_label {
-        position: absolute;
-        background: white;
-        left: 150px;
-        padding-left: 10px;
-        padding-right: 10px;
-        z-index: 1;
-    }
+    color: black;
+    text-align: center;
+    padding-top: 5px;
 }
 
-@media only screen and (min-width: 940px) and (max-width: 1050px) {
-    /* Tiny jump where sidebar makes page smaller */
-    .category_displayer .category_item {
-        width: 59px;
-        border-width: 3px;
-    }
-
-    .category_displayer {
-        width: 533px;
-    }
+.category_displayer .category_item span {
+    margin: auto;
+    padding-top:0;
+    text-align: center;
+    font-size: 22px;
+    vertical-align: middle;
+    color: inherit;
+    line-height: 40px;
 }
 
-@media only screen and (max-width: 650px) {
-    .category_displayer::before {
-        content: "";
-        background: grey;
-        position: absolute;
-        top: 0;
-        left: 40px;
-        height: 100%;
-        width: 5px;
-    }
+.category_displayer li.active {
+    width: 60px;
+    padding-top:0;
+    font-weight:bold;
+}
 
-    .category_displayer {
-        margin-bottom: 10px;
+.category_displayer li.active .category_item {
+    border: 5px solid black;
+    height: 60px;
+    width: 60px;
+}
+
+.category_displayer li.active span {
+    font-size:12pt;
+}
+
+.category_displayer li.active .category_item span {
+    line-height: 50px;
+    font-size: 24pt;
+}
+
+@media only screen and (max-width: 510px) {
+    .category_displayer::before {       
+        top: 34px;
     }
 
     .category_displayer li {
-        position: relative;
-        display: block;
+        width: 25px;
+        padding-top:20px;
+    }
+    .category_displayer .category_item {
+        width: 25px;
+        height: 25px;
+    }
+    .category_displayer .category_item span {
+        font-size: 12pt;
+        line-height: 25px;
+    }
+    .category_displayer .notactive .tag{
+       display:none;
+    }
+
+}
+
+@media only screen and (max-width: 345px) {
+
+    .category_displayer::before {
+        top: 30px;
+    }
+
+    .category_displayer li{
+        margin:1px;
+    }
+
+    .category_displayer li.active .category_item {
         height: 50px;
-        max-width: 100%;
-        margin: 0px;
-        padding: 0px;
-        padding-left: 10px;
-        border-left: 4px solid transparent;
+        width: 50px;
+    }
+
+    .category_displayer li.active .category_item span {
+        line-height: 40px;
+        font-size: 18pt;
     }
 
     .category_displayer .category_item {
-        width: 50px;
-        height: 50px;
+        width: 19px;
+        height: 19px;
     }
 
     .category_displayer .category_item span {
-        position: absolute;
-        left: 70px;
-        color: black;
-        font-size: 12pt;
-        text-align: left;
-        top: 50%;
+        font-size: 9pt;
+        line-height: 19px;
     }
-       
 }
 

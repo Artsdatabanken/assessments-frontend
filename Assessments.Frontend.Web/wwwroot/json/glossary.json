@@ -9,7 +9,7 @@
   },
   "region": {
     "tagline": "Regioner og havområder ",
-    "description": " En art er forekommende i et (historisk) fylke eller havområde hvis én eller flere vesentlige deler av livssyklusen foregår der. \"Kjent\" forekomst betyr kjent eller sannsynlig nåværende forekomst, \"antatt\" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser), \"antatt utdødd\" forekomst brukes når arten muligens har dødd ut lokalt, mens \"utdødd forekomst\" betyr at det er overveiende sannsynlighet for at arten har dødd ut i området. Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
+    "description": " En art er forekommende i et (historisk) fylke eller havområde hvis vesentlige deler av livssyklusen foregår der. \"Kjent\" forekomst betyr kjent eller sannsynlig nåværende forekomst. \"Antatt\" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser). \"Antatt utdødd\" forekomst brukes når arten muligens har dødd ut lokalt, mens \"utdødd forekomst\" betyr at det er overveiende sannsynlighet for at arten har dødd ut i området. Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
   },
   "criteria": {
     "tagline": "Hvilke kriterier gjør at denne arten er rødlistet?",
@@ -58,8 +58,6 @@
     "calculated": "Beregnet reduksjon, med føre-var forbehold:",
     "conclusion": "Kriteriets reduksjon ≥ <terskelverdi> % tilsvarer <kategori>"
   },
-
-
   "inkluderingskriterier": {
     "hvorfor": {
       "title": "Hvorfor er denne arten med i vurderingsgrunnlaget?",
@@ -138,6 +136,31 @@
     "annetNE": {
       "title": "Annet",
       "description": "Arten er ikke forsøkt rødlistevurdert."
+    }
+  },
+  "statistics": {
+    "heading": {
+      "title": "Statistikk"
+    },
+    "category": {
+      "title": "Antall vurderinger per kategori",
+      "description": "En vurdering har kun én kategori. Totalantallet tilsvarer derfor antall vurderinger i utvalget, nemlig "
+    },
+    "criteria": {
+      "title": "Antall vurderinger per kriterie",
+      "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per utslagsgivende kriterium for kategori (A-D)."
+    },
+    "habitat": {
+      "title": "Antall vurderinger per habitat",
+      "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per habitat. Flere habitattyper per vurdering er mulig."
+    },
+    "region": {
+      "title": "Antall vurderinger per region",
+      "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per region eller havområde. Basert på kjent eller antatt forekomst."
+    },
+    "impactfactor": {
+      "title": "Antall vurderinger per påvirkningsfaktor",
+      "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet som påvirkes negativt."
     }
   }
 }

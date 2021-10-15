@@ -303,31 +303,41 @@
 .habitat_container {
     display: flex;
     flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: space-between;
 }
 
 .habitat_element {
-    display: inline-block;
-    max-width: 160px;
-    margin-right: 10px;
+    max-width: 32%;
     margin-bottom: 10px;
     text-align: center;
-    position: relative;
     border: 1px solid lightgrey;
-    max-height: 250px;
-    padding-bottom: 10px;
-    vertical-align: top;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    background: #f4f4f4;
 }
 
-.habitat_element.inactive {
-    max-width: 125px;
+.habitat .inactive{
+    display:none;
+}
+
+.see_all .inactive{
+    display:flex;
+}
+
+.see_all .habitat_element.active {
+    border: 5px solid #4c4a48;
+}
+
+.see_all .habitat_element.active img {
+    border: 1px solid #f4f4f4;
 }
 
 .habitat_icon {
-    height: 160px;
     width: 100%;
     display: block;
-    background: white;
-    margin: auto;
+    height: 112px;
 }
 
 .habitat_icon img {
@@ -337,25 +347,21 @@
     overflow: hidden;
 }
 
-.speciesgroup_header,
-.habitat_header {
-    background: white;
-    padding: 2px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+.habitat_element b {
+    display: block;
+}
+
+.habitat_element p {
+   flex:1;
+}
+
+.habitat_element p,
+.habitat_element b {
     width: 100%;
-    font-size: 10pt;
+    padding: 5px;
 }
-
-.habitat_header {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 
 @media only screen and (min-width: 250px) and (max-width: 550px) {
-
     .habitat_icon {
         height: 100px;
         width: 100px;
@@ -366,16 +372,17 @@
     .habitat_element {
         max-width: 100%;
         padding-bottom: 0px;
+        display:inline-block;
+        width:100%;
     }
 
-        .habitat_element p,
-        .habitat_header {
-            position: relative;
-            max-width: calc(100% - 100px);
-            float: right;
-            top: auto;
-            left: auto;
-        }
+    .habitat_element p {
+        position: relative;
+        max-width: calc(100% - 100px);
+        float: right;
+        top: auto;
+        left: auto;
+    }
 
     .habitat_icon img {
         width: 100px;
@@ -386,28 +393,24 @@
     .habitat_element button {
         float: none;
     }
+
+    .see_all .inactive {
+        display: inline-block;
+    }
 }
 
+
+.expand_hide {
+    display: none;
+}
+
+.expanded .expand_hide {
+    display: block;
+}
 
 .habitat_element p, .habitat_element a {
-    color: grey;
+    color: black;
     font-size: 8pt;
-}
-
-.habitat_element.active h4,
-.habitat_element.active p,
-.habitat_element.active a {
-    color: #4c4a48;
-}
-
-.habitat_element p {
-    padding: 5px;
-    padding-bottom: 0; /* otherwise trunctuation line clamp is wrong */
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin-bottom: 5px;
 }
 
 .habitat_element .seemore {
@@ -419,16 +422,14 @@
     max-height: 100%;
 }
 
-.habitat_element.expanded p {
-    -webkit-line-clamp: initial;
-    -webkit-box-orient: vertical;
-    overflow: auto;
-    height: auto;
-}
-
 .more,
 .expanded .less {
     display: block;
+}
+
+span.material-icons.more,
+span.material-icons.less {
+    font-size: 20pt;
 }
 
 .expanded .more,
@@ -444,44 +445,14 @@
     display: block;
 }
 /* EXPERT Assessment */
-.expert_Assessment h3,
-.expert_Assessment p {
-    background: #f8f7f7;
-    padding: 10px;
-    margin: 0;
+.expert_Assessment h3 {
+    font-size: 12pt;
+    color: black;
+    font-family: inherit;
+    font-weight: bold;
+    margin: auto;
+    padding: 0;
 }
-
-
-.expert_Assessment p:first-child:before,
-.expert_Assessment p:last-child:after {
-    content: "\“\a";
-    font-size: 70pt;
-    height: 70px;
-    font-family: 'Times New Roman';
-    color: #929292;
-    display: block;
-}
-
-
-.expert_Assessment p:last-child:after {
-    text-align:right;
-    content: "\” ";
-}
-
-.expert_text{
-    max-height:1000px;
-    overflow-y:auto;
-    display:block;
-    padding:0;
-    margin:0;
-}
-
-.quote_by{
-    display:inline-block;
-    width:100%;
-}
-
-
 
 /* REFERENCES */
 .reference {
@@ -717,11 +688,6 @@
 
 /* IMPACT FACTORS */
 
-.outer {
-    margin-top: 20px;
-}
-
-
 /* COMPACT (normal) version */
 .impact h3 {
     display: block;
@@ -755,7 +721,7 @@
     font-weight: normal;
 }
 
-.impact .impact-id,
+.impact-id,
 .impact li.inactive li.inactive {
     display: none;
 }
@@ -773,11 +739,9 @@
     display: none;
 }
 
+
 /* SUMMARY VERSION */
-.summary li {    
-    padding: 0;
-    padding-top: 5px;
-}
+
 
 .summary .material-icons,
 .summary h3.inactive,
@@ -791,18 +755,18 @@
 
 /* FULL VERSION */
 
-.full_list .impact-id {
-    display:inline-block;
-}
-
 .full_list .second.inactive,
 .full_list li.inactive li.inactive,
 .full_list .final ul{
     display: block;    
 }
 
-/* All */
+.show_expand ul{
+    visibility:hidden;
+}
 
+
+/* All */
 .outer .text_collection {
     padding: 0;
 }
@@ -817,6 +781,8 @@
     width: 62px;
     height: 62px;
     display: inline-block;
+    margin-right: 5px;
+    padding-top: 10px;
 }
 
 .species_group_image img,
@@ -840,30 +806,37 @@
 
 
 .history_list li {
-    display: flex;
     font-size: 12pt;
-    border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    padding: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
-    margin-top:-1px;
-    justify-content:space-between;
+    display: inline-block;
+    border-top: 1px solid lightgray;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+@media only screen and (max-width: 940px) {
+    .history_list li {        
+        display: block;
+        max-width:300px;
+    }
+}
+
+.history_list li:first-child {
+    border:none;
 }
 
 .history_list .text_content {
     display: inline-block;
 }
 
-
-.history_list li a {
-    display:inline-block;
-    max-width: 40px;
+.history_list .graphic_element {
     font-size: 7pt;
-    text-decoration: none;
-    background: lightgrey;
-    color: black;
-    padding: 4px;
+    font-weight: bold;
+    margin-left: 6px;
+    vertical-align: text-top;
+    height: 18px;
+    width: 18px;
+    line-height: 18px;
+    padding: 0;
     text-align: center;
 }
 
@@ -875,4 +848,9 @@
 
 .thresholdlist.active {
     background:lightgrey;
+}
+
+.history_list .tinybutton{
+    float:right;
+    margin-bottom:0px;
 }

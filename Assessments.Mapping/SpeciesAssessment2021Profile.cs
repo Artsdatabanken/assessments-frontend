@@ -19,7 +19,6 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .AfterMap(SpeciesAssessment2021ProfileHelper.CorrectImpactFactors);
 
-            CreateMap<Rodliste2019.TrackInfo, SpeciesAssessment2021TrackInfo>();
             CreateMap<Rodliste2019.MinMaxProbable, SpeciesAssessment2021MinMaxProbableIntervall>(); // use the one below - differentiate on punktestimat
             CreateMap<Rodliste2019.MinMaxProbableIntervall, SpeciesAssessment2021MinMaxProbableIntervall>()
                 .ForMember(dest => dest.Punktestimat, opt => opt.MapFrom(src => (src.Punktestimat == "true")));
@@ -122,7 +121,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.RationaleNotEvaluated, opt => opt.MapFrom(src => src.KunnskapsStatusNE))
                 .ForMember(dest => dest.PercentageEuropeanPopulation, opt => opt.MapFrom(src => src.MaxAndelAvEuropeiskBestand))
                 .ForMember(dest => dest.PercentageGlobalPopulation, opt => opt.MapFrom(src => src.MaxAndelAvGlobalBestand))
-                .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => src.NaturtypeHovedenhet))
+                .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.ResolveMainHabitat(src.NaturtypeHovedenhet)))
 
                 .ForMember(dest => dest.AssessmentInitialClassification, opt => opt.MapFrom(src => src.OverordnetKlassifiseringGruppeKode))
                 
@@ -138,7 +137,7 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.TaxonomicHistory, opt => opt.MapFrom(src => src.TaxonomicHistory))
 
-                .ForMember(dest => dest.TaxonRank, opt => opt.MapFrom(src => src.TaxonRank))
+                .ForMember(dest => dest.TaxonRank, opt => opt.MapFrom(src => Helpers.SpeciesAssessment2021ProfileHelper.Capitalize(src.TaxonRank)))
 
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.TroligUtdodd))
                 .ForMember(dest => dest.RationaleRegionallyExtinct, opt => opt.MapFrom(src => src.UtdoddINorgeRE))
@@ -157,11 +156,13 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.EvaluateCategoryChangeReason(src)))
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.ÅrsakTilNedgraderingAvKategori,true)))
-                .AfterMap((src, dest) =>
+                .ForMember(dest=> dest.PreviousAssessments, opt=> opt.MapFrom(src => Helpers.SpeciesAssessment2021ProfileHelper.GetPreviousAssessments(src.ImportInfo)))
+                    .AfterMap((src, dest) =>
                 {
                     SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest);
                     SpeciesAssessment2021ProfileHelper.BlankReasonCategoryChangeWhenNoChange(src, dest);
                     SpeciesAssessment2021ProfileHelper.CalculateQuantiles(dest);
+                    SpeciesAssessment2021ProfileHelper.FixMissingCategoryChangedFrom(src, dest);
                 });
         }
     }

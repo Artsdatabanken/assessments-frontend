@@ -10,6 +10,10 @@
     var has_element = "";
     string map_type = "region_occurences";
 
+    // Add region if missing (region occurrence for the region "Jan Mayen" is sometimes absent while other regions always have data)
+    if (Model.RegionOccurrences.All(x => x.Fylke != "Jan Mayen"))
+        Model.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence { Fylke = "Jan Mayen", State  = 2 });
+
     @if (Model.Category.Contains("LC") || Model.Category.Contains("NA") || Model.Category.Contains("NE"))
     {
         map_type = "region_borders";
@@ -38,7 +42,7 @@
     <div class="region_distributions">
 
         <div class="regionlist @map_type">
-            @foreach (var region in Model.RegionOccurrences)
+            @foreach (var region in Model.RegionOccurrences.OrderBy(x => Helpers.SortedRegions().IndexOf(x.Fylke)).Reverse())
             {
                 <span class="region">
                     <b>@region.Fylke</b>

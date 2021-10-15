@@ -647,7 +647,7 @@ namespace Assessments.Mapping.Helpers
             result = sb.ToString().Trim();
             if (result.Contains("&"))
             {
-                result = WebUtility.HtmlDecode(result.Replace("&nbsp;", " ").Replace("&amp;", "&"));
+                result = WebUtility.HtmlDecode(result.Replace("&nbsp;", " ").Replace("&amp;", "&").Replace("<u>&gt;</u>", "≥")); ;
             }
 
             return result;

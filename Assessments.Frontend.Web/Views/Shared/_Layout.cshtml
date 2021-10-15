@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="~/css/listview.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/assessment.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/categorybar.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/searchAndFilter.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/filter.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/search.css" asp-append-version="true" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://design.artsdatabanken.no/script/header.js"></script>
@@ -41,6 +42,7 @@
         <div class="main-content width-adjuster">
             @RenderBody()
             <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/js/filter.js" asp-append-version="true"></script>
             @await RenderSectionAsync("Scripts", required: false)
         </div>
     </div>

@@ -16,43 +16,26 @@
 <ul class="history_list">
 
     <li>
-        <span class="text_content">
-            <h4>2021</h4>
-            <partial name="/Views/Shared/_CategoryTags.cshtml" />
-            @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
-            {
-                <span>Arten er vurdert for første gang i 2021.</span>
-            }
-        </span>
+        <b class="text_content"> 2021: </b>
+        <span class="graphic_element @Model.Category">@Model.Category</span>
+        <i> @categoryDescription(Model.Category)</i>
+
+        @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
+        {
+            <span>Arten er vurdert for første gang i 2021.</span>
+        }
     </li>
 
-
-    @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2015))
+    @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger
     {
-        <li class="withlink">
-            <span class="text_content">
-            <h4>Rødlista 2015</h4>
-            <span class="graphic_element @Model.ImportInfo.Kategori2015">@Model.ImportInfo.Kategori2015</span>
-            <b> @categoryDescription(Model.ImportInfo.Kategori2015)</b> 
-            </span>
-            <a target="_blank" href="@Model.ImportInfo.Url2015">
-                Gå til vurdering<span class="material-icons">open_in_new</span>
+        <li>
+            <b class="text_content"> @prev.Year: </b>
+            <span class="graphic_element @prev.Category">@prev.Category</span>
+            <i> @categoryDescription(prev.Category)</i>
+
+            <a target="_blank" href="@prev.AssessmentUrl" class="button tertiary tinybutton">
+                Se vurdering<span class="material-icons">open_in_new</span>
             </a>
         </li>
-    }
-
-    @if (!string.IsNullOrWhiteSpace(Model.ImportInfo.Kategori2010))
-    {
-    <li class="withlink">
-        <span class="text_content">
-            <h4>Rødlista 2010</h4>
-            <span class="graphic_element @Model.ImportInfo.Kategori2010">@Model.ImportInfo.Kategori2010</span>
-            <b> @categoryDescription(Model.ImportInfo.Kategori2010)</b>
-
-        </span>
-        <a target="_blank" href="@Model.ImportInfo.Url2010">
-            Gå til vurdering<span class="material-icons">open_in_new</span>
-        </a>
-    </li>
     }
 </ul>

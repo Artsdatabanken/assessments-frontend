@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using X.PagedList;
 using System;
 using Assessments.Frontend.Web.Infrastructure.Services;
+using Microsoft.AspNetCore.Http.Extensions;
 
 // ReSharper disable InconsistentNaming
 
@@ -29,18 +30,33 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
             viewModel ??= new RL2021ViewModel();
+
+
             // Pagination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
             var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
 
+            ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks(query.Select(x => x.TaxonRank).Distinct().ToArray());
+
             // Søk
+            string name = String.Empty;
+
             if (!string.IsNullOrEmpty(viewModel.Name))
-                query = query.Where(x => x.ScientificName.ToLower().Contains(viewModel.Name.Trim().ToLower()) ||
-                x.PopularName.ToLower().Contains(viewModel.Name.Trim().ToLower()))
-                .OrderByDescending(x => x.PopularName.ToLower() == viewModel.Name.Trim().ToLower() ||
-                x.ScientificName.ToLower() == viewModel.Name.Trim().ToLower());
+            {
+                name = viewModel.Name.Trim().ToLower();
+                string[] speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
+
+                query = query.Where(x => 
+                    x.ScientificName.ToLower().Contains(name) ||                            // Match on scientific name.
+                    speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
+                    x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
+                    x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
+                    x.SpeciesGroup.ToLower().Contains(name))                                // Match on species group.
+                    .OrderByDescending(x => x.PopularName.ToLower() == name ||              // Exact match on populatname or by
+                    x.ScientificName.ToLower() == name);                                    // exact match on scientific name is sorted first.
+            }
 
             // Filter
 
@@ -59,34 +75,30 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Criterias
             ViewBag.AllCriterias = _allCriterias;
-            char[] criterias = viewModel.Criterias.ToString().ToCharArray();
 
             if (viewModel.Criterias?.Any() == true)
-                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && x.CriteriaSummarized.IndexOfAny(criterias) != -1);
+                query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && viewModel.Criterias.Any(y => x.CriteriaSummarized.Contains(y)));
 
             // Habitat
             if (viewModel.Habitats?.Any() == true)
                 query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
 
             // Regions
-            string[] regionNames = query.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().OrderBy(x => x).ToArray();
-
-            ViewBag.AllRegions = Helpers.getRegionsDict(regionNames);
+            ViewBag.AllRegions = Helpers.getRegionsDict();
             string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions, ViewBag.AllRegions);
 
             if (chosenRegions?.Any() == true)
-                query = query.Where(x => x.RegionOccurrences.Any(y => y.State <= 1 && chosenRegions.Contains(y.Fylke)));
+                query = query.Where(x => x.RegionOccurrences.Any(y => y.State == 0 && chosenRegions.Contains(y.Fylke)));
 
             // SpeciesGroups
             if (viewModel.SpeciesGroups?.Any() == true)
             {
-                for (var i = 0; i < viewModel.SpeciesGroups.Length; i++)
-                {
-                    if (viewModel.SpeciesGroups[i].Contains("Amfibier"))
-                        viewModel.SpeciesGroups[i] = "Amfibier, reptiler";
-                }
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
             }
+
+            // TaxonRank
+            if (viewModel.TaxonRank?.Any() == true)
+                query = query.Where(x => viewModel.TaxonRank.Contains(x.TaxonRank));
 
             // European population percentages
             ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;
@@ -98,6 +110,8 @@ namespace Assessments.Frontend.Web.Controllers
             // Extinct
             if (viewModel.PresumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
+
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
 
             ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
 
@@ -113,7 +127,7 @@ namespace Assessments.Frontend.Web.Controllers
                 var expertCommitteeMembers = await DataRepository.GetData<ExpertCommitteeMember>(Constants.Filename.SpeciesExpertCommitteeMembers);
                 expertCommitteeMembers = expertCommitteeMembers.Where(x => x.Year == 2021);
 
-                return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport, expertCommitteeMembers.ToList()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport, expertCommitteeMembers.ToList(), Request.GetDisplayUrl()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     FileDownloadName = "rødliste-2021.xlsx"
                 };
@@ -176,6 +190,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             // STATISTICS.
             // INPUT dataset is an already filtered list, based on active filters in the view. 
+            string[] relevantCategories = new string[]{"CR", "EN", "VU", "NT"};
 
             // CATEGORY
             var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new
@@ -195,7 +210,12 @@ namespace Assessments.Frontend.Web.Controllers
             // SPECIES MAIN HABITAT
 
             // Fetch all habitat lists, flatten the lists and make it distinct to obtain all currently possible habitat names.
-            var habitatNames = data.Select(x => x.MainHabitat).SelectMany(x => x).Distinct().ToList(); 
+            var habitatNames = data
+                .Where(x => relevantCategories.Contains(x.Category))
+                .Select(x => x.MainHabitat)
+                .SelectMany(x => x)
+                .Distinct()
+                .ToList(); 
 
             // For each of the habitatnames - count each occurence in the main dataset
             var habitatStats = habitatNames.Select(name => new KeyValuePair<string, int>(name, data.Count(x => x.MainHabitat.Contains(name))))
@@ -204,8 +224,12 @@ namespace Assessments.Frontend.Web.Controllers
 
 
             // REGION
-            var regionNames = data.Select(x => x.RegionOccurrences.Select(x => x.Fylke)).SelectMany(x => x).Distinct().ToList();
-            var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data.Select(x => x.RegionOccurrences).SelectMany(x => x).Where(x => x.Fylke == name && x.State ==0).Count()))
+            var regionNames = Helpers.SortedRegions();
+            var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data
+                .Where(x => relevantCategories.Contains(x.Category))
+                .Select(x => x.RegionOccurrences)
+                .SelectMany(x => x)
+                .Where(x => x.Fylke == name && x.State ==0).Count()))
                 .ToDictionary(x => x.Key, x => x.Value);
             viewModel.Statistics.Region = regionStats;
 
@@ -216,7 +240,9 @@ namespace Assessments.Frontend.Web.Controllers
 
             // CRITERIA
 
-            var criteriaStrings = data.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized)).Select(x => x.CriteriaSummarized);
+            var criteriaStrings = data
+                .Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && relevantCategories.Contains(x.Category))
+                .Select(x => x.CriteriaSummarized);
             var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
             viewModel.Statistics.Criteria = criteria.ToDictionary(x => x.Key, x => x.Value);
 
@@ -227,6 +253,36 @@ namespace Assessments.Frontend.Web.Controllers
                 Console.WriteLine(habitatNames[i] + ": " + habitatStats[habitatNames[i]].ToString());
             }
             */
+
+
+
+            // IMPACTFACTORS
+
+            string excludedGroupingFactor = "Ingen trussel";
+            string excludedPopulationScope = "En ubetydelig del av populasjonen påvirkes";
+            string excludedSeverity = "Ubetydelig/ingen nedgang";
+
+            var impactFactors = data
+                .Where(x => relevantCategories.Contains(x.Category))
+                .Select(x => x.ImpactFactors
+                    .Where(x => x.GroupingFactor != excludedGroupingFactor &&
+                        x.PopulationScope != excludedPopulationScope &&
+                        x.Severity != excludedSeverity)
+                    .Select(x => x.GroupingFactor)
+                    .Distinct())
+                .SelectMany(x => x)
+                .GroupBy((x => x), (key, value) => new
+                {
+                    key = key,
+                    value = value.Count()
+                });
+
+            viewModel.Statistics.ImpactFactors = new Dictionary<string, int>();
+            
+            foreach (var item in impactFactors)
+            {
+                viewModel.Statistics.ImpactFactors.Add(item.key, item.value);
+            }
         }
 
         private static async Task<JObject> GetResource(string resourcePath)

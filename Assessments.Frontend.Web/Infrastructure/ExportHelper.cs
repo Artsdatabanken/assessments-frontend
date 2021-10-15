@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.IO;
@@ -10,7 +11,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class ExportHelper
     {
-        public static MemoryStream GenerateSpeciesAssessment2021Export(IEnumerable<SpeciesAssessment2021Export> assessments,  IEnumerable<ExpertCommitteeMember> expertCommitteeMembers)
+        public static MemoryStream GenerateSpeciesAssessment2021Export(IEnumerable<SpeciesAssessment2021Export> assessments,  IEnumerable<ExpertCommitteeMember> expertCommitteeMembers, string displayUrl)
         {
             MemoryStream memoryStream;
             using (var workbook = new ClosedXML.Excel.XLWorkbook())
@@ -55,6 +56,10 @@ namespace Assessments.Frontend.Web.Infrastructure
                 }).ToList());
 
                 workbook.Worksheet(3).Columns().AdjustToContents();
+
+                var citeAsWorksheet = workbook.AddWorksheet("Siteres som");
+                var referringUrl = new Uri(displayUrl);
+                citeAsWorksheet.Cell(1, 1).Value = $"Artsdatabanken (2021, 24. november). Norsk rødliste for arter 2021. Utvalg {referringUrl}. {referringUrl.GetLeftPart(UriPartial.Path)}";
 
                 foreach (var workbookWorksheet in workbook.Worksheets)
                     workbookWorksheet.SheetView.FreezeRows(1);

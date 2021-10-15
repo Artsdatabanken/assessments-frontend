@@ -45,5 +45,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             return sb.ToString();
         }
+
     }
 }

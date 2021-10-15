@@ -45,15 +45,9 @@
     {
         heading = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["title"];
         inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["description"];
-        //if (!string.IsNullOrEmpty(Model.AssessmentInitialSubClassificationCode.ToCamelString()))
-        //{
-            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"];
-            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
-        //}
-        //else
-        //{
-        //    inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
-        //}
+        reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"];
+        reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
+        
     }
     else if (new[] {SpeciesAssessment2021.InitialClassification.FremmedArtNA,
         SpeciesAssessment2021.InitialClassification.BegrensetForekomstNA,
@@ -62,34 +56,9 @@
     {
         heading = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["title"];
         inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
-
-        //if (Model.AssessmentInitialClassificationCode == SpeciesAssessment2021.InitialClassification.FremmedArtNA)
-        //{
-            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"]; // fjernet magic string kopling - potensielt rename termer
-            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
-        //}
-        //else if (Model.AssessmentInitialClassificationCode == SpeciesAssessment2021.InitialClassification.BegrensetForekomstNA)
-        //{
-        //    if (!string.IsNullOrEmpty(Model.AssessmentInitialSubClassificationCode.ToCamelString()))
-        //    {
-        //        reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"];
-        //        reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
-        //    }
-        //}
-        //else if (Model.AssessmentInitialClassificationCode == SpeciesAssessment2021.InitialClassification.KunnskapsStatusNE)
-        //{
-
-        //    if (!string.IsNullOrEmpty(Model.AssessmentInitialSubClassificationCode.ToCamelString()))
-        //    {
-        //        reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"];
-        //        reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
-        //    }
-        //}
-        //else
-        //{
-        //    inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
-        //    inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["else"];
-        //}
+        reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["title"]; // fjernet magic string kopling - potensielt rename termer
+        reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialSubClassificationCode.ToCamelString()]["description"];
+        
     }
 }
 

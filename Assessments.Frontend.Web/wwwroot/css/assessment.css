@@ -280,23 +280,45 @@
     width: 100%;
     max-width: 350px;
     display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e9e9e9;
 }
 
-.region b{
-    width:120px;    
+.region_list_header {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    justify-content: space-between;
+}
+
+span.region p {
+    margin: 2px 0;
+    width:150px;    
     display:inline-block;
+}
+
+p.region_list_header b {
+    margin: 2px 0;
+    display:inline-block;
+}
+
+p.region_list_header {
+    margin-bottom: 5px;
 }
 
 .region .area{
     display:flex;
-    max-width: calc(100% - 125px);
 }
 
 .region .area i{
     padding-left:5px;
     display: inline-block;
+    white-space: nowrap;
 }
 
+.region .area i span {
+    white-space: normal;
+}
 
 /* habitat TYPES */
 
@@ -465,23 +487,23 @@ span.material-icons.less {
 
 .region_distributions {
     width: 100%;
-    display: block;
     display: flex;
     flex-wrap: wrap-reverse;
-    max-width: 740px;
 }
 
 .regionlist {
-    width: 100%;
+    width: 35%;
     padding: 5px;
-    max-width: 285px;
     display: flex;
     flex-wrap: wrap;
 }
 
 .map {
-    width: 100%;
-    max-width: calc(100% - 285px);
+    width: 65%;
+}
+
+.regionlist+p.list_header {
+    border-bottom: #4c4a48;
 }
 
 
@@ -489,9 +511,46 @@ span.material-icons.less {
 
 /* MOBILE SIZE: 550px til 650px  */
 @media only screen and (max-width: 650px) {
-    .regionlist,
+    .regionlist {
+        width: 100%;
+    }
+
     .map {
-        max-width: 100%;
+        width: 75%;
+    }
+}
+
+/* Special case for map */
+@media only screen and (max-width: 500px) {
+    .map {
+        width: 100%;
+    }
+}
+
+/* Special case when map gets a lot smaller than the list */
+@media (max-width: 1200px) and (min-width: 940px) {
+    .regionlist span.region p,
+    .regionlist span.region i {
+        font-size: 10pt;
+    }
+}
+
+@media (max-width: 650px) and (min-width: 450px) {
+    .regionlist span.region p,
+    .regionlist span.region i {
+        font-size: 10pt;
+    }
+
+    .region_distributions {
+        flex-direction: row;
+    }
+
+    .regionlist {
+        width: 35%;
+    }
+
+    .map {
+        width: 65%;
     }
 }
 
@@ -501,9 +560,14 @@ span.material-icons.less {
     .region{
         margin-bottom:2px;
     }
-    .region b {
+    .region p {
         display: block;
         width:100%;
+    }
+
+    .regionlist,
+    .map {
+        width: 100%;
     }
 }
 
@@ -563,23 +627,34 @@ span.material-icons.less {
 .current:hover {
     stroke-width: 1;
     filter:brightness(70%);
-    cursor: pointer;
+    /* cursor: pointer; Turning this off for now as nothing happens when you click on it */ 
 }
 
 .indicator {
     display:inline-block;
     width: 15px;
+    min-width: 15px;
     height: 15px;
-    border:1px solid grey;
     margin:0px;
-    flex:none;
     font-size:0;
+}
+
+.indicator:not(:empty) {
+    border: 1px solid #4c4a48;
+}
+
+span.area {
+    align-items: center;
 }
 
 .indicatorcontent {
     display: inline-block;
     width: 50%;
     height: 100%;
+}
+
+span.area i {
+    text-align: end;
 }
 
 /*criteria*/

@@ -66,14 +66,11 @@
 
 <div class="page_section inclusion_section">
     <h3>@heading</h3>
-    <a class="button" href="https://www.artsdatabanken.no/Rodliste/NasjonaleTilpasninger">Les mer 
-    <span class="material-icons">
-        launch
-    </span>
+    <p>@inclusion @reason_heading. @Html.Raw(reason_description)</p>
+    <a class="button tinybutton tertiary" href="https://www.artsdatabanken.no/Rodliste/NasjonaleTilpasninger">
+        Hvilke arter vurderes?
+        <span class="material-icons">
+            launch
+        </span>
     </a>
-    <p>@inclusion</p>
-
-
-    <b>@reason_heading</b>
-    <p>@Html.Raw(reason_description)</p>
 </div>

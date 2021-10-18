@@ -20,8 +20,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: lightgray;
-    border: 1px solid #7a7a7a;
+    background-color: #eee;
+    border: 1px solid #908E89;
     transition: .3s;
     border-radius: 30px;
 }
@@ -31,15 +31,17 @@
     content: "";
     height: 15px;
     width: 15px;
-    left: 2px;
-    bottom: 2px;
-    background-color: #3d3b3a;
+    left: 1px;
+    bottom: 1px;
+    background-color: white;
     transition: .3s;
     border-radius: 50%;
+    border: 1px solid #908E89;
 }
 
 input:checked + .slider {
     background-color: #098293;
+    border-color: #3d3b3a;
 }
 
 input:checked:focus + .slider {
@@ -53,7 +55,8 @@ input:focus + .slider {
 
 input:checked + .slider:before {
     transform: translateX(17px);
-    background-color: #f0f0f0;
+    background-color: #fff;
+    border-color: #3d3b3a;
 }
 
 .switch_list_elemtent {

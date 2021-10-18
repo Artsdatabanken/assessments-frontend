@@ -39,7 +39,7 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
                 @Html.Raw(mapping)
             </p>
 
-            <button class="tertiary tinybutton" onclick="expand(this, 'expanded')">
+            <button class="tertiary tinybutton" onclick="expandHabitat(this, 'expanded')">
                 <span class="more">Se mer</span>
                 <span class="less">Se mindre</span>
             </button>
@@ -54,11 +54,11 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         <h2>@ViewBag.glossary["habitat"]["tagline"]</h2>
         <p>@Html.Raw(@ViewBag.glossary["habitat"]["description"])</p>
 
-        <button class="changetab active" onclick="expand(this, 'see_all', 'remove')">
+        <button class="changetab active" onclick="expandHabitat(this, 'see_all', 'remove')">
             Hovedhabitat
         </button>
 
-        <button class="changetab" onclick="expand(this, 'see_all','add')">
+        <button class="changetab" onclick="expandHabitat(this, 'see_all','add')">
             Alle habitat
         </button>
 
@@ -79,7 +79,7 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         // See more text by altering css of the clicked element's top parent node
         var seemorebuttons = document.getElementsByClassName('seemore');
 
-        function expand(element, className, actiontype) {
+        function expandHabitat(element, className, actiontype) {
             if (actiontype == "remove") {
                 element.parentElement.classList.remove(className);
                 element.nextElementSibling.classList.remove("active");

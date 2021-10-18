@@ -77,9 +77,10 @@
       "description": "Det vil si at den ikke er fast reproduserende, men bestander som utgjør mer enn 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor vurderingsområdet i deler av sin års-/livssyklus."
     },
     "hvorforikke": {
-      "title": "Arten oppfyller ikke kravene for å bli rødlistevurdert",
-      "description": "Arten oppfyller ingen av de tre inkluderingskriteriene for rødlista.",
-      "else": " Disse kriteriene er enten etablert bestand i norge, regelmessig gjest eller etablert før 1800."
+      "title": "Hvorfor er ikke arten ",
+      "description": "Den har ikke etablert bestand i norge, er ikke en regelmessig gjest og ikke er etablert før 1800.",
+      "NA": "egnet?",
+      "NE": "vurdert?"
     },
     "IkkeReproduserendeGjestNA": {
       "title": "ikke reproduserende gjest",

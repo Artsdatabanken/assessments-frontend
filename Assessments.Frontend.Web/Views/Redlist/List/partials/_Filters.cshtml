@@ -25,7 +25,7 @@
     }
     void InputTag(string name, string[] elements, string value)
     {
-        InputTag(name, "submitOnclick", name, elements, value);
+        InputTag(value, "submitOnclick", name, elements, value);
     }
 
     void getInsectsList(string[] insects)
@@ -35,7 +35,9 @@
             {
                 <li class="checkbox">
                     <label>
-                        @{ InputTag("SpeciesGroups", Model.SpeciesGroups, insect); }
+                        @{
+                            InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect); 
+                        }
                     </label>
                     <span>@insect</span>
                 </li>

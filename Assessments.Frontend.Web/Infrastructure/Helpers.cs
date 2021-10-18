@@ -54,6 +54,15 @@ namespace Assessments.Frontend.Web.Infrastructure
             return allSpecies.OrderBy(x => x).ToArray();
         }
 
+        public static string[] getSelectedSpeciesGroups(List<string> species)
+        {
+            if (species.Contains("Insekter"))
+                foreach (var insect in Constants.AllInsects)
+                    species.Add(insect);
+            
+            return species.ToArray();
+        }
+
         public static Dictionary<string, string> getRegionsDict()
         {
             var regionNames = SortedRegions().ToArray();

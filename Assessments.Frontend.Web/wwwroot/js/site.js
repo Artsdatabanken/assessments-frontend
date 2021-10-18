@@ -10,48 +10,13 @@ const init = document.getElementById("initial_check");
 const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
 const redlistCheck = document.getElementById("redlisted_check");
 const endangeredCheck = document.getElementById("endangered_check");
+const insectInput = document.getElementById("Insekter");
+const insectFilters = document.getElementsByClassName("insect_input");
 const scrollTo = document.getElementById("remember_scroll");
 
 // Constants
 const redlisted = ["RE", "CR", "EN", "VU", "NT", "DD"];
 const endangered = ["CR", "EN", "VU"];
-
-const toggleRedlistedCategories = () => {
-    const isEndangeredActive = endangeredCheck.checked;
-    const isRedlistedActive = redlistCheck.checked;
-    redlisted.forEach(el => {
-        if (isRedlistedActive) {
-            document.getElementById("input_" + el).checked = true;
-        } else {
-            if (isEndangeredActive) {
-                if (!endangered.includes(el)) {
-                    document.getElementById("input_" + el).checked = false;
-                }
-            } else {
-                document.getElementById("input_" + el).checked = false;
-            }
-        }
-    })
-}
-
-
-const toggleEndangeredCategories = () => {
-    const isEndangeredActive = endangeredCheck.checked;
-    const isRedlistedActive = redlistCheck.checked;
-    endangered.forEach(el => {
-        if (isEndangeredActive) {
-            document.getElementById("input_" + el).checked = true;
-        } else {
-            if (isRedlistedActive) {
-                if (!redlisted.includes(el)) {
-                    document.getElementById("input_" + el).checked = false;
-                }
-            } else {
-                document.getElementById("input_" + el).checked = false;
-            }
-        }
-    })
-}
 
 const isSmallReader = () => {
     return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 750;
@@ -71,20 +36,27 @@ const addSubmitOnclick = () => {
         if (el.id === "redlisted_check") {
             el.onclick = function () {
                 toggleRedlistedCategories();
-                scrollTo.value = "scroll_" + Math.floor(window.scrollY);
+                scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
                 this.form.submit();
             };
         } else if (el.id === "endangered_check") {
             el.onclick = function () {
                 toggleEndangeredCategories();
-                scrollTo.value = "scroll_" + Math.floor(window.scrollY);
+                scrollTo.value = "scroll_" + window.scrollY;
+                scrollTo.checked = true;
+                this.form.submit();
+            };
+        } else if (el.id === "Insekter") {
+            el.onclick = function () {
+                toggleInsects();
+                scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
                 this.form.submit();
             };
         } else {
             el.onclick = function() {
-                scrollTo.value = "scroll_" + Math.floor(window.scrollY);
+                scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
                 this.form.submit();
             };
@@ -103,6 +75,10 @@ const removeSubmitOnclick = () => {
         } else if (el.id === "endangered_check") {
             el.onclick = function () {
                 toggleEndangeredCategories();
+            };
+        } else if (el.id === "Insekter") {
+            el.onclick = function () {
+                toggleInsects();
             };
         } else {
             el.onclick = null;

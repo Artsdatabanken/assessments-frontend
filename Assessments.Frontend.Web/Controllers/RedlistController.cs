@@ -103,9 +103,12 @@ namespace Assessments.Frontend.Web.Controllers
             // SpeciesGroups
             ViewBag.AllSpeciesGroups = Helpers.getAllSpeciesGroups(ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>());
             ViewBag.AllInsects = Constants.AllInsects;
-            
+
             if (viewModel.SpeciesGroups?.Any() == true)
+                viewModel.SpeciesGroups = Helpers.getSelectedSpeciesGroups(viewModel.SpeciesGroups.ToList());
             {
+                if (viewModel.SpeciesGroups.Contains("Insekter"))
+                    
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
             }
 

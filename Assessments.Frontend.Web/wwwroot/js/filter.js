@@ -132,6 +132,52 @@ const handleFirstTime = () => {
     })
 }
 
+const toggleRedlistedCategories = () => {
+    const isEndangeredActive = endangeredCheck.checked;
+    const isRedlistedActive = redlistCheck.checked;
+    redlisted.forEach(el => {
+        if (isRedlistedActive) {
+            document.getElementById("input_" + el).checked = true;
+        } else {
+            if (isEndangeredActive) {
+                if (!endangered.includes(el)) {
+                    document.getElementById("input_" + el).checked = false;
+                }
+            } else {
+                document.getElementById("input_" + el).checked = false;
+            }
+        }
+    })
+}
+
+const toggleEndangeredCategories = () => {
+    const isEndangeredActive = endangeredCheck.checked;
+    const isRedlistedActive = redlistCheck.checked;
+    endangered.forEach(el => {
+        if (isEndangeredActive) {
+            document.getElementById("input_" + el).checked = true;
+        } else {
+            if (isRedlistedActive) {
+                if (!redlisted.includes(el)) {
+                    document.getElementById("input_" + el).checked = false;
+                }
+            } else {
+                document.getElementById("input_" + el).checked = false;
+            }
+        }
+    })
+}
+
+const toggleInsects = () => {
+    Array.prototype.forEach.call(insectFilters, insect => {
+        if (insectInput.checked) {
+            insect.checked = true;
+        } else {
+            insect.checked = false;
+        }
+    });
+}
+
 document.addEventListener('keydown', (e) => {
     if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader) {
         closeFilters();

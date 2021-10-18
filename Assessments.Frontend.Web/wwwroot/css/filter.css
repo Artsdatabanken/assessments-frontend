@@ -108,6 +108,12 @@ li.checkbox {
     list-style-type: none;
 }
 
+.filter_groups ul.insect_filters {
+    padding-left: 5px;
+    padding-right: 0;
+    border-left: 1px solid #3b3b3a;
+}
+
 .list_header_text {
     display: flex;
     flex-direction: row;

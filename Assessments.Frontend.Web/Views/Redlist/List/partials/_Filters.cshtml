@@ -7,8 +7,9 @@
     var AllEuroPop = ViewBag.AllEuroPop;
     var AllRegions = ViewBag.AllRegions;
     Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
-    Dictionary<string, Dictionary<string, string>> AllSpeciesGroups = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
     var AllTaxonRanks = ViewBag.AllTaxonRanks;
+    string[] AllSpeciesGroups = ViewBag.AllSpeciesGroups;
+    string[] AllInsects = ViewBag.AllInsects;
 }
 
 @functions{
@@ -25,6 +26,21 @@
     void InputTag(string name, string[] elements, string value)
     {
         InputTag(name, "submitOnclick", name, elements, value);
+    }
+
+    void getInsectsList(string[] insects)
+    {
+        <ul class="insect_filters">
+            @foreach (var insect in insects)
+            {
+                <li class="checkbox">
+                    <label>
+                        @{ InputTag("SpeciesGroups", Model.SpeciesGroups, insect); }
+                    </label>
+                    <span>@insect</span>
+                </li>
+            }
+        </ul>
     }
 
 
@@ -234,10 +250,13 @@
                                         {
                                             <li class="checkbox">
                                                 <label>
-                                                    @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species.Key); }
+                                                    @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species); }
                                                 </label>
-                                                <span>@species.Key</span>
+                                                <span>@species</span>
                                             </li>
+                                            
+                                            @if (species == "Insekter")
+                                                getInsectsList(AllInsects);
                                         }
                                     </ul>
                                 </div>

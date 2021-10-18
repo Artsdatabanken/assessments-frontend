@@ -71,20 +71,20 @@ const addSubmitOnclick = () => {
         if (el.id === "redlisted_check") {
             el.onclick = function () {
                 toggleRedlistedCategories();
-                scrollTo.value = "scroll_" + window.scrollY;
+                scrollTo.value = "scroll_" + Math.floor(window.scrollY);
                 scrollTo.checked = true;
                 this.form.submit();
             };
         } else if (el.id === "endangered_check") {
             el.onclick = function () {
                 toggleEndangeredCategories();
-                scrollTo.value = "scroll_" + window.scrollY;
+                scrollTo.value = "scroll_" + Math.floor(window.scrollY);
                 scrollTo.checked = true;
                 this.form.submit();
             };
         } else {
             el.onclick = function() {
-                scrollTo.value = "scroll_" + window.scrollY;
+                scrollTo.value = "scroll_" + Math.floor(window.scrollY);
                 scrollTo.checked = true;
                 this.form.submit();
             };

@@ -31,6 +31,16 @@ namespace Assessments.Frontend.Web.Controllers
         {
             viewModel ??= new RL2021ViewModel();
 
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
+
+            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
+
+            ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
+
+            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
+
+            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
+
 
             // Pagination
             const int pageSize = 25;
@@ -91,6 +101,9 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => x.RegionOccurrences.Any(y => y.State == 0 && chosenRegions.Contains(y.Fylke)));
 
             // SpeciesGroups
+            ViewBag.AllSpeciesGroups = Helpers.getAllSpeciesGroups(ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>());
+            ViewBag.AllInsects = Constants.AllInsects;
+            
             if (viewModel.SpeciesGroups?.Any() == true)
             {
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
@@ -110,16 +123,6 @@ namespace Assessments.Frontend.Web.Controllers
             // Extinct
             if (viewModel.PresumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
-
-            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
-
-            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
-
-            ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
-
-            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
-
-            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
 
             if (export)
             {

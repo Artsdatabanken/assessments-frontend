@@ -904,18 +904,14 @@ span.area i {
 }
 
 .history_list .graphic_element {
-    font-size: 7pt;
-    font-weight: bold;
+    font-size: 8pt;
     margin-left: 6px;
     vertical-align: text-top;
     height: 18px;
     width: 18px;
-    line-height: 18px;
+    line-height: 20px;
     padding: 0;
     text-align: center;
 }
 
-.history_list .tinybutton{
-    float:right;
-    margin-bottom:0px;
-}
+

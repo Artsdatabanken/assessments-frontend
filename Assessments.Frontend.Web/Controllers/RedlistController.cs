@@ -105,9 +105,9 @@ namespace Assessments.Frontend.Web.Controllers
             ViewBag.AllInsects = Constants.AllInsects;
 
             if (viewModel.SpeciesGroups?.Any() == true)
-                viewModel.SpeciesGroups = Helpers.getSelectedSpeciesGroups(viewModel.SpeciesGroups.ToList());
             {
                 if (viewModel.SpeciesGroups.Contains("Insekter"))
+                    viewModel.SpeciesGroups = Helpers.getSelectedSpeciesGroups(viewModel.SpeciesGroups.ToList());
                     
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
             }

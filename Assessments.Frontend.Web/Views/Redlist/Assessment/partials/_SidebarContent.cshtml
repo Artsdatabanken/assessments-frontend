@@ -7,16 +7,17 @@
     // By the time we arrive here, the actual committe name has been split into correct species group,
     // and is thus now species group and not actually committtee group.
 
+    string taxon_url = "https://artsdatabanken.no/taxon/"+Model.ScientificName+"/" + Model.ScientificNameId;
 
 }
 
 <div class="sidebar_image_info">
-    <button class="secondary">
+    <a href="@taxon_url" class="button tertiary tinybutton">
         <span class="material-icons">
             mediation
         </span>
         Gå til taxonsiden
-    </button>
+    </a>
 
     <partial name="/Views/Redlist/Assessment/partials/_Development.cshtml" />
     <partial name="/Views/Redlist/Assessment/partials/_Links.cshtml" />

@@ -65,7 +65,7 @@
       "else": " enten har etablert bestand i norge, er en regelmessig gjest eller er etablert før 1800."
     },
     "EtablertFør1800": {
-      "title": "er en fremmedarts som ble etablert før 1800",
+      "title": "er en fremmedart som ble etablert før 1800",
       "description": "Det vil si at den er en fremmedart, men er antatt eller dokumentert etablert med fast reproduserende populasjon per år 1800. "
     },
     "EtablertBestandINorge": {

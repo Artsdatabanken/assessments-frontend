@@ -53,7 +53,7 @@
                         <span class="element_popular_name list_cell">@Capitalize(item.PopularName)</span>                       
                     </span>
 
-                    <span class="list_cell categoryname">
+                    <span class="list_cell categoryname capitalized">
                         @if (!string.IsNullOrEmpty(item.Category))
                         {
                             @ViewBag.categories[item.Category.Substring(0, 2)]["presentationstring"];

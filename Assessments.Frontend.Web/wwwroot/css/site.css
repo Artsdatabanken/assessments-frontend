@@ -471,3 +471,10 @@ ul a:active,
     }
 }
 
+.capitalized{
+    display:inline-block;
+}
+
+.capitalized:first-letter {
+    text-transform: uppercase;
+}

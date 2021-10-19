@@ -75,6 +75,7 @@
     height: 50px;
     font-size: 8px;
     text-align: center;
+    min-width: 51px;
 }
 
 /* ANYTHING GRID */
@@ -134,9 +135,26 @@
     width: 127px;
 }
 
+.element_popular_name {
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.speciesgroup_name {
+    display: block;
+    margin-left: -100%;
+    margin-right: -100%;
+    text-align: center;
+    overflow:visible;
+}
 
 
 @media only screen and (max-width: 750px) {
+
+    .element_species{
+        padding-left:5px;
+    }
     .redlist li a {
         padding: 4px 0;
     }
@@ -151,11 +169,16 @@
     }
 
     .element_popular_name {
-        font-weight: bold;
+        color: #7B766B;
     }
 
     .redlist li a {
         grid-template-columns: 1fr 4fr 100px 53px;
+    }
+
+    .element_popular_name {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 }
 
@@ -173,14 +196,7 @@
     }
 
 
-    .element_popular_name {
-        font-weight: bold;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        -webkit-hyphens: auto;
-        -moz-hyphens: auto;
-        hyphens: auto;
-    }
+
 }
 
 
@@ -250,7 +266,6 @@
     }
 
     .element_popular_name {
-        font-weight: bold;
         word-break: break-word;
 
     }

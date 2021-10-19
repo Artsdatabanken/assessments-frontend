@@ -24,8 +24,6 @@
     string initialSubClassificationCode = Model.AssessmentInitialSubClassificationCode.ToString();
     bool evaluated = true;
 
-
-
     if (new[] {
         SpeciesAssessment2021.InitialClassification.RodlisteVurdertArt,
         SpeciesAssessment2021.InitialClassification.UtdoddINorgeRE,
@@ -62,14 +60,12 @@
 <div class="page_section inclusion_section">
     <h3>@heading</h3>
     <p>@Html.Raw(reason)</p>
-    @if (evaluated)
-    {
-        <a class="button tinybutton tertiary" href="https://www.artsdatabanken.no/Rodliste/NasjonaleTilpasninger">
-            Hvilke arter vurderes?
-            <span class="material-icons">
-                launch
-            </span>
-        </a>
-    }
+   
+    <a class="button tinybutton tertiary" href="https://www.artsdatabanken.no/Rodliste/NasjonaleTilpasninger">
+        Hvilke arter vurderes?
+        <span class="material-icons">
+            launch
+        </span>
+    </a>
 </div>
 

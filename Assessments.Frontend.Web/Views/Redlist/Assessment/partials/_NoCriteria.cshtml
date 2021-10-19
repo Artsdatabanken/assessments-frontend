@@ -1,0 +1,23 @@
+﻿@model SpeciesAssessment2021
+
+@if (Model.Category.Contains("LC"))
+{
+    <h3>
+        Hvorfor er ikke denne arten rødlistet?
+    </h3>
+    <p>
+        Denne arten har ikke oppfylt noen av kriteriene for å rødlistes.
+        Den er havner derfor i kategorien LC - livskraftig.
+    </p>
+    <a class="button tertiary tinybutton" href="https://www.artsdatabanken.no/Rodliste/Metode#193097">
+        Les om kriteriene her
+        <span class="material-icons">
+            launch
+        </span>
+    </a>
+}
+
+
+
+
+

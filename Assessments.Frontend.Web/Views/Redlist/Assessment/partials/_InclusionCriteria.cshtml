@@ -11,95 +11,61 @@
     4. For de ikkevurderte finnes det egne forklaringer. Feltet markert i AssessmentInitialClassification bestemmer hvilken
         som er relevant der det er flere. Aldri gi ut andre forklaringer enn den det tilhører.
 
-    // TODO: MANGLER SJEKKER FOR OM TiNG FAKTISK FINNES I GLOSSARY
     // TODO: LINK TIL INFOSIDE OM INKLUDERING som er up-to-date. 
-
-    string direkteSattKategori = "Denne arten har fått sin kategori satt direkte";
-
-    if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt")
-    {
-        // Only the ones mentioned above are actually fully evaluated. Any else have directly set category.
-        // But as that also is considered an evaluation, this has no impact on other data presented.
-        // Optimally this could have been used to hide/show areas, but stricter hiding is often necessary.
-    
-        direkteSattKategori = "Dette arten har fått sin kategori etter en full vurdering mot alle kriteriene .";
-    }
 
 *@
 
 @{
-
-
-
     string heading = "";
     string inclusion = "";
     string reason_heading = "";
     string reason_description = "";
+    string reason = "";
+    string initialSubClassificationCode = Model.AssessmentInitialSubClassificationCode.ToString();
+    bool evaluated = true;
 
-    if (@Model.AssessmentInitialClassification == "rodlisteVurdertArt" ||
-        @Model.AssessmentInitialClassification == "utdoddINorgeRE" ||
-        @Model.AssessmentInitialClassification == "sikkerBestandLC" ||
-        @Model.AssessmentInitialClassification == "storUsikkerhetOmKorrektKategoriDD")
+    if (new[] {
+        SpeciesAssessment2021.InitialClassification.RodlisteVurdertArt,
+        SpeciesAssessment2021.InitialClassification.UtdoddINorgeRE,
+        SpeciesAssessment2021.InitialClassification.SikkerBestandLC,
+        SpeciesAssessment2021.InitialClassification.StorUsikkerhetOmKorrektKategoriDD }
+        .Contains(@Model.AssessmentInitialClassificationCode))
     {
         heading = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["title"];
         inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["description"];
-        if (!string.IsNullOrEmpty(Model.EvaluationJustification))
-        {
-            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["title"];
-            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.EvaluationJustification]["description"];
-        }
-        else
-        {
-            inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorfor"]["else"];
-        }
+        reason_heading = @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["title"];
+        reason_description += @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["description"];
+        reason = inclusion + reason_heading + ". " + reason_description;
     }
-    else if (Model.AssessmentInitialClassification == "fremmedArtNA" ||
-        Model.AssessmentInitialClassification == "begrensetForekomstNA" ||
-        Model.AssessmentInitialClassification == "kunnskapsStatusNE")
+    else if (new[] {SpeciesAssessment2021.InitialClassification.FremmedArtNA,
+        SpeciesAssessment2021.InitialClassification.BegrensetForekomstNA,
+        SpeciesAssessment2021.InitialClassification.KunnskapsStatusNE }
+.Contains(@Model.AssessmentInitialClassificationCode))
     {
-        heading = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["title"];
-        inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
-
-        if (Model.AssessmentInitialClassification == "fremmedArtNA")
-        {
-            reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["title"];
-            reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.AssessmentInitialClassification]["description"];
-        }
-        else if (Model.AssessmentInitialClassification == "begrensetForekomstNA")
-        {
-            if (!string.IsNullOrEmpty(Model.RationaleNotApplicable))
-            {
-                reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["title"];
-                reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotApplicable]["description"];
-            }
-        }
-        else if (Model.AssessmentInitialClassification == "kunnskapsStatusNE")
-        {
-
-            if (!string.IsNullOrEmpty(Model.RationaleNotEvaluated))
-            {
-                reason_heading = @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["title"];
-                reason_description += @ViewBag.glossary["inkluderingskriterier"][Model.RationaleNotEvaluated]["description"];
-            }
-        }
-        else
-        {
-            inclusion = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["description"];
-            inclusion += @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["else"];
-        }
+        string title_ending = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"][Model.Category.Substring(0, 2)];
+        heading = @ViewBag.glossary["inkluderingskriterier"]["hvorforikke"]["title"] + title_ending;
+        reason_heading = @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["title"] ;
+        reason_description += @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["description"];
+        reason = reason_description ;
+        evaluated = false;
     }
+
+    // TO MAKE THIS SMOOTH ON NOT EVALUATED:
+    // MAKE HEADING REFLECT CATEGORY NAME
+    // DROP THE REASON HEADING
+    // ONLY DESCRIPTION
 }
+
 
 <div class="page_section inclusion_section">
     <h3>@heading</h3>
-    <a class="button" href="https://www.artsdatabanken.no/Rodliste/NasjonaleTilpasninger">Les mer 
-    <span class="material-icons">
-        launch
-    </span>
+    <p>@Html.Raw(reason)</p>
+   
+    <a class="button tinybutton tertiary" href="https://www.artsdatabanken.no/Rodliste/NasjonaleTilpasninger">
+        Hvilke arter vurderes?
+        <span class="material-icons">
+            launch
+        </span>
     </a>
-    <p>@inclusion</p>
-
-
-    <b>@reason_heading</b>
-    <p>@Html.Raw(reason_description)</p>
 </div>
+

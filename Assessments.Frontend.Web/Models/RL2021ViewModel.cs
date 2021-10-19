@@ -39,7 +39,7 @@ namespace Assessments.Frontend.Web.Models
         
         public string Redlist2021ResultsCount =>
             Redlist2021Results.Count > 0 ? 
-                $"Viser {Redlist2021Results.Count} av {Redlist2021Results.TotalItemCount:N0}" : "Ingen resulater";
+                $"Viser {Redlist2021Results.Count} av {Redlist2021Results.TotalItemCount:N0}" : "Ingen resultater";
 
         public Species2001StatisticsViewModel Statistics { get; set; } = new();
     }

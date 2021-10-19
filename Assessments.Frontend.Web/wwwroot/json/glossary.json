@@ -9,7 +9,7 @@
   },
   "region": {
     "tagline": "Regioner og havområder ",
-    "description": " En art er forekommende i et (historisk) fylke eller havområde hvis vesentlige deler av livssyklusen foregår der. \"Kjent\" forekomst betyr kjent eller sannsynlig nåværende forekomst. \"Antatt\" forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser). \"Antatt utdødd\" forekomst brukes når arten muligens har dødd ut lokalt, mens \"utdødd forekomst\" betyr at det er overveiende sannsynlighet for at arten har dødd ut i området. Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
+    "description": " En art er forekommende i et (historisk) fylke eller havområde hvis vesentlige deler av livssyklusen foregår der. <i>Kjent forekomst</i> betyr kjent eller sannsynlig nåværende forekomst. <i>Antatt forekomst</i> brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser). <i>Antatt utdødd forekomst</i> brukes når arten muligens har dødd ut lokalt, mens <i>utdødd forekomst</i> betyr at det er overveiende sannsynlighet for at arten har dødd ut i området. Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
   },
   "criteria": {
     "tagline": "Hvilke kriterier gjør at denne arten er rødlistet?",
@@ -60,80 +60,80 @@
   },
   "inkluderingskriterier": {
     "hvorfor": {
-      "title": "Hvorfor er denne arten med i vurderingsgrunnlaget?",
-      "description": "Denne arten oppfyller ett av inkluderingskriteriene og er dermed rødlistevurdert.",
-      "else": " Disse kriteriene er enten etablert bestand i norge, regelmessig gjest eller etablert før 1800."
+      "title": "Hvorfor er denne arten vurdert?",
+      "description": "Denne arten er rødlistevurdert fordi den ",
+      "else": " enten har etablert bestand i norge, er en regelmessig gjest eller er etablert før 1800."
+    },
+    "EtablertFør1800": {
+      "title": "er en fremmedart som ble etablert før 1800",
+      "description": "Det vil si at den er en fremmedart, men er antatt eller dokumentert etablert med fast reproduserende populasjon per år 1800. "
+    },
+    "EtablertBestandINorge": {
+      "title": "har en etablert populasjon i Norge",
+      "description": "Det vil si at den er eller har vært dokumentert eller antatt etablert med fast reproduserende populasjon uten opphav i introduserte individer."
+    },
+    "IkkeReproduserendeINorge": {
+      "title": "er en regelmessig gjest",
+      "description": "Det vil si at den ikke er fast reproduserende, men mer enn 2 % av global populasjon oppholder seg regelmessig innenfor vurderingsområdet i deler av sin års-/livssyklus."
     },
     "hvorforikke": {
-      "title": "Arten oppfyller ikke kravene for å bli rødlistevurdert",
-      "description": "Arten oppfyller ingen av de tre inkluderingskriteriene for rødlista.",
-      "else": " Disse kriteriene er enten etablert bestand i norge, regelmessig gjest eller etablert før 1800."
+      "title": "Hvorfor er ikke arten ",
+      "NA": "egnet?",
+      "NE": "vurdert?"
     },
-    "etablertFør1800": {
-      "title": "Etablert før 1800",
-      "description": "Arten er fremmed, men er antatt eller dokumentert etablert med fast reproduserende bestand per år 1800. "
+    "IkkeReproduserendeGjestNA": {
+      "title": "Ikke reproduserende gjest",
+      "description": "Arten er ikke etablert med fast reproduserende populasjon og mindre enn 2 % av global populasjon oppholder seg regelmessig innenfor vurderingsområdet (gjest)."
     },
-    "etablertBestandINorge": {
-      "title": "Etablert bestand i Norge",
-      "description": "Arten er eller har vært dokumentert eller antatt etablert med fast reproduserende bestand uten opphav i introduserte individer."
-    },
-    "ikkeReproduserendeINorge": {
-      "title": "Regelmessig gjest",
-      "description": "Arten er ikke fast reproduserende, men bestander som utgjør mer enn 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor vurderingsområdet i deler av sin års-/livssyklus."
-    },
-    "ikkeReproduserendeGjestNA": {
-      "title": "ikke reproduserende gjest",
-      "description": "Arten er ikke etablert med fast reproduserende bestand og mindre enn 2 % av global populasjonsstørrelse oppholder seg regelmessig innenfor vurderingsområdet (gjest)."
-    },
-    "fremmedArtNA": {
+    "FremmedArtNA": {
       "title": "Fremmedart",
       "description": "Arten er fremmed, og ble enten etablert innenfor vurderingsområdet etter år 1800 eller antas å kunne etablere seg innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokkart</a>). "
     },
-    "observertReproduserendeIkkeEtablertNA": {
-      "title": "Ikke etablert observert reproduserende",
-      "description": "Arten er observert reproduserende innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende bestand."
+    "ObservertReproduserendeIkkeEtablertNA": {
+      "title": "Ikke etablert reproduserende",
+      "description": "Arten er observert reproduserende innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende populasjon."
     },
-    "observertReproduktivIkkeEtablertNA": {
-      "title": "Ikke etablert observert reproduktiv",
-      "description": "Arten er observert i reproduktivt stadium innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende bestand."
+    "ObservertReproduktivIkkeEtablertNA": {
+      "title": "Ikke etablert reproduserende ",
+      "description": "Arten er observert i reproduktivt stadium innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende populasjon."
     },
-    "uregelmessigGjestIkkeReproduserendeNA": {
-      "title": "Uregelmessig ikke-reproduserende gjest",
+    "UregelmessigGjestIkkeReproduserendeNA": {
+      "title": "Uregelmessig gjest",
       "description": "Arten opptrer uregelmessig innenfor vurderingsområdet, da som en følge av naturlig forflyttning."
     },
-    "ikkeDokumentertForekomstNA": {
+    "IkkeDokumentertForekomstNA": {
       "title": "Ikke dokumentert forekomst",
       "description": "Arten har ikke dokumentert forekomst innenfor vurderingsområdet."
     },
-    "hybridartUtenReproduksjonNA": {
+    "HybridartUtenReproduksjonNA": {
       "title": "Hybridart uten reproduksjon",
       "description": "Hybridart uten reproduksjon."
     },
-    "hybridartUvisstOmReproduserendeNA": {
+    "HybridartUvisstOmReproduserendeNA": {
       "title": "Hybridart - uvisst om er reproduserende",
       "description": "Hybridart, men uvisst om den er reproduserende. "
     },
-    "forekommerBareIHybridkombinasjonNA": {
+    "ForekommerBareIHybridkombinasjonNA": {
       "title": "Forekommer bare i hybridkombinasjon",
       "description": "Arten forekommer bare i hybridkombinasjon i vurderingsområdet."
     },
-    "mangelfullKunnskapNE": {
+    "MangelfullKunnskapNE": {
       "title": "Mangelfull kunnskap",
       "description": "Arten er ikke forsøkt rødlistevurdert på grunn av svært mangelfull kunnskap."
     },
-    "uavklartSystematikkNE": {
+    "UavklartSystematikkNE": {
       "title": "Uavklart systematikk",
       "description": "Arten er ikke forsøkt rødlistevurdert fordi arten eller artsgruppen den tilhører har uavklart systematikk."
     },
-    "uklartOmReproduserendeBestandNE": {
+    "UklartOmReproduserendeBestandNE": {
       "title": "Uklart om reproduserende bestand",
-      "description": "Arten er ikke forsøkt rødlistevurdert fordi det er uavklart om arten er etablert med en fast reproduserende bestand i vurderingsområdet."
+      "description": "Arten er ikke forsøkt rødlistevurdert fordi det er uavklart om arten er etablert med en fast reproduserende populasjon i vurderingsområdet."
     },
-    "artsgruppeIkkeRisikovurdertNE": {
+    "ArtsgruppeIkkeRisikovurdertNE": {
       "title": "Artsgruppe ikke risikovurdert",
       "description": "Arten er ikke forsøkt rødlistevurdert fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021."
     },
-    "annetNE": {
+    "AnnetNE": {
       "title": "Annet",
       "description": "Arten er ikke forsøkt rødlistevurdert."
     }

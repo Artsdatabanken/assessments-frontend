@@ -75,8 +75,9 @@
 
     void placeCriteria(string criteria)
     {
-        if (!string.IsNullOrEmpty(criteria)){
-           if (criteria.Contains("A"))
+        if (!string.IsNullOrEmpty(criteria))
+        {
+            if (criteria.Contains("A"))
             {
                 a = criteria;
             }
@@ -93,7 +94,7 @@
                 d = criteria;
             }
         }
-       
+
 
     }
 
@@ -330,7 +331,6 @@
         </div>
     }
 
-
     void fancyList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue)
     {
         <p> VERDI: @thresholdValue</p>
@@ -351,6 +351,7 @@
             }
         </ul>
     }
+
 
     void getQuantile(Dictionary<string, object> value, string k, string key)
     {
@@ -565,12 +566,12 @@
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
 Model.Category.Contains("VU") || Model.Category.Contains("NT")))
+
 {
     <div class="page_section criteria">
         <div class="criteria_description">
             <h3>@ViewBag.glossary["criteria"]["tagline"]</h3>
             <p>@ViewBag.glossary["criteria"]["description"]</p>
-
             <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
             <p>@Model.CriteriaSummarized<br /></p>
             @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
@@ -656,7 +657,8 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                     @{ iconChooser(inString(k, options[key])); }
                                     <div class="listitem_text_field">
                                         <h5>@k. <span>@v["title"]</span></h5>
-                                        @{ hasKey("description", v);}
+                                        @{ //hasKey("description", v)
+                                            ;}
                                         @if (v.ContainsKey("sub"))
                                         {
                                             <div class="subsub_list">
@@ -695,5 +697,13 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                 </div>
             </div>
         }
+
+
+
     </div>
+}
+else
+{
+    <partial name="/Views/Redlist/Assessment/partials/_NoCriteria.cshtml" />
+
 }

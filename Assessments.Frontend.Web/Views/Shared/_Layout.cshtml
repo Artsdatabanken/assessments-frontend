@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="~/css/categorybar.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/filter.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/search.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/toggleSwitch.css" asp-append-version="true" />
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://design.artsdatabanken.no/script/header.js"></script>
@@ -34,15 +35,21 @@
             <nav id="headermenu" class="hide"></nav>
         </div>
     </header>
-
-    <h1 class="title_header">
-        Norsk rødliste for arter 
-    </h1>
+    
+    <div class="title_header">
+        <h1 class="title_header" style="display:inline;">
+            <span class="full_title">Norsk rødliste for arter</span>
+            <span class="short_title">Rødlista</span>
+        </h1>
+        <partial name="/Views/Shared/_PageMenu.cshtml" />
+    </div>
+   
     <div class="main">
         <div class="main-content width-adjuster">
             @RenderBody()
             <script src="~/js/site.js" asp-append-version="true"></script>
             <script src="~/js/filter.js" asp-append-version="true"></script>
+            <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
             @await RenderSectionAsync("Scripts", required: false)
         </div>
     </div>

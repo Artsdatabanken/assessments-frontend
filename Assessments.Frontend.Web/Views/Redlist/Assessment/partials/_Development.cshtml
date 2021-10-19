@@ -12,13 +12,13 @@
     }
 }
 
-<h3>Historikk</h3>
+<h3>Utvikling</h3>
 <ul class="history_list">
 
     <li>
         <b class="text_content"> 2021: </b>
         <span class="graphic_element @Model.Category">@Model.Category</span>
-        <i> @categoryDescription(Model.Category)</i>
+        <span> @categoryDescription(Model.Category)</span>
 
         @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
         {
@@ -32,10 +32,6 @@
             <b class="text_content"> @prev.Year: </b>
             <span class="graphic_element @prev.Category">@prev.Category</span>
             <i> @categoryDescription(prev.Category)</i>
-
-            <a target="_blank" href="@prev.AssessmentUrl" class="button tertiary tinybutton">
-                Se vurdering<span class="material-icons">open_in_new</span>
-            </a>
         </li>
     }
 </ul>

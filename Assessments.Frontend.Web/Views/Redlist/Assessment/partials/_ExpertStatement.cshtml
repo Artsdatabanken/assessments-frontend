@@ -14,7 +14,7 @@
             {
                 // IN cases with big blocks of text with no line breaks, detect when a sentence ends in
                 // parenhesis and create line break. These sentences are often of concluding nature
-                // such as references or summarising some content, which is a nice time to take a break.         
+                // such as references or summarising some content, which is a nice time to take a break.
                 kriteriedok = kriteriedok.Replace(").", ").<br/>");
             }
         }
@@ -57,27 +57,27 @@
         kriteriedok = "<p>" + kriteriedok + "</p>";
         kriteriedok = kriteriedok.Replace("<p></p>", "");
     }
-        }
+}
 
 
-@if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
+@*@if (!(Model.Category == "NA" || Model.Category == "NE" || Model.Category == "LC"))
+    {*@
+@if (!string.IsNullOrWhiteSpace(kriteriedok))
 {
-    @if (!string.IsNullOrWhiteSpace(kriteriedok))
-        {
-        <div class="page_section">
-            <h2>
-                Ekspertenes oppsumering
-            </h2>
+    <div class="page_section">
+        <h2>
+            Ekspertenes oppsummering
+        </h2>
 
-            <div class="expert_Assessment">
-                <div class="expert_text">
-                    @*@kriteriedok<br />*@
-                    @Html.Raw(kriteriedok)
-                </div>
+        <div class="expert_Assessment">
+            <div class="expert_text">
+                @*@kriteriedok<br />*@
+                @Html.Raw(kriteriedok)
             </div>
         </div>
-    }
-
+    </div>
 }
+
+@*}*@
 
 }

@@ -71,7 +71,7 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.BBOptions, opt => opt.MapFrom(src => src.BBPågåendeArealreduksjonKode.OrderBy(SpeciesAssessment2021ProfileHelper.RomanNumberSort)))
                 .ForMember(dest => dest.BCOptions, opt => opt.MapFrom(src => src.BCEksterneFluktuasjonerKode.OrderBy(SpeciesAssessment2021ProfileHelper.RomanNumberSort)))
-                .ForMember(dest => dest.RationaleNotApplicable, opt => opt.MapFrom(src => src.BegrensetForekomstNA))
+                //.ForMember(dest => dest.RationaleNotApplicable, opt => opt.MapFrom(src => src.BegrensetForekomstNA))
 
                 .ForPath(dest => dest.C1.Statistics, opt => opt.MapFrom(src => src.C1PågåendePopulasjonsreduksjonAntatt))
                 .ForPath(dest => dest.C1.ThresholdValue, opt => opt.MapFrom(src => src.C1PågåendePopulasjonsreduksjonKode))
@@ -118,13 +118,11 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.CriteriaSummarized, opt => opt.MapFrom(src => src.Kriterier))
 
-                .ForMember(dest => dest.RationaleNotEvaluated, opt => opt.MapFrom(src => src.KunnskapsStatusNE))
+                //.ForMember(dest => dest.RationaleNotEvaluated, opt => opt.MapFrom(src => src.KunnskapsStatusNE))
                 .ForMember(dest => dest.PercentageEuropeanPopulation, opt => opt.MapFrom(src => src.MaxAndelAvEuropeiskBestand))
                 .ForMember(dest => dest.PercentageGlobalPopulation, opt => opt.MapFrom(src => src.MaxAndelAvGlobalBestand))
                 .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.ResolveMainHabitat(src.NaturtypeHovedenhet)))
 
-                .ForMember(dest => dest.AssessmentInitialClassification, opt => opt.MapFrom(src => src.OverordnetKlassifiseringGruppeKode))
-                
                 .ForMember(dest => dest.PopularName, opt => opt.MapFrom(src => src.PopularName))
                 .ForMember(destination => destination.PopularName, opt => opt.NullSubstitute(string.Empty))
                 
@@ -132,7 +130,7 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.References, opt => opt.MapFrom(src => src.Referanser.Where(r => r.Type != "Person"))) // ikke ta med personreferanser
 
-                .ForMember(dest => dest.EvaluationJustification, opt => opt.MapFrom(src => src.RodlisteVurdertArt))
+                //.ForMember(dest => dest.EvaluationJustification, opt => opt.MapFrom(src => src.RodlisteVurdertArt))
                 .ForMember(dest => dest.YearPreviousAssessment, opt => opt.MapFrom(src => src.SistVurdertAr))
 
                 .ForMember(dest => dest.TaxonomicHistory, opt => opt.MapFrom(src => src.TaxonomicHistory))
@@ -163,6 +161,7 @@ namespace Assessments.Mapping
                     SpeciesAssessment2021ProfileHelper.BlankReasonCategoryChangeWhenNoChange(src, dest);
                     SpeciesAssessment2021ProfileHelper.CalculateQuantiles(dest);
                     SpeciesAssessment2021ProfileHelper.FixMissingCategoryChangedFrom(src, dest);
+                    InitialClassification.Map(src, dest);
                 });
         }
     }

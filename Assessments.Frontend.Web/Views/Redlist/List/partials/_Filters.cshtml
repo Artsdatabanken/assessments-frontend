@@ -123,7 +123,6 @@
                             @if (!string.IsNullOrEmpty(@GetActiveFiltersCount()))
                             {
                             <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
-
                                 <span>Fjern</span>
                                 <div class="filternumber"><span>@GetActiveFiltersCount()</span></div>
                             </a>
@@ -149,8 +148,9 @@
                                         {
                                             <li class="checkbox" style="margin-top: 0;">
                                                 <label>
-                                                    @{ InputTag("Area", Model.Area, area.Value);} @area.Key
+                                                    @{ InputTag("Area", Model.Area, area.Value);}
                                                 </label>
+                                                <span>@area.Key</span>
                                             </li>
                                         }
                                     </ul>
@@ -173,20 +173,23 @@
                                                 <label>
                                                     @{
                                                         InputTag("input_" + category, "submitOnclick", "Category", Model.Category, category);
-                                                    } @category
+                                                    }
                                                 </label>
+                                                <span>@category</span>
                                             </li>
                                         }
                                         <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
                                         <li class="checkbox">
                                             <label>
-                                                <input id="redlisted_check" type="checkbox" asp-for="Redlisted" class="submitOnclick" />@SearchAndFilter.ChooseRedlisted
+                                                <input id="redlisted_check" type="checkbox" asp-for="Redlisted" class="submitOnclick" />
                                             </label>
+                                            <span>@SearchAndFilter.ChooseRedlisted</span>
                                         </li>
                                         <li class="checkbox">
                                             <label>
-                                                <input id="endangered_check" type="checkbox" asp-for="Endangered" class="submitOnclick" />@SearchAndFilter.ChooseEndangered
+                                                <input id="endangered_check" type="checkbox" asp-for="Endangered" class="submitOnclick" />
                                             </label>
+                                            <span>@SearchAndFilter.ChooseEndangered</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -207,8 +210,9 @@
                                         {
                                             <li class="checkbox" style="margin-top: 0;">
                                                 <label>
-                                                    @{ InputTag("TaxonRank", Model.TaxonRank, rank.Key);} @rank.Value
+                                                    @{ InputTag("TaxonRank", Model.TaxonRank, rank.Key);}
                                                 </label>
+                                                <span>@rank.Value</span>
                                             </li>
                                         }
                                     </ul>
@@ -230,8 +234,9 @@
                                         {
                                             <li class="checkbox">
                                                 <label>
-                                                    @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species.Key); } @species.Key
+                                                    @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species.Key); }
                                                 </label>
+                                                <span>@species.Key</span>
                                             </li>
                                         }
                                     </ul>
@@ -253,8 +258,9 @@
                                         {
                                             <li class="checkbox">
                                                 <label>
-                                                    @{ InputTag("Habitats", Model.Habitats, habitat.Key); } @habitat.Value["shortname"]
+                                                    @{ InputTag("Habitats", Model.Habitats, habitat.Key); }
                                                 </label>
+                                                <span>@habitat.Value["shortname"]</span>
                                             </li>
                                         }
                                     </ul>
@@ -276,8 +282,9 @@
                                         {
                                             <li class="checkbox">
                                                 <label>
-                                                    @{ InputTag("Regions", Model.Regions, region.Key);} @region.Value
+                                                    @{ InputTag("Regions", Model.Regions, region.Key);}
                                                 </label>
+                                                <span>@region.Value</span>
                                             </li>
                                         }
                                     </ul>
@@ -298,8 +305,9 @@
                                         {
                                             <li class="checkbox">
                                                 <label>
-                                                    @{ InputTag("EuroPop", Model.EuroPop, pop.Key);} @pop.Value
+                                                    @{ InputTag("EuroPop", Model.EuroPop, pop.Key);}
                                                 </label>
+                                                <span>@pop.Value</span>
                                             </li>
                                         }
                                     </ul>
@@ -321,8 +329,9 @@
                                         {
                                             <li class="checkbox">
                                                 <label>
-                                                    @{ InputTag("Criterias", Model.Criterias, criteria.Key);} @criteria.Key - @criteria.Value
+                                                    @{ InputTag("Criterias", Model.Criterias, criteria.Key);}
                                                 </label>
+                                                <span>@criteria.Key - @criteria.Value</span>
                                             </li>
                                         }
                                     </ul>
@@ -341,8 +350,9 @@
                                     <ul>
                                         <li class="checkbox">
                                             <label>
-                                                <input type="checkbox" class="submitOnclick" asp-for="PresumedExtinct" />Trolig utdødd
+                                                <input type="checkbox" class="submitOnclick" asp-for="PresumedExtinct" />
                                             </label>
+                                            <span>Trolig utdødd</span>
                                         </li>
                                     </ul>
                                 </div>

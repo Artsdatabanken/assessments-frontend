@@ -264,73 +264,6 @@
         }
     }
 
-    void indicatordots(string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile)
-    {
-        @if (unit == "%")
-        {
-            <span class="indicator_dot" style="right: @quantile.Max%">
-                <span class="indicator_text max"> Max @quantile.Max @unit</span>
-                <span class="dot_dot"></span>
-            </span>
-            <span class="indicator_dot" style="right: @quantile.Calculated%">
-                <span class="indicator_text calc"> Calculated @quantile.Calculated @unit</span>
-                <span class="dot_dot"></span>
-            </span>
-            @if (@quantile.Probable.Length > 0)
-            {
-                <span class="indicator_dot" style="right: @quantile.Probable%">
-                    <span class="indicator_text prob">Probable @quantile.Probable @unit</span>
-                    <span class="dot_dot"></span>
-                </span>
-            }
-            <span class="indicator_dot" style="right: @quantile.Min%">
-                <span class="indicator_text min"> Min @quantile.Min @unit </span>
-                <span class="dot_dot"></span>
-            </span>
-        }
-    }
-
-    void fancyGraph(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue)
-    {
-        <p> VERDI: @thresholdValue</p>
-        <div class="category_graph LC">
-            <span>@{indicatordots(unit, quantile);}</span>
-            @{
-                int previous_threshold = 100;
-                int width = 0;
-                int flex = 1;
-            }
-
-            @foreach (var (cat, catval) in thresholds)
-            {
-                int n;
-                bool isNumeric = int.TryParse(catval, out n);
-                if (isNumeric)
-                {
-                    if (unit == "%")
-                    {
-                        width = previous_threshold - n;
-                    }
-                    else
-                    {
-                        width = 20;
-                        flex = n;
-                    }
-                }
-                else
-                {
-                    width = 20;
-                }
-                <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
-                    @cat
-                    <br />
-                    <span>@comparator @catval @unit</span>
-                </div>
-                previous_threshold = n;
-            }
-        </div>
-    }
-
     void fancyList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue)
     {
         <p> VERDI: @thresholdValue</p>
@@ -398,13 +331,7 @@
                 string thresholdValue = GetThresholdValue(k);
 
                 fancyList(thresholds, unit, quantile, comparator, thresholdValue);
-                if (key != "B")
-                {
-                    fancyGraph(thresholds, unit, quantile, comparator, thresholdValue);
-                }
-
-
-
+                
             }
 
 

@@ -45,6 +45,8 @@ namespace Assessments.Frontend.Web
 
             services.AddTransient<ExpertCommitteeMemberService>();
 
+            services.AddHttpClient<ArtsdatabankenApiService>();
+
             services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
         }
 

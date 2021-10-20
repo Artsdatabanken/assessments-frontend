@@ -49,7 +49,7 @@
     display: block;
     line-height: 1;
     width: 100%;
-    color: black;
+    color: #4c4a48;
     text-align: center;
     padding-top: 5px;
 }
@@ -143,4 +143,67 @@
     background: white;
     color: #4c4a48;
     border: 1px solid #4c4a48;
+}
+
+/* COLOURS */
+
+
+.RE {
+    background: #5a5b5d;
+}
+
+.CR {
+    background: #99191a;
+}
+
+.EN {
+    background: #d80f27;
+}
+
+.VU {
+    background: #e94f33;
+}
+
+.NT {
+    background: #ed6c26;
+}
+
+.DD {
+    background: #f7a520;
+}
+
+.LC {
+    background: #60beb2;
+}
+
+.NA {
+    background: #939598;
+}
+
+.NE {
+    background: #d1d3d4;
+}
+
+
+.RE ,
+.CR ,
+.EN ,
+.VU {
+    color: white;
+}
+
+.NT,
+.DD ,
+.LC ,
+.NA ,
+.NE {    
+    color: #282828;
+}
+
+.category_displayer .NT,
+.category_displayer .DD,
+.category_displayer .LC,
+.category_displayer .NA,
+.category_displayer .NE {
+    color: #3d3b3a;
 }

@@ -6,11 +6,6 @@
     margin-bottom: 5px;
 }
 
-.inclusion_section a {
-   display:inline-block;
-   float:right;
-}
-
 .populationsize li {
     margin: 10px;
     margin-left: 15px;
@@ -207,57 +202,6 @@
       
 }
 
-
-
-/* CATEGORIES */
-.RE {
-    background: #5a5b5d;
-    color: white;
-}
-
-.CR {
-    background: #99191a;
-    color: white;
-}
-
-.EN {
-    background: #d80f27;
-    color: white;
-}
-
-.VU {
-    background: #e94f33;
-    color: white;
-}
-
-.NT {
-    background: #ed6c26;
-    color: white;
-}
-
-.DD {
-    background: #f7a520;
-    color: white;
-}
-
-.LC {
-    background: #60beb2;
-    color: black;
-}
-
-.NA {
-    background: #939598;
-    color: black;
-}
-
-.NE {
-    background: #d1d3d4;
-    color: black;
-}
-
-.utdodd {
-    background: #4c4a48;
-}
 
 
 /* categori  things */
@@ -904,7 +848,7 @@ span.area i {
 }
 
 .history_list .graphic_element {
-    font-size: 8pt;
+    font-size: 9pt;
     margin-left: 6px;
     vertical-align: text-top;
     height: 18px;

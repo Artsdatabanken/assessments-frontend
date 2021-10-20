@@ -471,7 +471,13 @@ ul a:active,
     }
 }
 
+.capitalized{
+    display:inline-block;
+}
 
+.capitalized:first-letter {
+    text-transform: uppercase;
+}
 
 /* To correct an issue with needing overflow hidden for some - but not all children */
 .clearfix:before,
@@ -489,4 +495,5 @@ ul a:active,
 .clearfix {
     zoom: 1;
 }
-/* IE < 8 */
+
+

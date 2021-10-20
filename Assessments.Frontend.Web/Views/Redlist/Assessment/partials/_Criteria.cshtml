@@ -1,5 +1,13 @@
 ﻿
 @model SpeciesAssessment2021
+@*
+    TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
+
+    This component takes in the json file of criteria and displays it
+    It also takes in the unhandled criteriasummarized string and trasforms it
+    into two useable dictionaries which are then matched to relevant places in the json.
+*@
+
 
 @functions {
 
@@ -30,18 +38,45 @@
         }
         return null;
     }
-
 }
 
-@*
-    TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
-
-    This component takes in the json file of criteria and displays it
-    It also takes in the unhandled criteriasummarized string and trasforms it
-    into two useable dictionaries which are then matched to relevant places in the json.
-*@
 
 @{
+    // MAPPING WHICH SHOULD HAVE BEEN MOVED  ELSEWHERE
+    string GetThresholdValue(string key)
+    {
+        switch (key)
+        {
+            case "A1":
+                return Model.A1.PreliminaryCategory;
+            case "A2":
+                return Model.A2.PreliminaryCategory;
+            case "A3":
+                return Model.A3.PreliminaryCategory;
+            case "A4":
+                return Model.A4.PreliminaryCategory;
+            case "B1":
+                return Model.B1.PreliminaryCategory;
+            case "B2":
+                return Model.B2.PreliminaryCategory;
+            case "BAii":
+                return Model.BAii.PreliminaryCategory;
+            case "C":
+                return Model.C.PreliminaryCategory;
+            case "C1":
+                return Model.C1.ThresholdValue;
+            case "C2Ai":
+                return Model.C2Ai.ThresholdValue;
+            case "D1":
+                return Model.D1PreliminaryCategory;
+            case "D2":
+                return Model.D2PreliminaryCategory;
+
+        }
+        return null;
+    }
+
+
     Dictionary<string, Dictionary<string, object>> parseDictNested(string json)
     {
         return Newtonsoft.Json.Linq.JObject.Parse(json).ToObject<Dictionary<string, Dictionary<string, object>>>();
@@ -60,61 +95,20 @@
     // Cast JSON to dictionary for easy iteration. Cant use those above as it's not a string...
     Dictionary<string, Dictionary<string, object>> criteria = ViewBag.kriterier.ToObject<Dictionary<string, Dictionary<string, object>>>();
 
-
-    // Each criteria by letter is handled differently.
-    string a = "", b = "", c = "", d = "";
-
-    void placeCriteria(string criteria)
+    // CRITERIA SUMMARIZED SORTED BY SUBCRITERIA
+    var subcriteria = Criteria.sortCriteria(Model.CriteriaSummarized);
+    string options = "";
+    if (subcriteria["B"].Contains("+"))
     {
-        if (!string.IsNullOrEmpty(criteria))
-        {
-            if (criteria.Contains("A"))
-            {
-                a = criteria;
-            }
-            else if (criteria.Contains("B"))
-            {
-                b = criteria;
-            }
-            else if (criteria.Contains("C"))
-            {
-                c = criteria;
-            }
-            else if (criteria.Contains("D"))
-            {
-                d = criteria;
-            }
-        }
-
-
+        options = subcriteria["B"].Split("+")[1];
     }
 
-    // Iterate the criteria string and place each separate criteria in its correct container.
-    if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && Model.CriteriaSummarized.Contains(";"))
-    {
-        // SPLIT THE LIST AND LOOP THEM
-        foreach (string crit in Model.CriteriaSummarized.Split(";"))
-        {
-            placeCriteria(crit);
-        }
-    }
-    else
-    {
-        placeCriteria(@Model.CriteriaSummarized);
-    }
-
-
-    // Sort criteria contents
-
-    string subCriteria(string element, string bigstring)
-    {
-        return bigstring.Replace("+", ";" + element);
-    }
+    // FUNCTIONAL COMPONENTS BECAUSE LETS PRETEND THIS IS REACT.
 
     void hasKey(string key, Dictionary<string, object> field)
     {
-        @if (field.ContainsKey(key))
-        {
+                        @if (field.ContainsKey(key))
+                        {
             <p class="@key">
                 @field[key]
             </p>
@@ -122,117 +116,7 @@
 
     }
 
-    a = subCriteria("A", a); // A CRITERIA - OPTIONS AND SUBCRITERIA ARE NOT SEPARATE ENTITIES
-    c = subCriteria("C", c); // C CRITERIA - All options are only relevant for C2 - handle in code.
-    d = subCriteria("D", d); // D CRITERIA: - ONLY subcriteria.
-
-    // B CRITERIA - OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES, options may contain sub-options
-
-    string b_subcriteria = "";
-    string b_options = "";
-
-    b = subCriteria("B", b);
-    if (b.Contains("B1"))
-    {
-        b_subcriteria += "B1;";
-        b = b.Replace("B1", "");
-    }
-    if (b.Contains("B2"))
-    {
-        b_subcriteria += "B2";
-        b = b.Replace("B2", "");
-    }
-
-    b = b.Replace("b", ";b");
-    b = b.Replace("c", ";c");
-    var b_distinctlist = b.Split(";").Distinct();
-    b_options = string.Join(";", b_distinctlist);
-    b = b_subcriteria + ";" + b_options;
-
-
-    string handleCCriteria(string current_element, string key)
-    {
-        if (key == "C")
-        {
-            // THIS IS ONLY RELEVANT FOR C2
-            current_element = current_element.Replace("a(i,ii)", "a(i)a(ii)");
-            current_element = current_element.Replace(")", ");");
-            current_element = current_element.Replace(" ", "");
-        }
-        else
-        {
-            current_element = current_element.Replace(",", ";");
-        }
-        return current_element;
-    }
-
-
-    string[] obtainSubCriteriaList(string[] splitlist, string k)
-    {
-        var current_element = "";
-        @foreach (string element in splitlist)
-        {
-            if (element.Contains(k))// k = current criteria
-            {
-                current_element = element;
-            }
-        }
-        current_element = current_element.Replace(k, ""); // remove main criteria, leaving nested subcriteria
-        current_element = removeOuterParenthesis(current_element);
-        current_element = handleCCriteria(current_element, k);
-        return current_element.Split(";");
-    }
-
-    // The dictionaries used in the view <- two dicts made sense back when A was thought to have options as well. Now not as much
-
-    var subcriteria = new Dictionary<string, string>(){
-    {"A", a},
-    {"B", b_subcriteria},
-    {"C", c},
-    {"D", d}
-    };
-
-    var options = new Dictionary<string, string>(){
-    {"B", b_options},
-    };
-
-    // Functions relevant to string separation
-
-    string inString(string element, string bigstring)
-    {
-        if (bigstring.Contains(element))
-        {
-            return "active";
-        }
-        return "inactive";
-    }
-
-    string inList(string element, string[] bigstring)
-    {
-        foreach (string el in bigstring)
-        {
-            if (bigstring.Contains(element))
-            {
-                return "active";
-            }
-        }
-        return "inactive";
-    }
-
-    string removeOuterParenthesis(string wrapped)
-    {
-        if (wrapped.Length > 2)
-        {
-            if (wrapped.StartsWith("(") && wrapped.EndsWith(")"))
-            {
-                return wrapped.Substring(1, wrapped.Length - 2);
-            }
-        }
-        return wrapped;
-    }
-
-    // FUNCTIONAL COMPONENTS BECAUSE LETS PRETEND THIS IS REACT.
-
+    // ICON USED TO DECIDE IF ACTIVE OR NOT. X and V icons.
     void iconChooser(string compare)
     {
         if (compare == "active")
@@ -242,98 +126,42 @@
             </span>
         }
         else if (compare == "maybe")
-        {
+    {
             <span class="material-icons">
                 pause
             </span>
         }
         else
-        {
+    {
             <span class="material-icons" style="color:darkred">
                 close
             </span>
         }
     }
 
-    void indicatordots(string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile)
+    // THE LIST SHOWING A SUBCATEGORY'S THRESHOLD VALUES
+    void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue)
     {
-        @if (unit == "%")
-        {
-            <span class="indicator_dot" style="right: @quantile.Max%">
-                <span class="indicator_text max"> Max @quantile.Max @unit</span>
-                <span class="dot_dot"></span>
-            </span>
-            <span class="indicator_dot" style="right: @quantile.Calculated%">
-                <span class="indicator_text calc"> Calculated @quantile.Calculated @unit</span>
-                <span class="dot_dot"></span>
-            </span>
-            @if (@quantile.Probable.Length > 0)
-            {
-                <span class="indicator_dot" style="right: @quantile.Probable%">
-                    <span class="indicator_text prob">Probable @quantile.Probable @unit</span>
-                    <span class="dot_dot"></span>
-                </span>
-            }
-            <span class="indicator_dot" style="right: @quantile.Min%">
-                <span class="indicator_text min"> Min @quantile.Min @unit </span>
-                <span class="dot_dot"></span>
-            </span>
-        }
-    }
-
-    void fancyGraph(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator)
-    {
-        <div class="category_graph LC">
-
-            <span>@{indicatordots(unit, quantile);}</span>
-            @{
-                int previous_threshold = 100;
-                int width = 0;
-                int flex = 1;
-            }
-
+        <p> VERDI: @thresholdValue</p>
+        <ul>
             @foreach (var (cat, catval) in thresholds)
             {
-                int n;
-                bool isNumeric = int.TryParse(catval, out n);
-                if (isNumeric)
-                {
-                    if (unit == "%")
-                    {
-                        width = previous_threshold - n;
-                    }
-                    else
-                    {
-                        width = 20;
-                        flex = n;
-                    }
+                string className = "inactive";
+                @if (cat != null && thresholdValue != null && cat.Contains(thresholdValue))
+                        {
+                    className = "active";
                 }
-                else
-                {
-                    width = 20;
-                }
-                <div class="@cat category_graph_element" style="width:@width%;flex:@flex">
-                    @cat
-                    <br />
+                <li class="thresholdlist @className">
+                    <span class="graphic_element @cat">@cat</span>
                     <span>@comparator @catval @unit</span>
-                </div>
-                previous_threshold = n;
+                </li>
             }
-        </div>
+        </ul>
     }
 
-    void getQuantile(Dictionary<string, object> value, string k, string key)
-    {
-        // CALCULATIONS, NUMBERS AND ALL FUN THINGS
-        var quantile = GetQuantileForCriteria(k);
-        if (quantile != null)
-        {
-            mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key);
-        }
-    }
 
-    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key)
-    {
+    // MAX MIN PROBABLE INTERVAL VALUES presentation
+    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key, string k)    {
 
         var json_quantile = parseDictObject(value);
         string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
@@ -361,155 +189,256 @@
                 </span>
             </p>
 
-            @if (json_quantile.ContainsKey("threshold") && key != "B")
+            @if (json_quantile.ContainsKey("threshold"))
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
-                fancyGraph(thresholds, unit, quantile, comparator);
+                string thresholdValue = GetThresholdValue(k);
+                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue);
             }
-
-
         </div>
+    }
 
-    }<!-- END OF FUNCTION-->
+
+    // Check for and present number-data including thresholds
+    void getQuantile(Dictionary<string, object> value, string k, string key)
+    {
+        var quantile = GetQuantileForCriteria(k);
+        if (quantile != null)
+        {
+            mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key, k);
+        }
+    }
+
+
+    void GetModel(string key)
+    {
+
+        @*
+            TODO: This should not be necessary, as thing SHOULD be in the same object, but alas.
+        *@
+
+        List<string> ReductionBasedOn = null;
+        string PreliminaryCategory = null;
+        string ThresholdValue = null;
+
+        if (key == "A1")
+        {
+            ReductionBasedOn = Model.A1.ReductionBasedOn;
+            PreliminaryCategory = Model.A1.PreliminaryCategory;
+        }
+        else if (key == "A2")
+        {
+            ReductionBasedOn = Model.A2.ReductionBasedOn;
+            PreliminaryCategory = Model.A2.PreliminaryCategory;
+        }
+        else if (key == "A3")
+        {
+            ReductionBasedOn = Model.A3.ReductionBasedOn;
+            PreliminaryCategory = Model.A3.PreliminaryCategory;
+        }
+        else if (key == "A4")
+        {
+            ReductionBasedOn = Model.A4.ReductionBasedOn;
+            PreliminaryCategory = Model.A4.PreliminaryCategory;
+        }
+        else if (key == "B1")
+        {
+            PreliminaryCategory = Model.B1.PreliminaryCategory;
+        }
+        else if (key == "B2")
+        {
+            PreliminaryCategory = Model.B2.PreliminaryCategory;
+        }
+        else if (key == "BAii")
+        {
+            PreliminaryCategory = Model.BAii.PreliminaryCategory;
+        }
+        else if (key == "C")
+        {
+            PreliminaryCategory = Model.C.PreliminaryCategory;
+        }
+        else if (key == "C1")
+        {
+            ThresholdValue = Model.C1.ThresholdValue;
+        }
+        else if (key == "C2Ai")
+        {
+            ThresholdValue = Model.C2Ai.ThresholdValue;
+        }
+        else if (key == "D1")
+        {
+            PreliminaryCategory = Model.D1PreliminaryCategory;
+        }
+        else if (key == "D2")
+        {
+            PreliminaryCategory = Model.D2PreliminaryCategory;
+        }
+
+
+
+        @if (Helpers.isNotEmpty(PreliminaryCategory) || Helpers.isNotEmpty(ThresholdValue) || ReductionBasedOn != null && ReductionBasedOn.Count != 0)
+        {
+            <div style="padding:10px; background:pink;">
+                @if (ReductionBasedOn != null)
+                {
+                    <span>
+                        Reduksjon baser på :
+                        @foreach (string el in ReductionBasedOn)
+                        {<span>@el</span>}
+                    </span>
+                    <br />
+                }
+
+                @if (Helpers.isNotEmpty(ThresholdValue))
+                {<span>Terskelverdi: @ThresholdValue</span><br />}
+                @if (Helpers.isNotEmpty(PreliminaryCategory))
+                {<span>Kategori basert på kriterie: @PreliminaryCategory</span><br />}
+            </div>
+
+
+        }
+
+    }
+
+
+
+
 }<!-- END OF ALL-->
 
 
 @if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
-     Model.Category.Contains("VU") || Model.Category.Contains("NT")))
+Model.Category.Contains("VU") || Model.Category.Contains("NT")))
+
 {
     <div class="page_section criteria">
         <div class="criteria_description">
             <h3>@ViewBag.glossary["criteria"]["tagline"]</h3>
             <p>@ViewBag.glossary["criteria"]["description"]</p>
+            <button class="tertiary tinybutton">Gå til metode <span class="material-icons">open_in_new</span></button>
             <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
             <p>@Model.CriteriaSummarized<br /></p>
             @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
-            <button>Gå til ordliste</button>
-            <button>Gå til metode</button>
-            @*
-                TODO: switch not working when moving up one level due to type difference.
-                @Model.A1
-                @Model.A1.ReductionBasedOn
-                @Model.A1.QuantifiedReduction
-                @Model.A2.PreliminaryCategory
-            *@
+            <button class="tertiary tinybutton">Gå til ordliste <span class="material-icons">open_in_new</span></button>
         </div>
 
-        <!-- MAIN CRITERIA -->
-        @foreach (var (key, value) in criteria)
-        {
-            <div class="criteria_element @inString(key, @Model.CriteriaSummarized) listitem_criteria">
+        <button class="changetab active">Kompakt</button><button class="changetab">Full visning</button>
+        <div class="tabbed_element_container">
+            <!-- MAIN CRITERIA -->
+            @foreach (var (key, value) in criteria)
+            {
+                <div class="criteria_element @Criteria.inString(key, @Model.CriteriaSummarized) listitem_criteria">
 
-                @{ iconChooser(inString(key, Model.CriteriaSummarized)); }
-                <div class="listitem_text_field">
-                    <h4>@key -  @value["title"]</h4>
-                    @{ hasKey("description", @value);}
+                    @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
+                    <div class="listitem_text_field">
+                        <h4>@key -  @value["title"]</h4>
+                        @{ hasKey("description", @value);}
+                        @{ GetModel(key);}
+                        @{ getQuantile(value, key, key);}
 
-                    @{ getQuantile(value, key, key);}
 
-                    <!-- SUB CRITERIA : obtain and reformat necessary data -->
-                    @if (@value.ContainsKey("subcriteria"))
-                    {
-                        <div class="criteria_subcriteria">
-                            @{
-                                var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
-                            }
-                            @foreach (var (k, v) in thesubcriteria)
-                            {
-                                <!-- ITERATE THROUGH ALL SUBCRITERIA -->
-                                <div class=" @inString(k, subcriteria[key]) listitem_criteria">
+                        <!-- SUB CRITERIA : obtain and reformat necessary data -->
+                        @if (@value.ContainsKey("subcriteria"))
+                        {
+                            <div class="criteria_subcriteria">
+                                @{
+                                    var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
+                                }
+                                @foreach (var (k, v) in thesubcriteria)
+                                {
+                                    <!-- ITERATE THROUGH ALL SUBCRITERIA -->
+                                    <div class=" @Criteria.inString(k, subcriteria[key]) listitem_criteria">
 
-                                    @{iconChooser(@inString(k, subcriteria[key]));}
-                                    <div class="listitem_text_field">
+                                        @{iconChooser(@Criteria.inString(k, subcriteria[key]));}
+                                        <div class="listitem_text_field">
 
-                                        <h5>@k <span>@v["title"]</span></h5>
-                                        @{ hasKey("description", v);}
+                                            <h5>@k <span>@v["title"]</span></h5>
+                                            @{ hasKey("description", v);}
+                                            @{ GetModel(k);}
+                                            @{ getQuantile(v, k, key);}
 
-                                        @{ getQuantile(v, k, key);}
+                                            <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
+                                            @if (v.ContainsKey("subsub"))
+                                            {
+                                                string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
+                                                var subdict = parseDictNested(@v["subsub"].ToString());
+                                                @if (currentlist.Length > 0)
+                                                {
+                                                    <div class="subsub_list">
+                                                        <h6 class="subheading">Kunnskapsgrunnlag</h6>
 
-                                        <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
-                                        @if (v.ContainsKey("subsub"))
-                                        {
-                                            string[] currentlist = obtainSubCriteriaList(subcriteria[key].Split(";"), k);
-                                            var subdict = parseDictNested(@v["subsub"].ToString());
-                                            @if (currentlist.Length > 0)
+                                                        @foreach (var (subkey, subval) in subdict)
+                                                        {
+                                                            <div class="@Criteria.inList(subkey, currentlist) listitem_criteria">
+                                                                @{ iconChooser(Criteria.inList(subkey, currentlist)); }
+                                                                <h6 class="listitem_text_field">
+                                                                    <b>@subkey</b>
+                                                                    <span>@subval["title"]</span>
+                                                                </h6>
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        }
+
+                        <!-- OPTIONS-->
+                        @if (@value.ContainsKey("options"))
+                        {
+                            var newDictionary = parseDictNested(value["options"].ToString());
+                            <div class="criteria_options">
+                                <h5 class="subheading"> Underkriterier </h5>
+                                @{ hasKey("options_description", @value);}
+                                @foreach (var (k, v) in newDictionary)
+                                {
+                                    <div class="listitem_criteria @Criteria.inString(k, options) ">
+                                        @{ iconChooser(Criteria.inString(k, options)); }
+                                        <div class="listitem_text_field">
+                                            <h5>@k. <span>@v["title"]</span></h5>
+                                            @{ //hasKey("description", v)
+                                                ;}
+                                            @if (v.ContainsKey("sub"))
                                             {
                                                 <div class="subsub_list">
-                                                    <h6 class="subheading">Kunnskapsgrunnlag</h6>
-
-                                                    @foreach (var (subkey, subval) in subdict)
+                                                    @{
+                                                        var currentlist = options.Split(";");
+                                                        var current_element = "";
+                                                        foreach (string element in currentlist)
+                                                        {
+                                                            if (element.Contains(k))
+                                                            {
+                                                                current_element = element;
+                                                            }
+                                                        }
+                                                        current_element = current_element.Replace(k, "");
+                                                        current_element = Criteria.removeOuterParenthesis(current_element);
+                                                        var clean_list = current_element.Split(",");
+                                                        var subdict = parseDictNested(@v["sub"].ToString());
+                                                    }
+                                                    @foreach (var (subkey, subvalue) in subdict)
                                                     {
-                                                        <div class="@inList(subkey, currentlist) listitem_criteria">
-                                                            @{ iconChooser(inList(subkey, currentlist)); }
+                                                        <div class="listitem_criteria @Criteria.inList(subkey, clean_list)">
+                                                            @{ iconChooser(Criteria.inList(subkey, clean_list)); }
                                                             <h6 class="listitem_text_field">
-                                                                <b>@subkey</b>
-                                                                <span>@subval["title"]</span>
+                                                                <span>@subkey </span>
+                                                                <span>@subvalue["title"]</span>
                                                             </h6>
                                                         </div>
                                                     }
                                                 </div>
                                             }
-                                        }
+                                        </div>
                                     </div>
-                                </div>
-                            }
-                        </div>
-                    }
-
-                    <!-- OPTIONS-->
-                    @if (@value.ContainsKey("options"))
-                    {
-                        var newDictionary = parseDictNested(value["options"].ToString());
-                        <div class="criteria_options">
-                            <h5 class="subheading"> Underkriterier </h5>
-                            @{ hasKey("options_description", @value);}
-                            @foreach (var (k, v) in newDictionary)
-                            {
-                                <div class="listitem_criteria @inString(k, options[key]) ">
-                                    @{ iconChooser(inString(k, options[key])); }
-                                    <div class="listitem_text_field">
-                                        <h5>@k. <span>@v["title"]</span></h5>
-                                        @{ //hasKey("description", v)
-                                            ;}
-                                        @if (v.ContainsKey("sub"))
-                                        {
-                                            <div class="subsub_list">
-                                                @{
-                                                    var currentlist = options[key].Split(";");
-                                                    var current_element = "";
-                                                    foreach (string element in currentlist)
-                                                    {
-                                                        if (element.Contains(k))
-                                                        {
-                                                            current_element = element;
-                                                        }
-                                                    }
-                                                    current_element = current_element.Replace(k, "");
-                                                    current_element = removeOuterParenthesis(current_element);
-                                                    var clean_list = current_element.Split(",");
-                                                    var subdict = parseDictNested(@v["sub"].ToString());
-                                                }
-                                                @foreach (var (subkey, subvalue) in subdict)
-                                                {
-                                                    <div class="listitem_criteria @inList(subkey, clean_list)">
-                                                        @{ iconChooser(inList(subkey, clean_list)); }
-                                                        <h6 class="listitem_text_field">
-                                                            <span>@subkey </span>
-                                                            <span>@subvalue["title"]</span>
-                                                        </h6>
-                                                    </div>
-                                                }
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            }
-                        </div>
-                    }<!-- END OPTIONS-->
+                                }
+                            </div>
+                        }<!-- END OPTIONS-->
+                    </div>
                 </div>
-            </div>
-        }
-
+            }
+        </div>
 
 
     </div>

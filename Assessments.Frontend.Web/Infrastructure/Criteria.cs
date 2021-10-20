@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -45,7 +46,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             foreach (string el in bigstring)
             {
-                if (bigstring.Contains(element))
+                if (el.Contains(element))
                 {
                     return "active";
                 }
@@ -53,7 +54,111 @@ namespace Assessments.Frontend.Web.Infrastructure
             return "inactive";
         }
 
+        public static string[] obtainSubCriteriaList(string[] splitlist, string k)
+        {
+            var current_element = "";
+            foreach(string element in splitlist)
+        {
+                if (element.Contains(k))// k = current criteria
+                {
+                    current_element = element;
+                }
+            }
+            current_element = current_element.Replace(k, ""); // remove main criteria, leaving nested subcriteria
+            current_element = Criteria.removeOuterParenthesis(current_element);
+            current_element = Criteria.handleCCriteria(current_element, k);
+            return current_element.Split(";");
+        }
 
+        public static string subCriteria(string element, string bigstring)
+        {
+            return bigstring.Replace("+", ";" + element);
+        }
+
+        public static string sortBCriteria(string b)
+        {
+            string b_subcriteria = "";
+
+            b = Criteria.subCriteria("B", b);
+            if (b.Contains("B1"))
+            {
+                b_subcriteria += "B1;";
+                b = b.Replace("B1", "");
+            }
+            if (b.Contains("B2"))
+            {
+                b_subcriteria += "B2";
+                b = b.Replace("B2", "");
+            }
+
+            b = b.Replace("b", ";b");
+            b = b.Replace("c", ";c");
+
+            var b_distinctlist = b.Split(";").Distinct();
+            string b_options = string.Join(";", b_distinctlist);
+            b = b_subcriteria + ";+" + b_options;
+
+            return b;
+        }
+
+        public static Dictionary<string, string> sortCriteria(string criteria)
+        {
+            string a = "", b = "", c = "", d = "";
+
+            void placeCriteria(string criteria)
+            {
+                if (!string.IsNullOrEmpty(criteria))
+                {
+                    if (criteria.Contains("A"))
+                    {
+                        a = criteria;
+                    }
+                    else if (criteria.Contains("B"))
+                    {
+                        b = criteria;
+                    }
+                    else if (criteria.Contains("C"))
+                    {
+                        c = criteria;
+                    }
+                    else if (criteria.Contains("D"))
+                    {
+                        d = criteria;
+                    }
+                }
+            }
+
+            // Iterate the criteria string and place each separate criteria in its correct container.
+            if (!string.IsNullOrEmpty(criteria) && criteria.Contains(";"))
+            {
+                // SPLIT THE LIST AND LOOP THEM
+                foreach (string crit in criteria.Split(";"))
+                {
+                    placeCriteria(crit);
+                }
+            }
+            else
+            {
+                placeCriteria(criteria);
+            }
+
+            // Sort criteria contents
+            a = Criteria.subCriteria("A", a); // A CRITERIA - OPTIONS AND SUBCRITERIA ARE NOT SEPARATE ENTITIES
+            c = Criteria.subCriteria("C", c); // C CRITERIA - All options are only relevant for C2 - handle in code.
+            d = Criteria.subCriteria("D", d); // D CRITERIA: - ONLY subcriteria.
+            b = Criteria.sortBCriteria(b);    // B CRITERIA - OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES, options may contain sub-options
+
+            // The dictionaries used in the view <- two dicts made sense back when A was thought to have options as well. Now not as much
+
+            var subcriteria = new Dictionary<string, string>(){
+            {"A", a},
+            {"B", b},
+            {"C", c},
+            {"D", d}
+            };
+
+            return subcriteria;
+        }
 
     }
 }

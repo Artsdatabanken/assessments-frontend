@@ -30,19 +30,21 @@
 
     void getInsectsList(string[] insects)
     {
-        <ul class="insect_filters">
-            @foreach (var insect in insects)
-            {
-                <li class="checkbox">
-                    <label>
-                        @{
-                            InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect); 
-                        }
-                    </label>
-                    <span>@insect</span>
-                </li>
-            }
-        </ul>
+        <div class="filter_insects">
+            <ul class="insect_filters">
+                @foreach (var insect in insects)
+                {
+                    <li class="checkbox">
+                        <label>
+                            @{
+                                InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect); 
+                            }
+                        </label>
+                        <span>@insect</span>
+                    </li>
+                }
+            </ul>
+        </div>
     }
 
     string GetActiveFiltersCount()
@@ -254,13 +256,15 @@
                                         {
                                             @if (species == "Insekter")
                                             {
+                                                InputTag("show_insects", "collapse_checkbox", "IsCheck", Model.IsCheck, "Insects");
                                                 <li class="checkbox">
                                                     <button name="insektsfiltre" class="list_header" id="list_header_insects" onclick="collapse('show_insects')" type="button">
                                                         <span>@species</span>
                                                         <span class="list_header_text">
                                                             <span class="filternumber">@GetActiveFilters("Insects")</span>
                                                         </span>
-                                                        <label>
+                                                        <span id="show_all_insects">Maker alle</span>
+                                                        <label onclick="event.stopPropagation()">
                                                             @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species); }
                                                         </label>
                                                     </button>

@@ -11,6 +11,10 @@ input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
     display: none;
 }
 
+input[type=checkbox]:checked#show_insects~.filter_insects {
+    display: block;
+}
+
 .filter_area,
 .filter_category,
 .filter_region,
@@ -21,6 +25,10 @@ input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
 .filter_species_groups,
 .filter_taxon_rank {
     display: block;
+}
+
+.filter_insects {
+    display: none;
 }
 `;
 
@@ -124,7 +132,7 @@ const initialCollapsibleCheck = () => {
 
 const handleFirstTime = () => {
     Array.prototype.forEach.call(isCheckInputs, (e) => {
-        if (e.id == "show_area") {
+        if (e.id == "show_area" || e.id == "show_insects") {
             e.checked = true;
         } else {
             e.checked = false;

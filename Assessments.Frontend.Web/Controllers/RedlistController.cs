@@ -21,7 +21,6 @@ namespace Assessments.Frontend.Web.Controllers
     {
         private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
         private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
-        private static readonly string[] _allCategories = Constants.AllCategories;
         private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         public IActionResult Index() => View();
@@ -67,7 +66,6 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
 
             // Categories
-            ViewBag.AllCategories = _allCategories;
             viewModel.Category = Helpers.findSelectedCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
 
             if (viewModel.Category?.Any() == true)

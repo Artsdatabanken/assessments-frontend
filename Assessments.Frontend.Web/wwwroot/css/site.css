@@ -471,3 +471,29 @@ ul a:active,
     }
 }
 
+.capitalized{
+    display:inline-block;
+}
+
+.capitalized:first-letter {
+    text-transform: uppercase;
+}
+
+/* To correct an issue with needing overflow hidden for some - but not all children */
+.clearfix:before,
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+

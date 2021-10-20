@@ -2,24 +2,14 @@
 
 @* // Section containing numbers for proportions of different population sizes. *@
 
-@functions {
-    private bool isNotEmpty(string key)
-    {
-        @if (key != null && key != " " && key != "-" && key != "" && key != "Helt ukjent")
-            {
-            return true;
-            }
-        return false;
-    }
-}
 
 <div class="page_section populationsize">
 
     @if (Model.Category != "NE" && Model.Category != "NA")
     {
-        @if (isNotEmpty(Model.ProportionOfMaxPopulation) ||
-          isNotEmpty(Model.PercentageEuropeanPopulation) ||
-          isNotEmpty(Model.PercentageGlobalPopulation))
+        @if (Helpers.isNotEmpty(Model.ProportionOfMaxPopulation) ||
+          Helpers.isNotEmpty(Model.PercentageEuropeanPopulation) ||
+          Helpers.isNotEmpty(Model.PercentageGlobalPopulation))
         {
 
             <h3>@ViewBag.glossary["populationsize"]["title"]</h3>
@@ -31,21 +21,21 @@
             <h4>@ViewBag.glossary["populationsize"]["subtitle"]</h4>
 
             <ul>
-                @if (isNotEmpty(Model.ProportionOfMaxPopulation))
+                @if (Helpers.isNotEmpty(Model.ProportionOfMaxPopulation))
                 {
                     <li>
                         <span>@Model.ProportionOfMaxPopulation</span>
                         <span>@ViewBag.glossary["populationsize"]["AndelNåværendeBestand"]</span>
                     </li>
                 }
-                @if (isNotEmpty(Model.PercentageEuropeanPopulation))
+                @if (Helpers.isNotEmpty(Model.PercentageEuropeanPopulation))
                 {
                     <li>
                         <span>@Model.PercentageEuropeanPopulation</span>
                         <span>@ViewBag.glossary["populationsize"]["MaxAndelAvEuropeiskBestand"]</span>
                     </li>
                 }
-                @if (isNotEmpty(Model.PercentageGlobalPopulation))
+                @if (Helpers.isNotEmpty(Model.PercentageGlobalPopulation))
                 {
                     <li>
                         <span>@Model.PercentageGlobalPopulation</span>

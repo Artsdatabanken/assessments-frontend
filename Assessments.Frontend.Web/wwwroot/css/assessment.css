@@ -488,6 +488,11 @@ no_distribution {
     color:grey;
 }
 
+.vurdert_N .region p,
+.vurdert_N .regionlist span {
+    color: inherit;
+}
+
 
 /* MOBILE SIZE: 550px til 650px  */
 @media only screen and (max-width: 650px) {

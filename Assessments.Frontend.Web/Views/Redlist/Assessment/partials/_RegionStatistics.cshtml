@@ -32,7 +32,6 @@
                 <b>Region</b>
                 <span class="indicator"></span>
                 <b>Forekomst</b>
-                @Model.PresumedExtinct
             </p>
 
             @foreach (var region in Model.RegionOccurrences.OrderBy(x => Helpers.SortedRegions().IndexOf(x.Fylke)).Reverse())

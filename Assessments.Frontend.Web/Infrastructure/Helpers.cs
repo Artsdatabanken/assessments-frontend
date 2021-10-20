@@ -101,6 +101,16 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
             return taxonRanks;
         }
+
+        public static bool isNotEmpty(string key)
+        {
+            if(key != null && key != " " && key != "-" && key != "" && key != "Helt ukjent")
+        {
+                return true;
+            }
+            return false;
+        }
+
     }
 
     public static class Constants

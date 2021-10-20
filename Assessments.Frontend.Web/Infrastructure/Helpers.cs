@@ -58,7 +58,8 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             if (species.Contains("Insekter"))
                 foreach (var insect in Constants.AllInsects)
-                    species.Add(insect);
+                    if (!species.Contains(insect))
+                        species.Add(insect);
             
             return species.ToArray();
         }

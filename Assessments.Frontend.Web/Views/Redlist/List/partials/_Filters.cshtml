@@ -84,6 +84,8 @@
                 return String.Empty;
             case "SpeciesGroups":
                 if (Model.SpeciesGroups?.Any() == true)
+                    if (Model.SpeciesGroups.Contains("Insekter"))
+                        return $"{Model.SpeciesGroups.Length - 1}";
                     return $"{Model.SpeciesGroups.Length}";
                 return String.Empty;
             case "Habitats":
@@ -107,11 +109,15 @@
                     return $"1";
                 return String.Empty;
             case "Insects":
-                int count = 0;
-                foreach (var insect in AllInsects)
-                    if (Model.SpeciesGroups.Contains(insect))
-                        count ++;
-                return $"{count}";
+                if (AllInsects.Any(insect => Model.SpeciesGroups.Contains(insect)))
+                {
+                    int count = 0;
+                    foreach (var insect in AllInsects)
+                        if (Model.SpeciesGroups.Contains(insect))
+                            count ++;
+                    return $"{count}";
+                }
+                return String.Empty;
             default:
                 return String.Empty;
         }

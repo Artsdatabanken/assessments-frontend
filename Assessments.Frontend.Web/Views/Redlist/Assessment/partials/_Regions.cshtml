@@ -1,0 +1,29 @@
+﻿@model SpeciesAssessment2021
+
+@{
+    string distributionName = "no_distribution";
+
+    if (Model.AssessmentArea == "N")
+    {
+        distributionName = "vurdert_N";
+    }
+    else if(Model.AssessmentArea == "S")
+    {
+        if (Model.SpeciesGroup == "Pattedyr")
+        {
+            distributionName = "vurdert_S_pattedyr";
+        }
+        else
+        {
+            distributionName = "vurdert_S";
+        }
+    }
+}
+
+<div class="page_section @distributionName">
+    <h2>Vurderingsområde og artens utbredelse</h2>
+    <p>
+        @ViewBag.glossary[distributionName]["description"];
+    </p>
+    <partial name="/Views/Redlist/Assessment/partials/_RegionStatistics.cshtml" />
+</div><!-- End section -->

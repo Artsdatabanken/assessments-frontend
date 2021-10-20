@@ -1,6 +1,9 @@
 ﻿@model SpeciesAssessment2021
 
 @{
+    // Add region if missing (region occurrence for the region "Jan Mayen" is sometimes absent while other regions always have data)
+    if (Model.RegionOccurrences.All(x => x.Fylke != "Jan Mayen"))
+        Model.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence { Fylke = "Jan Mayen", State  = 2 });
 
     // There seems to be no automatic sorting into different lists from the api and models per now
     // Thus added a quick check if the elements exist.
@@ -8,45 +11,30 @@
     // This may not be an optimal solution, but it is more universal than a checkbox that sometimes is included and sometimes not.
 
     var has_element = "";
-    string map_type = "region_occurences";
-
-    // Add region if missing (region occurrence for the region "Jan Mayen" is sometimes absent while other regions always have data)
-    if (Model.RegionOccurrences.All(x => x.Fylke != "Jan Mayen"))
-        Model.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence { Fylke = "Jan Mayen", State  = 2 });
-
-    @if (Model.Category.Contains("LC") || Model.Category.Contains("NA") || Model.Category.Contains("NE"))
+    foreach (var element in Model.RegionOccurrences)
     {
-        map_type = "region_borders";
+        has_element += element.State;
     }
-
-        foreach (var element in Model.RegionOccurrences)
-        {
-            has_element += element.State;
-        }
-
-
-    }
+}
 
 @if (has_element != "")
 { // No content would imply it exists nowhere or is recorded nowhere
-<div class="geographic_facts @map_type">
-    <h3>
-        @ViewBag.glossary["region"]["tagline"]
-    </h3>
-    <div class="fact_box">
-        @ViewBag.glossary["region"]["description"]
-    </div>
+<div class="geographic_facts">
+    <h3> @ViewBag.glossary["region"]["tagline"]</h3>
+    <p> @Html.Raw(@ViewBag.glossary["region"]["description"])</p>
 
     <h3>Geografisk distribusjon</h3>
 
     <div class="region_distributions">
 
-        <div class="regionlist @map_type">
+        <div class="regionlist">
             <p class="region_list_header">
                 <b>Region</b>
                 <span class="indicator"></span>
                 <b>Forekomst</b>
+                @Model.PresumedExtinct
             </p>
+
             @foreach (var region in Model.RegionOccurrences.OrderBy(x => Helpers.SortedRegions().IndexOf(x.Fylke)).Reverse())
             {
                 <span class="region">
@@ -104,20 +92,13 @@
             }
         </div>
 
-        <div class="map  @map_type">
+        <div class="map">
             <partial name="/Views/Redlist/Assessment/partials/_Map.cshtml" />
         </div>
+
     </div>
     <br />
 <p class="center-horizontal"><i>En mørkere farge benyttes her for å fremheve landområder</i></p>
 
 </div>
-
-
 }
-else
-{
-    //TODO: Text here for items LC etc with no records.
-}
-
-@* MAP HERE *@

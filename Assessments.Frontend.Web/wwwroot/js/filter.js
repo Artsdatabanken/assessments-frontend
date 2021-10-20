@@ -178,6 +178,12 @@ const toggleInsects = () => {
     });
 }
 
+const toggleSingleFilter = (element, parentId) => {
+    if (!element.checked) {
+        document.getElementById(parentId).checked = false;
+    }
+}
+
 document.addEventListener('keydown', (e) => {
     if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader) {
         closeFilters();

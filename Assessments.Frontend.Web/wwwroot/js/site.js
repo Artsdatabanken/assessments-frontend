@@ -38,6 +38,7 @@ const addSubmitOnclick = () => {
                 toggleRedlistedCategories();
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
+                // toggleSingleFilter(el); activate if toggle all of the filters are possible
                 this.form.submit();
             };
         } else if (el.id === "endangered_check") {
@@ -45,6 +46,7 @@ const addSubmitOnclick = () => {
                 toggleEndangeredCategories();
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
+                // toggleSingleFilter(el); activate if toggle all of the filters are possible
                 this.form.submit();
             };
         } else if (el.id === "Insekter") {
@@ -52,10 +54,20 @@ const addSubmitOnclick = () => {
                 toggleInsects();
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
+                // toggleSingleFilter(el); activate if toggle all of the filters are possible
                 this.form.submit();
             };
         } else {
             el.onclick = function() {
+                if (el.classList[0] === "insect_input") {
+                    toggleSingleFilter(el, "Insekter");
+                } else if (endangered.some(category => el.id.indexOf(category) != -1)) {
+                    toggleSingleFilter(el, "endangered_check");
+                    toggleSingleFilter(el, "redlisted_check");
+                } else if (redlisted.some(category => el.id.indexOf(category) != -1)) {
+                    toggleSingleFilter(el, "redlisted_check");
+                }
+
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
                 this.form.submit();

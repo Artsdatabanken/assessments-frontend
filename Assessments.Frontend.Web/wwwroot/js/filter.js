@@ -204,10 +204,10 @@ const initialFilterCheck = () => {
         hideFilters();
         removeSubmitOnclick();
     } else {
-        addSubmitOnclick();
         showFilters();
         hideFilterButton();
     }
+    addOnclick();
 }
 
 if (filters) {

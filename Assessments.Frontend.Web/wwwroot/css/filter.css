@@ -109,8 +109,11 @@ li.checkbox {
 }
 
 .filter_groups ul.insect_filters {
-    padding-left: 15px;
     padding-right: 0;
+}
+
+div.filter_insects {
+    margin-left: 15px;
 }
 
 .list_header_insects {

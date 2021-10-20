@@ -30,7 +30,7 @@ const setVisited = () => {
     init.checked = true;
 }
 
-const addSubmitOnclick = () => {
+const addOnclick = () => {
     if (!submitCheckInputs) return;
     Array.prototype.forEach.call(submitCheckInputs, el => {
         if (el.id === "redlisted_check") {
@@ -39,7 +39,9 @@ const addSubmitOnclick = () => {
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
                 // toggleSingleFilter(el); activate if toggle all of the filters are possible
-                this.form.submit();
+                if (!isSmallReader()) {
+                    this.form.submit();
+                }
             };
         } else if (el.id === "endangered_check") {
             el.onclick = function () {
@@ -47,7 +49,9 @@ const addSubmitOnclick = () => {
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
                 // toggleSingleFilter(el); activate if toggle all of the filters are possible
-                this.form.submit();
+                if (!isSmallReader()) {
+                    this.form.submit();
+                }
             };
         } else if (el.id === "Insekter") {
             el.onclick = function () {
@@ -55,7 +59,9 @@ const addSubmitOnclick = () => {
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
                 // toggleSingleFilter(el); activate if toggle all of the filters are possible
-                this.form.submit();
+                if (!isSmallReader()) {
+                    this.form.submit();
+                }
             };
         } else {
             el.onclick = function() {
@@ -70,7 +76,9 @@ const addSubmitOnclick = () => {
 
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;
-                this.form.submit();
+                if (!isSmallReader()) {
+                    this.form.submit();
+                }
             };
         }
     });

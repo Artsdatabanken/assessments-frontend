@@ -666,12 +666,13 @@ namespace Assessments.Mapping.Helpers
             }
         }
 
-        public static PreviousAssessment[] GetPreviousAssessments(Rodliste2019.TrackInfo trackInfo)
+        public static PreviousAssessment[] GetPreviousAssessments(Rodliste2019 src)
         {
+            var trackInfo = src.ImportInfo;
             var result = new List<PreviousAssessment>();
             if (trackInfo == null) return result.ToArray();
-
-            if (trackInfo.Kategori2015 != null && trackInfo.Kategori2015.Length > 0)
+            
+            if (trackInfo.Kategori2015 != null && trackInfo.Kategori2015.Length > 0 && src.SistVurdertAr == 2015)
             {
                 result.Add(new PreviousAssessment()
                 {

@@ -340,7 +340,48 @@ span.material-icons.less {
     border-bottom: #4c4a48;
 }
 
+.vurdert_N,
+vurdert_S_pattedyr,
+vurdert_S,
+no_distribution {
+    fill: #e7f1f2;
+    stroke: #000000
+}
 
+
+
+.vurdert_N .land,
+.vurdert_N .sea {
+    stroke-width:0.7px;
+}
+
+.vurdert_N .svalbard_land {
+    fill: white;
+    stroke-width:0.5px;
+}
+
+.vurdert_S .land,
+.vurdert_S .sea {
+    fill: white;
+    stroke-width: 0.5px;
+    stroke:grey;
+}
+
+.vurdert_S .svalbard_land {
+    fill: inherit;
+    stroke:inherit;
+    stroke-width:0.7px;
+}
+
+.region p,
+.regionlist span{
+    color:grey;
+}
+
+.vurdert_N .region p,
+.vurdert_N .regionlist span {
+    color: inherit;
+}
 
 
 /* MOBILE SIZE: 550px til 650px  */

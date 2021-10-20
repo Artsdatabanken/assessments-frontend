@@ -717,7 +717,7 @@ namespace Assessments.Mapping.Helpers
                 
             }
 
-            if (dest.AssessmentArea == "Svalbard")
+            if (dest.AssessmentArea == "S")
             {
                 var category = dest.Category.ToLowerInvariant().Substring(0, 2);
                 if (dest.PresumedExtinct)
@@ -748,6 +748,10 @@ namespace Assessments.Mapping.Helpers
                 //region.State == 2: ""; < --ikke registrert forekomst/ default tilsvarer vurderingscontext S + NA eller NE
                 //region.State == 3: "presumed_extinct"; tilsvarer vurderingscontext S + Model.PresumedExtinct
                 //region.State == 4: "extinct"; tilsvarer vurderingscontext S + kategori RE
+            }
+            else
+            {
+                // do nothing here
             }
         }
     }

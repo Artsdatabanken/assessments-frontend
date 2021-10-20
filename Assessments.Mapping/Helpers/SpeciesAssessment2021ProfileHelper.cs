@@ -712,10 +712,6 @@ namespace Assessments.Mapping.Helpers
                 dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence { Fylke = "Jan Mayen", State = 2 });
             }
 
-            if (dest.RegionOccurrences.Any(x => x.Fylke == "Svalbard"))
-            {
-                
-            }
 
             if (dest.AssessmentArea == "S")
             {
@@ -751,7 +747,7 @@ namespace Assessments.Mapping.Helpers
             }
             else
             {
-                // do nothing here
+                // do nothing here or introduce state 2?
             }
         }
     }

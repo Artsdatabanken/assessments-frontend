@@ -161,6 +161,7 @@ namespace Assessments.Mapping
                     SpeciesAssessment2021ProfileHelper.BlankReasonCategoryChangeWhenNoChange(src, dest);
                     SpeciesAssessment2021ProfileHelper.CalculateQuantiles(dest);
                     SpeciesAssessment2021ProfileHelper.FixMissingCategoryChangedFrom(src, dest);
+                    SpeciesAssessment2021ProfileHelper.FixMissingRegions(src, dest);
                     InitialClassification.Map(src, dest);
                 });
         }

@@ -392,6 +392,9 @@ namespace Assessments.Mapping.Helpers
 
         }
         private static string[] _romanNumbers = new[] { "i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x" };
+        private static string[] _knownCategories = new[] { "cr", "en", "vu", "nt", "lc", "dd" };
+        private static string[] _notKnownCategories = new[] { "na", "ne" };
+
         public static int RomanNumberSort(string roman)
         {
             // for this purpose this is enough
@@ -698,6 +701,53 @@ namespace Assessments.Mapping.Helpers
         public static string Capitalize(string str)
         {
             return char.ToUpper(str[0]) + str.Substring(1);
+        }
+
+        public static void FixMissingRegions(Rodliste2019 src, SpeciesAssessment2021 dest)
+        {
+            if (dest.RegionOccurrences.All(x => x.Fylke != "Jan Mayen"))
+            {
+                // mangler på alle unntatt noen karplanter
+                dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence { Fylke = "Jan Mayen", State = 2 });
+            }
+
+            if (dest.RegionOccurrences.Any(x => x.Fylke == "Svalbard"))
+            {
+                
+            }
+
+            if (dest.AssessmentArea == "Svalbard")
+            {
+                var category = dest.Category.ToLowerInvariant().Substring(0, 2);
+                if (dest.PresumedExtinct)
+                {
+                    dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence(){ Fylke = "Svalbard", State = 3});
+                }
+                else if (category == "re")
+                {
+                    dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence() { Fylke = "Svalbard", State = 4 });
+                }
+                else if (_knownCategories.Contains(category))
+                {
+                    dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence() { Fylke = "Svalbard", State = 0 });
+                }
+                else if(_notKnownCategories.Contains(category))
+                {
+                    dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence() { Fylke = "Svalbard", State = 2 });
+                }
+                else
+                {
+                    throw new Exception("Should not happen");
+                }
+                // mangler alle
+                //Det er 4 kategorier regionforekomst som bør vises for svalbard.
+
+                //    region.State == 0: "known"; tilsvarer vurderingscontext S + Kategori == (CR, EN, VU, NT, LC) og DD
+                ////region.State == 1: "presumed" tilsvarer vurderingscontext S + Kategori == (DD);
+                //region.State == 2: ""; < --ikke registrert forekomst/ default tilsvarer vurderingscontext S + NA eller NE
+                //region.State == 3: "presumed_extinct"; tilsvarer vurderingscontext S + Model.PresumedExtinct
+                //region.State == 4: "extinct"; tilsvarer vurderingscontext S + kategori RE
+            }
         }
     }
 }

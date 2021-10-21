@@ -25,6 +25,7 @@ namespace Assessments.Frontend.Web.Controllers
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         public IActionResult Index() => View();
 
+
         [Route("2021")]
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {

@@ -168,26 +168,6 @@ namespace Assessments.Frontend.Web.Controllers
 
             return View("Assessment/SpeciesAssessment2021", assessment);
         }
-        
-        [Route("habitat")]
-        public async Task<IActionResult> Habitat()
-        {
-            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
-
-            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
-
-            return View("Habitat");
-        }
-
-        [Route("speciesgroup")]
-        public async Task<IActionResult> SpeciesGroup()
-        {
-            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
-
-            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
-
-            return View("SpeciesGroup");
-        }
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
         {

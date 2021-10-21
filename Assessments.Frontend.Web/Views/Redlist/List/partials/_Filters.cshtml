@@ -7,8 +7,9 @@
     var AllEuroPop = ViewBag.AllEuroPop;
     var AllRegions = ViewBag.AllRegions;
     Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
-    Dictionary<string, Dictionary<string, string>> AllSpeciesGroups = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
     var AllTaxonRanks = ViewBag.AllTaxonRanks;
+    string[] AllSpeciesGroups = ViewBag.AllSpeciesGroups;
+    string[] AllInsects = ViewBag.AllInsects;
 }
 
 @functions{
@@ -24,9 +25,27 @@
     }
     void InputTag(string name, string[] elements, string value)
     {
-        InputTag(name, "submitOnclick", name, elements, value);
+        InputTag(value, "submitOnclick", name, elements, value);
     }
 
+    void getInsectsList(string[] insects)
+    {
+        <div class="filter_insects">
+            <ul class="insect_filters">
+                @foreach (var insect in insects)
+                {
+                    <li class="checkbox">
+                        <label>
+                            @{
+                                InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect); 
+                            }
+                        </label>
+                        <span>@insect</span>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
 
     string GetActiveFiltersCount()
     {
@@ -65,7 +84,11 @@
                 return String.Empty;
             case "SpeciesGroups":
                 if (Model.SpeciesGroups?.Any() == true)
+                {
+                    if (Model.SpeciesGroups.Contains("Insekter"))
+                        return $"{Model.SpeciesGroups.Length - 1}";
                     return $"{Model.SpeciesGroups.Length}";
+                }
                 return String.Empty;
             case "Habitats":
                 if (Model.Habitats?.Any() == true)
@@ -86,6 +109,16 @@
             case "PresumedExtinct":
                 if (Model.PresumedExtinct == true)
                     return $"1";
+                return String.Empty;
+            case "Insects":
+                if (AllInsects.Any(insect => Model.SpeciesGroups.Contains(insect)))
+                {
+                    int count = 0;
+                    foreach (var insect in AllInsects)
+                        if (Model.SpeciesGroups.Contains(insect))
+                            count ++;
+                    return $"{count}";
+                }
                 return String.Empty;
             default:
                 return String.Empty;
@@ -163,7 +196,6 @@
                                         @SearchAndFilter.SearchChooseCategory
                                         <span class="filternumber">@GetActiveFilters("Category")</span>
                                     </span>
-
                                 </button>
                                 <div class="filter_category">
                                     <ul>
@@ -202,7 +234,6 @@
                                         @SearchAndFilter.SearchFilterTaxonRank
                                         <span class="filternumber">@GetActiveFilters("TaxonRank")</span>
                                     </span>
-
                                 </button>
                                 <div class="filter_taxon_rank">
                                     <ul>
@@ -226,18 +257,38 @@
                                         Artsgruppe
                                         <span class="filternumber">@GetActiveFilters("SpeciesGroups")</span>
                                     </span>
-
                                 </button>
                                 <div class="filter_species_groups">
                                     <ul>
                                         @foreach (var species in AllSpeciesGroups)
                                         {
-                                            <li class="checkbox">
-                                                <label>
-                                                    @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species.Key); }
-                                                </label>
-                                                <span>@species.Key</span>
-                                            </li>
+                                            @if (species == "Insekter")
+                                            {
+                                                InputTag("show_insects", "collapse_checkbox", "IsCheck", Model.IsCheck, "Insects");
+                                                <li class="checkbox">
+                                                    <button name="insektsfiltre" class="list_header" id="list_header_insects" onclick="collapse('show_insects')" type="button">
+                                                        <span>@species</span>
+                                                        <span class="list_header_text">
+                                                            <span class="filternumber">@GetActiveFilters("Insects")</span>
+                                                        </span>
+                                                        <span id="show_all_insects">Maker alle</span>
+                                                        <label onclick="event.stopPropagation()">
+                                                            @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species); }
+                                                        </label>
+                                                    </button>
+                                                </li>
+                                                getInsectsList(AllInsects);
+                                            } 
+                                            else
+                                            {
+                                                <li class="checkbox">
+                                                    <label>
+                                                        @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species); }
+                                                    </label>
+                                                    <span>@species</span>
+                                                </li>
+                                            }
+                                            
                                         }
                                     </ul>
                                 </div>
@@ -250,7 +301,6 @@
                                         Hovedhabitat
                                         <span class="filternumber">@GetActiveFilters("Habitats")</span>
                                     </span>
-
                                 </button>
                                 <div class="filter_habitat">
                                     <ul>
@@ -274,7 +324,6 @@
                                         Regioner og havområder
                                         <span class="filternumber">@GetActiveFilters("Regions")</span>
                                     </span>
-
                                 </button>
                                 <div class="filter_region">
                                     <ul>
@@ -321,7 +370,6 @@
                                         @SearchAndFilter.SearchChooseCriteria
                                         <span class="filternumber">@GetActiveFilters("Criterias")</span>
                                     </span>
-
                                 </button>
                                 <div class="filter_criteria">
                                     <ul>
@@ -362,7 +410,6 @@
                                     Avslutt
                                     <span class="material-icons">close</span>
                                 </button>
-
 
                                 <button class="hideonmobile tertiary" type="submit" name="Export" value="true" formtarget="_blank">
                                     <span class="material-icons">file_download</span> Eksporter

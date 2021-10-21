@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -40,6 +41,27 @@ namespace Assessments.Frontend.Web.Infrastructure
                 }
             }
             return selectedCategories.ToArray();
+        }
+
+        public static string[] getAllSpeciesGroups(Dictionary<string, Dictionary<string, string>> speciesGroups)
+        {
+            var insectArray = Constants.AllInsects;
+            List<string> allSpecies = new List<string>();
+            foreach (var species in speciesGroups)
+                if (!insectArray.Contains(species.Key))
+                    allSpecies.Add(species.Key);
+            allSpecies.Add("Insekter");
+            return allSpecies.OrderBy(x => x).ToArray();
+        }
+
+        public static string[] getSelectedSpeciesGroups(List<string> species)
+        {
+            if (species.Contains("Insekter"))
+                foreach (var insect in Constants.AllInsects)
+                    if (!species.Contains(insect))
+                        species.Add(insect);
+            
+            return species.ToArray();
         }
 
         public static Dictionary<string, string> getRegionsDict()
@@ -152,6 +174,26 @@ namespace Assessments.Frontend.Web.Infrastructure
             {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, "5 - 25 %"},
             {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, "25 - 50 %"},
             {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, "> 50 %"}
+        };
+
+        public static readonly string[] AllInsects = new string[]
+        {
+            "Biller",
+            "Døgnfluer",
+            "Kakerlakker",
+            "Kamelhalsfluer",
+            "Mudderfluer",
+            "Nebbfluer",
+            "Nebbmunner",
+            "Nettvinger",
+            "Rettvinger",
+            "Saksedyr",
+            "Sommerfugler",
+            "Steinfluer",
+            "Tovinger",
+            "Vepser",
+            "Vårfluer",
+            "Øyenstikkere"
         };
         
         public class EuropeanPopulationPercentages

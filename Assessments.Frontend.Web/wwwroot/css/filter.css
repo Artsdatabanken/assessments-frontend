@@ -108,6 +108,27 @@ li.checkbox {
     list-style-type: none;
 }
 
+.filter_groups ul.insect_filters {
+    padding-right: 0;
+}
+
+div.filter_insects {
+    margin-left: 15px;
+}
+
+.list_header_insects {
+    background-color: transparent;
+}
+
+.filter_insects {
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 5px;
+}
+
+#list_header_insects {
+    padding-right: 3px;
+}
+
 .list_header_text {
     display: flex;
     flex-direction: row;
@@ -138,6 +159,10 @@ button.list_header {
 
 .filter_header .material-icons {
     padding-right: 5px;
+}
+
+#show_all_insects {
+    display: none;
 }
 
 @media only screen and (max-width: 750px) {
@@ -185,6 +210,15 @@ button.list_header {
         width: 100%;
         overflow: hidden;
         text-align: center;
+    }
+
+    .filter_insects {
+        margin-bottom: 10px;
+    }
+
+    #show_all_insects {
+        display: inline-block;
+        white-space: nowrap;
     }
 } 
 

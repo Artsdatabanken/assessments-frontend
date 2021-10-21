@@ -47,7 +47,7 @@
         </div>
     }
 
-    string GetActiveFiltersCount()
+    int GetActiveSelectionCount()
     {
         int count = 0;
         count += Model.Area.Length;
@@ -61,8 +61,22 @@
         if (Model.PresumedExtinct)
             count++;
 
+        if (!string.IsNullOrEmpty(Model.Name))
+            count++;
+
+        return count;
+    }    
+
+    string GetActiveSelection()
+    {
+        var count = GetActiveSelectionCount();
+
         if (count > 0)
+        {
+            if (!string.IsNullOrEmpty(Model.Name))
+                return $"{Model.Name} {count}";
             return $"{count}";
+        }
         return String.Empty;
     }
 
@@ -131,7 +145,7 @@
     <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
 
     <button class="toggle_filter only_mobile" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-        <span class="filternumber">@GetActiveFiltersCount()</span>
+        <span class="filternumber">@GetActiveSelection()</span>
         <span class="material-icons">
             filter_list
         </span>Filter
@@ -153,11 +167,11 @@
                                 filter_list
                             </span>
                             <span>Filter</span>                            
-                            @if (!string.IsNullOrEmpty(@GetActiveFiltersCount()))
+                            @if (!string.IsNullOrEmpty(@GetActiveSelection()))
                             {
                             <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
+                                <div class="filternumber"><span>@GetActiveSelection()</span></div>
                                 <span>Fjern</span>
-                                <div class="filternumber"><span>@GetActiveFiltersCount()</span></div>
                             </a>
                             }                            
                         </h3>

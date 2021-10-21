@@ -217,7 +217,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Fetch all habitat lists, flatten the lists and make it distinct to obtain all currently possible habitat names.
             var habitatNames = data
-                .Where(x => relevantCategories.Contains(x.Category))
+                .Where(x => relevantCategories.Contains(x.Category.Substring(0,2)))
                 .Select(x => x.MainHabitat)
                 .SelectMany(x => x)
                 .Distinct()
@@ -232,7 +232,7 @@ namespace Assessments.Frontend.Web.Controllers
             // REGION
             var regionNames = Helpers.SortedRegions();
             var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data
-                .Where(x => relevantCategories.Contains(x.Category))
+                .Where(x => relevantCategories.Contains(x.Category.Substring(0, 2)))
                 .Select(x => x.RegionOccurrences)
                 .SelectMany(x => x)
                 .Where(x => x.Fylke == name && x.State ==0).Count()))
@@ -247,7 +247,7 @@ namespace Assessments.Frontend.Web.Controllers
             // CRITERIA
 
             var criteriaStrings = data
-                .Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && relevantCategories.Contains(x.Category))
+                .Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && relevantCategories.Contains(x.Category.Substring(0, 2)))
                 .Select(x => x.CriteriaSummarized);
             var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
             viewModel.Statistics.Criteria = criteria.ToDictionary(x => x.Key, x => x.Value);
@@ -269,7 +269,7 @@ namespace Assessments.Frontend.Web.Controllers
             string excludedSeverity = "Ubetydelig/ingen nedgang";
 
             var impactFactors = data
-                .Where(x => relevantCategories.Contains(x.Category))
+                .Where(x => relevantCategories.Contains(x.Category.Substring(0, 2)))
                 .Select(x => x.ImpactFactors
                     .Where(x => x.GroupingFactor != excludedGroupingFactor &&
                         x.PopulationScope != excludedPopulationScope &&

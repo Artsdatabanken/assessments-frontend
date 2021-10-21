@@ -1,0 +1,45 @@
+﻿@model SpeciesAssessment2021
+@{
+    ViewBag.Title = Model.ScientificName;
+    var naturtypehovedenhet = Model.MainHabitat;
+
+
+    string geografi = Model.AssessmentArea;
+
+    if (geografi == "N")
+    {
+        geografi = "Norge";
+    }
+    else if (geografi == "S")
+    {
+        geografi = "Svalbard";
+        if (@Model.ExpertCommittee == "Pattedyr (Svalbard)")
+        {
+            geografi = "Svalbard med kyst";
+        }
+    }
+}
+
+<partial name="/Views/Redlist/Species/2021/Assessment/partials/_Breadcrumb.cshtml" />
+<div class="pagecontainer">
+    <partial name="/Views/Shared/_PageMenu.cshtml" />
+
+    <div class="content-placer bigmid">
+        <div class="mid-content with_sidebar">
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Header.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />            
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertCommitteeMembers.cshtml" model="Model" />
+        </div>
+        <div class="side">
+            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SidebarContent.cshtml" />
+        </div>
+    </div>
+</div>

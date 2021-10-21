@@ -10,13 +10,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Views\Redlist\2021\Assessment\partials\criteria\**" />
+	  <Compile Remove="Views\Redlist\species\2021\Assessment\partials\criteria\**" />
 	  <Compile Remove="Views\Test\**" />
-	  <Content Remove="Views\Redlist\2021\Assessment\partials\criteria\**" />
+	  <Content Remove="Views\Redlist\species\2021\Assessment\partials\criteria\**" />
 	  <Content Remove="Views\Test\**" />
-	  <EmbeddedResource Remove="Views\Redlist\2021\Assessment\partials\criteria\**" />
+	  <EmbeddedResource Remove="Views\Redlist\species\2021\Assessment\partials\criteria\**" />
 	  <EmbeddedResource Remove="Views\Test\**" />
-	  <None Remove="Views\Redlist\2021\Assessment\partials\criteria\**" />
+	  <None Remove="Views\Redlist\species\2021\Assessment\partials\criteria\**" />
 	  <None Remove="Views\Test\**" />
 	</ItemGroup>
 
@@ -46,17 +46,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\Redlist\2021\Assessment\partials\_ImpactFactors.cshtml" />
+	  <UpToDateCheckInput Remove="Views\Redlist\species\2021\Assessment\partials\_ImpactFactors.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Views\Redlist\2021\Assessment\partials\_ImpactFactors.cshtml" />
+	  <_ContentIncludedByDefault Remove="Views\Redlist\species\2021\Assessment\partials\_ImpactFactors.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\Redlist\2006\" />
-	  <Folder Include="Views\Redlist\2010\" />
-	  <Folder Include="Views\Redlist\2018\" />
+	  <Folder Include="Views\Alienspecieslist\" />
+	  <Folder Include="Views\Redlist\species\2006\" />
+	  <Folder Include="Views\Redlist\species\2010\" />
+	  <Folder Include="Views\Redlist\species\2018\" />
+	  <Folder Include="Views\Redlist\nature\2018\" />
 	</ItemGroup>
 	
 </Project>

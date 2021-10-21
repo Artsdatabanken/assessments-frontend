@@ -15,15 +15,23 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [Route("species")]
+    [Route("redlist")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class RedlistController : BaseController<RedlistController>
     {
-        private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
+        public IActionResult Index() => View();
+
+        [Route("species")]
+        public IActionResult species()
+        {
+            return View("Species/Index");
+        }
+
+        private static readonly Dictionary<string, JObject> _resourceCache = new Dictionary<string, JObject>();
         private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
         private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
-        public IActionResult Index() => View();
+
 
 
         [Route("2021")]

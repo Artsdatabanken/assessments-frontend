@@ -142,7 +142,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             SetupStatisticsViewModel(query.ToList(), viewModel);
 
-            return View("List/List2021", viewModel);
+            return View("2021/List/List", viewModel);
         }
 
         [Route("{id:required}")]
@@ -167,7 +167,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             ViewBag.impactfactors = await GetResource("wwwroot/json/impactfactors.json");
 
-            return View("Assessment/SpeciesAssessment2021", assessment);
+            return View("2021/Assessment/SpeciesAssessment2021", assessment);
         }
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
@@ -272,14 +272,14 @@ namespace Assessments.Frontend.Web.Controllers
 
         private static async Task<JObject> GetResource(string resourcePath)
         {
-#if (DEBUG == true)
+            #if (DEBUG == true)
             if (_resourceCache.ContainsKey(resourcePath)) return _resourceCache[resourcePath];
-#endif
+            #endif
             var json = await System.IO.File.ReadAllTextAsync(resourcePath);
             var jObject = JObject.Parse(json);
-#if (DEBUG == true)
+            #if (DEBUG == true)
             if (!_resourceCache.ContainsKey(resourcePath)) _resourceCache.Add(resourcePath, jObject);
-#endif            
+            #endif            
             return jObject;
         }
     }

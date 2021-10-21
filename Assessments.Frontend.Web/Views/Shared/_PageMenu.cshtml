@@ -15,16 +15,7 @@
     <button class="button tertiary" onclick="expandParent(this, 'expand')">Om Rødlista </button>
     <h3>Om Rødlista </h3>
     <ul>
-        <li><a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">Listevisning</a></li>
-        <li><a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N"  asp-route-View="stat">Statistikk</a></li>
-        <li><a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">Menyelement fra Drupal</a></li>
-        <li><a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">Menyelement fra Drupal</a></li>
-        <li><a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">Menyelement fra Drupal</a></li>
         <li><a asp-controller="Redlist" asp-action="Detail" asp-route-id="9808">Testart: Nitidula rufipes</a></li>
-        <li><a asp-controller="Redlist" asp-action="Detail" asp-route-id="24069">Testart: Gråsotbeger </a></li>
-        <li><a asp-controller="Redlist" asp-action="Detail" asp-route-id="14469">Testart: Lappskjegg </a></li>
-        <li><a asp-controller="Redlist" asp-action="Detail" asp-route-id="19978">Testart: Hårsvøpmose </a></li>
-        <li><a asp-controller="Redlist" asp-action="Index">LINK TIL TESTSIDEN?</a></li>
         @*lenker fra cms/drupal via api*@
         @foreach (var (key, value) in menuItems)
         {

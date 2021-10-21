@@ -22,7 +22,7 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult Index() => View();
 
         [Route("species")]
-        public IActionResult species()
+        public IActionResult Species()
         {
             return View("Species/Index");
         }

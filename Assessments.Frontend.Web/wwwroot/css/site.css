@@ -51,6 +51,9 @@ ul a:active,
     display:block;
     text-transform:uppercase;
     text-decoration: none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
 .redlistlink {
@@ -61,6 +64,11 @@ ul a:active,
 .fremmedartlink {
     background: #5e3063;
     color: white;
+}
+
+.fremmedartlink img {
+    background: white;
+    border-radius: 50%;
 }
 
 

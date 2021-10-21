@@ -2,7 +2,7 @@
 @using static Assessments.Frontend.Web.Infrastructure.Constants
 @{
     var AllAreas = ViewBag.AllAreas;
-    var AllCategories = ViewBag.AllCategories;
+    Dictionary<string, Dictionary<string, string>> AllCategories = ViewBag.categories.ToObject<Dictionary<string, Dictionary<string, string>>>();
     var AllCriterias = ViewBag.AllCriterias;
     var AllEuroPop = ViewBag.AllEuroPop;
     var AllRegions = ViewBag.AllRegions;
@@ -204,10 +204,10 @@
                                             <li class="checkbox" style="margin-top: 0;">
                                                 <label>
                                                     @{
-                                                        InputTag("input_" + category, "submitOnclick", "Category", Model.Category, category);
+                                                        InputTag("input_" + category.Key, "submitOnclick", "Category", Model.Category, category.Key);
                                                     }
                                                 </label>
-                                                <span>@category</span>
+                                                <span>@category.Key - @category.Value["presentationstring"]</span>
                                             </li>
                                         }
                                         <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->

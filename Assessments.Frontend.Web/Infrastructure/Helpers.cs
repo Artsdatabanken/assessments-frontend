@@ -147,19 +147,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             {"Svalbard", "S"}
         };
 
-        public static readonly string[] AllCategories = new[]
-        {
-            Constants.SpeciesCategories.Extinct.ShortHand,
-            Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
-            Constants.SpeciesCategories.Endangered.ShortHand,
-            Constants.SpeciesCategories.Vulnerable.ShortHand,
-            Constants.SpeciesCategories.NearThreatened.ShortHand,
-            Constants.SpeciesCategories.DataDeficient.ShortHand,
-            Constants.SpeciesCategories.Viable.ShortHand,
-            Constants.SpeciesCategories.NotEvalueted.ShortHand,
-            Constants.SpeciesCategories.NotAppropriate.ShortHand
-        };
-
         public static readonly Dictionary<string, string> AllCriterias = new Dictionary<string, string>
         {
             {"A", "populasjonsreduksjon"},

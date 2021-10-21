@@ -39,18 +39,42 @@
 
         <hr/>
 
-        <h3>
-            <a href="https://artsdatabanken.no/fremmedartslista2018">Fremmedartslista 2018</a>
-        </h3>
+        <div class="page_section">
+
+            <ul class="front_page_links">
+                <li>
+                    
+                    <a asp-controller="Redlist" asp-action="Index" asp-route-Area="N" class="redlistlink">
+                        <img src="https://design.artsdatabanken.no/list-icons/RL-ART.png" />
+                        Rødlister for arter
+                    </a>
+                </li>
+
+                <li>
+                    
+                    <a href="https://artsdatabanken.no/rodlistefornaturtyper" class="redlistlink">
+                        <img src="https://design.artsdatabanken.no/list-icons/RL-NA.png" />
+                        Rødlista for naturtyper
+                    </a>
+                </li>
+
+                <li>
+                    
+                    <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
+                        <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
+                        Fremmedartslista 2018
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        
 
 
-        <h3>
-            <a href="https://artsdatabanken.no/rodlistefornaturtyper">Rødlista for naturtyper</a>
-        </h3>
+        
 
-        <h3>
-            <a asp-controller="Redlist" asp-action="Index" asp-route-Area="N">Alle rødlister</a>
-        </h3>
+        
 
     </div>
 </div>

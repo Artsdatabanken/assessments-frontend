@@ -13,12 +13,36 @@ button#open_filter {
 }
 
 @media only screen and (min-width: 750px) {
-    .controls {
-        margin-left: 220px;
+    .empty_filters_and_controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
 
+    .controls {
+        width: 100%;
+    }
+
+    .empty_filters {
+        width: 220px;
+        min-width: 220px;
+    }
+
+    .empty_filters a.tinybutton {
+        display: flex;
+        flex-direction: row;
+        margin: 5px 2px;
+        padding: 5px;
+        border: 1px solid #098293;
+        justify-content: space-around;
+    }
+
+    .empty_filters a.tinybutton .flex_row {
+        flex-wrap: wrap;
+    }
 
 }
+
 
 .controls button {
     margin-bottom: -1px;
@@ -299,7 +323,7 @@ button.list_header {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 5px;
+    margin: 0 5px;
     background: #7f726b;
     border-radius: 2px;
     color: white;
@@ -312,6 +336,7 @@ button.list_header {
     text-align: center;
     height: 20px;
     display: inline-block;
+    padding: 0 5px;
 }
 .filter_group button:hover .filternumber,
 .filter_group button:focus .filternumber,

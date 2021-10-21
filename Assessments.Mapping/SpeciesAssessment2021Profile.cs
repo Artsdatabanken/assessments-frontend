@@ -154,13 +154,14 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.EvaluateCategoryChangeReason(src)))
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.ÅrsakTilNedgraderingAvKategori,true)))
-                .ForMember(dest=> dest.PreviousAssessments, opt=> opt.MapFrom(src => Helpers.SpeciesAssessment2021ProfileHelper.GetPreviousAssessments(src.ImportInfo)))
+                .ForMember(dest=> dest.PreviousAssessments, opt=> opt.MapFrom(src => Helpers.SpeciesAssessment2021ProfileHelper.GetPreviousAssessments(src)))
                     .AfterMap((src, dest) =>
                 {
                     SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest);
                     SpeciesAssessment2021ProfileHelper.BlankReasonCategoryChangeWhenNoChange(src, dest);
                     SpeciesAssessment2021ProfileHelper.CalculateQuantiles(dest);
                     SpeciesAssessment2021ProfileHelper.FixMissingCategoryChangedFrom(src, dest);
+                    SpeciesAssessment2021ProfileHelper.FixMissingRegions(src, dest);
                     InitialClassification.Map(src, dest);
                 });
         }

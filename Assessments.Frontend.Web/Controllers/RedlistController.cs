@@ -21,7 +21,6 @@ namespace Assessments.Frontend.Web.Controllers
     {
         private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
         private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
-        private static readonly string[] _allCategories = Constants.AllCategories;
         private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         public IActionResult Index() => View();
@@ -30,6 +29,16 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
             viewModel ??= new RL2021ViewModel();
+
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
+
+            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
+
+            ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
+
+            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
+
+            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
 
 
             // Pagination
@@ -67,7 +76,6 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
 
             // Categories
-            ViewBag.AllCategories = _allCategories;
             viewModel.Category = Helpers.findSelectedCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
 
             if (viewModel.Category?.Any() == true)
@@ -91,8 +99,14 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => x.RegionOccurrences.Any(y => y.State == 0 && chosenRegions.Contains(y.Fylke)));
 
             // SpeciesGroups
+            ViewBag.AllSpeciesGroups = Helpers.getAllSpeciesGroups(ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>());
+            ViewBag.AllInsects = Constants.AllInsects;
+
             if (viewModel.SpeciesGroups?.Any() == true)
             {
+                if (viewModel.SpeciesGroups.Contains("Insekter"))
+                    viewModel.SpeciesGroups = Helpers.getSelectedSpeciesGroups(viewModel.SpeciesGroups.ToList());
+                    
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
             }
 
@@ -110,16 +124,6 @@ namespace Assessments.Frontend.Web.Controllers
             // Extinct
             if (viewModel.PresumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
-
-            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
-
-            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
-
-            ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
-
-            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
-
-            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
 
             if (export)
             {
@@ -211,7 +215,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Fetch all habitat lists, flatten the lists and make it distinct to obtain all currently possible habitat names.
             var habitatNames = data
-                .Where(x => relevantCategories.Contains(x.Category))
+                .Where(x => relevantCategories.Contains(x.Category.Substring(0,2)))
                 .Select(x => x.MainHabitat)
                 .SelectMany(x => x)
                 .Distinct()
@@ -226,7 +230,7 @@ namespace Assessments.Frontend.Web.Controllers
             // REGION
             var regionNames = Helpers.SortedRegions();
             var regionStats = regionNames.Select(name => new KeyValuePair<string, int>(name, data
-                .Where(x => relevantCategories.Contains(x.Category))
+                .Where(x => relevantCategories.Contains(x.Category.Substring(0, 2)))
                 .Select(x => x.RegionOccurrences)
                 .SelectMany(x => x)
                 .Where(x => x.Fylke == name && x.State ==0).Count()))
@@ -241,7 +245,7 @@ namespace Assessments.Frontend.Web.Controllers
             // CRITERIA
 
             var criteriaStrings = data
-                .Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && relevantCategories.Contains(x.Category))
+                .Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && relevantCategories.Contains(x.Category.Substring(0, 2)))
                 .Select(x => x.CriteriaSummarized);
             var criteria = new List<string> { "A", "B", "C", "D" }.Select(item => new KeyValuePair<string, int>(item, criteriaStrings.Count(x => x.Contains(item))));
             viewModel.Statistics.Criteria = criteria.ToDictionary(x => x.Key, x => x.Value);
@@ -263,7 +267,7 @@ namespace Assessments.Frontend.Web.Controllers
             string excludedSeverity = "Ubetydelig/ingen nedgang";
 
             var impactFactors = data
-                .Where(x => relevantCategories.Contains(x.Category))
+                .Where(x => relevantCategories.Contains(x.Category.Substring(0, 2)))
                 .Select(x => x.ImpactFactors
                     .Where(x => x.GroupingFactor != excludedGroupingFactor &&
                         x.PopulationScope != excludedPopulationScope &&

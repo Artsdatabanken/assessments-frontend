@@ -1,4 +1,17 @@
-﻿<div class="sidebarmenu">
+﻿@using Assessments.Frontend.Web.Infrastructure.Services
+@inject ArtsdatabankenApiService _artsdatabankenApiService
+
+@{
+    var menuItems = new List<KeyValuePair<string, string>>();
+    var content = await _artsdatabankenApiService.Get<ArtsdatabankenApiContent>("Content/314303"); 
+    if (content != null)
+    {
+        // https://database.artsdatabanken.no/cms/node/314303/edit?destination=node/314304
+        menuItems = content.References.Select(x => new KeyValuePair<string, string>(x.Heading, $"https://artsdatabanken.no{x.Url}")).ToList();
+    }
+}
+
+<div class="sidebarmenu">
     <button class="button tertiary" onclick="expandParent(this, 'expand')">Om Rødlista </button>
     <h3>Om Rødlista </h3>
     <ul>
@@ -12,11 +25,18 @@
         <li><a asp-controller="Redlist" asp-action="Detail" asp-route-id="14469">Testart: Lappskjegg </a></li>
         <li><a asp-controller="Redlist" asp-action="Detail" asp-route-id="19978">Testart: Hårsvøpmose </a></li>
         <li><a asp-controller="Redlist" asp-action="Index">LINK TIL TESTSIDEN?</a></li>
+        @*lenker fra cms/drupal via api*@
+        @foreach (var (key, value) in menuItems)
+        {
+            <li>
+                <a href="@value">@key</a>
+            </li>
+        }
     </ul>
 </div>
 
 <script>
-    function expandParent(element, className) {            
+    function expandParent(element, className) {
         if (element.parentElement.classList.contains(className)) {
             element.parentElement.classList.remove(className);
             element.classList.remove("active")

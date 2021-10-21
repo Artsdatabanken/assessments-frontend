@@ -11,6 +11,10 @@ input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
     display: none;
 }
 
+input[type=checkbox]:checked#show_insects~.filter_insects {
+    display: block;
+}
+
 .filter_area,
 .filter_category,
 .filter_region,
@@ -21,6 +25,10 @@ input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
 .filter_species_groups,
 .filter_taxon_rank {
     display: block;
+}
+
+.filter_insects {
+    display: none;
 }
 `;
 
@@ -124,12 +132,64 @@ const initialCollapsibleCheck = () => {
 
 const handleFirstTime = () => {
     Array.prototype.forEach.call(isCheckInputs, (e) => {
-        if (e.id == "show_area") {
+        if (e.id == "show_area" || e.id == "show_insects") {
             e.checked = true;
         } else {
             e.checked = false;
         }
     })
+}
+
+const toggleRedlistedCategories = () => {
+    const isEndangeredActive = endangeredCheck.checked;
+    const isRedlistedActive = redlistCheck.checked;
+    redlisted.forEach(el => {
+        if (isRedlistedActive) {
+            document.getElementById("input_" + el).checked = true;
+        } else {
+            if (isEndangeredActive) {
+                if (!endangered.includes(el)) {
+                    document.getElementById("input_" + el).checked = false;
+                }
+            } else {
+                document.getElementById("input_" + el).checked = false;
+            }
+        }
+    })
+}
+
+const toggleEndangeredCategories = () => {
+    const isEndangeredActive = endangeredCheck.checked;
+    const isRedlistedActive = redlistCheck.checked;
+    endangered.forEach(el => {
+        if (isEndangeredActive) {
+            document.getElementById("input_" + el).checked = true;
+        } else {
+            if (isRedlistedActive) {
+                if (!redlisted.includes(el)) {
+                    document.getElementById("input_" + el).checked = false;
+                }
+            } else {
+                document.getElementById("input_" + el).checked = false;
+            }
+        }
+    })
+}
+
+const toggleInsects = () => {
+    Array.prototype.forEach.call(insectFilters, insect => {
+        if (insectInput.checked) {
+            insect.checked = true;
+        } else {
+            insect.checked = false;
+        }
+    });
+}
+
+const toggleSingleFilter = (element, parentId) => {
+    if (!element.checked) {
+        document.getElementById(parentId).checked = false;
+    }
 }
 
 document.addEventListener('keydown', (e) => {
@@ -144,10 +204,10 @@ const initialFilterCheck = () => {
         hideFilters();
         removeSubmitOnclick();
     } else {
-        addSubmitOnclick();
         showFilters();
         hideFilterButton();
     }
+    addOnclick();
 }
 
 if (filters) {

@@ -6,6 +6,7 @@ using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +46,10 @@ namespace Assessments.Frontend.Web
 
             services.AddTransient<ExpertCommitteeMemberService>();
 
+            services.AddHttpClient<ArtsdatabankenApiService>();
+
             services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
+            services.AddResponseCompression();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,8 +65,15 @@ namespace Assessments.Frontend.Web
             }
 
             app.UseHttpsRedirection();
-
-            app.UseStaticFiles();
+            app.UseResponseCompression();
+            app.UseStaticFiles(new StaticFileOptions {
+                OnPrepareResponse = ctx =>
+                {
+                    // Cache static files for 30 days
+                    ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=86400");
+                    ctx.Context.Response.Headers.Append("Expires", DateTime.UtcNow.AddDays(1).ToString("R", CultureInfo.InvariantCulture));
+                }
+            }); // cache static files
 
             app.UseRouting();
 

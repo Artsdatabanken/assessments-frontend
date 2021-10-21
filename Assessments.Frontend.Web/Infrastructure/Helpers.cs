@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -42,6 +43,27 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedCategories.ToArray();
         }
 
+        public static string[] getAllSpeciesGroups(Dictionary<string, Dictionary<string, string>> speciesGroups)
+        {
+            var insectArray = Constants.AllInsects;
+            List<string> allSpecies = new List<string>();
+            foreach (var species in speciesGroups)
+                if (!insectArray.Contains(species.Key))
+                    allSpecies.Add(species.Key);
+            allSpecies.Add("Insekter");
+            return allSpecies.OrderBy(x => x).ToArray();
+        }
+
+        public static string[] getSelectedSpeciesGroups(List<string> species)
+        {
+            if (species.Contains("Insekter"))
+                foreach (var insect in Constants.AllInsects)
+                    if (!species.Contains(insect))
+                        species.Add(insect);
+            
+            return species.ToArray();
+        }
+
         public static Dictionary<string, string> getRegionsDict()
         {
             var regionNames = SortedRegions().ToArray();
@@ -67,7 +89,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         /// <summary>
         ///  Sortert liste med navn på regioner (etter gamle fylkesnummer)
         /// </summary>
-        public static List<string> SortedRegions() => new() { "Østfold", "Oslo og Akershus", "Hedmark", "Oppland", "Buskerud", "Vestfold", "Telemark", "Aust-Agder", "Vest-Agder", "Rogaland", "Hordaland", "Sogn og Fjordane", "Møre og Romsdal", "Trøndelag", "Nordland", "Troms", "Finnmark", "Jan Mayen", "Nordsjøen", "Norskehavet", "Barentshavet sør", "Barentshavet nord og Polhavet", "Grønlandshavet" };
+        public static List<string> SortedRegions() => new() { "Østfold", "Oslo og Akershus", "Hedmark", "Oppland", "Buskerud", "Vestfold", "Telemark", "Aust-Agder", "Vest-Agder", "Rogaland", "Hordaland", "Sogn og Fjordane", "Møre og Romsdal", "Trøndelag", "Nordland", "Troms", "Finnmark", "Svalbard", "Jan Mayen", "Nordsjøen", "Norskehavet", "Barentshavet sør", "Barentshavet nord og Polhavet", "Grønlandshavet" };
         
         public static string[] findEuropeanPopProcentages(string[] europeanPopulation)
         {
@@ -101,6 +123,16 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
             return taxonRanks;
         }
+
+        public static bool isNotEmpty(string key)
+        {
+            if(key != null && key != " " && key != "-" && key != "" && key != "Helt ukjent")
+        {
+                return true;
+            }
+            return false;
+        }
+
     }
 
     public static class Constants
@@ -113,19 +145,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             {"Norge", "N"},
             {"Svalbard", "S"}
-        };
-
-        public static readonly string[] AllCategories = new[]
-        {
-            Constants.SpeciesCategories.Extinct.ShortHand,
-            Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
-            Constants.SpeciesCategories.Endangered.ShortHand,
-            Constants.SpeciesCategories.Vulnerable.ShortHand,
-            Constants.SpeciesCategories.NearThreatened.ShortHand,
-            Constants.SpeciesCategories.DataDeficient.ShortHand,
-            Constants.SpeciesCategories.Viable.ShortHand,
-            Constants.SpeciesCategories.NotEvalueted.ShortHand,
-            Constants.SpeciesCategories.NotAppropriate.ShortHand
         };
 
         public static readonly Dictionary<string, string> AllCriterias = new Dictionary<string, string>
@@ -142,6 +161,26 @@ namespace Assessments.Frontend.Web.Infrastructure
             {Constants.EuropeanPopulationPercentages.EuropeanPopRange5To25, "5 - 25 %"},
             {Constants.EuropeanPopulationPercentages.EuropeanPopRange25To50, "25 - 50 %"},
             {Constants.EuropeanPopulationPercentages.EuropeanPopGt50, "> 50 %"}
+        };
+
+        public static readonly string[] AllInsects = new string[]
+        {
+            "Biller",
+            "Døgnfluer",
+            "Kakerlakker",
+            "Kamelhalsfluer",
+            "Mudderfluer",
+            "Nebbfluer",
+            "Nebbmunner",
+            "Nettvinger",
+            "Rettvinger",
+            "Saksedyr",
+            "Sommerfugler",
+            "Steinfluer",
+            "Tovinger",
+            "Vepser",
+            "Vårfluer",
+            "Øyenstikkere"
         };
         
         public class EuropeanPopulationPercentages

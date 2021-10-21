@@ -84,9 +84,11 @@
                 return String.Empty;
             case "SpeciesGroups":
                 if (Model.SpeciesGroups?.Any() == true)
+                {
                     if (Model.SpeciesGroups.Contains("Insekter"))
                         return $"{Model.SpeciesGroups.Length - 1}";
                     return $"{Model.SpeciesGroups.Length}";
+                }
                 return String.Empty;
             case "Habitats":
                 if (Model.Habitats?.Any() == true)

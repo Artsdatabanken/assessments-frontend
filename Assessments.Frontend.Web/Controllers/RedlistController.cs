@@ -34,7 +34,7 @@ namespace Assessments.Frontend.Web.Controllers
 
 
 
-        [Route("2021")]
+        [Route("Species/2021")]
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
             viewModel ??= new RL2021ViewModel();
@@ -150,10 +150,10 @@ namespace Assessments.Frontend.Web.Controllers
 
             SetupStatisticsViewModel(query.ToList(), viewModel);
 
-            return View("2021/List/List", viewModel);
+            return View("Species/2021/List/List", viewModel);
         }
 
-        [Route("{id:required}")]
+        [Route("Species/{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
             var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
@@ -175,7 +175,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             ViewBag.impactfactors = await GetResource("wwwroot/json/impactfactors.json");
 
-            return View("2021/Assessment/SpeciesAssessment2021", assessment);
+            return View("Species/2021/Assessment/SpeciesAssessment2021", assessment);
         }
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)

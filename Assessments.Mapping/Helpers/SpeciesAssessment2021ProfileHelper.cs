@@ -716,7 +716,7 @@ namespace Assessments.Mapping.Helpers
             if (dest.AssessmentArea == "S")
             {
                 var category = dest.Category.ToLowerInvariant().Substring(0, 2);
-                if (dest.PresumedExtinct)
+                if (dest.PresumedExtinct && category=="cr")
                 {
                     dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence(){ Fylke = "Svalbard", State = 3});
                 }

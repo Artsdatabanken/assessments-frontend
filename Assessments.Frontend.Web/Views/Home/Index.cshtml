@@ -3,34 +3,54 @@
 }
 
 
-<div class="pagecontainer">
-    <partial name="/Views/Shared/_PageMenu.cshtml" />
 
-    <div class="content-placer">
+<div class="breadcrumbs">
+    <ul>
+        <li class="lead in-breadcrumb">
+            <a href="/">
+                Risikovurderinger
+            </a>
+        </li>
+        <span class="breadcrumbdivider">&gt; </span>
+        <li class="in-breadcrumb currentcrumb">
+            Velg år
+        </li>
+    </ul>
+</div>
 
-        <div class="side">
+<div class="sidebarmenu"></div>
 
-            SIDEBARTEXT
-        </div>
-        <div class="mid-content with_sidebar">
+<div class="content-placer">
+    <div class="page-header">
+        <h1>
+            Risikovurderinger
+        </h1>
+        <h2>
+            Dette blir landingsside for alle de forskjellige vurderingene!
+        </h2>
+
+        <h3>
+            <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">Gå direkte til RØDLISTA FOR ARTER 2021</a>
+        </h3>
+
+        
+        
+        <p>Denne siden vil snart gi mer mening. Snart.</p>
+
+        <hr/>
+
+        <h3>
+            <a href="https://artsdatabanken.no/fremmedartslista2018">Fremmedartslista 2018</a>
+        </h3>
 
 
-            <div class="page-header">
+        <h3>
+            <a href="https://artsdatabanken.no/rodlistefornaturtyper">Rødlista for naturtyper</a>
+        </h3>
 
-
-                <h1>Forside</h1>
-            </div>
-
-            <div class="big_flashy_link">
-                <p>
-                    <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">2021</a>
-                    Når endelig 2021 dataen er på plass bør denne siden enten føre direkte dit,
-                    eller lenke opp alle de fremtidige listene sine her. MAO store lenker til tidligere år.
-                    Spørs om vi rekker det til lansering...
-                </p>
-            </div>
-        </div>
+        <h3>
+            <a asp-controller="Redlist" asp-action="Index" asp-route-Area="N">Alle rødlister</a>
+        </h3>
 
     </div>
 </div>
-

@@ -22,7 +22,6 @@
     string reason_description = "";
     string reason = "";
     string initialSubClassificationCode = Model.AssessmentInitialSubClassificationCode.ToString();
-    bool evaluated = true;
 
     if (new[] {
         SpeciesAssessment2021.InitialClassification.RodlisteVurdertArt,
@@ -47,7 +46,6 @@
         reason_heading = @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["title"] ;
         reason_description += @ViewBag.glossary["inkluderingskriterier"][initialSubClassificationCode]["description"];
         reason = reason_description ;
-        evaluated = false;
     }
 
     // TO MAKE THIS SMOOTH ON NOT EVALUATED:

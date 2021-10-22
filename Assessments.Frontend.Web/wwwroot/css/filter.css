@@ -8,10 +8,53 @@
     padding-top: 20px
 }
 
+button#open_filter {
+    display: none;
+}
+
+.empty_filters {
+    display: none;
+}
+
 @media only screen and (min-width: 750px) {
-    .controls {
-        margin-left: 220px;
+    .empty_filters_and_controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
     }
+
+    .controls {
+        width: 100%;
+    }
+
+    .empty_filters {
+        display: flex;
+        flex-direction: row;
+        width: 220px;
+        min-width: 220px;
+    }
+    
+    .empty_filters .flex_row {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 10pt;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+    
+    .empty_filters a.tinybutton {
+        display: flex;
+        flex-direction: row;
+        margin: 5px 2px;
+        padding: 5px;
+    }
+
+    .empty_filters a.tinybutton .flex_row {
+        flex-wrap: wrap;
+    }
+
 }
 
 .controls button {
@@ -32,6 +75,9 @@
     border-left-color: lightgray;
 }
 
+.empty_filters_mobile {
+    display: none;
+}
 
 @media only screen and (max-width: 750px) {
     .controls button {
@@ -46,13 +92,33 @@
     /* Filter button */
 
 
-    .toggle_filter {
+    .toggle_filter.only_mobile {
         float: right;
         position: relative;
     }
 
     .toggle_filter .filternumber {
         position: absolute;
+    }
+
+    .empty_filters_mobile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .empty_filters_mobile span {
+        font-size: 10pt;
+    }
+
+    .empty_filters_mobile a.button {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        padding-right: 2px;
     }
 }
 
@@ -293,21 +359,20 @@ button.list_header {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 5px;
+    margin: 0 5px;
     background: #7f726b;
     border-radius: 2px;
     color: white;
     font-size: 10pt;
-    width: 22px;
     min-width: 22px;
     height: 22px;
     background-clip: padding-box;
     background: #098293;
     color: white;
     text-align: center;
-    width: 20px;
     height: 20px;
     display: inline-block;
+    padding: 0 5px;
 }
 .filter_group button:hover .filternumber,
 .filter_group button:focus .filternumber,

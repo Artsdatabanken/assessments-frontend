@@ -47,7 +47,30 @@
         </div>
     }
 
-    string GetActiveFiltersCount()
+    void GetRemoveString()
+    {
+        @if (GetActiveSelectionCount() > 0)
+        {
+            <div class="filterstring"><span>@GetActiveSelectionCount()&nbsp;</span></div>
+            @if (GetActiveSelectionCount() > 1)
+            {
+                <span>filtre&nbsp;</span>
+            } else 
+            {
+                <span>filter&nbsp;</span>
+            }
+        }
+        @if (!string.IsNullOrEmpty(GetActiveSelection()) && GetActiveSelectionCount() > 0)
+        {
+            <span>og&nbsp;</span>
+        }
+        @if (!string.IsNullOrEmpty(GetActiveSelection()))
+        {
+            <span>søket&nbsp;</span><span> &ldquo;@GetActiveSelection()&rdquo;</span>
+        }
+    }
+
+    int GetActiveSelectionCount()
     {
         int count = 0;
         count += Model.Area.Length;
@@ -61,8 +84,15 @@
         if (Model.PresumedExtinct)
             count++;
 
-        if (count > 0)
-            return $"{count}";
+        return count;
+    }    
+
+    string GetActiveSelection()
+    {
+        if (!string.IsNullOrEmpty(Model.Name))
+        {
+            return $"{Model.Name}";
+        }
         return String.Empty;
     }
 
@@ -126,17 +156,30 @@
     }
 }
 
+<div class="empty_filters_and_controls">
+    <div class="empty_filters">
+        @if (GetActiveSelectionCount() != 0 || !string.IsNullOrEmpty(GetActiveSelection()))
+        {
+                <span class="flex_row">
+                    @{ GetRemoveString(); }
+                </span>
+                <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
+                    <span class="material-icons">close</span>Fjern
+                </a>
+        }  
+    </div>
 
-<div class="controls">
-    <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
+    <div class="controls">
 
-    <button class="toggle_filter only_mobile" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-        <span class="filternumber">@GetActiveFiltersCount()</span>
-        <span class="material-icons">
-            filter_list
-        </span>Filter
-    </button>
+        <partial name="/Views/Redlist/List/partials/_ControlButtons.cshtml" />
 
+        <button class="toggle_filter only_mobile" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
+            <span class="filternumber">@GetActiveSelectionCount()</span>
+            <span class="material-icons">
+                filter_list
+            </span>Filter
+        </button>
+    </div>
 </div>
 
 <div class="listwrapper">
@@ -152,19 +195,23 @@
                             <span class="material-icons">
                                 filter_list
                             </span>
-                            <span>Filter</span>                            
-                            @if (!string.IsNullOrEmpty(@GetActiveFiltersCount()))
-                            {
-                            <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
-                                <span>Fjern</span>
-                                <div class="filternumber"><span>@GetActiveFiltersCount()</span></div>
-                            </a>
-                            }                            
+                            <span>Filter</span>                          
                         </h3>
                         <div class="close_reset_filter">
                             <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
                                 <span class="material-icons">close</span>
                             </button>
+                        </div>
+                        <div class="empty_filters_mobile">
+                        @if (GetActiveSelectionCount() != 0 || !string.IsNullOrEmpty(GetActiveSelection()))
+                        {
+                            <span class="flex_row">
+                                @{ GetRemoveString(); }
+                            </span>
+                            <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
+                                <span class="material-icons">close</span>Fjern
+                            </a>
+                        }  
                         </div>
                         <ul>
                             <li class="filter_group">

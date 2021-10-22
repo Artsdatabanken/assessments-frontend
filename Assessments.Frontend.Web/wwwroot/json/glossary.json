@@ -38,7 +38,7 @@
   },
   "populationsize": {
     "title": "Populasjonsandel",
-    "description": "Norge er ikke nødvendigvis alene om å ha en art. Men bestanden i Norge utgjør noen ganger en betydelig andel av den totale bestanden, som igjen kan påvirke rødlistestatusen.",
+    "description": "En art er ikke nødvendigvis begrenset til Norge. Men populasjonen i Norge utgjør noen ganger en betydelig andel av den totale populasjonen.",
     "subtitle": "Nåværende populasjonsstørrelse i vurderingsområdet utgjør:",
     "AndelNåværendeBestand": "av maksimum populasjonsstørrelse etter år 1900 i samme område",
     "MaxAndelAvEuropeiskBestand": "av europeisk populasjonsstørrelse",

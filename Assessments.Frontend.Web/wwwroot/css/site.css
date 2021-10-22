@@ -43,11 +43,9 @@ ul a:active,
 }
 
 .front_page_links li a{
-    padding:20px;
+    padding:20px 10px;
     margin:10px;
-    font-size:16pt;
-    width:100%;
-    height:100%;
+    font-size:5vw;
     display:block;
     text-transform:uppercase;
     text-decoration: none;
@@ -71,9 +69,21 @@ ul a:active,
     border-radius: 50%;
 }
 
+.front_page_links img{
+    width:80px;
+    margin-right:1vw;
+}
 
+.material-icons.bigarrow {
+    font-size: 80px;
+}
+
+@media only screen and (min-width: 940px) {
+    .front_page_links li a {
+        font-size: 30px;
+    }
+}
 /* SHOULD MOVE TO THE GRAPHIC PROFILE PROJECT */
-
 .ingress p {
     font-size: 22.5px;
 }
@@ -258,8 +268,9 @@ ul a:active,
     fill: #4c4a48 !important;
 }
 
-.page-header{
-    border-bottom:0;
+.page-header {
+    max-width: 100%;
+    border-bottom: 0;
 }
 
 

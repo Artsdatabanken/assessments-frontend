@@ -1,22 +1,11 @@
 ﻿@{
     ViewBag.Title = "Rødlista 2021";
+
+    // https://www.artsdatabanken.no/Article/Article/453 <-- link to svartelista 2012
+    // https://www.artsdatabanken.no/fremmedearter/svartelista2007 <-- link to svartelista 2007 
+
 }
 
-
-
-<div class="breadcrumbs">
-    <ul>
-        <li class="lead in-breadcrumb">
-            <a href="/">
-                Risikovurderinger
-            </a>
-        </li>
-        <span class="breadcrumbdivider">&gt; </span>
-        <li class="in-breadcrumb currentcrumb">
-            Velg år
-        </li>
-    </ul>
-</div>
 
 <div class="sidebarmenu"></div>
 
@@ -30,14 +19,8 @@
         </h2>
 
         <h3>
-            <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">Gå direkte til RØDLISTA FOR ARTER 2021</a>
+            <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N" class="button tertiary">RØDLISTA FOR ARTER 2021</a>
         </h3>
-
-        
-        
-        <p>Denne siden vil snart gi mer mening. Snart.</p>
-
-        <hr/>
 
         <div class="page_section">
 
@@ -46,7 +29,8 @@
                     
                     <a asp-controller="Redlist" asp-action="Index" asp-route-Area="N" class="redlistlink">
                         <img src="https://design.artsdatabanken.no/list-icons/RL.png" />
-                        Rødlister 
+                        <span>Rødlistene</span>
+                        <span class="material-icons bigarrow">keyboard_arrow_right</span>
                     </a>
                 </li>
 
@@ -54,11 +38,19 @@
                     
                     <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
                         <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
-                        Fremmedartslista 2018
+                        <span>Fremmedartslista</span>
+                        <span class="material-icons bigarrow">keyboard_arrow_right</span>
                     </a>
                 </li>
 
             </ul>
+        </div>
+        <div class="page_section">
+            <h2>Hva er en risikovurdering?</h2>
+            <p>
+                Det finnes flere typer risikovurderinger. Til felles har de at de sier noe om nåværende status for arter og naturtyper i Norge.
+                Rødlistene viser risikoen for at en art eller naturtype utryddes fra norsk natur, mens fremmedartslista viser
+                risikoen en fremmed art har på norsk natur.
         </div>
 
         

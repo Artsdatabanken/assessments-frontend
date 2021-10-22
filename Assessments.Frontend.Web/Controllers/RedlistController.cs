@@ -15,17 +15,11 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [Route("redlist")]
+    [Route("rodlisteforarter")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class RedlistController : BaseController<RedlistController>
     {
-        public IActionResult Index() => View();
-
-        [Route("species")]
-        public IActionResult Species()
-        {
-            return View("Species/Index");
-        }
+        public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new Dictionary<string, JObject>();
         private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
@@ -34,7 +28,7 @@ namespace Assessments.Frontend.Web.Controllers
 
 
 
-        [Route("Species/2021")]
+        [Route("2021")]
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
             viewModel ??= new RL2021ViewModel();
@@ -153,7 +147,7 @@ namespace Assessments.Frontend.Web.Controllers
             return View("Species/2021/List/List", viewModel);
         }
 
-        [Route("Species/{id:required}")]
+        [Route("{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
             var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 

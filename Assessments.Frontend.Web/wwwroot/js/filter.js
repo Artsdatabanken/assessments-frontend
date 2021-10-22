@@ -51,12 +51,15 @@ const showFilters = () => {
     filters_scrollable.style["top"] = "auto";
     filters_scrollable.style["left"] = "auto";
 
+    submit_filters.style["display"] = "none";
+
     Array.prototype.forEach.call(filters_close_buttons, el => {
         el.style["display"] = "none";
     });
 }
 
 const hideFilters = () => {
+    submit_filters.style["display"] = "block";
     document.getElementById("filters").style["display"] = "none";
 }
 

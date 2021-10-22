@@ -82,7 +82,6 @@ const addOnclick = () => {
             };
         }
     });
-    submit_filters.style["display"] = "none";
 }
 
 const removeSubmitOnclick = () => {
@@ -104,7 +103,6 @@ const removeSubmitOnclick = () => {
             el.onclick = null;
         }
     });
-    submit_filters.style["display"] = "block";
 }
 
 const scrollToPreviousPosition = () => {

@@ -3,17 +3,17 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
 
-<partial name="/Views/Redlist/List/partials/_Breadcrumb.cshtml" />
+<partial name="/Views/Redlist/Species/2021/List/partials/_Breadcrumb.cshtml" />
 <div class="pagecontainer">
-  <partial name="/Views/Shared/_PageMenu.cshtml" />
+    <partial name="/Views/Redlist/Species/Shared/_PageMenu.cshtml" />
   <div class="content-placer bigmid">
       <div class="mid-content">
-          <partial name="/Views/Redlist/List/partials/_Header.cshtml" />
-          <partial name="/Views/Redlist/List/partials/_Introduction.cshtml" />
+          <partial name="/Views/Redlist/Species/2021/List/partials/_Header.cshtml" />
+          <partial name="/Views/Redlist/Species/2021/List/partials/_Introduction.cshtml" />
 
           <form asp-action="Index2021" method="get">
-              <partial name="/Views/Redlist/List/partials/_Search.cshtml" />
-              <partial name="/Views/Redlist/List/partials/_Filters.cshtml" />
+              <partial name="/Views/Redlist/Species/2021/List/partials/_Search.cshtml" />
+              <partial name="/Views/Redlist/Species/2021/List/partials/_Filters.cshtml" />
           </form>
           <h3>
               @Model.Redlist2021ResultsCount

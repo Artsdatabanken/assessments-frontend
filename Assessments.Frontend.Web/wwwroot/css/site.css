@@ -38,12 +38,52 @@ ul a:active,
 
 /* TEMPORARY CODE NEEDS TO BE THOUGHT ABOUT*/
 
-.fact_box{
-    color:grey;
+.front_page_links li{
+    display:block;
 }
 
-/* SHOULD MOVE TO THE GRAPHIC PROFILE PROJECT */
+.front_page_links li a{
+    padding:20px 10px;
+    margin:10px;
+    font-size:5vw;
+    display:block;
+    text-transform:uppercase;
+    text-decoration: none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
 
+.redlistlink {
+    background: #8b0000;
+    color: white;
+}
+
+.fremmedartlink {
+    background: #5e3063;
+    color: white;
+}
+
+.fremmedartlink img {
+    background: white;
+    border-radius: 50%;
+}
+
+.front_page_links img{
+    width:80px;
+    margin-right:1vw;
+}
+
+.material-icons.bigarrow {
+    font-size: 80px;
+}
+
+@media only screen and (min-width: 940px) {
+    .front_page_links li a {
+        font-size: 30px;
+    }
+}
+/* SHOULD MOVE TO THE GRAPHIC PROFILE PROJECT */
 .ingress p {
     font-size: 22.5px;
 }
@@ -233,8 +273,9 @@ ul a:active,
     fill: #4c4a48 !important;
 }
 
-.page-header{
-    border-bottom:0;
+.page-header {
+    max-width: 100%;
+    border-bottom: 0;
 }
 
 

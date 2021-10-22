@@ -15,18 +15,26 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [Route("species")]
+    [Route("redlist")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class RedlistController : BaseController<RedlistController>
     {
-        private static readonly Dictionary<string,JObject> _resourceCache = new Dictionary<string, JObject>();
+        public IActionResult Index() => View();
+
+        [Route("species")]
+        public IActionResult Species()
+        {
+            return View("Species/Index");
+        }
+
+        private static readonly Dictionary<string, JObject> _resourceCache = new Dictionary<string, JObject>();
         private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
         private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
-        public IActionResult Index() => View();
 
 
-        [Route("2021")]
+
+        [Route("Species/2021")]
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
             viewModel ??= new RL2021ViewModel();
@@ -142,10 +150,10 @@ namespace Assessments.Frontend.Web.Controllers
 
             SetupStatisticsViewModel(query.ToList(), viewModel);
 
-            return View("List/List2021", viewModel);
+            return View("Species/2021/List/List", viewModel);
         }
 
-        [Route("{id:required}")]
+        [Route("Species/{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
             var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
@@ -167,7 +175,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             ViewBag.impactfactors = await GetResource("wwwroot/json/impactfactors.json");
 
-            return View("Assessment/SpeciesAssessment2021", assessment);
+            return View("Species/2021/Assessment/SpeciesAssessment2021", assessment);
         }
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
@@ -272,14 +280,14 @@ namespace Assessments.Frontend.Web.Controllers
 
         private static async Task<JObject> GetResource(string resourcePath)
         {
-#if (DEBUG == true)
+            #if (DEBUG == true)
             if (_resourceCache.ContainsKey(resourcePath)) return _resourceCache[resourcePath];
-#endif
+            #endif
             var json = await System.IO.File.ReadAllTextAsync(resourcePath);
             var jObject = JObject.Parse(json);
-#if (DEBUG == true)
+            #if (DEBUG == true)
             if (!_resourceCache.ContainsKey(resourcePath)) _resourceCache.Add(resourcePath, jObject);
-#endif            
+            #endif            
             return jObject;
         }
     }

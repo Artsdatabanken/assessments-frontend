@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Assessments.Mapping.Models.Species;
+using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -74,6 +76,63 @@ namespace Assessments.Frontend.Web.Infrastructure
                 allRegions.Add($"{i}", regionNames[i]);
             }
             return allRegions;
+        }
+
+        public static IQueryable<SpeciesAssessment2021> sortResults(IQueryable<SpeciesAssessment2021> query, string name, string sortBy)
+        {
+            switch ((string.IsNullOrEmpty(name), sortBy))
+            {
+                // without search string "name"
+                case (true, "ScientificName"):
+                    query = query.OrderBy(x => x.ScientificName);
+                    break;
+                case (true, "PopularName"):
+                    query = query
+                                .OrderBy(x => string.IsNullOrEmpty(x.PopularName))
+                                .ThenBy(x => x.PopularName);
+                    break;
+                case (true, "Category"):
+                    query = query.OrderBy(x => x.Category, new CategoryComparer());
+                    break;
+                case (true, "SpeciesGroup"):
+                    query = query.OrderBy(x => x.SpeciesGroup);
+                    break;
+
+                // with search string "name"
+                case (false, "ScientificName"):
+                    query = query
+                        .OrderByDescending(x => x.PopularName.ToLower() == name ||
+                        x.ScientificName.ToLower() == name)
+                        .ThenBy(x => x.ScientificName);
+                    break;
+                case (false, "PopularName"):
+                    query = query
+                        .OrderByDescending(x => x.PopularName.ToLower() == name ||
+                        x.ScientificName.ToLower() == name)
+                        .ThenBy(x => !string.IsNullOrEmpty(x.PopularName))
+                        .ThenBy(x => x.PopularName);
+                    break;
+                case (false, "Category"):
+                    query = query
+                        .OrderByDescending(x => x.PopularName.ToLower() == name ||
+                        x.ScientificName.ToLower() == name)
+                        .ThenBy(x => x.Category, new CategoryComparer());
+                    break;
+                case (false, "SpeciesGroup"):
+                    query = query
+                        .OrderByDescending(x => x.PopularName.ToLower() == name ||
+                        x.ScientificName.ToLower() == name)
+                        .ThenBy(x => x.SpeciesGroup);
+                    break;
+                case (false, null):
+                    query = query
+                        .OrderByDescending(x => x.PopularName.ToLower() == name ||
+                        x.ScientificName.ToLower() == name);
+                    break;
+                default:
+                    break;
+            }
+            return query;
         }
 
         public static string[] findSelectedRegions(string[] selectedRegions, Dictionary<string, string> allRegions)
@@ -283,5 +342,19 @@ namespace Assessments.Frontend.Web.Infrastructure
         }
     }
 
+    public class CategoryComparer : IComparer<string>
+    {
+        private string[] categories = new string[]
+        {
+                    "RE", "CR", "EN", "VU", "NT", "DD", "LC", "NA", "NE"
+        };
+        public int Compare(string x, string y)
+        {
+            if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
+                return 0;
+
+            return Array.IndexOf(categories, x.Substring(0, 2)) - Array.IndexOf(categories, y.Substring(0, 2));
+        }
+    }
 
 }

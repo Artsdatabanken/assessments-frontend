@@ -320,19 +320,15 @@
     void getGenerationTime(String key, String subkey)
     {
         float generation3 = 0;
-        string gen = Model.GenerationLength.Replace(".", ",");
-        float generasjon = float.Parse(gen);
+        string gen = Model.GenerationLength != null ? Model.GenerationLength.Replace(".", ",") : "0";
+        float generasjon = gen != null ? float.Parse(gen) : 0;
         float gen2 = generasjon * 2;
         float gen3 = generasjon * 3;
-
         generation3 = Math.Max(gen3, 10);
-
-
 
         if (key == "A")
         {
             <p class="generation_time" style="background:hotpink;padding:10px;">
-
                 Generasjonstiden er på @Model.GenerationLength år som gir en vurderingsperiode på @gen år
             </p>
             <br />

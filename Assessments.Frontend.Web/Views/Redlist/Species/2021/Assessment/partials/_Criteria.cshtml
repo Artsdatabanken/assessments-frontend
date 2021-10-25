@@ -142,45 +142,44 @@
     // THE LIST SHOWING A SUBCATEGORY'S THRESHOLD VALUES
     void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k, Dictionary<string, object> C_labels)
     {
-
-
         string CThresh = "";
         if (k == "C1")
         {
             unit = "";
             CThresh = Model.C.PreliminaryCategory;
+
+            <b> Terskelverdier når kriterie C er @CThresh. @thresholdValue</b><br/>
+            <span style="color:hotpink;">// TODO: Vis tall, ikke kategori fra C</span>
+            <br />
+            <p>
+                Se hele matrisen for terskelverdier i kapittelet om metode. <br/>
+                <a href="" class="button tertiary" style="color:hotpink;">Les mer LINK</a>
+            </p>
+
+            
         }
-        <p> VERDI: @thresholdValue + <span> @CThresh</span></p>
         <ul>
             @foreach (var (cat, catval) in thresholds)
             {
                 string className = "inactive";
-                string catshort = cat;
-
-                @if (cat != null && thresholdValue != null && (cat.Contains(thresholdValue) ||
-                 k == "C1" && catval.Substring(0, 2) == thresholdValue))
+                @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
+                    k == "C1" && catval.Substring(0, 2) == thresholdValue))
                 {
-                    if (k == "C1")
-                    {
-                        catshort = catshort.Substring(0, 2);
-
-
-                    }
                     className = "active";
                 }
                 string C_key = "labels-" + CThresh;
-                string labels = catshort;
-                    
-                if(C_labels.ContainsKey(C_key))
-                 {
+                string labels = cat;
+
+                if (C_labels.ContainsKey(C_key))
+                {
                     var c_labels = parseDictString(C_labels[C_key].ToString());
-                    labels = c_labels[catshort];
+                    labels = c_labels[cat];
                 }
 
                 <li class="thresholdlist @className">
                     <span class="graphic_element @labels">@labels</span>
                     <span class="threshold_element">
-                        @labels @comparator @catval @unit
+                       @comparator @catval @unit
                     </span>
                 </li>
             }
@@ -201,6 +200,12 @@
         string estimated = "-";
 
         <div class="criteria_results">
+            @if (json_quantile.ContainsKey("threshold"))
+            {
+                var thresholds = parseDictString(json_quantile["threshold"].ToString());
+                string thresholdValue = GetThresholdValue(k);
+                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue, k, json_quantile);
+            }
 
             @if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
             {
@@ -223,12 +228,7 @@
                 </span>
             </p>
 
-            @if (json_quantile.ContainsKey("threshold"))
-            {
-                var thresholds = parseDictString(json_quantile["threshold"].ToString());
-                string thresholdValue = GetThresholdValue(k);
-                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue, k, json_quantile);
-            }
+
         </div>
     }
 
@@ -309,7 +309,7 @@
 
         @if (Helpers.isNotEmpty(PreliminaryCategory) || Helpers.isNotEmpty(ThresholdValue) || ReductionBasedOn != null && ReductionBasedOn.Count != 0)
         {
-            <div style="padding:10px; background:pink;">
+            <div>
                 @if (ReductionBasedOn != null)
                 {
                     <span>
@@ -319,9 +319,6 @@
                     </span>
                     <br />
                 }
-
-                @if (Helpers.isNotEmpty(ThresholdValue))
-                {<span>Terskelverdi: @ThresholdValue</span><br />}
                 @if (Helpers.isNotEmpty(PreliminaryCategory))
                 {<span>Kategori basert på kriterie: @PreliminaryCategory</span><br />}
             </div>
@@ -340,21 +337,30 @@
 
         if (key == "A")
         {
-            <p class="generation_time" style="background:hotpink;padding:10px;">
+            <p class="generation_time">
                 Generasjonstiden er på @Model.GenerationLength år som gir en vurderingsperiode på @gen år
             </p>
             <br />
         }
         else if (subkey == "C1")
         {
-            <p class="generation_time" style="background:hotpink;padding:10px;">
+            float vurderingsperiode = 0;
+            if (Model.C1.ThresholdValue == "25")
+            {
+                vurderingsperiode = Math.Max(3, generasjon);
+            }
+            else if (Model.C1.ThresholdValue == "20")
+            {
+                vurderingsperiode = Math.Max(5, gen2);
+            }
+            else
+            {
+                vurderingsperiode = Math.Max(10, gen3);
+            }
 
-                Generasjonstiden er på @Model.GenerationLength år<br />
-                1 generasjon = @generasjon <br />
-                2 generasjoner = @gen2<br />
-                3 generasjoner = @gen3
+            <p class="generation_time">                
+                 Vurderingsperioden er på @vurderingsperiode år.
             </p>
-            <br />
         }
     }
 }<!-- END OF ALL-->

@@ -140,23 +140,69 @@
     }
 
     // THE LIST SHOWING A SUBCATEGORY'S THRESHOLD VALUES
-    void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue)
+    void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k)
     {
-        <p> VERDI: @thresholdValue</p>
+        string CThresh = "";
+        if (k == "C1")
+        {
+            unit = "";
+            CThresh = Model.C.PreliminaryCategory;
+        }
+        <p> VERDI: @thresholdValue + <span> @CThresh</span></p>
         <ul>
             @foreach (var (cat, catval) in thresholds)
             {
                 string className = "inactive";
-                @if (cat != null && thresholdValue != null && cat.Contains(thresholdValue))
+                //string c1 = catval.Substring(0, 2);
+
+                @if (cat != null && thresholdValue != null && (cat.Contains(thresholdValue) ||
+           k == "C1" && catval.Substring(0, 2) == thresholdValue))
                 {
-                    className = "active";
-                }
+                    if (k == "C1")
+                    {
+                        if (thresholdValue.Contains("10"))
+                        {
+                            className = "active";
+                            // For C1 where there are two options for TH value 10, choose the correct one.
+                            if (cat.Contains("+"))
+                            {
+                                if (CThresh.Contains("NT"))
+                                {
+                                    // 10% + NT = NT
+                                    className = "active";
+                                }
+                                else
+                                {
+                                    className = "inactive";
+                                }
+                            }
+                            else
+                            {
+                                // 10 % + CR, EN, VU = VU.
+                                if (!CThresh.Contains("NT"))
+                                {
+                                    className = "active";
+                                }
+                                else
+                                {
+                                    className = "inactive";
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        className = "active";
+                    }
+                }                
+
                 <li class="thresholdlist @className">
-                    <span class="graphic_element @cat">@cat</span>
-                    <span>@comparator @catval @unit</span>
+                    <span class="graphic_element @cat">@cat.Substring(0,2)</span>
+                    <span class="threshold_element">@comparator @catval @unit</span>
                 </li>
             }
         </ul>
+        <br/>
     }
 
 
@@ -198,7 +244,7 @@
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
                 string thresholdValue = GetThresholdValue(k);
-                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue);
+                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue,k);
             }
         </div>
     }
@@ -300,17 +346,34 @@
     }
 
     //GenerationTime
-    void getGenerationTime(String key)
+    void getGenerationTime(String key, String subkey)
     {
         float generation3 = 0;
-        string gen = Model.GenerationLength.Replace(".",",");
-        generation3 = Math.Max(float.Parse(gen) * 3, 10); 
+        string gen = Model.GenerationLength.Replace(".", ",");
+        float generasjon = float.Parse(gen);
+        float gen2 = generasjon * 2;
+        float gen3 = generasjon * 3;
 
-        @if (key == "A" || key == "C")
+        generation3 = Math.Max(gen3, 10);
+
+
+
+        if (key == "A")
         {
             <p class="generation_time" style="background:hotpink;padding:10px;">
-               
+
                 Generasjonstiden er på @Model.GenerationLength år som gir en vurderingsperiode på @gen år
+            </p>
+            <br />
+        }
+        else if (subkey == "C1")
+        {
+            <p class="generation_time" style="background:hotpink;padding:10px;">
+
+                Generasjonstiden er på @Model.GenerationLength år<br/>
+                1 generasjon = @generasjon <br/>
+                2 generasjoner = @gen2<br/>
+                3 generasjoner = @gen3
             </p>
             <br />
         }
@@ -365,7 +428,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
                                             <h5>@k <span>@v["title"]</span></h5>
                                             @{ hasKey("description", v);}
-                                            @{ getGenerationTime(key);}
+                                            @{ getGenerationTime(key, k);}
                                             @{ getModel(k);}
                                             @{ getQuantile(v, k, key);}
 

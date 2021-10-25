@@ -262,10 +262,11 @@
         "content": {
           "unit": "%",
           "threshold": {
-            "CR": "25 % på 3 år eller 1 gener",
-            "EN": "20 % på 5 år eller 2 gener",
-            "VU": "10 % på 10 år eller 3 gener",
-            "NT": "10 % på 10 år eller 3 gener*. *eller  < 10000 ind. og 5% på 10 år eller 3 gener"
+            "CR": "25 % på 3 år eller 1 generasjon",
+            "EN": "20 % på 5 år eller 2 generasjoner",
+            "VU": "10 % på 10 år eller 3 generasjoner",
+            "NT +": "10 % på 10 år eller 3 generasjoner og > 10000 individer",
+            "NT": "5 % på 10 år eller 3 generasjoner"
           },
           "conclusion": "C1 Pågående nedgang på <terskelverdi> tilsvarer i utgangspunktet <kategori>"
         }

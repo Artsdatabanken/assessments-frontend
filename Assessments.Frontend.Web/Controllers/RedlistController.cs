@@ -65,9 +65,7 @@ namespace Assessments.Frontend.Web.Controllers
                     speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
                     x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
                     x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
-                    x.SpeciesGroup.ToLower().Contains(name))                                // Match on species group.
-                    .OrderByDescending(x => x.PopularName.ToLower() == name ||              // Exact match on populatname or by
-                    x.ScientificName.ToLower() == name);                                    // exact match on scientific name is sorted first.
+                    x.SpeciesGroup.ToLower().Contains(name));                               // Match on species group.
             }
 
             // Filter
@@ -127,6 +125,10 @@ namespace Assessments.Frontend.Web.Controllers
             // Extinct
             if (viewModel.PresumedExtinct)
                 query = query.Where(x => x.PresumedExtinct);
+
+            // Sort
+            if (!string.IsNullOrEmpty(viewModel.Name) || !string.IsNullOrEmpty(viewModel.SortBy))
+                query = Helpers.sortResults(query, viewModel.Name, viewModel.SortBy);
 
             if (export)
             {

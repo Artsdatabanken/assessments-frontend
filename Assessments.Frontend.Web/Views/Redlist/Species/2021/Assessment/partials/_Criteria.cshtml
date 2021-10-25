@@ -302,12 +302,15 @@
     //GenerationTime
     void getGenerationTime(String key)
     {
-        int generation3 = Math.Max(int.Parse(Model.GenerationLength) * 3, 10);
+        float generation3 = 0;
+        string gen = Model.GenerationLength.Replace(".",",");
+        generation3 = Math.Max(float.Parse(gen) * 3, 10); 
+
         @if (key == "A" || key == "C")
         {
             <p class="generation_time" style="background:hotpink;padding:10px;">
                
-                Generasjonstiden er på @Model.GenerationLength år som gir en vurderingsperiode på @generation3 år
+                Generasjonstiden er på @Model.GenerationLength år som gir en vurderingsperiode på @gen år
             </p>
             <br />
         }

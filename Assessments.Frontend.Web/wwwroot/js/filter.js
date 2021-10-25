@@ -151,12 +151,9 @@ const toggleRedlistedCategories = () => {
             document.getElementById("input_" + el).checked = true;
         } else {
             if (isEndangeredActive) {
-                if (!endangered.includes(el)) {
-                    document.getElementById("input_" + el).checked = false;
-                }
-            } else {
-                document.getElementById("input_" + el).checked = false;
-            }
+                endangeredCheck.checked = false;
+            } 
+            document.getElementById("input_" + el).checked = false;
         }
     })
 }
@@ -169,12 +166,9 @@ const toggleEndangeredCategories = () => {
             document.getElementById("input_" + el).checked = true;
         } else {
             if (isRedlistedActive) {
-                if (!redlisted.includes(el)) {
-                    document.getElementById("input_" + el).checked = false;
-                }
-            } else {
-                document.getElementById("input_" + el).checked = false;
+                redlistCheck.checked = false;
             }
+            document.getElementById("input_" + el).checked = false;
         }
     })
 }

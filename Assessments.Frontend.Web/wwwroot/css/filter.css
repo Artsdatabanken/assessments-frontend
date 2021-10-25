@@ -89,6 +89,13 @@ button#open_filter {
         font-size: 15pt;
     }
 
+    .sort_by {
+        float: initial;
+        font-weight: normal;
+        text-transform: none;
+        background-color: F5f5f5;
+    }
+
     /* Filter button */
 
 

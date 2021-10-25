@@ -153,51 +153,22 @@
             @foreach (var (cat, catval) in thresholds)
             {
                 string className = "inactive";
-                //string c1 = catval.Substring(0, 2);
+                string catshort = cat;
 
                 @if (cat != null && thresholdValue != null && (cat.Contains(thresholdValue) ||
-           k == "C1" && catval.Substring(0, 2) == thresholdValue))
+                    k == "C1" && catval.Substring(0, 2) == thresholdValue))
                 {
                     if (k == "C1")
                     {
-                        if (thresholdValue.Contains("10"))
-                        {
-                            className = "active";
-                            // For C1 where there are two options for TH value 10, choose the correct one.
-                            if (cat.Contains("+"))
-                            {
-                                if (CThresh.Contains("NT"))
-                                {
-                                    // 10% + NT = NT
-                                    className = "active";
-                                }
-                                else
-                                {
-                                    className = "inactive";
-                                }
-                            }
-                            else
-                            {
-                                // 10 % + CR, EN, VU = VU.
-                                if (!CThresh.Contains("NT"))
-                                {
-                                    className = "active";
-                                }
-                                else
-                                {
-                                    className = "inactive";
-                                }
-                            }
-                        }
+                        catshort = catshort.Substring(0, 2);
+                       
                     }
-                    else
-                    {
-                        className = "active";
-                    }
+                    className = "active";
                 }                
 
+
                 <li class="thresholdlist @className">
-                    <span class="graphic_element @cat">@cat.Substring(0,2)</span>
+                    <span class="graphic_element @catshort">@catshort</span>
                     <span class="threshold_element">@comparator @catval @unit</span>
                 </li>
             }

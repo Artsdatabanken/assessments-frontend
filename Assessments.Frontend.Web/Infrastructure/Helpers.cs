@@ -83,42 +83,42 @@ namespace Assessments.Frontend.Web.Infrastructure
             switch ((string.IsNullOrEmpty(name), sortBy))
             {
                 // without search string "name"
-                case (true, "ScientificName"):
+                case (true, nameof(SpeciesAssessment2021.ScientificName)):
                     query = query.OrderBy(x => x.ScientificName);
                     break;
-                case (true, "PopularName"):
+                case (true, nameof(SpeciesAssessment2021.PopularName)):
                     query = query
                                 .OrderBy(x => string.IsNullOrEmpty(x.PopularName))
                                 .ThenBy(x => x.PopularName);
                     break;
-                case (true, "Category"):
+                case (true, nameof(SpeciesAssessment2021.Category)):
                     query = query.OrderBy(x => x.Category, new CategoryComparer());
                     break;
-                case (true, "SpeciesGroup"):
+                case (true, nameof(SpeciesAssessment2021.SpeciesGroup)):
                     query = query.OrderBy(x => x.SpeciesGroup);
                     break;
 
                 // with search string "name"
-                case (false, "ScientificName"):
+                case (false, nameof(SpeciesAssessment2021.ScientificName)):
                     query = query
                         .OrderByDescending(x => x.PopularName.ToLower() == name ||
                         x.ScientificName.ToLower() == name)
                         .ThenBy(x => x.ScientificName);
                     break;
-                case (false, "PopularName"):
+                case (false, nameof(SpeciesAssessment2021.PopularName)):
                     query = query
                         .OrderByDescending(x => x.PopularName.ToLower() == name ||
                         x.ScientificName.ToLower() == name)
                         .ThenBy(x => !string.IsNullOrEmpty(x.PopularName))
                         .ThenBy(x => x.PopularName);
                     break;
-                case (false, "Category"):
+                case (false, nameof(SpeciesAssessment2021.Category)):
                     query = query
                         .OrderByDescending(x => x.PopularName.ToLower() == name ||
                         x.ScientificName.ToLower() == name)
                         .ThenBy(x => x.Category, new CategoryComparer());
                     break;
-                case (false, "SpeciesGroup"):
+                case (false, nameof(SpeciesAssessment2021.SpeciesGroup)):
                     query = query
                         .OrderByDescending(x => x.PopularName.ToLower() == name ||
                         x.ScientificName.ToLower() == name)

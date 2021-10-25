@@ -265,7 +265,31 @@
             "25": "25 % på 3 år eller 1 generasjon",
             "20": "20 % på 5 år eller 2 generasjoner",
             "10": "10 % på 10 år eller 3 generasjoner",
-            "5": "5 % på 10 år og < 10000 individer eller 3 generasjoner "
+            "5": "< 10000 individer og 5 % på 10 år eller 3 generasjoner"
+          },
+          "labels-CR": {
+            "25": "CR",
+            "20": "EN",
+            "10": "VU",
+            "5": "NT"
+          },
+          "labels-EN": {
+            "25": "EN",
+            "20": "EN",
+            "10": "VU",
+            "5": "NT"
+          },
+          "labels-VU": {
+            "25": "VU",
+            "20": "VU",
+            "10": "VU",
+            "5": "NT"
+          },
+          "labels-NT": {
+            "25": "NT",
+            "20": "NT",
+            "10": "NT",
+            "5": "LC"
           },
           "conclusion": "C1 Pågående nedgang på <terskelverdi> tilsvarer i utgangspunktet <kategori>"
         }

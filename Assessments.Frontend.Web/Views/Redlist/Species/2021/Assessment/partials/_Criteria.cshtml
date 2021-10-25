@@ -140,8 +140,10 @@
     }
 
     // THE LIST SHOWING A SUBCATEGORY'S THRESHOLD VALUES
-    void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k)
+    void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k, Dictionary<string, object> C_labels)
     {
+
+
         string CThresh = "";
         if (k == "C1")
         {
@@ -156,24 +158,34 @@
                 string catshort = cat;
 
                 @if (cat != null && thresholdValue != null && (cat.Contains(thresholdValue) ||
-                    k == "C1" && catval.Substring(0, 2) == thresholdValue))
+                 k == "C1" && catval.Substring(0, 2) == thresholdValue))
                 {
                     if (k == "C1")
                     {
                         catshort = catshort.Substring(0, 2);
-                       
+
+
                     }
                     className = "active";
-                }                
-
+                }
+                string C_key = "labels-" + CThresh;
+                string labels = catshort;
+                    
+                if(C_labels.ContainsKey(C_key))
+                 {
+                    var c_labels = parseDictString(C_labels[C_key].ToString());
+                    labels = c_labels[catshort];
+                }
 
                 <li class="thresholdlist @className">
-                    <span class="graphic_element @catshort">@catshort</span>
-                    <span class="threshold_element">@comparator @catval @unit</span>
+                    <span class="graphic_element @labels">@labels</span>
+                    <span class="threshold_element">
+                        @labels @comparator @catval @unit
+                    </span>
                 </li>
             }
         </ul>
-        <br/>
+        <br />
     }
 
 
@@ -215,7 +227,7 @@
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
                 string thresholdValue = GetThresholdValue(k);
-                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue,k);
+                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue, k, json_quantile);
             }
         </div>
     }
@@ -337,9 +349,9 @@
         {
             <p class="generation_time" style="background:hotpink;padding:10px;">
 
-                Generasjonstiden er på @Model.GenerationLength år<br/>
-                1 generasjon = @generasjon <br/>
-                2 generasjoner = @gen2<br/>
+                Generasjonstiden er på @Model.GenerationLength år<br />
+                1 generasjon = @generasjon <br />
+                2 generasjoner = @gen2<br />
                 3 generasjoner = @gen3
             </p>
             <br />

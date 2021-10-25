@@ -73,6 +73,7 @@ const addOnclick = () => {
                 } else if (redlisted.some(category => el.id.indexOf(category) != -1)) {
                     toggleSingleFilter(el, "redlisted_check");
                 }
+                toggleMarkAll();
 
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;

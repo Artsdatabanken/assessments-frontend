@@ -143,6 +143,32 @@ const handleFirstTime = () => {
     })
 }
 
+const shouldToggleMarkAll = (elementsClass) => {
+    const allElements = document.getElementsByClassName(elementsClass);
+    return Array.prototype.every.call(allElements, (element) => {
+        return element.checked === true;
+    })
+}
+
+const shouldToggleMarkRedOrEnd = (list) => {
+    return Array.prototype.every.call(list, (item) => {
+        console.log(item)
+        return document.getElementById("input_" + item).checked === true;
+    })
+}
+
+const toggleMarkAll = () => {
+    if (shouldToggleMarkAll("insect_input")) {
+        insectInput.checked = true;
+    }
+    if (shouldToggleMarkRedOrEnd(redlisted)) {
+        redlistCheck.checked = true;
+    }
+    if (shouldToggleMarkRedOrEnd(endangered)) {
+        endangeredCheck.checked = true;
+    }
+}
+
 const toggleRedlistedCategories = () => {
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;

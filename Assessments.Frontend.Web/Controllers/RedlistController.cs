@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using X.PagedList;
 using System;
 using Assessments.Frontend.Web.Infrastructure.Services;
+using Assessments.Shared.Helpers;
 using Microsoft.AspNetCore.Http.Extensions;
 
 // ReSharper disable InconsistentNaming
@@ -48,7 +49,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+            var query = await DataRepository.GetSpeciesAssessments();
 
             ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks(query.Select(x => x.TaxonRank).Distinct().ToArray());
 
@@ -133,7 +134,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (export)
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());
-                var expertCommitteeMembers = await DataRepository.GetData<ExpertCommitteeMember>(Constants.Filename.SpeciesExpertCommitteeMembers);
+                var expertCommitteeMembers = await DataRepository.GetData<ExpertCommitteeMember>(DataFilenames.SpeciesExpertCommitteeMembers);
                 expertCommitteeMembers = expertCommitteeMembers.Where(x => x.Year == 2021);
 
                 return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport, expertCommitteeMembers.ToList(), Request.GetDisplayUrl()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
@@ -152,7 +153,7 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
-            var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+            var data = await DataRepository.GetSpeciesAssessments();
 
             var assessment = data.FirstOrDefault(x => x.Id == id);
 

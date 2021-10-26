@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Mapping.Models.Species;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -17,24 +16,15 @@ namespace Assessments.Frontend.Web.Controllers.Api
     {
         [HttpGet, EnableQuery(PageSize = 100)]
         [ProducesResponseType(typeof(IList<SpeciesAssessment2021>), Status200OK)]
-        public async Task<IActionResult> Get()
-        {
-            // var data = await DataRepository.GetData<SpeciesAssessment2021>(Constants.Filename.Species2021); // ferdig transformert modell
-            var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
-
-            return Ok(data);
-        }
+        public async Task<IActionResult> Get() => Ok(await DataRepository.GetSpeciesAssessments());
 
         [HttpGet, EnableQuery]
         [ProducesResponseType(typeof(SpeciesAssessment2021), Status200OK), ProducesResponseType(Status404NotFound)]
         public async Task<IActionResult> Get(int key)
         {
-            // var data = await DataRepository.GetData<SpeciesAssessment2021>(Constants.Filename.Species2021); // ferdig transformert modell
-            var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen
+            var data = await DataRepository.GetSpeciesAssessments();
 
-            var result = data.Where(x => x.Id == key);
-
-            return Ok(SingleResult.Create(result.AsQueryable()));
+            return Ok(SingleResult.Create(data.Where(x => x.Id == key).AsQueryable()));
         }
     }
 }

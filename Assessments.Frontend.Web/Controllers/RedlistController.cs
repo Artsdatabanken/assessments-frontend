@@ -19,13 +19,18 @@ namespace Assessments.Frontend.Web.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class RedlistController : BaseController<RedlistController>
     {
+        public RedlistController(ArtskartApiService artskartApiService)
+        {
+            _artskartApiService = artskartApiService;
+        }
+
         public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new Dictionary<string, JObject>();
         private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
         private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
-
+        private readonly ArtskartApiService _artskartApiService;
 
 
         [Route("2021")]
@@ -53,11 +58,9 @@ namespace Assessments.Frontend.Web.Controllers
             ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks(query.Select(x => x.TaxonRank).Distinct().ToArray());
 
             // Søk
-            string name = String.Empty;
-
             if (!string.IsNullOrEmpty(viewModel.Name))
             {
-                name = viewModel.Name.Trim().ToLower();
+                var name = viewModel.Name.Trim().ToLower();
                 string[] speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
 
                 query = query.Where(x => 
@@ -66,6 +69,16 @@ namespace Assessments.Frontend.Web.Controllers
                     x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
                     x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
                     x.SpeciesGroup.ToLower().Contains(name));                               // Match on species group.
+
+                if (!query.Any()) // bruk populærnavn om ingen treff på navn
+                {
+                    var searchTaxons = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
+                    if (searchTaxons != null && searchTaxons.Any())
+                    {
+                        query = await DataRepository.GetMappedSpeciesAssessments();
+                        query = query.Where(x => searchTaxons.Select(y => y.ScientificNameId).Contains(x.ScientificNameId));
+                    }
+                }
             }
 
             // Filter

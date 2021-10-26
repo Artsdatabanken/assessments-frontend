@@ -107,8 +107,8 @@
 
     void hasKey(string key, Dictionary<string, object> field)
     {
-                        @if (field.ContainsKey(key))
-                        {
+        @if (field.ContainsKey(key))
+        {
             <p class="@key">
                 @field[key]
             </p>
@@ -126,13 +126,13 @@
             </span>
         }
         else if (compare == "maybe")
-    {
+        {
             <span class="material-icons">
                 pause
             </span>
         }
         else
-    {
+        {
             <span class="material-icons" style="color:darkred">
                 close
             </span>
@@ -140,28 +140,57 @@
     }
 
     // THE LIST SHOWING A SUBCATEGORY'S THRESHOLD VALUES
-    void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue)
+    void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k, Dictionary<string, object> C_labels)
     {
-        <p> VERDI: @thresholdValue</p>
+        string CThresh = "";
+        if (k == "C1")
+        {
+            unit = "";
+            CThresh = Model.C.PreliminaryCategory;
+
+            <b> Terskelverdier når kriterie C er @CThresh. @thresholdValue</b><br/>
+            <span style="color:hotpink;">// TODO: Vis tall, ikke kategori fra C</span>
+            <br />
+            <p>
+                Se hele matrisen for terskelverdier i kapittelet om metode. <br/>
+                <a href="" class="button tertiary" style="color:hotpink;">Les mer LINK</a>
+            </p>
+
+            
+        }
         <ul>
             @foreach (var (cat, catval) in thresholds)
             {
                 string className = "inactive";
-                @if (cat != null && thresholdValue != null && cat.Contains(thresholdValue))
-                        {
+                @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
+                    k == "C1" && catval.Substring(0, 2) == thresholdValue))
+                {
                     className = "active";
                 }
+                string C_key = "labels-" + CThresh;
+                string labels = cat;
+
+                if (C_labels.ContainsKey(C_key))
+                {
+                    var c_labels = parseDictString(C_labels[C_key].ToString());
+                    labels = c_labels[cat];
+                }
+
                 <li class="thresholdlist @className">
-                    <span class="graphic_element @cat">@cat</span>
-                    <span>@comparator @catval @unit</span>
+                    <span class="graphic_element @labels">@labels</span>
+                    <span class="threshold_element">
+                       @comparator @catval @unit
+                    </span>
                 </li>
             }
         </ul>
+        <br />
     }
 
 
     // MAX MIN PROBABLE INTERVAL VALUES presentation
-    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key, string k)    {
+    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key, string k)
+    {
 
         var json_quantile = parseDictObject(value);
         string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
@@ -171,6 +200,13 @@
         string estimated = "-";
 
         <div class="criteria_results">
+            @if (json_quantile.ContainsKey("threshold"))
+            {
+                var thresholds = parseDictString(json_quantile["threshold"].ToString());
+                string thresholdValue = GetThresholdValue(k);
+                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue, k, json_quantile);
+            }
+
             @if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
             {
                 estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
@@ -181,20 +217,18 @@
             }
 
             <p>
+
                 <span>Estimert verdi ligger på @quantile.Calculated @unit.</span><br />
                 <span>Det antas en nedgang på mellom @min @unit og @max @unit.</span><br />
+
+
                 <span>
                     @if (estimated.Length > 0)
                     {<span>Den mest trolige verdien er @estimated @unit</span>}.
                 </span>
             </p>
 
-            @if (json_quantile.ContainsKey("threshold"))
-            {
-                var thresholds = parseDictString(json_quantile["threshold"].ToString());
-                string thresholdValue = GetThresholdValue(k);
-                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue);
-            }
+
         </div>
     }
 
@@ -209,8 +243,7 @@
         }
     }
 
-
-    void GetModel(string key)
+    void getModel(string key)
     {
 
         @*
@@ -274,11 +307,9 @@
             PreliminaryCategory = Model.D2PreliminaryCategory;
         }
 
-
-
         @if (Helpers.isNotEmpty(PreliminaryCategory) || Helpers.isNotEmpty(ThresholdValue) || ReductionBasedOn != null && ReductionBasedOn.Count != 0)
         {
-            <div style="padding:10px; background:pink;">
+            <div>
                 @if (ReductionBasedOn != null)
                 {
                     <span>
@@ -288,21 +319,50 @@
                     </span>
                     <br />
                 }
-
-                @if (Helpers.isNotEmpty(ThresholdValue))
-                {<span>Terskelverdi: @ThresholdValue</span><br />}
                 @if (Helpers.isNotEmpty(PreliminaryCategory))
                 {<span>Kategori basert på kriterie: @PreliminaryCategory</span><br />}
             </div>
-
-
         }
-
     }
 
+    //GenerationTime
+    void getGenerationTime(String key, String subkey)
+    {
+        float generation3 = 0;
+        string gen = Model.GenerationLength != null ? Model.GenerationLength.Replace(".", ",") : "0";
+        float generasjon = gen != null ? float.Parse(gen) : 0;
+        float gen2 = generasjon * 2;
+        float gen3 = generasjon * 3;
+        generation3 = Math.Max(gen3, 10);
 
+        if (key == "A")
+        {
+            <p class="generation_time">
+                Generasjonstiden er på @Model.GenerationLength år som gir en vurderingsperiode på @gen år
+            </p>
+            <br />
+        }
+        else if (subkey == "C1")
+        {
+            float vurderingsperiode = 0;
+            if (Model.C1.ThresholdValue == "25")
+            {
+                vurderingsperiode = Math.Max(3, generasjon);
+            }
+            else if (Model.C1.ThresholdValue == "20")
+            {
+                vurderingsperiode = Math.Max(5, gen2);
+            }
+            else
+            {
+                vurderingsperiode = Math.Max(10, gen3);
+            }
 
-
+            <p class="generation_time">                
+                 Vurderingsperioden er på @vurderingsperiode år.
+            </p>
+        }
+    }
 }<!-- END OF ALL-->
 
 
@@ -332,7 +392,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                     <div class="listitem_text_field">
                         <h4>@key -  @value["title"]</h4>
                         @{ hasKey("description", @value);}
-                        @{ GetModel(key);}
+                        @{ getModel(key);}
                         @{ getQuantile(value, key, key);}
 
 
@@ -353,7 +413,8 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
                                             <h5>@k <span>@v["title"]</span></h5>
                                             @{ hasKey("description", v);}
-                                            @{ GetModel(k);}
+                                            @{ getGenerationTime(key, k);}
+                                            @{ getModel(k);}
                                             @{ getQuantile(v, k, key);}
 
                                             <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->

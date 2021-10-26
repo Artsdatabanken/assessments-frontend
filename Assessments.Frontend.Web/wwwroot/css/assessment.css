@@ -800,10 +800,14 @@ span.area i {
 .thresholdlist {
     display: block;
     padding: 5px;
-    max-width:200px;
+    max-width:100%;
 }
 
 .thresholdlist.active {
     background:lightgrey;
 }
 
+.hotpink {
+    border: 2px solid hotpink;
+    color: hotpink;
+}

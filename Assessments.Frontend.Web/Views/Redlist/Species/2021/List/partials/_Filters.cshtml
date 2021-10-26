@@ -1,5 +1,7 @@
 @model RL2021ViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Constants
+@using static Assessments.Frontend.Web.Infrastructure.Filter
+
 @{
     var AllAreas = ViewBag.AllAreas;
     Dictionary<string, Dictionary<string, string>> AllCategories = ViewBag.categories.ToObject<Dictionary<string, Dictionary<string, string>>>();
@@ -49,10 +51,10 @@
 
     void GetRemoveString()
     {
-        @if (GetActiveSelectionCount() > 0)
+        @if (Filter.GetActiveSelectionCount(Model) > 0)
         {
-            <div class="filterstring"><span>@GetActiveSelectionCount()&nbsp;</span></div>
-            @if (GetActiveSelectionCount() > 1)
+            <div class="filterstring"><span>@Filter.GetActiveSelectionCount(Model)&nbsp;</span></div>
+            @if (Filter.GetActiveSelectionCount(Model) > 1)
             {
                 <span>filtre&nbsp;</span>
             } else 
@@ -60,105 +62,20 @@
                 <span>filter&nbsp;</span>
             }
         }
-        @if (!string.IsNullOrEmpty(GetActiveSelection()) && GetActiveSelectionCount() > 0)
+        @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)) && Filter.GetActiveSelectionCount(Model) > 0)
         {
             <span>og&nbsp;</span>
         }
-        @if (!string.IsNullOrEmpty(GetActiveSelection()))
+        @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
-            <span>søket&nbsp;</span><span> &ldquo;@GetActiveSelection()&rdquo;</span>
+            <span>søket&nbsp;</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
         }
-    }
-
-    int GetActiveSelectionCount()
-    {
-        int count = 0;
-        count += Model.Area.Length;
-        count += Model.Category.Length;
-        count += Model.SpeciesGroups.Length;
-        count += Model.TaxonRank.Length;
-        count += Model.Habitats.Length;
-        count += Model.Regions.Length;
-        count += Model.EuroPop.Length;
-        count += Model.Criterias.Length;
-        if (Model.PresumedExtinct)
-            count++;
-
-        return count;
     }    
-
-    string GetActiveSelection()
-    {
-        if (!string.IsNullOrEmpty(Model.Name))
-        {
-            return $"{Model.Name}";
-        }
-        return String.Empty;
-    }
-
-    string GetActiveFilters(string filterType)
-    {
-        switch (filterType)
-        {
-            case "Area":
-                if (Model.Area?.Any() == true)
-                    return $"{Model.Area.Length}";
-                return String.Empty;
-            case "Category":
-                if (Model.Category?.Any() == true)
-                    return $"{Model.Category.Length}";
-                return String.Empty;
-            case "TaxonRank":
-                if (Model.TaxonRank?.Any() == true)
-                    return $"{Model.TaxonRank.Length}";
-                return String.Empty;
-            case "SpeciesGroups":
-                if (Model.SpeciesGroups?.Any() == true)
-                {
-                    if (Model.SpeciesGroups.Contains("Insekter"))
-                        return $"{Model.SpeciesGroups.Length - 1}";
-                    return $"{Model.SpeciesGroups.Length}";
-                }
-                return String.Empty;
-            case "Habitats":
-                if (Model.Habitats?.Any() == true)
-                    return $"{Model.Habitats.Length}";
-                return String.Empty;
-            case "Regions":
-                if (Model.Regions?.Any() == true)
-                    return $"{Model.Regions.Length}";
-                return String.Empty;
-            case "EuroPop":
-                if (Model.EuroPop?.Any() == true)
-                    return $"{Model.EuroPop.Length}";
-                return String.Empty;
-            case "Criterias":
-                if (Model.Criterias?.Any() == true)
-                    return $"{Model.Criterias.Length}";
-                return String.Empty;
-            case "PresumedExtinct":
-                if (Model.PresumedExtinct == true)
-                    return $"1";
-                return String.Empty;
-            case "Insects":
-                if (AllInsects.Any(insect => Model.SpeciesGroups.Contains(insect)))
-                {
-                    int count = 0;
-                    foreach (var insect in AllInsects)
-                        if (Model.SpeciesGroups.Contains(insect))
-                            count ++;
-                    return $"{count}";
-                }
-                return String.Empty;
-            default:
-                return String.Empty;
-        }
-    }
 }
 
 <div class="empty_filters_and_controls">
     <div class="empty_filters">
-        @if (GetActiveSelectionCount() != 0 || !string.IsNullOrEmpty(GetActiveSelection()))
+        @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
                 <span class="flex_row">
                     @{ GetRemoveString(); }
@@ -182,7 +99,7 @@
             </select>
         }
         <button class="toggle_filter only_mobile" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-            <span class="filternumber">@GetActiveSelectionCount()</span>
+            <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>
             <span class="material-icons">
                 filter_list
             </span>Filter
@@ -211,7 +128,7 @@
                             </button>
                         </div>
                         <div class="empty_filters_mobile">
-                        @if (GetActiveSelectionCount() != 0 || !string.IsNullOrEmpty(GetActiveSelection()))
+                        @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
                         {
                             <span class="flex_row">
                                 @{ GetRemoveString(); }
@@ -227,7 +144,7 @@
                                 <button name="områdefiltre" class="list_header" id="list_header_area" onclick="collapse('show_area')" type="button">
                                     <span class="list_header_text">
                                         @SearchAndFilter.SearchChooseArea
-                                        <span class="filternumber">@GetActiveFilters("Area")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("Area", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_area">
@@ -249,7 +166,7 @@
                                 <button name="kategorifiltre" class="list_header" id="list_header_category" onclick="collapse('show_category')" type="button">
                                     <span class="list_header_text">
                                         @SearchAndFilter.SearchChooseCategory
-                                        <span class="filternumber">@GetActiveFilters("Category")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("Category", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_category">
@@ -287,7 +204,7 @@
                                 <button name="'taksonomisk nivå'-filtre" class="list_header" id="list_header_taxon_rank" onclick="collapse('show_taxon_rank')" type="button">
                                     <span class="list_header_text">
                                         @SearchAndFilter.SearchFilterTaxonRank
-                                        <span class="filternumber">@GetActiveFilters("TaxonRank")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("TaxonRank", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_taxon_rank">
@@ -310,7 +227,7 @@
                                 <button name="artsgruppefiltre" class="list_header" id="list_header_species_groups" onclick="collapse('show_species_groups')" type="button">
                                     <span class="list_header_text">
                                         Artsgruppe
-                                        <span class="filternumber">@GetActiveFilters("SpeciesGroups")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("SpeciesGroups", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_species_groups">
@@ -324,7 +241,7 @@
                                                     <button name="insektsfiltre" class="list_header" id="list_header_insects" onclick="collapse('show_insects')" type="button">
                                                         <span>@species</span>
                                                         <span class="list_header_text">
-                                                            <span class="filternumber">@GetActiveFilters("Insects")</span>
+                                                            <span class="filternumber">@Filter.GetActiveFilters("Insects", Model)</span>
                                                         </span>
                                                         <span id="show_all_insects">Maker alle</span>
                                                         <label onclick="event.stopPropagation()">
@@ -354,7 +271,7 @@
                                 <button name="hovedhabitatfiltre" class="list_header" id="list_header_habitat" onclick="collapse('show_habitat')" type="button">
                                     <span class="list_header_text">
                                         Hovedhabitat
-                                        <span class="filternumber">@GetActiveFilters("Habitats")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("Habitats", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_habitat">
@@ -377,7 +294,7 @@
                                 <button name="regionfiltre" class="list_header" id="list_header_region" onclick="collapse('show_region')" type="button">
                                     <span class="list_header_text">
                                         Regioner og havområder
-                                        <span class="filternumber">@GetActiveFilters("Regions")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("Regions", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_region">
@@ -400,7 +317,7 @@
                                 <button name="'andel av europeisk populasjon'-filtre" class="list_header" id="list_header_european_population" onclick="collapse('show_european_population')" type="button">
                                     <span class="list_header_text">
                                         Andel av europeisk populasjon
-                                        <span class="filternumber">@GetActiveFilters("EuroPop")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("EuroPop", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_european_population">
@@ -423,7 +340,7 @@
                                 <button name="kriteriefiltre" class="list_header" id="list_header_criteria" onclick="collapse('show_criteria')" type="button">
                                     <span class="list_header_text">
                                         @SearchAndFilter.SearchChooseCriteria
-                                        <span class="filternumber">@GetActiveFilters("Criterias")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("Criterias", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_criteria">
@@ -446,7 +363,7 @@
                                 <button name="'trolig utdødd'-filter" class="list_header" id="list_header_extinct" onclick="collapse('show_extinct')" type="button">
                                     <span class="list_header_text">
                                         Trolig utdødd
-                                        <span class="filternumber">@GetActiveFilters("PresumedExtinct")</span>
+                                        <span class="filternumber">@Filter.GetActiveFilters("PresumedExtinct", Model)</span>
                                     </span>
                                 </button>
                                 <div class="filter_extinct">

@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
+using Assessments.Shared.Helpers;
 using AutoMapper;
 using Azure.Storage.Blobs;
 using CsvHelper;
@@ -81,7 +82,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             async Task<IQueryable<SpeciesAssessment2021>> Get()
             {
-                var data = await GetData<Rodliste2019>(Constants.Filename.Species2021Temp);
+                var data = await GetData<Rodliste2019>(DataFilenames.Species2021Temp);
                 return _mapper.Map<IEnumerable<SpeciesAssessment2021>>(data).AsQueryable(); 
             }
 

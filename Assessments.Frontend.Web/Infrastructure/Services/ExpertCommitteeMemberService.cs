@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Assessments.Shared.Helpers;
 using CsvHelper.Configuration.Attributes;
 
 namespace Assessments.Frontend.Web.Infrastructure.Services
@@ -17,7 +18,7 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
 
         public async Task<List<ExpertCommitteeMember>> GetExpertCommitteeMembers(string expertCommitteeName, int year)
         {
-            var data = await _dataRepository.GetData<ExpertCommitteeMember>(Constants.Filename.SpeciesExpertCommitteeMembers);
+            var data = await _dataRepository.GetData<ExpertCommitteeMember>(DataFilenames.SpeciesExpertCommitteeMembers);
             
             var expertCommitteeMembers = data.Where(x => x.ExpertCommittee == expertCommitteeName && x.Year == year).ToList();
 

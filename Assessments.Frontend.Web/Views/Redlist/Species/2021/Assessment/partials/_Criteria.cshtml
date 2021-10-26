@@ -33,7 +33,7 @@
                 return Model.C.Statistics;
             case "C1":
                 return Model.C1.Statistics;
-            case "C2Ai":
+            case "C2a(i)":
                 return Model.C2Ai.Statistics;
         }
         return null;
@@ -67,11 +67,12 @@
                 return Model.C1.ThresholdValue;
             case "C2a(i)":
                 return Model.C2Ai.ThresholdValue;
+            case "C2a(ii)":
+                return Model.C2Aii.ThresholdValue;
             case "D1":
                 return Model.D1PreliminaryCategory;
             case "D2":
                 return Model.D2PreliminaryCategory;
-
         }
         return null;
     }
@@ -143,28 +144,21 @@
     void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k, Dictionary<string, object> C_labels)
     {
         string CThresh = "";
-        if (k == "C1")
+        if (k == "C1" || k.Contains("C2"))
         {
             unit = "";
             CThresh = Model.C.PreliminaryCategory;
 
             <b> Terskelverdier når kriterie C er @CThresh. @thresholdValue</b>
-            <br />
-            <span style="color:hotpink;">// TODO: Vis tall, ikke kategori fra C</span>
-            <br />
-            <p>
-                Se hele matrisen for terskelverdier i kapittelet om metode. <br />
-                <a href="" class="button tertiary" style="color:hotpink;">Les mer LINK</a>
-            </p>
-
-
+            <span style="color:hotpink;display:block;">// TODO: Vis tall, ikke kategori fra C</span>
         }
         <ul>
             @foreach (var (cat, catval) in thresholds)
             {
                 string className = "inactive";
                 @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
-                  k == "C1" && catval.Substring(0, 2) == thresholdValue))
+               k == "C1" && catval.Substring(0, 2) == thresholdValue)
+               || k.Contains("C2") && thresholdValue == catval)
                 {
                     className = "active";
                 }
@@ -185,22 +179,28 @@
                 </li>
             }
         </ul>
+        if (k == "C1" || k.Contains("C2"))
+        {
+            <i>
+                Se hele matrisen for terskelverdier i kapittelet om metode. 
+                <a href="" class="button tertiary tinybutton" style="color:hotpink;">Les mer LINK ></a>
+            </i>
+        }
         <br />
     }
+
 
 
     // MAX MIN PROBABLE INTERVAL VALUES presentation
     void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key, string k)
     {
-
         var json_quantile = parseDictObject(value);
         string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
         string comparator = json_quantile.ContainsKey("comparator") ? json_quantile["comparator"].ToString() : "";
-        string min = @quantile.Min;
-        string max = @quantile.Max;
         string estimated = "-";
 
         <div class="criteria_results">
+
             @if (json_quantile.ContainsKey("threshold"))
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
@@ -208,26 +208,29 @@
                 thresholdsList(thresholds, unit, quantile, comparator, thresholdValue, k, json_quantile);
             }
 
-            @if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
+            @if (quantile != null)
             {
-                estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
+                string min = @quantile.Min;
+                string max = @quantile.Max;
+
+                if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
+                {
+                    estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
+                }
+                else
+                {
+                    estimated = @quantile.Probable;
+                }
+
+                <p>
+                    <span>Estimert verdi ligger på @quantile.Calculated @unit.</span><br />
+                    <span>Det antas en nedgang på mellom @min @unit og @max @unit.</span><br />
+                    <span>
+                        @if (estimated.Length > 0)
+                        {<span>Den mest trolige verdien er @estimated @unit</span>}.
+                    </span>
+                </p>
             }
-            else
-            {
-                estimated = @quantile.Probable;
-            }
-
-            <p>
-
-                <span>Estimert verdi ligger på @quantile.Calculated @unit.</span><br />
-                <span>Det antas en nedgang på mellom @min @unit og @max @unit.</span><br />
-                <span>
-                    @if (estimated.Length > 0)
-                    {<span>Den mest trolige verdien er @estimated @unit</span>}.
-                </span>
-            </p>
-
-
         </div>
     }
 
@@ -236,14 +239,13 @@
     void getQuantile(Dictionary<string, object> value, string k, string key)
     {
         var quantile = GetQuantileForCriteria(k);
-        if (quantile != null)
+        if (quantile != null || k == "C2a(ii)")
         {
-            <span> HAR QUANTILE </span>
             mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key, k);
         }
         else
         {
-            <span>MANGLER QUANTILE</span>
+            //<span>MANGLER QUANTILE for @k</span>
         }
     }
 
@@ -337,7 +339,7 @@
         float vurderingsperiode = 0;
         if (key == "A")
         {
-            vurderingsperiode = Math.Max(generasjon*3, 10);
+            vurderingsperiode = Math.Max(generasjon * 3, 10);
         }
         else if (subkey == "C1")
         {
@@ -347,11 +349,11 @@
             }
             else if (Model.C1.ThresholdValue == "20")
             {
-                vurderingsperiode = Math.Max(5, generasjon*2);
+                vurderingsperiode = Math.Max(5, generasjon * 2);
             }
             else
             {
-                vurderingsperiode = Math.Max(10, generasjon*3);
+                vurderingsperiode = Math.Max(10, generasjon * 3);
             }
         }
 
@@ -429,23 +431,30 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                 @if (currentlist.Length > 0)
                                                 {
                                                     <div class="subsub_list">
-                                                        <h6 class="subheading">Kunnskapsgrunnlag</h6>
+                                                        @{ if (key == "A")
+                                                            {
+                                                                <h6 class="subheading">Kunnskapsgrunnlag</h6>
+                                                            }
+                                                        }
                                                         @foreach (var (subkey, subval) in subdict)
                                                         {
                                                             string modelkey = k + subkey;
                                                             <div class="@Criteria.inList(subkey, currentlist) listitem_criteria">
                                                                 @{ iconChooser(Criteria.inList(subkey, currentlist)); }
-                                                                <h6 class="listitem_text_field">
-                                                                    <b>@subkey</b>
-                                                                    <span>@subval["title"]</span>
+
+
+
+
+                                                                <div class="listitem_text_field">
+                                                                    <h6>
+                                                                        <b>@subkey</b> <span>@subval["title"]</span>
+                                                                    </h6>
                                                                     <p>
-                                                                        @subval, <br />
-                                                                        @subkey, <br/>
-                                                                        @modelkey<br/>
-                                                                        @{ getQuantile(subval, subkey, modelkey);}
+                                                                        @{ getQuantile(subval, modelkey, modelkey);}
                                                                     </p>
-                                                                    
-                                                                </h6>
+                                                                </div>
+
+
                                                             </div>
                                                         }
                                                     </div>

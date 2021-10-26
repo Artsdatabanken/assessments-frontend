@@ -303,10 +303,29 @@
               "unit": "individ",
               "comparator": "≤",
               "threshold": {
-                "CR": "50",
-                "EN": "250",
-                "VU": "1000",
-                "NT": "1000"
+                "50": "50",
+                "250": "250",
+                "1000": "1000"
+              },
+              "labels-CR": {
+                "50": "CR",
+                "250": "EN",
+                "1000": "VU"
+              },
+              "labels-EN": {
+                "50": "EN",
+                "250": "EN",
+                "1000": "VU"
+              },
+              "labels-VU": {
+                "50": "VU",
+                "250": "VU",
+                "1000": "VU"
+              },
+              "labels-NT": {
+                "50": "NT",
+                "250": "NT",
+                "1000": "NT"
               },
               "conclusion": "C2a(i) Største delpopulasjon ≤<terskelverdi> tilsvarer i utgangspunktet <kategori>"
             }

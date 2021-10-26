@@ -49,7 +49,7 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+            var query = await DataRepository.GetSpeciesAssessments();
 
             ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks(query.Select(x => x.TaxonRank).Distinct().ToArray());
 
@@ -153,7 +153,7 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
-            var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+            var data = await DataRepository.GetSpeciesAssessments();
 
             var assessment = data.FirstOrDefault(x => x.Id == id);
 

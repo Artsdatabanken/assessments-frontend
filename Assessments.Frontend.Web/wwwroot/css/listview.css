@@ -425,12 +425,12 @@ li a span.element_icon {
     }
 
     .total {
-        background: #cbd2d2;
+        color: inherit;
     }
 
-        .total .infograph_number {
-            font-size: 40pt;
-        }
+    .total .infograph_number {
+        font-size: 40pt;
+    }
 
     .infograph_percent {
         font-size: 30pt;
@@ -438,11 +438,9 @@ li a span.element_icon {
     }
 
     .threatened {
-        background: #2d2d2f;
-        color: white;
+        color: #2d2d2f;
     }
 
     .redlisted {
-        background: #8b0000;
-        color: white;
+        color: #8b0000;
     }

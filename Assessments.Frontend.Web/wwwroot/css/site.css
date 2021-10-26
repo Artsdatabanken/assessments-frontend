@@ -561,3 +561,14 @@ option {
 }
 
 
+.coverphoto {
+    max-width: 240px;
+    float: left;
+}
+
+@media only screen and (max-width: 750px) {
+    .coverphoto {
+       display:none;
+    }
+
+}

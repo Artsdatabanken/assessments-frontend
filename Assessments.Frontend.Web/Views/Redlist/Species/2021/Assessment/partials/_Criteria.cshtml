@@ -65,7 +65,7 @@
                 return Model.C.PreliminaryCategory;
             case "C1":
                 return Model.C1.ThresholdValue;
-            case "C2Ai":
+            case "C2a(i)":
                 return Model.C2Ai.ThresholdValue;
             case "D1":
                 return Model.D1PreliminaryCategory;
@@ -238,7 +238,12 @@
         var quantile = GetQuantileForCriteria(k);
         if (quantile != null)
         {
+            <span> HAR QUANTILE </span>
             mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key, k);
+        }
+        else
+        {
+            <span>MANGLER QUANTILE</span>
         }
     }
 
@@ -293,7 +298,7 @@
         {
             ThresholdValue = Model.C1.ThresholdValue;
         }
-        else if (key == "C2Ai")
+        else if (key == "C2a(i)")
         {
             ThresholdValue = Model.C2Ai.ThresholdValue;
         }
@@ -427,11 +432,19 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                         <h6 class="subheading">Kunnskapsgrunnlag</h6>
                                                         @foreach (var (subkey, subval) in subdict)
                                                         {
+                                                            string modelkey = k + subkey;
                                                             <div class="@Criteria.inList(subkey, currentlist) listitem_criteria">
                                                                 @{ iconChooser(Criteria.inList(subkey, currentlist)); }
                                                                 <h6 class="listitem_text_field">
                                                                     <b>@subkey</b>
                                                                     <span>@subval["title"]</span>
+                                                                    <p>
+                                                                        @subval, <br />
+                                                                        @subkey, <br/>
+                                                                        @modelkey<br/>
+                                                                        @{ getQuantile(subval, subkey, modelkey);}
+                                                                    </p>
+                                                                    
                                                                 </h6>
                                                             </div>
                                                         }

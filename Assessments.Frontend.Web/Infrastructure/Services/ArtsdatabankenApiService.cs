@@ -17,7 +17,7 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
         {
             _logger = logger;
             _client = client;
-            _client.BaseAddress = new Uri("https://artsdatabanken.no/apiii/");
+            _client.BaseAddress = new Uri("https://artsdatabanken.no/api/");
             _client.Timeout = TimeSpan.FromSeconds(15);
             
             _appCache = appCache;

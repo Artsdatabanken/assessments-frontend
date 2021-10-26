@@ -143,6 +143,32 @@ const handleFirstTime = () => {
     })
 }
 
+const shouldToggleMarkAll = (elementsClass) => {
+    const allElements = document.getElementsByClassName(elementsClass);
+    return Array.prototype.every.call(allElements, (element) => {
+        return element.checked === true;
+    })
+}
+
+const shouldToggleMarkRedOrEnd = (list) => {
+    return Array.prototype.every.call(list, (item) => {
+        console.log(item)
+        return document.getElementById("input_" + item).checked === true;
+    })
+}
+
+const toggleMarkAll = () => {
+    if (shouldToggleMarkAll("insect_input")) {
+        insectInput.checked = true;
+    }
+    if (shouldToggleMarkRedOrEnd(redlisted)) {
+        redlistCheck.checked = true;
+    }
+    if (shouldToggleMarkRedOrEnd(endangered)) {
+        endangeredCheck.checked = true;
+    }
+}
+
 const toggleRedlistedCategories = () => {
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
@@ -151,12 +177,9 @@ const toggleRedlistedCategories = () => {
             document.getElementById("input_" + el).checked = true;
         } else {
             if (isEndangeredActive) {
-                if (!endangered.includes(el)) {
-                    document.getElementById("input_" + el).checked = false;
-                }
-            } else {
-                document.getElementById("input_" + el).checked = false;
-            }
+                endangeredCheck.checked = false;
+            } 
+            document.getElementById("input_" + el).checked = false;
         }
     })
 }
@@ -169,12 +192,9 @@ const toggleEndangeredCategories = () => {
             document.getElementById("input_" + el).checked = true;
         } else {
             if (isRedlistedActive) {
-                if (!redlisted.includes(el)) {
-                    document.getElementById("input_" + el).checked = false;
-                }
-            } else {
-                document.getElementById("input_" + el).checked = false;
+                redlistCheck.checked = false;
             }
+            document.getElementById("input_" + el).checked = false;
         }
     })
 }

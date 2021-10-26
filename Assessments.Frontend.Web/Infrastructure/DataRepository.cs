@@ -59,7 +59,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                     await using var writer = new StreamWriter(fileName);
                     await writer.WriteAsync(fileContent);
 
-                    _logger.LogDebug($"Downloaded {fileName}");
+                    _logger.LogInformation($"Downloaded {fileName}");
                 }
 
                 if (!name.EndsWith(".csv")) // handle json

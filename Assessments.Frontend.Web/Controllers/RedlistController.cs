@@ -61,23 +61,24 @@ namespace Assessments.Frontend.Web.Controllers
             if (!string.IsNullOrEmpty(viewModel.Name))
             {
                 var name = viewModel.Name.Trim().ToLower();
-                string[] speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
+                var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
 
-                query = query.Where(x => 
+                var queryByName = query.Where(x => 
                     x.ScientificName.ToLower().Contains(name) ||                            // Match on scientific name.
                     speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
                     x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
                     x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
                     x.SpeciesGroup.ToLower().Contains(name));                               // Match on species group.
 
-                if (!query.Any()) // bruk populærnavn om ingen treff på navn
+                if (queryByName.Any())
                 {
-                    var searchTaxons = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
-                    if (searchTaxons != null && searchTaxons.Any())
-                    {
-                        query = await DataRepository.GetMappedSpeciesAssessments();
-                        query = query.Where(x => searchTaxons.Select(y => y.ScientificNameId).Contains(x.ScientificNameId));
-                    }
+                    query = queryByName;
+                }
+                else // bruk populærnavn om ingen treff på navn
+                {
+                    var popularNames = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
+                    if (popularNames != null && popularNames.Any())
+                        query = query.Where(x => popularNames.Select(y => y.ScientificNameId).Contains(x.ScientificNameId));
                 }
             }
 

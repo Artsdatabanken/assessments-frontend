@@ -185,11 +185,26 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static bool isNotEmpty(string key)
         {
-            if(key != null && key != " " && key != "-" && key != "" && key != "Helt ukjent")
-        {
+            if (key != null && key != " " && key != "-" && key != "" && key != "Helt ukjent")
+            {
                 return true;
             }
             return false;
+        }
+
+        public static string findDegrees(string category,bool parenthesis)
+        {
+            string text = "";
+            if (category.Length >2)
+            {
+                text = "nedgradert";
+            }
+            if (parenthesis)
+            {
+                return "(" + text + ")";
+            }
+
+            return text;
         }
 
     }

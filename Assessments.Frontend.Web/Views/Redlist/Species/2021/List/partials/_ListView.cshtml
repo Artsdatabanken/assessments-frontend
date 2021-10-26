@@ -48,6 +48,8 @@
                         @if (!string.IsNullOrEmpty(item.Category))
                         {
                             @ViewBag.categories[item.Category.Substring(0, 2)]["presentationstring"];
+                        <span class="degrees">@Helpers.findDegrees(item.Category,false)</span>
+
                         }
                     </span>
 

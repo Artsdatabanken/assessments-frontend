@@ -165,14 +165,22 @@
                 string C_key = "labels-" + CThresh;
                 string labels = cat;
 
+
                 if (C_labels.ContainsKey(C_key))
                 {
                     var c_labels = parseDictString(C_labels[C_key].ToString());
                     labels = c_labels[cat];
                 }
 
+                string box_class = "";
+                if (k == "C")
+                {
+                    box_class += "C_question";
+                    labels += " ?";
+                }
+
                 <li class="thresholdlist @className">
-                    <span class="graphic_element @labels">@labels</span>
+                    <span class="graphic_element @labels @box_class">@labels</span>
                     <span class="threshold_element">
                         @comparator @catval @unit
                     </span>

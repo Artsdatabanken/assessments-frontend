@@ -363,7 +363,29 @@
             }
           },
           "b": {
-            "title": "Ekstreme fluktuasjoner i antall reproduksjonsdyktige individ"
+            "title": "Ekstreme fluktuasjoner i antall reproduksjonsdyktige individ",
+            "content": {
+              "threshold": {
+                "JA": "Ja, det er ekstreme fluktuasjoner",
+                "NEI": "Nei, det er ikke ekstreme fluktuasjoner"
+              },
+              "labels-CR": {
+                "JA": "CR",
+                "NEI": "LC"
+              },
+              "labels-EN": {
+                "JA": "EN",
+                "NEI": "LC"
+              },
+              "labels-VU": {
+                "JA": "VU",
+                "NEI": "LC"
+              },
+              "labels-NT": {
+                "JA": "NT",
+                "NEI": "LC"
+              }
+            }
           }
         }
       }

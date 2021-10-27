@@ -69,6 +69,8 @@
                 return Model.C2Ai.ThresholdValue;
             case "C2a(ii)":
                 return Model.C2Aii.ThresholdValue;
+            case "C2b":
+                return Model.C2bExtremeFluctuations;
             case "D1":
                 return Model.D1PreliminaryCategory;
             case "D2":
@@ -208,7 +210,6 @@
         string estimated = "-";
 
         <div class="criteria_results">
-
             @if (json_quantile.ContainsKey("threshold"))
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
@@ -247,13 +248,13 @@
     void getQuantile(Dictionary<string, object> value, string k, string key)
     {
         var quantile = GetQuantileForCriteria(k);
-        if (quantile != null || k == "C2a(ii)")
+        if (quantile != null || k == "C2a(ii)" || k == "C2b")
         {
             mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key, k);
         }
         else
         {
-            //<span>MANGLER QUANTILE for @k</span>
+            //<span class="hotpink">MANGLER QUANTILE for @k</span>
         }
     }
 
@@ -397,6 +398,8 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
         <button class="changetab active">Kompakt</button><button class="changetab">Full visning</button>
         <div class="tabbed_element_container">
+
+            <span>c2b: @Model.C2bExtremeFluctuations</span>
             <!-- MAIN CRITERIA -->
             @foreach (var (key, value) in criteria)
             {

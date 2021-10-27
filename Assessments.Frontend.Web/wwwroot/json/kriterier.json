@@ -162,8 +162,7 @@
                 "EN": "5",
                 "VU": "10",
                 "NT": "20"
-              },
-              "conclusion": "Ba(ii). Antall trusseldefinerte lokaliteter ≤ <terskelverdi> tilsvarer i utgangspunktet <kategori>"
+              }
             }
           }
         }
@@ -220,8 +219,7 @@
             "EN": "5000",
             "VU": "20000",
             "NT": "40000"
-          },
-          "conclusion": "B1 < <terskelverdi> tilsvarer i utgangspunktet <kategori>"
+          }
         }
       },
       "B2": {
@@ -235,8 +233,7 @@
             "EN": "500",
             "VU": "2000",
             "NT": "4000 km2 eller >EN + et underkriterium"
-          },
-          "conclusion": "B2 Forekomstareal < <terskelverdi> tilsvarer i utgangspunktet <kategori>"
+          }
         }
       }
     }
@@ -252,8 +249,7 @@
         "EN": "2500",
         "VU": "10000",
         "NT": "20000"
-      },
-      "conclusion": "C Antall reproduksjonsdyktige individ < <terskelverdi> tilsvarer i utgangspunktet <kategori>"
+      }
     },
     "subcriteria": {
       "C1": {
@@ -290,8 +286,7 @@
             "20": "NT",
             "10": "NT",
             "5": "LC"
-          },
-          "conclusion": "C1 Pågående nedgang på <terskelverdi> tilsvarer i utgangspunktet <kategori>"
+          }
         }
       },
       "C2": {
@@ -326,8 +321,7 @@
                 "50": "NT",
                 "250": "NT",
                 "1000": "NT"
-              },
-              "conclusion": "C2a(i) Største delpopulasjon ≤<terskelverdi> tilsvarer i utgangspunktet <kategori>"
+              }
             }
           },
           "a(ii)": {
@@ -358,8 +352,7 @@
                 "100": "NT",
                 "95": "LC",
                 "90": "LC"
-              },
-              "min": "Minst :c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon"
+              }
             }
           },
           "b": {
@@ -404,8 +397,7 @@
             "EN": "250",
             "VU": "1000",
             "NT": "2000"
-          },
-          "conclusion": "D1 Antall reproduksjonsdyktige individ < <terskelverdi> tilsvarer <kategori> "
+          }
         }
       },
       "D2": {
@@ -413,14 +405,12 @@
         "description": "Forekomstarealet er svært lite (< 40 km2) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (< 10)",
         "content": {
           "unit": "km2",
-          "comparator": "<",
           "threshold": {
-            "CR": "",
-            "EN": "",
+            "CR": "-",
+            "EN": "-",
             "VU": "<20 km2, ≤ 5 lokaliteter",
             "NT": "≤ 40 km2, ≤ 10 lokaliteter"
-          },
-          "conclusion": "Beregnet antall trusseldefinerte lokaliteter: baIntervallAntallLokaliteter(quantile) D2 Den begrensede forekomsten tilsvarer <kategori> "
+          }
         }
       }
     }

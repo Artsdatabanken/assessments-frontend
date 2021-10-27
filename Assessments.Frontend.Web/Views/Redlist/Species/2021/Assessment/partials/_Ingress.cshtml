@@ -10,7 +10,7 @@
 
             <span>
                 Ikke revidert siden 2010, hvor den ble vurdert til
-                <partial name="/Views/Shared/_Category.cshtml" />
+                <partial name="/Views/Shared/_Category.cshtml" />  
             </span>
         }
         else
@@ -20,7 +20,7 @@
             {
                 <span>vurdert til </span>
             }
-            <partial name="/Views/Shared/_Category.cshtml" />
+            <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span> 
             <span>
                 for Norsk rødliste for arter 2021.
                 Rødlista for arter er en oversikt over arter som har risiko for å dø ut fra Norge.

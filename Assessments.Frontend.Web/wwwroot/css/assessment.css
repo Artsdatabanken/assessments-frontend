@@ -368,17 +368,16 @@ no_distribution {
     stroke-width:0.5px;
 }
 
-.vurdert_S .land,
+.vurdert_S .land:not(.svalbard_land),
 .vurdert_S .sea {
     fill: white;
     stroke-width: 0.5px;
-    stroke:grey;
+    stroke: grey;
 }
 
 .vurdert_S .svalbard_land {
-    fill: inherit;
-    stroke:inherit;
-    stroke-width:0.7px;
+    stroke: inherit;
+    stroke-width: 0.7px;
 }
 
 .region p,

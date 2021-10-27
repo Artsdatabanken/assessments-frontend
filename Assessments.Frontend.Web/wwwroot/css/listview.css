@@ -410,37 +410,33 @@ li a span.element_icon {
     .infographics {
         flex-direction:column;
     }
-    }
+}
 
-    .infograph_element {
-        padding: 10px;
-        margin: 10px;
-        border-radius: 2px;
-        flex: 1;
-    }
+.infograph_element {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 2px;
+    flex: 1;
+}
 
-    .infograph_number {
-        font-size: 20pt;
-        font-weight: bold;
-    }
+.total {
+    color: inherit;
+}
 
-    .total {
-        color: inherit;
-    }
+.total .infograph_number {
+    font-size: 40pt;
+}
 
-    .total .infograph_number {
-        font-size: 40pt;
-    }
+.threatened {
+    color: #2d2d2f;
+}
 
-    .infograph_percent {
-        font-size: 30pt;
-        font-weight: bold;
-    }
+.redlisted {
+    color: #8b0000;
+}
 
-    .threatened {
-        color: #2d2d2f;
-    }
-
-    .redlisted {
-        color: #8b0000;
-    }
+.degrees{
+    font-size:12px;
+    display:block;
+    color: #4c4a48;
+}

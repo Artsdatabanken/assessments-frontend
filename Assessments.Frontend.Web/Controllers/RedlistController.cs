@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using X.PagedList;
 using System;
 using Assessments.Frontend.Web.Infrastructure.Services;
+using Assessments.Shared.Helpers;
 using Microsoft.AspNetCore.Http.Extensions;
 
 // ReSharper disable InconsistentNaming
@@ -19,13 +20,18 @@ namespace Assessments.Frontend.Web.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class RedlistController : BaseController<RedlistController>
     {
+        public RedlistController(ArtskartApiService artskartApiService)
+        {
+            _artskartApiService = artskartApiService;
+        }
+
         public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new Dictionary<string, JObject>();
         private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
         private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
-
+        private readonly ArtskartApiService _artskartApiService;
 
 
         [Route("2021")]
@@ -48,24 +54,33 @@ namespace Assessments.Frontend.Web.Controllers
             const int pageSize = 25;
             var pageNumber = page ?? 1;
 
-            var query = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+            var query = await DataRepository.GetSpeciesAssessments();
 
             ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks(query.Select(x => x.TaxonRank).Distinct().ToArray());
 
             // Søk
-            string name = String.Empty;
-
             if (!string.IsNullOrEmpty(viewModel.Name))
             {
-                name = viewModel.Name.Trim().ToLower();
-                string[] speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
+                var name = viewModel.Name.Trim().ToLower();
+                var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
 
-                query = query.Where(x => 
+                var queryByName = query.Where(x => 
                     x.ScientificName.ToLower().Contains(name) ||                            // Match on scientific name.
                     speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
                     x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
                     x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
                     x.SpeciesGroup.ToLower().Contains(name));                               // Match on species group.
+
+                if (queryByName.Any())
+                {
+                    query = queryByName;
+                }
+                else // bruk populærnavn om ingen treff på navn
+                {
+                    var popularNames = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
+                    if (popularNames != null && popularNames.Any())
+                        query = query.Where(x => popularNames.Select(y => y.ScientificNameId).Contains(x.ScientificNameId));
+                }
             }
 
             // Filter
@@ -133,7 +148,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (export)
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<SpeciesAssessment2021Export>>(query.ToList());
-                var expertCommitteeMembers = await DataRepository.GetData<ExpertCommitteeMember>(Constants.Filename.SpeciesExpertCommitteeMembers);
+                var expertCommitteeMembers = await DataRepository.GetData<ExpertCommitteeMember>(DataFilenames.SpeciesExpertCommitteeMembers);
                 expertCommitteeMembers = expertCommitteeMembers.Where(x => x.Year == 2021);
 
                 return new FileStreamResult(ExportHelper.GenerateSpeciesAssessment2021Export(assessmentsForExport, expertCommitteeMembers.ToList(), Request.GetDisplayUrl()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
@@ -152,7 +167,7 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
-            var data = await DataRepository.GetMappedSpeciesAssessments(); // transformer modellen 
+            var data = await DataRepository.GetSpeciesAssessments();
 
             var assessment = data.FirstOrDefault(x => x.Id == id);
 

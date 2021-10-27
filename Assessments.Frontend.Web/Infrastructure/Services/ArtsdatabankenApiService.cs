@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using LazyCache;
+using Microsoft.Extensions.Logging;
 
 namespace Assessments.Frontend.Web.Infrastructure.Services
 {
@@ -10,9 +11,11 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
     {
         private readonly HttpClient _client;
         private readonly IAppCache _appCache;
+        private readonly ILogger<ArtsdatabankenApiService> _logger;
 
-        public ArtsdatabankenApiService(HttpClient client, IAppCache appCache)
+        public ArtsdatabankenApiService(HttpClient client, IAppCache appCache, ILogger<ArtsdatabankenApiService> logger)
         {
+            _logger = logger;
             _client = client;
             _client.BaseAddress = new Uri("https://artsdatabanken.no/api/");
             _client.Timeout = TimeSpan.FromSeconds(15);
@@ -27,8 +30,9 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
             {
                 return await _appCache.GetOrAddAsync(path, () => _client.GetFromJsonAsync<T>(path));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "An error occurred");
                 return default;
             }
         }

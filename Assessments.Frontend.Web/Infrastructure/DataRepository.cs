@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
+using Assessments.Shared.Helpers;
 using AutoMapper;
 using Azure.Storage.Blobs;
 using CsvHelper;
@@ -46,24 +47,24 @@ namespace Assessments.Frontend.Web.Infrastructure
 
                 if (File.Exists(fileName)) // use cached file
                 {
-                    fileContent = await File.ReadAllTextAsync(fileName); 
+                    fileContent = await File.ReadAllTextAsync(fileName);
                 }
                 else // download file
                 {
                     var blob = new BlobContainerClient(_configuration["ConnectionStrings:AzureBlobStorage"], "assessments").GetBlobClient(name);
                     var response = await blob.DownloadContentAsync();
-                    
+
                     fileContent = response.Value.Content.ToString();
 
                     await using var writer = new StreamWriter(fileName);
                     await writer.WriteAsync(fileContent);
 
-                    _logger.LogDebug($"Downloaded {fileName}");
+                    _logger.LogInformation($"Downloaded {fileName}");
                 }
 
                 if (!name.EndsWith(".csv")) // handle json
                     return JsonSerializer.Deserialize<IList<T>>(fileContent)?.AsQueryable();
-                
+
                 using var reader = new StringReader(fileContent);
                 using var csv = new CsvReader(reader, CsvConfiguration);
 
@@ -72,20 +73,21 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             return _appCache.GetOrAddAsync($"{nameof(DataRepository)}-{name}", DeserializeData);
         }
-        
-        /// <summary>
-        /// Metode som henter data som "RL2019" og transformerer til "SpeciesAssessment2021"
-        /// litt tregere (ved oppstart), kan brukes for å teste mapping
-        /// </summary>
-        public Task<IQueryable<SpeciesAssessment2021>> GetMappedSpeciesAssessments()
+
+        public Task<IQueryable<SpeciesAssessment2021>> GetSpeciesAssessments()
         {
+            var transformSpeciesAssessments = bool.Parse(_configuration.GetSection("Mapping").GetSection("Redlist").GetSection("TransformSpeciesAssessments").Value);
+
             async Task<IQueryable<SpeciesAssessment2021>> Get()
             {
-                var data = await GetData<Rodliste2019>(Constants.Filename.Species2021Temp);
-                return _mapper.Map<IEnumerable<SpeciesAssessment2021>>(data).AsQueryable(); 
+                return transformSpeciesAssessments ?
+                    // transformerer modell fra "Rodliste2019"
+                    _mapper.Map<IEnumerable<SpeciesAssessment2021>>(await GetData<Rodliste2019>(DataFilenames.Species2021Temp)).AsQueryable() :
+                    // modell lagret som "SpeciesAssessment2021"
+                    _mapper.Map<IEnumerable<SpeciesAssessment2021>>(await GetData<SpeciesAssessment2021>(DataFilenames.Species2021)).AsQueryable();
             }
 
-            return _appCache.GetOrAddAsync($"{nameof(GetMappedSpeciesAssessments)}", Get);
+            return _appCache.GetOrAddAsync($"{nameof(GetSpeciesAssessments)}", Get);
         }
     }
 }

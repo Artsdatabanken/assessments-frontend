@@ -55,6 +55,10 @@ namespace Assessments.Mapping.Helpers
             {
                 "0.1.",
                 "0."
+            },
+            {
+                "1.1.2.1.2",
+                "1.1.2.1.2."
             }
         };
 
@@ -75,13 +79,13 @@ namespace Assessments.Mapping.Helpers
                     },
                     {
                         "1.1.2.2.Plukkhogst, tynning, vedhogst",
-                        new Tuple<string, string, string>("1.1.2.1.2",
+                        new Tuple<string, string, string>("1.1.2.1.2.",
                             "Lukkede hogstformer (plukkhogst, skjermstilling, tynning, uttak av enkelttrær, inkludert uttak av rotvelt, råtne trær, tørrgran etc.)",
                             "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
                     },
                     {
-                        "1.1.2.3.Fjerning av dødt virke", new Tuple<string, string, string>("1.1.2.1.3.",
-                            "Ungskogrydding (rydding i ungskog)",
+                        "1.1.2.3.Fjerning av dødt virke", new Tuple<string, string, string>("1.1.2.1.4.",
+                            "Uttak av død ved (stående gadd og liggende læger)",
                             "Påvirkning på habitat > Landbruk > Skogbruk (kommersielt) > Skogsdrift, hogst og skjøtsel")
                     },
                     {
@@ -354,7 +358,10 @@ namespace Assessments.Mapping.Helpers
             //var under = level > 1
             //    ? string.Join(" > ", pOverordnetTittel.Split(" > ").Skip(1)) + " - " + pBeskrivelse
             //    : pBeskrivelse;
-
+            if (!pId.EndsWith("."))
+            {
+                pId = pId + ".";
+            }
             dest.Id = pId;
             dest.Factor = pBeskrivelse;
             dest.FactorPath =

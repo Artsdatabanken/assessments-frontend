@@ -335,9 +335,29 @@
             "content": {
               "unit": "%",
               "threshold": {
-                "90": "90-100",
-                "95": "95-100",
-                "100": "100"
+                "100": "100",
+                "95": "> 95",
+                "90": "> 90"
+              },
+              "labels-CR": {
+                "100": "CR",
+                "95": "CR",
+                "90": "CR"
+              },
+              "labels-EN": {
+                "100": "EN",
+                "95": "EN",
+                "90": "LC"
+              },
+              "labels-VU": {
+                "100": "VU",
+                "95": "LC",
+                "90": "LC"
+              },
+              "labels-NT": {
+                "100": "NT",
+                "95": "LC",
+                "90": "LC"
               },
               "min": "Minst :c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon"
             }

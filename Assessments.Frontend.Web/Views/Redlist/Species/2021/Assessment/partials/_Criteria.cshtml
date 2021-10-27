@@ -146,21 +146,24 @@
     void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k, Dictionary<string, object> C_labels)
     {
         string CThresh = "";
+        string C_Blank_Value = "";
         if (k == "C1" || k.Contains("C2"))
         {
             unit = "";
             CThresh = Model.C.PreliminaryCategory;
+            C_Blank_Value = ViewBag.kriterier["C"]["content"]["threshold"][CThresh];
+            C_Blank_Value = ViewBag.kriterier["C"]["content"]["comparator"] + " " + C_Blank_Value;
+            C_Blank_Value = C_Blank_Value + " " + ViewBag.kriterier["C"]["content"]["unit"];
 
-            <b> Terskelverdier når kriterie C er @CThresh. @thresholdValue</b>
-            <span style="color:hotpink;display:block;">// TODO: Vis tall, ikke kategori fra C</span>
+            <b> Alternativ for @C_Blank_Value</b>
         }
         <ul>
             @foreach (var (cat, catval) in thresholds)
             {
                 string className = "inactive";
                 @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
-               k == "C1" && catval.Substring(0, 2) == thresholdValue)
-               || k.Contains("C2") && thresholdValue == catval)
+             k == "C1" && catval.Substring(0, 2) == thresholdValue)
+             || k.Contains("C2") && thresholdValue == catval)
                 {
                     className = "active";
                 }
@@ -189,12 +192,9 @@
                 </li>
             }
         </ul>
-        if (k == "C1" || k.Contains("C2"))
-        {
-            <i>
-                Se hele matrisen for terskelverdier i kapittelet om metode. 
-                <a href="" class="button tertiary tinybutton" style="color:hotpink;">Les mer LINK ></a>
-            </i>
+        if (k == "C1" || k.Contains("C2a"))
+        {           
+            <a href="" class="button tertiary tinybutton" style="color:hotpink;" >Se hele matrisen ></a>
         }
         <br />
     }
@@ -233,11 +233,11 @@
 
                 <p>
                     <span>Estimert verdi ligger på @quantile.Calculated @unit.</span><br />
-                    <span>Det antas en nedgang på mellom @min @unit og @max @unit.</span><br />
-                    <span>
-                        @if (estimated.Length > 0)
-                        {<span>Den mest trolige verdien er @estimated @unit</span>}.
-                    </span>
+                    <span>Det antas en nedgang på mellom @min @unit og @max @unit.</span><br />                    
+                    @if (estimated.Length > 0)
+                    {
+                        <span>Den mest trolige verdien er @estimated @unit.</span>
+                    }                   
                 </p>
             }
         </div>
@@ -335,7 +335,7 @@
                     <br />
                 }
                 @if (Helpers.isNotEmpty(PreliminaryCategory))
-                {<span>Kategori basert på kriterie: @PreliminaryCategory</span><br />}
+                {<span class="hotpink">Kategori basert på kriterie: @PreliminaryCategory</span><br />}
             </div>
         }
     }

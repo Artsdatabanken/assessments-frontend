@@ -303,10 +303,29 @@
               "unit": "individ",
               "comparator": "≤",
               "threshold": {
-                "CR": "50",
-                "EN": "250",
-                "VU": "1000",
-                "NT": "1000"
+                "50": "50",
+                "250": "250",
+                "1000": "1000"
+              },
+              "labels-CR": {
+                "50": "CR",
+                "250": "EN",
+                "1000": "VU"
+              },
+              "labels-EN": {
+                "50": "EN",
+                "250": "EN",
+                "1000": "VU"
+              },
+              "labels-VU": {
+                "50": "VU",
+                "250": "VU",
+                "1000": "VU"
+              },
+              "labels-NT": {
+                "50": "NT",
+                "250": "NT",
+                "1000": "NT"
               },
               "conclusion": "C2a(i) Største delpopulasjon ≤<terskelverdi> tilsvarer i utgangspunktet <kategori>"
             }
@@ -316,10 +335,29 @@
             "content": {
               "unit": "%",
               "threshold": {
-                "CR": "90-100",
-                "EN": "95-100",
-                "VU": "100",
-                "NT": "100"
+                "100": "100",
+                "95": "> 95",
+                "90": "> 90"
+              },
+              "labels-CR": {
+                "100": "CR",
+                "95": "CR",
+                "90": "CR"
+              },
+              "labels-EN": {
+                "100": "EN",
+                "95": "EN",
+                "90": "LC"
+              },
+              "labels-VU": {
+                "100": "VU",
+                "95": "LC",
+                "90": "LC"
+              },
+              "labels-NT": {
+                "100": "NT",
+                "95": "LC",
+                "90": "LC"
               },
               "min": "Minst :c2A2PågåendePopulasjonsreduksjonKode % av alle individer er samlet i én delpopulasjon"
             }

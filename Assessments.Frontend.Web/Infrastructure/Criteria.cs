@@ -7,7 +7,7 @@ namespace Assessments.Frontend.Web.Infrastructure
     {
         public static string handleCCriteria(string current_element, string key)
         {
-            if (key == "C")
+            if (key.Contains("C"))
             {
                 // THIS IS ONLY RELEVANT FOR C2
                 current_element = current_element.Replace("a(i,ii)", "a(i)a(ii)");

@@ -810,3 +810,25 @@ span.area i {
     border: 2px solid hotpink;
     color: hotpink;
 }
+
+.C_question{
+    font-size:8px;
+    line-height:12pt;
+}
+
+.CR.C_question {
+    background: black;
+}
+
+.EN.C_question {
+    background: #4d4d4d;
+}
+
+.VU.C_question {
+    background: #737373;
+}
+
+.NT.C_question {
+    background: #848484;
+    color: white;
+}

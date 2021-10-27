@@ -69,6 +69,8 @@
                 return Model.C2Ai.ThresholdValue;
             case "C2a(ii)":
                 return Model.C2Aii.ThresholdValue;
+            case "C2b":
+                return Model.C2bExtremeFluctuations;
             case "D1":
                 return Model.D1PreliminaryCategory;
             case "D2":
@@ -144,21 +146,24 @@
     void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k, Dictionary<string, object> C_labels)
     {
         string CThresh = "";
+        string C_Blank_Value = "";
         if (k == "C1" || k.Contains("C2"))
         {
             unit = "";
             CThresh = Model.C.PreliminaryCategory;
+            C_Blank_Value = ViewBag.kriterier["C"]["content"]["threshold"][CThresh];
+            C_Blank_Value = ViewBag.kriterier["C"]["content"]["comparator"] + " " + C_Blank_Value;
+            C_Blank_Value = C_Blank_Value + " " + ViewBag.kriterier["C"]["content"]["unit"];
 
-            <b> Terskelverdier når kriterie C er @CThresh. @thresholdValue</b>
-            <span style="color:hotpink;display:block;">// TODO: Vis tall, ikke kategori fra C</span>
+            <b> Alternativ for @C_Blank_Value</b>
         }
         <ul>
             @foreach (var (cat, catval) in thresholds)
             {
                 string className = "inactive";
                 @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
-               k == "C1" && catval.Substring(0, 2) == thresholdValue)
-               || k.Contains("C2") && thresholdValue == catval)
+             k == "C1" && catval.Substring(0, 2) == thresholdValue)
+             || k.Contains("C2") && thresholdValue == catval)
                 {
                     className = "active";
                 }
@@ -187,12 +192,9 @@
                 </li>
             }
         </ul>
-        if (k == "C1" || k.Contains("C2"))
-        {
-            <i>
-                Se hele matrisen for terskelverdier i kapittelet om metode. 
-                <a href="" class="button tertiary tinybutton" style="color:hotpink;">Les mer LINK ></a>
-            </i>
+        if (k == "C1" || k.Contains("C2a"))
+        {           
+            <a href="" class="button tertiary tinybutton" style="color:hotpink;" >Se hele matrisen ></a>
         }
         <br />
     }
@@ -208,7 +210,6 @@
         string estimated = "-";
 
         <div class="criteria_results">
-
             @if (json_quantile.ContainsKey("threshold"))
             {
                 var thresholds = parseDictString(json_quantile["threshold"].ToString());
@@ -231,12 +232,12 @@
                 }
 
                 <p>
-                    <span>Estimert verdi ligger på @quantile.Calculated @unit.</span><br />
-                    <span>Det antas en nedgang på mellom @min @unit og @max @unit.</span><br />
-                    <span>
-                        @if (estimated.Length > 0)
-                        {<span>Den mest trolige verdien er @estimated @unit</span>}.
-                    </span>
+                    <span>Estimert verdi: @quantile.Calculated @unit.</span><br />
+                    <span>Verdiem antas å ligge mellom @min @unit og @max @unit.</span><br />                    
+                    @if (estimated.Length > 0)
+                    {
+                        <span>Mest trolig er den @estimated @unit.</span>
+                    }                   
                 </p>
             }
         </div>
@@ -247,13 +248,13 @@
     void getQuantile(Dictionary<string, object> value, string k, string key)
     {
         var quantile = GetQuantileForCriteria(k);
-        if (quantile != null || k == "C2a(ii)")
+        if (quantile != null || k == "C2a(ii)" || k == "C2b" || k=="D1" || k =="D2")
         {
             mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key, k);
         }
         else
         {
-            //<span>MANGLER QUANTILE for @k</span>
+            //<span class="hotpink">MANGLER QUANTILE for @k</span>
         }
     }
 
@@ -264,63 +265,64 @@
             TODO: This should not be necessary, as thing SHOULD be in the same object, but alas.
         *@
 
-        List<string> ReductionBasedOn = null;
-        string PreliminaryCategory = null;
-        string ThresholdValue = null;
+    List<string> ReductionBasedOn = null;
+    string PreliminaryCategory = null;
+    string ThresholdValue = null;
 
-        if (key == "A1")
-        {
-            ReductionBasedOn = Model.A1.ReductionBasedOn;
-            PreliminaryCategory = Model.A1.PreliminaryCategory;
-        }
-        else if (key == "A2")
-        {
-            ReductionBasedOn = Model.A2.ReductionBasedOn;
-            PreliminaryCategory = Model.A2.PreliminaryCategory;
-        }
-        else if (key == "A3")
-        {
-            ReductionBasedOn = Model.A3.ReductionBasedOn;
-            PreliminaryCategory = Model.A3.PreliminaryCategory;
-        }
-        else if (key == "A4")
-        {
-            ReductionBasedOn = Model.A4.ReductionBasedOn;
-            PreliminaryCategory = Model.A4.PreliminaryCategory;
-        }
-        else if (key == "B1")
-        {
-            PreliminaryCategory = Model.B1.PreliminaryCategory;
-        }
-        else if (key == "B2")
-        {
-            PreliminaryCategory = Model.B2.PreliminaryCategory;
-        }
-        else if (key == "BAii")
-        {
-            PreliminaryCategory = Model.BAii.PreliminaryCategory;
-        }
-        else if (key == "C")
-        {
-            PreliminaryCategory = Model.C.PreliminaryCategory;
-        }
-        else if (key == "C1")
-        {
-            ThresholdValue = Model.C1.ThresholdValue;
-        }
-        else if (key == "C2a(i)")
-        {
-            ThresholdValue = Model.C2Ai.ThresholdValue;
-        }
-        else if (key == "D1")
-        {
-            PreliminaryCategory = Model.D1PreliminaryCategory;
-        }
-        else if (key == "D2")
-        {
-            PreliminaryCategory = Model.D2PreliminaryCategory;
-        }
+    if (key == "A1")
+    {
+        ReductionBasedOn = Model.A1.ReductionBasedOn;
+        PreliminaryCategory = Model.A1.PreliminaryCategory;
+    }
+    else if (key == "A2")
+    {
+        ReductionBasedOn = Model.A2.ReductionBasedOn;
+        PreliminaryCategory = Model.A2.PreliminaryCategory;
+    }
+    else if (key == "A3")
+    {
+        ReductionBasedOn = Model.A3.ReductionBasedOn;
+        PreliminaryCategory = Model.A3.PreliminaryCategory;
+    }
+    else if (key == "A4")
+    {
+        ReductionBasedOn = Model.A4.ReductionBasedOn;
+        PreliminaryCategory = Model.A4.PreliminaryCategory;
+    }
+    else if (key == "B1")
+    {
+        PreliminaryCategory = Model.B1.PreliminaryCategory;
+    }
+    else if (key == "B2")
+    {
+        PreliminaryCategory = Model.B2.PreliminaryCategory;
+    }
+    else if (key == "BAii")
+    {
+        PreliminaryCategory = Model.BAii.PreliminaryCategory;
+    }
+    else if (key == "C")
+    {
+        PreliminaryCategory = Model.C.PreliminaryCategory;
+    }
+    else if (key == "C1")
+    {
+        ThresholdValue = Model.C1.ThresholdValue;
+    }
+    else if (key == "C2a(i)")
+    {
+        ThresholdValue = Model.C2Ai.ThresholdValue;
+    }
+    else if (key == "D1")
+    {
+        PreliminaryCategory = Model.D1PreliminaryCategory;
+    }
+    else if (key == "D2")
+    {
+        PreliminaryCategory = Model.D2PreliminaryCategory;
+    }
 
+        /* // Not relevant to display? Preliminary category is used elsewhere.
         @if (Helpers.isNotEmpty(PreliminaryCategory) || Helpers.isNotEmpty(ThresholdValue) || ReductionBasedOn != null && ReductionBasedOn.Count != 0)
         {
             <div>
@@ -334,15 +336,19 @@
                     <br />
                 }
                 @if (Helpers.isNotEmpty(PreliminaryCategory))
-                {<span>Kategori basert på kriterie: @PreliminaryCategory</span><br />}
+                {
+                    <span class="hotpink">Kategori basert på kriterie: @PreliminaryCategory</span><br />
+                }
             </div>
-        }
+        }*/
     }
 
     //GenerationTime
     void getGenerationTime(String key, String subkey)
     {
-        string gen = Model.GenerationLength != null ? Model.GenerationLength.Replace(".", ",") : "0";
+        string gen = !string.IsNullOrEmpty(Model.GenerationLength) ? Model.GenerationLength.Replace(".", ",") : "0";
+
+
         float generasjon = gen != null ? float.Parse(gen) : 0;
         float vurderingsperiode = 0;
         if (key == "A")
@@ -397,6 +403,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
         <button class="changetab active">Kompakt</button><button class="changetab">Full visning</button>
         <div class="tabbed_element_container">
+
             <!-- MAIN CRITERIA -->
             @foreach (var (key, value) in criteria)
             {

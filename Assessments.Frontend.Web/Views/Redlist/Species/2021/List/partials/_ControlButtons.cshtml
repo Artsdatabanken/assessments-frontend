@@ -1,12 +1,6 @@
 @model RL2021ViewModel
 
 @functions{
-
-    string ViewCheck(string name, string element, string value)
-    {
-        return $"name={name} value={value}";// + (element == value ? " checked=checked" : String.Empty);
-    }
-
     string GetViewClass(string element, string value)
     {
         if (String.IsNullOrEmpty(element) && value == "list")
@@ -17,14 +11,14 @@
     }
 }
 
-<button @GetViewClass(Model.View, "list") type="submit" @ViewCheck("View", Model.View, "list")>
+<button id="list_view_button" @GetViewClass(Model.View, "list") type="submit" name="View" value="list">
     <span class="material-icons">list</span> Liste
 </button>
 @*
     <button @GetViewClass(Model.View, "grid") type="submit" @ViewCheck("View", Model.View, "grid") class="hideonmobile">
         <span class="material-icons">grid_on</span> Grid
     </button>*@
-<button @GetViewClass(Model.View, "stat") type="submit" @ViewCheck("View", Model.View, "stat")>
+<button id="stat_view_button" @GetViewClass(Model.View, "stat") type="submit" name="View" value="stat">
     <span class="material-icons">bar_chart</span> Statistikk
 </button>
 

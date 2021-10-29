@@ -1,6 +1,4 @@
 ﻿using Assessments.Mapping.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
@@ -85,17 +83,8 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.C2bExtremeFluctuations, opt => opt.MapFrom(src => src.C2BPågåendePopulasjonsreduksjonKode))
 
-                .ForPath(dest => dest.C.GenetsPerLocation, opt => opt.MapFrom(src => src.CAntallGeneter))
-                .ForPath(dest => dest.C.RametsPerGenet, opt => opt.MapFrom(src => src.CAntallRameter))
-                .ForPath(dest => dest.C.KnownPopulationSize, opt => opt.MapFrom(src => src.CKjentPopulasjonsstørrelse))
-                .ForPath(dest => dest.C.NumberOfLocations, opt => opt.MapFrom(src => src.CNumberOfLocations))
-                .ForPath(dest => dest.C.IndirectEstimate, opt => opt.MapFrom(src => src.CPopulasjonsstørrelse))
                 .ForPath(dest => dest.C.Statistics, opt => opt.MapFrom(src => src.CPopulasjonsstørrelseAntatt))
                 .ForPath(dest => dest.C.PreliminaryCategory, opt => opt.MapFrom(src => src.CPopulasjonsstørrelseKode))
-                .ForPath(dest => dest.C.IndividualsPerLocation, opt => opt.MapFrom(src => src.CReproductionDefinitionPerLocation))
-                .ForPath(dest => dest.C.IndividualsPerSubstrateUnit, opt => opt.MapFrom(src => src.CReproductionDefinitionPerTree))
-                .ForPath(dest => dest.C.IndividualsPerAreaValue, opt => opt.MapFrom(src => src.CReproductionDefinitionTemplate))
-                .ForPath(dest => dest.C.IndividualsPerAreaUnit, opt => opt.MapFrom(src => src.CReproductionDefinitionTemplateScale))
                 .ForPath(dest => dest.C.SubstrateUnitsPerLocation, opt => opt.MapFrom(src => src.CSubstratenheter))
 
                 .ForMember(dest => dest.D1PreliminaryCategory, opt => opt.MapFrom(src => src.D1FåReproduserendeIndividKode))
@@ -135,7 +124,7 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.TaxonomicHistory, opt => opt.MapFrom(src => src.TaxonomicHistory))
 
-                .ForMember(dest => dest.TaxonRank, opt => opt.MapFrom(src => Helpers.SpeciesAssessment2021ProfileHelper.Capitalize(src.TaxonRank)))
+                .ForMember(dest => dest.TaxonRank, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.Capitalize(src.TaxonRank)))
 
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.TroligUtdodd))
                 .ForMember(dest => dest.RationaleRegionallyExtinct, opt => opt.MapFrom(src => src.UtdoddINorgeRE))
@@ -154,7 +143,7 @@ namespace Assessments.Mapping
 
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.EvaluateCategoryChangeReason(src)))
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.ÅrsakTilNedgraderingAvKategori,true)))
-                .ForMember(dest=> dest.PreviousAssessments, opt=> opt.MapFrom(src => Helpers.SpeciesAssessment2021ProfileHelper.GetPreviousAssessments(src)))
+                .ForMember(dest=> dest.PreviousAssessments, opt=> opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.GetPreviousAssessments(src)))
                     .AfterMap((src, dest) =>
                 {
                     SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest);

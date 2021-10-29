@@ -76,6 +76,16 @@
     min-width: 51px;
 }
 
+p.no_style {
+    color: inherit;
+    margin: 0;
+    font-size: inherit;
+    text-emphasis: none;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+}
+
 /* ANYTHING GRID */
 
 .listheader,

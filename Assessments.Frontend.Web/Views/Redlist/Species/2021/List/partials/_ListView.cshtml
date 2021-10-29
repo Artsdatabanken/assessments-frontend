@@ -6,6 +6,21 @@
     Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
 }
 
+@functions
+{
+    void getScientificNameElement(string scientificName)
+    {
+        if (!String.IsNullOrEmpty(scientificName) && scientificName.Substring(0,1) == "×")
+        {
+            <i class="element_name list_cell"><p class="no_style">@scientificName.Substring(0,1)</p>@scientificName.Substring(1)</i>
+        }
+        else
+        {
+            <i class="element_name list_cell">@scientificName</i>
+        }
+    }
+}
+
     <ul class="redlist" id="redlist">
         <li class="listheader" id="listheader">
             <span></span>
@@ -40,7 +55,7 @@
 
 
                     <span class="element_species">
-                        <i class="element_name list_cell">@item.ScientificName</i>
+                        @{ getScientificNameElement(item.ScientificName); }
                         <span class="element_popular_name list_cell">@item.PopularName</span>
                     </span>
 

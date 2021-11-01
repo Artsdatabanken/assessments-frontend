@@ -209,19 +209,21 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string getScientificNameElement(string scientificName)
         {
-            if (!String.IsNullOrEmpty(scientificName) && scientificName.Substring(0, 1) == "×")
+            if (string.IsNullOrEmpty(scientificName))
+                return scientificName;
+            if (scientificName.Substring(0, 1) == "×")
                 return $"{scientificName.Substring(0, 1)}<i>{scientificName.Substring(1)}</i>";
-            if (!String.IsNullOrEmpty(scientificName) && scientificName.Contains("×"))
+            if (scientificName.Contains("×"))
             {
                 int indexAt = scientificName.IndexOf("×");
                 return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 1)}<i>{scientificName.Substring(indexAt + 1)}</i>";
             }
-            if (!String.IsNullOrEmpty(scientificName) && scientificName.Contains("agg."))
+            if (scientificName.Contains("agg."))
             {
                 int indexAt = scientificName.IndexOf("agg.");
                 return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 4)}";
             }
-            if (!String.IsNullOrEmpty(scientificName) && scientificName.Contains("coll."))
+            if (scientificName.Contains("coll."))
             {
                 int indexAt = scientificName.IndexOf("coll.");
                 return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 5)}<i>{scientificName.Substring(indexAt + 5)}</i>";

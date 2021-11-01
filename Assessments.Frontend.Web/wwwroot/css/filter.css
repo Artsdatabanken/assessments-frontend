@@ -89,6 +89,11 @@ button#open_filter {
         font-size: 15pt;
     }
 
+    .sort_by_container {
+        max-width: 25%;
+        float: right;
+    }
+
     .sort_by {
         float: initial;
         font-weight: normal;

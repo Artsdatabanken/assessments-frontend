@@ -90,13 +90,15 @@
     <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
         @if(Model.View != "stat")
         {
-            <select asp-for="SortBy" id="sort_results" class="sort_by" onchange="this.form.submit()">
-                <option value="" disabled selected>Sorter etter</option>
-                <option value="@nameof(SpeciesAssessment2021.ScientificName)">Artsnavn</option>
-                <option value="@nameof(SpeciesAssessment2021.PopularName)">Populærnavn</option>
-                <option value="@nameof(SpeciesAssessment2021.Category)">Kategori</option>
-                <option value="@nameof(SpeciesAssessment2021.SpeciesGroup)">Artsgruppe</option>
-            </select>
+            <div class="sort_by_container">
+                <label for="sort_results">Sorter etter</label>
+                <select asp-for="SortBy" id="sort_results" class="sort_by" onchange="this.form.submit()">
+                    <option value="@nameof(SpeciesAssessment2021.ScientificName)">Artsnavn</option>
+                    <option value="@nameof(SpeciesAssessment2021.PopularName)">Populærnavn</option>
+                    <option value="@nameof(SpeciesAssessment2021.Category)">Kategori</option>
+                    <option value="@nameof(SpeciesAssessment2021.SpeciesGroup)">Artsgruppe</option>
+                </select>
+            </div>
         }
         <button class="toggle_filter only_mobile" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
             <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>

@@ -17,7 +17,7 @@
 
     <li>
         <b class="text_content"> 2021: </b>
-        <span class="graphic_element @Model.Category">@Model.Category</span>
+        <span class="graphic_element @Model.Category.Substring(0,2)">@Model.Category</span>
         <span class="capitalized"> @categoryDescription(Model.Category)</span>
 
         @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
@@ -30,7 +30,7 @@
     {
         <li>
             <b class="text_content"> @prev.Year: </b>
-            <span class="graphic_element @prev.Category">@prev.Category</span>
+            <span class="graphic_element @prev.Category.Substring(0,2)">@prev.Category</span>
             <span class="capitalized"> @categoryDescription(prev.Category)</span>
         </li>
     }

@@ -199,7 +199,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             {
                 text = "nedgradert";
             }
-            if (parenthesis)
+            if (parenthesis && category.Length > 2)
             {
                 return "(" + text + ")";
             }

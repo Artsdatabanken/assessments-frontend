@@ -224,7 +224,7 @@
 
                 if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
                 {
-                    estimated = @quantile.Maxintervall + " - " + @quantile.Minintervall;
+                    estimated = @quantile.Minintervall  + " - " + @quantile.Maxintervall;
                 }
                 else
                 {
@@ -233,7 +233,7 @@
 
                 <p>
                     <span>Estimert verdi: @quantile.Calculated @Html.Raw(unit).</span><br />
-                    <span>Verdiem antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />                    
+                    <span>Verdien antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />                  
                     @if (estimated.Length > 0)
                     {
                         <span>Mest trolig er den @estimated @Html.Raw(unit).</span>

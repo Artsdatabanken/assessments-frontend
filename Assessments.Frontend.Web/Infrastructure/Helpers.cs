@@ -216,6 +216,16 @@ namespace Assessments.Frontend.Web.Infrastructure
                 int indexAt = scientificName.IndexOf("×");
                 return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 1)}<i>{scientificName.Substring(indexAt + 1)}</i>";
             }
+            if (!String.IsNullOrEmpty(scientificName) && scientificName.Contains("agg."))
+            {
+                int indexAt = scientificName.IndexOf("agg.");
+                return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 4)}";
+            }
+            if (!String.IsNullOrEmpty(scientificName) && scientificName.Contains("coll."))
+            {
+                int indexAt = scientificName.IndexOf("coll.");
+                return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 5)}<i>{scientificName.Substring(indexAt + 5)}</i>";
+            }
             return $"<i>{scientificName}</i>";
         }
 

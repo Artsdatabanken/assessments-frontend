@@ -211,6 +211,11 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             if (!String.IsNullOrEmpty(scientificName) && scientificName.Substring(0, 1) == "×")
                 return $"{scientificName.Substring(0, 1)}<i>{scientificName.Substring(1)}</i>";
+            if (!String.IsNullOrEmpty(scientificName) && scientificName.Contains("×"))
+            {
+                int indexAt = scientificName.IndexOf("×");
+                return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 1)}<i>{scientificName.Substring(indexAt + 1)}</i>";
+            }
             return $"<i>{scientificName}</i>";
         }
 

@@ -1,4 +1,5 @@
 ﻿@model SpeciesAssessment2021
+@using static Assessments.Frontend.Web.Infrastructure.Helpers
 @* 
    Norwegian name and scientific name with and without autor.
    Codeblock from Innsynsløsninga 2021 by SN. Modified by HEM for launch.
@@ -13,7 +14,7 @@
 <h1>
     @if (!string.IsNullOrEmpty(Model.PopularName))
     {<b>@popularName </b>}
-    <i><b>@Model.ScientificName</b></i>
+    <b>@Html.Raw(getScientificNameElement(Model.ScientificName))</b>
     <span class="subtext_header">
         @Model.ScientificNameAuthor
     </span>

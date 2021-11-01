@@ -207,6 +207,13 @@ namespace Assessments.Frontend.Web.Infrastructure
             return text;
         }
 
+        public static string getScientificNameElement(string scientificName)
+        {
+            if (!String.IsNullOrEmpty(scientificName) && scientificName.Substring(0, 1) == "×")
+                return $"{scientificName.Substring(0, 1)}<i>{scientificName.Substring(1)}</i>";
+            return $"<i>{scientificName}</i>";
+        }
+
     }
 
     public static class Constants

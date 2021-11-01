@@ -572,3 +572,8 @@ option {
     }
 
 }
+
+
+.lowercase{
+    text-transform:lowercase;
+}

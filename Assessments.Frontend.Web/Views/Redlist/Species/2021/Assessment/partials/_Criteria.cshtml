@@ -113,7 +113,7 @@
         @if (field.ContainsKey(key))
         {
             <p class="@key">
-                @field[key]
+                @Html.Raw(field[key])
             </p>
         }
 
@@ -155,7 +155,7 @@
             C_Blank_Value = ViewBag.kriterier["C"]["content"]["comparator"] + " " + C_Blank_Value;
             C_Blank_Value = C_Blank_Value + " " + ViewBag.kriterier["C"]["content"]["unit"];
 
-            <b> Alternativ for @C_Blank_Value</b>
+            <b> Alternativ for @Html.Raw(C_Blank_Value)</b>
         }
         <ul>
             @foreach (var (cat, catval) in thresholds)
@@ -187,7 +187,7 @@
                 <li class="thresholdlist @className">
                     <span class="graphic_element @labels @box_class">@labels</span>
                     <span class="threshold_element">
-                        @comparator @catval @unit
+                        @comparator @Html.Raw(catval) @Html.Raw(unit)
                     </span>
                 </li>
             }
@@ -232,11 +232,11 @@
                 }
 
                 <p>
-                    <span>Estimert verdi: @quantile.Calculated @unit.</span><br />
-                    <span>Verdien antas å ligge mellom @min @unit og @max @unit.</span><br />                    
+                    <span>Estimert verdi: @quantile.Calculated @Html.Raw(unit).</span><br />
+                    <span>Verdien antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />                  
                     @if (estimated.Length > 0)
                     {
-                        <span>Mest trolig er den @estimated @unit.</span>
+                        <span>Mest trolig er den @estimated @Html.Raw(unit).</span>
                     }                   
                 </p>
             }
@@ -393,7 +393,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
     <div class="page_section criteria">
         <div class="criteria_description">
             <h3>@ViewBag.glossary["criteria"]["tagline"]</h3>
-            <p>@ViewBag.glossary["criteria"]["description"]</p>
+            <p>@Html.Raw(ViewBag.glossary["criteria"]["description"])</p>
             <button class="tertiary tinybutton">Gå til metode <span class="material-icons">open_in_new</span></button>
             <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
             <p>@Model.CriteriaSummarized<br /></p>

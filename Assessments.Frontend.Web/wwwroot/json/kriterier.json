@@ -26,7 +26,7 @@
         },
         "content": {
           "unit": "%",
-          "comparator": ">=",
+          "comparator": "≥",
           "threshold": {
             "CR": "90",
             "EN": "70",
@@ -59,7 +59,7 @@
         },
         "content": {
           "unit": "%",
-          "comparator": ">=",
+          "comparator": "≥",
           "threshold": {
             "CR": "80",
             "EN": "50",
@@ -89,7 +89,7 @@
         },
         "content": {
           "unit": "%",
-          "comparator": ">=",
+          "comparator": "≥",
           "threshold": {
             "CR": "80",
             "EN": "50",
@@ -122,7 +122,7 @@
         },
         "content": {
           "unit": "%",
-          "comparator": ">=",
+          "comparator": "≥",
           "threshold": {
             "CR": "80",
             "EN": "50",
@@ -156,12 +156,11 @@
             "description": "En trusseldefinert lokalitet forstås som et geografisk eller økologisk distinkt område der en enkelt trussel raskt kan påvirke alle individer av en art. Det geografiske omfanget av en trusseldefinert lokalitet avhenger med andre ord av den definerende trusselen. Begrepet må ikke forveksles med forekomst.",
             "content": {
               "unit": "antall",
-              "comparator": "≤",
               "threshold": {
-                "CR": "1",
-                "EN": "5",
-                "VU": "10",
-                "NT": "20"
+                "CR": "= 1",
+                "EN": "≤ 5",
+                "VU": "≤ 10",
+                "NT": "≤ 20"
               }
             }
           }
@@ -212,27 +211,27 @@
         "title": "Utbredelsesområde",
         "description": "Utbredelsesområde er et mål for en arts geografiske utbredelse, og tilsvarer arealet av en minimum konveks polygon der de rette linjene i polygonen omfatter alle kjente og antatte nåværende forekomster. ",
         "content": {
-          "unit": "km2",
+          "unit": "km&#178;",
           "comparator": "<",
           "threshold": {
             "CR": "100",
             "EN": "5000",
-            "VU": "20000",
-            "NT": "40000"
+            "VU": "20 000",
+            "NT": "40 000"
           }
         }
       },
       "B2": {
         "title": "Forekomstareal",
-        "description": "Forekomstareal er et mål for det spesifikke arealet arten lever i, standardisert som summen av alle 2 km x 2 km (4 km2) ruter som inneholder kjent eller antatt forekomst av arten. ",
+        "description": "Forekomstareal er et mål for det spesifikke arealet arten lever i, standardisert som summen av alle 2 km x 2 km (4 km&#178;) ruter som inneholder kjent eller antatt forekomst av arten. ",
         "content": {
-          "unit": "km2",
+          "unit": "km&#178;",
           "comparator": "<",
           "threshold": {
             "CR": "10",
             "EN": "500",
             "VU": "2000",
-            "NT": "4000 km2 eller >EN + et underkriterium"
+            "NT": "4000 km&#178; eller > EN + et underkriterium"
           }
         }
       }
@@ -247,8 +246,8 @@
       "threshold": {
         "CR": "250",
         "EN": "2500",
-        "VU": "10000",
-        "NT": "20000"
+        "VU": "10 000",
+        "NT": "20 000"
       }
     },
     "subcriteria": {
@@ -257,11 +256,12 @@
         "description": "Liten populasjonsstørrelse kombinert med en kvantifisert pågående nedgang over en periode på 1-3 generasjoner.",
         "content": {
           "unit": "%",
+          "comparator": "≥",
           "threshold": {
             "25": "25 % på 3 år eller 1 generasjon",
             "20": "20 % på 5 år eller 2 generasjoner",
             "10": "10 % på 10 år eller 3 generasjoner",
-            "5": "< 10000 individer og 5 % på 10 år eller 3 generasjoner"
+            "5": "5 % på 10 år eller 3 generasjoner og populasjonsstørrelse på < 10 000"
           },
           "labels-CR": {
             "25": "CR",
@@ -397,14 +397,14 @@
       },
       "D2": {
         "title": "Begrenset forekomstareal og/eller antall lokaliteter avgrenset av trussel ",
-        "description": "Forekomstarealet er svært lite (< 40 km2) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (< 10)",
+        "description": "Forekomstarealet er svært lite (< 40 km&#178;) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (< 10)",
         "content": {
-          "unit": "km2",
+          "unit": "km&#178;",
           "threshold": {
             "CR": "-",
             "EN": "-",
-            "VU": "<20 km2, ≤ 5 lokaliteter",
-            "NT": "≤ 40 km2, ≤ 10 lokaliteter"
+            "VU": "< 20 km&#178;, ≤ 5 lokaliteter",
+            "NT": "≤ 40 km&#178;, ≤ 10 lokaliteter"
           }
         }
       }

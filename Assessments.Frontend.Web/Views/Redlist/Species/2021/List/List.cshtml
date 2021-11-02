@@ -3,47 +3,48 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
 
-<partial name="/Views/Redlist/Species/2021/List/partials/_Breadcrumb.cshtml" />
+@* // Hide breadcrumb on top node
+    <partial name="/Views/Redlist/Species/2021/List/partials/_Breadcrumb.cshtml" /> *@
 <div class="pagecontainer">
     <partial name="/Views/Redlist/Species/Shared/_PageMenu.cshtml" />
-  <div class="content-placer bigmid">
-      <div class="mid-content">
-          <partial name="/Views/Redlist/Species/2021/List/partials/_Header.cshtml" />
-          
-          <partial name="/Views/Redlist/Species/2021/List/partials/_Introduction.cshtml" />
+    <div class="content-placer bigmid">
+        <div class="mid-content">
+            <partial name="/Views/Redlist/Species/2021/List/partials/_Header.cshtml" />
+
+            <partial name="/Views/Redlist/Species/2021/List/partials/_Introduction.cshtml" />
 
 
-          <form id ="search_and_filter_form" asp-action="Index2021" method="get">
-              <partial name="/Views/Redlist/Species/2021/List/partials/_Search.cshtml" />
-              <partial name="/Views/Redlist/Species/2021/List/partials/_Filters.cshtml" />
-          </form>
-          <h3>
-              @Model.Redlist2021ResultsCount
-          </h3>
-          <!-- Paginator buttons -->
-          @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", new
-          {
-                  Page = page,
-                  Name = Context.Request.Query["Name"],
-                  SortBy = Context.Request.Query["SortBy"],
-                  Area = Context.Request.Query["Area"],
-                  Category = Context.Request.Query["Category"],
-                  Criterias = Context.Request.Query["Criterias"],
-                  TaxonRank = Context.Request.Query["TaxonRank"],
-                  EuroPop = Context.Request.Query["EuroPop"],
-                  Regions = Context.Request.Query["Regions"],
-                  Habitats = Context.Request.Query["Habitats"],
-                  SpeciesGroups = Context.Request.Query["SpeciesGroups"],
-                  PresumedExtinct = Context.Request.Query["PresumedExtinct"],
-                  IsCheck = Context.Request.Query["IsCheck"],
-                  Meta = Context.Request.Query["Meta"]
-             }), new PagedListRenderOptions
-             {
-                 PageClasses = new[] { "page-link" },
-                 UlElementClasses = new[] { "pagination" },
-                 LiElementClasses = new[] { "page-item" }
-             })
-      </div>
+            <form id="search_and_filter_form" asp-action="Index2021" method="get">
+                <partial name="/Views/Redlist/Species/2021/List/partials/_Search.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/List/partials/_Filters.cshtml" />
+            </form>
+            <h3>
+                @Model.Redlist2021ResultsCount
+            </h3>
+            <!-- Paginator buttons -->
+            @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", new
+            {
+                    Page = page,
+                    Name = Context.Request.Query["Name"],
+                    SortBy = Context.Request.Query["SortBy"],
+                    Area = Context.Request.Query["Area"],
+                    Category = Context.Request.Query["Category"],
+                    Criterias = Context.Request.Query["Criterias"],
+                    TaxonRank = Context.Request.Query["TaxonRank"],
+                    EuroPop = Context.Request.Query["EuroPop"],
+                    Regions = Context.Request.Query["Regions"],
+                    Habitats = Context.Request.Query["Habitats"],
+                    SpeciesGroups = Context.Request.Query["SpeciesGroups"],
+                    PresumedExtinct = Context.Request.Query["PresumedExtinct"],
+                    IsCheck = Context.Request.Query["IsCheck"],
+                    Meta = Context.Request.Query["Meta"]
+               }), new PagedListRenderOptions
+               {
+                   PageClasses = new[] { "page-link" },
+                   UlElementClasses = new[] { "pagination" },
+                   LiElementClasses = new[] { "page-item" }
+               })
+        </div>
     </div>
 </div>
 

@@ -15,14 +15,19 @@
     <button class="button tertiary" onclick="expandParent(this, 'expand')">Om Rødlista </button>
     <h3>Om Rødlista </h3>
     <ul>
-        <li><a asp-controller="Redlist" asp-action="Detail" asp-route-id="9808">Testart: Nitidula rufipes</a></li>
+
         @*lenker fra cms/drupal via api*@
         @foreach (var (key, value) in menuItems)
         {
             <li>
-                <a href="@value">@key</a>
+                <a href="@value">
+                    <span style="width:calc(100% - 26px);display: inline-block;">@key </span>
+                    <span class="material-icons" style="float:right;">keyboard_arrow_right</span>
+                </a>
             </li>
         }
+
+        <li><a asp-controller="Redlist" asp-action="Detail" asp-route-id="9808" style="color:#8c1414">Testart: Nitidula rufipes</a></li>
     </ul>
 </div>
 

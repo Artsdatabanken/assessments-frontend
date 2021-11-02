@@ -162,8 +162,8 @@
             {
                 string className = "inactive";
                 @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
-             k == "C1" && catval.Substring(0, 2) == thresholdValue)
-             || k.Contains("C2") && thresholdValue == catval)
+           k == "C1" && catval.Substring(0, 2) == thresholdValue)
+           || k.Contains("C2") && thresholdValue == catval)
                 {
                     className = "active";
                 }
@@ -193,8 +193,8 @@
             }
         </ul>
         if (k == "C1" || k.Contains("C2a"))
-        {           
-            <a href="" class="button tertiary tinybutton" style="color:hotpink;" >Se hele matrisen ></a>
+        {
+            <a href="" class="button tertiary tinybutton" style="color:hotpink;">Se hele matrisen ></a>
         }
         <br />
     }
@@ -204,6 +204,7 @@
     // MAX MIN PROBABLE INTERVAL VALUES presentation
     void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key, string k)
     {
+
         var json_quantile = parseDictObject(value);
         string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
         string comparator = json_quantile.ContainsKey("comparator") ? json_quantile["comparator"].ToString() : "";
@@ -217,6 +218,8 @@
                 thresholdsList(thresholds, unit, quantile, comparator, thresholdValue, k, json_quantile);
             }
 
+
+
             @if (quantile != null)
             {
                 string min = @quantile.Min;
@@ -224,20 +227,21 @@
 
                 if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
                 {
-                    estimated = @quantile.Minintervall  + " - " + @quantile.Maxintervall;
+                    estimated = @quantile.Minintervall + " - " + @quantile.Maxintervall;
                 }
                 else
                 {
                     estimated = @quantile.Probable;
                 }
 
+
                 <p>
                     <span>Estimert verdi: @quantile.Calculated @Html.Raw(unit).</span><br />
-                    <span>Verdien antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />                  
+                    <span>Verdien antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />
                     @if (estimated.Length > 0)
                     {
                         <span>Mest trolig er den @estimated @Html.Raw(unit).</span>
-                    }                   
+                    }
                 </p>
             }
         </div>
@@ -248,9 +252,13 @@
     void getQuantile(Dictionary<string, object> value, string k, string key)
     {
         var quantile = GetQuantileForCriteria(k);
-        if (quantile != null || k == "C2a(ii)" || k == "C2b" || k=="D1" || k =="D2")
+        if(k == "D1")
         {
-            mmpi(value["content"].ToString(), GetQuantileForCriteria(k), key, k);
+            quantile = GetQuantileForCriteria("C");
+        }
+        if (quantile != null || k == "C2a(ii)" || k == "C2b" || k == "D1" || k == "D2")
+        {
+            mmpi(value["content"].ToString(), quantile, key, k);
         }
         else
         {
@@ -265,62 +273,62 @@
             TODO: This should not be necessary, as thing SHOULD be in the same object, but alas.
         *@
 
-    List<string> ReductionBasedOn = null;
-    string PreliminaryCategory = null;
-    string ThresholdValue = null;
+        List<string> ReductionBasedOn = null;
+        string PreliminaryCategory = null;
+        string ThresholdValue = null;
 
-    if (key == "A1")
-    {
-        ReductionBasedOn = Model.A1.ReductionBasedOn;
-        PreliminaryCategory = Model.A1.PreliminaryCategory;
-    }
-    else if (key == "A2")
-    {
-        ReductionBasedOn = Model.A2.ReductionBasedOn;
-        PreliminaryCategory = Model.A2.PreliminaryCategory;
-    }
-    else if (key == "A3")
-    {
-        ReductionBasedOn = Model.A3.ReductionBasedOn;
-        PreliminaryCategory = Model.A3.PreliminaryCategory;
-    }
-    else if (key == "A4")
-    {
-        ReductionBasedOn = Model.A4.ReductionBasedOn;
-        PreliminaryCategory = Model.A4.PreliminaryCategory;
-    }
-    else if (key == "B1")
-    {
-        PreliminaryCategory = Model.B1.PreliminaryCategory;
-    }
-    else if (key == "B2")
-    {
-        PreliminaryCategory = Model.B2.PreliminaryCategory;
-    }
-    else if (key == "BAii")
-    {
-        PreliminaryCategory = Model.BAii.PreliminaryCategory;
-    }
-    else if (key == "C")
-    {
-        PreliminaryCategory = Model.C.PreliminaryCategory;
-    }
-    else if (key == "C1")
-    {
-        ThresholdValue = Model.C1.ThresholdValue;
-    }
-    else if (key == "C2a(i)")
-    {
-        ThresholdValue = Model.C2Ai.ThresholdValue;
-    }
-    else if (key == "D1")
-    {
-        PreliminaryCategory = Model.D1PreliminaryCategory;
-    }
-    else if (key == "D2")
-    {
-        PreliminaryCategory = Model.D2PreliminaryCategory;
-    }
+        if (key == "A1")
+        {
+            ReductionBasedOn = Model.A1.ReductionBasedOn;
+            PreliminaryCategory = Model.A1.PreliminaryCategory;
+        }
+        else if (key == "A2")
+        {
+            ReductionBasedOn = Model.A2.ReductionBasedOn;
+            PreliminaryCategory = Model.A2.PreliminaryCategory;
+        }
+        else if (key == "A3")
+        {
+            ReductionBasedOn = Model.A3.ReductionBasedOn;
+            PreliminaryCategory = Model.A3.PreliminaryCategory;
+        }
+        else if (key == "A4")
+        {
+            ReductionBasedOn = Model.A4.ReductionBasedOn;
+            PreliminaryCategory = Model.A4.PreliminaryCategory;
+        }
+        else if (key == "B1")
+        {
+            PreliminaryCategory = Model.B1.PreliminaryCategory;
+        }
+        else if (key == "B2")
+        {
+            PreliminaryCategory = Model.B2.PreliminaryCategory;
+        }
+        else if (key == "BAii")
+        {
+            PreliminaryCategory = Model.BAii.PreliminaryCategory;
+        }
+        else if (key == "C")
+        {
+            PreliminaryCategory = Model.C.PreliminaryCategory;
+        }
+        else if (key == "C1")
+        {
+            ThresholdValue = Model.C1.ThresholdValue;
+        }
+        else if (key == "C2a(i)")
+        {
+            ThresholdValue = Model.C2Ai.ThresholdValue;
+        }
+        else if (key == "D1")
+        {
+            PreliminaryCategory = Model.D1PreliminaryCategory;
+        }
+        else if (key == "D2")
+        {
+            PreliminaryCategory = Model.D2PreliminaryCategory;
+        }
 
         /* // Not relevant to display? Preliminary category is used elsewhere.
         @if (Helpers.isNotEmpty(PreliminaryCategory) || Helpers.isNotEmpty(ThresholdValue) || ReductionBasedOn != null && ReductionBasedOn.Count != 0)

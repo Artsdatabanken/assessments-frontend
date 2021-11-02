@@ -399,7 +399,6 @@
         "title": "Begrenset forekomstareal og/eller antall lokaliteter avgrenset av trussel ",
         "description": "Forekomstarealet er svært lite (< 40 km&#178;) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (< 10)",
         "content": {
-          "unit": "km&#178;",
           "threshold": {
             "CR": "-",
             "EN": "-",

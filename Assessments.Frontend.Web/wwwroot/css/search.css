@@ -8,11 +8,14 @@
     width: 100%;
     padding-bottom: 15px;
     border-radius: 2px;
+    border-top: 1px solid lightgray;
+    padding-top: 20px;
+    background-image: linear-gradient(#f9f7f7, white);
 }
 
 @media only screen and (min-width: 750px) {
     .list-search {
-        background: #d0e5de;
+        padding-left:220px;
     }
 }
 
@@ -30,9 +33,10 @@
     vertical-align: top;
     margin: 0;
     height: 45px;
-    width: 385px;
-    max-width:100%;
-    margin:auto;
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+    background: pink;
 }
 
 /* Input field */
@@ -49,7 +53,7 @@
     height: 45px;
     line-height: 21.4333px;
     margin-bottom: 0px;
-    width: 285px;
+    width: 100%;
     max-width: 100%;
 }
 

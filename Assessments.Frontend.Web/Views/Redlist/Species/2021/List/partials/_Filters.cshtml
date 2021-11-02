@@ -91,7 +91,10 @@
         @if(Model.View != "stat")
         {
             <div class="sort_by_container">
-                <label for="sort_results">Sorter etter</label>
+                <label for="sort_results">
+                    <span class="material-icons">sort</span>
+                    Sorter etter
+                </label>
                 <select asp-for="SortBy" id="sort_results" class="sort_by" onchange="this.form.submit()">
                     <option value="@nameof(SpeciesAssessment2021.ScientificName)">Artsnavn</option>
                     <option value="@nameof(SpeciesAssessment2021.PopularName)">Populærnavn</option>

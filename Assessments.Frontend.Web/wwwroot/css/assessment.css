@@ -832,3 +832,31 @@ span.area i {
     background: #848484;
     color: white;
 }
+
+
+/* HANDLING TABS ON ASSESSMENT */
+
+.first_hidden_layer{
+    border-right:2px solid pink;
+}
+
+.first_hidden_layer .open_icon {
+    display: none;
+}
+
+.material-icons.close_icon {
+    display: none;
+}
+
+.first_hidden_layer .close_icon {
+    display: inline-block;
+}
+
+.full_list li.first_hidden_layer li.inactive,
+.first_hidden_layer ul {
+    display: none;
+}
+
+.outer ul{
+    border-left:1px solid grey;
+}

@@ -61,11 +61,22 @@
 
     void listHeaders(string key, Dictionary<string, object> value)
     {
-        <span class="text_container">
+        <span class="text_container" onclick="expand(this, 'first_hidden_layer')">
             @{iconChooser(activeOrNot(key));}
             <span class="text_collection">
-                <span class="impact-id">@key</span>
-                @value["title"]
+
+                <span class="title_field">
+                    <span class="impact-id">@key</span>
+                    @value["title"]
+
+                    @if (value.ContainsKey("subelement"))
+                    {
+                        <span class="close_icon material-icons">expand_less</span>
+                        <span class="open_icon material-icons">expand_more</span>
+                    }
+                </span>
+
+
                 @foreach (var factor in Model.ImpactFactors)
                 {
                     @if (factor.Id == (key))
@@ -93,8 +104,6 @@
         </span>
     }
 
-
-
 }
 
 @{
@@ -116,10 +125,19 @@
             <button id="compact" class="changetab" onclick="impactlist('compact',this)">Kompakt liste</button>
             <button id="full_list" class="changetab" onclick="impactlist('full_list',this)">Full liste</button>
             <br />
-            <div class="outer tabbed_element_container">
+            <ul class="outer tabbed_element_container">
                 @foreach (var (key, value) in impactfactors_json)
                 {
-                    <h3 class="@activeOrNot(key)">@key @value["title"] </h3>
+                <li class="@activeOrNot(key)" >
+                    <span onclick="expand(this, 'first_hidden_layer')">
+                        @key @value["title"]
+                        @if (value.ContainsKey("subelement"))
+                        {
+                            <span class="close_icon material-icons">expand_less</span>
+                            <span class="open_icon material-icons">expand_more</span>
+                         }
+                    </span>
+
                     @if (value.ContainsKey("subelement"))
                     {
                         <ul class="second @activeOrNot(key)">
@@ -128,8 +146,9 @@
                             }
                             @foreach (var (first_k, first_v) in first_layer)
                             {
-                                <li class="@activeOrNot(first_k)" onclick="expand(this, 'show_expand')">
+                                <li class="@activeOrNot(first_k)" >
                                     @{listHeaders(first_k, first_v);}
+
                                     @if (first_v.ContainsKey("subelement"))
                                     {
                                         <ul class="third">
@@ -177,11 +196,13 @@
                             }
                         </ul>
                     }
+
+                </li>
                 }
 
 
 
-            </div>
+            </ul>
 
         </div>
 
@@ -212,6 +233,7 @@
     }
 
     function expand(element, className) {
+        element = element.parentNode;
         if (element.classList.contains(className)) {
             element.classList.remove(className);
         } else {

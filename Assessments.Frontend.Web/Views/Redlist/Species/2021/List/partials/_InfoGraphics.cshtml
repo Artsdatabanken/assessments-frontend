@@ -4,31 +4,32 @@
     // TODO: Get nrs from db to stay updated with any changes in taxonomy
     float total_Norge = 2804;
     float total_Svalbard = 74;
-
 }
 
 <div class="infographics">
 
-    <div class="infograph_element total">
-        <div>
-            <h3>Trua arter i Norge</h3>
-        </div>
-        
+    <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N" asp-route-Endangered="true" class="button infograph_element total">
+
+        <span>Trua arter i Norge  <span class="material-icons">keyboard_arrow_right</span></span>
+
         <div class="infograph_number">
-           @total_Norge
+            @total_Norge
         </div>
-    </div>
 
-    <div class="infograph_element total">
-        <div>
-            <h3>Trua arter på Svalbard</h3>
+    </a>
 
-        </div>
+    <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="S" asp-route-Endangered="true" class="button infograph_element total">
+        <span>
+            Trua arter på Svalbard <span class="material-icons">keyboard_arrow_right</span>
+        </span>
         <div class="infograph_number">
             @total_Svalbard
         </div>
 
-    </div>
+
+    </a>
+
+   
 </div>
 
     

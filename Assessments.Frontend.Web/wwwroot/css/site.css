@@ -126,6 +126,7 @@ option {
     font-size: 20pt;
     position: relative;
     background-image: linear-gradient(#820404, #931a1a);
+    font-family:"Roboto condensed";
 }
 
 
@@ -583,4 +584,14 @@ option {
 
 .header-logo {
     box-sizing: border-box;
+}
+
+
+.sidebarmenu span:first-child {
+    width: calc(100% - 26px);
+    display: inline-block;
+}
+
+.sidebarmenu .material-icons {
+   float:right;
 }

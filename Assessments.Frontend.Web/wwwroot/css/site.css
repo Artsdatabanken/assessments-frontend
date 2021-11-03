@@ -124,7 +124,8 @@ option {
     color: white;
     text-align: center;
     font-size: 20pt;
-    position:relative;
+    position: relative;
+    background-image: linear-gradient(#820404, #931a1a);
 }
 
 
@@ -562,8 +563,11 @@ option {
 
 
 .coverphoto {
-    max-width: 240px;
+    max-width: 180px;
     float: right;
+    display: none;
+    background: gray;
+    margin: 10px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -573,7 +577,10 @@ option {
 
 }
 
-
 .lowercase{
     text-transform:lowercase;
+}
+
+.header-logo {
+    box-sizing: border-box;
 }

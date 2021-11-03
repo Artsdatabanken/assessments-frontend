@@ -192,12 +192,16 @@
     color: white;
 }
 
-.NT,
-.DD ,
-.LC ,
-.NA ,
-.NE {    
+
+.DD,
+.LC,
+.NA,
+.NE {
     color: #282828;
+}
+
+.NT {
+    color: #2b2b2b;
 }
 
 .category_displayer .NT,

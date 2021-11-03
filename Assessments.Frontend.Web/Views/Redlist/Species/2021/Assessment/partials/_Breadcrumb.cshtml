@@ -6,13 +6,11 @@
 <div class="breadcrumbs">
     <ul>
         <li class="lead in-breadcrumb">
-            <a href="/">
-                Rødlista
-            </a>
+            <a asp-controller="Redlist" asp-action="rodlisteforarter">Rødlista for arter</a>
         </li>
         <span class="breadcrumbdivider">&gt; </span>
         <li class="in-breadcrumb">
-            <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">2021</a>
+            <a asp-controller="Redlist" asp-action="Index2021">2021</a>
         </li>
         <span class="breadcrumbdivider">&gt; </span>
         @if (@Model.AssessmentArea == "N")

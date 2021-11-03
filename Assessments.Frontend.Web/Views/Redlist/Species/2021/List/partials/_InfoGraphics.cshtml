@@ -2,9 +2,8 @@
 
 @{ 
     // TODO: Get nrs from db to stay updated with any changes in taxonomy
-    float total = 24320;
-    float redlisted = 5153;
-    float threatened = 2862;
+    float total_Norge = 2804;
+    float total_Svalbard = 74;
 
 }
 
@@ -12,38 +11,24 @@
 
     <div class="infograph_element total">
         <div>
-            <h3>Antall vurderte arter</h3>
-            <span>RE, CR, EN, VU, NT, DD, LC</span>
+            <h3>Trua arter i Norge</h3>
         </div>
         
         <div class="infograph_number">
-           @total
+           @total_Norge
         </div>
     </div>
 
-    <div class="infograph_element redlisted">
+    <div class="infograph_element total">
         <div>
-            <h3>Rødlistede arter</h3>
-            <span>RE, CR, EN, VU, NT, DD</span>
-            
+            <h3>Trua arter på Svalbard</h3>
+
         </div>
         <div class="infograph_number">
-            @redlisted
+            @total_Svalbard
         </div>
 
     </div>
-
-    <div class="infograph_element threatened">
-        <div>
-            <h3>Antall truete arter</h3>
-            <span>CR, EN, VU</span>
-        </div>
-        <div class="infograph_number">
-            @threatened
-        </div>
-
-    </div>
-
 </div>
 
     

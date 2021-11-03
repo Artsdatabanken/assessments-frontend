@@ -2,8 +2,6 @@
     ViewBag.Title = "Rødlista 2021";
 }
 
-
-
 <div class="breadcrumbs">
     <ul>
         <li class="lead in-breadcrumb">
@@ -11,58 +9,85 @@
                 Risikovurderinger
             </a>
         </li>
-        <span class="breadcrumbdivider">&gt; </span>       
-       
+        <span class="breadcrumbdivider">&gt; </span>
+
         <li class="in-breadcrumb currentcrumb">
             Rødlista for arter
         </li>
     </ul>
 </div>
 
-<div class="sidebarmenu"></div>
+<div class="pagecontainer">
+    <partial name="/Views/Redlist/Species/Shared/_PageMenuHistorical.cshtml" />
+    <div class="content-placer bigmid">
+        <div class="mid-content">
+            <div class="page-header">
+                <h1>
+                    Rødlista for arter
+                </h1>
 
-<div class="content-placer">
-    <div class="page-header">
-        <h1>
-            Rødlista for arter
-        </h1>
+                <p>
+                    Etter lansering av Rødlista for arter 2021 i November, begynner arbeidet med å flytte de eldre versjonene inn i den samme løsningen.
+                    inntil det ligger de som eksterne applikasjoner.
+                </p>
+            </div>
 
-        <p>
-            Etter lansering av Rødlista for arter 2021 i November, begynner arbeidet med å flytte de eldre versjonene inn i den samme løsningen.
-            inntil det ligger de som eksterne applikasjoner.
-        </p>
+                <h2> Gjeldende rødliste</h2>
 
-        <div class="page_section">
-
-            <ul class="front_page_links">
-                <li>
-                    <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">
-                        Rølista 2021
+                <p class="page_section">
+                    Gjeldende rødliste ble lansert 24. november, og vil være den gjeldende rødlista frem til neste revisjon i 2027.
+                    <br/>
+                    <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N" class="button tertiary">
+                        Rølista 2021 
                     </a>
-                </li>
+                </p>
 
-                <li>
+                <h2>Alle rødlistene</h2>
+                <p class="page_section">
 
-                    <a href="https://artsdatabanken.no/Rodliste2015/sok">
-                        <span>Rødlista 2015</span>
-                    </a>
-                </li>
 
-                <li>
+                    <ul >
+                        <li>
+                            <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N" class="button tertiary">
+                                Rølista 2021 
+                            </a>
+                        </li>
 
-                    <a href="http://www.artsportalen.artsdatabanken.no/">
-                        Rødlista 2010
-                    </a>
-                </li>
+                        <li>
 
-                <li>
+                            <a href="https://artsdatabanken.no/Rodliste2015/sok" class="button tertiary">
+                                <span>Rødlista 2015</span>
+                            </a>
+                        </li>
 
-                    <a href="https://www.artsdatabanken.no/Pages/201632/Norsk_roedliste_2006">
-                        Rødlista 2006
-                    </a>
-                </li>               
+                        <li>
 
-            </ul>
+                            <a href="http://www.artsportalen.artsdatabanken.no/" class="button tertiary">
+                                Rødlista 2010
+                            </a>
+                        </li>
+
+                        <li>
+
+                            <a href="https://www.artsdatabanken.no/Pages/201632/Norsk_roedliste_2006" class="button tertiary">
+                                Rødlista 2006
+                            </a>
+                        </li>
+
+                    </ul>
+                </p>
+
+
+            </div>
+
+            
+
+
         </div>
     </div>
 </div>
+
+
+
+
+

@@ -164,7 +164,7 @@ namespace Assessments.Frontend.Web.Controllers
             return View("Species/2021/List/List", viewModel);
         }
 
-        [Route("{id:required}")]
+        [Route("2021/{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
             var data = await DataRepository.GetSpeciesAssessments();

@@ -419,10 +419,6 @@ li a span.element_icon {
     flex: 1;
 }
 
-.total {
-    color: inherit;
-}
-
 .total .infograph_number {
     font-size: 40pt;
 }
@@ -440,3 +436,40 @@ li a span.element_icon {
     display:block;
     color: #4c4a48;
 }
+/* 
+
+
+.infographics {
+    background: url(https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/5c1e06b8-fe42-4bd9-a39b-088956a4ede8/d15g8lw-00dd7c8a-7baa-4ddc-a2cf-6eca2edf04fd.jpg/v1/fill/w_900,h_674,q_75,strp/stock__night_sky_by_riddlesolved_d15g8lw-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Njc0IiwicGF0aCI6IlwvZlwvNWMxZTA2YjgtZmU0Mi00YmQ5LWEzOWItMDg4OTU2YTRlZGU4XC9kMTVnOGx3LTAwZGQ3YzhhLTdiYWEtNGRkYy1hMmNmLTZlY2EyZWRmMDRmZC5qcGciLCJ3aWR0aCI6Ijw9OTAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.JCnVXQUgYH-Xy2BqZ1rU21SxJWY33X8VeGItGdFLmKg) no-repeat;
+    
+    background-attachment: fixed;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+}
+
+.infograph_element {
+    background: inherit;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    position: relative;
+    z-index: 1;
+    background: inherit;
+    overflow: hidden;
+    border: none;
+    color: white;
+}
+
+    .infograph_element:before {
+        content: "";
+        position: absolute;
+        background: inherit;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        box-shadow: inset 0 0 2000px rgba(255, 255, 255, .5);
+        filter: blur(10px);
+        margin: -20px;
+    }
+    */

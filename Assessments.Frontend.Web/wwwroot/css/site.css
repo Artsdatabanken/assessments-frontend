@@ -126,6 +126,7 @@ option {
     font-size: 20pt;
     position: relative;
     background-image: linear-gradient(#820404, #931a1a);
+    font-family:"Roboto condensed";
 }
 
 

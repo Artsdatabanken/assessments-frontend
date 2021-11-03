@@ -840,15 +840,15 @@ span.area i {
     border-right:2px solid pink;
 }
 
-.first_hidden_layer .open_icon {
-    display: none;
-}
-
-.material-icons.close_icon {
-    display: none;
-}
-
 .first_hidden_layer .close_icon {
+    display: none;
+}
+
+.material-icons.open_icon {
+    display: none;
+}
+
+.first_hidden_layer .open_icon {
     display: inline-block;
 }
 

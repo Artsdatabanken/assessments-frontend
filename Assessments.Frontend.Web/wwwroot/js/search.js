@@ -1,5 +1,6 @@
 const searchField = document.getElementById("Name");
 const searchUrlBase = "https://artskart.artsdatabanken.no/appapi/api/data/SearchTaxons?";
+const autoCompleteWaitTime = 1500;
 
 const taxonCategories = {
     0: "Unknown",
@@ -30,22 +31,42 @@ const taxonCategories = {
     25: "Form"
 }
 
+const wait = async (ms) => {
+    return new Promise(resolve => {
+        setTimeout(resolve, ms);
+    });
+}
+
+let autoCompleteTs;
 const inputChange = async (e) => {
+    let json;
+    let localTs = Date.now();
+    autoCompleteTs = localTs;
+
+    const hasStoppedTyping = () => localTs === autoCompleteTs;
+
     if (e.target.value.length < 3) {
+        timeStamp = Date.now();
+        return;
+    }
+    searchUrl = searchUrlBase + `name=${e.target.value}`;
+
+    // wait and check if user has stopped typing
+    await wait(autoCompleteWaitTime);
+    if (!hasStoppedTyping()) {
         return;
     }
 
-    searchUrl = searchUrlBase + `name=${e.target.value}`;
-
+    // fetch results from api
     let response = await fetch(searchUrl);
-    let json;
     if (response.ok) {
         json = await response.json();
     }
     json = json.map(el => {
         return {"match": el.MatchedName, "category": taxonCategories[el.TaxonCategory]};
     });
-    console.log(json);
+
+    console.log("json", json);
 }
 
 searchField.addEventListener("input", inputChange);

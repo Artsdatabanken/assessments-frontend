@@ -214,6 +214,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             scientificName = scientificName.Replace("aff.", "</i>aff.<i>");
             scientificName = scientificName.Replace("agg.", "</i>agg.<i>");
             scientificName = scientificName.Replace("coll.", "</i>coll.<i>");
+            scientificName = scientificName.Replace("<i></i>", "");
             return scientificName;
         }
 

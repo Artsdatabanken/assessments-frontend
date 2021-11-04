@@ -209,31 +209,12 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string getScientificNameElement(string scientificName)
         {
-            if (string.IsNullOrEmpty(scientificName))
-                return scientificName;
-            if (scientificName.Substring(0, 1) == "×")
-                return $"{scientificName.Substring(0, 1)}<i>{scientificName.Substring(1)}</i>";
-            if (scientificName.Contains("×"))
-            {
-                int indexAt = scientificName.IndexOf("×");
-                return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 1)}<i>{scientificName.Substring(indexAt + 1)}</i>";
-            }
-            if (scientificName.Contains("aff."))
-            {
-                int indexAt = scientificName.IndexOf("aff.");
-                return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 4)}<i>{scientificName.Substring(indexAt + 4)}</i>";
-            }
-            if (scientificName.Contains("agg."))
-            {
-                int indexAt = scientificName.IndexOf("agg.");
-                return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 4)}";
-            }
-            if (scientificName.Contains("coll."))
-            {
-                int indexAt = scientificName.IndexOf("coll.");
-                return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 5)}<i>{scientificName.Substring(indexAt + 5)}</i>";
-            }
-            return $"<i>{scientificName}</i>";
+            scientificName = "<i>"+scientificName+"</i>";
+            scientificName = scientificName.Replace("×", "</i>×<i>");
+            scientificName = scientificName.Replace("aff.", "</i>aff.<i>");
+            scientificName = scientificName.Replace("agg.", "</i>agg.<i>");
+            scientificName = scientificName.Replace("coll.", "</i>coll.<i>");
+            return scientificName;
         }
 
     }

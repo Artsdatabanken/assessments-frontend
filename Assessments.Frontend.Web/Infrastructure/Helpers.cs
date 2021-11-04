@@ -218,6 +218,11 @@ namespace Assessments.Frontend.Web.Infrastructure
                 int indexAt = scientificName.IndexOf("×");
                 return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 1)}<i>{scientificName.Substring(indexAt + 1)}</i>";
             }
+            if (scientificName.Contains("aff."))
+            {
+                int indexAt = scientificName.IndexOf("aff.");
+                return $"<i>{scientificName.Substring(0, indexAt)}</i>{scientificName.Substring(indexAt, 4)}<i>{scientificName.Substring(indexAt + 4)}</i>";
+            }
             if (scientificName.Contains("agg."))
             {
                 int indexAt = scientificName.IndexOf("agg.");

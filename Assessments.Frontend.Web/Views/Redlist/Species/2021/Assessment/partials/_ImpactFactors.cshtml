@@ -69,10 +69,19 @@
         }
         else
         {
-            <span class="material-icons">
-                arrow_left
+            <span class="material-icons" style="font-size:4px;padding:10px;">
+                circle
             </span>
         }
+    }
+
+    string isClickableClass(Dictionary<string, object> value)
+    {
+        @if (value.ContainsKey("subelement"))
+        {
+            return "clickable";
+        }
+        return "";
     }
 
     void listHeaders(string key, Dictionary<string, object> value)
@@ -88,7 +97,7 @@
         <span class="text_container @has_table" onclick="expand(this, 'first_hidden_layer')">
 
             <span class="text_collection">
-                <span class="title_field">
+                <span class="title_field  @isClickableClass(value)">
                     @{ toggleChooser(value);}
                     @value["title"]
                     @{iconChooser(activeOrNot(key));}
@@ -145,10 +154,10 @@
                 @foreach (var (key, value) in impactfactors_json)
                 {
                     <li class="@activeOrNot(key)">
-                        <span onclick="expand(this, 'first_hidden_layer')" class="text_container">
+                        <span onclick="expand(this, 'first_hidden_layer')" class="text_container @isClickableClass(value)">
                             @{ toggleChooser(value);}
                             @value["title"]
-
+                            @{iconChooser(activeOrNot(key));}
                         </span>
 
                         @if (value.ContainsKey("subelement"))

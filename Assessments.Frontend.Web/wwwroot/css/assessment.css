@@ -645,7 +645,10 @@ span.area i {
 
 /* IMPACT FACTORS */
 
-/* COMPACT (normal) version */
+/* NORMAL VERSION */
+
+
+/* STYLING */
 .impact h3 {
     display: block;
     margin: 0px;
@@ -657,12 +660,7 @@ span.area i {
     color:black;
 }
 
-.impact .second.inactive {
-    display: none;
-}
-
 .impact li{
-    display:block;
     padding:2px;
     padding-left:20px;
 }
@@ -685,6 +683,7 @@ span.area i {
 
 .impact .text_container {
     display: flex;
+    padding-bottom:2px;
 }
 
 .impact .text_collection {
@@ -692,35 +691,86 @@ span.area i {
     padding-left:5px;
 }
 
+
+.impact .material-icons {
+    vertical-align: bottom;
+}
+
+
+.has_table {
+    border: 1px solid lightgrey;
+}
+
+    .has_table .title_field {
+        padding: 10px;
+        border-bottom: 1px solid lightgray;
+        display: block;
+    }
+
+/* VISIBILITY */
+
+.impact .second.inactive {
+    display: none;
+}
+
+.impact li {
+    display: block;
+}
+
+
 .impact .final ul {
     display: none;
 }
 
 
 /* SUMMARY VERSION */
-
-
 .summary .material-icons,
-.summary h3.inactive,
 .summary li.inactive {
     display: none;
 }
 
-.summary h3.active {
-    color: #777368;
+.summary li.active {
+    font-weight:normal;
 }
 
-/* FULL VERSION */
 
+
+/* FULL VERSION */
 .full_list .second.inactive,
 .full_list li.inactive li.inactive,
-.full_list .final ul{
-    display: block;    
+.full_list .final ul {
+    display: block;
+}
+
+.full_list .text_container {
+    border-bottom: 1px solid #dfdddd;
 }
 
 .show_expand ul{
     visibility:hidden;
 }
+
+
+
+/* HANDLING TABS ON ASSESSMENT */
+
+.first_hidden_layer .close_icon {
+    display: none;
+}
+
+.material-icons.open_icon {
+    display: none;
+}
+
+.first_hidden_layer .open_icon {
+    display: inline-block;
+}
+
+.full_list li.first_hidden_layer li.inactive,
+.first_hidden_layer ul {
+    display: none;
+}
+
 
 
 /* All */
@@ -833,30 +883,3 @@ span.area i {
     color: white;
 }
 
-
-/* HANDLING TABS ON ASSESSMENT */
-
-.first_hidden_layer{
-    border-right:2px solid pink;
-}
-
-.first_hidden_layer .close_icon {
-    display: none;
-}
-
-.material-icons.open_icon {
-    display: none;
-}
-
-.first_hidden_layer .open_icon {
-    display: inline-block;
-}
-
-.full_list li.first_hidden_layer li.inactive,
-.first_hidden_layer ul {
-    display: none;
-}
-
-.outer ul{
-    border-left:1px solid grey;
-}

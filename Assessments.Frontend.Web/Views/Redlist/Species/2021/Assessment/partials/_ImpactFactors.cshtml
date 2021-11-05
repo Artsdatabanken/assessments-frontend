@@ -45,6 +45,7 @@
                 done
             </span>
         }
+        /*
         else if (@compare == "maybe")
         {
             <span class="material-icons">
@@ -56,7 +57,7 @@
             <span class="material-icons" style="color:darkred">
                 close
             </span>
-        }
+        }*/
     }
 
     void toggleChooser(Dictionary<string, object> value)
@@ -68,20 +69,29 @@
         }
         else
         {
-            <span class="material-icons" style="opacity:0">
-                circle
+            <span class="material-icons">
+                arrow_left
             </span>
         }
     }
 
     void listHeaders(string key, Dictionary<string, object> value)
     {
-        <span class="text_container" onclick="expand(this, 'first_hidden_layer')">
-            @{iconChooser(activeOrNot(key));}
+        string has_table = "";
+        foreach (var factor in Model.ImpactFactors)
+        {
+            @if (factor.Id == (key))
+            {
+                has_table = "has_table";
+            }
+        }
+        <span class="text_container @has_table" onclick="expand(this, 'first_hidden_layer')">
+
             <span class="text_collection">
                 <span class="title_field">
                     @{ toggleChooser(value);}
                     @value["title"]
+                    @{iconChooser(activeOrNot(key));}
                 </span>
 
 
@@ -91,15 +101,15 @@
                     {
                         <div class="impact_table">
                             <div>
-                                <b>Omfang</b>
+                                <b>Omfang</b><br />
                                 <span>@factor.PopulationScope</span>
                             </div>
                             <div class="sideborders">
-                                <b>Alvorlighetsgrad</b>
+                                <b>Alvorlighetsgrad</b><br />
                                 <span>@factor.Severity</span><br />
                             </div>
                             <div>
-                                <b>Tidsrom</b>
+                                <b>Tidsrom</b><br />
                                 @factor.TimeScope
                             </div>
                         </div>
@@ -129,14 +139,13 @@
             </p>
 
             <button id="summary" class="changetab active" onclick="impactlist('summary',this)">Oppsummering</button>
-            <button id="compact" class="changetab" onclick="impactlist('compact',this)">Kompakt liste</button>
             <button id="full_list" class="changetab" onclick="impactlist('full_list',this)">Full liste</button>
             <br />
             <ul class="outer tabbed_element_container">
                 @foreach (var (key, value) in impactfactors_json)
                 {
                     <li class="@activeOrNot(key)">
-                        <span onclick="expand(this, 'first_hidden_layer')">
+                        <span onclick="expand(this, 'first_hidden_layer')" class="text_container">
                             @{ toggleChooser(value);}
                             @value["title"]
 
@@ -215,19 +224,19 @@
 <script>
     // See more text by altering css of the clicked element's top parent node
     document.getElementById('impactfactors').classList.add("summary");
+    var first = true;
 
     function impactlist(which, button) {
         document.getElementById('summary').classList.remove("active");
         document.getElementById('full_list').classList.remove("active");
-        document.getElementById('compact').classList.remove("active");
 
         if (which == 'full_list') {
             document.getElementById('impactfactors').classList.add("full_list");
             document.getElementById('impactfactors').classList.remove("summary");
-        }
-        if (which == 'compact') {
-            document.getElementById('impactfactors').classList.remove("full_list");
-            document.getElementById('impactfactors').classList.remove("summary");
+            if (first == true) {
+                first_close();
+            }
+            first = false;
         }
         if (which == 'summary') {
             document.getElementById('impactfactors').classList.add("summary");
@@ -242,6 +251,14 @@
             element.classList.remove(className);
         } else {
             element.classList.add(className);
+        }
+    }
+
+    function first_close() {
+        var elList = document.getElementsByClassName("inactive");
+        for (var i = 0; i < elList.length; i++) {
+            console.log("RUNNING");
+            elList[i].classList.add("first_hidden_layer");
         }
     }
 </script>

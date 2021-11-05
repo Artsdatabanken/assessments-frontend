@@ -1,7 +1,7 @@
 const searchField = document.getElementById("Name");
 const autocompleteList = document.getElementById("autocomplete_list_ul");
 const searchUrlBase = "https://artskart.artsdatabanken.no/appapi/api/data/SearchTaxons?";
-const autoCompleteWaitTime = 1500;
+const autoCompleteWaitTime = 1000;
 
 const taxonCategories = {
     0: "Unknown",
@@ -38,20 +38,49 @@ const wait = async (ms) => {
     });
 }
 
+const formatScientificName = (name) => {
+    if (!name) return;
+    name = `<i>${name}</i>`
+    name = name.replace("×", "</i>×<i>");
+    name = name.replace("aff.", "</i>aff.<i>");
+    name = name.replace("agg.", "</i>agg.<i>");
+    name = name.replace("coll.", "</i>coll.<i>");
+    name = name.replace("<i></i>", "");
+    return name;
+}
+
+const formatListElements = (el) => {
+    if (!el.PopularName) {
+        return `${formatScientificName(el.ScientificName)} <span>(${el.TaxonCategory})</span>`
+    }
+    return `<span>${el.PopularName}</span> ${formatScientificName(el.ScientificName)} <span>(${el.TaxonCategory})</span>`
+}
+
 const createList = (json) => {
     autocompleteList.innerHTML = "";
     json.forEach(el => {
         const li = document.createElement("li");
-        li.innerHTML = `${el.MatchedName} (${el.TaxonCategory})`;
+        li.innerHTML = formatListElements(el);
         li.classList.add("search_autocomplete");
         li.tabIndex = 1;
         li.onclick = () => {
-            searchField.value = el.MatchedName;
+            searchField.value = el.ScientificName;
             document.getElementById("search_and_filter_form").submit();
         }
         autocompleteList.appendChild(li);
     });
     autocompleteList.style["display"] = "block";
+}
+
+const removeList = () => {
+    autocompleteList.innerHTML = "";
+    autocompleteList.style["display"] = "none";
+}
+
+const getListValues = (json) => {
+    return json.map(el => {
+        return { "PopularName": el.PopularName, "TaxonCategory": taxonCategories[el.TaxonCategory], "ScientificName": el.ScientificName };
+    });
 }
 
 let autoCompleteTs;
@@ -64,6 +93,7 @@ const inputChange = async (e) => {
     
     if (e.target.value.length < 3) {
         timeStamp = Date.now();
+        removeList();
         return;
     }
     searchUrl = searchUrlBase + `name=${e.target.value}`;
@@ -79,11 +109,10 @@ const inputChange = async (e) => {
     if (response.ok) {
         json = await response.json();
     }
-    json = json.map(el => {
-        return { "MatchedName": el.MatchedName, "TaxonCategory": taxonCategories[el.TaxonCategory]};
-    });
+    
+    jsonList = getListValues(json);
 
-    createList(json);
+    createList(jsonList);
 }
 
 searchField.addEventListener("input", inputChange);

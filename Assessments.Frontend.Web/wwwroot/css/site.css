@@ -375,11 +375,12 @@ option {
     border: none;
 }
 
+.clickable:hover,
 .button:hover,
 .main button:hover {
     background: #4c4a48;
     color: #fff;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .main .closebutton {
@@ -590,7 +591,6 @@ option {
     .coverphoto {
        display:none;
     }
-
 }
 
 .lowercase{

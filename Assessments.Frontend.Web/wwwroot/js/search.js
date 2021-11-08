@@ -116,3 +116,9 @@ const inputChange = async (e) => {
 }
 
 searchField.addEventListener("input", inputChange);
+
+window.onclick = (e) => {
+    if (!searchField.contains(e.target) && !autocompleteList.contains(e.target)) {
+        removeList();
+    }
+}

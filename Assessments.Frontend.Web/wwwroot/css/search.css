@@ -1,6 +1,10 @@
 
 /* SEARCH FIELD REDLIST */
 
+.no_results {
+    padding: 10px 0;
+}
+
 /* Container div for anything search*/
 .list-search {
     text-align: center;

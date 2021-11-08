@@ -17,7 +17,8 @@
 
         </li>
 
-
+    @if (Model.Redlist2021Results.Count > 0)
+    {
         @foreach (var item in Model.Redlist2021Results)
         {
             string speciesgroupname = @item.SpeciesGroup.ToLower();
@@ -62,4 +63,9 @@
                 </a>
             </li>
         }
+    }
+    else
+    {
+        <div class="no_results">@ViewBag.glossary["oneliners"]["noResults"]</div>
+    }
     </ul>

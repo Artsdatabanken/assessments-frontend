@@ -661,6 +661,11 @@ span.area i {
     display: none;
 }
 
+.impact .text_collection,
+impact .title_field {
+    width:100%;
+}
+
 .impact .text_container {
     display: flex;
     padding-bottom: 2px;
@@ -671,9 +676,6 @@ span.area i {
     padding-left:5px;
 }
 
-.impact .material-icons {
-    vertical-align: bottom;
-}
 
 /* VISIBILITY */
 
@@ -690,8 +692,28 @@ span.area i {
     display: none;
 }
 
+.impact .circle {
+    font-size: 4px;
+    padding: 10px;
+}
+
+.text_icon,
+.text_text {
+    display: inline-block;
+}
+
+.text_icon{
+    
+    vertical-align: top;
+}
+
+
+.text_text {
+    width:calc(100% - 28px);
+}
 
 /* SUMMARY VERSION */
+.summary .impact_v,
 .summary .material-icons,
 .summary li.inactive {
     display: none;
@@ -703,6 +725,7 @@ span.area i {
 
 
 
+
 /* FULL VERSION */
 .full_list .second.inactive,
 .full_list li.inactive li.inactive,
@@ -710,18 +733,41 @@ span.area i {
     display: block;
 }
 
-.full_list .text_container {
-    border-bottom: 1px solid #dfdddd;
+.impact ul,
+.impact_table{
+    border-left: 1px solid #dfdddd;
 }
 
-.show_expand ul{
-    visibility:hidden;
+ul.fourth,
+ul.second {
+    border-color: lightgrey;
 }
 
+.show_expand ul {
+    visibility: hidden;
+}
 
+.impact_v {
+    color: white;
+    background: #138454;
+    border-radius: 8px;
+    overflow: visible;
+    height: 20px;
+    width: 20px;
+    position: relative;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.impact_v .material-icons {
+    position: absolute;
+    top: 0px;
+    left: -1px;
+    font-size: 20px;
+}
 
 /* HANDLING TABS ON ASSESSMENT */
-
 .first_hidden_layer .close_icon {
     display: none;
 }

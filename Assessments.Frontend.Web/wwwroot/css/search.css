@@ -44,6 +44,12 @@
     background: pink;
 }
 
+@media only screen and (max-width: 410px) {
+    input#Name {
+        height: 100%;
+    }
+}
+
 /* Input field */
 .list-search input {
     display: inline-block;
@@ -62,9 +68,14 @@
     max-width: 100%;
 }
 
+.searchfield_and_button {
+    display: flex;
+}
+
 /* Button*/
 .searchfield button {
     width: 100px;
+    min-width: 90px;
     vertical-align: top;
     margin: 0;
     height: 100%;
@@ -73,7 +84,7 @@
 /* Autocomplete list */
 #autocomplete_list_ul {
     display: none;
-    width: 285px;
+    width: calc(100% - 90px);
     border: 1px solid #3d3b3a;
     z-index: 10;
 }

@@ -1,7 +1,45 @@
 ﻿@model SpeciesAssessment2021
 @*
     HEADER BLOCK FOR PAGE
+    TODO:
+    - NEDGRADERT : ankerlenke
+    - RL-for arter osv : lenke
+    - Troliig utdødd, egen setning
+    - Norge/Svalbard inn i ingress
+    + kriteriesetning
+    + setning om degradering
+
+
+    GOOGLE SEO må tas separat -> heading og tekst til søk
+
 *@
+
+@{
+    // Obtain which criteria are used and their titles.
+    var subcriteria = Criteria.sortCriteria(Model.CriteriaSummarized);
+    string sentence = "";
+    @if (!string.IsNullOrWhiteSpace(Model.CriteriaSummarized))
+    {
+        @foreach (var (key, value) in subcriteria)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {                
+                string current = ViewBag.kriterier[key]["title"];                
+                sentence.Replace(" og ", ", ");               
+                if (sentence != "")
+                {
+                    sentence += " og ";
+                }
+                sentence += current.ToLower();
+            }
+        }
+        if(Model.Category.Length > 2)
+        {
+            sentence += ", og ble nedgradert på grunn av populasjoner i nærliggende regioner";
+        }
+        sentence = "Kategorien kommer av " + sentence + ".";
+    }
+}
 
 <div class="page_section">
     <p>
@@ -15,16 +53,19 @@
         }
         else
         {
+
+
             <span>Arten er </span>
             @if (Model.Category != "NA" && Model.Category != "NE")
             {
                 <span>vurdert til </span>
             }
-            <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span> 
-            <span>
-                for Norsk rødliste for arter 2021.
-                Rødlista for arter er en oversikt over arter som har risiko for å dø ut fra Norge.
+            <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span><span>
+                for Norsk rødliste for arter 2021. @sentence
             </span>
+
+
+
         }
     </p>
 </div>

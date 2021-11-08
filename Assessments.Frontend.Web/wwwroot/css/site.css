@@ -194,7 +194,7 @@ option {
     }
 
     .content-placer {
-        padding-top: 20px;
+        padding-top: 33px;
         width: calc(75% - 4px);
         display: flex;
     }

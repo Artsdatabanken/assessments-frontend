@@ -757,5 +757,40 @@ namespace Assessments.Mapping.Helpers
                 // do nothing here or introduce state 2?
             }
         }
+
+        public static void FixSomeTaxonomy(Rodliste2019 src, SpeciesAssessment2021 dest)
+        {
+            if (src.TaxonomyInfo!= null)
+            {
+                var rank = src.TaxonomyInfo.Rank.Substring(0,1).ToUpper() + src.TaxonomyInfo.Rank.Substring(1);
+                if (dest.TaxonRank != rank)
+                {
+                    dest.TaxonRank = rank;
+                }
+
+                var subgenus = src.TaxonomyInfo.HigherClassification.SingleOrDefault(x => x.Rank.ToLowerInvariant() == "subgenus");
+                if (subgenus != null)
+                {
+                    switch (src.TaxonomyInfo.Rank)
+                    {
+                        case "species":
+                            var names = src.TaxonomyInfo.ScientificName.Split(new []{" "}, StringSplitOptions.RemoveEmptyEntries);
+                            if (names.Length == 2)
+                            {
+                                dest.ScientificName = names[0] + " (" + subgenus.ScientificName + ") " + names.Last();
+                            }
+                            else
+                            {
+                                throw new Exception("ikke støttet pr nå"); // kommer trolig ikke til å dukke opp
+                            }
+                            break;
+                        case "subspecies":
+                            throw new Exception("ikke støttet pr nå");
+                        default:
+                            throw new Exception("ikke støttet pr nå");
+                    }
+                }
+            }
+        }
     }
 }

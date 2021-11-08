@@ -130,6 +130,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                         x.ScientificName.ToLower() == name);
                     break;
                 default:
+                    query = query.OrderBy(x => x.ScientificName);
                     break;
             }
             return query;

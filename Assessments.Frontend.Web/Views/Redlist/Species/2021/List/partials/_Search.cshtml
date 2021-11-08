@@ -2,13 +2,15 @@
 
 <div class="list-search">
     <div class="searchfield">
-        <input asp-for="Name" placeholder="Søk i Rødlista 2021" />
-        <button class="primary" type="submit">
-            <span class="material-icons">
-                search
-            </span>
-            Søk
-        </button>
-
+        <div>
+            <input asp-for="Name" autocomplete="off" placeholder="Søk i Rødlista 2021" />
+            <button class="primary" type="submit">
+                <span class="material-icons">
+                    search
+                </span>
+                Søk
+            </button>
+        </div>
+        <ul id="autocomplete_list_ul"></ul>
     </div>
 </div>

@@ -29,6 +29,7 @@
 /* Container div for input + button*/
 .searchfield {
     display: flex;
+    flex-direction: column;
     width: 100%;
     vertical-align: top;
     margin: 0;
@@ -62,5 +63,29 @@
     width: 100px;
     vertical-align: top;
     margin: 0;
+    height: 100%;
 }
 
+/* Autocomplete list */
+#autocomplete_list_ul {
+    display: none;
+    width: 285px;
+    border: 1px solid #3d3b3a;
+    z-index: 10;
+}
+
+.search_autocomplete {
+    padding: 5px;
+    border-top: 1px solid #3d3b3a;
+    min-height: 40px;
+    font-size: 10pt;
+    text-align: left;
+    list-style-type: none;
+    background-color: white;
+    vertical-align: middle;
+}
+
+.search_autocomplete:focus,
+.search_autocomplete:hover {
+    background-color: lightgray;
+}

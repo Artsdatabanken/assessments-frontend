@@ -142,8 +142,7 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => x.PresumedExtinct);
 
             // Sort
-            if (!string.IsNullOrEmpty(viewModel.Name) || !string.IsNullOrEmpty(viewModel.SortBy))
-                query = Helpers.sortResults(query, viewModel.Name, viewModel.SortBy);
+            query = Helpers.sortResults(query, viewModel.Name, viewModel.SortBy);
 
             if (export)
             {

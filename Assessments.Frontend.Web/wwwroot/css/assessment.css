@@ -625,21 +625,6 @@ span.area i {
 
 /* IMPACT FACTORS */
 
-/* NORMAL VERSION */
-
-
-/* STYLING */
-.impact h3 {
-    display: block;
-    margin: 0px;
-    margin-top: 5px;
-    padding: 0px;
-}
-
-.impact h3.active {
-    color:black;
-}
-
 .impact li{
     padding:2px;
     padding-left:20px;
@@ -654,11 +639,6 @@ span.area i {
 .impact li.inactive {
     color: grey;
     font-weight: normal;
-}
-
-.impact-id,
-.impact li.inactive li.inactive {
-    display: none;
 }
 
 .impact .text_collection,
@@ -676,20 +656,17 @@ impact .title_field {
     padding-left:5px;
 }
 
-
-/* VISIBILITY */
-
-.impact .second.inactive {
-    display: none;
+.text_icon,
+.text_text {
+    display: inline-block;
 }
 
-.impact li {
-    display: block;
+.text_icon {
+    vertical-align: top;
 }
 
-
-.impact .final ul {
-    display: none;
+.text_text {
+    width: calc(100% - 28px);
 }
 
 .impact .circle {
@@ -697,19 +674,26 @@ impact .title_field {
     padding: 10px;
 }
 
-.text_icon,
-.text_text {
-    display: inline-block;
+.impact ul,
+.impact_table {
+    border-left: 1px solid #dfdddd;
 }
 
-.text_icon{
-    
-    vertical-align: top;
+ul.fourth,
+ul.second {
+    border-color: lightgrey;
 }
 
+/* VISIBILITY */
 
-.text_text {
-    width:calc(100% - 28px);
+.impact li.inactive li.inactive,
+.impact .second.inactive,
+.impact .final ul {
+    display: none;
+}
+
+.impact li {
+    display: block;
 }
 
 /* SUMMARY VERSION */
@@ -719,28 +703,25 @@ impact .title_field {
     display: none;
 }
 
-.summary li.active {
-    font-weight:normal;
+.summary .clickable:hover{
+    background:inherit;
+    color:inherit;
+    cursor:inherit;
 }
 
+.summary li.active {
+    font-weight: normal;
+}
 
-
+.main .changetab {
+    visibility: hidden;
+}
 
 /* FULL VERSION */
 .full_list .second.inactive,
 .full_list li.inactive li.inactive,
 .full_list .final ul {
     display: block;
-}
-
-.impact ul,
-.impact_table{
-    border-left: 1px solid #dfdddd;
-}
-
-ul.fourth,
-ul.second {
-    border-color: lightgrey;
 }
 
 .show_expand ul {
@@ -784,7 +765,6 @@ ul.second {
 .first_hidden_layer ul {
     display: none;
 }
-
 
 
 /* All */

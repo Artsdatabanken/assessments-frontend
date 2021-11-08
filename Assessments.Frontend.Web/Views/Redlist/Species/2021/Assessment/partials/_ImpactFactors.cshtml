@@ -48,19 +48,7 @@
                 </span>
             </span>
         }
-        /*
-        else if (@compare == "maybe")
-        {
-            <span class="material-icons">
-                pause
-            </span>
-        }
-        else
-        {
-            <span class="material-icons" style="color:darkred">
-                close
-            </span>
-        }*/
+
     }
 
     void toggleChooser(Dictionary<string, object> value)
@@ -236,11 +224,13 @@
     }
 }
 <script>
-    // See more text by altering css of the clicked element's top parent node
-    document.getElementById('impactfactors').classList.add("summary");
-    var first = true;
 
+    // JS only relevant for users with javascript. 
+
+    var first = true;
+     
     function impactlist(which, button) {
+        // See more text by altering css of the clicked element's top parent node
         document.getElementById('summary').classList.remove("active");
         document.getElementById('full_list').classList.remove("active");
 
@@ -261,18 +251,32 @@
 
     function expand(element, className) {
         element = element.parentNode;
-        if (element.classList.contains(className)) {
-            element.classList.remove(className);
-        } else {
-            element.classList.add(className);
-        }
+        var mainparent = document.getElementById('impactfactors').classList;
+        // Never expand or collapse summary items
+        if (!mainparent.contains("summary")) {
+            if (element.classList.contains(className)) {
+                element.classList.remove(className);
+            } else {
+                element.classList.add(className);
+            }
+        }        
     }
 
     function first_close() {
         var elList = document.getElementsByClassName("inactive");
         for (var i = 0; i < elList.length; i++) {
-            console.log("RUNNING");
             elList[i].classList.add("first_hidden_layer");
         }
     }
+
+    function showTabButtons() {
+        var elList = document.getElementsByClassName("changetab");
+        for (var i = 0; i < elList.length; i++) {
+            elList[i].style.visibility = "visible";
+        }
+    }
+
+    showTabButtons();
+    document.getElementById('impactfactors').classList.add("summary");
+    
 </script>

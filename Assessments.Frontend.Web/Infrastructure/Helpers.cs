@@ -103,6 +103,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                     query = query
                         .OrderByDescending(x => x.PopularName.ToLower() == name ||
                         x.ScientificName.ToLower() == name)
+                        .ThenByDescending(x => x.VurdertVitenskapeligNavnHierarki.ToLower().Contains('/' + name + '/'))
                         .ThenBy(x => x.ScientificName);
                     break;
                 case (false, nameof(SpeciesAssessment2021.PopularName)):

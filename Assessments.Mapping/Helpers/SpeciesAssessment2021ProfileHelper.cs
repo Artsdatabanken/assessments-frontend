@@ -798,7 +798,7 @@ namespace Assessments.Mapping.Helpers
                         var names = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                         if (names.Length == 3)
                         {
-                            var test = names[0] + " " + names[1] + " sp. " + names[2];
+                            dest.ScientificName = names[0] + " " + names[1] + " sp. " + names[2];
                         }
                         else
                         {
@@ -809,7 +809,7 @@ namespace Assessments.Mapping.Helpers
                         var names1 = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                         if (names1.Length == 3)
                         {
-                            var test = names1[0] + " " + names1[1] + " v. " + names1[2];
+                            dest.ScientificName = names1[0] + " " + names1[1] + " v. " + names1[2];
                         }
                         else
                         {
@@ -820,7 +820,7 @@ namespace Assessments.Mapping.Helpers
                         var names2 = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                         if (names2.Length == 3)
                         {
-                            var test = names2[0] + " " + names2[1] + " f. " + names2[2];
+                            dest.ScientificName = names2[0] + " " + names2[1] + " f. " + names2[2];
                         }
                         else
                         {

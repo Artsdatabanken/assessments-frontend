@@ -791,6 +791,43 @@ namespace Assessments.Mapping.Helpers
                             throw new Exception("ikke støttet pr nå");
                     }
                 }
+
+                switch (dest.TaxonRank)
+                {
+                    case "SubSpecies":
+                        var names = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                        if (names.Length == 3)
+                        {
+                            var test = names[0] + " " + names[1] + " sp. " + names[2];
+                        }
+                        else
+                        {
+                            throw new Exception("Should not happen");
+                        }
+                        break;
+                    case "Variety":
+                        var names1 = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                        if (names1.Length == 3)
+                        {
+                            var test = names1[0] + " " + names1[1] + " v. " + names1[2];
+                        }
+                        else
+                        {
+                            throw new Exception("Should not happen");
+                        }
+                        break;
+                    case "Form":
+                        var names2 = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                        if (names2.Length == 3)
+                        {
+                            var test = names2[0] + " " + names2[1] + " f. " + names2[2];
+                        }
+                        else
+                        {
+                            throw new Exception("Should not happen");
+                        }
+                        break;
+                }
             }
         }
     }

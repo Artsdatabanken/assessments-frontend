@@ -822,9 +822,13 @@ namespace Assessments.Mapping.Helpers
                         {
                             dest.ScientificName = names2[0] + " " + names2[1] + " f. " + names2[2];
                         }
+                        if (names2.Length == 4)
+                        {
+                            dest.ScientificName = names2[0] + " " + names2[1] + " f. " + names2[2] + " " + names2[3];
+                        }
                         else
                         {
-                            throw new Exception("Should not happen");
+                            //throw new Exception("Should not happen");
                         }
                         break;
                 }

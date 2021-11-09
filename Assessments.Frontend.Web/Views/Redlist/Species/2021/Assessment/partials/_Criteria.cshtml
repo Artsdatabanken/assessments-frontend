@@ -27,7 +27,7 @@
                 return Model.B1.Statistics;
             case "B2":
                 return Model.B2.Statistics;
-            case "BAii":
+            case "Baii":
                 return Model.BAii.Statistics;
             case "C":
                 return Model.C.Statistics;
@@ -59,7 +59,7 @@
                 return Model.B1.PreliminaryCategory;
             case "B2":
                 return Model.B2.PreliminaryCategory;
-            case "BAii":
+            case "Baii":
                 return Model.BAii.PreliminaryCategory;
             case "C":
                 return Model.C.PreliminaryCategory;
@@ -243,6 +243,7 @@
             {
                 estimated = @quantile.Probable;
             }
+
             <p>
                 <span>Estimert verdi: @quantile.Calculated @Html.Raw(unit).</span><br />
                 <span>Verdien antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />
@@ -469,7 +470,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                                         <span class="title_field">
                                                                             @{expandOrBullet(false);}
                                                                             <span class="text_text">
-                                                                                @subkey - <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
+                                                                              @subkey - <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
                                                                             </span>
                                                                         </span>
                                                                         @{ getQuantile(subval, modelkey, modelkey);}
@@ -548,18 +549,22 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
                                                                         @foreach (var (subkey, subvalue) in subdict)
                                                                         {
-                                                                            <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
-                                                                                <span class="text_container">
-                                                                                    <span class="text_collection">
-                                                                                        <span class="text_text">
-                                                                                            @{expandOrBullet(false);}
-                                                                                            @subkey - @subvalue["title"]
-                                                                                        </span>
-                                                                                        @{ iconChooser(Criteria.inList(subkey, clean_list)); }
+                                                                            var modelkey = key + k + subkey;
+                                                                        <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
+                                                                            <span class="text_container">
+                                                                                <span class="text_collection">
+                                                                                    <span class="text_text">
+                                                                                        @{expandOrBullet(false);}
+                                                                                        @subkey - @subvalue["title"]
+
+                                                                                        @modelkey
                                                                                     </span>
+                                                                                    @{ iconChooser(Criteria.inList(subkey, clean_list)); }
                                                                                 </span>
 
-                                                                            </li>
+                                                                            </span>
+                                                                            @{ getQuantile(subvalue, modelkey, modelkey);}
+                                                                        </li>
                                                                         }
                                                                     </ul>
                                                                 }

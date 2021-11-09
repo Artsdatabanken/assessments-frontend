@@ -686,6 +686,18 @@ ul.second {
     font-weight: normal;
 }
 
+.tabbed_element_container .b_summary {
+    border: none;
+    padding-left: 0;
+    display:flex;
+    padding-top:5px;
+}
+
+.b_summary .graphic_element{
+    margin-left:0px;
+    margin-right:10px;
+}
+
 .main .changetab {
     visibility: hidden;
 }

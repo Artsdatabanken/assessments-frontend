@@ -400,128 +400,132 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
             @foreach (var (key, value) in criteria)
             {
                 string isactive = @Criteria.inString(key, @Model.CriteriaSummarized);
-                <li class="@isactive">
-                    <span class="text_container"
-                          onclick="expandCriteria(this, 'first_hidden_layer')">
-                        @{ expandOrBullet(true);}
-                        <span class="title_field clickable">
-                            @key - @value["title"]
-                            @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
-                        </span>
+            <li class="@isactive">
+                <span class="text_container"
+                      onclick="expandCriteria(this, 'first_hidden_layer')">
+                    @{ expandOrBullet(true);}
+                    <span class="title_field clickable">
+                        @key - @value["title"]
+                        @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
                     </span>
-                    <p>
-                        @{ hasKey("description", @value);}
-                        @{ getModel(key);}
-                        @{ getQuantile(value, key, key);}
-                    </p>
+                </span>
+                <p>
+                    @{ hasKey("description", @value);}
+                    @{ getModel(key);}
+                    @{ getQuantile(value, key, key);}
+                </p>
 
-                    <!-- SUBCRITERIA (A1, ... D2) -->
-                    @if (@value.ContainsKey("subcriteria"))
-                    {
-                        var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
-                        <ul class="second">
-                            @foreach (var (k, v) in thesubcriteria)
-                            {
-                                var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
-                                <li class=" @subcriteria_isactive">
-                                    <span class="text_container">
-                                        <span class="text_collection">
-                                            <span class="title_field clickable" onclick="expandCriteria(this, 'first_hidden_layer')">
-                                                
-                                                @{
-                                                   // TODO: BETTER CHECK. We actually want to check if abything below is empty...    
-                                                    expandOrBullet(true);
-                                                  }
-                                                <span class="text_text">
-                                                    @k - @v["title"]
-                                                    @{iconChooser(subcriteria_isactive);}
-                                                </span>
-                                            </span>
-                                            <p>
-                                                @{ hasKey("description", v);}
-                                                @{ getGenerationTime(key, k);}
-                                                @{ getModel(k);}
-                                            </p>
-                                            @{ getQuantile(v, k, key);}
-
-                                            <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
-
-                                            @if (v.ContainsKey("subsub"))
-                                            {
-                                                string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
-                                                var subdict = parseDictNested(@v["subsub"].ToString());
-                                                @if (currentlist.Length > 0)
-                                                {
-                                                    @if (key == "A")
-                                                    {
-                                                        <p class="subheading"> <b>Kunnskapsgrunnlag</b></p>
-                                                    }
-
-
-                                                    <ul class="third activeornot">
-                                                        @foreach (var (subkey, subval) in subdict)
-                                                        {
-                                                            string modelkey = k + subkey;
-                                                            <li class="@Criteria.inList(subkey, currentlist)">
-                                                                <span class="text_container">
-                                                                    <span class="text_collection">
-                                                                        <span class="title_field">
-                                                                            @{expandOrBullet(false);}
-                                                                            <span class="text_text">
-                                                                                @subkey - <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
-                                                                            </span>
-                                                                        </span>
-                                                                        @{ getQuantile(subval, modelkey, modelkey);}
-                                                                    </span>
-                                                                    <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
-                                                                </span>
-                                                            </li>
-                                                        }
-                                                    </ul>
-
-
-                                                }
-                                            }
-
-                                        </span>
-                                    </span>
-
-                                </li>
-                            }
-                        </ul>
-                    }
-
-                    
-
-                    @if (@value.ContainsKey("options"))
-                    {
-                        var newDictionary = parseDictNested(value["options"].ToString());
-
-                        <ul class="second">
-                            <li class="">
+                <!-- SUBCRITERIA (A1, ... D2) -->
+                @if (@value.ContainsKey("subcriteria"))
+                {
+                    var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
+                    <ul class="second">
+                        @foreach (var (k, v) in thesubcriteria)
+                        {
+                            var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
+                            <li class=" @subcriteria_isactive">
                                 <span class="text_container">
                                     <span class="text_collection">
+                                        <span class="title_field clickable" onclick="expandCriteria(this, 'first_hidden_layer')">
+
+                                            @{
+                                                // TODO: BETTER CHECK. We actually want to check if abything below is empty...
+                                                expandOrBullet(true);
+                                            }
+                                            <span class="text_text">
+                                                @k - @v["title"]
+                                                @{iconChooser(subcriteria_isactive);}
+                                            </span>
+                                        </span>
                                         <p>
-                                            <b class="subheading">  Underkriterier </b>
-                                            @{ hasKey("options_description", @value);}
+                                            @{ hasKey("description", v);}
+                                            @{ getGenerationTime(key, k);}
+                                            @{ getModel(k);}
                                         </p>
-                                        <ul class="second activeornot">
-                                            @foreach (var (k, v) in newDictionary)
+                                        @{ getQuantile(v, k, key);}
+
+                                        <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
+
+                                        @if (v.ContainsKey("subsub"))
+                                        {
+                                            string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
+                                            var subdict = parseDictNested(@v["subsub"].ToString());
+                                            @if (currentlist.Length > 0)
                                             {
-                                                <li class="@Criteria.inString(k, options)">
+                                                @if (key == "A")
+                                                {
+                                                    <p class="subheading"> <b>Kunnskapsgrunnlag</b></p>
+                                                }
+
+
+                                                <ul class="third activeornot">
+                                                    @foreach (var (subkey, subval) in subdict)
+                                                    {
+                                                        string modelkey = k + subkey;
+                                                        <li class="@Criteria.inList(subkey, currentlist)">
+                                                            <span class="text_container">
+                                                                <span class="text_collection">
+                                                                    <span class="title_field">
+                                                                        @{expandOrBullet(false);}
+                                                                        <span class="text_text">
+                                                                            @subkey - <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
+                                                                        </span>
+                                                                    </span>
+                                                                    @{ getQuantile(subval, modelkey, modelkey);}
+                                                                </span>
+                                                                <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
+                                                            </span>
+                                                        </li>
+                                                    }
+                                                </ul>
+
+
+                                            }
+                                        }
+
+                                    </span>
+                                </span>
+
+                            </li>
+                        }
+                    </ul>
+                }
+
+
+                @if (@value.ContainsKey("options"))
+                {
+                    <ul class="second">    
+                        <li class=" active">
+                            <span class="text_container">
+                                <span class="text_collection">
+                                    <span class="title_field clickable" onclick="expandCriteria(this, 'first_hidden_layer')">
+                                        @{expandOrBullet(true);}
+                                        <span class="text_text">
+                                            Underkriterier
+                                        </span>
+                                    </span>                                        
+
+                                    <!-- SUBCRITERIA SUBOPTIONS FOR B CRITERIA -->
+                                     @if (@value.ContainsKey("subcriteria"))
+                                    {
+                                        var thesubcriteria = parseDictNested(value["options"].ToString());
+                                        <ul class="second">
+                                            @foreach (var (k, v) in thesubcriteria)
+                                            {
+                                                var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
+                                                <li class=" @subcriteria_isactive">
                                                     <span class="text_container">
                                                         <span class="text_collection">
-                                                            <span class="title_field  clickable" onclick="expandCriteria(this, 'first_hidden_layer')">
+                                                            <span class="title_field clickable" onclick="expandCriteria(this, 'first_hidden_layer')">
                                                                 @{expandOrBullet(true);}
                                                                 <span class="text_text">
                                                                     @k - @v["title"]
-                                                                    @{ iconChooser(Criteria.inString(k, options)); }
                                                                 </span>
+                                                                @{iconChooser(subcriteria_isactive);}
                                                             </span>
 
-                                                            @{ getQuantile(v, k, key);}
+                                                            <!-- SUBCRITERIA SUBOPTIONS FOR B -->
 
-                                                            <!-- SUBOPTIONS -->
                                                             @if (v.ContainsKey("sub"))
                                                             {
                                                                 <ul class="subsub_list">
@@ -543,26 +547,33 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
                                                                     @foreach (var (subkey, subvalue) in subdict)
                                                                     {
-                                                                        <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
-                                                                            <span>@subkey - </span>
-                                                                            <span>@subvalue["title"]</span>
-                                                                            @{ iconChooser(Criteria.inList(subkey, clean_list)); }
+                                                                        <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">                                                                            
+                                                                            <span class="text_container">
+                                                                                <span class="text_collection">                                                                                    
+                                                                                    <span class="text_text wrapfix">
+                                                                                        @{expandOrBullet(false);}
+                                                                                        @subkey - @subvalue["title"]
+                                                                                    </span>
+                                                                                    @{ iconChooser(Criteria.inList(subkey, clean_list)); }
+                                                                                </span>
+                                                                            </span>
+                                                                           
                                                                         </li>
                                                                     }
                                                                 </ul>
                                                             }
                                                         </span>
                                                     </span>
-
                                                 </li>
                                             }
                                         </ul>
-                                        </span>
-                                    </span>
-                            </li>
-                        </ul>
-                    }
-                </li>
+                                    }
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+                }
+            </li>
             }
         </ul>
     </div>

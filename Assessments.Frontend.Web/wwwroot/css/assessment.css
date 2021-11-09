@@ -612,7 +612,7 @@ span.area i {
 }
 
 .text_text {
-    width: calc(100% - 28px);
+    max-width: calc(100% - 28px);
 }
 
 .tabbed_element_container .circle {

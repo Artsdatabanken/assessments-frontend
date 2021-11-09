@@ -610,3 +610,13 @@ option {
 .sidebarmenu .material-icons {
    float:right;
 }
+
+
+.sidebarmenu li .menuheaderlink {
+    border: none;
+    padding:inherit;
+}
+
+.sidebarmenu li h3 {
+    color: #098293;
+}

@@ -13,10 +13,15 @@
 
 <div class="sidebarmenu">
     <button class="button tertiary" onclick="expandParent(this, 'expand')">Om Rødlista </button>
-    <h3>Om Rødlista </h3>
+    
     <ul>
 
         @*lenker fra cms/drupal via api*@
+        <li>
+            <a class="menuheaderlink" asp-controller="Redlist" asp-action="Index2021">
+                <h3>Rødlista 2021</h3>
+            </a>
+        </li>
         @foreach (var (key, value) in menuItems)
         {
             <li>

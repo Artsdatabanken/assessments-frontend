@@ -35,7 +35,7 @@
         }
         if(Model.Category.Length > 2)
         {
-            sentence += ", og ble nedgradert på grunn av populasjoner i nærliggende regioner";
+            sentence += ", og ble <a href='#nedgradert'>nedgradert</a> på grunn av populasjoner i nærliggende regioner";
         }
         sentence = "Kategorien kommer av " + sentence + ".";
     }
@@ -61,7 +61,7 @@
                 <span>vurdert til </span>
             }
             <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span><span>
-                for Norsk rødliste for arter 2021. @sentence
+                for Norsk rødliste for arter 2021. @Html.Raw(sentence)
             </span>
 
 

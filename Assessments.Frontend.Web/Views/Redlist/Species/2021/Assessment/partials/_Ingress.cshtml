@@ -1,19 +1,4 @@
 ﻿@model SpeciesAssessment2021
-@*
-    HEADER BLOCK FOR PAGE
-    TODO:
-    - NEDGRADERT : ankerlenke
-    - RL-for arter osv : lenke
-    - Troliig utdødd, egen setning
-    - Norge/Svalbard inn i ingress
-    + kriteriesetning
-    + setning om degradering
-
-
-    GOOGLE SEO må tas separat -> heading og tekst til søk
-
-*@
-
 @{
     // Obtain which criteria are used and their titles.
     var subcriteria = Criteria.sortCriteria(Model.CriteriaSummarized);
@@ -41,6 +26,7 @@
     }
 }
 
+
 <div class="page_section">
     <p>
         @if (Model.AssessmentYear == 2010)
@@ -53,19 +39,23 @@
         }
         else
         {
-
-
             <span>Arten er </span>
             @if (Model.Category != "NA" && Model.Category != "NE")
             {
                 <span>vurdert til </span>
             }
             <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span><span>
-                for Norsk rødliste for arter 2021. @Html.Raw(sentence)
+                
+                @if (@Model.Category == "CR" && @Model.PresumedExtinct == true)
+                {
+                <span>for Norsk rødliste for arter 2021, og er trolig utdødd.</span>
+                }
+                else
+                {
+                  <span>for Norsk rødliste for arter 2021.</span>
+                }
+                @Html.Raw(sentence)
             </span>
-
-
-
         }
     </p>
 </div>

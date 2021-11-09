@@ -377,7 +377,6 @@ option {
     border: none;
 }
 
-.clickable:hover,
 .button:hover,
 .main button:hover {
     background: #4c4a48;

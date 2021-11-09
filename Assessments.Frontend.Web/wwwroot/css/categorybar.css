@@ -139,6 +139,7 @@
     }
 }
 
+.category_displayer .isactive .category_item,
 .category_displayer .notactive .category_item {
     background: white;
     color: #4c4a48;
@@ -210,4 +211,17 @@
 .category_displayer .NA,
 .category_displayer .NE {
     color: #3d3b3a;
+}
+
+.criteria_displayer li{
+    flex:1;
+}
+
+.criteria_displayer .isactive .category_item {
+    background: black;
+    color: white;
+}
+
+.criteria_displayer{
+    padding-bottom:10px;
 }

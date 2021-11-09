@@ -638,6 +638,11 @@ ul.second {
 }
 
 
+.tabbed_element_container .noline {
+    border: none;
+    padding-left: 0;
+}
+
 
 /* VISIBILITY */
 
@@ -649,6 +654,12 @@ ul.second {
 
 .tabbed_element_container li {
     display: block;
+}
+
+.clickable:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: #098293;
 }
 
 /* SUMMARY VERSION */
@@ -668,6 +679,7 @@ ul.second {
     background:inherit;
     color:inherit;
     cursor:inherit;
+    text-decoration:none;
 }
 
 .summary li.active {

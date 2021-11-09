@@ -630,9 +630,14 @@ ul.second {
     border-color: lightgrey;
 }
 
-.tabbed_element_container p{
-    padding-left:24px;
+.tabbed_element_container p {
+    padding-left: 24px;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    border-left: 1px solid #dfdddd;
 }
+
+
 
 /* VISIBILITY */
 
@@ -649,7 +654,7 @@ ul.second {
 /* SUMMARY VERSION */
 .inactive.listitem_criteria,
 .summary .impact_v,
-.tabbed_element_container .summary .material-icons,
+.summary .material-icons,
 .summary li.inactive {
     display: none;
 }
@@ -815,8 +820,8 @@ ul.second {
 }
 
 .tabbed_element_container .thresholdlist_container {
-    margin-left: 24px;
-    border-left: none;
+    padding-left: 24px;
+    padding-bottom: 20px;
 }
 
 

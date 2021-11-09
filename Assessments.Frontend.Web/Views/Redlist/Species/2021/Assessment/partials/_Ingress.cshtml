@@ -1,7 +1,31 @@
 ﻿@model SpeciesAssessment2021
-@*
-    HEADER BLOCK FOR PAGE
-*@
+@{
+    // Obtain which criteria are used and their titles.
+    var subcriteria = Criteria.sortCriteria(Model.CriteriaSummarized);
+    string sentence = "";
+    @if (!string.IsNullOrWhiteSpace(Model.CriteriaSummarized))
+    {
+        @foreach (var (key, value) in subcriteria)
+        {
+            if (!string.IsNullOrEmpty(value))
+            {                
+                string current = ViewBag.kriterier[key]["title"];                
+                sentence.Replace(" og ", ", ");               
+                if (sentence != "")
+                {
+                    sentence += " og ";
+                }
+                sentence += current.ToLower();
+            }
+        }
+        if(Model.Category.Length > 2)
+        {
+            sentence += ", og ble <a href='#nedgradert'>nedgradert</a> på grunn av populasjoner i nærliggende regioner";
+        }
+        sentence = "Kategorien kommer av " + sentence + ".";
+    }
+}
+
 
 <div class="page_section">
     <p>
@@ -20,10 +44,17 @@
             {
                 <span>vurdert til </span>
             }
-            <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span> 
-            <span>
-                for Norsk rødliste for arter 2021.
-                Rødlista for arter er en oversikt over arter som har risiko for å dø ut fra Norge.
+            <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span><span>
+                
+                @if (@Model.Category == "CR" && @Model.PresumedExtinct == true)
+                {
+                <span>for Norsk rødliste for arter 2021, og er trolig utdødd.</span>
+                }
+                else
+                {
+                  <span>for Norsk rødliste for arter 2021.</span>
+                }
+                @Html.Raw(sentence)
             </span>
         }
     </p>

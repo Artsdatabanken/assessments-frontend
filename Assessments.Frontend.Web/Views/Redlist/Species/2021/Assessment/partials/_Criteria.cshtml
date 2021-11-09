@@ -404,8 +404,10 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                     <span class="text_container"
                           onclick="expandCriteria(this, 'first_hidden_layer')">
                         @{ expandOrBullet(@value.ContainsKey("subcriteria"));}
-                        @key - @value["title"]
-                        @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
+                        <span class="title_field">
+                            @key - @value["title"]
+                            @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
+                        </span>
                     </span>
                     <p>
                         @{ hasKey("description", @value);}

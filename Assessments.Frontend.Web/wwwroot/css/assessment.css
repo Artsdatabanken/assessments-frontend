@@ -671,6 +671,11 @@ ul.second {
     display: none;
 }
 
+
+.summary .thresholdlist.inactive {
+    display: block;
+}
+
 .summary .clickable:hover{
     background:inherit;
     color:inherit;
@@ -830,6 +835,7 @@ ul.second {
     margin-left: 24px;
     border-left: none;
 }
+
 
 .thresholdlist.active {
     background: lightgrey;

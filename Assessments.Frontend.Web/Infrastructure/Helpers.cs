@@ -7,6 +7,14 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class Helpers
     {
+        private static Dictionary<string, string> _ranks = new Dictionary<string, string>
+        {
+            { "Species", "Art" },
+            { "SubSpecies", "Underart" },
+            { "Variety", "Varietet" },
+            { "Form", "Form" }
+        };
+
         public static string[] findSelectedCategories( bool redlisted, bool endangered,
             string[] categoriesSelected) 
         {
@@ -173,15 +181,16 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedPercenteges.ToArray();
         }
 
-        public static Dictionary<string, string> getAllTaxonRanks(string[] ranks)
+        public static Dictionary<string, string> getAllTaxonRanks() //string[] ranks)
         {
-            string[] displayNames = new string[] { "Art", "Underart/varietet" };
-            Dictionary<string, string> taxonRanks = new Dictionary<string, string>();
-            for (int i = 0; i < ranks.Length; i++)
-            {
-                taxonRanks.Add(ranks[i], displayNames[i]);
-            }
-            return taxonRanks;
+            return _ranks;
+            //string[] displayNames = new string[] { "Art", "Underart/varietet" };
+            //Dictionary<string, string> taxonRanks = new Dictionary<string, string>();
+            //for (int i = 0; i < ranks.Length; i++)
+            //{
+            //    taxonRanks.Add(ranks[i], displayNames[i]);
+            //}
+            //return taxonRanks;
         }
 
         public static bool isNotEmpty(string key)

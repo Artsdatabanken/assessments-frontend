@@ -762,7 +762,8 @@ namespace Assessments.Mapping.Helpers
         {
             if (src.TaxonomyInfo!= null)
             {
-                var rank = src.TaxonomyInfo.Rank.Substring(0,1).ToUpper() + src.TaxonomyInfo.Rank.Substring(1);
+                var rank = (src.TaxonomyInfo.Rank.Substring(0,1).ToUpper() + src.TaxonomyInfo.Rank.Substring(1));
+                if (rank == "Subspecies") rank = "SubSpecies";
                 if (dest.TaxonRank != rank)
                 {
                     dest.TaxonRank = rank;

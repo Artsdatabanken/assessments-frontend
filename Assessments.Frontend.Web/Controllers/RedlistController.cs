@@ -56,7 +56,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             var query = await DataRepository.GetSpeciesAssessments();
 
-            ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks(query.Select(x => x.TaxonRank).Distinct().ToArray());
+            ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks();//query.Select(x => x.TaxonRank).Distinct().ToArray());
 
             // Søk
             if (!string.IsNullOrEmpty(viewModel.Name))

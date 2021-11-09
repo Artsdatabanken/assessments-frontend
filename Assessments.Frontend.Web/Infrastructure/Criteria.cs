@@ -46,7 +46,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             foreach (string el in bigstring)
             {
-                if (el.Contains(element))
+                if (el == element)
                 {
                     return "active";
                 }

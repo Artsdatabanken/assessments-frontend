@@ -194,7 +194,7 @@ option {
     }
 
     .content-placer {
-        padding-top: 20px;
+        padding-top: 33px;
         width: calc(75% - 4px);
         display: flex;
     }
@@ -609,4 +609,14 @@ option {
 
 .sidebarmenu .material-icons {
    float:right;
+}
+
+
+.sidebarmenu li .menuheaderlink {
+    border: none;
+    padding:inherit;
+}
+
+.sidebarmenu li h3 {
+    color: #098293;
 }

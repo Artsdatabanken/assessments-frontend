@@ -414,6 +414,8 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                         @{ getModel(key);}
                         @{ getQuantile(value, key, key);}
                     </p>
+
+                    <!-- SUBCRITERIA (A1, ... D2) -->
                     @if (@value.ContainsKey("subcriteria"))
                     {
                         var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
@@ -425,7 +427,11 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                     <span class="text_container">
                                         <span class="text_collection" onclick="expandCriteria(this, 'first_hidden_layer')">
                                             <span class="title_field">
-                                                @{expandOrBullet(v.ContainsKey("subsub"));}
+                                                
+                                                @{
+                                                   // TODO: BETTER CHECK. We actually want to check if abything below is empty...    
+                                                    expandOrBullet(true);
+                                                  }
                                                 <span class="text_text">
                                                     @k - @v["title"]
                                                     @{iconChooser(subcriteria_isactive);}
@@ -497,11 +503,11 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             {
                                 <li class="@Criteria.inString(k, options)">
 
-                                    <span class="text_container" onclick="expand(this, 'first_hidden_layer')">
+                                    <span class="text_container" >
 
                                         <span class="text_collection">
-                                            <span class="title_field  isClickableClass">
-                                                @{expandOrBullet(false);}
+                                            <span class="title_field  isClickableClass" onclick="expandCriteria(this, 'first_hidden_layer')">
+                                                @{expandOrBullet(true);}
                                                 <span class="text_text">
                                                     @k - @v["title"]
                                                     @{ iconChooser(Criteria.inString(k, options)); }

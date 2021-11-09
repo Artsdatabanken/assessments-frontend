@@ -540,27 +540,10 @@ span.area i {
 }
 
 /*criteria*/
-
-.criteria_element h4 {
-    display: inline-block;
-    vertical-align: top;
-}
-
-.inactive .quantile{
-    display:none;
-}
-
-.quantile span{
-    display:block;
-}
-
-.temp{
-    color:lightblue;
-}
-
 .options_list p {
     display:none;
 }
+
 /* IMPACT FACTORS */
 .impact_table {
     display: flex;

@@ -798,7 +798,7 @@ namespace Assessments.Mapping.Helpers
                         var names = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                         if (names.Length == 3)
                         {
-                            dest.ScientificName = names[0] + " " + names[1] + " sp. " + names[2];
+                            dest.ScientificName = names[0] + " " + names[1] + " subsp. " + names[2];
                         }
                         else
                         {
@@ -809,27 +809,14 @@ namespace Assessments.Mapping.Helpers
                         var names1 = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                         if (names1.Length == 3)
                         {
-                            dest.ScientificName = names1[0] + " " + names1[1] + " v. " + names1[2];
+                            dest.ScientificName = names1[0] + " " + names1[1] + " var. " + names1[2];
                         }
                         else
                         {
                             throw new Exception("Should not happen");
                         }
                         break;
-                    case "Form":
-                        var names2 = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-                        if (names2.Length == 3)
-                        {
-                            dest.ScientificName = names2[0] + " " + names2[1] + " f. " + names2[2];
-                        }
-                        if (names2.Length == 4)
-                        {
-                            dest.ScientificName = names2[0] + " " + names2[1] + " f. " + names2[2] + " " + names2[3];
-                        }
-                        else
-                        {
-                            //throw new Exception("Should not happen");
-                        }
+                    default:
                         break;
                 }
             }

@@ -225,13 +225,13 @@ namespace Assessments.Frontend.Web.Infrastructure
             scientificName = scientificName.Replace("agg.", "</i>agg.<i>");
             scientificName = scientificName.Replace("coll.", "</i>coll.<i>");
             scientificName = scientificName.Replace("n.", "</i>n.<i>");
-            scientificName = scientificName.Replace("sp.", "</i>sp.<i>");
-            scientificName = scientificName.Replace("v.", "</i>v.<i>");
-            scientificName = scientificName.Replace("f.", "</i>f.<i>");
+            scientificName = scientificName.Replace("subsp.", "</i>subsp.<i>");
+            scientificName = scientificName.Replace("var.", "</i>var.<i>");
+            scientificName = scientificName.Replace(" '", "</i> '");
+            scientificName = scientificName.Replace("' ", "'<i> ");
             scientificName = scientificName.Replace("<i></i>", "");
             return scientificName;
         }
-
     }
 
     public static class Constants

@@ -508,7 +508,7 @@
                                                 @{expandOrBullet(false);}
                                                 <span class="text_text">
                                                     @k - @v["title"]
-                                                    @{iconChooser("active");}
+                                                    @{ iconChooser(Criteria.inString(k, options)); }
                                                 </span>
                                             </span>
 
@@ -517,7 +517,7 @@
                                             <!-- SUBOPTIONS -->
                                             @if (v.ContainsKey("sub"))
                                             {
-                                                <div class="subsub_list">
+                                                <ul class="subsub_list">
                                                     @{
                                                         var currentlist = options.Split(";");
                                                         var current_element = "";
@@ -533,18 +533,16 @@
                                                         var clean_list = current_element.Split(",");
                                                         var subdict = parseDictNested(@v["sub"].ToString());
                                                     }
+
                                                     @foreach (var (subkey, subvalue) in subdict)
                                                     {
-                                                        <div class="listitem_criteria @Criteria.inList(subkey, clean_list)">
-                                                            @{expandOrBullet(false);}
-                                                            <h6 class="listitem_text_field">
-                                                                <span>@subkey </span>
-                                                                <span>@subvalue["title"]</span>
-                                                                @{ iconChooser(Criteria.inList(subkey, clean_list)); }
-                                                            </h6>
-                                                        </div>
+                                                        <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">                                                            
+                                                            <span>@subkey - </span>
+                                                            <span>@subvalue["title"]</span>
+                                                            @{ iconChooser(Criteria.inList(subkey, clean_list)); }
+                                                        </li>
                                                     }
-                                                </div>
+                                                </ul>
                                             }
                                         </span>
                                     </span>
@@ -557,144 +555,6 @@
                 </li>
                 }
             </ul>
-
-
-            <div class="tabbed_element_container">
-
-                <!-- MAIN CRITERIA -->
-                @foreach (var (key, value) in criteria)
-                {
-
-
-                    <div class="criteria_element @Criteria.inString(key, @Model.CriteriaSummarized) listitem_criteria">
-                        @{expandOrBullet(false);}
-                        <div class="listitem_text_field">
-                            <h4>@key -  @value["title"]  @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }</h4>
-                            @{ hasKey("description", @value);}
-                            @{ getModel(key);}
-                            @{ getQuantile(value, key, key);}
-
-
-                            <!-- SUB CRITERIA : obtain and reformat necessary data -->
-                            @if (@value.ContainsKey("subcriteria"))
-                            {
-                                <div class="criteria_subcriteria">
-                                    @{
-                                        var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
-                                    }
-                                    @foreach (var (k, v) in thesubcriteria)
-                                    {
-                                        <!-- ITERATE THROUGH ALL SUBCRITERIA -->
-                                        <div class=" @Criteria.inString(k, subcriteria[key]) listitem_criteria">
-
-
-                                            @{expandOrBullet(false);}
-                                            <div class="listitem_text_field">
-
-                                                <h5>@k <span>@v["title"]</span> @{iconChooser(@Criteria.inString(k, subcriteria[key]));}</h5>
-                                                @{ hasKey("description", v);}
-                                                @{ getGenerationTime(key, k);}
-                                                @{ getModel(k);}
-                                                @{ getQuantile(v, k, key);}
-
-                                                <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
-                                                @if (v.ContainsKey("subsub"))
-                                                {
-                                                    string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
-                                                    var subdict = parseDictNested(@v["subsub"].ToString());
-                                                    @if (currentlist.Length > 0)
-                                                    {
-                                                        <div class="subsub_list">
-                                                            @{ if (key == "A")
-                                                                {
-                                                                    <h6 class="subheading">Kunnskapsgrunnlag</h6>
-                                                                }
-                                                            }
-                                                            @foreach (var (subkey, subval) in subdict)
-                                                            {
-                                                                string modelkey = k + subkey;
-                                                                <div class="@Criteria.inList(subkey, currentlist) listitem_criteria">
-                                                                    @{expandOrBullet(false);}
-                                                                    <div class="listitem_text_field">
-                                                                        <h6>
-                                                                            <b>@subkey</b> <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
-                                                                        </h6>
-                                                                        <p>
-                                                                            @{ getQuantile(subval, modelkey, modelkey);}
-                                                                        </p>
-                                                                    </div>
-
-
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                    }
-                                                }
-                                            </div>
-                                        </div>
-                                    }
-                                </div>
-                            }
-
-                            <!-- OPTIONS-->
-                            @if (@value.ContainsKey("options"))
-                            {
-                                var newDictionary = parseDictNested(value["options"].ToString());
-                                <span class="criteria_options">
-
-                                    <span class="listitem_text_field">
-                                        @{expandOrBullet(false);}
-                                        <h5 class="subheading">  Underkriterier </h5>
-                                        @{ hasKey("options_description", @value);}
-                                        @foreach (var (k, v) in newDictionary)
-                                        {
-                                            <span class="listitem_criteria @Criteria.inString(k, options) ">
-                                                @{expandOrBullet(false);}
-                                                <div class="listitem_text_field">
-                                                    <h5>@k. <span>@v["title"]</span>@{ iconChooser(Criteria.inString(k, options)); }</h5>
-                                                    @if (v.ContainsKey("sub"))
-                                                    {
-                                                        <div class="subsub_list">
-                                                            @{
-                                                                var currentlist = options.Split(";");
-                                                                var current_element = "";
-                                                                foreach (string element in currentlist)
-                                                                {
-                                                                    if (element.Contains(k))
-                                                                    {
-                                                                        current_element = element;
-                                                                    }
-                                                                }
-                                                                current_element = current_element.Replace(k, "");
-                                                                current_element = Criteria.removeOuterParenthesis(current_element);
-                                                                var clean_list = current_element.Split(",");
-                                                                var subdict = parseDictNested(@v["sub"].ToString());
-                                                            }
-                                                            @foreach (var (subkey, subvalue) in subdict)
-                                                            {
-                                                                <div class="listitem_criteria @Criteria.inList(subkey, clean_list)">
-                                                                    @{expandOrBullet(false);}
-                                                                    <h6 class="listitem_text_field">
-                                                                        <span>@subkey </span>
-                                                                        <span>@subvalue["title"]</span>
-                                                                        @{ iconChooser(Criteria.inList(subkey, clean_list)); }
-                                                                    </h6>
-                                                                </div>
-                                                            }
-                                                        </div>
-                                                    }
-                                                </div>
-                                            </span>
-                                        }
-                                    </span>
-                                </span>
-                            }<!-- END OPTIONS-->
-                        </div>
-                    </div>
-                }
-            </div>
-
-
         </div>
     }
     else
@@ -750,14 +610,14 @@
             }
         }
 
-        function showTabButtons2() {
+        function showTabButtons() {
             var elList = document.getElementsByClassName("changetab");
             for (var i = 0; i < elList.length; i++) {
                 elList[i].style.visibility = "visible";
             }
         }
 
-        //showTabButtons();
-        //document.getElementById('criteria').classList.add("summary");
+        showTabButtons();
+        document.getElementById('criteria').classList.add("summary");
 
     </script>

@@ -290,7 +290,27 @@ namespace Assessments.Mapping.Models.Source.Species
         public string ÅrsakTilEndringAvKategori { get; set; }
 
         public string ÅrsakTilNedgraderingAvKategori { get; set; }
-        
+
+        public Taxonomy TaxonomyInfo { get; set; }
+
+        public class Taxonomy
+        {
+            public string Rank { get; set; }
+            public int TaxonId { get; set; }
+            public int ScientificNameId { get; set; }
+            public string ScientificName { get; set; }
+            public string ScientificNameAuthor { get; set; }
+            public NameInfo[] HigherClassification { get; set; }
+
+            public class NameInfo
+            {
+                public int ScientificNameId { get; set; }
+                public string ScientificName { get; set; }
+                public string ScientificNameAuthor { get; set; }
+                public string Rank { get; set; }
+            }
+        }
+
         public class Fylkesforekomst
         {
             public string Fylke { get; set; }

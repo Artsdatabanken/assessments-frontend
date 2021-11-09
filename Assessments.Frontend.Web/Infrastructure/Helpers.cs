@@ -7,6 +7,14 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class Helpers
     {
+        private static Dictionary<string, string> _ranks = new Dictionary<string, string>
+        {
+            { "Species", "Art" },
+            { "SubSpecies", "Underart" },
+            { "Variety", "Varietet" },
+            { "Form", "Form" }
+        };
+
         public static string[] findSelectedCategories( bool redlisted, bool endangered,
             string[] categoriesSelected) 
         {
@@ -174,15 +182,9 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedPercenteges.ToArray();
         }
 
-        public static Dictionary<string, string> getAllTaxonRanks(string[] ranks)
+        public static Dictionary<string, string> getAllTaxonRanks()
         {
-            string[] displayNames = new string[] { "Art", "Underart/varietet" };
-            Dictionary<string, string> taxonRanks = new Dictionary<string, string>();
-            for (int i = 0; i < ranks.Length; i++)
-            {
-                taxonRanks.Add(ranks[i], displayNames[i]);
-            }
-            return taxonRanks;
+            return _ranks;
         }
 
         public static bool isNotEmpty(string key)
@@ -217,11 +219,13 @@ namespace Assessments.Frontend.Web.Infrastructure
             scientificName = scientificName.Replace("agg.", "</i>agg.<i>");
             scientificName = scientificName.Replace("coll.", "</i>coll.<i>");
             scientificName = scientificName.Replace("n.", "</i>n.<i>");
-            scientificName = scientificName.Replace("sp.", "</i>sp.<i>");
+            scientificName = scientificName.Replace("subsp.", "</i>subsp.<i>");
+            scientificName = scientificName.Replace("var.", "</i>var.<i>");
+            scientificName = scientificName.Replace(" '", "</i> '");
+            scientificName = scientificName.Replace("' ", "'<i> ");
             scientificName = scientificName.Replace("<i></i>", "");
             return scientificName;
         }
-
     }
 
     public static class Constants

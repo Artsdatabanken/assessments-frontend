@@ -757,5 +757,69 @@ namespace Assessments.Mapping.Helpers
                 // do nothing here or introduce state 2?
             }
         }
+
+        public static void FixSomeTaxonomy(Rodliste2019 src, SpeciesAssessment2021 dest)
+        {
+            if (src.TaxonomyInfo!= null)
+            {
+                var rank = (src.TaxonomyInfo.Rank.Substring(0,1).ToUpper() + src.TaxonomyInfo.Rank.Substring(1));
+                if (rank == "Subspecies") rank = "SubSpecies";
+                if (dest.TaxonRank != rank)
+                {
+                    dest.TaxonRank = rank;
+                }
+
+                var subgenus = src.TaxonomyInfo.HigherClassification.SingleOrDefault(x => x.Rank.ToLowerInvariant() == "subgenus");
+                if (subgenus != null)
+                {
+                    switch (src.TaxonomyInfo.Rank)
+                    {
+                        case "species":
+                            var names = src.TaxonomyInfo.ScientificName.Split(new []{" "}, StringSplitOptions.RemoveEmptyEntries);
+                            if (names.Length == 2)
+                            {
+                                dest.ScientificName = names[0] + " (" + subgenus.ScientificName + ") " + names.Last();
+                            }
+                            else
+                            {
+                                throw new Exception("ikke støttet pr nå"); // kommer trolig ikke til å dukke opp
+                            }
+                            break;
+                        case "subspecies":
+                            throw new Exception("ikke støttet pr nå");
+                        default:
+                            throw new Exception("ikke støttet pr nå");
+                    }
+                }
+
+                switch (dest.TaxonRank)
+                {
+                    case "SubSpecies":
+                        var names = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                        if (names.Length == 3)
+                        {
+                            dest.ScientificName = names[0] + " " + names[1] + " subsp. " + names[2];
+                        }
+                        else
+                        {
+                            throw new Exception("Should not happen");
+                        }
+                        break;
+                    case "Variety":
+                        var names1 = dest.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+                        if (names1.Length == 3)
+                        {
+                            dest.ScientificName = names1[0] + " " + names1[1] + " var. " + names1[2];
+                        }
+                        else
+                        {
+                            throw new Exception("Should not happen");
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 }

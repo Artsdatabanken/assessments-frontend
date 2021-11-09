@@ -558,6 +558,7 @@ span.area i {
     color:grey;
 }
 
+.criteria .inactive p,
 .criteria .inactive .criteria_description,
 .criteria .inactive .criteria_options,
 .criteria .inactive .criteria_subcriteria,
@@ -575,6 +576,8 @@ span.area i {
     display: inline-block;
     width: calc(100% - 30px);
     vertical-align: top;
+    border-left: 1px solid #e1e0e0;
+    padding-left: 10px;
 }
 
 .subsub_list{
@@ -625,35 +628,38 @@ span.area i {
 
 /* IMPACT FACTORS */
 
-.impact li{
+.tabbed_element_container li{
     padding:2px;
     padding-left:20px;
 }
 
-.impact li.active {
+.tabbed_element_container li.active {
     color: black;
     display: block;
-    font-weight:bold;
 }
 
-.impact li.inactive {
+.tabbed_element_container li.inactive {
     color: grey;
     font-weight: normal;
 }
 
-.impact .text_collection,
-impact .title_field {
-    width:100%;
+.tabbed_element_container .text_collection,
+.tabbed_element_container .title_field {
+    width: 100%;
 }
 
-.impact .text_container {
+.tabbed_element_container .text_container {
     display: flex;
     padding-bottom: 2px;
 }
 
-.impact .text_collection {
+.tabbed_element_container .title_field {
+    font-weight: bold;
+}
+
+.tabbed_element_container .text_collection {
     align-self: center;
-    padding-left:5px;
+    padding-left: 5px;
 }
 
 .text_icon,
@@ -669,12 +675,12 @@ impact .title_field {
     width: calc(100% - 28px);
 }
 
-.impact .circle {
+.tabbed_element_container .circle {
     font-size: 4px;
     padding: 10px;
 }
 
-.impact ul,
+.tabbed_element_container ul,
 .impact_table {
     border-left: 1px solid #dfdddd;
 }
@@ -684,21 +690,26 @@ ul.second {
     border-color: lightgrey;
 }
 
+.tabbed_element_container p{
+    padding-left:24px;
+}
+
 /* VISIBILITY */
 
-.impact li.inactive li.inactive,
-.impact .second.inactive,
-.impact .final ul {
+.tabbed_element_container li.inactive li.inactive,
+.tabbed_element_container .second.inactive,
+.tabbed_element_container .final ul {
     display: none;
 }
 
-.impact li {
+.tabbed_element_container li {
     display: block;
 }
 
 /* SUMMARY VERSION */
+.inactive.listitem_criteria,
 .summary .impact_v,
-.summary .material-icons,
+.tabbed_element_container .summary .material-icons,
 .summary li.inactive {
     display: none;
 }
@@ -718,6 +729,7 @@ ul.second {
 }
 
 /* FULL VERSION */
+.full_list .inactive.listitem_criteria,
 .full_list .second.inactive,
 .full_list li.inactive li.inactive,
 .full_list .final ul {
@@ -846,8 +858,13 @@ ul.second {
     max-width:100%;
 }
 
+.tabbed_element_container .thresholdlist_container {
+    margin-left: 24px;
+    border-left: none;
+}
+
 .thresholdlist.active {
-    background:lightgrey;
+    background: lightgrey;
 }
 
 .hotpink {

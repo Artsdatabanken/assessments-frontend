@@ -138,6 +138,7 @@
         if (hasChild)
         {
             <span class="close_icon material-icons text_icon">arrow_drop_down</span>
+            <span class="open_icon material-icons text_icon">arrow_right</span>
         }
         else
         {
@@ -169,8 +170,8 @@
             {
                 string className = "inactive";
                 @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
-               k == "C1" && catval.Substring(0, 2) == thresholdValue)
-              || k.Contains("C2") && thresholdValue == catval)
+            k == "C1" && catval.Substring(0, 2) == thresholdValue)
+           || k.Contains("C2") && thresholdValue == catval)
                 {
                     className = "active";
                 }
@@ -207,198 +208,202 @@
                     Se hele matrisen i vedlegg 1 i veilederen >
                 </a>
             </p>
-         }            
+        }
     }
 
 
 
-        // MAX MIN PROBABLE INTERVAL VALUES presentation
-        void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key, string k)
+    // MAX MIN PROBABLE INTERVAL VALUES presentation
+    void mmpi(string value, SpeciesAssessment2021MinMaxProbableIntervall quantile, string key, string k)
+    {
+
+        var json_quantile = parseDictObject(value);
+        string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
+        string comparator = json_quantile.ContainsKey("comparator") ? json_quantile["comparator"].ToString() : "";
+        string estimated = "-";
+
+
+        @if (json_quantile.ContainsKey("threshold"))
         {
-
-            var json_quantile = parseDictObject(value);
-            string unit = json_quantile.ContainsKey("unit") ? json_quantile["unit"].ToString() : "";
-            string comparator = json_quantile.ContainsKey("comparator") ? json_quantile["comparator"].ToString() : "";
-            string estimated = "-";
-
-
-            @if (json_quantile.ContainsKey("threshold"))
-            {
-                var thresholds = parseDictString(json_quantile["threshold"].ToString());
-                string thresholdValue = GetThresholdValue(k);
-                thresholdsList(thresholds, unit, quantile, comparator, thresholdValue, k, json_quantile);
-            }
-
-            @if (quantile != null)
-            {
-                string min = @quantile.Min;
-                string max = @quantile.Max;
-
-                if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
-                {
-                    estimated = @quantile.Minintervall + " - " + @quantile.Maxintervall;
-                }
-                else
-                {
-                    estimated = @quantile.Probable;
-                }
-                <p>
-                    <span>Estimert verdi: @quantile.Calculated @Html.Raw(unit).</span><br />
-                    <span>Verdien antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />
-                    @if (estimated.Length > 0)
-                    {
-                        <span>Mest trolig er den @estimated @Html.Raw(unit).</span>
-                    }
-                </p>
-            }
+            var thresholds = parseDictString(json_quantile["threshold"].ToString());
+            string thresholdValue = GetThresholdValue(k);
+            thresholdsList(thresholds, unit, quantile, comparator, thresholdValue, k, json_quantile);
         }
 
-
-        // Check for and present number-data including thresholds
-        void getQuantile(Dictionary<string, object> value, string k, string key)
+        @if (quantile != null)
         {
-            var quantile = GetQuantileForCriteria(k);
-            if (k == "D1")
+            string min = @quantile.Min;
+            string max = @quantile.Max;
+
+            if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
             {
-                quantile = GetQuantileForCriteria("C");
-            }
-            if (quantile != null || k == "C2a(ii)" || k == "C2b" || k == "D1" || k == "D2")
-            {
-                mmpi(value["content"].ToString(), quantile, key, k);
+                estimated = @quantile.Minintervall + " - " + @quantile.Maxintervall;
             }
             else
             {
-                //<span class="hotpink">MANGLER QUANTILE for @k</span>
+                estimated = @quantile.Probable;
             }
-        }
-
-        void getModel(string key)
-        {
-
-            @*
-                TODO: This should not be necessary, as thing SHOULD be in the same object, but alas.
-            *@
-
-            List<string> ReductionBasedOn = null;
-            string PreliminaryCategory = null;
-            string ThresholdValue = null;
-
-            if (key == "A1")
-            {
-                ReductionBasedOn = Model.A1.ReductionBasedOn;
-                PreliminaryCategory = Model.A1.PreliminaryCategory;
-            }
-            else if (key == "A2")
-            {
-                ReductionBasedOn = Model.A2.ReductionBasedOn;
-                PreliminaryCategory = Model.A2.PreliminaryCategory;
-            }
-            else if (key == "A3")
-            {
-                ReductionBasedOn = Model.A3.ReductionBasedOn;
-                PreliminaryCategory = Model.A3.PreliminaryCategory;
-            }
-            else if (key == "A4")
-            {
-                ReductionBasedOn = Model.A4.ReductionBasedOn;
-                PreliminaryCategory = Model.A4.PreliminaryCategory;
-            }
-            else if (key == "B1")
-            {
-                PreliminaryCategory = Model.B1.PreliminaryCategory;
-            }
-            else if (key == "B2")
-            {
-                PreliminaryCategory = Model.B2.PreliminaryCategory;
-            }
-            else if (key == "BAii")
-            {
-                PreliminaryCategory = Model.BAii.PreliminaryCategory;
-            }
-            else if (key == "C")
-            {
-                PreliminaryCategory = Model.C.PreliminaryCategory;
-            }
-            else if (key == "C1")
-            {
-                ThresholdValue = Model.C1.ThresholdValue;
-            }
-            else if (key == "C2a(i)")
-            {
-                ThresholdValue = Model.C2Ai.ThresholdValue;
-            }
-            else if (key == "D1")
-            {
-                PreliminaryCategory = Model.D1PreliminaryCategory;
-            }
-            else if (key == "D2")
-            {
-                PreliminaryCategory = Model.D2PreliminaryCategory;
-            }
-        }
-
-        //GenerationTime
-        void getGenerationTime(String key, String subkey)
-        {
-            string gen = !string.IsNullOrEmpty(Model.GenerationLength) ? Model.GenerationLength.Replace(".", ",") : "0";
-            float generasjon = gen != null ? float.Parse(gen) : 0;
-            float vurderingsperiode = 0;
-            if (key == "A")
-            {
-                vurderingsperiode = Math.Max(generasjon * 3, 10);
-            }
-            else if (subkey == "C1")
-            {
-                if (Model.C1.ThresholdValue == "25")
+            <p>
+                <span>Estimert verdi: @quantile.Calculated @Html.Raw(unit).</span><br />
+                <span>Verdien antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />
+                @if (estimated.Length > 0)
                 {
-                    vurderingsperiode = Math.Max(3, generasjon);
+                    <span>Mest trolig er den @estimated @Html.Raw(unit).</span>
                 }
-                else if (Model.C1.ThresholdValue == "20")
-                {
-                    vurderingsperiode = Math.Max(5, generasjon * 2);
-                }
-                else
-                {
-                    vurderingsperiode = Math.Max(10, generasjon * 3);
-                }
-            }
-            //Max value is 100 years always
-            vurderingsperiode = Math.Min(vurderingsperiode, 100);
-
-            if (key == "A" || subkey == "C1")
-            {
-                <p class="generation_time">
-                    Generasjonstiden er på @Model.GenerationLength år som gir en vurderingsperiode på @vurderingsperiode år
-                </p>
-            }
+            </p>
         }
-    }<!-- END OF ALL-->
+    }
 
 
-    @if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
-   Model.Category.Contains("VU") || Model.Category.Contains("NT")))
-
+    // Check for and present number-data including thresholds
+    void getQuantile(Dictionary<string, object> value, string k, string key)
     {
-        <div class="page_section criteria" id="criteria">
-            <div class="criteria_description">
-                <h3>@ViewBag.glossary["criteria"]["tagline"]</h3>
-                <p>@Html.Raw(ViewBag.glossary["criteria"]["description"])</p>
-                <button class="tertiary tinybutton">Gå til metode <span class="material-icons">open_in_new</span></button>
-                <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
-                <p>@Model.CriteriaSummarized<br /></p>
-                @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
-                <button class="tertiary tinybutton">Gå til ordliste <span class="material-icons">open_in_new</span></button>
-            </div>
+        var quantile = GetQuantileForCriteria(k);
+        if (k == "D1")
+        {
+            quantile = GetQuantileForCriteria("C");
+        }
+        if (quantile != null || k == "C2a(ii)" || k == "C2b" || k == "D1" || k == "D2")
+        {
+            mmpi(value["content"].ToString(), quantile, key, k);
+        }
+        else
+        {
+            //<span class="hotpink">MANGLER QUANTILE for @k</span>
+        }
+    }
 
-            <button class="changetab active" id="summary_criteria" onclick="criterialist('summary',this)">Oppsumering</button>
-            <button class="changetab" id="full_list_criteria" onclick="criterialist('full_list',this)">Full liste</button>
+    void getModel(string key)
+    {
 
-            <ul class="outer tabbed_element_container">
-                @foreach (var (key, value) in criteria)
-                {
-                <li class="@Criteria.inString(key, @Model.CriteriaSummarized)">
-                    <span onclick="expand(this, 'first_hidden_layer')" class="text_container">
-                        @{ expandOrBullet(@Criteria.inString(key, @Model.CriteriaSummarized) == "active");}
+        @*
+            TODO: This should not be necessary, as thing SHOULD be in the same object, but alas.
+        *@
+
+        List<string> ReductionBasedOn = null;
+        string PreliminaryCategory = null;
+        string ThresholdValue = null;
+
+        if (key == "A1")
+        {
+            ReductionBasedOn = Model.A1.ReductionBasedOn;
+            PreliminaryCategory = Model.A1.PreliminaryCategory;
+        }
+        else if (key == "A2")
+        {
+            ReductionBasedOn = Model.A2.ReductionBasedOn;
+            PreliminaryCategory = Model.A2.PreliminaryCategory;
+        }
+        else if (key == "A3")
+        {
+            ReductionBasedOn = Model.A3.ReductionBasedOn;
+            PreliminaryCategory = Model.A3.PreliminaryCategory;
+        }
+        else if (key == "A4")
+        {
+            ReductionBasedOn = Model.A4.ReductionBasedOn;
+            PreliminaryCategory = Model.A4.PreliminaryCategory;
+        }
+        else if (key == "B1")
+        {
+            PreliminaryCategory = Model.B1.PreliminaryCategory;
+        }
+        else if (key == "B2")
+        {
+            PreliminaryCategory = Model.B2.PreliminaryCategory;
+        }
+        else if (key == "BAii")
+        {
+            PreliminaryCategory = Model.BAii.PreliminaryCategory;
+        }
+        else if (key == "C")
+        {
+            PreliminaryCategory = Model.C.PreliminaryCategory;
+        }
+        else if (key == "C1")
+        {
+            ThresholdValue = Model.C1.ThresholdValue;
+        }
+        else if (key == "C2a(i)")
+        {
+            ThresholdValue = Model.C2Ai.ThresholdValue;
+        }
+        else if (key == "D1")
+        {
+            PreliminaryCategory = Model.D1PreliminaryCategory;
+        }
+        else if (key == "D2")
+        {
+            PreliminaryCategory = Model.D2PreliminaryCategory;
+        }
+    }
+
+    //GenerationTime
+    void getGenerationTime(String key, String subkey)
+    {
+        string gen = !string.IsNullOrEmpty(Model.GenerationLength) ? Model.GenerationLength.Replace(".", ",") : "0";
+        float generasjon = gen != null ? float.Parse(gen) : 0;
+        float vurderingsperiode = 0;
+        if (key == "A")
+        {
+            vurderingsperiode = Math.Max(generasjon * 3, 10);
+        }
+        else if (subkey == "C1")
+        {
+            if (Model.C1.ThresholdValue == "25")
+            {
+                vurderingsperiode = Math.Max(3, generasjon);
+            }
+            else if (Model.C1.ThresholdValue == "20")
+            {
+                vurderingsperiode = Math.Max(5, generasjon * 2);
+            }
+            else
+            {
+                vurderingsperiode = Math.Max(10, generasjon * 3);
+            }
+        }
+        //Max value is 100 years always
+        vurderingsperiode = Math.Min(vurderingsperiode, 100);
+
+        if (key == "A" || subkey == "C1")
+        {
+            <p class="generation_time">
+                Generasjonstiden er på @Model.GenerationLength år som gir en vurderingsperiode på @vurderingsperiode år
+            </p>
+        }
+    }
+}<!-- END OF ALL-->
+
+
+@if (!string.IsNullOrEmpty(Model.CriteriaSummarized) && (Model.Category.Contains("CR") || Model.Category.Contains("EN") ||
+Model.Category.Contains("VU") || Model.Category.Contains("NT")))
+
+{
+    <div class="page_section criteria" id="criteria">
+        <div class="criteria_description">
+            <h3>@ViewBag.glossary["criteria"]["tagline"]</h3>
+            <p>@Html.Raw(ViewBag.glossary["criteria"]["description"])</p>
+            <button class="tertiary tinybutton">Gå til metode <span class="material-icons">open_in_new</span></button>
+            <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
+            <p>@Model.CriteriaSummarized<br /></p>
+            @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
+            <button class="tertiary tinybutton">Gå til ordliste <span class="material-icons">open_in_new</span></button>
+        </div>
+
+        <!-- CONTROL BUTTONS -->
+        <button class="changetab active" id="summary_criteria" onclick="criterialist('summary',this)">Oppsumering</button>
+        <button class="changetab" id="full_list_criteria" onclick="criterialist('full_list',this)">Full liste</button>
+
+        <!-- START OF PRESENTATION -->
+        <ul class="outer tabbed_element_container">
+            @foreach (var (key, value) in criteria)
+            {
+                string isactive = @Criteria.inString(key, @Model.CriteriaSummarized);
+                <li class="@isactive">
+                    <span class="text_container"
+                          onclick="expandCriteria(this, 'first_hidden_layer')">
+                        @{ expandOrBullet(@value.ContainsKey("subcriteria"));}
                         @key - @value["title"]
                         @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
                     </span>
@@ -410,20 +415,18 @@
                     @if (@value.ContainsKey("subcriteria"))
                     {
                         var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
-
-                        <ul class="second activeornot">
+                        <ul class="second">
                             @foreach (var (k, v) in thesubcriteria)
                             {
-                                <li class=" @Criteria.inString(k, subcriteria[key])">
-
-                                    <span class="text_container" onclick="expand(this, 'first_hidden_layer')">
-
-                                        <span class="text_collection">
-                                            <span class="title_field  isClickableClass">
-                                                @{expandOrBullet(false);}
+                                var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
+                                <li class=" @subcriteria_isactive">
+                                    <span class="text_container">
+                                        <span class="text_collection" onclick="expandCriteria(this, 'first_hidden_layer')">
+                                            <span class="title_field">
+                                                @{expandOrBullet(v.ContainsKey("subsub"));}
                                                 <span class="text_text">
                                                     @k - @v["title"]
-                                                    @{iconChooser("active");}
+                                                    @{iconChooser(subcriteria_isactive);}
                                                 </span>
                                             </span>
                                             <p>
@@ -434,43 +437,44 @@
                                             @{ getQuantile(v, k, key);}
 
                                             <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
+
                                             @if (v.ContainsKey("subsub"))
                                             {
-                                                @if (v.ContainsKey("subsub"))
+                                                string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
+                                                var subdict = parseDictNested(@v["subsub"].ToString());
+                                                @if (currentlist.Length > 0)
                                                 {
-                                                    string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
-                                                    var subdict = parseDictNested(@v["subsub"].ToString());
-                                                    @if (currentlist.Length > 0)
+                                                    @if (key == "A")
                                                     {
-                                                        @if (key == "A")
-                                                        {
-                                                            <p class="subheading"> <b>Kunnskapsgrunnlag</b></p>
-                                                        }
-                                                        <ul class="third activeornot">
-                                                            @foreach (var (subkey, subval) in subdict)
-                                                            {
-                                                                string modelkey = k + subkey;
-                                                                <li class="@Criteria.inList(subkey, currentlist)">
-                                                                    <span class="text_container" onclick="expand(this, 'first_hidden_layer')">
-                                                                        <span class="text_collection">
-                                                                            <span class="title_field  isClickableClass">
-                                                                                @{expandOrBullet(false);}
-                                                                                <span class="text_text">
-                                                                                    @subkey - <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
-                                                                                </span>
-                                                                            </span>
-                                                                            @{ getQuantile(subval, modelkey, modelkey);}
-                                                                        </span>
-                                                                        <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
-                                                                    </span>
-                                                                </li>
-                                                            }
-                                                        </ul>
-
-
+                                                        <p class="subheading"> <b>Kunnskapsgrunnlag</b></p>
                                                     }
+
+
+                                                    <ul class="third activeornot">
+                                                        @foreach (var (subkey, subval) in subdict)
+                                                        {
+                                                            string modelkey = k + subkey;
+                                                            <li class="@Criteria.inList(subkey, currentlist)">
+                                                                <span class="text_container">
+                                                                    <span class="text_collection">
+                                                                        <span class="title_field">
+                                                                            @{expandOrBullet(false);}
+                                                                            <span class="text_text">
+                                                                                @subkey - <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
+                                                                            </span>
+                                                                        </span>
+                                                                        @{ getQuantile(subval, modelkey, modelkey);}
+                                                                    </span>
+                                                                    <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
+                                                                </span>
+                                                            </li>
+                                                        }
+                                                    </ul>
+
+
                                                 }
                                             }
+
                                         </span>
                                     </span>
 
@@ -484,7 +488,7 @@
                         var newDictionary = parseDictNested(value["options"].ToString());
                         <p>
                             <b class="subheading">  Underkriterier </b>
-                             @{ hasKey("options_description", @value);}
+                            @{ hasKey("options_description", @value);}
                         </p>
                         <ul class="second activeornot">
                             @foreach (var (k, v) in newDictionary)
@@ -526,7 +530,7 @@
 
                                                     @foreach (var (subkey, subvalue) in subdict)
                                                     {
-                                                        <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">                                                            
+                                                        <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
                                                             <span>@subkey - </span>
                                                             <span>@subvalue["title"]</span>
                                                             @{ iconChooser(Criteria.inList(subkey, clean_list)); }
@@ -543,71 +547,72 @@
 
                     }
                 </li>
-                }
-            </ul>
-        </div>
+            }
+        </ul>
+    </div>
+}
+else
+{
+    <partial name="/Views/Redlist/Species/2021/Assessment/partials/_NoCriteria.cshtml" />
+}
+
+
+
+<script>
+
+    // JS only relevant for users with javascript.
+
+    var first_criteria = true;
+
+    function criterialist(which, button) {
+        // See more text by altering css of the clicked element's top parent node
+        document.getElementById('summary_criteria').classList.remove("active");
+        document.getElementById('full_list_criteria').classList.remove("active");
+
+        if (which == 'full_list') {
+            document.getElementById('criteria').classList.add("full_list");
+            document.getElementById('criteria').classList.remove("summary");
+            if (first == true) {
+                first_close();
+            }
+            first = false;
+        }
+        if (which == 'summary') {
+            document.getElementById('criteria').classList.add("summary");
+            document.getElementById('criteria').classList.remove("full_list");
+        }
+        button.classList.add("active");
     }
-    else
-    {
-        <partial name="/Views/Redlist/Species/2021/Assessment/partials/_NoCriteria.cshtml" />
+
+    function expandCriteria(element, className) {
+        console.log("expand time")
+        element = element.parentNode;
+        var mainparent = document.getElementById('criteria').classList;
+        // Never expand or collapse summary items
+        if (!mainparent.contains("summary")) {
+            if (element.classList.contains(className)) {
+                element.classList.remove(className);
+            } else {
+                element.classList.add(className);
+            }
+        }
     }
 
-
-
-    <script>
-
-        // JS only relevant for users with javascript.
-
-        var first_criteria = true;
-
-        function criterialist(which, button) {
-            // See more text by altering css of the clicked element's top parent node
-            document.getElementById('summary_criteria').classList.remove("active");
-            document.getElementById('full_list_criteria').classList.remove("active");
-
-            if (which == 'full_list') {
-                document.getElementById('criteria').classList.add("full_list");
-                document.getElementById('criteria').classList.remove("summary");
-                if (first == true) {
-                    first_close();
-                }
-                first = false;
-            }
-            if (which == 'summary') {
-                document.getElementById('criteria').classList.add("summary");
-                document.getElementById('criteria').classList.remove("full_list");
-            }
-            button.classList.add("active");
+    function first_close() {
+        var elList = document.getElementsByClassName("inactive");
+        for (var i = 0; i < elList.length; i++) {
+            elList[i].classList.add("first_hidden_layer");
         }
+    }
 
-        function expand2(element, className) {
-            element = element.parentNode;
-            var mainparent = document.getElementById('impactfactors').classList;
-            // Never expand or collapse summary items
-            if (!mainparent.contains("summary")) {
-                if (element.classList.contains(className)) {
-                    element.classList.remove(className);
-                } else {
-                    element.classList.add(className);
-                }
-            }
+    function showTabButtons() {
+        var elList = document.getElementsByClassName("changetab");
+        for (var i = 0; i < elList.length; i++) {
+            elList[i].style.visibility = "visible";
         }
+    }
 
-        function first_close() {
-            var elList = document.getElementsByClassName("inactive");
-            for (var i = 0; i < elList.length; i++) {
-                elList[i].classList.add("first_hidden_layer");
-            }
-        }
+    showTabButtons();
+    document.getElementById('criteria').classList.add("summary");
 
-        function showTabButtons() {
-            var elList = document.getElementsByClassName("changetab");
-            for (var i = 0; i < elList.length; i++) {
-                elList[i].style.visibility = "visible";
-            }
-        }
-
-        showTabButtons();
-        document.getElementById('criteria').classList.add("summary");
-
-    </script>
+</script>

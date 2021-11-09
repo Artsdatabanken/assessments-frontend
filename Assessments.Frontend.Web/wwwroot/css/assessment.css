@@ -546,49 +546,6 @@ span.area i {
     vertical-align: top;
 }
 
-.criteria_element.active h4 {
-    color: black
-}
-
-.criteria_options {
-    padding-bottom: 20px;
-}
-
-.criteria .inactive {
-    color:grey;
-}
-
-.criteria .inactive p,
-.criteria .inactive .criteria_description,
-.criteria .inactive .criteria_options,
-.criteria .inactive .criteria_subcriteria,
-.criteria .inactive .listitem_text_field p,
-.criteria .inactive .criteria_results,
-.listitem_criteria.inactive .subsub_list {
-    display: none;
-}
-
-.listitem_criteria {
-    display: block;
-}
-
-.listitem_text_field {
-    display: inline-block;
-    width: calc(100% - 30px);
-    vertical-align: top;
-    border-left: 1px solid #e1e0e0;
-    padding-left: 10px;
-}
-
-.subsub_list{
-    margin-top:10px;
-    margin-bottom:20px;
-}
-
-.subheading{
-    margin-bottom: 5px;
-}
-
 .inactive .quantile{
     display:none;
 }
@@ -729,6 +686,7 @@ ul.second {
 }
 
 /* FULL VERSION */
+
 .full_list .inactive.listitem_criteria,
 .full_list .second.inactive,
 .full_list li.inactive li.inactive,
@@ -761,21 +719,31 @@ ul.second {
 }
 
 /* HANDLING TABS ON ASSESSMENT */
-.first_hidden_layer .close_icon {
-    display: none;
-}
 
 .material-icons.open_icon {
     display: none;
 }
 
+.full_list .first_hidden_layer .first_hidden_layer .close_icon,
 .first_hidden_layer .open_icon {
     display: inline-block;
 }
 
+.first_hidden_layer .close_icon,
 .full_list li.first_hidden_layer li.inactive,
-.first_hidden_layer ul {
+.full_list .first_hidden_layer p,
+.full_list .first_hidden_layer ul {
     display: none;
+}
+
+.full_list .first_hidden_layer .first_hidden_layer .open_icon{
+    display: none;
+}
+
+.full_list li.first_hidden_layer .first_hidden_layer li.inactive,
+.full_list .first_hidden_layer .first_hidden_layer ul,
+.full_list .first_hidden_layer .first_hidden_layer p {
+    display: block;
 }
 
 
@@ -868,8 +836,8 @@ ul.second {
 }
 
 .hotpink {
-    border: 2px solid hotpink;
     color: hotpink;
+    background:pink;
 }
 
 .C_question{

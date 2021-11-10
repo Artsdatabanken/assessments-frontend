@@ -163,6 +163,14 @@ namespace Assessments.Frontend.Web.Controllers
             return View("Species/2021/List/List", viewModel);
         }
 
+        [HttpGet, Route("2021/suggestions")]
+        public async Task<IActionResult> Suggestion([FromQueryAttribute] string search)
+        {
+            var query = await DataRepository.GetSpeciesAssessments();
+
+            return Json(query.First());
+        }
+
         [Route("2021/{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {

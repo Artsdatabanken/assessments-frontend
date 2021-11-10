@@ -646,15 +646,6 @@ ul.second {
 
 /* VISIBILITY */
 
-.tabbed_element_container li.inactive li.inactive,
-.tabbed_element_container .second.inactive,
-.tabbed_element_container .final ul {
-    display: none;
-}
-
-.tabbed_element_container li {
-    display: block;
-}
 
 .clickable:hover{
     cursor: pointer;
@@ -662,18 +653,9 @@ ul.second {
     color: #098293;
 }
 
+
 /* SUMMARY VERSION */
-.inactive.listitem_criteria,
-.summary .impact_v,
-.summary .material-icons,
-.summary li.inactive {
-    display: none;
-}
 
-
-.summary .thresholdlist.inactive {
-    display: block;
-}
 
 .summary .clickable:hover{
     background:inherit;
@@ -704,12 +686,7 @@ ul.second {
 
 /* FULL VERSION */
 
-.full_list .inactive.listitem_criteria,
-.full_list .second.inactive,
-.full_list li.inactive li.inactive,
-.full_list .final ul {
-    display: block;
-}
+
 
 .show_expand ul {
     visibility: hidden;
@@ -737,31 +714,79 @@ ul.second {
 
 /* HANDLING TABS ON ASSESSMENT */
 
-.material-icons.open_icon {
+.inactive.listitem_criteria,
+.summary .impact_v,
+.summary li.inactive {
     display: none;
 }
 
-.full_list .first_hidden_layer .first_hidden_layer .close_icon,
-.first_hidden_layer .open_icon {
+.summary .thresholdlist.inactive {
+    display: block;
+}
+
+
+
+/* OTHER ELEMENTS */
+
+.tabbed_element_container li{
+    display:block;
+}
+
+/*
+    
+.tabbed_element_container li.inactive li.inactive,
+.tabbed_element_container .second.inactive,
+.tabbed_element_container .final ul {
+    display: none;
+}
+
+.tabbed_element_container li {
+    display: block;
+}
+*/
+.full_list p {
+    display: none;
+}
+
+/* FIRST LAYER */
+.full_list li > ul {
+    display: none;
+}
+
+.full_list .opened_element > ul{
+    display: block;
+}
+
+/* SECOND LAYER */
+.full_list .opened_element .opened_element ul{
+    display:none;
+}
+
+
+/* OPEN AND CLOSE ICONS*/
+.tabbed_element_container .open_icon,
+.tabbed_element_container .close_icon,
+.tabbed_element_container .circle {
+    display: none;
+}
+
+
+.full_list .tabbed_element_container .close_icon,
+.full_list .tabbed_element_container .circle {
     display: inline-block;
 }
 
-.first_hidden_layer .close_icon,
-.full_list li.first_hidden_layer li.inactive,
-.full_list .first_hidden_layer p,
-.full_list .first_hidden_layer ul {
+
+.full_list .tabbed_element_container .opened_element .close_icon {
     display: none;
 }
 
-.full_list .first_hidden_layer .first_hidden_layer .open_icon{
-    display: none;
+.full_list .tabbed_element_container .opened_element .open_icon {
+    display: inline-block;
 }
 
-.full_list li.first_hidden_layer .first_hidden_layer li.inactive,
-.full_list .first_hidden_layer .first_hidden_layer ul,
-.full_list .first_hidden_layer .first_hidden_layer p {
-    display: block;
-}
+
+
 
 
 /* All */

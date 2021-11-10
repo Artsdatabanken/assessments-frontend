@@ -1,0 +1,94 @@
+// JS only relevant for users with javascript.
+console.log("running");
+
+function showTabButtons() {
+    // Users with javascript are shown the buttons to toggle tabs
+    var elements = document.getElementsByClassName("changetab");
+    for (let i in elements) {
+        //let parentnode = elements[i].closest(li);
+        if (elements[i] && elements[i].style) {
+            elements[i].style.visibility = "visible";
+        }
+    }
+}
+
+
+function first_close() {
+    // Rund on first change of tab to full-view
+    // Adds 
+    console.log("First close");    
+    var elements = document.getElementsByClassName("active");
+    for (let i in elements) {
+        //let parentnode = elements[i].closest(li);
+        if (elements[i] && elements[i].classList) {
+            elements[i].classList.add("opened_element");
+        }
+    }
+}
+
+// RUN ON START:
+console.log("KJØRER ASSESMENT TABS")
+showTabButtons();
+first_close();
+document.getElementById('criteria').classList.add("summary");
+document.getElementById('impactfactors').classList.add("summary");
+
+
+function criterialist(which, button) {
+    // See more text by altering css of the clicked element's top parent node
+    document.getElementById('summary_criteria').classList.remove("active");
+    document.getElementById('full_list_criteria').classList.remove("active");
+
+    if (which == 'full_list') {
+        document.getElementById('criteria').classList.add("full_list");
+        document.getElementById('criteria').classList.remove("summary");
+    }
+    if (which == 'summary') {
+        document.getElementById('criteria').classList.add("summary");
+        document.getElementById('criteria').classList.remove("full_list");
+    }
+    button.classList.add("active");
+}
+
+
+function impactlist(which, button) {
+    // See more text by altering css of the clicked element's top parent node
+    document.getElementById('summary').classList.remove("active");
+    document.getElementById('full_list').classList.remove("active");
+
+    if (which == 'full_list') {
+        document.getElementById('impactfactors').classList.add("full_list");
+        document.getElementById('impactfactors').classList.remove("summary");
+    }
+    if (which == 'summary') {
+        document.getElementById('impactfactors').classList.add("summary");
+        document.getElementById('impactfactors').classList.remove("full_list");
+    }
+    button.classList.add("active");
+}
+
+
+
+function expandCriteria(element, className) {
+    expand(element, className, 'criteria');
+}
+
+
+function expandImpact(element, className) {
+    expand(element, className, 'impactfactors');
+}
+
+
+function expand(element, className, id) {
+    console.log("expand time:" + element + className);
+    element = element.parentNode;
+    var mainparent = document.getElementById(id).classList;
+    // Never expand or collapse summary items
+    if (mainparent.contains("full_list")) {
+        if (element.classList.contains(className)) {
+            element.classList.remove(className);
+        } else {
+            element.classList.add(className);
+        }
+    }
+}

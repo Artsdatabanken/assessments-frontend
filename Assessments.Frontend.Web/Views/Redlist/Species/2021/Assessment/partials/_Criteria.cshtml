@@ -409,7 +409,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                 string isactive = @Criteria.inString(key, @Model.CriteriaSummarized);
             <li class="@isactive">
                 <span class="text_container"
-                      onclick="expandCriteria(this, 'first_hidden_layer')">
+                      onclick="expandCriteria(this, 'opened_element')">
                     @{ expandOrBullet(true);}
                     <span class="title_field clickable">
                         @key - @value["title"]
@@ -433,7 +433,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             <li class=" @subcriteria_isactive">
                                 <span class="text_container">
                                     <span class="text_collection">
-                                        <span class="title_field" onclick="expandCriteria(this, 'first_hidden_layer')">
+                                        <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
                                             @{expandOrBullet(true);}
                                             <span class="text_text clickable">
                                                 @k - @v["title"]
@@ -500,7 +500,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                         <li class=" active">
                             <span class="text_container">
                                 <span class="text_collection">
-                                    <span class="title_field clickable" onclick="expandCriteria(this, 'first_hidden_layer')">
+                                    <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
                                         @{expandOrBullet(true);}
                                         <span class="text_text">
                                             Underkriterier
@@ -518,7 +518,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                 <li class=" @subcriteria_isactive">
                                                     <span class="text_container">
                                                         <span class="text_collection">
-                                                            <span class="title_field" onclick="expandCriteria(this, 'first_hidden_layer')">
+                                                            <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
                                                                 @{expandOrBullet(true);}
                                                                 <span class="text_text clickable">
                                                                     @k - @v["title"]
@@ -578,48 +578,49 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             </span>
                         </li>
                     </ul>
+                    <ul class="second">
+                        <li class="active">
+                            <span class="text_container">
+                                <span class="text_collection">
+                                    <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
+                                        @{expandOrBullet(true);}
+                                        <span class="text_text clickable">
+                                            Konklusjon for B-kriteriet
+                                            @{iconChooser("active");}
+                                            <br />
+                                        </span>
+
+                                    </span>
+                                    @{
+                                        string b_category = Model.Category;
+                                        bool b_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
+                                        if (b_comparison)
+                                        {
+                                            b_category = Model.CategoryAdjustedFrom;
+                                        }
+                                    }
+                                    <p class="b_summary">
+                                        <span class="graphic_element @b_category">@b_category</span>
+                                        <span>
+                                            Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
+                                            @if (b_comparison)
+                                            {
+                                                @b_category
+                                            }
+                                            else
+                                            {
+                                                <partial name="/Views/Shared/_Category.cshtml" />
+                                            }
+                                        </span>
+                                    </p>
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+
                 }
 
-                
-                <ul class="second">
-                    <li class="active">
-                        <span class="text_container">
-                            <span class="text_collection">
-                                <span class="title_field" onclick="expandCriteria(this, 'first_hidden_layer')">
-                                    @{expandOrBullet(true);}
-                                    <span class="text_text clickable">
-                                        Konklusjon for B-kriteriet
-                                        @{iconChooser("active");}
-                                        <br />
-                                    </span>
 
-                                </span>
-                                @{
-                                    string b_category = Model.Category;
-                                    bool b_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
-                                    if (b_comparison)
-                                    {
-                                        b_category = Model.CategoryAdjustedFrom;
-                                    }
-                                }
-                                <p class="b_summary">
-                                    <span class="graphic_element @b_category">@b_category</span>
-                                    <span>
-                                        Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
-                                        @if (b_comparison)
-                                        {
-                                            @b_category
-                                        }
-                                        else
-                                        {
-                                            <partial name="/Views/Shared/_Category.cshtml" />
-                                        }
-                                    </span>
-                                </p>
-                            </span>
-                        </span>
-                    </li>                   
-                </ul>
             </li>
             }
         </ul>
@@ -632,62 +633,3 @@ else
 }
 
 
-
-<script>
-
-    // JS only relevant for users with javascript.
-
-    var first_criteria = true;
-
-    function criterialist(which, button) {
-        // See more text by altering css of the clicked element's top parent node
-        document.getElementById('summary_criteria').classList.remove("active");
-        document.getElementById('full_list_criteria').classList.remove("active");
-
-        if (which == 'full_list') {
-            document.getElementById('criteria').classList.add("full_list");
-            document.getElementById('criteria').classList.remove("summary");
-            if (first == true) {
-                first_close();
-            }
-            first = false;
-        }
-        if (which == 'summary') {
-            document.getElementById('criteria').classList.add("summary");
-            document.getElementById('criteria').classList.remove("full_list");
-        }
-        button.classList.add("active");
-    }
-
-    function expandCriteria(element, className) {
-        console.log("expand time")
-        element = element.parentNode;
-        var mainparent = document.getElementById('criteria').classList;
-        // Never expand or collapse summary items
-        if (!mainparent.contains("summary")) {
-            if (element.classList.contains(className)) {
-                element.classList.remove(className);
-            } else {
-                element.classList.add(className);
-            }
-        }
-    }
-
-    function first_close() {
-        var elList = document.getElementsByClassName("inactive");
-        for (var i = 0; i < elList.length; i++) {
-            elList[i].classList.add("first_hidden_layer");
-        }
-    }
-
-    function showTabButtons() {
-        var elList = document.getElementsByClassName("changetab");
-        for (var i = 0; i < elList.length; i++) {
-            elList[i].style.visibility = "visible";
-        }
-    }
-
-    showTabButtons();
-    document.getElementById('criteria').classList.add("summary");
-
-</script>

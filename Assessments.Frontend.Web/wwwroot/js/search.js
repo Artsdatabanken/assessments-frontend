@@ -119,10 +119,12 @@ const inputChange = async (e) => {
     createList(jsonList);
 }
 
-searchField.addEventListener("input", inputChange);
+if (searchField) {
+    searchField.addEventListener("input", inputChange);
+}
 
 window.onclick = (e) => {
-    if (!searchField.contains(e.target) && !autocompleteList.contains(e.target)) {
+    if (searchField && !searchField.contains(e.target) && !autocompleteList.contains(e.target)) {
         removeList();
     }
 }

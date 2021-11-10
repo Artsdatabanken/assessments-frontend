@@ -1,0 +1,43 @@
+﻿<!-- Add  category-selected to active tab -->
+@model SpeciesAssessment2021
+
+@functions {
+    public string setActive(string first, string second)
+    {
+        if (second.Contains(first))
+        {
+            return "isactive";
+        }
+        else
+        {
+            return "notactive";
+        }
+    }
+}
+
+    <ul class="category_displayer criteria_displayer noline">
+        <li class="@setActive("A", @Model.CriteriaSummarized)">
+            <div class="category_item">
+                <span>A</span>
+            </div>
+            <span class="tag">Populasjonsnedgang</span>
+        </li>
+        <li class="@setActive("B", @Model.CriteriaSummarized)">
+            <div class="category_item">
+                <span>B</span>
+            </div>
+            <span class="tag">Begrenset utberedelse</span>
+        </li>
+        <li class="@setActive("C", @Model.CriteriaSummarized)">
+            <div class="category_item">
+                <span>C</span>
+            </div>
+            <span class="tag">Få med nedgang</span>
+        </li>
+        <li class="@setActive("D", @Model.CriteriaSummarized)">
+            <div class="category_item">
+                <span>D</span>
+            </div>
+            <span class="tag">Svært få</span>
+        </li>
+    </ul>

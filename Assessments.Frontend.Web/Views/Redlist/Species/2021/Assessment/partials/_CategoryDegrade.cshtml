@@ -13,10 +13,19 @@
         <p>
             @Model.RationaleCategoryAdjustment
         </p>
+        <p>
+            <span class="graphic_element @Model.CategoryAdjustedFrom">@Model.CategoryAdjustedFrom</span>
+            <span class="material-icons" style="vertical-align: bottom;">
+                arrow_right_alt
+            </span>
+            <span class="graphic_element @Model.CategoryAdjustedTo.Substring(0,2)">@Model.CategoryAdjustedTo</span>
+        </p>
+
         <p>@ViewBag.glossary["degrees"]["description"]</p>
 
 
-        <span>@Model.CategoryAdjustedFrom > @Model.CategoryAdjustedTo</span>
+
+
 
     }
 

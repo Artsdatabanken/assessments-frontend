@@ -119,8 +119,6 @@
                 }
 
             </span>
-
-
         </span>
     }
 
@@ -147,18 +145,18 @@
                 @foreach (var (key, value) in impactfactors_json)
                 {
                     <li class="@activeOrNot(key)">
-                        <span onclick="expand(this, 'first_hidden_layer')" class="text_container @isClickableClass(value)">
-                            @{ toggleChooser(value);}
+                        <span  
+                              class="text_container @isClickableClass(value)" 
+                              onclick="expand(this, 'first_hidden_layer')">
+                            @{toggleChooser(value);}
                             @value["title"]
                             @{iconChooser(activeOrNot(key));}
                         </span>
 
                         @if (value.ContainsKey("subelement"))
                         {
+                            var first_layer = Newtonsoft.Json.Linq.JObject.Parse(value["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
                             <ul class="second @activeOrNot(key)">
-                                @{
-                                    var first_layer = Newtonsoft.Json.Linq.JObject.Parse(value["subelement"].ToString()).ToObject<Dictionary<string, Dictionary<string, object>>>();
-                                }
                                 @foreach (var (first_k, first_v) in first_layer)
                                 {
                                     <li class="@activeOrNot(first_k)">

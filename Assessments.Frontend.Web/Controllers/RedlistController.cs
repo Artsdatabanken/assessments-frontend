@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [Route("rodlisteforarter")]
+    [Route("")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class RedlistController : BaseController<RedlistController>
     {
@@ -25,6 +25,7 @@ namespace Assessments.Frontend.Web.Controllers
             _artskartApiService = artskartApiService;
         }
 
+        [Route("")]
         public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new Dictionary<string, JObject>();

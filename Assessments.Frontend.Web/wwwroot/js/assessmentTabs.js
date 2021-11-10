@@ -17,11 +17,14 @@ function first_close() {
     // Rund on first change of tab to full-view
     // Adds 
     console.log("First close");    
-    var elements = document.getElementsByClassName("active");
+    //var elements = document.getElementsByClassName("active");
+
+    var elements = document.querySelectorAll(".tabbed_element_container li.active");
+
     for (let i in elements) {
-        //let parentnode = elements[i].closest(li);
         if (elements[i] && elements[i].classList) {
             elements[i].classList.add("opened_element");
+            
         }
     }
 }
@@ -81,7 +84,9 @@ function expandImpact(element, className) {
 
 function expand(element, className, id) {
     console.log("expand time:" + element + className);
-    element = element.parentNode;
+    element = element.closest("li");
+
+
     var mainparent = document.getElementById(id).classList;
     // Never expand or collapse summary items
     if (mainparent.contains("full_list")) {

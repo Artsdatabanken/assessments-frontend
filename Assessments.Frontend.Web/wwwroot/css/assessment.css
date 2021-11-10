@@ -744,22 +744,57 @@ ul.second {
     display: block;
 }
 */
-.full_list p {
-    display: none;
-}
 
 /* FIRST LAYER */
+.full_list > .impact_table,
+.full_list li > p,
 .full_list li > ul {
     display: none;
 }
 
-.full_list .opened_element > ul{
+.full_list .opened_element .impact_table,
+.full_list .opened_element p,
+.full_list .opened_element ul {
     display: block;
 }
 
 /* SECOND LAYER */
-.full_list .opened_element .opened_element ul{
-    display:none;
+.full_list .opened_element li .impact_table,
+.full_list .opened_element li p,
+.full_list .opened_element li ul {
+    display: none;
+}
+
+.full_list .opened_element .opened_element .impact_table,
+.full_list .opened_element .opened_element p,
+.full_list .opened_element .opened_element ul {
+    display: block;
+}
+
+/* THIRD LAYER */
+.full_list .opened_element .opened_element li .impact_table,
+.full_list .opened_element .opened_element li p,
+.full_list .opened_element .opened_element li ul {
+    display: none;
+}
+
+.full_list .opened_element .opened_element .opened_element .impact_table,
+.full_list .opened_element .opened_element .opened_element p,
+.full_list .opened_element .opened_element .opened_element ul {
+    display: block;
+}
+
+/* FOURTH LAYER */
+.full_list .opened_element .opened_element .opened_element li .impact_table,
+.full_list .opened_element .opened_element .opened_element li p,
+.full_list .opened_element .opened_element .opened_element li ul {
+    display: none;
+}
+
+.full_list .opened_element .opened_element .opened_element .opened_element .impact_table,
+.full_list .opened_element .opened_element .opened_element .opened_element p,
+.full_list .opened_element .opened_element .opened_element .opened_element ul {
+    display: block;
 }
 
 

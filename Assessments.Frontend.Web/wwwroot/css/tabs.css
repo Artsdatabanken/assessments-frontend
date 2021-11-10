@@ -78,6 +78,11 @@ ul.second {
     padding-left: 0;
 }
 
+.tabbed_element_container .thresholdlist_container {
+    padding-left: 24px;
+    padding-bottom: 20px;
+}
+
 /* HOVER EFFECT */
 
 .clickable:hover {

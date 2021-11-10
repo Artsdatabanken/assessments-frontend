@@ -1,5 +1,4 @@
-﻿
-@model SpeciesAssessment2021
+﻿@model SpeciesAssessment2021
 @*
     TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
 
@@ -555,14 +554,12 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                                         {
                                                                             clickable = "clickable";
                                                                         }
-
                                                                         <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
                                                                             <span class="text_container">
                                                                                 <span class="text_collection">
-                                                                                    <span class="title_field @clickable" onclick="expandCriteria(this, 'opened_element')">
+                                                                                    <span class="text_text @clickable" onclick="expandCriteria(this, 'opened_element')">
                                                                                         @{expandOrBullet(clickable == "clickable");}
                                                                                         @subkey - @subvalue["title"]
-                                                                                        @modelkey
                                                                                     </span>
                                                                                     @{ iconChooser(Criteria.inList(subkey, clean_list)); }
                                                                                 </span>

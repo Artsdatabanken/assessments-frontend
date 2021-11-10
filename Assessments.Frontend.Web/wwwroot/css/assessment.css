@@ -356,8 +356,6 @@ no_distribution {
     stroke: #000000
 }
 
-
-
 .vurdert_N .land,
 .vurdert_N .sea {
     stroke-width:0.7px;
@@ -539,11 +537,6 @@ span.area i {
     text-align: end;
 }
 
-/*criteria*/
-.options_list p {
-    display:none;
-}
-
 /* IMPACT FACTORS */
 .impact_table {
     display: flex;
@@ -564,10 +557,6 @@ span.area i {
     max-width:200px;
 }
 
-
-
-/* OTHER ELEMENTS */
-
 /* All */
 .outer .text_collection {
     padding: 0;
@@ -577,7 +566,6 @@ span.area i {
 .speciesgroup_container{
     display:flex;
 }
-
 
 .species_group_image {
     width: 62px;
@@ -605,7 +593,6 @@ span.area i {
 .page-header h1 {
     margin-top: 0;
 }
-
 
 .history_list li {
     font-size: 12pt;
@@ -641,26 +628,22 @@ span.area i {
     text-align: center;
 }
 
+/* CRITERIA CONTENT */
 .thresholdlist {
     display: block;
     padding: 5px;
     max-width:100%;
 }
 
-.tabbed_element_container .thresholdlist_container {
-    padding-left: 24px;
-    padding-bottom: 20px;
-}
-
-
 .thresholdlist.active {
     background: lightgrey;
 }
 
-.hotpink {
-    color: hotpink;
-    background:pink;
+.options_list p {
+    display: none;
 }
+
+/* C QUESTIOn */
 
 .C_question{
     font-size:8px;
@@ -684,3 +667,9 @@ span.area i {
     color: white;
 }
 
+/* FOR TEST */
+
+.hotpink {
+    color: hotpink;
+    background: pink;
+}

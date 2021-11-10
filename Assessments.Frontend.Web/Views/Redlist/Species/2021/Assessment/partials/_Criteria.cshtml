@@ -550,13 +550,18 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                                     @foreach (var (subkey, subvalue) in subdict)
                                                                     {
                                                                         var modelkey = key + k + subkey;
+                                                                        string clickable = "";
+                                                                        if(modelkey == "Baii")
+                                                                        {
+                                                                            clickable = "clickable";
+                                                                        }
+
                                                                         <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
                                                                             <span class="text_container">
                                                                                 <span class="text_collection">
-                                                                                    <span class="text_text">
-                                                                                        @{expandOrBullet(false);}
+                                                                                    <span class="title_field @clickable" onclick="expandCriteria(this, 'opened_element')">
+                                                                                        @{expandOrBullet(clickable == "clickable");}
                                                                                         @subkey - @subvalue["title"]
-
                                                                                         @modelkey
                                                                                     </span>
                                                                                     @{ iconChooser(Criteria.inList(subkey, clean_list)); }
@@ -564,8 +569,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
                                                                             </span>
                                                                             @{ getQuantile(subvalue, modelkey, modelkey);}
-                                                                        </li>
-                                                                    }
+                                                                        </li>                                                                    }
                                                                 </ul>
                                                             }
                                                         </span>

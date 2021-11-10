@@ -714,7 +714,7 @@ ul.second {
 
 /* HANDLING TABS ON ASSESSMENT */
 
-.inactive.listitem_criteria,
+.summary .inactive.listitem_criteria,
 .summary .impact_v,
 .summary li.inactive {
     display: none;

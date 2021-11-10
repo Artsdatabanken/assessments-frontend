@@ -1,5 +1,11 @@
 // JS only relevant for users with javascript.
-console.log("running");
+
+// RUN ON START:
+console.log("KJØRER ASSESMENT TABS")
+showTabButtons();
+first_close();
+document.getElementById('criteria').classList.add("summary");
+document.getElementById('impactfactors').classList.add("summary");
 
 function showTabButtons() {
     // Users with javascript are shown the buttons to toggle tabs
@@ -12,13 +18,10 @@ function showTabButtons() {
     }
 }
 
-
 function first_close() {
-    // Rund on first change of tab to full-view
-    // Adds 
-    console.log("First close");    
-    //var elements = document.getElementsByClassName("active");
-
+    // Run on Start
+    // Adds the class "opened_element" to all active tabs for use in the dropdown effects.
+    // Adding extra class means less exceptions.
     var elements = document.querySelectorAll(".tabbed_element_container li.active");
 
     for (let i in elements) {
@@ -28,13 +31,6 @@ function first_close() {
         }
     }
 }
-
-// RUN ON START:
-console.log("KJØRER ASSESMENT TABS")
-showTabButtons();
-first_close();
-document.getElementById('criteria').classList.add("summary");
-document.getElementById('impactfactors').classList.add("summary");
 
 
 function criterialist(which, button) {
@@ -69,8 +65,6 @@ function impactlist(which, button) {
     }
     button.classList.add("active");
 }
-
-
 
 function expandCriteria(element, className) {
     expand(element, className, 'criteria');

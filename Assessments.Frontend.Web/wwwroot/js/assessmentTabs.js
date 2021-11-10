@@ -3,8 +3,14 @@
 // RUN ON START:
 showTabButtons();
 first_close();
-document.getElementById('criteria').classList.add("summary");
-document.getElementById('impactfactors').classList.add("summary");
+if (document.getElementById('criteria') && document.getElementById('criteria').classList) {
+    document.getElementById('criteria').classList.add("summary");
+}
+if (document.getElementById('impactfactors') && document.getElementById('impactfactors').classList) {
+    document.getElementById('impactfactors').classList.add("summary");
+}
+
+
 
 function showTabButtons() {
     // Users with javascript are shown the buttons to toggle tabs

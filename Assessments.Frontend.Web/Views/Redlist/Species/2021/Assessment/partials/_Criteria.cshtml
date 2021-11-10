@@ -603,18 +603,20 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                             b_category = Model.CategoryAdjustedFrom;
                                         }
                                     }
-                                    <p class="b_summary">
-                                        <span class="graphic_element @b_category">@b_category</span>
-                                        <span>
-                                            Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
-                                            @if (b_comparison)
-                                            {
-                                                @b_category
-                                            }
-                                            else
-                                            {
-                                                <partial name="/Views/Shared/_Category.cshtml" />
-                                            }
+                                    <p>
+                                        <span class="b_summary">
+                                            <span class="graphic_element @b_category">@b_category</span>
+                                            <span>
+                                                Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
+                                                @if (b_comparison)
+                                                {
+                                                    @b_category
+                                                }
+                                                else
+                                                {
+                                                    <partial name="/Views/Shared/_Category.cshtml" />
+                                                }
+                                            </span>
                                         </span>
                                     </p>
                                 </span>

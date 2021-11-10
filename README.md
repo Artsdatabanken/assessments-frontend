@@ -37,3 +37,4 @@ Deployment er delt i test og produksjon og skjer via github actions. Deployment 
 Dockerimage bygges og sendes til artdatabankens dockerhub:https://hub.docker.com/repository/docker/artsdatabanken/assessments-fe - det er foreløpig to tags; test og latest - henholdsvis test/produksjon. 
 
 For å dytte ut gjeldende versjon til produksjon, gå til #crocotta og bruk kommandoen deploy assessments-fe - da hentes image med tag "latest" fra dockerhub. 
+Tester flytting til jenkins for bygging. 

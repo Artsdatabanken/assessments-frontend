@@ -1,7 +1,6 @@
 // JS only relevant for users with javascript.
 
 // RUN ON START:
-console.log("KJØRER ASSESMENT TABS")
 showTabButtons();
 first_close();
 document.getElementById('criteria').classList.add("summary");
@@ -32,7 +31,6 @@ function first_close() {
     }
 }
 
-
 function criterialist(which, button) {
     // See more text by altering css of the clicked element's top parent node
     document.getElementById('summary_criteria').classList.remove("active");
@@ -48,7 +46,6 @@ function criterialist(which, button) {
     }
     button.classList.add("active");
 }
-
 
 function impactlist(which, button) {
     // See more text by altering css of the clicked element's top parent node
@@ -70,17 +67,13 @@ function expandCriteria(element, className) {
     expand(element, className, 'criteria');
 }
 
-
 function expandImpact(element, className) {
     expand(element, className, 'impactfactors');
 }
 
-
 function expand(element, className, id) {
     console.log("expand time:" + element + className);
     element = element.closest("li");
-
-
     var mainparent = document.getElementById(id).classList;
     // Never expand or collapse summary items
     if (mainparent.contains("full_list")) {

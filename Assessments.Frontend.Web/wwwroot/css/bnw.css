@@ -1,0 +1,95 @@
+
+.fremmedartlink,
+.redlistlink {
+    background: #3d3b3a;
+}
+
+
+.RE,
+.CR,
+.EN,
+.VU,
+.DD,
+.LC,
+.NA,
+.NE,
+.NT {
+    color: white;
+    background: #3d3b3a;
+}
+
+input:checked + .slider {
+    background-color: #3d3b3a;
+}
+
+.button.tertiary,
+.main button.tertiary {
+    color: #124eac;
+    border-bottom: 2px solid #124eac;
+    padding: 2px;
+}
+
+.title_header .button.tertiary {
+    color: white;
+    border:none;
+}
+
+.title_header{
+    background:black;
+}
+
+.land, .sea {
+    fill: white;
+}
+/* PAD-SIZE 940px */
+@media only screen and (max-width: 940px) {
+
+    .side {
+        background: none;
+        border-top:1px solid black;
+    }
+}
+
+/* MAP COLOURS */
+.extinct,
+.sea.extinct {
+    background: #fcbc78;
+    fill: #fcbc78;
+}
+
+.presumed_extinct,
+.sea.presumed_extinct {
+    background: #ff800f;
+    fill: #ff800f;
+}
+
+.presumed,
+.sea.presumed {
+    background: #a2c8ec;
+    fill: #a2c8ec;
+}
+
+.known,
+.sea.known {
+    background: #006ba8;
+    fill: #006ba8;
+}
+
+.list-search,
+.controls button.active,
+.habitat_element,
+.main .changetab,
+.main .changetab.active,
+.tabbed_element_container {
+    border-color: black;
+}
+
+.viewselector {
+    border-color: black;
+}
+
+
+.controls button.active,
+.main .changetab.active {
+    border-bottom-color: white;
+}

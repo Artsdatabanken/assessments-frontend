@@ -186,31 +186,16 @@
 }
 
 
-.RE ,
-.CR ,
-.EN ,
-.VU {
-    color: white;
-}
-
-
+.RE,
+.CR,
+.EN,
+.VU,
 .DD,
 .LC,
 .NA,
-.NE {
-    color: #282828;
-}
-
+.NE,
 .NT {
-    color: #2b2b2b;
-}
-
-.category_displayer .NT,
-.category_displayer .DD,
-.category_displayer .LC,
-.category_displayer .NA,
-.category_displayer .NE {
-    color: #3d3b3a;
+    color: white;
 }
 
 .criteria_displayer li{

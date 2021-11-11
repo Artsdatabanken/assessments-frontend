@@ -1,99 +1,146 @@
+/* 
+    HIGH CONTRAST THEME
+*/
 
-.fremmedartlink,
-.redlistlink {
-    background: #3d3b3a;
-}
-
-.RE,
-.CR,
-.EN,
-.VU,
-.DD,
-.LC,
-.NA,
-.NE,
-.NT {
+.highcontrast .RE,
+.highcontrast .CR,
+.highcontrast .EN,
+.highcontrast .VU,
+.highcontrast .DD,
+.highcontrast .LC,
+.highcontrast .NA,
+.highcontrast .NE,
+.highcontrast .NT {
     color: white;
     background: #3d3b3a;
 }
 
-input:checked + .slider {
+.highcontrast input:checked + .slider {
     background-color: #3d3b3a;
 }
 
-.sidebarmenu li h3,
-.button.tertiary,
-.main button.tertiary {
+.highcontrast .sidebarmenu li h3,
+.highcontrast .button.tertiary,
+.highcontrast .main button.tertiary {
     color: #124eac;
     text-decoration: underline;
     padding: 2px;
 }
 
-.title_header .button.tertiary {
+.highcontrast .title_header .button.tertiary {
     color: white;
-    border:none;
+    border: none;
 }
 
-.title_header{
-    background:black;
+.highcontrast .title_header {
+    background: black;
 }
 
-.habitat_element{
-    background:white;
+.highcontrast .habitat_element {
+    background: white;
 }
 
-.land, .sea {
+.highcontrast .land, .sea {
     fill: white;
 }
 /* PAD-SIZE 940px */
 @media only screen and (max-width: 940px) {
 
-    .side {
+    .highcontrast  .side {
         background: none;
-        border-top:1px solid black;
+        border-top: 1px solid black;
     }
 }
 
 /* MAP COLOURS */
-.extinct,
-.sea.extinct {
+.highcontrast .extinct,
+.highcontrast .sea.extinct {
     background: #fcbc78;
     fill: #fcbc78;
 }
 
-.presumed_extinct,
-.sea.presumed_extinct {
+.highcontrast .presumed_extinct,
+.highcontrast .sea.presumed_extinct {
     background: #ff800f;
     fill: #ff800f;
 }
 
-.presumed,
-.sea.presumed {
+.highcontrast .presumed,
+.highcontrast .sea.presumed {
     background: #a2c8ec;
     fill: #a2c8ec;
 }
 
-.known,
-.sea.known {
+.highcontrast .known,
+.highcontrast .sea.known {
     background: #006ba8;
     fill: #006ba8;
 }
 
-.list-search,
-.controls button.active,
-.habitat_element,
-.main .changetab,
-.main .changetab.active,
-.tabbed_element_container {
-    border-color: black;
-}
-
-.viewselector {
+.highcontrast .list-search,
+.highcontrast .controls button.active,
+.highcontrast .habitat_element,
+.highcontrast .main .changetab,
+.highcontrast .main .changetab.active,
+.highcontrast .tabbed_element_container {
     border-color: black;
 }
 
 
-.controls button.active,
-.main .changetab.active {
+
+/* 
+    DARK THEME:
+   FUN PROJECT NOT EVEN SLIGHTLY THERE
+*/
+
+.darktheme .listheader,
+.darktheme .viewselector {
+    border-color: #b3b1b1;
+    background: #424141;
+}
+
+
+.highcontrast .controls button.active,
+.highcontrast .main .changetab.active {
     border-bottom-color: white;
+}
+
+.darktheme header,
+.darktheme {
+    color: white;
+    background: black;
+}
+
+.darktheme .title_header {
+    background: #570808;
+}
+
+.darktheme .list-search,
+.darktheme .main-content{
+    color: white;
+    background: #201f1f;
+}
+
+.darktheme p,
+.darktheme h1,
+.darktheme h2,
+.darktheme h3 {
+    color:white;
+}
+
+
+.darktheme .byline {
+   color: rgb(202, 202, 202)
+}
+
+.darktheme .button.primary,
+.darktheme .main button.primary {
+    background: #ca1c35;
+    color: white;
+}
+
+.darktheme .controls button.active{
+    background:transparent;
+    color:white;
+    border-bottom:transparent;
 }

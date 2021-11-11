@@ -1,6 +1,7 @@
 const searchField = document.getElementById("Name");
 const autocompleteList = document.getElementById("autocomplete_list_ul");
-const searchUrlBase = "https://artskart.artsdatabanken.no/appapi/api/data/SearchTaxons?";
+const domain = window.location.domain;
+const searchUrlBase =  "/rodlisteforarter/2021/suggestions";
 const autoCompleteWaitTime = 1000;
 
 const taxonCategories = {
@@ -47,6 +48,8 @@ const formatScientificName = (name) => {
     name = name.replace("coll.", "</i>coll.<i>");
     name = name.replace("n.", "</i>n.<i>");
     name = name.replace("sp.", "</i>sp.<i>");
+    name = name.replace("subsp.", "</i>subsp.<i>");
+    name = name.replace("var.", "</i>var.<i>")
     name = name.replace(" '", "</i> '");
     name = name.replace("' ", "'<i> ");
     name = name.replace("<i></i>", "");
@@ -100,7 +103,7 @@ const inputChange = async (e) => {
         removeList();
         return;
     }
-    searchUrl = searchUrlBase + `name=${e.target.value}`;
+    searchUrl = searchUrlBase + `?search=${e.target.value}`;
 
     // wait and check if user has stopped typing
     await wait(autoCompleteWaitTime);

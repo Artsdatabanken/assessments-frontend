@@ -62,15 +62,9 @@ namespace Assessments.Frontend.Web.Controllers
             if (!string.IsNullOrEmpty(viewModel.Name))
             {
                 var name = viewModel.Name.Trim().ToLower();
-                var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
 
-                var queryByName = query.Where(x => 
-                    x.ScientificName.ToLower().Contains(name) ||                            // Match on scientific name.
-                    speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
-                    x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
-                    x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
-                    x.SpeciesGroup.ToLower().Contains(name));                               // Match on species group.
-
+                var queryByName = Helpers.GetQueryByName(query, name);
+                
                 if (queryByName.Any())
                 {
                     query = queryByName;
@@ -168,7 +162,7 @@ namespace Assessments.Frontend.Web.Controllers
         {
             var query = await DataRepository.GetSpeciesAssessments();
 
-            return Json(query.First());
+            return Json(query.Where(x => x.PopularName == "østersjørør"));
         }
 
         [Route("2021/{id:required}")]

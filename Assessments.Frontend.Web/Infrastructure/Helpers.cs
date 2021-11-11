@@ -155,6 +155,18 @@ namespace Assessments.Frontend.Web.Infrastructure
             return regions.ToArray();
         }
 
+        public static IQueryable<SpeciesAssessment2021> GetQueryByName(IQueryable<SpeciesAssessment2021> query, string name)
+        {
+            var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
+
+            return query.Where(x =>
+                x.ScientificName.ToLower().Contains(name) ||                            // Match on scientific name.
+                speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
+                x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
+                x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
+                x.SpeciesGroup.ToLower().Contains(name));                               // Match on species group.
+        }
+
         /// <summary>
         ///  Sortert liste med navn på regioner (etter gamle fylkesnummer)
         /// </summary>

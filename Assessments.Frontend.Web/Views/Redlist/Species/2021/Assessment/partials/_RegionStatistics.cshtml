@@ -36,9 +36,6 @@
 
         <h3>Geografisk distribusjon</h3>
 
-
-
-
         <div class="region_distributions @Model.AssessmentArea">
             @if (Model.AssessmentArea == "N")
             {
@@ -76,9 +73,6 @@
                             </span>
                         </li>
                     }
-
-
-
                 </ul>
             }
             else
@@ -102,23 +96,18 @@
             </li>
 
         </ul>
-                    }
-
-            <div class="map @Model.AssessmentArea">
-                @if (Model.AssessmentArea == "S")
-                {
-                    <partial name="/Views/Redlist/Species/2021/Assessment/partials/_MapSvalbard.cshtml" />
-                }
-                else
-                {
-                    <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Map.cshtml" />
-
-                }
-            </div>
-
+        }
+        <div class="map @Model.AssessmentArea">
+            @if (Model.AssessmentArea == "S")
+            {
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_MapSvalbard.cshtml" />
+            }
+            else
+            {
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Map.cshtml" />
+            }
         </div>
-        <br />
-        <p class="center-horizontal"><i>Kart over utberedelsesområdet.</i></p>
-
     </div>
+
+</div>
 }

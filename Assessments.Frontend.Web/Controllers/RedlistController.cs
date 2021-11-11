@@ -167,23 +167,28 @@ namespace Assessments.Frontend.Web.Controllers
             
             // Remove species not present in 'rødlista for arter'
             var suggestions = artskartResult.Where(x => 
-                                                    (x.TaxonCategory != Constants.TaxonCategories["Species"] &&
-                                                    x.TaxonCategory != Constants.TaxonCategories["SubSpecies"] &&
-                                                    x.TaxonCategory != Constants.TaxonCategories["Variety"]) ||
+                                                    (x.TaxonCategory != Constants.TaxonCategoriesEn.Species &&
+                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&
+                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.Variety) ||
              query.Any(y => y.ScientificNameId == x.ScientificNameId));
 
             // Add assessmentIds to species, subspecies and variety
             foreach (var item in suggestions.Select((hit, i) => new { i, hit}))
             {
                 if (
-                    item.hit.TaxonCategory == Constants.TaxonCategories["Species"] ||
-                    item.hit.TaxonCategory == Constants.TaxonCategories["SubSpecies"] ||
-                    item.hit.TaxonCategory == Constants.TaxonCategories["Variety"]
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Species ||
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.SubSpecies ||
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Variety
                     )
                 {
                     var ids = query.Where(x => x.ScientificNameId == item.hit.ScientificNameId).Select(x => new { id = x.Id, area = x.AssessmentArea }).ToArray();
                     item.hit.assessmentIds = ids;
                 }
+            }
+
+            if (artskartResult.Any() && suggestions.Any() != true)
+            {
+                return Json(new {message = "Her får du treff, men ingen av artene befinner seg i norsk rødliste for arter 2021."});
             }
 
             return Json(suggestions);

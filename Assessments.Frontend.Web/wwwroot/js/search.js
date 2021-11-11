@@ -57,6 +57,9 @@ const formatScientificName = (name) => {
 }
 
 const formatListElements = (el) => {
+    if (!el.ScientificName) {
+        return `<span>${el.message}</span>`
+    }
     if (!el.PopularName) {
         return `${formatScientificName(el.ScientificName)} <span>(${el.TaxonCategory})</span>`
     }
@@ -71,7 +74,7 @@ const createList = (json) => {
         li.classList.add("search_autocomplete");
         li.tabIndex = 1;
         li.onclick = () => {
-            searchField.value = el.ScientificName;
+            searchField.value = el.ScientificName + " /" + el.TaxonCategory;
             document.getElementById("search_and_filter_form").submit();
         }
         autocompleteList.appendChild(li);
@@ -85,7 +88,9 @@ const removeList = () => {
 }
 
 const getListValues = (json) => {
-    console.log(json);
+    if (typeof json != Array) {
+        return [json];
+    }
     return json.map(el => {
         return { "PopularName": el.popularName, "TaxonCategory": taxonCategories[el.taxonCategory], "ScientificName": el.scientificName };
     });

@@ -148,7 +148,7 @@ option {
 }
 
 /* FULLSCREEN above 940px*/
-@media only screen and (min-width: 940px) {
+@media only screen and (min-width: 941px) {
     .mid-content {
         padding-left: 10px;
         padding-right: 10px;
@@ -507,6 +507,11 @@ option {
     background: #751111;
 }
 
+.menuitems:active, .menuitems:focus, .menuitems:hover {
+    background: #ededed;
+    color: black;
+}
+
 
 @media only screen and (min-width: 941px) {
 
@@ -530,6 +535,7 @@ option {
         font-family: "Roboto condensed";
         height: 50px;
         line-height: 50px;
+        width: 240px;
     }
 }
 

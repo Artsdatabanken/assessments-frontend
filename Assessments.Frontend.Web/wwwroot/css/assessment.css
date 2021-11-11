@@ -126,26 +126,27 @@
     border-bottom: 1px solid #e9e9e9;
 }
 
+.S .region{
+    max-width:120px;
+}
+
 .region_list_header {
     width: 100%;
     max-width: 350px;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5px;
 }
 
-span.region p {
+li.region p {
     margin: 2px 0;
     width:150px;    
     display:inline-block;
 }
 
-p.region_list_header b {
+.region_list_header b {
     margin: 2px 0;
     display:inline-block;
-}
-
-p.region_list_header {
-    margin-bottom: 5px;
 }
 
 .region .area{
@@ -344,8 +345,12 @@ span.material-icons.less {
     width: 65%;
 }
 
-.regionlist+p.list_header {
-    border-bottom: #4c4a48;
+.map.S{
+    width:120px;
+}
+
+.region_list_header {
+    border-bottom: 1px solid #4c4a48;
 }
 
 .vurdert_N,
@@ -388,11 +393,28 @@ no_distribution {
     color: inherit;
 }
 
+.regionlist.legend {
+    display: block;
+}
+
+.regionlist.legend .region {
+    border: none;
+    padding-bottom: 2px;
+    display: block;
+}
+
+.regionlist.legend .region span{
+    color: black;
+}
 
 /* MOBILE SIZE: 550px til 650px  */
 @media only screen and (max-width: 650px) {
     .regionlist {
         width: 100%;
+    }
+
+    .regionlist.legend {
+        width: auto;
     }
 
     .map {
@@ -409,15 +431,15 @@ no_distribution {
 
 /* Special case when map gets a lot smaller than the list */
 @media (max-width: 1200px) and (min-width: 940px) {
-    .regionlist span.region p,
-    .regionlist span.region i {
+    .regionlist .region p,
+    .regionlist .region i {
         font-size: 10pt;
     }
 }
 
 @media (max-width: 650px) and (min-width: 450px) {
-    .regionlist span.region p,
-    .regionlist span.region i {
+    .regionlist .region p,
+    .regionlist .region i {
         font-size: 10pt;
     }
 

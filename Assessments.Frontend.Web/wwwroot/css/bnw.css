@@ -4,7 +4,6 @@
     background: #3d3b3a;
 }
 
-
 .RE,
 .CR,
 .EN,
@@ -22,10 +21,11 @@ input:checked + .slider {
     background-color: #3d3b3a;
 }
 
+.sidebarmenu li h3,
 .button.tertiary,
 .main button.tertiary {
     color: #124eac;
-    border-bottom: 2px solid #124eac;
+    text-decoration: underline;
     padding: 2px;
 }
 
@@ -36,6 +36,10 @@ input:checked + .slider {
 
 .title_header{
     background:black;
+}
+
+.habitat_element{
+    background:white;
 }
 
 .land, .sea {

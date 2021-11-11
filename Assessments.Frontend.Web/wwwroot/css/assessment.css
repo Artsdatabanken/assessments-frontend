@@ -11,15 +11,6 @@
     margin-left: 15px;
 }
 
-.big_flashy_link{
-    font-size:14pt;
-    background:lightgrey;
-    color:black;
-    text-align:center;
-    padding:20px;
-}
-
-
 @media only screen and (min-width: 550px) {
     .mobileversion {
         display: none;
@@ -31,55 +22,11 @@
     }
 }
 
-.toptitle {
-    float: right;
-    margin-top: 0;
-    text-align: right;
-    font-weight: initial;
-    font-size: 14pt;
-}
-
-.toptitle span {
-    color: #99191a;
-    display:block;
-}
-.side .tag_explanation {
-    display: none;
-}
-
-
-/* Sidebar element*/
-.sidebar_image_info h2{
-    margin:0;
-    padding:0;
-}
-
-.sidebar_image_info .tagline {
-    color: #777368;
-    font-weight: bold;
-}
-
-.sidebar_image_info .image_background {
-    width: 150px;
-    height: 150px;
-    padding: 5px;
-    border-radius: 50%;
-    background: #e7e7e7;
-    margin: 10px;
-    margin-bottom: 20px;
-    display: block;
-}
-
-.sidebar_image_info img {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
 
 /* GRAPHIC ELEMENT FOR CATEGORY */
 .graphic_element.material-icons,
 .graphic_element {
+    font-family: "roboto condensed";
     display: inline-block;
     border-radius: 2px;
     padding: 15px;
@@ -88,14 +35,19 @@
     font-size: 10pt;
     background: grey;
     padding: 4px;
+    padding-left:6px;
     color: white;
     width: 26px;
     height: 26px;
 }
 
+.degraded {
+    padding-left: 4px;
+}
+
 .graphic_element.material-icons {
-    font-size:12pt;
-    padding:5px;
+    font-size: 12pt;
+    padding: 5px;
 }
 
 @media only screen and (max-width: 350px) {
@@ -612,6 +564,18 @@ span.area i {
     color: grey;
 }
 
+.side h3{
+    padding-bottom:0px;
+}
+
+.side hr {
+    margin-top: 10px;
+}
+
+.side hr:first-of-type{
+    margin-top: 0px;
+}
+
 .page-header h1 {
     margin-top: 0;
 }
@@ -619,9 +583,20 @@ span.area i {
 .history_list li {
     font-size: 12pt;
     display: inline-block;
-    border-top: 1px solid lightgray;
     padding-top: 5px;
     padding-bottom: 5px;
+    width: 100%;   
+}
+
+.history_list .tinybutton{
+    margin:0;
+}
+
+@media only screen and (min-width: 965px) {
+    .history_list li {
+        overflow: visible;
+        white-space: nowrap;
+    }
 }
 
 @media only screen and (max-width: 940px) {

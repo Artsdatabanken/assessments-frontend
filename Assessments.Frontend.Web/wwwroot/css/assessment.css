@@ -564,6 +564,18 @@ span.area i {
     color: grey;
 }
 
+.side h3{
+    padding-bottom:0px;
+}
+
+.side hr {
+    margin-top: 10px;
+}
+
+.side hr:first-of-type{
+    margin-top: 0px;
+}
+
 .page-header h1 {
     margin-top: 0;
 }

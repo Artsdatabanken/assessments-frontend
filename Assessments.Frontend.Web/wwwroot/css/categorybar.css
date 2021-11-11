@@ -8,9 +8,9 @@
     font-size: 0;
     max-width: 100%;
     position: relative;
-    overflow-x:auto;
-    display:flex;
-    justify-content:space-between;
+    overflow-x: visible;
+    display: flex;
+    justify-content: space-between;
 }
 
 .category_displayer::before {

@@ -26,6 +26,7 @@
 /* GRAPHIC ELEMENT FOR CATEGORY */
 .graphic_element.material-icons,
 .graphic_element {
+    font-family: "roboto condensed";
     display: inline-block;
     border-radius: 2px;
     padding: 15px;
@@ -34,14 +35,19 @@
     font-size: 10pt;
     background: grey;
     padding: 4px;
+    padding-left:6px;
     color: white;
     width: 26px;
     height: 26px;
 }
 
+.degraded {
+    padding-left: 4px;
+}
+
 .graphic_element.material-icons {
-    font-size:12pt;
-    padding:5px;
+    font-size: 12pt;
+    padding: 5px;
 }
 
 @media only screen and (max-width: 350px) {

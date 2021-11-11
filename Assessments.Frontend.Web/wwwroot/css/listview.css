@@ -102,11 +102,18 @@
 }
 
 .redlist .category_tag {
-    padding: 9px;
     width: 41px;
     display: block;
     height: 41px;
-    padding-top: 13px;
+}
+
+.category_tag_label {
+    margin: auto;
+    display: block;
+    text-align: center;
+    font-family: "roboto condensed";
+    font-size: 20px;
+    line-height: 41px;
 }
 
 .list_cell {

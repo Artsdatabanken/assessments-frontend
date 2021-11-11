@@ -193,14 +193,13 @@
 .VU ,
 .DD,
 .LC,
-.NA,
-.NE ,
 .NT {
     color: white;
 }
 
+.NA,
 .NE {
-    color: #3d3b3a;
+    color: #1c1c1c;
 }
 
 

@@ -576,6 +576,10 @@ span.area i {
     width: 100%;   
 }
 
+.history_list .tinybutton{
+    margin:0;
+}
+
 @media only screen and (min-width: 965px) {
     .history_list li {
         overflow: visible;

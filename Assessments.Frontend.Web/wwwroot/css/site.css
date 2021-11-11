@@ -11,6 +11,7 @@
 
 .main {
     position: relative;
+    background: #f9f9f9;
 }
 
 h1 {
@@ -157,13 +158,12 @@ option {
     /* Page setup */
     .side {
         float: right;
-        display: inline-block;
-        height: 100%;
         padding: 10px;
-        padding-top: 0;
-        padding-left: 20px;
-        height:100%;
-        width:25%;
+        padding-left: 10px;
+        padding-right: 5px;
+        height: 100%;
+        width: 25%;
+        min-width: 200px;
     }
 
     .side button{
@@ -174,7 +174,6 @@ option {
         width: 75%;
         padding:20px;
         padding-top:0;
-        border-right:2px solid lightgrey;
     }
 
     .pagecontainer{

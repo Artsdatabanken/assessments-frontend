@@ -619,9 +619,16 @@ span.area i {
 .history_list li {
     font-size: 12pt;
     display: inline-block;
-    border-top: 1px solid lightgray;
     padding-top: 5px;
     padding-bottom: 5px;
+    width: 100%;   
+}
+
+@media only screen and (min-width: 965px) {
+    .history_list li {
+        overflow: visible;
+        white-space: nowrap;
+    }
 }
 
 @media only screen and (max-width: 940px) {

@@ -188,6 +188,18 @@ namespace Assessments.Frontend.Web.Controllers
             return View("Species/2021/Assessment/SpeciesAssessment2021", assessment);
         }
 
+        [Route("2021/Svalbard")]
+        public async Task<IActionResult> Svalbard2021()
+        {
+            return await Index2021(new RL2021ViewModel() { Area = new[] { "S" }, IsCheck = new[] { "Area" } }, null, false);
+        }
+
+        [Route("2021/Norge")]
+        public async Task<IActionResult> Norge2021()
+        {
+            return await Index2021(new RL2021ViewModel() { Area = new[] { "N" }, IsCheck = new[] { "Area" } }, null, false);
+        }
+
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)
         {
 

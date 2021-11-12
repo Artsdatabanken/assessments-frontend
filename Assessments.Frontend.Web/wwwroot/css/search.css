@@ -97,9 +97,15 @@
     list-style-type: none;
     background-color: white;
     vertical-align: middle;
+    display: flex;
+    align-items: center;
 }
 
 .search_autocomplete:focus,
 .search_autocomplete:hover {
     background-color: lightgray;
+}
+
+.search_area {
+    margin-left: auto;
 }

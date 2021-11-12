@@ -57,27 +57,70 @@ const formatScientificName = (name) => {
 }
 
 const formatListElements = (el) => {
+    let icon = '<span class="material-icons search_list_icon">list</span>';
+    if (el.ids != null) {
+       icon = '<span class="material-icons search_list_icon">share</span>';
+    }
     if (el.message) {
-        return `<span>${el.message}</span>`
+        return `<span>${el.message}</span>`;
     }
     if (!el.PopularName) {
-        return `${formatScientificName(el.ScientificName)} <span>(${el.TaxonCategory})</span>`
+        return icon + `${formatScientificName(el.ScientificName)} <span>(${el.TaxonCategory})</span>`;
     }
-    return `<span>${el.PopularName}</span> ${formatScientificName(el.ScientificName)} <span class="taxon_rank">(${el.TaxonCategory})</span>`
+    return icon + `<span>${el.PopularName}</span> 
+        ${formatScientificName(el.ScientificName)} 
+        <span class="taxon_rank">(${el.TaxonCategory})</span>`;
 }
 
 const createList = (json) => {
     autocompleteList.innerHTML = "";
     json.forEach(el => {
-        const li = document.createElement("li");
-        li.innerHTML = formatListElements(el);
-        li.classList.add("search_autocomplete");
-        li.tabIndex = 1;
-        li.onclick = () => {
-            searchField.value = el.ScientificName + " /" + el.TaxonCategory;
-            document.getElementById("search_and_filter_form").submit();
+        const assessments = el.ids;
+        if (assessments != null) {
+            for (let i in assessments) {
+                const id = assessments[i].id;
+                const li = document.createElement("li");
+                let extras = `<span class="material-icons">keyboard_arrow_right</span>`;
+               
+                if (assessments[i] && assessments[i].area) {
+                    let areaname = "Norge";
+                    if (assessments[i].area == "S") {
+                        areaname = "Svalbard";
+                    }
+                    extras = `<span class="search_area">${areaname}` + extras + '</span >';
+                }
+                li.innerHTML = formatListElements(el)  + extras;
+
+                li.classList.add("search_autocomplete");
+                li.tabIndex = 1;
+                li.onclick = () => {
+                    window.location.href = "/rodlisteforarter/2021/" + id;
+                }
+                li.onkeyup = (e) => {
+                    if (e.keyCode === 13) {
+                        window.location.href = "/rodlisteforarter/2021/" + id;
+                    }
+                }
+                autocompleteList.appendChild(li);
+            }
+        } else {
+            const li = document.createElement("li");
+            let formattedstring = `<span class="search_area">Søk<span class="material-icons">search</span></span>`;
+            li.innerHTML = formatListElements(el) + formattedstring;
+            li.classList.add("search_autocomplete");
+            li.tabIndex = 1;
+            li.onclick = () => {
+                searchField.value = el.ScientificName + " /" + el.TaxonCategory;
+                document.getElementById("search_and_filter_form").submit();
+            }
+            li.onkeyup = (e) => {
+                if (e.keyCode === 13) {
+                    searchField.value = el.ScientificName + " /" + el.TaxonCategory;
+                    document.getElementById("search_and_filter_form").submit();
+                }
+            }
+            autocompleteList.appendChild(li);
         }
-        autocompleteList.appendChild(li);
     });
     autocompleteList.style["display"] = "block";
 }
@@ -88,9 +131,14 @@ const removeList = () => {
 }
 
 const getListValues = (json) => {
-    console.log(json);
     return json.map(el => {        
-        return { "PopularName": el.popularName, "TaxonCategory": taxonCategories[el.taxonCategory], "ScientificName": el.scientificName, "message": el.message };
+        return {
+            "PopularName": el.popularName,
+            "TaxonCategory": taxonCategories[el.taxonCategory],
+            "ScientificName": el.scientificName,
+            "message": el.message,
+            "ids": el.assessmentIds
+        };
     });
 }
 
@@ -117,11 +165,9 @@ const inputChange = async (e) => {
 
     // fetch results from api
     let response = await fetch(searchUrl);
-    console.log(searchUrl);
     if (response.ok) {
         json = await response.json();
     }
-    console.log(json);
     jsonList = getListValues(json);
     createList(jsonList);
 }
@@ -141,6 +187,7 @@ window.onclick = (e) => {
 // ACCESSIBILITY - NAVIGATE DROPDOWNLIST:
 
 // Go from searchfield to suggestion on arrowdown
+
 var autocompletelist = document.getElementById("autocomplete_list_ul");
 searchField.addEventListener('keydown', function (event) {       
     if (autocompletelist.innerHTML.trim() != "") {
@@ -164,7 +211,7 @@ autocompletelist.addEventListener('keydown', function (event) {
         if (event.target != autocompletelist.lastChild) {
             event.target.nextElementSibling.focus();
         }        
-    }
+    }    
 });
 
 

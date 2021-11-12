@@ -37,3 +37,16 @@ Deployment er delt i test og produksjon og skjer via github actions. Deployment 
 Dockerimage bygges og sendes til artdatabankens dockerhub:https://hub.docker.com/repository/docker/artsdatabanken/assessments-fe - det er foreløpig to tags; test og latest - henholdsvis test/produksjon. 
 
 For å dytte ut gjeldende versjon til produksjon, gå til #crocotta og bruk kommandoen deploy assessments-fe - da hentes image med tag "latest" fra dockerhub. 
+
+### Deplyment til iis som website eller applikasjon under en website:
+
+- Bygg løsningen
+```cmd
+rem Bygg og publish en release av nettsiden:
+dotnet publish Assessments-frontend.sln -c Release
+
+rem Kopier den ferdig bygde applikasjone 
+robocopy "Assessments.Frontend.Web\bin\Release\net5.0\publish" ...destinasjon...
+```
+- Registrer Environmentvariabel ConnectionStrings:AzureBlobStorage f.eks. i IIS - Server - Configuration Editor - system.webServer/aspNetCore/environmentVariables - da som ASPNETCORE_ConnectionStrings__AzureBlobStorage
+- Legg til website eller applikasjon under website som peker på denne katalogen og som har app-pool for 'No managed code' (.net core)

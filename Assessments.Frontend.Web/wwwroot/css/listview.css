@@ -102,11 +102,18 @@
 }
 
 .redlist .category_tag {
-    padding: 9px;
     width: 41px;
     display: block;
     height: 41px;
-    padding-top: 13px;
+}
+
+.category_tag_label {
+    margin: auto;
+    display: block;
+    text-align: center;
+    font-family: "roboto condensed";
+    font-size: 20px;
+    line-height: 41px;
 }
 
 .list_cell {
@@ -396,27 +403,23 @@ li a span.element_icon {
 /* INFOGRAPHICS */
 
 .infographics {
-    padding: 10px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border-radius: 2px;
     font-size: 20px;
     display: flex;
     text-align: center;
-    justify-content: stretch;
-}
-
-@media only screen and (max-width: 750px) {
-    .infographics {
-        flex-direction:column;
-    }
 }
 
 .infograph_element {
     padding: 10px;
-    margin: 10px;
     border-radius: 2px;
-    flex: 1;
+    color: white;
+    background: #901616;
+}
+
+.infograph_element:first-child{
+    margin-right:10px;
 }
 
 .total .infograph_number {

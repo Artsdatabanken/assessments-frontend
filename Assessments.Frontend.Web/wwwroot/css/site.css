@@ -11,6 +11,7 @@
 
 .main {
     position: relative;
+    background: #f9f9f9;
 }
 
 h1 {
@@ -131,18 +132,6 @@ option {
     max-width: 100%;
 }
 
-.title_header {
-    width: 100%;
-    background: darkred;
-    margin: 0;
-    padding: 10px;
-    color: white;
-    text-align: center;
-    font-size: 20pt;
-    position: relative;
-    background-image: linear-gradient(#820404, #931a1a);
-    font-family:"Roboto condensed";
-}
 
 
 
@@ -160,7 +149,7 @@ option {
 }
 
 /* FULLSCREEN above 940px*/
-@media only screen and (min-width: 940px) {
+@media only screen and (min-width: 941px) {
     .mid-content {
         padding-left: 10px;
         padding-right: 10px;
@@ -169,13 +158,12 @@ option {
     /* Page setup */
     .side {
         float: right;
-        display: inline-block;
+        padding: 4px;
+        padding-left: 10px;
+        padding-right: 5px;
         height: 100%;
-        padding: 10px;
-        padding-top: 0;
-        padding-left: 20px;
-        height:100%;
-        width:25%;
+        width: 25%;
+        min-width: 200px;
     }
 
     .side button{
@@ -186,7 +174,6 @@ option {
         width: 75%;
         padding:20px;
         padding-top:0;
-        border-right:2px solid lightgrey;
     }
 
     .pagecontainer{
@@ -509,11 +496,66 @@ option {
     }
 }
 
-@media only screen and (max-width: 766px) {
+/* HEADER */
 
-    .title_header{
-        text-align:left;
-        padding-left:15px;
+.header {
+    background: #901616;
+}
+
+.header .menuitems {
+    background: #751111;
+}
+
+.menuitems:active, .menuitems:focus, .menuitems:hover {
+    background: #ededed;
+    color: black;
+}
+
+
+@media only screen and (min-width: 941px) {
+
+    .title_header {
+        width: 100%;
+        height: 3px;
+        top: 0px;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+    }
+
+    .title_header .full_title {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: visible;
+        color: white;
+        text-align: center;
+        font-size: 20pt;
+        font-family: "Roboto condensed";
+        height: 50px;
+        line-height: 50px;
+        width: 240px;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+
+    .title_header {
+        width: 100%;
+        background: darkred;
+        margin: 0;
+        padding: 10px;
+        color: white;
+        text-align: center;
+        font-size: 20pt;
+        position: relative;
+        background-image: linear-gradient(#820404, #931a1a);
+        font-family: "Roboto condensed";
+    }
+
+    .title_header {
+        text-align: left;
+        padding-left: 15px;
     }
 }
 

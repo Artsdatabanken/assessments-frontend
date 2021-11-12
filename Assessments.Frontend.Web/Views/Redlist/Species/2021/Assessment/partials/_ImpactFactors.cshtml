@@ -1,4 +1,5 @@
 ﻿@model SpeciesAssessment2021
+
 @functions{
 
     // Snatched and shortened from 2018 nature red list,
@@ -85,7 +86,7 @@
                 has_table = "has_table";
             }
         }
-        <span class="text_container @has_table" onclick="expand(this, 'first_hidden_layer')">
+        <span class="text_container @has_table" onclick="expandImpact(this, 'opened_element')">
 
             <span class="text_collection">
                 <span class="title_field  @isClickableClass(value)">
@@ -147,7 +148,7 @@
                     <li class="@activeOrNot(key)">
                         <span  
                               class="text_container @isClickableClass(value)" 
-                              onclick="expand(this, 'first_hidden_layer')">
+                              onclick="expandImpact(this, 'opened_element')">
                             @{toggleChooser(value);}
                             @value["title"]
                             @{iconChooser(activeOrNot(key));}
@@ -221,60 +222,3 @@
 
     }
 }
-<script>
-
-    // JS only relevant for users with javascript. 
-
-    var first = true;
-     
-    function impactlist(which, button) {
-        // See more text by altering css of the clicked element's top parent node
-        document.getElementById('summary').classList.remove("active");
-        document.getElementById('full_list').classList.remove("active");
-
-        if (which == 'full_list') {
-            document.getElementById('impactfactors').classList.add("full_list");
-            document.getElementById('impactfactors').classList.remove("summary");
-            if (first == true) {
-                first_close();
-            }
-            first = false;
-        }
-        if (which == 'summary') {
-            document.getElementById('impactfactors').classList.add("summary");
-            document.getElementById('impactfactors').classList.remove("full_list");
-        }
-        button.classList.add("active");
-    }
-
-    function expand(element, className) {
-        element = element.parentNode;
-        var mainparent = document.getElementById('impactfactors').classList;
-        // Never expand or collapse summary items
-        if (!mainparent.contains("summary")) {
-            if (element.classList.contains(className)) {
-                element.classList.remove(className);
-            } else {
-                element.classList.add(className);
-            }
-        }        
-    }
-
-    function first_close() {
-        var elList = document.getElementsByClassName("inactive");
-        for (var i = 0; i < elList.length; i++) {
-            elList[i].classList.add("first_hidden_layer");
-        }
-    }
-
-    function showTabButtons() {
-        var elList = document.getElementsByClassName("changetab");
-        for (var i = 0; i < elList.length; i++) {
-            elList[i].style.visibility = "visible";
-        }
-    }
-
-    showTabButtons();
-    document.getElementById('impactfactors').classList.add("summary");
-    
-</script>

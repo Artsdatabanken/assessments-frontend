@@ -3,15 +3,15 @@
 
 .pagination {
     display: flex;
-    padding-left: 0;
+    flex-direction: row;
+    justify-content: center;
     list-style: none;
-    font-size: 10pt;
     list-style: none;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .page-link {
-    padding: .375rem .75rem;
     position: relative;
     display: block;
     color: #4c4a48;
@@ -23,6 +23,21 @@
 
 .page-item:not(:first-child) .page-link {
     margin-left: -1px;
+}
+
+a.page-link {
+    display: block !important;
+    width: auto;
+}
+
+span.page-link {
+    height: 100%;
+}
+
+.redlist li.page-item {
+    width: 35px;
+    text-align: center;
+    border: 0;
 }
 
 .page-item.active .page-link {

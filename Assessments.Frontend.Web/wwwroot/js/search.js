@@ -89,7 +89,13 @@ const removeList = () => {
 
 const getListValues = (json) => {
     return json.map(el => {
-        return { "PopularName": el.popularName, "TaxonCategory": taxonCategories[el.taxonCategory], "ScientificName": el.scientificName, "message": el.message };
+        return {
+            "PopularName": el.popularName,
+            "TaxonCategory": taxonCategories[el.taxonCategory],
+            "ScientificName": el.scientificName,
+            "assessments": el.assessments,
+            "message": el.message
+        };
     });
 }
 

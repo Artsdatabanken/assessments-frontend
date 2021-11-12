@@ -41,6 +41,6 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
         public string MatchedName { get; set; }
         public string ScientificName { get; set; }
         public int TaxonCategory { get; set; }
-        public Array assessmentIds { get; set; }
+        public Array assessments { get; set; }
     }
 }

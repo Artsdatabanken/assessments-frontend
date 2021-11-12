@@ -182,7 +182,7 @@ namespace Assessments.Frontend.Web.Controllers
                     )
                 {
                     var ids = query.Where(x => x.ScientificNameId == item.hit.ScientificNameId).Select(x => new { id = x.Id, area = x.AssessmentArea }).ToArray();
-                    item.hit.assessmentIds = ids;
+                    item.hit.assessments = ids;
                 }
             }
 

@@ -63,7 +63,7 @@ const formatListElements = (el) => {
     if (!el.PopularName) {
         return `${formatScientificName(el.ScientificName)} <span>(${el.TaxonCategory})</span>`
     }
-    return `<span>${el.PopularName}</span> ${formatScientificName(el.ScientificName)} <span>(${el.TaxonCategory})</span>`
+    return `<span>${el.PopularName}</span> ${formatScientificName(el.ScientificName)} <span class="taxon_rank">(${el.TaxonCategory})</span>`
 }
 
 const createList = (json) => {
@@ -88,7 +88,8 @@ const removeList = () => {
 }
 
 const getListValues = (json) => {
-    return json.map(el => {
+    console.log(json);
+    return json.map(el => {        
         return { "PopularName": el.popularName, "TaxonCategory": taxonCategories[el.taxonCategory], "ScientificName": el.scientificName, "message": el.message };
     });
 }
@@ -116,18 +117,52 @@ const inputChange = async (e) => {
 
     // fetch results from api
     let response = await fetch(searchUrl);
+    console.log(searchUrl);
     if (response.ok) {
         json = await response.json();
     }
-    
+    console.log(json);
     jsonList = getListValues(json);
     createList(jsonList);
 }
 
 searchField.addEventListener("input", inputChange);
 
+// close list when clicking outside it
 window.onclick = (e) => {
     if (!searchField.contains(e.target) && !autocompleteList.contains(e.target)) {
         removeList();
-    }
+    } 
 }
+
+
+// ACCESSIBILITY - NAVIGATE DROPDOWNLIST:
+
+// Go from searchfield to suggestion on arrowdown
+var autocompletelist = document.getElementById("autocomplete_list_ul");
+searchField.addEventListener('keydown', function (event) {       
+    if (autocompletelist.innerHTML.trim() != "") {
+        if (event.key == "ArrowDown") {
+            event.preventDefault();
+            autocompletelist.firstChild.focus();
+        }
+    } 
+});
+
+// Navigate list with arrowkeys, leave list on first-child upkey
+autocompletelist.addEventListener('keydown', function (event) {
+    event.preventDefault();
+    if (event.key == "ArrowUp") {
+        if (event.target == autocompletelist.firstChild) {
+            searchField.focus();
+        } else {
+            event.target.previousElementSibling.focus();
+        }
+    } else if (event.key == "ArrowDown") {
+        if (event.target != autocompletelist.lastChild) {
+            event.target.nextElementSibling.focus();
+        }        
+    }
+});
+
+

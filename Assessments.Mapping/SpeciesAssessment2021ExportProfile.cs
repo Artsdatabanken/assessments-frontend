@@ -23,7 +23,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.TaxonRank, opt =>
                 {
                     opt.PreCondition(src => !string.IsNullOrEmpty(src.TaxonRank));
-                    opt.MapFrom(src => src.TaxonRank.ToLowerInvariant() == "species" ? "Art" : "Underart");
+                    opt.MapFrom(src => ConvertRangToNorwegian(src.TaxonRank));
                 })
                 .ForMember(dest => dest.AssessmentYear, opt => opt.MapFrom(src => src.AssessmentYear))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Replace("º", "°")))
@@ -66,6 +66,17 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.BarentshavetNordOgPolhavet, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
                 .ForMember(dest => dest.BarentshavetSor, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
                 .ForMember(dest => dest.Gronlandshavet, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())));
+        }
+
+        private static string ConvertRangToNorwegian(string taxonRank)
+        {
+            switch (taxonRank.ToLowerInvariant())
+            {
+                case "subspecies": return "Underart";
+                case "variety": return "Varietet";
+                case "form": return "Form";
+            }
+            return "Art";
         }
 
         private static string ResolveMainHabitat(IEnumerable<string> mainHabitats)

@@ -170,7 +170,7 @@ namespace Assessments.Frontend.Web.Controllers
                                                     (x.TaxonCategory != Constants.TaxonCategoriesEn.Species &&
                                                     x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&
                                                     x.TaxonCategory != Constants.TaxonCategoriesEn.Variety) ||
-             query.Any(y => y.ScientificNameId == x.ScientificNameId));
+             query.Any(y => y.ScientificNameId == x.ScientificNameId)).ToArray();
 
             // Add assessmentIds to species, subspecies and variety
             foreach (var item in suggestions.Select((hit, i) => new { i, hit}))
@@ -188,7 +188,11 @@ namespace Assessments.Frontend.Web.Controllers
 
             if (artskartResult.Any() && suggestions.Any() != true)
             {
-                return Json(new {message = "Her får du treff, men ingen av artene befinner seg i norsk rødliste for arter 2021."});
+                return Json(new List<object>() {new {message = "Her får du treff, men ingen av artene er behandlet i Rødlista for arter 2021"}});
+            }
+            else if (artskartResult.Any() != true)
+            {
+                return Json(new List<object>() {new {message = "Her får du ingen treff." } });
             }
 
             return Json(suggestions);

@@ -57,7 +57,7 @@ const formatScientificName = (name) => {
 }
 
 const formatListElements = (el) => {
-    if (!el.ScientificName) {
+    if (el.message) {
         return `<span>${el.message}</span>`
     }
     if (!el.PopularName) {
@@ -88,11 +88,8 @@ const removeList = () => {
 }
 
 const getListValues = (json) => {
-    if (typeof json != Array) {
-        return [json];
-    }
     return json.map(el => {
-        return { "PopularName": el.popularName, "TaxonCategory": taxonCategories[el.taxonCategory], "ScientificName": el.scientificName };
+        return { "PopularName": el.popularName, "TaxonCategory": taxonCategories[el.taxonCategory], "ScientificName": el.scientificName, "message": el.message };
     });
 }
 
@@ -124,7 +121,6 @@ const inputChange = async (e) => {
     }
     
     jsonList = getListValues(json);
-
     createList(jsonList);
 }
 

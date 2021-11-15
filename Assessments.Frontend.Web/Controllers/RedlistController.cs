@@ -160,6 +160,9 @@ namespace Assessments.Frontend.Web.Controllers
         [HttpGet, Route("2021/suggestions")]
         public async Task<IActionResult> Suggestion([FromQueryAttribute] string search)
         {
+            var jsonSpeciesGroup = await GetResource("wwwroot/json/speciesgroup.json");
+            Dictionary<string, Dictionary<string, string>> speciesgroupDict = jsonSpeciesGroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+            
             var name = search.Trim().ToLower();
             var query = await DataRepository.GetSpeciesAssessments();
 
@@ -181,7 +184,17 @@ namespace Assessments.Frontend.Web.Controllers
                     item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Variety
                     )
                 {
-                    var ids = query.Where(x => x.ScientificNameId == item.hit.ScientificNameId).Select(x => new { id = x.Id, area = x.AssessmentArea, category = x.Category, speciesGroup = x.SpeciesGroup }).ToArray();
+                    var ids = query
+                        .Where(x => x.ScientificNameId == item.hit.ScientificNameId)
+                        .Select(x => new {
+                            id = x.Id,
+                            area = x.AssessmentArea,
+                            category = x.Category,
+                            speciesGroup = x.SpeciesGroup,
+                            speciesGroupIconUrl = speciesgroupDict[x.SpeciesGroup]["image"]
+                            })
+                        .ToArray();
+
                     item.hit.assessments = ids;
                 }
             }

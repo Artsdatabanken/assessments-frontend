@@ -85,7 +85,7 @@ ul.second {
 
 /* HOVER EFFECT */
 
-.clickable:hover {
+.full_list .clickable:hover {
     color: #098293;
     cursor: pointer;
     color: #098293;

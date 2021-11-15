@@ -86,9 +86,10 @@ ul.second {
 /* HOVER EFFECT */
 
 .clickable:hover {
-    cursor: pointer;
-    text-decoration: underline;
     color: #098293;
+    cursor: pointer;
+    color: #098293;
+    border-bottom: 2px solid #098293;
 }
 
 

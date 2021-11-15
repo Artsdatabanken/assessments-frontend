@@ -407,10 +407,9 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
             {
                 string isactive = @Criteria.inString(key, @Model.CriteriaSummarized);
             <li class="@isactive">
-                <span class="text_container"
-                      onclick="expandCriteria(this, 'opened_element')">
+                <span class="text_container clickable" onclick="expandCriteria(this, 'opened_element') ">
                     @{ expandOrBullet(true);}
-                    <span class="title_field clickable">
+                    <span class="title_field">
                         @key - @value["title"]
                         @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
                     </span>
@@ -432,9 +431,9 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             <li class=" @subcriteria_isactive">
                                 <span class="text_container">
                                     <span class="text_collection">
-                                        <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
+                                        <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
                                             @{expandOrBullet(true);}
-                                            <span class="text_text clickable">
+                                            <span class="text_text ">
                                                 @k - @v["title"]
                                                 @{iconChooser(subcriteria_isactive);}
                                             </span>
@@ -517,9 +516,9 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                 <li class=" @subcriteria_isactive">
                                                     <span class="text_container">
                                                         <span class="text_collection">
-                                                            <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
+                                                            <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
                                                                 @{expandOrBullet(true);}
-                                                                <span class="text_text clickable">
+                                                                <span class="text_text ">
                                                                     @k - @v["title"]
                                                                 </span>
                                                                 @{iconChooser(subcriteria_isactive);}

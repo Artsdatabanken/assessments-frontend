@@ -108,7 +108,7 @@ const createList = (json) => {
                     window.location.href = "/rodlisteforarter/2021/" + id;
                 }
                 li.onkeyup = (e) => {
-                    if (e.keyCode === 13) {
+                    if (e.code === "Enter") {
                         window.location.href = "/rodlisteforarter/2021/" + id;
                     }
                 }
@@ -127,12 +127,12 @@ const createList = (json) => {
             li.classList.add("search_autocomplete");
             li.tabIndex = 0;
             li.onclick = () => {
-                searchField.value = el.ScientificName + " /" + el.TaxonCategory;
+                searchField.value = el.ScientificName;
                 document.getElementById("search_and_filter_form").submit();
             }
             li.onkeyup = (e) => {
-                if (e.keyCode === 13) {
-                    searchField.value = el.ScientificName + " /" + el.TaxonCategory;
+                if (e.code === "Enter") {
+                    searchField.value = el.ScientificName;
                     document.getElementById("search_and_filter_form").submit();
                 }
             }

@@ -69,6 +69,7 @@
 
 .searchfield_and_button {
     display: flex;
+    height: 45px;
 }
 
 /* Button*/

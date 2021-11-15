@@ -144,6 +144,14 @@ const removeList = () => {
     autocompleteList.style["display"] = "none";
 }
 
+const hideList = () => {
+    autocompleteList.style["display"] = "none";
+}
+
+const showList = () => {
+    autocompleteList.style["display"] = "block";
+}
+
 const getListValues = (json) => {
     return json.map(el => {
         return {
@@ -193,7 +201,7 @@ if (searchField) {
 // close list when clicking outside it
 window.onclick = (e) => {
     if (searchField && !searchField.contains(e.target) && !autocompleteList.contains(e.target)) {
-        removeList();
+        hideList();
     } 
 }
 
@@ -203,13 +211,19 @@ window.onclick = (e) => {
 // Go from searchfield to suggestion on arrowdown
 
 var autocompletelist = document.getElementById("autocomplete_list_ul");
-searchField.addEventListener('keydown', function (event) {       
+searchField.addEventListener('keydown', function (event) {
     if (autocompletelist.innerHTML.trim() != "") {
         if (event.key == "ArrowDown") {
             event.preventDefault();
             autocompletelist.firstChild.focus();
         }
-    } 
+    }
+});
+
+searchField.addEventListener('focus', function (event) {
+    if (autocompletelist.innerHTML.trim() != "") {
+        showList();
+    }
 });
 
 // Navigate list with arrowkeys, leave list on first-child upkey
@@ -224,8 +238,10 @@ autocompletelist.addEventListener('keydown', function (event) {
     } else if (event.key == "ArrowDown") {
         if (event.target != autocompletelist.lastChild) {
             event.target.nextElementSibling.focus();
-        }        
-    }    
+        }
+    } else if (event.key == "Escape") {
+        hideList();
+    }
 });
 
 

@@ -131,22 +131,14 @@ const removeList = () => {
 }
 
 const getListValues = (json) => {
-<<<<<<< HEAD
-    return json.map(el => {        
-=======
     return json.map(el => {
->>>>>>> 1470a944feadc3bb628f3d7234ebdc803c658a79
         return {
             "PopularName": el.popularName,
             "TaxonCategory": taxonCategories[el.taxonCategory],
             "ScientificName": el.scientificName,
-<<<<<<< HEAD
-            "message": el.message,
-            "ids": el.assessmentIds
-=======
+            "ids": el.assessmentIds,
             "assessments": el.assessments,
             "message": el.message
->>>>>>> 1470a944feadc3bb628f3d7234ebdc803c658a79
         };
     });
 }

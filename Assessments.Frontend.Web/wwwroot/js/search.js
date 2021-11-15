@@ -116,11 +116,14 @@ const createList = (json) => {
             }
         } else {
             const li = document.createElement("li");
-            let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;
             let icon = '<span class="material-icons search_list_icon">list</span>';
+            if (el.message) {
+                icon = '<span class="material-icons search_list_icon">playlist_remove</span>';
+            }
+            let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;            
             let category = "<span></span>";
             let speciesGroup = '<span class="search_speciesgroup"></span >';
-            li.innerHTML = icon + formatListElements(el,) + speciesGroup + category + right_action;
+            li.innerHTML = icon + formatListElements(el) + speciesGroup + category + right_action;
             li.classList.add("search_autocomplete");
             li.tabIndex = 0;
             li.onclick = () => {

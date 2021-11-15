@@ -409,7 +409,7 @@ option {
     border-bottom-color: white;
     border-left-color: lightgray;
     color: black;
-    background: none;
+    background: white;
 }
 
 .tabbed_element_container {    

@@ -65,7 +65,7 @@ const formatListElements = (el) => {
         name = `<span>${el.PopularName}</span>`;
     }
     if (el.ScientificName) {
-        name = `<span>${name} ${formatScientificName(el.ScientificName)}</span>`;
+        name = `<span class="search_name">${name} ${formatScientificName(el.ScientificName)}</span>`;
     }
     if (el.TaxonCategory) {
         name += `<span class="taxon_rank">${el.TaxonCategory}</span>`;
@@ -81,7 +81,7 @@ const createList = (json) => {
             for (let i in assessments) {
                 const id = assessments[i].id;
                 const li = document.createElement("li");
-                let action = `<span class="material-icons">keyboard_arrow_right</span>`;
+                let action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
                 let category = "<span></span>";
                 let icon = '<span class="material-icons search_list_icon">list</span>';
                 if (assessments[i] && assessments[i].area) {
@@ -115,7 +115,7 @@ const createList = (json) => {
             }
         } else {
             const li = document.createElement("li");
-            let right_action = `<span class="right_action">Søk</span><span class="material-icons">search</span>`;
+            let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;
             let icon = '<span class="material-icons search_list_icon">list</span>';
             let category = "<span></span>";
             let speciesGroup = '<span class="search_speciesgroup"></span >';

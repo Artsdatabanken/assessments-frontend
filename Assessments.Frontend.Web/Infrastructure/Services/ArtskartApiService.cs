@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
 namespace Assessments.Frontend.Web.Infrastructure.Services
@@ -38,5 +39,8 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
         public int ScientificNameId { get; set; }
         public string PopularName { get; set; }
         public string MatchedName { get; set; }
+        public string ScientificName { get; set; }
+        public int TaxonCategory { get; set; }
+        public Array assessments { get; set; }
     }
 }

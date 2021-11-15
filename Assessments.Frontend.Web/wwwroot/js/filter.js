@@ -65,15 +65,12 @@ const hideFilters = () => {
 
 const openFilters = () => {
     filters.style["display"] = "block";
-
     filter_modal_background.style["display"] = "block";
     filter_modal_background.classList.add("modal_background_open");
-
     filters_scrollable.style["position"] = "fixed";
     filters_scrollable.style["width"] = "90vw";
     filters_scrollable.style["top"] = "5vh";
     filters_scrollable.style["left"] = "5vw";
-
     Array.prototype.forEach.call(filters_close_buttons, el => {
         el.style["display"] = "block";
     });

@@ -154,6 +154,18 @@ namespace Assessments.Frontend.Web.Infrastructure
             return regions.ToArray();
         }
 
+        public static IQueryable<SpeciesAssessment2021> GetQueryByName(IQueryable<SpeciesAssessment2021> query, string name)
+        {
+            var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
+
+            return query.Where(x =>
+                x.ScientificName.ToLower().Contains(name) ||                            // Match on scientific name.
+                speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
+                x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
+                x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
+                x.SpeciesGroup.ToLower().Contains(name));                               // Match on species group.
+        }
+
         /// <summary>
         ///  Sortert liste med navn på regioner (etter gamle fylkesnummer)
         /// </summary>
@@ -359,6 +371,65 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string SearchFilterSpecies = "Søk art/slekt";
             public const string SearchFilterTaxonRank = "Taksonomisk nivå";
         }
+
+        public static class TaxonCategoriesEn
+        {
+            public static int Unknown = 0;
+            public static int Kingdom = 1;
+            public static int SubKingdom = 2;
+            public static int Phylum = 3;
+            public static int SubPhylum = 4;
+            public static int SuperClass = 5;
+            public static int Class = 6;
+            public static int SubClass = 7;
+            public static int InfraClass = 8;
+            public static int Cohort = 9;
+            public static int SuperOrder = 10;
+            public static int Order = 11;
+            public static int SubOrder = 12;
+            public static int InfraOrder = 13;
+            public static int SuperFamily = 14;
+            public static int Family = 15;
+            public static int SubFamily = 16;
+            public static int Tribe = 17;
+            public static int SubTribe = 18;
+            public static int Genus = 19;
+            public static int SubGenus = 20;
+            public static int Section = 21;
+            public static int Species = 22;
+            public static int SubSpecies = 23;
+            public static int Variety = 24;
+            public static int Form = 25;
+        };
+
+        public static Dictionary<string, string> TaxonCategoriesNbToEn = new Dictionary<string, string>(){
+            { "Unknown", "Unknown" },
+            { "Rike", "Kingdom" },
+            { "SubKingdom", "SubKingdom" },
+            { "Rekke", "Phylum" },
+            { "Underrekke", "SubPhylum" },
+            { "SuperClass", "SuperClass" },
+            { "Klasse", "Class" },
+            { "SubClass", "SubClass" },
+            { "InfraClass", "InfraClass" },
+            { "Cohort", "Cohort" },
+            { "SuperOrder", "SuperOrder" },
+            { "Orden", "Order" },
+            { "SubOrder", "SubOrder" },
+            { "InfraOrder", "InfraOrder" },
+            { "SuperFamily", "SuperFamily" },
+            { "Familie", "Family" },
+            { "SubFamily", "SubFamily" },
+            { "Tribe", "Tribe" },
+            { "SubTribe", "SubTribe" },
+            { "Slekt", "Genus" },
+            { "SubGenus", "SubGenus" },
+            { "Section", "Section" },
+            { "Art", "Species" },
+            { "Underart", "SubSpecies" },
+            { "Varietet", "Variety" },
+            { "Form", "Form" }
+        };
     }
 
     public class CategoryComparer : IComparer<string>

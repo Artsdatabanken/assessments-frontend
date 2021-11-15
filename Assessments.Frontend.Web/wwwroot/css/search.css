@@ -69,6 +69,7 @@
 
 .searchfield_and_button {
     display: flex;
+    height: 45px;
 }
 
 /* Button*/
@@ -97,9 +98,87 @@
     list-style-type: none;
     background-color: white;
     vertical-align: middle;
+    display: flex;
+    align-items: center;
+    display: inline-grid;
+    grid-template-columns: 30px 4fr 1fr 1fr 33px 53px 26px;
+    width: 100%;
+}
+
+.search_autocomplete .search_speciesgroup,
+.search_autocomplete .search_autocomplete {
+    padding-left: 2px;
+}
+
+.search_name{
+    padding-right:2px;
+}
+
+@media only screen and (max-width: 600px), only screen and (min-width: 941px) and (max-width: 1120px) {
+    .search_autocomplete {
+        grid-template-columns: 30px 4fr 1fr 33px 53px 26px;
+    }
+
+    .search_speciesgroup {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .search_autocomplete {
+        grid-template-columns: 30px 4fr 33px 53px 26px;
+    }
+
+    .taxon_rank {
+        display: none;
+    }
+
+    #autocomplete_list_ul{
+        width:100%;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .search_autocomplete {
+        grid-template-columns: 4fr 33px 53px 26px;
+    }
+
+    .search_speciesicon {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 250px) {
+    .search_autocomplete {
+        display:flex;
+        flex-direction:column;
+    }
+
+    .material-icons.right_icon,
+    .search_category {
+        display: none;
+    }
+}
+
+.search_speciesgroup{
+    min-width:85px;
 }
 
 .search_autocomplete:focus,
 .search_autocomplete:hover {
     background-color: lightgray;
+    cursor: pointer;
+}
+
+.search_speciesicon{
+    width:24px;
+    height:24px;
+}
+
+.right_action{
+    text-align:right;
+}
+
+.right_icon{
+    text-align:center;
 }

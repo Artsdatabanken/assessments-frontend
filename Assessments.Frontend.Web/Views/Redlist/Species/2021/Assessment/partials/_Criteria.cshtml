@@ -496,7 +496,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                 @if (@value.ContainsKey("options"))
                 {
                     <ul class="second">
-                        <li class=" active">
+                        <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
                             <span class="text_container">
                                 <span class="text_collection">
                                     <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
@@ -580,18 +580,18 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                         </li>
                     </ul>
                     <ul class="second">
-                        <li class="active">
+                        @{var activeB = @Criteria.inString("B", @Model.CriteriaSummarized); }
+                        <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
                             <span class="text_container">
                                 <span class="text_collection">
                                     <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
                                         @{expandOrBullet(true);}
                                         <span class="text_text clickable">
                                             Konklusjon for B-kriteriet
-                                            @{iconChooser("active");}
                                             <br />
                                         </span>
-
                                     </span>
+                                   
                                     @{
                                         string b_category = Model.Category;
                                         bool b_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
@@ -601,29 +601,33 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                         }
                                     }
                                     <p>
-                                        <span class="b_summary">
-                                            <span class="graphic_element @b_category">@b_category</span>
-                                            <span>
-                                                Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
-                                                @if (b_comparison)
-                                                {
-                                                    @b_category
-                                                }
-                                                else
-                                                {
-                                                    <partial name="/Views/Shared/_Category.cshtml" />
-                                                }
+                                        @if (activeB == "true")
+                                        {
+                                            <span class="b_summary">
+                                                <span class="graphic_element @b_category">@b_category</span>
+                                                <span>
+                                                    Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
+                                                    @if (b_comparison)
+                                                    {
+                                                        @b_category
+                                                    }
+                                                    else
+                                                    {
+                                                        <partial name="/Views/Shared/_Category.cshtml" />
+                                                    }
+                                                </span>
                                             </span>
-                                        </span>
+                                        }
+                                        else
+                                        {
+                                            <span>B-kriteriet er ikke gjeldende</span>
+                                        }
                                     </p>
                                 </span>
                             </span>
                         </li>
                     </ul>
-
                 }
-
-
             </li>
             }
         </ul>

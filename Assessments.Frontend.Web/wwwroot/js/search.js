@@ -75,21 +75,26 @@ const formatListElements = (el) => {
 const createList = (json) => {
     autocompleteList.innerHTML = "";
     json.forEach(el => {
-        const assessments = el.ids;
+        console.log(el);
+        const assessments = el.assessments;
         if (assessments != null) {
             for (let i in assessments) {
                 const id = assessments[i].id;
                 const li = document.createElement("li");
                 let extras = `<span class="material-icons">keyboard_arrow_right</span>`;
-               
+                let category = "";
+                console.log("bamse")
                 if (assessments[i] && assessments[i].area) {
                     let areaname = "Norge";
                     if (assessments[i].area == "S") {
                         areaname = "Svalbard";
                     }
+                    if (assessments[i].category) {
+                        category = `<span class="search_category graphic_element ${assessments[i].category}">${assessments[i].category}</span >`;
+                    }
                     extras = `<span class="search_area">${areaname}` + extras + '</span >';
                 }
-                li.innerHTML = formatListElements(el)  + extras;
+                li.innerHTML = formatListElements(el)  + category + extras;
 
                 li.classList.add("search_autocomplete");
                 li.tabIndex = 1;
@@ -131,22 +136,15 @@ const removeList = () => {
 }
 
 const getListValues = (json) => {
-<<<<<<< HEAD
-    return json.map(el => {        
-=======
+
     return json.map(el => {
->>>>>>> 1470a944feadc3bb628f3d7234ebdc803c658a79
         return {
             "PopularName": el.popularName,
             "TaxonCategory": taxonCategories[el.taxonCategory],
             "ScientificName": el.scientificName,
-<<<<<<< HEAD
             "message": el.message,
-            "ids": el.assessmentIds
-=======
-            "assessments": el.assessments,
-            "message": el.message
->>>>>>> 1470a944feadc3bb628f3d7234ebdc803c658a79
+            "ids": el.assessmentIds,
+            "assessments": el.assessments
         };
     });
 }

@@ -216,7 +216,7 @@ const toggleSingleFilter = (element, parentId) => {
 }
 
 document.addEventListener('keydown', (e) => {
-    if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader) {
+    if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader()) {
         closeFilters();
     }
 });

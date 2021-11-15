@@ -157,12 +157,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static IQueryable<SpeciesAssessment2021> GetQueryByName(IQueryable<SpeciesAssessment2021> query, string name)
         {
-            string taxonRank = "";
-            if (name.Contains(" /")) 
-            {
-                taxonRank = name.Split(" /")[1]; 
-                name = name.Split(" /")[0];
-            }
             var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
 
             return query.Where(x =>

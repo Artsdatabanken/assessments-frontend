@@ -3,21 +3,18 @@
 
 .pagination {
     display: flex;
-    padding-left: 0;
+    flex-direction: row;
+    justify-content: center;
     list-style: none;
-    font-size: 10pt;
     list-style: none;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .page-link {
-    padding: .375rem .75rem;
-    position: relative;
-    display: block;
     color: #4c4a48;
-    text-decoration: none;
     background-color: #fff;
-    border: 1px solid #dee2e6;
+    border: 1px solid #4c4a48;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
@@ -25,11 +22,28 @@
     margin-left: -1px;
 }
 
+.redlist li .page-link,
+.redlist li a.page-link {
+    display: block;
+    width: auto;
+}
+
+span.page-link {
+    height: 100%;
+}
+
+.redlist li.page-item {
+    width: 35px;
+    text-align: center;
+    border: 0;
+}
+
 .page-item.active .page-link {
     z-index: 3;
     color: #fff;
     background-color: #4c4a48;
     border-color: #4c4a48;
+    padding-top:3px;
 }
 
 .page-link:hover {

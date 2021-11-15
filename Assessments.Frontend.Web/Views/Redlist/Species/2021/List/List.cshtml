@@ -9,17 +9,13 @@
                  style="width:200px;float:right;" />
 
             <partial name="/Views/Redlist/Species/2021/List/partials/_Header.cshtml" />
-
             <partial name="/Views/Redlist/Species/2021/List/partials/_Introduction.cshtml" />
-
 
             <form id="search_and_filter_form" asp-action="Index2021" method="get">
                 <partial name="/Views/Redlist/Species/2021/List/partials/_Search.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/List/partials/_Filters.cshtml" />
             </form>
-            <h3>
-                @Model.Redlist2021ResultsCount
-            </h3>
+            
         </div>
     </div>
 </div>

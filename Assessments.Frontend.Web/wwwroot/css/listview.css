@@ -12,12 +12,9 @@
 }
 
 .page-link {
-    position: relative;
-    display: block;
     color: #4c4a48;
-    text-decoration: none;
     background-color: #fff;
-    border: 1px solid black;
+    border: 1px solid #4c4a48;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 

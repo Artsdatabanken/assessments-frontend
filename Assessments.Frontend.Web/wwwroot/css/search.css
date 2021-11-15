@@ -99,6 +99,9 @@
     vertical-align: middle;
     display: flex;
     align-items: center;
+    display: inline-grid;
+    grid-template-columns: 30px 1fr 1fr 1fr 70px;
+    width:100%;
 }
 
 .search_autocomplete:focus,
@@ -109,3 +112,4 @@
 .search_area {
     margin-left: auto;
 }
+

@@ -100,16 +100,21 @@
     display: flex;
     align-items: center;
     display: inline-grid;
-    grid-template-columns: 30px 1fr 1fr 1fr 70px;
-    width:100%;
+    grid-template-columns: 30px 4fr 1fr 1fr 33px 53px 26px;
+    width: 100%;
 }
 
 .search_autocomplete:focus,
 .search_autocomplete:hover {
     background-color: lightgray;
+    cursor:pointer;
 }
 
-.search_area {
-    margin-left: auto;
+.search_speciesicon{
+    width:24px;
+    height:24px;
 }
 
+.right_action{
+    text-align:right;
+}

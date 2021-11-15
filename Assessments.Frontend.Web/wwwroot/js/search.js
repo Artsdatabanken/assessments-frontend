@@ -68,7 +68,7 @@ const formatListElements = (el) => {
         name = `<span>${name} ${formatScientificName(el.ScientificName)}</span>`;
     }
     if (el.TaxonCategory) {
-        name += `<span class="taxon_rank">(${el.TaxonCategory})</span>`;
+        name += `<span class="taxon_rank">${el.TaxonCategory}</span>`;
     }
     return name;
 }
@@ -76,15 +76,14 @@ const formatListElements = (el) => {
 const createList = (json) => {
     autocompleteList.innerHTML = "";
     json.forEach(el => {
-        console.log(el);
         const assessments = el.assessments;
         if (assessments != null) {
             for (let i in assessments) {
                 const id = assessments[i].id;
                 const li = document.createElement("li");
-                let extras = `<span class="material-icons">keyboard_arrow_right</span>`;
-                let category = "";
-                console.log("bamse")
+                let action = `<span class="material-icons">keyboard_arrow_right</span>`;
+                let category = "<span></span>";
+                let icon = '<span class="material-icons search_list_icon">list</span>';
                 if (assessments[i] && assessments[i].area) {
                     let areaname = "Norge";
                     if (assessments[i].area == "S") {
@@ -94,12 +93,15 @@ const createList = (json) => {
                         category = `<span class="search_category graphic_element ${assessments[i].category}">${assessments[i].category}</span >`;
                     }
                     if (assessments[i].speciesGroup) {
-                        speciesGroup = `<span class="search_speciesgroup` + assessments[i].speciesGroup + '</span >';
+                        speciesGroup = '<span class="search_speciesgroup">' + assessments[i].speciesGroup + '</span >';
                     }
-                    extras = `<span class="search_area">${areaname}` + extras + '</span >';
+                    if (assessments[i].speciesGroupIconUrl) {
+                        icon = '<img src="' + assessments[i].speciesGroupIconUrl + '" class="search_speciesicon" >';
+                    }                   
+                    action = '<span class="right_action">'+areaname+"</span >" + action;
                 }
-                let icon = '<span class="material-icons search_list_icon">list</span>';
-                li.innerHTML = icon + formatListElements(el) + category + speciesGroup + extras;
+                
+                li.innerHTML = icon + formatListElements(el) + speciesGroup + category + action;
                 li.classList.add("search_autocomplete");
                 li.onclick = () => {
                     window.location.href = "/rodlisteforarter/2021/" + id;
@@ -113,9 +115,11 @@ const createList = (json) => {
             }
         } else {
             const li = document.createElement("li");
-            let formattedstring = `<span class="search_area">Søk<span class="material-icons">search</span></span>`;
+            let right_action = `<span class="right_action">Søk</span><span class="material-icons">search</span>`;
             let icon = '<span class="material-icons search_list_icon">list</span>';
-            li.innerHTML = icon + formatListElements(el, ) + formattedstring;
+            let category = "<span></span>";
+            let speciesGroup = '<span class="search_speciesgroup"></span >';
+            li.innerHTML = icon + formatListElements(el,) + speciesGroup + category + right_action;
             li.classList.add("search_autocomplete");
             li.tabIndex = 1;
             li.onclick = () => {

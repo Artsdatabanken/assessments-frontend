@@ -11,8 +11,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             { "Species", "Art" },
             { "SubSpecies", "Underart" },
-            { "Variety", "Varietet" },
-            { "Form", "Form" }
+            { "Variety", "Varietet" }
         };
 
         public static string[] findSelectedCategories( bool redlisted, bool endangered,

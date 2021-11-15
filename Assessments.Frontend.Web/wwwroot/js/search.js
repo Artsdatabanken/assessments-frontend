@@ -103,6 +103,7 @@ const createList = (json) => {
                 
                 li.innerHTML = icon + formatListElements(el) + speciesGroup + category + action;
                 li.classList.add("search_autocomplete");
+                li.tabIndex = 0;
                 li.onclick = () => {
                     window.location.href = "/rodlisteforarter/2021/" + id;
                 }
@@ -121,7 +122,7 @@ const createList = (json) => {
             let speciesGroup = '<span class="search_speciesgroup"></span >';
             li.innerHTML = icon + formatListElements(el,) + speciesGroup + category + right_action;
             li.classList.add("search_autocomplete");
-            li.tabIndex = 1;
+            li.tabIndex = 0;
             li.onclick = () => {
                 searchField.value = el.ScientificName + " /" + el.TaxonCategory;
                 document.getElementById("search_and_filter_form").submit();

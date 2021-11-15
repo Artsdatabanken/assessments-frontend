@@ -181,8 +181,8 @@ namespace Assessments.Frontend.Web.Controllers
                     item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Variety
                     )
                 {
-                    var ids = query.Where(x => x.ScientificNameId == item.hit.ScientificNameId).Select(x => new { id = x.Id, area = x.AssessmentArea }).ToArray();
-                    item.hit.assessmentIds = ids;
+                    var ids = query.Where(x => x.ScientificNameId == item.hit.ScientificNameId).Select(x => new { id = x.Id, area = x.AssessmentArea, category = x.Category, speciesGroup = x.SpeciesGroup }).ToArray();
+                    item.hit.assessments = ids;
                 }
             }
 

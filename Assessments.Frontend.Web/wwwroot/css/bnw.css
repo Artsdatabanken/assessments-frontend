@@ -86,6 +86,11 @@
     border-color: black;
 }
 
+.highcontrast .controls button.active,
+.highcontrast .main .changetab.active {
+    border-bottom-color: white;
+}
+
 
 
 /* 
@@ -93,21 +98,11 @@
    FUN PROJECT NOT EVEN SLIGHTLY THERE
 */
 
-.darktheme .listheader,
-.darktheme .viewselector {
-    border-color: #b3b1b1;
-    background: #424141;
-}
 
 
-.highcontrast .controls button.active,
-.highcontrast .main .changetab.active {
-    border-bottom-color: white;
-}
-
+/* PURE BLACK BACKGROUND */
 .darktheme header,
 .darktheme {
-    color: white;
     background: black;
 }
 
@@ -117,22 +112,54 @@
 
 .darktheme .list-search,
 .darktheme .main-content{
-    color: white;
     background: #201f1f;
 }
 
-.darktheme p,
-.darktheme h1,
-.darktheme h2,
-.darktheme h3 {
-    color:white;
+.darktheme .filter_group button{
+    background:transparent;
 }
+
+/* SEMI-GRAY BACKGROUND */
+.darktheme .listheader,
+.darktheme .viewselector,
+.darktheme .filter_group ul {
+    background: #424141;
+}
+
+/* SEMI-GRAY-BORDERS */
+.darktheme .listheader,
+.darktheme .viewselector{
+    border-color: #b3b1b1;
+}
+
+/* WHITE FONT COLOR*/
+    .darktheme,
+    .darktheme header,
+    .darktheme .list-search,
+    .darktheme .main-content,
+    .darktheme .filter_group button,
+    .darktheme .sidebarmenu li a,
+    .darktheme p,
+    .darktheme h1,
+    .darktheme h2,
+    .darktheme h3 {
+        color: white;
+    }
 
 
 .darktheme .byline {
    color: rgb(202, 202, 202)
 }
 
+/* ACTIVE LINK COLOUR */
+    .darktheme .breadcrumbs li,
+    .darktheme .button.tertiary,
+    .darktheme .main button.tertiary,
+    .darktheme .sidebarmenu li h3 {
+        color: #f2d14d;
+    }
+
+/* RED BACKGROUND WHITE TEXT*/
 .darktheme .button.primary,
 .darktheme .main button.primary {
     background: #ca1c35;

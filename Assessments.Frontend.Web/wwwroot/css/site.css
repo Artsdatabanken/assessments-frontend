@@ -670,6 +670,12 @@ option {
     width:calc(100% - 180px);
 }
 
+@media only screen and (max-width: 750px) {
+    .title_with_image img {
+        padding-right: 15px;
+    }
+}
+
 @media only screen and (max-width: 610px) {
     .title_with_header {
         width: 100%;
@@ -721,6 +727,7 @@ option {
         width:100%;
         margin:auto;
     }
+
 
     .mobile_padding,
     .redlist li,

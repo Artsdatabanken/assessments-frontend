@@ -106,18 +106,12 @@
     background: black;
 }
 
-.darktheme .title_header {
-    background: #570808;
-}
-
-.darktheme .list-search,
-.darktheme .main-content{
-    background: #201f1f;
-}
-
-.darktheme .filter_group button{
-    background:transparent;
-}
+/* MAIN BACKGROUND COLOR */
+    .darktheme .main .changetab.active,
+    .darktheme .list-search,
+    .darktheme .main-content {
+        background: #201f1f;
+    }
 
 /* SEMI-GRAY BACKGROUND */
 .darktheme .listheader,
@@ -126,10 +120,24 @@
     background: #424141;
 }
 
-/* SEMI-GRAY-BORDERS */
-.darktheme .listheader,
-.darktheme .viewselector{
-    border-color: #b3b1b1;
+/* TRANSPARENT ITEMS */
+.darktheme .side,
+.darktheme .habitat_element,
+.darktheme .controls button.active,
+.darktheme .filter_group button {
+    background: transparent;
+}
+
+/* WINE RED */
+.darktheme .category_displayer .notactive .category_item,
+.darktheme .title_header {
+    background: #570808;
+}
+
+/* RED BACKGROUND */
+.darktheme .button.primary,
+.darktheme .main button.primary {
+    background: #ca1c35;
 }
 
 /* WHITE FONT COLOR*/
@@ -139,35 +147,86 @@
     .darktheme .main-content,
     .darktheme .filter_group button,
     .darktheme .sidebarmenu li a,
-    .darktheme p,
-    .darktheme h1,
-    .darktheme h2,
-    .darktheme h3 {
+    .darktheme .button.primary,
+    .darktheme .main button.primary,
+    .darktheme .controls button.active,
+    .darktheme .category_displayer span,
+    .darktheme .regionlist.legend .region span,
+    .darktheme .main .changetab.active,
+    .darktheme .impact_table,
+    .darktheme p {
         color: white;
     }
 
 
-.darktheme .byline {
-   color: rgb(202, 202, 202)
+/* DISABLED/UNCLICKABLE LINKS */
+.darktheme .byline,
+.darktheme .date,
+.darktheme .breadcrumbs li.currentcrumb {
+    color: #ff7f7f;
+}
+
+
+/* SAND-COLOOURED TEXT */
+.darktheme h1,
+.darktheme h2,
+.darktheme h3,
+.darktheme h4,
+.darktheme h5,
+.darktheme .element_popular_name,
+.darktheme .tabbed_element_container li.active {
+    color: #ffeaaa;
 }
 
 /* ACTIVE LINK COLOUR */
-    .darktheme .breadcrumbs li,
-    .darktheme .button.tertiary,
-    .darktheme .main button.tertiary,
-    .darktheme .sidebarmenu li h3 {
-        color: #f2d14d;
-    }
-
-/* RED BACKGROUND WHITE TEXT*/
-.darktheme .button.primary,
-.darktheme .main button.primary {
-    background: #ca1c35;
-    color: white;
+.darktheme a,
+.darktheme .breadcrumbs li,
+.darktheme .button.tertiary,
+.darktheme .main button.tertiary,
+.darktheme .sidebarmenu li h3 {
+    color: #f2d14d;
 }
 
+
+/* BORDERS */
 .darktheme .controls button.active{
-    background:transparent;
-    color:white;
     border-bottom:transparent;
 }
+
+/* SEMI-GRAY-BORDERS */
+.darktheme .listheader,
+.darktheme .viewselector {
+    border-color: #b3b1b1;
+}
+
+/* WHITE BORDER */
+
+.darktheme .category_displayer .notactive .category_item{
+    border-color:white;
+}
+
+/* ICONS */
+
+.darktheme .element_icon,
+.darktheme .image_background {
+    width: 50px;
+    height: 50px;
+    background: white;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+.darktheme .speciesgroup_name{
+    background: #424141;
+}
+
+/* SPECIAL STUFF */
+
+    .darktheme .S .speciesgroup_name,
+    .darktheme .redlist li.S {
+        background: #101444;
+    }
+
+    .darktheme .main .changetab.active {
+        border-bottom-color: #201f1f;
+    }

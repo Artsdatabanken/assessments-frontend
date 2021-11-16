@@ -21,8 +21,8 @@
         @foreach (var item in Model.Redlist2021Results)
         {
             string speciesgroupname = @item.SpeciesGroup.ToLower();
-            <li class="list @speciesgroupname">
-                <a asp-action="Detail" asp-route-id="@item.Id" class="@item.AssessmentArea">
+            <li class="list @speciesgroupname @item.AssessmentArea">
+                <a asp-action="Detail" asp-route-id="@item.Id">
                     @{
                         // TODO: The number of fields contained in the box does not add up. Fix.
                         // Makes it very strange and overflowy in grid view.

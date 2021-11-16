@@ -32,9 +32,9 @@ ul a:active,
 
 
 /* PAGE CRUMB*/
-.currentcrumb {
-    text-decoration: none !important;
-    color: grey !important;
+.breadcrumbs li.currentcrumb {
+    text-decoration: none;
+    color: grey;
 }
 
 /* TEMPORARY CODE NEEDS TO BE THOUGHT ABOUT*/

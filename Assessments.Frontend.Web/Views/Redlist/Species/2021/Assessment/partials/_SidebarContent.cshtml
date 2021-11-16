@@ -12,25 +12,30 @@
 }
 
 <div class="sidebar_image_info">
+    <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" />
+    <br />
     <a href="@taxon_url" class="button tertiary tinybutton">
-        <span class="material-icons">
-            mediation
-        </span>
-        Taxonsiden
+        Til artssiden
         <span class="material-icons">keyboard_arrow_right</span>
     </a>
 
+    <hr />
     <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Development.cshtml" />
+    <hr />
     <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Links.cshtml" />
 
-    <h3>Taksonomi</h3>
-    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
-    {
-        <p class="taxonomy">
-            @foreach (var taxon in @Model.VurdertVitenskapeligNavnHierarki.Split("/"))
-            {
-                <span>@taxon > </span>
-            }
-        </p>
-    }
+    <hr />
+
+    @* // Hide taxonomic path
+        <h3>Taksonomi</h3>
+        @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+        {
+            <p class="taxonomy">
+                @foreach (var taxon in @Model.VurdertVitenskapeligNavnHierarki.Split("/"))
+                {
+                    <span>@taxon > </span>
+                }
+            </p>
+        }
+    *@
 </div>

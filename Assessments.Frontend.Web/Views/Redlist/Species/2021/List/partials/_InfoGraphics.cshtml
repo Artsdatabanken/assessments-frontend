@@ -8,26 +8,25 @@
 
 <div class="infographics">
 
-    <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N" asp-route-Endangered="true" class="button infograph_element total">
-
-        <span>Trua arter i Norge  <span class="material-icons">keyboard_arrow_right</span></span>
+    <div class=" infograph_element total">
 
         <div class="infograph_number">
             @total_Norge
         </div>
+        <span>Trua arter i Norge</span>
 
-    </a>
+    </div>
 
-    <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="S" asp-route-Endangered="true" class="button infograph_element total">
-        <span>
-            Trua arter på Svalbard <span class="material-icons">keyboard_arrow_right</span>
-        </span>
+    <div class=" infograph_element total">
+
         <div class="infograph_number">
             @total_Svalbard
         </div>
+        <span>
+            Trua arter på Svalbard
+        </span>
 
-
-    </a>
+    </div>
 
    
 </div>

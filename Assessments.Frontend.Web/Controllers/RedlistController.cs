@@ -56,21 +56,15 @@ namespace Assessments.Frontend.Web.Controllers
 
             var query = await DataRepository.GetSpeciesAssessments();
 
-            ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks();//query.Select(x => x.TaxonRank).Distinct().ToArray());
+            ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks();
 
             // Søk
             if (!string.IsNullOrEmpty(viewModel.Name))
             {
                 var name = viewModel.Name.Trim().ToLower();
-                var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
 
-                var queryByName = query.Where(x => 
-                    x.ScientificName.ToLower().Contains(name) ||                            // Match on scientific name.
-                    speciesHitScientificNames.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also finds supspecies.
-                    x.PopularName.ToLower().Contains(name) ||                               // Match on popular name.
-                    x.VurdertVitenskapeligNavnHierarki.ToLower().Contains(name) ||          // Match on taxonomic path.
-                    x.SpeciesGroup.ToLower().Contains(name));                               // Match on species group.
-
+                var queryByName = Helpers.GetQueryByName(query, name);
+                
                 if (queryByName.Any())
                 {
                     query = queryByName;
@@ -163,6 +157,61 @@ namespace Assessments.Frontend.Web.Controllers
             return View("Species/2021/List/List", viewModel);
         }
 
+        [HttpGet, Route("2021/suggestions")]
+        public async Task<IActionResult> Suggestion([FromQueryAttribute] string search)
+        {
+            var jsonSpeciesGroup = await GetResource("wwwroot/json/speciesgroup.json");
+            Dictionary<string, Dictionary<string, string>> speciesgroupDict = jsonSpeciesGroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
+            
+            var name = search.Trim().ToLower();
+            var query = await DataRepository.GetSpeciesAssessments();
+
+            var artskartResult = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
+            
+            // Remove species not present in 'rødlista for arter'
+            var suggestions = artskartResult.Where(x => 
+                                                    (x.TaxonCategory != Constants.TaxonCategoriesEn.Species &&                          // Not species
+                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&                        // Not subspecies
+                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.Variety) &&                          // Not variety
+                                                    query.Any(y => y.VurdertVitenskapeligNavnHierarki.Contains(x.ScientificName)) ||    // Check if none of the above -> exists in taxonomic rank
+             query.Any(y => y.ScientificNameId == x.ScientificNameId));                                                                 // or match on scientific name id: exact match on species/subsp./var.
+
+            // Add assessmentIds to species, subspecies and variety
+            foreach (var item in suggestions.Select((hit, i) => new { i, hit}))
+            {
+                if (
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Species ||
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.SubSpecies ||
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Variety
+                    )
+                {
+                    var ids = query
+                        .Where(x => x.ScientificNameId == item.hit.ScientificNameId)
+                        .Select(x => new {
+                            id = x.Id,
+                            area = x.AssessmentArea,
+                            category = x.Category,
+                            speciesGroup = x.SpeciesGroup,
+                            speciesGroupIconUrl = speciesgroupDict[x.SpeciesGroup]["image"]
+                            })
+                        .ToArray();
+
+                    item.hit.assessments = ids;
+                }
+            }
+
+            if (artskartResult.Any() && suggestions.Any() != true)
+            {
+                return Json(new List<object>() {new {message = "Her får du treff, men ingen av artene er behandlet i Rødlista for arter 2021"}});
+            }
+            else if (artskartResult.Any() != true)
+            {
+                return Json(new List<object>() {new {message = "Her får du ingen treff." } });
+            }
+
+            return Json(suggestions);
+        }
+
         [Route("2021/{id:required}")]
         public async Task<IActionResult> Detail(int id)
         {
@@ -186,6 +235,18 @@ namespace Assessments.Frontend.Web.Controllers
             ViewBag.impactfactors = await GetResource("wwwroot/json/impactfactors.json");
 
             return View("Species/2021/Assessment/SpeciesAssessment2021", assessment);
+        }
+
+        [Route("2021/Svalbard")]
+        public async Task<IActionResult> Svalbard2021()
+        {
+            return await Index2021(new RL2021ViewModel() { Area = new[] { "S" }, IsCheck = new[] { "Area" } }, null, false);
+        }
+
+        [Route("2021/Norge")]
+        public async Task<IActionResult> Norge2021()
+        {
+            return await Index2021(new RL2021ViewModel() { Area = new[] { "N" }, IsCheck = new[] { "Area" } }, null, false);
         }
 
         private static void SetupStatisticsViewModel(IList<SpeciesAssessment2021> data, RL2021ViewModel viewModel)

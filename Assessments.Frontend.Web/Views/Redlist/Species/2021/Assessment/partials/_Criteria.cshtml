@@ -407,10 +407,9 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
             {
                 string isactive = @Criteria.inString(key, @Model.CriteriaSummarized);
             <li class="@isactive">
-                <span class="text_container"
-                      onclick="expandCriteria(this, 'opened_element')">
+                <span class="text_container clickable" onclick="expandCriteria(this, 'opened_element') ">
                     @{ expandOrBullet(true);}
-                    <span class="title_field clickable">
+                    <span class="title_field">
                         @key - @value["title"]
                         @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
                     </span>
@@ -432,9 +431,9 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             <li class=" @subcriteria_isactive">
                                 <span class="text_container">
                                     <span class="text_collection">
-                                        <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
+                                        <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
                                             @{expandOrBullet(true);}
-                                            <span class="text_text clickable">
+                                            <span class="text_text ">
                                                 @k - @v["title"]
                                                 @{iconChooser(subcriteria_isactive);}
                                             </span>
@@ -496,7 +495,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                 @if (@value.ContainsKey("options"))
                 {
                     <ul class="second">
-                        <li class=" active">
+                        <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
                             <span class="text_container">
                                 <span class="text_collection">
                                     <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
@@ -517,9 +516,9 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                 <li class=" @subcriteria_isactive">
                                                     <span class="text_container">
                                                         <span class="text_collection">
-                                                            <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
+                                                            <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
                                                                 @{expandOrBullet(true);}
-                                                                <span class="text_text clickable">
+                                                                <span class="text_text ">
                                                                     @k - @v["title"]
                                                                 </span>
                                                                 @{iconChooser(subcriteria_isactive);}
@@ -580,18 +579,18 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                         </li>
                     </ul>
                     <ul class="second">
-                        <li class="active">
+                        @{var activeB = @Criteria.inString("B", @Model.CriteriaSummarized); }
+                        <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
                             <span class="text_container">
                                 <span class="text_collection">
                                     <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
                                         @{expandOrBullet(true);}
                                         <span class="text_text clickable">
                                             Konklusjon for B-kriteriet
-                                            @{iconChooser("active");}
                                             <br />
                                         </span>
-
                                     </span>
+                                   
                                     @{
                                         string b_category = Model.Category;
                                         bool b_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
@@ -601,29 +600,33 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                         }
                                     }
                                     <p>
-                                        <span class="b_summary">
-                                            <span class="graphic_element @b_category">@b_category</span>
-                                            <span>
-                                                Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
-                                                @if (b_comparison)
-                                                {
-                                                    @b_category
-                                                }
-                                                else
-                                                {
-                                                    <partial name="/Views/Shared/_Category.cshtml" />
-                                                }
+                                        @if (activeB == "active")
+                                        {
+                                            <span class="b_summary">
+                                                <span class="graphic_element @b_category">@b_category</span>
+                                                <span>
+                                                    Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
+                                                    @if (b_comparison)
+                                                    {
+                                                        @b_category
+                                                    }
+                                                    else
+                                                    {
+                                                        <partial name="/Views/Shared/_Category.cshtml" />
+                                                    }
+                                                </span>
                                             </span>
-                                        </span>
+                                        }
+                                        else
+                                        {
+                                            <span>B-kriteriet er ikke gjeldende</span>
+                                        }
                                     </p>
                                 </span>
                             </span>
                         </li>
                     </ul>
-
                 }
-
-
             </li>
             }
         </ul>

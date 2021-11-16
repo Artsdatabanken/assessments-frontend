@@ -27,20 +27,23 @@
 </head>
 
 <body>
-    <partial name="/Views/Shared/_PageTopBar.cshtml" />
-    <partial name="/Views/Redlist/Species/Shared/_RedlistHeader.cshtml" />
-    <div class="main">
-        <div class="main-content width-adjuster">
-            @RenderBody()
-            <script src="~/js/site.js" asp-append-version="true"></script>
-            <script src="~/js/filter.js" asp-append-version="true"></script>
-            <script src="~/js/search.js" asp-append-version="true"></script>
-            <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
-            <script src="~/js/gridOrListView.js" asp-append-version="true"></script>
-            <script src="~/js/assessmentTabs.js" asp-append-version="true"></script>
-            @await RenderSectionAsync("Scripts", required: false)
+    <div id="bodywrap">
+        <partial name="/Views/Shared/_PageTopBar.cshtml" />
+        <partial name="/Views/Redlist/Species/Shared/_RedlistHeader.cshtml" />
+        <button class="primary" onclick="highContrastMode(this, 'highcontrast')">Høykontrast</button>
+        <div class="main">
+            <div class="main-content width-adjuster">
+                @RenderBody()
+                <script src="~/js/site.js" asp-append-version="true"></script>
+                <script src="~/js/filter.js" asp-append-version="true"></script>
+                <script src="~/js/search.js" asp-append-version="true"></script>
+                <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
+                <script src="~/js/gridOrListView.js" asp-append-version="true"></script>
+                <script src="~/js/assessmentTabs.js" asp-append-version="true"></script>
+                @await RenderSectionAsync("Scripts", required: false)
+            </div>
         </div>
+        <partial name="/Views/Shared/_PageFooter.cshtml" />
     </div>
-    <partial name="/Views/Shared/_PageFooter.cshtml" />
 </body>
 </html>

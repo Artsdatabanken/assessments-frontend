@@ -90,3 +90,15 @@ function expand(element, className, id) {
         }
     }
 }
+
+function highContrastMode(thisbutton,className) {
+    var mainparent = document.getElementById("bodywrap");
+    console.log(mainparent);
+    if (mainparent.classList && mainparent.classList.contains(className)) {
+        mainparent.classList.remove(className);
+        thisbutton.classList.remove(className);
+    }else {
+        mainparent.classList.add(className); 
+        thisbutton.classList.add(className);
+    }
+}

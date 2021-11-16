@@ -25,14 +25,17 @@
     <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Links.cshtml" />
 
     <hr />
-    <h3>Taksonomi</h3>
-    @if (@Model.VurdertVitenskapeligNavnHierarki != null)
-    {
-        <p class="taxonomy">
-            @foreach (var taxon in @Model.VurdertVitenskapeligNavnHierarki.Split("/"))
-            {
-                <span>@taxon > </span>
-            }
-        </p>
-    }
+
+    @* // Hide taxonomic path
+        <h3>Taksonomi</h3>
+        @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+        {
+            <p class="taxonomy">
+                @foreach (var taxon in @Model.VurdertVitenskapeligNavnHierarki.Split("/"))
+                {
+                    <span>@taxon > </span>
+                }
+            </p>
+        }
+    *@
 </div>

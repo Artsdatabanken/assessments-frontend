@@ -169,6 +169,8 @@ button.close_filters {
     padding: 5px;
     margin-top: -1px;
     flex: none;
+    padding-top:0;
+    padding-bottom:1px;
 }
 
 .filter {

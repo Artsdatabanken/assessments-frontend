@@ -51,6 +51,31 @@ namespace Assessments.Frontend.Web
 
             services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
             services.AddResponseCompression();
+            services.AddWebOptimizer(pipeline =>
+            {
+                pipeline.AddCssBundle("/css/bundle.css",
+                    "/css/site.css",
+                    "/css/graphs.css",
+                    "/css/listview.css",
+                    "/css/assessment.css",
+                    "/css/categorybar.css",
+                    "/css/filter.css",
+                    "/css/search.css",
+                    "/css/toggleSwitch.css",
+                    "/css/tabs.css",
+                    "/css/rl2021.css");
+                pipeline.AddJavaScriptBundle("/js/redlistbundle.js",
+                    "/js/site.js",
+                    "/js/filter.js",
+                    "/js/search.js",
+                    "/js/toggleSwitch.js",
+                    "/js/gridOrListView.js",
+                    "/js/assessmentTabs.js");
+                pipeline.AddJavaScriptBundle("/js/redlistbundle.js",
+                    "/js/site.js",
+                    "/js/filter.js",
+                    "/js/toggleSwitch.js");
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -67,6 +92,7 @@ namespace Assessments.Frontend.Web
 
             app.UseHttpsRedirection();
             app.UseResponseCompression();
+            app.UseWebOptimizer();
             app.UseStaticFiles(new StaticFileOptions {
                 OnPrepareResponse = ctx =>
                 {

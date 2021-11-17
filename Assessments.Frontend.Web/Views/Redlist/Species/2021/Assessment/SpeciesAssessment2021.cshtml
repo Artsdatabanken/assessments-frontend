@@ -27,18 +27,20 @@
     <div class="content-placer bigmid">
         <div class="mid-content with_sidebar">
             <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Header.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />            
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertCommitteeMembers.cshtml" model="Model" />
+            <div class="mobile_padding">
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Citation.cshtml" model="Model" />
+            </div>
         </div>
-        <div class="side">
+        <div class="side mobile_padding">
             <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SidebarContent.cshtml" />
         </div>
     </div>

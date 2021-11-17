@@ -73,7 +73,7 @@
     }    
 }
 
-<div class="num_of_resutls">
+<div class="num_of_resutls mobile_hide">
         <span>@Model.Redlist2021Results.TotalItemCount treff</span>
 </div>
 
@@ -91,24 +91,25 @@
     </div>
 
     <div class="controls">
-        <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
-        @if(Model.View != "stat")
-        {
-            <div class="sort_by_container">
-                <select asp-for="SortBy" id="sort_results" class="sort_by" onchange="this.form.submit()">
+        <div class="list_control_buttons">
+            <button class="toggle_filter only_mobile list_actions" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
+                <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>
+                <span class="material-icons">filter_list</span>Filter
+            </button>
+
+            @if (Model.View != "stat")
+            {
+                <select asp-for="SortBy" id="sort_results" class="sort_by list_actions" onchange="this.form.submit()">
                     <option value="@nameof(SpeciesAssessment2021.ScientificName)">Artsnavn</option>
                     <option value="@nameof(SpeciesAssessment2021.PopularName)">Populærnavn</option>
                     <option value="@nameof(SpeciesAssessment2021.Category)">Kategori</option>
                     <option value="@nameof(SpeciesAssessment2021.SpeciesGroup)">Artsgruppe</option>
                 </select>
-            </div>
-        }
-        <button class="toggle_filter only_mobile" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-            <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>
-            <span class="material-icons">
-                filter_list
-            </span>Filter
-        </button>
+            }
+        </div>
+        <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
+
+
     </div>
 </div>
 

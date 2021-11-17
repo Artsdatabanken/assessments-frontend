@@ -24,7 +24,7 @@ HIGH CONTRAST THEME
 .highcontrast .NE,
 .highcontrast .NT {
     color: white;
-    background: #3d3b3a;
+    background: black;
 }
 
 .highcontrast input:checked + .slider {
@@ -35,8 +35,6 @@ HIGH CONTRAST THEME
 .highcontrast .button.tertiary,
 .highcontrast .main button.tertiary {
     color: #124eac;
-    text-decoration: underline;
-    padding: 2px;
 }
 
 .highcontrast .title_header .button.tertiary {
@@ -136,10 +134,11 @@ HIGH CONTRAST THEME
 .darktheme .listheader,
 .darktheme .viewselector,
 .darktheme .controls button.active,
-.darktheme .filter_group ul, 
+.darktheme .filter_group ul,
 .darktheme .redlist .listheader,
 .darktheme .viewselector,
-.darktheme .controls button.active {
+.darktheme .controls button.active,
+.darktheme.highcontrast .controls button.active {
     background: #2b2b2b;
 }
 
@@ -174,7 +173,8 @@ HIGH CONTRAST THEME
 /* Other button bg */
 .darktheme .button,
 .darktheme .main button {
-    background: #1e1616;
+    background: #484848;
+    border-color: #9d9d9d;
 }
 
 /* WHITE FONT COLOR*/
@@ -311,3 +311,75 @@ HIGH CONTRAST THEME
 .darktheme hr {
     border-color: #403d3d;
 }
+
+/* HIGH CONTRAST + DARK THEME */
+
+.darktheme.highcontrast a,
+.darktheme.highcontrast .breadcrumbs li,
+.darktheme.highcontrast .button.tertiary,
+.darktheme.highcontrast .main button.tertiary,
+.darktheme.highcontrast .sidebarmenu li h3 {
+    color: #f9d754;
+}
+
+/* HEADING COLOURED TEXT  */
+.darktheme.highcontrast h1,
+.darktheme.highcontrast h2,
+.darktheme.highcontrast h3,
+.darktheme.highcontrast h4,
+.darktheme.highcontrast h5,
+.darktheme.highcontrast .element_popular_name {
+    color: #ffbd78;
+}
+
+.darktheme.highcontrast input:checked + .slider {
+    background-color: #ca1c35;
+    border-color: #ca1c35;
+}
+
+.darktheme.highcontrast .button, 
+.darktheme.highcontrast .main button {
+    background: #ca1c35;
+    border:1px solid white;
+}
+
+.darktheme.highcontrast .button.tertiary,
+.darktheme.highcontrast .filter_group button {
+    background: transparent;
+}
+
+.darktheme.highcontrast .controls{
+    border-color:white;
+}
+
+.darktheme.highcontrast .controls button.active,
+.darktheme .controls button.active {
+    border-bottom: 1px solid #2b2b2b;
+}
+
+.darktheme.highcontrast .filternumber {
+    background: #ffbd78;
+    color:black;
+}
+
+.darktheme.highcontrast .category_tag{
+    border:2px solid white;
+    background:black;
+}
+
+.darktheme.highcontrast .indicator:not(:empty) {
+    border: 1px solid #fff;
+}
+
+.darktheme.highcontrast .button.tertiary{
+    border:0;
+}
+
+    .darktheme.highcontrast .category_displayer .active .category_item {
+        background: #f9d754;
+        border-color: #f9d754
+    }
+
+        .darktheme.highcontrast .category_displayer .active .category_item span{
+            color: black;
+        }

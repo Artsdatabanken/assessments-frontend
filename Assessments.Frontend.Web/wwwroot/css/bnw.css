@@ -136,7 +136,6 @@ HIGH CONTRAST THEME
 .darktheme .controls button.active,
 .darktheme .filter_group ul,
 .darktheme .redlist .listheader,
-.darktheme .viewselector,
 .darktheme .controls button.active,
 .darktheme .search_dropdown,
 .darktheme.highcontrast .controls button.active {
@@ -245,8 +244,7 @@ HIGH CONTRAST THEME
 
 /* SEMI-GRAY-BORDERS */
 .darktheme .darktheme .controls button.active,
-.darktheme .listheader,
-.darktheme .viewselector {
+.darktheme .listheader {
     border-color: black;
 }
 
@@ -261,7 +259,7 @@ HIGH CONTRAST THEME
     border-color: #f97474;
 }
 
-/* listborders */
+/* BORDERS */
 
 .darktheme .tabbed_element_container ul,
 .darktheme .impact_table,
@@ -283,9 +281,14 @@ HIGH CONTRAST THEME
     border-color:#514f4f;
 }
 
-    .darktheme .search_dropdown {
-        border-color: #8c8c8c;
-    }
+.darktheme .search_dropdown {
+    border-color: #8c8c8c;
+}
+
+.darktheme .viewselector {
+    border-color: #7f726b;
+    border-bottom: 1px solid #7f726b;
+}
 
 /* ICONS */
 .darktheme .element_icon,

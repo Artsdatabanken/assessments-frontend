@@ -2,26 +2,23 @@
 @{
     // Obtain which criteria are used and their titles.
     var subcriteria = Criteria.sortCriteria(Model.CriteriaSummarized);
-    string sentence = "";
-    string[] cri = { "A", "B", "C", "D",  };
+    string sentence = String.Empty;
+    string[] cri = { "A", "B", "C", "D" };
 
     @if (!string.IsNullOrWhiteSpace(Model.CriteriaSummarized))
     {
         @foreach (var value in cri)
         {
-            if (!string.IsNullOrEmpty(value))
+            if (Model.CriteriaSummarized.Contains(value))
             {
-                if (Model.CriteriaSummarized.Contains(value))
+                string current = ViewBag.kriterier[value]["title"];
+                sentence.Replace(" og ", ", ");
+                if (sentence != String.Empty)
                 {
-                    string current = ViewBag.kriterier[value]["title"];
-                    sentence.Replace(" og ", ", ");
-                    if (sentence != "")
-                    {
-                        sentence += " og ";
-                    }
-                    //sentence += value + " "; // NICE FOR TESTING
-                    sentence += current.ToLower();
+                    sentence += " og ";
                 }
+                //sentence += value + " "; // NICE FOR TESTING
+                sentence += current.ToLower();
             }
         }
         if(Model.Category.Length > 2)

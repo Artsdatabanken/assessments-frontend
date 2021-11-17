@@ -138,8 +138,9 @@ button#open_filter {
         display: flex;
         justify-content: center;
         padding-bottom: 12px;
+        padding-top: 12px;
         float: none;
-        width:100%;
+        width: 100%;
     }
 }
 

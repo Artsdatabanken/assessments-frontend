@@ -192,5 +192,9 @@
     text-align: left;
     padding: 5px;
     padding-bottom: 0;
-    color: #901616;
+}
+
+.search_matchedname,
+.search_match {
+    color: #0b8293;
 }

@@ -56,24 +56,31 @@ const formatScientificName = (name) => {
     return name;
 }
 
-const formatListElements = (el) => {
+function matchedString(str, find) {
+    var reg = new RegExp('(' + find + ')', 'gi');
+    return str.replace(reg, '<span class="search_match">$1</span>');
+}
+
+
+const formatListElements = (el, searchstring) => {
     let name = "";
     if (el.message) {
         return `<span>${el.message}</span>`;
     }
-    if (el.PopularName) {
-        name = `<span>${el.PopularName}</span>`;
+    if (el.PopularName) {        
+        name = `<span>${el.PopularName}</span>`;        
     }
     if (el.ScientificName) {
         name = `<span class="search_name">${name} ${formatScientificName(el.ScientificName)}</span>`;
     }
     if (el.TaxonCategory) {
-        name += `<span class="taxon_rank">${el.TaxonCategory}</span>`;
+        name += `<span class="taxon_rank">${el.TaxonCategory.toLowerCase()}</span>`;
     }
+    name = matchedString(name, searchstring);    
     return name;
 }
 
-const createList = (json) => {
+const createList = (json,searchstring) => {
     autocompleteList.innerHTML = "";
     json.forEach(el => {
         const assessments = el.assessments;
@@ -84,13 +91,11 @@ const createList = (json) => {
                 let matchedname = "";
                 if (el.matchedname) {
                     let name = el.PopularName + " " + el.ScientificName;
-                    if (!name.includes(el.matchedname)) {                       
-                        console.log("SYNONYM OG SÅNN", el.matchedname);
+                    if (!name.includes(el.matchedname)) {        
                         matchedname = "<span class='search_matchedname'>" + '"' + el.matchedname + '"' + "</span>";
                         li.classList.add("synonymgrid");
                     }
-                }
-                
+                }                
                 let action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
                 let category = "<span></span>";
                 let icon = '<span class="material-icons search_list_icon">list</span>';
@@ -103,7 +108,7 @@ const createList = (json) => {
                         category = `<span class="search_category graphic_element ${assessments[i].category}">${assessments[i].category}</span >`;
                     }
                     if (assessments[i].speciesGroup) {
-                        speciesGroup = '<span class="search_speciesgroup">' + assessments[i].speciesGroup + '</span >';
+                        speciesGroup = '<span class="search_speciesgroup">' + assessments[i].speciesGroup.toLowerCase() + '</span >';
                     }
                     if (assessments[i].speciesGroupIconUrl) {
                         icon = '<img src="' + assessments[i].speciesGroupIconUrl + '" class="search_speciesicon" >';
@@ -111,7 +116,7 @@ const createList = (json) => {
                     action = '<span class="right_action">'+areaname+"</span >" + action;
                 }
 
-                const liwrapper = "<span class='search_autocomplete'>" + icon + formatListElements(el) + speciesGroup + category + action +"</span>"
+                const liwrapper = "<span class='search_autocomplete'>" + icon + formatListElements(el, searchstring) + speciesGroup + category + action +"</span>"
                 li.innerHTML = matchedname + liwrapper;
                 li.tabIndex = 0;
                 li.onclick = () => {
@@ -133,7 +138,7 @@ const createList = (json) => {
             let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;            
             let category = "<span></span>";
             let speciesGroup = '<span class="search_speciesgroup"></span >';
-            li.innerHTML = icon + formatListElements(el) + speciesGroup + category + right_action;
+            li.innerHTML = icon + formatListElements(el, searchstring) + speciesGroup + category + right_action;
             li.classList.add("search_autocomplete");
             li.tabIndex = 0;
             li.onclick = () => {
@@ -205,7 +210,7 @@ const inputChange = async (e) => {
         json = await response.json();
     }
     jsonList = getListValues(json);
-    createList(jsonList);
+    createList(jsonList, e.target.value);
 }
 
 if (searchField) {

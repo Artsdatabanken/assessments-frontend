@@ -149,8 +149,9 @@ HIGH CONTRAST THEME
 }
 
 /* TRANSPARENT ITEMS */
+.darktheme .active .page-link,
 .darktheme .main .filter_group button,
-.darktheme .button.tertiary, 
+.darktheme .button.tertiary,
 .darktheme .main button.tertiary,
 .darktheme .habitat_element,
 .darktheme .filter_group button {
@@ -165,6 +166,7 @@ HIGH CONTRAST THEME
 
 
 /* RED BACKGROUND */
+.darktheme .page-link,
 .darktheme .button.primary,
 .darktheme .main button.primary {
     background: #ca1c35;
@@ -194,6 +196,8 @@ HIGH CONTRAST THEME
 .darktheme .main .changetab.active,
 .darktheme .tabbed_element_container li.active,
 .darktheme .impact_table,
+.darktheme .page-link,
+.darktheme .percent,
 .darktheme p {
     color: white;
 }
@@ -216,12 +220,13 @@ HIGH CONTRAST THEME
 .darktheme h3,
 .darktheme h4,
 .darktheme h5,
-.darktheme .search_matchedname,
 .darktheme .element_popular_name {
     color: #a8a4a4;
 }
 
 /* ACTIVE LINK COLOUR */
+.darktheme .search_matchedname,
+.darktheme .search_match,
 .darktheme a,
 .darktheme .breadcrumbs li,
 .darktheme .button.tertiary,
@@ -328,8 +333,12 @@ HIGH CONTRAST THEME
     border-color: #403d3d;
 }
 
-/* HIGH CONTRAST + DARK THEME */
+.darktheme .graph .heightbar_indicator,
+.darktheme .down_graph .heightbar_indicator {
+    border: 1px solid white;
+}
 
+/* HIGH CONTRAST + DARK THEME */
 .darktheme.highcontrast a,
 .darktheme.highcontrast .breadcrumbs li,
 .darktheme.highcontrast .button.tertiary,
@@ -345,6 +354,7 @@ HIGH CONTRAST THEME
 .darktheme.highcontrast h4,
 .darktheme.highcontrast h5,
 .darktheme.highcontrast .search_matchedname,
+.darktheme.highcontrast .search_match,
 .darktheme.highcontrast .element_popular_name {
     color: #ffbd78;
 }

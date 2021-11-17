@@ -73,21 +73,25 @@
     }    
 }
 
+<div class="num_of_resutls">
+        <span>@Model.Redlist2021Results.TotalItemCount treff</span>
+</div>
+
 <div class="empty_filters_and_controls">
     <div class="empty_filters">
         @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
-                <span class="flex_row">
-                    @{ GetRemoveString(); }
-                </span>
-                <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
-                    <span class="material-icons">close</span>Fjern
-                </a>
+            <span class="flex_row">
+                @{ GetRemoveString(); }
+            </span>
+            <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
+                <span class="material-icons">close</span>Fjern
+            </a>
         }  
     </div>
 
-<div class="controls">
-    <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
+    <div class="controls">
+        <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
         @if(Model.View != "stat")
         {
             <div class="sort_by_container">

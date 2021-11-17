@@ -413,6 +413,19 @@ li a span.element_icon {
     position:relative;
 }
 
+.num_of_resutls {
+    font-size: 12pt;
+    width: 100%;
+    text-align: end;
+    margin: 10px 0;
+}
+
+.num_of_resutls span {
+    border: 1px solid #901616;
+    border-radius: 2px;
+    padding: 4px;
+}
+
 
 /* INFOGRAPHICS */
 

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="~/css/toggleSwitch.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/tabs.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/rl2021.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bnw.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://design.artsdatabanken.no/script/header.js"></script>
     <script src="https://design.artsdatabanken.no/script/footer.js"></script>
@@ -26,20 +27,26 @@
 </head>
 
 <body>
-    <partial name="/Views/Shared/_PageTopBar.cshtml" />
-    <partial name="/Views/Redlist/Species/Shared/_RedlistHeader.cshtml" />
-    <div class="main">
-        <div class="main-content width-adjuster">
-            @RenderBody()
-            <script src="~/js/site.js" asp-append-version="true"></script>
-            <script src="~/js/filter.js" asp-append-version="true"></script>
-            <script src="~/js/search.js" asp-append-version="true"></script>
-            <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
-            <script src="~/js/gridOrListView.js" asp-append-version="true"></script>
-            <script src="~/js/assessmentTabs.js" asp-append-version="true"></script>
-            @await RenderSectionAsync("Scripts", required: false)
+    <div id="bodywrap">
+        <partial name="/Views/Shared/_PageTopBar.cshtml" />
+        <partial name="/Views/Redlist/Species/Shared/_RedlistHeader.cshtml" />
+        <div class="main">
+
+            <div class="main-content width-adjuster">
+                <button class="themebutton contrast primary tinybutton" onclick="highContrastMode(this, 'highcontrast')">Høykontrast</button>
+                <button class="themebutton dark primary tinybutton" onclick="highContrastMode(this, 'darktheme')">Nattmodus</button>
+
+                @RenderBody()
+                <script src="~/js/site.js" asp-append-version="true"></script>
+                <script src="~/js/filter.js" asp-append-version="true"></script>
+                <script src="~/js/search.js" asp-append-version="true"></script>
+                <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
+                <script src="~/js/gridOrListView.js" asp-append-version="true"></script>
+                <script src="~/js/assessmentTabs.js" asp-append-version="true"></script>
+                @await RenderSectionAsync("Scripts", required: false)
+            </div>
         </div>
+        <partial name="/Views/Shared/_PageFooter.cshtml" />
     </div>
-    <partial name="/Views/Shared/_PageFooter.cshtml" />
 </body>
 </html>

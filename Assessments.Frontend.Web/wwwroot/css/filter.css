@@ -79,7 +79,75 @@ button#open_filter {
     display: none;
 }
 
+.controls .list_actions {
+    width:150px;
+    max-width: 150px;
+    height: 35px;
+    background: white;
+    border: 1px solid black;
+    text-align: center;
+    margin:0;
+    position:relative;    
+}
+
+.controls .list_actions:first-child{
+    margin-right:2px;
+}
+
+.controls .list_actions:last-child {
+    margin-left: 2px;
+}
+
+.controls .list_actions .material-icons {
+    display: inline-block;
+}
+
+.list_control_buttons {
+    display:inline-block;
+    float:right;
+}
+
+
+
 @media only screen and (max-width: 750px) {
+    .list_control_buttons {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 10px;
+        float: right;
+        width: 304px;
+        padding-top: 2px;
+    }
+
+    .controls .list_actions {
+        height: 44px;
+        flex: 1;
+    }
+
+    .controls {
+        padding-top: 0px;
+    }
+
+    .toggle_filter .filternumber {
+        position: absolute;
+        right: 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .list_control_buttons {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 12px;
+        float: none;
+        width:100%;
+    }
+}
+
+
+
+@media only screen and (max-width: 750px) {
+
     .controls button {
         font-size: 10pt;
     }
@@ -89,29 +157,7 @@ button#open_filter {
         font-size: 15pt;
     }
 
-    .sort_by_container {
-        max-width: 25%;
-        float: right;
-    }
-
-    .sort_by {
-        float: initial;
-        font-weight: normal;
-        text-transform: none;
-        background-color: F5f5f5;
-    }
-
-    /* Filter button */
-
-
-    .toggle_filter.only_mobile {
-        float: right;
-        position: relative;
-    }
-
-    .toggle_filter .filternumber {
-        position: absolute;
-    }
+    /* Filter button */  
 
     .empty_filters_mobile {
         display: flex;
@@ -133,6 +179,9 @@ button#open_filter {
         padding-right: 2px;
     }
 }
+
+
+
 
 button.close_filters {
     display: none;
@@ -169,6 +218,8 @@ button.close_filters {
     padding: 5px;
     margin-top: -1px;
     flex: none;
+    padding-top:0;
+    padding-bottom:1px;
 }
 
 .filter {

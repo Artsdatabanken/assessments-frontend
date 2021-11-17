@@ -186,7 +186,6 @@
     background: #d1d3d4;
 }
 
-
 .RE ,
 .CR ,
 .EN ,
@@ -201,7 +200,6 @@
 .NE {
     color: #1c1c1c;
 }
-
 
 .criteria_displayer li{
     flex:1;

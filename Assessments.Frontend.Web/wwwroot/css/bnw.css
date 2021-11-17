@@ -1,0 +1,385 @@
+.main .themebutton {
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+    right: 10px;
+    width: 100px;
+    border: 1px solid black;
+}
+
+.themebutton.dark {
+    margin-top: 26px;
+}
+
+/* 
+HIGH CONTRAST THEME
+*/
+.highcontrast .RE,
+.highcontrast .CR,
+.highcontrast .EN,
+.highcontrast .VU,
+.highcontrast .DD,
+.highcontrast .LC,
+.highcontrast .NA,
+.highcontrast .NE,
+.highcontrast .NT {
+    color: white;
+    background: black;
+}
+
+.highcontrast input:checked + .slider {
+    background-color: #3d3b3a;
+}
+
+.highcontrast .sidebarmenu li h3,
+.highcontrast .button.tertiary,
+.highcontrast .main button.tertiary {
+    color: #124eac;
+}
+
+.highcontrast .title_header .button.tertiary {
+    color: white;
+    border: none;
+}
+
+.highcontrast .title_header {
+    background: black;
+}
+
+.highcontrast .habitat_element {
+    background: white;
+}
+
+.highcontrast .land, .sea {
+    fill: white;
+}
+/* PAD-SIZE 940px */
+@media only screen and (max-width: 940px) {
+
+    .highcontrast  .side {
+        background: none;
+        border-top: 1px solid black;
+    }
+}
+
+/* MAP COLOURS */
+.highcontrast .extinct,
+.highcontrast .sea.extinct {
+    background: #fcbc78;
+    fill: #fcbc78;
+}
+
+.highcontrast .presumed_extinct,
+.highcontrast .sea.presumed_extinct {
+    background: #ff800f;
+    fill: #ff800f;
+}
+
+.highcontrast .presumed,
+.highcontrast .sea.presumed {
+    background: #a2c8ec;
+    fill: #a2c8ec;
+}
+
+.highcontrast .known,
+.highcontrast .sea.known {
+    background: #006ba8;
+    fill: #006ba8;
+}
+
+.highcontrast .list-search,
+.highcontrast .controls button.active,
+.highcontrast .habitat_element,
+.highcontrast .main .changetab,
+.highcontrast .main .changetab.active,
+.highcontrast .tabbed_element_container {
+    border-color: black;
+}
+
+.highcontrast .controls button.active,
+.highcontrast .main .changetab.active {
+    border-bottom-color: white;
+}
+
+.highcontrast .darktheme .list-search input{
+    color:black;
+}
+/* 
+    DARK THEME:
+   FUN PROJECT NOT EVEN SLIGHTLY THERE
+*/
+/* PURE BLACK BACKGROUND */
+.darktheme,
+.darktheme .main {
+    background: black;
+}
+
+@media only screen and (max-width: 750px) {
+
+    .darktheme .filter_groups {
+        background:black;
+    }
+
+}
+
+/* MAIN BACKGROUND COLOR */
+.darktheme .sidebarmenu ul,
+.darktheme .main .changetab.active,
+.darktheme .list-search,
+.darktheme .main-content {
+    background: #201f1f;
+}
+
+/* SEMI-GRAY BACKGROUND */
+.darktheme .listheader,
+.darktheme .viewselector,
+.darktheme .controls button.active,
+.darktheme .filter_group ul,
+.darktheme .redlist .listheader,
+.darktheme .viewselector,
+.darktheme .controls button.active,
+.darktheme.highcontrast .controls button.active {
+    background: #2b2b2b;
+}
+
+@media only screen and (max-width: 940px) {
+    .darktheme .side {
+        background: #2b2b2b;
+    }
+}
+
+/* TRANSPARENT ITEMS */
+.darktheme .main .filter_group button,
+.darktheme .button.tertiary, 
+.darktheme .main button.tertiary,
+.darktheme .habitat_element,
+.darktheme .filter_group button {
+    background: transparent;
+}
+
+/* WINE RED */
+.darktheme .category_displayer .notactive .category_item,
+.darktheme .title_header {
+    background: #570808;
+}
+
+
+/* RED BACKGROUND */
+.darktheme .button.primary,
+.darktheme .main button.primary {
+    background: #ca1c35;
+}
+
+/* Other button bg */
+.darktheme .button,
+.darktheme .main button {
+    background: #484848;
+    border-color: #9d9d9d;
+}
+
+/* WHITE FONT COLOR*/
+.darktheme,
+.darktheme header,
+.darktheme .list-search,
+.darktheme .main-content,
+.darktheme .filter_group button,
+.darktheme .sidebarmenu li a,
+.darktheme .button.primary,
+.darktheme .main button.primary,
+.darktheme .main button,
+.darktheme .button,
+.darktheme .controls button.active,
+.darktheme .category_displayer span,
+.darktheme .regionlist.legend .region span,
+.darktheme .main .changetab.active,
+.darktheme .tabbed_element_container li.active,
+.darktheme .impact_table,
+.darktheme p {
+    color: white;
+}
+
+
+/* DISABLED/UNCLICKABLE LINKS */
+.darktheme .byline,
+.darktheme .date,
+.darktheme .breadcrumbs li.currentcrumb {
+    color: #b5aaaa;
+}
+
+.darktheme .tabbed_element_container li.inactive {
+    color: #bf7575;
+}
+
+/* HEADING COLOURED TEXT  */
+.darktheme h1,
+.darktheme h2,
+.darktheme h3,
+.darktheme h4,
+.darktheme h5,
+.darktheme .element_popular_name {
+    color: #a8a4a4;
+}
+
+/* ACTIVE LINK COLOUR */
+.darktheme a,
+.darktheme .breadcrumbs li,
+.darktheme .button.tertiary,
+.darktheme .main button.tertiary,
+.darktheme .sidebarmenu li h3 {
+    color: #f97474;
+}
+
+/* Blackish color */
+.darktheme .list-search input,
+.darktheme .tabbed_element_container .thresholdlist.active {
+    color: black;
+}
+
+/* BORDERS */
+
+.darktheme .controls button.active{
+    border-bottom:transparent;
+}
+
+/* SEMI-GRAY-BORDERS */
+.darktheme .darktheme .controls button.active,
+.darktheme .listheader,
+.darktheme .viewselector {
+    border-color: black;
+}
+
+/* WHITE BORDER */
+.darktheme .category_displayer li.active .category_item,
+.darktheme .category_displayer .notactive .category_item {
+    border-color: white;
+}
+
+/* ACTIVE BORDER */
+.darktheme .see_all .habitat_element.active {
+    border-color: #f97474;
+}
+
+/* listborders */
+.darktheme .tabbed_element_container ul, 
+.darktheme .impact_table,
+.darktheme .tabbed_element_container p,
+.darktheme ul.fourth,
+.darktheme ul.second {
+    border-color: #df6c6c;
+}
+
+.darktheme .sidebarmenu ul,
+.darktheme .sidebarmenu li a,
+.darktheme .redlist li {
+    border-color: #464646;
+}
+
+.darktheme .filter_group button{
+    border-color:#514f4f;
+}
+
+/* ICONS */
+.darktheme .element_icon,
+.darktheme .image_background {
+    width: 50px;
+    height: 50px;
+    background: white;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+.darktheme .speciesgroup_name{
+    background: #424141;
+}
+
+/* SPECIAL STUFF */
+
+.darktheme .S .speciesgroup_name,
+.darktheme .redlist li.S {
+    background: #0f122d;
+}
+
+.darktheme .main .changetab.active {
+    border-bottom-color: #201f1f;
+}
+
+.darktheme .category_displayer::before{
+    background:white;
+}
+
+.darktheme .list-search,
+.darktheme hr {
+    border-color: #403d3d;
+}
+
+/* HIGH CONTRAST + DARK THEME */
+
+.darktheme.highcontrast a,
+.darktheme.highcontrast .breadcrumbs li,
+.darktheme.highcontrast .button.tertiary,
+.darktheme.highcontrast .main button.tertiary,
+.darktheme.highcontrast .sidebarmenu li h3 {
+    color: #f9d754;
+}
+
+/* HEADING COLOURED TEXT  */
+.darktheme.highcontrast h1,
+.darktheme.highcontrast h2,
+.darktheme.highcontrast h3,
+.darktheme.highcontrast h4,
+.darktheme.highcontrast h5,
+.darktheme.highcontrast .element_popular_name {
+    color: #ffbd78;
+}
+
+.darktheme.highcontrast input:checked + .slider {
+    background-color: #ca1c35;
+    border-color: #ca1c35;
+}
+
+.darktheme.highcontrast .button, 
+.darktheme.highcontrast .main button {
+    background: #ca1c35;
+    border:1px solid white;
+}
+
+.darktheme.highcontrast .button.tertiary,
+.darktheme.highcontrast .filter_group button {
+    background: transparent;
+}
+
+.darktheme.highcontrast .controls{
+    border-color:white;
+}
+
+.darktheme.highcontrast .controls button.active,
+.darktheme .controls button.active {
+    border-bottom: 1px solid #2b2b2b;
+}
+
+.darktheme.highcontrast .filternumber {
+    background: #ffbd78;
+    color:black;
+}
+
+.darktheme.highcontrast .category_tag{
+    border:2px solid white;
+    background:black;
+}
+
+.darktheme.highcontrast .indicator:not(:empty) {
+    border: 1px solid #fff;
+}
+
+.darktheme.highcontrast .button.tertiary{
+    border:0;
+}
+
+    .darktheme.highcontrast .category_displayer .active .category_item {
+        background: #f9d754;
+        border-color: #f9d754
+    }
+
+        .darktheme.highcontrast .category_displayer .active .category_item span{
+            color: black;
+        }

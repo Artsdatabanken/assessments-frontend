@@ -81,6 +81,16 @@ const createList = (json) => {
             for (let i in assessments) {
                 const id = assessments[i].id;
                 const li = document.createElement("li");
+                let matchedname = "";
+                if (el.matchedname) {
+                    let name = el.PopularName + " " + el.ScientificName;
+                    if (!name.includes(el.matchedname)) {                       
+                        console.log("SYNONYM OG SÅNN", el.matchedname);
+                        matchedname = "<span class='search_matchedname'>" + '"' + el.matchedname + '"' + "</span>";
+                        li.classList.add("synonymgrid");
+                    }
+                }
+                
                 let action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
                 let category = "<span></span>";
                 let icon = '<span class="material-icons search_list_icon">list</span>';
@@ -100,9 +110,9 @@ const createList = (json) => {
                     }                   
                     action = '<span class="right_action">'+areaname+"</span >" + action;
                 }
-                
-                li.innerHTML = icon + formatListElements(el) + speciesGroup + category + action;
-                li.classList.add("search_autocomplete");
+
+                const liwrapper = "<span class='search_autocomplete'>" + icon + formatListElements(el) + speciesGroup + category + action +"</span>"
+                li.innerHTML = matchedname + liwrapper;
                 li.tabIndex = 0;
                 li.onclick = () => {
                     window.location.href = "/rodlisteforarter/2021/" + id;
@@ -162,6 +172,7 @@ const getListValues = (json) => {
             "TaxonCategory": taxonCategories[el.taxonCategory],
             "ScientificName": el.scientificName,
             "assessments": el.assessments,
+            "matchedname": el.matchedName,
             "message": el.message
         };
     });

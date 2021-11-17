@@ -138,6 +138,7 @@ HIGH CONTRAST THEME
 .darktheme .redlist .listheader,
 .darktheme .viewselector,
 .darktheme .controls button.active,
+.darktheme .search_dropdown,
 .darktheme.highcontrast .controls button.active {
     background: #2b2b2b;
 }
@@ -216,6 +217,7 @@ HIGH CONTRAST THEME
 .darktheme h3,
 .darktheme h4,
 .darktheme h5,
+.darktheme .search_matchedname,
 .darktheme .element_popular_name {
     color: #a8a4a4;
 }
@@ -260,7 +262,8 @@ HIGH CONTRAST THEME
 }
 
 /* listborders */
-.darktheme .tabbed_element_container ul, 
+
+.darktheme .tabbed_element_container ul,
 .darktheme .impact_table,
 .darktheme .tabbed_element_container p,
 .darktheme ul.fourth,
@@ -268,15 +271,21 @@ HIGH CONTRAST THEME
     border-color: #df6c6c;
 }
 
+
 .darktheme .sidebarmenu ul,
 .darktheme .sidebarmenu li a,
 .darktheme .redlist li {
     border-color: #464646;
 }
 
+
 .darktheme .filter_group button{
     border-color:#514f4f;
 }
+
+    .darktheme .search_dropdown {
+        border-color: #8c8c8c;
+    }
 
 /* ICONS */
 .darktheme .element_icon,
@@ -292,8 +301,12 @@ HIGH CONTRAST THEME
     background: #424141;
 }
 
-/* SPECIAL STUFF */
+.darktheme .search_speciesicon {
+    background:white;
+    border-radius:50%;
+}
 
+/* SPECIAL STUFF */
 .darktheme .S .speciesgroup_name,
 .darktheme .redlist li.S {
     background: #0f122d;
@@ -328,6 +341,7 @@ HIGH CONTRAST THEME
 .darktheme.highcontrast h3,
 .darktheme.highcontrast h4,
 .darktheme.highcontrast h5,
+.darktheme.highcontrast .search_matchedname,
 .darktheme.highcontrast .element_popular_name {
     color: #ffbd78;
 }
@@ -375,11 +389,11 @@ HIGH CONTRAST THEME
     border:0;
 }
 
-    .darktheme.highcontrast .category_displayer .active .category_item {
-        background: #f9d754;
-        border-color: #f9d754
-    }
+.darktheme.highcontrast .category_displayer .active .category_item {
+    background: #f9d754;
+    border-color: #f9d754
+}
 
-        .darktheme.highcontrast .category_displayer .active .category_item span{
-            color: black;
-        }
+.darktheme.highcontrast .category_displayer .active .category_item span{
+    color: black;
+}

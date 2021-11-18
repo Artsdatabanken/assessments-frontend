@@ -7,7 +7,6 @@ using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.Models.Species;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
-using System;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Assessments.Shared.Helpers;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -174,7 +173,7 @@ namespace Assessments.Frontend.Web.Controllers
                                                     x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&                        // Not subspecies
                                                     x.TaxonCategory != Constants.TaxonCategoriesEn.Variety) &&                          // Not variety
                                                     query.Any(y => y.VurdertVitenskapeligNavnHierarki.Contains(x.ScientificName)) ||    // Check if none of the above -> exists in taxonomic rank
-             query.Any(y => y.ScientificNameId == x.ScientificNameId));                                                                 // or match on scientific name id: exact match on species/subsp./var.
+             query.Any(y => y.ScientificNameId == x.ScientificNameId)).ToArray();                                                                 // or match on scientific name id: exact match on species/subsp./var.
 
             // Add assessmentIds to species, subspecies and variety
             foreach (var item in suggestions.Select((hit, i) => new { i, hit}))
@@ -192,11 +191,18 @@ namespace Assessments.Frontend.Web.Controllers
                             area = x.AssessmentArea,
                             category = x.Category,
                             speciesGroup = x.SpeciesGroup,
-                            speciesGroupIconUrl = speciesgroupDict[x.SpeciesGroup]["image"]
+                            speciesGroupIconUrl = speciesgroupDict[x.SpeciesGroup]["image"],
+                            scientificName = x.ScientificName
                             })
                         .ToArray();
 
                     item.hit.assessments = ids;
+                    if (ids.Length != 1) continue;
+                    if (item.hit.MatchedName == item.hit.ScientificName)// artskart har ikke underartsepitet o.l. men vi har det her
+                    {
+                        item.hit.MatchedName = ids[0].scientificName;
+                    }
+                    item.hit.ScientificName = ids[0].scientificName;
                 }
             }
 

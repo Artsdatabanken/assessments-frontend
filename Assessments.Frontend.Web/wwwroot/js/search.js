@@ -48,6 +48,7 @@ const formatScientificName = (name) => {
     name = name.replace("coll.", "</i>coll.<i>");
     name = name.replace("n.", "</i>n.<i>");
     name = name.replace("subsp.", "</i>subsp.<i>");
+    name = name.replace("sp.", "</i>sp.<i>");
     name = name.replace("var.", "</i>var.<i>");
     name = name.replace(" '", "</i> '");
     name = name.replace("' ", "'<i> ");
@@ -63,19 +64,27 @@ function matchedString(str, find) {
 
 const formatListElements = (el, searchstring) => {
     let name = "";
+
     if (el.message) {
         return `<span>${el.message}</span>`;
     }
-    if (el.PopularName) {        
-        name = `<span>${el.PopularName}</span>`;        
+    if (el.PopularName) {   
+        let popname = matchedString(el.PopularName, searchstring);
+        name = `<span>${popname}</span>`; 
     }
     if (el.ScientificName) {
-        name = `<span class="search_name">${name} ${formatScientificName(el.ScientificName)}</span>`;
+
+        let sciname = formatScientificName(el.ScientificName);
+            sciname = matchedString(el.ScientificName, searchstring);
+        name = `<span class="search_name">${name} ${sciname}</span>`;
     }
     if (el.TaxonCategory) {
         name += `<span class="taxon_rank">${el.TaxonCategory.toLowerCase()}</span>`;
     }
-    name = matchedString(name, searchstring);    
+
+    // PROBLEM: user searching for something contained in the html tags
+    // will also get this split in the presentation. 
+
     return name;
 }
 

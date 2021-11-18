@@ -10,6 +10,13 @@
     margin-top: 20px;
 }
 
+.page_count {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: -10px;
+}
+
 .page-item:not(:first-child) .page-link {
     margin-left: -1px;
 }

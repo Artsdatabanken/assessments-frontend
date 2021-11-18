@@ -88,8 +88,7 @@ function makeListItem(icon, listname, speciesGroup, category, right_action, nota
     li.tabIndex = 0;    
 
     if (notassesment) {
-        li.classList.add("search_autocomplete");
-      
+        li.classList.add("search_autocomplete");      
         li.onclick = () => {
             searchForTaxa(el.ScientificName);
         }
@@ -99,7 +98,6 @@ function makeListItem(icon, listname, speciesGroup, category, right_action, nota
             }
         }
         li.innerHTML = icon + listname + speciesGroup + category + right_action;
-
     } else {
         console.log("IS NOT ASSESMENT")
         li.onclick = () => {
@@ -128,27 +126,34 @@ function goToAssesment(id) {
 const createList = (json,searchstring) => {
     autocompleteList.innerHTML = "";
     json.forEach(el => {
+        // Subelements for taxonomic listitems
         let icon = '<span class="material-icons search_list_icon">list</span>';
         let category = "<span></span>";
         let speciesGroup = '<span class="search_speciesgroup"></span >';
-        let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;    
-        
-
+        let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;  
+        const listname = formatListElements(el, searchstring);     
         const assessments = el.assessments;
-        if (assessments != null) {
+        if (assessments == null) {
+            // No assesment means either no match or higher taxonomic rank
+            if (el.message) {
+                icon = '<span class="material-icons search_list_icon">playlist_remove</span>';
+            }
+            makeListItem(icon, listname, speciesGroup, category, right_action, true, el);
+        } else{
             for (let i in assessments) {
-                const id = assessments[i].id;                
-                const listname = formatListElements(el, searchstring);                
+                // For each assessment in a taxonomic item
+                const id = assessments[i].id;
                 let addclass, matchedname = "";
 
                 if (el.matchedname) {
+                    // IF Speciesname does not match the search string, add comparison 
+                    // Relevant for synonyms, nynorsk, alternative names etc.
                     let name = el.PopularName + " " + el.ScientificName;
                     if (!name.includes(el.matchedname)) {        
                         matchedname = "<span class='search_matchedname'>" + '"' + el.matchedname + '"' + "</span>";
                         addclass = "synonymgrid";                        
                     }
                 }
-
                 right_action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
 
                 if (assessments[i]) {
@@ -171,13 +176,7 @@ const createList = (json,searchstring) => {
                 }                
                 makeListItem(icon, listname, speciesGroup, category, right_action, false, el, id, matchedname, addclass);
             }
-        } else {  
-            if (el.message) {
-                icon = '<span class="material-icons search_list_icon">playlist_remove</span>';
-            }
-            const listname = formatListElements(el, searchstring);
-            makeListItem(icon, listname, speciesGroup, category, right_action, true, el);
-        }
+        } 
     });
     autocompleteList.style["display"] = "block";
 }

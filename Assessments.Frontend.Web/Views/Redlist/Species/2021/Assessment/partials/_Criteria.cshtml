@@ -37,6 +37,15 @@
         }
         return null;
     }
+
+    private string FormatNumeric(string value)
+    {
+        if (int.TryParse(value, out int result))
+        {
+            return result.ToString("### ### ###");
+        }
+        return value;
+    }
 }
 
 
@@ -244,8 +253,8 @@
             }
 
             <p>
-                <span>Estimert verdi: @quantile.Calculated @Html.Raw(unit).</span><br />
-                <span>Verdien antas å ligge mellom @min @Html.Raw(unit) og @max @Html.Raw(unit).</span><br />
+                <span>Estimert verdi: @FormatNumeric(quantile.Calculated) @Html.Raw(unit).</span><br />
+                <span>Verdien antas å ligge mellom @FormatNumeric(min) @Html.Raw(unit) og @FormatNumeric(max) @Html.Raw(unit).</span><br />
                 @if (estimated.Length > 0)
                 {
                     <span>Mest trolig er den @estimated @Html.Raw(unit).</span>

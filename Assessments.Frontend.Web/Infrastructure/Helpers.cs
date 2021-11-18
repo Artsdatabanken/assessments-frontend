@@ -360,6 +360,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public class SearchAndFilter
         {
+            public const string RemoveFilters = "remove_filters";
+            public const string RemoveSearch = "remove_search";
             public const string ChooseEndangered = "Marker alle truede arter";
             public const string ChooseRedlisted = "Marker alle rødlistearter";
             public const string ResetAllFilters = "Nullstill";

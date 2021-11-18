@@ -49,68 +49,72 @@
         </div>
     }
 
-    void GetRemoveString()
+    void GetRemoveSearchAndFilter()
     {
         @if (Filter.GetActiveSelectionCount(Model) > 0)
         {
-            <div class="filterstring"><span>@Filter.GetActiveSelectionCount(Model)&nbsp;</span></div>
+            <span>@Filter.GetActiveSelectionCount(Model)</span>
             @if (Filter.GetActiveSelectionCount(Model) > 1)
             {
-                <span>filtre&nbsp;</span>
+                <span>filtre</span>
             } else 
             {
-                <span>filter&nbsp;</span>
+                <span>filter</span>
             }
+            
+            <button class="button tinybutton tertiary" name="remove_filters" value="true">
+                <span class="material-icons">close</span>Fjern
+            </button>
         }
-        @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)) && Filter.GetActiveSelectionCount(Model) > 0)
+
+            
+
+        @if (Filter.GetActiveSelectionCount(Model) > 0 && !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
-            <span>og&nbsp;</span>
+            <span>og</span>
         }
         @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
-            <span>søket&nbsp;</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
+            <span>søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
+            <button class="button tinybutton tertiary" name="remove_search" value="true">
+                <span class="material-icons">close</span>Fjern
+            </button>
         }
-    }    
+    }
 }
 
-<div class="num_of_resutls mobile_hide">
-        <span>@Model.Redlist2021Results.TotalItemCount treff</span>
-</div>
-
-<div class="empty_filters_and_controls">
-    <div class="empty_filters">
+<div class="empty_filters">
+    <h3>
+        @Model.Redlist2021Results.TotalItemCount treff 
+        @if (Filter.GetActiveSelectionCount(Model) > 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
+        {
+            <span>basert på</span>
+        }
         @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
-            <span class="flex_row">
-                @{ GetRemoveString(); }
-            </span>
-            <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
-                <span class="material-icons">close</span>Fjern
-            </a>
-        }  
+            GetRemoveSearchAndFilter();
+        }
+    </h3>
+</div>
+
+<div class="controls">
+    <div class="list_control_buttons">
+        <button class="toggle_filter only_mobile list_actions" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
+            <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>
+            <span class="material-icons">filter_list</span>Filter
+        </button>
+
+        @if (Model.View != "stat")
+        {
+            <select asp-for="SortBy" id="sort_results" class="sort_by list_actions" onchange="this.form.submit()">
+                <option value="@nameof(SpeciesAssessment2021.ScientificName)">Artsnavn</option>
+                <option value="@nameof(SpeciesAssessment2021.PopularName)">Populærnavn</option>
+                <option value="@nameof(SpeciesAssessment2021.Category)">Kategori</option>
+                <option value="@nameof(SpeciesAssessment2021.SpeciesGroup)">Artsgruppe</option>
+            </select>
+        }
     </div>
-
-    <div class="controls">
-        <div class="list_control_buttons">
-            <button class="toggle_filter only_mobile list_actions" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-                <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>
-                <span class="material-icons">filter_list</span>Filter
-            </button>
-
-            @if (Model.View != "stat")
-            {
-                <select asp-for="SortBy" id="sort_results" class="sort_by list_actions" onchange="this.form.submit()">
-                    <option value="@nameof(SpeciesAssessment2021.ScientificName)">Artsnavn</option>
-                    <option value="@nameof(SpeciesAssessment2021.PopularName)">Populærnavn</option>
-                    <option value="@nameof(SpeciesAssessment2021.Category)">Kategori</option>
-                    <option value="@nameof(SpeciesAssessment2021.SpeciesGroup)">Artsgruppe</option>
-                </select>
-            }
-        </div>
-        <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
-
-
-    </div>
+    <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
 </div>
 
 <div class="listwrapper">
@@ -133,17 +137,17 @@
                                 <span class="material-icons">close</span>
                             </button>
                         </div>
-                        <div class="empty_filters_mobile">
+                        @* <div class="empty_filters_mobile">
                         @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
                         {
                             <span class="flex_row">
-                                @{ GetRemoveString(); }
+                                @{ GetRemoveSearchAndFilter(); }
                             </span>
                             <a class="button tinybutton tertiary" asp-controller="Redlist" asp-action="Index2021">
                                 <span class="material-icons">close</span>Fjern
                             </a>
                         }  
-                        </div>
+                        </div> *@
                         <ul>
                             <li class="filter_group">
                                 @{ InputTag("show_area", "collapse_checkbox", "IsCheck", Model.IsCheck, "Area");}

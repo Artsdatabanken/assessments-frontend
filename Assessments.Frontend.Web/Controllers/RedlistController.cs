@@ -48,6 +48,11 @@ namespace Assessments.Frontend.Web.Controllers
 
             ViewBag.categories = await GetResource("wwwroot/json/categories.json");
 
+            if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveFilters].ToString()))
+                viewModel = new RL2021ViewModel { Name = viewModel.Name };
+
+            if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveSearch].ToString()))
+                viewModel.Name = "";
 
             // Pagination
             const int pageSize = 25;

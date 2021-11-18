@@ -5,6 +5,22 @@
             <img alt="Artsdatabanken" src="https://artsdatabanken.no/Files/20978" class="mobile">
         </a>
         <button id="navbar-mobile" class='material-icons'>menu</button>
-        <nav id="headermenu" class="hide"></nav>
+        <nav id="headermenu" class="hide">
+            
+            
+        </nav>
+        <div>
+            <button id="themeselectorbutton" class="themeselector menuitems" onclick="expandThemeButtons(this)">Tema <span class="dropicon material-icons">arrow_drop_down</span></button>
+            <div id="themeselectordropdown" class="themeselectordropdown dropdown">
+                <ul>
+                    <li>
+                        Høykontrast <button class="themebutton contrast primary tinybutton" onclick="highContrastMode(this, 'highcontrast')">Høykontrast</button>
+                    </li>
+                    <li>
+                        Nattmodus <button class="themebutton dark primary tinybutton" onclick="highContrastMode(this, 'darktheme')">Nattmodus</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </header>

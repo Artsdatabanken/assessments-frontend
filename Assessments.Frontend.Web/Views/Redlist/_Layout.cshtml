@@ -28,18 +28,7 @@
 
 <body>
     <div id="bodywrap">
-        <partial name="/Views/Shared/_PageTopBar.cshtml" />
-        <button id="themeselectorbutton" class="themeselector menuitems" onclick="expandThemeButtons(this)">Tema <span class="dropicon material-icons">arrow_drop_down</span></button>
-        <div id="themeselectordropdown" class="themeselectordropdown dropdown">
-            <ul>
-                <li>
-                    Høykontrast <button class="themebutton contrast primary tinybutton" onclick="highContrastMode(this, 'highcontrast')">Høykontrast</button>
-                </li>
-                <li>
-                    Nattmodus <button class="themebutton dark primary tinybutton" onclick="highContrastMode(this, 'darktheme')">Nattmodus</button>
-                </li>
-            </ul>
-        </div>
+        <partial name="/Views/Shared/_PageTopBar.cshtml" />       
         <partial name="/Views/Redlist/Species/Shared/_RedlistHeader.cshtml" />
         <div class="main">
             <div class="main-content width-adjuster">

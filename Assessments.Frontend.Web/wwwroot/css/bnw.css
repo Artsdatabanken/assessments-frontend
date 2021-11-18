@@ -4,10 +4,9 @@
     position: absolute;
     top: 0px;
     right: 3px;
-    height: 50px;
     width: 68px;
     padding: 0;
-    background: #751111;
+    z-index: 3;
 }
 
 .themeselectordropdown {
@@ -29,6 +28,10 @@
     margin: 8px 0;
     display: block;
     text-decoration: none;
+}
+
+#headermenu {
+    z-index: 3;
 }
 
 /* HIGH CONTRAST THEME */

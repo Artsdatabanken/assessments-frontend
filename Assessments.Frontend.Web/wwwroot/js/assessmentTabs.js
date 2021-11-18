@@ -102,9 +102,11 @@ function highContrastMode(thisbutton,className) {
     }
 }
 
-
+console.log("runnitn")
 function expandThemeButtons(thisbutton) {
+    console.log("WTF WHY NO CLICK")
     let mainparent = document.getElementById('themeselectordropdown');
+    console.log("click");
     if (mainparent.style && mainparent.style.display == "block") {
         mainparent.style.display = "none";
     } else {

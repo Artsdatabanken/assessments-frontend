@@ -63,7 +63,7 @@
     "hvorfor": {
       "title": "Hvorfor er denne arten vurdert?",
       "description": "Denne arten er rødlistevurdert fordi den ",
-      "else": " enten har etablert bestand, er en regelmessig gjest eller er etablert før 1800."
+      "else": " enten har etablert bestand i vurderingsområdet, er en regelmessig gjest eller er etablert før 1800."
     },
     "EtablertFør1800": {
       "title": "er en fremmedart som ble etablert før 1800",

@@ -1,5 +1,9 @@
 /* BUTTONs FOR THEME SELECTING */
 
+#headermenu {
+    z-index: 3;
+}
+
 .themeselector {
     position: absolute;
     top: 0px;
@@ -30,9 +34,57 @@
     text-decoration: none;
 }
 
-#headermenu {
-    z-index: 3;
+
+.header .only_mobile {
+    display: none;
 }
+
+@media only screen and (max-width: 766px) {
+
+    .header .themeselectordropdown,
+    #headermenu {
+        background: #680c0c;
+        border-top: 1px solid #a83333;
+    }
+
+    .header .themeselector {
+        background: none;
+        right: 54px;
+        width: 44px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .header .themeselectordropdown{
+        top:35px;
+        padding:20px;
+        padding-top:0;
+    }
+
+    .header .themeselectordropdown ul ,
+    .header .themeselectordropdown li {
+        color: white;
+        background: #751111;
+        font-weight:normal;
+        margin-top:1px;
+    }
+
+    .header .themeselectordropdown li {
+        height:50px;
+        line-height:50px;
+    }
+
+
+
+    .header .only_mobile {
+        display: inline-block;
+    }
+
+    .header .hideonmobile {
+        display: none;
+    }
+}
+
 
 /* HIGH CONTRAST THEME */
 .highcontrast .RE,

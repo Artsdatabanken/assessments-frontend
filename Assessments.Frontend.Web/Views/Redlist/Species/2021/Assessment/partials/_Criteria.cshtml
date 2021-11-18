@@ -200,6 +200,12 @@
                     labels += " ?";
                 }
 
+                if ((k == "B1" || k == "B2") && labels == "NT")
+                {
+                    unit = string.Empty;
+                }
+
+
                 <li class="thresholdlist @className">
                     <span class="graphic_element @labels @box_class">@labels</span>
                     <span class="threshold_element">

@@ -64,7 +64,6 @@ function matchedString(str, find) {
 
 const formatListElements = (el, searchstring) => {
     let name = "";
-
     if (el.message) {
         return `<span>${el.message}</span>`;
     }
@@ -81,36 +80,80 @@ const formatListElements = (el, searchstring) => {
     if (el.TaxonCategory) {
         name += `<span class="taxon_rank">${el.TaxonCategory.toLowerCase()}</span>`;
     }
-
-    // PROBLEM: user searching for something contained in the html tags
-    // will also get this split in the presentation. 
-
     return name;
+}
+
+function makeListItem(icon, listname, speciesGroup, category, right_action, notassesment, el, id, matchedname, addclass) {
+    const li = document.createElement("li");
+    li.tabIndex = 0;    
+
+    if (notassesment) {
+        li.classList.add("search_autocomplete");
+      
+        li.onclick = () => {
+            searchForTaxa(el.ScientificName);
+        }
+        li.onkeyup = (e) => {
+            if (e.code === "Enter") {
+                searchForTaxa(el.ScientificName);
+            }
+        }
+        li.innerHTML = icon + listname + speciesGroup + category + right_action;
+
+    } else {
+        console.log("IS NOT ASSESMENT")
+        li.onclick = () => {
+            goToAssesment(id);
+        }
+        li.onkeyup = (e) => {
+            if (e.code === "Enter") {
+                goToAssesment(id);
+            }
+        }
+        const liwrapper = "<span class='search_autocomplete'>" + icon + listname + speciesGroup + category + right_action + "</span>"
+        li.innerHTML = matchedname + liwrapper;
+    }
+    autocompleteList.appendChild(li);
+}
+
+function searchForTaxa(sciname) {
+    searchField.value = sciname;
+    document.getElementById("search_and_filter_form").submit();
+}
+
+function goToAssesment(id) {
+    window.location.href = "/rodlisteforarter/2021/" + id;
 }
 
 const createList = (json,searchstring) => {
     autocompleteList.innerHTML = "";
     json.forEach(el => {
+        let icon = '<span class="material-icons search_list_icon">list</span>';
+        let category = "<span></span>";
+        let speciesGroup = '<span class="search_speciesgroup"></span >';
+        let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;    
+        
+
         const assessments = el.assessments;
         if (assessments != null) {
             for (let i in assessments) {
-                const id = assessments[i].id;
-                const li = document.createElement("li");
-                let matchedname = "";
+                const id = assessments[i].id;                
+                const listname = formatListElements(el, searchstring);                
+                let addclass, matchedname = "";
+
                 if (el.matchedname) {
                     let name = el.PopularName + " " + el.ScientificName;
                     if (!name.includes(el.matchedname)) {        
                         matchedname = "<span class='search_matchedname'>" + '"' + el.matchedname + '"' + "</span>";
-                        li.classList.add("synonymgrid");
+                        addclass = "synonymgrid";                        
                     }
-                }                
-                let action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
-                let category = "<span></span>";
-                let icon = '<span class="material-icons search_list_icon">list</span>';
-                if (assessments[i] && assessments[i].area) {
-                    let areaname = "Norge";
-                    if (assessments[i].area == "S") {
-                        areaname = "Svalbard";
+                }
+
+                right_action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
+
+                if (assessments[i]) {
+                    if (assessments[i].speciesGroupIconUrl) {
+                        icon = '<img src="' + assessments[i].speciesGroupIconUrl + '" class="search_speciesicon" >';
                     }
                     if (assessments[i].category) {
                         category = `<span class="search_category graphic_element ${assessments[i].category}">${assessments[i].category}</span >`;
@@ -118,48 +161,22 @@ const createList = (json,searchstring) => {
                     if (assessments[i].speciesGroup) {
                         speciesGroup = '<span class="search_speciesgroup">' + assessments[i].speciesGroup.toLowerCase() + '</span >';
                     }
-                    if (assessments[i].speciesGroupIconUrl) {
-                        icon = '<img src="' + assessments[i].speciesGroupIconUrl + '" class="search_speciesicon" >';
-                    }                   
-                    action = '<span class="right_action">'+areaname+"</span >" + action;
-                }
-
-                const liwrapper = "<span class='search_autocomplete'>" + icon + formatListElements(el, searchstring) + speciesGroup + category + action +"</span>"
-                li.innerHTML = matchedname + liwrapper;
-                li.tabIndex = 0;
-                li.onclick = () => {
-                    window.location.href = "/rodlisteforarter/2021/" + id;
-                }
-                li.onkeyup = (e) => {
-                    if (e.code === "Enter") {
-                        window.location.href = "/rodlisteforarter/2021/" + id;
+                    if (assessments[i].area) {
+                        let areaname = "Norge";
+                        if (assessments[i].area == "S") {
+                            areaname = "Svalbard";
+                        }
+                        right_action = '<span class="right_action">' + areaname + "</span >" + right_action;
                     }
-                }
-                autocompleteList.appendChild(li);
+                }                
+                makeListItem(icon, listname, speciesGroup, category, right_action, false, el, id, matchedname, addclass);
             }
-        } else {
-            const li = document.createElement("li");
-            let icon = '<span class="material-icons search_list_icon">list</span>';
+        } else {  
             if (el.message) {
                 icon = '<span class="material-icons search_list_icon">playlist_remove</span>';
             }
-            let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;            
-            let category = "<span></span>";
-            let speciesGroup = '<span class="search_speciesgroup"></span >';
-            li.innerHTML = icon + formatListElements(el, searchstring) + speciesGroup + category + right_action;
-            li.classList.add("search_autocomplete");
-            li.tabIndex = 0;
-            li.onclick = () => {
-                searchField.value = el.ScientificName;
-                document.getElementById("search_and_filter_form").submit();
-            }
-            li.onkeyup = (e) => {
-                if (e.code === "Enter") {
-                    searchField.value = el.ScientificName;
-                    document.getElementById("search_and_filter_form").submit();
-                }
-            }
-            autocompleteList.appendChild(li);
+            const listname = formatListElements(el, searchstring);
+            makeListItem(icon, listname, speciesGroup, category, right_action, true, el);
         }
     });
     autocompleteList.style["display"] = "block";

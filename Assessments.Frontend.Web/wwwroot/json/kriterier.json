@@ -140,7 +140,7 @@
     "options_description": "Gjelder samlet for både B1 og B2 dersom begge er utslagsgivende ",
     "options": {
       "a": {
-        "title": "Kraftig fragmentering eller få lokaliteter (avgrenset av trussel)",
+        "title": "Kraftig fragmentering og/eller få lokaliteter (avgrenset av trussel)",
         "sub": {
           "i": {
             "title": "Kraftig fragmentert populasjon"

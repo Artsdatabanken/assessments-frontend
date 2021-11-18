@@ -83,21 +83,14 @@
 }
 
 /* Autocomplete list */
-#autocomplete_list_ul {
-    display: none;
-    width: calc(100% - 90px);
-    border: 1px solid #3d3b3a;
-    z-index: 10;
-}
 
 .search_autocomplete {
     padding: 5px;
-    border-top: 1px solid #3d3b3a;
+    border-bottom: 1px solid #3d3b3a;
     min-height: 40px;
     font-size: 10pt;
     text-align: left;
     list-style-type: none;
-    background-color: white;
     vertical-align: middle;
     display: flex;
     align-items: center;
@@ -182,4 +175,26 @@
 
 .right_icon{
     text-align:center;
+}
+
+.search_dropdown {
+    background: white;
+    display: none;
+    width: calc(100% - 90px);
+    border: 1px solid #3d3b3a;
+    z-index: 10;
+    border-top:0;
+}
+
+.search_matchedname {
+    font-size: 10pt;
+    display: block;
+    text-align: left;
+    padding: 5px;
+    padding-bottom: 0;
+}
+
+.search_matchedname,
+.search_match {
+    color: #0b8293;
 }

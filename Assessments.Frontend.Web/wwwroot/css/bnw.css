@@ -1,19 +1,37 @@
-.main .themebutton {
+/* BUTTONs FOR THEME SELECTING */
+
+.themeselector {
     position: absolute;
-    top: 10px;
-    z-index: 1;
-    right: 10px;
-    width: 100px;
-    border: 1px solid black;
+    top: 0px;
+    right: 3px;
+    height: 50px;
+    width: 68px;
+    padding: 0;
+    background: #751111;
 }
 
-.themebutton.dark {
-    margin-top: 26px;
+.themeselectordropdown {
+    z-index: 3;
+    display:none;
+    position:absolute;
+    top:50px;
+    right:3px;
 }
 
-/* 
-HIGH CONTRAST THEME
-*/
+.themeselectordropdown li {
+    padding: 3px 20px;
+    font-weight: bold;
+    line-height: 1.42857143;
+    color: black;
+    white-space: nowrap;
+    font-size: 16px;
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 8px 0;
+    display: block;
+    text-decoration: none;
+}
+
+/* HIGH CONTRAST THEME */
 .highcontrast .RE,
 .highcontrast .CR,
 .highcontrast .EN,

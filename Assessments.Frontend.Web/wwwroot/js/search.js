@@ -48,7 +48,9 @@ const formatScientificName = (name) => {
     name = name.replace("coll.", "</i>coll.<i>");
     name = name.replace("n.", "</i>n.<i>");
     name = name.replace("subsp.", "</i>subsp.<i>");
-    name = name.replace("sp.", "</i>sp.<i>");
+    if (name.includes("sp.") && !name.includes("subsp.")){
+        name = name.replace("sp.", "</i>sp.<i>");
+    }    
     name = name.replace("var.", "</i>var.<i>");
     name = name.replace(" '", "</i> '");
     name = name.replace("' ", "'<i> ");
@@ -99,7 +101,6 @@ function makeListItem(icon, listname, speciesGroup, category, right_action, nota
         }
         li.innerHTML = icon + listname + speciesGroup + category + right_action;
     } else {
-        console.log("IS NOT ASSESMENT")
         li.onclick = () => {
             goToAssesment(id);
         }

@@ -513,22 +513,24 @@ span.area i {
 
 /* IMPACT FACTORS */
 .impact_table {
-    display: flex;
-    margin: 5px;
     padding: 5px;
     font-size: 10pt;
     font-weight: normal;
     padding-left: 15px;
-    flex-direction: column;
     
 }
 
 .impact_table div {
-    flex: 1;
+    margin-left: 5px;
     padding: 5px;
-    padding-left:10px;
-    padding-right:10px;
-    max-width:200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 400px;   
+}
+
+.full_list .addborder {
+    border-left: 1px solid #dfdddd;
+    margin-left: 15px;
 }
 
 /* All */

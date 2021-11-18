@@ -47,7 +47,6 @@ const formatScientificName = (name) => {
     name = name.replace("agg.", "</i>agg.<i>");
     name = name.replace("coll.", "</i>coll.<i>");
     name = name.replace("n.", "</i>n.<i>");
-    name = name.replace("sp.", "</i>sp.<i>");
     name = name.replace("subsp.", "</i>subsp.<i>");
     name = name.replace("var.", "</i>var.<i>")
     name = name.replace(" '", "</i> '");

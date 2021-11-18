@@ -74,7 +74,7 @@ const formatListElements = (el, searchstring) => {
     if (el.ScientificName) {
 
         let sciname = formatScientificName(el.ScientificName);
-            sciname = matchedString(el.ScientificName, searchstring);
+        sciname = matchedString(sciname, searchstring);
         name = `<span class="search_name">${name} ${sciname}</span>`;
     }
     if (el.TaxonCategory) {

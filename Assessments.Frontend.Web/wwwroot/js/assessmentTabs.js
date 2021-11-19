@@ -93,12 +93,20 @@ function expand(element, className, id) {
 
 function highContrastMode(thisbutton,className) {
     var mainparent = document.getElementById("bodywrap");
-    console.log(mainparent);
     if (mainparent.classList && mainparent.classList.contains(className)) {
         mainparent.classList.remove(className);
         thisbutton.classList.remove(className);
     }else {
         mainparent.classList.add(className); 
         thisbutton.classList.add(className);
+    }
+}
+
+function expandThemeButtons() {
+    let mainparent = document.getElementById('themeselectordropdown');
+    if (mainparent.style && mainparent.style.display == "block") {
+        mainparent.style.display = "none";
+    } else {
+        mainparent.style.display = "block";
     }
 }

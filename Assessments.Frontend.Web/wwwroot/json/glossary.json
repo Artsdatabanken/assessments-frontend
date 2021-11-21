@@ -148,7 +148,7 @@
       "description": "En vurdering har kun én kategori. Totalantallet tilsvarer derfor antall vurderinger i utvalget, nemlig "
     },
     "criteria": {
-      "title": "Antall vurderinger per kriterie",
+      "title": "Antall vurderinger per kriterium",
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per utslagsgivende kriterium for kategori (A-D)."
     },
     "habitat": {

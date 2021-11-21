@@ -1,4 +1,6 @@
 ﻿@model SpeciesAssessment2021
+@using static Assessments.Frontend.Web.Infrastructure.Helpers
+
 @*
     TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
 
@@ -36,15 +38,6 @@
                 return Model.C2Ai.Statistics;
         }
         return null;
-    }
-
-    private string FormatNumeric(string value)
-    {
-        if (int.TryParse(value, out int result))
-        {
-            return result.ToString("### ### ###");
-        }
-        return value;
     }
 }
 

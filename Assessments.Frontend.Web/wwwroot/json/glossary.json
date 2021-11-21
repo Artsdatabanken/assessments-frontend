@@ -152,7 +152,7 @@
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per utslagsgivende kriterium for kategori (A-D)."
     },
     "habitat": {
-      "title": "Antall vurderinger per habitat",
+      "title": "Antall vurderinger per habitattype",
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per habitat. Flere habitattyper per vurdering er mulig."
     },
     "region": {

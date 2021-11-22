@@ -721,3 +721,6 @@ option {
         bacground: pink;
     }
 }
+.categorytext {
+    width: 100px;
+} 

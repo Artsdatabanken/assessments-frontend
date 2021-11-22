@@ -394,8 +394,6 @@
         "description": "Forekomstarealet er svært lite (< 40 km&#178;) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (< 10)",
         "content": {
           "threshold": {
-            "CR": "-",
-            "EN": "-",
             "VU": "< 20 km&#178;, ≤ 5 lokaliteter",
             "NT": "≤ 40 km&#178;, ≤ 10 lokaliteter"
           }

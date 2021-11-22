@@ -157,7 +157,11 @@
 
         @if (k == "C1" || k.Contains("C2"))
         {
-            unit = "";
+
+            if (!k.Contains("C2"))
+            {
+                unit = string.Empty;
+            }
             CThresh = Model.C.PreliminaryCategory;
             C_Blank_Value = ViewBag.kriterier["C"]["content"]["threshold"][CThresh];
             C_Blank_Value = ViewBag.kriterier["C"]["content"]["comparator"] + " " + C_Blank_Value;
@@ -171,8 +175,8 @@
             {
                 string className = "inactive";
                 @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
-            k == "C1" && catval.Substring(0, 2) == thresholdValue)
-           || k.Contains("C2") && thresholdValue == catval)
+                k == "C1" && catval.Substring(0, 2) == thresholdValue)
+               || k.Contains("C2") && thresholdValue == catval)
                 {
                     className = "active";
                 }

@@ -39,7 +39,7 @@ namespace Assessments.Frontend.Web.Controllers
         {
             if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveFilters].ToString()))
             {
-                viewModel = new RL2021ViewModel { Name = viewModel.Name };
+                viewModel = new RL2021ViewModel { Name = viewModel.Name, View = viewModel.View };
             }
 
             if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveSearch].ToString()))

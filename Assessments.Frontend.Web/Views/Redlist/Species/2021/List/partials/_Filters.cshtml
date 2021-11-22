@@ -1,5 +1,6 @@
 @model RL2021ViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Constants
+@using static Assessments.Frontend.Web.Infrastructure.Helpers
 @using static Assessments.Frontend.Web.Infrastructure.Filter
 
 @{
@@ -85,7 +86,7 @@
 
 <div class="empty_filters">
     <h3>
-        @Model.Redlist2021Results.TotalItemCount treff 
+        @FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff
         @if (Filter.GetActiveSelectionCount(Model) > 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
             <span>basert på</span>

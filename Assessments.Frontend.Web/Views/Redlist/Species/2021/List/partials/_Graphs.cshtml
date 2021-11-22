@@ -77,7 +77,24 @@
         return 0;
 
     }
+
+
+    // DESCRIPTION
+    void categoryDescription(string category)
+    {
+        if (!string.IsNullOrEmpty(category) && category.Length > 0)
+        {
+            if (@ViewBag.categories.ContainsKey(category))
+            {
+                string final_string = @ViewBag.categories[category]["presentationstring"];
+                //final_string = final_string.ToLower();
+                // No idea why hyphens won't hyphenate one specific word only... 
+                <span class="stat_subtitle">@final_string</span>
+                }
+            }
+        }
 }
+
 
 <div class="page_section graphs">
 
@@ -89,13 +106,15 @@
         {
             <div class="statelement">
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key,@Model.Statistics.Categories))">
+                    <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key, @Model.Statistics.Categories))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.Categories)</span>
+                        
                     </div>
                 </div>
                 <span class="statbox">
-                    @key
+                    @key 
                 </span>
+                @{categoryDescription(key);}
             </div>
         }
     </div>

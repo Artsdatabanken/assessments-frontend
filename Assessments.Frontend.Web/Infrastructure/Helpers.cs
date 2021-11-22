@@ -18,6 +18,8 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             if (int.TryParse(value, out int result))
             {
+                if (value.Length < 5)
+                    return result.ToString();
                 return result.ToString("### ### ###");
             }
             return value;

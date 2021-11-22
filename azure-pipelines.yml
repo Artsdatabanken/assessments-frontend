@@ -26,6 +26,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
+- script: dir
+
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: 'bin\Release\net5.0\publish'

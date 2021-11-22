@@ -73,6 +73,8 @@ namespace Assessments.Frontend.Web.Controllers
                     var popularNames = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
                     if (popularNames != null && popularNames.Any())
                         query = query.Where(x => popularNames.Select(y => y.ScientificNameId).Contains(x.ScientificNameId));
+                    else
+                        query = queryByName;
                 }
             }
 

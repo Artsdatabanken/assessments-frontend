@@ -63,14 +63,14 @@
     "hvorfor": {
       "title": "Hvorfor er denne arten vurdert?",
       "description": "Denne arten er rødlistevurdert fordi den ",
-      "else": " enten har etablert bestand i norge, er en regelmessig gjest eller er etablert før 1800."
+      "else": " enten har etablert bestand i vurderingsområdet, er en regelmessig gjest eller er etablert før 1800."
     },
     "EtablertFør1800": {
       "title": "er en fremmedart som ble etablert før 1800",
       "description": "Det vil si at den er en fremmedart, men er antatt eller dokumentert etablert med fast reproduserende populasjon per år 1800. "
     },
     "EtablertBestandINorge": {
-      "title": "har en etablert populasjon i Norge",
+      "title": "har en etablert populasjon i vurderingsområdet",
       "description": "Det vil si at den er eller har vært dokumentert eller antatt etablert med fast reproduserende populasjon uten opphav i introduserte individer."
     },
     "IkkeReproduserendeINorge": {
@@ -148,11 +148,11 @@
       "description": "En vurdering har kun én kategori. Totalantallet tilsvarer derfor antall vurderinger i utvalget, nemlig "
     },
     "criteria": {
-      "title": "Antall vurderinger per kriterie",
+      "title": "Antall vurderinger per kriterium",
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per utslagsgivende kriterium for kategori (A-D)."
     },
     "habitat": {
-      "title": "Antall vurderinger per habitat",
+      "title": "Antall vurderinger per habitattype",
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet per habitat. Flere habitattyper per vurdering er mulig."
     },
     "region": {

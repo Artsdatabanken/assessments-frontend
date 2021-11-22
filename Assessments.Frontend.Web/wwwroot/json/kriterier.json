@@ -140,7 +140,7 @@
     "options_description": "Gjelder samlet for både B1 og B2 dersom begge er utslagsgivende ",
     "options": {
       "a": {
-        "title": "Kraftig fragmentering eller få lokaliteter (avgrenset av trussel)",
+        "title": "Kraftig fragmentering og/eller få lokaliteter (avgrenset av trussel)",
         "sub": {
           "i": {
             "title": "Kraftig fragmentert populasjon"
@@ -163,7 +163,7 @@
         }
       },
       "b": {
-        "title": "Pågående nedgang",
+        "title": "Pågående nedgang av",
         "sub": {
           "i": {
             "title": "utbredelsesområde"
@@ -183,7 +183,7 @@
         }
       },
       "c": {
-        "title": "Ekstreme fluktuasjoner ",
+        "title": "Ekstreme fluktuasjoner i ",
         "sub": {
           "i": {
             "title": "utbredelsesområde"
@@ -211,7 +211,7 @@
             "CR": "100",
             "EN": "5000",
             "VU": "20 000",
-            "NT": "40 000"
+            "NT": "40 000 km&#178; <i>eller</i> ≥ EN + ett underkriterium"
           }
         }
       },
@@ -225,7 +225,7 @@
             "CR": "10",
             "EN": "500",
             "VU": "2000",
-            "NT": "4000 km&#178; eller > EN + et underkriterium"
+            "NT": "4000 km&#178; <i>eller</i> ≥ EN + ett underkriterium"
           }
         }
       }
@@ -394,8 +394,6 @@
         "description": "Forekomstarealet er svært lite (< 40 km&#178;) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (< 10)",
         "content": {
           "threshold": {
-            "CR": "-",
-            "EN": "-",
             "VU": "< 20 km&#178;, ≤ 5 lokaliteter",
             "NT": "≤ 40 km&#178;, ≤ 10 lokaliteter"
           }

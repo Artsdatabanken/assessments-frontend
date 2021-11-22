@@ -14,6 +14,17 @@ namespace Assessments.Frontend.Web.Infrastructure
             { "Variety", "Varietet" }
         };
 
+        public static string FormatNumeric(string value)
+        {
+            if (int.TryParse(value, out int result))
+            {
+                if (value.Length < 5)
+                    return result.ToString();
+                return result.ToString("### ### ###");
+            }
+            return value;
+        }
+
         public static string[] findSelectedCategories( bool redlisted, bool endangered,
             string[] categoriesSelected) 
         {
@@ -448,5 +459,4 @@ namespace Assessments.Frontend.Web.Infrastructure
             return Array.IndexOf(categories, x.Substring(0, 2)) - Array.IndexOf(categories, y.Substring(0, 2));
         }
     }
-
 }

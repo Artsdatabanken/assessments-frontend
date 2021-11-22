@@ -48,6 +48,9 @@ const formatScientificName = (name) => {
     name = name.replace("coll.", "</i>coll.<i>");
     name = name.replace("n.", "</i>n.<i>");
     name = name.replace("subsp.", "</i>subsp.<i>");
+    if (name.includes("sp.") && !name.includes("subsp.")){
+        name = name.replace("sp.", "</i>sp.<i>");
+    }    
     name = name.replace("var.", "</i>var.<i>");
     name = name.replace(" '", "</i> '");
     name = name.replace("' ", "'<i> ");
@@ -66,42 +69,97 @@ const formatListElements = (el, searchstring) => {
     if (el.message) {
         return `<span>${el.message}</span>`;
     }
-    if (el.PopularName) {        
-        name = `<span>${el.PopularName}</span>`;        
+    if (el.PopularName) {   
+        let popname = matchedString(el.PopularName, searchstring);
+        name = `<span>${popname}</span>`; 
     }
     if (el.ScientificName) {
-        name = `<span class="search_name">${name} ${formatScientificName(el.ScientificName)}</span>`;
+
+        let sciname = formatScientificName(el.ScientificName);
+        sciname = matchedString(sciname, searchstring);
+        name = `<span class="search_name">${name} ${sciname}</span>`;
     }
     if (el.TaxonCategory) {
         name += `<span class="taxon_rank">${el.TaxonCategory.toLowerCase()}</span>`;
     }
-    name = matchedString(name, searchstring);    
     return name;
+}
+
+function makeListItem(icon, listname, speciesGroup, category, right_action, notassesment, el, id, matchedname, addclass) {
+    const li = document.createElement("li");
+    li.tabIndex = 0;    
+
+    if (notassesment) {
+        li.classList.add("search_autocomplete");      
+        li.onclick = () => {
+            searchForTaxa(el.ScientificName);
+        }
+        li.onkeyup = (e) => {
+            if (e.code === "Enter") {
+                searchForTaxa(el.ScientificName);
+            }
+        }
+        li.innerHTML = icon + listname + speciesGroup + category + right_action;
+    } else {
+        li.onclick = () => {
+            goToAssesment(id);
+        }
+        li.onkeyup = (e) => {
+            if (e.code === "Enter") {
+                goToAssesment(id);
+            }
+        }
+        const liwrapper = "<span class='search_autocomplete'>" + icon + listname + speciesGroup + category + right_action + "</span>"
+        li.innerHTML = matchedname + liwrapper;
+    }
+    autocompleteList.appendChild(li);
+}
+
+function searchForTaxa(sciname) {
+    searchField.value = sciname;
+    document.getElementById("search_and_filter_form").submit();
+}
+
+function goToAssesment(id) {
+    window.location.href = "/rodlisteforarter/2021/" + id;
 }
 
 const createList = (json,searchstring) => {
     autocompleteList.innerHTML = "";
     json.forEach(el => {
+        // Subelements for taxonomic listitems
+        let icon = '<span class="material-icons search_list_icon">list</span>';
+        let category = "<span></span>";
+        let speciesGroup = '<span class="search_speciesgroup"></span >';
+        let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;  
+        const listname = formatListElements(el, searchstring);     
         const assessments = el.assessments;
-        if (assessments != null) {
+        if (assessments == null) {
+            // No assesment means either no match or higher taxonomic rank
+            if (el.message) {
+                icon = '<span class="material-icons search_list_icon">playlist_remove</span>';
+            }
+            makeListItem(icon, listname, speciesGroup, category, right_action, true, el);
+        } else{
             for (let i in assessments) {
+                // For each assessment in a taxonomic item
                 const id = assessments[i].id;
-                const li = document.createElement("li");
-                let matchedname = "";
+                let addclass, matchedname = "";
+
                 if (el.matchedname) {
+                    // IF Speciesname does not match the search string, add comparison 
+                    // Relevant for synonyms, nynorsk, alternative names etc.
                     let name = el.PopularName + " " + el.ScientificName;
                     if (!name.includes(el.matchedname)) {        
                         matchedname = "<span class='search_matchedname'>" + '"' + el.matchedname + '"' + "</span>";
-                        li.classList.add("synonymgrid");
+                        addclass = "synonymgrid";                        
                     }
-                }                
-                let action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
-                let category = "<span></span>";
-                let icon = '<span class="material-icons search_list_icon">list</span>';
-                if (assessments[i] && assessments[i].area) {
-                    let areaname = "Norge";
-                    if (assessments[i].area == "S") {
-                        areaname = "Svalbard";
+                }
+                right_action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
+
+                if (assessments[i]) {
+                    if (assessments[i].speciesGroupIconUrl) {
+                        icon = '<img src="' + assessments[i].speciesGroupIconUrl + '" class="search_speciesicon" >';
                     }
                     if (assessments[i].category) {
                         category = `<span class="search_category graphic_element ${assessments[i].category}">${assessments[i].category}</span >`;
@@ -109,49 +167,17 @@ const createList = (json,searchstring) => {
                     if (assessments[i].speciesGroup) {
                         speciesGroup = '<span class="search_speciesgroup">' + assessments[i].speciesGroup.toLowerCase() + '</span >';
                     }
-                    if (assessments[i].speciesGroupIconUrl) {
-                        icon = '<img src="' + assessments[i].speciesGroupIconUrl + '" class="search_speciesicon" >';
-                    }                   
-                    action = '<span class="right_action">'+areaname+"</span >" + action;
-                }
-
-                const liwrapper = "<span class='search_autocomplete'>" + icon + formatListElements(el, searchstring) + speciesGroup + category + action +"</span>"
-                li.innerHTML = matchedname + liwrapper;
-                li.tabIndex = 0;
-                li.onclick = () => {
-                    window.location.href = "/rodlisteforarter/2021/" + id;
-                }
-                li.onkeyup = (e) => {
-                    if (e.code === "Enter") {
-                        window.location.href = "/rodlisteforarter/2021/" + id;
+                    if (assessments[i].area) {
+                        let areaname = "Norge";
+                        if (assessments[i].area == "S") {
+                            areaname = "Svalbard";
+                        }
+                        right_action = '<span class="right_action">' + areaname + "</span >" + right_action;
                     }
-                }
-                autocompleteList.appendChild(li);
+                }                
+                makeListItem(icon, listname, speciesGroup, category, right_action, false, el, id, matchedname, addclass);
             }
-        } else {
-            const li = document.createElement("li");
-            let icon = '<span class="material-icons search_list_icon">list</span>';
-            if (el.message) {
-                icon = '<span class="material-icons search_list_icon">playlist_remove</span>';
-            }
-            let right_action = `<span class="right_action">Søk</span><span class="material-icons right_icon">search</span>`;            
-            let category = "<span></span>";
-            let speciesGroup = '<span class="search_speciesgroup"></span >';
-            li.innerHTML = icon + formatListElements(el, searchstring) + speciesGroup + category + right_action;
-            li.classList.add("search_autocomplete");
-            li.tabIndex = 0;
-            li.onclick = () => {
-                searchField.value = el.ScientificName;
-                document.getElementById("search_and_filter_form").submit();
-            }
-            li.onkeyup = (e) => {
-                if (e.code === "Enter") {
-                    searchField.value = el.ScientificName;
-                    document.getElementById("search_and_filter_form").submit();
-                }
-            }
-            autocompleteList.appendChild(li);
-        }
+        } 
     });
     autocompleteList.style["display"] = "block";
 }

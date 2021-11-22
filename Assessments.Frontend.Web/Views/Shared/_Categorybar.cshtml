@@ -1,7 +1,7 @@
 ﻿<!-- Add  category-selected to active tab -->
 @model SpeciesAssessment2021
 @*
-    Category-displayer, purely visual css-element. 
+    Category-displayer, purely visual css-element.
     Needs the corresponding css to be viewed properly.
     CSS is in the file categorybar.css.
     Re-made completely for launch 2021.
@@ -9,8 +9,9 @@
     TODO: Mobile-friendly version.
 *@
 
-@functions {
-    public string setActive(string first, string second)
+@{
+
+    string setActive(string first, string second)
     {
         if (second.Contains(first))
         {
@@ -21,65 +22,72 @@
             return "notactive";
         }
     }
+
+    string addCategory(string category)
+    {
+        if (Model.Category.Contains(category) && Model.Category.Length > 2)
+        {
+            return @Model.Category;
+        }
+        return category;
+    }
 }
 
 <div class="page_section">
-
     <ul class="category_displayer">
         <li class="@setActive("RE", @Model.Category)">
-            <div class="category_item  RE ">
-                <span>RE</span>
+            <div class="category_item  RE">
+                <span>@addCategory("RE")</span>
             </div>
             <span class="tag">Regionalt utdødd</span>
         </li>
         <li class="@setActive("CR", @Model.Category)">
-            <div class="category_item CR  ">
-                <span>CR</span>
+            <div class="category_item CR">
+                <span>@addCategory("CR")</span>
             </div>
             <span class="tag">Kritisk truet</span>
         </li>
         <li class="@setActive("EN", @Model.Category)">
-            <div class="category_item  EN ">
-                <span>EN</span>
+            <div class="category_item  EN">
+                <span>@addCategory("EN")</span>
             </div>
             <span class="tag">Sterkt truet</span>
         </li>
         <li class="@setActive("VU", @Model.Category)">
-            <div class="category_item  VU ">
-                <span>VU</span>
+            <div class="category_item  VU">
+                <span>@addCategory("VU")</span>
             </div>
             <span class="tag">Sårbar</span>
         </li>
         <li class="@setActive("NT", @Model.Category) ">
             <div class="category_item  NT">
-                <span>NT</span>
+                <span>@addCategory("NT")</span>
             </div>
             <span class="tag">Nær<br />truet</span>
         </li>
         <li class="@setActive("DD", @Model.Category)">
             <div class="category_item  DD ">
-                <span>DD</span>
+                <span>@addCategory("DD")</span>
             </div>
             <span class="tag">Data- mangel</span>
         </li>
         <li class="@setActive("LC", @Model.Category)">
             <div class="category_item  LC ">
-                <span>LC</span>
+                <span>@addCategory("LC")</span>
             </div>
             <span class="tag">Livs- kraftig</span>
         </li>
         <li class="@setActive("NA", @Model.Category)">
             <div class="category_item  NA">
-                <span>NA</span>
+                <span>@addCategory("NA")</span>
             </div>
             <span class="tag">Ikke egnet</span>
         </li>
         <li class="@setActive("NE", @Model.Category)">
             <div class="category_item  NE ">
-                <span>NE</span>
+                <span>@addCategory("NE")</span>
             </div>
             <span class="tag">Ikke vurdert</span>
         </li>
-
     </ul>
 </div>

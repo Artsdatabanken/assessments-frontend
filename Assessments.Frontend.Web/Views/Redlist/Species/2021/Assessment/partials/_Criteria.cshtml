@@ -1,4 +1,6 @@
 ﻿@model SpeciesAssessment2021
+@using static Assessments.Frontend.Web.Infrastructure.Helpers
+
 @*
     TODO: IMPROVE AND MOVE LOGIC FROM VIEW. NOT CRITICAL, WILL NOT PRIORITIZE.
 
@@ -36,15 +38,6 @@
                 return Model.C2Ai.Statistics;
         }
         return null;
-    }
-
-    private string FormatNumeric(string value)
-    {
-        if (int.TryParse(value, out int result))
-        {
-            return result.ToString("### ### ###");
-        }
-        return value;
     }
 }
 
@@ -164,7 +157,11 @@
 
         @if (k == "C1" || k.Contains("C2"))
         {
-            unit = "";
+
+            if (!k.Contains("C2"))
+            {
+                unit = string.Empty;
+            }
             CThresh = Model.C.PreliminaryCategory;
             C_Blank_Value = ViewBag.kriterier["C"]["content"]["threshold"][CThresh];
             C_Blank_Value = ViewBag.kriterier["C"]["content"]["comparator"] + " " + C_Blank_Value;
@@ -178,8 +175,8 @@
             {
                 string className = "inactive";
                 @if (cat != null && thresholdValue != null && (cat == thresholdValue ||
-            k == "C1" && catval.Substring(0, 2) == thresholdValue)
-           || k.Contains("C2") && thresholdValue == catval)
+                k == "C1" && catval.Substring(0, 2) == thresholdValue)
+               || k.Contains("C2") && thresholdValue == catval)
                 {
                     className = "active";
                 }
@@ -199,6 +196,12 @@
                     box_class += "C_question";
                     labels += " ?";
                 }
+
+                if ((k == "B1" || k == "B2") && labels == "NT")
+                {
+                    unit = string.Empty;
+                }
+
 
                 <li class="thresholdlist @className">
                     <span class="graphic_element @labels @box_class">@labels</span>
@@ -253,8 +256,17 @@
             }
 
             <p>
-                <span>Estimert verdi: @FormatNumeric(quantile.Calculated) @Html.Raw(unit).</span><br />
-                <span>Verdien antas å ligge mellom @FormatNumeric(min) @Html.Raw(unit) og @FormatNumeric(max) @Html.Raw(unit).</span><br />
+                @if (!string.IsNullOrEmpty(quantile.Calculated))
+                {
+                    <span>Estimert verdi: @FormatNumeric(quantile.Calculated) @Html.Raw(unit).</span><br />
+
+                }
+                
+                 @if (!string.IsNullOrEmpty(min)&& !string.IsNullOrEmpty(max))
+                 {
+                    <span>Verdien antas å ligge mellom @FormatNumeric(min) @Html.Raw(unit) og @FormatNumeric(max) @Html.Raw(unit).</span><br />
+
+                }
                 @if (estimated.Length > 0)
                 {
                     <span>Mest trolig er den @estimated @Html.Raw(unit).</span>

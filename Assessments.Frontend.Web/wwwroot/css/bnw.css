@@ -1,19 +1,92 @@
-.main .themebutton {
+/* BUTTONs FOR THEME SELECTING */
+
+#headermenu {
+    z-index: 3;
+}
+
+.themeselector {
     position: absolute;
-    top: 10px;
-    z-index: 1;
-    right: 10px;
-    width: 100px;
-    border: 1px solid black;
+    top: 0px;
+    right: 3px;
+    width: 68px;
+    padding: 0;
+    z-index: 3;
 }
 
-.themebutton.dark {
-    margin-top: 26px;
+.themeselectordropdown {
+    z-index: 3;
+    display:none;
+    position:absolute;
+    top:50px;
+    right:3px;
 }
 
-/* 
-HIGH CONTRAST THEME
-*/
+.themeselectordropdown li {
+    padding: 3px 20px;
+    font-weight: bold;
+    line-height: 1.42857143;
+    color: black;
+    white-space: nowrap;
+    font-size: 16px;
+    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+    margin: 8px 0;
+    display: block;
+    text-decoration: none;
+}
+
+
+.header .only_mobile {
+    display: none;
+}
+
+@media only screen and (max-width: 766px) {
+
+    .header .themeselectordropdown,
+    #headermenu {
+        background: #680c0c;
+        border-top: 1px solid #a83333;
+    }
+
+    .header .themeselector {
+        background: none;
+        right: 54px;
+        width: 44px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .header .themeselectordropdown{
+        top:35px;
+        padding:20px;
+        padding-top:0;
+    }
+
+    .header .themeselectordropdown ul ,
+    .header .themeselectordropdown li {
+        color: white;
+        background: #751111;
+        font-weight:normal;
+        margin-top:1px;
+    }
+
+    .header .themeselectordropdown li {
+        height:50px;
+        line-height:50px;
+    }
+
+
+
+    .header .only_mobile {
+        display: inline-block;
+    }
+
+    .header .hideonmobile {
+        display: none;
+    }
+}
+
+
+/* HIGH CONTRAST THEME */
 .highcontrast .RE,
 .highcontrast .CR,
 .highcontrast .EN,

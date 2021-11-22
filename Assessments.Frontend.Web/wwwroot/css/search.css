@@ -158,6 +158,7 @@
     min-width:85px;
 }
 
+.search_dropdown li:focus,
 .search_autocomplete:focus,
 .search_autocomplete:hover {
     background-color: lightgray;

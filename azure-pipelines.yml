@@ -26,7 +26,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- script: dir
+- script: dir Assessments.Frontend.Web
+- script: dir Assessments.Frontend.Web\bin\Release
+- script: dir Assessments.Frontend.Web\bin\Release\net5.0
+- script: dir Assessments.Frontend.Web\bin
 
 - task: ArchiveFiles@2
   inputs:

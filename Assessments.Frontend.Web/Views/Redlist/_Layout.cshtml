@@ -28,13 +28,10 @@
 
 <body>
     <div id="bodywrap">
-        <partial name="/Views/Shared/_PageTopBar.cshtml" />
+        <partial name="/Views/Shared/_PageTopBar.cshtml" />       
         <partial name="/Views/Redlist/Species/Shared/_RedlistHeader.cshtml" />
         <div class="main">
-
             <div class="main-content width-adjuster">
-                <button class="themebutton contrast primary tinybutton" onclick="highContrastMode(this, 'highcontrast')">Høykontrast</button>
-                <button class="themebutton dark primary tinybutton" onclick="highContrastMode(this, 'darktheme')">Nattmodus</button>
 
                 @RenderBody()
                 <script src="~/js/site.js" asp-append-version="true"></script>

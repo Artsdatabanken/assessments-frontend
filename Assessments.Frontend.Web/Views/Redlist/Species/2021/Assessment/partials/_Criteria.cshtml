@@ -149,6 +149,24 @@
         }
     }
 
+    // DESCRIPTION
+    void categoryDescription(string category)
+    {
+        if (!string.IsNullOrEmpty(category) && category.Length > 0)
+        {
+            if (category.Length > 2)
+            {
+                category = category.Substring(0, 2);
+            }
+            if (@ViewBag.categories.ContainsKey(category))
+            {
+                var final_string = @ViewBag.categories[category]["presentationstring"];
+                <span class="capitalized categorytext">@final_string</span>
+            }
+        }
+
+    }
+
     // THE LIST SHOWING A SUBCATEGORY'S THRESHOLD VALUES
     void thresholdsList(Dictionary<string, string> thresholds, string unit, SpeciesAssessment2021MinMaxProbableIntervall quantile, string comparator, string thresholdValue, string k, Dictionary<string, object> C_labels)
     {
@@ -205,6 +223,7 @@
 
                 <li class="thresholdlist @className">
                     <span class="graphic_element @labels @box_class">@labels</span>
+                     @{categoryDescription(labels);}
                     <span class="threshold_element">
                         @comparator @Html.Raw(catval) @Html.Raw(unit)
                     </span>

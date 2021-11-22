@@ -721,3 +721,18 @@ option {
         bacground: pink;
     }
 }
+.categorytext {
+    width: 100px;
+}
+
+.stat_subtitle {
+    display: inline-block;
+    word-break: break-word;
+    hyphens: auto;
+    font-size: 10pt;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}

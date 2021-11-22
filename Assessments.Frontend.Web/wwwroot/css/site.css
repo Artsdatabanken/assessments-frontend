@@ -625,7 +625,9 @@ option {
 }
 
 .sidebarmenu li h3 {
-    color: #098293;
+    color: #4c4a48;
+    display: block;
+    font-size: 22.5px;
 }
 
 /* FRONT PAGE TITLE AREA */
@@ -720,4 +722,8 @@ option {
         padding-right: 15px;
         bacground: pink;
     }
+}
+
+.pad-top {
+    padding-top: 3px;
 }

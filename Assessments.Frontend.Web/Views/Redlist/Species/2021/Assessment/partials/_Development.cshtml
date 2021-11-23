@@ -23,15 +23,6 @@
             <span class="capitalized"> @categoryDescription(Model.Category)</span>
 
         </li>
-        @{/* // NOT NEEDED?
-            <li>
-                @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
-                {
-                    <span>Arten er vurdert for første gang i 2021.</span>
-                }
-            </li>
-          */
-        }
     }
 
     @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger

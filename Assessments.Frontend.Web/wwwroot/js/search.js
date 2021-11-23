@@ -121,7 +121,7 @@ function searchForTaxa(sciname) {
 }
 
 function goToAssesment(id) {
-    window.location.href = "/rodlisteforarter/2021/" + id;
+    window.location.href = window.location.pathname + '/' + id;
 }
 
 const createList = (json,searchstring) => {

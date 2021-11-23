@@ -40,8 +40,14 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
             </p>
 
             <button class="tertiary tinybutton" onclick="expandHabitat(this, 'expanded')">
-                <span class="more">Se mer</span>
-                <span class="less">Se mindre</span>
+                <span class="more">
+                    Se mer 
+                    <span class="material-icons">arrow_drop_down</span>
+                </span>
+                <span class="less">
+                    Se mindre
+                    <span class="material-icons">arrow_drop_up</span>
+                </span>
             </button>
         }
     </div>    

@@ -178,6 +178,11 @@ li.region p {
     padding: 5px;
 }
 
+.main .habitat_element .tinybutton {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media only screen and (min-width: 250px) and (max-width: 550px) {
     .habitat_icon {
         height: 100px;
@@ -574,9 +579,9 @@ span.area i {
     margin-top: 10px;
 }
 
-.side hr:first-of-type{
-    margin-top: 0px;
-}
+    .side hr:first-of-type {
+        /*margin-top: 0px;*/
+    }
 
 .sidebar_image_info img {
     background: #fff;
@@ -595,11 +600,21 @@ span.area i {
     padding-top: 5px;
     padding-bottom: 5px;
     width: 100%;   
+    max-width:100%;
 }
 
-.history_list .tinybutton{
-    margin:0;
+.history_list li a{
+    padding-left:0;
+    max-width: 100%;
 }
+
+.history_list{
+    width:100%;
+    max-width:100%;
+    padding-left:0;
+    margin-top:0;
+}
+
 
 @media only screen and (min-width: 965px) {
     .history_list li {

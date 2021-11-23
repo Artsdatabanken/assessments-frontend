@@ -1,8 +1,8 @@
 ﻿
 /* STATISTICS AND GRAPHS */
 
-.stat{
-    padding:10px;
+.viewselector.stat {
+    padding: 10px;
 }
 
 .viewselector.stat .redlist,

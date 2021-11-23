@@ -5,56 +5,20 @@
 
 .controls {
     border-bottom: 1px solid #7f726b;
-    padding-top: 20px
 }
 
 button#open_filter {
     display: none;
 }
 
-.empty_filters {
-    display: none;
-}
-
 @media only screen and (min-width: 750px) {
-    .empty_filters_and_controls {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-
     .controls {
-        width: 100%;
+        margin-left: 220px;
     }
 
     .empty_filters {
-        display: flex;
-        flex-direction: row;
-        width: 220px;
-        min-width: 220px;
+        margin-left: 205px;
     }
-    
-    .empty_filters .flex_row {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: center;
-        font-size: 10pt;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    
-    .empty_filters a.tinybutton {
-        display: flex;
-        flex-direction: row;
-        margin: 5px 2px;
-        padding: 5px;
-    }
-
-    .empty_filters a.tinybutton .flex_row {
-        flex-wrap: wrap;
-    }
-
 }
 
 .controls button {
@@ -75,8 +39,12 @@ button#open_filter {
     border-left-color: lightgray;
 }
 
-.empty_filters_mobile {
-    display: none;
+.empty_filters {
+    padding-left: 15px;
+}
+
+.empty_filters .button {
+    margin: 0;
 }
 
 .controls .list_actions {
@@ -139,8 +107,9 @@ button#open_filter {
         display: flex;
         justify-content: center;
         padding-bottom: 12px;
+        padding-top: 12px;
         float: none;
-        width:100%;
+        width: 100%;
     }
 }
 

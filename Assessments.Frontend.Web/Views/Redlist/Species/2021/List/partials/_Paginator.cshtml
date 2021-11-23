@@ -2,8 +2,12 @@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Web.Common
 
-@if (Model.Redlist2021Results.TotalItemCount > 25)
+@if (Model.Redlist2021Results.PageCount > 1 && Model.View != "stat")
 {
+    <p class="page_count">
+        Viser side @Model.Redlist2021Results.PageNumber av @Model.Redlist2021Results.PageCount.ToString("N0")
+    </p>
+
     @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", new
     {
         Page = page,

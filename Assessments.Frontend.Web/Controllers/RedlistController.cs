@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.Models.Species;
@@ -36,6 +37,21 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("2021")]
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
+            if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveFilters].ToString()))
+            {
+                viewModel = new RL2021ViewModel { Name = viewModel.Name, View = viewModel.View };
+            }
+
+            if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveSearch].ToString()))
+            {
+                var nameValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+                nameValues.Set("Name", string.Empty);
+                nameValues.Set(Constants.SearchAndFilter.RemoveSearch, string.Empty);
+                string url = HttpContext.Request.Path;
+                var queryString = "?" + nameValues.ToString();
+                Response.Redirect(url + queryString);
+            }
+
             viewModel ??= new RL2021ViewModel();
 
             ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");

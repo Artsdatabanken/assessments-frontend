@@ -137,7 +137,6 @@
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
     hyphens: auto;
-    white-space: pre-wrap;
     overflow-wrap: break-word;
 }
 

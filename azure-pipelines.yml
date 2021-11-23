@@ -24,7 +24,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: 'Assessments-frontend.sln -c Release'
+    arguments: '-c Release'
     zipAfterPublish: false
     modifyOutputPath: false
 

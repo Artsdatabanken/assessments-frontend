@@ -162,7 +162,11 @@ const createList = (json,searchstring) => {
                         icon = '<img src="' + assessments[i].speciesGroupIconUrl + '" class="search_speciesicon" >';
                     }
                     if (assessments[i].category) {
-                        category = `<span class="search_category graphic_element ${assessments[i].category}">${assessments[i].category}</span >`;
+                        let cat = assessments[i].category;
+                        if (cat.length > 2) {
+                            cat = cat.substring(0, 2) + " degraded";
+                        }
+                        category = `<span class="search_category graphic_element ${cat}">${assessments[i].category}</span >`;
                     }
                     if (assessments[i].speciesGroup) {
                         speciesGroup = '<span class="search_speciesgroup">' + assessments[i].speciesGroup.toLowerCase() + '</span >';

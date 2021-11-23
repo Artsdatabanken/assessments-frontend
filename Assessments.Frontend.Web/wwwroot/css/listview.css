@@ -133,6 +133,8 @@
 
 .list_cell {
     padding: 5px;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .redlist .amfibier,

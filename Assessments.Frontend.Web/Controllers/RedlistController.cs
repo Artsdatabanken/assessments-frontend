@@ -41,7 +41,7 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 var queryParams = HttpUtility.ParseQueryString(Request.QueryString.ToString());
                 queryParams = Helpers.removeFiltersFromQuery(queryParams);
-                string url = HttpContext.Request.Path;
+                string url = HttpContext.Request.PathBase.HasValue ? HttpContext.Request.PathBase + HttpContext.Request.Path : HttpContext.Request.Path;
                 var queryString = "?" + queryParams.ToString();
                 Response.Redirect(url + queryString);
             }
@@ -51,7 +51,7 @@ namespace Assessments.Frontend.Web.Controllers
                 var queryParams = HttpUtility.ParseQueryString(Request.QueryString.ToString());
                 queryParams.Remove(nameof(viewModel.Name));
                 queryParams.Remove(Constants.SearchAndFilter.RemoveSearch);
-                string url = HttpContext.Request.Path;
+                string url = HttpContext.Request.PathBase.HasValue ? HttpContext.Request.PathBase + HttpContext.Request.Path : HttpContext.Request.Path;
                 var queryString = "?" + queryParams.ToString();
                 Response.Redirect(url + queryString);
             }

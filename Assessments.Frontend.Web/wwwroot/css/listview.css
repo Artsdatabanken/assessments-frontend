@@ -10,6 +10,13 @@
     margin-top: 20px;
 }
 
+.page_count {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: -10px;
+}
+
 .page-item:not(:first-child) .page-link {
     margin-left: -1px;
 }
@@ -405,10 +412,41 @@ li a span.element_icon {
     li a span.element_icon {
     padding-right: 10px;
     }
+
+    .num_of_resutls {
+        padding: 0 15px;
+    }
 }
 
 .list_header{
     position:relative;
+}
+
+.num_of_resutls {
+    font-size: 12pt;
+    width: 100%;
+    text-align: end;
+    margin: 10px 0;
+}
+
+.num_of_resutls.desktop_hide {
+    width: auto;
+    margin-bottom: 0;
+    margin-top: 35px;
+    float: right;
+    padding: 0 5px;
+}
+
+@media (max-width: 500px) {
+    .mobile_hide {
+        display: none;
+    }
+}
+
+@media (min-width: 501px) {
+    .desktop_hide {
+        display: none;
+    }
 }
 
 

@@ -19,12 +19,14 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
-- task: VSBuild@1
+
+- task: DotNetCoreCLI@2
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:PublishProfile=release'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'publish'
+    publishWebProjects: true
+    arguments: 'Assessments-frontend.sln -c Release'
+    zipAfterPublish: false
+    modifyOutputPath: false
 
 - script: dir Assessments.Frontend.Web
 - script: dir Assessments.Frontend.Web\bin\Release
@@ -33,7 +35,7 @@ steps:
 
 - task: ArchiveFiles@2
   inputs:
-    rootFolderOrFile: 'Assessments.Frontend.Web\bin\Release\net5.0\'
+    rootFolderOrFile: 'Assessments.Frontend.Web\bin\Release\net5.0\publish'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'

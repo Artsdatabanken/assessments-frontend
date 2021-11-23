@@ -1,7 +1,9 @@
 ﻿using Assessments.Mapping.Models.Species;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System;
+using Assessments.Frontend.Web.Models;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -94,6 +96,24 @@ namespace Assessments.Frontend.Web.Infrastructure
                 allRegions.Add($"{i}", regionNames[i]);
             }
             return allRegions;
+        }
+
+        public static NameValueCollection removeFiltersFromQuery(NameValueCollection queryParams)
+        {
+            queryParams.Remove(nameof(RL2021ViewModel.Area));
+            queryParams.Remove(nameof(RL2021ViewModel.Category));
+            queryParams.Remove(nameof(RL2021ViewModel.Criterias));
+            queryParams.Remove(nameof(RL2021ViewModel.EuroPop));
+            queryParams.Remove(nameof(RL2021ViewModel.Regions));
+            queryParams.Remove(nameof(RL2021ViewModel.Habitats));
+            queryParams.Remove(nameof(RL2021ViewModel.SpeciesGroups));
+            queryParams.Remove(nameof(RL2021ViewModel.TaxonRank));
+            queryParams.Remove(nameof(RL2021ViewModel.Redlisted));
+            queryParams.Remove(nameof(RL2021ViewModel.Endangered));
+            queryParams.Remove(nameof(RL2021ViewModel.PresumedExtinct));
+            queryParams.Remove(Constants.SearchAndFilter.RemoveFilters);
+
+            return queryParams;
         }
 
         public static IQueryable<SpeciesAssessment2021> sortResults(IQueryable<SpeciesAssessment2021> query, string name, string sortBy)

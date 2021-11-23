@@ -15,16 +15,13 @@
 <h3>Utvikling</h3>
 <ul class="history_list">
 
-    @if (Model.AssessmentYear == 2021){
+    @if (Model.AssessmentYear == 2021)
+    {
         <li>
             <b class="text_content"> 2021: </b>
             <span class="graphic_element @Model.Category.Substring(0,2)">@Model.Category</span>
             <span class="capitalized"> @categoryDescription(Model.Category)</span>
 
-            @if (Model.YearPreviousAssessment == 2021 || Model.YearPreviousAssessment == 0)
-            {
-                <span>Arten er vurdert for første gang i 2021.</span>
-            }
         </li>
     }
 

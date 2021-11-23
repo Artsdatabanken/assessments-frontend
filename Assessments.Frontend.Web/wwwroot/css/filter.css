@@ -48,14 +48,14 @@ button#open_filter {
 }
 
 .controls .list_actions {
-    width:150px;
+    width: 150px;
     max-width: 150px;
-    height: 35px;
+    height: 30px;
     background: white;
     border: 1px solid black;
     text-align: center;
-    margin:0;
-    position:relative;    
+    margin: 0;
+    position: relative;
 }
 
 .controls .list_actions:first-child{
@@ -170,8 +170,7 @@ button.close_filters {
     margin-left: -15px;
     width: 100vw;
     height: 100vh;
-    z-index: 10;
-
+    z-index: 12;
 }
 
 /* FILTER */

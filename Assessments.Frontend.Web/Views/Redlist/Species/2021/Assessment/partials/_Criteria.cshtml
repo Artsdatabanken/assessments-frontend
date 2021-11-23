@@ -234,7 +234,7 @@
         @if (k == "C1" || k.Contains("C2a"))
         {
             <p>
-                <a href="https://www.artsdatabanken.no/files/33528" class="button tertiary tinybutton">
+                <a href="https://www.artsdatabanken.no/files/33528" class="link-styled">
                     Se hele matrisen i vedlegg 1 i veilederen >
                 </a>
             </p>
@@ -423,12 +423,18 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 <div class="page_section criteria" id="criteria">
     <div class="criteria_description">
         <h3>@ViewBag.glossary["criteria"]["tagline"]</h3>
-        <p>@Html.Raw(ViewBag.glossary["criteria"]["description"])</p>
-        <button class="tertiary tinybutton">Gå til metode <span class="material-icons">open_in_new</span></button>
+        <p>
+            @Html.Raw(ViewBag.glossary["criteria"]["description"])
+            <br />
+            <a href="/" class="link-styled">Gå til metode</a>
+          </p>
+       
         <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
-        <p>@Model.CriteriaSummarized<br /></p>
-        @*// TODO: FIX BUTTONS. MAKE URLS, make pretty, add link*@
-        <button class="tertiary tinybutton">Gå til ordliste <span class="material-icons">open_in_new</span></button>
+        <p>@Model.CriteriaSummarized
+        <br />
+         <a href="/" class="link-styled">Gå til ordliste</a>
+        </p>
+        
     </div>
 
     <!-- CONTROL BUTTONS -->

@@ -305,7 +305,6 @@ option {
     border: 1px solid #a6a6a6;
     margin-bottom: 10px;
     text-decoration: none;
-    text-transform: uppercase;
     font-weight: bold;
     font-family: "Roboto condensed";
     font-weight: normal;
@@ -328,9 +327,14 @@ option {
 
 .button.tertiary,
 .main button.tertiary {
-    background: none;
-    color: #1b57a9;
-    border: none;
+    width: 150px;
+    max-width: 150px;
+    height: 35px;
+    background: white;
+    border: 1px solid black;
+    text-align: center;
+    margin: 0;
+    margin-right: 0px;
 }
 
 .button.active,
@@ -357,8 +361,17 @@ option {
     border-radius: 2px;
 }
 
+.main button.tinybutton,
 .main .tinybutton {
-    padding: 0;
+    width: max-content;
+    padding: 3px 6px;
+    max-width: initial;
+    margin: 6px;
+    height: auto;
+}
+
+.link-styled{
+    display:block;
 }
 
 .disabled {
@@ -415,6 +428,11 @@ option {
 .title_header .tertiary {
     height: 53px;
     color: white;
+    background: transparent;
+    border: none;
+    margin-right: 0px;
+    margin-left: auto;
+    width: auto;
 }
 
 
@@ -451,6 +469,7 @@ option {
     .sidebarmenu button,
     .title_header .sidebarmenu {
         display: block;
+        height:0px;
     }
 
     .sidebarmenu button {
@@ -491,6 +510,10 @@ option {
     background: #751111;
 }
 
+.title_header {
+    text-decoration:none;
+}
+
 
 @media only screen and (min-width: 941px) {
 
@@ -514,7 +537,7 @@ option {
         font-family: "Roboto condensed";
         height: 50px;
         line-height: 50px;
-        width: 240px;
+        width: 300px;
     }
 }
 
@@ -612,6 +635,7 @@ option {
 .sidebarmenu span:first-child {
     width: calc(100% - 26px);
     display: inline-block;
+    font-weight:normal;
 }
 
 .sidebarmenu .material-icons {
@@ -742,4 +766,8 @@ option {
     -webkit-hyphens: auto;
     -moz-hyphens: auto;
     hyphens: auto;
+}
+
+.content-placer a{
+    font-size:initial;
 }

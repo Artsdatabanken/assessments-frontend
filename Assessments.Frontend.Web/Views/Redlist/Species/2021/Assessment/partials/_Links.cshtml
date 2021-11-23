@@ -13,12 +13,13 @@
 }
 
 <h3>Videre lesning</h3>
+
 <ul class="history_list">
     @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger
     {
         <li>
-            <a target="_blank" href="@prev.AssessmentUrl" class="button tertiary tinybutton">
-                @prev.Year vurdering<span class="material-icons">keyboard_arrow_right</span>
+            <a target="_blank" href="@prev.AssessmentUrl" class="link-styled">
+                <span>@prev.Year vurdering</span>
             </a>
         </li>
     }

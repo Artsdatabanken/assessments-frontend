@@ -39,16 +39,20 @@ namespace Assessments.Frontend.Web.Controllers
         {
             if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveFilters].ToString()))
             {
-                viewModel = new RL2021ViewModel { Name = viewModel.Name, View = viewModel.View };
+                var queryParams = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+                queryParams = Helpers.removeFiltersFromQuery(queryParams);
+                string url = HttpContext.Request.Path;
+                var queryString = "?" + queryParams.ToString();
+                Response.Redirect(url + queryString);
             }
 
             if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveSearch].ToString()))
             {
-                var nameValues = HttpUtility.ParseQueryString(Request.QueryString.ToString());
-                nameValues.Set("Name", string.Empty);
-                nameValues.Set(Constants.SearchAndFilter.RemoveSearch, string.Empty);
+                var queryParams = HttpUtility.ParseQueryString(Request.QueryString.ToString());
+                queryParams.Remove(nameof(viewModel.Name));
+                queryParams.Remove(Constants.SearchAndFilter.RemoveSearch);
                 string url = HttpContext.Request.Path;
-                var queryString = "?" + nameValues.ToString();
+                var queryString = "?" + queryParams.ToString();
                 Response.Redirect(url + queryString);
             }
 

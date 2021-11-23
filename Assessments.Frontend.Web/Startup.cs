@@ -87,14 +87,17 @@ namespace Assessments.Frontend.Web
 
             app.UseODataQueryRequest();
 
-            app.UseSwagger();
-
-            app.UseSwaggerUI(options =>
+            if (env.IsDevelopment()) // ikke vis swagger (bortsett fra i utviklingsmiljø) #457 TODO: enable swagger at some point
             {
-                options.RoutePrefix = "swagger";
-                options.SwaggerEndpoint("v1/swagger.json", "Assessments api");
-                options.InjectJavascript("/js/swagger.js");
-            });
+                app.UseSwagger();
+
+                app.UseSwaggerUI(options =>
+                {
+                    options.RoutePrefix = "swagger";
+                    options.SwaggerEndpoint("v1/swagger.json", "Assessments api");
+                    options.InjectJavascript("/js/swagger.js");
+                });
+            }
 
             var cachedFilesFolder = Path.Combine(env.ContentRootPath, Constants.CacheFolder);
 

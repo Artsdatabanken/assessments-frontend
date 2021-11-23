@@ -28,10 +28,8 @@ steps:
     zipAfterPublish: false
     modifyOutputPath: false
 
-- script: dir Assessments.Frontend.Web
-- script: dir Assessments.Frontend.Web\bin\Release
-- script: dir Assessments.Frontend.Web\bin\Release\net5.0
-- script: dir Assessments.Frontend.Web\bin
+#- script: dir Assessments.Frontend.Web\bin\Release\net5.0
+- script: dir Assessments.Frontend.Web\bin\Release\net5.0\publish
 
 - task: ArchiveFiles@2
   inputs:

@@ -469,6 +469,7 @@ option {
     .sidebarmenu button,
     .title_header .sidebarmenu {
         display: block;
+        height:0px;
     }
 
     .sidebarmenu button {
@@ -509,6 +510,10 @@ option {
     background: #751111;
 }
 
+.title_header {
+    text-decoration:none;
+}
+
 
 @media only screen and (min-width: 941px) {
 
@@ -532,7 +537,7 @@ option {
         font-family: "Roboto condensed";
         height: 50px;
         line-height: 50px;
-        width: 240px;
+        width: 300px;
     }
 }
 

@@ -4,6 +4,9 @@ namespace Assessments.Mapping.Models.Species
 {
     public class SpeciesAssessment2021Export
     {
+        [DisplayName("Id for vurderingen")]
+        [Description("Id for 2021 vurderingen")]
+        public int Id { get; set; }
         [DisplayName("Vurderingsområde")]
         [Description("Er arten vurdert for Norge eller Svalbard")]
         public string AssessmentArea { get; set; }
@@ -19,6 +22,10 @@ namespace Assessments.Mapping.Models.Species
         [DisplayName("Taksonomisk sti")]
         [Description("Taksonomisk sti for arten")]
         public string VurdertVitenskapeligNavnHierarki { get; set; }
+        
+        [DisplayName("Vitenskapelig navn id")]
+        [Description("Gyldig vitenskapelig navn id ved vurderingstidspunkt, i henhold til Artsnavnebase")]
+        public string ScientificNameId { get; set; }
 
         [DisplayName("Vitenskapelig navn")]
         [Description("Gyldig vitenskapelig navn ved vurderingstidspunkt, i henhold til Artsnavnebase")]
@@ -195,5 +202,6 @@ namespace Assessments.Mapping.Models.Species
         [DisplayName("Grønlandshavet")]
         [Description("Grønlandshavet - tilstedeværelse i regionen")]
         public string Gronlandshavet { get; set; }
+
     }
 }

@@ -13,10 +13,12 @@ namespace Assessments.Mapping
         public SpeciesAssessment2021ExportProfile()
         {
             CreateMap<SpeciesAssessment2021, SpeciesAssessment2021Export>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id ))
                 .ForMember(dest => dest.AssessmentArea, opt => opt.MapFrom(src => src.AssessmentArea == "S" ? "Svalbard" : "Norge"))
                 .ForMember(dest => dest.ExpertCommittee, opt => opt.MapFrom(src => src.ExpertCommittee))
                 .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => src.SpeciesGroup))
                 .ForMember(dest => dest.VurdertVitenskapeligNavnHierarki, opt => opt.MapFrom(src => src.VurdertVitenskapeligNavnHierarki))
+                .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.ScientificNameId))
                 .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.ScientificName))
                 .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.ScientificNameAuthor))
                 .ForMember(dest => dest.PopularName, opt => opt.MapFrom(src => src.PopularName))
@@ -94,7 +96,7 @@ namespace Assessments.Mapping
             return string.Join(";", mainHabitats.Select(GetProperDescription).ToList());
         }
 
-        private static string StripHtml(string input) => Regex.Replace(input, "<.*?>", string.Empty);
+        private static string StripHtml(string input) => input != null ? Regex.Replace(input, "<.*?>", string.Empty) : string.Empty;
 
         private static string ResolveRegionState(IEnumerable<SpeciesAssessment2021RegionOccurrence> regionOccurrences, string name)
         {

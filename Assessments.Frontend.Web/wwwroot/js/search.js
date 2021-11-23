@@ -1,6 +1,5 @@
 const searchField = document.getElementById("Name");
 const autocompleteList = document.getElementById("autocomplete_list_ul");
-const domain = window.location.domain;
 const searchUrlBase =  window.location.pathname + "/suggestions";
 const autoCompleteWaitTime = 1000;
 

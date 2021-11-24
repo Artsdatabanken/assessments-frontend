@@ -1,9 +1,16 @@
 ﻿
 <div class="sidebarmenu">
-    <button class="button tertiary" onclick="expandParent(this, 'expand')">Rødlista for arter </button>
-    <h3>Rødlista for arter </h3>
-    <ul>
+    <button class="button tertiary" onclick="expandParent(this, 'expand')">Sidemeny </button>
 
+    <ul>
+        <li>
+            <a class="menuheaderlink" asp-controller="Redlist" asp-action="RodlisteForArter">
+                <h3>
+                    <span>Rødlista for arter</span>
+                    <span class="material-icons pad-top">keyboard_arrow_right</span>
+                </h3>
+            </a>
+        </li>
         <li>
             <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">
 
@@ -38,9 +45,14 @@
 
 
     </ul>
-
-    <h3> Rødlista for naturtyper</h3>
     <ul>
+        <li>
+            <a class="menuheaderlink" asp-controller="Redlist" asp-action="RodlisteForArter">
+                <h3>
+                    <span> Rødlista for naturtyper</span>
+                </h3>
+            </a>
+        </li>
         <li>
 
             <a href="https://artsdatabanken.no/rodlistefornaturtyper">
@@ -49,7 +61,23 @@
             </a>
         </li>
     </ul>
-    </h3>
 
-    
+    <ul>
+        <li>
+            <a class="menuheaderlink" asp-controller="Redlist" asp-action="RodlisteForArter">
+                <h3>
+                    <span> Fremmedarter</span>
+                </h3>
+            </a>
+        </li>
+        <li>
+
+            <a href="https://artsdatabanken.no/fremmedartslista2018">
+                <span>Fremmedartslista 2018 </span>
+                <span class="material-icons">keyboard_arrow_right</span>
+            </a>
+        </li>
+    </ul>
+
+
 </div>

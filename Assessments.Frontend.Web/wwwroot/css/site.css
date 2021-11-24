@@ -45,7 +45,7 @@ ul a:active,
 
 .front_page_links li a{
     padding:20px 10px;
-    margin:10px;
+    margin-bottom:10px;
     font-size:5vw;
     display:block;
     text-transform:uppercase;

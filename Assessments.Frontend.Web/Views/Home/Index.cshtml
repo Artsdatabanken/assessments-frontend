@@ -1,38 +1,38 @@
 ﻿@{
     ViewBag.Title = "Rødlista 2021";
-
-    // https://www.artsdatabanken.no/Article/Article/453 <-- link to svartelista 2012
-    // https://www.artsdatabanken.no/fremmedearter/svartelista2007 <-- link to svartelista 2007
-
 }
-<div class="pagecontainer">
-    <partial name="/Views/Redlist/Species/Shared/_PageMenu.cshtml" />
 
+<div class="pagecontainer">
+    <partial name="/Views/Redlist/Species/Shared/_PageMenuHistorical.cshtml" />
     <div class="content-placer bigmid">
-        <div class="mid-content with_sidebar">
+        <div class="mid-content">
             <div class="page-header">
                 <h1>
-                    Risikovurderinger
+                    Lister
                 </h1>
-                <h2>
-                    Startside for testserver
-                </h2>
 
-                <p>
-                    Når ting endelig skal legges ut på sine permanente url'er vil denne siden ikke bli med ut.
-                    Den eksisterer kun for å gi et raskt startpunkt for testsiden.
+                <p class="ingress">
+                    Rødlistene viser hvilke naturtyper og arter som har risiko for å gå tapt fra Norge.
+                    Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge.
+                    Listene er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
                 </p>
-
-                <h3>
-                    <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N" class="link-styled">RØDLISTA FOR ARTER 2021</a>
-                </h3>
-
-
-
             </div>
 
+            <h2> Gjeldende rødliste</h2>
 
-            <div class="page_section">
+            <p class="page_section">
+                Gjeldende rødliste ble lansert 24. november, og vil være den gjeldende rødlista frem til neste revisjon i 2027.
+
+            </p>
+            <p>
+                <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N" class="button primary">
+                    Rødlista 2021
+                    <span class="material-icons">keyboard_arrow_right</span>
+                </a>
+            </p>
+
+            <h2> Alle listene </h2>
+            <p class="page_section">
 
                 <ul class="front_page_links">
                     <li>
@@ -63,9 +63,21 @@
                     </li>
 
                 </ul>
-            </div>
+            </p>
+
         </div>
-        <div class="side">
-        </div>
+
+
+
+
     </div>
 </div>
+</div>
+
+
+
+
+
+
+
+

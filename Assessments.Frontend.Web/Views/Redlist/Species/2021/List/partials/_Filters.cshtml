@@ -38,12 +38,12 @@
                 @foreach (var insect in insects)
                 {
                     <li class="checkbox">
-                        <label>
+                        <label for=@insect>
                             @{
                                 InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect); 
                             }
+                            <span class="label_text">@insect</span>
                         </label>
-                        <span>@insect</span>
                     </li>
                 }
             </ul>
@@ -101,7 +101,10 @@
 <div class="controls">
     <div class="list_control_buttons">
         <button class="toggle_filter only_mobile list_actions" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-            <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>
+            @if (Filter.GetActiveSelectionCount(Model) != 0)
+            {
+                <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>
+            }
             <span class="material-icons">filter_list</span>Filter
         </button>
 
@@ -163,10 +166,10 @@
                                         @foreach (var area in AllAreas)
                                         {
                                             <li class="checkbox" style="margin-top: 0;">
-                                                <label>
+                                                <label for=@area.Value>
                                                     @{ InputTag("Area", Model.Area, area.Value);}
+                                                    <span class="label_text">@area.Key</span>
                                                 </label>
-                                                <span>@area.Key</span>
                                             </li>
                                         }
                                     </ul>
@@ -185,26 +188,26 @@
                                         @foreach (var category in AllCategories)
                                         {
                                             <li class="checkbox" style="margin-top: 0;">
-                                                <label>
+                                                <label for="input_@category.Key">
                                                     @{
                                                         InputTag("input_" + category.Key, "submitOnclick", "Category", Model.Category, category.Key);
                                                     }
+                                                    <span class="label_text">@category.Key - @category.Value["presentationstring"]</span>
                                                 </label>
-                                                <span>@category.Key - @category.Value["presentationstring"]</span>
                                             </li>
                                         }
                                         <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
                                         <li class="checkbox">
-                                            <label>
+                                            <label for="redlisted_check">
                                                 <input id="redlisted_check" type="checkbox" asp-for="Redlisted" class="submitOnclick" />
+                                                <span class="label_text">@SearchAndFilter.ChooseRedlisted</span>
                                             </label>
-                                            <span>@SearchAndFilter.ChooseRedlisted</span>
                                         </li>
                                         <li class="checkbox">
-                                            <label>
+                                            <label for="endangered_check">
                                                 <input id="endangered_check" type="checkbox" asp-for="Endangered" class="submitOnclick" />
+                                                <span class="label_text">@SearchAndFilter.ChooseEndangered</span>
                                             </label>
-                                            <span>@SearchAndFilter.ChooseEndangered</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -223,10 +226,10 @@
                                         @foreach (var rank in AllTaxonRanks)
                                         {
                                             <li class="checkbox" style="margin-top: 0;">
-                                                <label>
+                                                <label for=@rank.Key>
                                                     @{ InputTag("TaxonRank", Model.TaxonRank, rank.Key);}
+                                                    <span class="label_text">@rank.Value</span>
                                                 </label>
-                                                <span>@rank.Value</span>
                                             </li>
                                         }
                                     </ul>
@@ -254,7 +257,7 @@
                                                         <span class="list_header_text">
                                                             <span class="filternumber">@Filter.GetActiveFilters("Insects", Model)</span>
                                                         </span>
-                                                        <span id="show_all_insects">Maker alle</span>
+                                                        <span id="show_all_insects">Marker alle</span>
                                                         <label onclick="event.stopPropagation()">
                                                             @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species); }
                                                         </label>
@@ -265,13 +268,12 @@
                                             else
                                             {
                                                 <li class="checkbox">
-                                                    <label>
+                                                    <label for=@species>
                                                         @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species); }
+                                                        <span class="label_text">@species</span>
                                                     </label>
-                                                    <span>@species</span>
                                                 </li>
                                             }
-                                            
                                         }
                                     </ul>
                                 </div>
@@ -290,10 +292,10 @@
                                         @foreach (var habitat in AllHabitats)
                                         {
                                             <li class="checkbox">
-                                                <label>
+                                                <label for=@habitat.Key>
                                                     @{ InputTag("Habitats", Model.Habitats, habitat.Key); }
+                                                    <span class="label_text">@habitat.Value["shortname"]</span>
                                                 </label>
-                                                <span>@habitat.Value["shortname"]</span>
                                             </li>
                                         }
                                     </ul>
@@ -313,10 +315,10 @@
                                         @foreach (var region in AllRegions)
                                         {
                                             <li class="checkbox">
-                                                <label>
+                                                <label for=@region.Key>
                                                     @{ InputTag("Regions", Model.Regions, region.Key);}
+                                                    <span class="label_text">@region.Value</span>
                                                 </label>
-                                                <span>@region.Value</span>
                                             </li>
                                         }
                                     </ul>
@@ -336,10 +338,10 @@
                                         @foreach (var pop in AllEuroPop)
                                         {
                                             <li class="checkbox">
-                                                <label>
+                                                <label for=@pop.Key>
                                                     @{ InputTag("EuroPop", Model.EuroPop, pop.Key);}
+                                                    <span class="label_text">@pop.Value</span>
                                                 </label>
-                                                <span>@pop.Value</span>
                                             </li>
                                         }
                                     </ul>
@@ -359,10 +361,10 @@
                                         @foreach (var criteria in AllCriterias)
                                         {
                                             <li class="checkbox">
-                                                <label>
+                                                <label for=@criteria.Key>
                                                     @{ InputTag("Criterias", Model.Criterias, criteria.Key);}
+                                                    <span class="label_text">@criteria.Key - @criteria.Value</span>
                                                 </label>
-                                                <span>@criteria.Key - @criteria.Value</span>
                                             </li>
                                         }
                                     </ul>
@@ -380,10 +382,10 @@
                                 <div class="filter_extinct">
                                     <ul>
                                         <li class="checkbox">
-                                            <label>
+                                            <label for="PresumedExtinct">
                                                 <input type="checkbox" class="submitOnclick" asp-for="PresumedExtinct" />
+                                                <span class="label_text">Trolig utdødd</span>
                                             </label>
-                                            <span>Trolig utdødd</span>
                                         </li>
                                     </ul>
                                 </div>

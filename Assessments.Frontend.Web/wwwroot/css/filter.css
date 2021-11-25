@@ -195,10 +195,15 @@ button.close_filters {
     width: 15%;
 }
 
-li.checkbox {
+li.checkbox label {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     list-style-type: none;
+}
+
+.label_text {
+    width: 100%;
 }
 
 .filter_groups ul {
@@ -277,6 +282,10 @@ button.list_header {
         justify-content: center;
     }
 
+    li.checkbox {
+        margin: 5px;
+    }
+
     #navbar-mobile {
         z-index: 1;
     }
@@ -286,10 +295,6 @@ button.list_header {
         overflow-y: scroll;
         background: white;
         border: 1px solid lightgray;
-    }
-
-    li.checkbox {
-        margin: 5px;
     }
 
     .filters_bottom {

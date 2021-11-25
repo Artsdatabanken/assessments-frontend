@@ -18,6 +18,17 @@
     padding: 0;
 }
 
+.stat_subtitle {
+    display: inline-block;
+    word-break: break-word;
+    hyphens: auto;
+    font-size: 10pt;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
 
 .graph {
     width: 100%;
@@ -181,36 +192,49 @@
 
 }
 
+@media only screen and (min-width: 281px) and (max-width: 400px){
+    .color_graph .statelement {
+        max-width: 10.5vw;
+    }
+
+    .color_graph .stat_subtitle {
+        font-size: 9px;
+        vertical-align: top;
+    }
+}
+
+
 @media only screen and (max-width: 280px) {
     .color_graph {
         flex-direction: column;
     }
 
-    .color_graph .statelement{
-        display:flex;
-        margin:2px;
+    .color_graph .statelement {
+        display: flex;
+        margin: 2px;
         border-bottom: 1px solid lightgray;
     }
+
     .color_graph .heightbar_blank {
         height: 20px;
         display: inline-block;
-        order:2;
-        width:50%;
+        order: 2;
+        width: 50%;
     }
 
     .color_graph .heightbar_indicator {
         position: relative;
-        background:none;
+        background: none;
         height: 100% !important; /*Clean table view*/
     }
 
     .color_graph .statbox {
-        order:1;
-        width:50%;
-        display:inline-block;
-        color:black;
-        background:none;
-        text-align:right;
+        order: 1;
+        width: 50%;
+        display: inline-block;
+        color: black;
+        background: none;
+        text-align: right;
     }
 
     .color_graph .percent {
@@ -220,6 +244,4 @@
         font-size: 12pt;
         padding: 2px;
     }
-
-
 }

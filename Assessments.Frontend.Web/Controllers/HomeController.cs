@@ -33,14 +33,14 @@ namespace Assessments.Frontend.Web.Controllers
                 // Application root/index
 
                 xw.WriteStartElement("url");
-                xw.WriteElementString("loc", basepath);
+                xw.WriteElementString("loc", basepath + "rodlisteforarter/2021/);
                 xw.WriteEndElement();
 
                 foreach (var assessment in items)
                 {
                     xw.WriteStartElement("url");
                     xw.WriteElementString("loc",
-                        basepath + assessment);
+                        basepath + "rodlisteforarter/2021/" + assessment);
                     // xw.WriteElementString("lastmod", assessment.Updated); // No timestamp for assessment?
                     xw.WriteEndElement();
                 }

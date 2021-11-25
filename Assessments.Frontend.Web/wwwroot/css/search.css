@@ -204,3 +204,11 @@
 .search_match {
     color: #0b8293;
 }
+
+.hit_count_text {
+    display: block;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: normal;
+    color: #0f0f0f;
+    font-size: 21px;
+}

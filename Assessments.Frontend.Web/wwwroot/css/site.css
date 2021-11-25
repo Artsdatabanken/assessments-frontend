@@ -768,3 +768,7 @@ option {
 .content-placer a{
     font-size:initial;
 }
+
+.breadcrumbs li {
+    text-decoration:none;
+}

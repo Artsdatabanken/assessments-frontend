@@ -33,7 +33,7 @@ namespace Assessments.Frontend.Web.Controllers
                 // Application root/index
 
                 xw.WriteStartElement("url");
-                xw.WriteElementString("loc", basepath + "rodlisteforarter/2021/);
+                xw.WriteElementString("loc", basepath + "rodlisteforarter/2021/");
                 xw.WriteEndElement();
 
                 foreach (var assessment in items)

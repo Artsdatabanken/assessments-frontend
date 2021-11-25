@@ -1,12 +1,13 @@
 const addSliders = () => {
     Array.prototype.forEach.call(submitCheckInputs, el => {
         const span = document.createElement("span");
+        const div = document.createElement("div");
         span.setAttribute("class", "slider");
+        div.setAttribute("class", "slider_container toggle_switch");
         parent = el.parentNode;
-        grandParent = parent.parentNode;
-        parent.classList.add("toggle_switch");
-        grandParent.classList.add("switch_list_elemtent");
-        parent.insertBefore(span, el.nextSibling);
+        parent.classList.add("switch_list_elemtent");
+        div.appendChild(span);
+        parent.insertBefore(div, el.nextSibling);
     });
 }
 

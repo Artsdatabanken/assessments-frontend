@@ -45,12 +45,14 @@ input:checked ~ .slider_container .slider {
     border-color: #3d3b3a;
 }
 
-input:checked:focus ~ .slider_container .slider {
+input:checked:focus ~ .slider_container .slider,
+input:checked:hover ~ .slider_container .slider {
     background-color: #035762;
     outline: 2px solid #3d3b3a;
 }
 
-input:focus ~ .slider_container .slider {
+input:focus ~ .slider_container .slider,
+input:hover ~ .slider_container .slider {
     outline: 2px solid #3d3b3a;
 }
 
@@ -63,6 +65,12 @@ input:checked ~ .slider_container .slider:before {
 .switch_list_elemtent {
     justify-content: space-between;
     flex-direction: row-reverse;
+}
+
+.switch_list_elemtent:hover {
+    cursor: pointer;
+    background-color: #7f726b;
+    color: white;
 }
 
 .slider_container {

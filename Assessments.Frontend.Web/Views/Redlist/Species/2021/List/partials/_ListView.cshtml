@@ -35,7 +35,7 @@
                     <div class="element_icon list_cell">
                         @if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
                         {
-                            <img src="@speciesgroup[item.SpeciesGroup]["image"]" />
+                            <img src="@speciesgroup[item.SpeciesGroup]["image"]" alt="@speciesgroupname"/>
                             <span class="speciesgroup_name">@speciesgroupname</span>
                         }
                     </div>

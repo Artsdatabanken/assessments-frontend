@@ -18,7 +18,7 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         <div class="habitat_icon">
             @if (imageurl != null)
             {
-                <img src=@imageurl />
+                <img src=@imageurl alt="Foto som viser @title"/>
             }
         </div>
         @if (title != null)

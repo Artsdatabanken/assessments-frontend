@@ -4,21 +4,24 @@
 
 
 <div class="breadcrumbs">
-    <ul>
+    <ol>
         <li class="lead in-breadcrumb">
             <a asp-controller="Redlist" asp-action="rodlisteforarter">Rødlista for arter</a>
+            <span class="breadcrumbdivider">&gt; </span>
         </li>
-        <span class="breadcrumbdivider">&gt; </span>
+        
         <li class="in-breadcrumb">
             <a asp-controller="Redlist" asp-action="Index2021">2021</a>
+            <span class="breadcrumbdivider">&gt; </span>
         </li>
-        <span class="breadcrumbdivider">&gt; </span>
+        
         @if (@Model.AssessmentArea == "N")
         {
             <li class="in-breadcrumb">
                 <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">
                     Norge
                 </a>
+                <span class="breadcrumbdivider">&gt; </span>
             </li>
         }
         @if (@Model.AssessmentArea == "S")
@@ -27,11 +30,12 @@
                 <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="S">
                     Svalbard
                 </a>
+                <span class="breadcrumbdivider">&gt; </span>
             </li>
         }
-        <span class="breadcrumbdivider">&gt; </span>
-        <li class="in-breadcrumb currentcrumb">
+        
+        <li class="in-breadcrumb currentcrumb"  disabled="true">
             @Model.ScientificName
         </li>
-    </ul>
+    </ol>
 </div>

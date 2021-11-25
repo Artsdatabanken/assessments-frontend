@@ -85,7 +85,7 @@
 }
 
 <div class="empty_filters">
-    <h3>
+    <p class="hit_count_text">
         @FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff
         @if (Filter.GetActiveSelectionCount(Model) > 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
@@ -95,7 +95,7 @@
         {
             GetRemoveSearchAndFilter();
         }
-    </h3>
+    </p>
 </div>
 
 <div class="controls">

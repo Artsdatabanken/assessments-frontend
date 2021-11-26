@@ -42,17 +42,13 @@ const hideFilterButton = () => {
 
 const showFilters = () => {
     filters.style["display"] = "block";
-
     filter_modal_background.style["display"] = "block";
     filter_modal_background.classList.remove("modal_background_open");
-
     filters_scrollable.style["position"] = "relative";
     filters_scrollable.style["width"] = "auto";
     filters_scrollable.style["top"] = "auto";
     filters_scrollable.style["left"] = "auto";
-
     submit_filters.style["display"] = "none";
-
     Array.prototype.forEach.call(filters_close_buttons, el => {
         el.style["display"] = "none";
     });
@@ -67,10 +63,7 @@ const openFilters = () => {
     filters.style["display"] = "block";
     filter_modal_background.style["display"] = "block";
     filter_modal_background.classList.add("modal_background_open");
-    filters_scrollable.style["position"] = "fixed";
-    filters_scrollable.style["width"] = "90vw";
-    filters_scrollable.style["top"] = "5vh";
-    filters_scrollable.style["left"] = "5vw";
+    filters_scrollable.classList.add("open_field")
     Array.prototype.forEach.call(filters_close_buttons, el => {
         el.style["display"] = "block";
     });
@@ -244,3 +237,7 @@ if (filters) {
     }
     initialCollapsibleCheck();
 }
+
+document.getElementById("filter_modal_background").addEventListener('click', function (event) {
+    closeFilters();
+});

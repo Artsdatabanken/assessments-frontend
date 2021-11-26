@@ -239,5 +239,6 @@ if (filters) {
 }
 
 document.getElementById("filter_modal_background").addEventListener('click', function (event) {
+    e.stopPropagation();
     closeFilters();
 });

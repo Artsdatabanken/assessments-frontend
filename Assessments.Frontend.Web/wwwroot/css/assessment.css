@@ -325,7 +325,8 @@ no_distribution {
 
 .vurdert_N .svalbard_land {
     fill: white;
-    stroke-width:0.5px;
+    stroke-width: 0.5px;
+    stroke: #aaa;
 }
 
 .vurdert_S .land:not(.svalbard_land),

@@ -181,6 +181,33 @@
     DARK THEME:
    FUN PROJECT NOT EVEN SLIGHTLY THERE
 */
+
+/* MAP COLOURS */
+.darktheme .vurdert_N,
+.darktheme .vurdert_S_pattedyr,
+.darktheme .vurdert_S,
+.darktheme .no_distribution,
+.darktheme .current,
+.darktheme .sea.current {
+    stroke: #eee;
+    fill: #2b2a2a;
+}
+
+.darktheme .extinct,
+.darktheme .sea.extinct,
+.darktheme .presumed_extinct,
+.darktheme .sea.presumed_extinct,
+.darktheme .presumed,
+.darktheme .sea.presumed,
+.darktheme .known,
+.darktheme .sea.known {
+    stroke: #fff;
+}
+
+.darktheme .vurdert_N .svalbard_land {
+    stroke: black;
+}
+
 /* PURE BLACK BACKGROUND */
 .darktheme,
 .darktheme .main {

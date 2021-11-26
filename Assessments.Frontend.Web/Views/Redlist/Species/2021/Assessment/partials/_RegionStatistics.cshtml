@@ -19,7 +19,7 @@
     void area(string class2, string title)
     {
         <i>
-            <span class="indicator">
+            <span class="indicator @class2">
                 <span class="indicatorcontent sea @class2"></span>
                 <span class="indicatorcontent @class2"></span>
             </span>
@@ -60,7 +60,7 @@
                                 }
                                 else if (region.State == 2)
                                 {
-                                    area("", "Ingen");
+                                    area("none", "Ingen");
                                 }
                                 else if (region.State == 3)
                                 {
@@ -86,7 +86,7 @@
                 @{area("presumed", "Antatt");}
             </li>
             <li class="region">
-                @{area("", "Ingen");}
+                @{area("none", "Ingen");}
             </li>
             <li class="region">
                 @{area("presumed_extinct", "Antatt Utdødd");}

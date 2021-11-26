@@ -211,6 +211,7 @@
 .darktheme .redlist .listheader,
 .darktheme .controls button.active,
 .darktheme .search_dropdown,
+.darktheme .controls .list_actions,
 .darktheme.highcontrast .controls button.active {
     background: #2b2b2b;
 }
@@ -246,6 +247,7 @@
 }
 
 /* Other button bg */
+.darktheme .controls .list_actions,
 .darktheme .button,
 .darktheme .main button {
     background: #484848;
@@ -255,6 +257,7 @@
 /* WHITE FONT COLOR*/
 .darktheme,
 .darktheme header,
+.darktheme .controls .list_actions,
 .darktheme .list-search,
 .darktheme .main-content,
 .darktheme .filter_group button,
@@ -306,6 +309,7 @@
 .darktheme .main button.tertiary,
 .darktheme .sidebarmenu li h3 {
     color: #f97474;
+    border-color: #f97474;
 }
 
 /* Blackish color */
@@ -409,6 +413,11 @@
 .darktheme .graph .heightbar_indicator,
 .darktheme .down_graph .heightbar_indicator {
     border: 1px solid white;
+}
+
+.darktheme input:checked ~ .slider_container .slider,
+.darktheme .slider {
+    border-color: white;
 }
 
 /* HIGH CONTRAST + DARK THEME */

@@ -91,6 +91,8 @@ function expand(element, className, id) {
     }
 }
 
+/* THEME MODES */
+
 function highContrastMode(thisbutton,className) {
     var mainparent = document.getElementById("bodywrap");
     if (mainparent.classList && mainparent.classList.contains(className)) {
@@ -110,3 +112,30 @@ function expandThemeButtons() {
         mainparent.style.display = "block";
     }
 }
+
+const initialContrast = matchMedia('(forced-colors: active)');
+const initialTheme = matchMedia('(prefers-color-scheme: dark)');
+
+function checks() {
+    var mainparent = document.getElementById("bodywrap");
+    if (initialTheme.matches) {
+        mainparent.classList.add("darktheme");
+    } else {
+        if (mainparent.classList) {
+            mainparent.classList.remove("darktheme");
+        }
+    }
+    if (initialContrast.matches) {        
+        mainparent.classList.add("highcontrast");
+    } else {
+        if (mainparent.classList) {
+            mainparent.classList.remove("highcontrast");
+        }
+    }
+}
+// run the checks immediately
+checks();
+
+// listen for any changes performed by people tinkering with their settings
+initialContrast.addListener(checks);
+initialTheme.addListener(checks);

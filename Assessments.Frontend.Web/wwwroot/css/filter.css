@@ -167,10 +167,15 @@ button.close_filters {
     top: 0px;
     bottom: 0px;
     position: fixed;
-    margin-left: -15px;
+    left: 0;
+    right: 0;
     width: 100vw;
     height: 100vh;
     z-index: 12;
+}
+
+.modal_background_open:hover{
+    cursor:pointer;
 }
 
 /* FILTER */
@@ -290,11 +295,19 @@ button.list_header {
         z-index: 1;
     }
 
-    #filters_scrollable {
-        max-height: 90vh;
-        overflow-y: scroll;
-        background: white;
+    .filter_background {
+        height: 100%;
+        background: #f7f7f7;
         border: 1px solid lightgray;
+        width: 90%;
+        max-width: 90vw;
+    }
+
+    .filter_scroll_area {
+        max-height: calc(100vh - 110px);
+        overflow: scroll;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
     }
 
     .filters_bottom {

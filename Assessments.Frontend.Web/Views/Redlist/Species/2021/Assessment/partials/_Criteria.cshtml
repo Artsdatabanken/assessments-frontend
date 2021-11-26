@@ -530,56 +530,58 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             </li>
                         }
                     </ul>
-                }
-                
-                <ul class="second">
-                    @{var activeC = @Criteria.inString("C", @Model.CriteriaSummarized); }
-                    <li class="@activeC">
-                        <span class="text_container">
-                            <span class="text_collection">
-                                <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
-                                    @{expandOrBullet(true);}
-                                    <span class="text_text clickable">
-                                        Konklusjon for C-kriteriet
-                                        <br />
-                                    </span>
-                                </span>
-
-                                @{
-                                    string c_category = Model.Category;
-                                    bool c_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
-                                    if (c_comparison)
-                                    {
-                                        c_category = Model.CategoryAdjustedFrom;
-                                    }
-                                }
-                                <p>
-                                    @if (activeC == "active")
-                                    {
-                                        <span class="b_summary">
-                                            <span class="graphic_element @c_category">@c_category</span>
-                                            <span>
-                                                Kombinasjon av populasjonsstørrelsen og underkriteriene gir til sammen kategori
-                                                @if (c_comparison)
-                                                {
-                                                    @c_category
-                                                }
-                                                else
-                                                {
-                                                    <partial name="/Views/Shared/_Category.cshtml" />
-                                                }
-                                            </span>
+                     if (key == "C"){
+                      <ul class="second">
+                        @{var activeC = @Criteria.inString("C", @Model.CriteriaSummarized); }
+                        <li class="@activeC">
+                            <span class="text_container">
+                                <span class="text_collection">
+                                    <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
+                                        @{expandOrBullet(true);}
+                                        <span class="text_text clickable">
+                                            Konklusjon for C-kriteriet
+                                            <br />
                                         </span>
+                                    </span>
+
+                                    @{
+                                        string c_category = Model.Category;
+                                        bool c_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
+                                        if (c_comparison)
+                                        {
+                                            c_category = Model.CategoryAdjustedFrom;
+                                        }
                                     }
-                                    else
-                                    {
-                                        <span>C-kriteriet er ikke gjeldende</span>
-                                    }
-                                </p>
+                                    <p>
+                                        @if (activeC == "active")
+                                        {
+                                            <span class="b_summary">
+                                                <span class="graphic_element @c_category">@c_category</span>
+                                                <span>
+                                                    Kombinasjon av populasjonsstørrelsen og underkriteriene gir til sammen kategori
+                                                    @if (c_comparison)
+                                                    {
+                                                        @c_category
+                                                    }
+                                                    else
+                                                    {
+                                                        <partial name="/Views/Shared/_Category.cshtml" />
+                                                    }
+                                                </span>
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span>C-kriteriet er ikke gjeldende</span>
+                                        }
+                                    </p>
+                                </span>
                             </span>
-                        </span>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                    }
+
+                }
                 
                 @if (@value.ContainsKey("options"))
                 {

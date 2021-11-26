@@ -465,7 +465,7 @@
 .darktheme.highcontrast .search_matchedname,
 .darktheme.highcontrast .search_match,
 .darktheme.highcontrast .element_popular_name {
-    color: #ffbd78;
+    color: #f9da62;
 }
 
 .darktheme.highcontrast input:checked + .slider {
@@ -518,4 +518,11 @@
 
 .darktheme.highcontrast .category_displayer .active .category_item span{
     color: black;
+}
+
+/* RED BACKGROUND */
+.darktheme.highcontrast .page-link,
+.darktheme.highcontrast .button.primary,
+.darktheme.highcontrast .main button.primary {
+    background: #8a0014;
 }

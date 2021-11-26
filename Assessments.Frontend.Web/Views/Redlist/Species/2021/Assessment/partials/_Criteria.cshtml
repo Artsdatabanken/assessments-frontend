@@ -265,7 +265,7 @@
             string min = @quantile.Min;
             string max = @quantile.Max;
 
-            if (quantile.Punktestimat == false) // true = default, thus may still include blank fields.
+            if (quantile.Punktestimat == false && !string.IsNullOrEmpty(@quantile.Minintervall) && !string.IsNullOrEmpty(@quantile.Maxintervall)) // true = default, thus may still include blank fields.
             {
                 estimated = @quantile.Minintervall + " - " + @quantile.Maxintervall;
             }
@@ -286,7 +286,7 @@
                     <span>Verdien antas å ligge mellom @FormatNumeric(min) @Html.Raw(unit) og @FormatNumeric(max) @Html.Raw(unit).</span><br />
 
                 }
-                @if (estimated.Length > 0)
+                @if (estimated.Length > 0 && @estimated != "-")
                 {
                     <span>Mest trolig er den @estimated @Html.Raw(unit).</span>
                 }

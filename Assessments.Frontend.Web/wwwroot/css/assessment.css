@@ -439,7 +439,6 @@ no_distribution {
 
 /* MAP COLOURS */
 
-
 .extinct {
     background: #cd4646;
     fill: #cd4646;
@@ -501,6 +500,10 @@ no_distribution {
 
 .indicator:not(:empty) {
     border: 1px solid #4c4a48;
+}
+
+.indicator.none {
+    display: none;
 }
 
 span.area {

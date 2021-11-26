@@ -11,7 +11,7 @@
             @ViewBag.glossary["degrees"]["title"]
         </h3>
         <p>
-            @Model.RationaleCategoryAdjustment
+            @Html.Raw(Model.RationaleCategoryAdjustment)
         </p>
         <p>
             <span class="graphic_element @Model.CategoryAdjustedFrom">@Model.CategoryAdjustedFrom</span>
@@ -21,7 +21,7 @@
             <span class="graphic_element @Model.CategoryAdjustedTo.Substring(0,2) degraded">@Model.CategoryAdjustedTo</span>
         </p>
 
-        <p>@ViewBag.glossary["degrees"]["description"]</p>
+        <p>@Html.Raw(ViewBag.glossary["degrees"]["description"])</p>
 
 
 

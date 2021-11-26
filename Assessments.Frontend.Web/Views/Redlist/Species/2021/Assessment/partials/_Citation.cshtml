@@ -7,13 +7,17 @@
 
 @{
     var expertCommitteeMembers = await _expertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
+
+    var au = @expertCommitteeMembers.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList();
+    var sortedlist = au.OrderBy(x => x).ToList();
+    string authors = sortedlist.JoinAnd(", ", " og ");
 }
 
 @if (expertCommitteeMembers.Any())
 {
     <h2>Sitering</h2>
     <p class="citation">
-        @expertCommitteeMembers.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList().JoinAnd(", ", " og ") (2021, 24. november).
+        @authors (2021, 24. november).
         @Model.SpeciesGroup: Vurdering av @Model.PopularName @Model.ScientificName for @(Model.AssessmentArea == "N" ? "Norge" : "Svalbard").
         Norsk rødliste for arter 2021. Artsdatabanken. @Context.Request.GetEncodedUrl()
     </p>

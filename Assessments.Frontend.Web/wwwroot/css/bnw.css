@@ -1,7 +1,7 @@
 /* BUTTONs FOR THEME SELECTING */
 
 #headermenu {
-    z-index: 3;
+    z-index: 13;
 }
 
 .themeselector {
@@ -14,7 +14,7 @@
 }
 
 .themeselectordropdown {
-    z-index: 3;
+    z-index: 13;
     display:none;
     position:absolute;
     top:50px;
@@ -181,6 +181,33 @@
     DARK THEME:
    FUN PROJECT NOT EVEN SLIGHTLY THERE
 */
+
+/* MAP COLOURS */
+.darktheme .vurdert_N,
+.darktheme .vurdert_S_pattedyr,
+.darktheme .vurdert_S,
+.darktheme .no_distribution,
+.darktheme .current,
+.darktheme .sea.current {
+    stroke: #eee;
+    fill: #2b2a2a;
+}
+
+.darktheme .extinct,
+.darktheme .sea.extinct,
+.darktheme .presumed_extinct,
+.darktheme .sea.presumed_extinct,
+.darktheme .presumed,
+.darktheme .sea.presumed,
+.darktheme .known,
+.darktheme .sea.known {
+    stroke: #fff;
+}
+
+.darktheme .vurdert_N .svalbard_land {
+    stroke: black;
+}
+
 /* PURE BLACK BACKGROUND */
 .darktheme,
 .darktheme .main {
@@ -438,7 +465,7 @@
 .darktheme.highcontrast .search_matchedname,
 .darktheme.highcontrast .search_match,
 .darktheme.highcontrast .element_popular_name {
-    color: #ffbd78;
+    color: #f9da62;
 }
 
 .darktheme.highcontrast input:checked + .slider {
@@ -491,4 +518,11 @@
 
 .darktheme.highcontrast .category_displayer .active .category_item span{
     color: black;
+}
+
+/* RED BACKGROUND */
+.darktheme.highcontrast .page-link,
+.darktheme.highcontrast .button.primary,
+.darktheme.highcontrast .main button.primary {
+    background: #8a0014;
 }

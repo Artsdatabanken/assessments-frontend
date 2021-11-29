@@ -115,12 +115,12 @@
         </div>
 
     }
-    void makeFilterElement(string buttontext, string filtername, string action, string id, string buttonname)
+    void makeFilterElement(string buttontext, string filtername, string action, string id, string buttonname,string numbername)
     {
         InputTag(action, "collapse_checkbox", "IsCheck", Model.IsCheck, filtername);
         <button name=@buttonname class="list_header" id=@id onclick="collapse('@action')" type="button">
             @buttontext
-            <span class="filternumber">@Filter.GetActiveFilters(filtername, Model)</span>
+            <span class="filternumber">@Filter.GetActiveFilters(numbername, Model)</span>
         </button>
     }
 }
@@ -179,7 +179,7 @@
                         <div class="filter_scroll_area">
                             <ul>
                                 <li class="filter_group">
-                                    @{makeFilterElement(@SearchAndFilter.SearchChooseArea, "Area", "show_area", "list_header_area", "områdefiltre");}
+                                    @{makeFilterElement(@SearchAndFilter.SearchChooseArea, "Area", "show_area", "list_header_area", "områdefiltre", "Area");}
                                     <div class="filter_area">
                                         <ul>
                                             @foreach (var area in AllAreas)
@@ -190,7 +190,7 @@
                                     </div>
                                 </li>
                                 <li class="filter_group">
-                                    @{makeFilterElement(@SearchAndFilter.SearchChooseCategory, "Category", "show_category", "list_header_category", "kategorifiltre");}
+                                    @{makeFilterElement(@SearchAndFilter.SearchChooseCategory, "Category", "show_category", "list_header_category", "kategorifiltre", "Category");}
                                     <div class="filter_category">
                                         <ul>
                                             @foreach (var category in AllCategories)
@@ -203,7 +203,7 @@
                                                         <span class="label_text">@category.Key - @category.Value["presentationstring"]</span>
                                                     </label>
                                                 </li>
-                                            }
+                                                            }
                                             <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
                                             <li class="checkbox">
                                                 <label for="redlisted_check">
@@ -221,7 +221,7 @@
                                     </div>
                                 </li>
                                 <li class="filter_group">
-                                    @{makeFilterElement(@SearchAndFilter.SearchFilterTaxonRank, "TaxonRank", "show_taxon_rank", "list_header_taxon_rank", "'taksonomisk nivå'-filtre");}
+                                    @{makeFilterElement(@SearchAndFilter.SearchFilterTaxonRank, "TaxonRank", "show_taxon_rank", "list_header_taxon_rank", "'taksonomisk nivå'-filtre", "TaxonRank");}
                                     <div class="filter_taxon_rank">
                                         <ul>
                                             @foreach (var rank in AllTaxonRanks)
@@ -232,7 +232,7 @@
                                     </div>
                                 </li>
                                 <li class="filter_group">
-                                    @{makeFilterElement("Artsgruppe", "SpeciesGroups", "show_species_groups", "list_header_species_groups", "artsgruppefiltre");}                                    
+                                    @{makeFilterElement("Artsgruppe", "SpeciesGroups", "show_species_groups", "list_header_species_groups", "artsgruppefiltre", "SpeciesGroups");}                                    
                                     <div class="filter_species_groups">
                                         <ul>
                                             @foreach (var species in AllSpeciesGroups)
@@ -263,14 +263,7 @@
                                     </div>
                                 </li>
                                 <li class="filter_group">
-                                    @{ // TODO HABITAT VS HABITATS... can't fix till thats fixed
-                                        InputTag("show_habitat", "collapse_checkbox", "IsCheck", Model.IsCheck, "Habitat");}
-                                    <button name="hovedhabitatfiltre" class="list_header" id="list_header_habitat" onclick="collapse('show_habitat')" type="button">
-                                        <span class="list_header_text">
-                                            Hovedhabitat
-                                            <span class="filternumber">@Filter.GetActiveFilters("Habitats", Model)</span>
-                                        </span>
-                                    </button>
+                                    @{makeFilterElement("Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");}
                                     <div class="filter_habitat">
                                         <ul>
                                             @foreach (var habitat in AllHabitats)
@@ -281,14 +274,7 @@
                                     </div>
                                 </li>
                                 <li class="filter_group">
-                                    @{ // TODO REGION VS REGIONS
-                                        InputTag("show_region", "collapse_checkbox", "IsCheck", Model.IsCheck, "Region");}
-                                    <button name="regionfiltre" class="list_header" id="list_header_region" onclick="collapse('show_region')" type="button">
-                                        <span class="list_header_text">
-                                            Regioner og havområder
-                                            <span class="filternumber">@Filter.GetActiveFilters("Regions", Model)</span>
-                                        </span>
-                                    </button>
+                                    @{makeFilterElement("Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");}
                                     <div class="filter_region">
                                         <ul>
                                             @foreach (var region in AllRegions)
@@ -299,7 +285,7 @@
                                     </div>
                                 </li>
                                 <li class="filter_group">
-                                    @{makeFilterElement("Andel av europeisk populasjon", "EuroPop", "show_european_population", "list_header_european_population", "'andel av europeisk populasjon'-filtre");}
+                                    @{makeFilterElement("Andel av europeisk populasjon", "EuroPop", "show_european_population", "list_header_european_population", "'andel av europeisk populasjon'-filtre", "EuroPop");}
                                     <div class="filter_european_population">
                                         <ul>
                                             @foreach (var pop in AllEuroPop)
@@ -310,14 +296,7 @@
                                     </div>
                                 </li>
                                 <li class="filter_group">
-                                    @{// CRITERIA VS CRITERIAS
-                                    InputTag("show_criteria", "collapse_checkbox", "IsCheck", Model.IsCheck, "Criteria");}
-                                    <button name="kriteriefiltre" class="list_header" id="list_header_criteria" onclick="collapse('show_criteria')" type="button">
-                                        <span class="list_header_text">
-                                            @SearchAndFilter.SearchChooseCriteria
-                                            <span class="filternumber">@Filter.GetActiveFilters("Criterias", Model)</span>
-                                        </span>
-                                    </button>
+                                    @{makeFilterElement(@SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");}
                                     <div class="filter_criteria">
                                         <ul>
                                             @foreach (var criteria in AllCriterias)
@@ -328,7 +307,13 @@
                                     </div>
                                 </li>
                                 <li class="filter_group">
-                                    @{makeFilterElement("Trolig utdødd", "PresumedExtinct", "show_extinct", "list_header_extinct", "'trolig utdødd'-filter");}
+                                    @{ InputTag("show_extinct", "collapse_checkbox", "IsCheck", Model.IsCheck, "Extinct");}
+                                    <button name="'trolig utdødd'-filter" class="list_header" id="list_header_extinct" onclick="collapse('show_extinct')" type="button">
+                                        <span class="list_header_text">
+                                            Trolig utdødd
+                                            <span class="filternumber">@Filter.GetActiveFilters("PresumedExtinct", Model)</span>
+                                        </span>
+                                    </button>
                                     <div class="filter_extinct">
                                         <ul>
                                             <li class="checkbox">

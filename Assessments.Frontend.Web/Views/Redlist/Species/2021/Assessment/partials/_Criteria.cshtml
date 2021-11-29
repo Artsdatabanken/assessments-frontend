@@ -209,18 +209,24 @@
                 }
 
                 string box_class = "";
-                
+
                 if ((k == "B1" || k == "B2") && labels == "NT")
                 {
                     unit = string.Empty;
                 }
 
+                string catval_corrected = catval;
+
+                if (k == "C1" && labels == "LC")
+                {
+                    catval_corrected = "5 % på 10 år eller 3 generasjoner";
+                }
 
                 <li class="thresholdlist @className">
                     <span class="graphic_element @labels @box_class">@labels</span>
                      @{categoryDescription(labels);}
                     <span class="threshold_element">
-                        @comparator @Html.Raw(catval) @Html.Raw(unit)
+                        @comparator @Html.Raw(catval_corrected) @Html.Raw(unit)
                     </span>
                 </li>
             }

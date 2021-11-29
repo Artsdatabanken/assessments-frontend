@@ -203,7 +203,7 @@
                                                         <span class="label_text">@category.Key - @category.Value["presentationstring"]</span>
                                                     </label>
                                                 </li>
-                                                            }
+                                            }
                                             <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
                                             <li class="checkbox">
                                                 <label for="redlisted_check">
@@ -231,8 +231,9 @@
                                         </ul>
                                     </div>
                                 </li>
+                                
                                 <li class="filter_group">
-                                    @{makeFilterElement("Artsgruppe", "SpeciesGroups", "show_species_groups", "list_header_species_groups", "artsgruppefiltre", "SpeciesGroups");}                                    
+                                    @{makeFilterElement("Artsgruppe", "SpeciesGroups", "show_species_groups", "list_header_species_groups", "artsgruppefiltre", "SpeciesGroups");}
                                     <div class="filter_species_groups">
                                         <ul>
                                             @foreach (var species in AllSpeciesGroups)

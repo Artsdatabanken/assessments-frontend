@@ -31,7 +31,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                         return $"{Model.SpeciesGroups.Length}";
                     }
                     return String.Empty;
-                case "Habitats":
+                case "Habitat":
                     if (Model.Habitats?.Any() == true)
                         return $"{Model.Habitats.Length}";
                     return String.Empty;

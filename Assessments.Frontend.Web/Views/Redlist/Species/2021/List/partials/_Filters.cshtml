@@ -40,7 +40,7 @@
                     <li class="checkbox">
                         <label for=@insect>
                             @{
-                                InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect); 
+                                InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect);
                             }
                             <span class="label_text">@insect</span>
                         </label>
@@ -58,17 +58,18 @@
             @if (Filter.GetActiveSelectionCount(Model) > 1)
             {
                 <span>filtre</span>
-            } else 
+            }
+            else
             {
                 <span>filter</span>
             }
-            
+
             <button class="button tinybutton tertiary" name="remove_filters" value="true">
                 <span class="material-icons">close</span>Fjern
             </button>
         }
 
-            
+
 
         @if (Filter.GetActiveSelectionCount(Model) > 0 && !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
@@ -82,6 +83,17 @@
             </button>
         }
     }
+
+    
+    void makeCheckBoxLi(string key, string value, string name, string[] model)
+    {
+        <li class="checkbox">
+            <label for=@key>
+                @{ InputTag(name, model, key);}
+                <span class="label_text">@value</span>
+            </label>
+        </li>
+    }    
 }
 
 <div class="empty_filters">
@@ -91,9 +103,15 @@
         {
             <span>basert på</span>
         }
+
+
         @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
             GetRemoveSearchAndFilter();
+            <span class="ffs">
+                @{Filter.GetActiveSelection(Model); }
+            </span>
+
         }
     </p>
 </div>
@@ -134,7 +152,7 @@
                             <span class="material-icons">
                                 filter_list
                             </span>
-                            <span>Filter</span>                          
+                            <span>Filter</span>
                         </h3>
                         <div class="close_reset_filter">
                             <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
@@ -155,12 +173,7 @@
                                         <ul>
                                             @foreach (var area in AllAreas)
                                             {
-                                                <li class="checkbox" style="margin-top: 0;">
-                                                    <label for=@area.Value>
-                                                        @{ InputTag("Area", Model.Area, area.Value);}
-                                                        <span class="label_text">@area.Key</span>
-                                                    </label>
-                                                </li>
+                                                makeCheckBoxLi(area.Value, area.Key, "Area", Model.Area);
                                             }
                                         </ul>
                                     </div>
@@ -215,12 +228,7 @@
                                         <ul>
                                             @foreach (var rank in AllTaxonRanks)
                                             {
-                                                <li class="checkbox" style="margin-top: 0;">
-                                                    <label for=@rank.Key>
-                                                        @{ InputTag("TaxonRank", Model.TaxonRank, rank.Key);}
-                                                        <span class="label_text">@rank.Value</span>
-                                                    </label>
-                                                </li>
+                                                makeCheckBoxLi(rank.Key, rank.Value, "TaxonRank", Model.TaxonRank);
                                             }
                                         </ul>
                                     </div>
@@ -257,17 +265,14 @@
                                                 }
                                                 else
                                                 {
-                                                    <li class="checkbox">
-                                                        <label for=@species>
-                                                            @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species); }
-                                                            <span class="label_text">@species</span>
-                                                        </label>
-                                                    </li>
+                                                    makeCheckBoxLi(@species, @species, "SpeciesGroups", Model.SpeciesGroups);
                                                 }
                                             }
                                         </ul>
                                     </div>
                                 </li>
+
+
 
                                 <li class="filter_group">
                                     @{ InputTag("show_habitat", "collapse_checkbox", "IsCheck", Model.IsCheck, "Habitat");}
@@ -281,16 +286,12 @@
                                         <ul>
                                             @foreach (var habitat in AllHabitats)
                                             {
-                                                <li class="checkbox">
-                                                    <label for=@habitat.Key>
-                                                        @{ InputTag("Habitats", Model.Habitats, habitat.Key); }
-                                                        <span class="label_text">@habitat.Value["shortname"]</span>
-                                                    </label>
-                                                </li>
+                                                makeCheckBoxLi(@habitat.Key, @habitat.Value["shortname"], "Habitats", Model.Habitats);
                                             }
                                         </ul>
                                     </div>
                                 </li>
+
 
                                 <li class="filter_group">
                                     @{ InputTag("show_region", "collapse_checkbox", "IsCheck", Model.IsCheck, "Region");}
@@ -304,12 +305,7 @@
                                         <ul>
                                             @foreach (var region in AllRegions)
                                             {
-                                                <li class="checkbox">
-                                                    <label for=@region.Key>
-                                                        @{ InputTag("Regions", Model.Regions, region.Key);}
-                                                        <span class="label_text">@region.Value</span>
-                                                    </label>
-                                                </li>
+                                                makeCheckBoxLi(region.Key, @region.Value, "Regions", Model.Regions);
                                             }
                                         </ul>
                                     </div>
@@ -327,12 +323,7 @@
                                         <ul>
                                             @foreach (var pop in AllEuroPop)
                                             {
-                                                <li class="checkbox">
-                                                    <label for=@pop.Key>
-                                                        @{ InputTag("EuroPop", Model.EuroPop, pop.Key);}
-                                                        <span class="label_text">@pop.Value</span>
-                                                    </label>
-                                                </li>
+                                                makeCheckBoxLi(pop.Key, pop.Value, "EuroPop", Model.EuroPop);
                                             }
                                         </ul>
                                     </div>
@@ -350,12 +341,7 @@
                                         <ul>
                                             @foreach (var criteria in AllCriterias)
                                             {
-                                                <li class="checkbox">
-                                                    <label for=@criteria.Key>
-                                                        @{ InputTag("Criterias", Model.Criterias, criteria.Key);}
-                                                        <span class="label_text">@criteria.Key - @criteria.Value</span>
-                                                    </label>
-                                                </li>
+                                                makeCheckBoxLi(criteria.Key, @criteria.Key + " - " + @criteria.Value, "Criterias", Model.Criterias);
                                             }
                                         </ul>
                                     </div>

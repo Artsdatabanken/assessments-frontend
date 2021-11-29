@@ -30,7 +30,6 @@
     {
         InputTag(value, "submitOnclick", name, elements, value);
     }
-
     void getInsectsList(string[] insects)
     {
         <div class="filter_insects">
@@ -49,7 +48,6 @@
             </ul>
         </div>
     }
-
     void GetRemoveSearchAndFilter()
     {
         @if (Filter.GetActiveSelectionCount(Model) > 0)
@@ -68,9 +66,6 @@
                 <span class="material-icons">close</span>Fjern
             </button>
         }
-
-
-
         @if (Filter.GetActiveSelectionCount(Model) > 0 && !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
             <span>og</span>
@@ -83,8 +78,6 @@
             </button>
         }
     }
-
-    
     void makeCheckBoxLi(string key, string value, string name, string[] model)
     {
         <li class="checkbox">
@@ -93,9 +86,38 @@
                 <span class="label_text">@value</span>
             </label>
         </li>
-    }    
+    }
+    void filterHeader()
+    {
+        <h3 class="toggle_filter filter_header">
+            <span class="material-icons">filter_list</span>
+            <span>Filter</span>
+        </h3>
+        <div class="close_reset_filter">
+            <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
+                <span class="material-icons">close</span>
+            </button>
+        </div>
+    }
+    void filterMobileButtons()
+    {
+        <div class="filters_bottom">
+            <button class="close_filters" name="Lukk filtre" type="button" onclick="closeFilters()">
+                Avslutt
+                <span class="material-icons">close</span>
+            </button>
+            <button class="hideonmobile tertiary" type="submit" name="Export" value="true" formtarget="_blank">
+                <span class="material-icons">file_download</span> Eksporter
+            </button>
+            <button id="submit_filters" name="Påfør filter" type="submit" class="primary">
+                <span class="material-icons">done</span> Påfør
+            </button>
+        </div>
+
+    }
 }
 
+<!--- # of hits in search and their corresponding filter-chips -->
 <div class="empty_filters">
     <p class="hit_count_text">
         @FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff
@@ -108,14 +130,11 @@
         @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
             GetRemoveSearchAndFilter();
-            <span class="ffs">
-                @{Filter.GetActiveSelection(Model); }
-            </span>
-
         }
     </p>
 </div>
 
+<!-- CONTROL BUTTONS and toggles-->
 <div class="controls">
     <div class="list_control_buttons">
         <button class="toggle_filter only_mobile list_actions" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
@@ -148,17 +167,7 @@
             <div id="filter_modal_background">
                 <div id="filters_scrollable" class="filter_background">
                     <div class="filter_groups">
-                        <h3 class="toggle_filter filter_header">
-                            <span class="material-icons">
-                                filter_list
-                            </span>
-                            <span>Filter</span>
-                        </h3>
-                        <div class="close_reset_filter">
-                            <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
-                                <span class="material-icons">close</span>
-                            </button>
-                        </div>
+                        @{filterHeader();}
                         <div class="filter_scroll_area">
                             <ul>
                                 <li class="filter_group">
@@ -368,19 +377,7 @@
                                 </li>
                             </ul>
                         </div>
-
-                        <div class="filters_bottom">
-                            <button class="close_filters" name="Lukk filtre" type="button" onclick="closeFilters()">
-                                Avslutt
-                                <span class="material-icons">close</span>
-                            </button>
-                            <button class="hideonmobile tertiary" type="submit" name="Export" value="true" formtarget="_blank">
-                                <span class="material-icons">file_download</span> Eksporter
-                            </button>
-                            <button id="submit_filters" name="Påfør filter" type="submit" class="primary">
-                                <span class="material-icons">done</span> Påfør
-                            </button>
-                        </div>
+                        @{ filterMobileButtons();}
                     </div>
                 </div>
             </div>

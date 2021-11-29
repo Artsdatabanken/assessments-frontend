@@ -87,34 +87,6 @@
             </label>
         </li>
     }
-    void filterHeader()
-    {
-        <h3 class="toggle_filter filter_header">
-            <span class="material-icons">filter_list</span>
-            <span>Filter</span>
-        </h3>
-        <div class="close_reset_filter">
-            <button class="close_filters closebutton" name="Lukk filtre" type="button" onclick="closeFilters()">
-                <span class="material-icons">close</span>
-            </button>
-        </div>
-    }
-    void filterMobileButtons()
-    {
-        <div class="filters_bottom">
-            <button class="close_filters" name="Lukk filtre" type="button" onclick="closeFilters()">
-                Avslutt
-                <span class="material-icons">close</span>
-            </button>
-            <button class="hideonmobile tertiary" type="submit" name="Export" value="true" formtarget="_blank">
-                <span class="material-icons">file_download</span> Eksporter
-            </button>
-            <button id="submit_filters" name="Påfør filter" type="submit" class="primary">
-                <span class="material-icons">done</span> Påfør
-            </button>
-        </div>
-
-    }
     void makeFilterElement(string buttontext, string filtername, string action, string id, string buttonname,string numbername)
     {
         InputTag(action, "collapse_checkbox", "IsCheck", Model.IsCheck, filtername);
@@ -175,7 +147,7 @@
             <div id="filter_modal_background">
                 <div id="filters_scrollable" class="filter_background">
                     <div class="filter_groups">
-                        @{filterHeader();}
+                        <partial name="/Views/Redlist/Species/2021/List/partials/_FilterHeader.cshtml" />
                         <div class="filter_scroll_area">
                             <ul>
                                 <li class="filter_group">
@@ -231,7 +203,7 @@
                                         </ul>
                                     </div>
                                 </li>
-                                
+
                                 <li class="filter_group">
                                     @{makeFilterElement("Artsgruppe", "SpeciesGroups", "show_species_groups", "list_header_species_groups", "artsgruppefiltre", "SpeciesGroups");}
                                     <div class="filter_species_groups">
@@ -328,7 +300,7 @@
                                 </li>
                             </ul>
                         </div>
-                        @{ filterMobileButtons();}
+                        <partial name="/Views/Redlist/Species/2021/List/partials/_FilterMobileButtons.cshtml" />
                     </div>
                 </div>
             </div>

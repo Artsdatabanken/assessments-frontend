@@ -3,9 +3,8 @@ name: Feature branches .NET Core
 
 on:
   push:
-    branches-ignore:
-      - master
-      - main 
+    branches:
+      - 'develop'
    
 jobs:
   build:

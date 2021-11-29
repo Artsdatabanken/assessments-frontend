@@ -544,8 +544,9 @@ option {
     color: black;
 }
 
-.header nav{
-    background: #751111;
+.header nav {
+    background: transparent;
+    height: 0;
 }
 
 .title_header {

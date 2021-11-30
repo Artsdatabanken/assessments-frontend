@@ -304,6 +304,8 @@
     color: white;
 }
 
+/* TODO: Fix white text too high contrast being almost painfully white */
+
 
 /* DISABLED/UNCLICKABLE LINKS */
 .darktheme .byline,

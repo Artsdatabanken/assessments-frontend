@@ -210,11 +210,7 @@
                                         </ul>
                                     </div>
                                 </li>
-
-                                @{makeFilterGroup(true, "filter_taxon_rank", "TaxonRank", Model.TaxonRank, AllTaxonRanks,
-                                              @SearchAndFilter.SearchFilterTaxonRank, "TaxonRank", "show_taxon_rank", "list_header_taxon_rank", "'taksonomisk nivå'-filtre", "TaxonRank");}
-
-
+                                @{makeFilterGroup(true, "filter_taxon_rank", "TaxonRank", Model.TaxonRank, AllTaxonRanks, @SearchAndFilter.SearchFilterTaxonRank, "TaxonRank", "show_taxon_rank", "list_header_taxon_rank", "'taksonomisk nivå'-filtre", "TaxonRank");}
 
                                 <li class="filter_group">
                                     @{makeFilterElement("Artsgruppe", "SpeciesGroups", "show_species_groups", "list_header_species_groups", "artsgruppefiltre", "SpeciesGroups");}
@@ -247,18 +243,12 @@
                                         </ul>
                                     </div>
                                 </li>
-                                @{makeFilterGroup(true, "filter_habitat", "Habitats", Model.Habitats, AllHabitats,
-                                             "Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");}
-
-
-                                @{makeFilterGroup(true, "filter_region", "Regions", Model.Regions, AllRegions,
-                                            "Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");}
-
-                                @{makeFilterGroup(true, "filter_european_population", "EuroPop", Model.EuroPop, AllEuroPop,
-                                            "Andel av europeisk populasjon", "EuroPop", "show_european_population", "list_header_european_population", "'andel av europeisk populasjon'-filtre", "EuroPop");}
-
-                                @{makeFilterGroup(true, "filter_criteria", "Criterias", Model.Criterias, AllCriterias,
-                                            @SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");}
+                                @{
+                                    makeFilterGroup(true, "filter_habitat", "Habitats", Model.Habitats, AllHabitats,"Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");
+                                    makeFilterGroup(true, "filter_region", "Regions", Model.Regions, AllRegions,"Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");
+                                    makeFilterGroup(true, "filter_european_population", "EuroPop", Model.EuroPop, AllEuroPop,"Andel av europeisk populasjon", "EuroPop", "show_european_population", "list_header_european_population", "'andel av europeisk populasjon'-filtre", "EuroPop");
+                                    makeFilterGroup(true, "filter_criteria", "Criterias", Model.Criterias, AllCriterias,@SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");
+                                 }
 
                                 <li class="filter_group">
                                     @{ InputTag("show_extinct", "collapse_checkbox", "IsCheck", Model.IsCheck, "Extinct");}

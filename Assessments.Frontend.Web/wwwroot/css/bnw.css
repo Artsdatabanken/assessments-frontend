@@ -215,9 +215,9 @@
 }
 
 @media only screen and (max-width: 750px) {
-
+    .darktheme .filter_background,
     .darktheme .filter_groups {
-        background:black;
+        background: black;
     }
 
 }

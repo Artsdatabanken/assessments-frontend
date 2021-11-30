@@ -304,6 +304,8 @@
     color: white;
 }
 
+/* TODO: Fix white text too high contrast being almost painfully white */
+
 
 /* DISABLED/UNCLICKABLE LINKS */
 .darktheme .byline,
@@ -327,6 +329,8 @@
 }
 
 /* ACTIVE LINK COLOUR */
+
+.darktheme .list:hover .speciesgroup_name,
 .darktheme .search_matchedname,
 .darktheme .search_match,
 .darktheme a,
@@ -339,6 +343,11 @@
 }
 
 /* Blackish color */
+.darktheme .list a:hover,
+.darktheme .list a:focus,
+.darktheme .list a:active,
+.darktheme .sidebarmenu li a:hover,
+.darktheme .list:hover .element_popular_name,
 .darktheme .list-search input,
 .darktheme .tabbed_element_container .thresholdlist.active {
     color: black;
@@ -444,6 +453,10 @@
 .darktheme input:checked ~ .slider_container .slider,
 .darktheme .slider {
     border-color: white;
+}
+
+.darktheme .svalbard-heading {
+    color: #55b2df
 }
 
 /* HIGH CONTRAST + DARK THEME */

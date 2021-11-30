@@ -789,6 +789,9 @@ option {
     width: max-content;
     border: 1px solid #f97474;
     border-radius: 5px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-top: 5px;
 }
 
 .chips .button.tertiary,

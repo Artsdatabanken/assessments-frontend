@@ -798,3 +798,7 @@ option {
 .darktheme .chips .button.tertiary {
     border-color: transparent;
 }
+
+.chips.generic {    
+    background: gray;
+}

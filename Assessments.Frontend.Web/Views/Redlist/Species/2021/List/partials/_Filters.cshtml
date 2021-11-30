@@ -95,42 +95,57 @@ using System.Linq;
         </li>
     }
 
-    void makeSuperChips(bool swap, string name, string[] modelname, dynamic looplist)
+    void makeSuperChips(bool swap, string name, dynamic modelname, dynamic looplist)
     {
         @foreach (var el in looplist)
         {
-            var value = el.Value;
-            var key = el.Key;
-            if (swap)
-            {
-                value = el.Key;
-                key = el.Value;
-            }
-            if (name == "Criterias")
-            {
-                key = el.Key + " - " + el.Value;
-            }
-            else if (name == "Habitats")
-            {
-                key = key["shortname"];
-            }
             
-            @foreach (string element in modelname)
+            if (name == "SpeciesGroups")
             {
-                // Contains kept giving type errors despite fixing all visible issues.
-                // Going oldschool.
-                if (element == value) {
-                    makeChips(key);
+                @foreach (var element in modelname)
+                {
+                    if(el == element)
+                    {
+                        makeChips(element, "blue");
+                    }
                 }
             }
-            
+            else
+            {
+                var value = el.Value;
+                var key = el.Key;
+                if (swap)
+                {
+                    value = el.Key;
+                    key = el.Value;
+                }
+                if (name == "Criterias")
+                {
+                    key = el.Key + " - " + el.Value;
+                }
+                else if (name == "Habitats")
+                {
+                    key = key["shortname"];
+                }
+
+                @foreach (string element in modelname)
+                {
+                    // Contains kept giving type errors despite fixing all visible issues.
+                    // Going oldschool.
+                    if (element == value)
+                    {
+                        <span>@element</span>
+                        makeChips(key,"generic");
+                    }
+                }
+            }
         }
     }
 
 
-    void makeChips(string buttontext)
+    void makeChips(string buttontext, string className)
     {
-        <div class="chips">
+        <div class="chips @className">
             <span>@buttontext</span>
             <button class="button tinybutton tertiary" name="remove_filters" value="true">
                 <span class="material-icons">close</span>Fjern
@@ -156,8 +171,9 @@ using System.Linq;
 
                 var allFilterElements = Filter.GetActiveSelectionElement(Model);
                 makeSuperChips(false, "Area", allFilterElements, AllAreas);
-                // makeSuperChips(false, "Category", Model.Category, AllCategories);
-                // makeSuperChips(true, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
+                //makeSuperChips(true, "Category", Model.Category, AllCategories);
+                makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
+                makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllInsects);
                 makeSuperChips(true, "TaxonRank", Model.TaxonRank, AllTaxonRanks);
                 makeSuperChips(true, "Habitats", Model.Habitats, AllHabitats);
                 makeSuperChips(true, "Regions", Model.Regions, AllRegions);
@@ -176,10 +192,10 @@ using System.Linq;
             {
                 buttontext.Replace("filter", "filtre");
             }
-            makeChips(buttontext);
-        }
+            makeChips(buttontext, "delete");
+            
 
-            }
+        }
         <br />
         <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>
 

@@ -453,6 +453,10 @@
     border-color: white;
 }
 
+.darktheme .svalbard-heading {
+    color: #55b2df
+}
+
 /* HIGH CONTRAST + DARK THEME */
 .darktheme.highcontrast a,
 .darktheme.highcontrast .breadcrumbs li,

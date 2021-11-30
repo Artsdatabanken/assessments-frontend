@@ -97,18 +97,26 @@ using System.Linq;
 
     void makeSuperChips(bool swap, string name, dynamic modelname, dynamic looplist)
     {
+
+
         @foreach (var el in looplist)
         {
-            
+
             if (name == "SpeciesGroups")
             {
                 @foreach (var element in modelname)
                 {
-                    if(el == element)
+                    if (el == element)
                     {
-                        makeChips(element, "blue");
+                        makeChips(el, "generic");
                     }
                 }
+            }
+            else if (name == "Category")
+            {
+                var value = el.Value["presentationstring"];
+                var key = el.Key;
+                // PUT HERE LOOP
             }
             else
             {
@@ -132,10 +140,15 @@ using System.Linq;
                 {
                     // Contains kept giving type errors despite fixing all visible issues.
                     // Going oldschool.
+
                     if (element == value)
                     {
-                        <span>@element</span>
-                        makeChips(key,"generic");
+
+                        makeChips(key, "generic");
+                    }
+                    else
+                    {
+                        <span>@element != @value</span>
                     }
                 }
             }
@@ -171,7 +184,7 @@ using System.Linq;
 
                 var allFilterElements = Filter.GetActiveSelectionElement(Model);
                 makeSuperChips(false, "Area", allFilterElements, AllAreas);
-                //makeSuperChips(true, "Category", Model.Category, AllCategories);
+                makeSuperChips(false, "Category", Model.Category, AllCategories);
                 makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
                 makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllInsects);
                 makeSuperChips(true, "TaxonRank", Model.TaxonRank, AllTaxonRanks);
@@ -193,7 +206,7 @@ using System.Linq;
                 buttontext.Replace("filter", "filtre");
             }
             makeChips(buttontext, "delete");
-            
+
 
         }
         <br />

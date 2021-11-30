@@ -238,7 +238,8 @@ if (filters) {
     initialCollapsibleCheck();
 }
 
-document.getElementById("filter_modal_background").addEventListener('click', function (event) {
-    e.stopPropagation();
-    closeFilters();
+document.getElementById("filter_modal_background").addEventListener('click', function (e) {
+    if (e.target == document.getElementById("filter_modal_background")) {
+        closeFilters();
+    } 
 });

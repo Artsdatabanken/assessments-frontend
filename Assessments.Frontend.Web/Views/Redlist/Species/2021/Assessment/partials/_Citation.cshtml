@@ -7,18 +7,18 @@
 
 @{
     var expertCommitteeMembers = await _expertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
+    var sortedExperts = @expertCommitteeMembers.OrderBy(x => x.Role).ThenBy(x => x.LastName); 
+    var formattedExperts = sortedExperts.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList();
+    string authors = formattedExperts.JoinAnd(", ", " og ");
+    }
 
-    var au = @expertCommitteeMembers.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList();
-    var sortedlist = au.OrderBy(x => x).ToList();
-    string authors = sortedlist.JoinAnd(", ", " og ");
-}
+    @if (expertCommitteeMembers.Any())
+    {
+        <h2>Sitering</h2>
 
-@if (expertCommitteeMembers.Any())
-{
-    <h2>Sitering</h2>
-    <p class="citation">
-        @authors (2021, 24. november).
-        @Model.SpeciesGroup: Vurdering av @Model.PopularName @Model.ScientificName for @(Model.AssessmentArea == "N" ? "Norge" : "Svalbard").
-        Norsk rødliste for arter 2021. Artsdatabanken. @Context.Request.GetEncodedUrl()
-    </p>
-}
+        <p class="citation">
+            @authors (2021, 24. november).
+            @Model.SpeciesGroup: Vurdering av @Model.PopularName @Model.ScientificName for @(Model.AssessmentArea == "N" ? "Norge" : "Svalbard").
+            Norsk rødliste for arter 2021. Artsdatabanken. @Context.Request.GetEncodedUrl()
+        </p>
+    }

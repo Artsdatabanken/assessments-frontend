@@ -260,8 +260,7 @@
 }
 
 /* WINE RED */
-.darktheme .category_displayer .notactive .category_item,
-.darktheme .title_header {
+.darktheme .category_displayer .notactive .category_item {
     background: #570808;
 }
 

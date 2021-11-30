@@ -780,3 +780,18 @@ option {
 .breadcrumbs li {
     text-decoration:none;
 }
+
+.chips {
+    font-size: 12pt;
+    color: white;
+    background: #890d0d;
+    padding: 0px 0px 0px 7px;
+    width: max-content;
+    border: 1px solid #f97474;
+    border-radius: 5px;
+}
+
+.chips .button.tertiary,
+.darktheme .chips .button.tertiary {
+    border-color: transparent;
+}

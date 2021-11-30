@@ -47,36 +47,6 @@
             </ul>
         </div>
     }
-    void GetRemoveSearchAndFilter()
-    {
-        @if (Filter.GetActiveSelectionCount(Model) > 0)
-        {
-            <span>@Filter.GetActiveSelectionCount(Model)</span>
-            @if (Filter.GetActiveSelectionCount(Model) > 1)
-            {
-                <span>filtre</span>
-            }
-            else
-            {
-                <span>filter</span>
-            }
-
-            <button class="button tinybutton tertiary" name="remove_filters" value="true">
-                <span class="material-icons">close</span>Fjern
-            </button>
-        }
-        @if (Filter.GetActiveSelectionCount(Model) > 0 && !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-        {
-            <span>og</span>
-        }
-        @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-        {
-            <span>søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
-            <button class="button tinybutton tertiary" name="remove_search" value="true">
-                <span class="material-icons">close</span>Fjern
-            </button>
-        }
-    }
     void makeCheckBoxLi(string key, string value, string name, string[] model)
     {
         <li class="checkbox">
@@ -127,17 +97,48 @@
 <!--- # of hits in search and their corresponding filter-chips -->
 <div class="empty_filters">
     <p class="hit_count_text">
-        @FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff
-        @if (Filter.GetActiveSelectionCount(Model) > 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-        {
-            <span>basert på</span>
-        }
-
-
         @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
         {
-            GetRemoveSearchAndFilter();
+            @if (Filter.GetActiveSelectionCount(Model) > 0)
+            {
+                @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
+                {
+                    <span>søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
+                    <button class="button tinybutton tertiary" name="remove_search" value="true">
+                        <span class="material-icons">close</span>Fjern
+                    </button><br />
+                }          
+
+                var allFilterElements = Filter.GetActiveSelectionElement(Model);
+                foreach (var el in allFilterElements)
+                {
+                    <div class="chips">
+                        <span>@el</span>
+                        <button class="button tinybutton tertiary" name="remove_filters" value="true">
+                            <span class="material-icons">close</span>Fjern
+                        </button>
+                    </div>
+                 }
+
+
+                string buttontext = "filter";
+                @if (Filter.GetActiveSelectionCount(Model) > 1)
+                {
+                    buttontext = "filtre";
+                }
+                <div class="chips">
+                    <span>@Filter.GetActiveSelectionCount(Model) @buttontext</span>
+                    <button class="button tinybutton tertiary" name="remove_filters" value="true">                    
+                        <span class="material-icons">close</span>Fjern
+                    </button>
+                </div>
+            }
+
         }
+        <br />
+        <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>
+
+
     </p>
 </div>
 

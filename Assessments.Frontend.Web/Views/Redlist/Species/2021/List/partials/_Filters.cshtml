@@ -116,7 +116,13 @@ using System.Linq;
             {
                 var value = el.Value["presentationstring"];
                 var key = el.Key;
-                // PUT HERE LOOP
+                @foreach (string element in modelname)
+                {
+                    if (element == key)
+                    {
+                        makeChips(value, "generic");
+                    }
+                }
             }
             else
             {
@@ -145,10 +151,6 @@ using System.Linq;
                     {
 
                         makeChips(key, "generic");
-                    }
-                    else
-                    {
-                        <span>@element != @value</span>
                     }
                 }
             }

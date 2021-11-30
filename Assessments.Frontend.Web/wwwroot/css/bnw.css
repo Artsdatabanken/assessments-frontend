@@ -327,6 +327,8 @@
 }
 
 /* ACTIVE LINK COLOUR */
+
+.darktheme .list:hover .speciesgroup_name,
 .darktheme .search_matchedname,
 .darktheme .search_match,
 .darktheme a,
@@ -339,6 +341,11 @@
 }
 
 /* Blackish color */
+.darktheme .list a:hover,
+.darktheme .list a:focus,
+.darktheme .list a:active,
+.darktheme .sidebarmenu li a:hover,
+.darktheme .list:hover .element_popular_name,
 .darktheme .list-search input,
 .darktheme .tabbed_element_container .thresholdlist.active {
     color: black;

@@ -104,10 +104,17 @@
                     {
                         var value = el.Value;
                         var key = el.Key;
-                        if (swap) // Seriously. Why. 
+                        if (swap) // Seriously. Why.
                         {
                             value = el.Key;
                             key = el.Value;
+                        }
+                        if (name == "Criterias")
+                        {
+                            key = el.Key + " - " + el.Value;
+                        }else if(name == "Habitats")
+                        {
+                            key = key["shortname"];
                         }
                         makeCheckBoxLi(value, key, name, modelname);
                     }
@@ -205,7 +212,7 @@
                                 </li>
 
                                 @{makeFilterGroup(true, "filter_taxon_rank", "TaxonRank", Model.TaxonRank, AllTaxonRanks,
-                                          @SearchAndFilter.SearchFilterTaxonRank, "TaxonRank", "show_taxon_rank", "list_header_taxon_rank", "'taksonomisk nivå'-filtre", "TaxonRank");}
+                                              @SearchAndFilter.SearchFilterTaxonRank, "TaxonRank", "show_taxon_rank", "list_header_taxon_rank", "'taksonomisk nivå'-filtre", "TaxonRank");}
 
 
 
@@ -240,34 +247,19 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li class="filter_group">
-                                    @{makeFilterElement("Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");}
-                                    <div class="filter_habitat">
-                                        <ul>
-                                            @foreach (var habitat in AllHabitats)
-                                            {
-                                                makeCheckBoxLi(@habitat.Key, @habitat.Value["shortname"], "Habitats", Model.Habitats);
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
+                                @{makeFilterGroup(true, "filter_habitat", "Habitats", Model.Habitats, AllHabitats,
+                                             "Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");}
+
+
                                 @{makeFilterGroup(true, "filter_region", "Regions", Model.Regions, AllRegions,
-                                        "Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");}
+                                            "Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");}
 
                                 @{makeFilterGroup(true, "filter_european_population", "EuroPop", Model.EuroPop, AllEuroPop,
-                                        "Andel av europeisk populasjon", "EuroPop", "show_european_population", "list_header_european_population", "'andel av europeisk populasjon'-filtre", "EuroPop");}
-                                
-                                <li class="filter_group">
-                                    @{makeFilterElement(@SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");}
-                                    <div class="filter_criteria">
-                                        <ul>
-                                            @foreach (var criteria in AllCriterias)
-                                            {
-                                                makeCheckBoxLi(criteria.Key, @criteria.Key + " - " + @criteria.Value, "Criterias", Model.Criterias);
-                                            }
-                                        </ul>
-                                    </div>
-                                </li>
+                                            "Andel av europeisk populasjon", "EuroPop", "show_european_population", "list_header_european_population", "'andel av europeisk populasjon'-filtre", "EuroPop");}
+
+                                @{makeFilterGroup(true, "filter_criteria", "Criterias", Model.Criterias, AllCriterias,
+                                            @SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");}
+
                                 <li class="filter_group">
                                     @{ InputTag("show_extinct", "collapse_checkbox", "IsCheck", Model.IsCheck, "Extinct");}
                                     <button name="'trolig utdødd'-filter" class="list_header" id="list_header_extinct" onclick="collapse('show_extinct')" type="button">

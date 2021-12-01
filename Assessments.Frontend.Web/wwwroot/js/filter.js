@@ -142,7 +142,6 @@ const shouldToggleMarkAll = (elementsClass) => {
 
 const shouldToggleMarkRedOrEnd = (list) => {
     return Array.prototype.every.call(list, (item) => {
-        console.log(item)
         return document.getElementById("input_" + item).checked === true;
     })
 }

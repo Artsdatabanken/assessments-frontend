@@ -76,8 +76,8 @@ const addOnclick = () => {
             };
         } else {
             el.onclick = function() {
-                updateToggleAll();
-                toggleMarkAll(el);
+                updateToggleAll(el);
+                toggleMarkAll();
 
                 scrollTo.value = "scroll_" + window.scrollY;
                 scrollTo.checked = true;

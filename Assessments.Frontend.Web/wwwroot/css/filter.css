@@ -33,6 +33,7 @@ button#open_filter {
     color: black;
     background: white;
     border-bottom-color: white;
+    border-left-color: lightgray;
 }
 
 .controls button.active:first-child {

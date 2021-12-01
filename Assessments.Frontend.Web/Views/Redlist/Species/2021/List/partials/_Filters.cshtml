@@ -101,70 +101,65 @@ using System.Linq;
 
         @foreach (var el in looplist)
         {
-
-            if (name == "SpeciesGroups")
+            dynamic value = el;
+            dynamic key = el;
+            if (name != "SpeciesGroups")
             {
-                @foreach (var element in modelname)
-                {
-                    if (el == element)
-                    {
-                        makeChips(el, "generic");
-                    }
-                }
-            }
-            else if (name == "Category")
-            {
-                var value = el.Value["presentationstring"];
-                var key = el.Key;
-                @foreach (string element in modelname)
-                {
-                    if (element == key)
-                    {
-                        makeChips(value, "generic");
-                    }
-                }
-            }
-            else
-            {
-                var value = el.Value;
-                var key = el.Key;
                 if (swap)
                 {
                     value = el.Key;
                     key = el.Value;
                 }
-                if (name == "Criterias")
+                else
                 {
-                    key = el.Key + " - " + el.Value;
-                }
-                else if (name == "Habitats")
-                {
-                    key = key["shortname"];
-                }
-
-                @foreach (string element in modelname)
-                {
-                    // Contains kept giving type errors despite fixing all visible issues.
-                    // Going oldschool.
-
-                    if (element == value)
-                    {
-
-                        makeChips(key, "generic");
-                    }
+                    value = el.Value;
+                    key = el.Key;
                 }
             }
+            if (name == "Criterias")
+            {
+                key = el.Key + " - " + el.Value;
+            }
+            else if (name == "Habitats")
+            {
+                key = key["shortname"];
+            }
+            else if (name == "Category")
+            {
+                key = key["presentationstring"];
+            }
+
+            @foreach (string element in modelname)
+            {
+                // Contains kept giving type errors despite fixing all visible issues.
+                // Going oldschool.
+
+                if (element == value)
+                {
+                    makeChips(key, "generic",value);
+                }
+            }
+            
         }
     }
 
 
-    void makeChips(string buttontext, string className)
+    void makeChips(string buttontext, string className,string value)
     {
         <div class="chips @className">
             <span>@buttontext</span>
-            <button class="button tinybutton tertiary" name="remove_filters" value="true">
-                <span class="material-icons">close</span>Fjern
-            </button>
+            @if (value == "delete")
+            {
+                <button class="button tinybutton tertiary" name="remove_filters" value="true">
+                    <span class="material-icons">close</span>Fjern
+                </button>
+            }
+            else
+            {   <label for="@value" class="button tinybutton tertiary">
+                    <span class="material-icons">close</span>Fjern
+                </label>
+            }
+
         </div>
     }
 }
@@ -186,7 +181,7 @@ using System.Linq;
 
                 var allFilterElements = Filter.GetActiveSelectionElement(Model);
                 makeSuperChips(false, "Area", allFilterElements, AllAreas);
-                makeSuperChips(false, "Category", Model.Category, AllCategories);
+                makeSuperChips(true, "Category", Model.Category, AllCategories);
                 makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
                 makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllInsects);
                 makeSuperChips(true, "TaxonRank", Model.TaxonRank, AllTaxonRanks);
@@ -207,9 +202,7 @@ using System.Linq;
             {
                 buttontext.Replace("filter", "filtre");
             }
-            makeChips(buttontext, "delete");
-
-
+            makeChips(buttontext, "delete","delete");
         }
         <br />
         <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>

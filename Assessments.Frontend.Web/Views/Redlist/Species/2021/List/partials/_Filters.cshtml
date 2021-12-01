@@ -103,7 +103,7 @@ using System.Linq;
             dynamic value = el;
             dynamic key = el;
 
-            if (name != "SpeciesGroups")
+            if (name != "SpeciesGroups" && name != "PresumedExtinct")
             {
                 if (swap)
                 {
@@ -117,6 +117,10 @@ using System.Linq;
                 }
             }
             string labelname = value;
+            if(name == "PresumedExtinct")
+            {
+                labelname = "PresumedExtinct";
+            }
             if (name == "Criterias")
             {
                 key = el.Key + " - " + el.Value;
@@ -133,15 +137,11 @@ using System.Linq;
 
             @foreach (string element in modelname)
             {
-                // Contains kept giving type errors despite fixing all visible issues.
-                // Going oldschool.
-
                 if (element == value)
                 {
                     makeChips(key, "generic", labelname);
                 }
-            }
-            
+            }            
         }
     }
     void makeChips(string buttontext, string className,string value)
@@ -198,8 +198,8 @@ using System.Linq;
 
                     if (Model.PresumedExtinct)
                     {
-                        //string[] PresumedExtinct = new string[] { "Antatt utdødd" };
-                        //makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
+                        string[] PresumedExtinct = new string[] { "Antatt utdødd" };
+                        makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
                     }
                 }
 

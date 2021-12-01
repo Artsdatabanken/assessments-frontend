@@ -24,7 +24,7 @@ using System.Linq;
                 if (item.Contains("scroll_"))
                     value = item.Replace("scroll_", "");
         }
-        <input id=@id type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
+        <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
     }
     void InputTag(string name, string[] elements, string value)
     {
@@ -37,7 +37,7 @@ using System.Linq;
                 @foreach (var insect in insects)
                 {
                     <li class="checkbox">
-                        <label for=@insect>
+                        <label for="@insect">
                             @{
                                 InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect);
                             }
@@ -51,7 +51,7 @@ using System.Linq;
     void makeCheckBoxLi(string key, string value, string name, string[] model)
     {
         <li class="checkbox">
-            <label for=@key>
+            <label for="@key">
                 @{ InputTag(name, model, key);}
                 <span class="label_text">@value</span>
             </label>
@@ -60,7 +60,7 @@ using System.Linq;
     void makeFilterElement(string buttontext, string filtername, string action, string id, string buttonname, string numbername)
     {
         InputTag(action, "collapse_checkbox", "IsCheck", Model.IsCheck, filtername);
-        <button name=@buttonname class="list_header" id=@id onclick="collapse('@action')" type="button">
+        <button name="@buttonname" class="list_header" id="@id" onclick="collapse('@action')" type="button">
             @buttontext
             <span class="filternumber">@Filter.GetActiveFilters(numbername, Model)</span>
         </button>

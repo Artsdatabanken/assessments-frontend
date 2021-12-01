@@ -247,15 +247,9 @@ document.getElementById("filter_modal_background").addEventListener('click', fun
 
 function submitClickedElement(element) {
     // Uncheck related checbox from filter
-    let checkboxed = document.getElementById(element);
-    if (!checkboxed) {
-        // if spaces are involved, use just the first item.
-        element = element.split(" ")[0];
-        checkboxed = document.getElementById(element);
-    }    
+    const checkboxed = document.getElementById(element);
     if (checkboxed && checkboxed.checked == true) {
         checkboxed.checked = false;
-    } else {
-        console.log(checkboxed);
     }
+    updateToggleAll(checkboxed);
 }

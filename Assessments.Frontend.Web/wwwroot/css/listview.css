@@ -70,6 +70,46 @@
 }
 
 
+/* LIST PRESENTATION */
+
+.redlist li a {
+    line-height: 1;
+    font-size: 12pt;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 2px;
+    box-sizing: border-box;
+}
+
+.redlist li {
+    width: 100%;
+    list-style-type: none;
+    max-width: 100%;
+    border-bottom: 1px solid #e9e9e9;
+}
+
+.list a:hover,
+.list a:focus,
+.list a:active {
+    background-color: #e9e9e9;
+}
+
+li a span.element_icon {
+    padding: 0;
+}
+
+.viewselector {
+    width: 100%;
+    border-left: 1px solid lightgrey;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
 /* REDLIST VIEW */
 
 .listwrapper {
@@ -98,6 +138,7 @@
     display: inline-grid;
     padding: 5px 0;
     width: 100%;
+    padding-left: 10px;
 }
 
 .listheader {
@@ -240,15 +281,14 @@
     }
 
     .redlist li a {
-        grid-template-columns: 15% 45% 25% 15%;
+        grid-template-columns: 18% 48% 22% 15%;
+        padding-left: 0;
+        padding-right: 0;
     }
 
     .redlist .category_tag {
         max-width: 100%;
     }
-
-
-
 }
 
 
@@ -285,7 +325,7 @@
     .element_icon {
         order: 1;
         font-size: 12px;
-        display: inline;
+        display: inline-block;
         height: auto;
     }
 
@@ -350,43 +390,6 @@
     border-bottom: 1px solid #4c4a48;
     padding-bottom: 5px;
     padding-right: 5px;
-}
-
-/* LIST PRESENTATION */
-
-.redlist li a {    
-    line-height: 1;
-    font-size: 12pt;
-    position: relative;
-    text-decoration: none;
-    color: inherit;
-    align-items: center;
-    padding-left:10px;
-    padding-right:10px;
-}
-
-.redlist li {
-    width: 100%;
-    list-style-type: none;
-    max-width: 100%;
-    border-bottom: 1px solid #e9e9e9;
-}
-
-.list a:hover,
-.list a:focus,
-.list a:active {
-    background-color: #e9e9e9;
-}
-
-li a span.element_icon {
-    padding: 0;
-}
-
-.viewselector {
-    width: 100%;
-    border-left: 1px solid lightgrey;
-    padding-top: 10px;
-    padding-bottom:10px;
 }
 
 

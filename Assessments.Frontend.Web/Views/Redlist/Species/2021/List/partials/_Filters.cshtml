@@ -1,6 +1,7 @@
 @model RL2021ViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Constants
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
+using System.Linq;
 
 @{
     var AllAreas = ViewBag.AllAreas;
@@ -23,7 +24,8 @@
                 if (item.Contains("scroll_"))
                     value = item.Replace("scroll_", "");
         }
-        <input id=@id type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
+        id = id.Replace(" ", "_");
+        <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
     }
     void InputTag(string name, string[] elements, string value)
     {
@@ -36,7 +38,7 @@
                 @foreach (var insect in insects)
                 {
                     <li class="checkbox">
-                        <label for=@insect>
+                        <label for="@insect">
                             @{
                                 InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.SpeciesGroups, insect);
                             }
@@ -46,41 +48,12 @@
                 }
             </ul>
         </div>
-    }
-    void GetRemoveSearchAndFilter()
-    {
-        @if (Filter.GetActiveSelectionCount(Model) > 0)
-        {
-            <span>@Filter.GetActiveSelectionCount(Model)</span>
-            @if (Filter.GetActiveSelectionCount(Model) > 1)
-            {
-                <span>filtre</span>
-            }
-            else
-            {
-                <span>filter</span>
-            }
-
-            <button class="button tinybutton tertiary" name="remove_filters" value="true">
-                <span class="material-icons">close</span>Fjern
-            </button>
-        }
-        @if (Filter.GetActiveSelectionCount(Model) > 0 && !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-        {
-            <span>og</span>
-        }
-        @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-        {
-            <span>søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
-            <button class="button tinybutton tertiary" name="remove_search" value="true">
-                <span class="material-icons">close</span>Fjern
-            </button>
-        }
-    }
+                                }
     void makeCheckBoxLi(string key, string value, string name, string[] model)
-    {
+    {        
+        string id= key.Replace(" ", "_");
         <li class="checkbox">
-            <label for=@key>
+            <label for="@id">
                 @{ InputTag(name, model, key);}
                 <span class="label_text">@value</span>
             </label>
@@ -89,12 +62,12 @@
     void makeFilterElement(string buttontext, string filtername, string action, string id, string buttonname, string numbername)
     {
         InputTag(action, "collapse_checkbox", "IsCheck", Model.IsCheck, filtername);
-        <button name=@buttonname class="list_header" id=@id onclick="collapse('@action')" type="button">
+        <button name="@buttonname" class="list_header" id="@id" onclick="collapse('@action')" type="button">
             @buttontext
             <span class="filternumber">@Filter.GetActiveFilters(numbername, Model)</span>
         </button>
     }
-    void makeFilterGroup(bool swap,string groupclassname,string name, dynamic modelname, dynamic looplist, string buttontext, string filtername, string action, string id, string buttonname, string numbername)
+    void makeFilterGroup(bool swap, string groupclassname, string name, dynamic modelname, dynamic looplist, string buttontext, string filtername, string action, string id, string buttonname, string numbername)
     {
         <li class="filter_group">
             @{makeFilterElement(buttontext, filtername, action, id, buttonname, numbername);}
@@ -112,7 +85,8 @@
                         if (name == "Criterias")
                         {
                             key = el.Key + " - " + el.Value;
-                        }else if(name == "Habitats")
+                        }
+                        else if (name == "Habitats")
                         {
                             key = key["shortname"];
                         }
@@ -122,23 +96,126 @@
             </div>
         </li>
     }
+    void makeSuperChips(bool swap, string name, dynamic modelname, dynamic looplist)
+    {
+        @foreach (var el in looplist)
+        {
+            dynamic value = el;
+            dynamic key = el;
+
+            if (name != "SpeciesGroups" && name != "PresumedExtinct")
+            {
+                if (swap)
+                {
+                    value = el.Key;
+                    key = el.Value;
+                }
+                else
+                {
+                    value = el.Value;
+                    key = el.Key;
+                }
+            }
+            string labelname = value;
+            if(name == "PresumedExtinct")
+            {
+                labelname = "PresumedExtinct";
+            }
+            if (name == "Criterias")
+            {
+                key = el.Key + " - " + el.Value;
+            }
+            else if (name == "Habitats")
+            {
+                key = key["shortname"];
+            }
+            else if (name == "Category")
+            {
+                key = key["presentationstring"];
+                labelname = "input_" + value;
+            }
+
+            @foreach (string element in modelname)
+            {
+                if (element == value)
+                {
+                    makeChips(key, "generic", labelname);
+                }
+            }            
+        }
+    }
+    void makeChips(string buttontext, string className,string value)
+    {
+    <div class="chips @className">
+        <span>@buttontext</span>
+        @if (value == "delete")
+        {
+            <button class="button tinybutton tertiary" name="remove_filters" value="true">
+                <span class="material-icons">close</span>Fjern
+            </button>
+        }
+        else if (value == "remove_search")
+        {
+            <button class="button tinybutton tertiary" name="remove_search" value="true">
+                <span class="material-icons">close</span>Fjern
+            </button><br />
+        }
+        else
+        {
+            <button class="button tinybutton tertiary" type="submit" onclick="submitClickedElement('@value')">
+                <span class="material-icons">close</span>Fjern
+            </button>
+        }
+
+    </div>
+    }
 }
 
 <!--- # of hits in search and their corresponding filter-chips -->
 <div class="empty_filters">
     <p class="hit_count_text">
-        @FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff
-        @if (Filter.GetActiveSelectionCount(Model) > 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-        {
-            <span>basert på</span>
-        }
+        <span>
+            @if (Filter.GetActiveSelectionCount(Model) != 0
+          || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
+            {
+                @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
+                {
+                    string searchstring = "Søket " + '"'+@Filter.GetActiveSelection(Model)+'"';
+                    makeChips(searchstring, "remove_search", "remove_search");
+                }
+                @if (Filter.GetActiveSelectionCount(Model) > 0)
+                {
+                    var allFilterElements = Filter.GetActiveSelectionElement(Model);
+                    makeSuperChips(false, "Area", allFilterElements, AllAreas);
+                    makeSuperChips(true, "Category", Model.Category, AllCategories);
+                    makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
+                    makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllInsects);
+                    makeSuperChips(true, "TaxonRank", Model.TaxonRank, AllTaxonRanks);
+                    makeSuperChips(true, "Habitats", Model.Habitats, AllHabitats);
+                    makeSuperChips(true, "Regions", Model.Regions, AllRegions);
+                    makeSuperChips(true, "EuroPop", Model.EuroPop, AllEuroPop);
+                    makeSuperChips(true, "Criterias", Model.Criterias, AllCriterias);
 
+                    if (Model.PresumedExtinct)
+                    {
+                        string[] PresumedExtinct = new string[] { "Antatt utdødd" };
+                        makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
+                    }
+                }
 
-        @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-        {
-            GetRemoveSearchAndFilter();
-        }
+                string buttontext = @Filter.GetActiveSelectionCount(Model) + " filter";                
+                if (Filter.GetActiveSelectionCount(Model) >= 1)
+                {
+                    buttontext.Replace("filter", "filtre");
+                    makeChips(buttontext, "delete", "delete");
+                }
+            }
+        </span>
     </p>
+    <p class="hit_count_text">
+        <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>  
+    </p>
+
 </div>
 
 <!-- CONTROL BUTTONS and toggles-->
@@ -244,11 +321,11 @@
                                     </div>
                                 </li>
                                 @{
-                                    makeFilterGroup(true, "filter_habitat", "Habitats", Model.Habitats, AllHabitats,"Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");
-                                    makeFilterGroup(true, "filter_region", "Regions", Model.Regions, AllRegions,"Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");
-                                    makeFilterGroup(true, "filter_european_population", "EuroPop", Model.EuroPop, AllEuroPop,"Andel av europeisk populasjon", "EuroPop", "show_european_population", "list_header_european_population", "'andel av europeisk populasjon'-filtre", "EuroPop");
-                                    makeFilterGroup(true, "filter_criteria", "Criterias", Model.Criterias, AllCriterias,@SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");
-                                 }
+                                    makeFilterGroup(true, "filter_habitat", "Habitats", Model.Habitats, AllHabitats, "Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");
+                                    makeFilterGroup(true, "filter_region", "Regions", Model.Regions, AllRegions, "Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");
+                                    makeFilterGroup(true, "filter_european_population", "EuroPop", Model.EuroPop, AllEuroPop, "Andel av europeisk populasjon", "EuroPop", "show_european_population", "list_header_european_population", "'andel av europeisk populasjon'-filtre", "EuroPop");
+                                    makeFilterGroup(true, "filter_criteria", "Criterias", Model.Criterias, AllCriterias, @SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");
+                                }
 
                                 <li class="filter_group">
                                     @{ InputTag("show_extinct", "collapse_checkbox", "IsCheck", Model.IsCheck, "Extinct");}

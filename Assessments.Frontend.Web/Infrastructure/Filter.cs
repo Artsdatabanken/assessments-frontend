@@ -2,6 +2,7 @@ using Assessments.Frontend.Web.Models;
 using static Assessments.Frontend.Web.Infrastructure.Constants;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -90,6 +91,24 @@ namespace Assessments.Frontend.Web.Infrastructure
                 count++;
 
             return count;
+        }
+
+        public static string[] GetActiveSelectionElement(RL2021ViewModel Model)
+        {
+            var selectionlist = Model.Area;
+            selectionlist = selectionlist.Concat(Model.Category).ToArray();
+            selectionlist = selectionlist.Concat(Model.SpeciesGroups).ToArray();
+            selectionlist = selectionlist.Concat(Model.TaxonRank).ToArray();
+            selectionlist = selectionlist.Concat(Model.Habitats).ToArray();
+            selectionlist = selectionlist.Concat(Model.Regions).ToArray();
+            selectionlist = selectionlist.Concat(Model.EuroPop).ToArray();
+            selectionlist = selectionlist.Concat(Model.Criterias).ToArray();
+            if (Model.PresumedExtinct)
+            {
+                string[] PresumedExtinct = new string[] { "Antatt utdødd" };
+                selectionlist = selectionlist.Concat(PresumedExtinct).ToArray();
+            }
+            return selectionlist;
         }
     }
 }

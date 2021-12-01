@@ -142,7 +142,6 @@ const shouldToggleMarkAll = (elementsClass) => {
 
 const shouldToggleMarkRedOrEnd = (list) => {
     return Array.prototype.every.call(list, (item) => {
-        console.log(item)
         return document.getElementById("input_" + item).checked === true;
     })
 }
@@ -239,7 +238,18 @@ if (filters) {
 }
 
 document.getElementById("filter_modal_background").addEventListener('click', function (e) {
-    if (e.target == document.getElementById("filter_modal_background")) {
+    if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
         closeFilters();
     } 
 });
+
+
+function submitClickedElement(element) {
+    // Uncheck related checbox from filter
+    element = element.split(' ').join('_'); // spaces must not exist -> underscore
+    const checkboxed = document.getElementById(element);
+    if (checkboxed && checkboxed.checked == true) {
+        checkboxed.checked = false;
+    }
+    updateToggleAll(checkboxed);
+}

@@ -30,6 +30,17 @@ const setVisited = () => {
     init.checked = true;
 }
 
+const updateToggleAll = (el) => {
+    if (el && el.classList[0] === "insect_input") {
+        toggleSingleFilter(el, "Insekter");
+    } else if (el && endangered.some(category => el.id.indexOf(category) != -1)) {
+        toggleSingleFilter(el, "endangered_check");
+        toggleSingleFilter(el, "redlisted_check");
+    } else if (el && redlisted.some(category => el.id.indexOf(category) != -1)) {
+        toggleSingleFilter(el, "redlisted_check");
+    }
+}
+
 const addOnclick = () => {
     if (!submitCheckInputs) return;
     Array.prototype.forEach.call(submitCheckInputs, el => {
@@ -65,14 +76,7 @@ const addOnclick = () => {
             };
         } else {
             el.onclick = function() {
-                if (el.classList[0] === "insect_input") {
-                    toggleSingleFilter(el, "Insekter");
-                } else if (endangered.some(category => el.id.indexOf(category) != -1)) {
-                    toggleSingleFilter(el, "endangered_check");
-                    toggleSingleFilter(el, "redlisted_check");
-                } else if (redlisted.some(category => el.id.indexOf(category) != -1)) {
-                    toggleSingleFilter(el, "redlisted_check");
-                }
+                updateToggleAll(el);
                 toggleMarkAll();
 
                 scrollTo.value = "scroll_" + window.scrollY;

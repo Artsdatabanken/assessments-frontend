@@ -17,7 +17,7 @@ button#open_filter {
     }
 
     .empty_filters {
-        margin-left: 205px;
+        /*margin-left: 205px;*/
     }
 }
 
@@ -433,4 +433,9 @@ button.list_header {
 
 .filternumber:empty {
     display: none;
+}
+
+.filterbox{
+    display:block;
+    margin-top:10px;
 }

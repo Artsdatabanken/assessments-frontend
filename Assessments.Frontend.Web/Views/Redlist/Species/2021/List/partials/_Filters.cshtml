@@ -146,74 +146,65 @@ using System.Linq;
     }
     void makeChips(string buttontext, string className,string value)
     {
-    <div class="chips @className">
-        <span>@buttontext</span>
-        @if (value == "delete")
-        {
-            <button class="button tinybutton tertiary" name="remove_filters" value="true">
-                <span class="material-icons">close</span>Fjern
-            </button>
-        }
-        else if (value == "remove_search")
-        {
-            <button class="button tinybutton tertiary" name="remove_search" value="true">
-                <span class="material-icons">close</span>Fjern
-            </button><br />
-        }
-        else
-        {
-            <button class="button tinybutton tertiary" type="submit" onclick="submitClickedElement('@value')">
-                <span class="material-icons">close</span>Fjern
-            </button>
-        }
-
-    </div>
+    <button class="chips @className" onclick="submitClickedElement('@value')" type="submit" >
+        <span>@buttontext</span>       
+        <span class="x" >
+            <span class="material-icons">close</span>Fjern
+        </span>
+    </button>
     }
 }
 
 <!--- # of hits in search and their corresponding filter-chips -->
 <div class="empty_filters">
     <p class="hit_count_text">
-        <span>
+        <span class="searchstring">
+            @FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff
             @if (Filter.GetActiveSelectionCount(Model) != 0
-          || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
+|| !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
             {
-                @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-                {
-                    string searchstring = "Søket " + '"'+@Filter.GetActiveSelection(Model)+'"';
-                    makeChips(searchstring, "remove_search", "remove_search");
-                }
-                @if (Filter.GetActiveSelectionCount(Model) > 0)
-                {
-                    var allFilterElements = Filter.GetActiveSelectionElement(Model);
-                    makeSuperChips(false, "Area", allFilterElements, AllAreas);
-                    makeSuperChips(true, "Category", Model.Category, AllCategories);
-                    makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
-                    makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllInsects);
-                    makeSuperChips(true, "TaxonRank", Model.TaxonRank, AllTaxonRanks);
-                    makeSuperChips(true, "Habitats", Model.Habitats, AllHabitats);
-                    makeSuperChips(true, "Regions", Model.Regions, AllRegions);
-                    makeSuperChips(true, "EuroPop", Model.EuroPop, AllEuroPop);
-                    makeSuperChips(true, "Criterias", Model.Criterias, AllCriterias);
-
-                    if (Model.PresumedExtinct)
+                <span>
+                    @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
                     {
-                        string[] PresumedExtinct = new string[] { "Antatt utdødd" };
-                        makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
+                        string searchstring = " for " + '"' + @Filter.GetActiveSelection(Model) + '"';
+                        <span>@searchstring</span>
+                        <button class="button tinybutton tertiary search_related" name="remove_search" value="true">
+                            <span class="material-icons">close</span>Fjern søk
+                        </button>
                     }
-                }
+                </span>
+                <span class="filterbox">
+                    @if (Filter.GetActiveSelectionCount(Model) > 0)
+                    {
+                        var allFilterElements = Filter.GetActiveSelectionElement(Model);
+                        makeSuperChips(false, "Area", allFilterElements, AllAreas);
+                        makeSuperChips(true, "Category", Model.Category, AllCategories);
+                        makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
+                        makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllInsects);
+                        makeSuperChips(true, "TaxonRank", Model.TaxonRank, AllTaxonRanks);
+                        makeSuperChips(true, "Habitats", Model.Habitats, AllHabitats);
+                        makeSuperChips(true, "Regions", Model.Regions, AllRegions);
+                        makeSuperChips(true, "EuroPop", Model.EuroPop, AllEuroPop);
+                        makeSuperChips(true, "Criterias", Model.Criterias, AllCriterias);
 
-                string buttontext = @Filter.GetActiveSelectionCount(Model) + " filter";                
-                if (Filter.GetActiveSelectionCount(Model) >= 1)
-                {
-                    buttontext.Replace("filter", "filtre");
-                    makeChips(buttontext, "delete", "delete");
-                }
+                        if (Model.PresumedExtinct)
+                        {
+                            string[] PresumedExtinct = new string[] { "Antatt utdødd" };
+                            makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
+                        }
+                    }
+
+                    @{string buttontext = @Filter.GetActiveSelectionCount(Model) + " filter"; }
+                    @if(Filter.GetActiveSelectionCount(Model) > 1)
+                    {
+                        buttontext.Replace("filter", "filtre");
+                        <button class="button tinybutton tertiary search_related" name="remove_filters" value="true">
+                            <span class="material-icons">close</span>Fjern alle filter
+                        </button>
+                    }        
+                </span>
             }
         </span>
-    </p>
-    <p class="hit_count_text">
-        <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>  
     </p>
 
 </div>

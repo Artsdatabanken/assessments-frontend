@@ -246,12 +246,16 @@ document.getElementById("filter_modal_background").addEventListener('click', fun
 
 
 function submitClickedElement(element) {
-    console.log(element)
-    //element.checked = false;
+    // Uncheck related checbox from filter
     let checkboxed = document.getElementById(element);
-    console.log(checkboxed.checked);
+    if (!checkboxed) {
+        // if spaces are involved, use just the first item.
+        element = element.split(" ")[0];
+        checkboxed = document.getElementById(element);
+    }    
     if (checkboxed && checkboxed.checked == true) {
-        console.log("is true sjø")
         checkboxed.checked = false;
+    } else {
+        console.log(checkboxed);
     }
 }

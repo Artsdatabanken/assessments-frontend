@@ -169,14 +169,13 @@ using System.Linq;
 <!--- # of hits in search and their corresponding filter-chips -->
 <div class="empty_filters">
     <p class="hit_count_text">
-        <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>
         <span>
             @if (Filter.GetActiveSelectionCount(Model) != 0
-            || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
+           || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
             {
                 @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
                 {
-                    <span>for søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
+                    <span>søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
                     <button class="button tinybutton tertiary" name="remove_search" value="true">
                         <span class="material-icons">close</span>Fjern
                     </button><br />
@@ -210,6 +209,10 @@ using System.Linq;
             }
         </span>
     </p>
+    <p class="hit_count_text">
+        <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>  
+    </p>
+
 </div>
 
 <!-- CONTROL BUTTONS and toggles-->

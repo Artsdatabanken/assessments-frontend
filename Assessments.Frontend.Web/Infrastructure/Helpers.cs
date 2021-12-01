@@ -146,9 +146,9 @@ namespace Assessments.Frontend.Web.Infrastructure
                     break;
                 case (false, nameof(SpeciesAssessment2021.PopularName)):
                     query = query
-                        .OrderByDescending(x => x.PopularName.ToLower() == name ||
+                        .OrderBy(x => string.IsNullOrEmpty(x.PopularName))
+                        .ThenByDescending(x => x.PopularName.ToLower() == name ||
                         x.ScientificName.ToLower() == name)
-                        .ThenBy(x => !string.IsNullOrEmpty(x.PopularName))
                         .ThenBy(x => x.PopularName);
                     break;
                 case (false, nameof(SpeciesAssessment2021.Category)):

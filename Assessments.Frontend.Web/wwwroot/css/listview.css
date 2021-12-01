@@ -324,7 +324,7 @@ li a span.element_icon {
     .element_icon {
         order: 1;
         font-size: 12px;
-        display: inline;
+        display: inline-block;
         height: auto;
     }
 

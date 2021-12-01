@@ -408,10 +408,9 @@
         padding: 4px;
         border-radius: 50%;
     }
-}
-
-.darktheme .speciesgroup_name{
-    background: #424141;
+    .darktheme .speciesgroup_name {
+        background: #424141;
+    }
 }
 
 .darktheme .search_speciesicon {

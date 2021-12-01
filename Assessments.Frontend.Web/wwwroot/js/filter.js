@@ -239,12 +239,19 @@ if (filters) {
 }
 
 document.getElementById("filter_modal_background").addEventListener('click', function (e) {
-    if (e.target == document.getElementById("filter_modal_background")) {
+    if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
         closeFilters();
     } 
 });
 
 
 function submitClickedElement(element) {
-    element.checked = false;
+    console.log(element)
+    //element.checked = false;
+    let checkboxed = document.getElementById(element);
+    console.log(checkboxed.checked);
+    if (checkboxed && checkboxed.checked == true) {
+        console.log("is true sjø")
+        checkboxed.checked = false;
+    }
 }

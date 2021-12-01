@@ -156,11 +156,12 @@ using System.Linq;
             </button>
         }
         else
-        { 
-            <button class="button tinybutton tertiary"  value="true" onclick="submitClickedElement(@value)">
+        {
+            <button class="button tinybutton tertiary" type="submit" onclick="submitClickedElement('@value')">
                 <span class="material-icons">close</span>Fjern
             </button>
         }
+
     </div>
     }
 }
@@ -168,47 +169,46 @@ using System.Linq;
 <!--- # of hits in search and their corresponding filter-chips -->
 <div class="empty_filters">
     <p class="hit_count_text">
-        @if (Filter.GetActiveSelectionCount(Model) != 0 || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
-        {
-            @if (Filter.GetActiveSelectionCount(Model) > 0)
+        <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>
+        <span>
+            @if (Filter.GetActiveSelectionCount(Model) != 0
+            || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
             {
                 @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
                 {
-                    <span>søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
+                    <span>for søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
                     <button class="button tinybutton tertiary" name="remove_search" value="true">
                         <span class="material-icons">close</span>Fjern
                     </button><br />
                 }
-
-                var allFilterElements = Filter.GetActiveSelectionElement(Model);
-                makeSuperChips(false, "Area", allFilterElements, AllAreas);
-                makeSuperChips(true, "Category", Model.Category, AllCategories);
-                makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
-                makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllInsects);
-                makeSuperChips(true, "TaxonRank", Model.TaxonRank, AllTaxonRanks);
-                makeSuperChips(true, "Habitats", Model.Habitats, AllHabitats);
-                makeSuperChips(true, "Regions", Model.Regions, AllRegions);
-                makeSuperChips(true, "EuroPop", Model.EuroPop, AllEuroPop);
-                makeSuperChips(true, "Criterias", Model.Criterias, AllCriterias);
-
-                if (Model.PresumedExtinct)
+                @if (Filter.GetActiveSelectionCount(Model) > 0)
                 {
-                    string[] PresumedExtinct = new string[] { "Antatt utdødd" };
-                    //makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
+                    var allFilterElements = Filter.GetActiveSelectionElement(Model);
+                    makeSuperChips(false, "Area", allFilterElements, AllAreas);
+                    makeSuperChips(true, "Category", Model.Category, AllCategories);
+                    makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllSpeciesGroups);
+                    makeSuperChips(false, "SpeciesGroups", Model.SpeciesGroups, AllInsects);
+                    makeSuperChips(true, "TaxonRank", Model.TaxonRank, AllTaxonRanks);
+                    makeSuperChips(true, "Habitats", Model.Habitats, AllHabitats);
+                    makeSuperChips(true, "Regions", Model.Regions, AllRegions);
+                    makeSuperChips(true, "EuroPop", Model.EuroPop, AllEuroPop);
+                    makeSuperChips(true, "Criterias", Model.Criterias, AllCriterias);
+
+                    if (Model.PresumedExtinct)
+                    {
+                        //string[] PresumedExtinct = new string[] { "Antatt utdødd" };
+                        //makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
+                    }
+                }
+
+                string buttontext = @Filter.GetActiveSelectionCount(Model) + " filter";
+                if (Filter.GetActiveSelectionCount(Model) >= 1)
+                {
+                    buttontext.Replace("filter", "filtre");
+                    makeChips(buttontext, "delete", "delete");
                 }
             }
-
-            string buttontext = @Filter.GetActiveSelectionCount(Model) + " filter";
-            if (Filter.GetActiveSelectionCount(Model) > 1)
-            {
-                buttontext.Replace("filter", "filtre");
-            }
-            makeChips(buttontext, "delete","delete");
-        }
-        <br />
-        <span class="antall">@FormatNumeric(Model.Redlist2021Results.TotalItemCount.ToString()) treff</span>
-
-
+        </span>
     </p>
 </div>
 

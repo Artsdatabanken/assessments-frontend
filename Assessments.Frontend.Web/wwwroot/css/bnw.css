@@ -446,6 +446,22 @@
     border-color: white;
 }
 
+
+.darktheme .chips {
+    color: white;
+    background: #890d0d;
+    border-color: #f97474;
+}
+
+.darktheme .chips .button.tertiary {
+    color: #f29696;
+}
+
+.darktheme .chips.generic {
+    background: #311414;
+}
+
+
 /* HIGH CONTRAST + DARK THEME */
 .darktheme.highcontrast a,
 .darktheme.highcontrast .breadcrumbs li,

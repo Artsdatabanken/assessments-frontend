@@ -783,23 +783,43 @@ option {
 
 .chips {
     font-size: 12pt;
-    color: white;
-    background: #890d0d;
+    color: black;
+    background: white;
     padding: 0px 0px 0px 7px;
     width: max-content;
-    border: 1px solid #f97474;
+    border: 1px solid black;
     border-radius: 5px;
     display: inline-block;
     margin-right: 5px;
     margin-top: 5px;
 }
 
+.chips:first-letter {
+    text-transform:uppercase;
+}
+
 .chips .button.tertiary,
 .darktheme .chips .button.tertiary {
     border-color: transparent;
-    color: #f29696;
+    background: transparent;
+    color: #790919;
+    margin: 0;
+}
+
+.chips.delete {
+    background: #f7d9d9;
+    border-color: #930909;
 }
 
 .chips.generic {
-    background: #311414;
+    background: #c3ebf0;
+    border-color: #098293;
+}
+
+.englishspacer{
+    visibility:hidden;
+}
+
+.chips:first-letter {
+    text-transform: uppercase;
 }

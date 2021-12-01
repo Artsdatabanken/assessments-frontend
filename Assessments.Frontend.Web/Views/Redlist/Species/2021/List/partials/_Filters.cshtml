@@ -155,6 +155,12 @@ using System.Linq;
                 <span class="material-icons">close</span>Fjern
             </button>
         }
+        else if (value == "remove_search")
+        {
+            <button class="button tinybutton tertiary" name="remove_search" value="true">
+                <span class="material-icons">close</span>Fjern
+            </button><br />
+        }
         else
         {
             <button class="button tinybutton tertiary" type="submit" onclick="submitClickedElement('@value')">
@@ -171,14 +177,12 @@ using System.Linq;
     <p class="hit_count_text">
         <span>
             @if (Filter.GetActiveSelectionCount(Model) != 0
-           || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
+          || !string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
             {
                 @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
                 {
-                    <span>søket</span><span> &ldquo;@Filter.GetActiveSelection(Model)&rdquo;</span>
-                    <button class="button tinybutton tertiary" name="remove_search" value="true">
-                        <span class="material-icons">close</span>Fjern
-                    </button><br />
+                    string searchstring = "Søket " + '"'+@Filter.GetActiveSelection(Model)+'"';
+                    makeChips(searchstring, "remove_search", "remove_search");
                 }
                 @if (Filter.GetActiveSelectionCount(Model) > 0)
                 {

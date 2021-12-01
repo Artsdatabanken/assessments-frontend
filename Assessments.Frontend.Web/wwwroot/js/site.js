@@ -31,12 +31,12 @@ const setVisited = () => {
 }
 
 const updateToggleAll = (el) => {
-    if (el.classList[0] === "insect_input") {
+    if (el && el.classList[0] === "insect_input") {
         toggleSingleFilter(el, "Insekter");
-    } else if (endangered.some(category => el.id.indexOf(category) != -1)) {
+    } else if (el && endangered.some(category => el.id.indexOf(category) != -1)) {
         toggleSingleFilter(el, "endangered_check");
         toggleSingleFilter(el, "redlisted_check");
-    } else if (redlisted.some(category => el.id.indexOf(category) != -1)) {
+    } else if (el && redlisted.some(category => el.id.indexOf(category) != -1)) {
         toggleSingleFilter(el, "redlisted_check");
     }
 }

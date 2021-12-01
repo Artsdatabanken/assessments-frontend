@@ -246,6 +246,7 @@ document.getElementById("filter_modal_background").addEventListener('click', fun
 
 function submitClickedElement(element) {
     // Uncheck related checbox from filter
+    element = element.split(' ').join('_'); // spaces must not exist -> underscore
     const checkboxed = document.getElementById(element);
     if (checkboxed && checkboxed.checked == true) {
         checkboxed.checked = false;

@@ -138,6 +138,7 @@ li a span.element_icon {
     display: inline-grid;
     padding: 5px 0;
     width: 100%;
+    padding-left: 10px;
 }
 
 .listheader {
@@ -280,7 +281,7 @@ li a span.element_icon {
     }
 
     .redlist li a {
-        grid-template-columns: 18% 48% 21% 15%;
+        grid-template-columns: 18% 48% 22% 15%;
         padding-left: 0;
         padding-right: 0;
     }

@@ -24,6 +24,7 @@ using System.Linq;
                 if (item.Contains("scroll_"))
                     value = item.Replace("scroll_", "");
         }
+        id = id.Replace(" ", "_");
         <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
     }
     void InputTag(string name, string[] elements, string value)
@@ -47,11 +48,12 @@ using System.Linq;
                 }
             </ul>
         </div>
-    }
+                                }
     void makeCheckBoxLi(string key, string value, string name, string[] model)
-    {
+    {        
+        string id= key.Replace(" ", "_");
         <li class="checkbox">
-            <label for="@key">
+            <label for="@id">
                 @{ InputTag(name, model, key);}
                 <span class="label_text">@value</span>
             </label>

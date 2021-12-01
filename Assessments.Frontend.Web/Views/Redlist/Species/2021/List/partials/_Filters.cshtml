@@ -97,12 +97,11 @@ using System.Linq;
 
     void makeSuperChips(bool swap, string name, dynamic modelname, dynamic looplist)
     {
-
-
         @foreach (var el in looplist)
         {
             dynamic value = el;
             dynamic key = el;
+
             if (name != "SpeciesGroups")
             {
                 if (swap)
@@ -116,6 +115,7 @@ using System.Linq;
                     key = el.Key;
                 }
             }
+            string labelname = value;
             if (name == "Criterias")
             {
                 key = el.Key + " - " + el.Value;
@@ -127,6 +127,7 @@ using System.Linq;
             else if (name == "Category")
             {
                 key = key["presentationstring"];
+                labelname = "input_" + value;
             }
 
             @foreach (string element in modelname)
@@ -136,7 +137,7 @@ using System.Linq;
 
                 if (element == value)
                 {
-                    makeChips(key, "generic",value);
+                    makeChips(key, "generic", labelname);
                 }
             }
             
@@ -146,21 +147,21 @@ using System.Linq;
 
     void makeChips(string buttontext, string className,string value)
     {
-        <div class="chips @className">
-            <span>@buttontext</span>
-            @if (value == "delete")
-            {
-                <button class="button tinybutton tertiary" name="remove_filters" value="true">
-                    <span class="material-icons">close</span>Fjern
-                </button>
-            }
-            else
-            {   <label for="@value" class="button tinybutton tertiary">
-                    <span class="material-icons">close</span>Fjern
-                </label>
-            }
-
-        </div>
+    <div class="chips @className">
+        <span>@buttontext</span>
+        @if (value == "delete")
+        {
+            <button class="button tinybutton tertiary" name="remove_filters" value="true">
+                <span class="material-icons">close</span>Fjern
+            </button>
+        }
+        else
+        { 
+            <button class="button tinybutton tertiary"  value="true" onclick="submitClickedElement(@value)">
+                <span class="material-icons">close</span>Fjern
+            </button>
+        }
+    </div>
     }
 }
 
@@ -193,7 +194,7 @@ using System.Linq;
                 if (Model.PresumedExtinct)
                 {
                     string[] PresumedExtinct = new string[] { "Antatt utdødd" };
-                    makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
+                    //makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
                 }
             }
 

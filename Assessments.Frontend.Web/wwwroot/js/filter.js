@@ -243,3 +243,8 @@ document.getElementById("filter_modal_background").addEventListener('click', fun
         closeFilters();
     } 
 });
+
+
+function submitClickedElement(element) {
+    element.checked = false;
+}

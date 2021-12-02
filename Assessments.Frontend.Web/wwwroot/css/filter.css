@@ -147,16 +147,13 @@
     }
 }
 
-
-
-
 button.close_filters {
     display: none;
 }
 
 /* MOBILE OPEN MODAL */
 
-.filter_background {
+.filter_background  {
     position: relative;
     width: auto;
     top: auto;

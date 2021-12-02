@@ -44,15 +44,15 @@ const showFilters = () => {
     filters.style["display"] = "block";
     filter_modal_background.style["display"] = "block";
     filter_modal_background.classList.remove("modal_background_open");
-    submit_filters.style["display"] = "none";
+    submit_filters.classList.add("hide_element");
     Array.prototype.forEach.call(filters_close_buttons, el => {
         el.style["display"] = "none";
     });
 }
 
-const hideFilters = () => {
-    submit_filters.style["display"] = "block";
-    document.getElementById("filters").style["display"] = "none";
+function hideFilters(){
+    submit_filters.classList.remove("hide_element");
+    document.getElementById("filters").classList.add("hide_element");
     if (document.body.classList) {
         document.body.classList.remove('noscroll');
     }    

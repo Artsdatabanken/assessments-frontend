@@ -212,7 +212,7 @@ using System.Linq;
 <!-- CONTROL BUTTONS and toggles-->
 <div class="controls">
     <div class="list_control_buttons">
-        <button class="toggle_filter only_mobile list_actions" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
+        <button class="toggle_filter only_mobile list_actions hide_element" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
             @if (Filter.GetActiveSelectionCount(Model) != 0)
             {
                 <span class="filternumber">@Filter.GetActiveSelectionCount(Model)</span>

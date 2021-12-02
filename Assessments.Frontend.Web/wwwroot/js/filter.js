@@ -33,11 +33,11 @@ input[type=checkbox]:checked#show_insects~.filter_insects {
 `;
 
 const showFilterButton = () => {
-    document.getElementById("open_filter").style["display"] = "inline-block";
+    document.getElementById("open_filter").classList.remove("hide_element");
 }
 
 const hideFilterButton = () => {
-    document.getElementById("open_filter").style["display"] = "none";
+    document.getElementById("open_filter").classList.add("hide_element");
 }
 
 const showFilters = () => {

@@ -824,3 +824,16 @@ option {
     overflow: hidden;
     position:fixed;
 }
+
+.main button.hide_element,
+.hide_element {
+    display: none;
+}
+
+.show_block{
+    display:block;
+}
+
+.show_inline_block {
+    display: inline-block;
+}

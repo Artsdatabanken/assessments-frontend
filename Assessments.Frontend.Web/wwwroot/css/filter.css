@@ -7,9 +7,6 @@
     border-bottom: 1px solid #7f726b;
 }
 
-button#open_filter {
-    display: none;
-}
 
 @media only screen and (min-width: 750px) {
     .controls {
@@ -306,7 +303,7 @@ button.list_header {
 
     .filter_scroll_area {
         max-height: calc(100vh - 110px);
-        overflow: scroll;
+        overflow-y: scroll;
         border-top: 1px solid gray;
         border-bottom: 1px solid gray;
     }

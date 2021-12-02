@@ -156,8 +156,11 @@ button.close_filters {
 
 /* MOBILE OPEN MODAL */
 
-#filters_scrollable {
+.filter_background {
     position: relative;
+    width: auto;
+    top: auto;
+    left: auto;
 }
 
 .modal_background_open {

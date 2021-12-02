@@ -44,10 +44,6 @@ const showFilters = () => {
     filters.style["display"] = "block";
     filter_modal_background.style["display"] = "block";
     filter_modal_background.classList.remove("modal_background_open");
-    filters_scrollable.style["position"] = "relative";
-    filters_scrollable.style["width"] = "auto";
-    filters_scrollable.style["top"] = "auto";
-    filters_scrollable.style["left"] = "auto";
     submit_filters.style["display"] = "none";
     Array.prototype.forEach.call(filters_close_buttons, el => {
         el.style["display"] = "none";
@@ -59,8 +55,7 @@ const hideFilters = () => {
     document.getElementById("filters").style["display"] = "none";
     if (document.body.classList) {
         document.body.classList.remove('noscroll');
-    }
-    
+    }    
 }
 
 const openFilters = () => {

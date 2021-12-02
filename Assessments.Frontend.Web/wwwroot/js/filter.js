@@ -69,6 +69,18 @@ if (document.getElementById("filter_modal_background")) {
     });
 }
 
+function submitClickedElement(element) {
+    console.log("UPDATING FILTER ON CHIPS CLICK")
+    // Uncheck related checbox from filter
+    element = element.split(' ').join('_'); // spaces must not exist -> underscore
+    const checkboxed = document.getElementById(element);
+    if (checkboxed && checkboxed.checked == true) {
+        checkboxed.checked = false;
+    }
+    updateToggleAll(checkboxed);
+}
+
+
 
 
  const filterStyles = `
@@ -228,26 +240,38 @@ const toggleInsects = () => {
     });
 }
 
-const toggleSingleFilter = (element, parentId) => {
-    
+const toggleSingleFilter = (element, parentId) => {    
     if (!element.checked) {
         document.getElementById(parentId).checked = false;
     }
 }
 
 
+const initialFilterCheck = () => {
 
-
-
-function submitClickedElement(element) {
-    
-    // Uncheck related checbox from filter
-    element = element.split(' ').join('_'); // spaces must not exist -> underscore
-    const checkboxed = document.getElementById(element);
-    if (checkboxed && checkboxed.checked == true) {
-        checkboxed.checked = false;
+    if (isSmallReader()) {
+       // showFilterButton();
+        //hideFilters();
+        //removeSubmitOnclick();
+    } else {
+       // showFilters();
+       // hideFilterButton();
     }
-    updateToggleAll(checkboxed);
+    addOnclick();
+}
+
+
+if (filters) {
+    window.addEventListener('resize', initialFilterCheck);
+    const stylesheet = document.createElement("style");
+    stylesheet.innerText = filterStyles;
+    document.head.appendChild(stylesheet);
+    initialFilterCheck();
+    if (!hasVisited()) {
+        setVisited();
+        handleFirstTime();
+    }
+    initialCollapsibleCheck();
 }
 
 
@@ -256,35 +280,7 @@ function submitClickedElement(element) {
 
 /*
 
-const initialFilterCheck = () => {
-    
-    if (isSmallReader()) {
-        showFilterButton();
-        hideFilters();
-        removeSubmitOnclick();
-    } else {
-        showFilters();
-        hideFilterButton();
-    }
-    addOnclick();
-}
 
-
-if (filters) {
-    
-    window.addEventListener('resize', initialFilterCheck);
-
-    const stylesheet = document.createElement("style");
-    stylesheet.innerText = filterStyles;
-    document.head.appendChild(stylesheet);
-
-    initialFilterCheck();
-    if (!hasVisited()) {
-        setVisited();
-        handleFirstTime();
-    }
-    initialCollapsibleCheck();
-}
 
 
 

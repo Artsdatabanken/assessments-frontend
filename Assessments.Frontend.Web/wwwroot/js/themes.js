@@ -1,7 +1,7 @@
 /* THEME MODES */
 
 function highContrastMode(thisbutton,className) {
-    var mainparent = document.getElementById("bodywrap");
+    var mainparent = document.body;
     if (mainparent.classList && mainparent.classList.contains(className)) {
         mainparent.classList.remove(className);
         thisbutton.classList.remove(className);
@@ -24,7 +24,8 @@ const initialContrast = matchMedia('(forced-colors: active)');
 const initialTheme = matchMedia('(prefers-color-scheme: dark)');
 
 function checks() {
-    var mainparent = document.getElementById("bodywrap");
+    console.log("RUNNING THEME CHECK")
+    var mainparent = document.body;
     if (initialTheme.matches) {
         mainparent.classList.add("darktheme");
     } else {
@@ -46,3 +47,4 @@ checks();
 // listen for any changes performed by people tinkering with their settings
 initialContrast.addListener(checks);
 initialTheme.addListener(checks);
+

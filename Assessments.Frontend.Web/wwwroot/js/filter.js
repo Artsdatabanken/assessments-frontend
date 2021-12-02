@@ -1,37 +1,77 @@
-function showFilterButton() {
-    document.getElementById("open_filter").classList.remove("hide_element");
-}
-
-function hideFilterButton() {
-    document.getElementById("open_filter").classList.add("hide_element");
-}
 
 function closeFilters() {
     document.getElementById("filters").classList.add("hide_on_smallscreen");
+    filters_open_button.focus();
 }
 
 function openFilters() {
     document.getElementById("filters").classList.remove("hide_on_smallscreen");
+    filters_close_buttons[0].focus();
+    document.body.classList.add('noscroll');
+}
+
+function collapse(name) {
+    item = document.getElementById(name);
+    if (item.checked) {
+        item.checked = false;
+    } else {
+        item.checked = true;
+    }
+    setCollapsibleIcon(name);
 }
 
 function startup() {
-    console.log("startup filters")
-    // Users without javascript should never see these items
-    showFilterButton();
+    console.log("~ startup filters")
+
+    // Remove no javascript tag, making js-availiable styling apply
+    if (document.getElementById("open_filter")) {
+        document.getElementById("open_filter").classList.remove("no_js");
+    }
+    if (document.getElementById("filters")) {
+        document.getElementById("filters").classList.remove("no_js");
+    }
+    
 
     // Users with javascript should always see this item
     closeFilters();
 
-    // ADD STYLING CLASS for JS-users
-    document.getElementById("filters").classList.remove("no_js");
-    console.log("startup complete");
+    
+    console.log("~ startup complete ^.^");
 }
 
 startup();
 
-/*
- * 
- * const filterStyles = `
+
+/* EVENTS */
+
+
+document.addEventListener('keydown', (e) => {
+    // Keypress on entire page
+    
+    if (e.code == "Escape" && isSmallReader()) {
+        // Only listen to escape clicks, and only on tiny screens
+
+        if (document.getElementById("filters") &&
+            !document.getElementById("filters").classList.contains("hide_on_smallscreen")) {
+            // If tilter box is open, close it.
+            closeFilters();
+        }
+    }    
+});
+
+if (document.getElementById("filter_modal_background")) {
+    // Click outside filtebox closes filterbox
+    // DO we even want this? 
+    document.getElementById("filter_modal_background").addEventListener('click', function (e) {
+        if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
+            closeFilters();
+        }
+    });
+}
+
+
+
+ const filterStyles = `
 input[type=checkbox]:not(:checked)#show_area~.filter_area,
 input[type=checkbox]:not(:checked)#show_category~.filter_category,
 input[type=checkbox]:not(:checked)#show_region~.filter_region,
@@ -67,52 +107,8 @@ input[type=checkbox]:checked#show_insects~.filter_insects {
 
 
 
-const showFilters = () => {
-    filters.style["display"] = "block";
-    filter_modal_background.style["display"] = "block";
-    filter_modal_background.classList.remove("modal_background_open");
-    submit_filters.classList.add("hide_element");
-    Array.prototype.forEach.call(filters_close_buttons, el => {
-        el.classList.add("hide_element");
-    });
-}
 
-function hideFilters(){
-    submit_filters.classList.remove("hide_element");
-    document.getElementById("filters").classList.add("hide_element");
-    if (document.body.classList) {
-        document.body.classList.remove('noscroll');
-    }    
-}
 
-const openFilters = () => {
-    filters.style["display"] = "block";
-    filter_modal_background.style["display"] = "block";
-    filter_modal_background.classList.add("modal_background_open");
-    filters_scrollable.classList.add("open_field")
-    Array.prototype.forEach.call(filters_close_buttons, el => {
-        el.classList.remove("hide_element");
-    });
-
-    filters_close_buttons[0].focus();
-    document.body.classList.add('noscroll');
-}
-
-const closeFilters = () => {
-    filters.style["display"] = "none";
-    filter_modal_background.style["display"] = "none";
-    filters_open_button.focus();
-}
-
-const collapse = (name) => {
-    item = document.getElementById(name);
-    if (item.checked) {
-        item.checked = false;
-    } else {
-        item.checked = true;
-    }
-    setCollapsibleIcon(name);
-}
 
 const setCollapsibleIcon = (name) => {
     if (name == "initial_check") {
@@ -167,13 +163,17 @@ const shouldToggleMarkAll = (elementsClass) => {
     })
 }
 
+
+
 const shouldToggleMarkRedOrEnd = (list) => {
+    
     return Array.prototype.every.call(list, (item) => {
         return document.getElementById("input_" + item).checked === true;
     })
 }
 
 const toggleMarkAll = () => {
+    
     if (shouldToggleMarkAll("insect_input")) {
         insectInput.checked = true;
     }
@@ -186,6 +186,7 @@ const toggleMarkAll = () => {
 }
 
 const toggleRedlistedCategories = () => {
+    
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
     redlisted.forEach(el => {
@@ -201,6 +202,7 @@ const toggleRedlistedCategories = () => {
 }
 
 const toggleEndangeredCategories = () => {
+  
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
     endangered.forEach(el => {
@@ -216,6 +218,7 @@ const toggleEndangeredCategories = () => {
 }
 
 const toggleInsects = () => {
+    
     Array.prototype.forEach.call(insectFilters, insect => {
         if (insectInput.checked) {
             insect.checked = true;
@@ -226,18 +229,35 @@ const toggleInsects = () => {
 }
 
 const toggleSingleFilter = (element, parentId) => {
+    
     if (!element.checked) {
         document.getElementById(parentId).checked = false;
     }
 }
 
-document.addEventListener('keydown', (e) => {
-    if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader()) {
-        closeFilters();
+
+
+
+
+function submitClickedElement(element) {
+    
+    // Uncheck related checbox from filter
+    element = element.split(' ').join('_'); // spaces must not exist -> underscore
+    const checkboxed = document.getElementById(element);
+    if (checkboxed && checkboxed.checked == true) {
+        checkboxed.checked = false;
     }
-});
+    updateToggleAll(checkboxed);
+}
+
+
+
+// REJECTED STUFF ------------------
+
+/*
 
 const initialFilterCheck = () => {
+    
     if (isSmallReader()) {
         showFilterButton();
         hideFilters();
@@ -249,7 +269,9 @@ const initialFilterCheck = () => {
     addOnclick();
 }
 
+
 if (filters) {
+    
     window.addEventListener('resize', initialFilterCheck);
 
     const stylesheet = document.createElement("style");
@@ -264,22 +286,23 @@ if (filters) {
     initialCollapsibleCheck();
 }
 
-if (document.getElementById("filter_modal_background")) {
-    document.getElementById("filter_modal_background").addEventListener('click', function (e) {
-        if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
-            closeFilters();
-        }
-    });
+
+
+const showFilters = () => {
+    filters.style["display"] = "block";
+    filter_modal_background.style["display"] = "block";
+    filter_modal_background.classList.remove("modal_background_open");
+    submit_filters.classList.add("hide_element");
+
 }
 
-function submitClickedElement(element) {
-    // Uncheck related checbox from filter
-    element = element.split(' ').join('_'); // spaces must not exist -> underscore
-    const checkboxed = document.getElementById(element);
-    if (checkboxed && checkboxed.checked == true) {
-        checkboxed.checked = false;
+function hideFilters() {
+    submit_filters.classList.remove("hide_element");
+    document.getElementById("filters").classList.add("hide_element");
+    if (document.body.classList) {
+        document.body.classList.remove('noscroll');
     }
-    updateToggleAll(checkboxed);
 }
 
 */
+

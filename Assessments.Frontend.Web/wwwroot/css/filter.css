@@ -462,6 +462,7 @@ button.list_header {
         z-index: 20;
     }
 
+    .filtercontainer,
     .filteX {
         max-width: 100%;
         width: 100%;
@@ -490,6 +491,14 @@ button.list_header {
 
 
     /* Filters for users without javascript */
+
+    .no_js .close_reset_filter,
+    .no_js .close_filters,
+    .toggle_filter.no_js {
+        display: none;
+    }
+
+    
     .no_js .filter_background,
     .filteX.no_js {
         display: inline-block;

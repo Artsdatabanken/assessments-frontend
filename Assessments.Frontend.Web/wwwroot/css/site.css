@@ -825,6 +825,8 @@ option {
     position:fixed;
 }
 
+/* are these in use? */
+
 .main button.hide_element,
 .hide_element {
     display: none;

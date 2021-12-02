@@ -1,4 +1,37 @@
-const filterStyles = `
+function showFilterButton() {
+    document.getElementById("open_filter").classList.remove("hide_element");
+}
+
+function hideFilterButton() {
+    document.getElementById("open_filter").classList.add("hide_element");
+}
+
+function closeFilters() {
+    document.getElementById("filters").classList.add("hide_on_smallscreen");
+}
+
+function openFilters() {
+    document.getElementById("filters").classList.remove("hide_on_smallscreen");
+}
+
+function startup() {
+    console.log("startup filters")
+    // Users without javascript should never see these items
+    showFilterButton();
+
+    // Users with javascript should always see this item
+    closeFilters();
+
+    // ADD STYLING CLASS for JS-users
+    document.getElementById("filters").classList.remove("no_js");
+    console.log("startup complete");
+}
+
+startup();
+
+/*
+ * 
+ * const filterStyles = `
 input[type=checkbox]:not(:checked)#show_area~.filter_area,
 input[type=checkbox]:not(:checked)#show_category~.filter_category,
 input[type=checkbox]:not(:checked)#show_region~.filter_region,
@@ -32,13 +65,7 @@ input[type=checkbox]:checked#show_insects~.filter_insects {
 }
 `;
 
-const showFilterButton = () => {
-    document.getElementById("open_filter").classList.remove("hide_element");
-}
 
-const hideFilterButton = () => {
-    document.getElementById("open_filter").classList.add("hide_element");
-}
 
 const showFilters = () => {
     filters.style["display"] = "block";
@@ -46,7 +73,7 @@ const showFilters = () => {
     filter_modal_background.classList.remove("modal_background_open");
     submit_filters.classList.add("hide_element");
     Array.prototype.forEach.call(filters_close_buttons, el => {
-        el.style["display"] = "none";
+        el.classList.add("hide_element");
     });
 }
 
@@ -64,7 +91,7 @@ const openFilters = () => {
     filter_modal_background.classList.add("modal_background_open");
     filters_scrollable.classList.add("open_field")
     Array.prototype.forEach.call(filters_close_buttons, el => {
-        el.style["display"] = "block";
+        el.classList.remove("hide_element");
     });
 
     filters_close_buttons[0].focus();
@@ -254,3 +281,5 @@ function submitClickedElement(element) {
     }
     updateToggleAll(checkboxed);
 }
+
+*/

@@ -1,6 +1,7 @@
 /* CONTROL BUTTONS */
 
 
+
 /* View control bar */
 
 .controls {
@@ -15,6 +16,10 @@
 
     .empty_filters {
         /*margin-left: 205px;*/
+    }
+
+    button.close_filters {
+        display: none;
     }
 }
 
@@ -147,9 +152,7 @@
     }
 }
 
-button.close_filters {
-    display: none;
-}
+
 
 /* MOBILE OPEN MODAL */
 
@@ -435,4 +438,64 @@ button.list_header {
 .filterbox{
     display:block;
     margin-top:10px;
+}
+
+/* AFTER REFACTOR: */
+
+@media only screen and (min-width: 750px) {
+    #open_filter {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 750px) {
+    .hide_on_smallscreen {
+        display: none;
+    }
+
+    .filteX {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+    }
+
+    .filteX {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .filter_modal_background {
+        background: rgba(0, 0, 0, 0.5) none repeat scroll 0% 0%;
+        top: 0px;
+        bottom: 0px;
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 12;
+    }
+
+    .filter_modal_background,
+    .filteX {
+        display: block;
+    }
+
+    .filteX.hide_on_smallscreen {
+        display: none;
+    }
+
+
+    /* Filters for users without javascript */
+    .no_js .filter_background,
+    .filteX.no_js {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        display: block;
+    }
 }

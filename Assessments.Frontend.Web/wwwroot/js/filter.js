@@ -57,7 +57,7 @@ const showFilters = () => {
 const hideFilters = () => {
     submit_filters.style["display"] = "block";
     document.getElementById("filters").style["display"] = "none";
-    if (body.classList) {
+    if (document.body.classList) {
         document.body.classList.remove('noscroll');
     }
     
@@ -242,12 +242,13 @@ if (filters) {
     initialCollapsibleCheck();
 }
 
-document.getElementById("filter_modal_background").addEventListener('click', function (e) {
-    if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
-        closeFilters();
-    } 
-});
-
+if (document.getElementById("filter_modal_background")) {
+    document.getElementById("filter_modal_background").addEventListener('click', function (e) {
+        if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
+            closeFilters();
+        }
+    });
+}
 
 function submitClickedElement(element) {
     // Uncheck related checbox from filter

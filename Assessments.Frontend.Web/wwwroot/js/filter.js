@@ -1,6 +1,7 @@
 
 function closeFilters() {
     document.getElementById("filters").classList.add("hide_on_smallscreen");
+    document.body.classList.remove('noscroll');
     filters_open_button.focus();
 }
 
@@ -81,7 +82,7 @@ function submitClickedElement(element) {
 }
 
 
-
+/* Old code not changed  much */
 
  const filterStyles = `
 input[type=checkbox]:not(:checked)#show_area~.filter_area,
@@ -116,11 +117,6 @@ input[type=checkbox]:checked#show_insects~.filter_insects {
     display: none;
 }
 `;
-
-
-
-
-
 
 const setCollapsibleIcon = (name) => {
     if (name == "initial_check") {
@@ -175,17 +171,13 @@ const shouldToggleMarkAll = (elementsClass) => {
     })
 }
 
-
-
-const shouldToggleMarkRedOrEnd = (list) => {
-    
+const shouldToggleMarkRedOrEnd = (list) => {    
     return Array.prototype.every.call(list, (item) => {
         return document.getElementById("input_" + item).checked === true;
     })
 }
 
-const toggleMarkAll = () => {
-    
+const toggleMarkAll = () => {    
     if (shouldToggleMarkAll("insect_input")) {
         insectInput.checked = true;
     }
@@ -197,8 +189,7 @@ const toggleMarkAll = () => {
     }
 }
 
-const toggleRedlistedCategories = () => {
-    
+const toggleRedlistedCategories = () => {    
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
     redlisted.forEach(el => {
@@ -213,8 +204,7 @@ const toggleRedlistedCategories = () => {
     })
 }
 
-const toggleEndangeredCategories = () => {
-  
+const toggleEndangeredCategories = () => {  
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
     endangered.forEach(el => {
@@ -229,8 +219,7 @@ const toggleEndangeredCategories = () => {
     })
 }
 
-const toggleInsects = () => {
-    
+const toggleInsects = () => {    
     Array.prototype.forEach.call(insectFilters, insect => {
         if (insectInput.checked) {
             insect.checked = true;
@@ -246,11 +235,9 @@ const toggleSingleFilter = (element, parentId) => {
     }
 }
 
-
-const initialFilterCheck = () => {
-
+function initialFilterCheck() {
     if (isSmallReader()) {
-       // showFilterButton();
+        // showFilterButton();
         //hideFilters();
         //removeSubmitOnclick();
     } else {
@@ -268,37 +255,14 @@ if (filters) {
     document.head.appendChild(stylesheet);
     initialFilterCheck();
     if (!hasVisited()) {
+        /*
+             hasVisited checks url if meta hasVisited is set 
+             All filtergrups start open (people w/o js. ) TODO : CONSIDER using the no_js tag instead. 
+             close all but Vurderingsområde on first visit. 
+             After first visit, use isCheck instead to know which groups are opened and closed.
+         */
         setVisited();
         handleFirstTime();
     }
     initialCollapsibleCheck();
 }
-
-
-
-// REJECTED STUFF ------------------
-
-/*
-
-
-
-
-
-const showFilters = () => {
-    filters.style["display"] = "block";
-    filter_modal_background.style["display"] = "block";
-    filter_modal_background.classList.remove("modal_background_open");
-    submit_filters.classList.add("hide_element");
-
-}
-
-function hideFilters() {
-    submit_filters.classList.remove("hide_element");
-    document.getElementById("filters").classList.add("hide_element");
-    if (document.body.classList) {
-        document.body.classList.remove('noscroll');
-    }
-}
-
-*/
-

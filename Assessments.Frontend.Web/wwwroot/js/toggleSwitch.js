@@ -18,6 +18,7 @@ function addTogglesCheck() {
 }
 
 addTogglesCheck();
+// TODO: WHEN resizing from mobile with unapplied changes to bigscreen, reset unapplied changes.
 
 
 window.addEventListener('resize', function (event) {
@@ -42,7 +43,4 @@ window.addEventListener('resize', function (event) {
             el.style.display = "inline-block";
         });
     }
-    
-
-
 }, true);

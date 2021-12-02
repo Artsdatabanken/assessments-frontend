@@ -57,6 +57,10 @@ const showFilters = () => {
 const hideFilters = () => {
     submit_filters.style["display"] = "block";
     document.getElementById("filters").style["display"] = "none";
+    if (body.classList) {
+        document.body.classList.remove('noscroll');
+    }
+    
 }
 
 const openFilters = () => {
@@ -69,6 +73,7 @@ const openFilters = () => {
     });
 
     filters_close_buttons[0].focus();
+    document.body.classList.add('noscroll');
 }
 
 const closeFilters = () => {

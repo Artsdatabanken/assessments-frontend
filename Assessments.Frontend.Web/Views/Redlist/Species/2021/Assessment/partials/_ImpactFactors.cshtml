@@ -148,7 +148,11 @@
                 <li class="tablist_listheader">
                     <span class="summary_title">Artens påvirkningsfaktorer</span>
                     <span class="full_list_title">Alle påvirkningsfaktorer</span>
-                    <span class="no_elements">Ingen elementer valgt</span>
+                    @if (Model.ImpactFactors.Count == 0)
+                    {
+                        <span class="no_elements">Det er ikke angitt påvirkningsfaktorer.</span>
+                    }
+
                 </li>
                 @foreach (var (key, value) in impactfactors_json)
                 {                

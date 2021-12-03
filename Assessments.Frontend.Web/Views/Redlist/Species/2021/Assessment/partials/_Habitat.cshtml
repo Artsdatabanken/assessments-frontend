@@ -8,57 +8,64 @@
 *@
 
 @{
-//model IEnumerable<string>
-Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
+    //model IEnumerable<string>
+    Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
 
 
     void habitatFunction(string imageurl, string title, string description, string mapping, string active)
     {
-    <div class="habitat_element @active">
-        <div class="habitat_icon">
-            @if (imageurl != null)
+        <div class="habitat_element @active">
+            <div class="habitat_icon">
+                @if (imageurl != null)
+                {
+                    <img src=@imageurl alt="Foto som viser @title" />
+                }
+            </div>
+            @if (title != null)
             {
-                <img src=@imageurl alt="Foto som viser @title"/>
+                <b>@title</b>
+            }
+            @if (description != null)
+            {
+                <p class="expand_hide">
+                    @description
+
+                </p>
+            }
+            @if (mapping != null)
+            {
+
+                <p class="expand_hide">
+                    @Html.Raw(mapping)
+                </p>
+
+                <button class="tertiary tinybutton" onclick="expandHabitat(this, 'expanded')">
+                    <span class="more">
+                        Se mer
+                        <span class="material-icons">arrow_drop_down</span>
+                    </span>
+                    <span class="less">
+                        Se mindre
+                        <span class="material-icons">arrow_drop_up</span>
+                    </span>
+                </button>
             }
         </div>
-        @if (title != null)
-        {
-            <b>@title</b>
-        }
-        @if (description != null)
-        {
-            <p class="expand_hide">
-                @description
-
-            </p>
-        }
-        @if (mapping != null)
-        {
-
-            <p class="expand_hide">
-                @Html.Raw(mapping)
-            </p>
-
-            <button class="tertiary tinybutton" onclick="expandHabitat(this, 'expanded')">
-                <span class="more">
-                    Se mer 
-                    <span class="material-icons">arrow_drop_down</span>
-                </span>
-                <span class="less">
-                    Se mindre
-                    <span class="material-icons">arrow_drop_up</span>
-                </span>
-            </button>
-        }
-    </div>    
     }
 }
 
-<div class="habitat page_section ">
-    @if (@Model.MainHabitat.Count() != 0)
+
+@if (!Model.Category.Contains("LC") &&
+     !Model.Category.Contains("NA") &&
+     !Model.Category.Contains("NE") &&
+     !Model.Category.Contains("RE") || @Model.MainHabitat.Count() != 0)
     {
+
+    <div class="habitat page_section ">        
         <h2>@ViewBag.glossary["habitat"]["tagline"]</h2>
         <p>@Html.Raw(@ViewBag.glossary["habitat"]["description"])</p>
+
+        <p>@Model.MainHabitat.Count</p>
 
         <button class="changetab active" onclick="expandHabitat(this, 'see_all', 'remove')">
             Hovedhabitat
@@ -69,6 +76,16 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
         </button>
 
         <div class="habitat_container tabbed_element_container">
+
+            <div class="tablist_listheader">
+                <span class="summary_title">Artens hovedhabitat</span>
+                <span class="full_list_title">Alle habitat</span>
+                @if (Model.MainHabitat.Count == 0)
+                {
+                    <span class="no_elements">Det er ikke angitt hovedhabitat.</span>
+                }
+
+            </div>
             @foreach (var key in habitat.Keys)
             {
                 var imageurl = @habitat[key]["image"];
@@ -78,9 +95,8 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
                 var active = @Model.MainHabitat.Contains(key) ? "active" : "inactive";
                 habitatFunction(imageurl, title, description, mapping, active);
             }
-        </div>
-    }
-
+        </div>    
+    </div>
     <script>
         // See more text by altering css of the clicked element's top parent node
         var seemorebuttons = document.getElementsByClassName('seemore');
@@ -94,14 +110,14 @@ Dictionary<string, Dictionary<string, string>> habitat = ViewBag.habitat.ToObjec
                 element.parentElement.classList.add(className);
                 element.previousElementSibling.classList.remove("active");
                 element.classList.add("active");
-            } else {               
+            } else {
                 if (element.parentElement.classList.contains(className)) {
                     element.parentElement.classList.remove(className);
                 } else {
                     element.parentElement.classList.add(className);
-                }                
+                }
             }
-            
+
         }
     </script>
-</div>
+}

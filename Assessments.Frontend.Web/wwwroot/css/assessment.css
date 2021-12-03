@@ -699,27 +699,31 @@ span.area i {
     background: pink;
 }
 
+.tablist_listheader{
+    display:block;
+    min-width:100%;
+}
+
 .full_list_title,
 .summary_title {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 14pt;
     padding-bottom: 10px;
+
 }
 
+.no_elements,
+.full_list_title,
+.full_list .summary_title,
+.full_list .no_elements,
+.see_all .summary_title,
+.see_all .no_elements {
+    display: none;
+}
+
+.see_all .full_list_title,
+.summary_title,
 .full_list .full_list_title,
-.summary .summary_title {
+.no_elements {
     display: block;
-}
-
-.summary .full_list_title ,
-.full_list .summary_title {
-    display:none;
-}
-
-.no_elements{
-    display:none;
-}
-
-.summary .no_elements{
-    display:block;
 }

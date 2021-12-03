@@ -22,6 +22,14 @@
     button.close_filters {
         display: none;
     }
+
+    .no_js button.submit_filters {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        min-width: 81px;
+        right: 0;
+    }
 }
 
 .controls button {
@@ -510,7 +518,6 @@ button.list_header {
     .no_js #filter_modal_background{
         position:relative;
     }
-
 
     .no_js .filter_background,
     .filteX.no_js {

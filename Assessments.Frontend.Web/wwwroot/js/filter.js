@@ -54,7 +54,7 @@ document.addEventListener('keydown', (e) => {
 
         if (document.getElementById("filters") &&
             !document.getElementById("filters").classList.contains("hide_on_smallscreen")) {
-            // If tilter box is open, close it.
+            // If filter box is open, close it.
             closeFilters();
         }
     }    
@@ -62,7 +62,6 @@ document.addEventListener('keydown', (e) => {
 
 if (document.getElementById("filter_modal_background")) {
     // Click outside filtebox closes filterbox
-    // DO we even want this? 
     document.getElementById("filter_modal_background").addEventListener('click', function (e) {
         if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
             closeFilters();
@@ -71,7 +70,7 @@ if (document.getElementById("filter_modal_background")) {
 }
 
 function submitClickedElement(element) {
-    console.log("UPDATING FILTER ON CHIPS CLICK")
+    console.log("Updating filter on chips click")
     // Uncheck related checbox from filter
     element = element.split(' ').join('_'); // spaces must not exist -> underscore
     const checkboxed = document.getElementById(element);
@@ -171,13 +170,13 @@ const shouldToggleMarkAll = (elementsClass) => {
     })
 }
 
-const shouldToggleMarkRedOrEnd = (list) => {    
+const shouldToggleMarkRedOrEnd = (list) => {
     return Array.prototype.every.call(list, (item) => {
         return document.getElementById("input_" + item).checked === true;
     })
 }
 
-const toggleMarkAll = () => {    
+const toggleMarkAll = () => {
     if (shouldToggleMarkAll("insect_input")) {
         insectInput.checked = true;
     }
@@ -189,7 +188,7 @@ const toggleMarkAll = () => {
     }
 }
 
-const toggleRedlistedCategories = () => {    
+const toggleRedlistedCategories = () => {
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
     redlisted.forEach(el => {
@@ -219,7 +218,7 @@ const toggleEndangeredCategories = () => {
     })
 }
 
-const toggleInsects = () => {    
+const toggleInsects = () => {
     Array.prototype.forEach.call(insectFilters, insect => {
         if (insectInput.checked) {
             insect.checked = true;
@@ -229,36 +228,23 @@ const toggleInsects = () => {
     });
 }
 
-const toggleSingleFilter = (element, parentId) => {    
+const toggleSingleFilter = (element, parentId) => {
     if (!element.checked) {
         document.getElementById(parentId).checked = false;
     }
 }
 
-function initialFilterCheck() {
-    if (isSmallReader()) {
-        // showFilterButton();
-        //hideFilters();
-        //removeSubmitOnclick();
-    } else {
-       // showFilters();
-       // hideFilterButton();
-    }
-    addOnclick();
-}
-
-
 if (filters) {
-    window.addEventListener('resize', initialFilterCheck);
+    window.addEventListener('resize', addOnclick);
     const stylesheet = document.createElement("style");
     stylesheet.innerText = filterStyles;
     document.head.appendChild(stylesheet);
-    initialFilterCheck();
+    addOnclick();
     if (!hasVisited()) {
         /*
              hasVisited checks url if meta hasVisited is set 
              All filtergrups start open (people w/o js. ) TODO : CONSIDER using the no_js tag instead. 
-             close all but Vurderingsområde on first visit. 
+             close all but VurderingsomrÃ¥de on first visit.
              After first visit, use isCheck instead to know which groups are opened and closed.
          */
         setVisited();

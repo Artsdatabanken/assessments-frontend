@@ -761,7 +761,7 @@ option {
     .page-header {
         padding-left: 15px;
         padding-right: 15px;
-        bacground: pink;
+        margin: 0px;
     }
 }
 
@@ -818,4 +818,24 @@ option {
 
 .main button.tinybutton.search_related {
     margin-top: 0px;
+}
+
+.noscroll {
+    overflow: hidden;
+    position:fixed;
+}
+
+/* are these in use? */
+
+.main button.hide_element,
+.hide_element {
+    display: none;
+}
+
+.show_block{
+    display:block;
+}
+
+.show_inline_block {
+    display: inline-block;
 }

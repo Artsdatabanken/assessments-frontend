@@ -1,9 +1,7 @@
 ﻿@model SpeciesAssessment2021
 @{
-    ViewBag.Title = Model.ScientificName;
+    ViewBag.Title = Model.ScientificName + " - Rødlista 2021";
     var naturtypehovedenhet = Model.MainHabitat;
-
-
     string geografi = Model.AssessmentArea;
 
     if (geografi == "N")

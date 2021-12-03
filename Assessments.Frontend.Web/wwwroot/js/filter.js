@@ -1,4 +1,89 @@
-const filterStyles = `
+
+function closeFilters() {
+    document.getElementById("filters").classList.add("hide_on_smallscreen");
+    document.body.classList.remove('noscroll');
+    filters_open_button.focus();
+}
+
+function openFilters() {
+    document.getElementById("filters").classList.remove("hide_on_smallscreen");
+    filters_close_buttons[0].focus();
+    document.body.classList.add('noscroll');
+}
+
+function collapse(name) {
+    item = document.getElementById(name);
+    if (item.checked) {
+        item.checked = false;
+    } else {
+        item.checked = true;
+    }
+    setCollapsibleIcon(name);
+}
+
+function startup() {
+    console.log("~ startup filters")
+
+    // Remove no javascript tag, making js-availiable styling apply
+    if (document.getElementById("open_filter")) {
+        document.getElementById("open_filter").classList.remove("no_js");
+    }
+    if (document.getElementById("filters")) {
+        document.getElementById("filters").classList.remove("no_js");
+    }
+    
+
+    // Users with javascript should always see this item
+    closeFilters();
+
+    
+    console.log("~ startup complete ^.^");
+}
+
+startup();
+
+
+/* EVENTS */
+
+
+document.addEventListener('keydown', (e) => {
+    // Keypress on entire page
+    
+    if (e.code == "Escape" && isSmallReader()) {
+        // Only listen to escape clicks, and only on tiny screens
+
+        if (document.getElementById("filters") &&
+            !document.getElementById("filters").classList.contains("hide_on_smallscreen")) {
+            // If filter box is open, close it.
+            closeFilters();
+        }
+    }    
+});
+
+if (document.getElementById("filter_modal_background")) {
+    // Click outside filtebox closes filterbox
+    document.getElementById("filter_modal_background").addEventListener('click', function (e) {
+        if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
+            closeFilters();
+        }
+    });
+}
+
+function submitClickedElement(element) {
+    console.log("Updating filter on chips click")
+    // Uncheck related checbox from filter
+    element = element.split(' ').join('_'); // spaces must not exist -> underscore
+    const checkboxed = document.getElementById(element);
+    if (checkboxed && checkboxed.checked == true) {
+        checkboxed.checked = false;
+    }
+    updateToggleAll(checkboxed);
+}
+
+
+/* Old code not changed  much */
+
+ const filterStyles = `
 input[type=checkbox]:not(:checked)#show_area~.filter_area,
 input[type=checkbox]:not(:checked)#show_category~.filter_category,
 input[type=checkbox]:not(:checked)#show_region~.filter_region,
@@ -31,61 +116,6 @@ input[type=checkbox]:checked#show_insects~.filter_insects {
     display: none;
 }
 `;
-
-const showFilterButton = () => {
-    document.getElementById("open_filter").style["display"] = "inline-block";
-}
-
-const hideFilterButton = () => {
-    document.getElementById("open_filter").style["display"] = "none";
-}
-
-const showFilters = () => {
-    filters.style["display"] = "block";
-    filter_modal_background.style["display"] = "block";
-    filter_modal_background.classList.remove("modal_background_open");
-    filters_scrollable.style["position"] = "relative";
-    filters_scrollable.style["width"] = "auto";
-    filters_scrollable.style["top"] = "auto";
-    filters_scrollable.style["left"] = "auto";
-    submit_filters.style["display"] = "none";
-    Array.prototype.forEach.call(filters_close_buttons, el => {
-        el.style["display"] = "none";
-    });
-}
-
-const hideFilters = () => {
-    submit_filters.style["display"] = "block";
-    document.getElementById("filters").style["display"] = "none";
-}
-
-const openFilters = () => {
-    filters.style["display"] = "block";
-    filter_modal_background.style["display"] = "block";
-    filter_modal_background.classList.add("modal_background_open");
-    filters_scrollable.classList.add("open_field")
-    Array.prototype.forEach.call(filters_close_buttons, el => {
-        el.style["display"] = "block";
-    });
-
-    filters_close_buttons[0].focus();
-}
-
-const closeFilters = () => {
-    filters.style["display"] = "none";
-    filter_modal_background.style["display"] = "none";
-    filters_open_button.focus();
-}
-
-const collapse = (name) => {
-    item = document.getElementById(name);
-    if (item.checked) {
-        item.checked = false;
-    } else {
-        item.checked = true;
-    }
-    setCollapsibleIcon(name);
-}
 
 const setCollapsibleIcon = (name) => {
     if (name == "initial_check") {
@@ -173,7 +203,7 @@ const toggleRedlistedCategories = () => {
     })
 }
 
-const toggleEndangeredCategories = () => {
+const toggleEndangeredCategories = () => {  
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
     endangered.forEach(el => {
@@ -204,52 +234,21 @@ const toggleSingleFilter = (element, parentId) => {
     }
 }
 
-document.addEventListener('keydown', (e) => {
-    if (e.code == "Escape" && filters.style["display"] === "block" && isSmallReader()) {
-        closeFilters();
-    }
-});
-
-const initialFilterCheck = () => {
-    if (isSmallReader()) {
-        showFilterButton();
-        hideFilters();
-        removeSubmitOnclick();
-    } else {
-        showFilters();
-        hideFilterButton();
-    }
-    addOnclick();
-}
-
 if (filters) {
-    window.addEventListener('resize', initialFilterCheck);
-
+    window.addEventListener('resize', addOnclick);
     const stylesheet = document.createElement("style");
     stylesheet.innerText = filterStyles;
     document.head.appendChild(stylesheet);
-
-    initialFilterCheck();
+    addOnclick();
     if (!hasVisited()) {
+        /*
+             hasVisited checks url if meta hasVisited is set 
+             All filtergrups start open (people w/o js. ) TODO : CONSIDER using the no_js tag instead. 
+             close all but Vurderingsområde on first visit.
+             After first visit, use isCheck instead to know which groups are opened and closed.
+         */
         setVisited();
         handleFirstTime();
     }
     initialCollapsibleCheck();
-}
-
-document.getElementById("filter_modal_background").addEventListener('click', function (e) {
-    if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
-        closeFilters();
-    } 
-});
-
-
-function submitClickedElement(element) {
-    // Uncheck related checbox from filter
-    element = element.split(' ').join('_'); // spaces must not exist -> underscore
-    const checkboxed = document.getElementById(element);
-    if (checkboxed && checkboxed.checked == true) {
-        checkboxed.checked = false;
-    }
-    updateToggleAll(checkboxed);
 }

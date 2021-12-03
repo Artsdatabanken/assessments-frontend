@@ -712,6 +712,11 @@ span.area i {
 
 }
 
+.full_list_description{
+    padding-bottom:10px;
+}
+
+.full_list_description,
 .no_elements,
 .full_list_title,
 .full_list .summary_title,
@@ -721,6 +726,7 @@ span.area i {
     display: none;
 }
 
+.full_list .full_list_description,
 .see_all .full_list_title,
 .summary_title,
 .full_list .full_list_title,

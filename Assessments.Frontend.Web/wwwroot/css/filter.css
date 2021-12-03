@@ -507,7 +507,11 @@ button.list_header {
         display: none;
     }
 
-    
+    .no_js #filter_modal_background{
+        position:relative;
+    }
+
+
     .no_js .filter_background,
     .filteX.no_js {
         display: inline-block;

@@ -2,8 +2,7 @@
 
 @functions{
 
-    // Snatched and shortened from 2018 nature red list,
-    // Not yet ready for use.
+    // Reference for impact factors
     // https://github.com/Artsdatabanken/RodlisteNaturtyper2018visning/blob/2019update/Views/Home/Partials/impact-factors.cshtml
 
     string ImpactIcon(string id, string subtitle)
@@ -131,7 +130,10 @@
 }
 
 
-@{ if (!Model.Category.Contains("LC") && !Model.Category.Contains("NA") && !Model.Category.Contains("NE") && !Model.Category.Contains("RE"))
+@{ if (!Model.Category.Contains("LC") && 
+        !Model.Category.Contains("NA") && 
+        !Model.Category.Contains("NE") && 
+        !Model.Category.Contains("RE"))
     {
         <div class="page_section impact" id="impactfactors">
             <h2>Påvirkningsfaktorer </h2>
@@ -143,8 +145,13 @@
             <button id="full_list" class="changetab" onclick="impactlist('full_list',this)">Full liste</button>
             <br />
             <ul class="outer tabbed_element_container">
+                <li class="tablist_listheader">
+                    <span class="summary_title">Artens påvirkningsfaktorer</span>
+                    <span class="full_list_title">Alle påvirkningsfaktorer</span>
+                    <span class="no_elements">Ingen elementer valgt</span>
+                </li>
                 @foreach (var (key, value) in impactfactors_json)
-                {
+                {                
                 <li class="@activeOrNot(key)">
                     @{listHeaders(key, value, "addborder");}
                     @if (value.ContainsKey("subelement"))

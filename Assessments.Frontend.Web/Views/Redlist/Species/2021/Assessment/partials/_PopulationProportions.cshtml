@@ -3,13 +3,14 @@
 @* // Section containing numbers for proportions of different population sizes. *@
 
 
+
 <div class="page_section populationsize">
 
     @if (Model.Category != "NE" && Model.Category != "NA")
     {
         @if (Helpers.isNotEmpty(Model.ProportionOfMaxPopulation) ||
-          Helpers.isNotEmpty(Model.PercentageEuropeanPopulation) ||
-          Helpers.isNotEmpty(Model.PercentageGlobalPopulation))
+        Helpers.isNotEmpty(Model.PercentageEuropeanPopulation) ||
+        Helpers.isNotEmpty(Model.PercentageGlobalPopulation))
         {
 
             <h3>@ViewBag.glossary["populationsize"]["title"]</h3>

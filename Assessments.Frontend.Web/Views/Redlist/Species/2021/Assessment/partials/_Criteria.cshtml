@@ -450,282 +450,300 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
             <partial name="/Views/Shared/_Criteriabar.cshtml" />
         *@
         <ul class="outer noline">
+            <li class="tablist_listheader">
+                <span class="summary_title">Artens kriterier</span>
+                <span class="full_list_title">Alle kriterier</span>
+                <span class="full_list_description" style="display:none;">
+                    Gjeldende kriterier for arten er markert med merket
+                    <span class="impact_v">
+                        <span class="material-icons">
+                            done
+                        </span>
+                    </span>
+                </span>
+                @if (string.IsNullOrEmpty(Model.CriteriaSummarized))
+                {
+                    <span class="no_elements">Det er ikke angitt påvirkningsfaktorer.</span>
+                }
+
+            </li>
             @foreach (var (key, value) in criteria)
             {
                 string isactive = @Criteria.inString(key, @Model.CriteriaSummarized);
-            <li class="@isactive">
-                <span class="text_container clickable" onclick="expandCriteria(this, 'opened_element') ">
-                    @{ expandOrBullet(true);}
-                    <span class="title_field">
-                        @key - @value["title"]
-                        @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
+                <li class="@isactive">
+                    <span class="text_container clickable" onclick="expandCriteria(this, 'opened_element') ">
+                        @{ expandOrBullet(true);}
+                        <span class="title_field">
+                            @key - @value["title"]
+                            @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
+                        </span>
                     </span>
-                </span>
-                <p>
-                    @{ hasKey("description", @value);}
-                    @{ getModel(key);}
-                    @{ getQuantile(value, key, key);}
-                </p>
+                    <p>
+                        @{ hasKey("description", @value);}
+                        @{ getModel(key);}
+                        @{ getQuantile(value, key, key);}
+                    </p>
 
-                <!-- SUBCRITERIA (A1, ... D2) -->
-                @if (@value.ContainsKey("subcriteria"))
-                {
-                    var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
-                    <ul class="second">
-                        @foreach (var (k, v) in thesubcriteria)
+                    <!-- SUBCRITERIA (A1, ... D2) -->
+                    @if (@value.ContainsKey("subcriteria"))
+                    {
+                        var thesubcriteria = parseDictNested(value["subcriteria"].ToString());
+                        <ul class="second">
+                            @foreach (var (k, v) in thesubcriteria)
+                            {
+                                var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
+                                <li class=" @subcriteria_isactive">
+                                    <span class="text_container">
+                                        <span class="text_collection">
+                                            <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
+                                                @{expandOrBullet(true);}
+                                                <span class="text_text ">
+                                                    @k - @v["title"]
+                                                    @{iconChooser(subcriteria_isactive);}
+                                                </span>
+                                            </span>
+                                            <p>
+                                                @{ hasKey("description", v);}
+                                                @{ getGenerationTime(key, k);}
+                                                @{ getModel(k);}
+                                            </p>
+                                            @{ getQuantile(v, k, key);}
+
+                                            <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
+
+                                            @if (v.ContainsKey("subsub"))
+                                            {
+                                                string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
+                                                var subdict = parseDictNested(@v["subsub"].ToString());
+                                                @if (currentlist.Length > 0)
+                                                {
+                                                    @if (key == "A")
+                                                    {
+                                                        <p class="subheading"> <b>Kunnskapsgrunnlag</b></p>
+                                                    }
+
+                                                    <ul class="third activeornot">
+                                                        @foreach (var (subkey, subval) in subdict)
+                                                        {
+                                                            string modelkey = k + subkey;
+                                                            <li class="@Criteria.inList(subkey, currentlist)">
+                                                                <span class="text_container">
+                                                                    <span class="text_collection">
+                                                                        <span class="title_field">
+                                                                            @{expandOrBullet(false);}
+                                                                            <span class="text_text">
+                                                                                @subkey - <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
+                                                                            </span>
+                                                                        </span>
+                                                                        @{ getQuantile(subval, modelkey, modelkey);}
+                                                                    </span>
+                                                                    <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
+                                                                </span>
+                                                            </li>
+                                                        }
+                                                    </ul>
+
+
+                                                }
+                                            }
+
+                                        </span>
+                                    </span>
+
+                                </li>
+                            }
+                        </ul>
+                        if (key == "C")
                         {
-                            var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
-                            <li class=" @subcriteria_isactive">
+                            <ul class="second">
+                                @{var activeC = @Criteria.inString("C", @Model.CriteriaSummarized); }
+                                <li class="@activeC">
+                                    <span class="text_container">
+                                        <span class="text_collection">
+                                            <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
+                                                @{expandOrBullet(true);}
+                                                <span class="text_text clickable">
+                                                    Konklusjon for C-kriteriet
+                                                    <br />
+                                                </span>
+                                            </span>
+
+                                            @{
+                                                string c_category = Model.Category;
+                                                bool c_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
+                                                if (c_comparison)
+                                                {
+                                                    c_category = Model.CategoryAdjustedFrom;
+                                                }
+                                            }
+                                            <p>
+                                                @if (activeC == "active")
+                                                {
+                                                    <span class="b_summary">
+                                                        <span class="graphic_element @c_category">@c_category</span>
+                                                        <span>
+                                                            Kombinasjon av populasjonsstørrelsen og underkriteriene gir til sammen kategori
+                                                            @if (c_comparison)
+                                                            {
+                                                                @c_category
+                                                            }
+                                                            else
+                                                            {
+                                                                <partial name="/Views/Shared/_Category.cshtml" />
+                                                            }
+                                                        </span>
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <span>C-kriteriet er ikke gjeldende</span>
+                                                }
+                                            </p>
+                                        </span>
+                                    </span>
+                                </li>
+                            </ul>
+                        }
+
+                    }
+
+                    @if (@value.ContainsKey("options"))
+                    {
+                        <ul class="second">
+                            <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
                                 <span class="text_container">
                                     <span class="text_collection">
                                         <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
                                             @{expandOrBullet(true);}
-                                            <span class="text_text ">
-                                                @k - @v["title"]
-                                                @{iconChooser(subcriteria_isactive);}
+                                            <span class="text_text">
+                                                Underkriterier
                                             </span>
                                         </span>
-                                        <p>
-                                            @{ hasKey("description", v);}
-                                            @{ getGenerationTime(key, k);}
-                                            @{ getModel(k);}
-                                        </p>
-                                        @{ getQuantile(v, k, key);}
 
-                                        <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
-
-                                        @if (v.ContainsKey("subsub"))
+                                        <!-- SUBCRITERIA SUBOPTIONS FOR B CRITERIA -->
+                                        @if (@value.ContainsKey("subcriteria"))
                                         {
-                                            string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
-                                            var subdict = parseDictNested(@v["subsub"].ToString());
-                                            @if (currentlist.Length > 0)
-                                            {
-                                                @if (key == "A")
+                                            var thesubcriteria = parseDictNested(value["options"].ToString());
+                                            <ul class="second">
+                                                @foreach (var (k, v) in thesubcriteria)
                                                 {
-                                                    <p class="subheading"> <b>Kunnskapsgrunnlag</b></p>
-                                                }
-
-                                                <ul class="third activeornot">
-                                                    @foreach (var (subkey, subval) in subdict)
-                                                    {
-                                                        string modelkey = k + subkey;
-                                                        <li class="@Criteria.inList(subkey, currentlist)">
-                                                            <span class="text_container">
-                                                                <span class="text_collection">
-                                                                    <span class="title_field">
-                                                                        @{expandOrBullet(false);}
-                                                                        <span class="text_text">
-                                                                            @subkey - <span>@subval["title"] @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
-                                                                        </span>
+                                                    var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
+                                                    <li class=" @subcriteria_isactive">
+                                                        <span class="text_container">
+                                                            <span class="text_collection">
+                                                                <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
+                                                                    @{expandOrBullet(true);}
+                                                                    <span class="text_text ">
+                                                                        @k - @v["title"]
                                                                     </span>
-                                                                    @{ getQuantile(subval, modelkey, modelkey);}
+                                                                    @{iconChooser(subcriteria_isactive);}
                                                                 </span>
-                                                                <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->
-                                                            </span>
-                                                        </li>
-                                                    }
-                                                </ul>
 
+                                                                <!-- SUBCRITERIA SUBOPTIONS FOR B -->
 
-                                            }
-                                        }
-
-                                    </span>
-                                </span>
-
-                            </li>
-                        }
-                    </ul>
-                     if (key == "C"){
-                      <ul class="second">
-                        @{var activeC = @Criteria.inString("C", @Model.CriteriaSummarized); }
-                        <li class="@activeC">
-                            <span class="text_container">
-                                <span class="text_collection">
-                                    <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
-                                        @{expandOrBullet(true);}
-                                        <span class="text_text clickable">
-                                            Konklusjon for C-kriteriet
-                                            <br />
-                                        </span>
-                                    </span>
-
-                                    @{
-                                        string c_category = Model.Category;
-                                        bool c_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
-                                        if (c_comparison)
-                                        {
-                                            c_category = Model.CategoryAdjustedFrom;
-                                        }
-                                    }
-                                    <p>
-                                        @if (activeC == "active")
-                                        {
-                                            <span class="b_summary">
-                                                <span class="graphic_element @c_category">@c_category</span>
-                                                <span>
-                                                    Kombinasjon av populasjonsstørrelsen og underkriteriene gir til sammen kategori
-                                                    @if (c_comparison)
-                                                    {
-                                                        @c_category
-                                                    }
-                                                    else
-                                                    {
-                                                        <partial name="/Views/Shared/_Category.cshtml" />
-                                                    }
-                                                </span>
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span>C-kriteriet er ikke gjeldende</span>
-                                        }
-                                    </p>
-                                </span>
-                            </span>
-                        </li>
-                    </ul>
-                    }
-
-                }
-                
-                @if (@value.ContainsKey("options"))
-                {
-                    <ul class="second">
-                        <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
-                            <span class="text_container">
-                                <span class="text_collection">
-                                    <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
-                                        @{expandOrBullet(true);}
-                                        <span class="text_text">
-                                            Underkriterier
-                                        </span>
-                                    </span>
-
-                                    <!-- SUBCRITERIA SUBOPTIONS FOR B CRITERIA -->
-                                    @if (@value.ContainsKey("subcriteria"))
-                                    {
-                                        var thesubcriteria = parseDictNested(value["options"].ToString());
-                                        <ul class="second">
-                                            @foreach (var (k, v) in thesubcriteria)
-                                            {
-                                                var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
-                                                <li class=" @subcriteria_isactive">
-                                                    <span class="text_container">
-                                                        <span class="text_collection">
-                                                            <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
-                                                                @{expandOrBullet(true);}
-                                                                <span class="text_text ">
-                                                                    @k - @v["title"]
-                                                                </span>
-                                                                @{iconChooser(subcriteria_isactive);}
-                                                            </span>
-
-                                                            <!-- SUBCRITERIA SUBOPTIONS FOR B -->
-
-                                                            @if (v.ContainsKey("sub"))
-                                                            {
-                                                                <ul class="subsub_list">
-                                                                    @{
-                                                                        var currentlist = options.Split(";");
-                                                                        var current_element = "";
-                                                                        foreach (string element in currentlist)
-                                                                        {
-                                                                            if (element.Contains(k))
+                                                                @if (v.ContainsKey("sub"))
+                                                                {
+                                                                    <ul class="subsub_list">
+                                                                        @{
+                                                                            var currentlist = options.Split(";");
+                                                                            var current_element = "";
+                                                                            foreach (string element in currentlist)
                                                                             {
-                                                                                current_element = element;
+                                                                                if (element.Contains(k))
+                                                                                {
+                                                                                    current_element = element;
+                                                                                }
                                                                             }
+                                                                            current_element = current_element.Replace(k, "");
+                                                                            current_element = Criteria.removeOuterParenthesis(current_element);
+                                                                            var clean_list = current_element.Split(",");
+                                                                            var subdict = parseDictNested(@v["sub"].ToString());
                                                                         }
-                                                                        current_element = current_element.Replace(k, "");
-                                                                        current_element = Criteria.removeOuterParenthesis(current_element);
-                                                                        var clean_list = current_element.Split(",");
-                                                                        var subdict = parseDictNested(@v["sub"].ToString());
-                                                                    }
 
-                                                                    @foreach (var (subkey, subvalue) in subdict)
-                                                                    {
-                                                                        var modelkey = key + k + subkey;
-                                                                        string clickable = "";
-                                                                        if (modelkey == "Baii")
+                                                                        @foreach (var (subkey, subvalue) in subdict)
                                                                         {
-                                                                            clickable = "clickable";
-                                                                        }
-                                                                        <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
-                                                                            <span class="text_container">
-                                                                                <span class="text_collection">
-                                                                                    <span class="text_text @clickable" onclick="expandCriteria(this, 'opened_element')">
-                                                                                        @{expandOrBullet(clickable == "clickable");}
-                                                                                        @subkey - @subvalue["title"]
+                                                                            var modelkey = key + k + subkey;
+                                                                            string clickable = "";
+                                                                            if (modelkey == "Baii")
+                                                                            {
+                                                                                clickable = "clickable";
+                                                                            }
+                                                                            <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
+                                                                                <span class="text_container">
+                                                                                    <span class="text_collection">
+                                                                                        <span class="text_text @clickable" onclick="expandCriteria(this, 'opened_element')">
+                                                                                            @{expandOrBullet(clickable == "clickable");}
+                                                                                            @subkey - @subvalue["title"]
+                                                                                        </span>
+                                                                                        @{ iconChooser(Criteria.inList(subkey, clean_list)); }
                                                                                     </span>
-                                                                                    @{ iconChooser(Criteria.inList(subkey, clean_list)); }
+
                                                                                 </span>
-
-                                                                            </span>
-                                                                            @{ getQuantile(subvalue, modelkey, modelkey);}
-                                                                        </li>
-                                                                    }
-                                                                </ul>
-                                                            }
+                                                                                @{ getQuantile(subvalue, modelkey, modelkey);}
+                                                                            </li>
+                                                                        }
+                                                                    </ul>
+                                                                }
+                                                            </span>
                                                         </span>
-                                                    </span>
-                                                </li>
-                                            }
-                                        </ul>
-                                    }
-                                </span>
-                            </span>
-                        </li>
-                    </ul>
-                    <ul class="second">
-                        @{var activeB = @Criteria.inString("B", @Model.CriteriaSummarized); }
-                        <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
-                            <span class="text_container">
-                                <span class="text_collection">
-                                    <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
-                                        @{expandOrBullet(true);}
-                                        <span class="text_text clickable">
-                                            Konklusjon for B-kriteriet
-                                            <br />
-                                        </span>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
                                     </span>
-
-                                    @{
-                                        string b_category = Model.Category;
-                                        bool b_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
-                                        if (b_comparison)
-                                        {
-                                            b_category = Model.CategoryAdjustedFrom;
-                                        }
-                                    }
-                                    <p>
-                                        @if (activeB == "active")
-                                        {
-                                            <span class="b_summary">
-                                                <span class="graphic_element @b_category">@b_category</span>
-                                                <span>
-                                                    Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
-                                                    @if (b_comparison)
-                                                    {
-                                                        @b_category
-                                                    }
-                                                    else
-                                                    {
-                                                        <partial name="/Views/Shared/_Category.cshtml" />
-                                                    }
-                                                </span>
-                                            </span>
-                                        }
-                                        else
-                                        {
-                                            <span>B-kriteriet er ikke gjeldende</span>
-                                        }
-                                    </p>
                                 </span>
-                            </span>
-                        </li>
-                    </ul>
-                }
-            </li>
+                            </li>
+                        </ul>
+                        <ul class="second">
+                            @{var activeB = @Criteria.inString("B", @Model.CriteriaSummarized); }
+                            <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
+                                <span class="text_container">
+                                    <span class="text_collection">
+                                        <span class="title_field" onclick="expandCriteria(this, 'opened_element')">
+                                            @{expandOrBullet(true);}
+                                            <span class="text_text clickable">
+                                                Konklusjon for B-kriteriet
+                                                <br />
+                                            </span>
+                                        </span>
+
+                                        @{
+                                            string b_category = Model.Category;
+                                            bool b_comparison = Model.Category.Length > 2 && !string.IsNullOrEmpty(Model.CategoryAdjustedFrom);
+                                            if (b_comparison)
+                                            {
+                                                b_category = Model.CategoryAdjustedFrom;
+                                            }
+                                        }
+                                        <p>
+                                            @if (activeB == "active")
+                                            {
+                                                <span class="b_summary">
+                                                    <span class="graphic_element @b_category">@b_category</span>
+                                                    <span>
+                                                        Kombinasjon av B1/B2 og underkriteriene gir til sammen kategori
+                                                        @if (b_comparison)
+                                                        {
+                                                            @b_category
+                                                        }
+                                                        else
+                                                        {
+                                                            <partial name="/Views/Shared/_Category.cshtml" />
+                                                        }
+                                                    </span>
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span>B-kriteriet er ikke gjeldende</span>
+                                            }
+                                        </p>
+                                    </span>
+                                </span>
+                            </li>
+                        </ul>
+                    }
+                </li>
             }
         </ul>
     </div>

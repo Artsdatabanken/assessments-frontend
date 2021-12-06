@@ -50,3 +50,7 @@ robocopy "Assessments.Frontend.Web\bin\Release\net5.0\publish" ...destinasjon...
 ```
 - Registrer Environmentvariabel ConnectionStrings:AzureBlobStorage f.eks. i IIS - Server - Configuration Editor - system.webServer/aspNetCore/environmentVariables - da som ASPNETCORE_ConnectionStrings__AzureBlobStorage
 - Legg til website eller applikasjon under website som peker på denne katalogen og som har app-pool for 'No managed code' (.net core)
+
+
+## Bygge ny cache for versjonene i IIS
+Det er laget jobber i Jenkins som stopper application pools sletter gammel cache og starter opp application pool. På det viset kan man få bygget ny cache, uten å bygge løsningen på nytt. 

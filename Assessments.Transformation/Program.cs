@@ -98,21 +98,30 @@ namespace Assessments.Transformation
 
             foreach (var item in databaseAssessments)
             {
+                var id = item.Id.ToString(); // id fra databasen
+                var assessmentForTransformation = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
+                if (assessmentForTransformation != null)
+                {
+                    assessmentForTransformation.Id = id;
+                    var transformedAssessment = speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(assessmentForTransformation);
+                    speciesAssessment2021Assessments.Add(transformedAssessment);
+                }
+
                 var assessment = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
                 if (assessment != null)
                 {
-                    assessment.Id = item.Id.ToString(); // id fra databasen
-                    speciesAssessment2021Assessments.Add(speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(assessment));
+                    assessment.Id = id;
                     rodliste2019Assessments.Add(assessment);
                 }
+
                 _progressBar.Tick();
             }
-            
+
             _progressBar.Message = "Serialiserer og lagrer filer (tar litt tid)";
-            
+
             var files = new Dictionary<string, string> {
                 {DataFilenames.Species2021, JsonConvert.SerializeObject(speciesAssessment2021Assessments)}, 
-                {DataFilenames.Species2021Temp, JsonConvert.SerializeObject(rodliste2019Assessments)}
+                {DataFilenames.Species2021Temp, JsonConvert.SerializeObject(rodliste2019Assessments) }
             };
             
             const string dataFolder = @"../../../../Assessments.Frontend.Web/Cache/";
@@ -126,7 +135,7 @@ namespace Assessments.Transformation
 
                 if (!upload) 
                     continue;
-                
+
                 _progressBar.Tick(0, $"Laster opp {key}");
                 _progressBar.MaxTicks = 100;
 

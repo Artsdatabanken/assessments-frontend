@@ -1,4 +1,9 @@
-function addSliders(){
+/* Script for swapping between 
+ * checkboxes which must be submitted for smaller screens and 
+ * toggles with immediate update-effect for bigger screens. 
+ * Checkboxes are default and workd for non-js users. */
+
+function addSliders() {
     Array.prototype.forEach.call(submitCheckInputs, el => {
         const span = document.createElement("span");
         const div = document.createElement("div");

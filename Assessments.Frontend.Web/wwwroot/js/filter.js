@@ -9,6 +9,12 @@ const insectInput = document.getElementById("Insekter");
 const redlistCheck = document.getElementById("redlisted_check").checked;
 const endangeredCheck = document.getElementById("endangered_check").checked;
 const init = document.getElementById("initial_check");
+const scrollTo = document.getElementById("remember_scroll");
+
+/* RUN THE STARTUP */
+if (filters) {    
+    startup();
+}
 
 function hasVisited() {
     // in url: check if this is the first run
@@ -88,12 +94,6 @@ function startup() {
     initialCollapsibleCheck();
     console.log("~ startup complete ^.^");
 }
-
-if (filters) {
-    /* RUN THE STARTUP */
-    startup();
-}
-
 
 // EVENTS 
 
@@ -230,8 +230,19 @@ function toggleSingleFilter(element, parentId){
     }
 }
 
+function updateToggleAll(el){
+    if (el && el.classList[0] === "insect_input") {
+        toggleSingleFilter(el, "Insekter");
+    } else if (el && endangered.some(category => el.id.indexOf(category) != -1)) {
+        toggleSingleFilter(el, "endangered_check");
+        toggleSingleFilter(el, "redlisted_check");
+    } else if (el && redlisted.some(category => el.id.indexOf(category) != -1)) {
+        toggleSingleFilter(el, "redlisted_check");
+    }
+}
 
-function onClickAction(el, possible,add) {
+function onClickAction(el, possible, add) {
+    // Clickevents for the toggles
     if (el.id === "redlisted_check") {
         toggleRedlistedCategories();
     } else if (el.id === "endangered_check") {
@@ -244,8 +255,7 @@ function onClickAction(el, possible,add) {
             toggleMarkAll();
         } else {
             el.onclick = null;
-        }
-        
+        }        
     }
     if (add) {
         scrollTo.value = "scroll_" + window.scrollY;
@@ -254,8 +264,7 @@ function onClickAction(el, possible,add) {
             //activate if toggle all of the filters are possible
             toggleSingleFilter(el);
         }
-    }
-    
+    }    
 }
 
 function addOnclick() {

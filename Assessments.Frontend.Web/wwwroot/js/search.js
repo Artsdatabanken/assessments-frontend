@@ -254,7 +254,6 @@ window.onclick = (e) => {
     } 
 }
 
-
 // ACCESSIBILITY - NAVIGATE DROPDOWNLIST:
 
 // Go from searchfield to suggestion on arrowdown

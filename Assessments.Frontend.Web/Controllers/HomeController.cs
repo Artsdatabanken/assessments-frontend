@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Assessments.Frontend.Web.Infrastructure;
@@ -8,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Assessments.Frontend.Web.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : BaseController<HomeController>
     {
         public IActionResult Index()

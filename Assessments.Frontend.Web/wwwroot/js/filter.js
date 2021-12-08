@@ -11,6 +11,10 @@ const endangeredCheck = document.getElementById("endangered_check").checked;
 const init = document.getElementById("initial_check");
 const scrollTo = document.getElementById("remember_scroll");
 
+// Constants
+const redlisted = ["RE", "CR", "EN", "VU", "NT", "DD"];
+const endangered = ["CR", "EN", "VU"];
+
 /* RUN THE STARTUP */
 if (filters) {    
     startup();

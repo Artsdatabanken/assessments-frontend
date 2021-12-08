@@ -3,9 +3,7 @@
 // DOM elements
 const submitCheckInputs = document.getElementsByClassName("submitOnclick");
 
-// Constants
-const redlisted = ["RE", "CR", "EN", "VU", "NT", "DD"];
-const endangered = ["CR", "EN", "VU"];
+
 
 // Screen Size
 const smallScreenSize = 750; // In case we want to tinker later.

@@ -1,5 +1,4 @@
-﻿// is this still in use?
-(function () {
+﻿(function () {
     window.addEventListener("load", function () {
         document.title = "Assessments api - " + document.title;
     });

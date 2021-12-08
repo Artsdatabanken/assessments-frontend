@@ -528,3 +528,16 @@ button.list_header {
         display: block;
     }
 }
+
+
+.no_js .filter_area,
+.no_js .filter_category,
+.no_js .filter_region,
+.no_js .filter_european_population,
+.no_js .filter_criteria,
+.no_js .filter_extinct,
+.no_js .filter_habitat,
+.no_js .filter_species_groups,
+.no_js .filter_taxon_rank {
+    display: block;
+}

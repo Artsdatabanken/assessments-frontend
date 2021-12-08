@@ -1,3 +1,5 @@
+/* Anything related to the redlist search */
+
 const searchField = document.getElementById("Name");
 const autocompleteList = document.getElementById("autocomplete_list_ul");
 const searchUrlBase =  window.location.pathname + "/suggestions";

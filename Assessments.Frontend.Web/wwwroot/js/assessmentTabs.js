@@ -1,4 +1,6 @@
-// JS only relevant for users with javascript.
+/* Info-tab actions for the assessment-pages. Openin/closing the big lists for 
+   impact factors, criteria and habitats. Re-arranging some items that has a
+   simpler (but more chaotic) display for users without javasctipt. */
 
 // RUN ON START:
 showTabButtons();
@@ -9,8 +11,6 @@ if (document.getElementById('criteria') && document.getElementById('criteria').c
 if (document.getElementById('impactfactors') && document.getElementById('impactfactors').classList) {
     document.getElementById('impactfactors').classList.add("summary");
 }
-
-
 
 function showTabButtons() {
     // Users with javascript are shown the buttons to toggle tabs

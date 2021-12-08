@@ -1,13 +1,64 @@
+/* Anything Filter should go here
+ * Filters are only relevant for the main page of the redlist */
+
+// DOM elements
+const filters = document.getElementById("filters");
+const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
+const redlistCheck = document.getElementById("redlisted_check");
+const endangeredCheck = document.getElementById("endangered_check");
+const insectFilters = document.getElementsByClassName("insect_input");
+const insectInput = document.getElementById("Insekter");
+const init = document.getElementById("initial_check");
+
+const filterStyles = `
+input[type=checkbox]:not(:checked)#show_area~.filter_area,
+input[type=checkbox]:not(:checked)#show_category~.filter_category,
+input[type=checkbox]:not(:checked)#show_region~.filter_region,
+input[type=checkbox]:not(:checked)#show_european_population~.filter_european_population,
+input[type=checkbox]:not(:checked)#show_criteria~.filter_criteria,
+input[type=checkbox]:not(:checked)#show_habitat~.filter_habitat,
+input[type=checkbox]:not(:checked)#show_extinct~.filter_extinct,
+input[type=checkbox]:not(:checked)#show_species_groups~.filter_species_groups,
+input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
+    display: none;
+}
+
+input[type=checkbox]:checked#show_insects~.filter_insects {
+    display: block;
+}
+
+.filter_insects {
+    display: none;
+}
+`;
+
+
+// MOVED
+
+
+function hasVisited(){
+    return init.checked;
+}
+
+function setVisited(){
+    init.checked = true;
+}
+
+function scrollToPreviousPosition(){
+    if (!scrollTo) return;
+    const position = scrollTo.value;
+    window.scrollTo(0, position);
+}
 
 function closeFilters() {
     document.getElementById("filters").classList.add("hide_on_smallscreen");
     document.body.classList.remove('noscroll');
-    filters_open_button.focus();
+    document.getElementById("open_filter").focus();
 }
 
 function openFilters() {
     document.getElementById("filters").classList.remove("hide_on_smallscreen");
-    filters_close_buttons[0].focus();
+    document.getElementsByClassName("close_filters")[0].focus();
     document.body.classList.add('noscroll');
 }
 
@@ -23,6 +74,7 @@ function collapse(name) {
 
 function startup() {
     console.log("~ startup filters")
+    scrollToPreviousPosition();
 
     // Remove no javascript tag, making js-availiable styling apply
     if (document.getElementById("open_filter")) {
@@ -31,17 +83,31 @@ function startup() {
     if (document.getElementById("filters")) {
         document.getElementById("filters").classList.remove("no_js");
     }
-    
-
     // Users with javascript should always see this item
     closeFilters();
 
-    
+    window.addEventListener('resize', addOnclick);
+    const stylesheet = document.createElement("style");
+    stylesheet.innerText = filterStyles;
+    document.head.appendChild(stylesheet);
+    addOnclick();
+    if (!hasVisited()) {
+        /*
+             hasVisited checks url if meta hasVisited is set 
+             All filtergrups start open (people w/o js. ) 
+             TODO : CONSIDER using the no_js tag instead. 
+             close all but Vurderingsområde on first visit.
+             After first visit, use isCheck instead to know which groups are opened and closed.
+         */
+        setVisited();
+        handleFirstTime();
+    }
     console.log("~ startup complete ^.^");
 }
 
-startup();
-
+if (filters) {
+    startup();
+}
 
 /* EVENTS */
 
@@ -83,41 +149,8 @@ function submitClickedElement(element) {
 
 /* Old code not changed  much */
 
- const filterStyles = `
-input[type=checkbox]:not(:checked)#show_area~.filter_area,
-input[type=checkbox]:not(:checked)#show_category~.filter_category,
-input[type=checkbox]:not(:checked)#show_region~.filter_region,
-input[type=checkbox]:not(:checked)#show_european_population~.filter_european_population,
-input[type=checkbox]:not(:checked)#show_criteria~.filter_criteria,
-input[type=checkbox]:not(:checked)#show_habitat~.filter_habitat,
-input[type=checkbox]:not(:checked)#show_extinct~.filter_extinct,
-input[type=checkbox]:not(:checked)#show_species_groups~.filter_species_groups,
-input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
-    display: none;
-}
 
-input[type=checkbox]:checked#show_insects~.filter_insects {
-    display: block;
-}
-
-.filter_area,
-.filter_category,
-.filter_region,
-.filter_european_population,
-.filter_criteria,
-.filter_extinct,
-.filter_habitat,
-.filter_species_groups,
-.filter_taxon_rank {
-    display: block;
-}
-
-.filter_insects {
-    display: none;
-}
-`;
-
-const setCollapsibleIcon = (name) => {
+function setCollapsibleIcon(name){
     if (name == "initial_check") {
         return;
     }
@@ -147,13 +180,13 @@ const setCollapsibleIcon = (name) => {
     headerItem.insertBefore(span, headerItem.childNodes[0]);
 }
 
-const initialCollapsibleCheck = () => {
+function initialCollapsibleCheck() {
     Array.prototype.forEach.call(isCheckInputs, el => {
         setCollapsibleIcon(el.id);
     })
 }
 
-const handleFirstTime = () => {
+function handleFirstTime(){
     Array.prototype.forEach.call(isCheckInputs, (e) => {
         if (e.id == "show_area" || e.id == "show_insects") {
             e.checked = true;
@@ -163,20 +196,20 @@ const handleFirstTime = () => {
     })
 }
 
-const shouldToggleMarkAll = (elementsClass) => {
+function shouldToggleMarkAll(elementsClass){
     const allElements = document.getElementsByClassName(elementsClass);
     return Array.prototype.every.call(allElements, (element) => {
         return element.checked === true;
     })
 }
 
-const shouldToggleMarkRedOrEnd = (list) => {
+function shouldToggleMarkRedOrEnd(list){
     return Array.prototype.every.call(list, (item) => {
         return document.getElementById("input_" + item).checked === true;
     })
 }
 
-const toggleMarkAll = () => {
+function toggleMarkAll(){
     if (shouldToggleMarkAll("insect_input")) {
         insectInput.checked = true;
     }
@@ -188,7 +221,7 @@ const toggleMarkAll = () => {
     }
 }
 
-const toggleRedlistedCategories = () => {
+function toggleRedlistedCategories(){
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
     redlisted.forEach(el => {
@@ -203,7 +236,7 @@ const toggleRedlistedCategories = () => {
     })
 }
 
-const toggleEndangeredCategories = () => {  
+function toggleEndangeredCategories(){  
     const isEndangeredActive = endangeredCheck.checked;
     const isRedlistedActive = redlistCheck.checked;
     endangered.forEach(el => {
@@ -218,7 +251,7 @@ const toggleEndangeredCategories = () => {
     })
 }
 
-const toggleInsects = () => {
+function toggleInsects(){
     Array.prototype.forEach.call(insectFilters, insect => {
         if (insectInput.checked) {
             insect.checked = true;
@@ -228,27 +261,12 @@ const toggleInsects = () => {
     });
 }
 
-const toggleSingleFilter = (element, parentId) => {
+function toggleSingleFilter(element, parentId){
     if (!element.checked) {
         document.getElementById(parentId).checked = false;
     }
 }
 
-if (filters) {
-    window.addEventListener('resize', addOnclick);
-    const stylesheet = document.createElement("style");
-    stylesheet.innerText = filterStyles;
-    document.head.appendChild(stylesheet);
-    addOnclick();
-    if (!hasVisited()) {
-        /*
-             hasVisited checks url if meta hasVisited is set 
-             All filtergrups start open (people w/o js. ) TODO : CONSIDER using the no_js tag instead. 
-             close all but Vurderingsområde on first visit.
-             After first visit, use isCheck instead to know which groups are opened and closed.
-         */
-        setVisited();
-        handleFirstTime();
-    }
+if (filters) {    
     initialCollapsibleCheck();
 }

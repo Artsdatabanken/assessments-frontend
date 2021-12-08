@@ -10,31 +10,6 @@ const insectFilters = document.getElementsByClassName("insect_input");
 const insectInput = document.getElementById("Insekter");
 const init = document.getElementById("initial_check");
 
-const filterStyles = `
-input[type=checkbox]:not(:checked)#show_area~.filter_area,
-input[type=checkbox]:not(:checked)#show_category~.filter_category,
-input[type=checkbox]:not(:checked)#show_region~.filter_region,
-input[type=checkbox]:not(:checked)#show_european_population~.filter_european_population,
-input[type=checkbox]:not(:checked)#show_criteria~.filter_criteria,
-input[type=checkbox]:not(:checked)#show_habitat~.filter_habitat,
-input[type=checkbox]:not(:checked)#show_extinct~.filter_extinct,
-input[type=checkbox]:not(:checked)#show_species_groups~.filter_species_groups,
-input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
-    display: none;
-}
-
-input[type=checkbox]:checked#show_insects~.filter_insects {
-    display: block;
-}
-
-.filter_insects {
-    display: none;
-}
-`;
-
-
-// MOVED
-
 
 function hasVisited(){
     return init.checked;
@@ -83,13 +58,16 @@ function startup() {
     if (document.getElementById("filters")) {
         document.getElementById("filters").classList.remove("no_js");
     }
+
+    // Add js-tag for elements only relevant to js-users. 
+    if (document.getElementById("filters")) {
+        document.getElementById("filters").classList.add("only_js");
+    }
+
+
     // Users with javascript should always see this item
     closeFilters();
-
     window.addEventListener('resize', addOnclick);
-    const stylesheet = document.createElement("style");
-    stylesheet.innerText = filterStyles;
-    document.head.appendChild(stylesheet);
     addOnclick();
     if (!hasVisited()) {
         /*

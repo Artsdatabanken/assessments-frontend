@@ -134,7 +134,6 @@ function submitClickedElement(element) {
 
 /* Old code not changed  much */
 
-
 function setCollapsibleIcon(name){
     if (name == "initial_check") {
         return;
@@ -164,9 +163,6 @@ function setCollapsibleIcon(name){
     span.setAttribute("class", classNames);
     headerItem.insertBefore(span, headerItem.childNodes[0]);
 }
-
-
-
 
 // Handle toggle events for misc. scenario
 
@@ -234,3 +230,51 @@ function toggleSingleFilter(element, parentId){
     }
 }
 
+
+function onClickAction(el, possible,add) {
+    if (el.id === "redlisted_check") {
+        toggleRedlistedCategories();
+    } else if (el.id === "endangered_check") {
+        toggleEndangeredCategories();
+    } else if (el.id === "Insekter") {
+        toggleInsects();
+    } else {
+        if (add) {
+            updateToggleAll(el);
+            toggleMarkAll();
+        } else {
+            el.onclick = null;
+        }
+        
+    }
+    if (add) {
+        scrollTo.value = "scroll_" + window.scrollY;
+        scrollTo.checked = true;
+        if (possible) {
+            //activate if toggle all of the filters are possible
+            toggleSingleFilter(el);
+        }
+    }
+    
+}
+
+function addOnclick() {
+    if (!submitCheckInputs) return;
+    Array.prototype.forEach.call(submitCheckInputs, el => {
+        el.onclick = function () {
+            onClickAction(el, false, true);
+            if (!isSmallReader() && this.form) {
+                this.form.submit();
+            }
+        };
+    });
+}
+
+function removeSubmitOnclick() {
+    if (!submitCheckInputs) return;
+    Array.prototype.forEach.call(submitCheckInputs, el => {
+        el.onclick = function () {
+            onClickAction(el, false, false);
+        };
+    });
+}

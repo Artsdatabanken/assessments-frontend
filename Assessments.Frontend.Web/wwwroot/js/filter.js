@@ -4,10 +4,10 @@
 // DOM elements
 const filters = document.getElementById("filters");
 const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
-const redlistCheck = document.getElementById("redlisted_check");
-const endangeredCheck = document.getElementById("endangered_check");
 const insectFilters = document.getElementsByClassName("insect_input");
 const insectInput = document.getElementById("Insekter");
+const redlistCheck = document.getElementById("redlisted_check").checked;
+const endangeredCheck = document.getElementById("endangered_check").checked;
 const init = document.getElementById("initial_check");
 
 
@@ -47,6 +47,12 @@ function collapse(name) {
     setCollapsibleIcon(name);
 }
 
+function initialCollapsibleCheck() {
+    Array.prototype.forEach.call(isCheckInputs, el => {
+        setCollapsibleIcon(el.id);
+    })
+}
+
 function startup() {
     console.log("~ startup filters")
     scrollToPreviousPosition();
@@ -55,15 +61,11 @@ function startup() {
     if (document.getElementById("open_filter")) {
         document.getElementById("open_filter").classList.remove("no_js");
     }
-    if (document.getElementById("filters")) {
-        document.getElementById("filters").classList.remove("no_js");
+    if (filters) { // Double-check in case first check gets removed ^^
+        filters.classList.remove("no_js");    
+        // Add js-tag for elements only relevant to js-users. 
+        filters.classList.add("only_js");
     }
-
-    // Add js-tag for elements only relevant to js-users. 
-    if (document.getElementById("filters")) {
-        document.getElementById("filters").classList.add("only_js");
-    }
-
 
     // Users with javascript should always see this item
     closeFilters();
@@ -80,15 +82,17 @@ function startup() {
         setVisited();
         handleFirstTime();
     }
+    initialCollapsibleCheck();
     console.log("~ startup complete ^.^");
 }
 
 if (filters) {
+    /* RUN THE STARTUP */
     startup();
 }
 
-/* EVENTS */
 
+// EVENTS 
 
 document.addEventListener('keydown', (e) => {
     // Keypress on entire page
@@ -158,11 +162,6 @@ function setCollapsibleIcon(name){
     headerItem.insertBefore(span, headerItem.childNodes[0]);
 }
 
-function initialCollapsibleCheck() {
-    Array.prototype.forEach.call(isCheckInputs, el => {
-        setCollapsibleIcon(el.id);
-    })
-}
 
 function handleFirstTime(){
     Array.prototype.forEach.call(isCheckInputs, (e) => {
@@ -199,34 +198,27 @@ function toggleMarkAll(){
     }
 }
 
-function toggleRedlistedCategories(){
-    const isEndangeredActive = endangeredCheck.checked;
-    const isRedlistedActive = redlistCheck.checked;
-    redlisted.forEach(el => {
-        if (isRedlistedActive) {
+function toggleAllOfType(what, thisid, thatid) {
+    const thatone = document.getElementById(thatid).checked;
+    const thisone = document.getElementById(thisid).checked;
+    what.forEach(el => {
+        if (thisone) {
             document.getElementById("input_" + el).checked = true;
         } else {
-            if (isEndangeredActive) {
-                endangeredCheck.checked = false;
-            } 
+            if (thatone) {
+                document.getElementById(thatid).checked = false;
+            }
             document.getElementById("input_" + el).checked = false;
         }
     })
 }
 
-function toggleEndangeredCategories(){  
-    const isEndangeredActive = endangeredCheck.checked;
-    const isRedlistedActive = redlistCheck.checked;
-    endangered.forEach(el => {
-        if (isEndangeredActive) {
-            document.getElementById("input_" + el).checked = true;
-        } else {
-            if (isRedlistedActive) {
-                redlistCheck.checked = false;
-            }
-            document.getElementById("input_" + el).checked = false;
-        }
-    })
+function toggleRedlistedCategories() {
+    toggleAllOfType(redlisted, "redlisted_check", "endangered_check");
+}
+
+function toggleEndangeredCategories() {  
+    toggleAllOfType(endangered, "endangered_check", "redlisted_check");
 }
 
 function toggleInsects(){
@@ -245,6 +237,3 @@ function toggleSingleFilter(element, parentId){
     }
 }
 
-if (filters) {    
-    initialCollapsibleCheck();
-}

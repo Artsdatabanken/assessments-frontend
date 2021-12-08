@@ -93,9 +93,9 @@ namespace Assessments.Frontend.Web
 
                 app.UseSwaggerUI(options =>
                 {
+                    options.DocumentTitle = "Assessments api - Artsdatabanken";
                     options.RoutePrefix = "swagger";
                     options.SwaggerEndpoint("v1/swagger.json", "Assessments api");
-                    options.InjectJavascript("/js/swagger.js");
                 });
             }
 

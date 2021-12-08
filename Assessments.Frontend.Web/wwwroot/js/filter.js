@@ -10,13 +10,25 @@ const redlistCheck = document.getElementById("redlisted_check").checked;
 const endangeredCheck = document.getElementById("endangered_check").checked;
 const init = document.getElementById("initial_check");
 
-
-function hasVisited(){
+function hasVisited() {
+    // in url: check if this is the first run
     return init.checked;
 }
 
-function setVisited(){
+function setVisited() {
+    // in url: mark page as visited.
     init.checked = true;
+}
+
+function handleFirstTime() {
+    // On the first run, close all but given elements
+    Array.prototype.forEach.call(isCheckInputs, (e) => {
+        if (e.id == "show_area" || e.id == "show_insects") {
+            e.checked = true;
+        } else {
+            e.checked = false;
+        }
+    })
 }
 
 function scrollToPreviousPosition(){
@@ -66,19 +78,10 @@ function startup() {
         // Add js-tag for elements only relevant to js-users. 
         filters.classList.add("only_js");
     }
-
-    // Users with javascript should always see this item
-    closeFilters();
-    window.addEventListener('resize', addOnclick);
+    closeFilters();    
     addOnclick();
-    if (!hasVisited()) {
-        /*
-             hasVisited checks url if meta hasVisited is set 
-             All filtergrups start open (people w/o js. ) 
-             TODO : CONSIDER using the no_js tag instead. 
-             close all but Vurderingsområde on first visit.
-             After first visit, use isCheck instead to know which groups are opened and closed.
-         */
+    window.addEventListener('resize', addOnclick);
+    if (!hasVisited()) {         
         setVisited();
         handleFirstTime();
     }
@@ -163,15 +166,9 @@ function setCollapsibleIcon(name){
 }
 
 
-function handleFirstTime(){
-    Array.prototype.forEach.call(isCheckInputs, (e) => {
-        if (e.id == "show_area" || e.id == "show_insects") {
-            e.checked = true;
-        } else {
-            e.checked = false;
-        }
-    })
-}
+
+
+// Handle toggle events for misc. scenario
 
 function shouldToggleMarkAll(elementsClass){
     const allElements = document.getElementsByClassName(elementsClass);

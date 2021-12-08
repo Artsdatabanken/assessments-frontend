@@ -92,25 +92,10 @@ function startup() {
         handleFirstTime();
     }
     initialCollapsibleCheck();
-    console.log("~ startup complete ^.^");
+    console.log("~ filter startup complete");
 }
 
 // EVENTS 
-
-document.addEventListener('keydown', (e) => {
-    // Keypress on entire page
-    
-    if (e.code == "Escape" && isSmallReader()) {
-        // Only listen to escape clicks, and only on tiny screens
-
-        if (document.getElementById("filters") &&
-            !document.getElementById("filters").classList.contains("hide_on_smallscreen")) {
-            // If filter box is open, close it.
-            closeFilters();
-        }
-    }    
-});
-
 if (document.getElementById("filter_modal_background")) {
     // Click outside filtebox closes filterbox
     document.getElementById("filter_modal_background").addEventListener('click', function (e) {

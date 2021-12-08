@@ -4,7 +4,6 @@ const listButton = document.getElementById("list_view_button");
 const statButton = document.getElementById("stat_view_button");
 
 const isInputChecked = (name, value) => {
-    console.log("running isInputChecked", name, value);
     return document.URL.indexOf(`${name}=${value}`) != -1;
 }
 
@@ -20,7 +19,6 @@ const createCheckbox = () => {
     inputElement.value = value;
     inputElement.classList.add("collapse_checkbox");
     inputElement.checked = isInputChecked(name, value);
-    console.log("running createCheckbox");
     return inputElement;
 }
 
@@ -29,12 +27,9 @@ const insertViewCheckbox = () => {
         const headerItem = listButton.parentNode;
         headerItem.insertBefore(createCheckbox(), headerItem.childNodes[0]);
     }
-    console.log("running insertViewCheckbox");
-    
 }
 
 const changeViewButtons = () => {
-    console.log("running changeViewButtons");
     if (listButton || statButton) {
         const viewButtons = [listButton, statButton];
 

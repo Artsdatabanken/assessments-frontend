@@ -97,7 +97,7 @@ function startup() {
 
 // EVENTS 
 if (document.getElementById("filter_modal_background")) {
-    // Click outside filtebox closes filterbox
+    // Click on filter_modal_background outside filtebox closes filterbox
     document.getElementById("filter_modal_background").addEventListener('click', function (e) {
         if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
             closeFilters();

@@ -1,0 +1,18 @@
+﻿@model SpeciesAssessment2021
+@using static Assessments.Frontend.Web.Infrastructure.Helpers
+@using Microsoft.AspNetCore.Http.Extensions
+
+@if (Model.Revisions != null && Model.Revisions.Any())
+{
+    
+    <h2>Revisjoner</h2>
+    foreach (var revision in Model.Revisions)
+    {
+
+        <p class="citation">
+            @revision.RevisionDate.ToLongDateString()
+            @revision.RevisionReason
+            <a href="@Context.Request.GetEncodedUrl()/@revision.Revision">@Context.Request.GetEncodedUrl()/@revision.Revision</a>
+        </p>
+    }
+}

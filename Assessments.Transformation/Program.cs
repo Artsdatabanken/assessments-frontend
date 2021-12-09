@@ -126,7 +126,6 @@ namespace Assessments.Transformation
                             innerAssessment.Revision = innerItem.Revision;
                             innerAssessment.Id = transformedAssessment.Id;
                             if (transformedAssessment.Revisions == null) transformedAssessment.Revisions = new List<SpeciesAssessment2021>();
-                            
                             transformedAssessment.Revisions.Add(innerAssessment);
                         }
                     }

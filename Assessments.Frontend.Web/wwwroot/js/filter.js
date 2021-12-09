@@ -100,7 +100,7 @@ function startup() {
 if (document.getElementById("filter_modal_background")) {
     // Click on filter_modal_background outside filtebox closes filterbox
     document.getElementById("filter_modal_background").addEventListener('click', function (e) {
-        if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
+        if (e.target == document.getElementById("filter_modal_background")) {
             closeFilters();
         }
     });

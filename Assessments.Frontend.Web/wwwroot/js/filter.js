@@ -76,9 +76,7 @@ function initialCollapsibleCheck() {
 }
 
 function startup() {
-    console.log("~ startup filters")
     scrollToPreviousPosition();
-
     // Remove no javascript tag, making js-availiable styling apply
     if (document.getElementById("open_filter")) {
         document.getElementById("open_filter").classList.remove("no_js");
@@ -96,7 +94,6 @@ function startup() {
         handleFirstTime();
     }
     initialCollapsibleCheck();
-    console.log("~ filter startup complete");
 }
 
 // EVENTS 
@@ -230,7 +227,7 @@ function updateToggleAll(el){
     }
 }
 
-function onClickAction(el, possible, add) {
+function onClickAction(el, allFiltersArePossible, add) {
     // Clickevents for the toggles
     if (el.id === "redlisted_check") {
         toggleRedlistedCategories();
@@ -249,7 +246,7 @@ function onClickAction(el, possible, add) {
     if (add) {
         scrollTo.value = "scroll_" + window.scrollY;
         scrollTo.checked = true;
-        if (possible) {
+        if (allFiltersArePossible) {
             //activate if toggle all of the filters are possible
             toggleSingleFilter(el);
         }

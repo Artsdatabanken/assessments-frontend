@@ -227,7 +227,7 @@ function updateToggleAll(el){
     }
 }
 
-function onClickAction(el, allFiltersArePossible, add) {
+function onClickAction(el, addOrRemove) {
     // Clickevents for the toggles
     if (el.id === "redlisted_check") {
         toggleRedlistedCategories();
@@ -236,20 +236,21 @@ function onClickAction(el, allFiltersArePossible, add) {
     } else if (el.id === "Insekter") {
         toggleInsects();
     } else {
-        if (add) {
+        if (addOrRemove == "add") {
             updateToggleAll(el);
             toggleMarkAll();
         } else {
             el.onclick = null;
         }        
     }
-    if (add) {
+    if (addOrRemove == "add") {
         scrollTo.value = "scroll_" + window.scrollY;
         scrollTo.checked = true;
+        /*
         if (allFiltersArePossible) {
-            //activate if toggle all of the filters are possible
+            //activate if toggle all of the filters are possible? 
             toggleSingleFilter(el);
-        }
+        }*/
     }    
 }
 
@@ -257,7 +258,7 @@ function addOnclick() {
     if (!submitCheckInputs) return;
     Array.prototype.forEach.call(submitCheckInputs, el => {
         el.onclick = function () {
-            onClickAction(el, false, true);
+            onClickAction(el, "add");
             if (!isSmallReader() && this.form) {
                 this.form.submit();
             }
@@ -269,7 +270,7 @@ function removeSubmitOnclick() {
     if (!submitCheckInputs) return;
     Array.prototype.forEach.call(submitCheckInputs, el => {
         el.onclick = function () {
-            onClickAction(el, false, false);
+            onClickAction(el, "remove");
         };
     });
 }

@@ -2,9 +2,9 @@
 
 // DOM elements
 const submitCheckInputs = document.getElementsByClassName("submitOnclick");
-const headerMenuRL = document.getElementsByClassName("headermenu");
-const themeSelectorDropDownRL = document.getElementsByClassName("themeselectordropdown");
-const sidebarMenuItemClickRL = document.getElementsByClassName("sidebarmenuitemclick");
+const headerMenuRL = document.getElementById("headermenu");
+const themeSelectorDropDownRL = document.getElementById("themeselectordropdown");
+const sidebarMenuItemClickRL = document.getElementById("sidebarmenuitemclick");
 
 // Screen Size
 const smallScreenSize = 750; // In case we want to tinker later.
@@ -19,7 +19,7 @@ function isPadSize() {
 }
 
 function closeHeadermenu() {
-    if (headerMenuRL &&
+    if (headerMenuRL && headerMenuRL.classList &&
         headerMenuRL.classList.contains("show")) {
         headerMenuRL.classList.remove("show")
         headerMenuRL.classList.add("hide")
@@ -36,7 +36,7 @@ function closeThemeselectordropdown() {
 
 function closeSidebarmenuitemclick() {
     if (isPadSize &&
-        sidebarMenuItemClickRL &&
+        sidebarMenuItemClickRL && sidebarMenuItemClickRL.classList &&
         sidebarMenuItemClickRL.classList.contains("expand")) {
         sidebarMenuItemClickRL.classList.remove("expand")
     }
@@ -50,7 +50,7 @@ document.addEventListener('click', e => {
     if (!e.target.matches('#theme_elements *')) { // Surrounding parent 
         closeThemeselectordropdown();
     }
-    if (!e.target.matches('#sidebarmenuitemclick *')) { // Surrounding parent 
+    if (!e.target.matches('#sidebarmenu_container *')) { // Surrounding parent 
         closeSidebarmenuitemclick();
     }      
 });

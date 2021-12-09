@@ -177,15 +177,15 @@ function toggleMarkAll(){
     }
 }
 
-function toggleAllOfType(what, thisid, thatid) {
-    const thatone = document.getElementById(thatid).checked;
-    const thisone = document.getElementById(thisid).checked;
+function toggleAllOfType(what, primaryToggleElementId, secondaryToggleElementId) {
+    const secondaryToggleElement = document.getElementById(secondaryToggleElementId).checked;
+    const primaryToggleElement = document.getElementById(primaryToggleElementId).checked;
     what.forEach(el => {
-        if (thisone) {
+        if (primaryToggleElement) {
             document.getElementById("input_" + el).checked = true;
         } else {
-            if (thatone) {
-                document.getElementById(thatid).checked = false;
+            if (secondaryToggleElement) {
+                document.getElementById(secondaryToggleElementId).checked = false;
             }
             document.getElementById("input_" + el).checked = false;
         }

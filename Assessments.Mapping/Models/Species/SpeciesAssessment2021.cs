@@ -348,5 +348,9 @@ namespace Assessments.Mapping.Models.Species
         /// Group the species belongs to, in most cases a taxonomic group
         /// </summary>
         public string SpeciesGroup { get; set; }
+
+        public DateTime RevisionDate { get; set; }
+        public int Revision { get; set; }
+        public List<SpeciesAssessment2021> Revisions { get; set; }
     }
 }

@@ -87,6 +87,8 @@ namespace Assessments.Transformation
             });
 
             var databaseAssessments = _dbContext.Assessments.AsNoTracking().Where(x => (bool)!x.IsDeleted && x.Expertgroup != "Testarter" && x.Expertgroup != "Moser (Svalbard)");
+            var revisions = await _dbContext.AssessmentRevisions.AsNoTracking().Include(x => x.AssessmentHistory).ToArrayAsync();
+
             var totalCount = await databaseAssessments.CountAsync();
 
             _progressBar.Tick(0, $"Transformerer {totalCount:N0} vurderinger");
@@ -95,6 +97,12 @@ namespace Assessments.Transformation
             var rodliste2019Assessments = new List<Rodliste2019>();
             var speciesAssessment2021Mapper = new MapperConfiguration(cfg => cfg.AddProfile<SpeciesAssessment2021Profile>()).CreateMapper();
             var speciesAssessment2021Assessments = new List<SpeciesAssessment2021>();
+            var revisionsTransformed = revisions.Select(x => new
+            {
+                Id = x.Id, Revision = x.RevisionId, RevDate = x.RevisionDateTime,
+                FutureRevisionDate = x.FutureRevisionDateTime,
+                Assessment = speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(JsonConvert.DeserializeObject<Rodliste2019>(x.AssessmentHistory.Doc))
+            }).GroupBy(x=>x.Id).ToDictionary(x => x.Key);
 
             foreach (var item in databaseAssessments)
             {
@@ -104,6 +112,24 @@ namespace Assessments.Transformation
                 {
                     assessmentForTransformation.Id = id;
                     var transformedAssessment = speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(assessmentForTransformation);
+
+                    // revisions
+                    transformedAssessment.RevisionDate = new DateTime(2021,11,24);
+                    if (revisionsTransformed.ContainsKey(transformedAssessment.Id))
+                    {
+                        var list = revisionsTransformed[transformedAssessment.Id].OrderBy(x => x.Revision).ToArray();
+                        foreach (var innerItem in list)
+                        {
+                            transformedAssessment.RevisionDate = innerItem.FutureRevisionDate;
+                            var innerAssessment = innerItem.Assessment;
+                            innerAssessment.RevisionDate = innerItem.RevDate;
+                            innerAssessment.Revision = innerItem.Revision;
+                            innerAssessment.Id = transformedAssessment.Id;
+                            if (transformedAssessment.Revisions == null) transformedAssessment.Revisions = new List<SpeciesAssessment2021>();
+                            
+                            transformedAssessment.Revisions.Add(innerAssessment);
+                        }
+                    }
                     speciesAssessment2021Assessments.Add(transformedAssessment);
                 }
 

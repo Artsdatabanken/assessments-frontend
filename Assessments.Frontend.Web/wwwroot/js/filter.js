@@ -15,11 +15,6 @@ const scrollTo = document.getElementById("remember_scroll");
 const redlisted = ["RE", "CR", "EN", "VU", "NT", "DD"];
 const endangered = ["CR", "EN", "VU"];
 
-/* RUN THE STARTUP */
-if (filters) {    
-    startup();
-}
-
 function hasVisited() {
     // in url: check if this is the first run
     return init.checked;
@@ -273,4 +268,9 @@ function removeSubmitOnclick() {
             onClickAction(el, "remove");
         };
     });
+}
+
+/* RUN THE STARTUP */
+if (filters) {
+    startup();
 }

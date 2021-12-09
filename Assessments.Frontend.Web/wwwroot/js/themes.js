@@ -1,4 +1,8 @@
-/* THEME MODES */
+/* THEME MODES 
+ - Swaps out classes on body adjusting to different css-themes
+ - Does not persist across pages at this point
+ - Checks manually set user preference as default (browser,os)
+ */
 
 function highContrastMode(thisbutton,className) {
     var mainparent = document.body;
@@ -23,8 +27,8 @@ function expandThemeButtons() {
 const initialContrast = matchMedia('(forced-colors: active)');
 const initialTheme = matchMedia('(prefers-color-scheme: dark)');
 
-function checks() {
-    console.log("RUNNING THEME CHECK")
+function themeChecks() {
+    // Detects user preference for high contrast and dark mode themes
     var mainparent = document.body;
     if (initialTheme.matches) {
         mainparent.classList.add("darktheme");
@@ -42,9 +46,9 @@ function checks() {
     }
 }
 // run the checks immediately
-checks();
+themeChecks();
 
 // listen for any changes performed by people tinkering with their settings
-initialContrast.addListener(checks);
-initialTheme.addListener(checks);
+initialContrast.addListener(themeChecks);
+initialTheme.addListener(themeChecks);
 

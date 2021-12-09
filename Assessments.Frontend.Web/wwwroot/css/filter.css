@@ -528,3 +528,36 @@ button.list_header {
         display: block;
     }
 }
+
+.only_js .filter_area,
+.only_js .filter_category,
+.only_js .filter_region,
+.only_js .filter_european_population,
+.only_js .filter_criteria,
+.only_js .filter_extinct,
+.only_js .filter_habitat,
+.only_js .filter_species_groups,
+.only_js .filter_taxon_rank {
+    display: block;
+}
+
+.only_js input[type=checkbox]:not(:checked)#show_area ~ .filter_area,
+.only_js input[type=checkbox]:not(:checked)#show_category ~ .filter_category,
+.only_js input[type=checkbox]:not(:checked)#show_region ~ .filter_region,
+.only_js input[type=checkbox]:not(:checked)#show_european_population ~ .filter_european_population,
+.only_js input[type=checkbox]:not(:checked)#show_criteria ~ .filter_criteria,
+.only_js input[type=checkbox]:not(:checked)#show_habitat ~ .filter_habitat,
+.only_js input[type=checkbox]:not(:checked)#show_extinct ~ .filter_extinct,
+.only_js input[type=checkbox]:not(:checked)#show_species_groups ~ .filter_species_groups,
+.only_js input[type=checkbox]:not(:checked)#show_taxon_rank ~ .filter_taxon_rank {
+    display: none;
+}
+
+.only_js input[type=checkbox]:checked#show_insects ~ .filter_insects {
+    display: block;
+}
+
+.only_js .filter_insects {
+    display: none;
+}
+

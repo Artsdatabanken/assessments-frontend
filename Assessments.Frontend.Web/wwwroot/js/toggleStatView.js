@@ -1,3 +1,5 @@
+// Toggle and remeber which view type the user has currently selected.
+
 const listButton = document.getElementById("list_view_button");
 const statButton = document.getElementById("stat_view_button");
 
@@ -6,6 +8,7 @@ const isInputChecked = (name, value) => {
 }
 
 const createCheckbox = () => {
+    // Choose between the list or stat views
     const inputElement = document.createElement("input");
     const name = "View";
     const value = "stat";
@@ -16,7 +19,6 @@ const createCheckbox = () => {
     inputElement.value = value;
     inputElement.classList.add("collapse_checkbox");
     inputElement.checked = isInputChecked(name, value);
-    
     return inputElement;
 }
 
@@ -25,7 +27,6 @@ const insertViewCheckbox = () => {
         const headerItem = listButton.parentNode;
         headerItem.insertBefore(createCheckbox(), headerItem.childNodes[0]);
     }
-    
 }
 
 const changeViewButtons = () => {
@@ -37,7 +38,6 @@ const changeViewButtons = () => {
             btn.type = "button";
             btn.onclick = () => {
                 if (btn.value == "stat") {
-                    console.log("yo");
                     checkbox.checked = true;
                 } else {
                     checkbox.checked = false;

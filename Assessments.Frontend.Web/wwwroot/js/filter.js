@@ -1,13 +1,56 @@
+/* Anything Filter should go here
+ * Filters are only relevant for the main page of the redlist */
+
+// DOM elements
+const filters = document.getElementById("filters");
+const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
+const insectFilters = document.getElementsByClassName("insect_input");
+const insectInput = document.getElementById("Insekter");
+const redlistCheck = document.getElementById("redlisted_check").checked;
+const endangeredCheck = document.getElementById("endangered_check").checked;
+const init = document.getElementById("initial_check");
+const scrollTo = document.getElementById("remember_scroll");
+
+// Constants
+const redlisted = ["RE", "CR", "EN", "VU", "NT", "DD"];
+const endangered = ["CR", "EN", "VU"];
+
+function hasVisited() {
+    // in url: check if this is the first run
+    return init.checked;
+}
+
+function setVisited() {
+    // in url: mark page as visited.
+    init.checked = true;
+}
+
+function handleFirstTime() {
+    // On the first run, close all but given elements
+    Array.prototype.forEach.call(isCheckInputs, (e) => {
+        if (e.id == "show_area" || e.id == "show_insects") {
+            e.checked = true;
+        } else {
+            e.checked = false;
+        }
+    })
+}
+
+function scrollToPreviousPosition(){
+    if (!scrollTo) return;
+    const position = scrollTo.value;
+    window.scrollTo(0, position);
+}
 
 function closeFilters() {
     document.getElementById("filters").classList.add("hide_on_smallscreen");
     document.body.classList.remove('noscroll');
-    filters_open_button.focus();
+    document.getElementById("open_filter").focus();
 }
 
 function openFilters() {
     document.getElementById("filters").classList.remove("hide_on_smallscreen");
-    filters_close_buttons[0].focus();
+    document.getElementsByClassName("close_filters")[0].focus();
     document.body.classList.add('noscroll');
 }
 
@@ -21,49 +64,38 @@ function collapse(name) {
     setCollapsibleIcon(name);
 }
 
-function startup() {
-    console.log("~ startup filters")
+function initialCollapsibleCheck() {
+    Array.prototype.forEach.call(isCheckInputs, el => {
+        setCollapsibleIcon(el.id);
+    })
+}
 
+function startup() {
+    scrollToPreviousPosition();
     // Remove no javascript tag, making js-availiable styling apply
     if (document.getElementById("open_filter")) {
         document.getElementById("open_filter").classList.remove("no_js");
     }
-    if (document.getElementById("filters")) {
-        document.getElementById("filters").classList.remove("no_js");
+    if (filters) { // Double-check in case first check gets removed ^^
+        filters.classList.remove("no_js");    
+        // Add js-tag for elements only relevant to js-users. 
+        filters.classList.add("only_js");
     }
-    
-
-    // Users with javascript should always see this item
-    closeFilters();
-
-    
-    console.log("~ startup complete ^.^");
+    closeFilters();    
+    addOnclick();
+    window.addEventListener('resize', addOnclick);
+    if (!hasVisited()) {         
+        setVisited();
+        handleFirstTime();
+    }
+    initialCollapsibleCheck();
 }
 
-startup();
-
-
-/* EVENTS */
-
-
-document.addEventListener('keydown', (e) => {
-    // Keypress on entire page
-    
-    if (e.code == "Escape" && isSmallReader()) {
-        // Only listen to escape clicks, and only on tiny screens
-
-        if (document.getElementById("filters") &&
-            !document.getElementById("filters").classList.contains("hide_on_smallscreen")) {
-            // If filter box is open, close it.
-            closeFilters();
-        }
-    }    
-});
-
+// EVENTS 
 if (document.getElementById("filter_modal_background")) {
-    // Click outside filtebox closes filterbox
+    // Click on filter_modal_background outside filterbox closes it
     document.getElementById("filter_modal_background").addEventListener('click', function (e) {
-        if (document.getElementById("filter_modal_background") && e.target == document.getElementById("filter_modal_background")) {
+        if (e.target == document.getElementById("filter_modal_background")) {
             closeFilters();
         }
     });
@@ -83,41 +115,7 @@ function submitClickedElement(element) {
 
 /* Old code not changed  much */
 
- const filterStyles = `
-input[type=checkbox]:not(:checked)#show_area~.filter_area,
-input[type=checkbox]:not(:checked)#show_category~.filter_category,
-input[type=checkbox]:not(:checked)#show_region~.filter_region,
-input[type=checkbox]:not(:checked)#show_european_population~.filter_european_population,
-input[type=checkbox]:not(:checked)#show_criteria~.filter_criteria,
-input[type=checkbox]:not(:checked)#show_habitat~.filter_habitat,
-input[type=checkbox]:not(:checked)#show_extinct~.filter_extinct,
-input[type=checkbox]:not(:checked)#show_species_groups~.filter_species_groups,
-input[type=checkbox]:not(:checked)#show_taxon_rank~.filter_taxon_rank {
-    display: none;
-}
-
-input[type=checkbox]:checked#show_insects~.filter_insects {
-    display: block;
-}
-
-.filter_area,
-.filter_category,
-.filter_region,
-.filter_european_population,
-.filter_criteria,
-.filter_extinct,
-.filter_habitat,
-.filter_species_groups,
-.filter_taxon_rank {
-    display: block;
-}
-
-.filter_insects {
-    display: none;
-}
-`;
-
-const setCollapsibleIcon = (name) => {
+function setCollapsibleIcon(name){
     if (name == "initial_check") {
         return;
     }
@@ -147,36 +145,22 @@ const setCollapsibleIcon = (name) => {
     headerItem.insertBefore(span, headerItem.childNodes[0]);
 }
 
-const initialCollapsibleCheck = () => {
-    Array.prototype.forEach.call(isCheckInputs, el => {
-        setCollapsibleIcon(el.id);
-    })
-}
+// Handle toggle events for misc. scenario
 
-const handleFirstTime = () => {
-    Array.prototype.forEach.call(isCheckInputs, (e) => {
-        if (e.id == "show_area" || e.id == "show_insects") {
-            e.checked = true;
-        } else {
-            e.checked = false;
-        }
-    })
-}
-
-const shouldToggleMarkAll = (elementsClass) => {
+function shouldToggleMarkAll(elementsClass){
     const allElements = document.getElementsByClassName(elementsClass);
     return Array.prototype.every.call(allElements, (element) => {
         return element.checked === true;
     })
 }
 
-const shouldToggleMarkRedOrEnd = (list) => {
+function shouldToggleMarkRedOrEnd(list){
     return Array.prototype.every.call(list, (item) => {
         return document.getElementById("input_" + item).checked === true;
     })
 }
 
-const toggleMarkAll = () => {
+function toggleMarkAll(){
     if (shouldToggleMarkAll("insect_input")) {
         insectInput.checked = true;
     }
@@ -188,37 +172,30 @@ const toggleMarkAll = () => {
     }
 }
 
-const toggleRedlistedCategories = () => {
-    const isEndangeredActive = endangeredCheck.checked;
-    const isRedlistedActive = redlistCheck.checked;
-    redlisted.forEach(el => {
-        if (isRedlistedActive) {
+function toggleAllOfType(what, primaryToggleElementId, secondaryToggleElementId) {
+    const secondaryToggleElement = document.getElementById(secondaryToggleElementId).checked;
+    const primaryToggleElement = document.getElementById(primaryToggleElementId).checked;
+    what.forEach(el => {
+        if (primaryToggleElement) {
             document.getElementById("input_" + el).checked = true;
         } else {
-            if (isEndangeredActive) {
-                endangeredCheck.checked = false;
-            } 
-            document.getElementById("input_" + el).checked = false;
-        }
-    })
-}
-
-const toggleEndangeredCategories = () => {  
-    const isEndangeredActive = endangeredCheck.checked;
-    const isRedlistedActive = redlistCheck.checked;
-    endangered.forEach(el => {
-        if (isEndangeredActive) {
-            document.getElementById("input_" + el).checked = true;
-        } else {
-            if (isRedlistedActive) {
-                redlistCheck.checked = false;
+            if (secondaryToggleElement) {
+                document.getElementById(secondaryToggleElementId).checked = false;
             }
             document.getElementById("input_" + el).checked = false;
         }
     })
 }
 
-const toggleInsects = () => {
+function toggleRedlistedCategories() {
+    toggleAllOfType(redlisted, "redlisted_check", "endangered_check");
+}
+
+function toggleEndangeredCategories() {  
+    toggleAllOfType(endangered, "endangered_check", "redlisted_check");
+}
+
+function toggleInsects(){
     Array.prototype.forEach.call(insectFilters, insect => {
         if (insectInput.checked) {
             insect.checked = true;
@@ -228,27 +205,72 @@ const toggleInsects = () => {
     });
 }
 
-const toggleSingleFilter = (element, parentId) => {
+function toggleSingleFilter(element, parentId){
     if (!element.checked) {
         document.getElementById(parentId).checked = false;
     }
 }
 
-if (filters) {
-    window.addEventListener('resize', addOnclick);
-    const stylesheet = document.createElement("style");
-    stylesheet.innerText = filterStyles;
-    document.head.appendChild(stylesheet);
-    addOnclick();
-    if (!hasVisited()) {
-        /*
-             hasVisited checks url if meta hasVisited is set 
-             All filtergrups start open (people w/o js. ) TODO : CONSIDER using the no_js tag instead. 
-             close all but Vurderingsområde on first visit.
-             After first visit, use isCheck instead to know which groups are opened and closed.
-         */
-        setVisited();
-        handleFirstTime();
+function updateToggleAll(el){
+    if (el && el.classList[0] === "insect_input") {
+        toggleSingleFilter(el, "Insekter");
+    } else if (el && endangered.some(category => el.id.indexOf(category) != -1)) {
+        toggleSingleFilter(el, "endangered_check");
+        toggleSingleFilter(el, "redlisted_check");
+    } else if (el && redlisted.some(category => el.id.indexOf(category) != -1)) {
+        toggleSingleFilter(el, "redlisted_check");
     }
-    initialCollapsibleCheck();
+}
+
+function onClickAction(el, addOrRemove) {
+    // Clickevents for the toggles
+    if (el.id === "redlisted_check") {
+        toggleRedlistedCategories();
+    } else if (el.id === "endangered_check") {
+        toggleEndangeredCategories();
+    } else if (el.id === "Insekter") {
+        toggleInsects();
+    } else {
+        if (addOrRemove == "add") {
+            updateToggleAll(el);
+            toggleMarkAll();
+        } else {
+            el.onclick = null;
+        }        
+    }
+    if (addOrRemove == "add") {
+        scrollTo.value = "scroll_" + window.scrollY;
+        scrollTo.checked = true;
+        /*
+        if (allFiltersArePossible) {
+            //activate if toggle all of the filters are possible? 
+            toggleSingleFilter(el);
+        }*/
+    }    
+}
+
+function addOnclick() {
+    if (!submitCheckInputs) return;
+    Array.prototype.forEach.call(submitCheckInputs, el => {
+        el.onclick = function () {
+            onClickAction(el, "add");
+            if (!isSmallReader() && this.form) {
+                this.form.submit();
+            }
+        };
+    });
+}
+
+function removeSubmitOnclick() {
+    if (!submitCheckInputs) return;
+    Array.prototype.forEach.call(submitCheckInputs, el => {
+        el.onclick = function () {
+            onClickAction(el, "remove");
+        };
+    });
+}
+
+/* RUN THE STARTUP */
+if (filters) {
+    startup();
 }

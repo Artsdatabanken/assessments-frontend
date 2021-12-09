@@ -1,123 +1,88 @@
+/* - JS relevant for the entire page */
+
 // DOM elements
-const filters = document.getElementById("filters");
-const filter_modal_background = document.getElementById("filter_modal_background");
-const filters_scrollable = document.getElementById("filters_scrollable");
 const submitCheckInputs = document.getElementsByClassName("submitOnclick");
-const submit_filters = document.getElementById("submit_filters");
-const filters_close_buttons = document.getElementsByClassName("close_filters");
-const filters_open_button = document.getElementById("open_filter");
-const init = document.getElementById("initial_check");
-const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
-const redlistCheck = document.getElementById("redlisted_check");
-const endangeredCheck = document.getElementById("endangered_check");
-const insectInput = document.getElementById("Insekter");
-const insectFilters = document.getElementsByClassName("insect_input");
-const scrollTo = document.getElementById("remember_scroll");
+const headerMenuRL = document.getElementById("headermenu");
+const themeSelectorDropDownRL = document.getElementById("themeselectordropdown");
+const sidebarMenuItemClickRL = document.getElementById("sidebarmenuitemclick");
 
-// Constants
-const redlisted = ["RE", "CR", "EN", "VU", "NT", "DD"];
-const endangered = ["CR", "EN", "VU"];
+// Screen Size
+const smallScreenSize = 750; // In case we want to tinker later.
+const padScreenSize = 940; // In case we want to tinker later.
 
-const isSmallReader = () => {
-    return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= 750;
+function isSmallReader(){
+    return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= smallScreenSize;
 }
 
-const hasVisited = () => {
-    return init.checked;
+function isPadSize() {
+    return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) <= padScreenSize;
 }
 
-const setVisited = () => {
-    init.checked = true;
-}
-
-const updateToggleAll = (el) => {
-    if (el && el.classList[0] === "insect_input") {
-        toggleSingleFilter(el, "Insekter");
-    } else if (el && endangered.some(category => el.id.indexOf(category) != -1)) {
-        toggleSingleFilter(el, "endangered_check");
-        toggleSingleFilter(el, "redlisted_check");
-    } else if (el && redlisted.some(category => el.id.indexOf(category) != -1)) {
-        toggleSingleFilter(el, "redlisted_check");
+function closeHeadermenu() {
+    if (headerMenuRL && headerMenuRL.classList &&
+        headerMenuRL.classList.contains("show")) {
+        headerMenuRL.classList.remove("show")
+        headerMenuRL.classList.add("hide")
     }
 }
 
-const addOnclick = () => {
-    if (!submitCheckInputs) return;
-    Array.prototype.forEach.call(submitCheckInputs, el => {
-        if (el.id === "redlisted_check") {
-            el.onclick = function () {
-                toggleRedlistedCategories();
-                scrollTo.value = "scroll_" + window.scrollY;
-                scrollTo.checked = true;
-                // toggleSingleFilter(el); activate if toggle all of the filters are possible
-                if (!isSmallReader()) {
-                    this.form.submit();
-                }
-            };
-        } else if (el.id === "endangered_check") {
-            el.onclick = function () {
-                toggleEndangeredCategories();
-                scrollTo.value = "scroll_" + window.scrollY;
-                scrollTo.checked = true;
-                // toggleSingleFilter(el); activate if toggle all of the filters are possible
-                if (!isSmallReader()) {
-                    this.form.submit();
-                }
-            };
-        } else if (el.id === "Insekter") {
-            el.onclick = function () {
-                toggleInsects();
-                scrollTo.value = "scroll_" + window.scrollY;
-                scrollTo.checked = true;
-                // toggleSingleFilter(el); activate if toggle all of the filters are possible
-                if (!isSmallReader()) {
-                    this.form.submit();
-                }
-            };
-        } else {
-            el.onclick = function() {
-                updateToggleAll(el);
-                toggleMarkAll();
+function closeThemeselectordropdown() {
+    if (themeSelectorDropDownRL &&
+        themeSelectorDropDownRL.style &&
+        themeSelectorDropDownRL.style.display == "block") {        
+        themeSelectorDropDownRL.style.display = "none";
+    }
+}
 
-                scrollTo.value = "scroll_" + window.scrollY;
-                scrollTo.checked = true;
-                if (!isSmallReader()) {
-                    this.form.submit();
-                }
-            };
+function closeSidebarmenuitemclick() {
+    if (isPadSize &&
+        sidebarMenuItemClickRL && sidebarMenuItemClickRL.classList &&
+        sidebarMenuItemClickRL.classList.contains("expand")) {
+        sidebarMenuItemClickRL.classList.remove("expand")
+    }
+}
+
+document.addEventListener('click', e => {    
+    // Click on entrie page
+    if (!e.target.matches('#headermenu *')) {
+        closeHeadermenu();
+    }
+    if (!e.target.matches('#theme_elements *')) { // Surrounding parent 
+        closeThemeselectordropdown();
+    }
+    if (!e.target.matches('#sidebarmenu_container *')) { // Surrounding parent 
+        closeSidebarmenuitemclick();
+    }      
+});
+
+document.addEventListener('keydown', (e) => {
+    // Keypress on entire page
+
+    if (e.code == "Escape") {
+        // Only listen to escape clicks
+        if (document.getElementById("Omoss")) {
+            document.getElementById("Omoss").style.display = "none";
         }
-    });
-}
 
-const removeSubmitOnclick = () => {
-    if (!submitCheckInputs) return;
-    Array.prototype.forEach.call(submitCheckInputs, el => {
-        if (el.id === "redlisted_check") {
-            el.onclick = function () {
-                toggleRedlistedCategories();
-            };
-        } else if (el.id === "endangered_check") {
-            el.onclick = function () {
-                toggleEndangeredCategories();
-            };
-        } else if (el.id === "Insekter") {
-            el.onclick = function () {
-                toggleInsects();
-            };
-        } else {
-            el.onclick = null;
+        if (document.getElementById("Meny")) {
+            document.getElementById("Meny").style.display = "none";
         }
-    });
-}
+        
+        if (themeSelectorDropDownRL){
+            themeSelectorDropDownRL.style.display = "none";
+        }
 
-const scrollToPreviousPosition = () => {
-    if (!scrollTo) return;
-    const position = scrollTo.value;
-    window.scrollTo(0, position);
-}
+        closeSidebarmenuitemclick();
+        if (isSmallReader()) {
+            // For elements with different ux for mobile
+            if (document.getElementById("filters") &&
+                !document.getElementById("filters").classList.contains("hide_on_smallscreen")) {
+                // If filter box is open, close it.
+                closeFilters();
+            }
+            closeHeadermenu();
+            closeThemeselectordropdown();
+        }
+    }
+});
 
-const initialCheck = () => {
-    scrollToPreviousPosition();
-}
-
-initialCheck();

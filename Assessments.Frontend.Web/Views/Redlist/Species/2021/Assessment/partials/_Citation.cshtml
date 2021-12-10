@@ -7,7 +7,9 @@
 
 @{
     var expertCommitteeMembers = await _expertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
-    var sortedExperts = @expertCommitteeMembers.OrderBy(x => x.Role).ThenBy(x => x.LastName); 
+    var sortedExperts = expertCommitteeMembers
+        .OrderBy(x => new List<string> {"leder", "nestleder", "medlem"}.IndexOf(x.Role.ToLowerInvariant()))
+        .ThenBy(x => x.LastName);  
     var formattedExperts = sortedExperts.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList();
     string authors = formattedExperts.JoinAnd(", ", " og ");
     }

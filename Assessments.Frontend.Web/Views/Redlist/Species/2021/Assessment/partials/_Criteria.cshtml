@@ -423,12 +423,18 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 {
 <div class="page_section criteria" id="criteria">
     <div class="criteria_description">
-        <h3>@ViewBag.glossary["criteria"]["tagline"]</h3>
+        @{ 
+            string heading = ViewBag.glossary["criteria"]["tagline"];
+            heading = @Helpers.fixSpeciesLevel(heading, Model.TaxonRank);
+            string description = ViewBag.glossary["criteria"]["description"];
+            description = @Helpers.fixSpeciesLevel(description, Model.TaxonRank);
+        }
+        <h3>@heading</h3>
         <p>
-            @Html.Raw(ViewBag.glossary["criteria"]["description"])
+            @Html.Raw(description)
             <br />
             <a href="https://www.artsdatabanken.no/Pages/314252/Metode#316484" class="link-styled">Gå til metode</a>
-          </p>
+        </p>
        
         <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
         <p>@Model.CriteriaSummarized
@@ -451,10 +457,10 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
         *@
         <ul class="outer noline">
             <li class="tablist_listheader">
-                <span class="summary_title">Artens kriterier</span>
+                <span class="summary_title">@Helpers.fixSpeciesLevel("Artens", Model.TaxonRank) kriterier</span>
                 <span class="full_list_title">Alle kriterier</span>
                 <span class="full_list_description" style="display:none;">
-                    Gjeldende kriterier for arten er markert med merket
+                    Gjeldende kriterier for @Helpers.fixSpeciesLevel("arten", Model.TaxonRank) er markert med merket
                     <span class="impact_v">
                         <span class="material-icons">
                             done

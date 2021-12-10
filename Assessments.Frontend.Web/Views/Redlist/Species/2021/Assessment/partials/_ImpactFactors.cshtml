@@ -138,7 +138,7 @@
         <div class="page_section impact" id="impactfactors">
             <h2>Påvirkningsfaktorer </h2>
             <p>
-                Nedenfor listes det opp forskjellige påvirkningsfaktorer som kan gi utslag for rødlisting av arten.
+                Nedenfor listes det opp forskjellige påvirkningsfaktorer som kan gi utslag for rødlisting av @Helpers.fixSpeciesLevel("arten", Model.TaxonRank).
             </p>
 
             <button id="summary" class="changetab active" onclick="impactlist('summary',this)">Oppsummering</button>
@@ -146,7 +146,7 @@
             <br />
             <ul class="outer tabbed_element_container">
                 <li class="tablist_listheader">
-                    <span class="summary_title">Artens påvirkningsfaktorer</span>
+                    <span class="summary_title">@Helpers.fixSpeciesLevel("Artens", Model.TaxonRank) påvirkningsfaktorer</span>
                     <span class="full_list_title">Alle påvirkningsfaktorer</span>
                     @if (Model.ImpactFactors.Count == 0)
                     {

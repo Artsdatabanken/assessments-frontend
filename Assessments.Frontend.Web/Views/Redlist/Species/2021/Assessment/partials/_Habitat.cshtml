@@ -63,7 +63,11 @@
 
     <div class="habitat page_section ">        
         <h2>@ViewBag.glossary["habitat"]["tagline"]</h2>
-        <p>@Html.Raw(@ViewBag.glossary["habitat"]["description"])</p>
+        <p>
+            @{string habitatdescription = ViewBag.glossary["habitat"]["description"];}
+            @Html.Raw(Helpers.fixSpeciesLevel(habitatdescription, Model.TaxonRank))
+        </p>
+
 
         <button class="changetab active" onclick="expandHabitat(this, 'see_all', 'remove')">
             Hovedhabitat
@@ -76,7 +80,7 @@
         <div class="habitat_container tabbed_element_container">
 
             <div class="tablist_listheader">
-                <span class="summary_title">Artens hovedhabitat</span>
+                <span class="summary_title">@Helpers.fixSpeciesLevel("Artens", Model.TaxonRank) hovedhabitat</span>
                 <span class="full_list_title">Alle habitat</span>
                 @if (Model.MainHabitat.Count == 0)
                 {

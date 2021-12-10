@@ -40,7 +40,8 @@
 { // No content would imply it exists nowhere or is recorded nowhere
 <div class="geographic_facts">
     <h3> @ViewBag.glossary["region"]["tagline"]</h3>
-    <p> @Html.Raw(@ViewBag.glossary["region"]["description"])</p>
+    @{string description = ViewBag.glossary["region"]["description"];}
+    @Html.Raw(Helpers.fixSpeciesLevel(description, Model.TaxonRank))
 
     <h3>Geografisk distribusjon</h3>
 

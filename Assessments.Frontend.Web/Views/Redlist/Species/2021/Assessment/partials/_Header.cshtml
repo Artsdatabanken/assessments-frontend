@@ -9,7 +9,7 @@
         <h1>TIDLIGERE VERSJON </h1>
     }
 
-    @if (string.IsNullOrWhiteSpace(Model.RevisionReason))
+    @if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
     {
         <h1>Denne er blitt oppdatert etter lansering </h1>
         <p>@Model.RevisionReason</p>

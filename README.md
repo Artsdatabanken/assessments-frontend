@@ -31,12 +31,19 @@ Alle sites er beskyttet og krever VPN (man trenger ikke være koblet på for å 
 
 Nyttig lenke om man er ny til teknologien: https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/start-mvc?view=aspnetcore-5.0&tabs=visual-studio
 
-## Deployment
-Deployment er delt i test og produksjon og skjer via github actions. Deployment til test skjer automatisk ved innsjekk av alle brancher som ikke er main/master. Ønsker du av en eller annen grunn å utelate din branch fra bygging/deployment til test, må du legge til denne i lista i fila: .github/workflows/test.yml under "branches ignore". 
+## Deployment og bygging til Linux og docker
+Git workflows representerer tre forskjellige versjoner av kjørende kode.
+- develop
+- test
+- main/master
 
-Dockerimage bygges og sendes til artdatabankens dockerhub:https://hub.docker.com/repository/docker/artsdatabanken/assessments-fe - det er foreløpig to tags; test og latest - henholdsvis test/produksjon. 
+- Develop branch er fritt vilt og alle push(og eventuelle PR) til denne bygges og publiseres på: https://assessments-fe-dev.test.artsdatabanken.no. Egnet for kortlevde tester.
+- Test(staging) er en mer stabil testversjon og vil kun bygge og publisere om en PR merges inn i branchen. Denne bygges da og publiseres på https://assessments-fe.test.artsdatabanken.no
+- Main/master bygges ved push(for å kunne adhoc rette akutte feil i produksjon) og om en PR merges inn i branchen. Denne kan publiseres ved å gå til #crocotta og bruk kommandoen "deploy assessments-fe" - den havner da hit: https://assessments-fe.artsdatabanken.no 
 
-For å dytte ut gjeldende versjon til produksjon, gå til #crocotta og bruk kommandoen deploy assessments-fe - da hentes image med tag "latest" fra dockerhub. 
+## Deployment og bygging til IIS/Windows
+- Test(beta): Jenkins mottar push hook fra Github, bygger og publiserer fra test-branch.
+- Main(prod): Bygger master/main ved å trykke "build now" i Jenkins. 
 
 ### Deplyment til iis som website eller applikasjon under en website:
 

@@ -1,15 +1,16 @@
 
-name: Feature branches .NET Core
+name: Test aka staging
+#Builds and publishes PRs to "stable" test
 
 on:
-  push:
-    branches-ignore:
-      - master
-      - main 
+  pull_request:
+    types: [closed]
+    branches: 
+      - 'test-staging'
    
 jobs:
   build:
-
+    if: github.event.pull_request.merged == 'true'
     runs-on: ubuntu-latest
 
     steps:

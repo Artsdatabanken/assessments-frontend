@@ -204,6 +204,11 @@
     stroke: #fff;
 }
 
+.darktheme .vurdert_S .known,
+.darktheme .vurdert_S .sea.known {
+    stroke: #000;
+}
+
 .darktheme .vurdert_N .svalbard_land {
     stroke: black;
 }

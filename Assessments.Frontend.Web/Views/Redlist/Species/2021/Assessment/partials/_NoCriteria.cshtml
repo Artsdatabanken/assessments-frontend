@@ -3,7 +3,7 @@
 @if (Model.Category.Contains("LC"))
 {
     <h3>
-        Hvorfor er ikke denne arten rødlistet?
+        Hvorfor er ikke denne @Helpers.fixSpeciesLevel("arten", Model.TaxonRank) rødlistet?
     </h3>
     <p>
         Denne @Helpers.fixSpeciesLevel("arten", Model.TaxonRank) oppfyller ikke kriteriene for rødlisting.

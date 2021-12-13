@@ -273,15 +273,44 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             if (rang == "SubSpecies" || rang == "Variety")
             {
+                if (replacestring.StartsWith("art", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    // starter med art - uten mellomrom først
+                    if (replacestring[0] == 'A')
+                    {
+                        if (rang == "SubSpecies")
+                        {
+                            replacestring = "Underart" + replacestring.Substring(3); // fra tegn 4 og ut....
+                        }
+                        else if (rang == "Variety")
+                        {
+                            replacestring = "Varietet" + replacestring.Substring(3);
+                        }
+                    }
+                    else
+                    {
+                        //liten a - i tilfelle det ikke er en setning 
+                        if (rang == "SubSpecies")
+                        {
+                            replacestring = "underart" + replacestring.Substring(3);
+                        }
+                        else if (rang == "Variety")
+                        {
+                            replacestring = "varietet" + replacestring.Substring(3);
+                        }
+                    }
+                }
+
+                // art med mellomrom foran (unngå f.eks. kart)
                 if (rang == "SubSpecies")
                 {
-                    replacestring = replacestring.Replace("art", "underart");
-                    replacestring = replacestring.Replace("Art", "Underart");
+                    replacestring = replacestring.Replace(" art", "underart");
+                    replacestring = replacestring.Replace(" Art", "Underart");
                 }
                 else if (rang == "Variety")
                 {
-                    replacestring = replacestring.Replace("art", "varietet");
-                    replacestring = replacestring.Replace("Art", "Varietet");
+                    replacestring = replacestring.Replace(" art", "varietet");
+                    replacestring = replacestring.Replace(" Art", "Varietet");
                 }
             }
             return replacestring;

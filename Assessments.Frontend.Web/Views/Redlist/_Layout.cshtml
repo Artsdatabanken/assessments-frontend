@@ -28,10 +28,12 @@
 
     <meta name="description" content="Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge. Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter. " />
 
-    <environment names="Production,Staging">
-	    <!-- Google Analytics -->
-	    <script>
-	        (function(i, s, o, g, r, a, m) {
+
+    <!-- Google Analytics -->
+    <script>
+
+        (function (i, s, o, g, r, a, m) {
+            console.log("supposed o set cooies sjø")            
 		        i['GoogleAnalyticsObject'] = r;
 		        i[r] = i[r] ||
 			        function() {
@@ -42,12 +44,23 @@
 		        a.async = 1;
 		        a.src = g;
 		        m.parentNode.insertBefore(a, m);
+                
 	        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-	        ga('create', '@(_configuration["Google:AnalyticsId"])', 'auto');
-	        ga('send', 'pageview');
-        </script>
-	    <!-- End Google Analytics -->
+            function acceptCookies(accepted) {
+                if (accepted) {
+                    console.log("setter cookies sjø")
+                    ga('create', '@(_configuration["Google:AnalyticsId"])', 'auto');
+                    ga('send', 'pageview');
+                    document.getElementById('heyCookie').style.display = "none";
+                } else {
+                    document.getElementById('heyCookie').style.display = "none";
+                }
+            }
+
+    </script>
+    <!-- End Google Analytics -->
+    <environment names="Production,Staging">
     </environment>
 
 </head>
@@ -69,7 +82,14 @@
                 <script src="~/js/themes.js" asp-append-version="true"></script>
                 @await RenderSectionAsync("Scripts", required: false)
             </div>
+            <div class="heyCookie" id="heyCookie">
+                Denne nettsiden benytter informasjonskapsler.
+                <button onclick="acceptCookies(false)">Avslå</button>
+                <button onclick="acceptCookies(true)" class="primary">Godta</button>
+
+            </div>
         </div>
+       
         <partial name="/Views/Shared/_PageFooter.cshtml" />
     </div>
 </body>

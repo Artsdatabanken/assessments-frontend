@@ -3,6 +3,27 @@
     overflow-x: hidden;
 }
 
+.heyCookie {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 10px;
+    text-align: center;
+    background: #c3ebf0;
+    border-top: 1px solid #098293;
+}
+
+.darktheme .heyCookie {
+    position: fixed;
+    width: 100%;
+    background: black;
+    bottom: 0;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    border-color: #a83333;
+}
+
 /* 
     Graphic profile colours for reference - classes are not in use as is 
     https://github.com/Artsdatabanken/grafiskprofil/wiki

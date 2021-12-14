@@ -839,3 +839,14 @@ option {
 .show_inline_block {
     display: inline-block;
 }
+
+.archive {
+    padding: 15px;
+    background: #ffaf31;
+    text-align: center;
+    color: black;
+}
+
+.archive .material-icons{
+    vertical-align:bottom;
+}

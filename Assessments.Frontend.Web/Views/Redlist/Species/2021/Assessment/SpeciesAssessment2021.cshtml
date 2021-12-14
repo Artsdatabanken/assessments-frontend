@@ -19,6 +19,15 @@
 }
 
 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Breadcrumb.cshtml" />
+@if (@ViewBag.revisionid > 0)
+{
+<div class="archive">
+    <span class="material-icons">
+        warning_amber
+    </span>
+    Denne siden er arkivert. Innholdet kan være utdatert.
+</div>
+}
 <div class="pagecontainer">
     <partial name="/Views/Redlist/Species/Shared/_PageMenu.cshtml" />
 

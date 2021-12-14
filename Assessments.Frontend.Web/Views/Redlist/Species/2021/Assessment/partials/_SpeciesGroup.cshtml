@@ -7,6 +7,13 @@
     // By the time we arrive here, the actual committe name has been split into correct species group,
     // and is thus now species group and not actually committtee group.
 
+    // @steinho, hvordan finner jeg riktig pub. dato?
+    string firspublished = "24.11.2021";
+    string dateline = "Publisert: " + (Model.AssessmentYear == 2010 ? Model.YearPreviousAssessment : firspublished);
+    @if (Model.RevisionDate.Date.ToShortDateString() != firspublished && !string.IsNullOrEmpty(Model.RevisionReason))
+    {
+        dateline += ", revidert: " + Model.RevisionDate.Date.ToShortDateString();
+    }
 
 }
 
@@ -21,14 +28,14 @@
 
                     @if (speciesgroup[key]["image"] != null)
                     {
-                        <img src="@speciesgroup[key]["image"]" alt="@key"/>
+                        <img src="@speciesgroup[key]["image"]" alt="@key" />
                     }
                 </div>
             }
         }
     </div>
-    <p >
+    <p>
         Vurdert av <a href="https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene" class="lowercase">ekspertkomité for @Model.ExpertCommittee </a> <br />
-        <span class="date">Publisert: @(Model.AssessmentYear == 2010  ? @Model.YearPreviousAssessment : Model.RevisionDate.Date.ToShortDateString())</span>
+        <span class="date">@dateline</span>
     </p>
 </div>

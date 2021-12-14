@@ -250,6 +250,8 @@ namespace Assessments.Frontend.Web.Controllers
             if (assessment == null)
                 return NotFound();
 
+            ViewBag.revisionid = null;
+
             ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
             
             ViewBag.glossary = await GetResource("wwwroot/json/glossary.json"); 
@@ -278,6 +280,8 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.revisionid = revisionid;
 
             assessment = assessment.Revisions.Single(x => x.Revision == revisionid);
 

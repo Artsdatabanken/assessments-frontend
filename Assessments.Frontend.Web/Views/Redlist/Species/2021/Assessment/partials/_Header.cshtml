@@ -4,16 +4,6 @@
 *@
 
 <div class="page-header">
-    @if (Model.Revision > 0)
-    {
-        <h1>TIDLIGERE VERSJON </h1>
-    }
-
-    @if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
-    {
-        <h1>Denne er blitt oppdatert etter lansering </h1>
-        <p>@Model.RevisionReason</p>
-    }
 
     <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Artsnavn.cshtml" />
 

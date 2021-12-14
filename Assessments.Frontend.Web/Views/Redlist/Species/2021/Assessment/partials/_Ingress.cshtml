@@ -47,17 +47,27 @@
                 <span>vurdert til </span>
             }
             <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span><span>
-                
+
                 @if (@Model.Category == "CR" && @Model.PresumedExtinct == true)
                 {
-                <span>for Norsk rødliste for arter 2021, og er trolig utdødd.</span>
+                    <span>for Norsk rødliste for arter 2021, og er trolig utdødd.</span>
                 }
                 else
                 {
-                  <span>for Norsk rødliste for arter 2021.</span>
+                    <span>for Norsk rødliste for arter 2021.</span>
                 }
                 @Html.Raw(sentence)
             </span>
         }
     </p>
+
+    @if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
+    {
+        <p>
+            @Model.RevisionReason <br/>
+            <a asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="1">Originalversjon </a>
+        </p>
+        
+
+    }
 </div>

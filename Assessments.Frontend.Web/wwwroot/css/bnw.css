@@ -391,16 +391,19 @@
     border-color: #df6c6c;
 }
 
-
 .darktheme .sidebarmenu ul,
 .darktheme .sidebarmenu li a,
 .darktheme .redlist li {
     border-color: #464646;
 }
 
-
 .darktheme .filter_group button{
     border-color:#514f4f;
+}
+
+.darktheme .button.primary,
+.darktheme .main button.primary {
+    border: 1px solid #f25d5d;
 }
 
 .darktheme .search_dropdown {

@@ -11,6 +11,7 @@
     text-align: center;
     background: #c3ebf0;
     border-top: 1px solid #098293;
+    z-index:12;
 }
 
 .darktheme .heyCookie {

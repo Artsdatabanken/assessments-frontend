@@ -875,6 +875,11 @@ option {
     margin-bottom: 20px;
 }
 
+.darktheme .archive a,
+.archive a {
+    color: #850808;
+}
+
 .archive .material-icons{
     vertical-align:bottom;
 }

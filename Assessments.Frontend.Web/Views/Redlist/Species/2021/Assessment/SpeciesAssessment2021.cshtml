@@ -19,10 +19,12 @@
 }
 
 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Breadcrumb.cshtml" />
+
 <div class="pagecontainer">
     <partial name="/Views/Redlist/Species/Shared/_PageMenu.cshtml" />
 
     <div class="content-placer bigmid">
+        <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Archived.cshtml" />
         <div class="mid-content with_sidebar">
             <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Header.cshtml" />
             <div class="mobile_padding">
@@ -36,6 +38,7 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Citation.cshtml" model="Model" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
             </div>
         </div>
         <div class="side mobile_padding">

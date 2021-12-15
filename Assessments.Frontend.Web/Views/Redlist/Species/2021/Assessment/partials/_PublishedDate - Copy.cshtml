@@ -1,0 +1,21 @@
+﻿@model SpeciesAssessment2021
+@{
+    // @steinho, hvordan finner jeg riktig pub. dato?
+
+    // Find correct startdate (Exceptions include 2010 spretthaler)
+    string firspublished = "24.11.2021";
+    firspublished = Model.AssessmentYear == 2010 ? Model.YearPreviousAssessment.ToString() : firspublished;
+    string printstring = "Publisert: " + firspublished;
+
+    // Add the revisiondate when it exists
+    string revisiondate = string.Empty;
+    @if (Model.RevisionDate.Date.ToShortDateString() != firspublished)
+    {
+        revisiondate = Model.RevisionDate.Date.ToShortDateString();
+        printstring += ", sist endret: " + revisiondate;
+    }
+}
+
+
+<span class="date datestring">@printstring</span>
+

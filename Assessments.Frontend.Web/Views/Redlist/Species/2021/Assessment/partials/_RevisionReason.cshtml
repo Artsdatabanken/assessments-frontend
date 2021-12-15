@@ -1,0 +1,17 @@
+﻿@model SpeciesAssessment2021
+@if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
+{
+<div>
+    <span class="material-icons" style="float:left;display:inline-block; padding:10px;">
+        <span class="material-icons">
+            new_releases
+        </span>
+    </span>
+    <i style="display:none;">NB - Vurderingen er justert etter publisering: </i>
+    <b>Justeringer etter publisering</b>
+    <p>
+        @Model.RevisionReason
+        <a asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="1">Gå til første utgave</a>
+    </p>        
+</div>      
+}

@@ -3,10 +3,10 @@
 @if (Model.Category.Contains("LC"))
 {
     <h3>
-        Hvorfor er ikke denne arten rødlistet?
+        Hvorfor er ikke denne @Helpers.fixSpeciesLevel("{art}en", Model.TaxonRank) rødlistet?
     </h3>
     <p>
-        Denne arten oppfyller ikke kriteriene for rødlisting.
+        Denne @Helpers.fixSpeciesLevel("{art}en", Model.TaxonRank) oppfyller ikke kriteriene for rødlisting.
         Den vurderes derfor til kategorien <i>livskraftig</i> LC.
     </p>
     <a class="link-styled" href="https://www.artsdatabanken.no/rodlisteforarter2021/Metode#193097">

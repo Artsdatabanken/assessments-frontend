@@ -259,37 +259,43 @@ window.onclick = (e) => {
 // Go from searchfield to suggestion on arrowdown
 
 var autocompletelist = document.getElementById("autocomplete_list_ul");
-searchField.addEventListener('keydown', function (event) {
-    if (autocompletelist.innerHTML.trim() != "") {
-        if (event.key == "ArrowDown") {
-            event.preventDefault();
-            autocompletelist.firstChild.focus();
+if (searchField) {
+    searchField.addEventListener('keydown', function (event) {
+        if (autocompletelist.innerHTML.trim() != "") {
+            if (event.key == "ArrowDown") {
+                event.preventDefault();
+                autocompletelist.firstChild.focus();
+            }
         }
-    }
-});
+    });
 
-searchField.addEventListener('focus', function (event) {
-    if (autocompletelist.innerHTML.trim() != "") {
-        showList();
-    }
-});
+    searchField.addEventListener('focus', function (event) {
+        if (autocompletelist.innerHTML.trim() != "") {
+            showList();
+        }
+    });
+}
+
 
 // Navigate list with arrowkeys, leave list on first-child upkey
-autocompletelist.addEventListener('keydown', function (event) {
-    event.preventDefault();
-    if (event.key == "ArrowUp") {
-        if (event.target == autocompletelist.firstChild) {
-            searchField.focus();
-        } else {
-            event.target.previousElementSibling.focus();
+if (autocompletelist) {
+    autocompletelist.addEventListener('keydown', function (event) {
+        event.preventDefault();
+        if (event.key == "ArrowUp") {
+            if (event.target == autocompletelist.firstChild) {
+                searchField.focus();
+            } else {
+                event.target.previousElementSibling.focus();
+            }
+        } else if (event.key == "ArrowDown") {
+            if (event.target != autocompletelist.lastChild) {
+                event.target.nextElementSibling.focus();
+            }
+        } else if (event.key == "Escape") {
+            hideList();
         }
-    } else if (event.key == "ArrowDown") {
-        if (event.target != autocompletelist.lastChild) {
-            event.target.nextElementSibling.focus();
-        }
-    } else if (event.key == "Escape") {
-        hideList();
-    }
-});
+    });
+
+}
 
 

@@ -7,7 +7,7 @@
     {
         distributionName = "vurdert_N";
     }
-    else if(Model.AssessmentArea == "S")
+    else if (Model.AssessmentArea == "S")
     {
         if (Model.SpeciesGroup == "Pattedyr")
         {
@@ -21,9 +21,10 @@
 }
 
 <div class="page_section @distributionName">
-    <h2>Vurderingsområde og artens utbredelse</h2>
+    <h2>Vurderingsområde og @Helpers.fixSpeciesLevel("{art}ens", Model.TaxonRank) utbredelse</h2>
     <p>
-        @ViewBag.glossary[distributionName]["description"]
+        @{string description = ViewBag.glossary[distributionName]["description"];}        
+        @Helpers.fixSpeciesLevel(description, Model.TaxonRank)
     </p>
 
     <partial name="/Views/Redlist/Species/2021/Assessment/partials/_RegionStatistics.cshtml" />

@@ -21,7 +21,7 @@
     },
     "NewSpecies":
     {
-      "title": "Arten nyoppdaget eller nybeskrevet for landet"
+      "title": "{Art}en nyoppdaget eller nybeskrevet for landet"
     },
     "TaxonomicChange":
     {
@@ -33,15 +33,15 @@
     },
     "NotEvaluated2010":
     {
-      "title": "Ikke vurdert: NA/NE art 2010"
+      "title": "Ikke vurdert: NA/NE {art} 2010"
     },
     "NotEvaluated2015":
     {
-      "title": "Ikke vurdert: NA/NE art 2015"
+      "title": "Ikke vurdert: NA/NE {art} 2015"
     },
     "NotEvaluated2021":
     {
-      "title": "Ikke vurdert: NA/NE art 2021"
+      "title": "Ikke vurdert: NA/NE {art} 2021"
     }
   }
 }

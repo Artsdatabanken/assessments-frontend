@@ -1,7 +1,7 @@
 ﻿{
   "RE": {
     "tagline": "Regionalt utdødd",
-    "description": "– det er svært liten tvil om at arten er dødd ut/har emigrert fra vurderingsområdet.",
+    "description": "– det er svært liten tvil om at {art}en er dødd ut/har emigrert fra vurderingsområdet.",
     "presentationstring": "regionalt utdødd "
   },
   "CR": {

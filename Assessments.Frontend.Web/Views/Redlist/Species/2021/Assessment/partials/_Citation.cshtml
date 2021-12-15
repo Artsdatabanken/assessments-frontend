@@ -6,21 +6,31 @@
 @inject ExpertCommitteeMemberService _expertCommitteeMemberService
 
 @{
+    // Authors
     var expertCommitteeMembers = await _expertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
-    var sortedExperts = @expertCommitteeMembers.OrderBy(x => x.Role).ThenBy(x => x.LastName);
+    var sortedExperts = expertCommitteeMembers
+        .OrderBy(x => new List<string> { "leder", "nestleder", "medlem" }.IndexOf(x.Role.ToLowerInvariant()))
+        .ThenBy(x => x.LastName);
+
     var formattedExperts = sortedExperts.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList();
     string authors = formattedExperts.JoinAnd(", ", " og ");
+
+    // Date
     string firspublished = Helpers.getPublishedDate(Model.AssessmentYear, Model.YearPreviousAssessment);
     string revisiondate = Helpers.getRevisionDate(Model.RevisionDate, firspublished);
-    string date = "(2021, 24. november).";
-    string species = Model.PopularName + " " + Model.ScientificName;
+    string date = firspublished;
+    if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
+    {
+        date = revisiondate;
+    }
+    date = "(" + date + ").";
+    firspublished = "(" + firspublished + ").";
+
+    // Publication
+            string species = Model.PopularName + " " + Model.ScientificName;
     string area = (Model.AssessmentArea == "N" ? "Norge" : "Svalbard");
     string articlename = Model.SpeciesGroup + ": Vurdering av " + species + " for " + area + ".";
     string publication = "Norsk rødliste for arter 2021. Artsdatabanken. ";
-
-    if (!string.IsNullOrWhiteSpace(Model.RevisionReason)) {
-        date = "(" + revisiondate + ")";
-    }
 }
 
 @if (expertCommitteeMembers.Any())
@@ -32,13 +42,5 @@
         @articlename
         @publication
         @Context.Request.GetEncodedUrl()
-    </p>
-}
-
-
-@if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
-{
-    <p>
-        MER SITER
     </p>
 }

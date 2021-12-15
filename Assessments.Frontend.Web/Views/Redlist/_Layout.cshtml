@@ -1,5 +1,9 @@
-﻿@using Microsoft.Extensions.Configuration
-@inject IConfiguration _configuration
+﻿@using Microsoft.Extensions.Hosting
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment _environment
+
+@{
+    var showCookieWarning = _environment.IsProduction();
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,33 +32,13 @@
 
     <meta name="description" content="Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge. Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter. " />
 
-    <environment names="Production,Staging">
-	    <!-- Google Analytics -->
-	    <script>
-	        (function(i, s, o, g, r, a, m) {
-		        i['GoogleAnalyticsObject'] = r;
-		        i[r] = i[r] ||
-			        function() {
-				        (i[r].q = i[r].q || []).push(arguments);
-			        }, i[r].l = 1 * new Date();
-		        a = s.createElement(o),
-			        m = s.getElementsByTagName(o)[0];
-		        a.async = 1;
-		        a.src = g;
-		        m.parentNode.insertBefore(a, m);
-	        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-	        ga('create', '@(_configuration["Google:AnalyticsId"])', 'auto');
-	        ga('send', 'pageview');
-        </script>
-	    <!-- End Google Analytics -->
-    </environment>
+    <script src="~/js/cookies.js" asp-append-version="true" is-visible="@showCookieWarning"></script>
 
 </head>
 
 <body>
     <div id="bodywrap">
-        <partial name="/Views/Shared/_PageTopBar.cshtml" />       
+        <partial name="/Views/Shared/_PageTopBar.cshtml" />
         <partial name="/Views/Redlist/Species/Shared/_RedlistHeader.cshtml" />
         <div class="main">
             <div class="main-content width-adjuster">
@@ -69,6 +53,32 @@
                 <script src="~/js/themes.js" asp-append-version="true"></script>
                 @await RenderSectionAsync("Scripts", required: false)
             </div>
+
+            <!-- HEY COOKIE. TODO: Improve content & move to partial. -->
+            <div class="heyCookie" id="heyCookie" is-visible="@showCookieWarning">
+                Denne nettsiden benytter informasjonskapsler.
+
+                <button onclick="learnAboutCookies()">Informasjon</button>
+                <button onclick="acceptCookies(false)">Avslå</button>
+                <button onclick="acceptCookies(true)" class="primary">Godta</button>
+
+                <div id="moreCookieInfo" style="display:none;">
+                    <p>
+                        Artsdatabaken brukar informasjonskapslar til å samle statistikk til å forbetre
+                        Artsdatabanken sine nettsider. Artsdatabanken nyttar ikkje informasjonskapslar med det som formål å kartleggje
+                        bruksmønstera til enkeltbrukarar eller annan informasjon som vil kunne krenkje personvernet.
+                    </p>
+                    <p>
+                        Artsdatabanken får brukarstatistikk frå Google Analytics.
+                        Det medfører at bruken din av nettsidene våre, inklusiv IP-adressa di,
+                        kan bli overført til Google, men vi nyttar Google Analytics sin anonymiseringsfunksjon som sørgjer
+                        for at dei siste siffera i brukaren si IP-adresse blir maskert ved innsamling. IP-maskeringa skjer så snart dataa er mottekne av Google Analytics sitt innsamlingsverk,
+                        før det blir lagra og behandla i tråd med Google sine personvernretningslinjer.
+                    </p>
+                    <a href="https://artsdatabanken.no/informasjonskapsler">Les mer om informasjonskapslar</a>
+                </div>
+            </div>
+
         </div>
         <partial name="/Views/Shared/_PageFooter.cshtml" />
     </div>

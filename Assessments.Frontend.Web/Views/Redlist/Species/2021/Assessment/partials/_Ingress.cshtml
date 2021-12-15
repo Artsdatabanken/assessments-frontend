@@ -21,7 +21,7 @@
                 sentence += current.ToLower();
             }
         }
-        if(Model.Category.Length > 2)
+        if (Model.Category.Length > 2)
         {
             sentence += ", og ble <a href='#nedgradert'>nedgradert</a> på grunn av populasjoner i nærliggende regioner";
         }
@@ -41,7 +41,7 @@
         }
         else
         {
-            <span>Arten er </span>
+            <span>@Helpers.fixSpeciesLevel("{Art}en", Model.TaxonRank) er </span>
             @if (Model.Category != "NA" && Model.Category != "NE")
             {
                 <span>vurdert til </span>

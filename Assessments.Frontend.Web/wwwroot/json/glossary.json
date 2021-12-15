@@ -5,15 +5,15 @@
   },
   "habitat": {
     "tagline": "Habitat",
-    "description": "Artens <a href=\"https://www.artsdatabanken.no/Pages/314252/Metode#316492\">habitat</a> er dens viktigste leveområder. I vurderingene er det laget noen predefinerte habitat basert på inndeling etter <a href=\"https://artsdatabanken.no/NiN/Natursystem/Typeinndeling\">Natur i Norge (NiN)</a> systemet."
+    "description": "{Art}ens <a href=\"https://www.artsdatabanken.no/Pages/314252/Metode#316492\">habitat</a> er dens viktigste leveområder. I vurderingene er det laget noen predefinerte habitat basert på inndeling etter <a href=\"https://artsdatabanken.no/NiN/Natursystem/Typeinndeling\">Natur i Norge (NiN)</a> systemet."
   },
   "region": {
     "tagline": "Regioner og havområder ",
-    "description": " En art er forekommende i et (historisk) fylke eller havområde hvis vesentlige deler av livssyklusen foregår der. <i>Kjent</i> forekomst betyr kjent eller sannsynlig nåværende forekomst. <i>Antatt</i> forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser). <i>Antatt utdødd</i> forekomst brukes når arten muligens har dødd ut lokalt, mens <i>utdødd</i> forekomst betyr at det er overveiende sannsynlighet for at arten har dødd ut i området. Marine arter regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
+    "description": " En {art} er forekommende i et (historisk) fylke eller havområde hvis vesentlige deler av livssyklusen foregår der. <i>Kjent</i> forekomst betyr kjent eller sannsynlig nåværende forekomst. <i>Antatt</i> forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser). <i>Antatt utdødd</i> forekomst brukes når {art}en muligens har dødd ut lokalt, mens <i>utdødd</i> forekomst betyr at det er overveiende sannsynlighet for at {art}en har dødd ut i området. Marine {art}er regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
   },
   "criteria": {
-    "tagline": "Hvilke kriterier gjør at denne arten er rødlistet?",
-    "description": "Arten vurderes mot et sett kriterier, og de(t) som gir høyest kategori blir gjeldende. ",
+    "tagline": "Hvilke kriterier gjør at denne {art}en er rødlistet?",
+    "description": "{Art}en vurderes mot et sett kriterier, og de(t) som gir høyest kategori blir gjeldende. ",
     "subheading": "Gjeldende kriterier"
   },
   "generasjonstid": {
@@ -22,7 +22,7 @@
   },
   "TroligUtdodd": {
     "tagline": "Trolig utdødd",
-    "description": "– merkelapp på arter vurdert som <i>kritisk truet</i> CR når det mistenkes, men ikke kan fastslås med sikkerhet, at arten er utdødd."
+    "description": "– merkelapp på {art}er vurdert som <i>kritisk truet</i> CR når det mistenkes, men ikke kan fastslås med sikkerhet, at {art}en er utdødd."
   },
   "vurdert_N": {
     "tagline": "Vurdert for Norge",
@@ -38,7 +38,7 @@
   },
   "populationsize": {
     "title": "Populasjonsandel",
-    "description": "En art er ikke nødvendigvis begrenset til norske områder. Men populasjonen i norske områder utgjør noen ganger en betydelig andel av den totale populasjonen.",
+    "description": "En {art} er ikke nødvendigvis begrenset til norske områder. Men populasjonen i norske områder utgjør noen ganger en betydelig andel av den totale populasjonen.",
     "subtitle": "Nåværende populasjonsstørrelse i vurderingsområdet utgjør:",
     "AndelNåværendeBestand": "av maksimum populasjonsstørrelse etter år 1900 i samme område",
     "MaxAndelAvEuropeiskBestand": "av europeisk populasjonsstørrelse",
@@ -49,9 +49,8 @@
     "description": "Kategori med grader er kategori etter nedgradering/oppgradering av den opprinnelige kategorien (satt etter kriteriene) for vurderingsområdet. Denne justeringen blir gjort når utdøingsrisiko i vurderingsområdet er sterkt påvirket av bestander i naboregioner."
   },
   "oneliners": {
-    "litentvil": "Det er svært liten tvil om at arten er utdødd fra",   
-    "Påvirkningsfaktorer": "Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke arten negativt. Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. \"Påvirkning på habitat\" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for arten. For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.",
-    "habitat_description_2015": "<p>I Rødlista 2015 benyttes Naturtyper i Norge (NiN 1.0) som klassifiseringssystem for å beskrive artenes leveområder (Halvorsen mfl. 2009). Dette klassifiseringssystemet har 4 naturtypenivå: i) landskap, ii) landskapsdel, iii) natursystem, og iv) livsmedium. Mer detaljert informasjon finnes i <a href=\"http://artsdatabanken.no/Files/16095\">veilederen til rødlistevurdering</a>(pdf) og <a href=\"http://www.artsdatabanken.no/NaturiNorge\">Naturtypebasen</a>. Ved registrering av artenes leveområde (hovedhabitat), inkluderes bare de leveområdene som er viktigst for arten. Det innebærer at habitatet skal være relevant for mer enn 20 % av bestanden.</p>",
+    "litentvil": "Det er svært liten tvil om at {art}en er utdødd fra",
+    "Påvirkningsfaktorer": "Påvirkningsfaktorer er i hovedsak menneskeskapte faktorer som antas å påvirke {art}en negativt. Klassifiseringssystemet for påvirkningsfaktorer er hierarkisk. Valg av påvirkningsfaktor på et overordnet nivå, eks. \"Påvirkning på habitat\" betyr ikke at alle underliggende nivå nødvendigvis er oppfylt, men at det kan være usikkert hvilke påvirkningsfaktorer på de lavere nivåene som gjør seg gjeldende for {art}en. For hver påvirkningsfaktor er tidsrom, omfang og alvorlighetsgrad angitt. Omfang og alvorlighetsgrad er relativt til den totale populasjonsstørrelsen eller forekomstarealet.",
     "min": "Minimum (min): ",
     "max": "Maximum (max): ",
     "probable": "Mest trolig",
@@ -61,13 +60,13 @@
   },
   "inkluderingskriterier": {
     "hvorfor": {
-      "title": "Hvorfor er denne arten vurdert?",
-      "description": "Denne arten er rødlistevurdert fordi den ",
+      "title": "Hvorfor er denne {art}en vurdert?",
+      "description": "Denne {art}en er rødlistevurdert fordi den ",
       "else": " enten har etablert bestand i vurderingsområdet, er en regelmessig gjest eller er etablert før 1800."
     },
     "EtablertFør1800": {
-      "title": "er en fremmedart som ble etablert før 1800",
-      "description": "Det vil si at den er en fremmedart, men er antatt eller dokumentert etablert med fast reproduserende populasjon per år 1800. "
+      "title": "er en fremmed{art} som ble etablert før 1800",
+      "description": "Det vil si at den er en fremmed{art}, men er antatt eller dokumentert etablert med fast reproduserende populasjon per år 1800. "
     },
     "EtablertBestandINorge": {
       "title": "har en etablert populasjon i vurderingsområdet",
@@ -78,33 +77,33 @@
       "description": "Det vil si at den ikke er fast reproduserende, men mer enn 2 % av global populasjon oppholder seg regelmessig innenfor vurderingsområdet i deler av sin års-/livssyklus."
     },
     "hvorforikke": {
-      "title": "Hvorfor er ikke arten ",
+      "title": "Hvorfor er ikke {art}en ",
       "NA": "egnet?",
       "NE": "vurdert?"
     },
     "IkkeReproduserendeGjestNA": {
       "title": "Ikke reproduserende gjest",
-      "description": "Arten er ikke etablert med fast reproduserende populasjon og mindre enn 2 % av global populasjon oppholder seg regelmessig innenfor vurderingsområdet (gjest)."
+      "description": "{Art}en er ikke etablert med fast reproduserende populasjon og mindre enn 2 % av global populasjon oppholder seg regelmessig innenfor vurderingsområdet (gjest)."
     },
     "FremmedArtNA": {
-      "title": "Fremmedart",
-      "description": "Arten er fremmed, og ble enten etablert innenfor vurderingsområdet etter år 1800 eller antas å kunne etablere seg innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokkart</a>). "
+      "title": "Fremmed{art}",
+      "description": "{Art}en er fremmed, og ble enten etablert innenfor vurderingsområdet etter år 1800 eller antas å kunne etablere seg innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokk{art}</a>). "
     },
     "ObservertReproduserendeIkkeEtablertNA": {
       "title": "Ikke etablert reproduserende",
-      "description": "Arten er observert reproduserende innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende populasjon."
+      "description": "{Art}en er observert reproduserende innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende populasjon."
     },
     "ObservertReproduktivIkkeEtablertNA": {
       "title": "Ikke etablert reproduserende ",
-      "description": "Arten er observert i reproduktivt stadium innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende populasjon."
+      "description": "{Art}en er observert i reproduktivt stadium innenfor vurderingsområdet, men antas å ikke være etablert med fast reproduserende populasjon."
     },
     "UregelmessigGjestIkkeReproduserendeNA": {
       "title": "Uregelmessig gjest",
-      "description": "Arten opptrer uregelmessig innenfor vurderingsområdet, da som en følge av naturlig forflyttning."
+      "description": "{Art}en opptrer uregelmessig innenfor vurderingsområdet, da som en følge av naturlig forflyttning."
     },
     "IkkeDokumentertForekomstNA": {
       "title": "Ikke dokumentert forekomst",
-      "description": "Arten har ikke dokumentert forekomst innenfor vurderingsområdet."
+      "description": "{Art}en har ikke dokumentert forekomst innenfor vurderingsområdet."
     },
     "HybridartUtenReproduksjonNA": {
       "title": "Hybridart uten reproduksjon",
@@ -116,27 +115,27 @@
     },
     "ForekommerBareIHybridkombinasjonNA": {
       "title": "Forekommer bare i hybridkombinasjon",
-      "description": "Arten forekommer bare i hybridkombinasjon i vurderingsområdet."
+      "description": "{Art}en forekommer bare i hybridkombinasjon i vurderingsområdet."
     },
     "MangelfullKunnskapNE": {
       "title": "Mangelfull kunnskap",
-      "description": "Arten er ikke forsøkt rødlistevurdert på grunn av svært mangelfull kunnskap."
+      "description": "{Art}en er ikke forsøkt rødlistevurdert på grunn av svært mangelfull kunnskap."
     },
     "UavklartSystematikkNE": {
       "title": "Uavklart systematikk",
-      "description": "Arten er ikke forsøkt rødlistevurdert fordi arten eller artsgruppen den tilhører har uavklart systematikk."
+      "description": "{Art}en er ikke forsøkt rødlistevurdert fordi {art}en eller artsgruppen den tilhører har uavklart systematikk."
     },
     "UklartOmReproduserendeBestandNE": {
       "title": "Uklart om reproduserende bestand",
-      "description": "Arten er ikke forsøkt rødlistevurdert fordi det er uavklart om arten er etablert med en fast reproduserende populasjon i vurderingsområdet."
+      "description": "{Art}en er ikke forsøkt rødlistevurdert fordi det er uavklart om {art}en er etablert med en fast reproduserende populasjon i vurderingsområdet."
     },
     "ArtsgruppeIkkeRisikovurdertNE": {
-      "title": "Artsgruppe ikke risikovurdert",
-      "description": "Arten er ikke forsøkt rødlistevurdert fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021."
+      "title": "{Art}sgruppe ikke risikovurdert",
+      "description": "{Art}en er ikke forsøkt rødlistevurdert fordi den tilhører en artsgruppe som ikke vurderes til Rødlista 2021."
     },
     "AnnetNE": {
       "title": "Annet",
-      "description": "Arten er ikke forsøkt rødlistevurdert."
+      "description": "{Art}en er ikke forsøkt rødlistevurdert."
     }
   },
   "statistics": {

@@ -11,14 +11,14 @@
             "title": "Direkte observasjoner"
           },
           "b": {
-            "title": "Egnet bestandsindeks for arten"
+            "title": "Egnet bestandsindeks for {art}en"
           },
           "c": {
             "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
           },
           "d": {
-            "title": "faktisk eller potensiell høsting/utnytting av arten",
-            "optionaltext": "Reell eller potensiell utnytting av arten"
+            "title": "faktisk eller potensiell høsting/utnytting av {art}en",
+            "optionaltext": "Reell eller potensiell utnytting av {art}en"
           },
           "e": {
             "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
@@ -44,14 +44,14 @@
             "title": "Direkte observasjoner"
           },
           "b": {
-            "title": "Egnet bestandsindeks for arten"
+            "title": "Egnet bestandsindeks for {art}en"
           },
           "c": {
             "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
           },
           "d": {
-            "title": "faktisk eller potensiell høsting/utnytting av arten",
-            "optionaltext": "Reell eller potensiell utnytting av arten"
+            "title": "faktisk eller potensiell høsting/utnytting av {art}en",
+            "optionaltext": "Reell eller potensiell utnytting av {art}en"
           },
           "e": {
             "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
@@ -74,14 +74,14 @@
         "description": "Fremtidig reduksjon over et tidsrom på 3 generasjoner, men minimum 10 år.",
         "subsub": {
           "b": {
-            "title": "Egnet bestandsindeks for arten"
+            "title": "Egnet bestandsindeks for {art}en"
           },
           "c": {
             "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
           },
           "d": {
-            "title": "faktisk eller potensiell høsting/utnytting av arten",
-            "optionaltext": "Reell eller potensiell utnytting av arten"
+            "title": "faktisk eller potensiell høsting/utnytting av {art}en",
+            "optionaltext": "Reell eller potensiell utnytting av {art}en"
           },
           "e": {
             "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
@@ -107,14 +107,14 @@
             "title": "Direkte observasjoner"
           },
           "b": {
-            "title": "Egnet bestandsindeks for arten"
+            "title": "Egnet bestandsindeks for {art}en"
           },
           "c": {
             "title": "Redusert forekomstareal, utbredelsesområde og/eller forringet habitatkvalitet"
           },
           "d": {
-            "title": "faktisk eller potensiell høsting/utnytting av arten",
-            "optionaltext": "Reell eller potensiell utnytting av arten"
+            "title": "faktisk eller potensiell høsting/utnytting av {art}en",
+            "optionaltext": "Reell eller potensiell utnytting av {art}en"
           },
           "e": {
             "title": "Negativ påvirkning fra innførte arter, hybridisering, patogener, forurensning, konkurrerende arter eller parasitter"
@@ -172,7 +172,7 @@
             "title": "forekomstareal"
           },
           "iii": {
-            "title": "areal eller kvalitet på artens habitat"
+            "title": "areal eller kvalitet på {art}ens habitat"
           },
           "iv": {
             "title": "antall lokaliteter eller delpopulasjoner"
@@ -203,7 +203,7 @@
     "subcriteria": {
       "B1": {
         "title": "Utbredelsesområde",
-        "description": "Utbredelsesområde er et mål for en arts geografiske utbredelse, og tilsvarer arealet av en minimum konveks polygon der de rette linjene i polygonen omfatter alle kjente og antatte nåværende forekomster. ",
+        "description": "Utbredelsesområde er et mål for en {art}s geografiske utbredelse, og tilsvarer arealet av en minimum konveks polygon der de rette linjene i polygonen omfatter alle kjente og antatte nåværende forekomster. ",
         "content": {
           "unit": "km&#178;",
           "comparator": "<",
@@ -217,7 +217,7 @@
       },
       "B2": {
         "title": "Forekomstareal",
-        "description": "Forekomstareal er et mål for det spesifikke arealet arten lever i, standardisert som summen av alle 2 km x 2 km (4 km&#178;) ruter som inneholder kjent eller antatt forekomst av arten. ",
+        "description": "Forekomstareal er et mål for det spesifikke arealet {art}en lever i, standardisert som summen av alle 2 km x 2 km (4 km&#178;) ruter som inneholder kjent eller antatt forekomst av {art}en. ",
         "content": {
           "unit": "km&#178;",
           "comparator": "<",

@@ -16,7 +16,8 @@
             <h3>@ViewBag.glossary["populationsize"]["title"]</h3>
 
             <p>
-                @ViewBag.glossary["populationsize"]["description"]
+                @{string description = ViewBag.glossary["populationsize"]["description"];}
+                @Html.Raw(Helpers.fixSpeciesLevel(description, Model.TaxonRank))
             </p>
 
             <h4>@ViewBag.glossary["populationsize"]["subtitle"]</h4>

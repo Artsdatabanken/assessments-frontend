@@ -106,12 +106,12 @@
       "description": "{Art}en har ikke dokumentert forekomst innenfor vurderingsområdet."
     },
     "HybridartUtenReproduksjonNA": {
-      "title": "Hybrid{art} uten reproduksjon",
-      "description": "Hybrid{art} uten reproduksjon."
+      "title": "Hybridart uten reproduksjon",
+      "description": "Hybridart uten reproduksjon."
     },
     "HybridartUvisstOmReproduserendeNA": {
-      "title": "Hybrid{art} - uvisst om er reproduserende",
-      "description": "Hybrid{art}, men uvisst om den er reproduserende. "
+      "title": "Hybridart - uvisst om er reproduserende",
+      "description": "Hybridart, men uvisst om den er reproduserende. "
     },
     "ForekommerBareIHybridkombinasjonNA": {
       "title": "Forekommer bare i hybridkombinasjon",

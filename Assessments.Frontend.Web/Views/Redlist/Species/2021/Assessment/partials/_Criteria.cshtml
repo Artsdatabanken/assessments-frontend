@@ -640,6 +640,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                             <ul class="second">
                                                 @foreach (var (k, v) in thesubcriteria)
                                                 {
+                                                    string vtitle = @v["title"].ToString();
                                                     var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
                                                     <li class=" @subcriteria_isactive">
                                                         <span class="text_container">
@@ -647,7 +648,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                                 <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
                                                                     @{expandOrBullet(true);}
                                                                     <span class="text_text ">
-                                                                        @k - @v["title"]
+                                                                        @k - @Helpers.fixSpeciesLevel(vtitle, Model.TaxonRank)
                                                                     </span>
                                                                     @{iconChooser(subcriteria_isactive);}
                                                                 </span>
@@ -675,6 +676,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
                                                                         @foreach (var (subkey, subvalue) in subdict)
                                                                         {
+                                                                            string vsubtitle = subvalue["title"].ToString();
                                                                             var modelkey = key + k + subkey;
                                                                             string clickable = "";
                                                                             if (modelkey == "Baii")
@@ -686,7 +688,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                                                     <span class="text_collection">
                                                                                         <span class="text_text @clickable" onclick="expandCriteria(this, 'opened_element')">
                                                                                             @{expandOrBullet(clickable == "clickable");}
-                                                                                            @subkey - @subvalue["title"]
+                                                                                            @subkey - @Helpers.fixSpeciesLevel(vsubtitle, Model.TaxonRank)
                                                                                         </span>
                                                                                         @{ iconChooser(Criteria.inList(subkey, clean_list)); }
                                                                                     </span>

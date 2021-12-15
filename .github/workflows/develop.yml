@@ -36,4 +36,4 @@ jobs:
         tags: dev
     - name: Post to slack
       if: ${{ github.actor != 'dependabot[bot]' }}
-      run: .github/workflows/slack.sh ${{ secrets.POST_SLACK }}
+      run: .github/workflows/slack_dev.sh ${{ secrets.POST_SLACK }}

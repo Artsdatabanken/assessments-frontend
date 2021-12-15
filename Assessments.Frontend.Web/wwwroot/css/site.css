@@ -162,6 +162,7 @@ option {
         height: 100%;
         width: 25%;
         min-width: 200px;
+        flex: 0.25;
     }
 
     .side button{
@@ -172,6 +173,7 @@ option {
         width: 75%;
         padding:20px;
         padding-top:0;
+        flex:1;
     }
 
     .pagecontainer{
@@ -182,6 +184,7 @@ option {
         padding-top: 33px;
         width: calc(75% - 4px);
         display: flex;
+        flex-wrap: wrap;
     }
 
 
@@ -860,4 +863,23 @@ option {
 
 .show_inline_block {
     display: inline-block;
+}
+
+.archive {
+    padding: 15px;
+    background: #ffaf31;
+    text-align: center;
+    color: black;
+    width: 100%;
+    font-size: initial;
+    margin-bottom: 20px;
+}
+
+.darktheme .archive a,
+.archive a {
+    color: #850808;
+}
+
+.archive .material-icons{
+    vertical-align:bottom;
 }

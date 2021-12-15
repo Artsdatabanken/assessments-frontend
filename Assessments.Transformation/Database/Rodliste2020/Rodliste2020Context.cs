@@ -11,6 +11,8 @@ namespace Assessments.Transformation.Database.Rodliste2020
             : base(options) { }
 
         public virtual DbSet<Assessment> Assessments { get; set; }
+        public virtual DbSet<AssessmentRevision> AssessmentRevisions { get; set; }
+        public virtual DbSet<AssessmentHistory> AssessmentHistories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -94,6 +96,35 @@ namespace Assessments.Transformation.Database.Rodliste2020
                 entity.Property(e => e.TaxonHierarcy)
                     .HasMaxLength(1500)
                     .HasComputedColumnSql("(CONVERT([nvarchar](1500),json_value([Doc],'$.VurdertVitenskapeligNavnHierarki')))", false);
+            });
+            // assessmentsHistory
+            modelBuilder.Entity<AssessmentHistory>(e =>
+            {
+                e.HasKey(x => new { x.Id, x.HistoryAt });
+                e.Property(x => x.Id).ValueGeneratedNever();
+                e.Property(x => x.Doc).IsRequired();
+                e.Property(x => x.Expertgroup).HasComputedColumnSql("cast(JSON_VALUE(Doc, '$.Ekspertgruppe') as nvarchar(150))");
+                e.HasIndex(x => x.Expertgroup);
+                e.Property(x => x.LockedForEditByUser).HasComputedColumnSql("cast(JSON_VALUE(Doc, '$.LockedForEditByUser') as nvarchar(100))");
+                e.Property(x => x.LockedForEditAt).HasComputedColumnSql("CONVERT(datetime2,JSON_VALUE(Doc, '$.LockedForEditAt'),112)");
+                e.Property(x => x.LastUpdatedBy).HasComputedColumnSql("cast(JSON_VALUE(Doc, '$.LastUpdatedBy') as nvarchar(100))");
+                e.Property(x => x.LastUpdatedAt).HasComputedColumnSql("CONVERT(datetime2,JSON_VALUE(Doc, '$.LastUpdatedOn'),112)");
+                e.Property(x => x.EvaluationStatus).HasComputedColumnSql("cast(JSON_VALUE(Doc, '$.EvaluationStatus') as nvarchar(100))");
+                e.HasIndex(x => x.HistoryAt);
+            });
+            // AssessmentRevisions
+            modelBuilder.Entity<AssessmentRevision>(e =>
+            {
+                e.HasKey(x => new { x.Id, x.RevisionId });
+                e.Property(x => x.Id).ValueGeneratedNever();
+                e.Property(x => x.RevisionId).ValueGeneratedNever();
+                //e.Property(x => x.AssessmentHistoryId).IsRequired();
+                //e.Property(x => x.AssessmentHistoryAt).IsRequired();
+                e.Property(x => x.RevisionDateTime).IsRequired();
+                e.Property(x => x.FutureRevisionDateTime).IsRequired();
+                e.HasOne(p => p.AssessmentHistory)
+                    .WithMany(c => c.AssessmentRevisions)
+                    .HasPrincipalKey(p => new { p.Id, p.HistoryAt });
             });
         }
     }

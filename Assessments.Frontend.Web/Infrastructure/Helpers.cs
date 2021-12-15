@@ -269,6 +269,23 @@ namespace Assessments.Frontend.Web.Infrastructure
             return scientificName;
         }
 
+
+        public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment)
+        {
+            string firspublished = "24.11.2021";
+            firspublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firspublished;
+            return firspublished;
+        }
+
+        public static string getRevisionDate(DateTime RevisionDate, string firspublished)
+        {
+            if (RevisionDate.Date.ToShortDateString() != firspublished)
+            {
+                return RevisionDate.Date.ToShortDateString();
+            }
+            return string.Empty;
+        }
+
         public static string fixSpeciesLevel(string replacestring, string rang)
         {
             if (rang == "SubSpecies" || rang == "Variety")
@@ -290,7 +307,6 @@ namespace Assessments.Frontend.Web.Infrastructure
                 replacestring = replacestring.Replace("{Art}", "Art");
             }
             return replacestring;
-
         }
     }
 

@@ -292,6 +292,7 @@ namespace Assessments.Mapping.Models.Source.Species
         public string ÅrsakTilNedgraderingAvKategori { get; set; }
 
         public Taxonomy TaxonomyInfo { get; set; }
+        public string Endringslogg { get; set; }
 
         public class Taxonomy
         {

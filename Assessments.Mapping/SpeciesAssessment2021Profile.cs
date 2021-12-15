@@ -144,6 +144,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.EvaluateCategoryChangeReason(src)))
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.ÅrsakTilNedgraderingAvKategori,true)))
                 .ForMember(dest=> dest.PreviousAssessments, opt=> opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.GetPreviousAssessments(src)))
+                .ForMember(dest => dest.RevisionReason, opt=> opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.Endringslogg, true)))
                     .AfterMap((src, dest) =>
                 {
                     SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest);

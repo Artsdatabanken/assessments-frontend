@@ -40,7 +40,7 @@ function learnAboutCookies() {
 function acceptCookies(accepted) {
     if (accepted) {
         acceptedcookies = "yes";
-        ga('create', '@(_configuration["Google:AnalyticsId"])', 'auto');
+        ga('create', 'UA-74815937-4', 'auto');
         ga('send', 'pageview');
         document.getElementById('heyCookie').style.display = "none";
     } else {

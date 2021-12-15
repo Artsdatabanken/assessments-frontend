@@ -385,7 +385,7 @@
         "title": "Sanking/høsting"
       },
       "3.7.": {
-        "title": "Indirekte via høsting av artens næring"
+        "title": "Indirekte via høsting av {art}ens næring"
       },
       "3.6.": {
         "title": "Andre"

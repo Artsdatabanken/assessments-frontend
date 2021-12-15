@@ -78,6 +78,7 @@
     void listHeaders(string key, Dictionary<string, object> value, string addborder)
     {
         string has_table = "";
+        string vtitle = @value["title"].ToString();
         foreach (var factor in Model.ImpactFactors)
         {
             @if (factor.Id == (key))
@@ -86,12 +87,11 @@
             }
         }
         <span class="text_container @has_table" onclick="expandImpact(this, 'opened_element')">
-
             <span class="text_collection">
                 <span class="title_field  @isClickableClass(value)">
-                    @{ toggleChooser(value);}
-                    <span class="text_text">
-                        @value["title"]
+                    @{toggleChooser(value);}
+                    <span class="text_text">                       
+                        @Helpers.fixSpeciesLevel(vtitle, Model.TaxonRank)
                         @{iconChooser(activeOrNot(key));}
                     </span>
                 </span>

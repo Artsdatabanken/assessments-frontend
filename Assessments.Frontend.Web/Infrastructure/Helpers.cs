@@ -255,7 +255,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string getScientificNameElement(string scientificName)
         {
-            scientificName = "<i>"+scientificName+"</i>";
+            scientificName = "<i>" + scientificName + "</i>";
             scientificName = scientificName.Replace("×", "</i>×<i>");
             scientificName = scientificName.Replace("aff.", "</i>aff.<i>");
             scientificName = scientificName.Replace("agg.", "</i>agg.<i>");
@@ -267,6 +267,22 @@ namespace Assessments.Frontend.Web.Infrastructure
             scientificName = scientificName.Replace("' ", "'<i> ");
             scientificName = scientificName.Replace("<i></i>", "");
             return scientificName;
+        }
+
+        public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment)
+        {
+            string firspublished = "24.11.2021";
+            firspublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firspublished;
+            return firspublished;
+        }
+
+        public static string getRevisionDate(DateTime RevisionDate, string firspublished)
+        {
+            if (RevisionDate.Date.ToShortDateString() != firspublished)
+            {
+                return RevisionDate.Date.ToShortDateString();
+            }
+            return string.Empty;
         }
     }
 

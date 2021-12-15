@@ -60,14 +60,5 @@
             </span>
         }
     </p>
-
-    @if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
-    {
-        <p>
-            @Model.RevisionReason <br/>
-            <a asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="1">Originalversjon </a>
-        </p>
-        
-
-    }
+    <partial name="/Views/Redlist/Species/2021/Assessment/partials/_RevisionReason.cshtml" />
 </div>

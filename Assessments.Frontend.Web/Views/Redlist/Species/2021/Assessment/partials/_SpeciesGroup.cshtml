@@ -12,7 +12,7 @@
     string dateline = "Publisert: " + (Model.AssessmentYear == 2010 ? Model.YearPreviousAssessment : firspublished);
     @if (Model.RevisionDate.Date.ToShortDateString() != firspublished && !string.IsNullOrEmpty(Model.RevisionReason))
     {
-        dateline += ", revidert: " + Model.RevisionDate.Date.ToShortDateString();
+        dateline += ", sist endret: " + Model.RevisionDate.Date.ToShortDateString();
     }
 
 }
@@ -36,6 +36,6 @@
     </div>
     <p>
         Vurdert av <a href="https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene" class="lowercase">ekspertkomité for @Model.ExpertCommittee </a> <br />
-        <span class="date">@dateline</span>
+        <partial name="/Views/Redlist/Species/2021/Assessment/partials/_PublishedDate.cshtml" />
     </p>
 </div>

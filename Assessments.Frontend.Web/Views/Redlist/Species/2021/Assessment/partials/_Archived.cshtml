@@ -1,0 +1,17 @@
+﻿@if (@ViewBag.revisionid > 0)
+{
+<div class="archive">
+    <span class="material-icons">
+        warning_amber
+    </span>
+    Denne vurderingen er utdatert. 
+    @if (@ViewBag.revisionid > 0)
+    {
+
+        <a asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="">
+            Gå til gjeldende vurdering
+        </a>
+    }
+
+</div>
+}

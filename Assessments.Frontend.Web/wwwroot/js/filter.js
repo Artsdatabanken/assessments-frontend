@@ -3,6 +3,8 @@
 
 // DOM elements
 const filters = document.getElementById("filters");
+
+if (filters) {
 const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
 const insectFilters = document.getElementsByClassName("insect_input");
 const insectInput = document.getElementById("Insekter");
@@ -36,7 +38,7 @@ function handleFirstTime() {
     })
 }
 
-function scrollToPreviousPosition(){
+function scrollToPreviousPosition() {
     if (!scrollTo) return;
     const position = scrollTo.value;
     window.scrollTo(0, position);
@@ -77,14 +79,14 @@ function startup() {
         document.getElementById("open_filter").classList.remove("no_js");
     }
     if (filters) { // Double-check in case first check gets removed ^^
-        filters.classList.remove("no_js");    
+        filters.classList.remove("no_js");
         // Add js-tag for elements only relevant to js-users. 
         filters.classList.add("only_js");
     }
-    closeFilters();    
+    closeFilters();
     addOnclick();
     window.addEventListener('resize', addOnclick);
-    if (!hasVisited()) {         
+    if (!hasVisited()) {
         setVisited();
         handleFirstTime();
     }
@@ -115,7 +117,7 @@ function submitClickedElement(element) {
 
 /* Old code not changed  much */
 
-function setCollapsibleIcon(name){
+function setCollapsibleIcon(name) {
     if (name == "initial_check") {
         return;
     }
@@ -147,20 +149,20 @@ function setCollapsibleIcon(name){
 
 // Handle toggle events for misc. scenario
 
-function shouldToggleMarkAll(elementsClass){
+function shouldToggleMarkAll(elementsClass) {
     const allElements = document.getElementsByClassName(elementsClass);
     return Array.prototype.every.call(allElements, (element) => {
         return element.checked === true;
     })
 }
 
-function shouldToggleMarkRedOrEnd(list){
+function shouldToggleMarkRedOrEnd(list) {
     return Array.prototype.every.call(list, (item) => {
         return document.getElementById("input_" + item).checked === true;
     })
 }
 
-function toggleMarkAll(){
+function toggleMarkAll() {
     if (shouldToggleMarkAll("insect_input")) {
         insectInput.checked = true;
     }
@@ -191,11 +193,11 @@ function toggleRedlistedCategories() {
     toggleAllOfType(redlisted, "redlisted_check", "endangered_check");
 }
 
-function toggleEndangeredCategories() {  
+function toggleEndangeredCategories() {
     toggleAllOfType(endangered, "endangered_check", "redlisted_check");
 }
 
-function toggleInsects(){
+function toggleInsects() {
     Array.prototype.forEach.call(insectFilters, insect => {
         if (insectInput.checked) {
             insect.checked = true;
@@ -205,13 +207,13 @@ function toggleInsects(){
     });
 }
 
-function toggleSingleFilter(element, parentId){
+function toggleSingleFilter(element, parentId) {
     if (!element.checked) {
         document.getElementById(parentId).checked = false;
     }
 }
 
-function updateToggleAll(el){
+function updateToggleAll(el) {
     if (el && el.classList[0] === "insect_input") {
         toggleSingleFilter(el, "Insekter");
     } else if (el && endangered.some(category => el.id.indexOf(category) != -1)) {
@@ -236,7 +238,7 @@ function onClickAction(el, addOrRemove) {
             toggleMarkAll();
         } else {
             el.onclick = null;
-        }        
+        }
     }
     if (addOrRemove == "add") {
         scrollTo.value = "scroll_" + window.scrollY;
@@ -246,7 +248,7 @@ function onClickAction(el, addOrRemove) {
             //activate if toggle all of the filters are possible? 
             toggleSingleFilter(el);
         }*/
-    }    
+    }
 }
 
 function addOnclick() {
@@ -271,6 +273,5 @@ function removeSubmitOnclick() {
 }
 
 /* RUN THE STARTUP */
-if (filters) {
-    startup();
+startup();
 }

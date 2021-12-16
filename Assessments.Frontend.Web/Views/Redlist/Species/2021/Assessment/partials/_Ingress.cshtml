@@ -21,7 +21,7 @@
                 sentence += current.ToLower();
             }
         }
-        if(Model.Category.Length > 2)
+        if (Model.Category.Length > 2)
         {
             sentence += ", og ble <a href='#nedgradert'>nedgradert</a> på grunn av populasjoner i nærliggende regioner";
         }
@@ -41,23 +41,24 @@
         }
         else
         {
-            <span>Arten er </span>
+            <span>@Helpers.fixSpeciesLevel("{Art}en", Model.TaxonRank) er </span>
             @if (Model.Category != "NA" && Model.Category != "NE")
             {
                 <span>vurdert til </span>
             }
             <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span><span>
-                
+
                 @if (@Model.Category == "CR" && @Model.PresumedExtinct == true)
                 {
-                <span>for Norsk rødliste for arter 2021, og er trolig utdødd.</span>
+                    <span>for Norsk rødliste for arter 2021, og er trolig utdødd.</span>
                 }
                 else
                 {
-                  <span>for Norsk rødliste for arter 2021.</span>
+                    <span>for Norsk rødliste for arter 2021.</span>
                 }
                 @Html.Raw(sentence)
             </span>
         }
     </p>
+    <partial name="/Views/Redlist/Species/2021/Assessment/partials/_RevisionReason.cshtml" />
 </div>

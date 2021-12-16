@@ -255,7 +255,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string getScientificNameElement(string scientificName)
         {
-            scientificName = "<i>"+scientificName+"</i>";
+            scientificName = "<i>" + scientificName + "</i>";
             scientificName = scientificName.Replace("×", "</i>×<i>");
             scientificName = scientificName.Replace("aff.", "</i>aff.<i>");
             scientificName = scientificName.Replace("agg.", "</i>agg.<i>");
@@ -267,6 +267,46 @@ namespace Assessments.Frontend.Web.Infrastructure
             scientificName = scientificName.Replace("' ", "'<i> ");
             scientificName = scientificName.Replace("<i></i>", "");
             return scientificName;
+        }
+
+
+        public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment)
+        {
+            string firspublished = "24.11.2021";
+            firspublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firspublished;
+            return firspublished;
+        }
+
+        public static string getRevisionDate(DateTime RevisionDate, string firspublished)
+        {
+            if (RevisionDate.Date.ToShortDateString() != firspublished)
+            {
+                return RevisionDate.Date.ToShortDateString();
+            }
+            return string.Empty;
+        }
+
+        public static string fixSpeciesLevel(string replacestring, string rang)
+        {
+            if (rang == "SubSpecies" || rang == "Variety")
+            {
+                if (rang == "SubSpecies")
+                {
+                    replacestring = replacestring.Replace("{art}", "underart");
+                    replacestring = replacestring.Replace("{Art}", "Underart");
+                }
+                else if (rang == "Variety")
+                {
+                    replacestring = replacestring.Replace("{art}", "varietet");
+                    replacestring = replacestring.Replace("{Art}", "Varietet");
+                }
+            }
+            else
+            {
+                replacestring = replacestring.Replace("{art}", "art");
+                replacestring = replacestring.Replace("{Art}", "Art");
+            }
+            return replacestring;
         }
     }
 

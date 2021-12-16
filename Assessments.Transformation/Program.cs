@@ -87,6 +87,8 @@ namespace Assessments.Transformation
             });
 
             var databaseAssessments = _dbContext.Assessments.AsNoTracking().Where(x => (bool)!x.IsDeleted && x.Expertgroup != "Testarter" && x.Expertgroup != "Moser (Svalbard)");
+            var revisions = await _dbContext.AssessmentRevisions.AsNoTracking().Include(x => x.AssessmentHistory).ToArrayAsync();
+
             var totalCount = await databaseAssessments.CountAsync();
 
             _progressBar.Tick(0, $"Transformerer {totalCount:N0} vurderinger");
@@ -95,23 +97,52 @@ namespace Assessments.Transformation
             var rodliste2019Assessments = new List<Rodliste2019>();
             var speciesAssessment2021Mapper = new MapperConfiguration(cfg => cfg.AddProfile<SpeciesAssessment2021Profile>()).CreateMapper();
             var speciesAssessment2021Assessments = new List<SpeciesAssessment2021>();
+            var revisionsTransformed = revisions.Select(x => new
+            {
+                Id = x.Id, 
+                Revision = x.RevisionId, 
+                RevDate = x.RevisionDateTime,
+                FutureRevisionDate = x.FutureRevisionDateTime,
+                Assessment = JsonConvert.DeserializeObject<Rodliste2019>(x.AssessmentHistory.Doc)
+            }).GroupBy(x=>x.Id).ToDictionary(x => x.Key);
+
+            // NB! all modifisering - som senere f.eks. skal kunne bli med i live-transformering på plasseres på kildeobjekt! (note to self)
 
             foreach (var item in databaseAssessments)
             {
-                var id = item.Id.ToString(); // id fra databasen
-                var assessmentForTransformation = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
-                if (assessmentForTransformation != null)
+                var id = item.Id; // id fra databasen
+                var rodliste2019 = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
+                if (rodliste2019 != null)
                 {
-                    assessmentForTransformation.Id = id;
-                    var transformedAssessment = speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(assessmentForTransformation);
+                    rodliste2019.Id = id.ToString();
+                    
+                    // enhancement of source
+                    rodliste2019.RevisionDate = new DateTime(2021, 11, 24);
+
+                    if (revisionsTransformed.ContainsKey(id))
+                    {
+                        var list = revisionsTransformed[id].OrderBy(x => x.Revision).ToArray();
+                        foreach (var innerItem in list)
+                        {
+                            rodliste2019.RevisionDate = innerItem.FutureRevisionDate;
+                            var innerAssessment = innerItem.Assessment;
+                            innerAssessment.RevisionDate = innerItem.RevDate;
+                            innerAssessment.Revision = innerItem.Revision;
+                            innerAssessment.Id = rodliste2019.Id;
+                            if (rodliste2019.Revisions == null) rodliste2019.Revisions = new List<Rodliste2019>();
+                            rodliste2019.Revisions.Add(innerAssessment);
+                        }
+                    }
+
+                    var transformedAssessment = speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(rodliste2019);
+                    
                     speciesAssessment2021Assessments.Add(transformedAssessment);
                 }
 
-                var assessment = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
-                if (assessment != null)
+                //var assessment = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
+                if (rodliste2019 != null)
                 {
-                    assessment.Id = id;
-                    rodliste2019Assessments.Add(assessment);
+                    rodliste2019Assessments.Add(rodliste2019);
                 }
 
                 _progressBar.Tick();

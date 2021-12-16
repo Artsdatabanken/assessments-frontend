@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using Assessments.Mapping.Models.Species;
 
 namespace Assessments.Mapping.Models.Source.Species
 {
@@ -292,6 +293,13 @@ namespace Assessments.Mapping.Models.Source.Species
         public string ÅrsakTilNedgraderingAvKategori { get; set; }
 
         public Taxonomy TaxonomyInfo { get; set; }
+        public string Endringslogg { get; set; }
+        
+        // enhansed props - not really there
+        public DateTime RevisionDate { get; set; }
+        public int Revision { get; set; }
+        public List<Rodliste2019> Revisions { get; set; }
+        public string RevisionReason { get; set; }
 
         public class Taxonomy
         {

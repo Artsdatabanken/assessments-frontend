@@ -250,12 +250,47 @@ namespace Assessments.Frontend.Web.Controllers
             if (assessment == null)
                 return NotFound();
 
+            ViewBag.revisionid = null;
+
             ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
             
             ViewBag.glossary = await GetResource("wwwroot/json/glossary.json"); 
             
             ViewBag.categories = await GetResource("wwwroot/json/categories.json");
             
+            ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
+
+            ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
+
+            ViewBag.impactfactors = await GetResource("wwwroot/json/impactfactors.json");
+
+            return View("Species/2021/Assessment/SpeciesAssessment2021", assessment);
+        }
+        [Route("2021/{id:required}/{revisionid:required}")]
+        public async Task<IActionResult> Detail(int id, int revisionid)
+        {
+            var data = await DataRepository.GetSpeciesAssessments();
+
+            var assessment = data.FirstOrDefault(x => x.Id == id);
+            
+            if (assessment == null)
+                return NotFound();
+
+            if (assessment.Revisions == null || assessment.Revisions.All(x => x.Revision != revisionid))
+            {
+                return NotFound();
+            }
+
+            ViewBag.revisionid = revisionid;
+
+            assessment = assessment.Revisions.Single(x => x.Revision == revisionid);
+
+            ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
+
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
+
+            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
+
             ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
 
             ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");

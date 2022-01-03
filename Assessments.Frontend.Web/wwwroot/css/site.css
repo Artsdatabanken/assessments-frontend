@@ -901,15 +901,16 @@ option {
     vertical-align: middle;
     font-size: 34pt;
 }
-
-
-.themebutton:hover{
-    cursor:pointer;
-    background:black;
-    color:white;
-}
-
 #darkmodebutton.darktheme {
     background: transparent;
 }
+
+#darkmodebutton.darktheme:hover,
+.themebutton:hover {
+    cursor: pointer;
+    color: black;
+    background-color: #f5f5f5;
+}
+
+
 

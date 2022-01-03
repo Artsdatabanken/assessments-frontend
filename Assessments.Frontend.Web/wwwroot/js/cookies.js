@@ -9,7 +9,15 @@
 var acceptedcookies = null;
 var readValue = sessionStorage['acceptedcookies'];
 var acceptedcookie = getCookie("acceptedcookie");
-var cookieDuration = 365; // Amount of days we let a cookie live.
+
+// Duration for all persistent cookies should be the same.
+// Set to 365 days (12 months), based on GDPR cookie consent rules.
+var cookieDurationDays = 365;
+var cookieDurationSeconds = cookieDurationDays * 24 * 60 * 60; // GA uses seconds
+var cookieDuration = new Date();
+cookieDuration.setTime(cookieDuration.getTime() + (cookieDurationSeconds * 1000));
+var cookieDurationString = cookieDuration.toUTCString(); // setCookie uses this one.
+
 
 // Google Analytics tracking
 (function (i, s, o, g, r, a, m) {
@@ -26,7 +34,7 @@ var cookieDuration = 365; // Amount of days we let a cookie live.
 
 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-
+// expand read more
 function learnAboutCookies() {
     if (document.getElementById('moreCookieInfo')){
         if (document.getElementById('moreCookieInfo').style.display == "none") {
@@ -37,17 +45,14 @@ function learnAboutCookies() {
     }
 }
 
-// Make new cookie
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    let expires = "expires=" + d.toUTCString();
+// Make a new cookie
+function setCookie(cname, cvalue,cduration) {   
+    let expires = "expires=" + cduration;
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-// Read the cookie
+// Read a cookie
 function getCookie(cname) {
-    console.log("Fetch cookie ", cname)
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -63,27 +68,40 @@ function getCookie(cname) {
     return "";
 }
 
-// User choice triggers tracking or rejecting tracking. Means we lose lots of stats.
+// User choice triggers tracking or rejecting tracking.
 function acceptCookies(accepted) {
-    if (accepted) {
-        acceptedcookies = "yes"
-        ga('create', 'UA-74815937-4', 'auto');
-        ga('send', 'pageview');
-        setCookie("acceptedcookie", acceptedcookies, cookieDuration); // Remember choice for x days.
-        document.getElementById('heyCookie').style.display = "none";
+    if (accepted) {        
+        hasAcceptedCookies();
     } else {
-        document.getElementById('heyCookie').style.display = "none";
-        acceptedcookies = "no";
-    }
-    sessionStorage['acceptedcookies'] = acceptedcookies;
+        hasRejectedCookies();
+    }   
 }
 
+// When cookies are accepted, make'em all, and with the same duration
+function hasAcceptedCookies() {
+    if (document.getElementById('heyCookie')) { // Only run on page with cookieWarning
+        acceptedcookies = "yes";
+        setCookie("acceptedcookie", acceptedcookies, cookieDurationString); // Remember choice for x days.    
+        ga('create', 'UA-74815937-4', { 'cookieExpires': cookieDurationSeconds, 'cookieUpdate': 'false' });
+        ga('send', 'pageview');       
+        document.getElementById('heyCookie').style.display = "none";
+    }
+}
+
+// When cookies are rejected, remember choice for now with sessionstorage
+function hasRejectedCookies() {
+    if (document.getElementById('heyCookie')) {// Only run on page with cookieWarning      
+        acceptedcookies = "no";
+        sessionStorage['acceptedcookies'] = acceptedcookies;
+        document.getElementById('heyCookie').style.display = "none";
+        // TODO: SHOULD LOOP THRU AND DELETE ALL COOKIES.
+    }
+}
 
 // Hide cookiewarning if already accepted this session
 window.onload = function () {
     if (readValue || acceptedcookie == "yes") {
-        if (document.getElementById('heyCookie')) {
-            document.getElementById('heyCookie').style.display = "none";
-        }
+        // if sessionstorage set or cookieconsent given, hide warning
+        document.getElementById('heyCookie').style.display = "none";       
     }
 };

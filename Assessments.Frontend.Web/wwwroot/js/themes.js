@@ -49,7 +49,7 @@ function highContrastMode(thisbutton,className) {
     }
 }
 
-if (cookiesave && getCookie('theme') != null) {   
+if (cookiesave && getCookie('theme') != null) {  
     let activethemes = getCookie('theme');
     document.body.classList = activethemes;
     if (activethemes.includes("darktheme")) {
@@ -69,9 +69,10 @@ if (cookiesave && getCookie('theme') != null) {
         // Detects user preference for high contrast and dark mode themes
         var mainparent = document.body;
         if (initialTheme.matches) {
-            let nightmodebutton = document.getElementById("nightmodebutton");
-            toggleOnOff(nightmodebutton, "active");
-            mainparent.classList.add("darktheme");            
+            let darkmodebutton = document.getElementById("darkmodebutton");
+            toggleOnOff(darkmodebutton, "active");
+            mainparent.classList.add("darktheme");          
+            
         } else {
             if (mainparent.classList) {
                 mainparent.classList.remove("darktheme");

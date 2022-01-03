@@ -79,7 +79,6 @@ function acceptCookies(accepted) {
 function themeCookie() {
     if (document.body) {
         let currenttheme = document.body.classList || " ";
-        console.log("current theme: ",currenttheme);
         setCookie("theme", currenttheme, cookieDurationString);
     }
 }

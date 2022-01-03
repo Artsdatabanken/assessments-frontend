@@ -21,22 +21,43 @@ if (window.hasOwnProperty('acceptedcookie') && acceptedcookie == "yes") {
     cookiesave = true;
 } 
 
+function toggleOnOff(thisbutton,activeornot) {
+    var child = thisbutton.children[1];
+
+    if (activeornot == "active") {
+        child.innerHTML = child.innerHTML.replace("off", "on");
+    } else{
+        child.innerHTML = child.innerHTML.replace("on", "off");
+    }
+}
+
 function highContrastMode(thisbutton,className) {
     var mainparent = document.body;
     if (mainparent.classList && mainparent.classList.contains(className)) {
         mainparent.classList.remove(className);
-        thisbutton.classList.remove(className);
+        thisbutton.classList.remove(className); 
+        toggleOnOff(thisbutton, "inactive");
     }else {
         mainparent.classList.add(className); 
         thisbutton.classList.add(className);
+        toggleOnOff(thisbutton, "active");
     }
     if (cookiesave) {
         themeCookie();
     }
 }
 
-if (cookiesave && getCookie('theme') != null) {
-    document.body.classList = getCookie('theme');
+if (cookiesave && getCookie('theme') != null) {   
+    let activethemes = getCookie('theme');
+    document.body.classList = activethemes;
+    if (activethemes.includes("darktheme")) {
+        let darkmodebutton = document.getElementById("darkmodebutton");
+        toggleOnOff(darkmodebutton, "active");
+    }
+    if (activethemes.includes("highcontrast")) {
+        let highcontrastbutton = document.getElementById("highcontrastbutton");
+        toggleOnOff(highcontrastbutton, "active");
+    }
 } else {
     // Sets initial preferences
     const initialContrast = matchMedia('(forced-colors: active)');
@@ -46,14 +67,18 @@ if (cookiesave && getCookie('theme') != null) {
         // Detects user preference for high contrast and dark mode themes
         var mainparent = document.body;
         if (initialTheme.matches) {
-            mainparent.classList.add("darktheme");
+            let nightmodebutton = document.getElementById("nightmodebutton");
+            toggleOnOff(nightmodebutton, "active");
+            mainparent.classList.add("darktheme");            
         } else {
             if (mainparent.classList) {
                 mainparent.classList.remove("darktheme");
             }
         }
         if (initialContrast.matches) {
+            let highcontrastbutton = document.getElementById("highcontrastbutton");
             mainparent.classList.add("highcontrast");
+            toggleOnOff(highcontrastbutton, "active");
         } else {
             if (mainparent.classList) {
                 mainparent.classList.remove("highcontrast");

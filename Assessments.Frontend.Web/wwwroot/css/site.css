@@ -883,3 +883,33 @@ option {
 .archive .material-icons{
     vertical-align:bottom;
 }
+
+.themebutton {
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    border: none;
+    color: inherit;
+    vertical-align: baseline;
+}
+
+.themebutton .material-icons {
+    vertical-align: middle;
+}
+
+.themebutton .material-icons.toggle {
+    vertical-align: middle;
+    font-size: 34pt;
+}
+
+
+.themebutton:hover{
+    cursor:pointer;
+    background:black;
+    color:white;
+}
+
+#darkmodebutton.darktheme {
+    background: transparent;
+}
+

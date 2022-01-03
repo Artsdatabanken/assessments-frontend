@@ -195,7 +195,24 @@ namespace Assessments.Frontend.Web.Controllers
                                                     x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&                        // Not subspecies
                                                     x.TaxonCategory != Constants.TaxonCategoriesEn.Variety) &&                          // Not variety
                                                     query.Any(y => y.VurdertVitenskapeligNavnHierarki.Contains(x.ScientificName)) ||    // Check if none of the above -> exists in taxonomic rank
-             query.Any(y => y.ScientificNameId == x.ScientificNameId)).ToArray();                                                                 // or match on scientific name id: exact match on species/subsp./var.
+                                                    query.Any(y => y.ScientificNameId == x.ScientificNameId)).ToList();                // or match on scientific name id: exact match on species/subsp./var.
+
+            // Add assessments if they are in redlist, but not in artskart. "Subsp." and "var." are not included in scientific names in artskart.
+            var redlistHits = query.Where(x => x.ScientificName.Trim().ToLower().Contains(name)).ToArray();
+
+            foreach (var hit in redlistHits) {
+                if (suggestions.Any(x => x.ScientificNameId.Equals(hit.ScientificNameId))) continue;
+                suggestions.Add(new ArtskartTaxon
+                {
+                    ScientificNameId = hit.ScientificNameId,
+                    PopularName = hit.PopularName,
+                    MatchedName = hit.ScientificName,
+                    ScientificName = hit.ScientificName,
+                    TaxonCategory = hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.Species) ? Constants.TaxonCategoriesEn.Species :
+                                    hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.SubSpecies) ? Constants.TaxonCategoriesEn.SubSpecies :
+                                    hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.Variety) ? Constants.TaxonCategoriesEn.Variety : 0
+                });
+            }
 
             // Add assessmentIds to species, subspecies and variety
             foreach (var item in suggestions.Select((hit, i) => new { i, hit}))
@@ -232,7 +249,7 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 return Json(new List<object>() {new {message = "Her får du treff, men ingen av artene er behandlet i Rødlista for arter 2021"}});
             }
-            else if (artskartResult.Any() != true)
+            else if (artskartResult.Any() != true && suggestions.Any() != true)
             {
                 return Json(new List<object>() {new {message = "Her får du ingen treff." } });
             }

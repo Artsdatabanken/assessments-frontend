@@ -115,10 +115,6 @@
     border: none;
 }
 
-.highcontrast .title_header {
-    background: black;
-}
-
 .highcontrast .habitat_element {
     background: white;
 }

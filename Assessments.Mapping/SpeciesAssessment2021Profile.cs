@@ -145,7 +145,10 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.ÅrsakTilNedgraderingAvKategori,true)))
                 .ForMember(dest=> dest.PreviousAssessments, opt=> opt.MapFrom(src => SpeciesAssessment2021ProfileHelper.GetPreviousAssessments(src)))
                 .ForMember(dest => dest.RevisionReason, opt=> opt.MapFrom(src => HtmlCleaner.MakeHtmlSafe(src.Endringslogg, true)))
-                    .AfterMap((src, dest) =>
+                .ForMember(dest => dest.Revision, opt => opt.MapFrom(src => src.Revision))
+                .ForMember(dest => dest.RevisionDate, opt => opt.MapFrom(src => src.RevisionDate))
+                .ForMember(dest => dest.Revisions, opt => opt.MapFrom(src => src.Revisions))
+                .AfterMap((src, dest) =>
                 {
                     SpeciesAssessment2021ProfileHelper.BlankCriteriaSumarizedBasedOnCategory(dest);
                     SpeciesAssessment2021ProfileHelper.BlankReasonCategoryChangeWhenNoChange(src, dest);

@@ -99,44 +99,50 @@ namespace Assessments.Transformation
             var speciesAssessment2021Assessments = new List<SpeciesAssessment2021>();
             var revisionsTransformed = revisions.Select(x => new
             {
-                Id = x.Id, Revision = x.RevisionId, RevDate = x.RevisionDateTime,
+                Id = x.Id, 
+                Revision = x.RevisionId, 
+                RevDate = x.RevisionDateTime,
                 FutureRevisionDate = x.FutureRevisionDateTime,
-                Assessment = speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(JsonConvert.DeserializeObject<Rodliste2019>(x.AssessmentHistory.Doc))
+                Assessment = JsonConvert.DeserializeObject<Rodliste2019>(x.AssessmentHistory.Doc)
             }).GroupBy(x=>x.Id).ToDictionary(x => x.Key);
+
+            // NB! all modifisering - som senere f.eks. skal kunne bli med i live-transformering på plasseres på kildeobjekt! (note to self)
 
             foreach (var item in databaseAssessments)
             {
-                var id = item.Id.ToString(); // id fra databasen
-                var assessmentForTransformation = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
-                if (assessmentForTransformation != null)
+                var id = item.Id; // id fra databasen
+                var rodliste2019 = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
+                if (rodliste2019 != null)
                 {
-                    assessmentForTransformation.Id = id;
-                    var transformedAssessment = speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(assessmentForTransformation);
+                    rodliste2019.Id = id.ToString();
+                    
+                    // enhancement of source
+                    rodliste2019.RevisionDate = new DateTime(2021, 11, 24);
 
-                    // revisions
-                    transformedAssessment.RevisionDate = new DateTime(2021,11,24);
-                    if (revisionsTransformed.ContainsKey(transformedAssessment.Id))
+                    if (revisionsTransformed.ContainsKey(id))
                     {
-                        var list = revisionsTransformed[transformedAssessment.Id].OrderBy(x => x.Revision).ToArray();
+                        var list = revisionsTransformed[id].OrderBy(x => x.Revision).ToArray();
                         foreach (var innerItem in list)
                         {
-                            transformedAssessment.RevisionDate = innerItem.FutureRevisionDate;
+                            rodliste2019.RevisionDate = innerItem.FutureRevisionDate;
                             var innerAssessment = innerItem.Assessment;
                             innerAssessment.RevisionDate = innerItem.RevDate;
                             innerAssessment.Revision = innerItem.Revision;
-                            innerAssessment.Id = transformedAssessment.Id;
-                            if (transformedAssessment.Revisions == null) transformedAssessment.Revisions = new List<SpeciesAssessment2021>();
-                            transformedAssessment.Revisions.Add(innerAssessment);
+                            innerAssessment.Id = rodliste2019.Id;
+                            if (rodliste2019.Revisions == null) rodliste2019.Revisions = new List<Rodliste2019>();
+                            rodliste2019.Revisions.Add(innerAssessment);
                         }
                     }
+
+                    var transformedAssessment = speciesAssessment2021Mapper.Map<SpeciesAssessment2021>(rodliste2019);
+                    
                     speciesAssessment2021Assessments.Add(transformedAssessment);
                 }
 
-                var assessment = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
-                if (assessment != null)
+                //var assessment = JsonConvert.DeserializeObject<Rodliste2019>(item.Doc);
+                if (rodliste2019 != null)
                 {
-                    assessment.Id = id;
-                    rodliste2019Assessments.Add(assessment);
+                    rodliste2019Assessments.Add(rodliste2019);
                 }
 
                 _progressBar.Tick();

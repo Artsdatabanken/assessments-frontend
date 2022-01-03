@@ -1,6 +1,5 @@
 /* THEME MODES 
  - Swaps out classes on body adjusting to different css-themes
- - Does not persist across pages at this point
  - Checks manually set user preference as default (browser,os)
  */
 

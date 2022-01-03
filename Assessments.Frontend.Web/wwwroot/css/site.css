@@ -903,6 +903,7 @@ option {
 }
 #darkmodebutton.darktheme {
     background: transparent;
+    color:black;
 }
 
 #darkmodebutton.darktheme:hover,

@@ -20,14 +20,17 @@ if (window.hasOwnProperty('acceptedcookie') && acceptedcookie == "yes") {
     cookiesave = true;
 } 
 
-function toggleOnOff(thisbutton,activeornot) {
-    var child = thisbutton.children[1];
+function toggleOnOff(thisbutton, activeornot) {
+    if (thisbutton != null) {
+        var child = thisbutton.children[1];
 
-    if (activeornot == "active") {
-        child.innerHTML = child.innerHTML.replace("off", "on");
-    } else{
-        child.innerHTML = child.innerHTML.replace("on", "off");
+        if (activeornot == "active") {
+            child.innerHTML = child.innerHTML.replace("off", "on");
+        } else {
+            child.innerHTML = child.innerHTML.replace("on", "off");
+        }
     }
+    
 }
 
 function highContrastMode(thisbutton,className) {

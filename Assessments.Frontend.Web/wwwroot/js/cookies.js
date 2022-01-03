@@ -1,4 +1,3 @@
-
 /* 
  * Cookies for Google Analytics and their handling
  * Using session-storage to remember which user preference. 
@@ -77,13 +76,22 @@ function acceptCookies(accepted) {
     }   
 }
 
+function themeCookie() {
+    if (document.body) {
+        let currenttheme = document.body.classList || " ";
+        console.log("current theme: ",currenttheme);
+        setCookie("theme", currenttheme, cookieDurationString);
+    }
+}
+
 // When cookies are accepted, make'em all, and with the same duration
 function hasAcceptedCookies() {
     if (document.getElementById('heyCookie')) { // Only run on page with cookieWarning
         acceptedcookies = "yes";
         setCookie("acceptedcookie", acceptedcookies, cookieDurationString); // Remember choice for x days.    
         ga('create', 'UA-74815937-4', { 'cookieExpires': cookieDurationSeconds, 'cookieUpdate': 'false' });
-        ga('send', 'pageview');       
+        ga('send', 'pageview');
+        themeCookie();
         document.getElementById('heyCookie').style.display = "none";
     }
 }

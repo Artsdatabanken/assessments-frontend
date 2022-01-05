@@ -17,10 +17,30 @@
             <div id="themeselectordropdown" class="themeselectordropdown dropdown">
                 <ul>
                     <li>
-                        Høykontrast <button class="themebutton contrast primary tinybutton" onclick="highContrastMode(this, 'highcontrast')">Høykontrast</button>
+                        <button id="highcontrastbutton" class="themebutton" onclick="highContrastMode(this, 'highcontrast')">
+                            <span class="label">
+                                <span class="material-icons">
+                                    contrast
+                                </span>
+                                Høykontrast
+                            </span>
+                            <span class="material-icons toggle">
+                                toggle_off
+                            </span>
+                        </button>
                     </li>
                     <li>
-                        Nattmodus <button class="themebutton dark primary tinybutton" onclick="highContrastMode(this, 'darktheme')">Nattmodus</button>
+                        <button  id="darkmodebutton" class="themebutton" onclick="highContrastMode(this, 'darktheme')">
+                            <span class="label">
+                                <span class="material-icons">
+                                    dark_mode
+                                </span>
+                                Nattmodus
+                            </span>
+                            <span class="material-icons toggle">
+                                toggle_off
+                            </span>
+                        </button>
                     </li>
                 </ul>
             </div>

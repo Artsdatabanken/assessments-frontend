@@ -77,9 +77,9 @@
       "description": "Det vil si at den ikke er fast reproduserende, men mer enn 2 % av global populasjon oppholder seg regelmessig innenfor vurderingsområdet i deler av sin års-/livssyklus."
     },
     "hvorforikke": {
-      "title": "Hvorfor er ikke {art}en ",
-      "NA": "egnet?",
-      "NE": "vurdert?"
+      "title": "Hvorfor er {art}en ",
+      "NA": "<i>ikke egnet</i> NA?",
+      "NE": "<i>ikke vurdert</i> NE?"
     },
     "IkkeReproduserendeGjestNA": {
       "title": "Ikke reproduserende gjest",

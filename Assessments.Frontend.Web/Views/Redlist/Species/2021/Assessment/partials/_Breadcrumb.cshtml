@@ -6,11 +6,11 @@
 <div class="breadcrumbs">
     <ol>
         @{/*
-                    <li class="lead in-breadcrumb">
-                        <a asp-controller="Redlist" asp-action="rodlisteforarter">Rødlista for arter</a>
-                        <span class="breadcrumbdivider">&gt; </span>
-                    </li>
-                  */
+                            <li class="lead in-breadcrumb">
+                                <a asp-controller="Redlist" asp-action="rodlisteforarter">Rødlista for arter</a>
+                                <span class="breadcrumbdivider">&gt; </span>
+                            </li>
+                          */
         }
 
         <li class="in-breadcrumb">
@@ -30,10 +30,12 @@
         @if (@Model.AssessmentArea == "S")
         {
             <li class="in-breadcrumb">
-                 <a asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="1">Originalversjon </a>
+                <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="S">
+                    Svalbard
+                </a>
                 <span class="breadcrumbdivider">&gt; </span>
             </li>
-        }
+         }    
 
         @if (@ViewBag.revisionid > 0)
         {
@@ -45,7 +47,7 @@
             </li>
 
             <li class="in-breadcrumb currentcrumb" disabled="true">
-               Versjon @ViewBag.revisionid
+                Versjon @ViewBag.revisionid
             </li>
         }
         else

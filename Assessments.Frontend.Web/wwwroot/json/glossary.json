@@ -1,4 +1,15 @@
 ﻿{
+  "pagetitle": {
+    "title": "Rødlista for arter 2021"
+  },
+  "areas": {
+    "N": {
+      "title": "Norge"
+    },
+    "S": {
+      "title": "Svalbard"
+    }
+  },
   "IUCN": {
     "tagline": "Beregnet XX, med føre-var forbehold: XX ",
     "description": "IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp. Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon. På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene. Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12. Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent). "
@@ -162,5 +173,14 @@
       "title": "Antall vurderinger per påvirkningsfaktor",
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet som påvirkes negativt."
     }
+  },
+  "archived": {
+    "warning": {
+      "title": "Denne vurderingen er utdatert. ",
+      "linktekst": "Gå til gjeldende vurdering"
+    },
+    "version": "Versjon "
+    
   }
+
 }

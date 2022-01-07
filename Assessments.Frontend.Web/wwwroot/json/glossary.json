@@ -1,6 +1,12 @@
 ﻿{
+  "adb": "Artsdatabanken",
   "pagetitle": {
     "title": "Rødlista for arter 2021"
+  },
+  "links": {
+    "categorypage": {
+      "title": "Alt om kategoriskalaen "
+    }
   },
   "areas": {
     "N": {
@@ -184,7 +190,12 @@
       "linktekst": "Gå til gjeldende vurdering"
     },
     "version": "Versjon "
-    
+
+  },
+  "citation": {
+    "title": "Sitering",
+    "articlename": ": Vurdering av @species for @area."
   }
+
 
 }

@@ -40,6 +40,21 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
 
             return results;
         }
+
+        public async Task<string> GetExpertCommitteeName(string expertCommitteeName, int year)
+        {
+            var data = await _dataRepository.GetData<ExpertCommitteeMember>(DataFilenames.SpeciesExpertCommitteeMembers);
+
+            var name = data.FirstOrDefault(x => x.ExpertCommittee.Equals(expertCommitteeName.Trim(), StringComparison.InvariantCultureIgnoreCase) && x.Year == year)?.ExpertCommittee;
+	
+            if (string.IsNullOrEmpty(name))
+            {
+                name =  data.FirstOrDefault(x => x.Year == year && x.ExpertCommittee.Split(",", StringSplitOptions.TrimEntries).Select(y => y.ToLowerInvariant()).Contains(expertCommitteeName.Trim().ToLowerInvariant()))
+                    ?.ExpertCommittee;
+            }
+	
+            return string.IsNullOrEmpty(name) ? string.Empty : name.Split(",", StringSplitOptions.TrimEntries).JoinAnd(", ", " og ");
+        }
     }
 
     public class ExpertCommitteeMember

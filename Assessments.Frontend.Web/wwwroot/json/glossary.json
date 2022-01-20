@@ -108,7 +108,7 @@
     },
     "FremmedArtNA": {
       "title": "Fremmed{art}",
-      "description": "{Art}en er fremmed, og ble enten etablert innenfor vurderingsområdet etter år 1800 eller antas å kunne etablere seg innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokk{art}</a>). "
+      "description": "{Art}en er fremmed og vurdert som selvstendig reproduserende etter år 1800, eller {art}en er fremmed og antas å kunne reprodusere selvstendig innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokk{art}</a>). "
     },
     "ObservertReproduserendeIkkeEtablertNA": {
       "title": "Ikke etablert reproduserende",

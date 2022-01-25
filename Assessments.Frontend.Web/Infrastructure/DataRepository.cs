@@ -51,7 +51,9 @@ namespace Assessments.Frontend.Web.Infrastructure
                 }
                 else // download file
                 {
-                    var blob = new BlobContainerClient(_configuration["ConnectionStrings:AzureBlobStorage"], "assessments").GetBlobClient(name);
+                    string connectionString = _configuration["ConnectionStrings:AzureBlobStorage"];
+                    if (string.IsNullOrWhiteSpace(connectionString)) throw new System.Exception("Missing required config for azure blog storage: ConnectionStrings:AzureBlobStorage");
+                    var blob = new BlobContainerClient(connectionString, "assessments").GetBlobClient(name);
                     var response = await blob.DownloadContentAsync();
 
                     fileContent = response.Value.Content.ToString();

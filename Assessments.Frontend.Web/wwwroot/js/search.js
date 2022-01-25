@@ -2,7 +2,7 @@
 
 const searchField = document.getElementById("Name");
 const autocompleteList = document.getElementById("autocomplete_list_ul");
-const searchUrlBase =  window.location.pathname + "/suggestions";
+const searchUrlBase = (window.location.pathname + "/suggestions").replace('//suggestions', '/suggestions');
 const autoCompleteWaitTime = 1000;
 
 const taxonCategories = {

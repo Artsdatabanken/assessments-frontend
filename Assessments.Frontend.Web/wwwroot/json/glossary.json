@@ -1,4 +1,21 @@
 ﻿{
+  "adb": "Artsdatabanken",
+  "pagetitle": {
+    "title": "Rødlista for arter 2021"
+  },
+  "links": {
+    "categorypage": {
+      "title": "Alt om kategoriskalaen "
+    }
+  },
+  "areas": {
+    "N": {
+      "title": "Norge"
+    },
+    "S": {
+      "title": "Svalbard"
+    }
+  },
   "IUCN": {
     "tagline": "Beregnet XX, med føre-var forbehold: XX ",
     "description": "IUCNs veileder fra 2019 forklarer at usikkerhet i vurderingene skal behandles etter et “føre-var, men realistisk”-prinsipp. Norsk rødliste for arter 2021 benytter en kvantilberegning (0.7-kvantil for prosent reduksjon/nedgang, 0.3-kvantil for øvrige), hvor metoden som ligger til grunn er basert på lineær interpolasjon. På de fleste tallfestede kriteriene har ekspertene angitt minimums- og maksimumstall, eventuelt også mest trolig-tall, og basert på dem beregnes en 0,7 eller 0,3-kvantilverdi. Den beregnede verdien legges så til grunn for terskelverdien på de respektive kriteriene. Eksempel: En reduksjon på A-kriteriet angis til mellom 58 % (min) og 75 % (max). Forskjellen er 75 - 58 = 17 (prosentpoeng). På reduksjon brukes en 0,7-kvantil: 17 x 0,7 = ca. 12. Den beregnede reduksjonen blir dermed 58 + 12 = 70 (prosent). "
@@ -10,6 +27,10 @@
   "region": {
     "tagline": "Regioner og havområder ",
     "description": " En {art} er forekommende i et (historisk) fylke eller havområde hvis vesentlige deler av livssyklusen foregår der. <i>Kjent</i> forekomst betyr kjent eller sannsynlig nåværende forekomst. <i>Antatt</i> forekomst brukes om mulig forekomst (basert på eldre observasjoner eller biogeografiske antagelser). <i>Antatt utdødd</i> forekomst brukes når {art}en muligens har dødd ut lokalt, mens <i>utdødd</i> forekomst betyr at det er overveiende sannsynlighet for at {art}en har dødd ut i området. Marine {art}er regnes som forekommende i kystfylker om de opptrer innenfor norsk territorialfarvann ved fylket. Kartet viser den historiske fylkesinndelingen per 1. januar 2018."
+  },
+  "categoryChanged": {
+    "title": "Årsak til endring av kategori",
+    "description": "Kategorien for denne {art}en har endret seg fra @previous_category til @current_category siden Rødlista @which_redlist. Endringen kommer på grunnlag av "
   },
   "criteria": {
     "tagline": "Hvilke kriterier gjør at denne {art}en er rødlistet?",
@@ -87,7 +108,7 @@
     },
     "FremmedArtNA": {
       "title": "Fremmed{art}",
-      "description": "{Art}en er fremmed, og ble enten etablert innenfor vurderingsområdet etter år 1800 eller antas å kunne etablere seg innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokk{art}</a>). "
+      "description": "{Art}en er fremmed og vurdert som selvstendig reproduserende etter år 1800, eller {art}en er fremmed og antas å kunne reprodusere selvstendig innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokk{art}</a>). "
     },
     "ObservertReproduserendeIkkeEtablertNA": {
       "title": "Ikke etablert reproduserende",
@@ -162,5 +183,19 @@
       "title": "Antall vurderinger per påvirkningsfaktor",
       "description": "Antall vurderinger i utvalget i kategoriene nær truet, sårbar, sterkt truet eller kritisk truet som påvirkes negativt."
     }
+  },
+  "archived": {
+    "warning": {
+      "title": "Denne vurderingen er utdatert. ",
+      "linktekst": "Gå til gjeldende vurdering"
+    },
+    "version": "Versjon "
+
+  },
+  "citation": {
+    "title": "Sitering",
+    "articlename": ": Vurdering av @species for @area."
   }
+
+
 }

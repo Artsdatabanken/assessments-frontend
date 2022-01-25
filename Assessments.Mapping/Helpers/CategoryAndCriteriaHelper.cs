@@ -363,9 +363,13 @@ namespace Assessments.Mapping.Helpers
                 {
                     Console.WriteLine("mangler overordnetKlassifisering");
                 }
+                else if (overordnetKlassifisering.Length > 1)
+                {
+                    total.Kategori = overordnetKlassifisering.Substring(overordnetKlassifisering.Length - 2);
+                }
 
                 //Console.WriteLine("klassifisering: " + overordnetKlassifisering);
-                total.Kategori = overordnetKlassifisering.Substring(overordnetKlassifisering.Length - 2);
+                
                 total.Kriterie = "";
             }
             return total;

@@ -6,36 +6,27 @@
 <div class="breadcrumbs">
     <ol>
         @{/*
-                            <li class="lead in-breadcrumb">
-                                <a asp-controller="Redlist" asp-action="rodlisteforarter">Rødlista for arter</a>
-                                <span class="breadcrumbdivider">&gt; </span>
-                            </li>
-                          */
+            <li class="lead in-breadcrumb">
+                <a asp-controller="Redlist" asp-action="rodlisteforarter">Rødlista for arter</a>
+                <span class="breadcrumbdivider">&gt; </span>
+            </li>
+            */
         }
 
         <li class="in-breadcrumb">
-            <a asp-controller="Redlist" asp-action="Index2021">Rødlista for arter 2021</a>
+            <a asp-controller="Redlist" asp-action="Index2021">@ViewBag.glossary["pagetitle"]["title"]</a>
             <span class="breadcrumbdivider">&gt; </span>
         </li>
 
-        @if (@Model.AssessmentArea == "N")
+        @if (@ViewBag.glossary["areas"].ContainsKey(@Model.AssessmentArea))
         {
             <li class="in-breadcrumb">
-                <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="N">
-                    Norge
+                <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="@Model.AssessmentArea">
+                    @ViewBag.glossary["areas"][@Model.AssessmentArea]["title"]
                 </a>
                 <span class="breadcrumbdivider">&gt; </span>
             </li>
         }
-        @if (@Model.AssessmentArea == "S")
-        {
-            <li class="in-breadcrumb">
-                <a asp-controller="Redlist" asp-action="Index2021" asp-route-Area="S">
-                    Svalbard
-                </a>
-                <span class="breadcrumbdivider">&gt; </span>
-            </li>
-         }    
 
         @if (@ViewBag.revisionid > 0)
         {
@@ -47,7 +38,7 @@
             </li>
 
             <li class="in-breadcrumb currentcrumb" disabled="true">
-                Versjon @ViewBag.revisionid
+                @ViewBag.glossary["archived"]["version"] @ViewBag.revisionid
             </li>
         }
         else

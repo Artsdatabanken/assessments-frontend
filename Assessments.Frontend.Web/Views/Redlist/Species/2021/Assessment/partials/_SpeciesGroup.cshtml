@@ -1,4 +1,9 @@
-﻿@model SpeciesAssessment2021
+﻿@using Assessments.Frontend.Web.Infrastructure.Services
+
+@model SpeciesAssessment2021
+
+@inject ExpertCommitteeMemberService _expertCommitteeMemberService
+
 @{
 
     Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
@@ -15,6 +20,7 @@
         dateline += ", sist endret: " + Model.RevisionDate.Date.ToShortDateString();
     }
 
+    var expertCommitteeName = await _expertCommitteeMemberService.GetExpertCommitteeName(Model.ExpertCommittee, Model.AssessmentYear);
 }
 
 <div class="speciesgroup_container">
@@ -35,7 +41,7 @@
         }
     </div>
     <p>
-        Vurdert av <a href="https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene" class="lowercase">ekspertkomité for @Model.ExpertCommittee </a> <br />
+        Vurdert av <a href="https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene" class="lowercase">ekspertkomité for @expertCommitteeName </a> <br />
         <partial name="/Views/Redlist/Species/2021/Assessment/partials/_PublishedDate.cshtml" />
     </p>
 </div>

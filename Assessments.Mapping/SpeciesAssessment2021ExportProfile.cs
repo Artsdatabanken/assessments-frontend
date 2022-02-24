@@ -31,7 +31,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.CriteriaSummarized, opt => opt.MapFrom(src => src.CriteriaSummarized))
                 .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => StripHtml(src.ExpertStatement)))
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => src.ExtinctionRiskAffected == "Nei" ?
-                string.Empty : src.RationaleCategoryAdjustment))
+                string.Empty : StripHtml(src.RationaleCategoryAdjustment)))
                 .ForMember(dest => dest.ExtinctionRiskAffected, opt => opt.MapFrom(src => src.ExtinctionRiskAffected))
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.PresumedExtinct ? "Ja" : "Nei"))
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ReasonCategoryChange.Description()))

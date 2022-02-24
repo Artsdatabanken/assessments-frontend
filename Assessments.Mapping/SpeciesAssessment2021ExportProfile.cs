@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Assessments.Mapping.Models.Species;
@@ -96,7 +95,7 @@ namespace Assessments.Mapping
             return string.Join(";", mainHabitats.Select(GetProperDescription).ToList());
         }
 
-        private static string StripHtml(string input) => input != null ? Regex.Replace(input, "<.*?>", string.Empty) : string.Empty;
+        private static string StripHtml(string input) => input != null ? Regex.Replace(input, @"(?></?\w+)(?>(?:[^>'""]+|'[^']*'|""[^""]*"")*)>", string.Empty) : string.Empty;
 
         private static string ResolveRegionState(IEnumerable<SpeciesAssessment2021RegionOccurrence> regionOccurrences, string name)
         {

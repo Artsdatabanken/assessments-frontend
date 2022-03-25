@@ -27,15 +27,17 @@
     firspublished = "(" + firspublished + ").";
 
     // Publication
-            string species = Model.PopularName + " " + Model.ScientificName;
-    string area = (Model.AssessmentArea == "N" ? "Norge" : "Svalbard");
-    string articlename = Model.SpeciesGroup + ": Vurdering av " + species + " for " + area + ".";
-    string publication = "Norsk rødliste for arter 2021. Artsdatabanken. ";
+    string species = Model.PopularName + " " + Model.ScientificName;
+    string area = @ViewBag.glossary["areas"][@Model.AssessmentArea]["title"];
+    string articlename = Model.SpeciesGroup + @ViewBag.glossary["citation"]["articlename"];
+    articlename = articlename.Replace("@species", species);
+    articlename = articlename.Replace("@area", area);
+    string publication = @ViewBag.glossary["pagetitle"]["title"] + ". " + @ViewBag.glossary["adb"] +". ";
 }
 
 @if (expertCommitteeMembers.Any())
 {
-    <h2>Sitering</h2>
+<h2>@ViewBag.glossary["citation"]["title"] </h2>
     <p class="citation">
         @authors
         @date

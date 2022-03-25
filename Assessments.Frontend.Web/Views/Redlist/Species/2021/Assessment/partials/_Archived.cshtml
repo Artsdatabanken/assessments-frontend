@@ -4,14 +4,12 @@
     <span class="material-icons">
         warning_amber
     </span>
-    Denne vurderingen er utdatert. 
+    @ViewBag.glossary["archived"]["warning"]["title"]
     @if (@ViewBag.revisionid > 0)
     {
-
-        <a asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="">
-            Gå til gjeldende vurdering
-        </a>
+    <a asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="">
+        @ViewBag.glossary["archived"]["warning"]["linktekst"]
+    </a>
     }
-
 </div>
 }

@@ -5,7 +5,6 @@
     @if (Model.ExtinctionRiskAffected == "Ja")
     {
         // example species include 31847
-
         <h3>
 
             @ViewBag.glossary["degrees"]["title"]
@@ -20,13 +19,7 @@
             </span>
             <span class="graphic_element @Model.CategoryAdjustedTo.Substring(0,2) degraded">@Model.CategoryAdjustedTo</span>
         </p>
-
         <p>@Html.Raw(ViewBag.glossary["degrees"]["description"])</p>
-
-
-
-
-
     }
 
 </div>

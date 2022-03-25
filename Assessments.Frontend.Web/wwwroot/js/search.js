@@ -2,7 +2,7 @@
 
 const searchField = document.getElementById("Name");
 const autocompleteList = document.getElementById("autocomplete_list_ul");
-const searchUrlBase =  window.location.pathname + "/suggestions";
+const searchUrlBase = (window.location.pathname + "/suggestions").replace('//suggestions', '/suggestions');
 const autoCompleteWaitTime = 1000;
 
 const taxonCategories = {
@@ -122,7 +122,7 @@ function searchForTaxa(sciname) {
 }
 
 function goToAssesment(id) {
-    window.location.href = window.location.pathname + '/' + id;
+    window.location.href = (window.location.pathname + '/' + id).replace('//', '/');
 }
 
 const createList = (json,searchstring) => {

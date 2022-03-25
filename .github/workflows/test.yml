@@ -6,7 +6,7 @@ on:
   pull_request:
     types: [closed]
     branches: 
-      - 'test-staging'
+      - 'test'
    
 jobs:
   build:

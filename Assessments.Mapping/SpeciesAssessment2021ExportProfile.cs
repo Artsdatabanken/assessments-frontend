@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Assessments.Mapping.Models.Species;
 using Assessments.Shared.Helpers;
 using AutoMapper;
+using HtmlAgilityPack;
 
 namespace Assessments.Mapping
 {
@@ -32,7 +31,7 @@ namespace Assessments.Mapping
                 .ForMember(dest => dest.CriteriaSummarized, opt => opt.MapFrom(src => src.CriteriaSummarized))
                 .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => StripHtml(src.ExpertStatement)))
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => src.ExtinctionRiskAffected == "Nei" ?
-                string.Empty : src.RationaleCategoryAdjustment))
+                string.Empty : StripHtml(src.RationaleCategoryAdjustment)))
                 .ForMember(dest => dest.ExtinctionRiskAffected, opt => opt.MapFrom(src => src.ExtinctionRiskAffected))
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.PresumedExtinct ? "Ja" : "Nei"))
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ReasonCategoryChange.Description()))
@@ -95,8 +94,16 @@ namespace Assessments.Mapping
 
             return string.Join(";", mainHabitats.Select(GetProperDescription).ToList());
         }
+        
+        private static string StripHtml(string input)
+        {
+            if (input == null)
+                return string.Empty;
 
-        private static string StripHtml(string input) => input != null ? Regex.Replace(input, "<.*?>", string.Empty) : string.Empty;
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(input);
+            return htmlDocument.DocumentNode.InnerText;
+        }
 
         private static string ResolveRegionState(IEnumerable<SpeciesAssessment2021RegionOccurrence> regionOccurrences, string name)
         {

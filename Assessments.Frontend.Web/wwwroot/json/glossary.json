@@ -30,7 +30,7 @@
   },
   "categoryChanged": {
     "title": "Årsak til endring av kategori",
-    "description": "Kategorien for denne {art}en har endret seg fra @previous_category til @current_category siden Rødlista @which_redlist. Endringen kommer på grunnlag av "
+    "description": "Kategorien for denne {art}en er endret fra @previous_category til @current_category siden Rødlista @which_redlist. Endringen kommer på grunnlag av "
   },
   "criteria": {
     "tagline": "Hvilke kriterier gjør at denne {art}en er rødlistet?",

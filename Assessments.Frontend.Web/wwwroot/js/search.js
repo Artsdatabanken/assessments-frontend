@@ -122,7 +122,7 @@ function searchForTaxa(sciname) {
 }
 
 function goToAssesment(id) {
-    window.location.href = window.location.pathname + '/' + id;
+    window.location.href = (window.location.pathname + '/' + id).replace('//', '/');
 }
 
 const createList = (json,searchstring) => {

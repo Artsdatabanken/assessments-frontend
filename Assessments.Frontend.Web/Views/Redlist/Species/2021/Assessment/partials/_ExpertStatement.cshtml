@@ -36,7 +36,7 @@
         kriteriedok = kriteriedok.Replace("</b>", "</h3>");
         kriteriedok = kriteriedok.Replace("<u>", "<h3>");
         kriteriedok = kriteriedok.Replace("</u>", "</h3>");
-        kriteriedok = kriteriedok.Replace("</h3>", "</h3><p>");
+        kriteriedok = kriteriedok.Replace("</h3>", "</h3>");
 
 
         // Fix specific cases it went wrong
@@ -53,8 +53,9 @@
         kriteriedok = kriteriedok.Replace("<br/>", "</p><p>");
         kriteriedok = kriteriedok.Replace("<p> ", "<p>");
         kriteriedok = kriteriedok.Replace(" </p>", "</p>");
-        kriteriedok = kriteriedok.Replace("<p><p>", "<p>");
         kriteriedok = "<p>" + kriteriedok + "</p>";
+        kriteriedok = kriteriedok.Replace("<p><p>", "<p>");
+        kriteriedok = kriteriedok.Replace("</p></p>", "</p>");
         kriteriedok = kriteriedok.Replace("<p></p>", "");
     }
 }

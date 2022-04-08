@@ -186,6 +186,8 @@
             C_Blank_Value = ViewBag.kriterier["C"]["content"]["threshold"][CThresh];
             C_Blank_Value = ViewBag.kriterier["C"]["content"]["comparator"] + " " + C_Blank_Value;
             C_Blank_Value = C_Blank_Value + " " + ViewBag.kriterier["C"]["content"]["unit"];
+            C_Blank_Value = C_Blank_Value.Replace("<", "&lt;");
+            C_Blank_Value = C_Blank_Value.Replace(">", "&gt;");
 
             <p><b> Alternativ for @Html.Raw(C_Blank_Value)</b></p>
         }
@@ -487,11 +489,9 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
                         </span>
                     </span>
-                    <p>
-                        @{ hasKey("description", @value);}
-                        @{ getModel(key);}
-                        @{ getQuantile(value, key, key);}
-                    </p>
+                    @{ hasKey("description", @value);}
+                    @{ getModel(key);}
+                    @{ getQuantile(value, key, key);}
 
                     <!-- SUBCRITERIA (A1, ... D2) -->
                     @if (@value.ContainsKey("subcriteria"))
@@ -513,11 +513,9 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                     @{iconChooser(subcriteria_isactive);}
                                                 </span>
                                             </span>
-                                            <p>
-                                                @{ hasKey("description", v);}
-                                                @{ getGenerationTime(key, k);}
-                                                @{ getModel(k);}
-                                            </p>
+                                            @{ hasKey("description", v);}
+                                            @{ getGenerationTime(key, k);}
+                                            @{ getModel(k);}
                                             @{ getQuantile(v, k, key);}
 
                                             <!-- SUBCRITERIA SUBOPTIONS FOR A & C-CRITERIA && SUBOPTIONS FOR Ca2 -->

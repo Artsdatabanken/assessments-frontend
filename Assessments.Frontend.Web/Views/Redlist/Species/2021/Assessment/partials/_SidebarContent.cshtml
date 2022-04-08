@@ -6,8 +6,8 @@
     // Expert committee field should always be present.
     // By the time we arrive here, the actual committe name has been split into correct species group,
     // and is thus now species group and not actually committtee group.
-
-    string taxon_url = "https://artsdatabanken.no/taxon/"+Model.ScientificName+"/" + Model.ScientificNameId;
+    string urlSafeScientificName = Model.ScientificName.Replace(" ", "%20");
+    string taxon_url = "https://artsdatabanken.no/taxon/" + urlSafeScientificName + "/" + Model.ScientificNameId;
 
 }
 

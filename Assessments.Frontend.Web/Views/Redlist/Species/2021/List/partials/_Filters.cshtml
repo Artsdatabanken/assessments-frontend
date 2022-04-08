@@ -288,8 +288,8 @@
                                             {
                                                 @if (species == "Insekter")
                                                 {
-                                                    InputTag("show_insects", "collapse_checkbox", "IsCheck", Model.IsCheck, "Insects");
                                                     <li class="checkbox">
+                                                        @{ InputTag("show_insects", "collapse_checkbox", "IsCheck", Model.IsCheck, "Insects"); }
                                                         <button name="insektsfiltre" class="list_header" id="list_header_insects" onclick="collapse('show_insects')" type="button">
                                                             <span>@species</span>
                                                             <span class="list_header_text">
@@ -300,8 +300,8 @@
                                                                 @{ InputTag("SpeciesGroups", Model.SpeciesGroups, species); }
                                                             </label>
                                                         </button>
+                                                        @{ getInsectsList(AllInsects); }
                                                     </li>
-                                                    getInsectsList(AllInsects);
                                                 }
                                                 else
                                                 {

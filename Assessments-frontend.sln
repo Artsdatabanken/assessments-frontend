@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Frontend.Web", "Assessments.Frontend.Web\Assessments.Frontend.Web.csproj", "{9D7AD847-DBF7-40D3-981C-13CCF229EE53}"
 EndProject
@@ -14,6 +14,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{5ABC60EC-61F1-4433-888B-46DEB60B2464}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{5A14CBF8-ED21-4DB0-9A21-0ABE1173B3DB}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\develop.yml = .github\workflows\develop.yml
+		.github\workflows\main.yml = .github\workflows\main.yml
+		.github\workflows\test.yml = .github\workflows\test.yml
 	EndProjectSection
 EndProject
 Global
@@ -41,6 +48,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5A14CBF8-ED21-4DB0-9A21-0ABE1173B3DB} = {5ABC60EC-61F1-4433-888B-46DEB60B2464}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1A2FDC22-2339-438F-8175-603BF5C7BAAB}

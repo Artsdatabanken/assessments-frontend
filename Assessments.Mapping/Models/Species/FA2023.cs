@@ -44,7 +44,7 @@ namespace Public.Domain
         }
 
         [JsonExtensionData]
-        public Dictionary<string, JsonElement>? ExtensionData { get; set; }
+        public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
         //public List<TaxonHistory> TaxonomicHistory { get; set; } = new List<TaxonHistory>();
         //public TrackInfo ImportInfo { get; set; } = new TrackInfo();

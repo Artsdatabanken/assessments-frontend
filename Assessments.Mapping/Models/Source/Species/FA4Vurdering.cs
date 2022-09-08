@@ -105,7 +105,7 @@ namespace Prod.Domain
         }
 
         [JsonExtensionData]
-        public Dictionary<string, JsonElement>? ExtensionData { get; set; }
+        public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
         public List<TaxonHistory> TaxonomicHistory { get; set; } = new List<TaxonHistory>();
         public TrackInfo ImportInfo { get; set; } = new TrackInfo();
@@ -732,7 +732,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         //public string SpreadRiskDecisiveCriterias { get; set; }
         //public string EcologicalEffectDecisiveCriterias { get; set; }
         [JsonExtensionData()]
-        public Dictionary<string, JsonElement>? ExtensionData { get; set; }
+        public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
         public int RiskLevel { get; set; } = -1;
         public string DecisiveCriteria { get; set; }

@@ -1,13 +1,14 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Globalization;
+using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+
 //using Prod.Domain.Helpers;
 
+// https://github.com/Artsdatabanken/Fremmedartsbase2023/blob/main/Public.Domain/FA2023.cs
 
-namespace Public.Domain
+namespace Assessments.Mapping.AlienSpecies.Models
 {
     public class CTaxon
     {
@@ -32,11 +33,11 @@ namespace Public.Domain
 
 
 
-    public partial class FA2023
+    public partial class AlienSpeciesAssessment2023
     {
-        public static FA2023 CreateNewFA4()
+        public static AlienSpeciesAssessment2023 CreateNewFA4()
         {
-            var newfa = new FA2023();
+            var newfa = new AlienSpeciesAssessment2023();
             newfa.initNaturalOrigins();
             newfa.InitFylkesforekomster();
             newfa.RiskAssessment.Criteria = RiskAssessment.CreateDefaultCriteria();
@@ -44,7 +45,7 @@ namespace Public.Domain
         }
 
         [JsonExtensionData]
-        public Dictionary<string, JsonElement>? ExtensionData { get; set; }
+        public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
         //public List<TaxonHistory> TaxonomicHistory { get; set; } = new List<TaxonHistory>();
         //public TrackInfo ImportInfo { get; set; } = new TrackInfo();
@@ -91,7 +92,7 @@ namespace Public.Domain
         public string EvaluatedScientificNameRank { get; set; }
     }
 
-    public partial class FA2023 // Horisontskanning
+    public partial class AlienSpeciesAssessment2023 // Horisontskanning
     {
         /// <summary>
         /// If true this assessment is marked for horizon scanning prior to risk assessment
@@ -116,7 +117,7 @@ namespace Public.Domain
 
 
 
-    public partial class FA2023 // (3.1) Artens status
+    public partial class AlienSpeciesAssessment2023 // (3.1) Artens status
     {
         public string AlienSpeciesCategory2012 { get; set; }
         public string DoorKnockerDescription { get; set; }
@@ -204,7 +205,7 @@ namespace Public.Domain
         public ObservedAndEstablishedInCountry ObservedAndEstablishedStatusInCountry { get; set; } = new ObservedAndEstablishedInCountry();
     }
 
-    public partial class FA2023 // Fylkesforekomster
+    public partial class AlienSpeciesAssessment2023 // Fylkesforekomster
     {
         private List<Fylkesforekomst> _fylkesforekomster;
 
@@ -258,7 +259,7 @@ namespace Public.Domain
         }
     }
 
-    public partial class FA2023 // (3.2) Artsegenskaper
+    public partial class AlienSpeciesAssessment2023 // (3.2) Artsegenskaper
     {
         public bool Limnic { get; set; }
         public bool Terrestrial { get; set; }
@@ -432,14 +433,14 @@ namespace Public.Domain
         public string RegionalPresenceAssumed { get; set; }
         public string RegionalPresencePotential { get; set; }
     }
-    public partial class FA2023 // (3.3) Import
+    public partial class AlienSpeciesAssessment2023 // (3.3) Import
     {
         public List<MigrationPathway> ImportPathways { get; set; } = new List<MigrationPathway>();
         //public bool ImportedToIndoorOrProductionArea { get; set; } = false;
 
         public string IndoorProduktion { get; set; }
     }
-    public partial class FA2023 // (3.4) Spredningsveier
+    public partial class AlienSpeciesAssessment2023 // (3.4) Spredningsveier
     {
         public List<MigrationPathway> AssesmentVectors { get; set; } = new List<MigrationPathway>();
         //public string Vector { get; set; }  // ???!!
@@ -453,7 +454,7 @@ namespace Public.Domain
 
 
     }
-    public partial class FA2023 // (3.5) Spredningshistorikk
+    public partial class AlienSpeciesAssessment2023 // (3.5) Spredningshistorikk
     {
         public List<SpreadHistory> SpreadHistory { get; set; } = new List<SpreadHistory>();
 
@@ -489,7 +490,7 @@ namespace Public.Domain
         public string SpeciesEstablishmentCategory { get; set; }
 
     }
-    public partial class FA2023 // (4) Naturtyper
+    public partial class AlienSpeciesAssessment2023 // (4) Naturtyper
     {
         public List<ImpactedNatureType> ImpactedNatureTypes { get; set; } = new List<ImpactedNatureType>();
 
@@ -506,7 +507,7 @@ namespace Public.Domain
         public string UsesLivingSpeciesAsHabitatScientificName { get; set; }
     }
 
-    public partial class FA2023 // (5) Risikovurdering
+    public partial class AlienSpeciesAssessment2023 // (5) Risikovurdering
     {
         //public class RegionalRiskAssessment
         //{
@@ -1037,17 +1038,17 @@ namespace Public.Domain
     }
 
 
-    public partial class FA2023 // (8) Referanser
+    public partial class AlienSpeciesAssessment2023 // (8) Referanser
     {
         public List<SimpleReference> References { get; set; } = new List<SimpleReference>();
     }
-    public partial class FA2023 // History
+    public partial class AlienSpeciesAssessment2023 // History
     {
         public List<PreviousAssessment> PreviousAssessments { get; set; } = new List<PreviousAssessment>();
     }
 
 
-    public partial class FA2023 // FA2023 Internal classes
+    public partial class AlienSpeciesAssessment2023 // FA2023 Internal classes
     {
         /// <summary>
         /// Static copy of information from previous assesment - for historical purposes
@@ -1123,7 +1124,7 @@ namespace Public.Domain
         //public string LockedForEditTimeStamp { get; set; }
     }
 
-    public partial class FA2023
+    public partial class AlienSpeciesAssessment2023
     {
         public string ArtskartAdded { get; set; }  // ?
         public string ArtskartRemoved { get; set; } // ?
@@ -1281,7 +1282,7 @@ namespace Public.Domain
         public string KTVNin1 { get; set; }
         public string category { get; set; }
     }
-    public class FA4WithComments : FA2023
+    public class FA4WithComments : AlienSpeciesAssessment2023
     {
         public string NewestCommentDate { get; set; }
         public int CommentClosed { get; set; }

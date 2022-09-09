@@ -1,14 +1,15 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Collections.Generic;
-using System.Globalization;
+using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-//using Prod.Domain.Helpers;
+using Assessments.Mapping.AlienSpecies.Helpers;
 
 //using System.Text.Json.Serialization;
 
-namespace Prod.Domain
+// https://github.com/Artsdatabanken/Fremmedartsbase2023/blob/main/Prod.Domain/FA4Vurdering.cs
+
+namespace Assessments.Mapping.AlienSpecies.Models.Source
 {
     //public class VelgArtInfo
     //{
@@ -51,11 +52,11 @@ namespace Prod.Domain
     {
         public string Id { get; set; }
         //[JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-        //[JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
+        [JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
         public int TaxonID { get; set; }
         public string ScientificName { get; set; }
         //[JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-        //[JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
+        [JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
         public int ScientificNameId { get; set; }
 
         public string ScientificNameAuthor { get; set; }
@@ -72,8 +73,7 @@ namespace Prod.Domain
 
     }
 
-
-        public class TrackInfo
+    public class TrackInfo
     {
         public string VurderingsId2015 { get; set; }
         public int OrgVitenskapeligNavnId { get; set; }
@@ -105,7 +105,7 @@ namespace Prod.Domain
         }
 
         [JsonExtensionData]
-        public Dictionary<string, JsonElement>? ExtensionData { get; set; }
+        public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
         public List<TaxonHistory> TaxonomicHistory { get; set; } = new List<TaxonHistory>();
         public TrackInfo ImportInfo { get; set; } = new TrackInfo();
@@ -263,6 +263,8 @@ namespace Prod.Domain
         //public bool OutdoorEstablished { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
         //public bool NorwegianNatureObserved { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
         //public bool NorwegianNatureEstablished { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
+        
+        public string FurtherInfo { get; set; } = ""; // ny
 
         public class TimeAndPlace
         {
@@ -732,7 +734,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         //public string SpreadRiskDecisiveCriterias { get; set; }
         //public string EcologicalEffectDecisiveCriterias { get; set; }
         [JsonExtensionData()]
-        public Dictionary<string, JsonElement>? ExtensionData { get; set; }
+        public Dictionary<string, JsonElement> ExtensionData { get; set; }
 
         public int RiskLevel { get; set; } = -1;
         public string DecisiveCriteria { get; set; }
@@ -956,6 +958,9 @@ public partial class FA4 // (3.2) Artsegenskaper
         public long? AOO1 { get; set; } // forekomstarealet i år 1 
         [System.Text.Json.Serialization.JsonPropertyName("AOO2")]
         public long? AOO2 { get; set; } // forekomstarealet i år 2 
+        [System.Text.Json.Serialization.JsonPropertyName("AOOfirstOccurenceLessThan10Years")]
+        public string AOOfirstOccurenceLessThan10Years { get; set; } = "yes";
+        public string CommentOrDescription {get; set;} //fritekstfelt metode B2a
         // ************************************************************************************
 
 
@@ -972,8 +977,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         public Int64? AOO50yrHighInput { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("AOO50yrHigh")]
         public Int64? AOO50yrHigh { get; set; }
-        [System.Text.Json.Serialization.JsonPropertyName("AOOfirstOccurenceLessThan10Years")]
-        public string AOOfirstOccurenceLessThan10Years { get; set; } = "yes";
+       
         //[System.Text.Json.Serialization.JsonPropertyName("AOOestimationPeriod10yrPossible")]
         //public string AOOestimationPeriod10yrPossible { get; set; } = "yes";
         // -------- disse (forekomstareal om 50år) er erstattet:  
@@ -1100,7 +1104,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         public int Blow { get; set; } // nedre skår for B-kriteriet (inkludert usikkerhet) 
         public int Bhigh { get; set; } // øvre skår for B-kriteriet (inkludert usikkerhet) 
 
-        //[JsonConverter(typeof(JsonHelpers.CrazyStringJsonConverter))]
+        [JsonConverter(typeof(JsonHelpers.CrazyStringJsonConverter))]
         public string BCritMCount { get; set; } = "";
         public string BCritExact { get; set; } = "false";
         public string BCritP { get; set; }
@@ -1317,13 +1321,13 @@ public partial class FA4 // (3.2) Artsegenskaper
             public string ScientificName { get; set; }
 
             //[JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-            //[JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
+            [JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
             public int ScientificNameId { get; set; }
             public string ScientificNameAuthor { get; set; } = "";
             public string VernacularName { get; set; }
             public string TaxonRank { get; set; }
             //[JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
-            //[JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
+            [JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
             public int TaxonId { get; set; }
         }
 
@@ -1499,10 +1503,6 @@ public partial class FA4 // (3.2) Artsegenskaper
         //public string CriteriaDocumentationMigrationPathways { get; set; } // fjernet 20.02.2020 - erstattet av spreadIntroductionFurtherInfo
         public string CriteriaDocumentationInvationPotential { get; set; }
         public string CriteriaDocumentationEcoEffect { get; set; }
-
-
-
-
 
 
         //public string NotEvaluatedBackgroundInformation { get; set; } // Dette var et aggregat av beskrivelser i 'artens status'. Vi bruker de sepparate egenskapene

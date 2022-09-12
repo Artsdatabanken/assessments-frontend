@@ -42,8 +42,8 @@ Git workflows representerer tre forskjellige versjoner av kjørende kode.
 - Main/master bygges ved push(for å kunne adhoc rette akutte feil i produksjon) og om en PR merges inn i branchen. Denne kan publiseres ved å gå til #crocotta og bruk kommandoen "deploy assessments-fe" - den havner da hit: https://assessments-fe.artsdatabanken.no 
 
 ## Deployment og bygging til IIS/Windows
-- Test(beta): Jenkins mottar push hook fra Github, bygger og publiserer fra test-branch.
-- Main(prod): Bygger master/main ved å trykke "build now" i Jenkins. 
+- Test(beta): Bygger test ved å trykke "build now" for 'assessments-fe-test' i Jenkins.
+- Main(prod): Bygger master/main ved å trykke "build now" for 'assessments-fe-drift' i Jenkins. 
 
 ### Deplyment til iis som website eller applikasjon under en website:
 

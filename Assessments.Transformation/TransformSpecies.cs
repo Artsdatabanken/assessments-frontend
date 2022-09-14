@@ -17,7 +17,7 @@ using ShellProgressBar;
 
 namespace Assessments.Transformation
 {
-    public static class Species
+    public static class TransformSpecies
     {
         private static Rodliste2020Context _dbContext;
 
@@ -114,7 +114,7 @@ namespace Assessments.Transformation
                 }
             };
 
-            const string dataFolder = @"../../../../Assessments.Frontend.Web/Cache/";
+            var dataFolder = configuration.GetValue<string>("FilesFolder");
 
             if (!Directory.Exists(dataFolder))
                 Directory.CreateDirectory(dataFolder);

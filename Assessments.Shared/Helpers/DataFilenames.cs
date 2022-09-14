@@ -12,5 +12,9 @@
         public const string Species2006 = "species-2006.json";
 
         public const string SpeciesExpertCommitteeMembers = "species-experts.csv";
+
+        public const string AlienSpecies2023 = "alienspecies-2023.json";
+
+        public const string AlienSpecies2023Temp = "alienspecies-temp-2023.json";
     }
 }

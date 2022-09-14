@@ -8,20 +8,22 @@ namespace Assessments.Transformation
 {
     internal class Program
     {
-        /// <summary>
-        /// Henter ekspertvurderinger, transformerer til datamodeller og lagrer som json lokalt eller i azure blobstorage
-        /// </summary>
         private static async Task Main()
         {
-            var configuration = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
-
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets<Program>()
+                .Build();
+            
             Console.Clear();
             Console.CursorVisible = false;
 
             var menuItems = new List<string>
             {
-                "Rødlista 2021 - transformer til filer lokalt",
-                "Rødlista 2021 - transformer og last opp i Azure",
+                "Rødlista 2021 - til filer lokalt",
+                "Rødlista 2021 - last opp i Azure",
+                "Fremmedartslista 2023 - til filer lokalt",
+                "Fremmedartslista 2023 - last opp i Azure",
                 "Avslutt"
             };
 
@@ -31,12 +33,20 @@ namespace Assessments.Transformation
 
                 switch (item)
                 {
-                    case "Rødlista 2021 - transformer til filer lokalt":
-                        await Species.TransformDataModels(configuration);
+                    case "Rødlista 2021 - til filer lokalt":
+                        await TransformSpecies.TransformDataModels(configuration);
                         Environment.Exit(0);
                         break;
-                    case "Rødlista 2021 - transformer og last opp i Azure":
-                        await Species.TransformDataModels(configuration, upload: true);
+                    case "Rødlista 2021 - last opp i Azure":
+                        await TransformSpecies.TransformDataModels(configuration, upload: true);
+                        Environment.Exit(0);
+                        break;
+                    case "Fremmedartslista 2023 - til filer lokalt":
+                        await TransformAlienSpecies.TransformDataModels(configuration, upload: false);
+                        Environment.Exit(0);
+                        break;
+                    case "Fremmedartslista 2023 - last opp i Azure":
+                        await TransformAlienSpecies.TransformDataModels(configuration, upload: true);
                         Environment.Exit(0);
                         break;
                     case "Avslutt":

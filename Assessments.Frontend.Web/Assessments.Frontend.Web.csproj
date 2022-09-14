@@ -28,7 +28,7 @@
 		<PackageReference Include="Microsoft.OData.Edm" Version="7.12.2" />
 		<PackageReference Include="Microsoft.Spatial" Version="7.12.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="System.Text.Json" Version="6.0.5" />
+		<PackageReference Include="System.Text.Json" Version="6.0.6" />
 		<PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />

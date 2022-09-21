@@ -8,18 +8,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
-
-	<ItemGroup>
-	  <Compile Remove="Views\Redlist\Species\2021\Assessment\partials\criteria\**" />
-	  <Compile Remove="Views\Test\**" />
-	  <Content Remove="Views\Redlist\Species\2021\Assessment\partials\criteria\**" />
-	  <Content Remove="Views\Test\**" />
-	  <EmbeddedResource Remove="Views\Redlist\Species\2021\Assessment\partials\criteria\**" />
-	  <EmbeddedResource Remove="Views\Test\**" />
-	  <None Remove="Views\Redlist\Species\2021\Assessment\partials\criteria\**" />
-	  <None Remove="Views\Test\**" />
-	</ItemGroup>
-
+	
 	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.96.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
@@ -46,20 +35,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\Redlist\Species\2021\Assessment\partials\_ImpactFactors.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Views\Redlist\Species\2021\Assessment\partials\_ImpactFactors.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Folder Include="Cache\" />
-	  <Folder Include="Views\Alienspecieslist\" />
-	  <Folder Include="Views\Redlist\Species\2006\" />
-	  <Folder Include="Views\Redlist\Species\2010\" />
-	  <Folder Include="Views\Redlist\Species\2018\" />
-	  <Folder Include="Views\Redlist\Nature\2018\" />
 	</ItemGroup>
 	
 </Project>

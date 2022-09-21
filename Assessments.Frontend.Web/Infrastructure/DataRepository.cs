@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Assessments.Mapping.AlienSpecies.Models;
+using Assessments.Mapping.AlienSpecies.Models.Source;
 using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
 using Assessments.Shared.Helpers;
@@ -51,7 +53,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                 }
                 else // download file
                 {
-                    string connectionString = _configuration["ConnectionStrings:AzureBlobStorage"];
+                    var connectionString = _configuration["ConnectionStrings:AzureBlobStorage"];
                     if (string.IsNullOrWhiteSpace(connectionString)) throw new System.Exception("Missing required config for azure blog storage: ConnectionStrings:AzureBlobStorage");
                     var blob = new BlobContainerClient(connectionString, "assessments").GetBlobClient(name);
                     var response = await blob.DownloadContentAsync();
@@ -78,7 +80,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public Task<IQueryable<SpeciesAssessment2021>> GetSpeciesAssessments()
         {
-            var transformSpeciesAssessments = bool.Parse(_configuration.GetSection("Mapping").GetSection("Redlist").GetSection("TransformSpeciesAssessments").Value);
+            var transformSpeciesAssessments = bool.Parse(_configuration.GetSection("Mapping").GetSection("Species").GetSection("TransformAssessments").Value);
 
             async Task<IQueryable<SpeciesAssessment2021>> Get()
             {
@@ -87,6 +89,22 @@ namespace Assessments.Frontend.Web.Infrastructure
                     _mapper.Map<IEnumerable<SpeciesAssessment2021>>(await GetData<Rodliste2019>(DataFilenames.Species2021Temp)).AsQueryable() :
                     // modell lagret som "SpeciesAssessment2021"
                     _mapper.Map<IEnumerable<SpeciesAssessment2021>>(await GetData<SpeciesAssessment2021>(DataFilenames.Species2021)).AsQueryable();
+            }
+
+            return _appCache.GetOrAddAsync($"{nameof(GetSpeciesAssessments)}", Get);
+        }
+
+        public Task<IQueryable<AlienSpeciesAssessment2023>> GetAlienSpeciesAssessments()
+        {
+            var transformSpeciesAssessments = bool.Parse(_configuration.GetSection("Mapping").GetSection("AlienSpecies").GetSection("TransformAssessments").Value);
+
+            async Task<IQueryable<AlienSpeciesAssessment2023>> Get()
+            {
+                return transformSpeciesAssessments ?
+                    // transformerer modell fra "FA4"
+                    _mapper.Map<IEnumerable<AlienSpeciesAssessment2023>>(await GetData<FA4>(DataFilenames.AlienSpecies2023Temp)).AsQueryable() :
+                    // returnerer modell som allerede er transformert
+                    await GetData<AlienSpeciesAssessment2023>(DataFilenames.AlienSpecies2023);
             }
 
             return _appCache.GetOrAddAsync($"{nameof(GetSpeciesAssessments)}", Get);

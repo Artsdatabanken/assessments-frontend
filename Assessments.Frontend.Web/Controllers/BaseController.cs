@@ -24,5 +24,7 @@ namespace Assessments.Frontend.Web.Controllers
         private ILogger<T> _logger;
 
         protected ILogger<T> Logger => _logger ??= HttpContext.RequestServices.GetService<ILogger<T>>();
+
+        protected const int DefaultPageSize = 25;
     }
 }

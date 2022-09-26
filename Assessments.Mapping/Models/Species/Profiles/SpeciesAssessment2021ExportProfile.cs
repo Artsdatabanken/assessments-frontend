@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Assessments.Mapping.Models.Species;
 using Assessments.Shared.Helpers;
 using AutoMapper;
 using HtmlAgilityPack;
 
-namespace Assessments.Mapping
+namespace Assessments.Mapping.Models.Species.Profiles
 {
     public class SpeciesAssessment2021ExportProfile : Profile
     {
         public SpeciesAssessment2021ExportProfile()
         {
             CreateMap<SpeciesAssessment2021, SpeciesAssessment2021Export>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id ))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.AssessmentArea, opt => opt.MapFrom(src => src.AssessmentArea == "S" ? "Svalbard" : "Norge"))
                 .ForMember(dest => dest.ExpertCommittee, opt => opt.MapFrom(src => src.ExpertCommittee))
                 .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => src.SpeciesGroup))
@@ -94,7 +93,7 @@ namespace Assessments.Mapping
 
             return string.Join(";", mainHabitats.Select(GetProperDescription).ToList());
         }
-        
+
         private static string StripHtml(string input)
         {
             if (input == null)

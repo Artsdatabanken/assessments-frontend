@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml.Serialization;
-using Assessments.Mapping.Models.Source.Species;
 using Assessments.Mapping.Models.Species;
+using Assessments.Mapping.Models.Species.Source;
 
 namespace Assessments.Mapping.Helpers
 {

@@ -5,7 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using Assessments.Frontend.Web.Infrastructure.Services;
-using Assessments.Mapping.AlienSpecies.Models;
+using Assessments.Mapping.Models.AlienSpecies;
 using Assessments.Mapping.Models.Species;
 
 namespace Assessments.Frontend.Web.Infrastructure

@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Assessments.Mapping.AlienSpecies.Models;
-using Assessments.Mapping.AlienSpecies.Models.Source;
-using Assessments.Mapping.Models.Source.Species;
+using Assessments.Mapping.Models.AlienSpecies;
+using Assessments.Mapping.Models.AlienSpecies.Source;
 using Assessments.Mapping.Models.Species;
+using Assessments.Mapping.Models.Species.Source;
 using Assessments.Shared.Helpers;
 using AutoMapper;
 using Azure.Storage.Blobs;
@@ -87,8 +87,8 @@ namespace Assessments.Frontend.Web.Infrastructure
                 return transformSpeciesAssessments ?
                     // transformerer modell fra "Rodliste2019"
                     _mapper.Map<IEnumerable<SpeciesAssessment2021>>(await GetData<Rodliste2019>(DataFilenames.Species2021Temp)).AsQueryable() :
-                    // modell lagret som "SpeciesAssessment2021"
-                    _mapper.Map<IEnumerable<SpeciesAssessment2021>>(await GetData<SpeciesAssessment2021>(DataFilenames.Species2021)).AsQueryable();
+                    // returnerer modell som allerede er transformert
+                    await GetData<SpeciesAssessment2021>(DataFilenames.Species2021);
             }
 
             return _appCache.GetOrAddAsync($"{nameof(GetSpeciesAssessments)}", Get);

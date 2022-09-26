@@ -1,10 +1,9 @@
-﻿using Assessments.Mapping.Helpers;
-using System.Linq;
-using Assessments.Mapping.Models.Source.Species;
-using Assessments.Mapping.Models.Species;
+﻿using System.Linq;
+using Assessments.Mapping.Helpers;
+using Assessments.Mapping.Models.Species.Source;
 using AutoMapper;
 
-namespace Assessments.Mapping
+namespace Assessments.Mapping.Models.Species.Profiles
 {
     public class SpeciesAssessment2021Profile : Profile
     {

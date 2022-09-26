@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assessments.Mapping.Models.Source.Species;
+using Assessments.Mapping.Models.Species.Source;
 
 namespace Assessments.Mapping.Helpers
 {

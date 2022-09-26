@@ -1,4 +1,4 @@
-﻿namespace Assessments.Mapping.Models.Source.Species
+﻿namespace Assessments.Mapping.Models.Species.Source
 {
     public class ArtskartModel
     {

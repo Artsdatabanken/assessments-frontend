@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Assessments.Mapping.AlienSpecies;
-using Assessments.Mapping.AlienSpecies.Models;
+using Assessments.Mapping.Models.AlienSpecies;
+using Assessments.Mapping.Models.AlienSpecies.Profiles;
+using Assessments.Mapping.Models.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using Assessments.Transformation.Database.Fab4;
 using Assessments.Transformation.Database.Fab4.Models;
@@ -35,13 +36,13 @@ namespace Assessments.Transformation
             Progress.ProgressBar.Tick(0, $"Transformerer {totalCount:N0} vurderinger");
             Progress.ProgressBar.MaxTicks = totalCount;
 
-            var sourceItems = new List<Mapping.AlienSpecies.Models.Source.FA4>();
+            var sourceItems = new List<FA4>();
             var targetItems = new List<AlienSpeciesAssessment2023>();
             var mapper = new MapperConfiguration(cfg => cfg.AddProfile<AlienSpeciesAssessment2023Profile>()).CreateMapper();
 
             foreach (var assessment in databaseAssessments)
             {
-                var fa4 = JsonSerializer.Deserialize<Mapping.AlienSpecies.Models.Source.FA4>(assessment.Doc);
+                var fa4 = JsonSerializer.Deserialize<FA4>(assessment.Doc);
 
                 if (fa4 == null)
                     continue;

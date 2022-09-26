@@ -1,4 +1,4 @@
-﻿using Assessments.Mapping.AlienSpecies.Models;
+﻿using Assessments.Mapping.Models.AlienSpecies;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models

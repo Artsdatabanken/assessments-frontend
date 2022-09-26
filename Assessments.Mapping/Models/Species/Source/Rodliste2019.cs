@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Assessments.Mapping.Models.Species;
 
-namespace Assessments.Mapping.Models.Source.Species
+namespace Assessments.Mapping.Models.Species.Source
 {
     /// <summary>
     /// https://github.com/Artsdatabanken/Rodliste2019/blob/master/Prod.Domain/Rodliste2019.cs
@@ -294,7 +293,7 @@ namespace Assessments.Mapping.Models.Source.Species
 
         public Taxonomy TaxonomyInfo { get; set; }
         public string Endringslogg { get; set; }
-        
+
         // enhansed props - not really there
         public DateTime RevisionDate { get; set; }
         public int Revision { get; set; }
@@ -336,7 +335,7 @@ namespace Assessments.Mapping.Models.Source.Species
 
             public string Quantile { get; set; } = "";
         }
-        
+
         public class MinMaxProbableIntervall
         {
             public string Max { get; set; } = "";

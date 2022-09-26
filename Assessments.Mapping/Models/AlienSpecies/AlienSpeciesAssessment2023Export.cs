@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Assessments.Mapping.AlienSpecies.Models
+namespace Assessments.Mapping.Models.AlienSpecies
 {
     public class AlienSpeciesAssessment2023Export
     {

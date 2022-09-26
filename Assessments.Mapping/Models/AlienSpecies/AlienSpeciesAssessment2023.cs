@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 // https://github.com/Artsdatabanken/Fremmedartsbase2023/blob/main/Public.Domain/FA2023.cs
 
-namespace Assessments.Mapping.AlienSpecies.Models
+namespace Assessments.Mapping.Models.AlienSpecies
 {
     public class CTaxon
     {

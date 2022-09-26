@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 // https://github.com/Artsdatabanken/Fremmedartsbase2023/blob/main/Prod.Domain/Helpers/JsonHelpers.cs
 
-namespace Assessments.Mapping.AlienSpecies.Helpers
+namespace Assessments.Mapping.Models.AlienSpecies.Helpers
 {
     public class JsonHelpers
     {
@@ -51,7 +51,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     }
                     return int32.ToString();
                 }
-                
+
                 return reader.GetString();
             }
 
@@ -93,7 +93,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 }
 
                 var value = reader.GetString();
-                return value != null && (value.ToLowerInvariant() == "true");
+                return value != null && value.ToLowerInvariant() == "true";
             }
 
             public override void Write(Utf8JsonWriter writer, bool value, JsonSerializerOptions options)
@@ -125,7 +125,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 }
 
                 var value = reader.GetString();
-                return value != null && (value.ToLowerInvariant() == "true");
+                return value != null && value.ToLowerInvariant() == "true";
             }
 
             public override void Write(Utf8JsonWriter writer, bool? value, JsonSerializerOptions options)
@@ -143,7 +143,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         }
 
 
-        public class DoubleJsonConverter : System.Text.Json.Serialization.JsonConverter<double?>
+        public class DoubleJsonConverter : JsonConverter<double?>
         {
             public override bool CanConvert(Type objectType)
             {

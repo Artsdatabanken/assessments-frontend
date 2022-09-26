@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Assessments.Mapping.AlienSpecies.Helpers;
+using Assessments.Mapping.Models.AlienSpecies.Helpers;
 
 //using System.Text.Json.Serialization;
 
 // https://github.com/Artsdatabanken/Fremmedartsbase2023/blob/main/Prod.Domain/FA4Vurdering.cs
 
-namespace Assessments.Mapping.AlienSpecies.Models.Source
+namespace Assessments.Mapping.Models.AlienSpecies.Source
 {
     //public class VelgArtInfo
     //{

@@ -1,7 +1,6 @@
-﻿using Assessments.Mapping.AlienSpecies.Models;
-using AutoMapper;
+﻿using AutoMapper;
 
-namespace Assessments.Mapping.AlienSpecies
+namespace Assessments.Mapping.Models.AlienSpecies.Profiles
 {
     public class AlienSpeciesAssessment2023ExportProfile : Profile
     {

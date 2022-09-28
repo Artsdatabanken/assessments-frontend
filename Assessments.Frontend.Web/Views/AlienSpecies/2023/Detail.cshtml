@@ -1,7 +1,8 @@
-﻿@model AlienSpeciesAssessment2023
+﻿@model AlienSpeciesDetailViewModel
 
 @{
-    ViewBag.Title = Model.EvaluatedScientificName + " - Fremmedartslista 2023";
+    var assessment = Model.Assessment;
+    ViewBag.Title = assessment.EvaluatedScientificName + " - Fremmedartslista 2023";
 }
 
-<h3>@Model.EvaluatedScientificName</h3>
+<h3>@assessment.EvaluatedScientificName</h3>

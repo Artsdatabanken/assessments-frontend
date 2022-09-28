@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Assessments.Frontend.Web.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi=true)]
     public abstract class BaseController<T> : Controller where T : BaseController<T>
     {
         private IWebHostEnvironment _environment;

@@ -51,7 +51,7 @@ namespace Assessments.Mapping.Models.AlienSpecies.Profiles
             CreateMap<FA4.ObservedAndEstablished, AlienSpeciesAssessment2023.ObservedAndEstablished>();
             CreateMap<FA4.ObservedAndEstablishedInCountry, AlienSpeciesAssessment2023.ObservedAndEstablishedInCountry>();
 
-            CreateMap<FA4, AlienSpeciesAssessment2023>().ForMember(dest => dest.EvaluatedScientificName, opt => opt.MapFrom(src => src.EvaluatedScientificName.ToUpper()));
+            CreateMap<FA4, AlienSpeciesAssessment2023>();
         }
     }
 }

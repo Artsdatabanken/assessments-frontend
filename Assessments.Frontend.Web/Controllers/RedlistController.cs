@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Http.Extensions;
 namespace Assessments.Frontend.Web.Controllers
 {
     [Route("rodlisteforarter")]
-    [ApiExplorerSettings(IgnoreApi = true)]
     public class RedlistController : BaseController<RedlistController>
     {
         public RedlistController(ArtskartApiService artskartApiService)

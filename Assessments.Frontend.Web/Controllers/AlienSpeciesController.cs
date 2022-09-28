@@ -12,13 +12,16 @@ namespace Assessments.Frontend.Web.Controllers
 {
     [NotReadyForProduction]
     [Route("fremmedartslista/2023")]
-    [ApiExplorerSettings(IgnoreApi = true)]
     public class AlienSpeciesController : BaseController<AlienSpeciesController>
     {
-        public async Task<IActionResult> Index(int? page, bool export)
+        public async Task<IActionResult> Index(AlienSpeciesListViewModel viewModel, int? page, bool export)
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
-            
+
+            if (!string.IsNullOrEmpty(viewModel.Parameters.Name))
+                query = query.Where(x => x.EvaluatedScientificName.ToLowerInvariant()
+                    .Contains(viewModel.Parameters.Name.ToLowerInvariant()));
+
             if (export)
             {
                 var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());
@@ -28,10 +31,7 @@ namespace Assessments.Frontend.Web.Controllers
                 };
             }
 
-            var viewModel = new AlienSpeciesListViewModel
-            {
-                Results = query.ToPagedList(page ?? 1, DefaultPageSize)
-            };
+            viewModel.Results = query.ToPagedList(page ?? 1, DefaultPageSize);
 
             return View("2023/Index", viewModel);
         }
@@ -46,7 +46,9 @@ namespace Assessments.Frontend.Web.Controllers
             if (assessment == null)
                 return NotFound();
 
-            return View("2023/Detail", assessment);
+            var viewModel = new AlienSpeciesDetailViewModel { Assessment = assessment};
+
+            return View("2023/Detail", viewModel);
         }
     }
 }

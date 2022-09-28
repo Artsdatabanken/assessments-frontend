@@ -1,6 +1,4 @@
 ﻿@model AlienSpeciesListViewModel
-@using X.PagedList.Web.Common
-@using X.PagedList.Mvc.Core
 
 @{
     ViewData["Title"] = "Fremmedartslista 2023";
@@ -9,11 +7,16 @@
 <h3>@ViewData["Title"]</h3>
 
 <div is-visible="@Model.Results.Any()">
-    <form>
 
-        <button class="hideonmobile tertiary" type="submit" name="Export" value="true" formtarget="_blank">
+    <form>
+        <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i @ViewData["Title"]" />
+        
+        <button type="submit">Søk</button>
+
+        <button type="submit" name="Export" value="true" formtarget="_blank">
             <span class="material-icons">file_download</span> Eksporter
         </button>
+
     </form>
 
     <ul>
@@ -35,12 +38,12 @@
 
     @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
     {
-        Page = page
+    Page = page
     }), new PagedListRenderOptions
     {
-        PageClasses = new[] { "page-link" },
-        UlElementClasses = new[] { "pagination" },
-        LiElementClasses = new[] { "page-item" }
+    PageClasses = new[] { "page-link" },
+    UlElementClasses = new[] { "pagination" },
+    LiElementClasses = new[] { "page-item" }
     })
 </div>
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.Models.AlienSpecies;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -18,18 +19,10 @@ namespace Assessments.Frontend.Web.Controllers
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
 
-            if (!string.IsNullOrEmpty(viewModel.Parameters.Name))
-                query = query.Where(x => x.EvaluatedScientificName.ToLowerInvariant()
-                    .Contains(viewModel.Parameters.Name.ToLowerInvariant()));
+            query = QueryHelpers.ApplyParameters(viewModel.Parameters, query);
 
             if (export)
-            {
-                var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());
-                return new FileStreamResult(ExportHelper.GenerateAlienSpeciesAssessment2023Export(assessmentsForExport, Request.GetDisplayUrl()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
-                {
-                    FileDownloadName = "fremmedartslista-2023.xlsx"
-                };
-            }
+                return GetExport(query);
 
             viewModel.Results = query.ToPagedList(page ?? 1, DefaultPageSize);
 
@@ -49,6 +42,15 @@ namespace Assessments.Frontend.Web.Controllers
             var viewModel = new AlienSpeciesDetailViewModel { Assessment = assessment};
 
             return View("2023/Detail", viewModel);
+        }
+        private IActionResult GetExport(IEnumerable<AlienSpeciesAssessment2023> query)
+        {
+            var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());
+
+            return new FileStreamResult(ExportHelper.GenerateAlienSpeciesAssessment2023Export(assessmentsForExport, Request.GetDisplayUrl()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            {
+                FileDownloadName = "fremmedartslista-2023.xlsx"
+            };
         }
     }
 }

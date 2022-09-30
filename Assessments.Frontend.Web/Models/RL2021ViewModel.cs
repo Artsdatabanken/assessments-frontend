@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Assessments.Mapping.Models.Species;
+using Assessments.Mapping.RedlistSpecies;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models

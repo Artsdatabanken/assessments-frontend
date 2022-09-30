@@ -5,14 +5,12 @@ using System.Threading.Tasks;
 using System.Web;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Models;
-using Assessments.Mapping.Models.Species;
+using Assessments.Mapping.RedlistSpecies;
 using Newtonsoft.Json.Linq;
 using X.PagedList;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Assessments.Shared.Helpers;
 using Microsoft.AspNetCore.Http.Extensions;
-
-// ReSharper disable InconsistentNaming
 
 namespace Assessments.Frontend.Web.Controllers
 {

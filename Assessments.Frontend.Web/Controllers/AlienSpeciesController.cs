@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
-using Assessments.Mapping.Models.AlienSpecies;
+using Assessments.Mapping.AlienSpecies;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using X.PagedList;

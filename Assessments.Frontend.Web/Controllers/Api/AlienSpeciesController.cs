@@ -1,11 +1,11 @@
 ﻿using Assessments.Frontend.Web.Infrastructure.Api;
-using Assessments.Mapping.Models.AlienSpecies;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
+using Assessments.Mapping.AlienSpecies;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 
 namespace Assessments.Frontend.Web.Controllers.Api

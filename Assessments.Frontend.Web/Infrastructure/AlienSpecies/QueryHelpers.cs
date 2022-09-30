@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Assessments.Frontend.Web.Models;
-using Assessments.Mapping.Models.AlienSpecies;
+using Assessments.Mapping.AlienSpecies;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {

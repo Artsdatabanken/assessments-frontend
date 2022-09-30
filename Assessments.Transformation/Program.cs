@@ -34,11 +34,11 @@ namespace Assessments.Transformation
                 switch (item)
                 {
                     case "Rødlista 2021 - til filer lokalt":
-                        await TransformSpecies.TransformDataModels(configuration);
+                        await TransformRedlistSpecies.TransformDataModels(configuration);
                         Environment.Exit(0);
                         break;
                     case "Rødlista 2021 - last opp i Azure":
-                        await TransformSpecies.TransformDataModels(configuration, upload: true);
+                        await TransformRedlistSpecies.TransformDataModels(configuration, upload: true);
                         Environment.Exit(0);
                         break;
                     case "Fremmedartslista 2023 - til filer lokalt":

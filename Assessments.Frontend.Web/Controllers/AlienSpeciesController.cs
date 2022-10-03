@@ -12,9 +12,12 @@ using X.PagedList;
 namespace Assessments.Frontend.Web.Controllers
 {
     [NotReadyForProduction]
-    [Route("fremmedartslista/2023")]
+    [Route("fremmedartslista")]
     public class AlienSpeciesController : BaseController<AlienSpeciesController>
     {
+        public IActionResult Home() => View("AlienSpeciesHome");
+
+        [Route("2023")]
         public async Task<IActionResult> Index(AlienSpeciesListViewModel viewModel, int? page, bool export)
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
@@ -26,10 +29,10 @@ namespace Assessments.Frontend.Web.Controllers
 
             viewModel.Results = query.ToPagedList(page ?? 1, DefaultPageSize);
 
-            return View("2023/Index", viewModel);
+            return View("2023/AlienSpeciesIndex", viewModel);
         }
 
-        [Route("{id:required:int}")]
+        [Route("2023/{id:required:int}")]
         public async Task<IActionResult> Detail(int id)
         {
             var data = await DataRepository.GetAlienSpeciesAssessments();
@@ -41,8 +44,9 @@ namespace Assessments.Frontend.Web.Controllers
 
             var viewModel = new AlienSpeciesDetailViewModel { Assessment = assessment};
 
-            return View("2023/Detail", viewModel);
+            return View("2023/AlienSpeciesDetail", viewModel);
         }
+        
         private IActionResult GetExport(IEnumerable<AlienSpeciesAssessment2023> query)
         {
             var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());

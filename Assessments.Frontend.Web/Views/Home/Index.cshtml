@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.Extensions.Hosting
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
+
+@{
     ViewBag.Title = "Lister - Rødlista for natur og arter, Fremmedartslista";
 }
 
@@ -37,8 +40,8 @@
                 <p class="page_section">
 
                     <ul class="front_page_links">
+                        
                         <li>
-
                             <a asp-controller="Redlist" asp-action="RodlisteForArter" class="redlistlink">
                                 <img src="https://design.artsdatabanken.no/list-icons/RL-ART.png" />
                                 <span>Rødlista for arter</span>
@@ -47,7 +50,6 @@
                         </li>
 
                         <li>
-
                             <a href="https://artsdatabanken.no/rodlistefornaturtyper" class="redlistlink">
                                 <img src="https://design.artsdatabanken.no/list-icons/RL-NA.png" />
                                 <span>Rødlista for naturtyper</span>
@@ -56,12 +58,22 @@
                         </li>
 
                         <li>
-
-                            <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
-                                <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
-                                <span>Fremmedartslista</span>
-                                <span class="material-icons bigarrow">keyboard_arrow_right</span>
-                            </a>
+                            @if (!Environment.IsProduction())
+                            {
+                                <a asp-controller="AlienSpecies" asp-action="Home" class="fremmedartlink">
+                                    <img src="https://design.artsdatabanken.no/list-icons/RL-ART.png" />
+                                    <span>Fremmedartslista</span>
+                                    <span class="material-icons bigarrow">keyboard_arrow_right</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
+                                    <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
+                                    <span>Fremmedartslista</span>
+                                    <span class="material-icons bigarrow">keyboard_arrow_right</span>
+                                </a>
+                            }
                         </li>
 
                     </ul>
@@ -74,12 +86,3 @@
 
     </div>
 </div>
-</div>
-
-
-
-
-
-
-
-

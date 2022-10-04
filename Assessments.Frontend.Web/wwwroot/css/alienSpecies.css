@@ -1,0 +1,28 @@
+h1, h2, h3 {
+    color: #0f0f0f;
+}
+
+.page-header h1 {
+    line-height: 1.3;
+    font-size: 33px;
+}
+
+.svalbard-heading {
+    color: #185c7d;
+}
+
+.sidebarmenu{
+    padding-top:0;
+}
+
+.main-content {
+    /*padding-top: 7px;*/
+}
+
+.header {
+    background: #5e3063;
+}
+
+.header button.menuitems {
+    background: #3d1f41;
+}

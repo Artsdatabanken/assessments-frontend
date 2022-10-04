@@ -1,0 +1,84 @@
+﻿@using Microsoft.Extensions.Hosting
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment _environment
+
+@{
+    var showCookieWarning = _environment.IsProduction();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Artsdatabanken</title>
+    <link rel="stylesheet" href="https://design.artsdatabanken.no/style/style-reset.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://design.artsdatabanken.no/style/layout.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://design.artsdatabanken.no/style/header-footer.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/graphs.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/listview.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/assessment.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/categorybar.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/filter.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/search.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/toggleSwitch.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/tabs.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/alienSpecies.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/bnw.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://design.artsdatabanken.no/script/header.js"></script>
+    <script src="https://design.artsdatabanken.no/script/footer.js"></script>
+    <meta name="description" content="Norsk fremmedartsliste for 2023 viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge. Fremmedartslista er utarbeidet av Artsdatabanken i samarbeid med fageksperter. " />
+    <script src="~/js/cookies.js" asp-append-version="true" is-visible="@showCookieWarning"></script>
+
+</head>
+
+<body>
+    <div id="bodywrap">
+        <partial name="/Views/Shared/_PageTopBar.cshtml" />
+        <partial name="/Views/AlienSpecies/Shared/_AlienSpeciesHeader.cshtml" />
+        <div class="main">
+            <div class="main-content width-adjuster">
+
+                @RenderBody()
+                <script src="~/js/site.js" asp-append-version="true"></script>
+                <script src="~/js/filter.js" asp-append-version="true"></script>
+                <script src="~/js/search.js" asp-append-version="true"></script>
+                <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
+                <script src="~/js/toggleStatView.js" asp-append-version="true"></script>
+                <script src="~/js/assessmentTabs.js" asp-append-version="true"></script>
+                <script src="~/js/themes.js" asp-append-version="true"></script>
+                @await RenderSectionAsync("Scripts", required: false)
+            </div>
+
+            <!-- HEY COOKIE. TODO: Improve content & move to partial. -->
+            <div class="heyCookie" id="heyCookie" is-visible="@showCookieWarning">
+                Denne nettsiden benytter informasjonskapsler.
+
+                <button onclick="learnAboutCookies()">Informasjon</button>
+                <button onclick="acceptCookies(false)">Avslå</button>
+                <button onclick="acceptCookies(true)" class="primary">Godta</button>
+
+                <div id="moreCookieInfo" style="display:none;">
+                    <p>
+                        Artsdatabanken brukar informasjonskapslar til å samle statistikk til å forbetre
+                        Artsdatabanken sine nettsider. Artsdatabanken nyttar ikkje informasjonskapslar med det som formål å kartleggje
+                        bruksmønstera til enkeltbrukarar eller annan informasjon som vil kunne krenkje personvernet.
+                    </p>
+                    <p>
+                        Artsdatabanken får brukarstatistikk frå Google Analytics.
+                        Det medfører at bruken din av nettsidene våre, inklusiv IP-adressa di,
+                        kan bli overført til Google, men vi nyttar Google Analytics sin anonymiseringsfunksjon som sørgjer
+                        for at dei siste siffera i brukaren si IP-adresse blir maskert ved innsamling. IP-maskeringa skjer så snart dataa er mottekne av Google Analytics sitt innsamlingsverk,
+                        før det blir lagra og behandla i tråd med Google sine personvernretningslinjer.
+                    </p>
+                    <a href="https://artsdatabanken.no/informasjonskapsler">Les mer om informasjonskapslar</a>
+                </div>
+            </div>
+
+        </div>
+        <partial name="/Views/Shared/_PageFooter.cshtml" />
+    </div>
+</body>
+</html>

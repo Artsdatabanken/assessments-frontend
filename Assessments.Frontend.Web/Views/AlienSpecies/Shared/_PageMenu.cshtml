@@ -11,15 +11,15 @@
     }
 }
 
-<div class="sidebarmenu" id="sidebarmenu_container">
-    <button class="button tertiary" onclick="expandParent(this, 'expand')">Om @ViewData["Title"]</button>
+<div class="sidebarmenu alien-species" id="sidebarmenu_container">
+    <button class="button tertiary alien-species" onclick="expandParent(this, 'expand')">Om @ViewData["Title"]</button>
     
     <ul>
 
         @*lenker fra cms/drupal via api*@
         <li>
             <a class="menuheaderlink" asp-controller="AlienSpecies" asp-action="Index">
-                <h3>
+                <h3 class="alien-species">
                     <span>@ViewData["Title"] 2023</span>
                     <span class="material-icons pad-top">keyboard_arrow_right</span>
                 </h3>

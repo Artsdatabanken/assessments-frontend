@@ -1,7 +1,21 @@
-﻿<div class="title_header">
-    <a asp-controller="AlienSpecies" asp-action="Index" class="title_header" style="display:inline;">
-        <span class="full_title">@ViewData["Title"] 2023</span>
-        <span class="short_title">@ViewData["Title"] 2023</span>
-    </a>
+﻿@using Microsoft.Extensions.Hosting
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
+
+<div class="title_header">
+    @if (!Environment.IsProduction())
+    {
+        <a asp-controller="AlienSpecies" asp-action="Index" class="title_header alien-species" style="display:inline;">
+            <span class="full_title">@ViewData["Title"] 2023</span>
+            <span class="short_title">@ViewData["Title"]</span>
+        </a>
+    } else
+    {
+        <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
+            <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
+            <span>Fremmedartslista</span>
+            <span class="material-icons bigarrow">keyboard_arrow_right</span>
+        </a>
+    }
+
     <partial name="/Views/AlienSpecies/Shared/_PageMenu.cshtml" />
 </div>

@@ -1,15 +1,15 @@
 ﻿@model AlienSpeciesListViewModel
 
 @{
-    ViewData["Title"] = "Fremmedartslista 2023";
+    ViewData["Title"] = "Fremmedartslista";
 }
 
-<h3>@ViewData["Title"]</h3>
+<h3>@ViewData["Title"] 2023</h3>
 
 <div is-visible="@Model.Results.Any()">
 
     <form>
-        <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i @ViewData["Title"]" />
+        <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i @ViewData["Title"]" 2023/>
         
         <button type="submit">Søk</button>
 

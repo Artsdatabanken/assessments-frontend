@@ -338,13 +338,15 @@
 .darktheme .breadcrumbs li,
 .darktheme .button.tertiary,
 .darktheme .main button.tertiary,
-.darktheme .sidebarmenu li h3 {
+.darktheme .sidebarmenu li h3,
+.darktheme .sidebarmenu .redlist h3 {
     color: #f97474;
     border-color: #f97474;
 }
 
 .darktheme .sidebarmenu .alien-species h3 {
     color: #b372bb;
+    border-color: #b372bb;
 }
 
 /* Blackish color */

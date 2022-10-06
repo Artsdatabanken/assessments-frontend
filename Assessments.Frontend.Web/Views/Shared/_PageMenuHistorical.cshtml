@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.Extensions.Hosting
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
+
+@{
     ViewData["Fremmedartslista"] = "Fremmedartslista";
     ViewData["Rødlista"] = "Rødlista";
 }
@@ -45,11 +48,11 @@
     </ul>
     <ul>
         <li>
-            <a class="menuheaderlink redlist" asp-controller="Redlist" asp-action="RodlisteForArter">
+            <div class="menuheaderlink redlist">
                 <h3>
                     <span>@ViewData["Rødlista"] for naturtyper</span>
                 </h3>
-            </a>
+            </div>
         </li>
 
         <li>
@@ -62,19 +65,34 @@
 
     <ul>
         <li>
-            <a class="menuheaderlink alien-species" asp-controller="AlienSpecies" asp-action="Home">
-                <h3>
-                    <span>Fremmedarter</span>
-                </h3>
-            </a>
+            @if (Environment.IsProduction())
+            {
+                <div class="menuheaderlink alien-species">
+                    <h3>
+                        <span>Fremmedarter</span>
+                    </h3>
+                </div>
+            }
+            else
+            {
+                <a class="menuheaderlink alien-species" asp-controller="AlienSpecies" asp-action="Home">
+                    <h3>
+                        <span>Fremmedarter</span>
+                        <span class="material-icons pad-top">keyboard_arrow_right</span>
+                    </h3>
+                </a>
+            }
         </li>
 
-        <li>
-            <a asp-controller="AlienSpecies" asp-action="Index">
-                <span>@ViewData["Fremmedartslista"] 2023</span>
-                <span class="material-icons">keyboard_arrow_right</span>
-            </a>
-        </li>
+        @if (!Environment.IsProduction())
+        {
+            <li>
+                <a asp-controller="AlienSpecies" asp-action="Index">
+                    <span>@ViewData["Fremmedartslista"] 2023</span>
+                    <span class="material-icons">keyboard_arrow_right</span>
+                </a>
+            </li>
+        }
 
         <li>
             <a href="https://artsdatabanken.no/fremmedartslista2018">

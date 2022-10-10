@@ -2,48 +2,59 @@
 
 @{
     ViewData["Title"] = "Fremmedartslista";
+    ViewData["PageMenuHeaderText"] = Constants.AlienSpecies2023PageMenuHeaderText;
+    ViewData["PageMenuContentId"] = Constants.AlienSpecies2023PageMenuContentId;
+    ViewData["PageMenuExpandButtonText"] = Constants.AlienSpecies2023PageManuExpandButtonText;
+
 }
 
 <h3>@ViewData["Title"] 2023</h3>
 
-<div is-visible="@Model.Results.Any()">
+<div class="pagecontainer">
+    <partial name="/Views/Shared/_PageMenu.cshtml" />
 
-    <form>
-        <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i @ViewData["Title"]" 2023/>
+    <div class="content-placer bigmid">
+        <div>
+            <div is-visible="@Model.Results.Any()">
+
+                <form>
+                    <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i @ViewData["Title"]" 2023/>
         
-        <button type="submit">Søk</button>
+                    <button type="submit">Søk</button>
 
-        <button type="submit" name="Export" value="true" formtarget="_blank">
-            <span class="material-icons">file_download</span> Eksporter
-        </button>
+                    <button type="submit" name="Export" value="true" formtarget="_blank">
+                        <span class="material-icons">file_download</span> Eksporter
+                    </button>
+                </form>
 
-    </form>
+                <ul>
+                    @foreach (var item in Model.Results)
+                    {
+                        <li>
+                            <a asp-action="Detail" asp-route-id="@item.Id">
+                                @item.Id  @item.EvaluatedScientificName
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
 
-    <ul>
-        @foreach (var item in Model.Results)
-        {
-            <li>
-                <a asp-action="Detail" asp-route-id="@item.Id">
-                    @item.Id  @item.EvaluatedScientificName
-                </a>
-            </li>
-        }
-    </ul>
+            <div is-visible="@Model.Results.PageCount > 1">
+                <p class="page_count">
+                    Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
+                </p>
+
+                @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
+                {
+                Page = page
+                }), new PagedListRenderOptions
+                {
+                PageClasses = new[] { "page-link" },
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" }
+                })
+            </div>
+        </div>
+    </div>
+
 </div>
-
-<div is-visible="@Model.Results.PageCount > 1">
-    <p class="page_count">
-        Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
-    </p>
-
-    @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
-    {
-    Page = page
-    }), new PagedListRenderOptions
-    {
-    PageClasses = new[] { "page-link" },
-    UlElementClasses = new[] { "pagination" },
-    LiElementClasses = new[] { "page-item" }
-    })
-</div>
-

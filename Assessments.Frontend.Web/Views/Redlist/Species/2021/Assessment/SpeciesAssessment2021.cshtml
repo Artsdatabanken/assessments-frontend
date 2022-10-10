@@ -1,6 +1,11 @@
 ﻿@model SpeciesAssessment2021
 @{
     ViewBag.Title = Model.ScientificName + " - Rødlista 2021";
+
+    ViewData["PageMenuHeaderText"] = Constants.RedlistSpecies2021PageMenuHeaderText;
+    ViewData["PageMenuContentId"] = Constants.RedlistSpecies2021PageMenuContentId;
+    ViewData["PageMenuExpandButtonText"] = Constants.RedlistSpecies2021PageManuExpandButtonText;
+
     var naturtypehovedenhet = Model.MainHabitat;
     string geografi = Model.AssessmentArea;
 
@@ -21,7 +26,7 @@
 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Breadcrumb.cshtml" />
 
 <div class="pagecontainer">
-    <partial name="/Views/Redlist/Species/Shared/_PageMenu.cshtml" />
+    <partial name="/Views/Shared/_PageMenu.cshtml" />
 
     <div class="content-placer bigmid">
         <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Archived.cshtml" />

@@ -503,6 +503,19 @@ namespace Assessments.Frontend.Web.Infrastructure
             { "Varietet", "Variety" },
             { "Form", "Form" }
         };
+
+        public const int RedlistSpecies2021PageMenuContentId = 314303;
+
+        public const string RedlistSpecies2021PageMenuHeaderText = "Rødlista for arter 2021";
+
+        public const string RedlistSpecies2021PageManuExpandButtonText = "Om Rødlista";
+
+        public const int AlienSpecies2023PageMenuContentId = 314303; // TODO: This needs content id for alien species 2023. Using redlist species 2021 temporarily.
+
+        public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023";
+
+        public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
+
     }
 
     public class CategoryComparer : IComparer<string>

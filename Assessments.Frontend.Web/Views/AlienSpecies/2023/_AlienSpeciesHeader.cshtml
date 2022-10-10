@@ -1,6 +1,12 @@
 ﻿@using Microsoft.Extensions.Hosting
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
 
+@{
+    ViewData["PageMenuHeaderText"] = Constants.AlienSpecies2023PageMenuHeaderText;
+    ViewData["PageMenuContentId"] = Constants.AlienSpecies2023PageMenuContentId;
+    ViewData["PageMenuExpandButtonText"] = Constants.AlienSpecies2023PageManuExpandButtonText;
+}
+
 <div class="title_header">
     @if (!Environment.IsProduction())
     {
@@ -17,5 +23,5 @@
         </a>
     }
 
-    <partial name="/Views/AlienSpecies/Shared/_PageMenu.cshtml" />
+    <partial name="/Views/Shared/_PageMenu.cshtml" />
 </div>

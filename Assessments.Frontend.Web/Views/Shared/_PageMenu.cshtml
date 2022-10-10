@@ -3,7 +3,7 @@
 
 @{
     var menuItems = new List<KeyValuePair<string, string>>();
-    var content = await _artsdatabankenApiService.Get<ArtsdatabankenApiContent>("Content/314303"); 
+    var content = await _artsdatabankenApiService.Get<ArtsdatabankenApiContent>($"Content/{ViewData["PageMenuContentId"]}");
     if (content != null)
     {
         // https://database.artsdatabanken.no/cms/node/314303/edit?destination=node/314304
@@ -11,16 +11,15 @@
     }
 }
 
-<div class="sidebarmenu alien-species" id="sidebarmenu_container">
-    <button class="button tertiary alien-species" onclick="expandParent(this, 'expand')">Om @ViewData["Title"]</button>
+<div class="sidebarmenu" id="sidebarmenu_container">
+    <button class="button tertiary" onclick="expandParent(this, 'expand')">@ViewData["PageMenuExpandButtonText"]</button>
     
     <ul>
-
         @*lenker fra cms/drupal via api*@
         <li>
-            <a class="menuheaderlink" asp-controller="AlienSpecies" asp-action="Index">
-                <h3 class="alien-species">
-                    <span>@ViewData["Title"] 2023</span>
+            <a class="menuheaderlink" asp-controller="Redlist" asp-action="Index2021">
+                <h3>
+                    <span>@ViewData["PageMenuHeaderText"]</span>
                     <span class="material-icons pad-top">keyboard_arrow_right</span>
                 </h3>
             </a>

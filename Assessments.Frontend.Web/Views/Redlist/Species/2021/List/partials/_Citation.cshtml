@@ -3,6 +3,6 @@
 <div class="mobile_padding">
     <h2>Sitering</h2>
     <p class="citation">
-        Artsdatabanken (2021, 24. november). Norsk rødliste for arter 2021. @Context.Request.GetEncodedUrl().Split('?', '#')[0]
+        @ViewData["CitationString"] @Context.Request.GetEncodedUrl().Split('?', '#')[0]
     </p>
 </div>

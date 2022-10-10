@@ -7,6 +7,9 @@
     ViewData["PageMenuHeaderText"] = Constants.RedlistSpecies2021PageMenuHeaderText;
     ViewData["PageMenuContentId"] = Constants.RedlistSpecies2021PageMenuContentId;
     ViewData["PageMenuExpandButtonText"] = Constants.RedlistSpecies2021PageManuExpandButtonText;
+    ViewData["CitationString"] = Constants.RedlistSpecies2021CitationString;
+    ViewData["HeaderText"] = Constants.RedlistSpecies2021HeaderText;
+    ViewData["HeaderByline"] = Constants.RedlistSpecies2021HeaderByline;
 }
 
 @{
@@ -19,7 +22,7 @@
 
             <div class="title_with_image">
                 <div class="title_with_header">
-                    <partial name="/Views/Redlist/Species/2021/List/partials/_Header.cshtml" />
+                    <partial name="/Views/Shared/_Header.cshtml" />
                 </div>
                 <div class="title_with_ingress">
                     <img src="https://design.artsdatabanken.no/list-icons/rl2021-icon-small.png" alt="Bilde av en fisk" />

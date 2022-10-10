@@ -5,16 +5,21 @@
     ViewData["PageMenuHeaderText"] = Constants.AlienSpecies2023PageMenuHeaderText;
     ViewData["PageMenuContentId"] = Constants.AlienSpecies2023PageMenuContentId;
     ViewData["PageMenuExpandButtonText"] = Constants.AlienSpecies2023PageManuExpandButtonText;
-
+    ViewData["CitationString"] = Constants.AlienSpecies2023CitationString;
+    ViewData["HeaderText"] = Constants.AlienSpecies2023HeaderText;
+    ViewData["HeaderByline"] = Constants.AlienSpecies2023HeaderByline;
 }
-
-<h3>@ViewData["Title"] 2023</h3>
 
 <div class="pagecontainer">
     <partial name="/Views/Shared/_PageMenu.cshtml" />
 
     <div class="content-placer bigmid">
-        <div>
+        <div class="mid-content">
+            <div class="title_with_image">
+                <div class="title_with_header">
+                    <partial name="/Views/Shared/_Header.cshtml" />
+                </div>
+            </div>
             <div is-visible="@Model.Results.Any()">
 
                 <form>
@@ -54,7 +59,7 @@
                 LiElementClasses = new[] { "page-item" }
                 })
             </div>
+            <partial name="/Views/Redlist/Species/2021/List/partials/_Citation.cshtml" />
         </div>
     </div>
-
 </div>

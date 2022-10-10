@@ -2,9 +2,12 @@
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
 
 @{
-    ViewData["PageMenuHeaderText"] = Constants.AlienSpecies2023PageMenuHeaderText;
-    ViewData["PageMenuContentId"] = Constants.AlienSpecies2023PageMenuContentId;
-    ViewData["PageMenuExpandButtonText"] = Constants.AlienSpecies2023PageManuExpandButtonText;
+    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
+            {
+                PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+                PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
+                PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
+            };
 }
 
 <div class="title_header">
@@ -23,5 +26,5 @@
         </a>
     }
 
-    <partial name="/Views/Shared/_PageMenu.cshtml" />
+    <partial name="/Views/Shared/_PageMenu.cshtml" model="@pageMenuViewModel" />
 </div>

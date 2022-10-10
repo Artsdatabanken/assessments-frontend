@@ -1,10 +1,12 @@
+@model HeaderViewModel
+
 <div class="page-header">
     <h1>
-        @ViewData["HeaderText"]
+        @Model.HeaderText
     </h1>
    
     <span class="byline">
-        @ViewData["HeaderByline"]
+        @Model.HeaderByline
     </span>
 </div>
 

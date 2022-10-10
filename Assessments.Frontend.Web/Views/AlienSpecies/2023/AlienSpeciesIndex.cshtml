@@ -1,28 +1,44 @@
 ﻿@model AlienSpeciesListViewModel
 
 @{
+    CitationViewModel citationViewModel = new CitationViewModel
+    {
+        CitationString = Constants.AlienSpecies2023CitationString
+    };
+
+    HeaderViewModel headerViewModel = new HeaderViewModel
+    {
+        HeaderText = Constants.AlienSpecies2023HeaderText,
+        HeaderByline = Constants.AlienSpecies2023HeaderByline
+    };
+
+    IntroductionViewModel introductionViewModel = new IntroductionViewModel
+    {
+        Introduction = Constants.AlienSpecies2023Introduction
+    };
+
+    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
+    {
+        PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+        PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
+        PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
+    };
+
     ViewData["Title"] = "Fremmedartslista";
-    ViewData["PageMenuHeaderText"] = Constants.AlienSpecies2023PageMenuHeaderText;
-    ViewData["PageMenuContentId"] = Constants.AlienSpecies2023PageMenuContentId;
-    ViewData["PageMenuExpandButtonText"] = Constants.AlienSpecies2023PageManuExpandButtonText;
-    ViewData["CitationString"] = Constants.AlienSpecies2023CitationString;
-    ViewData["HeaderText"] = Constants.AlienSpecies2023HeaderText;
-    ViewData["HeaderByline"] = Constants.AlienSpecies2023HeaderByline;
-    ViewData["Introduction"] = Constants.AlienSpecies2023Introduction;
 }
 
 <div class="pagecontainer">
-    <partial name="/Views/Shared/_PageMenu.cshtml" />
+    <partial name="/Views/Shared/_PageMenu.cshtml" model="@pageMenuViewModel" />
 
     <div class="content-placer bigmid">
         <div class="mid-content">
             <div class="title_with_image">
                 <div class="title_with_header">
-                    <partial name="/Views/Shared/_Header.cshtml" />
+                    <partial name="/Views/Shared/_Header.cshtml" model="headerViewModel" />
                 </div>
                 <div class="title_with_ingress">
                     <img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />
-                    <partial name="/Views/Shared/_Introduction.cshtml" />
+                    <partial name="/Views/Shared/_Introduction.cshtml" model="introductionViewModel" />
                 </div>
             </div>
 
@@ -34,10 +50,6 @@
             <div is-visible="@Model.Results.Any()">
 
                 <form>
-                    <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i @ViewData["Title"]" 2023/>
-        
-                    <button type="submit">Søk</button>
-
                     <button type="submit" name="Export" value="true" formtarget="_blank">
                         <span class="material-icons">file_download</span> Eksporter
                     </button>
@@ -70,7 +82,7 @@
                 LiElementClasses = new[] { "page-item" }
                 })
             </div>
-            <partial name="/Views/Redlist/Species/2021/List/partials/_Citation.cshtml" />
+            <partial name="/Views/Shared/_Citation.cshtml" model="citationViewModel"/>
         </div>
     </div>
 </div>

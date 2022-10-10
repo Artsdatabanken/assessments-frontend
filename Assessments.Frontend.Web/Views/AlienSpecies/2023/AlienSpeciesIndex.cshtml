@@ -8,6 +8,7 @@
     ViewData["CitationString"] = Constants.AlienSpecies2023CitationString;
     ViewData["HeaderText"] = Constants.AlienSpecies2023HeaderText;
     ViewData["HeaderByline"] = Constants.AlienSpecies2023HeaderByline;
+    ViewData["Introduction"] = Constants.AlienSpecies2023Introduction;
 }
 
 <div class="pagecontainer">
@@ -19,7 +20,17 @@
                 <div class="title_with_header">
                     <partial name="/Views/Shared/_Header.cshtml" />
                 </div>
+                <div class="title_with_ingress">
+                    <img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />
+                    <partial name="/Views/Shared/_Introduction.cshtml" />
+                </div>
             </div>
+
+            <form id="search_and_filter_form" aps-action="" method="get">
+                <partial name="/Views/AlienSpecies/2023/ListPartials/_Search.cshtml" />
+                @*<partial name="/Views/Redlist/Species/2021/List/partials/_Filters.cshtml" />*@
+            </form>
+
             <div is-visible="@Model.Results.Any()">
 
                 <form>

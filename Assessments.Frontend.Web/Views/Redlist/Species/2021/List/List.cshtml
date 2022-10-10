@@ -10,6 +10,7 @@
     ViewData["CitationString"] = Constants.RedlistSpecies2021CitationString;
     ViewData["HeaderText"] = Constants.RedlistSpecies2021HeaderText;
     ViewData["HeaderByline"] = Constants.RedlistSpecies2021HeaderByline;
+    ViewData["Introduction"] = Constants.RedlistSpecies2021Introduction;
 }
 
 @{
@@ -26,7 +27,7 @@
                 </div>
                 <div class="title_with_ingress">
                     <img src="https://design.artsdatabanken.no/list-icons/rl2021-icon-small.png" alt="Bilde av en fisk" />
-                    <partial name="/Views/Redlist/Species/2021/List/partials/_Introduction.cshtml" />
+                    <partial name="/Views/Shared/_Introduction.cshtml" />
                 </div>
 
             </div>

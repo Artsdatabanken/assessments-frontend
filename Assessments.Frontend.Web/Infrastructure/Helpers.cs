@@ -518,6 +518,9 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string RedlistSpecies2021CitationString = "Artsdatabanken (2021, 24. november). Norsk rødliste for arter 2021.";
 
+        public const string RedlistSpecies2021Introduction = "Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge." +
+            " Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
+
         // Alien species constants
 
         public const int AlienSpecies2023PageMenuContentId = 314303; // TODO: This needs content id for alien species 2023. Using redlist species 2021 temporarily.
@@ -531,6 +534,10 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
 
         public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Norsk fremmedartsliste 2023."; // TODO: insert correct publishing date for citation
+    
+        public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
+            " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
+    
     }
 
     public class CategoryComparer : IComparer<string>

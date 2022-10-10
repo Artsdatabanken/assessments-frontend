@@ -3,10 +3,9 @@
 namespace Assessments.Frontend.Web.Controllers.Api
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class TestController : BaseController<TestController>
+    public class TestController : BaseApiController<TestController>
     {
         [HttpGet]
-        public string Get() => $"Hello from {Environment.EnvironmentName.ToLower()} environment";
+        public IActionResult Get() => Ok($"Hello from {Environment.EnvironmentName.ToLower()} environment");
     }
 }

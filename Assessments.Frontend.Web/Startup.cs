@@ -3,11 +3,11 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Frontend.Web.Infrastructure.Api;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,20 +28,19 @@ namespace Assessments.Frontend.Web
         {
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddControllersWithViews().AddOData(options =>
-            {
-                options.AddRouteComponents("api", ODataModelConfiguration.EdmModel()).EnableQueryFeatures();
-            });
+            services.AddControllersWithViews();
 
             services.AddSwaggerGen(options =>
             {
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
                 options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Constants.AssessmentsMappingAssembly}.xml"));
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "Assessments api", Version = "v1", Description = "Species, alien species and naturetype assessments" });
+                var schemaHelper = new SwashbuckleSchemaHelper();
+                options.CustomSchemaIds(type => schemaHelper.GetSchemaId(type));
             });
 
             services.AddLazyCache();
-            
+
             services.AddSingleton<DataRepository>();
 
             services.AddTransient<ExpertCommitteeMemberService>();
@@ -58,7 +57,6 @@ namespace Assessments.Frontend.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseODataRouteDebug();
             }
             else
             {
@@ -67,7 +65,8 @@ namespace Assessments.Frontend.Web
 
             app.UseHttpsRedirection();
             app.UseResponseCompression();
-            app.UseStaticFiles(new StaticFileOptions {
+            app.UseStaticFiles(new StaticFileOptions
+            {
                 OnPrepareResponse = ctx =>
                 {
                     // Cache static files for 30 days
@@ -85,8 +84,6 @@ namespace Assessments.Frontend.Web
                 endpoints.MapDefaultControllerRoute();
             });
 
-            app.UseODataQueryRequest();
-
             if (env.IsDevelopment()) // ikke vis swagger (bortsett fra i utviklingsmiljø) #457 TODO: enable swagger at some point
             {
                 app.UseSwagger();
@@ -96,6 +93,7 @@ namespace Assessments.Frontend.Web
                     options.DocumentTitle = "Assessments api - Artsdatabanken";
                     options.RoutePrefix = "swagger";
                     options.SwaggerEndpoint("v1/swagger.json", "Assessments api");
+                    options.DefaultModelsExpandDepth(-1);
                 });
             }
 

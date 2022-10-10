@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Assessments.Frontend.Web.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi=true)]
     public abstract class BaseController<T> : Controller where T : BaseController<T>
     {
         private IWebHostEnvironment _environment;
@@ -24,5 +25,7 @@ namespace Assessments.Frontend.Web.Controllers
         private ILogger<T> _logger;
 
         protected ILogger<T> Logger => _logger ??= HttpContext.RequestServices.GetService<ILogger<T>>();
+
+        protected const int DefaultPageSize = 25;
     }
 }

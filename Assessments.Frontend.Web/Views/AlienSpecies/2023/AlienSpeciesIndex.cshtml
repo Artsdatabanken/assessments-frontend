@@ -1,0 +1,49 @@
+﻿@model AlienSpeciesListViewModel
+
+@{
+    ViewData["Title"] = "Fremmedartslista 2023";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<div is-visible="@Model.Results.Any()">
+
+    <form>
+        <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i @ViewData["Title"]" />
+        
+        <button type="submit">Søk</button>
+
+        <button type="submit" name="Export" value="true" formtarget="_blank">
+            <span class="material-icons">file_download</span> Eksporter
+        </button>
+
+    </form>
+
+    <ul>
+        @foreach (var item in Model.Results)
+        {
+            <li>
+                <a asp-action="Detail" asp-route-id="@item.Id">
+                    @item.Id  @item.EvaluatedScientificName
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+<div is-visible="@Model.Results.PageCount > 1">
+    <p class="page_count">
+        Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
+    </p>
+
+    @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
+    {
+    Page = page
+    }), new PagedListRenderOptions
+    {
+    PageClasses = new[] { "page-link" },
+    UlElementClasses = new[] { "pagination" },
+    LiElementClasses = new[] { "page-item" }
+    })
+</div>
+

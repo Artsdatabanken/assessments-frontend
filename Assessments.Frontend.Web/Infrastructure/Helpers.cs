@@ -1,4 +1,4 @@
-﻿using Assessments.Mapping.Models.Species;
+﻿using Assessments.Mapping.RedlistSpecies;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;

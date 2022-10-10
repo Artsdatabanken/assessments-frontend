@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
     public class HomeController : BaseController<HomeController>
     {
         public IActionResult Index()

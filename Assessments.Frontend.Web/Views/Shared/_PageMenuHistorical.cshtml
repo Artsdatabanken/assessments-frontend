@@ -65,15 +65,7 @@
 
     <ul>
         <li>
-            @if (Environment.IsProduction())
-            {
-                <div class="menuheaderlink alien-species">
-                    <h3>
-                        <span>Fremmedarter</span>
-                    </h3>
-                </div>
-            }
-            else
+            @if (Environment.IsDevelopment())
             {
                 <a class="menuheaderlink alien-species" asp-controller="AlienSpecies" asp-action="Home">
                     <h3>
@@ -82,9 +74,17 @@
                     </h3>
                 </a>
             }
+            else
+            {
+                <div class="menuheaderlink alien-species">
+                    <h3>
+                        <span>Fremmedarter</span>
+                    </h3>
+                </div>
+            }
         </li>
 
-        @if (!Environment.IsProduction())
+        @if (Environment.IsDevelopment())
         {
             <li>
                 <a asp-controller="AlienSpecies" asp-action="Index">

@@ -58,10 +58,10 @@
                         </li>
 
                         <li>
-                            @if (!Environment.IsProduction())
+                            @if (Environment.IsDevelopment())
                             {
                                 <a asp-controller="AlienSpecies" asp-action="Home" class="fremmedartlink">
-                                    <img src="https://design.artsdatabanken.no/list-icons/RL-ART.png" />
+                                    <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
                                     <span>Fremmedartslista</span>
                                     <span class="material-icons bigarrow">keyboard_arrow_right</span>
                                 </a>

@@ -23,7 +23,7 @@
 
                 <h2>Gjeldende fremmedartsliste</h2>
 
-                @if (!Environment.IsProduction())
+                @if (Environment.IsDevelopment())
                 {
                     <p class="page_section">
                         <!-- TODO before release: insert dates -->
@@ -51,7 +51,7 @@
                 <h2>Alle fremmedartslistene</h2>
                 <p class="page_section">
                     <ul>
-                        @if (!Environment.IsProduction())
+                        @if (Environment.IsDevelopment())
                         {
                             <li>
                                 <a asp-controller="AlienSpecies" asp-action="Index" class="button secondary">

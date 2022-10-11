@@ -1,6 +1,10 @@
 ﻿@using Microsoft.Extensions.Hosting
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
 
+@{
+    ViewData["Title"] = "Fremmedartlista";
+}
+
 <div class="title_header">
     @if (!Environment.IsProduction())
     {

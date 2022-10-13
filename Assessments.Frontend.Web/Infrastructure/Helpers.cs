@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System;
 using Assessments.Frontend.Web.Models;
+using Microsoft.VisualBasic;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -27,7 +28,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return value;
         }
 
-        public static string[] findSelectedCategories( bool redlisted, bool endangered,
+        public static string[] findSelectedRedlistSpeciesCategories( bool redlisted, bool endangered,
             string[] categoriesSelected) 
         {
             List<string> selectedCategories = new List<string>();

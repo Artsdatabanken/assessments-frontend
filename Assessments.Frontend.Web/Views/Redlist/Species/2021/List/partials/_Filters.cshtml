@@ -13,6 +13,12 @@
     var AllTaxonRanks = ViewBag.AllTaxonRanks;
     string[] AllSpeciesGroups = ViewBag.AllSpeciesGroups;
     string[] AllInsects = ViewBag.AllInsects;
+
+    ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
+    {
+        View = Model.View,
+        ItemCount = Model.Redlist2021Results.TotalItemCount,
+    };
 }
 
 @functions{
@@ -230,7 +236,7 @@
             </select>
         }
     </div>
-    <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
+    <partial name="/Views/Shared/_ControlButtons.cshtml" model="controlButtonsViewModel" />
 </div>
 
 <div class="listwrapper">

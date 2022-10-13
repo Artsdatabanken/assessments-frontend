@@ -8,6 +8,13 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Views\AlienSpecies\Shared\**" />
+	  <Content Remove="Views\AlienSpecies\Shared\**" />
+	  <EmbeddedResource Remove="Views\AlienSpecies\Shared\**" />
+	  <None Remove="Views\AlienSpecies\Shared\**" />
+	</ItemGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.96.0" />
@@ -31,7 +38,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Cache\" />
-	  <Folder Include="Views\AlienSpecies\Shared\" />
 	</ItemGroup>
 	
 </Project>

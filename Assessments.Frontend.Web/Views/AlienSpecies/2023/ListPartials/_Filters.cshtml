@@ -10,10 +10,16 @@
     var AllCriterias = ViewBag.AllCriterias;
     var AllEuroPop = ViewBag.AllEuroPop;
     var AllRegions = ViewBag.AllRegions;
-    Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();
+    Habitat.HabitatItem[] AllHabitats = Habitat.AlienSpecies2023Habitats;
     var AllTaxonRanks = ViewBag.AllTaxonRanks;
     string[] AllSpeciesGroups = ViewBag.AllSpeciesGroups;
     string[] AllInsects = ViewBag.AllInsects;
+
+    ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
+    {
+        View = Model.Parameters.View,
+        ItemCount = Model.Results.TotalItemCount,
+    };
 }
 
 @functions{
@@ -226,7 +232,7 @@
             </select>
         }
     </div>
-    <partial name="/Views/Redlist/Species/2021/List/partials/_ControlButtons.cshtml" />
+    <partial name="/Views/Shared/_ControlButtons.cshtml" model="controlButtonsViewModel" />
 </div>
 
 <div class="listwrapper">

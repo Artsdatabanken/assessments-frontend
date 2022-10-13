@@ -3,6 +3,13 @@ using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
 {
+    public class ControlButtonsViewModel
+    {
+        public string View { get; set; }
+
+        public int ItemCount { get; set; }
+    }
+
     public class CitationViewModel
     {
         public string CitationString { get; set; }

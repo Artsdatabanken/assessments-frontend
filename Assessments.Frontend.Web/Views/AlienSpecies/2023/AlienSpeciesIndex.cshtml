@@ -34,17 +34,17 @@
         <div class="mid-content">
             <div class="title_with_image">
                 <div class="title_with_header">
-                    <partial name="/Views/Shared/_Header.cshtml" model="headerViewModel" />
+                    <partial name="/Views/Shared/_Header.cshtml" model="@headerViewModel" />
                 </div>
                 <div class="title_with_ingress">
                     <img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />
-                    <partial name="/Views/Shared/_Introduction.cshtml" model="introductionViewModel" />
+                    <partial name="/Views/Shared/_Introduction.cshtml" model="@introductionViewModel" />
                 </div>
             </div>
 
             <form id="search_and_filter_form" aps-action="" method="get">
                 <partial name="/Views/AlienSpecies/2023/ListPartials/_Search.cshtml" />
-                @*<partial name="/Views/Redlist/Species/2021/List/partials/_Filters.cshtml" />*@
+                <partial name="/Views/AlienSpecies/2023/ListPartials/_Filters.cshtml" />
             </form>
 
             <div is-visible="@Model.Results.Any()">

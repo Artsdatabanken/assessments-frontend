@@ -15,7 +15,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public string PresentationString { get; set; }
         }
 
-        public static CategoryItem[] AlienSpecies2023Categories =
+        public static readonly CategoryItem[] AlienSpecies2023Categories =
         {
             new CategoryItem()
             {

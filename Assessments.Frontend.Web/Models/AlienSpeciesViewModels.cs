@@ -24,6 +24,7 @@ namespace Assessments.Frontend.Web.Models
             this.Habitats = Array.Empty<string>();
             this.SpeciesGroups = Array.Empty<string>();
             this.TaxonRank = Array.Empty<string>();
+            this.WaterRegions = Array.Empty<string>();
         }
 
         public string[] Area { get; set; }
@@ -50,6 +51,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string View { get; set; }
 
+        public string[] WaterRegions { get; set; }
     }
 
     public class AlienSpeciesDetailViewModel

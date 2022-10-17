@@ -538,7 +538,10 @@ namespace Assessments.Frontend.Web.Infrastructure
     
         public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
             " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
-    
+
+        public const string AlienSpecies2023NoListViewResults = "Kombinasjonen av søk og filter gir ingen treff i Fremmedartslista for 2023.";
+
+
     }
 
     public class CategoryComparer : IComparer<string>

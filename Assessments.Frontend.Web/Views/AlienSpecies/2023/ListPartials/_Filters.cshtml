@@ -299,7 +299,7 @@
             <div id="filter_modal_background">
                 <div id="filters_scrollable" class="filter_background">
                     <div class="filter_groups">
-                        <partial name="/Views/Redlist/Species/2021/List/partials/_FilterHeader.cshtml" />
+                        <partial name="/Views/Shared/_FilterHeader.cshtml" />
                         <div class="filter_scroll_area">
                             <ul>
                                 @{makeFilterGroup(false, "filter_area", "Area", Model.Parameters.Area, AllAreas, @SearchAndFilter.SearchChooseArea, "Area", "show_area", "list_header_area", "områdefiltre", "Area");}
@@ -356,18 +356,18 @@
                                     </div>
                                 </li>
                                 @{
-                                    makeFilterGroup(true, "filter_habitat", "Habitats", Model.Parameters.Habitats, AllHabitats, "Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");
-                                    makeFilterGroup(true, "filter_region", "Regions", Model.Parameters.Regions, AllRegions, "Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");
-                                    makeFilterGroup(true, "filter_water_region", "WaterRegions", Model.Parameters.WaterRegions, AllWaterRegions, "Vannregioner", "WaterRegion", "show_water_region", "list_header_water_region", "vannregionfiltre", "WaterRegions");
+                                    //makeFilterGroup(true, "filter_habitat", "Habitats", Model.Parameters.Habitats, AllHabitats, "Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");
+                                    //makeFilterGroup(true, "filter_region", "Regions", Model.Parameters.Regions, AllRegions, "Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");
+                                    //makeFilterGroup(true, "filter_water_region", "WaterRegions", Model.Parameters.WaterRegions, AllWaterRegions, "Vannregioner", "WaterRegion", "show_water_region", "list_header_water_region", "vannregionfiltre", "WaterRegions");
                                     //makeFilterGroup(true, "filter_criteria", "Criterias", Model.Parameters.Criterias, AllCriterias, @SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");
                                 }
                             </ul>
                         </div>
-                        <partial name="/Views/Redlist/Species/2021/List/partials/_FilterMobileButtons.cshtml" />
+                        <partial name="/Views/Shared/_FilterMobileButtons.cshtml" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <partial name="/Views/Redlist/Species/2021/List/partials/_View.cshtml" />
+    <partial name="/Views/AlienSpecies/2023/ListPartials/_View.cshtml" />
 </div>

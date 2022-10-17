@@ -248,7 +248,7 @@
             <div id="filter_modal_background">
                 <div id="filters_scrollable" class="filter_background">
                     <div class="filter_groups">
-                        <partial name="/Views/Redlist/Species/2021/List/partials/_FilterHeader.cshtml" />
+                        <partial name="/Views/Shared/_FilterHeader.cshtml" />
                         <div class="filter_scroll_area">
                             <ul>
                                 @{makeFilterGroup(false, "filter_area", "Area", Model.Area, AllAreas, @SearchAndFilter.SearchChooseArea, "Area", "show_area", "list_header_area", "områdefiltre", "Area");}
@@ -345,7 +345,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <partial name="/Views/Redlist/Species/2021/List/partials/_FilterMobileButtons.cshtml" />
+                        <partial name="/Views/Shared/_FilterMobileButtons.cshtml" />
                     </div>
                 </div>
             </div>

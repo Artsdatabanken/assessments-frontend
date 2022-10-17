@@ -6,26 +6,24 @@
     @*&& Model.View != "stat"*@
 )
 {
-    <p class="page_count">
+    <p class="page_count potit">
         Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
     </p>
 
-    @Html.PagedListPager(Model.Results, page => Url.Action("Index2021", new
+    @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
     {
         Page = page,
-        //Name = Context.Request.Query["Name"],
-        //SortBy = Context.Request.Query["SortBy"],
-        //Area = Context.Request.Query["Area"],
-        //Category = Context.Request.Query["Category"],
-        //Criterias = Context.Request.Query["Criterias"],
-        //TaxonRank = Context.Request.Query["TaxonRank"],
-        //EuroPop = Context.Request.Query["EuroPop"],
-        //Regions = Context.Request.Query["Regions"],
-        //Habitats = Context.Request.Query["Habitats"],
-        //SpeciesGroups = Context.Request.Query["SpeciesGroups"],
-        //PresumedExtinct = Context.Request.Query["PresumedExtinct"],
-        //IsCheck = Context.Request.Query["IsCheck"],
-        //Meta = Context.Request.Query["Meta"]
+        Name = Context.Request.Query["Parameters.Name"],
+        SortBy = Context.Request.Query["Parameters.SortBy"],
+        Area = Context.Request.Query["Parameters.Area"],
+        Category = Context.Request.Query["Parameters.Category"],
+        //Criterias = Context.Request.Query["Parameters.Criterias"],
+        //TaxonRank = Context.Request.Query["Parameters.TaxonRank"],
+        Regions = Context.Request.Query["Parameters.Regions"],
+        Habitats = Context.Request.Query["Parameters.Habitats"],
+        SpeciesGroups = Context.Request.Query["Parameters.SpeciesGroups"],
+        IsCheck = Context.Request.Query["Parameters.IsCheck"],
+        Meta = Context.Request.Query["Parameters.Meta"]
     }), new PagedListRenderOptions
     {
         PageClasses = new[] { "page-link" },

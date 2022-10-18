@@ -9,6 +9,23 @@
         PageMenuHeaderText = Constants.RedlistSpecies2021PageMenuHeaderText
     };
 
+    SideBarContentViewModel sideBarContentViewModel = new SideBarContentViewModel()
+    {
+         AssessmentYear = Model.AssessmentYear,
+         Category = @ViewBag.categories[Model.Category.Substring(0, 2)]["presentationstring"],
+         CategoryShort = Model.Category,
+         PreviousAssessments = Model.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
+         {
+             Category = @ViewBag.categories[x.Category.Substring(0, 2)]["presentationstring"],
+             CategoryShort = x.Category,
+             Url = x.AssessmentUrl,
+             Year = x.Year
+         }).ToArray(),
+         ScientificName = Model.ScientificName,
+         ScientificNameId = Model.ScientificNameId,
+         TaxonRank = Model.TaxonRank,
+    };
+
     var naturtypehovedenhet = Model.MainHabitat;
     string geografi = Model.AssessmentArea;
 
@@ -50,7 +67,7 @@
             </div>
         </div>
         <div class="side mobile_padding">
-            <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SidebarContent.cshtml" />
+            <partial name="/Views/Shared/_SidebarContent.cshtml" model="sideBarContentViewModel" />
         </div>
     </div>
 </div>

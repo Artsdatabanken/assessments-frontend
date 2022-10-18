@@ -528,6 +528,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023";
 
+        public const string AlienSpecies2023PageMenuHeaderTextShort = "Fremmedartslista";
+
         public const string AlienSpecies2023HeaderText = "Norsk fremmedartsliste for 2023";
 
         public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
@@ -540,8 +542,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
 
         public const string AlienSpecies2023NoListViewResults = "Kombinasjonen av søk og filter gir ingen treff i Fremmedartslista for 2023.";
-
-        public const string AlienSpecies2023AssessmentPageTitle = "Fremmedartslista 2023";
     }
 
     public class CategoryComparer : IComparer<string>

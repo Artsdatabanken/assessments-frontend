@@ -3,6 +3,11 @@ using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
 {
+    public class CitationViewModel
+    {
+        public string CitationString { get; set; }
+    }
+ 
     public class ControlButtonsViewModel
     {
         public string View { get; set; }
@@ -10,14 +15,39 @@ namespace Assessments.Frontend.Web.Models
         public int ItemCount { get; set; }
     }
 
-    public class CitationViewModel
+    public class SideBarContentViewModel
     {
-        public string CitationString { get; set; }
+        public class SideBarPreviousAssessment
+        {
+            public string Category { get; set; }
+
+            public string CategoryShort { get; set; }
+
+            public string Url { get; set; }
+
+            public int Year { get; set; }
+        }
+
+        public int AssessmentYear { get; set; }
+
+        public string Category { get; set; }
+
+        public string CategoryShort { get; set; }
+
+        public string ScientificName { get; set; }
+
+        public int ScientificNameId { get; set; }
+
+        public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
+
+        public string TaxonRank { get; set; }
     }
 
     public class HeaderViewModel
     {
         public string Title { get; set; }
+
+        public string TitleShort { get; set; }
     }
 
     public class PageHeaderViewModel

@@ -10,6 +10,27 @@
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
     };
+
+    SideBarContentViewModel sideBarContentViewModel = new SideBarContentViewModel()
+    {
+         AssessmentYear = 2023,
+         Category = Categories.AlienSpecies2023Categories
+                                                        .Where(x => x.Category == Model.Assessment.Category)
+                                                        .Select(x => x.TagLine).FirstOrDefault(),
+         CategoryShort = Model.Assessment.Category,
+         PreviousAssessments = Model.Assessment.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
+         {
+             Category = Categories.AlienSpecies2023Categories
+                                                        .Where(y => y.Category == x.MainCategory)
+                                                        .Select(y => y.TagLine).FirstOrDefault(),
+             CategoryShort = x.MainCategory,
+             Url = "https://artsdatabanken.no/fremmedarter/2018/N/" + x.AssessmentId, // TODO: get real url when the model is ready
+             Year = x.RevisionYear
+         }).ToArray(),
+         ScientificName = Model.Assessment.EvaluatedScientificName,
+         ScientificNameId = Model.Assessment.EvaluatedScientificNameId.GetValueOrDefault(),
+         TaxonRank = Model.Assessment.EvaluatedScientificNameRank,
+    };
 }
 
 <partial name="/Views/AlienSpecies/2023/AssesmentPartials/_Breadcrumb.cshtml" />
@@ -37,7 +58,7 @@
             </div>
         </div>
         <div class="side mobile_padding">
-            @*<partial name="/Views/Redlist/Species/2021/Assessment/partials/_SidebarContent.cshtml" />*@
+            <partial name="/Views/Shared/_SidebarContent.cshtml" model="sideBarContentViewModel" />
         </div>
     </div>
 </div>

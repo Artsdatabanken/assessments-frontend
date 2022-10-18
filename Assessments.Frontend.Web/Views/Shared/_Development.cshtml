@@ -1,0 +1,24 @@
+﻿@model SideBarContentViewModel
+
+<h3>Utvikling</h3>
+<ul class="history_list">
+
+    @if (Model.AssessmentYear == 2021)
+    {
+        <li>
+            <b class="text_content"> 2021: </b>
+            <span class="graphic_element @Model.CategoryShort.Substring(0,2)">@Model.CategoryShort</span>
+            <span class="capitalized"> @Model.Category</span>
+
+        </li>
+    }
+
+    @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger
+    {
+        <li>
+            <b class="text_content"> @prev.Year: </b>
+            <span class="graphic_element @prev.CategoryShort.Substring(0,2)">@prev.CategoryShort</span>
+            <span class="capitalized"> @prev.Category</span>
+        </li>
+    }
+</ul>

@@ -3,6 +3,11 @@
 
 @{
     var showCookieWarning = _environment.IsProduction();
+
+    HeaderViewModel headerViewModel = new HeaderViewModel()
+    {
+        Title = Constants.AlienSpecies2023AssessmentPageTitle
+    };
 }
 
 <!DOCTYPE html>
@@ -37,7 +42,7 @@
 <body>
     <div id="bodywrap" class="alien-species">
         <partial name="/Views/Shared/_PageTopBar.cshtml" />
-        <partial name="/Views/AlienSpecies/2023/_AlienSpeciesHeader.cshtml" />
+        <partial name="/Views/AlienSpecies/2023/_AlienSpeciesHeader.cshtml" model="@headerViewModel" />
         <div class="main">
             <div class="main-content width-adjuster">
 

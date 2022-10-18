@@ -6,7 +6,7 @@
         CitationString = Constants.AlienSpecies2023CitationString
     };
 
-    HeaderViewModel headerViewModel = new HeaderViewModel
+    PageHeaderViewModel pageHeaderViewModel = new PageHeaderViewModel
     {
         HeaderText = Constants.AlienSpecies2023HeaderText,
         HeaderByline = Constants.AlienSpecies2023HeaderByline
@@ -34,7 +34,7 @@
         <div class="mid-content">
             <div class="title_with_image">
                 <div class="title_with_header">
-                    <partial name="/Views/Shared/_Header.cshtml" model="@headerViewModel" />
+                    <partial name="/Views/Shared/_Header.cshtml" model="@pageHeaderViewModel" />
                 </div>
                 <div class="title_with_ingress">
                     <img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />

@@ -17,6 +17,11 @@ namespace Assessments.Frontend.Web.Models
 
     public class HeaderViewModel
     {
+        public string Title { get; set; }
+    }
+
+    public class PageHeaderViewModel
+    {
         public string HeaderText { get; set; }
 
         public string HeaderByline { get; set; }
@@ -34,5 +39,14 @@ namespace Assessments.Frontend.Web.Models
         public string PageMenuExpandButtonText { get; set; }
 
         public string PageMenuHeaderText { get; set; }
+    }
+
+    public class SidebarContentViewModel
+    {
+        public string ScientificName { get; set; }
+
+        public int ScientificNameId { get; set; }
+
+        public string TaxonRank { get; set; }
     }
 }

@@ -1,21 +1,22 @@
-﻿@using Microsoft.Extensions.Hosting
+﻿@model HeaderViewModel
+@using Microsoft.Extensions.Hosting
 @inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
 
 @{
     PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
-            {
-                PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
-                PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
-                PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
-            };
+    {
+        PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+        PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
+        PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
+    };
 }
 
 <div class="title_header">
     @if (Environment.IsDevelopment())
     {
         <a asp-controller="AlienSpecies" asp-action="Index" class="title_header alien-species" style="display:inline;">
-            <span class="full_title">@ViewData["Title"] 2023</span>
-            <span class="short_title">@ViewData["Title"]</span>
+            <span class="full_title">@Model.Title 2023</span>
+            <span class="short_title">@Model.Title</span>
         </a>
     } else
     {

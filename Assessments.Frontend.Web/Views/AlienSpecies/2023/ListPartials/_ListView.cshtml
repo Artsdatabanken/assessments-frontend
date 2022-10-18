@@ -44,7 +44,6 @@
                         {
                             @item.AlienSpeciesCategory
                             <span class="degrees">@Helpers.findDegrees(item.AlienSpeciesCategory, false)</span>
-
                         }
                     </span>
 
@@ -60,7 +59,7 @@
     }
     else
     {
-        <div class="no_results mobile_padding">@Constants.AlienSpecies2023NoListViewResults</div>
+        <li class="no_results mobile_padding">@Constants.AlienSpecies2023NoListViewResults</li>
     }
 </ul>
 

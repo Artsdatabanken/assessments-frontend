@@ -541,7 +541,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023NoListViewResults = "Kombinasjonen av søk og filter gir ingen treff i Fremmedartslista for 2023.";
 
-
+        public const string AlienSpecies2023AssessmentPageTitle = "Fremmedartslista 2023";
     }
 
     public class CategoryComparer : IComparer<string>

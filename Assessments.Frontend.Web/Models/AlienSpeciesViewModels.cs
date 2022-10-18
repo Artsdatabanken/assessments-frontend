@@ -1,5 +1,6 @@
 ﻿using Assessments.Mapping.AlienSpecies;
 using System;
+using System.Collections.Generic;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
@@ -7,8 +8,11 @@ namespace Assessments.Frontend.Web.Models
     public class AlienSpeciesListViewModel
     {
         public IPagedList<AlienSpeciesAssessment2023> Results { get; set; }
-        
+
+        public AlienSpeciesStatistics2023 Statistics { get; set; }
+
         public AlienSpeciesListParameters Parameters { get; set; } = new();
+
     }
 
     public class AlienSpeciesListParameters
@@ -57,5 +61,21 @@ namespace Assessments.Frontend.Web.Models
     public class AlienSpeciesDetailViewModel
     {
         public AlienSpeciesAssessment2023 Assessment { get; set; }
+    }
+
+    public class AlienSpeciesStatistics2023
+    {
+        // These are temporary and taken from redlist2021. Alien species might need other statistics
+        public Dictionary<string, int> Categories { get; set; }
+
+        public Dictionary<string, int> Criteria { get; set; }
+
+        public Dictionary<string, int> Habitat { get; set; }
+
+        public Dictionary<string, int> ImpactFactors { get; set; }
+
+        public Dictionary<string, int> Region { get; set; }
+
+        public List<string> RegionNames { get; set; }
     }
 }

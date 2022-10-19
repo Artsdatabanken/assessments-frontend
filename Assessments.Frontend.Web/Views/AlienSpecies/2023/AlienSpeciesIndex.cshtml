@@ -1,4 +1,5 @@
-﻿@model AlienSpeciesListViewModel
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model AlienSpeciesListViewModel
 
 @{
     CitationViewModel citationViewModel = new CitationViewModel
@@ -72,10 +73,7 @@
                     Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
                 </p>
 
-                @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
-                {
-                Page = page
-                }), new PagedListRenderOptions
+                @Html.PagedListPager(Model.Results, page => Url.Action("Index", Context.Request.QueryString.ToRouteValues(new { Page = page })), new PagedListRenderOptions
                 {
                 PageClasses = new[] { "page-link" },
                 UlElementClasses = new[] { "pagination" },

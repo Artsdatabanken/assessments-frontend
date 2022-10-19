@@ -24,10 +24,10 @@ namespace Assessments.Mapping.AlienSpecies
 
         public int? EvaluatedScientificNameId { get; set; }
 
-        public List<PreviousAssessment> PreviousAssessments { get; set; } = new();
+        public List<AlienSpeciesAssessment2023PreviousAssessment> PreviousAssessments { get; set; } = new();
     }
 
-    public class PreviousAssessment
+    public class AlienSpeciesAssessment2023PreviousAssessment
     {
         public int RevisionYear { get; set; } = 2018;
 

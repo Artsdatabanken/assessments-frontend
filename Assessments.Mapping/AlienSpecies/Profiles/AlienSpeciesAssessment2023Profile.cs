@@ -12,6 +12,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.EvaluatedScientificName))
 
                 ;
+
+            CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>();
         }
     }
 }

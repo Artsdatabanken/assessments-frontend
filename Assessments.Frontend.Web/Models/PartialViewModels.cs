@@ -1,8 +1,18 @@
 ﻿using Assessments.Mapping.AlienSpecies;
+using System;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
 {
+    public class AssessmentPageHeaderViewModel
+    {
+        public bool RenderSvalbard { get; set; }
+
+        public ScientificNameViewModel scientificNameViewModel { get; set; }
+
+        public SpeciesGroupViewModel speciesGroupViewModel { get; set; }
+    }
+
     public class CitationViewModel
     {
         public string CitationString { get; set; }
@@ -71,6 +81,15 @@ namespace Assessments.Frontend.Web.Models
         public string PageMenuHeaderText { get; set; }
     }
 
+    public class ScientificNameViewModel
+    {
+        public string PopularName { get; set; }
+
+        public string ScientificName { get; set; }
+
+        public string ScientificNameAuthor { get; set; }
+    }
+
     public class SidebarContentViewModel
     {
         public string ScientificName { get; set; }
@@ -78,5 +97,22 @@ namespace Assessments.Frontend.Web.Models
         public int ScientificNameId { get; set; }
 
         public string TaxonRank { get; set; }
+    }
+
+    public class SpeciesGroupViewModel
+    {
+        public int AssessmentYear { get; set; }
+
+        public string ExpertCommittee { get; set; }
+
+        public int PreviousAssessmentYear { get; set; }
+
+        public DateTime RevisionDate { get; set; }
+
+        public string RevisionReason { get; set; }
+     
+        public string SpeciesGroup { get; set; }
+
+        public string SpeciesGroupImageUrl { get; set; }
     }
 }

@@ -8,8 +8,8 @@ if (filters) {
 const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
 const insectFilters = document.getElementsByClassName("insect_input");
 const insectInput = document.getElementById("Insekter");
-const redlistCheck = document.getElementById("redlisted_check").checked;
-const endangeredCheck = document.getElementById("endangered_check").checked;
+const redlistCheck = document.getElementById("redlisted_check")?.checked;
+const endangeredCheck = document.getElementById("endangered_check")?.checked;
 const init = document.getElementById("initial_check");
 const scrollTo = document.getElementById("remember_scroll");
 
@@ -158,7 +158,7 @@ function shouldToggleMarkAll(elementsClass) {
 
 function shouldToggleMarkRedOrEnd(list) {
     return Array.prototype.every.call(list, (item) => {
-        return document.getElementById("input_" + item).checked === true;
+        return document.getElementById("input_" + item)?.checked === true;
     })
 }
 

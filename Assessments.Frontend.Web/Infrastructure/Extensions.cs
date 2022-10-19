@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Text;
+using DocumentFormat.OpenXml.InkML;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -45,6 +50,19 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             return sb.ToString();
         }
+        
+        public static RouteValueDictionary ToRouteValues(this QueryString queryString, object obj)
+        {
+            var valueCollection = HttpUtility.ParseQueryString(queryString.ToString());
 
+            var values = new RouteValueDictionary(obj);
+
+            foreach (string key in valueCollection)
+            {
+                if (key != null && !values.ContainsKey(key)) values[key] = valueCollection[key];
+            }
+
+            return values;
+        }
     }
 }

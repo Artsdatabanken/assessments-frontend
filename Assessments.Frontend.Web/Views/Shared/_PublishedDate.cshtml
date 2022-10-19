@@ -1,9 +1,7 @@
-﻿@model SpeciesAssessment2021
+﻿@model SpeciesGroupViewModel
 @{
-    // @steinho, hvordan finner jeg riktig pub. dato?
-
     // Find correct startdate (Exceptions include 2010 spretthaler)
-    string firspublished = Helpers.getPublishedDate(Model.AssessmentYear, Model.YearPreviousAssessment);
+    string firspublished = Helpers.getPublishedDate(Model.AssessmentYear, Model.PreviousAssessmentYear);
     string printstring = "Publisert: " + firspublished;
 
     // Add the revisiondate when it exists
@@ -14,5 +12,6 @@
         printstring += ", sist endret: " + revisiondate;
     }
 }
+
 <span class="date datestring">@printstring</span>
 

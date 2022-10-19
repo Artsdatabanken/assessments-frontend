@@ -1,0 +1,24 @@
+﻿@using Assessments.Frontend.Web.Infrastructure.Services
+
+@model SpeciesGroupViewModel
+
+@inject ExpertCommitteeMemberService _expertCommitteeMemberService
+
+@{
+    var expertCommitteeName = await _expertCommitteeMemberService.GetExpertCommitteeName(Model.ExpertCommittee, Model.AssessmentYear);
+}
+
+<div class="speciesgroup_container">
+    <div class="species_group_image">
+        <div class="image_background">
+            @if (!String.IsNullOrEmpty(Model.SpeciesGroupImageUrl))
+            {
+                <img src="@Model.SpeciesGroupImageUrl" alt="@Model.SpeciesGroup" />
+            }
+        </div>
+    </div>
+    <p>
+        Vurdert av <a href="https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene" class="lowercase">ekspertkomité for @expertCommitteeName </a> <br />
+        <partial name="/Views/Shared/_PublishedDate.cshtml" />
+    </p>
+</div>

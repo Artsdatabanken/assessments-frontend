@@ -6,8 +6,12 @@ const filters = document.getElementById("filters");
 
 if (filters) {
 const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
-const insectFilters = document.getElementsByClassName("insect_input");
+const algaeFilters = document.getElementsByClassName("Alger_input");
+const insectFilters = document.getElementsByClassName("insect_input") || document.getElementsByClassName("Insekter_input");
+const crayfishFilters = document.getElementsByClassName("Krepsdyr_input");
+const algaeInput = document.getElementById("Alger");
 const insectInput = document.getElementById("Insekter");
+const crayfishInput = document.getElementById("Krepsdyr");
 const redlistCheck = document.getElementById("redlisted_check")?.checked;
 const endangeredCheck = document.getElementById("endangered_check")?.checked;
 const init = document.getElementById("initial_check");
@@ -30,7 +34,13 @@ function setVisited() {
 function handleFirstTime() {
     // On the first run, close all but given elements
     Array.prototype.forEach.call(isCheckInputs, (e) => {
-        if (e.id == "show_area" || e.id == "show_insects") {
+        if (
+            e.id == "show_area"
+            || e.id == "show_Alger"
+            || e.id == "show_insects"
+            || e.id == "show_Insekter"
+            || e.id == "show_Krepsdyr"
+        ) {
             e.checked = true;
         } else {
             e.checked = false;
@@ -144,7 +154,7 @@ function setCollapsibleIcon(name) {
     span.innerHTML = content;
     span.setAttribute("id", addId);
     span.setAttribute("class", classNames);
-    headerItem.insertBefore(span, headerItem.childNodes[0]);
+    headerItem?.insertBefore(span, headerItem?.childNodes[0]);
 }
 
 // Handle toggle events for misc. scenario
@@ -163,8 +173,14 @@ function shouldToggleMarkRedOrEnd(list) {
 }
 
 function toggleMarkAll() {
-    if (shouldToggleMarkAll("insect_input")) {
+    if (shouldToggleMarkAll("Alger_input")) {
+        algaeInput.checked = true;
+    }
+    if (shouldToggleMarkAll("insect_input") || shouldToggleMarkAll("Insekter_input")) {
         insectInput.checked = true;
+    }
+    if (shouldToggleMarkAll("Krepser_input")) {
+        crayfishInput.checked = true;
     }
     if (shouldToggleMarkRedOrEnd(redlisted)) {
         redlistCheck.checked = true;
@@ -197,12 +213,12 @@ function toggleEndangeredCategories() {
     toggleAllOfType(endangered, "endangered_check", "redlisted_check");
 }
 
-function toggleInsects() {
-    Array.prototype.forEach.call(insectFilters, insect => {
-        if (insectInput.checked) {
-            insect.checked = true;
+function toggleSubSpecies(filters, input) {
+    Array.prototype.forEach.call(filters, subSpecies => {
+        if (input.checked) {
+            subSpecies.checked = true;
         } else {
-            insect.checked = false;
+            subSpecies.checked = false;
         }
     });
 }
@@ -214,8 +230,12 @@ function toggleSingleFilter(element, parentId) {
 }
 
 function updateToggleAll(el) {
-    if (el && el.classList[0] === "insect_input") {
+    if (el && el.classList[0] === "Alger_input") {
+        toggleSingleFilter(el, "Alger");
+    } else if (el && (el.classList[0] === "insect_input" || el.classList[0] === "Insekter_input")) {
         toggleSingleFilter(el, "Insekter");
+    } else if (el && el.classList[0] === "Krepsdyr_input") {
+        toggleSingleFilter(el, "Krepsdyr");
     } else if (el && endangered.some(category => el.id.indexOf(category) != -1)) {
         toggleSingleFilter(el, "endangered_check");
         toggleSingleFilter(el, "redlisted_check");
@@ -230,8 +250,12 @@ function onClickAction(el, addOrRemove) {
         toggleRedlistedCategories();
     } else if (el.id === "endangered_check") {
         toggleEndangeredCategories();
+    } else if (el.id === "Alger") {
+        toggleSubSpecies(algaeFilters, algaeInput);
     } else if (el.id === "Insekter") {
-        toggleInsects();
+        toggleSubSpecies(insectFilters, insectInput);
+    } else if (el.id === "Krepsdyr") {
+        toggleSubSpecies(crayfishFilters, crayfishInput);
     } else {
         if (addOrRemove == "add") {
             updateToggleAll(el);

@@ -225,24 +225,39 @@ li.checkbox label {
     list-style-type: none;
 }
 
-.filter_groups ul.insect_filters {
+.filter_groups ul.Alger_filters,
+.filter_groups ul.insect_filters,
+.filter_groups ul.Insekter_filters,
+.filter_groups ul.Krepsdyr_filters {
     padding-right: 0;
 }
 
-div.filter_insects {
+div.filter_Alger,
+div.filter_insects,
+div.filter_Insekter,
+div.filter_Krepsdyr {
     margin-left: 15px;
 }
 
-.list_header_insects {
+.list_header_Alger,
+.list_header_insects,
+.list_header_Insekter,
+.list_header_Krepsdyr {
     background-color: transparent;
 }
 
-.filter_insects {
+.filter_Alger,
+.filter_insects,
+.filter_Insekter,
+.filter_Krepsdyr {
     border-bottom: 1px solid lightgray;
     margin-bottom: 5px;
 }
 
-#list_header_insects {
+#list_header_Alger,
+#list_header_insects,
+#list_header_Insekter,
+#list_header_Krepsdyr {
     padding-right: 3px;
 }
 
@@ -263,8 +278,6 @@ button.list_header {
   align-items: center;
 }
 
-
-
 .filters_bottom {
     margin-top: 10px;
 }
@@ -278,7 +291,10 @@ button.list_header {
     padding-right: 5px;
 }
 
-#show_all_insects {
+#show_all_Alger,
+#show_all_insects,
+#show_all_Insekter,
+#show_all_Krepsdyr {
     display: none;
 }
 
@@ -337,11 +353,17 @@ button.list_header {
         text-align: center;
     }
 
-    .filter_insects {
+    .filter_Alger,
+    .filter_insects,
+    .filter_Insekter,
+    .filter_Krepsdyr {
         margin-bottom: 10px;
     }
 
-    #show_all_insects {
+    #show_all_Alger,
+    #show_all_insects,
+    #show_all_Insekter,
+    #show_all_Krepsdyr {
         display: inline-block;
         white-space: nowrap;
     }
@@ -553,11 +575,17 @@ button.list_header {
     display: none;
 }
 
-.only_js input[type=checkbox]:checked#show_insects ~ .filter_insects {
+.only_js input[type=checkbox]:checked#show_Alger ~ .filter_Alger,
+.only_js input[type=checkbox]:checked#show_insects ~ .filter_insects,
+.only_js input[type=checkbox]:checked#show_Insekter ~ .filter_Insekter,
+.only_js input[type=checkbox]:checked#show_Krepsdyr ~ .filter_Krepsdyr {
     display: block;
 }
 
-.only_js .filter_insects {
+.only_js .filter_Alger,
+.only_js .filter_Krepsdyr,
+.only_js .filter_insects,
+.only_js .filter_Insekter {
     display: none;
 }
 

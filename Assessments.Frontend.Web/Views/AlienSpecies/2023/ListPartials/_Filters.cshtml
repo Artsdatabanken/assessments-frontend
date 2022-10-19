@@ -31,55 +31,55 @@
                     value = item.Replace("scroll_", "");
         }
         id = id.Replace(" ", "_");
-        <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
+    <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
     }
     void InputTag(string name, string[] elements, string value)
     {
         InputTag(value, "submitOnclick", name, elements, value);
     }
-    void getInsectsList(string[] insects)
+    void getSubSpeciesGroupList(SpeciesGroups.SpeciesGroupItem parentSpecies, string name)
     {
-        <div class="filter_insects">
-            <ul class="insect_filters">
-                @foreach (var insect in insects)
+    <div class="filter_@parentSpecies.SpeciesName">
+            <ul class="@parentSpecies.SpeciesName-filters">
+                    @foreach (var species in parentSpecies.SubGroup)
                 {
                     <li class="checkbox">
-                        <label for="@insect">
+                        <label for="@species.SpeciesName">
                             @{
-                                InputTag(insect, "insect_input submitOnclick", "SpeciesGroups", Model.Parameters.SpeciesGroups, insect);
+                            InputTag(species.SpeciesName, $"{species.SpeciesName}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.SpeciesName);
                             }
-                            <span class="label_text">@insect</span>
+                            <span class="label_text">@species.SpeciesName</span>
                         </label>
                     </li>
                 }
-            </ul>
-        </div>
+                </ul>
+    </div>
                                 }
     void makeCheckBoxLi(string key, string value, string name, string[] model)
     {        
         string id= key.Replace(" ", "_");
-        <li class="checkbox">
-            <label for="@id">
-                @{ InputTag(name, model, key);}
-                <span class="label_text">@value</span>
-            </label>
-        </li>
+    <li class="checkbox">
+                <label for="@id">
+                    @{ InputTag(name, model, key);}
+                    <span class="label_text">@value</span>
+                </label>
+    </li>
     }
     void makeFilterElement(string buttontext, string filtername, string action, string id, string buttonname, string numbername)
     {
         InputTag(action, "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, filtername);
-        <button name="@buttonname" class="list_header" id="@id" onclick="collapse('@action')" type="button">
-            @buttontext
-            <span class="filternumber">@GetActiveFilters(numbername, Model.Parameters)</span>
-        </button>
+    <button name="@buttonname" class="list_header" id="@id" onclick="collapse('@action')" type="button">
+                @buttontext
+                <span class="filternumber">@GetActiveFilters(numbername, Model.Parameters)</span>
+    </button>
     }
     void makeFilterGroup(bool swap, string groupclassname, string name, dynamic modelname, dynamic looplist, string buttontext, string filtername, string action, string id, string buttonname, string numbername)
     {
-        <li class="filter_group">
-            @{makeFilterElement(buttontext, filtername, action, id, buttonname, numbername);}
-            <div class=@groupclassname>
-                <ul>
-                    @{
+    <li class="filter_group">
+                @{makeFilterElement(buttontext, filtername, action, id, buttonname, numbername);}
+                <div class=@groupclassname>
+                    <ul>
+                        @{
                         string key;
                         string value;
                         if (name == "Area")
@@ -132,12 +132,13 @@
                                 makeCheckBoxLi(value, key, name, modelname);
                             }
                         }
-                    }
-                    
-                </ul>
-            </div>
-        </li>
+                        }
+                        
+                    </ul>
+                </div>
+    </li>
     }
+
     void makeSuperChips(bool swap, string name, dynamic modelname, dynamic looplist)
     {
         @foreach (var el in looplist)
@@ -206,14 +207,15 @@
             }
         }
     }
+
     void makeChips(string buttontext, string className,string value)
     {
-    <button class="chips @className" onclick="submitClickedElement('@value')" type="submit" >
-        <span>@buttontext</span>       
-        <span class="x" >
-            <span class="material-icons">close</span>Fjern
-        </span>
-    </button>
+        <button class="chips @className" onclick="submitClickedElement('@value')" type="submit" >
+            <span>@buttontext</span>
+            <span class="x" >
+                <span class="material-icons">close</span>Fjern
+            </span>
+        </button>
     }
 }
 
@@ -329,22 +331,24 @@
                                         <ul>
                                             @foreach (var species in AllSpeciesGroups)
                                             {
-                                                @if (species.SpeciesName == "Insekter")
+                                                @if (species.SubGroup != null)
                                                 {
-                                                    InputTag("show_insects", "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, "Insects");
+                                                    InputTag($"show_{species.SpeciesName}", "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, species.SpeciesName);
                                                     <li class="checkbox">
-                                                        <button name="insektsfiltre" class="list_header" id="list_header_insects" onclick="collapse('show_insects')" type="button">
-                                                            <span>@species</span>
+                                                        <button name="@species.SpeciesName-filter" class="list_header" id="list_header_@species.SpeciesName" onclick="collapse('show_@species.SpeciesName')" type="button">
+                                                            <span>@species.SpeciesName</span>
                                                             <span class="list_header_text">
-                                                                <span class="filternumber">@GetActiveFilters("Insects", Model.Parameters)</span>
+                                                                <span class="filternumber">@GetActiveFilters(species.SpeciesName, Model.Parameters)</span>
                                                             </span>
-                                                            <span id="show_all_insects">Marker alle</span>
+                                                            <span id="show_all_@species.SpeciesName">Marker alle</span>
                                                             <label onclick="event.stopPropagation()">
-                                                                @{ InputTag("SpeciesGroups", Model.Parameters.SpeciesGroups, species.SpeciesName); }
+                                                                @{
+                                                                    InputTag("SpeciesGroups", Model.Parameters.SpeciesGroups, species.SpeciesName);
+                                                                }
                                                             </label>
                                                         </button>
                                                     </li>
-                                                    //getInsectsList(AllInsects);
+                                                    getSubSpeciesGroupList(species, "SpeciesGroups");
                                                 }
                                                 else
                                                 {

@@ -2,7 +2,7 @@
 
 @{
     AlienSpeciesAssessment2023 assessment = Model.Assessment;
-    ViewBag.Title = assessment.EvaluatedScientificName + " - Fremmedartslista";
+    ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
 
     PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
     {
@@ -27,15 +27,15 @@
              Url = "https://artsdatabanken.no/fremmedarter/2018/N/" + x.AssessmentId, // TODO: get real url when the model is ready
              Year = x.RevisionYear
          }).ToArray(),
-         ScientificName = Model.Assessment.EvaluatedScientificName,
+                ScientificName = Model.Assessment.ScientificName,
          ScientificNameId = Model.Assessment.EvaluatedScientificNameId.GetValueOrDefault(),
-         TaxonRank = Model.Assessment.EvaluatedScientificNameRank,
+                TaxonRank = Model.Assessment.ScientificName,
     };
 }
 
 <partial name="/Views/AlienSpecies/2023/AssesmentPartials/_Breadcrumb.cshtml" />
 
-<h3>@assessment.EvaluatedScientificName</h3>
+<h3>@assessment.ScientificName</h3>
 
 <div class="pagecontainer">
     <partial name="/Views/Shared/_PageMenu.cshtml" model="pageMenuViewModel" />

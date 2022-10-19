@@ -1,9 +1,10 @@
-﻿@using Assessments.Frontend.Web.Infrastructure.Services
+﻿@model PageMenuViewModel
+@using Assessments.Frontend.Web.Infrastructure.Services
 @inject ArtsdatabankenApiService _artsdatabankenApiService
 
 @{
     var menuItems = new List<KeyValuePair<string, string>>();
-    var content = await _artsdatabankenApiService.Get<ArtsdatabankenApiContent>("Content/314303"); 
+    var content = await _artsdatabankenApiService.Get<ArtsdatabankenApiContent>($"Content/{Model.PageMenuContentId}");
     if (content != null)
     {
         // https://database.artsdatabanken.no/cms/node/314303/edit?destination=node/314304
@@ -12,15 +13,14 @@
 }
 
 <div class="sidebarmenu" id="sidebarmenu_container">
-    <button class="button tertiary" onclick="expandParent(this, 'expand')">Om Rødlista </button>
+    <button class="button tertiary" onclick="expandParent(this, 'expand')">@Model.PageMenuExpandButtonText</button>
     
     <ul>
-
         @*lenker fra cms/drupal via api*@
         <li>
             <a class="menuheaderlink" asp-controller="Redlist" asp-action="Index2021">
                 <h3>
-                    <span>Rødlista for arter 2021</span>
+                    <span>@Model.PageMenuExpandButtonText</span>
                     <span class="material-icons pad-top">keyboard_arrow_right</span>
                 </h3>
             </a>

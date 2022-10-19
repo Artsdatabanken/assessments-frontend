@@ -1,49 +1,88 @@
 ﻿@model AlienSpeciesListViewModel
 
 @{
-    ViewData["Title"] = "Fremmedartslista 2023";
+    CitationViewModel citationViewModel = new CitationViewModel
+    {
+        CitationString = Constants.AlienSpecies2023CitationString
+    };
+
+    PageHeaderViewModel pageHeaderViewModel = new PageHeaderViewModel
+    {
+        HeaderText = Constants.AlienSpecies2023HeaderText,
+        HeaderByline = Constants.AlienSpecies2023HeaderByline
+    };
+
+    IntroductionViewModel introductionViewModel = new IntroductionViewModel
+    {
+        Introduction = Constants.AlienSpecies2023Introduction
+    };
+
+    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
+    {
+        PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+        PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
+        PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
+    };
+
+    ViewData["Title"] = "Fremmedartslista";
 }
 
-<h3>@ViewData["Title"]</h3>
+<div class="pagecontainer">
+    <partial name="/Views/Shared/_PageMenu.cshtml" model="@pageMenuViewModel" />
 
-<div is-visible="@Model.Results.Any()">
+    <div class="content-placer bigmid">
+        <div class="mid-content">
+            <div class="title_with_image">
+                <div class="title_with_header">
+                    <partial name="/Views/Shared/_Header.cshtml" model="@pageHeaderViewModel" />
+                </div>
+                <div class="title_with_ingress">
+                    <img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />
+                    <partial name="/Views/Shared/_Introduction.cshtml" model="@introductionViewModel" />
+                </div>
+            </div>
 
-    <form>
-        <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i @ViewData["Title"]" />
-        
-        <button type="submit">Søk</button>
+            <form id="search_and_filter_form" aps-action="" method="get">
+                <partial name="/Views/AlienSpecies/2023/ListPartials/_Search.cshtml" />
+                <partial name="/Views/AlienSpecies/2023/ListPartials/_Filters.cshtml" />
+            </form>
 
-        <button type="submit" name="Export" value="true" formtarget="_blank">
-            <span class="material-icons">file_download</span> Eksporter
-        </button>
+            <div is-visible="@Model.Results.Any()">
 
-    </form>
+                <form>
+                    <button type="submit" name="Export" value="true" formtarget="_blank">
+                        <span class="material-icons">file_download</span> Eksporter
+                    </button>
+                </form>
 
-    <ul>
-        @foreach (var item in Model.Results)
-        {
-            <li>
-                <a asp-action="Detail" asp-route-id="@item.Id">
-                    @item.Id  @item.EvaluatedScientificName
-                </a>
-            </li>
-        }
-    </ul>
+                <ul>
+                    @foreach (var item in Model.Results)
+                    {
+                        <li>
+                            <a asp-action="Detail" asp-route-id="@item.Id">
+                                @item.Id  @item.EvaluatedScientificName
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <div is-visible="@Model.Results.PageCount > 1">
+                <p class="page_count">
+                    Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
+                </p>
+
+                @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
+                {
+                Page = page
+                }), new PagedListRenderOptions
+                {
+                PageClasses = new[] { "page-link" },
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" }
+                })
+            </div>
+            <partial name="/Views/Shared/_Citation.cshtml" model="citationViewModel"/>
+        </div>
+    </div>
 </div>
-
-<div is-visible="@Model.Results.PageCount > 1">
-    <p class="page_count">
-        Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
-    </p>
-
-    @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
-    {
-    Page = page
-    }), new PagedListRenderOptions
-    {
-    PageClasses = new[] { "page-link" },
-    UlElementClasses = new[] { "pagination" },
-    LiElementClasses = new[] { "page-item" }
-    })
-</div>
-

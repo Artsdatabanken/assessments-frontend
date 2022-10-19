@@ -104,7 +104,7 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
 
             // Categories
-            viewModel.Category = Helpers.findSelectedCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
+            viewModel.Category = Helpers.findSelectedRedlistSpeciesCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
 
             if (viewModel.Category?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));

@@ -1,24 +1,48 @@
 ﻿@model RL2021ViewModel
+@using Assessments.Frontend.Web.Infrastructure
 
 @{
     ViewData["Title"] = "Rødlista 2021";
+
+    CitationViewModel citationViewModel = new CitationViewModel
+    {
+        CitationString = Constants.RedlistSpecies2021CitationString
+    };
+
+    PageHeaderViewModel headerViewModel = new PageHeaderViewModel
+    {
+        HeaderText = Constants.RedlistSpecies2021HeaderText,
+        HeaderByline = Constants.RedlistSpecies2021HeaderByline
+    };
+
+    IntroductionViewModel introductionViewModel = new IntroductionViewModel
+    {
+        Introduction = Constants.RedlistSpecies2021Introduction
+    };
+
+    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
+    {
+        PageMenuContentId = Constants.RedlistSpecies2021PageMenuContentId,
+        PageMenuExpandButtonText = Constants.RedlistSpecies2021PageManuExpandButtonText,
+        PageMenuHeaderText = Constants.RedlistSpecies2021PageMenuHeaderText
+    };
 }
 
 @{
     //<partial name="/Views/Redlist/Species/2021/List/partials/_Breadcrumb.cshtml" />
 }
 <div class="pagecontainer">
-    <partial name="/Views/Redlist/Species/Shared/_PageMenu.cshtml" />
+    <partial name="/Views/Shared/_PageMenu.cshtml" model="pageMenuViewModel" />
     <div class="content-placer bigmid">
         <div class="mid-content">
 
             <div class="title_with_image">
                 <div class="title_with_header">
-                    <partial name="/Views/Redlist/Species/2021/List/partials/_Header.cshtml" />
+                    <partial name="/Views/Shared/_Header.cshtml" model="headerViewModel" />
                 </div>
                 <div class="title_with_ingress">
                     <img src="https://design.artsdatabanken.no/list-icons/rl2021-icon-small.png" alt="Bilde av en fisk" />
-                    <partial name="/Views/Redlist/Species/2021/List/partials/_Introduction.cshtml" />
+                    <partial name="/Views/Shared/_Introduction.cshtml" model="introductionViewModel"/>
                 </div>
 
             </div>
@@ -26,7 +50,7 @@
                 <partial name="/Views/Redlist/Species/2021/List/partials/_Search.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/List/partials/_Filters.cshtml" />
             </form>
-            <partial name="/Views/Redlist/Species/2021/List/partials/_Citation.cshtml" />
+            <partial name="/Views/Shared/_Citation.cshtml" model="citationViewModel" />
         </div>
     </div>
 </div>

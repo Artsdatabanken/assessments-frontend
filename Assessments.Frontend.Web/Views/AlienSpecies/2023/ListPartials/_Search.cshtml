@@ -1,0 +1,16 @@
+@model AlienSpeciesListViewModel
+
+<div class="list-search">
+    <div class="searchfield">
+        <div class="searchfield_and_button">
+            <input asp-for="Parameters.Name" autocomplete="off" placeholder="Søk i Fremmedartslista 2023" />
+            <button class="primary" type="submit">
+                <span class="material-icons">
+                    search
+                </span>
+                Søk
+            </button>
+        </div>
+        <ul id="autocomplete_list_ul" class="search_dropdown"></ul>
+    </div>
+</div>

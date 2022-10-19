@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System;
 using Assessments.Frontend.Web.Models;
+using Microsoft.VisualBasic;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -27,7 +28,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return value;
         }
 
-        public static string[] findSelectedCategories( bool redlisted, bool endangered,
+        public static string[] findSelectedRedlistSpeciesCategories( bool redlisted, bool endangered,
             string[] categoriesSelected) 
         {
             List<string> selectedCategories = new List<string>();
@@ -503,6 +504,44 @@ namespace Assessments.Frontend.Web.Infrastructure
             { "Varietet", "Variety" },
             { "Form", "Form" }
         };
+
+        // Redlist species constants
+
+        public const int RedlistSpecies2021PageMenuContentId = 314303;
+
+        public const string RedlistSpecies2021PageMenuHeaderText = "Rødlista for arter 2021";
+
+        public const string RedlistSpecies2021HeaderText = "Norsk rødliste for arter 2021";
+
+        public const string RedlistSpecies2021HeaderByline = "Publisert: 24. november 2021";
+
+        public const string RedlistSpecies2021PageManuExpandButtonText = "Om Rødlista";
+
+        public const string RedlistSpecies2021CitationString = "Artsdatabanken (2021, 24. november). Norsk rødliste for arter 2021.";
+
+        public const string RedlistSpecies2021Introduction = "Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge." +
+            " Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
+
+        // Alien species constants
+
+        public const int AlienSpecies2023PageMenuContentId = 314303; // TODO: This needs content id for alien species 2023. Using redlist species 2021 temporarily.
+
+        public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023";
+
+        public const string AlienSpecies2023PageMenuHeaderTextShort = "Fremmedartslista";
+
+        public const string AlienSpecies2023HeaderText = "Norsk fremmedartsliste for 2023";
+
+        public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
+
+        public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
+
+        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Norsk fremmedartsliste 2023."; // TODO: insert correct publishing date for citation
+    
+        public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
+            " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
+
+        public const string AlienSpecies2023NoListViewResults = "Kombinasjonen av søk og filter gir ingen treff i Fremmedartslista for 2023.";
     }
 
     public class CategoryComparer : IComparer<string>

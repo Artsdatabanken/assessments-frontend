@@ -1,4 +1,4 @@
-﻿@model SpeciesAssessment2021
+﻿@model SideBarContentViewModel
 
 @functions{
     public string categoryDescription(string category)
@@ -18,7 +18,7 @@
     @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger
     {
         <li>
-            <a target="_blank" href="@prev.AssessmentUrl" class="link-styled">
+            <a target="_blank" href="@prev.Url" class="link-styled">
                 <span>@prev.Year-vurdering</span>
             </a>
         </li>

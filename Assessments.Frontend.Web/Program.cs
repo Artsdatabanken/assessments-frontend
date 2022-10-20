@@ -1,7 +1,6 @@
 using System;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.Api;
 using Assessments.Frontend.Web.Infrastructure.Services;
@@ -10,7 +9,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,19 +28,7 @@ builder.Services.AddHttpClient<ArtskartApiService>();
 
 builder.Services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
 
-builder.Services.AddSwaggerGen(options =>
-{
-    options.IncludeXmlComments(
-        Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"), true);
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{Constants.AssessmentsMappingAssembly}.xml"));
-    options.SwaggerDoc("v1",
-        new OpenApiInfo
-        {
-            Title = "Assessments api", Version = "v1", Description = "Species, alien species and naturetype assessments"
-        });
-    var schemaHelper = new SwashbuckleSchemaHelper();
-    options.CustomSchemaIds(type => schemaHelper.GetSchemaId(type));
-});
+builder.Services.AddSwagger();
 
 builder.Services.AddResponseCompression();
 
@@ -73,18 +59,8 @@ if (!Directory.Exists(cachedFilesFolder))
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
 
-if (app.Environment.IsDevelopment()) // Enables swagger in development
-{
-    app.UseSwagger();
-
-    app.UseSwaggerUI(options =>
-    {
-        options.DocumentTitle = "Assessments api - Artsdatabanken";
-        options.RoutePrefix = "swagger";
-        options.SwaggerEndpoint("v1/swagger.json", "Assessments api");
-        options.DefaultModelsExpandDepth(-1);
-    });
-}
+if (app.Environment.IsDevelopment()) // Enable swagger in development
+    SwaggerSetup.Configure(app);
 
 app.MapDefaultControllerRoute();
 

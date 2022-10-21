@@ -42,6 +42,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.TaxonRank?.Any() == true)
                         return $"{parameters.TaxonRank.Length}";
                     return String.Empty;
+                case "ProductionSpecies":
+                    if (parameters.ProductionSpecies?.Any() == true)
+                        return $"{parameters.ProductionSpecies.Length}";
+                    return String.Empty;
                 case "SpeciesGroups":
                     if (parameters.SpeciesGroups?.Any() == true)
                     {
@@ -92,9 +96,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             count += parameters.Area.Length;
             count += parameters.Category.Length;
             count += parameters.SpeciesGroups.Length;
+            count += parameters.ProductionSpecies.Length;
             count += parameters.TaxonRank.Length;
             count += parameters.Habitats.Length;
             count += parameters.Regions.Length;
+            count += parameters.WaterRegions.Length;
             count += parameters.Criterias.Length;
 
             return count;
@@ -104,10 +110,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var selectionlist = parameters.Area;
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
+            selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesGroups).ToArray();
             selectionlist = selectionlist.Concat(parameters.TaxonRank).ToArray();
             selectionlist = selectionlist.Concat(parameters.Habitats).ToArray();
             selectionlist = selectionlist.Concat(parameters.Regions).ToArray();
+            selectionlist = selectionlist.Concat(parameters.WaterRegions).ToArray();
             selectionlist = selectionlist.Concat(parameters.Criterias).ToArray();
             return selectionlist;
         }

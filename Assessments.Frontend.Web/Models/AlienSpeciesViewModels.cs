@@ -24,6 +24,7 @@ namespace Assessments.Frontend.Web.Models
             this.Criterias = Array.Empty<string>();
             this.IsCheck = Array.Empty<string>();
             this.Meta = Array.Empty<string>();
+            this.ProductionSpecies = Array.Empty<string>();
             this.Regions = Array.Empty<string>();
             this.Habitats = Array.Empty<string>();
             this.SpeciesGroups = Array.Empty<string>();
@@ -44,6 +45,8 @@ namespace Assessments.Frontend.Web.Models
         public string Name { get; set; }
 
         public string[] Meta { get; set; }
+
+        public string[] ProductionSpecies { get; set; }
 
         public string[] Regions { get; set; }
 

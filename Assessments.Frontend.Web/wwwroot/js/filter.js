@@ -160,7 +160,7 @@ function setCollapsibleIcon(name) {
 
 function shouldToggleMarkAll(elementsClass) {
     const allElements = document.getElementsByClassName(elementsClass);
-    return Array.prototype.every.call(allElements, (element) => {
+    return allElements.length && Array.prototype.every.call(allElements, (element) => {
         return element.checked === true;
     })
 }
@@ -178,7 +178,7 @@ function toggleMarkAll() {
     if (shouldToggleMarkAll("insect_input") || shouldToggleMarkAll("Insekter_input")) {
         insectInput.checked = true;
     }
-    if (shouldToggleMarkAll("Krepser_input")) {
+    if (shouldToggleMarkAll("Krepsdyr_input")) {
         crayfishInput.checked = true;
     }
     if (shouldToggleMarkRedOrEnd(redlisted)) {

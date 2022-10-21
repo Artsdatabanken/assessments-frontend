@@ -1,0 +1,13 @@
+﻿@model AssessmentPageHeaderViewModel
+
+<div class="page-header">
+    <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.scientificNameViewModel"/>
+    @if (@Model.RenderSvalbard)
+    {
+        <h2 class="svalbard-heading">
+            Svalbard
+        </h2>
+    }
+    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.speciesGroupViewModel"/>
+    <hr />
+</div>

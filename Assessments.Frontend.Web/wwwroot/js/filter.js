@@ -114,7 +114,6 @@ if (document.getElementById("filter_modal_background")) {
 }
 
 function submitClickedElement(element) {
-    console.log("Updating filter on chips click")
     // Uncheck related checbox from filter
     element = element.split(' ').join('_'); // spaces must not exist -> underscore
     const checkboxed = document.getElementById(element);

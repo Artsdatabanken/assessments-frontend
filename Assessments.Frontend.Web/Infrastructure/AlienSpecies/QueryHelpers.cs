@@ -28,5 +28,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
            
             return query;
         }
+
+        public static AlienSpeciesListParameters UpdateParameters(AlienSpeciesListParameters parameters)
+        {
+            if (!string.IsNullOrEmpty(parameters.RemoveFilters))
+            {
+                parameters = new AlienSpeciesListParameters(parameters.IsCheck, parameters.Meta, parameters.Name);
+            }
+            return parameters;
+        }
     }
 }

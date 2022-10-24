@@ -119,5 +119,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             selectionlist = selectionlist.Concat(parameters.Criterias).ToArray();
             return selectionlist;
         }
+
+        public static void RemoveAllFilters(AlienSpeciesListParameters parameters)
+        {
+            parameters = new AlienSpeciesListParameters();
+        }
     }
 }

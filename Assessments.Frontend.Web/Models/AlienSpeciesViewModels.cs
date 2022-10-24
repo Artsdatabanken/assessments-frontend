@@ -1,6 +1,7 @@
 ﻿using Assessments.Mapping.AlienSpecies;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
@@ -17,13 +18,14 @@ namespace Assessments.Frontend.Web.Models
 
     public class AlienSpeciesListParameters
     {
-        public AlienSpeciesListParameters()
+        public AlienSpeciesListParameters(string[] isCheck, string[] meta, string name)
         {
             this.Area = Array.Empty<string>();
             this.Category = Array.Empty<string>();
             this.Criterias = Array.Empty<string>();
-            this.IsCheck = Array.Empty<string>();
-            this.Meta = Array.Empty<string>();
+            this.IsCheck = isCheck.Any() ? isCheck : Array.Empty<string>();
+            this.Meta = meta.Any() ? meta : Array.Empty<string>();
+            this.Name = string.IsNullOrEmpty(name) ? string.Empty : name;
             this.ProductionSpecies = Array.Empty<string>();
             this.Regions = Array.Empty<string>();
             this.Habitats = Array.Empty<string>();
@@ -31,6 +33,9 @@ namespace Assessments.Frontend.Web.Models
             this.TaxonRank = Array.Empty<string>();
             this.WaterRegions = Array.Empty<string>();
         }
+
+        public AlienSpeciesListParameters() : this(Array.Empty<string>(), Array.Empty<string>(), string.Empty)
+        { }
 
         public string[] Area { get; set; }
 
@@ -49,6 +54,8 @@ namespace Assessments.Frontend.Web.Models
         public string[] ProductionSpecies { get; set; }
 
         public string[] Regions { get; set; }
+
+        public string RemoveFilters { get; set; }
 
         public string SortBy { get; set; }
 

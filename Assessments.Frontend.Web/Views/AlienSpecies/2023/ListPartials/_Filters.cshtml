@@ -280,7 +280,7 @@
                     @if(GetActiveSelectionCount(Model.Parameters) > 1)
                     {
                         buttontext.Replace("filter", "filtre");
-                        <button class="button tinybutton tertiary search_related" name="remove_filters" value="true">
+                        <button class="button tinybutton tertiary search_related" name="Parameters.@nameof(Model.Parameters.RemoveFilters)" value="true">
                             <span class="material-icons">close</span>Fjern alle filter
                         </button>
                     }        

@@ -22,6 +22,8 @@ namespace Assessments.Frontend.Web.Controllers
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
 
+            viewModel.Parameters = QueryHelpers.UpdateParameters(viewModel.Parameters);
+
             query = QueryHelpers.ApplyParameters(viewModel.Parameters, query);
 
             if (export)

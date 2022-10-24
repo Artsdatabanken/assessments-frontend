@@ -48,7 +48,7 @@
                     <li class="checkbox">
                         <label for="@species.SpeciesName">
                             @{
-                            InputTag(species.SpeciesName, $"{parentSpecies.SpeciesName}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.SpeciesName);
+                            InputTag("input_" + species.SpeciesName, $"{parentSpecies.SpeciesName}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.SpeciesName);
                             }
                             <span class="label_text">@species.SpeciesName</span>
                         </label>
@@ -339,7 +339,7 @@
                                                 <li class="checkbox" style="margin-top: 0;">
                                                     <label for="input_@category.Category">
                                                         @{
-                                                            InputTag("input_" + category.Category, "submitOnclick", "Category", Model.Parameters.Category, category.Category);
+                                                            InputTag("input_" + category.Category, "submitOnclick", nameof(Model.Parameters.Category), Model.Parameters.Category, category.Category);
                                                         }
                                                         <span class="label_text">@category.Category - @category.PresentationString</span>
                                                     </label>

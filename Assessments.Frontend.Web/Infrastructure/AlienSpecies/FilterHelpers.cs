@@ -62,6 +62,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.Regions?.Any() == true)
                         return $"{parameters.Regions.Length}";
                     return String.Empty;
+                case "WaterRegions":
+                    if (parameters.WaterRegions?.Any() == true)
+                        return $"{parameters.WaterRegions.Length}";
+                    return String.Empty;
                 case "Criterias":
                     if (parameters.Criterias?.Any() == true)
                         return $"{parameters.Criterias.Length}";

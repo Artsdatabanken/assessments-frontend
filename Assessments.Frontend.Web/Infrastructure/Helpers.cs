@@ -280,7 +280,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string getRevisionDate(DateTime RevisionDate, string firspublished)
         {
-            if (RevisionDate.Date.ToShortDateString() != firspublished)
+            if (RevisionDate.Date.ToShortDateString() != firspublished && RevisionDate != default)
             {
                 return RevisionDate.Date.ToShortDateString();
             }

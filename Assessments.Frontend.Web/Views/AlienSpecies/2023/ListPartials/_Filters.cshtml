@@ -279,10 +279,9 @@
         @if (Model.Parameters.View != "stat")
         {
             <select asp-for="Parameters.SortBy" id="sort_results" class="sort_by list_actions" onchange="this.form.submit()">
-                <option value="@nameof(SpeciesAssessment2021.ScientificName)">Artsnavn</option>
-                <option value="@nameof(SpeciesAssessment2021.PopularName)">Populærnavn</option>
-                <option value="@nameof(SpeciesAssessment2021.Category)">Kategori</option>
-                <option value="@nameof(SpeciesAssessment2021.SpeciesGroup)">Artsgruppe</option>
+                <option value="@nameof(AlienSpeciesAssessment2023.ScientificName)">Artsnavn</option>
+                <option value="@nameof(AlienSpeciesAssessment2023.EvaluatedVernacularName)">Populærnavn</option>
+                <option value="@nameof(AlienSpeciesAssessment2023.Category)">Kategori</option>
             </select>
         }
     </div>

@@ -1,4 +1,5 @@
-﻿@model AlienSpeciesListViewModel
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model AlienSpeciesListViewModel
 
 @{
     CitationViewModel citationViewModel = new CitationViewModel
@@ -48,40 +49,13 @@
             </form>
 
             <div is-visible="@Model.Results.Any()">
-
                 <form>
                     <button type="submit" name="Export" value="true" formtarget="_blank">
                         <span class="material-icons">file_download</span> Eksporter
                     </button>
                 </form>
-
-                <ul>
-                    @foreach (var item in Model.Results)
-                    {
-                        <li>
-                            <a asp-action="Detail" asp-route-id="@item.Id">
-                                @item.Id  @item.ScientificName
-                            </a>
-                        </li>
-                    }
-                </ul>
             </div>
 
-            <div is-visible="@Model.Results.PageCount > 1">
-                <p class="page_count">
-                    Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
-                </p>
-
-                @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
-                {
-                Page = page
-                }), new PagedListRenderOptions
-                {
-                PageClasses = new[] { "page-link" },
-                UlElementClasses = new[] { "pagination" },
-                LiElementClasses = new[] { "page-item" }
-                })
-            </div>
             <partial name="/Views/Shared/_Citation.cshtml" model="citationViewModel"/>
         </div>
     </div>

@@ -1,6 +1,4 @@
 @model AlienSpeciesListViewModel
-@using X.PagedList.Mvc.Core;
-@using X.PagedList.Web.Common
 
 @if (Model.Results.PageCount > 1
     @*&& Model.View != "stat"*@
@@ -10,21 +8,7 @@
         Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
     </p>
 
-    @Html.PagedListPager(Model.Results, page => Url.Action("Index", new
-    {
-        Page = page,
-        Name = Context.Request.Query["Parameters.Name"],
-        SortBy = Context.Request.Query["Parameters.SortBy"],
-        Area = Context.Request.Query["Parameters.Area"],
-        Category = Context.Request.Query["Parameters.Category"],
-        //Criterias = Context.Request.Query["Parameters.Criterias"],
-        //TaxonRank = Context.Request.Query["Parameters.TaxonRank"],
-        Regions = Context.Request.Query["Parameters.Regions"],
-        Habitats = Context.Request.Query["Parameters.Habitats"],
-        SpeciesGroups = Context.Request.Query["Parameters.SpeciesGroups"],
-        IsCheck = Context.Request.Query["Parameters.IsCheck"],
-        Meta = Context.Request.Query["Parameters.Meta"]
-    }), new PagedListRenderOptions
+    @Html.PagedListPager(Model.Results, page => Url.Action("Index", Context.Request.QueryString.ToRouteValues(new { Page = page })), new PagedListRenderOptions
     {
         PageClasses = new[] { "page-link" },
         UlElementClasses = new[] { "pagination" },

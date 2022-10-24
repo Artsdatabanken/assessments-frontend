@@ -3,7 +3,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
-    public class Regoins
+    public class Regions
     {
         public class RegionItem
         {

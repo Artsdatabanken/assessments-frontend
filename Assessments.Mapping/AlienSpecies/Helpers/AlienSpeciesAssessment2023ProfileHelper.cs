@@ -27,15 +27,15 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         }
         internal static string GetEstablishmentCategory(string SpeciesEstablishmentCategory, string SpeciesStatus)
         {
-            if(SpeciesEstablishmentCategory == null && SpeciesStatus == null)
+            if(SpeciesStatus == null)
             {
                 return string.Empty;
             }
-            if (SpeciesStatus != "C3")
+            else if (SpeciesStatus != "C3")
             {
                 return SpeciesStatus;
             }
-            return SpeciesEstablishmentCategory;
+            else return SpeciesEstablishmentCategory;
         }
     }
 }

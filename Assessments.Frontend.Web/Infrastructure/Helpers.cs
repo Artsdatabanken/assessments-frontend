@@ -432,10 +432,11 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public class SearchAndFilter
         {
-            public const string RemoveFilters = "remove_filters";
-            public const string RemoveSearch = "remove_search";
             public const string ChooseEndangered = "Marker alle truede arter";
             public const string ChooseRedlisted = "Marker alle rødlistearter";
+            public const string ProductionSpecies = "Bruksart";
+            public const string RemoveFilters = "remove_filters";
+            public const string RemoveSearch = "remove_search";
             public const string ResetAllFilters = "Nullstill";
             public const string SearchChangedCategory = "Vis arter med endret kategori fra 2015";
             public const string SearchChooseArea = "Vurderingsområde";

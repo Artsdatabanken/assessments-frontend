@@ -19,7 +19,7 @@
         {
             new SpeciesGroupItem()
             {
-                SpeciesName = "Brungler",
+                SpeciesName = "Brunagler",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
                 TagLine = "Phaeophyceae"
@@ -150,7 +150,7 @@
         {
             new SpeciesGroupItem()
             {
-                SpeciesName = "Agler",
+                SpeciesName = "Alger",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
                 TagLine = "Rhodophyta, Chlorophyta og Phaeophyceae",

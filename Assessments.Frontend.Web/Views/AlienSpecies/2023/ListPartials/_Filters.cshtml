@@ -35,10 +35,12 @@
         id = id.Replace(" ", "_");
         <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
     }
+
     void InputTag(string name, string[] elements, string value)
     {
         InputTag(value, "submitOnclick", name, elements, value);
     }
+
     void getSubSpeciesGroupList(Filter.FilterItem parentSpecies, string name)
     {
         <div class="filter_@parentSpecies.Name">
@@ -106,30 +108,11 @@
         </li>
     }
 
-    string findChipText(string filter, Filter.FilterItem[] filterItems)
-    {
-        for (int i = 0; i < filterItems.Length; i++)
-        {
-            Filter.FilterItem item = filterItems[i];
-            if (item.NameShort == filter)
-            {
-                return item.Name;
-            }
-            else if (item.SubGroup != null)
-            {
-                string buttonText = findChipText(filter, item.SubGroup);
-                if (!string.IsNullOrEmpty(buttonText))
-                    return buttonText;
-            }
-        }
-        return String.Empty;
-    }
-
     void makeFilterChips(string[] filterModel, Filter.FilterItem[] filterItems)
     {
         foreach (var filter in filterModel)
         {
-            string buttonText = findChipText(filter, filterItems);
+            string buttonText = GetChipText(filter, filterItems);
             if (!string.IsNullOrEmpty(buttonText))
                 renderChip(buttonText, filter);
         }
@@ -168,7 +151,6 @@
                 <span class="filterbox">
                     @if (GetActiveSelectionCount(Model.Parameters) > 0)
                     {
-                        var allFilterElements = GetActiveSelectionElement(Model.Parameters);
                         makeFilterChips(Model.Parameters.Area, AllAreas);
                         makeFilterChips(Model.Parameters.Category, AllCategories);
                         makeFilterChips(Model.Parameters.ProductionSpecies, AllProductionSpecies);

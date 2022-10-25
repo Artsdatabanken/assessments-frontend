@@ -69,19 +69,21 @@
         </li>
     }
 
-    void makeFilterElement(string buttontext, string filtername, string action, string id, string buttonname, string numbername)
+    void makeFilterElement(string buttonText, string filterName, string action, string id, string buttonname)
     {
-        InputTag(action, "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, filtername);
+        InputTag(action, "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, filterName);
         <button name="@buttonname" class="list_header" id="@id" onclick="collapse('@action')" type="button">
-                    @buttontext
-                    <span class="filternumber">@GetActiveFilters(numbername, Model.Parameters)</span>
+                    @buttonText
+            <span class="filternumber">@GetActiveFilters(filterName, Model.Parameters)</span>
         </button>
     }
 
-    void makeFilterGroup(string groupclassname, string name, string[] filterModel, Filter.FilterItem[] filterItems, string buttontext, string filtername, string action, string id, string buttonname, string numbername)
+    void makeFilterGroup(string groupclassname, string filterName, string[] filterModel, Filter.FilterItem[] filterItems, string buttontext, string action, string id, string buttonName)
     {
         <li class="filter_group">
-            @{makeFilterElement(buttontext, filtername, action, id, buttonname, numbername);}
+            @{
+                makeFilterElement(buttontext, filterName, action, id, buttonName);
+            }
             <div class=@groupclassname>
                 <ul>
                     @{
@@ -91,7 +93,7 @@
                         {
                             value = el.NameShort;
                             label = el.Name;
-                            makeCheckBoxLi(value, label, name, filterModel);
+                            makeCheckBoxLi(value, label, filterName, filterModel);
                         }
                     }
                 </ul>
@@ -229,11 +231,13 @@
                         <div class="filter_scroll_area">
                             <ul>
                                 @{
-                                    makeFilterGroup("filter_area", nameof(Model.Parameters.Area), Model.Parameters.Area, AllAreas, @SearchAndFilter.SearchChooseArea, "Area", "show_area", "list_header_area", "områdefiltre", "Area");
+                                    makeFilterGroup("filter_area", nameof(Model.Parameters.Area), Model.Parameters.Area, AllAreas, @SearchAndFilter.SearchChooseArea, "show_area", "list_header_area", "områdefiltre");
                                 }
 
                                 <li class="filter_group">
-                                    @{makeFilterElement(@SearchAndFilter.SearchChooseCategory, "Category", "show_category", "list_header_category", "kategorifiltre", "Category");}
+                                    @{
+                                        makeFilterElement(@SearchAndFilter.SearchChooseCategory, nameof(Model.Parameters.Category), "show_category", "list_header_category", "kategorifiltre");
+                                    }
                                     <div class="filter_category">
                                         <ul>
                                             @foreach (var category in AllCategories)
@@ -251,12 +255,12 @@
                                     </div>
                                 </li>
                                 @{
-                                    makeFilterGroup("filter_taxon_rank", nameof(Model.Parameters.TaxonRank), Model.Parameters.TaxonRank, AllTaxonRanks, @SearchAndFilter.SearchFilterTaxonRank, nameof(Model.Parameters.TaxonRank), "show_taxon_rank", "list_header_taxon_rank", "'taksonomisk nivå'-filtre", nameof(Model.Parameters.TaxonRank));
-                                    makeFilterGroup("filter_production_species", nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies, @SearchAndFilter.ProductionSpecies, nameof(Model.Parameters.ProductionSpecies), "show_production_species", "list_header_production_species", "'produksjonsart'-filtre", nameof(Model.Parameters.ProductionSpecies));
+                                    makeFilterGroup("filter_taxon_rank", nameof(Model.Parameters.TaxonRank), Model.Parameters.TaxonRank, AllTaxonRanks, @SearchAndFilter.SearchFilterTaxonRank, "show_taxon_rank", "list_header_taxon_rank", "'taksonomisk nivå'-filtre");
+                                    makeFilterGroup("filter_production_species", nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies, @SearchAndFilter.ProductionSpecies, "show_production_species", "list_header_production_species", "'produksjonsart'-filtre");
                                 }
 
                                 <li class="filter_group">
-                                    @{makeFilterElement("Artsgruppe", "SpeciesGroups", "show_species_groups", "list_header_species_groups", "artsgruppefiltre", "SpeciesGroups");}
+                                    @{makeFilterElement("Artsgruppe", "SpeciesGroups", "show_species_groups", "list_header_species_groups", "artsgruppefiltre");}
                                     <div class="filter_species_groups">
                                         <ul>
                                             @foreach (var species in AllSpeciesGroups)
@@ -289,10 +293,10 @@
                                     </div>
                                 </li>
                                 @{
-                                    makeFilterGroup("filter_habitat", nameof(Model.Parameters.Habitats), Model.Parameters.Habitats, AllHabitats, "Hovedhabitat", "Habitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre", "Habitats");
-                                    makeFilterGroup("filter_region", nameof(Model.Parameters.Regions), Model.Parameters.Regions, AllRegions, "Regioner og havområder", "Region", "show_region", "list_header_region", "regionfiltre", "Regions");
-                                    makeFilterGroup("filter_water_region", nameof(Model.Parameters.WaterRegions), Model.Parameters.WaterRegions, AllWaterRegions, "Vannregioner", "WaterRegion", "show_water_region", "list_header_water_region", "vannregionfiltre", "WaterRegions");
-                                    //makeFilterGroup("filter_criteria", nameof(Model.Parameters.Criterias), Model.Parameters.Criterias, AllCriterias, @SearchAndFilter.SearchChooseCriteria, "Criteria", "show_criteria", "list_header_criteria", "kriteriefiltre", "Criterias");
+                                    makeFilterGroup("filter_habitat", nameof(Model.Parameters.Habitats), Model.Parameters.Habitats, AllHabitats, "Hovedhabitat", "show_habitat", "list_header_habitat", "hovedhabitatfiltre");
+                                    makeFilterGroup("filter_region", nameof(Model.Parameters.Regions), Model.Parameters.Regions, AllRegions, "Regioner og havområder", "show_region", "list_header_region", "regionfiltre");
+                                    makeFilterGroup("filter_water_region", nameof(Model.Parameters.WaterRegions), Model.Parameters.WaterRegions, AllWaterRegions, "Vannregioner", "show_water_region", "list_header_water_region", "vannregionfiltre");
+                                    //makeFilterGroup("filter_criteria", nameof(Model.Parameters.Criterias), Model.Parameters.Criterias, AllCriterias, @SearchAndFilter.SearchChooseCriteria, "show_criteria", "list_header_criteria", "kriteriefiltre");
                                 }
                             </ul>
                         </div>

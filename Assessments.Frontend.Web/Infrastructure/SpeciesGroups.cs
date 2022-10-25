@@ -92,7 +92,7 @@
             new Filter.FilterItem()
             {
                 Name = "Støvlus",
-                NameShort = "sst",
+                NameShort = "ssl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/st%c3%b8vlus",
                 ImageUrl = "https://design.artsdatabanken.no/icons/St%c3%b8vlus.svg",
                 Description = "Psocoptera"
@@ -136,7 +136,7 @@
             new Filter.FilterItem()
             {
                 Name = "Bladfotinger",
-                NameShort = "sbl",
+                NameShort = "sbf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bladfotinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bladfotinger.svg",
                 Description = "Branchiopoda"

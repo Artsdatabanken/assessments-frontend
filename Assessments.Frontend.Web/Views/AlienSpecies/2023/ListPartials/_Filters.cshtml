@@ -50,7 +50,7 @@
                     <li class="checkbox">
                         <label for="input_@species.NameShort">
                             @{
-                            InputTag("input_" + species.NameShort, $"{parentSpecies.Name}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.NameShort);
+                            InputTag(species.NameShort, $"{parentSpecies.Name}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.NameShort);
                             }
                             <span class="label_text">@species.Name</span>
                         </label>

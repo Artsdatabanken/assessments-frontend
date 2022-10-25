@@ -48,7 +48,7 @@
                     @foreach (var species in parentSpecies.SubGroup)
                 {
                     <li class="checkbox">
-                        <label for="input_@species.NameShort">
+                        <label for="@species.NameShort">
                             @{
                             InputTag(species.NameShort, $"{parentSpecies.Name}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.NameShort);
                             }

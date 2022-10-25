@@ -2,12 +2,12 @@
 {
     public class AlienSpeciesHelpers
     {
-        public static SpeciesGroups.SpeciesGroupItem GetSpeciesGroup(SpeciesGroups.SpeciesGroupItem[] speciesGroups, string speciesGroupName)
+        public static Filter.FilterItem GetSpeciesGroup(Filter.FilterItem[] speciesGroups, string speciesGroupName)
         {
             for (int i = 0; i < speciesGroups.Length; i++)
             {
-                SpeciesGroups.SpeciesGroupItem speciesGroup = speciesGroups[i];
-                if (speciesGroup.SpeciesName == speciesGroupName)
+                Filter.FilterItem speciesGroup = speciesGroups[i];
+                if (speciesGroup.Name == speciesGroupName)
                 {
                     return speciesGroup;
                 }
@@ -16,8 +16,8 @@
                 {
                     for (int j = 0; j < speciesGroup.SubGroup.Length; j++)
                     {
-                        SpeciesGroups.SpeciesGroupItem subGroup = speciesGroup.SubGroup[j];
-                        if (subGroup.SpeciesName == speciesGroupName)
+                        Filter.FilterItem subGroup = speciesGroup.SubGroup[j];
+                        if (subGroup.Name == speciesGroupName)
                         {
                             return subGroup;
                         }

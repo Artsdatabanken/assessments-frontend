@@ -4,24 +4,17 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public class ProductionSpecies
     {
-        public class ProductionSpeciesItem
+        public static Filter.FilterItem[] AlienSpecies2023ProductionSpecies =
         {
-            public string Name { get;set;}
-
-            public string ShortName { get; set; }
-        }
-
-        public static ProductionSpeciesItem[] AlienSpecies2023ProductionSpecies =
-        {
-            new ProductionSpeciesItem()
+            new Filter.FilterItem()
             {
                 Name = "Tidligere eller nåværende bruksart",
-                ShortName = "use"
+                NameShort = "use"
             },
-            new ProductionSpeciesItem()
+            new Filter.FilterItem()
             {
                 Name = "Ikke bruksart",
-                ShortName = "not"
+                NameShort = "not"
             }
         };
     }

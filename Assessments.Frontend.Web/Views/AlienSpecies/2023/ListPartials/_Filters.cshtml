@@ -5,15 +5,15 @@
 @using System.Linq;
 
 @{
-    Areas.AreaItem[] AllAreas = Areas.AlienSpecies2023Areas;
-    Categories.CategoryItem[] AllCategories = Categories.AlienSpecies2023Categories;
+    Filter.FilterItem[] AllAreas = Areas.AlienSpecies2023Areas;
+    Filter.FilterItem[] AllCategories = Categories.AlienSpecies2023Categories;
     //var AllCriterias = ViewBag.AllCriterias;
-    Regions.RegionItem[] AllRegions = Regions.AlienSpecies2023Regions;
-    Regions.RegionItem[] AllWaterRegions = Regions.AlienSpecies2023WaterRegions;
-    Habitat.HabitatItem[] AllHabitats = Habitat.AlienSpecies2023Habitats;
-    Dictionary<string, string> AllTaxonRanks = getAllTaxonRanks();
-    ProductionSpecies.ProductionSpeciesItem[] AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
-    SpeciesGroups.SpeciesGroupItem[] AllSpeciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
+    Filter.FilterItem[] AllRegions = Regions.AlienSpecies2023Regions;
+    Filter.FilterItem[] AllWaterRegions = Regions.AlienSpecies2023WaterRegions;
+    Filter.FilterItem[] AllHabitats = Habitat.AlienSpecies2023Habitats;
+    Filter.FilterItem[] AllTaxonRanks = TaxonRank.AlienSpecies2023TaxonRanks;
+    Filter.FilterItem[] AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
+    Filter.FilterItem[] AllSpeciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
 
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
     {
@@ -39,18 +39,18 @@
     {
         InputTag(value, "submitOnclick", name, elements, value);
     }
-    void getSubSpeciesGroupList(SpeciesGroups.SpeciesGroupItem parentSpecies, string name)
+    void getSubSpeciesGroupList(Filter.FilterItem parentSpecies, string name)
     {
-        <div class="filter_@parentSpecies.SpeciesName">
-            <ul class="@parentSpecies.SpeciesName-filters">
+        <div class="filter_@parentSpecies.Name">
+            <ul class="@parentSpecies.Name-filters">
                     @foreach (var species in parentSpecies.SubGroup)
                 {
                     <li class="checkbox">
-                        <label for="@species.SpeciesName">
+                        <label for="input_@species.NameShort">
                             @{
-                            InputTag("input_" + species.SpeciesName, $"{parentSpecies.SpeciesName}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.SpeciesName);
+                            InputTag("input_" + species.NameShort, $"{parentSpecies.Name}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.NameShort);
                             }
-                            <span class="label_text">@species.SpeciesName</span>
+                            <span class="label_text">@species.Name</span>
                         </label>
                     </li>
                 }
@@ -58,13 +58,13 @@
         </div>
     }
 
-    void makeCheckBoxLi(string key, string value, string name, string[] model)
+    void makeCheckBoxLi(string value, string label, string name, string[] model)
     {        
-        string id= key.Replace(" ", "_");
+        string id = value.Replace(" ", "_");
         <li class="checkbox">
             <label for="@id">
-                @{ InputTag(name, model, key);}
-                <span class="label_text">@value</span>
+                @{ InputTag(name, model, value);}
+                <span class="label_text">@label</span>
             </label>
         </li>
     }
@@ -78,73 +78,20 @@
         </button>
     }
 
-    void makeFilterGroup(string groupclassname, string name, string[] modelname, dynamic looplist, string buttontext, string filtername, string action, string id, string buttonname, string numbername)
+    void makeFilterGroup(string groupclassname, string name, string[] filterModel, Filter.FilterItem[] filterItems, string buttontext, string filtername, string action, string id, string buttonname, string numbername)
     {
         <li class="filter_group">
             @{makeFilterElement(buttontext, filtername, action, id, buttonname, numbername);}
             <div class=@groupclassname>
                 <ul>
                     @{
-                        string key;
+                        string label;
                         string value;
-                        if (name == nameof(Model.Parameters.Area))
+                        foreach (var el in filterItems)
                         {
-                            foreach (var el in looplist)
-                            {
-                                value = el.AreaShort;
-                                key = el.Area;
-                                makeCheckBoxLi(value, key, name, modelname);
-                            }
-                        }
-                        else if (name == nameof(Model.Parameters.Habitats))
-                        {
-                            foreach (var el in looplist)
-                            {
-                                value = el.Name;
-                                key = el.ShortName;
-                                makeCheckBoxLi(value, key, name, modelname);
-                            }
-                        }
-                        else if (name == nameof(Model.Parameters.Category))
-                        {
-                            foreach (var el in looplist)
-                            {
-                                value = el.Category;
-                                key = el.Category;
-                                makeCheckBoxLi(value, key, name, modelname);
-                            }
-                        }
-                        else if (name == nameof(Model.Parameters.Regions) || name == nameof(Model.Parameters.WaterRegions))
-                        {
-                            foreach (var el in looplist)
-                            {
-                                value = el.RegionShortName;
-                                key = el.RegionName;
-                                makeCheckBoxLi(value, key, name, modelname);
-                            }
-                        }
-                        else if (name == nameof(Model.Parameters.ProductionSpecies))
-                        {
-                            foreach (var el in looplist)
-                            {
-                                value = el.ShortName;
-                                key = el.Name;
-                                makeCheckBoxLi(value, key, name, modelname);
-                            }
-                        }
-                        else
-                        {
-                            foreach (var el in looplist)
-                            {
-                                value = el.Value;
-                                key = el.Key;
-
-                                if (name == nameof(Model.Parameters.Criterias))
-                                {
-                                    key = el.Key + " - " + el.Value;
-                                }
-                                makeCheckBoxLi(value, key, name, modelname);
-                            }
+                            value = el.NameShort;
+                            label = el.Name;
+                            makeCheckBoxLi(value, label, name, filterModel);
                         }
                     }
                 </ul>
@@ -152,87 +99,42 @@
         </li>
     }
 
-    void makeSuperChips(string name, string[] modelname, dynamic looplist)
+    string findChipText(string filter, Filter.FilterItem[] filterItems)
     {
-        foreach (var value in modelname)
+        for (int i = 0; i < filterItems.Length; i++)
         {
-            for (int i = 0; i < looplist.Length; i++)
+            Filter.FilterItem item = filterItems[i];
+            if (item.NameShort == filter)
             {
-                string buttonText = string.Empty;
-                string filterValue = "input_" + value;
-
-                switch (name)
-                {
-                    case (nameof(Model.Parameters.SpeciesGroups)):
-                        SpeciesGroups.SpeciesGroupItem speciesGroup = looplist[i];
-                        if (speciesGroup.SpeciesName == value)
-                        {
-                            buttonText = speciesGroup.SpeciesName;
-                            break;
-                        }
-                        else if (speciesGroup.SubGroup != null)
-                        {
-                            for (int j = 0; j < speciesGroup.SubGroup.Length; j++)
-                            {
-                                SpeciesGroups.SpeciesGroupItem subSpeciesGroup = speciesGroup.SubGroup[j];
-                                if (subSpeciesGroup.SpeciesName == value)
-                                {
-                                    buttonText = subSpeciesGroup.SpeciesName;
-                                    break;
-                                }
-                            }
-                        }
-                        break;
-                    case (nameof(Model.Parameters.ProductionSpecies)):
-                        ProductionSpecies.ProductionSpeciesItem productionSpecies = looplist[i];
-                        if (productionSpecies.ShortName == value)
-                        {
-                            buttonText = productionSpecies.Name;
-                        }
-                        break;
-                    case (nameof(Model.Parameters.Category)):
-                        Categories.CategoryItem category = looplist[i];
-                        if (category.Category == value)
-                        {
-                            buttonText = category.TagLine;
-                        }
-                        break;
-                    case (nameof(Model.Parameters.Habitats)):
-                        Habitat.HabitatItem habitat = looplist[i];
-                        if (habitat.ShortName == value)
-                        {
-                            buttonText = habitat.Name;
-                        }
-                        break;
-                    case (nameof(Model.Parameters.Area)):
-                        Areas.AreaItem area = looplist[i];
-                        if (area.AreaShort == value)
-                        {
-                            buttonText = area.Area;
-                        }
-                        break;
-                    case (nameof(Model.Parameters.Regions)):
-                    case (nameof(Model.Parameters.WaterRegions)):
-                        Regions.RegionItem region = looplist[i];
-                        if (region.RegionShortName == value)
-                        {
-                            buttonText = region.RegionName;
-                        }
-                        break;
-
-                    default:
-                        return;
-                }
+                return item.Name;
+            }
+            else if (item.SubGroup != null)
+            {
+                string buttonText = findChipText(filter, item.SubGroup);
                 if (!string.IsNullOrEmpty(buttonText))
                 {
-                    makeChips(buttonText, filterValue);
+                    return buttonText;
                 }
+            }
+        }
+        return String.Empty;
+    }
+
+    void makeFilterChips(string[] filterModel, Filter.FilterItem[] filterItems)
+    {
+        foreach (var filter in filterModel)
+        {
+            string filterValue = "input_" + filter;
+            string buttonText = findChipText(filter, filterItems);
+            if (!string.IsNullOrEmpty(buttonText))
+            {
+                renderChip(buttonText, filterValue);
             }
         }
 
     }
 
-    void makeChips(string buttontext, string filterValue)
+    void renderChip(string buttontext, string filterValue)
     {
         <button class="chips generic" onclick="submitClickedElement('@filterValue')" type="submit">
             <span>@buttontext</span>
@@ -265,15 +167,15 @@
                     @if (GetActiveSelectionCount(Model.Parameters) > 0)
                     {
                         var allFilterElements = GetActiveSelectionElement(Model.Parameters);
-                        makeSuperChips(nameof(Model.Parameters.Area), allFilterElements, AllAreas);
-                        makeSuperChips(nameof(Model.Parameters.Category), Model.Parameters.Category, AllCategories);
-                        makeSuperChips(nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies);
-                        makeSuperChips(nameof(Model.Parameters.SpeciesGroups), Model.Parameters.SpeciesGroups, AllSpeciesGroups);
-                        makeSuperChips(nameof(Model.Parameters.TaxonRank), Model.Parameters.TaxonRank, AllTaxonRanks);
-                        makeSuperChips(nameof(Model.Parameters.Habitats), Model.Parameters.Habitats, AllHabitats);
-                        makeSuperChips(nameof(Model.Parameters.Regions), Model.Parameters.Regions, AllRegions);
-                        makeSuperChips(nameof(Model.Parameters.WaterRegions), Model.Parameters.WaterRegions, AllWaterRegions);
-                        //makeSuperChips("Criterias", Model.Parameters.Criterias, AllCriterias);
+                        makeFilterChips(Model.Parameters.Area, AllAreas);
+                        makeFilterChips(Model.Parameters.Category, AllCategories);
+                        makeFilterChips(Model.Parameters.ProductionSpecies, AllProductionSpecies);
+                        makeFilterChips(Model.Parameters.SpeciesGroups, AllSpeciesGroups);
+                        makeFilterChips(Model.Parameters.TaxonRank, AllTaxonRanks);
+                        makeFilterChips(Model.Parameters.Habitats, AllHabitats);
+                        makeFilterChips(Model.Parameters.Regions, AllRegions);
+                        makeFilterChips(Model.Parameters.WaterRegions, AllWaterRegions);
+                        //makeFilterChips("Criterias", Model.Parameters.Criterias, AllCriterias);
                     }
 
                     @{string buttontext = @GetActiveSelectionCount(Model.Parameters) + " filter"; }
@@ -337,11 +239,11 @@
                                             @foreach (var category in AllCategories)
                                             {
                                                 <li class="checkbox" style="margin-top: 0;">
-                                                    <label for="input_@category.Category">
+                                                    <label for="input_@category.NameShort">
                                                         @{
-                                                            InputTag("input_" + category.Category, "submitOnclick", nameof(Model.Parameters.Category), Model.Parameters.Category, category.Category);
+                                                            InputTag("input_" + category.NameShort, "submitOnclick", nameof(Model.Parameters.Category), Model.Parameters.Category, category.NameShort);
                                                         }
-                                                        <span class="label_text">@category.Category - @category.PresentationString</span>
+                                                        <span class="label_text">@category.NameShort - @category.Description</span>
                                                     </label>
                                                 </li>
                                             }
@@ -361,17 +263,17 @@
                                             {
                                                 @if (species.SubGroup != null)
                                                 {
-                                                    InputTag($"show_{species.SpeciesName}", "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, species.SpeciesName);
+                                                    InputTag($"show_{species.Name}", "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, species.Name);
                                                     <li class="checkbox">
-                                                        <button name="@species.SpeciesName-filter" class="list_header" id="list_header_@species.SpeciesName" onclick="collapse('show_@species.SpeciesName')" type="button">
-                                                            <span>@species.SpeciesName</span>
+                                                        <button name="@species.Name-filter" class="list_header" id="list_header_@species.Name" onclick="collapse('show_@species.Name')" type="button">
+                                                            <span>@species.Name</span>
                                                             <span class="list_header_text">
-                                                                <span class="filternumber">@GetActiveFilters(species.SpeciesName, Model.Parameters)</span>
+                                                                <span class="filternumber">@GetActiveFilters(species.Name, Model.Parameters)</span>
                                                             </span>
-                                                            <span id="show_all_@species.SpeciesName">Marker alle</span>
+                                                            <span id="show_all_@species.Name">Marker alle</span>
                                                             <label onclick="event.stopPropagation()">
                                                                 @{
-                                                                    InputTag("SpeciesGroups", Model.Parameters.SpeciesGroups, species.SpeciesName);
+                                                                    InputTag("SpeciesGroups", Model.Parameters.SpeciesGroups, species.Name);
                                                                 }
                                                             </label>
                                                         </button>
@@ -380,7 +282,7 @@
                                                 }
                                                 else
                                                 {
-                                                    makeCheckBoxLi(@species.SpeciesName, @species.SpeciesName, "SpeciesGroups", Model.Parameters.SpeciesGroups);
+                                                    makeCheckBoxLi(@species.NameShort, @species.Name, "SpeciesGroups", Model.Parameters.SpeciesGroups);
                                                 }
                                             }
                                         </ul>

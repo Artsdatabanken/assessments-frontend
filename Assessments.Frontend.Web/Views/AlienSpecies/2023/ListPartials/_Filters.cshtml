@@ -5,15 +5,16 @@
 @using System.Linq;
 
 @{
-    Filter.FilterItem[] AllAreas = Areas.AlienSpecies2023Areas;
-    Filter.FilterItem[] AllCategories = Categories.AlienSpecies2023Categories;
+    var AllAreas = Areas.AlienSpecies2023Areas;
+    var AllCategories = Categories.AlienSpecies2023Categories;
     //var AllCriterias = ViewBag.AllCriterias;
-    Filter.FilterItem[] AllRegions = Regions.AlienSpecies2023Regions;
-    Filter.FilterItem[] AllWaterRegions = Regions.AlienSpecies2023WaterRegions;
-    Filter.FilterItem[] AllHabitats = Habitat.AlienSpecies2023Habitats;
-    Filter.FilterItem[] AllTaxonRanks = TaxonRank.AlienSpecies2023TaxonRanks;
-    Filter.FilterItem[] AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
-    Filter.FilterItem[] AllSpeciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
+    var AllEstablishmentCategories = EstablishmentCategory.AlienSpecies2023EstablishmentCategory;
+    var AllHabitats = Habitat.AlienSpecies2023Habitats;
+    var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
+    var AllRegions = Regions.AlienSpecies2023Regions;
+    var AllSpeciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
+    var AllTaxonRanks = TaxonRank.AlienSpecies2023TaxonRanks;
+    var AllWaterRegions = Regions.AlienSpecies2023WaterRegions;
 
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
     {
@@ -153,6 +154,7 @@
                     {
                         makeFilterChips(Model.Parameters.Area, AllAreas);
                         makeFilterChips(Model.Parameters.Category, AllCategories);
+                        makeFilterChips(Model.Parameters.EstablishmentCategories, AllEstablishmentCategories);
                         makeFilterChips(Model.Parameters.ProductionSpecies, AllProductionSpecies);
                         makeFilterChips(Model.Parameters.SpeciesGroups, AllSpeciesGroups);
                         makeFilterChips(Model.Parameters.TaxonRank, AllTaxonRanks);
@@ -213,10 +215,11 @@
                         <div class="filter_scroll_area">
                             <ul>
                                 @{
-                                    makeFilterGroup(nameof(Model.Parameters.Area), Model.Parameters.Area, AllAreas, SearchAndFilter.SearchChooseArea, "områdefiltre");
-                                    makeFilterGroup(nameof(Model.Parameters.Category), Model.Parameters.Category, AllCategories, SearchAndFilter.SearchChooseCategory, "kategorifiltre");
-                                    makeFilterGroup(nameof(Model.Parameters.TaxonRank), Model.Parameters.TaxonRank, AllTaxonRanks, @SearchAndFilter.SearchFilterTaxonRank, "'taksonomisk nivå'-filtre");
-                                    makeFilterGroup(nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies, @SearchAndFilter.ProductionSpecies, "'produksjonsart'-filtre");
+                                    makeFilterGroup(nameof(Model.Parameters.Area), Model.Parameters.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
+                                    makeFilterGroup(nameof(Model.Parameters.Category), Model.Parameters.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
+                                    makeFilterGroup(nameof(Model.Parameters.TaxonRank), Model.Parameters.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
+                                    makeFilterGroup(nameof(Model.Parameters.EstablishmentCategories), Model.Parameters.EstablishmentCategories, AllEstablishmentCategories, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
+                                    makeFilterGroup(nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");
                                 }
 
                                 <li class="filter_group">

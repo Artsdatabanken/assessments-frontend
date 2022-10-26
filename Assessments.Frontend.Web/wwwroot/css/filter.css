@@ -553,6 +553,7 @@ button.list_header {
 
 .only_js .filter_area,
 .only_js .filter_category,
+.only_js .filter_establishmentcategories,
 .only_js .filter_region,
 .only_js .filter_regions,
 .only_js .filter_waterregions,
@@ -562,6 +563,7 @@ button.list_header {
 .only_js .filter_habitat,
 .only_js .filter_habitats,
 .only_js .filter_species_groups,
+.only_js .filter_speciesgroups,
 .only_js .filter_taxon_rank,
 .only_js .filter_taxonrank,
 .only_js .filter_productionspecies {
@@ -575,6 +577,7 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_waterregions ~ .filter_waterregions,
 .only_js input[type=checkbox]:not(:checked)#show_european_population ~ .filter_european_population,
 .only_js input[type=checkbox]:not(:checked)#show_criteria ~ .filter_criteria,
+.only_js input[type=checkbox]:not(:checked)#show_establishmentcategories ~ .filter_establishmentcategories,
 .only_js input[type=checkbox]:not(:checked)#show_habitat ~ .filter_habitat,
 .only_js input[type=checkbox]:not(:checked)#show_habitats ~ .filter_habitats,
 .only_js input[type=checkbox]:not(:checked)#show_extinct ~ .filter_extinct,

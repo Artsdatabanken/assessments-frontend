@@ -104,6 +104,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             int count = 0;
             count += parameters.Area.Length;
             count += parameters.Category.Length;
+            count += parameters.EstablishmentCategories.Length;
             count += parameters.SpeciesGroups.Length;
             count += parameters.ProductionSpecies.Length;
             count += parameters.TaxonRank.Length;

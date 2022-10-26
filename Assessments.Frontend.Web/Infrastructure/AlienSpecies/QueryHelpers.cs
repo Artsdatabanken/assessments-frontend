@@ -17,9 +17,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 query = query.OrderBy(x => x.ScientificName);
             }
-            else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.EvaluatedVernacularName), StringComparison.InvariantCultureIgnoreCase))
+            else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.VernacularName), StringComparison.InvariantCultureIgnoreCase))
             {
-                query = query.OrderBy(x => x.EvaluatedVernacularName);
+                query = query.OrderBy(x => x.VernacularName);
             }
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.Category), StringComparison.InvariantCultureIgnoreCase))
             {

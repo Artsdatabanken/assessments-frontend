@@ -19,7 +19,7 @@
                 RenderSvalbard = false,
                 scientificNameViewModel = new ScientificNameViewModel()
                 {
-                    PopularName = assessment.EvaluatedVernacularName,
+                    PopularName = assessment.VernacularName,
                     ScientificName = assessment.ScientificName,
                     ScientificNameAuthor = "" // TODO: get author from model - assessment.ScientificNameAuthor
                 },
@@ -59,7 +59,7 @@
              Year = x.RevisionYear
          }).ToArray(),
          ScientificName = Model.Assessment.ScientificName,
-         ScientificNameId = Model.Assessment.EvaluatedScientificNameId.GetValueOrDefault(),
+         ScientificNameId = Model.Assessment.ScientificNameId,
          TaxonRank = Model.Assessment.ScientificName // TODO: get scientificNameRank when it exists in the model
     };
 }

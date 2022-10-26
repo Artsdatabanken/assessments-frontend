@@ -1,11 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Assessments.Frontend.Web.Controllers.Api
+namespace Assessments.Frontend.Web.Controllers.Api;
+
+[ApiController]
+[Route("api/[controller]")]
+public class TestController : Controller
 {
-    [Route("api/[controller]")]
-    public class TestController : BaseApiController<TestController>
+    private readonly IWebHostEnvironment _environment;
+
+    public TestController(IWebHostEnvironment environment)
     {
-        [HttpGet]
-        public IActionResult Get() => Ok($"Hello from {Environment.EnvironmentName.ToLower()} environment");
+        _environment = environment;
     }
+
+    [HttpGet]
+    public IActionResult Get() => Ok($"Hello from {_environment.EnvironmentName.ToLower()} environment!");
 }

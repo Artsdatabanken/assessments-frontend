@@ -7,7 +7,7 @@
 
     //TODO: need species group in model first. Use dummy value until then
     //SpeciesGroups.SpeciesGroupItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, Model.Assessment.SpecieGroup);
-    SpeciesGroups.SpeciesGroupItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, "Fisker");
+    Filter.FilterItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, "Fisker");
     string speciesGroupImageUrl = String.Empty;
     if (speciesGroup != null)
     {
@@ -46,14 +46,14 @@
     {
          AssessmentYear = 2023,
          Category = Categories.AlienSpecies2023Categories
-                                                        .Where(x => x.Category == assessment.Category)
-                                                        .Select(x => x.TagLine).FirstOrDefault(),
+                                                        .Where(x => x.NameShort == assessment.Category)
+                                                        .Select(x => x.Name).FirstOrDefault(),
          CategoryShort = assessment.Category,
          PreviousAssessments = assessment.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
          {
              Category = Categories.AlienSpecies2023Categories
-                                                        .Where(y => y.Category == x.MainCategory)
-                                                        .Select(y => y.TagLine).FirstOrDefault(),
+                                                        .Where(y => y.NameShort == x.MainCategory)
+                                                        .Select(y => y.Name).FirstOrDefault(),
              CategoryShort = x.MainCategory,
              Url = "https://artsdatabanken.no/fremmedarter/2018/N/" + x.AssessmentId, // TODO: get real url when the model is ready
              Year = x.RevisionYear

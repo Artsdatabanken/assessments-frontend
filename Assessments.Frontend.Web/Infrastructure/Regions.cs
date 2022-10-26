@@ -5,218 +5,211 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public class Regions
     {
-        public class RegionItem
+        public static readonly Filter.FilterItem[] AlienSpecies2023Regions =
         {
-            public string RegionName { get; set; }
-
-            public string RegionShortName { get; set; }
-        }
-
-        public static readonly RegionItem[] AlienSpecies2023Regions =
-        {
-            new RegionItem()
+            new Filter.FilterItem()
             { 
-                RegionName = "Aust-Agder",
-                RegionShortName = "AA"
+                Name = "Aust-Agder",
+                NameShort = "AA"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Buskerud",
-                RegionShortName = "BU"
+                Name = "Buskerud",
+                NameShort = "BU"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Finnmark",
-                RegionShortName = "FI"
+                Name = "Finnmark",
+                NameShort = "FI"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Hedmark",
-                RegionShortName = "HE"
+                Name = "Hedmark",
+                NameShort = "HE"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Hordaland",
-                RegionShortName = "HO"
+                Name = "Hordaland",
+                NameShort = "HO"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Jan Mayen",
-                RegionShortName = "JM"
+                Name = "Jan Mayen",
+                NameShort = "JM"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Nordland",
-                RegionShortName = "NO"
+                Name = "Nordland",
+                NameShort = "NO"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Nord-Trøndelag",
-                RegionShortName = "NT"
+                Name = "Nord-Trøndelag",
+                NameShort = "NT"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Oppland",
-                RegionShortName = "OP"
+                Name = "Oppland",
+                NameShort = "OP"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Oslo og Akershus",
-                RegionShortName = "OA"
+                Name = "Oslo og Akershus",
+                NameShort = "OA"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Rogaland",
-                RegionShortName = "RO"
+                Name = "Rogaland",
+                NameShort = "RO"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Sogn og Fjordane",
-                RegionShortName = "SF"
+                Name = "Sogn og Fjordane",
+                NameShort = "SF"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Svalbard med sjøområder",
-                RegionShortName = "SS"
+                Name = "Svalbard med sjøområder",
+                NameShort = "SS"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Sør-Trøndelag",
-                RegionShortName = "ST"
+                Name = "Sør-Trøndelag",
+                NameShort = "ST"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Telemark",
-                RegionShortName = "TE"
+                Name = "Telemark",
+                NameShort = "TE"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Troms",
-                RegionShortName = "TR"
+                Name = "Troms",
+                NameShort = "TR"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Vest-Agder",
-                RegionShortName = "VA"
+                Name = "Vest-Agder",
+                NameShort = "VA"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Vestfold",
-                RegionShortName = "VF"
+                Name = "Vestfold",
+                NameShort = "VF"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "ØstFold",
-                RegionShortName = "ØF"
+                Name = "ØstFold",
+                NameShort = "ØF"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Barentshavet nord og Polhavet",
-                RegionShortName = "BP"
+                Name = "Barentshavet nord og Polhavet",
+                NameShort = "BP"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Barentshavet sør",
-                RegionShortName = "BS"
+                Name = "Barentshavet sør",
+                NameShort = "BS"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Grønlandshavet",
-                RegionShortName = "GH"
+                Name = "Grønlandshavet",
+                NameShort = "GH"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Nordsjøen og Skagerrak",
-                RegionShortName = "NS"
+                Name = "Nordsjøen og Skagerrak",
+                NameShort = "NS"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Norskehavet",
-                RegionShortName = "NH"
+                Name = "Norskehavet",
+                NameShort = "NH"
             },
         };
 
-        public static readonly RegionItem[] AlienSpecies2023WaterRegions =
+        public static readonly Filter.FilterItem[] AlienSpecies2023WaterRegions =
         {
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Agder",
-                RegionShortName = "WAG"
+                Name = "Agder",
+                NameShort = "WAG"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Bottenhavet",
-                RegionShortName = "WBH"
+                Name = "Bottenhavet",
+                NameShort = "WBH"
             }, 
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Bottenviken",
-                RegionShortName = "WBV"
+                Name = "Bottenviken",
+                NameShort = "WBV"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Innlandet og Viken",
-                RegionShortName = "WIV"
+                Name = "Innlandet og Viken",
+                NameShort = "WIV"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Kemijoki",
-                RegionShortName = "WKJ"
+                Name = "Kemijoki",
+                NameShort = "WKJ"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Møre og Romsdal",
-                RegionShortName = "WMR"
+                Name = "Møre og Romsdal",
+                NameShort = "WMR"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Nordland og Jan Mayen",
-                RegionShortName = "WNJ"
+                Name = "Nordland og Jan Mayen",
+                NameShort = "WNJ"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Norsk-finsk",
-                RegionShortName = "WNF"
+                Name = "Norsk-finsk",
+                NameShort = "WNF"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Rogaland",
-                RegionShortName = "WRO"
+                Name = "Rogaland",
+                NameShort = "WRO"
             }, 
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Torneå",
-                RegionShortName = "WTO"
+                Name = "Torneå",
+                NameShort = "WTO"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Tornionjoki",
-                RegionShortName = "WTJ"
+                Name = "Tornionjoki",
+                NameShort = "WTJ"
             }, 
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Troms og Finnmark",
-                RegionShortName = "WTF"
+                Name = "Troms og Finnmark",
+                NameShort = "WTF"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Trøndelag",
-                RegionShortName = "WTR"
+                Name = "Trøndelag",
+                NameShort = "WTR"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Vestfold og Telemark",
-                RegionShortName = "WVT"
+                Name = "Vestfold og Telemark",
+                NameShort = "WVT"
             },
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Vestland",
-                RegionShortName = "WVE"
+                Name = "Vestland",
+                NameShort = "WVE"
             }, 
-            new RegionItem()
+            new Filter.FilterItem()
             {
-                RegionName = "Västerhavet",
-                RegionShortName = "WVH"
+                Name = "Västerhavet",
+                NameShort = "WVH"
             },
         };
     }

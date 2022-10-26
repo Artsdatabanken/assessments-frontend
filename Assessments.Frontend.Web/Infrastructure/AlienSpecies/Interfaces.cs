@@ -9,5 +9,7 @@
         int IGetActiveSelectionCount(T obj);
 
         string[] IGetActiveSelectionElement(T obj);
+
+        string IGetChipText(string s, Filter.FilterItem[] f);
     }
 }

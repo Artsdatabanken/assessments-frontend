@@ -26,6 +26,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return GetActiveSelectionElement(parameters);
         }
 
+        public string IGetChipText(string filter, Filter.FilterItem[] filterItems)
+        {
+            return GetChipText(filter, filterItems);
+        }
+
         public static string GetActiveFilters(string filterType, AlienSpeciesListParameters parameters)
         {
             switch (filterType)
@@ -61,6 +66,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 case "Regions":
                     if (parameters.Regions?.Any() == true)
                         return $"{parameters.Regions.Length}";
+                    return String.Empty;
+                case "WaterRegions":
+                    if (parameters.WaterRegions?.Any() == true)
+                        return $"{parameters.WaterRegions.Length}";
                     return String.Empty;
                 case "Criterias":
                     if (parameters.Criterias?.Any() == true)
@@ -118,6 +127,30 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             selectionlist = selectionlist.Concat(parameters.WaterRegions).ToArray();
             selectionlist = selectionlist.Concat(parameters.Criterias).ToArray();
             return selectionlist;
+        }
+
+        public static string GetChipText(string filter, Filter.FilterItem[] filterItems)
+        {
+            for (int i = 0; i < filterItems.Length; i++)
+            {
+                Filter.FilterItem item = filterItems[i];
+                if (item.NameShort == filter)
+                {
+                    return item.Name;
+                }
+                else if (item.SubGroup != null)
+                {
+                    string buttonText = GetChipText(filter, item.SubGroup);
+                    if (!string.IsNullOrEmpty(buttonText))
+                        return buttonText;
+                }
+            }
+            return String.Empty;
+        }
+
+        public static void RemoveAllFilters(AlienSpeciesListParameters parameters)
+        {
+            parameters = new AlienSpeciesListParameters();
         }
     }
 }

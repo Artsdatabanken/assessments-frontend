@@ -1,27 +1,18 @@
-﻿using System.Collections.Generic;
-
-namespace Assessments.Frontend.Web.Infrastructure
+﻿namespace Assessments.Frontend.Web.Infrastructure
 {
     public class Areas
     {
-        public class AreaItem
+        public static readonly Filter.FilterItem[] AlienSpecies2023Areas =
         {
-            public string Area { get; set; }
-
-            public string AreaShort { get; set; }
-        }
-
-        public static readonly AreaItem[] AlienSpecies2023Areas =
-        {
-            new AreaItem()
+            new Filter.FilterItem()
             {
-                Area = "Norge",
-                AreaShort = "N"
+                Name = "Norge",
+                NameShort = "N"
             },
-            new AreaItem()
+            new Filter.FilterItem()
             {
-                Area = "Svalbard",
-                AreaShort = "S"
+                Name = "Svalbard",
+                NameShort = "S"
             }
         };
     }

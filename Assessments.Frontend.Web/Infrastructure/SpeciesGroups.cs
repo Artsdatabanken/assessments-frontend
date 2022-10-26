@@ -2,336 +2,367 @@
 {
     public class SpeciesGroups
     {
-        public class SpeciesGroupItem
+        // All NameShort for speciesGroup starts with 's' to not confuse them with other short names. 
+        private static readonly Filter.FilterItem[] AlienSpecies2023Algae =
         {
-            public string SpeciesName { get; set; }
-
-            public string InfoUrl { get; set; }
-
-            public string ImageUrl { get; set; }
-
-            public string TagLine { get; set; }
-
-            public SpeciesGroupItem[] SubGroup { get; set; }
-        }
-
-        private static readonly SpeciesGroupItem[] AlienSpecies2023Algae =
-        {
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Brunagler",
+                Name = "Brunagler",
+                NameShort = "sbr",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                TagLine = "Phaeophyceae"
+                Description = "Phaeophyceae"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Grønnalger",
+                Name = "Grønnalger",
+                NameShort = "sga",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                TagLine = "Chlorophyta"
+                Description = "Chlorophyta"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Rødalger",
+                Name = "Rødalger",
+                NameShort = "sra",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                TagLine = "Rhodophyta"
+                Description = "Rhodophyta"
             }
         };
 
-        private static readonly SpeciesGroupItem[] AlienSpecies2023Insects =
+        private static readonly Filter.FilterItem[] AlienSpecies2023Insects =
         {
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Biller",
+                Name = "Biller",
+                NameShort = "sbi",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/biller",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Biller.svg",
-                TagLine = "Coleoptera"
+                Description = "Coleoptera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Børstehaler",
+                Name = "Børstehaler",
+                NameShort = "sbo",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/b%c3%b8rstehaler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/B%c3%b8rstehale.svg",
-                TagLine = "Zygentoma"
+                Description = "Zygentoma"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Knelere",
+                Name = "Knelere",
+                NameShort = "skn",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/knelere",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Knelere.svg",
-                TagLine = "Mantodea"
+                Description = "Mantodea"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Lus og lopper",
+                Name = "Lus og lopper",
+                NameShort = "sll",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/lusoglopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/LusogLopper.svg",
-                TagLine = "Phthiraptera og Siphonatera"
+                Description = "Phthiraptera og Siphonatera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Nebbmunner",
+                Name = "Nebbmunner",
+                NameShort = "sne",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/nebbmunner",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Nebbmunner.svg",
-                TagLine = "Hemiptera"
+                Description = "Hemiptera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Rettvinger",
+                Name = "Rettvinger",
+                NameShort = "srv",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/rettvinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Rettvinger.svg",
-                TagLine = "Orthoptera"
+                Description = "Orthoptera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Sommerfugler",
+                Name = "Sommerfugler",
+                NameShort = "ssf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/sommerfugler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Sommerfugler.svg",
-                TagLine = "Lepidoptera"
+                Description = "Lepidoptera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Støvlus",
+                Name = "Støvlus",
+                NameShort = "ssl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/st%c3%b8vlus",
                 ImageUrl = "https://design.artsdatabanken.no/icons/St%c3%b8vlus.svg",
-                TagLine = "Psocoptera"
+                Description = "Psocoptera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Tovinger",
+                Name = "Tovinger",
+                NameShort = "sto",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/tovinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Tovinger.svg",
-                TagLine = "Diptera"
+                Description = "Diptera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Trips",
+                Name = "Trips",
+                NameShort = "str",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/trips",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Trips.svg",
-                TagLine = "Thysanoptera"
+                Description = "Thysanoptera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Vepser",
+                Name = "Vepser",
+                NameShort = "sve",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/vepser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Vepser.svg",
-                TagLine = "Hymenoptera"
+                Description = "Hymenoptera"
             }
         };
 
-        public static readonly SpeciesGroupItem[] AlienSpecies2023Crustacean =
+        public static readonly Filter.FilterItem[] AlienSpecies2023Crustacean =
         {
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Storkrepser",
+                Name = "Storkrepser",
+                NameShort = "sst",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/storkrepser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Storkrepser.svg",
-                TagLine = "Malacostraca"
+                Description = "Malacostraca"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Bladfotinger",
+                Name = "Bladfotinger",
+                NameShort = "sbf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bladfotinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bladfotinger.svg",
-                TagLine = "Branchiopoda"
+                Description = "Branchiopoda"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Maxillopoda",
+                Name = "Maxillopoda",
+                NameShort = "sma",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/maxillopoda",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Maxillopoda.svg",
-                TagLine = "Maxillopoda"
+                Description = "Maxillopoda"
             }
         };
 
-        public static readonly SpeciesGroupItem[] AlienSpecies2023SpeciesGroups =
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesGroups =
         {
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Alger",
+                Name = "Alger",
+                NameShort = "sal",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                TagLine = "Rhodophyta, Chlorophyta og Phaeophyceae",
+                Description = "Rhodophyta, Chlorophyta og Phaeophyceae",
                 SubGroup = AlienSpecies2023Algae
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Amfibier",
+                Name = "Amfibier",
+                NameShort = "sam",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/amfibier",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Amfibier.svg",
-                TagLine = "Amphibia"
+                Description = "Amphibia"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Bakterier",
+                Name = "Bakterier",
+                NameShort = "sba",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bakterier",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bakterier.svg",
-                TagLine = "Bacteria"
+                Description = "Bacteria"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Bløtdyr",
+                Name = "Bløtdyr",
+                NameShort = "sbl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bl%c3%b8tdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bl%c3%b8tdyr.svg",
-                TagLine = "Mollusca"
+                Description = "Mollusca"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Edderkoppdyr",
+                Name = "Edderkoppdyr",
+                NameShort = "sed",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/edderkoppdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Edderkoppdyr.svg",
-                TagLine = "Arachnida"
+                Description = "Arachnida"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Eggsporesopper",
+                Name = "Eggsporesopper",
+                NameShort = "seg",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/eggsporesopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Eggsporesopper.svg",
-                TagLine = "Oomycota"
+                Description = "Oomycota"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Fisker",
+                Name = "Fisker",
+                NameShort = "sfi",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/fisker",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Fisker.svg",
-                TagLine = "Actinopterygii"
+                Description = "Actinopterygii"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Flatormer",
+                Name = "Flatormer",
+                NameShort = "sfl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/flatormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Flatorm.svg",
-                TagLine = "Actinopterygii"
+                Description = "Actinopterygii"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Fugler",
+                Name = "Fugler",
+                NameShort = "sfu",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/fugler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Fugler.svg",
-                TagLine = "Aves"
+                Description = "Aves"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Havedderkopper",
+                Name = "Havedderkopper",
+                NameShort = "sha",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/havedderkopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Havedderkopper.svg",
-                TagLine = "Pycnogonida"
+                Description = "Pycnogonida"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Hjuldyr",
+                Name = "Hjuldyr",
+                NameShort = "shj",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/hjuldyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Hjuldyr.svg",
-                TagLine = "Rotifera"
+                Description = "Rotifera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Insekter",
+                Name = "Insekter",
+                NameShort = "sin",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/insekter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Insekter.svg",
-                TagLine = "Insecta",
+                Description = "Insecta",
                 SubGroup = AlienSpecies2023Insects
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Kammaneter",
+                Name = "Kammaneter",
+                NameShort = "ska",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                TagLine = "Ctenophora"
+                Description = "Ctenophora"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Kappedyr",
+                Name = "Kappedyr",
+                NameShort = "skd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                TagLine = "Ascidiacea (Tunicata)"
+                Description = "Ascidiacea (Tunicata)"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Karplanter",
+                Name = "Karplanter",
+                NameShort = "skp",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                TagLine = "Magnoliophyta, Pinophyta og Pteridophyta"
+                Description = "Magnoliophyta, Pinophyta og Pteridophyta"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Krepsdyr",
+                Name = "Krepsdyr",
+                NameShort = "skr",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/krepsdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                TagLine = "Crustacea",
+                Description = "Crustacea",
                 SubGroup = AlienSpecies2023Crustacean
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Leddormer",
+                Name = "Leddormer",
+                NameShort = "sle",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/leddormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Leddormer.svg",
-                TagLine = "Annelida"
+                Description = "Annelida"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Mangefotinger",
+                Name = "Mangefotinger",
+                NameShort = "smf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mangefotinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mangefotinger.svg",
-                TagLine = "Myriapoda [Chilopoda og Diplopoda]"
+                Description = "Myriapoda [Chilopoda og Diplopoda]"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Mosdyr og begerormer",
+                Name = "Mosdyr og begerormer",
+                NameShort = "smb",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mosdyrogbegerormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mosdyr.svg",
-                TagLine = "Ectoprocta og Entoprocta"
+                Description = "Ectoprocta og Entoprocta"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Moser",
+                Name = "Moser",
+                NameShort = "smo",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/moser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Moser.svg",
-                TagLine = "Bryophyta og Marchantiophyta"
+                Description = "Bryophyta og Marchantiophyta"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Nesledyr",
+                Name = "Nesledyr",
+                NameShort = "snd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/nesledyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Nesledyr.svg",
-                TagLine = "Cnidaria"
+                Description = "Cnidaria"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Pigghuder",
+                Name = "Pigghuder",
+                NameShort = "spi",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pigghuder",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Pigghuder.svg",
-                TagLine = "Echinodermata"
+                Description = "Echinodermata"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Reptiler",
+                Name = "Reptiler",
+                NameShort = "sre",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/reptiler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Reptiler.svg",
-                TagLine = "Reptilia"
+                Description = "Reptilia"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Rundormer",
+                Name = "Rundormer",
+                NameShort = "sru",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/rundormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Rundormer.svg",
-                TagLine = "Nematoda"
+                Description = "Nematoda"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Svamper",
+                Name = "Svamper",
+                NameShort = "ssv",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/svamper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Svamper.svg",
-                TagLine = "Porifera"
+                Description = "Porifera"
             },
-            new SpeciesGroupItem()
+            new Filter.FilterItem()
             {
-                SpeciesName = "Sopper",
+                Name = "Sopper",
+                NameShort = "sso",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/sopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Sopper.svg",
-                TagLine = "Fungi"
+                Description = "Fungi"
             },
         };
     }

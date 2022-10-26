@@ -7,7 +7,8 @@ const filters = document.getElementById("filters");
 if (filters) {
 const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
 const algaeFilters = document.getElementsByClassName("Alger_input");
-const insectFilters = document.getElementsByClassName("insect_input") || document.getElementsByClassName("Insekter_input");
+const insectFilters = document.getElementsByClassName("insect_input");
+const alienSpeciesInsectFilters = document.getElementsByClassName("Insekter_input");
 const crayfishFilters = document.getElementsByClassName("Krepsdyr_input");
 const algaeInput = document.getElementById("Alger");
 const insectInput = document.getElementById("Insekter");
@@ -253,6 +254,7 @@ function onClickAction(el, addOrRemove) {
         toggleSubSpecies(algaeFilters, algaeInput);
     } else if (el.id === "Insekter") {
         toggleSubSpecies(insectFilters, insectInput);
+        toggleSubSpecies(alienSpeciesInsectFilters, insectInput);
     } else if (el.id === "Krepsdyr") {
         toggleSubSpecies(crayfishFilters, crayfishInput);
     } else {

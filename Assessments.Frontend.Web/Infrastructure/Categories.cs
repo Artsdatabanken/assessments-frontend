@@ -4,60 +4,43 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public class Categories
     {
-        public class CategoryItem
+        public static readonly Filter.FilterItem[] AlienSpecies2023Categories =
         {
-            public string Category { get; set; }
-
-            public string TagLine { get; set; }
-
-            public string Description { get; set; }
-
-            public string PresentationString { get; set; }
-        }
-
-        public static readonly CategoryItem[] AlienSpecies2023Categories =
-        {
-            new CategoryItem()
+            new Filter.FilterItem()
             {
-                Category = "SE",
-                TagLine = "Svært høy risiko",
-                Description = "- svært høy risiko.",
-                PresentationString = "svært høy risiko"
+                NameShort = "SE",
+                Name = "Svært høy risiko",
+                Description = "svært høy risiko"
             },
-            new CategoryItem()
+            new Filter.FilterItem()
             {
-                Category = "HI",
-                TagLine = "Høy risiko",
-                Description = "- høy risiko.",
-                PresentationString = "høy risiko"
+                NameShort = "HI",
+                Name = "Høy risiko",
+                Description = "høy risiko"
             },
-            new CategoryItem()
+            new Filter.FilterItem()
             {
-                Category = "PH",
-                TagLine = "Potensielt høy risiko",
-                Description = "- potensielt høy risiko.",
-                PresentationString = "potensielt høy risiko"
+                NameShort = "PH",
+                Name = "Potensielt høy risiko",
+                Description = "potensielt høy risiko"
             },
-            new CategoryItem()
+            new Filter.FilterItem()
             {
-                Category = "LO",
-                TagLine = "Lav risiko",
-                Description = "- lav risiko.",
-                PresentationString = "lav risiko"
+                NameShort = "LO",
+                Name = "Lav risiko",
+                Description = "lav risiko"
             },
-            new CategoryItem()
+            new Filter.FilterItem()
             {
-                Category = "NK",
-                TagLine = "Ingen kjent risiko",
-                Description = "- ingen kjent risiko.",
-                PresentationString = "ingen kjent risiko"
+                NameShort = "NK",
+                Name = "Ingen kjent risiko",
+                Description = "ingen kjent risiko"
             },
-            new CategoryItem()
+            new Filter.FilterItem()
             {
-                Category = "NR",
-                TagLine = "Ikke vurdert",
-                Description = "- ikke vurdert.",
-                PresentationString = "ikke vurdert"
+                NameShort = "NR",
+                Name = "Ikke vurdert",
+                Description = "ikke vurdert"
             }
         };
     }

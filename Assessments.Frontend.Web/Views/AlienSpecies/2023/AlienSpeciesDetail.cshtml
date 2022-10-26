@@ -59,7 +59,7 @@
              Year = x.RevisionYear
          }).ToArray(),
          ScientificName = Model.Assessment.ScientificName,
-         ScientificNameId = Model.Assessment.ScientificNameId.GetValueOrDefault(),
+         ScientificNameId = Model.Assessment.ScientificNameId,
          TaxonRank = Model.Assessment.ScientificName // TODO: get scientificNameRank when it exists in the model
     };
 }

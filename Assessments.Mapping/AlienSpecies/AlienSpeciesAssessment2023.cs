@@ -67,7 +67,7 @@ namespace Assessments.Mapping.AlienSpecies
         /// <summary>
         /// An identifier for the nomenclatural (not taxonomic) details of a scientific name
         /// </summary>
-        public int? ScientificNameId { get; set; }
+        public int ScientificNameId { get; set; }
         
         /// <summary>
         /// Taxonomy path

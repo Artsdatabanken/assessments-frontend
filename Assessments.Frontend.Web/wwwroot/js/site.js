@@ -4,7 +4,6 @@
 const submitCheckInputs = document.getElementsByClassName("submitOnclick");
 const headerMenuRL = document.getElementById("headermenu");
 const themeSelectorDropDownRL = document.getElementById("themeselectordropdown");
-const sidebarMenuItemClickRL = document.getElementById("sidebarmenuitemclick");
 
 // Screen Size
 const smallScreenSize = 750; // In case we want to tinker later.
@@ -34,12 +33,13 @@ function closeThemeselectordropdown() {
     }
 }
 
-function closeSidebarmenuitemclick() {
-    if (isPadSize &&
-        sidebarMenuItemClickRL && sidebarMenuItemClickRL.classList &&
-        sidebarMenuItemClickRL.classList.contains("expand")) {
-        sidebarMenuItemClickRL.classList.remove("expand")
-    }
+function closeSidebarmenuitemclick(target) {
+    const sidebarMenuItemClickRL = document.getElementsByClassName('sidebarmenu');
+    Array.prototype.forEach.call(sidebarMenuItemClickRL, function (item) {
+        if (isPadSize && item?.classList?.contains("expand") && !item.contains(target)) {
+            item.classList.remove("expand")
+        }
+    });
 }
 
 document.addEventListener('click', e => {    
@@ -51,7 +51,7 @@ document.addEventListener('click', e => {
         closeThemeselectordropdown();
     }
     if (!e.target.matches('#sidebarmenu_container *')) { // Surrounding parent 
-        closeSidebarmenuitemclick();
+        closeSidebarmenuitemclick(e.target);
     }      
 });
 
@@ -72,7 +72,7 @@ document.addEventListener('keydown', (e) => {
             themeSelectorDropDownRL.style.display = "none";
         }
 
-        closeSidebarmenuitemclick();
+        closeSidebarmenuitemclick(e.target);
         if (isSmallReader()) {
             // For elements with different ux for mobile
             if (document.getElementById("filters") &&

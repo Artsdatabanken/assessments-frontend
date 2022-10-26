@@ -39,7 +39,7 @@
     "shortname": "Fjæresone",
     "image": "https://data.artsdatabanken.no//Natur_i_Norge/Natursystem/Typeinndeling/Fastmarkssystemer/Strandberg/foto_408.jpg",
     "description": "Samlebetegnelse på området mellom laveste normale fjæremål og høyeste normale flomål, eller øvre grense for regelmessig påvirkning av bølgeslag eller sjøsprøyt.",
-    "mapping": "Omfatter NiN 2.0 hovedtypene <a href=\\\"https://artsdatabanken.no/Pages/171925/Strandberg\" \"target=\\\"_new\\\" rel=\\\"noopener\\\">T6 Strandberg</a> og \"<a href=\\\"https://artsdatabanken.no/Pages/171929/Saltanrikingsmark_i_fjaeresonen\\\" target=\\\"_new\\\" rel=\\\"noopener\\\"> T11 Saltanrikingsmark i fjæresonen</a>."
+    "mapping": "Omfatter NiN 2.0 hovedtypene <a href=\"https://artsdatabanken.no/Pages/171925/Strandberg\" \"target=\"_new\" rel=\"noopener\">T6 Strandberg</a> og \"<a href=\"https://artsdatabanken.no/Pages/171929/Saltanrikingsmark_i_fjaeresonen\" target=\\\"_new\\\" rel=\\\"noopener\\\"> T11 Saltanrikingsmark i fjæresonen</a>."
   },
   "Flomsone": {
     "name": "Flomsone",

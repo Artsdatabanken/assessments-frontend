@@ -1,6 +1,7 @@
 ﻿@model SideBarContentViewModel
 @{
-    string taxon_url = "https://artsdatabanken.no/taxon/"+Model.ScientificName+"/" + Model.ScientificNameId;
+    string urlSafeScientificName = Model.ScientificName.Replace(" ", "%20");
+    string taxon_url = "https://artsdatabanken.no/taxon/" + urlSafeScientificName + "/" + Model.ScientificNameId;
 }
 
 <div class="sidebar_image_info">

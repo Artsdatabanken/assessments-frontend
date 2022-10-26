@@ -13,6 +13,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.Where(x => x.ScientificName.ToLowerInvariant()
                     .Contains(parameters.Name.ToLowerInvariant()));
 
+            if (parameters.Category.Any())
+            {
+                // TODO: implementere filter
+            }
+
             if (string.IsNullOrEmpty(parameters.SortBy) || parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.ScientificName), StringComparison.InvariantCultureIgnoreCase))
             {
                 query = query.OrderBy(x => x.ScientificName);

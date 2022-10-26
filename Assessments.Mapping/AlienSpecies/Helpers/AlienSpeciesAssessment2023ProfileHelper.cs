@@ -4,38 +4,35 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 {
     internal static class AlienSpeciesAssessment2023ProfileHelper
     {
-        internal static string GetAlienSpeciesCategory(string AlienSpeciesCategory, string ExpertGroup)
+        internal static string GetAlienSpeciesCategory(string alienSpeciesCategory, string expertGroup)
         {
-            if(AlienSpeciesCategory == "RegionallyAlien" && ExpertGroup != "Fisker")
+            if (alienSpeciesCategory == "RegionallyAlien" && expertGroup != "Fisker")
             {
                 return "AlienSpecie";
             }
-            else return AlienSpeciesCategory;
+            return alienSpeciesCategory;
         }
 
-        internal static string GetExpertGroup(string ExpertGroup)
+        internal static string GetExpertGroup(string expertGroup)
         {
-            if(ExpertGroup.Contains("(Svalbard)"))
+            if (expertGroup.Contains("(Svalbard)"))
             {
-                return ExpertGroup.Replace("(Svalbard)", "");
+                return expertGroup.Replace("(Svalbard)", "");
             }
-            if(ExpertGroup == "Bakterier" || ExpertGroup == "Kromister" || ExpertGroup == "Sopper")
+            if (expertGroup is "Bakterier" or "Kromister" or "Sopper")
             {
                 return "Sopper, det gule riket og bakterier";
             }
-            else return ExpertGroup;
+            return expertGroup;
         }
-        internal static string GetEstablishmentCategory(string SpeciesEstablishmentCategory, string SpeciesStatus)
+
+        internal static string GetEstablishmentCategory(string speciesEstablishmentCategory, string speciesStatus)
         {
-            if(SpeciesStatus == null)
+            if (speciesStatus == null)
             {
                 return string.Empty;
             }
-            else if (SpeciesStatus != "C3")
-            {
-                return SpeciesStatus;
-            }
-            else return SpeciesEstablishmentCategory;
+            return speciesStatus != "C3"? speciesStatus: speciesEstablishmentCategory;
         }
     }
 }

@@ -120,6 +120,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var selectionlist = parameters.Area;
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
+            selectionlist = selectionlist.Concat(parameters.EstablishmentCategories).ToArray();
             selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesGroups).ToArray();
             selectionlist = selectionlist.Concat(parameters.TaxonRank).ToArray();
@@ -165,7 +166,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             public const string ChooseCriteria = "Avgjørende kriterier for risikokategori";
             public const string EstablishmentCategory = "Etableringsklasse i dag";
             public const string ProductionSpecies = "Bruksart";
-            public const string ChooseSpeciesGroup = "Artsgrupper";
+            public const string SpeciesGroup = "Artsgrupper";
             public const string TaxonRank = "Taksonomi";
             public const string KnownOrExpectedInRegion = "Regioner med kjent eller forventet forekomst";
             public const string NaturType = "Naturtype";

@@ -232,32 +232,23 @@ li.checkbox label {
     padding-right: 0;
 }
 
-div.filter_Alger,
 div.filter_insects,
-div.filter_Insekter,
-div.filter_Krepsdyr {
+div.filter_subgroup {
     margin-left: 15px;
 }
 
-.list_header_Alger,
-.list_header_insects,
-.list_header_Insekter,
-.list_header_Krepsdyr {
+.list_header,
+.list_header_insects {
     background-color: transparent;
 }
 
-.filter_Alger,
 .filter_insects,
-.filter_Insekter,
-.filter_Krepsdyr {
+.filter_subgroup {
     border-bottom: 1px solid lightgray;
     margin-bottom: 5px;
 }
 
-#list_header_Alger,
-#list_header_insects,
-#list_header_Insekter,
-#list_header_Krepsdyr {
+#list_header_insects {
     padding-right: 3px;
 }
 
@@ -291,10 +282,7 @@ button.list_header {
     padding-right: 5px;
 }
 
-#show_all_Alger,
-#show_all_insects,
-#show_all_Insekter,
-#show_all_Krepsdyr {
+#show_all_insects {
     display: none;
 }
 
@@ -353,17 +341,12 @@ button.list_header {
         text-align: center;
     }
 
-    .filter_Alger,
     .filter_insects,
-    .filter_Insekter,
-    .filter_Krepsdyr {
+    .filter_subgroup {
         margin-bottom: 10px;
     }
 
-    #show_all_Alger,
-    #show_all_insects,
-    #show_all_Insekter,
-    #show_all_Krepsdyr {
+    #show_all_insects {
         display: inline-block;
         white-space: nowrap;
     }
@@ -553,6 +536,7 @@ button.list_header {
 
 .only_js .filter_area,
 .only_js .filter_category,
+.only_js .filter_subgroup,
 .only_js .filter_establishmentcategories,
 .only_js .filter_region,
 .only_js .filter_regions,
@@ -570,6 +554,13 @@ button.list_header {
     display: block;
 }
 
+/*sub groups*/
+.only_js input[type=checkbox]:not(:checked)#show_eda ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_sal ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_sin ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_skr ~ .filter_subgroup,
+
+/*groups*/
 .only_js input[type=checkbox]:not(:checked)#show_area ~ .filter_area,
 .only_js input[type=checkbox]:not(:checked)#show_category ~ .filter_category,
 .only_js input[type=checkbox]:not(:checked)#show_region ~ .filter_region,
@@ -589,17 +580,17 @@ button.list_header {
     display: none;
 }
 
-.only_js input[type=checkbox]:checked#show_Alger ~ .filter_Alger,
+.only_js input[type=checkbox]:checked#show_eda ~ .filter_subgroup,
+.only_js input[type=checkbox]:checked#show_sal ~ .filter_subgroup,
+.only_js input[type=checkbox]:checked#show_sin ~ .filter_subgroup,
+.only_js input[type=checkbox]:checked#show_skr ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_insects ~ .filter_insects,
-.only_js input[type=checkbox]:checked#show_Insekter ~ .filter_Insekter,
-.only_js input[type=checkbox]:checked#show_Krepsdyr ~ .filter_Krepsdyr {
+.only_js input[type=checkbox]:checked#show_Krepsdyr ~ .filter_subgroup {
     display: block;
 }
 
-.only_js .filter_Alger,
-.only_js .filter_Krepsdyr,
 .only_js .filter_insects,
-.only_js .filter_Insekter {
+.only_js .filter_subgroup {
     display: none;
 }
 

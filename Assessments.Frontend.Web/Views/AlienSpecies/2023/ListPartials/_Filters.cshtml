@@ -84,13 +84,13 @@
         </button>
     }
 
-    void makeFilterGroup(string filterName, string[] filterModel, Filter.FilterItem[] filterItems, string buttontext, string buttonName)
+    void makeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName)
     {
-        string className = $"filter_{filterName.ToLower()}";
+        string className = isSubGroup ? $"filter_subgroup filter_{filterName.ToLower()}" : $"filter_{filterName.ToLower()}";
 
         <li class="filter_group">
             @{
-                makeFilterElement(buttontext, filterName, buttonName);
+                makeFilterElement(buttonText, filterName, buttonName);
             }
             <div class=@className>
                 <ul>
@@ -101,12 +101,20 @@
                         {
                             value = el.NameShort;
                             label = filterName == nameof(Model.Parameters.Category) ? $"{el.NameShort} - {el.Description}" : el.Name;
-                            makeCheckBoxLi(value, label, filterName, filterModel);
+                            if (el.SubGroup != null)
+                                makeFilterGroup(el.NameShort, modelName, true, filterModel, el.SubGroup, el.Name, $"{el.Name}filtre");
+                            else
+                                makeCheckBoxLi(value, label, modelName, filterModel);
                         }
                     }
                 </ul>
             </div>
         </li>
+    }
+
+    void makeFilterGroup(string filterName, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName)
+    {
+        makeFilterGroup(filterName, filterName, false, filterModel, filterItems, buttonText, buttonName);
     }
 
     void makeFilterChips(string[] filterModel, Filter.FilterItem[] filterItems)
@@ -221,7 +229,7 @@
                                     makeFilterGroup(nameof(Model.Parameters.EstablishmentCategories), Model.Parameters.EstablishmentCategories, AllEstablishmentCategories, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
                                     makeFilterGroup(nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");
                                 }
-
+                                <!--
                                 <li class="filter_group">
                                     @{makeFilterElement("Artsgruppe", nameof(Model.Parameters.SpeciesGroups), "artsgruppefiltre");}
                                     <div class="filter_speciesgroups">
@@ -254,8 +262,9 @@
                                             }
                                         </ul>
                                     </div>
-                                </li>
+                                </li> -->
                                 @{
+                                    makeFilterGroup(nameof(Model.Parameters.SpeciesGroups), Model.Parameters.SpeciesGroups, AllSpeciesGroups, SearchAndFilterNames.SpeciesGroup, "artsgruppefiltre");
                                     makeFilterGroup(nameof(Model.Parameters.Habitats), Model.Parameters.Habitats, AllHabitats, "Hovedhabitat", "hovedhabitatfiltre");
                                     makeFilterGroup(nameof(Model.Parameters.Regions), Model.Parameters.Regions, AllRegions, "Regioner og havområder", "regionfiltre");
                                     makeFilterGroup(nameof(Model.Parameters.WaterRegions), Model.Parameters.WaterRegions, AllWaterRegions, "Vannregioner", "vannregionfiltre");

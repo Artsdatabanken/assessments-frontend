@@ -46,9 +46,9 @@
     {
          AssessmentYear = 2023,
          Category = Categories.AlienSpecies2023Categories
-                                                        .Where(x => x.NameShort == assessment.Category)
+                                                        .Where(x => x.NameShort == assessment.Category.ToString())
                                                         .Select(x => x.Name).FirstOrDefault(),
-         CategoryShort = assessment.Category,
+         CategoryShort = assessment.Category.ToString(),
          PreviousAssessments = assessment.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
          {
              Category = Categories.AlienSpecies2023Categories

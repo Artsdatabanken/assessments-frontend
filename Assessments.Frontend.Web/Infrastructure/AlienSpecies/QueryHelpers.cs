@@ -14,9 +14,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     .Contains(parameters.Name.ToLowerInvariant()));
 
             if (parameters.Category.Any())
-            {
-                // TODO: implementere filter
-            }
+                query = query.Where(x => parameters.Category.Select(y => (AlienSpeciesAssessment2023Category)Enum.Parse(typeof(AlienSpeciesAssessment2023Category), y)).Contains(x.Category));
 
             if (string.IsNullOrEmpty(parameters.SortBy) || parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.ScientificName), StringComparison.InvariantCultureIgnoreCase))
             {

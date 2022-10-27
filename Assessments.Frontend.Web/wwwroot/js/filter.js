@@ -22,6 +22,16 @@ const scrollTo = document.getElementById("remember_scroll");
 const redlisted = ["RE", "CR", "EN", "VU", "NT", "DD"];
 const endangered = ["CR", "EN", "VU"];
 
+// Ids for filters that should be open by default
+const handleFirstTimeIds = [
+    "show_area",
+    "show_eda",
+    "show_sal",
+    "show_insects",
+    "show_skr",
+    "show_sin"
+];
+
 function hasVisited() {
     // in url: check if this is the first run
     return init.checked;
@@ -35,13 +45,7 @@ function setVisited() {
 function handleFirstTime() {
     // On the first run, close all but given elements
     Array.prototype.forEach.call(isCheckInputs, (e) => {
-        if (
-            e.id == "show_area"
-            || e.id == "show_Alger"
-            || e.id == "show_insects"
-            || e.id == "show_Insekter"
-            || e.id == "show_Krepsdyr"
-        ) {
+        if (handleFirstTimeIds.includes(e.id)) {
             e.checked = true;
         } else {
             e.checked = false;

@@ -243,9 +243,15 @@ div.filter_subgroup {
 }
 
 .filter_insects,
-.filter_subgroup {
+.filter_subgroup,
+.mark_all {
     border-bottom: 1px solid lightgray;
     margin-bottom: 5px;
+    padding-bottom: 5px;
+}
+
+label.switch_list_element {
+    margin: 5px 0;
 }
 
 #list_header_insects {

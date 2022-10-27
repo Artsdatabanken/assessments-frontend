@@ -61,15 +61,21 @@
         </div>
     }
 
-    void makeCheckBoxLi(string value, string label, string name, string[] model)
+    void makeCheckBoxLi(string value, string label, string name, string[] model, string className)
     {        
         string id = value.Replace(" ", "_");
         <li class="checkbox">
-            <label for="@id">
+            <label for="@id" class="@className">
                 @{ InputTag(name, model, value);}
                 <span class="label_text">@label</span>
             </label>
         </li>
+    }
+
+    void makeCheckBoxLi(string value, string label, string name, string[] model)
+    {
+        string className = string.Empty;
+        makeCheckBoxLi(value, label, name, model, className);
     }
 
     void makeFilterElement(string buttonText, string filterName, string buttonname)
@@ -97,6 +103,8 @@
                     @{
                         string label;
                         string value;
+                        string markAllClassName = "mark_all";
+                        makeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName);
                         foreach (var el in filterItems)
                         {
                             value = el.NameShort;

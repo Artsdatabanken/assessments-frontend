@@ -7,7 +7,7 @@
     margin: 3px 3px 3px 0;
 }
 
-.switch_list_elemtent input {
+.switch_list_element input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -62,12 +62,12 @@ input:checked ~ .slider_container .slider:before {
     border-color: #3d3b3a;
 }
 
-.switch_list_elemtent {
+.switch_list_element {
     justify-content: space-between;
     flex-direction: row-reverse;
 }
 
-.switch_list_elemtent:hover {
+.switch_list_element:hover {
     cursor: pointer;
     background-color: #7f726b;
     color: white;

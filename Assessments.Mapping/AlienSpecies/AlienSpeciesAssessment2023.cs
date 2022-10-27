@@ -102,7 +102,7 @@ namespace Assessments.Mapping.AlienSpecies
         [Display(Name = "Ingen kjent risiko")] 
         NK,
 
-        [Display(Name = "Ikke risikovurdert ")]
+        [Display(Name = "Ikke risikovurdert")]
         NR
     }
 

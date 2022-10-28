@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
@@ -30,6 +31,12 @@ namespace Assessments.Shared.Helpers
         {
             var attribute = value.GetAttribute<DescriptionAttribute>();
             return attribute == null ? value.ToString() : attribute.Description;
+        }
+
+        public static string DisplayName(this Enum value)
+        {
+            var attribute = value.GetAttribute<DisplayAttribute>();
+            return attribute == null ? value.ToString() : attribute.Name;
         }
     }
 }

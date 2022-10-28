@@ -255,7 +255,7 @@
             "25": "25 % på 3 år eller 1 generasjon",
             "20": "20 % på 5 år eller 2 generasjoner",
             "10": "10 % på 10 år eller 3 generasjoner",
-            "5": "5 % på 10 år eller 3 generasjoner og populasjonsstørrelse på < 10 000"
+            "5": "5 % på 10 år eller 3 generasjoner og populasjonsstørrelse på &lt; 10 000"
           },
           "labels-CR": {
             "25": "CR",
@@ -391,11 +391,11 @@
       },
       "D2": {
         "title": "Begrenset forekomstareal og/eller antall lokaliteter avgrenset av trussel ",
-        "description": "Forekomstarealet er svært lite (< 40 km&#178;) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (< 10)",
+        "description": "Forekomstarealet er svært lite (&lt; 40 km&#178;) eller antall lokaliteter, avgrenset av reelle trusler, er svært få (&lt; 10)",
         "content": {
           "threshold": {
-            "VU": "< 20 km&#178;, ≤ 5 lokaliteter",
-            "NT": "≤ 40 km&#178;, ≤ 10 lokaliteter"
+            "VU": "&lt; 20 km&#178;, &le; 5 lokaliteter",
+            "NT": "&le; 40 km&#178;, &le; 10 lokaliteter"
           }
         }
       }

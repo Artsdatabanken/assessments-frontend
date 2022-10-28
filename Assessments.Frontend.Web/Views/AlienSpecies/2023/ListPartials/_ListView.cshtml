@@ -40,16 +40,12 @@
                     </span>
 
                     <span class="list_cell categoryname capitalized">
-                        @if (!string.IsNullOrEmpty(item.AlienSpeciesCategory))
-                        {
-                            @item.AlienSpeciesCategory
-                            <span class="degrees">@Helpers.findDegrees(item.AlienSpeciesCategory, false)</span>
-                        }
+                        @item.Category.DisplayName()
                     </span>
 
                     <span class="list_cell categorytag">
-                        <span class="@item.AlienSpeciesCategory.Substring(0,2) category_tag">
-                            <span class="category_tag_label">@item.AlienSpeciesCategory</span>
+                        <span class="@item.Category category_tag">
+                            <span class="category_tag_label">@item.Category</span>
                         </span>
                     </span>
 

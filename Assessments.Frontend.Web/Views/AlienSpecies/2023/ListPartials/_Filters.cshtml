@@ -86,7 +86,7 @@
         </button>
     }
 
-    void makeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName)
+    void makeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName, string outerClassName)
     {
         string className = isSubGroup ? $"filter_subgroup filter_{filterName.ToLower()}" : $"filter_{filterName.ToLower()}";
 
@@ -100,15 +100,18 @@
                         string label;
                         string value;
                         string markAllClassName = "mark_all";
-                        makeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, string.Empty);
+                        makeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
                         foreach (var el in filterItems)
                         {
                             value = el.NameShort;
                             label = filterName == nameof(Model.Parameters.Category) ? $"{el.NameShort} - {el.Description}" : el.Name;
+                            string extraOuterClassName = $"{outerClassName} {filterName}_input";
                             if (el.SubGroup != null)
-                                makeFilterGroup(el.NameShort, modelName, true, filterModel, el.SubGroup, el.Name, $"{el.Name}filtre");
+                            {
+                                makeFilterGroup(el.NameShort, modelName, true, filterModel, el.SubGroup, el.Name, $"{el.Name}filtre", extraOuterClassName);
+                            }
                             else
-                                makeCheckBoxLi(value, label, modelName, filterModel, string.Empty, $"{filterName}_input");
+                                makeCheckBoxLi(value, label, modelName, filterModel, string.Empty, extraOuterClassName);
                         }
                     }
                 </ul>
@@ -118,7 +121,7 @@
 
     void makeFilterGroup(string filterName, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName)
     {
-        makeFilterGroup(filterName, filterName, false, filterModel, filterItems, buttonText, buttonName);
+        makeFilterGroup(filterName, filterName, false, filterModel, filterItems, buttonText, buttonName, string.Empty);
     }
 
     void renderChip(string buttontext, string filterValue)
@@ -188,7 +191,6 @@
             }
         </span>
     </p>
-
 </div>
 
 <!-- CONTROL BUTTONS and toggles-->

@@ -168,7 +168,9 @@ if (filters) {
     function shouldToggleMarkAll(elementsClass) {
         const allElements = document.getElementsByClassName(elementsClass);
         return allElements.length && Array.prototype.every.call(allElements, (element) => {
-            return element.checked === true;
+            const parentElement = document.getElementById(element.id).parentElement;
+            const shouldIgnoreMarkAllInput = Array.prototype.includes.call(parentElement.classList, 'mark_all');
+            return element.checked === true || shouldIgnoreMarkAllInput;
         })
     }
 
@@ -184,7 +186,6 @@ if (filters) {
                 input.checked = true;
             }
         });
-
         // redlist species 2021
         if (shouldToggleMarkAll("insect_input")) {
             insectInput.checked = true;
@@ -195,21 +196,6 @@ if (filters) {
         if (shouldToggleMarkRedOrEnd(endangered)) {
             endangeredCheck.checked = true;
         }
-    }
-
-    function toggleAllOfType(what, primaryToggleElementId, secondaryToggleElementId) {
-        const secondaryToggleElement = document.getElementById(secondaryToggleElementId).checked;
-        const primaryToggleElement = document.getElementById(primaryToggleElementId).checked;
-        what.forEach(el => {
-            if (primaryToggleElement) {
-                document.getElementById("input_" + el).checked = true;
-            } else {
-                if (secondaryToggleElement) {
-                    document.getElementById(secondaryToggleElementId).checked = false;
-                }
-                document.getElementById("input_" + el).checked = false;
-            }
-        })
     }
 
     function toggleRedlistedCategories() {
@@ -236,15 +222,18 @@ if (filters) {
         if (!el) return;
 
         const shouldToggleSubGroup = Array.prototype.some.call(markAllInputs, input => input.id === el.id);
-        const className = Array.prototype.find.call(el.classList, name => name.indexOf('_input') != -1);
+        const classNames = Array.prototype.filter.call(el.classList, name => name.indexOf('_input') != -1);
 
         if (shouldToggleSubGroup) {
             const subFilters = document.getElementsByClassName(`${el.id}_input`);
             toggleSubGroup(subFilters, el);
-        } else if (className && className !== 'insect_input') {
-            const idIndex = className.indexOf('_input');
-            const filterId = className.substring(0, idIndex);
-            toggleSingleFilter(el, filterId);
+        }
+        if (classNames.length && !classNames.includes('insect_input')) {
+            classNames.forEach(name => {
+                const idIndex = name.indexOf('_input');
+                const filterId = name.substring(0, idIndex);
+                toggleSingleFilter(el, filterId);
+            })
         }
         // redlist species 2021
         else if (el.classList[0] === "insect_input") {

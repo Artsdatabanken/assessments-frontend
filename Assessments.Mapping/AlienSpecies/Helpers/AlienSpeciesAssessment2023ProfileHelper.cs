@@ -1,4 +1,4 @@
-
+using System;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
@@ -33,6 +33,21 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return string.Empty;
             }
             return speciesStatus != "C3"? speciesStatus: speciesEstablishmentCategory;
+        }
+
+        internal static int? GetScores(string category, string criteria, string axis)
+        {
+            if (string.IsNullOrEmpty(category) || category is "NR")
+            {
+                return null;
+            }
+            else
+            {
+                int scoreInvationAxis = (int)Char.GetNumericValue(criteria[0]);
+                string criteriaEcoEffectAxis = criteria.Split(",")[1];
+                int scoreEcoEffectAxis = (int)Char.GetNumericValue(criteriaEcoEffectAxis[0]);
+                return axis == "inv" ? scoreInvationAxis : scoreEcoEffectAxis;
+            }
         }
     }
 }

@@ -1,54 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Assessments.Mapping.AlienSpecies;
+using Assessments.Shared.Helpers;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
     public class Categories
     {
         public static readonly Filter.FilterItem[] AlienSpecies2023Categories =
-        {
-            new Filter.FilterItem()
-            {
-                NameShort = "SE",
-                Name = "Svært høy risiko",
-                Description = "svært høy risiko"
-            },
-            new Filter.FilterItem()
-            {
-                NameShort = "HI",
-                Name = "Høy risiko",
-                Description = "høy risiko"
-            },
-            new Filter.FilterItem()
-            {
-                NameShort = "PH",
-                Name = "Potensielt høy risiko",
-                Description = "potensielt høy risiko"
-            },
-            new Filter.FilterItem()
-            {
-                NameShort = "LO",
-                Name = "Lav risiko",
-                Description = "lav risiko"
-            },
-            new Filter.FilterItem()
-            {
-                NameShort = "NK",
-                Name = "Ingen kjent risiko",
-                Description = "ingen kjent risiko"
-            },
-            new Filter.FilterItem()
-            {
-                NameShort = "NR",
-                Name = "Ikke vurdert",
-                Description = "ikke vurdert"
-            }
-        };
+            new List<AlienSpeciesAssessment2023Category>(
+                    (AlienSpeciesAssessment2023Category[])Enum.GetValues(typeof(AlienSpeciesAssessment2023Category)))
+                .Select(x => new Filter.FilterItem
+                {
+                    NameShort = x.ToString(),
+                    Name = x.DisplayName().ToLowerInvariant(),
+                    Description = x.DisplayName()
+                }).ToArray();
     }
 }
-
-
-//"CR": {
-//    "tagline": "Kritisk truet",
-//    "description": "– ekstremt høy risiko for utdøing.",
-//    "presentationstring": "kritisk truet "
-//  },

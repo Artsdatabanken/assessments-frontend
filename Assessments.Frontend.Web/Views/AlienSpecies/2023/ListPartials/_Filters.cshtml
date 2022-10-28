@@ -24,7 +24,7 @@
 }
 
 @functions{
-    void InputTag(string id, string _class, string name, string[] elements, string value)
+    void InputTag(string id, string className, string name, string[] elements, string value)
     {
         name = $"Parameters.{name}";
         if (id == "remember_scroll")
@@ -34,7 +34,7 @@
                     value = item.Replace("scroll_", "");
         }
         id = id.Replace(" ", "_");
-        <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
+        <input id="@id" type="checkbox" class="@className" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
     }
 
     void InputTag(string name, string[] elements, string value)
@@ -61,21 +61,17 @@
         </div>
     }
 
-    void makeCheckBoxLi(string value, string label, string name, string[] model, string className)
+    void makeCheckBoxLi(string value, string label, string name, string[] model, string labelClassName, string inputClassName)
     {        
         string id = value.Replace(" ", "_");
         <li class="checkbox">
-            <label for="@id" class="@className">
-                @{ InputTag(name, model, value);}
+            <label for="@id" class="@labelClassName">
+                @{
+                    InputTag(value, $"{inputClassName} submitOnclick", name, model, value);
+                }
                 <span class="label_text">@label</span>
             </label>
         </li>
-    }
-
-    void makeCheckBoxLi(string value, string label, string name, string[] model)
-    {
-        string className = string.Empty;
-        makeCheckBoxLi(value, label, name, model, className);
     }
 
     void makeFilterElement(string buttonText, string filterName, string buttonname)
@@ -104,7 +100,7 @@
                         string label;
                         string value;
                         string markAllClassName = "mark_all";
-                        makeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName);
+                        makeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, string.Empty);
                         foreach (var el in filterItems)
                         {
                             value = el.NameShort;
@@ -112,7 +108,7 @@
                             if (el.SubGroup != null)
                                 makeFilterGroup(el.NameShort, modelName, true, filterModel, el.SubGroup, el.Name, $"{el.Name}filtre");
                             else
-                                makeCheckBoxLi(value, label, modelName, filterModel);
+                                makeCheckBoxLi(value, label, modelName, filterModel, string.Empty, $"{filterName}_input");
                         }
                     }
                 </ul>
@@ -125,6 +121,16 @@
         makeFilterGroup(filterName, filterName, false, filterModel, filterItems, buttonText, buttonName);
     }
 
+    void renderChip(string buttontext, string filterValue)
+    {
+        <button class="chips generic" onclick="submitClickedElement('@filterValue')" type="submit">
+            <span>@buttontext</span>
+            <span class="x" >
+                <span class="material-icons">close</span>Fjern
+            </span>
+        </button>
+    }
+
     void makeFilterChips(string[] filterModel, Filter.FilterItem[] filterItems)
     {
         foreach (var filter in filterModel)
@@ -134,16 +140,6 @@
                 renderChip(buttonText, filter);
         }
 
-    }
-
-    void renderChip(string buttontext, string filterValue)
-    {
-        <button class="chips generic" onclick="submitClickedElement('@filterValue')" type="submit">
-            <span>@buttontext</span>
-            <span class="x" >
-                <span class="material-icons">close</span>Fjern
-            </span>
-        </button>
     }
 }
 
@@ -236,42 +232,6 @@
                                     makeFilterGroup(nameof(Model.Parameters.TaxonRank), Model.Parameters.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
                                     makeFilterGroup(nameof(Model.Parameters.EstablishmentCategories), Model.Parameters.EstablishmentCategories, AllEstablishmentCategories, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
                                     makeFilterGroup(nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");
-                                }
-                                <!--
-                                <li class="filter_group">
-                                    @{makeFilterElement("Artsgruppe", nameof(Model.Parameters.SpeciesGroups), "artsgruppefiltre");}
-                                    <div class="filter_speciesgroups">
-                                        <ul>
-                                            @foreach (var species in AllSpeciesGroups)
-                                            {
-                                                @if (species.SubGroup != null)
-                                                {
-                                                    InputTag($"show_{species.Name}", "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, species.Name);
-                                                    <li class="checkbox">
-                                                        <button name="@species.Name-filter" class="list_header" id="list_header_@species.Name" onclick="collapse('show_@species.Name')" type="button">
-                                                            <span>@species.Name</span>
-                                                            <span class="list_header_text">
-                                                                <span class="filternumber">@GetActiveFilters(species.Name, Model.Parameters)</span>
-                                                            </span>
-                                                            <span id="show_all_@species.Name">Marker alle</span>
-                                                            <label onclick="event.stopPropagation()">
-                                                                @{
-                                                                    InputTag("SpeciesGroups", Model.Parameters.SpeciesGroups, species.Name);
-                                                                }
-                                                            </label>
-                                                        </button>
-                                                    </li>
-                                                    getSubSpeciesGroupList(species, "SpeciesGroups");
-                                                }
-                                                else
-                                                {
-                                                    makeCheckBoxLi(@species.NameShort, @species.Name, "SpeciesGroups", Model.Parameters.SpeciesGroups);
-                                                }
-                                            }
-                                        </ul>
-                                    </div>
-                                </li> -->
-                                @{
                                     makeFilterGroup(nameof(Model.Parameters.SpeciesGroups), Model.Parameters.SpeciesGroups, AllSpeciesGroups, SearchAndFilterNames.SpeciesGroup, "artsgruppefiltre");
                                     makeFilterGroup(nameof(Model.Parameters.Habitats), Model.Parameters.Habitats, AllHabitats, "Hovedhabitat", "hovedhabitatfiltre");
                                     makeFilterGroup(nameof(Model.Parameters.Regions), Model.Parameters.Regions, AllRegions, "Regioner og havområder", "regionfiltre");

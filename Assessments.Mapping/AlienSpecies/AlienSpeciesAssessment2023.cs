@@ -21,6 +21,11 @@ namespace Assessments.Mapping.AlienSpecies
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         /// <summary>
+        /// Decisive criteria according to GEIAAS method
+        /// </summary>
+        public string Criteria { get; set; }
+
+        /// <summary>
         /// Establishment category in Norway today. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are locally self-sustaining or strongly expanding
         /// </summary>
         public string EstablishmentCategory { get; set; }
@@ -69,6 +74,16 @@ namespace Assessments.Mapping.AlienSpecies
         /// An identifier for the nomenclatural (not taxonomic) details of a scientific name
         /// </summary>
         public int ScientificNameId { get; set; }
+
+        /// <summary>
+        /// The species' total score on the ecological effect axis
+        /// </summary>
+        public int? ScoreEcologicalEffect { get; set; }
+
+        /// <summary>
+        /// The species' total score on the invation axis
+        /// </summary>
+        public int? ScoreInvationPotential { get; set; }
 
         /// <summary>
         /// Taxonomy path

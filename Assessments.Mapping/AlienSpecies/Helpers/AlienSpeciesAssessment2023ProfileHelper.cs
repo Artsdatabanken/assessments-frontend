@@ -35,18 +35,18 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return speciesStatus != "C3"? speciesStatus: speciesEstablishmentCategory;
         }
 
-        internal static int? GetScores(string category, string criteria, string v)
+        internal static int? GetScores(string category, string criteria, string axis)
         {
-            if (category is "NR" or "" or null)
+            if (string.IsNullOrEmpty(category))
             {
                 return null;
             }
             else
             {
-                int SInv = (int)Char.GetNumericValue(criteria[0]);
-                string SEco = criteria.Split(",")[1];
-                int SEco2 = (int)Char.GetNumericValue(SEco[0]);
-                return v == "inv" ? SInv : SEco2;
+                int scoreInvationAxis = (int)Char.GetNumericValue(criteria[0]);
+                string criteriaEcoEffectAxis = criteria.Split(",")[1];
+                int scoreEcoEffectAxis = (int)Char.GetNumericValue(criteriaEcoEffectAxis[0]);
+                return axis == "inv" ? scoreInvationAxis : scoreEcoEffectAxis;
             }
         }
     }

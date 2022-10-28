@@ -37,7 +37,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static int? GetScores(string category, string criteria, string axis)
         {
-            if (string.IsNullOrEmpty(category))
+            if (string.IsNullOrEmpty(category) || category is "NR")
             {
                 return null;
             }

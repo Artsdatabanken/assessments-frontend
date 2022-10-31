@@ -6,12 +6,12 @@
         {
             new Filter.FilterItem()
             {
-                Name = "Norge",
+                Name = "Fastlands-Norge med havområder",
                 NameShort = "N"
             },
             new Filter.FilterItem()
             {
-                Name = "Svalbard",
+                Name = "Svalbard med havområder",
                 NameShort = "S"
             }
         };

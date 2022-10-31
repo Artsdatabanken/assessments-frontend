@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Assessments.Frontend.Web.Models;
+﻿using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.AlienSpecies;
+using System;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -12,6 +12,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (!string.IsNullOrEmpty(parameters.Name))
                 query = query.Where(x => x.ScientificName.ToLowerInvariant()
                     .Contains(parameters.Name.ToLowerInvariant()));
+
+            if (parameters.Area.Any())
+            {
+                query = ApplyAreaFilters(query, parameters.Area);
+            }
 
             if (parameters.Category.Any())
                 query = query.Where(x => parameters.Category.Select(y => (AlienSpeciesAssessment2023Category)Enum.Parse(typeof(AlienSpeciesAssessment2023Category), y)).Contains(x.Category));
@@ -28,7 +33,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 query = query.OrderBy(x => x.Category);
             }
-           
+
             return query;
         }
 
@@ -39,6 +44,23 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 parameters = new AlienSpeciesListParameters(parameters.IsCheck, parameters.Meta, parameters.Name);
             }
             return parameters;
+        }
+
+        public static IQueryable<AlienSpeciesAssessment2023> ApplyAreaFilters(IQueryable<AlienSpeciesAssessment2023> query, string[] areas)
+        {
+            IQueryable<AlienSpeciesAssessment2023> assessments = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+            string svalbard = "S";
+            string norway = "N";
+            string regionallyAlien = "RegionallyAlien";
+
+            foreach (var param in areas)
+            {
+                if (param == svalbard)
+                    assessments = assessments.Concat(query.Where(x => x.EvaluationContext == param));
+                if (param == norway)
+                    assessments = assessments.Concat(query.Where(x => x.EvaluationContext == param && x.AlienSpeciesCategory != regionallyAlien));
+            }
+            return assessments;
         }
     }
 }

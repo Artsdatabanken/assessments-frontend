@@ -104,6 +104,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             int count = 0;
             count += parameters.Area.Length;
             count += parameters.Category.Length;
+            count += parameters.EstablishmentCategories.Length;
             count += parameters.SpeciesGroups.Length;
             count += parameters.ProductionSpecies.Length;
             count += parameters.TaxonRank.Length;
@@ -119,6 +120,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var selectionlist = parameters.Area;
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
+            selectionlist = selectionlist.Concat(parameters.EstablishmentCategories).ToArray();
             selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesGroups).ToArray();
             selectionlist = selectionlist.Concat(parameters.TaxonRank).ToArray();
@@ -151,6 +153,31 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static void RemoveAllFilters(AlienSpeciesListParameters parameters)
         {
             parameters = new AlienSpeciesListParameters();
+        }
+
+        public class SearchAndFilterNames
+        {
+            public const string AssessmentArea = "Område";
+            public const string Category = "Risikokategori";
+            public const string GeographicRiskVariation = "Geografisk variasjon i risiko";
+            public const string ClimateChangeRisk = "Betydning av klimaendringer for risiko";
+            public const string CategoryChange = "Endring i risikokategori";
+            public const string FirstTimeAssessment = "Risikovurdert for første gang";
+            public const string ChooseCriteria = "Avgjørende kriterier for risikokategori";
+            public const string EstablishmentCategory = "Etableringsklasse i dag";
+            public const string ProductionSpecies = "Bruksart";
+            public const string SpeciesGroup = "Artsgrupper";
+            public const string TaxonRank = "Taksonomi";
+            public const string KnownOrExpectedInRegion = "Regioner med kjent eller forventet forekomst";
+            public const string NaturType = "Naturtype";
+            public const string WaysOfSpreading = "Spredningsmåter";
+            public const string RegionallyAlienSpecies = "Regionalt fremmede arter";
+            public const string NonAssessedSpecies = "Ikke risikovurderte arter";
+
+            public const string RemoveFilters = "remove_filters";
+            public const string RemoveSearch = "remove_search";
+            public const string ResetAllFilters = "Nullstill";
+            public const string SearchFilterSpecies = "Søk art/slekt";
         }
     }
 }

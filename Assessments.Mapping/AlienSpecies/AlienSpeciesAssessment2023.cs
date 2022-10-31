@@ -33,7 +33,7 @@ namespace Assessments.Mapping.AlienSpecies
         /// <summary>
         /// Geographic area assessed
         /// </summary>
-        public string EvaluationContext { get; set; }
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         /// <summary>
         /// Name of ekspert committee that conducted the assessments 
@@ -96,13 +96,23 @@ namespace Assessments.Mapping.AlienSpecies
         public string VernacularName { get; set; }
     }
 
+    public enum AlienSpeciesAssessment2023EvaluationContext
+    {
+        // ReSharper disable InconsistentNaming
+        [Display(Name = "Fastlands-Norge med havområder")]
+        N,
+
+        [Display(Name = "Svalbard med havområder")]
+        S
+    }
+
     public enum AlienSpeciesAssessment2023Category
     {
         // ReSharper disable InconsistentNaming
-        [Display(Name = "Ukjent")] 
+        [Display(Name = "Ukjent")]
         Undefined,
 
-        [Display(Name = "Svært høy risiko")] 
+        [Display(Name = "Svært høy risiko")]
         SE,
 
         [Display(Name = "Høy risiko")]
@@ -111,10 +121,10 @@ namespace Assessments.Mapping.AlienSpecies
         [Display(Name = "Potensielt høy risiko")]
         PH,
 
-        [Display(Name = "Lav risiko")] 
+        [Display(Name = "Lav risiko")]
         LO,
 
-        [Display(Name = "Ingen kjent risiko")] 
+        [Display(Name = "Ingen kjent risiko")]
         NK,
 
         [Display(Name = "Ikke risikovurdert")]

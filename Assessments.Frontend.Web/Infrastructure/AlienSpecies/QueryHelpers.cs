@@ -49,16 +49,16 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static IQueryable<AlienSpeciesAssessment2023> ApplyAreaFilters(IQueryable<AlienSpeciesAssessment2023> query, string[] areas)
         {
             IQueryable<AlienSpeciesAssessment2023> assessments = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
-            string svalbard = "S";
-            string norway = "N";
+            string svalbard = Enum.Parse(typeof(AlienSpeciesAssessment2023EvaluationContext), "S").ToString();
+            string norway = Enum.Parse(typeof(AlienSpeciesAssessment2023EvaluationContext), "N").ToString();
             string regionallyAlien = "RegionallyAlien";
 
             foreach (var param in areas)
             {
                 if (param == svalbard)
-                    assessments = assessments.Concat(query.Where(x => x.EvaluationContext == param));
+                    assessments = assessments.Concat(query.Where(x => x.EvaluationContext.ToString() == param));
                 if (param == norway)
-                    assessments = assessments.Concat(query.Where(x => x.EvaluationContext == param && x.AlienSpeciesCategory != regionallyAlien));
+                    assessments = assessments.Concat(query.Where(x => x.EvaluationContext.ToString() == param && x.AlienSpeciesCategory != regionallyAlien));
             }
             return assessments;
         }

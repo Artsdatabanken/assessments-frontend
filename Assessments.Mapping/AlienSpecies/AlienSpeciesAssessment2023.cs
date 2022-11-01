@@ -98,7 +98,6 @@ namespace Assessments.Mapping.AlienSpecies
 
     public enum AlienSpeciesAssessment2023EvaluationContext
     {
-        // ReSharper disable InconsistentNaming
         [Display(Name = "Fastlands-Norge med havområder")]
         N,
 

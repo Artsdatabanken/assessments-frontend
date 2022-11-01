@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Assessments.Mapping.AlienSpecies;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Profiles;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;

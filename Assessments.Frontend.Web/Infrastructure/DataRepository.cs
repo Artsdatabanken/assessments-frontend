@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Assessments.Mapping.AlienSpecies;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Mapping.RedlistSpecies;
 using Assessments.Mapping.RedlistSpecies.Source;

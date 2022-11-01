@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 
-namespace Assessments.Mapping.AlienSpecies
+namespace Assessments.Mapping.AlienSpecies.Model
 {
     public class AlienSpeciesAssessment2023
     {
@@ -94,51 +94,5 @@ namespace Assessments.Mapping.AlienSpecies
         /// Norwegian common names
         /// </summary>
         public string VernacularName { get; set; }
-    }
-
-    public enum AlienSpeciesAssessment2023EvaluationContext
-    {
-        [Display(Name = "Fastlands-Norge med havområder")]
-        N,
-
-        [Display(Name = "Svalbard med havområder")]
-        S
-    }
-
-    public enum AlienSpeciesAssessment2023Category
-    {
-        // ReSharper disable InconsistentNaming
-        [Display(Name = "Ukjent")]
-        Undefined,
-
-        [Display(Name = "Svært høy risiko")]
-        SE,
-
-        [Display(Name = "Høy risiko")]
-        HI,
-
-        [Display(Name = "Potensielt høy risiko")]
-        PH,
-
-        [Display(Name = "Lav risiko")]
-        LO,
-
-        [Display(Name = "Ingen kjent risiko")]
-        NK,
-
-        [Display(Name = "Ikke risikovurdert")]
-        NR
-    }
-
-    public class AlienSpeciesAssessment2023PreviousAssessment
-    {
-        public int RevisionYear { get; set; } = 2018;
-
-        public string AssessmentId { get; set; }
-        public int RiskLevel { get; set; }
-        /// <summary>
-        /// Evaluation  'tag' for the species in 2018 or 2012
-        /// </summary>
-        public string MainCategory { get; set; }
     }
 }

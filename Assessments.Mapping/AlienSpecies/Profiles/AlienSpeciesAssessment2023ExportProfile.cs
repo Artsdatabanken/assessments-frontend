@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Assessments.Mapping.AlienSpecies.Model;
+using AutoMapper;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
 {

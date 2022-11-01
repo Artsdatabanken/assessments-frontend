@@ -101,7 +101,9 @@
                         string label;
                         string value;
                         string markAllClassName = "mark_all";
-                        MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
+                        if (filterItems.Length > 4 && modelName != nameof(Model.Parameters.EstablishmentCategories))
+                            MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
+
                         foreach (var el in filterItems)
                         {
                             value = el.NameShort;

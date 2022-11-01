@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
+using System;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -33,17 +33,17 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             new()
             {
                 Name = "Art",
-                NameShort = "a"
+                NameShort = "art"
             },
             new()
             {
                 Name = "Underart",
-                NameShort = "ua"
+                NameShort = "uar"
             },
             new()
             {
                 Name = "Varietet",
-                NameShort = "v"
+                NameShort = "var"
             }
         };
     }
@@ -712,6 +712,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = "Dørstokkart",
                 NameShort = "eda",
+            },
+            new()
+            {
+                Name = "Dørstokkart som...",
+                NameShort = "eds",
                 SubGroup = AlienSpecies2023Doorknockers
             }
         };

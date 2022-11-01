@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -37,6 +39,11 @@ namespace Assessments.Shared.Helpers
         {
             var attribute = value.GetAttribute<DisplayAttribute>();
             return attribute == null ? value.ToString() : attribute.Name;
+        }
+
+        public static IEnumerable<T> ToEnumerable<T>(this IEnumerable<string> array)
+        {
+            return array.Select(a => (T) Enum.Parse(typeof(T), a));
         }
     }
 }

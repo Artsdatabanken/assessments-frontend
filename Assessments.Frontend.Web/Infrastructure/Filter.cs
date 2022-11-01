@@ -2,9 +2,6 @@ using Assessments.Frontend.Web.Models;
 using static Assessments.Frontend.Web.Infrastructure.Constants;
 using System;
 using System.Linq;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc.Filters;
-using static Assessments.Frontend.Web.Infrastructure.SpeciesGroups;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {

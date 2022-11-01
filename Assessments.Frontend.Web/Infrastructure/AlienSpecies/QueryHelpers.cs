@@ -1,5 +1,6 @@
 ﻿using Assessments.Frontend.Web.Models;
-using Assessments.Mapping.AlienSpecies;
+using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
 using System.Linq;

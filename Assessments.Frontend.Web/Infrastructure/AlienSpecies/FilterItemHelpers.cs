@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Assessments.Mapping.AlienSpecies;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
@@ -664,4 +664,57 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
     }
+
+    public class EstablishmentCategory
+    {
+        public static readonly Filter.FilterItem[] AlienSpecies2023Doorknockers =
+        {
+            new()
+            {
+                Name = "Overlever vinteren utendørs",
+                NameShort = "eov"
+            },
+            new()
+            {
+                Name = "Observert i norsk natur",
+                NameShort = "eon"
+            },
+            new()
+            {
+                Name = "Utendørs i eget produksjonsareal",
+                NameShort = "eup"
+            },
+            new()
+            {
+                Name = "Innendørs",
+                NameShort = "eid"
+            },
+            new()
+            {
+                Name = "Ikke i Norge",
+                NameShort = "ein"
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023EstablishmentCategory =
+        {
+            new()
+            {
+                Name = "Etablert",
+                NameShort = "eet"
+            },
+            new()
+            {
+                Name = "Selvstendig reproduserende",
+                NameShort = "esr"
+            },
+            new()
+            {
+                Name = "Dørstokkart",
+                NameShort = "eda",
+                SubGroup = AlienSpecies2023Doorknockers
+            }
+        };
+    }
+
 }

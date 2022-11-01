@@ -1,6 +1,7 @@
 ﻿using Assessments.Mapping.AlienSpecies.Source;
 using AutoMapper;
 using Assessments.Mapping.AlienSpecies.Helpers;
+using Assessments.Mapping.AlienSpecies.Model;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
 {

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
-using Assessments.Mapping.AlienSpecies;
 using static Microsoft.AspNetCore.Http.StatusCodes;
+using Assessments.Mapping.AlienSpecies.Model;
 
 namespace Assessments.Frontend.Web.Controllers.Api
 {

@@ -43,7 +43,7 @@ namespace Assessments.Shared.Helpers
 
         public static IEnumerable<T> ToEnumerable<T>(this IEnumerable<string> array)
         {
-            return array.Select(a => (T) Enum.Parse(typeof(T), a));
+            return array.Where(c => Enum.IsDefined(typeof(T), c)).Select(a => (T) Enum.Parse(typeof(T), a));
         }
     }
 }

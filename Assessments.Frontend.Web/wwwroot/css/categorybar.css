@@ -186,13 +186,39 @@
     background: #d1d3d4;
 }
 
+.SE {
+    background: #5e3063;
+}
+
+.HI {
+    background: #1b386f;
+}
+
+.PH {
+    background: #8cadb6;
+}
+
+.LO {
+    background: #5ea4a1;
+}
+
+.NK {
+    background: #9ba963;
+}
+
 .RE ,
 .CR ,
 .EN ,
 .VU ,
 .DD,
 .LC,
-.NT {
+.NT,
+
+.SE,
+.HI,
+.PH,
+.LO,
+.NK {
     color: white;
 }
 

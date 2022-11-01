@@ -1,4 +1,4 @@
-﻿using Assessments.Mapping.AlienSpecies;
+﻿using Assessments.Mapping.AlienSpecies.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

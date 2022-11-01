@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Assessments.Mapping.AlienSpecies;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies

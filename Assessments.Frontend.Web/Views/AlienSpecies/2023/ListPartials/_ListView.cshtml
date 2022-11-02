@@ -4,7 +4,7 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 
 @{
-    Filter.FilterItem[] speciesgroup = SpeciesGroups.AlienSpecies2023SpeciesGroups;
+    Filter.FilterItem[] speciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
 }
 
 <ul class="redlist" id="redlist">
@@ -19,20 +19,19 @@
     {
         @foreach (var item in Model.Results)
         {
-            @*string speciesgroupname = @item.SpeciesGroup.ToLower();*@
-            @*<li class="list @speciesgroupname @item.AssessmentArea">*@
-            <li class="list @item.EvaluationContext">
+             var speciesItem = AlienSpeciesHelpers.GetSpeciesGroup(speciesGroups, item.SpeciesGroup); 
+            <li class="list @item.SpeciesGroup.ToLower() @item.EvaluationContext">
                 <a asp-action="Detail" asp-route-id="@item.Id">
                     <div class="svalbarcontainer">
                         <span class="svalbard">Svalbard</span>
                     </div>
 
                     <div class="element_icon list_cell">
-                        @*@if (speciesgroup.ContainsKey(item.SpeciesGroup) && speciesgroup[item.SpeciesGroup]["image"] != null)
+                        @if (!string.IsNullOrEmpty(item.SpeciesGroup))
                         {
-                            <img src="@speciesgroup[item.SpeciesGroup]["image"]" alt="@speciesgroupname"/>
-                            <span class="speciesgroup_name">@speciesgroupname</span>
-                        }*@
+                            <img src="@speciesItem.ImageUrl" alt="@item.SpeciesGroup" />
+                            <span class="speciesgroup_name">@item.SpeciesGroup</span>
+                        }
                     </div>
 
 

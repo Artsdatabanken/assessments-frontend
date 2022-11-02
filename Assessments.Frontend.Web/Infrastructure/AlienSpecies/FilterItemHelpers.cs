@@ -319,8 +319,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = "Karplanter",
                 NameShort = "skp",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
+                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/karplanter",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Karplanter.svg",
                 Description = "Magnoliophyta, Pinophyta, Pteridophyta"
             },
             new()

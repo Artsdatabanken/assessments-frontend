@@ -111,7 +111,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sll",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/lusoglopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/LusogLopper.svg",
-                Description = "Phthiraptera og Siphonatera"
+                Description = "Phthiraptera, Siphonatera"
             },
             new()
             {
@@ -207,7 +207,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sal",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = "Rhodophyta, Chlorophyta og Phaeophyceae",
+                Description = "Rhodophyta, Chlorophyta, Phaeophyceae",
                 SubGroup = AlienSpecies2023Algae
             },
             new()
@@ -264,7 +264,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sfl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/flatormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Flatorm.svg",
-                Description = "Actinopterygii"
+                Description = "Platyhelminthes"
             },
             new()
             {
@@ -313,7 +313,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "skd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                Description = "Ascidiacea (Tunicata)"
+                Description = "Ascidiacea, Tunicata"
             },
             new()
             {
@@ -321,7 +321,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "skp",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                Description = "Magnoliophyta, Pinophyta og Pteridophyta"
+                Description = "Magnoliophyta, Pinophyta, Pteridophyta"
             },
             new()
             {
@@ -346,7 +346,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mangefotinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mangefotinger.svg",
-                Description = "Myriapoda [Chilopoda og Diplopoda]"
+                Description = "Myriapoda, Chilopoda, Diplopoda"
             },
             new()
             {
@@ -354,7 +354,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smb",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mosdyrogbegerormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mosdyr.svg",
-                Description = "Ectoprocta og Entoprocta"
+                Description = "Ectoprocta, Entoprocta"
             },
             new()
             {
@@ -362,7 +362,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smo",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/moser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Moser.svg",
-                Description = "Bryophyta og Marchantiophyta"
+                Description = "Bryophyta, Marchantiophyta"
             },
             new()
             {

@@ -672,27 +672,27 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             new()
             {
                 Name = "Overlever vinteren utendørs",
-                NameShort = "eov"
+                NameShort = "C1"
             },
             new()
             {
                 Name = "Observert i norsk natur",
-                NameShort = "eon"
+                NameShort = "C0"
             },
             new()
             {
                 Name = "Utendørs i eget produksjonsareal",
-                NameShort = "eup"
+                NameShort = "B2"
             },
             new()
             {
                 Name = "Innendørs",
-                NameShort = "eid"
+                NameShort = "B1"
             },
             new()
             {
                 Name = "Ikke i Norge",
-                NameShort = "ein"
+                NameShort = "A"
             }
         };
 
@@ -701,12 +701,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             new()
             {
                 Name = "Etablert",
-                NameShort = "eet"
+                NameShort = "C3"
             },
             new()
             {
                 Name = "Selvstendig reproduserende",
-                NameShort = "esr"
+                NameShort = "C2"
             },
             new()
             {

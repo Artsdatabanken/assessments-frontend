@@ -23,6 +23,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.ProductionSpecies.Any())
                 query = query.Where(x => parameters.ProductionSpecies.Contains(x.ProductionSpecies.ToString()));
 
+            if (parameters.SpeciesGroups.Any())
+                query = query.Where(x => parameters.SpeciesGroups.Any(y => AlienSpeciesHelpers.GetSpeciesGroupByShortName(y) == x.SpeciesGroup));
+
             if (string.IsNullOrEmpty(parameters.SortBy) || parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.ScientificName), StringComparison.InvariantCultureIgnoreCase))
                 query = query.OrderBy(x => x.ScientificName);
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.VernacularName), StringComparison.InvariantCultureIgnoreCase))

@@ -47,6 +47,14 @@ namespace Assessments.Transformation
                 if (fa4 == null)
                     continue;
 
+                // ekskluderer vurderinger som ligger under horisontskanning eller ikke har kategori
+                if (fa4.HorizonDoScanning || string.IsNullOrEmpty(fa4.Category))
+                    continue;
+
+                // ekskluderer vurderinger som er "ikke fremmed" i 2023 og 2018
+                if (fa4.AlienSpeciesCategory == "NotAlienSpecie" && fa4.PreviousAssessments.FirstOrDefault(x => x.RevisionYear == 2018) is { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
+                    continue;
+
                 fa4.Id = assessment.Id;
                 sourceItems.Add(fa4);
 
@@ -69,6 +77,9 @@ namespace Assessments.Transformation
             };
 
             var dataFolder = configuration.GetValue<string>("FilesFolder");
+
+            if (string.IsNullOrEmpty(dataFolder))
+                throw new Exception("Innstilling for 'FilesFolder' mangler");
 
             if (!Directory.Exists(dataFolder))
                 Directory.CreateDirectory(dataFolder);
@@ -98,7 +109,12 @@ namespace Assessments.Transformation
             if (!await _dbContext.Database.CanConnectAsync())
                 throw new Exception("Kan ikke koble til databasen");
 
-            return _dbContext.Assessments.AsNoTracking();
+            var excludedExpertGroups = new List<string> { "Testedyr", "Ikke-marine invertebrater" };
+
+            var assessments = _dbContext.Assessments.AsNoTracking()
+                .Where(x => (bool)!x.IsDeleted && !excludedExpertGroups.Contains(x.Expertgroup));
+
+            return assessments;
         }
     }
 }

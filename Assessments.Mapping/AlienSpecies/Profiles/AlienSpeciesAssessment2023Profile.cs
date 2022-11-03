@@ -24,6 +24,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 ;
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>();
+
+            CreateMap<FA4, AlienSpeciesAssessment2023RiskAssessment>()
+
+                .ForMember(dest => dest.GeographicVariationInCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarInCat(src.Category, src.RiskAssessment.PossibleLowerCategory)))
+                ;
         }
     }
 }

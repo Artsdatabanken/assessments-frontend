@@ -49,5 +49,18 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return axis == "inv" ? scoreInvationAxis : scoreEcoEffectAxis;
             }
         }
+
+        internal static string GetGeographicVarInCat(string category, string geographicvar) 
+        {
+            if (string.IsNullOrEmpty(category) || category is "NR")
+            {
+                return string.Empty;
+            }
+            if (string.IsNullOrEmpty(geographicvar))
+            {
+                return "no";
+            }
+            return geographicvar;
+        }
     }
 }

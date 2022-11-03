@@ -1,4 +1,5 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Shared.Helpers;
 using AutoMapper;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
@@ -7,7 +8,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
     {
         public AlienSpeciesAssessment2023ExportProfile()
         {
-            CreateMap<AlienSpeciesAssessment2023, AlienSpeciesAssessment2023Export>();
+            CreateMap<AlienSpeciesAssessment2023, AlienSpeciesAssessment2023Export>()
+                .ForMember(dest => dest.AlienSpeciesCategory, opt => opt.MapFrom(src => src.AlienSpeciesCategory.DisplayName()));
         }
     }
 }

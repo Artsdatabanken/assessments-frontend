@@ -52,11 +52,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         private static IQueryable<AlienSpeciesAssessment2023> ApplyEstablishmentCategories(string[] establishmentCategories, IQueryable<AlienSpeciesAssessment2023> query)
         {
             const string doorKnockerShort = "eda";
-            const string doorKnocker = "DoorKnocker";
-            const string effect = "EffectWithoutReproduction";
             
             return query.Where(x => establishmentCategories.Contains(x.EstablishmentCategory) ||
-                                    (establishmentCategories.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == doorKnocker || x.AlienSpeciesCategory == effect)));
+                                    (establishmentCategories.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction)));
         }
     }
 }

@@ -2,8 +2,10 @@
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
+using System.Web;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -30,13 +32,38 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return query;
         }
 
-        public static AlienSpeciesListParameters UpdateParameters(AlienSpeciesListParameters parameters)
+        public static string UpdateParameters(HttpRequest request, AlienSpeciesListParameters parameters)
         {
+            var queryParams = HttpUtility.ParseQueryString(request.QueryString.ToString());
+            var newQueryParams = HttpUtility.ParseQueryString(request.QueryString.ToString());
+            var url = request.PathBase.HasValue ? request.PathBase + request.Path : request.Path;
             if (!string.IsNullOrEmpty(parameters.RemoveFilters))
             {
-                parameters = new AlienSpeciesListParameters(parameters.IsCheck, parameters.Meta, parameters.Name);
+                string[] keepParameters =
+                {
+                    $"Parameters.{nameof(parameters.IsCheck)}",
+                    $"Parameters.{nameof(parameters.Meta)}",
+                    $"Parameters.{nameof(parameters.Name)}",
+                    $"Parameters.{nameof(parameters.SortBy)}"
+                };
+
+                foreach (var item in queryParams)
+                {
+                    if (!keepParameters.Contains(item))
+                        newQueryParams.Remove(item.ToString());
+                }
+
+                return $"{url}?{newQueryParams}";
             }
-            return parameters;
+
+            if (!string.IsNullOrEmpty(parameters.RemoveSearch))
+            {
+                queryParams.Remove($"Parameters.{nameof(parameters.Name)}");
+                queryParams.Remove($"Parameters.{nameof(parameters.RemoveSearch)}");
+                return $"{url}?{queryParams}";
+            }
+
+            return string.Empty;
         }
     }
 }

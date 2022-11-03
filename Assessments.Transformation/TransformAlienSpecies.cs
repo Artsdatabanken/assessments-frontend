@@ -49,11 +49,17 @@ namespace Assessments.Transformation
 
                 // ekskluderer vurderinger som ligger under horisontskanning eller ikke har kategori
                 if (fa4.HorizonDoScanning || string.IsNullOrEmpty(fa4.Category))
+                {
+                    Progress.ProgressBar.Tick();
                     continue;
+                }
 
                 // ekskluderer vurderinger som er "ikke fremmed" i 2023 og 2018
                 if (fa4.AlienSpeciesCategory == "NotAlienSpecie" && fa4.PreviousAssessments.FirstOrDefault(x => x.RevisionYear == 2018) is { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
+                {
+                    Progress.ProgressBar.Tick();
                     continue;
+                }
 
                 fa4.Id = assessment.Id;
                 sourceItems.Add(fa4);
@@ -92,7 +98,7 @@ namespace Assessments.Transformation
                     await Storage.Upload(configuration, key, value);
             }
 
-            Progress.ProgressBar.Message = "Transformering fullført";
+            Progress.ProgressBar.Message = $"Transformering fullført, {sourceItems.Count} vurderinger ble lagret";
             Progress.ProgressBar.Dispose();
         }
 

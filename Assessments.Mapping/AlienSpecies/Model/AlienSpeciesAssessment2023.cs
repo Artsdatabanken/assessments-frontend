@@ -8,7 +8,8 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Evaluation  'tag' for the species. Evaluated categories are "AlienSpecie", "DoorKnocker", "RegionallyAlien" and "EffectWithoutReproduction"
         /// </summary>
-        public string AlienSpeciesCategory { get; set; }
+
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         /// <summary>
         /// Was the alien species established by year 1800? If true the alien species is not risk assessed

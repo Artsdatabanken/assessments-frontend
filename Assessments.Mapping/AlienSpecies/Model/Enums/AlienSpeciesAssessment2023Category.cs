@@ -5,9 +5,6 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
     public enum AlienSpeciesAssessment2023Category
     {
         // ReSharper disable InconsistentNaming
-        [Display(Name = "Ukjent")]
-        Undefined,
-
         [Display(Name = "Svært høy risiko")]
         SE,
 

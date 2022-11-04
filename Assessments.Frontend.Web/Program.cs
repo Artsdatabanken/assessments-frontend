@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Text.Json.Serialization;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.Api;
 using Assessments.Frontend.Web.Infrastructure.Services;
@@ -14,7 +15,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddLazyCache();
 

@@ -7,6 +7,7 @@ using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
 using static Microsoft.AspNetCore.Http.StatusCodes;
 using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 namespace Assessments.Frontend.Web.Controllers.Api
 {
@@ -14,9 +15,15 @@ namespace Assessments.Frontend.Web.Controllers.Api
     public class AlienSpeciesController : BaseApiController<AlienSpeciesController>
     {
         [HttpGet, ProducesResponseType(typeof(PaginatedResults<List<AlienSpeciesAssessment2023>>), Status200OK)]
-        public async Task<ActionResult> GetAlienSpecies2023([FromQuery] AlienSpeciesListParameters parameters, int pageNumber = 1, int pageSize = 25)
+        public async Task<ActionResult> GetAlienSpecies2023(string name, [FromQuery] AlienSpeciesAssessment2023Category[] category, int pageNumber = 1, int pageSize = 25)
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
+
+            var parameters = new AlienSpeciesListParameters
+            {
+                Name = name, 
+                Category = category.Select(x => x.ToString()).ToArray()
+            };
 
             query = QueryHelpers.ApplyParameters(parameters, query);
 

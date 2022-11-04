@@ -5,14 +5,20 @@ namespace Assessments.Tests.Mapping
 {
     public class AlienSpeciesAssessment2023ProfileTests
     {
-        private readonly MapperConfiguration _mapper;
-
-        public AlienSpeciesAssessment2023ProfileTests()
+        [Fact]
+        public void AlienSpeciesAssessment2023ProfileShouldBeValid()
         {
-            _mapper = new MapperConfiguration(config => config.AddProfile(new AlienSpeciesAssessment2023Profile()));
+            var mapper = new MapperConfiguration(config => config.AddProfile(new AlienSpeciesAssessment2023Profile()));
+
+            mapper.AssertConfigurationIsValid();
         }
 
         [Fact]
-        public void AlienSpeciesAssessment2023ProfileShouldBeValid() => _mapper.AssertConfigurationIsValid();
+        public void AlienSpeciesAssessment2023ExportProfileShouldBeValid()
+        {
+            var mapper = new MapperConfiguration(config => config.AddProfile(new AlienSpeciesAssessment2023ExportProfile()));
+
+            mapper.AssertConfigurationIsValid();
+        }
     }
 }

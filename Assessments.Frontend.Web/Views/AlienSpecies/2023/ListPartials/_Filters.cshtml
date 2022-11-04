@@ -9,7 +9,7 @@
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
     //var AllCriterias = ViewBag.AllCriterias;
-    var AllEstablishmentCategories = EstablishmentCategory.AlienSpecies2023EstablishmentCategory;
+    var AllEstablishmentCategories = SpeciesStatus.AlienSpecies2023SpeciesStatus;
     var AllHabitats = Habitat.AlienSpecies2023Habitats;
     var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
     var AllRegions = Regions.AlienSpecies2023Regions;
@@ -101,7 +101,7 @@
                         string label;
                         string value;
                         string markAllClassName = "mark_all";
-                        if (filterItems.Length > 4 && modelName != nameof(Model.Parameters.EstablishmentCategories))
+                        if (filterItems.Length > 4 && modelName != nameof(Model.Parameters.SpeciesStatus))
                             MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
 
                         foreach (var el in filterItems)
@@ -174,7 +174,7 @@
                     {
                         MakeFilterChips(Model.Parameters.Area, AllAreas);
                         MakeFilterChips(Model.Parameters.Category, AllCategories);
-                        MakeFilterChips(Model.Parameters.EstablishmentCategories, AllEstablishmentCategories);
+                        MakeFilterChips(Model.Parameters.SpeciesStatus, AllEstablishmentCategories);
                         MakeFilterChips(Model.Parameters.ProductionSpecies, AllProductionSpecies);
                         MakeFilterChips(Model.Parameters.SpeciesGroups, AllSpeciesGroups);
                         MakeFilterChips(Model.Parameters.TaxonRank, AllTaxonRanks);
@@ -237,7 +237,7 @@
                                     MakeFilterGroup(nameof(Model.Parameters.Area), Model.Parameters.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
                                     MakeFilterGroup(nameof(Model.Parameters.Category), Model.Parameters.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
                                     MakeFilterGroup(nameof(Model.Parameters.TaxonRank), Model.Parameters.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
-                                    MakeFilterGroup(nameof(Model.Parameters.EstablishmentCategories), Model.Parameters.EstablishmentCategories, AllEstablishmentCategories, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
+                                    MakeFilterGroup(nameof(Model.Parameters.SpeciesStatus), Model.Parameters.SpeciesStatus, AllEstablishmentCategories, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
                                     MakeFilterGroup(nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");
                                     MakeFilterGroup(nameof(Model.Parameters.SpeciesGroups), Model.Parameters.SpeciesGroups, AllSpeciesGroups, SearchAndFilterNames.SpeciesGroup, "artsgruppefiltre");
                                     MakeFilterGroup(nameof(Model.Parameters.Habitats), Model.Parameters.Habitats, AllHabitats, "Hovedhabitat", "hovedhabitatfiltre");

@@ -92,6 +92,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string SpeciesGroup { get; set; }
 
         /// <summary>
+        /// Establishment category in Norway today from A-C3. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are established
+        /// </summary>
+        public string SpeciesStatus { get; set; }
+
+        /// <summary>
         /// Taxonomy path
         /// </summary>
         public string TaxonHierarcy { get; set; }

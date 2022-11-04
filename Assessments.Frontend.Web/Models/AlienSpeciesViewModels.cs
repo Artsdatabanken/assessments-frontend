@@ -23,7 +23,7 @@ namespace Assessments.Frontend.Web.Models
             this.Area = Array.Empty<string>();
             this.Category = Array.Empty<string>();
             this.Criterias = Array.Empty<string>();
-            this.EstablishmentCategories = Array.Empty<string>();
+            this.SpeciesStatus = Array.Empty<string>();
             this.IsCheck = isCheck.Any() ? isCheck : Array.Empty<string>();
             this.Meta = meta.Any() ? meta : Array.Empty<string>();
             this.Name = string.IsNullOrEmpty(name) ? string.Empty : name;
@@ -44,7 +44,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string[] Criterias { get; set; }
 
-        public string[] EstablishmentCategories { get; set; }
+        public string[] SpeciesStatus { get; set; }
 
         public string[] Habitats { get; set; }
 

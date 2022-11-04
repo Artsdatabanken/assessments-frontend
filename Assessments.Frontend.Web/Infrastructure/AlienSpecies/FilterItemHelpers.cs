@@ -665,7 +665,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
-    public class EstablishmentCategory
+    public class SpeciesStatus
     {
         public static readonly Filter.FilterItem[] AlienSpecies2023Doorknockers =
         {
@@ -696,7 +696,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023EstablishmentCategory =
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesStatus =
         {
             new()
             {

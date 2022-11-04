@@ -22,8 +22,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.Category.Any())
                 query = query.Where(x => parameters.Category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category));
 
-            if (parameters.EstablishmentCategories.Any())
-                query = ApplyEstablishmentCategories(parameters.EstablishmentCategories, query);
+            if (parameters.SpeciesStatus.Any())
+                query = ApplySpeciesStatus(parameters.SpeciesStatus, query);
 
             if (parameters.ProductionSpecies.Any())
                 query = query.Where(x => parameters.ProductionSpecies.Contains(x.ProductionSpecies.ToString()));
@@ -75,12 +75,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return string.Empty;
         }
 
-        private static IQueryable<AlienSpeciesAssessment2023> ApplyEstablishmentCategories(string[] establishmentCategories, IQueryable<AlienSpeciesAssessment2023> query)
+        private static IQueryable<AlienSpeciesAssessment2023> ApplySpeciesStatus(string[] speciesStatus, IQueryable<AlienSpeciesAssessment2023> query)
         {
             const string doorKnockerShort = "eda";
 
-            return query.Where(x => establishmentCategories.Contains(x.EstablishmentCategory) ||
-                                    (establishmentCategories.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction)));
+            return query.Where(x => speciesStatus.Contains(x.SpeciesStatus) ||
+                                    (speciesStatus.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction)));
         }
     }
 }

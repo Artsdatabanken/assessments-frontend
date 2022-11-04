@@ -43,9 +43,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.Category?.Any() == true)
                         return $"{parameters.Category.Length}";
                     return String.Empty;
-                case nameof(parameters.EstablishmentCategories):
-                    if (parameters.EstablishmentCategories?.Any() == true)
-                        return $"{parameters.EstablishmentCategories.Length}";
+                case nameof(parameters.SpeciesStatus):
+                    if (parameters.SpeciesStatus?.Any() == true)
+                        return $"{parameters.SpeciesStatus.Length}";
                     return String.Empty;
                 case nameof(parameters.TaxonRank):
                     if (parameters.TaxonRank?.Any() == true)
@@ -101,7 +101,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             int count = 0;
             count += parameters.Area.Length;
             count += parameters.Category.Length;
-            count += parameters.EstablishmentCategories.Length;
+            count += parameters.SpeciesStatus.Length;
             count += parameters.SpeciesGroups.Length;
             count += parameters.ProductionSpecies.Length;
             count += parameters.TaxonRank.Length;
@@ -117,7 +117,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var selectionlist = parameters.Area;
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
-            selectionlist = selectionlist.Concat(parameters.EstablishmentCategories).ToArray();
+            selectionlist = selectionlist.Concat(parameters.SpeciesStatus).ToArray();
             selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesGroups).ToArray();
             selectionlist = selectionlist.Concat(parameters.TaxonRank).ToArray();

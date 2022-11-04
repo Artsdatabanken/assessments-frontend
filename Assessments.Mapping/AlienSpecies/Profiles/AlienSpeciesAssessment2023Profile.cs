@@ -20,15 +20,13 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.EstablishmentCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEstablishmentCategory(src.SpeciesEstablishmentCategory, src.SpeciesStatus)))
                 .ForMember(dest => dest.ScoreInvationPotential, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScores(src.Category, src.Criteria, "inv")))
                 .ForMember(dest => dest.ScoreEcologicalEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScores(src.Category, src.Criteria, "eco")))
-
+                .ForPath(dest => dest.RiskAssessment.GeographicVariationInCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarInCat(src.Category, src.RiskAssessment.PossibleLowerCategory)))
                 ;
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>();
 
-            CreateMap<FA4, AlienSpeciesAssessment2023RiskAssessment>()
-
-                .ForMember(dest => dest.GeographicVariationInCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarInCat(src.Category, src.RiskAssessment.PossibleLowerCategory)))
-                ;
+            CreateMap<RiskAssessment, AlienSpeciesAssessment2023RiskAssessment>()
+                .ForMember(dest => dest.GeographicVariationInCategory, opt => opt.MapFrom(src => src.PossibleLowerCategory));
         }
     }
 }

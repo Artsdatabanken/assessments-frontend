@@ -162,7 +162,7 @@
                     {
                         string searchstring = " for " + '"' + @GetActiveSelection(Model.Parameters) + '"';
                         <span>@searchstring</span>
-                        <button class="button tinybutton tertiary search_related" name="remove_search" value="true">
+                        <button class="button tinybutton tertiary search_related" name="Parameters.@nameof(Model.Parameters.RemoveSearch)" value="true">
                             <span class="material-icons">close</span>Fjern søk
                         </button>
                     }

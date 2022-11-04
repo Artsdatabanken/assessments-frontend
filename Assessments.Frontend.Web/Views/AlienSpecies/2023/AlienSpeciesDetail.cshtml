@@ -6,14 +6,8 @@
     AlienSpeciesAssessment2023 assessment = Model.Assessment;
     ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
 
-    //TODO: need species group in model first. Use dummy value until then
-    //SpeciesGroups.SpeciesGroupItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, Model.Assessment.SpecieGroup);
-    Filter.FilterItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, "Fisker");
-    string speciesGroupImageUrl = String.Empty;
-    if (speciesGroup != null)
-    {
-        speciesGroupImageUrl = speciesGroup.ImageUrl;
-    }
+    Filter.FilterItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
+     var speciesGroupImageUrl = speciesGroup.ImageUrl;
 
     AssessmentPageHeaderViewModel assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
             {
@@ -22,15 +16,15 @@
                 {
                     PopularName = assessment.VernacularName,
                     ScientificName = assessment.ScientificName,
-                    ScientificNameAuthor = "" // TODO: get author from model - assessment.ScientificNameAuthor
+                    ScientificNameAuthor = assessment.ScientificNameAuthor
                 },
                 speciesGroupViewModel = new SpeciesGroupViewModel()
                 {
                     AssessmentYear = 2023, // TODO: create this field in assessment model
-                    ExpertCommittee = "ekspertkommité", // TODO: same as above
+                    ExpertCommittee = assessment.ExpertGroup,
                     //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
                     RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
-                    SpeciesGroup = "", // TODO: create this field in model
+                    SpeciesGroup = assessment.SpeciesGroup,
                     SpeciesGroupImageUrl = speciesGroupImageUrl,
                     PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }

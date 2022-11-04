@@ -35,55 +35,52 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             switch (filterType)
             {
-                case "Area":
+                case nameof(parameters.Area):
                     if (parameters.Area?.Any() == true)
                         return $"{parameters.Area.Length}";
                     return String.Empty;
-                case "Category":
+                case nameof(parameters.Category):
                     if (parameters.Category?.Any() == true)
                         return $"{parameters.Category.Length}";
                     return String.Empty;
-                case "TaxonRank":
+                case nameof(parameters.SpeciesStatus):
+                    if (parameters.SpeciesStatus?.Any() == true)
+                        return $"{parameters.SpeciesStatus.Length}";
+                    return String.Empty;
+                case nameof(parameters.TaxonRank):
                     if (parameters.TaxonRank?.Any() == true)
                         return $"{parameters.TaxonRank.Length}";
                     return String.Empty;
-                case "ProductionSpecies":
+                case nameof(parameters.ProductionSpecies):
                     if (parameters.ProductionSpecies?.Any() == true)
                         return $"{parameters.ProductionSpecies.Length}";
                     return String.Empty;
-                case "SpeciesGroups":
+                case nameof(parameters.SpeciesGroups):
                     if (parameters.SpeciesGroups?.Any() == true)
                     {
-                        if (parameters.SpeciesGroups.Contains("Insekter"))
-                            return $"{parameters.SpeciesGroups.Length - 1}";
-                        return $"{parameters.SpeciesGroups.Length}";
+                        var count = parameters.SpeciesGroups.Length;
+                        if (parameters.SpeciesGroups.Contains("sin"))
+                            count--;
+                        if (parameters.SpeciesGroups.Contains(nameof(parameters.SpeciesGroups)))
+                            count--;
+                        return $"{count}";
                     }
                     return String.Empty;
-                case "Habitats":
+                case nameof(parameters.Habitats):
                     if (parameters.Habitats?.Any() == true)
                         return $"{parameters.Habitats.Length}";
                     return String.Empty;
-                case "Regions":
+                case nameof(parameters.Regions):
                     if (parameters.Regions?.Any() == true)
                         return $"{parameters.Regions.Length}";
                     return String.Empty;
-                case "WaterRegions":
+                case nameof(parameters.WaterRegions):
                     if (parameters.WaterRegions?.Any() == true)
                         return $"{parameters.WaterRegions.Length}";
                     return String.Empty;
-                case "Criterias":
+                case nameof(parameters.Criterias):
                     if (parameters.Criterias?.Any() == true)
                         return $"{parameters.Criterias.Length}";
-                    return String.Empty;
-                case "Insects":
-                    if (Constants.AllInsects.Any(insect => parameters.SpeciesGroups.Contains(insect)))
-                    {
-                        int count = 0;
-                        foreach (var insect in Constants.AllInsects)
-                            if (parameters.SpeciesGroups.Contains(insect))
-                                count++;
-                        return $"{count}";
-                    }
                     return String.Empty;
                 default:
                     return String.Empty;
@@ -104,7 +101,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             int count = 0;
             count += parameters.Area.Length;
             count += parameters.Category.Length;
-            count += parameters.EstablishmentCategories.Length;
+            count += parameters.SpeciesStatus.Length;
             count += parameters.SpeciesGroups.Length;
             count += parameters.ProductionSpecies.Length;
             count += parameters.TaxonRank.Length;
@@ -120,7 +117,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var selectionlist = parameters.Area;
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
-            selectionlist = selectionlist.Concat(parameters.EstablishmentCategories).ToArray();
+            selectionlist = selectionlist.Concat(parameters.SpeciesStatus).ToArray();
             selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesGroups).ToArray();
             selectionlist = selectionlist.Concat(parameters.TaxonRank).ToArray();
@@ -148,11 +145,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 }
             }
             return String.Empty;
-        }
-
-        public static void RemoveAllFilters(AlienSpeciesListParameters parameters)
-        {
-            parameters = new AlienSpeciesListParameters();
         }
 
         public class SearchAndFilterNames

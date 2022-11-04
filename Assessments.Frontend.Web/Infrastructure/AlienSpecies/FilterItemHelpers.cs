@@ -26,6 +26,63 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }).ToArray();
     }
 
+    public class CategoryChange
+    {
+        private static readonly Filter.FilterItem[] DifferFrom2018 =
+        {
+            new()
+            {
+                Name = "Reell endring",
+                NameShort = "ccre"
+            },
+            new()
+            {
+                Name = "Ny kunnskap",
+                NameShort = "ccnk"
+            },
+            new()
+            {
+                Name = "Ny tolkning av tidligere data",
+                NameShort = "ccnt"
+            },
+            new()
+            {
+                Name = "Endrede avgrensninger eller retningslinjer",
+                NameShort = "ccea"
+            },
+            new()
+            {
+                Name = "Endret tolkning av retningslinjer",
+                NameShort = "ccet"
+            },
+            new()
+            {
+                Name = "Endret status (taksnonomi, til/fra stedegen)",
+                NameShort = "cces"
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023CategoryChanged =
+        {
+            new()
+            {
+                Name = "Vurdert for første gang",
+                NameShort = "ccvf"
+            },
+            new()
+            {
+                Name = "Kategorien er endret fra 2018",
+                NameShort = "ccke",
+                SubGroup = DifferFrom2018
+            },
+            new()
+            {
+                Name = "Samme kategori som i 2018",
+                NameShort = "ccsk"
+            }
+        };
+    }
+
     public class TaxonRank
     {
         public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanks =

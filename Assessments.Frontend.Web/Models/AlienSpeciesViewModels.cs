@@ -22,6 +22,7 @@ namespace Assessments.Frontend.Web.Models
         {
             this.Area = Array.Empty<string>();
             this.Category = Array.Empty<string>();
+            this.CategoryChanged = Array.Empty<string>();
             this.Criterias = Array.Empty<string>();
             this.SpeciesStatus = Array.Empty<string>();
             this.IsCheck = isCheck.Any() ? isCheck : Array.Empty<string>();
@@ -41,6 +42,8 @@ namespace Assessments.Frontend.Web.Models
         public string[] Area { get; set; }
 
         public string[] Category { get; set; }
+
+        public string[] CategoryChanged { get; set; }
 
         public string[] Criterias { get; set; }
 

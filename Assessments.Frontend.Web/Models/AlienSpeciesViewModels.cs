@@ -60,6 +60,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string RemoveFilters { get; set; }
 
+        public string RemoveSearch { get; set; }
+
         public string SortBy { get; set; }
 
         public string[] SpeciesGroups { get; set; }

@@ -50,17 +50,17 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
         }
 
-        internal static string GetGeographicVarInCat(string category, string geographicvar) 
+        internal static bool? GetGeographicVarInCat(string category, string geographicvar) 
         {
-            if (string.IsNullOrEmpty(category) || category is "NR")
+            if (category is "NR")
             {
-                return string.Empty;
+                return null;
             }
             if (string.IsNullOrEmpty(geographicvar))
             {
-                return "no";
+                return false;
             }
-            return geographicvar;
+            return geographicvar == "yes";
         }
     }
 }

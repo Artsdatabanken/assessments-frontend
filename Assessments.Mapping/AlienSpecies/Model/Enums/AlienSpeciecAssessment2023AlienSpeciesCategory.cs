@@ -13,7 +13,10 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Økologisk effekt uten selvstendig reproduksjon innen 50 år")] //treated like a doorknocker and will be visualised with "Dørstokkart" in the filter meny, but use this displayname in the species assessment site. 
         EffectWithoutReproduction,
 
-        [Display(Name = "Regionalt fremmed")] //These are only alien in parts of Norway (they are resident species of Norway) and are therefore excluded from the filter on assessment area (EvaluationContext). 
+        /// <summary>
+        /// These are only alien in parts of Norway (they are resident species of Norway) and are therefore excluded from the filter on assessment area (EvaluationContext). 
+        /// </summary>
+        [Display(Name = "Regionalt fremmed")]
         RegionallyAlien,
 
         [Display(Name = "Ikke fremmed")]

@@ -22,6 +22,15 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.Category.Any())
                 query = query.Where(x => parameters.Category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category));
 
+            if (parameters.SpeciesStatus.Any())
+                query = ApplySpeciesStatus(parameters.SpeciesStatus, query);
+
+            if (parameters.ProductionSpecies.Any())
+                query = query.Where(x => parameters.ProductionSpecies.Contains(x.ProductionSpecies.ToString()));
+
+            if (parameters.SpeciesGroups.Any())
+                query = query.Where(x => parameters.SpeciesGroups.Any(y => AlienSpeciesHelpers.GetSpeciesGroupByShortName(y) == x.SpeciesGroup));
+
             if (string.IsNullOrEmpty(parameters.SortBy) || parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.ScientificName), StringComparison.InvariantCultureIgnoreCase))
                 query = query.OrderBy(x => x.ScientificName);
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.VernacularName), StringComparison.InvariantCultureIgnoreCase))
@@ -64,6 +73,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return string.Empty;
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplySpeciesStatus(string[] speciesStatus, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            const string doorKnockerShort = "eda";
+
+            return query.Where(x => speciesStatus.Contains(x.SpeciesStatus) ||
+                                    (speciesStatus.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction)));
         }
     }
 }

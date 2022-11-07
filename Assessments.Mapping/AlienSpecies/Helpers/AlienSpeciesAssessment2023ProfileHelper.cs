@@ -1,4 +1,7 @@
+using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Shared.Helpers;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
@@ -33,7 +36,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 return string.Empty;
             }
-            return speciesStatus != "C3"? speciesStatus: speciesEstablishmentCategory;
+            return speciesStatus != "C3" ? speciesStatus : speciesEstablishmentCategory;
         }
 
         internal static int? GetScores(string category, string criteria, string axis)
@@ -118,6 +121,21 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
 
             return climateDoc;
+        }
+
+        internal static string GetSpeciesGroup(string taxonHierarchy)
+        {
+            // Reversing the list to get a match as low as possible in the taxon hierarchy.
+            var scientificNames = taxonHierarchy.Split("/").Reverse();
+            AlienSpeciesAssessment2023SpeciesGroups speciesGroup;
+            foreach (var name in scientificNames)
+            {
+                if (Enum.TryParse(name, out speciesGroup))
+                {
+                    return speciesGroup.DisplayName();
+                }
+            }
+            return String.Empty;
         }
     }
 }

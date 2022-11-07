@@ -1,7 +1,7 @@
-﻿using Assessments.Mapping.AlienSpecies.Source;
-using AutoMapper;
-using Assessments.Mapping.AlienSpecies.Helpers;
+﻿using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Source;
+using AutoMapper;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
 {
@@ -26,6 +26,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForPath(dest => dest.RiskAssessment.ClimateEffectsInvationpotential, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsInvationpotential(src.Category, src.Criteria, src.RiskAssessment.ClimateEffectsInvationpotential)))
                 .ForPath(dest => dest.RiskAssessment.ClimateEffectsEcoEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsEcoEffect(src.Category, src.Criteria, src.RiskAssessment.ClimateEffectsEcoEffect)))
                 .ForPath(dest => dest.RiskAssessment.ClimateEffectsDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsDoc(src.Category, src.Criteria, src.RiskAssessment.ClimateEffectsInvationpotential, src.RiskAssessment.ClimateEffectsEcoEffect, src.RiskAssessment.ClimateEffectsDocumentation)))
+                .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetSpeciesGroup(src.TaxonHierarcy)))
+
                 ;
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>();

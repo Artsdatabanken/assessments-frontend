@@ -1,7 +1,7 @@
-﻿using System;
-using System.Linq;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
+using System;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -33,17 +33,17 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             new()
             {
                 Name = "Art",
-                NameShort = "a"
+                NameShort = "art"
             },
             new()
             {
                 Name = "Underart",
-                NameShort = "ua"
+                NameShort = "uar"
             },
             new()
             {
                 Name = "Varietet",
-                NameShort = "v"
+                NameShort = "var"
             }
         };
     }
@@ -111,7 +111,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sll",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/lusoglopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/LusogLopper.svg",
-                Description = "Phthiraptera og Siphonatera"
+                Description = "Phthiraptera, Siphonatera"
             },
             new()
             {
@@ -207,7 +207,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sal",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = "Rhodophyta, Chlorophyta og Phaeophyceae",
+                Description = "Rhodophyta, Chlorophyta, Phaeophyceae",
                 SubGroup = AlienSpecies2023Algae
             },
             new()
@@ -264,7 +264,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sfl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/flatormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Flatorm.svg",
-                Description = "Actinopterygii"
+                Description = "Platyhelminthes"
             },
             new()
             {
@@ -313,15 +313,15 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "skd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                Description = "Ascidiacea (Tunicata)"
+                Description = "Ascidiacea, Tunicata"
             },
             new()
             {
                 Name = "Karplanter",
                 NameShort = "skp",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                Description = "Magnoliophyta, Pinophyta og Pteridophyta"
+                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/karplanter",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Karplanter.svg",
+                Description = "Magnoliophyta, Pinophyta, Pteridophyta"
             },
             new()
             {
@@ -346,7 +346,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mangefotinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mangefotinger.svg",
-                Description = "Myriapoda [Chilopoda og Diplopoda]"
+                Description = "Myriapoda, Chilopoda, Diplopoda"
             },
             new()
             {
@@ -354,7 +354,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smb",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mosdyrogbegerormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mosdyr.svg",
-                Description = "Ectoprocta og Entoprocta"
+                Description = "Ectoprocta, Entoprocta"
             },
             new()
             {
@@ -362,7 +362,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smo",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/moser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Moser.svg",
-                Description = "Bryophyta og Marchantiophyta"
+                Description = "Bryophyta, Marchantiophyta"
             },
             new()
             {
@@ -665,53 +665,58 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
-    public class EstablishmentCategory
+    public class SpeciesStatus
     {
         public static readonly Filter.FilterItem[] AlienSpecies2023Doorknockers =
         {
             new()
             {
                 Name = "Overlever vinteren utendørs",
-                NameShort = "eov"
+                NameShort = "C1"
             },
             new()
             {
                 Name = "Observert i norsk natur",
-                NameShort = "eon"
+                NameShort = "C0"
             },
             new()
             {
                 Name = "Utendørs i eget produksjonsareal",
-                NameShort = "eup"
+                NameShort = "B2"
             },
             new()
             {
                 Name = "Innendørs",
-                NameShort = "eid"
+                NameShort = "B1"
             },
             new()
             {
                 Name = "Ikke i Norge",
-                NameShort = "ein"
+                NameShort = "A"
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023EstablishmentCategory =
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesStatus =
         {
             new()
             {
                 Name = "Etablert",
-                NameShort = "eet"
+                NameShort = "C3"
             },
             new()
             {
                 Name = "Selvstendig reproduserende",
-                NameShort = "esr"
+                NameShort = "C2"
             },
             new()
             {
                 Name = "Dørstokkart",
                 NameShort = "eda",
+            },
+            new()
+            {
+                Name = "Dørstokkart som...",
+                NameShort = "eds",
                 SubGroup = AlienSpecies2023Doorknockers
             }
         };

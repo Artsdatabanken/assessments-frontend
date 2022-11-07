@@ -1,6 +1,4 @@
-﻿using Azure.Storage.Blobs.Models;
-
-namespace Assessments.Frontend.Web.Infrastructure
+﻿namespace Assessments.Frontend.Web.Infrastructure
 {
     public class ProductionSpecies
     {
@@ -9,12 +7,12 @@ namespace Assessments.Frontend.Web.Infrastructure
             new Filter.FilterItem()
             {
                 Name = "Tidligere eller nåværende bruksart",
-                NameShort = "use"
+                NameShort = true.ToString()
             },
             new Filter.FilterItem()
             {
                 Name = "Ikke bruksart",
-                NameShort = "not"
+                NameShort = false.ToString()
             }
         };
     }

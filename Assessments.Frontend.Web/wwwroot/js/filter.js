@@ -25,7 +25,7 @@ if (filters) {
     // Ids for filters that should be open by default
     const handleFirstTimeIds = [
         "show_area",
-        "show_eda",
+        "show_eds",
         "show_sal",
         "show_insects",
         "show_skr",
@@ -214,7 +214,8 @@ if (filters) {
 
     function toggleSingleFilter(element, parentId) {
         if (!element.checked) {
-            document.getElementById(parentId).checked = false;
+            if (document.getElementById(parentId))
+                document.getElementById(parentId).checked = false;
         }
     }
 

@@ -561,7 +561,7 @@ button.list_header {
 }
 
 /*sub groups*/
-.only_js input[type=checkbox]:not(:checked)#show_eda ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_eds ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_skr ~ .filter_subgroup,
@@ -586,7 +586,7 @@ button.list_header {
     display: none;
 }
 
-.only_js input[type=checkbox]:checked#show_eda ~ .filter_subgroup,
+.only_js input[type=checkbox]:checked#show_eds ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_skr ~ .filter_subgroup,

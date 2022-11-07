@@ -20,7 +20,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool? ClimateEffectsInvationpotential { get; set; }
 
         /// <summary>
-        /// Potential causes for the geographic variance in category. List containing up to 4 elements 
+        /// Potential causes for the geographic variance in category. Array with up to 4 elements 
         /// </summary>
         public string[] GeographicalVariation { get; set; }
 

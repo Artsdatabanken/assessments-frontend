@@ -1,6 +1,7 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
@@ -26,39 +27,70 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }).ToArray();
     }
 
+    public enum CategoryChangeEnum
+    {
+        // ReSharper disable InconsistentNaming
+        [Display(Name = "Reell endring")]
+        ccre,
+
+        [Display(Name = "Ny kunnskap")]
+        ccnk,
+
+        [Display(Name = "Ny tolkning av tidligere data")]
+        ccnt,
+
+        [Display(Name = "Endrede avgrensninger eller retningslinjer")]
+        ccea,
+
+        [Display(Name = "Endret tolkning av retningslinjer")]
+        ccet,
+
+        [Display(Name = "Endret status (taksnonomi, til/fra stedegen)")]
+        cces,
+
+        [Display(Name = "Vurdert for første gang")]
+        ccvf,
+
+        [Display(Name = "Kategorien er endret fra 2018")]
+        ccke,
+
+        [Display(Name = "Samme kategori som i 2018")]
+        ccsk
+    }
+
     public class CategoryChange
     {
         private static readonly Filter.FilterItem[] DifferFrom2018 =
         {
             new()
             {
-                Name = "Reell endring",
-                NameShort = "ccre"
+                Name = CategoryChangeEnum.ccre.DisplayName(),
+                NameShort = CategoryChangeEnum.ccre.ToString()
             },
             new()
             {
-                Name = "Ny kunnskap",
-                NameShort = "ccnk"
+                Name = CategoryChangeEnum.ccnk.DisplayName(),
+                NameShort = CategoryChangeEnum.ccnk.ToString()
             },
             new()
             {
-                Name = "Ny tolkning av tidligere data",
-                NameShort = "ccnt"
+                Name = CategoryChangeEnum.ccnt.DisplayName(),
+                NameShort = CategoryChangeEnum.ccnt.ToString()
             },
             new()
             {
-                Name = "Endrede avgrensninger eller retningslinjer",
-                NameShort = "ccea"
+                Name = CategoryChangeEnum.ccea.DisplayName(),
+                NameShort = CategoryChangeEnum.ccea.ToString()
             },
             new()
             {
-                Name = "Endret tolkning av retningslinjer",
-                NameShort = "ccet"
+                Name = CategoryChangeEnum.ccet.DisplayName(),
+                NameShort = CategoryChangeEnum.ccet.ToString()
             },
             new()
             {
-                Name = "Endret status (taksnonomi, til/fra stedegen)",
-                NameShort = "cces"
+                Name = CategoryChangeEnum.cces.DisplayName(),
+                NameShort = CategoryChangeEnum.cces.ToString()
             }
         };
 
@@ -66,19 +98,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             new()
             {
-                Name = "Vurdert for første gang",
-                NameShort = "ccvf"
+                Name = CategoryChangeEnum.ccvf.DisplayName(),
+                NameShort = CategoryChangeEnum.ccvf.ToString()
             },
             new()
             {
-                Name = "Kategorien er endret fra 2018",
-                NameShort = "ccke",
+                Name = CategoryChangeEnum.ccke.DisplayName(),
+                NameShort = CategoryChangeEnum.ccke.ToString(),
                 SubGroup = DifferFrom2018
             },
             new()
             {
-                Name = "Samme kategori som i 2018",
-                NameShort = "ccsk"
+                Name = CategoryChangeEnum.ccsk.DisplayName(),
+                NameShort = CategoryChangeEnum.ccsk.ToString()
             }
         };
     }

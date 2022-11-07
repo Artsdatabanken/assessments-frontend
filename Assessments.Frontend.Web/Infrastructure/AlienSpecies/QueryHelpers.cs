@@ -22,6 +22,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.Category.Any())
                 query = query.Where(x => parameters.Category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category));
 
+            if (parameters.CategoryChanged.Any())
+                query = ApplyCategoryChange(parameters.CategoryChanged, query);
+
             if (parameters.SpeciesStatus.Any())
                 query = ApplySpeciesStatus(parameters.SpeciesStatus, query);
 
@@ -73,6 +76,34 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return string.Empty;
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyCategoryChange(string[] changes, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+
+            var x = CategoryChangeEnum.ccvf;
+            var y = x.ToString();
+
+            foreach (var change in changes)
+            {
+                // TODO: fill inn more after Cagetory2018 and ReasonForChangeOfCategory is made available in the model
+                var assessments = change switch
+                {
+                    nameof(CategoryChangeEnum.ccvf) => query.Where(x => x.PreviousAssessments.Count == 0),
+                    nameof(CategoryChangeEnum.ccsk) => query.Where(x => x.PreviousAssessments.Count > 0),
+                    nameof(CategoryChangeEnum.ccre) => query.Where(x => x.PreviousAssessments.Count == 0),
+                    nameof(CategoryChangeEnum.ccnk) => query.Where(x => x.PreviousAssessments.Count == 0),
+                    nameof(CategoryChangeEnum.ccnt) => query.Where(x => x.PreviousAssessments.Count == 0),
+                    nameof(CategoryChangeEnum.ccea) => query.Where(x => x.PreviousAssessments.Count == 0),
+                    nameof(CategoryChangeEnum.ccet) => query.Where(x => x.PreviousAssessments.Count == 0),
+                    nameof(CategoryChangeEnum.cces) => query.Where(x => x.PreviousAssessments.Count == 0),
+                    _ => null
+                };
+                if (assessments != null)
+                    newQuery.Concat(assessments);
+            }
+            return newQuery;
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplySpeciesStatus(string[] speciesStatus, IQueryable<AlienSpeciesAssessment2023> query)

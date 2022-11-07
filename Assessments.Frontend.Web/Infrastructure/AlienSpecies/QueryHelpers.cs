@@ -82,9 +82,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
 
-            var x = CategoryChangeEnum.ccvf;
-            var y = x.ToString();
-
             foreach (var change in changes)
             {
                 // TODO: fill inn more after Cagetory2018 and ReasonForChangeOfCategory is made available in the model
@@ -101,9 +98,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     _ => null
                 };
                 if (assessments != null)
-                    newQuery.Concat(assessments);
+                    newQuery = newQuery.Concat(assessments);
             }
-            return newQuery;
+            return newQuery.Distinct();
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplySpeciesStatus(string[] speciesStatus, IQueryable<AlienSpeciesAssessment2023> query)

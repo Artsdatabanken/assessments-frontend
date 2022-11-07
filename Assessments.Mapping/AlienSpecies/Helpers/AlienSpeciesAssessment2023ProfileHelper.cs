@@ -51,37 +51,37 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
         }
 
-        internal static bool? GetGeographicVarInCat(string category, string geographicvar) 
+        internal static bool? GetGeographicVarInCat(string category, string geographicVar) 
         {
             if (category is "NR")
             {
                 return null;
             }
-            if (string.IsNullOrEmpty(geographicvar))
+            if (string.IsNullOrEmpty(geographicVar))
             {
                 return false;
             }
-            return geographicvar == "yes";
+            return geographicVar == "yes";
         }
 
-        internal static string[] GetGeographicVarCause(string category, string geographicvar, List<string> geovarcause)
+        internal static string[] GetGeographicVarCause(string category, string geographicVar, List<string> geoVarCause)
         {
-            if (GetGeographicVarInCat(category, geographicvar) is null or false)
+            if (GetGeographicVarInCat(category, geographicVar) is null or false)
             {
                 return Array.Empty<string>();
             }
 
-            return geovarcause.ToArray();
+            return geoVarCause.ToArray();
         }
 
-        internal static string GetGeographicVarDoc(string category, string geographicvar, string geovardoc)
+        internal static string GetGeographicVarDoc(string category, string geographicVar, string geoVarDoc)
         {
-            if (GetGeographicVarInCat(category, geographicvar) is null or false)
+            if (GetGeographicVarInCat(category, geographicVar) is null or false)
             {
                 return string.Empty;
             }
 
-            return geovardoc;
+            return geoVarDoc;
         }
 
         internal static bool? GetClimateEffectsInvationpotential(string category, string criteria, string climateEffectsInvationpotential)
@@ -110,14 +110,14 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return climateEffectsEcoEffect == "yes";
         }
 
-        internal static string GetClimateEffectsDoc(string category, string criteria, string climateEffectsInvationpotential, string climateEffectsEcoEffect, string climatedoc)
+        internal static string GetClimateEffectsDoc(string category, string criteria, string climateEffectsInvationpotential, string climateEffectsEcoEffect, string climateDoc)
         {
             if (GetClimateEffectsInvationpotential(category, criteria, climateEffectsInvationpotential) is null or false && GetClimateEffectsEcoEffect(category, criteria, climateEffectsEcoEffect) is null or false)
             {
                 return string.Empty;
             }
 
-            return climatedoc;
+            return climateDoc;
         }
     }
 }

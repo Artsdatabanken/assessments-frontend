@@ -77,6 +77,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public int ScientificNameId { get; set; }
 
         /// <summary>
+        /// The taxonomic rank of the evaluated scientific name
+        /// </summary>
+        public int ScientificNameRank { get; set; }
+
+        /// <summary>
         /// The species' total score on the ecological effect axis
         /// </summary>
         public int? ScoreEcologicalEffect { get; set; }

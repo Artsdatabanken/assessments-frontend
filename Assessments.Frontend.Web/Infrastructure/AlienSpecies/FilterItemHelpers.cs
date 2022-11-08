@@ -1,6 +1,7 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
@@ -28,22 +29,58 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class TaxonRank
     {
+        public enum TaxonRankEnum
+        {
+            Art = 22,
+            Underart = 23,
+            Varietet = 24,
+
+            [Display(Name = "Taksonomisk nivå")]
+            ttn,
+
+            [Display(Name = "Vurderes på et annet taksonomisk nivå ")]
+            tva,
+
+            [Display(Name = "Vurderes ikke på et annet taksonomisk nivå ")]
+            tvi
+        }
+
+        public static readonly Filter.FilterItem[] TaxonRanks2023 =
+        {
+            new()
+            {
+                Name = nameof(TaxonRankEnum.Art),
+                NameShort = TaxonRankEnum.Art.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = nameof(TaxonRankEnum.Underart),
+                NameShort = TaxonRankEnum.Underart.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = nameof(TaxonRankEnum.Varietet),
+                NameShort = TaxonRankEnum.Varietet.GetHashCode().ToString()
+            }
+        };
+
         public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanks =
         {
             new()
             {
-                Name = "Art",
-                NameShort = "art"
+                Name = TaxonRankEnum.ttn.DisplayName(),
+                NameShort = TaxonRankEnum.ttn.ToString(),
+                SubGroup = TaxonRanks2023
             },
             new()
             {
-                Name = "Underart",
-                NameShort = "uar"
+                Name = TaxonRankEnum.tva.DisplayName(),
+                NameShort = TaxonRankEnum.tva.ToString()
             },
             new()
             {
-                Name = "Varietet",
-                NameShort = "var"
+                Name = TaxonRankEnum.tvi.DisplayName(),
+                NameShort = TaxonRankEnum.tvi.ToString()
             }
         };
     }

@@ -67,5 +67,15 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
             return String.Empty;
         }
+
+        internal static int GetTaxonRank(string taxonRank)
+        {
+            var result = 0;
+            var isParsable = int.TryParse(taxonRank, out result);
+            if (!isParsable && taxonRank == "Species")
+                result = 22;
+
+            return result;
+        }
     }
 }

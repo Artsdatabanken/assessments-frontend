@@ -64,7 +64,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         //TODO: Add dictionary for norwegian names on GeographicalVariation values. 
         [DisplayName("Årsak til geografisk variasjon i risiko")]
         [Description("Angitte årsaker for hvorfor arten vurderes til å ha geografisk variasjon i risiko")]
-        public string GeographicalVariation { get; set; }
+        public string RiskAssessmentGeographicalVariation { get; set; }
 
         [DisplayName("Geografisk variasjon i risiko Beskrivelse")]
         [Description("Nærmere begrunnelse for artens geografiske variasjon i risiko")]

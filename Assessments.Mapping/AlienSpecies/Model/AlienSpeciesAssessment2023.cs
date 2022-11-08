@@ -62,11 +62,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool? ProductionSpecies { get; set; }
 
         /// <summary>
-        /// Class including all fields that are more or less directly connected to the risk assessment against the 9 criteria
-        /// </summary>
-        public AlienSpeciesAssessment2023RiskAssessment RiskAssessment { get; set; }
-
-        /// <summary>
         /// When forming part of an Identification, this should be the name in lowest level taxonomic rank that can be determined
         /// </summary>
         public string ScientificName { get; set; }
@@ -110,5 +105,35 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Norwegian common names
         /// </summary>
         public string VernacularName { get; set; }
+
+        /// <summary>
+        /// Wether the species' score on the effect axis would be lower in the absence of current or future climate changes 
+        /// </summary>
+        public bool? RiskAssessmentClimateEffectsEcoEffect { get; set; }
+
+        /// <summary>
+        /// Further information about the effects of current or future climate changes 
+        /// </summary>
+        public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+
+        /// <summary>
+        /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 
+        /// </summary>
+        public bool? RiskAssessmentClimateEffectsInvationpotential { get; set; }
+
+        /// <summary>
+        /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 
+        /// </summary>
+        public List<string> RiskAssessmentGeographicalVariation { get; set; }
+
+        /// <summary>
+        /// Further information about the geographic variance in category 
+        /// </summary>
+        public string RiskAssessmentGeographicalVariationDocumentation { get; set; }
+
+        /// <summary>
+        /// Wether the species has a lower impact category in parts of the species’ range
+        /// </summary>
+        public bool? RiskAssessmentGeographicVariationInCategory { get; set; }
     }
 }

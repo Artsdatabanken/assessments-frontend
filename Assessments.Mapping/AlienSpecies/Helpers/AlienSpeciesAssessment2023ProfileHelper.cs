@@ -67,14 +67,14 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return geographicVar == "yes";
         }
 
-        internal static string[] GetGeographicVarCause(string category, string geographicVar, List<string> geoVarCause)
+        internal static List<string> GetGeographicVarCause(string category, string geographicVar, List<string> geoVarCause)
         {
             if (GetGeographicVarInCat(category, geographicVar) is null or false)
             {
-                return Array.Empty<string>();
+                return new List<string>();
             }
 
-            return geoVarCause.ToArray();
+            return geoVarCause;
         }
 
         internal static string GetGeographicVarDoc(string category, string geographicVar, string geoVarDoc)

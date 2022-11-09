@@ -3,6 +3,7 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Assessments.Mapping.AlienSpecies.Source;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
@@ -87,35 +88,24 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return geoVarDoc;
         }
 
-        internal static bool? GetClimateEffectsInvationpotential(string category, string criteria, string climateEffectsInvationpotential)
+        internal static bool? GetClimateEffects(string category, string criteria, string axis, RiskAssessment ra)
         {
             if (category is "NR")
             {
                 return null;
             }
-            if (string.IsNullOrEmpty(climateEffectsInvationpotential) || GetScores(category, criteria, "inv") == 1)
+            string climateEffect = axis == "inv" ? ra.ClimateEffectsInvationpotential : ra.ClimateEffectsEcoEffect;
+
+            if (string.IsNullOrEmpty(climateEffect) || GetScores(category, criteria, axis) == 1)
             {
                 return false;
             }
-            return climateEffectsInvationpotential == "yes";
+            return climateEffect == "yes";
         }
 
-        internal static bool? GetClimateEffectsEcoEffect(string category, string criteria, string climateEffectsEcoEffect)
+        internal static string GetClimateEffectsDoc(string category, string criteria, RiskAssessment ra, string climateDoc)
         {
-            if (category is "NR")
-            {
-                return null;
-            }
-            if (string.IsNullOrEmpty(climateEffectsEcoEffect) || GetScores(category, criteria, "eco") == 1)
-            {
-                return false;
-            }
-            return climateEffectsEcoEffect == "yes";
-        }
-
-        internal static string GetClimateEffectsDoc(string category, string criteria, string climateEffectsInvationpotential, string climateEffectsEcoEffect, string climateDoc)
-        {
-            if (GetClimateEffectsInvationpotential(category, criteria, climateEffectsInvationpotential) is null or false && GetClimateEffectsEcoEffect(category, criteria, climateEffectsEcoEffect) is null or false)
+            if (GetClimateEffects(category, criteria, "inv", ra) is null or false && GetClimateEffects(category, criteria, "eco", ra) is null or false)
             {
                 return string.Empty;
             }

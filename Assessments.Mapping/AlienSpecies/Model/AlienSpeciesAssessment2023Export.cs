@@ -61,7 +61,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [Description("Arter med en viss utstrekning i forekomstarealet kan, som en respons på ulike miljøbetingelser, ha ulik påvirkning i naturen. Spørsmålet viser til om arten kunne fått en lavere risikokategori i deler av sitt potensielle forekomstareal")]
         public bool? RiskAssessmentGeographicVariationInCategory { get; set; }
 
-        //TODO: Add dictionary for norwegian names on GeographicalVariation values. 
         [DisplayName("Årsak til geografisk variasjon i risiko")]
         [Description("Angitte årsaker for hvorfor arten vurderes til å ha geografisk variasjon i risiko")]
         public string RiskAssessmentGeographicalVariation { get; set; }

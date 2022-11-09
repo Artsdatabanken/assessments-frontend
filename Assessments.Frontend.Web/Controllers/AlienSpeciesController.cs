@@ -21,13 +21,8 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index(AlienSpeciesListViewModel viewModel, int? page, bool export)
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
-
-            // Need to redirect to remove filters or search string parameters from the url
-            var redirectUrl = QueryHelpers.UpdateParameters(HttpContext.Request, viewModel.Parameters);
-            if (!string.IsNullOrEmpty(redirectUrl))
-                Response.Redirect(redirectUrl);
-
-            query = QueryHelpers.ApplyParameters(viewModel.Parameters, query);
+            
+            query = QueryHelpers.ApplyParameters(viewModel, query);
 
             if (export)
                 return GetExport(query);

@@ -1,79 +1,55 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
 {
-    public class AlienSpeciesListViewModel
+    public class AlienSpeciesListViewModel : AlienSpeciesListParameters
     {
         public IPagedList<AlienSpeciesAssessment2023> Results { get; set; }
 
         public AlienSpeciesStatistics2023 Statistics { get; set; }
-
-        public AlienSpeciesListParameters Parameters { get; set; } = new();
-
     }
 
     public class AlienSpeciesListParameters
     {
-        public AlienSpeciesListParameters(string[] isCheck, string[] meta, string name)
+        public IEnumerable<string> FilterParameters { get; } = new[]
         {
-            this.Area = Array.Empty<string>();
-            this.Category = Array.Empty<string>();
-            this.CategoryChanged = Array.Empty<string>();
-            this.Criterias = Array.Empty<string>();
-            this.SpeciesStatus = Array.Empty<string>();
-            this.IsCheck = isCheck.Any() ? isCheck : Array.Empty<string>();
-            this.Meta = meta.Any() ? meta : Array.Empty<string>();
-            this.Name = string.IsNullOrEmpty(name) ? string.Empty : name;
-            this.ProductionSpecies = Array.Empty<string>();
-            this.Regions = Array.Empty<string>();
-            this.Habitats = Array.Empty<string>();
-            this.SpeciesGroups = Array.Empty<string>();
-            this.TaxonRank = Array.Empty<string>();
-            this.WaterRegions = Array.Empty<string>();
-        }
-
-        public AlienSpeciesListParameters() : this(Array.Empty<string>(), Array.Empty<string>(), string.Empty)
-        { }
-
-        public string[] Area { get; set; }
-
-        public string[] Category { get; set; }
-
-        public string[] CategoryChanged { get; set; }
-
-        public string[] Criterias { get; set; }
-
-        public string[] SpeciesStatus { get; set; }
-
-        public string[] Habitats { get; set; }
-
-        public string[] IsCheck { get; set; }
-
-        public string Name { get; set; }
-
-        public string[] Meta { get; set; }
-
-        public string[] ProductionSpecies { get; set; }
-
-        public string[] Regions { get; set; }
-
-        public string RemoveFilters { get; set; }
-
-        public string RemoveSearch { get; set; }
+            nameof(Area), nameof(Category), nameof(Criterias), nameof(SpeciesStatus), nameof(Habitats), nameof(ProductionSpecies), nameof(Regions), nameof(SpeciesGroups), nameof(TaxonRank), nameof(WaterRegions), nameof(CategoryChanged)
+        };
 
         public string SortBy { get; set; }
 
-        public string[] SpeciesGroups { get; set; }
-
-        public string[] TaxonRank { get; set; }
-
         public string View { get; set; }
 
-        public string[] WaterRegions { get; set; }
+        public string[] Meta { get; set; } = Array.Empty<string>();
+
+        public string[] IsCheck { get; set; } = Array.Empty<string>();
+
+        public string Name { get; set; }
+
+        public string[] Area { get; set; } = Array.Empty<string>();
+
+        public string[] Category { get; set; } = Array.Empty<string>();
+
+        public string[] CategoryChanged { get; set; } = Array.Empty<string>();
+
+        public string[] Criterias { get; set; } = Array.Empty<string>();
+
+        public string[] SpeciesStatus { get; set; } = Array.Empty<string>();
+
+        public string[] Habitats { get; set; } = Array.Empty<string>();
+        
+        public string[] ProductionSpecies { get; set; } = Array.Empty<string>();
+
+        public string[] Regions { get; set; } = Array.Empty<string>();
+
+        public string[] SpeciesGroups { get; set; } = Array.Empty<string>();
+
+        public string[] TaxonRank { get; set; } = Array.Empty<string>();
+
+        public string[] WaterRegions { get; set; } = Array.Empty<string>();
     }
 
     public class AlienSpeciesDetailViewModel

@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Text;
-using DocumentFormat.OpenXml.InkML;
 using System.Web;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -63,6 +62,16 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
 
             return values;
+        }
+
+        public static string RemoveParameters(this QueryString queryString, IEnumerable<string> parameters)
+        {
+            var nameValueCollection = HttpUtility.ParseQueryString(queryString.ToString());
+
+            foreach (var element in nameValueCollection.AllKeys.Where(parameters.Contains))
+                nameValueCollection.Remove(element);
+
+            return $"?{nameValueCollection}";
         }
     }
 }

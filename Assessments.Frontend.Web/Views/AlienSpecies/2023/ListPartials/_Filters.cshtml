@@ -1,15 +1,10 @@
 @model AlienSpeciesListViewModel;
-@using static Assessments.Frontend.Web.Infrastructure.Helpers;
-@using static Assessments.Frontend.Web.Infrastructure.AlienSpecies.FilterHelpers;
 @using System.Linq;
-@using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
-@using Assessments.Mapping.AlienSpecies.Model
 
 @{
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
-    //var AllCriterias = ViewBag.AllCriterias;
     var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
     var AllHabitats = Habitat.AlienSpecies2023Habitats;
     var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
@@ -20,7 +15,7 @@
 
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
     {
-        View = Model.Parameters.View,
+        View = Model.View,
         ItemCount = Model.Results.TotalItemCount,
     };
 }
@@ -28,7 +23,6 @@
 @functions{
     void InputTag(string id, string className, string name, string[] elements, string value)
     {
-        name = $"Parameters.{name}";
         if (id == "remember_scroll")
         {
             foreach (var item in elements)
@@ -53,7 +47,7 @@
                     <li class="checkbox">
                         <label for="@species.NameShort">
                             @{
-                            InputTag(species.NameShort, $"{parentSpecies.Name}_input submitOnclick", name, Model.Parameters.SpeciesGroups, species.NameShort);
+                            InputTag(species.NameShort, $"{parentSpecies.Name}_input submitOnclick", name, Model.SpeciesGroups, species.NameShort);
                             }
                             <span class="label_text">@species.Name</span>
                         </label>
@@ -81,10 +75,10 @@
         string action = $"show_{filterName.ToLower()}";
         string id = $"list_header_{filterName.ToLower()}";
 
-        InputTag(action, "collapse_checkbox", "IsCheck", Model.Parameters.IsCheck, filterName);
+        InputTag(action, "collapse_checkbox", "IsCheck", Model.IsCheck, filterName);
         <button name="@buttonname" class="list_header" id="@id" onclick="collapse('@action')" type="button">
                     @buttonText
-            <span class="filternumber">@GetActiveFilters(filterName, Model.Parameters)</span>
+            <span class="filternumber">@GetActiveFilters(filterName, Model)</span>
         </button>
     }
 
@@ -102,13 +96,13 @@
                         string label;
                         string value;
                         string markAllClassName = "mark_all";
-                        if (filterItems.Length > 4 && modelName != nameof(Model.Parameters.SpeciesStatus))
+                        if (filterItems.Length > 4 && modelName != nameof(Model.SpeciesStatus))
                             MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
 
                         foreach (var el in filterItems)
                         {
                             value = el.NameShort;
-                            label = filterName == nameof(Model.Parameters.Category) ? $"{el.NameShort} - {el.Description}" : el.Name;
+                            label = filterName == nameof(Model.Category) ? $"{el.NameShort} - {el.Description}" : el.Name;
                             string extraOuterClassName = $"{outerClassName} {filterName}_input";
                             if (el.SubGroup != null)
                             {
@@ -157,43 +151,37 @@
     <p class="hit_count_text">
         <span class="searchstring">
             @FormatNumeric(Model.Results.TotalItemCount.ToString()) treff
-            @if (GetActiveSelectionCount(Model.Parameters) != 0
-|| !string.IsNullOrEmpty(GetActiveSelection(Model.Parameters)))
+            @if (GetActiveSelectionCount(Model) != 0
+|| !string.IsNullOrEmpty(GetActiveSelection(Model)))
             {
                 <span>
-                    @if (!string.IsNullOrEmpty(GetActiveSelection(Model.Parameters)))
+                    @if (!string.IsNullOrEmpty(GetActiveSelection(Model)))
                     {
-                        string searchstring = " for " + '"' + @GetActiveSelection(Model.Parameters) + '"';
+                        string searchstring = " for " + '"' + @GetActiveSelection(Model) + '"';
                         <span>@searchstring</span>
-                        <button class="button tinybutton tertiary search_related" name="Parameters.@nameof(Model.Parameters.RemoveSearch)" value="true">
+                        <a href="@Context.Request.QueryString.RemoveParameters(new[] { nameof(AlienSpeciesListParameters.Name) })" class="button tinybutton tertiary search_related">
                             <span class="material-icons">close</span>Fjern søk
-                        </button>
+                        </a>
                     }
                 </span>
                 <span class="filterbox">
-                    @if (GetActiveSelectionCount(Model.Parameters) > 0)
+                    @if (GetActiveSelectionCount(Model) > 0)
                     {
-                        MakeFilterChips(Model.Parameters.Area, AllAreas);
-                        MakeFilterChips(Model.Parameters.Category, AllCategories);
-                        MakeFilterChips(Model.Parameters.CategoryChanged, AllCategoriesChanged);
-                        MakeFilterChips(Model.Parameters.SpeciesStatus, AllSpeciesStatus);
-                        MakeFilterChips(Model.Parameters.ProductionSpecies, AllProductionSpecies);
-                        MakeFilterChips(Model.Parameters.SpeciesGroups, AllSpeciesGroups);
-                        MakeFilterChips(Model.Parameters.TaxonRank, AllTaxonRanks);
-                        MakeFilterChips(Model.Parameters.Habitats, AllHabitats);
-                        MakeFilterChips(Model.Parameters.Regions, AllRegions);
-                        MakeFilterChips(Model.Parameters.WaterRegions, AllWaterRegions);
-                        //makeFilterChips("Criterias", Model.Parameters.Criterias, AllCriterias);
+                        MakeFilterChips(Model.Area, AllAreas);
+                        MakeFilterChips(Model.Category, AllCategories);
+                        MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged);
+                        MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus);
+                        MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies);
+                        MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups);
+                        MakeFilterChips(Model.TaxonRank, AllTaxonRanks);
+                        MakeFilterChips(Model.Habitats, AllHabitats);
+                        MakeFilterChips(Model.Regions, AllRegions);
+                        MakeFilterChips(Model.WaterRegions, AllWaterRegions);
                     }
 
-                    @{string buttontext = @GetActiveSelectionCount(Model.Parameters) + " filter"; }
-                    @if(GetActiveSelectionCount(Model.Parameters) > 1)
-                    {
-                        buttontext.Replace("filter", "filtre");
-                        <button class="button tinybutton tertiary search_related" name="Parameters.@nameof(Model.Parameters.RemoveFilters)" value="true">
-                            <span class="material-icons">close</span>Fjern alle filter
-                        </button>
-                    }        
+                    <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters)" class="button tinybutton tertiary search_related">
+                        <span class="material-icons">close</span>Fjern alle filter
+                    </a>
                 </span>
             }
         </span>
@@ -204,16 +192,16 @@
 <div class="controls">
     <div class="list_control_buttons">
         <button class="toggle_filter only_mobile list_actions no_js" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
-            @if (GetActiveSelectionCount(Model.Parameters) != 0)
+            @if (GetActiveSelectionCount(Model) != 0)
             {
-                <span class="filternumber">@GetActiveSelectionCount(Model.Parameters)</span>
+                <span class="filternumber">@GetActiveSelectionCount(Model)</span>
             }
             <span class="material-icons">filter_list</span>Filter
         </button>
 
-        @if (Model.Parameters.View != "stat")
+        @if (Model.View != "stat")
         {
-            <select asp-for="Parameters.SortBy" id="sort_results" class="sort_by list_actions" onchange="this.form.submit()">
+            <select asp-for="SortBy" id="sort_results" class="sort_by list_actions" onchange="this.form.submit()">
                 <option value="@nameof(AlienSpeciesAssessment2023.ScientificName)">Artsnavn</option>
                 <option value="@nameof(AlienSpeciesAssessment2023.VernacularName)">Populærnavn</option>
                 <option value="@nameof(AlienSpeciesAssessment2023.Category)">Kategori</option>
@@ -225,8 +213,8 @@
 
 <div class="listwrapper">
     <div class="filtercontainer">
-        @{ InputTag("initial_check", "meta_checkbox", "Meta", Model.Parameters.Meta, "Visited");}
-        @{ InputTag("remember_scroll", "meta_checkbox", "Meta", Model.Parameters.Meta, "0");}
+        @{ InputTag("initial_check", "meta_checkbox", "Meta", Model.Meta, "Visited");}
+        @{ InputTag("remember_scroll", "meta_checkbox", "Meta", Model.Meta, "0");}
         <!-- View controls -->
         <div id="filters" class="filteX no_js hide_on_smallscreen">
             <div id="filter_modal_background">
@@ -236,17 +224,16 @@
                         <div class="filter_scroll_area">
                             <ul>
                                 @{
-                                    MakeFilterGroup(nameof(Model.Parameters.Area), Model.Parameters.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
-                                    MakeFilterGroup(nameof(Model.Parameters.Category), Model.Parameters.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
-                                    MakeFilterGroup(nameof(Model.Parameters.TaxonRank), Model.Parameters.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
-                                    MakeFilterGroup(nameof(Model.Parameters.SpeciesStatus), Model.Parameters.SpeciesStatus, AllSpeciesStatus, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
-                                    MakeFilterGroup(nameof(Model.Parameters.CategoryChanged), Model.Parameters.CategoryChanged, AllCategoriesChanged, SearchAndFilterNames.CategoryChanged, "kategoriendringsfiltre");
-                                    MakeFilterGroup(nameof(Model.Parameters.ProductionSpecies), Model.Parameters.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");
-                                    MakeFilterGroup(nameof(Model.Parameters.SpeciesGroups), Model.Parameters.SpeciesGroups, AllSpeciesGroups, SearchAndFilterNames.SpeciesGroup, "artsgruppefiltre");
-                                    MakeFilterGroup(nameof(Model.Parameters.Habitats), Model.Parameters.Habitats, AllHabitats, "Hovedhabitat", "hovedhabitatfiltre");
-                                    MakeFilterGroup(nameof(Model.Parameters.Regions), Model.Parameters.Regions, AllRegions, "Regioner og havområder", "regionfiltre");
-                                    MakeFilterGroup(nameof(Model.Parameters.WaterRegions), Model.Parameters.WaterRegions, AllWaterRegions, "Vannregioner", "vannregionfiltre");
-                                    //makeFilterGroup(nameof(Model.Parameters.Criterias), Model.Parameters.Criterias, AllCriterias, @SearchAndFilter.SearchChooseCriteria, "kriteriefiltre");
+                                    MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
+                                    MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
+                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
+                                    MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
+                                    MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged, SearchAndFilterNames.CategoryChanged, "kategoriendringsfiltre");
+                                    MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");
+                                    MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups, SearchAndFilterNames.SpeciesGroup, "artsgruppefiltre");
+                                    MakeFilterGroup(nameof(Model.Habitats), Model.Habitats, AllHabitats, "Hovedhabitat", "hovedhabitatfiltre");
+                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions, "Regioner og havområder", "regionfiltre");
+                                    MakeFilterGroup(nameof(Model.WaterRegions), Model.WaterRegions, AllWaterRegions, "Vannregioner", "vannregionfiltre");
                                 }
                             </ul>
                         </div>

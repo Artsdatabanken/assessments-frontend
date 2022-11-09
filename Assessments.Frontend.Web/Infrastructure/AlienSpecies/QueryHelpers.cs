@@ -2,10 +2,8 @@
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
-using System.Web;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -45,40 +43,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.OrderBy(x => x.Category);
 
             return query;
-        }
-
-        public static string UpdateParameters(HttpRequest request, AlienSpeciesListParameters parameters)
-        {
-            var queryParams = HttpUtility.ParseQueryString(request.QueryString.ToString());
-            var newQueryParams = HttpUtility.ParseQueryString(request.QueryString.ToString());
-            var url = request.PathBase.HasValue ? request.PathBase + request.Path : request.Path;
-            if (!string.IsNullOrEmpty(parameters.RemoveFilters))
-            {
-                string[] keepParameters =
-                {
-                    $"Parameters.{nameof(parameters.IsCheck)}",
-                    $"Parameters.{nameof(parameters.Meta)}",
-                    $"Parameters.{nameof(parameters.Name)}",
-                    $"Parameters.{nameof(parameters.SortBy)}"
-                };
-
-                foreach (var item in queryParams)
-                {
-                    if (!keepParameters.Contains(item))
-                        newQueryParams.Remove(item.ToString());
-                }
-
-                return $"{url}?{newQueryParams}";
-            }
-
-            if (!string.IsNullOrEmpty(parameters.RemoveSearch))
-            {
-                queryParams.Remove($"Parameters.{nameof(parameters.Name)}");
-                queryParams.Remove($"Parameters.{nameof(parameters.RemoveSearch)}");
-                return $"{url}?{queryParams}";
-            }
-
-            return string.Empty;
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplyCategoryChange(string[] changes, IQueryable<AlienSpeciesAssessment2023> query)

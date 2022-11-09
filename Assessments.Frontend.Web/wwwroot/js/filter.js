@@ -25,7 +25,8 @@ if (filters) {
         "show_ccke",
         "show_insects",
         "show_skr",
-        "show_sin"
+        "show_sin",
+        "show_ttn"
     ];
 
     const markAllInputs = document.querySelectorAll(".mark_all > input:first-of-type");

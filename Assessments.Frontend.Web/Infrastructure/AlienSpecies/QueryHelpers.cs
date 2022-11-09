@@ -34,6 +34,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.SpeciesGroups.Any())
                 query = query.Where(x => parameters.SpeciesGroups.Any(y => AlienSpeciesHelpers.GetSpeciesGroupByShortName(y) == x.SpeciesGroup));
 
+            if (parameters.TaxonRank.Any())
+                query = ApplyTaxonRank(parameters.TaxonRank, query);
+
             if (string.IsNullOrEmpty(parameters.SortBy) || parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.ScientificName), StringComparison.InvariantCultureIgnoreCase))
                 query = query.OrderBy(x => x.ScientificName);
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.VernacularName), StringComparison.InvariantCultureIgnoreCase))
@@ -109,6 +112,26 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             return query.Where(x => speciesStatus.Contains(x.SpeciesStatus) ||
                                     (speciesStatus.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction)));
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyTaxonRank(string[] taxonFilters, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            var newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+            var evaluatedAtAnotherLevel = AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+
+            foreach (var filter in taxonFilters)
+            {
+                var isInt = int.TryParse(filter, out int result);
+                var assessments = filter switch
+                {
+                    nameof(TaxonRank.TaxonRankEnum.tva) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
+                    nameof(TaxonRank.TaxonRankEnum.tvi) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
+                    _ => isInt ? query.Where(x => x.ScientificNameRank == result) : null
+                };
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
         }
     }
 }

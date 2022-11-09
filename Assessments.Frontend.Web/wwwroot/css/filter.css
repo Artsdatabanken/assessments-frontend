@@ -567,6 +567,7 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_skr ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_ttn ~ .filter_subgroup,
 /*groups*/
 .only_js input[type=checkbox]:not(:checked)#show_area ~ .filter_area,
 .only_js input[type=checkbox]:not(:checked)#show_category ~ .filter_category,
@@ -594,7 +595,7 @@ button.list_header {
 .only_js input[type=checkbox]:checked#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_skr ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_insects ~ .filter_insects,
-.only_js input[type=checkbox]:checked#show_Krepsdyr ~ .filter_subgroup {
+.only_js input[type=checkbox]:checked#show_ttn ~ .filter_subgroup {
     display: block;
 }
 

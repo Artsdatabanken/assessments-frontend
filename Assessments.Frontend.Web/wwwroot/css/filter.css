@@ -542,8 +542,9 @@ button.list_header {
 
 .only_js .filter_area,
 .only_js .filter_category,
+.only_js .filter_categorychanged,
 .only_js .filter_subgroup,
-.only_js .filter_establishmentcategories,
+.only_js .filter_speciesstatus,
 .only_js .filter_region,
 .only_js .filter_regions,
 .only_js .filter_waterregions,
@@ -561,6 +562,7 @@ button.list_header {
 }
 
 /*sub groups*/
+.only_js input[type=checkbox]:not(:checked)#show_ccke ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_eds ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sin ~ .filter_subgroup,
@@ -569,12 +571,13 @@ button.list_header {
 /*groups*/
 .only_js input[type=checkbox]:not(:checked)#show_area ~ .filter_area,
 .only_js input[type=checkbox]:not(:checked)#show_category ~ .filter_category,
+.only_js input[type=checkbox]:not(:checked)#show_categorychanged ~ .filter_categorychanged,
 .only_js input[type=checkbox]:not(:checked)#show_region ~ .filter_region,
 .only_js input[type=checkbox]:not(:checked)#show_regions ~ .filter_regions,
 .only_js input[type=checkbox]:not(:checked)#show_waterregions ~ .filter_waterregions,
 .only_js input[type=checkbox]:not(:checked)#show_european_population ~ .filter_european_population,
 .only_js input[type=checkbox]:not(:checked)#show_criteria ~ .filter_criteria,
-.only_js input[type=checkbox]:not(:checked)#show_establishmentcategories ~ .filter_establishmentcategories,
+.only_js input[type=checkbox]:not(:checked)#show_speciesstatus ~ .filter_speciesstatus,
 .only_js input[type=checkbox]:not(:checked)#show_habitat ~ .filter_habitat,
 .only_js input[type=checkbox]:not(:checked)#show_habitats ~ .filter_habitats,
 .only_js input[type=checkbox]:not(:checked)#show_extinct ~ .filter_extinct,
@@ -586,6 +589,7 @@ button.list_header {
     display: none;
 }
 
+.only_js input[type=checkbox]:checked#show_ccke ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_eds ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_sin ~ .filter_subgroup,

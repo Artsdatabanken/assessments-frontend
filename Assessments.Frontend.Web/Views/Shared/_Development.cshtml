@@ -17,7 +17,7 @@
     {
         <li>
             <b class="text_content"> @prev.Year: </b>
-            <span class="graphic_element @prev.CategoryShort.Substring(0,2)">@prev.CategoryShort</span>
+            <span class="graphic_element @prev.CategoryShort?.Substring(0,2)">@prev.CategoryShort</span>
             <span class="capitalized"> @prev.Category</span>
         </li>
     }

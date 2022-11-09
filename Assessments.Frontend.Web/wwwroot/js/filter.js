@@ -6,13 +6,8 @@ const filters = document.getElementById("filters");
 
 if (filters) {
     const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
-    const algaeFilters = document.getElementsByClassName("Alger_input");
     const insectFilters = document.getElementsByClassName("insect_input");
-    const alienSpeciesInsectFilters = document.getElementsByClassName("Insekter_input");
-    const crayfishFilters = document.getElementsByClassName("Krepsdyr_input");
-    const areaInput = document.getElementById("Area");
     const insectInput = document.getElementById("Insekter");
-    const crayfishInput = document.getElementById("Krepsdyr");
     const redlistCheck = document.getElementById("redlisted_check")?.checked;
     const endangeredCheck = document.getElementById("endangered_check")?.checked;
     const init = document.getElementById("initial_check");
@@ -27,6 +22,7 @@ if (filters) {
         "show_area",
         "show_eds",
         "show_sal",
+        "show_ccke",
         "show_insects",
         "show_skr",
         "show_sin"

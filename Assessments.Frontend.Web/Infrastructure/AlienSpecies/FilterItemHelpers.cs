@@ -1,6 +1,7 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
@@ -24,6 +25,94 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = x.DisplayName().ToLowerInvariant(),
                 Description = x.DisplayName()
             }).ToArray();
+    }
+
+    public enum CategoryChangeEnum
+    {
+        // ReSharper disable InconsistentNaming
+        [Display(Name = "Reell endring")]
+        ccre,
+
+        [Display(Name = "Ny kunnskap")]
+        ccnk,
+
+        [Display(Name = "Ny tolkning av tidligere data")]
+        ccnt,
+
+        [Display(Name = "Endrede avgrensninger eller retningslinjer")]
+        ccea,
+
+        [Display(Name = "Endret tolkning av retningslinjer")]
+        ccet,
+
+        [Display(Name = "Endret status (taksnonomi, til/fra stedegen)")]
+        cces,
+
+        [Display(Name = "Vurdert for første gang")]
+        ccvf,
+
+        [Display(Name = "Kategorien er endret fra 2018")]
+        ccke,
+
+        [Display(Name = "Samme kategori som i 2018")]
+        ccsk
+    }
+
+    public class CategoryChange
+    {
+        private static readonly Filter.FilterItem[] DifferFrom2018 =
+        {
+            new()
+            {
+                Name = CategoryChangeEnum.ccre.DisplayName(),
+                NameShort = CategoryChangeEnum.ccre.ToString()
+            },
+            new()
+            {
+                Name = CategoryChangeEnum.ccnk.DisplayName(),
+                NameShort = CategoryChangeEnum.ccnk.ToString()
+            },
+            new()
+            {
+                Name = CategoryChangeEnum.ccnt.DisplayName(),
+                NameShort = CategoryChangeEnum.ccnt.ToString()
+            },
+            new()
+            {
+                Name = CategoryChangeEnum.ccea.DisplayName(),
+                NameShort = CategoryChangeEnum.ccea.ToString()
+            },
+            new()
+            {
+                Name = CategoryChangeEnum.ccet.DisplayName(),
+                NameShort = CategoryChangeEnum.ccet.ToString()
+            },
+            new()
+            {
+                Name = CategoryChangeEnum.cces.DisplayName(),
+                NameShort = CategoryChangeEnum.cces.ToString()
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023CategoryChanged =
+        {
+            new()
+            {
+                Name = CategoryChangeEnum.ccvf.DisplayName(),
+                NameShort = CategoryChangeEnum.ccvf.ToString()
+            },
+            new()
+            {
+                Name = CategoryChangeEnum.ccke.DisplayName(),
+                NameShort = CategoryChangeEnum.ccke.ToString(),
+                SubGroup = DifferFrom2018
+            },
+            new()
+            {
+                Name = CategoryChangeEnum.ccsk.DisplayName(),
+                NameShort = CategoryChangeEnum.ccsk.ToString()
+            }
+        };
     }
 
     public class TaxonRank

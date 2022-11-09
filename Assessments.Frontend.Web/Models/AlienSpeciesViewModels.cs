@@ -16,7 +16,7 @@ namespace Assessments.Frontend.Web.Models
     {
         public IEnumerable<string> FilterParameters { get; } = new[]
         {
-            nameof(Area), nameof(Category), nameof(Criterias), nameof(SpeciesStatus), nameof(Habitats), nameof(ProductionSpecies), nameof(Regions), nameof(SpeciesGroups), nameof(TaxonRank), nameof(WaterRegions)
+            nameof(Area), nameof(Category), nameof(Criterias), nameof(SpeciesStatus), nameof(Habitats), nameof(ProductionSpecies), nameof(Regions), nameof(SpeciesGroups), nameof(TaxonRank), nameof(WaterRegions), nameof(CategoryChanged)
         };
 
         public string SortBy { get; set; }

@@ -5,7 +5,7 @@
     ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
 
     Filter.FilterItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
-     var speciesGroupImageUrl = speciesGroup.ImageUrl;
+    var speciesGroupImageUrl = speciesGroup.ImageUrl;
 
     AssessmentPageHeaderViewModel assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
             {
@@ -20,6 +20,7 @@
                 {
                     AssessmentYear = 2023, // TODO: create this field in assessment model
                     ExpertCommittee = assessment.ExpertGroup,
+                    FirstPublishedDateString = "ikke publisert", // TODO: add date of publishing when we get this knowledge
                     //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
                     RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
                     SpeciesGroup = assessment.SpeciesGroup,
@@ -77,7 +78,7 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Citation.cshtml" model="Model" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CitationForAssessment.cshtml" model="Model" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
             </div>
         </div>

@@ -1,10 +1,9 @@
-﻿using Assessments.Mapping.RedlistSpecies;
+﻿using Assessments.Frontend.Web.Models;
+using Assessments.Mapping.RedlistSpecies;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System;
-using Assessments.Frontend.Web.Models;
-using Microsoft.VisualBasic;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -28,8 +27,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             return value;
         }
 
-        public static string[] findSelectedRedlistSpeciesCategories( bool redlisted, bool endangered,
-            string[] categoriesSelected) 
+        public static string[] findSelectedRedlistSpeciesCategories(bool redlisted, bool endangered,
+            string[] categoriesSelected)
         {
             List<string> selectedCategories = new List<string>();
 
@@ -50,10 +49,10 @@ namespace Assessments.Frontend.Web.Infrastructure
                 Constants.SpeciesCategories.Vulnerable.ShortHand
             };
 
-            if (redlisted) 
+            if (redlisted)
                 foreach (var category in redlist)
                     selectedCategories.Add(category);
-            else if (endangered) 
+            else if (endangered)
                 foreach (var category in endangeredList)
                     selectedCategories.Add(category);
             foreach (var s in categoriesSelected)
@@ -83,7 +82,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                 foreach (var insect in Constants.AllInsects)
                     if (!species.Contains(insect))
                         species.Add(insect);
-            
+
             return species.ToArray();
         }
 
@@ -202,7 +201,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         ///  Sortert liste med navn på regioner (etter gamle fylkesnummer)
         /// </summary>
         public static List<string> SortedRegions() => new() { "Østfold", "Oslo og Akershus", "Hedmark", "Oppland", "Buskerud", "Vestfold", "Telemark", "Aust-Agder", "Vest-Agder", "Rogaland", "Hordaland", "Sogn og Fjordane", "Møre og Romsdal", "Trøndelag", "Nordland", "Troms", "Finnmark", "Svalbard", "Jan Mayen", "Nordsjøen", "Norskehavet", "Barentshavet sør", "Barentshavet nord og Polhavet", "Grønlandshavet" };
-        
+
         public static string[] findEuropeanPopProcentages(string[] europeanPopulation)
         {
             List<string> selectedPercenteges = new List<string>();
@@ -239,10 +238,10 @@ namespace Assessments.Frontend.Web.Infrastructure
             return false;
         }
 
-        public static string findDegrees(string category,bool parenthesis)
+        public static string findDegrees(string category, bool parenthesis)
         {
             string text = "";
-            if (category.Length >2)
+            if (category.Length > 2)
             {
                 text = "nedgradert";
             }
@@ -271,11 +270,10 @@ namespace Assessments.Frontend.Web.Infrastructure
         }
 
 
-        public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment)
+        public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment, string firstPublished)
         {
-            string firspublished = "24.11.2021";
-            firspublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firspublished;
-            return firspublished;
+            firstPublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firstPublished;
+            return firstPublished;
         }
 
         public static string getRevisionDate(DateTime RevisionDate, string firspublished)
@@ -358,7 +356,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             "Vårfluer",
             "Øyenstikkere"
         };
-        
+
         public class EuropeanPopulationPercentages
         {
             public const string EuropeanPopLt5 = "Lt5";
@@ -508,6 +506,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         // Redlist species constants
 
+        public const string RedlistSpecies2021FirstPublished = "24.11.2021";
+
         public const int RedlistSpecies2021PageMenuContentId = 314303;
 
         public const string RedlistSpecies2021PageMenuHeaderText = "Rødlista for arter 2021";
@@ -525,6 +525,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         // Alien species constants
 
+        public const string AlienSpecies2023FirstPublished = "18.08.2023"; // TODO: Need publishing date
+
         public const int AlienSpecies2023PageMenuContentId = 314303; // TODO: This needs content id for alien species 2023. Using redlist species 2021 temporarily.
         // 239645 is the number to alien species list menu 2018. Use this for the innsyn.
 
@@ -539,7 +541,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
 
         public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Norsk fremmedartsliste 2023."; // TODO: insert correct publishing date for citation
-    
+
         public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
             " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
 

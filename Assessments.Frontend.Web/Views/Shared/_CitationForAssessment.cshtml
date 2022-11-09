@@ -31,7 +31,7 @@
     <p class="citation">
         @authors
         (@date).
-        @Model.AssessmentName
+        @Html.Raw(Model.AssessmentName)
         @Model.PublicationText
         @Context.Request.GetEncodedUrl()
     </p>

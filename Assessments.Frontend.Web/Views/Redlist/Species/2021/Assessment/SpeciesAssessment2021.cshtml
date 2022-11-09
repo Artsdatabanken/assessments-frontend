@@ -35,7 +35,7 @@
 
     var assessmentName = Model.SpeciesGroup + @ViewBag.glossary["citation"]["articlename"];
     assessmentName = assessmentName
-        .Replace("@species", $"{Model.PopularName} {Model.ScientificName}")
+        .Replace("@species", $"{Model.PopularName} {Helpers.getScientificNameElement(Model.ScientificName)}")
         .Replace("@area", $"{ViewBag.glossary["areas"][Model.AssessmentArea]["title"]}");
     var citationViewModel = new CitationForAssessmentViewModel
     {

@@ -105,5 +105,35 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Norwegian common names
         /// </summary>
         public string VernacularName { get; set; }
+
+        /// <summary>
+        /// Wether the species' score on the effect axis would be lower in the absence of current or future climate changes 
+        /// </summary>
+        public bool? RiskAssessmentClimateEffectsEcoEffect { get; set; }
+
+        /// <summary>
+        /// Further information about the effects of current or future climate changes 
+        /// </summary>
+        public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+
+        /// <summary>
+        /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 
+        /// </summary>
+        public bool? RiskAssessmentClimateEffectsInvationpotential { get; set; }
+
+        /// <summary>
+        /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 
+        /// </summary>
+        public List<string> RiskAssessmentGeographicalVariation { get; set; }
+
+        /// <summary>
+        /// Further information about the geographic variance in category 
+        /// </summary>
+        public string RiskAssessmentGeographicalVariationDocumentation { get; set; }
+
+        /// <summary>
+        /// Wether the species has a lower impact category in parts of the species’ range
+        /// </summary>
+        public bool? RiskAssessmentGeographicVariationInCategory { get; set; }
     }
 }

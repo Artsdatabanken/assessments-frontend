@@ -2,6 +2,8 @@ using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using Assessments.Mapping.AlienSpecies.Source;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
@@ -51,6 +53,64 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 int scoreEcoEffectAxis = (int)Char.GetNumericValue(criteriaEcoEffectAxis[0]);
                 return axis == "inv" ? scoreInvationAxis : scoreEcoEffectAxis;
             }
+        }
+
+        internal static bool? GetGeographicVarInCat(string category, string geographicVar) 
+        {
+            if (category is "NR")
+            {
+                return null;
+            }
+            if (string.IsNullOrEmpty(geographicVar))
+            {
+                return false;
+            }
+            return geographicVar == "yes";
+        }
+
+        internal static List<string> GetGeographicVarCause(string category, string geographicVar, List<string> geoVarCause)
+        {
+            if (GetGeographicVarInCat(category, geographicVar) is null or false)
+            {
+                return new List<string>();
+            }
+
+            return geoVarCause;
+        }
+
+        internal static string GetGeographicVarDoc(string category, string geographicVar, string geoVarDoc)
+        {
+            if (GetGeographicVarInCat(category, geographicVar) is null or false)
+            {
+                return string.Empty;
+            }
+
+            return geoVarDoc;
+        }
+
+        internal static bool? GetClimateEffects(string category, string criteria, string axis, RiskAssessment ra)
+        {
+            if (category is "NR")
+            {
+                return null;
+            }
+            string climateEffect = axis == "inv" ? ra.ClimateEffectsInvationpotential : ra.ClimateEffectsEcoEffect;
+
+            if (string.IsNullOrEmpty(climateEffect) || GetScores(category, criteria, axis) == 1)
+            {
+                return false;
+            }
+            return climateEffect == "yes";
+        }
+
+        internal static string GetClimateEffectsDoc(string category, string criteria, RiskAssessment ra, string climateDoc)
+        {
+            if (GetClimateEffects(category, criteria, "inv", ra) is null or false && GetClimateEffects(category, criteria, "eco", ra) is null or false)
+            {
+                return string.Empty;
+            }
+
+            return climateDoc;
         }
 
         internal static string GetSpeciesGroup(string taxonHierarchy)

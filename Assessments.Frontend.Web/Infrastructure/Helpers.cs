@@ -504,6 +504,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             { "Form", "Form" }
         };
 
+        public const string Artsdatabanken = "Artsdatabanken";
+
         // Redlist species constants
 
         public const string RedlistSpecies2021FirstPublished = "24.11.2021";
@@ -539,6 +541,8 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
 
         public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
+
+        public const string AlienSpecies2023CitationHeading = "Siden siteres som:";
 
         public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Norsk fremmedartsliste 2023."; // TODO: insert correct publishing date for citation
 

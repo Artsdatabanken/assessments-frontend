@@ -9,7 +9,7 @@
 
     AssessmentPageHeaderViewModel assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
             {
-                RenderSvalbard = false,
+                AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
                 scientificNameViewModel = new ScientificNameViewModel()
                 {
                     PopularName = assessment.VernacularName,

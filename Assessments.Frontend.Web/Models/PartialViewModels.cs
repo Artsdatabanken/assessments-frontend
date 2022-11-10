@@ -4,7 +4,7 @@ namespace Assessments.Frontend.Web.Models
 {
     public class AssessmentPageHeaderViewModel
     {
-        public bool RenderSvalbard { get; set; }
+        public string AssessmentArea { get; set; }
 
         public ScientificNameViewModel scientificNameViewModel { get; set; }
 

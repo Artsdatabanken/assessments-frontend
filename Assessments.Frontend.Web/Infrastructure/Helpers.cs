@@ -525,6 +525,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         // Alien species constants
 
+        public const string AlienSpecies2023PageMenuAssessmentAreaText = "områder der arten er regionalt fremmed i Norge (uten Svalbard)";
+
         public const int AlienSpecies2023PageMenuContentId = 314303; // TODO: This needs content id for alien species 2023. Using redlist species 2021 temporarily.
         // 239645 is the number to alien species list menu 2018. Use this for the innsyn.
 

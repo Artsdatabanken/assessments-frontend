@@ -16,7 +16,7 @@
     var expertCommitteeName = await _expertCommitteeMemberService.GetExpertCommitteeName(Model.ExpertCommittee, Model.AssessmentYear);
     AssessmentPageHeaderViewModel assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
-        RenderSvalbard = Model.AssessmentArea == "S",
+        AssessmentArea = Model.AssessmentArea == "S" ? "Svalbard" : "Norge",
         scientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = Model.PopularName,

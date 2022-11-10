@@ -1,13 +1,16 @@
 ﻿@model AssessmentPageHeaderViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums
+
+@{
+    var hasSvalbardStyle = Model.AssessmentArea == AlienSpeciesAssessment2023EvaluationContext.S.DisplayName() || Model.AssessmentArea == "Svalbard";
+}
 
 <div class="page-header">
     <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.scientificNameViewModel"/>
-    @if (@Model.RenderSvalbard)
-    {
-        <h2 class="svalbard-heading">
-            Svalbard
-        </h2>
-    }
+    <span>Gjelder for vurderingsområde  </span>
+    <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
+            @Model.AssessmentArea
+        </span>
     <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.speciesGroupViewModel"/>
     <hr />
 </div>

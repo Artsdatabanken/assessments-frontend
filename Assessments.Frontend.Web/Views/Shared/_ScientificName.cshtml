@@ -1,23 +1,21 @@
 ﻿@model ScientificNameViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
-@* 
-   Norwegian name and scientific name with and without autor.
-   Codeblock from Innsynsløsninga 2021 by SN. Modified by HEM for launch.
-*@
 
 @{
-    string popularName = "";
-    if (Model.PopularName != string.Empty && !string.IsNullOrEmpty(Model.PopularName))
+    string popularName = string.Empty;
+    if (!string.IsNullOrEmpty(Model.PopularName))
         popularName = char.ToUpper(Model.PopularName[0]) + Model.PopularName.Substring(1);
 }
 
+<h2>
+    Vurdering av
+</h2>
+<h1 is-visible="@string.IsNullOrEmpty(Model.PopularName) == false">
+    @popularName
+</h1>
 <h1>
-    @if (!string.IsNullOrEmpty(Model.PopularName))
-    {<b>@popularName </b>}
-    <b>@Html.Raw(getScientificNameElement(Model.ScientificName))</b>
-    <span class="subtext_header">
-        @Model.ScientificNameAuthor
-    </span>
+    @Html.Raw(getScientificNameElement(Model.ScientificName))
+    @Model.ScientificNameAuthor
 </h1>
 
  

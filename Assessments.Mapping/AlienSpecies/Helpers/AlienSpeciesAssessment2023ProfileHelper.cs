@@ -1,9 +1,9 @@
 using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Source;
+using System.Linq;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
@@ -55,7 +55,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
         }
 
-        internal static bool? GetGeographicVarInCat(string category, string geographicVar) 
+        internal static bool? GetGeographicVarInCat(string category, string geographicVar)
         {
             if (category is "NR")
             {
@@ -130,6 +130,10 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static int GetTaxonRank(string taxonRank)
         {
+            // 0 maps to "Ukjent" (unknown) in the view. All assessments should have a taxonomic rank, but at this time not all do.
+            // 22 through 24 corresponds to species, sub species, and variety, respectively. 
+            // These numbers might seem mysterious, but I can assure you, they are not. 
+            // The numbers are used in multiple repositories, and corresponds to the correct taxon rank, of which there are about 25. 
             var result = 0;
             var isParsable = int.TryParse(taxonRank, out result);
             if (!isParsable && taxonRank == "Species")

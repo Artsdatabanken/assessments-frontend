@@ -11,8 +11,10 @@
         Til @Helpers.fixSpeciesLevel("{art}ssiden", Model.TaxonRank)
     </a>
 
-    <hr />
-    <partial name="/Views/Shared/_Development.cshtml" />
-    <hr />
-    <partial name="/Views/Shared/_Links.cshtml" />
+    <div is-visible="@Model.PreviousAssessments.Any()">
+        <hr />
+        <partial name="/Views/Shared/_Development.cshtml" />
+        <hr />
+        <partial name="/Views/Shared/_Links.cshtml" />
+    </div>
 </div>

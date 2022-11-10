@@ -1,6 +1,4 @@
-﻿using Assessments.Mapping.AlienSpecies;
-using System;
-using X.PagedList;
+﻿using System;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -17,7 +15,7 @@ namespace Assessments.Frontend.Web.Models
     {
         public string CitationString { get; set; }
     }
- 
+
     public class ControlButtonsViewModel
     {
         public string View { get; set; }
@@ -110,9 +108,11 @@ namespace Assessments.Frontend.Web.Models
         public DateTime RevisionDate { get; set; }
 
         public string RevisionReason { get; set; }
-     
+
         public string SpeciesGroup { get; set; }
 
         public string SpeciesGroupImageUrl { get; set; }
+
+        public string SpeciesGroupInfoUrl { get; set; }
     }
 }

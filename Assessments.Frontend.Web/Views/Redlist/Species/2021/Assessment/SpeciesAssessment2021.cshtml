@@ -1,4 +1,6 @@
 ﻿@model SpeciesAssessment2021
+@using Assessments.Frontend.Web.Infrastructure.Services
+@inject ExpertCommitteeMemberService _expertCommitteeMemberService
 @{
     ViewBag.Title = Model.ScientificName + " - Rødlista 2021";
 
@@ -11,6 +13,7 @@
         speciesGroupImageUrl = speciesGroups[Model.SpeciesGroup]["image"];
     }
 
+    var expertCommitteeName = await _expertCommitteeMemberService.GetExpertCommitteeName(Model.ExpertCommittee, Model.AssessmentYear);
     AssessmentPageHeaderViewModel assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
         RenderSvalbard = Model.AssessmentArea == "S",
@@ -28,6 +31,7 @@
             RevisionReason = Model.RevisionReason,
             SpeciesGroup = Model.SpeciesGroup,
             SpeciesGroupImageUrl = speciesGroupImageUrl,
+            SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene",
             PreviousAssessmentYear = Model.YearPreviousAssessment,
         }
     };

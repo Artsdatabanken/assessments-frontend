@@ -24,6 +24,7 @@
                     RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
                     SpeciesGroup = assessment.SpeciesGroup,
                     SpeciesGroupImageUrl = speciesGroupImageUrl,
+                    SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene", // TODO: add correct link for alien species
                     PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
     };
@@ -38,9 +39,8 @@
     TaxonRank.TaxonRankEnum scientificNameRank;
     var taxonRank = "Ukjent";
     if (Enum.TryParse(Model.Assessment.ScientificNameRank.ToString(), out scientificNameRank))
-    {
-        taxonRank = scientificNameRank.DisplayName();
-    }
+        if (scientificNameRank != 0)
+            taxonRank = scientificNameRank.DisplayName();
     SideBarContentViewModel sideBarContentViewModel = new SideBarContentViewModel()
     {
          AssessmentYear = 2023,

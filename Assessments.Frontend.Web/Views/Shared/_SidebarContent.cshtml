@@ -15,18 +15,4 @@
     <partial name="/Views/Shared/_Development.cshtml" />
     <hr />
     <partial name="/Views/Shared/_Links.cshtml" />
-
-
-    @* // Hide taxonomic path
-        <h3>Taksonomi</h3>
-        @if (@Model.VurdertVitenskapeligNavnHierarki != null)
-        {
-            <p class="taxonomy">
-                @foreach (var taxon in @Model.VurdertVitenskapeligNavnHierarki.Split("/"))
-                {
-                    <span>@taxon > </span>
-                }
-            </p>
-        }
-    *@
 </div>

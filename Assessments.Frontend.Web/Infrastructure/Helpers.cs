@@ -1,10 +1,9 @@
-﻿using Assessments.Mapping.RedlistSpecies;
+﻿using Assessments.Frontend.Web.Models;
+using Assessments.Mapping.RedlistSpecies;
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System;
-using Assessments.Frontend.Web.Models;
-using Microsoft.VisualBasic;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -28,8 +27,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             return value;
         }
 
-        public static string[] findSelectedRedlistSpeciesCategories( bool redlisted, bool endangered,
-            string[] categoriesSelected) 
+        public static string[] findSelectedRedlistSpeciesCategories(bool redlisted, bool endangered,
+            string[] categoriesSelected)
         {
             List<string> selectedCategories = new List<string>();
 
@@ -50,10 +49,10 @@ namespace Assessments.Frontend.Web.Infrastructure
                 Constants.SpeciesCategories.Vulnerable.ShortHand
             };
 
-            if (redlisted) 
+            if (redlisted)
                 foreach (var category in redlist)
                     selectedCategories.Add(category);
-            else if (endangered) 
+            else if (endangered)
                 foreach (var category in endangeredList)
                     selectedCategories.Add(category);
             foreach (var s in categoriesSelected)
@@ -83,7 +82,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                 foreach (var insect in Constants.AllInsects)
                     if (!species.Contains(insect))
                         species.Add(insect);
-            
+
             return species.ToArray();
         }
 
@@ -202,7 +201,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         ///  Sortert liste med navn på regioner (etter gamle fylkesnummer)
         /// </summary>
         public static List<string> SortedRegions() => new() { "Østfold", "Oslo og Akershus", "Hedmark", "Oppland", "Buskerud", "Vestfold", "Telemark", "Aust-Agder", "Vest-Agder", "Rogaland", "Hordaland", "Sogn og Fjordane", "Møre og Romsdal", "Trøndelag", "Nordland", "Troms", "Finnmark", "Svalbard", "Jan Mayen", "Nordsjøen", "Norskehavet", "Barentshavet sør", "Barentshavet nord og Polhavet", "Grønlandshavet" };
-        
+
         public static string[] findEuropeanPopProcentages(string[] europeanPopulation)
         {
             List<string> selectedPercenteges = new List<string>();
@@ -239,10 +238,10 @@ namespace Assessments.Frontend.Web.Infrastructure
             return false;
         }
 
-        public static string findDegrees(string category,bool parenthesis)
+        public static string findDegrees(string category, bool parenthesis)
         {
             string text = "";
-            if (category.Length >2)
+            if (category.Length > 2)
             {
                 text = "nedgradert";
             }
@@ -289,23 +288,24 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string fixSpeciesLevel(string replacestring, string rang)
         {
-            if (rang == "SubSpecies" || rang == "Variety")
+            var subSpecies = "Underart";
+            var species = "Art";
+            var variety = "Varietet";
+
+            if (rang == "SubSpecies" || rang == subSpecies)
             {
-                if (rang == "SubSpecies")
-                {
-                    replacestring = replacestring.Replace("{art}", "underart");
-                    replacestring = replacestring.Replace("{Art}", "Underart");
-                }
-                else if (rang == "Variety")
-                {
-                    replacestring = replacestring.Replace("{art}", "varietet");
-                    replacestring = replacestring.Replace("{Art}", "Varietet");
-                }
+                replacestring = replacestring.Replace("{art}", subSpecies.ToLower());
+                replacestring = replacestring.Replace("{Art}", subSpecies);
+            }
+            else if (rang == "Variety" || rang == variety)
+            {
+                replacestring = replacestring.Replace("{art}", variety.ToLower());
+                replacestring = replacestring.Replace("{Art}", variety);
             }
             else
             {
-                replacestring = replacestring.Replace("{art}", "art");
-                replacestring = replacestring.Replace("{Art}", "Art");
+                replacestring = replacestring.Replace("{art}", species.ToLower());
+                replacestring = replacestring.Replace("{Art}", species);
             }
             return replacestring;
         }
@@ -358,7 +358,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             "Vårfluer",
             "Øyenstikkere"
         };
-        
+
         public class EuropeanPopulationPercentages
         {
             public const string EuropeanPopLt5 = "Lt5";
@@ -539,7 +539,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
 
         public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Norsk fremmedartsliste 2023."; // TODO: insert correct publishing date for citation
-    
+
         public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
             " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
 

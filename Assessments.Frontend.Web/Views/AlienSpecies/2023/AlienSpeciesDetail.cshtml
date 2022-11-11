@@ -1,35 +1,44 @@
 ﻿@model AlienSpeciesDetailViewModel
 
 @{
-    AlienSpeciesAssessment2023 assessment = Model.Assessment;
+    var assessment = Model.Assessment;
     ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
 
-    Filter.FilterItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
+    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
     var speciesGroupImageUrl = speciesGroup.ImageUrl;
 
-    AssessmentPageHeaderViewModel assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
-            {
-                AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
-                scientificNameViewModel = new ScientificNameViewModel()
-                {
-                    PopularName = assessment.VernacularName,
-                    ScientificName = assessment.ScientificName,
-                    ScientificNameAuthor = assessment.ScientificNameAuthor
-                },
-                speciesGroupViewModel = new SpeciesGroupViewModel()
-                {
-                    AssessmentYear = 2023, // TODO: create this field in assessment model
-                    ExpertCommittee = assessment.ExpertGroup,
-                    //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
-                    RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
-                    SpeciesGroup = assessment.SpeciesGroup,
-                    SpeciesGroupImageUrl = speciesGroupImageUrl,
-                    SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene", // TODO: add correct link for alien species
-                    PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
+    var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
+    {
+        AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
+        scientificNameViewModel = new ScientificNameViewModel()
+        {
+            PopularName = assessment.VernacularName,
+            ScientificName = assessment.ScientificName,
+            ScientificNameAuthor = assessment.ScientificNameAuthor
+        },
+        speciesGroupViewModel = new SpeciesGroupViewModel()
+        {
+            AssessmentYear = 2023, // TODO: create this field in assessment model
+            ExpertCommittee = assessment.ExpertGroup,
+            //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
+            RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
+            SpeciesGroup = assessment.SpeciesGroup,
+            SpeciesGroupImageUrl = speciesGroupImageUrl,
+            SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene", // TODO: add correct link for alien species
+            PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
     };
 
-    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
+    var ingressViewModel = new IngressViewModel()
+            {
+                Category = assessment.Category,
+                Environment = assessment.Environment,
+                ListName = Constants.AlienSpecies2023ListName,
+                Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
+                TaxonRank = assessment.ScientificNameRank
+            };
+
+    var pageMenuViewModel = new PageMenuViewModel
     {
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
@@ -41,7 +50,7 @@
     if (Enum.TryParse(Model.Assessment.ScientificNameRank.ToString(), out scientificNameRank))
         if (scientificNameRank != 0)
             taxonRank = scientificNameRank.DisplayName();
-    SideBarContentViewModel sideBarContentViewModel = new SideBarContentViewModel()
+    var sideBarContentViewModel = new SideBarContentViewModel()
     {
          AssessmentYear = 2023,
          Category = Categories.AlienSpecies2023Categories
@@ -72,9 +81,9 @@
         <div class="mid-content with_sidebar">
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
+                <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 @*
                     Check which ones are appropriate for alien species list
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />

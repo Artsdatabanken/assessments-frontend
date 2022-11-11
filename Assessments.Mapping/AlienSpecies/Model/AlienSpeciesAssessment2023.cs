@@ -37,6 +37,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         /// <summary>
+        /// Tha taxon is assessed as living in either a limnic, marine, or terrestrial enviroment
+        /// </summary>
+        public AlienSpeciesAssessment2023Environment Environment { get; set; }
+
+        /// <summary>
         /// Name of ekspert committee that conducted the assessments 
         /// </summary>
         public string ExpertGroup { get; set; }
@@ -50,16 +55,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Free text field used to describe uncertainty around the species' status as alien
         /// </summary>
         public string IsAlien { get; set; }
-
-        /// <summary>
-        /// Tha taxon is assessed as living in a limnic enviroment
-        /// </summary>
-        public bool Limnic { get; set; }
-
-        /// <summary>
-        /// Tha taxon is assessed as living in a marine enviroment
-        /// </summary>
-        public bool Marine { get; set; }
 
         /// <summary>
         /// List including category and decisive criteria from previous assessments
@@ -115,11 +110,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Taxonomy path
         /// </summary>
         public string TaxonHierarcy { get; set; }
-
-        /// <summary>
-        /// Tha taxon is assessed as living in a terrestrial enviroment
-        /// </summary>
-        public bool Terrestrial { get; set; }
 
         /// <summary>
         /// Norwegian common names

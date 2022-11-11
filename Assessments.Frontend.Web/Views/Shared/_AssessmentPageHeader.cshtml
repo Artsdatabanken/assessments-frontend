@@ -3,13 +3,14 @@
 
 @{
     var hasSvalbardStyle = Model.AssessmentArea == AlienSpeciesAssessment2023EvaluationContext.S.DisplayName() || Model.AssessmentArea == "Svalbard";
+
 }
 
 <div class="page-header">
     <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.scientificNameViewModel"/>
     <span>Gjelder for vurderingsområde  </span>
     <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
-            @Model.AssessmentArea
+            @Model.AssessmentArea.
         </span>
     <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.speciesGroupViewModel"/>
     <hr />

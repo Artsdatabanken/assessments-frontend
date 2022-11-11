@@ -18,6 +18,16 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return alienSpeciesCategory;
         }
 
+        internal static AlienSpeciesAssessment2023Environment GetEnvironmentEnum(bool limnic, bool marine, bool terrestrial)
+        {
+            if (limnic)
+                return AlienSpeciesAssessment2023Environment.limnisk;
+            else if (marine)
+                return AlienSpeciesAssessment2023Environment.marin;
+            else
+                return AlienSpeciesAssessment2023Environment.terrestrisk;
+        }
+
         internal static string GetExpertGroup(string expertGroup)
         {
             if (expertGroup.Contains("(Svalbard)"))

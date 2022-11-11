@@ -1,0 +1,17 @@
+﻿@model IngressViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums
+
+@{
+    var riskCategoryText = Model.Category == AlienSpeciesAssessment2023Category.NR ?
+        $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er {Model.Category} - {Model.Category.DisplayName()} for {Model.ListName}." :
+        $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er vurdert til {Model.Category} - {Model.Category.DisplayName()} for {Model.ListName}.";
+}
+
+<div class="page_section">
+    <p>
+        @Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank) er @Model.Status og @Model.Environment.
+    </p>
+    <p>
+        @riskCategoryText
+    </p>
+</div>

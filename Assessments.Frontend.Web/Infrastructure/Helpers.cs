@@ -309,7 +309,19 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
             return replacestring;
         }
+        public static string FixSpeciesLevel(string replaceString, int rank)
+        {
+            var stringRank = rank switch
+            {
+                22 => "Art",
+                23 => "Underart",
+                24 => "Varietet",
+                _ => "Art"
+            };
+            return Helpers.fixSpeciesLevel(replaceString, stringRank);
+        }
     }
+
 
     public static class Constants
     {
@@ -524,6 +536,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             " Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
 
         // Alien species constants
+
+        public const string AlienSpecies2023ListName = "norsk fremmedartsliste 2023";
 
         public const string AlienSpecies2023PageMenuAssessmentAreaText = "områder der arten er regionalt fremmed i Norge (uten Svalbard)";
 

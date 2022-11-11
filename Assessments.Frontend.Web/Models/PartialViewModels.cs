@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+using System;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -21,6 +22,19 @@ namespace Assessments.Frontend.Web.Models
         public string View { get; set; }
 
         public int ItemCount { get; set; }
+    }
+
+    public class IngressViewModel
+    {
+        public AlienSpeciesAssessment2023Environment Environment { get; set; }
+
+        public AlienSpeciesAssessment2023Category Category { get; set; }
+
+        public string ListName { get; set; }
+
+        public string Status { get; set; }
+
+        public int TaxonRank { get; set; }
     }
 
     public class SideBarContentViewModel

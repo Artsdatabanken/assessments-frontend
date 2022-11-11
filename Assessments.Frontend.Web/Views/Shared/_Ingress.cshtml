@@ -2,9 +2,9 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-    var riskCategoryText = Model.Category == AlienSpeciesAssessment2023Category.NR ?
-        $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er {Model.Category} - {Model.Category.DisplayName()} for {Model.ListName}." :
-        $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er vurdert til {Model.Category} - {Model.Category.DisplayName()} for {Model.ListName}.";
+    var riskCategoryPreText = Model.Category == AlienSpeciesAssessment2023Category.NR ?
+        $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er " :
+        $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er vurdert til ";
 }
 
 <div class="page_section">
@@ -12,6 +12,6 @@
         @Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank) er @Model.Status og @Model.Environment.
     </p>
     <p>
-        @riskCategoryText
+        @riskCategoryPreText <i>@Model.Category.DisplayName()</i> - @Model.Category for @Model.ListName.
     </p>
 </div>

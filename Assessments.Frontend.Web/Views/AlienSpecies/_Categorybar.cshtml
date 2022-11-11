@@ -1,0 +1,31 @@
+﻿@model CategoryDescriptionViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums
+@*
+    Category-displayer, purely visual css-element.
+    Needs the corresponding css to be viewed properly.
+    CSS is in the file categorybar.css.
+*@
+
+@{
+
+    string GetActiveElement(AlienSpeciesAssessment2023Category currentCaterogy)
+    {
+        if (Model.Category == currentCaterogy)
+            return "active";
+        return "notactive";
+    }
+}
+
+<div class="page_section">
+    <ul class="category_displayer">
+        @foreach(var category in Enum.GetValues<AlienSpeciesAssessment2023Category>().Reverse())
+        {
+            <li class="@GetActiveElement(category)">
+                <div class="category_item  @category.ToString()">
+                        <span>@category.ToString()</span>
+                </div>
+                <span class="tag">@category.DisplayName()</span>
+            </li>
+        }
+    </ul>
+</div>

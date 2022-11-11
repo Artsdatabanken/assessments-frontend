@@ -29,6 +29,13 @@
         }
     };
 
+    var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
+    {
+        Category = assessment.Category,
+        CategoryBarText = "Alt om kategoriskalaen",
+        MethodUrl = ""
+    };
+
     var ingressViewModel = new IngressViewModel()
             {
                 Category = assessment.Category,
@@ -82,9 +89,9 @@
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
+                <partial name="/Views/AlienSpecies/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 @*
                     Check which ones are appropriate for alien species list
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />

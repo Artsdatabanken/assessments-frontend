@@ -1,0 +1,9 @@
+﻿@model CategoryDescriptionViewModel
+
+<div class="page_section">
+    <partial name="/Views/AlienSpecies/_Categorybar.cshtml" />
+    @*TODO: add url to the correct method, redlist species has https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316483*@
+    <a href="@Model.MethodUrl" class="link-styled">
+        @Model.CategoryBarText
+    </a>
+</div>

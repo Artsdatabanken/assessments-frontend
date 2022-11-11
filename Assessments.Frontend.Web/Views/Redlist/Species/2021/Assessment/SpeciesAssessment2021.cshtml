@@ -36,14 +36,14 @@
         }
     };
 
-    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
+    var pageMenuViewModel = new PageMenuViewModel
     {
         PageMenuContentId = Constants.RedlistSpecies2021PageMenuContentId,
         PageMenuExpandButtonText = Constants.RedlistSpecies2021PageManuExpandButtonText,
         PageMenuHeaderText = Constants.RedlistSpecies2021PageMenuHeaderText
     };
 
-    SideBarContentViewModel sideBarContentViewModel = new SideBarContentViewModel()
+    var sideBarContentViewModel = new SideBarContentViewModel()
     {
          AssessmentYear = Model.AssessmentYear,
          Category = @ViewBag.categories[Model.Category.Substring(0, 2)]["presentationstring"],
@@ -59,6 +59,51 @@
          ScientificNameId = Model.ScientificNameId,
          TaxonRank = Model.TaxonRank,
     };
+
+    var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
+            {
+                CategoryShort = Model.Category,
+                CategoryBar = new CategoryBarListElement[]
+                {
+                     new CategoryBarListElement {
+                        Name = "Ikke vurdert",
+                        NameShort = "NE"
+                    },
+                    new CategoryBarListElement {
+                        Name = "Ikke egnet",
+                        NameShort = "NA"
+                    },
+                    new CategoryBarListElement {
+                        Name = "Livs- kraftig",
+                        NameShort = "LC"
+                    },
+                    new CategoryBarListElement {
+                        Name = "Data- mangel",
+                        NameShort = "DD"
+                    },
+                    new CategoryBarListElement {
+                        Name = "Nær truet",
+                        NameShort = "NT"
+                    },
+                    new CategoryBarListElement {
+                        Name = "Sårbar",
+                        NameShort = "VU"
+                    },
+                    new CategoryBarListElement {
+                        Name = "Sterkt truet",
+                        NameShort = "EN"
+                    },
+                    new CategoryBarListElement {
+                        Name = "Kritisk truet",
+                        NameShort = "CR"
+                    },
+                    new CategoryBarListElement {
+                        Name = "Regionalt utdødd",
+                        NameShort = "RE"
+                    }
+                },
+                MethodUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316483"
+            };
 
     var naturtypehovedenhet = Model.MainHabitat;
     string geografi = Model.AssessmentArea;
@@ -88,7 +133,7 @@
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
+                <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />

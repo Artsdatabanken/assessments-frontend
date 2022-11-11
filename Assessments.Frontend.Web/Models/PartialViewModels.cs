@@ -12,11 +12,18 @@ namespace Assessments.Frontend.Web.Models
         public SpeciesGroupViewModel speciesGroupViewModel { get; set; }
     }
 
+    public class CategoryBarListElement
+    {
+        public string Name { get; set; }
+
+        public string NameShort { get; set; }
+    }
+
     public class CategoryDescriptionViewModel
     {
-        public AlienSpeciesAssessment2023Category Category { get; set; }
+        public string CategoryShort { get; set; }
 
-        public string CategoryBarText { get; set; }
+        public CategoryBarListElement[] CategoryBar { get; set; }
 
         public string MethodUrl { get; set; }
     }

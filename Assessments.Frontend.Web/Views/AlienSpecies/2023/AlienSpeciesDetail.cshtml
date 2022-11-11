@@ -1,4 +1,5 @@
 ﻿@model AlienSpeciesDetailViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
     var assessment = Model.Assessment;
@@ -31,9 +32,13 @@
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
     {
-        Category = assessment.Category,
-        CategoryBarText = "Alt om kategoriskalaen",
-        MethodUrl = ""
+        CategoryShort = assessment.Category.ToString(),
+        CategoryBar = Enum.GetValues<AlienSpeciesAssessment2023Category>().Select(x => new CategoryBarListElement()
+        {
+            Name = x.DisplayName(),
+            NameShort = x.ToString()
+        }).Reverse().ToArray(),
+        MethodUrl = "" //TODO: add url to the correct method, redlist species has https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316483
     };
 
     var ingressViewModel = new IngressViewModel()
@@ -89,7 +94,7 @@
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
-                <partial name="/Views/AlienSpecies/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
+                <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 @*
                     Check which ones are appropriate for alien species list
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />

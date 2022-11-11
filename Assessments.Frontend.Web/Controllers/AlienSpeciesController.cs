@@ -42,7 +42,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (assessment == null)
                 return NotFound();
 
-            var viewModel = new AlienSpeciesDetailViewModel { Assessment = assessment };
+            var viewModel = new AlienSpeciesDetailViewModel(assessment);
 
             return View("2023/AlienSpeciesDetail", viewModel);
         }

@@ -1,13 +1,13 @@
 ﻿@model AlienSpeciesDetailViewModel
 
 @{
-    AlienSpeciesAssessment2023 assessment = Model.Assessment;
+    var assessment = Model.Assessment;
     ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
 
-    Filter.FilterItem speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
-     var speciesGroupImageUrl = speciesGroup.ImageUrl;
+    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
+    var speciesGroupImageUrl = speciesGroup.ImageUrl;
 
-    AssessmentPageHeaderViewModel assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
+    var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
             {
                 RenderSvalbard = false,
                 scientificNameViewModel = new ScientificNameViewModel()
@@ -20,6 +20,7 @@
                 {
                     AssessmentYear = 2023, // TODO: create this field in assessment model
                     ExpertCommittee = assessment.ExpertGroup,
+                    FirstPublishedDateString = "ikke publisert", // TODO: add date of publishing when we get this knowledge
                     //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
                     RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
                     SpeciesGroup = assessment.SpeciesGroup,
@@ -27,15 +28,27 @@
                     PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
     };
+    var citationViewModel = new CitationForAssessmentViewModel
+    {
+        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {Helpers.getScientificNameElement(assessment.ScientificName)} for {assessment.EvaluationContext.DisplayName()}",
+        AssessmentYear = 2023, // TODO: add year when it comes into model
+        ExpertCommittee = assessment.ExpertGroup,
+        FirstPublished = Constants.RedlistSpecies2021FirstPublished,
+        CitationHeading = Constants.AlienSpecies2023CitationHeading,
+        PublicationText = $"{Constants.AlienSpecies2023PageMenuHeaderText}.  {Constants.Artsdatabanken}.",
+        RevisionDate = new DateTime(), // TODO: add if we handle revisions in this list
+        RevisionReason = string.Empty,  // TODO: add if we handle revisions in this list
+        YearPreviousAssessment = assessment.PreviousAssessments?.Select(x => x.RevisionYear).OrderByDescending(x => x).FirstOrDefault() ?? 0
+    };
 
-    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
+    var pageMenuViewModel = new PageMenuViewModel
     {
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
     };
 
-    SideBarContentViewModel sideBarContentViewModel = new SideBarContentViewModel()
+    var sideBarContentViewModel = new SideBarContentViewModel()
     {
          AssessmentYear = 2023,
          Category = Categories.AlienSpecies2023Categories
@@ -66,8 +79,8 @@
         <div class="mid-content with_sidebar">
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
-                @*
-                    Check which ones are appropriate for alien species list
+                
+                @*    Check which ones are appropriate for alien species list
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
@@ -76,9 +89,9 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Citation.cshtml" model="Model" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
+                <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
+                @*<partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
             </div>
         </div>
         <div class="side mobile_padding">

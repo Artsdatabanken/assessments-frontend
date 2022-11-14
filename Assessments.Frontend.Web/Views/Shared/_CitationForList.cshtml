@@ -1,0 +1,9 @@
+﻿@model CitationForListViewModel
+@using Microsoft.AspNetCore.Http.Extensions
+
+<div class="mobile_padding">
+    <h2>Sitering</h2>
+    <p class="citation">
+        @Model.CitationString @Context.Request.GetEncodedUrl().Split('?', '#')[0]
+    </p>
+</div>

@@ -1,0 +1,17 @@
+@model AlienSpeciesListViewModel
+
+@if (Model.Results.PageCount > 1
+    @*&& Model.View != "stat"*@
+)
+{
+    <p class="page_count potit">
+        Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
+    </p>
+
+    @Html.PagedListPager(Model.Results, page => Url.Action("Index", Context.Request.QueryString.ToRouteValues(new { Page = page })), new PagedListRenderOptions
+    {
+        PageClasses = new[] { "page-link" },
+        UlElementClasses = new[] { "pagination" },
+        LiElementClasses = new[] { "page-item" }
+    })
+}

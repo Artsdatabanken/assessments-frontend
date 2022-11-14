@@ -1,0 +1,17 @@
+﻿@model SpeciesGroupViewModel
+@{
+    // Find correct startdate (Exceptions include 2010 spretthaler)
+    string firspublished = Helpers.getPublishedDate(Model.AssessmentYear, Model.PreviousAssessmentYear, Model.FirstPublishedDateString);
+    string printstring = "Publisert: " + firspublished;
+
+    // Add the revisiondate when it exists
+    string revisiondate = Helpers.getRevisionDate(Model.RevisionDate, firspublished);
+
+    @if (!string.IsNullOrEmpty(revisiondate))
+    {        
+        printstring += ", sist endret: " + revisiondate;
+    }
+}
+
+<span class="date datestring">@printstring</span>
+

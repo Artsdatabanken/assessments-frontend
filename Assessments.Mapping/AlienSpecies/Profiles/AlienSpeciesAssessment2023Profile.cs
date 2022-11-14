@@ -1,5 +1,8 @@
-﻿using Assessments.Mapping.AlienSpecies.Source;
+﻿using Assessments.Mapping.AlienSpecies.Helpers;
+using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Source;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
 {
@@ -7,51 +10,30 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
     {
         public AlienSpeciesAssessment2023Profile()
         {
-            CreateMap<FA4.NaturalOrigin, AlienSpeciesAssessment2023.NaturalOrigin>();
-            CreateMap<FA4.RedlistedNatureType, AlienSpeciesAssessment2023.RedlistedNatureType>();
-            CreateMap<FA4.SimpleReference, AlienSpeciesAssessment2023.SimpleReference>();
-            // CreateMap<FA4.RegionalRiskAssessment, FA2023.RegionalRiskAssessment>();
-            CreateMap<Source.RiskAssessment.Criterion, RiskAssessment.Criterion>();
-            CreateMap<Source.RiskAssessment.HostParasiteInteraction,
-                    RiskAssessment.HostParasiteInteraction>();
-            CreateMap<Source.RiskAssessment.Interaction, RiskAssessment.Interaction>();
-            CreateMap<Source.RiskAssessment.NaturetypeInteraction,
-                    RiskAssessment.NaturetypeInteraction>();
-            CreateMap<Source.RiskAssessment.SpeciesInteraction,
-                    RiskAssessment.SpeciesInteraction>();
-            CreateMap<Source.RiskAssessment.SpeciesNaturetypeInteraction,
-                    RiskAssessment.SpeciesNaturetypeInteraction>();
-            CreateMap<Source.RiskAssessment.SpeciesSpeciesInteraction,
-                    RiskAssessment.SpeciesSpeciesInteraction>();
+            CreateMap<FA4, AlienSpeciesAssessment2023>()
 
-            CreateMap<Source.RiskAssessment, RiskAssessment>();
+                .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.EvaluatedScientificName))
+                .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.EvaluatedScientificNameId))
+                .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.EvaluatedScientificNameAuthor))
+                .ForMember(dest => dest.ScientificNameRank, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetTaxonRank(src.EvaluatedScientificNameRank)))
+                .ForMember(dest => dest.VernacularName, opt => opt.MapFrom(src => src.EvaluatedVernacularName))
+                .ForMember(dest => dest.AlienSpeciesCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAlienSpeciesCategory(src.AlienSpeciesCategory, src.ExpertGroup)))
+                .ForMember(dest => dest.ExpertGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpertGroup(src.ExpertGroup)))
+                .ForMember(dest => dest.EstablishmentCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEstablishmentCategory(src.SpeciesEstablishmentCategory, src.SpeciesStatus)))
+                .ForMember(dest => dest.ScoreInvationPotential, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScores(src.Category, src.Criteria, "inv")))
+                .ForMember(dest => dest.ScoreEcologicalEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScores(src.Category, src.Criteria, "eco")))
+                .ForMember(dest => dest.RiskAssessmentGeographicVariationInCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarInCat(src.Category, src.RiskAssessment.PossibleLowerCategory)))
+                .ForMember(dest => dest.RiskAssessmentGeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarCause(src.Category, src.RiskAssessment.PossibleLowerCategory, src.RiskAssessment.GeographicalVariation)))
+                .ForMember(dest => dest.RiskAssessmentGeographicalVariationDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarDoc(src.Category, src.RiskAssessment.PossibleLowerCategory, src.RiskAssessment.GeographicalVariationDocumentation)))
+                .ForMember(dest => dest.RiskAssessmentClimateEffectsInvationpotential, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffects(src.Category, src.Criteria, "inv", src.RiskAssessment)))
+                .ForMember(dest => dest.RiskAssessmentClimateEffectsEcoEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffects(src.Category, src.Criteria, "eco", src.RiskAssessment)))
+                .ForMember(dest => dest.RiskAssessmentClimateEffectsDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsDoc(src.Category, src.Criteria, src.RiskAssessment, src.RiskAssessment.ClimateEffectsDocumentation)))
+                .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetSpeciesGroup(src.TaxonHierarcy)))
 
-            CreateMap<Source.CTaxon, CTaxon>();
-            CreateMap<Source.Fylkesforekomst, Fylkesforekomst>();
-            CreateMap<Source.ArtskartModel, ArtskartModel>();
-            CreateMap<Source.ArtskartWaterModel, ArtskartWaterModel>();
-            CreateMap<Source.ArtskartWaterAreaModel, ArtskartWaterAreaModel>();
-            CreateMap<FA4.CoastLineSection, AlienSpeciesAssessment2023.CoastLineSection>();
-            CreateMap<FA4.BioClimateZones, AlienSpeciesAssessment2023.BioClimateZones>();
-            CreateMap<FA4.BioClimateZonesArctic, AlienSpeciesAssessment2023.BioClimateZonesArctic>();
-            CreateMap<FA4.Habitat, AlienSpeciesAssessment2023.Habitat>();
-            CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023.PreviousAssessment>();
+                ;
 
+            CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>();
 
-            CreateMap<Source.MigrationPathway, MigrationPathway>();
-            CreateMap<Source.MigrationPathwayCode, MigrationPathwayCode>();
-            CreateMap<Source.SpreadHistory, SpreadHistory>();
-            CreateMap<Source.RedlistedNatureTypeCode, RedlistedNatureTypeCode>();
-            CreateMap<Source.RedlistedNatureTypeCodeGroup, RedlistedNatureTypeCodeGroup>();
-
-            CreateMap<Source.RegionalPresence, RegionalPresence>();
-            CreateMap<Source.RegionalPresenceWithPotential, RegionalPresenceWithPotential>();
-            CreateMap<FA4.ImpactedNatureType, AlienSpeciesAssessment2023.ImpactedNatureType>();
-            CreateMap<FA4.TimeAndPlace, AlienSpeciesAssessment2023.TimeAndPlace>();
-            CreateMap<FA4.ObservedAndEstablished, AlienSpeciesAssessment2023.ObservedAndEstablished>();
-            CreateMap<FA4.ObservedAndEstablishedInCountry, AlienSpeciesAssessment2023.ObservedAndEstablishedInCountry>();
-
-            CreateMap<FA4, AlienSpeciesAssessment2023>();
         }
     }
 }

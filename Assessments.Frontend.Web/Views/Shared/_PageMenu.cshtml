@@ -1,0 +1,50 @@
+﻿@model PageMenuViewModel
+@using Assessments.Frontend.Web.Infrastructure.Services
+@inject ArtsdatabankenApiService _artsdatabankenApiService
+
+@{
+    var menuItems = new List<KeyValuePair<string, string>>();
+    var content = await _artsdatabankenApiService.Get<ArtsdatabankenApiContent>($"Content/{Model.PageMenuContentId}");
+    if (content != null)
+    {
+        // https://database.artsdatabanken.no/cms/node/314303/edit?destination=node/314304
+        menuItems = content.References.Select(x => new KeyValuePair<string, string>(x.Heading, $"https://artsdatabanken.no{x.Url}")).ToList();
+    }
+}
+
+<div class="sidebarmenu">
+    <button class="button tertiary" onclick="expandParent(this, 'expand')">@Model.PageMenuExpandButtonText</button>
+    
+    <ul>
+        @*lenker fra cms/drupal via api*@
+        <li>
+            <a class="menuheaderlink" asp-controller="Redlist" asp-action="Index2021">
+                <h3>
+                    <span>@Model.PageMenuExpandButtonText</span>
+                    <span class="material-icons pad-top">keyboard_arrow_right</span>
+                </h3>
+            </a>
+        </li>
+        @foreach (var (key, value) in menuItems)
+        {
+            <li>
+                <a href="@value">
+                    <span>@key </span>
+                    <span class="material-icons">keyboard_arrow_right</span>
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+<script>
+    function expandParent(element, className) {
+        if (element.parentElement.classList.contains(className)) {
+            element.parentElement.classList.remove(className);
+            element.classList.remove("active")
+        } else {
+            element.parentElement.classList.add(className);
+            element.classList.add("active")
+        }
+    }
+</script>

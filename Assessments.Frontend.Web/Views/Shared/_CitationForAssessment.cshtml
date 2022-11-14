@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using Assessments.Frontend.Web.Infrastructure.Services
+
+@model CitationForAssessmentViewModel
+
+@inject ExpertCommitteeMemberService _expertCommitteeMemberService
+
+@{
+    // Authors
+    var expertCommitteeMembers = await _expertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
+    var sortedExperts = expertCommitteeMembers
+        .OrderBy(x => new List<string> { "leder", "nestleder", "medlem" }.IndexOf(x.Role.ToLowerInvariant()))
+        .ThenBy(x => x.LastName);
+
+    var formattedExperts = sortedExperts.Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList();
+    var authors = formattedExperts.JoinAnd(", ", " og ");
+
+    // Date
+    var firspublished = Helpers.getPublishedDate(Model.AssessmentYear, Model.YearPreviousAssessment, Model.FirstPublished);
+    var revisiondate = Helpers.getRevisionDate(Model.RevisionDate, firspublished);
+    var date = firspublished;
+    if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
+    {
+        date = revisiondate;
+    }
+}
+
+@if (expertCommitteeMembers.Any())
+{
+<h2>@Model.CitationHeading</h2>
+    <p class="citation">
+        @authors
+        (@date).
+        @Html.Raw(Model.AssessmentName)
+        @Model.PublicationText
+        @Context.Request.GetEncodedUrl()
+    </p>
+}

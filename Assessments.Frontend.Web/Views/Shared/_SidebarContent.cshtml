@@ -1,0 +1,32 @@
+﻿@model SideBarContentViewModel
+@{
+    string urlSafeScientificName = Model.ScientificName.Replace(" ", "%20");
+    string taxon_url = "https://artsdatabanken.no/taxon/" + urlSafeScientificName + "/" + Model.ScientificNameId;
+}
+
+<div class="sidebar_image_info">
+    <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden"/>
+    <br />
+    <a href="@taxon_url" class="link-styled">
+        Til @Helpers.fixSpeciesLevel("{art}ssiden", Model.TaxonRank)
+    </a>
+
+    <hr />
+    <partial name="/Views/Shared/_Development.cshtml" />
+    <hr />
+    <partial name="/Views/Shared/_Links.cshtml" />
+
+
+    @* // Hide taxonomic path
+        <h3>Taksonomi</h3>
+        @if (@Model.VurdertVitenskapeligNavnHierarki != null)
+        {
+            <p class="taxonomy">
+                @foreach (var taxon in @Model.VurdertVitenskapeligNavnHierarki.Split("/"))
+                {
+                    <span>@taxon > </span>
+                }
+            </p>
+        }
+    *@
+</div>

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
@@ -30,6 +32,17 @@ namespace Assessments.Shared.Helpers
         {
             var attribute = value.GetAttribute<DescriptionAttribute>();
             return attribute == null ? value.ToString() : attribute.Description;
+        }
+
+        public static string DisplayName(this Enum value)
+        {
+            var attribute = value.GetAttribute<DisplayAttribute>();
+            return attribute == null ? value.ToString() : attribute.Name;
+        }
+
+        public static IEnumerable<T> ToEnumerable<T>(this IEnumerable<string> array)
+        {
+            return array.Where(c => Enum.IsDefined(typeof(T), c)).Select(a => (T) Enum.Parse(typeof(T), a));
         }
     }
 }

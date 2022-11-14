@@ -338,9 +338,15 @@
 .darktheme .breadcrumbs li,
 .darktheme .button.tertiary,
 .darktheme .main button.tertiary,
-.darktheme .sidebarmenu li h3 {
+.darktheme .sidebarmenu li h3,
+.darktheme .sidebarmenu .redlist h3 {
     color: #f97474;
     border-color: #f97474;
+}
+
+.darktheme .sidebarmenu .alien-species h3 {
+    color: #b372bb;
+    border-color: #b372bb;
 }
 
 /* Blackish color */
@@ -400,6 +406,11 @@
 .darktheme .button.primary,
 .darktheme .main button.primary {
     border: 1px solid #f25d5d;
+}
+
+.darktheme .button.primary.alien-species {
+    border: 1px solid #b372bb;
+    background: #8f4997;
 }
 
 .darktheme .search_dropdown {

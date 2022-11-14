@@ -2,7 +2,100 @@
 
 @{
     var assessment = Model.Assessment;
-    ViewBag.Title = assessment.EvaluatedScientificName + " - Fremmedartslista 2023";
+    ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
+
+    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
+    var speciesGroupImageUrl = speciesGroup.ImageUrl;
+
+    var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
+            {
+                RenderSvalbard = false,
+                scientificNameViewModel = new ScientificNameViewModel()
+                {
+                    PopularName = assessment.VernacularName,
+                    ScientificName = assessment.ScientificName,
+                    ScientificNameAuthor = assessment.ScientificNameAuthor
+                },
+                speciesGroupViewModel = new SpeciesGroupViewModel()
+                {
+                    AssessmentYear = 2023, // TODO: create this field in assessment model
+                    ExpertCommittee = assessment.ExpertGroup,
+                    FirstPublishedDateString = "ikke publisert", // TODO: add date of publishing when we get this knowledge
+                    //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
+                    RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
+                    SpeciesGroup = assessment.SpeciesGroup,
+                    SpeciesGroupImageUrl = speciesGroupImageUrl,
+                    PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
+        }
+    };
+    var citationViewModel = new CitationForAssessmentViewModel
+    {
+        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {Helpers.getScientificNameElement(assessment.ScientificName)} for {assessment.EvaluationContext.DisplayName()}",
+        AssessmentYear = 2023, // TODO: add year when it comes into model
+        ExpertCommittee = assessment.ExpertGroup,
+        FirstPublished = Constants.RedlistSpecies2021FirstPublished,
+        CitationHeading = Constants.AlienSpecies2023CitationHeading,
+        PublicationText = $"{Constants.AlienSpecies2023PageMenuHeaderText}.  {Constants.Artsdatabanken}.",
+        RevisionDate = new DateTime(), // TODO: add if we handle revisions in this list
+        RevisionReason = string.Empty,  // TODO: add if we handle revisions in this list
+        YearPreviousAssessment = assessment.PreviousAssessments?.Select(x => x.RevisionYear).OrderByDescending(x => x).FirstOrDefault() ?? 0
+    };
+
+    var pageMenuViewModel = new PageMenuViewModel
+    {
+        PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+        PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
+        PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
+    };
+
+    var sideBarContentViewModel = new SideBarContentViewModel()
+    {
+         AssessmentYear = 2023,
+         Category = Categories.AlienSpecies2023Categories
+                                                        .Where(x => x.NameShort == assessment.Category.ToString())
+                                                        .Select(x => x.Name).FirstOrDefault(),
+         CategoryShort = assessment.Category.ToString(),
+         PreviousAssessments = assessment.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
+         {
+             Category = Categories.AlienSpecies2023Categories
+                                                        .Where(y => y.NameShort == x.MainCategory)
+                                                        .Select(y => y.Name).FirstOrDefault(),
+             CategoryShort = x.MainCategory,
+             Url = "https://artsdatabanken.no/fremmedarter/2018/N/" + x.AssessmentId, // TODO: get real url when the model is ready
+             Year = x.RevisionYear
+         }).ToArray(),
+         ScientificName = Model.Assessment.ScientificName,
+         ScientificNameId = Model.Assessment.ScientificNameId,
+         TaxonRank = Model.Assessment.ScientificName // TODO: get scientificNameRank when it exists in the model
+    };
 }
 
-<h3>@assessment.EvaluatedScientificName</h3>
+<partial name="/Views/AlienSpecies/2023/AssesmentPartials/_Breadcrumb.cshtml" />
+
+<div class="pagecontainer">
+    <partial name="/Views/Shared/_PageMenu.cshtml" model="pageMenuViewModel" />
+
+    <div class="content-placer bigmid">
+        <div class="mid-content with_sidebar">
+            <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
+            <div class="mobile_padding">
+                
+                @*    Check which ones are appropriate for alien species list
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
+                <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
+                @*<partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
+            </div>
+        </div>
+        <div class="side mobile_padding">
+            <partial name="/Views/Shared/_SidebarContent.cshtml" model="sideBarContentViewModel" />
+        </div>
+    </div>
+</div>

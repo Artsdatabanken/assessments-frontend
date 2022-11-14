@@ -1,0 +1,31 @@
+﻿@model HeaderViewModel
+@using Microsoft.Extensions.Hosting
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
+
+@{
+    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
+    {
+        PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+        PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
+        PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
+    };
+}
+
+<div class="title_header">
+    @if (Environment.IsDevelopment())
+    {
+        <a asp-controller="AlienSpecies" asp-action="Index" class="title_header alien-species" style="display:inline;">
+            <span class="full_title">@Model.Title</span>
+            <span class="short_title">@Model.TitleShort</span>
+        </a>
+    } else
+    {
+        <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
+            <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
+            <span>Fremmedartslista</span>
+            <span class="material-icons bigarrow">keyboard_arrow_right</span>
+        </a>
+    }
+
+    <partial name="/Views/Shared/_PageMenu.cshtml" model="@pageMenuViewModel" />
+</div>

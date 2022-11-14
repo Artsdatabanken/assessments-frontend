@@ -116,6 +116,9 @@ namespace Assessments.Transformation
 
             var dataFolder = configuration.GetValue<string>("FilesFolder");
 
+            if (string.IsNullOrEmpty(dataFolder))
+                throw new Exception("Innstilling for 'FilesFolder' mangler");
+
             if (!Directory.Exists(dataFolder))
                 Directory.CreateDirectory(dataFolder);
 

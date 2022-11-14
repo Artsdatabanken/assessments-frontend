@@ -2,12 +2,28 @@ using Assessments.Frontend.Web.Models;
 using static Assessments.Frontend.Web.Infrastructure.Constants;
 using System;
 using System.Linq;
-using System.Collections.Generic;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class Filter
     {
+        public class FilterItem
+        {
+            public string Description { get; set; }
+
+            public string InfoUrl { get; set; }
+
+            public string ImageUrl { get; set; }
+
+            public string Mapping { get; set; }
+
+            public string Name { get; set; }
+
+            public string NameShort { get; set; }
+
+            public FilterItem[] SubGroup { get; set; }
+        }
+
         public static string GetActiveFilters(string filterType, RL2021ViewModel Model)
         {
             switch (filterType)

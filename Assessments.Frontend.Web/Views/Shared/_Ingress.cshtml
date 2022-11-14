@@ -5,11 +5,22 @@
     var riskCategoryPreText = Model.Category == AlienSpeciesAssessment2023Category.NR ?
         $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er " :
         $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er vurdert til ";
+
+    var andOrComma = string.Empty;
+    if (Model.Environment == AlienSpeciesAssessment2023Environment.limnisk)
+        andOrComma = " og";
+    else if (Model.Environment == AlienSpeciesAssessment2023Environment.marin)
+        andOrComma = " og";
+    else if (Model.Environment == AlienSpeciesAssessment2023Environment.terrestrisk)
+        andOrComma = " og";
+    else
+        andOrComma = ",";
+
 }
 
 <div class="page_section">
     <p>
-        @Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank) er @Model.Status og @Model.Environment.
+        @Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank) er @Model.Status@andOrComma @Model.Environment.DisplayName().
     </p>
     <p>
         @riskCategoryPreText <i>@Model.Category.DisplayName()</i> - @Model.Category for @Model.ListName.

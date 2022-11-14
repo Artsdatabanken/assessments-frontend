@@ -20,12 +20,25 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static AlienSpeciesAssessment2023Environment GetEnvironmentEnum(bool limnic, bool marine, bool terrestrial)
         {
+            var value = 0;
             if (limnic)
-                return AlienSpeciesAssessment2023Environment.limnisk;
-            else if (marine)
-                return AlienSpeciesAssessment2023Environment.marin;
-            else
-                return AlienSpeciesAssessment2023Environment.terrestrisk;
+                value += 1;
+            if (marine)
+                value += 2;
+            if (terrestrial)
+                value += 4;
+
+            return value switch
+            {
+                1 => AlienSpeciesAssessment2023Environment.limnisk,
+                2 => AlienSpeciesAssessment2023Environment.marin,
+                3 => AlienSpeciesAssessment2023Environment.limMar,
+                4 => AlienSpeciesAssessment2023Environment.terrestrisk,
+                5 => AlienSpeciesAssessment2023Environment.limTer,
+                6 => AlienSpeciesAssessment2023Environment.marTer,
+                7 => AlienSpeciesAssessment2023Environment.limMarTer,
+                _ => AlienSpeciesAssessment2023Environment.unknown
+            };
         }
 
         internal static string GetExpertGroup(string expertGroup)

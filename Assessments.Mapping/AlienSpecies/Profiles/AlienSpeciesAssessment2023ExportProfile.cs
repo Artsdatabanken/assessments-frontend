@@ -11,7 +11,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
         {
             CreateMap<AlienSpeciesAssessment2023, AlienSpeciesAssessment2023Export>()
                 .ForMember(dest => dest.AlienSpeciesCategory, opt => opt.MapFrom(src => src.AlienSpeciesCategory.DisplayName()))
-                .ForPath(dest => dest.RiskAssessmentGeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetGeographicalVariation(src.RiskAssessmentGeographicalVariation)))
+                .ForMember(dest => dest.RiskAssessmentGeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetGeographicalVariation(src.RiskAssessmentGeographicalVariation)))
+                .ForMember(dest => dest.PreviousAssessmentCategory2018, opt => opt.MapFrom(src => src.PreviousAssessments.Find(x => x.RevisionYear == 2018).Category))
                 
                 ;
 

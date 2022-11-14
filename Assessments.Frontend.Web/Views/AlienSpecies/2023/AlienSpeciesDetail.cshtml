@@ -21,6 +21,7 @@
         {
             AssessmentYear = 2023, // TODO: create this field in assessment model
             ExpertCommittee = assessment.ExpertGroup,
+            FirstPublishedDateString = "ikke publisert", // TODO: add date of publishing when we get this knowledge
             //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
             RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
             SpeciesGroup = assessment.SpeciesGroup,
@@ -28,6 +29,18 @@
             SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene", // TODO: add correct link for alien species
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
+    };
+    var citationViewModel = new CitationForAssessmentViewModel
+    {
+        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {Helpers.getScientificNameElement(assessment.ScientificName)} for {assessment.EvaluationContext.DisplayName()}",
+        AssessmentYear = 2023, // TODO: add year when it comes into model
+        ExpertCommittee = assessment.ExpertGroup,
+        FirstPublished = Constants.RedlistSpecies2021FirstPublished,
+        CitationHeading = Constants.AlienSpecies2023CitationHeading,
+        PublicationText = $"{Constants.AlienSpecies2023PageMenuHeaderText}.  {Constants.Artsdatabanken}.",
+        RevisionDate = new DateTime(), // TODO: add if we handle revisions in this list
+        RevisionReason = string.Empty,  // TODO: add if we handle revisions in this list
+        YearPreviousAssessment = assessment.PreviousAssessments?.Select(x => x.RevisionYear).OrderByDescending(x => x).FirstOrDefault() ?? 0
     };
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
@@ -42,13 +55,13 @@
     };
 
     var ingressViewModel = new IngressViewModel()
-            {
-                Category = assessment.Category,
-                Environment = assessment.Environment,
-                ListName = Constants.AlienSpecies2023ListName,
-                Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
-                TaxonRank = assessment.ScientificNameRank
-            };
+    {
+        Category = assessment.Category,
+        Environment = assessment.Environment,
+        ListName = Constants.AlienSpecies2023ListName,
+        Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
+        TaxonRank = assessment.ScientificNameRank
+    };
 
     var pageMenuViewModel = new PageMenuViewModel
     {
@@ -62,6 +75,7 @@
     if (Enum.TryParse(Model.Assessment.ScientificNameRank.ToString(), out scientificNameRank))
         if (scientificNameRank != 0)
             taxonRank = scientificNameRank.DisplayName();
+
     var sideBarContentViewModel = new SideBarContentViewModel()
     {
          AssessmentYear = 2023,
@@ -104,8 +118,8 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Citation.cshtml" model="Model" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
+                <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
             </div>
         </div>
         <div class="side mobile_padding">

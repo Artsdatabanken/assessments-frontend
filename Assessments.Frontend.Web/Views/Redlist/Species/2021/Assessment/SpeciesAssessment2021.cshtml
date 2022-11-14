@@ -14,7 +14,7 @@
     }
 
     var expertCommitteeName = await _expertCommitteeMemberService.GetExpertCommitteeName(Model.ExpertCommittee, Model.AssessmentYear);
-    AssessmentPageHeaderViewModel assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
+    var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
         AssessmentArea = Model.AssessmentArea == "S" ? "Svalbard" : "Norge",
         scientificNameViewModel = new ScientificNameViewModel()
@@ -27,6 +27,7 @@
         {
             AssessmentYear = Model.AssessmentYear,
             ExpertCommittee = Model.ExpertCommittee,
+            FirstPublishedDateString = "24.11.2021",
             RevisionDate = Model.RevisionDate,
             RevisionReason = Model.RevisionReason,
             SpeciesGroup = Model.SpeciesGroup,
@@ -34,6 +35,24 @@
             SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene",
             PreviousAssessmentYear = Model.YearPreviousAssessment,
         }
+    };
+
+    var assessmentName = Model.SpeciesGroup + @ViewBag.glossary["citation"]["articlename"];
+    assessmentName = assessmentName
+        .Replace("@species", $"{Model.PopularName} {Helpers.getScientificNameElement(Model.ScientificName)}")
+        .Replace("@area", $"{ViewBag.glossary["areas"][Model.AssessmentArea]["title"]}");
+
+    var citationViewModel = new CitationForAssessmentViewModel
+    {
+        AssessmentName = assessmentName,
+        AssessmentYear = Model.AssessmentYear,
+        ExpertCommittee = Model.ExpertCommittee,
+        FirstPublished = Constants.RedlistSpecies2021FirstPublished,
+        CitationHeading = ViewBag.glossary["citation"]["title"],
+        PublicationText = ViewBag.glossary["pagetitle"]["title"] + ". " + ViewBag.glossary["adb"] +". ",
+        RevisionDate = Model.RevisionDate,
+        RevisionReason = Model.RevisionReason,
+        YearPreviousAssessment = Model.YearPreviousAssessment
     };
 
     var pageMenuViewModel = new PageMenuViewModel
@@ -141,7 +160,7 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Citation.cshtml" model="Model" />
+                <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
             </div>
         </div>

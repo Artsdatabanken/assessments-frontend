@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Rødlista 2021";
 
-    CitationViewModel citationViewModel = new CitationViewModel
+    CitationForListViewModel citationViewModel = new CitationForListViewModel
     {
         CitationString = Constants.RedlistSpecies2021CitationString
     };
@@ -50,7 +50,7 @@
                 <partial name="/Views/Redlist/Species/2021/List/partials/_Search.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/List/partials/_Filters.cshtml" />
             </form>
-            <partial name="/Views/Shared/_Citation.cshtml" model="citationViewModel" />
+            <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel" />
         </div>
     </div>
 </div>

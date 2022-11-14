@@ -7,13 +7,13 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "ukjent livsmiljø")]
         unknown,
 
-        [Display(Name = "limnisk ")]
+        [Display(Name = "limnisk")]
         limnisk,
 
-        [Display(Name = "marin ")]
+        [Display(Name = "marin")]
         marin,
 
-        [Display(Name = "terrestrisk ")]
+        [Display(Name = "terrestrisk")]
         terrestrisk,
 
         [Display(Name = "limnisk og marin")]

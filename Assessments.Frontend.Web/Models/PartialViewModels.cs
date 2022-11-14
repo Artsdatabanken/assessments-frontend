@@ -1,4 +1,4 @@
-﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
 
 namespace Assessments.Frontend.Web.Models
@@ -28,7 +28,28 @@ namespace Assessments.Frontend.Web.Models
         public string MethodUrl { get; set; }
     }
 
-    public class CitationViewModel
+    public class CitationForAssessmentViewModel
+    {
+        public string AssessmentName { get; set; }
+
+        public int AssessmentYear { get; set; }
+
+        public string ExpertCommittee { get; set; }
+
+        public string FirstPublished { get; set; }
+
+        public string CitationHeading { get; set; }
+
+        public string PublicationText { get; set; }
+
+        public DateTime RevisionDate { get; set; }
+
+        public string RevisionReason { get; set; }
+
+        public int YearPreviousAssessment { get; set; }
+    }
+
+    public class CitationForListViewModel
     {
         public string CitationString { get; set; }
     }
@@ -132,6 +153,8 @@ namespace Assessments.Frontend.Web.Models
         public int AssessmentYear { get; set; }
 
         public string ExpertCommittee { get; set; }
+
+        public string FirstPublishedDateString { get; set; }
 
         public int PreviousAssessmentYear { get; set; }
 

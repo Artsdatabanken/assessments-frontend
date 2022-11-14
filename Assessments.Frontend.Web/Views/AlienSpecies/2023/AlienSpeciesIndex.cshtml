@@ -1,7 +1,7 @@
 ﻿@model AlienSpeciesListViewModel
 
 @{
-    CitationViewModel citationViewModel = new CitationViewModel
+    CitationForListViewModel citationViewModel = new CitationForListViewModel
     {
         CitationString = Constants.AlienSpecies2023CitationString
     };
@@ -55,7 +55,7 @@
                 </form>
             </div>
 
-            <partial name="/Views/Shared/_Citation.cshtml" model="citationViewModel"/>
+            <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel"/>
         </div>
     </div>
 </div>

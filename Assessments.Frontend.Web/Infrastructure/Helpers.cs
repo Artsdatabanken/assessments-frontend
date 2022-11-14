@@ -270,11 +270,10 @@ namespace Assessments.Frontend.Web.Infrastructure
         }
 
 
-        public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment)
+        public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment, string firstPublished)
         {
-            string firspublished = "24.11.2021";
-            firspublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firspublished;
-            return firspublished;
+            firstPublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firstPublished;
+            return firstPublished;
         }
 
         public static string getRevisionDate(DateTime RevisionDate, string firspublished)
@@ -518,7 +517,11 @@ namespace Assessments.Frontend.Web.Infrastructure
             { "Form", "Form" }
         };
 
+        public const string Artsdatabanken = "Artsdatabanken";
+
         // Redlist species constants
+
+        public const string RedlistSpecies2021FirstPublished = "24.11.2021";
 
         public const int RedlistSpecies2021PageMenuContentId = 314303;
 
@@ -541,6 +544,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023PageMenuAssessmentAreaText = "områder der arten er regionalt fremmed i Norge (uten Svalbard)";
 
+        public const string AlienSpecies2023FirstPublished = "18.08.2023"; // TODO: Need publishing date
+
         public const int AlienSpecies2023PageMenuContentId = 314303; // TODO: This needs content id for alien species 2023. Using redlist species 2021 temporarily.
         // 239645 is the number to alien species list menu 2018. Use this for the innsyn.
 
@@ -553,6 +558,8 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
 
         public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
+
+        public const string AlienSpecies2023CitationHeading = "Siden siteres som:";
 
         public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Norsk fremmedartsliste 2023."; // TODO: insert correct publishing date for citation
 

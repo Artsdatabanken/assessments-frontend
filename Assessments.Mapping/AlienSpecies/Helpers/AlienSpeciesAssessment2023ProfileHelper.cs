@@ -166,7 +166,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 }
                 else
                 {
-                    // TODO: legg til 2012 når formel for utregning er på plass #658
+                    // TODO: legg til 2012 når formel for utregning er på plass #711
                     previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
                     previousAssessment.Url = "https://artsdatabanken.no/fremmedartslista2018";
                 }

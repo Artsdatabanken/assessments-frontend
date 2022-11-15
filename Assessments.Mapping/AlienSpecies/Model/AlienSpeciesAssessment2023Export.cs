@@ -80,5 +80,9 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [DisplayName("Klimaeffekter Beskrivelse")]
         [Description("Nærmere begrunnelse for påvirkning av pågående eller framtidige klimaendringer på artens delkategori på aksene")]
         public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+
+        [DisplayName("Kjent forekomstareal")]
+        [Description("Artens kjente forekomstareal i dag")]
+        public int? RiskAssessmentAOOknown { get; set; }
     }
 }

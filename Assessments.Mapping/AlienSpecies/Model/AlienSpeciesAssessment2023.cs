@@ -140,5 +140,25 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Wether the species has a lower impact category in parts of the species’ range
         /// </summary>
         public bool? RiskAssessmentGeographicVariationInCategory { get; set; }
+
+        /// <summary>
+        /// Reasons for why a species' category has changed since the last assessment. List with up to 6 elements.
+        /// </summary>
+        public List<string> ReasonForChangeOfCategory { get; set; }
+
+        /// <summary>
+        /// Wether the species' may reproduce asexually or not
+        /// </summary>
+        public bool ReproductionAsexual { get; set; }
+
+        /// <summary>
+        /// Wether the species' may reproduce sexually or not
+        /// </summary>
+        public bool ReproductionSexual { get; set; }
+
+        /// <summary>
+        /// Known size of area of occupancy (AOO). Only relevant for AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
+        /// </summary>
+        public int? RiskAssessmentAOOknown { get; set; }
     }
 }

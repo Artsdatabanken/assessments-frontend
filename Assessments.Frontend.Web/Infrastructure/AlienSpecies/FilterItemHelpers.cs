@@ -500,7 +500,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             new()
             {
                 Name = "Pattedyr",
-                NameShort = "snd",
+                NameShort = "spd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pattedyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Pattedyr.svg",
                 Description = "Mammalia"

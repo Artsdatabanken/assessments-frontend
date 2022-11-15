@@ -10,22 +10,22 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "limnisk")]
         limnisk,
 
-        [Display(Name = "marin")]
-        marin,
+        [Display(Name = "marint")]
+        marint,
 
         [Display(Name = "terrestrisk")]
         terrestrisk,
 
-        [Display(Name = "limnisk og marin")]
+        [Display(Name = "limnisk og marint")]
         limMar,
 
         [Display(Name = "limnisk og terrestrisk")]
         limTer,
 
-        [Display(Name = "marin og terrestrisk")]
+        [Display(Name = "marint og terrestrisk")]
         marTer,
 
-        [Display(Name = "limnisk, marin og terrestrisk")]
+        [Display(Name = "limnisk, marint og terrestrisk")]
         limMarTer
     }
 }

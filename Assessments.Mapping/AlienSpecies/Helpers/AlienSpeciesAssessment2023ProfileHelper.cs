@@ -31,7 +31,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return value switch
             {
                 1 => AlienSpeciesAssessment2023Environment.limnisk,
-                2 => AlienSpeciesAssessment2023Environment.marin,
+                2 => AlienSpeciesAssessment2023Environment.marint,
                 3 => AlienSpeciesAssessment2023Environment.limMar,
                 4 => AlienSpeciesAssessment2023Environment.terrestrisk,
                 5 => AlienSpeciesAssessment2023Environment.limTer,

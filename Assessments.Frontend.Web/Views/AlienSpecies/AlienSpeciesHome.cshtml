@@ -1,7 +1,4 @@
-﻿@using Microsoft.Extensions.Hosting
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
-
-@{
+﻿@{
     ViewData["Title"] = "Fremmedartslista";
 }
 
@@ -23,44 +20,26 @@
 
                 <h2>Gjeldende fremmedartsliste</h2>
 
-                @if (Environment.IsDevelopment())
-                {
-                    <p class="page_section">
-                        <!-- TODO before release: insert dates -->
-                        Gjeldende fremmedartsliste ble lansert xx.xx.xxxx, og vil være den gjeldende fremmedartslista frem til neste revisjon i 2029.
-                    </p>
-                    <p>
-                        <a asp-controller="AlienSpecies" asp-action="Index" class="button primary alien-species">
-                            @ViewData["Title"] 2023
-                            <span class="material-icons">keyboard_arrow_right</span>
-                        </a>
-                    </p>
-                } else
-                {
-                    <p class="page_section">
-                        Gjeldende fremmedartsliste ble lansert i 2018, og vil være den gjeldende fremmedartslista frem til neste revisjon i 2023.
-                    </p>
-                    <p>
-                        <a href="https://artsdatabanken.no/fremmedartslista2018" class="button secondary">
-                            <span>@ViewData["Title"] 2018</span>
-                            <span class="material-icons bigarrow">keyboard_arrow_right</span>
-                        </a>
-                    </p>
-                }
-
+                <p class="page_section">
+                    <!-- TODO before release: insert dates -->
+                    Gjeldende fremmedartsliste ble lansert xx.xx.xxxx, og vil være den gjeldende fremmedartslista frem til neste revisjon i 2029.
+                </p>
+                <p>
+                    <a asp-controller="AlienSpecies" asp-action="Index" class="button primary alien-species">
+                        @ViewData["Title"] 2023
+                        <span class="material-icons">keyboard_arrow_right</span>
+                    </a>
+                </p>
+                
                 <h2>Alle fremmedartslistene</h2>
                 <p class="page_section">
                     <ul>
-                        @if (Environment.IsDevelopment())
-                        {
-                            <li>
-                                <a asp-controller="AlienSpecies" asp-action="Index" class="button secondary">
-                                    @ViewData["Title"] 2023
-                                    <span class="material-icons">keyboard_arrow_right</span>
-                                </a>
-                            </li>
-                        }
-                        
+                        <li>
+                            <a asp-controller="AlienSpecies" asp-action="Index" class="button secondary">
+                                @ViewData["Title"] 2023
+                                <span class="material-icons">keyboard_arrow_right</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="https://artsdatabanken.no/fremmedartslista2018" class="button secondary">
                                 <span>@ViewData["Title"] 2018</span>

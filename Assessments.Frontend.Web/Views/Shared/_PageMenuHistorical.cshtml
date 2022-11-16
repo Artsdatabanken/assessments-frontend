@@ -65,7 +65,7 @@
 
     <ul>
         <li>
-            @if (Environment.IsDevelopment())
+            @if (!Environment.IsProduction())
             {
                 <a class="menuheaderlink alien-species" asp-controller="AlienSpecies" asp-action="Home">
                     <h3>
@@ -84,7 +84,7 @@
             }
         </li>
 
-        @if (Environment.IsDevelopment())
+        @if (!Environment.IsProduction())
         {
             <li>
                 <a asp-controller="AlienSpecies" asp-action="Index">

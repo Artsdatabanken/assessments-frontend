@@ -17,7 +17,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             var environment = context.HttpContext.RequestServices.GetService<IWebHostEnvironment>();
 
-            if (!environment.IsDevelopment())
+            if (environment.IsProduction())
                 context.Result = new NotFoundResult();
         }
 

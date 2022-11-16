@@ -12,7 +12,7 @@
 }
 
 <div class="title_header">
-    @if (Environment.IsDevelopment())
+    @if (!Environment.IsProduction())
     {
         <a asp-controller="AlienSpecies" asp-action="Index" class="title_header alien-species" style="display:inline;">
             <span class="full_title">@Model.Title</span>

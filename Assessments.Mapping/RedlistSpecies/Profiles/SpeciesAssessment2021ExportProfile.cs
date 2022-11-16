@@ -2,7 +2,6 @@
 using System.Linq;
 using Assessments.Shared.Helpers;
 using AutoMapper;
-using HtmlAgilityPack;
 
 namespace Assessments.Mapping.RedlistSpecies.Profiles
 {
@@ -28,9 +27,9 @@ namespace Assessments.Mapping.RedlistSpecies.Profiles
                 .ForMember(dest => dest.AssessmentYear, opt => opt.MapFrom(src => src.AssessmentYear))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.Replace("º", "°")))
                 .ForMember(dest => dest.CriteriaSummarized, opt => opt.MapFrom(src => src.CriteriaSummarized))
-                .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => StripHtml(src.ExpertStatement)))
+                .ForMember(dest => dest.ExpertStatement, opt => opt.MapFrom(src => src.ExpertStatement.StripHtml()))
                 .ForMember(dest => dest.RationaleCategoryAdjustment, opt => opt.MapFrom(src => src.ExtinctionRiskAffected == "Nei" ?
-                string.Empty : StripHtml(src.RationaleCategoryAdjustment)))
+                string.Empty : src.RationaleCategoryAdjustment.StripHtml()))
                 .ForMember(dest => dest.ExtinctionRiskAffected, opt => opt.MapFrom(src => src.ExtinctionRiskAffected))
                 .ForMember(dest => dest.PresumedExtinct, opt => opt.MapFrom(src => src.PresumedExtinct ? "Ja" : "Nei"))
                 .ForMember(dest => dest.ReasonCategoryChange, opt => opt.MapFrom(src => src.ReasonCategoryChange.Description()))
@@ -92,16 +91,6 @@ namespace Assessments.Mapping.RedlistSpecies.Profiles
             };
 
             return string.Join(";", mainHabitats.Select(GetProperDescription).ToList());
-        }
-
-        private static string StripHtml(string input)
-        {
-            if (input == null)
-                return string.Empty;
-
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(input);
-            return htmlDocument.DocumentNode.InnerText;
         }
 
         private static string ResolveRegionState(IEnumerable<SpeciesAssessment2021RegionOccurrence> regionOccurrences, string name)

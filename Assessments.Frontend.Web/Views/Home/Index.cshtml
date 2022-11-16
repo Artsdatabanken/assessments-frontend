@@ -58,9 +58,9 @@
                         </li>
 
                         <li>
-                            @if (Environment.IsDevelopment())
+                            @if (Environment.IsProduction())
                             {
-                                <a asp-controller="AlienSpecies" asp-action="Home" class="fremmedartlink">
+                                <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
                                     <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
                                     <span>Fremmedartslista</span>
                                     <span class="material-icons bigarrow">keyboard_arrow_right</span>
@@ -68,7 +68,7 @@
                             }
                             else
                             {
-                                <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
+                                <a asp-controller="AlienSpecies" asp-action="Home" class="fremmedartlink">
                                     <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
                                     <span>Fremmedartslista</span>
                                     <span class="material-icons bigarrow">keyboard_arrow_right</span>

@@ -66,4 +66,6 @@ if (!app.Environment.IsProduction()) // Disable swagger in production
 
 app.MapDefaultControllerRoute();
 
+ExportHelper.Setup();
+
 app.Run();

@@ -48,12 +48,49 @@ namespace Assessments.Shared.Helpers
 
         public static string StripHtml(this string input)
         {
-            if (input == null)
+            if (string.IsNullOrEmpty(input)) 
                 return string.Empty;
 
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(input);
+
             return htmlDocument.DocumentNode.InnerText;
+        }
+
+        public static string StripUnwantedHtml(this string input)
+        {
+            if (string.IsNullOrEmpty(input)) 
+                return string.Empty;
+
+            var document = new HtmlDocument();
+            document.LoadHtml(input);
+
+            var acceptableTags = new[] { "p", "i", "b" };
+            var nodes = new Queue<HtmlNode>(document.DocumentNode.SelectNodes("./*|./text()"));
+            
+            while (nodes.Count > 0)
+            {
+                var node = nodes.Dequeue();
+                var parentNode = node.ParentNode;
+
+                if (acceptableTags.Contains(node.Name) || node.Name == "#text")
+                    continue;
+
+                var childNodes = node.SelectNodes("./*|./text()");
+
+                if (childNodes != null)
+                {
+                    foreach (var child in childNodes)
+                    {
+                        nodes.Enqueue(child);
+                        parentNode.InsertBefore(child, node);
+                    }
+                }
+
+                parentNode.RemoveChild(node);
+            }
+
+            return document.DocumentNode.InnerHtml;
         }
     }
 }

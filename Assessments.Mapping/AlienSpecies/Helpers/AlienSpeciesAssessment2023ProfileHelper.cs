@@ -3,6 +3,7 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
@@ -130,12 +131,48 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static int GetTaxonRank(string taxonRank)
         {
-            var result = 0;
-            var isParsable = int.TryParse(taxonRank, out result);
+            var isParsable = int.TryParse(taxonRank, out var result);
             if (!isParsable && taxonRank == "Species")
                 result = 22;
 
             return result;
+        }
+
+        internal static List<AlienSpeciesAssessment2023PreviousAssessment> GetPreviousAssessments(List<AlienSpeciesAssessment2023PreviousAssessment> previousAssessments)
+        {
+            foreach (var previousAssessment in previousAssessments)
+            {
+                if (previousAssessment.RevisionYear == 2018)
+                {
+                    previousAssessment.Url = $"https://artsdatabanken.no/fremmedarter/2018/{previousAssessment.AssessmentId.Replace("FA3", string.Empty)}";
+
+                    // https://github.com/Artsdatabanken/Fremmedartsbase2023/blob/65212142a2dbb29317a0cc94bfde26688ab1bc67/Prod.Api/Helpers/ExportMapper.cs#L31-L72
+                    if (previousAssessment.MainCategory == "NotApplicable" || (previousAssessment.MainCategory == "DoorKnocker" && previousAssessment.MainSubCategory == "noRiskAssessment") || (previousAssessment.MainCategory == "RegionallyAlien" && previousAssessment.MainSubCategory == "noRiskAssessment"))
+                    {
+                        previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
+                    }
+                    else
+                    {
+                        previousAssessment.Category = previousAssessment.RiskLevel switch
+                        {
+                            0 => AlienSpeciesAssessment2023Category.NK,
+                            1 => AlienSpeciesAssessment2023Category.LO,
+                            2 => AlienSpeciesAssessment2023Category.PH,
+                            3 => AlienSpeciesAssessment2023Category.HI,
+                            4 => AlienSpeciesAssessment2023Category.SE,
+                            _ => AlienSpeciesAssessment2023Category.NR
+                        };
+                    }
+                }
+                else
+                {
+                    // TODO: legg til 2012 når formel for utregning er på plass #711
+                    previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
+                    previousAssessment.Url = "https://artsdatabanken.no/fremmedartslista2018";
+                }
+            }
+
+            return previousAssessments;
         }
     }
 }

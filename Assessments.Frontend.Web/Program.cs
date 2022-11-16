@@ -61,7 +61,7 @@ if (!Directory.Exists(cachedFilesFolder))
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
 
-if (app.Environment.IsDevelopment()) // Enable swagger in development
+if (!app.Environment.IsProduction()) // Disable swagger in production
     SwaggerSetup.Configure(app);
 
 app.MapDefaultControllerRoute();

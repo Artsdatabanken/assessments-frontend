@@ -1,10 +1,10 @@
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
-using Assessments.Mapping.AlienSpecies.Source;
+using System.Linq;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
@@ -41,6 +41,15 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return speciesStatus != "C3" ? speciesStatus : speciesEstablishmentCategory;
         }
 
+        internal static bool GetHasIndoorProduction(string indoorProductionString)
+        {
+            if (string.IsNullOrEmpty(indoorProductionString))
+                return false;
+            if (indoorProductionString.Equals("positive"))
+                return true;
+            return false;
+        }
+
         internal static int? GetScores(string category, string criteria, string axis)
         {
             if (string.IsNullOrEmpty(category) || category is "NR")
@@ -56,7 +65,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
         }
 
-        internal static bool? GetGeographicVarInCat(string category, string geographicVar) 
+        internal static bool? GetGeographicVarInCat(string category, string geographicVar)
         {
             if (category is "NR")
             {

@@ -4,6 +4,9 @@
     var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR &&
                 Model.AlienSpeciesCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
+    var showSpreadWays = (Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)) ||
+                !string.IsNullOrEmpty(Model.SpreadIntroductionFurtherInfo) || 
+                !string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo);
     // Html.Raw is used on model values that are stripped of html, except for a few tags, such as p, i and b. This is because some text needs to be formatted, and we don't know when.
 }
 
@@ -17,16 +20,58 @@
             @Html.Raw(Model.CriteriaDocumentation)
         </div>
     </div>
-</div>
 
-<div class="page_section">
     <h2>
         Ekspertenes oppsummering
     </h2>
 
+    <h3>Generelt om arten</h3>
     <div class="expert_Assessment">
         <div class="expert_text">
             @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)
+        </div>
+    </div>
+
+    <div is-visible="@(!string.IsNullOrEmpty(Model.UncertaintyStatusDescription))">
+        <h3>Usikkerhet rundt etableringsklasse</h3>
+        <div class="expert_Assessment">
+            <div class="expert_text">
+                @Html.Raw(Model.UncertaintyStatusDescription)
+            </div>
+        </div>
+    </div>
+
+    <div is-visible="@(!string.IsNullOrEmpty(Model.CriteriaDocumentationDomesticSpread))">
+        <h3>Utbredelse i Norge</h3>
+        <div class="expert_Assessment">
+            <div class="expert_text">
+                @Html.Raw(Model.CriteriaDocumentationDomesticSpread)
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h3>Spredningsmåter</h3>
+        <div class="expert_Assessment" is-visible="@Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)">
+            <div class="expert_text">
+                <p>
+                    @Html.Raw(Model.SpreadIndoorFurtherInfo)
+                </p>
+            </div>
+        </div>
+
+        <div class="expert_Assessment" is-visible="@(!string.IsNullOrEmpty(Model.SpreadIntroductionFurtherInfo))">
+            <div class="expert_text">
+                <p>
+                    @Html.Raw(Model.SpreadIntroductionFurtherInfo)
+                </p>
+            </div>
+        </div>
+
+        <div class="expert_Assessment" is-visible="@(!string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo))">
+            <div class="expert_text">
+                @Html.Raw(Model.SpreadFurtherSpreadFurtherInfo)
+            </div>
         </div>
     </div>
 </div>

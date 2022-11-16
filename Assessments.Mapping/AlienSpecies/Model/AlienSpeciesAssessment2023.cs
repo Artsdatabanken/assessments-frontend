@@ -52,6 +52,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string IsAlien { get; set; }
 
         /// <summary>
+        /// Does the species live indoors
+        /// </summary>
+        public bool HasIndoorProduction { get; set; }
+
+        /// <summary>
         /// List including category and decisive criteria from previous assessments
         /// </summary>
         public List<AlienSpeciesAssessment2023PreviousAssessment> PreviousAssessments { get; set; } = new();
@@ -102,9 +107,29 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string SpeciesStatus { get; set; }
 
         /// <summary>
+        /// Further info on how the further spread is spread further
+        /// </summary>
+        public string SpreadFurtherSpreadFurtherInfo { get; set; }
+
+        /// <summary>
+        /// Info text on how the spieces spreads indoors
+        /// </summary>
+        public string SpreadIndoorFurtherInfo { get; set; }
+
+        /// <summary>
+        /// info on how the introduces species spreads
+        /// </summary>
+        public string SpreadIntroductionFurtherInfo { get; set; }
+
+        /// <summary>
         /// Taxonomy path
         /// </summary>
         public string TaxonHierarcy { get; set; }
+
+        /// <summary>
+        /// Uncertainty around the status description
+        /// </summary>
+        public string UncertaintyStatusDescription { get; set; }
 
         /// <summary>
         /// Norwegian common names
@@ -125,6 +150,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Documentation for the given criteria
         /// </summary>
         public string RiskAssessmentCriteriaDocumentation { get; set; }
+
+        /// <summary>
+        /// Spread in Norway
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentationDomesticSpread { get; set; }
 
         /// <summary>
         /// Documentation for the given species status

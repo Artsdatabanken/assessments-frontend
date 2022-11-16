@@ -48,11 +48,26 @@ namespace Assessments.Frontend.Web.Models
     public class ExpertStatementViewModel
     {
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
         public AlienSpeciesAssessment2023Category Category { get; set; }
+
         public string CriteriaDocumentation { get; set; }
 
+        public string CriteriaDocumentationDomesticSpread { get; set; }
+
         public string CriteriaDocumentationSpeciesStatus { get; set; }
+
+        public string SpreadFurtherSpreadFurtherInfo { get; set; }
+
+        public string SpreadIntroductionFurtherInfo { get; set; }
+
+        public bool HasIndoorProduction { get; set; }
+
+        public string SpreadIndoorFurtherInfo { get; set; }
+
         public string Summary { get; set; }
+
+        public string UncertaintyStatusDescription { get; set; }
     }
 
     public class SideBarContentViewModel

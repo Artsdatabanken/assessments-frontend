@@ -49,7 +49,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Free text field used to describe uncertainty around the species' status as alien
         /// </summary>
-        public string IsAlien { get; set; }
+        public string IsAlienSpeciesDescription { get; set; }
 
         /// <summary>
         /// List including category and decisive criteria from previous assessments
@@ -157,8 +157,28 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool ReproductionSexual { get; set; }
 
         /// <summary>
-        /// Known size of area of occupancy (AOO). Only relevant for AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
+        /// Known size of area of occupancy (AOO) today. Only relevant for AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
         /// </summary>
-        public int? RiskAssessmentAOOknown { get; set; }
+        public uint? RiskAssessmentAOOknown { get; set; }
+
+        /// <summary>
+        /// Low estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
+        /// </summary>
+        public uint? RiskAssessmentAOOtotalLow { get; set; }
+
+        /// <summary>
+        /// Best estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
+        /// </summary>
+        public uint? RiskAssessmentAOOtotalBest { get; set; }
+
+        /// <summary>
+        /// High estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
+        /// </summary>
+        public uint? RiskAssessmentAOOtotalHigh { get; set; }
+
+        /// <summary>
+        /// Low estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
+        /// </summary>
+        public uint? RiskAssessmentAOOfutureLow { get; set; }
     }
 }

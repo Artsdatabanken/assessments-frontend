@@ -137,5 +137,103 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
             return result;
         }
+
+        //TODO: add Best and High in same function? Add versions for marine and terrestrial too. Use dictionary?. Add functions for AOO10yrLow, AOO10yrBest and AOO10yrHigh (these are null!). Separate between Svalbard and Fastlandet. 
+        private static Dictionary<int, int> introLowTable = new Dictionary<int, int>()
+        {
+            { 1, 1 },
+            { 5, 2 },
+            { 13, 3 },
+            { 26, 4 },
+            { 43, 5 },
+            { 65, 6 },
+            { 91, 7 },
+            { 121, 8 },
+            { 156, 9 },
+            { 195, 10 }
+        };
+
+        private static Dictionary<int, int> introHighTable = new Dictionary<int, int>()
+        {
+            { 1, 1 },
+            { 6, 2 },
+            { 15, 3 },
+            { 29, 4 },
+            { 47, 5 },
+            { 69, 6 },
+            { 96, 7 },
+            { 127, 8 },
+            { 163, 9 },
+            { 204, 10 }
+        };
+
+        private static int IntroductionNum(Dictionary<int, int> table, long? best)
+        {
+            var keys = table.Keys.Reverse();
+            var i = 0;
+            foreach (var key in keys)
+            {
+                if (best >= key)
+                {
+                    i = table[key];
+                    break;
+                }
+            }
+            return i;
+        }
+
+        private static long IntroductionsLow(RiskAssessment ra)
+        {
+            long num = IntroductionNum(introLowTable, ra.IntroductionsBest);
+            return (long)(num == 0 ? 0 : ra.IntroductionsBest - num);
+        }
+
+        private static long introductionsHigh(RiskAssessment ra)
+        {
+            long num = IntroductionNum(introHighTable, ra.IntroductionsBest);
+            return (long)(num == 0 ? 0 : ra.IntroductionsBest + num);
+        }
+
+        private static long? AOO10yr(long? occurrences1, long? introductions)
+        {
+            if (introductions.HasValue == false || occurrences1.HasValue == false)
+            {
+                return null;
+            }
+            var occ = occurrences1.Value;
+            var intr = introductions.Value;
+            long result = occ == 0 && intr == 0
+                    ? 0
+                    : occ == 0
+                        ? (long)(4 * Math.Round(0.64 + 0.36 * intr, 0))
+                        : (long)(4 * Math.Round(occ + Math.Pow(intr, ((double)occ + 9) / 10)));
+
+            return result;
+        }
+
+        private static long? AOO10yrBest(RiskAssessment ra)
+        {
+            var result = AOO10yr(ra.Occurrences1Best, ra.IntroductionsBest);
+            return result;
+        }
+
+        private static long? AOO10yrHigh(RiskAssessment ra)
+        {
+            var result = AOO10yr(ra.Occurrences1High, introductionsHigh(ra));
+            return result;
+        }
+
+        internal static ulong? GetAOOfutureLow(FA4 ass, RiskAssessment ra)
+        {
+            if (ass.Limnic && !ass.Marine && !ass.Terrestrial && ass.AssessmentConclusion != "WillNotBeRiskAssessed" && ra.Occurrences1Low.HasValue)
+            {
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(50000, (ulong)ra.AOO50yrLowInput) : Math.Min(50000, (ulong)AOO10yr(ra.Occurrences1Low, IntroductionsLow(ra)));
+            }
+            if (ass.Limnic && ass.Marine && !ass.Terrestrial && ass.AssessmentConclusion != "WillNotBeRiskAssessed" && ra.Occurrences1Low.HasValue)
+            {
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(3000000, (ulong)ra.AOO50yrLowInput) : Math.Min(3000000, (ulong)AOO10yr(ra.Occurrences1Low, IntroductionsLow(ra)));
+            }
+            return null;
+        }
     }
 }

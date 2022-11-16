@@ -29,9 +29,34 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsEcoEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffects(src.Category, src.Criteria, "eco", src.RiskAssessment)))
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsDoc(src.Category, src.Criteria, src.RiskAssessment, src.RiskAssessment.ClimateEffectsDocumentation)))
                 .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetSpeciesGroup(src.TaxonHierarcy)))
-                .ForMember(dest => dest.RiskAssessmentAOOknown, opt => { opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
+                .ForMember(dest => dest.RiskAssessmentAOOknown, opt => 
+                {
+                    opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOknownInput);
                 })
+                .ForMember(dest => dest.RiskAssessmentAOOtotalLow, opt => 
+                {
+                    opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
+                    opt.MapFrom(src => src.RiskAssessment.AOOtotalLowInput);
+                })
+                .ForMember(dest => dest.RiskAssessmentAOOtotalBest, opt => 
+                {
+                    opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
+                    opt.MapFrom(src => src.RiskAssessment.AOOtotalBestInput);
+                })
+                .ForMember(dest => dest.RiskAssessmentAOOtotalHigh, opt => 
+                {
+                    opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
+                    opt.MapFrom(src => src.RiskAssessment.AOOtotalHighInput);
+                })
+                .ForMember(dest => dest.IsAlienSpeciesDescription, opt => opt.MapFrom(src => src.IsAlien))
+                .ForMember(dest => dest.RiskAssessmentAOOfutureLow, opt =>
+                {
+                    //TODO: remove precondition when all assessments are finished (before innsynet)
+                    opt.PreCondition(src => src.EvaluationStatus == "finished");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfutureLow(src, src.RiskAssessment));
+                })
+
                 ;
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>();

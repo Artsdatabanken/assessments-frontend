@@ -83,6 +83,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Kjent forekomstareal")]
         [Description("Artens kjente forekomstareal i dag")]
-        public int? RiskAssessmentAOOknown { get; set; }
+        public uint? RiskAssessmentAOOknown { get; set; }
+
+        //TODO: skill felt mellom dørstokkarter og selvstendig reproduserende?
+        [DisplayName("Fremtidig forekomstareal lavt anslag")]
+        [Description("Artens antatte forekomstareal (lavt anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
+        public uint? RiskAssessmentAOOfutureLow { get; set; }
     }
 }

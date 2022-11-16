@@ -2,7 +2,6 @@
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
 using AutoMapper;
-using System.Collections.Generic;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
 {
@@ -11,7 +10,6 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
         public AlienSpeciesAssessment2023Profile()
         {
             CreateMap<FA4, AlienSpeciesAssessment2023>()
-
                 .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.EvaluatedScientificName))
                 .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.EvaluatedScientificNameId))
                 .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.EvaluatedScientificNameAuthor))
@@ -57,10 +55,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfutureLow(src, src.RiskAssessment));
                 })
 
+                .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
                 ;
 
-            CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>();
-
+            CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
         }
     }
 }

@@ -52,11 +52,6 @@ namespace Assessments.Frontend.Web.Models
         public string[] WaterRegions { get; set; } = Array.Empty<string>();
     }
 
-    public class AlienSpeciesDetailViewModel
-    {
-        public AlienSpeciesAssessment2023 Assessment { get; set; }
-    }
-
     public class AlienSpeciesStatistics2023
     {
         // These are temporary and taken from redlist2021. Alien species might need other statistics

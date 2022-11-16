@@ -15,7 +15,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static string GetGeographicalVariation(List<string> geoVar)
         {
-            var valueList  = new List<string>();
+            var valueList = new List<string>();
             foreach (string var in geoVar)
             {
                 valueList.Add(GetGeoVarValues[var]);

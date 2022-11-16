@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using HtmlAgilityPack;
 
 namespace Assessments.Shared.Helpers
 {
@@ -43,6 +44,16 @@ namespace Assessments.Shared.Helpers
         public static IEnumerable<T> ToEnumerable<T>(this IEnumerable<string> array)
         {
             return array.Where(c => Enum.IsDefined(typeof(T), c)).Select(a => (T) Enum.Parse(typeof(T), a));
+        }
+
+        public static string StripHtml(this string input)
+        {
+            if (input == null)
+                return string.Empty;
+
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(input);
+            return htmlDocument.DocumentNode.InnerText;
         }
     }
 }

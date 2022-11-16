@@ -1,8 +1,8 @@
 ﻿using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
+using Assessments.Shared.Helpers;
 using AutoMapper;
-using System.Collections.Generic;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
 {
@@ -29,6 +29,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsEcoEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffects(src.Category, src.Criteria, "eco", src.RiskAssessment)))
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsDoc(src.Category, src.Criteria, src.RiskAssessment, src.RiskAssessment.ClimateEffectsDocumentation)))
                 .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetSpeciesGroup(src.TaxonHierarcy)))
+                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentation.StripHtml()))
 
                 ;
 

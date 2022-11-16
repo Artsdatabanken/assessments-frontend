@@ -41,6 +41,14 @@
         YearPreviousAssessment = assessment.PreviousAssessments?.Select(x => x.RevisionYear).OrderByDescending(x => x).FirstOrDefault() ?? 0
     };
 
+    var expertStatementViewModel = new ExpertStatementViewModel
+    {
+        AlienSpeciesCategory = assessment.AlienSpeciesCategory,
+        Category = assessment.Category,
+        CriteriaDocumentation = assessment.RiskAssessmentCriteriaDocumentation,
+        Summary = assessment.RiskAssessmentGeographicalVariationDocumentation
+    };
+
     var pageMenuViewModel = new PageMenuViewModel
     {
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
@@ -70,7 +78,7 @@
     };
 }
 
-<partial name="/Views/AlienSpecies/2023/AssesmentPartials/_Breadcrumb.cshtml" />
+<partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Breadcrumb.cshtml" />
 
 <div class="pagecontainer">
     <partial name="/Views/Shared/_PageMenu.cshtml" model="pageMenuViewModel" />
@@ -83,13 +91,13 @@
                 @*    Check which ones are appropriate for alien species list
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="expertStatementViewModel" />
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
                 @*<partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
             </div>

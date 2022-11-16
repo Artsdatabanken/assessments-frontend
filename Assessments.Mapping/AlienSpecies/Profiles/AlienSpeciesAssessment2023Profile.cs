@@ -1,6 +1,7 @@
 ﻿using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
+using Assessments.Shared.Helpers;
 using AutoMapper;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
@@ -47,7 +48,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalHighInput);
                 })
-                .ForMember(dest => dest.IsAlienSpeciesDescription, opt => opt.MapFrom(src => src.IsAlien))
+                .ForMember(dest => dest.IsAlienSpeciesDescription, opt => opt.MapFrom(src => src.IsAlien.StripUnwantedHtml()))
                 .ForMember(dest => dest.RiskAssessmentAOOfutureLow, opt =>
                 {
                     //TODO: remove precondition when all assessments are finished (before innsynet)

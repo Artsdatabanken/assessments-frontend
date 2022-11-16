@@ -3,6 +3,8 @@
 @{
     var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR &&
                 Model.AlienSpeciesCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+
+    // Html.Raw is used on model values that are stripped of html, except for a few tags, such as p, i and b. This is because some text needs to be formatted, and we don't know when.
 }
 
 <div class="page_section" is-visible="@showCriteriaDocumentation">
@@ -12,7 +14,7 @@
 
     <div class="expert_Assessment">
         <div class="expert_text">
-            @Model.CriteriaDocumentation
+            @Html.Raw(Model.CriteriaDocumentation)
         </div>
     </div>
 </div>
@@ -24,7 +26,7 @@
 
     <div class="expert_Assessment">
         <div class="expert_text">
-            @Html.Raw(Model.Summary)
+            @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)
         </div>
     </div>
 </div>

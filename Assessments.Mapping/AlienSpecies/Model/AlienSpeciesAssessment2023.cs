@@ -62,11 +62,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool? ProductionSpecies { get; set; }
 
         /// <summary>
-        /// Documentation for the given criteria
-        /// </summary>
-        public string RiskAssessmentCriteriaDocumentation { get; set; }
-
-        /// <summary>
         /// When forming part of an Identification, this should be the name in lowest level taxonomic rank that can be determined
         /// </summary>
         public string ScientificName { get; set; }
@@ -125,6 +120,16 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Further information about the effects of current or future climate changes 
         /// </summary>
         public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+
+        /// <summary>
+        /// Documentation for the given criteria
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentation { get; set; }
+
+        /// <summary>
+        /// Documentation for the given species status
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentationSpeciesStatus { get; set; }
 
         /// <summary>
         /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 

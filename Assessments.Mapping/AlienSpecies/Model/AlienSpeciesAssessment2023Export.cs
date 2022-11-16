@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿
 using System.ComponentModel;
 
 namespace Assessments.Mapping.AlienSpecies.Model
@@ -80,5 +80,9 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [DisplayName("Klimaeffekter Beskrivelse")]
         [Description("Nærmere begrunnelse for påvirkning av pågående eller framtidige klimaendringer på artens delkategori på aksene")]
         public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+
+        [DisplayName("Risikokategori 2018")]
+        [Description("Endelig kategori i 2018 etter GEIAAS kategorier and kriterier")]
+        public string PreviousAssessmentCategory2018 { get; set; }
     }
 }

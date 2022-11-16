@@ -5,18 +5,25 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using Assessments.Frontend.Web.Infrastructure.Services;
-using Assessments.Mapping.AlienSpecies;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.RedlistSpecies;
+using ClosedXML.Excel;
+using ClosedXML.Graphics;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class ExportHelper
     {
+        public static void Setup()
+        {
+            // add linux fallback font
+            LoadOptions.DefaultGraphicEngine = new DefaultGraphicEngine("carlito");
+        }
+
         public static MemoryStream GenerateSpeciesAssessment2021Export(IEnumerable<SpeciesAssessment2021Export> assessments,  IEnumerable<ExpertCommitteeMember> expertCommitteeMembers, string displayUrl)
         {
             MemoryStream memoryStream;
-            using (var workbook = new ClosedXML.Excel.XLWorkbook())
+            using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.AddWorksheet("Vurderinger");
                 worksheet.Cell(1, 1).InsertTable(assessments);
@@ -78,7 +85,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public static MemoryStream GenerateAlienSpeciesAssessment2023Export(IEnumerable<AlienSpeciesAssessment2023Export> assessments,  string displayUrl)
         {
             MemoryStream memoryStream;
-            using (var workbook = new ClosedXML.Excel.XLWorkbook())
+            using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.AddWorksheet("Vurderinger");
                 worksheet.Cell(1, 1).InsertTable(assessments);

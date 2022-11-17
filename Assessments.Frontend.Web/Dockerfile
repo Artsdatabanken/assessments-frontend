@@ -3,6 +3,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 
 # Install System.Drawing native dependencies (required by ClosedXML)
 RUN apt-get update && apt-get install -y libgdiplus
+RUN apt-get install fonts-crosextra-carlito
 
 WORKDIR /app
 ENV ASPNETCORE_URLS="http://+:3001"

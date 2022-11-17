@@ -25,7 +25,30 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 "wasThoughtToBeAlien" => AlienSpeciesAssessment2023ChangedFromAlien.WasThoughtToBeAlien,
                 "wasAlienButEstablishedNow" => AlienSpeciesAssessment2023ChangedFromAlien.WasAlienButEstablishedNow,
-                _ => AlienSpeciesAssessment2023ChangedFromAlien.Unknown,
+                _ => AlienSpeciesAssessment2023ChangedFromAlien.Unknown
+            };
+        }
+
+        internal static AlienSpeciesAssessment2023Environment GetEnvironmentEnum(bool limnic, bool marine, bool terrestrial)
+        {
+            var value = 0;
+            if (limnic)
+                value += 1;
+            if (marine)
+                value += 2;
+            if (terrestrial)
+                value += 4;
+
+            return value switch
+            {
+                1 => AlienSpeciesAssessment2023Environment.Limnisk,
+                2 => AlienSpeciesAssessment2023Environment.Marint,
+                3 => AlienSpeciesAssessment2023Environment.LimMar,
+                4 => AlienSpeciesAssessment2023Environment.Terrestrisk,
+                5 => AlienSpeciesAssessment2023Environment.LimTer,
+                6 => AlienSpeciesAssessment2023Environment.MarTer,
+                7 => AlienSpeciesAssessment2023Environment.LimMarTer,
+                _ => AlienSpeciesAssessment2023Environment.Unknown
             };
         }
 
@@ -150,6 +173,10 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static int GetTaxonRank(string taxonRank)
         {
+            // 0 maps to "Ukjent" (unknown) in the view. All assessments should have a taxonomic rank, but at this time not all do.
+            // 22 through 24 corresponds to species, sub species, and variety, respectively. 
+            // These numbers might seem mysterious, but I can assure you, they are not. 
+            // The numbers are used in multiple repositories, and corresponds to the correct taxon rank, of which there are about 25. 
             var isParsable = int.TryParse(taxonRank, out var result);
             if (!isParsable && taxonRank == "Species")
                 result = 22;

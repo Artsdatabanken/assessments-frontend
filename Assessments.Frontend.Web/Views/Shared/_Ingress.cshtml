@@ -1,0 +1,27 @@
+﻿@model IngressViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums
+
+@{
+    var riskCategoryPreText = Model.Category == AlienSpeciesAssessment2023Category.NR ?
+        $"{@Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank)} er " :
+        $"{@Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank)} er vurdert til ";
+
+    var andOrComma = string.Empty;
+    if (Model.Environment == AlienSpeciesAssessment2023Environment.Limnisk)
+        andOrComma = " og";
+    else if (Model.Environment == AlienSpeciesAssessment2023Environment.Marint)
+        andOrComma = " og";
+    else if (Model.Environment == AlienSpeciesAssessment2023Environment.Terrestrisk)
+        andOrComma = " og";
+    else
+        andOrComma = ",";
+}
+
+<div class="page_section">
+    <p>
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Model.Status@andOrComma @Model.Environment.DisplayName().
+    </p>
+    <p>
+        @riskCategoryPreText <i>@Model.Category.DisplayName()</i> - @Model.Category i @Model.ListName.
+    </p>
+</div>

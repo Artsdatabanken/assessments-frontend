@@ -145,6 +145,9 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Moser")]
         Marchantiophyta,
 
+        [Display(Name = "Pattedyr")]
+        Mammalia,
+
         [Display(Name = "Nesledyr")]
         Cnidaria,
 

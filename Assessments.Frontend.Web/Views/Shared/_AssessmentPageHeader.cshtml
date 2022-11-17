@@ -2,7 +2,7 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-    var hasSvalbardStyle = Model.AssessmentArea == AlienSpeciesAssessment2023EvaluationContext.S.DisplayName() || Model.AssessmentArea == "Svalbard";
+    var hasSvalbardStyle =Model.AssessmentArea == "Svalbard";
     
     // The value "Fastlands-Norge med havområder" needs to start with lower case in this instance. Cannot use string.ToLower, as n in "Norge" still needs to be  capitalized
     var assessmentArea = Model.AssessmentArea == AlienSpeciesAssessment2023EvaluationContext.N.DisplayName() ? char.ToLower(Model.AssessmentArea[0]) + Model.AssessmentArea.Substring(1) : Model.AssessmentArea;

@@ -540,8 +540,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         // Alien species constants
 
-        public const string AlienSpecies2023ListName = "norsk fremmedartsliste 2023";
-
         public const string AlienSpecies2023PageMenuAssessmentAreaText = "områder der arten er regionalt fremmed i Norge (uten Svalbard)";
 
         public const string AlienSpecies2023FirstPublished = "18.08.2023"; // TODO: Need publishing date

@@ -7,11 +7,11 @@
         $"{@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank)} er vurdert til ";
 
     var andOrComma = string.Empty;
-    if (Model.Environment == AlienSpeciesAssessment2023Environment.limnisk)
+    if (Model.Environment == AlienSpeciesAssessment2023Environment.Limnisk)
         andOrComma = " og";
-    else if (Model.Environment == AlienSpeciesAssessment2023Environment.marint)
+    else if (Model.Environment == AlienSpeciesAssessment2023Environment.Marint)
         andOrComma = " og";
-    else if (Model.Environment == AlienSpeciesAssessment2023Environment.terrestrisk)
+    else if (Model.Environment == AlienSpeciesAssessment2023Environment.Terrestrisk)
         andOrComma = " og";
     else
         andOrComma = ",";
@@ -22,6 +22,6 @@
         @Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank) er @Model.Status@andOrComma @Model.Environment.DisplayName().
     </p>
     <p>
-        @riskCategoryPreText <i>@Model.Category.DisplayName()</i> - @Model.Category for @Model.ListName.
+        @riskCategoryPreText <i>@Model.Category.DisplayName()</i> - @Model.Category i @Model.ListName.
     </p>
 </div>

@@ -5,27 +5,27 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
     public enum AlienSpeciesAssessment2023Environment
     {
         [Display(Name = "ukjent livsmiljø")]
-        unknown,
+        Unknown,
 
         [Display(Name = "limnisk")]
-        limnisk,
+        Limnisk,
 
         [Display(Name = "marint")]
-        marint,
+        Marint,
 
         [Display(Name = "terrestrisk")]
-        terrestrisk,
+        Terrestrisk,
 
         [Display(Name = "limnisk og marint")]
-        limMar,
+        LimMar,
 
         [Display(Name = "limnisk og terrestrisk")]
-        limTer,
+        LimTer,
 
         [Display(Name = "marint og terrestrisk")]
-        marTer,
+        MarTer,
 
         [Display(Name = "limnisk, marint og terrestrisk")]
-        limMarTer
+        LimMarTer
     }
 }

@@ -30,14 +30,14 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
             return value switch
             {
-                1 => AlienSpeciesAssessment2023Environment.limnisk,
-                2 => AlienSpeciesAssessment2023Environment.marint,
-                3 => AlienSpeciesAssessment2023Environment.limMar,
-                4 => AlienSpeciesAssessment2023Environment.terrestrisk,
-                5 => AlienSpeciesAssessment2023Environment.limTer,
-                6 => AlienSpeciesAssessment2023Environment.marTer,
-                7 => AlienSpeciesAssessment2023Environment.limMarTer,
-                _ => AlienSpeciesAssessment2023Environment.unknown
+                1 => AlienSpeciesAssessment2023Environment.Limnisk,
+                2 => AlienSpeciesAssessment2023Environment.Marint,
+                3 => AlienSpeciesAssessment2023Environment.LimMar,
+                4 => AlienSpeciesAssessment2023Environment.Terrestrisk,
+                5 => AlienSpeciesAssessment2023Environment.LimTer,
+                6 => AlienSpeciesAssessment2023Environment.MarTer,
+                7 => AlienSpeciesAssessment2023Environment.LimMarTer,
+                _ => AlienSpeciesAssessment2023Environment.Unknown
             };
         }
 

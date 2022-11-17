@@ -499,6 +499,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
+                Name = "Pattedyr",
+                NameShort = "spd",
+                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pattedyr",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Pattedyr.svg",
+                Description = "Mammalia"
+            },
+            new()
+            {
                 Name = "Pigghuder",
                 NameShort = "spi",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pigghuder",

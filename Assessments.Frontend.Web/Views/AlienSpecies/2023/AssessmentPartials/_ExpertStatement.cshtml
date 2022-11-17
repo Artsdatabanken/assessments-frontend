@@ -1,12 +1,19 @@
 ﻿@model ExpertStatementViewModel
 
 @{
-    var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR &&
+    var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR ||
                 Model.AlienSpeciesCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
     var showSpreadWays = (Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)) ||
                 !string.IsNullOrEmpty(Model.SpreadIntroductionFurtherInfo) || 
                 !string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo);
+
+    var showReasoning = Model.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR ||
+                Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+
+    var showChangedAssessment = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie &&
+                Model.ChangedFromAlien != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ChangedFromAlien.Unknown;
+
     // Html.Raw is used on model values that are stripped of html, except for a few tags, such as p, i and b. This is because some text needs to be formatted, and we don't know when.
 }
 
@@ -25,7 +32,7 @@
         Ekspertenes oppsummering
     </h2>
 
-    <h3>Generelt om arten</h3>
+    <h3>Generelt om @Helpers.fixSpeciesLevel("{art}en", Model.TaxonRank.DisplayName())</h3>
     <div class="expert_Assessment">
         <div class="expert_text">
             @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)
@@ -71,6 +78,39 @@
         <div class="expert_Assessment" is-visible="@(!string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo))">
             <div class="expert_text">
                 @Html.Raw(Model.SpreadFurtherSpreadFurtherInfo)
+            </div>
+        </div>
+    </div>
+
+    <div is-visible="@(!string.IsNullOrEmpty(Model.CriteriaDocumentationInvationPotential))">
+        <h3>Invasjonspotensial</h3>
+        <div class="expert_Assessment">
+            <div class="expert_text">
+                @Html.Raw(Model.CriteriaDocumentationInvationPotential)
+            </div>
+        </div>
+    </div>
+
+    <div is-visible="@(!string.IsNullOrEmpty(Model.CriteriaDocumentationEcoEffect))">
+        <h3>Økologisk effekt</h3>
+        <div class="expert_Assessment">
+            <div class="expert_text">
+                @Html.Raw(Model.CriteriaDocumentationEcoEffect)
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page_section" is-visible="@showReasoning">
+    <h2>
+        Begrunnelse
+    </h2>
+
+    <div is-visible="@showChangedAssessment">
+        <h3>Økologisk effekt</h3>
+        <div class="expert_Assessment">
+            <div class="expert_text">
+                @Html.Raw(Model.ChangedFromAlien.DisplayName())
             </div>
         </div>
     </div>

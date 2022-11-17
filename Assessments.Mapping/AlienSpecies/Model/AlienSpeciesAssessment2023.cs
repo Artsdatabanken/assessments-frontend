@@ -52,6 +52,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string IsAlien { get; set; }
 
         /// <summary>
+        /// The taxon was thought to be alien or is no longer alien, or null
+        /// </summary>
+        public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
+
+        /// <summary>
         /// Does the species live indoors
         /// </summary>
         public bool HasIndoorProduction { get; set; }
@@ -155,6 +160,16 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Spread in Norway
         /// </summary>
         public string RiskAssessmentCriteriaDocumentationDomesticSpread { get; set; }
+
+        /// <summary>
+        /// Documents the criteria for ecological effect
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentationEcoEffect { get; set; }
+
+        /// <summary>
+        /// Documents the criteria for invation potential
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentationInvationPotential { get; set; }
 
         /// <summary>
         /// Documentation for the given species status

@@ -19,6 +19,16 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return alienSpeciesCategory;
         }
 
+        internal static AlienSpeciesAssessment2023ChangedFromAlien GetAlienSpeciesAssessment2023Changed(string changedFrom)
+        {
+            return changedFrom switch
+            {
+                "wasThoughtToBeAlien" => AlienSpeciesAssessment2023ChangedFromAlien.WasThoughtToBeAlien,
+                "wasAlienButEstablishedNow" => AlienSpeciesAssessment2023ChangedFromAlien.WasAlienButEstablishedNow,
+                _ => AlienSpeciesAssessment2023ChangedFromAlien.Unknown,
+            };
+        }
+
         internal static string GetExpertGroup(string expertGroup)
         {
             if (expertGroup.Contains("(Svalbard)"))

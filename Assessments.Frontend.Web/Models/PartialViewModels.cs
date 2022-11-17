@@ -51,9 +51,15 @@ namespace Assessments.Frontend.Web.Models
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
+        public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
+
         public string CriteriaDocumentation { get; set; }
 
         public string CriteriaDocumentationDomesticSpread { get; set; }
+
+        public string CriteriaDocumentationEcoEffect { get; set; }
+
+        public string CriteriaDocumentationInvationPotential { get; set; }
 
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 
@@ -66,6 +72,8 @@ namespace Assessments.Frontend.Web.Models
         public string SpreadIndoorFurtherInfo { get; set; }
 
         public string Summary { get; set; }
+
+        public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
 
         public string UncertaintyStatusDescription { get; set; }
     }

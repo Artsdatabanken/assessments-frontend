@@ -10,7 +10,6 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
         public AlienSpeciesAssessment2023Profile()
         {
             CreateMap<FA4, AlienSpeciesAssessment2023>()
-
                 .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.EvaluatedScientificName))
                 .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.EvaluatedScientificNameId))
                 .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.EvaluatedScientificNameAuthor))
@@ -30,10 +29,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetSpeciesGroup(src.TaxonHierarcy)))
                 .ForMember(dest => dest.Environment, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEnvironmentEnum(src.Limnic, src.Marine, src.Terrestrial)))
 
+                .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
                 ;
 
-            CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>();
-
+            CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
         }
     }
 }

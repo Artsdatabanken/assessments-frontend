@@ -39,7 +39,7 @@
         CitationHeading = Constants.AlienSpecies2023CitationHeading,
         PublicationText = $"{Constants.AlienSpecies2023PageMenuHeaderText}.  {Constants.Artsdatabanken}.",
         RevisionDate = new DateTime(), // TODO: add if we handle revisions in this list
-        RevisionReason = string.Empty,  // TODO: add if we handle revisions in this list
+        RevisionReason = string.Empty, // TODO: add if we handle revisions in this list
         YearPreviousAssessment = assessment.PreviousAssessments?.Select(x => x.RevisionYear).OrderByDescending(x => x).FirstOrDefault() ?? 0
     };
 
@@ -69,7 +69,7 @@
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
     };
-
+    
     TaxonRank.TaxonRankEnum scientificNameRank;
     var taxonRank = "Ukjent";
     if (Enum.TryParse(Model.Assessment.ScientificNameRank.ToString(), out scientificNameRank))
@@ -109,8 +109,7 @@
             <div class="mobile_padding">
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
-                @*
-                    Check which ones are appropriate for alien species list
+                @*    Check which ones are appropriate for alien species list
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
@@ -123,7 +122,7 @@
             </div>
         </div>
         <div class="side mobile_padding">
-            <partial name="/Views/Shared/_SidebarContent.cshtml" model="sideBarContentViewModel" />
+            <partial name="/Views/Shared/_SidebarContent.cshtml" model="Model.SideBarContentViewModel" />
         </div>
     </div>
 </div>

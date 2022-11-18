@@ -225,7 +225,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return (long)(num == 0 ? 0 : ra.IntroductionsBest - num);
         }
 
-        private static long introductionsHigh(RiskAssessment ra)
+        private static long IntroductionsHigh(RiskAssessment ra)
         {
             long num = IntroductionNum(introHighTable, ra.IntroductionsBest);
             return (long)(num == 0 ? 0 : ra.IntroductionsBest + num);
@@ -248,37 +248,76 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return result;
         }
 
-        private static long? AOO10yrBest(RiskAssessment ra)
+        internal static ulong? GetAOOfuture(FA4 ass, RiskAssessment ra, string estimateQuantile)
         {
-            var result = AOO10yr(ra.Occurrences1Best, ra.IntroductionsBest);
-            return result;
-        }
-
-        private static long? AOO10yrHigh(RiskAssessment ra)
-        {
-            var result = AOO10yr(ra.Occurrences1High, introductionsHigh(ra));
-            return result;
-        }
-
-        internal static ulong? GetAOOfutureLow(FA4 ass, RiskAssessment ra)
-        {
-            //TODO: use ra.Occurrences1Low directly in function when all assessments are ready before innsynet (should not be any null for doorknockers at that point..)
-            var occurrences1Low = ra.Occurrences1Low.HasValue ? ra.Occurrences1Low : 0;
-            if (ass.Limnic && !ass.Marine && !ass.Terrestrial && ass.AssessmentConclusion != "WillNotBeRiskAssessed") //limnic species
+            if (ass.AssessmentConclusion == "WillNotBeRiskAssessed")
             {
-                if (ass.EvaluationContext is "N")
-                {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(22000, (ulong)ra.AOO50yrLowInput) : Math.Min(22000, (ulong)AOO10yr(occurrences1Low, IntroductionsLow(ra))); //ra.Occurrences1Low.HasValue? (ulong)AOO10yr(ra.Occurrences1Low, IntroductionsLow(ra)) : 0
-                }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(500, (ulong)ra.AOO50yrLowInput) : Math.Min(500, (ulong)AOO10yr(occurrences1Low, IntroductionsLow(ra)));
+                return null;
             }
-            if (ass.Limnic && ass.Marine && !ass.Terrestrial && ass.AssessmentConclusion != "WillNotBeRiskAssessed") //limnic and marine species
+            //TODO: use ra.Occurrences1Low without asking for HasValue when all assessments are ready before innsynet (should not be any null for doorknockers at that point..)
+            long? AOO50yr = estimateQuantile != "low" ? estimateQuantile == "best" ? ra.AOO50yrBestInput : ra.AOO50yrHighInput : ra.AOO50yrLowInput;
+            long ? occur1 = estimateQuantile == "low" ? ra.Occurrences1Low.HasValue ? ra.Occurrences1Low : 0
+                : estimateQuantile == "best" ? ra.Occurrences1Best.HasValue ? ra.Occurrences1Best : 0
+                : ra.Occurrences1High.HasValue ? ra.Occurrences1High : 0;
+            var intro  = estimateQuantile != "low" ? estimateQuantile == "best" ? ra.IntroductionsBest.HasValue ? ra.IntroductionsBest : 0 
+                : IntroductionsHigh(ra) 
+                : IntroductionsLow(ra);
+
+            if (ass.Limnic && !ass.Marine && !ass.Terrestrial) //limnic species
             {
                 if (ass.EvaluationContext is "N")
                 {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(956000, (ulong)ra.AOO50yrLowInput) : Math.Min(956000, (ulong)AOO10yr(occurrences1Low, IntroductionsLow(ra)));
+                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(22000, (ulong)AOO50yr) : Math.Min(22000, (ulong)AOO10yr(occur1, intro));
                 }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099500, (ulong)ra.AOO50yrLowInput) : Math.Min(1099500, (ulong)AOO10yr(occurrences1Low, IntroductionsLow(ra)));
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(500, (ulong)AOO50yr) : Math.Min(500, (ulong)AOO10yr(occur1, intro));
+            }
+            if (ass.Limnic && ass.Marine && !ass.Terrestrial) //limnic and marine species
+            {
+                if (ass.EvaluationContext is "N")
+                {
+                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(956000, (ulong)AOO50yr) : Math.Min(956000, (ulong)AOO10yr(occur1, intro));
+                }
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099500, (ulong)AOO50yr) : Math.Min(1099500, (ulong)AOO10yr(occur1, intro));
+            }
+            if (ass.Limnic && !ass.Marine && ass.Terrestrial) //limnic and terrestrial species
+            {
+                if (ass.EvaluationContext is "N")
+                {
+                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(332000, (ulong)AOO50yr) : Math.Min(332000, (ulong)AOO10yr(occur1, intro));
+                }
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(24500, (ulong)AOO50yr) : Math.Min(24500, (ulong)AOO10yr(occur1, intro));
+            }
+            if (!ass.Limnic && ass.Marine && !ass.Terrestrial) //marine species
+            {
+                if (ass.EvaluationContext is "N")
+                {
+                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(934000, (ulong)AOO50yr) : Math.Min(934000, (ulong)AOO10yr(occur1, intro));
+                }
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099000, (ulong)AOO50yr) : Math.Min(1099000, (ulong)AOO10yr(occur1, intro));
+            }
+            if (!ass.Limnic && ass.Marine && ass.Terrestrial) //marine and terrestrial species
+            {
+                if (ass.EvaluationContext is "N")
+                {
+                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1244000, (ulong)AOO50yr) : Math.Min(1244000, (ulong)AOO10yr(occur1, intro));
+                }
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1123000, (ulong)AOO50yr) : Math.Min(1123000, (ulong)AOO10yr(occur1, intro));
+            }
+            if (!ass.Limnic && !ass.Marine && ass.Terrestrial) //terrestrial species
+            {
+                if (ass.EvaluationContext is "N")
+                {
+                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(310000, (ulong)AOO50yr) : Math.Min(310000, (ulong)AOO10yr(occur1, intro));
+                }
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(24000, (ulong)AOO50yr) : Math.Min(24000, (ulong)AOO10yr(occur1, intro));
+            }
+            if (ass.Limnic && ass.Marine && ass.Terrestrial) //limnic, marine and terrestrial species
+            {
+                if (ass.EvaluationContext is "N")
+                {
+                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1266000, (ulong)AOO50yr) : Math.Min(1266000, (ulong)AOO10yr(occur1, intro));
+                }
+                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1123500, (ulong)AOO50yr) : Math.Min(1123500, (ulong)AOO10yr(occur1, intro));
             }
             return null;
         }

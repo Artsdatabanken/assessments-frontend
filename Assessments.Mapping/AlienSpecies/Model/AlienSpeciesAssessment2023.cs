@@ -180,5 +180,15 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Low estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
         /// </summary>
         public uint? RiskAssessmentAOOfutureLow { get; set; }
+
+        /// <summary>
+        /// Best estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
+        /// </summary>
+        public uint? RiskAssessmentAOOfutureBest { get; set; }
+
+        /// <summary>
+        /// High estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
+        /// </summary>
+        public uint? RiskAssessmentAOOfutureHigh { get; set; }
     }
 }

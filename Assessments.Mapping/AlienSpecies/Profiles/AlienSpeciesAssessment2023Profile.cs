@@ -53,8 +53,21 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 {
                     //TODO: remove precondition when all assessments are finished (before innsynet)
                     opt.PreCondition(src => src.EvaluationStatus == "finished");
-                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfutureLow(src, src.RiskAssessment));
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "low"));
                 })
+                 .ForMember(dest => dest.RiskAssessmentAOOfutureBest, opt =>
+                 {
+                     //TODO: remove precondition when all assessments are finished (before innsynet)
+                     opt.PreCondition(src => src.EvaluationStatus == "finished");
+                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "best"));
+                 })
+
+                 .ForMember(dest => dest.RiskAssessmentAOOfutureHigh, opt =>
+                 {
+                     //TODO: remove precondition when all assessments are finished (before innsynet)
+                     opt.PreCondition(src => src.EvaluationStatus == "finished");
+                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "high"));
+                 })
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
                 ;

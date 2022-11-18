@@ -1,10 +1,10 @@
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
-using Assessments.Mapping.AlienSpecies.Source;
+using System.Linq;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
@@ -17,6 +17,29 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return "AlienSpecie";
             }
             return alienSpeciesCategory;
+        }
+
+        internal static AlienSpeciesAssessment2023Environment GetEnvironmentEnum(bool limnic, bool marine, bool terrestrial)
+        {
+            var value = 0;
+            if (limnic)
+                value += 1;
+            if (marine)
+                value += 2;
+            if (terrestrial)
+                value += 4;
+
+            return value switch
+            {
+                1 => AlienSpeciesAssessment2023Environment.Limnisk,
+                2 => AlienSpeciesAssessment2023Environment.Marint,
+                3 => AlienSpeciesAssessment2023Environment.LimMar,
+                4 => AlienSpeciesAssessment2023Environment.Terrestrisk,
+                5 => AlienSpeciesAssessment2023Environment.LimTer,
+                6 => AlienSpeciesAssessment2023Environment.MarTer,
+                7 => AlienSpeciesAssessment2023Environment.LimMarTer,
+                _ => AlienSpeciesAssessment2023Environment.Unknown
+            };
         }
 
         internal static string GetExpertGroup(string expertGroup)
@@ -56,7 +79,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
         }
 
-        internal static bool? GetGeographicVarInCat(string category, string geographicVar) 
+        internal static bool? GetGeographicVarInCat(string category, string geographicVar)
         {
             if (category is "NR")
             {
@@ -131,6 +154,10 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static int GetTaxonRank(string taxonRank)
         {
+            // 0 maps to "Ukjent" (unknown) in the view. All assessments should have a taxonomic rank, but at this time not all do.
+            // 22 through 24 corresponds to species, sub species, and variety, respectively. 
+            // These numbers might seem mysterious, but I can assure you, they are not. 
+            // The numbers are used in multiple repositories, and corresponds to the correct taxon rank, of which there are about 25. 
             var isParsable = int.TryParse(taxonRank, out var result);
             if (!isParsable && taxonRank == "Species")
                 result = 22;

@@ -206,6 +206,10 @@
     background: #9ba963;
 }
 
+.NR {
+    background: #d1d3d4;
+}
+
 .RE ,
 .CR ,
 .EN ,
@@ -223,7 +227,8 @@
 }
 
 .NA,
-.NE {
+.NE,
+.NR {
     color: #1c1c1c;
 }
 

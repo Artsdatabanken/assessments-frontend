@@ -1,4 +1,5 @@
 ﻿@model AlienSpeciesDetailViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
     var assessment = Model.Assessment;
@@ -9,7 +10,7 @@
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
-        RenderSvalbard = false,
+        AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
         scientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = assessment.VernacularName,
@@ -25,6 +26,7 @@
             RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
             SpeciesGroup = assessment.SpeciesGroup,
             SpeciesGroupImageUrl = speciesGroupImageUrl,
+            SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene", // TODO: add correct link for alien species
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
     };
@@ -41,11 +43,58 @@
         YearPreviousAssessment = assessment.PreviousAssessments?.Select(x => x.RevisionYear).OrderByDescending(x => x).FirstOrDefault() ?? 0
     };
 
+    var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
+    {
+        CategoryShort = assessment.Category.ToString(),
+        CategoryBar = Enum.GetValues<AlienSpeciesAssessment2023Category>().Select(x => new CategoryBarListElement()
+        {
+            Name = x.DisplayName(),
+            NameShort = x.ToString()
+        }).Reverse().ToArray(),
+        MethodUrl = "" //TODO: add url to the correct method, redlist species has https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316483
+    };
+
+    var ingressViewModel = new IngressViewModel()
+    {
+        Category = assessment.Category,
+        Environment = assessment.Environment,
+        ListName = Constants.AlienSpecies2023PageMenuHeaderText,
+        Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
+        TaxonRank = assessment.ScientificNameRank
+    };
+
     var pageMenuViewModel = new PageMenuViewModel
     {
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
+    };
+    
+    TaxonRank.TaxonRankEnum scientificNameRank;
+    var taxonRank = "Ukjent";
+    if (Enum.TryParse(Model.Assessment.ScientificNameRank.ToString(), out scientificNameRank))
+        if (scientificNameRank != 0)
+            taxonRank = scientificNameRank.DisplayName();
+
+    var sideBarContentViewModel = new SideBarContentViewModel()
+    {
+         AssessmentYear = 2023,
+         Category = Categories.AlienSpecies2023Categories
+                                                        .Where(x => x.NameShort == assessment.Category.ToString())
+                                                        .Select(x => x.Name).FirstOrDefault(),
+         CategoryShort = assessment.Category.ToString(),
+         PreviousAssessments = assessment.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
+         {
+             Category = Categories.AlienSpecies2023Categories
+                                                        .Where(y => y.NameShort == x.MainCategory)
+                                                        .Select(y => y.Name).FirstOrDefault(),
+             CategoryShort = x.MainCategory,
+             Url = "https://artsdatabanken.no/fremmedarter/2018/N/" + x.AssessmentId, // TODO: get real url when the model is ready
+             Year = x.RevisionYear
+         }).ToArray(),
+         ScientificName = Model.Assessment.ScientificName,
+         ScientificNameId = Model.Assessment.ScientificNameId,
+         TaxonRank = taxonRank
     };
 }
 
@@ -58,19 +107,18 @@
         <div class="mid-content with_sidebar">
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
-
+                <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
+                <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 @*    Check which ones are appropriate for alien species list
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
-                @*<partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
             </div>
         </div>
         <div class="side mobile_padding">

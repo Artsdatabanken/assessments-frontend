@@ -287,27 +287,40 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string fixSpeciesLevel(string replacestring, string rang)
         {
-            if (rang == "SubSpecies" || rang == "Variety")
+            var subSpecies = "Underart";
+            var species = "Art";
+            var variety = "Varietet";
+
+            if (rang == "SubSpecies" || rang == subSpecies)
             {
-                if (rang == "SubSpecies")
-                {
-                    replacestring = replacestring.Replace("{art}", "underart");
-                    replacestring = replacestring.Replace("{Art}", "Underart");
-                }
-                else if (rang == "Variety")
-                {
-                    replacestring = replacestring.Replace("{art}", "varietet");
-                    replacestring = replacestring.Replace("{Art}", "Varietet");
-                }
+                replacestring = replacestring.Replace("{art}", subSpecies.ToLower());
+                replacestring = replacestring.Replace("{Art}", subSpecies);
+            }
+            else if (rang == "Variety" || rang == variety)
+            {
+                replacestring = replacestring.Replace("{art}", variety.ToLower());
+                replacestring = replacestring.Replace("{Art}", variety);
             }
             else
             {
-                replacestring = replacestring.Replace("{art}", "art");
-                replacestring = replacestring.Replace("{Art}", "Art");
+                replacestring = replacestring.Replace("{art}", species.ToLower());
+                replacestring = replacestring.Replace("{Art}", species);
             }
             return replacestring;
         }
+        public static string FixSpeciesLevel(string replaceString, int rank)
+        {
+            var stringRank = rank switch
+            {
+                22 => "Art",
+                23 => "Underart",
+                24 => "Varietet",
+                _ => "Art"
+            };
+            return Helpers.fixSpeciesLevel(replaceString, stringRank);
+        }
     }
+
 
     public static class Constants
     {
@@ -526,6 +539,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             " Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
 
         // Alien species constants
+
+        public const string AlienSpecies2023PageMenuAssessmentAreaText = "områder der arten er regionalt fremmed i Norge (uten Svalbard)";
 
         public const string AlienSpecies2023FirstPublished = "18.08.2023"; // TODO: Need publishing date
 

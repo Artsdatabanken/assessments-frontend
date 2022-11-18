@@ -1,14 +1,31 @@
-﻿using System;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
+using System;
 
 namespace Assessments.Frontend.Web.Models
 {
     public class AssessmentPageHeaderViewModel
     {
-        public bool RenderSvalbard { get; set; }
+        public string AssessmentArea { get; set; }
 
         public ScientificNameViewModel scientificNameViewModel { get; set; }
 
         public SpeciesGroupViewModel speciesGroupViewModel { get; set; }
+    }
+
+    public class CategoryBarListElement
+    {
+        public string Name { get; set; }
+
+        public string NameShort { get; set; }
+    }
+
+    public class CategoryDescriptionViewModel
+    {
+        public string CategoryShort { get; set; }
+
+        public CategoryBarListElement[] CategoryBar { get; set; }
+
+        public string MethodUrl { get; set; }
     }
 
     public class CitationForAssessmentViewModel
@@ -42,6 +59,19 @@ namespace Assessments.Frontend.Web.Models
         public string View { get; set; }
 
         public int ItemCount { get; set; }
+    }
+
+    public class IngressViewModel
+    {
+        public AlienSpeciesAssessment2023Environment Environment { get; set; }
+
+        public AlienSpeciesAssessment2023Category Category { get; set; }
+
+        public string ListName { get; set; }
+
+        public string Status { get; set; }
+
+        public int TaxonRank { get; set; }
     }
 
     public class SideBarContentViewModel
@@ -135,5 +165,7 @@ namespace Assessments.Frontend.Web.Models
         public string SpeciesGroup { get; set; }
 
         public string SpeciesGroupImageUrl { get; set; }
+
+        public string SpeciesGroupInfoUrl { get; set; }
     }
 }

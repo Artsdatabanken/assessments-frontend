@@ -1,0 +1,29 @@
+﻿@model CategoryDescriptionViewModel
+
+@{
+    string GetActiveElement(string currentCaterogy)
+    {
+        if (Model.CategoryShort == currentCaterogy)
+            return "active";
+        return "notactive";
+    }
+}
+
+<div class="page_section">
+    <div class="page_section">
+        <ul class="category_displayer">
+                @foreach (var category in Model.CategoryBar)
+                {
+                    <li class="@GetActiveElement(category.NameShort)">
+                        <div class="category_item  @category.NameShort">
+                                <span>@category.NameShort</span>
+                        </div>
+                        <span class="tag">@category.Name</span>
+                    </li>
+                }
+        </ul>
+    </div>
+    <a href="@Model.MethodUrl" class="link-styled">
+        Alt om kategoriskalaen
+    </a>
+</div>

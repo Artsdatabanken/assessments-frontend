@@ -37,6 +37,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         /// <summary>
+        /// Tha taxon is assessed as living in either a limnic, marine, or terrestrial enviroment
+        /// </summary>
+        public AlienSpeciesAssessment2023Environment Environment { get; set; }
+
+        /// <summary>
         /// Name of ekspert committee that conducted the assessments 
         /// </summary>
         public string ExpertGroup { get; set; }

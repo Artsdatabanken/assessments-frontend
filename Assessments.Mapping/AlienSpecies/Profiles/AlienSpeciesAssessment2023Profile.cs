@@ -50,7 +50,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalHighInput);
                 })
-                .ForMember(dest => dest.IsAlienSpeciesDescription, opt => opt.MapFrom(src => src.IsAlien.StripUnwantedHtml()))
+                .ForMember(dest => dest.AlienSpeciesDescription, opt => opt.MapFrom(src => src.IsAlien.StripUnwantedHtml()))
                 .ForMember(dest => dest.RiskAssessmentAOOfutureLow, opt =>
                 {
                     //TODO: remove precondition when all assessments are finished (before innsynet)
@@ -70,6 +70,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                      opt.PreCondition(src => src.EvaluationStatus == "finished");
                      opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "high"));
                  })
+                 .ForMember(dest => dest.CurrentPresenceComment, opt => opt.MapFrom(src => src.CurrentPresenceComment.StripUnwantedHtml()))
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
                 ;

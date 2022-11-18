@@ -37,7 +37,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         /// <summary>
-        /// Tha taxon is assessed as living in either a limnic, marine, or terrestrial enviroment
+        /// Tha taxon is assessed as living in a limnic, marine, and/or terrestrial enviroment
         /// </summary>
         public AlienSpeciesAssessment2023Environment Environment { get; set; }
 
@@ -54,7 +54,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Free text field used to describe uncertainty around the species' status as alien
         /// </summary>
-        public string IsAlienSpeciesDescription { get; set; }
+        public string AlienSpeciesDescription { get; set; }
 
         /// <summary>
         /// List including category and decisive criteria from previous assessments

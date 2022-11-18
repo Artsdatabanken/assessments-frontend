@@ -22,9 +22,19 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         /// <summary>
+        /// Explanation for a change in the assessment
+        /// </summary>
+        public string ChangedAssessment { get; set; }
+
+        /// <summary>
         /// Decisive criteria according to GEIAAS method
         /// </summary>
         public string Criteria { get; set; }
+
+        /// <summary>
+        /// Lets see wht this is
+        /// </summary>
+        public string ConnectedToHigherLowerTaxonDescription { get; set; }
 
         /// <summary>
         /// Establishment category in Norway today. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are locally self-sustaining or strongly expanding
@@ -140,6 +150,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Uncertainty around the status description
         /// </summary>
         public string UncertaintyStatusDescription { get; set; }
+
+        /// <summary>
+        /// Description of the uncertainty of time of establishment
+        /// </summary>
+        public string UncertaintyEstablishmentTimeDescription { get; set; }
 
         /// <summary>
         /// Norwegian common names

@@ -47,7 +47,10 @@
     var expertStatementViewModel = new ExpertStatementViewModel
     {
         AlienSpeciesCategory = assessment.AlienSpeciesCategory,
+        AlienStatusExplanation = assessment.IsAlien,
         Category = assessment.Category,
+        ChangedAssessment = assessment.ChangedAssessment,
+        ConnectedToHigherLowerTaxonDescription = assessment.ConnectedToHigherLowerTaxonDescription,
         CriteriaDocumentation = assessment.RiskAssessmentCriteriaDocumentation,
         CriteriaDocumentationDomesticSpread = assessment.RiskAssessmentCriteriaDocumentationDomesticSpread,
         CriteriaDocumentationEcoEffect = assessment.RiskAssessmentCriteriaDocumentationEcoEffect,
@@ -60,6 +63,7 @@
         SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
         Summary = assessment.RiskAssessmentGeographicalVariationDocumentation,
         TaxonRank = assessment.ScientificNameRank,
+        UncertaintyEstablishmentTimeDescription = assessment.UncertaintyEstablishmentTimeDescription,
         UncertaintyStatusDescription = assessment.UncertaintyStatusDescription
     };
 

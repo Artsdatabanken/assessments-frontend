@@ -69,6 +69,12 @@ namespace Assessments.Frontend.Web.Models
 
         public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
 
+        public string AlienStatusExplanation { get; set; }
+
+        public string ChangedAssessment { get; set; }
+
+        public string ConnectedToHigherLowerTaxonDescription { get; set; }
+
         public string CriteriaDocumentation { get; set; }
 
         public string CriteriaDocumentationDomesticSpread { get; set; }
@@ -79,11 +85,11 @@ namespace Assessments.Frontend.Web.Models
 
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 
+        public bool HasIndoorProduction { get; set; }
+
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 
         public string SpreadIntroductionFurtherInfo { get; set; }
-
-        public bool HasIndoorProduction { get; set; }
 
         public string SpreadIndoorFurtherInfo { get; set; }
 
@@ -92,6 +98,8 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
 
         public string UncertaintyStatusDescription { get; set; }
+
+        public string UncertaintyEstablishmentTimeDescription { get; set; }
     }
 
     public class IngressViewModel

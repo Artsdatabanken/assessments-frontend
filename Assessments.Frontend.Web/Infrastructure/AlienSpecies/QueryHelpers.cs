@@ -1,9 +1,9 @@
-﻿using Assessments.Frontend.Web.Models;
+﻿using System;
+using System.Linq;
+using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
-using System;
-using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -48,20 +48,25 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         private static IQueryable<AlienSpeciesAssessment2023> ApplyCategoryChange(string[] changes, IQueryable<AlienSpeciesAssessment2023> query)
         {
             IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+            var changedCriteria = "changedCriteria";
+            var changedCriteriaInterpretation = "changedCriteriaInterpretation";
+            var changedStatus = "changedStatus";
+            var newInformation = "newInformation";
+            var newInterpretation = "newInterpretation";
+            var realChange = "realChange";
 
             foreach (var change in changes)
             {
-                // TODO: fill inn more after Cagetory2018 and ReasonForChangeOfCategory is made available in the model
                 var assessments = change switch
                 {
-                    nameof(CategoryChangeEnum.ccvf) => query.Where(x => x.PreviousAssessments.Count == 0),
-                    nameof(CategoryChangeEnum.ccsk) => query.Where(x => x.PreviousAssessments.Count > 0),
-                    nameof(CategoryChangeEnum.ccre) => query.Where(x => x.PreviousAssessments.Count == 0),
-                    nameof(CategoryChangeEnum.ccnk) => query.Where(x => x.PreviousAssessments.Count == 0),
-                    nameof(CategoryChangeEnum.ccnt) => query.Where(x => x.PreviousAssessments.Count == 0),
-                    nameof(CategoryChangeEnum.ccea) => query.Where(x => x.PreviousAssessments.Count == 0),
-                    nameof(CategoryChangeEnum.ccet) => query.Where(x => x.PreviousAssessments.Count == 0),
-                    nameof(CategoryChangeEnum.cces) => query.Where(x => x.PreviousAssessments.Count == 0),
+                    nameof(CategoryChangeEnum.ccvf) => query.Where(x => x.PreviousAssessments.Count == 0 || x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category == AlienSpeciesAssessment2023Category.NR)),
+                    nameof(CategoryChangeEnum.ccsk) => query.Where(x => x.PreviousAssessments.Count > 0 && x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category == y.Category)),
+                    nameof(CategoryChangeEnum.ccre) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(realChange))),
+                    nameof(CategoryChangeEnum.ccnk) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(newInformation))),
+                    nameof(CategoryChangeEnum.ccnt) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(newInterpretation))),
+                    nameof(CategoryChangeEnum.ccea) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(changedCriteria))),
+                    nameof(CategoryChangeEnum.ccet) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(changedCriteriaInterpretation))),
+                    nameof(CategoryChangeEnum.cces) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(changedStatus))),
                     _ => null
                 };
                 if (assessments != null)

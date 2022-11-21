@@ -1,5 +1,5 @@
-﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 namespace Assessments.Mapping.AlienSpecies.Model
 {
@@ -105,6 +105,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Establishment category in Norway today from A-C3. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are established
         /// </summary>
         public string SpeciesStatus { get; set; }
+
+        /// <summary>
+        /// A list of reasons for a change in category from previous assessment, if any
+        /// </summary>
+        public List<string> ReasonForChangeOfCategory { get; set; }
 
         /// <summary>
         /// Taxonomy path

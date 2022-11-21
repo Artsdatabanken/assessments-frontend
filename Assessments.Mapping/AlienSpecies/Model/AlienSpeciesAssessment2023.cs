@@ -184,21 +184,52 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Low estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
         /// </summary>
-        public uint? RiskAssessmentAOOfutureLow { get; set; }
+        public ulong? RiskAssessmentAOOfutureLow { get; set; }
 
         /// <summary>
         /// Best estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
         /// </summary>
-        public uint? RiskAssessmentAOOfutureBest { get; set; }
+        public ulong? RiskAssessmentAOOfutureBest { get; set; }
 
         /// <summary>
         /// High estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
         /// </summary>
-        public uint? RiskAssessmentAOOfutureHigh { get; set; }
+        public ulong? RiskAssessmentAOOfutureHigh { get; set; }
 
         /// <summary>
         /// The reasoning or assumptions behind future area of occupancy and regional distribution. 
         /// </summary>
         public string CurrentPresenceComment { get; set; }
+
+        /// <summary>
+        /// Number of occurrences stemming from a single introduction event 10 years after the introduction took place (low estimate). Used to estimate future AOO for doorknockers. 
+        /// </summary>
+        public uint? RiskAssessmentOccurrences1Low { get; set; }
+
+        /// <summary>
+        /// Number of occurrences stemming from a single introduction event 10 years after the introduction took place (best estimate). Used to estimate future AOO for doorknockers. 
+        /// </summary>
+        public uint? RiskAssessmentOccurrences1Best { get; set; }
+
+        /// <summary>
+        /// Number of occurrences stemming from a single introduction event 10 years after the introduction took place (high estimate). Used to estimate future AOO for doorknockers. 
+        /// </summary>
+        public uint? RiskAssessmentOccurrences1High { get; set; }
+
+        /// <summary>
+        /// Number of introductions (minus one) during a 10 years period (low estimate). Used to estimate future AOO for doorknockers. 
+        /// </summary>
+        public uint? RiskAssessmentIntroductionsLow { get; set; }
+
+        /// <summary>
+        /// Number of introductions (minus one) during a 10 years period (best estimate). Used to estimate future AOO for doorknockers. 
+        /// </summary>
+        public uint? RiskAssessmentIntroductionsBest { get; set; }
+
+        /// <summary>
+        /// Number of introductions (minus one) during a 10 years period (high estimate). Used to estimate future AOO for doorknockers. 
+        /// </summary>
+        public uint? RiskAssessmentIntroductionsHigh { get; set; }
+
     }
 }

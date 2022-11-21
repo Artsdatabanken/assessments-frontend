@@ -113,5 +113,29 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [DisplayName("Fremtidig forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
         public ulong? RiskAssessmentAOOfutureHigh { get; set; }
+
+        [DisplayName("Ant. forekomster fra én introduksjon lavt anslag")]
+        [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (lavt anslag)")]
+        public uint? RiskAssessmentOccurrences1Low { get; set; }
+
+        [DisplayName("Ant. forekomster fra én introduksjon beste anslag")]
+        [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (beste anslag)")]
+        public uint? RiskAssessmentOccurrences1Best { get; set; }
+
+        [DisplayName("Ant. forekomster fra én introduksjon høyt anslag")]
+        [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (høyt anslag)")]
+        public uint? RiskAssessmentOccurrences1High { get; set; }
+
+        [DisplayName("Ant. ytterligere introduksjoner lavt anslag")]
+        [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (lavt anslag)")]
+        public uint? RiskAssessmentIntroductionsLow { get; set; }
+
+        [DisplayName("Ant. ytterligere introduksjoner beste anslag")]
+        [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (beste anslag)")]
+        public uint? RiskAssessmentIntroductionsBest { get; set; }
+
+        [DisplayName("Ant. ytterligere introduksjoner høyt anslag")]
+        [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (høyt anslag)")]
+        public uint? RiskAssessmentIntroductionsHigh { get; set; }
     }
 }

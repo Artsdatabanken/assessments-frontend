@@ -63,7 +63,6 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                      opt.PreCondition(src => src.EvaluationStatus == "finished");
                      opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "best"));
                  })
-
                  .ForMember(dest => dest.RiskAssessmentAOOfutureHigh, opt =>
                  {
                      //TODO: remove precondition when all assessments are finished (before innsynet)
@@ -71,6 +70,36 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                      opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "high"));
                  })
                  .ForMember(dest => dest.CurrentPresenceComment, opt => opt.MapFrom(src => src.CurrentPresenceComment.StripUnwantedHtml()))
+                 .ForMember(dest => dest.RiskAssessmentOccurrences1Low, opt =>
+                 {
+                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
+                     opt.MapFrom(src => src.RiskAssessment.Occurrences1Low);
+                 })
+                 .ForMember(dest => dest.RiskAssessmentOccurrences1Best, opt =>
+                 {
+                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
+                     opt.MapFrom(src => src.RiskAssessment.Occurrences1Best);
+                 })
+                 .ForMember(dest => dest.RiskAssessmentOccurrences1High, opt =>
+                 {
+                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
+                     opt.MapFrom(src => src.RiskAssessment.Occurrences1High);
+                 })
+                 .ForMember(dest => dest.RiskAssessmentIntroductionsLow, opt =>
+                 {
+                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
+                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsLow(src.RiskAssessment));
+                 })
+                 .ForMember(dest => dest.RiskAssessmentIntroductionsBest, opt =>
+                 {
+                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
+                     opt.MapFrom(src => src.RiskAssessment.IntroductionsBest);
+                 })
+                  .ForMember(dest => dest.RiskAssessmentIntroductionsHigh, opt =>
+                  {
+                      opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
+                      opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
+                  })
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
                 ;

@@ -202,7 +202,6 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return previousAssessments;
         }
 
-        //TODO: add Best and High in same function?  Use dictionary?. Separate between Svalbard and Fastlandet. 
         private static Dictionary<int, int> introLowTable = new Dictionary<int, int>()
         {
             { 1, 1 },
@@ -246,13 +245,13 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return i;
         }
 
-        private static long IntroductionsLow(RiskAssessment ra)
+        internal static long IntroductionsLow(RiskAssessment ra)
         {
             long num = IntroductionNum(introLowTable, ra.IntroductionsBest);
             return (long)(num == 0 ? 0 : ra.IntroductionsBest - num);
         }
 
-        private static long IntroductionsHigh(RiskAssessment ra)
+        internal static long IntroductionsHigh(RiskAssessment ra)
         {
             long num = IntroductionNum(introHighTable, ra.IntroductionsBest);
             return (long)(num == 0 ? 0 : ra.IntroductionsBest + num);
@@ -281,7 +280,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 return null;
             }
-            //TODO: use ra.Occurrences1Low without asking for HasValue when all assessments are ready before innsynet (should not be any null for doorknockers at that point..)
+            //TODO: use ra.Occurrences1Low/Best/High without asking for HasValue when all assessments are ready before innsynet (should not be any null for doorknockers at that point..)
             long? AOO50yr = estimateQuantile != "low" ? estimateQuantile == "best" ? ra.AOO50yrBestInput : ra.AOO50yrHighInput : ra.AOO50yrLowInput;
             long ? occur1 = estimateQuantile == "low" ? ra.Occurrences1Low.HasValue ? ra.Occurrences1Low : 0
                 : estimateQuantile == "best" ? ra.Occurrences1Best.HasValue ? ra.Occurrences1Best : 0

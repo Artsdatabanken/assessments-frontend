@@ -233,28 +233,24 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         private static int IntroductionNum(Dictionary<int, int> table, long? best)
         {
             var keys = table.Keys.Reverse();
-            var i = 0;
             foreach (var key in keys)
             {
                 if (best >= key)
-                {
-                    i = table[key];
-                    break;
-                }
+                    return table[key];
             }
-            return i;
+            return 0;
         }
 
-        internal static long IntroductionsLow(RiskAssessment ra)
+        internal static int IntroductionsLow(RiskAssessment ra)
         {
-            long num = IntroductionNum(introLowTable, ra.IntroductionsBest);
-            return (long)(num == 0 ? 0 : ra.IntroductionsBest - num);
+            int num = IntroductionNum(introLowTable, ra.IntroductionsBest);
+            return (int)(num == 0 ? 0 : ra.IntroductionsBest - num);
         }
 
-        internal static long IntroductionsHigh(RiskAssessment ra)
+        internal static int IntroductionsHigh(RiskAssessment ra)
         {
-            long num = IntroductionNum(introHighTable, ra.IntroductionsBest);
-            return (long)(num == 0 ? 0 : ra.IntroductionsBest + num);
+            int num = IntroductionNum(introHighTable, ra.IntroductionsBest);
+            return (int)(num == 0 ? 0 : ra.IntroductionsBest + num);
         }
 
         private static long? AOO10yr(long? occurrences1, long? introductions)
@@ -265,85 +261,98 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
             var occ = occurrences1.Value;
             var intr = introductions.Value;
-            long result = occ == 0 && intr == 0
-                    ? 0
-                    : occ == 0
-                        ? (long)(4 * Math.Round(0.64 + 0.36 * intr, 0))
-                        : (long)(4 * Math.Round(occ + Math.Pow(intr, ((double)occ + 9) / 10)));
-
-            return result;
+            if (occ is 0 && intr is 0)
+            {
+                return 0;
+            }
+            else return occ is 0 ? (long)(4 * Math.Round(0.64 + 0.36 * intr, 0)) : (long)(4 * Math.Round(occ + Math.Pow(intr, ((double)occ + 9) / 10)));
         }
 
-        internal static ulong? GetAOOfuture(FA4 ass, RiskAssessment ra, string estimateQuantile)
+        internal static int? GetAOOfuture(FA4 assessment, RiskAssessment riskAssessment, string estimateQuantile)
         {
-            if (ass.AssessmentConclusion == "WillNotBeRiskAssessed")
+            if (assessment.AssessmentConclusion == "WillNotBeRiskAssessed")
             {
                 return null;
             }
-            //TODO: use ra.Occurrences1Low/Best/High without asking for HasValue when all assessments are ready before innsynet (should not be any null for doorknockers at that point..)
-            long? AOO50yr = estimateQuantile != "low" ? estimateQuantile == "best" ? ra.AOO50yrBestInput : ra.AOO50yrHighInput : ra.AOO50yrLowInput;
-            long ? occur1 = estimateQuantile == "low" ? ra.Occurrences1Low.HasValue ? ra.Occurrences1Low : 0
-                : estimateQuantile == "best" ? ra.Occurrences1Best.HasValue ? ra.Occurrences1Best : 0
-                : ra.Occurrences1High.HasValue ? ra.Occurrences1High : 0;
-            var intro  = estimateQuantile != "low" ? estimateQuantile == "best" ? ra.IntroductionsBest.HasValue ? ra.IntroductionsBest : 0 
-                : IntroductionsHigh(ra) 
-                : IntroductionsLow(ra);
+            //TODO: use ra.Occurrences1Low/Best/High without asking for HasValue (??) when all assessments are ready before innsynet (should not be any null for doorknockers at that point..)
+            long? areaOfOccurrenceIn50Years;
+            long? numberOfOccurrences;
+            int numberOfIntroductions;
+            if (estimateQuantile == "low")
+            {
+                areaOfOccurrenceIn50Years = riskAssessment.AOO50yrLowInput;
+                numberOfOccurrences = riskAssessment.Occurrences1Low ?? 0;
+                numberOfIntroductions = IntroductionsLow(riskAssessment);
 
-            if (ass.Limnic && !ass.Marine && !ass.Terrestrial) //limnic species
-            {
-                if (ass.EvaluationContext is "N")
-                {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(22000, (ulong)AOO50yr) : Math.Min(22000, (ulong)AOO10yr(occur1, intro));
-                }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(500, (ulong)AOO50yr) : Math.Min(500, (ulong)AOO10yr(occur1, intro));
             }
-            if (ass.Limnic && ass.Marine && !ass.Terrestrial) //limnic and marine species
+            else if (estimateQuantile == "best")
             {
-                if (ass.EvaluationContext is "N")
-                {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(956000, (ulong)AOO50yr) : Math.Min(956000, (ulong)AOO10yr(occur1, intro));
-                }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099500, (ulong)AOO50yr) : Math.Min(1099500, (ulong)AOO10yr(occur1, intro));
+                areaOfOccurrenceIn50Years = riskAssessment.AOO50yrBestInput;
+                numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
+                numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
             }
-            if (ass.Limnic && !ass.Marine && ass.Terrestrial) //limnic and terrestrial species
+            else
             {
-                if (ass.EvaluationContext is "N")
-                {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(332000, (ulong)AOO50yr) : Math.Min(332000, (ulong)AOO10yr(occur1, intro));
-                }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(24500, (ulong)AOO50yr) : Math.Min(24500, (ulong)AOO10yr(occur1, intro));
+                areaOfOccurrenceIn50Years = riskAssessment.AOO50yrHighInput;
+                numberOfOccurrences = riskAssessment.Occurrences1High ?? 0;
+                numberOfIntroductions = IntroductionsHigh(riskAssessment);
             }
-            if (!ass.Limnic && ass.Marine && !ass.Terrestrial) //marine species
+            
+            if (assessment.Limnic && !assessment.Marine && !assessment.Terrestrial) //limnic species
             {
-                if (ass.EvaluationContext is "N")
+                if (assessment.EvaluationContext is "N")
                 {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(934000, (ulong)AOO50yr) : Math.Min(934000, (ulong)AOO10yr(occur1, intro));
+                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(22000, (long)areaOfOccurrenceIn50Years) : Math.Min(22000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099000, (ulong)AOO50yr) : Math.Min(1099000, (ulong)AOO10yr(occur1, intro));
+                return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(500, (long)areaOfOccurrenceIn50Years) : Math.Min(500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
             }
-            if (!ass.Limnic && ass.Marine && ass.Terrestrial) //marine and terrestrial species
+            if (assessment.Limnic && assessment.Marine && !assessment.Terrestrial) //limnic and marine species
             {
-                if (ass.EvaluationContext is "N")
+                if (assessment.EvaluationContext is "N")
                 {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1244000, (ulong)AOO50yr) : Math.Min(1244000, (ulong)AOO10yr(occur1, intro));
+                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(956000, (long)areaOfOccurrenceIn50Years) : Math.Min(956000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1123000, (ulong)AOO50yr) : Math.Min(1123000, (ulong)AOO10yr(occur1, intro));
+                return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099500, (long)areaOfOccurrenceIn50Years) : Math.Min(1099500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
             }
-            if (!ass.Limnic && !ass.Marine && ass.Terrestrial) //terrestrial species
+            if (assessment.Limnic && !assessment.Marine && assessment.Terrestrial) //limnic and terrestrial species
             {
-                if (ass.EvaluationContext is "N")
+                if (assessment.EvaluationContext is "N")
                 {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(310000, (ulong)AOO50yr) : Math.Min(310000, (ulong)AOO10yr(occur1, intro));
+                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(332000, (long)areaOfOccurrenceIn50Years) : Math.Min(332000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(24000, (ulong)AOO50yr) : Math.Min(24000, (ulong)AOO10yr(occur1, intro));
+                return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(24500, (long)areaOfOccurrenceIn50Years) : Math.Min(24500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
             }
-            if (ass.Limnic && ass.Marine && ass.Terrestrial) //limnic, marine and terrestrial species
+            if (!assessment.Limnic && assessment.Marine && !assessment.Terrestrial) //marine species
             {
-                if (ass.EvaluationContext is "N")
+                if (assessment.EvaluationContext is "N")
                 {
-                    return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1266000, (ulong)AOO50yr) : Math.Min(1266000, (ulong)AOO10yr(occur1, intro));
+                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(934000, (long)areaOfOccurrenceIn50Years) : Math.Min(934000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 }
-                return ass.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1123500, (ulong)AOO50yr) : Math.Min(1123500, (ulong)AOO10yr(occur1, intro));
+                return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099000, (long)areaOfOccurrenceIn50Years) : Math.Min(1099000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+            }
+            if (!assessment.Limnic && assessment.Marine && assessment.Terrestrial) //marine and terrestrial species
+            {
+                if (assessment.EvaluationContext is "N")
+                {
+                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1244000, (long)areaOfOccurrenceIn50Years) : Math.Min(1244000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                }
+                return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1123000, (long)areaOfOccurrenceIn50Years) : Math.Min(1123000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+            }
+            if (!assessment.Limnic && !assessment.Marine && assessment.Terrestrial) //terrestrial species
+            {
+                if (assessment.EvaluationContext is "N")
+                {
+                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(310000, (long)areaOfOccurrenceIn50Years) : Math.Min(310000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                }
+                return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(24000, (long)areaOfOccurrenceIn50Years) : Math.Min(24000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+            }
+            if (assessment.Limnic && assessment.Marine && assessment.Terrestrial) //limnic, marine and terrestrial species
+            {
+                if (assessment.EvaluationContext is "N")
+                {
+                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1266000, (long)areaOfOccurrenceIn50Years) : Math.Min(1266000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                }
+                return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1123500, (long)areaOfOccurrenceIn50Years) : Math.Min(1123500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
             }
             return null;
         }

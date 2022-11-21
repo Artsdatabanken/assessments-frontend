@@ -87,55 +87,55 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Kjent forekomstareal")]
         [Description("Artens kjente forekomstareal i dag")]
-        public uint? RiskAssessmentAOOknown { get; set; }
+        public int? RiskAssessmentAOOknown { get; set; }
 
         [DisplayName("Antatt forekomstareal lavt anslag")]
         [Description("Artens antatte forekomstareal i dag (lavt anslag)")]
-        public uint? RiskAssessmentAOOtotalLow { get; set; }
+        public int? RiskAssessmentAOOtotalLow { get; set; }
 
         [DisplayName("Antatt forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal i dag (beste anslag)")]
-        public uint? RiskAssessmentAOOtotalBest { get; set; }
+        public int? RiskAssessmentAOOtotalBest { get; set; }
 
         [DisplayName("Antatt forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal i dag (høyt anslag)")]
-        public uint? RiskAssessmentAOOtotalHigh { get; set; }
+        public int? RiskAssessmentAOOtotalHigh { get; set; }
 
         //TODO: skill felt mellom dørstokkarter og selvstendig reproduserende for fremtidige forekomstareal?
         [DisplayName("Fremtidig forekomstareal lavt anslag")]
         [Description("Artens antatte forekomstareal (lavt anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public ulong? RiskAssessmentAOOfutureLow { get; set; }
+        public int? RiskAssessmentAOOfutureLow { get; set; }
 
         [DisplayName("Fremtidig forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public ulong? RiskAssessmentAOOfutureBest { get; set; }
+        public int? RiskAssessmentAOOfutureBest { get; set; }
 
         [DisplayName("Fremtidig forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public ulong? RiskAssessmentAOOfutureHigh { get; set; }
+        public int? RiskAssessmentAOOfutureHigh { get; set; }
 
         [DisplayName("Ant. forekomster fra én introduksjon lavt anslag")]
         [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (lavt anslag)")]
-        public uint? RiskAssessmentOccurrences1Low { get; set; }
+        public int? RiskAssessmentOccurrences1Low { get; set; }
 
         [DisplayName("Ant. forekomster fra én introduksjon beste anslag")]
         [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (beste anslag)")]
-        public uint? RiskAssessmentOccurrences1Best { get; set; }
+        public int? RiskAssessmentOccurrences1Best { get; set; }
 
         [DisplayName("Ant. forekomster fra én introduksjon høyt anslag")]
         [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (høyt anslag)")]
-        public uint? RiskAssessmentOccurrences1High { get; set; }
+        public int? RiskAssessmentOccurrences1High { get; set; }
 
         [DisplayName("Ant. ytterligere introduksjoner lavt anslag")]
         [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (lavt anslag)")]
-        public uint? RiskAssessmentIntroductionsLow { get; set; }
+        public int? RiskAssessmentIntroductionsLow { get; set; }
 
         [DisplayName("Ant. ytterligere introduksjoner beste anslag")]
         [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (beste anslag)")]
-        public uint? RiskAssessmentIntroductionsBest { get; set; }
+        public int? RiskAssessmentIntroductionsBest { get; set; }
 
         [DisplayName("Ant. ytterligere introduksjoner høyt anslag")]
         [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (høyt anslag)")]
-        public uint? RiskAssessmentIntroductionsHigh { get; set; }
+        public int? RiskAssessmentIntroductionsHigh { get; set; }
     }
 }

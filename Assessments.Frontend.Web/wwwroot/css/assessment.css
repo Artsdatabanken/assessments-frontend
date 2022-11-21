@@ -733,3 +733,13 @@ span.area i {
 .no_elements {
     display: block;
 }
+
+.collapsible_header {
+    width: 100%;
+}
+
+.collapsible_header:hover,
+.collapsible_header:hover span {
+    text-decoration: underline;
+    cursor: pointer;
+}

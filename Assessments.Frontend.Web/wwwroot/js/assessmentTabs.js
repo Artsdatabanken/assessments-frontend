@@ -78,7 +78,6 @@ function expandImpact(element, className) {
 }
 
 function expand(element, className, id) {
-    console.log("expand time:" + element + className);
     element = element.closest("li");
     var mainparent = document.getElementById(id).classList;
     // Never expand or collapse summary items

@@ -20,6 +20,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.Category.Any())
                 query = query.Where(x => parameters.Category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category));
 
+            if (parameters.EcologicalEffect.Any())
+                query = query.Where(x => parameters.EcologicalEffect.Any(y => y.Contains(x.ScoreEcologicalEffect.ToString())));
+
+            if (parameters.InvationPotential.Any())
+                query = query.Where(x => parameters.InvationPotential.Any(y => y.Contains(x.ScoreInvationPotential.ToString())));
+
             if (parameters.CategoryChanged.Any())
                 query = ApplyCategoryChange(parameters.CategoryChanged, query);
 

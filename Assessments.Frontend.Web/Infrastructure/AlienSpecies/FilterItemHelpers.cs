@@ -1,8 +1,8 @@
-﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
-using Assessments.Shared.Helpers;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Shared.Helpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -18,6 +18,54 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Categories
     {
+        public static readonly Filter.FilterItem[] AlienSpecies2023InvationPotential =
+        {
+            new Filter.FilterItem
+            {
+                NameShort = "ip1",
+                Name = "Lite",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip2",
+                Name = "Begrensa",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip3",
+                Name = "Moderat",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip4",
+                Name = "Stort",
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffect =
+        {
+            new Filter.FilterItem
+            {
+                NameShort = "ee1",
+                Name = "Ingen kjent",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee2",
+                Name = "Liten",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee3",
+                Name = "Middels",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee4",
+                Name = "Stor",
+            }
+        };
+
         public static readonly Filter.FilterItem[] AlienSpecies2023Categories = Enum.GetValues<AlienSpeciesAssessment2023Category>()
             .Select(x => new Filter.FilterItem
             {

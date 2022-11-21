@@ -1,6 +1,6 @@
-﻿using Assessments.Frontend.Web.Models;
-using System;
+﻿using System;
 using System.Linq;
+using Assessments.Frontend.Web.Models;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -40,6 +40,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                         return $"{parameters.Area.Length}";
                     return String.Empty;
                 case nameof(parameters.Category):
+                    if (parameters.Category?.Any() == true)
+                        return $"{parameters.Category.Length}";
+                    return String.Empty;
+                case nameof(parameters.EcologicalEffect):
+                    if (parameters.Category?.Any() == true)
+                        return $"{parameters.Category.Length}";
+                    return String.Empty;
+                case nameof(parameters.InvationPotential):
                     if (parameters.Category?.Any() == true)
                         return $"{parameters.Category.Length}";
                     return String.Empty;
@@ -101,6 +109,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             int count = 0;
             count += parameters.Area.Length;
             count += parameters.Category.Length;
+            count += parameters.EcologicalEffect.Length;
+            count += parameters.InvationPotential.Length;
             count += parameters.CategoryChanged.Length;
             count += parameters.SpeciesStatus.Length;
             count += parameters.SpeciesGroups.Length;
@@ -118,6 +128,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var selectionlist = parameters.Area;
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
+            selectionlist = selectionlist.Concat(parameters.EcologicalEffect).ToArray();
+            selectionlist = selectionlist.Concat(parameters.InvationPotential).ToArray();
             selectionlist = selectionlist.Concat(parameters.CategoryChanged).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesStatus).ToArray();
             selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
@@ -153,6 +165,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             public const string AssessmentArea = "Område";
             public const string Category = "Risikokategori";
+            public const string EcologicalEffect = "Økologisk effekt";
+            public const string InvationPotential = "Invasjonspotensial";
             public const string CategoryChanged = "Endring i risikokategori";
             public const string GeographicRiskVariation = "Geografisk variasjon i risiko";
             public const string ClimateChangeRisk = "Betydning av klimaendringer for risiko";

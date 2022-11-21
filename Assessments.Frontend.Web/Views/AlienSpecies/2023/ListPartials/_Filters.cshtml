@@ -4,6 +4,8 @@
 @{
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
+    var AllEcologicalEffects = Categories.AlienSpecies2023EcologicalEffect;
+    var AllInvationPotentials = Categories.AlienSpecies2023InvationPotential;
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
     var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
     var AllHabitats = Habitat.AlienSpecies2023Habitats;
@@ -36,25 +38,6 @@
     void InputTag(string name, string[] elements, string value)
     {
         InputTag(value, "submitOnclick", name, elements, value);
-    }
-
-    void GetSubSpeciesGroupList(Filter.FilterItem parentSpecies, string name)
-    {
-        <div class="filter_@parentSpecies.Name">
-            <ul class="@parentSpecies.Name-filters">
-                    @foreach (var species in parentSpecies.SubGroup)
-                {
-                    <li class="checkbox">
-                        <label for="@species.NameShort">
-                            @{
-                            InputTag(species.NameShort, $"{parentSpecies.Name}_input submitOnclick", name, Model.SpeciesGroups, species.NameShort);
-                            }
-                            <span class="label_text">@species.Name</span>
-                        </label>
-                    </li>
-                }
-                </ul>
-        </div>
     }
 
     void MakeCheckBoxLi(string value, string label, string name, string[] model, string labelClassName, string inputClassName)
@@ -169,6 +152,8 @@
                     {
                         MakeFilterChips(Model.Area, AllAreas);
                         MakeFilterChips(Model.Category, AllCategories);
+                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects);
+                        MakeFilterChips(Model.InvationPotential, AllInvationPotentials);
                         MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged);
                         MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus);
                         MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies);
@@ -226,6 +211,8 @@
                                 @{
                                     MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
                                     MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
+                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects, SearchAndFilterNames.EcologicalEffect, "okologiskeffektfiltre");
+                                    MakeFilterGroup(nameof(Model.InvationPotential), Model.InvationPotential, AllInvationPotentials, SearchAndFilterNames.InvationPotential, "invasjonspotensialfiltre");
                                     MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
                                     MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
                                     MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged, SearchAndFilterNames.CategoryChanged, "kategoriendringsfiltre");

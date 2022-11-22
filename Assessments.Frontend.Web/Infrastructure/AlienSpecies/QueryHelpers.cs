@@ -12,7 +12,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static IQueryable<AlienSpeciesAssessment2023> ApplyParameters(AlienSpeciesListParameters parameters, IQueryable<AlienSpeciesAssessment2023> query)
         {
             if (!string.IsNullOrEmpty(parameters.Name))
-                query = query.Where(x => x.ScientificName.ToLowerInvariant().Contains(parameters.Name.ToLowerInvariant()));
+                query = ApplySearch(parameters.Name, query);
 
             if (parameters.Area.Any())
                 query = query.Where(x => parameters.Area.ToEnumerable<AlienSpeciesAssessment2023EvaluationContext>().Contains(x.EvaluationContext) && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien); // remove "regionallyalien" assessments when filtering by evaluation context
@@ -43,6 +43,21 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.OrderBy(x => x.Category);
 
             return query;
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplySearch(string searchString, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            var containsSubSpecies = query.Where(x =>
+                !string.IsNullOrEmpty(x.VernacularName) &&
+                x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())).Select(x => x.ScientificName).ToArray();
+
+            return query.Where(x =>
+                x.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
+                containsSubSpecies.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also includes sub species
+                !string.IsNullOrEmpty(x.VernacularName) &&
+                x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
+                x.TaxonHierarcy.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
+                x.SpeciesGroup.ToLowerInvariant().Contains(searchString.ToLowerInvariant()));
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplyCategoryChange(string[] changes, IQueryable<AlienSpeciesAssessment2023> query)

@@ -105,7 +105,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 {
                     nameof(TaxonRank.TaxonRankEnum.tva) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
                     nameof(TaxonRank.TaxonRankEnum.tvi) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
-                    _ => isInt ? query.Where(x => x.ScientificNameRank == result) : null
+                    _ => isInt ? query.Where(x => ((int)x.ScientificNameRank) == result) : null
                 };
                 if (assessments != null)
                     newQuery = newQuery.Concat(assessments);

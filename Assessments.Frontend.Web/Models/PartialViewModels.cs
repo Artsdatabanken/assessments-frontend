@@ -61,6 +61,47 @@ namespace Assessments.Frontend.Web.Models
         public int ItemCount { get; set; }
     }
 
+    public class ExpertStatementViewModel
+    {
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
+        public AlienSpeciesAssessment2023Category Category { get; set; }
+
+        public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
+
+        public string AlienStatusExplanation { get; set; }
+
+        public string ChangedFromAlienDescription { get; set; }
+
+        public string ConnectedToHigherLowerTaxonDescription { get; set; }
+
+        public string CriteriaDocumentation { get; set; }
+
+        public string CriteriaDocumentationDomesticSpread { get; set; }
+
+        public string CriteriaDocumentationEcoEffect { get; set; }
+
+        public string CriteriaDocumentationInvationPotential { get; set; }
+
+        public string CriteriaDocumentationSpeciesStatus { get; set; }
+
+        public bool HasIndoorProduction { get; set; }
+
+        public string SpreadFurtherSpreadFurtherInfo { get; set; }
+
+        public string SpreadIntroductionFurtherInfo { get; set; }
+
+        public string SpreadIndoorFurtherInfo { get; set; }
+
+        public string Summary { get; set; }
+
+        public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
+
+        public string UncertaintyStatusDescription { get; set; }
+
+        public string UncertaintyEstablishmentTimeDescription { get; set; }
+    }
+
     public class IngressViewModel
     {
         public AlienSpeciesAssessment2023Environment Environment { get; set; }
@@ -71,7 +112,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string Status { get; set; }
 
-        public int TaxonRank { get; set; }
+        public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
     }
 
     public class SideBarContentViewModel

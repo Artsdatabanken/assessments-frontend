@@ -287,11 +287,11 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             else return occ is 0 ? (long)(4 * Math.Round(0.64 + 0.36 * intr, 0)) : (long)(4 * Math.Round(occ + Math.Pow(intr, ((double)occ + 9) / 10)));
         }
 
-        internal static int? GetAOOfuture(FA4 assessment, RiskAssessment riskAssessment, string estimateQuantile)
+        internal static int GetAOOfuture(FA4 assessment, RiskAssessment riskAssessment, string estimateQuantile)
         {
             if (assessment.AssessmentConclusion == "WillNotBeRiskAssessed")
             {
-                return null;
+                return 0;
             }
             //TODO: use ra.Occurrences1Low/Best/High without asking for HasValue (??) when all assessments are ready before innsynet (should not be any null for doorknockers at that point..)
             long? areaOfOccurrenceIn50Years;
@@ -317,6 +317,8 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 numberOfIntroductions = IntroductionsHigh(riskAssessment);
             }
 
+            var norway = "N";
+            var assessedSelfReproducing = "AssessedSelfReproducing";
             var value = 0;
             if (assessment.Limnic)
                 value += 1;
@@ -328,49 +330,49 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             switch (value)
             {
                 case 1:
-                    if (assessment.EvaluationContext is "N")
+                    if (assessment.EvaluationContext == norway)
                     {
-                        return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(22000, (long)areaOfOccurrenceIn50Years) : Math.Min(22000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(22000, (long)areaOfOccurrenceIn50Years) : Math.Min(22000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                     }
-                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(500, (long)areaOfOccurrenceIn50Years) : Math.Min(500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(500, (long)areaOfOccurrenceIn50Years) : Math.Min(500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 case 2:
-                    if (assessment.EvaluationContext is "N")
+                    if (assessment.EvaluationContext == norway)
                     {
-                        return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(934000, (long)areaOfOccurrenceIn50Years) : Math.Min(934000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(934000, (long)areaOfOccurrenceIn50Years) : Math.Min(934000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                     }
-                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099000, (long)areaOfOccurrenceIn50Years) : Math.Min(1099000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1099000, (long)areaOfOccurrenceIn50Years) : Math.Min(1099000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 case 3:
-                    if (assessment.EvaluationContext is "N")
+                    if (assessment.EvaluationContext == norway)
                     {
-                        return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(956000, (long)areaOfOccurrenceIn50Years) : Math.Min(956000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(956000, (long)areaOfOccurrenceIn50Years) : Math.Min(956000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                     }
-                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1099500, (long)areaOfOccurrenceIn50Years) : Math.Min(1099500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1099500, (long)areaOfOccurrenceIn50Years) : Math.Min(1099500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 case 4:
-                    if (assessment.EvaluationContext is "N")
+                    if (assessment.EvaluationContext == norway)
                     {
-                        return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(310000, (long)areaOfOccurrenceIn50Years) : Math.Min(310000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(310000, (long)areaOfOccurrenceIn50Years) : Math.Min(310000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                     }
-                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(24000, (long)areaOfOccurrenceIn50Years) : Math.Min(24000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(24000, (long)areaOfOccurrenceIn50Years) : Math.Min(24000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 case 5:
-                    if (assessment.EvaluationContext is "N")
+                    if (assessment.EvaluationContext == norway)
                     {
-                        return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(332000, (long)areaOfOccurrenceIn50Years) : Math.Min(332000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(332000, (long)areaOfOccurrenceIn50Years) : Math.Min(332000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                     }
-                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(24500, (long)areaOfOccurrenceIn50Years) : Math.Min(24500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(24500, (long)areaOfOccurrenceIn50Years) : Math.Min(24500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 case 6:
-                    if (assessment.EvaluationContext is "N")
+                    if (assessment.EvaluationContext == norway)
                     {
-                        return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1244000, (long)areaOfOccurrenceIn50Years) : Math.Min(1244000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1244000, (long)areaOfOccurrenceIn50Years) : Math.Min(1244000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                     }
-                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1123000, (long)areaOfOccurrenceIn50Years) : Math.Min(1123000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1123000, (long)areaOfOccurrenceIn50Years) : Math.Min(1123000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 case 7:
-                    if (assessment.EvaluationContext is "N")
+                    if (assessment.EvaluationContext == norway)
                     {
-                        return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1266000, (long)areaOfOccurrenceIn50Years) : Math.Min(1266000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1266000, (long)areaOfOccurrenceIn50Years) : Math.Min(1266000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                     }
-                    return (int?)(assessment.AssessmentConclusion is "AssessedSelfReproducing" ? Math.Min(1123500, (long)areaOfOccurrenceIn50Years) : Math.Min(1123500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1123500, (long)areaOfOccurrenceIn50Years) : Math.Min(1123500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                 default: 
-                    return null;
+                    return 0;
             }
         }
     }

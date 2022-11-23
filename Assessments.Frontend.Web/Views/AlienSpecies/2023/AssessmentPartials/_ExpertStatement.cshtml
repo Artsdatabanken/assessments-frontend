@@ -34,6 +34,10 @@
 
     var showChangedFromAlien = Model.ChangedFromAlien != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ChangedFromAlien.Unknown;
 
+    var showAlienStatusExplanation = !string.IsNullOrEmpty(Model.AlienStatusExplanation);
+
+    var showChangedFromAlienDescription = !string.IsNullOrEmpty(Model.ChangedFromAlienDescription);
+
     var showConnectedToHigherLowerTaxonDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
     var showUncertaintyEstablishmentTimeDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800;
@@ -141,14 +145,14 @@
     <div class="expert_Assessment">
         <div class="expert_text">
             <div is-visible="@showChangedAssessment">
-                <p>
+                <p is-visible="@showAlienStatusExplanation">
                     @*TODO: strip html tags in mapping when the correct name is ready*@
                     @Html.Raw(Model.AlienStatusExplanation) 
                 </p>
                 <p is-visible="@showChangedFromAlien">
                     @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Html.Raw(Model.ChangedFromAlien.DisplayName()).
                 </p>
-                <p>
+                <p is-visible="showChangedFromAlienDescription">
                     @Html.Raw(Model.ChangedFromAlienDescription)
                 </p>
             </div>

@@ -1,7 +1,7 @@
 ﻿@model ExpertStatementViewModel
 
 @{
-    var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR ||
+    var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR &&
                 Model.AlienSpeciesCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
     var showConclusion = !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
@@ -61,7 +61,7 @@
 
         <div>
             <div is-visible="@showSpeciesStatusDocumentation">
-                <h3>Generelt om @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank)</h3>
+                <h3>Generelt om @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
                 <div class="expert_Assessment">
                     <div class="expert_text">
                         @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)
@@ -149,7 +149,7 @@
                     @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Html.Raw(Model.ChangedFromAlien.DisplayName()).
                 </p>
                 <p>
-                    @Html.Raw(Model.ChangedAssessment)
+                    @Html.Raw(Model.ChangedFromAlienDescription)
                 </p>
             </div>
             <p is-visible="@showConnectedToHigherLowerTaxonDescription">

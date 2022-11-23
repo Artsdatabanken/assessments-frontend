@@ -12,7 +12,6 @@
 */
 
 const makeCollapsibleListIds = [
-    'show_conclusion',
     'show_expert_summary',
     'show_assessment_reasoning'
 ];

@@ -15,7 +15,7 @@ namespace Assessments.Frontend.Web.Models
                 AlienSpeciesCategory = assessment.AlienSpeciesCategory,
                 AlienStatusExplanation = assessment.IsAlien,
                 Category = assessment.Category,
-                ChangedAssessment = assessment.ChangedAssessment,
+                ChangedFromAlienDescription = assessment.ChangedFromAlienDescription,
                 ConnectedToHigherLowerTaxonDescription = assessment.ConnectedToHigherLowerTaxonDescription,
                 CriteriaDocumentation = assessment.RiskAssessmentCriteriaDocumentation,
                 CriteriaDocumentationDomesticSpread = assessment.RiskAssessmentCriteriaDocumentationDomesticSpread,

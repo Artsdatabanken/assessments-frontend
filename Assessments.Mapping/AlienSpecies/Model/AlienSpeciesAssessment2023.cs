@@ -22,9 +22,14 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         /// <summary>
-        /// Explanation for a change in the assessment
+        /// The short reason why an earlier believed alien species is no longer considered alien (or null)
         /// </summary>
-        public string ChangedAssessment { get; set; }
+        public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
+
+        /// <summary>
+        /// Explanation for why an earlier believed alien species is no longer considered alien. Free text field.
+        /// </summary>
+        public string ChangedFromAlienDescription { get; set; }
 
         /// <summary>
         /// Decisive criteria according to GEIAAS method
@@ -32,7 +37,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string Criteria { get; set; }
 
         /// <summary>
-        /// Lets see wht this is
+        /// Explanation for why the taxon is evaluated at another taxonomic rank. Free text field.
         /// </summary>
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
 
@@ -67,12 +72,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string IsAlien { get; set; }
 
         /// <summary>
-        /// The taxon was thought to be alien or is no longer alien, or null
-        /// </summary>
-        public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
-
-        /// <summary>
-        /// Does the species live indoors
+        /// Does the taxons' pathway to norwegian nature go through indoor environments or its own production area
         /// </summary>
         public bool HasIndoorProduction { get; set; }
 
@@ -127,17 +127,17 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string SpeciesStatus { get; set; }
 
         /// <summary>
-        /// Further info on how the further spread is spread further
+        /// Further information about the taxons' secondary spread (i.e. spread within Norwegian nature)
         /// </summary>
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 
         /// <summary>
-        /// Info text on how the spieces spreads indoors
+        /// Further information about the taxons' entry to indoor environments or its own production area from abroad
         /// </summary>
         public string SpreadIndoorFurtherInfo { get; set; }
 
         /// <summary>
-        /// info on how the introduces species spreads
+        /// Further information about the taxons' introduction to Norwegian nature
         /// </summary>
         public string SpreadIntroductionFurtherInfo { get; set; }
 
@@ -147,7 +147,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string TaxonHierarcy { get; set; }
 
         /// <summary>
-        /// Uncertainty around the status description
+        /// Uncertainty around the establishment category. Free text field.
         /// </summary>
         public string UncertaintyStatusDescription { get; set; }
 
@@ -172,27 +172,27 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string RiskAssessmentClimateEffectsDocumentation { get; set; }
 
         /// <summary>
-        /// Documentation for the given criteria
+        /// Short conclusion/summary of the impact assessment. Free text field
         /// </summary>
         public string RiskAssessmentCriteriaDocumentation { get; set; }
 
         /// <summary>
-        /// Spread in Norway
+        /// Description of the species' distribution in Norway. Free text field
         /// </summary>
         public string RiskAssessmentCriteriaDocumentationDomesticSpread { get; set; }
 
         /// <summary>
-        /// Documents the criteria for ecological effect
+        /// Description and documentation of the species' ecological effects. Free text field
         /// </summary>
         public string RiskAssessmentCriteriaDocumentationEcoEffect { get; set; }
 
         /// <summary>
-        /// Documents the criteria for invation potential
+        /// Description and documentation of the species' invasion potential. Free text field
         /// </summary>
         public string RiskAssessmentCriteriaDocumentationInvationPotential { get; set; }
 
         /// <summary>
-        /// Documentation for the given species status
+        /// Description of relevant aspects of taxonomy, the species life history and ecology. Free text field
         /// </summary>
         public string RiskAssessmentCriteriaDocumentationSpeciesStatus { get; set; }
 

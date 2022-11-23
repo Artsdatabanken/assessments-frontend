@@ -7,10 +7,10 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "ikke endret fra fremmed")]
         Unknown,
 
-        [Display(Name = "tidligere antatt fremmed")]
+        [Display(Name = "tidligere antatt fremmed, men kunnskapsgrunnlaget/tolkninga er endra")]
         WasThoughtToBeAlien,
 
-        [Display(Name = "tidligere fremmed, men er nå etablert")]
+        [Display(Name = "tidligere vært fremmed, men har nå etablert minst én stedegen bestand")]
         WasAlienButEstablishedNow,
     }
 }

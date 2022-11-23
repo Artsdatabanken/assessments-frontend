@@ -78,7 +78,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         {
             if (string.IsNullOrEmpty(indoorProductionString))
                 return false;
-            if (indoorProductionString.Equals("positive"))
+            if (indoorProductionString.Equals("negative"))
                 return true;
             return false;
         }

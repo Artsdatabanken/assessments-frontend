@@ -71,7 +71,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string AlienStatusExplanation { get; set; }
 
-        public string ChangedAssessment { get; set; }
+        public string ChangedFromAlienDescription { get; set; }
 
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
 

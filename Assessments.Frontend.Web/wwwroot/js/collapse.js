@@ -13,7 +13,6 @@
 
 const makeCollapsibleListIds = [
     'show_expert_summary',
-    'show_assessment_reasoning'
 ];
 
 const expandLessInnerHtml = 'expand_less';

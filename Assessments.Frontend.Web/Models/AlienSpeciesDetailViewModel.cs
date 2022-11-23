@@ -13,7 +13,7 @@ namespace Assessments.Frontend.Web.Models
             ExpertStatementViewModel = new ExpertStatementViewModel
             {
                 AlienSpeciesCategory = assessment.AlienSpeciesCategory,
-                AlienStatusExplanation = assessment.IsAlien,
+                AlienStatusExplanation = assessment.AlienSpeciesDescription,
                 Category = assessment.Category,
                 ChangedFromAlienDescription = assessment.ChangedFromAlienDescription,
                 ConnectedToHigherLowerTaxonDescription = assessment.ConnectedToHigherLowerTaxonDescription,

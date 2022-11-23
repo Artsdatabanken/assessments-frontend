@@ -1,6 +1,7 @@
 ﻿using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
+using Assessments.Shared.Helpers;
 using AutoMapper;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
@@ -27,6 +28,19 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsEcoEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffects(src.Category, src.Criteria, "eco", src.RiskAssessment)))
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsDoc(src.Category, src.Criteria, src.RiskAssessment, src.RiskAssessment.ClimateEffectsDocumentation)))
                 .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetSpeciesGroup(src.TaxonHierarcy)))
+                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentation.StripUnwantedHtml()))
+                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentationSpeciesStatus, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationSpeciesStatus.StripUnwantedHtml()))
+                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentationDomesticSpread, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationDomesticSpread.StripUnwantedHtml()))
+                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentationEcoEffect, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationEcoEffect.StripUnwantedHtml()))
+                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentationInvationPotential, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationInvationPotential.StripUnwantedHtml()))
+                .ForMember(dest => dest.UncertaintyStatusDescription, opt => opt.MapFrom(src => src.UncertainityStatusDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.HasIndoorProduction, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetHasIndoorProduction(src.IndoorProduktion)))
+                .ForMember(dest => dest.SpreadIndoorFurtherInfo, opt => opt.MapFrom(src => src.SpreadIndoorFurtherInfo.StripUnwantedHtml()))
+                .ForMember(dest => dest.SpreadFurtherSpreadFurtherInfo, opt => opt.MapFrom(src => src.SpreadFurtherSpreadFurtherInfo.StripUnwantedHtml()))
+                .ForMember(dest => dest.ChangedFromAlienDescription, opt => opt.MapFrom(src => src.ChangedAssessment.StripUnwantedHtml()))
+                .ForMember(dest => dest.ConnectedToHigherLowerTaxonDescription, opt => opt.MapFrom(src => src.ConnectedToHigherLowerTaxonDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.UncertaintyEstablishmentTimeDescription, opt => opt.MapFrom(src => src.UncertainityEstablishmentTimeDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.ChangedFromAlien, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAlienSpeciesAssessment2023Changed(src.ChangedFromAlien)))
                 .ForMember(dest => dest.Environment, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEnvironmentEnum(src.Limnic, src.Marine, src.Terrestrial)))
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))

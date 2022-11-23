@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+using System.Collections.Generic;
 
 namespace Assessments.Mapping.AlienSpecies.Model
 {
@@ -22,9 +22,24 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         /// <summary>
+        /// The short reason why an earlier believed alien species is no longer considered alien (or null)
+        /// </summary>
+        public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
+
+        /// <summary>
+        /// Explanation for why an earlier believed alien species is no longer considered alien. Free text field.
+        /// </summary>
+        public string ChangedFromAlienDescription { get; set; }
+
+        /// <summary>
         /// Decisive criteria according to GEIAAS method
         /// </summary>
         public string Criteria { get; set; }
+
+        /// <summary>
+        /// Explanation for why the taxon is evaluated at another taxonomic rank. Free text field.
+        /// </summary>
+        public string ConnectedToHigherLowerTaxonDescription { get; set; }
 
         /// <summary>
         /// Establishment category in Norway today. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are locally self-sustaining or strongly expanding
@@ -57,6 +72,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string IsAlien { get; set; }
 
         /// <summary>
+        /// Does the taxons' pathway to norwegian nature go through indoor environments or its own production area
+        /// </summary>
+        public bool HasIndoorProduction { get; set; }
+
+        /// <summary>
         /// List including category and decisive criteria from previous assessments
         /// </summary>
         public List<AlienSpeciesAssessment2023PreviousAssessment> PreviousAssessments { get; set; } = new();
@@ -84,7 +104,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The taxonomic rank of the evaluated scientific name
         /// </summary>
-        public int ScientificNameRank { get; set; }
+        public AlienSpeciesAssessment2023TaxonRank ScientificNameRank { get; set; }
 
         /// <summary>
         /// The species' total score on the ecological effect axis
@@ -112,9 +132,29 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public List<string> ReasonForChangeOfCategory { get; set; }
 
         /// <summary>
+        /// Further information about the taxons' secondary spread (i.e. spread within Norwegian nature)
+        /// </summary>
+        public string SpreadFurtherSpreadFurtherInfo { get; set; }
+
+        /// <summary>
+        /// Further information about the taxons' entry to indoor environments or its own production area from abroad
+        /// </summary>
+        public string SpreadIndoorFurtherInfo { get; set; }
+
+        /// <summary>
         /// Taxonomy path
         /// </summary>
         public string TaxonHierarcy { get; set; }
+
+        /// <summary>
+        /// Uncertainty around the establishment category. Free text field.
+        /// </summary>
+        public string UncertaintyStatusDescription { get; set; }
+
+        /// <summary>
+        /// Description of the uncertainty of time of establishment
+        /// </summary>
+        public string UncertaintyEstablishmentTimeDescription { get; set; }
 
         /// <summary>
         /// Norwegian common names
@@ -130,6 +170,31 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Further information about the effects of current or future climate changes 
         /// </summary>
         public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+
+        /// <summary>
+        /// Short conclusion/summary of the impact assessment. Free text field
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentation { get; set; }
+
+        /// <summary>
+        /// Description of the species' distribution in Norway. Free text field
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentationDomesticSpread { get; set; }
+
+        /// <summary>
+        /// Description and documentation of the species' ecological effects. Free text field
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentationEcoEffect { get; set; }
+
+        /// <summary>
+        /// Description and documentation of the species' invasion potential. Free text field
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentationInvationPotential { get; set; }
+
+        /// <summary>
+        /// Description of relevant aspects of taxonomy, the species life history and ecology. Free text field
+        /// </summary>
+        public string RiskAssessmentCriteriaDocumentationSpeciesStatus { get; set; }
 
         /// <summary>
         /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 

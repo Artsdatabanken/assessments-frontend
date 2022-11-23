@@ -61,3 +61,7 @@ robocopy "Assessments.Frontend.Web\bin\Release\net5.0\publish" ...destinasjon...
 
 ## Bygge ny cache for versjonene i IIS
 Det er laget jobber i Jenkins som stopper application pools sletter gammel cache og starter opp application pool. På det viset kan man få bygget ny cache, uten å bygge løsningen på nytt. 
+
+## Videre dokumentasjon - se "les meg"-filene for hvert prosjekt
+
+[Assessments.Frontend.Web](https://github.com/Artsdatabanken/assessments-frontend/blob/develop/Assessments.Frontend.Web/README.md)

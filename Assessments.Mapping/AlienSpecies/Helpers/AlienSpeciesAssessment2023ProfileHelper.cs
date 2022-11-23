@@ -19,6 +19,16 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return alienSpeciesCategory;
         }
 
+        internal static AlienSpeciesAssessment2023ChangedFromAlien GetAlienSpeciesAssessment2023Changed(string changedFrom)
+        {
+            return changedFrom switch
+            {
+                "wasThoughtToBeAlien" => AlienSpeciesAssessment2023ChangedFromAlien.WasThoughtToBeAlien,
+                "wasAlienButEstablishedNow" => AlienSpeciesAssessment2023ChangedFromAlien.WasAlienButEstablishedNow,
+                _ => AlienSpeciesAssessment2023ChangedFromAlien.Unknown
+            };
+        }
+
         internal static AlienSpeciesAssessment2023Environment GetEnvironmentEnum(bool limnic, bool marine, bool terrestrial)
         {
             var value = 0;
@@ -62,6 +72,15 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return string.Empty;
             }
             return speciesStatus != "C3" ? speciesStatus : speciesEstablishmentCategory;
+        }
+
+        internal static bool GetHasIndoorProduction(string indoorProductionString)
+        {
+            if (string.IsNullOrEmpty(indoorProductionString))
+                return false;
+            if (indoorProductionString.Equals("negative"))
+                return true;
+            return false;
         }
 
         internal static int? GetScores(string category, string criteria, string axis)

@@ -30,16 +30,13 @@
                                                         showEcoEffectDocumentation ||
                                                         showSpreadWays;
 
-    var showChangedAssessment = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie &&
-                Model.ChangedFromAlien != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ChangedFromAlien.Unknown;
+    var showChangedAssessment = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie;
 
     var showChangedFromAlien = Model.ChangedFromAlien != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ChangedFromAlien.Unknown;
 
-    var showConnectedToHigherLowerTaxonDescription = !(showChangedAssessment || showChangedFromAlien) &&
-                Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var showConnectedToHigherLowerTaxonDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
-    var showUncertaintyEstablishmentTimeDescription = !(showChangedAssessment || showChangedFromAlien || showConnectedToHigherLowerTaxonDescription) &&
-                Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800;
+    var showUncertaintyEstablishmentTimeDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800;
 
     // Html.Raw is used on model values that are stripped of html, except for a few tags, such as p, i and b. This is because some text needs to be formatted, and we don't know when.
 }
@@ -141,9 +138,9 @@
         Begrunnelse
     </h2>
 
-    <div is-visible="@showChangedAssessment">
-        <div class="expert_Assessment">
-            <div class="expert_text">
+    <div class="expert_Assessment">
+        <div class="expert_text">
+            <div is-visible="@showChangedAssessment">
                 <p>
                     @*TODO: strip html tags in mapping when the correct name is ready*@
                     @Html.Raw(Model.AlienStatusExplanation) 
@@ -154,13 +151,13 @@
                 <p>
                     @Html.Raw(Model.ChangedAssessment)
                 </p>
-                <p is-visible="@showConnectedToHigherLowerTaxonDescription">
-                    @Html.Raw(Model.ConnectedToHigherLowerTaxonDescription)
-                </p>
-                <p is-visible="@showUncertaintyEstablishmentTimeDescription">
-                    @Html.Raw(Model.UncertaintyEstablishmentTimeDescription)
-                </p>
             </div>
+            <p is-visible="@showConnectedToHigherLowerTaxonDescription">
+                @Html.Raw(Model.ConnectedToHigherLowerTaxonDescription)
+            </p>
+            <p is-visible="@showUncertaintyEstablishmentTimeDescription">
+                @Html.Raw(Model.UncertaintyEstablishmentTimeDescription)
+            </p>
         </div>
     </div>
 </div>

@@ -30,6 +30,7 @@
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
     };
+
     var citationViewModel = new CitationForAssessmentViewModel
     {
         AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {Helpers.getScientificNameElement(assessment.ScientificName)} for {assessment.EvaluationContext.DisplayName()}",
@@ -51,7 +52,7 @@
             Name = x.DisplayName(),
             NameShort = x.ToString()
         }).Reverse().ToArray(),
-        MethodUrl = "" //TODO: add url to the correct method, redlist species has https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316483
+        MethodUrl = "https://artsdatabanken.no/pages/239659"
     };
 
     var ingressViewModel = new IngressViewModel()
@@ -98,7 +99,7 @@
     };
 }
 
-<partial name="/Views/AlienSpecies/2023/AssesmentPartials/_Breadcrumb.cshtml" />
+<partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Breadcrumb.cshtml" />
 
 <div class="pagecontainer">
     <partial name="/Views/Shared/_PageMenu.cshtml" model="pageMenuViewModel" />
@@ -110,14 +111,17 @@
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 @*    Check which ones are appropriate for alien species list
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="Model.ExpertStatementViewModel" />
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
             </div>
         </div>

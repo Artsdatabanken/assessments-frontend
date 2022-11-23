@@ -1,0 +1,167 @@
+﻿@model ExpertStatementViewModel
+
+@{
+    var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR &&
+                Model.AlienSpeciesCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+
+    var showConclusion = !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
+
+    var showSpeciesStatusDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
+
+    var showUncertaintyStatusDescription = !string.IsNullOrEmpty(Model.UncertaintyStatusDescription);
+
+    var showDomesticSpreadDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationDomesticSpread);
+
+    var showInvationPotentialDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationInvationPotential);
+
+    var showEcoEffectDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationEcoEffect);
+
+    var showSpreadWays = (Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)) ||
+                !string.IsNullOrEmpty(Model.SpreadIntroductionFurtherInfo) || 
+                !string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo);
+
+    var showReasoning = Model.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR ||
+                Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+
+    var showExpertSummary = showSpeciesStatusDocumentation ||
+                                                        showUncertaintyStatusDescription ||
+                                                        showDomesticSpreadDocumentation ||
+                                                        showInvationPotentialDocumentation ||
+                                                        showEcoEffectDocumentation ||
+                                                        showSpreadWays;
+
+    var showChangedAssessment = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie;
+
+    var showChangedFromAlien = Model.ChangedFromAlien != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ChangedFromAlien.Unknown;
+
+    var showAlienStatusExplanation = !string.IsNullOrEmpty(Model.AlienStatusExplanation);
+
+    var showChangedFromAlienDescription = !string.IsNullOrEmpty(Model.ChangedFromAlienDescription);
+
+    var showConnectedToHigherLowerTaxonDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+
+    var showUncertaintyEstablishmentTimeDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800;
+
+    // Html.Raw is used on model values that are stripped of html, except for a few tags, such as p, i and b. This is because some text needs to be formatted, and we don't know when.
+}
+
+<div class="page_section" is-visible="@showCriteriaDocumentation">
+    <div id="show_conclusion" is-visible="@showConclusion">
+        <h2>
+            Konklusjon
+        </h2>
+
+        <div class="expert_Assessment">
+            <div class="expert_text">
+                @Html.Raw(Model.CriteriaDocumentation)
+            </div>
+        </div>
+    </div>
+
+    <div id="show_expert_summary" is-visible="@showExpertSummary">
+        <h2>
+            Ekspertenes oppsummering
+        </h2>
+
+        <div>
+            <div is-visible="@showSpeciesStatusDocumentation">
+                <h3>Generelt om @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
+                <div class="expert_Assessment">
+                    <div class="expert_text">
+                        @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)
+                    </div>
+                </div>
+            </div>
+
+            <div is-visible="@showUncertaintyStatusDescription">
+                <h3>Usikkerhet rundt etableringsklasse</h3>
+                <div class="expert_Assessment">
+                    <div class="expert_text">
+                        @Html.Raw(Model.UncertaintyStatusDescription)
+                    </div>
+                </div>
+            </div>
+
+            <div is-visible="@showDomesticSpreadDocumentation">
+                <h3>Utbredelse i Norge</h3>
+                <div class="expert_Assessment">
+                    <div class="expert_text">
+                        @Html.Raw(Model.CriteriaDocumentationDomesticSpread)
+                    </div>
+                </div>
+            </div>
+
+            <div is-visible="@showSpreadWays">
+                <h3>Spredningsmåter</h3>
+                <div class="expert_Assessment" is-visible="@Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)">
+                    <div class="expert_text">
+                        <p>
+                            @Html.Raw(Model.SpreadIndoorFurtherInfo)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="expert_Assessment" is-visible="@(!string.IsNullOrEmpty(Model.SpreadIntroductionFurtherInfo))">
+                    <div class="expert_text">
+                        <p>
+                            @Html.Raw(Model.SpreadIntroductionFurtherInfo)
+                        </p>
+                    </div>
+                </div>
+
+                <div class="expert_Assessment" is-visible="@(!string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo))">
+                    <div class="expert_text">
+                        @Html.Raw(Model.SpreadFurtherSpreadFurtherInfo)
+                    </div>
+                </div>
+            </div>
+
+            <div is-visible="@showInvationPotentialDocumentation">
+                <h3>Invasjonspotensial</h3>
+                <div class="expert_Assessment">
+                    <div class="expert_text">
+                        @Html.Raw(Model.CriteriaDocumentationInvationPotential)
+                    </div>
+                </div>
+            </div>
+
+            <div is-visible="@showEcoEffectDocumentation">
+                <h3>Økologisk effekt</h3>
+                <div class="expert_Assessment">
+                    <div class="expert_text">
+                        @Html.Raw(Model.CriteriaDocumentationEcoEffect)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="show_assessment_reasoning" class="page_section" is-visible="@showReasoning">
+    <h2>
+        Begrunnelse
+    </h2>
+
+    <div class="expert_Assessment">
+        <div class="expert_text">
+            <div is-visible="@showChangedAssessment">
+                <p is-visible="@showAlienStatusExplanation">
+                    @*TODO: strip html tags in mapping when the correct name is ready*@
+                    @Html.Raw(Model.AlienStatusExplanation) 
+                </p>
+                <p is-visible="@showChangedFromAlien">
+                    @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Html.Raw(Model.ChangedFromAlien.DisplayName()).
+                </p>
+                <p is-visible="showChangedFromAlienDescription">
+                    @Html.Raw(Model.ChangedFromAlienDescription)
+                </p>
+            </div>
+            <p is-visible="@showConnectedToHigherLowerTaxonDescription">
+                @Html.Raw(Model.ConnectedToHigherLowerTaxonDescription)
+            </p>
+            <p is-visible="@showUncertaintyEstablishmentTimeDescription">
+                @Html.Raw(Model.UncertaintyEstablishmentTimeDescription)
+            </p>
+        </div>
+    </div>
+</div>

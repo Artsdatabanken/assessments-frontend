@@ -117,17 +117,50 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class DeciciveCriteria
     {
+        public enum DecisiveCriteriaEnum
+        {
+            [Display(Name = "A")]
+            dcexa,
+
+            [Display(Name = "B")]
+            dcexb,
+
+            [Display(Name = "AB")]
+            dcipab,
+
+            [Display(Name = "C")]
+            dcipc,
+
+            [Display(Name = "D")]
+            dceed,
+
+            [Display(Name = "E")]
+            dcipe,
+
+            [Display(Name = "F")]
+            dceef,
+
+            [Display(Name = "G")]
+            dcipg,
+
+            [Display(Name = "H")]
+            dceeh,
+
+            [Display(Name = "I")]
+            dcipi,
+        };
+
         public static readonly Filter.FilterItem[] ExistanceTimeAndExpansionSpeed =
         {
             new()
             {
                 Name = "A – artens levetid i Norge",
-                NameShort = "dcexa"
+                NameShort = nameof(DecisiveCriteriaEnum.dcexa)
             },
             new()
             {
                 Name = "B – ekspansjonshastighet",
-                NameShort = "dcexb"
+                NameShort = nameof(DecisiveCriteriaEnum.dcexb)
             }
         };
 
@@ -136,7 +169,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             new()
             {
                 Name = "A×B – artens levetid i Norge × ekspansjonshastighet",
-                NameShort = "dcipab",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipab)
             },
             new()
             {
@@ -147,7 +180,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             new()
             {
                 Name = "C – kolonisert areal",
-                NameShort = "dcipc"
+                NameShort = nameof(DecisiveCriteriaEnum.dcipc)
             }
         };
 
@@ -156,32 +189,32 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             new()
             {
                 Name = "D – effekt på truede arter eller nøkkelarter",
-                NameShort = "dceed"
+                NameShort = nameof(DecisiveCriteriaEnum.dceed)
             },
             new()
             {
                 Name = "E – effekt på øvrige arter",
-                NameShort = "dcipe"
+                NameShort = nameof(DecisiveCriteriaEnum.dcipe)
             },
             new()
             {
                 Name = "F – effekt på truede eller sjeldne naturtyper",
-                NameShort = "dceef"
+                NameShort = nameof(DecisiveCriteriaEnum.dceef)
             },
             new()
             {
                 Name = "G – effekt på øvrige naturtyper",
-                NameShort = "dcipg"
+                NameShort = nameof(DecisiveCriteriaEnum.dcipg)
             },
             new()
             {
                 Name = "H – overføring av genetisk materiale",
-                NameShort = "dceeh"
+                NameShort = nameof(DecisiveCriteriaEnum.dceeh)
             },
             new()
             {
                 Name = "I – overføring av parasitter eller patogener",
-                NameShort = "dcipi"
+                NameShort = nameof(DecisiveCriteriaEnum.dcipi)
             }
         };
 

@@ -36,3 +36,7 @@ Hard coded in _Filters.cshtml partials file.
 
 - In wwwroot/js/filter.js do:
 	- Add the filter's checkbox id to the list "handleFirstTimeIds" if you want it to open by default.
+
+- In the file Infrastructure/AlienSpecies/QueryHelpers.cs, apply the filter to the query results list.
+
+Remember to rebuild the solution before testing.

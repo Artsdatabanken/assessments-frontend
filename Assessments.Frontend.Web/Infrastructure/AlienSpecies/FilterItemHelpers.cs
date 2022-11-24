@@ -115,6 +115,93 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
+    public class DeciciveCriteria
+    {
+        public static readonly Filter.FilterItem[] ExistanceTimeAndExpansionSpeed =
+        {
+            new()
+            {
+                Name = "A – artens levetid i Norge",
+                NameShort = "dcexa"
+            },
+            new()
+            {
+                Name = "B – ekspansjonshastighet",
+                NameShort = "dcexb"
+            }
+        };
+
+        public static readonly Filter.FilterItem[] InvationPotential =
+        {
+            new()
+            {
+                Name = "A×B – artens levetid i Norge × ekspansjonshastighet",
+                NameShort = "dcipab",
+            },
+            new()
+            {
+                Name = "A×B hvor...",
+                NameShort = "dcipah",
+                SubGroup = ExistanceTimeAndExpansionSpeed
+            },
+            new()
+            {
+                Name = "C – kolonisert areal",
+                NameShort = "dcipc"
+            }
+        };
+
+        public static readonly Filter.FilterItem[] EcologicalEffect =
+        {
+            new()
+            {
+                Name = "D – effekt på truede arter eller nøkkelarter",
+                NameShort = "dceed"
+            },
+            new()
+            {
+                Name = "E – effekt på øvrige arter",
+                NameShort = "dcipe"
+            },
+            new()
+            {
+                Name = "F – effekt på truede eller sjeldne naturtyper",
+                NameShort = "dceef"
+            },
+            new()
+            {
+                Name = "G – effekt på øvrige naturtyper",
+                NameShort = "dcipg"
+            },
+            new()
+            {
+                Name = "H – overføring av genetisk materiale",
+                NameShort = "dceeh"
+            },
+            new()
+            {
+                Name = "I – overføring av parasitter eller patogener",
+                NameShort = "dcipi"
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023DeciciveCriteria =
+        {
+            new()
+            {
+                Name = "Invasjonspotensial",
+                NameShort = "dcin",
+                SubGroup = InvationPotential
+            },
+            new()
+            {
+                Name = "Økologisk effekt",
+                NameShort = "dcok",
+                SubGroup = EcologicalEffect
+            }
+        };
+    }
+
     public class TaxonRank
     {
         public enum TaxonRankEnum

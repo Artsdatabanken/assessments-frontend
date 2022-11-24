@@ -127,11 +127,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string SpeciesStatus { get; set; }
 
         /// <summary>
-        /// A list of reasons for a change in category from previous assessment, if any
-        /// </summary>
-        public List<string> ReasonForChangeOfCategory { get; set; }
-
-        /// <summary>
         /// Further information about the taxons' secondary spread (i.e. spread within Norwegian nature)
         /// </summary>
         public string SpreadFurtherSpreadFurtherInfo { get; set; }

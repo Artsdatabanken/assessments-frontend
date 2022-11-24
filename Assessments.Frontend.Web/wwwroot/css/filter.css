@@ -219,6 +219,7 @@ li.checkbox label {
 
 .label_text {
     width: 100%;
+    hyphens: auto;
 }
 
 .filter_groups ul {

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Assessments.Frontend.Web.Models;
+using System;
 using System.Linq;
-using Assessments.Frontend.Web.Models;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -44,12 +44,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                         return $"{parameters.Category.Length}";
                     return String.Empty;
                 case nameof(parameters.EcologicalEffect):
-                    if (parameters.Category?.Any() == true)
-                        return $"{parameters.Category.Length}";
+                    if (parameters.EcologicalEffect?.Any() == true)
+                        return $"{parameters.EcologicalEffect.Length}";
                     return String.Empty;
                 case nameof(parameters.InvationPotential):
-                    if (parameters.Category?.Any() == true)
-                        return $"{parameters.Category.Length}";
+                    if (parameters.InvationPotential?.Any() == true)
+                        return $"{parameters.InvationPotential.Length}";
                     return String.Empty;
                 case nameof(parameters.SpeciesStatus):
                     if (parameters.SpeciesStatus?.Any() == true)

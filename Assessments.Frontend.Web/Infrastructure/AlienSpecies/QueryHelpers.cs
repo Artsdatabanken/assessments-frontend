@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using Assessments.Frontend.Web.Models;
+﻿using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
+using System;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -21,10 +21,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.Where(x => parameters.Category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category));
 
             if (parameters.EcologicalEffect.Any())
-                query = query.Where(x => parameters.EcologicalEffect.Any(y => y.Contains(x.ScoreEcologicalEffect.ToString())));
+                query = query.Where(x => parameters.EcologicalEffect.Any(y => x.ScoreEcologicalEffect != null && y.Contains(x.ScoreEcologicalEffect.ToString())));
 
             if (parameters.InvationPotential.Any())
-                query = query.Where(x => parameters.InvationPotential.Any(y => y.Contains(x.ScoreInvationPotential.ToString())));
+                query = query.Where(x => parameters.InvationPotential.Any(y => x.ScoreInvationPotential != null && y.Contains(x.ScoreInvationPotential.ToString())));
 
             if (parameters.CategoryChanged.Any())
                 query = ApplyCategoryChange(parameters.CategoryChanged, query);

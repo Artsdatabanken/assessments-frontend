@@ -2,40 +2,9 @@
    impact factors, criteria and habitats. Re-arranging some items that has a
    simpler (but more chaotic) display for users without javasctipt. */
 
-// RUN ON START:
-showTabButtons();
-first_close();
-if (document.getElementById('criteria') && document.getElementById('criteria').classList) {
-    document.getElementById('criteria').classList.add("summary");
-}
-if (document.getElementById('impactfactors') && document.getElementById('impactfactors').classList) {
-    document.getElementById('impactfactors').classList.add("summary");
-}
-
-function showTabButtons() {
-    // Users with javascript are shown the buttons to toggle tabs
-    var elements = document.getElementsByClassName("changetab");
-    for (let i in elements) {
-        //let parentnode = elements[i].closest(li);
-        if (elements[i] && elements[i].style) {
-            elements[i].style.visibility = "visible";
-        }
-    }
-}
-
-function first_close() {
-    // Run on Start
-    // Adds the class "opened_element" to all active tabs for use in the dropdown effects.
-    // Adding extra class means less exceptions.
-    var elements = document.querySelectorAll(".tabbed_element_container li.active");
-
-    for (let i in elements) {
-        if (elements[i] && elements[i].classList) {
-            elements[i].classList.add("opened_element");
-
-        }
-    }
-}
+/*****
+*     Start of code especially for redlist species 2021
+*****/
 
 function criterialist(which, button) {
     // See more text by altering css of the clicked element's top parent node
@@ -88,4 +57,36 @@ function expand(element, className, id) {
             element.classList.add(className);
         }
     }
+}
+
+/*****
+*     End of code especially for redlist species 2021
+*****/
+
+function showTabButtons() {
+    // Users with javascript are shown the buttons to toggle tabs
+    var elements = document.getElementsByClassName("changetab");
+    for (let i in elements) {
+        if (elements[i] && elements[i].style) {
+            elements[i].style.visibility = "visible";
+        }
+    }
+}
+
+// Adds the class "opened_element" to all active tabs for use in the dropdown effects.
+function first_close() {
+    var elements = document.querySelectorAll(".tabbed_element_container li.active");
+
+    Array.prototype.forEach.call(elements, el => {
+        el.classList.add("opened_element");
+    });
+}
+
+showTabButtons();
+first_close();
+if (document.getElementById('criteria') && document.getElementById('criteria').classList) {
+    document.getElementById('criteria').classList.add("summary");
+}
+if (document.getElementById('impactfactors') && document.getElementById('impactfactors').classList) {
+    document.getElementById('impactfactors').classList.add("summary");
 }

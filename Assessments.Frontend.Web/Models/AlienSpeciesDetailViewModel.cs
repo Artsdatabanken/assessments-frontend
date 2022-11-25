@@ -33,6 +33,11 @@ namespace Assessments.Frontend.Web.Models
                 UncertaintyStatusDescription = assessment.UncertaintyStatusDescription
             };
 
+            RegionalSpreadViewModel = new RegionalSpreadViewModel
+            {
+                Category = assessment.Category
+            };
+
             SideBarContentViewModel = new SideBarContentViewModel
             {
                 AssessmentYear = 2023,
@@ -54,6 +59,8 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023 Assessment { get; set; }
 
         public ExpertStatementViewModel ExpertStatementViewModel { get; set; }
+
+        public RegionalSpreadViewModel RegionalSpreadViewModel { get; set; }
 
         public SideBarContentViewModel SideBarContentViewModel { get; set; }
     }

@@ -115,6 +115,11 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
     }
 
+    public class RegionalSpreadViewModel
+    {
+        public AlienSpeciesAssessment2023Category Category { get; set; }
+    }
+
     public class SideBarContentViewModel
     {
         public class SideBarPreviousAssessment

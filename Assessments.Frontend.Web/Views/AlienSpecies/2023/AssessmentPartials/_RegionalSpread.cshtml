@@ -1,0 +1,21 @@
+﻿@model RegionalSpreadViewModel;
+
+@{
+    var showPage = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
+}
+
+<div class="page_section" is-visible="@showPage">
+    <h2>
+        Utbredelse
+    </h2>
+    <button class="changetab active">Utbredelse i Norge</button>
+    <button class="changetab">Regional naturvariasjon</button>
+    <div class="tabbed_element_container">
+        <div>
+            <div class="tablist_listheader"></div>
+        </div>
+        <div>
+            <div class="tablist_listheader"></div>
+        </div>
+    </div>
+</div>

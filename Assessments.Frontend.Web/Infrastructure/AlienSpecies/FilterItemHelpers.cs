@@ -173,7 +173,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "A×B hvor...",
+                Name = "A×B hvor høyeste skår er...",
                 NameShort = "dcipah",
                 SubGroup = ExistanceTimeAndExpansionSpeed
             },

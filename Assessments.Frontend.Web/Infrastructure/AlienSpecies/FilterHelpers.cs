@@ -43,6 +43,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.Category?.Any() == true)
                         return $"{parameters.Category.Length}";
                     return String.Empty;
+                case nameof(parameters.CategoryChanged):
+                    if (parameters.CategoryChanged?.Any() == true)
+                        return $"{parameters.CategoryChanged.Length}";
+                    return String.Empty;
                 case nameof(parameters.SpeciesStatus):
                     if (parameters.SpeciesStatus?.Any() == true)
                         return $"{parameters.SpeciesStatus.Length}";

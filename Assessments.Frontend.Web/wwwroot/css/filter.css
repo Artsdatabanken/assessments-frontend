@@ -543,7 +543,7 @@ button.list_header {
 .only_js .filter_area,
 .only_js .filter_category,
 .only_js .filter_ecologicaleffect,
-.only_js .filter_invationpotential,
+.only_js .filter_invasionpotential,
 .only_js .filter_categorychanged,
 .only_js .filter_subgroup,
 .only_js .filter_speciesstatus,
@@ -565,7 +565,9 @@ button.list_header {
 
 /*sub groups*/
 .only_js input[type=checkbox]:not(:checked)#show_ccke ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_eco ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_eds ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_inv ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_skr ~ .filter_subgroup,
@@ -573,8 +575,6 @@ button.list_header {
 /*groups*/
 .only_js input[type=checkbox]:not(:checked)#show_area ~ .filter_area,
 .only_js input[type=checkbox]:not(:checked)#show_category ~ .filter_category,
-.only_js input[type=checkbox]:not(:checked)#show_ecologicaleffect ~ .filter_ecologicaleffect,
-.only_js input[type=checkbox]:not(:checked)#show_invationpotential ~ .filter_invationpotential,
 .only_js input[type=checkbox]:not(:checked)#show_categorychanged ~ .filter_categorychanged,
 .only_js input[type=checkbox]:not(:checked)#show_region ~ .filter_region,
 .only_js input[type=checkbox]:not(:checked)#show_regions ~ .filter_regions,
@@ -594,7 +594,9 @@ button.list_header {
 }
 
 .only_js input[type=checkbox]:checked#show_ccke ~ .filter_subgroup,
+.only_js input[type=checkbox]:checked#show_eco ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_eds ~ .filter_subgroup,
+.only_js input[type=checkbox]:checked#show_inv ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:checked#show_skr ~ .filter_subgroup,

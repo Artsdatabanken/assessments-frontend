@@ -20,7 +20,7 @@ namespace Assessments.Frontend.Web.Models
                 CriteriaDocumentation = assessment.RiskAssessmentCriteriaDocumentation,
                 CriteriaDocumentationDomesticSpread = assessment.RiskAssessmentCriteriaDocumentationDomesticSpread,
                 CriteriaDocumentationEcoEffect = assessment.RiskAssessmentCriteriaDocumentationEcoEffect,
-                CriteriaDocumentationInvationPotential = assessment.RiskAssessmentCriteriaDocumentationInvationPotential,
+                CriteriaDocumentationInvasionPotential = assessment.RiskAssessmentCriteriaDocumentationInvasionPotential,
                 CriteriaDocumentationSpeciesStatus = assessment.RiskAssessmentCriteriaDocumentationSpeciesStatus,
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 HasIndoorProduction = assessment.HasIndoorProduction,

@@ -114,7 +114,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species' total score on the invation axis
         /// </summary>
-        public int? ScoreInvationPotential { get; set; }
+        public int? ScoreInvasionPotential { get; set; }
 
         /// <summary>
         /// The species group name, based on the taxon hierarchy
@@ -184,7 +184,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Description and documentation of the species' invasion potential. Free text field
         /// </summary>
-        public string RiskAssessmentCriteriaDocumentationInvationPotential { get; set; }
+        public string RiskAssessmentCriteriaDocumentationInvasionPotential { get; set; }
 
         /// <summary>
         /// Description of relevant aspects of taxonomy, the species life history and ecology. Free text field
@@ -194,7 +194,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 
         /// </summary>
-        public bool? RiskAssessmentClimateEffectsInvationpotential { get; set; }
+        public bool? RiskAssessmentClimateEffectsInvasionpotential { get; set; }
 
         /// <summary>
         /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 

@@ -220,5 +220,160 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
             return previousAssessments;
         }
+
+        private static Dictionary<int, int> introLowTable = new Dictionary<int, int>()
+        {
+            { 1, 1 },
+            { 5, 2 },
+            { 13, 3 },
+            { 26, 4 },
+            { 43, 5 },
+            { 65, 6 },
+            { 91, 7 },
+            { 121, 8 },
+            { 156, 9 },
+            { 195, 10 }
+        };
+
+        private static Dictionary<int, int> introHighTable = new Dictionary<int, int>()
+        {
+            { 1, 1 },
+            { 6, 2 },
+            { 15, 3 },
+            { 29, 4 },
+            { 47, 5 },
+            { 69, 6 },
+            { 96, 7 },
+            { 127, 8 },
+            { 163, 9 },
+            { 204, 10 }
+        };
+
+        private static int IntroductionNum(Dictionary<int, int> table, long? best)
+        {
+            var keys = table.Keys.Reverse();
+            foreach (var key in keys)
+            {
+                if (best >= key)
+                    return table[key];
+            }
+            return 0;
+        }
+
+        internal static int IntroductionsLow(RiskAssessment ra)
+        {
+            int num = IntroductionNum(introLowTable, ra.IntroductionsBest);
+            return (int)(num == 0 ? 0 : ra.IntroductionsBest - num);
+        }
+
+        internal static int IntroductionsHigh(RiskAssessment ra)
+        {
+            int num = IntroductionNum(introHighTable, ra.IntroductionsBest);
+            return (int)(num == 0 ? 0 : ra.IntroductionsBest + num);
+        }
+
+        private static long? AOO10yr(long? occurrences1, long? introductions)
+        {
+            if (introductions.HasValue == false || occurrences1.HasValue == false)
+            {
+                return null;
+            }
+            var occ = occurrences1.Value;
+            var intr = introductions.Value;
+            if (occ is 0 && intr is 0)
+            {
+                return 0;
+            }
+            else return occ is 0 ? (long)(4 * Math.Round(0.64 + 0.36 * intr, 0)) : (long)(4 * Math.Round(occ + Math.Pow(intr, ((double)occ + 9) / 10)));
+        }
+
+        internal static int GetAOOfuture(FA4 assessment, RiskAssessment riskAssessment, string estimateQuantile)
+        {
+            if (assessment.AssessmentConclusion == "WillNotBeRiskAssessed")
+            {
+                return 0;
+            }
+            //TODO: use ra.Occurrences1Low/Best/High without asking for HasValue (??) when all assessments are ready before innsynet (should not be any null for doorknockers at that point..)
+            long? areaOfOccurrenceIn50Years;
+            long? numberOfOccurrences;
+            int numberOfIntroductions;
+            if (estimateQuantile == "low")
+            {
+                areaOfOccurrenceIn50Years = riskAssessment.AOO50yrLowInput;
+                numberOfOccurrences = riskAssessment.Occurrences1Low ?? 0;
+                numberOfIntroductions = IntroductionsLow(riskAssessment);
+
+            }
+            else if (estimateQuantile == "best")
+            {
+                areaOfOccurrenceIn50Years = riskAssessment.AOO50yrBestInput;
+                numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
+                numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
+            }
+            else
+            {
+                areaOfOccurrenceIn50Years = riskAssessment.AOO50yrHighInput;
+                numberOfOccurrences = riskAssessment.Occurrences1High ?? 0;
+                numberOfIntroductions = IntroductionsHigh(riskAssessment);
+            }
+
+            var norway = "N";
+            var assessedSelfReproducing = "AssessedSelfReproducing";
+            var value = 0;
+            if (assessment.Limnic)
+                value += 1;
+            if (assessment.Marine)
+                value += 2;
+            if (assessment.Terrestrial)
+                value += 4;
+
+            switch (value)
+            {
+                case 1:
+                    if (assessment.EvaluationContext == norway)
+                    {
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(22000, (long)areaOfOccurrenceIn50Years) : Math.Min(22000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    }
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(500, (long)areaOfOccurrenceIn50Years) : Math.Min(500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                case 2:
+                    if (assessment.EvaluationContext == norway)
+                    {
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(934000, (long)areaOfOccurrenceIn50Years) : Math.Min(934000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    }
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1099000, (long)areaOfOccurrenceIn50Years) : Math.Min(1099000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                case 3:
+                    if (assessment.EvaluationContext == norway)
+                    {
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(956000, (long)areaOfOccurrenceIn50Years) : Math.Min(956000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    }
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1099500, (long)areaOfOccurrenceIn50Years) : Math.Min(1099500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                case 4:
+                    if (assessment.EvaluationContext == norway)
+                    {
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(310000, (long)areaOfOccurrenceIn50Years) : Math.Min(310000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    }
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(24000, (long)areaOfOccurrenceIn50Years) : Math.Min(24000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                case 5:
+                    if (assessment.EvaluationContext == norway)
+                    {
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(332000, (long)areaOfOccurrenceIn50Years) : Math.Min(332000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    }
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(24500, (long)areaOfOccurrenceIn50Years) : Math.Min(24500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                case 6:
+                    if (assessment.EvaluationContext == norway)
+                    {
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1244000, (long)areaOfOccurrenceIn50Years) : Math.Min(1244000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    }
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1123000, (long)areaOfOccurrenceIn50Years) : Math.Min(1123000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                case 7:
+                    if (assessment.EvaluationContext == norway)
+                    {
+                        return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1266000, (long)areaOfOccurrenceIn50Years) : Math.Min(1266000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                    }
+                    return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1123500, (long)areaOfOccurrenceIn50Years) : Math.Min(1123500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
+                default: 
+                    return 0;
+            }
+        }
     }
 }

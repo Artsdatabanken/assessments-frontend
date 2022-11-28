@@ -21,6 +21,9 @@ if (filters) {
     const handleFirstTimeIds = [
         "show_area",
         "show_eco",
+        "show_dcin",
+        "show_dcok",
+        "show_dcipah",
         "show_eds",
         "show_inv",
         "show_sal",

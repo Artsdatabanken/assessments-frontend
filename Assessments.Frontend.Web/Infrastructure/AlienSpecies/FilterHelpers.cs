@@ -47,6 +47,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.CategoryChanged?.Any() == true)
                         return $"{parameters.CategoryChanged.Length}";
                     return String.Empty;
+                case nameof(parameters.DecisiveCriterias):
+                    if (parameters.DecisiveCriterias?.Any() == true)
+                        return $"{parameters.DecisiveCriterias.Length}";
+                    return String.Empty;
                 case nameof(parameters.SpeciesStatus):
                     if (parameters.SpeciesStatus?.Any() == true)
                         return $"{parameters.SpeciesStatus.Length}";
@@ -106,6 +110,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             count += parameters.Area.Length;
             count += parameters.Category.Length;
             count += parameters.CategoryChanged.Length;
+            count += parameters.DecisiveCriterias.Length;
             count += parameters.SpeciesStatus.Length;
             count += parameters.SpeciesGroups.Length;
             count += parameters.ProductionSpecies.Length;
@@ -123,6 +128,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             var selectionlist = parameters.Area;
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
             selectionlist = selectionlist.Concat(parameters.CategoryChanged).ToArray();
+            selectionlist = selectionlist.Concat(parameters.DecisiveCriterias).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesStatus).ToArray();
             selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesGroups).ToArray();
@@ -158,6 +164,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             public const string AssessmentArea = "Område";
             public const string Category = "Risikokategori";
             public const string CategoryChanged = "Endring i risikokategori";
+            public const string DecisiveCriteria = "Avgjørende kriterier for kategori";
             public const string GeographicRiskVariation = "Geografisk variasjon i risiko";
             public const string ClimateChangeRisk = "Betydning av klimaendringer for risiko";
             public const string FirstTimeAssessment = "Risikovurdert for første gang";

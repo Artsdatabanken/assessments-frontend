@@ -23,6 +23,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.CategoryChanged.Any())
                 query = ApplyCategoryChange(parameters.CategoryChanged, query);
 
+            if (parameters.DecisiveCriterias.Any())
+                query = ApplyDecisiveCriteria(parameters.DecisiveCriterias, query);
+
             if (parameters.SpeciesStatus.Any())
                 query = ApplySpeciesStatus(parameters.SpeciesStatus, query);
 
@@ -81,6 +84,31 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category) ||
                 category.Any(y => x.ScoreEcologicalEffect != null && y.Contains("ee") && y.Contains(x.ScoreEcologicalEffect.ToString())) ||     // "ee" identifies ecological effect
                 category.Any(y => x.ScoreInvasionPotential != null && y.Contains("ip") && y.Contains(x.ScoreInvasionPotential.ToString())));  // ""ip" identifies invasion potential
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyDecisiveCriteria(string[] criterias, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+            foreach (var criteria in criterias)
+            {
+                var assessments = criteria switch
+                {
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcexa) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcexa.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcexb) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcexb.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipab) => query.Where(x => DeciciveCriteria.DecisiveCriteriaEnum.dcipab.DisplayName().Any(y => x.Criteria.Contains(y))),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipc) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipc.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceed) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceed.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipe) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipe.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceef) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceef.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipg) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipg.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceeh) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceeh.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipi) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipi.DisplayName())),
+                    _ => null
+                };
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplySpeciesStatus(string[] speciesStatus, IQueryable<AlienSpeciesAssessment2023> query)

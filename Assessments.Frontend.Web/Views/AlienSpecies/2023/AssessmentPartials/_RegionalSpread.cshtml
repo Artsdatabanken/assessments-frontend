@@ -4,18 +4,22 @@
     var showPage = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
 }
 
-<div class="page_section" is-visible="@showPage">
+<div id="geographical_spread" class="page_section" is-visible="@showPage">
     <h2>
         Utbredelse
     </h2>
-    <button class="changetab active">Utbredelse i Norge</button>
-    <button class="changetab">Regional naturvariasjon</button>
+    <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , 'geographical_spread' )">Utbredelse i Norge</button>
+    <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , 'geographical_spread' )">Regional naturvariasjon</button>
     <div class="tabbed_element_container">
-        <div>
-            <div class="tablist_listheader"></div>
+        <div id="domestic_spread">
+            <div class="tablist_listheader">
+                domestic_spread
+            </div>
         </div>
-        <div>
-            <div class="tablist_listheader"></div>
+        <div id="regional_nature_variation" class="inactive">
+            <div class="tablist_listheader">
+                regional_nature_variation
+            </div>
         </div>
     </div>
 </div>

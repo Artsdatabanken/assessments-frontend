@@ -1,6 +1,18 @@
-/* Info-tab actions for the assessment-pages. Openin/closing the big lists for 
-   impact factors, criteria and habitats. Re-arranging some items that has a
-   simpler (but more chaotic) display for users without javasctipt. */
+/* Redlist species 2021:
+ *
+ * Info-tab actions for the assessment-pages. Openin/closing the big lists for 
+ * impact factors, criteria and habitats. Re-arranging some items that has a
+ * simpler (but more chaotic) display for users without javasctipt. 
+ *
+ * The rest:
+ * If you want to add a section with tabs you need to make a main div with an id. 
+ * This div should contain buttons which has their own ids and a "changetab" class, as well as setting one of them with class name "active".
+ * Below the buttons you should place a new div with class name "tabbed_element_container". This div will contain the content divs for the different tabs.
+ * Each content div needs to have an id. You can add as many as you like.
+ * The buttons, which are the tab selectors should have an onclick function and call the selectTab-function in this file.
+ * Then you should have a section with tabs.
+ *
+*/
 
 /*****
 *     Start of code especially for redlist species 2021
@@ -59,6 +71,15 @@ function expand(element, className, id) {
     }
 }
 
+// Adds the class "opened_element" to all active tabs for use in the dropdown effects.
+function first_close() {
+    var elements = document.querySelectorAll(".tabbed_element_container li.active");
+
+    Array.prototype.forEach.call(elements, el => {
+        el.classList.add("opened_element");
+    });
+}
+
 /*****
 *     End of code especially for redlist species 2021
 *****/
@@ -73,12 +94,26 @@ function showTabButtons() {
     }
 }
 
-// Adds the class "opened_element" to all active tabs for use in the dropdown effects.
-function first_close() {
-    var elements = document.querySelectorAll(".tabbed_element_container li.active");
+const selectTab = (buttonId, tabId, mainSectionId) => {
+    const active = 'active';
+    const inactive = 'inactive';
+    const elementButtons = document.querySelectorAll(`#${mainSectionId} button`);
+    const elementSections = document.querySelectorAll(`#${mainSectionId} .tabbed_element_container`)[0]?.children;
 
-    Array.prototype.forEach.call(elements, el => {
-        el.classList.add("opened_element");
+    Array.prototype.forEach.call(elementButtons, button => {
+        if (button?.id === buttonId) {
+            button.classList.remove(inactive);
+            button.classList.add(active)
+        }
+        else {
+            button.classList.remove(active);
+            button.classList.add(inactive);
+        }
+    });
+
+    Array.prototype.forEach.call(elementSections, element => {
+        if (element?.id === tabId) element.classList.remove(inactive);
+        else element.classList.add(inactive);
     });
 }
 

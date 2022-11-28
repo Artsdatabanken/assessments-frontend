@@ -65,7 +65,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 var assessments = change switch
                 {
-                    nameof(CategoryChangeEnum.ccvf) => query.Where(x => x.PreviousAssessments.Count == 0 || x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category == AlienSpeciesAssessment2023Category.NR)),
+                    nameof(CategoryChangeEnum.ccvf) => query.Where(x => (x.PreviousAssessments.Count == 0 || x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category == AlienSpeciesAssessment2023Category.NR)) && x.Category != AlienSpeciesAssessment2023Category.NR),
                     nameof(CategoryChangeEnum.ccsk) => query.Where(x => x.PreviousAssessments.Count > 0 && x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category == y.Category)),
                     nameof(CategoryChangeEnum.ccre) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(realChange))),
                     nameof(CategoryChangeEnum.ccnk) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(newInformation))),

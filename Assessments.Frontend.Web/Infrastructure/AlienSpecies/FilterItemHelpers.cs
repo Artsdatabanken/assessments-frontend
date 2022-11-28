@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Shared.Helpers;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
-using Assessments.Shared.Helpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -67,6 +67,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
 
         public static readonly Filter.FilterItem[] AlienSpecies2023Categories = Enum.GetValues<AlienSpeciesAssessment2023Category>()
+            .Where(x => x != AlienSpeciesAssessment2023Category.NR)
             .Select(x => new Filter.FilterItem
             {
                 NameShort = x.ToString(),

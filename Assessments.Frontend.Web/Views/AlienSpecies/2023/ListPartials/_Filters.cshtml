@@ -152,8 +152,8 @@
                     {
                         MakeFilterChips(Model.Area, AllAreas);
                         MakeFilterChips(Model.Category, AllCategories);
-                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects);
                         MakeFilterChips(Model.InvationPotential, AllInvationPotentials);
+                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects);
                         MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged);
                         MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus);
                         MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies);
@@ -211,8 +211,8 @@
                                 @{
                                     MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
                                     MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
-                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects, SearchAndFilterNames.EcologicalEffect, "okologiskeffektfiltre");
                                     MakeFilterGroup(nameof(Model.InvationPotential), Model.InvationPotential, AllInvationPotentials, SearchAndFilterNames.InvationPotential, "invasjonspotensialfiltre");
+                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects, SearchAndFilterNames.EcologicalEffect, "okologiskeffektfiltre");
                                     MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
                                     MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
                                     MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged, SearchAndFilterNames.CategoryChanged, "kategoriendringsfiltre");

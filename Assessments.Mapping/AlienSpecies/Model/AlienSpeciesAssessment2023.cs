@@ -301,5 +301,15 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// </summary>
         public int? RiskAssessmentIntroductionsHigh { get; set; }
 
+        /// <summary>
+        /// The available methods to estimate the population lifetime of a species (or its likelihood of extinction) in Norway.
+        /// </summary>
+        public AlienSpeciesAssessment2023MedianLifetimeEstimationMethod MedianLifetimeEstimationMethod { get; set; }
+
+        /// <summary>
+        /// Is the median population lifetime that was automatically estimated based on estimation method "simplified estimation" accepted?
+        /// </summary>
+        public bool IsAcceptedSimplifiedEstimate { get; set; }
+
     }
 }

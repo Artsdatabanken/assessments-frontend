@@ -57,6 +57,14 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [Description("Artens delkategori (1-4) på effektaksen i risikomatrisen. Denne bestemmes av artens økologiske effekt")]
         public int? ScoreEcologicalEffect { get; set; }
 
+        [DisplayName("Estimeringsmetode A-kriteriet")]
+        [Description("Valgt estimeringsmetode for A-kriteriet, artens mediane levetid i Norge")]
+        public string MedianLifetimeEstimationMethod { get; set; }
+
+        [DisplayName("Forenklet Anslag akseptert")]
+        [Description("Er den automatisk estimerte utregningen av artens mediane levetid i Norge basert på metoden forenklet anslag akseptert?")]
+        public bool? IsAcceptedSimplifiedEstimate { get; set; }
+
         [DisplayName("Geografisk variasjon i risiko")]
         [Description("Arter med en viss utstrekning i forekomstarealet kan, som en respons på ulike miljøbetingelser, ha ulik påvirkning i naturen. Spørsmålet viser til om arten kunne fått en lavere risikokategori i deler av sitt potensielle forekomstareal")]
         public bool? RiskAssessmentGeographicVariationInCategory { get; set; }

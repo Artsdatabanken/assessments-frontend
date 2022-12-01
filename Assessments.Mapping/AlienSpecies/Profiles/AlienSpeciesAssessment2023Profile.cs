@@ -114,7 +114,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                       opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                       opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
                   })
-
+                  .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => src.Category == "NR" || src.RiskAssessment.ChosenSpreadMedanLifespan == "RedListCategoryLevel" ? "NotRelevant" : src.RiskAssessment.ChosenSpreadMedanLifespan))
+                  .ForMember(dest => dest.IsAcceptedSimplifiedEstimate, opt => opt.MapFrom(src => src.RiskAssessment.AcceptOrAdjustCritA == "accept"))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
                 ;
 

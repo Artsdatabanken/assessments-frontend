@@ -1,12 +1,12 @@
-﻿using Assessments.Frontend.Web.Infrastructure;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
@@ -21,7 +21,7 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index(AlienSpeciesListViewModel viewModel, int? page, bool export)
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
-            
+
             query = QueryHelpers.ApplyParameters(viewModel, query);
 
             if (export)

@@ -50,18 +50,19 @@ namespace Assessments.Frontend.Web.Infrastructure
             return sb.ToString();
         }
         
-        public static RouteValueDictionary ToRouteValues(this QueryString queryString, object obj)
+        public static string AddParameters(this QueryString queryString, object routeValues)
         {
-            var valueCollection = HttpUtility.ParseQueryString(queryString.ToString());
+            var nameValueCollection = HttpUtility.ParseQueryString(queryString.ToString());
 
-            var values = new RouteValueDictionary(obj);
+            var values = new RouteValueDictionary(routeValues);
 
-            foreach (string key in valueCollection)
+            foreach (var element in values)
             {
-                if (key != null && !values.ContainsKey(key)) values[key] = valueCollection[key];
+                nameValueCollection.Remove(element.Key);
+                nameValueCollection.Add(element.Key, element.Value!.ToString());
             }
 
-            return values;
+            return $"?{nameValueCollection}";
         }
 
         public static string RemoveParameters(this QueryString queryString, IEnumerable<string> parameters)

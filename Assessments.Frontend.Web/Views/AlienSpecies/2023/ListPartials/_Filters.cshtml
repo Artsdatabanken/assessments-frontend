@@ -160,7 +160,7 @@
                     {
                         string searchstring = " for " + '"' + @GetActiveSelection(Model) + '"';
                         <span>@searchstring</span>
-                        <a href="@Context.Request.QueryString.RemoveParameters(new[] { nameof(AlienSpeciesListParameters.Name) })" class="button tinybutton tertiary search_related">
+                        <a href="@Context.Request.QueryString.RemoveParameters(new[] { nameof(AlienSpeciesListParameters.Name), "Page" })" class="button tinybutton tertiary search_related">
                             <span class="material-icons">close</span>Fjern søk
                         </a>
                     }
@@ -181,7 +181,7 @@
                         MakeFilterChips(Model.WaterRegions, AllWaterRegions);
                     }
 
-                    <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters)" class="button tinybutton tertiary search_related">
+                    <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">
                         <span class="material-icons">close</span>Fjern alle filter
                     </a>
                 </span>

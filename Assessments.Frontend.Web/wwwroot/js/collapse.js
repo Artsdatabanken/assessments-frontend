@@ -43,7 +43,6 @@ const switchArrowType = element => {
 
 const toggleCollapsed = element => {
     isCollapsed = element.style['display'] === 'none';
-    console.log(element.style['display'])
     if (isCollapsed)
         element.style = 'display:block';
     else

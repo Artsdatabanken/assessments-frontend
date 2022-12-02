@@ -51,7 +51,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Skår Invasjonspotensial")]
         [Description("Artens delkategori (1-4) på invasjonsaksen i risikomatrisen. Denne bestemmes av artens invasjonspotensial")]
-        public int? ScoreInvationPotential { get; set; }
+        public int? ScoreInvasionPotential { get; set; }
 
         [DisplayName("Skår Økologisk effekt")]
         [Description("Artens delkategori (1-4) på effektaksen i risikomatrisen. Denne bestemmes av artens økologiske effekt")]
@@ -71,7 +71,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Klimaeffekter invasjonspotensial")]
         [Description("Angir om skåren på invasjonsaksen ville vært lavere i fravær av pågående eller framtidige klimaendringer")]
-        public bool? RiskAssessmentClimateEffectsInvationpotential { get; set; }
+        public bool? RiskAssessmentClimateEffectsInvasionPotential { get; set; }
 
         [DisplayName("Klimaeffekter økologisk effekt")]
         [Description("Angir om skåren på effektaksen ville vært lavere i fravær av pågående eller framtidige klimaendringer")]

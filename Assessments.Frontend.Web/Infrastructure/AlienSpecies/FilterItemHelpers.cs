@@ -18,7 +18,56 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Categories
     {
+        public static readonly Filter.FilterItem[] AlienSpecies2023InvasionPotential =
+        {
+            new Filter.FilterItem
+            {
+                NameShort = "ip1",
+                Name = "Lite",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip2",
+                Name = "Begrensa",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip3",
+                Name = "Moderat",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip4",
+                Name = "Stort",
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffect =
+        {
+            new Filter.FilterItem
+            {
+                NameShort = "ee1",
+                Name = "Ingen kjent",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee2",
+                Name = "Liten",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee3",
+                Name = "Middels",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee4",
+                Name = "Stor",
+            }
+        };
+
         public static readonly Filter.FilterItem[] AlienSpecies2023Categories = Enum.GetValues<AlienSpeciesAssessment2023Category>()
+            .Where(x => x != AlienSpeciesAssessment2023Category.NR)
             .Select(x => new Filter.FilterItem
             {
                 NameShort = x.ToString(),

@@ -5,6 +5,8 @@
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
+    var AllEcologicalEffects = Categories.AlienSpecies2023EcologicalEffect;
+    var AllInvasionPotentials = Categories.AlienSpecies2023InvasionPotential;
     var AllDeciciveCriterias = DeciciveCriteria.AlienSpecies2023DeciciveCriteria;
     var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
     var AllHabitats = Habitat.AlienSpecies2023Habitats;
@@ -152,6 +154,8 @@
                         MakeFilterChips(Model.Area, AllAreas);
                         MakeFilterChips(Model.Category, AllCategories);
                         MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged);
+                        MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials);
+                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects);
                         MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias);
                         MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus);
                         MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies);
@@ -209,6 +213,8 @@
                                 @{
                                     MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
                                     MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
+                                    MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials, SearchAndFilterNames.InvasionPotential, "invasjonspotensialfiltre");
+                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects, SearchAndFilterNames.EcologicalEffect, "okologiskeffektfiltre");
                                     MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
                                     MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias, SearchAndFilterNames.DecisiveCriteria, "avgjorende kriterier-filtre");
                                     MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");

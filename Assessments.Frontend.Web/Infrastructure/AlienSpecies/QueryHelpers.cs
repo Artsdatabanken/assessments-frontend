@@ -18,7 +18,13 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.Where(x => parameters.Area.ToEnumerable<AlienSpeciesAssessment2023EvaluationContext>().Contains(x.EvaluationContext) && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien); // remove "regionallyalien" assessments when filtering by evaluation context
 
             if (parameters.Category.Any())
-                query = ApplyRiskCategory(parameters.Category, query);
+                query = query.Where(x => parameters.Category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category));
+
+            if (parameters.EcologicalEffect.Any())
+                query = query.Where(x => parameters.EcologicalEffect.Any(y => x.ScoreEcologicalEffect != null && y.Contains(x.ScoreEcologicalEffect.ToString())));
+
+            if (parameters.InvasionPotential.Any())
+                query = query.Where(x => parameters.InvasionPotential.Any(y => x.ScoreInvasionPotential != null && y.Contains(x.ScoreInvasionPotential.ToString())));
 
             if (parameters.CategoryChanged.Any())
                 query = ApplyCategoryChange(parameters.CategoryChanged, query);
@@ -76,14 +82,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     newQuery = newQuery.Concat(assessments);
             }
             return newQuery.Distinct();
-        }
-
-        private static IQueryable<AlienSpeciesAssessment2023> ApplyRiskCategory(string[] category, IQueryable<AlienSpeciesAssessment2023> query)
-        {
-            return query.Where(x =>
-                category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category) ||
-                category.Any(y => x.ScoreEcologicalEffect != null && y.Contains("ee") && y.Contains(x.ScoreEcologicalEffect.ToString())) ||     // "ee" identifies ecological effect
-                category.Any(y => x.ScoreInvasionPotential != null && y.Contains("ip") && y.Contains(x.ScoreInvasionPotential.ToString())));  // ""ip" identifies invasion potential
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplyDecisiveCriteria(string[] criterias, IQueryable<AlienSpeciesAssessment2023> query)

@@ -66,22 +66,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] ecologicalEffectAndInvasionPotential =
-        {
-            new Filter.FilterItem
-            {
-                NameShort = "inv",
-                Name = "Invasjonspotensial",
-                SubGroup = AlienSpecies2023InvasionPotential
-            },
-            new Filter.FilterItem
-            {
-                NameShort = "eco",
-                Name = "Økologisk effekt",
-                SubGroup = AlienSpecies2023EcologicalEffect
-            },
-        };
-
         public static readonly Filter.FilterItem[] AlienSpecies2023Categories = Enum.GetValues<AlienSpeciesAssessment2023Category>()
             .Where(x => x != AlienSpeciesAssessment2023Category.NR)
             .Select(x => new Filter.FilterItem
@@ -89,7 +73,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = x.ToString(),
                 Name = x.DisplayName().ToLowerInvariant(),
                 Description = x.DisplayName()
-            }).Concat(ecologicalEffectAndInvasionPotential).ToArray();
+            }).ToArray();
     }
 
     public enum CategoryChangeEnum

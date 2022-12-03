@@ -744,6 +744,6 @@ span.area i {
     cursor: pointer;
 }
 
-.tabbed_element_container .inactive {
+.tabbed_element_container.assessment_tabs .inactive {
     display: none;
 }

@@ -16,7 +16,7 @@ namespace Assessments.Frontend.Web.Models
     {
         public IEnumerable<string> FilterParameters { get; } = new[]
         {
-            nameof(Area), nameof(Category), nameof(Criterias), nameof(SpeciesStatus), nameof(Habitats), nameof(ProductionSpecies), nameof(Regions), nameof(SpeciesGroups), nameof(TaxonRank), nameof(WaterRegions), nameof(CategoryChanged)
+            nameof(Area), nameof(Category), nameof(EcologicalEffect),  nameof(InvasionPotential), nameof(Criterias), nameof(DecisiveCriterias), nameof(SpeciesStatus), nameof(Habitats), nameof(ProductionSpecies), nameof(Regions), nameof(SpeciesGroups), nameof(TaxonRank), nameof(WaterRegions), nameof(CategoryChanged)
         };
 
         public string SortBy { get; set; }
@@ -37,10 +37,16 @@ namespace Assessments.Frontend.Web.Models
 
         public string[] Criterias { get; set; } = Array.Empty<string>();
 
+        public string[] EcologicalEffect { get; set; } = Array.Empty<string>();
+
+        public string[] InvasionPotential { get; set; } = Array.Empty<string>();
+
+        public string[] DecisiveCriterias { get; set; } = Array.Empty<string>();
+
         public string[] SpeciesStatus { get; set; } = Array.Empty<string>();
 
         public string[] Habitats { get; set; } = Array.Empty<string>();
-        
+
         public string[] ProductionSpecies { get; set; } = Array.Empty<string>();
 
         public string[] Regions { get; set; } = Array.Empty<string>();

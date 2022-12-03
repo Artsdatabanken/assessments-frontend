@@ -18,7 +18,56 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Categories
     {
+        public static readonly Filter.FilterItem[] AlienSpecies2023InvasionPotential =
+        {
+            new Filter.FilterItem
+            {
+                NameShort = "ip1",
+                Name = "Lite",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip2",
+                Name = "Begrensa",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip3",
+                Name = "Moderat",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip4",
+                Name = "Stort",
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffect =
+        {
+            new Filter.FilterItem
+            {
+                NameShort = "ee1",
+                Name = "Ingen kjent",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee2",
+                Name = "Liten",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee3",
+                Name = "Middels",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee4",
+                Name = "Stor",
+            }
+        };
+
         public static readonly Filter.FilterItem[] AlienSpecies2023Categories = Enum.GetValues<AlienSpeciesAssessment2023Category>()
+            .Where(x => x != AlienSpeciesAssessment2023Category.NR)
             .Select(x => new Filter.FilterItem
             {
                 NameShort = x.ToString(),
@@ -111,6 +160,126 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = CategoryChangeEnum.ccsk.DisplayName(),
                 NameShort = CategoryChangeEnum.ccsk.ToString()
+            }
+        };
+    }
+
+    public class DeciciveCriteria
+    {
+        public enum DecisiveCriteriaEnum
+        {
+            [Display(Name = "A")]
+            dcexa,
+
+            [Display(Name = "B")]
+            dcexb,
+
+            [Display(Name = "AB")]
+            dcipab,
+
+            [Display(Name = "C")]
+            dcipc,
+
+            [Display(Name = "D")]
+            dceed,
+
+            [Display(Name = "E")]
+            dcipe,
+
+            [Display(Name = "F")]
+            dceef,
+
+            [Display(Name = "G")]
+            dcipg,
+
+            [Display(Name = "H")]
+            dceeh,
+
+            [Display(Name = "I")]
+            dcipi,
+        };
+
+        public static readonly Filter.FilterItem[] ExistanceTimeAndExpansionSpeed =
+        {
+            new()
+            {
+                Name = "A – artens levetid i Norge",
+                NameShort = nameof(DecisiveCriteriaEnum.dcexa)
+            },
+            new()
+            {
+                Name = "B – ekspansjonshastighet",
+                NameShort = nameof(DecisiveCriteriaEnum.dcexb)
+            }
+        };
+
+        public static readonly Filter.FilterItem[] InvationPotential =
+        {
+            new()
+            {
+                Name = "A×B – artens levetid i Norge × ekspansjonshastighet",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipab)
+            },
+            new()
+            {
+                Name = "A×B hvor høyeste skår er...",
+                NameShort = "dcipah",
+                SubGroup = ExistanceTimeAndExpansionSpeed
+            },
+            new()
+            {
+                Name = "C – kolonisert areal",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipc)
+            }
+        };
+
+        public static readonly Filter.FilterItem[] EcologicalEffect =
+        {
+            new()
+            {
+                Name = "D – effekt på truede arter eller nøkkelarter",
+                NameShort = nameof(DecisiveCriteriaEnum.dceed)
+            },
+            new()
+            {
+                Name = "E – effekt på øvrige arter",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipe)
+            },
+            new()
+            {
+                Name = "F – effekt på truede eller sjeldne naturtyper",
+                NameShort = nameof(DecisiveCriteriaEnum.dceef)
+            },
+            new()
+            {
+                Name = "G – effekt på øvrige naturtyper",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipg)
+            },
+            new()
+            {
+                Name = "H – overføring av genetisk materiale",
+                NameShort = nameof(DecisiveCriteriaEnum.dceeh)
+            },
+            new()
+            {
+                Name = "I – overføring av parasitter eller patogener",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipi)
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023DeciciveCriteria =
+        {
+            new()
+            {
+                Name = "Invasjonspotensial",
+                NameShort = "dcin",
+                SubGroup = InvationPotential
+            },
+            new()
+            {
+                Name = "Økologisk effekt",
+                NameShort = "dcok",
+                SubGroup = EcologicalEffect
             }
         };
     }

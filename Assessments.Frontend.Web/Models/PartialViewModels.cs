@@ -81,7 +81,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string CriteriaDocumentationEcoEffect { get; set; }
 
-        public string CriteriaDocumentationInvationPotential { get; set; }
+        public string CriteriaDocumentationInvasionPotential { get; set; }
 
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 

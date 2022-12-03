@@ -5,6 +5,9 @@
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
+    var AllEcologicalEffects = Categories.AlienSpecies2023EcologicalEffect;
+    var AllInvasionPotentials = Categories.AlienSpecies2023InvasionPotential;
+    var AllDeciciveCriterias = DeciciveCriteria.AlienSpecies2023DeciciveCriteria;
     var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
     var AllHabitats = Habitat.AlienSpecies2023Habitats;
     var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
@@ -36,25 +39,6 @@
     void InputTag(string name, string[] elements, string value)
     {
         InputTag(value, "submitOnclick", name, elements, value);
-    }
-
-    void GetSubSpeciesGroupList(Filter.FilterItem parentSpecies, string name)
-    {
-        <div class="filter_@parentSpecies.Name">
-            <ul class="@parentSpecies.Name-filters">
-                    @foreach (var species in parentSpecies.SubGroup)
-                {
-                    <li class="checkbox">
-                        <label for="@species.NameShort">
-                            @{
-                            InputTag(species.NameShort, $"{parentSpecies.Name}_input submitOnclick", name, Model.SpeciesGroups, species.NameShort);
-                            }
-                            <span class="label_text">@species.Name</span>
-                        </label>
-                    </li>
-                }
-                </ul>
-        </div>
     }
 
     void MakeCheckBoxLi(string value, string label, string name, string[] model, string labelClassName, string inputClassName)
@@ -159,7 +143,7 @@
                     {
                         string searchstring = " for " + '"' + @GetActiveSelection(Model) + '"';
                         <span>@searchstring</span>
-                        <a href="@Context.Request.QueryString.RemoveParameters(new[] { nameof(AlienSpeciesListParameters.Name) })" class="button tinybutton tertiary search_related">
+                        <a href="@Context.Request.QueryString.RemoveParameters(new[] { nameof(AlienSpeciesListParameters.Name), "Page" })" class="button tinybutton tertiary search_related">
                             <span class="material-icons">close</span>Fjern søk
                         </a>
                     }
@@ -170,6 +154,9 @@
                         MakeFilterChips(Model.Area, AllAreas);
                         MakeFilterChips(Model.Category, AllCategories);
                         MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged);
+                        MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials);
+                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects);
+                        MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias);
                         MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus);
                         MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies);
                         MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups);
@@ -179,7 +166,7 @@
                         MakeFilterChips(Model.WaterRegions, AllWaterRegions);
                     }
 
-                    <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters)" class="button tinybutton tertiary search_related">
+                    <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">
                         <span class="material-icons">close</span>Fjern alle filter
                     </a>
                 </span>
@@ -226,7 +213,10 @@
                                 @{
                                     MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
                                     MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
+                                    MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials, SearchAndFilterNames.InvasionPotential, "invasjonspotensialfiltre");
+                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects, SearchAndFilterNames.EcologicalEffect, "okologiskeffektfiltre");
                                     MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
+                                    MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias, SearchAndFilterNames.DecisiveCriteria, "avgjorende kriterier-filtre");
                                     MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
                                     MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged, SearchAndFilterNames.CategoryChanged, "kategoriendringsfiltre");
                                     MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");

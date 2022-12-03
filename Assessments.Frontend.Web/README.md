@@ -4,7 +4,7 @@
 
 ### Make areas in the assessment page collapsible
 
-Follow the recipe found in top of the file "Assessments.Frontend.Web\wwwroot\js\collapse.js". 
+Follow the recipe found in top of the file "Assessments.Frontend.Web/wwwroot/js/collapse.js". 
 
 ### Adding a filter to the list view
 
@@ -38,5 +38,13 @@ Hard coded in _Filters.cshtml partials file.
 	- Add the filter's checkbox id to the list "handleFirstTimeIds" if you want it to open by default.
 
 - In the file Infrastructure/AlienSpecies/QueryHelpers.cs, apply the filter to the query results list.
+
+### Adding a section with tabs
+
+#### All lists
+
+- Redlist species 2021 already has three special tab sections, but adding new ones will be done in the same generic way as the rest. 
+
+- You can find thorough information on how to add a new tabbable section in the assessment pages in the top of the file `wwwroot/js/assessmentTabs.js`.
 
 Remember to rebuild the solution before testing.

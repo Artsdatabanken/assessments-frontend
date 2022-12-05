@@ -1,15 +1,28 @@
 using Assessments.Frontend.Web.Models;
-using static Assessments.Frontend.Web.Infrastructure.Constants;
 using System;
 using System.Linq;
+using static Assessments.Frontend.Web.Infrastructure.Constants;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class Filter
     {
+        public class FilterAndMetaData
+        {
+            public FilterItem[] Filters { get; set; }
+
+            public string ModelName { get; set; }
+
+            public string FilterName { get; set; }
+
+            public string FilterHtmlSafe { get; set; }
+        }
+
         public class FilterItem
         {
             public string Description { get; set; }
+
+            public string FilterHelpText { get; set; }
 
             public string InfoUrl { get; set; }
 

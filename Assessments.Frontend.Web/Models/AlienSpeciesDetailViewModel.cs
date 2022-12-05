@@ -34,6 +34,7 @@ namespace Assessments.Frontend.Web.Models
 
             RegionalSpreadViewModel = new RegionalSpreadViewModel
             {
+                AlienSpeciesCategory = assessment.AlienSpeciesCategory,
                 Category = assessment.Category
             };
 

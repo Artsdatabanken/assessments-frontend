@@ -1,7 +1,12 @@
 ﻿@model RegionalSpreadViewModel;
+@using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
+    var showPage = Model.Category != AlienSpeciesAssessment2023Category.NR;
+    var showTableAndTreMaps = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
+    var showTableAndSingleMap = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker ||
+        Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
+    var showInteractiveMap = showTableAndTreMaps && false; // TODO: switch false with has used artskart and downloaded a zip file
 }
 
 <div id="geographical_spread" class="page_section" is-visible="@showPage">
@@ -12,7 +17,18 @@
     <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , 'geographical_spread' )">Regional naturvariasjon</button>
     <div class="tabbed_element_container assessment_tabs">
         <div id="domestic_spread">
-            domestic_spread
+            <div id="show_occurence_area">
+                <h3>Forekomstareal</h3>
+                <div is-visible="@showTableAndTreMaps">
+                    tabell og tre kart
+                </div>
+                <div is-visible="@showTableAndSingleMap">
+                    tabell og et enkelt kart
+                </div>
+                <div is-visible="@showInteractiveMap">
+                    Interaktivt kart
+                </div>
+            </div>
         </div>
         <div id="regional_nature_variation">
             regional_nature_variation

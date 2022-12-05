@@ -117,6 +117,8 @@ namespace Assessments.Frontend.Web.Models
 
     public class RegionalSpreadViewModel
     {
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
         public AlienSpeciesAssessment2023Category Category { get; set; }
     }
 

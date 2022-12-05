@@ -32,7 +32,7 @@ Hard coded in _Filters.cshtml partials file.
 	- Add the displayed name of the filter to SearchAndFilterNames
 
 - In wwwroot/css/filter.css do:
-	- Add ".only_js input[type=checkbox]:not(:checked)#show_<filter name> ~ .filter_<filter name>," to the group, or sub group of filters. Search for comment "Hide the filters initially" to find the location.
+	- Add `.only_js input[type=checkbox]:not(:checked)#show_<filter name> ~ .filter_<filter name>` to the group, or sub group of filters. Search for comment "Hide the filters initially" to find the location.
 
 - In wwwroot/js/filter.js do:
 	- Add the filter's checkbox id to the list "handleFirstTimeIds" if you want it to open by default.
@@ -45,6 +45,6 @@ Hard coded in _Filters.cshtml partials file.
 
 - Redlist species 2021 already has three special tab sections, but adding new ones will be done in the same generic way as the rest. 
 
-- You can find thorough information on how to add a new tabbable section in the assessment pages in the top of the file `wwwroot/js/assessmentTabs.js`.
+- You can find thorough information on how to add a new tabbable section in the assessment pages in the top of the file "wwwroot/js/assessmentTabs.js".
 
 Remember to rebuild the solution before testing.

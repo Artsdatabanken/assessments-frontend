@@ -1,6 +1,9 @@
-﻿using Assessments.Mapping.AlienSpecies.Model;
+﻿using System;
+using System.Collections.Generic;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
 using System.Linq;
+using Assessments.Frontend.Web.Infrastructure;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -55,5 +58,7 @@ namespace Assessments.Frontend.Web.Models
         public ExpertStatementViewModel ExpertStatementViewModel { get; set; }
 
         public SideBarContentViewModel SideBarContentViewModel { get; set; }
+
+        public string ExpertGroupMembers { get; set; }
     }
 }

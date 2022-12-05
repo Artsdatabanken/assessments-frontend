@@ -1,5 +1,7 @@
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
+using System.Collections.Generic;
+using Assessments.Mapping.AlienSpecies.Model;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -47,6 +49,8 @@ namespace Assessments.Frontend.Web.Models
         public string RevisionReason { get; set; }
 
         public int YearPreviousAssessment { get; set; }
+
+        public string ExpertGroupMembers { get; set; }
     }
 
     public class CitationForListViewModel

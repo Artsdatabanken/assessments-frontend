@@ -1,6 +1,7 @@
 ﻿@model SpeciesAssessment2021
 @using Assessments.Frontend.Web.Infrastructure.Services
-@inject ExpertCommitteeMemberService _expertCommitteeMemberService
+@inject ExpertCommitteeMemberService ExpertCommitteeMemberService
+
 @{
     ViewBag.Title = Model.ScientificName + " - Rødlista 2021";
 
@@ -13,7 +14,6 @@
         speciesGroupImageUrl = speciesGroups[Model.SpeciesGroup]["image"];
     }
 
-    var expertCommitteeName = await _expertCommitteeMemberService.GetExpertCommitteeName(Model.ExpertCommittee, Model.AssessmentYear);
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
         AssessmentArea = Model.AssessmentArea == "S" ? "Svalbard" : "Norge",
@@ -42,6 +42,8 @@
         .Replace("@species", $"{Model.PopularName} {Helpers.getScientificNameElement(Model.ScientificName)}")
         .Replace("@area", $"{ViewBag.glossary["areas"][Model.AssessmentArea]["title"]}");
 
+    var expertCommitteeMembers = await ExpertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
+
     var citationViewModel = new CitationForAssessmentViewModel
     {
         AssessmentName = assessmentName,
@@ -49,10 +51,11 @@
         ExpertCommittee = Model.ExpertCommittee,
         FirstPublished = Constants.RedlistSpecies2021FirstPublished,
         CitationHeading = ViewBag.glossary["citation"]["title"],
-        PublicationText = ViewBag.glossary["pagetitle"]["title"] + ". " + ViewBag.glossary["adb"] +". ",
+        PublicationText = ViewBag.glossary["pagetitle"]["title"] + ". " + ViewBag.glossary["adb"] + ". ",
         RevisionDate = Model.RevisionDate,
         RevisionReason = Model.RevisionReason,
-        YearPreviousAssessment = Model.YearPreviousAssessment
+        YearPreviousAssessment = Model.YearPreviousAssessment,
+        ExpertGroupMembers = expertCommitteeMembers.JoinAnd(", ", " og ")
     };
 
     var pageMenuViewModel = new PageMenuViewModel
@@ -64,65 +67,74 @@
 
     var sideBarContentViewModel = new SideBarContentViewModel()
     {
-         AssessmentYear = Model.AssessmentYear,
-         Category = @ViewBag.categories[Model.Category.Substring(0, 2)]["presentationstring"],
-         CategoryShort = Model.Category,
-         PreviousAssessments = Model.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
-         {
-             Category = @ViewBag.categories[x.Category.Substring(0, 2)]["presentationstring"],
-             CategoryShort = x.Category,
-             Url = x.AssessmentUrl,
-             Year = x.Year
-         }).ToArray(),
-         ScientificName = Model.ScientificName,
-         ScientificNameId = Model.ScientificNameId,
-         TaxonRank = Model.TaxonRank,
+        AssessmentYear = Model.AssessmentYear,
+        Category = @ViewBag.categories[Model.Category.Substring(0, 2)]["presentationstring"],
+        CategoryShort = Model.Category,
+        PreviousAssessments = Model.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
+        {
+            Category = @ViewBag.categories[x.Category.Substring(0, 2)]["presentationstring"],
+            CategoryShort = x.Category,
+            Url = x.AssessmentUrl,
+            Year = x.Year
+        }).ToArray(),
+        ScientificName = Model.ScientificName,
+        ScientificNameId = Model.ScientificNameId,
+        TaxonRank = Model.TaxonRank,
     };
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
+    {
+        CategoryShort = Model.Category,
+        CategoryBar = new CategoryBarListElement[]
+        {
+            new CategoryBarListElement
             {
-                CategoryShort = Model.Category,
-                CategoryBar = new CategoryBarListElement[]
-                {
-                     new CategoryBarListElement {
-                        Name = "Regionalt utdødd",
-                        NameShort = "RE"
-                    },
-                    new CategoryBarListElement {
-                        Name = "Kritisk truet",
-                        NameShort = "CR"
-                    },
-                    new CategoryBarListElement {
-                        Name = "Sterkt truet",
-                        NameShort = "EN"
-                    },
-                    new CategoryBarListElement {
-                        Name = "Sårbar",
-                        NameShort = "VU"
-                    },
-                    new CategoryBarListElement {
-                        Name = "Nær truet",
-                        NameShort = "NT"
-                    },
-                    new CategoryBarListElement {
-                        Name = "Data- mangel",
-                        NameShort = "DD"
-                    },
-                    new CategoryBarListElement {
-                        Name = "Livs- kraftig",
-                        NameShort = "LC"
-                    },
-                    new CategoryBarListElement {
-                        Name = "Ikke egnet",
-                        NameShort = "NA"
-                    },
-                    new CategoryBarListElement {
-                        Name = "Ikke vurdert",
-                        NameShort = "NE"
-                    },
-                },
-                MethodUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316483"
-            };
+                Name = "Regionalt utdødd",
+                NameShort = "RE"
+            },
+            new CategoryBarListElement
+            {
+                Name = "Kritisk truet",
+                NameShort = "CR"
+            },
+            new CategoryBarListElement
+            {
+                Name = "Sterkt truet",
+                NameShort = "EN"
+            },
+            new CategoryBarListElement
+            {
+                Name = "Sårbar",
+                NameShort = "VU"
+            },
+            new CategoryBarListElement
+            {
+                Name = "Nær truet",
+                NameShort = "NT"
+            },
+            new CategoryBarListElement
+            {
+                Name = "Data- mangel",
+                NameShort = "DD"
+            },
+            new CategoryBarListElement
+            {
+                Name = "Livs- kraftig",
+                NameShort = "LC"
+            },
+            new CategoryBarListElement
+            {
+                Name = "Ikke egnet",
+                NameShort = "NA"
+            },
+            new CategoryBarListElement
+            {
+                Name = "Ikke vurdert",
+                NameShort = "NE"
+            },
+        },
+        MethodUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316483"
+    };
 
     var naturtypehovedenhet = Model.MainHabitat;
     string geografi = Model.AssessmentArea;

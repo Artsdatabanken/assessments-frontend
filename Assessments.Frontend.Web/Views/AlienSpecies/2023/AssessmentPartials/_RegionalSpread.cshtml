@@ -7,6 +7,7 @@
     var showTableAndSingleMap = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker ||
         Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
     var showInteractiveMap = showTableAndTreMaps && false; // TODO: switch false with has used artskart and downloaded a zip file
+    var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
 }
 
 <div id="geographical_spread" class="page_section" is-visible="@showPage">
@@ -19,14 +20,34 @@
         <div id="domestic_spread">
             <div id="show_occurence_area">
                 <h3>Forekomstareal</h3>
-                <div is-visible="@showTableAndTreMaps">
-                    tabell og tre kart
-                </div>
-                <div is-visible="@showTableAndSingleMap">
-                    tabell og et enkelt kart
-                </div>
-                <div is-visible="@showInteractiveMap">
-                    Interaktivt kart
+                <div>
+                    <div is-visible="@showTableAndTreMaps">
+                        <div>
+                            tabell
+                        </div>
+                        <div>
+                            kart x 3
+                        </div>
+                    </div>
+                    <div is-visible="@showTableAndSingleMap">
+                        <div>
+                            tabell
+                        </div>
+                        <div>
+                            kart x 1
+                        </div>
+                    </div>
+                    <div is-visible="showCurrentPresenceComment">
+                        <div>
+                            Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og forekomstareal om 50 år.
+                        </div>
+                        <p>
+                            @Html.Raw(Model.CurrentPresenceComment)
+                        </p>
+                    </div>
+                    <div is-visible="@showInteractiveMap">
+                        Interaktivt kart
+                    </div>
                 </div>
             </div>
         </div>

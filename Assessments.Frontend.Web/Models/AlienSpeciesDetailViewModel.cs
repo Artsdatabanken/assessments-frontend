@@ -35,7 +35,15 @@ namespace Assessments.Frontend.Web.Models
             RegionalSpreadViewModel = new RegionalSpreadViewModel
             {
                 AlienSpeciesCategory = assessment.AlienSpeciesCategory,
-                Category = assessment.Category
+                AreaOfOccupancyFutureBest = assessment.RiskAssessmentAOOfutureBest,
+                AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
+                AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
+                AreaOfOccupancyTotalBest = assessment.RiskAssessmentAOOtotalBest,
+                AreaOfOccupancyTotalHigh = assessment.RiskAssessmentAOOtotalHigh,
+                AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
+                AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
+                Category = assessment.Category,
+                CurrentPresenceComment = assessment.CurrentPresenceComment
             };
 
             SideBarContentViewModel = new SideBarContentViewModel

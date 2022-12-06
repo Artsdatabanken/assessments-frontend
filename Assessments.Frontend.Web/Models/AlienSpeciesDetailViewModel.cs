@@ -32,6 +32,20 @@ namespace Assessments.Frontend.Web.Models
                 UncertaintyStatusDescription = assessment.UncertaintyStatusDescription
             };
 
+            RegionalSpreadViewModel = new RegionalSpreadViewModel
+            {
+                AlienSpeciesCategory = assessment.AlienSpeciesCategory,
+                AreaOfOccupancyFutureBest = assessment.RiskAssessmentAOOfutureBest,
+                AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
+                AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
+                AreaOfOccupancyTotalBest = assessment.RiskAssessmentAOOtotalBest,
+                AreaOfOccupancyTotalHigh = assessment.RiskAssessmentAOOtotalHigh,
+                AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
+                AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
+                Category = assessment.Category,
+                CurrentPresenceComment = assessment.CurrentPresenceComment
+            };
+
             SideBarContentViewModel = new SideBarContentViewModel
             {
                 AssessmentYear = 2023,
@@ -53,6 +67,8 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023 Assessment { get; set; }
 
         public ExpertStatementViewModel ExpertStatementViewModel { get; set; }
+
+        public RegionalSpreadViewModel RegionalSpreadViewModel { get; set; }
 
         public SideBarContentViewModel SideBarContentViewModel { get; set; }
     }

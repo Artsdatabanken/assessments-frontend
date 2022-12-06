@@ -743,3 +743,7 @@ span.area i {
     text-decoration: underline;
     cursor: pointer;
 }
+
+.tabbed_element_container.assessment_tabs .inactive {
+    display: none;
+}

@@ -115,6 +115,29 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
     }
 
+    public class RegionalSpreadViewModel
+    {
+        public int? AreaOfOccupancyKnown { get; set; }
+
+        public int? AreaOfOccupancyFutureBest { get; set; }
+
+        public int? AreaOfOccupancyFutureHigh { get; set; }
+
+        public int? AreaOfOccupancyFutureLow { get; set; }
+
+        public int? AreaOfOccupancyTotalBest { get; set; }
+
+        public int? AreaOfOccupancyTotalHigh { get; set; }
+
+        public int? AreaOfOccupancyTotalLow { get; set; }
+
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
+        public AlienSpeciesAssessment2023Category Category { get; set; }
+
+        public string CurrentPresenceComment { get; set; }
+    }
+
     public class SideBarContentViewModel
     {
         public class SideBarPreviousAssessment

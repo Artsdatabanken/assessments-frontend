@@ -5,7 +5,7 @@
     var assessment = Model.Assessment;
     ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
 
-    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
+    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
     var speciesGroupImageUrl = speciesGroup.ImageUrl;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
@@ -80,13 +80,13 @@
     var sideBarContentViewModel = new SideBarContentViewModel()
     {
          AssessmentYear = 2023,
-         Category = Categories.AlienSpecies2023Categories
+         Category = Categories.AlienSpecies2023Categories.Filters
                                                         .Where(x => x.NameShort == assessment.Category.ToString())
                                                         .Select(x => x.Name).FirstOrDefault(),
          CategoryShort = assessment.Category.ToString(),
          PreviousAssessments = assessment.PreviousAssessments.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment()
          {
-             Category = Categories.AlienSpecies2023Categories
+             Category = Categories.AlienSpecies2023Categories.Filters
                                                         .Where(y => y.NameShort == x.MainCategory)
                                                         .Select(y => y.Name).FirstOrDefault(),
              CategoryShort = x.MainCategory,

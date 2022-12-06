@@ -11,11 +11,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             public FilterItem[] Filters { get; set; }
 
-            public string ModelName { get; set; }
-
-            public string FilterName { get; set; }
-
-            public string FilterHtmlSafe { get; set; }
+            public string FilterDescription { get; set; }
         }
 
         public class FilterItem
@@ -34,7 +30,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             public string NameShort { get; set; }
 
-            public FilterItem[] SubGroup { get; set; }
+            public FilterAndMetaData SubGroup { get; set; }
         }
 
         public static string GetActiveFilters(string filterType, RL2021ViewModel Model)

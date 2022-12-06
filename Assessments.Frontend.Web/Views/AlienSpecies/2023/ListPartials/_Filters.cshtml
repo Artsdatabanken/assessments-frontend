@@ -66,7 +66,7 @@
         </button>
     }
 
-    void MakeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName, string outerClassName)
+    void MakeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, Filter.FilterAndMetaData filterItems, string buttonText, string buttonName, string outerClassName)
     {
         string className = isSubGroup ? $"filter_subgroup filter_{filterName.ToLower()}" : $"filter_{filterName.ToLower()}";
 
@@ -75,15 +75,22 @@
                 MakeFilterElement(buttonText, filterName, buttonName);
             }
             <div class=@className>
+                @{
+                    if (!string.IsNullOrEmpty(filterItems.FilterDescription))
+                        {
+                            <div class="filter_info_text">@filterItems.FilterDescription</div>
+                        }
+                }
                 <ul>
                     @{
                         string label;
                         string value;
                         string markAllClassName = "mark_all";
-                        if (filterItems.Length > 4 && modelName != nameof(Model.SpeciesStatus))
+
+                        if (filterItems.Filters.Length > 4 && modelName != nameof(Model.SpeciesStatus))
                             MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
 
-                        foreach (var el in filterItems)
+                        foreach (var el in filterItems.Filters)
                         {
                             value = el.NameShort;
                             label = filterName == nameof(Model.Category) ? $"{el.NameShort} - {el.Description}" : el.Name;
@@ -103,7 +110,7 @@
         </li>
     }
 
-    void MakeFilterGroup(string filterName, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName)
+    void MakeFilterGroup(string filterName, string[] filterModel, Filter.FilterAndMetaData filterItems, string buttonText, string buttonName)
     {
         MakeFilterGroup(filterName, filterName, false, filterModel, filterItems, buttonText, buttonName, string.Empty);
     }
@@ -151,19 +158,19 @@
                 <span class="filterbox">
                     @if (GetActiveSelectionCount(Model) > 0)
                     {
-                        MakeFilterChips(Model.Area, AllAreas);
-                        MakeFilterChips(Model.Category, AllCategories);
-                        MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged);
-                        MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials);
-                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects);
-                        MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias);
-                        MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus);
-                        MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies);
-                        MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups);
-                        MakeFilterChips(Model.TaxonRank, AllTaxonRanks);
-                        MakeFilterChips(Model.Habitats, AllHabitats);
-                        MakeFilterChips(Model.Regions, AllRegions);
-                        MakeFilterChips(Model.WaterRegions, AllWaterRegions);
+                        MakeFilterChips(Model.Area, AllAreas.Filters);
+                        MakeFilterChips(Model.Category, AllCategories.Filters);
+                        MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters);
+                        MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters);
+                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters);
+                        MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters);
+                        MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters);
+                        MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters);
+                        MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters);
+                        MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
+                        MakeFilterChips(Model.Habitats, AllHabitats.Filters);
+                        MakeFilterChips(Model.Regions, AllRegions.Filters);
+                        MakeFilterChips(Model.WaterRegions, AllWaterRegions.Filters);
                     }
 
                     <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">

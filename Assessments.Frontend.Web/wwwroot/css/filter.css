@@ -293,6 +293,10 @@ button.list_header {
     display: none;
 }
 
+.filter_info_text {
+    margin: 5px;
+}
+
 @media only screen and (max-width: 750px) {
 
     .show_filters {

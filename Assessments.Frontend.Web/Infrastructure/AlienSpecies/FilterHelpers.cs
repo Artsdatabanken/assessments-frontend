@@ -163,7 +163,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 }
                 else if (item.SubGroup != null)
                 {
-                    string buttonText = GetChipText(filter, item.SubGroup);
+                    string buttonText = GetChipText(filter, item.SubGroup.Filters);
                     if (!string.IsNullOrEmpty(buttonText))
                         return buttonText;
                 }

@@ -110,9 +110,9 @@
         </li>
     }
 
-    void MakeFilterGroup(string filterName, string[] filterModel, Filter.FilterAndMetaData filterItems, string buttonText, string buttonName)
+    void MakeFilterGroup(string filterName, string[] filterModel, Filter.FilterAndMetaData filterItems)
     {
-        MakeFilterGroup(filterName, filterName, false, filterModel, filterItems, buttonText, buttonName, string.Empty);
+        MakeFilterGroup(filterName, filterName, false, filterModel, filterItems, filterItems.FilterButtonText, filterItems.FilterButtonName, string.Empty);
     }
 
     void RenderChip(string buttontext, string filterValue)
@@ -218,19 +218,19 @@
                         <div class="filter_scroll_area">
                             <ul>
                                 @{
-                                    MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
-                                    MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
-                                    MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials, SearchAndFilterNames.InvasionPotential, "invasjonspotensialfiltre");
-                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects, SearchAndFilterNames.EcologicalEffect, "okologiskeffektfiltre");
-                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
-                                    MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias, SearchAndFilterNames.DecisiveCriteria, "avgjorende kriterier-filtre");
-                                    MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
-                                    MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged, SearchAndFilterNames.CategoryChanged, "kategoriendringsfiltre");
-                                    MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");
-                                    MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups, SearchAndFilterNames.SpeciesGroup, "artsgruppefiltre");
-                                    MakeFilterGroup(nameof(Model.Habitats), Model.Habitats, AllHabitats, "Hovedhabitat", "hovedhabitatfiltre");
-                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions, "Regioner og havområder", "regionfiltre");
-                                    MakeFilterGroup(nameof(Model.WaterRegions), Model.WaterRegions, AllWaterRegions, "Vannregioner", "vannregionfiltre");
+                                    MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas);
+                                    MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories);
+                                    MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials);
+                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects);
+                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
+                                    MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias);
+                                    MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus);
+                                    MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged);
+                                    MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies);
+                                    MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
+                                    MakeFilterGroup(nameof(Model.Habitats), Model.Habitats, AllHabitats);
+                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
+                                    MakeFilterGroup(nameof(Model.WaterRegions), Model.WaterRegions, AllWaterRegions);
                                 }
                             </ul>
                         </div>

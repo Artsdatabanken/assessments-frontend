@@ -173,30 +173,15 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         public class SearchAndFilterNames
         {
-            public const string AssessmentArea = "Område";
-            public const string Category = "Risikokategori";
-            public const string EcologicalEffect = "Økologisk effekt (risikomatrisens y-akse)";
-            public const string InvasionPotential = "Invasjonspotensial (risikomatrisens x-akse)";
-            public const string CategoryChanged = "Endring i risikokategori";
-            public const string DecisiveCriteria = "Avgjørende kriterier for kategori";
             public const string GeographicRiskVariation = "Geografisk variasjon i risiko";
             public const string ClimateChangeRisk = "Betydning av klimaendringer for risiko";
             public const string FirstTimeAssessment = "Risikovurdert for første gang";
             public const string ChooseCriteria = "Avgjørende kriterier for risikokategori";
-            public const string EstablishmentCategory = "Etableringsklasse i dag";
-            public const string ProductionSpecies = "Bruksart";
-            public const string SpeciesGroup = "Artsgrupper";
-            public const string TaxonRank = "Taksonomi";
             public const string KnownOrExpectedInRegion = "Regioner med kjent eller forventet forekomst";
             public const string NaturType = "Naturtype";
             public const string WaysOfSpreading = "Spredningsmåter";
             public const string RegionallyAlienSpecies = "Regionalt fremmede arter";
             public const string NonAssessedSpecies = "Ikke risikovurderte arter";
-
-            public const string RemoveFilters = "remove_filters";
-            public const string RemoveSearch = "remove_search";
-            public const string ResetAllFilters = "Nullstill";
-            public const string SearchFilterSpecies = "Søk art/slekt";
         }
     }
 }

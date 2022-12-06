@@ -18,7 +18,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023Areas = new()
         {
             Filters = AlienSpecies2023AreasFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "områdefiltre",
+            FilterButtonText = "Område"
         };
     }
 
@@ -51,7 +53,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023InvasionPotential = new()
         {
             Filters = AlienSpecies2023InvasionPotentialFilters,
-            FilterDescription = "Artens levedyktighet og evne til å ekspandere"
+            FilterDescription = "Artens levedyktighet og evne til å ekspandere",
+            FilterButtonName = "invasjonspotensialfiltre",
+            FilterButtonText = "Invasjonspotensial (risikomatrisens x-akse)"
         };
 
         public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffectFilters =
@@ -81,7 +85,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023EcologicalEffect = new()
         {
             Filters = AlienSpecies2023EcologicalEffectFilters,
-            FilterDescription = "Påvirkning på arter og naturtyper i Norge"
+            FilterDescription = "Påvirkning på arter og naturtyper i Norge",
+            FilterButtonName = "okologiskeffektfiltre",
+            FilterButtonText = "Økologisk effekt (risikomatrisens y-akse)"
         };
 
         public static readonly Filter.FilterItem[] AlienSpecies2023CategoriesFilters = Enum.GetValues<AlienSpeciesAssessment2023Category>()
@@ -96,7 +102,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023Categories = new()
         {
             Filters = AlienSpecies2023CategoriesFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "kategorifiltre",
+            FilterButtonText = "Risikokategori"
         };
     }
 
@@ -194,7 +202,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023CategoryChanged = new()
         {
             Filters = AlienSpecies2023CategoryChangedFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "kategoriendringsfiltre",
+            FilterButtonText = "Endring i risikokategori"
         };
     }
 
@@ -332,7 +342,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023DeciciveCriteria = new()
         {
             Filters = AlienSpecies2023DeciciveCriteriaFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "avgjorende kriterier-filtre",
+            FilterButtonText = "Avgjørende kriterier for kategori"
         };
     }
 
@@ -400,7 +412,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023TaxonRanks = new()
         {
             Filters = AlienSpecies2023TaxonRanksFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "'taksonomisk nivå'-filtre",
+            FilterButtonText = "Taksonomi"
         };
     }
 
@@ -793,7 +807,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023SpeciesGroups = new()
         {
             Filters = AlienSpecies2023SpeciesGroupsFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "artsgruppefiltre",
+            FilterButtonText = "Artsgrupper"
         };
     }
 
@@ -926,7 +942,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023Regions = new()
         {
             Filters = AlienSpecies2023RegionsFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "regionfiltre",
+            FilterButtonText = "Regioner og havområder"
         };
 
         public static readonly Filter.FilterItem[] AlienSpecies2023WaterRegionsFilters =
@@ -1016,7 +1034,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023WaterRegions = new()
         {
             Filters = AlienSpecies2023WaterRegionsFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "vannregionfiltre",
+            FilterButtonText = "Vannregioner"
         };
     }
 
@@ -1061,7 +1081,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023Habitats = new()
         {
             Filters = AlienSpecies2023HabitatsFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "hovedhabitatfiltre",
+            FilterButtonText = "Hovedhabitat"
         };
     }
 
@@ -1084,7 +1106,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023ProductionSpecies = new()
         {
             Filters = AlienSpecies2023ProductionSpeciesFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "'produksjonsart'-filtre",
+            FilterButtonText = "Bruksart"
         };
     }
 
@@ -1151,7 +1175,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023SpeciesStatus = new()
         {
             Filters = AlienSpecies2023SpeciesStatusFilters,
-            FilterDescription = ""
+            FilterDescription = "",
+            FilterButtonName = "etableringsklassefiltre",
+            FilterButtonText = "Etableringsklasse i dag"
         };
     }
 }

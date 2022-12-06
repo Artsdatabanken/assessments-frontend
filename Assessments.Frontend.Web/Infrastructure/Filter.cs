@@ -9,9 +9,25 @@ namespace Assessments.Frontend.Web.Infrastructure
     {
         public class FilterAndMetaData
         {
+            /// <summary>
+            /// The filters themselfes
+            /// </summary>
             public FilterItem[] Filters { get; set; }
 
+            /// <summary>
+            /// Describing the filter. This will show as info text when you open a filter.
+            /// </summary>
             public string FilterDescription { get; set; }
+
+            /// <summary>
+            /// A norwegian name for the button to open filters. Sub groups do not need this.
+            /// </summary>
+            public string FilterButtonName { get; set; }
+
+            /// <summary>
+            /// The text displayed on the button. Also known as the name of the filter.
+            /// </summary>
+            public string FilterButtonText { get; set; }
         }
 
         public class FilterItem

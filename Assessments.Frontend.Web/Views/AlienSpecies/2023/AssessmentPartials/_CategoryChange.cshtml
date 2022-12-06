@@ -1,0 +1,37 @@
+﻿@model AlienSpeciesDetailViewModel
+
+@{
+    var has2018 = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018) ?? false;
+    var isNr = Model.Assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
+    var wasNr2018 = Model.Assessment.PreviousAssessments != null &&
+        Model.Assessment.PreviousAssessments.Any(x => x.RevisionYear == 2018 && x.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR);
+    var category2018 = Model.Assessment.PreviousAssessments?.Where(x => x.RevisionYear == 2018).Select(x => x.Category).FirstOrDefault();
+    var sameAs2018 = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018 && x.Category == Model.Assessment.Category) ?? false;
+
+    var showMain = true;
+    if (isNr && wasNr2018)
+        showMain = false;
+
+    var showNotAssessed2018 = !isNr && Model.Assessment.PreviousAssessments.Count == 0 || wasNr2018;
+    var showSameAs2019 = !isNr && sameAs2018;
+
+    var category2018WithName = has2018 ? $"{category2018.DisplayName().ToLower()} - {category2018}" : string.Empty;
+    var category2023WithName = $"{Model.Assessment.Category.DisplayName().ToLower()} - {Model.Assessment.Category}";
+}
+
+<div is-visible="showMain" class="page_section">
+    <div id="show_category_changed">
+        <h2 class="collapsible_header">Endring i risikokategori siden Fremmedartslista 2018</h2>
+        <div>
+            <div is-visible="showNotAssessed2018">
+                Denne arten ble ikke risikovurdert for Fremmedartslista 2018
+            </div>
+            <div is-visible="showSameAs2019">
+                Denne arten er vurdert til samme risikokategori som i Fremmedartslista 2018
+            </div>
+            <div is-visible="!showNotAssessed2018 && !showSameAs2019">
+                Kategorien for denne arten er endret fra @category2018WithName til @category2023WithName siden Fremmedartslista 2018. Dette skyldes:
+            </div>
+        </div>
+    </div>
+</div>

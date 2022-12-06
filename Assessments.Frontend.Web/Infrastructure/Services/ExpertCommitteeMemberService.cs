@@ -16,7 +16,7 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
             _dataRepository = dataRepository;
         }
 
-        public async Task<List<ExpertCommitteeMember>> GetExpertCommitteeMembers(string expertCommitteeName, int year)
+        public async Task<List<string>> GetExpertCommitteeMembers(string expertCommitteeName, int year)
         {
             var data = await _dataRepository.GetData<ExpertCommitteeMember>(DataFilenames.SpeciesExpertCommitteeMembers);
 
@@ -37,23 +37,10 @@ namespace Assessments.Frontend.Web.Infrastructure.Services
                     .Replace("(Norge)", string.Empty, StringComparison.InvariantCultureIgnoreCase).Trim();
                 return x;
             }).ToList();
-
-            return results;
-        }
-
-        public async Task<string> GetExpertCommitteeName(string expertCommitteeName, int year)
-        {
-            var data = await _dataRepository.GetData<ExpertCommitteeMember>(DataFilenames.SpeciesExpertCommitteeMembers);
-
-            var name = data.FirstOrDefault(x => x.ExpertCommittee.Equals(expertCommitteeName.Trim(), StringComparison.InvariantCultureIgnoreCase) && x.Year == year)?.ExpertCommittee;
-	
-            if (string.IsNullOrEmpty(name))
-            {
-                name =  data.FirstOrDefault(x => x.Year == year && x.ExpertCommittee.Split(",", StringSplitOptions.TrimEntries).Select(y => y.ToLowerInvariant()).Contains(expertCommitteeName.Trim().ToLowerInvariant()))
-                    ?.ExpertCommittee;
-            }
-	
-            return string.IsNullOrEmpty(name) ? string.Empty : name.Split(",", StringSplitOptions.TrimEntries).JoinAnd(", ", " og ");
+            
+            var sortedexpertCommitteeMembers = expertCommitteeMembers.OrderBy(x => new List<string> { "leder", "nestleder", "medlem" }.IndexOf(x.Role.ToLowerInvariant())).ThenBy(x => x.LastName).Select(x => $"{x.LastName} {x.FirstNameInitals}").Distinct().ToList();
+            
+            return sortedexpertCommitteeMembers;
         }
     }
 

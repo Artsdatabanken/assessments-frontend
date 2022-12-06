@@ -8,7 +8,6 @@ using Assessments.Mapping.AlienSpecies.Profiles;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using Assessments.Transformation.Database.Fab4;
-using Assessments.Transformation.Database.Fab4.Models;
 using Assessments.Transformation.Helpers;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -24,13 +23,19 @@ namespace Assessments.Transformation
 
         public static async Task TransformDataModels(IConfigurationRoot configuration, bool upload)
         {
+            await SetupDatabaseContext(configuration);
+
             Progress.ProgressBar = new ProgressBar(100, "Henter vurderinger", new ProgressBarOptions
             {
                 DisplayTimeInRealTime = false,
                 EnableTaskBarProgress = true
             });
 
-            var databaseAssessments = await GetAssessments(configuration);
+            var excludedExpertGroups = new List<string> { "Testedyr", "Ikke-marine invertebrater" };
+
+            var databaseAssessments = _dbContext.Assessments.AsNoTracking()
+                .Where(x => (bool) !x.IsDeleted && !excludedExpertGroups.Contains(x.Expertgroup));
+
             var totalCount = await databaseAssessments.CountAsync();
 
             Progress.ProgressBar.Tick(0, $"Transformerer {totalCount:N0} vurderinger");
@@ -82,17 +87,9 @@ namespace Assessments.Transformation
                 }
             };
 
-            var dataFolder = configuration.GetValue<string>("FilesFolder");
-
-            if (string.IsNullOrEmpty(dataFolder))
-                throw new Exception("Innstilling for 'FilesFolder' mangler");
-
-            if (!Directory.Exists(dataFolder))
-                Directory.CreateDirectory(dataFolder);
-
             foreach (var (key, value) in files)
             {
-                await File.WriteAllTextAsync(Path.Combine(dataFolder, key), value);
+                await File.WriteAllTextAsync(Path.Combine(configuration.GetValue<string>("FilesFolder"), key), value);
 
                 if (upload)
                     await Storage.Upload(configuration, key, value);
@@ -102,7 +99,45 @@ namespace Assessments.Transformation
             Progress.ProgressBar.Dispose();
         }
 
-        private static async Task<IQueryable<Assessment>> GetAssessments(IConfiguration configuration)
+        public static async Task ExpertGroupExport(IConfigurationRoot configuration, bool upload)
+        {
+            await SetupDatabaseContext(configuration);
+
+            Progress.ProgressBar = new ProgressBar(100, "Eksporterer ekspertgruppe medlemmer", new ProgressBarOptions
+            {
+                DisplayTimeInRealTime = false,
+                EnableTaskBarProgress = true
+            });
+
+            var expertGroupMembers = _dbContext.UserRoleInExpertGroups.Include(x => x.User)
+                .Where(x => x.WriteAccess
+                            && !x.User.FullName.Contains("(Test)")
+                            && x.ExpertGroupName != "Testedyr"
+                            && !x.User.Email.EndsWith("@artsdatabanken.no")
+                )
+                .Select(x => new AlienSpeciesAssessment2023ExpertGroupMember
+                {
+                    ExpertCommittee = x.ExpertGroupName.Replace("(Svalbard)", "").Trim(),
+                    Name = x.User.FullName.RemoveExcessWhitepace(),
+                    Admin = x.Admin
+                })
+                .Distinct().OrderBy(x => x.ExpertCommittee).ThenByDescending(x => x.Admin).ToList();
+
+            foreach (var expertGroupMember in expertGroupMembers.Where(x => x.ExpertCommittee is "Bakterier" or "Kromister" or "Sopper"))
+                expertGroupMember.ExpertCommittee = "Sopper, det gule riket og bakterier";
+            
+            var serializedData = JsonSerializer.Serialize(expertGroupMembers);
+
+            await File.WriteAllTextAsync(Path.Combine(configuration.GetValue<string>("FilesFolder"), DataFilenames.AlienSpeciesExpertCommitteeMembers), serializedData);
+
+            if (upload)
+                await Storage.Upload(configuration, DataFilenames.AlienSpeciesExpertCommitteeMembers, serializedData);
+
+            Progress.ProgressBar.Tick(Progress.ProgressBar.MaxTicks, "Lagret ekspertgruppe medlemmer");
+            Progress.ProgressBar.Dispose();
+        }
+
+        private static async Task SetupDatabaseContext(IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("Fab4");
 
@@ -114,13 +149,6 @@ namespace Assessments.Transformation
 
             if (!await _dbContext.Database.CanConnectAsync())
                 throw new Exception("Kan ikke koble til databasen");
-
-            var excludedExpertGroups = new List<string> { "Testedyr", "Ikke-marine invertebrater" };
-
-            var assessments = _dbContext.Assessments.AsNoTracking()
-                .Where(x => (bool)!x.IsDeleted && !excludedExpertGroups.Contains(x.Expertgroup));
-
-            return assessments;
         }
     }
 }

@@ -109,19 +109,19 @@ namespace Assessments.Transformation
                 EnableTaskBarProgress = true
             });
 
-            var expertGroupMembers = await _dbContext.UserRoleInExpertGroups.Include(x => x.User)
+            var expertGroupMembers = _dbContext.UserRoleInExpertGroups.Include(x => x.User)
                 .Where(x => x.WriteAccess
                             && !x.User.FullName.Contains("(Test)")
                             && x.ExpertGroupName != "Testedyr"
                             && !x.User.Email.EndsWith("@artsdatabanken.no")
                 )
-                .OrderBy(x => x.User.IsAdmin)
                 .Select(x => new AlienSpeciesAssessment2023ExpertGroupMember
                 {
                     ExpertCommittee = x.ExpertGroupName.Replace("(Svalbard)", "").Trim(),
-                    Name = x.User.FullName.RemoveExcessWhitepace()
+                    Name = x.User.FullName.RemoveExcessWhitepace(),
+                    Admin = x.Admin
                 })
-                .Distinct().OrderBy(x => x.ExpertCommittee).ToListAsync();
+                .Distinct().OrderBy(x => x.ExpertCommittee).ThenByDescending(x => x.Admin).ToList();
 
             foreach (var expertGroupMember in expertGroupMembers.Where(x => x.ExpertCommittee is "Bakterier" or "Kromister" or "Sopper"))
                 expertGroupMember.ExpertCommittee = "Sopper, det gule riket og bakterier";

@@ -5,5 +5,7 @@
         public string ExpertCommittee { get; set; }
 
         public string Name { get; set; }
+
+        public bool Admin { get; set; }
     }
 }

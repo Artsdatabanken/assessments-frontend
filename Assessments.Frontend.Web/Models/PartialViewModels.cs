@@ -40,8 +40,6 @@ namespace Assessments.Frontend.Web.Models
 
         public string FirstPublished { get; set; }
 
-        public string CitationHeading { get; set; }
-
         public string PublicationText { get; set; }
 
         public DateTime RevisionDate { get; set; }

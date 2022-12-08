@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
 namespace Assessments.Shared.Helpers
@@ -92,5 +93,7 @@ namespace Assessments.Shared.Helpers
 
             return document.DocumentNode.InnerHtml;
         }
+
+        public static string RemoveExcessWhitepace(this string input) => Regex.Replace(input, @"\s+", " ");
     }
 }

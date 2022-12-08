@@ -54,14 +54,18 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static string GetExpertGroup(string expertGroup)
         {
+            // NOTE: synchronise logic with ExpertGroupExport in TransformAlienSpecies
+
             if (expertGroup.Contains("(Svalbard)"))
             {
                 return expertGroup.Replace("(Svalbard)", "");
             }
-            if (expertGroup is "Bakterier" or "Kromister" or "Sopper")
+
+            if (expertGroup is "Bakterier" or "Kromister" or "Sopper") 
             {
                 return "Sopper, det gule riket og bakterier";
             }
+
             return expertGroup;
         }
 

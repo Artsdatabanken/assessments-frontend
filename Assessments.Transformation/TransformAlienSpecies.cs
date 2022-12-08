@@ -116,11 +116,14 @@ namespace Assessments.Transformation
                             && !x.User.Email.EndsWith("@artsdatabanken.no")
                 )
                 .Select(x => new AlienSpeciesAssessment2023ExpertGroupMember
-                {
-                    ExpertCommittee = x.ExpertGroupName.Replace("(Svalbard)", "").Trim(),
-                    Name = x.User.FullName.RemoveExcessWhitepace(),
-                    Admin = x.Admin
-                })
+                    {
+                        ExpertCommittee = x.ExpertGroupName.Replace("(Svalbard)", "").Trim(),
+                        FullName = x.User.FullName.RemoveExcessWhitepace(),
+                        FirstName = GetFirstName(x.User.FullName),
+                        LastName = GetLastName(x.User.FullName),
+                        FirstNameInitials = GetFirstName(x.User.FullName).GetInitials(),
+                        Admin = x.Admin
+                    })
                 .Distinct().OrderBy(x => x.ExpertCommittee).ThenByDescending(x => x.Admin).ToList();
 
             foreach (var expertGroupMember in expertGroupMembers.Where(x => x.ExpertCommittee is "Bakterier" or "Kromister" or "Sopper"))
@@ -149,6 +152,16 @@ namespace Assessments.Transformation
 
             if (!await _dbContext.Database.CanConnectAsync())
                 throw new Exception("Kan ikke koble til databasen");
+        }
+
+        private static string GetLastName(string fullname) => fullname.Trim().Split(' ').LastOrDefault().RemoveExcessWhitepace();
+
+        private static string GetFirstName(string fullname)
+        {
+            var parts = fullname.Split(' ');
+            var firstName = string.Join(" ", parts.Take(parts.Length - 1));
+
+            return firstName.RemoveExcessWhitepace();
         }
     }
 }

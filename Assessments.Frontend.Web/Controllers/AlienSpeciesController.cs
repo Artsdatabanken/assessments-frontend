@@ -50,7 +50,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             var viewModel = new AlienSpeciesDetailViewModel(assessment)
             {
-                ExpertGroupMembers = assessmentExpertGroupMembers.Select(x => x.Name).JoinAnd(", ", " og ")
+                //ExpertGroupMembers = assessmentExpertGroupMembers.Select(x => x.Name).JoinAnd(", ", " og ")
             };
 
             return View("2023/AlienSpeciesDetail", viewModel);

@@ -24,7 +24,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 		.github\workflows\test.yml = .github\workflows\test.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assessments.Tests", "Assessments.Tests\Assessments.Tests.csproj", "{A268EDE0-4060-42E3-90AD-E97558A410E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Tests", "Assessments.Tests\Assessments.Tests.csproj", "{A268EDE0-4060-42E3-90AD-E97558A410E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "myMLApp", "myMLApp\myMLApp.csproj", "{5B4DE1B2-7741-4055-AAC4-23460278F8B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentModel_ConsoleApp1", "SentimentModel_ConsoleApp1\SentimentModel_ConsoleApp1.csproj", "{4E8AF1E3-2F49-4F14-85B2-F30CCC588F93}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentModel_WebApi1", "SentimentModel_WebApi1\SentimentModel_WebApi1.csproj", "{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +58,18 @@ Global
 		{A268EDE0-4060-42E3-90AD-E97558A410E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A268EDE0-4060-42E3-90AD-E97558A410E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A268EDE0-4060-42E3-90AD-E97558A410E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B4DE1B2-7741-4055-AAC4-23460278F8B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B4DE1B2-7741-4055-AAC4-23460278F8B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B4DE1B2-7741-4055-AAC4-23460278F8B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B4DE1B2-7741-4055-AAC4-23460278F8B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E8AF1E3-2F49-4F14-85B2-F30CCC588F93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E8AF1E3-2F49-4F14-85B2-F30CCC588F93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E8AF1E3-2F49-4F14-85B2-F30CCC588F93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E8AF1E3-2F49-4F14-85B2-F30CCC588F93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

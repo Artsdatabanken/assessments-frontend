@@ -13,7 +13,7 @@
 
                 if (speciesGroup.SubGroup != null)
                 {
-                    foreach (var subGroup in speciesGroup.SubGroup)
+                    foreach (var subGroup in speciesGroup.SubGroup.Filters)
                     {
                         if (subGroup.Name == speciesGroupName)
                         {
@@ -27,7 +27,7 @@
 
         public static string GetSpeciesGroupByShortName(string shortName)
         {
-            var speciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
+            var speciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters;
 
             foreach (var species in speciesGroups)
             {
@@ -39,7 +39,7 @@
 
                 if (speciesGroup.SubGroup != null)
                 {
-                    foreach (var subGroup in species.SubGroup)
+                    foreach (var subGroup in species.SubGroup.Filters)
                     {
                         if (subGroup.NameShort == shortName)
                         {

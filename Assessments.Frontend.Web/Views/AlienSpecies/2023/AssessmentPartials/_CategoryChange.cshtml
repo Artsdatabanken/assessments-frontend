@@ -1,36 +1,51 @@
 ﻿@model AlienSpeciesDetailViewModel
 
 @{
-    var has2018 = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018) ?? false;
+    var has2018Assessmnet = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018) ?? false;
+    var category2018 = has2018Assessmnet ? Model.Assessment.PreviousAssessments?.Where(x => x.RevisionYear == 2018).Select(x => x.Category).FirstOrDefault() : null;
     var isNr = Model.Assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
-    var wasNr2018 = Model.Assessment.PreviousAssessments != null &&
-        Model.Assessment.PreviousAssessments.Any(x => x.RevisionYear == 2018 && x.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR);
-    var category2018 = Model.Assessment.PreviousAssessments?.Where(x => x.RevisionYear == 2018).Select(x => x.Category).FirstOrDefault();
-    var sameAs2018 = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018 && x.Category == Model.Assessment.Category) ?? false;
+    var wasNr2018 = category2018 == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
+    var sameAs2018 = Model.Assessment.Category == category2018;
 
-    var showMain = true;
-    if (isNr && wasNr2018)
-        showMain = false;
+    var showMain = !(category2018 != null && isNr) || !(isNr || sameAs2018);
 
-    var showNotAssessed2018 = !isNr && Model.Assessment.PreviousAssessments.Count == 0 || wasNr2018;
-    var showSameAs2019 = !isNr && sameAs2018;
+    var showNotAssessed2018 = !isNr && (category2018 == null || wasNr2018);
+    var showSameAs2018 = !isNr && sameAs2018;
 
-    var category2018WithName = has2018 ? $"{category2018.DisplayName().ToLower()} - {category2018}" : string.Empty;
+    var category2018WithName = category2018 != null ? $"{category2018.DisplayName().ToLower()} - {category2018}" : string.Empty;
     var category2023WithName = $"{Model.Assessment.Category.DisplayName().ToLower()} - {Model.Assessment.Category}";
+
+    var showRealChange = Model.Assessment.ReasonForChangeOfCategory.Contains("realChange");
+    var showNewKnowledge = Model.Assessment.ReasonForChangeOfCategory.Contains("newInformation");
+    var showNewInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("newInterpretation");
+    var showChangedCriteria = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteria");
+    var showChangedCriteriaInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteriaInterpretation");
+    var showChangedStatus = Model.Assessment.ReasonForChangeOfCategory.Contains("changedStatus");
+    var showReasonsForChangeDescription = !string.IsNullOrEmpty(Model.Assessment.ReasonsForChangeOfCategoryDescription);
 }
 
 <div is-visible="showMain" class="page_section">
     <div id="show_category_changed">
         <h2 class="collapsible_header">Endring i risikokategori siden Fremmedartslista 2018</h2>
         <div>
-            <div is-visible="showNotAssessed2018">
+            <p is-visible="showNotAssessed2018">
                 Denne arten ble ikke risikovurdert for Fremmedartslista 2018
-            </div>
-            <div is-visible="showSameAs2019">
+            </p>
+            <p is-visible="!showNotAssessed2018 && showSameAs2018">
                 Denne arten er vurdert til samme risikokategori som i Fremmedartslista 2018
-            </div>
-            <div is-visible="!showNotAssessed2018 && !showSameAs2019">
+            </p>
+            <div is-visible="!showNotAssessed2018 && !showSameAs2018">
                 Kategorien for denne arten er endret fra @category2018WithName til @category2023WithName siden Fremmedartslista 2018. Dette skyldes:
+                <p is-visible="showRealChange">- Reel endring i utbredelse, forekomstareal og/eller økologiske effekter</p>
+                <p is-visible="showNewKnowledge">- Ny kunnskap</p>
+                <p is-visible="showNewInterpretation">- Ny tolkning av tidligere data</p>
+                <p is-visible="showChangedCriteria">- Endrede avgrensninger eller retningslinjer</p>
+                <p is-visible="showChangedCriteriaInterpretation">- Endret tolkning av retningslinjer</p>
+                <p is-visible="showChangedStatus">- Endret status (inkl. taksonomi, til stedegen)</p>
+            </div>
+            <div is-visible="showReasonsForChangeDescription">
+                Utfyllende beskrivelse av årsaken(e) for endret risikokategori:
+                <p>@Html.Raw(Model.Assessment.ReasonsForChangeOfCategoryDescription)</p>
             </div>
         </div>
     </div>

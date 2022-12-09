@@ -5,7 +5,7 @@
     var assessment = Model.Assessment;
     ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
 
-    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups, assessment.SpeciesGroup);
+    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
     var speciesGroupImageUrl = speciesGroup.ImageUrl;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()

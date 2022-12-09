@@ -8,8 +8,8 @@
 
 ## URL-er
 
-| Url | .NET miljø | 
-| :--- | :--- | :--- |
+| Url | .NET miljø |
+| :------------- | :------------- |
 | https://assessments-fe-dev.test.artsdatabanken.no | Staging | 
 | https://assessments-fe.test.artsdatabanken.no | Staging | 
 | https://assessments-fe.artsdatabanken.no | Production | 

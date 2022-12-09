@@ -8,13 +8,13 @@
 
 ## URL-er
 
-| Url | .NET miljø |
-| :------------- | :------------- |
-| https://assessments-fe-dev.test.artsdatabanken.no | Staging | 
-| https://assessments-fe.test.artsdatabanken.no | Staging | 
-| https://assessments-fe.artsdatabanken.no | Production | 
-| https://beta.artsdatabanken.no/lister/ | Production |
-| https://artsdatabanken.no/lister/ | Production |
+| Url | .NET miljø | Branch
+| :------------- | :------------- | :------------- |
+| https://assessments-fe-dev.test.artsdatabanken.no | Staging | develop (default)
+| https://assessments-fe.test.artsdatabanken.no | Staging | test
+| https://assessments-fe.artsdatabanken.no | Production | master
+| https://beta.artsdatabanken.no/lister/ | Production | test
+| https://artsdatabanken.no/lister/ | Production | master
 
 https://beta.artsdatabanken.no/lister og  https://artsdatabanken.no/lister er tilgjengelig utenfor kontor eller uten vpn.
 

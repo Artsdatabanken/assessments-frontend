@@ -1,4 +1,5 @@
-﻿using Assessments.Mapping.AlienSpecies.Helpers;
+﻿using System.Linq;
+using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
@@ -113,11 +114,19 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                       opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                       opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
                   })
-
+                .ForMember(dest => dest.RegionOccurrences, opt =>
+                {
+                    opt.PreCondition(src => new[] { "AlienSpecie", "DoorKnocker", "EffectWithoutReproduction" }.Any(x => src.AlienSpeciesCategory.Contains(x)));
+                    opt.MapFrom(src => src.Fylkesforekomster.Where(x => x.State2 != 1 | x.State0 == 1 | x.State1 == 1 | x.State3 == 1));
+                })
+                
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
                 ;
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
+           
+            CreateMap<Fylkesforekomst, AlienSpeciesAssessment2023RegionOccurrence>(MemberList.None)
+                .ForMember(dest => dest.Region, opt => opt.MapFrom(src => src.Fylke));
         }
     }
 }

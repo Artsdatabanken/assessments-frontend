@@ -87,6 +87,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool? ProductionSpecies { get; set; }
 
         /// <summary>
+        /// TODO: documentation
+        /// </summary>
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; } = new();
+
+        /// <summary>
         /// When forming part of an Identification, this should be the name in lowest level taxonomic rank that can be determined
         /// </summary>
         public string ScientificName { get; set; }

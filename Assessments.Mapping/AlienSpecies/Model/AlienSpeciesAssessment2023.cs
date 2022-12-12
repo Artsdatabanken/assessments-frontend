@@ -30,16 +30,21 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Explanation for why an earlier believed alien species is no longer considered alien. Free text field.
         /// </summary>
         public string ChangedFromAlienDescription { get; set; }
-
-        /// <summary>
-        /// Decisive criteria according to GEIAAS method
-        /// </summary>
-        public string Criteria { get; set; }
-
+        
         /// <summary>
         /// Explanation for why the taxon is evaluated at another taxonomic rank. Free text field.
         /// </summary>
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
+        
+        /// <summary>
+        /// TODO: documentation
+        /// </summary>
+        public List<AlienSpeciesAssessment2023Criterion> Criteria { get; set; }
+
+        /// <summary>
+        /// Decisive criteria according to GEIAAS method
+        /// </summary>
+        public string DecisiveCriteria { get; set; }
 
         /// <summary>
         /// Establishment category in Norway today. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are locally self-sustaining or strongly expanding
@@ -85,6 +90,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// A species that is used for production of goods or services in agriculture, forestry, horticulture, gardens, parks, aquaculture, farming, as pet, for hobby or leisure, or a species imported as food, fodder or bait
         /// </summary>
         public bool? ProductionSpecies { get; set; }
+
+        /// <summary>
+        /// TODO: documentation
+        /// </summary>
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; } = new();
 
         /// <summary>
         /// When forming part of an Identification, this should be the name in lowest level taxonomic rank that can be determined
@@ -295,6 +305,5 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Number of introductions (minus one) during a 10 years period (high estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
         public int? RiskAssessmentIntroductionsHigh { get; set; }
-
     }
 }

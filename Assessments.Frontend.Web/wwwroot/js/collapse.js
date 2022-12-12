@@ -13,7 +13,8 @@
 
 const makeCollapsibleListIds = [
     'show_expert_summary',
-    'show_occurence_area'
+    'show_occurence_area',
+    'show_category_changed'
 ];
 
 const expandLessInnerHtml = 'expand_less';

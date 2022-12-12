@@ -117,7 +117,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.RegionOccurrences, opt =>
                 {
                     opt.PreCondition(src => new[] { "AlienSpecie", "DoorKnocker", "EffectWithoutReproduction" }.Any(x => src.AlienSpeciesCategory.Contains(x)));
-                    opt.MapFrom(src => src.Fylkesforekomster.Where(x => x.State2 != 1 | x.State0 == 1 | x.State1 == 1 | x.State3 == 1));
+                    opt.MapFrom(src => src.Fylkesforekomster.Where(x => x.State2 == 0));
                 })
                 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
@@ -126,7 +126,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
            
             CreateMap<Fylkesforekomst, AlienSpeciesAssessment2023RegionOccurrence>(MemberList.None)
-                .ForMember(dest => dest.Region, opt => opt.MapFrom(src => src.Fylke));
+                .ForMember(dest => dest.Region, opt => opt.MapFrom(src => src.Fylke))
+                .ForMember(dest => dest.IsKnown, opt => opt.MapFrom(src => src.State0 == 1))
+                .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
+                .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));
         }
     }
 }

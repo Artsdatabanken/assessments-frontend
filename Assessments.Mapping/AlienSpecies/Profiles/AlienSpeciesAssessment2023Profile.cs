@@ -114,6 +114,9 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                       opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                       opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
                   })
+                .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
+                .ForMember(dest => dest.Criteria, opt => opt.MapFrom(src => src.RiskAssessment.Criteria))
+
                 .ForMember(dest => dest.RegionOccurrences, opt =>
                 {
                     opt.PreCondition(src => new[] { "AlienSpecie", "DoorKnocker", "EffectWithoutReproduction" }.Any(x => src.AlienSpeciesCategory.Contains(x)));
@@ -124,6 +127,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 ;
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
+           
+            CreateMap<RiskAssessment.Criterion, AlienSpeciesAssessment2023Criterion>(MemberList.None)
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Value + 1))
+                .ForMember(dest => dest.UncertaintyValues, opt => opt.MapFrom(src => src.UncertaintyValues.OrderBy(x => x).Select(x => x + 1)));
            
             CreateMap<Fylkesforekomst, AlienSpeciesAssessment2023RegionOccurrence>(MemberList.None)
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(src => src.Fylke))

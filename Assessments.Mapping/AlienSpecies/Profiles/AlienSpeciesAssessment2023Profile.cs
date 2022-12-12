@@ -1,4 +1,5 @@
-﻿using Assessments.Mapping.AlienSpecies.Helpers;
+﻿using System.Linq;
+using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
@@ -113,11 +114,17 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                       opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                       opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
                   })
+                .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
+                .ForMember(dest => dest.Criteria, opt => opt.MapFrom(src => src.RiskAssessment.Criteria))
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
                 ;
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
+           
+            CreateMap<RiskAssessment.Criterion, AlienSpeciesAssessment2023Criterion>(MemberList.None)
+                .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Value + 1))
+                .ForMember(dest => dest.UncertaintyValues, opt => opt.MapFrom(src => src.UncertaintyValues.OrderBy(x => x).Select(x => x + 1)));
         }
     }
 }

@@ -45,7 +45,9 @@ namespace Assessments.Frontend.Web.Controllers
             
             var expertGroupMembers = await DataRepository.GetData<AlienSpeciesAssessment2023ExpertGroupMember>(DataFilenames.AlienSpeciesExpertCommitteeMembers);
             
-            var assessmentExpertGroupMembers = await expertGroupMembers.Where(x => x.ExpertCommittee == assessment.ExpertGroup).OrderByDescending(x => x.Admin).ToListAsync();
+            var assessmentExpertGroupMembers = await expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
+                .OrderBy(x => x.ExpertGroup)
+                .ThenBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToListAsync();
 
             var viewModel = new AlienSpeciesDetailViewModel(assessment)
             {

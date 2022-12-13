@@ -3,10 +3,10 @@
 
 @{
     var showPage = Model.Category != AlienSpeciesAssessment2023Category.NR;
-    var showTableAndTreMaps = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
+    var showTableAndThreeMaps = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
     var showTableAndSingleMap = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker ||
         Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
-    var showInteractiveMap = showTableAndTreMaps && false; // TODO: switch false with has used artskart and downloaded a zip file
+    var showInteractiveMap = showTableAndThreeMaps && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
 }
 
@@ -16,38 +16,37 @@
     </h2>
     <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , 'geographical_spread' )">Utbredelse i Norge</button>
     <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , 'geographical_spread' )">Regional naturvariasjon</button>
+   
     <div class="tabbed_element_container assessment_tabs">
         <div id="domestic_spread">
             <div id="show_occurence_area">
+
                 <h3>Forekomstareal</h3>
-                <div>
-                    <div is-visible="@showTableAndTreMaps">
-                        <div>
-                            tabell
-                        </div>
-                        <div>
-                            kart x 3
-                        </div>
+                <div is-visible="@showTableAndThreeMaps">
+                    <div class="map triple_map">
+                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
+                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
+                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
                     </div>
-                    <div is-visible="@showTableAndSingleMap">
-                        <div>
-                            tabell
-                        </div>
-                        <div>
-                            kart x 1
-                        </div>
+                    <p>Tabellvisning + legende</p>
+                </div> 
+                <div is-visible="@showTableAndSingleMap">
+                    <div>
+                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
                     </div>
-                    <div is-visible="showCurrentPresenceComment">
-                        <div>
-                            Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og forekomstareal om 50 år.
-                        </div>
-                        <p>
-                            @Html.Raw(Model.CurrentPresenceComment)
-                        </p>
-                    </div>
-                    <div is-visible="@showInteractiveMap">
-                        Interaktivt kart
-                    </div>
+                    <div>
+                        tabell
+                    </div>                        
+                </div>
+                <div is-visible="showCurrentPresenceComment">
+                    <p>
+                        Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og 
+                        forekomstareal om 50 år.
+                    </p>
+                    <p>@Html.Raw(Model.CurrentPresenceComment)</p>
+                </div>
+                <div is-visible="@showInteractiveMap">
+                    Interaktivt kart
                 </div>
             </div>
         </div>

@@ -1,6 +1,9 @@
-﻿using Assessments.Mapping.AlienSpecies.Model;
+﻿using System;
+using System.Collections.Generic;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
 using System.Linq;
+using Assessments.Frontend.Web.Infrastructure;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -20,17 +23,30 @@ namespace Assessments.Frontend.Web.Models
                 CriteriaDocumentation = assessment.RiskAssessmentCriteriaDocumentation,
                 CriteriaDocumentationDomesticSpread = assessment.RiskAssessmentCriteriaDocumentationDomesticSpread,
                 CriteriaDocumentationEcoEffect = assessment.RiskAssessmentCriteriaDocumentationEcoEffect,
-                CriteriaDocumentationInvationPotential = assessment.RiskAssessmentCriteriaDocumentationInvationPotential,
+                CriteriaDocumentationInvasionPotential = assessment.RiskAssessmentCriteriaDocumentationInvasionPotential,
                 CriteriaDocumentationSpeciesStatus = assessment.RiskAssessmentCriteriaDocumentationSpeciesStatus,
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 HasIndoorProduction = assessment.HasIndoorProduction,
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,
-                SpreadIntroductionFurtherInfo = assessment.SpreadIntroductionFurtherInfo,
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
                 Summary = assessment.RiskAssessmentGeographicalVariationDocumentation,
                 TaxonRank = assessment.ScientificNameRank,
                 UncertaintyEstablishmentTimeDescription = assessment.UncertaintyEstablishmentTimeDescription,
                 UncertaintyStatusDescription = assessment.UncertaintyStatusDescription
+            };
+
+            RegionalSpreadViewModel = new RegionalSpreadViewModel
+            {
+                AlienSpeciesCategory = assessment.AlienSpeciesCategory,
+                AreaOfOccupancyFutureBest = assessment.RiskAssessmentAOOfutureBest,
+                AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
+                AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
+                AreaOfOccupancyTotalBest = assessment.RiskAssessmentAOOtotalBest,
+                AreaOfOccupancyTotalHigh = assessment.RiskAssessmentAOOtotalHigh,
+                AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
+                AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
+                Category = assessment.Category,
+                CurrentPresenceComment = assessment.CurrentPresenceComment
             };
 
             SideBarContentViewModel = new SideBarContentViewModel
@@ -55,6 +71,10 @@ namespace Assessments.Frontend.Web.Models
 
         public ExpertStatementViewModel ExpertStatementViewModel { get; set; }
 
+        public RegionalSpreadViewModel RegionalSpreadViewModel { get; set; }
+
         public SideBarContentViewModel SideBarContentViewModel { get; set; }
+
+        public string ExpertGroupMembers { get; set; }
     }
 }

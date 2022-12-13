@@ -1,5 +1,7 @@
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
+using System.Collections.Generic;
+using Assessments.Mapping.AlienSpecies.Model;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -38,8 +40,6 @@ namespace Assessments.Frontend.Web.Models
 
         public string FirstPublished { get; set; }
 
-        public string CitationHeading { get; set; }
-
         public string PublicationText { get; set; }
 
         public DateTime RevisionDate { get; set; }
@@ -47,6 +47,8 @@ namespace Assessments.Frontend.Web.Models
         public string RevisionReason { get; set; }
 
         public int YearPreviousAssessment { get; set; }
+
+        public string ExpertGroupMembers { get; set; }
     }
 
     public class CitationForListViewModel
@@ -81,7 +83,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string CriteriaDocumentationEcoEffect { get; set; }
 
-        public string CriteriaDocumentationInvationPotential { get; set; }
+        public string CriteriaDocumentationInvasionPotential { get; set; }
 
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 
@@ -113,6 +115,29 @@ namespace Assessments.Frontend.Web.Models
         public string Status { get; set; }
 
         public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
+    }
+
+    public class RegionalSpreadViewModel
+    {
+        public int? AreaOfOccupancyKnown { get; set; }
+
+        public int? AreaOfOccupancyFutureBest { get; set; }
+
+        public int? AreaOfOccupancyFutureHigh { get; set; }
+
+        public int? AreaOfOccupancyFutureLow { get; set; }
+
+        public int? AreaOfOccupancyTotalBest { get; set; }
+
+        public int? AreaOfOccupancyTotalHigh { get; set; }
+
+        public int? AreaOfOccupancyTotalLow { get; set; }
+
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
+        public AlienSpeciesAssessment2023Category Category { get; set; }
+
+        public string CurrentPresenceComment { get; set; }
     }
 
     public class SideBarContentViewModel

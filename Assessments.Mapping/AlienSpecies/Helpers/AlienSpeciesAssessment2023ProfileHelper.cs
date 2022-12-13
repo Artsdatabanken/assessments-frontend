@@ -54,14 +54,18 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static string GetExpertGroup(string expertGroup)
         {
+            // NOTE: synchronise logic with ExpertGroupExport in TransformAlienSpecies
+
             if (expertGroup.Contains("(Svalbard)"))
             {
                 return expertGroup.Replace("(Svalbard)", "");
             }
-            if (expertGroup is "Bakterier" or "Kromister" or "Sopper")
+
+            if (expertGroup is "Bakterier" or "Kromister" or "Sopper") 
             {
                 return "Sopper, det gule riket og bakterier";
             }
+
             return expertGroup;
         }
 
@@ -371,7 +375,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                         return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1266000, (long)areaOfOccurrenceIn50Years) : Math.Min(1266000, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
                     }
                     return (int)(assessment.AssessmentConclusion == assessedSelfReproducing ? Math.Min(1123500, (long)areaOfOccurrenceIn50Years) : Math.Min(1123500, (long)AOO10yr(numberOfOccurrences, numberOfIntroductions)));
-                default: 
+                default:
                     return 0;
             }
         }

@@ -1,7 +1,7 @@
 ﻿/*
      Create an element containing a header element and a div for hiding.
-     The header element will receive span elements injected in front of the headeing itself.
-     The div is the element which will be hidden. If you have this structure you can add the id of the parent element to this list,
+     The header element will receive span elements injected in front of the heading itself.
+     The div is the element which will be hidden. If you have this structure you can add the id of the parent element to "makeCollapsibleListIds",
      and it will become collapsible.
      
      example structure when adding "example" into the id list:
@@ -13,6 +13,7 @@
 
 const makeCollapsibleListIds = [
     'show_expert_summary',
+    'show_occurence_area'
 ];
 
 const expandLessInnerHtml = 'expand_less';
@@ -43,7 +44,6 @@ const switchArrowType = element => {
 
 const toggleCollapsed = element => {
     isCollapsed = element.style['display'] === 'none';
-    console.log(element.style['display'])
     if (isCollapsed)
         element.style = 'display:block';
     else

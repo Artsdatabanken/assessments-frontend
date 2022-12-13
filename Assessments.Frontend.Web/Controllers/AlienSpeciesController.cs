@@ -1,12 +1,13 @@
-﻿using Assessments.Frontend.Web.Infrastructure;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Shared.Helpers;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
@@ -21,7 +22,7 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index(AlienSpeciesListViewModel viewModel, int? page, bool export)
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
-            
+
             query = QueryHelpers.ApplyParameters(viewModel, query);
 
             if (export)
@@ -41,8 +42,16 @@ namespace Assessments.Frontend.Web.Controllers
 
             if (assessment == null)
                 return NotFound();
+            
+            var expertGroupMembers = await DataRepository.GetData<AlienSpeciesAssessment2023ExpertGroupMember>(DataFilenames.AlienSpeciesExpertCommitteeMembers);
+            
+            var assessmentExpertGroupMembers = await expertGroupMembers.Where(x => x.ExpertCommittee == assessment.ExpertGroup)
+                .OrderByDescending(x => x.Admin).ToListAsync();
 
-            var viewModel = new AlienSpeciesDetailViewModel(assessment);
+            var viewModel = new AlienSpeciesDetailViewModel(assessment)
+            {
+                ExpertGroupMembers = assessmentExpertGroupMembers.Select(x => x.Name).JoinAnd(", ", " og ")
+            };
 
             return View("2023/AlienSpeciesDetail", viewModel);
         }

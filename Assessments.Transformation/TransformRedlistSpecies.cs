@@ -114,17 +114,9 @@ namespace Assessments.Transformation
                 }
             };
 
-            var dataFolder = configuration.GetValue<string>("FilesFolder");
-
-            if (string.IsNullOrEmpty(dataFolder))
-                throw new Exception("Innstilling for 'FilesFolder' mangler");
-
-            if (!Directory.Exists(dataFolder))
-                Directory.CreateDirectory(dataFolder);
-
             foreach (var (key, value) in files)
             {
-                await File.WriteAllTextAsync(Path.Combine(dataFolder, key), value);
+                await File.WriteAllTextAsync(Path.Combine(configuration.GetValue<string>("FilesFolder"), key), value);
 
                 if (upload)
                     await Storage.Upload(configuration, key, value);

@@ -12,7 +12,7 @@
 
     var showDomesticSpreadDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationDomesticSpread);
 
-    var showInvationPotentialDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationInvationPotential);
+    var showInvasionPotentialDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationInvasionPotential);
 
     var showEcoEffectDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationEcoEffect);
 
@@ -26,7 +26,7 @@
     var showExpertSummary = showSpeciesStatusDocumentation ||
                                                         showUncertaintyStatusDescription ||
                                                         showDomesticSpreadDocumentation ||
-                                                        showInvationPotentialDocumentation ||
+                                                        showInvasionPotentialDocumentation ||
                                                         showEcoEffectDocumentation ||
                                                         showSpreadWays;
 
@@ -116,11 +116,11 @@
                 </div>
             </div>
 
-            <div is-visible="@showInvationPotentialDocumentation">
+            <div is-visible="@showInvasionPotentialDocumentation">
                 <h3>Invasjonspotensial</h3>
                 <div class="expert_Assessment">
                     <div class="expert_text">
-                        @Html.Raw(Model.CriteriaDocumentationInvationPotential)
+                        @Html.Raw(Model.CriteriaDocumentationInvasionPotential)
                     </div>
                 </div>
             </div>

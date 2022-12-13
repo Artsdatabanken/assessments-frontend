@@ -310,5 +310,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Number of introductions (minus one) during a 10 years period (high estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
         public int? RiskAssessmentIntroductionsHigh { get; set; }
+
+        /// <summary>
+        /// TODO: documentation
+        /// </summary>
+        public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; } = new();
     }
 }

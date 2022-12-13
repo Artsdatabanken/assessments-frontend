@@ -118,11 +118,15 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                   })
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
                 .ForMember(dest => dest.Criteria, opt => opt.MapFrom(src => src.RiskAssessment.Criteria))
-
                 .ForMember(dest => dest.RegionOccurrences, opt =>
                 {
                     opt.PreCondition(src => new[] { "AlienSpecie", "DoorKnocker", "EffectWithoutReproduction" }.Any(x => src.AlienSpeciesCategory.Contains(x)));
                     opt.MapFrom(src => src.Fylkesforekomster.Where(x => x.State2 == 0));
+                })
+                .ForMember(dest => dest.WaterModel, opt =>
+                {
+                    opt.PreCondition(src => src.AlienSpeciesCategory == "RegionallyAlien");
+                    opt.MapFrom(src => src.ArtskartWaterModel);
                 })
                 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments))
@@ -136,6 +140,16 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
            
             CreateMap<Fylkesforekomst, AlienSpeciesAssessment2023RegionOccurrence>(MemberList.None)
                 .ForMember(dest => dest.Region, opt => opt.MapFrom(src => src.Fylke))
+                .ForMember(dest => dest.IsKnown, opt => opt.MapFrom(src => src.State0 == 1))
+                .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
+                .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));
+
+            CreateMap<ArtskartWaterModel, AlienSpeciesAssessment2023WaterModel>(MemberList.None)
+                .ForMember(dest => dest.WaterAreas, opt => opt.MapFrom(src => src.Areas));
+
+            CreateMap<ArtskartWaterAreaModel, AlienSpeciesAssessment2023WaterArea>(MemberList.None)
+                .ForMember(dest => dest.WaterRegionId, opt => opt.MapFrom(src => src.VannregionId))
+                .ForMember(dest => dest.IsIncludedInAssessmentArea, opt => opt.MapFrom(src => src.Disabled == 0 && src.Selected == 1))
                 .ForMember(dest => dest.IsKnown, opt => opt.MapFrom(src => src.State0 == 1))
                 .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
                 .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));

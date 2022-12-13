@@ -47,6 +47,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string DecisiveCriteria { get; set; }
 
         /// <summary>
+        /// Fritekstfelt for å beskrive årsak til endring i kategori siden 2018
+        /// </summary>
+        public string ReasonsForChangeOfCategoryDescription { get; set; }
+
+        /// <summary>
         /// Establishment category in Norway today. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are locally self-sustaining or strongly expanding
         /// </summary>
         public string EstablishmentCategory { get; set; }
@@ -90,6 +95,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// A species that is used for production of goods or services in agriculture, forestry, horticulture, gardens, parks, aquaculture, farming, as pet, for hobby or leisure, or a species imported as food, fodder or bait
         /// </summary>
         public bool? ProductionSpecies { get; set; }
+
+        /// <summary>
+        /// TODO: documentation
+        /// </summary>
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; } = new();
 
         /// <summary>
         /// When forming part of an Identification, this should be the name in lowest level taxonomic rank that can be determined
@@ -311,5 +321,9 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// </summary>
         public bool IsAcceptedSimplifiedEstimate { get; set; }
 
+        /// <summary>
+        /// TODO: documentation
+        /// </summary>
+        public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; } = new();
     }
 }

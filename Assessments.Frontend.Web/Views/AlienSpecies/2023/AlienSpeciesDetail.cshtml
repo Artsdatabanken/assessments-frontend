@@ -41,7 +41,7 @@
         RevisionDate = new DateTime(), // TODO: add if we handle revisions in this list
         RevisionReason = string.Empty, // TODO: add if we handle revisions in this list
         YearPreviousAssessment = assessment.PreviousAssessments?.Select(x => x.RevisionYear).OrderByDescending(x => x).FirstOrDefault() ?? 0,
-        ExpertGroupMembers = Model.ExpertGroupMembers
+        ExpertGroupMembers = Model.ExpertGroupMembers.Select(x => $"{x.LastName} {x.FirstNameInitials}").JoinAnd(", ", " og ")
     };
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
@@ -90,7 +90,6 @@
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 @*    Check which ones are appropriate for alien species list
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
@@ -100,6 +99,7 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="Model.ExpertStatementViewModel" />
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_CategoryChange.cshtml" />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RegionalSpread.cshtml" model="Model.RegionalSpreadViewModel" />
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
             </div>

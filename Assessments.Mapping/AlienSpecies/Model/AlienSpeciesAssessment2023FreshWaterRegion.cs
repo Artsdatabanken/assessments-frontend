@@ -1,6 +1,6 @@
 ﻿namespace Assessments.Mapping.AlienSpecies.Model
 {
-    public class AlienSpeciesAssessment2023WaterArea
+    public class AlienSpeciesAssessment2023FreshWaterRegion
     {
         /// <summary>
         /// TODO: documentation

@@ -314,6 +314,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// TODO: documentation
         /// </summary>
-        public AlienSpeciesAssessment2023WaterModel WaterModel { get; set; } = new();
+        public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; } = new();
     }
 }

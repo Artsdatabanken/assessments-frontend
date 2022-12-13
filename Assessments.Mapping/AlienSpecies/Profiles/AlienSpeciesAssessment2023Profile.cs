@@ -123,7 +123,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => new[] { "AlienSpecie", "DoorKnocker", "EffectWithoutReproduction" }.Any(x => src.AlienSpeciesCategory.Contains(x)));
                     opt.MapFrom(src => src.Fylkesforekomster.Where(x => x.State2 == 0));
                 })
-                .ForMember(dest => dest.WaterModel, opt =>
+                .ForMember(dest => dest.FreshWaterRegionModel, opt =>
                 {
                     opt.PreCondition(src => src.AlienSpeciesCategory == "RegionallyAlien");
                     opt.MapFrom(src => src.ArtskartWaterModel);
@@ -144,10 +144,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
                 .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));
 
-            CreateMap<ArtskartWaterModel, AlienSpeciesAssessment2023WaterModel>(MemberList.None)
-                .ForMember(dest => dest.WaterAreas, opt => opt.MapFrom(src => src.Areas));
+            CreateMap<ArtskartWaterModel, AlienSpeciesAssessment2023FreshWaterRegionModel>(MemberList.None)
+                .ForMember(dest => dest.FreshWaterRegions, opt => opt.MapFrom(src => src.Areas));
 
-            CreateMap<ArtskartWaterAreaModel, AlienSpeciesAssessment2023WaterArea>(MemberList.None)
+            CreateMap<ArtskartWaterAreaModel, AlienSpeciesAssessment2023FreshWaterRegion>(MemberList.None)
                 .ForMember(dest => dest.WaterRegionId, opt => opt.MapFrom(src => src.VannregionId))
                 .ForMember(dest => dest.IsIncludedInAssessmentArea, opt => opt.MapFrom(src => src.Disabled == 0 && src.Selected == 1))
                 .ForMember(dest => dest.IsKnown, opt => opt.MapFrom(src => src.State0 == 1))

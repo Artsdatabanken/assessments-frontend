@@ -37,7 +37,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
         
         /// <summary>
-        /// TODO: documentation
+        /// List including all criteria (A-I), their score and uncertainty
         /// </summary>
         public List<AlienSpeciesAssessment2023Criterion> Criteria { get; set; }
 
@@ -97,7 +97,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool? ProductionSpecies { get; set; }
 
         /// <summary>
-        /// TODO: documentation
+        /// Species' occurrence in counties/regions
         /// </summary>
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; } = new();
 
@@ -312,7 +312,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public int? RiskAssessmentIntroductionsHigh { get; set; }
 
         /// <summary>
-        /// TODO: documentation
+        /// Species' occurrence in water regions/areas. Only relevant for regionally alien freshwater fish.
         /// </summary>
         public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; } = new();
     }

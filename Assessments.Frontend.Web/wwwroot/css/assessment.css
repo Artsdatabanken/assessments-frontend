@@ -747,3 +747,8 @@ span.area i {
 .tabbed_element_container.assessment_tabs .inactive {
     display: none;
 }
+
+.expand_header{
+    display:flex;
+    justify-content:space-between
+}

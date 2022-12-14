@@ -108,3 +108,59 @@ h1, h2, h3 {
     border:0;
     padding:4px;
 }
+
+.expanded .if_expanded {
+    display: inline-block;
+}
+
+.collapsed .if_expanded {
+    display: none;
+}
+
+.expanded .if_collapsed {
+    display: none;
+}
+
+.collapsed .if_collapsed {
+    display: inline-block;
+}
+
+.expandable {
+    border: 1px solid lightgrey;
+    margin-top: 40px;
+}
+
+.expandable .expand_content {
+    padding: 8px;
+    padding-bottom:20px;
+}
+
+.expand_header h2 {
+    margin: 0;
+}
+
+.expand_header {
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.darktheme .expand_header,
+.darktheme .expandable {
+    border-color: white;
+}
+
+.main .ghost {
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 24px;
+    margin:0;
+}
+
+.main .ghost .material-icons {
+    font-size: inherit;
+    vertical-align: middle;
+}

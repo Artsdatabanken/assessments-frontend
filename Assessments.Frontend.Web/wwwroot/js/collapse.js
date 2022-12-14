@@ -11,6 +11,23 @@
      </div>
 */
 
+function toggleMe(element){
+    console.log(element.parentNode);
+    parent = element.parentNode.parentNode;
+    isExpanded = parent.classList.contains("expanded");
+    if (isExpanded) {
+        console.log("yep")
+        parent.classList.remove("expanded")
+        parent.classList.add("collapsed")
+    } else {
+        console.log("nope")
+        parent.classList.add("expanded");
+        parent.classList.remove("collapsed")
+    }
+        /// TODO FIX        
+}
+
+/*
 const makeCollapsibleListIds = [
     'show_expert_summary',
     'show_occurence_area'
@@ -65,6 +82,8 @@ const addOnclickFunction = (element, id) => {
     }
 }
 
+
+
 const makeCollapsible = id => {
     const elements = document.getElementById(id)?.childNodes;
     if (!elements) return;
@@ -81,3 +100,5 @@ const makeCollapsible = id => {
 makeCollapsibleListIds?.forEach(id => {
     makeCollapsible(id);
 });
+
+*/

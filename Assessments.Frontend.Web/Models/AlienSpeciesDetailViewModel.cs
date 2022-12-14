@@ -75,6 +75,6 @@ namespace Assessments.Frontend.Web.Models
 
         public SideBarContentViewModel SideBarContentViewModel { get; set; }
 
-        public string ExpertGroupMembers { get; set; }
+        public List<AlienSpeciesAssessment2023ExpertGroupMember> ExpertGroupMembers { get; set; } = new();
     }
 }

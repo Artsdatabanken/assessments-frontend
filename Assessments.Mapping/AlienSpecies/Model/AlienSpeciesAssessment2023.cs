@@ -47,6 +47,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string DecisiveCriteria { get; set; }
 
         /// <summary>
+        /// Fritekstfelt for å beskrive årsak til endring i kategori siden 2018
+        /// </summary>
+        public string ReasonsForChangeOfCategoryDescription { get; set; }
+
+        /// <summary>
         /// Establishment category in Norway today. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are locally self-sustaining or strongly expanding
         /// </summary>
         public string EstablishmentCategory { get; set; }
@@ -305,5 +310,20 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Number of introductions (minus one) during a 10 years period (high estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
         public int? RiskAssessmentIntroductionsHigh { get; set; }
+
+        /// <summary>
+        /// The available methods to estimate the population lifetime of a species (or its likelihood of extinction) in Norway.
+        /// </summary>
+        public AlienSpeciesAssessment2023MedianLifetimeEstimationMethod MedianLifetimeEstimationMethod { get; set; }
+
+        /// <summary>
+        /// Is the median population lifetime that was automatically estimated based on estimation method "simplified estimation" accepted?
+        /// </summary>
+        public bool IsAcceptedSimplifiedEstimate { get; set; }
+
+        /// <summary>
+        /// TODO: documentation
+        /// </summary>
+        public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; } = new();
     }
 }

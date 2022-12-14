@@ -99,44 +99,6 @@ namespace Assessments.Transformation
             Progress.ProgressBar.Dispose();
         }
 
-        public static async Task ExpertGroupExport(IConfigurationRoot configuration, bool upload)
-        {
-            await SetupDatabaseContext(configuration);
-
-            Progress.ProgressBar = new ProgressBar(100, "Eksporterer ekspertgruppe medlemmer", new ProgressBarOptions
-            {
-                DisplayTimeInRealTime = false,
-                EnableTaskBarProgress = true
-            });
-
-            var expertGroupMembers = _dbContext.UserRoleInExpertGroups.Include(x => x.User)
-                .Where(x => x.WriteAccess
-                            && !x.User.FullName.Contains("(Test)")
-                            && x.ExpertGroupName != "Testedyr"
-                            && !x.User.Email.EndsWith("@artsdatabanken.no")
-                )
-                .Select(x => new AlienSpeciesAssessment2023ExpertGroupMember
-                {
-                    ExpertCommittee = x.ExpertGroupName.Replace("(Svalbard)", "").Trim(),
-                    Name = x.User.FullName.RemoveExcessWhitepace(),
-                    Admin = x.Admin
-                })
-                .Distinct().OrderBy(x => x.ExpertCommittee).ThenByDescending(x => x.Admin).ToList();
-
-            foreach (var expertGroupMember in expertGroupMembers.Where(x => x.ExpertCommittee is "Bakterier" or "Kromister" or "Sopper"))
-                expertGroupMember.ExpertCommittee = "Sopper, det gule riket og bakterier";
-            
-            var serializedData = JsonSerializer.Serialize(expertGroupMembers);
-
-            await File.WriteAllTextAsync(Path.Combine(configuration.GetValue<string>("FilesFolder"), DataFilenames.AlienSpeciesExpertCommitteeMembers), serializedData);
-
-            if (upload)
-                await Storage.Upload(configuration, DataFilenames.AlienSpeciesExpertCommitteeMembers, serializedData);
-
-            Progress.ProgressBar.Tick(Progress.ProgressBar.MaxTicks, "Lagret ekspertgruppe medlemmer");
-            Progress.ProgressBar.Dispose();
-        }
-
         private static async Task SetupDatabaseContext(IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("Fab4");

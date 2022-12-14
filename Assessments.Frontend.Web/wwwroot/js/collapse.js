@@ -1,4 +1,4 @@
-﻿/**
+/**
  * toggleMe toggles an element's grandparent on and off.
  * A example of expandable box with styling:
  
@@ -15,7 +15,6 @@
     </div>
  */
 
-
 function toggleMe(element) {
     console.log(element.parentNode);
     parent = element.parentNode.parentNode;
@@ -30,7 +29,5 @@ function toggleMe(element) {
 }
 
 /*
-const makeCollapsibleListIds = [
-    'show_expert_summary',
-    'show_occurence_area'
-];*/
+'show_occurence_area',
+'show_category_changed'*/

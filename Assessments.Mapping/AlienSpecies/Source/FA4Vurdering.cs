@@ -227,6 +227,17 @@ namespace Assessments.Mapping.AlienSpecies.Source
 
         public bool? ConnectedToAnother { get; set; }
 
+        /// <summary>
+        /// The species was misidentified in previous assessment
+        /// </summary>
+        public bool MisIdentified { get; set; } = false;
+
+        /// <summary>
+        /// Reason for misidentification
+        /// </summary>
+        public string MisIdentifiedDescription { get; set; } = "";
+
+
         public bool? HigherOrLowerLevel { get; set; }
 
         public string Connected { get; set; }

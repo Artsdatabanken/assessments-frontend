@@ -17,6 +17,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 {
                     opt.PreCondition(src => src.PreviousAssessments.Any(x => x.RevisionYear == 2018));
                     opt.MapFrom(src => src.PreviousAssessments.First(x => x.RevisionYear == 2018).Category);
+                })
+                .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => src.MedianLifetimeEstimationMethod.DisplayName()))
+                .ForMember(dest => dest.IsAcceptedSimplifiedEstimate, opt => {
+                    opt.PreCondition(src => src.MedianLifetimeEstimationMethod.DisplayName() == "Forenklet anslag");
+                    opt.MapFrom(src => src.IsAcceptedSimplifiedEstimate);
                 });
         }
     }

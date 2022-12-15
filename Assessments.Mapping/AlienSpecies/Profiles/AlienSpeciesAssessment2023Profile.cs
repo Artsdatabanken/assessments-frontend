@@ -114,7 +114,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
                 })
-                .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => src.Category == "NR" || src.RiskAssessment.ChosenSpreadMedanLifespan == "RedListCategoryLevel" ? "NotRelevant" : src.RiskAssessment.ChosenSpreadMedanLifespan))
+                .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => src.Category == "NR" || src.RiskAssessment.ChosenSpreadMedanLifespan == "RedListCategoryLevel" ? "NotRelevant" : src.RiskAssessment.ChosenSpreadMedanLifespan == "LifespanA1aSimplifiedEstimate" ? "SimplifiedEstimation" : src.RiskAssessment.ChosenSpreadMedanLifespan == "SpreadRscriptEstimatedSpeciesLongevity" ? "NumericalEstimation" : src.RiskAssessment.ChosenSpreadMedanLifespan))
                 .ForMember(dest => dest.IsAcceptedSimplifiedEstimate, opt => opt.MapFrom(src => src.RiskAssessment.AcceptOrAdjustCritA == "accept"))
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
                 .ForMember(dest => dest.Criteria, opt => opt.MapFrom(src => src.RiskAssessment.Criteria))
@@ -130,6 +130,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AlienSpeciesCategory == "RegionallyAlien");
                     opt.MapFrom(src => src.ArtskartWaterModel);
                 })
+                .ForMember(dest => dest.MisIdentifiedDescription, opt => opt.MapFrom(src => src.MisIdentifiedDescription.StripUnwantedHtml()))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

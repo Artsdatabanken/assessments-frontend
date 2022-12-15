@@ -325,5 +325,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Species' occurrence in water regions/areas. Only relevant for regionally alien freshwater fish.
         /// </summary>
         public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; } = new();
+
+        ///<summary>
+        ///Reason for misidentification
+        /// </summary>
+        public string MisIdentifiedDescription { get; set; }
     }
 }

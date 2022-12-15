@@ -1,0 +1,138 @@
+/* DIRECT COPY FROM 2018 */
+
+.risk-level-matrix {
+    margin: 20px -20px;
+}
+
+figure.risk-level-matrix table {
+    border: none;
+    border-collapse: separate;
+    border-spacing: 1px;
+    width: 200px;
+    height: 200px;
+}
+
+@media print {
+    figure.risk-level-matrix table {
+        border-collapse: collapse;
+        border-spacing: inherit;
+    }
+
+    figure.risk-level-matrix table td.cat-nk,
+    figure.risk-level-matrix table td.cat-lo,
+    figure.risk-level-matrix table td.cat-ph,
+    figure.risk-level-matrix table td.cat-hi,
+    figure.risk-level-matrix table td.cat-se {
+        border-color: #000000;
+        color: #000000;
+    }
+}
+
+figure.risk-level-matrix table td {
+    width: 20%;
+    height: 20%;
+    border: thin solid transparent;
+    text-align: center;
+    font-weight: bold;
+    padding: 0;
+    color: transparent;
+}
+
+figure.risk-level-matrix table td[colspan] {
+    border-top-color: #000000;
+    color: #000000;
+}
+
+figure.risk-level-matrix table td[rowspan] {
+    border-right-color: #000000;
+    color: #000000;
+}
+
+
+.darktheme figure.risk-level-matrix table td[colspan],
+.darktheme figure.risk-level-matrix table td[rowspan] {
+    color: white;
+}
+
+figure.risk-level-matrix table .cat-nk {
+    background: #9ba963;
+    border-color: #9ba963;
+}
+
+figure.risk-level-matrix table .cat-lo {
+    background: #5ea4a1;
+    border-color: #5ea4a1;
+}
+
+figure.risk-level-matrix table .cat-ph {
+    background: #185a6c;
+    border-color: #185a6c;
+}
+
+figure.risk-level-matrix table .cat-hi {
+    background: #1b386f;
+    border-color: #1b386f;
+}
+
+figure.risk-level-matrix table .cat-se {
+    background: #5e3063;
+    border-color: #5e3063;
+}
+
+figure.risk-level-matrix table .active {
+    border-color: #FFF;
+}
+
+figure.risk-level-matrix table .active > b {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: medium solid #FFF;
+}
+
+figure.risk-level-matrix table .uncertain {
+    border-color: #FFF;
+}
+
+figure.risk-level-matrix table .uncertain > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: medium dotted #FFF;
+}
+
+@media print {
+    figure.risk-level-matrix table .active,
+    figure.risk-level-matrix table .uncertain {
+        border-color: #000000;
+    }
+
+    figure.risk-level-matrix table .active b,
+    figure.risk-level-matrix table .uncertain b,
+    figure.risk-level-matrix table .active span,
+    figure.risk-level-matrix table .uncertain span {
+        border-color: #000000;
+    }
+}
+
+figure.risk-level-matrix table td.legend {
+    font-size: 0.8em;
+    font-weight: normal;
+    text-align: left;
+}
+
+figure.risk-level-matrix table td.legend-v {
+    width: 1rem;
+    position: relative;
+}
+
+figure.risk-level-matrix table td.legend-v span {
+    position: absolute;
+    bottom: 0;
+    right: .5rem;
+    transform: rotate(-90deg);
+    display: block;
+    width: 1rem;
+    white-space: nowrap;
+    line-height: 1rem;
+}

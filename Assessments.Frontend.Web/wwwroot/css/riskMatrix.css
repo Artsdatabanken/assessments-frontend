@@ -8,8 +8,8 @@ figure.risk-level-matrix table {
     border: none;
     border-collapse: separate;
     border-spacing: 1px;
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
 }
 
 @media print {

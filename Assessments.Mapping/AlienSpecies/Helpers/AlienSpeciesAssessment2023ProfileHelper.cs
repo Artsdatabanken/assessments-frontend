@@ -216,9 +216,28 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 }
                 else
                 {
-                    // TODO: legg til 2012 når formel for utregning er på plass #711
-                    previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
-                    previousAssessment.Url = "https://artsdatabanken.no/fremmedartslista2018";
+                    if (previousAssessment.MainSubCategory == "noRiskAssessment")
+                    {
+                        previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
+                    }
+                    else
+                    {
+                        previousAssessment.Category = previousAssessment.RiskLevel switch
+                        {
+                            0 => AlienSpeciesAssessment2023Category.NK,
+                            1 => AlienSpeciesAssessment2023Category.LO,
+                            2 => AlienSpeciesAssessment2023Category.PH,
+                            3 => AlienSpeciesAssessment2023Category.HI,
+                            4 => AlienSpeciesAssessment2023Category.SE,
+                            _ => AlienSpeciesAssessment2023Category.NR
+                        };
+                    }
+
+                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":") 
+                        ? "https://artsdatabanken.no/fremmedartslista2018" 
+                        : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
+
+
                 }
             }
 

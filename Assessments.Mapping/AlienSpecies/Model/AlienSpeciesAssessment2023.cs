@@ -335,5 +335,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The probability of extiction by 50 years deduced from the A-criterion score
         /// </summary>
         public AlienSpeciesAssessment2023ExtinctionProbability ExtinctionProbability { get; set; }
+
+        ///<summary>
+        /// The default, estimated score on criterion A (median lifetime) when using estimation method "simplified estimation"
+        /// </summary>
+        public int MedianLifetimeSimplifiedEstimationDefaultScore { get; set; }
     }
 }

@@ -135,6 +135,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.RiskAssessment.Criteria.Count > 0 && src.Category != "NR");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExtinctionProbability(src.RiskAssessment.Criteria));
                 })
+                .ForMember(dest => dest.MedianLifetimeSimplifiedEstimationDefaultScore, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(src.AssessmentConclusion, src.RiskAssessment));
+                })
 
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));

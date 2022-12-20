@@ -47,7 +47,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Utslagsgivende kriterier 2023")]
         [Description("Utslagsgivende kriterier i 2023 etter GEIAAS metoden")]
-        public string Criteria { get; set; }
+        public string DecisiveCriteria { get; set; }
 
         [DisplayName("Skår Invasjonspotensial")]
         [Description("Artens delkategori (1-4) på invasjonsaksen i risikomatrisen. Denne bestemmes av artens invasjonspotensial")]

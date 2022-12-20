@@ -234,7 +234,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     }
 
                     previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":") 
-                        ? "https://artsdatabanken.no/fremmedartslista2018" 
+                        ? "https://databank.artsdatabanken.no/FremmedArt2012" 
                         : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
 
 

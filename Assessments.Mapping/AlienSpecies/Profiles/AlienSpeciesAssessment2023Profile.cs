@@ -119,6 +119,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
                 .ForMember(dest => dest.Criteria, opt => opt.MapFrom(src => src.RiskAssessment.Criteria))
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
+                .ForMember(dest => dest.DecisiveCriteria, opt => opt.NullSubstitute(string.Empty))
                 .ForMember(dest => dest.Criteria, opt => opt.MapFrom(src => src.RiskAssessment.Criteria))
                 .ForMember(dest => dest.RegionOccurrences, opt =>
                 {

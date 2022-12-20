@@ -379,5 +379,23 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     return 0;
             }
         }
+
+        internal static string GetExtinctionProbability(List<RiskAssessment.Criterion> aCriterionScore)
+        {
+            switch (aCriterionScore[0].Value)
+            {
+                case 0:
+                    return "High";
+                case 1:
+                    return "MediumHigh";
+                case 2:
+                    return "MediumLow";
+                case 3:
+                    return "Low";
+                default:
+                    break;
+            }
+            return "NotEvaluated";
+        }
     }
 }

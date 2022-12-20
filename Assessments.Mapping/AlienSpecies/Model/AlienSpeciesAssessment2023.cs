@@ -254,7 +254,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Best estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
         /// </summary>
-        public int? RiskAssessmentAOOtotalBest { get; set; }
+        public int? AOOtotalBest { get; set; }
 
         /// <summary>
         /// High estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
@@ -269,7 +269,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Best estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
         /// </summary>
-        public int RiskAssessmentAOOfutureBest { get; set; }
+        public int AOOfutureBest { get; set; }
 
         /// <summary>
         /// High estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
@@ -330,5 +330,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         ///Reason for misidentification
         /// </summary>
         public string MisIdentifiedDescription { get; set; }
+
+        ///<summary>
+        /// The probability of extiction by 50 years deduced from the A-criterion score
+        /// </summary>
+        public AlienSpeciesAssessment2023ExtinctionProbability ExtinctionProbability { get; set; }
     }
 }

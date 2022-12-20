@@ -54,7 +54,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalLowInput);
                 })
-                .ForMember(dest => dest.RiskAssessmentAOOtotalBest, opt =>
+                .ForMember(dest => dest.AOOtotalBest, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalBestInput);
@@ -71,7 +71,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.EvaluationStatus == "finished");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "low"));
                 })
-                .ForMember(dest => dest.RiskAssessmentAOOfutureBest, opt =>
+                .ForMember(dest => dest.AOOfutureBest, opt =>
                 {
                     //TODO: remove precondition when all assessments are finished (before innsynet)
                     opt.PreCondition(src => src.EvaluationStatus == "finished");
@@ -118,8 +118,6 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.IsAcceptedSimplifiedEstimate, opt => opt.MapFrom(src => src.RiskAssessment.AcceptOrAdjustCritA == "accept"))
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
                 .ForMember(dest => dest.Criteria, opt => opt.MapFrom(src => src.RiskAssessment.Criteria))
-                .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
-                .ForMember(dest => dest.Criteria, opt => opt.MapFrom(src => src.RiskAssessment.Criteria))
                 .ForMember(dest => dest.RegionOccurrences, opt =>
                 {
                     opt.PreCondition(src => new[] { "AlienSpecie", "DoorKnocker", "EffectWithoutReproduction" }.Any(x => src.AlienSpeciesCategory.Contains(x)));
@@ -131,6 +129,13 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.ArtskartWaterModel);
                 })
                 .ForMember(dest => dest.MisIdentifiedDescription, opt => opt.MapFrom(src => src.MisIdentifiedDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.ExtinctionProbability, opt =>
+                {
+                    opt.PreCondition(src => src.RiskAssessment.Criteria.Count > 0 && src.Category != "NR");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExtinctionProbability(src.RiskAssessment.Criteria));
+                })
+
+
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

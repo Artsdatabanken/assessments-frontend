@@ -103,7 +103,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Antatt forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal i dag (beste anslag)")]
-        public int? RiskAssessmentAOOtotalBest { get; set; }
+        public int? AOOtotalBest { get; set; }
 
         [DisplayName("Antatt forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal i dag (høyt anslag)")]
@@ -116,7 +116,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Fremtidig forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public int? RiskAssessmentAOOfutureBest { get; set; }
+        public int? AOOfutureBest { get; set; }
 
         [DisplayName("Fremtidig forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]

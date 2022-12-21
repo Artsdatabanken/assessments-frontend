@@ -38,10 +38,10 @@ namespace Assessments.Frontend.Web.Models
             RegionalSpreadViewModel = new RegionalSpreadViewModel
             {
                 AlienSpeciesCategory = assessment.AlienSpeciesCategory,
-                AreaOfOccupancyFutureBest = assessment.RiskAssessmentAOOfutureBest,
+                AreaOfOccupancyFutureBest = assessment.AOOfutureBest,
                 AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
                 AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
-                AreaOfOccupancyTotalBest = assessment.RiskAssessmentAOOtotalBest,
+                AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
                 AreaOfOccupancyTotalHigh = assessment.RiskAssessmentAOOtotalHigh,
                 AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
                 AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,

@@ -9,8 +9,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {"reproduksjonLimitedToCertainClimaticZones", "Artens evne til reproduksjon og/eller spredning er begrenset til visse bioklimatiske soner eller seksjoner" },
             {"ecologicalEffectLimitedToCertainClimaticZones","Artens økologiske effekter er begrenset til visse bioklimatiske soner eller seksjoner"},
             {"ecologicalEffectLimitedToCertainNatureTypes","Artens økologiske effekter er begrenset til bestemte naturtyper"},
-            {"ecologicalEffectLimitedToIndigenousSpecies  ","Artens økologiske effekt består utelukkende i interaksjoner med stedegne arter som har svært begrenset utbredelse"},
-            {"ecologicalEffectLimitedToIndigenousSpecies", "Artens økologiske effekt består utelukkende i interaksjoner med stedegne arter som har svært begrenset utbredelse"}
+            {"ecologicalEffectLimitedToIndigenousSpecies  ","Artens økologiske effekt består utelukkende i interaksjoner med stedegne arter som har svært begrenset utbredelse"}
         };
 
         internal static string GetGeographicalVariation(List<string> geoVar)

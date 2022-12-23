@@ -22,7 +22,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.IsAcceptedSimplifiedEstimate, opt => {
                     opt.PreCondition(src => src.MedianLifetimeEstimationMethod.DisplayName() == "Forenklet anslag");
                     opt.MapFrom(src => src.IsAcceptedSimplifiedEstimate);
-                });
+                })
+                ;
         }
     }
 }

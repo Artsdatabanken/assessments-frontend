@@ -10,7 +10,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool IsWaterArea { get; set; }
 
         /// <summary>
-        /// TODO: documentation
+        /// List including all water areas or water regions, and information about the species "occurrence-status" in each region  
         /// </summary>
         public List<AlienSpeciesAssessment2023FreshWaterRegion> FreshWaterRegions { get; set; } = new();
     }

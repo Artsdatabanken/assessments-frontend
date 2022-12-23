@@ -47,7 +47,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Utslagsgivende kriterier 2023")]
         [Description("Utslagsgivende kriterier i 2023 etter GEIAAS metoden")]
-        public string Criteria { get; set; }
+        public string DecisiveCriteria { get; set; }
 
         [DisplayName("Skår Invasjonspotensial")]
         [Description("Artens delkategori (1-4) på invasjonsaksen i risikomatrisen. Denne bestemmes av artens invasjonspotensial")]
@@ -103,7 +103,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Antatt forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal i dag (beste anslag)")]
-        public int? RiskAssessmentAOOtotalBest { get; set; }
+        public int? AOOtotalBest { get; set; }
 
         [DisplayName("Antatt forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal i dag (høyt anslag)")]
@@ -116,7 +116,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Fremtidig forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public int? RiskAssessmentAOOfutureBest { get; set; }
+        public int? AOOfutureBest { get; set; }
 
         [DisplayName("Fremtidig forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]

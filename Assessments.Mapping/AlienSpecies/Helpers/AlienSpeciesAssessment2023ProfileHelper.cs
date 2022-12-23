@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
-    internal static class AlienSpeciesAssessment2023ProfileHelper
+    public static class AlienSpeciesAssessment2023ProfileHelper
     {
         internal static string GetAlienSpeciesCategory(string alienSpeciesCategory, string expertGroup)
         {
@@ -216,9 +216,28 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 }
                 else
                 {
-                    // TODO: legg til 2012 når formel for utregning er på plass #711
-                    previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
-                    previousAssessment.Url = "https://artsdatabanken.no/fremmedartslista2018";
+                    if (previousAssessment.MainSubCategory == "noRiskAssessment")
+                    {
+                        previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
+                    }
+                    else
+                    {
+                        previousAssessment.Category = previousAssessment.RiskLevel switch
+                        {
+                            0 => AlienSpeciesAssessment2023Category.NK,
+                            1 => AlienSpeciesAssessment2023Category.LO,
+                            2 => AlienSpeciesAssessment2023Category.PH,
+                            3 => AlienSpeciesAssessment2023Category.HI,
+                            4 => AlienSpeciesAssessment2023Category.SE,
+                            _ => AlienSpeciesAssessment2023Category.NR
+                        };
+                    }
+
+                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":") 
+                        ? "https://databank.artsdatabanken.no/FremmedArt2012" 
+                        : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
+
+
                 }
             }
 
@@ -378,6 +397,53 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 default:
                     return 0;
             }
+        }
+
+        internal static string GetExtinctionProbability(List<RiskAssessment.Criterion> aCriterionScore)
+        {
+            switch (aCriterionScore[0].Value)
+            {
+                case 0:
+                    return "High";
+                case 1:
+                    return "MediumHigh";
+                case 2:
+                    return "MediumLow";
+                case 3:
+                    return "Low";
+                default:
+                    break;
+            }
+            return "NotEvaluated";
+        }
+
+        public static int GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(string assessmentConclusion, RiskAssessment riskAssessment)
+        {
+            var assessedDoorKnocker = "AssessedDoorknocker";
+            if (assessmentConclusion == assessedDoorKnocker)
+            {
+                var numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
+                var numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
+                var AOOTenYearsBest = AOO10yr(numberOfOccurrences, numberOfIntroductions);
+                return AOOTenYearsBest > 16 ? 4
+                    : AOOTenYearsBest > 4 ? 3
+                    : AOOTenYearsBest > 1 ? 2
+                    : 1;
+            }
+            else
+            {
+                if (riskAssessment.AOO50yrBestInput.HasValue == false || riskAssessment.AOOtotalBestInput.HasValue == false) return 0;
+                double AOOFiftyYearsBest = (double)riskAssessment.AOO50yrBestInput;
+                double AOOtotalBest = (double)riskAssessment.AOOtotalBestInput;
+                double AOOChangeBest = AOOtotalBest == 0 ? 1 : (double)(AOOFiftyYearsBest / AOOtotalBest);
+
+                return AOOFiftyYearsBest >= 20 && AOOChangeBest > 0.2 ? 4
+                    : AOOFiftyYearsBest >= 20 && AOOChangeBest > 0.05 ? 3
+                    : AOOFiftyYearsBest >= 8 && AOOChangeBest > 0.2 ? 2
+                    : 1;
+            }
+
+
         }
     }
 }

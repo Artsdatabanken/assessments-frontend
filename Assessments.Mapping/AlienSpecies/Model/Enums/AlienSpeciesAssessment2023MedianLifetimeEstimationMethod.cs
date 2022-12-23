@@ -5,10 +5,10 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
     public enum AlienSpeciesAssessment2023MedianLifetimeEstimationMethod
     {
         [Display(Name = "Forenklet anslag")]
-        LifespanA1aSimplifiedEstimate,
+        SimplifiedEstimation,
 
         [Display(Name = "Numerisk estimering")]
-        SpreadRscriptEstimatedSpeciesLongevity,
+        NumericalEstimation,
 
         [Display(Name = "Levedyktighetsanalyse")]
         ViableAnalysis,

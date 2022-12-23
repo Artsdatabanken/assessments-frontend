@@ -37,7 +37,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
         
         /// <summary>
-        /// TODO: documentation
+        /// List including all criteria (A-I), their score and uncertainty
         /// </summary>
         public List<AlienSpeciesAssessment2023Criterion> Criteria { get; set; }
 
@@ -97,7 +97,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool? ProductionSpecies { get; set; }
 
         /// <summary>
-        /// TODO: documentation
+        /// Species' occurrence in counties/regions
         /// </summary>
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; } = new();
 
@@ -254,7 +254,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Best estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
         /// </summary>
-        public int? RiskAssessmentAOOtotalBest { get; set; }
+        public int? AOOtotalBest { get; set; }
 
         /// <summary>
         /// High estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
@@ -269,7 +269,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Best estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
         /// </summary>
-        public int RiskAssessmentAOOfutureBest { get; set; }
+        public int AOOfutureBest { get; set; }
 
         /// <summary>
         /// High estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
@@ -322,8 +322,23 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool IsAcceptedSimplifiedEstimate { get; set; }
 
         /// <summary>
-        /// TODO: documentation
+        /// Species' occurrence in water regions/areas. Only relevant for regionally alien freshwater fish.
         /// </summary>
         public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; } = new();
+
+        ///<summary>
+        ///Reason for misidentification
+        /// </summary>
+        public string MisIdentifiedDescription { get; set; }
+
+        ///<summary>
+        /// The probability of extiction by 50 years deduced from the A-criterion score
+        /// </summary>
+        public AlienSpeciesAssessment2023ExtinctionProbability ExtinctionProbability { get; set; }
+
+        ///<summary>
+        /// The default, estimated score on criterion A (median lifetime) when using estimation method "simplified estimation"
+        /// </summary>
+        public int MedianLifetimeSimplifiedEstimationDefaultScore { get; set; }
     }
 }

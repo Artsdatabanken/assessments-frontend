@@ -1,17 +1,25 @@
-﻿
-@*
-   Map of Norway with svalbard
-   Region limits per 2018
-*@
-
-@functions{
-    string className(string name)    {
-        string classN = "current";
-        return classN;
-    }
-}
+﻿@model MapViewModel;
 
 @{
+    //Map of Norway with svalbard
+    //Region limits per 2018
+
+    string className(string name)
+    {
+        string className = "current";
+        if (Model.RegionOccurrences.Any(x => x.Region.DisplayName() == name))
+        {
+            return Model.MapText switch
+            {
+                Constants.AlienSpecies2023KnownOccurence => "known_today",
+                Constants.AlienSpecies2023AssumedOccurence => "is_assumed_today",
+                Constants.AlienSpecies2023AssumedInFutureOccurence => "is_assumed_in_future",
+                _ => className
+            };
+        }
+        return className;
+    }
+
     string seastyle = "fill:#e7f1f2;stroke:#000000;stroke-width:0.5px;";
     string nauticstyle = "fill:lightblue;stroke:#000000;stroke-width:0.5px;";
     string placestyle = "fill:#f2e7da;stroke:#000000;stroke-width:0.5px;";

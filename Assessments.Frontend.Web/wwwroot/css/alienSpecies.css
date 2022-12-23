@@ -73,10 +73,29 @@ h1, h2, h3 {
     }
 }
 
-    @media only screen and (max-width: 940px) {
-        .title_header {
-            background: black;
-            background-image: linear-gradient(#8f499760, #8f499780);
-        }
+@media only screen and (max-width: 940px) {
+    .title_header {
+        background: black;
+        background-image: linear-gradient(#8f499760, #8f499780);
+    }
+}
+
+
+/* MAP FOR FA ONLY */
+.triple_map{
+    display:flex;
+    width:100%;
+}
+
+
+/* TODO: adjust jumps */ 
+@media only screen and (max-width: 740px) {
+    .triple_map {
+       
+        flex-wrap: wrap;
     }
 
+    .map svg {
+        max-width: 500px;
+    }
+}

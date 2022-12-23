@@ -50,7 +50,6 @@
         <h2>
             Konklusjon
         </h2>
-
         <div class="expert_Assessment">
             <div class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentation)
@@ -58,12 +57,17 @@
         </div>
     </div>
 
-    <div id="show_expert_summary" is-visible="@showExpertSummary">
-        <h2>
-            Ekspertenes oppsummering
-        </h2>
-
-        <div>
+    <div is-visible="@showExpertSummary" class="collapsible initially_closed">
+        <div class="collapsible_header">
+             <h2>
+                 Ekspertenes oppsummering
+             </h2>
+            <button class="hide" onclick="toggleCollapsible(this)">
+                <span class="material-icons expanded_icon">expand_less</span>
+                <span class="material-icons collapsed_icon">expand_more</span>
+            </button>
+        </div>
+        <div class="collapsible_content">
             <div is-visible="@showSpeciesStatusDocumentation">
                 <h3>Generelt om @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
                 <div class="expert_Assessment">

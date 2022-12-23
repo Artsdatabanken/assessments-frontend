@@ -16,37 +16,43 @@
     </h2>
     <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , 'geographical_spread' )">Utbredelse i Norge</button>
     <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , 'geographical_spread' )">Regional naturvariasjon</button>
-   
     <div class="tabbed_element_container assessment_tabs">
         <div id="domestic_spread">
-            <div id="show_occurence_area">
-
-                <h3>Forekomstareal</h3>
-                <div is-visible="@showTableAndThreeMaps">
-                    <div class="map triple_map">
-                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
-                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
-                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
-                    </div>
-                    <p>Tabellvisning + legende</p>
-                </div> 
-                <div is-visible="@showTableAndSingleMap">
-                    <div>
-                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
-                    </div>
-                    <div>
-                        tabell
-                    </div>                        
+            <div id="show_occurence_area" class="collapsible initially_closed">
+                <div class="collapsible_header">
+                    <h3>Forekomstareal</h3>
+                    <button class="hide" onclick="toggleCollapsible(this)">
+                        <span class="material-icons expanded_icon">expand_less</span>
+                        <span class="material-icons collapsed_icon">expand_more</span>
+                    </button>
                 </div>
-                <div is-visible="showCurrentPresenceComment">
-                    <p>
-                        Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og 
-                        forekomstareal om 50 år.
-                    </p>
-                    <p>@Html.Raw(Model.CurrentPresenceComment)</p>
-                </div>
-                <div is-visible="@showInteractiveMap">
-                    Interaktivt kart
+                <div class="collapsible_content">
+                    <div is-visible="@showTableAndThreeMaps">
+                        <div class="map triple_map">
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
+                        </div>
+                        <p>Tabellvisning + legende</p>
+                    </div> 
+                    <div is-visible="@showTableAndSingleMap">
+                        <div>
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
+                        </div>
+                        <div>
+                            tabell
+                        </div>                        
+                    </div>
+                    <div is-visible="showCurrentPresenceComment">
+                        <p>
+                            Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og 
+                            forekomstareal om 50 år.
+                        </p>
+                        <p>@Html.Raw(Model.CurrentPresenceComment)</p>
+                    </div>
+                    <div is-visible="@showInteractiveMap">
+                        Interaktivt kart
+                    </div>
                 </div>
             </div>
         </div>

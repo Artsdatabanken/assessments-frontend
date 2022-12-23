@@ -738,17 +738,67 @@ span.area i {
     width: 100%;
 }
 
-.collapsible_header:hover,
-.collapsible_header:hover span {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
 .tabbed_element_container.assessment_tabs .inactive {
     display: none;
 }
 
-.expand_header{
+.collapsible_header{
     display:flex;
     justify-content:space-between
+}
+
+.hide {
+    display: none !important;
+}
+
+.collapsible_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.expanded .collapsible_header {
+    border-bottom: 1px solid lightgrey;
+}
+
+.darktheme .collapsible_header,
+.darktheme .collapsible {
+    border-color: white;
+}
+
+.darktheme .collapsible_header button:not(:hover),
+.collapsible_header button {
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 24px;
+    margin: 0;
+}
+
+.collapsible_header button .material-icons {
+    font-size: inherit;
+    vertical-align: middle;
+}
+
+/* OVERRIDE P STYLING */
+
+.darktheme .tabbed_element_container p,
+.tabbed_element_container p {
+    border: 0;
+    padding: 4px;
+}
+
+.collapsible {
+    border: 1px solid lightgrey;
+    margin-top: 40px;
+}
+
+.collapsible .collapsible_content {
+    padding: 8px;
+    padding-bottom: 20px;
+}
+
+.collapsible_header h2 {
+    margin: 0;
 }

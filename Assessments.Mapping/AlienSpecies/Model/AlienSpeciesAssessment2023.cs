@@ -340,5 +340,27 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The default, estimated score on criterion A (median lifetime) when using estimation method "simplified estimation"
         /// </summary>
         public int MedianLifetimeSimplifiedEstimationDefaultScore { get; set; }
+
+        ///<summary>
+        /// The default, low estimate / low uncertainty quantile of the score on criterion A (median lifetime) when using estimation method "simplified estimation"
+        /// </summary>
+        public int MedianLifetimeSimplifiedEstimationDefaultScoreLow { get; set; }
+
+        ///<summary>
+        /// The default, high estimate / high uncertainty quantile of the score on criterion A (median lifetime) when using estimation method "simplified estimation"
+        /// </summary>
+        public int MedianLifetimeSimplifiedEstimationDefaultScoreHigh { get; set; }
+
+        /// <summary>
+        /// Arguments for not accepting the median population lifetime that was automatically estimated based on estimation method "simplified estimation". Applies when IsAcceptedSimplifiedEstimate == false 
+        /// </summary>
+        public string MedianLifetimeSimplifiedEstimationAdjustScoreReason { get; set; }
+
+        public long MedianLifetimeNumericalEstimationPopulationSize { get; set; } 
+        public double MedianLifetimeNumericalEstimationGrowthRate { get; set; } 
+        public double MedianLifetimeNumericalEstimationEnvironmentalVariance { get; set; } 
+        public double MedianLifetimeNumericalEstimationDemographicVariance { get; set; } 
+        public long MedianLifetimeNumericalEstimationCarryingCapacity { get; set; } 
+        public int MedianLifetimeNumericalEstimationExtinctionThreshold { get; set; }
     }
 }

@@ -1,0 +1,60 @@
+﻿@model FeedbackViewModel
+
+@{
+    var showReciept = TempData["feedback"] != null;
+}
+
+<h2 id="feedback">Tilbakemelding</h2>
+
+@if (showReciept)
+{
+    <p>Takk for tilbakemeldingen!</p>
+}
+else
+{
+    <form asp-controller="Feedback" asp-action="Index" asp-route-returnurl="@(Context.Request.Path + "#feedback")" method="post" enctype="multipart/form-data" novalidate>
+
+        <label asp-for="FullName"></label><br />
+        <input asp-for="FullName" />
+        <span asp-validation-for="FullName"></span>
+        <br />
+
+        <label asp-for="Email"></label><br />
+        <input asp-for="Email" />
+        <span asp-validation-for="Email"></span>
+        <br />
+
+        <label asp-for="Comment"></label><br />
+        <textarea asp-for="Comment" rows="5"></textarea>
+        <span asp-validation-for="Comment"></span>
+        <br />
+
+        <label asp-for="FormFiles"></label><br />
+        <input asp-for="FormFiles" type="file" accept=".pdf, .doc, .docx" multiple>
+        <span asp-validation-for="FormFiles"></span>
+        <br />
+
+        <input asp-for="AssessmentId" />
+        <input asp-for="Year" />
+        <input asp-for="Type" />
+
+        <button type="submit">Send inn</button>
+
+        <div asp-validation-summary="All"></div>
+
+    </form>
+
+    <script src="/js/aspnet-validation.min.js"></script>
+    <script>
+        var validation = new aspnetValidation.ValidationService();
+        validation.bootstrap();
+    </script>
+
+    <style>
+        .input-validation-error {
+            border-color: red;
+            outline-color: red;
+        }
+    </style>
+
+}

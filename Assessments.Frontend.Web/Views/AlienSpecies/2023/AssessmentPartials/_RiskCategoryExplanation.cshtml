@@ -1,0 +1,58 @@
+﻿@model AlienSpeciesDetailViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums
+
+@{
+    var showIsNk = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NK;
+}
+
+<div class="page-section">
+    <div class="collapsible initially_closed">
+        <div class="collapsible_header">
+            <h2>Hva forklarer artens risikokategori</h2>
+            <button onclick="toggleCollapsible(this)">
+                <span class="material-icons expanded_icon">expand_less</span>
+                <span class="material-icons collapsed_icon">expand_more</span>
+            </button>
+        </div >
+
+        <div class="collapsible_content">
+            <div id="risk_category_explanation">
+               <button id="risk_category_explanation_button_1" class="changetab active" onclick="selectTab('risk_category_explanation_button_1', 'risk_category_explanation_tab_block_1' , 'risk_category_explanation' )">Avgjørende kriterier</button>
+                <button id="risk_category_explanation_button_2" class="changetab" onclick="selectTab('risk_category_explanation_button_2', 'risk_category_explanation_tab_block_2' , 'risk_category_explanation' )">Øvrige brukte kriterier</button>
+               <div class="tabbed_element_container assessment_tabs">
+                   <div id="risk_category_explanation_tab_block_1">
+                       <div is-visible="showIsNk">
+                           Arten har <i>ingen kjent risiko</i> (NK) og dermed ingen utslag på noen kriterier. Se fanen Øvrige brukte kriterier.
+                       </div>
+                   </div>
+                   <div id="risk_category_explanation_tab_block_2">
+                       <div class="collapsible initially_closed">
+                            <div class="collapsible_header">
+                                <h3>Invasjonspotensial</h3>
+                                <button onclick="toggleCollapsible(this)" id="myButton">
+                                    <span class="material-icons expanded_icon">expand_less</span>
+                                    <span class="material-icons collapsed_icon">expand_more</span>
+                                </button>
+                            </div >
+                            <div class="collapsible_content">
+                                innsett andre kriterier med informasjon
+                            </div>
+                        </div >
+                        <div class="collapsible initially_closed">
+                            <div class="collapsible_header">
+                                <h3>Økologisk effekt</h3>
+                                <button onclick="toggleCollapsible(this)">
+                                    <span class="material-icons expanded_icon">expand_less</span>
+                                    <span class="material-icons collapsed_icon">expand_more</span>
+                                </button>
+                            </div >
+                            <div class="collapsible_content">
+                                innsett andre kriterier med informasjon
+                            </div>
+                        </div >
+                   </div>
+               </div>
+            </div>
+        </div>
+    </div >
+</div>

@@ -355,12 +355,45 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Arguments for not accepting the median population lifetime that was automatically estimated based on estimation method "simplified estimation". Applies when IsAcceptedSimplifiedEstimate == false 
         /// </summary>
         public string MedianLifetimeSimplifiedEstimationAdjustScoreReason { get; set; }
-
-        public long MedianLifetimeNumericalEstimationPopulationSize { get; set; } 
-        public double MedianLifetimeNumericalEstimationGrowthRate { get; set; } 
-        public double MedianLifetimeNumericalEstimationEnvironmentalVariance { get; set; } 
-        public double MedianLifetimeNumericalEstimationDemographicVariance { get; set; } 
-        public long MedianLifetimeNumericalEstimationCarryingCapacity { get; set; } 
-        public int MedianLifetimeNumericalEstimationExtinctionThreshold { get; set; }
+        ///<summary>
+        /// The population size used to estimate population viability with estimation method "numerical estimation"
+        /// </summary>
+        public long MedianLifetimeNumericalEstimationPopulationSize { get; set; }
+        ///<summary>
+        /// The growth rate used to estimate population viability with estimation method "numerical estimation"
+        /// </summary>
+        public double MedianLifetimeNumericalEstimationGrowthRate { get; set; }
+        ///<summary>
+        /// The environmental variance used to estimate population viability with estimation method "numerical estimation". Optional.
+        /// </summary>
+        public double? MedianLifetimeNumericalEstimationEnvironmentalVariance { get; set; }
+        ///<summary>
+        /// The demographic variance used to estimate population viability with estimation method "numerical estimation". Optional.
+        /// </summary>
+        public double? MedianLifetimeNumericalEstimationDemographicVariance { get; set; }
+        ///<summary>
+        /// The carrying capacity (in number of individuals) used to estimate population viability with estimation method "numerical estimation". Optional.
+        /// </summary>
+        public long? MedianLifetimeNumericalEstimationCarryingCapacity { get; set; }
+        ///<summary>
+        /// The quazi-extinction threashold (in number of individuals) used to estimate population viability with estimation method "numerical estimation". Optional.
+        /// </summary>
+        public int? MedianLifetimeNumericalEstimationExtinctionThreshold { get; set; }
+        ///<summary>
+        /// The estimated median lifetime (in years) of the species in Norway. Obligatory for estimation methods "numerical estimation" and "viability analysis". 
+        /// </summary>
+        public long MedianLifetimeBestEstimate { get; set; }
+        ///<summary>
+        /// The estimated low quantile of median lifetime (in years) of the species in Norway. Obligatory for estimation method "viability analysis". 
+        /// </summary>
+        public long MedianLifetimeLowEstimate { get; set; }
+        ///<summary>
+        /// The estimated high quantile of median lifetime (in years) of the species in Norway. Obligatory for estimation method "viability analysis". 
+        /// </summary>
+        public long MedianLifetimeHighEstimate { get; set; }
+        ///<summary>
+        /// Desciption of the Population Viability Analysis model used. Used for estimation method "viability analysis". 
+        /// </summary>
+        public string MedianLifetimeViabilityAnalysisDescription { get; set; }
     }
 }

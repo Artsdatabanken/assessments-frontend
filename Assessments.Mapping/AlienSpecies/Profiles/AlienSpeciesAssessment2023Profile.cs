@@ -157,7 +157,22 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.MedianLifetimeNumericalEstimationDemographicVariance, opt => opt.MapFrom(src => src.RiskAssessment.DemVariance))
                 .ForMember(dest => dest.MedianLifetimeNumericalEstimationCarryingCapacity, opt => opt.MapFrom(src => src.RiskAssessment.CarryingCapacity))
                 .ForMember(dest => dest.MedianLifetimeNumericalEstimationExtinctionThreshold, opt => opt.MapFrom(src => src.RiskAssessment.ExtinctionThreshold))
-
+                .ForMember(dest => dest.MedianLifetimeBestEstimate, opt =>
+                {
+                    opt.PreCondition(src => new[] { "SpreadRscriptEstimatedSpeciesLongevity", "ViableAnalysis" }.Any(x => src.RiskAssessment.ChosenSpreadMedanLifespan.Contains(x)));
+                    opt.MapFrom(src => src.RiskAssessment.MedianLifetimeInput);
+                })
+                .ForMember(dest => dest.MedianLifetimeLowEstimate, opt =>
+                {
+                    opt.PreCondition(src => src.RiskAssessment.ChosenSpreadMedanLifespan == "ViableAnalysis");
+                    opt.MapFrom(src => src.RiskAssessment.LifetimeLowerQInput);
+                })
+                .ForMember(dest => dest.MedianLifetimeHighEstimate, opt =>
+                {
+                    opt.PreCondition(src => src.RiskAssessment.ChosenSpreadMedanLifespan == "ViableAnalysis");
+                    opt.MapFrom(src => src.RiskAssessment.LifetimeUpperQInput);
+                })
+                .ForMember(dest => dest.MedianLifetimeViabilityAnalysisDescription, opt => opt.MapFrom(src => src.RiskAssessment.SpreadPVAAnalysis.StripUnwantedHtml()))
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 

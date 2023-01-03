@@ -25,8 +25,8 @@
 
     var showSimplifiedEstimateAcceptedAlien = isSimplifiedEstimation && isAcceptedSimplifiedEstimation && isAlien;
     var showSimplifiedEstimateNotAcceptedAlien = isSimplifiedEstimation && !isAcceptedSimplifiedEstimation && isAlien;
-    var showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction = isSimplifiedEstimation && isAcceptedSimplifiedEstimation == isDoorknockerOrEffectWithoutReproduction;
-    var showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction = isSimplifiedEstimation && !isAcceptedSimplifiedEstimation == isDoorknockerOrEffectWithoutReproduction;
+    var showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction = isSimplifiedEstimation && isAcceptedSimplifiedEstimation && isDoorknockerOrEffectWithoutReproduction;
+    var showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction = isSimplifiedEstimation && !isAcceptedSimplifiedEstimation && isDoorknockerOrEffectWithoutReproduction;
 }
 
 <div class="page-section">
@@ -100,20 +100,27 @@
                                 </button>
                             </div >
                             <div class="collapsible_content">
-                                Estimeringsmetode: @Model.Assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
-                                <p is-visible="showSimplifiedEstimateAcceptedAlien">
-                                    Basert på de beste anslagene på forekomstareal i dag ([AOOtotalBest] km²) og om 50 år ([AOOfutureBest] km²) er A-kriteriet skåret som [AValue] (med usikkerhet: [Math.min(UncertaintyValues) – Math.max(UncertaintyValues )]). Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på [ExtinctionProbability.DisplayName()]
+                                <p>
+                                    Estimeringsmetode: @Model.Assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
                                 </p>
-                                <p is-visible="showSimplifiedEstimateNotAcceptedAlien">
-                                    Basert på de beste anslagene på forekomstareal i dag ([AOOtotalBest] km²) og om 50 år ([AOOfutureBest] km²) ble A-kriteriet forhåndsskåret som [MedianLifetimeSimplifiedEstimationDefaultScore] (med usikkerhet: [MedianLifetimeSimplifiedEstimationDefaultScoreLow – MedianLifetimeSimplifiedEstimationDefaultScoreHigh]). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier [AValue] og [Math.min(UncertaintyValues) – Math.max(UncertaintyValues)]. Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på [ExtinctionProbability.DisplayName()]. 
-                               </p>
-                               <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore</p>
+                                <p is-visible="showSimplifiedEstimateAcceptedAlien">
+                                    Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) er A-kriteriet skåret som [AValue] (med usikkerhet: [Math.min(UncertaintyValues) – Math.max(UncertaintyValues )]). Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                </p>
+                                <div is-visible="showSimplifiedEstimateNotAcceptedAlien">
+                                    <p>
+                                        Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier [AValue] og [Math.min(UncertaintyValues) – Math.max(UncertaintyValues)]. Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                    </p>
+                                    <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
+                                </div>
                                 <p is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-
+                                    Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som [AValue] (med usikkerhet: [Math.min(UncertaintyValues)–Math.max(UncertaintyValues)]). Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                </p>
-                                <p is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
-
-                               </p>
+                                <div is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
+                                    <p>
+                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier [AValue] og [Math.min(UncertaintyValues) – Math.max(UncertaintyValues)]. Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                   </p>
+                                    <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
+                               </div>
                             </div>
                         </div >
                    </div>

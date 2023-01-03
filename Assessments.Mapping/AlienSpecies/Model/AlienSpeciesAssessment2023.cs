@@ -30,12 +30,12 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Explanation for why an earlier believed alien species is no longer considered alien. Free text field.
         /// </summary>
         public string ChangedFromAlienDescription { get; set; }
-        
+
         /// <summary>
         /// Explanation for why the taxon is evaluated at another taxonomic rank. Free text field.
         /// </summary>
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
-        
+
         /// <summary>
         /// List including all criteria (A-I), their score and uncertainty
         /// </summary>

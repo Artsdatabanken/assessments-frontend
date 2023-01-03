@@ -340,5 +340,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The default, estimated score on criterion A (median lifetime) when using estimation method "simplified estimation"
         /// </summary>
         public int MedianLifetimeSimplifiedEstimationDefaultScore { get; set; }
+
+        public AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod ExpansionSpeedEstimationMethod { get; set; }
     }
 }

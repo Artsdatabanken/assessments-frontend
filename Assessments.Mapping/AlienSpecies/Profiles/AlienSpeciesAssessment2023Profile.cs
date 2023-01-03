@@ -140,6 +140,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.Category != "NR");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(src.AssessmentConclusion, src.RiskAssessment));
                 })
+                .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR");
+                    opt.MapFrom(src => src.RiskAssessment.ChosenSpreadYearlyIncrease == "a" ? "SpatioTemporalDataset" : src.RiskAssessment.ChosenSpreadYearlyIncrease == "b" && src.AssessmentConclusion == "AssessedDoorknocker" ? "EstimatedIncreaseInAOODoorknockers" : src.RiskAssessment.ChosenSpreadYearlyIncrease == "b" && src.RiskAssessment.AOOfirstOccurenceLessThan10Years == "yes" ? "EstimatedIncreaseInAOOReproducingUnaided" : src.RiskAssessment.ChosenSpreadYearlyIncrease == "b" && src.RiskAssessment.AOOfirstOccurenceLessThan10Years == "no" ? "EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion" : "NotRelevant");
+                })
 
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));

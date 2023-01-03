@@ -69,9 +69,11 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return expertGroup;
         }
 
-        internal static string GetEstablishmentCategory(string speciesEstablishmentCategory, string speciesStatus)
+        internal static string GetEstablishmentCategory(string speciesEstablishmentCategory, string speciesStatus, string alienSpeciesCategory)
         {
-            if (speciesStatus == null)
+            string notAlienSpecies = "NotAlienSpecie";
+
+            if (speciesStatus == null || alienSpeciesCategory == notAlienSpecies)
             {
                 return string.Empty;
             }
@@ -425,6 +427,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 var numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
                 var numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
                 var AOOTenYearsBest = AOO10yr(numberOfOccurrences, numberOfIntroductions);
+                
                 return AOOTenYearsBest > 16 ? 4
                     : AOOTenYearsBest > 4 ? 3
                     : AOOTenYearsBest > 1 ? 2
@@ -439,10 +442,73 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
                 return AOOFiftyYearsBest >= 20 && AOOChangeBest > 0.2 ? 4
                     : AOOFiftyYearsBest >= 20 && AOOChangeBest > 0.05 ? 3
-                    : AOOFiftyYearsBest >= 8 && AOOChangeBest > 0.2 ? 2
+                    : AOOFiftyYearsBest >= 8 && AOOChangeBest > 0.2 ? 3
+                    : AOOFiftyYearsBest >= 4 ? 2
                     : 1;
             }
 
+
+        }
+
+        public static int GetMedianLifetimeSimplifiedEstimationDefaultScoreUncertainty(string assessmentConclusion, RiskAssessment riskAssessment, string estimateQuantile)
+        {
+            var assessedDoorKnocker = "AssessedDoorknocker";
+            if(estimateQuantile == "Low") 
+            {
+                if (assessmentConclusion == assessedDoorKnocker)
+                {
+                    var numberOfOccurrences = riskAssessment.Occurrences1Low ?? 0;
+                    int numberOfIntroductions = IntroductionsLow(riskAssessment);
+                    var AOOTenYearsLow = AOO10yr(numberOfOccurrences, numberOfIntroductions);
+                    
+                    return AOOTenYearsLow > 16 ? 4
+                        : AOOTenYearsLow > 4 ? 3
+                        : AOOTenYearsLow > 1 ? Math.Max(2, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
+                        : AOOTenYearsLow <= 1 ? Math.Max(1, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
+                        : 1;
+                }
+                else
+                {
+                    if (riskAssessment.AOO50yrLowInput.HasValue == false || riskAssessment.AOOtotalBestInput.HasValue == false) return 0;
+                    double AOOFiftyYearsLow = (double)riskAssessment.AOO50yrLowInput;
+                    double AOOtotalBest = (double)riskAssessment.AOOtotalBestInput;
+                    double AOOChangeLow = AOOtotalBest == 0 ? 1 : (double)(AOOFiftyYearsLow / AOOtotalBest);
+
+                    return AOOFiftyYearsLow >= 20 && AOOChangeLow > 0.2 ? 4
+                        : AOOFiftyYearsLow >= 20 && AOOChangeLow > 0.05 ? 3
+                        : AOOFiftyYearsLow >= 8 && AOOChangeLow > 0.2 ? 3
+                        : AOOFiftyYearsLow >= 4 ? Math.Max(2, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
+                        : AOOFiftyYearsLow < 4 ? Math.Max(1, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
+                        : 1;
+                }
+            }
+            else //estimateQuantile == "High"
+            {
+                if (assessmentConclusion == assessedDoorKnocker)
+                {
+                    var numberOfOccurrences = riskAssessment.Occurrences1High ?? 0;
+                    int numberOfIntroductions = IntroductionsHigh(riskAssessment);
+                    var AOOTenYearsHigh = AOO10yr(numberOfOccurrences, numberOfIntroductions);
+                    
+                    return AOOTenYearsHigh > 16 ? Math.Min(4, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOTenYearsHigh > 4 ? Math.Min(3, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOTenYearsHigh > 1 ? 2
+                        : 1;
+                }
+                else
+                {
+                    if (riskAssessment.AOO50yrHighInput.HasValue == false || riskAssessment.AOOtotalBestInput.HasValue == false) return 0;
+                    double AOOFiftyYearsHigh = (double)riskAssessment.AOO50yrHighInput;
+                    double AOOtotalBest = (double)riskAssessment.AOOtotalBestInput;
+                    double AOOChangeHigh = AOOtotalBest == 0 ? 1 : (double)(AOOFiftyYearsHigh / AOOtotalBest);
+
+                    return AOOFiftyYearsHigh >= 20 && AOOChangeHigh > 0.2 ? Math.Min(4, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOFiftyYearsHigh >= 20 && AOOChangeHigh > 0.05 ? Math.Min(3, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOFiftyYearsHigh >= 8 && AOOChangeHigh > 0.2 ? Math.Min(3, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOFiftyYearsHigh >= 4 ? 2
+                        : 1;
+                }
+            }
 
         }
     }

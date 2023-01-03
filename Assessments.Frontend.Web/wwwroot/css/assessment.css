@@ -489,6 +489,36 @@ no_distribution {
     /* cursor: pointer; Turning this off for now as nothing happens when you click on it */ 
 }
 
+.known_today {
+    background: #f9ae00;
+    fill: #f9ae00;
+}
+
+.sea.known_today {
+    background: #b77818;
+    fill: #b77818;
+}
+
+.is_assumed_today {
+    background: #9c9922;
+    fill: #9c9922;
+}
+
+.sea.is_assumed_today {
+    background: #495f2f;
+    fill: #495f2f;
+}
+
+.is_assumed_in_future {
+    background: #51b051;
+    fill: #51b051;
+}
+
+.sea.is_assumed_in_future {
+    background: #7ae57a;
+    fill: #7ae57a;
+}
+
 .indicator {
     display:inline-block;
     width: 15px;

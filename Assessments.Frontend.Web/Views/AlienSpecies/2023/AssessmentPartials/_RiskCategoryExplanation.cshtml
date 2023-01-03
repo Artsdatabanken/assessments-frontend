@@ -27,6 +27,9 @@
     var showSimplifiedEstimateNotAcceptedAlien = isSimplifiedEstimation && !isAcceptedSimplifiedEstimation && isAlien;
     var showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction = isSimplifiedEstimation && isAcceptedSimplifiedEstimation && isDoorknockerOrEffectWithoutReproduction;
     var showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction = isSimplifiedEstimation && !isAcceptedSimplifiedEstimation && isDoorknockerOrEffectWithoutReproduction;
+
+    var showNumericalEstimation = Model.Assessment.MedianLifetimeEstimationMethod == AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.NumericalEstimation;
+    var showViableAnalysis = Model.Assessment.MedianLifetimeEstimationMethod == AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.ViableAnalysis;
 }
 
 <div class="page-section">
@@ -91,7 +94,7 @@
                                 </div>
                             </div>
                         </div >
-                        <div class="collapsible initially_closed">
+                        <div is-visible="!showIsNk" class="collapsible initially_closed">
                             <div class="collapsible_header">
                                 <h3>Se mer</h3>
                                 <button onclick="toggleCollapsible(this)" id="myButton">
@@ -121,10 +124,58 @@
                                    </p>
                                     <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                                </div>
+                                <div is-visible="showNumericalEstimation">
+                                    <table>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
+                                            <td>Nåværende populasjonsstørrelse: </td>
+                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize</td>
+                                        </tr>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
+                                            <td>Vekstrate: </td>
+                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationGrowthRate</td>
+                                        </tr>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
+                                            <td>Mijøvarians: </td>
+                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance</td>
+                                        </tr>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
+                                            <td>Demografisk varians: </td>
+                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationDemographicVariance</td>
+                                        </tr>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
+                                            <td>Bæreevne: </td>
+                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationCarryingCapacity</td>
+                                        </tr>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
+                                            <td>Terskel for kvasiutdøing: </td>
+                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationExtinctionThreshold</td>
+                                        </tr>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">
+                                            <td>Estimert median levetid (i år): </td>
+                                            <td>@Model.Assessment.MedianLifetimeBestEstimate</td>
+                                        </tr>
+                                    </table>
+                               </div>
+                                <div is-visible="showViableAnalysis">
+                                    <p>Beskrivelse av modeller og programvare som er brukt: @Model.Assessment.MedianLifetimeViabilityAnalysisDescription</p>
+                                    <table>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">
+                                            <td>Estimert median levetid (i år): </td>
+                                            <td>@Model.Assessment.MedianLifetimeBestEstimate</td>
+                                        </tr>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeLowEstimate != 0">
+                                            <td>Estimert median levetid (i år) lavt anslag: </td>
+                                            <td>@Model.Assessment.MedianLifetimeLowEstimate</td>
+                                        </tr>
+                                        <tr is-visible="Model.Assessment.MedianLifetimeHighEstimate != 0">
+                                            <td>Estimert median levetid (i år) høyt anslag: </td>
+                                            <td>@Model.Assessment.MedianLifetimeHighEstimate</td>
+                                        </tr>
+                                    </table>
+                                </div>
                             </div>
                         </div >
                    </div>
-
 
                    <div id="risk_category_explanation_tab_block_2">
                        <div class="collapsible initially_closed">

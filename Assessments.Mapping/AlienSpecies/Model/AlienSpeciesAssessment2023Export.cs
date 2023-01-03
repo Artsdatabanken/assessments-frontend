@@ -99,11 +99,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Kjent forekomstareal")]
         [Description("Artens kjente forekomstareal i dag")]
-        public int? RiskAssessmentAOOknown { get; set; }
+        public int? AOOknown { get; set; }
 
         [DisplayName("Antatt forekomstareal lavt anslag")]
         [Description("Artens antatte forekomstareal i dag (lavt anslag)")]
-        public int? RiskAssessmentAOOtotalLow { get; set; }
+        public int? AOOtotalLow { get; set; }
 
         [DisplayName("Antatt forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal i dag (beste anslag)")]
@@ -111,7 +111,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Antatt forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal i dag (høyt anslag)")]
-        public int? RiskAssessmentAOOtotalHigh { get; set; }
+        public int? AOOtotalHigh { get; set; }
 
         //TODO: skill felt mellom dørstokkarter og selvstendig reproduserende for fremtidige forekomstareal?
         [DisplayName("Fremtidig forekomstareal lavt anslag")]

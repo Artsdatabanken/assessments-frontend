@@ -17,7 +17,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion,
 
         [Display(Name = "Anslått økning i artens forekomstareal")]
-        EstimatedIncreaseInAOODoorknockers,
+        EstimatedIncreaseInAOODoorKnockers,
 
     }
 }

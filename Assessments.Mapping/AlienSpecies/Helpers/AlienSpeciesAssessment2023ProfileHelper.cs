@@ -511,5 +511,16 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
 
         }
+        internal static string GetSpatioTemporalDatasetModel(string model)
+        {
+            return model switch
+            {
+                "1" => "ConstantDetectability",
+                "2" => "ChangeDetectabilityOnce",
+                "3" => "TestTwoModels",
+                "4" => "KnownSamplingEffort",
+                _ => "NotRelevant",
+            };
+        }
     }
 }

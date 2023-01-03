@@ -42,9 +42,9 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
                 AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
                 AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
-                AreaOfOccupancyTotalHigh = assessment.RiskAssessmentAOOtotalHigh,
-                AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
-                AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
+                AreaOfOccupancyTotalHigh = assessment.AOOtotalHigh,
+                AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
+                AreaOfOccupancyKnown = assessment.AOOknown,
                 Category = assessment.Category,
                 CurrentPresenceComment = assessment.CurrentPresenceComment
             };

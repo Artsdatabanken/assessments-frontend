@@ -19,7 +19,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.VernacularName, opt => opt.MapFrom(src => src.EvaluatedVernacularName))
                 .ForMember(dest => dest.AlienSpeciesCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAlienSpeciesCategory(src.AlienSpeciesCategory, src.ExpertGroup)))
                 .ForMember(dest => dest.ExpertGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpertGroup(src.ExpertGroup).Trim()))
-                .ForMember(dest => dest.EstablishmentCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEstablishmentCategory(src.SpeciesEstablishmentCategory, src.SpeciesStatus)))
+                .ForMember(dest => dest.EstablishmentCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEstablishmentCategory(src.SpeciesEstablishmentCategory, src.SpeciesStatus, src.AlienSpeciesCategory)))
                 .ForMember(dest => dest.ScoreInvasionPotential, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScores(src.Category, src.Criteria, "inv")))
                 .ForMember(dest => dest.ScoreEcologicalEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScores(src.Category, src.Criteria, "eco")))
                 .ForMember(dest => dest.RiskAssessmentGeographicVariationInCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarInCat(src.Category, src.RiskAssessment.PossibleLowerCategory)))
@@ -140,6 +140,39 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.Category != "NR");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(src.AssessmentConclusion, src.RiskAssessment));
                 })
+                .ForMember(dest => dest.MedianLifetimeSimplifiedEstimationDefaultScoreLow, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeSimplifiedEstimationDefaultScoreUncertainty(src.AssessmentConclusion, src.RiskAssessment, "Low"));
+                })
+                .ForMember(dest => dest.MedianLifetimeSimplifiedEstimationDefaultScoreHigh, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeSimplifiedEstimationDefaultScoreUncertainty(src.AssessmentConclusion, src.RiskAssessment, "High"));
+                })
+                .ForMember(dest => dest.MedianLifetimeSimplifiedEstimationAdjustScoreReason, opt => opt.MapFrom(src => src.RiskAssessment.ReasonForAdjustmentCritA.StripUnwantedHtml()))
+                .ForMember(dest => dest.MedianLifetimeNumericalEstimationPopulationSize, opt => opt.MapFrom(src => src.RiskAssessment.PopulationSize))
+                .ForMember(dest => dest.MedianLifetimeNumericalEstimationGrowthRate, opt => opt.MapFrom(src => src.RiskAssessment.GrowthRate))
+                .ForMember(dest => dest.MedianLifetimeNumericalEstimationEnvironmentalVariance, opt => opt.MapFrom(src => src.RiskAssessment.EnvVariance))
+                .ForMember(dest => dest.MedianLifetimeNumericalEstimationDemographicVariance, opt => opt.MapFrom(src => src.RiskAssessment.DemVariance))
+                .ForMember(dest => dest.MedianLifetimeNumericalEstimationCarryingCapacity, opt => opt.MapFrom(src => src.RiskAssessment.CarryingCapacity))
+                .ForMember(dest => dest.MedianLifetimeNumericalEstimationExtinctionThreshold, opt => opt.MapFrom(src => src.RiskAssessment.ExtinctionThreshold))
+                .ForMember(dest => dest.MedianLifetimeBestEstimate, opt =>
+                {
+                    opt.PreCondition(src => new[] { "SpreadRscriptEstimatedSpeciesLongevity", "ViableAnalysis" }.Any(x => src.RiskAssessment.ChosenSpreadMedanLifespan.Contains(x)));
+                    opt.MapFrom(src => src.RiskAssessment.MedianLifetimeInput);
+                })
+                .ForMember(dest => dest.MedianLifetimeLowEstimate, opt =>
+                {
+                    opt.PreCondition(src => src.RiskAssessment.ChosenSpreadMedanLifespan == "ViableAnalysis");
+                    opt.MapFrom(src => src.RiskAssessment.LifetimeLowerQInput);
+                })
+                .ForMember(dest => dest.MedianLifetimeHighEstimate, opt =>
+                {
+                    opt.PreCondition(src => src.RiskAssessment.ChosenSpreadMedanLifespan == "ViableAnalysis");
+                    opt.MapFrom(src => src.RiskAssessment.LifetimeUpperQInput);
+                })
+                .ForMember(dest => dest.MedianLifetimeViabilityAnalysisDescription, opt => opt.MapFrom(src => src.RiskAssessment.SpreadPVAAnalysis.StripUnwantedHtml()))
                 .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt =>
                 {
                     opt.PreCondition(src => src.Category != "NR");

@@ -20,15 +20,22 @@ namespace Assessments.Frontend.Web.Controllers
     {
         private readonly AssessmentsDbContext _dbContext;
         private readonly BlobContainerClient _blob;
+        private readonly IConfiguration _configuration;
 
         public FeedbackController(IConfiguration configuration, AssessmentsDbContext dbContext)
         {
+            _configuration = configuration;
             _dbContext = dbContext;
             _blob = new BlobContainerClient(configuration["ConnectionStrings:AzureBlobStorage"], "files");
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string secret)
         {
+            var feedbackSecret = _configuration["FeedbackSecret"];
+
+            if (feedbackSecret != secret)
+                return Unauthorized();
+
             var feedback = await _dbContext.Feedbacks.AsNoTracking().OrderBy(x => x.CreatedOn).ToListAsync();
 
             MemoryStream memoryStream;
@@ -47,6 +54,8 @@ namespace Assessments.Frontend.Web.Controllers
                 var row = 1;
 
                 var attachments = await _dbContext.FeedbackAttachments.AsNoTracking().ToListAsync();
+                
+                var baseUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}";
 
                 foreach (var attachment in attachments)
                 {
@@ -54,7 +63,7 @@ namespace Assessments.Frontend.Web.Controllers
 
                     worksheet2.Cell(row, 1).Value = attachment.FeedbackId;
                     worksheet2.Cell(row, 2).Value = attachment.FileName;
-                    worksheet2.Cell(row, 2).SetHyperlink(new XLHyperlink($"{Request.GetEncodedUrl()}/attachment?id={attachment.Id}"));
+                    worksheet2.Cell(row, 2).SetHyperlink(new XLHyperlink($"{baseUrl}/feedback/attachment/{attachment.Id}"));
                     worksheet2.Cell(row, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                 }
 

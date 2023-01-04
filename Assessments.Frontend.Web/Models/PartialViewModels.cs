@@ -1,7 +1,7 @@
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
 using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -138,6 +138,15 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         public string CurrentPresenceComment { get; set; }
+
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
+    }
+
+    public class MapViewModel
+    {
+        public string MapText { get; set; }
+
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
     }
 
     public class SideBarContentViewModel

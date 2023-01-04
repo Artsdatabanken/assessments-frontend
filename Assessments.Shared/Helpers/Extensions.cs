@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using HtmlAgilityPack;
 
 namespace Assessments.Shared.Helpers
@@ -55,7 +54,7 @@ namespace Assessments.Shared.Helpers
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(input);
 
-            return htmlDocument.DocumentNode.InnerText;
+            return htmlDocument.DocumentNode.InnerText.Replace("&nbsp;", string.Empty, StringComparison.OrdinalIgnoreCase);
         }
 
         public static string StripUnwantedHtml(this string input)
@@ -91,14 +90,7 @@ namespace Assessments.Shared.Helpers
                 parentNode.RemoveChild(node);
             }
 
-            return document.DocumentNode.InnerHtml;
+            return document.DocumentNode.InnerHtml.Replace("&nbsp;", string.Empty, StringComparison.OrdinalIgnoreCase);
         }
-
-        public static string RemoveExcessWhitepace(this string input) => Regex.Replace(input, @"\s+", " ");
-
-        public static string GetInitials(this string value) => string.Concat(value.RemoveExcessWhitepace()
-                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
-                .Where(x => x.Length >= 1 && char.IsLetter(x[0]))
-                .Select(x => char.ToUpper(x[0])));
     }
 }

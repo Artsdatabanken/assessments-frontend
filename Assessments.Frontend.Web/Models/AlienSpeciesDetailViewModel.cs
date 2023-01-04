@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
+﻿using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
+using System.Collections.Generic;
 using System.Linq;
-using Assessments.Frontend.Web.Infrastructure;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -46,7 +44,8 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
                 AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
                 Category = assessment.Category,
-                CurrentPresenceComment = assessment.CurrentPresenceComment
+                CurrentPresenceComment = assessment.CurrentPresenceComment,
+                RegionOccurrences = assessment.RegionOccurrences
             };
 
             SideBarContentViewModel = new SideBarContentViewModel

@@ -1,5 +1,5 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using ClosedXML.Attributes;
 
 namespace Assessments.Data.Models
 {
@@ -27,6 +27,7 @@ namespace Assessments.Data.Models
         [Required, MaxLength(10000)]
         public string Comment { get; set; }
 
+        [XLColumn(Ignore = true)]
         public List<FeedbackAttachment> Attachments { get; set; }
     }
 

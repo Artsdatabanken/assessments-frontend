@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Assessments.Data;
 using Assessments.Data.Models;
 using Assessments.Frontend.Web.Models;
 using Assessments.Shared.Helpers;
 using Azure.Storage.Blobs;
-using CsvHelper;
-using CsvHelper.Configuration;
+using ClosedXML.Excel;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,30 +27,51 @@ namespace Assessments.Frontend.Web.Controllers
             _blob = new BlobContainerClient(configuration["ConnectionStrings:AzureBlobStorage"], "files");
         }
 
-        private static CsvConfiguration CsvConfiguration => new(CultureInfo.InvariantCulture)
+        public async Task<IActionResult> Index()
         {
-            Delimiter = ";",
-            Encoding = Encoding.UTF8
-        };
+            var feedback = await _dbContext.Feedbacks.AsNoTracking().OrderBy(x => x.CreatedOn).ToListAsync();
 
-        public async Task<IActionResult> Export()
-        {
-            var query = await _dbContext.Feedbacks.Include(x => x.Attachments).AsNoTracking().ToListAsync();
-
-            byte[] result;
-            await using (var memoryStream = new MemoryStream())
-            await using (var streamWriter = new StreamWriter(memoryStream, new UTF8Encoding(true)))
+            MemoryStream memoryStream;
+            using (var workbook = new XLWorkbook())
             {
-                var csvWriter = new CsvWriter(streamWriter, CsvConfiguration);
+                var worksheet = workbook.Worksheets.Add("Tilbakemeldinger");
+                
+                worksheet.Cell(1, 1).InsertTable(feedback);
+                workbook.Worksheet(1).Columns().AdjustToContents();
 
-                await csvWriter.WriteRecordsAsync(query);
-                await streamWriter.FlushAsync();
-                result = memoryStream.ToArray();
+                var worksheet2 = workbook.Worksheets.Add("Vedlegg");
+
+                worksheet2.Cell(1, 1).Value = "FeedbackId";
+                worksheet2.Cell(1, 2).Value = "Filnavn";
+
+                var row = 1;
+
+                var attachments = await _dbContext.FeedbackAttachments.AsNoTracking().ToListAsync();
+
+                foreach (var attachment in attachments)
+                {
+                    ++row;
+
+                    worksheet2.Cell(row, 1).Value = attachment.FeedbackId;
+                    worksheet2.Cell(row, 2).Value = attachment.FileName;
+                    worksheet2.Cell(row, 2).SetHyperlink(new XLHyperlink($"{Request.GetEncodedUrl()}/attachment?id={attachment.Id}"));
+                    worksheet2.Cell(row, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                }
+
+                workbook.Worksheet(2).Columns().AdjustToContents();
+
+                foreach (var workbookWorksheet in workbook.Worksheets)
+                    workbookWorksheet.SheetView.FreezeRows(1);
+
+                memoryStream = new MemoryStream();
+                workbook.SaveAs(memoryStream);
             }
 
-            return new FileStreamResult(new MemoryStream(result), "text/csv")
+            memoryStream.Seek(0, SeekOrigin.Begin);
+
+            return new FileStreamResult(memoryStream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             {
-                FileDownloadName = "feedback.csv"
+                FileDownloadName = "feedback.xlsx"
             };
         }
 
@@ -62,7 +80,7 @@ namespace Assessments.Frontend.Web.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Beklager, en feil oppstod ved innsending av skjema");
-            
+
             var feedback = new Feedback
             {
                 AssessmentId = formViewModel.AssessmentId,
@@ -77,7 +95,7 @@ namespace Assessments.Frontend.Web.Controllers
             _dbContext.Feedbacks.Add(feedback);
 
             await _dbContext.SaveChangesAsync();
-            
+
             var folderId = Guid.NewGuid();
 
             if (formViewModel.FormFiles != null)
@@ -104,7 +122,7 @@ namespace Assessments.Frontend.Web.Controllers
 
                     _dbContext.FeedbackAttachments.Add(new FeedbackAttachment
                     {
-                        FeedbackId = feedback.Id, 
+                        FeedbackId = feedback.Id,
                         BlobName = blobName,
                         FileName = formFile.FileName
                     });
@@ -118,7 +136,7 @@ namespace Assessments.Frontend.Web.Controllers
             return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : BadRequest();
         }
 
-        public async Task<IActionResult> GetAttachment(int id)
+        public async Task<IActionResult> Attachment(int id)
         {
             var attachment = await _dbContext.FeedbackAttachments.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
@@ -126,7 +144,7 @@ namespace Assessments.Frontend.Web.Controllers
                 return NotFound();
 
             var file = _blob.GetBlobClient(attachment.BlobName);
-            
+
             if (!await file.ExistsAsync())
                 return NotFound();
 

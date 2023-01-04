@@ -1,0 +1,47 @@
+﻿@model AlienSpeciesDetailViewModel;
+@using Assessments.Mapping.AlienSpecies.Model.Enums;
+
+@{
+    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
+    var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
+    var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";   
+}
+
+<div class="page_section" is-visible="@showPage">
+    <div class="collapsible initially_closed">
+        <div class="collapsible_header">
+             <h2>
+                 Klimaeffekter
+             </h2>
+            <button class="hide" onclick="toggleCollapsible(this)">
+                <span class="material-icons expanded_icon">expand_less</span>
+                <span class="material-icons collapsed_icon">expand_more</span>
+            </button>
+        </div>
+        <div class="collapsible_content">
+            
+            <p is-visible="hasClimateEffectsInvasionpotential">
+                Delkategori for invasjonspotensial ville vært lavere i fravær av pågående eller fremtidige klimaendringer
+            </p>
+
+            <p is-visible="!hasClimateEffectsInvasionpotential">
+                Delkategori for invasjonspotensial ville <i></i> vært lavere i fravær av pågående eller fremtidige klimaendringer.
+            </p>
+
+            <p is-visible="hasClimateEffectsEcoEffect">
+                Delkategori for økologisk effekt ville vært lavere i fravær av pågående eller fremtidige klimaendringer.
+            </p>
+
+            <p is-visible="!hasClimateEffectsEcoEffect">
+                Delkategori for økologisk effekt ville <i>ikke</i> vært lavere i fravær av pågående eller fremtidige klimaendringer.
+            </p>
+                            
+            <div is-visible="hasClimateEffectsInvasionpotential && hasClimateEffectsEcoEffect && hasRiskAssessmentClimateEffectsDocumentation">
+                <h3>Betydningen av klimaendringer:</h3>
+                <p>@Model.Assessment.RiskAssessmentClimateEffectsDocumentation</p>
+            </div>
+
+        </div>
+    </div>
+</div>

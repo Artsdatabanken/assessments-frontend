@@ -14,7 +14,7 @@
 <div class="page_section">
     <p is-visible="!isNr">Livsmiljø: @Model.Environment.DisplayName()</p>
     <p is-visible="isEvaluatedAtAnotherLevel">
-        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() (les vurderingen <a href="">her</a>).
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() (les vurderingen <a href="">her</a>).
     </p>
     <p is-visible="isNr && !isEvaluatedAtAnotherLevel">
         @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant().
@@ -24,7 +24,7 @@
         @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er en dørstokkart som @Model.SpeciesStatus.Description().
     </p>
     <p is-visible="!isNr && !isEvaluatedAtAnotherLevel && hasEffectWithoutReproduction">
-        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) har @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() som @Model.SpeciesStatus.Description().
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) har @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() og @Model.SpeciesStatus.Description().
     </p>
     <p is-visible="!isNr && !isEvaluatedAtAnotherLevel && isRegionallyAlien">
         @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er en regionalt fremmed @Helpers.FixSpeciesLevel("{art}", (int)Model.TaxonRank) som @Model.SpeciesStatus.Description().

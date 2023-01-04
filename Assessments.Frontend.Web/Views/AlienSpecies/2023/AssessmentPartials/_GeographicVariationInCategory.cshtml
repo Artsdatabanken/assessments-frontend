@@ -1,0 +1,62 @@
+﻿@model AlienSpeciesDetailViewModel;
+@using Assessments.Mapping.AlienSpecies.Model.Enums;
+
+@{
+    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var hasGeographicVariationInCategory = @Model.Assessment.RiskAssessmentGeographicVariationInCategory == true;
+    var geographicVariation = @Model.Assessment.RiskAssessmentGeographicalVariation;
+    var geographicVariationDocumentation = @Model.Assessment.RiskAssessmentGeographicalVariationDocumentation;
+    var hasGeographicVariationDocumentation = geographicVariationDocumentation !=  "";
+    var hasFirstOption = geographicVariation.IndexOf("reproduksjonLimitedToCertainClimaticZones") != -1;
+    var hasSecondOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainClimaticZones") != -1;
+    var hasThirdOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainNatureTypes") != -1;
+    var hasFourthOption = geographicVariation.IndexOf("RiskAssessmentGeographicalVariation ") != -1; 
+    var hasCauses = geographicVariation.Count > 0;
+    var causes = geographicVariation.Count;
+    // TODO: correct space on 4th option when it's completed other places
+}
+   
+<div is-visible="showPage" class="page_section">
+    <div id="show_category_changed" class="collapsible initially_closed">
+        <div class="collapsible_header">
+            <h2> Geografisk variasjon i risiko</h2>
+            <button class="hide" onclick="toggleCollapsible(this)">
+                <span class="material-icons expanded_icon">expand_less</span>
+                <span class="material-icons collapsed_icon">expand_more</span>
+            </button>
+        </div>
+        <div class="collapsible_content">
+
+            <div is-visible="hasGeographicVariationInCategory">
+                <p>
+                    Arten kunne ha fått lavere risikokategori enn 
+                   <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category
+                    i deler av sitt potensielle forekomstareal. 
+                   
+                </p>
+                 <h3  is-visible="hasCauses">Dette skyldes:</h3>
+                <ul class="indented_list">
+                    <li is-visible="hasFirstOption">Artens evne til reproduksjon og/eller spredning er begrenset til visse bioklimatiske soner eller seksjoner </li>
+                    <li is-visible="hasSecondOption">Artens økologiske effekter er begrenset til visse bioklimatiske soner eller seksjoner</li>
+                    <li is-visible="hasThirdOption">Artens økologiske effekter er begrenset til bestemte naturtyper </li>
+                    <li is-visible="hasFourthOption">Artens økologiske effekt består utelukkende i interaksjoner med stedegne arter som har svært begrenset utbredelse </li>
+                </ul>
+                <br/>
+        
+                <p is-visible="hasGeographicVariationDocumentation">
+                    Nærmere beskrivelse av artens geografiske variasjon i risiko: @geographicVariationDocumentation
+                </p>
+            </div>
+            <p is-visible="!hasGeographicVariationInCategory">
+                
+                Arten kunne ikke ha fått lavere risikokategori enn <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category i deler av sitt potensielle forekomstareal.
+            </p>
+        
+        </div>
+    </div>
+</div>
+
+
+
+
+

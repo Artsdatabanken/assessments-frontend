@@ -45,7 +45,8 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
                 AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
                 Category = assessment.Category,
-                CurrentPresenceComment = assessment.CurrentPresenceComment
+                CurrentPresenceComment = assessment.CurrentPresenceComment,
+                RegionOccurrences = assessment.RegionOccurrences
             };
 
             SideBarContentViewModel = new SideBarContentViewModel

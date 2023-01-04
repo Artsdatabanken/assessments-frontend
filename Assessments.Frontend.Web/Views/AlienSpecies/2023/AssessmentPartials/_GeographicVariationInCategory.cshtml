@@ -11,6 +11,8 @@
     var hasSecondOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainClimaticZones") != -1;
     var hasThirdOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainNatureTypes") != -1;
     var hasFourthOption = geographicVariation.IndexOf("RiskAssessmentGeographicalVariation ") != -1; 
+    var hasCauses = geographicVariation.Count > 0;
+    var causes = geographicVariation.Count;
     // TODO: correct space on 4th option when it's completed other places
 }
    
@@ -29,9 +31,10 @@
                 <p>
                     Arten kunne ha fått lavere risikokategori enn 
                    <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category
-                    i deler av sitt potensielle forekomstareal. Dette skyldes at:
+                    i deler av sitt potensielle forekomstareal. 
+                   
                 </p>
-
+                 <h3  is-visible="hasCauses">Dette skyldes:</h3>
                 <ul class="indented_list">
                     <li is-visible="hasFirstOption">Artens evne til reproduksjon og/eller spredning er begrenset til visse bioklimatiske soner eller seksjoner </li>
                     <li is-visible="hasSecondOption">Artens økologiske effekter er begrenset til visse bioklimatiske soner eller seksjoner</li>

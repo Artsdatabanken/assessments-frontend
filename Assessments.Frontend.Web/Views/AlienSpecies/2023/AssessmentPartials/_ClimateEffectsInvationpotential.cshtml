@@ -5,7 +5,11 @@
     var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
     var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
     var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
-    var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";   
+    var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";
+
+    var sentenceEnding = "vært lavere i fravær av pågående eller fremtidige klimaendringer.";
+
+
 }
 
 <div class="page_section" is-visible="@showPage">
@@ -20,22 +24,40 @@
             </button>
         </div>
         <div class="collapsible_content">
-            
-            <p is-visible="hasClimateEffectsInvasionpotential">
-                Delkategori for invasjonspotensial ville vært lavere i fravær av pågående eller fremtidige klimaendringer
-            </p>
 
-            <p is-visible="!hasClimateEffectsInvasionpotential">
-                Delkategori for invasjonspotensial ville <i></i> vært lavere i fravær av pågående eller fremtidige klimaendringer.
-            </p>
 
-            <p is-visible="hasClimateEffectsEcoEffect">
-                Delkategori for økologisk effekt ville vært lavere i fravær av pågående eller fremtidige klimaendringer.
-            </p>
+            <div is-visible="hasClimateEffectsInvasionpotential == hasClimateEffectsEcoEffect">
+                <p is-visible="!hasClimateEffectsInvasionpotential">
+                    Hverken delkategori for økologisk effekt eller invasjonspotensial 
+                    ville @sentenceEnding
+                </p>
+                <p is-visible="hasClimateEffectsInvasionpotential">
+                    Både delkategori for økologisk effekt og invasjonspotensial 
+                    ville @sentenceEnding      
+                 </p>
 
-            <p is-visible="!hasClimateEffectsEcoEffect">
-                Delkategori for økologisk effekt ville <i>ikke</i> vært lavere i fravær av pågående eller fremtidige klimaendringer.
-            </p>
+            </div>
+
+            <div is-visible="hasClimateEffectsInvasionpotential != hasClimateEffectsEcoEffect">
+
+                 <p is-visible="hasClimateEffectsInvasionpotential">
+                    Delkategori for invasjonspotensial ville @sentenceEnding
+                </p>
+
+                <p is-visible="!hasClimateEffectsInvasionpotential">
+                    Delkategori for invasjonspotensial ville <i>ikke</i>  @sentenceEnding
+                </p>
+
+                <p is-visible="hasClimateEffectsEcoEffect">
+                    Delkategori for økologisk effekt ville @sentenceEnding
+                </p>
+
+                <p is-visible="!hasClimateEffectsEcoEffect">
+                    Delkategori for økologisk effekt ville <i>ikke</i> @sentenceEnding
+                </p>
+            </div>
+
+                     
                             
             <div is-visible="hasClimateEffectsInvasionpotential && hasClimateEffectsEcoEffect && hasRiskAssessmentClimateEffectsDocumentation">
                 <h3>Betydningen av klimaendringer:</h3>

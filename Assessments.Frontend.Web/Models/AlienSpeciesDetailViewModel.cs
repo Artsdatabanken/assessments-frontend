@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
+﻿using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
+using System.Collections.Generic;
 using System.Linq;
-using Assessments.Frontend.Web.Infrastructure;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -27,6 +25,7 @@ namespace Assessments.Frontend.Web.Models
                 CriteriaDocumentationSpeciesStatus = assessment.RiskAssessmentCriteriaDocumentationSpeciesStatus,
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 HasIndoorProduction = assessment.HasIndoorProduction,
+                MisidentifiedDescription = assessment.MisIdentifiedDescription,
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
                 Summary = assessment.RiskAssessmentGeographicalVariationDocumentation,

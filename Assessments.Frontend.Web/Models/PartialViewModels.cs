@@ -1,7 +1,5 @@
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
-using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -88,6 +86,8 @@ namespace Assessments.Frontend.Web.Models
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 
         public bool HasIndoorProduction { get; set; }
+
+        public string MisidentifiedDescription { get; set; }
 
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 

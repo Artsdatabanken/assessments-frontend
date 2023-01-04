@@ -30,12 +30,12 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Explanation for why an earlier believed alien species is no longer considered alien. Free text field.
         /// </summary>
         public string ChangedFromAlienDescription { get; set; }
-        
+
         /// <summary>
         /// Explanation for why the taxon is evaluated at another taxonomic rank. Free text field.
         /// </summary>
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
-        
+
         /// <summary>
         /// List including all criteria (A-I), their score and uncertainty
         /// </summary>
@@ -139,7 +139,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Establishment category in Norway today from A-C3. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are established
         /// </summary>
-        public string SpeciesStatus { get; set; }
+        public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
 
         /// <summary>
         /// Further information about the taxons' secondary spread (i.e. spread within Norwegian nature)

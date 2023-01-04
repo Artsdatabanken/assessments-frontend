@@ -89,6 +89,8 @@ namespace Assessments.Frontend.Web.Models
 
         public bool HasIndoorProduction { get; set; }
 
+        public string MisidentifiedDescription { get; set; }
+
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 
         public string SpreadIntroductionFurtherInfo { get; set; }

@@ -8,6 +8,24 @@
         Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
     var showInteractiveMap = showTableAndThreeMaps && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
+
+    var knownToday = new MapViewModel
+    {
+        MapText = Constants.AlienSpecies2023KnownOccurence,
+        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList()
+    };
+
+    var isAssumedToday = new MapViewModel
+    {
+        MapText = Constants.AlienSpecies2023AssumedOccurence,
+        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true).ToList()
+    };
+
+    var isAssumedInFuture = new MapViewModel
+    {
+        MapText = Constants.AlienSpecies2023AssumedInFutureOccurence,
+        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
+    };
 }
 
 <div id="geographical_spread" class="page_section" is-visible="@showPage">
@@ -29,15 +47,15 @@
                 <div class="collapsible_content">
                     <div is-visible="@showTableAndThreeMaps">
                         <div class="map triple_map">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownToday" />
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
                         </div>
                         <p>Tabellvisning + legende</p>
                     </div> 
                     <div is-visible="@showTableAndSingleMap">
                         <div>
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml"/>
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
                         </div>
                         <div>
                             tabell

@@ -859,7 +859,3 @@ span.area i {
     .numbers-table td {
         border-bottom: 1px solid rgba(192, 192, 192,0.2);
     }
-
-.sub-element td:first-child{
-    padding-left:20px;
-}

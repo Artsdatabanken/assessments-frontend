@@ -87,6 +87,37 @@
                         </div>
                         <p>Tabellvisning + legende</p>
                     </div> 
+
+                     <table class="numbers-table">
+
+                        <tr>
+                            <th>Forekomst i løpet av en periode på 10 år</th>
+                            <th>Antall forekomster fra én introduksjon  </th>
+                            <th>Antall ytterligere introduksjoner til norsk natur </th>
+                            <th>Forekomstareal (km2)  </th>
+                        </tr>
+                        
+                        <tr>
+                            <td>Antatt lavt anslag</td> 
+                            <td>RiskAssessmentAOOtotalLow </td> 
+                            <td>RiskAssessmentIntroductionsLow </td>
+                             <td>RiskAssessmentAOOfutureLow </td>
+                        </tr>
+                        <tr>
+                            <td>Antatt beste anslag</td>
+                            <td>RiskAssessmentAOOtotalBest</td>
+                            <td>RiskAssessmentIntroductionsBest</td>
+                            <td>RiskAssessmentAOOfutureBest</td>
+                        </tr>
+                        <tr>
+                            <td>Antatt høyt anslag</td>
+                            <td>RiskAssessmentAOOtotalHigh</td>
+                            <td>RiskAssessmentIntroductionsHigh</td>
+                            <td>RiskAssessmentAOOfutureHigh</td>
+                        </tr>
+
+                    </table>
+
                     <div is-visible="@showTableAndSingleMap">
                         <div>
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>

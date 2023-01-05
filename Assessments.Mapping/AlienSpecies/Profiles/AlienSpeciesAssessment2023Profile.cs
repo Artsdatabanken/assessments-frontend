@@ -173,11 +173,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.RiskAssessment.LifetimeUpperQInput);
                 })
                 .ForMember(dest => dest.MedianLifetimeViabilityAnalysisDescription, opt => opt.MapFrom(src => src.RiskAssessment.SpreadPVAAnalysis.StripUnwantedHtml()))
-                .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt =>
-                {
-                    opt.PreCondition(src => src.Category != "NR");
-                    opt.MapFrom(src => src.RiskAssessment.ChosenSpreadYearlyIncrease == "a" ? "SpatioTemporalDataset" : src.RiskAssessment.ChosenSpreadYearlyIncrease == "b" && src.AssessmentConclusion == "AssessedDoorknocker" ? "EstimatedIncreaseInAOODoorKnockers" : src.RiskAssessment.ChosenSpreadYearlyIncrease == "b" && src.RiskAssessment.AOOfirstOccurenceLessThan10Years == "yes" ? "EstimatedIncreaseInAOOReproducingUnaided" : src.RiskAssessment.ChosenSpreadYearlyIncrease == "b" && src.RiskAssessment.AOOfirstOccurenceLessThan10Years == "no" ? "EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion" : "NotRelevant");
-                })
+                .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionEstimationMethod(src.Category, src.RiskAssessment.ChosenSpreadYearlyIncrease, src.AssessmentConclusion,src.RiskAssessment.AOOfirstOccurenceLessThan10Years)))
                 .ForMember(dest => dest.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange, opt =>
                 {
                     opt.PreCondition(src => src.Category != "NR");

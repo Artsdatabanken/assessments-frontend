@@ -522,5 +522,40 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 _ => "NotRelevant",
             };
         }
+
+        internal static string GetExpansionEstimationMethod(string category, string chosenMainMethod, string assessmentConclusion, string chosenSubMethod)
+        {
+            if (category == "NR")
+            {
+                return "NotRelevant";
+            }
+
+            var mainMethodA = chosenMainMethod == "a";
+            var mainMethodB = chosenMainMethod == "b";
+            var assessedDoorKnocker = assessmentConclusion == "AssessedDoorknocker";
+                
+            if(mainMethodA)
+            {
+                return "SpatioTemporalDataset";
+            }
+            
+            if(mainMethodB && assessedDoorKnocker)
+            {
+                return "EstimatedIncreaseInAOODoorKnockers";
+            }
+            
+            if(mainMethodB && chosenSubMethod == "yes")
+            {
+                return "EstimatedIncreaseInAOOReproducingUnaided";
+            }
+
+            if (mainMethodB && chosenSubMethod == "no")
+            {
+                return "EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion";
+            }
+
+            else return "NotRelevant";
+      
+        }
     }
 }

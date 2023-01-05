@@ -3,10 +3,11 @@
 
 @{
     var showPage = Model.Category != AlienSpeciesAssessment2023Category.NR;
-    var showTableAndThreeMaps = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
-    var showTableAndSingleMap = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker ||
-        Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
-    var showInteractiveMap = showTableAndThreeMaps && false; // TODO: switch false with has used artskart and downloaded a zip file
+    var isAlienSpecie = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
+    var isDoorKnocker = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
+    var isEffectWithoutReproduction = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
+    var isDoorKnockerOrEffectNoRep = isDoorKnocker || isEffectWithoutReproduction;
+    var showInteractiveMap = isAlienSpecie && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
 
     var knownToday = new MapViewModel
@@ -47,7 +48,7 @@
                 <div class="collapsible_content">
 
                     
-                    <table class="numbers-table">
+                    <table class="numbers-table" is-visible="isAlienSpecie">
 
                         <tr>
                             <th>Forekomstareal</th>
@@ -79,7 +80,7 @@
                     </table>
 
 
-                    <div is-visible="@showTableAndThreeMaps">
+                    <div is-visible="@isAlienSpecie">
                         <div class="map triple_map">
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownToday" />
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
@@ -88,7 +89,7 @@
                         <p>Tabellvisning + legende</p>
                     </div> 
 
-                     <table class="numbers-table">
+                     <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
 
                         <tr>
                             <th>Antatt i løpet av en periode på 10 år</th>
@@ -118,7 +119,7 @@
 
                     </table>
 
-                    <div is-visible="@showTableAndSingleMap">
+                    <div is-visible="@isDoorKnockerOrEffectNoRep">
                         <div>
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
                         </div>

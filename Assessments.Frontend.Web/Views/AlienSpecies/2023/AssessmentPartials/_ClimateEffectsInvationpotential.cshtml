@@ -59,7 +59,7 @@
 
                      
                             
-            <div is-visible="hasClimateEffectsInvasionpotential && hasClimateEffectsEcoEffect && hasRiskAssessmentClimateEffectsDocumentation">
+            <div is-visible="(hasClimateEffectsInvasionpotential || hasClimateEffectsEcoEffect) && hasRiskAssessmentClimateEffectsDocumentation">
                 <h3>Betydningen av klimaendringer:</h3>
                 <p>@Model.Assessment.RiskAssessmentClimateEffectsDocumentation</p>
             </div>

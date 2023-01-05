@@ -21,7 +21,7 @@
     var showChangedCriteria = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteria");
     var showChangedCriteriaInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteriaInterpretation");
     var showChangedStatus = Model.Assessment.ReasonForChangeOfCategory.Contains("changedStatus");
-    var showReasonsForChangeDescription = !string.IsNullOrEmpty(Model.Assessment.ReasonsForChangeOfCategoryDescription);
+    var showReasonsForChangeDescription = !wasNr2018 && !showSameAs2018 && !string.IsNullOrEmpty(Model.Assessment.ReasonsForChangeOfCategoryDescription);
 }
 
 <div is-visible="showMain" class="page_section">

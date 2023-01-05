@@ -12,132 +12,135 @@
 
     var knownToday = new MapViewModel
     {
+        MapName = "Kjent utberedelse i dag",
+        MapDescription = "",
         MapText = Constants.AlienSpecies2023KnownOccurence,
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList()
     };
 
     var isAssumedToday = new MapViewModel
     {
+        MapName = "Antatt utberedelse i dag",
+        MapDescription = "",
         MapText = Constants.AlienSpecies2023AssumedOccurence,
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true).ToList()
     };
 
     var isAssumedInFuture = new MapViewModel
     {
+        MapName = "Antatt Utberedelse om 50 år",
+        MapDescription = "",
         MapText = Constants.AlienSpecies2023AssumedInFutureOccurence,
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
     };
 }
 
 <div id="geographical_spread" class="page_section collapsible initially_closed" is-visible="@showPage" >
-
-    
-
-     <div class="collapsible_header">
+    <div class="collapsible_header">
         <h2>Utbredelse</h2>
         <button class="hide" onclick="toggleCollapsible(this)">
             <span class="material-icons expanded_icon">expand_less</span>
             <span class="material-icons collapsed_icon">expand_more</span>
         </button>
-       </div>
+    </div>
 
-       <div class="collapsible_content only-tabs-inside">
+    <div class="collapsible_content only-tabs-inside">
+        <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , 'geographical_spread' )">Utbredelse i Norge</button>
+        <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , 'geographical_spread' )">Regional naturvariasjon</button>
+        <div class="tabbed_element_container assessment_tabs">
+            <div id="domestic_spread">
+                <div id="show_occurence_area" >                
+                    <h3>Forekomstareal</h3>               
+                    <table class="numbers-table" is-visible="isAlienSpecie">
 
-    <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , 'geographical_spread' )">Utbredelse i Norge</button>
-    <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , 'geographical_spread' )">Regional naturvariasjon</button>
-    <div class="tabbed_element_container assessment_tabs">
-        <div id="domestic_spread">
-            <div id="show_occurence_area" >                
-                <h3>Forekomstareal</h3>               
-                <table class="numbers-table" is-visible="isAlienSpecie">
+                        <tr>
+                            <th>Forekomstareal</th>
+                            <th>I dag </th>
+                            <th>Fremtidig (50 år) </th>
+                        </tr>
+                        <tr>
+                            <td>Kjent  </td>
+                            <td>@Model.AreaOfOccupancyKnown km<sup>2</sup></td>
+                            <td></td>
+                        </tr>
 
-                    <tr>
-                        <th>Forekomstareal</th>
-                        <th>I dag </th>
-                        <th>Fremtidig (50 år) </th>
-                    </tr>
-                    <tr>
-                        <td>Kjent  </td>
-                        <td>@Model.AreaOfOccupancyKnown km<sup>2</sup></td>
-                        <td></td>
-                    </tr>
+                        <tr>
+                            <td>Antatt lavt anslag</td> 
+                            <td>@Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
+                            <td>@Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
+                        </tr>
+                        <tr>
+                            <td>Antatt beste anslag</td>
+                            <td>@Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
+                            <td>@Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
+                        </tr>
+                        <tr>
+                            <td>Antatt høyt anslag</td>
+                            <td>@Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
+                            <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
+                        </tr>
+                    </table>
+                    <div is-visible="@isAlienSpecie">
+                        <h3>Fylkesforekomster</h3>
+                        <div class="map triple_map">
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownToday" />
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
+                        </div>
+                        <p>Tabellvisning + legende</p>
+                    </div> 
+                    <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
 
-                    <tr>
-                        <td>Antatt lavt anslag</td> 
-                        <td>@Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
-                        <td>@Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
-                    </tr>
-                    <tr>
-                        <td>Antatt beste anslag</td>
-                        <td>@Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
-                        <td>@Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
-                    </tr>
-                    <tr>
-                        <td>Antatt høyt anslag</td>
-                        <td>@Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
-                        <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
-                    </tr>
-                </table>
-                <div is-visible="@isAlienSpecie">
-                    <div class="map triple_map">
-                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownToday" />
-                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
-                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
-                    </div>
-                    <p>Tabellvisning + legende</p>
-                </div> 
-                <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
-
-                    <tr>
-                        <th>Antatt i løpet av en periode på 10 år</th>
-                        <th>Antall forekomster fra én introduksjon  </th>
-                        <th>Antall ytterligere introduksjoner til norsk natur </th>
-                        <th>Forekomstareal </th>
-                    </tr>
+                        <tr>
+                            <th>Antatt i løpet av en periode på 10 år</th>
+                            <th>Antall forekomster fra én introduksjon  </th>
+                            <th>Antall ytterligere introduksjoner til norsk natur </th>
+                            <th>Forekomstareal </th>
+                        </tr>
                         
-                    <tr>
-                        <td>Lavt anslag</td> 
-                        <td>@Model.RiskAssessmentOccurrences1Low </td> 
-                        <td>@Model.RiskAssessmentIntroductionsLow </td>
-                            <td>@Model.AreaOfOccupancyFutureLow  km<sup>2</sup></td>
-                    </tr>
-                    <tr>
-                        <td>Beste anslag</td>
-                        <td>@Model.RiskAssessmentOccurrences1Best </td> 
-                        <td>@Model.RiskAssessmentIntroductionsBest </td>
-                        <td>@Model.AreaOfOccupancyFutureBest  km<sup>2</sup></td>
-                    </tr>
-                    <tr>
-                        <td>Høyt anslag</td>
-                        <td>@Model.RiskAssessmentOccurrences1High </td> 
-                        <td>@Model.RiskAssessmentIntroductionsHigh </td>
-                        <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
-                    </tr>
-                </table>
-                <div is-visible="@isDoorKnockerOrEffectNoRep">
-                    <div>
-                        <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
+                        <tr>
+                            <td>Lavt anslag</td> 
+                            <td>@Model.RiskAssessmentOccurrences1Low </td> 
+                            <td>@Model.RiskAssessmentIntroductionsLow </td>
+                                <td>@Model.AreaOfOccupancyFutureLow  km<sup>2</sup></td>
+                        </tr>
+                        <tr>
+                            <td>Beste anslag</td>
+                            <td>@Model.RiskAssessmentOccurrences1Best </td> 
+                            <td>@Model.RiskAssessmentIntroductionsBest </td>
+                            <td>@Model.AreaOfOccupancyFutureBest  km<sup>2</sup></td>
+                        </tr>
+                        <tr>
+                            <td>Høyt anslag</td>
+                            <td>@Model.RiskAssessmentOccurrences1High </td> 
+                            <td>@Model.RiskAssessmentIntroductionsHigh </td>
+                            <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
+                        </tr>
+                    </table>
+                    <div is-visible="@isDoorKnockerOrEffectNoRep">
+                        <div>
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
+                        </div>
+                        <div>
+                            tabell
+                        </div>                        
                     </div>
-                    <div>
-                        tabell
-                    </div>                        
+                    <div is-visible="showCurrentPresenceComment">
+                        <p>
+                            Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og 
+                            forekomstareal om 50 år.
+                        </p>
+                        <p>@Html.Raw(Model.CurrentPresenceComment)</p>
+                    </div>
+                    <div is-visible="@showInteractiveMap">
+                        Interaktivt kart
+                    </div>                
                 </div>
-                <div is-visible="showCurrentPresenceComment">
-                    <p>
-                        Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og 
-                        forekomstareal om 50 år.
-                    </p>
-                    <p>@Html.Raw(Model.CurrentPresenceComment)</p>
-                </div>
-                <div is-visible="@showInteractiveMap">
-                    Interaktivt kart
-                </div>                
+            </div>
+            <div id="regional_nature_variation">
+                regional_nature_variation
             </div>
         </div>
-        <div id="regional_nature_variation">
-            regional_nature_variation
-        </div>
     </div>
 
-    </div>
 </div>

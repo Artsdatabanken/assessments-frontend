@@ -830,8 +830,7 @@ span.area i {
 }
 
 .darktheme .collapsible .collapsible_content {
-    padding: 8px 20px;
-    border-top: 1px solid white;
+    border-color: white;
 }
 
 .collapsible_header h2 {
@@ -866,7 +865,6 @@ span.area i {
     border-bottom: 1px solid rgba(192, 192, 192,0.2);
 }
 
-
 .collapsible .only-tabs-inside {
-    padding: 0
+    padding: 20px 0 0 0;
 }

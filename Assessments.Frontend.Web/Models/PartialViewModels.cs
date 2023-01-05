@@ -163,7 +163,11 @@ namespace Assessments.Frontend.Web.Models
 
     public class MapViewModel
     {
+        public string MapName { get; set; }
+
         public string MapText { get; set; }
+
+        public string MapDescription { get; set; }
 
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
     }

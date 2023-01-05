@@ -1118,28 +1118,28 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             new()
             {
-                Name = "Overlever vinteren utendørs",
-                NameShort = "C1"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.c1.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c1)
             },
             new()
             {
-                Name = "Observert i norsk natur",
-                NameShort = "C0"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.c0.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c0)
             },
             new()
             {
-                Name = "Utendørs i eget produksjonsareal",
-                NameShort = "B2"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.b2.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.b2)
             },
             new()
             {
-                Name = "Innendørs",
-                NameShort = "B1"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.b1.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.b1)
             },
             new()
             {
-                Name = "Ikke i Norge",
-                NameShort = "A"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.a.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.a)
             }
         };
 
@@ -1147,13 +1147,13 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             new()
             {
-                Name = "Etablert",
-                NameShort = "C3"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.c3.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c3)
             },
             new()
             {
-                Name = "Selvstendig reproduserende",
-                NameShort = "C2"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.c2.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c2)
             },
             new()
             {

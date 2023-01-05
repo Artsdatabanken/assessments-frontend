@@ -139,7 +139,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Establishment category in Norway today from A-C3. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are established
         /// </summary>
-        public string SpeciesStatus { get; set; }
+        public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
 
         /// <summary>
         /// Further information about the taxons' secondary spread (i.e. spread within Norwegian nature)

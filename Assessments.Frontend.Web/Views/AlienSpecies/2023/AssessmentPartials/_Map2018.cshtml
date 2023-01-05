@@ -4,6 +4,8 @@
     //Map of Norway with svalbard
     //Region limits per 2018
 
+    var isOccurrenceKnown = Model.MapText == "known_today";
+
     string className(string name)
     {
         string className = "current";
@@ -218,4 +220,20 @@
             </path>
         </g>
     </svg>
+    <div>
+            <span is-visible="isOccurrenceKnown">Kjent</span>
+            <span is-visible="!isOccurrenceKnown">Antatt</span>
+            <span>utbredelse i:</span>
+            <span>
+                @{
+                    for (var i = 0; i < Model.RegionOccurrences.Count; i++)
+                        {
+                        if (i + 1 < Model.RegionOccurrences.Count)
+                            {<span>@Model.RegionOccurrences[i].Region.DisplayName(), </span>}
+                        else
+                            {<span>@Model.RegionOccurrences[i].Region.DisplayName().</span>}
+                    }
+                }
+            </span>
+    </div>
 </div>

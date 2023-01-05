@@ -2,26 +2,34 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-    var riskCategoryPreText = Model.Category == AlienSpeciesAssessment2023Category.NR ?
-        $"{@Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank)} er " :
-        $"{@Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank)} er vurdert til ";
+    var isNr = Model.Category == AlienSpeciesAssessment2023Category.NR;
+    var isEvaluatedAtAnotherLevel = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
-    var andOrComma = string.Empty;
-    if (Model.Environment == AlienSpeciesAssessment2023Environment.Limnisk)
-        andOrComma = " og";
-    else if (Model.Environment == AlienSpeciesAssessment2023Environment.Marint)
-        andOrComma = " og";
-    else if (Model.Environment == AlienSpeciesAssessment2023Environment.Terrestrisk)
-        andOrComma = " og";
-    else
-        andOrComma = ",";
+    var isDoorKnocker = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
+    var hasEffectWithoutReproduction = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
+    var isRegionallyAlien = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien;
+    var isNoneOfTheAbove = !isNr && !isEvaluatedAtAnotherLevel && !isDoorKnocker && !hasEffectWithoutReproduction && !isRegionallyAlien;
 }
 
 <div class="page_section">
-    <p>
-        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Model.Status@andOrComma @Model.Environment.DisplayName().
+    <p is-visible="!isNr">Livsmiljø: @Model.Environment.DisplayName()</p>
+    <p is-visible="isEvaluatedAtAnotherLevel">
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() (les vurderingen <a href="">her</a>).
     </p>
-    <p>
-        @riskCategoryPreText <i>@Model.Category.DisplayName()</i> - @Model.Category i @Model.ListName.
+    <p is-visible="isNr && !isEvaluatedAtAnotherLevel">
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant().
+    </p>
+
+    <p is-visible="!isNr && !isEvaluatedAtAnotherLevel && isDoorKnocker">
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er en dørstokkart som @Model.SpeciesStatus.Description().
+    </p>
+    <p is-visible="!isNr && !isEvaluatedAtAnotherLevel && hasEffectWithoutReproduction">
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) har @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() og @Model.SpeciesStatus.Description().
+    </p>
+    <p is-visible="!isNr && !isEvaluatedAtAnotherLevel && isRegionallyAlien">
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er en regionalt fremmed @Helpers.FixSpeciesLevel("{art}", (int)Model.TaxonRank) som @Model.SpeciesStatus.Description().
+    </p>
+    <p is-visible="isNoneOfTheAbove">
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) @Model.SpeciesStatus.Description().
     </p>
 </div>

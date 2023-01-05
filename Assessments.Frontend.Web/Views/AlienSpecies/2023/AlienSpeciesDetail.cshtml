@@ -57,9 +57,11 @@
 
     var ingressViewModel = new IngressViewModel()
     {
+        AlienSpeciesCategory = assessment.AlienSpeciesCategory,
         Category = assessment.Category,
         Environment = assessment.Environment,
         ListName = Constants.AlienSpecies2023PageMenuHeaderText,
+        SpeciesStatus = assessment.SpeciesStatus,
         Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
         TaxonRank = assessment.ScientificNameRank
     };
@@ -88,7 +90,7 @@
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
-                <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
+                <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>                
                 @*    Check which ones are appropriate for alien species list
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
@@ -99,7 +101,9 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="Model.ExpertStatementViewModel" />
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ClimateEffectsInvationpotential.cshtml" />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_CategoryChange.cshtml" />
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_GeographicVariationInCategory.cshtml"  />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RegionalSpread.cshtml" model="Model.RegionalSpreadViewModel" />
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
             </div>

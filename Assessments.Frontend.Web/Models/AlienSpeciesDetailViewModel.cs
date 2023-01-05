@@ -25,6 +25,7 @@ namespace Assessments.Frontend.Web.Models
                 CriteriaDocumentationSpeciesStatus = assessment.RiskAssessmentCriteriaDocumentationSpeciesStatus,
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 HasIndoorProduction = assessment.HasIndoorProduction,
+                MisidentifiedDescription = assessment.MisIdentifiedDescription,
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
                 Summary = assessment.RiskAssessmentGeographicalVariationDocumentation,

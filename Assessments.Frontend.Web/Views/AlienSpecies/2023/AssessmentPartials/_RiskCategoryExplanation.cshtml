@@ -101,7 +101,7 @@
                         </div >
                         <div is-visible="!showIsNk" class="collapsible initially_closed">
                             <div class="collapsible_header">
-                                <h3>Se mer</h3>
+                                <h3>Bakgrunnsdata</h3>
                                 <button onclick="toggleCollapsible(this)" id="myButton">
                                     <span class="material-icons expanded_icon">expand_less</span>
                                     <span class="material-icons collapsed_icon">expand_more</span>
@@ -130,7 +130,7 @@
                                     <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                                </div>
                                 <div is-visible="showNumericalEstimation">
-                                    <table>
+                                    <table class="number-table">
                                         <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
                                             <td>Nåværende populasjonsstørrelse: </td>
                                             <td>@Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize</td>
@@ -163,7 +163,7 @@
                                </div>
                                 <div is-visible="showViableAnalysis">
                                     <p>Beskrivelse av modeller og programvare som er brukt: @Model.Assessment.MedianLifetimeViabilityAnalysisDescription</p>
-                                    <table>
+                                    <table class="number-table">
                                         <tr is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">
                                             <td>Estimert median levetid (i år): </td>
                                             <td>@Model.Assessment.MedianLifetimeBestEstimate</td>

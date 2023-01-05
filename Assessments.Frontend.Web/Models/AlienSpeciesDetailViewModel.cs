@@ -44,6 +44,12 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyTotalHigh = assessment.RiskAssessmentAOOtotalHigh,
                 AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
                 AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
+                RiskAssessmentIntroductionsLow = assessment.RiskAssessmentIntroductionsLow,
+                RiskAssessmentIntroductionsBest = assessment.RiskAssessmentIntroductionsBest,
+                RiskAssessmentIntroductionsHigh = assessment.RiskAssessmentIntroductionsHigh,
+                RiskAssessmentOccurrences1Low = assessment.RiskAssessmentOccurrences1Low,
+                RiskAssessmentOccurrences1Best = assessment.RiskAssessmentOccurrences1Best,
+                RiskAssessmentOccurrences1High = assessment.RiskAssessmentOccurrences1High,
                 Category = assessment.Category,
                 CurrentPresenceComment = assessment.CurrentPresenceComment,
                 RegionOccurrences = assessment.RegionOccurrences

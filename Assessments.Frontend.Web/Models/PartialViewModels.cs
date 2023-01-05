@@ -139,6 +139,19 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public int? RiskAssessmentIntroductionsLow { get; set; }
+
+        public int? RiskAssessmentIntroductionsBest { get; set; }
+
+        public int? RiskAssessmentIntroductionsHigh { get; set; }
+
+        public int? RiskAssessmentOccurrences1Low { get; set; }
+
+        public int? RiskAssessmentOccurrences1Best { get; set; }
+
+        public int? RiskAssessmentOccurrences1High { get; set; }
+
+
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }

@@ -30,6 +30,11 @@
 
     var showNumericalEstimation = Model.Assessment.MedianLifetimeEstimationMethod == AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.NumericalEstimation;
     var showViableAnalysis = Model.Assessment.MedianLifetimeEstimationMethod == AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.ViableAnalysis;
+
+    int GetUncertaintyValueMinMax(int value, int uncertainty)
+    {
+        return uncertainty == 0 ? value : uncertainty;
+    }
 }
 
 <div class="page-section">
@@ -65,29 +70,29 @@
                                 </div>
                                 <div is-visible="showHigherInvasionPotential">
                                     <p is-visible="decisiveCriteriaHasA || decisiveCriteriaHasB">
-                                        @AlienSpeciesAssessment2023CriteriaLetter.A.DisplayName() på @uncertaintyA.Value 
+                                        @AlienSpeciesAssessment2023CriteriaLetter.A.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value) 
                                         <span is-visible="uncertaintyHighA != 0 || uncertaintyLowA != 0">(med usikkerhet</span>
-                                        <span is-visible="uncertaintyLowA != 0">ned mot @uncertaintyLowA</span>
+                                        <span is-visible="uncertaintyLowA != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyLowA)</span>
                                         <span is-visible="uncertaintyHighA != 0 && uncertaintyLowA != 0">og/eller</span>
-                                        <span is-visible="uncertaintyHighA != 0">opp mot @uncertaintyHighA</span>
+                                        <span is-visible="uncertaintyHighA != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyHighA)</span>
                                         <span is-visible="uncertaintyHighA != 0 || uncertaintyLowA != 0">).</span>
                                         <span is-visible="uncertaintyHighA == 0 && uncertaintyLowA == 0">.</span>
                                     </p>
                                     <p is-visible="decisiveCriteriaHasB || decisiveCriteriaHasA">
-                                        @AlienSpeciesAssessment2023CriteriaLetter.B.DisplayName() på @uncertaintyB.Value 
+                                        @AlienSpeciesAssessment2023CriteriaLetter.B.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyB.Value) 
                                         <span is-visible="uncertaintyHighB != 0 || uncertaintyLowB != 0">(med usikkerhet</span> 
-                                        <span is-visible="uncertaintyLowB != 0">ned mot @uncertaintyLowB</span>
+                                        <span is-visible="uncertaintyLowB != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyLowB)</span>
                                         <span is-visible="uncertaintyHighB != 0 && uncertaintyLowB != 0">og/eller</span>
-                                        <span is-visible="uncertaintyHighB != 0">opp mot @uncertaintyHighB</span>
+                                        <span is-visible="uncertaintyHighB != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyHighB)</span>
                                         <span is-visible="uncertaintyHighB != 0 || uncertaintyLowB != 0">).</span>
                                         <span is-visible="uncertaintyHighB == 0 && uncertaintyLowB == 0">.</span>
                                     </p>
                                     <p is-visible="decisiveCriteriaHasC">
-                                        @AlienSpeciesAssessment2023CriteriaLetter.C.DisplayName() på @uncertaintyC.Value 
+                                        @AlienSpeciesAssessment2023CriteriaLetter.C.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyC.Value) 
                                         <span is-visible="uncertaintyHighC != 0 || uncertaintyLowC != 0">(med usikkerhet</span>
-                                        <span is-visible="uncertaintyLowC != 0">ned mot @uncertaintyLowC</span>
+                                        <span is-visible="uncertaintyLowC != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyLowC)</span>
                                         <span is-visible="uncertaintyHighC != 0 && uncertaintyLowC != 0">og/eller</span>
-                                        <span is-visible="uncertaintyHighC != 0">opp mot @uncertaintyHighC</span>
+                                        <span is-visible="uncertaintyHighC != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyHighC)</span>
                                         <span is-visible="uncertaintyHighC != 0 || uncertaintyLowC != 0">).</span>
                                         <span is-visible="uncertaintyHighC == 0 && uncertaintyLowC == 0">.</span>
                                     </p>
@@ -107,20 +112,20 @@
                                     Estimeringsmetode: @Model.Assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
                                 </p>
                                 <p is-visible="showSimplifiedEstimateAcceptedAlien">
-                                    Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) er A-kriteriet skåret som [AValue] (med usikkerhet: [Math.min(UncertaintyValues) – Math.max(UncertaintyValues )]). Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                    Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                 </p>
                                 <div is-visible="showSimplifiedEstimateNotAcceptedAlien">
                                     <p>
-                                        Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier [AValue] og [Math.min(UncertaintyValues) – Math.max(UncertaintyValues)]. Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                        Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                     </p>
                                     <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                                 </div>
                                 <p is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-                                    Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som [AValue] (med usikkerhet: [Math.min(UncertaintyValues)–Math.max(UncertaintyValues)]). Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                    Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                </p>
                                 <div is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
                                     <p>
-                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier [AValue] og [Math.min(UncertaintyValues) – Math.max(UncertaintyValues)]. Dette innebærer at artens mediane levetid er [skårtekst], eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                    </p>
                                     <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                                </div>

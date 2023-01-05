@@ -11,9 +11,9 @@
         {
             return Model.MapText switch
             {
-                Constants.AlienSpecies2023KnownOccurence => "known_today",
-                Constants.AlienSpecies2023AssumedOccurence => "is_assumed_today",
-                Constants.AlienSpecies2023AssumedInFutureOccurence => "is_assumed_in_future",
+                Constants.AlienSpecies2023KnownOccurrence => "known_today",
+                Constants.AlienSpecies2023AssumedOccurrence => "is_assumed_today",
+                Constants.AlienSpecies2023AssumedInFutureOccurrence => "is_assumed_in_future",
                 _ => className
             };
         }
@@ -26,7 +26,11 @@
 }
 
 <div class="map-box-container">
-    <span>@Model.MapName</span>
+    <span class="indicator">
+        <span class="indicatorcontent sea @Model.MapName"></span>
+        <span class="indicatorcontent @Model.MapName"></span>
+    </span>
+    <span>@Model.MapText</span>
     <svg viewBox="0 0 172.13006 278.71942"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:svg="http://www.w3.org/2000/svg">

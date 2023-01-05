@@ -12,25 +12,22 @@
 
     var knownToday = new MapViewModel
     {
-        MapName = "Kjent utberedelse i dag",
-        MapDescription = "",
-        MapText = Constants.AlienSpecies2023KnownOccurence,
+        MapName = "known_today",
+        MapText = Constants.AlienSpecies2023KnownOccurrence,
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList()
     };
 
     var isAssumedToday = new MapViewModel
     {
-        MapName = "Antatt utberedelse i dag",
-        MapDescription = "",
-        MapText = Constants.AlienSpecies2023AssumedOccurence,
+        MapName = "is_assumed_today",
+        MapText = Constants.AlienSpecies2023AssumedOccurrence,
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true).ToList()
     };
 
     var isAssumedInFuture = new MapViewModel
     {
-        MapName = "Antatt Utberedelse om 50 år",
-        MapDescription = "",
-        MapText = Constants.AlienSpecies2023AssumedInFutureOccurence,
+        MapName = "is_assumed_in_future",
+        MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
     };
 }
@@ -87,7 +84,7 @@
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
                         </div>
-                        <p>Tabellvisning + legende</p>
+                        <p>Tabellvisning</p>
                     </div> 
                     <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
 

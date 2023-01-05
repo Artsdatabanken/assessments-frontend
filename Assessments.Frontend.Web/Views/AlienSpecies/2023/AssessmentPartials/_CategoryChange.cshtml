@@ -9,7 +9,7 @@
 
     var showMain = !(category2018 != null && isNr) || !(isNr || sameAs2018);
 
-    var showNotAssessed2018 = !isNr && (category2018 == null || wasNr2018);
+    var showNotAssessed2018 = category2018 == null || wasNr2018;
     var showSameAs2018 = !isNr && sameAs2018;
 
     var category2018WithName = category2018 != null ? $"{category2018.DisplayName().ToLower()} - {category2018}" : string.Empty;

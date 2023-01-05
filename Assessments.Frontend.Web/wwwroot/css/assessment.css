@@ -856,6 +856,11 @@ span.area i {
 .numbers-table th{
     border-bottom:2px solid grey;
 }
-    .numbers-table td {
-        border-bottom: 1px solid rgba(192, 192, 192,0.2);
-    }
+.numbers-table td {
+    border-bottom: 1px solid rgba(192, 192, 192,0.2);
+}
+
+
+.collapsible .only-tabs-inside {
+    padding: 0
+}

@@ -19,20 +19,18 @@ namespace Assessments.Frontend.Web.Controllers
     {
         private readonly AssessmentsDbContext _dbContext;
         private readonly BlobContainerClient _blob;
-        private readonly IConfiguration _configuration;
+        private readonly string _feedbackSecret;
 
         public FeedbackController(IConfiguration configuration, AssessmentsDbContext dbContext)
         {
-            _configuration = configuration;
             _dbContext = dbContext;
             _blob = new BlobContainerClient(configuration["ConnectionStrings:AzureBlobStorage"], "files");
+            _feedbackSecret = configuration["FeedbackSecret"];
         }
 
         public async Task<IActionResult> Index(string secret)
         {
-            var feedbackSecret = _configuration["FeedbackSecret"];
-
-            if (feedbackSecret != secret)
+            if (_feedbackSecret != secret)
                 return Unauthorized();
 
             var feedback = await _dbContext.Feedbacks.AsNoTracking().OrderBy(x => x.CreatedOn).ToListAsync();
@@ -62,7 +60,7 @@ namespace Assessments.Frontend.Web.Controllers
 
                     worksheet2.Cell(row, 1).Value = attachment.FeedbackId;
                     worksheet2.Cell(row, 2).Value = attachment.FileName;
-                    worksheet2.Cell(row, 2).SetHyperlink(new XLHyperlink($"{baseUrl}/feedback/attachment/{attachment.Id}"));
+                    worksheet2.Cell(row, 2).SetHyperlink(new XLHyperlink($"{baseUrl}/feedback/attachment/{attachment.Id}?secret={_feedbackSecret}"));
                     worksheet2.Cell(row, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                 }
 
@@ -144,8 +142,11 @@ namespace Assessments.Frontend.Web.Controllers
             return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : BadRequest();
         }
 
-        public async Task<IActionResult> Attachment(int id)
+        public async Task<IActionResult> Attachment(int id, string secret)
         {
+            if (_feedbackSecret != secret)
+                return Unauthorized();
+
             var attachment = await _dbContext.FeedbackAttachments.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
             if (attachment == null)

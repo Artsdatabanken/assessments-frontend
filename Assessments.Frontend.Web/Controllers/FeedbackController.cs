@@ -9,7 +9,6 @@ using Assessments.Frontend.Web.Models;
 using Assessments.Shared.Helpers;
 using Azure.Storage.Blobs;
 using ClosedXML.Excel;
-using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

@@ -460,5 +460,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Comment or description related to the estimation of expansion speed. Used for method EstimatedIncreaseInAOO.
         /// </summary>
         public string ExpansionSpeedEstimatedIncreaseInAOODescription { get; set; }
+
+        /// <summary>
+        /// Species' occurrence in and impact on ecosystems (according to NiN-classification)
+        /// </summary>
+        public List<AlienSpeciesAssessment2023ImpactedNatureTypes> ImpactedNatureTypes { get; set; } = new();
     }
 }

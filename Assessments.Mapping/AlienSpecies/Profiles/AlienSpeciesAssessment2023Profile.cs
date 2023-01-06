@@ -173,7 +173,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.RiskAssessment.LifetimeUpperQInput);
                 })
                 .ForMember(dest => dest.MedianLifetimeViabilityAnalysisDescription, opt => opt.MapFrom(src => src.RiskAssessment.SpreadPVAAnalysis.StripUnwantedHtml()))
-                .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionEstimationMethod(src.Category, src.RiskAssessment.ChosenSpreadYearlyIncrease, src.AssessmentConclusion,src.RiskAssessment.AOOfirstOccurenceLessThan10Years)))
+                .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionEstimationMethod(src.Category, src.RiskAssessment.ChosenSpreadYearlyIncrease, src.AssessmentConclusion, src.RiskAssessment.AOOfirstOccurenceLessThan10Years)))
                 .ForMember(dest => dest.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange, opt =>
                 {
                     opt.PreCondition(src => src.Category != "NR");
@@ -221,6 +221,13 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.IsKnown, opt => opt.MapFrom(src => src.State0 == 1))
                 .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
                 .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));
+
+            CreateMap<FA4.ImpactedNatureType, AlienSpeciesAssessment2023ImpactedNatureTypes>(MemberList.None)
+                .ForMember(dest => dest.StateChange, opt =>
+                {
+                    opt.PreCondition(src => src.StateChange.Count > 0);
+                    opt.MapFrom(src => src.StateChange.Select(x => string.Concat(x.Where(char.IsLetter))));
+                });
         }
     }
 }

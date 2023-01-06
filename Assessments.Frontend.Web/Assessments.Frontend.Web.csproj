@@ -34,9 +34,5 @@
 	  <ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
 	  <ProjectReference Include="..\Assessments.Shared\Assessments.Shared.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Cache\" />
-	</ItemGroup>
 	
 </Project>

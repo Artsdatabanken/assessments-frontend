@@ -30,12 +30,12 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Explanation for why an earlier believed alien species is no longer considered alien. Free text field.
         /// </summary>
         public string ChangedFromAlienDescription { get; set; }
-        
+
         /// <summary>
         /// Explanation for why the taxon is evaluated at another taxonomic rank. Free text field.
         /// </summary>
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
-        
+
         /// <summary>
         /// List including all criteria (A-I), their score and uncertainty
         /// </summary>
@@ -139,7 +139,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Establishment category in Norway today from A-C3. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are established
         /// </summary>
-        public string SpeciesStatus { get; set; }
+        public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
 
         /// <summary>
         /// Further information about the taxons' secondary spread (i.e. spread within Norwegian nature)
@@ -244,12 +244,12 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Known size of area of occupancy (AOO) today. Only relevant for AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
         /// </summary>
-        public int? RiskAssessmentAOOknown { get; set; }
+        public int? AOOknown { get; set; }
 
         /// <summary>
         /// Low estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
         /// </summary>
-        public int? RiskAssessmentAOOtotalLow { get; set; }
+        public int? AOOtotalLow { get; set; }
 
         /// <summary>
         /// Best estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
@@ -259,7 +259,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// High estimate of area of occupancy (AOO) today. Only relevant if AlienSpeciesCategory is "AlienSpecie" or "RegionallyAlien"
         /// </summary>
-        public int? RiskAssessmentAOOtotalHigh { get; set; }
+        public int? AOOtotalHigh { get; set; }
 
         /// <summary>
         /// Low estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
@@ -355,45 +355,110 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Arguments for not accepting the median population lifetime that was automatically estimated based on estimation method "simplified estimation". Applies when IsAcceptedSimplifiedEstimate == false 
         /// </summary>
         public string MedianLifetimeSimplifiedEstimationAdjustScoreReason { get; set; }
+        
         ///<summary>
         /// The population size used to estimate population viability with estimation method "numerical estimation"
         /// </summary>
         public long MedianLifetimeNumericalEstimationPopulationSize { get; set; }
+        
         ///<summary>
         /// The growth rate used to estimate population viability with estimation method "numerical estimation"
         /// </summary>
         public double MedianLifetimeNumericalEstimationGrowthRate { get; set; }
+        
         ///<summary>
         /// The environmental variance used to estimate population viability with estimation method "numerical estimation". Optional.
         /// </summary>
         public double? MedianLifetimeNumericalEstimationEnvironmentalVariance { get; set; }
+        
         ///<summary>
         /// The demographic variance used to estimate population viability with estimation method "numerical estimation". Optional.
         /// </summary>
         public double? MedianLifetimeNumericalEstimationDemographicVariance { get; set; }
+        
         ///<summary>
         /// The carrying capacity (in number of individuals) used to estimate population viability with estimation method "numerical estimation". Optional.
         /// </summary>
         public long? MedianLifetimeNumericalEstimationCarryingCapacity { get; set; }
+        
         ///<summary>
         /// The quazi-extinction threashold (in number of individuals) used to estimate population viability with estimation method "numerical estimation". Optional.
         /// </summary>
         public int? MedianLifetimeNumericalEstimationExtinctionThreshold { get; set; }
+        
         ///<summary>
         /// The estimated median lifetime (in years) of the species in Norway. Obligatory for estimation methods "numerical estimation" and "viability analysis". 
         /// </summary>
         public long MedianLifetimeBestEstimate { get; set; }
+        
         ///<summary>
         /// The estimated low quantile of median lifetime (in years) of the species in Norway. Obligatory for estimation method "viability analysis". 
         /// </summary>
         public long MedianLifetimeLowEstimate { get; set; }
+        
         ///<summary>
         /// The estimated high quantile of median lifetime (in years) of the species in Norway. Obligatory for estimation method "viability analysis". 
         /// </summary>
         public long MedianLifetimeHighEstimate { get; set; }
+        
         ///<summary>
         /// Desciption of the Population Viability Analysis model used. Used for estimation method "viability analysis". 
         /// </summary>
         public string MedianLifetimeViabilityAnalysisDescription { get; set; }
+        
+        /// <summary>
+        /// The available methods to estimate the expansion speed of a species in Norwegian nature.
+        /// </summary>
+        public AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod ExpansionSpeedEstimationMethod { get; set; }
+        
+        /// <summary>
+        /// The dark figure (range) of the Area Of Occupancy used to estimate expansion speed with method SpatioTemporalDataset.
+        /// </summary>
+        public string ExpansionSpeedSpatioTemporalDatasetDarkFigureRange { get; set; }
+        
+        /// <summary>
+        /// The chosen model used to estimate expansion speed with method SpatioTemporalDataset.
+        /// </summary>
+        public AlienSpeciesAssessment2023ExpansionSpeedSpatioTemporalDatasetModel ExpansionSpeedSpatioTemporalDatasetModel { get; set; }
+
+        /// <summary>
+        /// Whether the data file used to estimate expansion speed lists occurrences only once or several times. Background information for method SpatioTemporalDataset.
+        /// </summary>
+        public AlienSpeciesAssessment2023ExpansionSpeedSpatioTemporalDatasetOccurrenceListing ExpansionSpeedSpatioTemporalDatasetOccurrenceListing { get; set; }
+
+        /// <summary>
+        /// The first year, representing the beginning of the period used to estimate expansion speed. Used for method EstimatedIncreaseInAOO.
+        /// </summary>
+        public int ExpansionSpeedEstimatedIncreaseInAOOFirstYear { get; set; }
+
+        /// <summary>
+        /// The second year, representing the end of the period used to estimate expansion speed. Used for method EstimatedIncreaseInAOO.
+        /// </summary>
+        public int ExpansionSpeedEstimatedIncreaseInAOOLastYear { get; set; }
+
+        /// <summary>
+        /// The Area Of Occupancy (AOO) at the first year, representing the area occupied by the species at the beginning of the period used to estimate expansion speed. Used for method EstimatedIncreaseInAOO.
+        /// </summary>
+        public int ExpansionSpeedEstimatedIncreaseInAOOFirstAOO { get; set; }
+
+        /// <summary>
+        /// The Area Of Occupancy (AOO) at the last year, representing the area occupied by the species at the beginning of the period used to estimate expansion speed. Used for method EstimatedIncreaseInAOO.
+        /// </summary>
+        public int ExpansionSpeedEstimatedIncreaseInAOOLastAOO { get; set; }
+
+        /// <summary>
+        /// The Area Of Occupancy (AOO) at the first year, corrected for management. Represents the area occupied by the species at the beginning of the period used to estimate expansion speed. Used for method EstimatedIncreaseInAOO.
+        /// </summary>
+        public int ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr { get; set; }
+
+        /// <summary>
+        /// The Area Of Occupancy (AOO) at the last year, corrected for management. Represents the area occupied by the species at the beginning of the period used to estimate expansion speed. Used for method EstimatedIncreaseInAOO.
+        /// </summary>
+        public int ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr { get; set; }
+
+        /// <summary>
+        /// Comment or description related to the estimation of expansion speed. Used for method EstimatedIncreaseInAOO.
+        /// </summary>
+        public string ExpansionSpeedEstimatedIncreaseInAOODescription { get; set; }
     }
 }

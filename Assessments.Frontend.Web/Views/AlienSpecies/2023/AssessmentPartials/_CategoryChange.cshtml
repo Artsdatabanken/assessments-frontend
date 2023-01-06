@@ -7,7 +7,7 @@
     var wasNr2018 = category2018 == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
     var sameAs2018 = Model.Assessment.Category == category2018;
 
-    var showMain = !(category2018 != null && isNr) || !(isNr || sameAs2018) || (isNr && !sameAs2018);
+    var showMain = (!(category2018 != null && isNr) || !(isNr || sameAs2018) || (isNr && !sameAs2018)) && !(isNr && !has2018Assessmnet);
 
     var showNotAssessed2018 = category2018 == null || wasNr2018;
     var showSameAs2018 = !isNr && sameAs2018;

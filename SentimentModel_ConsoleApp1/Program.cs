@@ -3,8 +3,8 @@ using CsvHelper.Configuration;
 using SentimentModel_ConsoleApp1;
 using System.Globalization;
 
-using (var reader = new StreamReader("C:\\temp\\ml_only_raw.csv"))
-using (var writer = new StreamWriter("C:\\temp\\ml_only_raw_new.csv", false, System.Text.Encoding.UTF8))
+using (var reader = new StreamReader("C:\\temp\\ml\\ml_only_raw.csv", System.Text.Encoding.GetEncoding("iso-8859-1")))
+using (var writer = new StreamWriter("C:\\temp\\ml\\ml_only_raw_new.csv", false, System.Text.Encoding.UTF8))
 using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
 {
     var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
@@ -25,11 +25,6 @@ using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
 
     for (var i = 0; i < recordsList.Count; i++)
     {
-        if (i > 5)
-        {
-            break;
-        }
-
         SentimentModel.ModelInput sampleData = new SentimentModel.ModelInput()
         {
             Sånn_ting = recordsList[i],

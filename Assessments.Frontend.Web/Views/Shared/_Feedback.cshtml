@@ -12,38 +12,44 @@
 }
 else
 {
-    <form asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path + "#feedback")" method="post" enctype="multipart/form-data" novalidate>
+    <div class="page_section">
+        <form asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path + "#feedback")" class="feedback_form" method="post" enctype="multipart/form-data" novalidate>
 
-        <label asp-for="FullName"></label><br />
-        <input asp-for="FullName" />
-        <span asp-validation-for="FullName"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="FullName"></label><br />
+                <input asp-for="FullName" />
+                <span asp-validation-for="FullName"></span>
+            </div>
 
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="Email"></label><br />
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
 
-        <label asp-for="Comment"></label><br />
-        <textarea asp-for="Comment" rows="5"></textarea>
-        <span asp-validation-for="Comment"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="Comment"></label><br />
+                <textarea asp-for="Comment" rows="5"></textarea>
+                <span asp-validation-for="Comment"></span>
+            </div>
 
-        <label asp-for="FormFiles"></label><br />
-        <input asp-for="FormFiles" type="file" accept=".pdf, .doc, .docx" multiple>
-        <span asp-validation-for="FormFiles"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="FormFiles"></label><br />
+                <input asp-for="FormFiles" type="file" accept=".pdf, .doc, .docx" multiple>
+                <span asp-validation-for="FormFiles"></span>
+            </div>
 
-        <input asp-for="AssessmentId" />
-        <input asp-for="Year" />
-        <input asp-for="ExpertGroup" />
-        <input asp-for="Type" />
+            <input asp-for="AssessmentId" />
+            <input asp-for="Year" />
+            <input asp-for="ExpertGroup" />
+            <input asp-for="Type" />
 
-        <button type="submit">Send inn skjema</button>
+            <button class="primary" type="submit">Send inn skjema</button>
 
-        <div asp-validation-summary="All"></div>
+            <div asp-validation-summary="All"></div>
 
-    </form>
+        </form>
+    </div>
 
     <script src="/js/aspnet-validation.min.js"></script>
     <script>
@@ -53,7 +59,7 @@ else
 
     <style>
         .input-validation-error {
-            border-color: red;
+            border: 1px solid red;
             outline-color: red;
         }
     </style>

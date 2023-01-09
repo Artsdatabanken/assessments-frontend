@@ -405,12 +405,7 @@
 
 .darktheme .button.primary,
 .darktheme .main button.primary {
-    border: 1px solid #f25d5d;
-}
-
-.darktheme .button.primary.alien-species {
     border: 1px solid #b372bb;
-    background: #8f4997;
 }
 
 .darktheme .search_dropdown {

@@ -57,153 +57,141 @@
                        <div is-visible="showIsNk">
                            Arten har <i>ingen kjent risiko</i> (NK) og dermed ingen utslag på noen kriterier. Se fanen Øvrige brukte kriterier.
                        </div>
-                       <div is-visible="!showIsNk" class="collapsible initially_closed">
-                            <div class="collapsible_header">
-                                <h3>Invasjonspotensial</h3>
-                                <button onclick="toggleCollapsible(this)">
-                                    <span class="material-icons expanded_icon">expand_less</span>
-                                    <span class="material-icons collapsed_icon">expand_more</span>
-                                </button>
-                            </div >
-                            <div class="collapsible_content">
+                       <div is-visible="!showIsNk">
+                            <h3>Invasjonspotensial</h3>
+                            <div>
                                 <div is-visible="showLowInvasionPotential">
                                     Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen. Se fanen Øvrige brukte kriterier.
                                 </div>
                                 <div is-visible="showHigherInvasionPotential">
-                                    <p is-visible="decisiveCriteriaHasA || decisiveCriteriaHasB">
-                                        @AlienSpeciesAssessment2023CriteriaLetter.A.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value) 
-                                        <span is-visible="uncertaintyHighA != 0 || uncertaintyLowA != 0">(med usikkerhet</span>
-                                        <span is-visible="uncertaintyLowA != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyLowA)</span>
-                                        <span is-visible="uncertaintyHighA != 0 && uncertaintyLowA != 0">og/eller</span>
-                                        <span is-visible="uncertaintyHighA != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyHighA)</span>
-                                        <span is-visible="uncertaintyHighA != 0 || uncertaintyLowA != 0">).</span>
-                                        <span is-visible="uncertaintyHighA == 0 && uncertaintyLowA == 0">.</span>
-                                        <div is-visible="!showIsNk" class="collapsible initially_closed">
-                                            <div class="collapsible_header">
-                                                <h3>Vis detaljer</h3>
-                                                <button onclick="toggleCollapsible(this)" id="myButton">
-                                                    <span class="material-icons expanded_icon">expand_less</span>
-                                                    <span class="material-icons collapsed_icon">expand_more</span>
-                                                </button>
-                                            </div>
-                                            <div class="collapsible_content">
-                                                <p>
-                                                    Estimeringsmetode: @Model.Assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
-                                                </p>
-                                                <p is-visible="showSimplifiedEstimateAcceptedAlien">
-                                                    Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
-                                                </p>
-                                                <div is-visible="showSimplifiedEstimateNotAcceptedAlien">
+                                    <div>
+                                        <p is-visible="decisiveCriteriaHasA || decisiveCriteriaHasB">
+                                            @AlienSpeciesAssessment2023CriteriaLetter.A.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value) 
+                                            <span is-visible="uncertaintyHighA != 0 || uncertaintyLowA != 0">(med usikkerhet</span>
+                                            <span is-visible="uncertaintyLowA != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyLowA)</span>
+                                            <span is-visible="uncertaintyHighA != 0 && uncertaintyLowA != 0">og/eller</span>
+                                            <span is-visible="uncertaintyHighA != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyHighA)</span>
+                                            <span is-visible="uncertaintyHighA != 0 || uncertaintyLowA != 0">).</span>
+                                            <span is-visible="uncertaintyHighA == 0 && uncertaintyLowA == 0">.</span>
+                                            <div is-visible="!showIsNk" class="collapsible initially_closed">
+                                                <div class="collapsible_header">
+                                                    <h3>Vis detaljer</h3>
+                                                    <button onclick="toggleCollapsible(this)" id="myButton">
+                                                        <span class="material-icons expanded_icon">expand_less</span>
+                                                        <span class="material-icons collapsed_icon">expand_more</span>
+                                                    </button>
+                                                </div>
+                                                <div class="collapsible_content">
                                                     <p>
-                                                        Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                        Estimeringsmetode: @Model.Assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
                                                     </p>
-                                                    <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
-                                                </div>
-                                                <p is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-                                                    Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
-                                                </p>
-                                                <div is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
-                                                    <p>
-                                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                    <p is-visible="showSimplifiedEstimateAcceptedAlien">
+                                                        Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                                     </p>
-                                                    <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
-                                                </div>
-                                                <div is-visible="showNumericalEstimation">
-                                                    <table class="number-table">
-                                                        <caption>Demografiske nøkkeltall</caption>
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
-                                                            <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
-                                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize</td>
-                                                        </tr>
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
-                                                            <td>Vekstrate (&lambda;): </td>
-                                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationGrowthRate</td>
-                                                        </tr>
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
-                                                            <td>Miljøvarians (&sigma;<sub>e</sub><sup>2</sup>): </td>
-                                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance</td>
-                                                        </tr>
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
-                                                            <td>Demografisk varians (&sigma;<sub>d</sub><sup>2</sup>): </td>
-                                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationDemographicVariance</td>
-                                                        </tr>
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
-                                                            <td>Bæreevne (K, i antall individer): </td>
-                                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationCarryingCapacity</td>
-                                                        </tr>
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
-                                                            <td>Terskel for kvasiutdøing (C, i antall individer): </td>
-                                                            <td>@Model.Assessment.MedianLifetimeNumericalEstimationExtinctionThreshold</td>
-                                                        </tr>
-                                                    </table>
-                                                    <br />
-                                                    <p is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til @Model.Assessment.MedianLifetimeBestEstimate år.</p>
-                                                </div>
-                                                <div is-visible="showViableAnalysis">
-                                                    <p>Beskrivelse av modeller og programvare som er brukt: @Model.Assessment.MedianLifetimeViabilityAnalysisDescription</p>
-                                                    <table class="number-table">
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">
-                                                            <td>Estimert median levetid (i år): </td>
-                                                            <td>@Model.Assessment.MedianLifetimeBestEstimate</td>
-                                                        </tr>
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeLowEstimate != 0">
-                                                            <td>Estimert median levetid (i år) lavt anslag: </td>
-                                                            <td>@Model.Assessment.MedianLifetimeLowEstimate</td>
-                                                        </tr>
-                                                        <tr is-visible="Model.Assessment.MedianLifetimeHighEstimate != 0">
-                                                            <td>Estimert median levetid (i år) høyt anslag: </td>
-                                                            <td>@Model.Assessment.MedianLifetimeHighEstimate</td>
-                                                        </tr>
-                                                    </table>
+                                                    <div is-visible="showSimplifiedEstimateNotAcceptedAlien">
+                                                        <p>
+                                                            Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                        </p>
+                                                        <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
+                                                    </div>
+                                                    <p is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
+                                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                    </p>
+                                                    <div is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
+                                                        <p>
+                                                            Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                        </p>
+                                                        <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
+                                                    </div>
+                                                    <div is-visible="showNumericalEstimation">
+                                                        <table class="number-table">
+                                                            <caption>Demografiske nøkkeltall</caption>
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
+                                                                <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
+                                                                <td>@Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize</td>
+                                                            </tr>
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
+                                                                <td>Vekstrate (&lambda;): </td>
+                                                                <td>@Model.Assessment.MedianLifetimeNumericalEstimationGrowthRate</td>
+                                                            </tr>
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
+                                                                <td>Miljøvarians (&sigma;<sub>e</sub><sup>2</sup>): </td>
+                                                                <td>@Model.Assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance</td>
+                                                            </tr>
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
+                                                                <td>Demografisk varians (&sigma;<sub>d</sub><sup>2</sup>): </td>
+                                                                <td>@Model.Assessment.MedianLifetimeNumericalEstimationDemographicVariance</td>
+                                                            </tr>
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
+                                                                <td>Bæreevne (K, i antall individer): </td>
+                                                                <td>@Model.Assessment.MedianLifetimeNumericalEstimationCarryingCapacity</td>
+                                                            </tr>
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
+                                                                <td>Terskel for kvasiutdøing (C, i antall individer): </td>
+                                                                <td>@Model.Assessment.MedianLifetimeNumericalEstimationExtinctionThreshold</td>
+                                                            </tr>
+                                                        </table>
+                                                        <br />
+                                                        <p is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til @Model.Assessment.MedianLifetimeBestEstimate år.</p>
+                                                    </div>
+                                                    <div is-visible="showViableAnalysis">
+                                                        <p>Beskrivelse av modeller og programvare som er brukt: @Model.Assessment.MedianLifetimeViabilityAnalysisDescription</p>
+                                                        <table class="number-table">
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">
+                                                                <td>Estimert median levetid (i år): </td>
+                                                                <td>@Model.Assessment.MedianLifetimeBestEstimate</td>
+                                                            </tr>
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeLowEstimate != 0">
+                                                                <td>Estimert median levetid (i år) lavt anslag: </td>
+                                                                <td>@Model.Assessment.MedianLifetimeLowEstimate</td>
+                                                            </tr>
+                                                            <tr is-visible="Model.Assessment.MedianLifetimeHighEstimate != 0">
+                                                                <td>Estimert median levetid (i år) høyt anslag: </td>
+                                                                <td>@Model.Assessment.MedianLifetimeHighEstimate</td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </p>
-                                    <p is-visible="decisiveCriteriaHasB || decisiveCriteriaHasA">
-                                        @AlienSpeciesAssessment2023CriteriaLetter.B.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyB.Value) 
-                                        <span is-visible="uncertaintyHighB != 0 || uncertaintyLowB != 0">(med usikkerhet</span> 
-                                        <span is-visible="uncertaintyLowB != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyLowB)</span>
-                                        <span is-visible="uncertaintyHighB != 0 && uncertaintyLowB != 0">og/eller</span>
-                                        <span is-visible="uncertaintyHighB != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyHighB)</span>
-                                        <span is-visible="uncertaintyHighB != 0 || uncertaintyLowB != 0">).</span>
-                                        <span is-visible="uncertaintyHighB == 0 && uncertaintyLowB == 0">.</span>
-                                    </p>
-                                    <p is-visible="decisiveCriteriaHasC">
-                                        @AlienSpeciesAssessment2023CriteriaLetter.C.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyC.Value) 
-                                        <span is-visible="uncertaintyHighC != 0 || uncertaintyLowC != 0">(med usikkerhet</span>
-                                        <span is-visible="uncertaintyLowC != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyLowC)</span>
-                                        <span is-visible="uncertaintyHighC != 0 && uncertaintyLowC != 0">og/eller</span>
-                                        <span is-visible="uncertaintyHighC != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyHighC)</span>
-                                        <span is-visible="uncertaintyHighC != 0 || uncertaintyLowC != 0">).</span>
-                                        <span is-visible="uncertaintyHighC == 0 && uncertaintyLowC == 0">.</span>
-                                    </p>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p is-visible="decisiveCriteriaHasB || decisiveCriteriaHasA">
+                                            @AlienSpeciesAssessment2023CriteriaLetter.B.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyB.Value) 
+                                            <span is-visible="uncertaintyHighB != 0 || uncertaintyLowB != 0">(med usikkerhet</span> 
+                                            <span is-visible="uncertaintyLowB != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyLowB)</span>
+                                            <span is-visible="uncertaintyHighB != 0 && uncertaintyLowB != 0">og/eller</span>
+                                            <span is-visible="uncertaintyHighB != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyHighB)</span>
+                                            <span is-visible="uncertaintyHighB != 0 || uncertaintyLowB != 0">).</span>
+                                            <span is-visible="uncertaintyHighB == 0 && uncertaintyLowB == 0">.</span>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p is-visible="decisiveCriteriaHasC">
+                                            @AlienSpeciesAssessment2023CriteriaLetter.C.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyC.Value) 
+                                            <span is-visible="uncertaintyHighC != 0 || uncertaintyLowC != 0">(med usikkerhet</span>
+                                            <span is-visible="uncertaintyLowC != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyLowC)</span>
+                                            <span is-visible="uncertaintyHighC != 0 && uncertaintyLowC != 0">og/eller</span>
+                                            <span is-visible="uncertaintyHighC != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyHighC)</span>
+                                            <span is-visible="uncertaintyHighC != 0 || uncertaintyLowC != 0">).</span>
+                                            <span is-visible="uncertaintyHighC == 0 && uncertaintyLowC == 0">.</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div >
                    </div>
 
                    <div id="risk_category_explanation_tab_block_2">
-                       <div class="collapsible initially_closed">
-                            <div class="collapsible_header">
-                                <h3>Invasjonspotensial</h3>
-                                <button onclick="toggleCollapsible(this)" id="myButton">
-                                    <span class="material-icons expanded_icon">expand_less</span>
-                                    <span class="material-icons collapsed_icon">expand_more</span>
-                                </button>
-                            </div >
-                            <div class="collapsible_content">
+                       <div>
+                            <h3>Invasjonspotensial</h3>
+                            <div>
                                 innsett andre kriterier med informasjon
                             </div>
-                        </div >
-                        <div class="collapsible initially_closed">
-                            <div class="collapsible_header">
-                                <h3>Økologisk effekt</h3>
-                                <button onclick="toggleCollapsible(this)">
-                                    <span class="material-icons expanded_icon">expand_less</span>
-                                    <span class="material-icons collapsed_icon">expand_more</span>
-                                </button>
-                            </div >
-                            <div class="collapsible_content">
+                        </div>
+                        <div>
+                            <h3>Økologisk effekt</h3>
+                            <div>
                                 innsett andre kriterier med informasjon
                             </div>
                         </div >

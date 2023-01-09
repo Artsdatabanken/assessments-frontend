@@ -65,6 +65,22 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [Description("Er den automatisk estimerte utregningen av artens mediane levetid i Norge basert på metoden forenklet anslag akseptert?")]
         public bool? IsAcceptedSimplifiedEstimate { get; set; }
 
+        [DisplayName("Estimeringsmetode B-kriteriet")]
+        [Description("Valgt estimeringsmetode for B-kriteriet, artens ekspansjonshastighet i norsk natur")]
+        public string ExpansionSpeedEstimationMethod { get; set; }
+
+        [DisplayName("Ekspansjonshastighet (lavt anslag)")]
+        [Description("Artens ekspansjonshastighet i norsk natur (lavt anslag)")]
+        public long ExpansionSpeedLowEstimate { get; set; }
+
+        [DisplayName("Ekspansjonshastighet (beste anslag)")]
+        [Description("Artens ekspansjonshastighet i norsk natur (beste anslag)")]
+        public long ExpansionSpeedBestEstimate { get; set; }
+
+        [DisplayName("Ekspansjonshastighet (høyt anslag)")]
+        [Description("Artens ekspansjonshastighet i norsk natur (høyt anslag)")]
+        public long ExpansionSpeedHighEstimate { get; set; }
+
         [DisplayName("Geografisk variasjon i risiko")]
         [Description("Arter med en viss utstrekning i forekomstarealet kan, som en respons på ulike miljøbetingelser, ha ulik påvirkning i naturen. Spørsmålet viser til om arten kunne fått en lavere risikokategori i deler av sitt potensielle forekomstareal")]
         public bool? RiskAssessmentGeographicVariationInCategory { get; set; }
@@ -95,11 +111,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Kjent forekomstareal")]
         [Description("Artens kjente forekomstareal i dag")]
-        public int? RiskAssessmentAOOknown { get; set; }
+        public int? AOOknown { get; set; }
 
         [DisplayName("Antatt forekomstareal lavt anslag")]
         [Description("Artens antatte forekomstareal i dag (lavt anslag)")]
-        public int? RiskAssessmentAOOtotalLow { get; set; }
+        public int? AOOtotalLow { get; set; }
 
         [DisplayName("Antatt forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal i dag (beste anslag)")]
@@ -107,7 +123,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Antatt forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal i dag (høyt anslag)")]
-        public int? RiskAssessmentAOOtotalHigh { get; set; }
+        public int? AOOtotalHigh { get; set; }
 
         //TODO: skill felt mellom dørstokkarter og selvstendig reproduserende for fremtidige forekomstareal?
         [DisplayName("Fremtidig forekomstareal lavt anslag")]

@@ -511,5 +511,145 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
 
         }
+        internal static string GetSpatioTemporalDatasetModel(string model)
+        {
+            return model switch
+            {
+                "1" => "ConstantDetectability",
+                "2" => "ChangeDetectabilityOnce",
+                "3" => "TestTwoModels",
+                "4" => "KnownSamplingEffort",
+                _ => "NotRelevant",
+            };
+        }
+
+        internal static string GetExpansionEstimationMethod(string category, string chosenMainMethod, string assessmentConclusion, string chosenSubMethod)
+        {
+            if (category == "NR")
+            {
+                return "NotRelevant";
+            }
+
+            var mainMethodA = chosenMainMethod == "a";
+            var mainMethodB = chosenMainMethod == "b";
+            var assessedDoorKnocker = assessmentConclusion == "AssessedDoorknocker";
+                
+            if(mainMethodA)
+            {
+                return "SpatioTemporalDataset";
+            }
+            
+            if(mainMethodB && assessedDoorKnocker)
+            {
+                return "EstimatedIncreaseInAOODoorKnockers";
+            }
+            
+            if(mainMethodB && chosenSubMethod == "yes")
+            {
+                return "EstimatedIncreaseInAOOReproducingUnaided";
+            }
+
+            if (mainMethodB && chosenSubMethod == "no")
+            {
+                return "EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion";
+            }
+
+            else return "NotRelevant";
+      
+        }
+
+        static private long GetExpansionSpeedAOOSelfReproducing(RiskAssessment riskAssessment, long areaOfOccurrenceToday, long areaOfOccurrenceIn50Years)
+        {
+            bool chosenSubMethod = riskAssessment.AOOfirstOccurenceLessThan10Years == "yes";
+            long? firstYear = riskAssessment.AOOyear1;
+            long? lastYear = riskAssessment.AOOyear2;
+            long? firstYearArea = riskAssessment.AOO1;
+            long? lastYearArea = riskAssessment.AOO2;
+            long? areaOfOccurrenceTodayBest = riskAssessment.AOOtotalBestInput;
+            long? knownAreaToday = riskAssessment.AOOknownInput;
+
+            decimal result;
+            if (chosenSubMethod)
+            {
+                result = (firstYear == null || lastYear == null || (lastYear - firstYear) < 10 || firstYearArea <= 0 || lastYearArea <= 0) ?
+                0
+                : Math.Truncate((decimal)(Math.Sqrt((double)(areaOfOccurrenceToday / knownAreaToday)) * 2000 * (Math.Sqrt(Math.Ceiling((double)(lastYearArea / 4))) - Math.Sqrt(Math.Ceiling((double)(firstYearArea / 4)))) / ((lastYear - firstYear) * Math.Sqrt(Math.PI))));
+            }
+
+            else
+            {
+                result = (decimal)Math.Truncate(20 * (Math.Sqrt((double)areaOfOccurrenceIn50Years) - Math.Sqrt((double)areaOfOccurrenceTodayBest)) / Math.Sqrt(Math.PI));
+            }
+
+            return (long)Math.Round(result,0);
+        }
+
+        internal static long GetExpansionSpeedEstimates(RiskAssessment riskAssessment, string estimateQuantile, string assessmentConclusion)
+        {
+            var mainMethodA = riskAssessment.ChosenSpreadYearlyIncrease is "a";
+            var mainMethodB = riskAssessment.ChosenSpreadYearlyIncrease is "b";
+            var assessedDoorKnocker = assessmentConclusion is "AssessedDoorknocker";
+
+            if (mainMethodA)
+            {
+                return (long)(estimateQuantile is "best" ? riskAssessment.ExpansionSpeedInput
+                    : estimateQuantile is "low" ? riskAssessment.ExpansionLowerQInput
+                    : riskAssessment.ExpansionUpperQInput);
+            }
+
+            if (mainMethodB && assessedDoorKnocker)
+            {
+                long? numberOfOccurrences;
+                long? numberOfIntroductions;
+                long areaAfterTenYearsEstimate;
+
+                if (estimateQuantile == "low")
+                {
+                    numberOfOccurrences = riskAssessment.Occurrences1Low ?? 0;
+                    numberOfIntroductions = IntroductionsLow(riskAssessment);
+
+                }
+                else if (estimateQuantile == "best")
+                {
+                    numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
+                    numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
+                }
+                else
+                {
+                    numberOfOccurrences = riskAssessment.Occurrences1High ?? 0;
+                    numberOfIntroductions = IntroductionsHigh(riskAssessment);
+                }
+
+                areaAfterTenYearsEstimate = AOO10yr(numberOfOccurrences, numberOfIntroductions) ?? 0;
+
+                return (long)Math.Round(Math.Truncate(200 * (Math.Sqrt((double)(areaAfterTenYearsEstimate / 4)) - 1) / Math.Sqrt(Math.PI)),0);
+            }
+
+            else //mainMethodB and assessed as self-reproducing
+            {
+                long areaOfOccurrenceToday;
+                long areaOfOccurrenceIn50Years;
+                if (estimateQuantile == "low")
+                {
+                    areaOfOccurrenceToday = riskAssessment.AOOtotalLowInput ?? 0;
+                    areaOfOccurrenceIn50Years = riskAssessment.AOO50yrLowInput ?? 0;
+                }
+
+                else if (estimateQuantile == "best")
+                {
+                    areaOfOccurrenceToday = riskAssessment.AOOtotalBestInput ?? 0;
+                    areaOfOccurrenceIn50Years = riskAssessment.AOO50yrBestInput ?? 0;
+                }
+
+                else
+                {
+                    areaOfOccurrenceToday = riskAssessment.AOOtotalHighInput ?? 0;
+                    areaOfOccurrenceIn50Years = riskAssessment.AOO50yrHighInput ?? 0;
+                }
+
+                return GetExpansionSpeedAOOSelfReproducing(riskAssessment, areaOfOccurrenceToday, areaOfOccurrenceIn50Years);
+            }
+
+        }
     }
 }

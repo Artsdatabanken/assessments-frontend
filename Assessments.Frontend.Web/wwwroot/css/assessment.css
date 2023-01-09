@@ -813,8 +813,8 @@ span.area i {
 
 /* OVERRIDE P STYLING */
 
-.darktheme .tabbed_element_container p,
-.tabbed_element_container p {
+.darktheme .tabbed_element_container ul p,
+.tabbed_element_container ul p {
     border: 0;
     padding: 4px;
 }

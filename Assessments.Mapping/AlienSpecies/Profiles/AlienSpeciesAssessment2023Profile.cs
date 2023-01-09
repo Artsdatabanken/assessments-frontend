@@ -44,12 +44,12 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ChangedFromAlien, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAlienSpeciesAssessment2023Changed(src.ChangedFromAlien)))
                 .ForMember(dest => dest.Environment, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEnvironmentEnum(src.Limnic, src.Marine, src.Terrestrial)))
                 .ForMember(dest => dest.ReasonsForChangeOfCategoryDescription, opt => opt.MapFrom(src => src.DescriptionOfReasonsForChangeOfCategory.StripUnwantedHtml()))
-                .ForMember(dest => dest.RiskAssessmentAOOknown, opt =>
+                .ForMember(dest => dest.AOOknown, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOknownInput);
                 })
-                .ForMember(dest => dest.RiskAssessmentAOOtotalLow, opt =>
+                .ForMember(dest => dest.AOOtotalLow, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalLowInput);
@@ -59,7 +59,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalBestInput);
                 })
-                .ForMember(dest => dest.RiskAssessmentAOOtotalHigh, opt =>
+                .ForMember(dest => dest.AOOtotalHigh, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalHighInput);
@@ -173,6 +173,44 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.RiskAssessment.LifetimeUpperQInput);
                 })
                 .ForMember(dest => dest.MedianLifetimeViabilityAnalysisDescription, opt => opt.MapFrom(src => src.RiskAssessment.SpreadPVAAnalysis.StripUnwantedHtml()))
+                .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionEstimationMethod(src.Category, src.RiskAssessment.ChosenSpreadYearlyIncrease, src.AssessmentConclusion,src.RiskAssessment.AOOfirstOccurenceLessThan10Years)))
+                .ForMember(dest => dest.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR");
+                    opt.MapFrom(src => src.RiskAssessment.BCritMCount);
+                })
+                .ForMember(dest => dest.ExpansionSpeedSpatioTemporalDatasetModel, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetSpatioTemporalDatasetModel(src.RiskAssessment.BCritModel));
+                })
+                .ForMember(dest => dest.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR");
+                    opt.MapFrom(src => src.RiskAssessment.BCritOccurrences == "a" ? "FirstYear" : src.RiskAssessment.BCritOccurrences == "b" ? "EveryYear" : "NotRelevant");
+                })
+                .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOOFirstYear, opt => opt.MapFrom(src => src.RiskAssessment.AOOyear1))
+                .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOOLastYear, opt => opt.MapFrom(src => src.RiskAssessment.AOOyear2))
+                .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO, opt => opt.MapFrom(src => src.RiskAssessment.AOOknown1))
+                .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOOLastAOO, opt => opt.MapFrom(src => src.RiskAssessment.AOOknown2))
+                .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr, opt => opt.MapFrom(src => src.RiskAssessment.AOO1))
+                .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr, opt => opt.MapFrom(src => src.RiskAssessment.AOO2))
+                .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOODescription, opt => opt.MapFrom(src => src.RiskAssessment.CommentOrDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.ExpansionSpeedLowEstimate, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "low", src.AssessmentConclusion));
+                })
+                .ForMember(dest => dest.ExpansionSpeedBestEstimate, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "best", src.AssessmentConclusion));
+                })
+                .ForMember(dest => dest.ExpansionSpeedHighEstimate, opt =>
+                {
+                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished");
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "high", src.AssessmentConclusion));
+                })
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 

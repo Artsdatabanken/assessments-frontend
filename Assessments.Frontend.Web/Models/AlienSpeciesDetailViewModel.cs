@@ -40,19 +40,19 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyFutureBest = assessment.AOOfutureBest,
                 AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
                 AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
+                AreaOfOccupancyKnown = assessment.AOOknown,
                 AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
-                AreaOfOccupancyTotalHigh = assessment.RiskAssessmentAOOtotalHigh,
-                AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
-                AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
+                AreaOfOccupancyTotalHigh = assessment.AOOtotalHigh,
+                AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
+                Category = assessment.Category,
+                CurrentPresenceComment = assessment.CurrentPresenceComment,
+                RegionOccurrences = assessment.RegionOccurrences,
                 RiskAssessmentIntroductionsLow = assessment.RiskAssessmentIntroductionsLow,
                 RiskAssessmentIntroductionsBest = assessment.RiskAssessmentIntroductionsBest,
                 RiskAssessmentIntroductionsHigh = assessment.RiskAssessmentIntroductionsHigh,
                 RiskAssessmentOccurrences1Low = assessment.RiskAssessmentOccurrences1Low,
                 RiskAssessmentOccurrences1Best = assessment.RiskAssessmentOccurrences1Best,
-                RiskAssessmentOccurrences1High = assessment.RiskAssessmentOccurrences1High,
-                Category = assessment.Category,
-                CurrentPresenceComment = assessment.CurrentPresenceComment,
-                RegionOccurrences = assessment.RegionOccurrences
+                RiskAssessmentOccurrences1High = assessment.RiskAssessmentOccurrences1High
             };
 
             SideBarContentViewModel = new SideBarContentViewModel

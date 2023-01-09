@@ -115,23 +115,21 @@
                         </tr>
                     </table>
                     <div is-visible="@isDoorKnockerOrEffectNoRep">
-                        <div>
+                        <div class="map">
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
-                        </div>
-                        <div>
-                            tabell
-                        </div>                        
+                        </div>                    
                     </div>
                     <div is-visible="showCurrentPresenceComment">
+                        <br />
                         <p>
                             Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og 
-                            forekomstareal om 50 år.
+                            forekomstareal om 50 år: <br />
+                            @Html.Raw(Model.CurrentPresenceComment)
                         </p>
-                        <p>@Html.Raw(Model.CurrentPresenceComment)</p>
                     </div>
-                    <div is-visible="@showInteractiveMap">
+                    @*<div is-visible="@showInteractiveMap"> // TODO: show interactive map here
                         Interaktivt kart
-                    </div>                
+                    </div>   *@             
                 </div>
             </div>
             <div id="regional_nature_variation">

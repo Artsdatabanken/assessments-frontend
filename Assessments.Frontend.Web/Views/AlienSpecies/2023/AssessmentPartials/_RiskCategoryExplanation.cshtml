@@ -2,6 +2,7 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
+    var isNr = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NR;
     var showIsNk = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NK;
     var showLowInvasionPotential = Model.Assessment.ScoreInvasionPotential == 1;
     var showHigherInvasionPotential = Model.Assessment.ScoreInvasionPotential > 1;
@@ -37,7 +38,7 @@
     }
 }
 
-<div class="page-section">
+<div class="page-section" is-visible="!isNr">
     <div class="collapsible initially_closed">
         <div class="collapsible_header">
             <h2>Hva forklarer artens risikokategori</h2>
@@ -108,22 +109,22 @@
                                                     <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                                                 </div>
                                                 <div is-visible="showNumericalEstimation">
-                                                    <p>Demografiske nøkkeltall</p>
                                                     <table class="number-table">
+                                                        <caption>Demografiske nøkkeltall</caption>
                                                         <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
                                                             <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
                                                             <td>@Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize</td>
                                                         </tr>
                                                         <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
-                                                            <td>Vekstrate (λ): </td>
+                                                            <td>Vekstrate (&lambda;): </td>
                                                             <td>@Model.Assessment.MedianLifetimeNumericalEstimationGrowthRate</td>
                                                         </tr>
                                                         <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
-                                                            <td>Miljøvarians (\sigma_e^2): </td>
+                                                            <td>Miljøvarians (&sigma;<sub>e</sub><sup>2</sup>): </td>
                                                             <td>@Model.Assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance</td>
                                                         </tr>
                                                         <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
-                                                            <td>Demografisk varians (\sigma_d^2): </td>
+                                                            <td>Demografisk varians (&sigma;<sub>d</sub><sup>2</sup>): </td>
                                                             <td>@Model.Assessment.MedianLifetimeNumericalEstimationDemographicVariance</td>
                                                         </tr>
                                                         <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
@@ -131,10 +132,11 @@
                                                             <td>@Model.Assessment.MedianLifetimeNumericalEstimationCarryingCapacity</td>
                                                         </tr>
                                                         <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
-                                                            <td>Tersker for kvasiutdøing (C, i antall individer): </td>
+                                                            <td>Terskel for kvasiutdøing (C, i antall individer): </td>
                                                             <td>@Model.Assessment.MedianLifetimeNumericalEstimationExtinctionThreshold</td>
                                                         </tr>
                                                     </table>
+                                                    <br />
                                                     <p is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til @Model.Assessment.MedianLifetimeBestEstimate år.</p>
                                                 </div>
                                                 <div is-visible="showViableAnalysis">

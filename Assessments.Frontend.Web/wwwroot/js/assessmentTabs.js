@@ -124,7 +124,7 @@ const setInactiveTabs = () => {
 const selectTab = (buttonId, tabId, mainSectionId) => {
     const active = 'active';
     const inactive = 'inactive';
-    const elementButtons = document.querySelectorAll(`#${mainSectionId} button`);
+    const elementButtons = document.querySelectorAll(`#${mainSectionId} button.changetab`);
     const elementSections = document.querySelectorAll(`#${mainSectionId} .tabbed_element_container.assessment_tabs`)[0]?.children;
 
     Array.prototype.forEach.call(elementButtons, button => {

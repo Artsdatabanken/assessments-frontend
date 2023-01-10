@@ -47,7 +47,8 @@ function learnAboutCookies() {
 // Make a new cookie
 function setCookie(cname, cvalue,cduration) {   
     let expires = "expires=" + cduration;
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    const secure = "Secure"
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";" + secure + ";path=/";
 }
 
 // Read a cookie
@@ -88,7 +89,7 @@ function hasAcceptedCookies() {
     if (document.getElementById('heyCookie')) { // Only run on page with cookieWarning
         acceptedcookies = "yes";
         setCookie("acceptedcookie", acceptedcookies, cookieDurationString); // Remember choice for x days.    
-        ga('create', 'UA-74815937-4', { 'cookieExpires': cookieDurationSeconds, 'cookieUpdate': 'false' });
+        ga('create', 'UA-74815937-4', { 'cookieExpires': cookieDurationSeconds, 'cookieUpdate': 'false', 'cookieFlags': 'Secure' });
         ga('send', 'pageview');
         themeCookie();
         document.getElementById('heyCookie').style.display = "none";

@@ -461,6 +461,21 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// </summary>
         public string ExpansionSpeedEstimatedIncreaseInAOODescription { get; set; }
 
+        ///<summary>
+        /// The estimated expansion speed (low quantile) of the species in Norway.  
+        /// </summary>
+        public long ExpansionSpeedLowEstimate { get; set; }
+
+        ///<summary>
+        /// The estimated expansion speed (median/best estimate) of the species in Norway. 
+        /// </summary>
+        public long ExpansionSpeedBestEstimate { get; set; }
+
+        ///<summary>
+        /// The estimated expansion speed (high estimate) of the species in Norway. 
+        /// </summary>
+        public long ExpansionSpeedHighEstimate { get; set; }
+
         /// <summary>
         /// Species' occurrence in and impact on ecosystems (according to NiN-classification)
         /// </summary>

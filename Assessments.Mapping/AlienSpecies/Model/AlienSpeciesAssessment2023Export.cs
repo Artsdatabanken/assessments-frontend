@@ -69,6 +69,18 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [Description("Valgt estimeringsmetode for B-kriteriet, artens ekspansjonshastighet i norsk natur")]
         public string ExpansionSpeedEstimationMethod { get; set; }
 
+        [DisplayName("Ekspansjonshastighet (lavt anslag)")]
+        [Description("Artens ekspansjonshastighet i norsk natur (lavt anslag)")]
+        public long ExpansionSpeedLowEstimate { get; set; }
+
+        [DisplayName("Ekspansjonshastighet (beste anslag)")]
+        [Description("Artens ekspansjonshastighet i norsk natur (beste anslag)")]
+        public long ExpansionSpeedBestEstimate { get; set; }
+
+        [DisplayName("Ekspansjonshastighet (høyt anslag)")]
+        [Description("Artens ekspansjonshastighet i norsk natur (høyt anslag)")]
+        public long ExpansionSpeedHighEstimate { get; set; }
+
         [DisplayName("Geografisk variasjon i risiko")]
         [Description("Arter med en viss utstrekning i forekomstarealet kan, som en respons på ulike miljøbetingelser, ha ulik påvirkning i naturen. Spørsmålet viser til om arten kunne fått en lavere risikokategori i deler av sitt potensielle forekomstareal")]
         public bool? RiskAssessmentGeographicVariationInCategory { get; set; }

@@ -130,10 +130,12 @@ namespace Assessments.Transformation
                 Debug.Assert(parentAssessment != null, nameof(parentAssessment) + " != null");
                 targetItem.Category = parentAssessment.Category;
                 targetItem.ParentAssessmentId = parentAssessment.Id;
+                targetItem.DecisiveCriteria = parentAssessment.DecisiveCriteria;
                 var sourceItem = sourceItems.SingleOrDefault(x => x.Id == targetItem.Id);
                 Debug.Assert(sourceItem != null, nameof(sourceItem) + " != null");
                 sourceItem.ParentAssessmentId = parentAssessment.Id;
                 sourceItem.Category = parentAssessment.Category.ToString();
+                sourceItem.Criteria = parentAssessment.DecisiveCriteria;
             }
         }
 

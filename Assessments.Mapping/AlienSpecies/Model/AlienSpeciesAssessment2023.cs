@@ -475,5 +475,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The estimated expansion speed (high estimate) of the species in Norway. 
         /// </summary>
         public long ExpansionSpeedHighEstimate { get; set; }
+
+        /// <summary>
+        /// Pointer to parent assessment if child taxon is assessed at an higher level
+        /// </summary>
+        public int? ParentAssessmentId { get; set; }
     }
 }

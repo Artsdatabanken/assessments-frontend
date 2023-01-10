@@ -79,12 +79,16 @@
                     </table>
                     <div is-visible="@isAlienSpecie">
                         <h3>Fylkesforekomster</h3>
-                        <div class="map triple_map">
+                        <div is-visible="Model.IsSvalbard" class="map triple_map">
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownToday" />
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedToday" />
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture"/>
+                        </div>
+                        <div is-visible="!Model.IsSvalbard" class="map triple_map">
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownToday" />
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
                         </div>
-                        <p>Tabellvisning</p>
                     </div> 
                     <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
 
@@ -115,9 +119,12 @@
                         </tr>
                     </table>
                     <div is-visible="@isDoorKnockerOrEffectNoRep">
-                        <div class="map">
+                        <div is-visible="Model.IsSvalbard" class="map S">
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture"/>
+                        </div>
+                        <div is-visible="!Model.IsSvalbard" class="map">
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
-                        </div>                    
+                        </div> 
                     </div>
                     <div is-visible="showCurrentPresenceComment">
                         <br />

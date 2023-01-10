@@ -11,7 +11,9 @@ using Assessments.Transformation.Database.Fab4;
 using Assessments.Transformation.Helpers;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 using ShellProgressBar;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -96,6 +98,61 @@ namespace Assessments.Transformation
             }
 
             Progress.ProgressBar.Message = $"Transformering fullført, {sourceItems.Count} vurderinger ble lagret";
+            Progress.ProgressBar.Dispose();
+        }
+
+        public static async Task UploadAttachments(IConfigurationRoot configuration, bool upload)
+        {
+            await SetupDatabaseContext(configuration);
+
+            Progress.ProgressBar = new ProgressBar(100, "Henter vedlegg", new ProgressBarOptions
+            {
+                DisplayTimeInRealTime = false,
+                EnableTaskBarProgress = true
+            });
+
+            var excludedExpertGroups = new List<string> { "Testedyr", "Ikke-marine invertebrater" };
+
+            var databaseAttachments = _dbContext.Attachments.Include(x=>x.Assessment).AsNoTracking()
+                .Where(x => (bool)!x.Assessment.IsDeleted 
+                            && !excludedExpertGroups.Contains(x.Assessment.Expertgroup)
+                            && x.IsDeleted == false);
+
+            var totalCount = await databaseAttachments.CountAsync();
+            var attachmentCount = 0;
+
+            Progress.ProgressBar.Tick(0, $"Laster opp {totalCount:N0} vedlegg");
+            Progress.ProgressBar.MaxTicks = totalCount;
+
+            foreach (var attachment in databaseAttachments)
+            {
+                var fa4 = JsonSerializer.Deserialize<FA4>(attachment.Assessment.Doc);
+
+                if (fa4 == null)
+                    continue;
+
+                // ekskluderer vurderinger som ligger under horisontskanning eller ikke har kategori
+                if (fa4.HorizonDoScanning || string.IsNullOrEmpty(fa4.Category))
+                {
+                    Progress.ProgressBar.Tick();
+                    continue;
+                }
+
+                // ekskluderer vurderinger som er "ikke fremmed" i 2023 og 2018
+                if (fa4.AlienSpeciesCategory == "NotAlienSpecie" && fa4.PreviousAssessments.FirstOrDefault(x => x.RevisionYear == 2018) is { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
+                {
+                    Progress.ProgressBar.Tick();
+                    continue;
+                }
+
+                if (upload)
+                    await Storage.UploadFile(configuration, "FAB4\\" + attachment.AssessmentId + "\\" + attachment.Id + "_" + attachment.FileName, attachment.File);
+
+                attachmentCount++;
+                Progress.ProgressBar.Tick();
+            }
+            
+            Progress.ProgressBar.Message = $"Opplasting fullført, {attachmentCount} vedlegg ble lagret";
             Progress.ProgressBar.Dispose();
         }
 

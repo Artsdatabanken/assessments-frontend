@@ -33,6 +33,7 @@ namespace Assessments.Transformation
                 "Rødlista 2021 - last opp i Azure",
                 "Fremmedartslista 2023 - til filer lokalt",
                 "Fremmedartslista 2023 - last opp i Azure",
+                "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure",
                 "Avslutt"
             };
 
@@ -56,6 +57,10 @@ namespace Assessments.Transformation
                         break;
                     case "Fremmedartslista 2023 - last opp i Azure":
                         await TransformAlienSpecies.TransformDataModels(configuration, upload: true);
+                        Environment.Exit(0);
+                        break;
+                    case "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure":
+                        await TransformAlienSpecies.UploadAttachments(configuration, upload: true);
                         Environment.Exit(0);
                         break;
                     case "Avslutt":

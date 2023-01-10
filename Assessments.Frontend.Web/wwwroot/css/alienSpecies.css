@@ -103,3 +103,8 @@ h1, h2, h3 {
         max-width: 500px;
     }
 }
+
+.collapsible {
+    margin-top: 0;
+    margin-bottom: 40px;
+}

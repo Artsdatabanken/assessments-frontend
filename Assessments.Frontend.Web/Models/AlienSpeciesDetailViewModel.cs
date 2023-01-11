@@ -26,7 +26,12 @@ namespace Assessments.Frontend.Web.Models
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 HasIndoorProduction = assessment.HasIndoorProduction,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
-                References = assessment.References,
+                References = assessment.References.Select(x => new CommonSimpleReference
+                {
+                    ReferenceId = x.ReferenceId,
+                    FormattedReference = x.FormattedReference,
+                    Type = x.Type
+                }).ToList(),
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
                 Summary = assessment.RiskAssessmentGeographicalVariationDocumentation,

@@ -41,7 +41,7 @@
                         <tr>
 
                         <td><b class="only_mobile">naturtype:</b>@natureType.Name</td>
-                        <td><b class="only_mobile">tidshorisont:</b>@natureType.TimeHorizon.DisplayName().ToLower()</td>
+                        <td><b class="only_mobile">tidshorisont:</b>@natureType.TimeHorizon.DisplayName()</td>
                         <td><b class="only_mobile">kolonisert areal (%):</b>@natureType.ColonizedArea</td>
                         <td><b class="only_mobile">tydelig tilstandsendring:</b>
                         @{ if(natureType.StateChange != null)
@@ -49,7 +49,7 @@
                              <ul>
                                 @{
                                     foreach (var state in natureType.StateChange)
-                                    {<li>@state.DisplayName().ToLower()</li>}
+                                    {<li>@state.DisplayName()</li>}
                                  }
                              </ul>
                             }

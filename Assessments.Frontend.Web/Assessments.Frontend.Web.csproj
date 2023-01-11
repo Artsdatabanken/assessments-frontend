@@ -11,7 +11,12 @@
 	
 	<ItemGroup>
 		<PackageReference Include="ClosedXML" Version="0.97.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.12" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.12" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.12">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="System.Text.Json" Version="6.0.7" />
 		<PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
@@ -25,6 +30,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Assessments.Data\Assessments.Data.csproj" />
 	  <ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
 	  <ProjectReference Include="..\Assessments.Shared\Assessments.Shared.csproj" />
 	</ItemGroup>

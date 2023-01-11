@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Net.Mail;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Assessments.Mapping.AlienSpecies.Helpers;
@@ -163,6 +164,19 @@ namespace Assessments.Mapping.AlienSpecies.Source
 
         //public Datasett Datasett { get; set; } = new Datasett();
         public string EvaluatedScientificNameRank { get; set; }
+
+        /// <summary>
+        /// Virtual list of attachments not existing in production model
+        /// </summary>
+        public Attachment[] Attachmemnts { get; set; }
+    }
+
+    public class Attachment
+    {
+        public int Id { get; set; }
+        public string Description { get; set; }
+        public string FileName { get; set; }
+        public string MimeType { get; set; }
     }
 
     public partial class FA4 // Horisontskanning

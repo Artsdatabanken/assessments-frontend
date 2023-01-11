@@ -211,6 +211,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "high", src.AssessmentConclusion));
                 })
+                .ForMember(dest => dest.Attachments, opt => opt.MapFrom(src => src.Attachmemnts))
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
@@ -235,6 +236,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.IsKnown, opt => opt.MapFrom(src => src.State0 == 1))
                 .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
                 .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));
+
+            CreateMap<Attachment, AlienSpeciesAssessment2023Attachment>(MemberList.None);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Assessments.Transformation
 
             var excludedExpertGroups = new List<string> { "Testedyr", "Ikke-marine invertebrater" };
 
-            var databaseAssessments = _dbContext.Assessments.AsNoTracking()
+            var databaseAssessments = _dbContext.Assessments.AsNoTracking().Include(x=>x.Attachments.Where(y=>y.IsDeleted == false))
                 .Where(x => (bool) !x.IsDeleted && !excludedExpertGroups.Contains(x.Expertgroup));
 
             var totalCount = await databaseAssessments.CountAsync();
@@ -51,22 +51,18 @@ namespace Assessments.Transformation
             {
                 var fa4 = JsonSerializer.Deserialize<FA4>(assessment.Doc);
 
-                if (fa4 == null)
+                if (fa4 == null || AssessmentToBeExcluded(fa4))
                     continue;
 
-                // ekskluderer vurderinger som ligger under horisontskanning eller ikke har kategori
-                if (fa4.HorizonDoScanning || string.IsNullOrEmpty(fa4.Category))
+                // datasett 
+                fa4.Attachmemnts = assessment.Attachments.Where(x=> !x.IsDeleted).Select(x => new Attachment()
                 {
-                    Progress.ProgressBar.Tick();
-                    continue;
-                }
+                    Id = x.Id, 
+                    Description = !string.IsNullOrWhiteSpace(x.Description) ? x.Description : x.Name, 
+                    FileName = x.FileName,
+                    MimeType = x.Type
+                }).ToArray();
 
-                // ekskluderer vurderinger som er "ikke fremmed" i 2023 og 2018
-                if (fa4.AlienSpeciesCategory == "NotAlienSpecie" && fa4.PreviousAssessments.FirstOrDefault(x => x.RevisionYear == 2018) is { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
-                {
-                    Progress.ProgressBar.Tick();
-                    continue;
-                }
 
                 fa4.Id = assessment.Id;
                 sourceItems.Add(fa4);
@@ -128,22 +124,8 @@ namespace Assessments.Transformation
             {
                 var fa4 = JsonSerializer.Deserialize<FA4>(attachment.Assessment.Doc);
 
-                if (fa4 == null)
+                if (fa4 == null || AssessmentToBeExcluded(fa4))
                     continue;
-
-                // ekskluderer vurderinger som ligger under horisontskanning eller ikke har kategori
-                if (fa4.HorizonDoScanning || string.IsNullOrEmpty(fa4.Category))
-                {
-                    Progress.ProgressBar.Tick();
-                    continue;
-                }
-
-                // ekskluderer vurderinger som er "ikke fremmed" i 2023 og 2018
-                if (fa4.AlienSpeciesCategory == "NotAlienSpecie" && fa4.PreviousAssessments.FirstOrDefault(x => x.RevisionYear == 2018) is { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
-                {
-                    Progress.ProgressBar.Tick();
-                    continue;
-                }
 
                 if (upload)
                     await Storage.UploadFile(configuration, "FAB4\\" + attachment.AssessmentId + "\\" + attachment.Id + "_" + attachment.FileName, attachment.File);
@@ -154,6 +136,27 @@ namespace Assessments.Transformation
             
             Progress.ProgressBar.Message = $"Opplasting fullført, {attachmentCount} vedlegg ble lagret";
             Progress.ProgressBar.Dispose();
+        }
+
+        private static bool AssessmentToBeExcluded(FA4 fa4)
+        {
+            // ekskluderer vurderinger som ligger under horisontskanning eller ikke har kategori
+            if (fa4.HorizonDoScanning || string.IsNullOrEmpty(fa4.Category))
+            {
+                Progress.ProgressBar.Tick();
+                return true;
+            }
+
+            // ekskluderer vurderinger som er "ikke fremmed" i 2023 og 2018
+            if (fa4.AlienSpeciesCategory == "NotAlienSpecie" &&
+                fa4.PreviousAssessments.FirstOrDefault(x => x.RevisionYear == 2018) is
+                    { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
+            {
+                Progress.ProgressBar.Tick();
+                return true;
+            }
+
+            return false;
         }
 
         private static async Task SetupDatabaseContext(IConfiguration configuration)

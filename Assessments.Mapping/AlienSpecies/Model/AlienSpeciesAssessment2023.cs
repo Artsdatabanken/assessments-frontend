@@ -460,5 +460,30 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Comment or description related to the estimation of expansion speed. Used for method EstimatedIncreaseInAOO.
         /// </summary>
         public string ExpansionSpeedEstimatedIncreaseInAOODescription { get; set; }
+
+        ///<summary>
+        /// The estimated expansion speed (low quantile) of the species in Norway.  
+        /// </summary>
+        public long ExpansionSpeedLowEstimate { get; set; }
+
+        ///<summary>
+        /// The estimated expansion speed (median/best estimate) of the species in Norway. 
+        /// </summary>
+        public long ExpansionSpeedBestEstimate { get; set; }
+
+        ///<summary>
+        /// The estimated expansion speed (high estimate) of the species in Norway. 
+        /// </summary>
+        public long ExpansionSpeedHighEstimate { get; set; }
+
+        /// <summary>
+        /// Species' occurrence in and impact on ecosystems (according to NiN-classification)
+        /// </summary>
+        public List<AlienSpeciesAssessment2023ImpactedNatureTypes> ImpactedNatureTypes { get; set; } = new();
+
+        /// <summary>
+        /// Pointer to parent assessment if child taxon is assessed at an higher level
+        /// </summary>
+        public int? ParentAssessmentId { get; set; }
     }
 }

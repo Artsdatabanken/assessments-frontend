@@ -116,6 +116,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string ListName { get; set; }
 
+        public int? ParentAssessmentId { get; set; }
+
         public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
 
         public string Status { get; set; }

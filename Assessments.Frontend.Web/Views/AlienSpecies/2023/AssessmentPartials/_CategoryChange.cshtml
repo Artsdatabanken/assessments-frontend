@@ -4,10 +4,11 @@
     var has2018Assessmnet = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018) ?? false;
     var category2018 = has2018Assessmnet ? Model.Assessment.PreviousAssessments?.Where(x => x.RevisionYear == 2018).Select(x => x.Category).FirstOrDefault() : null;
     var isNr = Model.Assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
+    var isEvaluatedAtAnotherLevel = Model.Assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var wasNr2018 = category2018 == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
     var sameAs2018 = Model.Assessment.Category == category2018;
 
-    var showMain = !(isNr && (sameAs2018 || !has2018Assessmnet));
+    var showMain = !((isNr && (sameAs2018 || !has2018Assessmnet)) || isEvaluatedAtAnotherLevel);
 
     var showNotAssessed2018 = category2018 == null || wasNr2018;
     var showSameAs2018 = !isNr && sameAs2018;

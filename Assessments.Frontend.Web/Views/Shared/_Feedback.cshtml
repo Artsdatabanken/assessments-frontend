@@ -26,6 +26,10 @@
         {
             validationCode = validationCodeCookie;
         }
+        else
+        {
+            Context.Response.Cookies.Delete(validationCookieName);
+        }
     }
 
     var emailIsValid = false;
@@ -50,6 +54,7 @@
         else
         {
             validationCodeIsInvalid = true;
+            Context.Response.Cookies.Delete(validationCookieName);
         }
     }
 }
@@ -68,38 +73,31 @@ else if (emailIsValid)
 {
     <div class="page_section">
         <form asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path + "#feedback")" class="feedback_form" method="post" enctype="multipart/form-data" novalidate>
-
             <div class="feedback_form_input_field">
                 <label asp-for="FullName"></label><br />
                 <input asp-for="FullName" />
                 <span asp-validation-for="FullName"></span>
             </div>
-
             <div class="feedback_form_input_field">
                 <label asp-for="Email"></label><br />
                 <input asp-for="Email" />
                 <span asp-validation-for="Email"></span>
             </div>
-
             <div class="feedback_form_input_field">
                 <label asp-for="Comment"></label><br />
                 <textarea asp-for="Comment" rows="5"></textarea>
                 <span asp-validation-for="Comment"></span>
             </div>
-
             <div class="feedback_form_input_field">
                 <label asp-for="FormFiles"></label><br />
                 <input asp-for="FormFiles" type="file" accept=".pdf, .doc, .docx" multiple>
                 <span asp-validation-for="FormFiles"></span>
             </div>
-
             <input asp-for="AssessmentId" type="hidden" />
             <input asp-for="Year" type="hidden" />
             <input asp-for="ExpertGroup" type="hidden" />
             <input asp-for="Type" type="hidden" />
-
             <button class="primary" type="submit">Send inn skjema</button>
-
         </form>
     </div>
 }
@@ -110,22 +108,18 @@ else
     </p>
 
     <div class="page_section">
-        <form asp-controller="Feedback" asp-action="ValidateEmail" asp-route-returnurl="@(Context.Request.Path + "#feedback")" method="post" enctype="multipart/form-data" novalidate>
-
+        <form asp-controller="Feedback" asp-action="ValidateEmail" asp-route-returnurl="@Context.Request.Path" method="post" enctype="multipart/form-data" novalidate>
             <div class="feedback_form_input_field">
                 <label asp-for="FullName"></label><br />
                 <input asp-for="FullName" />
                 <span asp-validation-for="FullName"></span>
             </div>
-
             <div class="feedback_form_input_field">
                 <label asp-for="Email"></label><br />
                 <input asp-for="Email" />
                 <span asp-validation-for="Email"></span>
             </div>
-
             <button class="primary" type="submit">Registrer e-postadresse</button>
-
         </form>
     </div>
 }

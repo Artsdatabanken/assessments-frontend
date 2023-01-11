@@ -566,11 +566,11 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023NoListViewResults = "Kombinasjonen av søk og filter gir ingen treff i Fremmedartslista for 2023.";
 
-        public const string AlienSpecies2023KnownOccurence = "Kjent utbredelse i dag";
+        public const string AlienSpecies2023KnownOccurrence = "Kjent utbredelse i dag";
 
-        public const string AlienSpecies2023AssumedOccurence = "Antatt utbredelse i dag";
+        public const string AlienSpecies2023AssumedOccurrence = "Antatt utbredelse i dag";
 
-        public const string AlienSpecies2023AssumedInFutureOccurence = "Antatt utbredelse om 50 år";
+        public const string AlienSpecies2023AssumedInFutureOccurrence = "Antatt utbredelse om 50 år";
     }
 
     public class CategoryComparer : IComparer<string>

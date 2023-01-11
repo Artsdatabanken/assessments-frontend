@@ -163,6 +163,11 @@ namespace Assessments.Mapping.AlienSpecies.Source
 
         //public Datasett Datasett { get; set; } = new Datasett();
         public string EvaluatedScientificNameRank { get; set; }
+
+        /// <summary>
+        /// Denne eksisterer kun virtuelt - ikke i produksjonsbasen - kun for lasting av vurderinger og gjenntatt transformasjon
+        /// </summary>
+        public int? ParentAssessmentId { get; set; }
     }
 
     public partial class FA4 // Horisontskanning

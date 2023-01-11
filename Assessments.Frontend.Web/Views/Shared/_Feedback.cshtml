@@ -8,10 +8,10 @@
 @{
     var feedbackMessage = TempData["feedback"] != null;
     var validationCode = Context.Request.Query["guid"];
-    
+
     var emailIsValid = false;
     var validationCodeIsInvalid = false;
-    
+
     if (!string.IsNullOrEmpty(validationCode))
     {
         var emailValidation = await DbContext.EmailValidations.AsNoTracking().FirstOrDefaultAsync(x => x.Guid == new Guid(validationCode));
@@ -41,39 +41,42 @@ else if (feedbackMessage)
 }
 else if (emailIsValid)
 {
-    <p>
-        Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod, iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
-    </p>
-    <form asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path + "#feedback")" method="post" enctype="multipart/form-data" novalidate>
+    <div class="page_section">
+        <form asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path + "#feedback")" class="feedback_form" method="post" enctype="multipart/form-data" novalidate>
 
-        <label asp-for="FullName"></label><br />
-        <input asp-for="FullName" />
-        <span asp-validation-for="FullName"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="FullName"></label><br />
+                <input asp-for="FullName" />
+                <span asp-validation-for="FullName"></span>
+            </div>
 
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="Email"></label><br />
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
 
-        <label asp-for="Comment"></label><br />
-        <textarea asp-for="Comment" rows="5"></textarea>
-        <span asp-validation-for="Comment"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="Comment"></label><br />
+                <textarea asp-for="Comment" rows="5"></textarea>
+                <span asp-validation-for="Comment"></span>
+            </div>
 
-        <label asp-for="FormFiles"></label><br />
-        <input asp-for="FormFiles" type="file" accept=".pdf, .doc, .docx, .xls, .xlsx" multiple>
-        <span asp-validation-for="FormFiles"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="FormFiles"></label><br />
+                <input asp-for="FormFiles" type="file" accept=".pdf, .doc, .docx" multiple>
+                <span asp-validation-for="FormFiles"></span>
+            </div>
 
-        <input asp-for="AssessmentId" type="hidden" />
-        <input asp-for="Year" type="hidden" />
-        <input asp-for="ExpertGroup" type="hidden" />
-        <input asp-for="Type" type="hidden" />
+            <input asp-for="AssessmentId" type="hidden" />
+            <input asp-for="Year" type="hidden" />
+            <input asp-for="ExpertGroup" type="hidden" />
+            <input asp-for="Type" type="hidden" />
 
-        <button type="submit">Send tilbakemelding</button>
+            <button class="primary" type="submit">Send inn skjema</button>
 
-    </form>
+        </form>
+    </div>
 }
 else
 {
@@ -81,21 +84,25 @@ else
         Registrer navn og e-postadresse for å få tilsendt en gyldig lenke for å sende tilbakemelding.
     </p>
 
-    <form asp-controller="Feedback" asp-action="ValidateEmail" asp-route-returnurl="@(Context.Request.Path + "#feedback")" method="post" enctype="multipart/form-data" novalidate>
+    <div class="page_section">
+        <form asp-controller="Feedback" asp-action="ValidateEmail" asp-route-returnurl="@(Context.Request.Path + "#feedback")" method="post" enctype="multipart/form-data" novalidate>
 
-        <label asp-for="FullName"></label><br />
-        <input asp-for="FullName" />
-        <span asp-validation-for="FullName"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="FullName"></label><br />
+                <input asp-for="FullName" />
+                <span asp-validation-for="FullName"></span>
+            </div>
 
-        <label asp-for="Email"></label><br />
-        <input asp-for="Email" />
-        <span asp-validation-for="Email"></span>
-        <br />
+            <div class="feedback_form_input_field">
+                <label asp-for="Email"></label><br />
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
 
-        <button type="submit">Registrer e-postadresse</button>
+            <button class="primary" type="submit">Registrer e-postadresse</button>
 
-    </form>
+        </form>
+    </div>
 }
 
 <script src="/js/aspnet-validation.min.js"></script>
@@ -107,7 +114,7 @@ else
 
 <style>
     .input-validation-error {
-        border-color: red;
+        border: 1px solid red;
         outline-color: red;
     }
 </style>

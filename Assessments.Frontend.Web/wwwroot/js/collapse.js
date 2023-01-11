@@ -3,10 +3,10 @@
 //with the appropriate class names and ids corresponing to what it is. The class name "initially_closed" is added
 // if you want to collapse the element initially.
 //
-//<div class="collapsible initially_closed" id="myCollapsible">
+//<div class="collapsible initially_closed">
 //    <div class="collapsible_header">
 //        <h2>This is header text</h2>
-//        <button onclick="toggleCollapsible(<id of main element. In this case " myCollapsible">)">
+//        <button onclick="toggleCollapsible(this)">
 //            <span class="material-icons expanded_icon">expand_less</span>
 //            <span class="material-icons collapsed_icon">expand_more</span>
 //        </button>

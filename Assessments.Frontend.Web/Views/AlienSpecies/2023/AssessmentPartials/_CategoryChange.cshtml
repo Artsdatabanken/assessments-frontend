@@ -7,9 +7,9 @@
     var wasNr2018 = category2018 == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
     var sameAs2018 = Model.Assessment.Category == category2018;
 
-    var showMain = !(category2018 != null && isNr) || !(isNr || sameAs2018);
+    var showMain = !(isNr && (sameAs2018 || !has2018Assessmnet));
 
-    var showNotAssessed2018 = !isNr && (category2018 == null || wasNr2018);
+    var showNotAssessed2018 = category2018 == null || wasNr2018;
     var showSameAs2018 = !isNr && sameAs2018;
 
     var category2018WithName = category2018 != null ? $"{category2018.DisplayName().ToLower()} - {category2018}" : string.Empty;
@@ -21,7 +21,7 @@
     var showChangedCriteria = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteria");
     var showChangedCriteriaInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteriaInterpretation");
     var showChangedStatus = Model.Assessment.ReasonForChangeOfCategory.Contains("changedStatus");
-    var showReasonsForChangeDescription = !string.IsNullOrEmpty(Model.Assessment.ReasonsForChangeOfCategoryDescription);
+    var showReasonsForChangeDescription = !wasNr2018 && !showSameAs2018 && !string.IsNullOrEmpty(Model.Assessment.ReasonsForChangeOfCategoryDescription);
 }
 
 <div is-visible="showMain" class="page_section">

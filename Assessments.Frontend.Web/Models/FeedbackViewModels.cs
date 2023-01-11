@@ -1,6 +1,5 @@
 ﻿using Assessments.Data.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -25,6 +24,10 @@ namespace Assessments.Frontend.Web.Models
         [MaxLength(10000, ErrorMessage = "{0} kan ha maks {1} tegn")]
         [Display(Name = "Kommentar")]
         public string Comment { get; set; }
+        
+        [Display(Name = "Godta vilkår")]
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Du må godkjenne vilkårene")]
+        public bool Terms { get; set; }
 
         [Display(Name = "Filer")]
         public List<IFormFile> FormFiles { get; set; }

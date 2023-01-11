@@ -110,6 +110,8 @@ namespace Assessments.Frontend.Web.Models
     {
         public AlienSpeciesAssessment2023Environment Environment { get; set; }
 
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
+
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }

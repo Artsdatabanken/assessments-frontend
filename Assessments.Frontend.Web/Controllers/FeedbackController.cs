@@ -46,11 +46,12 @@ namespace Assessments.Frontend.Web.Controllers
                 var worksheet2 = workbook.Worksheets.Add("Vedlegg");
 
                 worksheet2.Cell(1, 1).Value = "FeedbackId";
-                worksheet2.Cell(1, 2).Value = "Filnavn";
+                worksheet2.Cell(1, 2).Value = "ExpertGroup";
+                worksheet2.Cell(1, 3).Value = "FileName";
 
                 var row = 1;
 
-                var attachments = await _dbContext.FeedbackAttachments.AsNoTracking().ToListAsync();
+                var attachments = await _dbContext.FeedbackAttachments.Include(x => x.Feedback).AsNoTracking().ToListAsync();
                 
                 var baseUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}";
 
@@ -59,9 +60,10 @@ namespace Assessments.Frontend.Web.Controllers
                     ++row;
 
                     worksheet2.Cell(row, 1).Value = attachment.FeedbackId;
-                    worksheet2.Cell(row, 2).Value = attachment.FileName;
-                    worksheet2.Cell(row, 2).SetHyperlink(new XLHyperlink($"{baseUrl}/feedback/attachment/{attachment.Id}?secret={_feedbackSecret}"));
-                    worksheet2.Cell(row, 2).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
+                    worksheet2.Cell(row, 2).Value = attachment.Feedback.ExpertGroup;
+                    worksheet2.Cell(row, 3).Value = attachment.FileName;
+                    worksheet2.Cell(row, 3).SetHyperlink(new XLHyperlink($"{baseUrl}/feedback/attachment/{attachment.Id}?secret={_feedbackSecret}"));
+                    worksheet2.Cell(row, 3).Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Left);
                 }
 
                 workbook.Worksheet(2).Columns().AdjustToContents();
@@ -85,7 +87,7 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> AddFeedback(FeedbackFormViewModel formViewModel, string returnUrl)
         {
             if (!ModelState.IsValid)
-                return BadRequest("Beklager, en feil oppstod ved innsending av skjema");
+                return BadRequest("Beklager, en feil oppstod ved innsending av skjema.");
 
             var feedback = new Feedback
             {
@@ -94,7 +96,7 @@ namespace Assessments.Frontend.Web.Controllers
                 Type = formViewModel.Type,
                 ExpertGroup = formViewModel.ExpertGroup,
                 FullName = formViewModel.FullName.Trim().StripHtml(),
-                Email = formViewModel.Email,
+                Email = formViewModel.Email.ToLowerInvariant(),
                 Comment = formViewModel.Comment.Trim().StripHtml()
             };
 
@@ -108,7 +110,7 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 await _blob.CreateIfNotExistsAsync();
 
-                string[] permittedExtensions = { ".pdf", ".doc", ".docx" };
+                string[] permittedExtensions = { ".pdf", ".doc", ".docx", ".xls", ".xlsx" };
 
                 foreach (var formFile in formViewModel.FormFiles)
                 {
@@ -137,7 +139,7 @@ namespace Assessments.Frontend.Web.Controllers
                 await _dbContext.SaveChangesAsync();
             }
 
-            TempData["feedback"] = "OK";
+            TempData["feedback"] = "Takk for tilbakemeldingen.";
 
             return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : BadRequest();
         }
@@ -160,6 +162,28 @@ namespace Assessments.Frontend.Web.Controllers
             var stream = await file.OpenReadAsync();
 
             return File(stream, "application/octet-stream", attachment.FileName);
+        }
+
+        public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl)
+        {
+            ModelState.Remove(nameof(FeedbackFormViewModel.Comment));
+
+            if (!ModelState.IsValid)
+                return BadRequest("Beklager, en feil oppstod ved innsending av skjema.");
+
+            _dbContext.EmailValidations.Add(new EmailValidation
+            {
+                Email = viewModel.Email.ToLowerInvariant(),
+                FullName = viewModel.FullName.Trim()
+            });
+
+            await _dbContext.SaveChangesAsync();
+
+            TempData["feedback"] = $"Du vil bli tilsendt en e-post (til {viewModel.Email}) med lenke for tilbakemelding.";
+
+            // TODO: send epost og lenke med sendgrid
+            
+            return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : BadRequest();
         }
     }
 }

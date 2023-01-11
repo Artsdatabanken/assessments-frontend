@@ -25,20 +25,16 @@ namespace Assessments.Frontend.Web.Models
         [MaxLength(10000, ErrorMessage = "{0} kan ha maks {1} tegn")]
         [Display(Name = "Kommentar")]
         public string Comment { get; set; }
-        
-        [Required, HiddenInput]
-        public int AssessmentId { get; set; }
-
-        [Required, HiddenInput]
-        public int Year { get; set; }
-
-        [Required, HiddenInput]
-        public string ExpertGroup { get; set; }
-
-        [Required, HiddenInput]
-        public FeedbackType Type { get; set; }
 
         [Display(Name = "Filer")]
         public List<IFormFile> FormFiles { get; set; }
+        
+        public int AssessmentId { get; set; }
+
+        public int Year { get; set; }
+
+        public string ExpertGroup { get; set; }
+
+        public FeedbackType Type { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿@model AlienSpeciesDetailViewModel
 @using Assessments.Mapping.AlienSpecies.Model.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Assessments.Data.Models
 
 @{
     var assessment = Model.Assessment;
@@ -61,6 +63,7 @@
         Category = assessment.Category,
         Environment = assessment.Environment,
         ListName = Constants.AlienSpecies2023PageMenuHeaderText,
+        ParentAssessmentId = assessment.ParentAssessmentId,
         SpeciesStatus = assessment.SpeciesStatus,
         Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
         TaxonRank = assessment.ScientificNameRank
@@ -107,6 +110,7 @@
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_GeographicVariationInCategory.cshtml"  />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RegionalSpread.cshtml" model="Model.RegionalSpreadViewModel" />
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
+                <partial name="/Views/Shared/_Feedback.cshtml" model="new FeedbackFormViewModel { Year = 2023, AssessmentId = assessment.Id, ExpertGroup = assessment.ExpertGroup, Type = FeedbackType.AlienSpecies }" />
             </div>
         </div>
         <div class="side mobile_padding">
@@ -114,3 +118,4 @@
         </div>
     </div>
 </div>
+

@@ -219,17 +219,23 @@
         </g>
     </svg>
     <div>
-            <span>@Model.MapText:</span>
-            <span>
-                @{
-                    for (var i = 0; i < Model.RegionOccurrences.Count; i++)
-                        {
-                        if (i + 1 < Model.RegionOccurrences.Count)
-                            {<span>@Model.RegionOccurrences[i].Region.DisplayName(), </span>}
-                        else
-                            {<span>@Model.RegionOccurrences[i].Region.DisplayName().</span>}
-                    }
+        <span>@Model.MapText:</span>
+        <span>
+            @{
+                for (var i = 0; i < Model.RegionOccurrences.Count; i++)
+                {
+                if (i + 1 < Model.RegionOccurrences.Count)
+                    {<span>@Model.RegionOccurrences[i].Region.DisplayName(), </span>}
+                else
+                {
+                    <span>@Model.RegionOccurrences[i].Region.DisplayName().</span>
                 }
-            </span>
+            }
+            if (Model.RegionOccurrences.Count == 0)
+            {
+                <span>ingen angitte områder.</span>
+            }
+        }
+        </span>
     </div>
 </div>

@@ -306,6 +306,10 @@ span.material-icons.less {
     width:120px;
 }
 
+.map.N {
+    width: 33%;
+}
+
 .region_list_header {
     border-bottom: 1px solid #4c4a48;
 }

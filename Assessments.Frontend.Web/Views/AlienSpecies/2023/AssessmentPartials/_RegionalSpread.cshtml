@@ -90,19 +90,17 @@
                         </div>
                     </div> 
                     <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
-
                         <tr>
                             <th>Antatt i løpet av en periode på 10 år</th>
                             <th>Antall forekomster fra én introduksjon  </th>
                             <th>Antall ytterligere introduksjoner til norsk natur </th>
-                            <th>Forekomstareal </th>
+                            <th>Forekomstareal etter 10 år </th>
                         </tr>
-                        
                         <tr>
                             <td>Lavt anslag</td> 
                             <td>@Model.RiskAssessmentOccurrences1Low </td> 
                             <td>@Model.RiskAssessmentIntroductionsLow </td>
-                                <td>@Model.AreaOfOccupancyFutureLow  km<sup>2</sup></td>
+                            <td>@Model.AreaOfOccupancyFutureLow  km<sup>2</sup></td>
                         </tr>
                         <tr>
                             <td>Beste anslag</td>
@@ -121,7 +119,7 @@
                         <div is-visible="Model.IsSvalbard" class="map S">
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture"/>
                         </div>
-                        <div is-visible="!Model.IsSvalbard" class="map">
+                        <div is-visible="!Model.IsSvalbard" class="map N">
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
                         </div> 
                     </div>

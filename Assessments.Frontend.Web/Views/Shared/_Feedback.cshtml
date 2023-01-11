@@ -94,8 +94,7 @@ else if (emailIsValid)
                 <span asp-validation-for="FormFiles"></span>
             </div>
             <div class="feedback_form_input_field">
-                <input asp-for="Terms" /> <label asp-for="Terms"></label><br />
-                <span asp-validation-for="Terms"></span>
+                <input asp-for="Terms" /><label asp-for="Terms"></label> <a asp-action="Terms" asp-controller="Feedback" target="_blank">Se vilkårene her</a> <span asp-validation-for="Terms"></span>
             </div>
             <input asp-for="AssessmentId" type="hidden" />
             <input asp-for="Year" type="hidden" />
@@ -124,8 +123,7 @@ else
                 <span asp-validation-for="Email"></span>
             </div>
             <div class="feedback_form_input_field">
-                <input asp-for="Terms" /> <label asp-for="Terms"></label><br />
-                <span asp-validation-for="Terms"></span>
+                <input asp-for="Terms" /><label asp-for="Terms"></label> <a asp-action="Terms" asp-controller="Feedback" target="_blank">Se vilkårene her</a> <span asp-validation-for="Terms"></span>
             </div>
             <button class="primary" type="submit">Registrer e-postadresse</button>
         </form>

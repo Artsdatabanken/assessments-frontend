@@ -223,5 +223,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : BadRequest();
         }
+
+        public IActionResult Terms() => View();
     }
 }

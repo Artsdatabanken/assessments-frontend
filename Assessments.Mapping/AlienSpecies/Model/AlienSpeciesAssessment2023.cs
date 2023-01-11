@@ -480,5 +480,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Species' occurrence in and impact on ecosystems (according to NiN-classification)
         /// </summary>
         public List<AlienSpeciesAssessment2023ImpactedNatureTypes> ImpactedNatureTypes { get; set; } = new();
+
+        /// <summary>
+        /// Pointer to parent assessment if child taxon is assessed at an higher level
+        /// </summary>
+        public int? ParentAssessmentId { get; set; }
     }
 }

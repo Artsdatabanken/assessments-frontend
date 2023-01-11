@@ -198,20 +198,20 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOODescription, opt => opt.MapFrom(src => src.RiskAssessment.CommentOrDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.ExpansionSpeedLowEstimate, opt =>
                 {
-                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished");
+                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "low", src.AssessmentConclusion));
                 })
                 .ForMember(dest => dest.ExpansionSpeedBestEstimate, opt =>
                 {
-                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished");
+                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "best", src.AssessmentConclusion));
                 })
                 .ForMember(dest => dest.ExpansionSpeedHighEstimate, opt =>
                 {
-                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished");
+                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "high", src.AssessmentConclusion));
                 })
-
+                .ForMember(dest => dest.ParentAssessmentId, opt => opt.MapFrom(src => src.ParentAssessmentId))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

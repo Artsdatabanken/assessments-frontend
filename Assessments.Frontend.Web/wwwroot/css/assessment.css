@@ -894,7 +894,10 @@ span.area i {
     .big-data-table .only_mobile{
         display:block;
         color:grey;
-        text-transform:capitalize
+    }
+
+    .big-data-table only_mobile:first-letter {
+        text-transform: capitalize
     }
 
     .big-data-table td:first-child .only_mobile{

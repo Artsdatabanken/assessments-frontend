@@ -1,0 +1,75 @@
+﻿@model AlienSpeciesDetailViewModel;
+@using Assessments.Mapping.AlienSpecies.Model.Enums;
+
+@{
+    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var natureTypes = @Model.Assessment.ImpactedNatureTypes;
+}
+
+<div is-visible="showPage" class="page_section">
+    <div id="show_category_changed" class="collapsible initially_closed">
+        <div class="collapsible_header">
+            <h2>Naturtypetilhørighet</h2>
+            <button class="hide" onclick="toggleCollapsible(this)">
+                <span class="material-icons expanded_icon">expand_less</span>
+                <span class="material-icons collapsed_icon">expand_more</span>
+            </button>
+        </div>
+        <div class="collapsible_content">
+            <p>Her vises naturtypene den fremmede arten er observert i, eller/og naturtyper som er potensielle habitater for arten i Norge, samt påvirkningen arten har eller antas å ha i naturtypene. </p>
+            
+            <h3>Valgte truede, sjeldne og øvrige naturtyper</h3>
+            <p>Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens (eventuelt framtidige) påvirkning i naturtypen og anslått andel av naturtypens areal som blir eller vil bli påvirket (F- og G-kriteriet).</p>
+        
+            <table>
+                <tr>
+                    <th>Naturtype</th>
+                    <th>Tidshorisont</th>
+                    <th>Kolonisert areal (%)</th>
+                    <th>Tydelig tilstandsendring</th>
+                    <th>Tydelig påvirka areal (%)</th>
+                    <th>Vurderingsgrunnlag</th>
+                </tr>
+                @{
+                    
+                        foreach (var natureType in natureTypes)
+                    {
+                        <tr>
+
+                        <td>@natureType.Name</td>
+                        <td>@natureType.TimeHorizon.DisplayName()</td>
+                        <td>@natureType.ColonizedArea</td>
+                        <td>
+                        @{ if(natureType.StateChange != null)
+                            { 
+                             <ul>
+                                @{
+                                    foreach (var state in natureType.StateChange)
+                                    {<li>@state.DisplayName()</li>}
+                                 }
+                             </ul>
+                            }
+                        }
+                        </td>
+                        <td>@natureType.AffectedArea</td>
+                         <td>
+                        @{ if(natureType.Background != null)
+                            { 
+                             <ul>
+                                @{
+                                    foreach (var bg in natureType.Background)
+                                    {<li>@bg.DisplayName()</li>}
+                                 }
+                             </ul>
+                            }
+                        }
+                        </td>
+                        </tr>
+                    }
+                    
+                    
+                }
+            </table>
+        </div>
+    </div>
+</div>

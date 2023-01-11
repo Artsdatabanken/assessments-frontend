@@ -46,6 +46,7 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
                 Category = assessment.Category,
                 CurrentPresenceComment = assessment.CurrentPresenceComment,
+                IsSvalbard = assessment.EvaluationContext == Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.S,
                 RegionOccurrences = assessment.RegionOccurrences,
                 RiskAssessmentIntroductionsLow = assessment.RiskAssessmentIntroductionsLow,
                 RiskAssessmentIntroductionsBest = assessment.RiskAssessmentIntroductionsBest,

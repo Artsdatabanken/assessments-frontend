@@ -139,6 +139,8 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public bool IsSvalbard { get; set; }
+
         public int? RiskAssessmentIntroductionsLow { get; set; }
 
         public int? RiskAssessmentIntroductionsBest { get; set; }

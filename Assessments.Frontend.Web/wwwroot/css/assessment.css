@@ -825,13 +825,13 @@ span.area i {
 }
 
 .collapsible .collapsible_content {
-    padding: 8px 20px;
+    padding: 20px;
+    padding-bottom:5px;
     border-top: 1px solid lightgrey;
 }
 
 .darktheme .collapsible .collapsible_content {
-    padding: 8px 20px;
-    border-top: 1px solid white;
+    border-color: white;
 }
 
 .collapsible_header h2 {
@@ -853,8 +853,6 @@ span.area i {
 .darktheme .big-data-table {
     background: #201f1f;
 }
-
-
 
 .big-data-table th,
 .big-data-table td {
@@ -932,4 +930,10 @@ span.area i {
         padding-bottom: 8px;
         display: block;
     }
+}
+
+.table-description {
+    padding: 4px;
+    border: none;
+    margin-bottom: 4px;
 }

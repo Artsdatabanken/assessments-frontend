@@ -1,13 +1,32 @@
 ﻿@model FeedbackFormViewModel
 
 @using Assessments.Data
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.EntityFrameworkCore
 
 @inject AssessmentsDbContext DbContext
 
 @{
     var feedbackMessage = TempData["feedback"] != null;
-    var validationCode = Context.Request.Query["guid"];
+    var validationCode = string.Empty;
+    var validationCodeQuerystring = Context.Request.Query["guid"];
+
+    const string validationCookieName = "FeedbackValidation";
+
+    if (!string.IsNullOrEmpty(validationCodeQuerystring) && Guid.TryParse(validationCodeQuerystring, out _))
+    {
+        validationCode = validationCodeQuerystring;
+    }
+    else
+    {
+        var validationCodeCookie = Context.Request.Cookies[validationCookieName];
+
+        if (!string.IsNullOrEmpty(validationCodeCookie) && Guid.TryParse(validationCodeCookie, out _))
+        {
+            validationCode = validationCodeCookie;
+        }
+    }
 
     var emailIsValid = false;
     var validationCodeIsInvalid = false;
@@ -19,8 +38,14 @@
         if (emailValidation != null)
         {
             emailIsValid = true;
+
             Model.FullName = emailValidation.FullName;
             Model.Email = emailValidation.Email;
+            
+            Context.Response.Cookies.Append(validationCookieName, emailValidation.Guid.ToString(), new CookieOptions
+            {
+                Expires = DateTime.Now.AddMonths(1)
+            });
         }
         else
         {
@@ -33,7 +58,7 @@
 
 @if (validationCodeIsInvalid)
 {
-    <p>Lenke for validering av e-post er ugyldig.</p>
+    <p>Lenken for validering av e-post er ugyldig.</p>
 }
 else if (feedbackMessage)
 {

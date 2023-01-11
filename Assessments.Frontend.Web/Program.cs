@@ -7,6 +7,7 @@ using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.Api;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -59,6 +60,13 @@ app.UseStaticFiles(new StaticFileOptions
         ctx.Context.Response.Headers.Append("Expires",
             DateTime.UtcNow.AddDays(1).ToString("R", CultureInfo.InvariantCulture));
     }
+});
+
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    Secure = CookieSecurePolicy.Always, 
+    HttpOnly = HttpOnlyPolicy.Always, 
+    MinimumSameSitePolicy = SameSiteMode.Strict
 });
 
 var cachedFilesFolder = Path.Combine(app.Environment.ContentRootPath, Constants.CacheFolder);

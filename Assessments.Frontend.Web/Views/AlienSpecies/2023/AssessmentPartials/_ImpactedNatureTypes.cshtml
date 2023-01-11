@@ -21,14 +21,14 @@
             <h3>Valgte truede, sjeldne og øvrige naturtyper</h3>
             <p>Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens (eventuelt framtidige) påvirkning i naturtypen og anslått andel av naturtypens areal som blir eller vil bli påvirket (F- og G-kriteriet).</p>
         
-            <table>
+            <table class="big-data-table">
                 <tr>
-                    <th>Naturtype</th>
-                    <th>Tidshorisont</th>
-                    <th>Kolonisert areal (%)</th>
-                    <th>Tydelig tilstandsendring</th>
-                    <th>Tydelig påvirka areal (%)</th>
-                    <th>Vurderingsgrunnlag</th>
+                    <th>naturtype</th>
+                    <th>tidshorisont</th>
+                    <th>kolonisert areal (%)</th>
+                    <th>tydelig tilstandsendring</th>
+                    <th>tydelig påvirka areal (%)</th>
+                    <th>vurderingsgrunnlag</th>
                 </tr>
                 @{
                     
@@ -36,23 +36,23 @@
                     {
                         <tr>
 
-                        <td>@natureType.Name</td>
-                        <td>@natureType.TimeHorizon.DisplayName()</td>
-                        <td>@natureType.ColonizedArea</td>
-                        <td>
+                        <td><b class="only_mobile">naturtype:</b>@natureType.Name</td>
+                        <td><b class="only_mobile">tidshorisont:</b>@natureType.TimeHorizon.DisplayName().ToLower()</td>
+                        <td><b class="only_mobile">kolonisert areal (%):</b>@natureType.ColonizedArea</td>
+                        <td><b class="only_mobile">tydelig tilstandsendring:</b>
                         @{ if(natureType.StateChange != null)
                             { 
                              <ul>
                                 @{
                                     foreach (var state in natureType.StateChange)
-                                    {<li>@state.DisplayName()</li>}
+                                    {<li>@state.DisplayName().ToLower()</li>}
                                  }
                              </ul>
                             }
                         }
                         </td>
-                        <td>@natureType.AffectedArea</td>
-                         <td>
+                        <td><b class="only_mobile">tydelig påvirka areal (%):</b>@natureType.AffectedArea</td>
+                         <td><b class="only_mobile">vurderingsgrunnlag:</b>
                         @{ if(natureType.Background != null)
                             { 
                              <ul>

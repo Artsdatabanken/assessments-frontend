@@ -1,8 +1,8 @@
-﻿using System;
+﻿using Assessments.Mapping.RedlistSpecies.Source;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Assessments.Mapping.RedlistSpecies.Source;
 
 namespace Assessments.Mapping.RedlistSpecies.Helpers
 {
@@ -305,7 +305,7 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
             "Maneter" => "Stormaneter",
             _ => mainHabitat
         };
-    
+
         /// <summary>
         /// Mapper om bl.a. 2010 id'er og beskrivelser over til 2015 versjonen av påvirkningsfaktorer - samt fixer eldre tekster som er blitt endret
         /// </summary>
@@ -614,7 +614,7 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
             SetQuantile(dest.A4.QuantifiedReduction, 0.7);
 
             SetQuantile(dest.B1.Statistics, 0.3); //.B1IntervallUtbredelsesområde
-            SetQuantile(dest.B2.Statistics , 0.3); // rl2021.B2IntervallForekomstareal
+            SetQuantile(dest.B2.Statistics, 0.3); // rl2021.B2IntervallForekomstareal
 
             // I henhold til IUCNs retningslinjer skal EOO (utbredelsesområdet) settes likt AOO (forekomstareal) når AOO>EOO.
             if (GetQuantile(dest.B1.Statistics, 0.3) < GetQuantile(dest.B2.Statistics, 0.3))
@@ -624,7 +624,7 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
 
 
 
-            SetQuantile(dest.BAii.Statistics , 0.3); // rl2021.BaIntervallAntallLokaliteter
+            SetQuantile(dest.BAii.Statistics, 0.3); // rl2021.BaIntervallAntallLokaliteter
 
             SetQuantile(dest.C.Statistics, 0.3); //  rl2021.CPopulasjonsstørrelseAntatt
 
@@ -651,8 +651,8 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
                 case "Reell populasjonsendring":
                     return CategoryChangeReason.RealPopulationChange;
                 case "Endret (ny eller annen) kunnskap":
-                        return CategoryChangeReason.NewKnowledge;
-                case "Endrete kriterier eller tilpasning til regler":return CategoryChangeReason.CriteriaAdjustments;
+                    return CategoryChangeReason.NewKnowledge;
+                case "Endrete kriterier eller tilpasning til regler": return CategoryChangeReason.CriteriaAdjustments;
                 case "Ny tolkning av tidligere data":
                     return CategoryChangeReason.NewIntepretation;
                 case "Arten nyoppdaget eller nybeskrevet for landet":
@@ -676,12 +676,12 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
             var trackInfo = src.ImportInfo;
             var result = new List<PreviousAssessment>();
             if (trackInfo == null) return result.ToArray();
-            
+
             if (trackInfo.Kategori2015 != null && trackInfo.Kategori2015.Length > 0 && src.SistVurdertAr == 2015)
             {
                 result.Add(new PreviousAssessment()
                 {
-                    Year = 2015, 
+                    Year = 2015,
                     Category = trackInfo.Kategori2015.Replace("º", "°"),
                     CriteriaSummarized = trackInfo.Kriterier2015,
                     ScientificNameId = trackInfo.ScientificNameId2015,
@@ -721,9 +721,9 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
             if (dest.AssessmentArea == "S")
             {
                 var category = dest.Category.ToLowerInvariant().Substring(0, 2);
-                if (dest.PresumedExtinct && category=="cr")
+                if (dest.PresumedExtinct && category == "cr")
                 {
-                    dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence(){ Fylke = "Svalbard", State = 3});
+                    dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence() { Fylke = "Svalbard", State = 3 });
                 }
                 else if (category == "re")
                 {
@@ -733,7 +733,7 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
                 {
                     dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence() { Fylke = "Svalbard", State = 0 });
                 }
-                else if(_notKnownCategories.Contains(category))
+                else if (_notKnownCategories.Contains(category))
                 {
                     dest.RegionOccurrences.Add(new SpeciesAssessment2021RegionOccurrence() { Fylke = "Svalbard", State = 2 });
                 }
@@ -758,9 +758,9 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
 
         public static void FixSomeTaxonomy(Rodliste2019 src, SpeciesAssessment2021 dest)
         {
-            if (src.TaxonomyInfo!= null)
+            if (src.TaxonomyInfo != null)
             {
-                var rank = (src.TaxonomyInfo.Rank.Substring(0,1).ToUpper() + src.TaxonomyInfo.Rank.Substring(1));
+                var rank = (src.TaxonomyInfo.Rank.Substring(0, 1).ToUpper() + src.TaxonomyInfo.Rank.Substring(1));
                 if (rank == "Subspecies") rank = "SubSpecies";
                 if (dest.TaxonRank != rank)
                 {
@@ -773,7 +773,7 @@ namespace Assessments.Mapping.RedlistSpecies.Helpers
                     switch (src.TaxonomyInfo.Rank)
                     {
                         case "species":
-                            var names = src.TaxonomyInfo.ScientificName.Split(new []{" "}, StringSplitOptions.RemoveEmptyEntries);
+                            var names = src.TaxonomyInfo.ScientificName.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
                             if (names.Length == 2)
                             {
                                 dest.ScientificName = names[0] + " (" + subgenus.ScientificName + ") " + names.Last();

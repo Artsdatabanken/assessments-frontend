@@ -116,6 +116,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string ListName { get; set; }
 
+        public int? ParentAssessmentId { get; set; }
+
         public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
 
         public string Status { get; set; }
@@ -139,6 +141,21 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public bool IsSvalbard { get; set; }
+
+        public int? RiskAssessmentIntroductionsLow { get; set; }
+
+        public int? RiskAssessmentIntroductionsBest { get; set; }
+
+        public int? RiskAssessmentIntroductionsHigh { get; set; }
+
+        public int? RiskAssessmentOccurrences1Low { get; set; }
+
+        public int? RiskAssessmentOccurrences1Best { get; set; }
+
+        public int? RiskAssessmentOccurrences1High { get; set; }
+
+
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
@@ -150,7 +167,11 @@ namespace Assessments.Frontend.Web.Models
 
     public class MapViewModel
     {
+        public string MapName { get; set; }
+
         public string MapText { get; set; }
+
+        public string MapDescription { get; set; }
 
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
     }

@@ -24,6 +24,7 @@ namespace Assessments.Frontend.Web.Models
                 CriteriaDocumentationInvasionPotential = assessment.RiskAssessmentCriteriaDocumentationInvasionPotential,
                 CriteriaDocumentationSpeciesStatus = assessment.RiskAssessmentCriteriaDocumentationSpeciesStatus,
                 ChangedFromAlien = assessment.ChangedFromAlien,
+                EvaluationContext = assessment.EvaluationContext,
                 HasIndoorProduction = assessment.HasIndoorProduction,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,

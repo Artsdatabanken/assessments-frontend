@@ -13,8 +13,8 @@
     var showNotAssessed2018 = category2018 == null || wasNr2018;
     var showSameAs2018 = !isNr && sameAs2018;
 
-    var category2018WithName = category2018 != null ? $"{category2018.DisplayName().ToLower()} - {category2018}" : string.Empty;
-    var category2023WithName = $"{Model.Assessment.Category.DisplayName().ToLower()} - {Model.Assessment.Category}";
+    var category2018WithName = category2018 != null ? $"<i>{category2018.DisplayName().ToLower()}</i> - {category2018}" : string.Empty;
+    var category2023WithName = $"<i>{Model.Assessment.Category.DisplayName().ToLower()}</i> - {Model.Assessment.Category}";
 
     var showRealChange = Model.Assessment.ReasonForChangeOfCategory.Contains("realChange");
     var showNewKnowledge = Model.Assessment.ReasonForChangeOfCategory.Contains("newInformation");
@@ -42,13 +42,16 @@
                 Denne arten er vurdert til samme risikokategori som i Fremmedartslista 2018
             </p>
             <div is-visible="!showNotAssessed2018 && !showSameAs2018">
-                Kategorien for denne arten er endret fra @category2018WithName til @category2023WithName siden Fremmedartslista 2018. Dette skyldes:
-                <p is-visible="showRealChange">- Reel endring i utbredelse, forekomstareal og/eller økologiske effekter</p>
-                <p is-visible="showNewKnowledge">- Ny kunnskap</p>
-                <p is-visible="showNewInterpretation">- Ny tolkning av tidligere data</p>
-                <p is-visible="showChangedCriteria">- Endrede avgrensninger eller retningslinjer</p>
-                <p is-visible="showChangedCriteriaInterpretation">- Endret tolkning av retningslinjer</p>
-                <p is-visible="showChangedStatus">- Endret status (inkl. taksonomi, til stedegen)</p>
+                <p>Kategorien for denne arten er endret fra @Html.Raw(category2018WithName) til @Html.Raw(category2023WithName) siden Fremmedartslista 2018. Dette skyldes:</p>
+                <ul>
+                    <li is-visible="showRealChange">Reel endring i utbredelse, forekomstareal og/eller økologiske effekter</li>
+                    <li is-visible="showNewKnowledge">Ny kunnskap</li>
+                    <li is-visible="showNewInterpretation">Ny tolkning av tidligere data</li>
+                    <li is-visible="showChangedCriteria">Endrede avgrensninger eller retningslinjer</li>
+                    <li is-visible="showChangedCriteriaInterpretation">Endret tolkning av retningslinjer</li>
+                    <li is-visible="showChangedStatus">Endret status (inkl. taksonomi, til stedegen)</li>
+                </ul>
+                <br />
             </div>
             <div is-visible="showReasonsForChangeDescription">
                 Utfyllende beskrivelse av årsaken(e) for endret risikokategori:

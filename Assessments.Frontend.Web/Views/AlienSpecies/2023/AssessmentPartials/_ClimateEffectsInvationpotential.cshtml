@@ -2,7 +2,7 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
     var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
     var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";

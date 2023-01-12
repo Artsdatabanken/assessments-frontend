@@ -82,7 +82,7 @@ figure.risk-level-matrix table .cat-se {
     border-color: #5e3063;
 }
 
-figure.risk-level-matrix table .active {
+figure.risk-level-matrix table td.active {
     border-color: #FFF;
 }
 
@@ -93,29 +93,9 @@ figure.risk-level-matrix table .active > b {
     border: medium solid #FFF;
 }
 
-figure.risk-level-matrix table .uncertain {
+figure.risk-level-matrix table td.uncertain {
     border-color: #FFF;
-}
-
-figure.risk-level-matrix table .uncertain > span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: medium dotted #FFF;
-}
-
-@media print {
-    figure.risk-level-matrix table .active,
-    figure.risk-level-matrix table .uncertain {
-        border-color: #000000;
-    }
-
-    figure.risk-level-matrix table .active b,
-    figure.risk-level-matrix table .uncertain b,
-    figure.risk-level-matrix table .active span,
-    figure.risk-level-matrix table .uncertain span {
-        border-color: #000000;
-    }
+    border-style:dashed;
 }
 
 figure.risk-level-matrix table td.legend {

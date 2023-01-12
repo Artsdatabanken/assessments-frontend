@@ -28,6 +28,6 @@ public class TestController : Controller
         var connectionString = _configuration.GetConnectionString("Default");
         var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(connectionString);
         
-        return Ok($"DataSource: {sqlConnectionStringBuilder.DataSource}, UserID: {sqlConnectionStringBuilder.UserID}, InitialCatalog:  {sqlConnectionStringBuilder.InitialCatalog}");
+        return Ok($"DataSource: '{sqlConnectionStringBuilder.DataSource}', UserID: '{sqlConnectionStringBuilder.UserID}', InitialCatalog: '{sqlConnectionStringBuilder.InitialCatalog}'");
     }
 }

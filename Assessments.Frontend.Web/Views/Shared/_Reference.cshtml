@@ -17,15 +17,12 @@
 
         <div class="@(Model.IsCollapsible ? "collapsible_content" : "")">
             <div class="page_section">
-                @if (Model.References.Count() > 0)
-                {
-                    <ul>
-                        @foreach (var reference in references)
-                        {
-                            <li class="reference">@reference.FormattedReference</li>
-                        }
-                    </ul>
-                }
+                <ul>
+                    @foreach (var reference in references)
+                    {
+                        <li class="reference">@reference.FormattedReference</li>
+                    }
+                </ul>
             </div>
         </div>
     </div >

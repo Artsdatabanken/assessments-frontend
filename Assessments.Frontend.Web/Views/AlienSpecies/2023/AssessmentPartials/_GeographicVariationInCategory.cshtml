@@ -2,10 +2,10 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
-    var hasGeographicVariationInCategory = @Model.Assessment.RiskAssessmentGeographicVariationInCategory == true;
-    var geographicVariation = @Model.Assessment.RiskAssessmentGeographicalVariation;
-    var geographicVariationDocumentation = @Model.Assessment.RiskAssessmentGeographicalVariationDocumentation;
+    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var hasGeographicVariationInCategory = Model.Assessment.RiskAssessmentGeographicVariationInCategory == true;
+    var geographicVariation = Model.Assessment.RiskAssessmentGeographicalVariation;
+    var geographicVariationDocumentation = Model.Assessment.RiskAssessmentGeographicalVariationDocumentation;
     var hasGeographicVariationDocumentation = geographicVariationDocumentation !=  "";
     var hasFirstOption = geographicVariation.IndexOf("reproduksjonLimitedToCertainClimaticZones") != -1;
     var hasSecondOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainClimaticZones") != -1;

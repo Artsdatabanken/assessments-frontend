@@ -7,19 +7,19 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "")]
         BackgroundNotSpecified,
 
-        [Display(Name = "Skriftlig dokumentasjon fra Norge")]
+        [Display(Name = "skriftlig dokumentasjon fra Norge")]
         WrittenDocumentationNorway,
 
-        [Display(Name = "Kun observasjoner fra Norge")]
+        [Display(Name = "kun observasjoner fra Norge")]
         ObservationNorway,
 
-        [Display(Name = "Skriftlig dokumentasjon fra utlandet")]
+        [Display(Name = "skriftlig dokumentasjon fra utlandet")]
         WrittenDocumentationAbroad,
 
-        [Display(Name = "Kun observasjoner fra utlandet")]
+        [Display(Name = "kun observasjoner fra utlandet")]
         ObservationAbroad,
 
-        [Display(Name = "Annet")]
+        [Display(Name = "annet")]
         Other
 
     }

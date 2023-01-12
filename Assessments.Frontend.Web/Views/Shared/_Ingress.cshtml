@@ -9,6 +9,7 @@
     var hasEffectWithoutReproduction = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
     var isRegionallyAlien = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien;
     var isNoneOfTheAbove = !isNr && !isEvaluatedAtAnotherLevel && !isDoorKnocker && !hasEffectWithoutReproduction && !isRegionallyAlien;
+    var speciesStatusDescription = Model.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.N ? Model.SpeciesStatus.Description() : Model.SpeciesStatus.Description().Replace("i Norge", "på Svalbard");
 }
 
 <div class="page_section">
@@ -21,7 +22,7 @@
     </p>
 
     <p is-visible="!isNr && !isEvaluatedAtAnotherLevel && isDoorKnocker">
-        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er en dørstokkart som @Model.SpeciesStatus.Description().
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er en dørstokkart som @speciesStatusDescription.
     </p>
     <p is-visible="!isNr && !isEvaluatedAtAnotherLevel && hasEffectWithoutReproduction">
         @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) har @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() og @Model.SpeciesStatus.Description().

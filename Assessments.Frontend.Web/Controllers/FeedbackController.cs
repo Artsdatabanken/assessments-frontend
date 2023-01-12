@@ -12,6 +12,9 @@ using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace Assessments.Frontend.Web.Controllers
 {
@@ -164,26 +167,63 @@ namespace Assessments.Frontend.Web.Controllers
             return File(stream, "application/octet-stream", attachment.FileName);
         }
 
-        public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl)
+        public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl, [FromServices] ISendGridClient sendGridClient)
         {
             ModelState.Remove(nameof(FeedbackFormViewModel.Comment));
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || !Url.IsLocalUrl(returnUrl))
                 return BadRequest("Beklager, en feil oppstod ved innsending av skjema.");
 
-            _dbContext.EmailValidations.Add(new EmailValidation
-            {
-                Email = viewModel.Email.ToLowerInvariant(),
-                FullName = viewModel.FullName.Trim()
-            });
+            var email = viewModel.Email.ToLowerInvariant();
+            var emailValidation = await _dbContext.EmailValidations.FirstOrDefaultAsync(x => x.Email == email);
 
-            await _dbContext.SaveChangesAsync();
+            if (emailValidation == null)
+            {
+                emailValidation = new EmailValidation
+                {
+                    Email = email,
+                    FullName = viewModel.FullName.Trim()
+                };
+
+                _dbContext.EmailValidations.Add(emailValidation);
+                
+                await _dbContext.SaveChangesAsync();
+            }
+
+            var message = new SendGridMessage
+            {
+                From = new EmailAddress("no-reply@artsdatabanken.no"),
+                Subject = "Validering av e-postadresse for tilbakemelding"
+            };
+
+            message.AddTo(new EmailAddress(emailValidation.Email, emailValidation.FullName));
+            
+            var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#feedback";
+            var messageContent = $"<a href='{validationUrl}'>{validationUrl}</a>";
+
+            message.AddContent(MimeType.Html, messageContent);
+            message.AddContent(MimeType.Text, messageContent.StripHtml());
+
+            try
+            {
+                var response = await sendGridClient.SendEmailAsync(message);
+
+                if (!response.IsSuccessStatusCode)
+                    throw new Exception($"Failed sending email with StatusCode: {response.StatusCode}");
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "An error occurred: {message}", ex.Message);
+                
+                return BadRequest("Beklager, en feil oppstod ved sending av e-post.");
+            }
 
             TempData["feedback"] = $"Du vil bli tilsendt en e-post (til {viewModel.Email}) med lenke for tilbakemelding.";
 
-            // TODO: send epost og lenke med sendgrid
-            
             return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : BadRequest();
         }
+
+        public IActionResult Terms() => View();
     }
 }

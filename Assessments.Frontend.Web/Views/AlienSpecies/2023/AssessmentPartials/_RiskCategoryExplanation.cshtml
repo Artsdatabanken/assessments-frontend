@@ -2,7 +2,7 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-    var isNr = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NR;
+    var isNrOrEvaluatedAtAnotherLevel = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NR || Model.Assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var showIsNk = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NK;
     var showLowInvasionPotential = Model.Assessment.ScoreInvasionPotential == 1;
     var showHigherInvasionPotential = Model.Assessment.ScoreInvasionPotential > 1;
@@ -44,7 +44,7 @@
     }
 }
 
-<div class="page-section" is-visible="!isNr">
+<div class="page-section" is-visible="!isNrOrEvaluatedAtAnotherLevel">
     <div class="collapsible initially_closed">
         <div class="collapsible_header">
             <h2>Hva forklarer artens risikokategori</h2>

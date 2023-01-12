@@ -40,13 +40,20 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyFutureBest = assessment.AOOfutureBest,
                 AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
                 AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
+                AreaOfOccupancyKnown = assessment.AOOknown,
                 AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
                 AreaOfOccupancyTotalHigh = assessment.AOOtotalHigh,
                 AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
-                AreaOfOccupancyKnown = assessment.AOOknown,
                 Category = assessment.Category,
                 CurrentPresenceComment = assessment.CurrentPresenceComment,
-                RegionOccurrences = assessment.RegionOccurrences
+                IsSvalbard = assessment.EvaluationContext == Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.S,
+                RegionOccurrences = assessment.RegionOccurrences,
+                RiskAssessmentIntroductionsLow = assessment.RiskAssessmentIntroductionsLow,
+                RiskAssessmentIntroductionsBest = assessment.RiskAssessmentIntroductionsBest,
+                RiskAssessmentIntroductionsHigh = assessment.RiskAssessmentIntroductionsHigh,
+                RiskAssessmentOccurrences1Low = assessment.RiskAssessmentOccurrences1Low,
+                RiskAssessmentOccurrences1Best = assessment.RiskAssessmentOccurrences1Best,
+                RiskAssessmentOccurrences1High = assessment.RiskAssessmentOccurrences1High
             };
 
             SideBarContentViewModel = new SideBarContentViewModel

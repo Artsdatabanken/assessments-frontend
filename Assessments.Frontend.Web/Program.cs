@@ -2,14 +2,19 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Text.Json.Serialization;
+using Assessments.Data;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.Api;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SendGrid.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +22,10 @@ builder.Services.Configure<RouteOptions>(options => { options.LowercaseUrls = tr
 
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+
+builder.Services.AddDbContext<AssessmentsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddLazyCache();
 
@@ -33,6 +42,8 @@ builder.Services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAs
 builder.Services.AddSwagger();
 
 builder.Services.AddResponseCompression();
+
+builder.Services.AddSendGrid(options => { options.ApiKey = builder.Configuration["SendGridApiKey"]; });
 
 var app = builder.Build();
 
@@ -54,6 +65,13 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    Secure = CookieSecurePolicy.Always, 
+    HttpOnly = HttpOnlyPolicy.Always, 
+    MinimumSameSitePolicy = SameSiteMode.Strict
+});
+
 var cachedFilesFolder = Path.Combine(app.Environment.ContentRootPath, Constants.CacheFolder);
 
 if (!Directory.Exists(cachedFilesFolder))
@@ -67,5 +85,12 @@ if (!app.Environment.IsProduction()) // Disable swagger in production
 app.MapDefaultControllerRoute();
 
 ExportHelper.Setup();
+
+if (!app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var dataContext = scope.ServiceProvider.GetRequiredService<AssessmentsDbContext>();
+    dataContext.Database.Migrate();
+}
 
 app.Run();

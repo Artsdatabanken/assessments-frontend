@@ -829,7 +829,8 @@ span.area i {
 }
 
 .collapsible .collapsible_content {
-    padding: 8px 20px;
+    padding: 20px;
+    padding-bottom:5px;
     border-top: 1px solid lightgrey;
 }
 
@@ -842,6 +843,113 @@ span.area i {
     padding:0
 }
 
+/* Tables */
+
+.big-data-table {
+    border-collapse: collapse;
+    background: white;
+    border: 1px solid grey;
+    margin-left: -17px;
+    width: calc(100% + 34px);
+    table-layout: fixed;
+}
+
+.darktheme .big-data-table {
+    background: #201f1f;
+}
+
+.big-data-table th,
+.big-data-table td {
+    padding: 8px;
+    text-align: left;
+}
+
+.big-data-table th:first-letter {
+   text-transform: capitalize    
+}
+
+.big-data-table th,
+.big-data-table td {
+    border-bottom: 1px solid rgba(128, 128, 128,0.2);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+.big-data-table th {
+    border-color: grey;
+}
+
+@media only screen and (max-width: 750px) {
+
+    .big-data-table{
+        border:none
+    }
+
+    .big-data-table th {
+        display: none;
+    }
+
+    .big-data-table td {
+        display: block;
+        background: rgba(128, 128, 128,0.3);
+        border: 1px solid rgba(128, 128, 128,0.5);
+        margin-top: -1px;
+    }
+
+    .darktheme .big-data-table td {
+        background: rgba(128, 128, 128,0.1);
+        border-color: rgba(128, 128, 128,0.2);
+    }
+
+    .big-data-table td:first-child {
+        background: #5e3063;
+        color: white;
+    }
+
+    .big-data-table .only_mobile {
+        display: block;
+        color:#595959 
+    }
+
+    .darktheme .big-data-table .only_mobile {
+        color: #959595;
+    }
+
+    .big-data-table .only_mobile:first-letter {
+        text-transform: capitalize
+    }
+
+    .big-data-table td:first-child .only_mobile{
+       color:white;
+    }
+
+    .big-data-table ul{
+        margin-left:15px;
+    }
+
+    .big-data-table tr {
+        padding-bottom: 8px;
+        display: block;
+    }
+}
+
+.table-description {
+    padding: 4px;
+    border: none;
+    margin-bottom: 4px;
+}
+@media only screen and (min-width: 751px) {
+
+    .big-data-table td:nth-child(3),
+    .big-data-table th:nth-child(3),
+    .big-data-table td:nth-child(5),
+    .big-data-table th:nth-child(5) {
+        width: 11%
+    }
+}
 
 /* TABLES for regional spread */
 

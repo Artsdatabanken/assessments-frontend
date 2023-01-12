@@ -62,6 +62,7 @@
         AlienSpeciesCategory = assessment.AlienSpeciesCategory,
         Category = assessment.Category,
         Environment = assessment.Environment,
+        EvaluationContext = assessment.EvaluationContext,
         ListName = Constants.AlienSpecies2023PageMenuHeaderText,
         ParentAssessmentId = assessment.ParentAssessmentId,
         SpeciesStatus = assessment.SpeciesStatus,
@@ -101,8 +102,7 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ImpactFactors.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
+                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />*@
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="Model.ExpertStatementViewModel" />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskCategoryExplanation.cshtml" />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_CategoryChange.cshtml" />
@@ -110,6 +110,7 @@
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_GeographicVariationInCategory.cshtml"  />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RegionalSpread.cshtml" model="Model.RegionalSpreadViewModel" />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ImpactedNatureTypes.cshtml" />
+                <partial name="/Views/Shared/_Reference.cshtml" model="Model.ReferenceViewModel"/>
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
                 <partial name="/Views/Shared/_Feedback.cshtml" model="new FeedbackFormViewModel { Year = 2023, AssessmentId = assessment.Id, ExpertGroup = assessment.ExpertGroup, Type = FeedbackType.AlienSpecies }" />
             </div>

@@ -306,6 +306,10 @@ span.material-icons.less {
     width:120px;
 }
 
+.map.N {
+    width: 33%;
+}
+
 .region_list_header {
     border-bottom: 1px solid #4c4a48;
 }
@@ -487,6 +491,36 @@ no_distribution {
     stroke-width: 1;
     filter:brightness(70%);
     /* cursor: pointer; Turning this off for now as nothing happens when you click on it */ 
+}
+
+.known_today {
+    background: #51b051;
+    fill: #51b051;
+}
+
+.sea.known_today {
+    background: #7ae57a;
+    fill: #7ae57a;
+}
+
+.is_assumed_today {
+    background: #f9ae00;
+    fill: #f9ae00;
+}
+
+.sea.is_assumed_today {
+    background: #b77818;
+    fill: #b77818;
+}
+
+.is_assumed_in_future {
+    background: #f9ae00;
+    fill: #f9ae00;
+}
+
+.sea.is_assumed_in_future {
+    background: #b77818;
+    fill: #b77818;
 }
 
 .indicator {
@@ -738,17 +772,103 @@ span.area i {
     width: 100%;
 }
 
-.collapsible_header:hover,
-.collapsible_header:hover span {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
 .tabbed_element_container.assessment_tabs .inactive {
     display: none;
 }
 
-.expand_header{
+.collapsible_header{
     display:flex;
     justify-content:space-between
+}
+
+.hide {
+    display: none !important;
+}
+
+.collapsible_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+}
+
+.expanded .collapsible_header {
+    border-bottom: 1px solid lightgrey;
+}
+
+.darktheme .collapsible_header,
+.darktheme .collapsible {
+    border-color: white;
+}
+
+.darktheme .collapsible_header button:not(:hover),
+.collapsible_header button {
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 24px;
+    margin: 0;
+}
+
+.collapsible_header button .material-icons {
+    font-size: inherit;
+    vertical-align: middle;
+}
+
+/* OVERRIDE P STYLING */
+
+.darktheme .tabbed_element_container ul p,
+.tabbed_element_container ul p {
+    border: 0;
+    padding: 4px;
+}
+
+.collapsible {
+    border: 1px solid lightgrey;
+    margin-top: 40px;
+}
+
+.collapsible .collapsible_content {
+    padding: 8px 20px;
+    border-top: 1px solid lightgrey;
+}
+
+.darktheme .collapsible .collapsible_content {
+    border-color: white;
+}
+
+.collapsible_header h2 {
+    margin: 0;
+    padding:0
+}
+
+
+/* TABLES for regional spread */
+
+.numbers-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:20px;
+}
+
+.numbers-table td,
+.numbers-table th{
+    padding: 8px;
+    text-align:left
+}
+
+.numbers-table td:not(:first-child),
+.numbers-table th:not(:first-child) {
+    text-align: right;
+}
+
+.numbers-table th{
+    border-bottom:2px solid grey;
+}
+.numbers-table td {
+    border-bottom: 1px solid rgba(192, 192, 192,0.2);
+}
+
+.collapsible .only-tabs-inside {
+    padding: 20px 0 0 0;
 }

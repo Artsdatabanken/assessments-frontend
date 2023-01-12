@@ -128,7 +128,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             const string doorKnockerShort = "eda";
 
-            return query.Where(x => speciesStatus.Contains(x.SpeciesStatus) ||
+            return query.Where(x => speciesStatus.Contains(x.SpeciesStatus.ToString()) ||
                                     (speciesStatus.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction)));
         }
 

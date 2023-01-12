@@ -1,7 +1,7 @@
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
 using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -89,6 +89,8 @@ namespace Assessments.Frontend.Web.Models
 
         public bool HasIndoorProduction { get; set; }
 
+        public string MisidentifiedDescription { get; set; }
+
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 
         public string SpreadIntroductionFurtherInfo { get; set; }
@@ -110,7 +112,13 @@ namespace Assessments.Frontend.Web.Models
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
         public string ListName { get; set; }
+
+        public int? ParentAssessmentId { get; set; }
+
+        public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
 
         public string Status { get; set; }
 
@@ -133,11 +141,39 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public bool IsSvalbard { get; set; }
+
+        public int? RiskAssessmentIntroductionsLow { get; set; }
+
+        public int? RiskAssessmentIntroductionsBest { get; set; }
+
+        public int? RiskAssessmentIntroductionsHigh { get; set; }
+
+        public int? RiskAssessmentOccurrences1Low { get; set; }
+
+        public int? RiskAssessmentOccurrences1Best { get; set; }
+
+        public int? RiskAssessmentOccurrences1High { get; set; }
+
+
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         public string CurrentPresenceComment { get; set; }
+
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
+    }
+
+    public class MapViewModel
+    {
+        public string MapName { get; set; }
+
+        public string MapText { get; set; }
+
+        public string MapDescription { get; set; }
+
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
     }
 
     public class SideBarContentViewModel

@@ -1,11 +1,10 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
-using System.Text.RegularExpressions;
-using HtmlAgilityPack;
 
 namespace Assessments.Shared.Helpers
 {
@@ -14,7 +13,7 @@ namespace Assessments.Shared.Helpers
         public static string DisplayName(this MemberInfo property)
         {
             var attribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).Cast<DisplayNameAttribute>().Single();
-           
+
             return attribute.DisplayName;
         }
 
@@ -23,9 +22,9 @@ namespace Assessments.Shared.Helpers
             var type = value.GetType();
             var memberInfo = type.GetMember(value.ToString());
             var attributes = memberInfo[0].GetCustomAttributes(typeof(T), false);
-            
-            if (attributes.Length > 0)	
-                return (T) attributes[0];
+
+            if (attributes.Length > 0)
+                return (T)attributes[0];
 
             return null;
         }
@@ -44,23 +43,23 @@ namespace Assessments.Shared.Helpers
 
         public static IEnumerable<T> ToEnumerable<T>(this IEnumerable<string> array)
         {
-            return array.Where(c => Enum.IsDefined(typeof(T), c)).Select(a => (T) Enum.Parse(typeof(T), a));
+            return array.Where(c => Enum.IsDefined(typeof(T), c)).Select(a => (T)Enum.Parse(typeof(T), a));
         }
 
         public static string StripHtml(this string input)
         {
-            if (string.IsNullOrEmpty(input)) 
+            if (string.IsNullOrEmpty(input))
                 return string.Empty;
 
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(input);
 
-            return htmlDocument.DocumentNode.InnerText;
+            return htmlDocument.DocumentNode.InnerText.Replace("&nbsp;", string.Empty, StringComparison.OrdinalIgnoreCase);
         }
 
         public static string StripUnwantedHtml(this string input)
         {
-            if (string.IsNullOrEmpty(input)) 
+            if (string.IsNullOrEmpty(input))
                 return string.Empty;
 
             var document = new HtmlDocument();
@@ -68,7 +67,7 @@ namespace Assessments.Shared.Helpers
 
             var acceptableTags = new[] { "p", "i", "b" };
             var nodes = new Queue<HtmlNode>(document.DocumentNode.SelectNodes("./*|./text()"));
-            
+
             while (nodes.Count > 0)
             {
                 var node = nodes.Dequeue();
@@ -91,9 +90,7 @@ namespace Assessments.Shared.Helpers
                 parentNode.RemoveChild(node);
             }
 
-            return document.DocumentNode.InnerHtml;
+            return document.DocumentNode.InnerHtml.Replace("&nbsp;", " ", StringComparison.OrdinalIgnoreCase);
         }
-
-        public static string RemoveExcessWhitepace(this string input) => Regex.Replace(input, @"\s+", " ");
     }
 }

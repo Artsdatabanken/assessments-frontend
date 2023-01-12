@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
-    internal static class AlienSpeciesAssessment2023ProfileHelper
+    public static class AlienSpeciesAssessment2023ProfileHelper
     {
         internal static string GetAlienSpeciesCategory(string alienSpeciesCategory, string expertGroup)
         {
@@ -69,9 +69,11 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return expertGroup;
         }
 
-        internal static string GetEstablishmentCategory(string speciesEstablishmentCategory, string speciesStatus)
+        internal static string GetEstablishmentCategory(string speciesEstablishmentCategory, string speciesStatus, string alienSpeciesCategory)
         {
-            if (speciesStatus == null)
+            string notAlienSpecies = "NotAlienSpecie";
+
+            if (speciesStatus == null || alienSpeciesCategory == notAlienSpecies)
             {
                 return string.Empty;
             }
@@ -216,9 +218,28 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 }
                 else
                 {
-                    // TODO: legg til 2012 når formel for utregning er på plass #711
-                    previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
-                    previousAssessment.Url = "https://artsdatabanken.no/fremmedartslista2018";
+                    if (previousAssessment.MainSubCategory == "noRiskAssessment")
+                    {
+                        previousAssessment.Category = AlienSpeciesAssessment2023Category.NR;
+                    }
+                    else
+                    {
+                        previousAssessment.Category = previousAssessment.RiskLevel switch
+                        {
+                            0 => AlienSpeciesAssessment2023Category.NK,
+                            1 => AlienSpeciesAssessment2023Category.LO,
+                            2 => AlienSpeciesAssessment2023Category.PH,
+                            3 => AlienSpeciesAssessment2023Category.HI,
+                            4 => AlienSpeciesAssessment2023Category.SE,
+                            _ => AlienSpeciesAssessment2023Category.NR
+                        };
+                    }
+
+                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":") 
+                        ? "https://databank.artsdatabanken.no/FremmedArt2012" 
+                        : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
+
+
                 }
             }
 
@@ -378,6 +399,257 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 default:
                     return 0;
             }
+        }
+
+        internal static string GetExtinctionProbability(List<RiskAssessment.Criterion> aCriterionScore)
+        {
+            switch (aCriterionScore[0].Value)
+            {
+                case 0:
+                    return "High";
+                case 1:
+                    return "MediumHigh";
+                case 2:
+                    return "MediumLow";
+                case 3:
+                    return "Low";
+                default:
+                    break;
+            }
+            return "NotEvaluated";
+        }
+
+        public static int GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(string assessmentConclusion, RiskAssessment riskAssessment)
+        {
+            var assessedDoorKnocker = "AssessedDoorknocker";
+            if (assessmentConclusion == assessedDoorKnocker)
+            {
+                var numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
+                var numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
+                var AOOTenYearsBest = AOO10yr(numberOfOccurrences, numberOfIntroductions);
+                
+                return AOOTenYearsBest > 16 ? 4
+                    : AOOTenYearsBest > 4 ? 3
+                    : AOOTenYearsBest > 1 ? 2
+                    : 1;
+            }
+            else
+            {
+                if (riskAssessment.AOO50yrBestInput.HasValue == false || riskAssessment.AOOtotalBestInput.HasValue == false) return 0;
+                double AOOFiftyYearsBest = (double)riskAssessment.AOO50yrBestInput;
+                double AOOtotalBest = (double)riskAssessment.AOOtotalBestInput;
+                double AOOChangeBest = AOOtotalBest == 0 ? 1 : (double)(AOOFiftyYearsBest / AOOtotalBest);
+
+                return AOOFiftyYearsBest >= 20 && AOOChangeBest > 0.2 ? 4
+                    : AOOFiftyYearsBest >= 20 && AOOChangeBest > 0.05 ? 3
+                    : AOOFiftyYearsBest >= 8 && AOOChangeBest > 0.2 ? 3
+                    : AOOFiftyYearsBest >= 4 ? 2
+                    : 1;
+            }
+
+
+        }
+
+        public static int GetMedianLifetimeSimplifiedEstimationDefaultScoreUncertainty(string assessmentConclusion, RiskAssessment riskAssessment, string estimateQuantile)
+        {
+            var assessedDoorKnocker = "AssessedDoorknocker";
+            if(estimateQuantile == "Low") 
+            {
+                if (assessmentConclusion == assessedDoorKnocker)
+                {
+                    var numberOfOccurrences = riskAssessment.Occurrences1Low ?? 0;
+                    int numberOfIntroductions = IntroductionsLow(riskAssessment);
+                    var AOOTenYearsLow = AOO10yr(numberOfOccurrences, numberOfIntroductions);
+                    
+                    return AOOTenYearsLow > 16 ? 4
+                        : AOOTenYearsLow > 4 ? 3
+                        : AOOTenYearsLow > 1 ? Math.Max(2, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
+                        : AOOTenYearsLow <= 1 ? Math.Max(1, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
+                        : 1;
+                }
+                else
+                {
+                    if (riskAssessment.AOO50yrLowInput.HasValue == false || riskAssessment.AOOtotalBestInput.HasValue == false) return 0;
+                    double AOOFiftyYearsLow = (double)riskAssessment.AOO50yrLowInput;
+                    double AOOtotalBest = (double)riskAssessment.AOOtotalBestInput;
+                    double AOOChangeLow = AOOtotalBest == 0 ? 1 : (double)(AOOFiftyYearsLow / AOOtotalBest);
+
+                    return AOOFiftyYearsLow >= 20 && AOOChangeLow > 0.2 ? 4
+                        : AOOFiftyYearsLow >= 20 && AOOChangeLow > 0.05 ? 3
+                        : AOOFiftyYearsLow >= 8 && AOOChangeLow > 0.2 ? 3
+                        : AOOFiftyYearsLow >= 4 ? Math.Max(2, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
+                        : AOOFiftyYearsLow < 4 ? Math.Max(1, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
+                        : 1;
+                }
+            }
+            else //estimateQuantile == "High"
+            {
+                if (assessmentConclusion == assessedDoorKnocker)
+                {
+                    var numberOfOccurrences = riskAssessment.Occurrences1High ?? 0;
+                    int numberOfIntroductions = IntroductionsHigh(riskAssessment);
+                    var AOOTenYearsHigh = AOO10yr(numberOfOccurrences, numberOfIntroductions);
+                    
+                    return AOOTenYearsHigh > 16 ? Math.Min(4, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOTenYearsHigh > 4 ? Math.Min(3, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOTenYearsHigh > 1 ? 2
+                        : 1;
+                }
+                else
+                {
+                    if (riskAssessment.AOO50yrHighInput.HasValue == false || riskAssessment.AOOtotalBestInput.HasValue == false) return 0;
+                    double AOOFiftyYearsHigh = (double)riskAssessment.AOO50yrHighInput;
+                    double AOOtotalBest = (double)riskAssessment.AOOtotalBestInput;
+                    double AOOChangeHigh = AOOtotalBest == 0 ? 1 : (double)(AOOFiftyYearsHigh / AOOtotalBest);
+
+                    return AOOFiftyYearsHigh >= 20 && AOOChangeHigh > 0.2 ? Math.Min(4, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOFiftyYearsHigh >= 20 && AOOChangeHigh > 0.05 ? Math.Min(3, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOFiftyYearsHigh >= 8 && AOOChangeHigh > 0.2 ? Math.Min(3, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
+                        : AOOFiftyYearsHigh >= 4 ? 2
+                        : 1;
+                }
+            }
+
+        }
+        internal static string GetSpatioTemporalDatasetModel(string model)
+        {
+            return model switch
+            {
+                "1" => "ConstantDetectability",
+                "2" => "ChangeDetectabilityOnce",
+                "3" => "TestTwoModels",
+                "4" => "KnownSamplingEffort",
+                _ => "NotRelevant",
+            };
+        }
+
+        internal static string GetExpansionEstimationMethod(string category, string chosenMainMethod, string assessmentConclusion, string chosenSubMethod)
+        {
+            if (category == "NR")
+            {
+                return "NotRelevant";
+            }
+
+            var mainMethodA = chosenMainMethod == "a";
+            var mainMethodB = chosenMainMethod == "b";
+            var assessedDoorKnocker = assessmentConclusion == "AssessedDoorknocker";
+                
+            if(mainMethodA)
+            {
+                return "SpatioTemporalDataset";
+            }
+            
+            if(mainMethodB && assessedDoorKnocker)
+            {
+                return "EstimatedIncreaseInAOODoorKnockers";
+            }
+            
+            if(mainMethodB && chosenSubMethod == "yes")
+            {
+                return "EstimatedIncreaseInAOOReproducingUnaided";
+            }
+
+            if (mainMethodB && chosenSubMethod == "no")
+            {
+                return "EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion";
+            }
+
+            else return "NotRelevant";
+      
+        }
+
+        static private long GetExpansionSpeedAOOSelfReproducing(RiskAssessment riskAssessment, long areaOfOccurrenceToday, long areaOfOccurrenceIn50Years)
+        {
+            bool chosenSubMethod = riskAssessment.AOOfirstOccurenceLessThan10Years == "yes";
+            long? firstYear = riskAssessment.AOOyear1;
+            long? lastYear = riskAssessment.AOOyear2;
+            long? firstYearArea = riskAssessment.AOO1;
+            long? lastYearArea = riskAssessment.AOO2;
+            long? areaOfOccurrenceTodayBest = riskAssessment.AOOtotalBestInput;
+            long? knownAreaToday = riskAssessment.AOOknownInput;
+
+            decimal result;
+            if (chosenSubMethod)
+            {
+                result = (firstYear == null || lastYear == null || (lastYear - firstYear) < 10 || firstYearArea <= 0 || lastYearArea <= 0) ?
+                0
+                : Math.Truncate((decimal)(Math.Sqrt((double)(areaOfOccurrenceToday / knownAreaToday)) * 2000 * (Math.Sqrt(Math.Ceiling((double)(lastYearArea / 4))) - Math.Sqrt(Math.Ceiling((double)(firstYearArea / 4)))) / ((lastYear - firstYear) * Math.Sqrt(Math.PI))));
+            }
+
+            else
+            {
+                result = (decimal)Math.Truncate(20 * (Math.Sqrt((double)areaOfOccurrenceIn50Years) - Math.Sqrt((double)areaOfOccurrenceTodayBest)) / Math.Sqrt(Math.PI));
+            }
+
+            return (long)Math.Round(result,0);
+        }
+
+        internal static long GetExpansionSpeedEstimates(RiskAssessment riskAssessment, string estimateQuantile, string assessmentConclusion)
+        {
+            var mainMethodA = riskAssessment.ChosenSpreadYearlyIncrease is "a";
+            var mainMethodB = riskAssessment.ChosenSpreadYearlyIncrease is "b";
+            var assessedDoorKnocker = assessmentConclusion is "AssessedDoorknocker";
+
+            if (mainMethodA)
+            {
+                return (long)(estimateQuantile is "best" ? riskAssessment.ExpansionSpeedInput
+                    : estimateQuantile is "low" ? riskAssessment.ExpansionLowerQInput
+                    : riskAssessment.ExpansionUpperQInput);
+            }
+
+            if (mainMethodB && assessedDoorKnocker)
+            {
+                long? numberOfOccurrences;
+                long? numberOfIntroductions;
+                long areaAfterTenYearsEstimate;
+
+                if (estimateQuantile == "low")
+                {
+                    numberOfOccurrences = riskAssessment.Occurrences1Low ?? 0;
+                    numberOfIntroductions = IntroductionsLow(riskAssessment);
+
+                }
+                else if (estimateQuantile == "best")
+                {
+                    numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
+                    numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
+                }
+                else
+                {
+                    numberOfOccurrences = riskAssessment.Occurrences1High ?? 0;
+                    numberOfIntroductions = IntroductionsHigh(riskAssessment);
+                }
+
+                areaAfterTenYearsEstimate = AOO10yr(numberOfOccurrences, numberOfIntroductions) ?? 0;
+
+                return (long)Math.Round(Math.Truncate(200 * (Math.Sqrt((double)(areaAfterTenYearsEstimate / 4)) - 1) / Math.Sqrt(Math.PI)),0);
+            }
+
+            else //mainMethodB and assessed as self-reproducing
+            {
+                long areaOfOccurrenceToday;
+                long areaOfOccurrenceIn50Years;
+                if (estimateQuantile == "low")
+                {
+                    areaOfOccurrenceToday = riskAssessment.AOOtotalLowInput ?? 0;
+                    areaOfOccurrenceIn50Years = riskAssessment.AOO50yrLowInput ?? 0;
+                }
+
+                else if (estimateQuantile == "best")
+                {
+                    areaOfOccurrenceToday = riskAssessment.AOOtotalBestInput ?? 0;
+                    areaOfOccurrenceIn50Years = riskAssessment.AOO50yrBestInput ?? 0;
+                }
+
+                else
+                {
+                    areaOfOccurrenceToday = riskAssessment.AOOtotalHighInput ?? 0;
+                    areaOfOccurrenceIn50Years = riskAssessment.AOO50yrHighInput ?? 0;
+                }
+
+                return GetExpansionSpeedAOOSelfReproducing(riskAssessment, areaOfOccurrenceToday, areaOfOccurrenceIn50Years);
+            }
+
         }
     }
 }

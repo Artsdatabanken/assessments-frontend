@@ -163,6 +163,11 @@ namespace Assessments.Mapping.AlienSpecies.Source
 
         //public Datasett Datasett { get; set; } = new Datasett();
         public string EvaluatedScientificNameRank { get; set; }
+
+        /// <summary>
+        /// Denne eksisterer kun virtuelt - ikke i produksjonsbasen - kun for lasting av vurderinger og gjenntatt transformasjon
+        /// </summary>
+        public int? ParentAssessmentId { get; set; }
     }
 
     public partial class FA4 // Horisontskanning
@@ -226,6 +231,17 @@ namespace Assessments.Mapping.AlienSpecies.Source
         public bool? IsRegionallyAlien { get; set; }
 
         public bool? ConnectedToAnother { get; set; }
+
+        /// <summary>
+        /// The species was misidentified in previous assessment
+        /// </summary>
+        public bool MisIdentified { get; set; } = false;
+
+        /// <summary>
+        /// Reason for misidentification
+        /// </summary>
+        public string MisIdentifiedDescription { get; set; } = "";
+
 
         public bool? HigherOrLowerLevel { get; set; }
 

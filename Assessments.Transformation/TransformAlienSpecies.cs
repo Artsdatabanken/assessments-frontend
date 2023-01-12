@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,17 @@ namespace Assessments.Transformation
     public class TransformAlienSpecies
     {
         private static Fab4Context _dbContext;
+
+        private static readonly Dictionary<int, int>
+            LinkSubSpeciesToSpeciesDictionary = new Dictionary<int, int>()
+            {
+                { 2637, 2120 },
+                { 1027, 2354 },
+                { 1026, 2354 },
+                { 1293, 2367 },
+                { 1292, 2367 },
+                { 1835, 1825 }
+            };
 
         public static async Task TransformDataModels(IConfigurationRoot configuration, bool upload)
         {
@@ -75,6 +87,8 @@ namespace Assessments.Transformation
                 Progress.ProgressBar.Tick();
             }
 
+            FixSubSpeciesLinkedToSpecies(targetItems, sourceItems);
+
             Progress.ProgressBar.Message = "Serialiserer og lagrer filer (tar litt tid)";
 
             var files = new Dictionary<string, string>
@@ -99,42 +113,30 @@ namespace Assessments.Transformation
             Progress.ProgressBar.Dispose();
         }
 
-        public static async Task ExpertGroupExport(IConfigurationRoot configuration, bool upload)
+        private static void FixSubSpeciesLinkedToSpecies(List<AlienSpeciesAssessment2023> targetItems, List<FA4> sourceItems)
         {
-            await SetupDatabaseContext(configuration);
-
-            Progress.ProgressBar = new ProgressBar(100, "Eksporterer ekspertgruppe medlemmer", new ProgressBarOptions
+            // lag relasjon mellom underart og art der arten skal representere kategori
+            foreach (var targetItem in targetItems)
             {
-                DisplayTimeInRealTime = false,
-                EnableTaskBarProgress = true
-            });
-
-            var expertGroupMembers = _dbContext.UserRoleInExpertGroups.Include(x => x.User)
-                .Where(x => x.WriteAccess
-                            && !x.User.FullName.Contains("(Test)")
-                            && x.ExpertGroupName != "Testedyr"
-                            && !x.User.Email.EndsWith("@artsdatabanken.no")
-                )
-                .Select(x => new AlienSpeciesAssessment2023ExpertGroupMember
+                if (!LinkSubSpeciesToSpeciesDictionary.ContainsKey(targetItem.Id))
                 {
-                    ExpertCommittee = x.ExpertGroupName.Replace("(Svalbard)", "").Trim(),
-                    Name = x.User.FullName.RemoveExcessWhitepace(),
-                    Admin = x.Admin
-                })
-                .Distinct().OrderBy(x => x.ExpertCommittee).ThenByDescending(x => x.Admin).ToList();
+                    continue;
+                }
 
-            foreach (var expertGroupMember in expertGroupMembers.Where(x => x.ExpertCommittee is "Bakterier" or "Kromister" or "Sopper"))
-                expertGroupMember.ExpertCommittee = "Sopper, det gule riket og bakterier";
-            
-            var serializedData = JsonSerializer.Serialize(expertGroupMembers);
-
-            await File.WriteAllTextAsync(Path.Combine(configuration.GetValue<string>("FilesFolder"), DataFilenames.AlienSpeciesExpertCommitteeMembers), serializedData);
-
-            if (upload)
-                await Storage.Upload(configuration, DataFilenames.AlienSpeciesExpertCommitteeMembers, serializedData);
-
-            Progress.ProgressBar.Tick(Progress.ProgressBar.MaxTicks, "Lagret ekspertgruppe medlemmer");
-            Progress.ProgressBar.Dispose();
+                // overfør informasjon fra hovedvurderingen
+                // også for sourceitems slik at livetransform også virker
+                var parentAssessment =
+                    targetItems.SingleOrDefault(x => x.Id == LinkSubSpeciesToSpeciesDictionary[targetItem.Id]);
+                Debug.Assert(parentAssessment != null, nameof(parentAssessment) + " != null");
+                targetItem.Category = parentAssessment.Category;
+                targetItem.ParentAssessmentId = parentAssessment.Id;
+                targetItem.DecisiveCriteria = parentAssessment.DecisiveCriteria;
+                var sourceItem = sourceItems.SingleOrDefault(x => x.Id == targetItem.Id);
+                Debug.Assert(sourceItem != null, nameof(sourceItem) + " != null");
+                sourceItem.ParentAssessmentId = parentAssessment.Id;
+                sourceItem.Category = parentAssessment.Category.ToString();
+                sourceItem.Criteria = parentAssessment.DecisiveCriteria;
+            }
         }
 
         private static async Task SetupDatabaseContext(IConfiguration configuration)

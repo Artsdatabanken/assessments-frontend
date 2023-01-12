@@ -7,17 +7,17 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public AlienSpeciesAssessment2023Region Region { get; set; }
 
         /// <summary>
-        /// TODO: documentation (State0)
+        /// Is the species known to occur in the region today
         /// </summary>
         public bool IsKnown { get; set; }
 
         /// <summary>
-        /// TODO: documentation (State1)
+        /// Is the species assumed to occur in the region today
         /// </summary>
         public bool IsAssumedToday { get; set; }
 
         /// <summary>
-        /// TODO: documentation (State3)
+        /// Is the species assumed to occur in the region in the future (within 50 years)
         /// </summary>
         public bool IsAssumedInFuture { get; set; }
     }

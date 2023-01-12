@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
+﻿using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
+using System.Collections.Generic;
 using System.Linq;
-using Assessments.Frontend.Web.Infrastructure;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -27,6 +25,7 @@ namespace Assessments.Frontend.Web.Models
                 CriteriaDocumentationSpeciesStatus = assessment.RiskAssessmentCriteriaDocumentationSpeciesStatus,
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 HasIndoorProduction = assessment.HasIndoorProduction,
+                MisidentifiedDescription = assessment.MisIdentifiedDescription,
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
                 Summary = assessment.RiskAssessmentGeographicalVariationDocumentation,
@@ -38,15 +37,23 @@ namespace Assessments.Frontend.Web.Models
             RegionalSpreadViewModel = new RegionalSpreadViewModel
             {
                 AlienSpeciesCategory = assessment.AlienSpeciesCategory,
-                AreaOfOccupancyFutureBest = assessment.RiskAssessmentAOOfutureBest,
+                AreaOfOccupancyFutureBest = assessment.AOOfutureBest,
                 AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
                 AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
-                AreaOfOccupancyTotalBest = assessment.RiskAssessmentAOOtotalBest,
-                AreaOfOccupancyTotalHigh = assessment.RiskAssessmentAOOtotalHigh,
-                AreaOfOccupancyTotalLow = assessment.RiskAssessmentAOOtotalLow,
-                AreaOfOccupancyKnown = assessment.RiskAssessmentAOOknown,
+                AreaOfOccupancyKnown = assessment.AOOknown,
+                AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
+                AreaOfOccupancyTotalHigh = assessment.AOOtotalHigh,
+                AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
                 Category = assessment.Category,
-                CurrentPresenceComment = assessment.CurrentPresenceComment
+                CurrentPresenceComment = assessment.CurrentPresenceComment,
+                IsSvalbard = assessment.EvaluationContext == Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.S,
+                RegionOccurrences = assessment.RegionOccurrences,
+                RiskAssessmentIntroductionsLow = assessment.RiskAssessmentIntroductionsLow,
+                RiskAssessmentIntroductionsBest = assessment.RiskAssessmentIntroductionsBest,
+                RiskAssessmentIntroductionsHigh = assessment.RiskAssessmentIntroductionsHigh,
+                RiskAssessmentOccurrences1Low = assessment.RiskAssessmentOccurrences1Low,
+                RiskAssessmentOccurrences1Best = assessment.RiskAssessmentOccurrences1Best,
+                RiskAssessmentOccurrences1High = assessment.RiskAssessmentOccurrences1High
             };
 
             SideBarContentViewModel = new SideBarContentViewModel
@@ -75,6 +82,6 @@ namespace Assessments.Frontend.Web.Models
 
         public SideBarContentViewModel SideBarContentViewModel { get; set; }
 
-        public string ExpertGroupMembers { get; set; }
+        public List<AlienSpeciesAssessment2023ExpertGroupMember> ExpertGroupMembers { get; set; } = new();
     }
 }

@@ -42,17 +42,16 @@
 
     var showUncertaintyEstablishmentTimeDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800;
 
+    var isMisidentified = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified;
+
     // Html.Raw is used on model values that are stripped of html, except for a few tags, such as p, i and b. This is because some text needs to be formatted, and we don't know when.
 }
 
 <div class="page_section" is-visible="@showCriteriaDocumentation">
     <div id="show_conclusion" is-visible="@showConclusion">
-       
-             <h2>
-                Konklusjon
-             </h2>
-       
-
+        <h2>
+            Konklusjon
+        </h2>
         <div class="expert_Assessment">
             <div class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentation)
@@ -60,17 +59,17 @@
         </div>
     </div>
 
-    <div is-visible="@showExpertSummary" class="expandable expanded">
-        <div class="expand_header">
+    <div is-visible="@showExpertSummary" class="collapsible initially_closed">
+        <div class="collapsible_header">
              <h2>
                  Ekspertenes oppsummering
              </h2>
-            <button onclick="toggleMe(this)" class="ghost">
-                <span class="material-icons if_expanded">expand_less </span>
-                <span class="material-icons if_collapsed">expand_more </span>
+            <button class="hide" onclick="toggleCollapsible(this)">
+                <span class="material-icons expanded_icon">expand_less</span>
+                <span class="material-icons collapsed_icon">expand_more</span>
             </button>
         </div>
-        <div class="if_expanded expand_content">
+        <div class="collapsible_content">
             <div is-visible="@showSpeciesStatusDocumentation">
                 <h3>Generelt om @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
                 <div class="expert_Assessment">
@@ -149,8 +148,10 @@
         Begrunnelse
     </h2>
 
+
     <div class="expert_Assessment">
         <div class="expert_text">
+            <div is-visible="isMisidentified">@Html.Raw(Model.MisidentifiedDescription)</div>
             <div is-visible="@showChangedAssessment">
                 <p is-visible="@showAlienStatusExplanation">
                     @Html.Raw(Model.AlienStatusExplanation) 

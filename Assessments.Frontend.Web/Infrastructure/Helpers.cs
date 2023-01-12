@@ -565,6 +565,12 @@ namespace Assessments.Frontend.Web.Infrastructure
             " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
 
         public const string AlienSpecies2023NoListViewResults = "Kombinasjonen av søk og filter gir ingen treff i Fremmedartslista for 2023.";
+
+        public const string AlienSpecies2023KnownOccurrence = "Kjent utbredelse i dag";
+
+        public const string AlienSpecies2023AssumedOccurrence = "Antatt utbredelse i dag";
+
+        public const string AlienSpecies2023AssumedInFutureOccurrence = "Antatt utbredelse om 50 år";
     }
 
     public class CategoryComparer : IComparer<string>

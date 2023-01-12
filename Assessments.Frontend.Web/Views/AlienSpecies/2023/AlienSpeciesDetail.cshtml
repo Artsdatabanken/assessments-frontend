@@ -1,5 +1,7 @@
 ﻿@model AlienSpeciesDetailViewModel
 @using Assessments.Mapping.AlienSpecies.Model.Enums
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Assessments.Data.Models
 
 @{
     var assessment = Model.Assessment;
@@ -41,7 +43,7 @@
         RevisionDate = new DateTime(), // TODO: add if we handle revisions in this list
         RevisionReason = string.Empty, // TODO: add if we handle revisions in this list
         YearPreviousAssessment = assessment.PreviousAssessments?.Select(x => x.RevisionYear).OrderByDescending(x => x).FirstOrDefault() ?? 0,
-        ExpertGroupMembers = Model.ExpertGroupMembers
+        ExpertGroupMembers = Model.ExpertGroupMembers.Select(x => $"{x.LastName} {x.FirstNameInitials}").JoinAnd(", ", " og ")
     };
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
@@ -57,9 +59,12 @@
 
     var ingressViewModel = new IngressViewModel()
     {
+        AlienSpeciesCategory = assessment.AlienSpeciesCategory,
         Category = assessment.Category,
         Environment = assessment.Environment,
         ListName = Constants.AlienSpecies2023PageMenuHeaderText,
+        ParentAssessmentId = assessment.ParentAssessmentId,
+        SpeciesStatus = assessment.SpeciesStatus,
         Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
         TaxonRank = assessment.ScientificNameRank
     };
@@ -91,7 +96,6 @@
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>
                 @*    Check which ones are appropriate for alien species list
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Ingress.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Method.cshtml" />
@@ -101,8 +105,13 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />*@
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="Model.ExpertStatementViewModel" />
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskCategoryExplanation.cshtml" />
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_CategoryChange.cshtml" />
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ClimateEffectsInvationpotential.cshtml" />
+                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_GeographicVariationInCategory.cshtml"  />
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RegionalSpread.cshtml" model="Model.RegionalSpreadViewModel" />
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
+                <partial name="/Views/Shared/_Feedback.cshtml" model="new FeedbackFormViewModel { Year = 2023, AssessmentId = assessment.Id, ExpertGroup = assessment.ExpertGroup, Type = FeedbackType.AlienSpecies }" />
             </div>
         </div>
         <div class="side mobile_padding">
@@ -110,3 +119,4 @@
         </div>
     </div>
 </div>
+

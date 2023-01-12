@@ -66,7 +66,7 @@ ul.second {
     border-color: lightgrey;
 }
 
-.tabbed_element_container p {
+.tabbed_element_container ul p {
     padding-left: 24px;
     padding-bottom: 10px;
     margin-bottom: 0px;

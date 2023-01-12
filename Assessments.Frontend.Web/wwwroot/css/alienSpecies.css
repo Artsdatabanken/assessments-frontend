@@ -2,6 +2,10 @@ h1, h2, h3 {
     color: #0f0f0f;
 }
 
+.indented_list {
+    margin-left: 22px;
+}
+
 .page-header h1 {
     line-height: 1.3;
     font-size: 33px;
@@ -59,6 +63,12 @@ h1, h2, h3 {
     background: #8f4997;
 }
 
+
+    .darktheme .button.primary {
+        border: 1px solid #b372bb;
+        background: #8f4997;
+    }
+
 @media only screen and (max-width: 766px) {
     .header .themeselectordropdown,
     #headermenu {
@@ -87,11 +97,14 @@ h1, h2, h3 {
     width:100%;
 }
 
-
-/* TODO: adjust jumps */ 
+.map-box-container {
+    flex: 1;
+    text-align: center;
+    font-size: small;
+}
+/* TODO: adjust jumps */
 @media only screen and (max-width: 740px) {
-    .triple_map {
-       
+    .triple_map {       
         flex-wrap: wrap;
     }
 
@@ -101,70 +114,3 @@ h1, h2, h3 {
 }
 
 
-/* OVERRIDE P STYLING */
-
-.darktheme .tabbed_element_container p,
-.tabbed_element_container p{
-    border:0;
-    padding:4px;
-}
-
-.expanded .if_expanded {
-    display: inline-block;
-}
-
-.collapsed .if_expanded {
-    display: none;
-}
-
-.expanded .if_collapsed {
-    display: none;
-}
-
-.collapsed .if_collapsed {
-    display: inline-block;
-}
-
-.expandable {
-    border: 1px solid lightgrey;
-    margin-top: 40px;
-}
-
-.expandable .expand_content {
-    padding: 8px;
-    padding-bottom:20px;
-}
-
-.expand_header h2 {
-    margin: 0;
-}
-
-.expand_header {    
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-}
-
-.expanded .expand_header {
-    border-bottom: 1px solid lightgrey;
-}
-
-.darktheme .expand_header,
-.darktheme .expandable {
-    border-color: white;
-}
-
-.darktheme .main .ghost:not(:hover),
-.main .ghost {
-    background: none;
-    border: 2px solid transparent;
-    border-radius: 50%;
-    font-size: 24px;
-    margin: 0;
-}
-
-.main .ghost .material-icons {
-    font-size: inherit;
-    vertical-align: middle;
-}

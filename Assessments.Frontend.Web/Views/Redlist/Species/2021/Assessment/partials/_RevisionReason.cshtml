@@ -11,7 +11,7 @@
     <b>Justeringer etter publisering</b>
     <p>
         @Model.RevisionReason
-        <a asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="1">Gå til første utgave</a>
+        <a is-visible="Model.Revisions.Any()" asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="1">Gå til første utgave</a>
     </p>        
 </div>      
 }

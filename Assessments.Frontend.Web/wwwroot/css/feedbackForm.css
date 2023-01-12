@@ -1,0 +1,27 @@
+﻿.feedback_form {
+    width: 100%;
+}
+
+.feedback_form #FullName,
+.feedback_form #Email {
+    width: 50%;
+}
+
+.feedback_form #Comment {
+    width: 100%;
+}
+
+.feedback_form_input_field {
+    margin-bottom: 25px;
+}
+
+@media only screen and (max-width: 550px) {
+    .feedback_form #FullName, .feedback_form #Email {
+        width: 100%;
+    }
+}
+
+.input-validation-error {
+    border: 1px solid red;
+    outline-color: red;
+}

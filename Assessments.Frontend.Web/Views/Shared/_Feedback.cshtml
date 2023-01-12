@@ -45,11 +45,11 @@
 
             Model.FullName = emailValidation.FullName;
             Model.Email = emailValidation.Email;
-            
+
             Context.Response.Cookies.Append(validationCookieName, emailValidation.Guid.ToString(), new CookieOptions
-            {
-                Expires = DateTime.Now.AddMonths(1)
-            });
+                    {
+                        Expires = DateTime.Now.AddMonths(1)
+                    });
         }
         else
         {
@@ -130,9 +130,19 @@ else
     </div>
 }
 
-<script src="/js/aspnet-validation.min.js"></script>
+<script src="~/js/lib/jquery.slim.min.js"></script>
+<script src="~/js/lib/jquery.validate.min.js"></script>
+<script src="~/js/lib/jquery.validate.unobtrusive.min.js"></script>
 
 <script>
-    var validation = new aspnetValidation.ValidationService();
-    validation.bootstrap();
+    $(function () {
+        var defaultRangeValidator = $.validator.methods.range;
+        $.validator.methods.range = function (value, element, param) {
+            if (element.type === 'checkbox') {
+                return element.checked;
+            } else {
+                return defaultRangeValidator.call(this, value, element, param);
+            }
+        }
+    });
 </script>

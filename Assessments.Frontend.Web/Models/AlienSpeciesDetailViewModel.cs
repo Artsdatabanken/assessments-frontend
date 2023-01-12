@@ -27,12 +27,29 @@ namespace Assessments.Frontend.Web.Models
                 EvaluationContext = assessment.EvaluationContext,
                 HasIndoorProduction = assessment.HasIndoorProduction,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
+                References = assessment.References.Select(x => new CommonSimpleReference
+                {
+                    ReferenceId = x.ReferenceId,
+                    FormattedReference = x.FormattedReference,
+                    Type = x.Type
+                }).ToList(),
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
                 Summary = assessment.RiskAssessmentGeographicalVariationDocumentation,
                 TaxonRank = assessment.ScientificNameRank,
                 UncertaintyEstablishmentTimeDescription = assessment.UncertaintyEstablishmentTimeDescription,
                 UncertaintyStatusDescription = assessment.UncertaintyStatusDescription
+            };
+
+            ReferenceViewModel = new ReferenceViewModel
+            {
+                IsCollapsible = true,
+                References = assessment.References.Select(x => new CommonSimpleReference
+                {
+                    ReferenceId = x.ReferenceId,
+                    FormattedReference = x.FormattedReference,
+                    Type = x.Type
+                }).ToList()
             };
 
             RegionalSpreadViewModel = new RegionalSpreadViewModel
@@ -78,6 +95,8 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023 Assessment { get; set; }
 
         public ExpertStatementViewModel ExpertStatementViewModel { get; set; }
+
+        public ReferenceViewModel ReferenceViewModel { get; set; }
 
         public RegionalSpreadViewModel RegionalSpreadViewModel { get; set; }
 

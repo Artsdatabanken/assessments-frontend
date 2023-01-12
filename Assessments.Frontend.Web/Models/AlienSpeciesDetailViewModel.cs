@@ -28,7 +28,7 @@ namespace Assessments.Frontend.Web.Models
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
-                Summary = assessment.RiskAssessmentGeographicalVariationDocumentation,
+                Summary = assessment.GeographicalVariationDocumentation,
                 TaxonRank = assessment.ScientificNameRank,
                 UncertaintyEstablishmentTimeDescription = assessment.UncertaintyEstablishmentTimeDescription,
                 UncertaintyStatusDescription = assessment.UncertaintyStatusDescription

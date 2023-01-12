@@ -214,17 +214,17 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 
         /// </summary>
-        public List<string> RiskAssessmentGeographicalVariation { get; set; }
+        public List<string> GeographicalVariation { get; set; }
 
         /// <summary>
         /// Further information about the geographic variance in category 
         /// </summary>
-        public string RiskAssessmentGeographicalVariationDocumentation { get; set; }
+        public string GeographicalVariationDocumentation { get; set; }
 
         /// <summary>
         /// Wether the species has a lower impact category in parts of the species’ range
         /// </summary>
-        public bool? RiskAssessmentGeographicVariationInCategory { get; set; }
+        public bool? GeographicVariationInCategory { get; set; }
 
         /// <summary>
         /// Reasons for why a species' category has changed since the last assessment. List with up to 6 elements.

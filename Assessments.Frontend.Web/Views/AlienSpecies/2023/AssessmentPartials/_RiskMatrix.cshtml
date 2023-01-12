@@ -4,19 +4,42 @@
    Direct copy from 2018 version. 
 
    Hel linje - 
-    det angir det beste anslaget på plassering i matrisa 
-    og er det som bestemmer kategorien.     
-    Du finner denne ruta ved hjelp av feltene 
-    ScoreInvasionPotential (x-aksen) og
-    ScoreEcologicalEffect (y-aksen).
+    > Angir beste anslått plassering i matrisa 
+    > bestemmer kategorie     
+    ScoreInvasionPotential (x-aksen) 
+    ScoreEcologicalEffect (y-aksen)
 
+   Striplede linjer - 
+   > angir usikkerheten. 
+   > Utgangspunkt i kategoriplasseringsruta
+   > Kan bevege seg i to akser:
+   - horisontalt (x-aksen) 
+   - eller/og vertikalt (y-aksen). 
+   - Kan ikke gå på skrå.
+
+   x-aksen: A-C-kriteriene
+
+   Datagrunnlag:
+   - AlienSpeciesAssessment2023Criterion Criteria. 
    
+   y-aksen:
+   
+   > den/de av kriteriene D-I som har høyest Value. 
+   > Hvis UncertaintyValues.Length > 1 for denne / en av disse
+    => UncertaintyValues for den/de relevante kriteriene  => usikkerhet på y-aksen (vertikalt i matrisa).
+   > Hvis UncertaintyValues.Length == 1 => ingen usikkerhet på y-aksen.
 *@
 
 @{
+    // Calculate category placement on the grid
     var x = Model.Assessment.ScoreInvasionPotential;
     var y = Model.Assessment.ScoreEcologicalEffect;
     var place = x + "" + y;
+
+    // Calculate uncertainty
+    var data = Model.Assessment.Criteria;
+    
+
 }
 
 @functions{
@@ -39,33 +62,47 @@
 <figure class="risk-level-matrix">
     <table>
         <tbody>
+            
             <tr>
                 <td rowspan="4" class="legend legend-v"><span>Økologisk effekt</span></td>
+                <td class="description"><span>4</span> stor</td>
                 <td class="cat-ph @className("14", place )" id="risk-41">14</td>
                 <td class="cat-hi @className("24", place)"  id="risk-42">24</td>
                 <td class="cat-se @className("34", place)"  id="risk-43">34</td>
                 <td class="cat-se @className("44", place)"  id="risk-44">44</td>
             </tr>
             <tr>
+                <td class="description"><span>3</span> middels</td>
                 <td class="cat-lo @className("13", place)" id="risk-31">13</td>
                 <td class="cat-hi @className("23", place)" id="risk-32">23</td>
                 <td class="cat-hi @className("33", place)" id="risk-33">33</td>
                 <td class="cat-se @className("43", place)" id="risk-34">43</td>
             </tr>
             <tr>
+                <td class="description"><span>2</span> liten</td>
                 <td class="cat-lo @className("12", place)" id="risk-21">12</td>
                 <td class="cat-lo @className("22", place)" id="risk-22">22</td>
                 <td class="cat-lo @className("32", place)" id="risk-23">32</td>
                 <td class="cat-hi @className("42", place)" id="risk-24">42</td>
             </tr>
             <tr>
+                <td class="description"><span>1</span> ingen kjent</td>
                 <td class="cat-nk @className("11", place)" id="risk-11">11</td>
                 <td class="cat-lo @className("21", place)" id="risk-12">21</td>
                 <td class="cat-lo @className("31", place)" id="risk-13">31</td>
                 <td class="cat-ph @className("41", place)" id="risk-14"><b>41</b></td>
             </tr>
+            <tr>
+                <td class="description"></td>
+                <td class="description"></td>
+                <td class="description"><span>1</span> lite</td>
+                <td class="description"><span>2</span> begrensa</td>
+                <td class="description"><span>3</span> moderat</td>
+                <td class="description"><span>4</span> stor</td>
+            </tr>
         <tr>
             <td class="legend"></td>
+            <td></td>
             <td colspan="4" class="legend">Invasjonspotensial</td>
         </tr>
         </tbody>

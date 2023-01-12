@@ -8,7 +8,7 @@ figure.risk-level-matrix table {
     border: none;
     border-collapse: separate;
     border-spacing: 1px;
-    width: 300px;
+    width: 360px;
     height: 300px;
 }
 
@@ -28,23 +28,26 @@ figure.risk-level-matrix table {
     }
 }
 
-figure.risk-level-matrix table td {
-    width: 20%;
-    height: 20%;
-    border: thin solid transparent;
+figure.risk-level-matrix table td:not(.description) {
+    width: 44px;
+    height: 44px;
+    border: 2px solid transparent;
     text-align: center;
     font-weight: bold;
     padding: 0;
     color: transparent;
 }
-
-figure.risk-level-matrix table td[colspan] {
-    border-top-color: #000000;
-    color: #000000;
+figure.risk-level-matrix table .description {
+   color: black;
 }
 
+.darktheme figure.risk-level-matrix table .description {
+    color: white;
+}
+
+
+figure.risk-level-matrix table td[colspan],
 figure.risk-level-matrix table td[rowspan] {
-    border-right-color: #000000;
     color: #000000;
 }
 
@@ -116,23 +119,31 @@ figure.risk-level-matrix table .uncertain > span {
 }
 
 figure.risk-level-matrix table td.legend {
-    
     font-weight: normal;
-    text-align: left;
+    text-align: center;
 }
 
 figure.risk-level-matrix table td.legend-v {
-    width: 1rem;
     position: relative;
 }
 
 figure.risk-level-matrix table td.legend-v span {
     position: absolute;
-    bottom: 0;
-    right: .5rem;
     transform: rotate(-90deg);
     display: block;
     width: 1rem;
     white-space: nowrap;
     line-height: 1rem;
+    top: 50%;
+    right: -2em;
+    text-align: center;
+    bottom: 0;
+}
+
+.description{
+    font-size:small
+}
+
+.description span {
+    display: block;
 }

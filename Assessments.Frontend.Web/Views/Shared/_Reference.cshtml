@@ -1,5 +1,9 @@
 ﻿@model ReferenceViewModel
 
+@{
+    var references = Model.References.OrderBy(x => x.FormattedReference).ToArray();
+}
+
 @if (@Model.References != null && Model.References.Count() > 0)
 {
     <div class="@(Model.IsCollapsible ? "collapsible initially_closed" : "")">
@@ -16,7 +20,7 @@
                 @if (Model.References.Count() > 0)
                 {
                     <ul>
-                        @foreach (var reference in Model.References)
+                        @foreach (var reference in references)
                         {
                             <li class="reference">@reference.FormattedReference</li>
                         }

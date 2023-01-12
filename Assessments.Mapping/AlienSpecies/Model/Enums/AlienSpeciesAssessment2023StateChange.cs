@@ -7,49 +7,49 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "")]
         StateChangeNotSpecified,
 
-        [Display(Name = "Erosjonsutsatthet")]
+        [Display(Name = "erosjonsutsatthet")]
         ER,
 
-        [Display(Name = "Oksygenmangel")]
+        [Display(Name = "oksygenmangel")]
         OM,
 
-        [Display(Name = "Sandstabilisering")]
+        [Display(Name = "sandstabilisering")]
         SS,
 
-        [Display(Name = "Vannmetning")]
+        [Display(Name = "vannmetning")]
         VM,
 
-        [Display(Name = "Enkeltartssammensetning")]
+        [Display(Name = "enkeltartssammensetning")]
         AE,
 
-        [Display(Name = "Artsgruppesammensetning")]
+        [Display(Name = "artsgruppesammensetning")]
         AG,
 
-        [Display(Name = "Relativ del-artsgruppesammensetning")]
+        [Display(Name = "relativ del-artsgruppesammensetning")]
         AR,
 
-        [Display(Name = "Eutrofiering")]
+        [Display(Name = "eutrofiering")]
         EU,
 
-        [Display(Name = "Rask suksesjon")]
+        [Display(Name = "rask suksesjon")]
         RA,
 
-        [Display(Name = "Naturlig bestandsreduksjon på tresatt areal")]
+        [Display(Name = "naturlig bestandsreduksjon på tresatt areal")]
         SN,
 
-        [Display(Name = "Ubalanse mellom trofiske nivåer")]
+        [Display(Name = "ubalanse mellom trofiske nivåer")]
         UB,
 
-        [Display(Name = "Tresjiktstruktur")]
+        [Display(Name = "tresjiktstruktur")]
         TS,
 
-        [Display(Name = "Annen tilstandsendring")]
+        [Display(Name = "annen tilstandsendring")]
         other,
 
-        [Display(Name = "Naturtype endres til innsjø-vannmasser preget av introduksjon eller bortfall av strukturerende organismer (F11)")]
+        [Display(Name = "naturtype endres til innsjø-vannmasser preget av introduksjon eller bortfall av strukturerende organismer (F11)")]
         F11,
 
-        [Display(Name = "Naturtype endres til elvevannmasser preget av introduksjon eller bortfall av strukturerende organismer (F13)")]
+        [Display(Name = "naturtype endres til elvevannmasser preget av introduksjon eller bortfall av strukturerende organismer (F13)")]
         F13
             
     }

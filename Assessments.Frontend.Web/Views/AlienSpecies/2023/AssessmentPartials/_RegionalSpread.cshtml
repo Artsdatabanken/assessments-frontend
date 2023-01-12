@@ -3,8 +3,7 @@
 
 @{
     var evaluationContextText = Model.IsSvalbard ? "på Svalbard" : "i Norge";
-
-    var showPage = Model.Category != AlienSpeciesAssessment2023Category.NR;
+    var showPage = Model.Category != AlienSpeciesAssessment2023Category.NR && Model.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var isAlienSpecie = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
     var isDoorKnocker = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
     var isEffectWithoutReproduction = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;

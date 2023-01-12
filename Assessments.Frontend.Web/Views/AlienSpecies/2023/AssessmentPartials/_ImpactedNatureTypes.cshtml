@@ -16,62 +16,62 @@
             </button>
         </div>
         <div class="collapsible_content">
-            <p>Her vises naturtypene den fremmede arten er observert i, eller/og naturtyper som er potensielle habitater for arten i Norge, samt påvirkningen arten har eller antas å ha i naturtypene. </p>
-            
-            
+            <p>Her vises naturtypene den fremmede arten er observert i, eller/og naturtyper som 
+                er potensielle habitater for arten i Norge, samt påvirkningen arten har eller 
+                antas å ha i naturtypene. 
+            </p>            
             <p class="big-data-table table-description"><b>Tabell over valgte truede, sjeldne og øvrige naturtyper </b>
                 Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er 
                 observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner 
                 (det av tallene som er størst), samt artens (eventuelt framtidige) påvirkning i 
-                naturtypen og anslått andel av naturtypens areal som blir eller vil bli påvirket (F- og G-kriteriet).</p>
-        
+                naturtypen og anslått andel av naturtypens areal som blir eller vil bli påvirket 
+                (F- og G-kriteriet).
+            </p>
             <table class="big-data-table">
                 <tr>
                     <th>naturtype</th>
                     <th>tidshorisont</th>
-                    <th>kolonisert areal (%)</th>
-                    <th>tydelig tilstandsendring</th>
-                    <th>tydelig påvirka areal (%)</th>
+                    <th>kolonisert <br />areal (%)</th>
+                    <th>tydelig <br />tilstandsendring</th>
+                    <th>tydelig <br />påvirka <br />areal (%)</th>
                     <th>vurderingsgrunnlag</th>
                 </tr>
                 @{
-                    
-                        foreach (var natureType in natureTypes)
-                    {
-                        <tr>
-
-                        <td><b class="only_mobile">naturtype:</b>@natureType.Name</td>
-                        <td><b class="only_mobile">tidshorisont:</b>@natureType.TimeHorizon.DisplayName()</td>
-                        <td><b class="only_mobile">kolonisert areal (%):</b>@natureType.ColonizedArea</td>
-                        <td><b class="only_mobile">tydelig tilstandsendring:</b>
-                        @{ if(natureType.StateChange != null)
-                            { 
-                             <ul>
-                                @{
-                                    foreach (var state in natureType.StateChange)
-                                    {<li>@state.DisplayName()</li>}
-                                 }
-                             </ul>
+                foreach (var natureType in natureTypes)
+                {
+                <tr>
+                    <td><b class="only_mobile">naturtype:</b>@natureType.Name</td>
+                    <td><b class="only_mobile">tidshorisont:</b>@natureType.TimeHorizon.DisplayName()</td>
+                    <td><b class="only_mobile">kolonisert areal (%):</b>@natureType.ColonizedArea</td>
+                    <td><b class="only_mobile">tydelig tilstandsendring:</b>
+                    @{ 
+                        if(natureType.StateChange != null)
+                        { 
+                            <ul>
+                            @{
+                                foreach (var state in natureType.StateChange)
+                                {<li>@state.DisplayName()</li>}
                             }
+                            </ul>
                         }
-                        </td>
-                        <td><b class="only_mobile">tydelig påvirka areal (%):</b>@natureType.AffectedArea</td>
-                         <td><b class="only_mobile">vurderingsgrunnlag:</b>
-                        @{ if(natureType.Background != null)
-                            { 
-                             <ul>
-                                @{
-                                    foreach (var bg in natureType.Background)
-                                    {<li>@bg.DisplayName()</li>}
-                                 }
-                             </ul>
-                            }
-                        }
-                        </td>
-                        </tr>
                     }
-                    
-                    
+                    </td>
+                    <td><b class="only_mobile">tydelig påvirka areal (%):</b>@natureType.AffectedArea</td>
+                    <td><b class="only_mobile">vurderingsgrunnlag:</b>
+                    @{ 
+                        if(natureType.Background != null)
+                        { 
+                            <ul>
+                            @{
+                                foreach (var bg in natureType.Background)
+                                {<li>@bg.DisplayName()</li>}
+                                }
+                            </ul>
+                        }
+                    }
+                    </td>
+                </tr>
+                }
                 }
             </table>
         </div>

@@ -250,12 +250,12 @@
                                                         Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra forventet endring i forekomstareal framover i tid.
                                                     </p>
                                                     <p>
-                                                        Basert på det det beste anslaget på forekomstarealet i dag (@Model.Assessment.AOOtotalBest km<sup>2</sup>) og om 50 år (@Model.Assessment.AOOfutureBest km<sup>2</sup>) er ekspansjonshastigheten anslått til @Model.Assessment.ExpansionSpeedBestEstimate m/år. Dette tilsvarer skår @uncertaintyB.Value på B-kriteriet. 
+                                                        Basert på det beste anslaget på forekomstarealet i dag (@Model.Assessment.AOOtotalBest km<sup>2</sup>) og om 50 år (@Model.Assessment.AOOfutureBest km<sup>2</sup>) er ekspansjonshastigheten anslått til @Model.Assessment.ExpansionSpeedBestEstimate m/år. Dette tilsvarer skår @uncertaintyB.Value på B-kriteriet. 
                                                     </p>
                                                 </div>
                                                 <div is-visible="isEstimatedIncreaseInAOODoorKnockers">
                                                     <p>
-                                                        Basert på det beste anslaget på [RiskAssessmentOccurrences1Best] forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @uncertaintyLowB – @uncertaintyHighB). Det beste anslaget på artens ekspansjonshastighet er @Model.Assessment.ExpansionSpeedBestEstimate m/år).
+                                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyB.Value, uncertaintyLowB) – @GetUncertaintyValueMinMax(uncertaintyB.Value, uncertaintyHighB)). Det beste anslaget på artens ekspansjonshastighet er @Model.Assessment.ExpansionSpeedBestEstimate m/år.
                                                     </p>
                                                 </div>
                                             </div>

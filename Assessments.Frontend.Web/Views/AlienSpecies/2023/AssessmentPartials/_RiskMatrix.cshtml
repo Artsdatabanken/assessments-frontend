@@ -139,9 +139,11 @@ alle disse har usikkerhet nedover - så skal det vises
         if(current_x == place_x)
         {
             // Add uncertainty to the y-axis only for the current column on the x-axis.
-            if (highestUncertainty_y >=  current_y)
+            if (current_y <= highestUncertainty_y && current_y > place_y)
             {
-                classN = "uncertain";
+                // y value smaller than the highest cap
+                // higher than the category value
+                classN = "uncertain " + highestUncertainty_y + " " +current_y + " " + place_y;               
             }
         }
 

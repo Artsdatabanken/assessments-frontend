@@ -25,7 +25,7 @@
     };
 
     ViewData["Title"] = "Fremmedartslista";
-}
+    }
 
 <div class="pagecontainer">
     <partial name="/Views/Shared/_PageMenu.cshtml" model="@pageMenuViewModel" />
@@ -34,11 +34,16 @@
         <div class="mid-content">
             <div class="title_with_image">
                 <div class="title_with_header">
+                    
                     <partial name="/Views/Shared/_Header.cshtml" model="@pageHeaderViewModel" />
                 </div>
                 <div class="title_with_ingress">
                     <img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />
-                    <partial name="/Views/Shared/_Introduction.cshtml" model="@introductionViewModel" />
+                    <partial name="/Views/Shared/_Introduction.cshtml" model="@introductionViewModel" /> 
+                    <p>@Constants.AlienSpecies2023InnsynDescription1</p>
+                    <p>@Constants.AlienSpecies2023InnsynDescription2<a href="@Constants.AlienSpecies2023InnsynDescriptionLink1">@Constants.AlienSpecies2023InnsynDescription3</a>@Constants.AlienSpecies2023InnsynDescription4</p>
+                    <p>@Constants.AlienSpecies2023InnsynDescription5</p>
+                    <strong>@Constants.AlienSpecies2023InnsynDeadline</strong>
                 </div>
             </div>
 

@@ -551,9 +551,9 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023PageMenuHeaderTextShort = "Fremmedartslista";
 
-        public const string AlienSpecies2023HeaderText = "Norsk fremmedartsliste for 2023";
+        public const string AlienSpecies2023HeaderText = "Fremmedartslista 2023 – innsyn";
 
-        public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
+        public const string AlienSpecies2023HeaderByline = "Publisert: 6. februar 2023"; // TODO: change to correct publishing date
 
         public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
 
@@ -571,6 +571,15 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023AssumedOccurrence = "Antatt utbredelse i dag";
 
         public const string AlienSpecies2023AssumedInFutureOccurrence = "Antatt utbredelse om 50 år";
+
+        public const string AlienSpecies2023InnsynDescription1 = "I august 2023 lanserer Artsdatabanken en ny utgave av Fremmedartslista. Nå åpner vi for innsyn i de foreløpige risikovurderingene. Hensikten med innsynet er å øke kunnskapsgrunnlaget for vurderingene. Vi ønsker innspill fra alle som har utfyllende og relevant kunnskap. Eksempel på relevant informasjon er publiserte artikler eller rapporter som dokumenterer fremmede arters effekt eller spredning. Funn som dokumenterer spredning til og etablering i nye områder er også av stor interesse. Innsynet er åpent fra mandag 20. februar 2023.";
+        public const string AlienSpecies2023InnsynDescription2 = "Risikovurderingene blir utført av 58 eksperter, fordelt på 12 ";
+        public const string AlienSpecies2023InnsynDescription3 = "komitéer";
+        public const string AlienSpecies2023InnsynDescriptionLink1 = "";
+        public const string AlienSpecies2023InnsynDescription4 = ". Hver komité har en ansvarlig leder og arbeidet er kontraktsfestet med den institusjonen ekspertkomitélederen tilhører.";
+        public const string AlienSpecies2023InnsynDescription5 = "Resultatene er foreløpige. Det er ikke tillatt å publisere sammenstillinger av resultatene som framkommer i innsynet";
+        public const string AlienSpecies2023InnsynDeadline = "Fristen for å sende inn innspill er 12. mars 2023.";
+
     }
 
     public class CategoryComparer : IComparer<string>

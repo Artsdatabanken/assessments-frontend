@@ -91,6 +91,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string MisidentifiedDescription { get; set; }
 
+        public List<CommonSimpleReference> References { get; set; }
+
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 
         public string SpreadIntroductionFurtherInfo { get; set; }
@@ -176,6 +178,13 @@ namespace Assessments.Frontend.Web.Models
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
     }
 
+    public class ReferenceViewModel
+    {
+        public bool IsCollapsible { get; set; }
+
+        public List<CommonSimpleReference> References { get; set; }
+    }
+
     public class SideBarContentViewModel
     {
         public class SideBarPreviousAssessment
@@ -202,6 +211,15 @@ namespace Assessments.Frontend.Web.Models
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
         public string TaxonRank { get; set; }
+    }
+
+    public class CommonSimpleReference
+    {
+        public string Type { get; set; }
+
+        public Guid ReferenceId { get; set; }
+
+        public string FormattedReference { get; set; }
     }
 
     public class HeaderViewModel

@@ -241,7 +241,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 {
                     opt.PreCondition(src => src.StateChange.Count > 0);
                     opt.MapFrom(src => src.StateChange.Select(x => string.Concat(x.Where(char.IsLetter))));
-                });
+                })
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToLower()));
         }
     }
 }

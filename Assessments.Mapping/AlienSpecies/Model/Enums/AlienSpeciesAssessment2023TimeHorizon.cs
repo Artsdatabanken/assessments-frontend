@@ -4,10 +4,10 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023TimeHorizon
     {
-        [Display(Name = "Nå")]
+        [Display(Name = "nå")]
         now,
 
-        [Display(Name = "Fremtidig")]
+        [Display(Name = "fremtidig")]
         future
     }
 }

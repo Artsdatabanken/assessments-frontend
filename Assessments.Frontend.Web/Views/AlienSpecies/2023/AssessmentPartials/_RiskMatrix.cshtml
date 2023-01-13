@@ -2,136 +2,82 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 @*
    Risk Matrix
-   Direct copy from 2018 version. 
 
-   Hel linje - 
-    > Angir beste anslått plassering i matrisa 
-    > bestemmer kategorie     
-    ScoreInvasionPotential (x-aksen) 
-    ScoreEcologicalEffect (y-aksen)
+   FILLED LINE: BEST ESTIMATE OF MARTIX PLACEMENT
+   -> Determines risk category
 
-   Striplede linjer - 
-   > angir usikkerheten. 
-   > Utgangspunkt i kategoriplasseringsruta
-   > Kan bevege seg i to akser:
-   - horisontalt (x-aksen) 
-   - eller/og vertikalt (y-aksen). 
-   - Kan ikke gå på skrå.
-
-   x-aksen: A-C-kriteriene
-
-   Datagrunnlag:
-   - AlienSpeciesAssessment2023Criterion Criteria. 
-   
-   y-aksen:
-   
-   > den/de av kriteriene D-I som har høyest Value. 
-   > Hvis UncertaintyValues.Length > 1 for denne / en av disse
-    => UncertaintyValues for den/de relevante kriteriene  => usikkerhet på y-aksen (vertikalt i matrisa).
-   > Hvis UncertaintyValues.Length == 1 => ingen usikkerhet på y-aksen.
-
-
+   Dashed/Dotted Line - Uncertainty
+   -> one step up/down from risk category
+       x-axis: A-C-criteria. Rules will come later.
+       y-axis: the/those criteria D-I with the highest value       
+           if UncertaintyValues.Count > 1 = has uncertainty on the y-axis
+                upwards uncertainty: the highest number
+                downwards uncertainty: all determening criteria must have the same for it to be added
+           if UncertaintyValues.Count == 1 = no uncertainty on the y-axis
 *@
 
 @{
+    // Names / Descriptions         
+    string xAxisLabel = "Invasjonspotensial";
+    string yAxisLabel = "Økologisk effekt";
+
     // Obtain Criteria Letters
+    var criteria = Model.Assessment.Criteria;
     var A = AlienSpeciesAssessment2023CriteriaLetter.A;
     var B = AlienSpeciesAssessment2023CriteriaLetter.B;
     var C = AlienSpeciesAssessment2023CriteriaLetter.C;
 
-    // Calculate category placement on the grid
+    // Risk category placement
     int x = Model.Assessment.ScoreInvasionPotential.Value;
     int y = Model.Assessment.ScoreEcologicalEffect.Value;
-    var place = x + "" + y;
+    List<AlienSpeciesAssessment2023Criterion> yAxisCriteriaList = new List<AlienSpeciesAssessment2023Criterion>();
 
-    // Calculate uncertainty
-    var criteria = Model.Assessment.Criteria;
-    var determiningCriteriaY = "";
-    var highestCriteriaValueY = 0;
-    var yLowerUncertainty = highestCriteriaValueY;
-    var yhigherUncertainty = highestCriteriaValueY;
-    List<int> uncertaintiesY = new List<int>();
 
-    var whichAxis = "";
-
-    foreach (var criterium in criteria)
+    // Obtain all counting criteria
+    foreach (var criterion in criteria)
     {
-        var letter = criterium.CriteriaLetter;
-        if(letter == A || letter == B || letter == C){
-            // X-axis
-            whichAxis += "x";
-        }else
-        {
-            // y-axis
-            if(criterium.UncertaintyValues.Count > 1 && criterium.Value > 0)
+        var letter = criterion.CriteriaLetter;
+        var xAxis = (letter == A || letter == B || letter == C);
+        if (!xAxis){
+            if (criterion.UncertaintyValues.Count > 1 && criterion.Value > 0 && criterion.Value == y)
             {
-                whichAxis += ">y<";
-
-                if(criterium.Value == highestCriteriaValueY)
-                {
-                    // COMPARE And update the previous highest criteria
-                    determiningCriteriaY += criterium.CriteriaLetter; // add letter to string of highest rated criteria for testing
-                    var newUncertainties = criterium.UncertaintyValues;
-                    var newLowerUncertainty = criterium.Value;
-
-                    // obtain top and bottom of range for this criteria
-                    foreach (var uncertainty in newUncertainties)
-                    {
-                        if(uncertainty > yhigherUncertainty)
-                        { 
-                            // always use the highest directly
-                            yhigherUncertainty = uncertainty;
-                        }
-                        if(uncertainty < newLowerUncertainty)
-                        {   
-                            // set uncertainty for this criteria only
-                            newLowerUncertainty = uncertainty;
-                        }
-                    }
-
-                    // REQUIREMENT: multiple counting criterias must have 
-                    // the same lower uncertainty or be reset back to criteria score.
-
-                    if(newLowerUncertainty != yLowerUncertainty)
-                    {
-                        yLowerUncertainty = criterium.Value;
-                    }
-
-                    uncertaintiesY.Concat(criterium.UncertaintyValues); // Adds ALL uncertainty values to one list
-
-
-                }else if(criterium.Value > highestCriteriaValueY)
-                {
-                    // SET/RESET all values to this criterium
-                    determiningCriteriaY = "" + criterium.CriteriaLetter;
-
-                    // Start all values at criteria value
-                    highestCriteriaValueY = criterium.Value;
-                    yhigherUncertainty = criterium.Value;
-                    yLowerUncertainty = criterium.Value;       
-                    
-                    // Obtain top and bottom uncertainties
-                    uncertaintiesY = criterium.UncertaintyValues;
-                    foreach (var uncertainty in uncertaintiesY)
-                    {
-                        if(uncertainty < yLowerUncertainty)
-                        {
-                            yLowerUncertainty = uncertainty;
-                        }
-                        if(uncertainty > yhigherUncertainty)
-                        {
-                            yhigherUncertainty = uncertainty;
-                        }
-                    }                    
-                }
+                yAxisCriteriaList.Add(criterion);
             }
-            else
-            {
-                // No uncertainty for this one. skip it.
-                whichAxis += "-y-";
-            }
-        } 
+        }
     }
+
+    // Uncertainty Values
+
+    int yhigherUncertainty = y;
+    List<int> lowestYList = new List<int>();
+
+    foreach (var criterion in yAxisCriteriaList)
+    {
+        // Obtain top and bottom uncertainties
+        int criteriaLowestY = y;
+        foreach (var uncertainty in criterion.UncertaintyValues)
+        {
+            // Always use highest uncertainty 
+            if(uncertainty > yhigherUncertainty)
+            {
+                yhigherUncertainty = uncertainty;
+            }
+            // dump all the lower uncertainties into one comparison-list
+            if(uncertainty < y)
+            {
+                lowestYList.Add(uncertainty);
+            }
+        }   
+    }
+
+    int yLowerUncertainty = y;
+    // set lower uncertainty if all lower uncertainty values are the same
+    if(lowestYList.Distinct().Count() == 1)
+    {
+        yLowerUncertainty = lowestYList[0];
+    }
+
+}
 
 @functions{
     string className(int current_x, int current_y, int place_x, int place_y,int highestUncertainty_y, int lowestUncertainty_y){
@@ -168,32 +114,12 @@
 }
 <h2>Risikomatrisen</h2>
 
-<p>
-    En forklaring er bra å ha. @whichAxis
-    <br/>
-
-    x: @x <br/> 
-    y: @y 
-    <br/>
-    @determiningCriteriaY = @highestCriteriaValueY <br/>
-    @{
-        foreach (var uncertainty in uncertaintiesY)
-        {
-            <b>@uncertainty</b>
-        }
-        
-    }
-    <br/>
-    @yLowerUncertainty LOWEST <br/>
-    @yhigherUncertainty HIGHEST
-    
-</p>
 <figure class="risk-level-matrix">
     <table>
         <tbody>
             
             <tr>
-                <td rowspan="4" class="legend legend-v"><span>Økologisk effekt</span></td>
+                <td rowspan="4" class="legend legend-v"><span>@yAxisLabel</span></td>
                 <td class="description"><span>4</span> stor</td>
                 <td class="cat-ph @className(1, 4, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-41">14</td>
                 <td class="cat-hi @className(2, 4, x, y, yhigherUncertainty, yLowerUncertainty )"  id="risk-42">24</td>
@@ -232,7 +158,7 @@
         <tr>
             <td class="legend"></td>
             <td></td>
-            <td colspan="4" class="legend">Invasjonspotensial</td>
+            <td colspan="4" class="legend">@xAxisLabel</td>
         </tr>
         </tbody>
     </table>

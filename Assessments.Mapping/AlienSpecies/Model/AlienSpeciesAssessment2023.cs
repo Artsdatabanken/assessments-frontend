@@ -491,5 +491,8 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Pointer to parent assessment if child taxon is assessed at an higher level
         /// </summary>
         public List<SimpleReference> References { get; set; }
+
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteractionThreatenedSpecies> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new (); // lagt til 11.10.2016
+        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new ();
     }
 }

@@ -12,7 +12,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
         {
             CreateMap<AlienSpeciesAssessment2023, AlienSpeciesAssessment2023Export>()
                 .ForMember(dest => dest.AlienSpeciesCategory, opt => opt.MapFrom(src => src.AlienSpeciesCategory.DisplayName()))
-                .ForMember(dest => dest.RiskAssessmentGeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetGeographicalVariation(src.GeographicalVariation)))
+                .ForMember(dest => dest.GeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetGeographicalVariation(src.GeographicalVariation)))
                 .ForMember(dest => dest.PreviousAssessmentCategory2018, opt =>
                 {
                     opt.PreCondition(src => src.PreviousAssessments.Any(x => x.RevisionYear == 2018));

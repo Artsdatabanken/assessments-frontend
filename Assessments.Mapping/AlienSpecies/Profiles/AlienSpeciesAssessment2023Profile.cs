@@ -212,6 +212,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "high", src.AssessmentConclusion));
                 })
                 .ForMember(dest => dest.ParentAssessmentId, opt => opt.MapFrom(src => src.ParentAssessmentId))
+                .ForMember(dest => dest.SpeciesSpeciesInteractionsThreatenedSpecies, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => new[] { "VU", "EN", "CR" }.Any(y => x.RedListCategory.Contains(y)) || x.KeyStoneSpecie)))
+                
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
@@ -243,6 +245,16 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.StateChange.Select(x => string.Concat(x.Where(char.IsLetter))));
                 })
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToLower()));
+
+            CreateMap<RiskAssessment.SpeciesSpeciesInteraction, AlienSpeciesAssessment2023SpeciesSpeciesInteractionThreatenedSpecies>(MemberList.None)
+                .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.BasisOfAssessment))
+                .ForMember(dest => dest.InteractionStrength, opt => opt.MapFrom(src => src.Effect))
+                ;
+
+            CreateMap<RiskAssessment.SpeciesNaturetypeInteraction, AlienSpeciesAssessment2023SpeciesNaturetypeInteraction>(MemberList.None)
+                .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.BasisOfAssessment))
+                .ForMember(dest => dest.InteractionStrength, opt => opt.MapFrom(src => src.Effect))
+                ;
         }
     }
 }

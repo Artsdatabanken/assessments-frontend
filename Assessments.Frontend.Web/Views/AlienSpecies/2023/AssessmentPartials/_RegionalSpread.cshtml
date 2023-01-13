@@ -2,6 +2,7 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
+    var evaluationContextText = Model.IsSvalbard ? "på Svalbard" : "i Norge";
     var showPage = Model.Category != AlienSpeciesAssessment2023Category.NR && Model.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var isAlienSpecie = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
     var isDoorKnocker = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
@@ -42,7 +43,7 @@
     </div>
 
     <div class="collapsible_content only-tabs-inside">
-        <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , 'geographical_spread' )">Utbredelse i Norge</button>
+        <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , 'geographical_spread' )">Utbredelse @evaluationContextText</button>
         <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , 'geographical_spread' )">Regional naturvariasjon</button>
         <div class="tabbed_element_container assessment_tabs">
             <div id="domestic_spread">

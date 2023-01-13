@@ -90,6 +90,9 @@ h1, h2, h3 {
     }
 }
 
+ul {
+    list-style-position: inside;
+}
 
 /* MAP FOR FA ONLY */
 .triple_map{
@@ -113,4 +116,7 @@ h1, h2, h3 {
     }
 }
 
-
+.collapsible {
+    margin-top: 0;
+    margin-bottom: 40px;
+}

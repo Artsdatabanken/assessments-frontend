@@ -20,6 +20,6 @@
         (@date).
         @Html.Raw(Model.AssessmentName)
         @Model.PublicationText
-        @Context.Request.GetEncodedUrl()
+        @Context.Request.GetDisplayUrl().Split('?')[0]
     </p>
 }

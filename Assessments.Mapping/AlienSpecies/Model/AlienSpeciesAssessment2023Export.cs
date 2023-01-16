@@ -83,15 +83,15 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Geografisk variasjon i risiko")]
         [Description("Arter med en viss utstrekning i forekomstarealet kan, som en respons på ulike miljøbetingelser, ha ulik påvirkning i naturen. Spørsmålet viser til om arten kunne fått en lavere risikokategori i deler av sitt potensielle forekomstareal")]
-        public bool? RiskAssessmentGeographicVariationInCategory { get; set; }
+        public bool? GeographicVariationInCategory { get; set; }
 
         [DisplayName("Årsak til geografisk variasjon i risiko")]
         [Description("Angitte årsaker for hvorfor arten vurderes til å ha geografisk variasjon i risiko")]
-        public string RiskAssessmentGeographicalVariation { get; set; }
+        public string GeographicalVariation { get; set; }
 
         [DisplayName("Geografisk variasjon i risiko Beskrivelse")]
         [Description("Nærmere begrunnelse for artens geografiske variasjon i risiko")]
-        public string RiskAssessmentGeographicalVariationDocumentation { get; set; }
+        public string GeographicalVariationDocumentation { get; set; }
 
         [DisplayName("Klimaeffekter invasjonspotensial")]
         [Description("Angir om skåren på invasjonsaksen ville vært lavere i fravær av pågående eller framtidige klimaendringer")]

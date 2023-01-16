@@ -225,17 +225,17 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 
         /// </summary>
-        public List<string> RiskAssessmentGeographicalVariation { get; set; }
+        public List<string> GeographicalVariation { get; set; }
 
         /// <summary>
         /// Further information about the geographic variance in category 
         /// </summary>
-        public string RiskAssessmentGeographicalVariationDocumentation { get; set; }
+        public string GeographicalVariationDocumentation { get; set; }
 
         /// <summary>
         /// Wether the species has a lower impact category in parts of the species’ range
         /// </summary>
-        public bool? RiskAssessmentGeographicVariationInCategory { get; set; }
+        public bool? GeographicVariationInCategory { get; set; }
 
         /// <summary>
         /// Reasons for why a species' category has changed since the last assessment. List with up to 6 elements.
@@ -488,6 +488,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public long ExpansionSpeedHighEstimate { get; set; }
 
         /// <summary>
+        /// File attachments uploaded by the committee to document the assessment
+        /// </summary>
+        public AlienSpeciesAssessment2023Attachment[] Attachments { get; set; }
+
+        /// <summary>
         /// Species' occurrence in and impact on ecosystems (according to NiN-classification)
         /// </summary>
         public List<AlienSpeciesAssessment2023ImpactedNatureTypes> ImpactedNatureTypes { get; set; } = new();
@@ -498,8 +503,43 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public int? ParentAssessmentId { get; set; }
 
         /// <summary>
-        /// Pointer to parent assessment if child taxon is assessed at an higher level
+        /// References
         /// </summary>
         public List<SimpleReference> References { get; set; }
+
+        /// <summary>
+        ///The species impact(s) on Red-List assessed species that are neither threatened nor keystone
+        /// </summary>
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractions { get; set; } = new();
+
+        /// <summary>
+        ///The species impact(s) on threathened or keystone species
+        /// </summary>
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new (); 
+
+        /// <summary>
+        ///The species impact(s) on groups of Red-List assessed species
+        /// </summary>
+        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new ();
+
+        /// <summary>
+        ///The species impact(s) on groups of Red-List assessed species that include at least one threatened species or keystone species
+        /// </summary>
+        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractionsThreatenedSpecies { get; set; } = new();
+        
+        /// <summary>
+        /// Further information related to the species impact(s) on native species
+        /// </summary>
+        public string EffectsOnSpeciesSupplementaryInformation { get; set; }
+
+        /// <summary>
+        /// Reasoning behind the uncertainty related to the species impact(s) on threathened or keystone species
+        /// </summary>
+        public string EffectsOnThreathenedSpeciesUncertaintyDocumentation { get; set; }
+
+        /// <summary>
+        /// Reasoning behind the uncertainty related to the species impact(s) on Red-List assessed species that are neither threatened nor keystone
+        /// </summary>
+        public string EffectsOnOtherNativeSpeciesUncertaintyDocumentation { get; set; }
     }
 }

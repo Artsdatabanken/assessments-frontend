@@ -221,7 +221,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             TempData["feedback"] = $"Du vil bli tilsendt en e-post (til {viewModel.Email}) med lenke for tilbakemelding.";
 
-            return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : BadRequest();
+            return Url.IsLocalUrl(returnUrl) ? Redirect($"{returnUrl}#feedback") : BadRequest();
         }
 
         public IActionResult Terms() => View();

@@ -58,31 +58,49 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             MoreThan1000
         }
 
-        //public enum TimeOfIncident
-        //{
-        //    [Display(Name = "Introduksjon")]
-        //    Introduction,
+        public enum TimeOfIncident
+        {
+            [Display(Name = "")]
+            NotChosen,
 
-        //    [Display(Name = "Spredning")]
-        //    Spread,
-        //}
+            [Display(Name = "Kun historisk")]
+            Historic,
 
-        //public enum Category
-        //{
-        //    [Display(Name = "Introduksjon")]
-        //    Introduction,
+            [Display(Name = "Opphørt, men kan inntreffe igjen")]
+            Ceased,
 
-        //    [Display(Name = "Spredning")]
-        //    Spread,
-        //}
+            [Display(Name = "Pågående")]
+            Ongoing,
 
-        //public enum MainCategory
-        //{
-        //    [Display(Name = "Introduksjon")]
-        //    Introduction,
+            [Display(Name = "Kun i fremtiden")]
+            Future,
 
-        //    [Display(Name = "Spredning")]
-        //    Spread,
-        //}
+            [Display(Name = "Ukjent")]
+            Unknown
+        }
+
+        public enum MainCategory
+        {
+            [Display(Name = "")]
+            Unknown,
+
+            [Display(Name = "Rømning/forvilling")]
+            Escaped,
+
+            [Display(Name = "Blindpassasjer med transport")]
+            Stowaway,
+
+            [Display(Name = "Korridor")]
+            Corridor,
+
+            [Display(Name = "Tilsiktet utsetting")]
+            Released,
+
+            [Display(Name = "Egenspredning")]
+            NaturalDispersal,
+
+            [Display(Name = "Forurensning av vare")]
+            Transportpolution
+        }
     }
 }

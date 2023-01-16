@@ -91,14 +91,14 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static List<AlienSpeciesAssessment2023AssessmentVector> GetIntroductionPathways(List<MigrationPathway> assessmentVectors, AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread pathWay)
         {
-            List<AlienSpeciesAssessment2023AssessmentVector> filteredAssessmentVectors = assessmentVectors.Where(x => x.IntroductionSpread == pathWay.ToString().ToLower() && x.Magnitude != "unknown").Select(x => new AlienSpeciesAssessment2023AssessmentVector()
+            List<AlienSpeciesAssessment2023AssessmentVector> filteredAssessmentVectors = assessmentVectors.Where(x => x.IntroductionSpread == pathWay.ToString().ToLower()).Select(x => new AlienSpeciesAssessment2023AssessmentVector()
             {
                 IntroductionSpread = pathWay,
-                InfluenceFactor = (AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor)Enum.Parse(typeof(AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor), x.InfluenceFactor, true),
-                Magnitude = (AlienSpeciesAssessment2023IntroductionPathway.Magnitude)AlienSpeciesAssessment2023AssessmentVector.GetMagnitude(x.Magnitude),
-                TimeOfIncident = x.TimeOfIncident,
+                InfluenceFactor = AlienSpeciesAssessment2023AssessmentVector.GetInfluenceFactor(x.InfluenceFactor),
+                Magnitude = AlienSpeciesAssessment2023AssessmentVector.GetMagnitude(x.Magnitude),
+                TimeOfIncident = AlienSpeciesAssessment2023AssessmentVector.GetTimeOfIncident(x.TimeOfIncident),
                 Category = x.Category,
-                MainCategory = x.MainCategory
+                MainCategory = AlienSpeciesAssessment2023AssessmentVector.GetMainCategory(x.MainCategory)
             }).ToList();
 
             return filteredAssessmentVectors;

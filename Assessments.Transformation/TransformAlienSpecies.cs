@@ -109,7 +109,6 @@ namespace Assessments.Transformation
             Progress.ProgressBar.Dispose();
         }
 
-<<<<<<< HEAD
         public static async Task UploadAttachments(IConfigurationRoot configuration, bool upload)
         {
             await SetupDatabaseContext(configuration);
@@ -153,7 +152,7 @@ namespace Assessments.Transformation
             Progress.ProgressBar.Message = $"Opplasting fullført, {attachmentCount} vedlegg ble lagret";
             Progress.ProgressBar.Dispose();
         }
-        
+
 
         /// <summary>
         /// Check extra Criteria for excluding an assessment
@@ -179,7 +178,8 @@ namespace Assessments.Transformation
             }
 
             return false;
-=======
+        }
+
         private static void FixSubSpeciesLinkedToSpecies(List<AlienSpeciesAssessment2023> targetItems, List<FA4> sourceItems)
         {
             // lag relasjon mellom underart og art der arten skal representere kategori
@@ -204,7 +204,6 @@ namespace Assessments.Transformation
                 sourceItem.Category = parentAssessment.Category.ToString();
                 sourceItem.Criteria = parentAssessment.DecisiveCriteria;
             }
->>>>>>> 951e6f4849f8a22ff61e1760733c56758f88430a
         }
 
         private static async Task SetupDatabaseContext(IConfiguration configuration)

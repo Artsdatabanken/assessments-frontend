@@ -67,11 +67,11 @@ namespace Assessments.Frontend.Web.Models
     {
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
+        public string AlienStatusExplanation { get; set; }
+
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
-
-        public string AlienStatusExplanation { get; set; }
 
         public string ChangedFromAlienDescription { get; set; }
 
@@ -87,9 +87,13 @@ namespace Assessments.Frontend.Web.Models
 
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
+
         public bool HasIndoorProduction { get; set; }
 
         public string MisidentifiedDescription { get; set; }
+
+        public List<CommonSimpleReference> References { get; set; }
 
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 
@@ -110,11 +114,15 @@ namespace Assessments.Frontend.Web.Models
     {
         public AlienSpeciesAssessment2023Environment Environment { get; set; }
 
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
+
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public string ListName { get; set; }
+
+        public int? ParentAssessmentId { get; set; }
 
         public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
 
@@ -139,6 +147,21 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public bool IsSvalbard { get; set; }
+
+        public int? RiskAssessmentIntroductionsLow { get; set; }
+
+        public int? RiskAssessmentIntroductionsBest { get; set; }
+
+        public int? RiskAssessmentIntroductionsHigh { get; set; }
+
+        public int? RiskAssessmentOccurrences1Low { get; set; }
+
+        public int? RiskAssessmentOccurrences1Best { get; set; }
+
+        public int? RiskAssessmentOccurrences1High { get; set; }
+
+
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
@@ -150,9 +173,20 @@ namespace Assessments.Frontend.Web.Models
 
     public class MapViewModel
     {
+        public string MapName { get; set; }
+
         public string MapText { get; set; }
 
+        public string MapDescription { get; set; }
+
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
+    }
+
+    public class ReferenceViewModel
+    {
+        public bool IsCollapsible { get; set; }
+
+        public List<CommonSimpleReference> References { get; set; }
     }
 
     public class SideBarContentViewModel
@@ -181,6 +215,15 @@ namespace Assessments.Frontend.Web.Models
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
         public string TaxonRank { get; set; }
+    }
+
+    public class CommonSimpleReference
+    {
+        public string Type { get; set; }
+
+        public Guid ReferenceId { get; set; }
+
+        public string FormattedReference { get; set; }
     }
 
     public class HeaderViewModel

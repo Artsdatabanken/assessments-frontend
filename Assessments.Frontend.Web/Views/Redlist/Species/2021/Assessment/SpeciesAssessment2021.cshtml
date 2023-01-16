@@ -60,7 +60,7 @@
     var pageMenuViewModel = new PageMenuViewModel
     {
         PageMenuContentId = Constants.RedlistSpecies2021PageMenuContentId,
-        PageMenuExpandButtonText = Constants.RedlistSpecies2021PageManuExpandButtonText,
+        PageMenuExpandButtonText = Constants.RedlistSpecies2021PageMenuHeaderText,
         PageMenuHeaderText = Constants.RedlistSpecies2021PageMenuHeaderText
     };
 
@@ -150,6 +150,17 @@
             geografi = "Svalbard med kyst";
         }
     }
+
+    var referenceViewModel = new ReferenceViewModel
+    {
+        IsCollapsible = false,
+        References = Model.References.Select(x => new CommonSimpleReference
+        {
+            Type = x.Type,
+            ReferenceId = x.ReferenceId,
+            FormattedReference = x.FormattedReference
+        }).ToList()
+    };
 }
 
 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Breadcrumb.cshtml" />
@@ -170,7 +181,7 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
+                <partial name="/Views/Shared/_Reference.cshtml" model="referenceViewModel"/>
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
             </div>

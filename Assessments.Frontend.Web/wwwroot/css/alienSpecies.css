@@ -63,6 +63,12 @@ h1, h2, h3 {
     background: #8f4997;
 }
 
+
+    .darktheme .button.primary {
+        border: 1px solid #b372bb;
+        background: #8f4997;
+    }
+
 @media only screen and (max-width: 766px) {
     .header .themeselectordropdown,
     #headermenu {
@@ -84,6 +90,9 @@ h1, h2, h3 {
     }
 }
 
+ul {
+    list-style-position: inside;
+}
 
 /* MAP FOR FA ONLY */
 .triple_map{
@@ -91,15 +100,23 @@ h1, h2, h3 {
     width:100%;
 }
 
-
-/* TODO: adjust jumps */ 
+.map-box-container {
+    flex: 1;
+    text-align: center;
+    font-size: small;
+}
+/* TODO: adjust jumps */
 @media only screen and (max-width: 740px) {
-    .triple_map {
-       
+    .triple_map {       
         flex-wrap: wrap;
     }
 
     .map svg {
         max-width: 500px;
     }
+}
+
+.collapsible {
+    margin-top: 0;
+    margin-bottom: 40px;
 }

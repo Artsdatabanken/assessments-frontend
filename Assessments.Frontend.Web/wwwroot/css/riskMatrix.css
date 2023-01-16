@@ -1,0 +1,129 @@
+/* DIRECT COPY FROM 2018 */
+
+.risk-level-matrix {
+    margin: 20px -20px;
+}
+
+figure.risk-level-matrix table {
+    border: none;
+    border-collapse: separate;
+    border-spacing: 1px;
+    width: 360px;
+    height: 300px;
+}
+
+@media print {
+    figure.risk-level-matrix table {
+        border-collapse: collapse;
+        border-spacing: inherit;
+    }
+
+    figure.risk-level-matrix table td.cat-nk,
+    figure.risk-level-matrix table td.cat-lo,
+    figure.risk-level-matrix table td.cat-ph,
+    figure.risk-level-matrix table td.cat-hi,
+    figure.risk-level-matrix table td.cat-se {
+        border-color: #000000;
+        color: #000000;
+    }
+}
+
+figure.risk-level-matrix table td:not(.description) {
+    width: 44px;
+    height: 44px;
+    border: 2px solid transparent;
+    text-align: center;
+    font-weight: bold;
+    padding: 0;
+    color: transparent;
+}
+figure.risk-level-matrix table .description {
+   color: black;
+}
+
+.darktheme figure.risk-level-matrix table .description {
+    color: white;
+}
+
+
+figure.risk-level-matrix table td[colspan],
+figure.risk-level-matrix table td[rowspan] {
+    color: #000000;
+}
+
+
+.darktheme figure.risk-level-matrix table td[colspan],
+.darktheme figure.risk-level-matrix table td[rowspan] {
+    color: white;
+}
+
+figure.risk-level-matrix table .cat-nk {
+    background: #9ba963;
+    border-color: #9ba963;
+}
+
+figure.risk-level-matrix table .cat-lo {
+    background: #5ea4a1;
+    border-color: #5ea4a1;
+}
+
+figure.risk-level-matrix table .cat-ph {
+    background: #185a6c;
+    border-color: #185a6c;
+}
+
+figure.risk-level-matrix table .cat-hi {
+    background: #1b386f;
+    border-color: #1b386f;
+}
+
+figure.risk-level-matrix table .cat-se {
+    background: #5e3063;
+    border-color: #5e3063;
+}
+
+figure.risk-level-matrix table td.active {
+    border-color: #FFF;
+}
+
+figure.risk-level-matrix table .active > b {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: medium solid #FFF;
+}
+
+figure.risk-level-matrix table td.uncertain {
+    border-color: #FFF;
+    border-style:dashed;
+}
+
+figure.risk-level-matrix table td.legend {
+    font-weight: normal;
+    text-align: center;
+}
+
+figure.risk-level-matrix table td.legend-v {
+    position: relative;
+}
+
+figure.risk-level-matrix table td.legend-v span {
+    position: absolute;
+    transform: rotate(-90deg);
+    display: block;
+    width: 1rem;
+    white-space: nowrap;
+    line-height: 1rem;
+    top: 50%;
+    right: -2em;
+    text-align: center;
+    bottom: 0;
+}
+
+.description{
+    font-size:small
+}
+
+.description span {
+    display: block;
+}

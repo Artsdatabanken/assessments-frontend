@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Assessments.Mapping.AlienSpecies.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Assessments.Mapping.AlienSpecies.Helpers;
 
 //using System.Text.Json.Serialization;
 
@@ -127,12 +127,12 @@ namespace Assessments.Mapping.AlienSpecies.Source
         //public string EvaluationCategory { get; set; } // slettet 10.01.2017
 
         public string Citation { get; set; }
-        public string Category { get; set; } 
-        public string Criteria { get; set; } 
+        public string Category { get; set; }
+        public string Criteria { get; set; }
         public string AlienSpeciesCategory { get; set; }
         public string AssessmentConclusion { get; set; }
 
-         public string DescriptionOfReasonsForChangeOfCategory { get; set; }
+        public string DescriptionOfReasonsForChangeOfCategory { get; set; }
 
         public List<string> ReasonForChangeOfCategory { get; set; } = new List<string>();
         public DateTime LastUpdatedAt { get; set; }
@@ -156,6 +156,11 @@ namespace Assessments.Mapping.AlienSpecies.Source
         public string EvaluatedVernacularName { get; set; } //added 29.09.2017
 
         public string TaxonHierarcy { get; set; }
+
+        /// <summary>
+        /// Denne eksisterer kun virtuelt - ikke i produksjonsbasen - kun for lasting av vurderinger og gjenntatt transformasjon
+        /// </summary>
+        public int? ParentAssessmentId { get; set; }
 
         //public string VurdertVitenskapeligNavn { get; set; }
 
@@ -220,7 +225,7 @@ namespace Assessments.Mapping.AlienSpecies.Source
         /// Tekstlig informasjon knytt til at art vurderes sammen med ett annet taxon
         /// </summary>
         public string ConnectedToAnotherTaxonDescription { get; set; } = "";
-        
+
         /// <summary>
         /// Tekstlig informasjon knytt til usikkerhet rundt etableringstidspunkt
         /// </summary>
@@ -280,14 +285,14 @@ namespace Assessments.Mapping.AlienSpecies.Source
         public string DoorKnockerCategory { get; set; } // lagt til 25.08.2016 // fjernet 14.12.2016 // lagt til 21.12.2016
         public string RegionallyAlienCategory { get; set; } // lagt til 25.08.2016
         public string NotApplicableCategory { get; set; } // lagt til 25.08.2016
-        //public bool LongDistanceEffect { get; set; } // lagt til 22.08.2016 // fjernet 29.08.2016
-        //public bool IndoorObserved { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
-        //public bool IndoorEstablished { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
-        //public bool OutdoorObserved { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
-        //public bool OutdoorEstablished { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
-        //public bool NorwegianNatureObserved { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
-        //public bool NorwegianNatureEstablished { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
-        
+                                                          //public bool LongDistanceEffect { get; set; } // lagt til 22.08.2016 // fjernet 29.08.2016
+                                                          //public bool IndoorObserved { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
+                                                          //public bool IndoorEstablished { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
+                                                          //public bool OutdoorObserved { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
+                                                          //public bool OutdoorEstablished { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
+                                                          //public bool NorwegianNatureObserved { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
+                                                          //public bool NorwegianNatureEstablished { get; set; } // lagt til 22.08.2016 // fjernet 30.08.2016
+
         public string FurtherInfo { get; set; } = ""; // ny
 
         public class TimeAndPlace
@@ -409,7 +414,7 @@ namespace Assessments.Mapping.AlienSpecies.Source
         }
     }
 
-public partial class FA4 // (3.2) Artsegenskaper
+    public partial class FA4 // (3.2) Artsegenskaper
     {
         //public string LimnicTerrestrialMarine { get; set; } // lagt til 2.9.2016 // fjernet 26.09.2016
         public bool Limnic { get; set; } // lagt til 26.9.2016
@@ -467,7 +472,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         {
             public string ClimateZone { get; set; }
             //public string ClimateZoneSubtype { get; set; }
-            
+
             public bool WeakOceanic { get; set; }
             public bool TransferSection { get; set; }
             public bool WeakContinental { get; set; }
@@ -501,34 +506,34 @@ public partial class FA4 // (3.2) Artsegenskaper
             };
         public string CurrentInternationalExistenceAreasUnknownDocumentation { get; set; }
 
-       
-
-    //public NaturalOrigin createDefaultNaturalOrigin(string climateZone, string climateZoneSubType)
-    //{
-    //    return new NaturalOrigin()
-    //    {
-    //        ClimateZone = climateZone,
-    //        ClimateZoneSubtype = climateZoneSubType,
-    //    };
-    //}
-    //public List<NaturalOrigin> createDefaultNaturalOrigins()
-    //{
-    //    return new List<NaturalOrigin> {
-    //        createDefaultNaturalOrigin("polart","inkl alpint"),
-    //        createDefaultNaturalOrigin("temperert","boreal"),
-    //        createDefaultNaturalOrigin("temperert","nemoral"),
-    //        createDefaultNaturalOrigin("temperert","tørt"),
-    //        createDefaultNaturalOrigin("subtropisk","middelhavsklima"),
-    //        createDefaultNaturalOrigin("subtropisk","fuktig"),
-    //        createDefaultNaturalOrigin("subtropisk","tørt"),
-    //        createDefaultNaturalOrigin("subtropisk","høydeklima"),
-    //        createDefaultNaturalOrigin("subtropisk","kappregionen"),
-    //        createDefaultNaturalOrigin("tropisk","")
-    //    };
-    //}
 
 
-    public void initNaturalOrigins()
+        //public NaturalOrigin createDefaultNaturalOrigin(string climateZone, string climateZoneSubType)
+        //{
+        //    return new NaturalOrigin()
+        //    {
+        //        ClimateZone = climateZone,
+        //        ClimateZoneSubtype = climateZoneSubType,
+        //    };
+        //}
+        //public List<NaturalOrigin> createDefaultNaturalOrigins()
+        //{
+        //    return new List<NaturalOrigin> {
+        //        createDefaultNaturalOrigin("polart","inkl alpint"),
+        //        createDefaultNaturalOrigin("temperert","boreal"),
+        //        createDefaultNaturalOrigin("temperert","nemoral"),
+        //        createDefaultNaturalOrigin("temperert","tørt"),
+        //        createDefaultNaturalOrigin("subtropisk","middelhavsklima"),
+        //        createDefaultNaturalOrigin("subtropisk","fuktig"),
+        //        createDefaultNaturalOrigin("subtropisk","tørt"),
+        //        createDefaultNaturalOrigin("subtropisk","høydeklima"),
+        //        createDefaultNaturalOrigin("subtropisk","kappregionen"),
+        //        createDefaultNaturalOrigin("tropisk","")
+        //    };
+        //}
+
+
+        public void initNaturalOrigins()
         {
             //NaturalOrigins = createDefaultNaturalOrigins();
             //NaturalOrigins = new List<NaturalOrigin> {
@@ -582,7 +587,7 @@ public partial class FA4 // (3.2) Artsegenskaper
                 new CoastLineSection() {ClimateZone = "norwegianSea",               None=false,OpenCoastLine=false,Skagerrak=false },
                 new CoastLineSection() {ClimateZone = "barentsSea",                 None=false,OpenCoastLine=false,Skagerrak=false },
                 new CoastLineSection() {ClimateZone = "greenlandSea",               None=false,OpenCoastLine=false,Skagerrak=false },
-                new CoastLineSection() {ClimateZone = "polarSea",                   None=false,OpenCoastLine=false,Skagerrak=false }               
+                new CoastLineSection() {ClimateZone = "polarSea",                   None=false,OpenCoastLine=false,Skagerrak=false }
             };
 
             CurrentBioClimateZones = new List<BioClimateZones> {
@@ -603,7 +608,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         public string NaturalOriginMarineDetails { get; set; } // lagt til 21.04.2017
         public List<string> CurrentInternationalExistenceMarineAreas { get; set; } = new List<string>(); // lagt til 05.09.2016
         public string CurrentInternationalExistenceMarineAreasDetails { get; set; } // lagt til 21.04.2017
-        
+
         public bool SurvivalBelow5c { get; set; } // lagt til 27.09.2016
 
         public List<string> IntroductionCourse { get; set; } // fab: List<int> Introduction_Course  //Årsak til tilstedeværelse
@@ -711,7 +716,7 @@ public partial class FA4 // (3.2) Artsegenskaper
     {
         //public List<NatureType> AssessmentNatureTypes { get; set; } // removed 03.11.2016 - * see comment for NatureType class
         public List<ImpactedNatureType> ImpactedNatureTypes { get; set; } = new List<ImpactedNatureType>();
-        
+
         /// <summary>
         /// Naturetypes from 2018 after NIN2_2 which are not compatible with NIN2_3 - for reference - not for edit
         /// </summary>
@@ -848,15 +853,15 @@ public partial class FA4 // (3.2) Artsegenskaper
         public static List<Criterion> CreateDefaultCriteria()
         {
             var criteria = new List<RiskAssessment.Criterion>();
-            criteria.Add(CreateDomainCriterion("InvasionPopulationLifetimeExpectancy",             "A", RiskAssessment.Criterion.Axis.Invasion));
-            criteria.Add(CreateDomainCriterion("InvasionExpansionSpeed",                           "B", RiskAssessment.Criterion.Axis.Invasion));
-            criteria.Add(CreateDomainCriterion("InvasionColonizationOfNaturetypeAfter50Years",     "C", RiskAssessment.Criterion.Axis.Invasion));
+            criteria.Add(CreateDomainCriterion("InvasionPopulationLifetimeExpectancy", "A", RiskAssessment.Criterion.Axis.Invasion));
+            criteria.Add(CreateDomainCriterion("InvasionExpansionSpeed", "B", RiskAssessment.Criterion.Axis.Invasion));
+            criteria.Add(CreateDomainCriterion("InvasionColonizationOfNaturetypeAfter50Years", "C", RiskAssessment.Criterion.Axis.Invasion));
             criteria.Add(CreateDomainCriterion("EcologicalEffectInteractionWithThreatenedSpecies", "D", RiskAssessment.Criterion.Axis.EcoEffect));
-            criteria.Add(CreateDomainCriterion("EcologicalEffectInteractionWithDomesticSpecies",   "E", RiskAssessment.Criterion.Axis.EcoEffect));
+            criteria.Add(CreateDomainCriterion("EcologicalEffectInteractionWithDomesticSpecies", "E", RiskAssessment.Criterion.Axis.EcoEffect));
             criteria.Add(CreateDomainCriterion("EcologicalEffectInfluenceOnThreatenedNatureTypes", "F", RiskAssessment.Criterion.Axis.EcoEffect));
-            criteria.Add(CreateDomainCriterion("EcologicalEffectInfluenceOnCommonNatureTypes",     "G", RiskAssessment.Criterion.Axis.EcoEffect));
-            criteria.Add(CreateDomainCriterion("EcologicalEffectTransferOfGeneticMaterial",        "H", RiskAssessment.Criterion.Axis.EcoEffect));
-            criteria.Add(CreateDomainCriterion("EcologicalEffectTransferOfDiseasesAndParasites",   "I", RiskAssessment.Criterion.Axis.EcoEffect));
+            criteria.Add(CreateDomainCriterion("EcologicalEffectInfluenceOnCommonNatureTypes", "G", RiskAssessment.Criterion.Axis.EcoEffect));
+            criteria.Add(CreateDomainCriterion("EcologicalEffectTransferOfGeneticMaterial", "H", RiskAssessment.Criterion.Axis.EcoEffect));
+            criteria.Add(CreateDomainCriterion("EcologicalEffectTransferOfDiseasesAndParasites", "I", RiskAssessment.Criterion.Axis.EcoEffect));
             return criteria;
         }
 
@@ -984,7 +989,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         public long? AOO2 { get; set; } // forekomstarealet i år 2 
         [System.Text.Json.Serialization.JsonPropertyName("AOOfirstOccurenceLessThan10Years")]
         public string AOOfirstOccurenceLessThan10Years { get; set; } = "yes";
-        public string CommentOrDescription {get; set;} //fritekstfelt metode B2a
+        public string CommentOrDescription { get; set; } //fritekstfelt metode B2a
         // ************************************************************************************
 
 
@@ -1001,7 +1006,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         public Int64? AOO50yrHighInput { get; set; }
         [System.Text.Json.Serialization.JsonPropertyName("AOO50yrHigh")]
         public Int64? AOO50yrHigh { get; set; }
-       
+
         //[System.Text.Json.Serialization.JsonPropertyName("AOOestimationPeriod10yrPossible")]
         //public string AOOestimationPeriod10yrPossible { get; set; } = "yes";
         // -------- disse (forekomstareal om 50år) er erstattet:  
@@ -1242,7 +1247,7 @@ public partial class FA4 // (3.2) Artsegenskaper
 
         #region unused ???????
         // -- spredningshastighet
-        
+
         public double? SpreadYearlyIncrease { get; set; }   // Spread_Yearly_Increase
         public string SpreadYearlyIncreaseMethod { get; set; }  // Spread_Yearly_Increase_EstimationMethod
         #endregion unused ???????
@@ -1441,7 +1446,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         public List<string> CommonNatureTypes { get; set; } = new List<string>(); // 09.01.2017  // Common_Nature_Types
         //public string Common_Nature_Types_Affected_Documentation { get; set; }               //intern informasjon
 
-        public List<string> Naturetype2018 { get; set; } = new List<string>();        
+        public List<string> Naturetype2018 { get; set; } = new List<string>();
         public List<string> NaturetypeNIN2 { get; set; } = new List<string>();
 
         public List<string> BackgroundC { get; set; } = new List<string>();
@@ -1487,7 +1492,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         public bool? CommonNatureTypesForeignDocumented { get; set; }  // Common_Nature_Types_Affected_Foreign_Documented
         public string CommonNatureTypesAffectedDomesticDescription { get; set; }         // Common_Nature_Types_Affected_Domestic_Description??????????????
         public string CommonNatureTypesAffectedAbroadDescription { get; set; } = "";        // lagt til 15.11.2016
-        
+
         // -- (E) kan overføre genetisk materiale til stedegne arter
         public string GeneticTransferDomesticDescription { get; set; }        //Genetic_Transfer_Domestic_Description intern informasjon
         public bool? GeneticTransferDomesticObserved { get; set; }  // Genetic_Transfer_Domestic_Observed
@@ -1538,7 +1543,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         public List<SimpleReference> References { get; set; } = new List<SimpleReference>();
     }
     public partial class FA4 // History
-    { 
+    {
         public List<PreviousAssessment> PreviousAssessments { get; set; } = new List<PreviousAssessment>();
     }
 
@@ -1729,29 +1734,29 @@ public partial class FA4 // (3.2) Artsegenskaper
     {
         public SpreadHistory()
         {
-/*            this.RegionalPresence = new List<RegionalPresenseWithAssumed>()
-                                               {
-                                                   new RegionalPresenseWithAssumed { Id = "Øs", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "OsA", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "He", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Op", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Bu", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Ve", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Te", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Aa", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Va", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Ro", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Ho", Known = true, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Sf", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Mr", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "St", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Nt", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "No", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Tr", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Fi", Known = false, Assumed = true },
-                                                   new RegionalPresenseWithAssumed { Id = "Sv", Known = false, Assumed = false },
-                                                   new RegionalPresenseWithAssumed { Id = "Jm", Known = false, Assumed = false },
-    };*/
+            /*            this.RegionalPresence = new List<RegionalPresenseWithAssumed>()
+                                                           {
+                                                               new RegionalPresenseWithAssumed { Id = "Øs", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "OsA", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "He", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Op", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Bu", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Ve", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Te", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Aa", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Va", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Ro", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Ho", Known = true, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Sf", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Mr", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "St", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Nt", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "No", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Tr", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Fi", Known = false, Assumed = true },
+                                                               new RegionalPresenseWithAssumed { Id = "Sv", Known = false, Assumed = false },
+                                                               new RegionalPresenseWithAssumed { Id = "Jm", Known = false, Assumed = false },
+                };*/
         }
 
         public Guid Id { get; set; }
@@ -1771,21 +1776,21 @@ public partial class FA4 // (3.2) Artsegenskaper
         public Int64? ExistenceArea { get; set; }
         public Int64? ExistenceAreaCount { get; set; }
         public Int64? SpreadArea { get; set; }
-        
+
         public double? SpeciesCountDarkFigure { get; set; }
-        
+
         public double? ExistenceAreaDarkFigure { get; set; }
-        
+
         public double? ExistenceAreaCountDarkFigure { get; set; }
-        
+
         public double? SpreadAreaDarkFigure { get; set; }
-        
+
         public double? SpeciesCountCalculated { get; set; }
-        
+
         public double? ExistenceAreaCalculated { get; set; }
-        
+
         public double? ExistenceAreaCountCalculated { get; set; }
-        
+
         public double? SpreadAreaCalculated { get; set; }
 
         public string SelectionGeometry { get; set; }// = "{\\\"type\\\": \\\"Feature\\\",\\\"geometry\\\": {\\\"type\\\": \\\"Polygon\\\", \\\"coordinates\\\": [[[10.33, 63.45], [11.951, 63.451], [10.949, 64.45]]]}}";
@@ -1881,7 +1886,7 @@ public partial class FA4 // (3.2) Artsegenskaper
         //public int CommentNew { get; set; }
         public int TaxonChange { get; set; }
     }
-    
+
     public class Fylkesforekomst
     {
         public string Fylke { get; set; }

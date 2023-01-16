@@ -478,6 +478,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public long ExpansionSpeedHighEstimate { get; set; }
 
         /// <summary>
+        /// File attachments uploaded by the committee to document the assessment
+        /// </summary>
+        public AlienSpeciesAssessment2023Attachment[] Attachments { get; set; }
+
+        /// <summary>
         /// Species' occurrence in and impact on ecosystems (according to NiN-classification)
         /// </summary>
         public List<AlienSpeciesAssessment2023ImpactedNatureTypes> ImpactedNatureTypes { get; set; } = new();

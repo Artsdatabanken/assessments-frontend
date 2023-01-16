@@ -8,6 +8,7 @@ using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
@@ -16,6 +17,10 @@ namespace Assessments.Frontend.Web.Controllers
     [Route("fremmedartslista")]
     public class AlienSpeciesController : BaseController<AlienSpeciesController>
     {
+        private AttachmentRepository _attachmentRepository;
+
+        protected AttachmentRepository AttachmentRepository => _attachmentRepository ??= HttpContext.RequestServices.GetService<AttachmentRepository>();
+
         public IActionResult Home() => View("AlienSpeciesHome");
 
         [Route("2023")]
@@ -55,6 +60,23 @@ namespace Assessments.Frontend.Web.Controllers
             };
 
             return View("2023/AlienSpeciesDetail", viewModel);
+        }
+
+        [Route("2023/Attachment/{attachmentId:required:int}_{name}")]
+        public async Task<IActionResult> Attachment(int attachmentId, string name)
+        {
+            var data = await DataRepository.GetAlienSpeciesAssessments();
+            var assessment = data.FirstOrDefault(x => x.Attachments.Any(y => y.Id == attachmentId));
+            var attachment = assessment.Attachments.Single(x => x.Id == attachmentId);
+
+            var stream = await AttachmentRepository.GetFileStream(
+                DataFilenames.CalculateAlienSpecies2023AttachmentFilePath(attachmentId, attachment.FileName));
+            
+            return new FileStreamResult(stream, attachment.MimeType)
+            {
+                FileDownloadName = attachment.FileName
+            };
+
         }
 
         private IActionResult GetExport(IEnumerable<AlienSpeciesAssessment2023> query)

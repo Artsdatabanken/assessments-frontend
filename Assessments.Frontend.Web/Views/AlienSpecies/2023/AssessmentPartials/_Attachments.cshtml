@@ -1,0 +1,13 @@
+﻿@model AlienSpeciesAssessment2023Attachment[];
+<h2>
+    Filvedlegg
+</h2>
+@{
+    // todo - make this great
+    foreach (var attachment in Model)
+    {
+        <a asp-controller="AlienSpecies" asp-action="Attachment" asp-route-attachmentId="@attachment.Id" asp-route-name="@attachment.FileName">Desc:@attachment.Description, Filename:@attachment.FileName, Mimetype:@attachment.MimeType, Id:@attachment.Id</a>
+        <br />
+    }
+}
+

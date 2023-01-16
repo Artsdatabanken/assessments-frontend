@@ -200,7 +200,7 @@ namespace Assessments.Frontend.Web.Controllers
             
             var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#feedback";
             
-            var messageContent = $"<p>Klikk på lenken nedenfor for å bekrefte din e-postadresse. Dette gir deg tilgang til å gi tilbakemelding på Fremmedartsvurderinger i 2023.</p><p><a href='{validationUrl}'>{validationUrl}</a></p>";
+            var messageContent = $"<p>Klikk på lenken nedenfor for å bekrefte din e-postadresse. Dette gir deg tilgang til å gi tilbakemelding på Fremmedartsvurderinger i 2023.</p><p><a href='{validationUrl}'>{validationUrl}</a></p><p>Dette er en automatisk generert e-post som du ikke kan svare på</p>";
 
             message.AddContent(MimeType.Html, messageContent);
             message.AddContent(MimeType.Text, messageContent.StripHtml());

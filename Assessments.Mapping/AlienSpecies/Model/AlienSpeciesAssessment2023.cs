@@ -88,6 +88,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool HasIndoorProduction { get; set; }
 
         /// <summary>
+        /// Relevant pathways of introduction to Norwegian nature
+        /// </summary>
+        public List<AlienSpeciesAssessment2023AssessmentVector> IntroductionPathways { get; set; }
+
+        /// <summary>
         /// List including category and decisive criteria from previous assessments
         /// </summary>
         public List<AlienSpeciesAssessment2023PreviousAssessment> PreviousAssessments { get; set; } = new();
@@ -131,6 +136,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The species' total score on the invation axis
         /// </summary>
         public int? ScoreInvasionPotential { get; set; }
+
+        /// <summary>
+        /// Relevant pathways of secondary spread within Norwegian nature
+        /// </summary>
+        public List<AlienSpeciesAssessment2023AssessmentVector> SecondarySpreadPathways { get; set; }
 
         /// <summary>
         /// The species group name, based on the taxon hierarchy

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Assessments.Mapping.AlienSpecies.Model
 {
-    public class AlienSpeciesAssessment2023SpeciesSpeciesInteractionThreatenedSpecies
+    public class AlienSpeciesAssessment2023SpeciesSpeciesInteraction
     {   
         /// <summary>
         /// The scientific name of the red listed species

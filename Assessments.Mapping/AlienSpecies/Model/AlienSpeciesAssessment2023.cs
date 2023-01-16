@@ -488,11 +488,43 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public int? ParentAssessmentId { get; set; }
 
         /// <summary>
-        /// Pointer to parent assessment if child taxon is assessed at an higher level
+        /// References
         /// </summary>
         public List<SimpleReference> References { get; set; }
 
-        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteractionThreatenedSpecies> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new (); // lagt til 11.10.2016
+        /// <summary>
+        ///The species impact(s) on Red-List assessed species that are neither threatened nor keystone
+        /// </summary>
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractions { get; set; } = new();
+
+        /// <summary>
+        ///The species impact(s) on threathened or keystone species
+        /// </summary>
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new (); 
+
+        /// <summary>
+        ///The species impact(s) on groups of Red-List assessed species
+        /// </summary>
         public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new ();
+
+        /// <summary>
+        ///The species impact(s) on groups of Red-List assessed species that include at least one threatened species or keystone species
+        /// </summary>
+        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractionsThreatenedSpecies { get; set; } = new();
+        
+        /// <summary>
+        /// Further information related to the species impact(s) on native species
+        /// </summary>
+        public string EffectsOnSpeciesSupplementaryInformation { get; set; }
+
+        /// <summary>
+        /// Reasoning behind the uncertainty related to the species impact(s) on threathened or keystone species
+        /// </summary>
+        public string EffectsOnThreathenedSpeciesUncertaintyDocumentation { get; set; }
+
+        /// <summary>
+        /// Reasoning behind the uncertainty related to the species impact(s) on Red-List assessed species that are neither threatened nor keystone
+        /// </summary>
+        public string EffectsOnOtherNativeSpeciesUncertaintyDocumentation { get; set; }
     }
 }

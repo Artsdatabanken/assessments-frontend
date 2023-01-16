@@ -192,14 +192,15 @@ namespace Assessments.Frontend.Web.Controllers
 
             var message = new SendGridMessage
             {
-                From = new EmailAddress("no-reply@artsdatabanken.no"),
-                Subject = "Validering av e-postadresse for tilbakemelding"
+                From = new EmailAddress("noreply@artsdatabanken.no"),
+                Subject = "Bekreftelse av e-postadresse for tilbakemelding"
             };
 
             message.AddTo(new EmailAddress(emailValidation.Email, emailValidation.FullName));
             
             var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#feedback";
-            var messageContent = $"<a href='{validationUrl}'>{validationUrl}</a>";
+            
+            var messageContent = $"<p>Klikk på lenken nedenfor for å bekrefte din e-postadresse. Dette gir deg tilgang til å gi tilbakemelding på Fremmedartsvurderinger i 2023.</p><p><a href='{validationUrl}'>{validationUrl}</a></p><p>Dette er en automatisk generert e-post som du ikke kan svare på</p>";
 
             message.AddContent(MimeType.Html, messageContent);
             message.AddContent(MimeType.Text, messageContent.StripHtml());
@@ -219,7 +220,7 @@ namespace Assessments.Frontend.Web.Controllers
                 return BadRequest("Beklager, en feil oppstod ved sending av e-post.");
             }
 
-            TempData["feedback"] = $"Du vil bli tilsendt en e-post (til {viewModel.Email}) med lenke for tilbakemelding.";
+            TempData["feedback"] = $"Du vil bli tilsendt en epost (til {email}) som brukes for å bekrefte e-postadressen og med lenke for tilbakemelding.";
 
             return Url.IsLocalUrl(returnUrl) ? Redirect($"{returnUrl}#feedback") : BadRequest();
         }

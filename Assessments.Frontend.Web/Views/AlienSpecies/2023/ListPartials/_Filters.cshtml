@@ -117,12 +117,14 @@
 
     void RenderChip(string buttontext, string filterValue)
     {
-        <button class="chips generic" onclick="submitClickedElement('@filterValue')" type="submit">
-            <span>@buttontext</span>
-            <span class="x" >
-                <span class="material-icons">close</span>Fjern
-            </span>
-        </button>
+        <li class="chips">
+        <span class="chips-text">@buttontext</span>
+            <button class="text-button chips-close-button btn icon-button" onclick="submitClickedElement('@filterValue')" type="submit">
+                <span class="material-icons ">close</span>
+            </button>
+        </li>
+
+
     }
 
     void MakeFilterChips(string[] filterModel, Filter.FilterItem[] filterItems)
@@ -155,28 +157,29 @@
                         </a>
                     }
                 </span>
-                <span class="filterbox">
-                    @if (GetActiveSelectionCount(Model) > 0)
-                    {
-                        MakeFilterChips(Model.Area, AllAreas.Filters);
-                        MakeFilterChips(Model.Category, AllCategories.Filters);
-                        MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters);
-                        MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters);
-                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters);
-                        MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters);
-                        MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters);
-                        MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters);
-                        MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters);
-                        MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
-                        MakeFilterChips(Model.Habitats, AllHabitats.Filters);
-                        MakeFilterChips(Model.Regions, AllRegions.Filters);
-                        MakeFilterChips(Model.WaterRegions, AllWaterRegions.Filters);
-                    }
-
+                <div class="filterbox">
+                    <ul>
+                        @if (GetActiveSelectionCount(Model) > 0)
+                        {
+                            MakeFilterChips(Model.Area, AllAreas.Filters);
+                            MakeFilterChips(Model.Category, AllCategories.Filters);
+                            MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters);
+                            MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters);
+                            MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters);
+                            MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters);
+                            MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters);
+                            MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters);
+                            MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters);
+                            MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
+                            MakeFilterChips(Model.Habitats, AllHabitats.Filters);
+                            MakeFilterChips(Model.Regions, AllRegions.Filters);
+                            MakeFilterChips(Model.WaterRegions, AllWaterRegions.Filters);
+                        }
+                    </ul>
                     <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">
                         <span class="material-icons">close</span>Fjern alle filter
                     </a>
-                </span>
+                </div>
             }
         </span>
     </p>

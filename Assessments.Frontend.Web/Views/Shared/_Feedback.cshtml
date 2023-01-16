@@ -72,7 +72,7 @@ else if (feedbackMessage)
 else if (emailIsValid)
 {
     <div class="page_section">
-        <form asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path + "#feedback")" class="feedback_form" method="post" enctype="multipart/form-data" novalidate>
+        <form id="js-feedback-form" asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path + "#feedback")" class="feedback_form" method="post" enctype="multipart/form-data" novalidate>
             <div class="feedback_form_input_field">
                 <label asp-for="FullName"></label><br />
                 <input asp-for="FullName" />
@@ -111,7 +111,7 @@ else
     </p>
 
     <div class="page_section">
-        <form asp-controller="Feedback" asp-action="ValidateEmail" asp-route-returnurl="@Context.Request.Path" method="post" enctype="multipart/form-data" novalidate>
+        <form id="js-feedback-form" asp-controller="Feedback" asp-action="ValidateEmail" asp-route-returnurl="@Context.Request.Path" method="post" enctype="multipart/form-data" novalidate>
             <div class="feedback_form_input_field">
                 <label asp-for="FullName"></label><br />
                 <input asp-for="FullName" />
@@ -144,5 +144,11 @@ else
                 return defaultRangeValidator.call(this, value, element, param);
             }
         }
+        
+        $("#js-feedback-form").submit(function () {
+            if ($(this).valid()) {
+                $(this).find(":submit").attr("disabled", true).text("Behandler skjema..");
+            }
+        });      
     });
 </script>

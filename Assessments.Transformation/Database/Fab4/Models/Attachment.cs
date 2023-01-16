@@ -17,8 +17,13 @@ namespace Assessments.Transformation.Database.Fab4.Models
         public string Name { get; set; }
         public string FileName { get; set; }
         public bool IsDeleted { get; set; }
-        public byte[] File { get; set; }
         public string Type { get; set; }
         public string Description { get; set; }
+        public AttachmentFile AttachmentFile { get; set; }
+    }
+    public class AttachmentFile
+    {
+        public int Id { get; set; }
+        public byte[] File { get; set; }
     }
 }

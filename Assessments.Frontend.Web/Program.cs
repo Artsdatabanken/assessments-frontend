@@ -3,6 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Text.Json.Serialization;
 using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Infrastructure.Api;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
@@ -21,6 +22,8 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddLazyCache();
 
 builder.Services.AddSingleton<DataRepository>();
+
+builder.Services.AddSingleton<AttachmentRepository>();
 
 builder.Services.AddTransient<ExpertCommitteeMemberService>();
 

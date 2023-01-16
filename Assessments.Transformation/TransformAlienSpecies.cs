@@ -11,9 +11,7 @@ using Assessments.Transformation.Database.Fab4;
 using Assessments.Transformation.Helpers;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json.Linq;
 using ShellProgressBar;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -109,7 +107,10 @@ namespace Assessments.Transformation
 
             var excludedExpertGroups = new List<string> { "Testedyr", "Ikke-marine invertebrater" };
 
-            var databaseAttachments = _dbContext.Attachments.Include(x=>x.Assessment).AsNoTracking()
+            var databaseAttachments = _dbContext.Attachments
+                .Include(x=>x.Assessment)
+                .Include(x=>x.AttachmentFile)
+                .AsNoTracking()
                 .Where(x => (bool)!x.Assessment.IsDeleted 
                             && !excludedExpertGroups.Contains(x.Assessment.Expertgroup)
                             && x.IsDeleted == false);
@@ -128,7 +129,7 @@ namespace Assessments.Transformation
                     continue;
 
                 if (upload)
-                    await Storage.UploadFile(configuration, "FAB4\\" + attachment.AssessmentId + "\\" + attachment.Id + "_" + attachment.FileName, attachment.File);
+                    await Storage.UploadFile(configuration, DataFilenames.CalculateAlienSpecies2023AttachmentFilePath(attachment.Id, attachment.FileName), attachment.AttachmentFile.File);
 
                 attachmentCount++;
                 Progress.ProgressBar.Tick();
@@ -137,7 +138,13 @@ namespace Assessments.Transformation
             Progress.ProgressBar.Message = $"Opplasting fullført, {attachmentCount} vedlegg ble lagret";
             Progress.ProgressBar.Dispose();
         }
+        
 
+        /// <summary>
+        /// Check extra Criteria for excluding an assessment
+        /// </summary>
+        /// <param name="fa4">AlienSpecies assessment</param>
+        /// <returns></returns>
         private static bool AssessmentToBeExcluded(FA4 fa4)
         {
             // ekskluderer vurderinger som ligger under horisontskanning eller ikke har kategori

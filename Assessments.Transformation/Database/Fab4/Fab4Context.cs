@@ -103,17 +103,29 @@ namespace Assessments.Transformation.Database.Fab4
             });
 
             // attachemnts
+            // split table to avoid loading extra data on assessments on ordinary transform
             modelBuilder.Entity<Attachment>(e =>
             {
                 e.HasKey(x => x.Id);
+                e.ToTable("Attachments");
                 e.HasOne(x => x.Assessment).WithMany(x => x.Attachments).OnDelete(DeleteBehavior.NoAction).IsRequired();
                 e.Property(x => x.IsDeleted).IsRequired();
-                e.Property(x => x.File).IsRequired();
+                //e.Property(x => x.File).IsRequired();
                 e.Property(x => x.Type).IsRequired().HasMaxLength(300);
                 e.Property(x => x.Date).IsRequired();
                 e.Property(x => x.FileName).IsRequired().HasMaxLength(1000);
                 e.Property(x => x.Name).IsRequired().HasMaxLength(2000);
                 e.HasOne(x => x.User).WithMany().OnDelete(DeleteBehavior.NoAction).IsRequired();
+                e.HasOne(o => o.AttachmentFile).WithOne()
+                    .HasForeignKey<AttachmentFile>(o => o.Id);
+                e.Navigation(o => o.AttachmentFile).IsRequired();
+            });
+
+            modelBuilder.Entity<AttachmentFile>(e =>
+            {
+                e.HasKey(x => x.Id);
+                e.ToTable("Attachments");
+                e.Property(x => x.File).IsRequired();
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Net.Mail;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Assessments.Mapping.AlienSpecies.Helpers;

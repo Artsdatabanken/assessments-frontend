@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace Assessments.Frontend.Web.Controllers.Api;
 
@@ -25,6 +26,9 @@ public class TestController : Controller
     [HttpGet("database")]
     public IActionResult DatabaseInfo()
     {
+        if (_environment.IsProduction())
+            return NotFound();
+
         var connectionString = _configuration.GetConnectionString("Default");
         var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(connectionString);
         

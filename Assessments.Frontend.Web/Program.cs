@@ -86,11 +86,11 @@ app.MapDefaultControllerRoute();
 
 ExportHelper.Setup();
 
-//if (!app.Environment.IsDevelopment())
-//{
-//    using var scope = app.Services.CreateScope();
-//    var dataContext = scope.ServiceProvider.GetRequiredService<AssessmentsDbContext>();
-//    dataContext.Database.Migrate();
-//}
+if (!app.Environment.IsDevelopment())
+{
+    using var scope = app.Services.CreateScope();
+    var dataContext = scope.ServiceProvider.GetRequiredService<AssessmentsDbContext>();
+    dataContext.Database.Migrate();
+}
 
 app.Run();

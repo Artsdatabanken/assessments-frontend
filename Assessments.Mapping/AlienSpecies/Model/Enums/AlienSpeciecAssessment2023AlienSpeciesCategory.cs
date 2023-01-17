@@ -28,7 +28,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Etablert per år 1800")]
         UncertainBefore1800,
 
-        [Display(Name = "Arten var tidligere feilbestemt")]
+        [Display(Name = "Tidligere feilbestemt")]
         MisIdentified,
 
         // TODO: Remove values below when no assessments have any of these values in AlienSpeciesCategory. At latest, these should be removed before 'innsynet' opens to the public.

@@ -61,7 +61,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return expertGroup.Replace("(Svalbard)", "");
             }
 
-            if (expertGroup is "Bakterier" or "Kromister" or "Sopper") 
+            if (expertGroup is "Bakterier" or "Kromister" or "Sopper")
             {
                 return "Sopper, det gule riket og bakterier";
             }
@@ -235,8 +235,8 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                         };
                     }
 
-                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":") 
-                        ? "https://databank.artsdatabanken.no/FremmedArt2012" 
+                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":")
+                        ? "https://databank.artsdatabanken.no/FremmedArt2012"
                         : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
 
 
@@ -427,7 +427,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 var numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
                 var numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
                 var AOOTenYearsBest = AOO10yr(numberOfOccurrences, numberOfIntroductions);
-                
+
                 return AOOTenYearsBest > 16 ? 4
                     : AOOTenYearsBest > 4 ? 3
                     : AOOTenYearsBest > 1 ? 2
@@ -453,14 +453,14 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         public static int GetMedianLifetimeSimplifiedEstimationDefaultScoreUncertainty(string assessmentConclusion, RiskAssessment riskAssessment, string estimateQuantile)
         {
             var assessedDoorKnocker = "AssessedDoorknocker";
-            if(estimateQuantile == "Low") 
+            if (estimateQuantile == "Low")
             {
                 if (assessmentConclusion == assessedDoorKnocker)
                 {
                     var numberOfOccurrences = riskAssessment.Occurrences1Low ?? 0;
                     int numberOfIntroductions = IntroductionsLow(riskAssessment);
                     var AOOTenYearsLow = AOO10yr(numberOfOccurrences, numberOfIntroductions);
-                    
+
                     return AOOTenYearsLow > 16 ? 4
                         : AOOTenYearsLow > 4 ? 3
                         : AOOTenYearsLow > 1 ? Math.Max(2, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
@@ -489,7 +489,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     var numberOfOccurrences = riskAssessment.Occurrences1High ?? 0;
                     int numberOfIntroductions = IntroductionsHigh(riskAssessment);
                     var AOOTenYearsHigh = AOO10yr(numberOfOccurrences, numberOfIntroductions);
-                    
+
                     return AOOTenYearsHigh > 16 ? Math.Min(4, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
                         : AOOTenYearsHigh > 4 ? Math.Min(3, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
                         : AOOTenYearsHigh > 1 ? 2
@@ -533,18 +533,18 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             var mainMethodA = chosenMainMethod == "a";
             var mainMethodB = chosenMainMethod == "b";
             var assessedDoorKnocker = assessmentConclusion == "AssessedDoorknocker";
-                
-            if(mainMethodA)
+
+            if (mainMethodA)
             {
                 return "SpatioTemporalDataset";
             }
-            
-            if(mainMethodB && assessedDoorKnocker)
+
+            if (mainMethodB && assessedDoorKnocker)
             {
                 return "EstimatedIncreaseInAOODoorKnockers";
             }
-            
-            if(mainMethodB && chosenSubMethod == "yes")
+
+            if (mainMethodB && chosenSubMethod == "yes")
             {
                 return "EstimatedIncreaseInAOOReproducingUnaided";
             }
@@ -555,7 +555,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
 
             else return "NotRelevant";
-      
+
         }
 
         static private long GetExpansionSpeedAOOSelfReproducing(RiskAssessment riskAssessment, long areaOfOccurrenceToday, long areaOfOccurrenceIn50Years)
@@ -581,7 +581,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 result = (decimal)Math.Truncate(20 * (Math.Sqrt((double)areaOfOccurrenceIn50Years) - Math.Sqrt((double)areaOfOccurrenceTodayBest)) / Math.Sqrt(Math.PI));
             }
 
-            return (long)Math.Round(result,0);
+            return (long)Math.Round(result, 0);
         }
 
         internal static long GetExpansionSpeedEstimates(RiskAssessment riskAssessment, string estimateQuantile, string assessmentConclusion)
@@ -622,7 +622,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
                 areaAfterTenYearsEstimate = AOO10yr(numberOfOccurrences, numberOfIntroductions) ?? 0;
 
-                return (long)Math.Round(Math.Truncate(200 * (Math.Sqrt((double)(areaAfterTenYearsEstimate / 4)) - 1) / Math.Sqrt(Math.PI)),0);
+                return (long)Math.Round(Math.Truncate(200 * (Math.Sqrt((double)(areaAfterTenYearsEstimate / 4)) - 1) / Math.Sqrt(Math.PI)), 0);
             }
 
             else //mainMethodB and assessed as self-reproducing

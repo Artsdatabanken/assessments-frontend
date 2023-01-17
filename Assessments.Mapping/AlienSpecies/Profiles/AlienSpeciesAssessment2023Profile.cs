@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using Assessments.Mapping.AlienSpecies.Helpers;
+﻿using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using AutoMapper;
+using System.Linq;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
 {
@@ -22,9 +22,9 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.EstablishmentCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEstablishmentCategory(src.SpeciesEstablishmentCategory, src.SpeciesStatus, src.AlienSpeciesCategory)))
                 .ForMember(dest => dest.ScoreInvasionPotential, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScores(src.Category, src.Criteria, "inv")))
                 .ForMember(dest => dest.ScoreEcologicalEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScores(src.Category, src.Criteria, "eco")))
-                .ForMember(dest => dest.RiskAssessmentGeographicVariationInCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarInCat(src.Category, src.RiskAssessment.PossibleLowerCategory)))
-                .ForMember(dest => dest.RiskAssessmentGeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarCause(src.Category, src.RiskAssessment.PossibleLowerCategory, src.RiskAssessment.GeographicalVariation)))
-                .ForMember(dest => dest.RiskAssessmentGeographicalVariationDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarDoc(src.Category, src.RiskAssessment.PossibleLowerCategory, src.RiskAssessment.GeographicalVariationDocumentation.StripUnwantedHtml())))
+                .ForMember(dest => dest.GeographicVariationInCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarInCat(src.Category, src.RiskAssessment.PossibleLowerCategory)))
+                .ForMember(dest => dest.GeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarCause(src.Category, src.RiskAssessment.PossibleLowerCategory, src.RiskAssessment.GeographicalVariation)))
+                .ForMember(dest => dest.GeographicalVariationDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetGeographicVarDoc(src.Category, src.RiskAssessment.PossibleLowerCategory, src.RiskAssessment.GeographicalVariationDocumentation.StripUnwantedHtml())))
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsInvasionpotential, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffects(src.Category, src.Criteria, "inv", src.RiskAssessment)))
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsEcoEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffects(src.Category, src.Criteria, "eco", src.RiskAssessment)))
                 .ForMember(dest => dest.RiskAssessmentClimateEffectsDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsDoc(src.Category, src.Criteria, src.RiskAssessment, src.RiskAssessment.ClimateEffectsDocumentation)))
@@ -211,7 +211,16 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "high", src.AssessmentConclusion));
                 })
+                .ForMember(dest => dest.Attachments, opt => opt.MapFrom(src => src.Attachmemnts))
                 .ForMember(dest => dest.ParentAssessmentId, opt => opt.MapFrom(src => src.ParentAssessmentId))
+                .ForMember(dest => dest.SpeciesSpeciesInteractions, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => new[] { "VU", "EN", "CR" }.Any(y => !x.RedListCategory.Contains(y)) && !x.KeyStoneSpecie)))
+                .ForMember(dest => dest.SpeciesSpeciesInteractionsThreatenedSpecies, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => new[] { "VU", "EN", "CR" }.Any(y => x.RedListCategory.Contains(y)) || x.KeyStoneSpecie)))
+                .ForMember(dest => dest.SpeciesNaturetypeInteractions, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesNaturetypeInteractions))
+                .ForMember(dest => dest.SpeciesNaturetypeInteractionsThreatenedSpecies, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesNaturetypeInteractions.Where(x => x.KeyStoneSpecie)))
+                .ForMember(dest => dest.EffectsOnSpeciesSupplementaryInformation, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractionsSupplementaryInformation.StripUnwantedHtml()))
+                .ForMember(dest => dest.EffectsOnThreathenedSpeciesUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.DCritInsecurity.StripUnwantedHtml()))
+                .ForMember(dest => dest.EffectsOnOtherNativeSpeciesUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ECritInsecurity.StripUnwantedHtml()))
+
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
@@ -236,6 +245,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
                 .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));
 
+            CreateMap<Attachment, AlienSpeciesAssessment2023Attachment>(MemberList.None);
             CreateMap<FA4.ImpactedNatureType, AlienSpeciesAssessment2023ImpactedNatureTypes>(MemberList.None)
                 .ForMember(dest => dest.StateChange, opt =>
                 {
@@ -243,6 +253,16 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.StateChange.Select(x => string.Concat(x.Where(char.IsLetter))));
                 })
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToLower()));
+
+            CreateMap<RiskAssessment.SpeciesSpeciesInteraction, AlienSpeciesAssessment2023SpeciesSpeciesInteraction>(MemberList.None)
+                .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.BasisOfAssessment))
+                .ForMember(dest => dest.InteractionStrength, opt => opt.MapFrom(src => src.Effect))
+                ;
+
+            CreateMap<RiskAssessment.SpeciesNaturetypeInteraction, AlienSpeciesAssessment2023SpeciesNaturetypeInteraction>(MemberList.None)
+                .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.BasisOfAssessment))
+                .ForMember(dest => dest.InteractionStrength, opt => opt.MapFrom(src => src.Effect))
+                ;
         }
     }
 }

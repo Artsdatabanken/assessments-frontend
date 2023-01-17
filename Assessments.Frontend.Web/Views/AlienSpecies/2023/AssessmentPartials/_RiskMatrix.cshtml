@@ -4,8 +4,7 @@
 
 @{
     var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
-    /*
-     *    Risk Matrix
+    /* Risk Matrix
 
    FILLED LINE: BEST ESTIMATE OF MARTIX PLACEMENT
    -> Determines risk category
@@ -31,20 +30,15 @@
 
         // Names / Descriptions         
         string xAxisLabel = "Invasjonspotensial";
-        string yAxisLabel = "Økologisk effekt";
+        string yAxisLabel = "Økologisk effekt";        
 
-        // Obtain Criteria Letters
-        var criteria = Model.Assessment.Criteria;
-        var A = AlienSpeciesAssessment2023CriteriaLetter.A;
-        var B = AlienSpeciesAssessment2023CriteriaLetter.B;
-        var C = AlienSpeciesAssessment2023CriteriaLetter.C;
+        // Uncertainty Values for y
 
-
-        // Obtain all counting criteria
-        foreach (var criterion in criteria)
+        // 1. Obtain all counting criteria
+        foreach (var criterion in Model.Assessment.Criteria)
         {
             var letter = criterion.CriteriaLetter;
-            var xAxis = (letter == A || letter == B || letter == C);
+            var xAxis = (letter == AlienSpeciesAssessment2023CriteriaLetter.A || letter == AlienSpeciesAssessment2023CriteriaLetter.B || letter == AlienSpeciesAssessment2023CriteriaLetter.C);
             if (!xAxis){
                 if (criterion.UncertaintyValues.Count > 1 && criterion.Value > 0 && criterion.Value == y)
                 {
@@ -53,38 +47,34 @@
             }
         }
 
-        // Uncertainty Values y
-
+        // 2. Obtain higher and lower uncertainties
         int yHigherUncertainty = y;
-        List<int> lowestYList = new List<int>();
+        int yLowerUncertainty = y;
 
-        foreach (var criterion in yAxisCriteriaList)
-        {
-            // Obtain top and bottom uncertainties
+        List<int> lowestYList = new List<int>();
+        foreach (var criterion in yAxisCriteriaList) 
+        {            
             int criteriaLowestY = y;
             foreach (var uncertainty in criterion.UncertaintyValues)
-            {
-                // Always use highest uncertainty 
-                if(uncertainty > yHigherUncertainty)
+            {                
+                if(uncertainty > yHigherUncertainty) // Always use highest uncertainty 
                 {
                     yHigherUncertainty = uncertainty;
-                }
-                // dump all the lower uncertainties into one comparison-list
+                }                
                 if(uncertainty < y)
                 {
-                    lowestYList.Add(uncertainty);
+                    lowestYList.Add(uncertainty); // dump alllower uncertainties into one comparison-list
                 }
             }   
-        }
+        }        
 
-        int yLowerUncertainty = y;
-        // set lower uncertainty if all lower uncertainty values are the same
+        // 3. set lower uncertainty if all lower uncertainty values are the same
         if(lowestYList.Distinct().Count() == 1)
         {
             yLowerUncertainty = lowestYList[0];
         }
 
-        // CALCULATE UNCERTAINTIES FOR X
+        // Uncertainty Values for x
 
         // 1. Obtain A, B & C criteria
         var critA = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
@@ -110,8 +100,7 @@
         var adjustedB = Math.Min(adjustedAB, critB.Value);
         var level = Math.Max(adjustedAB, critC.Value);
 
-        // 3. Add decisive criteria to list,
-
+        // 3. Add decisive criteria to list
         List<int> uncertaintiesAB = new List<int>(); 
         List<int> uncertaintiesC = new List<int>();
         List<AlienSpeciesAssessment2023Criterion> decisiveCrits = new List<AlienSpeciesAssessment2023Criterion>();
@@ -149,7 +138,6 @@
         }
 
         // 5. Obtain all values for uncertainty levels by mering AB & C lists for uncertainties, make them distinct, and sort them.
-
         List<int> allUncertaintyLevels = uncertaintiesAB.Union(uncertaintiesC).ToList();
         allUncertaintyLevels.Sort(); //const allUncertaintyLevels = [...new Set([...uncertaintiesAB,...uncertaintiesC])].sort()
 
@@ -166,13 +154,8 @@
         }
 
 
-        // 7. The bit that makes little sense, but here it is
-        // REDUCE FUNCTION ATTEMPT AT TRANSLATION:
+        // 7. The bit that makes little sense, but here it is: REDUCE FUNCTION ATTEMPT AT TRANSLATION:
         // ORIGINAL: sweepingUncertaintyLevels = decisiveUncertainties.reduce((acc, uv) => acc.filter(n => n >= level || uv.indexOf(n) > -1), allUncertaintyLevels);
-        // callbackfunction: (acc, uv) => acc.filter(n => n >= level || uv.indexOf(n) > -1)
-        // initialValue: allUncertaintyLevels
-        // sourceList: decisiveUncertainties
-
         var startValue = allUncertaintyLevels;
         IEnumerable<int> sweepingUncertaintyLevels = null;
 
@@ -185,7 +168,6 @@
         IEnumerable<int> xUncertainties = sweepingUncertaintyLevels;       
         int xHigherUncertainty = Math.Max(sweepingUncertaintyLevels.AsQueryable().Max(),x); 
         int xLowerUncertainty =  Math.Min(sweepingUncertaintyLevels.AsQueryable().Min(),x);
-
    }
 
 
@@ -220,11 +202,15 @@
             // Add UPWARDS uncertainty to the x-axis only for the current column on the x-axis.
             if (current_x <= highestUncertainty_x && current_x > place_x)
             {
+               
                 classN = "uncertain " + highestUncertainty_x + " " +current_x + " " + place_x;               
             }
+
             // Add DOWNWARDS uncertainty to the y-axis only for the current column on the x-axis.
             if (current_x >= lowestUncertainty_x && current_x < place_x)
             {
+                // y value higher than the lowest cap
+                // lower than the category value
                 classN = "uncertain " + lowestUncertainty_x + " " +current_x + " " + place_x;               
             }
         }
@@ -240,7 +226,13 @@
 
     <p>
         x: @x - Usikkerhet: Max @xHigherUncertainty Min: @xLowerUncertainty<br/>
-        y: @y - Usikkerhet: Max @yHigherUncertainty Min: @yLowerUncertainty <br />        
+        y: @y - Usikkerhet: Max @yHigherUncertainty Min: @yLowerUncertainty <br />     
+        "sweepingUncertaintyLevels": @{
+             foreach (var uncertainty in xUncertainties)
+            {
+                <b>@uncertainty</b>
+            }   
+        }
     </p>
 
     <figure class="risk-level-matrix">

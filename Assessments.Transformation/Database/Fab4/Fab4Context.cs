@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Assessments.Transformation.Database.Fab4.Models;
+using System.Net.Mail;
+using Attachment = Assessments.Transformation.Database.Fab4.Models.Attachment;
 
 namespace Assessments.Transformation.Database.Fab4
 {
@@ -20,6 +22,8 @@ namespace Assessments.Transformation.Database.Fab4
         public virtual DbSet<Assessment> Assessments { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRoleInExpertGroup> UserRoleInExpertGroups { get; set; }
+
+        public virtual DbSet<Models.Attachment> Attachments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -96,6 +100,32 @@ namespace Assessments.Transformation.Database.Fab4
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserRoleInExpertGroups)
                     .HasForeignKey(d => d.UserId);
+            });
+
+            // attachemnts
+            // split table to avoid loading extra data on assessments on ordinary transform
+            modelBuilder.Entity<Attachment>(e =>
+            {
+                e.HasKey(x => x.Id);
+                e.ToTable("Attachments");
+                e.HasOne(x => x.Assessment).WithMany(x => x.Attachments).OnDelete(DeleteBehavior.NoAction).IsRequired();
+                e.Property(x => x.IsDeleted).IsRequired();
+                //e.Property(x => x.File).IsRequired();
+                e.Property(x => x.Type).IsRequired().HasMaxLength(300);
+                e.Property(x => x.Date).IsRequired();
+                e.Property(x => x.FileName).IsRequired().HasMaxLength(1000);
+                e.Property(x => x.Name).IsRequired().HasMaxLength(2000);
+                e.HasOne(x => x.User).WithMany().OnDelete(DeleteBehavior.NoAction).IsRequired();
+                e.HasOne(o => o.AttachmentFile).WithOne()
+                    .HasForeignKey<AttachmentFile>(o => o.Id);
+                e.Navigation(o => o.AttachmentFile).IsRequired();
+            });
+
+            modelBuilder.Entity<AttachmentFile>(e =>
+            {
+                e.HasKey(x => x.Id);
+                e.ToTable("Attachments");
+                e.Property(x => x.File).IsRequired();
             });
 
             OnModelCreatingPartial(modelBuilder);

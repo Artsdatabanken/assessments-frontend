@@ -89,11 +89,10 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return false;
         }
 
-        internal static List<AlienSpeciesAssessment2023AssessmentVector> GetIntroductionPathways(List<MigrationPathway> assessmentVectors, AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread pathWay)
+        internal static List<AlienSpeciesAssessment2023AssessmentVector> GetIntroductionPathways(List<MigrationPathway> assessmentVectors, string pathWay)
         {
-            List<AlienSpeciesAssessment2023AssessmentVector> filteredAssessmentVectors = assessmentVectors.Where(x => x.IntroductionSpread == pathWay.ToString().ToLower()).Select(x => new AlienSpeciesAssessment2023AssessmentVector()
+            List<AlienSpeciesAssessment2023AssessmentVector> filteredAssessmentVectors = assessmentVectors.Where(x => x.IntroductionSpread == pathWay).Select(x => new AlienSpeciesAssessment2023AssessmentVector()
             {
-                IntroductionSpread = pathWay,
                 InfluenceFactor = AlienSpeciesAssessment2023AssessmentVector.GetInfluenceFactor(x.InfluenceFactor),
                 Magnitude = AlienSpeciesAssessment2023AssessmentVector.GetMagnitude(x.Magnitude),
                 TimeOfIncident = AlienSpeciesAssessment2023AssessmentVector.GetTimeOfIncident(x.TimeOfIncident),

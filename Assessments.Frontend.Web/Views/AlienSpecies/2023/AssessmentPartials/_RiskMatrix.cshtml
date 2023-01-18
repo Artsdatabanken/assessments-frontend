@@ -116,7 +116,7 @@
         }
 
         // 4. Obtain uncertainty values for decisive criteria
-    
+
         if (adjustedA == level || adjustedB == level)
         {
             var minUL_A = critA.UncertaintyValues.Count == 0 ? critA.Value : critA.UncertaintyValues.AsQueryable().Min(); 
@@ -154,21 +154,17 @@
         }
 
 
-        // 7. The bit that makes little sense, but here it is: REDUCE FUNCTION ATTEMPT AT TRANSLATION:
-        // ORIGINAL: sweepingUncertaintyLevels = decisiveUncertainties.reduce((acc, uv) => acc.filter(n => n >= level || uv.indexOf(n) > -1), allUncertaintyLevels);
-        var startValue = allUncertaintyLevels;
-        IEnumerable<int> sweepingUncertaintyLevels = null;
+        // 7. ORIGINAL: sweepingUncertaintyLevels = decisiveUncertainties.reduce((acc, uv) => acc.filter(n => n >= level || uv.indexOf(n) > -1), allUncertaintyLevels);
+        var sweepingUncertaintyLevels = decisiveUncertainties.Aggregate(allUncertaintyLevels, (accumulator, current) => accumulator.Where(x => x >= level || current.Contains(x)).ToList());
 
-        foreach (var acc in decisiveUncertainties)
-        {
-            sweepingUncertaintyLevels = acc.Where(n => n >= level || startValue.Contains(n));
-        }
+        // 7.5: removeuncertainty values not next to the actual value (x is the actual value)
+        sweepingUncertaintyLevels = sweepingUncertaintyLevels.Where(val => x - 1 == val || x == val || x + 1 ==  val).ToList();
 
         // 8. The end values.
         IEnumerable<int> xUncertainties = sweepingUncertaintyLevels;       
         int xHigherUncertainty = Math.Max(sweepingUncertaintyLevels.AsQueryable().Max(),x); 
         int xLowerUncertainty =  Math.Min(sweepingUncertaintyLevels.AsQueryable().Min(),x);
-   }
+    }
 
 
 @functions{

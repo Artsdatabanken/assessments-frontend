@@ -4,6 +4,8 @@ namespace Assessments.Mapping.AlienSpecies.Model
 {
     public class AlienSpeciesAssessment2023AssessmentVector
     {
+        public AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread IntroductionSpread { get; set; }
+
         public AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor InfluenceFactor { get; set; }
 
         public AlienSpeciesAssessment2023IntroductionPathway.Magnitude Magnitude { get; set; }

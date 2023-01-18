@@ -45,8 +45,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ChangedFromAlien, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAlienSpeciesAssessment2023Changed(src.ChangedFromAlien)))
                 .ForMember(dest => dest.Environment, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEnvironmentEnum(src.Limnic, src.Marine, src.Terrestrial)))
                 .ForMember(dest => dest.ReasonsForChangeOfCategoryDescription, opt => opt.MapFrom(src => src.DescriptionOfReasonsForChangeOfCategory.StripUnwantedHtml()))
-                .ForMember(dest => dest.IntroductionPathways, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetIntroductionPathways(src.AssesmentVectors, "introduction")))
-                .ForMember(dest => dest.SecondarySpreadPathways, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetIntroductionPathways(src.AssesmentVectors, "spread")))
+                .ForMember(dest => dest.AssessmentVectors, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetIntroductionPathways(src.AssesmentVectors)))
                 .ForMember(dest => dest.AOOknown, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");

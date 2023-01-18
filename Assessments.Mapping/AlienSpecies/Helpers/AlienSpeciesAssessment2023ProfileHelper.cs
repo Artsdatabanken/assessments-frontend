@@ -90,7 +90,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return false;
         }
 
-        internal static List<AlienSpeciesAssessment2023AssessmentVector> GetIntroductionPathways(List<MigrationPathway> assessmentVectors, string pathWay)
+        internal static List<AlienSpeciesAssessment2023AssessmentVector> GetIntroductionPathways(List<MigrationPathway> assessmentVectors)
         {
             InfluenceFactor GetInfluenceFactor(string influenceFactor)
             {
@@ -146,8 +146,9 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 };
             }
 
-            List<AlienSpeciesAssessment2023AssessmentVector> filteredAssessmentVectors = assessmentVectors.Where(x => x.IntroductionSpread == pathWay).Select(x => new AlienSpeciesAssessment2023AssessmentVector()
+            List<AlienSpeciesAssessment2023AssessmentVector> filteredAssessmentVectors = assessmentVectors.Select(x => new AlienSpeciesAssessment2023AssessmentVector()
             {
+                IntroductionSpread = (IntroductionSpread)Enum.Parse(typeof(IntroductionSpread), x.IntroductionSpread, true),
                 InfluenceFactor = GetInfluenceFactor(x.InfluenceFactor),
                 Magnitude = GetMagnitude(x.Magnitude),
                 TimeOfIncident = GetTimeOfIncident(x.TimeOfIncident),

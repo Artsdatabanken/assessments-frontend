@@ -4,6 +4,14 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public class AlienSpeciesAssessment2023IntroductionPathway
     {
+        public enum IntroductionSpread
+        {
+            [Display(Name = "Introduksjon")]
+            Introduction,
+            [Display(Name = "Spredning")]
+            Spread,
+        }
+
         public enum InfluenceFactor
         {
             [Display(Name = "")]

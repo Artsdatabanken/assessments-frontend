@@ -88,9 +88,9 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool HasIndoorProduction { get; set; }
 
         /// <summary>
-        /// Relevant pathways of introduction to Norwegian nature
+        /// Relevant pathways of introduction to Norwegian nature and relevant pathways of secondary spread within Norwegian nature
         /// </summary>
-        public List<AlienSpeciesAssessment2023AssessmentVector> IntroductionPathways { get; set; }
+        public List<AlienSpeciesAssessment2023AssessmentVector> AssessmentVectors { get; set; }
 
         /// <summary>
         /// List including category and decisive criteria from previous assessments
@@ -136,11 +136,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The species' total score on the invation axis
         /// </summary>
         public int? ScoreInvasionPotential { get; set; }
-
-        /// <summary>
-        /// Relevant pathways of secondary spread within Norwegian nature
-        /// </summary>
-        public List<AlienSpeciesAssessment2023AssessmentVector> SecondarySpreadPathways { get; set; }
 
         /// <summary>
         /// The species group name, based on the taxon hierarchy
@@ -515,18 +510,18 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         ///The species impact(s) on threathened or keystone species
         /// </summary>
-        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new (); 
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new();
 
         /// <summary>
         ///The species impact(s) on groups of Red-List assessed species
         /// </summary>
-        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new ();
+        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new();
 
         /// <summary>
         ///The species impact(s) on groups of Red-List assessed species that include at least one threatened species or keystone species
         /// </summary>
         public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractionsThreatenedSpecies { get; set; } = new();
-        
+
         /// <summary>
         /// Further information related to the species impact(s) on native species
         /// </summary>

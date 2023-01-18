@@ -93,6 +93,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public List<AlienSpeciesAssessment2023AssessmentVector> AssessmentVectors { get; set; }
 
         /// <summary>
+        /// Relevant pathways of introduction to Norwegian nature and relevant pathways of secondary spread within Norwegian nature
+        /// </summary>
+        public List<AlienSpeciesAssessment2023AssessmentVector> ImportPathways { get; set; }
+
+        /// <summary>
         /// List including category and decisive criteria from previous assessments
         /// </summary>
         public List<AlienSpeciesAssessment2023PreviousAssessment> PreviousAssessments { get; set; } = new();

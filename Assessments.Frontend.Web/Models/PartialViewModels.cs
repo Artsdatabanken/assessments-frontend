@@ -9,9 +9,9 @@ namespace Assessments.Frontend.Web.Models
     {
         public string AssessmentArea { get; set; }
 
-        public ScientificNameViewModel scientificNameViewModel { get; set; }
+        public ScientificNameViewModel ScientificNameViewModel { get; set; }
 
-        public SpeciesGroupViewModel speciesGroupViewModel { get; set; }
+        public SpeciesGroupViewModel SpeciesGroupViewModel { get; set; }
     }
 
     public class CategoryBarListElement
@@ -90,6 +90,8 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         public bool HasIndoorProduction { get; set; }
+
+        public List<AlienSpeciesAssessment2023AssessmentVector> ImportPathways { get; set; }
 
         public string MisidentifiedDescription { get; set; }
 

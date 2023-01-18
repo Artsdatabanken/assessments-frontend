@@ -7,6 +7,7 @@ using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Infrastructure.Api;
 using Assessments.Frontend.Web.Infrastructure.Services;
+using Assessments.Shared.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Http;
@@ -47,6 +48,8 @@ builder.Services.AddSwagger();
 builder.Services.AddResponseCompression();
 
 builder.Services.AddSendGrid(options => { options.ApiKey = builder.Configuration["SendGridApiKey"]; });
+
+builder.Services.Configure<ApplicationOptions>(builder.Configuration.GetSection(nameof(ApplicationOptions)));
 
 var app = builder.Build();
 

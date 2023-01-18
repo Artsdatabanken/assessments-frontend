@@ -9,15 +9,13 @@
     var decisiveCriteriaHasA = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A));
     var decisiveCriteriaHasB = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B));
     var decisiveCriteriaHasC = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C));
+    var decisiveCriteriaHasD = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D));
+    var decisiveCriteriaHasE = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E));
     var uncertaintyA = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
     var uncertaintyB = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
     var uncertaintyC = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
-    var uncertaintyHighA = uncertaintyA.UncertaintyValues.Where(x => x > uncertaintyA.Value).FirstOrDefault();
-    var uncertaintyHighB = uncertaintyB.UncertaintyValues.Where(x => x > uncertaintyB.Value).FirstOrDefault();
-    var uncertaintyHighC = uncertaintyC.UncertaintyValues.Where(x => x > uncertaintyC.Value).FirstOrDefault();
-    var uncertaintyLowA = uncertaintyA.UncertaintyValues.Where(x => x < uncertaintyA.Value).FirstOrDefault();
-    var uncertaintyLowB = uncertaintyB.UncertaintyValues.Where(x => x < uncertaintyB.Value).FirstOrDefault();
-    var uncertaintyLowC = uncertaintyC.UncertaintyValues.Where(x => x < uncertaintyC.Value).FirstOrDefault();
+    var uncertaintyD = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.D).FirstOrDefault();
+    var uncertaintyE = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.E).FirstOrDefault();
 
     var isSimplifiedEstimation = Model.Assessment.MedianLifetimeEstimationMethod == AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.SimplifiedEstimation;
     var isAcceptedSimplifiedEstimation = Model.Assessment.IsAcceptedSimplifiedEstimate == true;
@@ -36,11 +34,96 @@
     var isEstimatedIncreaseInAOOReproducingUnaided = Model.Assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOOReproducingUnaided;
     var isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion = Model.Assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion;
     var isEstimatedIncreaseInAOODoorKnockers = Model.Assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOODoorKnockers;
-    
+
+    var showNoEcologicalEffect = Model.Assessment.ScoreEcologicalEffect == 1;
+
 
     int GetUncertaintyValueMinMax(int value, int uncertainty)
     {
         return uncertainty == 0 ? value : uncertainty;
+    }
+
+    int GetUncertaintyHigh(AlienSpeciesAssessment2023Criterion criterion)
+    {
+        return criterion.UncertaintyValues.Where(x => x > criterion.Value).FirstOrDefault();
+    }
+
+    int GetUncertaintyLow(AlienSpeciesAssessment2023Criterion criterion)
+    {
+        return criterion.UncertaintyValues.Where(x => x < criterion.Value).FirstOrDefault();
+    }
+
+    string GetDecisiveCriteriaY()
+    {
+        var yAxisLetters = string.Empty;
+        var yAxisCriteria = Model.Assessment.DecisiveCriteria.Split(',')[1];
+        foreach (var criterium in Model.Assessment.Criteria)
+        {
+            if (yAxisCriteria.Contains(criterium.CriteriaLetter.ToString()))
+            {
+                yAxisLetters += criterium.CriteriaLetter;
+            }
+        }
+        return yAxisLetters;
+    }
+
+    void GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion)
+    {
+        <p>
+            @criterion.CriteriaLetter.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, criterion.Value)@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "")
+            @{
+                if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
+                    {
+                        <span>(med usikkerhet</span>
+                    }
+                if (GetUncertaintyLow(criterion) != 0)
+                    {
+                        <span>
+                            ned mot @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyLow(criterion))@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) != 0 ? ")." : "")
+                        </span>
+                    }
+                if (GetUncertaintyHigh(criterion) != 0 && GetUncertaintyLow(criterion) != 0)
+                {
+                    <span>og</span>
+                }
+                if (GetUncertaintyHigh(criterion) != 0)
+                {
+                    <span>
+                        opp mot @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion))@(GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0 ? ")." : "")
+                    </span>
+                }
+            }
+        </p>
+    }
+
+    void GetLetterUncertainty(AlienSpeciesAssessment2023Criterion criterion)
+    {
+        <p>
+            Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @criterion.Value@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "")
+            @{
+                if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
+                    {
+                        <span>(med usikkerhet</span>
+                    }
+                if (GetUncertaintyLow(criterion) != 0)
+                    {
+                        <span>
+                            ned mot @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyLow(criterion))@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) != 0 ? ")." : "")
+                        </span>
+                    }
+                if (GetUncertaintyHigh(criterion) != 0 && GetUncertaintyLow(criterion) != 0)
+                {
+                    <span>og</span>
+                }
+                if (GetUncertaintyHigh(criterion) != 0)
+                {
+                    <span>
+                        opp mot @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion))@(GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0 ? ")." : "")
+                    </span>
+                }
+            }
+            Dette begrunnes i:
+        </p>
     }
 }
 
@@ -71,15 +154,7 @@
                                 </div>
                                 <div is-visible="showHigherInvasionPotential">
                                     <div is-visible="decisiveCriteriaHasA || decisiveCriteriaHasB">
-                                        <p>
-                                            @AlienSpeciesAssessment2023CriteriaLetter.A.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value) 
-                                            <span is-visible="uncertaintyHighA != 0 || uncertaintyLowA != 0">(med usikkerhet</span>
-                                            <span is-visible="uncertaintyLowA != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyLowA)</span>
-                                            <span is-visible="uncertaintyHighA != 0 && uncertaintyLowA != 0">og</span>
-                                            <span is-visible="uncertaintyHighA != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyHighA)</span>
-                                            <span is-visible="uncertaintyHighA != 0 || uncertaintyLowA != 0">).</span>
-                                            <span is-visible="uncertaintyHighA == 0 && uncertaintyLowA == 0">.</span>
-                                        </p>
+                                        @{ GetLetterFullText(uncertaintyA); }
                                         <div is-visible="!showIsNk" class="collapsible initially_closed">
                                             <div class="collapsible_header">
                                                 <h3>Vis detaljer</h3>
@@ -93,25 +168,25 @@
                                                     Estimeringsmetode: @Model.Assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
                                                 </p>
                                                 <p is-visible="showSimplifiedEstimateAcceptedAlien">
-                                                    Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                    Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyLow(uncertaintyA)) – @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                                 </p>
                                                 <div is-visible="showSimplifiedEstimateNotAcceptedAlien">
                                                     <p>
-                                                        Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                        Basert på de beste anslagene på forekomstareal i dag (@Model.Assessment.AOOtotalBest km²) og om 50 år (@Model.Assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyLow(uncertaintyA)) – @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                                     </p>
                                                     <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                                                 </div>
                                                 <p is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-                                                    Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                    Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyLow(uncertaintyA)) – @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                                 </p>
                                                 <div is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
                                                     <p>
-                                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyLowA) – @GetUncertaintyValueMinMax(uncertaintyA.Value, uncertaintyHighA). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
+                                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @Model.Assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyLow(uncertaintyA)) – @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @Model.Assessment.ExtinctionProbability.DisplayName().
                                                     </p>
                                                     <p>Begrunnelse for justering av skår og/eller usikkerhet: @Model.Assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                                                 </div>
                                                 <div is-visible="showNumericalEstimation">
-                                                    <table class="number-table">
+                                                    <table class="numbers-table">
                                                         <caption>Demografiske nøkkeltall</caption>
                                                         <tr is-visible="Model.Assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
                                                             <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
@@ -143,7 +218,7 @@
                                                 </div>
                                                 <div is-visible="showViableAnalysis">
                                                     <p>Beskrivelse av modeller og programvare som er brukt: @Model.Assessment.MedianLifetimeViabilityAnalysisDescription</p>
-                                                    <table class="number-table">
+                                                    <table class="numbers-table">
                                                         <caption>Demografiske nøkkeltall</caption>
                                                         <tr is-visible="Model.Assessment.MedianLifetimeBestEstimate != 0">
                                                             <td>Estimert median levetid (i år): </td>
@@ -163,15 +238,7 @@
                                         </div>
                                     </div>
                                     <div is-visible="decisiveCriteriaHasB || decisiveCriteriaHasA">
-                                        <p>
-                                            @AlienSpeciesAssessment2023CriteriaLetter.B.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyB.Value) 
-                                            <span is-visible="uncertaintyHighB != 0 || uncertaintyLowB != 0">(med usikkerhet</span> 
-                                            <span is-visible="uncertaintyLowB != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyLowB)</span>
-                                            <span is-visible="uncertaintyHighB != 0 && uncertaintyLowB != 0">og</span>
-                                            <span is-visible="uncertaintyHighB != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyB.CriteriaLetter, uncertaintyHighB)</span>
-                                            <span is-visible="uncertaintyHighB != 0 || uncertaintyLowB != 0">).</span>
-                                            <span is-visible="uncertaintyHighB == 0 && uncertaintyLowB == 0">.</span>
-                                        </p>
+                                        @{ GetLetterFullText(uncertaintyB); }
                                         <div class="collapsible initially_closed">
                                             <div class="collapsible_header">
                                                 <h3>Vis detaljer</h3>
@@ -185,7 +252,7 @@
                                                     Estimeringsmetode: @Model.Assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant()
                                                 </p>
                                                 <div is-visible="isSpatiotemporalDataset">
-                                                    <table class="number-table">
+                                                    <table class="numbers-table">
                                                         <caption>Parametervalg for estimering av ekspansjonshastighet (les mer om metoden her: <a href="https://view.nina.no/expansion/" target="_blank">ekspansjon</a>)</caption>
                                                         <tr is-visible="!string.IsNullOrEmpty(Model.Assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange)">
                                                             <td>Forekomstarealets mørketall: </td>
@@ -201,7 +268,7 @@
                                                         </tr>
                                                     </table>
                                                     <br />
-                                                    <table class="number-table">
+                                                    <table class="numbers-table">
                                                         <caption>Ekspansjonshastighet</caption>
                                                         <tr>
                                                             <td>Gjennomsnittlig (m/år): </td>
@@ -221,7 +288,7 @@
                                                     <p>
                                                         Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra endringen i forekomstareal mellom to år tilbake i tid, hvor antall år mellom første og andre år, er på mellom 10 og 20 år. Følgende data ligger til grunn:
                                                     </p>
-                                                    <table class="number-table">
+                                                    <table class="numbers-table">
                                                         <tr>
                                                             <td>År</td>
                                                             <td>Kjent forekomstareal (km<sup>2</sup>)</td>
@@ -255,28 +322,245 @@
                                                 </div>
                                                 <div is-visible="isEstimatedIncreaseInAOODoorKnockers">
                                                     <p>
-                                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyB.Value, uncertaintyLowB) – @GetUncertaintyValueMinMax(uncertaintyB.Value, uncertaintyHighB)). Det beste anslaget på artens ekspansjonshastighet er @Model.Assessment.ExpansionSpeedBestEstimate m/år.
+                                                        Basert på det beste anslaget på @Model.Assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @Model.Assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyB.Value, GetUncertaintyLow(uncertaintyB)) – @GetUncertaintyValueMinMax(uncertaintyB.Value, GetUncertaintyHigh(uncertaintyB))). Det beste anslaget på artens ekspansjonshastighet er @Model.Assessment.ExpansionSpeedBestEstimate m/år.
                                                     </p>
                                                 </div>
                                             </div>
                                         </div >
                                     </div>
                                     <div is-visible="decisiveCriteriaHasC">
-                                        <p>
-                                            @AlienSpeciesAssessment2023CriteriaLetter.C.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyC.Value) 
-                                            <span is-visible="uncertaintyHighC != 0 || uncertaintyLowC != 0">(med usikkerhet</span>
-                                            <span is-visible="uncertaintyLowC != 0">ned mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyLowC)</span>
-                                            <span is-visible="uncertaintyHighC != 0 && uncertaintyLowC != 0">og</span>
-                                            <span is-visible="uncertaintyHighC != 0">opp mot @AlienSpeciesHelpers.CriteriaDescription(uncertaintyC.CriteriaLetter, uncertaintyHighC)</span>
-                                            <span is-visible="uncertaintyHighC != 0 || uncertaintyLowC != 0">).</span>
-                                            <span is-visible="uncertaintyHighC == 0 && uncertaintyLowC == 0">.</span>
-                                        </p>
-                                        <p>Se mer informasjon under Naturtypetilhørighet.  </p>
+                                        @{ GetLetterFullText(uncertaintyC); }
                                     </div>
                                 </div>
                             </div>
                             <h3>Økologisk effekt</h3>
-                            <div>y-aksen</div>
+                            <div  is-visible="showNoEcologicalEffect">
+                                <p>Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen. Se fanen Øvrige brukte kriterier.</p>
+                            </div>
+                            <div is-visible="!showNoEcologicalEffect">
+                                <p>Avgjørende kriterium: @GetDecisiveCriteriaY()</p>
+                                <div is-visible="decisiveCriteriaHasD">
+                                    @{
+                                        GetLetterFullText(uncertaintyD);
+                                    }
+                                    <p>Se mer informasjon under Naturtypetilhørighet.  </p>
+                                    <div is-visible="!showIsNk" class="collapsible initially_closed">
+                                        <div class="collapsible_header">
+                                            <h3>Vis detaljer</h3>
+                                            <button onclick="toggleCollapsible(this)" id="myButton">
+                                                <span class="material-icons expanded_icon">expand_less</span>
+                                                <span class="material-icons collapsed_icon">expand_more</span>
+                                            </button>
+                                        </div>
+                                        <div class="collapsible_content">
+                                            <div is-visible="@Model.Assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && @Model.Assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0">
+                                                <p>
+                                                    Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med følgende truede arter og nøkkelarter. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
+                                                </p>
+                                                <div>
+                                                    @foreach (var impact in Model.Assessment.SpeciesSpeciesInteractionsThreatenedSpecies)
+                                                    {
+                                                        <table class="numbers-table">
+                                                            <caption>Rødlistevurdert art: @impact.VernacularName @Html.Raw(Helpers.getScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
+                                                            <tr>
+                                                                <td>kategori i Rødlista 2021</td>
+                                                                <td>@impact.RedListCategory</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>er arten en nøkkelart?</td>
+                                                                <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>interaksjonens styrke</td>
+                                                                <td>@impact.InteractionStrength.DisplayName()</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>geografisk omfang</td>
+                                                                <td>@impact.Scale.DisplayName()</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>type interaskjon</td>
+                                                                <td>@impact.InteractionType.DisplayName()</td>
+                                                            </tr>
+                                                            <tr is-visible="@impact.Background != null && @impact.Background.Count() != 0">
+                                                                <td>vurderingsgrunnlag</td>
+                                                                <td>
+                                                                    <ul>
+                                                                        @foreach (var background in impact.Background)
+                                                                        {
+                                                                            <li>@background.DisplayName()</li>
+                                                                        }
+                                                                    </ul>    
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div is-visible="@Model.Assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && @Model.Assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0">
+                                                <p>
+                                                    Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter som inkluderer truede arter eller nøkkelarter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
+                                                </p>
+                                                <div>
+                                                    @foreach (var impact in Model.Assessment.SpeciesNaturetypeInteractionsThreatenedSpecies)
+                                                        {
+                                                        <table class="numbers-table">
+                                                            <caption>Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
+                                                            <tr>
+                                                                <td>påvirkes nøkkelarter eller truede arter?</td>
+                                                                <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>interaksjonens styrke</td>
+                                                                <td>@impact.InteractionStrength.DisplayName()</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>geografisk omfang</td>
+                                                                <td>@impact.Scale.DisplayName()</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>type interaskjon</td>
+                                                                <td>@impact.InteractionType.DisplayName()</td>
+                                                            </tr>
+                                                            <tr is-visible="@impact.Background != null && @impact.Background.Count() != 0">
+                                                                <td>vurderingsgrunnlag</td>
+                                                                <td>
+                                                                    <ul>
+                                                                        @foreach (var background in impact.Background)
+                                                                         {
+                                                                             <li>@background.DisplayName()</li>
+                                                                         }
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div is-visible="@(!string.IsNullOrEmpty(Model.Assessment.EffectsOnSpeciesSupplementaryInformation))">
+                                                <p>Utfyllende informasjon rundt artens negative effekter:</p>
+                                                <p>@Html.Raw(Model.Assessment.EffectsOnSpeciesSupplementaryInformation)</p>
+                                            </div>
+                                            <div is-visible="@(!string.IsNullOrEmpty(Model.Assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation))">
+                                                @{
+                                                    GetLetterUncertainty(uncertaintyD);
+                                                }
+                                                <p>@Html.Raw(Model.Assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div is-visible="decisiveCriteriaHasE">
+                                    @{
+                                        GetLetterFullText(uncertaintyE);
+                                    }
+                                    <div is-visible="!showIsNk" class="collapsible initially_closed">
+                                        <div class="collapsible_header">
+                                            <h3>Vis detaljer</h3>
+                                            <button onclick="toggleCollapsible(this)" id="myButton">
+                                                <span class="material-icons expanded_icon">expand_less</span>
+                                                <span class="material-icons collapsed_icon">expand_more</span>
+                                            </button>
+                                        </div>
+                                        <div class="collapsible_content">
+                                            <div is-visible="@Model.Assessment.SpeciesSpeciesInteractions  != null && @Model.Assessment.SpeciesSpeciesInteractions .Count() != 0">
+                                                <p>
+                                                    Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med øvrige rødlistevurderte arter, dvs. arter som hverken er truede eller nøkkelarter . Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert. 
+                                                </p>
+                                                <div>
+                                                    @foreach (var impact in Model.Assessment.SpeciesSpeciesInteractions )
+                                                    {
+                                                        <table class="numbers-table">
+                                                            <caption>Rødlistevurdert art: @impact.VernacularName @Html.Raw(Helpers.getScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
+                                                            <tr>
+                                                                <td>kategori i Rødlista 2021</td>
+                                                                <td>@impact.RedListCategory</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>er arten en nøkkelart?</td>
+                                                                <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>interaksjonens styrke</td>
+                                                                <td>@impact.InteractionStrength.DisplayName()</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>geografisk omfang</td>
+                                                                <td>@impact.Scale.DisplayName()</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>type interaskjon</td>
+                                                                <td>@impact.InteractionType.DisplayName()</td>
+                                                            </tr>
+                                                            <tr is-visible="@impact.Background != null && @impact.Background.Count() != 0">
+                                                                <td>vurderingsgrunnlag</td>
+                                                                <td>
+                                                                    <ul>
+                                                                        @foreach (var background in impact.Background)
+                                                                        {
+                                                                            <li>@background.DisplayName()</li>
+                                                                        }
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div is-visible="@Model.Assessment.SpeciesNaturetypeInteractions != null && @Model.Assessment.SpeciesNaturetypeInteractions.Count() != 0">
+                                                <p>
+                                                    Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert. 
+                                                </p>
+                                                <div>
+                                                    @foreach (var impact in Model.Assessment.SpeciesNaturetypeInteractions)
+                                                    {
+                                                        <table class="numbers-table">
+                                                            <caption>Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
+                                                            <tr>
+                                                                <td>påvirkes nøkkelarter eller truede arter?</td>
+                                                                <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>interaksjonens styrke</td>
+                                                                <td>@impact.InteractionStrength.DisplayName()</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>geografisk omfang</td>
+                                                                <td>@impact.Scale.DisplayName()</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>type interaskjon</td>
+                                                                <td>@impact.InteractionType.DisplayName()</td>
+                                                            </tr>
+                                                            <tr is-visible="@impact.Background != null && @impact.Background.Count() != 0">
+                                                                <td>vurderingsgrunnlag</td>
+                                                                <td>
+                                                                    <ul>
+                                                                        @foreach (var background in impact.Background)
+                                                                        {
+                                                                            <li>@background.DisplayName()</li>
+                                                                        }
+                                                                    </ul>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div is-visible="@(!string.IsNullOrEmpty(Model.Assessment.EffectsOnSpeciesSupplementaryInformation))">
+                                                <p>Utfyllende informasjon rundt artens negative effekter:</p>
+                                                <p>@Html.Raw(Model.Assessment.EffectsOnSpeciesSupplementaryInformation)</p>
+                                            </div>
+                                            <div is-visible="@(!string.IsNullOrEmpty(Model.Assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation))">
+                                                @{
+                                                    GetLetterUncertainty(uncertaintyE);
+                                                }
+                                                <p>@Html.Raw(Model.Assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation)</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div >
                    </div>
 

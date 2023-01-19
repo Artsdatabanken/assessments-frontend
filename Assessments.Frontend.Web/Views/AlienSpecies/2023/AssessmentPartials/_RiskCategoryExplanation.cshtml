@@ -122,10 +122,10 @@
                 <td><b>Er arten en nøkkelart?</b></td>
                 <td><b>Interaksjonens styrke</b></td>
                 <td><b>Geografisk omfang</b></td>
-                <td><b>Type interaskjon</b></td>
+                <td><b>Type interaksjon</b></td>
                 @if (impacts.Any(x => x.Background != null && x.Background.Count() != 0))
                 {
-                    <td><b>vurderingsgrunnlag</b></td>
+                    <td><b>Vurderingsgrunnlag</b></td>
                 }
             </tr>
             @foreach (var impact in impacts)
@@ -176,7 +176,7 @@
                         <td>@impact.Scale.DisplayName()</td>
                     </tr>
                     <tr>
-                        <td>type interaskjon</td>
+                        <td>type interaksjon</td>
                         <td>@impact.InteractionType.DisplayName()</td>
                     </tr>
                     @if (@impact.Background != null && @impact.Background.Count() != 0)
@@ -206,7 +206,7 @@
                 <td><b>Påvirkes nøkkelarter eller truede arter?</b></td>
                 <td><b>Interaksjonens styrke</b></td>
                 <td><b>Geografisk omfang</b></td>
-                <td><b>Type interaskjon</b></td>
+                <td><b>Type interaksjon</b></td>
                 <td><b>Vurderingsgrunnlag</b></td>
             </tr>
             @foreach (var impact in impacts)
@@ -249,7 +249,7 @@
                     <td>@impact.Scale.DisplayName()</td>
                 </tr>
                 <tr>
-                    <td>type interaskjon</td>
+                    <td>type interaksjon</td>
                     <td>@impact.InteractionType.DisplayName()</td>
                 </tr>
                 @if (@impact.Background != null && @impact.Background.Count() != 0)

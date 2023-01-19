@@ -53,20 +53,6 @@
         return criterion.UncertaintyValues.Where(x => x < criterion.Value).FirstOrDefault();
     }
 
-    string GetDecisiveCriteriaY()
-    {
-        var yAxisLetters = string.Empty;
-        var yAxisCriteria = Model.Assessment.DecisiveCriteria.Split(',')[1];
-        foreach (var criterium in Model.Assessment.Criteria)
-        {
-            if (yAxisCriteria.Contains(criterium.CriteriaLetter.ToString()))
-            {
-                yAxisLetters += criterium.CriteriaLetter;
-            }
-        }
-        return yAxisLetters;
-    }
-
     void GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion)
     {
         <p>
@@ -146,7 +132,7 @@
             {
                 <tr>
                     <td>@impact.VernacularName <br> @Html.Raw(Helpers.getScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</td>
-                    <td>@impact.RedListCategory</td>
+                    <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
                     <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
                     <td>@impact.InteractionStrength.DisplayName()</td>
                     <td>@impact.Scale.DisplayName()</td>
@@ -175,7 +161,7 @@
                     <caption>Rødlistevurdert art: @impact.VernacularName @Html.Raw(Helpers.getScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
                     <tr>
                         <td>kategori i Rødlista 2021</td>
-                        <td>@impact.RedListCategory</td>
+                        <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
                     </tr>
                     <tr>
                         <td>er arten en nøkkelart?</td>
@@ -496,7 +482,6 @@
                                 <p>Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen. Se fanen Øvrige brukte kriterier.</p>
                             </div>
                             <div is-visible="!showNoEcologicalEffect">
-                                <p>Avgjørende kriterium: @GetDecisiveCriteriaY()</p>
                                 <div is-visible="decisiveCriteriaHasD">
                                     @{
                                         GetLetterFullText(uncertaintyD);

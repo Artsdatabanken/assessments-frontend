@@ -47,14 +47,6 @@
                 <partial name="/Views/AlienSpecies/2023/ListPartials/_Filters.cshtml" />
             </form>
 
-            <div is-visible="@Model.Results.Any()">
-                <form>
-                    <button type="submit" name="Export" value="true" formtarget="_blank">
-                        <span class="material-icons">file_download</span> Eksporter
-                    </button>
-                </form>
-            </div>
-
             <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel"/>
         </div>
     </div>

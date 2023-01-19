@@ -26,6 +26,11 @@ builder.Services.Configure<RouteOptions>(options => { options.LowercaseUrls = tr
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
+builder.Services.AddDbContext<AssessmentsDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"), providerOptions => providerOptions.EnableRetryOnFailure());
+});
+
 builder.Host.UseNLog();
 
 builder.Services.AddDbContext<AssessmentsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));

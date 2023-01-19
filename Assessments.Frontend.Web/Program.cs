@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NLog.Web;
 using SendGrid.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,10 @@ builder.Services.AddDbContext<AssessmentsDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"), providerOptions => providerOptions.EnableRetryOnFailure());
 });
+
+builder.Host.UseNLog();
+
+builder.Services.AddDbContext<AssessmentsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 

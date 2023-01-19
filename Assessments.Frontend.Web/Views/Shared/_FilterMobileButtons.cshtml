@@ -1,10 +1,10 @@
-@using Assessments.Shared.Options
-@using Microsoft.Extensions.Options
-
-@inject IOptions<ApplicationOptions> Options
-
 @{
-    var disableExport = Options.Value.AlienSpecies.DisableExport;
+    var disableExport = false;
+
+    if (ViewData["DisableExport"] != null)
+    {
+        disableExport = (bool)ViewData["DisableExport"];
+    }
 }
 
 <div class="filters_bottom">

@@ -1,7 +1,14 @@
 @model AlienSpeciesListViewModel;
+
 @using System.Linq;
+@using Assessments.Shared.Options
+@using Microsoft.Extensions.Options
+
+@inject IOptions<ApplicationOptions> Options
 
 @{
+    ViewData["DisableExport"] = Options.Value.AlienSpecies.DisableExport;
+
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
@@ -234,7 +241,7 @@
                                 }
                             </ul>
                         </div>
-                        <partial name="/Views/Shared/_FilterMobileButtons.cshtml" />
+                        <partial name="/Views/Shared/_FilterMobileButtons.cshtml" view-data="ViewData" />
                     </div>
                 </div>
             </div>

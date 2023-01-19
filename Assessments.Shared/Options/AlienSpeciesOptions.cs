@@ -1,6 +1,6 @@
 ﻿namespace Assessments.Shared.Options
 {
-    public class ApplicationOptions
+    public class ApplicationOptions // configured in appsettings.json
     {
         public AlienSpeciesOptions AlienSpecies { get; set; }
     }

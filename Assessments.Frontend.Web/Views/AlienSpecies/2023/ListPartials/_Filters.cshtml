@@ -7,7 +7,7 @@
 @inject IOptions<ApplicationOptions> Options
 
 @{
-    ViewData["DisableExport"] = Options.Value.AlienSpecies.DisableExport;
+    ViewData["EnableExport"] = Options.Value.AlienSpecies2023.EnableExport;
 
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;

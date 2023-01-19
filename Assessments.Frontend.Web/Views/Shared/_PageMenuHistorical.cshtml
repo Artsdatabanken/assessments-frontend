@@ -1,9 +1,13 @@
-﻿@using Microsoft.Extensions.Hosting
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
+﻿@using Microsoft.Extensions.Options
+@using Assessments.Shared.Options
+
+@inject IOptions<ApplicationOptions> Options
 
 @{
     ViewData["Fremmedartslista"] = "Fremmedartslista";
     ViewData["Rødlista"] = "Rødlista";
+
+    var enableAlienSpecies2023 = Options.Value.AlienSpecies2023.Enabled;
 }
 
 <div class="sidebarmenu">
@@ -65,7 +69,7 @@
 
     <ul>
         <li>
-            @if (!Environment.IsProduction())
+            @if (enableAlienSpecies2023)
             {
                 <a class="menuheaderlink alien-species" asp-controller="AlienSpecies" asp-action="Home">
                     <h3>
@@ -84,7 +88,7 @@
             }
         </li>
 
-        @if (!Environment.IsProduction())
+        @if (enableAlienSpecies2023)
         {
             <li>
                 <a asp-controller="AlienSpecies" asp-action="Index">
@@ -93,7 +97,6 @@
                 </a>
             </li>
         }
-
         <li>
             <a href="https://artsdatabanken.no/fremmedartslista2018">
                 <span>@ViewData["Fremmedartslista"] 2018 </span>

@@ -14,16 +14,16 @@ using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [NotReadyForProduction]
+    [EnableAlienSpecies2023]
     [Route("fremmedartslista")]
     public class AlienSpeciesController : BaseController<AlienSpeciesController>
     {
         private readonly AttachmentRepository _attachmentRepository;
-        private readonly AlienSpeciesOptions _alienSpeciesOptions;
+        private readonly AlienSpecies2023Options _alienSpecies2023Options;
 
         public AlienSpeciesController(IOptions<ApplicationOptions> options, AttachmentRepository attachmentRepository)
         {
-            _alienSpeciesOptions = options.Value.AlienSpecies;
+            _alienSpecies2023Options = options.Value.AlienSpecies2023;
             _attachmentRepository = attachmentRepository;
         }
 
@@ -90,7 +90,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         private IActionResult GetExport(IEnumerable<AlienSpeciesAssessment2023> query)
         {
-            if (_alienSpeciesOptions.DisableExport)
+            if (!_alienSpecies2023Options.EnableExport)
                 return NotFound();
 
             var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());

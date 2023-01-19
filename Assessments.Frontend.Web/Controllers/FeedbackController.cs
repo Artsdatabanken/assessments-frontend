@@ -27,7 +27,7 @@ namespace Assessments.Frontend.Web.Controllers
         public FeedbackController(IConfiguration configuration, AssessmentsDbContext dbContext)
         {
             _dbContext = dbContext;
-            _blob = new BlobContainerClient(configuration["ConnectionStrings:AzureBlobStorage"], "files");
+            _blob = new BlobContainerClient(configuration["ConnectionStrings:AzureBlobStorage"], "feedback");
             _feedbackSecret = configuration["FeedbackSecret"];
         }
 
@@ -107,8 +107,6 @@ namespace Assessments.Frontend.Web.Controllers
 
             await _dbContext.SaveChangesAsync();
 
-            var folderId = Guid.NewGuid();
-
             if (formViewModel.FormFiles != null)
             {
                 await _blob.CreateIfNotExistsAsync();
@@ -126,7 +124,7 @@ namespace Assessments.Frontend.Web.Controllers
                         continue;
 
                     var encodedFileName = WebUtility.HtmlEncode(Path.GetFileName(formFile.FileName));
-                    var blobName = $"{folderId}/{Guid.NewGuid()}_{encodedFileName}";
+                    var blobName = $"{feedback.Type}/{feedback.Year}/{feedback.Id}/{Guid.NewGuid()}_{encodedFileName}";
 
                     await using var stream = formFile.OpenReadStream();
                     await _blob.UploadBlobAsync(blobName, stream);

@@ -125,6 +125,83 @@
             Dette begrunnes i:
         </p>
     }
+
+    void GetNatureTypeTableDesktop(List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> impacts)
+    {
+        <table class="numbers-table">
+            <caption>Artens negative effekter på grupper av arter (samfunn)</caption>
+            <tr>
+                <td><b>Berørt naturtype (med gruppen av påvirkede arter)</b></td>
+                <td><b>Påvirkes nøkkelarter eller truede arter?</b></td>
+                <td><b>Interaksjonens styrke</b></td>
+                <td><b>Geografisk omfang</b></td>
+                <td><b>Type interaskjon</b></td>
+                <td><b>Vurderingsgrunnlag</b></td>
+            </tr>
+            @foreach (var impact in impacts)
+            {
+                <tr>
+                    <td>@impact.Name</td>
+                    <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
+                    <td>@impact.InteractionStrength.DisplayName()</td>
+                    <td>@impact.Scale.DisplayName()</td>
+                    <td>@impact.InteractionType.DisplayName()</td>
+                    <td>
+                        <ul>
+                            @foreach (var background in impact.Background)
+                            {
+                                <li>@background.DisplayName()</li>
+                            }
+                        </ul>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    void GetNatureNypeTablesMobile(List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> impacts)
+    {
+        <div>
+            @{
+                foreach (var impact in impacts)
+                {
+                    <table class="numbers-table">
+                        <caption>Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
+                        <tr>
+                            <td>påvirkes nøkkelarter eller truede arter?</td>
+                            <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
+                        </tr>
+                        <tr>
+                            <td>interaksjonens styrke</td>
+                            <td>@impact.InteractionStrength.DisplayName()</td>
+                        </tr>
+                        <tr>
+                            <td>geografisk omfang</td>
+                            <td>@impact.Scale.DisplayName()</td>
+                        </tr>
+                        <tr>
+                            <td>type interaskjon</td>
+                            <td>@impact.InteractionType.DisplayName()</td>
+                        </tr>
+                        @if (@impact.Background != null && @impact.Background.Count() != 0)
+                        {
+                            <tr>
+                                <td>vurderingsgrunnlag</td>
+                                <td>
+                                    <ul>
+                                        @foreach (var background in impact.Background)
+                                        {
+                                            <li>@background.DisplayName()</li>
+                                        }
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+            }
+        </div>
+    }
 }
 
 <div class="page-section" is-visible="!isNrOrEvaluatedAtAnotherLevel">
@@ -401,39 +478,14 @@
                                                 <p>
                                                     Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter som inkluderer truede arter eller nøkkelarter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
                                                 </p>
-                                                <div>
-                                                    @foreach (var impact in Model.Assessment.SpeciesNaturetypeInteractionsThreatenedSpecies)
-                                                        {
-                                                        <table class="numbers-table">
-                                                            <caption>Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
-                                                            <tr>
-                                                                <td>påvirkes nøkkelarter eller truede arter?</td>
-                                                                <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>interaksjonens styrke</td>
-                                                                <td>@impact.InteractionStrength.DisplayName()</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>geografisk omfang</td>
-                                                                <td>@impact.Scale.DisplayName()</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>type interaskjon</td>
-                                                                <td>@impact.InteractionType.DisplayName()</td>
-                                                            </tr>
-                                                            <tr is-visible="@impact.Background != null && @impact.Background.Count() != 0">
-                                                                <td>vurderingsgrunnlag</td>
-                                                                <td>
-                                                                    <ul>
-                                                                        @foreach (var background in impact.Background)
-                                                                         {
-                                                                             <li>@background.DisplayName()</li>
-                                                                         }
-                                                                    </ul>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                                <div class="mobile_hide">
+                                                    @{
+                                                        GetNatureTypeTableDesktop(Model.Assessment.SpeciesNaturetypeInteractionsThreatenedSpecies);
+                                                    }
+                                                </div>
+                                                <div class="only_mobile">
+                                                    @{
+                                                        GetNatureNypeTablesMobile(Model.Assessment.SpeciesNaturetypeInteractionsThreatenedSpecies);
                                                     }
                                                 </div>
                                             </div>
@@ -511,39 +563,14 @@
                                                 <p>
                                                     Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert. 
                                                 </p>
-                                                <div>
-                                                    @foreach (var impact in Model.Assessment.SpeciesNaturetypeInteractions)
-                                                    {
-                                                        <table class="numbers-table">
-                                                            <caption>Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
-                                                            <tr>
-                                                                <td>påvirkes nøkkelarter eller truede arter?</td>
-                                                                <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>interaksjonens styrke</td>
-                                                                <td>@impact.InteractionStrength.DisplayName()</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>geografisk omfang</td>
-                                                                <td>@impact.Scale.DisplayName()</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>type interaskjon</td>
-                                                                <td>@impact.InteractionType.DisplayName()</td>
-                                                            </tr>
-                                                            <tr is-visible="@impact.Background != null && @impact.Background.Count() != 0">
-                                                                <td>vurderingsgrunnlag</td>
-                                                                <td>
-                                                                    <ul>
-                                                                        @foreach (var background in impact.Background)
-                                                                        {
-                                                                            <li>@background.DisplayName()</li>
-                                                                        }
-                                                                    </ul>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                                <div class="mobile_hide">
+                                                    @{
+                                                        GetNatureTypeTableDesktop(Model.Assessment.SpeciesNaturetypeInteractions);
+                                                    }
+                                                </div>
+                                                <div class="only_mobile">
+                                                    @{ 
+                                                        GetNatureNypeTablesMobile(Model.Assessment.SpeciesNaturetypeInteractions); 
                                                     }
                                                 </div>
                                             </div>

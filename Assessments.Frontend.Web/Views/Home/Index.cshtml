@@ -1,8 +1,11 @@
-﻿@using Microsoft.Extensions.Hosting
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Environment
+﻿@using Microsoft.Extensions.Options
+@using Assessments.Shared.Options
+
+@inject IOptions<ApplicationOptions> Options
 
 @{
     ViewBag.Title = "Lister - Rødlista for natur og arter, Fremmedartslista";
+    var enableAlienSpecies2023 = Options.Value.AlienSpecies2023.Enabled;
 }
 
 <div class="pagecontainer">
@@ -58,9 +61,9 @@
                         </li>
 
                         <li>
-                            @if (Environment.IsProduction())
+                            @if (enableAlienSpecies2023)
                             {
-                                <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
+                                <a asp-controller="AlienSpecies" asp-action="Home" class="fremmedartlink">
                                     <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
                                     <span>Fremmedartslista</span>
                                     <span class="material-icons bigarrow">keyboard_arrow_right</span>
@@ -68,7 +71,7 @@
                             }
                             else
                             {
-                                <a asp-controller="AlienSpecies" asp-action="Home" class="fremmedartlink">
+                                <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
                                     <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
                                     <span>Fremmedartslista</span>
                                     <span class="material-icons bigarrow">keyboard_arrow_right</span>

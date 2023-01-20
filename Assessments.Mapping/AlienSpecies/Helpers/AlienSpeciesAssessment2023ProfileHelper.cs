@@ -117,14 +117,33 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return geographicVar == "yes";
         }
 
-        internal static List<string> GetGeographicVarCause(string category, string geographicVar, List<string> geoVarCause)
+        internal static List<AlienSpeciesAssessment2023GeographicalVariation> GetGeographicVarCause(string category, string geographicVar, List<string> geographicalVariation, List<string> geographicalVariationMarine)
         {
             if (GetGeographicVarInCat(category, geographicVar) is null or false)
             {
-                return new List<string>();
+                return new List<AlienSpeciesAssessment2023GeographicalVariation>();
             }
 
-            return geoVarCause;
+            var geographicalVariations = new List<string>();
+            var geographicalVariationsEnumList = new List<AlienSpeciesAssessment2023GeographicalVariation>();
+            Object current;
+            foreach (var variation in geographicalVariationMarine)
+            {
+                geographicalVariations.Add($"{variation.TrimEnd()}Marine");
+            }
+            foreach (var variation in geographicalVariation)
+            {
+                geographicalVariations.Add(variation.TrimEnd());
+            }
+            foreach (var variation in geographicalVariations)
+            {
+                Enum.TryParse(typeof(AlienSpeciesAssessment2023GeographicalVariation), variation, true, out current);
+                if (Enum.TryParse(typeof(AlienSpeciesAssessment2023GeographicalVariation), variation, true, out current))
+                {
+                    geographicalVariationsEnumList.Add((AlienSpeciesAssessment2023GeographicalVariation)current);
+                }
+            }
+            return geographicalVariationsEnumList;
         }
 
         internal static string GetGeographicVarDoc(string category, string geographicVar, string geoVarDoc)

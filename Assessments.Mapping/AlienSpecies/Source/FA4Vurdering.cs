@@ -1509,6 +1509,7 @@ namespace Assessments.Mapping.AlienSpecies.Source
     public partial class RiskAssessment // (5.3) Geografisk Variasjon
     {
         public List<string> GeographicalVariation { get; set; } = new List<string>(); // lagt til 23.09.2016
+        public List<string> GeographicalVariationMarine { get; set; } = new List<string>(); // lagt til 20.01.2023
         public string GeographicalVariationDocumentation { get; set; } // lagt til 23.09.2016
 
         public string PossibleLowerCategory { get; set; }

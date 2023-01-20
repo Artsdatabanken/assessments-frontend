@@ -215,7 +215,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 
         /// </summary>
-        public List<string> GeographicalVariation { get; set; }
+        public List<AlienSpeciesAssessment2023GeographicalVariation> GeographicalVariation { get; set; }
 
         /// <summary>
         /// Further information about the geographic variance in category 
@@ -505,18 +505,18 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         ///The species impact(s) on threathened or keystone species
         /// </summary>
-        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new (); 
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new();
 
         /// <summary>
         ///The species impact(s) on groups of Red-List assessed species
         /// </summary>
-        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new ();
+        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new();
 
         /// <summary>
         ///The species impact(s) on groups of Red-List assessed species that include at least one threatened species or keystone species
         /// </summary>
         public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractionsThreatenedSpecies { get; set; } = new();
-        
+
         /// <summary>
         /// Further information related to the species impact(s) on native species
         /// </summary>

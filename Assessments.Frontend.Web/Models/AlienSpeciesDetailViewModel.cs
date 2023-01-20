@@ -35,6 +35,7 @@ namespace Assessments.Frontend.Web.Models
                 }).ToList(),
                 SpreadFurtherSpreadFurtherInfo = assessment.SpreadFurtherSpreadFurtherInfo,
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
+                SpreadIntroductionFurtherInfo = assessment.SpreadIntroductionFurtherInfo,
                 Summary = assessment.GeographicalVariationDocumentation,
                 TaxonRank = assessment.ScientificNameRank,
                 UncertaintyEstablishmentTimeDescription = assessment.UncertaintyEstablishmentTimeDescription,

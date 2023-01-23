@@ -18,5 +18,6 @@ namespace Assessments.Transformation.Database.Fab4.Models
 
         public virtual User LastUpdatedByUser { get; set; }
         public virtual User LockedForEditByUser { get; set; }
+        public List<Attachment> Attachments { get; set; }
     }
 }

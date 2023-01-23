@@ -5,6 +5,7 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
@@ -61,7 +62,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return expertGroup.Replace("(Svalbard)", "");
             }
 
-            if (expertGroup is "Bakterier" or "Kromister" or "Sopper") 
+            if (expertGroup is "Bakterier" or "Kromister" or "Sopper")
             {
                 return "Sopper, det gule riket og bakterier";
             }
@@ -87,6 +88,76 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             if (indoorProductionString.Equals("negative"))
                 return true;
             return false;
+        }
+
+        internal static List<AlienSpeciesAssessment2023Pathways> GetIntroductionPathways(List<MigrationPathway> assessmentVectors)
+        {
+            InfluenceFactor GetInfluenceFactor(string influenceFactor)
+            {
+                return influenceFactor switch
+                {
+                    "unknown" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.Unknown,
+                    "numerousYearly" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.NumerousYearly,
+                    "yearly" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.Yearly,
+                    "severalPr10years" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.SeveralPr10years,
+                    "rarerThan10years" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.RarerThan10years,
+                    _ => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.NotChosen
+                };
+            }
+
+            Magnitude GetMagnitude(string magnitude)
+            {
+                return magnitude switch
+                {
+                    "unknown" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Unknown,
+                    "1" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Smallest,
+                    "2-10" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Small,
+                    "11-100" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Medium,
+                    "101-1000" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Large,
+                    "moreThan1000" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.MoreThan1000,
+                    _ => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.NotChosen
+                };
+            }
+
+            TimeOfIncident GetTimeOfIncident(string timeOfIncident)
+            {
+                return timeOfIncident switch
+                {
+                    "unknown" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Unknown,
+                    "historic" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Historic,
+                    "ceased" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Ceased,
+                    "ongoing" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Ongoing,
+                    "future" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Future,
+                    _ => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.NotChosen
+                };
+            }
+
+            MainCategory GetMainCategory(string mainCategory)
+            {
+                return mainCategory switch
+                {
+                    "Rømning/forvilling" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped,
+                    "Blindpassasjer med transport" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Stowaway,
+                    "Korridor" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Corridor,
+                    "Tilsiktet utsetting" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Released,
+                    "Egenspredning" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.NaturalDispersal,
+                    "Forurensning av vare" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Transportpolution,
+                    "Direkte import" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.ImportDirect,
+                    _ => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Unknown
+                };
+            }
+
+            List<AlienSpeciesAssessment2023Pathways> filteredAssessmentVectors = assessmentVectors.Select(x => new AlienSpeciesAssessment2023Pathways()
+            {
+                IntroductionSpread = (IntroductionSpread)Enum.Parse(typeof(IntroductionSpread), x.IntroductionSpread, true),
+                InfluenceFactor = GetInfluenceFactor(x.InfluenceFactor),
+                Magnitude = GetMagnitude(x.Magnitude),
+                TimeOfIncident = GetTimeOfIncident(x.TimeOfIncident),
+                Category = x.Category,
+                MainCategory = GetMainCategory(x.MainCategory)
+            }).ToList();
+
+            return filteredAssessmentVectors;
         }
 
         internal static int? GetScores(string category, string criteria, string axis)
@@ -235,8 +306,8 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                         };
                     }
 
-                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":") 
-                        ? "https://databank.artsdatabanken.no/FremmedArt2012" 
+                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":")
+                        ? "https://databank.artsdatabanken.no/FremmedArt2012"
                         : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
 
 
@@ -427,7 +498,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 var numberOfOccurrences = riskAssessment.Occurrences1Best ?? 0;
                 var numberOfIntroductions = (int?)riskAssessment.IntroductionsBest ?? 0;
                 var AOOTenYearsBest = AOO10yr(numberOfOccurrences, numberOfIntroductions);
-                
+
                 return AOOTenYearsBest > 16 ? 4
                     : AOOTenYearsBest > 4 ? 3
                     : AOOTenYearsBest > 1 ? 2
@@ -453,14 +524,14 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         public static int GetMedianLifetimeSimplifiedEstimationDefaultScoreUncertainty(string assessmentConclusion, RiskAssessment riskAssessment, string estimateQuantile)
         {
             var assessedDoorKnocker = "AssessedDoorknocker";
-            if(estimateQuantile == "Low") 
+            if (estimateQuantile == "Low")
             {
                 if (assessmentConclusion == assessedDoorKnocker)
                 {
                     var numberOfOccurrences = riskAssessment.Occurrences1Low ?? 0;
                     int numberOfIntroductions = IntroductionsLow(riskAssessment);
                     var AOOTenYearsLow = AOO10yr(numberOfOccurrences, numberOfIntroductions);
-                    
+
                     return AOOTenYearsLow > 16 ? 4
                         : AOOTenYearsLow > 4 ? 3
                         : AOOTenYearsLow > 1 ? Math.Max(2, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) - 1)
@@ -489,7 +560,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     var numberOfOccurrences = riskAssessment.Occurrences1High ?? 0;
                     int numberOfIntroductions = IntroductionsHigh(riskAssessment);
                     var AOOTenYearsHigh = AOO10yr(numberOfOccurrences, numberOfIntroductions);
-                    
+
                     return AOOTenYearsHigh > 16 ? Math.Min(4, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
                         : AOOTenYearsHigh > 4 ? Math.Min(3, GetMedianLifetimeSimplifiedEstimationDefaultScoreBest(assessmentConclusion, riskAssessment) + 1)
                         : AOOTenYearsHigh > 1 ? 2
@@ -533,18 +604,18 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             var mainMethodA = chosenMainMethod == "a";
             var mainMethodB = chosenMainMethod == "b";
             var assessedDoorKnocker = assessmentConclusion == "AssessedDoorknocker";
-                
-            if(mainMethodA)
+
+            if (mainMethodA)
             {
                 return "SpatioTemporalDataset";
             }
-            
-            if(mainMethodB && assessedDoorKnocker)
+
+            if (mainMethodB && assessedDoorKnocker)
             {
                 return "EstimatedIncreaseInAOODoorKnockers";
             }
-            
-            if(mainMethodB && chosenSubMethod == "yes")
+
+            if (mainMethodB && chosenSubMethod == "yes")
             {
                 return "EstimatedIncreaseInAOOReproducingUnaided";
             }
@@ -555,7 +626,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
 
             else return "NotRelevant";
-      
+
         }
 
         static private long GetExpansionSpeedAOOSelfReproducing(RiskAssessment riskAssessment, long areaOfOccurrenceToday, long areaOfOccurrenceIn50Years)
@@ -581,7 +652,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 result = (decimal)Math.Truncate(20 * (Math.Sqrt((double)areaOfOccurrenceIn50Years) - Math.Sqrt((double)areaOfOccurrenceTodayBest)) / Math.Sqrt(Math.PI));
             }
 
-            return (long)Math.Round(result,0);
+            return (long)Math.Round(result, 0);
         }
 
         internal static long GetExpansionSpeedEstimates(RiskAssessment riskAssessment, string estimateQuantile, string assessmentConclusion)
@@ -622,7 +693,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
                 areaAfterTenYearsEstimate = AOO10yr(numberOfOccurrences, numberOfIntroductions) ?? 0;
 
-                return (long)Math.Round(Math.Truncate(200 * (Math.Sqrt((double)(areaAfterTenYearsEstimate / 4)) - 1) / Math.Sqrt(Math.PI)),0);
+                return (long)Math.Round(Math.Truncate(200 * (Math.Sqrt((double)(areaAfterTenYearsEstimate / 4)) - 1) / Math.Sqrt(Math.PI)), 0);
             }
 
             else //mainMethodB and assessed as self-reproducing

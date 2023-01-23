@@ -53,6 +53,11 @@
         return criterion.UncertaintyValues.Where(x => x < criterion.Value).FirstOrDefault();
     }
 
+    bool HasUncertainty(AlienSpeciesAssessment2023Criterion uncertainty)
+    {
+        return GetUncertaintyLow(uncertainty) != 0 || GetUncertaintyHigh(uncertainty) != 0;
+    }
+
     void GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion)
     {
         <p>
@@ -486,7 +491,6 @@
                                     @{
                                         GetLetterFullText(uncertaintyD);
                                     }
-                                    <p>Se mer informasjon under Naturtypetilhørighet.  </p>
                                     <div is-visible="!showIsNk" class="collapsible initially_closed">
                                         <div class="collapsible_header">
                                             <h3>Vis detaljer</h3>
@@ -530,7 +534,7 @@
                                                 <p>Utfyllende informasjon rundt artens negative effekter:</p>
                                                 <p>@Html.Raw(Model.Assessment.EffectsOnSpeciesSupplementaryInformation)</p>
                                             </div>
-                                            <div is-visible="@(!string.IsNullOrEmpty(Model.Assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation))">
+                                            <div is-visible="@(!string.IsNullOrEmpty(Model.Assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD))">
                                                 @{
                                                     GetLetterUncertainty(uncertaintyD);
                                                 }
@@ -586,7 +590,7 @@
                                                 <p>Utfyllende informasjon rundt artens negative effekter:</p>
                                                 <p>@Html.Raw(Model.Assessment.EffectsOnSpeciesSupplementaryInformation)</p>
                                             </div>
-                                            <div is-visible="@(!string.IsNullOrEmpty(Model.Assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation))">
+                                            <div is-visible="@(!string.IsNullOrEmpty(Model.Assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE))">
                                                 @{
                                                     GetLetterUncertainty(uncertaintyE);
                                                 }

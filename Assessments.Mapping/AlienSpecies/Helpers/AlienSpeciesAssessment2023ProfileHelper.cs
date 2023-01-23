@@ -5,6 +5,7 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
@@ -87,6 +88,76 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             if (indoorProductionString.Equals("negative"))
                 return true;
             return false;
+        }
+
+        internal static List<AlienSpeciesAssessment2023Pathways> GetIntroductionPathways(List<MigrationPathway> assessmentVectors)
+        {
+            InfluenceFactor GetInfluenceFactor(string influenceFactor)
+            {
+                return influenceFactor switch
+                {
+                    "unknown" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.Unknown,
+                    "numerousYearly" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.NumerousYearly,
+                    "yearly" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.Yearly,
+                    "severalPr10years" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.SeveralPr10years,
+                    "rarerThan10years" => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.RarerThan10years,
+                    _ => AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.NotChosen
+                };
+            }
+
+            Magnitude GetMagnitude(string magnitude)
+            {
+                return magnitude switch
+                {
+                    "unknown" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Unknown,
+                    "1" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Smallest,
+                    "2-10" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Small,
+                    "11-100" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Medium,
+                    "101-1000" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.Large,
+                    "moreThan1000" => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.MoreThan1000,
+                    _ => AlienSpeciesAssessment2023IntroductionPathway.Magnitude.NotChosen
+                };
+            }
+
+            TimeOfIncident GetTimeOfIncident(string timeOfIncident)
+            {
+                return timeOfIncident switch
+                {
+                    "unknown" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Unknown,
+                    "historic" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Historic,
+                    "ceased" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Ceased,
+                    "ongoing" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Ongoing,
+                    "future" => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.Future,
+                    _ => AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.NotChosen
+                };
+            }
+
+            MainCategory GetMainCategory(string mainCategory)
+            {
+                return mainCategory switch
+                {
+                    "Rømning/forvilling" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped,
+                    "Blindpassasjer med transport" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Stowaway,
+                    "Korridor" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Corridor,
+                    "Tilsiktet utsetting" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Released,
+                    "Egenspredning" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.NaturalDispersal,
+                    "Forurensning av vare" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Transportpolution,
+                    "Direkte import" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.ImportDirect,
+                    _ => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Unknown
+                };
+            }
+
+            List<AlienSpeciesAssessment2023Pathways> filteredAssessmentVectors = assessmentVectors.Select(x => new AlienSpeciesAssessment2023Pathways()
+            {
+                IntroductionSpread = (IntroductionSpread)Enum.Parse(typeof(IntroductionSpread), x.IntroductionSpread, true),
+                InfluenceFactor = GetInfluenceFactor(x.InfluenceFactor),
+                Magnitude = GetMagnitude(x.Magnitude),
+                TimeOfIncident = GetTimeOfIncident(x.TimeOfIncident),
+                Category = x.Category,
+                MainCategory = GetMainCategory(x.MainCategory)
+            }).ToList();
+
+            return filteredAssessmentVectors;
         }
 
         internal static int? GetScores(string category, string criteria, string axis)

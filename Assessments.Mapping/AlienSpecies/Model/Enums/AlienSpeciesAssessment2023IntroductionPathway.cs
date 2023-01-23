@@ -99,7 +99,10 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             NaturalDispersal,
 
             [Display(Name = "Forurensning av vare")]
-            Transportpolution
+            Transportpolution,
+
+            [Display(Name = "Direkte import")]
+            ImportDirect
         }
     }
 }

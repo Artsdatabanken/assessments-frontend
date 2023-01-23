@@ -90,7 +90,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return false;
         }
 
-        internal static List<AlienSpeciesAssessment2023AssessmentVector> GetIntroductionPathways(List<MigrationPathway> assessmentVectors)
+        internal static List<AlienSpeciesAssessment2023Pathways> GetIntroductionPathways(List<MigrationPathway> assessmentVectors)
         {
             InfluenceFactor GetInfluenceFactor(string influenceFactor)
             {
@@ -142,11 +142,12 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     "Tilsiktet utsetting" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Released,
                     "Egenspredning" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.NaturalDispersal,
                     "Forurensning av vare" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Transportpolution,
+                    "Direkte import" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.ImportDirect,
                     _ => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Unknown
                 };
             }
 
-            List<AlienSpeciesAssessment2023AssessmentVector> filteredAssessmentVectors = assessmentVectors.Select(x => new AlienSpeciesAssessment2023AssessmentVector()
+            List<AlienSpeciesAssessment2023Pathways> filteredAssessmentVectors = assessmentVectors.Select(x => new AlienSpeciesAssessment2023Pathways()
             {
                 IntroductionSpread = (IntroductionSpread)Enum.Parse(typeof(IntroductionSpread), x.IntroductionSpread, true),
                 InfluenceFactor = GetInfluenceFactor(x.InfluenceFactor),

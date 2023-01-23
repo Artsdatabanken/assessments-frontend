@@ -2,7 +2,7 @@
 
 namespace Assessments.Mapping.AlienSpecies.Model
 {
-    public class AlienSpeciesAssessment2023AssessmentVector
+    public class AlienSpeciesAssessment2023Pathways
     {
         public AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread IntroductionSpread { get; set; }
 

@@ -91,7 +91,7 @@ namespace Assessments.Frontend.Web.Models
 
         public bool HasIndoorProduction { get; set; }
 
-        public List<AlienSpeciesAssessment2023AssessmentVector> ImportPathways { get; set; }
+        public List<AlienSpeciesAssessment2023Pathways> ImportPathways { get; set; }
 
         public string MisidentifiedDescription { get; set; }
 

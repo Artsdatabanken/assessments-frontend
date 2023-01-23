@@ -122,46 +122,6 @@
                         @Html.Raw(Model.SpreadFurtherSpreadFurtherInfo)
                     </div>
                 </div>
-
-                <div class="expert_Assessment" is-visible="Model.ImportPathways != null && Model.ImportPathways.Count() !=  0">
-                    <h4 class="space_above_20">Data om spredningmåter</h4>
-                    @foreach (var pathway in Model.ImportPathways)
-                    {
-                        <div class="space_above_20">
-                            <table class="numbers-table">
-                                <caption>Spredningsvei</caption>
-                                <tr>
-                                    <td>Kategori</td>
-                                    <td>Verdi</td>
-                                </tr>
-                                <tr>
-                                    <td>Spredningstype</td>
-                                    <td>@pathway.IntroductionSpread.DisplayName()</td>
-                                </tr>
-                                <tr is-visible="@(pathway.InfluenceFactor != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway.InfluenceFactor.NotChosen)">
-                                    <td>Påvirkningsfaktor</td>
-                                    <td>@pathway.InfluenceFactor.DisplayName()</td>
-                                </tr>
-                                <tr is-visible="@(pathway.Magnitude != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway.Magnitude.NotChosen)">
-                                    <td>Omfang</td>
-                                    <td>@pathway.Magnitude.DisplayName()</td>
-                                </tr>
-                                <tr is-visible="@(pathway.TimeOfIncident != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway.TimeOfIncident.NotChosen)">
-                                    <td>Tidspunkt</td>
-                                    <td>@pathway.TimeOfIncident.DisplayName()</td>
-                                </tr>
-                                <tr is-visible="@(pathway.MainCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Unknown)">
-                                    <td>Hovedkategori</td>
-                                    <td>@pathway.MainCategory.DisplayName()</td>
-                                </tr>
-                                <tr is-visible="@(!string.IsNullOrEmpty(pathway.Category))">
-                                    <td>Kategori</td>
-                                    <td>@(char.ToUpper(pathway.Category[0]) + pathway.Category.Substring(1))</td>
-                                </tr>
-                            </table>
-                        </div>
-                    }
-                </div>
             </div>
 
             <div is-visible="@showInvasionPotentialDocumentation">

@@ -3,42 +3,40 @@
 
 @{
     var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
-    var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
-    var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
-    var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";
-    var sentenceEnding = "vært lavere i fravær av pågående eller fremtidige klimaendringer.";
 }
 
 <div class="page_section" is-visible="@showPage">
-    <h2 id="ClimateEffectsInvationpotential">@Constants.HeadingsNO["ClimateEffectsInvationpotential"]</h2>
+    @{
+        var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
+        var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
+        var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";
+    }
+    <h2 id="ClimateEffectsInvationpotential">
+        @Constants.HeadingsNO["ClimateEffectsInvationpotential"]
+    </h2>
 
     <div is-visible="hasClimateEffectsInvasionpotential == hasClimateEffectsEcoEffect">
         <p is-visible="!hasClimateEffectsInvasionpotential">
-            Hverken delkategori for økologisk effekt eller invasjonspotensial 
-            ville @sentenceEnding
+            @Constants.ClimateEffectExplanationNeither
+            @Constants.ClimateEffectExplanationEnding
         </p>
         <p is-visible="hasClimateEffectsInvasionpotential">
-            Både delkategori for økologisk effekt og invasjonspotensial 
-            ville @sentenceEnding      
-            </p>
+           @Constants.ClimateEffectExplanationBoth
+           @Constants.ClimateEffectExplanationEnding      
+         </p>
     </div>
 
     <div is-visible="hasClimateEffectsInvasionpotential != hasClimateEffectsEcoEffect">
-
-            <p is-visible="hasClimateEffectsInvasionpotential">
-            Delkategori for invasjonspotensial ville @sentenceEnding
+        <p>
+            @Constants.ClimateEffectExplanationInvationPotential 
+            <span is-visible="!hasClimateEffectsInvasionpotential"><i>ikke </i></span>
+            @Constants.ClimateEffectExplanationEnding
         </p>
 
-        <p is-visible="!hasClimateEffectsInvasionpotential">
-            Delkategori for invasjonspotensial ville <i>ikke</i>  @sentenceEnding
-        </p>
-
-        <p is-visible="hasClimateEffectsEcoEffect">
-            Delkategori for økologisk effekt ville @sentenceEnding
-        </p>
-
-        <p is-visible="!hasClimateEffectsEcoEffect">
-            Delkategori for økologisk effekt ville <i>ikke</i> @sentenceEnding
+        <p>
+            @Constants.ClimateEffectExplanationEcoEffect 
+            <span is-visible="!hasClimateEffectsEcoEffect"><i>ikke </i></span>
+            @Constants.ClimateEffectExplanationEnding
         </p>
     </div>        
                             

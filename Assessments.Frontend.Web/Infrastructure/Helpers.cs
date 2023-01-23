@@ -582,6 +582,14 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023AssumedOccurrence = "Antatt utbredelse i dag";
 
         public const string AlienSpecies2023AssumedInFutureOccurrence = "Antatt utbredelse om 50 år";
+
+        public const string ClimateEffectExplanationEnding = "vært lavere i fravær av pågående eller fremtidige klimaendringer.";
+        public const string ClimateEffectExplanationInvationPotential = "Delkategori for invasjonspotensial ville ";
+        public const string ClimateEffectExplanationEcoEffect = "Delkategori for økologisk effekt ville ";
+        public const string ClimateEffectExplanationNeither = "Hverken delkategori for økologisk effekt eller invasjonspotensial ville ";
+        public const string ClimateEffectExplanationBoth = " Både delkategori for økologisk effekt og invasjonspotensial ville ";
+
+
     }
 
     public class CategoryComparer : IComparer<string>

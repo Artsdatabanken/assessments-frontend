@@ -353,6 +353,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             {"RegionalSpread", "Utbredelse"},
             {"Attachments", "Filvedlegg"},
             {"ImpactedNatureTypes", "Naturtypetilhørighet"},
+            {"References", "Referanser"},
         };
 
         public static readonly Dictionary<string, string> AllEuropeanPopulationPercentages = new Dictionary<string, string>
@@ -609,7 +610,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string ImpactedNatureTypesTableColumn4 = "tydelig <br/>tilstandsendring";
         public const string ImpactedNatureTypesTableColumn5 = "tydelig <br/>påvirka <br/>areal (%)";
         public const string ImpactedNatureTypesTableColumn6 = "vurderingsgrunnlag";
-
 
     }
 

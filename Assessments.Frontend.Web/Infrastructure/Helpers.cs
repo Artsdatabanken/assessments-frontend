@@ -349,6 +349,10 @@ namespace Assessments.Frontend.Web.Infrastructure
             {"RiskCategoryExplanation", "Hva forklarer artens risikokategori"},
             {"CategoryChange", "Endring av risikokategori fra 2018"},
             {"ClimateEffectsInvationpotential", "Effekt av klimaendringer"},
+            {"GeographicVariationInCategory", "Geografisk variasjon i risiko"},
+            {"RegionalSpread", "Utbredelse"},
+
+
 
         };
 
@@ -589,6 +593,13 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string ClimateEffectExplanationNeither = "Hverken delkategori for økologisk effekt eller invasjonspotensial ville ";
         public const string ClimateEffectExplanationBoth = " Både delkategori for økologisk effekt og invasjonspotensial ville ";
 
+
+        public const string HasGeographicVariationDocumentation = "Nærmere beskrivelse av artens geografiske variasjon i risiko: ";
+        public const string NoLowerCategoryThan = "Arten kunne ikke ha fått lavere risikokategori enn ";
+        public const string LowerCategoryThan = "Arten kunne ha fått lavere risikokategori enn ";
+        public const string LowerCategoryThanEnding = "i deler av sitt potensielle forekomstareal.";
+
+        // TODO: ADD THE LIST FOR GEOGRAPHIC CAUSES FOR RISK VARIATION
 
     }
 

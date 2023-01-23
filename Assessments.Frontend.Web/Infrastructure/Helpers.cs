@@ -269,7 +269,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             return scientificName;
         }
 
-
         public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment, string firstPublished)
         {
             firstPublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firstPublished;
@@ -340,6 +339,17 @@ namespace Assessments.Frontend.Web.Infrastructure
             {"B", "lite areal"},
             {"C", "liten populasjon"},
             {"D", "svært liten populasjon eller forekomst"}
+        };
+
+        public static Dictionary<string, string> HeadingsNO = new Dictionary<string, string>
+        {
+            {"RiskMatrix", "Risikomatrisen"},
+            {"Conclusion", "Konklusjon"},
+            {"ExpertSummary", "Ekspertenes oppsummering"},
+            {"RiskCategoryExplanation", "Hva forklarer artens risikokategori"},
+            {"CategoryChange", "Endring av risikokategori fra 2018"},
+            {"ClimateEffectsInvationpotential", "Effekt av klimaendringer"},
+
         };
 
         public static readonly Dictionary<string, string> AllEuropeanPopulationPercentages = new Dictionary<string, string>
@@ -517,6 +527,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             { "Form", "Form" }
         };
 
+        
         public const string Artsdatabanken = "Artsdatabanken";
 
         // Redlist species constants

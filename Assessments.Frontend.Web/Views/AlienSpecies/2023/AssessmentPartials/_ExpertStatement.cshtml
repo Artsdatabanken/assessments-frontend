@@ -51,9 +51,7 @@
 
 <div class="page_section" is-visible="@showCriteriaDocumentation">
     <div id="show_conclusion" is-visible="@showConclusion">
-        <h2>
-            Konklusjon
-        </h2>
+        <h2 id="Conclusion">@Constants.HeadingsNO["Conclusion"]</h2>
         <div class="expert_Assessment">
             <div class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentation)
@@ -63,9 +61,7 @@
 
     <div is-visible="@showExpertSummary" class="collapsible initially_closed">
         <div class="collapsible_header">
-             <h2>
-                 Ekspertenes oppsummering
-             </h2>
+             <h2 id="ExpertSummary">@Constants.HeadingsNO["ExpertSummary"]</h2>
             <button class="hide" onclick="toggleCollapsible(this)">
                 <span class="material-icons expanded_icon">expand_less</span>
                 <span class="material-icons collapsed_icon">expand_more</span>

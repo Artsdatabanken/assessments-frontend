@@ -216,7 +216,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 })
                 .ForMember(dest => dest.Attachments, opt => opt.MapFrom(src => src.Attachmemnts))
                 .ForMember(dest => dest.ParentAssessmentId, opt => opt.MapFrom(src => src.ParentAssessmentId))
-                .ForMember(dest => dest.SpeciesSpeciesInteractions, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => new[] { "VU", "EN", "CR" }.Any(y => !x.RedListCategory.Contains(y)) && !x.KeyStoneSpecie)))
+                .ForMember(dest => dest.SpeciesSpeciesInteractions, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => !(new[] { "VU", "EN", "CR" }.Any(y => x.RedListCategory.Contains(y)) || x.KeyStoneSpecie))))
                 .ForMember(dest => dest.SpeciesSpeciesInteractionsThreatenedSpecies, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => new[] { "VU", "EN", "CR" }.Any(y => x.RedListCategory.Contains(y)) || x.KeyStoneSpecie)))
                 .ForMember(dest => dest.SpeciesNaturetypeInteractions, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesNaturetypeInteractions))
                 .ForMember(dest => dest.SpeciesNaturetypeInteractionsThreatenedSpecies, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesNaturetypeInteractions.Where(x => x.KeyStoneSpecie)))

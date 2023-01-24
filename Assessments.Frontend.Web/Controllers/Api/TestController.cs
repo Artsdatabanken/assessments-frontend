@@ -8,7 +8,7 @@ namespace Assessments.Frontend.Web.Controllers.Api;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TestController : Controller
+public class TestController : ControllerBase
 {
     private readonly IWebHostEnvironment _environment;
     private readonly IConfiguration _configuration;

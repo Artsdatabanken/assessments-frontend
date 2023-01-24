@@ -88,6 +88,16 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public bool HasIndoorProduction { get; set; }
 
         /// <summary>
+        /// Relevant pathways of introduction to Norwegian nature and relevant pathways of secondary spread within Norwegian nature
+        /// </summary>
+        public List<AlienSpeciesAssessment2023Pathways> IntroductionAndSpreadPathways { get; set; }
+
+        /// <summary>
+        /// Relevant pathways of introduction to Norwegian nature and relevant pathways of secondary spread within Norwegian nature
+        /// </summary>
+        public List<AlienSpeciesAssessment2023Pathways> ImportPathways { get; set; }
+
+        /// <summary>
         /// List including category and decisive criteria from previous assessments
         /// </summary>
         public List<AlienSpeciesAssessment2023PreviousAssessment> PreviousAssessments { get; set; } = new();
@@ -505,18 +515,18 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         ///The species impact(s) on threathened or keystone species
         /// </summary>
-        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new (); 
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> SpeciesSpeciesInteractionsThreatenedSpecies { get; set; } = new();
 
         /// <summary>
         ///The species impact(s) on groups of Red-List assessed species
         /// </summary>
-        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new ();
+        public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractions { get; set; } = new();
 
         /// <summary>
         ///The species impact(s) on groups of Red-List assessed species that include at least one threatened species or keystone species
         /// </summary>
         public List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> SpeciesNaturetypeInteractionsThreatenedSpecies { get; set; } = new();
-        
+
         /// <summary>
         /// Further information related to the species impact(s) on native species
         /// </summary>

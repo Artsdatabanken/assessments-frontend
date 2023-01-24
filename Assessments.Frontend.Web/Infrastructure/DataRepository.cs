@@ -9,6 +9,7 @@ using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Mapping.RedlistSpecies;
 using Assessments.Mapping.RedlistSpecies.Source;
 using Assessments.Shared.Helpers;
+using Assessments.Shared.Options;
 using AutoMapper;
 using Azure.Storage.Blobs;
 using CsvHelper;
@@ -17,6 +18,7 @@ using LazyCache;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -27,11 +29,13 @@ namespace Assessments.Frontend.Web.Infrastructure
         private readonly IWebHostEnvironment _environment;
         private readonly ILogger<DataRepository> _logger;
         private readonly IMapper _mapper;
+        private readonly IOptions<ApplicationOptions> _options;
 
         private static CsvConfiguration CsvConfiguration => new(CultureInfo.InvariantCulture) { Delimiter = ";" };
 
-        public DataRepository(IAppCache appCache, IConfiguration configuration, IWebHostEnvironment environment, ILogger<DataRepository> logger, IMapper mapper)
+        public DataRepository(IAppCache appCache, IConfiguration configuration, IWebHostEnvironment environment, ILogger<DataRepository> logger, IMapper mapper, IOptions<ApplicationOptions> options)
         {
+            _options = options;
             _mapper = mapper;
             _logger = logger;
             _environment = environment;
@@ -80,11 +84,10 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public Task<IQueryable<SpeciesAssessment2021>> GetSpeciesAssessments()
         {
-            var transformSpeciesAssessments = bool.Parse(_configuration.GetSection("Mapping").GetSection("Species").GetSection("TransformAssessments").Value);
-
             async Task<IQueryable<SpeciesAssessment2021>> Get()
             {
-                return transformSpeciesAssessments ?
+                return _options.Value.Species2021.TransformAssessments
+                    ?
                     // transformerer modell fra "Rodliste2019"
                     _mapper.Map<IEnumerable<SpeciesAssessment2021>>(await GetData<Rodliste2019>(DataFilenames.Species2021Temp)).AsQueryable() :
                     // returnerer modell som allerede er transformert
@@ -96,11 +99,10 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public Task<IQueryable<AlienSpeciesAssessment2023>> GetAlienSpeciesAssessments()
         {
-            var transformSpeciesAssessments = bool.Parse(_configuration.GetSection("Mapping").GetSection("AlienSpecies").GetSection("TransformAssessments").Value);
-
             async Task<IQueryable<AlienSpeciesAssessment2023>> Get()
             {
-                return transformSpeciesAssessments ?
+                return _options.Value.AlienSpecies2023.TransformAssessments
+                    ?
                     // transformerer modell fra "FA4"
                     _mapper.Map<IEnumerable<AlienSpeciesAssessment2023>>(await GetData<FA4>(DataFilenames.AlienSpecies2023Temp)).AsQueryable() :
                     // returnerer modell som allerede er transformert

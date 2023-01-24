@@ -12,6 +12,8 @@ namespace Assessments.Data
 
         public DbSet<EmailValidation> EmailValidations { get; set; }
 
+        public DbSet<Log> Logs { get; set; }
+
         public AssessmentsDbContext(DbContextOptions<AssessmentsDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

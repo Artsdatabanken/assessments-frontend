@@ -722,5 +722,23 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
 
         }
+
+        internal static string GetMedianLifetimeEstimationMethod(string category, string chosenMethod)
+        {
+            if(category == "NR" || chosenMethod == "RedListCategoryLevel")
+            {
+                return "NotRelevant";
+            }
+
+            else
+            {
+                return chosenMethod switch
+                {
+                    "LifespanA1aSimplifiedEstimate" => "SimplifiedEstimation",
+                    "SpreadRscriptEstimatedSpeciesLongevity" => "NumericalEstimation",
+                    _ => chosenMethod
+                };
+            }
+        }
     }
 }

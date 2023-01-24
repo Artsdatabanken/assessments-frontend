@@ -152,7 +152,11 @@
 
     <div class="expert_Assessment">
         <div class="expert_text">
-            <div is-visible="isMisidentified">@Html.Raw(Model.MisidentifiedDescription)</div>
+            <div is-visible="isMisidentified">
+                <p>
+                    @Html.Raw(Model.MisidentifiedDescription)
+                </p>
+            </div>
             <div is-visible="@showChangedAssessment">
                 <p is-visible="@showAlienStatusExplanation">
                     @Html.Raw(Model.AlienStatusExplanation) 

@@ -1,4 +1,5 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesDetailViewModel(AlienSpeciesAssessment2023 assessment)
         {
             Assessment = assessment;
+
+            AttachmentViewModel = new AttachmentViewModel
+            {
+                Attachments = assessment.Attachments,
+                IsEvaluatedAtAnotherLever = assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel
+            };
 
             ExpertStatementViewModel = new ExpertStatementViewModel
             {
@@ -94,6 +101,8 @@ namespace Assessments.Frontend.Web.Models
         }
 
         public AlienSpeciesAssessment2023 Assessment { get; set; }
+
+        public AttachmentViewModel AttachmentViewModel { get; set; }
 
         public ExpertStatementViewModel ExpertStatementViewModel { get; set; }
 

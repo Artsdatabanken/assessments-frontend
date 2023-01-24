@@ -117,7 +117,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
                 })
-                .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeEstimationMethod(src.Category,  src.RiskAssessment.ChosenSpreadMedanLifespan)))// == "RedListCategoryLevel" ? "NotRelevant" : src.RiskAssessment.ChosenSpreadMedanLifespan == "LifespanA1aSimplifiedEstimate" ? "SimplifiedEstimation" : src.RiskAssessment.ChosenSpreadMedanLifespan == "SpreadRscriptEstimatedSpeciesLongevity" ? "NumericalEstimation" : src.RiskAssessment.ChosenSpreadMedanLifespan))
+                .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeEstimationMethod(src.Category,  src.RiskAssessment.ChosenSpreadMedanLifespan)))
                 .ForMember(dest => dest.IsAcceptedSimplifiedEstimate, opt => opt.MapFrom(src => src.RiskAssessment.AcceptOrAdjustCritA == "accept"))
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.NullSubstitute(string.Empty))

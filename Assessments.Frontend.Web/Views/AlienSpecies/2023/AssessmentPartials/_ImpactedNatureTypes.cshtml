@@ -2,7 +2,7 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var natureTypes = @Model.Assessment.ImpactedNatureTypes;
 }
 

@@ -37,7 +37,7 @@
                 </ul>
                 <br/>
                 <p is-visible="hasGeographicVariationDocumentation">
-                    Nærmere beskrivelse av artens geografiske variasjon i risiko: @geographicVariationDocumentation
+                    Nærmere beskrivelse av artens geografiske variasjon i risiko: @Html.Raw(geographicVariationDocumentation)
                 </p>
             </div>
             <p is-visible="!hasGeographicVariationInCategory">

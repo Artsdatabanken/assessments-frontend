@@ -223,6 +223,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.EffectsOnSpeciesSupplementaryInformation, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractionsSupplementaryInformation.StripUnwantedHtml()))
                 .ForMember(dest => dest.EffectsOnThreathenedSpeciesUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.DCritInsecurity.StripUnwantedHtml()))
                 .ForMember(dest => dest.EffectsOnOtherNativeSpeciesUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ECritInsecurity.StripUnwantedHtml()))
+                .ForMember(dest => dest.GeneticContamination, opt => opt.MapFrom(src => src.RiskAssessment.GeneticTransferDocumented))
+                .ForMember(dest => dest.GeneticContaminationUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.HCritInsecurity.StripUnwantedHtml()))
+                .ForMember(dest => dest.ParasitePathogenTransmission, opt => opt.MapFrom(src => src.RiskAssessment.HostParasiteInformations))
+                .ForMember(dest => dest.ParasitePathogenTransmissionUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ICritInsecurity.StripUnwantedHtml()))
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
@@ -266,6 +270,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.BasisOfAssessment))
                 .ForMember(dest => dest.InteractionStrength, opt => opt.MapFrom(src => src.Effect))
                 ;
+
+            CreateMap<RiskAssessment.HostParasiteInteraction, AlienSpeciesAssessment2023ParasitePathogenTransmission>(MemberList.None)
+                .ForMember(dest => dest.ParasiteEcoEffect, opt => opt.MapFrom(src => int.Parse(src.ParasiteEcoEffect)))
+                .ForMember(dest => dest.ParasiteStatus, opt => opt.MapFrom(src => src.Status));
+
         }
     }
 }

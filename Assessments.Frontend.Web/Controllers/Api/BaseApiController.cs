@@ -7,7 +7,7 @@ namespace Assessments.Frontend.Web.Controllers.Api
 {
     [NotReadyForProduction]
     [ApiController, Produces("application/json")]
-    public abstract class BaseApiController<T> : Controller where T : BaseApiController<T>
+    public abstract class BaseApiController<T> : ControllerBase where T : BaseApiController<T>
     {
         private IWebHostEnvironment _environment;
 

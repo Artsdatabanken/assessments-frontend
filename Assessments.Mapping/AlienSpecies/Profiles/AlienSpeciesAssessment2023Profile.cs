@@ -3,6 +3,7 @@ using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using AutoMapper;
+using System;
 using System.Linq;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
@@ -44,6 +45,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ChangedFromAlien, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAlienSpeciesAssessment2023Changed(src.ChangedFromAlien)))
                 .ForMember(dest => dest.Environment, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetEnvironmentEnum(src.Limnic, src.Marine, src.Terrestrial)))
                 .ForMember(dest => dest.ReasonsForChangeOfCategoryDescription, opt => opt.MapFrom(src => src.DescriptionOfReasonsForChangeOfCategory.StripUnwantedHtml()))
+                .ForMember(dest => dest.IntroductionAndSpreadPathways, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetIntroductionPathways(src.AssesmentVectors)))
+                .ForMember(dest => dest.ImportPathways, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetIntroductionPathways(src.ImportPathways)))
                 .ForMember(dest => dest.AOOknown, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedSelfReproducing");
@@ -213,7 +216,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 })
                 .ForMember(dest => dest.Attachments, opt => opt.MapFrom(src => src.Attachmemnts))
                 .ForMember(dest => dest.ParentAssessmentId, opt => opt.MapFrom(src => src.ParentAssessmentId))
-                .ForMember(dest => dest.SpeciesSpeciesInteractions, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => new[] { "VU", "EN", "CR" }.Any(y => !x.RedListCategory.Contains(y)) && !x.KeyStoneSpecie)))
+                .ForMember(dest => dest.SpeciesSpeciesInteractions, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => !(new[] { "VU", "EN", "CR" }.Any(y => x.RedListCategory.Contains(y)) || x.KeyStoneSpecie))))
                 .ForMember(dest => dest.SpeciesSpeciesInteractionsThreatenedSpecies, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractions.Where(x => new[] { "VU", "EN", "CR" }.Any(y => x.RedListCategory.Contains(y)) || x.KeyStoneSpecie)))
                 .ForMember(dest => dest.SpeciesNaturetypeInteractions, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesNaturetypeInteractions))
                 .ForMember(dest => dest.SpeciesNaturetypeInteractionsThreatenedSpecies, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesNaturetypeInteractions.Where(x => x.KeyStoneSpecie)))

@@ -26,6 +26,7 @@ namespace Assessments.Frontend.Web.Models
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 EvaluationContext = assessment.EvaluationContext,
                 HasIndoorProduction = assessment.HasIndoorProduction,
+                ImportPathways = assessment.ImportPathways,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
                 References = assessment.References.Select(x => new CommonSimpleReference
                 {

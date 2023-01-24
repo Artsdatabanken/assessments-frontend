@@ -62,7 +62,11 @@ builder.Services.Configure<ApplicationOptions>(builder.Configuration.GetSection(
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
+    app.UseStatusCodePagesWithReExecute("/Error/{0}");
     app.UseHsts();
+}
 
 app.UseHttpsRedirection();
 

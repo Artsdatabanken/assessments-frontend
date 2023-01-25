@@ -223,6 +223,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.EffectsOnSpeciesSupplementaryInformation, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractionsSupplementaryInformation.StripUnwantedHtml()))
                 .ForMember(dest => dest.EffectsOnThreathenedSpeciesUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.DCritInsecurity.StripUnwantedHtml()))
                 .ForMember(dest => dest.EffectsOnOtherNativeSpeciesUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ECritInsecurity.StripUnwantedHtml()))
+                .ForMember(dest => dest.ThreatenedNatureTypesAffectedDomesticDescription, opt => opt.MapFrom(src => src.RiskAssessment.ThreatenedNatureTypesAffectedDomesticDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.CommonNatureTypesAffectedDomesticDescription, opt => opt.MapFrom(src => src.RiskAssessment.CommonNatureTypesAffectedDomesticDescription.StripUnwantedHtml()))
 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 

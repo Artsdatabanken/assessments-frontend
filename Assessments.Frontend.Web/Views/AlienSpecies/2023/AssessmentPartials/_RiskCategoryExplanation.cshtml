@@ -11,11 +11,15 @@
     var decisiveCriteriaHasC = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C));
     var decisiveCriteriaHasD = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D));
     var decisiveCriteriaHasE = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E));
+    var decisiveCriteriaHasF = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F));
+    var decisiveCriteriaHasG = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G));
     var uncertaintyA = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
     var uncertaintyB = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
     var uncertaintyC = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
     var uncertaintyD = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.D).FirstOrDefault();
     var uncertaintyE = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.E).FirstOrDefault();
+    var uncertaintyF = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.F).FirstOrDefault();
+    var uncertaintyG = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.G).FirstOrDefault();
 
     var isSimplifiedEstimation = Model.Assessment.MedianLifetimeEstimationMethod == AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.SimplifiedEstimation;
     var isAcceptedSimplifiedEstimation = Model.Assessment.IsAcceptedSimplifiedEstimate == true;
@@ -36,7 +40,8 @@
     var isEstimatedIncreaseInAOODoorKnockers = Model.Assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOODoorKnockers;
 
     var showNoEcologicalEffect = Model.Assessment.ScoreEcologicalEffect == 1;
-
+    var showFTable = Model.Assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == true && x.AffectedArea != "0.0");
+    var showGTable = Model.Assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == false && x.AffectedArea != "0.0");
 
     int GetUncertaintyValueMinMax(int value, int uncertainty)
     {
@@ -274,6 +279,54 @@
             </table>
         }
     }
+
+    void GetFGTable()
+    {
+        <table class="numbers-table">
+            <caption>Øvrige naturtyper  som påvirkes av arten</caption>
+            <tr>
+                <td><b>Naturtype</b></td>
+                <td><b>Tidshorisont</b></td>
+                <td><b>Tydelig tilstandsendring</b></td>
+                <td><b>Tydelig påvirka areal (%)</b></td>
+                <td><b>Vurderingsgrunnlag</b></td>
+            </tr>
+            @foreach (var natureType in Model.Assessment.ImpactedNatureTypes)
+            {
+                <tr>
+                    <td>@natureType.Name</td>
+                    <td>@natureType.TimeHorizon.DisplayName()</td>
+                    <td>
+                        @if (natureType.StateChange != null)
+                        {
+                            <ul>
+                                @foreach (var stateChange in natureType.StateChange)
+                                {
+                                    <li>
+                                        @stateChange.DisplayName()
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </td>
+                    <td>@natureType.AffectedArea</td>
+                    <td>
+                        @if (natureType.Background != null)
+                        {
+                            <ul>
+                                @foreach (var background in natureType.Background)
+                                {
+                                    <li>
+                                        @background.DisplayName()
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
 }
 
 <div class="page-section" is-visible="!isNrOrEvaluatedAtAnotherLevel">
@@ -486,6 +539,7 @@
                             <div  is-visible="showNoEcologicalEffect">
                                 <p>Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen. Se fanen Øvrige brukte kriterier.</p>
                             </div>
+
                             <div is-visible="!showNoEcologicalEffect">
                                 <div is-visible="decisiveCriteriaHasD">
                                     @{
@@ -543,6 +597,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div is-visible="decisiveCriteriaHasE">
                                     @{
                                         GetLetterFullText(uncertaintyE);
@@ -599,6 +654,57 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <div is-visible="decisiveCriteriaHasF">
+                                    @{
+                                        GetLetterFullText(uncertaintyF);
+                                    }
+                                    <div is-visible="!showIsNk" class="collapsible initially_closed">
+                                        <div class="collapsible_header">
+                                            <h3>Vis detaljer</h3>
+                                            <button onclick="toggleCollapsible(this)" id="myButton">
+                                                <span class="material-icons expanded_icon">expand_less</span>
+                                                <span class="material-icons collapsed_icon">expand_more</span>
+                                            </button>
+                                        </div>
+                                        <div class="collapsible_content">
+                                            <div is-visible="showFTable">
+                                                @{
+                                                    GetFGTable();
+                                                }
+                                            </div>
+                                            <p is-visible="!string.IsNullOrEmpty(Model.Assessment.ThreatenedNatureTypesAffectedDomesticDescription)">
+                                                Utfyllende informasjon rundt artens negative effekter: @Html.Raw(Model.Assessment.ThreatenedNatureTypesAffectedDomesticDescription)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div is-visible="decisiveCriteriaHasG">
+                                    @{
+                                        GetLetterFullText(uncertaintyG);
+                                    }
+                                    <div is-visible="!showIsNk" class="collapsible initially_closed">
+                                        <div class="collapsible_header">
+                                            <h3>Vis detaljer</h3>
+                                            <button onclick="toggleCollapsible(this)" id="myButton">
+                                                <span class="material-icons expanded_icon">expand_less</span>
+                                                <span class="material-icons collapsed_icon">expand_more</span>
+                                            </button>
+                                        </div>
+                                        <div class="collapsible_content">
+                                            <div is-visible="showGTable">
+                                                @{
+                                                    GetFGTable();
+                                                }
+                                            </div>
+                                            <p is-visible="!string.IsNullOrEmpty(Model.Assessment.CommonNatureTypesAffectedDomesticDescription)">
+                                                Utfyllende informasjon rundt artens negative effekter: @Html.Raw(Model.Assessment.CommonNatureTypesAffectedDomesticDescription)
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div >
                    </div>

@@ -81,21 +81,27 @@
         var critB = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
         var critC = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
 
+
+
+
+
+
+
         static int abAdjustment(int x, int y)
         {
             int[,] abAdjustmentMatrix = { 
-            // Crit B -->
-            { 0, 1, 1, 2 }, // Crit A
-            { 0, 1, 2, 2 }, // |
-            { 1, 2, 2, 3 }, // |
-            { 1, 2, 3, 3 }  // V
-        };
+                // Crit B -->
+                { 0, 1, 1, 2 }, // Crit A
+                { 0, 1, 2, 2 }, // |
+                { 1, 2, 2, 3 }, // |
+                { 1, 2, 3, 3 }  // V
+             };
             // TODO: FACT CHECK: Assuming it's -1 due to 0-indexing?
             return abAdjustmentMatrix[x-1,y-1];
         }
 
         // 2. Calculate level used to determine if a criterion is decisive
-        var adjustedAB = abAdjustment(critA.Value,critB.Value); 
+        var adjustedAB = abAdjustment(critB.Value,critA.Value); 
         var adjustedA = Math.Min(adjustedAB, critA.Value);
         var adjustedB = Math.Min(adjustedAB, critB.Value);
         var level = Math.Max(adjustedAB, critC.Value);
@@ -121,12 +127,12 @@
         {
             var minUL_A = critA.UncertaintyValues.Count == 0 ? critA.Value : critA.UncertaintyValues.AsQueryable().Min(); 
             var minUL_B = critB.UncertaintyValues.Count == 0 ? critB.Value : critB.UncertaintyValues.AsQueryable().Min(); 
-            var minUL_AB_adj = abAdjustment(minUL_A, minUL_B); 
+            var minUL_AB_adj = abAdjustment(minUL_B,minUL_A); 
             var minUL_AB = Math.Max(minUL_AB_adj, adjustedAB - 1);
 
             var maxUL_A = critA.UncertaintyValues.Count == 0 ? critA.Value : critA.UncertaintyValues.AsQueryable().Max(); 
             var maxUL_B = critB.UncertaintyValues.Count == 0 ? critB.Value : critB.UncertaintyValues.AsQueryable().Max(); 
-            var maxUL_AB_adj = abAdjustment(maxUL_A, maxUL_B); 
+            var maxUL_AB_adj = abAdjustment(maxUL_B,maxUL_A); 
             var maxUL_AB = Math.Min(maxUL_AB_adj, adjustedAB + 1);
 
             for (var i = minUL_AB; i <= maxUL_AB; i++) {
@@ -135,6 +141,21 @@
         }
         if (critC.Value == level) {
             uncertaintiesC = critC.UncertaintyValues; //const uncertaintiesC = c === level ? critC.UncertaintyValues : []
+        }
+
+
+        // Hvis A, B og C alle er utslagsgivende, 
+        if(adjustedA == level && adjustedB == level && adjustedB == level)
+        {
+         // og C ikke har usikkerhet, men resultatet for A +B gir det (eller omvendt), 
+         // så er det kun usikkerhet oppover som skal angis i matrisa.    
+        }
+
+        if(adjustedA == level || adjustedB == level && adjustedB == level)
+        {
+        // Usikkerhet nedover skal kun vises  i matrisa 
+        // hvis både resultatet for A+B og C har usikkerhet 
+        // nedover [altså hvis A/B og C er utslagsgivende].
         }
 
         // 5. Obtain all values for uncertainty levels by mering AB & C lists for uncertainties, make them distinct, and sort them.
@@ -158,7 +179,7 @@
         var sweepingUncertaintyLevels = decisiveUncertainties.Aggregate(allUncertaintyLevels, (accumulator, current) => accumulator.Where(x => x >= level || current.Contains(x)).ToList());
 
         // 7.5: removeuncertainty values not next to the actual value (x is the actual value)
-        sweepingUncertaintyLevels = sweepingUncertaintyLevels.Where(val => x - 1 == val || x == val || x + 1 ==  val).ToList();
+        //sweepingUncertaintyLevels = sweepingUncertaintyLevels.Where(val => x - 1 == val || x == val || x + 1 ==  val).ToList();
 
         // 8. The end values.
         IEnumerable<int> xUncertainties = sweepingUncertaintyLevels;       
@@ -222,7 +243,28 @@
 
     <p>
         x: @x - Usikkerhet: Max @xHigherUncertainty Min: @xLowerUncertainty<br/>
-        y: @y - Usikkerhet: Max @yHigherUncertainty Min: @yLowerUncertainty <br />     
+        y: @y - Usikkerhet: Max @yHigherUncertainty Min: @yLowerUncertainty <br />
+        <br/>
+        level: @level<br/>
+        x: @x<br/>
+        @{
+            <b>A</b>
+             foreach (var uncertainty in @critA.UncertaintyValues)
+            {
+                <b> @uncertainty</b>
+            } 
+            <br/><b>B</b>
+            foreach (var uncertainty in @critB.UncertaintyValues)
+            {
+                <b> @uncertainty</b>
+            } 
+            <br/><b>C</b>
+            foreach (var uncertainty in @critC.UncertaintyValues)
+            {
+                <b> @uncertainty</b>
+            } 
+        }
+        <br/>
         "sweepingUncertaintyLevels": @{
              foreach (var uncertainty in xUncertainties)
             {

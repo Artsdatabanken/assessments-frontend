@@ -541,5 +541,15 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Reasoning behind the uncertainty related to the species impact(s) on Red-List assessed species that are neither threatened nor keystone
         /// </summary>
         public string EffectsOnOtherNativeSpeciesUncertaintyDocumentation { get; set; }
+
+        /// <summary>
+        /// Further information related to the species impact(s) on threatened or rare ecosystems
+        /// </summary>
+        public string ThreatenedNatureTypesAffectedDomesticDescription { get; set; }
+
+        /// <summary>
+        /// Further information related to the species impact(s) on ecosystems that are not threatened nor rare
+        /// </summary>
+        public string CommonNatureTypesAffectedDomesticDescription { get; set; }
     }
 }

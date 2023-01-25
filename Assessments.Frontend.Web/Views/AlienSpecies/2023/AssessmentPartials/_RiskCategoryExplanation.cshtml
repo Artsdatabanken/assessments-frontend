@@ -2,7 +2,13 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-    var isNrOrEvaluatedAtAnotherLevel = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NR || Model.Assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var isNRCheck = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NR;
+    var isEvaluatedAtAnotherLevel = Model.Assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var isNrOrEvaluatedAtAnotherLevel = isNRCheck || isEvaluatedAtAnotherLevel;
+    var pageName = Constants.RiskCategoryExplanation;
+}
+<div class="page-section" is-visible="!isNrOrEvaluatedAtAnotherLevel">
+@{
     var showIsNk = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NK;
     var showLowInvasionPotential = Model.Assessment.ScoreInvasionPotential == 1;
     var showHigherInvasionPotential = Model.Assessment.ScoreInvasionPotential > 1;
@@ -275,18 +281,14 @@
         }
     }
 }
-
-<div class="page-section" is-visible="!isNrOrEvaluatedAtAnotherLevel">
     <div class="collapsible initially_closed">
         <div class="collapsible_header">
-            <h2 id="RiskCategoryExplanation">@Constants.HeadingsNO["RiskCategoryExplanation"] </h2>
+            <h2 id="@pageName">@Constants.HeadingsNO[@pageName] </h2>
             <button onclick="toggleCollapsible(this)">
                 <span class="material-icons expanded_icon">expand_less</span>
                 <span class="material-icons collapsed_icon">expand_more</span>
             </button>
         </div >
-
-    
 
         <div class="collapsible_content">    
         <p>Artens risikokategori bestemmes av artens skår på to akser, 

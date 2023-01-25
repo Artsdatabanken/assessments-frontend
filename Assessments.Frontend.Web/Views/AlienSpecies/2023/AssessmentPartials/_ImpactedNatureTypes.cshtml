@@ -2,22 +2,23 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var pageName = @Constants.ImpactedNatureTypes;
+    var showPage = Constants.showHeading(pageName, @Model.Assessment.Category);
 }
 
 <div is-visible="showPage" class="page_section">
-@{
-    var natureTypes = @Model.Assessment.ImpactedNatureTypes;
-}
-
-@functions{
-    string removeLineBreaksForMobile(string text){
-        return text.Replace("<br/>", "");
+    @{
+        var natureTypes = @Model.Assessment.ImpactedNatureTypes;
     }
-}
+
+    @functions{
+        string removeLineBreaksForMobile(string text){
+            return text.Replace("<br/>", "");
+        }
+    }
     <div id="show_category_changed" class="collapsible initially_closed">
         <div class="collapsible_header">
-            <h2 id="ImpactedNatureTypes">@Constants.HeadingsNO["ImpactedNatureTypes"]</h2>
+            <h2 id=@pageName>@Constants.HeadingsNO[@pageName]</h2>
             <button class="hide" onclick="toggleCollapsible(this)">
                 <span class="material-icons expanded_icon">expand_less</span>
                 <span class="material-icons collapsed_icon">expand_more</span>

@@ -2,9 +2,9 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var pageName = @Constants.GeographicVariationInCategory;
+    var showPage = @Constants.showHeading(pageName, @Model.Assessment.Category);
 }
-   
 <div is-visible="showPage" class="page_section">
     @{
         var hasGeographicVariationInCategory = @Model.Assessment.GeographicVariationInCategory == true;
@@ -20,7 +20,7 @@
         // TODO: correct space on 4th option when it's completed other places
     }
     <div id="show_category_changed" >
-        <h2 id="GeographicVariationInCategory"> @Constants.HeadingsNO["GeographicVariationInCategory"]</h2>
+        <h2 id="@pageName"> @Constants.HeadingsNO[@pageName]</h2>
 
         <div is-visible="hasGeographicVariationInCategory">
             <p>

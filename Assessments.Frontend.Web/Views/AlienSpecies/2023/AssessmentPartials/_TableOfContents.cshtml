@@ -5,11 +5,14 @@
 }
 
 <div is-visible="showMain" class="page_section">
-    <h2>Innhold</h2>
+    <h2 id="TableOfContents">@Constants.HeadingsNO["TableOfContents"]</h2>
     <ul>
          @{
             foreach (var heading in Constants.HeadingsNO)
-            {<li><a href="#@heading.Key">@heading.Value</a></li>}
+            {
+                
+                <li is-visible=@Constants.showHeading(@heading.Key,@Model.Assessment.Category)><a href="#@heading.Key">@heading.Value</a></li>
+            }
         }
     </ul>
 </div>

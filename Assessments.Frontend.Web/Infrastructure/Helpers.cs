@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -341,20 +342,45 @@ namespace Assessments.Frontend.Web.Infrastructure
             {"D", "svært liten populasjon eller forekomst"}
         };
 
+        public const string RiskMatrix = "RiskMatrix";
+        public const string Conclusion = "Conclusion";
+        public const string TableOfContents = "TableOfContents";
+        public const string ExpertSummary = "ExpertSummary";
+        public const string AssesmentReasoning = "AssesmentReasoning";
+        public const string RiskCategoryExplanation = "RiskCategoryExplanation";
+        public const string CategoryChange = "CategoryChange";
+        public const string ClimateEffectsInvationpotential = "ClimateEffectsInvationpotential";
+        public const string GeographicVariationInCategory = "GeographicVariationInCategory";
+        public const string RegionalSpread = "RegionalSpread";
+        public const string Attachments = "Attachments";
+        public const string ImpactedNatureTypes = "ImpactedNatureTypes";
+        public const string References = "References";
+
+
         public static Dictionary<string, string> HeadingsNO = new Dictionary<string, string>
         {
-            {"RiskMatrix", "Risikomatrisen"},
-            {"Conclusion", "Konklusjon"},
-            {"ExpertSummary", "Ekspertenes oppsummering"},
-            {"RiskCategoryExplanation", "Hva forklarer artens risikokategori"},
-            {"CategoryChange", "Endring av risikokategori fra 2018"},
-            {"ClimateEffectsInvationpotential", "Effekt av klimaendringer"},
-            {"GeographicVariationInCategory", "Geografisk variasjon i risiko"},
-            {"RegionalSpread", "Utbredelse"},
-            {"Attachments", "Filvedlegg"},
-            {"ImpactedNatureTypes", "Naturtypetilhørighet"},
-            {"References", "Referanser"},
+            {RiskMatrix, "Risikomatrisen"},
+            {Conclusion, "Konklusjon"},
+            {TableOfContents, "Innhold"},
+            {ExpertSummary, "Ekspertenes oppsummering"},
+            {AssesmentReasoning, "Begrunnelse"},
+            {RiskCategoryExplanation, "Hva forklarer artens risikokategori"},
+            {CategoryChange, "Endring av risikokategori fra 2018"},
+            {ClimateEffectsInvationpotential, "Effekt av klimaendringer"},
+            {GeographicVariationInCategory, "Geografisk variasjon i risiko"},
+            {RegionalSpread, "Utbredelse"},
+            {Attachments, "Filvedlegg"},
+            {ImpactedNatureTypes, "Naturtypetilhørighet"},
+            {References, "Referanser"},
         };
+        public static bool showHeading(string value, AlienSpeciesAssessment2023Category category)
+        {            
+            if (value == ImpactedNatureTypes || value == GeographicVariationInCategory)
+            {
+                return category != AlienSpeciesAssessment2023Category.NR;
+            }
+            return false;
+        }
 
         public static readonly Dictionary<string, string> AllEuropeanPopulationPercentages = new Dictionary<string, string>
         {

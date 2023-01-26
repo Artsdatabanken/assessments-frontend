@@ -81,110 +81,126 @@
         var critB = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
         var critC = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
 
+        // Obtain the decisive criteria:
+        var decisiveX = Model.Assessment.DecisiveCriteria.Split(",")[0];
+        var deciciveAB = false;
+        var deciciveC = false;
 
+        // Dictionary with matrix numbers vs. criterion uncertainty
+        var matrixValue = new Dictionary<string, int>(){
+	            {"1", 0},
+	            {"1>", 1},
+                {"2", 2},
+                {"<2", 3},
+	            {"2>", 4},
+                {"<2>", 5},
+                {"3", 6},
+                {"<3", 7},
+	            {"3>", 8},
+                {"<3>", 9},
+                {"4", 10},
+                {"<4", 11},
+            };
 
+        static string matrixByValue( int number,Dictionary<string, int> matrixValue){
+            return matrixValue.FirstOrDefault(x => x.Value == number).Key;
+        }
 
+        // Obtain Matrix number by criterion. 
+        static int uncertaintyConversion( AlienSpeciesAssessment2023Criterion criterion,Dictionary<string, int> matrixValue){
+            string key = "";
+            if(criterion.UncertaintyValues.AsQueryable().Min() < criterion.Value){ key += "<"; };
+            key += criterion.Value;
+            if(criterion.UncertaintyValues.AsQueryable().Max() > criterion.Value){ key += ">"; };
+            return matrixValue[key];
+        }       
 
+        // Full table as given by Hanno, but with unique numbers for each case. Fully 0-indexed <3
+        static int uncertaintyLookup( int a,int b){
+            int[,] uncertaintyComparison = {
+                    {0, 0,  0,  0,  1,  1,  2,  3,  2,  3,  2,  2},
+                    {1, 1,  1,  1,  1,  1,  4,  5,  4,  5,  4,  4},
+                    {2, 2,  2,  2,  4,  4,  6,  7,  6,  7,  6,  6},
+                    {3, 3,  3,  3,  5,  5,  7,  7,  7,  7,  7,  7},
+                    {2, 4,  4,  4,  4,  4,  6,  7,  8,  9,  8,  8},
+                    {3, 5,  5,  5,  5,  5,  7,  7,  9,  9,  8,  9},
+                    {2, 4,  6,  7,  6,  7,  6,  6,  8,  8,  10, 11},
+                    {2, 4,  7,  7,  7,  7,  6,  7,  8,  9,  11, 11},
+                    {4, 4,  6,  7,  8,  9,  8,  8,  8,  8,  10, 11},
+                    {4, 4,  7,  7,  9,  9,  8,  9,  8,  9,  11, 11},
+                    {6, 6,  6,  6,  8,  8,  10, 11, 10, 11, 10, 10},
+                    {7, 7,  6,  7,  8,  9,  11, 11, 11, 11, 10, 11}
+                };
+            return uncertaintyComparison[a,b];
+        }
 
+        // Obtain A/B-relationship by The Matrix
+        string AB_string = "Not decisive";
+        string C_string = "Not decisive";
+        string AB_conclusion = "";
+        string C_conclusion = "";
 
-        static int abAdjustment(int x, int y)
+        if (decisiveX.Contains("A")||decisiveX.Contains("B"))
         {
-            int[,] abAdjustmentMatrix = { 
-                // Crit B -->
-                { 0, 1, 1, 2 }, // Crit A
-                { 0, 1, 2, 2 }, // |
-                { 1, 2, 2, 3 }, // |
-                { 1, 2, 3, 3 }  // V
-             };
-            // TODO: FACT CHECK: Assuming it's -1 due to 0-indexing?
-            return abAdjustmentMatrix[x-1,y-1];
+            deciciveAB = true;          
+            int ANumber = uncertaintyConversion(critA,matrixValue);
+            int BNumber = uncertaintyConversion(critB,matrixValue);
+            int finalNumber = uncertaintyLookup(ANumber,BNumber);
+            AB_conclusion = matrixByValue(finalNumber, matrixValue);
+
+            AB_string = "A: " + ANumber + " B: " + BNumber + " Matrix: " + finalNumber + " = " + AB_conclusion;
+
         }
 
-        // 2. Calculate level used to determine if a criterion is decisive
-        var adjustedAB = abAdjustment(critB.Value,critA.Value); 
-        var adjustedA = Math.Min(adjustedAB, critA.Value);
-        var adjustedB = Math.Min(adjustedAB, critB.Value);
-        var level = Math.Max(adjustedAB, critC.Value);
-
-        // 3. Add decisive criteria to list
-        List<int> uncertaintiesAB = new List<int>(); 
-        List<int> uncertaintiesC = new List<int>();
-        List<AlienSpeciesAssessment2023Criterion> decisiveCrits = new List<AlienSpeciesAssessment2023Criterion>();
-
-        if (adjustedA == level) {
-            decisiveCrits.Add(critA);
-        }
-        if (adjustedB == level) {
-            decisiveCrits.Add(critB);
-        }      
-        if (critC.Value == level) {
-            decisiveCrits.Add(critC);    
-        }
-
-        // 4. Obtain uncertainty values for decisive criteria
-
-        if (adjustedA == level || adjustedB == level)
+        if (decisiveX.Contains("C"))
         {
-            var minUL_A = critA.UncertaintyValues.Count == 0 ? critA.Value : critA.UncertaintyValues.AsQueryable().Min(); 
-            var minUL_B = critB.UncertaintyValues.Count == 0 ? critB.Value : critB.UncertaintyValues.AsQueryable().Min(); 
-            var minUL_AB_adj = abAdjustment(minUL_B,minUL_A); 
-            var minUL_AB = Math.Max(minUL_AB_adj, adjustedAB - 1);
+            deciciveC = true;
+            int CNumber = uncertaintyConversion(critC,matrixValue);
+            C_conclusion = matrixByValue(CNumber, matrixValue);
+            C_string = " " + C_conclusion;
+        }
 
-            var maxUL_A = critA.UncertaintyValues.Count == 0 ? critA.Value : critA.UncertaintyValues.AsQueryable().Max(); 
-            var maxUL_B = critB.UncertaintyValues.Count == 0 ? critB.Value : critB.UncertaintyValues.AsQueryable().Max(); 
-            var maxUL_AB_adj = abAdjustment(maxUL_B,maxUL_A); 
-            var maxUL_AB = Math.Min(maxUL_AB_adj, adjustedAB + 1);
+        string x_conclusion = "" + x;
+        if(deciciveAB && deciciveC)
+        {
+            bool cUP = C_conclusion.Contains("<");
+            bool cDown = C_conclusion.Contains("<");
+            bool abUP = AB_conclusion.Contains("<");
+            bool abDown = AB_conclusion.Contains("<");
+            bool cHasUV = cUP || cDown;
+            bool abHasUV = abUP || abDown;
 
-            for (var i = minUL_AB; i <= maxUL_AB; i++) {
-                uncertaintiesAB.Add(i);
+
+            if(abHasUV != cHasUV) // exclusively C or AB has an uncertainty -> only upwards
+            {                
+                if(cUP || abUP) 
+                {
+                    x_conclusion += ">";
+                }
+            }else {                
+                if(cUP && abUP && cDown && abDown) // Both have up and down
+                {                    
+                    x_conclusion = "<" + x + ">";
+                }   else if(cDown && abDown) // Down only if A+B & C has down
+                {                    
+                    x_conclusion = "<" + x;
+                }else if(cUP && abUP) // NOT STATED BUT THIS HAS TO BE TRUE?
+                {
+                    x_conclusion += ">";
+                }
+
             }
-        }
-        if (critC.Value == level) {
-            uncertaintiesC = critC.UncertaintyValues; //const uncertaintiesC = c === level ? critC.UncertaintyValues : []
-        }
-
-
-        // Hvis A, B og C alle er utslagsgivende, 
-        if(adjustedA == level && adjustedB == level && adjustedB == level)
+        }else if (deciciveAB)
         {
-         // og C ikke har usikkerhet, men resultatet for A +B gir det (eller omvendt), 
-         // så er det kun usikkerhet oppover som skal angis i matrisa.    
-        }
-
-        if(adjustedA == level || adjustedB == level && adjustedB == level)
+            x_conclusion = AB_conclusion;
+        }else if (deciciveC)
         {
-        // Usikkerhet nedover skal kun vises  i matrisa 
-        // hvis både resultatet for A+B og C har usikkerhet 
-        // nedover [altså hvis A/B og C er utslagsgivende].
-        }
-
-        // 5. Obtain all values for uncertainty levels by mering AB & C lists for uncertainties, make them distinct, and sort them.
-        List<int> allUncertaintyLevels = uncertaintiesAB.Union(uncertaintiesC).ToList();
-        allUncertaintyLevels.Sort(); //const allUncertaintyLevels = [...new Set([...uncertaintiesAB,...uncertaintiesC])].sort()
-
-
-        // 6. Obtain all the decisive uncertainties
-        List<List<int>> decisiveUncertainties = new List<List<int>>();
-
-        if (adjustedA == level || adjustedB == level) {
-            decisiveUncertainties.Add(uncertaintiesAB);
-        }
-
-        if (critC.Value == level) {
-            decisiveUncertainties.Add(uncertaintiesC);
+            x_conclusion = C_conclusion;
         }
 
 
-        // 7. ORIGINAL: sweepingUncertaintyLevels = decisiveUncertainties.reduce((acc, uv) => acc.filter(n => n >= level || uv.indexOf(n) > -1), allUncertaintyLevels);
-        var sweepingUncertaintyLevels = decisiveUncertainties.Aggregate(allUncertaintyLevels, (accumulator, current) => accumulator.Where(x => x >= level || current.Contains(x)).ToList());
-
-        // 7.5: removeuncertainty values not next to the actual value (x is the actual value)
-        //sweepingUncertaintyLevels = sweepingUncertaintyLevels.Where(val => x - 1 == val || x == val || x + 1 ==  val).ToList();
-
-        // 8. The end values.
-        IEnumerable<int> xUncertainties = sweepingUncertaintyLevels;       
-        int xHigherUncertainty = Math.Max(sweepingUncertaintyLevels.AsQueryable().Max(),x); 
-        int xLowerUncertainty =  Math.Min(sweepingUncertaintyLevels.AsQueryable().Min(),x);
+       int xHigherUncertainty = x_conclusion.Contains(">")?x+1:x; 
+       int xLowerUncertainty =  x_conclusion.Contains("<")?x-1:x;
     }
 
 
@@ -242,12 +258,12 @@
     <h2>Risikomatrisen</h2>
 
     <p>
-        x: @x - Usikkerhet: Max @xHigherUncertainty Min: @xLowerUncertainty<br/>
+        x: @x - Usikkerhet: <!--Max @xHigherUncertainty Min: @xLowerUncertainty--><br/>
         y: @y - Usikkerhet: Max @yHigherUncertainty Min: @yLowerUncertainty <br />
         <br/>
-        level: @level<br/>
-        x: @x<br/>
-        @{
+        decisivecrit x: @decisiveX
+        <br/>
+         @{
             <b>A</b>
              foreach (var uncertainty in @critA.UncertaintyValues)
             {
@@ -264,13 +280,17 @@
                 <b> @uncertainty</b>
             } 
         }
+        <br/> <hr/>
+
+       A/B = @deciciveAB = @AB_string <br/>
+       c = @deciciveC = @C_string <br/>
+       <hr/>
+      x konlusjon: @x_conclusion
+       <br/>
+        
         <br/>
-        "sweepingUncertaintyLevels": @{
-             foreach (var uncertainty in xUncertainties)
-            {
-                <b>@uncertainty</b>
-            }   
-        }
+       
+       
     </p>
 
     <figure class="risk-level-matrix">

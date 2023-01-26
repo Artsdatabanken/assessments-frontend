@@ -734,8 +734,8 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 return chosenMethod switch
                 {
-                    "LifespanA1aSimplifiedEstimate" => "SimplifiedEstimation",
-                    "SpreadRscriptEstimatedSpeciesLongevity" => "NumericalEstimation",
+                    "LifespanA1aSimplifiedEstimate" => AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.SimplifiedEstimation.ToString(),
+                    "SpreadRscriptEstimatedSpeciesLongevity" => AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.NumericalEstimation.ToString(),
                     _ => chosenMethod
                 };
             }

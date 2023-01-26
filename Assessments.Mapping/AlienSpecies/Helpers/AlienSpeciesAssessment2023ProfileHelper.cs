@@ -149,7 +149,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
             List<AlienSpeciesAssessment2023Pathways> filteredAssessmentVectors = assessmentVectors.Select(x => new AlienSpeciesAssessment2023Pathways()
             {
-                IntroductionSpread = (IntroductionSpread)Enum.Parse(typeof(IntroductionSpread), x.IntroductionSpread, true),
+                IntroductionSpread = (IntroductionSpread)Enum.Parse(typeof(IntroductionSpread), string.IsNullOrEmpty(x.IntroductionSpread) ? "NotChosen" : x.IntroductionSpread, true),
                 InfluenceFactor = GetInfluenceFactor(x.InfluenceFactor),
                 Magnitude = GetMagnitude(x.Magnitude),
                 TimeOfIncident = GetTimeOfIncident(x.TimeOfIncident),
@@ -742,6 +742,24 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return GetExpansionSpeedAOOSelfReproducing(riskAssessment, areaOfOccurrenceToday, areaOfOccurrenceIn50Years);
             }
 
+        }
+
+        internal static string GetMedianLifetimeEstimationMethod(string category, string chosenMethod)
+        {
+            if(category == "NR" || chosenMethod == "RedListCategoryLevel")
+            {
+                return "NotRelevant";
+            }
+
+            else
+            {
+                return chosenMethod switch
+                {
+                    "LifespanA1aSimplifiedEstimate" => AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.SimplifiedEstimation.ToString(),
+                    "SpreadRscriptEstimatedSpeciesLongevity" => AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.NumericalEstimation.ToString(),
+                    _ => chosenMethod
+                };
+            }
         }
     }
 }

@@ -6,10 +6,14 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
     {
         public enum IntroductionSpread
         {
+            [Display(Name = "")]
+            NotChosen,
+
             [Display(Name = "Introduksjon")]
             Introduction,
+
             [Display(Name = "Spredning")]
-            Spread,
+            Spread
         }
 
         public enum InfluenceFactor

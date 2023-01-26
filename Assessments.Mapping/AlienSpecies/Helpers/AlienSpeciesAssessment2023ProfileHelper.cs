@@ -188,14 +188,35 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return geographicVar == "yes";
         }
 
-        internal static List<string> GetGeographicVarCause(string category, string geographicVar, List<string> geoVarCause)
+        internal static List<AlienSpeciesAssessment2023GeographicalVariation> GetGeographicVarCause(string category, string geographicVar, List<string> geographicalVariation, AlienSpeciesAssessment2023Environment environment)
         {
             if (GetGeographicVarInCat(category, geographicVar) is null or false)
             {
-                return new List<string>();
+                return new List<AlienSpeciesAssessment2023GeographicalVariation>();
             }
 
-            return geoVarCause;
+            var isMarine = environment == AlienSpeciesAssessment2023Environment.Limnisk || environment == AlienSpeciesAssessment2023Environment.Marint || environment == AlienSpeciesAssessment2023Environment.LimMar || environment == AlienSpeciesAssessment2023Environment.LimTer || environment == AlienSpeciesAssessment2023Environment.MarTer || environment == AlienSpeciesAssessment2023Environment.LimMarTer;
+            var geographicalVariationsEnumList = new List<AlienSpeciesAssessment2023GeographicalVariation>();
+            Object current;
+
+            foreach (var variation in geographicalVariation)
+            {
+                if (isMarine)
+                {
+                    if (Enum.TryParse(typeof(AlienSpeciesAssessment2023GeographicalVariation), $"{variation.TrimEnd()}Marine", true, out current))
+                    {
+                        geographicalVariationsEnumList.Add((AlienSpeciesAssessment2023GeographicalVariation)current);
+                    }
+                }
+                else
+                {
+                    if (Enum.TryParse(typeof(AlienSpeciesAssessment2023GeographicalVariation), variation.TrimEnd(), true, out current))
+                    {
+                        geographicalVariationsEnumList.Add((AlienSpeciesAssessment2023GeographicalVariation)current);
+                    }
+                }
+            }
+            return geographicalVariationsEnumList;
         }
 
         internal static string GetGeographicVarDoc(string category, string geographicVar, string geoVarDoc)

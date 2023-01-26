@@ -10,6 +10,7 @@
 
     var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
     var speciesGroupImageUrl = speciesGroup.ImageUrl;
+    var showRiskMatrix = Model.Assessment.ScoreEcologicalEffect != null && Model.Assessment.ScoreInvasionPotential != null;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
@@ -97,7 +98,9 @@
             <div class="mobile_padding">
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
-                <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>
+                <div is-visible="showRiskMatrix">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml" />
+                </div>
                 @*    Check which ones are appropriate for alien species list
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_CategoryDescription.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_ExpertStatement.cshtml" />

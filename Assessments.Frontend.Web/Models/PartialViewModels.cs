@@ -1,3 +1,4 @@
+using Assessments.Frontend.Web.Infrastructure.Enums;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
@@ -249,6 +250,8 @@ namespace Assessments.Frontend.Web.Models
 
     public class PageMenuViewModel
     {
+        public AssessmentType AssessmentType { get; set; }
+
         public int PageMenuContentId { get; set; }
 
         public string PageMenuExpandButtonText { get; set; }

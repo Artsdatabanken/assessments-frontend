@@ -4,6 +4,7 @@ using Azure;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -11,6 +12,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     {
         private readonly IConfiguration _configuration;
         private BlobContainerClient _containerClient;
+        private readonly ILogger<AttachmentRepository> _logger;
 
         private BlobContainerClient ContainerClient
         {
@@ -25,8 +27,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         }
 
-        public AttachmentRepository(IConfiguration configuration)
+        public AttachmentRepository(IConfiguration configuration, ILogger<AttachmentRepository> logger)
         {
+            _logger = logger;
             _configuration = configuration;
         }
         
@@ -42,6 +45,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
             catch (RequestFailedException ex) when (ex.ErrorCode == BlobErrorCode.BlobNotFound)
             {
+                _logger.LogWarning("{Message}", ex.Message);
+               
                 return null;
             }
         }

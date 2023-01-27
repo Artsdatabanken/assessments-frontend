@@ -2,16 +2,11 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-
     var pageName = @Constants.GeographicVariationInCategory;
     var showPage = @Constants.showHeading(pageName, @Model.Assessment.Category);
-
-
 }
 <div is-visible="showPage" class="page_section">
-
-    @{
-        
+    @{        
         var hasGeographicVariationInCategory = @Model.Assessment.GeographicVariationInCategory == true;
         var geographicVariation = @Model.Assessment.GeographicalVariation;
         var geographicVariationDocumentation = @Model.Assessment.GeographicalVariationDocumentation;
@@ -39,12 +34,11 @@
             <br/>
         
             <p is-visible="hasGeographicVariationDocumentation">
-                <!--@Constants.HasGeographicVariationDocumentation -->
-                @geographicVariationDocumentation
+                <b>@Constants.HasGeographicVariationDocumentation</b>
+                @Html.Raw(geographicVariationDocumentation)
             </p>
         </div>
-        <p is-visible="!hasGeographicVariationInCategory">
-                
+        <p is-visible="!hasGeographicVariationInCategory">                
             @Constants.NoLowerCategoryThan
             <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category 
             @Constants.LowerCategoryThanEnding

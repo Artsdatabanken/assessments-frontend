@@ -625,9 +625,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string LowerCategoryThanEnding = "i deler av sitt potensielle forekomstareal.";
 // TODO: ADD THE LIST FOR GEOGRAPHIC CAUSES FOR RISK VARIATION
 
-
-        public const string ImpactedNatureTypesIntro = "Her vises naturtypene den fremmede arten er observert i, eller/og naturtyper som er potensielle habitater for arten i Norge, samt påvirkningen arten har eller antas å ha i naturtypene.";
-        public const string ImpactedNatureTypesTableTitle = "Tabell over valgte truede, sjeldne og øvrige naturtyper ";
+        public const string ImpactedNatureTypesTableTitle = "Valgte truede, sjeldne og øvrige naturtyper ";
         public const string ImpactedNatureTypesTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens(eventuelt framtidige) påvirkning i naturtypen og anslått andel av naturtypens areal som blir eller vil bli påvirket (F- og G-kriteriet).";
         public const string ImpactedNatureTypesTableColumn1 = "naturtype";
         public const string ImpactedNatureTypesTableColumn2 = "tidshorisont";
@@ -635,6 +633,10 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string ImpactedNatureTypesTableColumn4 = "tydelig <br/>tilstandsendring";
         public const string ImpactedNatureTypesTableColumn5 = "tydelig <br/>påvirka <br/>areal (%)";
         public const string ImpactedNatureTypesTableColumn6 = "vurderingsgrunnlag";
+
+        public const string CategoryChangeNotAssessed2018 = "Denne arten er risikovurdert for første gang i 2023.";
+        public const string CategoryChangeShowSameAs2018 = "Denne arten er vurdert til samme risikokategori som i Fremmedartslista 2018 (forrige revisjon).";
+        public const string CategoryChangeReasonsForChangeDescription = "Utfyllende beskrivelse av årsaken(e) for endret risikokategori:";
 
     }
 

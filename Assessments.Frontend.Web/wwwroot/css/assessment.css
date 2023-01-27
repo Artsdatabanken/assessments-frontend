@@ -977,6 +977,14 @@ span.area i {
     border-bottom: 1px solid rgba(192, 192, 192,0.2);
 }
 
+.numbers-table li {
+    margin: 8px 0;
+}
+
 .collapsible .only-tabs-inside {
     padding: 20px 0 0 0;
+}
+
+.space_above_20 {
+    margin-top: 20px;
 }

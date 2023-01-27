@@ -19,6 +19,7 @@
 
     PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
     {
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
@@ -46,14 +47,6 @@
                 <partial name="/Views/AlienSpecies/2023/ListPartials/_Search.cshtml" />
                 <partial name="/Views/AlienSpecies/2023/ListPartials/_Filters.cshtml" />
             </form>
-
-            <div is-visible="@Model.Results.Any()">
-                <form>
-                    <button type="submit" name="Export" value="true" formtarget="_blank">
-                        <span class="material-icons">file_download</span> Eksporter
-                    </button>
-                </form>
-            </div>
 
             <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel"/>
         </div>

@@ -2,8 +2,9 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
-    var natureTypes = @Model.Assessment.ImpactedNatureTypes;
+    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var natureTypes = Model.Assessment.ImpactedNatureTypes;
+    var isSvalbard = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
 }
 
 <div is-visible="showPage" class="page_section">
@@ -16,10 +17,12 @@
             </button>
         </div>
         <div class="collapsible_content">
-            <p>Her vises naturtypene den fremmede arten er observert i, eller/og naturtyper som 
-                er potensielle habitater for arten i Norge, samt påvirkningen arten har eller 
-                antas å ha i naturtypene. 
-            </p>            
+            <p is-visible="isSvalbard">
+                Naturtyper arten er observert i og/eller som er potensielle habitater for arten på Svalbard. Hvis arten fører til endringer i naturtypen er det angitt.
+            </p>
+            <p is-visible="!isSvalbard">
+                Naturtyper arten er observert i og/eller som er potensielle habitater for arten i Norge. Hvis arten fører til endringer i naturtypen er det angitt.
+            </p>
             <p class="big-data-table table-description"><b>Tabell over valgte truede, sjeldne og øvrige naturtyper </b>
                 Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er 
                 observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner 

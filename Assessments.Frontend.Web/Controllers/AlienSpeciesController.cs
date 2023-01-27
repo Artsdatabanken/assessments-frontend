@@ -6,20 +6,26 @@ using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
+using Assessments.Shared.Options;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [NotReadyForProduction]
+    [EnableAlienSpecies2023]
     [Route("fremmedartslista")]
     public class AlienSpeciesController : BaseController<AlienSpeciesController>
     {
-        private AttachmentRepository _attachmentRepository;
+        private readonly AttachmentRepository _attachmentRepository;
+        private readonly AlienSpecies2023Options _alienSpecies2023Options;
 
-        protected AttachmentRepository AttachmentRepository => _attachmentRepository ??= HttpContext.RequestServices.GetService<AttachmentRepository>();
+        public AlienSpeciesController(IOptions<ApplicationOptions> options, AttachmentRepository attachmentRepository)
+        {
+            _alienSpecies2023Options = options.Value.AlienSpecies2023;
+            _attachmentRepository = attachmentRepository;
+        }
 
         public IActionResult Home() => View("AlienSpeciesHome");
 
@@ -67,20 +73,26 @@ namespace Assessments.Frontend.Web.Controllers
         {
             var data = await DataRepository.GetAlienSpeciesAssessments();
             var assessment = data.FirstOrDefault(x => x.Attachments.Any(y => y.Id == attachmentId));
+
+            if (assessment == null)
+                return NotFound();
+
             var attachment = assessment.Attachments.Single(x => x.Id == attachmentId);
 
-            var stream = await AttachmentRepository.GetFileStream(
+            var stream = await _attachmentRepository.GetFileStream(
                 DataFilenames.CalculateAlienSpecies2023AttachmentFilePath(attachmentId, attachment.FileName));
             
             return new FileStreamResult(stream, attachment.MimeType)
             {
                 FileDownloadName = attachment.FileName
             };
-
         }
 
         private IActionResult GetExport(IEnumerable<AlienSpeciesAssessment2023> query)
         {
+            if (!_alienSpecies2023Options.EnableExport)
+                return NotFound();
+
             var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());
 
             return new FileStreamResult(ExportHelper.GenerateAlienSpeciesAssessment2023Export(assessmentsForExport, Request.GetDisplayUrl()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

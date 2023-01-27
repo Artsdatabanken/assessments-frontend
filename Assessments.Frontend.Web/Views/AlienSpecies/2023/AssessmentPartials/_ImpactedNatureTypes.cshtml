@@ -4,6 +4,8 @@
 @{
     var pageName = @Constants.ImpactedNatureTypes;
     var showPage = Constants.showHeading(pageName, @Model.Assessment.Category);
+    var natureTypes = Model.Assessment.ImpactedNatureTypes;
+    var isSvalbard = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
 }
 
 <div is-visible="showPage" class="page_section">
@@ -30,6 +32,20 @@
             <p class="big-data-table table-description">
                 <b>@Constants.ImpactedNatureTypesTableTitle</b>
                 @Constants.ImpactedNatureTypesTableDescription
+
+            <p is-visible="isSvalbard">
+                Naturtyper arten er observert i og/eller som er potensielle habitater for arten på Svalbard. Hvis arten fører til endringer i naturtypen er det angitt.
+            </p>
+            <p is-visible="!isSvalbard">
+                Naturtyper arten er observert i og/eller som er potensielle habitater for arten i Norge. Hvis arten fører til endringer i naturtypen er det angitt.
+            </p>
+            <p class="big-data-table table-description"><b>Tabell over valgte truede, sjeldne og øvrige naturtyper </b>
+                Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er 
+                observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner 
+                (det av tallene som er størst), samt artens (eventuelt framtidige) påvirkning i 
+                naturtypen og anslått andel av naturtypens areal som blir eller vil bli påvirket 
+                (F- og G-kriteriet).
+
             </p>
             <table class="big-data-table">
                 <tr>

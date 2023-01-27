@@ -23,6 +23,7 @@ namespace Assessments.Frontend.Web.Controllers
         private readonly AssessmentsDbContext _dbContext;
         private readonly BlobContainerClient _blob;
         private readonly string _feedbackSecret;
+        public const string ValidationCookieName = "FeedbackValidation";
 
         public FeedbackController(IConfiguration configuration, AssessmentsDbContext dbContext)
         {
@@ -87,33 +88,38 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddFeedback(FeedbackFormViewModel formViewModel, string returnUrl)
+        public async Task<IActionResult> AddFeedback(FeedbackFormViewModel form, string code, string returnUrl)
         {
-            if (!ModelState.IsValid)
-                return BadRequest("Beklager, en feil oppstod ved innsending av skjema.");
+            if (!ModelState.IsValid || !Guid.TryParse(code, out _) || !Url.IsLocalUrl(returnUrl))
+                return BadRequest();
+
+            var validation = await _dbContext.EmailValidations.FirstOrDefaultAsync(x => x.Guid == new Guid(code));
+
+            if (validation == null || !validation.Email.Equals(form.Email) || !validation.FullName.Equals(form.FullName))
+                return BadRequest();
 
             var feedback = new Feedback
             {
-                AssessmentId = formViewModel.AssessmentId,
-                Year = formViewModel.Year,
-                Type = formViewModel.Type,
-                ExpertGroup = formViewModel.ExpertGroup,
-                FullName = formViewModel.FullName.Trim().StripHtml(),
-                Email = formViewModel.Email.ToLowerInvariant(),
-                Comment = formViewModel.Comment.Trim().StripHtml()
+                AssessmentId = form.AssessmentId,
+                Year = form.Year,
+                Type = form.Type,
+                ExpertGroup = form.ExpertGroup,
+                FullName = form.FullName.Trim().StripHtml(),
+                Email = form.Email.ToLowerInvariant(),
+                Comment = form.Comment.Trim().StripHtml()
             };
 
             _dbContext.Feedbacks.Add(feedback);
 
             await _dbContext.SaveChangesAsync();
 
-            if (formViewModel.FormFiles != null)
+            if (form.FormFiles != null)
             {
                 await _blob.CreateIfNotExistsAsync();
 
                 string[] permittedExtensions = { ".pdf", ".doc", ".docx", ".xls", ".xlsx" };
 
-                foreach (var formFile in formViewModel.FormFiles)
+                foreach (var formFile in form.FormFiles)
                 {
                     if (formFile.Length <= 0)
                         continue;
@@ -135,6 +141,8 @@ namespace Assessments.Frontend.Web.Controllers
                         BlobName = blobName,
                         FileName = formFile.FileName
                     });
+
+                    Logger.LogDebug("{blobName} uploaded to storage", blobName);
                 }
 
                 await _dbContext.SaveChangesAsync();
@@ -142,7 +150,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             TempData["feedback"] = "Takk for tilbakemeldingen.";
 
-            return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : BadRequest();
+            return Redirect($"{returnUrl}#feedback");
         }
 
         public async Task<IActionResult> Attachment(int id, string secret)
@@ -218,9 +226,30 @@ namespace Assessments.Frontend.Web.Controllers
                 return BadRequest("Beklager, en feil oppstod ved sending av e-post.");
             }
 
-            TempData["feedback"] = $"Du vil bli tilsendt en epost (til {email}) som brukes for å bekrefte e-postadressen og med lenke for tilbakemelding.";
+            TempData["feedback"] = $"Du vil bli tilsendt en e-post (til {email}) som brukes for å bekrefte e-postadressen og med lenke for tilbakemelding.";
 
             return Url.IsLocalUrl(returnUrl) ? Redirect($"{returnUrl}#feedback") : BadRequest();
+        }
+
+        public async Task<IActionResult> ForgetValidation(string code, string returnUrl)
+        {
+            if (!Guid.TryParse(code, out _) || !Url.IsLocalUrl(returnUrl))
+                return BadRequest();
+
+            var validation = await _dbContext.EmailValidations.FirstOrDefaultAsync(x => x.Guid == new Guid(code));
+
+            if (validation == null)
+                return BadRequest();
+
+            _dbContext.EmailValidations.Remove(validation);
+
+            await _dbContext.SaveChangesAsync();
+
+            HttpContext.Response.Cookies.Delete(ValidationCookieName);
+
+            TempData["feedback"] = "Din e-postadresse er slettet.";
+
+            return Redirect($"{returnUrl}#feedback");
         }
 
         public IActionResult Terms() => View();

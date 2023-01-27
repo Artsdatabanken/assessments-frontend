@@ -10,6 +10,7 @@
 
     var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
     var speciesGroupImageUrl = speciesGroup.ImageUrl;
+    var showRiskMatrix = Model.Assessment.ScoreEcologicalEffect != null && Model.Assessment.ScoreInvasionPotential != null;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
@@ -73,6 +74,7 @@
 
     var pageMenuViewModel = new PageMenuViewModel
     {
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText

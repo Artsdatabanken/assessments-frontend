@@ -1,23 +1,23 @@
-﻿@model AlienSpeciesDetailViewModel;
+@model AlienSpeciesDetailViewModel;
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
+
     var pageName = @Constants.GeographicVariationInCategory;
     var showPage = @Constants.showHeading(pageName, @Model.Assessment.Category);
+
+
 }
 <div is-visible="showPage" class="page_section">
+
     @{
+        
         var hasGeographicVariationInCategory = @Model.Assessment.GeographicVariationInCategory == true;
         var geographicVariation = @Model.Assessment.GeographicalVariation;
         var geographicVariationDocumentation = @Model.Assessment.GeographicalVariationDocumentation;
         var hasGeographicVariationDocumentation = geographicVariationDocumentation !=  "";
-        var hasFirstOption = geographicVariation.IndexOf("reproduksjonLimitedToCertainClimaticZones") != -1;
-        var hasSecondOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainClimaticZones") != -1;
-        var hasThirdOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainNatureTypes") != -1;
-        var hasFourthOption = geographicVariation.IndexOf("RiskAssessmentGeographicalVariation ") != -1; 
         var hasCauses = geographicVariation.Count > 0;
         var causes = geographicVariation.Count;
-        // TODO: correct space on 4th option when it's completed other places
     }
     <div id="show_category_changed" >
         <h2 id="@pageName"> @Constants.HeadingsNO[@pageName]</h2>
@@ -26,16 +26,16 @@
             <p>
                 @Constants.LowerCategoryThan
                 <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category
-                @Constants.LowerCategoryThanEnding
-                   
+                @Constants.LowerCategoryThanEnding                   
             </p>
                 <h3  is-visible="hasCauses">Årsak til geografisk variasjon i risiko</h3>
-            <ul class="indented_list">
-                <li is-visible="hasFirstOption">Artens evne til reproduksjon og/eller spredning er begrenset til visse bioklimatiske soner eller seksjoner </li>
-                <li is-visible="hasSecondOption">Artens økologiske effekter er begrenset til visse bioklimatiske soner eller seksjoner</li>
-                <li is-visible="hasThirdOption">Artens økologiske effekter er begrenset til bestemte naturtyper </li>
-                <li is-visible="hasFourthOption">Artens økologiske effekt består utelukkende i interaksjoner med stedegne arter som har svært begrenset utbredelse </li>
-            </ul>
+           
+                <ul class="indented_list">
+                    @foreach (var variation in Model.Assessment.GeographicalVariation)
+                    {
+                        <li>@variation.DisplayName()</li>
+                    }
+                </ul>
             <br/>
         
             <p is-visible="hasGeographicVariationDocumentation">
@@ -51,8 +51,3 @@
         </p>
     </div>
 </div>
-
-
-
-
-

@@ -1,86 +1,201 @@
 ﻿@model AlienSpeciesDetailViewModel
 @using Assessments.Mapping.AlienSpecies.Model.Enums
-@*
-   Risk Matrix
+@using System;
 
-   FILLED LINE: BEST ESTIMATE OF MARTIX PLACEMENT
+@{
+    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    /* Risk Matrix 2023
+
+   Filled line - Criteria value
    -> Determines risk category
 
    Dashed/Dotted Line - Uncertainty
    -> one step up/down from risk category
-       x-axis: A-C-criteria. Rules will come later.
-       y-axis: the/those criteria D-I with the highest value       
-           if UncertaintyValues.Count > 1 = has uncertainty on the y-axis
-                upwards uncertainty: the highest number
-                downwards uncertainty: all determening criteria must have the same for it to be added
-           if UncertaintyValues.Count == 1 = no uncertainty on the y-axis
-*@
-
-@{
-    // Names / Descriptions         
-    string xAxisLabel = "Invasjonspotensial";
-    string yAxisLabel = "Økologisk effekt";
-
-    // Obtain Criteria Letters
-    var criteria = Model.Assessment.Criteria;
-    var A = AlienSpeciesAssessment2023CriteriaLetter.A;
-    var B = AlienSpeciesAssessment2023CriteriaLetter.B;
-    var C = AlienSpeciesAssessment2023CriteriaLetter.C;
-
-    // Risk category placement
-    int x = Model.Assessment.ScoreInvasionPotential.Value;
-    int y = Model.Assessment.ScoreEcologicalEffect.Value;
-    List<AlienSpeciesAssessment2023Criterion> yAxisCriteriaList = new List<AlienSpeciesAssessment2023Criterion>();
-
-
-    // Obtain all counting criteria
-    foreach (var criterion in criteria)
-    {
-        var letter = criterion.CriteriaLetter;
-        var xAxis = (letter == A || letter == B || letter == C);
-        if (!xAxis){
-            if (criterion.UncertaintyValues.Count > 1 && criterion.Value > 0 && criterion.Value == y)
-            {
-                yAxisCriteriaList.Add(criterion);
-            }
-        }
-    }
-
-    // Uncertainty Values
-
-    int yhigherUncertainty = y;
-    List<int> lowestYList = new List<int>();
-
-    foreach (var criterion in yAxisCriteriaList)
-    {
-        // Obtain top and bottom uncertainties
-        int criteriaLowestY = y;
-        foreach (var uncertainty in criterion.UncertaintyValues)
-        {
-            // Always use highest uncertainty 
-            if(uncertainty > yhigherUncertainty)
-            {
-                yhigherUncertainty = uncertainty;
-            }
-            // dump all the lower uncertainties into one comparison-list
-            if(uncertainty < y)
-            {
-                lowestYList.Add(uncertainty);
-            }
-        }   
-    }
-
-    int yLowerUncertainty = y;
-    // set lower uncertainty if all lower uncertainty values are the same
-    if(lowestYList.Distinct().Count() == 1)
-    {
-        yLowerUncertainty = lowestYList[0];
-    }
-
+    x-axis: A-C criteria. 
+    y-axis: D-I criteria
+    */
 }
 
+<div is-visible="showPage">    
+
+    @{
+        // Risk category placement
+        int x = Model.Assessment.ScoreInvasionPotential.Value;
+        int y = Model.Assessment.ScoreEcologicalEffect.Value;
+        List<AlienSpeciesAssessment2023Criterion> yAxisCriteriaList = new List<AlienSpeciesAssessment2023Criterion>();    
+
+        // Names / Descriptions         
+        string xAxisLabel = "Invasjonspotensial";
+        string yAxisLabel = "Økologisk effekt";        
+
+        // ~*~ Y Uncertainty : Eco effect ~*~
+        int yHigherUncertainty = y;
+        int yLowerUncertainty = y;
+
+        // 1. Obtain all counting criteria
+        foreach (var criterion in Model.Assessment.Criteria)
+        {
+            var letter = criterion.CriteriaLetter;
+            var xAxis = (letter == AlienSpeciesAssessment2023CriteriaLetter.A || letter == AlienSpeciesAssessment2023CriteriaLetter.B || letter == AlienSpeciesAssessment2023CriteriaLetter.C);
+            if (!xAxis){
+                if (criterion.UncertaintyValues.Count > 1 && criterion.Value > 0 && criterion.Value == y)
+                {
+                    yAxisCriteriaList.Add(criterion);
+                }
+            }
+        }
+
+        // 2. Obtain higher and lower uncertainties
+        List<int> lowestYList = new List<int>();
+        foreach (var criterion in yAxisCriteriaList) 
+        {            
+            int criteriaLowestY = y;
+            foreach (var uncertainty in criterion.UncertaintyValues)
+            {                
+                if(uncertainty > yHigherUncertainty) // Always use highest uncertainty 
+                {
+                    yHigherUncertainty = uncertainty;
+                }                
+                if(uncertainty < y)
+                {
+                    lowestYList.Add(uncertainty); // dump alllower uncertainties into one comparison-list
+                }
+            }   
+        }        
+
+        // 3. set lower uncertainty if all lower uncertainty values are the same
+        if(lowestYList.Distinct().Count() == 1)
+        {
+            yLowerUncertainty = lowestYList[0];
+        }
+
+        // ~*~ x Uncertainty - Invation Potential ~*~
+
+        // 1. Obtain A, B & C criteria
+        var critA = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
+        var critB = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
+        var critC = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
+
+        // Obtain the decisive criteria:
+        var decisiveX = Model.Assessment.DecisiveCriteria.Split(",")[0];
+        bool deciciveAB = (decisiveX.Contains("A")||decisiveX.Contains("B"))?true:false;
+        bool deciciveC = decisiveX.Contains("C")?true:false;
+
+        // Necessary string values
+        string x_conclusion = "" + x;
+        string AB_conclusion = "";
+        string C_conclusion = "";        
+         
+        // Dictionary with matrix numbers vs. criterion uncertainty
+        var stringToUNumber = new Dictionary<string, int>(){
+	            {"1", 0},
+	            {"1>", 1},
+                {"2", 2},
+                {"<2", 3},
+	            {"2>", 4},
+                {"<2>", 5},
+                {"3", 6},
+                {"<3", 7},
+	            {"3>", 8},
+                {"<3>", 9},
+                {"4", 10},
+                {"<4", 11},
+            };
+
+        // Reverse lookup of stringToUNumberDictionary
+        static string numberToConclusionString( int number,Dictionary<string, int> stringToUNumber){
+            return stringToUNumber.FirstOrDefault(x => x.Value == number).Key;
+        }
+
+        // A + B: Full table of uncertainties Hanno's excel sheet with <x> and <y>. 
+        // converted from string notation to 0-indexed unique numbers for each case, per stringToUNumber.
+        static int uncertaintyLookup( int a,int b){
+            int[,] uncertaintyComparison = {
+                    {0, 0,  0,  0,  1,  1,  2,  3,  2,  3,  2,  2},
+                    {1, 1,  1,  1,  1,  1,  4,  5,  4,  5,  4,  4},
+                    {2, 2,  2,  2,  4,  4,  6,  7,  6,  7,  6,  6},
+                    {3, 3,  3,  3,  5,  5,  7,  7,  7,  7,  7,  7},
+                    {2, 4,  4,  4,  4,  4,  6,  7,  8,  9,  8,  8},
+                    {3, 5,  5,  5,  5,  5,  7,  7,  9,  9,  8,  9},
+                    {2, 4,  6,  7,  6,  7,  6,  6,  8,  8,  10, 11},
+                    {2, 4,  7,  7,  7,  7,  6,  7,  8,  9,  11, 11},
+                    {4, 4,  6,  7,  8,  9,  8,  8,  8,  8,  10, 11},
+                    {4, 4,  7,  7,  9,  9,  8,  9,  8,  9,  11, 11},
+                    {6, 6,  6,  6,  8,  8,  10, 11, 10, 11, 10, 10},
+                    {7, 7,  6,  7,  8,  9,  11, 11, 11, 11, 10, 11}
+                };
+            return uncertaintyComparison[b,a];
+        }
+
+        // Obtain Uncertainty Lookup number by criterion. 
+        static int uncertaintyConversion( AlienSpeciesAssessment2023Criterion criterion,Dictionary<string, int> stringToUNumber){
+            string key = "";
+            if(criterion.UncertaintyValues.AsQueryable().Min() < criterion.Value){ key += "<"; };
+            key += criterion.Value;
+            if(criterion.UncertaintyValues.AsQueryable().Max() > criterion.Value){ key += ">"; };
+            return stringToUNumber[key];
+        } 
+
+        // Convert C-criteria to conclusion-string
+        if (deciciveC)
+        {
+            int CNumber = uncertaintyConversion(critC,stringToUNumber);
+            C_conclusion = numberToConclusionString(CNumber, stringToUNumber);
+        }
+
+        // Obtain A/B-relationship by The Matrix, and convert to conclusion-string
+        if (deciciveAB)
+        {      
+            int ANumber = uncertaintyConversion(critA,stringToUNumber);
+            int BNumber = uncertaintyConversion(critB,stringToUNumber);
+            int ABNumber = uncertaintyLookup(ANumber,BNumber);
+            AB_conclusion = numberToConclusionString(ABNumber, stringToUNumber);
+        }
+
+        // Follow rules for conclusion strings, as given by Ane :)        
+        if(deciciveAB && deciciveC) // both AB & C are decisive criteria
+        {
+            bool cUP = C_conclusion.Contains("<");
+            bool cDown = C_conclusion.Contains("<");
+            bool abUP = AB_conclusion.Contains("<");
+            bool abDown = AB_conclusion.Contains("<");
+            bool cHasUV = cUP || cDown; // C has any uncertainty
+            bool abHasUV = abUP || abDown; // AB has any uncertainty
+
+            if(abHasUV != cHasUV) // exclusively C or AB has an uncertainty -> ignore down
+            {                
+                if(cUP || abUP) // If either has up, we go up.
+                {
+                    x_conclusion += ">";
+                }
+            }else {                
+                if(cUP && abUP && cDown && abDown) // Both have up and down
+                {                    
+                    x_conclusion = "<" + x + ">";
+                }else if(cDown && abDown) // Down if both have down
+                {                    
+                    x_conclusion = "<" + x;
+                }else if(cUP && abUP) // Up if both have up
+                {
+                    x_conclusion += ">";
+                }
+            }
+        }else if (deciciveAB)
+        {
+            x_conclusion = AB_conclusion;
+        }else if (deciciveC)
+        {
+            x_conclusion = C_conclusion;
+        }
+
+       // Final interpretation of conclusion-string 
+       int xHigherUncertainty = x_conclusion.Contains(">")?x+1:x; 
+       int xLowerUncertainty =  x_conclusion.Contains("<")?x-1:x;
+    }
+
+
 @functions{
-    string className(int current_x, int current_y, int place_x, int place_y,int highestUncertainty_y, int lowestUncertainty_y){
+    string className(int current_x, int current_y, int place_x, int place_y,int highestUncertainty_y, int lowestUncertainty_y,int highestUncertainty_x, int lowestUncertainty_x){
 
         string name = "" + current_x + current_y;
         string place = "" + place_x + place_y;
@@ -105,6 +220,24 @@
             }
         }
 
+         if(current_y == place_y)
+        {
+            // Add UPWARDS uncertainty to the x-axis only for the current column on the x-axis.
+            if (current_x <= highestUncertainty_x && current_x > place_x)
+            {
+               
+                classN = "uncertain " + highestUncertainty_x + " " +current_x + " " + place_x;               
+            }
+
+            // Add DOWNWARDS uncertainty to the y-axis only for the current column on the x-axis.
+            if (current_x >= lowestUncertainty_x && current_x < place_x)
+            {
+                // y value higher than the lowest cap
+                // lower than the category value
+                classN = "uncertain " + lowestUncertainty_x + " " +current_x + " " + place_x;               
+            }
+        }
+
         if(name == place)
         {
             classN = "active";            
@@ -113,54 +246,54 @@
     }
 }
 <h2>@Constants.HeadingsNO["RiskMatrix"]</h2>
-
-<figure class="risk-level-matrix">
-    <table>
-        <tbody>
+    <figure class="risk-level-matrix">
+        <table>
+            <tbody>
             
+                <tr>
+                    <td rowspan="4" class="legend legend-v"><span>@yAxisLabel</span></td>
+                    <td class="description"><span>4</span> stor</td>
+                    <td class="cat-ph @className(1, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-41">14</td>
+                    <td class="cat-hi @className(2, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-42">24</td>
+                    <td class="cat-se @className(3, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-43">34</td>
+                    <td class="cat-se @className(4, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-44">44</td>
+                </tr>
+                <tr>
+                    <td class="description"><span>3</span> middels</td>
+                    <td class="cat-lo @className(1, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-31">13</td>
+                    <td class="cat-hi @className(2, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-32">23</td>
+                    <td class="cat-hi @className(3, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-33">33</td>
+                    <td class="cat-se @className(4, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-34">43</td>
+                </tr>
+                <tr>
+                    <td class="description"><span>2</span> liten</td>
+                    <td class="cat-lo @className(1, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-21">12</td>
+                    <td class="cat-lo @className(2, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-22">22</td>
+                    <td class="cat-lo @className(3, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-23">32</td>
+                    <td class="cat-hi @className(4, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-24">42</td>
+                </tr>
+                <tr>
+                    <td class="description"><span>1</span> ingen kjent</td>
+                    <td class="cat-nk @className(1, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-11">11</td>
+                    <td class="cat-lo @className(2, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-12">21</td>
+                    <td class="cat-lo @className(3, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-13">31</td>
+                    <td class="cat-ph @className(4, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-14">41</td>
+                </tr>
+                <tr>
+                    <td class="description"></td>
+                    <td class="description"></td>
+                    <td class="description"><span>1</span> lite</td>
+                    <td class="description"><span>2</span> begrensa</td>
+                    <td class="description"><span>3</span> moderat</td>
+                    <td class="description"><span>4</span> stor</td>
+                </tr>
             <tr>
-                <td rowspan="4" class="legend legend-v"><span>@yAxisLabel</span></td>
-                <td class="description"><span>4</span> stor</td>
-                <td class="cat-ph @className(1, 4, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-41">14</td>
-                <td class="cat-hi @className(2, 4, x, y, yhigherUncertainty, yLowerUncertainty )"  id="risk-42">24</td>
-                <td class="cat-se @className(3, 4, x, y, yhigherUncertainty, yLowerUncertainty )"  id="risk-43">34</td>
-                <td class="cat-se @className(4, 4, x, y, yhigherUncertainty, yLowerUncertainty )"  id="risk-44">44</td>
+                <td class="legend"></td>
+                <td></td>
+                <td colspan="4" class="legend">@xAxisLabel</td>
             </tr>
-            <tr>
-                <td class="description"><span>3</span> middels</td>
-                <td class="cat-lo @className(1, 3, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-31">13</td>
-                <td class="cat-hi @className(2, 3, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-32">23</td>
-                <td class="cat-hi @className(3, 3, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-33">33</td>
-                <td class="cat-se @className(4, 3, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-34">43</td>
-            </tr>
-            <tr>
-                <td class="description"><span>2</span> liten</td>
-                <td class="cat-lo @className(1, 2, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-21">12</td>
-                <td class="cat-lo @className(2, 2, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-22">22</td>
-                <td class="cat-lo @className(3, 2, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-23">32</td>
-                <td class="cat-hi @className(4, 2, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-24">42</td>
-            </tr>
-            <tr>
-                <td class="description"><span>1</span> ingen kjent</td>
-                <td class="cat-nk @className(1, 1, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-11">11</td>
-                <td class="cat-lo @className(2, 1, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-12">21</td>
-                <td class="cat-lo @className(3, 1, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-13">31</td>
-                <td class="cat-ph @className(4, 1, x, y, yhigherUncertainty, yLowerUncertainty )" id="risk-14">41</td>
-            </tr>
-            <tr>
-                <td class="description"></td>
-                <td class="description"></td>
-                <td class="description"><span>1</span> lite</td>
-                <td class="description"><span>2</span> begrensa</td>
-                <td class="description"><span>3</span> moderat</td>
-                <td class="description"><span>4</span> stor</td>
-            </tr>
-        <tr>
-            <td class="legend"></td>
-            <td></td>
-            <td colspan="4" class="legend">@xAxisLabel</td>
-        </tr>
-        </tbody>
-    </table>
-   <!--  <a class="info-link" href="/pages/239659" target="_blank">Forklaring på risikomatrisen</a>-->
-</figure>
+            </tbody>
+        </table>
+       <!--  <a class="info-link" href="/pages/239659" target="_blank">Forklaring på risikomatrisen</a>-->
+    </figure>
+</div>

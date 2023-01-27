@@ -1,17 +1,18 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class AttachmentRepository
     {
-
         private readonly IConfiguration _configuration;
         private BlobContainerClient _containerClient;
 
-        public BlobContainerClient ContainerClient
+        private BlobContainerClient ContainerClient
         {
             get
             {
@@ -29,12 +30,20 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             _configuration = configuration;
         }
         
-        public async Task<MemoryStream> GetFileStream(string path)
+        public async Task<Stream> GetFileStream(string path)
         {
-            var stream = new MemoryStream();
-            var response = await ContainerClient.GetBlobClient(path).DownloadToAsync(stream);
-            stream.Position = 0;
-            return stream;
+            var blobClient = ContainerClient.GetBlobClient(path);
+
+            try
+            {
+                var stream = await blobClient.OpenReadAsync();
+
+                return stream;
+            }
+            catch (RequestFailedException ex) when (ex.ErrorCode == BlobErrorCode.BlobNotFound)
+            {
+                return null;
+            }
         }
     }
 }

@@ -23,84 +23,110 @@
 }
 
 <div class="page_section" is-visible="@showCriteriaDocumentation"><br/>
-    <div is-visible="@showExpertSummary" class="collapsible initially_closed">
-        <div class="collapsible_header">
-             <h2 id="ExpertSummary">@Constants.HeadingsNO["ExpertSummary"]</h2>
-            <button class="hide" onclick="toggleCollapsible(this)">
-                <span class="material-icons expanded_icon">expand_less</span>
-                <span class="material-icons collapsed_icon">expand_more</span>
-            </button>
-        </div>
+    <div is-visible="@showExpertSummary">
+        <h2 id="ExpertSummary">@Constants.HeadingsNO["ExpertSummary"]</h2>
+           
         <div class="collapsible_content">
-            <div is-visible="@showSpeciesStatusDocumentation">
-                <h3>Generelt om @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
-                <div class="expert_Assessment">
+
+             <div is-visible="@showSpeciesStatusDocumentation" class="collapsible small-collapse initially_closed">
+                <div class="collapsible_header">
+                       <h3>Generelt om @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
+                    <button class="hide" onclick="toggleCollapsible(this)">
+                        <span class="material-icons expanded_icon">expand_less</span>
+                        <span class="material-icons collapsed_icon">expand_more</span>
+                    </button>
+                </div>
+                <div class="collapsible_content expert_Assessment">
                     <div class="expert_text">
                         @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)
                     </div>
                 </div>
             </div>
 
-            <div is-visible="@showUncertaintyStatusDescription">
-                <h3>Usikkerhet rundt etableringsklasse</h3>
-                <div class="expert_Assessment">
+             <div is-visible="@showUncertaintyStatusDescription" class="collapsible small-collapse initially_closed">
+                <div class="collapsible_header">
+                      <h3>Usikkerhet rundt etableringsklasse</h3>
+                    <button class="hide" onclick="toggleCollapsible(this)">
+                        <span class="material-icons expanded_icon">expand_less</span>
+                        <span class="material-icons collapsed_icon">expand_more</span>
+                    </button>
+                </div>
+                <div class="collapsible_content expert_Assessment">
                     <div class="expert_text">
-                        @Html.Raw(Model.UncertaintyStatusDescription)
+                       @Html.Raw(Model.UncertaintyStatusDescription)
                     </div>
                 </div>
             </div>
 
-            <div is-visible="@showDomesticSpreadDocumentation">
-                <h3>Utbredelse @evaluationContextText</h3>
-                <div class="expert_Assessment">
+            <div is-visible="@showDomesticSpreadDocumentation" class="collapsible small-collapse initially_closed">
+                <div class="collapsible_header">
+                     <h3>Utbredelse @evaluationContextText</h3>
+                    <button class="hide" onclick="toggleCollapsible(this)">
+                        <span class="material-icons expanded_icon">expand_less</span>
+                        <span class="material-icons collapsed_icon">expand_more</span>
+                    </button>
+                </div>
+                <div class="collapsible_content expert_Assessment">
                     <div class="expert_text">
-                        @Html.Raw(Model.CriteriaDocumentationDomesticSpread)
+                       @Html.Raw(Model.CriteriaDocumentationDomesticSpread)
                     </div>
                 </div>
             </div>
 
-            <div is-visible="@showSpreadWays">
-                <h3>Spredningsmåter</h3>
-                <div class="expert_Assessment" is-visible="@Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)">
+            <div is-visible="@showSpreadWays" class="collapsible small-collapse initially_closed">
+                <div class="collapsible_header">
+                    <h3>Spredningsmåter</h3>
+                    <button class="hide" onclick="toggleCollapsible(this)">
+                        <span class="material-icons expanded_icon">expand_less</span>
+                        <span class="material-icons collapsed_icon">expand_more</span>
+                    </button>
+                </div>
+                <div class="collapsible_content expert_Assessment">
                     <div class="expert_text">
-                        <p>
+                        <p is-visible="@Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)">
                             @Html.Raw(Model.SpreadIndoorFurtherInfo)
                         </p>
-                    </div>
-                </div>
-
-                <div class="expert_Assessment" is-visible="@(!string.IsNullOrEmpty(Model.SpreadIntroductionFurtherInfo))">
-                    <div class="expert_text">
-                        <p>
-                            @Html.Raw(Model.SpreadIntroductionFurtherInfo)
+                        <p is-visible="@(!string.IsNullOrEmpty(Model.SpreadIntroductionFurtherInfo))">
+                           @Html.Raw(Model.SpreadIntroductionFurtherInfo)
+                        </p>
+                        <p is-visible="@(!string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo))">
+                            @Html.Raw(Model.SpreadFurtherSpreadFurtherInfo)
                         </p>
                     </div>
                 </div>
+            </div>
 
-                <div class="expert_Assessment" is-visible="@(!string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo))">
+            <div is-visible="@showInvasionPotentialDocumentation" class="collapsible small-collapse initially_closed">
+                <div class="collapsible_header">
+                    <h3>Invasjonspotensial</h3>
+                    <button class="hide" onclick="toggleCollapsible(this)">
+                        <span class="material-icons expanded_icon">expand_less</span>
+                        <span class="material-icons collapsed_icon">expand_more</span>
+                    </button>
+                </div>
+                <div class="collapsible_content expert_Assessment">
                     <div class="expert_text">
-                        @Html.Raw(Model.SpreadFurtherSpreadFurtherInfo)
+                       @Html.Raw(Model.CriteriaDocumentationInvasionPotential)
                     </div>
                 </div>
             </div>
 
-            <div is-visible="@showInvasionPotentialDocumentation">
-                <h3>Invasjonspotensial</h3>
-                <div class="expert_Assessment">
+            <div is-visible="@showEcoEffectDocumentation" class="collapsible small-collapse initially_closed">
+                <div class="collapsible_header">
+                    <h3>Økologisk effekt</h3>
+                    <button class="hide" onclick="toggleCollapsible(this)">
+                        <span class="material-icons expanded_icon">expand_less</span>
+                        <span class="material-icons collapsed_icon">expand_more</span>
+                    </button>
+                </div>
+                <div class="collapsible_content expert_Assessment">
                     <div class="expert_text">
-                        @Html.Raw(Model.CriteriaDocumentationInvasionPotential)
+                      @Html.Raw(Model.CriteriaDocumentationEcoEffect)
                     </div>
                 </div>
             </div>
 
-            <div is-visible="@showEcoEffectDocumentation">
-                <h3>Økologisk effekt</h3>
-                <div class="expert_Assessment">
-                    <div class="expert_text">
-                        @Html.Raw(Model.CriteriaDocumentationEcoEffect)
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 </div>

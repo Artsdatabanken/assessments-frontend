@@ -120,3 +120,16 @@ ul {
     margin-top: 0;
     margin-bottom: 40px;
 }
+
+.collapsible.small-collapse {
+    margin-bottom: 4px;
+}
+
+.small-collapse .collapsible_header {
+    line-height: inherit;
+    padding: 0 8px;
+}
+
+.small-collapse:last-child{
+    margin-bottom: 40px;
+}

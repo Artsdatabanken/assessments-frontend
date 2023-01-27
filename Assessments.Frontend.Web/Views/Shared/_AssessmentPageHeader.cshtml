@@ -9,11 +9,11 @@
 }
 
 <div class="page-header">
-    <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.scientificNameViewModel"/>
+    <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.ScientificNameViewModel"/>
     <span>Gjelder for  </span>
     <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
         @assessmentArea.
         </span>
-    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.speciesGroupViewModel"/>
+    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel"/>
     <hr />
 </div>

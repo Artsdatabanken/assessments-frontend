@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Assessments.Mapping.AlienSpecies.Model
 {
     public class AlienSpeciesAssessment2023SpeciesSpeciesInteraction
-    {   
+    {
         /// <summary>
         /// The scientific name of the red listed species
         /// </summary>
@@ -23,7 +23,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The red list category of the species
         /// </summary>
-        public string RedListCategory { get; set; }
+        public RedlistCategory RedListCategory { get; set; }
 
         /// <summary>
         /// Whether the species is a key stone species or not
@@ -34,7 +34,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The strength of the interaction between the alien species and the red listed species
         /// </summary>
         public AlienSpeciesAssessment2023InteractionStrength InteractionStrength { get; set; }
-        
+
         /// <summary>
         /// The type of interaction/negative effect induced by the alien species on the red listed species
         /// </summary>
@@ -48,6 +48,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The assessment basis for the effects on the ecosystem
         /// </summary>
-        public List<AlienSpeciesAssessment2023Background> Background { get; set; } //public List<string> BasisOfAssessment { get; set; } = new List<string>();
+        public List<AlienSpeciesAssessment2023Background> Background { get; set; } 
     }
 }

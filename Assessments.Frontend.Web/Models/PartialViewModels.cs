@@ -1,3 +1,4 @@
+using Assessments.Frontend.Web.Infrastructure.Enums;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
@@ -9,9 +10,9 @@ namespace Assessments.Frontend.Web.Models
     {
         public string AssessmentArea { get; set; }
 
-        public ScientificNameViewModel scientificNameViewModel { get; set; }
+        public ScientificNameViewModel ScientificNameViewModel { get; set; }
 
-        public SpeciesGroupViewModel speciesGroupViewModel { get; set; }
+        public SpeciesGroupViewModel SpeciesGroupViewModel { get; set; }
     }
 
     public class CategoryBarListElement
@@ -90,6 +91,8 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         public bool HasIndoorProduction { get; set; }
+
+        public List<AlienSpeciesAssessment2023Pathways> ImportPathways { get; set; }
 
         public string MisidentifiedDescription { get; set; }
 
@@ -247,6 +250,8 @@ namespace Assessments.Frontend.Web.Models
 
     public class PageMenuViewModel
     {
+        public AssessmentType AssessmentType { get; set; }
+
         public int PageMenuContentId { get; set; }
 
         public string PageMenuExpandButtonText { get; set; }

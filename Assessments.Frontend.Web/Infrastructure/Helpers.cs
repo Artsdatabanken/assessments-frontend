@@ -391,7 +391,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             {CriteriaDocumentationEcoEffect, "Økologisk effekt"},
         };
 
-        // Nesting. Yes, go ahead, do this another way... but it works ;)
         public static Dictionary<string, Dictionary<string, string>> SubHeadingsNO = new Dictionary<string, Dictionary<string, string>>
         {
             {ExpertSummary, ExpertStatementSubHeadingsNO},
@@ -647,8 +646,9 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string NoLowerCategoryThan = "Arten kunne ikke ha fått lavere risikokategori enn ";
         public const string LowerCategoryThan = "Arten kunne ha fått lavere risikokategori enn ";
         public const string LowerCategoryThanEnding = "i deler av sitt potensielle forekomstareal.";
-// TODO: ADD THE LIST FOR GEOGRAPHIC CAUSES FOR RISK VARIATION
-
+        
+        public const string ImpactedNatureTypesDescription = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten i Norge. Hvis arten fører til endringer i naturtypen er det angitt.";
+        public const string ImpactedNatureTypesDescriptionSvalbard = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten på Svalbard. Hvis arten fører til endringer i naturtypen er det angitt.";
         public const string ImpactedNatureTypesTableTitle = "Valgte truede, sjeldne og øvrige naturtyper ";
         public const string ImpactedNatureTypesTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens(eventuelt framtidige) påvirkning i naturtypen og anslått andel av naturtypens areal som blir eller vil bli påvirket (F- og G-kriteriet).";
         public const string ImpactedNatureTypesTableColumn1 = "naturtype";

@@ -16,72 +16,66 @@
             return text.Replace("<br/>", "");
         }
     }
-    <div id="show_category_changed" class="collapsible initially_closed">
-        <div class="collapsible_header">
-            <h2 id=@pageName>@Constants.HeadingsNO[@pageName]</h2>
-            <button class="hide" onclick="toggleCollapsible(this)">
-                <span class="material-icons expanded_icon">expand_less</span>
-                <span class="material-icons collapsed_icon">expand_more</span>
-            </button>
-        </div>
-        <div class="collapsible_content">
-             <p is-visible="isSvalbard">
-                Naturtyper arten er observert i og/eller som er potensielle habitater for arten på Svalbard. Hvis arten fører til endringer i naturtypen er det angitt.
-            </p>
-            <p is-visible="!isSvalbard">
-                Naturtyper arten er observert i og/eller som er potensielle habitater for arten i Norge. Hvis arten fører til endringer i naturtypen er det angitt.
-            </p>
-            <p class="big-data-table table-description">
-                <b>@Constants.ImpactedNatureTypesTableTitle</b>
-                @Constants.ImpactedNatureTypesTableDescription
+    <div id="show_category_changed" >
+        <h2 id=@pageName>@Constants.HeadingsNO[@pageName]</h2>
+       
+        <p is-visible="isSvalbard">
+            @Constants.ImpactedNatureTypesDescriptionSvalbard
+        </p>
+        <p is-visible="!isSvalbard">
+            @Constants.ImpactedNatureTypesDescription
+        </p>
+        <p class="big-data-table table-description">
+            <b>@Constants.ImpactedNatureTypesTableTitle</b>
+            @Constants.ImpactedNatureTypesTableDescription
             
-            <table class="big-data-table">
-                <tr>
-                    <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
-                    <th>@Constants.ImpactedNatureTypesTableColumn2</th>
-                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
-                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
-                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
-                    <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
-                </tr>
-                @{
-                foreach (var natureType in natureTypes)
-                {
-                <tr>
-                    <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
-                    <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn2:</b>@natureType.TimeHorizon.DisplayName()</td>
-                    <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
-                    <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn4):</b>
-                    @{ 
-                        if(natureType.StateChange != null)
-                        { 
-                            <ul>
-                            @{
-                                foreach (var state in natureType.StateChange)
-                                {<li>@state.DisplayName()</li>}
+        <table class="big-data-table">
+            <tr>
+                <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
+                <th>@Constants.ImpactedNatureTypesTableColumn2</th>
+                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
+                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
+                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
+                <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
+            </tr>
+            @{
+            foreach (var natureType in natureTypes)
+            {
+            <tr>
+                <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
+                <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn2:</b>@natureType.TimeHorizon.DisplayName()</td>
+                <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
+                <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn4):</b>
+                @{ 
+                    if(natureType.StateChange != null)
+                    { 
+                        <ul>
+                        @{
+                            foreach (var state in natureType.StateChange)
+                            {<li>@state.DisplayName()</li>}
+                        }
+                        </ul>
+                    }
+                }
+                </td>
+                <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn5):</b>@natureType.AffectedArea</td>
+                <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn6:</b>
+                @{ 
+                    if(natureType.Background != null)
+                    { 
+                        <ul>
+                        @{
+                            foreach (var bg in natureType.Background)
+                            {<li>@bg.DisplayName()</li>}
                             }
-                            </ul>
-                        }
+                        </ul>
                     }
-                    </td>
-                    <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn5):</b>@natureType.AffectedArea</td>
-                    <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn6:</b>
-                    @{ 
-                        if(natureType.Background != null)
-                        { 
-                            <ul>
-                            @{
-                                foreach (var bg in natureType.Background)
-                                {<li>@bg.DisplayName()</li>}
-                                }
-                            </ul>
-                        }
-                    }
-                    </td>
-                </tr>
                 }
-                }
-            </table>
-        </div>
+                </td>
+            </tr>
+            }
+            }
+        </table>
     </div>
 </div>
+

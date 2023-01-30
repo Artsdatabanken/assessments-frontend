@@ -7,10 +7,6 @@
     var geographicVariation = Model.Assessment.GeographicalVariation;
     var geographicVariationDocumentation = Model.Assessment.GeographicalVariationDocumentation;
     var hasGeographicVariationDocumentation = geographicVariationDocumentation !=  "";
-    var hasFirstOption = geographicVariation.IndexOf("reproduksjonLimitedToCertainClimaticZones") != -1;
-    var hasSecondOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainClimaticZones") != -1;
-    var hasThirdOption = geographicVariation.IndexOf("ecologicalEffectLimitedToCertainNatureTypes") != -1;
-    var hasFourthOption = geographicVariation.IndexOf("RiskAssessmentGeographicalVariation ") != -1; 
     var hasCauses = geographicVariation.Count > 0;
     var causes = geographicVariation.Count;
     // TODO: correct space on 4th option when it's completed other places
@@ -26,37 +22,27 @@
             </button>
         </div>
         <div class="collapsible_content">
-
             <div is-visible="hasGeographicVariationInCategory">
                 <p>
-                    Arten kunne ha fått lavere risikokategori enn 
+                    Arten har geografisk variasjon i risiko, og kunne fått lavere risikokategori enn
                    <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category
                     i deler av sitt potensielle forekomstareal. 
-                   
                 </p>
-                 <h3  is-visible="hasCauses">Dette skyldes:</h3>
+                <h3  is-visible="hasCauses">Dette skyldes at:</h3>
                 <ul class="indented_list">
-                    <li is-visible="hasFirstOption">Artens evne til reproduksjon og/eller spredning er begrenset til visse bioklimatiske soner eller seksjoner </li>
-                    <li is-visible="hasSecondOption">Artens økologiske effekter er begrenset til visse bioklimatiske soner eller seksjoner</li>
-                    <li is-visible="hasThirdOption">Artens økologiske effekter er begrenset til bestemte naturtyper </li>
-                    <li is-visible="hasFourthOption">Artens økologiske effekt består utelukkende i interaksjoner med stedegne arter som har svært begrenset utbredelse </li>
+                    @foreach (var variation in Model.Assessment.GeographicalVariation)
+                    {
+                        <li>@variation.DisplayName()</li>
+                    }
                 </ul>
                 <br/>
-        
                 <p is-visible="hasGeographicVariationDocumentation">
-                    Nærmere beskrivelse av artens geografiske variasjon i risiko: @geographicVariationDocumentation
+                    Nærmere beskrivelse av artens geografiske variasjon i risiko: @Html.Raw(geographicVariationDocumentation)
                 </p>
             </div>
             <p is-visible="!hasGeographicVariationInCategory">
-                
-                Arten kunne ikke ha fått lavere risikokategori enn <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category i deler av sitt potensielle forekomstareal.
+                Arten er antatt å ha lik risikokategori i hele sitt potensielle forekomstareal.
             </p>
-        
         </div>
     </div>
 </div>
-
-
-
-
-

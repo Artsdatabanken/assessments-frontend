@@ -79,8 +79,10 @@ namespace Assessments.Frontend.Web.Controllers
 
             var attachment = assessment.Attachments.Single(x => x.Id == attachmentId);
 
-            var stream = await _attachmentRepository.GetFileStream(
-                DataFilenames.CalculateAlienSpecies2023AttachmentFilePath(attachmentId, attachment.FileName));
+            var stream = await _attachmentRepository.GetFileStream(DataFilenames.CalculateAlienSpecies2023AttachmentFilePath(attachmentId, attachment.FileName));
+
+            if (stream == null)
+                return NotFound();
             
             return new FileStreamResult(stream, attachment.MimeType)
             {

@@ -1,3 +1,4 @@
+using Assessments.Frontend.Web.Infrastructure.Enums;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
@@ -5,6 +6,13 @@ using System.Collections.Generic;
 
 namespace Assessments.Frontend.Web.Models
 {
+    public class AttachmentViewModel
+    {
+        public AlienSpeciesAssessment2023Attachment[] Attachments { get; set; }
+
+        public bool IsEvaluatedAtAnotherLever { get; set; }
+    }
+
     public class AssessmentPageHeaderViewModel
     {
         public string AssessmentArea { get; set; }
@@ -249,6 +257,8 @@ namespace Assessments.Frontend.Web.Models
 
     public class PageMenuViewModel
     {
+        public AssessmentType AssessmentType { get; set; }
+
         public int PageMenuContentId { get; set; }
 
         public string PageMenuExpandButtonText { get; set; }

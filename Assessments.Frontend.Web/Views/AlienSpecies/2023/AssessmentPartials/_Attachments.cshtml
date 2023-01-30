@@ -1,10 +1,11 @@
-﻿@model AlienSpeciesAssessment2023Attachment[];
-<h2>
-    Filvedlegg
-</h2>
-@{
-    // todo - make this great
-    foreach (var attachment in Model)
+﻿@model AttachmentViewModel;
+
+@if (!Model.IsEvaluatedAtAnotherLever && Model.Attachments != null && Model.Attachments.Count() != 0)
+{
+    <h2>
+        Filvedlegg
+    </h2>
+    @foreach (var attachment in Model.Attachments)
     {
         <a asp-controller="AlienSpecies" asp-action="Attachment" asp-route-attachmentId="@attachment.Id" asp-route-name="@attachment.FileName">Desc:@attachment.Description, Filename:@attachment.FileName, Mimetype:@attachment.MimeType, Id:@attachment.Id</a>
         <br />

@@ -157,10 +157,17 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// </summary>
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 
+
+
         /// <summary>
         /// Further information about the taxons' entry to indoor environments or its own production area from abroad
         /// </summary>
         public string SpreadIndoorFurtherInfo { get; set; }
+
+        /// <summary>
+        /// Further information about the taxons' introduction to Norwegian nature
+        /// </summary>
+        public string SpreadIntroductionFurtherInfo { get; set; }
 
         /// <summary>
         /// Taxonomy path
@@ -225,7 +232,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 
         /// </summary>
-        public List<string> GeographicalVariation { get; set; }
+        public List<AlienSpeciesAssessment2023GeographicalVariation> GeographicalVariation { get; set; }
 
         /// <summary>
         /// Further information about the geographic variance in category 
@@ -541,5 +548,25 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Reasoning behind the uncertainty related to the species impact(s) on Red-List assessed species that are neither threatened nor keystone
         /// </summary>
         public string EffectsOnOtherNativeSpeciesUncertaintyDocumentation { get; set; }
+
+        /// <summary>
+        ///The species' genetic contamination of Red-List assessed species through introgression
+        /// </summary>
+        public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> GeneticContamination { get; set; } = new();
+
+        /// <summary>
+        /// Reasoning behind the uncertainty related to the species' genetic contamination of Red-List assessed species
+        /// </summary>
+        public string GeneticContaminationUncertaintyDocumentation { get; set; }
+
+        /// <summary>
+        /// The species' transmission of parasites or pathogens to Red-List assessed species
+        /// </summary>
+        public List<AlienSpeciesAssessment2023ParasitePathogenTransmission> ParasitePathogenTransmission { get; set; } = new();
+
+        /// <summary>
+        /// Reasoning behind the uncertainty related to the species' transmission of parasites or pathogens to Red-List assessed species
+        /// </summary>
+        public string ParasitePathogenTransmissionUncertaintyDocumentation { get; set; }
     }
 }

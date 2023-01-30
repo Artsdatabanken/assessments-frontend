@@ -6,6 +6,13 @@ using System.Collections.Generic;
 
 namespace Assessments.Frontend.Web.Models
 {
+    public class AttachmentViewModel
+    {
+        public AlienSpeciesAssessment2023Attachment[] Attachments { get; set; }
+
+        public bool IsEvaluatedAtAnotherLever { get; set; }
+    }
+
     public class AssessmentPageHeaderViewModel
     {
         public string AssessmentArea { get; set; }

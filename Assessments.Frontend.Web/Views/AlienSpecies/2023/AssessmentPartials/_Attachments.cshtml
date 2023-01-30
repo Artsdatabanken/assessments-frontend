@@ -1,22 +1,22 @@
-﻿@model AlienSpeciesAssessment2023Attachment[];
 
-@{
-    var visible = Model.Count() > 0;
-}     
-<div is-visible="visible">
-    <h2 id="Attachments">@Constants.HeadingsNO["Attachments"]</h2>
-    @{
-        foreach (var attachment in Model)
-        {
-            <a asp-controller="AlienSpecies" asp-action="Attachment" 
-            asp-route-attachmentId="@attachment.Id" 
-            asp-route-name="@attachment.FileName">
-                Desc:@attachment.Description, 
-                Filename:@attachment.FileName, 
-                Mimetype:@attachment.MimeType, Id:@attachment.Id
-            </a>
-            <br />
-        }
+﻿@model AttachmentViewModel;
+
+@if (!Model.IsEvaluatedAtAnotherLever && Model.Attachments != null && Model.Attachments.Count() != 0)
+{
+    <h2>
+        Filvedlegg
+    </h2>
+    @foreach (var attachment in Model.Attachments)
+    {
+        <a asp-controller="AlienSpecies" 
+        asp-action="Attachment" 
+        sp-route-attachmentId="@attachment.Id" 
+        asp-route-name="@attachment.FileName">
+        Desc:@attachment.Description, 
+        Filename:@attachment.FileName, 
+        Mimetype:@attachment.MimeType, 
+        Id:@attachment.Id</a>
+        <br />
     }
 </div>
 

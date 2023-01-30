@@ -3,7 +3,8 @@
 
 @{
     var pageName = @Constants.ImpactedNatureTypes;
-    var showPage = Constants.showHeading(pageName, @Model.Assessment.Category);
+    //var showPage = Constants.showHeading(pageName, @Model.Assessment.Category);
+    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var natureTypes = Model.Assessment.ImpactedNatureTypes;
     var isSvalbard = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
 }

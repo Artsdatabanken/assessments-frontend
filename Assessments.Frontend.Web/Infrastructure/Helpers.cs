@@ -373,6 +373,30 @@ namespace Assessments.Frontend.Web.Infrastructure
             {ImpactedNatureTypes, "Naturtypetilhørighet"},
             {References, "Referanser"},
         };
+
+        public const string CriteriaDocumentationSpeciesStatus = "CriteriaDocumentationSpeciesStatus";
+        public const string UncertaintyStatusDescription = "UncertaintyStatusDescription";
+        public const string CriteriaDocumentationDomesticSpread = "CriteriaDocumentationDomesticSpread";
+        public const string SpreadWays = "SpreadWays";
+        public const string CriteriaDocumentationInvasionPotential = "CriteriaDocumentationInvasionPotential";
+        public const string CriteriaDocumentationEcoEffect = "CriteriaDocumentationEcoEffect";
+
+        public static Dictionary<string, string> ExpertStatementSubHeadingsNO = new Dictionary<string, string>
+        {
+            {CriteriaDocumentationSpeciesStatus, "Generelt om "},
+            {UncertaintyStatusDescription, "Usikkerhet rundt etableringsklasse"},
+            {CriteriaDocumentationDomesticSpread, "Utbredelse "},
+            {SpreadWays, "Spredningsmåter"},
+            {CriteriaDocumentationInvasionPotential, "Invasjonspotensial"},
+            {CriteriaDocumentationEcoEffect, "Økologisk effekt"},
+        };
+
+        // Nesting. Yes, go ahead, do this another way... but it works ;)
+        public static Dictionary<string, Dictionary<string, string>> SubHeadingsNO = new Dictionary<string, Dictionary<string, string>>
+        {
+            {ExpertSummary, ExpertStatementSubHeadingsNO},
+        };
+
         public static bool showHeading(string value, AlienSpeciesAssessment2023Category category)
         {            
             if (value == ImpactedNatureTypes || value == GeographicVariationInCategory)

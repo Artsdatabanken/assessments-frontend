@@ -94,6 +94,10 @@ ul {
     list-style-position: inside;
 }
 
+li ul{
+    margin-left:8px;
+}
+
 /* MAP FOR FA ONLY */
 .triple_map{
     display:flex;

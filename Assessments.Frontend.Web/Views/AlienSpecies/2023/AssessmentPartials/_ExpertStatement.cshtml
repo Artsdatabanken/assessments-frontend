@@ -25,8 +25,10 @@
 }
 
 <div class="page_section" is-visible="@showCriteriaDocumentation"><br/>
-    <h2 id="ExpertSummary">@Constants.HeadingsNO["ExpertSummary"]</h2>    
-
+    <div class="page_section_header">
+        <h2 id="ExpertSummary">@Constants.HeadingsNO["ExpertSummary"] </h2>    
+        <a href="#@Constants.TableOfContents">Tilbake til toppen</a>
+    </div>
     <div is-visible="@showExpertSummary">
         <div is-visible="@showSpeciesStatusDocumentation">               
             <h3 id="@Constants.CriteriaDocumentationSpeciesStatus">@subheadingsList[Constants.CriteriaDocumentationSpeciesStatus]

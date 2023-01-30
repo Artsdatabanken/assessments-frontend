@@ -137,3 +137,29 @@ li ul{
 .small-collapse:last-child{
     margin-bottom: 40px;
 }
+
+.page_section_header{
+    display:flex;
+}
+
+.page_section_header h2 {
+    display:inline-block;
+    width: calc(100% - 125px);
+}
+
+.page_section_header a{
+    margin-top:40px;
+    padding-top:8px;
+    
+}
+
+@media only screen and (max-width: 740px) {
+    .page_section_header h2 {
+        width: auto;
+        flex-grow:1;
+    }
+    .page_section_header a {
+        max-width:20%;
+        text-align:center
+    }
+}

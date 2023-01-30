@@ -350,15 +350,17 @@
         </div >
 
         <div class="collapsible_content">
+            <p>Artens risikokategori bestemmes av artens skår på to akser, invasjonspotensial (x-aksen) og økologisk effekt (y-aksen).</p>
             <div id="risk_category_explanation">
                <button id="risk_category_explanation_button_1" class="changetab active" onclick="selectTab('risk_category_explanation_button_1', 'risk_category_explanation_tab_block_1' , 'risk_category_explanation' )">Avgjørende kriterier</button>
-               <button id="risk_category_explanation_button_2" class="changetab" onclick="selectTab('risk_category_explanation_button_2', 'risk_category_explanation_tab_block_2' , 'risk_category_explanation' )">Øvrige brukte kriterier</button>
+               <button id="risk_category_explanation_button_2" class="changetab" onclick="selectTab('risk_category_explanation_button_2', 'risk_category_explanation_tab_block_2' , 'risk_category_explanation' )">Øvrige kriterier</button>
                <div class="tabbed_element_container assessment_tabs">
                    <div id="risk_category_explanation_tab_block_1">
                        <div is-visible="showIsNk">
-                           Arten har <i>ingen kjent risiko</i> (NK) og dermed ingen utslag på noen kriterier. Se fanen Øvrige brukte kriterier.
+                            Arten er vurdert til <i>ingen kjent risiko</i> NK og har dermed ingen avgjørende kriterier.
                        </div>
                        <div is-visible="!showIsNk">
+                           <p>Kriteriene arten skårer høyest på for hver av de to aksene. <a href="">Les mer om kriteriene@{ /*TODO: add link when there is one*/ }</a></p>
                             <h3>Invasjonspotensial</h3>
                             <div>
                                 <div is-visible="showLowInvasionPotential">
@@ -721,6 +723,7 @@
 
                    <div id="risk_category_explanation_tab_block_2">
                        <div>
+                            <p>Øvrige kriterier som gir utslag, men som ikke påvirker artens risikokategori. <a href="">Les mer om kriteriene@{ /*TODO: add link when there is one*/ }</a></p>
                             <h3>Invasjonspotensial</h3>
                             <div>
                                 innsett andre kriterier med informasjon

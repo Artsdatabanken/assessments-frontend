@@ -40,8 +40,8 @@
     var isEstimatedIncreaseInAOODoorKnockers = Model.Assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOODoorKnockers;
 
     var showNoEcologicalEffect = Model.Assessment.ScoreEcologicalEffect == 1;
-    var showFTable = Model.Assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == true && x.AffectedArea != "0.0");
-    var showGTable = Model.Assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == false && x.AffectedArea != "0.0");
+    var showFTable = Model.Assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == true && HasAffectedArea(x.AffectedArea));
+    var showGTable = Model.Assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == false && HasAffectedArea(x.AffectedArea));
 
     int GetUncertaintyValueMinMax(int value, int uncertainty)
     {
@@ -61,6 +61,16 @@
     bool HasUncertainty(AlienSpeciesAssessment2023Criterion uncertainty)
     {
         return GetUncertaintyLow(uncertainty) != 0 || GetUncertaintyHigh(uncertainty) != 0;
+    }
+
+    bool HasAffectedArea(string affectedArea)
+    {
+        float area;
+        if (float.TryParse(affectedArea, out area))
+        {
+            return area != (float)0;
+        }
+        return true;
     }
 
     void GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion)
@@ -280,7 +290,7 @@
         }
     }
 
-    void GetFGTable()
+    void GetFGTable(bool shouldBeThreatened)
     {
         <table class="numbers-table">
             <caption>Øvrige naturtyper  som påvirkes av arten</caption>
@@ -291,7 +301,7 @@
                 <td><b>Tydelig påvirka areal (%)</b></td>
                 <td><b>Vurderingsgrunnlag</b></td>
             </tr>
-            @foreach (var natureType in Model.Assessment.ImpactedNatureTypes)
+            @foreach (var natureType in Model.Assessment.ImpactedNatureTypes.Where(x => x.IsThreatened == shouldBeThreatened && HasAffectedArea(x.AffectedArea)))
             {
                 <tr>
                     <td>@natureType.Name</td>
@@ -670,7 +680,7 @@
                                         <div class="collapsible_content">
                                             <div is-visible="showFTable">
                                                 @{
-                                                    GetFGTable();
+                                                    GetFGTable(true);
                                                 }
                                             </div>
                                             <p is-visible="!string.IsNullOrEmpty(Model.Assessment.ThreatenedNatureTypesAffectedDomesticDescription)">
@@ -695,7 +705,7 @@
                                         <div class="collapsible_content">
                                             <div is-visible="showGTable">
                                                 @{
-                                                    GetFGTable();
+                                                    GetFGTable(false);
                                                 }
                                             </div>
                                             <p is-visible="!string.IsNullOrEmpty(Model.Assessment.CommonNatureTypesAffectedDomesticDescription)">

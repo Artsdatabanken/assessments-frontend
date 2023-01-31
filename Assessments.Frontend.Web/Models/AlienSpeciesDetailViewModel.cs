@@ -52,7 +52,7 @@ namespace Assessments.Frontend.Web.Models
 
             ReferenceViewModel = new ReferenceViewModel
             {
-                IsCollapsible = true,
+                HasBackToTopLink = true,
                 References = assessment.References.Select(x => new CommonSimpleReference
                 {
                     ReferenceId = x.ReferenceId,

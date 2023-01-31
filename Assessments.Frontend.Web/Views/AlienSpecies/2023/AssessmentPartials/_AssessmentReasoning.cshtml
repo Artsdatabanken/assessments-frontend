@@ -1,8 +1,6 @@
 ﻿@model ExpertStatementViewModel
 
 @{
-    var showReasoning = Model.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR ||
-                Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var showChangedAssessment = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie;
     var showChangedFromAlien = Model.ChangedFromAlien != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ChangedFromAlien.Unknown;
     var showAlienStatusExplanation = !string.IsNullOrEmpty(Model.AlienStatusExplanation);
@@ -12,9 +10,8 @@
     var isMisidentified = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified;
 }
 
-<div id="show_assessment_reasoning" class="page_section" is-visible="@showReasoning">
-    <h2>@Constants.HeadingsNO["AssesmentReasoning"]</h2>
-
+<div id="@Constants.HeadingsIds.AssesmentReasoning">
+    <h2>@Constants.HeadingsNo.AssesmentReasoning</h2>
     <div class="expert_Assessment">
         <div class="expert_text">
             <div is-visible="isMisidentified">@Html.Raw(Model.MisidentifiedDescription)</div>

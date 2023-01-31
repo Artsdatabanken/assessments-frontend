@@ -60,7 +60,12 @@
     }
 }
 
-<h2 id="feedback">Tilbakemelding</h2>
+<div class="page_section_header" id="Feedback" is-visible="Model.HasBackToTopLink">
+    <h2>Tilbakemelding</h2>
+    <a href="#@Constants.TableOfContents">Tilbake til toppen</a>
+</div>
+<h2 id="Feedback" is-visible="!Model.HasBackToTopLink">Tilbakemelding</h2>
+
 
 @if (validationCodeIsInvalid)
 {

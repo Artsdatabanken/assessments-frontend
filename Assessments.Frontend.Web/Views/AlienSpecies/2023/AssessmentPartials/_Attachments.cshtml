@@ -1,24 +1,16 @@
 
 @model AttachmentViewModel;
 
-@{
-    if (!Model.IsEvaluatedAtAnotherLever && Model.Attachments != null && Model.Attachments.Count() != 0)
-    {       
-        <h2 id="@Constants.Attachments">@Constants.HeadingsNO[Constants.Attachments]</h2>
-        @foreach (var attachment in Model.Attachments)
-        {
-            <a asp-controller="AlienSpecies" 
-            asp-action="Attachment" 
-            sp-route-attachmentId="@attachment.Id" 
-            asp-route-name="@attachment.FileName">
-            Desc:@attachment.Description, 
-            Filename:@attachment.FileName, 
-            Mimetype:@attachment.MimeType, 
-            Id:@attachment.Id</a>
-            <br />
-        }        
-    }
-}
-    
-
-
+<h2 id="@Constants.HeadingsIds.Attachments">@Constants.HeadingsNo.Attachments</h2>
+@foreach (var attachment in Model.Attachments)
+{
+    <a asp-controller="AlienSpecies" 
+    asp-action="Attachment" 
+    sp-route-attachmentId="@attachment.Id" 
+    asp-route-name="@attachment.FileName">
+    Desc:@attachment.Description, 
+    Filename:@attachment.FileName, 
+    Mimetype:@attachment.MimeType, 
+    Id:@attachment.Id</a>
+    <br />
+}        

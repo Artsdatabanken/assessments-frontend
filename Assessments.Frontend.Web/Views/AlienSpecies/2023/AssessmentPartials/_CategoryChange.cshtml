@@ -22,8 +22,11 @@
     var showReasonsForChangeDescription = !wasNr2018 && !showSameAs2018 && !string.IsNullOrEmpty(Model.Assessment.ReasonsForChangeOfCategoryDescription);
 }
 
-<div id="page_section" >
-    <h2 id="@Constants.HeadingsNO[Constants.CategoryChange]">@Constants.HeadingsNO[Constants.CategoryChange]</h2>
+<div id="@Constants.HeadingsIds.CategoryChange">
+    <div class="page_section_header">
+        <h2>@Constants.HeadingsNo.CategoryChange</h2>
+        <a href="#@Constants.TableOfContents">Tilbake til toppen</a>
+    </div>
     <p is-visible="showNotAssessed2018">
         @Constants.CategoryChangeNotAssessed2018
     </p>

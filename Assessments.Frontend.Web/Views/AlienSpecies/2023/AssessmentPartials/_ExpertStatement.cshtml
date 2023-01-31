@@ -2,8 +2,6 @@
 
 @{
     var evaluationContextText = Model.EvaluationContext == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.N ? "i Norge" : "på Svalbard";
-    var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR &&
-                Model.AlienSpeciesCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var showSpeciesStatusDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
     var showUncertaintyStatusDescription = !string.IsNullOrEmpty(Model.UncertaintyStatusDescription);
     var showDomesticSpreadDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationDomesticSpread);
@@ -24,9 +22,9 @@
     var subheadingsList = Constants.ExpertStatementSubHeadingsNO;
 }
 
-<div class="page_section" is-visible="@showCriteriaDocumentation"><br/>
+<div id="@Constants.HeadingsIds.ExpertSummary">
     <div class="page_section_header">
-        <h2 id="ExpertSummary">@Constants.HeadingsNO["ExpertSummary"] </h2>    
+        <h2>@Constants.HeadingsNo.ExpertSummary</h2>
         <a href="#@Constants.TableOfContents">Tilbake til toppen</a>
     </div>
     <div is-visible="@showExpertSummary">

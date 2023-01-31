@@ -14,7 +14,11 @@
 
 @if (!string.IsNullOrEmpty(Model.ExpertGroupMembers))
 {
-<h2>Sitering</h2>
+    <div class="page_section_header" is-visible="Model.HasBackToTopLink" id="@Constants.HeadingsIds.Citation">
+        <h2>@Constants.HeadingsNo.Citation</h2>
+        <a href="#@Constants.TableOfContents">Tilbake til toppen</a>
+    </div>
+    <h2 is-visible="!Model.HasBackToTopLink">@Constants.HeadingsNo.Citation</h2>
     <p class="citation">
         @Model.ExpertGroupMembers
         (@date).

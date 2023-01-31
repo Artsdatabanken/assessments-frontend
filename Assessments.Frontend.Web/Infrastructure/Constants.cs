@@ -37,23 +37,42 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string ImpactedNatureTypes = "ImpactedNatureTypes";
         public const string References = "References";
 
-
-        public static readonly Dictionary<string, string> HeadingsNO = new()
+        public class HeadingsNo
         {
-            {RiskMatrix, "Risikomatrisen"},
-            {Conclusion, "Konklusjon"},
-            {TableOfContents, "Innhold"},
-            {ExpertSummary, "Ekspertenes oppsummering"},
-            {AssesmentReasoning, "Begrunnelse"},
-            {RiskCategoryExplanation, "Hva forklarer artens risikokategori"},
-            {CategoryChange, "Endring av risikokategori fra 2018"},
-            {ClimateEffectsInvationpotential, "Effekt av klimaendringer"},
-            {GeographicVariationInCategory, "Geografisk variasjon i risiko"},
-            {RegionalSpread, "Utbredelse"},
-            {Attachments, "Filvedlegg"},
-            {ImpactedNatureTypes, "Naturtypetilhørighet"},
-            {References, "Referanser"},
-        };
+            public static readonly string Citation = "Sitering";
+            public static readonly string RiskMatrix = "Risikomatrisen";
+            public static readonly string Conclusion = "Konklusjon";
+            public static readonly string TableOfContents = "Innhold";
+            public static readonly string ExpertSummary = "Ekspertenes oppsummering";
+            public static readonly string AssesmentReasoning = "Begrunnelse";
+            public static readonly string RiskCategoryExplanation = "Hva forklarer artens risikokategori";
+            public static readonly string CategoryChange = "Endring av risikokategori fra 2018";
+            public static readonly string ClimateEffectsInvationpotential = "Effekt av klimaendringer";
+            public static readonly string GeographicVariationInCategory = "Geografisk variasjon i risiko";
+            public static readonly string RegionalSpread = "Utbredelse";
+            public static readonly string Attachments = "Filvedlegg";
+            public static readonly string ImpactedNatureTypes = "Naturtypetilhørighet";
+            public static readonly string References = "Referanser";
+        }
+
+        public class HeadingsIds
+        {
+            public static readonly string Citation = "Citation";
+            public static readonly string RiskMatrix = "RiskMatrix";
+            public static readonly string Conclusion = "Conclusion";
+            public static readonly string TableOfContents = "TableOfContents";
+            public static readonly string ExpertSummary = "ExpertSummary";
+            public static readonly string AssesmentReasoning = "AssesmentReasoning";
+            public static readonly string RiskCategoryExplanation = "RiskCategoryExplanation";
+            public static readonly string CategoryChange = "CategoryChange";
+            public static readonly string ClimateEffectsInvationpotential = "ClimateEffectsInvationpotential";
+            public static readonly string GeographicVariationInCategory = "GeographicVariationInCategory";
+            public static readonly string RegionalSpread = "RegionalSpread";
+            public static readonly string Attachments = "Attachments";
+            public static readonly string ImpactedNatureTypes = "ImpactedNatureTypes";
+            public static readonly string References = "References";
+        }
+
 
         public const string CriteriaDocumentationSpeciesStatus = "CriteriaDocumentationSpeciesStatus";
         public const string UncertaintyStatusDescription = "UncertaintyStatusDescription";

@@ -2,18 +2,16 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
+    var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
+    var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";
 }
 
-<div class="page_section" is-visible="@showPage">
-    @{
-        var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
-        var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
-        var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";
-    }
-    <h2 id="ClimateEffectsInvationpotential">
-        @Constants.HeadingsNO["ClimateEffectsInvationpotential"]
-    </h2>
+<div id="@Constants.HeadingsIds.ClimateEffectsInvationpotential">
+    <div class="page_section_header">
+        <h2>@Constants.HeadingsNo.ClimateEffectsInvationpotential</h2>
+        <a href="#@Constants.TableOfContents">Tilbake til toppen</a>
+    </div>
 
     <div is-visible="hasClimateEffectsInvasionpotential == hasClimateEffectsEcoEffect">
         <p is-visible="!hasClimateEffectsInvasionpotential">

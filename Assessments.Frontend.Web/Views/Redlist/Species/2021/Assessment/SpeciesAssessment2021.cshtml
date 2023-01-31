@@ -50,6 +50,7 @@
         AssessmentYear = Model.AssessmentYear,
         ExpertCommittee = Model.ExpertCommittee,
         FirstPublished = Constants.RedlistSpecies2021FirstPublished,
+        HasBackToTopLink = false,
         PublicationText = ViewBag.glossary["pagetitle"]["title"] + ". " + ViewBag.glossary["adb"] + ". ",
         RevisionDate = Model.RevisionDate,
         RevisionReason = Model.RevisionReason,
@@ -154,7 +155,7 @@
 
     var referenceViewModel = new ReferenceViewModel
     {
-        IsCollapsible = false,
+        HasBackToTopLink = false,
         References = Model.References.Select(x => new CommonSimpleReference
         {
             Type = x.Type,

@@ -2,45 +2,42 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var pageName = @Constants.ImpactedNatureTypes;
-    //var showPage = Constants.showHeading(pageName, @Model.Assessment.Category);
-    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var natureTypes = Model.Assessment.ImpactedNatureTypes;
     var isSvalbard = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
+
+    string removeLineBreaksForMobile(string text){
+        return text.Replace("<br/>", "");
+    }
 }
 
-<div is-visible="showPage" class="page_section">
-
-    @functions{
-        string removeLineBreaksForMobile(string text){
-            return text.Replace("<br/>", "");
-        }
-    }
-    <div id="show_category_changed" >
-        <h2 id=@pageName>@Constants.HeadingsNO[@pageName]</h2>
+<div id="@Constants.HeadingsIds.ImpactedNatureTypes">
+    <div class="page_section_header">
+        <h2>@Constants.HeadingsNo.ImpactedNatureTypes</h2>
+        <a href="#@Constants.TableOfContents">Tilbake til toppen</a>
+    </div>
        
-        <p is-visible="isSvalbard">
-            @Constants.ImpactedNatureTypesDescriptionSvalbard
-        </p>
-        <p is-visible="!isSvalbard">
-            @Constants.ImpactedNatureTypesDescription
-        </p>
-        <p class="big-data-table table-description">
-            <b>@Constants.ImpactedNatureTypesTableTitle</b>
-            @Constants.ImpactedNatureTypesTableDescription
+    <p is-visible="isSvalbard">
+        @Constants.ImpactedNatureTypesDescriptionSvalbard
+    </p>
+    <p is-visible="!isSvalbard">
+        @Constants.ImpactedNatureTypesDescription
+    </p>
+    <p class="big-data-table table-description">
+        <b>@Constants.ImpactedNatureTypesTableTitle</b>
+        @Constants.ImpactedNatureTypesTableDescription
             
-        <table class="big-data-table">
-            <tr>
-                <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
-                <th>@Constants.ImpactedNatureTypesTableColumn2</th>
-                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
-                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
-                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
-                <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
-            </tr>
-            @{
-            foreach (var natureType in natureTypes)
-            {
+    <table class="big-data-table">
+        <tr>
+            <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
+            <th>@Constants.ImpactedNatureTypesTableColumn2</th>
+            <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
+            <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
+            <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
+            <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
+        </tr>
+        @{
+        foreach (var natureType in natureTypes)
+        {
             <tr>
                 <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
                 <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn2:</b>@natureType.TimeHorizon.DisplayName()</td>
@@ -74,8 +71,6 @@
                 </td>
             </tr>
             }
-            }
-        </table>
-    </div>
+        }
+    </table>
 </div>
-

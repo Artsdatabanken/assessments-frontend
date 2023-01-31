@@ -4,18 +4,14 @@
     var showCriteriaDocumentation = Model.Category != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR &&
                 Model.AlienSpeciesCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
-    var showConclusion = !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
-
+    var showConclusion = showCriteriaDocumentation && !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
 }
 
-<div class="page_section" is-visible="@showCriteriaDocumentation">
-    <div id="show_conclusion" is-visible="@showConclusion">
-        <h2 id="Conclusion">@Constants.HeadingsNO["Conclusion"]</h2>
-        <div class="expert_Assessment">
-            <div class="expert_text">
-                @Html.Raw(Model.CriteriaDocumentation)
-            </div>
+<div class="page_section" id="@Constants.HeadingsIds.Conclusion" is-visible="@showConclusion">
+    <h2>@Constants.HeadingsNo.Conclusion</h2>
+    <div class="expert_Assessment">
+        <div class="expert_text">
+            @Html.Raw(Model.CriteriaDocumentation)
         </div>
     </div>
 </div>
-

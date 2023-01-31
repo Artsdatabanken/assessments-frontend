@@ -37,7 +37,7 @@
 
     var citationViewModel = new CitationForAssessmentViewModel
     {
-        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {Helpers.getScientificNameElement(assessment.ScientificName)} for {assessment.EvaluationContext.DisplayName()}",
+        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {Helpers.GetScientificNameElement(assessment.ScientificName)} for {assessment.EvaluationContext.DisplayName()}",
         AssessmentYear = 2023, // TODO: add year when it comes into model
         ExpertCommittee = assessment.ExpertGroup,
         FirstPublished = Constants.RedlistSpecies2021FirstPublished,

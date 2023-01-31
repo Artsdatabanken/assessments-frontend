@@ -8,36 +8,36 @@
 
     @if (Model.Category != "NE" && Model.Category != "NA")
     {
-        @if (Helpers.isNotEmpty(Model.ProportionOfMaxPopulation) ||
-        Helpers.isNotEmpty(Model.PercentageEuropeanPopulation) ||
-        Helpers.isNotEmpty(Model.PercentageGlobalPopulation))
+        @if (Helpers.IsNotEmpty(Model.ProportionOfMaxPopulation) ||
+        Helpers.IsNotEmpty(Model.PercentageEuropeanPopulation) ||
+        Helpers.IsNotEmpty(Model.PercentageGlobalPopulation))
         {
 
             <h3>@ViewBag.glossary["populationsize"]["title"]</h3>
 
             <p>
                 @{string description = ViewBag.glossary["populationsize"]["description"];}
-                @Html.Raw(Helpers.fixSpeciesLevel(description, Model.TaxonRank))
+                @Html.Raw(Helpers.FixSpeciesLevel(description, Model.TaxonRank))
             </p>
 
             <h4>@ViewBag.glossary["populationsize"]["subtitle"]</h4>
 
             <ul>
-                @if (Helpers.isNotEmpty(Model.ProportionOfMaxPopulation))
+                @if (Helpers.IsNotEmpty(Model.ProportionOfMaxPopulation))
                 {
                     <li>
                         <span>@Model.ProportionOfMaxPopulation</span>
                         <span>@ViewBag.glossary["populationsize"]["AndelNåværendeBestand"]</span>
                     </li>
                 }
-                @if (Helpers.isNotEmpty(Model.PercentageEuropeanPopulation))
+                @if (Helpers.IsNotEmpty(Model.PercentageEuropeanPopulation))
                 {
                     <li>
                         <span>@Model.PercentageEuropeanPopulation</span>
                         <span>@ViewBag.glossary["populationsize"]["MaxAndelAvEuropeiskBestand"]</span>
                     </li>
                 }
-                @if (Helpers.isNotEmpty(Model.PercentageGlobalPopulation))
+                @if (Helpers.IsNotEmpty(Model.PercentageGlobalPopulation))
                 {
                     <li>
                         <span>@Model.PercentageGlobalPopulation</span>

@@ -9,7 +9,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class Helpers
     {
-        private static Dictionary<string, string> _ranks = new Dictionary<string, string>
+        private static readonly Dictionary<string, string> _ranks = new()
         {
             { "Species", "Art" },
             { "SubSpecies", "Underart" },
@@ -27,12 +27,12 @@ namespace Assessments.Frontend.Web.Infrastructure
             return value;
         }
 
-        public static string[] findSelectedRedlistSpeciesCategories(bool redlisted, bool endangered,
+        public static string[] FindSelectedRedlistSpeciesCategories(bool redlisted, bool endangered,
             string[] categoriesSelected)
         {
-            List<string> selectedCategories = new List<string>();
+            List<string> selectedCategories = new();
 
-            List<string> redlist = new List<string>
+            List<string> redlist = new()
             {
                 Constants.SpeciesCategories.Extinct.ShortHand,
                 Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
@@ -42,7 +42,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                 Constants.SpeciesCategories.DataDeficient.ShortHand
             };
 
-            List<string> endangeredList = new List<string>
+            List<string> endangeredList = new()
             {
                 Constants.SpeciesCategories.CriticallyEndangered.ShortHand,
                 Constants.SpeciesCategories.Endangered.ShortHand,
@@ -65,10 +65,10 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedCategories.ToArray();
         }
 
-        public static string[] getAllSpeciesGroups(Dictionary<string, Dictionary<string, string>> speciesGroups)
+        public static string[] GetAllSpeciesGroups(Dictionary<string, Dictionary<string, string>> speciesGroups)
         {
             var insectArray = Constants.AllInsects;
-            List<string> allSpecies = new List<string>();
+            List<string> allSpecies = new();
             foreach (var species in speciesGroups)
                 if (!insectArray.Contains(species.Key))
                     allSpecies.Add(species.Key);
@@ -76,7 +76,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return allSpecies.OrderBy(x => x).ToArray();
         }
 
-        public static string[] getSelectedSpeciesGroups(List<string> species)
+        public static string[] GetSelectedSpeciesGroups(List<string> species)
         {
             if (species.Contains("Insekter"))
                 foreach (var insect in Constants.AllInsects)
@@ -86,11 +86,11 @@ namespace Assessments.Frontend.Web.Infrastructure
             return species.ToArray();
         }
 
-        public static Dictionary<string, string> getRegionsDict()
+        public static Dictionary<string, string> GetRegionsDict()
         {
             var regionNames = SortedRegions().ToArray();
 
-            Dictionary<string, string> allRegions = new Dictionary<string, string>();
+            Dictionary<string, string> allRegions = new();
             for (int i = 0; i < regionNames.Length; i++)
             {
                 allRegions.Add($"{i}", regionNames[i]);
@@ -98,7 +98,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return allRegions;
         }
 
-        public static NameValueCollection removeFiltersFromQuery(NameValueCollection queryParams)
+        public static NameValueCollection RemoveFiltersFromQuery(NameValueCollection queryParams)
         {
             queryParams.Remove(nameof(RL2021ViewModel.Area));
             queryParams.Remove(nameof(RL2021ViewModel.Category));
@@ -116,7 +116,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return queryParams;
         }
 
-        public static IQueryable<SpeciesAssessment2021> sortResults(IQueryable<SpeciesAssessment2021> query, string name, string sortBy)
+        public static IQueryable<SpeciesAssessment2021> SortResults(IQueryable<SpeciesAssessment2021> query, string name, string sortBy)
         {
             switch ((string.IsNullOrEmpty(name), sortBy))
             {
@@ -175,9 +175,9 @@ namespace Assessments.Frontend.Web.Infrastructure
             return query;
         }
 
-        public static string[] findSelectedRegions(string[] selectedRegions, Dictionary<string, string> allRegions)
+        public static string[] FindSelectedRegions(string[] selectedRegions, Dictionary<string, string> allRegions)
         {
-            List<string> regions = new List<string>();
+            List<string> regions = new();
             foreach (var region in selectedRegions)
             {
                 regions.Add(allRegions[region]);
@@ -202,9 +202,9 @@ namespace Assessments.Frontend.Web.Infrastructure
         /// </summary>
         public static List<string> SortedRegions() => new() { "Østfold", "Oslo og Akershus", "Hedmark", "Oppland", "Buskerud", "Vestfold", "Telemark", "Aust-Agder", "Vest-Agder", "Rogaland", "Hordaland", "Sogn og Fjordane", "Møre og Romsdal", "Trøndelag", "Nordland", "Troms", "Finnmark", "Svalbard", "Jan Mayen", "Nordsjøen", "Norskehavet", "Barentshavet sør", "Barentshavet nord og Polhavet", "Grønlandshavet" };
 
-        public static string[] findEuropeanPopProcentages(string[] europeanPopulation)
+        public static string[] FindEuropeanPopProcentages(string[] europeanPopulation)
         {
-            List<string> selectedPercenteges = new List<string>();
+            List<string> selectedPercenteges = new();
 
             foreach (var item in europeanPopulation)
             {
@@ -224,12 +224,12 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedPercenteges.ToArray();
         }
 
-        public static Dictionary<string, string> getAllTaxonRanks()
+        public static Dictionary<string, string> GetAllTaxonRanks()
         {
             return _ranks;
         }
 
-        public static bool isNotEmpty(string key)
+        public static bool IsNotEmpty(string key)
         {
             if (key != null && key != " " && key != "-" && key != "" && key != "Helt ukjent")
             {
@@ -238,7 +238,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return false;
         }
 
-        public static string findDegrees(string category, bool parenthesis)
+        public static string FindDegrees(string category, bool parenthesis)
         {
             string text = "";
             if (category.Length > 2)
@@ -253,7 +253,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return text;
         }
 
-        public static string getScientificNameElement(string scientificName)
+        public static string GetScientificNameElement(string scientificName)
         {
             scientificName = "<i>" + scientificName + "</i>";
             scientificName = scientificName.Replace("×", "</i>×<i>");
@@ -269,13 +269,13 @@ namespace Assessments.Frontend.Web.Infrastructure
             return scientificName;
         }
 
-        public static string getPublishedDate(int assesmentyear, int yearPreviousAssessment, string firstPublished)
+        public static string GetPublishedDate(int assesmentyear, int yearPreviousAssessment, string firstPublished)
         {
             firstPublished = assesmentyear == 2010 ? yearPreviousAssessment.ToString() : firstPublished;
             return firstPublished;
         }
 
-        public static string getRevisionDate(DateTime RevisionDate, string firspublished)
+        public static string GetRevisionDate(DateTime RevisionDate, string firspublished)
         {
             if (RevisionDate.Date.ToShortDateString() != firspublished && RevisionDate != default)
             {
@@ -284,7 +284,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return string.Empty;
         }
 
-        public static string fixSpeciesLevel(string replacestring, string rang)
+        public static string FixSpeciesLevel(string replacestring, string rang)
         {
             var subSpecies = "Underart";
             var species = "Art";
@@ -316,13 +316,13 @@ namespace Assessments.Frontend.Web.Infrastructure
                 24 => "Varietet",
                 _ => "Art"
             };
-            return Helpers.fixSpeciesLevel(replaceString, stringRank);
+            return Helpers.FixSpeciesLevel(replaceString, stringRank);
         }
     }
 
     public class CategoryComparer : IComparer<string>
     {
-        private string[] categories = new string[]
+        private readonly string[] categories = new string[]
         {
                     "RE", "CR", "EN", "VU", "NT", "DD", "LC", "NA", "NE"
         };
@@ -331,7 +331,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
                 return 0;
 
-            return Array.IndexOf(categories, x.Substring(0, 2)) - Array.IndexOf(categories, y.Substring(0, 2));
+            return Array.IndexOf(categories, x[..2]) - Array.IndexOf(categories, y[..2]);
         }
     }
 }

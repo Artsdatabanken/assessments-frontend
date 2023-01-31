@@ -151,7 +151,7 @@
             @foreach (var impact in impacts)
             {
                 <tr>
-                    <td>@impact.VernacularName <br> @Html.Raw(Helpers.getScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</td>
+                    <td>@impact.VernacularName <br> @Html.Raw(Helpers.GetScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</td>
                     <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
                     <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
                     <td>@impact.InteractionStrength.DisplayName()</td>
@@ -178,7 +178,7 @@
         @foreach (var impact in impacts)
         {
             <table class="numbers-table">
-                <caption>Rødlistevurdert art: @impact.VernacularName @Html.Raw(Helpers.getScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
+                <caption>Rødlistevurdert art: @impact.VernacularName @Html.Raw(Helpers.GetScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
                 <tr>
                     <td>kategori i Rødlista 2021</td>
                     <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>

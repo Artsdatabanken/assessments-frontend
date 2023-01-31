@@ -3,8 +3,8 @@
 
 @{
     // Date
-    var firspublished = Helpers.getPublishedDate(Model.AssessmentYear, Model.YearPreviousAssessment, Model.FirstPublished);
-    var revisiondate = Helpers.getRevisionDate(Model.RevisionDate, firspublished);
+    var firspublished = Helpers.GetPublishedDate(Model.AssessmentYear, Model.YearPreviousAssessment, Model.FirstPublished);
+    var revisiondate = Helpers.GetRevisionDate(Model.RevisionDate, firspublished);
     var date = firspublished;
     if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
     {

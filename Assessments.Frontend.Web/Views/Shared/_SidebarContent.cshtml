@@ -8,7 +8,7 @@
     <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden"/>
     <br />
     <a href="@taxon_url" class="link-styled">
-        Til @Helpers.fixSpeciesLevel("{art}ssiden", Model.TaxonRank)
+        Til @Helpers.FixSpeciesLevel("{art}ssiden", Model.TaxonRank)
     </a>
 
     <div is-visible="@Model.PreviousAssessments.Any()">

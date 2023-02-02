@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
 
 namespace Assessments.Transformation.Helpers
@@ -49,8 +50,12 @@ namespace Assessments.Transformation.Helpers
                 await _blobContainer.CreateIfNotExistsAsync();
             }
 
-            await using var stream = new MemoryStream(value);
-            await _blobContainer.GetBlobClient(path).UploadAsync(stream);
+            var blobClient = _blobContainer.GetBlobClient(path);
+            if (!await blobClient.ExistsAsync())
+            {
+                await using var stream = new MemoryStream(value);
+                await blobClient.UploadAsync(stream, overwrite: true);
+            }
         }
     }
 }

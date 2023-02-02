@@ -275,6 +275,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ParasiteEcoEffect, opt => opt.MapFrom(src => int.Parse(src.ParasiteEcoEffect)))
                 .ForMember(dest => dest.ParasiteStatus, opt => opt.MapFrom(src => src.Status));
 
+            CreateMap<FA4.Habitat, AlienSpeciesAssessment2023MicroHabitat>(MemberList.None)
+                .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.Taxon.ScientificName))
+                .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.Taxon.ScientificNameAuthor))
+                .ForMember(dest => dest.VernacularName, opt => opt.MapFrom(src => src.Taxon.VernacularName));
+
         }
     }
 }

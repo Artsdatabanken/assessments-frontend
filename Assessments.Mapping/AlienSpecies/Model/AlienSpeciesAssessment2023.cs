@@ -569,6 +569,9 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// </summary>
         public string ParasitePathogenTransmissionUncertaintyDocumentation { get; set; }
 
+        /// <summary>
+        /// Microhabitats used by the alien species
+        /// </summary>
         public List<AlienSpeciesAssessment2023MicroHabitat> MicroHabitat { get; set; }
     }
 }

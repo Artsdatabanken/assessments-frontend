@@ -568,5 +568,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Reasoning behind the uncertainty related to the species' transmission of parasites or pathogens to Red-List assessed species
         /// </summary>
         public string ParasitePathogenTransmissionUncertaintyDocumentation { get; set; }
+
+        public List<AlienSpeciesAssessment2023MicroHabitat> MicroHabitat { get; set; }
     }
 }

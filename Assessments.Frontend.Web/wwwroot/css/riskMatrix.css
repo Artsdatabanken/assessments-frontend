@@ -1,6 +1,10 @@
 
 /* remaking risk matrix to grid*/
 
+.non-css-only {
+    display: none!important;
+}
+
 .risk-level-matrix {
     display: inline-grid;
     grid-template-columns: 20px 1fr;

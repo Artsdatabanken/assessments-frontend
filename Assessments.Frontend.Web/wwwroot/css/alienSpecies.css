@@ -50,12 +50,6 @@ h1, h2, h3 {
     border-color: #b372bb;
 }
 
-.darktheme .main .chips {
-    color: white;
-    background: #8f4997;
-    border-color: #b372bb;
-}
-
 /* PURPLE BACKGROUND */
 .darktheme .page-link,
 .darktheme .button.primary,

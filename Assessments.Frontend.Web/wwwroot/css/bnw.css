@@ -276,7 +276,7 @@
 /* Other button bg */
 .darktheme .controls .list_actions,
 .darktheme .button,
-.darktheme .main button {
+.darktheme .main button:not(.icon-button) {
     background: #484848;
     border-color: #9d9d9d;
 }
@@ -291,7 +291,7 @@
 .darktheme .sidebarmenu li a,
 .darktheme .button.primary,
 .darktheme .main button.primary,
-.darktheme .main button,
+.darktheme .main button:not(.icon-button),
 .darktheme .button,
 .darktheme .controls button.active,
 .darktheme .category_displayer span,
@@ -464,24 +464,6 @@
 .darktheme input:checked ~ .slider_container .slider,
 .darktheme .slider {
     border-color: white;
-}
-
-.darktheme .main .chips {
-    color: white;
-    background: #890d0d;
-    border-color: #f97474;
-}
-
-.darktheme .main .chips .button.tertiary {
-    color: #f29696;
-}
-
-.darktheme .main .chips {
-    background: #751111;/* darkred*/
-}
-
-.darktheme .chips .x {
-    color: #f59595;
 }
 
 .darktheme .svalbard-heading {

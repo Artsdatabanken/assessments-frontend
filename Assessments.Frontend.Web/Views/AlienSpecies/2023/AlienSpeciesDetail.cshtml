@@ -72,14 +72,6 @@
         TaxonRank = assessment.ScientificNameRank
     };
 
-    PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
-    {
-        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
-        PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
-        PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
-        PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
-    };
-
     var isNr = Model.Assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
     var has2018Assessmnet = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018) ?? false;
     var category2018 = has2018Assessmnet ? Model.Assessment.PreviousAssessments?.Where(x => x.RevisionYear == 2018).Select(x => x.Category).FirstOrDefault() : null;
@@ -189,7 +181,7 @@
 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Breadcrumb.cshtml" />
 
 <div class="pagecontainer">
-    <partial name="/Views/Shared/_PageMenu.cshtml" model="pageMenuViewModel" />
+    <partial name="/Views/Shared/_PageMenu.cshtml" model="Model.PageMenuViewModel" />
 
     <div class="content-placer bigmid">
         <div class="mid-content with_sidebar">

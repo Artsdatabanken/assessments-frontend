@@ -13,6 +13,8 @@
     var decisiveCriteriaHasE = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E));
     var decisiveCriteriaHasF = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F));
     var decisiveCriteriaHasG = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G));
+    var decisiveCriteriaHasH = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H));
+    var decisiveCriteriaHasI = Model.Assessment.DecisiveCriteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I));
     var uncertaintyA = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
     var uncertaintyB = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
     var uncertaintyC = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
@@ -20,6 +22,8 @@
     var uncertaintyE = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.E).FirstOrDefault();
     var uncertaintyF = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.F).FirstOrDefault();
     var uncertaintyG = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.G).FirstOrDefault();
+    var uncertaintyH = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.H).FirstOrDefault();
+    var uncertaintyI = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.I).FirstOrDefault();
 
     var isSimplifiedEstimation = Model.Assessment.MedianLifetimeEstimationMethod == AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.SimplifiedEstimation;
     var isAcceptedSimplifiedEstimation = Model.Assessment.IsAcceptedSimplifiedEstimate == true;
@@ -42,6 +46,10 @@
     var showNoEcologicalEffect = Model.Assessment.ScoreEcologicalEffect == 1;
     var showFTable = Model.Assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == true && HasAffectedArea(x.AffectedArea));
     var showGTable = Model.Assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == false && HasAffectedArea(x.AffectedArea));
+    var showHTable = Model.Assessment.GeneticContamination != null && Model.Assessment.GeneticContamination.Count() != 0;
+    var showITable = Model.Assessment.ParasitePathogenTransmission != null && Model.Assessment.ParasitePathogenTransmission.Count() != 0;
+    var showGeneticContaminationUncertaintyDocumentation = !string.IsNullOrEmpty(Model.Assessment.GeneticContaminationUncertaintyDocumentation) && Model.Assessment.Criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.H && x.UncertaintyValues.Count() > 1);
+    var showParasitePathogenTransmissionUncertaintyDocumentation = !string.IsNullOrEmpty(Model.Assessment.ParasitePathogenTransmissionUncertaintyDocumentation) && Model.Assessment.Criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.I && x.UncertaintyValues.Count() > 1);
 
     int GetUncertaintyValueMinMax(int value, int uncertainty)
     {
@@ -73,10 +81,10 @@
         return true;
     }
 
-    void GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion)
+    void GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion, bool isDifferent)
     {
         <p>
-            @criterion.CriteriaLetter.DisplayName() på @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, criterion.Value)@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "")
+            @criterion.CriteriaLetter.DisplayName() @( isDifferent == true ? "som er" : "på" ) @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, criterion.Value)@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "")
             @{
                 if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
                 {
@@ -358,6 +366,9 @@
                                 /*TODO: add link when there is one*/
                             }</a></p>
                     <h3>Invasjonspotensial</h3>
+                    <p>
+                        Artens invasjonspotensial bestemmes av tre kriterier: Artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet). Invasjonspotensialet bestemmer artens plassering langs risikomatrisens x-akse.
+                    </p>
                     <div>
                         <div is-visible="showLowInvasionPotential">
                             Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen. Se fanen Øvrige brukte kriterier.
@@ -365,7 +376,7 @@
                         <div is-visible="showHigherInvasionPotential">
                             <div is-visible="decisiveCriteriaHasA || decisiveCriteriaHasB">
                                 @{
-                                    GetLetterFullText(uncertaintyA);
+                                    GetLetterFullText(uncertaintyA, false);
                                 }
                                 <div is-visible="!showIsNk" class="collapsible initially_closed">
                                     <div class="collapsible_header">
@@ -451,7 +462,7 @@
                             </div>
                             <div is-visible="decisiveCriteriaHasB || decisiveCriteriaHasA">
                                 @{
-                                    GetLetterFullText(uncertaintyB);
+                                    GetLetterFullText(uncertaintyB, false);
                                 }
                                 <div class="collapsible initially_closed">
                                     <div class="collapsible_header">
@@ -544,12 +555,15 @@
                             </div>
                             <div is-visible="decisiveCriteriaHasC">
                                 @{
-                                    GetLetterFullText(uncertaintyC);
+                                    GetLetterFullText(uncertaintyC, false);
                                 }
                             </div>
                         </div>
                     </div>
                     <h3>Økologisk effekt</h3>
+                    <p>
+                        Artens økologiske effekt bestemmes av seks kriterier: Artens effekter på rødlistevurderte arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av rødlistevurderte arter (G-kriteriet) og overføring av parasitter eller patogener til rødlistevurderte arter (I-kriteriet). Artens økologiske effekter bestemmer artens plassering langs risikomatrisens y-akse.
+                    </p>
                     <div is-visible="showNoEcologicalEffect">
                         <p>Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen. Se fanen Øvrige brukte kriterier.</p>
                     </div>
@@ -557,7 +571,7 @@
                     <div is-visible="!showNoEcologicalEffect">
                         <div is-visible="decisiveCriteriaHasD">
                             @{
-                                GetLetterFullText(uncertaintyD);
+                                GetLetterFullText(uncertaintyD, false);
                             }
                             <div is-visible="!showIsNk" class="collapsible initially_closed">
                                 <div class="collapsible_header">
@@ -614,7 +628,7 @@
 
                         <div is-visible="decisiveCriteriaHasE">
                             @{
-                                GetLetterFullText(uncertaintyE);
+                                GetLetterFullText(uncertaintyE, false);
                             }
                             <div is-visible="!showIsNk" class="collapsible initially_closed">
                                 <div class="collapsible_header">
@@ -671,7 +685,7 @@
 
                         <div is-visible="decisiveCriteriaHasF">
                             @{
-                                GetLetterFullText(uncertaintyF);
+                                GetLetterFullText(uncertaintyF, false);
                             }
                             <div is-visible="!showIsNk" class="collapsible initially_closed">
                                 <div class="collapsible_header">
@@ -696,7 +710,7 @@
 
                         <div is-visible="decisiveCriteriaHasG">
                             @{
-                                GetLetterFullText(uncertaintyG);
+                                GetLetterFullText(uncertaintyG, false);
                             }
                             <div is-visible="!showIsNk" class="collapsible initially_closed">
                                 <div class="collapsible_header">
@@ -715,6 +729,109 @@
                                     <p is-visible="!string.IsNullOrEmpty(Model.Assessment.CommonNatureTypesAffectedDomesticDescription)">
                                         Utfyllende informasjon rundt artens negative effekter: @Html.Raw(Model.Assessment.CommonNatureTypesAffectedDomesticDescription)
                                     </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div is-visible="decisiveCriteriaHasH">
+                            @{
+                                GetLetterFullText(uncertaintyH, true);
+                            }
+                            <div is-visible="!showIsNk" class="collapsible initially_closed">
+                                <div class="collapsible_header">
+                                    <h3>Vis detaljer</h3>
+                                    <button onclick="toggleCollapsible(this)" id="myButton">
+                                        <span class="material-icons expanded_icon">expand_less</span>
+                                        <span class="material-icons collapsed_icon">expand_more</span>
+                                    </button>
+                                </div>
+                                <div class="collapsible_content">
+                                    <div is-visible="showHTable">
+                                        <table>
+                                            <caption><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke rødlistevurderte arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes [* introgresjon *] , hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
+                                            <tr>
+                                                <td><b>Rødlistevurdert art</b></td>
+                                                <td><b>Kategori i Rødlista 2021</b></td>
+                                                <td><b>Er arten en nøkkelart?</b></td>
+                                                <td><b>Interaksjonens styrke</b></td>
+                                                <td><b>Geografisk omfang</b></td>
+                                                <td><b>Vurderingsgrunnlag</b></td>
+                                            </tr>
+                                            @foreach (var contaminant in Model.Assessment.GeneticContamination)
+                                            {
+                                                <tr>
+                                                    <td>@contaminant.VernacularName <br> @Html.Raw(Helpers.GetScientificNameElement(contaminant.ScientificName)) @contaminant.ScientificNameAuthor</td>
+                                                    <td><i>@contaminant.RedListCategory.DisplayName()</i> @contaminant.RedListCategory</td>
+                                                    <td>@( contaminant.KeyStoneSpecie == true ? "ja" : "nei" )</td>
+                                                    <td>@contaminant.InteractionType.DisplayName()</td>
+                                                    <td>@contaminant.Scale.DisplayName()</td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach(var field in contaminant.Background)
+                                                            {
+                                                                <li>
+                                                                    @field.DisplayName()
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
+                                        <div is-visible="showGeneticContaminationUncertaintyDocumentation">
+                                            @{ GetLetterUncertainty(uncertaintyH); } 
+                                            <p>@Html.Raw(Model.Assessment.GeneticContaminationUncertaintyDocumentation)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div is-visible="decisiveCriteriaHasI">
+                            @{
+                                GetLetterFullText(uncertaintyI, true);
+                            }
+                            <div is-visible="!showIsNk" class="collapsible initially_closed">
+                                <div class="collapsible_header">
+                                    <h3>Vis detaljer</h3>
+                                    <button onclick="toggleCollapsible(this)" id="myButton">
+                                        <span class="material-icons expanded_icon">expand_less</span>
+                                        <span class="material-icons collapsed_icon">expand_more</span>
+                                    </button>
+                                </div>
+                                <div class="collapsible_content">
+                                    <div is-visible="showITable">
+                                        <table>
+                                            <caption><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til rødlistevurderte verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
+                                            <tr>
+                                                <td><b>Rødlistevurdert art</b></td>
+                                                <td><b>Kategori i Rødlista 2021</b></td>
+                                                <td><b>Er arten en nøkkelart?</b></td>
+                                                <td><b>Parasittens vitenskapelige navn</b></td>
+                                                <td><b>Parasittens status</b></td>
+                                                <td><b>Parasittens delkategori</b></td>
+                                                <td><b>Geografisk omfang</b></td>
+                                                <td><b>Vurderingsgrunnlag</b></td>
+                                            </tr>
+                                            @foreach (var transmission in Model.Assessment.ParasitePathogenTransmission)
+                                            {
+                                                <tr>
+                                                    <td>@transmission.VernacularName <br> @Html.Raw(Helpers.GetScientificNameElement(transmission.ScientificName)) @transmission.ScientificNameAuthor</td>
+                                                    <td><i>@transmission.RedListCategory.DisplayName()</i> @transmission.RedListCategory</td>
+                                                    <td>@(transmission.KeyStoneSpecie == true ? "ja" : "nei")</td>
+                                                    <td>@transmission.ParasiteScientificName</td>
+                                                    <td>@transmission.ParasiteStatus.DisplayName()</td>
+                                                    <td>@transmission.ParasiteEcoEffect</td>
+                                                    <td>@transmission.Scale.DisplayName()</td>
+                                                    <td>@transmission.Background</td>
+                                                </tr>
+                                            }
+                                        </table>
+                                        <div is-visible="showParasitePathogenTransmissionUncertaintyDocumentation">
+                                            @{ GetLetterUncertainty(uncertaintyI); } 
+                                            <p>@Html.Raw(Model.Assessment.ParasitePathogenTransmissionUncertaintyDocumentation)</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -11,6 +11,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Whether the ecosystem is threatened or rare (true) or not (false)
+        /// </summary>
+        public bool IsThreatened { get; set; }
+
+        /// <summary>
         /// Time horizon of effect. I.e. whether the impact of the alien species is happening now or assumed in the futre
         /// </summary>
         public AlienSpeciesAssessment2023TimeHorizon TimeHorizon { get; set; }

@@ -1,4 +1,5 @@
-﻿using Assessments.Mapping.AlienSpecies.Model;
+﻿using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System.Collections.Generic;
@@ -50,9 +51,17 @@ namespace Assessments.Frontend.Web.Models
                 UncertaintyStatusDescription = assessment.UncertaintyStatusDescription
             };
 
+            PageMenuViewModel = new PageMenuViewModel
+            {
+                AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
+                PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+                PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
+                PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
+            };
+
             ReferenceViewModel = new ReferenceViewModel
             {
-                IsCollapsible = true,
+                HasBackToTopLink = true,
                 References = assessment.References.Select(x => new CommonSimpleReference
                 {
                     ReferenceId = x.ReferenceId,
@@ -106,6 +115,8 @@ namespace Assessments.Frontend.Web.Models
         public AttachmentViewModel AttachmentViewModel { get; set; }
 
         public ExpertStatementViewModel ExpertStatementViewModel { get; set; }
+
+        public PageMenuViewModel PageMenuViewModel { get; set; }
 
         public ReferenceViewModel ReferenceViewModel { get; set; }
 

@@ -48,6 +48,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string FirstPublished { get; set; }
 
+        public bool HasBackToTopLink { get; set; }
+
         public string PublicationText { get; set; }
 
         public DateTime RevisionDate { get; set; }
@@ -194,7 +196,7 @@ namespace Assessments.Frontend.Web.Models
 
     public class ReferenceViewModel
     {
-        public bool IsCollapsible { get; set; }
+        public bool HasBackToTopLink { get; set; }
 
         public List<CommonSimpleReference> References { get; set; }
     }
@@ -225,6 +227,22 @@ namespace Assessments.Frontend.Web.Models
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
         public string TaxonRank { get; set; }
+    }
+
+    public class TableOfContentsViewModel
+    {
+        public class Content
+        {
+            public string ElementId { get; set; }
+
+            public string Title { get; set; }
+
+            public bool ShouldShow { get; set; }
+
+            public List<Content> SubContents { get; set; }
+        }
+
+        public List<Content> Contents { get; set; }
     }
 
     public class CommonSimpleReference

@@ -6,16 +6,12 @@
 
 @if (@Model.References != null && Model.References.Count() > 0)
 {
-    <div class="@(Model.IsCollapsible ? "collapsible initially_closed" : "")">
-        <div class="collapsible_header">
-            <h2>Referanser</h2>
-            <button is-visible="Model.IsCollapsible" onclick="toggleCollapsible(this)">
-                <span class="material-icons expanded_icon">expand_less</span>
-                <span class="material-icons collapsed_icon">expand_more</span>
-            </button>
-        </div >
-
-        <div class="@(Model.IsCollapsible ? "collapsible_content" : "")">
+    <div id="@Constants.HeadingsIds.References">
+        <div class="page_section_header" is-visible="Model.HasBackToTopLink">
+            <h2>@Constants.HeadingsNo.References</h2>
+            <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
+        </div>
+        <h2 is-visible="!Model.HasBackToTopLink">@Constants.HeadingsNo.References</h2>
             <div class="page_section">
                 <ul>
                     @foreach (var reference in references)
@@ -24,7 +20,6 @@
                     }
                 </ul>
             </div>
-        </div>
-    </div >
+    </div>
 }
     

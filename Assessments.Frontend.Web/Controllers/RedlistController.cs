@@ -37,7 +37,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (!string.IsNullOrEmpty(HttpContext.Request.Query[Constants.SearchAndFilter.RemoveFilters].ToString()))
             {
                 var queryParams = HttpUtility.ParseQueryString(Request.QueryString.ToString());
-                queryParams = Helpers.removeFiltersFromQuery(queryParams);
+                queryParams = Helpers.RemoveFiltersFromQuery(queryParams);
                 string url = HttpContext.Request.PathBase.HasValue ? HttpContext.Request.PathBase + HttpContext.Request.Path : HttpContext.Request.Path;
                 var queryString = "?" + queryParams.ToString();
                 Response.Redirect(url + queryString);
@@ -72,7 +72,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             var query = await DataRepository.GetSpeciesAssessments();
 
-            ViewBag.AllTaxonRanks = Helpers.getAllTaxonRanks();
+            ViewBag.AllTaxonRanks = Helpers.GetAllTaxonRanks();
 
             // Søk
             if (!string.IsNullOrEmpty(viewModel.Name))
@@ -104,7 +104,7 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
 
             // Categories
-            viewModel.Category = Helpers.findSelectedRedlistSpeciesCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
+            viewModel.Category = Helpers.FindSelectedRedlistSpeciesCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
 
             if (viewModel.Category?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));
@@ -120,20 +120,20 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
 
             // Regions
-            ViewBag.AllRegions = Helpers.getRegionsDict();
-            string[] chosenRegions = Helpers.findSelectedRegions(viewModel.Regions, ViewBag.AllRegions);
+            ViewBag.AllRegions = Helpers.GetRegionsDict();
+            string[] chosenRegions = Helpers.FindSelectedRegions(viewModel.Regions, ViewBag.AllRegions);
 
             if (chosenRegions?.Any() == true)
                 query = query.Where(x => x.RegionOccurrences.Any(y => y.State == 0 && chosenRegions.Contains(y.Fylke)));
 
             // SpeciesGroups
-            ViewBag.AllSpeciesGroups = Helpers.getAllSpeciesGroups(ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>());
+            ViewBag.AllSpeciesGroups = Helpers.GetAllSpeciesGroups(ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>());
             ViewBag.AllInsects = Constants.AllInsects;
 
             if (viewModel.SpeciesGroups?.Any() == true)
             {
                 if (viewModel.SpeciesGroups.Contains("Insekter"))
-                    viewModel.SpeciesGroups = Helpers.getSelectedSpeciesGroups(viewModel.SpeciesGroups.ToList());
+                    viewModel.SpeciesGroups = Helpers.GetSelectedSpeciesGroups(viewModel.SpeciesGroups.ToList());
                     
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
             }
@@ -144,7 +144,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             // European population percentages
             ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;
-            string[] chosenEuropeanPopulation = Helpers.findEuropeanPopProcentages(viewModel.EuroPop);
+            string[] chosenEuropeanPopulation = Helpers.FindEuropeanPopProcentages(viewModel.EuroPop);
 
             if (chosenEuropeanPopulation?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.PercentageEuropeanPopulation) && chosenEuropeanPopulation.Contains(x.PercentageEuropeanPopulation));
@@ -154,7 +154,7 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => x.PresumedExtinct);
 
             // Sort
-            query = Helpers.sortResults(query, viewModel.Name, viewModel.SortBy);
+            query = Helpers.SortResults(query, viewModel.Name, viewModel.SortBy);
 
             if (export)
             {

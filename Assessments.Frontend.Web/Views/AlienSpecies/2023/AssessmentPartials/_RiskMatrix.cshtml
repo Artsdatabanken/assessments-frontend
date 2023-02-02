@@ -3,9 +3,8 @@
 @using System;
 
 @{
-    var showPage = @Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR;
     /* Risk Matrix 2023
-
+     * 
    Filled line - Criteria value
    -> Determines risk category
 
@@ -14,185 +13,180 @@
     x-axis: A-C criteria. 
     y-axis: D-I criteria
     */
-}
 
-<div is-visible="showPage">    
+    // Risk category placement
+    int x = Model.Assessment.ScoreInvasionPotential.Value;
+    int y = Model.Assessment.ScoreEcologicalEffect.Value;
+    List<AlienSpeciesAssessment2023Criterion> yAxisCriteriaList = new List<AlienSpeciesAssessment2023Criterion>();    
 
-    @{
-        // Risk category placement
-        int x = Model.Assessment.ScoreInvasionPotential.Value;
-        int y = Model.Assessment.ScoreEcologicalEffect.Value;
-        List<AlienSpeciesAssessment2023Criterion> yAxisCriteriaList = new List<AlienSpeciesAssessment2023Criterion>();    
+    // Names / Descriptions         
+    string xAxisLabel = "Invasjonspotensial";
+    string yAxisLabel = "Økologisk effekt";        
 
-        // Names / Descriptions         
-        string xAxisLabel = "Invasjonspotensial";
-        string yAxisLabel = "Økologisk effekt";        
+    // ~*~ Y Uncertainty : Eco effect ~*~
+    int yHigherUncertainty = y;
+    int yLowerUncertainty = y;
 
-        // ~*~ Y Uncertainty : Eco effect ~*~
-        int yHigherUncertainty = y;
-        int yLowerUncertainty = y;
-
-        // 1. Obtain all counting criteria
-        foreach (var criterion in Model.Assessment.Criteria)
-        {
-            var letter = criterion.CriteriaLetter;
-            var xAxis = (letter == AlienSpeciesAssessment2023CriteriaLetter.A || letter == AlienSpeciesAssessment2023CriteriaLetter.B || letter == AlienSpeciesAssessment2023CriteriaLetter.C);
-            if (!xAxis){
-                if (criterion.UncertaintyValues.Count > 1 && criterion.Value > 0 && criterion.Value == y)
-                {
-                    yAxisCriteriaList.Add(criterion);
-                }
+    // 1. Obtain all counting criteria
+    foreach (var criterion in Model.Assessment.Criteria)
+    {
+        var letter = criterion.CriteriaLetter;
+        var xAxis = (letter == AlienSpeciesAssessment2023CriteriaLetter.A || letter == AlienSpeciesAssessment2023CriteriaLetter.B || letter == AlienSpeciesAssessment2023CriteriaLetter.C);
+        if (!xAxis){
+            if (criterion.UncertaintyValues.Count > 1 && criterion.Value > 0 && criterion.Value == y)
+            {
+                yAxisCriteriaList.Add(criterion);
             }
         }
-
-        // 2. Obtain higher and lower uncertainties
-        List<int> lowestYList = new List<int>();
-        foreach (var criterion in yAxisCriteriaList) 
-        {            
-            int criteriaLowestY = y;
-            foreach (var uncertainty in criterion.UncertaintyValues)
-            {                
-                if(uncertainty > yHigherUncertainty) // Always use highest uncertainty 
-                {
-                    yHigherUncertainty = uncertainty;
-                }                
-                if(uncertainty < y)
-                {
-                    lowestYList.Add(uncertainty); // dump alllower uncertainties into one comparison-list
-                }
-            }   
-        }        
-
-        // 3. set lower uncertainty if all lower uncertainty values are the same
-        if(lowestYList.Distinct().Count() == 1)
-        {
-            yLowerUncertainty = lowestYList[0];
-        }
-
-        // ~*~ x Uncertainty - Invation Potential ~*~
-
-        // 1. Obtain A, B & C criteria
-        var critA = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
-        var critB = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
-        var critC = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
-
-        // Obtain the decisive criteria:
-        var decisiveX = Model.Assessment.DecisiveCriteria.Split(",")[0];
-        bool deciciveAB = (decisiveX.Contains("A")||decisiveX.Contains("B"))?true:false;
-        bool deciciveC = decisiveX.Contains("C")?true:false;
-
-        // Necessary string values
-        string x_conclusion = "" + x;
-        string AB_conclusion = "";
-        string C_conclusion = "";        
-         
-        // Dictionary with matrix numbers vs. criterion uncertainty
-        var stringToUNumber = new Dictionary<string, int>(){
-	            {"1", 0},
-	            {"1>", 1},
-                {"2", 2},
-                {"<2", 3},
-	            {"2>", 4},
-                {"<2>", 5},
-                {"3", 6},
-                {"<3", 7},
-	            {"3>", 8},
-                {"<3>", 9},
-                {"4", 10},
-                {"<4", 11},
-            };
-
-        // Reverse lookup of stringToUNumberDictionary
-        static string numberToConclusionString( int number,Dictionary<string, int> stringToUNumber){
-            return stringToUNumber.FirstOrDefault(x => x.Value == number).Key;
-        }
-
-        // A + B: Full table of uncertainties Hanno's excel sheet with <x> and <y>. 
-        // converted from string notation to 0-indexed unique numbers for each case, per stringToUNumber.
-        static int uncertaintyLookup( int a,int b){
-            int[,] uncertaintyComparison = {
-                    {0, 0,  0,  0,  1,  1,  2,  3,  2,  3,  2,  2},
-                    {1, 1,  1,  1,  1,  1,  4,  5,  4,  5,  4,  4},
-                    {2, 2,  2,  2,  4,  4,  6,  7,  6,  7,  6,  6},
-                    {3, 3,  3,  3,  5,  5,  7,  7,  7,  7,  7,  7},
-                    {2, 4,  4,  4,  4,  4,  6,  7,  8,  9,  8,  8},
-                    {3, 5,  5,  5,  5,  5,  7,  7,  9,  9,  8,  9},
-                    {2, 4,  6,  7,  6,  7,  6,  6,  8,  8,  10, 11},
-                    {2, 4,  7,  7,  7,  7,  6,  7,  8,  9,  11, 11},
-                    {4, 4,  6,  7,  8,  9,  8,  8,  8,  8,  10, 11},
-                    {4, 4,  7,  7,  9,  9,  8,  9,  8,  9,  11, 11},
-                    {6, 6,  6,  6,  8,  8,  10, 11, 10, 11, 10, 10},
-                    {7, 7,  6,  7,  8,  9,  11, 11, 11, 11, 10, 11}
-                };
-            return uncertaintyComparison[b,a];
-        }
-
-        // Obtain Uncertainty Lookup number by criterion. 
-        static int uncertaintyConversion( AlienSpeciesAssessment2023Criterion criterion,Dictionary<string, int> stringToUNumber){
-            string key = "";
-            if(criterion.UncertaintyValues.AsQueryable().Min() < criterion.Value){ key += "<"; };
-            key += criterion.Value;
-            if(criterion.UncertaintyValues.AsQueryable().Max() > criterion.Value){ key += ">"; };
-            return stringToUNumber[key];
-        } 
-
-        // Convert C-criteria to conclusion-string
-        if (deciciveC)
-        {
-            int CNumber = uncertaintyConversion(critC,stringToUNumber);
-            C_conclusion = numberToConclusionString(CNumber, stringToUNumber);
-        }
-
-        // Obtain A/B-relationship by The Matrix, and convert to conclusion-string
-        if (deciciveAB)
-        {      
-            int ANumber = uncertaintyConversion(critA,stringToUNumber);
-            int BNumber = uncertaintyConversion(critB,stringToUNumber);
-            int ABNumber = uncertaintyLookup(ANumber,BNumber);
-            AB_conclusion = numberToConclusionString(ABNumber, stringToUNumber);
-        }
-
-        // Follow rules for conclusion strings, as given by Ane :)        
-        if(deciciveAB && deciciveC) // both AB & C are decisive criteria
-        {
-            bool cUP = C_conclusion.Contains("<");
-            bool cDown = C_conclusion.Contains("<");
-            bool abUP = AB_conclusion.Contains("<");
-            bool abDown = AB_conclusion.Contains("<");
-            bool cHasUV = cUP || cDown; // C has any uncertainty
-            bool abHasUV = abUP || abDown; // AB has any uncertainty
-
-            if(abHasUV != cHasUV) // exclusively C or AB has an uncertainty -> ignore down
-            {                
-                if(cUP || abUP) // If either has up, we go up.
-                {
-                    x_conclusion += ">";
-                }
-            }else {                
-                if(cUP && abUP && cDown && abDown) // Both have up and down
-                {                    
-                    x_conclusion = "<" + x + ">";
-                }else if(cDown && abDown) // Down if both have down
-                {                    
-                    x_conclusion = "<" + x;
-                }else if(cUP && abUP) // Up if both have up
-                {
-                    x_conclusion += ">";
-                }
-            }
-        }else if (deciciveAB)
-        {
-            x_conclusion = AB_conclusion;
-        }else if (deciciveC)
-        {
-            x_conclusion = C_conclusion;
-        }
-
-       // Final interpretation of conclusion-string 
-       int xHigherUncertainty = x_conclusion.Contains(">")?x+1:x; 
-       int xLowerUncertainty =  x_conclusion.Contains("<")?x-1:x;
     }
 
+    // 2. Obtain higher and lower uncertainties
+    List<int> lowestYList = new List<int>();
+    foreach (var criterion in yAxisCriteriaList) 
+    {            
+        int criteriaLowestY = y;
+        foreach (var uncertainty in criterion.UncertaintyValues)
+        {                
+            if(uncertainty > yHigherUncertainty) // Always use highest uncertainty 
+            {
+                yHigherUncertainty = uncertainty;
+            }                
+            if(uncertainty < y)
+            {
+                lowestYList.Add(uncertainty); // dump alllower uncertainties into one comparison-list
+            }
+        }   
+    }        
+
+    // 3. set lower uncertainty if all lower uncertainty values are the same
+    if(lowestYList.Distinct().Count() == 1)
+    {
+        yLowerUncertainty = lowestYList[0];
+    }
+
+    // ~*~ x Uncertainty - Invation Potential ~*~
+
+    // 1. Obtain A, B & C criteria
+    var critA = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
+    var critB = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
+    var critC = Model.Assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
+
+    // Obtain the decisive criteria:
+    var decisiveX = Model.Assessment.DecisiveCriteria.Split(",")[0];
+    bool deciciveAB = (decisiveX.Contains("A")||decisiveX.Contains("B"))?true:false;
+    bool deciciveC = decisiveX.Contains("C")?true:false;
+
+    // Necessary string values
+    string x_conclusion = "" + x;
+    string AB_conclusion = "";
+    string C_conclusion = "";        
+         
+    // Dictionary with matrix numbers vs. criterion uncertainty
+    var stringToUNumber = new Dictionary<string, int>(){
+	        {"1", 0},
+	        {"1>", 1},
+            {"2", 2},
+            {"<2", 3},
+	        {"2>", 4},
+            {"<2>", 5},
+            {"3", 6},
+            {"<3", 7},
+	        {"3>", 8},
+            {"<3>", 9},
+            {"4", 10},
+            {"<4", 11},
+        };
+
+    // Reverse lookup of stringToUNumberDictionary
+    static string numberToConclusionString( int number,Dictionary<string, int> stringToUNumber){
+        return stringToUNumber.FirstOrDefault(x => x.Value == number).Key;
+    }
+
+    // A + B: Full table of uncertainties Hanno's excel sheet with <x> and <y>. 
+    // converted from string notation to 0-indexed unique numbers for each case, per stringToUNumber.
+    static int uncertaintyLookup( int a,int b){
+        int[,] uncertaintyComparison = {
+                {0, 0,  0,  0,  1,  1,  2,  3,  2,  3,  2,  2},
+                {1, 1,  1,  1,  1,  1,  4,  5,  4,  5,  4,  4},
+                {2, 2,  2,  2,  4,  4,  6,  7,  6,  7,  6,  6},
+                {3, 3,  3,  3,  5,  5,  7,  7,  7,  7,  7,  7},
+                {2, 4,  4,  4,  4,  4,  6,  7,  8,  9,  8,  8},
+                {3, 5,  5,  5,  5,  5,  7,  7,  9,  9,  8,  9},
+                {2, 4,  6,  7,  6,  7,  6,  6,  8,  8,  10, 11},
+                {2, 4,  7,  7,  7,  7,  6,  7,  8,  9,  11, 11},
+                {4, 4,  6,  7,  8,  9,  8,  8,  8,  8,  10, 11},
+                {4, 4,  7,  7,  9,  9,  8,  9,  8,  9,  11, 11},
+                {6, 6,  6,  6,  8,  8,  10, 11, 10, 11, 10, 10},
+                {7, 7,  6,  7,  8,  9,  11, 11, 11, 11, 10, 11}
+            };
+        return uncertaintyComparison[b,a];
+    }
+
+    // Obtain Uncertainty Lookup number by criterion. 
+    static int uncertaintyConversion( AlienSpeciesAssessment2023Criterion criterion,Dictionary<string, int> stringToUNumber){
+        string key = "";
+        if(criterion.UncertaintyValues.AsQueryable().Min() < criterion.Value){ key += "<"; };
+        key += criterion.Value;
+        if(criterion.UncertaintyValues.AsQueryable().Max() > criterion.Value){ key += ">"; };
+        return stringToUNumber[key];
+    } 
+
+    // Convert C-criteria to conclusion-string
+    if (deciciveC)
+    {
+        int CNumber = uncertaintyConversion(critC,stringToUNumber);
+        C_conclusion = numberToConclusionString(CNumber, stringToUNumber);
+    }
+
+    // Obtain A/B-relationship by The Matrix, and convert to conclusion-string
+    if (deciciveAB)
+    {      
+        int ANumber = uncertaintyConversion(critA,stringToUNumber);
+        int BNumber = uncertaintyConversion(critB,stringToUNumber);
+        int ABNumber = uncertaintyLookup(ANumber,BNumber);
+        AB_conclusion = numberToConclusionString(ABNumber, stringToUNumber);
+    }
+
+    // Follow rules for conclusion strings, as given by Ane :)        
+    if(deciciveAB && deciciveC) // both AB & C are decisive criteria
+    {
+        bool cUP = C_conclusion.Contains("<");
+        bool cDown = C_conclusion.Contains("<");
+        bool abUP = AB_conclusion.Contains("<");
+        bool abDown = AB_conclusion.Contains("<");
+        bool cHasUV = cUP || cDown; // C has any uncertainty
+        bool abHasUV = abUP || abDown; // AB has any uncertainty
+
+        if(abHasUV != cHasUV) // exclusively C or AB has an uncertainty -> ignore down
+        {                
+            if(cUP || abUP) // If either has up, we go up.
+            {
+                x_conclusion += ">";
+            }
+        }else {                
+            if(cUP && abUP && cDown && abDown) // Both have up and down
+            {                    
+                x_conclusion = "<" + x + ">";
+            }else if(cDown && abDown) // Down if both have down
+            {                    
+                x_conclusion = "<" + x;
+            }else if(cUP && abUP) // Up if both have up
+            {
+                x_conclusion += ">";
+            }
+        }
+    }else if (deciciveAB)
+    {
+        x_conclusion = AB_conclusion;
+    }else if (deciciveC)
+    {
+        x_conclusion = C_conclusion;
+    }
+
+    // Final interpretation of conclusion-string 
+    int xHigherUncertainty = x_conclusion.Contains(">")?x+1:x; 
+    int xLowerUncertainty =  x_conclusion.Contains("<")?x-1:x;
+}
 
 @functions{
     string className(int current_x, int current_y, int place_x, int place_y,int highestUncertainty_y, int lowestUncertainty_y,int highestUncertainty_x, int lowestUncertainty_x){
@@ -245,12 +239,12 @@
         return classN;
     }
 }
-    <h2>Risikomatrisen</h2>
 
+<div>
+    <h2>@Constants.HeadingsNo.RiskMatrix</h2>
     <figure class="risk-level-matrix">
         <table>
             <tbody>
-            
                 <tr>
                     <td rowspan="4" class="legend legend-v"><span>@yAxisLabel</span></td>
                     <td class="description"><span>4</span> stor</td>
@@ -295,6 +289,6 @@
             </tr>
             </tbody>
         </table>
-       <!--  <a class="info-link" href="/pages/239659" target="_blank">Forklaring på risikomatrisen</a>-->
+        <!--  <a class="info-link" href="/pages/239659" target="_blank">Forklaring på risikomatrisen</a>-->
     </figure>
 </div>

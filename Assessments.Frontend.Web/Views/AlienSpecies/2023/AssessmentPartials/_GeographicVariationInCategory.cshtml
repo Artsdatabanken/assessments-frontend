@@ -1,48 +1,45 @@
-﻿@model AlienSpeciesDetailViewModel;
+@model AlienSpeciesDetailViewModel;
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var showPage = Model.Assessment.Category != AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
-    var hasGeographicVariationInCategory = Model.Assessment.GeographicVariationInCategory == true;
-    var geographicVariation = Model.Assessment.GeographicalVariation;
-    var geographicVariationDocumentation = Model.Assessment.GeographicalVariationDocumentation;
+    var hasGeographicVariationInCategory = @Model.Assessment.GeographicVariationInCategory == true;
+    var geographicVariation = @Model.Assessment.GeographicalVariation;
+    var geographicVariationDocumentation = @Model.Assessment.GeographicalVariationDocumentation;     
     var hasGeographicVariationDocumentation = geographicVariationDocumentation !=  "";
     var hasCauses = geographicVariation.Count > 0;
     var causes = geographicVariation.Count;
-    // TODO: correct space on 4th option when it's completed other places
 }
-   
-<div is-visible="showPage" class="page_section">
-    <div id="show_category_changed" class="collapsible initially_closed">
-        <div class="collapsible_header">
-            <h2> Geografisk variasjon i risiko</h2>
-            <button class="hide" onclick="toggleCollapsible(this)">
-                <span class="material-icons expanded_icon">expand_less</span>
-                <span class="material-icons collapsed_icon">expand_more</span>
-            </button>
-        </div>
-        <div class="collapsible_content">
-            <div is-visible="hasGeographicVariationInCategory">
-                <p>
-                    Arten har geografisk variasjon i risiko, og kunne fått lavere risikokategori enn
-                   <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category
-                    i deler av sitt potensielle forekomstareal. 
-                </p>
-                <h3  is-visible="hasCauses">Dette skyldes at:</h3>
-                <ul class="indented_list">
-                    @foreach (var variation in Model.Assessment.GeographicalVariation)
-                    {
-                        <li>@variation.DisplayName()</li>
-                    }
-                </ul>
-                <br/>
-                <p is-visible="hasGeographicVariationDocumentation">
-                    Nærmere beskrivelse av artens geografiske variasjon i risiko: @Html.Raw(geographicVariationDocumentation)
-                </p>
-            </div>
-            <p is-visible="!hasGeographicVariationInCategory">
-                Arten er antatt å ha lik risikokategori i hele sitt potensielle forekomstareal.
-            </p>
-        </div>
+
+<div id="@Constants.HeadingsIds.GeographicVariationInCategory">
+    <div class="page_section_header">
+        <h2>@Constants.HeadingsNo.GeographicVariationInCategory</h2>
+        <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
     </div>
+
+    <div is-visible="hasGeographicVariationInCategory">
+        <p>
+            @Constants.LowerCategoryThan
+            <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category
+            @Constants.LowerCategoryThanEnding                   
+        </p>
+            <h3  is-visible="hasCauses">Årsak til geografisk variasjon i risiko</h3>
+           
+            <ul class="indented_list">
+                @foreach (var variation in Model.Assessment.GeographicalVariation)
+                {
+                    <li>@variation.DisplayName()</li>
+                }
+            </ul>
+        <br/>
+        
+        <p is-visible="hasGeographicVariationDocumentation">
+            <b>@Constants.HasGeographicVariationDocumentation</b>
+            @Html.Raw(geographicVariationDocumentation)
+        </p>
+    </div>
+    <p is-visible="!hasGeographicVariationInCategory">                
+        @Constants.NoLowerCategoryThan
+        <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category 
+        @Constants.LowerCategoryThanEnding
+    </p>
 </div>

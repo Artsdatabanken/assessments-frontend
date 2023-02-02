@@ -41,7 +41,7 @@
 <div class="geographic_facts">
     <h3> @ViewBag.glossary["region"]["tagline"]</h3>
     @{string description = ViewBag.glossary["region"]["description"];}
-    @Html.Raw(Helpers.fixSpeciesLevel(description, Model.TaxonRank))
+    @Html.Raw(Helpers.FixSpeciesLevel(description, Model.TaxonRank))
 
     <h3>Geografisk distribusjon</h3>
 

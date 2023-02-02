@@ -344,5 +344,12 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string CategoryChangeShowSameAs2018 = "Denne arten er vurdert til samme risikokategori som i Fremmedartslista 2018 (forrige revisjon).";
         public const string CategoryChangeReasonsForChangeDescription = "Utfyllende beskrivelse av årsaken(e) for endret risikokategori:";
 
+
+        public const string PathwaysMainCategory = "Hovedkategori";
+        public const string PathwaysCategory = "Kategori";
+        public const string PathwaysInfluenceFactor = "Hyppighet";
+        public const string PathwaysMagnitude = "Antall individer";
+        public const string PathwaysTimeOfIncident = "Tidsrom";
+
     }
 }

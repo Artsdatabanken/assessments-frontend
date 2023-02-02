@@ -1,5 +1,4 @@
-﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -23,22 +22,22 @@ namespace Assessments.Frontend.Web.Infrastructure
             {"D", "svært liten populasjon eller forekomst"}
         };
 
-        public const string RiskMatrix = "RiskMatrix";
-        public const string Conclusion = "Conclusion";
-        public const string TableOfContents = "TableOfContents";
-        public const string ExpertSummary = "ExpertSummary";
-        public const string AssesmentReasoning = "AssesmentReasoning";
-        public const string RiskCategoryExplanation = "RiskCategoryExplanation";
-        public const string CategoryChange = "CategoryChange";
-        public const string ClimateEffectsInvationpotential = "ClimateEffectsInvationpotential";
-        public const string GeographicVariationInCategory = "GeographicVariationInCategory";
-        public const string RegionalSpread = "RegionalSpread";
-        public const string Attachments = "Attachments";
-        public const string ImpactedNatureTypes = "ImpactedNatureTypes";
-        public const string References = "References";
-
         public class HeadingsNo
         {
+            public static class SubHeadings
+            {
+                public static readonly string CriteriaDocumentationSpeciesStatus = "Generelt om ";
+                public static readonly string UncertaintyStatusDescription = "Usikkerhet rundt etableringsklasse";
+                public static readonly string CriteriaDocumentationDomesticSpread = "Utbredelse";
+                public static readonly string SpreadWays = "Spredningsmåter";
+                public static readonly string CriteriaDocumentationInvasionPotential = "Invasjonspotensial";
+                public static readonly string CriteriaDocumentationEcoEffect = "Økologisk effekt";
+                public static readonly string RiskCategoryExplanationInvasionPotential = "Invasjonspotensial";
+                public static readonly string RiskCategoryExplanationEcoEffect = "Økologisk effekt";
+                public static readonly string RegionalSpreadArea = "Forekomstareal";
+                public static readonly string RegionalSpreadObservations = "Fylkesforekomster";
+            }
+
             public static readonly string Citation = "Sitering";
             public static readonly string RiskMatrix = "Risikomatrisen";
             public static readonly string Conclusion = "Konklusjon";
@@ -57,6 +56,20 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public class HeadingsIds
         {
+            public static class SubHeadings
+            {
+                public static readonly string CriteriaDocumentationSpeciesStatus = "CriteriaDocumentationSpeciesStatus";
+                public static readonly string UncertaintyStatusDescription = "UncertaintyStatusDescription";
+                public static readonly string CriteriaDocumentationDomesticSpread = "CriteriaDocumentationDomesticSpread";
+                public static readonly string SpreadWays = "SpreadWays";
+                public static readonly string CriteriaDocumentationInvasionPotential = "CriteriaDocumentationInvasionPotential";
+                public static readonly string CriteriaDocumentationEcoEffect = "CriteriaDocumentationEcoEffect";
+                public static readonly string RiskCategoryExplanationInvasionPotential = "RiskCategoryExplanationInvasionPotential";
+                public static readonly string RiskCategoryExplanationEcoEffect = "RiskCategoryExplanationEcoEffect";
+                public static readonly string RegionalSpreadArea = "RegionalSpreadArea";
+                public static readonly string RegionalSpreadObservations = "RegionalSpreadObservations";
+            }
+
             public static readonly string Citation = "Citation";
             public static readonly string RiskMatrix = "RiskMatrix";
             public static readonly string Conclusion = "Conclusion";
@@ -71,38 +84,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string Attachments = "Attachments";
             public static readonly string ImpactedNatureTypes = "ImpactedNatureTypes";
             public static readonly string References = "References";
-        }
-
-
-        public const string CriteriaDocumentationSpeciesStatus = "CriteriaDocumentationSpeciesStatus";
-        public const string UncertaintyStatusDescription = "UncertaintyStatusDescription";
-        public const string CriteriaDocumentationDomesticSpread = "CriteriaDocumentationDomesticSpread";
-        public const string SpreadWays = "SpreadWays";
-        public const string CriteriaDocumentationInvasionPotential = "CriteriaDocumentationInvasionPotential";
-        public const string CriteriaDocumentationEcoEffect = "CriteriaDocumentationEcoEffect";
-
-        public static readonly Dictionary<string, string> ExpertStatementSubHeadingsNO = new()
-        {
-            {CriteriaDocumentationSpeciesStatus, "Generelt om "},
-            {UncertaintyStatusDescription, "Usikkerhet rundt etableringsklasse"},
-            {CriteriaDocumentationDomesticSpread, "Utbredelse "},
-            {SpreadWays, "Spredningsmåter"},
-            {CriteriaDocumentationInvasionPotential, "Invasjonspotensial"},
-            {CriteriaDocumentationEcoEffect, "Økologisk effekt"},
-        };
-
-        public static readonly Dictionary<string, Dictionary<string, string>> SubHeadingsNO = new()
-        {
-            {ExpertSummary, ExpertStatementSubHeadingsNO},
-        };
-
-        public static bool ShowHeading(string value, AlienSpeciesAssessment2023Category category)
-        {
-            if (value == ImpactedNatureTypes || value == GeographicVariationInCategory)
-            {
-                return category != AlienSpeciesAssessment2023Category.NR;
-            }
-            return false;
         }
 
         public static readonly Dictionary<string, string> AllEuropeanPopulationPercentages = new()

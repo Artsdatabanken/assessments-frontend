@@ -18,18 +18,17 @@
                                                         showInvasionPotentialDocumentation ||
                                                         showEcoEffectDocumentation ||
                                                         showSpreadWays;
-
-    var subheadingsList = Constants.ExpertStatementSubHeadingsNO;
 }
 
 <div id="@Constants.HeadingsIds.ExpertSummary">
     <div class="page_section_header">
         <h2>@Constants.HeadingsNo.ExpertSummary</h2>
-        <a href="#@Constants.TableOfContents">Tilbake til toppen</a>
+        <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
     </div>
     <div is-visible="@showExpertSummary">
         <div is-visible="@showSpeciesStatusDocumentation">               
-            <h3 id="@Constants.CriteriaDocumentationSpeciesStatus">@subheadingsList[Constants.CriteriaDocumentationSpeciesStatus]
+            <h3>
+                Generelt om 
                 @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
             <p class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)
@@ -37,21 +36,21 @@
         </div>
 
         <div is-visible="@showUncertaintyStatusDescription">
-            <h3 id="@Constants.UncertaintyStatusDescription">@subheadingsList[Constants.UncertaintyStatusDescription]</h3>               
+            <h3>Usikkerhet rundt etableringsklasse</h3>
             <p class="expert_text">
                 @Html.Raw(Model.UncertaintyStatusDescription)
             </p>
         </div>
 
         <div is-visible="@showDomesticSpreadDocumentation" >
-            <h3 id="@Constants.CriteriaDocumentationDomesticSpread">@subheadingsList[Constants.CriteriaDocumentationDomesticSpread] @evaluationContextText</h3>
+            <h3>Utbredelse @evaluationContextText</h3>
             <p class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentationDomesticSpread)
             </p>
         </div>
 
         <div is-visible="@showSpreadWays">
-            <h3  id="@Constants.SpreadWays">@subheadingsList[Constants.SpreadWays]</h3>
+            <h3>Spredningsmåter</h3>
             <p is-visible="@Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)">
                 @Html.Raw(Model.SpreadIndoorFurtherInfo)
             </p>
@@ -64,14 +63,14 @@
         </div>
 
         <div is-visible="@showInvasionPotentialDocumentation">
-            <h3 id="@Constants.CriteriaDocumentationInvasionPotential">@subheadingsList[Constants.CriteriaDocumentationInvasionPotential]</h3>
+            <h3>Invasjonspotensial</h3>
             <p class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentationInvasionPotential)
             </p>
         </div>
 
         <div is-visible="@showEcoEffectDocumentation" >
-            <h3 id="@Constants.CriteriaDocumentationEcoEffect">@subheadingsList[Constants.CriteriaDocumentationEcoEffect]</h3>
+            <h3>Økologisk effekt</h3>
             <p class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentationEcoEffect)
             </p>

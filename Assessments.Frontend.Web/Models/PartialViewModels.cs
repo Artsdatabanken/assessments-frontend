@@ -238,6 +238,8 @@ namespace Assessments.Frontend.Web.Models
             public string Title { get; set; }
 
             public bool ShouldShow { get; set; }
+
+            public List<Content> SubContents { get; set; }
         }
 
         public List<Content> Contents { get; set; }

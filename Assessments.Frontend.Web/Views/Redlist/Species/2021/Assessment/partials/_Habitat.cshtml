@@ -65,7 +65,7 @@
         <h2>@ViewBag.glossary["habitat"]["tagline"]</h2>
         <p>
             @{string habitatdescription = ViewBag.glossary["habitat"]["description"];}
-            @Html.Raw(Helpers.fixSpeciesLevel(habitatdescription, Model.TaxonRank))
+            @Html.Raw(Helpers.FixSpeciesLevel(habitatdescription, Model.TaxonRank))
         </p>
 
 
@@ -80,7 +80,7 @@
         <div class="habitat_container tabbed_element_container">
 
             <div class="tablist_listheader">
-                <span class="summary_title">@Helpers.fixSpeciesLevel("{Art}ens", Model.TaxonRank) hovedhabitat</span>
+                <span class="summary_title">@Helpers.FixSpeciesLevel("{Art}ens", Model.TaxonRank) hovedhabitat</span>
                 <span class="full_list_title">Alle habitat</span>
                 @if (Model.MainHabitat.Count == 0)
                 {

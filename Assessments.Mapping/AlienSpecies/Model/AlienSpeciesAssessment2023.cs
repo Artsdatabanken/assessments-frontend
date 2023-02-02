@@ -550,6 +550,16 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string EffectsOnOtherNativeSpeciesUncertaintyDocumentation { get; set; }
 
         /// <summary>
+        /// Further information related to the species impact(s) on threatened or rare ecosystems
+        /// </summary>
+        public string ThreatenedNatureTypesAffectedDomesticDescription { get; set; }
+
+        /// <summary>
+        /// Further information related to the species impact(s) on ecosystems that are not threatened nor rare
+        /// </summary>
+        public string CommonNatureTypesAffectedDomesticDescription { get; set; }
+
+        /// <summary>
         ///The species' genetic contamination of Red-List assessed species through introgression
         /// </summary>
         public List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> GeneticContamination { get; set; } = new();

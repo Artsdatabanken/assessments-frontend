@@ -117,7 +117,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
                 })
-                .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeEstimationMethod(src.Category,  src.RiskAssessment.ChosenSpreadMedanLifespan)))
+                .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMedianLifetimeEstimationMethod(src.Category, src.RiskAssessment.ChosenSpreadMedanLifespan)))
                 .ForMember(dest => dest.IsAcceptedSimplifiedEstimate, opt => opt.MapFrom(src => src.RiskAssessment.AcceptOrAdjustCritA == "accept"))
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.MapFrom(src => src.Criteria))
                 .ForMember(dest => dest.DecisiveCriteria, opt => opt.NullSubstitute(string.Empty))
@@ -223,11 +223,12 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.EffectsOnSpeciesSupplementaryInformation, opt => opt.MapFrom(src => src.RiskAssessment.SpeciesSpeciesInteractionsSupplementaryInformation.StripUnwantedHtml()))
                 .ForMember(dest => dest.EffectsOnThreathenedSpeciesUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.DCritInsecurity.StripUnwantedHtml()))
                 .ForMember(dest => dest.EffectsOnOtherNativeSpeciesUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ECritInsecurity.StripUnwantedHtml()))
+                .ForMember(dest => dest.ThreatenedNatureTypesAffectedDomesticDescription, opt => opt.MapFrom(src => src.RiskAssessment.ThreatenedNatureTypesAffectedDomesticDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.CommonNatureTypesAffectedDomesticDescription, opt => opt.MapFrom(src => src.RiskAssessment.CommonNatureTypesAffectedDomesticDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.GeneticContamination, opt => opt.MapFrom(src => src.RiskAssessment.GeneticTransferDocumented))
                 .ForMember(dest => dest.GeneticContaminationUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.HCritInsecurity.StripUnwantedHtml()))
                 .ForMember(dest => dest.ParasitePathogenTransmission, opt => opt.MapFrom(src => src.RiskAssessment.HostParasiteInformations))
                 .ForMember(dest => dest.ParasitePathogenTransmissionUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ICritInsecurity.StripUnwantedHtml()))
-
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
@@ -259,7 +260,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.StateChange.Count > 0);
                     opt.MapFrom(src => src.StateChange.Select(x => string.Concat(x.Where(char.IsLetter))));
                 })
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToLower()));
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToLower()))
+                .ForMember(dest => dest.IsThreatened, opt => opt.MapFrom(src => src.NiNCode.All(Char.IsDigit)));
 
             CreateMap<RiskAssessment.SpeciesSpeciesInteraction, AlienSpeciesAssessment2023SpeciesSpeciesInteraction>(MemberList.None)
                 .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.BasisOfAssessment))

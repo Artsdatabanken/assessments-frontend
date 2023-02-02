@@ -24,14 +24,14 @@ namespace Assessments.Frontend.Web.Models
         [MaxLength(10000, ErrorMessage = "{0} kan ha maks {1} tegn")]
         [Display(Name = "Kommentar")]
         public string Comment { get; set; }
-        
+
         [Display(Name = "Godta vilkår")]
         [Range(typeof(bool), "true", "true", ErrorMessage = "Du må godkjenne vilkårene")]
         public bool Terms { get; set; }
 
         [Display(Name = "Filer")]
         public List<IFormFile> FormFiles { get; set; }
-        
+
         public int AssessmentId { get; set; }
 
         public int Year { get; set; }
@@ -39,5 +39,7 @@ namespace Assessments.Frontend.Web.Models
         public string ExpertGroup { get; set; }
 
         public FeedbackType Type { get; set; }
+
+        public bool HasBackToTopLink { get; set; }
     }
 }

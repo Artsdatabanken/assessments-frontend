@@ -4,7 +4,9 @@
 .risk-level-matrix {
     display: inline-grid;
     grid-template-columns: 20px 1fr;
-    margin:0
+    margin:0;
+    overflow-x:auto;
+        max-width:100%;
 }
 
 .risk-matrix {
@@ -73,7 +75,7 @@
 }
 
 .rotate-legend {
-    writing-mode: vertical-lr;
+    writing-mode: vertical-rl;
     transform: scale(-1, -1);
 }
 
@@ -106,4 +108,31 @@
 .risk-matrix .se span {
     background: #5e3063;
     color: white;
+}
+
+
+@media only screen and (max-width: 355px) {
+
+    .risk-matrix ul {
+        grid-template-columns: 60px repeat(4, 40px);
+    }
+
+    .risk-matrix li {
+        height: 40px;
+        line-height: 38px;
+        width:40px
+    }
+
+    .risk-matrix li.active span,
+    .risk-matrix li.uncertain span {
+        line-height: 34px;
+    }
+
+    .bottom-legend .description {
+        writing-mode: vertical-rl;
+        transform: scale(-1, -1);
+        height: 80px;
+        text-align: right
+    }
+    
 }

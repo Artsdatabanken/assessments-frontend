@@ -88,6 +88,7 @@
     var showRegionalSpread = !isNr && !isEvaluatedAtAnotherLevel;
     var showAttachments = !isEvaluatedAtAnotherLevel && Model.Assessment.Attachments != null && Model.Assessment.Attachments.Count() != 0;
     var showImpactedNatureTypes = !isNr && !isEvaluatedAtAnotherLevel;
+    var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
     var showReference = Model.Assessment.References != null && Model.Assessment.References.Count() > 0;
     var showCitationForAssessment = !string.IsNullOrEmpty(Model.ExpertGroupMembers.Select(x => $"{x.LastName} {x.FirstNameInitials}").JoinAnd(", ", " og "));
     var showFeedback = true;
@@ -149,6 +150,12 @@
                 ElementId = Constants.HeadingsIds.ImpactedNatureTypes,
                 Title = Constants.HeadingsNo.ImpactedNatureTypes,
                 ShouldShow = showImpactedNatureTypes
+            },
+            new ()
+            {
+                ElementId = Constants.HeadingsIds.SpreadWays,
+                Title = Constants.HeadingsNo.SpreadWays,
+                ShouldShow = showSpreadWays
             },
             new ()
             {
@@ -221,7 +228,7 @@
                 <div class="page-section" is-visible="showImpactedNatureTypes">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ImpactedNatureTypes.cshtml" />
                 </div>
-                <div class="page-section" >
+                <div class="page-section" is-visible="showSpreadWays">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_SpreadWays.cshtml" />
                 </div>
                 <div class="page-section" is-visible="showReference">

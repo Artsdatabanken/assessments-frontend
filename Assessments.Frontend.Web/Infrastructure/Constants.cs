@@ -51,6 +51,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string RegionalSpread = "Utbredelse";
             public static readonly string Attachments = "Filvedlegg";
             public static readonly string ImpactedNatureTypes = "Naturtypetilhørighet";
+            public static readonly string SpreadWays = "Spredningsmåter";
             public static readonly string References = "Referanser";
         }
 
@@ -83,6 +84,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string RegionalSpread = "RegionalSpread";
             public static readonly string Attachments = "Attachments";
             public static readonly string ImpactedNatureTypes = "ImpactedNatureTypes";
+            public static readonly string SpreadWays = "SpreadWays";
             public static readonly string References = "References";
         }
 

@@ -80,7 +80,7 @@
     string x_conclusion = "" + x;
     string AB_conclusion = "";
     string C_conclusion = "";        
-         
+
     // Dictionary with matrix numbers vs. criterion uncertainty
     var stringToUNumber = new Dictionary<string, int>(){
 	        {"1", 0},
@@ -118,7 +118,7 @@
                 {4, 4,  7,  7,  9,  9,  8,  9,  8,  9,  11, 11},
                 {6, 6,  6,  6,  8,  8,  10, 11, 10, 11, 10, 10},
                 {7, 7,  6,  7,  8,  9,  11, 11, 11, 11, 10, 11}
-            };
+    };
         return uncertaintyComparison[b,a];
     }
 
@@ -186,6 +186,14 @@
     // Final interpretation of conclusion-string 
     int xHigherUncertainty = x_conclusion.Contains(">")?x+1:x; 
     int xLowerUncertainty =  x_conclusion.Contains("><")?x-1:x;
+
+    string GetUncertaintyCategoriesText()
+    {
+        var hasLower = false;
+        var hasHigher = false;
+        var k = Model.Assessment.Criteria;
+        return ".";
+    }
 }
 
 @functions{
@@ -260,59 +268,65 @@
 
 <div>
     <h2>@Constants.HeadingsNo.RiskMatrix</h2>
-    <!-- 
-        Used the class non-css-only to make the matrix readable for users with css disabled.
-        This was not an issue with tables, but would be for grid view with many lists.
-        All info given in the non-css-only fields would be easily seen when css is added without these 
-        texts which then gets a display:none.
-    -->
-
-    <figure class="risk-level-matrix">
-        <span class="legend rotate-legend">@yAxisLabel<span class="non-css-only"> (y-aksen)</span></span>
-        <div class="risk-matrix">
-            <b class="non-css-only"><br />y = 4</b>
-                <ul>                    
-                    <li class="description"><span class="non-css-only">@yAxisLabel: </span><span>4</span> stor</li>
-                    <li class="risk-level ph @className(1, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-41"><span class="non-css-only">For @xAxisLabel (x-aksen) = 1: kategori </span><span>PH</span><span class="non-css-only"> er verdien: @findStatus(1, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level hi @className(2, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-42"><span class="non-css-only">For @xAxisLabel (x-aksen) = 2: kategori </span><span>HI</span><span class="non-css-only"> er verdien: @findStatus(2, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level se @className(3, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-43"><span class="non-css-only">For @xAxisLabel (x-aksen) = 3: kategori </span><span>SE</span><span class="non-css-only"> er verdien: @findStatus(3, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level se @className(4, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-44"><span class="non-css-only">For @xAxisLabel (x-aksen) = 4: kategori </span><span>SE</span><span class="non-css-only"> er verdien: @findStatus(4, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                </ul>
-                <b class="non-css-only"><br />y = 3</b>
-                <ul>
-                    <li class="description"><span class="non-css-only">@yAxisLabel: </span><span>3</span> middels</li>
-                    <li class="risk-level lo @className(1, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-31"><span class="non-css-only">For @xAxisLabel (x-aksen) = 1: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(1, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level hi @className(2, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-32"><span class="non-css-only">For @xAxisLabel (x-aksen) = 2: kategori </span><span>HI</span><span class="non-css-only"> er verdien: @findStatus(2, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level hi @className(3, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-33"><span class="non-css-only">For @xAxisLabel (x-aksen) = 3: kategori </span><span>HI</span><span class="non-css-only"> er verdien: @findStatus(3, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level se @className(4, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-34"><span class="non-css-only">For @xAxisLabel (x-aksen) = 4: kategori </span><span>SE</span><span class="non-css-only"> er verdien: @findStatus(4, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                </ul>
-                <b class="non-css-only"><br />y = 2</b>
-                <ul>
-                    <li class="description"><span class="non-css-only">@yAxisLabel: </span><span>2</span> liten</li>
-                    <li class="risk-level lo @className(1, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-21"><span class="non-css-only">For @xAxisLabel (x-aksen) = 1: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(1, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level lo @className(2, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-22"><span class="non-css-only">For @xAxisLabel (x-aksen) = 2: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(2, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level lo @className(3, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-23"><span class="non-css-only">For @xAxisLabel (x-aksen) = 3: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(3, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level hi @className(4, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-24"><span class="non-css-only">For @xAxisLabel (x-aksen) = 4: kategori </span><span>HI</span><span class="non-css-only"> er verdien: @findStatus(4, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                </ul>
-                <b class="non-css-only"><br />y = 1</b>
-                <ul class="bottom-border">
-                    <li class="description"><span class="non-css-only">@yAxisLabel: </span><span>1</span> ingen kjent</li>
-                    <li class="risk-level nk @className(1, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-11"><span class="non-css-only">For @xAxisLabel (x-aksen) = 1: kategori </span><span>NK</span><span class="non-css-only"> er verdien: @findStatus(1, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level lo @className(2, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-12"><span class="non-css-only">For @xAxisLabel (x-aksen) = 2: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(2, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level lo @className(3, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-13"><span class="non-css-only">For @xAxisLabel (x-aksen) = 3: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(3, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                    <li class="risk-level ph @className(4, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-14"><span class="non-css-only">For @xAxisLabel (x-aksen) = 4: kategori </span><span>PH</span><span class="non-css-only"> er verdien: @findStatus(4, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
-                </ul>
-                <b class="non-css-only"><br />Tallforklaring for x-aksen:</b>
-                <ul class="bottom-legend">
-                    <span></span>
-                    <li class="description"><span>1</span> lite</li>
-                    <li class="description"><span>2</span> begrensa</li>
-                    <li class="description"><span>3</span> moderat</li>
-                    <li class="description"><span>4</span> stor</li>
-                </ul>
+    <div class="risk-matrix-container">
+        <!-- 
+            Used the class non-css-only to make the matrix readable for users with css disabled.
+            This was not an issue with tables, but would be for grid view with many lists.
+            All info given in the non-css-only fields would be easily seen when css is added without these 
+            texts which then gets a display:none.
+        -->
+        <div>
+            <figure class="risk-level-matrix">
+                <span class="legend rotate-legend">@yAxisLabel<span class="non-css-only"> (y-aksen)</span></span>
+                <div class="risk-matrix">
+                    <b class="non-css-only"><br />y = 4</b>
+                        <ul>                    
+                            <li class="description"><span class="non-css-only">@yAxisLabel: </span><span>4</span> stor</li>
+                            <li class="risk-level ph @className(1, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-41"><span class="non-css-only">For @xAxisLabel (x-aksen) = 1: kategori </span><span>PH</span><span class="non-css-only"> er verdien: @findStatus(1, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level hi @className(2, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-42"><span class="non-css-only">For @xAxisLabel (x-aksen) = 2: kategori </span><span>HI</span><span class="non-css-only"> er verdien: @findStatus(2, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level se @className(3, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-43"><span class="non-css-only">For @xAxisLabel (x-aksen) = 3: kategori </span><span>SE</span><span class="non-css-only"> er verdien: @findStatus(3, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level se @className(4, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )"  id="risk-44"><span class="non-css-only">For @xAxisLabel (x-aksen) = 4: kategori </span><span>SE</span><span class="non-css-only"> er verdien: @findStatus(4, 4, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                        </ul>
+                        <b class="non-css-only"><br />y = 3</b>
+                        <ul>
+                            <li class="description"><span class="non-css-only">@yAxisLabel: </span><span>3</span> middels</li>
+                            <li class="risk-level lo @className(1, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-31"><span class="non-css-only">For @xAxisLabel (x-aksen) = 1: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(1, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level hi @className(2, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-32"><span class="non-css-only">For @xAxisLabel (x-aksen) = 2: kategori </span><span>HI</span><span class="non-css-only"> er verdien: @findStatus(2, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level hi @className(3, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-33"><span class="non-css-only">For @xAxisLabel (x-aksen) = 3: kategori </span><span>HI</span><span class="non-css-only"> er verdien: @findStatus(3, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level se @className(4, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-34"><span class="non-css-only">For @xAxisLabel (x-aksen) = 4: kategori </span><span>SE</span><span class="non-css-only"> er verdien: @findStatus(4, 3, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                        </ul>
+                        <b class="non-css-only"><br />y = 2</b>
+                        <ul>
+                            <li class="description"><span class="non-css-only">@yAxisLabel: </span><span>2</span> liten</li>
+                            <li class="risk-level lo @className(1, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-21"><span class="non-css-only">For @xAxisLabel (x-aksen) = 1: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(1, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level lo @className(2, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-22"><span class="non-css-only">For @xAxisLabel (x-aksen) = 2: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(2, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level lo @className(3, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-23"><span class="non-css-only">For @xAxisLabel (x-aksen) = 3: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(3, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level hi @className(4, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-24"><span class="non-css-only">For @xAxisLabel (x-aksen) = 4: kategori </span><span>HI</span><span class="non-css-only"> er verdien: @findStatus(4, 2, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                        </ul>
+                        <b class="non-css-only"><br />y = 1</b>
+                        <ul class="bottom-border">
+                            <li class="description"><span class="non-css-only">@yAxisLabel: </span><span>1</span> ingen kjent</li>
+                            <li class="risk-level nk @className(1, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-11"><span class="non-css-only">For @xAxisLabel (x-aksen) = 1: kategori </span><span>NK</span><span class="non-css-only"> er verdien: @findStatus(1, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level lo @className(2, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-12"><span class="non-css-only">For @xAxisLabel (x-aksen) = 2: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(2, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level lo @className(3, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-13"><span class="non-css-only">For @xAxisLabel (x-aksen) = 3: kategori </span><span>LO</span><span class="non-css-only"> er verdien: @findStatus(3, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                            <li class="risk-level ph @className(4, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty )" id="risk-14"><span class="non-css-only">For @xAxisLabel (x-aksen) = 4: kategori </span><span>PH</span><span class="non-css-only"> er verdien: @findStatus(4, 1, x, y, yHigherUncertainty, yLowerUncertainty, xHigherUncertainty, xLowerUncertainty ) </span></li>
+                        </ul>
+                        <b class="non-css-only"><br />Tallforklaring for x-aksen:</b>
+                        <ul class="bottom-legend">
+                            <span></span>
+                            <li class="description"><span>1</span> lite</li>
+                            <li class="description"><span>2</span> begrensa</li>
+                            <li class="description"><span>3</span> moderat</li>
+                            <li class="description"><span>4</span> stor</li>
+                        </ul>
+                </div>
+                <span></span>
+                <span class="legend">@xAxisLabel<span class="non-css-only">: @x, @yAxisLabel: @y </span></span>
+                <!--  <a class="info-link" href="/pages/239659" target="_blank">Forklaring på risikomatrisen</a>-->
+            </figure>
         </div>
-        <span></span>
-        <span class="legend">@xAxisLabel<span class="non-css-only">: @x, @yAxisLabel: @y </span></span>
-        <!--  <a class="info-link" href="/pages/239659" target="_blank">Forklaring på risikomatrisen</a>-->
-    </figure>
+        <div>
+            @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificNameRank) har @Model.Assessment.Category.DisplayName()@GetUncertaintyCategoriesText()
+        </div>
+    </div>
 </div>

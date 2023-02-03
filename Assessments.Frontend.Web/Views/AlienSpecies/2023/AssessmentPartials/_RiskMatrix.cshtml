@@ -356,7 +356,11 @@
 
         @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificNameRank) har @Model.Assessment.Category - 
         @Model.Assessment.Category.DisplayName()<span is-visible="uncertaintiesList.Count>0">, med usikkerhet til </span>
-
+        <!-- 
+            This Display below of the uncertainties ignores same-category variation, which are displayed in the matrix
+            The same info should preferrably be availiable in the main text, to aid users who cannot view the image optimally.
+            Also it would look nicer. yeh. All uncertainty x,y's are now input in the findAllUncertaintyCategories use of the matrix lookup.
+        -->
         @{
             for (int i = 0; i < uncertaintiesList.Count; i++) {
                 <span>@uncertaintiesList[i].ToUpper() - @Constants.categoryStringFromCode[@uncertaintiesList[i]]</span>

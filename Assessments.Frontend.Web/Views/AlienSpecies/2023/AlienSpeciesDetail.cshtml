@@ -189,7 +189,7 @@
             <div class="mobile_padding">
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
-                <div is-visible="!isNr">
+                <div is-visible="!isNr && !isEvaluatedAtAnotherLevel">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>
                 </div>
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Conclusion.cshtml" model="Model.ExpertStatementViewModel"/>

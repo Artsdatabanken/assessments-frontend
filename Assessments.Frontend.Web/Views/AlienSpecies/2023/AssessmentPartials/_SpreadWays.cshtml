@@ -1,32 +1,28 @@
 @model AlienSpeciesDetailViewModel
 @{
     // Category != "NR" && AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel";
+    bool isVisible = true;
+
+    // TODO: H2 and H3 needs to be added to the TableOfContents
+    // TODO: Need anchors
+    // TODO: fix the tab if things exist or not :) 
+    // TODO: Correct empty enum strings
+} 
+
+<div is-visible="isVisible">
+@{
+    // Category != "NR" && AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel";
 
     bool hasIndoorProduction = Model.Assessment.HasIndoorProduction;
-}
-
-<div>
-    <div class="page_section_header">
-        <h2>Spredningsveier</h2>
-        <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
-    </div>
-
-    <h3>Til innendørs- eller produksjonsareal</h3>
-       <p>
-        Spredningsmåter til innendørs- eller produksjonsareal omfatter artens spredningsmåter til Norge eller Svalbard, 
-        og ikke artens spredningsmåter til norsk natur. 
-        </p>
-        
-        <p>
-            Herunder tilfaller enhver (a) tilsikta eller utilsikta innførsel av en art fra utlandet og til "Innendørs-Norge" 
-            (f.eks. butikker, privathus, lagerbygninger) og (b) tilsikta innførsel av en art fra utlandet og til artens eget produksjonsareal.
-        </p>
-            
-        <p class="big-data-table table-description">
-            <b>Artens importveier til innendørs- eller produksjonsareal.</b> Følgende aktuelle, fortidige og sannsynlig fremtidige 
-            importveier til innendørs- eller produksjonsareal er angitt for arten.</p>
-
-      <table class="big-data-table">
+    var ImportPathways = Model.Assessment.ImportPathways;
+    var ImportPathwaysIntroduction = Model.Assessment.ImportPathways.Where(x => x.IntroductionSpread.ToString() == "Introduction").ToList();;
+    var ImportPathwaysFurtherSpreadn = Model.Assessment.ImportPathways.Where(x => x.IntroductionSpread.ToString() == "Spread").ToList();;
+    bool hasFurtherSpread = ImportPathwaysFurtherSpreadn.Count > 0;
+} 
+@functions{
+    void makeTable(List<AlienSpeciesAssessment2023Pathways> pathwayList )
+    {        
+    <table class="big-data-table" >
         <tr>
             <th>@Constants.PathwaysMainCategory </th>
             <th>@Constants.PathwaysCategory</th>
@@ -34,18 +30,79 @@
             <th>@Html.Raw(Constants.PathwaysMagnitude) </th>
             <th>@Constants.PathwaysTimeOfIncident </th>
         </tr>
-        @{
-        foreach (var pathway in Model.Assessment.ImportPathways)
-        {
+        @{          
+
+            foreach (var pathway in pathwayList )
+            {               
             <tr>
-                <td><b class="only_mobile">@Constants.PathwaysMainCategory:</b>@pathway.MainCategory</td>
+                <td><b class="only_mobile">@Constants.PathwaysMainCategory:</b>@pathway.MainCategory.DisplayName()</td>
                 <td><b class="only_mobile">@Constants.PathwaysCategory:</b>@pathway.Category</td>
-                <td><b class="only_mobile">@Constants.PathwaysInfluenceFactor:</b>@pathway.InfluenceFactor</td>
-                <td><b class="only_mobile">@Html.Raw(Constants.PathwaysMagnitude):</b>@pathway.Magnitude</td>
-                <td><b class="only_mobile">@Constants.PathwaysTimeOfIncident:</b>@pathway.TimeOfIncident</td>
+                <td><b class="only_mobile">@Constants.PathwaysInfluenceFactor:</b>@pathway.InfluenceFactor.DisplayName()</td>
+                <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.PathwaysMagnitude):</b>@pathway.Magnitude.DisplayName()</td>
+                <td><b class="only_mobile">@Constants.PathwaysTimeOfIncident:</b>@pathway.TimeOfIncident.DisplayName()</td>
             </tr>
             }
         }
-    </table>
+       </table>
+    }
+}
+    <div class="page_section_header">
+        <h2>Spredningsveier</h2>
+        <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
+    </div>
+
+
+    <div is-visible="hasIndoorProduction">
+        <h3>@Constants.hasIndoorProtectionTitle</h3>        
+        <p>@Constants.hasIndoorProtectionParagraph</p>
+        <p>@Constants.hasIndoorProtectionParagraph2</p>
+
+        <div is-visible="Model.Assessment.ImportPathways.Count > 0"> 
+            <p class="big-data-table table-description">
+                <b>@Constants.hasIndoorProtectionTableTitle</b> 
+                <span>@Constants.hasIndoorProtectionTableDescription</span>
+            </p>
+            @{
+                makeTable(ImportPathways);
+            }           
+        </div>
+     </div>
+
+
+     <div is-visible="!hasIndoorProduction">
+        <h3>@Constants.hasNoIndoorProtectionTitle</h3>        
+        <p>@Constants.hasNoIndoorProtectionParagraph</p>
+
+        <div is-visible="ImportPathwaysIntroduction.Count > 0"> 
+            <p class="big-data-table table-description">
+                <b>@Constants.hasNoIndoorProtectionTableTitle</b> 
+                <span>@Constants.hasNoIndoorProtectionTableDescription</span>
+            </p>
+            @{
+                makeTable(ImportPathwaysIntroduction );
+            }           
+        </div>
+     </div>
+
+
+      <div is-visible="true">
+        <h3>@Constants.furtherSpreadWaysTitle</h3>        
+        <p>@Constants.furtherSpreadWaysParagraph</p>
+
+        <div is-visible="hasFurtherSpread"> 
+            <p class="big-data-table table-description">
+                <b>@Constants.furtherSpreadWaysTableTitle</b> 
+                <span>@Constants.furtherSpreadWaysTableDescription</span>
+            </p>
+            @{
+                makeTable(ImportPathwaysFurtherSpreadn );
+            }           
+        </div>
+        <p is-visible="!hasFurtherSpread">
+            @Constants.noFurtherSpreadWays
+        </p>
+
+     </div>
+       
     
 </div>

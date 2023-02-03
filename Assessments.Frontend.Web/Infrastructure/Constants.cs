@@ -345,11 +345,28 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string CategoryChangeReasonsForChangeDescription = "Utfyllende beskrivelse av årsaken(e) for endret risikokategori:";
 
 
-        public const string PathwaysMainCategory = "Hovedkategori";
-        public const string PathwaysCategory = "Kategori";
-        public const string PathwaysInfluenceFactor = "Hyppighet";
-        public const string PathwaysMagnitude = "Antall individer";
-        public const string PathwaysTimeOfIncident = "Tidsrom";
+        public const string PathwaysMainCategory = "hovedkategori";
+        public const string PathwaysCategory = "kategori";
+        public const string PathwaysInfluenceFactor = "hyppighet";
+        public const string PathwaysMagnitude = "antall <br/>individer";
+        public const string PathwaysTimeOfIncident = "tidsrom";
+
+        public const string hasIndoorProtectionTitle = "Til innendørs- eller produksjonsareal";
+        public const string hasIndoorProtectionParagraph = "Spredningsmåter til innendørs- eller produksjonsareal omfatter artens spredningsmåter til Norge eller Svalbard, og ikke artens spredningsmåter til norsk natur. ";
+        public const string hasIndoorProtectionParagraph2 = "Herunder tilfaller enhver (a) tilsikta eller utilsikta innførsel av en art fra utlandet og til 'Innendørs-Norge' (f.eks. butikker, privathus, lagerbygninger) og (b) tilsikta innførsel av en art fra utlandet og til artens eget produksjonsareal.";
+        public const string hasIndoorProtectionTableTitle = "Artens importveier til innendørs- eller produksjonsareal.";
+        public const string hasIndoorProtectionTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige importveier til innendørs- eller produksjonsareal er angitt for arten.";
+
+        public const string hasNoIndoorProtectionTitle = "Introduksjon til natur";
+        public const string hasNoIndoorProtectionParagraph = "Introduksjon til natur omfatter artens spredningsmåter til norsk natur fra utland, innendørsareal eller artens produksjonsareal. Med introduksjon menes enhver tilsikta eller utilsikta form for antropogen innførsel til norsk natur. Introduksjon kan altså enten skje uten eller etter en separat importhendelse.";
+        public const string hasNoIndoorProtectionTableTitle = "Artens introduksjonsveier til norsk natur.";
+        public const string hasNoIndoorProtectionTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige introduksjonsveier til norsk natur er angitt for arten. ";
+
+        public const string furtherSpreadWaysTitle = "Videre spredning i natur";
+        public const string furtherSpreadWaysParagraph = "Artens videre spredning i norsk natur omfatter spredning innad i naturen, altså fra norsk natur til norsk natur.";
+        public const string furtherSpreadWaysTableTitle = "Artens videre spredning i norsk natur.";
+        public const string furtherSpreadWaysTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige spredningsveier fra norsk natur til norsk natur er angitt for arten.  ";
+        public const string noFurtherSpreadWays = "Det er ikke angitt spredningsmåter i norsk natur for denne arten";
 
     }
 }

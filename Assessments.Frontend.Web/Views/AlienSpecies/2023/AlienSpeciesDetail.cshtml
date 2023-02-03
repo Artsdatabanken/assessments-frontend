@@ -72,12 +72,12 @@
         TaxonRank = assessment.ScientificNameRank
     };
 
-    var isNr = Model.Assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
-    var has2018Assessmnet = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018) ?? false;
-    var category2018 = has2018Assessmnet ? Model.Assessment.PreviousAssessments?.Where(x => x.RevisionYear == 2018).Select(x => x.Category).FirstOrDefault() : null;
-    var sameAs2018 = Model.Assessment.Category == category2018;
-    var isEvaluatedAtAnotherLevel = Model.Assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
-    var isMisidentified = Model.Assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified;
+    var isNr = assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
+    var has2018Assessmnet = assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018) ?? false;
+    var category2018 = has2018Assessmnet ? assessment.PreviousAssessments?.Where(x => x.RevisionYear == 2018).Select(x => x.Category).FirstOrDefault() : null;
+    var sameAs2018 = assessment.Category == category2018;
+    var isEvaluatedAtAnotherLevel = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var isMisidentified = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified;
 
     var showExpertStatement = !isNr && !isEvaluatedAtAnotherLevel;
     var showAssessmentReasoning = isNr || isEvaluatedAtAnotherLevel;
@@ -86,9 +86,9 @@
     var showClimateEffectsInvationpotential = !isNr && !isEvaluatedAtAnotherLevel;
     var showGeographicVariationInCategory = !isNr && !isEvaluatedAtAnotherLevel;
     var showRegionalSpread = !isNr && !isEvaluatedAtAnotherLevel;
-    var showAttachments = !isEvaluatedAtAnotherLevel && Model.Assessment.Attachments != null && Model.Assessment.Attachments.Count() != 0;
+    var showAttachments = !isEvaluatedAtAnotherLevel && assessment.Attachments != null && assessment.Attachments.Count() != 0;
     var showImpactedNatureTypes = !isNr && !isEvaluatedAtAnotherLevel;
-    var showReference = Model.Assessment.References != null && Model.Assessment.References.Count() > 0;
+    var showReference = assessment.References != null && assessment.References.Count() > 0;
     var showCitationForAssessment = !string.IsNullOrEmpty(Model.ExpertGroupMembers.Select(x => $"{x.LastName} {x.FirstNameInitials}").JoinAnd(", ", " og "));
     var showFeedback = true;
 
@@ -173,7 +173,7 @@
 
     TaxonRank.TaxonRankEnum scientificNameRank;
     var taxonRank = "Ukjent";
-    if (Enum.TryParse(Model.Assessment.ScientificNameRank.ToString(), out scientificNameRank))
+    if (Enum.TryParse(assessment.ScientificNameRank.ToString(), out scientificNameRank))
         if (scientificNameRank != 0)
             taxonRank = scientificNameRank.DisplayName();
 }

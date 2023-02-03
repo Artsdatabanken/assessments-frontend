@@ -563,7 +563,7 @@
             @{
                 GetLetterFullText(uncertaintyD, false);
             }
-            <div is-visible="!showIsNk" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && ((assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0) || (assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD)))" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -620,7 +620,7 @@
             @{
                 GetLetterFullText(uncertaintyE, false);
             }
-            <div is-visible="!showIsNk" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && ((assessment.SpeciesSpeciesInteractions  != null && assessment.SpeciesSpeciesInteractions .Count() != 0) || (assessment.SpeciesNaturetypeInteractions != null && assessment.SpeciesNaturetypeInteractions.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE)))" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -677,7 +677,7 @@
             @{
                 GetLetterFullText(uncertaintyF, false);
             }
-            <div is-visible="!showIsNk" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && (showFTable || !string.IsNullOrEmpty(assessment.ThreatenedNatureTypesAffectedDomesticDescription))" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -702,7 +702,7 @@
             @{
                 GetLetterFullText(uncertaintyG, false);
             }
-            <div is-visible="!showIsNk" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && (showGTable || !string.IsNullOrEmpty(assessment.CommonNatureTypesAffectedDomesticDescription))" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -727,7 +727,7 @@
             @{
                 GetLetterFullText(uncertaintyH, true);
             }
-            <div is-visible="!showIsNk" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && (showHTable || showGeneticContaminationUncertaintyDocumentation)" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -736,8 +736,8 @@
                     </button>
                 </div>
                 <div class="collapsible_content">
-                    <div is-visible="showHTable">
-                        <table>
+                    <div>
+                        <table is-visible="showHTable">
                             <caption><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke rødlistevurderte arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
                             <tr>
                                 <td><b>Rødlistevurdert art</b></td>
@@ -781,7 +781,7 @@
             @{
                 GetLetterFullText(uncertaintyI, true);
             }
-            <div is-visible="!showIsNk" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && (showITable || showParasitePathogenTransmissionUncertaintyDocumentation)" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -790,8 +790,8 @@
                     </button>
                 </div>
                 <div class="collapsible_content">
-                    <div is-visible="showITable">
-                        <table>
+                    <div>
+                        <table is-visible="showITable">
                             <caption><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til rødlistevurderte verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
                             <tr>
                                 <td><b>Rødlistevurdert art</b></td>

@@ -262,6 +262,39 @@ namespace Assessments.Frontend.Web.Infrastructure
             { "Form", "Form" }
         };
 
+        public const string xAxisLabel = "Invasjonspotensial";
+        public const string yAxisLabel = "Økologisk effekt";
+
+        public static readonly Dictionary<string, string> categoryFromMatrix = new()
+        {
+            { "14", "ph" },
+            { "24", "hi" },
+            { "34", "se" },
+            { "44", "se" },
+            { "13", "lo" },
+            { "23", "hi" },
+            { "33", "hi" },
+            { "43", "se" },
+            { "12", "lo" },
+            { "22", "lo" },
+            { "32", "lo" },
+            { "42", "hi" },
+            { "11", "nk" },
+            { "21", "lo" },
+            { "31", "lo" },
+            { "41", "ph" },
+        };
+
+        public static readonly Dictionary<string, string> categoryStringFromCode = new()
+        {
+            { "nr", "Ikke risikovurdert" },
+            { "nk", "Ingen kjent risiko" },
+            { "lo", "Lav risiko" },
+            { "ph", "Potensielt høy risiko" },
+            { "hi", "Høy risiko" },
+            { "se", "Svært høy risiko" },
+        };
+
 
         public const string Artsdatabanken = "Artsdatabanken";
 

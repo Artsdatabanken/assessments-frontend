@@ -55,39 +55,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string References = "Referanser";
         }
 
-        public class HeadingsIds
-        {
-            public static class SubHeadings
-            {
-                public static readonly string CriteriaDocumentationSpeciesStatus = "CriteriaDocumentationSpeciesStatus";
-                public static readonly string UncertaintyStatusDescription = "UncertaintyStatusDescription";
-                public static readonly string CriteriaDocumentationDomesticSpread = "CriteriaDocumentationDomesticSpread";
-                public static readonly string SpreadWays = "SpreadWays";
-                public static readonly string CriteriaDocumentationInvasionPotential = "CriteriaDocumentationInvasionPotential";
-                public static readonly string CriteriaDocumentationEcoEffect = "CriteriaDocumentationEcoEffect";
-                public static readonly string RiskCategoryExplanationInvasionPotential = "RiskCategoryExplanationInvasionPotential";
-                public static readonly string RiskCategoryExplanationEcoEffect = "RiskCategoryExplanationEcoEffect";
-                public static readonly string RegionalSpreadArea = "RegionalSpreadArea";
-                public static readonly string RegionalSpreadObservations = "RegionalSpreadObservations";
-            }
-
-            public static readonly string Citation = "Citation";
-            public static readonly string RiskMatrix = "RiskMatrix";
-            public static readonly string Conclusion = "Conclusion";
-            public static readonly string TableOfContents = "TableOfContents";
-            public static readonly string ExpertSummary = "ExpertSummary";
-            public static readonly string AssesmentReasoning = "AssesmentReasoning";
-            public static readonly string RiskCategoryExplanation = "RiskCategoryExplanation";
-            public static readonly string CategoryChange = "CategoryChange";
-            public static readonly string ClimateEffectsInvationpotential = "ClimateEffectsInvationpotential";
-            public static readonly string GeographicVariationInCategory = "GeographicVariationInCategory";
-            public static readonly string RegionalSpread = "RegionalSpread";
-            public static readonly string Attachments = "Attachments";
-            public static readonly string ImpactedNatureTypes = "ImpactedNatureTypes";
-            public static readonly string SpreadWays = "SpreadWays";
-            public static readonly string References = "References";
-        }
-
         public static readonly Dictionary<string, string> AllEuropeanPopulationPercentages = new()
         {
             {Constants.EuropeanPopulationPercentages.EuropeanPopLt5, "< 5 %"},

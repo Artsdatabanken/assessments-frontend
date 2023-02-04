@@ -753,7 +753,6 @@
                                                 <td><b>Rødlistevurdert art</b></td>
                                                 <td><b>Kategori i Rødlista 2021</b></td>
                                                 <td><b>Er arten en nøkkelart?</b></td>
-                                                <td><b>Interaksjonens styrke</b></td>
                                                 <td><b>Geografisk omfang</b></td>
                                                 <td><b>Vurderingsgrunnlag</b></td>
                                             </tr>
@@ -763,7 +762,6 @@
                                                     <td>@contaminant.VernacularName <br> @Html.Raw(Helpers.GetScientificNameElement(contaminant.ScientificName)) @contaminant.ScientificNameAuthor</td>
                                                     <td><i>@contaminant.RedListCategory.DisplayName()</i> @contaminant.RedListCategory</td>
                                                     <td>@( contaminant.KeyStoneSpecie == true ? "ja" : "nei" )</td>
-                                                    <td>@contaminant.InteractionType.DisplayName()</td>
                                                     <td>@contaminant.Scale.DisplayName()</td>
                                                     <td>
                                                         <ul>

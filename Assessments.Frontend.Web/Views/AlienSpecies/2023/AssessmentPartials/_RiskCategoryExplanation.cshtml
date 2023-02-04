@@ -823,7 +823,16 @@
                                                     <td>@transmission.ParasiteStatus.DisplayName()</td>
                                                     <td>@transmission.ParasiteEcoEffect</td>
                                                     <td>@transmission.Scale.DisplayName()</td>
-                                                    <td>@transmission.Background</td>
+                                                    <td>
+                                                        <ul>
+                                                            @foreach(var field in transmission.Background)
+                                                            {
+                                                                <li>
+                                                                    @field.DisplayName()
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </td>
                                                 </tr>
                                             }
                                         </table>

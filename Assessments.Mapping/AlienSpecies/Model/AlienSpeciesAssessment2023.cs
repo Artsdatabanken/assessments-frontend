@@ -582,6 +582,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Microhabitats used by the alien species
         /// </summary>
-        public List<AlienSpeciesAssessment2023MicroHabitat> MicroHabitat { get; set; }
+        public List<AlienSpeciesAssessment2023MicroHabitat> MicroHabitat { get; set; } = new();
     }
 }

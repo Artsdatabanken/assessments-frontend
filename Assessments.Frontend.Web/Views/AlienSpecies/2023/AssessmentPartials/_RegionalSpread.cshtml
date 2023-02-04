@@ -3,7 +3,6 @@
 
 @{
     var evaluationContextText = Model.IsSvalbard ? "på Svalbard" : "i Norge";
-    var showPage = Model.Category != AlienSpeciesAssessment2023Category.NR && Model.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var isAlienSpecie = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
     var isDoorKnocker = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
     var isEffectWithoutReproduction = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
@@ -33,21 +32,18 @@
     };
 }
 
-<div id="geographical_spread" class="page_section collapsible initially_closed" is-visible="@showPage" >
-    <div class="collapsible_header">
-        <h2>Utbredelse</h2>
-        <button class="hide" onclick="toggleCollapsible(this)">
-            <span class="material-icons expanded_icon">expand_less</span>
-            <span class="material-icons collapsed_icon">expand_more</span>
-        </button>
+<div id="@Constants.HeadingsIds.RegionalSpread">
+    <div class="page_section_header">
+        <h2>@Constants.HeadingsNo.RegionalSpread</h2>
+        <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
     </div>
-    <div class="collapsible_content only-tabs-inside">
-        <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , 'geographical_spread' )">Utbredelse @evaluationContextText</button>
-        <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , 'geographical_spread' )">Regional naturvariasjon</button>
+    <div class="only-tabs-inside">
+        <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , '@Constants.HeadingsIds.RegionalSpread' )">Utbredelse @evaluationContextText</button>
+        <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , '@Constants.HeadingsIds.RegionalSpread' )">Regional naturvariasjon</button>
         <div class="tabbed_element_container assessment_tabs">
             <div id="domestic_spread">
                 <div id="show_occurence_area" >                
-                    <h3>Forekomstareal</h3>               
+                    <h3>Forekomstareal</h3>
                     <table class="numbers-table" is-visible="isAlienSpecie">
                         <tr>
                             <th>Forekomstareal</th>

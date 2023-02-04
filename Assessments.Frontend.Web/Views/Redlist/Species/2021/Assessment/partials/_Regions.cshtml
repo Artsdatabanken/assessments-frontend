@@ -21,10 +21,10 @@
 }
 
 <div class="page_section @distributionName">
-    <h2>Vurderingsområde og @Helpers.fixSpeciesLevel("{art}ens", Model.TaxonRank) utbredelse</h2>
+    <h2>Vurderingsområde og @Helpers.FixSpeciesLevel("{art}ens", Model.TaxonRank) utbredelse</h2>
     <p>
         @{string description = ViewBag.glossary[distributionName]["description"];}        
-        @Helpers.fixSpeciesLevel(description, Model.TaxonRank)
+        @Helpers.FixSpeciesLevel(description, Model.TaxonRank)
     </p>
 
     <partial name="/Views/Redlist/Species/2021/Assessment/partials/_RegionStatistics.cshtml" />

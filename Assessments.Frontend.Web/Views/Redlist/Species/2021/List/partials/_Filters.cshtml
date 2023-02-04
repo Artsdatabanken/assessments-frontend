@@ -152,12 +152,12 @@
     }
     void makeChips(string buttontext, string className,string value)
     {
-    <button class="chips @className" onclick="submitClickedElement('@value')" type="submit" >
-        <span>@buttontext</span>       
-        <span class="x" >
-            <span class="material-icons">close</span>Fjern
-        </span>
-    </button>
+    <li class="chips">
+        <span class="chips-text">@buttontext</span>
+        <button class="text-button chips-close-button btn icon-button" onclick="submitClickedElement('@value')" type="submit">
+            <span class="material-icons ">close</span>
+        </button>
+    </li>
     }
 }
 
@@ -180,6 +180,7 @@
                     }
                 </span>
                 <span class="filterbox">
+                <ul>
                     @if (Filter.GetActiveSelectionCount(Model) > 0)
                     {
                         var allFilterElements = Filter.GetActiveSelectionElement(Model);
@@ -199,7 +200,7 @@
                             makeSuperChips(true, "PresumedExtinct", PresumedExtinct, PresumedExtinct);
                         }
                     }
-
+                    </ul>
                     @{string buttontext = @Filter.GetActiveSelectionCount(Model) + " filter"; }
                     @if(Filter.GetActiveSelectionCount(Model) > 1)
                     {

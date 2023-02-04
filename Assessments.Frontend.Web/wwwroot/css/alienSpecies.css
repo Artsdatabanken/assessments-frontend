@@ -50,12 +50,6 @@ h1, h2, h3 {
     border-color: #b372bb;
 }
 
-.darktheme .main .chips {
-    color: white;
-    background: #8f4997;
-    border-color: #b372bb;
-}
-
 /* PURPLE BACKGROUND */
 .darktheme .page-link,
 .darktheme .button.primary,
@@ -94,6 +88,10 @@ ul {
     list-style-position: inside;
 }
 
+li ul{
+    margin-left:8px;
+}
+
 /* MAP FOR FA ONLY */
 .triple_map{
     display:flex;
@@ -119,4 +117,43 @@ ul {
 .collapsible {
     margin-top: 0;
     margin-bottom: 40px;
+}
+
+.collapsible.small-collapse {
+    margin-bottom: 4px;
+}
+
+.small-collapse .collapsible_header {
+    line-height: inherit;
+    padding: 0 8px;
+}
+
+.small-collapse:last-child{
+    margin-bottom: 40px;
+}
+
+.page_section_header{
+    display:flex;
+}
+
+.page_section_header h2 {
+    display:inline-block;
+    width: calc(100% - 125px);
+}
+
+.page_section_header a{
+    margin-top:40px;
+    padding-top:8px;
+    
+}
+
+@media only screen and (max-width: 740px) {
+    .page_section_header h2 {
+        width: auto;
+        flex-grow:1;
+    }
+    .page_section_header a {
+        max-width:20%;
+        text-align:center
+    }
 }

@@ -32,14 +32,14 @@
 
                 @{ 
                     string description = @ViewBag.glossary["categoryChanged"]["description"];
-                    description = @Helpers.fixSpeciesLevel(description, Model.TaxonRank);
+                    description = @Helpers.FixSpeciesLevel(description, Model.TaxonRank);
                     description = description.Replace("@previous_category", previous_category);
                     description = description.Replace("@current_category", current_category);
                     description = description.Replace("@which_redlist", which_redlist);
                 }
                 
                 @description
-                <span style="text-transform:lowercase">@Helpers.fixSpeciesLevel(@Model.ReasonCategoryChange.Description(), Model.TaxonRank)</span>.
+                <span style="text-transform:lowercase">@Helpers.FixSpeciesLevel(@Model.ReasonCategoryChange.Description(), Model.TaxonRank)</span>.
             </p>
 
         }

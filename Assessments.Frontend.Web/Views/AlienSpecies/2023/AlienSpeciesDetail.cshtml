@@ -2,9 +2,14 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Assessments.Data.Models
+@using Assessments.Shared.Options
+@using Microsoft.Extensions.Options
 
+@inject IOptions<ApplicationOptions> Options
 
 @{
+    var enableCitation = Options.Value.AlienSpecies2023.EnableCitation;
+
     var assessment = Model.Assessment;
     ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
 
@@ -89,7 +94,7 @@
     var showAttachments = !isEvaluatedAtAnotherLevel && Model.Assessment.Attachments != null && Model.Assessment.Attachments.Count() != 0;
     var showImpactedNatureTypes = !isNr && !isEvaluatedAtAnotherLevel;
     var showReference = Model.Assessment.References != null && Model.Assessment.References.Count() > 0;
-    var showCitationForAssessment = !string.IsNullOrEmpty(Model.ExpertGroupMembers.Select(x => $"{x.LastName} {x.FirstNameInitials}").JoinAnd(", ", " og "));
+    var showCitationForAssessment = enableCitation && !string.IsNullOrEmpty(Model.ExpertGroupMembers.Select(x => $"{x.LastName} {x.FirstNameInitials}").JoinAnd(", ", " og "));
     var showFeedback = true;
 
     var tableOfContentsViewModel = new TableOfContentsViewModel

@@ -229,6 +229,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.GeneticContaminationUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.HCritInsecurity.StripUnwantedHtml()))
                 .ForMember(dest => dest.ParasitePathogenTransmission, opt => opt.MapFrom(src => src.RiskAssessment.HostParasiteInformations))
                 .ForMember(dest => dest.ParasitePathogenTransmissionUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ICritInsecurity.StripUnwantedHtml()))
+                .ForMember(dest => dest.MicroHabitat, opt => opt.MapFrom(src => src.Habitats))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
@@ -276,6 +277,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
             CreateMap<RiskAssessment.HostParasiteInteraction, AlienSpeciesAssessment2023ParasitePathogenTransmission>(MemberList.None)
                 .ForMember(dest => dest.ParasiteEcoEffect, opt => opt.MapFrom(src => int.Parse(src.ParasiteEcoEffect)))
                 .ForMember(dest => dest.ParasiteStatus, opt => opt.MapFrom(src => src.Status));
+
+            CreateMap<FA4.Habitat, AlienSpeciesAssessment2023MicroHabitat>(MemberList.None)
+                .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.Taxon.ScientificName))
+                .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.Taxon.ScientificNameAuthor))
+                .ForMember(dest => dest.VernacularName, opt => opt.MapFrom(src => src.Taxon.VernacularName));
 
         }
     }

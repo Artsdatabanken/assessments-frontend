@@ -988,3 +988,7 @@ span.area i {
 .space_above_20 {
     margin-top: 20px;
 }
+
+table caption.table-title {
+    text-align: left;
+}

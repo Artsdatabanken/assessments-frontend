@@ -1,4 +1,8 @@
 ﻿@model AlienSpeciesListViewModel
+@using Assessments.Shared.Options
+@using Microsoft.Extensions.Options
+
+@inject IOptions<ApplicationOptions> Options
 
 @{
     CitationForListViewModel citationViewModel = new CitationForListViewModel
@@ -26,6 +30,8 @@
     };
 
     ViewData["Title"] = "Fremmedartslista";
+
+    var enableCitation = Options.Value.AlienSpecies2023.EnableCitation;
 }
 
 <div class="pagecontainer">
@@ -48,7 +54,9 @@
                 <partial name="/Views/AlienSpecies/2023/ListPartials/_Filters.cshtml" />
             </form>
 
-            <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel"/>
+            <div is-visible="enableCitation">
+                <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel"/>
+            </div>
         </div>
     </div>
 </div>

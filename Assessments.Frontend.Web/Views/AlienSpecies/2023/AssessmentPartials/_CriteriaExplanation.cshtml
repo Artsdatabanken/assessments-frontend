@@ -111,40 +111,10 @@
         </p>
     }
 
-    void GetLetterUncertainty(AlienSpeciesAssessment2023Criterion criterion)
-    {
-        <p>
-            Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @criterion.Value@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "")
-            @{
-                if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
-                {
-                    <span>(med usikkerhet</span>
-                }
-                if (GetUncertaintyLow(criterion) != 0)
-                {
-                    <span>
-                        ned mot @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyLow(criterion))@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) != 0 ? ")." : "")
-                    </span>
-                }
-                if (GetUncertaintyHigh(criterion) != 0 && GetUncertaintyLow(criterion) != 0)
-                {
-                    <span>og</span>
-                }
-                if (GetUncertaintyHigh(criterion) != 0)
-                {
-                    <span>
-                        opp mot @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion))@(GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0 ? ")." : "")
-                    </span>
-                }
-            }
-            Dette begrunnes i:
-        </p>
-    }
-
     void GetSpeciesTableDesktop(List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> impacts)
     {
         <table class="numbers-table">
-            <caption>Artens negative effekter på øvrige rødlistevurderte arter</caption>
+            <caption class="table-title">Artens negative effekter på øvrige rødlistevurderte arter</caption>
             <tr>
                 <td><b>Rødlistevurdert art</b></td>
                 <td><b>Kategori i Rødlista 2021</b></td>
@@ -187,7 +157,7 @@
         @foreach (var impact in impacts)
         {
             <table class="numbers-table">
-                <caption>Rødlistevurdert art: @impact.VernacularName @Html.Raw(Helpers.GetScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
+                <caption class="table-title">Rødlistevurdert art: @impact.VernacularName @Html.Raw(Helpers.GetScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
                 <tr>
                     <td>kategori i Rødlista 2021</td>
                     <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
@@ -229,7 +199,7 @@
     void GetNatureTypeTableDesktop(List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> impacts)
     {
         <table class="numbers-table">
-            <caption>Artens negative effekter på grupper av arter (samfunn)</caption>
+            <caption class="table-title">Artens negative effekter på grupper av arter (samfunn)</caption>
             <tr>
                 <td><b>Berørt naturtype (med gruppen av påvirkede arter)</b></td>
                 <td><b>Påvirkes nøkkelarter eller truede arter?</b></td>
@@ -264,7 +234,7 @@
         foreach (var impact in impacts)
         {
             <table class="numbers-table">
-                <caption>Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
+                <caption class="table-title">Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
                 <tr>
                     <td>påvirkes nøkkelarter eller truede arter?</td>
                     <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
@@ -302,7 +272,7 @@
     void GetFGTable(bool shouldBeThreatened)
     {
         <table class="numbers-table">
-            <caption>Øvrige naturtyper  som påvirkes av arten</caption>
+            <caption class="table-title">Øvrige naturtyper  som påvirkes av arten</caption>
             <tr>
                 <td><b>Naturtype</b></td>
                 <td><b>Tidshorisont</b></td>
@@ -400,7 +370,7 @@
                         </div>
                         <div is-visible="showNumericalEstimation">
                             <table class="numbers-table">
-                                <caption>Demografiske nøkkeltall</caption>
+                                <caption class="table-title">Demografiske nøkkeltall</caption>
                                 <tr is-visible="assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
                                     <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
                                     <td>@assessment.MedianLifetimeNumericalEstimationPopulationSize</td>
@@ -432,7 +402,7 @@
                         <div is-visible="showViableAnalysis">
                             <p>Beskrivelse av modeller og programvare som er brukt: @assessment.MedianLifetimeViabilityAnalysisDescription</p>
                             <table class="numbers-table">
-                                <caption>Demografiske nøkkeltall</caption>
+                                <caption class="table-title">Demografiske nøkkeltall</caption>
                                 <tr is-visible="assessment.MedianLifetimeBestEstimate != 0">
                                     <td>Estimert median levetid (i år): </td>
                                     <td>@assessment.MedianLifetimeBestEstimate</td>
@@ -468,7 +438,7 @@
                         </p>
                         <div is-visible="isSpatiotemporalDataset">
                             <table class="numbers-table">
-                                <caption>Parametervalg for estimering av ekspansjonshastighet (les mer om metoden her: <a href="https://view.nina.no/expansion/" target="_blank">ekspansjon</a>)</caption>
+                                <caption class="table-title">Parametervalg for estimering av ekspansjonshastighet (les mer om metoden her: <a href="https://view.nina.no/expansion/" target="_blank">ekspansjon</a>)</caption>
                                 <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange)">
                                     <td>Forekomstarealets mørketall: </td>
                                     <td>@assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange</td>
@@ -484,7 +454,7 @@
                             </table>
                             <br />
                             <table class="numbers-table">
-                                <caption>Ekspansjonshastighet</caption>
+                                <caption class="table-title">Ekspansjonshastighet</caption>
                                 <tr>
                                     <td>Gjennomsnittlig (m/år): </td>
                                     <td>@assessment.ExpansionSpeedBestEstimate</td>
@@ -607,9 +577,10 @@
                         <p>@Html.Raw(assessment.EffectsOnSpeciesSupplementaryInformation)</p>
                     </div>
                     <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD))">
-                        @{
-                            GetLetterUncertainty(uncertaintyD);
-                        }
+                        <p>
+                            Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @uncertaintyD.Value.
+                            Dette begrunnes i:
+                        </p>
                         <p>@Html.Raw(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation)</p>
                     </div>
                 </div>
@@ -664,9 +635,10 @@
                         <p>@Html.Raw(assessment.EffectsOnSpeciesSupplementaryInformation)</p>
                     </div>
                     <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE))">
-                        @{
-                            GetLetterUncertainty(uncertaintyE);
-                        }
+                        <p>
+                            Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @uncertaintyE.Value.
+                            Dette begrunnes i:
+                        </p>
                         <p>@Html.Raw(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation)</p>
                     </div>
                 </div>
@@ -737,13 +709,12 @@
                 </div>
                 <div class="collapsible_content">
                     <div>
-                        <table is-visible="showHTable">
-                            <caption><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke rødlistevurderte arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
+                        <table class="numbers-table" is-visible="showHTable">
+                            <caption class="table-title"><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke rødlistevurderte arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
                             <tr>
                                 <td><b>Rødlistevurdert art</b></td>
                                 <td><b>Kategori i Rødlista 2021</b></td>
                                 <td><b>Er arten en nøkkelart?</b></td>
-                                <td><b>Interaksjonens styrke</b></td>
                                 <td><b>Geografisk omfang</b></td>
                                 <td><b>Vurderingsgrunnlag</b></td>
                             </tr>
@@ -753,7 +724,6 @@
                                     <td>@contaminant.VernacularName <br> @Html.Raw(Helpers.GetScientificNameElement(contaminant.ScientificName)) @contaminant.ScientificNameAuthor</td>
                                     <td><i>@contaminant.RedListCategory.DisplayName()</i> @contaminant.RedListCategory</td>
                                     <td>@( contaminant.KeyStoneSpecie == true ? "ja" : "nei" )</td>
-                                    <td>@contaminant.InteractionType.DisplayName()</td>
                                     <td>@contaminant.Scale.DisplayName()</td>
                                     <td>
                                         <ul>
@@ -769,7 +739,10 @@
                             }
                         </table>
                         <div is-visible="showGeneticContaminationUncertaintyDocumentation">
-                            @{ GetLetterUncertainty(uncertaintyH); } 
+                            <p>
+                                Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @uncertaintyH.Value.
+                                Dette begrunnes i:
+                            </p>
                             <p>@Html.Raw(assessment.GeneticContaminationUncertaintyDocumentation)</p>
                         </div>
                     </div>
@@ -791,8 +764,8 @@
                 </div>
                 <div class="collapsible_content">
                     <div>
-                        <table is-visible="showITable">
-                            <caption><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til rødlistevurderte verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
+                        <table class="numbers-table" is-visible="showITable">
+                            <caption class="table-title"><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til rødlistevurderte verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
                             <tr>
                                 <td><b>Rødlistevurdert art</b></td>
                                 <td><b>Kategori i Rødlista 2021</b></td>
@@ -813,12 +786,24 @@
                                     <td>@transmission.ParasiteStatus.DisplayName()</td>
                                     <td>@transmission.ParasiteEcoEffect</td>
                                     <td>@transmission.Scale.DisplayName()</td>
-                                    <td>@transmission.Background</td>
+                                    <td>
+                                        <ul>
+                                            @foreach (var field in transmission.Background)
+                                            {
+                                                <li>
+                                                    @field.DisplayName()
+                                                </li>
+                                            }
+                                        </ul>
+                                    </td>
                                 </tr>
                             }
                         </table>
                         <div is-visible="showParasitePathogenTransmissionUncertaintyDocumentation">
-                            @{ GetLetterUncertainty(uncertaintyI); } 
+                            <p>
+                                Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @uncertaintyI.Value.
+                                Dette begrunnes i:
+                            </p>
                             <p>@Html.Raw(assessment.ParasitePathogenTransmissionUncertaintyDocumentation)</p>
                         </div>
                     </div>

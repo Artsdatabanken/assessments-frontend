@@ -45,7 +45,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = ApplyTaxonRank(parameters.TaxonRank, query);
 
             if (string.IsNullOrEmpty(parameters.SortBy) || parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.ScientificName), StringComparison.InvariantCultureIgnoreCase))
-                query = query.OrderBy(x => x.ScientificName);
+                query = query.OrderBy(x => x.ScientificName.Replace("×", string.Empty));
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.VernacularName), StringComparison.InvariantCultureIgnoreCase))
                 query = query.OrderBy(x => x.VernacularName);
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.Category), StringComparison.InvariantCultureIgnoreCase))

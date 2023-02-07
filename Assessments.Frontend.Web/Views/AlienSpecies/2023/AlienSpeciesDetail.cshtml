@@ -145,15 +145,15 @@
             },
             new ()
             {
-                ElementId = Constants.HeadingsIds.Attachments,
-                Title = Constants.HeadingsNo.Attachments,
-                ShouldShow = showAttachments
-            },
-            new ()
-            {
                 ElementId = Constants.HeadingsIds.ImpactedNatureTypes,
                 Title = Constants.HeadingsNo.ImpactedNatureTypes,
                 ShouldShow = showImpactedNatureTypes
+            },
+            new ()
+            {
+                ElementId = Constants.HeadingsIds.Attachments,
+                Title = Constants.HeadingsNo.Attachments,
+                ShouldShow = showAttachments
             },
             new ()
             {
@@ -220,11 +220,11 @@
                 <div class="page-section" is-visible="showRegionalSpread">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RegionalSpread.cshtml" model="Model.RegionalSpreadViewModel" />
                 </div>
-                <div class="page-section" is-visible="showAttachments">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Attachments.cshtml" model="Model.AttachmentViewModel" />
-                </div>
                 <div class="page-section" is-visible="showImpactedNatureTypes">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ImpactedNatureTypes.cshtml" />
+                </div>
+                <div class="page-section" is-visible="showAttachments">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Attachments.cshtml" model="Model.AttachmentViewModel" />
                 </div>
                 <div class="page-section" is-visible="showReference">
                     <partial name="/Views/Shared/_Reference.cshtml" model="Model.ReferenceViewModel" />

@@ -1,6 +1,6 @@
 ﻿@model TableOfContentsViewModel
 
-<div id="@Constants.HeadingsIds.TableOfContents">
+<div id="@nameof(Constants.HeadingsNo.TableOfContents)">
     <h2>@Constants.HeadingsNo.TableOfContents</h2>
     <ul>
         @foreach (var heading in Model.Contents)

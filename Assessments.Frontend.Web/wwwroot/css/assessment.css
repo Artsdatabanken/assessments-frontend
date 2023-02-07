@@ -849,8 +849,7 @@ span.area i {
     border-collapse: collapse;
     background: white;
     border: 1px solid grey;
-    margin-left: -17px;
-    width: calc(100% + 34px);
+    width: 100%;
     table-layout: fixed;
 }
 
@@ -880,6 +879,7 @@ span.area i {
 
 .big-data-table th {
     border-color: grey;
+    font-size: 14px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -943,10 +943,10 @@ span.area i {
 }
 @media only screen and (min-width: 751px) {
 
-    .big-data-table td:nth-child(3),
-    .big-data-table th:nth-child(3),
-    .big-data-table td:nth-child(5),
-    .big-data-table th:nth-child(5) {
+    .nature-table-setup td:nth-child(3),
+    .nature-table-setup th:nth-child(3),
+    .nature-table-setup td:nth-child(5),
+    .nature-table-setup th:nth-child(5) {
         width: 11%
     }
 }

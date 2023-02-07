@@ -4,16 +4,12 @@
 @{
     var natureTypes = Model.Assessment.ImpactedNatureTypes;
     var isSvalbard = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
-
-    string removeLineBreaksForMobile(string text){
-        return text.Replace("<br/>", "");
-    }
 }
 
-<div id="@Constants.HeadingsIds.ImpactedNatureTypes">
+<div id="@nameof(Constants.HeadingsNo.ImpactedNatureTypes)">
     <div class="page_section_header">
         <h2>@Constants.HeadingsNo.ImpactedNatureTypes</h2>
-        <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
+        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
        
     <p is-visible="isSvalbard">
@@ -26,7 +22,7 @@
         <b>@Constants.ImpactedNatureTypesTableTitle</b>
         @Constants.ImpactedNatureTypesTableDescription
             
-    <table class="big-data-table">
+    <table class="big-data-table nature-table-setup">
         <tr>
             <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
             <th>@Constants.ImpactedNatureTypesTableColumn2</th>
@@ -41,7 +37,7 @@
             <tr>
                 <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
                 <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn2:</b>@natureType.TimeHorizon.DisplayName()</td>
-                <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
+                <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
                 <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn4):</b>
                 @{ 
                     if(natureType.StateChange != null)

@@ -292,11 +292,11 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const int AlienSpecies2023PageMenuContentId = 239646;
 
-        public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023";
+        public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023 - innsyn"; // TODO: remove "innsyn" after innsyn
 
         public const string AlienSpecies2023PageMenuHeaderTextShort = "Fremmedartslista";
 
-        public const string AlienSpecies2023HeaderText = "Norsk fremmedartsliste for 2023";
+        public const string AlienSpecies2023HeaderText = "Norsk fremmedartsliste for 2023 - innsyn"; // TODO: change to correct publishing date
 
         public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
 

@@ -7,15 +7,15 @@
     var showIsNk = assessment.Category == AlienSpeciesAssessment2023Category.NK;
     var showLowInvasionPotential = assessment.ScoreInvasionPotential == 1;
     var showHigherInvasionPotential = assessment.ScoreInvasionPotential > 1;
-    var decisiveCriteriaHasA = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A));
-    var decisiveCriteriaHasB = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B));
-    var decisiveCriteriaHasC = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C));
-    var decisiveCriteriaHasD = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D));
-    var decisiveCriteriaHasE = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E));
-    var decisiveCriteriaHasF = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F));
-    var decisiveCriteriaHasG = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G));
-    var decisiveCriteriaHasH = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H));
-    var decisiveCriteriaHasI = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I));
+    var criteriaHasA = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A));
+    var criteriaHasB = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B));
+    var criteriaHasC = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C));
+    var criteriaHasD = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D));
+    var criteriaHasE = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E));
+    var criteriaHasF = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F));
+    var criteriaHasG = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G));
+    var criteriaHasH = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H));
+    var criteriaHasI = Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I));
     var uncertaintyA = assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
     var uncertaintyB = assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
     var uncertaintyC = assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
@@ -334,7 +334,7 @@
             Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen. Se fanen Øvrige brukte kriterier.
         </div>
         <div is-visible="showHigherInvasionPotential">
-            <div is-visible="decisiveCriteriaHasA || decisiveCriteriaHasB">
+            <div is-visible="criteriaHasA || criteriaHasB">
                 @{
                     GetLetterFullText(uncertaintyA, false);
                 }
@@ -420,7 +420,7 @@
                     </div>
                 </div>
             </div>
-            <div is-visible="decisiveCriteriaHasB || decisiveCriteriaHasA">
+            <div is-visible="criteriaHasB || criteriaHasA">
                 @{
                     GetLetterFullText(uncertaintyB, false);
                 }
@@ -513,7 +513,7 @@
                     </div>
                 </div>
             </div>
-            <div is-visible="decisiveCriteriaHasC">
+            <div is-visible="criteriaHasC">
                 @{
                     GetLetterFullText(uncertaintyC, false);
                 }
@@ -529,7 +529,7 @@
     </div>
 
     <div is-visible="!showNoEcologicalEffect">
-        <div is-visible="decisiveCriteriaHasD">
+        <div is-visible="criteriaHasD">
             @{
                 GetLetterFullText(uncertaintyD, false);
             }
@@ -587,7 +587,7 @@
             </div>
         </div>
 
-        <div is-visible="decisiveCriteriaHasE">
+        <div is-visible="criteriaHasE">
             @{
                 GetLetterFullText(uncertaintyE, false);
             }
@@ -645,7 +645,7 @@
             </div>
         </div>
 
-        <div is-visible="decisiveCriteriaHasF">
+        <div is-visible="criteriaHasF">
             @{
                 GetLetterFullText(uncertaintyF, false);
             }
@@ -670,7 +670,7 @@
             </div>
         </div>
 
-        <div is-visible="decisiveCriteriaHasG">
+        <div is-visible="criteriaHasG">
             @{
                 GetLetterFullText(uncertaintyG, false);
             }
@@ -695,7 +695,7 @@
             </div>
         </div>
 
-        <div is-visible="decisiveCriteriaHasH">
+        <div is-visible="criteriaHasH">
             @{
                 GetLetterFullText(uncertaintyH, true);
             }
@@ -750,7 +750,7 @@
             </div>
         </div>
 
-        <div is-visible="decisiveCriteriaHasI">
+        <div is-visible="criteriaHasI">
             @{
                 GetLetterFullText(uncertaintyI, true);
             }

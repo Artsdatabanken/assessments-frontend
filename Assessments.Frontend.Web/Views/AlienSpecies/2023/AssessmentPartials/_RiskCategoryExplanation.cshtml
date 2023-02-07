@@ -3,7 +3,7 @@
 
 @{
     var criteriaLetters = "ABCDEFGHI";
-    var nonDecisiveCriteria = criteriaLetters.Where(x => !Model.Assessment.DecisiveCriteria.Contains(x)).ToString();
+    var nonDecisiveCriteria = new string(criteriaLetters.Where(x => !Model.Assessment.DecisiveCriteria.Contains(x)).ToArray());
 
     var decisiveCriteriaExplanationViewModel = new CriteriaExplanationViewModel()
     {

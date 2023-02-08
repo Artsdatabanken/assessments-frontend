@@ -1,7 +1,7 @@
 
 @model AttachmentViewModel;
 
-<h2 id="@Constants.HeadingsIds.Attachments">@Constants.HeadingsNo.Attachments</h2>
+<h2 id="@nameof(Constants.HeadingsNo.Attachments)">@Constants.HeadingsNo.Attachments</h2>
 @foreach (var attachment in Model.Attachments)
 {
     <a asp-controller="AlienSpecies" 

@@ -296,7 +296,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023PageMenuHeaderTextShort = "Fremmedartslista";
 
-        public const string AlienSpecies2023HeaderText = "Norsk fremmedartsliste for 2023 - innsyn"; // TODO: change to correct publishing date
+        public const string AlienSpecies2023HeaderText = "Fremmedartslista 2023 - innsyn"; // TODO: change to correct publishing date
 
         public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
 
@@ -304,7 +304,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023CitationHeading = "Siden siteres som:";
 
-        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Norsk fremmedartsliste 2023."; // TODO: insert correct publishing date for citation
+        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Fremmede arter i Norge - med økologisk risiko 2023."; // TODO: insert correct publishing date for citation
 
         public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
             " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";

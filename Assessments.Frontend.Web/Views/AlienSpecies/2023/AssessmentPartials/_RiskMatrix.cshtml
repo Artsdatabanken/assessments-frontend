@@ -340,7 +340,7 @@
                 </ul>
                 <b class="non-css-only"><br />Tallforklaring for x-aksen:</b>
                 <ul class="bottom-legend">
-                    <span></span>
+                    <li></li>
                     <li class="description"><span>1</span> lite</li>
                     <li class="description"><span>2</span> begrensa</li>
                     <li class="description"><span>3</span> moderat</li>
@@ -354,8 +354,8 @@
 
     <div>
 
-        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificNameRank) har @Model.Assessment.Category - 
-        @Model.Assessment.Category.DisplayName()<span is-visible="uncertaintiesList.Count>0">, med usikkerhet til </span>
+        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificNameRank) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> -
+        @Model.Assessment.Category<span is-visible="uncertaintiesList.Count>0">, med usikkerhet til </span>
         <!-- 
             This Display below of the uncertainties ignores same-category variation, which are displayed in the matrix
             The same info should preferrably be availiable in the main text, to aid users who cannot view the image optimally.
@@ -373,4 +373,3 @@
         }
     </div>
 </div>
-

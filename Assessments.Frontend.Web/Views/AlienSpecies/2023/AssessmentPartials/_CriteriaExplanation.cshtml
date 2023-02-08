@@ -44,7 +44,8 @@
     var isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion = assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion;
     var isEstimatedIncreaseInAOODoorKnockers = assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOODoorKnockers;
 
-    var showNoEcologicalEffect = assessment.ScoreEcologicalEffect == 1;
+
+    var showNoEcologicalEffect = assessment.ScoreEcologicalEffect == 1 && !Model.Criteria.Any(x => Model.AlienSpeciesDetailViewModel.Assessment.Criteria.Any(y => y.CriteriaLetter.ToString() == x.ToString() && y.UncertaintyValues.Count() > 1));
     var showFTable = assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == true && HasAffectedArea(x.AffectedArea));
     var showGTable = assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == false && HasAffectedArea(x.AffectedArea));
     var showHTable = assessment.GeneticContamination != null && assessment.GeneticContamination.Count() != 0;
@@ -644,7 +645,6 @@
                 </div>
             </div>
         </div>
-
         <div is-visible="criteriaHasF">
             @{
                 GetLetterFullText(uncertaintyF, false);

@@ -3,7 +3,10 @@
 
 @{
     var criteriaLetters = "ABCDEFGHI";
-    var nonDecisiveCriteria = new string(criteriaLetters.Where(x => !Model.Assessment.DecisiveCriteria.Contains(x)).ToArray());
+    var isAorBDecisive = Model.Assessment.DecisiveCriteria.Any(x => x == 'A' || x == 'B');
+    
+    // If either A or B is decisive, both should be shown as decisive. Hence we have to remove the other criteria from nonDecisiveCriteria if that is the case. 
+    var nonDecisiveCriteria = new string(criteriaLetters.Where(x => !Model.Assessment.DecisiveCriteria.Contains(x) && (!isAorBDecisive || (x != 'A' && x != 'B'))).ToArray());
 
     var decisiveCriteriaExplanationViewModel = new CriteriaExplanationViewModel()
     {

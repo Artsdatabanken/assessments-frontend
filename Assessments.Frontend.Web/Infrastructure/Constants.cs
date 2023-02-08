@@ -51,39 +51,8 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string RegionalSpread = "Utbredelse";
             public static readonly string Attachments = "Filvedlegg";
             public static readonly string ImpactedNatureTypes = "Naturtypetilhørighet";
+            public static readonly string SpreadWays = "Spredningsmåter";
             public static readonly string References = "Referanser";
-        }
-
-        public class HeadingsIds
-        {
-            public static class SubHeadings
-            {
-                public static readonly string CriteriaDocumentationSpeciesStatus = "CriteriaDocumentationSpeciesStatus";
-                public static readonly string UncertaintyStatusDescription = "UncertaintyStatusDescription";
-                public static readonly string CriteriaDocumentationDomesticSpread = "CriteriaDocumentationDomesticSpread";
-                public static readonly string SpreadWays = "SpreadWays";
-                public static readonly string CriteriaDocumentationInvasionPotential = "CriteriaDocumentationInvasionPotential";
-                public static readonly string CriteriaDocumentationEcoEffect = "CriteriaDocumentationEcoEffect";
-                public static readonly string RiskCategoryExplanationInvasionPotential = "RiskCategoryExplanationInvasionPotential";
-                public static readonly string RiskCategoryExplanationEcoEffect = "RiskCategoryExplanationEcoEffect";
-                public static readonly string RegionalSpreadArea = "RegionalSpreadArea";
-                public static readonly string RegionalSpreadObservations = "RegionalSpreadObservations";
-            }
-
-            public static readonly string Citation = "Citation";
-            public static readonly string RiskMatrix = "RiskMatrix";
-            public static readonly string Conclusion = "Conclusion";
-            public static readonly string TableOfContents = "TableOfContents";
-            public static readonly string ExpertSummary = "ExpertSummary";
-            public static readonly string AssesmentReasoning = "AssesmentReasoning";
-            public static readonly string RiskCategoryExplanation = "RiskCategoryExplanation";
-            public static readonly string CategoryChange = "CategoryChange";
-            public static readonly string ClimateEffectsInvationpotential = "ClimateEffectsInvationpotential";
-            public static readonly string GeographicVariationInCategory = "GeographicVariationInCategory";
-            public static readonly string RegionalSpread = "RegionalSpread";
-            public static readonly string Attachments = "Attachments";
-            public static readonly string ImpactedNatureTypes = "ImpactedNatureTypes";
-            public static readonly string References = "References";
         }
 
         public static readonly Dictionary<string, string> AllEuropeanPopulationPercentages = new()
@@ -292,11 +261,11 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const int AlienSpecies2023PageMenuContentId = 239646;
 
-        public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023";
+        public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023 - innsyn"; // TODO: remove "innsyn" after innsyn
 
         public const string AlienSpecies2023PageMenuHeaderTextShort = "Fremmedartslista";
 
-        public const string AlienSpecies2023HeaderText = "Norsk fremmedartsliste for 2023";
+        public const string AlienSpecies2023HeaderText = "Fremmedartslista 2023 - innsyn"; // TODO: change to correct publishing date
 
         public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
 
@@ -304,7 +273,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023CitationHeading = "Siden siteres som:";
 
-        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Norsk fremmedartsliste 2023."; // TODO: insert correct publishing date for citation
+        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Fremmede arter i Norge - med økologisk risiko 2023."; // TODO: insert correct publishing date for citation
 
         public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
             " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
@@ -343,6 +312,30 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string CategoryChangeNotAssessed2018 = "Denne arten er risikovurdert for første gang i 2023.";
         public const string CategoryChangeShowSameAs2018 = "Denne arten er vurdert til samme risikokategori som i Fremmedartslista 2018 (forrige revisjon).";
         public const string CategoryChangeReasonsForChangeDescription = "Utfyllende beskrivelse av årsaken(e) for endret risikokategori:";
+
+
+        public const string PathwaysMainCategory = "hovedkategori";
+        public const string PathwaysCategory = "kategori";
+        public const string PathwaysInfluenceFactor = "hyppighet";
+        public const string PathwaysMagnitude = "antall <br/>individer";
+        public const string PathwaysTimeOfIncident = "tidsrom";
+
+        public const string hasIndoorProtectionTitle = "Til innendørs- eller produksjonsareal";
+        public const string hasIndoorProtectionParagraph = "Spredningsmåter til innendørs- eller produksjonsareal omfatter artens spredningsmåter til Norge eller Svalbard, og ikke artens spredningsmåter til norsk natur. ";
+        public const string hasIndoorProtectionParagraph2 = "Herunder tilfaller enhver (a) tilsikta eller utilsikta innførsel av en art fra utlandet og til 'Innendørs-Norge' (f.eks. butikker, privathus, lagerbygninger) og (b) tilsikta innførsel av en art fra utlandet og til artens eget produksjonsareal.";
+        public const string hasIndoorProtectionTableTitle = "Artens importveier til innendørs- eller produksjonsareal.";
+        public const string hasIndoorProtectionTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige importveier til innendørs- eller produksjonsareal er angitt for arten.";
+
+        public const string hasNoIndoorProtectionTitle = "Introduksjon til natur";
+        public const string hasNoIndoorProtectionParagraph = "Introduksjon til natur omfatter artens spredningsmåter til norsk natur fra utland, innendørsareal eller artens produksjonsareal. Med introduksjon menes enhver tilsikta eller utilsikta form for antropogen innførsel til norsk natur. Introduksjon kan altså enten skje uten eller etter en separat importhendelse.";
+        public const string hasNoIndoorProtectionTableTitle = "Artens introduksjonsveier til norsk natur.";
+        public const string hasNoIndoorProtectionTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige introduksjonsveier til norsk natur er angitt for arten. ";
+
+        public const string furtherSpreadWaysTitle = "Videre spredning i natur";
+        public const string furtherSpreadWaysParagraph = "Artens videre spredning i norsk natur omfatter spredning innad i naturen, altså fra norsk natur til norsk natur.";
+        public const string furtherSpreadWaysTableTitle = "Artens videre spredning i norsk natur.";
+        public const string furtherSpreadWaysTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige spredningsveier fra norsk natur til norsk natur er angitt for arten.  ";
+        public const string noFurtherSpreadWays = "Det er ikke angitt spredningsmåter i norsk natur for denne arten";
 
     }
 }

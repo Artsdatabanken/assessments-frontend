@@ -7,7 +7,7 @@
     var showConclusion = showCriteriaDocumentation && !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
 }
 
-<div class="page_section" id="@Constants.HeadingsIds.Conclusion" is-visible="@showConclusion">
+<div class="page_section" id="@nameof(Constants.HeadingsNo.Conclusion)" is-visible="@showConclusion">
     <h2>@Constants.HeadingsNo.Conclusion</h2>
     <div class="expert_Assessment">
         <div class="expert_text">

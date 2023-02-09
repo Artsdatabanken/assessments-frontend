@@ -43,6 +43,10 @@ h1, h2, h3 {
     padding-left: 4px;
 }
 
+.themeselector {
+    top:-2px
+}
+
 /* ACTIVE LINK COLOUR */
 .darktheme .list:hover .speciesgroup_name,
 .darktheme .search_matchedname,
@@ -173,6 +177,7 @@ li ul{
     border-radius: 4px;
     padding: 10px 20px;
     background: #f2f2f2;
+    margin-bottom: 40px;
 }
 
 .innsyn-info-box ol {

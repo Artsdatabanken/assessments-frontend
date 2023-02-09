@@ -2,20 +2,12 @@ h1, h2, h3 {
     color: #0f0f0f;
 }
 
-.small-heading-part{
-    display:block;
-    font-size:20px;
-}
 
 .indented_list {
     margin-left: 22px;
 }
 
-.page-header h1 {
-    line-height: 1.3;
-    font-size: 33px;
-    margin-bottom: 20px;
-}
+
 
 .svalbard-heading {
     color: #185c7d;

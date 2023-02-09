@@ -1,13 +1,9 @@
 ﻿@model ScientificNameViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
 
-<h1 is-visible="@string.IsNullOrEmpty(Model.PopularName) == false">
+<h1>
     <span class="small-heading-part">Vurdering av </span>
     <span is-visible="!string.IsNullOrEmpty(Model.PopularName)">@Model.PopularName</span>
     <span>@Html.Raw(GetScientificNameElement(Model.ScientificName))
     @Model.ScientificNameAuthor</span>
 </h1>
-
-
- 
-

@@ -224,6 +224,11 @@ namespace Assessments.Frontend.Web.Infrastructure
             return selectedPercenteges.ToArray();
         }
 
+        public static string removeLineBreaksForMobile(string text)
+        {
+            return text.Replace("<br/>", "");
+        }
+
         public static Dictionary<string, string> GetAllTaxonRanks()
         {
             return _ranks;

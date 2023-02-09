@@ -300,7 +300,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023HeaderText = "Fremmedartslista 2023 - innsyn"; // TODO: change to correct publishing date
 
-        public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
+        public const string AlienSpecies2023HeaderByline = "Publisert: 2?. februar 2023"; // TODO: change to correct publishing date
 
         public const string AlienSpecies2023PageManuExpandButtonText = "Fremmede arter";
 

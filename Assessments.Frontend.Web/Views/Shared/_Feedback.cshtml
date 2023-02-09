@@ -116,7 +116,7 @@ else
     </p>
 
     <div class="page_section">
-        <form id="js-feedback-form" asp-controller="Feedback" asp-action="ValidateEmail" asp-route-returnurl="@Context.Request.Path" method="post" enctype="multipart/form-data" novalidate>
+        <form id="js-feedback-form" asp-controller="Feedback" asp-action="ValidateEmail"  asp-route-returnurl="@Context.Request.Path" method="post" enctype="multipart/form-data" class="feedback_form" novalidate>
             <div class="feedback_form_input_field">
                 <label asp-for="FullName"></label><br />
                 <input asp-for="FullName" />

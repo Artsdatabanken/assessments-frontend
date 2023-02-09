@@ -168,3 +168,43 @@ li ul{
         text-align:center
     }
 }
+
+.innsyn-info-box {
+    border-radius: 4px;
+    padding: 10px 20px;
+    background: #f2f2f2;
+}
+
+.innsyn-info-box ol {
+    margin-left: 24px;
+    margin-bottom: 15px;
+}
+
+.innsyn-info-box .impact-bold {
+    font-size: 20px;
+    display: flex;
+    padding: 8px;
+    border-radius: 4px;
+    border: 2px solid #5e3063;
+    color: #5e3063;
+}
+
+.innsyn-info-box p, .innsyn-info-box h3,
+.innsyn-info-box h4 {
+    color: inherit
+}
+
+.impact-bold .material-icons{
+    margin-right:4px;
+}
+
+.darktheme .innsyn-info-box .impact-bold {
+    background: #5e3063;
+    border-color: white;
+    color:white;
+}
+
+.darktheme .innsyn-info-box {
+    color: white;
+    background: #3d1f41;
+}

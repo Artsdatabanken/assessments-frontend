@@ -146,12 +146,6 @@
             },
             new ()
             {
-                ElementId = nameof(Constants.HeadingsNo.Attachments),
-                Title = Constants.HeadingsNo.Attachments,
-                ShouldShow = showAttachments
-            },
-            new ()
-            {
                 ElementId = nameof(Constants.HeadingsNo.ImpactedNatureTypes),
                 Title = Constants.HeadingsNo.ImpactedNatureTypes,
                 ShouldShow = showImpactedNatureTypes
@@ -161,6 +155,12 @@
                 ElementId = nameof(Constants.HeadingsNo.SpreadWays),
                 Title = Constants.HeadingsNo.SpreadWays,
                 ShouldShow = showSpreadWays
+            },
+            new ()
+            {
+                ElementId = nameof(Constants.HeadingsNo.Attachments),
+                Title = Constants.HeadingsNo.Attachments,
+                ShouldShow = showAttachments
             },
             new ()
             {
@@ -201,7 +201,7 @@
             <div class="mobile_padding">
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
-                <div is-visible="!isNr">
+                <div is-visible="!isNr && !isEvaluatedAtAnotherLevel">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>
                 </div>
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Conclusion.cshtml" model="Model.ExpertStatementViewModel"/>
@@ -227,14 +227,14 @@
                 <div class="page-section" is-visible="showRegionalSpread">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RegionalSpread.cshtml" model="Model.RegionalSpreadViewModel" />
                 </div>
-                <div class="page-section" is-visible="showAttachments">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Attachments.cshtml" model="Model.AttachmentViewModel" />
-                </div>
                 <div class="page-section" is-visible="showImpactedNatureTypes">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ImpactedNatureTypes.cshtml" />
                 </div>
                 <div class="page-section" is-visible="showSpreadWays">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_SpreadWays.cshtml" />
+                </div>
+                <div class="page-section" is-visible="showAttachments">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Attachments.cshtml" model="Model.AttachmentViewModel" />
                 </div>
                 <div class="page-section" is-visible="showReference">
                     <partial name="/Views/Shared/_Reference.cshtml" model="Model.ReferenceViewModel" />

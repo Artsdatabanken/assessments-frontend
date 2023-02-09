@@ -30,7 +30,7 @@
         var letter = criterion.CriteriaLetter;
         var xAxis = (letter == AlienSpeciesAssessment2023CriteriaLetter.A || letter == AlienSpeciesAssessment2023CriteriaLetter.B || letter == AlienSpeciesAssessment2023CriteriaLetter.C);
         if (!xAxis){
-            if (criterion.UncertaintyValues.Count > 1 && criterion.Value > 0 && criterion.Value == y)
+            if (criterion.Value > 0 && criterion.Value == y) 
             {
                 yAxisCriteriaList.Add(criterion);
             }
@@ -39,27 +39,27 @@
 
     // 2. Obtain higher and lower uncertainties
     List<int> lowestYList = new List<int>();
-    foreach (var criterion in yAxisCriteriaList) 
-    {            
-        int criteriaLowestY = y;
-        foreach (var uncertainty in criterion.UncertaintyValues)
-        {                
-            if(uncertainty > yHigherUncertainty) // Always use highest uncertainty 
-            {
-                yHigherUncertainty = uncertainty;
-            }                
-            if(uncertainty < y)
-            {
-                lowestYList.Add(uncertainty); // dump alllower uncertainties into one comparison-list
-            }
-        }   
-    }        
 
-    // 3. set lower uncertainty if all lower uncertainty values are the same
-    if(lowestYList.Distinct().Count() == 1)
+    if (yAxisCriteriaList.Count == 1)
     {
-        yLowerUncertainty = lowestYList[0];
+        yHigherUncertainty = yAxisCriteriaList[0].UncertaintyValues.Max();
+        yLowerUncertainty = yAxisCriteriaList[0].UncertaintyValues.Min();
     }
+    if (yAxisCriteriaList.Count > 1 && !yAxisCriteriaList.All(x => x.UncertaintyValues.Count == 1)) //More than one decisive criteria and at least one has uncertainty
+    {
+        yHigherUncertainty = yAxisCriteriaList.Select(x => x.UncertaintyValues.Max()).Max(); // Always use highest uncertainty 
+        foreach (var criterion in yAxisCriteriaList) 
+        {     
+            lowestYList.Add(criterion.UncertaintyValues.Min()); // dump alllower uncertainties into one comparison-list  
+        }
+        
+        // 3. set lower uncertainty if all lower uncertainty values are the same
+        if (lowestYList.Distinct().Count() == 1)
+        {
+            yLowerUncertainty = lowestYList[0];
+        }
+    }
+    
 
     // ~*~ x Uncertainty - Invation Potential ~*~
 

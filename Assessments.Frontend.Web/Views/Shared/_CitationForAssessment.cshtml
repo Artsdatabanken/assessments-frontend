@@ -14,9 +14,9 @@
 
 @if (!string.IsNullOrEmpty(Model.ExpertGroupMembers))
 {
-    <div class="page_section_header" is-visible="Model.HasBackToTopLink" id="@Constants.HeadingsIds.Citation">
+    <div class="page_section_header" is-visible="Model.HasBackToTopLink" id="@nameof(Constants.HeadingsNo.Citation)">
         <h2>@Constants.HeadingsNo.Citation</h2>
-        <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
+        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
     <h2 is-visible="!Model.HasBackToTopLink">@Constants.HeadingsNo.Citation</h2>
     <p class="citation">

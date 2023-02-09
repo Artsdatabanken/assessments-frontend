@@ -32,14 +32,14 @@
     };
 }
 
-<div id="@Constants.HeadingsIds.RegionalSpread">
+<div id="@nameof(Constants.HeadingsNo.RegionalSpread)">
     <div class="page_section_header">
         <h2>@Constants.HeadingsNo.RegionalSpread</h2>
-        <a href="#@Constants.HeadingsIds.TableOfContents">Tilbake til toppen</a>
+        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
     <div class="only-tabs-inside">
-        <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , '@Constants.HeadingsIds.RegionalSpread' )">Utbredelse @evaluationContextText</button>
-        <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , '@Constants.HeadingsIds.RegionalSpread' )">Regional naturvariasjon</button>
+        <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , '@nameof(Constants.HeadingsNo.RegionalSpread)' )">Utbredelse @evaluationContextText</button>
+        <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , '@nameof(Constants.HeadingsNo.RegionalSpread)' )">Regional naturvariasjon</button>
         <div class="tabbed_element_container assessment_tabs">
             <div id="domestic_spread">
                 <div id="show_occurence_area" >                

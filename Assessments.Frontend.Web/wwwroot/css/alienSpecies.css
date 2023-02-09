@@ -15,8 +15,9 @@ h1, h2, h3 {
     color: #185c7d;
 }
 
-.sidebarmenu{
-    padding-top:0;
+.sidebarmenu {
+    padding-top: 0;
+    max-width: 200px;
 }
 
 .main-content {

@@ -70,8 +70,10 @@
 
     // Obtain the decisive criteria:
     var decisiveX = Model.Assessment.DecisiveCriteria.Split(",")[0];
-    bool deciciveAB = (decisiveX.Contains("A")||decisiveX.Contains("B"))?true:false;
+    bool deciciveAB = (decisiveX.Contains("A")||decisiveX.Contains("B")||decisiveX == "1")?true:false;
     bool deciciveC = decisiveX.Contains("C")?true:false;
+
+
 
     // Necessary string values
     string x_conclusion = "" + x;
@@ -373,9 +375,6 @@
                  }
             }
         }
-         <p>X-konklusjon (på formen < x > ) = @x_conclusion</p>
-         <p>C_conclusion: @C_conclusion</p>
-         <p>AB_conclusion: @AB_conclusion</p>
-         <p>decicive: C @deciciveC AB @deciciveAB</p>
+         
     </div>
 </div>

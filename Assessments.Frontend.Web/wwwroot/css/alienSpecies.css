@@ -18,6 +18,7 @@ h1, h2, h3 {
 .sidebarmenu {
     padding-top: 0;
     max-width: 200px;
+    width: 100%;
 }
 
 .main-content {

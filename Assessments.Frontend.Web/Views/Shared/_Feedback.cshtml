@@ -60,6 +60,8 @@
     }
 }
 
+<div class="feedback_form_container">
+
 <div class="page_section_header" id="Feedback" is-visible="Model.HasBackToTopLink">
     <h2>Tilbakemelding</h2>
     <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
@@ -75,8 +77,11 @@ else if (feedbackMessage)
 {
     <p>@TempData["feedback"].ToString()</p>
 }
-else if (emailIsValid)
+else if (emailIsValid || true)
 {
+    <p>
+       Din e-post er verifisert, nå kan du legge inn tilbakemelding.
+    </p>
     <div class="page_section">
         <form id="js-feedback-form" asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path)" asp-route-code="@validationCode" class="feedback_form" method="post" enctype="multipart/form-data" novalidate>
             <div class="feedback_form_input_field">
@@ -134,6 +139,7 @@ else
         </form>
     </div>
 }
+</div>
 
 <script src="~/js/lib/jquery.slim.min.js"></script>
 <script src="~/js/lib/jquery.validate.min.js"></script>

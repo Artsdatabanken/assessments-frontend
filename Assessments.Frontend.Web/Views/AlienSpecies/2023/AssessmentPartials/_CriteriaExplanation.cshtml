@@ -330,7 +330,10 @@
     }
 }
 
-<div>
+<div is-visible="showIsNk">
+    Arten er vurdert til <i>ingen kjent risiko</i> NK og har dermed ingen avgjørende kriterier.
+</div>
+<div is-visible="!showIsNk">
     <p>Kriteriene arten skårer høyest på for hver av de to aksene. <a href="">Les mer om kriteriene@{
                 /*TODO: add link when there is one*/
             }</a></p>

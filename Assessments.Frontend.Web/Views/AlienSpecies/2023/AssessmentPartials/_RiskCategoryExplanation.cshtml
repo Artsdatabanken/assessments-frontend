@@ -4,7 +4,6 @@
 @{
     var criteriaLetters = "ABCDEFGHI";
     var isAorBDecisive = Model.Assessment.DecisiveCriteria.Any(x => x == 'A' || x == 'B');
-    var showIsNk = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NK;
     
     // If either A or B is decisive, both should be shown as decisive. Hence we have to remove the other criteria from nonDecisiveCriteria if that is the case. 
     var nonDecisiveCriteria = new string(criteriaLetters.Where(x => !Model.Assessment.DecisiveCriteria.Contains(x) && (!isAorBDecisive || (x != 'A' && x != 'B'))).ToArray());
@@ -27,11 +26,8 @@
         <h2>@Constants.HeadingsNo.RiskCategoryExplanation</h2>
         <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
-    <div is-visible="showIsNk">
-        Arten er vurdert til <i>ingen kjent risiko</i> NK og har dermed ingen avgjørende kriterier.
-    </div>
-    <div id="risk_category_explanation" is-visible="!showIsNk">
-        <p>Artens risikokategori bestemmes av artens skår på to akser, invasjonspotensial (x-aksen) og økologisk effekt (y-aksen).</p>
+    <p>Artens risikokategori bestemmes av artens skår på to akser, invasjonspotensial (x-aksen) og økologisk effekt (y-aksen).</p>
+    <div id="risk_category_explanation">
         <button id="risk_category_explanation_button_1" class="changetab active" onclick="selectTab('risk_category_explanation_button_1', 'risk_category_explanation_tab_block_1' , 'risk_category_explanation' )">Avgjørende kriterier</button>
         <button id="risk_category_explanation_button_2" class="changetab" onclick="selectTab('risk_category_explanation_button_2', 'risk_category_explanation_tab_block_2' , 'risk_category_explanation' )">Øvrige kriterier</button>
         <div class="tabbed_element_container assessment_tabs">

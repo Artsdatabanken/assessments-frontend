@@ -302,7 +302,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023HeaderByline = "Publisert: 24. november 2023"; // TODO: change to correct publishing date
 
-        public const string AlienSpecies2023PageManuExpandButtonText = "Om Fremmedartslista";
+        public const string AlienSpecies2023PageManuExpandButtonText = "Fremmede arter";
 
         public const string AlienSpecies2023CitationHeading = "Siden siteres som:";
 

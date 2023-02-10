@@ -182,7 +182,7 @@ option {
 
     .content-placer {
         padding-top: 33px;
-        width: calc(75% - 4px);
+        width: calc(75%);
         display: flex;
         flex-wrap: wrap;
     }
@@ -897,3 +897,43 @@ button {
 
 
 
+
+
+
+.title_header a:active,
+.title_header a:focus {
+    text-decoration: underline
+}
+
+.darktheme.title_header a,
+.title_header a {
+    text-decoration: none;
+}
+
+.short_title,
+.full_title {
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 940px) {
+    .title_header {
+        height: 50px;
+        padding-top: 6px;
+    }
+
+    #navbar-mobile {
+        right: 50px;
+        line-height: 40px;
+        top: -2px;
+        height: 100%;
+        background: transparent;
+    }
+
+    .header button.menuitems.themeselector {
+        right: 12px;
+        line-height: 53px;
+        height: 100%;
+        background: transparent
+    }
+}
+ 

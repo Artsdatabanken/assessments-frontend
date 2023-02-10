@@ -25,9 +25,35 @@
             <script src="~/js/filter.js" asp-append-version="true"></script>
             <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
             <script src="~/js/themes.js" asp-append-version="true"></script>
+            <script src="~/js/cookies.js" asp-append-version="true"></script>
 
             @await RenderSectionAsync("Scripts", required: false)
         </div>
+
+        <!-- HEY COOKIE. TODO: Improve content & move to partial. -->
+            <div class="heyCookie" id="heyCookie">
+                Denne nettsiden benytter informasjonskapsler.
+
+                <button onclick="learnAboutCookies()">Informasjon</button>
+                <button onclick="acceptCookies(false)">Avslå</button>
+                <button onclick="acceptCookies(true)" class="primary">Godta</button>
+
+                <div id="moreCookieInfo" style="display:none;">
+                    <p>
+                        Artsdatabanken brukar informasjonskapslar til å samle statistikk til å forbetre
+                        Artsdatabanken sine nettsider. Artsdatabanken nyttar ikkje informasjonskapslar med det som formål å kartleggje
+                        bruksmønstera til enkeltbrukarar eller annan informasjon som vil kunne krenkje personvernet.
+                    </p>
+                    <p>
+                        Artsdatabanken får brukarstatistikk frå Google Analytics.
+                        Det medfører at bruken din av nettsidene våre, inklusiv IP-adressa di,
+                        kan bli overført til Google, men vi nyttar Google Analytics sin anonymiseringsfunksjon som sørgjer
+                        for at dei siste siffera i brukaren si IP-adresse blir maskert ved innsamling. IP-maskeringa skjer så snart dataa er mottekne av Google Analytics sitt innsamlingsverk,
+                        før det blir lagra og behandla i tråd med Google sine personvernretningslinjer.
+                    </p>
+                    <a href="https://artsdatabanken.no/informasjonskapsler">Les mer om informasjonskapslar</a>
+                </div>
+            </div>
     </div>
     <partial name="/Views/Shared/_PageFooter.cshtml" />
 </body>

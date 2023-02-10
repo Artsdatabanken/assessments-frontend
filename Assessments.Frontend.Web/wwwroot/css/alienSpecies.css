@@ -2,22 +2,30 @@ h1, h2, h3 {
     color: #0f0f0f;
 }
 
+@media only screen and (min-width: 941px) {
+
+    .sidebarmenu {
+        max-width: 200px;
+        width: 100%;
+        padding: 0;
+    }
+
+    .content-placer {
+        padding-top: 33px;
+        width: calc(75% + 1996px);
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
 
 .indented_list {
     margin-left: 22px;
 }
 
-
-
 .svalbard-heading {
     color: #185c7d;
 }
 
-.sidebarmenu {
-    padding-top: 0;
-    max-width: 200px;
-    width: 100%;
-}
 
 .main-content {
     /*padding-top: 7px;*/
@@ -31,13 +39,7 @@ h1, h2, h3 {
     background: #3d1f41;
 }
 
-.sidebarmenu li a {
-    padding-left: 4px;
-}
 
-.themeselector {
-    top:-2px
-}
 
 /* ACTIVE LINK COLOUR */
 .darktheme .list:hover .speciesgroup_name,
@@ -65,14 +67,18 @@ h1, h2, h3 {
 }
 
 
-    .darktheme .button.primary {
-        border: 1px solid #b372bb;
-        background: #8f4997;
-    }
+.darktheme .button.primary {
+    border: 1px solid #b372bb;
+    background: #8f4997;
+}
+
+.title_header a:active,
+.title_header a:focus{
+    text-decoration:underline
+}
 
 @media only screen and (max-width: 766px) {
-    .header .themeselectordropdown,
-    #headermenu {
+    .header .themeselectordropdown, #headermenu {
         background: #8f4997;
         border-top: 1px solid #b372bb;
     }
@@ -84,10 +90,38 @@ h1, h2, h3 {
     }
 }
 
+.darktheme.title_header a ,
+.title_header a {
+    text-decoration: none;
+}
+
+.short_title,
+.full_title {
+    font-size: 18px;
+}
+
 @media only screen and (max-width: 940px) {
     .title_header {
         background: black;
         background-image: linear-gradient(#8f499760, #8f499780);
+        height: 50px;
+        padding-top: 6px;
+    }
+
+    #navbar-mobile {
+        right: 50px;
+        line-height: 40px;
+        background: gray;
+        top: -2px;
+        height: 100%;
+        background: transparent;
+    }
+
+    .header button.menuitems.themeselector {
+        right: 12px;
+        line-height: 53px;
+        height: 100%;
+        background: transparent
     }
 }
 
@@ -204,4 +238,12 @@ li ul{
 .darktheme .innsyn-info-box {
     color: white;
     background: #3d1f41;
+}
+
+.prettier-ol li {
+    padding-bottom: 12px
+}
+
+.prettier-ol{
+    padding-top: 8px 
 }

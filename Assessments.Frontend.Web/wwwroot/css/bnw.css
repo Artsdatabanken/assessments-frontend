@@ -6,7 +6,7 @@
 
 .themeselector {
     position: absolute;
-    top: 0px;
+    top: -2px;
     right: 3px;
     width: 68px;
     padding: 0;

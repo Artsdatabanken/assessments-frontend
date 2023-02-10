@@ -10,18 +10,11 @@
     var showInteractiveMap = isAlienSpecie && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
 
-    var knownToday = new MapViewModel
+    var knownOrAssumedToday = new MapViewModel
     {
-        MapName = "known_today",
-        MapText = Constants.AlienSpecies2023KnownOccurrence,
-        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList()
-    };
-
-    var isAssumedToday = new MapViewModel
-    {
-        MapName = "is_assumed_today",
-        MapText = Constants.AlienSpecies2023AssumedOccurrence,
-        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true).ToList()
+        MapName = "known_or_assumed_today",
+        MapText = Constants.AlienSpecies2023KnownOrAssumedOccurrence,
+        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true ||  x.IsAssumedToday == true).ToList()
     };
 
     var isAssumedInFuture = new MapViewModel
@@ -75,13 +68,11 @@
                     <div is-visible="@isAlienSpecie">
                         <h3>Fylkesforekomster</h3>
                         <div is-visible="Model.IsSvalbard" class="map triple_map">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownToday" />
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedToday" />
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownOrAssumedToday" />
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture"/>
                         </div>
                         <div is-visible="!Model.IsSvalbard" class="map triple_map">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownToday" />
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
                         </div>
                     </div> 

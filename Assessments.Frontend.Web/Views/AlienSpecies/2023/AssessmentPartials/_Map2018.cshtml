@@ -6,18 +6,28 @@
 
     string className(string name)
     {
-        string className = "current";
-        if (Model.RegionOccurrences.Any(x => x.Region.DisplayName() == name))
+        string className = "LOL";
+        var element = Model.RegionOccurrences.Where(x => x.Region.DisplayName() == name).FirstOrDefault();
+        if (element != null)
         {
-            return Model.MapText switch
+            if(Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence)
             {
-                Constants.AlienSpecies2023KnownOccurrence => "known_today",
-                Constants.AlienSpecies2023AssumedOccurrence => "is_assumed_today",
-                Constants.AlienSpecies2023AssumedInFutureOccurrence => "is_assumed_in_future",
-                _ => className
-            };
+                if (element.IsKnown)
+                {
+                    className += " known_today";
+                }else if (element.IsAssumedToday)
+                {
+                    className += " is_assumed_today";
+                }
+            }else if (Model.MapText == Constants.AlienSpecies2023AssumedInFutureOccurrence)
+            {
+                 if (element.IsAssumedInFuture)
+                {
+                    className += " is_assumed_in_future";
+                }    
+            }                   
         }
-        return className;
+        return className;      
     }
 
     string seastyle = "fill:#e7f1f2;stroke:#000000;stroke-width:0.5px;";

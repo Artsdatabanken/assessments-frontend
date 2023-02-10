@@ -317,6 +317,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023AssumedOccurrence = "Antatt utbredelse i dag";
 
+        public const string AlienSpecies2023KnownOrAssumedOccurrence = "Kjent og antatt utbredelse i dag";
+
         public const string AlienSpecies2023AssumedInFutureOccurrence = "Antatt utbredelse om 50 år";
 
         public const string ClimateEffectExplanationEnding = "vært lavere i fravær av pågående eller fremtidige klimaendringer.";

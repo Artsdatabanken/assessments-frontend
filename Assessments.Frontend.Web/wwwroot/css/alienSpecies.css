@@ -35,11 +35,9 @@ h1, h2, h3 {
     background: #5e3063;
 }
 
-.header button.menuitems {
-    background: #3d1f41;
+.header button.menuitems:not(:active,:focus,:hover) {
+    background: #5e3063;
 }
-
-
 
 /* ACTIVE LINK COLOUR */
 .darktheme .list:hover .speciesgroup_name,
@@ -66,62 +64,33 @@ h1, h2, h3 {
     background: #8f4997;
 }
 
-
 .darktheme .button.primary {
     border: 1px solid #b372bb;
     background: #8f4997;
 }
 
-.title_header a:active,
-.title_header a:focus{
-    text-decoration:underline
-}
-
 @media only screen and (max-width: 766px) {
     .header .themeselectordropdown, #headermenu {
-        background: #8f4997;
+        background: #5e3063;
         border-top: 1px solid #b372bb;
     }
 
-    .header .themeselectordropdown ul ,
+    .header .themeselectordropdown ul,
     .header .themeselectordropdown li {
         color: white;
-        background: #3d1f41;
+        background: #5e3063;
     }
 }
 
-.darktheme.title_header a ,
-.title_header a {
-    text-decoration: none;
+.dropdown {
+    background: #5e3063;
 }
 
-.short_title,
-.full_title {
-    font-size: 18px;
-}
 
 @media only screen and (max-width: 940px) {
     .title_header {
         background: black;
         background-image: linear-gradient(#8f499760, #8f499780);
-        height: 50px;
-        padding-top: 6px;
-    }
-
-    #navbar-mobile {
-        right: 50px;
-        line-height: 40px;
-        background: gray;
-        top: -2px;
-        height: 100%;
-        background: transparent;
-    }
-
-    .header button.menuitems.themeselector {
-        right: 12px;
-        line-height: 53px;
-        height: 100%;
-        background: transparent
     }
 }
 

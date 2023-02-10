@@ -4,6 +4,7 @@
 @{
     var natureTypes = Model.Assessment.ImpactedNatureTypes;
     var isSvalbard = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
+    var showMicroHabitats = Model.Assessment.MicroHabitat != null && Model.Assessment.MicroHabitat.Count() != 0;
 }
 
 <div id="@nameof(Constants.HeadingsNo.ImpactedNatureTypes)">
@@ -69,4 +70,27 @@
             }
         }
     </table>
+
+    <div is-visible="showMicroHabitats">
+        <h3>Livsmedium</h3>
+        <p>
+            For noen arter er det mer riktig å angi <a href="https://www.artsdatabanken.no/Pages/137826/Livsmedium">livsmedium</a> enn naturtyper. Et eksempel er parasittiske arter som lever i og på dyr, eller arter som lever i dyremøkk, og hvor naturtypen dyret eller møkka befinner seg i betyr lite. Livsmedium har ingen effekter på artens risikokategori.
+        </p>
+        <table class="numbers-table">
+            <caption class="table-title"><b>Artens livsmedium.</b>For hvert livsmedium er det angitt om situasjonen gjelder i dag eller i fremtiden (tidshorisont). Hvis arten bruker en annen art som livsmedium er dette angitt (art/takson). </caption>
+            <tr>
+                <td>Livsmedium</td>
+                <td>Art/Takson</td>
+                <td>Tidshorisont</td>
+            </tr>
+            @foreach (var habitat in Model.Assessment.MicroHabitat)
+            {
+                <tr>
+                    <td>@habitat.Name</td>
+                    <td>@Html.Raw(Helpers.GetScientificNameElement(habitat.ScientificName)) @habitat.ScientificNameAuthor @habitat.VernacularName</td>
+                    <td>@habitat.TimeHorizon.DisplayName()</td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>

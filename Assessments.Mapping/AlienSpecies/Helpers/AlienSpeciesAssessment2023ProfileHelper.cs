@@ -5,12 +5,16 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using static Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
     public static class AlienSpeciesAssessment2023ProfileHelper
     {
+        private static PropertyInfo[] riskAssessmentProperties = typeof(RiskAssessment).GetProperties();
+        private static PropertyInfo[] riskAssessmentPropertiesFirstObservations = riskAssessmentProperties.Where(x => x.Name.StartsWith("YearFirst") && !x.Name.Contains("Insecure") && !x.Name.Contains("Domestic")).ToArray();
+
         internal static string GetAlienSpeciesCategory(string alienSpeciesCategory, string expertGroup)
         {
             if (alienSpeciesCategory == "RegionallyAlien" && expertGroup != "Fisker")
@@ -759,6 +763,48 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     "SpreadRscriptEstimatedSpeciesLongevity" => AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.NumericalEstimation.ToString(),
                     _ => chosenMethod
                 };
+            }
+        }
+
+      
+        internal static List<(AlienSpeciesAssessment2023YearFirstEstablishmentType, int, bool)> GetYearsFirstObserved(RiskAssessment riskAssessment, string establishmentCategory)
+        {
+            if (establishmentCategory == "A")
+            {
+                return new List<(AlienSpeciesAssessment2023YearFirstEstablishmentType, int, bool)>();
+            }
+
+            else
+            {
+                var establishmentType = new List<(AlienSpeciesAssessment2023YearFirstEstablishmentType, int, bool)>();
+                
+                foreach (var firstObservationProperty in riskAssessmentPropertiesFirstObservations)
+                {
+                    var yearFirstValue = firstObservationProperty.GetValue(riskAssessment);
+                    //copy.SetMethod.ReturnParameter.
+                    if (yearFirstValue is not null) 
+                    {
+                        AlienSpeciesAssessment2023YearFirstEstablishmentType establishmentTypeName = firstObservationProperty.Name switch
+                        {
+                            "YearFirstEstablishedNature" => AlienSpeciesAssessment2023YearFirstEstablishmentType.EstablishedNature,
+                            "YearFirstReproductionNature" => AlienSpeciesAssessment2023YearFirstEstablishmentType.ReproductionNature,
+                            "YearFirstNature" => AlienSpeciesAssessment2023YearFirstEstablishmentType.IndividualNature,
+                            "YearFirstEstablishmentProductionArea" => AlienSpeciesAssessment2023YearFirstEstablishmentType.EstablishedProductionArea,
+                            "YearFirstReproductionOutdoors" => AlienSpeciesAssessment2023YearFirstEstablishmentType.ReproductionProductionArea,
+                            "YearFirstProductionOutdoors" => AlienSpeciesAssessment2023YearFirstEstablishmentType.IndividualProductionArea,
+                            "YearFirstReproductionIndoors" => AlienSpeciesAssessment2023YearFirstEstablishmentType.ReproductionIndoors,
+                            _ => AlienSpeciesAssessment2023YearFirstEstablishmentType.IndividualIndoors,
+                        };
+                        var copyPropertyMatchingName = riskAssessmentProperties.Where(x => x.Name == firstObservationProperty.Name + "Insecure").Single();
+                        bool riskassesMatchingName = (bool)copyPropertyMatchingName.GetValue(riskAssessment);
+                        establishmentType.Add((establishmentTypeName, (int)yearFirstValue, riskassesMatchingName));
+                    }
+                }
+                //if (riskAssessment.YearFirstEstablishedNature.HasValue)
+                //{
+                //    establishmentType.Add((AlienSpeciesAssessment2023YearFirstEstablishmentType.EstablishedNature, (int)riskAssessment.YearFirstEstablishedNature, riskAssessment.YearFirstEstablishedNatureInsecure));
+                //}
+                return establishmentType;
             }
         }
     }

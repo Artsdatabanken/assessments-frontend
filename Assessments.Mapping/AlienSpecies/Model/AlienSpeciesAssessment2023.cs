@@ -583,5 +583,17 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Microhabitats used by the alien species
         /// </summary>
         public List<AlienSpeciesAssessment2023MicroHabitat> MicroHabitat { get; set; } = new();
+
+        /// <summary>
+        /// The first observations of the alien species in Norway (year and type of observation)
+        /// </summary>
+        public AlienSpeciesAssessment2023YearFirstObserved YearsFirstObserved { get; set; }
+
+
+        public List<string> ArrivedCountryFrom { get; set; } = new List<string>(); 
+
+        public string ArrivedCountryFromDetails { get; set; }
+
+        public List<NaturalOrigin> NaturalOrigins { get; set; }
     }
 }

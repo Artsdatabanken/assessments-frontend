@@ -230,6 +230,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ParasitePathogenTransmission, opt => opt.MapFrom(src => src.RiskAssessment.HostParasiteInformations))
                 .ForMember(dest => dest.ParasitePathogenTransmissionUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ICritInsecurity.StripUnwantedHtml()))
                 .ForMember(dest => dest.MicroHabitat, opt => opt.MapFrom(src => src.Habitats))
+                .ForPath(dest => dest.YearsFirstObserved.ObservedEstablishmentInNorway, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetYearsFirstObserved(src.RiskAssessment, src.SpeciesStatus)))
+                .ForPath(dest => dest.YearsFirstObserved.Description, opt => opt.MapFrom(src => src.FurtherInfo))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

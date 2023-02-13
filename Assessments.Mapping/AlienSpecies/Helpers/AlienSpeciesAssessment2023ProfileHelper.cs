@@ -769,7 +769,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
       
         internal static List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)> GetYearsFirstObserved(RiskAssessment riskAssessment, string establishmentCategory)
         {
-            if (establishmentCategory == "A")
+            if (establishmentCategory is "A") //species not yet in Norway cannot have observations in Norway
             {
                 return new List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)>();
             }

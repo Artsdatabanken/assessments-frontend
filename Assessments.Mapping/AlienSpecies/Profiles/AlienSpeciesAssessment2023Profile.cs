@@ -236,6 +236,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.NaturalOriginMarine, opt => opt.PreCondition(src => src.Marine))
                 .ForMember(dest => dest.CurrentInternationalExistenceAreas, opt => opt.PreCondition(src => src.Terrestrial || src.Limnic))
                 .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => src.ReproductionGenerationTime))
+                .ForMember(dest => dest.ArrivedCountryFrom, opt => opt.PreCondition(src => src.ArrivedCountryFrom is not null && src.ArrivedCountryFrom.Count > 0))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

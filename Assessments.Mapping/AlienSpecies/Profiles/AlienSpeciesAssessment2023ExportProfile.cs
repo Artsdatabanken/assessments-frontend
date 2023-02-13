@@ -24,6 +24,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.IsAcceptedSimplifiedEstimate);
                 })
                 .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt => opt.MapFrom(src => src.ExpansionSpeedEstimationMethod.DisplayName()))
+                .ForMember(dest => dest.ArrivedCountryFrom, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetArrivedCountryFrom(src.ArrivedCountryFrom)))
                 ;
         }
     }

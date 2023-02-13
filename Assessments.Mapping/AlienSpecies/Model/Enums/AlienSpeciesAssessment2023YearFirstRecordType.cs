@@ -2,7 +2,7 @@
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
-    public enum AlienSpeciesAssessment2023YearFirstEstablishmentType
+    public enum AlienSpeciesAssessment2023YearFirstRecordType
     {
         [Display(Name = "Etablering i norsk natur")]
         EstablishedNature,

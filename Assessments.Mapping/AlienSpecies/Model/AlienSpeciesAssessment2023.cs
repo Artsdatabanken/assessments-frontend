@@ -643,5 +643,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The average age of reproducing individuals (in years) 
         /// </summary>
         public double? GenerationTime { get; set; }
+
+        /// <summary>
+        /// The proportion of the known or assumed area of occupancy (AOO) in strongly altered ecosystems
+        /// </summary>
+        public double? AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }  
     }
 }

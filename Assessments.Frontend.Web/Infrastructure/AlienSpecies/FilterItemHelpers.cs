@@ -8,23 +8,104 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class Areas
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023Areas = Enum.GetValues<AlienSpeciesAssessment2023EvaluationContext>()
+        public static readonly Filter.FilterItem[] AlienSpecies2023AreasFilters = Enum.GetValues<AlienSpeciesAssessment2023EvaluationContext>()
             .Select(x => new Filter.FilterItem
             {
                 Name = x.DisplayName(),
                 NameShort = x.ToString()
             }).ToArray();
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023Areas = new()
+        {
+            Filters = AlienSpecies2023AreasFilters,
+            FilterDescription = "",
+            FilterButtonName = "områdefiltre",
+            FilterButtonText = "Område"
+        };
     }
 
     public class Categories
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023Categories = Enum.GetValues<AlienSpeciesAssessment2023Category>()
+        public static readonly Filter.FilterItem[] AlienSpecies2023InvasionPotentialFilters =
+        {
+            new Filter.FilterItem
+            {
+                NameShort = "ip1",
+                Name = "Lite",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip2",
+                Name = "Begrensa",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip3",
+                Name = "Moderat",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ip4",
+                Name = "Stort",
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023InvasionPotential = new()
+        {
+            Filters = AlienSpecies2023InvasionPotentialFilters,
+            FilterDescription = "Artens levedyktighet og evne til å ekspandere",
+            FilterButtonName = "invasjonspotensialfiltre",
+            FilterButtonText = "Invasjonspotensial (risikomatrisens x-akse)"
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffectFilters =
+        {
+            new Filter.FilterItem
+            {
+                NameShort = "ee1",
+                Name = "Ingen kjent",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee2",
+                Name = "Liten",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee3",
+                Name = "Middels",
+            },
+            new Filter.FilterItem
+            {
+                NameShort = "ee4",
+                Name = "Stor",
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023EcologicalEffect = new()
+        {
+            Filters = AlienSpecies2023EcologicalEffectFilters,
+            FilterDescription = "Påvirkning på arter og naturtyper i Norge",
+            FilterButtonName = "okologiskeffektfiltre",
+            FilterButtonText = "Økologisk effekt (risikomatrisens y-akse)"
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023CategoriesFilters = Enum.GetValues<AlienSpeciesAssessment2023Category>()
+            .Where(x => x != AlienSpeciesAssessment2023Category.NR)
             .Select(x => new Filter.FilterItem
             {
                 NameShort = x.ToString(),
                 Name = x.DisplayName().ToLowerInvariant(),
                 Description = x.DisplayName()
             }).ToArray();
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023Categories = new()
+        {
+            Filters = AlienSpecies2023CategoriesFilters,
+            FilterDescription = "",
+            FilterButtonName = "kategorifiltre",
+            FilterButtonText = "Risikokategori"
+        };
     }
 
     public enum CategoryChangeEnum
@@ -94,7 +175,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023CategoryChanged =
+        public static readonly Filter.FilterItem[] AlienSpecies2023CategoryChangedFilters =
         {
             new()
             {
@@ -105,13 +186,165 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = CategoryChangeEnum.ccke.DisplayName(),
                 NameShort = CategoryChangeEnum.ccke.ToString(),
-                SubGroup = DifferFrom2018
+                SubGroup = new()
+                {
+                    Filters = DifferFrom2018,
+                    FilterDescription = ""
+                }
             },
             new()
             {
                 Name = CategoryChangeEnum.ccsk.DisplayName(),
                 NameShort = CategoryChangeEnum.ccsk.ToString()
             }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023CategoryChanged = new()
+        {
+            Filters = AlienSpecies2023CategoryChangedFilters,
+            FilterDescription = "",
+            FilterButtonName = "kategoriendringsfiltre",
+            FilterButtonText = "Endring i risikokategori"
+        };
+    }
+
+    public class DeciciveCriteria
+    {
+        public enum DecisiveCriteriaEnum
+        {
+            [Display(Name = "A")]
+            dcexa,
+
+            [Display(Name = "B")]
+            dcexb,
+
+            [Display(Name = "AB")]
+            dcipab,
+
+            [Display(Name = "C")]
+            dcipc,
+
+            [Display(Name = "D")]
+            dceed,
+
+            [Display(Name = "E")]
+            dcipe,
+
+            [Display(Name = "F")]
+            dceef,
+
+            [Display(Name = "G")]
+            dcipg,
+
+            [Display(Name = "H")]
+            dceeh,
+
+            [Display(Name = "I")]
+            dcipi,
+        };
+
+        public static readonly Filter.FilterItem[] ExistanceTimeAndExpansionSpeed =
+        {
+            new()
+            {
+                Name = "A – artens levetid i Norge",
+                NameShort = nameof(DecisiveCriteriaEnum.dcexa)
+            },
+            new()
+            {
+                Name = "B – ekspansjonshastighet",
+                NameShort = nameof(DecisiveCriteriaEnum.dcexb)
+            }
+        };
+
+        public static readonly Filter.FilterItem[] InvationPotential =
+        {
+            new()
+            {
+                Name = "A×B – artens levetid i Norge × ekspansjonshastighet",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipab)
+            },
+            new()
+            {
+                Name = "A×B hvor høyeste skår er...",
+                NameShort = "dcipah",
+                SubGroup = new()
+                {
+                    Filters = ExistanceTimeAndExpansionSpeed,
+                    FilterDescription = ""
+                }
+            },
+            new()
+            {
+                Name = "C – kolonisert areal",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipc)
+            }
+        };
+
+        public static readonly Filter.FilterItem[] EcologicalEffect =
+        {
+            new()
+            {
+                Name = "D – effekt på truede arter eller nøkkelarter",
+                NameShort = nameof(DecisiveCriteriaEnum.dceed)
+            },
+            new()
+            {
+                Name = "E – effekt på øvrige arter",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipe)
+            },
+            new()
+            {
+                Name = "F – effekt på truede eller sjeldne naturtyper",
+                NameShort = nameof(DecisiveCriteriaEnum.dceef)
+            },
+            new()
+            {
+                Name = "G – effekt på øvrige naturtyper",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipg)
+            },
+            new()
+            {
+                Name = "H – overføring av genetisk materiale",
+                NameShort = nameof(DecisiveCriteriaEnum.dceeh)
+            },
+            new()
+            {
+                Name = "I – overføring av parasitter eller patogener",
+                NameShort = nameof(DecisiveCriteriaEnum.dcipi)
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023DeciciveCriteriaFilters =
+        {
+            new()
+            {
+                Name = "Invasjonspotensial",
+                NameShort = "dcin",
+                SubGroup = new()
+                {
+                    Filters = InvationPotential,
+                    FilterDescription = ""
+                }
+            },
+            new()
+            {
+                Name = "Økologisk effekt",
+                NameShort = "dcok",
+                SubGroup = new()
+                {
+                    Filters = EcologicalEffect,
+                    FilterDescription = ""
+                }
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023DeciciveCriteria = new()
+        {
+            Filters = AlienSpecies2023DeciciveCriteriaFilters,
+            FilterDescription = "",
+            FilterButtonName = "avgjorende kriterier-filtre",
+            FilterButtonText = "Avgjørende kriterier for kategori"
         };
     }
 
@@ -152,13 +385,17 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanks =
+        public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanksFilters =
         {
             new()
             {
                 Name = TaxonRankEnum.ttn.DisplayName(),
                 NameShort = TaxonRankEnum.ttn.ToString(),
-                SubGroup = TaxonRanks2023
+                SubGroup = new()
+                {
+                    Filters = TaxonRanks2023,
+                    FilterDescription = ""
+                }
             },
             new()
             {
@@ -170,6 +407,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = TaxonRankEnum.tvi.DisplayName(),
                 NameShort = TaxonRankEnum.tvi.ToString()
             }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023TaxonRanks = new()
+        {
+            Filters = AlienSpecies2023TaxonRanksFilters,
+            FilterDescription = "",
+            FilterButtonName = "'taksonomisk nivå'-filtre",
+            FilterButtonText = "Taksonomi"
         };
     }
 
@@ -324,7 +569,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesGroups =
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesGroupsFilters =
         {
             new()
             {
@@ -333,7 +578,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
                 Description = "Rhodophyta, Chlorophyta, Phaeophyceae",
-                SubGroup = AlienSpecies2023Algae
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023Algae,
+                    FilterDescription = ""
+                }
             },
             new()
             {
@@ -422,7 +671,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/insekter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Insekter.svg",
                 Description = "Insecta",
-                SubGroup = AlienSpecies2023Insects
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023Insects,
+                    FilterDescription = ""
+                }
             },
             new()
             {
@@ -455,7 +708,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/krepsdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = "Crustacea",
-                SubGroup = AlienSpecies2023Crustacean
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023Crustacean,
+                    FilterDescription = ""
+                }
             },
             new()
             {
@@ -499,6 +756,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
+                Name = "Pattedyr",
+                NameShort = "spd",
+                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pattedyr",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Pattedyr.svg",
+                Description = "Mammalia"
+            },
+            new()
+            {
                 Name = "Pigghuder",
                 NameShort = "spi",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pigghuder",
@@ -538,11 +803,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Description = "Fungi"
             }
         };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023SpeciesGroups = new()
+        {
+            Filters = AlienSpecies2023SpeciesGroupsFilters,
+            FilterDescription = "",
+            FilterButtonName = "artsgruppefiltre",
+            FilterButtonText = "Artsgrupper"
+        };
     }
 
     public class Regions
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023Regions =
+        public static readonly Filter.FilterItem[] AlienSpecies2023RegionsFilters =
         {
             new()
             {
@@ -666,7 +939,15 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023WaterRegions =
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023Regions = new()
+        {
+            Filters = AlienSpecies2023RegionsFilters,
+            FilterDescription = "",
+            FilterButtonName = "regionfiltre",
+            FilterButtonText = "Regioner og havområder"
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023WaterRegionsFilters =
         {
             new()
             {
@@ -749,11 +1030,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "WVH"
             }
         };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023WaterRegions = new()
+        {
+            Filters = AlienSpecies2023WaterRegionsFilters,
+            FilterDescription = "",
+            FilterButtonName = "vannregionfiltre",
+            FilterButtonText = "Vannregioner"
+        };
     }
 
     public class Habitat
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023Habitats =
+        public static readonly Filter.FilterItem[] AlienSpecies2023HabitatsFilters =
         {
             new()
             {
@@ -788,6 +1077,39 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Mapping = "Omfatter alle hovedtypene under NiN 2.0 hovedtypegruppen <a href=\"https://artsdatabanken.no/Pages/172028/Vaatmarkssystemer\" target=\"_blank\" rel=\"noopener\">V Våtmarkssystemer</a>."
             }
         };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023Habitats = new()
+        {
+            Filters = AlienSpecies2023HabitatsFilters,
+            FilterDescription = "",
+            FilterButtonName = "hovedhabitatfiltre",
+            FilterButtonText = "Hovedhabitat"
+        };
+    }
+
+    public class ProductionSpecies
+    {
+        public static Filter.FilterItem[] AlienSpecies2023ProductionSpeciesFilters =
+        {
+            new Filter.FilterItem()
+            {
+                Name = "Tidligere eller nåværende bruksart",
+                NameShort = true.ToString()
+            },
+            new Filter.FilterItem()
+            {
+                Name = "Ikke bruksart",
+                NameShort = false.ToString()
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023ProductionSpecies = new()
+        {
+            Filters = AlienSpecies2023ProductionSpeciesFilters,
+            FilterDescription = "",
+            FilterButtonName = "'produksjonsart'-filtre",
+            FilterButtonText = "Bruksart"
+        };
     }
 
     public class SpeciesStatus
@@ -796,42 +1118,42 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             new()
             {
-                Name = "Overlever vinteren utendørs",
-                NameShort = "C1"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.c1.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c1)
             },
             new()
             {
-                Name = "Observert i norsk natur",
-                NameShort = "C0"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.c0.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c0)
             },
             new()
             {
-                Name = "Utendørs i eget produksjonsareal",
-                NameShort = "B2"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.b2.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.b2)
             },
             new()
             {
-                Name = "Innendørs",
-                NameShort = "B1"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.b1.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.b1)
             },
             new()
             {
-                Name = "Ikke i Norge",
-                NameShort = "A"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.a.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.a)
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesStatus =
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesStatusFilters =
         {
             new()
             {
-                Name = "Etablert",
-                NameShort = "C3"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.c3.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c3)
             },
             new()
             {
-                Name = "Selvstendig reproduserende",
-                NameShort = "C2"
+                Name = AlienSpeciesAssessment2023SpeciesStatus.c2.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c2)
             },
             new()
             {
@@ -842,9 +1164,20 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = "Dørstokkart som...",
                 NameShort = "eds",
-                SubGroup = AlienSpecies2023Doorknockers
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023Doorknockers,
+                    FilterDescription = ""
+                }
             }
         };
-    }
 
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023SpeciesStatus = new()
+        {
+            Filters = AlienSpecies2023SpeciesStatusFilters,
+            FilterDescription = "",
+            FilterButtonName = "etableringsklassefiltre",
+            FilterButtonText = "Etableringsklasse i dag"
+        };
+    }
 }

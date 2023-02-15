@@ -1,0 +1,263 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Focus outline
+// Had to override bootstrap reboot css which directly targets button. Ugly stuff.*/
+button:focus-visible,
+button:focus:not(:focus-visible),
+.timepicker-toggle-button:focus,
+.timepicker-button:focus,
+.datepicker-footer-btn:focus,
+.primary:focus,
+.secondary:focus,
+.text-button:focus,
+.ghost:focus {
+    outline: 3px solid #0283a1;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/* Button styles */
+.chips,
+.btn,
+.adb-button {
+    padding: 14px 22px;
+    border-radius: 30px;
+    border-width: 2px;
+    border-style: solid;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 16px;
+    margin:  8px;
+    margin-left: 0;
+}
+
+
+.adb-button .material-icons,
+.adb-button .material-icons-outline {
+    vertical-align: text-top;
+    font-size: 18px;
+    line-height: 16px;
+    margin-right:  8px;
+}
+
+.adb-button .end-icon {
+    margin-right: auto;
+    margin-left:  8px;
+}
+
+button:not(.icon-button).material-icons {
+    vertical-align: baseline;
+    margin-right:  8px;
+    font-size: inherit;
+}
+
+.primary {
+    background:  #005B72;
+    border-color:  #005B72;
+    color: #FFFFFF
+}
+
+.primary:hover,
+.primary:active {
+    background: #337B8D;
+    border-color: #337B8D;
+    color: #FFFFFF
+}
+
+.secondary {
+    background: #CCDEE3;
+    border-color: #CCDEE3;
+}
+
+.secondary:hover,
+.secondary:active {
+    background: #E6EFF1;
+    border-color: #E6EFF1;
+}
+
+
+.timepicker-button,
+.datepicker-footer-btn,
+.text-button,
+.ghost {
+    text-decoration: underline;
+    color:  #005B72;
+    border-color: transparent;
+    background: transparent;
+}
+
+
+.timepicker-button:hover,
+.datepicker-footer-btn:hover,
+.text-button:hover,
+.ghost:hover,
+.ghost:active,
+.secondary:active {
+    background: #E6EFF1;
+    border-color: #E6EFF1;
+    color: #262f31;
+}
+
+.ghost,
+.ghost:hover,
+.ghost:active {
+    color: #262f31;
+    border-color: #262f31;
+    text-decoration: none;
+}
+
+.timepicker-toggle-button:focus,
+.timepicker-button:focus,
+.datepicker-footer-btn:focus,
+.primary:focus,
+.secondary:focus,
+.primary:focus-visible,
+.secondary:focus-visible {
+    border-color: #FFFFFF;
+}
+
+.datepicker-toggle-button,
+.timepicker-toggle-button,
+.icon-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.icon-button {
+    padding: 0;
+    margin: 0;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.icon-button .material-icons {
+    margin: 0
+}
+
+.icon-button.text-button,
+.icon-button.ghost {
+    color: #262f31;
+}
+
+.button-tabs {
+    width: 100%;
+    display: flex;
+}
+
+.button-tabs * {
+    flex: 1;
+}
+
+.button-tabs .adb-button {
+    margin: 0;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.secondary.active {
+    border-color:  #005B72;
+    border-width:  calc( 8px / 2);
+}
+
+.button-tabs .secondary:not(.active) {
+    background: #F2F6F8;
+    border: #F2F6F8;
+}
+
+/**
+ * Chips are based on button-styles, and cannot be used without it.
+ */
+
+
+.chips-container {
+    display: inline-block;
+    list-style: none;
+}
+
+.chips {
+    background: #DEE0E0;
+    width: fit-content;
+    max-width: fit-content;
+    border-color: #DEE0E0;
+    display: inline-block;
+    position: relative;
+    padding: 12px 14px;
+    min-height: 50px;
+    color: #0f0f0f;
+}
+
+.chips-close-button {
+    position: absolute;
+    right: 12px;
+    top: calc(14px - calc(calc(40px - 18px) / 2));
+    color:inherit;
+}
+
+.chips-text {
+    padding-right: calc(40px +  8px);
+    line-height: 22px;
+}
+
+.chips .chips-icon,
+.chips .species-group-icon {
+    display: inline-block;
+    vertical-align: text-bottom;
+    margin-right:  8px;
+}
+
+.chips:not(.mega-chips) .chips-icon,
+.chips:not(.mega-chips) .species-group-icon {
+    width: 22px;
+    height: 22px;
+    font-size: 18px;
+    border-width: 1px;
+    padding: 1px;
+}
+
+.chips .vernacular-name {
+    display: inline;
+}
+
+/*  Mega-chips
+// For use for displaying selected species*/
+
+.mega-chips-container {
+    width: 100%;
+    display: inline-block;
+}
+
+.mega-chips {
+    border: 1px solid #555555;
+    border-radius: 0;
+    background: #faf1e4;
+    width: 100%;
+    max-width: 100%;
+    padding:  16px 21px;
+}
+
+.mega-chips .chips-icon,
+.mega-chips .species-group-icon {
+    float: left;
+    margin-right:  16px !important;
+    /*  ugly, but the other stylesheet is an inline stylesheet with higher priority*/
+}
+
+.mega-chips .vernacular-name {
+    display: block;
+}
+
+.mega-chips .name-text {
+    font-family: 'Space Mono', sans-serif;
+}
+
+.mega-chips .chips-close-button {
+    right:  16px;
+    top: calc(21px - calc(calc(40px - 18px) / 2));
+}

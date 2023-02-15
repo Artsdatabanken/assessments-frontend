@@ -1,0 +1,158 @@
+
+/* remaking risk matrix to grid*/
+
+.non-css-only {
+    display: none!important;
+}
+
+.risk-level-matrix {
+    display: inline-grid;
+    grid-template-columns: 20px 1fr;
+    margin:0;
+    overflow-x:auto;
+    max-width:100%;
+
+}
+
+.risk-matrix {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.risk-matrix ul {
+    display: inline-grid;
+    grid-template-columns: repeat(5, 60px);
+    list-style: none;
+}
+
+
+/* element containers */
+.risk-matrix li {
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+}
+
+.risk-level {
+    background: black;
+    border: 1px solid black;
+    border-bottom-width: 0px;
+}
+
+.risk-level:not(:last-child) {
+    border-right: none
+}
+
+.bottom-border .risk-level {
+    border-width: 1px
+}
+
+.risk-level span {
+    display: block;
+    height: 100%;
+}
+
+.risk-matrix li.active span {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.risk-matrix li.active span,
+.risk-matrix li.uncertain span {
+    border: 2px solid white;
+    font-size: 20px;
+    line-height: 54px;
+}
+
+.risk-matrix li.uncertain span {
+    border-style: dashed;
+}
+
+.risk-matrix li.description {
+    line-height: initial;
+    padding: 8px;
+    font-size: small;
+    border: none;
+}
+
+.risk-matrix li.description span {
+    display: block
+}
+
+.rotate-legend {
+    writing-mode: vertical-rl;
+    transform: scale(-1, -1);
+}
+
+.legend {
+    text-align: center
+}
+
+
+/* colours */
+.risk-matrix .nk span {
+    background: #9ba963;
+    color: #201f1f
+}
+
+.risk-matrix .lo span {
+    background: #5ea4a1;
+    color: #201f1f
+}
+
+.risk-matrix .ph span {
+    background: #185a6c;
+    color: white;
+}
+
+.risk-matrix .hi span {
+    background: #1b386f;
+    color: white;
+}
+
+.risk-matrix .se span {
+    background: #5e3063;
+    color: white;
+}
+
+
+.risk-matrix-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.risk-matrix-container .flex-me {
+    flex:1;
+    min-width:50%;
+    padding:20px 0;
+}
+
+
+@media only screen and (max-width: 355px) {
+
+    .risk-matrix ul {
+        grid-template-columns: 60px repeat(4, 40px);
+    }
+
+    .risk-matrix li {
+        height: 40px;
+        line-height: 38px;
+        width:40px
+    }
+
+    .risk-matrix li.active span,
+    .risk-matrix li.uncertain span {
+        line-height: 34px;
+    }
+
+    .bottom-legend .description {
+        writing-mode: vertical-rl;
+        transform: scale(-1, -1);
+        height: 80px;
+        text-align: right
+    }
+    
+}

@@ -12,7 +12,7 @@ namespace Assessments.Shared.Helpers
         public static string DisplayName(this MemberInfo property)
         {
             var attribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true).Cast<DisplayNameAttribute>().Single();
-           
+
             return attribute.DisplayName;
         }
 
@@ -21,9 +21,9 @@ namespace Assessments.Shared.Helpers
             var type = value.GetType();
             var memberInfo = type.GetMember(value.ToString());
             var attributes = memberInfo[0].GetCustomAttributes(typeof(T), false);
-            
-            if (attributes.Length > 0)	
-                return (T) attributes[0];
+
+            if (attributes.Length > 0)
+                return (T)attributes[0];
 
             return null;
         }
@@ -42,7 +42,7 @@ namespace Assessments.Shared.Helpers
 
         public static IEnumerable<T> ToEnumerable<T>(this IEnumerable<string> array)
         {
-            return array.Where(c => Enum.IsDefined(typeof(T), c)).Select(a => (T) Enum.Parse(typeof(T), a));
+            return array.Where(c => Enum.IsDefined(typeof(T), c)).Select(a => (T)Enum.Parse(typeof(T), a));
         }
     }
 }

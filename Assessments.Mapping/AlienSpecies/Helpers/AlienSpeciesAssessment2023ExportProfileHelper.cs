@@ -1,24 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Shared.Helpers;
+using System.Collections.Generic;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
     internal static class AlienSpeciesAssessment2023ExportProfileHelper
     {
-        private static Dictionary<string, string> GetGeoVarValues = new Dictionary<string, string>()
+        internal static string GetGeographicalVariation(List<AlienSpeciesAssessment2023GeographicalVariation> geoVar)
         {
-            {"reproduksjonLimitedToCertainClimaticZones", "Artens evne til reproduksjon og/eller spredning er begrenset til visse bioklimatiske soner eller seksjoner" },
-            {"ecologicalEffectLimitedToCertainClimaticZones","Artens økologiske effekter er begrenset til visse bioklimatiske soner eller seksjoner"},
-            {"ecologicalEffectLimitedToCertainNatureTypes","Artens økologiske effekter er begrenset til bestemte naturtyper"},
-            {"ecologicalEffectLimitedToIndigenousSpecies  ","Artens økologiske effekt består utelukkende i interaksjoner med stedegne arter som har svært begrenset utbredelse"},
-            {"ecologicalEffectLimitedToIndigenousSpecies", "Artens økologiske effekt består utelukkende i interaksjoner med stedegne arter som har svært begrenset utbredelse"}
-        };
-
-        internal static string GetGeographicalVariation(List<string> geoVar)
-        {
-            var valueList  = new List<string>();
-            foreach (string var in geoVar)
+            var valueList = new List<string>();
+            foreach (var variation in geoVar)
             {
-                valueList.Add(GetGeoVarValues[var]);
+                valueList.Add(variation.DisplayName());
             }
             return string.Join(", ", valueList);
         }

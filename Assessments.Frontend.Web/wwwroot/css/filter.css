@@ -11,7 +11,7 @@
 
 @media only screen and (min-width: 750px) {
     .controls {
-        margin-left: 220px;
+        margin-left: 260px;
     }
 
     .empty_filters {
@@ -196,9 +196,9 @@
 
 .filtercontainer{
     box-sizing: border-box;
-    max-width: 220px;
-    width: 220px;
-    padding: 5px;
+    max-width: 260px;
+    width: 260px;
+    padding-right: 10px;
     margin-top: -1px;
     flex: none;
     padding-top:0;
@@ -219,6 +219,7 @@ li.checkbox label {
 
 .label_text {
     width: 100%;
+    hyphens: auto;
 }
 
 .filter_groups ul {
@@ -290,6 +291,10 @@ button.list_header {
 
 #show_all_insects {
     display: none;
+}
+
+.filter_info_text {
+    margin: 5px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -542,6 +547,8 @@ button.list_header {
 
 .only_js .filter_area,
 .only_js .filter_category,
+.only_js .filter_ecologicaleffect,
+.only_js .filter_invasionpotential,
 .only_js .filter_categorychanged,
 .only_js .filter_subgroup,
 .only_js .filter_speciesstatus,
@@ -561,9 +568,14 @@ button.list_header {
     display: block;
 }
 
+/*Hide the filters initially*/
 /*sub groups*/
 .only_js input[type=checkbox]:not(:checked)#show_ccke ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_dcin ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_dcok ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_dcipah ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_eds ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_insects ~ .filter_insects,
 .only_js input[type=checkbox]:not(:checked)#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_skr ~ .filter_subgroup,
@@ -572,6 +584,9 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_area ~ .filter_area,
 .only_js input[type=checkbox]:not(:checked)#show_category ~ .filter_category,
 .only_js input[type=checkbox]:not(:checked)#show_categorychanged ~ .filter_categorychanged,
+.only_js input[type=checkbox]:not(:checked)#show_ecologicaleffect ~ .filter_ecologicaleffect,
+.only_js input[type=checkbox]:not(:checked)#show_invasionpotential ~ .filter_invasionpotential,
+.only_js input[type=checkbox]:not(:checked)#show_decisivecriterias ~ .filter_decisivecriterias,
 .only_js input[type=checkbox]:not(:checked)#show_region ~ .filter_region,
 .only_js input[type=checkbox]:not(:checked)#show_regions ~ .filter_regions,
 .only_js input[type=checkbox]:not(:checked)#show_waterregions ~ .filter_waterregions,
@@ -588,19 +603,3 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_taxonrank ~ .filter_taxonrank {
     display: none;
 }
-
-.only_js input[type=checkbox]:checked#show_ccke ~ .filter_subgroup,
-.only_js input[type=checkbox]:checked#show_eds ~ .filter_subgroup,
-.only_js input[type=checkbox]:checked#show_sal ~ .filter_subgroup,
-.only_js input[type=checkbox]:checked#show_sin ~ .filter_subgroup,
-.only_js input[type=checkbox]:checked#show_skr ~ .filter_subgroup,
-.only_js input[type=checkbox]:checked#show_insects ~ .filter_insects,
-.only_js input[type=checkbox]:checked#show_ttn ~ .filter_subgroup {
-    display: block;
-}
-
-.only_js .filter_insects,
-.only_js .filter_subgroup {
-    display: none;
-}
-

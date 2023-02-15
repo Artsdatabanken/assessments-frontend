@@ -1,0 +1,31 @@
+﻿.feedback_form_container {
+    width: 100%;
+    background: rgba(125,125,125,0.2);
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 40px;
+}
+
+.feedback_form {
+    width: 100%;
+    max-width: 550px;
+}
+
+.feedback_form input:not([type=checkbox]),
+.feedback_form textarea {
+    padding: 8px;
+    border-radius: 3px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.feedback_form_input_field {
+    margin-bottom: 20px;
+}
+
+.input-validation-error {
+    border: 1px solid red;
+    outline-color: red;
+}

@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
 
 namespace Assessments.Transformation.Helpers
@@ -33,6 +34,28 @@ namespace Assessments.Transformation.Helpers
 
             await using var stream = new MemoryStream(bytesToUpload);
             await _blobContainer.GetBlobClient(key).UploadAsync(stream, progressHandler: progressHandler);
+        }
+
+        public static async Task UploadFile(IConfigurationRoot configuration, string path, byte[] value)
+        {
+            if (_blobContainer == null)
+            {
+                var connectionString = configuration.GetConnectionString("AzureBlobStorage");
+
+                if (string.IsNullOrEmpty(connectionString))
+                    throw new Exception("ConnectionStrings:AzureBlobStorage (app secret) mangler");
+
+                _blobContainer = new BlobContainerClient(connectionString, "assessments");
+
+                await _blobContainer.CreateIfNotExistsAsync();
+            }
+
+            var blobClient = _blobContainer.GetBlobClient(path);
+            if (!await blobClient.ExistsAsync())
+            {
+                await using var stream = new MemoryStream(value);
+                await blobClient.UploadAsync(stream, overwrite: true);
+            }
         }
     }
 }

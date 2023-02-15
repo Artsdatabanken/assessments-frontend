@@ -10,6 +10,8 @@
         // https://database.artsdatabanken.no/cms/node/314303/edit?destination=node/314304
         menuItems = content.References.Select(x => new KeyValuePair<string, string>(x.Heading, $"https://artsdatabanken.no{x.Url}")).ToList();
     }
+    var isRedlist2021 = Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021;
+    var isAlienSpecies2023 = Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023;
 }
 
 <div class="sidebarmenu">
@@ -18,7 +20,13 @@
     <ul>
         @*lenker fra cms/drupal via api*@
         <li>
-            <a class="menuheaderlink" asp-controller="Redlist" asp-action="Index2021">
+            <a is-visible="isRedlist2021" class="menuheaderlink" asp-controller="Redlist" asp-action="Index2021">
+                <h3>
+                    <span>@Model.PageMenuExpandButtonText</span>
+                    <span class="material-icons pad-top">keyboard_arrow_right</span>
+                </h3>
+            </a>
+            <a is-visible="isAlienSpecies2023" class="menuheaderlink" asp-controller="AlienSpecies" asp-action="Index">
                 <h3>
                     <span>@Model.PageMenuExpandButtonText</span>
                     <span class="material-icons pad-top">keyboard_arrow_right</span>

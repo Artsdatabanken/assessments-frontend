@@ -41,12 +41,12 @@
         }
         else
         {
-            <span>@Helpers.fixSpeciesLevel("{Art}en", Model.TaxonRank) er </span>
+            <span>@Helpers.FixSpeciesLevel("{Art}en", Model.TaxonRank) er </span>
             @if (Model.Category != "NA" && Model.Category != "NE")
             {
                 <span>vurdert til </span>
             }
-            <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.findDegrees(Model.Category, true)</span><span>
+            <partial name="/Views/Shared/_Category.cshtml" /> <span class="">@Helpers.FindDegrees(Model.Category, true)</span><span>
 
                 @if (@Model.Category == "CR" && @Model.PresumedExtinct == true)
                 {

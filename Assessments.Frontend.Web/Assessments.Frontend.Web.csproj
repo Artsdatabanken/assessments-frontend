@@ -10,27 +10,32 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="ClosedXML" Version="0.97.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.10" />
-		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="System.Text.Json" Version="6.0.6" />
+		<PackageReference Include="ClosedXML" Version="0.100.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.13" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.13">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+		<PackageReference Include="NLog.Database" Version="5.1.1" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.1" />
+		<PackageReference Include="SendGrid.Extensions.DependencyInjection" Version="1.0.1" />
+		<PackageReference Include="System.Text.Json" Version="6.0.7" />
 		<PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
-		<PackageReference Include="AutoMapper" Version="12.0.0" />
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
-		<PackageReference Include="CsvHelper" Version="30.0.0" />
+		<PackageReference Include="CsvHelper" Version="30.0.1" />
 		<PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.14.1" />
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Assessments.Data\Assessments.Data.csproj" />
 	  <ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
 	  <ProjectReference Include="..\Assessments.Shared\Assessments.Shared.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Cache\" />
 	</ItemGroup>
 	
 </Project>

@@ -8,7 +8,7 @@
         Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
     </p>
 
-    @Html.PagedListPager(Model.Results, page => Url.Action("Index", Context.Request.QueryString.ToRouteValues(new { Page = page })), new PagedListRenderOptions
+    @Html.PagedListPager(Model.Results, page => Context.Request.QueryString.AddParameters(new { Page = page }), new PagedListRenderOptions
     {
         PageClasses = new[] { "page-link" },
         UlElementClasses = new[] { "pagination" },

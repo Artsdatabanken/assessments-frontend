@@ -6,7 +6,7 @@
         Viser side @Model.Redlist2021Results.PageNumber av @Model.Redlist2021Results.PageCount.ToString("N0")
     </p>
 
-    @Html.PagedListPager(Model.Redlist2021Results, page => Url.Action("Index2021", Context.Request.QueryString.ToRouteValues(new { Page = page })), new PagedListRenderOptions
+    @Html.PagedListPager(Model.Redlist2021Results, page => Context.Request.QueryString.AddParameters(new { Page = page }), new PagedListRenderOptions
     {
         PageClasses = new[] { "page-link" },
         UlElementClasses = new[] { "pagination" },

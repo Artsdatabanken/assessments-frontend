@@ -1,0 +1,37 @@
+﻿@model ExpertStatementViewModel
+
+@{
+    var showChangedAssessment = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie;
+    var showChangedFromAlien = Model.ChangedFromAlien != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ChangedFromAlien.Unknown;
+    var showAlienStatusExplanation = !string.IsNullOrEmpty(Model.AlienStatusExplanation);
+    var showChangedFromAlienDescription = !string.IsNullOrEmpty(Model.ChangedFromAlienDescription);
+    var showConnectedToHigherLowerTaxonDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var showUncertaintyEstablishmentTimeDescription = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800;
+    var isMisidentified = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified;
+}
+
+<div id="@nameof(Constants.HeadingsNo.AssesmentReasoning)">
+    <h2>@Constants.HeadingsNo.AssesmentReasoning</h2>
+    <div class="expert_Assessment">
+        <div class="expert_text">
+            <div is-visible="isMisidentified">@Html.Raw(Model.MisidentifiedDescription)</div>
+            <div is-visible="@showChangedAssessment">
+                <p is-visible="@showAlienStatusExplanation">
+                    @Html.Raw(Model.AlienStatusExplanation) 
+                </p>
+                <p is-visible="@showChangedFromAlien">
+                    @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Html.Raw(Model.ChangedFromAlien.DisplayName()).
+                </p>
+                <p is-visible="showChangedFromAlienDescription">
+                    @Html.Raw(Model.ChangedFromAlienDescription)
+                </p>
+            </div>
+            <p is-visible="@showConnectedToHigherLowerTaxonDescription">
+                @Html.Raw(Model.ConnectedToHigherLowerTaxonDescription)
+            </p>
+            <p is-visible="@showUncertaintyEstablishmentTimeDescription">
+                @Html.Raw(Model.UncertaintyEstablishmentTimeDescription)
+            </p>
+        </div>
+    </div>
+</div>

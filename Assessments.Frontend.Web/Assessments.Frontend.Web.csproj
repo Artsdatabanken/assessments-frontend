@@ -13,7 +13,7 @@
 		<PackageReference Include="ClosedXML" Version="0.100.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.13" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.13" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.13">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.14">
 		  <PrivateAssets>all</PrivateAssets>
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>

@@ -583,5 +583,70 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Microhabitats used by the alien species
         /// </summary>
         public List<AlienSpeciesAssessment2023MicroHabitat> MicroHabitat { get; set; } = new();
+
+        /// <summary>
+        /// The first records of the alien species in Norway (year and type of revord)
+        /// </summary>
+        public AlienSpeciesAssessment2023YearFirstRecord YearsFirstRecord { get; set; }
+
+        /// <summary>
+        /// The origin of the individuals in Norway
+        /// </summary>
+        public List<AlienSpeciesAssessment2023ArrivedCountryFrom> ArrivedCountryFrom { get; set; } = new();
+
+        /// <summary>
+        /// The origin of the individuals in Norway. Description.
+        /// </summary>
+        public string ArrivedCountryFromDetails { get; set; }
+
+        /// <summary>
+        /// The species natural global distribution (terrestrial and limnic species)
+        /// </summary>
+        public List<NaturalOrigin> NaturalOrigins { get; set; }
+
+        /// <summary>
+        /// The species natural global distribution (terrestrial and limnic species). Description.
+        /// </summary>
+        public string NaturalOriginUnknownDocumentation { get; set; }
+
+        /// <summary>
+        /// The species natural global distribution (marine species)
+        /// </summary>
+        public List<AlienSpeciesAssessment2023NaturalOriginMarine> NaturalOriginMarine { get; set; }
+
+        /// <summary>
+        /// The species natural global distribution (marine species). Description.
+        /// </summary>
+        public string NaturalOriginMarineDetails { get; set; }
+
+        /// <summary>
+        /// The species current global distribution including alien distribution (terrestrial and limnic species)
+        /// </summary>
+        public List<NaturalOrigin> CurrentInternationalExistenceAreas { get; set; }
+
+        /// <summary>
+        /// The species current global distribution including alien distribution (terrestrial and limnic species). Description.
+        /// </summary>
+        public string CurrentInternationalExistenceAreasUnknownDocumentation { get; set; }
+
+        /// <summary>
+        /// The species current global distribution including alien distribution (marine species).
+        /// </summary>
+        public List<AlienSpeciesAssessment2023NaturalOriginMarine> CurrentInternationalExistenceMarineAreas { get; set; }
+
+        /// <summary>
+        /// The species current global distribution including alien distribution (marine species). Description.
+        /// </summary>
+        public string CurrentInternationalExistenceMarineAreasDetails { get; set; }
+
+        /// <summary>
+        /// The average age of reproducing individuals (in years) 
+        /// </summary>
+        public double? GenerationTime { get; set; }
+
+        /// <summary>
+        /// The proportion of the known or assumed area of occupancy (AOO) in strongly altered ecosystems
+        /// </summary>
+        public AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }  
     }
 }

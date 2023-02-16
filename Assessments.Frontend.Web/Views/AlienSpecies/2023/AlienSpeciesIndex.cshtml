@@ -29,7 +29,7 @@
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
     };
 
-    ViewData["Title"] = "Fremmedartslista - innsyn"; // TODO: change to correct publishing date
+    ViewData["Title"] = "Fremmedartslista 2023 - innsyn"; // TODO: change after innsight process
 
     var enableCitation = Options.Value.AlienSpecies2023.EnableCitation;
 }
@@ -44,7 +44,7 @@
                     <partial name="/Views/Shared/_Header.cshtml" model="@pageHeaderViewModel" />
                 </div>
                 <div class="title_with_ingress">
-                    <img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />
+                    @*<img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />*@
                     <partial name="/Views/Shared/_Introduction.cshtml" model="@introductionViewModel" />
                 </div>
             </div>

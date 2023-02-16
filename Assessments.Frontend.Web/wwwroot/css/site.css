@@ -875,6 +875,10 @@ button {
     vertical-align: baseline;
 }
 
+.themeselectordropdown .themebutton {
+    color: #000;
+}
+
 .themebutton .material-icons {
     vertical-align: middle;
 }

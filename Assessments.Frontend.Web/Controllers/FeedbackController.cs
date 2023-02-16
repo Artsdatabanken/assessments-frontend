@@ -204,7 +204,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             message.AddTo(new EmailAddress(emailValidation.Email, emailValidation.FullName));
             
-            var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#Feedback";
+            var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#Feedback";
             
             var messageContent = $"<p>Klikk på lenken nedenfor for å bekrefte din e-postadresse. Dette gir deg tilgang til å gi tilbakemelding på Fremmedartsvurderinger i 2023.</p><p><a href='{validationUrl}'>{validationUrl}</a></p><p>Dette er en automatisk generert e-post som du ikke kan svare på</p>";
 
@@ -249,7 +249,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             TempData["feedback"] = "Din e-postadresse er slettet.";
 
-            return Redirect($"{returnUrl}#Feedback");
+            return Redirect($"{returnUrl.Split('?')[0]}#Feedback");
         }
 
         public IActionResult Terms() => View();

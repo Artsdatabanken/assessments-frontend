@@ -70,6 +70,11 @@ namespace Assessments.Mapping.AlienSpecies.Source
         public string TaxonSearchString { get; set; }
 
         public string TaxonRank { get; set; }
+        
+        /// <summary>
+        /// Connected assessment
+        /// </summary>
+        public int AssessmentId { get; set; } // lagt til 16.02.2023
 
     }
 
@@ -152,10 +157,17 @@ namespace Assessments.Mapping.AlienSpecies.Source
         /// Scientific name used for Risk Evaluation (at the time of evaluation)
         /// </summary>
         public string EvaluatedScientificName { get; set; }
+
+        public string EvaluatedScientificNameFormatted { get; set; } // added 16.02.2023
         public string EvaluatedScientificNameAuthor { get; set; } //added 23.08.2017
         public string EvaluatedVernacularName { get; set; } //added 29.09.2017
 
         public string TaxonHierarcy { get; set; }
+
+        /// <summary>
+        /// taxonomic hiearchy with tuple (formatted name, author and taxonrank int)
+        /// </summary>
+        public List<ScientificNameWithRankId> NameHiearchy { get; set; } // added 16.02.2023
 
         /// <summary>
         /// Denne eksisterer kun virtuelt - ikke i produksjonsbasen - kun for lasting av vurderinger og gjenntatt transformasjon
@@ -1604,6 +1616,13 @@ namespace Assessments.Mapping.AlienSpecies.Source
         //    public string NatureTypeDescription;
         //    public List<string> NatureTypeVariation;
         //}
+
+        public class ScientificNameWithRankId
+        {
+            public string ScientificName { get; set; }
+            public string Author { get; set; }
+            public int Rank { get; set; }
+        }
 
         /// <summary>
         /// Static copy of information from previous assesment - for historical purposes

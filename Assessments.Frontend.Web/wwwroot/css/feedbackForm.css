@@ -1,37 +1,28 @@
-﻿.feedback_form {
+﻿.feedback_form_container {
     width: 100%;
     background: rgba(125,125,125,0.2);
     padding: 20px;
-    border-radius: 30px;
-    text-align: center;
+    border-radius: 4px;
+    margin-top: 40px;
 }
 
-.feedback_form #FullName,
-.feedback_form #Email,
-.feedback_form #Comment {
+.feedback_form {
+    width: 100%;
+    max-width: 550px;
+}
+
+.feedback_form input:not([type=checkbox]),
+.feedback_form textarea {
     padding: 8px;
     border-radius: 3px;
     display: block;
-    margin: 2px auto
-}
-
-.feedback_form #FullName,
-.feedback_form #Email {
-    width: 50%;
-}
-
-.feedback_form #Comment {
     width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
 }
 
 .feedback_form_input_field {
-    margin-bottom: 25px;
-}
-
-@media only screen and (max-width: 550px) {
-    .feedback_form #FullName, .feedback_form #Email {
-        width: 100%;
-    }
+    margin-bottom: 20px;
 }
 
 .input-validation-error {

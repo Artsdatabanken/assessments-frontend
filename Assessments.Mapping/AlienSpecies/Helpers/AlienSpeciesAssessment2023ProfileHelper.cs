@@ -140,7 +140,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 return mainCategory switch
                 {
-                    "Rømning/forvilling" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped,
+                    "R\u00F8mning/forvilling" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped,
                     "Blindpassasjer med transport" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Stowaway,
                     "Korridor" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Corridor,
                     "Tilsiktet utsetting" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Released,

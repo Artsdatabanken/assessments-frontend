@@ -4,7 +4,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023SpeciesGroups
     {
-        [Display(Name = "Brunagler")]
+        [Display(Name = "Brunalger")]
         Phaeophyceae,
 
         [Display(Name = "Grønnalger")]

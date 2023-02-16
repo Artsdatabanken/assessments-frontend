@@ -161,5 +161,9 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [DisplayName("Ant. ytterligere introduksjoner høyt anslag")]
         [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (høyt anslag)")]
         public int? RiskAssessmentIntroductionsHigh { get; set; }
+
+        [DisplayName("Kom til vurderingsområdet fra")]
+        [Description("Angir hvorfra arten ankom vurderingsområdet")]
+        public string ArrivedCountryFrom { get; set; }
     }
 }

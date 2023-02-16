@@ -875,6 +875,10 @@ button {
     vertical-align: baseline;
 }
 
+.themeselectordropdown .themebutton {
+    color: #000;
+}
+
 .themebutton .material-icons {
     vertical-align: middle;
 }
@@ -931,7 +935,6 @@ button {
 
     .header button.menuitems.themeselector {
         right: 12px;
-        line-height: 53px;
         height: 100%;
         background: transparent
     }

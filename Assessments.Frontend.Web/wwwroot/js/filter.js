@@ -8,8 +8,8 @@ if (filters) {
     const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
     const insectFilters = document.getElementsByClassName("insect_input");
     const insectInput = document.getElementById("Insekter");
-    const redlistCheck = document.getElementById("redlisted_check")?.checked;
-    const endangeredCheck = document.getElementById("endangered_check")?.checked;
+    const redlistCheckbox = document.getElementById("redlisted_check");
+    const endangeredCheckbox = document.getElementById("endangered_check");
     const init = document.getElementById("initial_check");
     const scrollTo = document.getElementById("remember_scroll");
 
@@ -191,11 +191,26 @@ if (filters) {
             insectInput.checked = true;
         }
         if (shouldToggleMarkRedOrEnd(redlisted)) {
-            redlistCheck.checked = true;
+            redlistCheckbox.checked = true;
         }
         if (shouldToggleMarkRedOrEnd(endangered)) {
-            endangeredCheck.checked = true;
+            endangeredCheckbox.checked = true;
         }
+    }
+
+    function toggleAllOfType(what, primaryToggleElementId, secondaryToggleElementId) {
+        const secondaryToggleElement = document.getElementById(secondaryToggleElementId).checked;
+        const primaryToggleElement = document.getElementById(primaryToggleElementId).checked;
+        what.forEach(el => {
+            if (primaryToggleElement) {
+                document.getElementById("input_" + el).checked = true;
+            } else {
+                if (secondaryToggleElement) {
+                    document.getElementById(secondaryToggleElementId).checked = false;
+                }
+                document.getElementById("input_" + el).checked = false;
+            }
+        })
     }
 
     function toggleRedlistedCategories() {

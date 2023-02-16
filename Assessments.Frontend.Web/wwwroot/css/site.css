@@ -935,7 +935,6 @@ button {
 
     .header button.menuitems.themeselector {
         right: 12px;
-        line-height: 53px;
         height: 100%;
         background: transparent
     }

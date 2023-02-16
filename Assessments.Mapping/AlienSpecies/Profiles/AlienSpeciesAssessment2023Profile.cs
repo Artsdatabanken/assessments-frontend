@@ -230,6 +230,15 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ParasitePathogenTransmission, opt => opt.MapFrom(src => src.RiskAssessment.HostParasiteInformations))
                 .ForMember(dest => dest.ParasitePathogenTransmissionUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ICritInsecurity.StripUnwantedHtml()))
                 .ForMember(dest => dest.MicroHabitat, opt => opt.MapFrom(src => src.Habitats))
+                .ForPath(dest => dest.YearsFirstRecord.ObservedEstablishmentInNorway, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetYearsFirstObserved(src.RiskAssessment, src.SpeciesStatus)))
+                .ForPath(dest => dest.YearsFirstRecord.Description, opt => opt.MapFrom(src => src.FurtherInfo))
+                .ForMember(dest => dest.NaturalOrigins, opt => opt.PreCondition(src => src.Terrestrial || src.Limnic))
+                .ForMember(dest => dest.NaturalOriginMarine, opt => opt.PreCondition(src => src.Marine))
+                .ForMember(dest => dest.CurrentInternationalExistenceAreas, opt => opt.PreCondition(src => src.Terrestrial || src.Limnic))
+                .ForMember(dest => dest.CurrentInternationalExistenceMarineAreas, opt => opt.PreCondition(src => src.Marine))
+                .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => src.ReproductionGenerationTime))
+                .ForMember(dest => dest.ArrivedCountryFrom, opt => opt.PreCondition(src => src.ArrivedCountryFrom is not null && src.ArrivedCountryFrom.Count > 0))
+                .ForMember(dest => dest.AreaOfOccupancyInStronglyAlteredEcosystems, opt => opt.MapFrom(src => src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.HasValue ? "Value" + src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.ToString() : "NotChosen"))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

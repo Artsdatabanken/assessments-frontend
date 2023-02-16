@@ -15,5 +15,15 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
             return string.Join(", ", valueList);
         }
+
+        internal static string GetArrivedCountryFrom(List<AlienSpeciesAssessment2023ArrivedCountryFrom> arrivedCountryFrom)
+        {
+            var valueList = new List<string>();
+            foreach (var variation in arrivedCountryFrom)
+            {
+                valueList.Add(variation.DisplayName());
+            }
+            return string.Join(", ", valueList);
+        }
     }
 }

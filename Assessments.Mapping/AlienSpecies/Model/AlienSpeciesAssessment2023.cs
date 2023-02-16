@@ -612,7 +612,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species natural global distribution (marine species)
         /// </summary>
-        public List<string> NaturalOriginMarine { get; set; }
+        public List<AlienSpeciesAssessment2023NaturalOriginMarine> NaturalOriginMarine { get; set; }
 
         /// <summary>
         /// The species natural global distribution (marine species). Description.
@@ -632,7 +632,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species current global distribution including alien distribution (marine species).
         /// </summary>
-        public List<string> CurrentInternationalExistenceMarineAreas { get; set; }
+        public List<AlienSpeciesAssessment2023NaturalOriginMarine> CurrentInternationalExistenceMarineAreas { get; set; }
 
         /// <summary>
         /// The species current global distribution including alien distribution (marine species). Description.
@@ -647,6 +647,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The proportion of the known or assumed area of occupancy (AOO) in strongly altered ecosystems
         /// </summary>
-        public double? AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }  
+        public AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }  
     }
 }

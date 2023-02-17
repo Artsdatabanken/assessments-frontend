@@ -28,7 +28,7 @@ namespace Assessments.Data.Models
         public string Comment { get; set; }
 
         [XLColumn(Ignore = true)]
-        public List<FeedbackAttachment> Attachments { get; set; }
+        public List<FeedbackAttachment> Attachments { get; set; } = new();
     }
 
     public enum FeedbackType

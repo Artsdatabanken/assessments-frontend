@@ -30,7 +30,13 @@ namespace Assessments.Transformation
                 { 1026, 2354 },
                 { 1293, 2367 },
                 { 1292, 2367 },
-                { 1835, 1825 }
+                { 1835, 1825 },
+                { 2206, 595  },
+                { 2015, 830  },
+                { 2016, 830  },
+                { 2037, 830  },
+                { 1370, 1070 }
+
             };
 
         public static async Task TransformDataModels(IConfigurationRoot configuration, bool upload)

@@ -15,17 +15,6 @@
     var showLowInvasionPotential = assessment.ScoreInvasionPotential == 1;
     var showHigherInvasionPotential = assessment.ScoreInvasionPotential > 1;
 
-    // If decisive criteria pane, show if decisive. If not decisive criteria pane, show if criteria is used, or if it has uncertainty.
-    var criteriaHasA = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)));
-    var criteriaHasB = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B)));
-    var criteriaHasC = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C)));
-    var criteriaHasD = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D)));
-    var criteriaHasE = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E)));
-    var criteriaHasF = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F)));
-    var criteriaHasG = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G)));
-    var criteriaHasH = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H)));
-    var criteriaHasI = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I)) && !unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I)));
-
     var uncertaintyA = assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
     var uncertaintyB = assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
     var uncertaintyC = assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).FirstOrDefault();
@@ -63,6 +52,28 @@
     var showITable = assessment.ParasitePathogenTransmission != null && assessment.ParasitePathogenTransmission.Count() != 0;
     var showGeneticContaminationUncertaintyDocumentation = !string.IsNullOrEmpty(assessment.GeneticContaminationUncertaintyDocumentation) && assessment.Criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.H && x.UncertaintyValues.Count() > 1);
     var showParasitePathogenTransmissionUncertaintyDocumentation = !string.IsNullOrEmpty(assessment.ParasitePathogenTransmissionUncertaintyDocumentation) && assessment.Criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.I && x.UncertaintyValues.Count() > 1);
+
+    // needed to check if a criteria has content, for deciding if it should be shown in nonDecisiveCriteria tab
+    var hasContentA = showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction || showNumericalEstimation || showViableAnalysis;
+    var hasContentB = isSpatiotemporalDataset || isEstimatedIncreaseInAOOReproducingUnaided || isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion || isEstimatedIncreaseInAOODoorKnockers;
+
+    var hasContentD = (assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0) || (assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD));
+    var hasContentE = (assessment.SpeciesSpeciesInteractions != null && assessment.SpeciesSpeciesInteractions.Count() != 0) || (assessment.SpeciesNaturetypeInteractions != null && assessment.SpeciesNaturetypeInteractions.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE));
+    var hasContentF = showFTable || !string.IsNullOrEmpty(assessment.ThreatenedNatureTypesAffectedDomesticDescription);
+    var hasContentG = showGTable || !string.IsNullOrEmpty(assessment.CommonNatureTypesAffectedDomesticDescription);
+    var hasContentH = showHTable || showGeneticContaminationUncertaintyDocumentation;
+    var hasContentI = showITable || showParasitePathogenTransmissionUncertaintyDocumentation;
+
+    // If decisive criteria pane, show if decisive. If not decisive criteria pane, show if criteria is used, or if it has uncertainty.
+    var criteriaHasA = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) || hasContentA));
+    var criteriaHasB = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B)) || hasContentB));
+    var criteriaHasC = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C))));
+    var criteriaHasD = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D)) || hasContentD));
+    var criteriaHasE = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E)) || hasContentE));
+    var criteriaHasF = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F)) || hasContentF));
+    var criteriaHasG = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G)) || hasContentG));
+    var criteriaHasH = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H)) || hasContentH));
+    var criteriaHasI = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I)) || hasContentI));
 
     int GetUncertaintyValueMinMax(int value, int uncertainty)
     {
@@ -549,7 +560,7 @@
             @{
                 GetLetterFullText(uncertaintyD, false);
             }
-            <div is-visible="!showIsNk && ((assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0) || (assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD)))" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentD" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -607,7 +618,7 @@
             @{
                 GetLetterFullText(uncertaintyE, false);
             }
-            <div is-visible="!showIsNk && ((assessment.SpeciesSpeciesInteractions  != null && assessment.SpeciesSpeciesInteractions .Count() != 0) || (assessment.SpeciesNaturetypeInteractions != null && assessment.SpeciesNaturetypeInteractions.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE)))" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentE" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -664,7 +675,7 @@
             @{
                 GetLetterFullText(uncertaintyF, false);
             }
-            <div is-visible="!showIsNk && (showFTable || !string.IsNullOrEmpty(assessment.ThreatenedNatureTypesAffectedDomesticDescription))" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentF" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -689,7 +700,7 @@
             @{
                 GetLetterFullText(uncertaintyG, false);
             }
-            <div is-visible="!showIsNk && (showGTable || !string.IsNullOrEmpty(assessment.CommonNatureTypesAffectedDomesticDescription))" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentG" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -714,7 +725,7 @@
             @{
                 GetLetterFullText(uncertaintyH, true);
             }
-            <div is-visible="!showIsNk && (showHTable || showGeneticContaminationUncertaintyDocumentation)" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentH" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -769,7 +780,7 @@
             @{
                 GetLetterFullText(uncertaintyI, true);
             }
-            <div is-visible="!showIsNk && (showITable || showParasitePathogenTransmissionUncertaintyDocumentation)" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentI" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">

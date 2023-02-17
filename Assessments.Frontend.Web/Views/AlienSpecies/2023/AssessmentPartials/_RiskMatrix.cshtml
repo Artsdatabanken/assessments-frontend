@@ -365,7 +365,7 @@
         -->
         @{
             for (int i = 0; i < uncertaintiesList.Count; i++) {
-                <span>@uncertaintiesList[i].ToUpper() - @Constants.categoryStringFromCode[@uncertaintiesList[i]]</span>
+                <span><i>@Constants.categoryStringFromCode[@uncertaintiesList[i]].ToLowerInvariant()</i> - @uncertaintiesList[i].ToUpper()</span>
                  if (i == uncertaintiesList.Count - 2) {
                        <span> og </span>
                  }else if (i != uncertaintiesList.Count - 1) {

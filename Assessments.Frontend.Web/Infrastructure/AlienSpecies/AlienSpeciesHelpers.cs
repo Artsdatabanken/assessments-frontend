@@ -1,4 +1,9 @@
-﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Shared.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -154,6 +159,86 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return description;
+        }
+
+        public static int GetUncertaintyValueMinMax(int value, int uncertainty)
+        {
+            return uncertainty == 0 ? value : uncertainty;
+        }
+        public static int GetUncertaintyHigh(AlienSpeciesAssessment2023Criterion criterion)
+        {
+            return criterion.UncertaintyValues.Where(x => x > criterion.Value).FirstOrDefault();
+        }
+        public static int GetUncertaintyLow(AlienSpeciesAssessment2023Criterion criterion)
+        {
+            return criterion.UncertaintyValues.Where(x => x < criterion.Value).FirstOrDefault();
+        }
+
+        public static string GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion, bool isDifferent)
+        {
+            var letterText = criterion.CriteriaLetter.DisplayName();
+            letterText += isDifferent == true ? " som er " : " på ";
+            letterText += CriteriaDescription(criterion.CriteriaLetter, criterion.Value);
+            letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "";
+            if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
+            {
+                letterText += "(med usikkerhet ";
+            }
+            if (GetUncertaintyLow(criterion) != 0)
+            {
+                letterText += $"ned mot {CriteriaDescription(criterion.CriteriaLetter, AlienSpeciesHelpers.GetUncertaintyLow(criterion))}";
+                letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) != 0 ? ")." : "";
+            }
+            if (GetUncertaintyHigh(criterion) != 0 && GetUncertaintyLow(criterion) != 0)
+            {
+                letterText += " og ";
+            }
+            if (AlienSpeciesHelpers.GetUncertaintyHigh(criterion) != 0)
+            {
+                letterText += $"opp mot {CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion))}";
+                letterText += GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0 ? ")." : "";
+            }
+
+            return letterText;
+        }
+
+        public static string GetCriteriaExplanation(List<AlienSpeciesAssessment2023Criterion> criteria)
+        {
+            var explanation = string.Empty;
+
+            string Lower(string text)
+            {
+                return char.ToLower(text[0]) + text[1..];
+            }
+
+            if (criteria.Count() != 0)
+            {
+                for (var i = 0; i < criteria.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        explanation += criteria[i].CriteriaLetter.DisplayName();
+                    }
+                    else
+                    {
+                        explanation += Lower(criteria[i].CriteriaLetter.DisplayName());
+                    }
+                    explanation += $"på {CriteriaDescription(criteria[i].CriteriaLetter, criteria[i].Value)}";
+                    if (i + 1 == criteria.Count())
+                    {
+                        explanation += ".";
+                    }
+                    else if (i + 2 == criteria.Count())
+                    {
+                        explanation += " og ";
+                    }
+                    else
+                    {
+                        explanation += ", ";
+                    }
+                }
+            }
+            return explanation;
         }
     }
 }

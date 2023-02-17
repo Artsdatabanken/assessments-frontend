@@ -52,14 +52,14 @@
         {     
             lowestYList.Add(criterion.UncertaintyValues.Min()); // dump alllower uncertainties into one comparison-list  
         }
-        
+
         // 3. set lower uncertainty if all lower uncertainty values are the same
         if (lowestYList.Distinct().Count() == 1)
         {
             yLowerUncertainty = lowestYList[0];
         }
     }
-    
+
 
     // ~*~ x Uncertainty - Invation Potential ~*~
 
@@ -219,6 +219,12 @@
 
     uncertaintiesList = findAllUncertaintyCategories(x, y, xHigherUncertainty, xLowerUncertainty, yHigherUncertainty, yLowerUncertainty,uncertaintiesList);
 
+    var xAxisLetters = "ABC";
+    var yAxisLetters = "DEFGHI";
+
+    var xAxisCriteria = Model.Assessment.Criteria.Where(x => xAxisLetters.Contains(x.CriteriaLetter.ToString()) && Model.Assessment.DecisiveCriteria.Contains(x.CriteriaLetter.ToString()) || ((x.CriteriaLetter.ToString() == "A" || x.CriteriaLetter.ToString() == "B") && Model.Assessment.DecisiveCriteria.Any(y => y == 'A' || y == 'B'))).ToList();
+
+    var yAxisCriteria = Model.Assessment.Criteria.Where(x => yAxisLetters.Contains(x.CriteriaLetter.ToString()) && Model.Assessment.DecisiveCriteria.Contains(x.CriteriaLetter.ToString())).ToList();
 }
 
 @functions{
@@ -355,23 +361,49 @@
         <!--  <a class="info-link" href="/pages/239659" target="_blank">Forklaring på risikomatrisen</a>-->
     </div>
 
-    <div class="flex-me">        
-        @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificNameRank) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> -
-        @Model.Assessment.Category<span is-visible="uncertaintiesList.Count>0">, med usikkerhet til </span>
-        <!-- 
-            This Display below of the uncertainties ignores same-category variation, which are displayed in the matrix
-            The same info should preferrably be availiable in the main text, to aid users who cannot view the image optimally.
-            Also it would look nicer. yeh. All uncertainty x,y's are now input in the findAllUncertaintyCategories use of the matrix lookup.
-        -->
-        @{
-            for (int i = 0; i < uncertaintiesList.Count; i++) {
-                <span><i>@Constants.categoryStringFromCode[@uncertaintiesList[i]].ToLowerInvariant()</i> - @uncertaintiesList[i].ToUpper()</span>
-                 if (i == uncertaintiesList.Count - 2) {
-                       <span> og </span>
-                 }else if (i != uncertaintiesList.Count - 1) {
-                       <span>,</span>
-                 }
+    <div class="flex-me">
+        <p>
+            @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificNameRank) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> -
+            @Model.Assessment.Category<span is-visible="uncertaintiesList.Count>0">, med usikkerhet til </span>
+            <!-- 
+                This Display below of the uncertainties ignores same-category variation, which are displayed in the matrix
+                The same info should preferrably be availiable in the main text, to aid users who cannot view the image optimally.
+                Also it would look nicer. yeh. All uncertainty x,y's are now input in the findAllUncertaintyCategories use of the matrix lookup.
+            -->
+            @{
+                for (int i = 0; i < uncertaintiesList.Count; i++) {
+                    <span><i>@Constants.categoryStringFromCode[@uncertaintiesList[i]].ToLowerInvariant()</i> - @uncertaintiesList[i].ToUpper()</span>
+                     if (i == uncertaintiesList.Count - 2) {
+                           <span> og </span>
+                     }else if (i != uncertaintiesList.Count - 1) {
+                           <span>,</span>
+                     }
+                }
             }
-        }         
+        </p>
+        <div>
+            <p>
+                @if (xAxisCriteria.Count() != 0)
+                {
+                    <span>@( AlienSpeciesHelpers.GetCriteriaExplanation(xAxisCriteria) )</span>
+                }
+                else
+                {
+                    <span>Det er ingen utslagsgivende kriterier for invasjonspotensial.</span>
+                }
+                Dette tilsvarer [text] invasjonspotensial (risikomatrisens x-akse).
+            </p>
+            <p>
+                @if (yAxisCriteria.Count() != 0)
+                {
+                    <span> @( AlienSpeciesHelpers.GetCriteriaExplanation(yAxisCriteria) )</span>
+                }
+                else
+                {
+                    <span>Det er ingen utslagsgivende kriterier for økologisk effekt.</span>
+                }
+                Dette tilsvarer [text] økologisk effekt (risikomatrisens y-akse).
+             </p>
+        </div>
     </div>
 </div>

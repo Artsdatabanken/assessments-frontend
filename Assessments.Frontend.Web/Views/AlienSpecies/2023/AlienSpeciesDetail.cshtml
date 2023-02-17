@@ -14,7 +14,7 @@
     ViewData["Title"] = assessment.ScientificName + " - Fremmedartslista 2023 innsyn"; // TODO: change after innsight process
 
     var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
-    var speciesGroupImageUrl = speciesGroup.ImageUrl;
+    var speciesGroupImageUrl = speciesGroup?.ImageUrl;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {

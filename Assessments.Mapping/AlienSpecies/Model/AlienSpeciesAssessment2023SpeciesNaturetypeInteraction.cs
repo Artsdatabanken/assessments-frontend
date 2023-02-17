@@ -33,6 +33,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The assessment basis for the effects on the ecosystem
         /// </summary>
-        public List<AlienSpeciesAssessment2023Background> Background { get; set; } //public List<string> BasisOfAssessment { get; set; } = new List<string>();
+        public List<AlienSpeciesAssessment2023Background> Background { get; set; } 
     }
 }

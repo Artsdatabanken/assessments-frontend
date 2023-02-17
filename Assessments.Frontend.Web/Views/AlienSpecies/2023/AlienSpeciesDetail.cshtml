@@ -11,10 +11,10 @@
     var enableCitation = Options.Value.AlienSpecies2023.EnableCitation;
 
     var assessment = Model.Assessment;
-    ViewBag.Title = assessment.ScientificName + " - Fremmedartslista";
+    ViewData["Title"] = assessment.ScientificName + " - Fremmedartslista 2023 innsyn"; // TODO: change after innsight process
 
     var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
-    var speciesGroupImageUrl = speciesGroup.ImageUrl;
+    var speciesGroupImageUrl = speciesGroup?.ImageUrl;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {

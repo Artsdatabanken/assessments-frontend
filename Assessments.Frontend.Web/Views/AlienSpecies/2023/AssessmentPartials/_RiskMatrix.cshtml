@@ -305,9 +305,8 @@
         texts which then gets a display:none.
     -->
 
-   
 
-    <figure class="risk-level-matrix">
+    <div class="risk-level-matrix">
         <span class="legend rotate-legend">@Constants.yAxisLabel<span class="non-css-only"> (y-aksen)</span></span>
         <div class="risk-matrix">
             <b class="non-css-only"><br />y = 4</b>
@@ -354,10 +353,9 @@
         <span></span>
         <span class="legend">@Constants.xAxisLabel<span class="non-css-only">: @x, @Constants.yAxisLabel: @y </span></span>
         <!--  <a class="info-link" href="/pages/239659" target="_blank">Forklaring på risikomatrisen</a>-->
-    </figure>
+    </div>
 
-    <div>
-
+    <div class="flex-me">        
         @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificNameRank) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> -
         @Model.Assessment.Category<span is-visible="uncertaintiesList.Count>0">, med usikkerhet til </span>
         <!-- 
@@ -374,7 +372,6 @@
                        <span>,</span>
                  }
             }
-        }
-         
+        }         
     </div>
 </div>

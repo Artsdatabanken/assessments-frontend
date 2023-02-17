@@ -5,12 +5,16 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using static Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
     public static class AlienSpeciesAssessment2023ProfileHelper
     {
+        private static PropertyInfo[] riskAssessmentProperties = typeof(RiskAssessment).GetProperties();
+        private static PropertyInfo[] riskAssessmentPropertiesFirstObservations = riskAssessmentProperties.Where(x => x.Name.StartsWith("YearFirst") && !x.Name.Contains("Insecure") && !x.Name.Contains("Domestic")).ToArray();
+
         internal static string GetAlienSpeciesCategory(string alienSpeciesCategory, string expertGroup)
         {
             if (alienSpeciesCategory == "RegionallyAlien" && expertGroup != "Fisker")
@@ -136,7 +140,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 return mainCategory switch
                 {
-                    "Rømning/forvilling" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped,
+                    "R\u00F8mning/forvilling" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped,
                     "Blindpassasjer med transport" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Stowaway,
                     "Korridor" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Corridor,
                     "Tilsiktet utsetting" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Released,
@@ -759,6 +763,45 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     "SpreadRscriptEstimatedSpeciesLongevity" => AlienSpeciesAssessment2023MedianLifetimeEstimationMethod.NumericalEstimation.ToString(),
                     _ => chosenMethod
                 };
+            }
+        }
+
+      
+        internal static List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)> GetYearsFirstObserved(RiskAssessment riskAssessment, string establishmentCategory)
+        {
+            if (establishmentCategory is "A") //species not yet in Norway cannot have observations in Norway
+            {
+                return new List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)>();
+            }
+
+            else
+            {
+                var yearEstablishmentType = new List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)>();
+                
+                foreach (var firstObservationProperty in riskAssessmentPropertiesFirstObservations)
+                {
+                    var yearFirstValue = firstObservationProperty.GetValue(riskAssessment);
+                    
+                    if (yearFirstValue is not null) 
+                    {
+                        AlienSpeciesAssessment2023YearFirstRecordType establishmentTypeName = firstObservationProperty.Name switch
+                        {
+                            "YearFirstEstablishedNature" => AlienSpeciesAssessment2023YearFirstRecordType.EstablishedNature,
+                            "YearFirstReproductionNature" => AlienSpeciesAssessment2023YearFirstRecordType.ReproductionNature,
+                            "YearFirstNature" => AlienSpeciesAssessment2023YearFirstRecordType.IndividualNature,
+                            "YearFirstEstablishmentProductionArea" => AlienSpeciesAssessment2023YearFirstRecordType.EstablishedProductionArea,
+                            "YearFirstReproductionOutdoors" => AlienSpeciesAssessment2023YearFirstRecordType.ReproductionProductionArea,
+                            "YearFirstProductionOutdoors" => AlienSpeciesAssessment2023YearFirstRecordType.IndividualProductionArea,
+                            "YearFirstReproductionIndoors" => AlienSpeciesAssessment2023YearFirstRecordType.ReproductionIndoors,
+                            _ => AlienSpeciesAssessment2023YearFirstRecordType.IndividualIndoors,
+                        };
+                        var firstObservationUncertaintyProperty = riskAssessmentProperties.Where(x => x.Name == firstObservationProperty.Name + "Insecure").Single();
+                        bool isUncertaintyYearValue = (bool)firstObservationUncertaintyProperty.GetValue(riskAssessment);
+                        yearEstablishmentType.Add((establishmentTypeName, (int)yearFirstValue, isUncertaintyYearValue));
+                    }
+                }
+
+                return yearEstablishmentType;
             }
         }
     }

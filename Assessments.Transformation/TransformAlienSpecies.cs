@@ -183,6 +183,13 @@ namespace Assessments.Transformation
                 return true;
             }
 
+            // ekskluderer vurderinger som ikke er ferdigstilte
+            if (!fa4.EvaluationStatus.Equals("finished", StringComparison.OrdinalIgnoreCase))
+            {
+                Progress.ProgressBar.Tick();
+                return true;
+            }
+
             return false;
         }
 

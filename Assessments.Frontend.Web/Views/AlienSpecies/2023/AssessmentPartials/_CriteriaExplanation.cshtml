@@ -4,7 +4,7 @@
 @{
     var isDecisiveCriteria = Model.Criteria == Model.AlienSpeciesDetailViewModel.Assessment.DecisiveCriteria;
     // We need to know which criteria are not used, but still has uncertainty, and who does not have uncertainty or is used at all. 
-    var unusedCriteriaWithoutUncertainty = new string(Model.Criteria.Where(x => Model.AlienSpeciesDetailViewModel.Assessment.Criteria.Any(y => y.CriteriaLetter.ToString() == x.ToString() && y.UncertaintyValues.Count() == 1 && y.Value == 1)).ToArray());
+    var unusedCriteriaWithoutUncertainty = new string(Model.Criteria.Where(x => Model.AlienSpeciesDetailViewModel.Assessment.Criteria.Any(y => y.CriteriaLetter.ToString() == x.ToString() && y.UncertaintyValues.Count() == 1)).ToArray());
     var unusedCriteriaCountInvationPotential = unusedCriteriaWithoutUncertainty.Where(x => "ABC".Contains(x)).Count();
     var unusedCriteriaCountEcologicalEffect = unusedCriteriaWithoutUncertainty.Where(x => "DEFGHI".Contains(x)).Count();
 

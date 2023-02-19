@@ -259,7 +259,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.IsIncludedInAssessmentArea, opt => opt.MapFrom(src => src.Disabled == 0 && src.Selected == 1))
                 .ForMember(dest => dest.IsKnown, opt => opt.MapFrom(src => src.State0 == 1))
                 .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
-                .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));
+                .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1))
+                .ForMember(dest => dest.WaterRegionName, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetWaterRegionName(src.VannregionId)));
 
             CreateMap<Attachment, AlienSpeciesAssessment2023Attachment>(MemberList.None);
             CreateMap<FA4.ImpactedNatureType, AlienSpeciesAssessment2023ImpactedNatureTypes>(MemberList.None)

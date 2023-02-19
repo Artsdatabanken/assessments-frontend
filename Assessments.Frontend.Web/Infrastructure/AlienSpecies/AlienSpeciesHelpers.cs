@@ -298,18 +298,20 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 categoriesList.Add(cat);
             }
-            var index = Array.IndexOf(categoriesArray, category);
             var categoryTexts = string.Empty;
+            var index = Array.IndexOf(categoriesArray, category);
 
-            // Decrements because enum is from high to low. Doing it this way, we don't have to reverse the array twice => Result should also go from high to low. 
-            for (var i = index; i >= 0; i--)
+            if (index == -1)
+                return categoryTexts;
+
+            for (var i = index + 1; i < categoriesList.Count - 1; i++)
             {
                 categoryTexts += $"<i>{categoriesList[i].DisplayName().ToLowerInvariant()}</i>";
-                if (i > 1)
+                if (i < categoriesList.Count - 3)
                 {
                     categoryTexts += ", ";
                 }
-                else if (i == 1)
+                else if (i == categoriesList.Count - 3)
                 {
                     categoryTexts += " eller ";
                 }

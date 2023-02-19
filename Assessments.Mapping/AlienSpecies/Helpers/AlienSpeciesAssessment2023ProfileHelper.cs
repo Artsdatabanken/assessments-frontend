@@ -841,5 +841,31 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return yearEstablishmentType;
             }
         }
+
+        public static string GetWaterRegionName(string id)
+        {
+            // https://raw.githubusercontent.com/Artsdatabanken/Fremmedartsbase2023/main/Prod.Api/Resources/WaterRegion.geojson
+            
+            return id switch
+            {
+                "5103" => "Agder",
+                "2" => "Bottenhavet",
+                "1" => "Bottenviken",
+                "5107" => "Innlandet og Viken",
+                "VHA5" => "Kemijoki",
+                "1101" => "Møre og Romsdal",
+                "1108" => "Nordland og Jan Mayen",
+                "1106" => "Norsk-finsk",
+                "5104" => "Rogaland",
+                "1TO" => "Torneå",
+                "VHA6" => "Tornionjoki",
+                "1109" => "Troms og Finnmark",
+                "1107" => "Trøndelag",
+                "5108" => "Vestfold og Telemark",
+                "5109" => "Vestland",
+                "5" => "Västerhavet",
+                _ => string.Empty
+            };
+        }
     }
 }

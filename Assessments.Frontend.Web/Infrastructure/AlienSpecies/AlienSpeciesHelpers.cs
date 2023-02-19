@@ -288,5 +288,33 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             return explanation;
         }
+
+        public static string GetLowerEcologicalEffectsText(AlienSpeciesAssessment2023Category category)
+        {
+            AlienSpeciesAssessment2023Category[] categoriesArray = (AlienSpeciesAssessment2023Category[])Enum.GetValues(typeof(AlienSpeciesAssessment2023Category));
+            // Not able to use Array.ToList() for some reason. Manually converting it... If you come across this and know the reason, please feel free to fix it :)
+            List<AlienSpeciesAssessment2023Category> categoriesList = new();
+            foreach (var cat in categoriesArray)
+            {
+                categoriesList.Add(cat);
+            }
+            var index = Array.IndexOf(categoriesArray, category);
+            var categoryTexts = string.Empty;
+
+            // Decrements because enum is from high to low. Doing it this way, we don't have to reverse the array twice => Result should also go from high to low. 
+            for (var i = index; i >= 0; i--)
+            {
+                categoryTexts += $"<i>{categoriesList[i].DisplayName().ToLowerInvariant()}</i>";
+                if (i > 1)
+                {
+                    categoryTexts += ", ";
+                }
+                else if (i == 1)
+                {
+                    categoryTexts += " eller ";
+                }
+            }
+            return categoryTexts;
+        }
     }
 }

@@ -112,6 +112,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string MisidentifiedDescription { get; set; }
 
+        public RaceViewModel RaceViewModel { get; set; }
+
         public List<CommonSimpleReference> References { get; set; }
 
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
@@ -148,6 +150,17 @@ namespace Assessments.Frontend.Web.Models
         public string Status { get; set; }
 
         public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
+    }
+
+    public class RaceViewModel
+    {
+        public AlienSpeciesAssessment2023ScientificName[] NameHierarchy { get; set; }
+
+        public AlienSpeciesAssessment2023ScientificName ScientificName { get; set; }
+
+        public string SpeciesGroup { get; set; }
+
+        public string VernacularName { get; set; }
     }
 
     public class RegionalSpreadViewModel

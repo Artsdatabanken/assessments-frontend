@@ -392,7 +392,7 @@
                 {
                     <span>Det er ingen utslagsgivende kriterier for invasjonspotensial.</span>
                 }
-                Dette tilsvarer [text] invasjonspotensial (risikomatrisens x-akse).
+                Dette tilsvarer @Model.Assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant() invasjonspotensial (risikomatrisens x-akse).
             </p>
             <p>
                 @if (yAxisCriteria.Count() != 0)
@@ -403,7 +403,7 @@
                 {
                     <span>Det er ingen utslagsgivende kriterier for økologisk effekt.</span>
                 }
-                Dette tilsvarer [text] økologisk effekt (risikomatrisens y-akse).
+                Dette tilsvarer @Model.Assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant() økologisk effekt (risikomatrisens y-akse).
              </p>
         </div>
     </div>

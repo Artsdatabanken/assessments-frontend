@@ -4,7 +4,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023Background
     {
-        [Display(Name = "ingen valgt")]
+        [Display(Name = "ikke valgt")]
         BackgroundNotSpecified,
 
         [Display(Name = "skriftlig dokumentasjon fra Norge")]

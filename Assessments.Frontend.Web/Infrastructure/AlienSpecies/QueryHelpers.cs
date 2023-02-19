@@ -65,7 +65,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 containsSubSpecies.Any(hit => x.ScientificName.ScientificName.Contains(hit)) || // Search on species also includes sub species
                 !string.IsNullOrEmpty(x.VernacularName) &&
                 x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
-                x.NameHiearchy.Any(x=>x.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())) ||
+                x.NameHiearchy.Any(x => x.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())) ||
                 x.SpeciesGroup.ToLowerInvariant().Contains(searchString.ToLowerInvariant()));
         }
 

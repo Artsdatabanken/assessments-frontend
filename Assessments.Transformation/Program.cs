@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Assessments.Transformation.Helpers;
@@ -26,6 +27,8 @@ namespace Assessments.Transformation
 
             if (!Directory.Exists(dataFolder))
                 Directory.CreateDirectory(dataFolder);
+
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
 
             var menuItems = new List<string>
             {

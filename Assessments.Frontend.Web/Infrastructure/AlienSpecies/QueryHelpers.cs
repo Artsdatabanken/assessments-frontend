@@ -21,10 +21,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.Where(x => parameters.Category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category));
 
             if (parameters.EcologicalEffect.Any())
-                query = query.Where(x => parameters.EcologicalEffect.Any(y => x.ScoreEcologicalEffect != null && y.Contains(x.ScoreEcologicalEffect.ToString())));
+                query = query.Where(x => parameters.EcologicalEffect.Any(y => x.ScoreEcologicalEffect != AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Unknown && y.Contains(x.ScoreEcologicalEffect.Description())));
 
             if (parameters.InvasionPotential.Any())
-                query = query.Where(x => parameters.InvasionPotential.Any(y => x.ScoreInvasionPotential != null && y.Contains(x.ScoreInvasionPotential.ToString())));
+                query = query.Where(x => parameters.InvasionPotential.Any(y => x.ScoreInvasionPotential != AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown && y.Contains(x.ScoreInvasionPotential.Description())));
 
             if (parameters.CategoryChanged.Any())
                 query = ApplyCategoryChange(parameters.CategoryChanged, query);

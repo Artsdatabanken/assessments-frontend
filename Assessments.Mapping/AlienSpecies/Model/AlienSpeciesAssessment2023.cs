@@ -120,12 +120,12 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species' total score on the ecological effect axis
         /// </summary>
-        public int? ScoreEcologicalEffect { get; set; }
+        public AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect ScoreEcologicalEffect { get; set; }
 
         /// <summary>
         /// The species' total score on the invation axis
         /// </summary>
-        public int? ScoreInvasionPotential { get; set; }
+        public AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential ScoreInvasionPotential { get; set; }
 
         /// <summary>
         /// The species group name, based on the taxon hierarchy
@@ -632,6 +632,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The proportion of the known or assumed area of occupancy (AOO) in strongly altered ecosystems
         /// </summary>
-        public AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }  
+        public AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }
     }
 }

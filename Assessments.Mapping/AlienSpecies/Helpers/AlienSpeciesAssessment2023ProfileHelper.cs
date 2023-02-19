@@ -12,8 +12,8 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 {
     public static class AlienSpeciesAssessment2023ProfileHelper
     {
-        private static PropertyInfo[] riskAssessmentProperties = typeof(RiskAssessment).GetProperties();
-        private static PropertyInfo[] riskAssessmentPropertiesFirstObservations = riskAssessmentProperties.Where(x => x.Name.StartsWith("YearFirst") && !x.Name.Contains("Insecure") && !x.Name.Contains("Domestic")).ToArray();
+        private static readonly PropertyInfo[] riskAssessmentProperties = typeof(RiskAssessment).GetProperties();
+        private static readonly PropertyInfo[] riskAssessmentPropertiesFirstObservations = riskAssessmentProperties.Where(x => x.Name.StartsWith("YearFirst") && !x.Name.Contains("Insecure") && !x.Name.Contains("Domestic")).ToArray();
 
         internal static string GetAlienSpeciesCategory(string alienSpeciesCategory, string expertGroup)
         {
@@ -198,7 +198,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             };
         }
 
-        internal static AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential GetScoreInvasionPotential(string name, string category, string criteria)
+        internal static AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential GetScoreInvasionPotential(string category, string criteria)
         {
             if (string.IsNullOrEmpty(category) || category is "NR")
             {
@@ -300,10 +300,9 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         {
             // Reversing the list to get a match as low as possible in the taxon hierarchy.
             var scientificNames = taxonHierarchy.Split("/").Reverse();
-            AlienSpeciesAssessment2023SpeciesGroups speciesGroup;
             foreach (var name in scientificNames)
             {
-                if (Enum.TryParse(name, out speciesGroup))
+                if (Enum.TryParse(name, out AlienSpeciesAssessment2023SpeciesGroups speciesGroup))
                 {
                     return speciesGroup.DisplayName();
                 }
@@ -369,7 +368,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                         };
                     }
 
-                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":")
+                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(':')
                         ? "https://databank.artsdatabanken.no/FremmedArt2012"
                         : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
 
@@ -380,7 +379,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return previousAssessments;
         }
 
-        private static Dictionary<int, int> introLowTable = new()
+        private static readonly Dictionary<int, int> introLowTable = new()
         {
             { 1, 1 },
             { 5, 2 },
@@ -394,7 +393,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             { 195, 10 }
         };
 
-        private static Dictionary<int, int> introHighTable = new()
+        private static readonly Dictionary<int, int> introHighTable = new()
         {
             { 1, 1 },
             { 6, 2 },

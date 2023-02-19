@@ -201,19 +201,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             return letterText;
         }
+        public static string LowerFirstCharacter(string text)
+        {
+            return char.ToLower(text[0]) + text[1..];
+        }
 
-        public static string GetCriteriaExplanation(List<AlienSpeciesAssessment2023Criterion> criteria)
+        public static string GetInvasionPotentialExplanation(List<AlienSpeciesAssessment2023Criterion> criteria)
         {
             var explanation = string.Empty;
 
-            string Lower(string text)
-            {
-                return char.ToLower(text[0]) + text[1..];
-            }
 
-            if (criteria.Count() != 0)
+            if (criteria.Count != 0)
             {
-                for (var i = 0; i < criteria.Count(); i++)
+                for (var i = 0; i < criteria.Count; i++)
                 {
                     if (i == 0)
                     {
@@ -221,14 +221,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     }
                     else
                     {
-                        explanation += Lower(criteria[i].CriteriaLetter.DisplayName());
+                        explanation += LowerFirstCharacter(criteria[i].CriteriaLetter.DisplayName());
                     }
-                    explanation += $"på {CriteriaDescription(criteria[i].CriteriaLetter, criteria[i].Value)}";
-                    if (i + 1 == criteria.Count())
+                    explanation += $" på {CriteriaDescription(criteria[i].CriteriaLetter, criteria[i].Value)}";
+                    if (i + 1 == criteria.Count)
                     {
                         explanation += ".";
                     }
-                    else if (i + 2 == criteria.Count())
+                    else if (i + 2 == criteria.Count)
                     {
                         explanation += " og ";
                     }
@@ -238,6 +238,54 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     }
                 }
             }
+            return explanation;
+        }
+
+        public static string GetEcologicalEffectExplanation(List<AlienSpeciesAssessment2023Criterion> criteria)
+        {
+            var hasDE = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.D || x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.E);
+            var hasFG = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.F || x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.G);
+            var hasH = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.H);
+            var hasI = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.I);
+
+            var controlValue = 0;
+            var explanation = "Arten";
+
+            if (hasDE)
+                controlValue += 1;
+            if (hasFG)
+                controlValue += 2;
+            if (hasH)
+                controlValue += 4;
+            if (hasI)
+                controlValue += 8;
+
+            var deText = " har negative interaksjoner med stedegne arter";
+            var fgText = " medfører endring i naturtyper";
+            var hText = " overfører genetisk materiale til stedegne arter";
+            var iText = " overfører parasitter/patogener til stedegne arter";
+            var noCriteria = " har ingen utslagsgivende kriterier for økologisk effekt";
+
+            explanation += controlValue switch
+            {
+                1 => $"{deText}.",
+                2 => $"{fgText}.",
+                3 => $"{deText} og {fgText}.",
+                4 => $"{hText}.",
+                5 => $"{deText} og {hText}.",
+                6 => $"{fgText} og {hText}.",
+                7 => $"{deText}, {fgText} og {hText}.",
+                8 => $"{iText}.",
+                9 => $"{deText} og {iText}.",
+                10 => $"{fgText} og {iText}.",
+                11 => $"{deText}, {fgText} og {iText}.",
+                12 => $"{hText} og {iText}.",
+                13 => $"{deText}, {hText} og {iText}.",
+                14 => $"{fgText}, {hText} og {iText}.",
+                15 => $"{deText}, {fgText}, {hText} og {iText}.",
+                _ => $"{noCriteria}."
+            };
+
             return explanation;
         }
     }

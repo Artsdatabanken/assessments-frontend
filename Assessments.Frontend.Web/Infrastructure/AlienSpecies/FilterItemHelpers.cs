@@ -1055,7 +1055,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class ProductionSpecies
     {
-        public static Filter.FilterItem[] AlienSpecies2023ProductionSpeciesFilters =
+        public static readonly Filter.FilterItem[] AlienSpecies2023ProductionSpeciesFilters =
         {
             new Filter.FilterItem()
             {

@@ -386,7 +386,7 @@
             <p>
                 @if (xAxisCriteria.Count() != 0)
                 {
-                    <span>@( AlienSpeciesHelpers.GetCriteriaExplanation(xAxisCriteria) )</span>
+                    <span>@( AlienSpeciesHelpers.GetInvasionPotentialExplanation(xAxisCriteria) )</span>
                 }
                 else
                 {
@@ -395,14 +395,7 @@
                 Dette tilsvarer @Model.Assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant() invasjonspotensial (risikomatrisens x-akse).
             </p>
             <p>
-                @if (yAxisCriteria.Count() != 0)
-                {
-                    <span> @( AlienSpeciesHelpers.GetCriteriaExplanation(yAxisCriteria) )</span>
-                }
-                else
-                {
-                    <span>Det er ingen utslagsgivende kriterier for økologisk effekt.</span>
-                }
+                @( AlienSpeciesHelpers.GetEcologicalEffectExplanation(yAxisCriteria) )
                 Dette tilsvarer @Model.Assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant() økologisk effekt (risikomatrisens y-akse).
              </p>
         </div>

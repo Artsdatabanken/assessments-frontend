@@ -404,7 +404,7 @@
             </p>
         </div>
         <div is-visible="@Model.Assessment.GeographicVariationInCategory == true">
-            Arten har lavere risiko enn <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> (dvs. @Html.Raw(AlienSpeciesHelpers.GetLowerEcologicalEffectsText(Model.Assessment.Category))) i deler av sin utbredelse.
+            Arten har lavere risiko enn <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> - @Model.Assessment.Category.ToString() (dvs. @Html.Raw(AlienSpeciesHelpers.GetLowerEcologicalEffectsText(Model.Assessment.Category))) i deler av sin utbredelse.
         </div>
     </div>
 </div>

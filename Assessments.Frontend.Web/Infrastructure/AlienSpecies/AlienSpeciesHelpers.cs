@@ -306,7 +306,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             for (var i = index + 1; i < categoriesList.Count - 1; i++)
             {
-                categoryTexts += $"<i>{categoriesList[i].DisplayName().ToLowerInvariant()}</i>";
+                categoryTexts += $"<i>{categoriesList[i].DisplayName().ToLowerInvariant()}</i> - {categoriesList[i].ToString()}";
                 if (i < categoriesList.Count - 3)
                 {
                     categoryTexts += ", ";

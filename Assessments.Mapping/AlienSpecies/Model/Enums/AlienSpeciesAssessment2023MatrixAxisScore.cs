@@ -19,7 +19,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             [Display(Name = "Moderat")]
             [Description("ip3")]
             Moderate,
-            [Display(Name = "Stor")]
+            [Display(Name = "Stort")]
             [Description("ip4")]
             Great,
         }

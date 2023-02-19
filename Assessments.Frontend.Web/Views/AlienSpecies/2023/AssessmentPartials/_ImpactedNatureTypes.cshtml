@@ -84,7 +84,7 @@
             {
                 <tr>
                     <td>@habitat.Name</td>
-                    <td>@Html.Raw(Helpers.GetScientificNameElement(habitat.ScientificName)) @habitat.ScientificNameAuthor @habitat.VernacularName</td>
+                    <td>@Html.Raw(Helpers.FormatScientificNameElement(habitat.ScientificName)) @habitat.ScientificNameAuthor @habitat.VernacularName</td>
                     <td>@habitat.TimeHorizon.DisplayName()</td>
                 </tr>
             }

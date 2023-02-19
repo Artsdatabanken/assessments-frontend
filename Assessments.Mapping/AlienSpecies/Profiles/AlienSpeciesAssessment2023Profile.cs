@@ -13,10 +13,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
         public AlienSpeciesAssessment2023Profile()
         {
             CreateMap<FA4, AlienSpeciesAssessment2023>()
-                .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.EvaluatedScientificName))
-                .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.EvaluatedScientificNameId))
-                .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.EvaluatedScientificNameAuthor))
-                .ForMember(dest => dest.ScientificNameRank, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetTaxonRank(src.EvaluatedScientificNameRank)))
+                .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetScientificName(src)))
+                .ForMember(dest => dest.NameHiearchy, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetNameHiearchy(src.NameHiearchy)))
                 .ForMember(dest => dest.VernacularName, opt => opt.MapFrom(src => src.EvaluatedVernacularName))
                 .ForMember(dest => dest.AlienSpeciesCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAlienSpeciesCategory(src.AlienSpeciesCategory, src.ExpertGroup)))
                 .ForMember(dest => dest.ExpertGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpertGroup(src.ExpertGroup).Trim()))
@@ -261,7 +259,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.IsIncludedInAssessmentArea, opt => opt.MapFrom(src => src.Disabled == 0 && src.Selected == 1))
                 .ForMember(dest => dest.IsKnown, opt => opt.MapFrom(src => src.State0 == 1))
                 .ForMember(dest => dest.IsAssumedToday, opt => opt.MapFrom(src => src.State1 == 1))
-                .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1));
+                .ForMember(dest => dest.IsAssumedInFuture, opt => opt.MapFrom(src => src.State3 == 1))
+                .ForMember(dest => dest.WaterRegionName, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetWaterRegionName(src.VannregionId)));
 
             CreateMap<Attachment, AlienSpeciesAssessment2023Attachment>(MemberList.None);
             CreateMap<FA4.ImpactedNatureType, AlienSpeciesAssessment2023ImpactedNatureTypes>(MemberList.None)

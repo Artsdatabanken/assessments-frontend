@@ -11,7 +11,7 @@
     var enableCitation = Options.Value.AlienSpecies2023.EnableCitation;
 
     var assessment = Model.Assessment;
-    ViewData["Title"] = assessment.ScientificName + " - Fremmedartslista 2023 innsyn"; // TODO: change after innsight process
+    ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023 innsyn"; // TODO: change after innsight process
 
     var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
     var speciesGroupImageUrl = speciesGroup?.ImageUrl;
@@ -22,8 +22,9 @@
         ScientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = assessment.VernacularName,
-            ScientificName = assessment.ScientificName,
-            ScientificNameAuthor = assessment.ScientificNameAuthor
+            ScientificName = assessment.ScientificName.ScientificNameFormatted,
+            ScientificNameFormatted = true,
+            ScientificNameAuthor = assessment.ScientificName.ScientificNameAuthor
         },
         SpeciesGroupViewModel = new SpeciesGroupViewModel()
         {
@@ -41,7 +42,7 @@
 
     var citationViewModel = new CitationForAssessmentViewModel
     {
-        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {Helpers.GetScientificNameElement(assessment.ScientificName)} for {assessment.EvaluationContext.DisplayName()}",
+        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {assessment.ScientificName.ScientificNameFormatted} for {assessment.EvaluationContext.DisplayName()}",
         AssessmentYear = 2023, // TODO: add year when it comes into model
         ExpertCommittee = assessment.ExpertGroup,
         FirstPublished = Constants.RedlistSpecies2021FirstPublished,
@@ -74,7 +75,7 @@
         ParentAssessmentId = assessment.ParentAssessmentId,
         SpeciesStatus = assessment.SpeciesStatus,
         Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
-        TaxonRank = assessment.ScientificNameRank
+        TaxonRank = assessment.ScientificName.ScientificNameRank
     };
 
     var isNr = assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
@@ -185,7 +186,7 @@
 
     TaxonRank.TaxonRankEnum scientificNameRank;
     var taxonRank = "Ukjent";
-    if (Enum.TryParse(assessment.ScientificNameRank.ToString(), out scientificNameRank))
+    if (Enum.TryParse(Model.Assessment.ScientificName.ScientificNameRank.ToString(), out scientificNameRank))
         if (scientificNameRank != 0)
             taxonRank = scientificNameRank.DisplayName();
 }

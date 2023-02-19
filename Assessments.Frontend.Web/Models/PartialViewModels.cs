@@ -122,7 +122,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string Summary { get; set; }
 
-        public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
+        public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
 
         public string UncertaintyStatusDescription { get; set; }
 
@@ -147,7 +147,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string Status { get; set; }
 
-        public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
+        public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
     }
 
     public class RegionalSpreadViewModel
@@ -233,7 +233,7 @@ namespace Assessments.Frontend.Web.Models
 
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
-        public string TaxonRank { get; set; }
+        public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
     }
 
     public class TableOfContentsViewModel
@@ -298,6 +298,7 @@ namespace Assessments.Frontend.Web.Models
         public string ScientificName { get; set; }
 
         public string ScientificNameAuthor { get; set; }
+        public bool ScientificNameFormatted { get; set; } = false;
     }
 
     public class SidebarContentViewModel

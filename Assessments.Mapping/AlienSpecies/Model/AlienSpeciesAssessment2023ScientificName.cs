@@ -12,7 +12,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         {
             if (string.IsNullOrWhiteSpace(name)) { return name; }
 
-            return Regex.Replace(name, "<[^>]*>", string.Empty).Replace(" ", " ");
+            return Regex.Replace(name, "<[^>]*>", string.Empty).Replace("  ", " ");
         }
 
         /// <summary>

@@ -867,5 +867,27 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 _ => string.Empty
             };
         }
+
+        public static AlienSpeciesAssessment2023ScientificName[] GetNameHiearchy(List<FA4.ScientificNameWithRankId> srcNameHiearchy)
+        {
+            var path = srcNameHiearchy == null ? Array.Empty<AlienSpeciesAssessment2023ScientificName>()  : srcNameHiearchy.Skip(1).Reverse().Select(x => new AlienSpeciesAssessment2023ScientificName()
+            {
+                ScientificNameFormatted = x.ScientificName,
+                ScientificNameRank = (AlienSpeciesAssessment2023ScientificNameRank)x.Rank,
+                ScientificNameAuthor = x.Author
+            }).ToArray();
+            return path;
+        }
+
+        public static AlienSpeciesAssessment2023ScientificName GetScientificName(FA4 src)
+        {
+            return new AlienSpeciesAssessment2023ScientificName()
+            {
+                ScientificNameFormatted = string.IsNullOrWhiteSpace(src.EvaluatedScientificNameFormatted) ? src.EvaluatedScientificName : src.EvaluatedScientificNameFormatted,
+                ScientificNameId = src.EvaluatedScientificNameId,
+                ScientificNameAuthor = src.EvaluatedScientificNameAuthor,
+                ScientificNameRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(src.EvaluatedScientificNameRank == null ? "22" : src.EvaluatedScientificNameRank)
+            };
+        }
     }
 }

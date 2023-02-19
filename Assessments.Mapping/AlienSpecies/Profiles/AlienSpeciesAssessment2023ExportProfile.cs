@@ -25,6 +25,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 })
                 .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt => opt.MapFrom(src => src.ExpansionSpeedEstimationMethod.DisplayName()))
                 .ForMember(dest => dest.ArrivedCountryFrom, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetArrivedCountryFrom(src.ArrivedCountryFrom)))
+                .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.ScientificName.ScientificName))
+                .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.ScientificName.ScientificNameId))
+                .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.ScientificName.ScientificNameAuthor))
+                .ForMember(dest => dest.TaxonHierarcy, opt => opt.MapFrom(src => string.Join("\\", src.NameHiearchy.Select(x=>x.ScientificName).ToArray())))
                 ;
         }
     }

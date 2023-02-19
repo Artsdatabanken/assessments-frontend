@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -258,7 +259,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return text;
         }
 
-        public static string GetScientificNameElement(string scientificName)
+        public static string FormatScientificNameElement(string scientificName)
         {
             scientificName = "<i>" + scientificName + "</i>";
             scientificName = scientificName.Replace("×", "</i>×<i>");
@@ -319,6 +320,18 @@ namespace Assessments.Frontend.Web.Infrastructure
                 22 => "Art",
                 23 => "Underart",
                 24 => "Varietet",
+                _ => "Art"
+            };
+            return Helpers.FixSpeciesLevel(replaceString, stringRank);
+        }
+        public static string FixSpeciesLevel(string replaceString, AlienSpeciesAssessment2023ScientificNameRank rank)
+        {
+            var stringRank = rank switch
+            {
+                AlienSpeciesAssessment2023ScientificNameRank.Species => "Art",
+                AlienSpeciesAssessment2023ScientificNameRank.SubSpecies => "Underart",
+                AlienSpeciesAssessment2023ScientificNameRank.Variety => "Varietet",
+                AlienSpeciesAssessment2023ScientificNameRank.Form => "Form",
                 _ => "Art"
             };
             return Helpers.FixSpeciesLevel(replaceString, stringRank);

@@ -115,22 +115,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// When forming part of an Identification, this should be the name in lowest level taxonomic rank that can be determined
         /// </summary>
-        public string ScientificName { get; set; }
-
-        /// <summary>
-        /// Author of the scienfic name
-        /// </summary>
-        public string ScientificNameAuthor { get; set; }
-
-        /// <summary>
-        /// An identifier for the nomenclatural (not taxonomic) details of a scientific name
-        /// </summary>
-        public int ScientificNameId { get; set; }
-
-        /// <summary>
-        /// The taxonomic rank of the evaluated scientific name
-        /// </summary>
-        public AlienSpeciesAssessment2023TaxonRank ScientificNameRank { get; set; }
+        public AlienSpeciesAssessment2023ScientificName ScientificName { get; set; }
 
         /// <summary>
         /// The species' total score on the ecological effect axis
@@ -172,7 +157,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Taxonomy path
         /// </summary>
-        public string TaxonHierarcy { get; set; }
+        public AlienSpeciesAssessment2023ScientificName[] NameHiearchy { get; set; }
 
         /// <summary>
         /// Uncertainty around the establishment category. Free text field.

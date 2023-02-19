@@ -321,6 +321,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Art = 22,
             Underart = 23,
             Varietet = 24,
+            Form = 25,
 
             [Display(Name = "Taksonomisk nivå")]
             ttn,
@@ -348,6 +349,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = nameof(TaxonRankEnum.Varietet),
                 NameShort = TaxonRankEnum.Varietet.GetHashCode().ToString()
+            },
+            new()
+            {
+            Name = nameof(TaxonRankEnum.Form),
+            NameShort = TaxonRankEnum.Form.GetHashCode().ToString()
             }
         };
 

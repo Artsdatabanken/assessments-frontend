@@ -73,6 +73,13 @@ namespace Assessments.Frontend.Web.Models
         public int ItemCount { get; set; }
     }
 
+    public class CriteriaExplanationViewModel
+    {
+        public AlienSpeciesDetailViewModel AlienSpeciesDetailViewModel { get; set; }
+
+        public string Criteria { get; set; }
+    }
+
     public class ExpertStatementViewModel
     {
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }

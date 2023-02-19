@@ -270,7 +270,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.StateChange.Select(x => string.Concat(x.Where(char.IsLetter))));
                 })
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToLower()))
-                .ForMember(dest => dest.IsThreatened, opt => opt.MapFrom(src => src.NiNCode.All(Char.IsDigit)));
+                .ForMember(dest => dest.IsThreatened, opt => opt.MapFrom(src => src.NiNCode.All(Char.IsDigit)))
+                .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.Background.DefaultIfEmpty()));
 
             CreateMap<RiskAssessment.SpeciesSpeciesInteraction, AlienSpeciesAssessment2023SpeciesSpeciesInteraction>(MemberList.None)
                 .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.BasisOfAssessment.DefaultIfEmpty()))

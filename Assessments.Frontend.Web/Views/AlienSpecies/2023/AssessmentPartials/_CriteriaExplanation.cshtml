@@ -12,8 +12,8 @@
     var assessment = Model.AlienSpeciesDetailViewModel.Assessment;
     var isNrOrEvaluatedAtAnotherLevel = assessment.Category == AlienSpeciesAssessment2023Category.NR || assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var showIsNk = assessment.Category == AlienSpeciesAssessment2023Category.NK;
-    var showLowInvasionPotential = assessment.ScoreInvasionPotential == 1;
-    var showHigherInvasionPotential = assessment.ScoreInvasionPotential > 1;
+    var showLowInvasionPotential = assessment.ScoreInvasionPotential == AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Small;
+    var showHigherInvasionPotential = assessment.ScoreInvasionPotential != AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Small && assessment.ScoreInvasionPotential != AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown;
 
     var uncertaintyA = assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).FirstOrDefault();
     var uncertaintyB = assessment.Criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).FirstOrDefault();
@@ -44,7 +44,7 @@
     var isEstimatedIncreaseInAOODoorKnockers = assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOODoorKnockers;
 
 
-    var showNoEcologicalEffect = assessment.ScoreEcologicalEffect == 1 && !Model.Criteria.Any(x => Model.AlienSpeciesDetailViewModel.Assessment.Criteria.Any(y => y.CriteriaLetter.ToString() == x.ToString() && y.UncertaintyValues.Count() > 1));
+    var showNoEcologicalEffect = assessment.ScoreEcologicalEffect == AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.NotKnown && !Model.Criteria.Any(x => Model.AlienSpeciesDetailViewModel.Assessment.Criteria.Any(y => y.CriteriaLetter.ToString() == x.ToString() && y.UncertaintyValues.Count() > 1));
 
     var showFTable = assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == true && HasAffectedArea(x.AffectedArea));
     var showGTable = assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == false && HasAffectedArea(x.AffectedArea));
@@ -75,24 +75,9 @@
     var criteriaHasH = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H)) || hasContentH));
     var criteriaHasI = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I)) || hasContentI));
 
-    int GetUncertaintyValueMinMax(int value, int uncertainty)
-    {
-        return uncertainty == 0 ? value : uncertainty;
-    }
-
-    int GetUncertaintyHigh(AlienSpeciesAssessment2023Criterion criterion)
-    {
-        return criterion.UncertaintyValues.Where(x => x > criterion.Value).FirstOrDefault();
-    }
-
-    int GetUncertaintyLow(AlienSpeciesAssessment2023Criterion criterion)
-    {
-        return criterion.UncertaintyValues.Where(x => x < criterion.Value).FirstOrDefault();
-    }
-
     bool HasUncertainty(AlienSpeciesAssessment2023Criterion uncertainty)
     {
-        return GetUncertaintyLow(uncertainty) != 0 || GetUncertaintyHigh(uncertainty) != 0;
+        return AlienSpeciesHelpers.GetUncertaintyLow(uncertainty) != 0 || AlienSpeciesHelpers.GetUncertaintyHigh(uncertainty) != 0;
     }
 
     bool HasAffectedArea(string affectedArea)
@@ -103,35 +88,6 @@
             return area != (float)0;
         }
         return true;
-    }
-
-    void GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion, bool isDifferent)
-    {
-        <p>
-            @criterion.CriteriaLetter.DisplayName() @( isDifferent == true ? "som er" : "på" ) @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, criterion.Value)@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "")
-            @{
-                if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
-                {
-                    <span>(med usikkerhet</span>
-                }
-                if (GetUncertaintyLow(criterion) != 0)
-                {
-                    <span>
-                        ned mot @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyLow(criterion))@(GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) != 0 ? ")." : "")
-                    </span>
-                }
-                if (GetUncertaintyHigh(criterion) != 0 && GetUncertaintyLow(criterion) != 0)
-                {
-                    <span>og</span>
-                }
-                if (GetUncertaintyHigh(criterion) != 0)
-                {
-                    <span>
-                        opp mot @AlienSpeciesHelpers.CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion))@(GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0 ? ")." : "")
-                    </span>
-                }
-            }
-        </p>
     }
 
     void GetSpeciesTableDesktop(List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> impacts)
@@ -145,7 +101,7 @@
                 <td><b>Interaksjonens styrke</b></td>
                 <td><b>Geografisk omfang</b></td>
                 <td><b>Type interaksjon</b></td>
-                @if (impacts.Any(x => x.Background != null && x.Background.Count() != 0))
+                @if (impacts.Any(x => x.Background.Count() != 0))
                 {
                     <td><b>Vurderingsgrunnlag</b></td>
                 }
@@ -159,7 +115,7 @@
                     <td>@impact.InteractionStrength.DisplayName()</td>
                     <td>@impact.Scale.DisplayName()</td>
                     <td>@impact.InteractionType.DisplayName()</td>
-                    @if (@impact.Background != null && @impact.Background.Count() != 0)
+                    @if (@impact.Background.Count() != 0)
                     {
                         <td>
                             <ul>
@@ -201,7 +157,7 @@
                     <td>type interaksjon</td>
                     <td>@impact.InteractionType.DisplayName()</td>
                 </tr>
-                @if (@impact.Background != null && @impact.Background.Count() != 0)
+                @if (@impact.Background.Count() != 0)
                 {
                     <tr>
                         <td>vurderingsgrunnlag</td>
@@ -274,7 +230,7 @@
                     <td>type interaksjon</td>
                     <td>@impact.InteractionType.DisplayName()</td>
                 </tr>
-                @if (@impact.Background != null && @impact.Background.Count() != 0)
+                @if (@impact.Background.Count() != 0)
                 {
                     <tr>
                         <td>vurderingsgrunnlag</td>
@@ -323,8 +279,7 @@
                     </td>
                     <td>@natureType.AffectedArea</td>
                     <td>
-                        @if (natureType.Background != null)
-                        {
+                    @{
                             <ul>
                                 @foreach (var background in natureType.Background)
                                 {
@@ -333,7 +288,7 @@
                                     </li>
                                 }
                             </ul>
-                        }
+                    }
                     </td>
                 </tr>
             }
@@ -359,8 +314,10 @@
         <div is-visible="showHigherInvasionPotential">
             <div is-visible="criteriaHasA || criteriaHasB">
                 @{
-                    GetLetterFullText(uncertaintyA, false);
-                }
+                    <p>    
+                        @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) )
+                    </p>
+                    }
                 <div is-visible="!showIsNk" class="collapsible initially_closed">
                     <div class="collapsible_header">
                         <h3>Vis detaljer</h3>
@@ -374,20 +331,20 @@
                             Estimeringsmetode: @assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
                         </p>
                         <p is-visible="showSimplifiedEstimateAcceptedAlien">
-                            Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest km²) og om 50 år (@assessment.AOOfutureBest km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyLow(uncertaintyA)) – @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
+                            Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest km²) og om 50 år (@assessment.AOOfutureBest km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
                         </p>
                         <div is-visible="showSimplifiedEstimateNotAcceptedAlien">
                             <p>
-                                Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest km²) og om 50 år (@assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyLow(uncertaintyA)) – @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
+                                Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest km²) og om 50 år (@assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
                             </p>
                             <p>Begrunnelse for justering av skår og/eller usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                         </div>
                         <p is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-                            Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyLow(uncertaintyA)) – @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
+                            Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
                         </p>
                         <div is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
                             <p>
-                                Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyLow(uncertaintyA)) – @GetUncertaintyValueMinMax(uncertaintyA.Value, GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
+                                Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
                             </p>
                             <p>Begrunnelse for justering av skår og/eller usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                         </div>
@@ -445,8 +402,10 @@
             </div>
             <div is-visible="criteriaHasB || criteriaHasA">
                 @{
-                    GetLetterFullText(uncertaintyB, false);
-                }
+                    <p>    
+                        @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyB, false) )
+                    </p>
+                    }
                 <div class="collapsible initially_closed">
                     <div class="collapsible_header">
                         <h3>Vis detaljer</h3>
@@ -530,7 +489,7 @@
                         </div>
                         <div is-visible="isEstimatedIncreaseInAOODoorKnockers">
                             <p>
-                                Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @GetUncertaintyValueMinMax(uncertaintyB.Value, GetUncertaintyLow(uncertaintyB)) – @GetUncertaintyValueMinMax(uncertaintyB.Value, GetUncertaintyHigh(uncertaintyB))). Det beste anslaget på artens ekspansjonshastighet er @assessment.ExpansionSpeedBestEstimate m/år.
+                                Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyB)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyB))). Det beste anslaget på artens ekspansjonshastighet er @assessment.ExpansionSpeedBestEstimate m/år.
                             </p>
                         </div>
                     </div>
@@ -538,7 +497,9 @@
             </div>
             <div is-visible="criteriaHasC">
                 @{
-                    GetLetterFullText(uncertaintyC, false);
+                <p>    
+                    @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyC, false) )
+                </p>
                 }
             </div>
             <div>
@@ -558,7 +519,9 @@
     <div is-visible="!showNoEcologicalEffect">
         <div is-visible="criteriaHasD">
             @{
-                GetLetterFullText(uncertaintyD, false);
+            <p>    
+                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyD, false) )
+            </p>
             }
             <div is-visible="!showIsNk && hasContentD" class="collapsible initially_closed">
                 <div class="collapsible_header">
@@ -616,7 +579,9 @@
 
         <div is-visible="criteriaHasE">
             @{
-                GetLetterFullText(uncertaintyE, false);
+            <p>
+                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyE, false) )
+            </p>
             }
             <div is-visible="!showIsNk && hasContentE" class="collapsible initially_closed">
                 <div class="collapsible_header">
@@ -673,7 +638,9 @@
         </div>
         <div is-visible="criteriaHasF">
             @{
-                GetLetterFullText(uncertaintyF, false);
+            <p>
+                    @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyF, false) )
+            </p>
             }
             <div is-visible="!showIsNk && hasContentF" class="collapsible initially_closed">
                 <div class="collapsible_header">
@@ -698,7 +665,9 @@
 
         <div is-visible="criteriaHasG">
             @{
-                GetLetterFullText(uncertaintyG, false);
+            <p>    
+                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyG, false) )
+            </p>
             }
             <div is-visible="!showIsNk && hasContentG" class="collapsible initially_closed">
                 <div class="collapsible_header">
@@ -723,7 +692,9 @@
 
         <div is-visible="criteriaHasH">
             @{
-                GetLetterFullText(uncertaintyH, true);
+            <p>    
+                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyH, true) )
+            </p>
             }
             <div is-visible="!showIsNk && hasContentH" class="collapsible initially_closed">
                 <div class="collapsible_header">
@@ -778,7 +749,9 @@
 
         <div is-visible="criteriaHasI">
             @{
-                GetLetterFullText(uncertaintyI, true);
+            <p>
+                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyI, true) )
+            </p>
             }
             <div is-visible="!showIsNk && hasContentI" class="collapsible initially_closed">
                 <div class="collapsible_header">

@@ -12,8 +12,8 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 {
     public static class AlienSpeciesAssessment2023ProfileHelper
     {
-        private static PropertyInfo[] riskAssessmentProperties = typeof(RiskAssessment).GetProperties();
-        private static PropertyInfo[] riskAssessmentPropertiesFirstObservations = riskAssessmentProperties.Where(x => x.Name.StartsWith("YearFirst") && !x.Name.Contains("Insecure") && !x.Name.Contains("Domestic")).ToArray();
+        private static readonly PropertyInfo[] riskAssessmentProperties = typeof(RiskAssessment).GetProperties();
+        private static readonly PropertyInfo[] riskAssessmentPropertiesFirstObservations = riskAssessmentProperties.Where(x => x.Name.StartsWith("YearFirst") && !x.Name.Contains("Insecure") && !x.Name.Contains("Domestic")).ToArray();
 
         internal static string GetAlienSpeciesCategory(string alienSpeciesCategory, string expertGroup)
         {
@@ -179,6 +179,44 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
         }
 
+        internal static AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect GetScoreEcologicalEffect(string category, string criteria)
+        {
+            if (string.IsNullOrEmpty(category) || category is "NR")
+            {
+                return AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Unknown;
+            }
+            var axis = criteria.Split(",")[1];
+            var score = (int)Char.GetNumericValue(axis[0]);
+
+            return score switch
+            {
+                1 => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.NotKnown,
+                2 => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Small,
+                3 => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Medium,
+                4 => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Great,
+                _ => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Unknown
+            };
+        }
+
+        internal static AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential GetScoreInvasionPotential(string category, string criteria)
+        {
+            if (string.IsNullOrEmpty(category) || category is "NR")
+            {
+                return AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown;
+            }
+            var axis = criteria.Split(",")[0];
+            var score = (int)Char.GetNumericValue(axis[0]);
+
+            return score switch
+            {
+                1 => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Small,
+                2 => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Limited,
+                3 => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Moderate,
+                4 => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Great,
+                _ => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown
+            };
+        }
+
         internal static bool? GetGeographicVarInCat(string category, string geographicVar)
         {
             if (category is "NR")
@@ -262,10 +300,9 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         {
             // Reversing the list to get a match as low as possible in the taxon hierarchy.
             var scientificNames = taxonHierarchy.Split("/").Reverse();
-            AlienSpeciesAssessment2023SpeciesGroups speciesGroup;
             foreach (var name in scientificNames)
             {
-                if (Enum.TryParse(name, out speciesGroup))
+                if (Enum.TryParse(name, out AlienSpeciesAssessment2023SpeciesGroups speciesGroup))
                 {
                     return speciesGroup.DisplayName();
                 }
@@ -331,7 +368,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                         };
                     }
 
-                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":")
+                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(':')
                         ? "https://databank.artsdatabanken.no/FremmedArt2012"
                         : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
 
@@ -342,7 +379,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return previousAssessments;
         }
 
-        private static Dictionary<int, int> introLowTable = new Dictionary<int, int>()
+        private static readonly Dictionary<int, int> introLowTable = new()
         {
             { 1, 1 },
             { 5, 2 },
@@ -356,7 +393,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             { 195, 10 }
         };
 
-        private static Dictionary<int, int> introHighTable = new Dictionary<int, int>()
+        private static readonly Dictionary<int, int> introHighTable = new()
         {
             { 1, 1 },
             { 6, 2 },
@@ -750,7 +787,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static string GetMedianLifetimeEstimationMethod(string category, string chosenMethod)
         {
-            if(category == "NR" || chosenMethod == "RedListCategoryLevel")
+            if (category == "NR" || chosenMethod == "RedListCategoryLevel")
             {
                 return "NotRelevant";
             }
@@ -766,7 +803,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
         }
 
-      
+
         internal static List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)> GetYearsFirstObserved(RiskAssessment riskAssessment, string establishmentCategory)
         {
             if (establishmentCategory is "A") //species not yet in Norway cannot have observations in Norway
@@ -777,12 +814,12 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             else
             {
                 var yearEstablishmentType = new List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)>();
-                
+
                 foreach (var firstObservationProperty in riskAssessmentPropertiesFirstObservations)
                 {
                     var yearFirstValue = firstObservationProperty.GetValue(riskAssessment);
-                    
-                    if (yearFirstValue is not null) 
+
+                    if (yearFirstValue is not null)
                     {
                         AlienSpeciesAssessment2023YearFirstRecordType establishmentTypeName = firstObservationProperty.Name switch
                         {

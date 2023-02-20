@@ -112,6 +112,12 @@ li ul{
     text-align: center;
     font-size: small;
 }
+
+.map-description{
+    text-align:left;
+    padding:8px;
+}
+
 /* TODO: adjust jumps */
 @media only screen and (max-width: 740px) {
     .triple_map {       

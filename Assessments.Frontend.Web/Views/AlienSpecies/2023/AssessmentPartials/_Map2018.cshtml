@@ -6,7 +6,7 @@
 
     string className(string name)
     {
-        string className = "LOL";
+        string className = "";
         var element = Model.RegionOccurrences.Where(x => x.Region.DisplayName() == name).FirstOrDefault();
         if (element != null)
         {
@@ -21,7 +21,7 @@
                 }
             }else if (Model.MapText == Constants.AlienSpecies2023AssumedInFutureOccurrence)
             {
-                 if (element.IsAssumedInFuture)
+                if (element.IsAssumedInFuture)
                 {
                     className += " is_assumed_in_future";
                 }    
@@ -33,14 +33,28 @@
     string seastyle = "fill:#e7f1f2;stroke:#000000;stroke-width:0.5px;";
     string nauticstyle = "fill:lightblue;stroke:#000000;stroke-width:0.5px;";
     string placestyle = "fill:#f2e7da;stroke:#000000;stroke-width:0.5px;";
+
+    void makeFormattedList(List<AlienSpeciesAssessment2023RegionOccurrence> listToShow)
+    {
+        for (var i = 0; i < listToShow.Count; i++){
+            if (i + 1 < listToShow.Count){
+            
+                <span>@listToShow[i].Region.DisplayName(), </span>}
+            else
+            {
+                <span>@listToShow[i].Region.DisplayName().</span>
+            }
+        }
+        if (listToShow.Count == 0)
+        {
+            <span>ingen angitte områder.</span>
+        }
+    }
+    
+
 }
 
 <div class="map-box-container">
-    <span class="indicator">
-        <span class="indicatorcontent sea @Model.MapName"></span>
-        <span class="indicatorcontent @Model.MapName"></span>
-    </span>
-    <span>@Model.MapText</span>
     <svg viewBox="0 0 172.13006 278.71942"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:svg="http://www.w3.org/2000/svg">
@@ -144,7 +158,6 @@
                 <title>Sogn og Fjordane kyst</title>
             </path>
         </g>
-
         <g class="land" style=@placestyle>
             <path d="m 153.55296,139.82943 1.6736,2.00832 -1.2552,0.66944 h -1.08784 l -2.17568,3.59825 -1.00416,2.9288 -1.00416,-1.50624 0.92048,-3.68193 -1.17152,-1.75728 -4.51873,-2.34304 -2.5104,2.34304 -1.2552,0.0837 -1.50624,3.17984 0.58576,7.11281 -1.84096,1.33888 -0.75312,2.34305 -1.25521,-0.66944 -2.092,-0.50209 -0.66944,-1.00416 -1.92464,2.51041 -3.17984,-1.00416 -1.58993,-3.17985 1.75729,-0.75312 -1.08785,-2.84512 1.25521,-0.92048 0.16736,-1.58992 -1.00417,-0.33473 -0.75312,-1.75728 -1.08784,-2.092 -1.42256,-0.16736 -0.52983,-1.35189 3.57787,-0.21418 1.47069,2.90495 1.73127,-4.41466 2.5234,-2.77446 -1.49323,-1.42993 1.17152,-2.092 1.6736,0.75312 1.00416,-2.9288 1.67361,1.17152 -2.00833,9.28849 4.01665,-9.28849 0.4184,5.43921 c 0.47419,-0.97627 1.49062,1.30093 1.42256,-2.92881 l 0.25104,-4.184 3.59824,0.50208 -0.75312,5.0208 1.00416,1.08784 0.74748,-5.17515 5.00781,0.63779 3.03112,1.60856 v 1.84096 l -6.35968,3.34721 3.93296,0.8368 3.09616,0.66944 -0.0837,-0.16736 z m -26.11902,-0.98639 0.77349,1.25694 1.25694,-1.74037 -0.38675,-1.16025 0.38675,-0.48344 0.48344,0.96688 0.96687,-1.45031 -1.06356,-1.25694 -0.48344,1.64368 z m -3.48075,-1.45031 1.35362,1.35363 2.41719,-1.45031 0.58012,-2.03044 z m 5.99462,-4.64099 -0.29006,0.7735 0.77349,0.19337 0.19338,-0.58012 z"
                   id="Finnmark" class="@className("Finnmark") land">
@@ -228,24 +241,52 @@
             </path>
         </g>
     </svg>
-    <div>
-        <span>@Model.MapText:</span>
+    <div class="map-description"> 
+        <b>@Model.MapText</b><br/>
         <span>
             @{
-                for (var i = 0; i < Model.RegionOccurrences.Count; i++)
+                // Split list for map of today:
+                List<AlienSpeciesAssessment2023RegionOccurrence> knownToday;
+                List<AlienSpeciesAssessment2023RegionOccurrence> assumedToday;
+
+                if (Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence)
                 {
-                if (i + 1 < Model.RegionOccurrences.Count)
-                    {<span>@Model.RegionOccurrences[i].Region.DisplayName(), </span>}
-                else
-                {
-                    <span>@Model.RegionOccurrences[i].Region.DisplayName().</span>
+                    knownToday = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList();
+                    assumedToday = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true && x.IsKnown == false).ToList();
+
+
+                    <div>
+                        <br/>
+                        <b>Kjent utberedelse</b><br/>
+                        @{makeFormattedList(knownToday);}
+                        <br/><br/>
+                        <b>Antatt utberedelse</b><br/>
+                        Alle i listen ovenfor + 
+                        @{makeFormattedList(assumedToday);}
+                    </div>
                 }
-            }
-            if (Model.RegionOccurrences.Count == 0)
-            {
-                <span>ingen angitte områder.</span>
-            }
+
+
+                else
+                {                    
+                    makeFormattedList(@Model.RegionOccurrences);
+                        <br/><br/>
+                        <span class="indicator">
+                            <span class="indicatorcontent sea known_today"></span>
+                            <span class="indicatorcontent known_today"></span>
+                        </span>
+                        <span>Kjent utberedelse</span><br/>
+
+                        <span>
+                        <span class="indicator">
+                            <span class="indicatorcontent sea is_assumed_in_future"></span>
+                            <span class="indicatorcontent is_assumed_in_future"></span>
+                        </span>
+                        <span>Antatt utberedelse</span>
+                    </span>
+                }
+            
         }
-        </span>
+        
     </div>
 </div>

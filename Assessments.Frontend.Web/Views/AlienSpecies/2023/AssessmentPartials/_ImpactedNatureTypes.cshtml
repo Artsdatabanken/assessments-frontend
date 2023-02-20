@@ -55,15 +55,12 @@
                 <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn5):</b>@natureType.AffectedArea</td>
                 <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn6:</b>
                 @{ 
-                    if(natureType.Background != null)
-                    { 
                         <ul>
                         @{
                             foreach (var bg in natureType.Background)
                             {<li>@bg.DisplayName()</li>}
-                            }
+                        }
                         </ul>
-                    }
                 }
                 </td>
             </tr>
@@ -87,7 +84,7 @@
             {
                 <tr>
                     <td>@habitat.Name</td>
-                    <td>@Html.Raw(Helpers.GetScientificNameElement(habitat.ScientificName)) @habitat.ScientificNameAuthor @habitat.VernacularName</td>
+                    <td>@Html.Raw(Helpers.FormatScientificNameElement(habitat.ScientificName)) @habitat.ScientificNameAuthor @habitat.VernacularName</td>
                     <td>@habitat.TimeHorizon.DisplayName()</td>
                 </tr>
             }

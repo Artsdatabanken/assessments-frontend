@@ -5,13 +5,17 @@
                 Model.AlienSpeciesCategory != Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
     var showConclusion = showCriteriaDocumentation && !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
+    var showRaceExplanation = Model.RaceViewModel.SpeciesGroup == "Pattedyr";
 }
 
 <div class="page_section" id="@nameof(Constants.HeadingsNo.Conclusion)" is-visible="@showConclusion">
     <h2>@Constants.HeadingsNo.Conclusion</h2>
     <div class="expert_Assessment">
-        <div class="expert_text">
+        <p class="expert_text">
             @Html.Raw(Model.CriteriaDocumentation)
+        </p>
+        <div is-visible="showRaceExplanation">
+            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RaceExplanation.cshtml" model="Model.RaceViewModel" />
         </div>
     </div>
 </div>

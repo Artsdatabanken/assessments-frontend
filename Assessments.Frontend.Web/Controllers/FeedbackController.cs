@@ -45,7 +45,7 @@ namespace Assessments.Frontend.Web.Controllers
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Tilbakemeldinger");
-                
+
                 worksheet.Cell(1, 1).InsertTable(feedback);
                 workbook.Worksheet(1).Columns().AdjustToContents();
 
@@ -58,7 +58,7 @@ namespace Assessments.Frontend.Web.Controllers
                 var row = 1;
 
                 var attachments = await _dbContext.FeedbackAttachments.Include(x => x.Feedback).AsNoTracking().ToListAsync();
-                
+
                 var baseUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}";
 
                 foreach (var attachment in attachments)
@@ -109,7 +109,7 @@ namespace Assessments.Frontend.Web.Controllers
             return File(stream, "application/octet-stream", attachment.FileName);
         }
 
-                public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl)
+        public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl)
         {
             ModelState.Remove(nameof(FeedbackFormViewModel.Comment));
 
@@ -128,7 +128,7 @@ namespace Assessments.Frontend.Web.Controllers
                 };
 
                 _dbContext.EmailValidations.Add(emailValidation);
-                
+
                 await _dbContext.SaveChangesAsync();
             }
 
@@ -139,9 +139,9 @@ namespace Assessments.Frontend.Web.Controllers
             };
 
             message.AddTo(new EmailAddress(emailValidation.Email, emailValidation.FullName));
-            
+
             var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#Feedback";
-            
+
             var messageContent = $"<p>Klikk på lenken nedenfor for å bekrefte din e-postadresse. Dette gir deg tilgang til å gi tilbakemelding på Fremmedartsvurderinger i 2023.</p><p><a href='{validationUrl}'>{validationUrl}</a></p>";
 
             var sendMail = await SendMail(message, messageContent);

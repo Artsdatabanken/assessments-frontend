@@ -92,7 +92,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         private IActionResult GetExport(IEnumerable<AlienSpeciesAssessment2023> query)
         {
-            if (!_alienSpecies2023Options.EnableExport)
+            if (_alienSpecies2023Options.IsHearing)
                 return NotFound();
 
             var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());

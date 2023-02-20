@@ -56,7 +56,7 @@
     // needed to check if a criteria has content, for deciding if it should be shown in nonDecisiveCriteria tab
     var hasContentA = showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction || showNumericalEstimation || showViableAnalysis;
     var hasContentB = isSpatiotemporalDataset || isEstimatedIncreaseInAOOReproducingUnaided || isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion || isEstimatedIncreaseInAOODoorKnockers;
-
+    var hasContentC = assessment.ImpactedNatureTypes != null && assessment.ImpactedNatureTypes.Count != 0 && assessment.ImpactedNatureTypes.Any(x => x.ColonizedArea != "0.0");
     var hasContentD = (assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0) || (assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD));
     var hasContentE = (assessment.SpeciesSpeciesInteractions != null && assessment.SpeciesSpeciesInteractions.Count() != 0) || (assessment.SpeciesNaturetypeInteractions != null && assessment.SpeciesNaturetypeInteractions.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE));
     var hasContentF = showFTable || !string.IsNullOrEmpty(assessment.ThreatenedNatureTypesAffectedDomesticDescription);
@@ -67,7 +67,7 @@
     // If decisive criteria pane, show if decisive. If not decisive criteria pane, show if criteria is used, or if it has uncertainty.
     var criteriaHasA = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) || hasContentA));
     var criteriaHasB = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B)) || hasContentB));
-    var criteriaHasC = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C))));
+    var criteriaHasC = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.C)) || hasContentC));
     var criteriaHasD = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.D)) || hasContentD));
     var criteriaHasE = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.E)) || hasContentE));
     var criteriaHasF = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.F)) || hasContentF));
@@ -313,11 +313,9 @@
         </div>
         <div is-visible="showHigherInvasionPotential">
             <div is-visible="criteriaHasA || criteriaHasB">
-                @{
-                    <p>    
-                        @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) )
-                    </p>
-                    }
+                <p>    
+                    @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) )
+                </p>
                 <div is-visible="!showIsNk" class="collapsible initially_closed">
                     <div class="collapsible_header">
                         <h3>Vis detaljer</h3>
@@ -401,11 +399,9 @@
                 </div>
             </div>
             <div is-visible="criteriaHasB || criteriaHasA">
-                @{
-                    <p>    
-                        @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyB, false) )
-                    </p>
-                    }
+                <p>    
+                    @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyB, false) )
+                </p>
                 <div class="collapsible initially_closed">
                     <div class="collapsible_header">
                         <h3>Vis detaljer</h3>
@@ -496,11 +492,43 @@
                 </div>
             </div>
             <div is-visible="criteriaHasC">
-                @{
                 <p>    
                     @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyC, false) )
                 </p>
-                }
+                <div is-visible="!showIsNk && hasContentC" class="collapsible initially_closed">
+                    <div class="collapsible_header">
+                        <h3>Vis detaljer</h3>
+                        <button onclick="toggleCollapsible(this)">
+                            <span class="material-icons expanded_icon">expand_less</span>
+                            <span class="material-icons collapsed_icon">expand_more</span>
+                        </button>
+                    </div>
+                    <div class="collapsible_content">
+                        <table class="numbers-table">
+                            <caption class="table-title"><b>Kolonisert naturtypeareal.</b> Anslått prosentandel kolonisert areal i de naturtypene arten er observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner. </caption>
+                            <tr>
+                                <td><b>Naturtype</b></td>
+                                <td><b>Tidshorisont</b></td>
+                                <td><b>Tydelig påvirka areal (%)</b></td>
+                                <td><b>Vurderingsgrunnlag</b></td>
+                            </tr>
+                            @foreach (var natureType in assessment.ImpactedNatureTypes)
+                            {
+                                <tr>
+                                    <td>@natureType.Name</td>
+                                    <td>@natureType.TimeHorizon.DisplayName()</td>
+                                    <td>@natureType.ColonizedArea</td>
+                                    <td>
+                                            @foreach (var background in natureType.Background)
+                                            {
+                                            <li>@background.DisplayName()</li>
+                                            }
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
             </div>
             <div>
                 <p is-visible="unusedCriteriaCountInvationPotential == 1">Det øvrige kriteriet er ikke brukt.</p>
@@ -518,11 +546,9 @@
 
     <div is-visible="!showNoEcologicalEffect">
         <div is-visible="criteriaHasD">
-            @{
             <p>    
                 @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyD, false) )
             </p>
-            }
             <div is-visible="!showIsNk && hasContentD" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
@@ -578,11 +604,9 @@
         </div>
 
         <div is-visible="criteriaHasE">
-            @{
             <p>
                 @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyE, false) )
             </p>
-            }
             <div is-visible="!showIsNk && hasContentE" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
@@ -637,11 +661,9 @@
             </div>
         </div>
         <div is-visible="criteriaHasF">
-            @{
             <p>
-                    @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyF, false) )
+                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyF, false) )
             </p>
-            }
             <div is-visible="!showIsNk && hasContentF" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
@@ -664,11 +686,9 @@
         </div>
 
         <div is-visible="criteriaHasG">
-            @{
             <p>    
                 @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyG, false) )
             </p>
-            }
             <div is-visible="!showIsNk && hasContentG" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
@@ -691,11 +711,9 @@
         </div>
 
         <div is-visible="criteriaHasH">
-            @{
             <p>    
                 @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyH, true) )
             </p>
-            }
             <div is-visible="!showIsNk && hasContentH" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
@@ -748,11 +766,9 @@
         </div>
 
         <div is-visible="criteriaHasI">
-            @{
             <p>
                 @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyI, true) )
             </p>
-            }
             <div is-visible="!showIsNk && hasContentI" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>

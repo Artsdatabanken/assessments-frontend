@@ -236,10 +236,14 @@ namespace Assessments.Frontend.Web.Controllers
                 await _dbContext.SaveChangesAsync();
             }
 
+            var alienSpeciesAssessments = await DataRepository.GetAlienSpeciesAssessments();
+            var assessment = alienSpeciesAssessments.FirstOrDefault(x => x.Id == feedback.AssessmentId);
+            var scientificName = assessment != null ? assessment.ScientificName.ScientificName : string.Empty;
+
             var message = new SendGridMessage
             {
                 From = new EmailAddress("noreply@artsdatabanken.no"),
-                Subject = "Tilbakemelding til Fremmedartvurdering 2023 "
+                Subject = $"Tilbakemelding på foreløpig vurdering av {scientificName}"
             };
 
             message.AddTo(new EmailAddress(feedback.Email, feedback.FullName));
@@ -249,7 +253,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (feedback.Attachments.Any())
                 feedbackAttachments = $"<p>Antall vedlegg: {feedback.Attachments.Count}</p>";
 
-            var messageContent = $"<p>Vi har mottatt følgende tilbakemelding:</p><p>{feedback.Comment}</p>{feedbackAttachments}";
+            var messageContent = $"<p>Under innsyn i de foreløpige vurderingene i Fremmedartslista 2023 har vi mottatt følgende tilbakemelding på vurderingen av {scientificName}:</p><p>{feedback.Comment}</p>{feedbackAttachments}";
 
             var sendMail = await SendMail(message, messageContent);
 

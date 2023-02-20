@@ -30,7 +30,17 @@ namespace Assessments.Transformation
                 { 1026, 2354 },
                 { 1293, 2367 },
                 { 1292, 2367 },
-                { 1835, 1825 }
+                { 1835, 1825 },
+                { 2206, 595  },
+                { 2015, 830  },
+                { 2016, 830  },
+                { 2037, 830  },
+                { 1370, 1070 },
+                { 7356, 1070 },
+                {  850, 7355 },
+                { 6068, 1451 },
+                { 2158, 464  },
+
             };
 
         public static async Task TransformDataModels(IConfigurationRoot configuration, bool upload)
@@ -172,6 +182,13 @@ namespace Assessments.Transformation
             if (fa4.AlienSpeciesCategory == "NotAlienSpecie" &&
                 fa4.PreviousAssessments.FirstOrDefault(x => x.RevisionYear == 2018) is
                     { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
+            {
+                Progress.ProgressBar.Tick();
+                return true;
+            }
+
+            // ekskluderer vurderinger som ikke er ferdigstilte
+            if (!fa4.EvaluationStatus.Equals("finished", StringComparison.OrdinalIgnoreCase))
             {
                 Progress.ProgressBar.Tick();
                 return true;

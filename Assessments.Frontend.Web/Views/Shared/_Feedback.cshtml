@@ -3,6 +3,7 @@
 @using Assessments.Data
 @using Assessments.Frontend.Web.Controllers
 @using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.EntityFrameworkCore
 
@@ -12,6 +13,7 @@
     var feedbackMessage = TempData["feedback"] != null;
     var validationCode = string.Empty;
     var validationCodeQuerystring = Context.Request.Query["guid"];
+    var returnUrl = Context.Request.GetEncodedPathAndQuery();
 
     const string validationCookieName = FeedbackController.ValidationCookieName;
 
@@ -60,6 +62,8 @@
     }
 }
 
+<div class="feedback_form_container">
+
 <div class="page_section_header" id="Feedback" is-visible="Model.HasBackToTopLink">
     <h2>Tilbakemelding</h2>
     <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
@@ -77,8 +81,11 @@ else if (feedbackMessage)
 }
 else if (emailIsValid)
 {
+    <p>
+       Din e-post er verifisert, nå kan du legge inn tilbakemelding.
+    </p>
     <div class="page_section">
-        <form id="js-feedback-form" asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@(Context.Request.Path)" asp-route-code="@validationCode" class="feedback_form" method="post" enctype="multipart/form-data" novalidate>
+            <form id="js-feedback-form" asp-controller="Feedback" asp-action="AddFeedback" asp-route-returnurl="@returnUrl" asp-route-code="@validationCode" class="feedback_form" method="post" enctype="multipart/form-data" novalidate>
             <div class="feedback_form_input_field">
                 <label asp-for="FullName"></label><br />
                 <input asp-for="FullName" readonly="readonly" />
@@ -105,7 +112,7 @@ else if (emailIsValid)
             <input asp-for="ExpertGroup" type="hidden" />
             <input asp-for="Type" type="hidden" />
             <button class="primary" type="submit">Send inn skjema</button>
-            <a asp-controller="Feedback" asp-action="ForgetValidation" asp-route-code="@validationCode" asp-route-returnurl="@(Context.Request.Path)" onclick="return confirm('Er du sikker?')">Glem meg?</a>
+                <a asp-controller="Feedback" asp-action="ForgetValidation" asp-route-code="@validationCode" asp-route-returnurl="@returnUrl" onclick="return confirm('Er du sikker?')">Glem meg?</a>
         </form>
     </div>
 }
@@ -116,7 +123,7 @@ else
     </p>
 
     <div class="page_section">
-        <form id="js-feedback-form" asp-controller="Feedback" asp-action="ValidateEmail"  asp-route-returnurl="@Context.Request.Path" method="post" enctype="multipart/form-data" class="feedback_form" novalidate>
+            <form id="js-feedback-form" asp-controller="Feedback" asp-action="ValidateEmail" asp-route-returnurl="@returnUrl" method="post" enctype="multipart/form-data" class="feedback_form" novalidate>
             <div class="feedback_form_input_field">
                 <label asp-for="FullName"></label><br />
                 <input asp-for="FullName" />
@@ -134,6 +141,7 @@ else
         </form>
     </div>
 }
+</div>
 
 <script src="~/js/lib/jquery.slim.min.js"></script>
 <script src="~/js/lib/jquery.validate.min.js"></script>

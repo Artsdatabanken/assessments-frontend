@@ -5,12 +5,16 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using static Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway;
 
 namespace Assessments.Mapping.AlienSpecies.Helpers
 {
     public static class AlienSpeciesAssessment2023ProfileHelper
     {
+        private static readonly PropertyInfo[] riskAssessmentProperties = typeof(RiskAssessment).GetProperties();
+        private static readonly PropertyInfo[] riskAssessmentPropertiesFirstObservations = riskAssessmentProperties.Where(x => x.Name.StartsWith("YearFirst") && !x.Name.Contains("Insecure") && !x.Name.Contains("Domestic")).ToArray();
+
         internal static string GetAlienSpeciesCategory(string alienSpeciesCategory, string expertGroup)
         {
             if (alienSpeciesCategory == "RegionallyAlien" && expertGroup != "Fisker")
@@ -136,7 +140,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 return mainCategory switch
                 {
-                    "Rømning/forvilling" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped,
+                    "R\u00F8mning/forvilling" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped,
                     "Blindpassasjer med transport" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Stowaway,
                     "Korridor" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Corridor,
                     "Tilsiktet utsetting" => AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Released,
@@ -173,6 +177,44 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 int scoreEcoEffectAxis = (int)Char.GetNumericValue(criteriaEcoEffectAxis[0]);
                 return axis == "inv" ? scoreInvationAxis : scoreEcoEffectAxis;
             }
+        }
+
+        internal static AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect GetScoreEcologicalEffect(string category, string criteria)
+        {
+            if (string.IsNullOrEmpty(category) || category is "NR")
+            {
+                return AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Unknown;
+            }
+            var axis = criteria.Split(",")[1];
+            var score = (int)Char.GetNumericValue(axis[0]);
+
+            return score switch
+            {
+                1 => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.NotKnown,
+                2 => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Small,
+                3 => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Medium,
+                4 => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Great,
+                _ => AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Unknown
+            };
+        }
+
+        internal static AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential GetScoreInvasionPotential(string category, string criteria)
+        {
+            if (string.IsNullOrEmpty(category) || category is "NR")
+            {
+                return AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown;
+            }
+            var axis = criteria.Split(",")[0];
+            var score = (int)Char.GetNumericValue(axis[0]);
+
+            return score switch
+            {
+                1 => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Small,
+                2 => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Limited,
+                3 => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Moderate,
+                4 => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Great,
+                _ => AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown
+            };
         }
 
         internal static bool? GetGeographicVarInCat(string category, string geographicVar)
@@ -258,10 +300,9 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         {
             // Reversing the list to get a match as low as possible in the taxon hierarchy.
             var scientificNames = taxonHierarchy.Split("/").Reverse();
-            AlienSpeciesAssessment2023SpeciesGroups speciesGroup;
             foreach (var name in scientificNames)
             {
-                if (Enum.TryParse(name, out speciesGroup))
+                if (Enum.TryParse(name, out AlienSpeciesAssessment2023SpeciesGroups speciesGroup))
                 {
                     return speciesGroup.DisplayName();
                 }
@@ -327,7 +368,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                         };
                     }
 
-                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(":")
+                    previousAssessment.Url = !previousAssessment.AssessmentId.Contains(':')
                         ? "https://databank.artsdatabanken.no/FremmedArt2012"
                         : $"https://databank.artsdatabanken.no/FremmedArt2012/{previousAssessment.AssessmentId.Split(":")[1]}";
 
@@ -338,7 +379,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return previousAssessments;
         }
 
-        private static Dictionary<int, int> introLowTable = new Dictionary<int, int>()
+        private static readonly Dictionary<int, int> introLowTable = new()
         {
             { 1, 1 },
             { 5, 2 },
@@ -352,7 +393,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             { 195, 10 }
         };
 
-        private static Dictionary<int, int> introHighTable = new Dictionary<int, int>()
+        private static readonly Dictionary<int, int> introHighTable = new()
         {
             { 1, 1 },
             { 6, 2 },
@@ -746,7 +787,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         internal static string GetMedianLifetimeEstimationMethod(string category, string chosenMethod)
         {
-            if(category == "NR" || chosenMethod == "RedListCategoryLevel")
+            if (category == "NR" || chosenMethod == "RedListCategoryLevel")
             {
                 return "NotRelevant";
             }
@@ -760,6 +801,93 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                     _ => chosenMethod
                 };
             }
+        }
+
+
+        internal static List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)> GetYearsFirstObserved(RiskAssessment riskAssessment, string establishmentCategory)
+        {
+            if (establishmentCategory is "A") //species not yet in Norway cannot have observations in Norway
+            {
+                return new List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)>();
+            }
+
+            else
+            {
+                var yearEstablishmentType = new List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)>();
+
+                foreach (var firstObservationProperty in riskAssessmentPropertiesFirstObservations)
+                {
+                    var yearFirstValue = firstObservationProperty.GetValue(riskAssessment);
+
+                    if (yearFirstValue is not null)
+                    {
+                        AlienSpeciesAssessment2023YearFirstRecordType establishmentTypeName = firstObservationProperty.Name switch
+                        {
+                            "YearFirstEstablishedNature" => AlienSpeciesAssessment2023YearFirstRecordType.EstablishedNature,
+                            "YearFirstReproductionNature" => AlienSpeciesAssessment2023YearFirstRecordType.ReproductionNature,
+                            "YearFirstNature" => AlienSpeciesAssessment2023YearFirstRecordType.IndividualNature,
+                            "YearFirstEstablishmentProductionArea" => AlienSpeciesAssessment2023YearFirstRecordType.EstablishedProductionArea,
+                            "YearFirstReproductionOutdoors" => AlienSpeciesAssessment2023YearFirstRecordType.ReproductionProductionArea,
+                            "YearFirstProductionOutdoors" => AlienSpeciesAssessment2023YearFirstRecordType.IndividualProductionArea,
+                            "YearFirstReproductionIndoors" => AlienSpeciesAssessment2023YearFirstRecordType.ReproductionIndoors,
+                            _ => AlienSpeciesAssessment2023YearFirstRecordType.IndividualIndoors,
+                        };
+                        var firstObservationUncertaintyProperty = riskAssessmentProperties.Where(x => x.Name == firstObservationProperty.Name + "Insecure").Single();
+                        bool isUncertaintyYearValue = (bool)firstObservationUncertaintyProperty.GetValue(riskAssessment);
+                        yearEstablishmentType.Add((establishmentTypeName, (int)yearFirstValue, isUncertaintyYearValue));
+                    }
+                }
+
+                return yearEstablishmentType;
+            }
+        }
+
+        public static string GetWaterRegionName(string id)
+        {
+            // https://raw.githubusercontent.com/Artsdatabanken/Fremmedartsbase2023/main/Prod.Api/Resources/WaterRegion.geojson
+            
+            return id switch
+            {
+                "5103" => "Agder",
+                "2" => "Bottenhavet",
+                "1" => "Bottenviken",
+                "5107" => "Innlandet og Viken",
+                "VHA5" => "Kemijoki",
+                "1101" => "Møre og Romsdal",
+                "1108" => "Nordland og Jan Mayen",
+                "1106" => "Norsk-finsk",
+                "5104" => "Rogaland",
+                "1TO" => "Torneå",
+                "VHA6" => "Tornionjoki",
+                "1109" => "Troms og Finnmark",
+                "1107" => "Trøndelag",
+                "5108" => "Vestfold og Telemark",
+                "5109" => "Vestland",
+                "5" => "Västerhavet",
+                _ => string.Empty
+            };
+        }
+
+        public static AlienSpeciesAssessment2023ScientificName[] GetNameHiearchy(List<FA4.ScientificNameWithRankId> srcNameHiearchy)
+        {
+            var path = srcNameHiearchy == null ? Array.Empty<AlienSpeciesAssessment2023ScientificName>()  : srcNameHiearchy.Skip(1).Reverse().Select(x => new AlienSpeciesAssessment2023ScientificName()
+            {
+                ScientificNameFormatted = x.ScientificName,
+                ScientificNameRank = (AlienSpeciesAssessment2023ScientificNameRank)x.Rank,
+                ScientificNameAuthor = x.Author
+            }).ToArray();
+            return path;
+        }
+
+        public static AlienSpeciesAssessment2023ScientificName GetScientificName(FA4 src)
+        {
+            return new AlienSpeciesAssessment2023ScientificName()
+            {
+                ScientificNameFormatted = string.IsNullOrWhiteSpace(src.EvaluatedScientificNameFormatted) ? src.EvaluatedScientificName : src.EvaluatedScientificNameFormatted,
+                ScientificNameId = src.EvaluatedScientificNameId,
+                ScientificNameAuthor = src.EvaluatedScientificNameAuthor,
+                ScientificNameRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(src.EvaluatedScientificNameRank == null ? "22" : src.EvaluatedScientificNameRank)
+            };
         }
     }
 }

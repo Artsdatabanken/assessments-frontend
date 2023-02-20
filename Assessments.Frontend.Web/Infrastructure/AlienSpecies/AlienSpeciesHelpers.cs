@@ -1,4 +1,9 @@
-﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Shared.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -154,6 +159,164 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return description;
+        }
+
+        public static int GetUncertaintyValueMinMax(int value, int uncertainty)
+        {
+            return uncertainty == 0 ? value : uncertainty;
+        }
+        public static int GetUncertaintyHigh(AlienSpeciesAssessment2023Criterion criterion)
+        {
+            return criterion.UncertaintyValues.Where(x => x > criterion.Value).FirstOrDefault();
+        }
+        public static int GetUncertaintyLow(AlienSpeciesAssessment2023Criterion criterion)
+        {
+            return criterion.UncertaintyValues.Where(x => x < criterion.Value).FirstOrDefault();
+        }
+
+        public static string GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion, bool isDifferent)
+        {
+            var letterText = criterion.CriteriaLetter.DisplayName();
+            letterText += isDifferent == true ? " som er " : " på ";
+            letterText += CriteriaDescription(criterion.CriteriaLetter, criterion.Value);
+            letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "";
+            if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
+            {
+                letterText += "(med usikkerhet ";
+            }
+            if (GetUncertaintyLow(criterion) != 0)
+            {
+                letterText += $"ned mot {CriteriaDescription(criterion.CriteriaLetter, AlienSpeciesHelpers.GetUncertaintyLow(criterion))}";
+                letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) != 0 ? ")." : "";
+            }
+            if (GetUncertaintyHigh(criterion) != 0 && GetUncertaintyLow(criterion) != 0)
+            {
+                letterText += " og ";
+            }
+            if (AlienSpeciesHelpers.GetUncertaintyHigh(criterion) != 0)
+            {
+                letterText += $"opp mot {CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion))}";
+                letterText += GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0 ? ")." : "";
+            }
+
+            return letterText;
+        }
+        public static string LowerFirstCharacter(string text)
+        {
+            return char.ToLower(text[0]) + text[1..];
+        }
+
+        public static string GetInvasionPotentialExplanation(List<AlienSpeciesAssessment2023Criterion> criteria)
+        {
+            var explanation = string.Empty;
+
+
+            if (criteria.Count != 0)
+            {
+                for (var i = 0; i < criteria.Count; i++)
+                {
+                    if (i == 0)
+                    {
+                        explanation += criteria[i].CriteriaLetter.DisplayName();
+                    }
+                    else
+                    {
+                        explanation += LowerFirstCharacter(criteria[i].CriteriaLetter.DisplayName());
+                    }
+                    explanation += $" på {CriteriaDescription(criteria[i].CriteriaLetter, criteria[i].Value)}";
+                    if (i + 1 == criteria.Count)
+                    {
+                        explanation += ".";
+                    }
+                    else if (i + 2 == criteria.Count)
+                    {
+                        explanation += " og ";
+                    }
+                    else
+                    {
+                        explanation += ", ";
+                    }
+                }
+            }
+            return explanation;
+        }
+
+        public static string GetEcologicalEffectExplanation(List<AlienSpeciesAssessment2023Criterion> criteria)
+        {
+            var hasDE = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.D || x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.E);
+            var hasFG = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.F || x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.G);
+            var hasH = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.H);
+            var hasI = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.I);
+
+            var controlValue = 0;
+            var explanation = "Arten";
+
+            if (hasDE)
+                controlValue += 1;
+            if (hasFG)
+                controlValue += 2;
+            if (hasH)
+                controlValue += 4;
+            if (hasI)
+                controlValue += 8;
+
+            var deText = " har negative interaksjoner med stedegne arter";
+            var fgText = " medfører endring i naturtyper";
+            var hText = " overfører genetisk materiale til stedegne arter";
+            var iText = " overfører parasitter/patogener til stedegne arter";
+            var noCriteria = " har ingen utslagsgivende kriterier for økologisk effekt";
+
+            explanation += controlValue switch
+            {
+                1 => $"{deText}.",
+                2 => $"{fgText}.",
+                3 => $"{deText} og {fgText}.",
+                4 => $"{hText}.",
+                5 => $"{deText} og {hText}.",
+                6 => $"{fgText} og {hText}.",
+                7 => $"{deText}, {fgText} og {hText}.",
+                8 => $"{iText}.",
+                9 => $"{deText} og {iText}.",
+                10 => $"{fgText} og {iText}.",
+                11 => $"{deText}, {fgText} og {iText}.",
+                12 => $"{hText} og {iText}.",
+                13 => $"{deText}, {hText} og {iText}.",
+                14 => $"{fgText}, {hText} og {iText}.",
+                15 => $"{deText}, {fgText}, {hText} og {iText}.",
+                _ => $"{noCriteria}."
+            };
+
+            return explanation;
+        }
+
+        public static string GetLowerEcologicalEffectsText(AlienSpeciesAssessment2023Category category)
+        {
+            AlienSpeciesAssessment2023Category[] categoriesArray = (AlienSpeciesAssessment2023Category[])Enum.GetValues(typeof(AlienSpeciesAssessment2023Category));
+            // Not able to use Array.ToList() for some reason. Manually converting it... If you come across this and know the reason, please feel free to fix it :)
+            List<AlienSpeciesAssessment2023Category> categoriesList = new();
+            foreach (var cat in categoriesArray)
+            {
+                categoriesList.Add(cat);
+            }
+            var categoryTexts = string.Empty;
+            var index = Array.IndexOf(categoriesArray, category);
+
+            if (index == -1)
+                return categoryTexts;
+
+            for (var i = index + 1; i < categoriesList.Count - 1; i++)
+            {
+                categoryTexts += $"<i>{categoriesList[i].DisplayName().ToLowerInvariant()}</i> - {categoriesList[i].ToString()}";
+                if (i < categoriesList.Count - 3)
+                {
+                    categoryTexts += ", ";
+                }
+                else if (i == categoriesList.Count - 3)
+                {
+                    categoryTexts += " eller ";
+                }
+            }
+            return categoryTexts;
         }
     }
 }

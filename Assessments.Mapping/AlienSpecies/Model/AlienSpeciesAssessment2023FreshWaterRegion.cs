@@ -10,6 +10,11 @@
         /// <summary>
         /// TODO: documentation
         /// </summary>
+        public string WaterRegionName { get; set; }
+
+        /// <summary>
+        /// TODO: documentation
+        /// </summary>
         public string GlobalId { get; set; }
 
         /// <summary>

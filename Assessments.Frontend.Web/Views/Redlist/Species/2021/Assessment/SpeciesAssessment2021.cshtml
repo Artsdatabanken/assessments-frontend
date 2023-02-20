@@ -1,5 +1,6 @@
 ﻿@model SpeciesAssessment2021
 @using Assessments.Frontend.Web.Infrastructure.Services
+@using Assessments.Mapping.AlienSpecies.Model.Enums
 @inject ExpertCommitteeMemberService ExpertCommitteeMemberService
 
 @{
@@ -39,7 +40,7 @@
 
     var assessmentName = Model.SpeciesGroup + @ViewBag.glossary["citation"]["articlename"];
     assessmentName = assessmentName
-        .Replace("@species", $"{Model.PopularName} {Helpers.GetScientificNameElement(Model.ScientificName)}")
+        .Replace("@species", $"{Model.PopularName} {Helpers.FormatScientificNameElement(Model.ScientificName)}")
         .Replace("@area", $"{ViewBag.glossary["areas"][Model.AssessmentArea]["title"]}");
 
     var expertCommitteeMembers = await ExpertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
@@ -80,7 +81,7 @@
         }).ToArray(),
         ScientificName = Model.ScientificName,
         ScientificNameId = Model.ScientificNameId,
-        TaxonRank = Model.TaxonRank,
+        TaxonRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(Model.TaxonRank),
     };
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()

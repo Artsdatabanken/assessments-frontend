@@ -23,10 +23,12 @@ namespace Assessments.Frontend.Web.Controllers
         private readonly AssessmentsDbContext _dbContext;
         private readonly BlobContainerClient _blob;
         private readonly string _feedbackSecret;
+        private readonly ISendGridClient _sendGridClient;
         public const string ValidationCookieName = "FeedbackValidation";
 
-        public FeedbackController(IConfiguration configuration, AssessmentsDbContext dbContext)
+        public FeedbackController(IConfiguration configuration, AssessmentsDbContext dbContext, ISendGridClient sendGridClient)
         {
+            _sendGridClient = sendGridClient;
             _dbContext = dbContext;
             _blob = new BlobContainerClient(configuration["ConnectionStrings:AzureBlobStorage"], "feedback");
             _feedbackSecret = configuration["FeedbackSecret"];
@@ -43,7 +45,7 @@ namespace Assessments.Frontend.Web.Controllers
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Tilbakemeldinger");
-                
+
                 worksheet.Cell(1, 1).InsertTable(feedback);
                 workbook.Worksheet(1).Columns().AdjustToContents();
 
@@ -56,7 +58,7 @@ namespace Assessments.Frontend.Web.Controllers
                 var row = 1;
 
                 var attachments = await _dbContext.FeedbackAttachments.Include(x => x.Feedback).AsNoTracking().ToListAsync();
-                
+
                 var baseUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}";
 
                 foreach (var attachment in attachments)
@@ -85,6 +87,92 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 FileDownloadName = "feedback.xlsx"
             };
+        }
+
+        public async Task<IActionResult> Attachment(int id, string secret)
+        {
+            if (_feedbackSecret != secret)
+                return Unauthorized();
+
+            var attachment = await _dbContext.FeedbackAttachments.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+
+            if (attachment == null)
+                return NotFound();
+
+            var file = _blob.GetBlobClient(attachment.BlobName);
+
+            if (!await file.ExistsAsync())
+                return NotFound();
+
+            var stream = await file.OpenReadAsync();
+
+            return File(stream, "application/octet-stream", attachment.FileName);
+        }
+
+        public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl)
+        {
+            ModelState.Remove(nameof(FeedbackFormViewModel.Comment));
+
+            if (!ModelState.IsValid || !Url.IsLocalUrl(returnUrl))
+                return BadRequest("Beklager, en feil oppstod ved innsending av skjema.");
+
+            var email = viewModel.Email.ToLowerInvariant();
+            var emailValidation = await _dbContext.EmailValidations.FirstOrDefaultAsync(x => x.Email == email);
+
+            if (emailValidation == null)
+            {
+                emailValidation = new EmailValidation
+                {
+                    Email = email,
+                    FullName = viewModel.FullName.Trim()
+                };
+
+                _dbContext.EmailValidations.Add(emailValidation);
+
+                await _dbContext.SaveChangesAsync();
+            }
+
+            var message = new SendGridMessage
+            {
+                From = new EmailAddress("noreply@artsdatabanken.no"),
+                Subject = "Bekreftelse av e-postadresse for tilbakemelding"
+            };
+
+            message.AddTo(new EmailAddress(emailValidation.Email, emailValidation.FullName));
+
+            var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#Feedback";
+
+            var messageContent = $"<p>Klikk på lenken nedenfor for å bekrefte din e-postadresse. Dette gir deg tilgang til å gi tilbakemelding på Fremmedartsvurderinger i 2023.</p><p><a href='{validationUrl}'>{validationUrl}</a></p>";
+
+            var sendMail = await SendMail(message, messageContent);
+
+            if (!sendMail)
+                return BadRequest("Beklager, en feil oppstod ved sending av e-post.");
+
+            TempData["feedback"] = $"Du vil bli tilsendt en e-post (til {email}) som brukes for å bekrefte e-postadressen og med lenke for tilbakemelding.";
+
+            return Url.IsLocalUrl(returnUrl) ? Redirect($"{returnUrl}#Feedback") : BadRequest();
+        }
+
+        public async Task<IActionResult> ForgetValidation(string code, string returnUrl)
+        {
+            if (!Guid.TryParse(code, out _) || !Url.IsLocalUrl(returnUrl))
+                return BadRequest();
+
+            var validation = await _dbContext.EmailValidations.FirstOrDefaultAsync(x => x.Guid == new Guid(code));
+
+            if (validation == null)
+                return BadRequest();
+
+            _dbContext.EmailValidations.Remove(validation);
+
+            await _dbContext.SaveChangesAsync();
+
+            HttpContext.Response.Cookies.Delete(ValidationCookieName);
+
+            TempData["feedback"] = "Din e-postadresse er slettet.";
+
+            return Redirect($"{returnUrl.Split('?')[0]}#Feedback");
         }
 
         [HttpPost]
@@ -135,7 +223,7 @@ namespace Assessments.Frontend.Web.Controllers
                     await using var stream = formFile.OpenReadStream();
                     await _blob.UploadBlobAsync(blobName, stream);
 
-                    _dbContext.FeedbackAttachments.Add(new FeedbackAttachment
+                    feedback.Attachments.Add(new FeedbackAttachment
                     {
                         FeedbackId = feedback.Id,
                         BlobName = blobName,
@@ -148,110 +236,58 @@ namespace Assessments.Frontend.Web.Controllers
                 await _dbContext.SaveChangesAsync();
             }
 
-            TempData["feedback"] = "Takk for tilbakemeldingen.";
-
-            return Redirect($"{returnUrl}#feedback");
-        }
-
-        public async Task<IActionResult> Attachment(int id, string secret)
-        {
-            if (_feedbackSecret != secret)
-                return Unauthorized();
-
-            var attachment = await _dbContext.FeedbackAttachments.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-
-            if (attachment == null)
-                return NotFound();
-
-            var file = _blob.GetBlobClient(attachment.BlobName);
-
-            if (!await file.ExistsAsync())
-                return NotFound();
-
-            var stream = await file.OpenReadAsync();
-
-            return File(stream, "application/octet-stream", attachment.FileName);
-        }
-
-        public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl, [FromServices] ISendGridClient sendGridClient)
-        {
-            ModelState.Remove(nameof(FeedbackFormViewModel.Comment));
-
-            if (!ModelState.IsValid || !Url.IsLocalUrl(returnUrl))
-                return BadRequest("Beklager, en feil oppstod ved innsending av skjema.");
-
-            var email = viewModel.Email.ToLowerInvariant();
-            var emailValidation = await _dbContext.EmailValidations.FirstOrDefaultAsync(x => x.Email == email);
-
-            if (emailValidation == null)
-            {
-                emailValidation = new EmailValidation
-                {
-                    Email = email,
-                    FullName = viewModel.FullName.Trim()
-                };
-
-                _dbContext.EmailValidations.Add(emailValidation);
-                
-                await _dbContext.SaveChangesAsync();
-            }
+            var alienSpeciesAssessments = await DataRepository.GetAlienSpeciesAssessments();
+            var assessment = alienSpeciesAssessments.FirstOrDefault(x => x.Id == feedback.AssessmentId);
+            var scientificName = assessment != null ? assessment.ScientificName.ScientificName : string.Empty;
 
             var message = new SendGridMessage
             {
                 From = new EmailAddress("noreply@artsdatabanken.no"),
-                Subject = "Bekreftelse av e-postadresse for tilbakemelding"
+                Subject = $"Tilbakemelding på foreløpig vurdering av {scientificName}"
             };
 
-            message.AddTo(new EmailAddress(emailValidation.Email, emailValidation.FullName));
-            
-            var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#feedback";
-            
-            var messageContent = $"<p>Klikk på lenken nedenfor for å bekrefte din e-postadresse. Dette gir deg tilgang til å gi tilbakemelding på Fremmedartsvurderinger i 2023.</p><p><a href='{validationUrl}'>{validationUrl}</a></p><p>Dette er en automatisk generert e-post som du ikke kan svare på</p>";
+            message.AddTo(new EmailAddress(feedback.Email, feedback.FullName));
+
+            var feedbackAttachments = string.Empty;
+
+            if (feedback.Attachments.Any())
+                feedbackAttachments = $"<p>Antall vedlegg: {feedback.Attachments.Count}</p>";
+
+            var messageContent = $"<p>Under innsyn i de foreløpige vurderingene i Fremmedartslista 2023 har vi mottatt følgende tilbakemelding på vurderingen av {scientificName}:</p><p>{feedback.Comment}</p>{feedbackAttachments}";
+
+            var sendMail = await SendMail(message, messageContent);
+
+            if (!sendMail)
+                return BadRequest("Beklager, en feil oppstod ved sending av e-post.");
+
+            TempData["feedback"] = "Takk for tilbakemeldingen.";
+
+            return Redirect($"{returnUrl}#Feedback");
+        }
+
+        public IActionResult Terms() => View();
+
+        private async Task<bool> SendMail(SendGridMessage message, string messageContent)
+        {
+            messageContent += "<p>Dette er en automatisk generert e-post som du ikke kan svare på.</p>";
 
             message.AddContent(MimeType.Html, messageContent);
             message.AddContent(MimeType.Text, messageContent.StripHtml());
 
             try
             {
-                var response = await sendGridClient.SendEmailAsync(message);
+                var response = await _sendGridClient.SendEmailAsync(message);
 
                 if (!response.IsSuccessStatusCode)
                     throw new Exception($"Failed sending email with StatusCode: {response.StatusCode}");
-
             }
             catch (Exception ex)
             {
                 Logger.LogError(ex, "An error occurred: {message}", ex.Message);
-                
-                return BadRequest("Beklager, en feil oppstod ved sending av e-post.");
+                return false;
             }
 
-            TempData["feedback"] = $"Du vil bli tilsendt en e-post (til {email}) som brukes for å bekrefte e-postadressen og med lenke for tilbakemelding.";
-
-            return Url.IsLocalUrl(returnUrl) ? Redirect($"{returnUrl}#feedback") : BadRequest();
+            return true;
         }
-
-        public async Task<IActionResult> ForgetValidation(string code, string returnUrl)
-        {
-            if (!Guid.TryParse(code, out _) || !Url.IsLocalUrl(returnUrl))
-                return BadRequest();
-
-            var validation = await _dbContext.EmailValidations.FirstOrDefaultAsync(x => x.Guid == new Guid(code));
-
-            if (validation == null)
-                return BadRequest();
-
-            _dbContext.EmailValidations.Remove(validation);
-
-            await _dbContext.SaveChangesAsync();
-
-            HttpContext.Response.Cookies.Delete(ValidationCookieName);
-
-            TempData["feedback"] = "Din e-postadresse er slettet.";
-
-            return Redirect($"{returnUrl}#feedback");
-        }
-
-        public IActionResult Terms() => View();
     }
 }

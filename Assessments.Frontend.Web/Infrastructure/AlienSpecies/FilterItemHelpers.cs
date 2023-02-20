@@ -26,29 +26,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Categories
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023InvasionPotentialFilters =
-        {
-            new Filter.FilterItem
+        public static readonly Filter.FilterItem[] AlienSpecies2023InvasionPotentialFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential>()
+            .Select(x => new Filter.FilterItem
             {
-                NameShort = "ip1",
-                Name = "Lite",
-            },
-            new Filter.FilterItem
-            {
-                NameShort = "ip2",
-                Name = "Begrensa",
-            },
-            new Filter.FilterItem
-            {
-                NameShort = "ip3",
-                Name = "Moderat",
-            },
-            new Filter.FilterItem
-            {
-                NameShort = "ip4",
-                Name = "Stort",
-            }
-        };
+                NameShort = x.Description(),
+                Name = x.DisplayName()
+            }).Skip(1).ToArray();
 
         public static readonly Filter.FilterAndMetaData AlienSpecies2023InvasionPotential = new()
         {
@@ -58,29 +41,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             FilterButtonText = "Invasjonspotensial (risikomatrisens x-akse)"
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffectFilters =
-        {
-            new Filter.FilterItem
+        public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffectFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect>()
+            .Select(x => new Filter.FilterItem
             {
-                NameShort = "ee1",
-                Name = "Ingen kjent",
-            },
-            new Filter.FilterItem
-            {
-                NameShort = "ee2",
-                Name = "Liten",
-            },
-            new Filter.FilterItem
-            {
-                NameShort = "ee3",
-                Name = "Middels",
-            },
-            new Filter.FilterItem
-            {
-                NameShort = "ee4",
-                Name = "Stor",
-            }
-        };
+                NameShort = x.Description(),
+                Name = x.DisplayName()
+            }).Skip(1).ToArray();
 
         public static readonly Filter.FilterAndMetaData AlienSpecies2023EcologicalEffect = new()
         {
@@ -95,7 +61,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             .Select(x => new Filter.FilterItem
             {
                 NameShort = x.ToString(),
-                Name = x.DisplayName().ToLowerInvariant(),
+                Name = x.DisplayName(),
                 Description = x.DisplayName()
             }).ToArray();
 
@@ -355,6 +321,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Art = 22,
             Underart = 23,
             Varietet = 24,
+            Form = 25,
 
             [Display(Name = "Taksonomisk nivå")]
             ttn,
@@ -382,6 +349,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = nameof(TaxonRankEnum.Varietet),
                 NameShort = TaxonRankEnum.Varietet.GetHashCode().ToString()
+            },
+            new()
+            {
+            Name = nameof(TaxonRankEnum.Form),
+            NameShort = TaxonRankEnum.Form.GetHashCode().ToString()
             }
         };
 
@@ -425,7 +397,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             new()
             {
-                Name = "Brunagler",
+                Name = "Brunalger",
                 NameShort = "sbr",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
@@ -1089,7 +1061,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class ProductionSpecies
     {
-        public static Filter.FilterItem[] AlienSpecies2023ProductionSpeciesFilters =
+        public static readonly Filter.FilterItem[] AlienSpecies2023ProductionSpeciesFilters =
         {
             new Filter.FilterItem()
             {

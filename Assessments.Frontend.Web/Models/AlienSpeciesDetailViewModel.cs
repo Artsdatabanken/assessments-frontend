@@ -36,6 +36,13 @@ namespace Assessments.Frontend.Web.Models
                 HasIndoorProduction = assessment.HasIndoorProduction,
                 ImportPathways = assessment.ImportPathways,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
+                RaceViewModel = new RaceViewModel
+                {
+                    NameHierarchy = assessment.NameHiearchy,
+                    ScientificName = assessment.ScientificName,
+                    SpeciesGroup = assessment.SpeciesGroup,
+                    VernacularName = assessment.VernacularName
+                },
                 References = assessment.References.Select(x => new CommonSimpleReference
                 {
                     ReferenceId = x.ReferenceId,
@@ -46,7 +53,7 @@ namespace Assessments.Frontend.Web.Models
                 SpreadIndoorFurtherInfo = assessment.SpreadIndoorFurtherInfo,
                 SpreadIntroductionFurtherInfo = assessment.SpreadIntroductionFurtherInfo,
                 Summary = assessment.GeographicalVariationDocumentation,
-                TaxonRank = assessment.ScientificNameRank,
+                TaxonRank = assessment.ScientificName.ScientificNameRank,
                 UncertaintyEstablishmentTimeDescription = assessment.UncertaintyEstablishmentTimeDescription,
                 UncertaintyStatusDescription = assessment.UncertaintyStatusDescription
             };
@@ -104,9 +111,9 @@ namespace Assessments.Frontend.Web.Models
                     Url = x.Url,
                     Year = x.RevisionYear
                 }).ToArray(),
-                ScientificName = assessment.ScientificName,
-                ScientificNameId = assessment.ScientificNameId,
-                TaxonRank = assessment.ScientificName // TODO: get scientificNameRank when it exists in the model
+                ScientificName = assessment.ScientificName.ScientificName,
+                ScientificNameId = assessment.ScientificName.ScientificNameId.Value,
+                TaxonRank = assessment.ScientificName.ScientificNameRank // TODO: get scientificNameRank when it exists in the model
             };
         }
 

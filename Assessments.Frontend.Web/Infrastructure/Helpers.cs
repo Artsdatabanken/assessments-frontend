@@ -1,4 +1,5 @@
 ﻿using Assessments.Frontend.Web.Models;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Mapping.RedlistSpecies;
 using System;
 using System.Collections.Generic;
@@ -258,7 +259,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             return text;
         }
 
-        public static string GetScientificNameElement(string scientificName)
+        public static string FormatScientificNameElement(string scientificName)
         {
             scientificName = "<i>" + scientificName + "</i>";
             scientificName = scientificName.Replace("×", "</i>×<i>");
@@ -294,6 +295,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             var subSpecies = "Underart";
             var species = "Art";
             var variety = "Varietet";
+            var form = "Form";
 
             if (rang == "SubSpecies" || rang == subSpecies)
             {
@@ -304,6 +306,11 @@ namespace Assessments.Frontend.Web.Infrastructure
             {
                 replacestring = replacestring.Replace("{art}", variety.ToLower());
                 replacestring = replacestring.Replace("{Art}", variety);
+            }
+            else if (rang == form)
+            {
+                replacestring = replacestring.Replace("{art}", form.ToLower());
+                replacestring = replacestring.Replace("{Art}", form);
             }
             else
             {
@@ -319,6 +326,19 @@ namespace Assessments.Frontend.Web.Infrastructure
                 22 => "Art",
                 23 => "Underart",
                 24 => "Varietet",
+                25 => "Form",
+                _ => "Art"
+            };
+            return Helpers.FixSpeciesLevel(replaceString, stringRank);
+        }
+        public static string FixSpeciesLevel(string replaceString, AlienSpeciesAssessment2023ScientificNameRank rank)
+        {
+            var stringRank = rank switch
+            {
+                AlienSpeciesAssessment2023ScientificNameRank.Species => "Art",
+                AlienSpeciesAssessment2023ScientificNameRank.SubSpecies => "Underart",
+                AlienSpeciesAssessment2023ScientificNameRank.Variety => "Varietet",
+                AlienSpeciesAssessment2023ScientificNameRank.Form => "Form",
                 _ => "Art"
             };
             return Helpers.FixSpeciesLevel(replaceString, stringRank);

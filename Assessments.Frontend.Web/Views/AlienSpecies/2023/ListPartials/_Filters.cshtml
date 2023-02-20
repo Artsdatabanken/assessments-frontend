@@ -7,7 +7,7 @@
 @inject IOptions<ApplicationOptions> Options
 
 @{
-    ViewData["EnableExport"] = Options.Value.AlienSpecies2023.EnableExport;
+    ViewData["EnableExport"] = !Options.Value.AlienSpecies2023.IsHearing;
 
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
@@ -27,6 +27,7 @@
     {
         View = Model.View,
         ItemCount = Model.Results.TotalItemCount,
+        EnableStatistics = !Options.Value.AlienSpecies2023.IsHearing
     };
 }
 

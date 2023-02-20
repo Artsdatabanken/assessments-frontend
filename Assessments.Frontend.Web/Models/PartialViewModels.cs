@@ -71,6 +71,8 @@ namespace Assessments.Frontend.Web.Models
         public string View { get; set; }
 
         public int ItemCount { get; set; }
+
+        public bool EnableStatistics { get; set; } = true;
     }
 
     public class CriteriaExplanationViewModel

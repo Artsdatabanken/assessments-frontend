@@ -5,6 +5,7 @@
 @{
     PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
     {
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
@@ -14,7 +15,7 @@
 <div class="title_header">
     @if (!Environment.IsProduction())
     {
-        <a asp-controller="AlienSpecies" asp-action="Index" class="title_header alien-species" style="display:inline;">
+        <a asp-controller="AlienSpecies" asp-action="Index" class="alien-species">
             <span class="full_title">@Model.Title</span>
             <span class="short_title">@Model.TitleShort</span>
         </a>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 using Assessments.Transformation.Helpers;
@@ -27,14 +28,15 @@ namespace Assessments.Transformation
             if (!Directory.Exists(dataFolder))
                 Directory.CreateDirectory(dataFolder);
 
+            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
+
             var menuItems = new List<string>
             {
                 "Rødlista 2021 - til filer lokalt",
                 "Rødlista 2021 - last opp i Azure",
                 "Fremmedartslista 2023 - til filer lokalt",
                 "Fremmedartslista 2023 - last opp i Azure",
-                "Fremmedartslista 2023 Eksperter - til fil lokalt",
-                "Fremmedartslista 2023 Eksperter - last opp i Azure",
+                "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure",
                 "Avslutt"
             };
 
@@ -60,12 +62,8 @@ namespace Assessments.Transformation
                         await TransformAlienSpecies.TransformDataModels(configuration, upload: true);
                         Environment.Exit(0);
                         break;
-                    case "Fremmedartslista 2023 Eksperter - til fil lokalt":
-                        await TransformAlienSpecies.ExpertGroupExport(configuration, upload: false);
-                        Environment.Exit(0);
-                        break;
-                    case "Fremmedartslista 2023 Eksperter - last opp i Azure":
-                        await TransformAlienSpecies.ExpertGroupExport(configuration, upload: true);
+                    case "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure":
+                        await TransformAlienSpecies.UploadAttachments(configuration, upload: true);
                         Environment.Exit(0);
                         break;
                     case "Avslutt":

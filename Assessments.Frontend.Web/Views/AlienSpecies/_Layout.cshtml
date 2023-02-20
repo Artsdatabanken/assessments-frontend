@@ -1,9 +1,4 @@
-﻿@using Microsoft.Extensions.Hosting
-@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment _environment
-
-@{
-    var showCookieWarning = _environment.IsProduction();
-
+﻿@{
     HeaderViewModel headerViewModel = new HeaderViewModel()
     {
         Title = Constants.AlienSpecies2023PageMenuHeaderText,
@@ -32,12 +27,15 @@
     <link rel="stylesheet" href="~/css/tabs.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/bnw.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/alienSpecies.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/riskMatrix.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/feedbackForm.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/buttons-and-chips.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
     <script src="https://design.artsdatabanken.no/script/header.js"></script>
     <script src="https://design.artsdatabanken.no/script/footer.js"></script>
     <meta name="description" content="Norske fremmedartslister viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge. Fremmedartslistene er utarbeidet av Artsdatabanken i samarbeid med fageksperter. " />
-    <script src="~/js/cookies.js" asp-append-version="true" is-visible="@showCookieWarning"></script>
-
+    <script src="~/js/cookies.js" asp-append-version="true"></script>
+    <meta name="robots" content="noindex" /> <!-- TODO: remove after innsight process -->
 </head>
 
 <body>
@@ -60,7 +58,7 @@
             </div>
 
             <!-- HEY COOKIE. TODO: Improve content & move to partial. -->
-            <div class="heyCookie" id="heyCookie" is-visible="@showCookieWarning">
+            <div class="heyCookie" id="heyCookie">
                 Denne nettsiden benytter informasjonskapsler.
 
                 <button onclick="learnAboutCookies()">Informasjon</button>

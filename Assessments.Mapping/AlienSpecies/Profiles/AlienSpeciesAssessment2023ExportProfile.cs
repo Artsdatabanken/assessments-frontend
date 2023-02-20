@@ -12,12 +12,24 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
         {
             CreateMap<AlienSpeciesAssessment2023, AlienSpeciesAssessment2023Export>()
                 .ForMember(dest => dest.AlienSpeciesCategory, opt => opt.MapFrom(src => src.AlienSpeciesCategory.DisplayName()))
-                .ForMember(dest => dest.RiskAssessmentGeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetGeographicalVariation(src.RiskAssessmentGeographicalVariation)))
+                .ForMember(dest => dest.GeographicalVariation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetGeographicalVariation(src.GeographicalVariation)))
                 .ForMember(dest => dest.PreviousAssessmentCategory2018, opt =>
                 {
                     opt.PreCondition(src => src.PreviousAssessments.Any(x => x.RevisionYear == 2018));
                     opt.MapFrom(src => src.PreviousAssessments.First(x => x.RevisionYear == 2018).Category);
-                });
+                })
+                .ForMember(dest => dest.MedianLifetimeEstimationMethod, opt => opt.MapFrom(src => src.MedianLifetimeEstimationMethod.DisplayName()))
+                .ForMember(dest => dest.IsAcceptedSimplifiedEstimate, opt => {
+                    opt.PreCondition(src => src.MedianLifetimeEstimationMethod.DisplayName() == "Forenklet anslag");
+                    opt.MapFrom(src => src.IsAcceptedSimplifiedEstimate);
+                })
+                .ForMember(dest => dest.ExpansionSpeedEstimationMethod, opt => opt.MapFrom(src => src.ExpansionSpeedEstimationMethod.DisplayName()))
+                .ForMember(dest => dest.ArrivedCountryFrom, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ExportProfileHelper.GetArrivedCountryFrom(src.ArrivedCountryFrom)))
+                .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.ScientificName.ScientificName))
+                .ForMember(dest => dest.ScientificNameId, opt => opt.MapFrom(src => src.ScientificName.ScientificNameId))
+                .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.ScientificName.ScientificNameAuthor))
+                .ForMember(dest => dest.TaxonHierarcy, opt => opt.MapFrom(src => string.Join("\\", src.NameHiearchy.Select(x=>x.ScientificName).ToArray())))
+                ;
         }
     }
 }

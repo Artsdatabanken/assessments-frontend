@@ -1,5 +1,6 @@
 ﻿@model SpeciesAssessment2021
 @using Assessments.Frontend.Web.Infrastructure.Services
+@using Assessments.Mapping.AlienSpecies.Model.Enums
 @inject ExpertCommitteeMemberService ExpertCommitteeMemberService
 
 @{
@@ -17,13 +18,13 @@
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
         AssessmentArea = Model.AssessmentArea == "S" ? "Svalbard" : "Norge",
-        scientificNameViewModel = new ScientificNameViewModel()
+        ScientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = Model.PopularName,
             ScientificName = Model.ScientificName,
             ScientificNameAuthor = Model.ScientificNameAuthor
         },
-        speciesGroupViewModel = new SpeciesGroupViewModel()
+        SpeciesGroupViewModel = new SpeciesGroupViewModel()
         {
             AssessmentYear = Model.AssessmentYear,
             ExpertCommittee = Model.ExpertCommittee,
@@ -39,7 +40,7 @@
 
     var assessmentName = Model.SpeciesGroup + @ViewBag.glossary["citation"]["articlename"];
     assessmentName = assessmentName
-        .Replace("@species", $"{Model.PopularName} {Helpers.getScientificNameElement(Model.ScientificName)}")
+        .Replace("@species", $"{Model.PopularName} {Helpers.FormatScientificNameElement(Model.ScientificName)}")
         .Replace("@area", $"{ViewBag.glossary["areas"][Model.AssessmentArea]["title"]}");
 
     var expertCommitteeMembers = await ExpertCommitteeMemberService.GetExpertCommitteeMembers(Model.ExpertCommittee, Model.AssessmentYear);
@@ -50,7 +51,7 @@
         AssessmentYear = Model.AssessmentYear,
         ExpertCommittee = Model.ExpertCommittee,
         FirstPublished = Constants.RedlistSpecies2021FirstPublished,
-        CitationHeading = ViewBag.glossary["citation"]["title"],
+        HasBackToTopLink = false,
         PublicationText = ViewBag.glossary["pagetitle"]["title"] + ". " + ViewBag.glossary["adb"] + ". ",
         RevisionDate = Model.RevisionDate,
         RevisionReason = Model.RevisionReason,
@@ -60,8 +61,9 @@
 
     var pageMenuViewModel = new PageMenuViewModel
     {
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         PageMenuContentId = Constants.RedlistSpecies2021PageMenuContentId,
-        PageMenuExpandButtonText = Constants.RedlistSpecies2021PageManuExpandButtonText,
+        PageMenuExpandButtonText = Constants.RedlistSpecies2021PageMenuHeaderText,
         PageMenuHeaderText = Constants.RedlistSpecies2021PageMenuHeaderText
     };
 
@@ -79,7 +81,7 @@
         }).ToArray(),
         ScientificName = Model.ScientificName,
         ScientificNameId = Model.ScientificNameId,
-        TaxonRank = Model.TaxonRank,
+        TaxonRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(Model.TaxonRank),
     };
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
@@ -151,6 +153,17 @@
             geografi = "Svalbard med kyst";
         }
     }
+
+    var referenceViewModel = new ReferenceViewModel
+    {
+        HasBackToTopLink = false,
+        References = Model.References.Select(x => new CommonSimpleReference
+        {
+            Type = x.Type,
+            ReferenceId = x.ReferenceId,
+            FormattedReference = x.FormattedReference
+        }).ToList()
+    };
 }
 
 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Breadcrumb.cshtml" />
@@ -171,7 +184,7 @@
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Regions.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Habitat.cshtml" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_SpeciesDetails.cshtml" />
-                <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Reference.cshtml" />
+                <partial name="/Views/Shared/_Reference.cshtml" model="referenceViewModel"/>
                 <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
                 <partial name="/Views/Redlist/Species/2021/Assessment/partials/_Revision.cshtml" model="Model" />
             </div>

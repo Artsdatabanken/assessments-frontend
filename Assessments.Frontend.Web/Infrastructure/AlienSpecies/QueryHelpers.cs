@@ -21,10 +21,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.Where(x => parameters.Category.ToEnumerable<AlienSpeciesAssessment2023Category>().Contains(x.Category));
 
             if (parameters.EcologicalEffect.Any())
-                query = query.Where(x => parameters.EcologicalEffect.Any(y => x.ScoreEcologicalEffect != null && y.Contains(x.ScoreEcologicalEffect.ToString())));
+                query = query.Where(x => parameters.EcologicalEffect.Any(y => x.ScoreEcologicalEffect != AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Unknown && y.Contains(x.ScoreEcologicalEffect.Description())));
 
             if (parameters.InvasionPotential.Any())
-                query = query.Where(x => parameters.InvasionPotential.Any(y => x.ScoreInvasionPotential != null && y.Contains(x.ScoreInvasionPotential.ToString())));
+                query = query.Where(x => parameters.InvasionPotential.Any(y => x.ScoreInvasionPotential != AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown && y.Contains(x.ScoreInvasionPotential.Description())));
 
             if (parameters.CategoryChanged.Any())
                 query = ApplyCategoryChange(parameters.CategoryChanged, query);
@@ -45,7 +45,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = ApplyTaxonRank(parameters.TaxonRank, query);
 
             if (string.IsNullOrEmpty(parameters.SortBy) || parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.ScientificName), StringComparison.InvariantCultureIgnoreCase))
-                query = query.OrderBy(x => x.ScientificName);
+                query = query.OrderBy(x => x.ScientificName.ScientificName.Replace("×", string.Empty));
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.VernacularName), StringComparison.InvariantCultureIgnoreCase))
                 query = query.OrderBy(x => x.VernacularName);
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.Category), StringComparison.InvariantCultureIgnoreCase))
@@ -58,14 +58,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var containsSubSpecies = query.Where(x =>
                 !string.IsNullOrEmpty(x.VernacularName) &&
-                x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())).Select(x => x.ScientificName).ToArray();
+                x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())).Select(x => x.ScientificName.ScientificName).ToArray();
 
             return query.Where(x =>
-                x.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
-                containsSubSpecies.Any(hit => x.ScientificName.Contains(hit)) || // Search on species also includes sub species
+                x.ScientificName.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
+                containsSubSpecies.Any(hit => x.ScientificName.ScientificName.Contains(hit)) || // Search on species also includes sub species
                 !string.IsNullOrEmpty(x.VernacularName) &&
                 x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
-                x.TaxonHierarcy.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
+                x.NameHiearchy.Any(x => x.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())) ||
                 x.SpeciesGroup.ToLowerInvariant().Contains(searchString.ToLowerInvariant()));
         }
 
@@ -106,16 +106,16 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 var assessments = criteria switch
                 {
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcexa) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcexa.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcexb) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcexb.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipab) => query.Where(x => DeciciveCriteria.DecisiveCriteriaEnum.dcipab.DisplayName().Any(y => x.Criteria.Contains(y))),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipc) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipc.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceed) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceed.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipe) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipe.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceef) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceef.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipg) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipg.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceeh) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceeh.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipi) => query.Where(x => x.Criteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipi.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcexa) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcexa.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcexb) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcexb.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipab) => query.Where(x => DeciciveCriteria.DecisiveCriteriaEnum.dcipab.DisplayName().Any(y => x.DecisiveCriteria.Contains(y))),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipc) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipc.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceed) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceed.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipe) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipe.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceef) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceef.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipg) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipg.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceeh) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceeh.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipi) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipi.DisplayName())),
                     _ => null
                 };
                 if (assessments != null)
@@ -128,23 +128,23 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             const string doorKnockerShort = "eda";
 
-            return query.Where(x => speciesStatus.Contains(x.SpeciesStatus) ||
+            return query.Where(x => speciesStatus.Contains(x.SpeciesStatus.ToString()) ||
                                     (speciesStatus.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction)));
         }
 
-        private static IQueryable<AlienSpeciesAssessment2023> ApplyTaxonRank(string[] taxonFilters, IQueryable<AlienSpeciesAssessment2023> query)
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyTaxonRank(string[] rankFilters, IQueryable<AlienSpeciesAssessment2023> query)
         {
             var newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
             var evaluatedAtAnotherLevel = AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
 
-            foreach (var filter in taxonFilters)
+            foreach (var filter in rankFilters)
             {
                 var isInt = int.TryParse(filter, out int result);
                 var assessments = filter switch
                 {
                     nameof(TaxonRank.TaxonRankEnum.tva) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
                     nameof(TaxonRank.TaxonRankEnum.tvi) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
-                    _ => isInt ? query.Where(x => ((int)x.ScientificNameRank) == result) : null
+                    _ => isInt ? query.Where(x => ((int)x.ScientificName.ScientificNameRank) == result) : null
                 };
                 if (assessments != null)
                     newQuery = newQuery.Concat(assessments);

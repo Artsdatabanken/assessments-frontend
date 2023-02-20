@@ -1,0 +1,25 @@
+@model AttachmentViewModel;
+
+<div class="page_section_header">
+    <h2 id="@nameof(Constants.HeadingsNo.Attachments)">@Constants.HeadingsNo.Attachments</h2>
+    <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
+</div>
+<table class="numbers-table">
+    <tr>
+        <td><b>Filnavn</b></td>
+        <td><b>Beskrivelse</b></td>
+        <td><b>Lenke for nedlasting</b></td>
+    </tr>
+    @foreach (var attachment in Model.Attachments)
+    {
+        <tr>
+            <td>@attachment.FileName</td>
+            <td>@attachment.Description</td>
+            <td>
+                <a asp-controller="AlienSpecies"  asp-action="Attachment"  asp-route-attachmentId="@attachment.Id"  asp-route-name="@attachment.FileName" target="_blank">
+                    Last ned
+                </a>
+            </td>
+        </tr>
+    }
+</table>

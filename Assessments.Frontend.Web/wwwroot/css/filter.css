@@ -11,7 +11,7 @@
 
 @media only screen and (min-width: 750px) {
     .controls {
-        margin-left: 220px;
+        margin-left: 260px;
     }
 
     .empty_filters {
@@ -191,14 +191,14 @@
 /* FILTER */
 .arrow-down {
     border: 0px;
-    background-color: #0000;
+    background-color: #000;
 }
 
 .filtercontainer{
     box-sizing: border-box;
-    max-width: 220px;
-    width: 220px;
-    padding: 5px;
+    max-width: 260px;
+    width: 260px;
+    padding-right: 10px;
     margin-top: -1px;
     flex: none;
     padding-top:0;
@@ -291,6 +291,10 @@ button.list_header {
 
 #show_all_insects {
     display: none;
+}
+
+.filter_info_text {
+    margin: 5px;
 }
 
 @media only screen and (max-width: 750px) {

@@ -32,6 +32,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentModel_ConsoleApp1"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SentimentModel_WebApi1", "SentimentModel_WebApi1\SentimentModel_WebApi1.csproj", "{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assessments.Data", "Assessments.Data\Assessments.Data.csproj", "{2B7D3328-8C3A-40ED-9932-66B07374394B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,6 +72,10 @@ Global
 		{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B9AD4E03-5BA6-4AA5-ACE9-6B55465CF461}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B7D3328-8C3A-40ED-9932-66B07374394B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B7D3328-8C3A-40ED-9932-66B07374394B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B7D3328-8C3A-40ED-9932-66B07374394B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B7D3328-8C3A-40ED-9932-66B07374394B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

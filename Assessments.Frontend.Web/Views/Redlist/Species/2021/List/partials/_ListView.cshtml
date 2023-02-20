@@ -42,7 +42,7 @@
 
 
                     <span class="element_species">
-                        <span class="element_scientific_name list_cell">@Html.Raw(getScientificNameElement(item.ScientificName))</span>
+                        <span class="element_scientific_name list_cell">@Html.Raw(FormatScientificNameElement(item.ScientificName))</span>
                         <span class="element_popular_name list_cell">@item.PopularName</span>
                     </span>
 
@@ -50,7 +50,7 @@
                         @if (!string.IsNullOrEmpty(item.Category))
                         {
                             @ViewBag.categories[item.Category.Substring(0, 2)]["presentationstring"];
-                            <span class="degrees">@Helpers.findDegrees(item.Category, false)</span>
+                            <span class="degrees">@Helpers.FindDegrees(item.Category, false)</span>
 
                         }
                     </span>

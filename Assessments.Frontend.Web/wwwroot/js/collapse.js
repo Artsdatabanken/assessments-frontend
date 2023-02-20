@@ -1,83 +1,63 @@
-﻿/*
-     Create an element containing a header element and a div for hiding.
-     The header element will receive span elements injected in front of the heading itself.
-     The div is the element which will be hidden. If you have this structure you can add the id of the parent element to "makeCollapsibleListIds",
-     and it will become collapsible.
-     
-     example structure when adding "example" into the id list:
-     <div id="example">
-        <h3>Header text</h3>
-        <div>collapse me</div>
-     </div>
-*/
+//This file contains code for the collapsible property of elements.
+//When adding a new collapsible element to the page, you need to have the code structured in this way
+//with the appropriate class names and ids corresponing to what it is. The class name "initially_closed" is added
+// if you want to collapse the element initially.
+//
+//<div class="collapsible initially_closed">
+//    <div class="collapsible_header">
+//        <h2>This is header text</h2>
+//        <button onclick="toggleCollapsible(this)">
+//            <span class="material-icons expanded_icon">expand_less</span>
+//            <span class="material-icons collapsed_icon">expand_more</span>
+//        </button>
+//    </div >
+//
+//    <div class="collapsible_content">
+//        <collapsible content>
+//    </div>
+//</div >
 
-const makeCollapsibleListIds = [
-    'show_expert_summary',
-    'show_occurence_area'
-];
+const hideClassName = 'hide';
+const collapsibleClassName = 'collapsible';
 
-const expandLessInnerHtml = 'expand_less';
-const expandMoreInnerHtml = 'expand_more';
-const expandClassList = ['material-icons-outlined'];
-const collapsibleHeaderClass = 'collapsible_header';
+const toggleCollapsible = buttonElement => {
+    const mainElement = buttonElement.parentNode.parentNode;
+    const collapsibleContentElement = mainElement.children[1];
+    const isCollapsed = collapsibleContentElement.classList.contains(hideClassName);
+    const expandLessIcon = buttonElement.children[0];
+    const expandMoreIcon = buttonElement.children[1];
 
-const getCollapsibleIcon = isOpen => {
-    const icon = document.createElement('span');
-    icon.classList = expandClassList;
-    icon.innerHTML = isOpen ? expandLessInnerHtml : expandMoreInnerHtml;
-    return icon;
-}
-
-const addCollapsibleArrow = element => {
-    const icon = getCollapsibleIcon(isOpen = false);
-    element.prepend(icon);
-    element.classList.add(collapsibleHeaderClass);
-}
-
-const switchArrowType = element => {
-    const showCollapsedIcon = Array.prototype.some.call(element?.childNodes, el => {
-        return el.innerHTML === expandLessInnerHtml;
-    });
-    element.childNodes[0].remove();
-    element.prepend(getCollapsibleIcon(!showCollapsedIcon));
-}
-
-const toggleCollapsed = element => {
-    isCollapsed = element.style['display'] === 'none';
-    if (isCollapsed)
-        element.style = 'display:block';
-    else
-        element.style = 'display:none';
-}
-
-const collapseElementUsingId = id => {
-    const elements = document.getElementById(id)?.childNodes;
-    const filtered = Array.prototype.filter.call(elements, (el => el.nodeType === Node.ELEMENT_NODE));
-    const [ header, collapsible ] = filtered;
-
-    switchArrowType(header);
-    toggleCollapsed(collapsible);
-}
-
-const addOnclickFunction = (element, id) => {
-    element.onclick = () => {
-        collapseElementUsingId(id);
+    if (isCollapsed) {
+        collapsibleContentElement.classList.remove(hideClassName);
+        expandLessIcon.classList.remove(hideClassName);
+        expandMoreIcon.classList.add(hideClassName);
+    } else {
+        collapsibleContentElement.classList.add(hideClassName);
+        expandLessIcon.classList.add(hideClassName);
+        expandMoreIcon.classList.remove(hideClassName);
     }
 }
 
-const makeCollapsible = id => {
-    const elements = document.getElementById(id)?.childNodes;
-    if (!elements) return;
-
-    const filtered = Array.prototype.filter.call(elements, (el => el.nodeType === Node.ELEMENT_NODE));
-    if (filtered?.length !== 2) return;
-
-    const [ header, collapsible ] = filtered;
-    addCollapsibleArrow(header);
-    addOnclickFunction(header, id);
-    toggleCollapsed(collapsible);
+const initialCollapse = () => {
+    const collapsibleMainElements = document.getElementsByClassName(collapsibleClassName);
+    Array.prototype.forEach.call(collapsibleMainElements, element => {
+        const collapsibleContent = element.children[1];
+        collapsibleContent.classList.add(hideClassName);
+    });
 }
 
-makeCollapsibleListIds?.forEach(id => {
-    makeCollapsible(id);
-});
+const revealToggleCollapsibleButtons = () => {
+    const collapsibleMainElements = document.getElementsByClassName(collapsibleClassName);
+    Array.prototype.forEach.call(collapsibleMainElements, element => {
+        const buttonElement = element.children[0].children[1];
+        buttonElement.classList.remove(hideClassName);
+        toggleCollapsible(buttonElement);
+    });
+}
+
+const initCollapsible = () => {
+    revealToggleCollapsibleButtons();
+    initialCollapse();
+}
+
+initCollapsible();

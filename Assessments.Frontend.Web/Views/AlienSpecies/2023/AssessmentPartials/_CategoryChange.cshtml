@@ -1,0 +1,54 @@
+@model AlienSpeciesDetailViewModel
+
+@{
+    var has2018Assessmnet = Model.Assessment.PreviousAssessments?.Any(x => x.RevisionYear == 2018) ?? false;
+    var category2018 = has2018Assessmnet ? Model.Assessment.PreviousAssessments?.Where(x => x.RevisionYear == 2018).Select(x => x.Category).FirstOrDefault() : null;
+    var isNr = Model.Assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
+    var isEvaluatedAtAnotherLevel = Model.Assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var isMisidentified = Model.Assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified;
+    var wasNr2018 = category2018 == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
+    var sameAs2018 = Model.Assessment.Category == category2018;
+    var showMain = !((isNr && (sameAs2018 || !has2018Assessmnet)) || isEvaluatedAtAnotherLevel || isMisidentified);
+    var showNotAssessed2018 = category2018 == null || wasNr2018;    
+    var showSameAs2018 = !isNr && sameAs2018;
+    var category2018WithName = category2018 != null ? $"<i>{category2018.DisplayName().ToLower()}</i> - {category2018}" : string.Empty;
+    var category2023WithName = $"<i>{Model.Assessment.Category.DisplayName().ToLower()}</i> - {Model.Assessment.Category}";
+    var showRealChange = Model.Assessment.ReasonForChangeOfCategory.Contains("realChange");
+    var showNewKnowledge = Model.Assessment.ReasonForChangeOfCategory.Contains("newInformation");
+    var showNewInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("newInterpretation");
+    var showChangedCriteria = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteria");
+    var showChangedCriteriaInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteriaInterpretation");
+    var showChangedStatus = Model.Assessment.ReasonForChangeOfCategory.Contains("changedStatus");
+    var showReasonsForChangeDescription = (!wasNr2018 && !showSameAs2018 && !string.IsNullOrEmpty(Model.Assessment.ReasonsForChangeOfCategoryDescription) && false); // this is disabled as for now.
+}
+
+<div id="@nameof(Constants.HeadingsNo.CategoryChange)">
+    <div class="page_section_header">
+        <h2>@Constants.HeadingsNo.CategoryChange</h2>
+        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
+    </div>
+    <p is-visible="showNotAssessed2018">
+        @Constants.CategoryChangeNotAssessed2018
+    </p>
+    <p is-visible="!showNotAssessed2018 && showSameAs2018">
+            @Constants.CategoryChangeShowSameAs2018
+               
+    </p>
+    <div is-visible="!showNotAssessed2018 && !showSameAs2018">
+        <p>Kategorien for denne arten er endret fra @Html.Raw(category2018WithName) til @Html.Raw(category2023WithName) siden Fremmedartslista 2018 (forrige revisjon). Dette skyldes:</p>
+        <ul>
+            <li is-visible="showRealChange">Reel endring i utbredelse, forekomstareal og/eller økologiske effekter</li>
+            <li is-visible="showNewKnowledge">Ny kunnskap</li>
+            <li is-visible="showNewInterpretation">Ny tolkning av tidligere data</li>
+            <li is-visible="showChangedCriteria">Endrede avgrensninger eller retningslinjer</li>
+            <li is-visible="showChangedCriteriaInterpretation">Endret tolkning av retningslinjer</li>
+            <li is-visible="showChangedStatus">Endret status (inkl. taksonomi, til stedegen)</li>
+        </ul>
+        <br />
+    </div>
+    <div is-visible="showReasonsForChangeDescription">
+        @Constants.CategoryChangeReasonsForChangeDescription
+        <p>@Html.Raw(Model.Assessment.ReasonsForChangeOfCategoryDescription)</p>
+    </div>
+    
+</div>

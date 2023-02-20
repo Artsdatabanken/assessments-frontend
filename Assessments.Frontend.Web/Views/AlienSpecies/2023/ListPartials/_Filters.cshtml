@@ -1,7 +1,14 @@
 @model AlienSpeciesListViewModel;
+
 @using System.Linq;
+@using Assessments.Shared.Options
+@using Microsoft.Extensions.Options
+
+@inject IOptions<ApplicationOptions> Options
 
 @{
+    ViewData["EnableExport"] = Options.Value.AlienSpecies2023.EnableExport;
+
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
@@ -66,7 +73,7 @@
         </button>
     }
 
-    void MakeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName, string outerClassName)
+    void MakeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, Filter.FilterAndMetaData filterItems, string buttonText, string buttonName, string outerClassName)
     {
         string className = isSubGroup ? $"filter_subgroup filter_{filterName.ToLower()}" : $"filter_{filterName.ToLower()}";
 
@@ -75,15 +82,22 @@
                 MakeFilterElement(buttonText, filterName, buttonName);
             }
             <div class=@className>
+                @{
+                    if (!string.IsNullOrEmpty(filterItems.FilterDescription))
+                        {
+                            <div class="filter_info_text">@filterItems.FilterDescription</div>
+                        }
+                }
                 <ul>
                     @{
                         string label;
                         string value;
                         string markAllClassName = "mark_all";
-                        if (filterItems.Length > 4 && modelName != nameof(Model.SpeciesStatus))
+
+                        if (filterItems.Filters.Length > 4 && modelName != nameof(Model.SpeciesStatus))
                             MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
 
-                        foreach (var el in filterItems)
+                        foreach (var el in filterItems.Filters)
                         {
                             value = el.NameShort;
                             label = filterName == nameof(Model.Category) ? $"{el.NameShort} - {el.Description}" : el.Name;
@@ -103,19 +117,21 @@
         </li>
     }
 
-    void MakeFilterGroup(string filterName, string[] filterModel, Filter.FilterItem[] filterItems, string buttonText, string buttonName)
+    void MakeFilterGroup(string filterName, string[] filterModel, Filter.FilterAndMetaData filterItems)
     {
-        MakeFilterGroup(filterName, filterName, false, filterModel, filterItems, buttonText, buttonName, string.Empty);
+        MakeFilterGroup(filterName, filterName, false, filterModel, filterItems, filterItems.FilterButtonText, filterItems.FilterButtonName, string.Empty);
     }
 
     void RenderChip(string buttontext, string filterValue)
     {
-        <button class="chips generic" onclick="submitClickedElement('@filterValue')" type="submit">
-            <span>@buttontext</span>
-            <span class="x" >
-                <span class="material-icons">close</span>Fjern
-            </span>
-        </button>
+        <li class="chips">
+        <span class="chips-text">@buttontext</span>
+            <button class="text-button chips-close-button btn icon-button" onclick="submitClickedElement('@filterValue')" type="submit">
+                <span class="material-icons ">close</span>
+            </button>
+        </li>
+
+
     }
 
     void MakeFilterChips(string[] filterModel, Filter.FilterItem[] filterItems)
@@ -148,28 +164,29 @@
                         </a>
                     }
                 </span>
-                <span class="filterbox">
-                    @if (GetActiveSelectionCount(Model) > 0)
-                    {
-                        MakeFilterChips(Model.Area, AllAreas);
-                        MakeFilterChips(Model.Category, AllCategories);
-                        MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged);
-                        MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials);
-                        MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects);
-                        MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias);
-                        MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus);
-                        MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies);
-                        MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups);
-                        MakeFilterChips(Model.TaxonRank, AllTaxonRanks);
-                        MakeFilterChips(Model.Habitats, AllHabitats);
-                        MakeFilterChips(Model.Regions, AllRegions);
-                        MakeFilterChips(Model.WaterRegions, AllWaterRegions);
-                    }
-
+                <div class="filterbox">
+                    <ul>
+                        @if (GetActiveSelectionCount(Model) > 0)
+                        {
+                            MakeFilterChips(Model.Area, AllAreas.Filters);
+                            MakeFilterChips(Model.Category, AllCategories.Filters);
+                            MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters);
+                            MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters);
+                            MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters);
+                            MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters);
+                            MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters);
+                            MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters);
+                            MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters);
+                            MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
+                            MakeFilterChips(Model.Habitats, AllHabitats.Filters);
+                            MakeFilterChips(Model.Regions, AllRegions.Filters);
+                            MakeFilterChips(Model.WaterRegions, AllWaterRegions.Filters);
+                        }
+                    </ul>
                     <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">
                         <span class="material-icons">close</span>Fjern alle filter
                     </a>
-                </span>
+                </div>
             }
         </span>
     </p>
@@ -211,23 +228,23 @@
                         <div class="filter_scroll_area">
                             <ul>
                                 @{
-                                    MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas, SearchAndFilterNames.AssessmentArea, "områdefiltre");
-                                    MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories, SearchAndFilterNames.Category, "kategorifiltre");
-                                    MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials, SearchAndFilterNames.InvasionPotential, "invasjonspotensialfiltre");
-                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects, SearchAndFilterNames.EcologicalEffect, "okologiskeffektfiltre");
-                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks, SearchAndFilterNames.TaxonRank, "'taksonomisk nivå'-filtre");
-                                    MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias, SearchAndFilterNames.DecisiveCriteria, "avgjorende kriterier-filtre");
-                                    MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus, SearchAndFilterNames.EstablishmentCategory, "etableringsklassefiltre");
-                                    MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged, SearchAndFilterNames.CategoryChanged, "kategoriendringsfiltre");
-                                    MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies, SearchAndFilterNames.ProductionSpecies, "'produksjonsart'-filtre");
-                                    MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups, SearchAndFilterNames.SpeciesGroup, "artsgruppefiltre");
-                                    MakeFilterGroup(nameof(Model.Habitats), Model.Habitats, AllHabitats, "Hovedhabitat", "hovedhabitatfiltre");
-                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions, "Regioner og havområder", "regionfiltre");
-                                    MakeFilterGroup(nameof(Model.WaterRegions), Model.WaterRegions, AllWaterRegions, "Vannregioner", "vannregionfiltre");
+                                    MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas);
+                                    MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories);
+                                    MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials);
+                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects);
+                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
+                                    MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias);
+                                    MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus);
+                                    MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged);
+                                    MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies);
+                                    MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
+                                    //MakeFilterGroup(nameof(Model.Habitats), Model.Habitats, AllHabitats);
+                                    //MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
+                                    //MakeFilterGroup(nameof(Model.WaterRegions), Model.WaterRegions, AllWaterRegions);
                                 }
                             </ul>
                         </div>
-                        <partial name="/Views/Shared/_FilterMobileButtons.cshtml" />
+                        <partial name="/Views/Shared/_FilterMobileButtons.cshtml" view-data="ViewData" />
                     </div>
                 </div>
             </div>

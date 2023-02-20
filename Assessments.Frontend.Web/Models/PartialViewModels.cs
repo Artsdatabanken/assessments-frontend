@@ -1,17 +1,25 @@
+using Assessments.Frontend.Web.Infrastructure.Enums;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
 using System.Collections.Generic;
-using Assessments.Mapping.AlienSpecies.Model;
 
 namespace Assessments.Frontend.Web.Models
 {
+    public class AttachmentViewModel
+    {
+        public AlienSpeciesAssessment2023Attachment[] Attachments { get; set; }
+
+        public bool IsEvaluatedAtAnotherLever { get; set; }
+    }
+
     public class AssessmentPageHeaderViewModel
     {
         public string AssessmentArea { get; set; }
 
-        public ScientificNameViewModel scientificNameViewModel { get; set; }
+        public ScientificNameViewModel ScientificNameViewModel { get; set; }
 
-        public SpeciesGroupViewModel speciesGroupViewModel { get; set; }
+        public SpeciesGroupViewModel SpeciesGroupViewModel { get; set; }
     }
 
     public class CategoryBarListElement
@@ -40,7 +48,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string FirstPublished { get; set; }
 
-        public string CitationHeading { get; set; }
+        public bool HasBackToTopLink { get; set; }
 
         public string PublicationText { get; set; }
 
@@ -65,15 +73,22 @@ namespace Assessments.Frontend.Web.Models
         public int ItemCount { get; set; }
     }
 
+    public class CriteriaExplanationViewModel
+    {
+        public AlienSpeciesDetailViewModel AlienSpeciesDetailViewModel { get; set; }
+
+        public string Criteria { get; set; }
+    }
+
     public class ExpertStatementViewModel
     {
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
+        public string AlienStatusExplanation { get; set; }
+
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         public AlienSpeciesAssessment2023ChangedFromAlien ChangedFromAlien { get; set; }
-
-        public string AlienStatusExplanation { get; set; }
 
         public string ChangedFromAlienDescription { get; set; }
 
@@ -89,7 +104,17 @@ namespace Assessments.Frontend.Web.Models
 
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
+
         public bool HasIndoorProduction { get; set; }
+
+        public List<AlienSpeciesAssessment2023Pathways> ImportPathways { get; set; }
+
+        public string MisidentifiedDescription { get; set; }
+
+        public RaceViewModel RaceViewModel { get; set; }
+
+        public List<CommonSimpleReference> References { get; set; }
 
         public string SpreadFurtherSpreadFurtherInfo { get; set; }
 
@@ -99,7 +124,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string Summary { get; set; }
 
-        public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
+        public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
 
         public string UncertaintyStatusDescription { get; set; }
 
@@ -110,13 +135,32 @@ namespace Assessments.Frontend.Web.Models
     {
         public AlienSpeciesAssessment2023Environment Environment { get; set; }
 
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
+
         public AlienSpeciesAssessment2023Category Category { get; set; }
+
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public string ListName { get; set; }
 
+        public int? ParentAssessmentId { get; set; }
+
+        public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
+
         public string Status { get; set; }
 
-        public AlienSpeciesAssessment2023TaxonRank TaxonRank { get; set; }
+        public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
+    }
+
+    public class RaceViewModel
+    {
+        public AlienSpeciesAssessment2023ScientificName[] NameHierarchy { get; set; }
+
+        public AlienSpeciesAssessment2023ScientificName ScientificName { get; set; }
+
+        public string SpeciesGroup { get; set; }
+
+        public string VernacularName { get; set; }
     }
 
     public class RegionalSpreadViewModel
@@ -135,11 +179,46 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public bool IsSvalbard { get; set; }
+
+        public int? RiskAssessmentIntroductionsLow { get; set; }
+
+        public int? RiskAssessmentIntroductionsBest { get; set; }
+
+        public int? RiskAssessmentIntroductionsHigh { get; set; }
+
+        public int? RiskAssessmentOccurrences1Low { get; set; }
+
+        public int? RiskAssessmentOccurrences1Best { get; set; }
+
+        public int? RiskAssessmentOccurrences1High { get; set; }
+
+
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         public string CurrentPresenceComment { get; set; }
+
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
+    }
+
+    public class MapViewModel
+    {
+        public string MapName { get; set; }
+
+        public string MapText { get; set; }
+
+        public string MapDescription { get; set; }
+
+        public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
+    }
+
+    public class ReferenceViewModel
+    {
+        public bool HasBackToTopLink { get; set; }
+
+        public List<CommonSimpleReference> References { get; set; }
     }
 
     public class SideBarContentViewModel
@@ -167,7 +246,32 @@ namespace Assessments.Frontend.Web.Models
 
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
-        public string TaxonRank { get; set; }
+        public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
+    }
+
+    public class TableOfContentsViewModel
+    {
+        public class Content
+        {
+            public string ElementId { get; set; }
+
+            public string Title { get; set; }
+
+            public bool ShouldShow { get; set; }
+
+            public List<Content> SubContents { get; set; }
+        }
+
+        public List<Content> Contents { get; set; }
+    }
+
+    public class CommonSimpleReference
+    {
+        public string Type { get; set; }
+
+        public Guid ReferenceId { get; set; }
+
+        public string FormattedReference { get; set; }
     }
 
     public class HeaderViewModel
@@ -191,6 +295,8 @@ namespace Assessments.Frontend.Web.Models
 
     public class PageMenuViewModel
     {
+        public AssessmentType AssessmentType { get; set; }
+
         public int PageMenuContentId { get; set; }
 
         public string PageMenuExpandButtonText { get; set; }
@@ -205,6 +311,7 @@ namespace Assessments.Frontend.Web.Models
         public string ScientificName { get; set; }
 
         public string ScientificNameAuthor { get; set; }
+        public bool ScientificNameFormatted { get; set; } = false;
     }
 
     public class SidebarContentViewModel

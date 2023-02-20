@@ -17,7 +17,11 @@
 
         public const string AlienSpecies2023Temp = "alienspecies-temp-2023.json";
 
-        public const string AlienSpeciesExpertCommitteeMembers = "alienspecies-experts.json";
+        public const string AlienSpeciesExpertCommitteeMembers = "alienspecies-experts.csv";
 
+        public static string CalculateAlienSpecies2023AttachmentFilePath(int attachmentId, string fileName)
+        {
+            return "AlienSpecies2023Attachments\\" + attachmentId + "_" + fileName;
+        }
     }
 }

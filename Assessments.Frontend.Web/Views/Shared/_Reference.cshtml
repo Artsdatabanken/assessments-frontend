@@ -1,0 +1,25 @@
+﻿@model ReferenceViewModel
+
+@{
+    var references = Model.References.OrderBy(x => x.FormattedReference).ToArray();
+}
+
+@if (@Model.References != null && Model.References.Count() > 0)
+{
+    <div id="@nameof(Constants.HeadingsNo.References)">
+        <div class="page_section_header" is-visible="Model.HasBackToTopLink">
+            <h2>@Constants.HeadingsNo.References</h2>
+            <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
+        </div>
+        <h2 is-visible="!Model.HasBackToTopLink">@Constants.HeadingsNo.References</h2>
+            <div class="page_section">
+                <ul>
+                    @foreach (var reference in references)
+                    {
+                        <li class="reference">@reference.FormattedReference</li>
+                    }
+                </ul>
+            </div>
+    </div>
+}
+    

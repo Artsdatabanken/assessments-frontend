@@ -1,0 +1,44 @@
+﻿@model AlienSpeciesDetailViewModel;
+@using Assessments.Mapping.AlienSpecies.Model.Enums;
+
+@{
+    var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
+    var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
+    var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";
+}
+
+<div id="@nameof(Constants.HeadingsNo.ClimateEffectsInvationpotential)">
+    <div class="page_section_header">
+        <h2>@Constants.HeadingsNo.ClimateEffectsInvationpotential</h2>
+        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
+    </div>
+
+    <div is-visible="hasClimateEffectsInvasionpotential == hasClimateEffectsEcoEffect">
+        <p is-visible="!hasClimateEffectsInvasionpotential">
+            @Constants.ClimateEffectExplanationNeither
+            @Constants.ClimateEffectExplanationEnding
+        </p>
+        <p is-visible="hasClimateEffectsInvasionpotential">
+           @Constants.ClimateEffectExplanationBoth
+           @Constants.ClimateEffectExplanationEnding      
+         </p>
+    </div>
+
+    <div is-visible="hasClimateEffectsInvasionpotential != hasClimateEffectsEcoEffect">
+        <p>
+            @Constants.ClimateEffectExplanationInvationPotential 
+            <span is-visible="!hasClimateEffectsInvasionpotential"><i>ikke </i></span>
+            @Constants.ClimateEffectExplanationEnding
+        </p>
+        <p>
+            @Constants.ClimateEffectExplanationEcoEffect 
+            <span is-visible="!hasClimateEffectsEcoEffect"><i>ikke </i></span>
+            @Constants.ClimateEffectExplanationEnding
+        </p>
+    </div>        
+                            
+    <div is-visible="(hasClimateEffectsInvasionpotential || hasClimateEffectsEcoEffect) && hasRiskAssessmentClimateEffectsDocumentation">
+        <h3>Betydningen av klimaendringer:</h3>
+        <p>@Model.Assessment.RiskAssessmentClimateEffectsDocumentation</p>
+    </div>
+</div>

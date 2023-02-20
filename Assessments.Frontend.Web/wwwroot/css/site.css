@@ -182,7 +182,7 @@ option {
 
     .content-placer {
         padding-top: 33px;
-        width: calc(75% - 4px);
+        width: calc(75%);
         display: flex;
         flex-wrap: wrap;
     }
@@ -304,8 +304,8 @@ option {
     Buttons on page have .main in front, to avoid clashing with footer and header code.
 */
 
-.button,
-.main button {
+
+button {
     padding: 6px 12px;
     font-size: 15px;
     line-height: 1.42857143;
@@ -601,7 +601,7 @@ option {
         font-family: "Roboto condensed";
         height: 50px;
         line-height: 50px;
-        width: 300px;
+        /*width: 300px; remove for innsight (innsyn)*/
     }
 }
 
@@ -806,28 +806,10 @@ option {
     text-decoration:none;
 }
 
-.main .chips {
-    font-size: 12pt;
-    color: black;
-    background: white;
-    padding: 3px;
-    border: 1px solid black;
-    border-radius: 15px;
-    display: inline-block;
-    margin-right: 5px;
-    margin-bottom: 10px;
-    background: #c3ebf0;
-    border-color: #098293;
-}
 
-.main .chips:first-letter {
+.chips:first-letter {
     text-transform:uppercase;
 }
-
-.chips .x {
-    color: #1b57a9;
-}
-
 .englishspacer{
     visibility:hidden;
 }
@@ -893,6 +875,10 @@ option {
     vertical-align: baseline;
 }
 
+.themeselectordropdown .themebutton {
+    color: #000;
+}
+
 .themebutton .material-icons {
     vertical-align: middle;
 }
@@ -915,3 +901,42 @@ option {
 
 
 
+
+
+
+.title_header a:active,
+.title_header a:focus {
+    text-decoration: underline
+}
+
+.darktheme.title_header a,
+.title_header a {
+    text-decoration: none;
+}
+
+.short_title,
+.full_title {
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 940px) {
+    .title_header {
+        height: 50px;
+        padding-top: 6px;
+    }
+
+    #navbar-mobile {
+        right: 50px;
+        line-height: 40px;
+        top: -2px;
+        height: 100%;
+        background: transparent;
+    }
+
+    .header button.menuitems.themeselector {
+        right: 12px;
+        height: 100%;
+        background: transparent
+    }
+}
+ 

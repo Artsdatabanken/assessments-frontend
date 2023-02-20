@@ -1,0 +1,89 @@
+@model AlienSpeciesDetailViewModel
+
+@{
+    var hasIndoorProduction = Model.Assessment.HasIndoorProduction;
+    var importPathways = Model.Assessment.ImportPathways;
+    var introductionSpreadPathwaysIntroduction = Model.Assessment.IntroductionAndSpreadPathways.Where(x => x.IntroductionSpread == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).ToList();
+    var introductionSpreadPathwaysSpread = Model.Assessment.IntroductionAndSpreadPathways.Where(x => x.IntroductionSpread == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Spread).ToList();
+    
+    var showImportPathways = importPathways != null && importPathways.Count() > 0;
+    var showFurtherSpread = introductionSpreadPathwaysSpread != null && introductionSpreadPathwaysSpread.Count() > 0;
+
+    void MakeTable(List<AlienSpeciesAssessment2023Pathways> pathways )
+    {        
+        <table class="big-data-table" >
+            <tr>
+                <th>@Constants.PathwaysMainCategory </th>
+                <th>@Constants.PathwaysCategory</th>
+                <th>@Constants.PathwaysInfluenceFactor </th>
+                <th>@Html.Raw(Constants.PathwaysMagnitude) </th>
+                <th>@Constants.PathwaysTimeOfIncident </th>
+            </tr>
+            @foreach (var pathway in pathways )
+            {               
+                <tr>
+                    <td><b class="only_mobile">@Constants.PathwaysMainCategory:</b>@pathway.MainCategory.DisplayName()</td>
+                    <td><b class="only_mobile">@Constants.PathwaysCategory:</b>@pathway.Category</td>
+                    <td><b class="only_mobile">@Constants.PathwaysInfluenceFactor:</b>@pathway.InfluenceFactor.DisplayName()</td>
+                    <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.PathwaysMagnitude):</b>@pathway.Magnitude.DisplayName()</td>
+                    <td><b class="only_mobile">@Constants.PathwaysTimeOfIncident:</b>@pathway.TimeOfIncident.DisplayName()</td>
+                </tr>
+            }
+       </table>
+    }
+}
+
+<div id="@nameof(Constants.HeadingsNo.SpreadWays)" class="page_section_header">
+    <h2>@Constants.HeadingsNo.SpreadWays</h2>
+    <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
+</div>
+
+
+<div is-visible="hasIndoorProduction">
+    <h3>@Constants.hasIndoorProtectionTitle</h3>        
+    <p>@Constants.hasIndoorProtectionParagraph</p>
+    <p>@Constants.hasIndoorProtectionParagraph2</p>
+
+    <div is-visible="showImportPathways"> 
+        <p class="big-data-table table-description">
+            <b>@Constants.hasIndoorProtectionTableTitle</b> 
+            <span>@Constants.hasIndoorProtectionTableDescription</span>
+        </p>
+        @{
+            MakeTable(importPathways);
+        }           
+    </div>
+    </div>
+
+<div>
+    <h3>@Constants.hasNoIndoorProtectionTitle</h3>        
+    <p>@Constants.hasNoIndoorProtectionParagraph</p>
+
+    <div is-visible="introductionSpreadPathwaysIntroduction.Count() > 0">
+        <p class="big-data-table table-description">
+            <b>@Constants.hasNoIndoorProtectionTableTitle</b> 
+            <span>@Constants.hasNoIndoorProtectionTableDescription</span>
+        </p>
+        @{
+            MakeTable(introductionSpreadPathwaysIntroduction);
+        }           
+    </div>
+</div>
+
+<div>
+    <h3>@Constants.furtherSpreadWaysTitle</h3>        
+    <p>@Constants.furtherSpreadWaysParagraph</p>
+
+    <div is-visible="showFurtherSpread"> 
+        <p class="big-data-table table-description">
+            <b>@Constants.furtherSpreadWaysTableTitle</b> 
+            <span>@Constants.furtherSpreadWaysTableDescription</span>
+        </p>
+        @{
+            MakeTable(introductionSpreadPathwaysSpread);
+        }           
+    </div>
+    <p is-visible="!showFurtherSpread">
+        @Constants.noFurtherSpreadWays
+    </p>
+</div>

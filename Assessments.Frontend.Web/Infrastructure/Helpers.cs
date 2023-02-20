@@ -1,10 +1,10 @@
 ﻿using Assessments.Frontend.Web.Models;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Mapping.RedlistSpecies;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
@@ -295,6 +295,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             var subSpecies = "Underart";
             var species = "Art";
             var variety = "Varietet";
+            var form = "Form";
 
             if (rang == "SubSpecies" || rang == subSpecies)
             {
@@ -305,6 +306,11 @@ namespace Assessments.Frontend.Web.Infrastructure
             {
                 replacestring = replacestring.Replace("{art}", variety.ToLower());
                 replacestring = replacestring.Replace("{Art}", variety);
+            }
+            else if (rang == form)
+            {
+                replacestring = replacestring.Replace("{art}", form.ToLower());
+                replacestring = replacestring.Replace("{Art}", form);
             }
             else
             {
@@ -320,6 +326,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                 22 => "Art",
                 23 => "Underart",
                 24 => "Varietet",
+                25 => "Form",
                 _ => "Art"
             };
             return Helpers.FixSpeciesLevel(replaceString, stringRank);

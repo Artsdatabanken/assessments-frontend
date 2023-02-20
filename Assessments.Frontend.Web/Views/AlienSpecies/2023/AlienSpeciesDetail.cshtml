@@ -8,8 +8,6 @@
 @inject IOptions<ApplicationOptions> Options
 
 @{
-    var enableCitation = Options.Value.AlienSpecies2023.EnableCitation;
-
     var assessment = Model.Assessment;
     ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023 innsyn"; // TODO: change after innsight process
 
@@ -96,8 +94,8 @@
     var showImpactedNatureTypes = !isNr && !isEvaluatedAtAnotherLevel;
     var showReference = assessment.References != null && assessment.References.Count() > 0;
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
-    var showCitationForAssessment = enableCitation && !string.IsNullOrEmpty(Model.ExpertGroupMembers.Select(x => $"{x.LastName} {x.FirstNameInitials}").JoinAnd(", ", " og "));
-    var showFeedback = true;
+    var showCitationForAssessment = Model.ExpertGroupMembers.Any() && !Options.Value.AlienSpecies2023.IsHearing;
+    var showFeedback = Options.Value.AlienSpecies2023.IsHearing;
 
     var tableOfContentsViewModel = new TableOfContentsViewModel
     {
@@ -243,7 +241,7 @@
                 <div class="page-section" is-visible="showCitationForAssessment">
                     <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
                 </div>
-                <div class="page-section" id="Feedback">
+                <div class="page-section" id="Feedback" is-visible="@showFeedback">
                     <partial name="/Views/Shared/_Feedback.cshtml" model="new FeedbackFormViewModel { Year = 2023, AssessmentId = assessment.Id, ExpertGroup = assessment.ExpertGroup, Type = FeedbackType.AlienSpecies, HasBackToTopLink = true }" />
                 </div>
             </div>

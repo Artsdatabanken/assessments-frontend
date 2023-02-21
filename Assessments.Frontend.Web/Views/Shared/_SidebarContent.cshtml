@@ -17,10 +17,16 @@
         <hr />
         <partial name="/Views/Shared/_Links.cshtml" />
     </div>
-    <h3 is-visible="@Model.SpeciesIsOnBannedList">Forbudsliste</h3>
+
+    <hr is-visible="@Model.SpeciesIsOnBannedList"/>
+    <h3 is-visible="@Model.SpeciesIsOnBannedList">Forskrift om fremmede organismer</h3>
     <div is-visible="@Model.SpeciesIsOnBannedList">
+
+        <p>Denne arten er oppført på Klima- og miljødepartementets liste over arter det er 
+            forbudt å innføre, sette ut og omsette, jf. § 5 og § 9.
+        </p>
         <a href="https://lovdata.no/dokument/SF/forskrift/2015-06-19-716#KAPITTEL_9" class="link-styled">
-            Denne arten er på Forbudslista
+            Forbudslista hos Lovdata.no <span class="material-icons">open_in_new</span>
         </a>
     </div>
 </div>

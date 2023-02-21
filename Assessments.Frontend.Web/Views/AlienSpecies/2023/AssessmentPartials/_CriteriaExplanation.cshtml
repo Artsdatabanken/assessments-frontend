@@ -5,8 +5,6 @@
     var isDecisiveCriteria = Model.Criteria == Model.AlienSpeciesDetailViewModel.Assessment.DecisiveCriteria;
     // We need to know which criteria are not used, but still has uncertainty, and who does not have uncertainty or is used at all. 
     var unusedCriteriaWithoutUncertainty = new string(Model.Criteria.Where(x => Model.AlienSpeciesDetailViewModel.Assessment.Criteria.Any(y => y.CriteriaLetter.ToString() == x.ToString() && y.UncertaintyValues.Count() == 1)).ToArray());
-    var unusedCriteriaCountInvationPotential = unusedCriteriaWithoutUncertainty.Where(x => "ABC".Contains(x)).Count();
-    var unusedCriteriaCountEcologicalEffect = unusedCriteriaWithoutUncertainty.Where(x => "DEFGHI".Contains(x)).Count();
 
 
     var assessment = Model.AlienSpeciesDetailViewModel.Assessment;
@@ -64,6 +62,7 @@
     var hasContentH = showHTable || showGeneticContaminationUncertaintyDocumentation;
     var hasContentI = showITable || showParasitePathogenTransmissionUncertaintyDocumentation;
 
+
     // If decisive criteria pane, show if decisive. If not decisive criteria pane, show if criteria is used, or if it has uncertainty.
     var criteriaHasA = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) || hasContentA));
     var criteriaHasB = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.B)) || hasContentB));
@@ -74,6 +73,37 @@
     var criteriaHasG = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.G)) || hasContentG));
     var criteriaHasH = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.H)) || hasContentH));
     var criteriaHasI = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.I)) || hasContentI));
+
+    string UnusedCriteriaInvationPotential()
+    {
+        var notUsed = string.Empty;
+        notUsed += hasContentA ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.A);
+        notUsed += hasContentB ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.B);
+        notUsed += hasContentC ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.C);
+
+        if (notUsed.Length > 1)
+        {
+            notUsed = String.Join(", ", notUsed.ToArray());
+        }
+        return notUsed;
+    } 
+
+    string UnusedCriteriaEcologicalEffect()
+    {
+        var notUsed = string.Empty;;
+        notUsed += hasContentD ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.D);
+        notUsed += hasContentE ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.E);
+        notUsed += hasContentF ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.F);
+        notUsed += hasContentG ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.G);
+        notUsed += hasContentH ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.H);
+        notUsed += hasContentI ? string.Empty : nameof(AlienSpeciesAssessment2023CriteriaLetter.I);
+
+        if (notUsed.Length > 1)
+        {
+            notUsed = String.Join(", ", notUsed.ToArray());
+        }
+        return notUsed;
+    }
 
     bool HasUncertainty(AlienSpeciesAssessment2023Criterion uncertainty)
     {
@@ -530,9 +560,8 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <p is-visible="unusedCriteriaCountInvationPotential == 1">Det øvrige kriteriet er ikke brukt.</p>
-                <p is-visible="unusedCriteriaCountInvationPotential > 1">De øvrige kriteriene er ikke brukt.</p>
+            <div is-visible="!isDecisiveCriteria">
+                <p is-visible="UnusedCriteriaInvationPotential().Length > 0">Invasjonspotensial etter @UnusedCriteriaInvationPotential() er vurdert som fraværende (usannsynlig).</p>
             </div>
         </div>
     </div>
@@ -825,9 +854,8 @@
                 </div>
             </div>
         </div>
-        <div>
-            <p is-visible="unusedCriteriaCountEcologicalEffect == 1">Det øvrige kriteriet er ikke brukt.</p>
-            <p is-visible="unusedCriteriaCountEcologicalEffect > 1">De øvrige kriteriene er ikke brukt.</p>
+        <div is-visible="!isDecisiveCriteria">
+            <p is-visible="UnusedCriteriaEcologicalEffect().Length > 0">Økologiske effekter etter @UnusedCriteriaEcologicalEffect() er vurdert som fraværende (usannsynlige).</p>
         </div>
     </div>
 </div>

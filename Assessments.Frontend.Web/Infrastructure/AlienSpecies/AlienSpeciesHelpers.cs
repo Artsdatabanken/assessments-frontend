@@ -209,33 +209,21 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static string GetInvasionPotentialExplanation(List<AlienSpeciesAssessment2023Criterion> criteria)
         {
             var explanation = string.Empty;
-
+            var hasAorB = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A || x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B);
+            var hasC = criteria.Any(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C);
 
             if (criteria.Count != 0)
             {
-                for (var i = 0; i < criteria.Count; i++)
+                if (hasAorB)
                 {
-                    if (i == 0)
-                    {
-                        explanation += criteria[i].CriteriaLetter.DisplayName();
-                    }
-                    else
-                    {
-                        explanation += LowerFirstCharacter(criteria[i].CriteriaLetter.DisplayName());
-                    }
-                    explanation += $" på {CriteriaDescription(criteria[i].CriteriaLetter, criteria[i].Value)}";
-                    if (i + 1 == criteria.Count)
-                    {
-                        explanation += ".";
-                    }
-                    else if (i + 2 == criteria.Count)
-                    {
-                        explanation += " og ";
-                    }
-                    else
-                    {
-                        explanation += ", ";
-                    }
+                    var aCriterion = criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.A).SingleOrDefault();
+                    var bCriterion = criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.B).SingleOrDefault();
+                    explanation += $"Arten har en forventet levetid i Norge på {CriteriaDescription(aCriterion.CriteriaLetter, aCriterion.Value)} og en ekspansjonshastighet  på {CriteriaDescription(bCriterion.CriteriaLetter, bCriterion.Value)}. ";
+                }
+                if (hasC)
+                {
+                    var cCriterion = criteria.Where(x => x.CriteriaLetter == AlienSpeciesAssessment2023CriteriaLetter.C).SingleOrDefault();
+                    explanation += $"Arten koloniserer {CriteriaDescription(cCriterion.CriteriaLetter, cCriterion.Value)} av en naturtype.";
                 }
             }
             return explanation;

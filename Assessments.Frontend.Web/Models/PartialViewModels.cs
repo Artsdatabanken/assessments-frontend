@@ -252,6 +252,7 @@ namespace Assessments.Frontend.Web.Models
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
         public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
+        public bool SpeciesIsOnBannedList { get; set; }
     }
 
     public class TableOfContentsViewModel

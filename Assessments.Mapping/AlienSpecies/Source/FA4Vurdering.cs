@@ -267,6 +267,27 @@ namespace Assessments.Mapping.AlienSpecies.Source
         /// </summary>
         public string MisIdentifiedDescription { get; set; } = "";
 
+        /// <summary>
+        /// All of the species' subtaxa have separate evaluations, leaving the species unassessed
+        /// </summary>
+
+        public bool AllSubTaxaAssessedSeparately { get; set; } = false;
+
+        /// <summary>
+        /// Reason for all of the species' subtaxa have separate evaluations
+        /// </summary>
+        public string AllSubTaxaAssessedSeparatelyDescription { get; set; } = "";
+
+        /// <summary>
+        /// Hybrid species without its own assessment
+        /// </summary>
+
+        public bool IsHybridWithoutOwnRiskAssessment { get; set; } = false;
+
+        /// <summary>
+        /// Hybrid species without its own assessment. Reasoning
+        /// </summary>
+        public string IsHybridWithoutOwnRiskAssessmentDescription { get; set; } = "";
 
         public bool? HigherOrLowerLevel { get; set; }
 

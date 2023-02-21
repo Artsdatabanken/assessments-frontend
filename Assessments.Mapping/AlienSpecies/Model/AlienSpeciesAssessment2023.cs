@@ -633,5 +633,15 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The proportion of the known or assumed area of occupancy (AOO) in strongly altered ecosystems
         /// </summary>
         public AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }
+
+        /// <summary>
+        /// Reason for all of the species' subtaxa have separate evaluations
+        /// </summary>
+        public string AllSubTaxaAssessedSeparatelyDescription { get; set; }
+
+        /// <summary>
+        /// Hybrid species without its own assessment. Reasoning
+        /// </summary>
+        public string IsHybridWithoutOwnRiskAssessmentDescription { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System.Collections.Generic;
 using System.Linq;
-using Assessments.Mapping.AlienSpecies.Helpers;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -23,6 +23,7 @@ namespace Assessments.Frontend.Web.Models
             ExpertStatementViewModel = new ExpertStatementViewModel
             {
                 AlienSpeciesCategory = assessment.AlienSpeciesCategory,
+                AllSubTaxaAssessedSeparately = assessment.AllSubTaxaAssessedSeparatelyDescription,
                 AlienStatusExplanation = assessment.AlienSpeciesDescription,
                 Category = assessment.Category,
                 ChangedFromAlienDescription = assessment.ChangedFromAlienDescription,
@@ -35,6 +36,7 @@ namespace Assessments.Frontend.Web.Models
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 EvaluationContext = assessment.EvaluationContext,
                 HasIndoorProduction = assessment.HasIndoorProduction,
+                HybridWithoutOwnRiskAssessmentDescription = assessment.HybridWithoutOwnRiskAssessmentDescription,
                 ImportPathways = assessment.ImportPathways,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
                 RaceViewModel = new RaceViewModel

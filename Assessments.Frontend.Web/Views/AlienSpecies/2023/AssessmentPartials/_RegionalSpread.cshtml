@@ -4,6 +4,7 @@
 @{
     var evaluationContextText = Model.IsSvalbard ? "på Svalbard" : "i Norge";
     var isAlienSpecie = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
+    var isRegionallyAlien = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien;
     var isDoorKnocker = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
     var isEffectWithoutReproduction = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
     var isDoorKnockerOrEffectNoRep = isDoorKnocker || isEffectWithoutReproduction;
@@ -30,9 +31,16 @@
         MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
     };
+
+    var waterRegions = Model.FreshWaterRegionModel?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
+    {
+        WaterRegionName = x.Key,
+        IsKnown = x.Any(y => y.IsKnown == true),
+        IsAssumedToday = x.Any(y => y.IsAssumedToday == true),
+        IsAssumedInFuture = x.Any(y => y.IsAssumedInFuture == true),
+        WaterAreas = x.ToList()
+    }).ToList();
 }
-
-
 
 @*
 This is the original code for Regional spread. We have removed the tabs for the innsight bacause the second tab has no content yet. Remove the bottom code and use the commented code when reverting to tabs yet again. 
@@ -238,6 +246,30 @@ Remember to also change the heading in constants by removing " i Norge".
                     forekomstareal om 50 år: <br />
                     @Html.Raw(Model.CurrentPresenceComment)
                 </p>
+            </div>
+            <div is-visible="isRegionallyAlien">
+                <table class="numbers-table">
+                    <caption class="table-title">Regionalt fremmed utbradelse</caption>
+                    <tbody>
+                        <tr>
+                            <td>Vannregion</td>
+                            <td>Vannområde</td>
+                            <td>Kjent utbredelse</td>
+                            <td>Antatt utbredelse i dag</td>
+                            <td>Antatt utbredelse om 50 år</td>
+                        </tr>
+                        @foreach (var area in waterRegions)
+                        {
+                            <tr>
+                                <td>@area.WaterRegionName</td>
+                                <td>@area.Name</td>
+                                <td><span is-visible="area.IsKnown" class="material-icons">check</span></td>
+                                <td><span is-visible="area.IsAssumedToday" class="material-icons">check</span></td>
+                                <td><span is-visible="area.IsAssumedInFuture" class="material-icons">check</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

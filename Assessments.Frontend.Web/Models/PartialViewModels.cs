@@ -181,6 +181,8 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public List<AlienSpeciesAssessment2023FreshWaterRegion> FreshWaterRegionModel { get; set; }
+
         public bool IsSvalbard { get; set; }
 
         public int? RiskAssessmentIntroductionsLow { get; set; }
@@ -194,7 +196,6 @@ namespace Assessments.Frontend.Web.Models
         public int? RiskAssessmentOccurrences1Best { get; set; }
 
         public int? RiskAssessmentOccurrences1High { get; set; }
-
 
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 

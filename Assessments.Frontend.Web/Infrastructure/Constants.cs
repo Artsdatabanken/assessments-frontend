@@ -292,7 +292,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023FirstPublished = "18.08.2023"; // TODO: Need publishing date
 
-        public const int AlienSpecies2023PageMenuContentId = 239646;
+        public const int AlienSpecies2023PageMenuContentId = 239657; //239645; //239644; //239646;
 
         public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023 - innsyn"; // TODO: remove "innsyn" after innsyn
 

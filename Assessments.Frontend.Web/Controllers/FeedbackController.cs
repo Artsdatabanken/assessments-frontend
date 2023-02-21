@@ -186,9 +186,21 @@ namespace Assessments.Frontend.Web.Controllers
             if (validation == null || !validation.Email.Equals(form.Email) || !validation.FullName.Equals(form.FullName))
                 return BadRequest();
 
+            var alienSpeciesAssessments = await DataRepository.GetAlienSpeciesAssessments();
+            var assessment = alienSpeciesAssessments.FirstOrDefault(x => x.Id == form.AssessmentId);
+
+            if (assessment == null)
+            {
+                Logger.LogError("AlienSpeciesAssessment with id {Id} not found", form.AssessmentId);
+                return BadRequest();
+            }
+
+            var scientificName = assessment.ScientificName.ScientificName;
+
             var feedback = new Feedback
             {
                 AssessmentId = form.AssessmentId,
+                ScientificName = scientificName,
                 Year = form.Year,
                 Type = form.Type,
                 ExpertGroup = form.ExpertGroup,
@@ -236,10 +248,6 @@ namespace Assessments.Frontend.Web.Controllers
                 await _dbContext.SaveChangesAsync();
             }
 
-            var alienSpeciesAssessments = await DataRepository.GetAlienSpeciesAssessments();
-            var assessment = alienSpeciesAssessments.FirstOrDefault(x => x.Id == feedback.AssessmentId);
-            var scientificName = assessment != null ? assessment.ScientificName.ScientificName : string.Empty;
-
             var message = new SendGridMessage
             {
                 From = new EmailAddress("noreply@artsdatabanken.no"),
@@ -253,7 +261,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (feedback.Attachments.Any())
                 feedbackAttachments = $"<p>Antall vedlegg: {feedback.Attachments.Count}</p>";
 
-            var messageContent = $"<p>Under innsyn i de foreløpige vurderingene i Fremmedartslista 2023 har vi mottatt følgende tilbakemelding på vurderingen av {scientificName}:</p><p>{feedback.Comment}</p>{feedbackAttachments}";
+            var messageContent = $"<p>Under innsyn i de foreløpige vurderingene i Fremmedartslista 2023 har vi mottatt følgende tilbakemelding på vurderingen av {feedback.ScientificName}:</p><p>{feedback.Comment}</p>{feedbackAttachments}";
 
             var sendMail = await SendMail(message, messageContent);
 

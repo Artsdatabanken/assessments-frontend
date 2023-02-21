@@ -31,7 +31,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Tidligere feilbestemt")]
         MisIdentified,
 
-        [Display(Name = "Vurderes ikke fordi det foreligger separate vurderinger av infraspesifikke taksa")]
+        [Display(Name = "Ikke vurdert fordi det foreligger separate vurderinger av infraspesifikke taksa")]
         AllSubTaxaAssessedSeparately,
 
         [Display(Name = "Utenfor avgrensningen")]

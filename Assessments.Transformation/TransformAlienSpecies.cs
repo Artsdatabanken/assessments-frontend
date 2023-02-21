@@ -194,6 +194,13 @@ namespace Assessments.Transformation
                 return true;
             }
 
+            // ekskluderer vurderinger med pattedyr som er husdyrraser
+            if (new[]{ 4937, 4963, 4964, 4965, 5217 }.Contains(fa4.Id))
+            {
+                Progress.ProgressBar.Tick();
+                return true;
+            }
+
             return false;
         }
 

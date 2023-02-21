@@ -5,6 +5,7 @@
     var natureTypes = Model.Assessment.ImpactedNatureTypes;
     var isSvalbard = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
     var showMicroHabitats = Model.Assessment.MicroHabitat != null && Model.Assessment.MicroHabitat.Count() != 0;
+    var showNatureTypes = natureTypes != null && natureTypes.Count > 0;
 }
 
 <div id="@nameof(Constants.HeadingsNo.ImpactedNatureTypes)">
@@ -12,82 +13,89 @@
         <h2>@Constants.HeadingsNo.ImpactedNatureTypes</h2>
         <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
+
+    <p is-visible="!showNatureTypes && !showMicroHabitats">Det er ikke angitt noen naturtypetilhørighet for arten.</p>
        
-    <p is-visible="isSvalbard">
-        @Constants.ImpactedNatureTypesDescriptionSvalbard
-    </p>
-    <p is-visible="!isSvalbard">
-        @Constants.ImpactedNatureTypesDescription
-    </p>
-    <p class="big-data-table table-description">
-        <b>@Constants.ImpactedNatureTypesTableTitle</b>
-        @Constants.ImpactedNatureTypesTableDescription
-            
-    <table class="big-data-table nature-table-setup">
-        <tr>
-            <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
-            <th>@Constants.ImpactedNatureTypesTableColumn2</th>
-            <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
-            <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
-            <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
-            <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
-        </tr>
-        @{
-        foreach (var natureType in natureTypes)
-        {
-            <tr>
-                <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
-                <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn2:</b>@natureType.TimeHorizon.DisplayName()</td>
-                <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
-                <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn4):</b>
-                @{ 
-                    if(natureType.StateChange != null)
-                    { 
-                        <ul>
-                        @{
-                            foreach (var state in natureType.StateChange)
-                            {<li>@state.DisplayName()</li>}
+    <div is-visible="showNatureTypes || showMicroHabitats">
+        <p is-visible="isSvalbard">
+            @Constants.ImpactedNatureTypesDescriptionSvalbard
+        </p>
+        <p is-visible="!isSvalbard">
+            @Constants.ImpactedNatureTypesDescription
+        </p>
+        <div is-visible="showNatureTypes">
+            <p class="big-data-table table-description">
+                <b>@Constants.ImpactedNatureTypesTableTitle</b>
+                @Constants.ImpactedNatureTypesTableDescription
+            </p>
+            <table class="big-data-table nature-table-setup">
+                <tr>
+                    <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
+                    <th>@Constants.ImpactedNatureTypesTableColumn2</th>
+                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
+                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
+                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
+                    <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
+                </tr>
+                @{
+                foreach (var natureType in natureTypes)
+                {
+                    <tr>
+                        <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
+                        <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn2:</b>@natureType.TimeHorizon.DisplayName()</td>
+                        <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
+                        <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn4):</b>
+                        @{ 
+                            if(natureType.StateChange != null)
+                            { 
+                                <ul>
+                                @{
+                                    foreach (var state in natureType.StateChange)
+                                    {<li>@state.DisplayName()</li>}
+                                }
+                                </ul>
+                            }
                         }
-                        </ul>
+                        </td>
+                        <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn5):</b>@natureType.AffectedArea</td>
+                        <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn6:</b>
+                        @{ 
+                                <ul>
+                                @{
+                                    foreach (var bg in natureType.Background)
+                                    {<li>@bg.DisplayName()</li>}
+                                }
+                                </ul>
+                        }
+                        </td>
+                    </tr>
                     }
                 }
-                </td>
-                <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn5):</b>@natureType.AffectedArea</td>
-                <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn6:</b>
-                @{ 
-                        <ul>
-                        @{
-                            foreach (var bg in natureType.Background)
-                            {<li>@bg.DisplayName()</li>}
-                        }
-                        </ul>
-                }
-                </td>
-            </tr>
-            }
-        }
-    </table>
+            </table>
+        </div>
 
-    <div is-visible="showMicroHabitats">
-        <h3>Livsmedium</h3>
-        <p>
-            For noen arter er det mer riktig å angi <a href="https://www.artsdatabanken.no/Pages/137826/Livsmedium">livsmedium</a> enn naturtyper. Et eksempel er parasittiske arter som lever i og på dyr, eller arter som lever i dyremøkk, og hvor naturtypen dyret eller møkka befinner seg i betyr lite. Livsmedium har ingen effekter på artens risikokategori.
-        </p>
-        <table class="numbers-table">
-            <caption class="table-title"><b>Artens livsmedium.</b>For hvert livsmedium er det angitt om situasjonen gjelder i dag eller i fremtiden (tidshorisont). Hvis arten bruker en annen art som livsmedium er dette angitt (art/takson). </caption>
-            <tr>
-                <td>Livsmedium</td>
-                <td>Art/Takson</td>
-                <td>Tidshorisont</td>
-            </tr>
-            @foreach (var habitat in Model.Assessment.MicroHabitat)
-            {
+        <div is-visible="showMicroHabitats">
+            <h3>Livsmedium</h3>
+            <p>
+                For noen arter er det mer riktig å angi <a href="https://www.artsdatabanken.no/Pages/137826/Livsmedium">livsmedium</a> enn naturtyper. Et eksempel er parasittiske arter som lever i og på dyr, eller arter som lever i dyremøkk, og hvor naturtypen dyret eller møkka befinner seg i betyr lite. Livsmedium har ingen effekter på artens risikokategori.
+            </p>
+            <table class="numbers-table">
+                <caption class="table-title"><b>Artens livsmedium.</b>For hvert livsmedium er det angitt om situasjonen gjelder i dag eller i fremtiden (tidshorisont). Hvis arten bruker en annen art som livsmedium er dette angitt (art/takson). </caption>
                 <tr>
-                    <td>@habitat.Name</td>
-                    <td>@Html.Raw(Helpers.FormatScientificNameElement(habitat.ScientificName)) @habitat.ScientificNameAuthor @habitat.VernacularName</td>
-                    <td>@habitat.TimeHorizon.DisplayName()</td>
+                    <td>Livsmedium</td>
+                    <td>Art/Takson</td>
+                    <td>Tidshorisont</td>
                 </tr>
-            }
-        </table>
+                @foreach (var habitat in Model.Assessment.MicroHabitat)
+                {
+                    <tr>
+                        <td>@habitat.Name</td>
+                        <td>@Html.Raw(Helpers.FormatScientificNameElement(habitat.ScientificName)) @habitat.ScientificNameAuthor @habitat.VernacularName</td>
+                        <td>@habitat.TimeHorizon.DisplayName()</td>
+                    </tr>
+                }
+            </table>
+        </div>
     </div>
+
 </div>

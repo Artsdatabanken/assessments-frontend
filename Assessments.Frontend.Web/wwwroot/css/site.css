@@ -899,11 +899,6 @@ button {
     background-color: #f5f5f5;
 }
 
-
-
-
-
-
 .title_header a:active,
 .title_header a:focus {
     text-decoration: underline
@@ -939,4 +934,11 @@ button {
         background: transparent
     }
 }
- 
+
+.success {
+    color: #16a979;
+}
+
+.error {
+    color: #cf3e1c;
+}

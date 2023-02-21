@@ -889,5 +889,46 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 ScientificNameRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(src.EvaluatedScientificNameRank == null ? "22" : src.EvaluatedScientificNameRank)
             };
         }
+
+        /// <summary>
+        /// List of banned species illegal to import to Norway
+        /// </summary>
+        public static int[] AlienSpeciesBanList()
+        {
+            return new int[]
+            {
+                16522,
+                100327,
+                100328,
+                100816,
+                100817,
+                101761,
+                102995,
+                100936,
+                101463,
+                101479,
+                101672,
+                101938,
+                101939,
+                101982,
+                101980,
+                101981,
+                99333,
+                99334,
+                129594,
+                129595,
+                129593,
+                103272,
+                103273,
+                103280,
+                103403,
+                102634,
+                102635,
+                128903,
+                129589,
+                103588,
+                103590
+            };
+        }
     }
 }

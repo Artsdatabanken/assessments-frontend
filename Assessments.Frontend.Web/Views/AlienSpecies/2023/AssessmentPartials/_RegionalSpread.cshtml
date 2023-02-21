@@ -32,19 +32,42 @@
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
     };
 
-    var waterRegions = Model.FreshWaterRegionModel?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
+    var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
     {
         WaterRegionName = x.Key,
         IsKnown = x.Any(y => y.IsKnown == true),
         IsAssumedToday = x.Any(y => y.IsAssumedToday == true),
         IsAssumedInFuture = x.Any(y => y.IsAssumedInFuture == true),
         WaterAreas = x.ToList()
-    }).ToList();
+    }).OrderBy(x => x.WaterRegionName).ToList();
+
+    var waterRegionsNaturalOccurence = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == false)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
+    {
+        WaterRegionName = x.Key,
+        IsKnown = x.Any(y => y.IsKnown == true),
+        IsAssumedToday = x.Any(y => y.IsAssumedToday == true),
+        IsAssumedInFuture = x.Any(y => y.IsAssumedInFuture == true),
+        WaterAreas = x.ToList()
+    }).OrderBy(x => x.WaterRegionName).ToList();
+
+    string GetWaterRegions(List<AlienSpeciesAssessment2023FreshWaterRegion> regions)
+    {
+        var regionText = string.Empty;
+
+        for (var i = 0; i < regions.Count; i++)
+        {
+            if (i < regions.Count - 1)
+                regionText += $"{regions[i].WaterRegionName}, ";
+            if (i == regions.Count - 1)
+                regionText += $"{regions[i].WaterRegionName}.";
+        }
+        return regionText;
+    }
 }
 
 @*
 This is the original code for Regional spread. We have removed the tabs for the innsight bacause the second tab has no content yet. Remove the bottom code and use the commented code when reverting to tabs yet again. 
-Remember to also change the heading in constants by removing " i Norge".
+Remember to also change the heading in constants by removing " i Norge" Also, the part with tables for regionally alien is not included in the commented part, it needs to be.
     
 <div id="@nameof(Constants.HeadingsNo.RegionalSpread)">
     <div class="page_section_header">
@@ -249,7 +272,7 @@ Remember to also change the heading in constants by removing " i Norge".
             </div>
             <div is-visible="isRegionallyAlien">
                 <table class="numbers-table">
-                    <caption class="table-title">Regionalt fremmed utbradelse</caption>
+                    <caption class="table-title">Vannregioner hvor arten har enten kjent utbredelse, antatt utbredelse i dag eller antatt utbredelse om 50 år.</caption>
                     <tbody>
                         <tr>
                             <td>Vannregion</td>
@@ -258,7 +281,7 @@ Remember to also change the heading in constants by removing " i Norge".
                             <td>Antatt utbredelse i dag</td>
                             <td>Antatt utbredelse om 50 år</td>
                         </tr>
-                        @foreach (var waterRegion in waterRegions)
+                        @foreach (var waterRegion in waterRegionsRegionallyAlien)
                         {
                             <tr>
                                 <td>@waterRegion.WaterRegionName</td>
@@ -306,6 +329,9 @@ Remember to also change the heading in constants by removing " i Norge".
                         }
                     </tbody>
                 </table>
+                
+                <p is-visible="Model.FreshWaterRegionModel.IsWaterArea">Arten har naturlig utbredelse i vannområder innenfor følgende vannregioner: @GetWaterRegions(waterRegionsNaturalOccurence)</p>
+                <p is-visible="!Model.FreshWaterRegionModel.IsWaterArea">Artens naturlige utbredelse omfatter følgende vannregioner:  @GetWaterRegions(waterRegionsNaturalOccurence)</p>
             </div>
         </div>
     </div>

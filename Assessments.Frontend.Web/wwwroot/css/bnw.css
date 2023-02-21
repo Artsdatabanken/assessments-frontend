@@ -549,3 +549,11 @@
 .darktheme.highcontrast .main button.primary {
     background: #8a0014;
 }
+
+.darktheme .success {
+    color: #7ae57a;
+}
+
+.darktheme .error {
+    color: #e55440;
+}

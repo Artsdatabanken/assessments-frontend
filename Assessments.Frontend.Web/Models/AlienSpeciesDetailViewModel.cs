@@ -4,6 +4,7 @@ using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using Assessments.Mapping.AlienSpecies.Helpers;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -89,8 +90,10 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
                 Category = assessment.Category,
                 CurrentPresenceComment = assessment.CurrentPresenceComment,
-                IsSvalbard = assessment.EvaluationContext == Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.S,
+                IsSvalbard = assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S,
+                NameRank = assessment.ScientificName.ScientificNameRank,
                 RegionOccurrences = assessment.RegionOccurrences,
+                FreshWaterRegionModel = assessment.FreshWaterRegionModel,
                 RiskAssessmentIntroductionsLow = assessment.RiskAssessmentIntroductionsLow,
                 RiskAssessmentIntroductionsBest = assessment.RiskAssessmentIntroductionsBest,
                 RiskAssessmentIntroductionsHigh = assessment.RiskAssessmentIntroductionsHigh,
@@ -113,7 +116,8 @@ namespace Assessments.Frontend.Web.Models
                 }).ToArray(),
                 ScientificName = assessment.ScientificName.ScientificName,
                 ScientificNameId = assessment.ScientificName.ScientificNameId.Value,
-                TaxonRank = assessment.ScientificName.ScientificNameRank // TODO: get scientificNameRank when it exists in the model
+                TaxonRank = assessment.ScientificName.ScientificNameRank, // TODO: get scientificNameRank when it exists in the model
+                SpeciesIsOnBannedList = AlienSpeciesAssessment2023ProfileHelper.AlienSpeciesBanList().Contains(assessment.ScientificName.ScientificNameId.Value)
             };
         }
 

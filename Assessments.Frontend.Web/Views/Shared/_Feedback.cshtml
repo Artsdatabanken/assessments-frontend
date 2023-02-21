@@ -112,7 +112,7 @@ else if (emailIsValid)
             <input asp-for="ExpertGroup" type="hidden" />
             <input asp-for="Type" type="hidden" />
             <button class="primary" type="submit">Send inn skjema</button>
-                <a asp-controller="Feedback" asp-action="ForgetValidation" asp-route-code="@validationCode" asp-route-returnurl="@returnUrl" onclick="return confirm('Er du sikker?')">Glem meg?</a>
+                <a asp-controller="Feedback" asp-action="ForgetValidation" asp-route-code="@validationCode" asp-route-returnurl="@returnUrl" onclick="return confirm('Er du sikker?')">Glem meg (sletter e-postadressen)</a>
         </form>
     </div>
 }

@@ -17,4 +17,10 @@
         <hr />
         <partial name="/Views/Shared/_Links.cshtml" />
     </div>
+    <h3 is-visible="@Model.SpeciesIsOnBannedList">Forbudsliste</h3>
+    <div is-visible="@Model.SpeciesIsOnBannedList">
+        <a href="https://lovdata.no/dokument/SF/forskrift/2015-06-19-716#KAPITTEL_9" class="link-styled">
+            Denne arten er på Forbudslista
+        </a>
+    </div>
 </div>

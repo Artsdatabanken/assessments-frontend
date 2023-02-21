@@ -253,20 +253,56 @@ Remember to also change the heading in constants by removing " i Norge".
                     <tbody>
                         <tr>
                             <td>Vannregion</td>
-                            <td>Vannområde</td>
+                            @*<td>Vannområde</td>*@
                             <td>Kjent utbredelse</td>
                             <td>Antatt utbredelse i dag</td>
                             <td>Antatt utbredelse om 50 år</td>
                         </tr>
-                        @foreach (var area in waterRegions)
+                        @foreach (var waterRegion in waterRegions)
                         {
                             <tr>
-                                <td>@area.WaterRegionName</td>
-                                <td>@area.Name</td>
-                                <td><span is-visible="area.IsKnown" class="material-icons">check</span></td>
-                                <td><span is-visible="area.IsAssumedToday" class="material-icons">check</span></td>
-                                <td><span is-visible="area.IsAssumedInFuture" class="material-icons">check</span></td>
+                                <td>@waterRegion.WaterRegionName</td>
+                                @*<td>
+                                    <span class="collapse_water_area">
+                                        Utvid vannregionen
+                                        <button onclick="toggleWaterArea(@waterRegion.WaterRegionName.Replace(" ", "_"))">
+                                            <span class="material-icons expanded_icon">expand_less</span>
+                                            <span class="material-icons collapsed_icon">expand_more</span>
+                                        </button>
+                                    </span>
+                                </td>*@
+                                <td>
+                                    <span is-visible="waterRegion.IsKnown"><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsKnown"><span class="material-icons error">close</span>Nei</span>
+                                </td>
+                                <td>
+                                    <span is-visible="waterRegion.IsAssumedToday"><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsAssumedToday"><span class="material-icons error">close</span>Nei</span>
+                                </td>
+                                <td>
+                                    <span is-visible="waterRegion.IsAssumedInFuture"><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsAssumedInFuture"><span class="material-icons error">close</span>Nei</span>
+                                </td>
                             </tr>
+                            @*foreach (var waterArea in waterRegion.WaterAreas)
+                            {
+                                <tr class="@waterRegion.WaterRegionName.Replace(" ", "_")">
+                                    <td>@waterArea.WaterRegionName</td>
+                                    <td>@waterArea.Name</td>
+                                    <td>
+                                        <span is-visible="waterArea.IsKnown"><span class="material-icons">check</span>Ja</span>
+                                        <span is-visible="!waterArea.IsKnown">Nei</span>
+                                    </td>
+                                    <td>
+                                        <span is-visible="waterArea.IsAssumedToday"><span class="material-icons">check</span>Ja</span>
+                                        <span is-visible="!waterArea.IsAssumedToday">Nei</span>
+                                    </td>
+                                    <td>
+                                        <span is-visible="waterArea.IsAssumedInFuture"><span class="material-icons">check</span>Ja</span>
+                                        <span is-visible="!waterArea.IsAssumedInFuture">Nei</span>
+                                    </td>
+                                </tr>
+                            }*@
                         }
                     </tbody>
                 </table>

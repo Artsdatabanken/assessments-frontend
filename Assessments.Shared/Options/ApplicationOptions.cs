@@ -11,9 +11,7 @@
     {
         public bool Enabled { get; set; }
 
-        public bool EnableExport { get; set; }
-
-        public bool EnableCitation { get; set; }
+        public bool IsHearing { get; set; }
 
         public bool TransformAssessments { get; set; }
     }

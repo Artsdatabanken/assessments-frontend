@@ -4,24 +4,18 @@
 @{
     var evaluationContextText = Model.IsSvalbard ? "på Svalbard" : "i Norge";
     var isAlienSpecie = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie;
+    var isRegionallyAlien = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien;
     var isDoorKnocker = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
     var isEffectWithoutReproduction = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction;
     var isDoorKnockerOrEffectNoRep = isDoorKnocker || isEffectWithoutReproduction;
     var showInteractiveMap = isAlienSpecie && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
 
-    var knownToday = new MapViewModel
+    var knownOrAssumedToday = new MapViewModel
     {
-        MapName = "known_today",
-        MapText = Constants.AlienSpecies2023KnownOccurrence,
-        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList()
-    };
-
-    var isAssumedToday = new MapViewModel
-    {
-        MapName = "is_assumed_today",
-        MapText = Constants.AlienSpecies2023AssumedOccurrence,
-        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true).ToList()
+        MapName = "known_or_assumed_today",
+        MapText = Constants.AlienSpecies2023KnownOrAssumedOccurrence,
+        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true ||  x.IsAssumedToday == true).ToList()
     };
 
     var isAssumedInFuture = new MapViewModel
@@ -30,13 +24,43 @@
         MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
     };
+
+    var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
+    {
+        WaterRegionName = x.Key,
+        IsKnown = x.Any(y => y.IsKnown == true),
+        IsAssumedToday = x.Any(y => y.IsAssumedToday == true),
+        IsAssumedInFuture = x.Any(y => y.IsAssumedInFuture == true),
+        WaterAreas = x.ToList()
+    }).OrderBy(x => x.WaterRegionName).ToList();
+
+    var waterRegionsNaturalOccurence = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == false)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
+    {
+        WaterRegionName = x.Key,
+        IsKnown = x.Any(y => y.IsKnown == true),
+        IsAssumedToday = x.Any(y => y.IsAssumedToday == true),
+        IsAssumedInFuture = x.Any(y => y.IsAssumedInFuture == true),
+        WaterAreas = x.ToList()
+    }).OrderBy(x => x.WaterRegionName).ToList();
+
+    string GetWaterRegions(List<AlienSpeciesAssessment2023FreshWaterRegion> regions)
+    {
+        var regionText = string.Empty;
+
+        for (var i = 0; i < regions.Count; i++)
+        {
+            if (i < regions.Count - 1)
+                regionText += $"{regions[i].WaterRegionName}, ";
+            if (i == regions.Count - 1)
+                regionText += $"{regions[i].WaterRegionName}.";
+        }
+        return regionText;
+    }
 }
-
-
 
 @*
 This is the original code for Regional spread. We have removed the tabs for the innsight bacause the second tab has no content yet. Remove the bottom code and use the commented code when reverting to tabs yet again. 
-Remember to also change the heading in constants by removing " i Norge".
+Remember to also change the heading in constants by removing " i Norge" Also, the part with tables for regionally alien is not included in the commented part, it needs to be.
     
 <div id="@nameof(Constants.HeadingsNo.RegionalSpread)">
     <div class="page_section_header">
@@ -80,14 +104,12 @@ Remember to also change the heading in constants by removing " i Norge".
                     </table>
                     <div is-visible="@isAlienSpecie">
                         <h3>Regionvis utbredelse</h3>
-                        <div is-visible="Model.IsSvalbard" class="map triple_map">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownToday" />
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedToday" />
+                        <div is-visible="Model.IsSvalbard" class="map double_map">
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownOrAssumedToday" />
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture"/>
                         </div>
-                        <div is-visible="!Model.IsSvalbard" class="map triple_map">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownToday" />
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
+                        <div is-visible="!Model.IsSvalbard" class="map double_map">
+                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
                             <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
                         </div>
                     </div> 
@@ -156,7 +178,7 @@ Remember to also change the heading in constants by removing " i Norge".
     <div id="domestic_spread">
         <div id="show_occurence_area">
             <h3>Forekomstareal</h3>
-            <table class="numbers-table" is-visible="isAlienSpecie">
+            <table class="numbers-table" is-visible="isAlienSpecie || isRegionallyAlien">
                 <tr>
                     <th>Forekomstareal</th>
                     <th>I dag </th>
@@ -186,14 +208,12 @@ Remember to also change the heading in constants by removing " i Norge".
             </table>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
-                <div is-visible="Model.IsSvalbard" class="map triple_map">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownToday" />
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedToday" />
+                <div is-visible="Model.IsSvalbard" class="map double_map">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownOrAssumedToday" />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture" />
                 </div>
-                <div is-visible="!Model.IsSvalbard" class="map triple_map">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownToday" />
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedToday" />
+                <div is-visible="!Model.IsSvalbard" class="map double_map">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>
             </div>
@@ -238,6 +258,69 @@ Remember to also change the heading in constants by removing " i Norge".
                     forekomstareal om 50 år: <br />
                     @Html.Raw(Model.CurrentPresenceComment)
                 </p>
+            </div>
+            <div is-visible="isRegionallyAlien">
+                <table class="numbers-table">
+                    <caption class="table-title">Vannregioner hvor arten har enten kjent utbredelse, antatt utbredelse i dag eller antatt utbredelse om 50 år.</caption>
+                    <tbody>
+                        <tr>
+                            <td>Vannregion</td>
+                            @*<td>Vannområde</td>*@
+                            <td>Kjent utbredelse</td>
+                            <td>Antatt utbredelse i dag</td>
+                            <td>Antatt utbredelse om 50 år</td>
+                        </tr>
+                        @foreach (var waterRegion in waterRegionsRegionallyAlien)
+                        {
+                            <tr>
+                                <td>@waterRegion.WaterRegionName</td>
+                                @*<td>
+                                    <span class="collapse_water_area">
+                                        Utvid vannregionen
+                                        <button onclick="toggleWaterArea(@waterRegion.WaterRegionName.Replace(" ", "_"))">
+                                            <span class="material-icons expanded_icon">expand_less</span>
+                                            <span class="material-icons collapsed_icon">expand_more</span>
+                                        </button>
+                                    </span>
+                                </td>*@
+                                <td>
+                                    <span is-visible="waterRegion.IsKnown"><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsKnown"><span class="material-icons error">close</span>Nei</span>
+                                </td>
+                                <td>
+                                    <span is-visible="waterRegion.IsAssumedToday"><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsAssumedToday"><span class="material-icons error">close</span>Nei</span>
+                                </td>
+                                <td>
+                                    <span is-visible="waterRegion.IsAssumedInFuture"><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsAssumedInFuture"><span class="material-icons error">close</span>Nei</span>
+                                </td>
+                            </tr>
+                            @*foreach (var waterArea in waterRegion.WaterAreas)
+                            {
+                                <tr class="@waterRegion.WaterRegionName.Replace(" ", "_")">
+                                    <td>@waterArea.WaterRegionName</td>
+                                    <td>@waterArea.Name</td>
+                                    <td>
+                                        <span is-visible="waterArea.IsKnown"><span class="material-icons">check</span>Ja</span>
+                                        <span is-visible="!waterArea.IsKnown">Nei</span>
+                                    </td>
+                                    <td>
+                                        <span is-visible="waterArea.IsAssumedToday"><span class="material-icons">check</span>Ja</span>
+                                        <span is-visible="!waterArea.IsAssumedToday">Nei</span>
+                                    </td>
+                                    <td>
+                                        <span is-visible="waterArea.IsAssumedInFuture"><span class="material-icons">check</span>Ja</span>
+                                        <span is-visible="!waterArea.IsAssumedInFuture">Nei</span>
+                                    </td>
+                                </tr>
+                            }*@
+                        }
+                    </tbody>
+                </table>
+                
+                <p is-visible="Model.FreshWaterRegionModel.IsWaterArea">Arten har naturlig utbredelse i vannområder innenfor følgende vannregioner: @GetWaterRegions(waterRegionsNaturalOccurence)</p>
+                <p is-visible="!Model.FreshWaterRegionModel.IsWaterArea">Artens naturlige utbredelse omfatter følgende vannregioner:  @GetWaterRegions(waterRegionsNaturalOccurence)</p>
             </div>
         </div>
     </div>

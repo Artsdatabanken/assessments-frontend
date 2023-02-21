@@ -1,4 +1,6 @@
-﻿namespace Assessments.Mapping.AlienSpecies.Model
+﻿using System.Collections.Generic;
+
+namespace Assessments.Mapping.AlienSpecies.Model
 {
     public class AlienSpeciesAssessment2023FreshWaterRegion
     {
@@ -41,5 +43,10 @@
         ///  Is the species assumed to occur in the water region in the future (within 50 years)
         /// </summary>
         public bool IsAssumedInFuture { get; set; }
+
+        /// <summary>
+        /// A list of water regions when water regions are grouped together
+        /// </summary>
+        public List<AlienSpeciesAssessment2023FreshWaterRegion> WaterAreas { get; set; }
     }
 }

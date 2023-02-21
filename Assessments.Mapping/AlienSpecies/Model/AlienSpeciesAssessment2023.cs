@@ -642,6 +642,6 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Hybrid species without its own assessment. Reasoning
         /// </summary>
-        public string IsHybridWithoutOwnRiskAssessmentDescription { get; set; }
+        public string HybridWithoutOwnRiskAssessmentDescription { get; set; }
     }
 }

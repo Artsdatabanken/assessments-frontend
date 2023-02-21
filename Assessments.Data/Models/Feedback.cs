@@ -11,6 +11,9 @@ namespace Assessments.Data.Models
 
         public int AssessmentId { get; set; }
 
+        [MaxLength(200)]
+        public string ScientificName { get; set; }
+
         public int Year { get; set; }
 
         public FeedbackType Type { get; set; }

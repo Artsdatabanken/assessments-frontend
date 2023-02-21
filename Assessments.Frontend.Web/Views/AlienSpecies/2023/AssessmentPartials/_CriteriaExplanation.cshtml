@@ -55,10 +55,10 @@
     var hasContentA = showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction || showNumericalEstimation || showViableAnalysis;
     var hasContentB = isSpatiotemporalDataset || isEstimatedIncreaseInAOOReproducingUnaided || isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion || isEstimatedIncreaseInAOODoorKnockers;
     var hasContentC = assessment.ImpactedNatureTypes != null && assessment.ImpactedNatureTypes.Count != 0 && assessment.ImpactedNatureTypes.Any(x => x.ColonizedArea != "0.0");
-    var hasContentD = (assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0) || (assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD));
-    var hasContentE = (assessment.SpeciesSpeciesInteractions != null && assessment.SpeciesSpeciesInteractions.Count() != 0) || (assessment.SpeciesNaturetypeInteractions != null && assessment.SpeciesNaturetypeInteractions.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation)) || (!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE));
-    var hasContentF = showFTable || !string.IsNullOrEmpty(assessment.ThreatenedNatureTypesAffectedDomesticDescription);
-    var hasContentG = showGTable || !string.IsNullOrEmpty(assessment.CommonNatureTypesAffectedDomesticDescription);
+    var hasContentD = (assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0) || (assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD));
+    var hasContentE = (assessment.SpeciesSpeciesInteractions != null && assessment.SpeciesSpeciesInteractions.Count() != 0) || (assessment.SpeciesNaturetypeInteractions != null && assessment.SpeciesNaturetypeInteractions.Count() != 0) || (!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE));
+    var hasContentF = showFTable;
+    var hasContentG = showGTable;
     var hasContentH = showHTable || showGeneticContaminationUncertaintyDocumentation;
     var hasContentI = showITable || showParasitePathogenTransmissionUncertaintyDocumentation;
 
@@ -345,7 +345,7 @@
             <p>    
                 @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) )
             </p>
-            <div is-visible="!showIsNk" class="collapsible initially_closed">
+            <div class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">
@@ -524,7 +524,7 @@
             <p>    
                 @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyC, false) )
             </p>
-            <div is-visible="!showIsNk && hasContentC" class="collapsible initially_closed">
+            <div is-visible="hasContentC" class="collapsible initially_closed">
                 <div class="collapsible_header">
                     <h3>Vis detaljer</h3>
                     <button onclick="toggleCollapsible(this)">

@@ -44,17 +44,13 @@
             {
                 <span>@listToShow[i].Region.DisplayName().</span>
             }
-        }
-        if (listToShow.Count == 0)
-        {
-            <span>ingen angitte områder.</span>
-        }
-    }
-    
+        }        
+    }   
 
 }
 
 <div class="map-box-container">
+     
     <svg viewBox="0 0 172.13006 278.71942"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:svg="http://www.w3.org/2000/svg">
@@ -241,6 +237,24 @@
             </path>
         </g>
     </svg>
+
+    <ul class="map-legend">    
+        <li>            
+            <span>Kjent utberedelse</span>
+            <span class="indicator">
+                <span class="indicatorcontent sea known_today"></span>
+                <span class="indicatorcontent known_today"></span>
+            </span>
+        </li>
+        <li>
+            <span>Antatt utberedelse</span>
+            <span class="indicator">
+                <span class="indicatorcontent sea is_assumed_in_future"></span>
+                <span class="indicatorcontent is_assumed_in_future"></span>
+            </span>            
+        </li>
+    </ul>
+
     <div class="map-description"> 
         <b>@Model.MapText</b><br/>
         <span>
@@ -258,10 +272,12 @@
                     <div>
                         <br/>
                         <b>Kjent utberedelse</b><br/>
+                        <span is-visible="knownToday.Count == 0">Arten er ikke kjent i noen områder</span>
                         @{makeFormattedList(knownToday);}
                         <br/><br/>
                         <b>Antatt utberedelse</b><br/>
-                        Alle i listen ovenfor + 
+                        <span is-visible="assumedToday.Count == 0 && knownToday.Count == 0">Det antas at arten ikke finnes i noen områder</span>
+                        <span is-visible="assumedToday.Count == 0 && knownToday.Count > 0">Arten er antatt å kun finnes i de kjente områdene</span>
                         @{makeFormattedList(assumedToday);}
                     </div>
                 }
@@ -270,20 +286,8 @@
                 else
                 {                    
                     makeFormattedList(@Model.RegionOccurrences);
-                        <br/><br/>
-                        <span class="indicator">
-                            <span class="indicatorcontent sea known_today"></span>
-                            <span class="indicatorcontent known_today"></span>
-                        </span>
-                        <span>Kjent utberedelse</span><br/>
-
-                        <span>
-                        <span class="indicator">
-                            <span class="indicatorcontent sea is_assumed_in_future"></span>
-                            <span class="indicatorcontent is_assumed_in_future"></span>
-                        </span>
-                        <span>Antatt utberedelse</span>
-                    </span>
+                    <span is-visible="Model.RegionOccurrences.Count == 0">Det antas ingen utberedelse om 50 år <!-- TODO: Hide map? --></span>
+                       
                 }
             
         }

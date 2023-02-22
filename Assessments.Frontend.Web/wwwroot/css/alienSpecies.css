@@ -81,11 +81,6 @@ h1, h2, h3 {
     }
 }
 
-.dropdown {
-    background: #5e3063;
-}
-
-
 @media only screen and (max-width: 940px) {
     .title_header {
         background: black;

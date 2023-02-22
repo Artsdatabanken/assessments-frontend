@@ -17,7 +17,7 @@
 //    </div>
 //</div >
 
-const hideClassName = 'hide';
+const hideClassName = 'hide-element';
 const collapsibleClassName = 'collapsible';
 
 const toggleCollapsible = buttonElement => {

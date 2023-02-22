@@ -33,7 +33,7 @@
             RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
             SpeciesGroup = assessment.SpeciesGroup,
             SpeciesGroupImageUrl = speciesGroupImageUrl,
-            SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene", // TODO: add correct link for alien species
+            SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene", // TODO: add correct link for alien species
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
     };
@@ -60,7 +60,7 @@
             Name = x.DisplayName(),
             NameShort = x.ToString()
         }).Reverse().ToArray(),
-        MethodUrl = "https://artsdatabanken.no/pages/239659"
+                MethodUrl = "https://artsdatabanken.no/Pages/339785/Risikokategorier_og_kriterier"
     };
 
     var ingressViewModel = new IngressViewModel()

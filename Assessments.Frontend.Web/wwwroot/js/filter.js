@@ -245,13 +245,16 @@ if (filters) {
     const updateToggleAll = (el) => {
         if (!el) return;
 
-        const shouldToggleSubGroup = Array.prototype.some.call(markAllInputs, input => input.id === el.id);
+        if (markAllInputs) {
+            const shouldToggleSubGroup = Array.prototype.some.call(markAllInputs, input => input.id === el.id);
+
+            if (shouldToggleSubGroup) {
+                const subFilters = document.getElementsByClassName(`${el.id}_input`);
+                toggleSubGroup(subFilters, el);
+            }
+        }
         const classNames = Array.prototype.filter.call(el.classList, name => name.indexOf('_input') != -1);
 
-        if (shouldToggleSubGroup) {
-            const subFilters = document.getElementsByClassName(`${el.id}_input`);
-            toggleSubGroup(subFilters, el);
-        }
         if (classNames.length && !classNames.includes('insect_input')) {
             classNames.forEach(name => {
                 const idIndex = name.indexOf('_input');

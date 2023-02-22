@@ -35,7 +35,7 @@ h1, h2, h3 {
 }
 
 .header button.menuitems:not(:active,:focus,:hover) {
-    background: #5e3063;
+    background: #3d1f41;
 }
 
 /* ACTIVE LINK COLOUR */
@@ -80,11 +80,6 @@ h1, h2, h3 {
         background: #5e3063;
     }
 }
-
-.dropdown {
-    background: #5e3063;
-}
-
 
 @media only screen and (max-width: 940px) {
     .title_header {

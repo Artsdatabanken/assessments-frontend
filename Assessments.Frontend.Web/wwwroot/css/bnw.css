@@ -6,8 +6,8 @@
 
 .themeselector {
     position: absolute;
-    top: -2px;
-    right: 3px;
+    top: 0;
+    right: 1px;
     width: 68px;
     padding: 0;
     z-index: 3;

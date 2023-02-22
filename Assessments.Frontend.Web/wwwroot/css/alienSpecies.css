@@ -35,7 +35,7 @@ h1, h2, h3 {
 }
 
 .header button.menuitems:not(:active,:focus,:hover) {
-    background: #5e3063;
+    background: #3d1f41;
 }
 
 /* ACTIVE LINK COLOUR */

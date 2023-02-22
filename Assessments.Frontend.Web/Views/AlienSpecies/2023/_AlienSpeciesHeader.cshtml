@@ -13,20 +13,10 @@
 }
 
 <div class="title_header">
-    @if (!Environment.IsProduction())
-    {
-        <a asp-controller="AlienSpecies" asp-action="Index" class="alien-species">
-            <span class="full_title">@Model.Title</span>
-            <span class="short_title">@Model.TitleShort</span>
-        </a>
-    } else
-    {
-        <a href="https://artsdatabanken.no/fremmedartslista2018" class="fremmedartlink">
-            <img src="https://design.artsdatabanken.no/list-icons/FA.png" />
-            <span>Fremmedartslista</span>
-            <span class="material-icons bigarrow">keyboard_arrow_right</span>
-        </a>
-    }
+    <a asp-controller="AlienSpecies" asp-action="Index" class="alien-species">
+        <span class="full_title">@Model.Title</span>
+        <span class="short_title">@Model.TitleShort</span>
+    </a>
 
     <partial name="/Views/Shared/_PageMenu.cshtml" model="@pageMenuViewModel" />
 </div>

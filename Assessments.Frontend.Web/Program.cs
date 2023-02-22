@@ -60,7 +60,8 @@ builder.Services.AddSendGrid(options => { options.ApiKey = builder.Configuration
 
 builder.Services.Configure<ApplicationOptions>(builder.Configuration.GetSection(nameof(ApplicationOptions)));
 
-builder.Services.AddDataProtection().SetApplicationName("Assessments").PersistKeysToDbContext<AssessmentsDbContext>();
+if (!builder.Environment.IsDevelopment())
+    builder.Services.AddDataProtection().SetApplicationName("Assessments").PersistKeysToDbContext<AssessmentsDbContext>();
 
 var app = builder.Build();
 

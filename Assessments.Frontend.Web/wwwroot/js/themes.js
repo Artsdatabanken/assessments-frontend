@@ -65,10 +65,10 @@ if (cookiesave && getCookie('theme') != null) {
     const initialContrast = matchMedia('(forced-colors: active)');
     const initialTheme = matchMedia('(prefers-color-scheme: dark)');
 
-    function themeChecks() {
+    const themeChecks = () => {
         // Detects user preference for high contrast and dark mode themes
         var mainparent = document.body;
-        if (initialTheme.matches) {
+        if (initialTheme && initialTheme.matches) {
             let darkmodebutton = document.getElementById("darkmodebutton");
             toggleOnOff(darkmodebutton, "active");
             mainparent.classList.add("darktheme");          

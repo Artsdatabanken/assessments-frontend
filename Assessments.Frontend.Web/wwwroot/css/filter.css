@@ -188,6 +188,14 @@
     cursor:pointer;
 }
 
+/* CSS specific to iOS devices */
+@supports (-webkit-overflow-scrolling: touch) {
+    .filter_scroll_area {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
 /* FILTER */
 .arrow-down {
     border: 0px;

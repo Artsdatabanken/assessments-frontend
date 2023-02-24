@@ -177,12 +177,12 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Wether the species' score on the effect axis would be lower in the absence of current or future climate changes 
         /// </summary>
-        public bool? RiskAssessmentClimateEffectsEcoEffect { get; set; }
+        public bool? ClimateEffectsEcoEffect { get; set; }
 
         /// <summary>
         /// Further information about the effects of current or future climate changes 
         /// </summary>
-        public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+        public string ClimateEffectsDocumentation { get; set; }
 
         /// <summary>
         /// Short conclusion/summary of the impact assessment. Free text field
@@ -212,7 +212,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 
         /// </summary>
-        public bool? RiskAssessmentClimateEffectsInvasionpotential { get; set; }
+        public bool? ClimateEffectsInvasionpotential { get; set; }
 
         /// <summary>
         /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 

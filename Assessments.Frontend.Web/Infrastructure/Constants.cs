@@ -328,7 +328,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string ClimateEffectExplanationBoth = " Både delkategori for økologisk effekt og invasjonspotensial ville ";
 
 
-        public const string HasGeographicVariationDocumentation = "Nærmere beskrivelse av artens geografiske variasjon i risiko: ";
+        //public const string HasGeographicVariationDocumentation = "Nærmere beskrivelse av artens geografiske variasjon i risiko: ";
         public const string NoLowerCategoryThan = "Arten kunne ikke ha fått lavere risikokategori enn ";
         public const string LowerCategoryThan = "Arten kunne ha fått lavere risikokategori enn ";
         public const string LowerCategoryThanEnding = "i deler av sitt potensielle forekomstareal.";

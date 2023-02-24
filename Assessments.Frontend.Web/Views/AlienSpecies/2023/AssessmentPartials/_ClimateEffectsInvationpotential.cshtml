@@ -2,9 +2,9 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var hasClimateEffectsInvasionpotential = Model.Assessment.RiskAssessmentClimateEffectsInvasionpotential == true;   
-    var hasClimateEffectsEcoEffect = Model.Assessment.RiskAssessmentClimateEffectsEcoEffect == true;   
-    var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.RiskAssessmentClimateEffectsDocumentation != "";
+    var hasClimateEffectsInvasionpotential = Model.Assessment.ClimateEffectsInvasionpotential == true;   
+    var hasClimateEffectsEcoEffect = Model.Assessment.ClimateEffectsEcoEffect == true;   
+    var hasRiskAssessmentClimateEffectsDocumentation = Model.Assessment.ClimateEffectsDocumentation != "";
 }
 
 <div id="@nameof(Constants.HeadingsNo.ClimateEffectsInvationpotential)">
@@ -39,6 +39,6 @@
                             
     <div is-visible="(hasClimateEffectsInvasionpotential || hasClimateEffectsEcoEffect) && hasRiskAssessmentClimateEffectsDocumentation">
         <h3>Betydningen av klimaendringer:</h3>
-        <p>@Model.Assessment.RiskAssessmentClimateEffectsDocumentation</p>
+        <p>@Model.Assessment.ClimateEffectsDocumentation</p>
     </div>
 </div>

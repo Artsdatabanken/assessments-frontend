@@ -95,15 +95,15 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Klimaeffekter invasjonspotensial")]
         [Description("Angir om skåren på invasjonsaksen ville vært lavere i fravær av pågående eller framtidige klimaendringer")]
-        public bool? RiskAssessmentClimateEffectsInvasionPotential { get; set; }
+        public bool? ClimateEffectsInvasionPotential { get; set; }
 
         [DisplayName("Klimaeffekter økologisk effekt")]
         [Description("Angir om skåren på effektaksen ville vært lavere i fravær av pågående eller framtidige klimaendringer")]
-        public bool? RiskAssessmentClimateEffectsEcoEffect { get; set; }
+        public bool? ClimateEffectsEcoEffect { get; set; }
 
         [DisplayName("Klimaeffekter Beskrivelse")]
         [Description("Nærmere begrunnelse for påvirkning av pågående eller framtidige klimaendringer på artens delkategori på aksene")]
-        public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+        public string ClimateEffectsDocumentation { get; set; }
 
         [DisplayName("Risikokategori 2018")]
         [Description("Endelig kategori i 2018 etter GEIAAS kategorier and kriterier")]

@@ -293,7 +293,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return string.Empty;
             }
 
-            return climateDoc;
+            return climateDoc.StripUnwantedHtml();
         }
 
         internal static string GetSpeciesGroup(string taxonHierarchy)

@@ -329,7 +329,7 @@ button.list_header {
     }
 
     .filter_scroll_area {
-        max-height: calc(100vh - 110px);
+        max-height: calc(100vh - 170px);
         overflow-y: scroll;
         border-top: 1px solid gray;
         border-bottom: 1px solid gray;

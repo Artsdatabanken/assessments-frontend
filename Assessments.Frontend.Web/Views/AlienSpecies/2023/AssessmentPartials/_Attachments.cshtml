@@ -14,7 +14,7 @@
     {
         <tr>
             <td>@attachment.FileName</td>
-            <td>@attachment.Description</td>
+            <td>@Html.Raw(attachment.Description)</td>
             <td>
                 <a asp-controller="AlienSpecies"  asp-action="Attachment"  asp-route-attachmentId="@attachment.Id" target="_blank">
                     Last ned

@@ -55,8 +55,11 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Bladfotinger")]
         Branchiopoda,
 
-        [Display(Name = "Maxillopoda")]
-        Maxillopoda,
+        [Display(Name = "Hoppekreps")]
+        Copepoda,
+
+        [Display(Name = "Rankefotinger")]
+        Thecostraca,
 
         //[Display(Name = "Alger")]
         //Rhodophyta, Chlorophyta, Phaeophyceae,

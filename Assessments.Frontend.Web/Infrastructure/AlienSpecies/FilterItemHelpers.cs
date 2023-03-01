@@ -401,7 +401,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sbr",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = "Phaeophyceae"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Phaeophyceae)
             },
             new()
             {
@@ -409,7 +409,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sga",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = "Chlorophyta"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Chlorophyta)
             },
             new()
             {
@@ -417,7 +417,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sra",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = "Rhodophyta"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Rhodophyta)
             }
         };
 
@@ -429,7 +429,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sbi",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/biller",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Biller.svg",
-                Description = "Coleoptera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Coleoptera)
             },
             new()
             {
@@ -437,7 +437,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sbo",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/b%c3%b8rstehaler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/B%c3%b8rstehale.svg",
-                Description = "Zygentoma"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Zygentoma)
             },
             new()
             {
@@ -445,7 +445,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "skn",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/knelere",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Knelere.svg",
-                Description = "Mantodea"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Mantodea)
             },
             new()
             {
@@ -453,7 +453,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sll",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/lusoglopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/LusogLopper.svg",
-                Description = "Phthiraptera, Siphonatera"
+                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Phthiraptera)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Siphonatera)}"
             },
             new()
             {
@@ -461,7 +461,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sne",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/nebbmunner",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Nebbmunner.svg",
-                Description = "Hemiptera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Hemiptera)
             },
             new()
             {
@@ -469,7 +469,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "srv",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/rettvinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Rettvinger.svg",
-                Description = "Orthoptera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Orthoptera)
             },
             new()
             {
@@ -477,7 +477,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "ssf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/sommerfugler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Sommerfugler.svg",
-                Description = "Lepidoptera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Lepidoptera)
             },
             new()
             {
@@ -485,7 +485,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "ssl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/st%c3%b8vlus",
                 ImageUrl = "https://design.artsdatabanken.no/icons/St%c3%b8vlus.svg",
-                Description = "Psocoptera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Psocoptera)
             },
             new()
             {
@@ -493,7 +493,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sto",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/tovinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Tovinger.svg",
-                Description = "Diptera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Diptera)
             },
             new()
             {
@@ -501,7 +501,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "str",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/trips",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Trips.svg",
-                Description = "Thysanoptera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Thysanoptera)
             },
             new()
             {
@@ -509,7 +509,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sve",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/vepser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Vepser.svg",
-                Description = "Hymenoptera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Hymenoptera)
             }
         };
 
@@ -521,7 +521,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sst",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/storkrepser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Storkrepser.svg",
-                Description = "Malacostraca"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Malacostraca)
             },
             new()
             {
@@ -529,15 +529,23 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sbf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bladfotinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bladfotinger.svg",
-                Description = "Branchiopoda"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Branchiopoda)
             },
             new()
             {
-                Name = "Maxillopoda",
-                NameShort = "sma",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/maxillopoda",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Maxillopoda.svg",
-                Description = "Maxillopoda"
+                Name = "Hoppekreps",
+                NameShort = "sho",
+                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/copepoda",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Copepoda.svg",
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Copepoda)
+            },
+            new()
+            {
+                Name = "Rankefotinger",
+                NameShort = "srf",
+                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/thecostraca",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Thecostraca.svg",
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Thecostraca)
             }
         };
 
@@ -562,7 +570,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sam",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/amfibier",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Amfibier.svg",
-                Description = "Amphibia"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Amphibia)
             },
             new()
             {
@@ -570,7 +578,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sba",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bakterier",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bakterier.svg",
-                Description = "Bacteria"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Bacteria)
             },
             new()
             {
@@ -578,7 +586,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sbl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bl%c3%b8tdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bl%c3%b8tdyr.svg",
-                Description = "Mollusca"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Mollusca)
             },
             new()
             {
@@ -586,7 +594,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sed",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/edderkoppdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Edderkoppdyr.svg",
-                Description = "Arachnida"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Arachnida)
             },
             new()
             {
@@ -594,7 +602,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "seg",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/eggsporesopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Eggsporesopper.svg",
-                Description = "Oomycota"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Oomycota)
             },
             new()
             {
@@ -602,7 +610,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sfi",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/fisker",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Fisker.svg",
-                Description = "Actinopterygii"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Actinopterygii)
             },
             new()
             {
@@ -610,7 +618,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sfl",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/flatormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Flatorm.svg",
-                Description = "Platyhelminthes"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Platyhelminthes)
             },
             new()
             {
@@ -618,7 +626,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sfu",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/fugler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Fugler.svg",
-                Description = "Aves"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Aves)
             },
             new()
             {
@@ -626,7 +634,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sha",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/havedderkopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Havedderkopper.svg",
-                Description = "Pycnogonida"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Pycnogonida)
             },
             new()
             {
@@ -634,7 +642,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "shj",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/hjuldyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Hjuldyr.svg",
-                Description = "Rotifera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Rotifera)
             },
             new()
             {
@@ -642,7 +650,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sin",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/insekter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Insekter.svg",
-                Description = "Insecta",
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Insecta),
                 SubGroup = new()
                 {
                     Filters = AlienSpecies2023Insects,
@@ -655,7 +663,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "ska",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                Description = "Ctenophora"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Ctenophora)
             },
             new()
             {
@@ -663,7 +671,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "skd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
-                Description = "Ascidiacea, Tunicata"
+                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Ascidiacea)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Tunicata)}"
             },
             new()
             {
@@ -671,7 +679,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "skp",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/karplanter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Karplanter.svg",
-                Description = "Magnoliophyta, Pinophyta, Pteridophyta"
+                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Magnoliophyta)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Pinophyta)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Pteridophyta)}"
             },
             new()
             {
@@ -679,7 +687,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "skr",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/krepsdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = "Crustacea",
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Crustacea),
                 SubGroup = new()
                 {
                     Filters = AlienSpecies2023Crustacean,
@@ -692,7 +700,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sle",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/leddormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Leddormer.svg",
-                Description = "Annelida"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Annelida)
             },
             new()
             {
@@ -700,7 +708,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mangefotinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mangefotinger.svg",
-                Description = "Myriapoda, Chilopoda, Diplopoda"
+                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Myriapoda)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Chilopoda)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Diplopoda)}"
             },
             new()
             {
@@ -708,7 +716,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smb",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mosdyrogbegerormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mosdyr.svg",
-                Description = "Ectoprocta, Entoprocta"
+                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Ectoprocta)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Entoprocta)}"
             },
             new()
             {
@@ -716,7 +724,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "smo",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/moser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Moser.svg",
-                Description = "Bryophyta, Marchantiophyta"
+                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Bryophyta)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Marchantiophyta)}"
             },
             new()
             {
@@ -724,7 +732,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "snd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/nesledyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Nesledyr.svg",
-                Description = "Cnidaria"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Cnidaria)
             },
             new()
             {
@@ -732,7 +740,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "spd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pattedyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Pattedyr.svg",
-                Description = "Mammalia"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Mammalia)
             },
             new()
             {
@@ -740,7 +748,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "spi",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pigghuder",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Pigghuder.svg",
-                Description = "Echinodermata"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Echinodermata)
             },
             new()
             {
@@ -748,7 +756,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sre",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/reptiler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Reptiler.svg",
-                Description = "Reptilia"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Reptilia)
             },
             new()
             {
@@ -756,7 +764,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sru",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/rundormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Rundormer.svg",
-                Description = "Nematoda"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Nematoda)
             },
             new()
             {
@@ -764,7 +772,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "ssv",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/svamper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Svamper.svg",
-                Description = "Porifera"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Porifera)
             },
             new()
             {
@@ -772,7 +780,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = "sso",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/sopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Sopper.svg",
-                Description = "Fungi"
+                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Fungi)
             }
         };
 

@@ -1,0 +1,9 @@
+﻿@model AlienSpeciesDetailViewModel
+
+@{
+}
+
+<div class="page_section_header">
+    <h2>@Constants.HeadingsNo.KnowMore @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank)</h2>
+    <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
+</div>

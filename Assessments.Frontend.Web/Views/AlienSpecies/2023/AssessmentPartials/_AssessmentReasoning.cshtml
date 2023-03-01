@@ -10,7 +10,6 @@
     var isMisidentified = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified;
     var isAllBubTaxaAssessedSeparately = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.AllSubTaxaAssessedSeparately;
     var isHybridWithoutOwnRiskAssessment = Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.HybridWithoutOwnRiskAssessment;
-    var showRaceExplanation = Model.RaceViewModel.SpeciesGroup == "Pattedyr";
 }
 
 <div id="@nameof(Constants.HeadingsNo.AssesmentReasoning)">
@@ -37,9 +36,6 @@
             <p is-visible="@showUncertaintyEstablishmentTimeDescription">
                 @Html.Raw(Model.UncertaintyEstablishmentTimeDescription)
             </p>
-        </div>
-        <div is-visible="showRaceExplanation">
-            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RaceExplanation.cshtml" model="Model.RaceViewModel" />
         </div>
     </div>
 </div>

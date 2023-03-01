@@ -39,13 +39,6 @@ namespace Assessments.Frontend.Web.Models
                 HybridWithoutOwnRiskAssessmentDescription = assessment.HybridWithoutOwnRiskAssessmentDescription,
                 ImportPathways = assessment.ImportPathways,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
-                RaceViewModel = new RaceViewModel
-                {
-                    NameHierarchy = assessment.NameHiearchy,
-                    ScientificName = assessment.ScientificName,
-                    SpeciesGroup = assessment.SpeciesGroup,
-                    VernacularName = assessment.VernacularName
-                },
                 References = assessment.References.Select(x => new CommonSimpleReference
                 {
                     ReferenceId = x.ReferenceId,

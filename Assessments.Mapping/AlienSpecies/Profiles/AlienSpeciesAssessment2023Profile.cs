@@ -229,13 +229,18 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ParasitePathogenTransmissionUncertaintyDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.ICritInsecurity.StripUnwantedHtml()))
                 .ForMember(dest => dest.MicroHabitat, opt => opt.MapFrom(src => src.Habitats))
                 .ForPath(dest => dest.YearsFirstRecord.ObservedEstablishmentInNorway, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetYearsFirstObserved(src.RiskAssessment, src.SpeciesStatus)))
-                .ForPath(dest => dest.YearsFirstRecord.Description, opt => opt.MapFrom(src => src.FurtherInfo))
+                .ForPath(dest => dest.YearsFirstRecord.Description, opt => opt.MapFrom(src => src.FurtherInfo.StripUnwantedHtml()))
                 .ForMember(dest => dest.NaturalOrigins, opt => opt.PreCondition(src => src.Terrestrial || src.Limnic))
+                .ForMember(dest => dest.NaturalOriginUnknownDocumentation, opt => opt.MapFrom(src => src.NaturalOriginUnknownDocumentation.StripUnwantedHtml()))
                 .ForMember(dest => dest.NaturalOriginMarine, opt => opt.PreCondition(src => src.Marine))
+                .ForMember(dest => dest.NaturalOriginMarineDetails, opt => opt.MapFrom(src => src.NaturalOriginMarineDetails.StripUnwantedHtml()))
                 .ForMember(dest => dest.CurrentInternationalExistenceAreas, opt => opt.PreCondition(src => src.Terrestrial || src.Limnic))
+                .ForMember(dest => dest.CurrentInternationalExistenceAreasUnknownDocumentation, opt => opt.MapFrom(src => src.CurrentInternationalExistenceAreasUnknownDocumentation.StripUnwantedHtml()))
                 .ForMember(dest => dest.CurrentInternationalExistenceMarineAreas, opt => opt.PreCondition(src => src.Marine))
+                .ForMember(dest => dest.CurrentInternationalExistenceMarineAreasDetails, opt => opt.MapFrom(src => src.CurrentInternationalExistenceMarineAreasDetails.StripUnwantedHtml()))
                 .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => src.ReproductionGenerationTime))
                 .ForMember(dest => dest.ArrivedCountryFrom, opt => opt.PreCondition(src => src.ArrivedCountryFrom is not null && src.ArrivedCountryFrom.Count > 0))
+                .ForMember(dest => dest.ArrivedCountryFromDetails, opt => opt.MapFrom(src => src.ArrivedCountryFromDetails.StripUnwantedHtml()))
                 .ForMember(dest => dest.AreaOfOccupancyInStronglyAlteredEcosystems, opt => opt.MapFrom(src => src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.HasValue ? "Value" + src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.ToString() : "NotChosen"))
                 .ForMember(dest => dest.AllSubTaxaAssessedSeparatelyDescription, opt => opt.MapFrom(src => src.AllSubTaxaAssessedSeparatelyDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.HybridWithoutOwnRiskAssessmentDescription, opt => opt.MapFrom(src => src.IsHybridWithoutOwnRiskAssessmentDescription.StripUnwantedHtml()))
@@ -294,6 +299,19 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ScientificName, opt => opt.MapFrom(src => src.Taxon.ScientificName))
                 .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.Taxon.ScientificNameAuthor))
                 .ForMember(dest => dest.VernacularName, opt => opt.MapFrom(src => src.Taxon.VernacularName));
+
+            CreateMap<FA4.NaturalOrigin, AlienSpeciesAssessment2023NaturalOrigin>(MemberList.None)
+                .ForMember(dest => dest.ClimateZone, opt => 
+                {
+                    opt.PreCondition(src => src.Oceania || src.Africa || src.Asia || src.Europe || src.NorthAndCentralAmerica || src.SouthAmerica);
+                    opt.MapFrom(src => src.ClimateZone.Replace(";", ""));
+                })
+                .ForMember(dest => dest.Continent, opt =>
+                {
+                    opt.PreCondition(src => src.Oceania || src.Africa || src.Asia || src.Europe || src.NorthAndCentralAmerica || src.SouthAmerica);
+                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetNaturalOriginContinent(src.Oceania, src.Africa, src.Asia, src.Europe, src.NorthAndCentralAmerica, src.SouthAmerica));
+                })
+                ;
 
         }
     }

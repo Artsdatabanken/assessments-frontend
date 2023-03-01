@@ -587,7 +587,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species natural global distribution (terrestrial and limnic species)
         /// </summary>
-        public List<NaturalOrigin> NaturalOrigins { get; set; }
+        public List<AlienSpeciesAssessment2023NaturalOrigin> NaturalOrigins { get; set; }
 
         /// <summary>
         /// The species natural global distribution (terrestrial and limnic species). Description.
@@ -607,7 +607,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species current global distribution including alien distribution (terrestrial and limnic species)
         /// </summary>
-        public List<NaturalOrigin> CurrentInternationalExistenceAreas { get; set; }
+        public List<AlienSpeciesAssessment2023NaturalOrigin> CurrentInternationalExistenceAreas { get; set; }
 
         /// <summary>
         /// The species current global distribution including alien distribution (terrestrial and limnic species). Description.

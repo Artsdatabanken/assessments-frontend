@@ -930,5 +930,39 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 103590
             };
         }
+
+        internal static List<AlienSpeciesAssessment2023NaturalOriginContinent> GetNaturalOriginContinent(bool oceania, bool africa, bool asia, bool europe, bool northAndCentralAmerica, bool southAmerica)
+        {
+            var continent = new List<AlienSpeciesAssessment2023NaturalOriginContinent>();
+            if (!oceania && !africa && !asia && !europe && !northAndCentralAmerica && !southAmerica)
+            {
+                return continent;
+            }
+            if (oceania)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Oceania);
+            }
+            if (africa)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Africa);
+            }
+            if (asia)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Asia);
+            }
+            if (europe)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Europe);
+            }
+            if (northAndCentralAmerica)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.AmericaNorth);
+            }
+            if (southAmerica)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.AmericaNorth);
+            }
+            return continent;
+        }
     }
 }

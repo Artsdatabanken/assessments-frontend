@@ -19,9 +19,6 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Børstehaler")]
         Zygentoma,
 
-        [Display(Name = "Knelere")]
-        Mantodea,
-
         [Display(Name = "Lus og lopper")]
         Phthiraptera,
 
@@ -30,9 +27,6 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 
         [Display(Name = "Nebbmunner")]
         Hemiptera,
-
-        [Display(Name = "Rettvinger")]
-        Orthoptera,
 
         [Display(Name = "Sommerfugler")]
         Lepidoptera,
@@ -55,8 +49,11 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Bladfotinger")]
         Branchiopoda,
 
-        [Display(Name = "Maxillopoda")]
-        Maxillopoda,
+        [Display(Name = "Hoppekreps")]
+        Copepoda,
+
+        [Display(Name = "Rankefotinger")]
+        Thecostraca,
 
         //[Display(Name = "Alger")]
         //Rhodophyta, Chlorophyta, Phaeophyceae,

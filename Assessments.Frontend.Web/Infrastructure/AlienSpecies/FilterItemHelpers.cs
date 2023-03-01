@@ -441,14 +441,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Knelere",
-                NameShort = "skn",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/knelere",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Knelere.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Mantodea)
-            },
-            new()
-            {
                 Name = "Lus og lopper",
                 NameShort = "sll",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/lusoglopper",
@@ -462,14 +454,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/nebbmunner",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Nebbmunner.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Hemiptera)
-            },
-            new()
-            {
-                Name = "Rettvinger",
-                NameShort = "srv",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/rettvinger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Rettvinger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Orthoptera)
             },
             new()
             {

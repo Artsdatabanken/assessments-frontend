@@ -934,10 +934,6 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         internal static List<AlienSpeciesAssessment2023NaturalOriginContinent> GetNaturalOriginContinent(bool oceania, bool africa, bool asia, bool europe, bool northAndCentralAmerica, bool southAmerica)
         {
             var continent = new List<AlienSpeciesAssessment2023NaturalOriginContinent>();
-            if (!oceania && !africa && !asia && !europe && !northAndCentralAmerica && !southAmerica)
-            {
-                return continent;
-            }
             if (oceania)
             {
                 continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Oceania);

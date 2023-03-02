@@ -22,14 +22,14 @@
             <i> @Model.Assessment.Category.DisplayName()</i> @Model.Assessment.Category
             @Constants.LowerCategoryThanEnding                   
         </p>
-            <h3  is-visible="hasCauses">Årsak til geografisk variasjon i risiko</h3>
+        <h3  is-visible="hasCauses">Årsak til geografisk variasjon i risiko</h3>
            
-            <ul class="indented_list">
-                @foreach (var variation in Model.Assessment.GeographicalVariation)
-                {
-                    <li>@variation.DisplayName()</li>
-                }
-            </ul>
+        <ul class="indented_list">
+            @foreach (var variation in Model.Assessment.GeographicalVariation)
+            {
+                <li>@variation.DisplayName()</li>
+            }
+        </ul>
         <br/>
         
         <p is-visible="hasGeographicVariationDocumentation">

@@ -301,7 +301,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.VernacularName, opt => opt.MapFrom(src => src.Taxon.VernacularName));
 
             CreateMap<FA4.NaturalOrigin, AlienSpeciesAssessment2023NaturalOrigin>(MemberList.None)
-                .ForMember(dest => dest.ClimateZone, opt => 
+                .ForMember(dest => dest.ClimateZone, opt =>
                 {
                     opt.PreCondition(src => src.Oceania || src.Africa || src.Asia || src.Europe || src.NorthAndCentralAmerica || src.SouthAmerica);
                     opt.MapFrom(src => src.ClimateZone.Replace(";", ""));

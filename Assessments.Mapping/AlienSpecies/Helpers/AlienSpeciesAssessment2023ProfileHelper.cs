@@ -845,7 +845,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         public static string GetWaterRegionName(string id)
         {
             // https://raw.githubusercontent.com/Artsdatabanken/Fremmedartsbase2023/main/Prod.Api/Resources/WaterRegion.geojson
-            
+
             return id switch
             {
                 "5103" => "Agder",
@@ -870,7 +870,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         public static AlienSpeciesAssessment2023ScientificName[] GetNameHiearchy(List<FA4.ScientificNameWithRankId> srcNameHiearchy)
         {
-            var path = srcNameHiearchy == null ? Array.Empty<AlienSpeciesAssessment2023ScientificName>()  : srcNameHiearchy.Skip(1).Reverse().Select(x => new AlienSpeciesAssessment2023ScientificName()
+            var path = srcNameHiearchy == null ? Array.Empty<AlienSpeciesAssessment2023ScientificName>() : srcNameHiearchy.Skip(1).Reverse().Select(x => new AlienSpeciesAssessment2023ScientificName()
             {
                 ScientificNameFormatted = x.ScientificName,
                 ScientificNameRank = (AlienSpeciesAssessment2023ScientificNameRank)x.Rank,

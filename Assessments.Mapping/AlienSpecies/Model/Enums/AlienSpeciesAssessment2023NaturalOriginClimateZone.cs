@@ -4,6 +4,9 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023NaturalOriginClimateZone
     {
+        [Display(Name = "Ukjent klimasone")]
+        Unknown,
+
         [Display(Name = "Polart")]
         Polar,
 
@@ -35,9 +38,6 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         Subtropichighlands,
 
         [Display(Name = "Tropisk")]
-        Tropic,
-
-        [Display(Name = "Ukjent klimasone")]
-        Unknown
+        Tropic
     }
 }

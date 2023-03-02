@@ -19,27 +19,26 @@
     <div is-visible="hasGeographicVariationInCategory">
         <p>
             @Constants.LowerCategoryThan
-            <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category
+            <i> @Model.Assessment.Category.DisplayName()</i> @Model.Assessment.Category
             @Constants.LowerCategoryThanEnding                   
         </p>
-            <h3  is-visible="hasCauses">Årsak til geografisk variasjon i risiko</h3>
+        <h3  is-visible="hasCauses">Årsak til geografisk variasjon i risiko</h3>
            
-            <ul class="indented_list">
-                @foreach (var variation in Model.Assessment.GeographicalVariation)
-                {
-                    <li>@variation.DisplayName()</li>
-                }
-            </ul>
+        <ul class="indented_list">
+            @foreach (var variation in Model.Assessment.GeographicalVariation)
+            {
+                <li>@variation.DisplayName()</li>
+            }
+        </ul>
         <br/>
         
         <p is-visible="hasGeographicVariationDocumentation">
-            <b>@Constants.HasGeographicVariationDocumentation</b>
             @Html.Raw(geographicVariationDocumentation)
         </p>
     </div>
     <p is-visible="!hasGeographicVariationInCategory">                
         @Constants.NoLowerCategoryThan
-        <i> @Model.Assessment.Category.DisplayName()</i> - @Model.Assessment.Category 
+        <i> @Model.Assessment.Category.DisplayName()</i> @Model.Assessment.Category 
         @Constants.LowerCategoryThanEnding
     </p>
 </div>

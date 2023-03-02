@@ -1002,3 +1002,8 @@ span.area i {
 table caption.table-title {
     text-align: left;
 }
+
+.numbers-table.align-normal td:not(:first-child),
+.numbers-table.align-normal th:not(:first-child) {
+    text-align: left;
+}

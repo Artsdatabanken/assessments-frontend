@@ -293,7 +293,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 return string.Empty;
             }
 
-            return climateDoc;
+            return climateDoc.StripUnwantedHtml();
         }
 
         internal static string GetSpeciesGroup(string taxonHierarchy)
@@ -845,7 +845,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         public static string GetWaterRegionName(string id)
         {
             // https://raw.githubusercontent.com/Artsdatabanken/Fremmedartsbase2023/main/Prod.Api/Resources/WaterRegion.geojson
-            
+
             return id switch
             {
                 "5103" => "Agder",
@@ -870,7 +870,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
 
         public static AlienSpeciesAssessment2023ScientificName[] GetNameHiearchy(List<FA4.ScientificNameWithRankId> srcNameHiearchy)
         {
-            var path = srcNameHiearchy == null ? Array.Empty<AlienSpeciesAssessment2023ScientificName>()  : srcNameHiearchy.Skip(1).Reverse().Select(x => new AlienSpeciesAssessment2023ScientificName()
+            var path = srcNameHiearchy == null ? Array.Empty<AlienSpeciesAssessment2023ScientificName>() : srcNameHiearchy.Skip(1).Reverse().Select(x => new AlienSpeciesAssessment2023ScientificName()
             {
                 ScientificNameFormatted = x.ScientificName,
                 ScientificNameRank = (AlienSpeciesAssessment2023ScientificNameRank)x.Rank,
@@ -929,6 +929,36 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 103588,
                 103590
             };
+        }
+
+        internal static List<AlienSpeciesAssessment2023NaturalOriginContinent> GetNaturalOriginContinent(bool oceania, bool africa, bool asia, bool europe, bool northAndCentralAmerica, bool southAmerica)
+        {
+            var continent = new List<AlienSpeciesAssessment2023NaturalOriginContinent>();
+            if (oceania)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Oceania);
+            }
+            if (africa)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Africa);
+            }
+            if (asia)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Asia);
+            }
+            if (europe)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.Europe);
+            }
+            if (northAndCentralAmerica)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.AmericaNorth);
+            }
+            if (southAmerica)
+            {
+                continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.AmericaNorth);
+            }
+            return continent;
         }
     }
 }

@@ -1082,28 +1082,28 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.c1.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c1)
+                Name = AlienSpeciesAssessment2023SpeciesStatus.C1.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.C1)
             },
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.c0.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c0)
+                Name = AlienSpeciesAssessment2023SpeciesStatus.C0.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.C0)
             },
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.b2.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.b2)
+                Name = AlienSpeciesAssessment2023SpeciesStatus.B2.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.B2)
             },
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.b1.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.b1)
+                Name = AlienSpeciesAssessment2023SpeciesStatus.B1.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.B1)
             },
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.a.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.a)
+                Name = AlienSpeciesAssessment2023SpeciesStatus.A.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.A)
             }
         };
 
@@ -1111,13 +1111,13 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.c3.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c3)
+                Name = AlienSpeciesAssessment2023SpeciesStatus.C3.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.C3)
             },
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.c2.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.c2)
+                Name = AlienSpeciesAssessment2023SpeciesStatus.C2.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.C2)
             },
             new()
             {

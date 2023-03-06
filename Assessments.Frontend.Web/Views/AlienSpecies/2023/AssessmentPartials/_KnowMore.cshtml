@@ -3,6 +3,8 @@
 
 @{
     var areaText = Model.Assessment.EvaluationContext == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.N ? "i Norge" : "på Svalbard";
+    var isRegionallyAlien = Model.Assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien;
+    var isDoorKnocker = Model.Assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
 
     string ComingFromText()
     {
@@ -71,6 +73,15 @@
             return $"{speciesLevel} har både seksuell og aseksuell reproduksjon.";
         return string.Empty;
     }
+
+    string GetCameToNorwayFrom()
+    {
+        if (isRegionallyAlien)
+            return $"{Helpers.FixSpeciesLevel("{Art}en", Model.Assessment.ScientificName.ScientificNameRank)} kom til området der den er regionalt fremmed fra:";
+        if (isDoorKnocker)
+            return $"{Helpers.FixSpeciesLevel("{Art}en", Model.Assessment.ScientificName.ScientificNameRank)} kan komme til {ComingFromText()} fra:";
+        return $"{Helpers.FixSpeciesLevel("{Art}en", Model.Assessment.ScientificName.ScientificNameRank)} kom til {ComingFromText()} fra:";
+    }
 }
 
 <div id="@nameof(Constants.HeadingsNo.KnowMore)">
@@ -79,18 +90,19 @@
         <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
     <div>
-        <h3>Artens etableringsklasse @areaText</h3>
+        <h3>Etableringsklasse @areaText</h3>
         <p>
             Hvor godt etablert en fremmed art er @areaText varierer fra at den ikke finnes her, til at den har sporadiske kortlevde forekomster og til at den er etablert.
         </p>
         <p>
             @GetSpeciesStatusText()
         </p>
-        <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="numbers-table">
-            <caption>Første observasjon av arten @areaText</caption>
+        <p>@Html.Raw(Model.Assessment.UncertaintyStatusDescription)</p>
+        <h3>Første observasjon av arten @( isRegionallyAlien ? "der den er regionalt fremmed" : areaText )</h3>
+        <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="numbers-table small-table">
             <tbody>
                 <tr>
-                    <td>Første observasjon @areaText av…</td>
+                    <td>Første observasjon av:</td>
                     <td>Årstall</td>
                     <td>Usikkerhet i årstall (> ± 5 år)</td>
                 </tr>
@@ -107,13 +119,14 @@
         <p is-visible="!string.IsNullOrEmpty(Model.Assessment.YearsFirstRecord.Description)">
             @Html.Raw(Model.Assessment.YearsFirstRecord.Description)
         </p>
-        <p>Kommer til @ComingFromText() fra: @( GetArrivedCountryFromString(Model.Assessment.ArrivedCountryFrom) )
+        <p>
+            @( GetCameToNorwayFrom() ) @(GetArrivedCountryFromString(Model.Assessment.ArrivedCountryFrom))
         </p>
         <p>@Model.Assessment.ArrivedCountryFromDetails</p>
     </div>
     <div>
         <h3>Global utbredelse</h3>
-        <p>Artens naturlige utbredelse.</p>
+        <h4>@Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) naturlige utbredelse.</h4>
         <p>
             Naturlig utbredelse omfatter de områdene arten forekommer i uten at det ligger menneskelig transport bak (dvs. alle former for tilsikta eller utilsikta forflytning av arten).
         </p>
@@ -132,6 +145,24 @@
                 @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) naturlige marine utbredelse: @(GetNaturalOriginsMarineString(Model.Assessment.NaturalOriginMarine)).
             </p>
             <p>@Html.Raw(Model.Assessment.NaturalOriginMarineDetails)</p>
+        </div>
+        <h4>@Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) nåværende utbredelse</h4>
+        <p>Nåværende utbredelse viser @Helpers.FixSpeciesLevel("{art}ens", Model.Assessment.ScientificName.ScientificNameRank) totale utbredelse. Det vil si områder der @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) finnes naturlig (se naturlig utbredelse) og områder som er et resultat av menneskelig forflytning, tilsikta eller utilsikta, av @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank). </p>
+        <div is-visible="isLimnic || isTerrestrial">
+            <ul is-visible="Model.Assessment.CurrentInternationalExistenceAreas != null || Model.Assessment.CurrentInternationalExistenceAreas.Count != 0">
+                @foreach (var origin in Model.Assessment.CurrentInternationalExistenceAreas)
+                {
+                        <li is-visible="origin.Continent != null">@origin.ClimateZone.DisplayName(): @(GetNaturalOriginsString(origin.Continent))</li>
+                }
+            </ul>
+            <br />
+            <p>@Html.Raw(Model.Assessment.CurrentInternationalExistenceAreasUnknownDocumentation)</p>
+        </div>
+        <div is-visible="isMarine">
+            <p is-visible="Model.Assessment.CurrentInternationalExistenceMarineAreas != null && Model.Assessment.CurrentInternationalExistenceMarineAreas.Count != 0">
+                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) nåværende marine utbredelse: @(GetNaturalOriginsMarineString(Model.Assessment.CurrentInternationalExistenceMarineAreas)).
+            </p>
+            <p>@Html.Raw(Model.Assessment.CurrentInternationalExistenceMarineAreasDetails)</p>
         </div>
     </div>
     <div>

@@ -30,36 +30,6 @@
         return $"{text} {Model.Assessment.SpeciesStatus.Description().Replace("i Norge", areaText)}.";
     }
 
-    string GetArrivedCountryFromString(List<AlienSpeciesAssessment2023ArrivedCountryFrom> textList)
-    {
-        var stringList = new List<string>();
-        foreach (var element in textList)
-        {
-            stringList.Add(element.DisplayName().ToLowerInvariant());
-        }
-        return Helpers.GetListString(stringList);
-    }
-
-    string GetNaturalOriginsString(List<AlienSpeciesAssessment2023NaturalOriginContinent> textList)
-    {
-        var stringList = new List<string>();
-        foreach (var element in textList)
-        {
-            stringList.Add(element.DisplayName().ToLowerInvariant());
-        }
-        return Helpers.GetListString(stringList);
-    }
-
-    string GetNaturalOriginsMarineString(List<AlienSpeciesAssessment2023NaturalOriginMarine> textList)
-    {
-        var stringList = new List<string>();
-        foreach (var element in textList)
-        {
-            stringList.Add(element.DisplayName().ToLowerInvariant());
-        }
-        return Helpers.GetListString(stringList);
-    }
-
     string GetReproductionString()
     {
         var hasSexual = Model.Assessment.ReproductionSexual;
@@ -120,7 +90,7 @@
             @Html.Raw(Model.Assessment.YearsFirstRecord.Description)
         </p>
         <p>
-            @( GetCameToNorwayFrom() ) @(GetArrivedCountryFromString(Model.Assessment.ArrivedCountryFrom))
+            @(GetCameToNorwayFrom()) @Model.Assessment.ArrivedCountryFrom.Select(x => x.DisplayName()).JoinAnd(", ", " og ").ToLowerInvariant()
         </p>
         <p>@Model.Assessment.ArrivedCountryFromDetails</p>
     </div>
@@ -134,15 +104,14 @@
             <ul is-visible="Model.Assessment.NaturalOrigins != null || Model.Assessment.NaturalOrigins.Count != 0">
                 @foreach(var origin in Model.Assessment.NaturalOrigins)
                 {
-                    <li is-visible="origin.Continent != null">@origin.ClimateZone.DisplayName(): @(GetNaturalOriginsString(origin.Continent))</li>
+                    <li is-visible="origin.Continent != null">@origin.ClimateZone.DisplayName(): @(origin.Continent.Select(x => x.DisplayName()).JoinAnd(", ", " og "))</li>
                 }
             </ul>
-            <br />
             <p>@Html.Raw(Model.Assessment.NaturalOriginUnknownDocumentation)</p>
         </div>
         <div is-visible="isMarine">
             <p is-visible="Model.Assessment.NaturalOriginMarine != null && Model.Assessment.NaturalOriginMarine.Count != 0">
-                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) naturlige marine utbredelse: @(GetNaturalOriginsMarineString(Model.Assessment.NaturalOriginMarine)).
+                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) naturlige marine utbredelse: @Model.Assessment.NaturalOriginMarine.Select(x => x.DisplayName()).JoinAnd(", ", " og ").
             </p>
             <p>@Html.Raw(Model.Assessment.NaturalOriginMarineDetails)</p>
         </div>
@@ -150,17 +119,16 @@
         <p>Nåværende utbredelse viser @Helpers.FixSpeciesLevel("{art}ens", Model.Assessment.ScientificName.ScientificNameRank) totale utbredelse. Det vil si områder der @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) finnes naturlig (se naturlig utbredelse) og områder som er et resultat av menneskelig forflytning, tilsikta eller utilsikta, av @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank). </p>
         <div is-visible="isLimnic || isTerrestrial">
             <ul is-visible="Model.Assessment.CurrentInternationalExistenceAreas != null || Model.Assessment.CurrentInternationalExistenceAreas.Count != 0">
-                @foreach (var origin in Model.Assessment.CurrentInternationalExistenceAreas)
+                @foreach (var existenceArea in Model.Assessment.CurrentInternationalExistenceAreas)
                 {
-                        <li is-visible="origin.Continent != null">@origin.ClimateZone.DisplayName(): @(GetNaturalOriginsString(origin.Continent))</li>
+                    <li is-visible="existenceArea.Continent != null">@existenceArea.ClimateZone.DisplayName(): @(existenceArea.Continent.Select(x => x.DisplayName()).JoinAnd(", ", " og "))</li>
                 }
             </ul>
-            <br />
             <p>@Html.Raw(Model.Assessment.CurrentInternationalExistenceAreasUnknownDocumentation)</p>
         </div>
         <div is-visible="isMarine">
             <p is-visible="Model.Assessment.CurrentInternationalExistenceMarineAreas != null && Model.Assessment.CurrentInternationalExistenceMarineAreas.Count != 0">
-                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) nåværende marine utbredelse: @(GetNaturalOriginsMarineString(Model.Assessment.CurrentInternationalExistenceMarineAreas)).
+                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) nåværende marine utbredelse: @Model.Assessment.CurrentInternationalExistenceMarineAreas.Select(x => x.DisplayName()).JoinAnd(", ", " og ").
             </p>
             <p>@Html.Raw(Model.Assessment.CurrentInternationalExistenceMarineAreasDetails)</p>
         </div>

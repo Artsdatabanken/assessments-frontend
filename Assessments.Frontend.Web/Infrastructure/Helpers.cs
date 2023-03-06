@@ -343,23 +343,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             };
             return Helpers.FixSpeciesLevel(replaceString, stringRank);
         }
-
-        public static string GetListString(List<string> textList)
-        {
-            var text = string.Empty;
-            if (textList == null || textList.Count == 0)
-                return text;
-
-            for (var i = 0; i < textList.Count; i++)
-            {
-                text += textList[i];
-                if (i < textList.Count - 2)
-                    text += ", ";
-                else if (i == textList.Count - 2)
-                    text += " og ";
-            }
-            return text;
-        }
     }
 
     public class CategoryComparer : IComparer<string>

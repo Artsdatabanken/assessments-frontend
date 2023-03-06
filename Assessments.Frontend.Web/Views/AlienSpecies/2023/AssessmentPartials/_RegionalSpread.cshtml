@@ -1,5 +1,9 @@
 ﻿@model RegionalSpreadViewModel;
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
+@using Assessments.Shared.Options
+@using Microsoft.Extensions.Options
+
+@inject IOptions<ApplicationOptions> Options
 
 @{
     var evaluationContextText = Model.IsSvalbard ? "på Svalbard" : "i Norge";
@@ -58,117 +62,6 @@
     }
 }
 
-@*
-This is the original code for Regional spread. We have removed the tabs for the innsight bacause the second tab has no content yet. Remove the bottom code and use the commented code when reverting to tabs yet again. 
-Remember to also change the heading in constants by removing " i Norge" Also, the part with tables for regionally alien is not included in the commented part, it needs to be.
-    
-<div id="@nameof(Constants.HeadingsNo.RegionalSpread)">
-    <div class="page_section_header">
-        <h2>@Constants.HeadingsNo.RegionalSpread</h2>
-        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
-    </div>
-    <div class="only-tabs-inside">
-        <button id="domestic_spread_button" class="changetab active" onclick="selectTab('domestic_spread_button', 'domestic_spread' , '@nameof(Constants.HeadingsNo.RegionalSpread)' )">Utbredelse @evaluationContextText</button>
-        <button id="regional_nature_variation_button" class="changetab" onclick="selectTab('regional_nature_variation_button', 'regional_nature_variation' , '@nameof(Constants.HeadingsNo.RegionalSpread)' )">Regional naturvariasjon</button>
-        <div class="tabbed_element_container assessment_tabs">
-            <div id="domestic_spread">
-                <div id="show_occurence_area" >                
-                    <h3>Forekomstareal</h3>
-                    <table class="numbers-table" is-visible="isAlienSpecie">
-                        <tr>
-                            <th>Forekomstareal</th>
-                            <th>I dag </th>
-                            <th>Fremtidig (50 år) </th>
-                        </tr>
-                        <tr>
-                            <td>Kjent  </td>
-                            <td>@Model.AreaOfOccupancyKnown km<sup>2</sup></td>
-                            <td></td>
-                        </tr>
-
-                        <tr>
-                            <td>Antatt lavt anslag</td> 
-                            <td>@Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
-                            <td>@Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
-                        </tr>
-                        <tr>
-                            <td>Antatt beste anslag</td>
-                            <td>@Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
-                            <td>@Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
-                        </tr>
-                        <tr>
-                            <td>Antatt høyt anslag</td>
-                            <td>@Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
-                            <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
-                        </tr>
-                    </table>
-                    <div is-visible="@isAlienSpecie">
-                        <h3>Regionvis utbredelse</h3>
-                        <div is-visible="Model.IsSvalbard" class="map double_map">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownOrAssumedToday" />
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture"/>
-                        </div>
-                        <div is-visible="!Model.IsSvalbard" class="map double_map">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
-                        </div>
-                    </div> 
-                    <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
-                        <tr>
-                            <th>Antatt i løpet av en periode på 10 år</th>
-                            <th>Antall forekomster fra én introduksjon  </th>
-                            <th>Antall ytterligere introduksjoner til norsk natur </th>
-                            <th>Forekomstareal etter 10 år </th>
-                        </tr>
-                        <tr>
-                            <td>Lavt anslag</td> 
-                            <td>@Model.RiskAssessmentOccurrences1Low </td> 
-                            <td>@Model.RiskAssessmentIntroductionsLow </td>
-                            <td>@Model.AreaOfOccupancyFutureLow  km<sup>2</sup></td>
-                        </tr>
-                        <tr>
-                            <td>Beste anslag</td>
-                            <td>@Model.RiskAssessmentOccurrences1Best </td> 
-                            <td>@Model.RiskAssessmentIntroductionsBest </td>
-                            <td>@Model.AreaOfOccupancyFutureBest  km<sup>2</sup></td>
-                        </tr>
-                        <tr>
-                            <td>Høyt anslag</td>
-                            <td>@Model.RiskAssessmentOccurrences1High </td> 
-                            <td>@Model.RiskAssessmentIntroductionsHigh </td>
-                            <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
-                        </tr>
-                    </table>
-                    <div is-visible="@isDoorKnockerOrEffectNoRep">
-                        <div is-visible="Model.IsSvalbard" class="map S">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture"/>
-                        </div>
-                        <div is-visible="!Model.IsSvalbard" class="map N">
-                            <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture"/>
-                        </div> 
-                    </div>
-                    <div is-visible="showCurrentPresenceComment">
-                        <br />
-                        <p>
-                            Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og 
-                            forekomstareal om 50 år: <br />
-                            @Html.Raw(Model.CurrentPresenceComment)
-                        </p>
-                    </div>
-                    @*<div is-visible="@showInteractiveMap"> // TODO: show interactive map here
-                        Interaktivt kart
-                    </div>   *@  @*           
-                </div>
-            </div>
-            <div id="regional_nature_variation">
-                <div>
-                    Bioklimatiske soner og seksjoner hvor arten finnes i dag eller antas å kunne finnes i fremtiden (innen 50 år).
-                </div>
-            </div>
-        </div>
-    </div>
-</div>*@
-
 <div id="@nameof(Constants.HeadingsNo.RegionalSpread)">
     <div class="page_section_header">
         <h2>@Constants.HeadingsNo.RegionalSpread</h2>
@@ -206,6 +99,8 @@ Remember to also change the heading in constants by removing " i Norge" Also, th
                     <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
                 </tr>
             </table>
+            <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isDoorKnocker || isEffectWithoutReproduction)">Andel av antatt forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
+            <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
                 <div is-visible="Model.IsSvalbard" class="map double_map">

@@ -166,6 +166,8 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyFutureLow { get; set; }
 
+        public AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }
+
         public int? AreaOfOccupancyTotalBest { get; set; }
 
         public int? AreaOfOccupancyTotalHigh { get; set; }

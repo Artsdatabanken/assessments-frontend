@@ -441,11 +441,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Lus og lopper",
+                Name = "Lus",
                 NameShort = "sll",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/lusoglopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/LusogLopper.svg",
-                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Phthiraptera)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Siphonatera)}"
+                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Phthiraptera)}"
             },
             new()
             {

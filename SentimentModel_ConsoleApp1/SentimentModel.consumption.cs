@@ -16,7 +16,7 @@ namespace SentimentModel_ConsoleApp1
         public class ModelInput
         {
             [ColumnName(@"Sånn ting")]
-            public string Sånn_ting { get; set; }
+            public string Tried { get; set; }
 
             [ColumnName(@"0/1")]
             public bool _0_1 { get; set; }

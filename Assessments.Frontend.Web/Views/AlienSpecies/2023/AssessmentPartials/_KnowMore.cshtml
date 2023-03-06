@@ -44,6 +44,17 @@
         return string.Empty;
     }
 
+    string GetLimnicOrTerrestrialExpansion()
+    {
+        if (isLimnic && isTerrestrial)
+            return "Limlisk og terrestrisk utbredelse:";
+
+        if (isLimnic)
+            return "Limlisk utbredelse:";
+        
+        return "Terrestrisk utbredelse:";
+    }
+
     string GetCameToNorwayFrom()
     {
         if (isRegionallyAlien)
@@ -101,34 +112,52 @@
             Naturlig utbredelse omfatter de områdene arten forekommer i uten at det ligger menneskelig transport bak (dvs. alle former for tilsikta eller utilsikta forflytning av arten).
         </p>
         <div is-visible="isLimnic || isTerrestrial">
-            <ul is-visible="Model.Assessment.NaturalOrigins != null || Model.Assessment.NaturalOrigins.Count != 0">
-                @foreach(var origin in Model.Assessment.NaturalOrigins)
-                {
-                    <li is-visible="origin.Continent != null">@origin.ClimateZone.DisplayName(): @(origin.Continent.Select(x => x.DisplayName()).JoinAnd(", ", " og "))</li>
-                }
-            </ul>
-            <p>@Html.Raw(Model.Assessment.NaturalOriginUnknownDocumentation)</p>
+            <div is-visible="Model.Assessment.NaturalOrigins != null || Model.Assessment.NaturalOrigins.Count != 0">
+                <p>@GetLimnicOrTerrestrialExpansion()</p>
+                <ul>
+                    @foreach(var origin in Model.Assessment.NaturalOrigins)
+                    {
+                        <li is-visible="origin.Continent != null">@origin.ClimateZone.DisplayName(): @(origin.Continent.Select(x => x.DisplayName()).JoinAnd(", ", " og "))</li>
+                    }
+                </ul>
+            </div>
+            <p><br />@Html.Raw(Model.Assessment.NaturalOriginUnknownDocumentation)</p>
         </div>
         <div is-visible="isMarine">
             <p is-visible="Model.Assessment.NaturalOriginMarine != null && Model.Assessment.NaturalOriginMarine.Count != 0">
-                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) naturlige marine utbredelse: @Model.Assessment.NaturalOriginMarine.Select(x => x.DisplayName()).JoinAnd(", ", " og ").
+                Marin utbredelse: 
+                <ul>
+                    @foreach (var existenceArea in Model.Assessment.NaturalOriginMarine.Select(x => x.DisplayName()))
+                    {
+                        <li is-visible="existenceArea != null">@existenceArea</li>
+                    }
+                </ul>
             </p>
             <p>@Html.Raw(Model.Assessment.NaturalOriginMarineDetails)</p>
         </div>
         <h4>@Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) nåværende utbredelse</h4>
         <p>Nåværende utbredelse viser @Helpers.FixSpeciesLevel("{art}ens", Model.Assessment.ScientificName.ScientificNameRank) totale utbredelse. Det vil si områder der @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) finnes naturlig (se naturlig utbredelse) og områder som er et resultat av menneskelig forflytning, tilsikta eller utilsikta, av @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank). </p>
         <div is-visible="isLimnic || isTerrestrial">
-            <ul is-visible="Model.Assessment.CurrentInternationalExistenceAreas != null || Model.Assessment.CurrentInternationalExistenceAreas.Count != 0">
-                @foreach (var existenceArea in Model.Assessment.CurrentInternationalExistenceAreas)
-                {
-                    <li is-visible="existenceArea.Continent != null">@existenceArea.ClimateZone.DisplayName(): @(existenceArea.Continent.Select(x => x.DisplayName()).JoinAnd(", ", " og "))</li>
-                }
-            </ul>
-            <p>@Html.Raw(Model.Assessment.CurrentInternationalExistenceAreasUnknownDocumentation)</p>
+            <div is-visible="Model.Assessment.CurrentInternationalExistenceAreas != null || Model.Assessment.CurrentInternationalExistenceAreas.Count != 0">
+                <p>@GetLimnicOrTerrestrialExpansion()</p>
+                <ul>
+                    @foreach (var existenceArea in Model.Assessment.CurrentInternationalExistenceAreas)
+                    {
+                        <li is-visible="existenceArea.Continent != null">@existenceArea.ClimateZone.DisplayName(): @(existenceArea.Continent.Select(x => x.DisplayName()).JoinAnd(", ", " og "))</li>
+                    }
+                </ul>
+            </div>
+            <p><br />@Html.Raw(Model.Assessment.CurrentInternationalExistenceAreasUnknownDocumentation)</p>
         </div>
         <div is-visible="isMarine">
             <p is-visible="Model.Assessment.CurrentInternationalExistenceMarineAreas != null && Model.Assessment.CurrentInternationalExistenceMarineAreas.Count != 0">
-                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) nåværende marine utbredelse: @Model.Assessment.CurrentInternationalExistenceMarineAreas.Select(x => x.DisplayName()).JoinAnd(", ", " og ").
+                Marin utbredelse: 
+                <ul>
+                    @foreach (var existenceArea in Model.Assessment.CurrentInternationalExistenceMarineAreas.Select(x => x.DisplayName()))
+                    {
+                        <li is-visible="existenceArea != null">@existenceArea</li>
+                    }
+                </ul>
             </p>
             <p>@Html.Raw(Model.Assessment.CurrentInternationalExistenceMarineAreasDetails)</p>
         </div>

@@ -31,15 +31,10 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Tidligere feilbestemt")]
         MisIdentified,
 
-        // TODO: Remove values below when no assessments have any of these values in AlienSpeciesCategory. At latest, these should be removed before 'innsynet' opens to the public.
+        [Display(Name = "Ikke vurdert fordi det foreligger separate vurderinger av infraspesifikke taksa")]
+        AllSubTaxaAssessedSeparately,
 
-        [Display(Name = "Ikke avgjort")]
-        NotDefined,
-
-        [Display(Name = "Ikke avgjort")]
-        NotApplicable,
-
-        [Display(Name = "Ikke avgjort")]
-        EcoEffectWithoutEstablishment
+        [Display(Name = "Utenfor avgrensningen")]
+        HybridWithoutOwnRiskAssessment
     }
 }

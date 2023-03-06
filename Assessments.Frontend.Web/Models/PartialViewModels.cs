@@ -71,6 +71,8 @@ namespace Assessments.Frontend.Web.Models
         public string View { get; set; }
 
         public int ItemCount { get; set; }
+
+        public bool EnableStatistics { get; set; } = true;
     }
 
     public class CriteriaExplanationViewModel
@@ -85,6 +87,8 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public string AlienStatusExplanation { get; set; }
+
+        public string AllSubTaxaAssessedSeparately { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
@@ -108,11 +112,11 @@ namespace Assessments.Frontend.Web.Models
 
         public bool HasIndoorProduction { get; set; }
 
+        public string HybridWithoutOwnRiskAssessmentDescription { get; set; }
+
         public List<AlienSpeciesAssessment2023Pathways> ImportPathways { get; set; }
 
         public string MisidentifiedDescription { get; set; }
-
-        public RaceViewModel RaceViewModel { get; set; }
 
         public List<CommonSimpleReference> References { get; set; }
 
@@ -152,17 +156,6 @@ namespace Assessments.Frontend.Web.Models
         public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
     }
 
-    public class RaceViewModel
-    {
-        public AlienSpeciesAssessment2023ScientificName[] NameHierarchy { get; set; }
-
-        public AlienSpeciesAssessment2023ScientificName ScientificName { get; set; }
-
-        public string SpeciesGroup { get; set; }
-
-        public string VernacularName { get; set; }
-    }
-
     public class RegionalSpreadViewModel
     {
         public int? AreaOfOccupancyKnown { get; set; }
@@ -179,6 +172,8 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; }
+
         public bool IsSvalbard { get; set; }
 
         public int? RiskAssessmentIntroductionsLow { get; set; }
@@ -193,6 +188,7 @@ namespace Assessments.Frontend.Web.Models
 
         public int? RiskAssessmentOccurrences1High { get; set; }
 
+        public AlienSpeciesAssessment2023ScientificNameRank NameRank { get; set; }
 
         public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
@@ -247,6 +243,7 @@ namespace Assessments.Frontend.Web.Models
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
         public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
+        public bool SpeciesIsOnBannedList { get; set; }
     }
 
     public class TableOfContentsViewModel

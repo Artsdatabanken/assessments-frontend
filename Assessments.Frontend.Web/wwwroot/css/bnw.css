@@ -6,8 +6,8 @@
 
 .themeselector {
     position: absolute;
-    top: -2px;
-    right: 3px;
+    top: 0;
+    right: 1px;
     width: 68px;
     padding: 0;
     z-index: 3;
@@ -548,4 +548,12 @@
 .darktheme.highcontrast .button.primary,
 .darktheme.highcontrast .main button.primary {
     background: #8a0014;
+}
+
+.darktheme .success {
+    color: #7ae57a;
+}
+
+.darktheme .error {
+    color: #e55440;
 }

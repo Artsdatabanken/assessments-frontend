@@ -45,7 +45,7 @@ namespace Assessments.Frontend.Web.Controllers
             using (var workbook = new XLWorkbook())
             {
                 var worksheet = workbook.Worksheets.Add("Tilbakemeldinger");
-                
+
                 worksheet.Cell(1, 1).InsertTable(feedback);
                 workbook.Worksheet(1).Columns().AdjustToContents();
 
@@ -58,7 +58,7 @@ namespace Assessments.Frontend.Web.Controllers
                 var row = 1;
 
                 var attachments = await _dbContext.FeedbackAttachments.Include(x => x.Feedback).AsNoTracking().ToListAsync();
-                
+
                 var baseUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{Request.PathBase.ToUriComponent()}";
 
                 foreach (var attachment in attachments)
@@ -109,7 +109,7 @@ namespace Assessments.Frontend.Web.Controllers
             return File(stream, "application/octet-stream", attachment.FileName);
         }
 
-                public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl)
+        public async Task<IActionResult> ValidateEmail(FeedbackFormViewModel viewModel, string returnUrl)
         {
             ModelState.Remove(nameof(FeedbackFormViewModel.Comment));
 
@@ -128,7 +128,7 @@ namespace Assessments.Frontend.Web.Controllers
                 };
 
                 _dbContext.EmailValidations.Add(emailValidation);
-                
+
                 await _dbContext.SaveChangesAsync();
             }
 
@@ -139,9 +139,9 @@ namespace Assessments.Frontend.Web.Controllers
             };
 
             message.AddTo(new EmailAddress(emailValidation.Email, emailValidation.FullName));
-            
+
             var validationUrl = $"{Request.Scheme}://{Request.Host.ToUriComponent()}{returnUrl}?guid={emailValidation.Guid}#Feedback";
-            
+
             var messageContent = $"<p>Klikk på lenken nedenfor for å bekrefte din e-postadresse. Dette gir deg tilgang til å gi tilbakemelding på Fremmedartsvurderinger i 2023.</p><p><a href='{validationUrl}'>{validationUrl}</a></p>";
 
             var sendMail = await SendMail(message, messageContent);
@@ -186,9 +186,21 @@ namespace Assessments.Frontend.Web.Controllers
             if (validation == null || !validation.Email.Equals(form.Email) || !validation.FullName.Equals(form.FullName))
                 return BadRequest();
 
+            var alienSpeciesAssessments = await DataRepository.GetAlienSpeciesAssessments();
+            var assessment = alienSpeciesAssessments.FirstOrDefault(x => x.Id == form.AssessmentId);
+
+            if (assessment == null)
+            {
+                Logger.LogError("AlienSpeciesAssessment with id {Id} not found", form.AssessmentId);
+                return BadRequest();
+            }
+
+            var scientificName = assessment.ScientificName.ScientificName;
+
             var feedback = new Feedback
             {
                 AssessmentId = form.AssessmentId,
+                ScientificName = scientificName,
                 Year = form.Year,
                 Type = form.Type,
                 ExpertGroup = form.ExpertGroup,
@@ -239,7 +251,7 @@ namespace Assessments.Frontend.Web.Controllers
             var message = new SendGridMessage
             {
                 From = new EmailAddress("noreply@artsdatabanken.no"),
-                Subject = "Tilbakemelding til Fremmedartvurdering 2023 "
+                Subject = $"Tilbakemelding på foreløpig vurdering av {scientificName}"
             };
 
             message.AddTo(new EmailAddress(feedback.Email, feedback.FullName));
@@ -249,7 +261,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (feedback.Attachments.Any())
                 feedbackAttachments = $"<p>Antall vedlegg: {feedback.Attachments.Count}</p>";
 
-            var messageContent = $"<p>Vi har mottatt følgende tilbakemelding:</p><p>{feedback.Comment}</p>{feedbackAttachments}";
+            var messageContent = $"<p>Under innsyn i de foreløpige vurderingene i Fremmedartslista 2023 har vi mottatt følgende tilbakemelding på vurderingen av {feedback.ScientificName}:</p><p>{feedback.Comment}</p>{feedbackAttachments}";
 
             var sendMail = await SendMail(message, messageContent);
 

@@ -48,10 +48,11 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string CategoryChange = "Endring av risikokategori fra 2018";
             public static readonly string ClimateEffectsInvationpotential = "Effekt av klimaendringer";
             public static readonly string GeographicVariationInCategory = "Geografisk variasjon i risiko";
-            public static readonly string RegionalSpread = "Utbredelse";
+            public static readonly string RegionalSpread = "Utbredelse i Norge";
             public static readonly string Attachments = "Filvedlegg";
             public static readonly string ImpactedNatureTypes = "Naturtypetilhørighet";
             public static readonly string SpreadWays = "Spredningsmåter";
+            public static readonly string KnowMore = "Vil du vite mer om";
             public static readonly string References = "Referanser";
         }
 
@@ -292,7 +293,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023FirstPublished = "18.08.2023"; // TODO: Need publishing date
 
-        public const int AlienSpecies2023PageMenuContentId = 239646;
+        public const int AlienSpecies2023PageMenuContentId = 239657; //239645; //239644; //239646;
 
         public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023 - innsyn"; // TODO: remove "innsyn" after innsyn
 
@@ -309,13 +310,15 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Fremmede arter i Norge - med økologisk risiko 2023."; // TODO: insert correct publishing date for citation
 
         public const string AlienSpecies2023Introduction = "Fremmedartslista 2023 lanseres i august. Her kan du se de foreløpige risikovurderingene som er gjort for den nye lista. Har du utfyllende og relevant kunnskap om de vurderte artene, vil vi gjerne ha innspill."; //"Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
-            //" Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter."; TODO: exchange text with outcommented text after innsyn
+                                                                                                                                                                                                                                                                               //" Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter."; TODO: exchange text with outcommented text after innsyn
 
         public const string AlienSpecies2023NoListViewResults = "Kombinasjonen av søk og filter gir ingen treff i Fremmedartslista for 2023.";
 
         public const string AlienSpecies2023KnownOccurrence = "Kjent utbredelse i dag";
 
         public const string AlienSpecies2023AssumedOccurrence = "Antatt utbredelse i dag";
+
+        public const string AlienSpecies2023KnownOrAssumedOccurrence = "Utbredelse i dag";
 
         public const string AlienSpecies2023AssumedInFutureOccurrence = "Antatt utbredelse om 50 år";
 
@@ -326,7 +329,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string ClimateEffectExplanationBoth = " Både delkategori for økologisk effekt og invasjonspotensial ville ";
 
 
-        public const string HasGeographicVariationDocumentation = "Nærmere beskrivelse av artens geografiske variasjon i risiko: ";
         public const string NoLowerCategoryThan = "Arten kunne ikke ha fått lavere risikokategori enn ";
         public const string LowerCategoryThan = "Arten kunne ha fått lavere risikokategori enn ";
         public const string LowerCategoryThanEnding = "i deler av sitt potensielle forekomstareal.";

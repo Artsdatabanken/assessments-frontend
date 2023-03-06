@@ -34,15 +34,17 @@ const changeViewButtons = () => {
         const viewButtons = [listButton, statButton];
 
         viewButtons.forEach(btn => {
-            const checkbox = document.getElementById("view_checkbox");
-            btn.type = "button";
-            btn.onclick = () => {
-                if (btn.value == "stat") {
-                    checkbox.checked = true;
-                } else {
-                    checkbox.checked = false;
+            if (btn) {
+                const checkbox = document.getElementById("view_checkbox");
+                btn.type = "button";
+                btn.onclick = () => {
+                    if (btn.value == "stat") {
+                        checkbox.checked = true;
+                    } else {
+                        checkbox.checked = false;
+                    }
+                    document.getElementById("search_and_filter_form").submit();
                 }
-                document.getElementById("search_and_filter_form").submit();
             }
         })
     }   

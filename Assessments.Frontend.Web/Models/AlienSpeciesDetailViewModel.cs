@@ -1,4 +1,5 @@
 ﻿using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
@@ -22,6 +23,7 @@ namespace Assessments.Frontend.Web.Models
             ExpertStatementViewModel = new ExpertStatementViewModel
             {
                 AlienSpeciesCategory = assessment.AlienSpeciesCategory,
+                AllSubTaxaAssessedSeparately = assessment.AllSubTaxaAssessedSeparatelyDescription,
                 AlienStatusExplanation = assessment.AlienSpeciesDescription,
                 Category = assessment.Category,
                 ChangedFromAlienDescription = assessment.ChangedFromAlienDescription,
@@ -34,15 +36,9 @@ namespace Assessments.Frontend.Web.Models
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 EvaluationContext = assessment.EvaluationContext,
                 HasIndoorProduction = assessment.HasIndoorProduction,
+                HybridWithoutOwnRiskAssessmentDescription = assessment.HybridWithoutOwnRiskAssessmentDescription,
                 ImportPathways = assessment.ImportPathways,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,
-                RaceViewModel = new RaceViewModel
-                {
-                    NameHierarchy = assessment.NameHiearchy,
-                    ScientificName = assessment.ScientificName,
-                    SpeciesGroup = assessment.SpeciesGroup,
-                    VernacularName = assessment.VernacularName
-                },
                 References = assessment.References.Select(x => new CommonSimpleReference
                 {
                     ReferenceId = x.ReferenceId,
@@ -89,8 +85,10 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
                 Category = assessment.Category,
                 CurrentPresenceComment = assessment.CurrentPresenceComment,
-                IsSvalbard = assessment.EvaluationContext == Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.S,
+                IsSvalbard = assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S,
+                NameRank = assessment.ScientificName.ScientificNameRank,
                 RegionOccurrences = assessment.RegionOccurrences,
+                FreshWaterRegionModel = assessment.FreshWaterRegionModel,
                 RiskAssessmentIntroductionsLow = assessment.RiskAssessmentIntroductionsLow,
                 RiskAssessmentIntroductionsBest = assessment.RiskAssessmentIntroductionsBest,
                 RiskAssessmentIntroductionsHigh = assessment.RiskAssessmentIntroductionsHigh,
@@ -113,7 +111,8 @@ namespace Assessments.Frontend.Web.Models
                 }).ToArray(),
                 ScientificName = assessment.ScientificName.ScientificName,
                 ScientificNameId = assessment.ScientificName.ScientificNameId.Value,
-                TaxonRank = assessment.ScientificName.ScientificNameRank // TODO: get scientificNameRank when it exists in the model
+                TaxonRank = assessment.ScientificName.ScientificNameRank, // TODO: get scientificNameRank when it exists in the model
+                SpeciesIsOnBannedList = AlienSpeciesAssessment2023ProfileHelper.AlienSpeciesBanList().Contains(assessment.ScientificName.ScientificNameId.Value)
             };
         }
 

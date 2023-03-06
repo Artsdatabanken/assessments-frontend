@@ -791,7 +791,7 @@ span.area i {
     justify-content:space-between
 }
 
-.hide {
+.hide-element {
     display: none !important;
 }
 
@@ -1001,4 +1001,15 @@ span.area i {
 
 table caption.table-title {
     text-align: left;
+}
+
+.numbers-table.align-normal td:not(:first-child),
+.numbers-table.align-normal th:not(:first-child) {
+    text-align: left;
+}
+
+@media only screen and (min-width: 751px) {
+    .small-table {
+        width: 70%;
+    }
 }

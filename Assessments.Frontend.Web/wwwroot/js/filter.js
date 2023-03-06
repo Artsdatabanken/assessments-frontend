@@ -34,14 +34,20 @@ if (filters) {
 
     const markAllInputs = document.querySelectorAll(".mark_all > input:first-of-type");
         
-    function hasVisited() {
+    const hasVisited = () => {
         // in url: check if this is the first run
-        return init.checked;
+        if (init) {
+            return init.checked;
+        } else {
+            return false;
+        }
     }
 
-    function setVisited() {
+    const setVisited = () => {
         // in url: mark page as visited.
-        init.checked = true;
+        if (init) {
+            init.checked = true;
+        }
     }
 
     function handleFirstTime() {
@@ -181,11 +187,13 @@ if (filters) {
     }
 
     function allChildrenMarkedTriggerMarkAll() {
-        Array.prototype.forEach.call(markAllInputs, input => {
-            if (shouldToggleMarkAll(`${input.id}_input`)) {
-                input.checked = true;
-            }
-        });
+        if (markAllInputs) {
+            Array.prototype.forEach.call(markAllInputs, input => {
+                if (shouldToggleMarkAll(`${input.id}_input`)) {
+                    input.checked = true;
+                }
+            });
+        }
         // redlist species 2021
         if (shouldToggleMarkAll("insect_input")) {
             insectInput.checked = true;
@@ -234,16 +242,19 @@ if (filters) {
         }
     }
 
-    function updateToggleAll(el) {
+    const updateToggleAll = (el) => {
         if (!el) return;
 
-        const shouldToggleSubGroup = Array.prototype.some.call(markAllInputs, input => input.id === el.id);
+        if (markAllInputs) {
+            const shouldToggleSubGroup = Array.prototype.some.call(markAllInputs, input => input.id === el.id);
+
+            if (shouldToggleSubGroup) {
+                const subFilters = document.getElementsByClassName(`${el.id}_input`);
+                toggleSubGroup(subFilters, el);
+            }
+        }
         const classNames = Array.prototype.filter.call(el.classList, name => name.indexOf('_input') != -1);
 
-        if (shouldToggleSubGroup) {
-            const subFilters = document.getElementsByClassName(`${el.id}_input`);
-            toggleSubGroup(subFilters, el);
-        }
         if (classNames.length && !classNames.includes('insect_input')) {
             classNames.forEach(name => {
                 const idIndex = name.indexOf('_input');

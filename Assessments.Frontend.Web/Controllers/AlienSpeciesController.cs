@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Assessments.Frontend.Web.Infrastructure;
+﻿using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
@@ -10,6 +7,9 @@ using Assessments.Shared.Options;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
@@ -53,9 +53,9 @@ namespace Assessments.Frontend.Web.Controllers
 
             if (assessment == null)
                 return NotFound();
-            
+
             var expertGroupMembers = await DataRepository.GetData<AlienSpeciesAssessment2023ExpertGroupMember>(DataFilenames.AlienSpeciesExpertCommitteeMembers);
-            
+
             var assessmentExpertGroupMembers = await expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
                 .OrderBy(x => x.ExpertGroup)
                 .ThenBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToListAsync();
@@ -68,8 +68,8 @@ namespace Assessments.Frontend.Web.Controllers
             return View("2023/AlienSpeciesDetail", viewModel);
         }
 
-        [Route("2023/Attachment/{attachmentId:required:int}_{name}")]
-        public async Task<IActionResult> Attachment(int attachmentId, string name)
+        [Route("2023/Attachment/{attachmentId:required:int}")]
+        public async Task<IActionResult> Attachment(int attachmentId)
         {
             var data = await DataRepository.GetAlienSpeciesAssessments();
             var assessment = data.FirstOrDefault(x => x.Attachments.Any(y => y.Id == attachmentId));
@@ -83,7 +83,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             if (stream == null)
                 return NotFound();
-            
+
             return new FileStreamResult(stream, attachment.MimeType)
             {
                 FileDownloadName = attachment.FileName
@@ -92,7 +92,7 @@ namespace Assessments.Frontend.Web.Controllers
 
         private IActionResult GetExport(IEnumerable<AlienSpeciesAssessment2023> query)
         {
-            if (!_alienSpecies2023Options.EnableExport)
+            if (_alienSpecies2023Options.IsHearing)
                 return NotFound();
 
             var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());

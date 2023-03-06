@@ -177,12 +177,12 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Wether the species' score on the effect axis would be lower in the absence of current or future climate changes 
         /// </summary>
-        public bool? RiskAssessmentClimateEffectsEcoEffect { get; set; }
+        public bool? ClimateEffectsEcoEffect { get; set; }
 
         /// <summary>
         /// Further information about the effects of current or future climate changes 
         /// </summary>
-        public string RiskAssessmentClimateEffectsDocumentation { get; set; }
+        public string ClimateEffectsDocumentation { get; set; }
 
         /// <summary>
         /// Short conclusion/summary of the impact assessment. Free text field
@@ -212,7 +212,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 
         /// </summary>
-        public bool? RiskAssessmentClimateEffectsInvasionpotential { get; set; }
+        public bool? ClimateEffectsInvasionpotential { get; set; }
 
         /// <summary>
         /// Potential causes for/more detailed information about the geographic variance in category. Array with up to 4 elements 
@@ -587,7 +587,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species natural global distribution (terrestrial and limnic species)
         /// </summary>
-        public List<NaturalOrigin> NaturalOrigins { get; set; }
+        public List<AlienSpeciesAssessment2023NaturalOrigin> NaturalOrigins { get; set; }
 
         /// <summary>
         /// The species natural global distribution (terrestrial and limnic species). Description.
@@ -607,7 +607,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species current global distribution including alien distribution (terrestrial and limnic species)
         /// </summary>
-        public List<NaturalOrigin> CurrentInternationalExistenceAreas { get; set; }
+        public List<AlienSpeciesAssessment2023NaturalOrigin> CurrentInternationalExistenceAreas { get; set; }
 
         /// <summary>
         /// The species current global distribution including alien distribution (terrestrial and limnic species). Description.
@@ -633,5 +633,15 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// The proportion of the known or assumed area of occupancy (AOO) in strongly altered ecosystems
         /// </summary>
         public AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems AreaOfOccupancyInStronglyAlteredEcosystems { get; set; }
+
+        /// <summary>
+        /// Reason for all of the species' subtaxa have separate evaluations
+        /// </summary>
+        public string AllSubTaxaAssessedSeparatelyDescription { get; set; }
+
+        /// <summary>
+        /// Hybrid species without its own assessment. Reasoning
+        /// </summary>
+        public string HybridWithoutOwnRiskAssessmentDescription { get; set; }
     }
 }

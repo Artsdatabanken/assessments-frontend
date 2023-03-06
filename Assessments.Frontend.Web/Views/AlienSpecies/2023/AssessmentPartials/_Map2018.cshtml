@@ -6,31 +6,51 @@
 
     string className(string name)
     {
-        string className = "current";
-        if (Model.RegionOccurrences.Any(x => x.Region.DisplayName() == name))
+        string className = "";
+        var element = Model.RegionOccurrences.Where(x => x.Region.DisplayName() == name).FirstOrDefault();
+        if (element != null)
         {
-            return Model.MapText switch
+            if(Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence)
             {
-                Constants.AlienSpecies2023KnownOccurrence => "known_today",
-                Constants.AlienSpecies2023AssumedOccurrence => "is_assumed_today",
-                Constants.AlienSpecies2023AssumedInFutureOccurrence => "is_assumed_in_future",
-                _ => className
-            };
+                if (element.IsKnown)
+                {
+                    className += " known_today";
+                }else if (element.IsAssumedToday)
+                {
+                    className += " is_assumed_today";
+                }
+            }else if (Model.MapText == Constants.AlienSpecies2023AssumedInFutureOccurrence)
+            {
+                if (element.IsAssumedInFuture)
+                {
+                    className += " is_assumed_in_future";
+                }    
+            }                   
         }
-        return className;
+        return className;      
     }
 
     string seastyle = "fill:#e7f1f2;stroke:#000000;stroke-width:0.5px;";
     string nauticstyle = "fill:lightblue;stroke:#000000;stroke-width:0.5px;";
     string placestyle = "fill:#f2e7da;stroke:#000000;stroke-width:0.5px;";
+
+    void makeFormattedList(List<AlienSpeciesAssessment2023RegionOccurrence> listToShow)
+    {
+        for (var i = 0; i < listToShow.Count; i++){
+            if (i + 1 < listToShow.Count){
+            
+                <span>@listToShow[i].Region.DisplayName(), </span>}
+            else
+            {
+                <span>@listToShow[i].Region.DisplayName().</span>
+            }
+        }        
+    }   
+
 }
 
 <div class="map-box-container">
-    <span class="indicator">
-        <span class="indicatorcontent sea @Model.MapName"></span>
-        <span class="indicatorcontent @Model.MapName"></span>
-    </span>
-    <span>@Model.MapText</span>
+     
     <svg viewBox="0 0 172.13006 278.71942"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:svg="http://www.w3.org/2000/svg">
@@ -70,7 +90,7 @@
                 <title>Jan Mayen kyst</title>
             </path>
             <path d="m 111.94576,98.33567 -2.24004,0.672014 -0.89602,2.688056 2.46405,3.13607 2.01605,-0.67202 1.56803,-4.256087 z"
-                  id="bjørnøya-hav" class="sea @className("Bjørnøya")">
+                  id="bjørnøya-hav" class="sea @className("Svalbard")">
                 <title>Bjørnøya kyst</title>
             </path>
             <path d="m 126.05806,75.039182 -3.13606,0.44801 -1.12003,3.584074 0.67201,2.688057 h 2.01604 l 2.01604,-2.016043 z m -30.026594,-8.10816 1.818778,9.639522 3.091926,3.637555 2.36441,4.183189 2.91004,0.545633 1.81878,-1.6369 0.90939,-9.275766 h 3.45568 l 1.27314,2.000655 0.72751,3.455678 3.2738,0.727511 3.63756,-4.9107 0.72751,-4.728822 2.72816,-2.728167 -1.09126,-2.000655 -4.00131,-2.546289 -3.2738,-5.092578 5.63821,-4.365066 4.18319,-9.275767 -1.6369,-3.091922 h -2.54629 l -1.6369,-2.728167 -3.63756,-1.273144 -2.54629,2.364411 -4.9107,-3.091922 -1.45502,1.818778 -0.36375,2.000655 -2.91005,3.637556 -5.092576,2.000655 -1.273145,1.818778 -3.2738,-1.818778 -3.2738,3.2738 0.727511,6.911356 -1.6369,2.182533 1.273145,6.729478 2.364411,2.546288 z m 30.922614,-25.044533 2.24004,3.36007 h 2.68806 l 2.24004,-3.136067 v -4.032085 l -4.25608,-0.224003 z m -3.36008,11.872248 -2.91205,1.568032 -0.22401,1.792037 1.79204,2.91206 3.13607,-0.224003 0.89601,-2.240048 2.68806,0.672015 3.13606,-5.376112 -2.24004,-2.688057 z"
@@ -134,7 +154,6 @@
                 <title>Sogn og Fjordane kyst</title>
             </path>
         </g>
-
         <g class="land" style=@placestyle>
             <path d="m 153.55296,139.82943 1.6736,2.00832 -1.2552,0.66944 h -1.08784 l -2.17568,3.59825 -1.00416,2.9288 -1.00416,-1.50624 0.92048,-3.68193 -1.17152,-1.75728 -4.51873,-2.34304 -2.5104,2.34304 -1.2552,0.0837 -1.50624,3.17984 0.58576,7.11281 -1.84096,1.33888 -0.75312,2.34305 -1.25521,-0.66944 -2.092,-0.50209 -0.66944,-1.00416 -1.92464,2.51041 -3.17984,-1.00416 -1.58993,-3.17985 1.75729,-0.75312 -1.08785,-2.84512 1.25521,-0.92048 0.16736,-1.58992 -1.00417,-0.33473 -0.75312,-1.75728 -1.08784,-2.092 -1.42256,-0.16736 -0.52983,-1.35189 3.57787,-0.21418 1.47069,2.90495 1.73127,-4.41466 2.5234,-2.77446 -1.49323,-1.42993 1.17152,-2.092 1.6736,0.75312 1.00416,-2.9288 1.67361,1.17152 -2.00833,9.28849 4.01665,-9.28849 0.4184,5.43921 c 0.47419,-0.97627 1.49062,1.30093 1.42256,-2.92881 l 0.25104,-4.184 3.59824,0.50208 -0.75312,5.0208 1.00416,1.08784 0.74748,-5.17515 5.00781,0.63779 3.03112,1.60856 v 1.84096 l -6.35968,3.34721 3.93296,0.8368 3.09616,0.66944 -0.0837,-0.16736 z m -26.11902,-0.98639 0.77349,1.25694 1.25694,-1.74037 -0.38675,-1.16025 0.38675,-0.48344 0.48344,0.96688 0.96687,-1.45031 -1.06356,-1.25694 -0.48344,1.64368 z m -3.48075,-1.45031 1.35362,1.35363 2.41719,-1.45031 0.58012,-2.03044 z m 5.99462,-4.64099 -0.29006,0.7735 0.77349,0.19337 0.19338,-0.58012 z"
                   id="Finnmark" class="@className("Finnmark") land">
@@ -210,7 +229,7 @@
             </path>
             <path d="m 130.29412,40.041607 -1.90675,1.779627 0.25424,1.779627 2.92367,-1.906744 z m -1.27117,13.474318 v 0.762697 l 0.7627,-0.381348 z m -17.16068,46.651645 -0.88982,1.01693 0.88982,1.01693 0.50846,-1.27116 z m 12.5845,-22.753797 -1.14404,2.66944 1.39827,-1.525394 z m 5.08465,-24.024964 z m -2.92367,0.889813 -1.01693,1.398279 h 2.92367 z m -29.999429,-3.68637 -1.01693,-1.525394 -1.525395,2.66944 0.635581,4.321951 1.01693,-1.271162 0.635581,2.923673 -1.398278,0.127116 1.01693,3.68637 -1.398279,-0.127116 -1.271162,-3.432138 0.254233,3.940603 2.415208,2.923673 -1.01693,-2.923673 h 1.525394 l 1.144046,2.796557 2.66944,-1.271163 0.25423,-3.68637 5.33888,2.923673 -6.991388,4.067719 -0.127116,2.288092 6.228694,-1.271162 -3.81349,2.415208 2.92368,1.65251 -5.338884,-0.127116 3.050794,4.449068 h 3.05078 l -1.90674,2.033859 2.28809,3.305021 1.27117,-1.525394 0.38134,-9.025251 1.01693,0.889813 1.27117,-6.101578 1.01693,0.508465 -0.88982,-4.194835 3.43214,-2.542324 0.50846,1.144046 -1.65251,1.144046 1.14405,2.66944 2.03386,-0.508465 -2.03386,1.525395 1.65251,2.542324 -0.7627,2.923673 0.38135,0.635581 2.66944,-1.779627 h 1.01693 l -0.25423,3.813486 2.79656,-4.449067 -0.25424,-2.66944 -1.65251,-0.254233 -1.90674,-2.796557 -1.27116,0.762698 0.38135,-1.525395 -0.88982,-2.66944 -1.65251,0.635581 0.7627,-3.050789 -4.19484,-2.669441 -1.39827,0.254233 -0.25424,-0.635581 0.25424,-2.160976 1.65251,-0.381349 1.39827,1.398279 4.32196,-0.762697 -0.38135,1.016929 2.54232,0.889814 2.79656,-2.796557 1.77963,-7.118508 -6.35582,-2.796556 -1.14404,3.432137 -0.38135,-3.559254 -1.14405,4.321952 -3.55925,-3.940603 -4.06772,3.940603 2.16098,3.432137 5.72023,-0.508465 -5.466,3.050789 -0.7627,-1.016929 -1.01693,2.288092 0.25424,-3.940603 -2.92368,-2.288092 -1.14404,2.542324 1.27116,8.262554 -2.66944,-8.516786 -3.050791,3.305022 1.906743,-3.813487 -3.050789,0.127116 z m 25.677479,6.737159 1.01693,1.144046 0.76269,-1.016929 z"
                   id="Svalbard" class="@className("Svalbard") land svalbard_land">
-                <title>Svalbard</title>
+                <title>Svalbard og Bjørnøya</title>
             </path>
             <path d="m 29.061683,120.3984 -1.820907,0.29135 v 0.87403 l 1.893744,-0.8012 h 1.820907 l 0.509854,-1.38389 h -1.092544 l -0.946872,0.50986 z"
                   id="Jan_Mayen" class="@className("Jan_Mayen") land">
@@ -218,24 +237,60 @@
             </path>
         </g>
     </svg>
-    <div>
-        <span>@Model.MapText:</span>
+
+    <ul class="map-legend">    
+        <li>            
+            <span>Kjent utberedelse</span>
+            <span class="indicator">
+                <span class="indicatorcontent sea known_today"></span>
+                <span class="indicatorcontent known_today"></span>
+            </span>
+        </li>
+        <li>
+            <span>Antatt utberedelse</span>
+            <span class="indicator">
+                <span class="indicatorcontent sea is_assumed_in_future"></span>
+                <span class="indicatorcontent is_assumed_in_future"></span>
+            </span>            
+        </li>
+    </ul>
+
+    <div class="map-description"> 
+        <b>@Model.MapText</b><br/>
         <span>
             @{
-                for (var i = 0; i < Model.RegionOccurrences.Count; i++)
+                // Split list for map of today:
+                List<AlienSpeciesAssessment2023RegionOccurrence> knownToday;
+                List<AlienSpeciesAssessment2023RegionOccurrence> assumedToday;
+
+                if (Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence)
                 {
-                if (i + 1 < Model.RegionOccurrences.Count)
-                    {<span>@Model.RegionOccurrences[i].Region.DisplayName(), </span>}
-                else
-                {
-                    <span>@Model.RegionOccurrences[i].Region.DisplayName().</span>
+                    knownToday = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList();
+                    assumedToday = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true && x.IsKnown == false).ToList();
+
+
+                    <div>
+                        <br/>
+                        <b>Kjent utberedelse</b><br/>
+                        <span is-visible="knownToday.Count == 0">Arten er ikke kjent i noen områder</span>
+                        @{makeFormattedList(knownToday);}
+                        <br/><br/>
+                        <b>Antatt utberedelse</b><br/>
+                        <span is-visible="assumedToday.Count == 0 && knownToday.Count == 0">Det antas at arten ikke finnes i noen områder</span>
+                        <span is-visible="assumedToday.Count == 0 && knownToday.Count > 0">Arten er antatt å kun finnes i de kjente områdene</span>
+                        @{makeFormattedList(assumedToday);}
+                    </div>
                 }
-            }
-            if (Model.RegionOccurrences.Count == 0)
-            {
-                <span>ingen angitte områder.</span>
-            }
+
+
+                else
+                {                    
+                    makeFormattedList(@Model.RegionOccurrences);
+                    <span is-visible="Model.RegionOccurrences.Count == 0">Det antas ingen utberedelse om 50 år <!-- TODO: Hide map? --></span>
+                       
+                }
+            
         }
-        </span>
+        
     </div>
 </div>

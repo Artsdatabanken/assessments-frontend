@@ -49,10 +49,17 @@
             Model.FullName = emailValidation.FullName;
             Model.Email = emailValidation.Email;
 
-            Context.Response.Cookies.Append(validationCookieName, emailValidation.Guid.ToString(), new CookieOptions
+            var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.Now.AddMonths(1)
-            });
+            };
+
+            if (Context.Request.Host.ToUriComponent().StartsWith("www.artsdatabanken.no"))
+            {
+                cookieOptions.Domain = "artsdatabanken.no";
+            }
+
+            Context.Response.Cookies.Append(validationCookieName, emailValidation.Guid.ToString(), cookieOptions);
         }
         else
         {
@@ -69,7 +76,6 @@
     <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
 </div>
 <h2 id="Feedback" is-visible="!Model.HasBackToTopLink">Tilbakemelding</h2>
-
 
 @if (validationCodeIsInvalid)
 {
@@ -112,7 +118,7 @@ else if (emailIsValid)
             <input asp-for="ExpertGroup" type="hidden" />
             <input asp-for="Type" type="hidden" />
             <button class="primary" type="submit">Send inn skjema</button>
-                <a asp-controller="Feedback" asp-action="ForgetValidation" asp-route-code="@validationCode" asp-route-returnurl="@returnUrl" onclick="return confirm('Er du sikker?')">Glem meg?</a>
+                <a asp-controller="Feedback" asp-action="ForgetValidation" asp-route-code="@validationCode" asp-route-returnurl="@returnUrl" onclick="return confirm('Er du sikker?')">Glem meg (sletter e-postadressen)</a>
         </form>
     </div>
 }

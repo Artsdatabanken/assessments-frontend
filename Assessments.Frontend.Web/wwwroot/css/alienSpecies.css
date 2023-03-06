@@ -35,7 +35,7 @@ h1, h2, h3 {
 }
 
 .header button.menuitems:not(:active,:focus,:hover) {
-    background: #5e3063;
+    background: #3d1f41;
 }
 
 /* ACTIVE LINK COLOUR */
@@ -81,11 +81,6 @@ h1, h2, h3 {
     }
 }
 
-.dropdown {
-    background: #5e3063;
-}
-
-
 @media only screen and (max-width: 940px) {
     .title_header {
         background: black;
@@ -102,8 +97,9 @@ li ul{
 }
 
 /* MAP FOR FA ONLY */
-.triple_map{
+.double_map{
     display:flex;
+    flex-wrap:wrap;
     width:100%;
 }
 
@@ -111,17 +107,23 @@ li ul{
     flex: 1;
     text-align: center;
     font-size: small;
+    position:relative;
+    min-width:250px;
 }
-/* TODO: adjust jumps */
-@media only screen and (max-width: 740px) {
-    .triple_map {       
-        flex-wrap: wrap;
-    }
 
-    .map svg {
-        max-width: 500px;
-    }
+.map-description{
+    text-align:left;
+    padding:8px;
 }
+
+.tabbed_element_container .map-legend {
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    border-left: 0;
+    margin-left: auto;
+}
+
 
 .collapsible {
     margin-top: 0;

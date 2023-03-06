@@ -8,9 +8,8 @@
 @inject IOptions<ApplicationOptions> Options
 
 @{
-    var enableCitation = Options.Value.AlienSpecies2023.EnableCitation;
-
     var assessment = Model.Assessment;
+    var isHearing = Options.Value.AlienSpecies2023.IsHearing;
     ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023 innsyn"; // TODO: change after innsight process
 
     var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
@@ -35,7 +34,7 @@
             RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
             SpeciesGroup = assessment.SpeciesGroup,
             SpeciesGroupImageUrl = speciesGroupImageUrl,
-            SpeciesGroupInfoUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/ekspertkomiteene", // TODO: add correct link for alien species
+            SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene", // TODO: add correct link for alien species
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
     };
@@ -62,7 +61,7 @@
             Name = x.DisplayName(),
             NameShort = x.ToString()
         }).Reverse().ToArray(),
-        MethodUrl = "https://artsdatabanken.no/pages/239659"
+                MethodUrl = "https://artsdatabanken.no/Pages/339785/Risikokategorier_og_kriterier"
     };
 
     var ingressViewModel = new IngressViewModel()
@@ -94,10 +93,11 @@
     var showRegionalSpread = !isNr && !isEvaluatedAtAnotherLevel;
     var showAttachments = !isEvaluatedAtAnotherLevel && assessment.Attachments != null && assessment.Attachments.Count() != 0;
     var showImpactedNatureTypes = !isNr && !isEvaluatedAtAnotherLevel;
+    var showKnowMore = !isHearing;
     var showReference = assessment.References != null && assessment.References.Count() > 0;
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
-    var showCitationForAssessment = enableCitation && !string.IsNullOrEmpty(Model.ExpertGroupMembers.Select(x => $"{x.LastName} {x.FirstNameInitials}").JoinAnd(", ", " og "));
-    var showFeedback = true;
+    var showCitationForAssessment = Model.ExpertGroupMembers.Any() && !isHearing;
+    var showFeedback = isHearing;
 
     var tableOfContentsViewModel = new TableOfContentsViewModel
     {
@@ -156,6 +156,12 @@
                 ElementId = nameof(Constants.HeadingsNo.SpreadWays),
                 Title = Constants.HeadingsNo.SpreadWays,
                 ShouldShow = showSpreadWays
+            },
+            new ()
+            {
+                ElementId = nameof(Constants.HeadingsNo.KnowMore),
+                Title = $"{Constants.HeadingsNo.KnowMore} {Helpers.FixSpeciesLevel("{art}en", assessment.ScientificName.ScientificNameRank)}",
+                ShouldShow = showKnowMore
             },
             new ()
             {
@@ -234,6 +240,9 @@
                 <div class="page-section" is-visible="showSpreadWays">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_SpreadWays.cshtml" />
                 </div>
+                <div class="page-section" is-visible="showKnowMore">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_KnowMore.cshtml" />
+                </div>
                 <div class="page-section" is-visible="showAttachments">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Attachments.cshtml" model="Model.AttachmentViewModel" />
                 </div>
@@ -243,7 +252,7 @@
                 <div class="page-section" is-visible="showCitationForAssessment">
                     <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
                 </div>
-                <div class="page-section" id="Feedback">
+                <div class="page-section" id="Feedback" is-visible="@showFeedback">
                     <partial name="/Views/Shared/_Feedback.cshtml" model="new FeedbackFormViewModel { Year = 2023, AssessmentId = assessment.Id, ExpertGroup = assessment.ExpertGroup, Type = FeedbackType.AlienSpecies, HasBackToTopLink = true }" />
                 </div>
             </div>

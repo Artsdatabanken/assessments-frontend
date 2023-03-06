@@ -19,11 +19,8 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Børstehaler")]
         Zygentoma,
 
-        [Display(Name = "Lus og lopper")]
+        [Display(Name = "Lus")]
         Phthiraptera,
-
-        [Display(Name = "Lus og lopper")]
-        Siphonatera,
 
         [Display(Name = "Nebbmunner")]
         Hemiptera,

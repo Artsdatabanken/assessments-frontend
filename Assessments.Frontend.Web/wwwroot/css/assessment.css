@@ -1007,3 +1007,9 @@ table caption.table-title {
 .numbers-table.align-normal th:not(:first-child) {
     text-align: left;
 }
+
+@media only screen and (min-width: 751px) {
+    .small-table {
+        width: 70%;
+    }
+}

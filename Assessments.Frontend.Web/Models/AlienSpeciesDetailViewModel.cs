@@ -79,6 +79,7 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyFutureBest = assessment.AOOfutureBest,
                 AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
                 AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
+                AreaOfOccupancyInStronglyAlteredEcosystems = assessment.AreaOfOccupancyInStronglyAlteredEcosystems,
                 AreaOfOccupancyKnown = assessment.AOOknown,
                 AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
                 AreaOfOccupancyTotalHigh = assessment.AOOtotalHigh,

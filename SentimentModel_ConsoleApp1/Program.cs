@@ -5,10 +5,18 @@ using SentimentModel_ConsoleApp1;
 using System.Globalization;
 
 var baseDir = "C:\\temp\\ml\\";
-var fileName = "originalfilCsv.csv";
+var fileName = "originalfil.xlsx";
+
+if (fileName.Contains("xls"))
+{
+    // convert file to csv
+    var convertedFileName = "convertedFile.csv";
+    if (FileConverter.ConvertExcelToCsv(baseDir, fileName, convertedFileName))
+        fileName = convertedFileName;
+}
 
 using (var reader = new StreamReader(baseDir + fileName, System.Text.Encoding.GetEncoding("iso-8859-1")))
-using (var writer = new StreamWriter(baseDir + "new_" + fileName, false, System.Text.Encoding.UTF8))
+using (var writer = new StreamWriter(baseDir + "cleaned_" + fileName, false, System.Text.Encoding.UTF8))
 using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
 {
     var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);

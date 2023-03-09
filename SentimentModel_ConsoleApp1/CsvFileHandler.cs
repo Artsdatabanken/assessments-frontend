@@ -11,7 +11,7 @@ namespace SentimentModel_ConsoleApp1
         /// <param name="basePath">The path to the file, including trailing slash</param>
         /// <param name="fileName">The name of the file itself</param>
         /// <returns></returns>
-        public static IEnumerable<dynamic>? ReadFile(string basePath, string fileName)
+        internal static IEnumerable<dynamic>? ReadFile(string basePath, string fileName)
         {
             if (!fileName.EndsWith(".csv"))
                 fileName += ".csv";
@@ -44,7 +44,7 @@ namespace SentimentModel_ConsoleApp1
         /// <param name="fileName">The name of the file itself</param>
         /// <param name="lines">The list of lines to be written</param>
         /// <returns></returns>
-        public static bool WriteFile(string basePath, string fileName, IEnumerable<dynamic> lines)
+        internal static bool WriteFile(string basePath, string fileName, IEnumerable<dynamic> lines)
         {
             if (!fileName.EndsWith(".csv"))
                 fileName += ".csv";

@@ -17,37 +17,9 @@ var recordsList = CsvFileHandler.ReadFile(baseDir, fileName);
 if (recordsList == null)
     return;
 
-var hitCount = 0;
-var progressCount = 0;
-var actualProgress = 0.0;
-var recordsLength = recordsList.ToList().Count;
-Console.WriteLine($"\nProgress {progressCount} av {recordsLength}: 0.0 %");
+var sanitizedRecordsList = Sanitation.Sanitize(recordsList);
 
-foreach (var record in recordsList)
-{
-    var sampleData = new SentimentModel.ModelInput()
-    {
-        Tried = record.Samkopiert,
-    };
-    //Make a single prediction on the sample data and print results
-    var predictionResult = SentimentModel.Predict(sampleData);
-    if (predictionResult.PredictedLabel)
-    {
-        hitCount += 1;
-        record.Samkopiert = "**Innholdet er skjult av personvernhensyn. Vennligst ta kontakt med Artsdatabanken for mer info.**";
-    }
-    progressCount += 1;
-    var newProgress = Math.Floor((double)progressCount / recordsLength * 100) / 100;
-    if (newProgress != actualProgress)
-    {
-        actualProgress = newProgress;
-        if ((actualProgress * 100) % 10 == 0)
-            Console.WriteLine($"\nProgress {progressCount} av {recordsLength}: {actualProgress * 100}%");
-    }
-}
-Console.WriteLine($"Number of sanitized fields: {hitCount}");
-
-CsvFileHandler.WriteFile(baseDir, "sanitized_" + fileName, recordsList);
+CsvFileHandler.WriteFile(baseDir, "sanitized_" + fileName, sanitizedRecordsList);
 
 
 public class Headers

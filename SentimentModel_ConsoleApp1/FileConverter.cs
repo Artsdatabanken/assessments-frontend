@@ -1,14 +1,16 @@
 ﻿using ExcelDataReader;
+using SentimentModel_ConsoleApp1.Enums;
 using System.Text;
 
 namespace SentimentModel_ConsoleApp1
 {
     internal class FileConverter
     {
-        public static bool ConvertExcelToCsv(string baseDirectory, string excelFilePath, string? csvFileName)
+        internal static bool ConvertExcelToCsv(string baseDirectory, string excelFilePath, string? csvFileName, DebugLevel debugLevel = DebugLevel.DefaultLogging)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            Console.WriteLine($"\nOpening file {excelFilePath}...");
+            if (debugLevel != DebugLevel.NoLogging)
+                Console.WriteLine($"Opening file {excelFilePath} for convertion to csv.");
 
             using var stream = new FileStream(baseDirectory + excelFilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             IExcelDataReader? reader = null;
@@ -35,8 +37,9 @@ namespace SentimentModel_ConsoleApp1
 
             while (rowNumber < dataSet.Tables[0].Rows.Count)
             {
-                if (rowNumber % 1000 == 0)
-                    Console.WriteLine($"\nConverting line {rowNumber} of {dataSet.Tables[0].Rows.Count}.");
+                if (rowNumber % 1000 == 0 && debugLevel == DebugLevel.VerboseLogging)
+                    Console.WriteLine($"Converting line {rowNumber} of {dataSet.Tables[0].Rows.Count}.");
+
                 var arr = new List<string>();
                 for (int i = 0; i < dataSet.Tables[0].Columns.Count; i++)
                 {
@@ -56,9 +59,15 @@ namespace SentimentModel_ConsoleApp1
 
             var newFilePath = !string.IsNullOrEmpty(csvFileName) ? csvFileName : $"{excelFilePath.Split('.')[0]}.csv";
             var csv = new StreamWriter(baseDirectory + newFilePath, false, System.Text.Encoding.UTF8);
-            Console.WriteLine($"\nWriting to file {baseDirectory + newFilePath}.");
+
+            if (debugLevel != DebugLevel.NoLogging)
+                Console.WriteLine($"Writing to file {baseDirectory + newFilePath}.");
+
             csv.Write(csvContent);
-            Console.WriteLine($"\nFile written");
+
+            if (debugLevel != DebugLevel.NoLogging)
+                Console.WriteLine($"File written.");
+
             csv.Close();
             return true;
         }

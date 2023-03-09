@@ -20,8 +20,8 @@ namespace SentimentModel_ConsoleApp1
             {
                 var reader = new StreamReader(basePath + fileName, System.Text.Encoding.GetEncoding("iso-8859-1"));
                 var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-                var records = csvReader.GetRecords<Headers>();
-                var recordsList = new List<Headers>();
+                var records = csvReader.GetRecords<dynamic>();
+                var recordsList = new List<dynamic>();
 
                 foreach (var line in records)
                 {
@@ -54,13 +54,8 @@ namespace SentimentModel_ConsoleApp1
                 var writer = new StreamWriter(basePath + fileName, false, System.Text.Encoding.UTF8);
                 var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
 
-                csvWriter.WriteHeader<Headers>();
-                csvWriter.NextRecord();
-                foreach (var line in lines)
-                {
-                    csvWriter.WriteRecord(line);
-                    csvWriter.NextRecord();
-                }
+                csvWriter.WriteRecords(lines);
+
                 writer.Close();
                 Console.WriteLine($"\nFile written: {basePath + fileName}.");
                 return true;

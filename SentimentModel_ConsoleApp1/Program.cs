@@ -16,10 +16,8 @@ if (fileName.Contains("xls"))
 }
 
 using (var reader = new StreamReader(baseDir + fileName, System.Text.Encoding.GetEncoding("iso-8859-1")))
-using (var writer = new StreamWriter(baseDir + "cleaned_" + fileName, false, System.Text.Encoding.UTF8))
 using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
 {
-    var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
     var records = csvReader.GetRecords<Headers>();
     var hitCount = 0;
     var progressCount = 0;
@@ -36,7 +34,7 @@ using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
 
     foreach (var record in recordsList)
     {
-        SentimentModel.ModelInput sampleData = new SentimentModel.ModelInput()
+        var sampleData = new SentimentModel.ModelInput()
         {
             Tried = record.Samkopiert,
         };
@@ -57,13 +55,7 @@ using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
     }
     Console.WriteLine($"Number of hits: {hitCount}");
 
-    csvWriter.WriteHeader<Headers>();
-    csvWriter.NextRecord();
-    foreach (var record in recordsList)
-    {
-        csvWriter.WriteRecord(record);
-        csvWriter.NextRecord();
-    }
+    CsvFileHandler.WriteFile(baseDir, fileName, recordsList);
 }
 
 

@@ -22,17 +22,27 @@ namespace SentimentModel_ConsoleApp1
                 IDictionary<string, object> recordDict = (IDictionary<string, object>)recordsList[i];
                 foreach (var fieldName in targettingFields)
                 {
-                    var sanitizeString = recordDict[fieldName].ToString() ?? string.Empty;
-                    var sampleData = new SentimentModel.ModelInput()
+                    try
                     {
-                        Tried = sanitizeString,
-                    };
-                    //Make a single prediction on the sample data
-                    var predictionResult = SentimentModel.Predict(sampleData);
-                    if (predictionResult.PredictedLabel)
+                        var sanitizeString = recordDict[fieldName]?.ToString() ?? string.Empty;
+
+                        var sampleData = new SentimentModel.ModelInput()
+                        {
+                            Tried = sanitizeString,
+                        };
+                        //Make a single prediction on the sample data
+                        var predictionResult = SentimentModel.Predict(sampleData);
+                        if (predictionResult.PredictedLabel)
+                        {
+                            hitCount += 1;
+                            recordDict[fieldName] = replaceWith;
+                        }
+                    }
+                    catch (Exception e)
                     {
-                        hitCount += 1;
-                        recordDict[fieldName] = replaceWith;
+                        if (debugLevel != DebugLevel.NoLogging)
+                            Console.WriteLine($"\nUnable to find field for sanitation: {fieldName}. Exception: {e}");
+                        break;
                     }
 
                     if (debugLevel == DebugLevel.VerboseLogging)

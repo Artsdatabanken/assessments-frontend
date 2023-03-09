@@ -97,6 +97,7 @@
     var showReference = assessment.References != null && assessment.References.Count() > 0;
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
     var showCitationForAssessment = Model.ExpertGroupMembers.Any() && !isHearing;
+    var showTableOfContents = isHearing || !isHearing && assessment.Category != AlienSpeciesAssessment2023Category.NR;
     var showFeedback = isHearing;
 
     var tableOfContentsViewModel = new TableOfContentsViewModel
@@ -212,7 +213,9 @@
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>
                 </div>
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Conclusion.cshtml" model="Model.ExpertStatementViewModel"/>
-                <partial name="/Views/Shared/_TableOfContents.cshtml" model="tableOfContentsViewModel" />
+                <div is-visible="showTableOfContents">
+                    <partial name="/Views/Shared/_TableOfContents.cshtml" model="tableOfContentsViewModel" />
+                </div>
                 <div class="page_section" is-visible="showExpertStatement">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="Model.ExpertStatementViewModel" />
                 </div>

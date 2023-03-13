@@ -97,7 +97,7 @@
     var showReference = assessment.References != null && assessment.References.Count() > 0;
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
     var showCitationForAssessment = Model.ExpertGroupMembers.Any() && !isHearing;
-    var showTableOfContents = isHearing || !isHearing && assessment.Category != AlienSpeciesAssessment2023Category.NR;
+    var showTableOfContents = assessment.Category != AlienSpeciesAssessment2023Category.NR;
     var showFeedback = isHearing;
 
     var tableOfContentsViewModel = new TableOfContentsViewModel

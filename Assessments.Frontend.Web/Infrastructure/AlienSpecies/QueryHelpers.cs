@@ -21,6 +21,20 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public string TimeHorizon { get; set; }
         public string MainCategoryGroup { get; set; }
     }
+
+    public class NewSpreadWays
+    {
+        public int AssessmentId { get; set; }
+        public string ScientificName { get; set; }
+        public string IntroductionSpread { get; set; }
+        public string InfluenceFactor { get; set; }
+        public string Magnitude { get; set; }
+        public string TimeOfIncident { get; set; }
+        public string Category { get; set; }
+        public string MainCategory { get; set; }
+        public string ImportPathwayOrAssessmentVector { get; set; }
+    }
+
     public static class QueryHelpers
     {
         public static IQueryable<AlienSpeciesAssessment2023> ApplyParameters(AlienSpeciesListParameters parameters, IQueryable<AlienSpeciesAssessment2023> query)
@@ -44,7 +58,36 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 }));
             }
 
-            //ex = ex.GroupBy(x => x.Name).ToList();
+            var sw = new List<NewSpreadWays>();
+
+            foreach (var assessment in query)
+            {
+                sw.AddRange(assessment.ImportPathways.Select(x => new NewSpreadWays
+                {
+                    AssessmentId = assessment.Id,
+                    ScientificName = assessment.ScientificName.ScientificName,
+                    IntroductionSpread = x.IntroductionSpread.DisplayName(),
+                    InfluenceFactor = x.InfluenceFactor.DisplayName(),
+                    Magnitude = x.Magnitude.DisplayName(),
+                    TimeOfIncident = x.TimeOfIncident.DisplayName(),
+                    Category = x.Category,
+                    MainCategory = x.MainCategory.DisplayName(),
+                    ImportPathwayOrAssessmentVector = "ImportPathway"
+                }));
+
+                sw.AddRange(assessment.IntroductionAndSpreadPathways.Select(x => new NewSpreadWays
+                {
+                    AssessmentId = assessment.Id,
+                    ScientificName = assessment.ScientificName.ScientificName,
+                    IntroductionSpread = x.IntroductionSpread.DisplayName(),
+                    InfluenceFactor = x.InfluenceFactor.DisplayName(),
+                    Magnitude = x.Magnitude.DisplayName(),
+                    TimeOfIncident = x.TimeOfIncident.DisplayName(),
+                    Category = x.Category,
+                    MainCategory = x.MainCategory.DisplayName(),
+                    ImportPathwayOrAssessmentVector = "AssessmentVector"
+                }));
+            }
 
             if (!string.IsNullOrEmpty(parameters.Name))
                 query = ApplySearch(parameters.Name, query);

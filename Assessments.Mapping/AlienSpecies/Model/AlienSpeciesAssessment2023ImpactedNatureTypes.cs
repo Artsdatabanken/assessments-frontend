@@ -11,6 +11,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string Name { get; set; }
 
         /// <summary>
+        /// Main category group name of ecosystem in Norwegian based on Nin2.3
+        /// </summary>
+        public AlienSpeciesAssessment2023NatureTypeMainGategoryGroup MainCategoryGroupNin2_3 { get; set; }
+
+        /// <summary>
         /// Whether the ecosystem is threatened or rare (true) or not (false)
         /// </summary>
         public bool IsThreatened { get; set; }

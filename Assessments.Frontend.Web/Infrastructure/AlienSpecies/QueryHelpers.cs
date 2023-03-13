@@ -3,14 +3,49 @@ using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
+    public class NewNatureType
+    {
+        public string NatureType { get; set; }
+        public int AssessmentId { get; set; }
+        public bool IsThreatened { get; set; }
+        public string ScientificName { get; set; }
+        public string ColonizedArea { get; set; }
+        public string AffectedArea { get; set; }
+        public string Background { get; set; }
+        public string StateChange { get; set; }
+        public string TimeHorizon { get; set; }
+        public string MainCategoryGroup { get; set; }
+    }
     public static class QueryHelpers
     {
         public static IQueryable<AlienSpeciesAssessment2023> ApplyParameters(AlienSpeciesListParameters parameters, IQueryable<AlienSpeciesAssessment2023> query)
         {
+            var ex = new List<NewNatureType>();
+
+            foreach (var assessment in query)
+            {
+                ex.AddRange(assessment.ImpactedNatureTypes.Select(x => new NewNatureType
+                {
+                    NatureType = x.Name,
+                    ScientificName = assessment.ScientificName.ScientificName,
+                    AssessmentId = assessment.Id,
+                    IsThreatened = x.IsThreatened,
+                    ColonizedArea = x.ColonizedArea,
+                    AffectedArea = x.AffectedArea,
+                    Background = x.Background != null ? string.Join(", ", x.Background?.Select(x => x.DisplayName())) : "",
+                    StateChange = x.StateChange != null ? string.Join(", ", x.StateChange?.Select(x => x.DisplayName())) : "",
+                    TimeHorizon = x.TimeHorizon.DisplayName(),
+                    MainCategoryGroup = x.MainCategoryGroupNin2_3.DisplayName()
+                }));
+            }
+
+            //ex = ex.GroupBy(x => x.Name).ToList();
+
             if (!string.IsNullOrEmpty(parameters.Name))
                 query = ApplySearch(parameters.Name, query);
 

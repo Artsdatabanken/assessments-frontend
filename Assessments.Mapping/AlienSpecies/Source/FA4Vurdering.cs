@@ -70,7 +70,7 @@ namespace Assessments.Mapping.AlienSpecies.Source
         public string TaxonSearchString { get; set; }
 
         public string TaxonRank { get; set; }
-        
+
         /// <summary>
         /// Connected assessment
         /// </summary>

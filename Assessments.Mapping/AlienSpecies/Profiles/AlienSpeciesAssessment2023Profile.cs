@@ -278,6 +278,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.StateChange.Select(x => string.Concat(x.Where(char.IsLetter))));
                 })
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToLower()))
+                .ForMember(dest => dest.MainCategoryGroupNin2_3, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetNinMainCategoryGroup(src.NiNCode)))
                 .ForMember(dest => dest.IsThreatened, opt => opt.MapFrom(src => src.NiNCode.All(Char.IsDigit)))
                 .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.Background.DefaultIfEmpty()));
 

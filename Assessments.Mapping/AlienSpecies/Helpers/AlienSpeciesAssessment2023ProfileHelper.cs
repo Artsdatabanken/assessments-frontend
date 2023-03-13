@@ -960,5 +960,15 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
             return continent;
         }
+
+        internal static AlienSpeciesAssessment2023NatureTypeMainGategoryGroup GetNinMainCategoryGroup(string NinCode)
+        {
+            string ninCodeLetter = !string.IsNullOrEmpty(NinCode) ? NinCode.Replace("NA ", string.Empty)[0].ToString() : "";
+            AlienSpeciesAssessment2023NatureTypeMainGategoryGroup parsed;
+
+            if (Enum.TryParse(ninCodeLetter, out parsed))
+                return parsed;
+            return AlienSpeciesAssessment2023NatureTypeMainGategoryGroup.Unknown;
+        }
     }
 }

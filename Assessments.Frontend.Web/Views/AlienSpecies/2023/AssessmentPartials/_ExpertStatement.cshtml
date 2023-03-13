@@ -3,8 +3,7 @@
 @{
     var evaluationContextText = Model.EvaluationContext == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.N ? "i Norge" : "på Svalbard";
     var showSpeciesStatusDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationSpeciesStatus);
-    var showUncertaintyStatusDescription = !string.IsNullOrEmpty(Model.UncertaintyStatusDescription);
-    var showDomesticSpreadDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationDomesticSpread);
+    var showDomesticSpreadDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationDomesticSpread) || !string.IsNullOrEmpty(Model.UncertaintyStatusDescription);
     var showInvasionPotentialDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationInvasionPotential);
     var showEcoEffectDocumentation = !string.IsNullOrEmpty(Model.CriteriaDocumentationEcoEffect);
     var showSpreadWays = (Model.HasIndoorProduction && !string.IsNullOrEmpty(Model.SpreadIndoorFurtherInfo)) ||
@@ -13,7 +12,6 @@
     var showReasoning = Model.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR ||
                 Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var showExpertSummary = showSpeciesStatusDocumentation ||
-                                                        showUncertaintyStatusDescription ||
                                                         showDomesticSpreadDocumentation ||
                                                         showInvasionPotentialDocumentation ||
                                                         showEcoEffectDocumentation ||
@@ -35,17 +33,13 @@
             </p>
         </div>
 
-        <div is-visible="@showUncertaintyStatusDescription">
-            <h3>Usikkerhet rundt etableringsklasse</h3>
-            <p class="expert_text">
-                @Html.Raw(Model.UncertaintyStatusDescription)
-            </p>
-        </div>
-
         <div is-visible="@showDomesticSpreadDocumentation" >
             <h3>Utbredelse @evaluationContextText</h3>
             <p class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentationDomesticSpread)
+            </p>
+            <p class="expert_text">
+                @Html.Raw(Model.UncertaintyStatusDescription)
             </p>
         </div>
 

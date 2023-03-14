@@ -114,19 +114,19 @@
         <div is-visible="isLimnic || isTerrestrial">
             <div is-visible="Model.Assessment.NaturalOrigins != null || Model.Assessment.NaturalOrigins.Count != 0">
                 <p>@GetLimnicOrTerrestrialExpansion()</p>
-                <ul>
+                <ul class="expansion-list">
                     @foreach(var origin in Model.Assessment.NaturalOrigins)
                     {
                         <li is-visible="origin.Continent != null">@origin.ClimateZone.DisplayName(): @(origin.Continent.Select(x => x.DisplayName()).JoinAnd(", ", " og "))</li>
                     }
                 </ul>
             </div>
-            <p><br />@Html.Raw(Model.Assessment.NaturalOriginUnknownDocumentation)</p>
+            <p is-visible="!string.IsNullOrEmpty(Model.Assessment.NaturalOriginUnknownDocumentation)">@Html.Raw(Model.Assessment.NaturalOriginUnknownDocumentation)</p>
         </div>
         <div is-visible="isMarine">
             <p is-visible="Model.Assessment.NaturalOriginMarine != null && Model.Assessment.NaturalOriginMarine.Count != 0">
                 Marin utbredelse: 
-                <ul>
+                <ul class="expansion-list">
                     @foreach (var existenceArea in Model.Assessment.NaturalOriginMarine.Select(x => x.DisplayName()))
                     {
                         <li is-visible="existenceArea != null">@existenceArea</li>
@@ -140,19 +140,19 @@
         <div is-visible="isLimnic || isTerrestrial">
             <div is-visible="Model.Assessment.CurrentInternationalExistenceAreas != null || Model.Assessment.CurrentInternationalExistenceAreas.Count != 0">
                 <p>@GetLimnicOrTerrestrialExpansion()</p>
-                <ul>
+                <ul class="expansion-list">
                     @foreach (var existenceArea in Model.Assessment.CurrentInternationalExistenceAreas)
                     {
                         <li is-visible="existenceArea.Continent != null">@existenceArea.ClimateZone.DisplayName(): @(existenceArea.Continent.Select(x => x.DisplayName()).JoinAnd(", ", " og "))</li>
                     }
                 </ul>
             </div>
-            <p><br />@Html.Raw(Model.Assessment.CurrentInternationalExistenceAreasUnknownDocumentation)</p>
+            <p is-visible="!string.IsNullOrEmpty(Model.Assessment.CurrentInternationalExistenceAreasUnknownDocumentation)">@Html.Raw(Model.Assessment.CurrentInternationalExistenceAreasUnknownDocumentation)</p>
         </div>
         <div is-visible="isMarine">
             <p is-visible="Model.Assessment.CurrentInternationalExistenceMarineAreas != null && Model.Assessment.CurrentInternationalExistenceMarineAreas.Count != 0">
                 Marin utbredelse: 
-                <ul>
+                <ul class="expansion-list">
                     @foreach (var existenceArea in Model.Assessment.CurrentInternationalExistenceMarineAreas.Select(x => x.DisplayName()))
                     {
                         <li is-visible="existenceArea != null">@existenceArea</li>

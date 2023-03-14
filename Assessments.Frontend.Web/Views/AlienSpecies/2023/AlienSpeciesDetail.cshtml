@@ -2,15 +2,10 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Assessments.Data.Models
-@using Assessments.Shared.Options
-@using Microsoft.Extensions.Options
-
-@inject IOptions<ApplicationOptions> Options
 
 @{
     var assessment = Model.Assessment;
-    var isHearing = Options.Value.AlienSpecies2023.IsHearing;
-    ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023 innsyn"; // TODO: change after innsight process
+    ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023";
 
     var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
     var speciesGroupImageUrl = speciesGroup?.ImageUrl;
@@ -34,7 +29,7 @@
             RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
             SpeciesGroup = assessment.SpeciesGroup,
             SpeciesGroupImageUrl = speciesGroupImageUrl,
-            SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene", // TODO: add correct link for alien species
+            SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene",
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         }
     };
@@ -93,11 +88,10 @@
     var showRegionalSpread = !isNr && !isEvaluatedAtAnotherLevel;
     var showAttachments = !isEvaluatedAtAnotherLevel && assessment.Attachments != null && assessment.Attachments.Count() != 0;
     var showImpactedNatureTypes = !isNr && !isEvaluatedAtAnotherLevel;
-    var showKnowMore = !isHearing;
+    var showKnowMore = true;
     var showReference = assessment.References != null && assessment.References.Count() > 0;
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
-    var showCitationForAssessment = Model.ExpertGroupMembers.Any() && !isHearing;
-    var showFeedback = isHearing;
+    var showCitationForAssessment = Model.ExpertGroupMembers.Any();
 
     var tableOfContentsViewModel = new TableOfContentsViewModel
     {
@@ -180,21 +174,9 @@
                 ElementId = nameof(Constants.HeadingsNo.Citation),
                 Title = Constants.HeadingsNo.Citation,
                 ShouldShow = showCitationForAssessment
-            },
-            new ()
-            {
-                ElementId = "Feedback",
-                Title = "Tilbakemelding",
-                ShouldShow = showFeedback
             }
         }
     };
-
-    TaxonRank.TaxonRankEnum scientificNameRank;
-    var taxonRank = "Ukjent";
-    if (Enum.TryParse(Model.Assessment.ScientificName.ScientificNameRank.ToString(), out scientificNameRank))
-        if (scientificNameRank != 0)
-            taxonRank = scientificNameRank.DisplayName();
 }
 
 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Breadcrumb.cshtml" />
@@ -251,9 +233,6 @@
                 </div>
                 <div class="page-section" is-visible="showCitationForAssessment">
                     <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
-                </div>
-                <div class="page-section" id="Feedback" is-visible="@showFeedback">
-                    <partial name="/Views/Shared/_Feedback.cshtml" model="new FeedbackFormViewModel { Year = 2023, AssessmentId = assessment.Id, ExpertGroup = assessment.ExpertGroup, Type = FeedbackType.AlienSpecies, HasBackToTopLink = true }" />
                 </div>
             </div>
         </div>

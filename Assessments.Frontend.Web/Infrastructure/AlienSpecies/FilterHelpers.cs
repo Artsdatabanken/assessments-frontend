@@ -98,6 +98,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.Criterias?.Any() == true)
                         return $"{parameters.Criterias.Length}";
                     return String.Empty;
+                case nameof(parameters.ClimateEffects):
+                    if (parameters.ClimateEffects?.Any() == true)
+                        return $"{parameters.ClimateEffects.Length}";
+                    return String.Empty;
+                case nameof(parameters.GeographicVariations):
+                    if (parameters.GeographicVariations?.Any() == true)
+                        return $"{parameters.GeographicVariations.Length}";
+                    return String.Empty;
                 default:
                     return String.Empty;
             }
@@ -129,6 +137,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             count += parameters.Regions.Length;
             count += parameters.WaterRegions.Length;
             count += parameters.Criterias.Length;
+            count += parameters.ClimateEffects.Length;
+            count += parameters.GeographicVariations.Length;
 
             return count;
         }
@@ -149,6 +159,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             selectionlist = selectionlist.Concat(parameters.Regions).ToArray();
             selectionlist = selectionlist.Concat(parameters.WaterRegions).ToArray();
             selectionlist = selectionlist.Concat(parameters.Criterias).ToArray();
+            selectionlist = selectionlist.Concat(parameters.GeographicVariations).ToArray();
+            selectionlist = selectionlist.Concat(parameters.ClimateEffects).ToArray();
             return selectionlist;
         }
 

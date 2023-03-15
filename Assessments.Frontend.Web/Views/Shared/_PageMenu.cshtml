@@ -43,6 +43,10 @@
             </li>
         }
     </ul>
+
+    <div is-visible="Model.TableOfContentsViewModel != null" class="table-of-contents-big-screen">
+        <partial name="/Views/Shared/_TableOfContents.cshtml" model="Model.TableOfContentsViewModel" />
+    </div>
 </div>
 
 <script>

@@ -3,7 +3,7 @@
 const searchField = document.getElementById("Name");
 const autocompleteList = document.getElementById("autocomplete_list_ul");
 const searchUrlBase = (window.location.pathname + "/suggestions").replace('//suggestions', '/suggestions');
-const autoCompleteWaitTime = 1000;
+const autoCompleteWaitTime = 500;
 
 const taxonCategories = {
     0: "Unknown",
@@ -81,7 +81,7 @@ const formatListElements = (el, searchstring) => {
         name = `<span class="search_name">${name} ${sciname}</span>`;
     }
     if (el.TaxonCategory) {
-        name += `<span class="taxon_rank">${el.TaxonCategory.toLowerCase()}</span>`;
+        name += `<span class="taxon_rank">${el.TaxonCategory != 'Unknown' ? el.TaxonCategory.toLowerCase() : ''}</span>`;
     }
     return name;
 }

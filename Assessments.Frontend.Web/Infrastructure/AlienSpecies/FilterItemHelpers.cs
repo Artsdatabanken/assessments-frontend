@@ -427,8 +427,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             Filters = AlienSpecies2023ClimateEffectsFilters,
             FilterDescription = "",
-            FilterButtonName = "'geografisk variasjon'-filtre",
-            FilterButtonText = "Geografisk variasjon i risiko"
+            FilterButtonName = "'klimaendringer'-filtre",
+            FilterButtonText = "Betydning av klimaendringer for risiko"
         };
     }
 

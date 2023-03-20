@@ -1043,12 +1043,16 @@ table caption.table-title {
     display: none;
 }
 
-.mobile_padding .table-of-contents-outer {
-    position: sticky;
-    top: 20px;
+.mobile_padding #tableOfContentsOuter {
+    position: relative;
     width: fit-content;
     z-index: 1;
     margin-bottom: 10px;
+}
+
+.mobile_padding #tableOfContentsOuter.table-of-contents-sticky {
+    position: sticky;
+    top: 20px;
 }
 
 .mobile_padding .table-of-contents {
@@ -1072,7 +1076,7 @@ table caption.table-title {
         padding: 0 0 0.5em 1em;
     }
 
-    .mobile_padding .table-of-contents-outer {
+    .mobile_padding #tableOfContentsOuter {
         display: none;
     }
 }

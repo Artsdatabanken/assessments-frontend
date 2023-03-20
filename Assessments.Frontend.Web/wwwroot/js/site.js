@@ -53,7 +53,7 @@ document.addEventListener('click', e => {
     if (!e.target.matches('#sidebarmenu_container *')) { // Surrounding parent 
         closeSidebarmenuitemclick(e.target);
     }
-    if (!e.target.matches('.table-of-contents-outer *')) {
+    if (!e.target.matches('#tableOfContentsOuter *')) {
         if (document.getElementById('showTableOfContentList')) {
             document.getElementById('showTableOfContentList').checked = false;
         }

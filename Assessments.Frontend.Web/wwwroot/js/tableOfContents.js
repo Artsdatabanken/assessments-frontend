@@ -1,9 +1,11 @@
 ﻿const tableOfContentButton = document.getElementById('tableOfContentsLabel');
 const tableOfContentInput = document.getElementById('showTableOfContentList');
 const tableOfContentsSmallScreen = document.getElementById('tableOfContentsSmallScreen');
+const tableOfContentsOuter = document.getElementById('tableOfContentsOuter');
 
 const hideTableOfContentsSmallScreen = () => {
     tableOfContentsSmallScreen.classList.add('table-of-contents-small-screen-show');
+    tableOfContentsOuter.classList.add('table-of-contents-sticky');
 }
 
 const showTableOfContentButton = () => {

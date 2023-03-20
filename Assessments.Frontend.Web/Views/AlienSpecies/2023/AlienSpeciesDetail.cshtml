@@ -184,12 +184,23 @@
 
 <div class="pagecontainer">
     <partial name="/Views/Shared/_PageMenu.cshtml" model="Model.PageMenuViewModel" />
-    <partial name="/Views/Shared/_TableOfContents.cshtml" model="Model.PageMenuViewModel.TableOfContentsViewModel" />
 
     <div class="content-placer bigmid">
         <div class="mid-content with_sidebar">
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
+                <div class="table-of-contents-outer">
+                    <input type="checkbox" id="showTableOfContentList" class="button table-of-contents-small-screen-input" />
+                    <label id="tableOfContentsLabel" for="showTableOfContentList" class="button table-of-contents-small-screen-button table-of-contents-small-screen-button-hide">
+                        <span class="material-icons">
+                            list
+                        </span>
+                        <span>&nbsp;Innhold</span>
+                    </label>
+                    <div id="tableOfContentsSmallScreen" onclick="closeTableOfContents(event)">
+                        <partial name="/Views/Shared/_TableOfContents.cshtml" model="Model.PageMenuViewModel.TableOfContentsViewModel" />
+                    </div>
+                </div>
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 <div is-visible="!isNr && !isEvaluatedAtAnotherLevel">

@@ -195,16 +195,6 @@ option {
         display: inline-block;
         position: sticky;
     }
-
-    .table-of-contents {
-        display: none;
-    }
-
-    .sidebarmenu #TableOfContents li a {
-        text-decoration: revert;
-        border: none;
-        padding: 0 0 0.5em 1em;
-    }
 }
 /* PAD-SIZE 940px */
 @media only screen and (max-width: 940px) {

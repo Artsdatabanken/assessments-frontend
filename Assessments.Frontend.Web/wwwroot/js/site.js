@@ -52,7 +52,12 @@ document.addEventListener('click', e => {
     }
     if (!e.target.matches('#sidebarmenu_container *')) { // Surrounding parent 
         closeSidebarmenuitemclick(e.target);
-    }      
+    }
+    if (!e.target.matches('.table-of-contents-outer *')) {
+        if (document.getElementById('showTableOfContentList')) {
+            document.getElementById('showTableOfContentList').checked = false;
+        }
+    }
 });
 
 document.addEventListener('keydown', (e) => {
@@ -71,6 +76,11 @@ document.addEventListener('keydown', (e) => {
         if (themeSelectorDropDownRL){
             themeSelectorDropDownRL.style.display = "none";
         }
+
+        if (document.getElementById('showTableOfContentList')) {
+            document.getElementById('showTableOfContentList').checked = false;
+        }
+
 
         closeSidebarmenuitemclick(e.target);
         if (isSmallReader()) {

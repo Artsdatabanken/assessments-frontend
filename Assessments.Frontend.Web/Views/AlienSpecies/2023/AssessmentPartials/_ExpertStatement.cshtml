@@ -12,12 +12,14 @@
                 !string.IsNullOrEmpty(Model.SpreadFurtherSpreadFurtherInfo);
     var showReasoning = Model.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR ||
                 Model.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
+    var showConclusion = !showReasoning && !string.IsNullOrEmpty(Model.CriteriaDocumentation);
     var showExpertSummary = showSpeciesStatusDocumentation ||
                                                         showUncertaintyStatusDescription ||
                                                         showDomesticSpreadDocumentation ||
                                                         showInvasionPotentialDocumentation ||
                                                         showEcoEffectDocumentation ||
-                                                        showSpreadWays;
+                                                        showSpreadWays ||
+                                                        showConclusion;
 }
 
 <div id="@nameof(Constants.HeadingsNo.ExpertSummary)">
@@ -25,6 +27,7 @@
         <h2>@Constants.HeadingsNo.ExpertSummary</h2>
         <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
+
     <div is-visible="@showExpertSummary">
         <div is-visible="@showSpeciesStatusDocumentation">               
             <h3>
@@ -73,6 +76,13 @@
             <h3>Økologisk effekt</h3>
             <p class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentationEcoEffect)
+            </p>
+        </div>
+        
+        <div is-visible="@showConclusion">
+            <h3>@Constants.HeadingsNo.Conclusion</h3>
+            <p class="expert_text">
+                @Html.Raw(Model.CriteriaDocumentation)
             </p>
         </div>
     </div>

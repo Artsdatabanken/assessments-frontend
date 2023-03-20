@@ -314,6 +314,124 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
+    public class GeographicVariation
+    {
+        public enum GeographicVariationEnum
+        {
+            [Display(Name = "Risikoen er ulik innenfor artens potensielle forekomstareal")]
+            Gvv,
+
+            [Display(Name = "Risikoen er den samme innenfor artens potensielle forekomstareal")]
+            Gvn,
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023GeographicVariationFilters =
+        {
+            new ()
+            {
+                Name = GeographicVariationEnum.Gvv.DisplayName(),
+                NameShort = nameof(GeographicVariationEnum.Gvv)
+            },
+            new()
+            {
+                Name = GeographicVariationEnum.Gvn.DisplayName(),
+                NameShort = nameof(GeographicVariationEnum.Gvn)
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023GeographicVariation = new()
+        {
+            Filters = AlienSpecies2023GeographicVariationFilters,
+            FilterDescription = "",
+            FilterButtonName = "'geografisk variasjon'-filtre",
+            FilterButtonText = "Geografisk variasjon i risiko"
+        };
+    }
+
+    public class ClimateEffects
+    {
+        public enum ClimateEffectsEnum
+        {
+            [Display(Name = "Invasjonspotensial påvirket av klimaendringer")]
+            Cepi,
+
+            [Display(Name = "Økologisk effekt påvirket av klimaendringer")]
+            Cepo,
+
+            [Display(Name = "Invasjonspotensial ikke påvirket av klimaendringer")]
+            Ceii,
+
+            [Display(Name = "Økologisk effekt ikke påvirket av klimaendringer")]
+            Ceio,
+
+            [Display(Name = "Påvirket av klimaendringer")]
+            Cep,
+
+            [Display(Name = "Ikke påvirket av klimaendringer")]
+            Cei,
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023ClimateEffectsFiltersAffected =
+        {
+            new ()
+            {
+                Name = ClimateEffectsEnum.Cepi.DisplayName(),
+                NameShort = nameof(ClimateEffectsEnum.Cepi),
+            },
+            new()
+            {
+                Name = ClimateEffectsEnum.Cepo.DisplayName(),
+                NameShort = nameof(ClimateEffectsEnum.Cepo),
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023ClimateEffectsFiltersNotAffected =
+        {
+            new ()
+            {
+                Name = ClimateEffectsEnum.Ceii.DisplayName(),
+                NameShort = nameof(ClimateEffectsEnum.Ceii),
+            },
+            new()
+            {
+                Name = ClimateEffectsEnum.Ceio.DisplayName(),
+                NameShort = nameof(ClimateEffectsEnum.Ceio),
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023ClimateEffectsFilters =
+        {
+            new ()
+            {
+                Name = ClimateEffectsEnum.Cep.DisplayName(),
+                NameShort = nameof(ClimateEffectsEnum.Cep),
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023ClimateEffectsFiltersAffected,
+                    FilterDescription = ""
+                }
+            },
+            new()
+            {
+                Name = ClimateEffectsEnum.Cei.DisplayName(),
+                NameShort = nameof(ClimateEffectsEnum.Cei),
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023ClimateEffectsFiltersNotAffected,
+                    FilterDescription = ""
+                }
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023ClimateEffects = new()
+        {
+            Filters = AlienSpecies2023ClimateEffectsFilters,
+            FilterDescription = "",
+            FilterButtonName = "'klimaendringer'-filtre",
+            FilterButtonText = "Betydning av klimaendringer for risiko"
+        };
+    }
+
     public class TaxonRank
     {
         public enum TaxonRankEnum

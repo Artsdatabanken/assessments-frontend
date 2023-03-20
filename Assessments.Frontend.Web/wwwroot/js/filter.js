@@ -29,7 +29,10 @@ if (filters) {
         "show_insects",
         "show_skr",
         "show_sin",
-        "show_ttn"
+        "show_ttn",
+        "show_cep",
+        "show_cei"
+
     ];
 
     const markAllInputs = document.querySelectorAll(".mark_all > input:first-of-type");

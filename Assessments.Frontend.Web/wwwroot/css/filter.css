@@ -571,6 +571,8 @@ button.list_header {
 .only_js .filter_species_groups,
 .only_js .filter_speciesgroups,
 .only_js .filter_taxon_rank,
+.only_js .filter_geographicvariations,
+.only_js .filter_climateeffects,
 .only_js .filter_taxonrank,
 .only_js .filter_productionspecies {
     display: block;
@@ -588,6 +590,8 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_skr ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_ttn ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_cep ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_cei ~ .filter_subgroup,
 /*groups*/
 .only_js input[type=checkbox]:not(:checked)#show_area ~ .filter_area,
 .only_js input[type=checkbox]:not(:checked)#show_category ~ .filter_category,
@@ -608,6 +612,8 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_speciesgroups ~ .filter_speciesgroups,
 .only_js input[type=checkbox]:not(:checked)#show_productionspecies ~ .filter_productionspecies,
 .only_js input[type=checkbox]:not(:checked)#show_taxon_rank ~ .filter_taxon_rank,
+.only_js input[type=checkbox]:not(:checked)#show_geographicvariations ~ .filter_geographicvariations,
+.only_js input[type=checkbox]:not(:checked)#show_climateeffects ~ .filter_climateeffects,
 .only_js input[type=checkbox]:not(:checked)#show_taxonrank ~ .filter_taxonrank {
     display: none;
 }

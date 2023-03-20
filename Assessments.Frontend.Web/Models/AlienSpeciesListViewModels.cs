@@ -29,7 +29,9 @@ namespace Assessments.Frontend.Web.Models
             nameof(SpeciesGroups),
             nameof(TaxonRank),
             nameof(WaterRegions),
-            nameof(CategoryChanged)
+            nameof(CategoryChanged),
+            nameof(GeographicVariations),
+            nameof(ClimateEffects)
         };
 
         public string SortBy { get; set; }
@@ -48,6 +50,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string[] CategoryChanged { get; set; } = Array.Empty<string>();
 
+        public string[] ClimateEffects { get; set; } = Array.Empty<string>();
+
         public string[] Criterias { get; set; } = Array.Empty<string>();
 
         public string[] EcologicalEffect { get; set; } = Array.Empty<string>();
@@ -57,6 +61,8 @@ namespace Assessments.Frontend.Web.Models
         public string[] DecisiveCriterias { get; set; } = Array.Empty<string>();
 
         public string[] SpeciesStatus { get; set; } = Array.Empty<string>();
+
+        public string[] GeographicVariations { get; set; } = Array.Empty<string>();
 
         public string[] Habitats { get; set; } = Array.Empty<string>();
 

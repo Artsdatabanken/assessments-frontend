@@ -1239,12 +1239,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Dørstokkart",
-                NameShort = "eda",
-            },
-            new()
-            {
-                Name = "Dørstokkart som...",
+                Name = "Dørstokkarter",
                 NameShort = "eds",
                 SubGroup = new()
                 {

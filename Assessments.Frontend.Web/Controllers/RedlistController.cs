@@ -1,16 +1,16 @@
-using System.Collections.Generic;
+using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Frontend.Web.Infrastructure.Services;
+using Assessments.Frontend.Web.Models;
+using Assessments.Mapping.RedlistSpecies;
+using Assessments.Shared.Helpers;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
-using Assessments.Frontend.Web.Infrastructure;
-using Assessments.Frontend.Web.Models;
-using Assessments.Mapping.RedlistSpecies;
-using Newtonsoft.Json.Linq;
 using X.PagedList;
-using Assessments.Frontend.Web.Infrastructure.Services;
-using Assessments.Shared.Helpers;
-using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Assessments.Frontend.Web.Controllers
 {
@@ -80,7 +80,7 @@ namespace Assessments.Frontend.Web.Controllers
                 var name = viewModel.Name.Trim().ToLower();
 
                 var queryByName = Helpers.GetQueryByName(query, name);
-                
+
                 if (queryByName.Any())
                 {
                     query = queryByName;
@@ -104,7 +104,7 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
 
             // Categories
-            viewModel.Category = Helpers.FindSelectedRedlistSpeciesCategories( viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
+            viewModel.Category = Helpers.FindSelectedRedlistSpeciesCategories(viewModel.Redlisted, viewModel.Endangered, viewModel.Category);
 
             if (viewModel.Category?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));
@@ -134,7 +134,7 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 if (viewModel.SpeciesGroups.Contains("Insekter"))
                     viewModel.SpeciesGroups = Helpers.GetSelectedSpeciesGroups(viewModel.SpeciesGroups.ToList());
-                    
+
                 query = query.Where(x => !string.IsNullOrEmpty(x.SpeciesGroup) && viewModel.SpeciesGroups.Contains(x.SpeciesGroup));
             }
 
@@ -180,14 +180,14 @@ namespace Assessments.Frontend.Web.Controllers
         {
             var jsonSpeciesGroup = await GetResource("wwwroot/json/speciesgroup.json");
             Dictionary<string, Dictionary<string, string>> speciesgroupDict = jsonSpeciesGroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
-            
+
             var name = search.Trim().ToLower();
             var query = await DataRepository.GetSpeciesAssessments();
 
             var artskartResult = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
-            
+
             // Remove species not present in 'rødlista for arter'
-            var suggestions = artskartResult.Where(x => 
+            var suggestions = artskartResult.Where(x =>
                                                     (x.TaxonCategory != Constants.TaxonCategoriesEn.Species &&                          // Not species
                                                     x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&                        // Not subspecies
                                                     x.TaxonCategory != Constants.TaxonCategoriesEn.Variety) &&                          // Not variety
@@ -197,7 +197,8 @@ namespace Assessments.Frontend.Web.Controllers
             // Add assessments if they are in redlist, but not in artskart. "Subsp." and "var." are not included in scientific names in artskart.
             var redlistHits = query.Where(x => x.ScientificName.Trim().ToLower().Contains(name)).ToArray();
 
-            foreach (var hit in redlistHits) {
+            foreach (var hit in redlistHits)
+            {
                 if (suggestions.Any(x => x.ScientificNameId.Equals(hit.ScientificNameId))) continue;
                 suggestions.Add(new ArtskartTaxon
                 {
@@ -212,7 +213,7 @@ namespace Assessments.Frontend.Web.Controllers
             }
 
             // Add assessmentIds to species, subspecies and variety
-            foreach (var item in suggestions.Select((hit, i) => new { i, hit}))
+            foreach (var item in suggestions.Select((hit, i) => new { i, hit }))
             {
                 if (
                     item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Species ||
@@ -222,14 +223,15 @@ namespace Assessments.Frontend.Web.Controllers
                 {
                     var ids = query
                         .Where(x => x.ScientificNameId == item.hit.ScientificNameId)
-                        .Select(x => new {
+                        .Select(x => new
+                        {
                             id = x.Id,
                             area = x.AssessmentArea,
                             category = x.Category,
                             speciesGroup = x.SpeciesGroup,
                             speciesGroupIconUrl = speciesgroupDict[x.SpeciesGroup]["image"],
                             scientificName = x.ScientificName
-                            })
+                        })
                         .ToArray();
 
                     item.hit.assessments = ids;
@@ -244,11 +246,11 @@ namespace Assessments.Frontend.Web.Controllers
 
             if (artskartResult.Any() && suggestions.Any() != true)
             {
-                return Json(new List<object>() {new {message = "Her får du treff, men ingen av artene er behandlet i Rødlista for arter 2021"}});
+                return Json(new List<object>() { new { message = "Her får du treff, men ingen av artene er behandlet i Rødlista for arter 2021" } });
             }
             else if (artskartResult.Any() != true && suggestions.Any() != true)
             {
-                return Json(new List<object>() {new {message = "Her får du ingen treff." } });
+                return Json(new List<object>() { new { message = "Her får du ingen treff." } });
             }
 
             return Json(suggestions);
@@ -267,11 +269,11 @@ namespace Assessments.Frontend.Web.Controllers
             ViewBag.revisionid = null;
 
             ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
-            
-            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json"); 
-            
+
+            ViewBag.glossary = await GetResource("wwwroot/json/glossary.json");
+
             ViewBag.categories = await GetResource("wwwroot/json/categories.json");
-            
+
             ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
 
             ViewBag.speciesgroup = await GetResource("wwwroot/json/speciesgroup.json");
@@ -286,7 +288,7 @@ namespace Assessments.Frontend.Web.Controllers
             var data = await DataRepository.GetSpeciesAssessments();
 
             var assessment = data.FirstOrDefault(x => x.Id == id);
-            
+
             if (assessment == null)
                 return NotFound();
 
@@ -331,7 +333,7 @@ namespace Assessments.Frontend.Web.Controllers
 
             // STATISTICS.
             // INPUT dataset is an already filtered list, based on active filters in the view. 
-            string[] relevantCategories = new string[]{"CR", "EN", "VU", "NT"};
+            string[] relevantCategories = new string[] { "CR", "EN", "VU", "NT" };
 
             // CATEGORY
             var categories = data.Where(x => !string.IsNullOrEmpty(x.Category)).GroupBy(x => new
@@ -352,11 +354,11 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Fetch all habitat lists, flatten the lists and make it distinct to obtain all currently possible habitat names.
             var habitatNames = data
-                .Where(x => relevantCategories.Contains(x.Category.Substring(0,2)))
+                .Where(x => relevantCategories.Contains(x.Category.Substring(0, 2)))
                 .Select(x => x.MainHabitat)
                 .SelectMany(x => x)
                 .Distinct()
-                .ToList(); 
+                .ToList();
 
             // For each of the habitatnames - count each occurence in the main dataset
             var habitatStats = habitatNames.Select(name => new KeyValuePair<string, int>(name, data.Count(x => x.MainHabitat.Contains(name))))
@@ -370,7 +372,7 @@ namespace Assessments.Frontend.Web.Controllers
                 .Where(x => relevantCategories.Contains(x.Category.Substring(0, 2)))
                 .Select(x => x.RegionOccurrences)
                 .SelectMany(x => x)
-                .Where(x => x.Fylke == name && x.State ==0).Count()))
+                .Where(x => x.Fylke == name && x.State == 0).Count()))
                 .ToDictionary(x => x.Key, x => x.Value);
             viewModel.Statistics.Region = regionStats;
 
@@ -419,7 +421,7 @@ namespace Assessments.Frontend.Web.Controllers
                 });
 
             viewModel.Statistics.ImpactFactors = new Dictionary<string, int>();
-            
+
             foreach (var item in impactFactors)
             {
                 viewModel.Statistics.ImpactFactors.Add(item.key, item.value);
@@ -428,14 +430,14 @@ namespace Assessments.Frontend.Web.Controllers
 
         private static async Task<JObject> GetResource(string resourcePath)
         {
-            #if (DEBUG == true)
+#if (DEBUG == true)
             if (_resourceCache.ContainsKey(resourcePath)) return _resourceCache[resourcePath];
-            #endif
+#endif
             var json = await System.IO.File.ReadAllTextAsync(resourcePath);
             var jObject = JObject.Parse(json);
-            #if (DEBUG == true)
+#if (DEBUG == true)
             if (!_resourceCache.ContainsKey(resourcePath)) _resourceCache.Add(resourcePath, jObject);
-            #endif            
+#endif
             return jObject;
         }
     }

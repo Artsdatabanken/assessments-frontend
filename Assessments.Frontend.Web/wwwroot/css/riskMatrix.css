@@ -91,27 +91,27 @@
 
 /* colours */
 .risk-matrix .nk span {
-    background: #9ba963;
+    background: #94A360;
     color: #201f1f
 }
 
 .risk-matrix .lo span {
-    background: #5ea4a1;
+    background: #5C9A94;
     color: #201f1f
 }
 
 .risk-matrix .ph span {
-    background: #185a6c;
+    background: #296473;
     color: white;
 }
 
 .risk-matrix .hi span {
-    background: #1b386f;
+    background: #2E4073;
     color: white;
 }
 
 .risk-matrix .se span {
-    background: #5e3063;
+    background: #4F1052;
     color: white;
 }
 

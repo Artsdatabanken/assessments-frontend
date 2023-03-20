@@ -276,35 +276,5 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             return explanation;
         }
-
-        public static string GetLowerEcologicalEffectsText(AlienSpeciesAssessment2023Category category)
-        {
-            AlienSpeciesAssessment2023Category[] categoriesArray = (AlienSpeciesAssessment2023Category[])Enum.GetValues(typeof(AlienSpeciesAssessment2023Category));
-            // Not able to use Array.ToList() for some reason. Manually converting it... If you come across this and know the reason, please feel free to fix it :)
-            List<AlienSpeciesAssessment2023Category> categoriesList = new();
-            foreach (var cat in categoriesArray)
-            {
-                categoriesList.Add(cat);
-            }
-            var categoryTexts = string.Empty;
-            var index = Array.IndexOf(categoriesArray, category);
-
-            if (index == -1)
-                return categoryTexts;
-
-            for (var i = index + 1; i < categoriesList.Count - 1; i++)
-            {
-                categoryTexts += $"<i>{categoriesList[i].DisplayName().ToLowerInvariant()}</i> - {categoriesList[i].ToString()}";
-                if (i < categoriesList.Count - 3)
-                {
-                    categoryTexts += ", ";
-                }
-                else if (i == categoriesList.Count - 3)
-                {
-                    categoryTexts += " eller ";
-                }
-            }
-            return categoryTexts;
-        }
     }
 }

@@ -201,6 +201,7 @@
 
 <div class="pagecontainer">
     <partial name="/Views/Shared/_PageMenu.cshtml" model="Model.PageMenuViewModel" />
+    <partial name="/Views/Shared/_TableOfContents.cshtml" model="Model.PageMenuViewModel.TableOfContentsViewModel" />
 
     <div class="content-placer bigmid">
         <div class="mid-content with_sidebar">
@@ -212,9 +213,6 @@
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>
                 </div>
                 <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Conclusion.cshtml" model="Model.ExpertStatementViewModel"/>
-                <div class="table-of-contents">
-                    <partial name="/Views/Shared/_TableOfContents.cshtml" model="Model.PageMenuViewModel.TableOfContentsViewModel" />
-                </div>
                 <div class="page_section" is-visible="showExpertStatement">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="Model.ExpertStatementViewModel" />
                 </div>

@@ -72,7 +72,7 @@ namespace Assessments.Frontend.Web.Models
 
         public string[] Regions { get; set; } = Array.Empty<string>();
 
-        public string[] RegionallyAlien { get; set; } = new string[] { "Rae" };
+        public string[] RegionallyAlien { get; set; } = Array.Empty<string>();
 
         public string[] SpeciesGroups { get; set; } = Array.Empty<string>();
 

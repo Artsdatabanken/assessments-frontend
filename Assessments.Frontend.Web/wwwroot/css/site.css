@@ -604,7 +604,7 @@ button {
         font-family: "Roboto condensed";
         height: 50px;
         line-height: 50px;
-        /*width: 300px; remove for innsight (innsyn)*/
+        width: 300px;
     }
 }
 

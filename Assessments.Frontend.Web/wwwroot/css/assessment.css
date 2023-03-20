@@ -504,33 +504,23 @@ no_distribution {
 }
 
 .known_today {
-    background: #51b051;
-    fill: #51b051;
+    background: #007759;
+    fill: #007759;
 }
 
 .sea.known_today {
-    background: #7ae57a;
-    fill: #7ae57a;
+    background: #16a979;
+    fill: #16a979;
 }
 
-.is_assumed_today {
-    background: #f9ae00;
-    fill: #f9ae00;
+.is_assumed {
+    background: #b67717;
+    fill: #b67717;
 }
 
-.sea.is_assumed_today {
-    background: #b77818;
-    fill: #b77818;
-}
-
-.is_assumed_in_future {
-    background: #f9ae00;
-    fill: #f9ae00;
-}
-
-.sea.is_assumed_in_future {
-    background: #b77818;
-    fill: #b77818;
+.sea.is_assumed {
+    background: #f8ae00;
+    fill: #f8ae00;
 }
 
 .indicator {

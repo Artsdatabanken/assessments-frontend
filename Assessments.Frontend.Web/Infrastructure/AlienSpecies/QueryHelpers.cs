@@ -44,6 +44,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.TaxonRank.Any())
                 query = ApplyTaxonRank(parameters.TaxonRank, query);
 
+            if (parameters.GeographicVariations.Any())
+                query = ApplyGeographicVariation(parameters.GeographicVariations, query);
+
+            if (parameters.ClimateEffects.Any())
+                query = ApplyClimateEffects(parameters.ClimateEffects, query);
+
             if (string.IsNullOrEmpty(parameters.SortBy) || parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.ScientificName), StringComparison.InvariantCultureIgnoreCase))
                 query = query.OrderBy(x => x.ScientificName.ScientificName.Replace("×", string.Empty));
             else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.VernacularName), StringComparison.InvariantCultureIgnoreCase))
@@ -146,6 +152,46 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     nameof(TaxonRank.TaxonRankEnum.tvi) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
                     _ => isInt ? query.Where(x => ((int)x.ScientificName.ScientificNameRank) == result) : null
                 };
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyGeographicVariation(string[] geographicVariations, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            var newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+
+            foreach (var variation in geographicVariations)
+            {
+                var assessments = variation switch
+                {
+                    nameof(GeographicVariation.GeographicVariationEnum.Gvv) => query.Where(x => x.GeographicVariationInCategory == true),
+                    nameof(GeographicVariation.GeographicVariationEnum.Gvn) => query.Where(x => x.GeographicVariationInCategory == false),
+                    _ => null
+                };
+
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery;
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyClimateEffects(string[] climateEffects, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            var newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+
+            foreach (var effect in climateEffects)
+            {
+                var assessments = effect switch
+                {
+                    nameof(ClimateEffects.ClimateEffectsEnum.Cepi) => query.Where(x => x.ClimateEffectsInvasionpotential == true),
+                    nameof(ClimateEffects.ClimateEffectsEnum.Cepo) => query.Where(x => x.ClimateEffectsEcoEffect == true),
+                    nameof(ClimateEffects.ClimateEffectsEnum.Ceii) => query.Where(x => x.ClimateEffectsInvasionpotential == false),
+                    nameof(ClimateEffects.ClimateEffectsEnum.Ceio) => query.Where(x => x.ClimateEffectsEcoEffect == false),
+                    _ => null
+                };
+
                 if (assessments != null)
                     newQuery = newQuery.Concat(assessments);
             }

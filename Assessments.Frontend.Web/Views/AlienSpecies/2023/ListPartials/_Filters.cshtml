@@ -19,6 +19,7 @@
     var AllHabitats = Habitat.AlienSpecies2023Habitats;
     var AllInvasionPotentials = Categories.AlienSpecies2023InvasionPotential;
     var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
+    var AllRegionallyAlien = RegionallyAlien.AlienSpecies2023RegionallyAlien;
     var AllRegions = Regions.AlienSpecies2023Regions;
     var AllSpeciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
     var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
@@ -180,6 +181,7 @@
                             MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters);
                             MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters);
                             MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters);
+                            MakeFilterChips(Model.RegionallyAlien, AllRegionallyAlien.Filters);
                             MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters);
                             MakeFilterChips(Model.GeographicVariations, AllGeographicVariation.Filters);
                             MakeFilterChips(Model.ClimateEffects, AllClimateEffects.Filters);
@@ -248,6 +250,7 @@
                                     MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies);
                                     MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
                                     MakeFilterGroup(nameof(Model.SpreadWays), Model.SpreadWays, AllSpreadWays);
+                                    MakeFilterGroup(nameof(Model.RegionallyAlien), Model.RegionallyAlien, AllRegionallyAlien);
                                 }
                             </ul>
                         </div>

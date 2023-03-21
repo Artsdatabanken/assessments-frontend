@@ -90,6 +90,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.Habitats?.Any() == true)
                         return $"{parameters.Habitats.Length}";
                     return String.Empty;
+                case nameof(parameters.RegionallyAlien):
+                    if (parameters.RegionallyAlien?.Any() == true)
+                        return $"{parameters.RegionallyAlien.Length}";
+                    return String.Empty;
                 case nameof(parameters.Regions):
                     if (parameters.Regions?.Any() == true)
                         return $"{parameters.Regions.Length}";
@@ -139,6 +143,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             count += parameters.SpreadWays.Length;
             count += parameters.TaxonRank.Length;
             count += parameters.Habitats.Length;
+            count += parameters.RegionallyAlien.Length;
             count += parameters.Regions.Length;
             count += parameters.WaterRegions.Length;
             count += parameters.Criterias.Length;
@@ -162,6 +167,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             selectionlist = selectionlist.Concat(parameters.SpreadWays).ToArray();
             selectionlist = selectionlist.Concat(parameters.TaxonRank).ToArray();
             selectionlist = selectionlist.Concat(parameters.Habitats).ToArray();
+            selectionlist = selectionlist.Concat(parameters.RegionallyAlien).ToArray();
             selectionlist = selectionlist.Concat(parameters.Regions).ToArray();
             selectionlist = selectionlist.Concat(parameters.WaterRegions).ToArray();
             selectionlist = selectionlist.Concat(parameters.Criterias).ToArray();

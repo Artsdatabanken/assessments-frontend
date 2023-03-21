@@ -34,7 +34,9 @@ if (filters) {
         "show_cei",
         "show_swimp",
         "show_swnat",
-        "show_swspr"
+        "show_swspr",
+        "show_regionallyalien",
+        "show_rar"
     ];
 
     const markAllInputs = document.querySelectorAll(".mark_all > input:first-of-type");

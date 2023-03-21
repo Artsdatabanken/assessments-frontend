@@ -613,6 +613,187 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
+    public class RegionallyAlien
+    {
+        public enum RegionallyAlienEnum
+        {
+            [Display(Name = "Ekskluder regionalt fremmede arter i filtertreff")]
+            Rae,
+
+            [Display(Name = "Kun vis regionalt fremmede arter i filtertreff")]
+            Rai,
+
+            [Display(Name = "Regionvis utbredelse")]
+            Rar,
+
+            [Display(Name = "Agder")]
+            Raag,
+
+            [Display(Name = "Bottenhavet")]
+            Raboh,
+
+            [Display(Name = "Bottenviken")]
+            Rabov,
+
+            [Display(Name = "Innlandet og Viken")]
+            Rain,
+
+            [Display(Name = "Kemijoki")]
+            Rake,
+
+            [Display(Name = "Møre og Romsdal")]
+            Ramo,
+
+            [Display(Name = "Nordland og Jan Mayen")]
+            Rano,
+
+            [Display(Name = "Norsk-finsk")]
+            Ranof,
+
+            [Display(Name = "Rogaland")]
+            Raro,
+
+            [Display(Name = "Torneå")]
+            Rator,
+
+            [Display(Name = "Tornionjoki")]
+            Ratoj,
+
+            [Display(Name = "Troms og Finnmark")]
+            Ratrf,
+
+            [Display(Name = "Trøndelag")]
+            Ratro,
+
+            [Display(Name = "Vestfold og Telemark")]
+            Ravet,
+
+            [Display(Name = "Vestland")]
+            Raves,
+
+            [Display(Name = "Västerhavet")]
+            Rava,
+
+        }
+
+        public static readonly Filter.FilterItem[] RegionalSpread =
+        {
+            new()
+            {
+                Name = RegionallyAlienEnum.Raag.DisplayName(),
+                NameShort = RegionallyAlienEnum.Raag.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Raboh.DisplayName(),
+                NameShort = RegionallyAlienEnum.Raboh.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rabov.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rabov.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rain.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rain.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rake.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rake.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ramo.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ramo.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rano.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rano.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ranof.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ranof.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Raro.DisplayName(),
+                NameShort = RegionallyAlienEnum.Raro.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rator.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rator.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ratoj.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ratoj.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ratrf.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ratrf.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ratro.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ratro.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ravet.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ravet.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Raves.DisplayName(),
+                NameShort = RegionallyAlienEnum.Raves.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rava.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rava.GetHashCode().ToString()
+            },
+
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023RegionallyAlienFilters =
+        {
+            new()
+            {
+                Name = RegionallyAlienEnum.Rae.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rae.ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rai.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rai.ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rar.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rar.ToString(),
+                SubGroup = new()
+                {
+                    Filters = RegionalSpread,
+                    FilterDescription = "Vannregioner"
+                }
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023RegionallyAlien = new()
+        {
+            Filters = AlienSpecies2023RegionallyAlienFilters,
+            FilterDescription = "",
+            FilterButtonName = "'regionalt fremmed'-filtre",
+            FilterButtonText = "Regionalt fremmede arter"
+        };
+    }
+
     public class TaxonRank
     {
         public enum TaxonRankEnum

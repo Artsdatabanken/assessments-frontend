@@ -1,7 +1,7 @@
 ﻿@model TableOfContentsViewModel
 
 <div id="@nameof(Constants.HeadingsNo.TableOfContents)"  class="table-of-contents">
-    <h2>@Constants.HeadingsNo.TableOfContents</h2>
+    <h3><span>@Constants.HeadingsNo.TableOfContents</span></h3>
     <ul>
         @foreach (var heading in Model.Contents)
         {

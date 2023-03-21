@@ -445,7 +445,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             [Display(Name = "Som blindpassasjerer")]
             Swibl,
 
-            [Display(Name = "Bevisst utsetting")]
+            [Display(Name = "Tilsiktet utsetting")]
             Swnbe,
 
             [Display(Name = "Rømning/forvilling")]

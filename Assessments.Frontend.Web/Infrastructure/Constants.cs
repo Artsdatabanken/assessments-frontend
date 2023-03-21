@@ -41,7 +41,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string Citation = "Sitering";
             public static readonly string RiskMatrix = "Risikomatrisen";
             public static readonly string Conclusion = "Konklusjon";
-            public static readonly string TableOfContents = "Innhold";
+            public static readonly string TableOfContents = "Innhold på siden";
             public static readonly string ExpertSummary = "Ekspertenes oppsummering";
             public static readonly string AssesmentReasoning = "Begrunnelse";
             public static readonly string RiskCategoryExplanation = "Hva forklarer artens risikokategori";

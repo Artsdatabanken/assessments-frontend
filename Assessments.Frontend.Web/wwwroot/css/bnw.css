@@ -557,3 +557,8 @@
 .darktheme .error {
     color: #e55440;
 }
+
+.darktheme .mobile_padding .table-of-contents {
+    background-color: #201f1f;
+    border: 1px solid #ccc;
+}

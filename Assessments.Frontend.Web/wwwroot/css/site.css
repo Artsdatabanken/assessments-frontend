@@ -190,12 +190,11 @@ option {
         flex-wrap: wrap;
     }
 
-
     .sidebarmenu {
         vertical-align: top;
         display: inline-block;
+        position: sticky;
     }
-
 }
 /* PAD-SIZE 940px */
 @media only screen and (max-width: 940px) {

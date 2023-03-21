@@ -360,20 +360,20 @@
                         Estimeringsmetode: @assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
                     </p>
                     <p is-visible="showSimplifiedEstimateAcceptedAlien">
-                        Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest km²) og om 50 år (@assessment.AOOfutureBest km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
+                        Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest?.ToString("N0") km²) og om 50 år (@assessment.AOOfutureBest.ToString("N0") km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
                     </p>
                     <div is-visible="showSimplifiedEstimateNotAcceptedAlien">
                         <p>
-                            Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest km²) og om 50 år (@assessment.AOOfutureBest km²) ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
+                            Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest?.ToString("N0") km²) og om 50 år (@assessment.AOOfutureBest.ToString("N0") km²) ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore.ToString("N0") (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow.ToString("N0") – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh.ToString("N0")). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
                         </p>
                         <p>Begrunnelse for justering av skår og/eller usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                     </div>
                     <p is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-                        Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
+                        Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best?.ToString("N0") forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest?.ToString("N0") ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
                     </p>
                     <div is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
                         <p>
-                            Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
+                            Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best?.ToString("N0") forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest?.ToString("N0") ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore.ToString("N0") (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow.ToString("N0") – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh.ToString("N0")). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
                         </p>
                         <p>Begrunnelse for justering av skår og/eller usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
                     </div>
@@ -382,31 +382,31 @@
                             <caption class="table-title">Demografiske nøkkeltall</caption>
                             <tr is-visible="assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
                                 <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationPopulationSize</td>
+                                <td>@assessment.MedianLifetimeNumericalEstimationPopulationSize.ToString("N0")</td>
                             </tr>
                             <tr is-visible="assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
                                 <td>Vekstrate (&lambda;): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationGrowthRate</td>
+                                <td>@assessment.MedianLifetimeNumericalEstimationGrowthRate.ToString("N0")</td>
                             </tr>
                             <tr is-visible="assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
                                 <td>Miljøvarians (&sigma;<sub>e</sub><sup>2</sup>): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance</td>
+                                <td>@assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance?.ToString("N0")</td>
                             </tr>
                             <tr is-visible="assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
                                 <td>Demografisk varians (&sigma;<sub>d</sub><sup>2</sup>): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationDemographicVariance</td>
+                                <td>@assessment.MedianLifetimeNumericalEstimationDemographicVariance?.ToString("N0")</td>
                             </tr>
                             <tr is-visible="assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
                                 <td>Bæreevne (K, i antall individer): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationCarryingCapacity</td>
+                                <td>@assessment.MedianLifetimeNumericalEstimationCarryingCapacity?.ToString("N0")</td>
                             </tr>
                             <tr is-visible="assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
                                 <td>Terskel for kvasiutdøing (C, i antall individer): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationExtinctionThreshold</td>
+                                <td>@assessment.MedianLifetimeNumericalEstimationExtinctionThreshold?.ToString("N0")</td>
                             </tr>
                         </table>
                         <br />
-                        <p is-visible="assessment.MedianLifetimeBestEstimate != 0">Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til @assessment.MedianLifetimeBestEstimate år.</p>
+                        <p is-visible="assessment.MedianLifetimeBestEstimate != 0">Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til @assessment.MedianLifetimeBestEstimate.ToString("N0") år.</p>
                     </div>
                     <div is-visible="showViableAnalysis">
                         <p>Beskrivelse av modeller og programvare som er brukt: @assessment.MedianLifetimeViabilityAnalysisDescription</p>
@@ -414,15 +414,15 @@
                             <caption class="table-title">Demografiske nøkkeltall</caption>
                             <tr is-visible="assessment.MedianLifetimeBestEstimate != 0">
                                 <td>Estimert median levetid (i år): </td>
-                                <td>@assessment.MedianLifetimeBestEstimate</td>
+                                <td>@assessment.MedianLifetimeBestEstimate.ToString("N0")</td>
                             </tr>
                             <tr is-visible="assessment.MedianLifetimeLowEstimate != 0">
                                 <td>Estimert median levetid (i år) lavt anslag: </td>
-                                <td>@assessment.MedianLifetimeLowEstimate</td>
+                                <td>@assessment.MedianLifetimeLowEstimate.ToString("N0")</td>
                             </tr>
                             <tr is-visible="assessment.MedianLifetimeHighEstimate != 0">
                                 <td>Estimert median levetid (i år) høyt anslag: </td>
-                                <td>@assessment.MedianLifetimeHighEstimate</td>
+                                <td>@assessment.MedianLifetimeHighEstimate.ToString("N0")</td>
                             </tr>
                         </table>
                     </div>
@@ -466,15 +466,15 @@
                             <caption class="table-title">Ekspansjonshastighet</caption>
                             <tr>
                                 <td>Gjennomsnittlig (m/år): </td>
-                                <td>@assessment.ExpansionSpeedBestEstimate</td>
+                                <td>@assessment.ExpansionSpeedBestEstimate.ToString("N0")</td>
                             </tr>
                             <tr>
                                 <td>Gjennomsnittlig (m/år) lavt anslag: </td>
-                                <td>@assessment.ExpansionSpeedLowEstimate</td>
+                                <td>@assessment.ExpansionSpeedLowEstimate.ToString("N0")</td>
                             </tr>
                             <tr>
                                 <td>Gjennomsnittlig (m/år) høyt anslag: </td>
-                                <td>@assessment.ExpansionSpeedHighEstimate</td>
+                                <td>@assessment.ExpansionSpeedHighEstimate.ToString("N0")</td>
                             </tr>
                         </table>
                     </div>
@@ -490,20 +490,20 @@
                             </tr>
                             <tr>
                                 <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO</td>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr</td>
+                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO.ToString("N0")</td>
+                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr.ToString("N0")</td>
                             </tr>
                             <tr>
                                 <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear</td>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOO</td>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr</td>
+                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOO.ToString("N0")</td>
+                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr.ToString("N0")</td>
                             </tr>
                         </table>
                         <p is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedEstimatedIncreaseInAOODescription)">
                             Kommentar til datagrunnlaget: @assessment.ExpansionSpeedEstimatedIncreaseInAOODescription
                         </p>
                         <p>
-                            Basert på økningen i artens forekomstareal i perioden fra @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear til @assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear og et mørketall på @(assessment.AOOtotalBest / assessment.AOOknown) er ekspansjonshastigheten estimert til @assessment.ExpansionSpeedBestEstimate m/år. Med usikkerhet: @assessment.ExpansionSpeedLowEstimate m/år (mørketall på @(assessment.AOOtotalLow / assessment.AOOknown)) – @assessment.ExpansionSpeedHighEstimate m/år (mørketall på @(assessment.AOOtotalHigh / assessment.AOOknown)).
+                            Basert på økningen i artens forekomstareal i perioden fra @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear til @assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear og et mørketall på @((assessment.AOOtotalBest / assessment.AOOknown)?.ToString("N0")) er ekspansjonshastigheten estimert til @assessment.ExpansionSpeedBestEstimate.ToString("N0") m/år. Med usikkerhet: @assessment.ExpansionSpeedLowEstimate.ToString("N0") m/år (mørketall på @((assessment.AOOtotalLow / assessment.AOOknown)?.ToString("N0"))) – @assessment.ExpansionSpeedHighEstimate.ToString("N0") m/år (mørketall på @((assessment.AOOtotalHigh / assessment.AOOknown)?.ToString("N0"))).
                         </p>
                     </div>
                     <div is-visible="isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion">
@@ -511,12 +511,12 @@
                             Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra forventet endring i forekomstareal framover i tid.
                         </p>
                         <p>
-                            Basert på det beste anslaget på forekomstarealet i dag (@assessment.AOOtotalBest km<sup>2</sup>) og om 50 år (@assessment.AOOfutureBest km<sup>2</sup>) er ekspansjonshastigheten anslått til @assessment.ExpansionSpeedBestEstimate m/år. Dette tilsvarer skår @uncertaintyB.Value på B-kriteriet.
+                            Basert på det beste anslaget på forekomstarealet i dag (@assessment.AOOtotalBest?.ToString("N0") km<sup>2</sup>) og om 50 år (@assessment.AOOfutureBest.ToString("N0") km<sup>2</sup>) er ekspansjonshastigheten anslått til @assessment.ExpansionSpeedBestEstimate.ToString("N0") m/år. Dette tilsvarer skår @uncertaintyB.Value på B-kriteriet.
                         </p>
                     </div>
                     <div is-visible="isEstimatedIncreaseInAOODoorKnockers">
                         <p>
-                            Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyB)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyB))). Det beste anslaget på artens ekspansjonshastighet er @assessment.ExpansionSpeedBestEstimate m/år.
+                            Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best?.ToString("N0") forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest?.ToString("N0") ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyB)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyB))). Det beste anslaget på artens ekspansjonshastighet er @assessment.ExpansionSpeedBestEstimate.ToString("N0") m/år.
                         </p>
                     </div>
                 </div>

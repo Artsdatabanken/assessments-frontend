@@ -1,11 +1,13 @@
 ﻿@model CategoryDescriptionViewModel
 
 @{
+    var active = "active";
+    var notActive = "notactive";
     string GetActiveElement(string currentCaterogy)
     {
-        if (Model.CategoryShort == currentCaterogy)
-            return "active";
-        return "notactive";
+        if (Model.CategoryShort.Substring(0,2) == currentCaterogy)
+            return active;
+        return notActive;
     }
 }
 
@@ -16,7 +18,7 @@
                 {
                     <li class="@GetActiveElement(category.NameShort)">
                         <div class="category_item  @category.NameShort">
-                                <span>@category.NameShort</span>
+                        <span>@(GetActiveElement(category.NameShort) == active ? Model.CategoryShort : category.NameShort)</span>
                         </div>
                         <span class="tag">@category.Name</span>
                     </li>

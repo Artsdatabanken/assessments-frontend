@@ -432,6 +432,187 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
+    public class SpreadWays
+    {
+        public enum SpreadWaysEnum
+        {
+            [Display(Name = "Direkte import")]
+            Swidi,
+
+            [Display(Name = "Som forurensning av vare")]
+            Swifo,
+
+            [Display(Name = "Som blindpassasjerer")]
+            Swibl,
+
+            [Display(Name = "Tilsiktet utsetting")]
+            Swnbe,
+
+            [Display(Name = "Rømning/forvilling")]
+            Swnro,
+
+            [Display(Name = "Som forurensning av vare")]
+            Swnfo,
+
+            [Display(Name = "Som blindpassasjerer")]
+            Swnbl,
+
+            [Display(Name = "Via menneskeskapt korridor")]
+            Swnme,
+
+            [Display(Name = "Egenspredning")]
+            Swneg,
+
+            [Display(Name = "Tilsiktet utsetting")]
+            Swsti,
+
+            [Display(Name = "Som forurensning av vare")]
+            Swsfo,
+
+            [Display(Name = "Som blindpassasjerer")]
+            Swsbl,
+
+            [Display(Name = "Via menneskeskapt korridor")]
+            Swsme,
+
+            [Display(Name = "Egenspredning")]
+            Swseg,
+
+            [Display(Name = "Import til produksjons- eller innendørsareal")]
+            Swimp,
+
+            [Display(Name = "Introduksjon til naturen")]
+            Swnat,
+
+            [Display(Name = "Spredning i naturen")]
+            Swspr,
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersImportPathways =
+        {
+            new ()
+            {
+                Name = SpreadWaysEnum.Swidi.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swidi),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swifo.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swifo),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swibl.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swibl),
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersIntroduction =
+        {
+            new ()
+            {
+                Name = SpreadWaysEnum.Swnbe.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnbe),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnro.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnro),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnfo.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnfo),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnbl.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnbl),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnme.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnme),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swneg.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swneg),
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersSpread =
+        {
+            new ()
+            {
+                Name = SpreadWaysEnum.Swsti.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swsti),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swsfo.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swsfo),
+            },
+            new ()
+            {
+                Name = SpreadWaysEnum.Swsbl.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swsbl),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swsme.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swsme),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swseg.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swseg),
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFilters =
+        {
+            new ()
+            {
+                Name = SpreadWaysEnum.Swimp.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swimp),
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023SpreadWaysFiltersImportPathways,
+                    FilterDescription = ""
+                }
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnat.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnat),
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023SpreadWaysFiltersIntroduction,
+                    FilterDescription = ""
+                }
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swspr.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swspr),
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023SpreadWaysFiltersSpread,
+                    FilterDescription = ""
+                }
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023SpreadWays = new()
+        {
+            Filters = AlienSpecies2023SpreadWaysFilters,
+            FilterDescription = "",
+            FilterButtonName = "'spredningsmåter'-filtre",
+            FilterButtonText = "Spredningsmåter"
+        };
+    }
+
     public class TaxonRank
     {
         public enum TaxonRankEnum

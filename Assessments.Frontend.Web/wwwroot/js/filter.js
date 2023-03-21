@@ -31,8 +31,10 @@ if (filters) {
         "show_sin",
         "show_ttn",
         "show_cep",
-        "show_cei"
-
+        "show_cei",
+        "show_swimp",
+        "show_swnat",
+        "show_swspr"
     ];
 
     const markAllInputs = document.querySelectorAll(".mark_all > input:first-of-type");

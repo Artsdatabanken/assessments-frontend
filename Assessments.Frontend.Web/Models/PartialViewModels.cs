@@ -301,6 +301,8 @@ namespace Assessments.Frontend.Web.Models
         public string PageMenuExpandButtonText { get; set; }
 
         public string PageMenuHeaderText { get; set; }
+
+        public TableOfContentsViewModel TableOfContentsViewModel { get; set; }
     }
 
     public class ScientificNameViewModel

@@ -25,8 +25,10 @@ namespace Assessments.Frontend.Web.Models
             nameof(SpeciesStatus),
             nameof(Habitats),
             nameof(ProductionSpecies),
+            nameof(RegionallyAlien),
             nameof(Regions),
             nameof(SpeciesGroups),
+            nameof(SpreadWays),
             nameof(TaxonRank),
             nameof(WaterRegions),
             nameof(CategoryChanged),
@@ -70,7 +72,11 @@ namespace Assessments.Frontend.Web.Models
 
         public string[] Regions { get; set; } = Array.Empty<string>();
 
+        public string[] RegionallyAlien { get; set; } = Array.Empty<string>();
+
         public string[] SpeciesGroups { get; set; } = Array.Empty<string>();
+
+        public string[] SpreadWays { get; set; } = Array.Empty<string>();
 
         public string[] TaxonRank { get; set; } = Array.Empty<string>();
 

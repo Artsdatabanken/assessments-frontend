@@ -25,7 +25,7 @@
                     Gjeldende fremmedartsliste ble lansert xx.xx.xxxx, og vil være den gjeldende fremmedartslista frem til neste revisjon i 2029.
                 </p>
                 <p>
-                    <a asp-controller="AlienSpecies" asp-action="Index" class="button primary alien-species">
+                    <a asp-controller="AlienSpecies" asp-action="Index" class="button primary alien-species" asp-route-RegionallyAlien="Rae">
                         @ViewData["Title"] 2023
                         <span class="material-icons">keyboard_arrow_right</span>
                     </a>
@@ -35,7 +35,7 @@
                 <p class="page_section">
                     <ul>
                         <li>
-                            <a asp-controller="AlienSpecies" asp-action="Index" class="button secondary">
+                            <a asp-controller="AlienSpecies" asp-action="Index" class="button secondary" asp-route-RegionallyAlien="Rae">
                                 @ViewData["Title"] 2023
                                 <span class="material-icons">keyboard_arrow_right</span>
                             </a>

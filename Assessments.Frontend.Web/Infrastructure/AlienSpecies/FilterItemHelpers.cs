@@ -432,6 +432,368 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
+    public class SpreadWays
+    {
+        public enum SpreadWaysEnum
+        {
+            [Display(Name = "Direkte import")]
+            Swidi,
+
+            [Display(Name = "Som forurensning av vare")]
+            Swifo,
+
+            [Display(Name = "Som blindpassasjerer")]
+            Swibl,
+
+            [Display(Name = "Tilsiktet utsetting")]
+            Swnbe,
+
+            [Display(Name = "Rømning/forvilling")]
+            Swnro,
+
+            [Display(Name = "Som forurensning av vare")]
+            Swnfo,
+
+            [Display(Name = "Som blindpassasjerer")]
+            Swnbl,
+
+            [Display(Name = "Via menneskeskapt korridor")]
+            Swnme,
+
+            [Display(Name = "Egenspredning")]
+            Swneg,
+
+            [Display(Name = "Tilsiktet utsetting")]
+            Swsti,
+
+            [Display(Name = "Som forurensning av vare")]
+            Swsfo,
+
+            [Display(Name = "Som blindpassasjerer")]
+            Swsbl,
+
+            [Display(Name = "Via menneskeskapt korridor")]
+            Swsme,
+
+            [Display(Name = "Egenspredning")]
+            Swseg,
+
+            [Display(Name = "Import til produksjons- eller innendørsareal")]
+            Swimp,
+
+            [Display(Name = "Introduksjon til naturen")]
+            Swnat,
+
+            [Display(Name = "Spredning i naturen")]
+            Swspr,
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersImportPathways =
+        {
+            new ()
+            {
+                Name = SpreadWaysEnum.Swidi.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swidi),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swifo.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swifo),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swibl.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swibl),
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersIntroduction =
+        {
+            new ()
+            {
+                Name = SpreadWaysEnum.Swnbe.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnbe),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnro.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnro),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnfo.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnfo),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnbl.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnbl),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnme.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnme),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swneg.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swneg),
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersSpread =
+        {
+            new ()
+            {
+                Name = SpreadWaysEnum.Swsti.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swsti),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swsfo.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swsfo),
+            },
+            new ()
+            {
+                Name = SpreadWaysEnum.Swsbl.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swsbl),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swsme.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swsme),
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swseg.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swseg),
+            }
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFilters =
+        {
+            new ()
+            {
+                Name = SpreadWaysEnum.Swimp.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swimp),
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023SpreadWaysFiltersImportPathways,
+                    FilterDescription = ""
+                }
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swnat.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swnat),
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023SpreadWaysFiltersIntroduction,
+                    FilterDescription = ""
+                }
+            },
+            new()
+            {
+                Name = SpreadWaysEnum.Swspr.DisplayName(),
+                NameShort = nameof(SpreadWaysEnum.Swspr),
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023SpreadWaysFiltersSpread,
+                    FilterDescription = ""
+                }
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023SpreadWays = new()
+        {
+            Filters = AlienSpecies2023SpreadWaysFilters,
+            FilterDescription = "",
+            FilterButtonName = "'spredningsmåter'-filtre",
+            FilterButtonText = "Spredningsmåter"
+        };
+    }
+
+    public class RegionallyAlien
+    {
+        public enum RegionallyAlienEnum
+        {
+            [Display(Name = "Ekskluder regionalt fremmede arter i filtertreff")]
+            Rae,
+
+            [Display(Name = "Kun vis regionalt fremmede arter i filtertreff")]
+            Rai,
+
+            [Display(Name = "Regionvis utbredelse")]
+            Rar,
+
+            [Display(Name = "Agder")]
+            Raag,
+
+            [Display(Name = "Bottenhavet")]
+            Raboh,
+
+            [Display(Name = "Bottenviken")]
+            Rabov,
+
+            [Display(Name = "Innlandet og Viken")]
+            Rain,
+
+            [Display(Name = "Kemijoki")]
+            Rake,
+
+            [Display(Name = "Møre og Romsdal")]
+            Ramo,
+
+            [Display(Name = "Nordland og Jan Mayen")]
+            Rano,
+
+            [Display(Name = "Norsk-finsk")]
+            Ranof,
+
+            [Display(Name = "Rogaland")]
+            Raro,
+
+            [Display(Name = "Torneå")]
+            Rator,
+
+            [Display(Name = "Tornionjoki")]
+            Ratoj,
+
+            [Display(Name = "Troms og Finnmark")]
+            Ratrf,
+
+            [Display(Name = "Trøndelag")]
+            Ratro,
+
+            [Display(Name = "Vestfold og Telemark")]
+            Ravet,
+
+            [Display(Name = "Vestland")]
+            Raves,
+
+            [Display(Name = "Västerhavet")]
+            Rava,
+
+        }
+
+        public static readonly Filter.FilterItem[] RegionalSpread =
+        {
+            new()
+            {
+                Name = RegionallyAlienEnum.Raag.DisplayName(),
+                NameShort = RegionallyAlienEnum.Raag.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Raboh.DisplayName(),
+                NameShort = RegionallyAlienEnum.Raboh.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rabov.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rabov.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rain.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rain.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rake.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rake.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ramo.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ramo.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rano.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rano.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ranof.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ranof.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Raro.DisplayName(),
+                NameShort = RegionallyAlienEnum.Raro.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rator.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rator.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ratoj.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ratoj.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ratrf.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ratrf.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ratro.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ratro.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Ravet.DisplayName(),
+                NameShort = RegionallyAlienEnum.Ravet.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Raves.DisplayName(),
+                NameShort = RegionallyAlienEnum.Raves.GetHashCode().ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rava.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rava.GetHashCode().ToString()
+            },
+
+        };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023RegionallyAlienFilters =
+        {
+            new()
+            {
+                Name = RegionallyAlienEnum.Rae.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rae.ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rai.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rai.ToString()
+            },
+            new()
+            {
+                Name = RegionallyAlienEnum.Rar.DisplayName(),
+                NameShort = RegionallyAlienEnum.Rar.ToString(),
+                SubGroup = new()
+                {
+                    Filters = RegionalSpread,
+                    FilterDescription = "Vannregioner"
+                }
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023RegionallyAlien = new()
+        {
+            Filters = AlienSpecies2023RegionallyAlienFilters,
+            FilterDescription = "",
+            FilterButtonName = "'regionalt fremmed'-filtre",
+            FilterButtonText = "Regionalt fremmede arter"
+        };
+    }
+
     public class TaxonRank
     {
         public enum TaxonRankEnum

@@ -561,6 +561,7 @@ button.list_header {
 .only_js .filter_subgroup,
 .only_js .filter_speciesstatus,
 .only_js .filter_region,
+.only_js .filter_regionallyalien,
 .only_js .filter_regions,
 .only_js .filter_waterregions,
 .only_js .filter_european_population,
@@ -574,6 +575,7 @@ button.list_header {
 .only_js .filter_geographicvariations,
 .only_js .filter_climateeffects,
 .only_js .filter_taxonrank,
+.only_js .filter_spreadways,
 .only_js .filter_productionspecies {
     display: block;
 }
@@ -592,6 +594,10 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_ttn ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_cep ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_cei ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_swimp ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_swnat ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_swspr ~ .filter_subgroup,
+.only_js input[type=checkbox]:not(:checked)#show_rar ~ .filter_subgroup,
 /*groups*/
 .only_js input[type=checkbox]:not(:checked)#show_area ~ .filter_area,
 .only_js input[type=checkbox]:not(:checked)#show_category ~ .filter_category,
@@ -600,6 +606,7 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_invasionpotential ~ .filter_invasionpotential,
 .only_js input[type=checkbox]:not(:checked)#show_decisivecriterias ~ .filter_decisivecriterias,
 .only_js input[type=checkbox]:not(:checked)#show_region ~ .filter_region,
+.only_js input[type=checkbox]:not(:checked)#show_regionallyalien ~ .filter_regionallyalien,
 .only_js input[type=checkbox]:not(:checked)#show_regions ~ .filter_regions,
 .only_js input[type=checkbox]:not(:checked)#show_waterregions ~ .filter_waterregions,
 .only_js input[type=checkbox]:not(:checked)#show_european_population ~ .filter_european_population,
@@ -614,6 +621,7 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_taxon_rank ~ .filter_taxon_rank,
 .only_js input[type=checkbox]:not(:checked)#show_geographicvariations ~ .filter_geographicvariations,
 .only_js input[type=checkbox]:not(:checked)#show_climateeffects ~ .filter_climateeffects,
+.only_js input[type=checkbox]:not(:checked)#show_spreadways ~ .filter_spreadways,
 .only_js input[type=checkbox]:not(:checked)#show_taxonrank ~ .filter_taxonrank {
     display: none;
 }

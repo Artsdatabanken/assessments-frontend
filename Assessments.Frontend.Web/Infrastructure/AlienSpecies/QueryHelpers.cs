@@ -38,8 +38,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.ProductionSpecies.Any())
                 query = query.Where(x => parameters.ProductionSpecies.Contains(x.ProductionSpecies.ToString()));
 
+            if (parameters.RegionallyAlien.Any())
+                query = ApplyRegionallyAlien(parameters.RegionallyAlien, query);
+
             if (parameters.SpeciesGroups.Any())
                 query = query.Where(x => parameters.SpeciesGroups.Any(y => AlienSpeciesHelpers.GetSpeciesGroupByShortName(y) == x.SpeciesGroup));
+
+            if (parameters.SpreadWays.Any())
+                query = ApplySpreadWays(parameters.SpreadWays, query);
 
             if (parameters.TaxonRank.Any())
                 query = ApplyTaxonRank(parameters.TaxonRank, query);
@@ -191,6 +197,66 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     nameof(ClimateEffects.ClimateEffectsEnum.Ceio) => query.Where(x => x.ClimateEffectsEcoEffect == false),
                     _ => null
                 };
+
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplySpreadWays(string[] spreadWays, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            var newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+
+            foreach (var way in spreadWays)
+            {
+                var assessments = way switch
+                {
+                    nameof(SpreadWays.SpreadWaysEnum.Swidi) => query.Where(x => x.ImportPathways.Any(y => y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.ImportDirect)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swifo) => query.Where(x => x.ImportPathways.Any(y => y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Transportpolution)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swibl) => query.Where(x => x.ImportPathways.Any(y => y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Stowaway)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swnbe) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Released)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swnro) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Escaped)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swnfo) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Transportpolution)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swnbl) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Stowaway)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swnme) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Corridor)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swneg) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.NaturalDispersal)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swsti) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Spread && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Released)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swsfo) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Spread && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Transportpolution)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swsbl) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Spread && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Stowaway)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swsme) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Spread && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.Corridor)),
+                    nameof(SpreadWays.SpreadWaysEnum.Swseg) => query.Where(x => x.IntroductionAndSpreadPathways.Any(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Spread && y.MainCategory == AlienSpeciesAssessment2023IntroductionPathway.MainCategory.NaturalDispersal)),
+                    _ => null
+                };
+
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyRegionallyAlien(string[] regionFilters, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            var newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+
+            foreach (var regionFilter in regionFilters)
+            {
+                IQueryable<AlienSpeciesAssessment2023> assessments;
+                RegionallyAlien.RegionallyAlienEnum filterEnum;
+                // Rae and Rai are not regions, so they are treated differently
+                if (regionFilter != nameof(RegionallyAlien.RegionallyAlienEnum.Rae) && regionFilter != nameof(RegionallyAlien.RegionallyAlienEnum.Rai) && Enum.TryParse(regionFilter, out filterEnum))
+                {
+                    assessments = query.Where(x => x.FreshWaterRegionModel.FreshWaterRegions.Any(y => y.WaterRegionName == filterEnum.DisplayName() && y.IsIncludedInAssessmentArea == true && (y.IsKnown || y.IsAssumedToday || y.IsAssumedInFuture)));
+                }
+                else
+                {
+                    assessments = regionFilter switch
+                    {
+                        nameof(RegionallyAlien.RegionallyAlienEnum.Rae) => query.Where(x => x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien),
+                        nameof(RegionallyAlien.RegionallyAlienEnum.Rai) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien),
+                        _ => null
+                    };
+                }
 
                 if (assessments != null)
                     newQuery = newQuery.Concat(assessments);

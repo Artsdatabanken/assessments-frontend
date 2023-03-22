@@ -63,6 +63,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.SpeciesStatus?.Any() == true)
                         return $"{parameters.SpeciesStatus.Length}";
                     return String.Empty;
+                case nameof(parameters.SpreadWays):
+                    if (parameters.SpreadWays?.Any() == true)
+                        return $"{parameters.SpreadWays.Length}";
+                    return String.Empty;
                 case nameof(parameters.TaxonRank):
                     if (parameters.TaxonRank?.Any() == true)
                         return $"{parameters.TaxonRank.Length}";
@@ -85,6 +89,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 case nameof(parameters.Habitats):
                     if (parameters.Habitats?.Any() == true)
                         return $"{parameters.Habitats.Length}";
+                    return String.Empty;
+                case nameof(parameters.RegionallyAlien):
+                    if (parameters.RegionallyAlien?.Any() == true)
+                        return $"{parameters.RegionallyAlien.Length}";
                     return String.Empty;
                 case nameof(parameters.Regions):
                     if (parameters.Regions?.Any() == true)
@@ -132,8 +140,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             count += parameters.SpeciesStatus.Length;
             count += parameters.SpeciesGroups.Length;
             count += parameters.ProductionSpecies.Length;
+            count += parameters.SpreadWays.Length;
             count += parameters.TaxonRank.Length;
             count += parameters.Habitats.Length;
+            count += parameters.RegionallyAlien.Length;
             count += parameters.Regions.Length;
             count += parameters.WaterRegions.Length;
             count += parameters.Criterias.Length;
@@ -154,8 +164,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             selectionlist = selectionlist.Concat(parameters.SpeciesStatus).ToArray();
             selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesGroups).ToArray();
+            selectionlist = selectionlist.Concat(parameters.SpreadWays).ToArray();
             selectionlist = selectionlist.Concat(parameters.TaxonRank).ToArray();
             selectionlist = selectionlist.Concat(parameters.Habitats).ToArray();
+            selectionlist = selectionlist.Concat(parameters.RegionallyAlien).ToArray();
             selectionlist = selectionlist.Concat(parameters.Regions).ToArray();
             selectionlist = selectionlist.Concat(parameters.WaterRegions).ToArray();
             selectionlist = selectionlist.Concat(parameters.Criterias).ToArray();

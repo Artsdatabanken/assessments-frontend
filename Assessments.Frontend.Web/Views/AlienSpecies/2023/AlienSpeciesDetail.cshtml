@@ -6,7 +6,7 @@
 @{
     var assessment = Model.Assessment;
     ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023";
-
+    var evaluationContextText = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S ? "på Svalbard" : "i Norge";
     var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
     var speciesGroupImageUrl = speciesGroup?.ImageUrl;
 
@@ -137,7 +137,7 @@
             new ()
             {
                 ElementId = nameof(Constants.HeadingsNo.RegionalSpread),
-                Title = Constants.HeadingsNo.RegionalSpread,
+                Title = $"{Constants.HeadingsNo.RegionalSpread} {evaluationContextText}",
                 ShouldShow = showRegionalSpread
             },
             new ()

@@ -48,7 +48,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string CategoryChange = "Endring av risikokategori fra 2018";
             public static readonly string ClimateEffectsInvationpotential = "Effekt av klimaendringer";
             public static readonly string GeographicVariationInCategory = "Geografisk variasjon i risiko";
-            public static readonly string RegionalSpread = "Utbredelse i Norge";
+            public static readonly string RegionalSpread = "Utbredelse";
             public static readonly string Attachments = "Filvedlegg";
             public static readonly string ImpactedNatureTypes = "Naturtypetilhørighet";
             public static readonly string SpreadWays = "Spredningsmåter";

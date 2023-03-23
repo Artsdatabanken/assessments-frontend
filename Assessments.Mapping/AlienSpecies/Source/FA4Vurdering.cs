@@ -1664,6 +1664,7 @@ namespace Assessments.Mapping.AlienSpecies.Source
 
         public class ImpactedNatureType
         {
+            public string MajorTypeGroup { get; set; }
             public string NiNCode { get; set; }
             public string Name { get; set; }
             public List<string> NiNVariation { get; set; } = new List<string>();

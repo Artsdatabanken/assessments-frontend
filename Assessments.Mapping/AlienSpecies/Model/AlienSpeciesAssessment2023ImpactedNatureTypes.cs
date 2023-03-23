@@ -5,6 +5,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
 {
     public class AlienSpeciesAssessment2023ImpactedNatureTypes
     {
+        /// </summary>
+        /// Name of the ecosystem's major type group in Norwegian
+        /// </summary>
+        public string MajorTypeGroup { get; set; }
+
         /// <summary>
         /// Name of the ecosystem in Norwegian
         /// </summary>

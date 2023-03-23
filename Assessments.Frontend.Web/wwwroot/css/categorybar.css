@@ -147,6 +147,10 @@
     border: 1px solid #4c4a48;
 }
 
+li.active  .category_item.NR {
+    border: 1px solid #4c4a48;
+}
+
 /* COLOURS */
 
 

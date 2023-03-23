@@ -102,10 +102,6 @@
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
-                <div is-visible="Model.IsSvalbard" class="map double_map">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownOrAssumedToday" />
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture" />
-                </div>
                 <div is-visible="!Model.IsSvalbard" class="map double_map">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
@@ -138,9 +134,6 @@
                 </tr>
             </table>
             <div is-visible="@isDoorKnockerOrEffectNoRep">
-                <div is-visible="Model.IsSvalbard" class="map S">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture" />
-                </div>
                 <div is-visible="!Model.IsSvalbard" class="map N">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>

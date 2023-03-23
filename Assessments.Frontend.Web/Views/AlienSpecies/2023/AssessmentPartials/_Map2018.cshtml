@@ -3,6 +3,8 @@
 @{
     //Map of Norway with svalbard
     //Region limits per 2018
+    var seaAreas = new string[] { "Barentshavet nord og Polhavet", "Barentshavet sør", "Grønlandshavet", "Nordsjøen og Skagerrak", "Norskehavet" };
+    var showOceanAreasInMap = Model.RegionOccurrences.Any(x => seaAreas.Any(y => x.Region.DisplayName() == y && (x.IsKnown || x.IsAssumedToday || x.IsAssumedInFuture)));
 
     string className(string name)
     {
@@ -54,7 +56,7 @@
     <svg viewBox="0 0 172.13006 278.71942"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:svg="http://www.w3.org/2000/svg">
-        <g class="sea" style=@seastyle>
+        <g class="sea" style=@seastyle is-visible="showOceanAreasInMap">
             <path d="m 139.27434,140.67256 14.5603,-2.68806 3.13607,-3.36007 0.44801,-10.08022 1.12002,-12.76826 0.67201,-9.85621 -12.09625,-3.13606 -13.21628,-0.224005 -11.42424,2.240045 -12.32025,4.25609 9.40819,43.68091 z"
                   id="Barentshavet-sør" class="sea @className("Barentshavet sør")">
                 <title>Barentshavet sør</title>

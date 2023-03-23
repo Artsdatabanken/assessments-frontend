@@ -1087,3 +1087,34 @@ table caption.table-title {
     color: #4c4a48;
     font-size: 22.5px;
 }
+
+.water-area-hide,
+.collapse_water_area.water-area-hide,
+.water-area-hide.material-icons {
+    display: none;
+}
+
+.show_water_areas {
+    display: block;
+}
+
+.collapse_water_area button {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 24px;
+    margin: 0;
+    padding: 0 5px;
+}
+
+.collapse_water_area button .material-icons {
+    font-size: inherit;
+    vertical-align: middle;
+}
+
+.collapse_water_area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

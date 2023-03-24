@@ -241,9 +241,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => src.ReproductionGenerationTime))
                 .ForMember(dest => dest.ArrivedCountryFrom, opt => opt.PreCondition(src => src.ArrivedCountryFrom is not null && src.ArrivedCountryFrom.Count > 0))
                 .ForMember(dest => dest.ArrivedCountryFromDetails, opt => opt.MapFrom(src => src.ArrivedCountryFromDetails.StripUnwantedHtml()))
-                .ForMember(dest => dest.AreaOfOccupancyInStronglyAlteredEcosystems, opt => opt.MapFrom(src => src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.HasValue ? "Value" + src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.ToString() : "NotChosen"))
+                .ForMember(dest => dest.AreaOfOccupancyInStronglyAlteredEcosystems, opt => opt.MapFrom(src => src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.HasValue ? "Value" + src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.ToString() : "Value0"))
                 .ForMember(dest => dest.AllSubTaxaAssessedSeparatelyDescription, opt => opt.MapFrom(src => src.AllSubTaxaAssessedSeparatelyDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.HybridWithoutOwnRiskAssessmentDescription, opt => opt.MapFrom(src => src.IsHybridWithoutOwnRiskAssessmentDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.SpeciesStatus, opt => opt.PreCondition(src => src.SpeciesStatus is not null))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

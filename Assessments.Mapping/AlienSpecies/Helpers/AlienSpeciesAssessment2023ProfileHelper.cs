@@ -886,7 +886,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 ScientificNameFormatted = string.IsNullOrWhiteSpace(src.EvaluatedScientificNameFormatted) ? src.EvaluatedScientificName : src.EvaluatedScientificNameFormatted,
                 ScientificNameId = src.EvaluatedScientificNameId,
                 ScientificNameAuthor = src.EvaluatedScientificNameAuthor,
-                ScientificNameRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(src.EvaluatedScientificNameRank == null ? "22" : src.EvaluatedScientificNameRank)
+                ScientificNameRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(src.EvaluatedScientificNameRank ?? "22")
             };
         }
 
@@ -965,16 +965,16 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         {
             return typeGroup switch
             {
-                "Ferskvann" => AlienSpeciesAssessment2023MajorTypeGroup.FreshWater,
-                "Fjell og berg" => AlienSpeciesAssessment2023MajorTypeGroup.Mountain,
-                "Landform" => AlienSpeciesAssessment2023MajorTypeGroup.LandForm,
-                "Marint dypvann" => AlienSpeciesAssessment2023MajorTypeGroup.MarineDeepWater,
-                "Marint gruntvann" => AlienSpeciesAssessment2023MajorTypeGroup.MarineShallowWater,
-                "Marint gruntvann, Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.MarineShallowWaterSvalbard,
-                "Semi-naturlig" => AlienSpeciesAssessment2023MajorTypeGroup.SemiNatural,
-                "Skog" => AlienSpeciesAssessment2023MajorTypeGroup.Forest,
-                "Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.Svalbard,
-                "Våtmark" => AlienSpeciesAssessment2023MajorTypeGroup.Wetlands,
+                "Ferskvann" => AlienSpeciesAssessment2023MajorTypeGroup.Naf,
+                "Fjell og berg" => AlienSpeciesAssessment2023MajorTypeGroup.Nafb,
+                "Landform" => AlienSpeciesAssessment2023MajorTypeGroup.Nal,
+                "Marint dypvann" => AlienSpeciesAssessment2023MajorTypeGroup.Namd,
+                "Marint gruntvann" => AlienSpeciesAssessment2023MajorTypeGroup.Namger,
+                "Marint gruntvann, Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.NamgsrSvalbard,
+                "Semi-naturlig" => AlienSpeciesAssessment2023MajorTypeGroup.Nasn,
+                "Skog" => AlienSpeciesAssessment2023MajorTypeGroup.Nas,
+                "Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.Nasv,
+                "Våtmark" => AlienSpeciesAssessment2023MajorTypeGroup.Nav,
                 _ => AlienSpeciesAssessment2023MajorTypeGroup.Unknown,
             };
         }

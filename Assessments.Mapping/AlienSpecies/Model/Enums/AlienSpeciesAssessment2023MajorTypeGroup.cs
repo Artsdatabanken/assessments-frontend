@@ -1,52 +1,40 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023MajorTypeGroup
     {
         [Display(Name = "ukjent")]
-        [Description("Na0")]
         Unknown,
 
         [Display(Name = "Ferskvann")]
-        [Description("Na1")]
-        FreshWater,
+        Naf,
 
         [Display(Name = "Fjell og berg")]
-        [Description("Na2")]
-        Mountain,
+        Nafb,
 
         [Display(Name = "Landform")]
-        [Description("Na3")]
-        LandForm,
+        Nal,
 
         [Display(Name = "Marint dypvann")]
-        [Description("Na4")]
-        MarineDeepWater,
+        Namd,
 
         [Display(Name = "Marint gruntvann")]
-        [Description("Na5")]
-        MarineShallowWater,
+        Namger,
 
         [Display(Name = "Marint gruntvann, Svalbard")]
-        [Description("Na6")]
-        MarineShallowWaterSvalbard,
+        NamgsrSvalbard,
 
         [Display(Name = "Semi-naturlig")]
-        [Description("Na7")]
-        SemiNatural,
+        Nasn,
 
         [Display(Name = "Skog")]
-        [Description("Na8")]
-        Forest,
+        Nas,
 
         [Display(Name = "Svalbard")]
-        [Description("Na9")]
-        Svalbard,
+        Nasv,
 
         [Display(Name = "Våtmark")]
-        [Description("Na10")]
-        Wetlands,
+        Nav,
     }
 }

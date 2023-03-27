@@ -479,7 +479,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         .Select(x => new Filter.FilterItem
         {
             Name = x.DisplayName(),
-            NameShort = x.Description()
+            NameShort = x.ToString()
         }).Skip(1).ToArray();
 
         public static readonly Filter.FilterItem[] AlienSpecies2023NatureTypesFilters =

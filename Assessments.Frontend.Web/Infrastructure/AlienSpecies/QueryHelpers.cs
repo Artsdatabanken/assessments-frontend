@@ -26,6 +26,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.Environment.Any())
                 query = ApplyEnvironments(parameters.Environment, query);
 
+            if (parameters.NatureTypes.Any())
+                query = query.Where(x => parameters.NatureTypes.Any(y => y == x.AreaOfOccupancyInStronglyAlteredEcosystems.ToString() || x.ImpactedNatureTypes.Any(z => z.MajorTypeGroup.ToString() == y && z.IsThreatened)));
+
             if (parameters.InvasionPotential.Any())
                 query = query.Where(x => parameters.InvasionPotential.Any(y => x.ScoreInvasionPotential != AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown && y.Contains(x.ScoreInvasionPotential.Description())));
 
@@ -267,9 +270,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             foreach (var regionFilter in regionFilters)
             {
                 IQueryable<AlienSpeciesAssessment2023> assessments;
-                RegionallyAlien.RegionallyAlienEnum filterEnum;
                 // Rae and Rai are not regions, so they are treated differently
-                if (regionFilter != nameof(RegionallyAlien.RegionallyAlienEnum.Rae) && regionFilter != nameof(RegionallyAlien.RegionallyAlienEnum.Rai) && Enum.TryParse(regionFilter, out filterEnum))
+                if (regionFilter != nameof(RegionallyAlien.RegionallyAlienEnum.Rae) && regionFilter != nameof(RegionallyAlien.RegionallyAlienEnum.Rai) && Enum.TryParse(regionFilter, out RegionallyAlien.RegionallyAlienEnum filterEnum))
                 {
                     assessments = query.Where(x => x.FreshWaterRegionModel.FreshWaterRegions.Any(y => y.WaterRegionName == filterEnum.DisplayName() && y.IsIncludedInAssessmentArea == true && (y.IsKnown || y.IsAssumedToday || y.IsAssumedInFuture)));
                 }

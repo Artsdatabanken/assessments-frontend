@@ -960,5 +960,23 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
             return continent;
         }
+
+        internal static AlienSpeciesAssessment2023MajorTypeGroup GetMajorTypeGroup(string typeGroup)
+        {
+            return typeGroup switch
+            {
+                "Ferskvann" => AlienSpeciesAssessment2023MajorTypeGroup.FreshWater,
+                "Fjell og berg" => AlienSpeciesAssessment2023MajorTypeGroup.Mountain,
+                "Landform" => AlienSpeciesAssessment2023MajorTypeGroup.LandForm,
+                "Marint dypvann" => AlienSpeciesAssessment2023MajorTypeGroup.MarineDeepWater,
+                "Marint gruntvann" => AlienSpeciesAssessment2023MajorTypeGroup.MarineShallowWater,
+                "Marint gruntvann, Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.MarineShallowWaterSvalbard,
+                "Semi-naturlig" => AlienSpeciesAssessment2023MajorTypeGroup.SemiNatural,
+                "Skog" => AlienSpeciesAssessment2023MajorTypeGroup.Forest,
+                "Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.Svalbard,
+                "Våtmark" => AlienSpeciesAssessment2023MajorTypeGroup.Wetlands,
+                _ => AlienSpeciesAssessment2023MajorTypeGroup.Unknown,
+            };
+        }
     }
 }

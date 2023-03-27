@@ -66,24 +66,9 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalHighInput);
                 })
                 .ForMember(dest => dest.AlienSpeciesDescription, opt => opt.MapFrom(src => src.IsAlien.StripUnwantedHtml()))
-                .ForMember(dest => dest.RiskAssessmentAOOfutureLow, opt =>
-                {
-                    //TODO: remove precondition when all assessments are finished (before innsynet)
-                    opt.PreCondition(src => src.EvaluationStatus == "finished");
-                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "low"));
-                })
-                .ForMember(dest => dest.AOOfutureBest, opt =>
-                {
-                    //TODO: remove precondition when all assessments are finished (before innsynet)
-                    opt.PreCondition(src => src.EvaluationStatus == "finished");
-                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "best"));
-                })
-                .ForMember(dest => dest.RiskAssessmentAOOfutureHigh, opt =>
-                {
-                    //TODO: remove precondition when all assessments are finished (before innsynet)
-                    opt.PreCondition(src => src.EvaluationStatus == "finished");
-                    opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "high"));
-                })
+                .ForMember(dest => dest.RiskAssessmentAOOfutureLow, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "low")))
+                .ForMember(dest => dest.AOOfutureBest, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "best")))
+                .ForMember(dest => dest.RiskAssessmentAOOfutureHigh, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "high")))
                 .ForMember(dest => dest.CurrentPresenceComment, opt => opt.MapFrom(src => src.CurrentPresenceComment.StripUnwantedHtml()))
                 .ForMember(dest => dest.RiskAssessmentOccurrences1Low, opt =>
                 {
@@ -199,17 +184,17 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ExpansionSpeedEstimatedIncreaseInAOODescription, opt => opt.MapFrom(src => src.RiskAssessment.CommentOrDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.ExpansionSpeedLowEstimate, opt =>
                 {
-                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
+                    opt.PreCondition(src => src.Category != "NR" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "low", src.AssessmentConclusion));
                 })
                 .ForMember(dest => dest.ExpansionSpeedBestEstimate, opt =>
                 {
-                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
+                    opt.PreCondition(src => src.Category != "NR" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "best", src.AssessmentConclusion));
                 })
                 .ForMember(dest => dest.ExpansionSpeedHighEstimate, opt =>
                 {
-                    opt.PreCondition(src => src.Category != "NR" && src.EvaluationStatus == "finished" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
+                    opt.PreCondition(src => src.Category != "NR" && src.AlienSpeciesCategory != "TaxonEvaluatedAtAnotherLevel");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetExpansionSpeedEstimates(src.RiskAssessment, "high", src.AssessmentConclusion));
                 })
                 .ForMember(dest => dest.Attachments, opt => opt.MapFrom(src => src.Attachmemnts))
@@ -241,9 +226,10 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.GenerationTime, opt => opt.MapFrom(src => src.ReproductionGenerationTime))
                 .ForMember(dest => dest.ArrivedCountryFrom, opt => opt.PreCondition(src => src.ArrivedCountryFrom is not null && src.ArrivedCountryFrom.Count > 0))
                 .ForMember(dest => dest.ArrivedCountryFromDetails, opt => opt.MapFrom(src => src.ArrivedCountryFromDetails.StripUnwantedHtml()))
-                .ForMember(dest => dest.AreaOfOccupancyInStronglyAlteredEcosystems, opt => opt.MapFrom(src => src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.HasValue ? "Value" + src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.ToString() : "NotChosen"))
+                .ForMember(dest => dest.AreaOfOccupancyInStronglyAlteredEcosystems, opt => opt.MapFrom(src => src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.HasValue ? "Value" + src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.ToString() : "Value0"))
                 .ForMember(dest => dest.AllSubTaxaAssessedSeparatelyDescription, opt => opt.MapFrom(src => src.AllSubTaxaAssessedSeparatelyDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.HybridWithoutOwnRiskAssessmentDescription, opt => opt.MapFrom(src => src.IsHybridWithoutOwnRiskAssessmentDescription.StripUnwantedHtml()))
+                .ForMember(dest => dest.SpeciesStatus, opt => opt.PreCondition(src => src.SpeciesStatus is not null))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

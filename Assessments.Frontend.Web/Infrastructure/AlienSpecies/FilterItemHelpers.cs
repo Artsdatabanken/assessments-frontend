@@ -314,6 +314,40 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
+    public class Environments
+    {
+        public static string Marine = "Ema";
+        public static string Limnic = "Eli";
+        public static string Terrestrial = "Ete";
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023EnvironmentFilters =
+        {
+            new()
+            {
+                Name = nameof(AlienSpeciesAssessment2023Environment.Marint),
+                NameShort = "Ema",
+            },
+            new()
+            {
+                Name = nameof(AlienSpeciesAssessment2023Environment.Limnisk),
+                NameShort = "Eli",
+            },
+            new()
+            {
+                Name = nameof(AlienSpeciesAssessment2023Environment.Terrestrisk),
+                NameShort = "Ete",
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023Environment = new()
+        {
+            Filters = AlienSpecies2023EnvironmentFilters,
+            FilterDescription = "",
+            FilterButtonName = "livsmiljø-filtre",
+            FilterButtonText = "Livsmiljø"
+        };
+    }
+
     public class GeographicVariation
     {
         public enum GeographicVariationEnum
@@ -1269,9 +1303,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023Regions = new()
         {
             Filters = AlienSpecies2023RegionsFilters,
-            FilterDescription = "",
+            FilterDescription = "Regioner med kjent, antatt eller forventet forekomst",
             FilterButtonName = "regionfiltre",
-            FilterButtonText = "Regioner"
+            FilterButtonText = "Regioner og havområder"
         };
     }
 

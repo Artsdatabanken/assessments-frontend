@@ -25,7 +25,6 @@
     var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
     var AllSpreadWays = SpreadWays.AlienSpecies2023SpreadWays;
     var AllTaxonRanks = TaxonRank.AlienSpecies2023TaxonRanks;
-    var AllWaterRegions = Regions.AlienSpecies2023WaterRegions;
 
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
     {
@@ -189,7 +188,6 @@
                             MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
                             MakeFilterChips(Model.Habitats, AllHabitats.Filters);
                             MakeFilterChips(Model.Regions, AllRegions.Filters);
-                            MakeFilterChips(Model.WaterRegions, AllWaterRegions.Filters);
                         }
                     </ul>
                     <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">
@@ -243,12 +241,13 @@
                                     MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects);
                                     MakeFilterGroup(nameof(Model.GeographicVariations), Model.GeographicVariations, AllGeographicVariation);
                                     MakeFilterGroup(nameof(Model.ClimateEffects), Model.ClimateEffects, AllClimateEffects);
-                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
                                     MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias);
                                     MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus);
                                     MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged);
                                     MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies);
                                     MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
+                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
+                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
                                     MakeFilterGroup(nameof(Model.SpreadWays), Model.SpreadWays, AllSpreadWays);
                                     MakeFilterGroup(nameof(Model.RegionallyAlien), Model.RegionallyAlien, AllRegionallyAlien);
                                 }

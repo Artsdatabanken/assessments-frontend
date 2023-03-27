@@ -4,9 +4,6 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems
     {
-        [Display(Name = "")]
-        NotChosen,
-
         [Display(Name = "under 5 %")]
         Value0,
 

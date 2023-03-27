@@ -29,7 +29,7 @@
             }
         }
 
-        if (Model.FreshWaterNaturalOccurence.Any(x => x.WaterRegionName == name))
+        if (Model.FreshWaterNaturalOccurence.Any(x => x.WaterAreas.Any(y => y.Name == name)))
             className += " not_evaluated";
 
         return className;

@@ -116,9 +116,13 @@
             </div>
             <div is-visible="@isRegionallyAlien">
                 <h3>Regionvis utbredelse</h3>
-                <div is-visible="!Model.IsSvalbard" class="map double_map">
+                <div is-visible="!Model.IsSvalbard && !Model.FreshWaterRegionModel.IsWaterArea" class="map double_map">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterRegions.cshtml" model="knownOrAssumedToday" />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterRegions.cshtml" model="isAssumedInFuture" />
+                </div>
+                <div is-visible="!Model.IsSvalbard && Model.FreshWaterRegionModel.IsWaterArea" class="map double_map">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterAreas.cshtml" model="knownOrAssumedToday" />
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterAreas.cshtml" model="isAssumedInFuture" />
                 </div>
             </div>
             <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">

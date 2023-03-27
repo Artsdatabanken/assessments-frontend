@@ -165,5 +165,9 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [DisplayName("Kom til vurderingsområdet fra")]
         [Description("Angir hvorfra arten ankom vurderingsområdet")]
         public string ArrivedCountryFrom { get; set; }
+
+        [DisplayName("Naturtyper")]
+        [Description("Naturtyper arten koloniserer eller påvirker i dag, eller forventes å kolonisere/påvirke i løpet av vurderingsperioden")]
+        public string Ecosystems { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace Assessments.Frontend.Web.Models
             nameof(DecisiveCriterias),
             nameof(SpeciesStatus),
             nameof(Habitats),
+            nameof(NatureTypes),
             nameof(ProductionSpecies),
             nameof(RegionallyAlien),
             nameof(Regions),
@@ -61,6 +62,8 @@ namespace Assessments.Frontend.Web.Models
         public string[] Environment { get; set; } = Array.Empty<string>();
 
         public string[] InvasionPotential { get; set; } = Array.Empty<string>();
+
+        public string[] NatureTypes { get; set; } = Array.Empty<string>();
 
         public string[] DecisiveCriterias { get; set; } = Array.Empty<string>();
 

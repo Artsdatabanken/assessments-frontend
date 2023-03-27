@@ -466,6 +466,56 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
+    public class NatureTypes
+    {
+        public static readonly Filter.FilterItem[] AlienSpecies2023AlteredEcosystems = Enum.GetValues<AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems>()
+        .Select(x => new Filter.FilterItem
+        {
+            Name = x.DisplayName().ToUpper()[0] + x.DisplayName()[1..],
+            NameShort = x.ToString()
+        }).ToArray();
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023AlteredMajorTypeGroupTypes = Enum.GetValues<AlienSpeciesAssessment2023MajorTypeGroup>()
+        .Select(x => new Filter.FilterItem
+        {
+            Name = x.DisplayName(),
+            NameShort = x.Description()
+        }).Skip(1).ToArray();
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023NatureTypesFilters =
+        {
+
+        new ()
+            {
+                Name = "Forekomst i truede eller sjeldne naturtyper",
+                NameShort = "Nta",
+                SubGroup = new ()
+                {
+                    Filters = AlienSpecies2023AlteredEcosystems,
+                    FilterDescription = ""
+                }
+},
+            new()
+            {
+                Name = "Forekomst i truede eller sjeldne naturtyper",
+                NameShort = "Ntn",
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023AlteredMajorTypeGroupTypes,
+                    FilterDescription = ""
+                }
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023NatureTypes = new()
+        {
+            Filters = AlienSpecies2023NatureTypesFilters,
+            FilterDescription = "",
+            FilterButtonName = "'naturtyper'-filtre",
+            FilterButtonText = "Naturtyper"
+        };
+    }
+
     public class SpreadWays
     {
         public enum SpreadWaysEnum

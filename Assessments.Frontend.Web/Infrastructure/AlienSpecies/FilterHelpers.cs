@@ -51,6 +51,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.Environment?.Any() == true)
                         return $"{parameters.Environment.Length}";
                     return String.Empty;
+                case nameof(parameters.NatureTypes):
+                    if (parameters.NatureTypes?.Any() == true)
+                        return $"{parameters.NatureTypes.Length}";
+                    return String.Empty;
                 case nameof(parameters.InvasionPotential):
                     if (parameters.InvasionPotential?.Any() == true)
                         return $"{parameters.InvasionPotential.Length}";
@@ -135,6 +139,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             count += parameters.Category.Length;
             count += parameters.EcologicalEffect.Length;
             count += parameters.Environment.Length;
+            count += parameters.NatureTypes.Length;
             count += parameters.InvasionPotential.Length;
             count += parameters.CategoryChanged.Length;
             count += parameters.DecisiveCriterias.Length;
@@ -159,6 +164,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
             selectionlist = selectionlist.Concat(parameters.EcologicalEffect).ToArray();
             selectionlist = selectionlist.Concat(parameters.Environment).ToArray();
+            selectionlist = selectionlist.Concat(parameters.NatureTypes).ToArray();
             selectionlist = selectionlist.Concat(parameters.InvasionPotential).ToArray();
             selectionlist = selectionlist.Concat(parameters.CategoryChanged).ToArray();
             selectionlist = selectionlist.Concat(parameters.DecisiveCriterias).ToArray();

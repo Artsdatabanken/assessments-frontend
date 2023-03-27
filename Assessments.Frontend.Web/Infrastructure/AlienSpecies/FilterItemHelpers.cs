@@ -316,9 +316,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Environments
     {
-        public static string Marine = "Ema";
-        public static string Limnic = "Eli";
-        public static string Terrestrial = "Ete";
+        public const string Marine = "Ema";
+        public const string Limnic = "Eli";
+        public const string Terrestrial = "Ete";
 
         public static readonly Filter.FilterItem[] AlienSpecies2023EnvironmentFilters =
         {

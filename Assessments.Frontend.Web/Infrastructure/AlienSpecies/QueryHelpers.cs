@@ -23,6 +23,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.EcologicalEffect.Any())
                 query = query.Where(x => parameters.EcologicalEffect.Any(y => x.ScoreEcologicalEffect != AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Unknown && y.Contains(x.ScoreEcologicalEffect.Description())));
 
+            if (parameters.Environment.Any())
+                query = ApplyEnvironments(parameters.Environment, query);
+
             if (parameters.InvasionPotential.Any())
                 query = query.Where(x => parameters.InvasionPotential.Any(y => x.ScoreInvasionPotential != AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Unknown && y.Contains(x.ScoreInvasionPotential.Description())));
 
@@ -131,6 +134,25 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipg) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipg.DisplayName())),
                     nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceeh) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceeh.DisplayName())),
                     nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipi) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipi.DisplayName())),
+                    _ => null
+                };
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyEnvironments(string[] environments, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+
+            foreach (var environment in environments)
+            {
+                var assessments = environment switch
+                {
+                    Environments.Marine => query.Where(x => x.Environment == AlienSpeciesAssessment2023Environment.Marint || x.Environment == AlienSpeciesAssessment2023Environment.LimMar || x.Environment == AlienSpeciesAssessment2023Environment.MarTer || x.Environment == AlienSpeciesAssessment2023Environment.LimMarTer),
+                    Environments.Limnic => query.Where(x => x.Environment == AlienSpeciesAssessment2023Environment.Limnisk || x.Environment == AlienSpeciesAssessment2023Environment.LimMar || x.Environment == AlienSpeciesAssessment2023Environment.LimTer || x.Environment == AlienSpeciesAssessment2023Environment.LimMarTer),
+                    Environments.Terrestrial => query.Where(x => x.Environment == AlienSpeciesAssessment2023Environment.Terrestrisk || x.Environment == AlienSpeciesAssessment2023Environment.LimTer || x.Environment == AlienSpeciesAssessment2023Environment.MarTer || x.Environment == AlienSpeciesAssessment2023Environment.LimMarTer),
                     _ => null
                 };
                 if (assessments != null)

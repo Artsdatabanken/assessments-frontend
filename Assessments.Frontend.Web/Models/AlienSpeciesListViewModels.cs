@@ -31,7 +31,6 @@ namespace Assessments.Frontend.Web.Models
             nameof(SpeciesGroups),
             nameof(SpreadWays),
             nameof(TaxonRank),
-            nameof(WaterRegions),
             nameof(CategoryChanged),
             nameof(GeographicVariations),
             nameof(ClimateEffects)
@@ -82,8 +81,6 @@ namespace Assessments.Frontend.Web.Models
         public string[] SpreadWays { get; set; } = Array.Empty<string>();
 
         public string[] TaxonRank { get; set; } = Array.Empty<string>();
-
-        public string[] WaterRegions { get; set; } = Array.Empty<string>();
     }
 
     public class AlienSpeciesStatistics2023

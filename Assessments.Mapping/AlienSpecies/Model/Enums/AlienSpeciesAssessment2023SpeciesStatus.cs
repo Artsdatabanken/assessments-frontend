@@ -5,10 +5,6 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023SpeciesStatus
     {
-        [Display(Name = "Ikke relevant")]
-        [Description("er ikke relevant")]
-        Empty,
-
         [Display(Name = "Ikke i Norge")]
         [Description("ikke forekommer i Norge")]
         A,

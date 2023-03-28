@@ -8,33 +8,58 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         Unknown,
 
         [Display(Name = "Ferskvann")]
-        Naf,
+        FreshWaterThreatned,
 
         [Display(Name = "Fjell og berg")]
-        Nafb,
+        MountainsThreatned,
 
         [Display(Name = "Landform")]
-        Nal,
+        LandformThreatned,
 
         [Display(Name = "Marint dypvann")]
-        Namd,
+        MarineDeepWaterThreatned,
 
         [Display(Name = "Marint gruntvann")]
-        Namger,
+        MarineWaterThreatned,
 
         [Display(Name = "Marint gruntvann, Svalbard")]
-        NamgsrSvalbard,
+        MarineWaterSvalbardThreatned,
 
         [Display(Name = "Semi-naturlig")]
-        Nasn,
+        SemiNaturalThreatned,
 
         [Display(Name = "Skog")]
-        Nas,
+        ForestThreatned,
 
         [Display(Name = "Svalbard")]
-        Nasv,
+        SvalbardThreatned,
 
         [Display(Name = "Våtmark")]
-        Nav,
+        WetlandsThreatned,
+
+        [Display(Name = "Limniske vannmasser")]
+        LimnicWaterbodySystems,
+
+        [Display(Name = "Marine vannmasser")]
+        MarineWaterbodySystems,
+
+        [Display(Name = "Snø- og issystemer")]
+        SnowAndIceSystems,
+
+        [Display(Name = "Innsjøbunnsystemer")]
+        FreshwaterBottomSystems,
+
+        [Display(Name = "Saltvannsbunnsystemer")]
+        MarineSeabedSystems,
+
+        [Display(Name = "Elvebunnsystemer")]
+        RiverBottomSystems,
+
+        [Display(Name = "Fastmarkssystemer")]
+        TerrestrialSystems,
+
+        [Display(Name = "Våtmarkssystemer")]
+        WetlandSystems,
+
     }
 }

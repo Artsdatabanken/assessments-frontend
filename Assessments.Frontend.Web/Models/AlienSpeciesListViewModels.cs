@@ -24,6 +24,7 @@ namespace Assessments.Frontend.Web.Models
             nameof(DecisiveCriterias),
             nameof(SpeciesStatus),
             nameof(Habitats),
+            nameof(NotAssessed),
             nameof(ProductionSpecies),
             nameof(RegionallyAlien),
             nameof(Regions),
@@ -66,6 +67,8 @@ namespace Assessments.Frontend.Web.Models
         public string[] GeographicVariations { get; set; } = Array.Empty<string>();
 
         public string[] Habitats { get; set; } = Array.Empty<string>();
+
+        public string[] NotAssessed { get; set; } = Array.Empty<string>();
 
         public string[] ProductionSpecies { get; set; } = Array.Empty<string>();
 

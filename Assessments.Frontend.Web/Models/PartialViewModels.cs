@@ -108,6 +108,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 
+        public AlienSpeciesAssessment2023Environment Environment { get; set; }
+
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         public bool HasIndoorProduction { get; set; }
@@ -137,8 +139,6 @@ namespace Assessments.Frontend.Web.Models
 
     public class IngressViewModel
     {
-        public AlienSpeciesAssessment2023Environment Environment { get; set; }
-
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }

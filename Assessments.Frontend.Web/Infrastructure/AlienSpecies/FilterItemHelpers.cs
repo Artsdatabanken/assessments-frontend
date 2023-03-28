@@ -1494,4 +1494,47 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             FilterButtonText = "Etableringsklasse i dag"
         };
     }
+
+    public class NotAssessed
+    {
+        public enum NotAssessedEnum
+        {
+            // ReSharper disable InconsistentNaming
+            [Display(Name = "Ikke fremmed")]
+            Nan,
+
+            [Display(Name = "Etablert per år 1800")]
+            Nau,
+
+            [Display(Name = "Tidligere feilbestemt")]
+            Nam
+        }
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023NotAssessedFilters =
+        {
+            new()
+            {
+                Name = NotAssessedEnum.Nan.DisplayName(),
+                NameShort = nameof(NotAssessedEnum.Nan)
+            },
+            new()
+            {
+                Name = NotAssessedEnum.Nau.DisplayName(),
+                NameShort = nameof(NotAssessedEnum.Nau)
+            },
+            new()
+            {
+                Name = NotAssessedEnum.Nam.DisplayName(),
+                NameShort = nameof(NotAssessedEnum.Nam)
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023NotAssessed = new()
+        {
+            Filters = AlienSpecies2023NotAssessedFilters,
+            FilterDescription = "",
+            FilterButtonName = "'ikke vurdert'-filtre",
+            FilterButtonText = "Ikke-risikovurderte arter"
+        };
+    }
 }

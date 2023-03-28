@@ -38,6 +38,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.DecisiveCriterias.Any())
                 query = ApplyDecisiveCriteria(parameters.DecisiveCriterias, query);
 
+            if (parameters.NotAssessed.Any())
+                query = ApplyNotAssessed(parameters.NotAssessed, query);
+
             if (parameters.SpeciesStatus.Any())
                 query = ApplySpeciesStatus(parameters.SpeciesStatus, query);
 
@@ -156,6 +159,24 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     Environments.Marine => query.Where(x => x.Environment == AlienSpeciesAssessment2023Environment.Marint || x.Environment == AlienSpeciesAssessment2023Environment.LimMar || x.Environment == AlienSpeciesAssessment2023Environment.MarTer || x.Environment == AlienSpeciesAssessment2023Environment.LimMarTer),
                     Environments.Limnic => query.Where(x => x.Environment == AlienSpeciesAssessment2023Environment.Limnisk || x.Environment == AlienSpeciesAssessment2023Environment.LimMar || x.Environment == AlienSpeciesAssessment2023Environment.LimTer || x.Environment == AlienSpeciesAssessment2023Environment.LimMarTer),
                     Environments.Terrestrial => query.Where(x => x.Environment == AlienSpeciesAssessment2023Environment.Terrestrisk || x.Environment == AlienSpeciesAssessment2023Environment.LimTer || x.Environment == AlienSpeciesAssessment2023Environment.MarTer || x.Environment == AlienSpeciesAssessment2023Environment.LimMarTer),
+                    _ => null
+                };
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyNotAssessed(string[] assessedType, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+            foreach (var type in assessedType)
+            {
+                var assessments = type switch
+                {
+                    nameof(NotAssessed.NotAssessedEnum.Nan) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie),
+                    nameof(NotAssessed.NotAssessedEnum.Nau) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800),
+                    nameof(NotAssessed.NotAssessedEnum.Nam) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified),
                     _ => null
                 };
                 if (assessments != null)

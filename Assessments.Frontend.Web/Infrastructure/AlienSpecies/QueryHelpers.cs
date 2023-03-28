@@ -32,6 +32,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             if (parameters.DecisiveCriterias.Any())
                 query = ApplyDecisiveCriteria(parameters.DecisiveCriterias, query);
 
+            if (parameters.NotAssessed.Any())
+                query = ApplyNotAssessed(parameters.NotAssessed, query);
+
             if (parameters.SpeciesStatus.Any())
                 query = ApplySpeciesStatus(parameters.SpeciesStatus, query);
 
@@ -131,6 +134,24 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipg) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipg.DisplayName())),
                     nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceeh) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceeh.DisplayName())),
                     nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipi) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipi.DisplayName())),
+                    _ => null
+                };
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplyNotAssessed(string[] assessedType, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+            foreach (var type in assessedType)
+            {
+                var assessments = type switch
+                {
+                    nameof(NotAssessed.NotAssessedEnum.Nan) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie),
+                    nameof(NotAssessed.NotAssessedEnum.Nau) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800),
+                    nameof(NotAssessed.NotAssessedEnum.Nam) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified),
                     _ => null
                 };
                 if (assessments != null)

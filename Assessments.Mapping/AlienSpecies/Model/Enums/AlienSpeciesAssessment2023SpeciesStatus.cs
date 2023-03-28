@@ -5,6 +5,10 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023SpeciesStatus
     {
+        [Display(Name = "Ikke angitt")]
+        [Description("")]
+        NotIndicated,
+
         [Display(Name = "Ikke i Norge")]
         [Description("ikke forekommer i Norge")]
         A,

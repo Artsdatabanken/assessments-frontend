@@ -19,10 +19,10 @@
             <div is-visible="isMisidentified">@Html.Raw(Model.MisidentifiedDescription)</div>
             <div is-visible="isAllBubTaxaAssessedSeparately">@Html.Raw(Model.AllSubTaxaAssessedSeparately)</div>
             <div is-visible="isHybridWithoutOwnRiskAssessment">@Html.Raw(Model.HybridWithoutOwnRiskAssessmentDescription)</div>
+            <p is-visible="@showAlienStatusExplanation">
+                @Html.Raw(Model.AlienStatusExplanation) 
+            </p>
             <div is-visible="@showChangedAssessment">
-                <p is-visible="@showAlienStatusExplanation">
-                    @Html.Raw(Model.AlienStatusExplanation) 
-                </p>
                 <p is-visible="@showChangedFromAlien">
                     @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Html.Raw(Model.ChangedFromAlien.DisplayName()).
                 </p>

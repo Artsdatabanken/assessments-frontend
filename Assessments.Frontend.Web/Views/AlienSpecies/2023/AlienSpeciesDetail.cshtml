@@ -80,7 +80,14 @@
     var isMisidentified = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified;
 
     var showExpertStatement = !isNr && !isEvaluatedAtAnotherLevel;
-    var showAssessmentReasoning = isNr || isEvaluatedAtAnotherLevel;
+    var showAssessmentReasoning = (isNr || isEvaluatedAtAnotherLevel) && 
+        (!string.IsNullOrEmpty(Model.ExpertStatementViewModel.MisidentifiedDescription) ||
+        !string.IsNullOrEmpty(Model.ExpertStatementViewModel.AllSubTaxaAssessedSeparately) ||
+        !string.IsNullOrEmpty(Model.ExpertStatementViewModel.HybridWithoutOwnRiskAssessmentDescription) ||
+        !string.IsNullOrEmpty(Model.ExpertStatementViewModel.AlienStatusExplanation) ||
+        !string.IsNullOrEmpty(Model.ExpertStatementViewModel.ChangedFromAlienDescription) ||
+        !string.IsNullOrEmpty(Model.ExpertStatementViewModel.ConnectedToHigherLowerTaxonDescription) ||
+        !string.IsNullOrEmpty(Model.ExpertStatementViewModel.UncertaintyEstablishmentTimeDescription));
     var showRiskCategoryExplanation = !isNr && !isEvaluatedAtAnotherLevel;
     var showCategoryChange = !((isNr && (sameAs2018 || !has2018Assessmnet)) || isEvaluatedAtAnotherLevel || isMisidentified);
     var showClimateEffectsInvationpotential = !isNr && !isEvaluatedAtAnotherLevel;
@@ -191,7 +198,7 @@
             <div class="mobile_padding">
                 <div id="tableOfContentsOuter">
                     <input type="checkbox" id="showTableOfContentList" class="button table-of-contents-small-screen-input" />
-                    <label id="tableOfContentsLabel" for="showTableOfContentList" class="button table-of-contents-small-screen-button table-of-contents-small-screen-button-hide">
+                    <label id="tableOfContentsLabel" for="showTableOfContentList" aria-label="Innholdsfortegnelse" class="button table-of-contents-small-screen-button table-of-contents-small-screen-button-hide">
                         <span class="material-icons">
                             list
                         </span>

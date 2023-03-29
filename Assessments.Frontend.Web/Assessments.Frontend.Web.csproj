@@ -20,7 +20,7 @@
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
 		<PackageReference Include="NLog.Database" Version="5.1.2" />
-		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.2" />
+		<PackageReference Include="NLog.Web.AspNetCore" Version="5.2.3" />
 		<PackageReference Include="SendGrid.Extensions.DependencyInjection" Version="1.0.1" />
 		<PackageReference Include="System.Text.Json" Version="6.0.7" />
 		<PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.5" />

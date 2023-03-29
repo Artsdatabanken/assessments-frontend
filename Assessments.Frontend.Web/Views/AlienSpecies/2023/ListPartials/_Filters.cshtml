@@ -15,9 +15,11 @@
     var AllClimateEffects = ClimateEffects.AlienSpecies2023ClimateEffects;
     var AllDeciciveCriterias = DeciciveCriteria.AlienSpecies2023DeciciveCriteria;
     var AllEcologicalEffects = Categories.AlienSpecies2023EcologicalEffect;
+    var AllEnvironments = Environments.AlienSpecies2023Environment;
     var AllGeographicVariation = GeographicVariation.AlienSpecies2023GeographicVariation;
     var AllHabitats = Habitat.AlienSpecies2023Habitats;
     var AllInvasionPotentials = Categories.AlienSpecies2023InvasionPotential;
+    var AllNatureTypes = NatureTypes.AlienSpecies2023NatureTypes;
     var AllNotAssessed = NotAssessed.AlienSpecies2023NotAssessed;
     var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
     var AllRegionallyAlien = RegionallyAlien.AlienSpecies2023RegionallyAlien;
@@ -177,7 +179,9 @@
                             MakeFilterChips(Model.Category, AllCategories.Filters);
                             MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters);
                             MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters);
+                            MakeFilterChips(Model.NatureTypes, AllNatureTypes.Filters);
                             MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters);
+                            MakeFilterChips(Model.Environment, AllEnvironments.Filters);
                             MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters);
                             MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters);
                             MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters);
@@ -250,6 +254,8 @@
                                     MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
                                     MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
                                     MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
+                                    MakeFilterGroup(nameof(Model.Environment), Model.Environment, AllEnvironments);
+                                    MakeFilterGroup(nameof(Model.NatureTypes), Model.NatureTypes, AllNatureTypes);
                                     MakeFilterGroup(nameof(Model.SpreadWays), Model.SpreadWays, AllSpreadWays);
                                     MakeFilterGroup(nameof(Model.RegionallyAlien), Model.RegionallyAlien, AllRegionallyAlien);
                                     MakeFilterGroup(nameof(Model.NotAssessed), Model.NotAssessed, AllNotAssessed);

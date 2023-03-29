@@ -886,7 +886,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 ScientificNameFormatted = string.IsNullOrWhiteSpace(src.EvaluatedScientificNameFormatted) ? src.EvaluatedScientificName : src.EvaluatedScientificNameFormatted,
                 ScientificNameId = src.EvaluatedScientificNameId,
                 ScientificNameAuthor = src.EvaluatedScientificNameAuthor,
-                ScientificNameRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(src.EvaluatedScientificNameRank == null ? "22" : src.EvaluatedScientificNameRank)
+                ScientificNameRank = Enum.Parse<AlienSpeciesAssessment2023ScientificNameRank>(src.EvaluatedScientificNameRank ?? "22")
             };
         }
 
@@ -959,6 +959,32 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 continent.Add(AlienSpeciesAssessment2023NaturalOriginContinent.AmericaNorth);
             }
             return continent;
+        }
+
+        internal static AlienSpeciesAssessment2023MajorTypeGroup GetMajorTypeGroup(string typeGroup)
+        {
+            return typeGroup switch
+            {
+                "Ferskvann" => AlienSpeciesAssessment2023MajorTypeGroup.FreshWaterThreatned,
+                "Fjell og berg" => AlienSpeciesAssessment2023MajorTypeGroup.MountainsThreatned,
+                "Landform" => AlienSpeciesAssessment2023MajorTypeGroup.LandformThreatned,
+                "Marint dypvann" => AlienSpeciesAssessment2023MajorTypeGroup.MarineDeepWaterThreatned,
+                "Marint gruntvann" => AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterThreatned,
+                "Marint gruntvann, Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterSvalbardThreatned,
+                "Semi-naturlig" => AlienSpeciesAssessment2023MajorTypeGroup.SemiNaturalThreatned,
+                "Skog" => AlienSpeciesAssessment2023MajorTypeGroup.ForestThreatned,
+                "Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.SvalbardThreatned,
+                "Våtmark" => AlienSpeciesAssessment2023MajorTypeGroup.WetlandsThreatned,
+                "Limniske vannmasser" => AlienSpeciesAssessment2023MajorTypeGroup.LimnicWaterbodySystems,
+                "Marine vannmasser" => AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterbodySystems,
+                "Snø- og issystemer" => AlienSpeciesAssessment2023MajorTypeGroup.SnowAndIceSystems,
+                "Innsjøbunnsystemer" => AlienSpeciesAssessment2023MajorTypeGroup.FreshwaterBottomSystems,
+                "Saltvannsbunnsystemer" => AlienSpeciesAssessment2023MajorTypeGroup.MarineSeabedSystems,
+                "Elvebunnsystemer" => AlienSpeciesAssessment2023MajorTypeGroup.RiverBottomSystems,
+                "Fastmarkssystemer" => AlienSpeciesAssessment2023MajorTypeGroup.TerrestrialSystems,
+                "Våtmarkssystemer" => AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems,
+                _ => AlienSpeciesAssessment2023MajorTypeGroup.Unknown,
+            };
         }
     }
 }

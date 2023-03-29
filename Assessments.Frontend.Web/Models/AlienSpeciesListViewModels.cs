@@ -19,11 +19,13 @@ namespace Assessments.Frontend.Web.Models
             nameof(Area),
             nameof(Category),
             nameof(EcologicalEffect),
+            nameof(Environment),
             nameof(InvasionPotential),
             nameof(Criterias),
             nameof(DecisiveCriterias),
             nameof(SpeciesStatus),
             nameof(Habitats),
+            nameof(NatureTypes),
             nameof(NotAssessed),
             nameof(ProductionSpecies),
             nameof(RegionallyAlien),
@@ -58,7 +60,11 @@ namespace Assessments.Frontend.Web.Models
 
         public string[] EcologicalEffect { get; set; } = Array.Empty<string>();
 
+        public string[] Environment { get; set; } = Array.Empty<string>();
+
         public string[] InvasionPotential { get; set; } = Array.Empty<string>();
+
+        public string[] NatureTypes { get; set; } = Array.Empty<string>();
 
         public string[] DecisiveCriterias { get; set; } = Array.Empty<string>();
 

@@ -468,6 +468,18 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class NatureTypes
     {
+        // Must remove non-threatened nature types from the filter
+        private static readonly string[] isNotThreatened = new string[] {
+            AlienSpeciesAssessment2023MajorTypeGroup.LimnicWaterbodySystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterbodySystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.SnowAndIceSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.FreshwaterBottomSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.MarineSeabedSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.RiverBottomSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.TerrestrialSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems.DisplayName(),
+         };
+
         public static readonly Filter.FilterItem[] AlienSpecies2023AlteredEcosystems = Enum.GetValues<AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems>()
         .Select(x => new Filter.FilterItem
         {
@@ -480,14 +492,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             Name = x.DisplayName(),
             NameShort = x.ToString()
-        }).Skip(1).ToArray();
+        }).Skip(1).Where(x => !isNotThreatened.Contains(x.Name)).ToArray();
 
         public static readonly Filter.FilterItem[] AlienSpecies2023NatureTypesFilters =
         {
 
         new ()
             {
-                Name = "Forekomst i truede eller sjeldne naturtyper",
+                Name = "Forekomstareal i sterkt endra natur",
                 NameShort = "Nta",
                 SubGroup = new ()
                 {

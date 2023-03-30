@@ -30,7 +30,7 @@
     };
 
     var hasWaterAreas = Model.FreshWaterRegionModel.IsWaterArea;
-
+    var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
     var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
     {
         WaterRegionName = x.Key,
@@ -104,10 +104,6 @@
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
-                <div is-visible="Model.IsSvalbard" class="map double_map">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownOrAssumedToday" />
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture" />
-                </div>
                 <div is-visible="!Model.IsSvalbard" class="map double_map">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
@@ -140,18 +136,13 @@
                 </tr>
             </table>
             <div is-visible="@isDoorKnockerOrEffectNoRep">
-                <div is-visible="Model.IsSvalbard" class="map S">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture" />
-                </div>
-                <div is-visible="!Model.IsSvalbard" class="map N">
+                <div is-visible="!Model.IsSvalbard && hasKnownOrAssumedOccurrence" class="map N">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>
+                <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>
             </div>
             <div is-visible="showCurrentPresenceComment">
-                <br />
                 <p>
-                    Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og
-                    forekomstareal om 50 år: <br />
                     @Html.Raw(Model.CurrentPresenceComment)
                 </p>
             </div>

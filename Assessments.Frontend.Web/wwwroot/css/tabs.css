@@ -278,8 +278,7 @@ ul.second {
 .criteria-summary-list li {
     border: 0;
     padding: 0;
-    background: #eaeaea;
-   
+    background: #f0f0f0;
 }
 
 .criteria-summary-list .collapsible {

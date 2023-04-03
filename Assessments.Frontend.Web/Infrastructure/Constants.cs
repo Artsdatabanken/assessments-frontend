@@ -392,21 +392,62 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string determeningCriteriaHeading = "Avgjørende kriterier";
         public const string estimationMethod = "Estimeringsmetode:";
 
-
         public const string basedOnEstimatesPlural = "Basert på de beste anslagene på ";
         public const string basedOnEstimatesSingular = "Basert på det beste anslaget på";
         public const string basedOnArea = "forekomstareal";
+        public const string basedOnAreaSingular = "forekomstarealet";
         public const string basedOnArea10years = "forekomster i løpet av 10 år";
         public const string today = "i dag";
         public const string moreIntroductions = "ytterligere introduksjon(er) i samme tidsperiode ";
         public const string and = "og";
         public const string andIn50 = "og om 50 år";
         public const string aCriteriaScoredAs = "er A-kriteriet skåret som";
+        public const string bCriteriaScoredAs = "er B-kriteriet skåret som ";
         public const string aCriteriaPreScoredAs = "ble A-kriteriet forhåndsskåret som";
-        public const string withUuncertaintyA = "(med usikkerhet: ";
+        public const string withUuncertainty = "med usikkerhet: ";
         public const string medianLifeSpan = "Dette innebærer at artens mediane levetid er ";
         public const string riskOfDeath50 = "eller at sannsynligheten for utdøing innen 50 år er på ";
         public const string adjustedTo = "Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier ";
         public const string adjustedUncertainty = "Begrunnelse for justering av skår og/eller usikkerhet:";
+                
+        public const string demoKeyNumbers = "Demografiske nøkkeltall";
+        public const string currentPopSize = "Nåværende populasjonsstørrelse (N, i antall individer):";
+        public const string growthRate = "Vekstrate";
+        public const string environmentVar = "Miljøvarians";
+        public const string demographicVar = "Demografisk varians";
+        public const string sustainability = "Bæreevne (K, i antall individer): ";
+        public const string extinctLimit = "Terskel for kvasiutdøing (C, i antall individer): ";
+        public const string years = "år";
+        public const string yearCaps = "År";
+        public const string to = "til";
+        public const string corrected = "korrigert for tiltak";
+        public const string mPerYear = "m/år";
+        public const string medianLifeEst = "Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til ";
+
+        public const string modelAndProgram = "Beskrivelse av modeller og programvare som er brukt: ";
+        public const string estMedianLifeSpanThisYear = "Estimert median levetid (i år)";
+        public const string lowEstimate = "lavt anslag";
+        public const string highEstimate = "høyt anslag";
+
+        public const string expansionSpeed = "Ekspansjonshastighet";
+        public const string expansionSpeedGuess = "Det beste anslaget på artens ekspansjonshastighet er";
+        public const string expansionSpeedIs = "er ekspansjonshastigheten anslått til";
+        public const string expansionSpeedEst = "er ekspansjonshastigheten estimert til";
+
+        public const string isScore = "Dette tilsvarer skår";
+        public const string atBCrit = "på B-kriteriet";
+        public const string methodDescriptionUnaidedFuture = "Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra forventet endring i forekomstareal framover i tid.";
+        public const string methodDescriptionReproducingUnaided = "Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra endringen i forekomstareal mellom to år tilbake i tid, hvor antall år mellom første og andre år, er på mellom 10 og 20 år. Følgende data ligger til grunn:";
+        public const string commentData = "Kommentar til datagrunnlaget:";
+        public const string basedOnIncrease = "Basert på økningen i artens forekomstareal i perioden fra";
+        public const string andA = "og et";
+        public const string darkNumber = "mørketall på";
+        public const string knownArea = "Kjent forekomstareal";
+        public const string average = "Gjennomsnittlig (m/år)";
+        
+
+
+
+
     }
 }   

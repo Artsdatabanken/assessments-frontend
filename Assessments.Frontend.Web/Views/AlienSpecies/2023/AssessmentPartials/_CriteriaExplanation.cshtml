@@ -357,9 +357,11 @@
                 </button>
             </div>
             <div class="collapsible_content">                
-                <b>@Constants.estimationMethod
+                <span class="estimation-method">
+                    <b>@Constants.estimationMethod</b><br/>
                     <span>@assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()</span>
-                </b>
+                </span>
+                
                 <p class="summary-estimated">
                     <span is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien">
                         @Constants.basedOnEstimatesPlural @Constants.basedOnArea @Constants.today
@@ -378,7 +380,7 @@
                     <span is-visible="showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
                         @Constants.aCriteriaPreScoredAs 
                         @assessment.MedianLifetimeSimplifiedEstimationDefaultScore.ToString("N0")
-                        @Constants.withUuncertaintyA
+                        (@Constants.withUuncertainty
                         @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow.ToString("N0")
                         – 
                         @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh.ToString("N0")). 
@@ -386,7 +388,7 @@
                     </span>
 
                     <span is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-                        @Constants.aCriteriaScoredAs @uncertaintyA.Value @Constants.withUuncertaintyA
+                        @Constants.aCriteriaScoredAs @uncertaintyA.Value (@Constants.withUuncertainty
                     </span>
                     
                     <span class="uncertainty-range" is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
@@ -409,147 +411,162 @@
                 </p>
                                 
                 <div is-visible="showNumericalEstimation">
-                    <table class="numbers-table">
-                        <caption class="table-title">Demografiske nøkkeltall</caption>
+                    <table class="numbers-table" is-visible="showNumericalEstimation">
+                        <caption class="table-title"><b>@Constants.demoKeyNumbers</b></caption>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
-                            <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
+                            <td>@Constants.currentPopSize </td>
                             <td>@assessment.MedianLifetimeNumericalEstimationPopulationSize.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
-                            <td>Vekstrate (&lambda;): </td>
+                            <td>@Constants.growthRate (&lambda;): </td>
                             <td>@assessment.MedianLifetimeNumericalEstimationGrowthRate.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
-                            <td>Miljøvarians (&sigma;<sub>e</sub><sup>2</sup>): </td>
+                            <td>@Constants.environmentVar (&sigma;<sub>e</sub><sup>2</sup>): </td>
                             <td>@assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance?.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
-                            <td>Demografisk varians (&sigma;<sub>d</sub><sup>2</sup>): </td>
+                            <td>@Constants.demographicVar (&sigma;<sub>d</sub><sup>2</sup>): </td>
                             <td>@assessment.MedianLifetimeNumericalEstimationDemographicVariance?.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
-                            <td>Bæreevne (K, i antall individer): </td>
+                            <td>@Constants.sustainability</td>
                             <td>@assessment.MedianLifetimeNumericalEstimationCarryingCapacity?.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
-                            <td>Terskel for kvasiutdøing (C, i antall individer): </td>
+                            <td>@Constants.extinctLimit</td>
                             <td>@assessment.MedianLifetimeNumericalEstimationExtinctionThreshold?.ToString("N0")</td>
                         </tr>
                     </table>
-                    <br />
-                    <p is-visible="assessment.MedianLifetimeBestEstimate != 0">Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til @assessment.MedianLifetimeBestEstimate.ToString("N0") år.</p>
+                    <p is-visible="assessment.MedianLifetimeBestEstimate != 0">
+                        @Constants.medianLifeEst
+                        @assessment.MedianLifetimeBestEstimate.ToString("N0") @Constants.years.
+                    </p>
                 </div>
+
                 <div is-visible="showViableAnalysis">
-                    <p>Beskrivelse av modeller og programvare som er brukt: @assessment.MedianLifetimeViabilityAnalysisDescription</p>
+                    <p>@Constants.modelAndProgram @assessment.MedianLifetimeViabilityAnalysisDescription</p>
                     <table class="numbers-table">
-                        <caption class="table-title">Demografiske nøkkeltall</caption>
+                        <caption class="table-title">@Constants.demoKeyNumbers</caption>
                         <tr is-visible="assessment.MedianLifetimeBestEstimate != 0">
-                            <td>Estimert median levetid (i år): </td>
+                            <td>@Constants.estMedianLifeSpanThisYear: </td>
                             <td>@assessment.MedianLifetimeBestEstimate.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeLowEstimate != 0">
-                            <td>Estimert median levetid (i år) lavt anslag: </td>
+                            <td>@Constants.estMedianLifeSpanThisYear @Constants.lowEstimate: </td>
                             <td>@assessment.MedianLifetimeLowEstimate.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeHighEstimate != 0">
-                            <td>Estimert median levetid (i år) høyt anslag: </td>
+                            <td>@Constants.estMedianLifeSpanThisYear @Constants.highEstimate: </td>
                             <td>@assessment.MedianLifetimeHighEstimate.ToString("N0")</td>
                         </tr>
                     </table>
                 </div>
             </div>            
         </li>
-        <li is-visible="criteriaHasA || criteriaHasB">
-            <div class="collapsible initially_closed">
-                <div class="collapsible_header">
-                    <span>
-                     <b> B - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyB, false) </span> 
-                    </span>
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
-                <div class="collapsible_content">
-                    <p>
-                        Estimeringsmetode: @assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant()
-                    </p>
-                    <div is-visible="isSpatiotemporalDataset">
-                        <table class="numbers-table">
-                            <caption class="table-title">Parametervalg for estimering av ekspansjonshastighet (les mer om metoden her: <a href="https://view.nina.no/expansion/" target="_blank">ekspansjon</a>)</caption>
-                            <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange)">
-                                <td>Forekomstarealets mørketall: </td>
-                                <td>@assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange</td>
-                            </tr>
-                            <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName())">
-                                <td>Modell: </td>
-                                <td>@assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName()</td>
-                            </tr>
-                            <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing.DisplayName())">
-                                <td>Lokalitetene i datafila er oppført: </td>
-                                <td>@assessment.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing.DisplayName()</td>
-                            </tr>
-                        </table>
-                        <br />
-                        <table class="numbers-table">
-                            <caption class="table-title">Ekspansjonshastighet</caption>
-                            <tr>
-                                <td>Gjennomsnittlig (m/år): </td>
-                                <td>@assessment.ExpansionSpeedBestEstimate.ToString("N0")</td>
-                            </tr>
-                            <tr>
-                                <td>Gjennomsnittlig (m/år) lavt anslag: </td>
-                                <td>@assessment.ExpansionSpeedLowEstimate.ToString("N0")</td>
-                            </tr>
-                            <tr>
-                                <td>Gjennomsnittlig (m/år) høyt anslag: </td>
-                                <td>@assessment.ExpansionSpeedHighEstimate.ToString("N0")</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div is-visible="isEstimatedIncreaseInAOOReproducingUnaided">
-                        <p>
-                            Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra endringen i forekomstareal mellom to år tilbake i tid, hvor antall år mellom første og andre år, er på mellom 10 og 20 år. Følgende data ligger til grunn:
-                        </p>
-                        <table class="numbers-table">
-                            <tr>
-                                <td>År</td>
-                                <td>Kjent forekomstareal (km<sup>2</sup>)</td>
-                                <td>Kjent forekomstareal (km<sup>2</sup>) korrigert for tiltak</td>
-                            </tr>
-                            <tr>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO.ToString("N0")</td>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr.ToString("N0")</td>
-                            </tr>
-                            <tr>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear</td>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOO.ToString("N0")</td>
-                                <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr.ToString("N0")</td>
-                            </tr>
-                        </table>
-                        <p is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedEstimatedIncreaseInAOODescription)">
-                            Kommentar til datagrunnlaget: @assessment.ExpansionSpeedEstimatedIncreaseInAOODescription
-                        </p>
-                        <p>
-                            Basert på økningen i artens forekomstareal i perioden fra @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear til @assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear og et mørketall på @((assessment.AOOtotalBest / assessment.AOOknown)?.ToString("N0")) er ekspansjonshastigheten estimert til @assessment.ExpansionSpeedBestEstimate.ToString("N0") m/år. Med usikkerhet: @assessment.ExpansionSpeedLowEstimate.ToString("N0") m/år (mørketall på @((assessment.AOOtotalLow / assessment.AOOknown)?.ToString("N0"))) – @assessment.ExpansionSpeedHighEstimate.ToString("N0") m/år (mørketall på @((assessment.AOOtotalHigh / assessment.AOOknown)?.ToString("N0"))).
-                        </p>
-                    </div>
-                    <div is-visible="isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion">
-                        <p>
-                            Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra forventet endring i forekomstareal framover i tid.
-                        </p>
-                        <p>
-                            Basert på det beste anslaget på forekomstarealet i dag (@assessment.AOOtotalBest?.ToString("N0") km<sup>2</sup>) og om 50 år (@assessment.AOOfutureBest.ToString("N0") km<sup>2</sup>) er ekspansjonshastigheten anslått til @assessment.ExpansionSpeedBestEstimate.ToString("N0") m/år. Dette tilsvarer skår @uncertaintyB.Value på B-kriteriet.
-                        </p>
-                    </div>
-                    <div is-visible="isEstimatedIncreaseInAOODoorKnockers">
-                        <p>
-                            Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best?.ToString("N0") forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest?.ToString("N0") ytterligere introduksjon(er) i samme tidsperiode er B-kriteriet skåret som @uncertaintyB.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyB)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyB))). Det beste anslaget på artens ekspansjonshastighet er @assessment.ExpansionSpeedBestEstimate.ToString("N0") m/år.
-                        </p>
-                    </div>
-                </div>
+        <li is-visible="criteriaHasA || criteriaHasB" class="collapsible initially_closed">            
+            <div class="collapsible_header">
+                <span>
+                    <b> B - </b> 
+                    <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyB, false) </span> 
+                </span>
+                <button onclick="toggleCollapsible(this)">
+                    <span class="material-icons expanded_icon">expand_less</span>
+                    <span class="material-icons collapsed_icon">expand_more</span>
+                </button>
             </div>
+            <div class="collapsible_content">
+                <span class="estimation-method">
+                    <b>@Constants.estimationMethod</b><br/>
+                    <span>@assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant()</span>
+                </span>
+
+                <div is-visible="isSpatiotemporalDataset">
+                    <table class="numbers-table">
+                        <caption class="table-title">Parametervalg for estimering av ekspansjonshastighet (les mer om metoden her: <a href="https://view.nina.no/expansion/" target="_blank">ekspansjon</a>)</caption>
+                        <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange)">
+                            <td>Forekomstarealets mørketall: </td>
+                            <td>@assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange</td>
+                        </tr>
+                        <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName())">
+                            <td>Modell: </td>
+                            <td>@assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName()</td>
+                        </tr>
+                        <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing.DisplayName())">
+                            <td>Lokalitetene i datafila er oppført: </td>
+                            <td>@assessment.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing.DisplayName()</td>
+                        </tr>
+                    </table>
+                    <br />
+                    <table class="numbers-table">
+                        <caption class="table-title">@Constants.expansionSpeed</caption>
+                        <tr>
+                            <td>@Constants.average: </td>
+                            <td>@assessment.ExpansionSpeedBestEstimate.ToString("N0")</td>
+                        </tr>
+                        <tr>
+                            <td>@Constants.average @Constants.lowEstimate: </td>
+                            <td>@assessment.ExpansionSpeedLowEstimate.ToString("N0")</td>
+                        </tr>
+                        <tr>
+                            <td>@Constants.average @Constants.highEstimate: </td>
+                            <td>@assessment.ExpansionSpeedHighEstimate.ToString("N0")</td>
+                        </tr>
+                    </table>
+                </div>
+                <div is-visible="isEstimatedIncreaseInAOOReproducingUnaided">
+                    <p>@Constants.methodDescriptionReproducingUnaided</p>
+                    <table class="numbers-table">
+                        <tr>
+                            <td>@Constants.yearCaps</td>
+                            <td>@Constants.knownArea (km<sup>2</sup>)</td>
+                            <td>@Constants.knownArea (km<sup>2</sup>) @Constants.corrected</td>
+                        </tr>
+                        <tr>
+                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
+                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO.ToString("N0")</td>
+                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr.ToString("N0")</td>
+                        </tr>
+                        <tr>
+                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear</td>
+                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOO.ToString("N0")</td>
+                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr.ToString("N0")</td>
+                        </tr>
+                    </table>
+                    <p is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedEstimatedIncreaseInAOODescription)">
+                        @Constants.commentData @assessment.ExpansionSpeedEstimatedIncreaseInAOODescription
+                    </p>
+                    <p>
+                        @Constants.basedOnIncrease @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear @Constants.to 
+                        @assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear
+                        @Constants.andA @Constants.darkNumber @((assessment.AOOtotalBest / assessment.AOOknown)?.ToString("N0"))
+                        @Constants.expansionSpeedEst @assessment.ExpansionSpeedBestEstimate.ToString("N0") @Constants.mPerYear. 
+                        @Constants.withUuncertainty @assessment.ExpansionSpeedLowEstimate.ToString("N0") @Constants.mPerYear 
+                        (@Constants.darkNumber @((assessment.AOOtotalLow / assessment.AOOknown)?.ToString("N0"))) – 
+                        @assessment.ExpansionSpeedHighEstimate.ToString("N0") @Constants.mPerYear 
+                        (@Constants.darkNumber @((assessment.AOOtotalHigh / assessment.AOOknown)?.ToString("N0"))).
+                    </p>
+                </div>
+                <div is-visible="isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion">
+                    <p>@Constants.methodDescriptionUnaidedFuture</p>
+                    <p>
+                        @Constants.basedOnEstimatesSingular @Constants.basedOnAreaSingular @Constants.today 
+                        (@assessment.AOOtotalBest?.ToString("N0") km<sup>2</sup>) @Constants.andIn50
+                        (@assessment.AOOfutureBest.ToString("N0") km<sup>2</sup>)  @Constants.expansionSpeedIs
+                        @assessment.ExpansionSpeedBestEstimate.ToString("N0") @Constants.mPerYear. 
+                        @Constants.isScore @uncertaintyB.Value @Constants.atBCrit.
+                    </p>
+                </div>
+                <p is-visible="isEstimatedIncreaseInAOODoorKnockers">                   
+                    @Constants.basedOnEstimatesSingular  @assessment.RiskAssessmentOccurrences1Best?.ToString("N0") 
+                    @Constants.basedOnArea10years @Constants.and @assessment.RiskAssessmentIntroductionsBest?.ToString("N0") 
+                    @Constants.moreIntroductions @Constants.bCriteriaScoredAs @uncertaintyB.Value (@Constants.withUuncertainty
+                    @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyB))
+                    – 
+                    @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyB))). 
+                    @Constants.expansionSpeedGuess @assessment.ExpansionSpeedBestEstimate.ToString("N0") @Constants.mPerYear.                   
+                </p>
+            </div>            
         </li>
         <li is-visible="criteriaHasC">
             <div is-visible="hasContentC" class="collapsible initially_closed">

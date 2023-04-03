@@ -272,17 +272,26 @@ ul.second {
 }
 
 .criteria-summary-list .collapsible_header {
-    padding-left: 4px;
+    padding-left: 8px;
 }
 
 .criteria-summary-list li {
     border: 0;
     padding: 0;
     background: #eaeaea;
+   
+}
+
+.criteria-summary-list .collapsible {
     margin-bottom: 2px;
 }
 
 .criteria-summary-list .collapsible .collapsible_content {
-    padding: 0;
+    padding: 8px;
     border: 1px solid lightgray;
+}
+.tabbed_element_container .criteria-summary-list p{
+    padding:0;
+    margin-top:8px;
+    margin-bottom:8px;
 }

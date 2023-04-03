@@ -389,10 +389,24 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string showDetailsButton = "Vis detaljer";
         public const string hideDetailsButton = "Skjul detaljer";
+        public const string determeningCriteriaHeading = "Avgjørende kriterier";
+        public const string estimationMethod = "Estimeringsmetode:";
 
 
-
-
-
+        public const string basedOnEstimatesPlural = "Basert på de beste anslagene på ";
+        public const string basedOnEstimatesSingular = "Basert på det beste anslaget på";
+        public const string basedOnArea = "forekomstareal";
+        public const string basedOnArea10years = "forekomster i løpet av 10 år";
+        public const string today = "i dag";
+        public const string moreIntroductions = "ytterligere introduksjon(er) i samme tidsperiode ";
+        public const string and = "og";
+        public const string andIn50 = "og om 50 år";
+        public const string aCriteriaScoredAs = "er A-kriteriet skåret som";
+        public const string aCriteriaPreScoredAs = "ble A-kriteriet forhåndsskåret som";
+        public const string withUuncertaintyA = "(med usikkerhet: ";
+        public const string medianLifeSpan = "Dette innebærer at artens mediane levetid er ";
+        public const string riskOfDeath50 = "eller at sannsynligheten for utdøing innen 50 år er på ";
+        public const string adjustedTo = "Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier ";
+        public const string adjustedUncertainty = "Begrunnelse for justering av skår og/eller usikkerhet:";
     }
-}
+}   

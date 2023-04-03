@@ -344,92 +344,120 @@
         <span>@Constants.seeOtherTab</span>
     </div>
 
-    <b>Avgjørende kriterier</b>
+    <b>@Constants.determeningCriteriaHeading</b>
     <ul class="criteria-summary-list">
-        <li is-visible="criteriaHasA || criteriaHasB">
-            <div class="collapsible initially_closed">
-                <div class="collapsible_header">
-                    <span>
-                       <b> A - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) </span> 
-                    </span> 
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
-                <div class="collapsible_content">
-                    <p>
-                        Estimeringsmetode: @assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()
-                    </p>
-                    <p is-visible="showSimplifiedEstimateAcceptedAlien">
-                        Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest?.ToString("N0") km²) og om 50 år (@assessment.AOOfutureBest.ToString("N0") km²) er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
-                    </p>
-                    <div is-visible="showSimplifiedEstimateNotAcceptedAlien">
-                        <p>
-                            Basert på de beste anslagene på forekomstareal i dag (@assessment.AOOtotalBest?.ToString("N0") km²) og om 50 år (@assessment.AOOfutureBest.ToString("N0") km²) ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore.ToString("N0") (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow.ToString("N0") – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh.ToString("N0")). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
-                        </p>
-                        <p>Begrunnelse for justering av skår og/eller usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
-                    </div>
-                    <p is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-                        Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best?.ToString("N0") forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest?.ToString("N0") ytterligere introduksjon(er) i samme tidsperiode er A-kriteriet skåret som @uncertaintyA.Value (med usikkerhet: @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
-                    </p>
-                    <div is-visible="showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
-                        <p>
-                            Basert på det beste anslaget på @assessment.RiskAssessmentOccurrences1Best?.ToString("N0") forekomster i løpet av 10 år og @assessment.RiskAssessmentIntroductionsBest?.ToString("N0") ytterligere introduksjon(er) i samme tidsperiode ble A-kriteriet forhåndsskåret som @assessment.MedianLifetimeSimplifiedEstimationDefaultScore.ToString("N0") (med usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow.ToString("N0") – @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh.ToString("N0")). Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier @uncertaintyA.Value og @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA)) – @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA)). Dette innebærer at artens mediane levetid er @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value), eller at sannsynligheten for utdøing innen 50 år er på @assessment.ExtinctionProbability.DisplayName().
-                        </p>
-                        <p>Begrunnelse for justering av skår og/eller usikkerhet: @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason</p>
-                    </div>
-                    <div is-visible="showNumericalEstimation">
-                        <table class="numbers-table">
-                            <caption class="table-title">Demografiske nøkkeltall</caption>
-                            <tr is-visible="assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
-                                <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationPopulationSize.ToString("N0")</td>
-                            </tr>
-                            <tr is-visible="assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
-                                <td>Vekstrate (&lambda;): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationGrowthRate.ToString("N0")</td>
-                            </tr>
-                            <tr is-visible="assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
-                                <td>Miljøvarians (&sigma;<sub>e</sub><sup>2</sup>): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance?.ToString("N0")</td>
-                            </tr>
-                            <tr is-visible="assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
-                                <td>Demografisk varians (&sigma;<sub>d</sub><sup>2</sup>): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationDemographicVariance?.ToString("N0")</td>
-                            </tr>
-                            <tr is-visible="assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
-                                <td>Bæreevne (K, i antall individer): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationCarryingCapacity?.ToString("N0")</td>
-                            </tr>
-                            <tr is-visible="assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
-                                <td>Terskel for kvasiutdøing (C, i antall individer): </td>
-                                <td>@assessment.MedianLifetimeNumericalEstimationExtinctionThreshold?.ToString("N0")</td>
-                            </tr>
-                        </table>
-                        <br />
-                        <p is-visible="assessment.MedianLifetimeBestEstimate != 0">Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til @assessment.MedianLifetimeBestEstimate.ToString("N0") år.</p>
-                    </div>
-                    <div is-visible="showViableAnalysis">
-                        <p>Beskrivelse av modeller og programvare som er brukt: @assessment.MedianLifetimeViabilityAnalysisDescription</p>
-                        <table class="numbers-table">
-                            <caption class="table-title">Demografiske nøkkeltall</caption>
-                            <tr is-visible="assessment.MedianLifetimeBestEstimate != 0">
-                                <td>Estimert median levetid (i år): </td>
-                                <td>@assessment.MedianLifetimeBestEstimate.ToString("N0")</td>
-                            </tr>
-                            <tr is-visible="assessment.MedianLifetimeLowEstimate != 0">
-                                <td>Estimert median levetid (i år) lavt anslag: </td>
-                                <td>@assessment.MedianLifetimeLowEstimate.ToString("N0")</td>
-                            </tr>
-                            <tr is-visible="assessment.MedianLifetimeHighEstimate != 0">
-                                <td>Estimert median levetid (i år) høyt anslag: </td>
-                                <td>@assessment.MedianLifetimeHighEstimate.ToString("N0")</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+        <li is-visible="criteriaHasA || criteriaHasB"  class="collapsible initially_closed">            
+            <div class="collapsible_header">
+                <span>
+                    <b> A - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) </span> 
+                </span> 
+                <button onclick="toggleCollapsible(this)">
+                    <span class="material-icons expanded_icon">expand_less</span>
+                    <span class="material-icons collapsed_icon">expand_more</span>
+                </button>
             </div>
+            <div class="collapsible_content">                
+                <b>@Constants.estimationMethod
+                    <span>@assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()</span>
+                </b>
+                <p class="summary-estimated">
+                    <span is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien">
+                        @Constants.basedOnEstimatesPlural @Constants.basedOnArea @Constants.today
+                        (@assessment.AOOtotalBest?.ToString("N0") km²) @Constants.andIn50 
+                        (@assessment.AOOfutureBest.ToString("N0") km²)     
+                    </span>
+                    
+                    <span is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
+                        @Constants.basedOnEstimatesSingular
+                        @assessment.RiskAssessmentOccurrences1Best?.ToString("N0")
+                        @Constants.basedOnArea10years @Constants.and
+                        @assessment.RiskAssessmentIntroductionsBest?.ToString("N0")
+                        @Constants.moreIntroductions                       
+                    </span>
+
+                    <span is-visible="showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
+                        @Constants.aCriteriaPreScoredAs 
+                        @assessment.MedianLifetimeSimplifiedEstimationDefaultScore.ToString("N0")
+                        @Constants.withUuncertaintyA
+                        @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreLow.ToString("N0")
+                        – 
+                        @assessment.MedianLifetimeSimplifiedEstimationDefaultScoreHigh.ToString("N0")). 
+                        @Constants.adjustedTo @uncertaintyA.Value @Constants.and 
+                    </span>
+
+                    <span is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
+                        @Constants.aCriteriaScoredAs @uncertaintyA.Value @Constants.withUuncertaintyA
+                    </span>
+                    
+                    <span class="uncertainty-range" is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
+                        @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyA))
+                        – 
+                        @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyA.Value, AlienSpeciesHelpers.GetUncertaintyHigh(uncertaintyA))). 
+                    </span>
+
+                    <span class="lifeSpan" is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
+                        @Constants.medianLifeSpan
+                        @AlienSpeciesHelpers.CriteriaDescription(uncertaintyA.CriteriaLetter, uncertaintyA.Value)                    
+                        @Constants.riskOfDeath50
+                        @assessment.ExtinctionProbability.DisplayName().
+                    </span>
+                </p>
+
+                <p class="adjusted-explanation" is-visible="showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
+                    @Constants.adjustedUncertainty
+                    @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason
+                </p>
+                                
+                <div is-visible="showNumericalEstimation">
+                    <table class="numbers-table">
+                        <caption class="table-title">Demografiske nøkkeltall</caption>
+                        <tr is-visible="assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
+                            <td>Nåværende populasjonsstørrelse (N, i antall individer): </td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationPopulationSize.ToString("N0")</td>
+                        </tr>
+                        <tr is-visible="assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
+                            <td>Vekstrate (&lambda;): </td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationGrowthRate.ToString("N0")</td>
+                        </tr>
+                        <tr is-visible="assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
+                            <td>Miljøvarians (&sigma;<sub>e</sub><sup>2</sup>): </td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance?.ToString("N0")</td>
+                        </tr>
+                        <tr is-visible="assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
+                            <td>Demografisk varians (&sigma;<sub>d</sub><sup>2</sup>): </td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationDemographicVariance?.ToString("N0")</td>
+                        </tr>
+                        <tr is-visible="assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
+                            <td>Bæreevne (K, i antall individer): </td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationCarryingCapacity?.ToString("N0")</td>
+                        </tr>
+                        <tr is-visible="assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
+                            <td>Terskel for kvasiutdøing (C, i antall individer): </td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationExtinctionThreshold?.ToString("N0")</td>
+                        </tr>
+                    </table>
+                    <br />
+                    <p is-visible="assessment.MedianLifetimeBestEstimate != 0">Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til @assessment.MedianLifetimeBestEstimate.ToString("N0") år.</p>
+                </div>
+                <div is-visible="showViableAnalysis">
+                    <p>Beskrivelse av modeller og programvare som er brukt: @assessment.MedianLifetimeViabilityAnalysisDescription</p>
+                    <table class="numbers-table">
+                        <caption class="table-title">Demografiske nøkkeltall</caption>
+                        <tr is-visible="assessment.MedianLifetimeBestEstimate != 0">
+                            <td>Estimert median levetid (i år): </td>
+                            <td>@assessment.MedianLifetimeBestEstimate.ToString("N0")</td>
+                        </tr>
+                        <tr is-visible="assessment.MedianLifetimeLowEstimate != 0">
+                            <td>Estimert median levetid (i år) lavt anslag: </td>
+                            <td>@assessment.MedianLifetimeLowEstimate.ToString("N0")</td>
+                        </tr>
+                        <tr is-visible="assessment.MedianLifetimeHighEstimate != 0">
+                            <td>Estimert median levetid (i år) høyt anslag: </td>
+                            <td>@assessment.MedianLifetimeHighEstimate.ToString("N0")</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>            
         </li>
         <li is-visible="criteriaHasA || criteriaHasB">
             <div class="collapsible initially_closed">
@@ -524,12 +552,12 @@
             </div>
         </li>
         <li is-visible="criteriaHasC">
-            <p>    
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyC, false) )
-            </p>
             <div is-visible="hasContentC" class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                    <span>
+                       <b> C - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyC, false) </span> 
+                    </span> 
+
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -563,9 +591,12 @@
             </div>
         </li>
         <li is-visible="!isDecisiveCriteria">
-            <p is-visible="UnusedCriteriaInvationPotential().Length > 0">Invasjonspotensial etter @UnusedCriteriaInvationPotential() er vurdert som fraværende (usannsynlig).</p>
+            <p is-visible="UnusedCriteriaInvationPotential().Length > 0">
+                Invasjonspotensial etter @UnusedCriteriaInvationPotential() er vurdert som fraværende (usannsynlig).
+            </p>
         </li>
     </ul>
+
     <h3>@Constants.yAxisLabel</h3>
     <p>@Constants.yAxisExplanation</p>
     <div is-visible="showNoEcologicalEffect">

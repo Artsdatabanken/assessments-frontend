@@ -372,5 +372,27 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string furtherSpreadWaysTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige spredningsveier fra norsk natur til norsk natur er angitt for arten.  ";
         public const string noFurtherSpreadWays = "Det er ikke angitt spredningsmåter i norsk natur for denne arten";
 
+
+        /* Criteria Explanation */
+        public const string speciesEvaluatedTo = "Arten er vurdert til ";
+        public const string noRisk = "ingen kjent risiko";
+        public const string noRiskExplanation = "NK og har dermed ingen avgjørende kriterier.";
+
+        public const string criteriaScoresAt = "Kriteriene arten skårer høyest på for hver av de to aksene. ";
+        public const string readMoreAboutCriterias = "Les mer om kriteriene";
+
+        public const string xAxisExplanation = "Artens invasjonspotensial bestemmes av tre kriterier: Artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet). Invasjonspotensialet bestemmer artens plassering langs risikomatrisens x-akse.";
+        public const string yAxisExplanation = "Artens økologiske effekt bestemmes av seks kriterier: Artens effekter på rødlistevurderte arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av rødlistevurderte arter (H-kriteriet) og overføring av parasitter eller patogener til rødlistevurderte arter (I-kriteriet). Artens økologiske effekter bestemmer artens plassering langs risikomatrisens y-akse.";
+
+        public const string seeOtherTab = "Se fanen Øvrige brukte kriterier.";
+        public const string noDecisiveCriteriaXAxis = "Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen.";
+
+        public const string showDetailsButton = "Vis detaljer";
+        public const string hideDetailsButton = "Skjul detaljer";
+
+
+
+
+
     }
 }

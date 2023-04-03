@@ -6,7 +6,6 @@
     // We need to know which criteria are not used, but still has uncertainty, and who does not have uncertainty or is used at all. 
     var unusedCriteriaWithoutUncertainty = new string(Model.Criteria.Where(x => Model.AlienSpeciesDetailViewModel.Assessment.Criteria.Any(y => y.CriteriaLetter.ToString() == x.ToString() && y.UncertaintyValues.Count() == 1)).ToArray());
 
-
     var assessment = Model.AlienSpeciesDetailViewModel.Assessment;
     var isNrOrEvaluatedAtAnotherLevel = assessment.Category == AlienSpeciesAssessment2023Category.NR || assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel;
     var showIsNk = assessment.Category == AlienSpeciesAssessment2023Category.NK;
@@ -41,7 +40,6 @@
     var isEstimatedIncreaseInAOOReproducingUnaidedFutureExpansion = assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOOReproducingUnaidedFutureExpansion;
     var isEstimatedIncreaseInAOODoorKnockers = assessment.ExpansionSpeedEstimationMethod == AlienSpeciesAssessment2023ExpansionSpeedEstimationMethod.EstimatedIncreaseInAOODoorKnockers;
 
-
     var showNoEcologicalEffect = assessment.ScoreEcologicalEffect == AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.NotKnown && !Model.Criteria.Any(x => Model.AlienSpeciesDetailViewModel.Assessment.Criteria.Any(y => y.CriteriaLetter.ToString() == x.ToString() && y.UncertaintyValues.Count() > 1));
 
     var showFTable = assessment.ImpactedNatureTypes.Any(x => x.IsThreatened == true && HasAffectedArea(x.AffectedArea));
@@ -61,7 +59,6 @@
     var hasContentG = showGTable || !string.IsNullOrEmpty(assessment.CommonNatureTypesAffectedDomesticDescription);
     var hasContentH = showHTable || showGeneticContaminationUncertaintyDocumentation;
     var hasContentI = showITable || showParasitePathogenTransmissionUncertaintyDocumentation;
-
 
     // If decisive criteria pane, show if decisive. If not decisive criteria pane, show if criteria is used, or if it has uncertainty.
     var criteriaHasA = (isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A))) || (!isDecisiveCriteria && Model.Criteria.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) && (!unusedCriteriaWithoutUncertainty.Contains(nameof(AlienSpeciesAssessment2023CriteriaLetter.A)) || hasContentA));
@@ -327,29 +324,34 @@
 }
 
 <div is-visible="showIsNk && isDecisiveCriteria">
-    Arten er vurdert til <i>ingen kjent risiko</i> NK og har dermed ingen avgjørende kriterier.
+    @Constants.speciesEvaluatedTo  <i>@Constants.noRisk</i> @Constants.noRiskExplanation
 </div>
+
 <div is-visible="!showIsNk || !isDecisiveCriteria">
     <p>
-        Kriteriene arten skårer høyest på for hver av de to aksene. <a href="https://artsdatabanken.no/Pages/339785/Risikokategorier_og_kriterier">
-            Les mer om kriteriene@{
+       @Constants.criteriaScoresAt 
+        <a href="https://artsdatabanken.no/Pages/339785/Risikokategorier_og_kriterier">
+            @Constants.readMoreAboutCriterias
+            @{
                 /*TODO: add link when there is one*/
-            }</a></p>
-    <h3>Invasjonspotensial</h3>
-    <p>
-        Artens invasjonspotensial bestemmes av tre kriterier: Artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet). Invasjonspotensialet bestemmer artens plassering langs risikomatrisens x-akse.
+            }
+        </a>
     </p>
+    <h3>@Constants.xAxisLabel</h3>
+    <p>@Constants.xAxisExplanation</p>
     <div is-visible="showLowInvasionPotential && isDecisiveCriteria">
-        Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen. <span>Se fanen Øvrige brukte kriterier.</span>
+         @Constants.noDecisiveCriteriaXAxis
+        <span>@Constants.seeOtherTab</span>
     </div>
-    <div>
-        <div is-visible="criteriaHasA || criteriaHasB">
-            <p>    
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) )
-            </p>
+
+    <b>Avgjørende kriterier</b>
+    <ul class="criteria-summary-list">
+        <li is-visible="criteriaHasA || criteriaHasB">
             <div class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                    <span>
+                       <b> A - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) </span> 
+                    </span> 
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -428,14 +430,13 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div is-visible="criteriaHasB || criteriaHasA">
-            <p>    
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyB, false) )
-            </p>
+        </li>
+        <li is-visible="criteriaHasA || criteriaHasB">
             <div class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                    <span>
+                     <b> B - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyB, false) </span> 
+                    </span>
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -521,8 +522,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div is-visible="criteriaHasC">
+        </li>
+        <li is-visible="criteriaHasC">
             <p>    
                 @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyC, false) )
             </p>
@@ -560,15 +561,13 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div is-visible="!isDecisiveCriteria">
+        </li>
+        <li is-visible="!isDecisiveCriteria">
             <p is-visible="UnusedCriteriaInvationPotential().Length > 0">Invasjonspotensial etter @UnusedCriteriaInvationPotential() er vurdert som fraværende (usannsynlig).</p>
-        </div>
-    </div>
-    <h3>Økologisk effekt</h3>
-    <p>
-        Artens økologiske effekt bestemmes av seks kriterier: Artens effekter på rødlistevurderte arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av rødlistevurderte arter (H-kriteriet) og overføring av parasitter eller patogener til rødlistevurderte arter (I-kriteriet). Artens økologiske effekter bestemmer artens plassering langs risikomatrisens y-akse.
-    </p>
+        </li>
+    </ul>
+    <h3>@Constants.yAxisLabel</h3>
+    <p>@Constants.yAxisExplanation</p>
     <div is-visible="showNoEcologicalEffect">
         <p>Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.</p>
     </div>

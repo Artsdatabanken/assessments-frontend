@@ -439,6 +439,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string expansionSpeedGuess = "Det beste anslaget på artens ekspansjonshastighet er";
         public const string expansionSpeedIs = "er ekspansjonshastigheten anslått til";
         public const string expansionSpeedEst = "er ekspansjonshastigheten estimert til";
+        public const string expansion = "ekspansjon";
 
         public const string isScore = "Dette tilsvarer skår";
         public const string atBCrit = "på B-kriteriet";
@@ -449,11 +450,24 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string andA = "og et";
         public const string darkNumber = "mørketall på";
         public const string knownArea = "Kjent forekomstareal";
+        public const string areaDarkNumbers = "Forekomstarealets mørketall";
         public const string average = "Gjennomsnittlig (m/år)";
 
         public const string noEcoEffect = "Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.";
         public const string effectAfterCriterium = "Økologiske effekter etter kriterium";
         public const string evaluatedAsUnlikely = "er vurdert som fraværende (usannsynlige)";
+
+        public const string spatioTemporalTableTitle = "Parametervalg for estimering av ekspansjonshastighet ";
+        public const string readMoreMethod = "les mer om metoden her";
+        public const string model = "Modell";
+        public const string sitesListed = "Lokalitetene i datafila er oppført";
+
+
+
+
+
+
+
 
 
     }

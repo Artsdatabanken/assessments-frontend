@@ -335,6 +335,14 @@
             </button>
         </div>
     }
+
+    void getEstimationMethod(string estimationMethod)
+    {
+        <span class="estimation-method">
+            <b>@Constants.estimationMethod</b><br/>
+            <span>@estimationMethod</span>
+        </span>
+    }
 }
 
 <div is-visible="showIsNk && isDecisiveCriteria">
@@ -371,11 +379,7 @@
         <li is-visible="criteriaHasA || criteriaHasB"  class="collapsible initially_closed">            
            @{getListForCategory(uncertaintyA, "A");}
             <div class="collapsible_content">                
-                <span class="estimation-method">
-                    <b>@Constants.estimationMethod</b><br/>
-                    <span>@assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant()</span>
-                </span>
-                
+                @{getEstimationMethod(assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant());}                
                 <p class="summary-estimated">
                     <span is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien">
                         @Constants.basedOnEstimatesPlural @Constants.basedOnArea @Constants.today
@@ -418,12 +422,10 @@
                         @assessment.ExtinctionProbability.DisplayName().
                     </span>
                 </p>
-
                 <p class="adjusted-explanation" is-visible="showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
                     @Constants.adjustedUncertainty
                     @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason
-                </p>
-                                
+                </p>                                
                 <div is-visible="showNumericalEstimation">
                     <table class="numbers-table" is-visible="showNumericalEstimation">
                         <caption class="table-title"><b>@Constants.demoKeyNumbers</b></caption>
@@ -457,7 +459,6 @@
                         @assessment.MedianLifetimeBestEstimate.ToString("N0") @Constants.years.
                     </p>
                 </div>
-
                 <div is-visible="showViableAnalysis">
                     <p>@Constants.modelAndProgram @assessment.MedianLifetimeViabilityAnalysisDescription</p>
                     <table class="numbers-table">
@@ -481,24 +482,23 @@
         <li is-visible="criteriaHasA || criteriaHasB" class="collapsible initially_closed">            
             @{getListForCategory(uncertaintyB, "B");}
             <div class="collapsible_content">
-                <span class="estimation-method">
-                    <b>@Constants.estimationMethod</b><br/>
-                    <span>@assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant()</span>
-                </span>
-
+                @{getEstimationMethod(assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant());}
                 <div is-visible="isSpatiotemporalDataset">
                     <table class="numbers-table">
-                        <caption class="table-title">Parametervalg for estimering av ekspansjonshastighet (les mer om metoden her: <a href="https://view.nina.no/expansion/" target="_blank">ekspansjon</a>)</caption>
+                        <caption class="table-title">
+                            @Constants.spatioTemporalTableTitle                            
+                            (@Constants.readMoreMethod: <a href="https://view.nina.no/expansion/" target="_blank">@Constants.expansion</a>)
+                        </caption>
                         <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange)">
-                            <td>Forekomstarealets mørketall: </td>
+                            <td>@Constants.areaDarkNumbers: </td>
                             <td>@assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange</td>
                         </tr>
                         <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName())">
-                            <td>Modell: </td>
+                            <td>@Constants.model: </td>
                             <td>@assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName()</td>
                         </tr>
                         <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing.DisplayName())">
-                            <td>Lokalitetene i datafila er oppført: </td>
+                            <td>@Constants.sitesListed: </td>
                             <td>@assessment.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing.DisplayName()</td>
                         </tr>
                     </table>

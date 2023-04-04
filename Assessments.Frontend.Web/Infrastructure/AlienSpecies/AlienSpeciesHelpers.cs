@@ -176,26 +176,28 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         public static string GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion, bool isDifferent)
         {
-            var letterText = criterion.CriteriaLetter.DisplayName();
-            letterText += isDifferent == true ? " som er " : " på ";
+            var letterText = "";
+            letterText += isDifferent == true ? " " + Constants.whichIs + " " : " "+ Constants.on +" ";
             letterText += CriteriaDescription(criterion.CriteriaLetter, criterion.Value);
             letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "";
             if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
             {
-                letterText += "(med usikkerhet ";
+                letterText += "("+ Constants.withUuncertainty + " ";
             }
             if (GetUncertaintyLow(criterion) != 0)
             {
-                letterText += $"ned mot {CriteriaDescription(criterion.CriteriaLetter, AlienSpeciesHelpers.GetUncertaintyLow(criterion))}";
+                letterText += Constants.downTo + " ";
+                letterText += CriteriaDescription(criterion.CriteriaLetter, AlienSpeciesHelpers.GetUncertaintyLow(criterion));
                 letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) != 0 ? ")." : "";
             }
             if (GetUncertaintyHigh(criterion) != 0 && GetUncertaintyLow(criterion) != 0)
             {
-                letterText += " og ";
+                letterText += " " + Constants.and + " ";
             }
             if (AlienSpeciesHelpers.GetUncertaintyHigh(criterion) != 0)
             {
-                letterText += $"opp mot {CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion))}";
+                letterText += Constants.upTo + " ";
+                letterText += CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion));
                 letterText += GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0 ? ")." : "";
             }
 

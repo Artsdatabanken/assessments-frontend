@@ -390,6 +390,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string showDetailsButton = "Vis detaljer";
         public const string hideDetailsButton = "Skjul detaljer";
         public const string determeningCriteriaHeading = "Avgjørende kriterier";
+        public const string otherCriteriaHeading = "Øvrige kriterier";
         public const string estimationMethod = "Estimeringsmetode:";
 
         public const string basedOnEstimatesPlural = "Basert på de beste anslagene på ";
@@ -404,7 +405,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string aCriteriaScoredAs = "er A-kriteriet skåret som";
         public const string bCriteriaScoredAs = "er B-kriteriet skåret som ";
         public const string aCriteriaPreScoredAs = "ble A-kriteriet forhåndsskåret som";
-        public const string withUuncertainty = "med usikkerhet: ";
+        public const string withUuncertainty = "med usikkerhet";
         public const string medianLifeSpan = "Dette innebærer at artens mediane levetid er ";
         public const string riskOfDeath50 = "eller at sannsynligheten for utdøing innen 50 år er på ";
         public const string adjustedTo = "Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier ";
@@ -420,8 +421,13 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string years = "år";
         public const string yearCaps = "År";
         public const string to = "til";
+        public const string on = "på";
+        public const string whichIs = "som er";
+        public const string downTo = "ned mot";
+        public const string upTo = "opp mot";
         public const string corrected = "korrigert for tiltak";
         public const string mPerYear = "m/år";
+        public const string speciesHas = "Arten har";
         public const string medianLifeEst = "Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til ";
 
         public const string modelAndProgram = "Beskrivelse av modeller og programvare som er brukt: ";
@@ -446,7 +452,8 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string average = "Gjennomsnittlig (m/år)";
 
         public const string noEcoEffect = "Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.";
-
+        public const string effectAfterCriterium = "Økologiske effekter etter kriterium";
+        public const string evaluatedAsUnlikely = "er vurdert som fraværende (usannsynlige)";
 
 
     }

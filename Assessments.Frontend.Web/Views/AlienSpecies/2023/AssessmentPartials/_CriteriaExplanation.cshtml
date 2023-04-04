@@ -321,6 +321,20 @@
             }
         </table>
     }
+
+    void getListForCategory(AlienSpeciesAssessment2023Criterion criterion, string letter)
+    {
+        <div class="collapsible_header">
+            <span>
+                <b> @letter - </b> <span>@criterion.CriteriaLetter.DisplayName()</span><br/>
+                <span> @AlienSpeciesHelpers.GetLetterFullText(criterion, false) </span> 
+            </span> 
+            <button onclick="toggleCollapsible(this)">
+                <span class="material-icons expanded_icon">expand_less</span>
+                <span class="material-icons collapsed_icon">expand_more</span>
+            </button>
+        </div>
+    }
 }
 
 <div is-visible="showIsNk && isDecisiveCriteria">
@@ -339,23 +353,23 @@
     </p>
     <h3>@Constants.xAxisLabel</h3>
     <p>@Constants.xAxisExplanation</p>
-    <div is-visible="showLowInvasionPotential && isDecisiveCriteria">
+    
+    <p is-visible="isDecisiveCriteria">
+        <b>@Constants.speciesHas @assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant() 
+            @Constants.xAxisLabel.ToLower() 
+            <!-- TODO: Få tak i faktisk score, forstod ikke forklaringa. -->
+        </b>
+    </p>
+
+    <b is-visible="isDecisiveCriteria">@Constants.determeningCriteriaHeading</b>
+    <b is-visible="!isDecisiveCriteria">@Constants.otherCriteriaHeading</b>
+    <p is-visible="showLowInvasionPotential && isDecisiveCriteria">
          @Constants.noDecisiveCriteriaXAxis
         <span>@Constants.seeOtherTab</span>
-    </div>
-
-    <b>@Constants.determeningCriteriaHeading</b>
+    </p>
     <ul class="criteria-summary-list">
         <li is-visible="criteriaHasA || criteriaHasB"  class="collapsible initially_closed">            
-            <div class="collapsible_header">
-                <span>
-                    <b> A - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyA, false) </span> 
-                </span> 
-                <button onclick="toggleCollapsible(this)">
-                    <span class="material-icons expanded_icon">expand_less</span>
-                    <span class="material-icons collapsed_icon">expand_more</span>
-                </button>
-            </div>
+           @{getListForCategory(uncertaintyA, "A");}
             <div class="collapsible_content">                
                 <span class="estimation-method">
                     <b>@Constants.estimationMethod</b><br/>
@@ -388,7 +402,7 @@
                     </span>
 
                     <span is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
-                        @Constants.aCriteriaScoredAs @uncertaintyA.Value (@Constants.withUuncertainty
+                        @Constants.aCriteriaScoredAs @uncertaintyA.Value (@Constants.withUuncertainty: 
                     </span>
                     
                     <span class="uncertainty-range" is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction">
@@ -465,16 +479,7 @@
             </div>            
         </li>
         <li is-visible="criteriaHasA || criteriaHasB" class="collapsible initially_closed">            
-            <div class="collapsible_header">
-                <span>
-                    <b> B - </b> 
-                    <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyB, false) </span> 
-                </span>
-                <button onclick="toggleCollapsible(this)">
-                    <span class="material-icons expanded_icon">expand_less</span>
-                    <span class="material-icons collapsed_icon">expand_more</span>
-                </button>
-            </div>
+            @{getListForCategory(uncertaintyB, "B");}
             <div class="collapsible_content">
                 <span class="estimation-method">
                     <b>@Constants.estimationMethod</b><br/>
@@ -570,16 +575,7 @@
         </li>
         <li is-visible="criteriaHasC">
             <div is-visible="hasContentC" class="collapsible initially_closed">
-                <div class="collapsible_header">
-                    <span>
-                       <b> C - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyC, false) </span> 
-                    </span> 
-
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
+               @{getListForCategory(uncertaintyC, "C");}
                 <div class="collapsible_content">
                     <table class="numbers-table">
                         <caption class="table-title"><b>Kolonisert naturtypeareal.</b> Anslått prosentandel kolonisert areal i de naturtypene arten er observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner. </caption>
@@ -615,162 +611,131 @@
     </ul>
 
     <h3>@Constants.yAxisLabel</h3>
-    <p>@Constants.yAxisExplanation</p>
-    <div is-visible="showNoEcologicalEffect">
-        <p>@Constants.noEcoEffect</p>
-    </div>
+    <p>@Constants.yAxisExplanation</p>   
+
+    <p is-visible="isDecisiveCriteria">
+        <b>@Constants.speciesHas @assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant() 
+            @Constants.yAxisLabel.ToLower() 
+            <!-- TODO: Få tak i faktisk score, forstod ikke forklaringa. -->
+        </b>
+    </p>
 
     <b>@Constants.determeningCriteriaHeading</b>
+    <p is-visible="showNoEcologicalEffect">
+        <p>@Constants.noEcoEffect</p>
+    </p>
     <ul class="criteria-summary-list">
-        <li is-visible="criteriaHasD">
-            <div is-visible="!showIsNk && hasContentD" class="collapsible initially_closed">
-                <div class="collapsible_header">
-                    <span>
-                        <b> D - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyD, false) </span> 
-                    </span> 
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
-                <div class="collapsible_content">
-                    <div is-visible="@assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && @assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0">
-                        <p>
-                            Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med følgende truede arter og nøkkelarter. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
-                        </p>
-                        <div class="mobile_hide">
-                            @{
-                                GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractionsThreatenedSpecies);
-                            }
-                        </div>
-                        <div class="only_mobile">
-                            @{
-                                GetSpeciesTablesMobile(assessment.SpeciesSpeciesInteractionsThreatenedSpecies);
-                            }
-                        </div>
-                    </div>
-                    <div is-visible="@assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && @assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0">
-                        <p>
-                            Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter som inkluderer truede arter eller nøkkelarter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
-                        </p>
-                        <div class="mobile_hide">
-                            @{
-                                GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractionsThreatenedSpecies);
-                            }
-                        </div>
-                        <div class="only_mobile">
-                            @{
-                                GetNatureNypeTablesMobile(assessment.SpeciesNaturetypeInteractionsThreatenedSpecies);
-                            }
-                        </div>
-                    </div>
-                    <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation))">
-                        <p>Utfyllende informasjon rundt artens negative effekter:</p>
-                        <p>@Html.Raw(assessment.EffectsOnSpeciesSupplementaryInformation)</p>
-                    </div>
-                    <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD))">
-                        <p>
-                            Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @uncertaintyD.Value.
-                            Dette begrunnes i:
-                        </p>
-                        <p>@Html.Raw(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation)</p>
-                    </div>
-                </div>
-            </div>
-        </li>
-
-        <li is-visible="criteriaHasE">
-            <div is-visible="!showIsNk && hasContentE" class="collapsible initially_closed">
-                <div class="collapsible_header">
-                   <span>
-                        <b> E - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyE, false) </span> 
-                    </span> 
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
-                <div class="collapsible_content">
-                    <div is-visible="@assessment.SpeciesSpeciesInteractions  != null && @assessment.SpeciesSpeciesInteractions .Count() != 0">
-                        <p>
-                            Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med øvrige rødlistevurderte arter, dvs. arter som hverken er truede eller nøkkelarter . Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
-                        </p>
-                        <div class="mobile_hide">
-                            @{
-                                GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractions);
-                            }
-                        </div>
-                        <div class="only_mobile">
-                            @{
-                                GetSpeciesTablesMobile(assessment.SpeciesSpeciesInteractions);
-                            }
-                        </div>
-                    </div>
-                    <div is-visible="@assessment.SpeciesNaturetypeInteractions != null && @assessment.SpeciesNaturetypeInteractions.Count() != 0">
-                        <p>
-                            Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
-                        </p>
-                        <div class="mobile_hide">
-                            @{
-                                GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractions);
-                            }
-                        </div>
-                        <div class="only_mobile">
-                            @{
-                                GetNatureNypeTablesMobile(assessment.SpeciesNaturetypeInteractions);
-                            }
-                        </div>
-                    </div>
-                    <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation))">
-                        <p>Utfyllende informasjon rundt artens negative effekter:</p>
-                        <p>@Html.Raw(assessment.EffectsOnSpeciesSupplementaryInformation)</p>
-                    </div>
-                    <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE))">
-                        <p>
-                            Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @uncertaintyE.Value.
-                            Dette begrunnes i:
-                        </p>
-                        <p>@Html.Raw(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation)</p>
-                    </div>
-                </div>
-            </div>
-        </li>
-
-        <li is-visible="criteriaHasF">
-            <div is-visible="!showIsNk && hasContentF" class="collapsible initially_closed">
-                <div class="collapsible_header">
-                    <span>
-                        <b> F - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyF, false) </span> 
-                    </span> 
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
-                <div class="collapsible_content">
-                    <div is-visible="showFTable">
+        <li is-visible="criteriaHasD && !showIsNk && hasContentD" class="collapsible initially_closed">           
+            @{getListForCategory(uncertaintyD, "D");}
+            <div class="collapsible_content">
+                <div is-visible="@assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && @assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0">
+                    <p>
+                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med følgende truede arter og nøkkelarter. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
+                    </p>
+                    <div class="mobile_hide">
                         @{
-                            GetFGTable(true);
+                            GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractionsThreatenedSpecies);
                         }
                     </div>
-                    <p is-visible="!string.IsNullOrEmpty(assessment.ThreatenedNatureTypesAffectedDomesticDescription)">
-                        Utfyllende informasjon rundt artens negative effekter: @Html.Raw(assessment.ThreatenedNatureTypesAffectedDomesticDescription)
-                    </p>
+                    <div class="only_mobile">
+                        @{
+                            GetSpeciesTablesMobile(assessment.SpeciesSpeciesInteractionsThreatenedSpecies);
+                        }
+                    </div>
                 </div>
+                <div is-visible="@assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && @assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0">
+                    <p>
+                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter som inkluderer truede arter eller nøkkelarter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
+                    </p>
+                    <div class="mobile_hide">
+                        @{
+                            GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractionsThreatenedSpecies);
+                        }
+                    </div>
+                    <div class="only_mobile">
+                        @{
+                            GetNatureNypeTablesMobile(assessment.SpeciesNaturetypeInteractionsThreatenedSpecies);
+                        }
+                    </div>
+                </div>
+                <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation))">
+                    <p>Utfyllende informasjon rundt artens negative effekter:</p>
+                    <p>@Html.Raw(assessment.EffectsOnSpeciesSupplementaryInformation)</p>
+                </div>
+                <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyD))">
+                    <p>
+                        Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @uncertaintyD.Value.
+                        Dette begrunnes i:
+                    </p>
+                    <p>@Html.Raw(assessment.EffectsOnThreathenedSpeciesUncertaintyDocumentation)</p>
+                </div>                
             </div>
+        </li>
+
+        <li is-visible="criteriaHasE && !showIsNk && hasContentE" class="collapsible initially_closed">           
+            @{getListForCategory(uncertaintyE, "E");}
+            <div class="collapsible_content">
+                <div is-visible="@assessment.SpeciesSpeciesInteractions  != null && @assessment.SpeciesSpeciesInteractions .Count() != 0">
+                    <p>
+                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med øvrige rødlistevurderte arter, dvs. arter som hverken er truede eller nøkkelarter . Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
+                    </p>
+                    <div class="mobile_hide">
+                        @{
+                            GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractions);
+                        }
+                    </div>
+                    <div class="only_mobile">
+                        @{
+                            GetSpeciesTablesMobile(assessment.SpeciesSpeciesInteractions);
+                        }
+                    </div>
+                </div>
+                <div is-visible="@assessment.SpeciesNaturetypeInteractions != null && @assessment.SpeciesNaturetypeInteractions.Count() != 0">
+                    <p>
+                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
+                    </p>
+                    <div class="mobile_hide">
+                        @{
+                            GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractions);
+                        }
+                    </div>
+                    <div class="only_mobile">
+                        @{
+                            GetNatureNypeTablesMobile(assessment.SpeciesNaturetypeInteractions);
+                        }
+                    </div>
+                </div>
+                <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnSpeciesSupplementaryInformation))">
+                    <p>Utfyllende informasjon rundt artens negative effekter:</p>
+                    <p>@Html.Raw(assessment.EffectsOnSpeciesSupplementaryInformation)</p>
+                </div>
+                <div is-visible="@(!string.IsNullOrEmpty(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation) && HasUncertainty(uncertaintyE))">
+                    <p>
+                        Det er knyttet usikkerhet rundt artens effekter som går utover utfallsrommet til den mest sannsynlige skåren på @uncertaintyE.Value.
+                        Dette begrunnes i:
+                    </p>
+                    <p>@Html.Raw(assessment.EffectsOnOtherNativeSpeciesUncertaintyDocumentation)</p>
+                </div>               
+            </div>
+        </li>
+
+        <li is-visible="criteriaHasF && !showIsNk && hasContentF" class="collapsible initially_closed">           
+            @{getListForCategory(uncertaintyF, "F");}
+            <div class="collapsible_content">
+                <div is-visible="showFTable">
+                    @{
+                        GetFGTable(true);
+                    }
+                </div>
+                <p is-visible="!string.IsNullOrEmpty(assessment.ThreatenedNatureTypesAffectedDomesticDescription)">
+                    Utfyllende informasjon rundt artens negative effekter: @Html.Raw(assessment.ThreatenedNatureTypesAffectedDomesticDescription)
+                </p>
+            </div>            
         </li>
 
         <li is-visible="criteriaHasG">
             <div is-visible="!showIsNk && hasContentG" class="collapsible initially_closed">
-                <div class="collapsible_header">
-                     <span>
-                        <b> G - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyG, false) </span> 
-                    </span> 
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
+               @{getListForCategory(uncertaintyG, "G");}
                 <div class="collapsible_content">
                     <div is-visible="showGTable">
                         @{
@@ -786,15 +751,7 @@
 
         <li is-visible="criteriaHasH">
             <div is-visible="!showIsNk && hasContentH" class="collapsible initially_closed">
-                <div class="collapsible_header">
-                    <span>
-                        <b> H - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyH, false) </span> 
-                    </span> 
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
+                @{getListForCategory(uncertaintyH, "H");}
                 <div class="collapsible_content">
                     <div>
                         <table class="numbers-table" is-visible="showHTable">
@@ -840,15 +797,7 @@
 
         <li is-visible="criteriaHasI">
             <div is-visible="!showIsNk && hasContentI" class="collapsible initially_closed">
-                <div class="collapsible_header">
-                     <span>
-                        <b> I - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyI, false) </span> 
-                    </span> 
-                    <button onclick="toggleCollapsible(this)">
-                        <span class="material-icons expanded_icon">expand_less</span>
-                        <span class="material-icons collapsed_icon">expand_more</span>
-                    </button>
-                </div>
+               @{getListForCategory(uncertaintyI, "I");}
                 <div class="collapsible_content">
                     <div>
                         <table class="numbers-table" is-visible="showITable">
@@ -898,8 +847,11 @@
             </div>
         </li>
 
-        <li is-visible="!isDecisiveCriteria">
-            <p is-visible="UnusedCriteriaEcologicalEffect().Length > 0">Økologiske effekter etter kriterium @UnusedCriteriaEcologicalEffect() er vurdert som fraværende (usannsynlige).</p>
+        <li is-visible="!isDecisiveCriteria && UnusedCriteriaEcologicalEffect().Length > 0" class="collapsible initially_closed">
+            <div class="collapsible_header">
+                @Constants.effectAfterCriterium @UnusedCriteriaEcologicalEffect() 
+                @Constants.evaluatedAsUnlikely
+            </div>
         </li>
     </ul>
 </div>

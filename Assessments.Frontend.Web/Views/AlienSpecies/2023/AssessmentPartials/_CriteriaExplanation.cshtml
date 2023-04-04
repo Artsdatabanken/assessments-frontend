@@ -617,17 +617,17 @@
     <h3>@Constants.yAxisLabel</h3>
     <p>@Constants.yAxisExplanation</p>
     <div is-visible="showNoEcologicalEffect">
-        <p>Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.</p>
+        <p>@Constants.noEcoEffect</p>
     </div>
 
-    <div is-visible="!showNoEcologicalEffect">
-        <div is-visible="criteriaHasD">
-            <p>    
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyD, false) )
-            </p>
+    <b>@Constants.determeningCriteriaHeading</b>
+    <ul class="criteria-summary-list">
+        <li is-visible="criteriaHasD">
             <div is-visible="!showIsNk && hasContentD" class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                    <span>
+                        <b> D - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyD, false) </span> 
+                    </span> 
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -677,15 +677,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </li>
 
-        <div is-visible="criteriaHasE">
-            <p>
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyE, false) )
-            </p>
+        <li is-visible="criteriaHasE">
             <div is-visible="!showIsNk && hasContentE" class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                   <span>
+                        <b> E - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyE, false) </span> 
+                    </span> 
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -735,14 +734,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div is-visible="criteriaHasF">
-            <p>
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyF, false) )
-            </p>
+        </li>
+
+        <li is-visible="criteriaHasF">
             <div is-visible="!showIsNk && hasContentF" class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                    <span>
+                        <b> F - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyF, false) </span> 
+                    </span> 
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -759,15 +758,14 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </li>
 
-        <div is-visible="criteriaHasG">
-            <p>    
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyG, false) )
-            </p>
+        <li is-visible="criteriaHasG">
             <div is-visible="!showIsNk && hasContentG" class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                     <span>
+                        <b> G - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyG, false) </span> 
+                    </span> 
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -784,15 +782,14 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </li>
 
-        <div is-visible="criteriaHasH">
-            <p>    
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyH, true) )
-            </p>
+        <li is-visible="criteriaHasH">
             <div is-visible="!showIsNk && hasContentH" class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                    <span>
+                        <b> H - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyH, false) </span> 
+                    </span> 
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -839,15 +836,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </li>
 
-        <div is-visible="criteriaHasI">
-            <p>
-                @( AlienSpeciesHelpers.GetLetterFullText(uncertaintyI, true) )
-            </p>
+        <li is-visible="criteriaHasI">
             <div is-visible="!showIsNk && hasContentI" class="collapsible initially_closed">
                 <div class="collapsible_header">
-                    <h3>Vis detaljer</h3>
+                     <span>
+                        <b> I - </b> <span> @AlienSpeciesHelpers.GetLetterFullText(uncertaintyI, false) </span> 
+                    </span> 
                     <button onclick="toggleCollapsible(this)">
                         <span class="material-icons expanded_icon">expand_less</span>
                         <span class="material-icons collapsed_icon">expand_more</span>
@@ -900,9 +896,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div is-visible="!isDecisiveCriteria">
+        </li>
+
+        <li is-visible="!isDecisiveCriteria">
             <p is-visible="UnusedCriteriaEcologicalEffect().Length > 0">Økologiske effekter etter kriterium @UnusedCriteriaEcologicalEffect() er vurdert som fraværende (usannsynlige).</p>
-        </div>
-    </div>
+        </li>
+    </ul>
 </div>

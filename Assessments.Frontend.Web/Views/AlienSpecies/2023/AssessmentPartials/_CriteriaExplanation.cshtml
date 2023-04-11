@@ -330,8 +330,14 @@
                 <span> @AlienSpeciesHelpers.GetLetterFullText(criterion, false) @Constants.ScoreExplanationScore @criterion.Value.</span>
             </span> 
             <button onclick="toggleCollapsible(this)">
-                <span class="material-icons expanded_icon">expand_less</span>
-                <span class="material-icons collapsed_icon">expand_more</span>
+                <span class="expanded_icon">
+                    <span>Se mindre</span>
+                    <span class="material-icons">expand_less</span>
+                </span>
+                <span class="collapsed_icon">
+                    <span>Se mer</span>
+                    <span class="material-icons">expand_more</span>
+                </span>
             </button>
         </div>
     }

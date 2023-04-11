@@ -785,18 +785,31 @@ span.area i {
     border-color: white;
 }
 
+.collapsible_header button:not(:hover),
+.collapsible_header button {
+    background: #ddd;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
 .darktheme .collapsible_header button:not(:hover),
 .collapsible_header button {
     background: none;
     border: 2px solid transparent;
-    border-radius: 50%;
-    font-size: 24px;
+    border-radius: 20px;
     margin-bottom: 5px;
+}
+
+.collapsed_icon {
+    white-space: nowrap;
 }
 
 .collapsible_header button .material-icons {
     font-size: inherit;
-    vertical-align: middle;
+    font-size: 24px;
 }
 
 /* OVERRIDE P STYLING */

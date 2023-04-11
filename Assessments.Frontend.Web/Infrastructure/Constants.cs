@@ -392,6 +392,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string determeningCriteriaHeading = "Avgjørende kriterier";
         public const string otherCriteriaHeading = "Øvrige kriterier";
         public const string estimationMethod = "Estimeringsmetode:";
+        public const string ScoreExplanationScore = "Dette tilsvarer skår";
 
         public const string basedOnEstimatesPlural = "Basert på de beste anslagene på ";
         public const string basedOnEstimatesSingular = "Basert på det beste anslaget på";
@@ -410,7 +411,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string riskOfDeath50 = "eller at sannsynligheten for utdøing innen 50 år er på ";
         public const string adjustedTo = "Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier ";
         public const string adjustedUncertainty = "Begrunnelse for justering av skår og/eller usikkerhet:";
-                
+
         public const string demoKeyNumbers = "Demografiske nøkkeltall";
         public const string currentPopSize = "Nåværende populasjonsstørrelse (N, i antall individer):";
         public const string growthRate = "Vekstrate";
@@ -471,4 +472,4 @@ namespace Assessments.Frontend.Web.Infrastructure
 
 
     }
-}   
+}

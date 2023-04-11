@@ -570,3 +570,7 @@
 .criteria-summary-list .collapsible {
     background: inherit;
 }
+
+.criteria-summary-list li {
+    background: inherit;
+}

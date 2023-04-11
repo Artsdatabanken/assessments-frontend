@@ -322,12 +322,12 @@
         </table>
     }
 
-    void getListForCategory(AlienSpeciesAssessment2023Criterion criterion, string letter)
+    void GetListForCategory(AlienSpeciesAssessment2023Criterion criterion, string letter)
     {
         <div class="collapsible_header">
             <span>
-                <b> @letter - </b> <span>@criterion.CriteriaLetter.DisplayName()</span><br/>
-                <span> @AlienSpeciesHelpers.GetLetterFullText(criterion, false) </span> 
+                <b><span class="collapsible_header_letter">@letter.</span> @criterion.CriteriaLetter.DisplayName() </b> <br />
+                <span> @AlienSpeciesHelpers.GetLetterFullText(criterion, false) @Constants.ScoreExplanationScore @criterion.Value.</span>
             </span> 
             <button onclick="toggleCollapsible(this)">
                 <span class="material-icons expanded_icon">expand_less</span>
@@ -336,7 +336,7 @@
         </div>
     }
 
-    void getEstimationMethod(string estimationMethod)
+    void GetEstimationMethod(string estimationMethod)
     {
         <span class="estimation-method">
             <b>@Constants.estimationMethod</b><br/>
@@ -377,9 +377,9 @@
     </p>
     <ul class="criteria-summary-list">
         <li is-visible="criteriaHasA || criteriaHasB"  class="collapsible initially_closed">            
-           @{getListForCategory(uncertaintyA, "A");}
+           @{GetListForCategory(uncertaintyA, "A");}
             <div class="collapsible_content">                
-                @{getEstimationMethod(assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant());}                
+                @{GetEstimationMethod(assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant());}                
                 <p class="summary-estimated">
                     <span is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien">
                         @Constants.basedOnEstimatesPlural @Constants.basedOnArea @Constants.today
@@ -480,9 +480,9 @@
             </div>            
         </li>
         <li is-visible="criteriaHasA || criteriaHasB" class="collapsible initially_closed">            
-            @{getListForCategory(uncertaintyB, "B");}
+            @{GetListForCategory(uncertaintyB, "B");}
             <div class="collapsible_content">
-                @{getEstimationMethod(assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant());}
+                @{GetEstimationMethod(assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant());}
                 <div is-visible="isSpatiotemporalDataset">
                     <table class="numbers-table">
                         <caption class="table-title">
@@ -575,7 +575,7 @@
         </li>
         <li is-visible="criteriaHasC">
             <div is-visible="hasContentC" class="collapsible initially_closed">
-               @{getListForCategory(uncertaintyC, "C");}
+               @{GetListForCategory(uncertaintyC, "C");}
                 <div class="collapsible_content">
                     <table class="numbers-table">
                         <caption class="table-title"><b>Kolonisert naturtypeareal.</b> Anslått prosentandel kolonisert areal i de naturtypene arten er observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner. </caption>
@@ -626,7 +626,7 @@
     </p>
     <ul class="criteria-summary-list">
         <li is-visible="criteriaHasD && !showIsNk && hasContentD" class="collapsible initially_closed">           
-            @{getListForCategory(uncertaintyD, "D");}
+            @{GetListForCategory(uncertaintyD, "D");}
             <div class="collapsible_content">
                 <div is-visible="@assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && @assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0">
                     <p>
@@ -673,7 +673,7 @@
         </li>
 
         <li is-visible="criteriaHasE && !showIsNk && hasContentE" class="collapsible initially_closed">           
-            @{getListForCategory(uncertaintyE, "E");}
+            @{GetListForCategory(uncertaintyE, "E");}
             <div class="collapsible_content">
                 <div is-visible="@assessment.SpeciesSpeciesInteractions  != null && @assessment.SpeciesSpeciesInteractions .Count() != 0">
                     <p>
@@ -720,7 +720,7 @@
         </li>
 
         <li is-visible="criteriaHasF && !showIsNk && hasContentF" class="collapsible initially_closed">           
-            @{getListForCategory(uncertaintyF, "F");}
+            @{GetListForCategory(uncertaintyF, "F");}
             <div class="collapsible_content">
                 <div is-visible="showFTable">
                     @{
@@ -735,7 +735,7 @@
 
         <li is-visible="criteriaHasG">
             <div is-visible="!showIsNk && hasContentG" class="collapsible initially_closed">
-               @{getListForCategory(uncertaintyG, "G");}
+               @{GetListForCategory(uncertaintyG, "G");}
                 <div class="collapsible_content">
                     <div is-visible="showGTable">
                         @{
@@ -751,7 +751,7 @@
 
         <li is-visible="criteriaHasH">
             <div is-visible="!showIsNk && hasContentH" class="collapsible initially_closed">
-                @{getListForCategory(uncertaintyH, "H");}
+                @{GetListForCategory(uncertaintyH, "H");}
                 <div class="collapsible_content">
                     <div>
                         <table class="numbers-table" is-visible="showHTable">
@@ -797,7 +797,7 @@
 
         <li is-visible="criteriaHasI">
             <div is-visible="!showIsNk && hasContentI" class="collapsible initially_closed">
-               @{getListForCategory(uncertaintyI, "I");}
+               @{GetListForCategory(uncertaintyI, "I");}
                 <div class="collapsible_content">
                     <div>
                         <table class="numbers-table" is-visible="showITable">

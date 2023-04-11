@@ -574,3 +574,7 @@
 .criteria-summary-list li {
     background: inherit;
 }
+
+.collapsible_header_letter {
+    color: lightgray;
+}

@@ -370,8 +370,7 @@
     
     <p is-visible="isDecisiveCriteria">
         <b>@Constants.speciesHas @assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant() 
-            @Constants.xAxisLabel.ToLower() 
-            <!-- TODO: Få tak i faktisk score, forstod ikke forklaringa. -->
+            @Constants.xAxisLabel.ToLower() (@Constants.JustScore @((int)assessment.ScoreInvasionPotential))
         </b>
     </p>
 
@@ -629,8 +628,7 @@
 
     <p is-visible="isDecisiveCriteria">
         <b>@Constants.speciesHas @assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant() 
-            @Constants.yAxisLabel.ToLower() 
-            <!-- TODO: Få tak i faktisk score, forstod ikke forklaringa. -->
+            @Constants.yAxisLabel.ToLower() (@Constants.JustScore @((int)assessment.ScoreEcologicalEffect))
         </b>
     </p>
 

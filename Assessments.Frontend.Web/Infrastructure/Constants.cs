@@ -393,6 +393,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string otherCriteriaHeading = "Øvrige kriterier";
         public const string estimationMethod = "Estimeringsmetode:";
         public const string ScoreExplanationScore = "Dette tilsvarer skår";
+        public const string JustScore = "skår";
 
         public const string basedOnEstimatesPlural = "Basert på de beste anslagene på ";
         public const string basedOnEstimatesSingular = "Basert på det beste anslaget på";

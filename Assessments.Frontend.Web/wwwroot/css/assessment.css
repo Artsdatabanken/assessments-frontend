@@ -772,6 +772,10 @@ span.area i {
     padding: 8px;
 }
 
+.collapsible_header_letter {
+    color: grey;
+}
+
 .expanded .collapsible_header {
     border-bottom: 1px solid lightgrey;
 }
@@ -787,7 +791,7 @@ span.area i {
     border: 2px solid transparent;
     border-radius: 50%;
     font-size: 24px;
-    margin: 0;
+    margin-bottom: 5px;
 }
 
 .collapsible_header button .material-icons {

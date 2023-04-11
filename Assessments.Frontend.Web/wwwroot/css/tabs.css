@@ -268,7 +268,7 @@ ul.second {
 .criteria-summary-list .collapsible_header {
     border: 0;
     padding: 0;
-    margin: 0;    
+    margin: 0;
 }
 
 .criteria-summary-list .collapsible_header {
@@ -282,12 +282,13 @@ ul.second {
 }
 
 .criteria-summary-list .collapsible {
-    margin-bottom: 2px;
+    margin: 5px 0;
 }
 
 .criteria-summary-list .collapsible .collapsible_content {
     padding: 8px;
     border: 1px solid lightgray;
+    margin-bottom: 10px;
 }
 .tabbed_element_container .criteria-summary-list p{
     padding:0;

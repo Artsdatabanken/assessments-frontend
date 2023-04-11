@@ -566,3 +566,7 @@
     background-color: #201f1f;
     border: 1px solid #ccc;
 }
+
+.criteria-summary-list .collapsible {
+    background: inherit;
+}

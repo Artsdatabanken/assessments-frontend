@@ -382,8 +382,10 @@
         <span>@Constants.seeOtherTab</span>
     </p>
     <ul class="criteria-summary-list">
-        <li is-visible="criteriaHasA || criteriaHasB"  class="collapsible initially_closed">            
-           @{GetListForCategory(uncertaintyA, "A");}
+        <li is-visible="criteriaHasA || criteriaHasB"  class="collapsible initially_closed">
+            @{
+                GetListForCategory(uncertaintyA, AlienSpeciesAssessment2023CriteriaLetter.A.ToString());
+            }
             <div class="collapsible_content">                
                 @{GetEstimationMethod(assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant());}                
                 <p class="summary-estimated">
@@ -486,7 +488,9 @@
             </div>            
         </li>
         <li is-visible="criteriaHasA || criteriaHasB" class="collapsible initially_closed">            
-            @{GetListForCategory(uncertaintyB, "B");}
+            @{
+                GetListForCategory(uncertaintyB, AlienSpeciesAssessment2023CriteriaLetter.B.ToString());
+            }
             <div class="collapsible_content">
                 @{GetEstimationMethod(assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant());}
                 <div is-visible="isSpatiotemporalDataset">
@@ -581,7 +585,9 @@
         </li>
         <li is-visible="criteriaHasC">
             <div is-visible="hasContentC" class="collapsible initially_closed">
-               @{GetListForCategory(uncertaintyC, "C");}
+                @{
+                    GetListForCategory(uncertaintyC, AlienSpeciesAssessment2023CriteriaLetter.C.ToString());
+                }
                 <div class="collapsible_content">
                     <table class="numbers-table">
                         <caption class="table-title"><b>Kolonisert naturtypeareal.</b> Anslått prosentandel kolonisert areal i de naturtypene arten er observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner. </caption>
@@ -598,10 +604,12 @@
                                 <td>@natureType.TimeHorizon.DisplayName()</td>
                                 <td>@natureType.ColonizedArea</td>
                                 <td>
+                                    <ul>
                                         @foreach (var background in natureType.Background)
                                         {
                                         <li>@background.DisplayName()</li>
                                         }
+                                    </ul>
                                 </td>
                             </tr>
                         }
@@ -632,7 +640,9 @@
     </p>
     <ul class="criteria-summary-list">
         <li is-visible="criteriaHasD && !showIsNk && hasContentD" class="collapsible initially_closed">           
-            @{GetListForCategory(uncertaintyD, "D");}
+            @{
+                GetListForCategory(uncertaintyD, AlienSpeciesAssessment2023CriteriaLetter.D.ToString());
+            }
             <div class="collapsible_content">
                 <div is-visible="@assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && @assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0">
                     <p>
@@ -679,7 +689,9 @@
         </li>
 
         <li is-visible="criteriaHasE && !showIsNk && hasContentE" class="collapsible initially_closed">           
-            @{GetListForCategory(uncertaintyE, "E");}
+            @{
+                GetListForCategory(uncertaintyE, AlienSpeciesAssessment2023CriteriaLetter.E.ToString());
+            }
             <div class="collapsible_content">
                 <div is-visible="@assessment.SpeciesSpeciesInteractions  != null && @assessment.SpeciesSpeciesInteractions .Count() != 0">
                     <p>
@@ -726,7 +738,9 @@
         </li>
 
         <li is-visible="criteriaHasF && !showIsNk && hasContentF" class="collapsible initially_closed">           
-            @{GetListForCategory(uncertaintyF, "F");}
+            @{
+                GetListForCategory(uncertaintyF, AlienSpeciesAssessment2023CriteriaLetter.F.ToString());
+            }
             <div class="collapsible_content">
                 <div is-visible="showFTable">
                     @{
@@ -741,7 +755,9 @@
 
         <li is-visible="criteriaHasG">
             <div is-visible="!showIsNk && hasContentG" class="collapsible initially_closed">
-               @{GetListForCategory(uncertaintyG, "G");}
+                @{
+                    GetListForCategory(uncertaintyG, AlienSpeciesAssessment2023CriteriaLetter.G.ToString());
+                }
                 <div class="collapsible_content">
                     <div is-visible="showGTable">
                         @{
@@ -757,7 +773,9 @@
 
         <li is-visible="criteriaHasH">
             <div is-visible="!showIsNk && hasContentH" class="collapsible initially_closed">
-                @{GetListForCategory(uncertaintyH, "H");}
+                @{
+                    GetListForCategory(uncertaintyH, AlienSpeciesAssessment2023CriteriaLetter.H.ToString());
+                }
                 <div class="collapsible_content">
                     <div>
                         <table class="numbers-table" is-visible="showHTable">
@@ -803,7 +821,9 @@
 
         <li is-visible="criteriaHasI">
             <div is-visible="!showIsNk && hasContentI" class="collapsible initially_closed">
-               @{GetListForCategory(uncertaintyI, "I");}
+                @{
+                    GetListForCategory(uncertaintyI, AlienSpeciesAssessment2023CriteriaLetter.I.ToString());
+                }
                 <div class="collapsible_content">
                     <div>
                         <table class="numbers-table" is-visible="showITable">

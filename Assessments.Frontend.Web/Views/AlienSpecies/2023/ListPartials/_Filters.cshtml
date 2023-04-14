@@ -12,16 +12,22 @@
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
-    var AllEcologicalEffects = Categories.AlienSpecies2023EcologicalEffect;
-    var AllInvasionPotentials = Categories.AlienSpecies2023InvasionPotential;
+    var AllClimateEffects = ClimateEffects.AlienSpecies2023ClimateEffects;
     var AllDeciciveCriterias = DeciciveCriteria.AlienSpecies2023DeciciveCriteria;
-    var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
+    var AllEcologicalEffects = Categories.AlienSpecies2023EcologicalEffect;
+    var AllEnvironments = Environments.AlienSpecies2023Environment;
+    var AllGeographicVariation = GeographicVariation.AlienSpecies2023GeographicVariation;
     var AllHabitats = Habitat.AlienSpecies2023Habitats;
+    var AllInvasionPotentials = Categories.AlienSpecies2023InvasionPotential;
+    var AllNatureTypes = NatureTypes.AlienSpecies2023NatureTypes;
+    var AllNotAssessed = NotAssessed.AlienSpecies2023NotAssessed;
     var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
+    var AllRegionallyAlien = RegionallyAlien.AlienSpecies2023RegionallyAlien;
     var AllRegions = Regions.AlienSpecies2023Regions;
     var AllSpeciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
+    var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
+    var AllSpreadWays = SpreadWays.AlienSpecies2023SpreadWays;
     var AllTaxonRanks = TaxonRank.AlienSpecies2023TaxonRanks;
-    var AllWaterRegions = Regions.AlienSpecies2023WaterRegions;
 
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
     {
@@ -95,7 +101,7 @@
                         string value;
                         string markAllClassName = "mark_all";
 
-                        if (filterItems.Filters.Length > 4 && modelName != nameof(Model.SpeciesStatus))
+                        if (filterItems.Filters.Length > 4)
                             MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
 
                         foreach (var el in filterItems.Filters)
@@ -173,15 +179,21 @@
                             MakeFilterChips(Model.Category, AllCategories.Filters);
                             MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters);
                             MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters);
+                            MakeFilterChips(Model.NatureTypes, AllNatureTypes.Filters);
                             MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters);
+                            MakeFilterChips(Model.Environment, AllEnvironments.Filters);
                             MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters);
                             MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters);
                             MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters);
+                            MakeFilterChips(Model.NotAssessed, AllNotAssessed.Filters);
+                            MakeFilterChips(Model.RegionallyAlien, AllRegionallyAlien.Filters);
                             MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters);
+                            MakeFilterChips(Model.GeographicVariations, AllGeographicVariation.Filters);
+                            MakeFilterChips(Model.ClimateEffects, AllClimateEffects.Filters);
+                            MakeFilterChips(Model.SpreadWays, AllSpreadWays.Filters);
                             MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
                             MakeFilterChips(Model.Habitats, AllHabitats.Filters);
                             MakeFilterChips(Model.Regions, AllRegions.Filters);
-                            MakeFilterChips(Model.WaterRegions, AllWaterRegions.Filters);
                         }
                     </ul>
                     <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">
@@ -233,15 +245,20 @@
                                     MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories);
                                     MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials);
                                     MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects);
-                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
+                                    MakeFilterGroup(nameof(Model.GeographicVariations), Model.GeographicVariations, AllGeographicVariation);
+                                    MakeFilterGroup(nameof(Model.ClimateEffects), Model.ClimateEffects, AllClimateEffects);
                                     MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias);
                                     MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus);
                                     MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged);
                                     MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies);
                                     MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
-                                    //MakeFilterGroup(nameof(Model.Habitats), Model.Habitats, AllHabitats);
-                                    //MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
-                                    //MakeFilterGroup(nameof(Model.WaterRegions), Model.WaterRegions, AllWaterRegions);
+                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
+                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
+                                    MakeFilterGroup(nameof(Model.Environment), Model.Environment, AllEnvironments);
+                                    MakeFilterGroup(nameof(Model.NatureTypes), Model.NatureTypes, AllNatureTypes);
+                                    MakeFilterGroup(nameof(Model.SpreadWays), Model.SpreadWays, AllSpreadWays);
+                                    MakeFilterGroup(nameof(Model.RegionallyAlien), Model.RegionallyAlien, AllRegionallyAlien);
+                                    MakeFilterGroup(nameof(Model.NotAssessed), Model.NotAssessed, AllNotAssessed);
                                 }
                             </ul>
                         </div>

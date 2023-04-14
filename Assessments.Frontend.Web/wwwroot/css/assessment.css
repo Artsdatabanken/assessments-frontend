@@ -503,36 +503,6 @@ no_distribution {
     /* cursor: pointer; Turning this off for now as nothing happens when you click on it */ 
 }
 
-.known_today {
-    background: #51b051;
-    fill: #51b051;
-}
-
-.sea.known_today {
-    background: #7ae57a;
-    fill: #7ae57a;
-}
-
-.is_assumed_today {
-    background: #f9ae00;
-    fill: #f9ae00;
-}
-
-.sea.is_assumed_today {
-    background: #b77818;
-    fill: #b77818;
-}
-
-.is_assumed_in_future {
-    background: #f9ae00;
-    fill: #f9ae00;
-}
-
-.sea.is_assumed_in_future {
-    background: #b77818;
-    fill: #b77818;
-}
-
 .indicator {
     display:inline-block;
     width: 15px;
@@ -1016,4 +986,115 @@ table caption.table-title {
 
 .expansion-list {
     margin-bottom: 15px;
+}
+
+.table-of-contents-small-screen-button {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 6px;
+    border: 1px solid #000;
+    border-radius: 2px;
+    background: #fff;
+}
+
+.table-of-contents-small-screen-button-hide {
+    display: none;
+}
+
+.table-of-contents-small-screen-input {
+    position: sticky;
+    top: 20px;
+}
+
+.table-of-contents-small-screen .button .material-icons {
+    font-size: 25px;
+}
+
+.table-of-contents-small-screen-show {
+    display: none;
+}
+
+#showTableOfContentList:checked ~ .table-of-contents-small-screen-show {
+    display: block;
+}
+
+#showTableOfContentList {
+    display: none;
+}
+
+.mobile_padding #tableOfContentsOuter {
+    position: relative;
+    width: fit-content;
+    z-index: 1;
+    margin-bottom: 10px;
+}
+
+.mobile_padding #tableOfContentsOuter.table-of-contents-sticky {
+    position: sticky;
+    top: 20px;
+}
+
+.mobile_padding .table-of-contents {
+    border: 1px solid #000;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.mobile_padding .table-of-contents ul {
+    list-style: none;
+}
+
+@media only screen and (min-width: 941px) {
+    .table-of-contents-small-screen {
+        display: none;
+    }
+
+    .sidebarmenu #TableOfContents li a {
+        text-decoration: revert;
+        border: none;
+        padding: 0 0 0.5em 1em;
+    }
+
+    .mobile_padding #tableOfContentsOuter {
+        display: none;
+    }
+}
+
+.table-of-contents-big-screen h3 {
+    font-weight: normal;
+    font-family: "Roboto Condensed", sans-serif;
+    color: #4c4a48;
+    font-size: 22.5px;
+}
+
+.water-area-hide,
+.collapse_water_area.water-area-hide,
+.water-area-hide.material-icons {
+    display: none;
+}
+
+.show_water_areas {
+    display: block;
+}
+
+.collapse_water_area button {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 24px;
+    margin: 0;
+    padding: 0 5px;
+}
+
+.collapse_water_area button .material-icons {
+    font-size: inherit;
+    vertical-align: middle;
+}
+
+.collapse_water_area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

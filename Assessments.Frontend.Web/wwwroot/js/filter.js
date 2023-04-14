@@ -29,7 +29,16 @@ if (filters) {
         "show_insects",
         "show_skr",
         "show_sin",
-        "show_ttn"
+        "show_ttn",
+        "show_cep",
+        "show_cei",
+        "show_swimp",
+        "show_swnat",
+        "show_swspr",
+        "show_regionallyalien",
+        "show_rar",
+        "show_nta",
+        "show_ntn",
     ];
 
     const markAllInputs = document.querySelectorAll(".mark_all > input:first-of-type");

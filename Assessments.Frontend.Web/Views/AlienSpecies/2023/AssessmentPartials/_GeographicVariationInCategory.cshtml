@@ -13,13 +13,12 @@
 <div id="@nameof(Constants.HeadingsNo.GeographicVariationInCategory)">
     <div class="page_section_header">
         <h2>@Constants.HeadingsNo.GeographicVariationInCategory</h2>
-        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
 
     <div is-visible="hasGeographicVariationInCategory">
         <p>
             @Constants.LowerCategoryThan
-            <i> @Model.Assessment.Category.DisplayName()</i> @Model.Assessment.Category
+            <i> @Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> @Model.Assessment.Category
             @Constants.LowerCategoryThanEnding                   
         </p>
         <h3  is-visible="hasCauses">Årsak til geografisk variasjon i risiko</h3>
@@ -38,7 +37,7 @@
     </div>
     <p is-visible="!hasGeographicVariationInCategory">                
         @Constants.NoLowerCategoryThan
-        <i> @Model.Assessment.Category.DisplayName()</i> @Model.Assessment.Category 
+        <i> @Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> @Model.Assessment.Category 
         @Constants.LowerCategoryThanEnding
     </p>
 </div>

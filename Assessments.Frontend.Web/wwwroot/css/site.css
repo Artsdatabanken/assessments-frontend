@@ -190,12 +190,11 @@ option {
         flex-wrap: wrap;
     }
 
-
     .sidebarmenu {
         vertical-align: top;
         display: inline-block;
+        position: sticky;
     }
-
 }
 /* PAD-SIZE 940px */
 @media only screen and (max-width: 940px) {
@@ -604,7 +603,7 @@ button {
         font-family: "Roboto condensed";
         height: 50px;
         line-height: 50px;
-        /*width: 300px; remove for innsight (innsyn)*/
+        width: 300px;
     }
 }
 

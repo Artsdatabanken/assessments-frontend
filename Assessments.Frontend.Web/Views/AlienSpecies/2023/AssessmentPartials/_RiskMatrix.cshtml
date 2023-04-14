@@ -363,28 +363,15 @@
     </div>
 
     <div class="flex-me">
+        @*This Display below of the uncertainties ignores same-category variation, which are displayed in the matrix
+        The same info should preferrably be availiable in the main text, to aid users who cannot view the image optimally.
+        Also it would look nicer. yeh. All uncertainty x,y's are now input in the findAllUncertaintyCategories use of the matrix lookup.*@
         <p>
-            @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificName.ScientificNameRank) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> -
-            @Model.Assessment.Category<span is-visible="uncertaintiesList.Count>0">, med usikkerhet til </span>
-            <!--
-                This Display below of the uncertainties ignores same-category variation, which are displayed in the matrix
-                The same info should preferrably be availiable in the main text, to aid users who cannot view the image optimally.
-                Also it would look nicer. yeh. All uncertainty x,y's are now input in the findAllUncertaintyCategories use of the matrix lookup.
-            -->
-            @{
-                for (int i = 0; i < uncertaintiesList.Count; i++)
-                {
-                    <span><i>@Constants.categoryStringFromCode[@uncertaintiesList[i]].ToLowerInvariant()</i> - @uncertaintiesList[i].ToUpper()</span>
-                    if (i == uncertaintiesList.Count - 2)
-                    {
-                        <span> og </span>
-                    }
-                    else if (i != uncertaintiesList.Count - 1)
-                    {
-                        <span>,</span>
-                    }
-                }
-            }
+            @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificName.ScientificNameRank) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> 
+            @Model.Assessment.Category<span is-visible="uncertaintiesList.Count == 0">.</span><span is-visible="uncertaintiesList.Count>0">, med usikkerhet til @Html.Raw(uncertaintiesList.Select(x => $"<i>{Constants.categoryStringFromCode[x].ToLowerInvariant()}</i> {x.ToUpper()}").JoinAnd(", ", " og ")).</span>
+            <span>
+                Risikoen er @(Model.Assessment.GeographicVariationInCategory == true ? "lavere i deler av" : "den samme i hele")  @Helpers.FixSpeciesLevel("{art}ens", Model.Assessment.ScientificName.ScientificNameRank) potensielle utbredelse.
+            </span>
         </p>
         <div>
             <p>
@@ -402,9 +389,6 @@
                 @(AlienSpeciesHelpers.GetEcologicalEffectExplanation(yAxisCriteria))
                 Dette tilsvarer @Model.Assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant() økologisk effekt (risikomatrisens y-akse).
             </p>
-        </div>
-        <div is-visible="@Model.Assessment.GeographicVariationInCategory == true">
-            Arten har lavere risiko enn <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> - @Model.Assessment.Category.ToString() (dvs. @Html.Raw(AlienSpeciesHelpers.GetLowerEcologicalEffectsText(Model.Assessment.Category))) i deler av sin utbredelse.
         </div>
     </div>
 </div>

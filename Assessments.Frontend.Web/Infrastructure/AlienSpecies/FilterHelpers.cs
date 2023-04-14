@@ -47,6 +47,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.EcologicalEffect?.Any() == true)
                         return $"{parameters.EcologicalEffect.Length}";
                     return String.Empty;
+                case nameof(parameters.Environment):
+                    if (parameters.Environment?.Any() == true)
+                        return $"{parameters.Environment.Length}";
+                    return String.Empty;
+                case nameof(parameters.NatureTypes):
+                    if (parameters.NatureTypes?.Any() == true)
+                        return $"{parameters.NatureTypes.Length}";
+                    return String.Empty;
                 case nameof(parameters.InvasionPotential):
                     if (parameters.InvasionPotential?.Any() == true)
                         return $"{parameters.InvasionPotential.Length}";
@@ -63,9 +71,17 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.SpeciesStatus?.Any() == true)
                         return $"{parameters.SpeciesStatus.Length}";
                     return String.Empty;
+                case nameof(parameters.SpreadWays):
+                    if (parameters.SpreadWays?.Any() == true)
+                        return $"{parameters.SpreadWays.Length}";
+                    return String.Empty;
                 case nameof(parameters.TaxonRank):
                     if (parameters.TaxonRank?.Any() == true)
                         return $"{parameters.TaxonRank.Length}";
+                    return String.Empty;
+                case nameof(parameters.NotAssessed):
+                    if (parameters.NotAssessed?.Any() == true)
+                        return $"{parameters.NotAssessed.Length}";
                     return String.Empty;
                 case nameof(parameters.ProductionSpecies):
                     if (parameters.ProductionSpecies?.Any() == true)
@@ -86,17 +102,25 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     if (parameters.Habitats?.Any() == true)
                         return $"{parameters.Habitats.Length}";
                     return String.Empty;
+                case nameof(parameters.RegionallyAlien):
+                    if (parameters.RegionallyAlien?.Any() == true)
+                        return $"{parameters.RegionallyAlien.Length}";
+                    return String.Empty;
                 case nameof(parameters.Regions):
                     if (parameters.Regions?.Any() == true)
                         return $"{parameters.Regions.Length}";
                     return String.Empty;
-                case nameof(parameters.WaterRegions):
-                    if (parameters.WaterRegions?.Any() == true)
-                        return $"{parameters.WaterRegions.Length}";
-                    return String.Empty;
                 case nameof(parameters.Criterias):
                     if (parameters.Criterias?.Any() == true)
                         return $"{parameters.Criterias.Length}";
+                    return String.Empty;
+                case nameof(parameters.ClimateEffects):
+                    if (parameters.ClimateEffects?.Any() == true)
+                        return $"{parameters.ClimateEffects.Length}";
+                    return String.Empty;
+                case nameof(parameters.GeographicVariations):
+                    if (parameters.GeographicVariations?.Any() == true)
+                        return $"{parameters.GeographicVariations.Length}";
                     return String.Empty;
                 default:
                     return String.Empty;
@@ -118,17 +142,23 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             count += parameters.Area.Length;
             count += parameters.Category.Length;
             count += parameters.EcologicalEffect.Length;
+            count += parameters.Environment.Length;
+            count += parameters.NatureTypes.Length;
             count += parameters.InvasionPotential.Length;
             count += parameters.CategoryChanged.Length;
             count += parameters.DecisiveCriterias.Length;
             count += parameters.SpeciesStatus.Length;
             count += parameters.SpeciesGroups.Length;
+            count += parameters.NotAssessed.Length;
             count += parameters.ProductionSpecies.Length;
+            count += parameters.SpreadWays.Length;
             count += parameters.TaxonRank.Length;
             count += parameters.Habitats.Length;
+            count += parameters.RegionallyAlien.Length;
             count += parameters.Regions.Length;
-            count += parameters.WaterRegions.Length;
             count += parameters.Criterias.Length;
+            count += parameters.ClimateEffects.Length;
+            count += parameters.GeographicVariations.Length;
 
             return count;
         }
@@ -138,17 +168,23 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             var selectionlist = parameters.Area;
             selectionlist = selectionlist.Concat(parameters.Category).ToArray();
             selectionlist = selectionlist.Concat(parameters.EcologicalEffect).ToArray();
+            selectionlist = selectionlist.Concat(parameters.Environment).ToArray();
+            selectionlist = selectionlist.Concat(parameters.NatureTypes).ToArray();
             selectionlist = selectionlist.Concat(parameters.InvasionPotential).ToArray();
             selectionlist = selectionlist.Concat(parameters.CategoryChanged).ToArray();
             selectionlist = selectionlist.Concat(parameters.DecisiveCriterias).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesStatus).ToArray();
+            selectionlist = selectionlist.Concat(parameters.NotAssessed).ToArray();
             selectionlist = selectionlist.Concat(parameters.ProductionSpecies).ToArray();
             selectionlist = selectionlist.Concat(parameters.SpeciesGroups).ToArray();
+            selectionlist = selectionlist.Concat(parameters.SpreadWays).ToArray();
             selectionlist = selectionlist.Concat(parameters.TaxonRank).ToArray();
             selectionlist = selectionlist.Concat(parameters.Habitats).ToArray();
+            selectionlist = selectionlist.Concat(parameters.RegionallyAlien).ToArray();
             selectionlist = selectionlist.Concat(parameters.Regions).ToArray();
-            selectionlist = selectionlist.Concat(parameters.WaterRegions).ToArray();
             selectionlist = selectionlist.Concat(parameters.Criterias).ToArray();
+            selectionlist = selectionlist.Concat(parameters.GeographicVariations).ToArray();
+            selectionlist = selectionlist.Concat(parameters.ClimateEffects).ToArray();
             return selectionlist;
         }
 

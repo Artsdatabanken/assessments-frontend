@@ -1,5 +1,6 @@
 ﻿using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
+using Assessments.Frontend.Web.Infrastructure.Services;
 using Assessments.Frontend.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
@@ -18,13 +19,15 @@ namespace Assessments.Frontend.Web.Controllers
     [Route("fremmedartslista")]
     public class AlienSpeciesController : BaseController<AlienSpeciesController>
     {
+        private readonly ArtskartApiService _artskartApiService;
         private readonly AttachmentRepository _attachmentRepository;
         private readonly AlienSpecies2023Options _alienSpecies2023Options;
 
-        public AlienSpeciesController(IOptions<ApplicationOptions> options, AttachmentRepository attachmentRepository)
+        public AlienSpeciesController(IOptions<ApplicationOptions> options, AttachmentRepository attachmentRepository, ArtskartApiService artskartApiService)
         {
             _alienSpecies2023Options = options.Value.AlienSpecies2023;
             _attachmentRepository = attachmentRepository;
+            _artskartApiService = artskartApiService;
         }
 
         public IActionResult Home() => View("AlienSpeciesHome");
@@ -101,6 +104,89 @@ namespace Assessments.Frontend.Web.Controllers
             {
                 FileDownloadName = "fremmedartslista-2023.xlsx"
             };
+        }
+
+        [HttpGet, Route("2023/suggestions")]
+        public async Task<IActionResult> Suggestion([FromQueryAttribute] string search)
+        {
+            var name = search.Trim().ToLower();
+            var query = await DataRepository.GetAlienSpeciesAssessments();
+
+            // At the moment the artskart hits are used to indicate to the user that there exists taxons with the searched name, but that it may not be present in the alien species list. 
+            // We might want to extend this method to also add a few of the most relevant hits even though they are not in the alien species list. 
+            var artskartResult = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
+
+            // Remove species not present in alien species list
+            var suggestions = artskartResult.Where(x =>
+                                                    (x.TaxonCategory != Constants.TaxonCategoriesEn.Species &&                          // Not species
+                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&                        // Not subspecies
+                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.Variety &&                          // Not variety
+                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.Form) &&                          // Not form
+                                                    query.Any(y => y.NameHiearchy.Any(z => z.ScientificName.Contains(x.ScientificName))) ||    // Check if none of the above -> exists in taxonomic rank
+                                                    query.Any(y => y.ScientificName.ScientificNameId == x.ScientificNameId)).ToList();                // or match on scientific name id: exact match on species/subsp./var.
+
+            // Add assessments if they are in alien species list, but not in artskart. "Subsp." and "var." are not included in scientific names in artskart.
+            var alienSpeciesHits = query.Where(x => x.ScientificName.ScientificName.Trim().ToLower().Contains(name)).ToArray();
+
+            foreach (var hit in alienSpeciesHits)
+            {
+                if (suggestions.Any(x => x.ScientificNameId.Equals(hit.ScientificName.ScientificNameId))) continue;
+                suggestions.Add(new ArtskartTaxon
+                {
+                    ScientificNameId = (int)hit.ScientificName.ScientificNameId,
+                    PopularName = hit.VernacularName,
+                    MatchedName = hit.ScientificName.ScientificName,
+                    ScientificName = hit.ScientificName.ScientificName,
+                    TaxonCategory = hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Species) ? Constants.TaxonCategoriesEn.Species :
+                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.SubSpecies) ? Constants.TaxonCategoriesEn.SubSpecies :
+                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Variety) ? Constants.TaxonCategoriesEn.Variety :
+                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Form) ? Constants.TaxonCategoriesEn.Form : 0
+                });
+            }
+
+            // Add assessmentIds to species, subspecies, form and variety
+            foreach (var item in suggestions.Select((hit, i) => new { i, hit }))
+            {
+                if (
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Species ||
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.SubSpecies ||
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Variety ||
+                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Form
+                    )
+                {
+                    var ids = query
+                        .Where(x => x.ScientificName.ScientificNameId == item.hit.ScientificNameId)
+                        .Select(x => new
+                        {
+                            id = x.Id,
+                            area = x.EvaluationContext,
+                            category = x.Category,
+                            speciesGroup = x.SpeciesGroup,
+                            speciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, x.SpeciesGroup).ImageUrl,
+                            scientificName = x.ScientificName.ScientificName
+                        })
+                        .ToArray();
+
+                    item.hit.assessments = ids;
+                    if (ids.Length != 1) continue;
+                    if (item.hit.MatchedName == item.hit.ScientificName)// artskart har ikke underartsepitet o.l. men vi har det her
+                    {
+                        item.hit.MatchedName = ids[0].scientificName;
+                    }
+                    item.hit.ScientificName = ids[0].scientificName;
+                }
+            }
+
+            if (artskartResult.Any() && suggestions.Any() != true)
+            {
+                return Json(new List<object>() { new { message = "Her får du treff, men ingen av artene er behandlet i Fremmedartslista 2023" } });
+            }
+            else if (artskartResult.Any() != true && suggestions.Any() != true)
+            {
+                return Json(new List<object>() { new { message = "Her får du ingen treff." } });
+            }
+
+            return Json(suggestions);
         }
     }
 }

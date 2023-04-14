@@ -30,12 +30,12 @@
     <link rel="stylesheet" href="~/css/riskMatrix.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/feedbackForm.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/buttons-and-chips.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/map.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
     <script src="~/js/cookies.js" asp-append-version="true"></script>
     <script src="https://design.artsdatabanken.no/script/header.js"></script>
     <script src="https://design.artsdatabanken.no/script/footer.js"></script>
     <meta name="description" content="Norske fremmedartslister viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge. Fremmedartslistene er utarbeidet av Artsdatabanken i samarbeid med fageksperter. " />
-    <meta name="robots" content="noindex" /> <!-- TODO: remove after innsight process -->
 </head>
 
 <body>
@@ -54,6 +54,8 @@
                 <script src="~/js/assessmentTabs.js" asp-append-version="true"></script>
                 <script src="~/js/collapse.js" asp-append-version="true"></script>
                 <script src="~/js/themes.js" asp-append-version="true"></script>
+                <script src="~/js/tableCollapse.js" asp-append-version="true"></script>
+                <script src="~/js/tableOfContents.js" asp-append-version="true"></script>
                 @await RenderSectionAsync("Scripts", required: false)
             </div>
 

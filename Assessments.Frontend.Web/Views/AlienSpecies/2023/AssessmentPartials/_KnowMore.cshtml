@@ -68,12 +68,11 @@
 <div id="@nameof(Constants.HeadingsNo.KnowMore)">
     <div class="page_section_header">
         <h2>@Constants.HeadingsNo.KnowMore @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank)</h2>
-        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
     </div>
     <div>
         <h3>Etableringsklasse @areaText</h3>
         <p>
-            Hvor godt etablert en fremmed art er @areaText varierer fra at den ikke finnes her, til at den har sporadiske kortlevde forekomster og til at den er etablert.
+            Etableringsklasse beskriver de ulike trinnene den vurderte @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) kan ha nådd, fra å kun finnes utenlands til å være etablert i naturen.
         </p>
         <p>
             @GetSpeciesStatusText()
@@ -103,7 +102,7 @@
         <p>
             @(GetCameToNorwayFrom()) @Model.Assessment.ArrivedCountryFrom.Select(x => x.DisplayName()).JoinAnd(", ", " og ").ToLowerInvariant()
         </p>
-        <p>@Model.Assessment.ArrivedCountryFromDetails</p>
+        <p>@Html.Raw(Model.Assessment.ArrivedCountryFromDetails)</p>
     </div>
     <div>
         <h3>Global utbredelse</h3>

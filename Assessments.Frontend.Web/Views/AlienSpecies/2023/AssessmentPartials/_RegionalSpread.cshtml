@@ -29,6 +29,8 @@
         RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
     };
 
+    var hasWaterAreas = Model.FreshWaterRegionModel.IsWaterArea;
+    var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
     var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
     {
         WaterRegionName = x.Key,
@@ -64,8 +66,7 @@
 
 <div id="@nameof(Constants.HeadingsNo.RegionalSpread)">
     <div class="page_section_header">
-        <h2>@Constants.HeadingsNo.RegionalSpread</h2>
-        <a href="#@nameof(Constants.HeadingsNo.TableOfContents)">Tilbake til toppen</a>
+        <h2>@( $"{Constants.HeadingsNo.RegionalSpread} {evaluationContextText}" )</h2>
     </div>
     
     <div id="domestic_spread">
@@ -103,10 +104,6 @@
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
-                <div is-visible="Model.IsSvalbard" class="map double_map">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="knownOrAssumedToday" />
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture" />
-                </div>
                 <div is-visible="!Model.IsSvalbard" class="map double_map">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
@@ -139,18 +136,13 @@
                 </tr>
             </table>
             <div is-visible="@isDoorKnockerOrEffectNoRep">
-                <div is-visible="Model.IsSvalbard" class="map S">
-                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapSvalbard.cshtml" model="isAssumedInFuture" />
-                </div>
-                <div is-visible="!Model.IsSvalbard" class="map N">
+                <div is-visible="!Model.IsSvalbard && hasKnownOrAssumedOccurrence" class="map N">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>
+                <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>
             </div>
             <div is-visible="showCurrentPresenceComment">
-                <br />
                 <p>
-                    Grunnlaget for og/eller antagelsene bak anslagene på regionvis utbredelse og
-                    forekomstareal om 50 år: <br />
                     @Html.Raw(Model.CurrentPresenceComment)
                 </p>
             </div>
@@ -160,7 +152,7 @@
                     <tbody>
                         <tr>
                             <td>Vannregion</td>
-                            @*<td>Vannområde</td>*@
+                            <td is-visible="hasWaterAreas">Vannområde</td>
                             <td>Kjent utbredelse</td>
                             <td>Antatt utbredelse i dag</td>
                             <td>Antatt utbredelse om 50 år</td>
@@ -169,15 +161,16 @@
                         {
                             <tr>
                                 <td>@waterRegion.WaterRegionName</td>
-                                @*<td>
-                                    <span class="collapse_water_area">
-                                        Utvid vannregionen
-                                        <button onclick="toggleWaterArea(@waterRegion.WaterRegionName.Replace(" ", "_"))">
-                                            <span class="material-icons expanded_icon">expand_less</span>
-                                            <span class="material-icons collapsed_icon">expand_more</span>
+                                <td is-visible="hasWaterAreas">
+                                    <span class="collapse_water_area water-area-hide">
+                                        Utvid&nbsp;
+                                        <button name="Ekspander @waterRegion.WaterRegionName" onclick="toggleTableRows('@( $"{waterRegion.WaterRegionName.Replace(" ", "_")} water-area")')">
+                                            <span class="@waterRegion.WaterRegionName.Replace(" ", "_") material-icons expanded_icon water-area-hide">expand_less</span>
+                                            <span class="@waterRegion.WaterRegionName.Replace(" ", "_") material-icons collapsed_icon">expand_more</span>
                                         </button>
                                     </span>
-                                </td>*@
+                                    <span class="collapse_water_area water-area-no-js">Alle vannområder</span>
+                                </td>
                                 <td>
                                     <span is-visible="waterRegion.IsKnown"><span class="material-icons success">done</span>Ja</span>
                                     <span is-visible="!waterRegion.IsKnown"><span class="material-icons error">close</span>Nei</span>
@@ -191,31 +184,31 @@
                                     <span is-visible="!waterRegion.IsAssumedInFuture"><span class="material-icons error">close</span>Nei</span>
                                 </td>
                             </tr>
-                            @*foreach (var waterArea in waterRegion.WaterAreas)
+                            foreach (var waterArea in waterRegion.WaterAreas)
                             {
-                                <tr class="@waterRegion.WaterRegionName.Replace(" ", "_")">
+                                <tr class="@waterRegion.WaterRegionName.Replace(" ", "_") water-area">
                                     <td>@waterArea.WaterRegionName</td>
                                     <td>@waterArea.Name</td>
                                     <td>
-                                        <span is-visible="waterArea.IsKnown"><span class="material-icons">check</span>Ja</span>
-                                        <span is-visible="!waterArea.IsKnown">Nei</span>
+                                        <span is-visible="waterArea.IsKnown"><span class="material-icons success">done</span>Ja</span>
+                                        <span is-visible="!waterArea.IsKnown"><span class="material-icons error">close</span>Nei</span>
                                     </td>
                                     <td>
-                                        <span is-visible="waterArea.IsAssumedToday"><span class="material-icons">check</span>Ja</span>
-                                        <span is-visible="!waterArea.IsAssumedToday">Nei</span>
+                                        <span is-visible="waterArea.IsAssumedToday"><span class="material-icons success">done</span>Ja</span>
+                                        <span is-visible="!waterArea.IsAssumedToday"><span class="material-icons error">close</span>Nei</span>
                                     </td>
                                     <td>
-                                        <span is-visible="waterArea.IsAssumedInFuture"><span class="material-icons">check</span>Ja</span>
-                                        <span is-visible="!waterArea.IsAssumedInFuture">Nei</span>
+                                        <span is-visible="waterArea.IsAssumedInFuture"><span class="material-icons success">done</span>Ja</span>
+                                        <span is-visible="!waterArea.IsAssumedInFuture"><span class="material-icons error">close</span>Nei</span>
                                     </td>
                                 </tr>
-                            }*@
+                            }
                         }
                     </tbody>
                 </table>
                 
-                <p is-visible="Model.FreshWaterRegionModel.IsWaterArea">Arten har naturlig utbredelse i vannområder innenfor følgende vannregioner: @GetWaterRegions(waterRegionsNaturalOccurence)</p>
-                <p is-visible="!Model.FreshWaterRegionModel.IsWaterArea">Artens naturlige utbredelse omfatter følgende vannregioner:  @GetWaterRegions(waterRegionsNaturalOccurence)</p>
+                <p is-visible="hasWaterAreas">Arten har naturlig utbredelse i vannområder innenfor følgende vannregioner: @GetWaterRegions(waterRegionsNaturalOccurence)</p>
+                <p is-visible="!hasWaterAreas">Artens naturlige utbredelse omfatter følgende vannregioner:  @GetWaterRegions(waterRegionsNaturalOccurence)</p>
             </div>
         </div>
     </div>

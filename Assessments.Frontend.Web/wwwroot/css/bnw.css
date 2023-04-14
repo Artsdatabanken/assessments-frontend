@@ -304,6 +304,10 @@
     color: white;
 }
 
+.darktheme .category_displayer .NR span {
+    color: #1c1c1c;
+}
+
 /* TODO: Fix white text too high contrast being almost painfully white */
 
 
@@ -556,4 +560,9 @@
 
 .darktheme .error {
     color: #e55440;
+}
+
+.darktheme .mobile_padding .table-of-contents {
+    background-color: #201f1f;
+    border: 1px solid #ccc;
 }

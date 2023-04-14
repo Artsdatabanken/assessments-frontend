@@ -203,6 +203,10 @@ namespace Assessments.Frontend.Web.Models
 
     public class MapViewModel
     {
+        public List<AlienSpeciesAssessment2023FreshWaterRegion> FreshWaterRegions { get; set; } = new();
+
+        public List<AlienSpeciesAssessment2023FreshWaterRegion> FreshWaterNaturalOccurence { get; set; } = new();
+
         public string MapName { get; set; }
 
         public string MapText { get; set; }

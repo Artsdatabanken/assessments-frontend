@@ -1,21 +1,29 @@
 ﻿.sea {
     fill: #f2e7da;
-    stroke: #000000;
+    stroke: #000;
     stroke-width: 0.5px;
 }
 
 .land {
     fill: #f2e7da;
-    stroke: #000000;
+    stroke: #000;
     stroke-width: 0.5px;
 }
 
-.sea.not-evaluated {
-    fill: #ffffff;
+.sea.no_occurrence {
+    fill: #f2e7da;
 }
 
-.land.not-evaluated {
-    fill: #ffffff;
+.land.no_occurrence {
+    fill: #f2e7da;
+}
+
+.sea.not_evaluated {
+    fill: #fff;
+}
+
+.land.not_evaluated {
+    fill: #fff;
 }
 
 .sea.known_today {
@@ -36,15 +44,20 @@
 
 .map-legend .indicator.is_assumed {
     background: #f8ae00;
-    border: 0.5px solid #000000;
+    border: 0.5px solid #000;
 }
 
 .map-legend .indicator.is_known_today {
     background: #16a979;
-    border: 0.5px solid #000000;
+    border: 0.5px solid #000;
 }
 
-.map-legend .indicator.not-evaluated {
+.map-legend .indicator.no_occurrence {
     background: #f2e7da;
-    border: 0.5px solid #000000;
+    border: 0.5px solid #000;
+}
+
+.map-legend .indicator.not_evaluated {
+    background: #fff;
+    border: 0.5px solid #000;
 }

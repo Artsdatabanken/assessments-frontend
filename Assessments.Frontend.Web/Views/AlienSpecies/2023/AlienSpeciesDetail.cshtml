@@ -95,7 +95,7 @@
     var showRegionalSpread = !isNr && !isEvaluatedAtAnotherLevel;
     var showAttachments = !isEvaluatedAtAnotherLevel && assessment.Attachments != null && assessment.Attachments.Count() != 0;
     var showImpactedNatureTypes = !isNr && !isEvaluatedAtAnotherLevel;
-    var showKnowMore = true;
+    var showKnowMore = !(assessment.Category == AlienSpeciesAssessment2023Category.NR && (assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie || Model.Assessment.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.NotIndicated));
     var showReference = assessment.References != null && assessment.References.Count() > 0;
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
     var showTableOfContents = assessment.Category != AlienSpeciesAssessment2023Category.NR;

@@ -15,22 +15,8 @@
     var showInteractiveMap = isAlienSpecie && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
 
-    var knownOrAssumedToday = new MapViewModel
-    {
-        MapName = "known_or_assumed_today",
-        MapText = Constants.AlienSpecies2023KnownOrAssumedOccurrence,
-        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true ||  x.IsAssumedToday == true).ToList()
-    };
-
-    var isAssumedInFuture = new MapViewModel
-    {
-        MapName = "is_assumed_in_future",
-        MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
-        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
-    };
 
     var hasWaterAreas = Model.FreshWaterRegionModel.IsWaterArea;
-    var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
     var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
     {
         WaterRegionName = x.Key,
@@ -48,6 +34,26 @@
         IsAssumedInFuture = x.Any(y => y.IsAssumedInFuture == true),
         WaterAreas = x.ToList()
     }).OrderBy(x => x.WaterRegionName).ToList();
+
+    var knownOrAssumedToday = new MapViewModel
+            {
+                FreshWaterRegions = Model.FreshWaterRegionModel.FreshWaterRegions.Where(x => x.IsKnown || x.IsAssumedToday).ToList(),
+                FreshWaterNaturalOccurence = waterRegionsNaturalOccurence,
+                MapName = "known_or_assumed_today",
+                MapText = Constants.AlienSpecies2023KnownOrAssumedOccurrence,
+                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true || x.IsAssumedToday == true).ToList()
+            };
+
+    var isAssumedInFuture = new MapViewModel
+            {
+                FreshWaterRegions = Model.FreshWaterRegionModel.FreshWaterRegions.Where(x => x.IsAssumedInFuture).ToList(),
+                FreshWaterNaturalOccurence = waterRegionsNaturalOccurence,
+                MapName = "is_assumed_in_future",
+                MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
+                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
+            };
+
+    var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
 
     string GetWaterRegions(List<AlienSpeciesAssessment2023FreshWaterRegion> regions)
     {
@@ -104,9 +110,20 @@
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
-                <div is-visible="!Model.IsSvalbard" class="map double_map">
+                <div is-visible="!Model.IsSvalbard && !isRegionallyAlien" class="map double_map">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
+                </div>
+            </div>
+            <div is-visible="@isRegionallyAlien">
+                <h3>Regionvis utbredelse</h3>
+                <div is-visible="!Model.IsSvalbard && !Model.FreshWaterRegionModel.IsWaterArea" class="map double_map">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterRegions.cshtml" model="knownOrAssumedToday" />
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterRegions.cshtml" model="isAssumedInFuture" />
+                </div>
+                <div is-visible="!Model.IsSvalbard && Model.FreshWaterRegionModel.IsWaterArea" class="map double_map">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterAreas.cshtml" model="knownOrAssumedToday" />
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterAreas.cshtml" model="isAssumedInFuture" />
                 </div>
             </div>
             <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">

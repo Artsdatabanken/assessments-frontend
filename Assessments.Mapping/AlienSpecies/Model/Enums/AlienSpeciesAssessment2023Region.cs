@@ -22,7 +22,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Nordland")] No,
         [Display(Name = "Troms")] Tr,
         [Display(Name = "Finnmark")] Fi,
-        [Display(Name = "Svalbard med sjøområder")] Sv,
+        [Display(Name = "Svalbard med kystsone")] Sv,
         [Display(Name = "Jan Mayen")] Jm,
         [Display(Name = "Nordsjøen og Skagerrak")] Ns,
         [Display(Name = "Norskehavet")] Nh,

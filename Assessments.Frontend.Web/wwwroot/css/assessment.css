@@ -503,26 +503,6 @@ no_distribution {
     /* cursor: pointer; Turning this off for now as nothing happens when you click on it */ 
 }
 
-.known_today {
-    background: #007759;
-    fill: #007759;
-}
-
-.sea.known_today {
-    background: #16a979;
-    fill: #16a979;
-}
-
-.is_assumed {
-    background: #b67717;
-    fill: #b67717;
-}
-
-.sea.is_assumed {
-    background: #f8ae00;
-    fill: #f8ae00;
-}
-
 .indicator {
     display:inline-block;
     width: 15px;
@@ -1090,4 +1070,35 @@ table caption.table-title {
     font-family: "Roboto Condensed", sans-serif;
     color: #4c4a48;
     font-size: 22.5px;
+}
+
+.water-area-hide,
+.collapse_water_area.water-area-hide,
+.water-area-hide.material-icons {
+    display: none;
+}
+
+.show_water_areas {
+    display: block;
+}
+
+.collapse_water_area button {
+    border: 2px solid transparent;
+    border-radius: 50%;
+    font-size: 24px;
+    margin: 0;
+    padding: 0 5px;
+}
+
+.collapse_water_area button .material-icons {
+    font-size: inherit;
+    vertical-align: middle;
+}
+
+.collapse_water_area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

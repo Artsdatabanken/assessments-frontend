@@ -265,6 +265,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 })
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name.ToLower()))
                 .ForMember(dest => dest.IsThreatened, opt => opt.MapFrom(src => src.NiNCode.All(Char.IsDigit)))
+                .ForMember(dest => dest.MajorTypeGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetMajorTypeGroup(src.MajorTypeGroup)))
                 .ForMember(dest => dest.Background, opt => opt.MapFrom(src => src.Background.DefaultIfEmpty()));
 
             CreateMap<RiskAssessment.SpeciesSpeciesInteraction, AlienSpeciesAssessment2023SpeciesSpeciesInteraction>(MemberList.None)

@@ -264,7 +264,6 @@
     background: #570808;
 }
 
-
 /* RED BACKGROUND */
 .darktheme .page-link,
 .darktheme .button.primary,
@@ -304,8 +303,12 @@
     color: white;
 }
 
-.darktheme .category_displayer .NR span {
+.darktheme .category_displayer .active .NR span {
     color: #1c1c1c;
+}
+
+.darktheme .category_displayer .NR span {
+    color: white;
 }
 
 /* TODO: Fix white text too high contrast being almost painfully white */

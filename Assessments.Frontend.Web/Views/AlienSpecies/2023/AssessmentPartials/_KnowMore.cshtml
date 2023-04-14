@@ -102,7 +102,7 @@
         <p>
             @(GetCameToNorwayFrom()) @Model.Assessment.ArrivedCountryFrom.Select(x => x.DisplayName()).JoinAnd(", ", " og ").ToLowerInvariant()
         </p>
-        <p>@Model.Assessment.ArrivedCountryFromDetails</p>
+        <p>@Html.Raw(Model.Assessment.ArrivedCountryFromDetails)</p>
     </div>
     <div>
         <h3>Global utbredelse</h3>

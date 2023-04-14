@@ -314,6 +314,40 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         };
     }
 
+    public class Environments
+    {
+        public const string Marine = "Ema";
+        public const string Limnic = "Eli";
+        public const string Terrestrial = "Ete";
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023EnvironmentFilters =
+        {
+            new()
+            {
+                Name = nameof(AlienSpeciesAssessment2023Environment.Marint),
+                NameShort = "Ema",
+            },
+            new()
+            {
+                Name = nameof(AlienSpeciesAssessment2023Environment.Limnisk),
+                NameShort = "Eli",
+            },
+            new()
+            {
+                Name = nameof(AlienSpeciesAssessment2023Environment.Terrestrisk),
+                NameShort = "Ete",
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023Environment = new()
+        {
+            Filters = AlienSpecies2023EnvironmentFilters,
+            FilterDescription = "",
+            FilterButtonName = "livsmiljø-filtre",
+            FilterButtonText = "Livsmiljø"
+        };
+    }
+
     public class GeographicVariation
     {
         public enum GeographicVariationEnum
@@ -429,6 +463,68 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             FilterDescription = "",
             FilterButtonName = "'klimaendringer'-filtre",
             FilterButtonText = "Betydning av klimaendringer for risiko"
+        };
+    }
+
+    public class NatureTypes
+    {
+        // Must remove non-threatened nature types from the filter
+        private static readonly string[] isNotThreatened = new string[] {
+            AlienSpeciesAssessment2023MajorTypeGroup.LimnicWaterbodySystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterbodySystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.SnowAndIceSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.FreshwaterBottomSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.MarineSeabedSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.RiverBottomSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.TerrestrialSystems.DisplayName(),
+            AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems.DisplayName(),
+         };
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023AlteredEcosystems = Enum.GetValues<AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems>()
+        .Select(x => new Filter.FilterItem
+        {
+            Name = x.DisplayName().ToUpper()[0] + x.DisplayName()[1..],
+            NameShort = x.ToString()
+        }).ToArray();
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023AlteredMajorTypeGroupTypes = Enum.GetValues<AlienSpeciesAssessment2023MajorTypeGroup>()
+        .Select(x => new Filter.FilterItem
+        {
+            Name = x.DisplayName(),
+            NameShort = x.ToString()
+        }).Skip(1).Where(x => !isNotThreatened.Contains(x.Name)).ToArray();
+
+        public static readonly Filter.FilterItem[] AlienSpecies2023NatureTypesFilters =
+        {
+
+        new ()
+            {
+                Name = "Forekomstareal i sterkt endra natur",
+                NameShort = "Nta",
+                SubGroup = new ()
+                {
+                    Filters = AlienSpecies2023AlteredEcosystems,
+                    FilterDescription = ""
+                }
+},
+            new()
+            {
+                Name = "Forekomst i truede eller sjeldne naturtyper",
+                NameShort = "Ntn",
+                SubGroup = new()
+                {
+                    Filters = AlienSpecies2023AlteredMajorTypeGroupTypes,
+                    FilterDescription = ""
+                }
+            }
+        };
+
+        public static readonly Filter.FilterAndMetaData AlienSpecies2023NatureTypes = new()
+        {
+            Filters = AlienSpecies2023NatureTypesFilters,
+            FilterDescription = "",
+            FilterButtonName = "'naturtyper'-filtre",
+            FilterButtonText = "Naturtyper"
         };
     }
 
@@ -1269,9 +1365,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static readonly Filter.FilterAndMetaData AlienSpecies2023Regions = new()
         {
             Filters = AlienSpecies2023RegionsFilters,
-            FilterDescription = "",
+            FilterDescription = "Regioner med kjent, antatt eller forventet forekomst",
             FilterButtonName = "regionfiltre",
-            FilterButtonText = "Regioner"
+            FilterButtonText = "Regioner og havområder"
         };
     }
 

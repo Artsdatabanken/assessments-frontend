@@ -17,7 +17,6 @@
 
 
     var hasWaterAreas = Model.FreshWaterRegionModel.IsWaterArea;
-    var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
     var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
     {
         WaterRegionName = x.Key,

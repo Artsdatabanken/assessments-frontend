@@ -153,6 +153,7 @@
             </table>
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isDoorKnocker || isEffectWithoutReproduction)">Andel av antatt forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isDoorKnockerOrEffectNoRep">
+                <h3>Regionvis utbredelse</h3>
                 <div is-visible="!Model.IsSvalbard && hasKnownOrAssumedOccurrence" class="map N">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>

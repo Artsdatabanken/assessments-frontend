@@ -85,6 +85,7 @@
                 </p>
                 @{ GetNatureTypeTable(natureTypes.Where(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.now)); }
             </div>
+            <br>
             <div is-visible="hasFutureTimeHorizonTypes">
                 <p class="big-data-table table-description">
                     <b>@Constants.ImpactedNatureTypesFutureTableTitle</b>

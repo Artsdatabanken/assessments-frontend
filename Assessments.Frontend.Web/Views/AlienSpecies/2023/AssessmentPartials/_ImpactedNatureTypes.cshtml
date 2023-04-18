@@ -11,6 +11,61 @@
     var hasCurrentBioClimateZones = assessment.CurrentBioClimateZones != null;
     var hasArcticBioClimateZones = assessment.ArcticBioClimateZones != null;
     var showRegionalNatureVariationList = hasCoastLineSections || hasArcticBioClimateZones || hasCurrentBioClimateZones;
+
+    var hasCurrentTimeHorizonTypes = natureTypes.FirstOrDefault(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.now) != null;
+    var hasFutureTimeHorizonTypes = natureTypes.FirstOrDefault(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.future) != null;
+
+    void GetNatureTypeTable(IEnumerable<AlienSpeciesAssessment2023ImpactedNatureTypes> natureTypesList)
+    {
+        <table class="big-data-table nature-table-setup">
+            <tr>
+                <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
+                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
+                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
+                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
+                <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
+            </tr>
+            @{
+                foreach (var natureType in natureTypesList)
+                {
+                    <tr>
+                        <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
+                        <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
+                        <td>
+                            <b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn4):</b>
+                            @{
+                                if (natureType.StateChange != null)
+                                {
+                                    <ul>
+                                        @{
+                                            foreach (var state in natureType.StateChange)
+                                            {
+                                                <li>@state.DisplayName()</li>
+                                            }
+                                        }
+                                    </ul>
+                                }
+                            }
+                        </td>
+                        <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn5):</b>@natureType.AffectedArea</td>
+                        <td>
+                            <b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn6:</b>
+                            @{
+                                <ul>
+                                    @{
+                                        foreach (var bg in natureType.Background)
+                                        {
+                                            <li>@bg.DisplayName()</li>
+                                        }
+                                    }
+                                </ul>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    }
 }
 
 <div id="@nameof(Constants.HeadingsNo.ImpactedNatureTypes)">
@@ -28,54 +83,21 @@
             @Constants.ImpactedNatureTypesDescription
         </p>
         <div is-visible="showNatureTypes">
-            <p class="big-data-table table-description">
-                <b>@Constants.ImpactedNatureTypesTableTitle</b>
-                @Constants.ImpactedNatureTypesTableDescription
-            </p>
-            <table class="big-data-table nature-table-setup numbers-table">
-                <tr>
-                    <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
-                    <th>@Constants.ImpactedNatureTypesTableColumn2</th>
-                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
-                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
-                    <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
-                    <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
-                </tr>
-                @{
-                foreach (var natureType in natureTypes)
-                {
-                    <tr>
-                        <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
-                        <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn2:</b>@natureType.TimeHorizon.DisplayName()</td>
-                        <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
-                        <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn4):</b>
-                        @{ 
-                            if(natureType.StateChange != null)
-                            { 
-                                <ul>
-                                @{
-                                    foreach (var state in natureType.StateChange)
-                                    {<li>@state.DisplayName()</li>}
-                                }
-                                </ul>
-                            }
-                        }
-                        </td>
-                        <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn5):</b>@natureType.AffectedArea</td>
-                        <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn6:</b>
-                        @{ 
-                                <ul>
-                                @{
-                                    foreach (var bg in natureType.Background)
-                                    {<li>@bg.DisplayName()</li>}
-                                }
-                                </ul>
-                        }
-                        </td>
-                    </tr>
-                    }
-                }
-            </table>
+            <div is-visible="hasCurrentTimeHorizonTypes">
+                <p class="big-data-table table-description">
+                    <b>@Constants.ImpactedNatureTypesCurrentTableTitle</b>
+                    @Constants.ImpactedNatureTypesCurrentTableDescription
+                </p>
+                @{ GetNatureTypeTable(natureTypes.Where(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.now)); }
+            </div>
+            <br>
+            <div is-visible="hasFutureTimeHorizonTypes">
+                <p class="big-data-table table-description">
+                    <b>@Constants.ImpactedNatureTypesFutureTableTitle</b>
+                    @Constants.ImpactedNatureTypesFutureTableDescription
+                </p>
+                @{ GetNatureTypeTable(natureTypes.Where(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.future)); }
+            </div>
         </div>
 
         <div is-visible="showMicroHabitats">

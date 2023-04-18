@@ -11,8 +11,8 @@
     var showMain = !((isNr && (sameAs2018 || !has2018Assessmnet)) || isEvaluatedAtAnotherLevel || isMisidentified);
     var showNotAssessed2018 = category2018 == null || wasNr2018;    
     var showSameAs2018 = !isNr && sameAs2018;
-    var category2018WithName = category2018 != null ? $"<i>{category2018.DisplayName().ToLower()}</i> - {category2018}" : string.Empty;
-    var category2023WithName = $"<i>{Model.Assessment.Category.DisplayName().ToLower()}</i> - {Model.Assessment.Category}";
+    var category2018WithName = category2018 != null ? $"<i>{category2018.DisplayName().ToLower()}</i> {category2018}" : string.Empty;
+    var category2023WithName = $"<i>{Model.Assessment.Category.DisplayName().ToLower()}</i> {Model.Assessment.Category}";
     var showRealChange = Model.Assessment.ReasonForChangeOfCategory.Contains("realChange");
     var showNewKnowledge = Model.Assessment.ReasonForChangeOfCategory.Contains("newInformation");
     var showNewInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("newInterpretation");
@@ -49,5 +49,4 @@
         @Constants.CategoryChangeReasonsForChangeDescription
         <p>@Html.Raw(Model.Assessment.ReasonsForChangeOfCategoryDescription)</p>
     </div>
-    
 </div>

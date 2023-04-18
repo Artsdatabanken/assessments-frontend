@@ -3,16 +3,13 @@
 
 @{
     var hasSvalbardStyle =Model.AssessmentArea == "Svalbard";
-    
-    // The value "Fastlands-Norge med havområder" needs to start with lower case in this instance. Cannot use string.ToLower, as n in "Norge" still needs to be  capitalized
-    var assessmentArea = Model.AssessmentArea == AlienSpeciesAssessment2023EvaluationContext.N.DisplayName() ? char.ToLower(Model.AssessmentArea[0]) + Model.AssessmentArea.Substring(1) : Model.AssessmentArea;
 }
 
 <div class="page-header">
     <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.ScientificNameViewModel"/>
     <span>Gjelder for  </span>
     <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
-        @assessmentArea.
+        @Model.AssessmentArea.
         </span>
     <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel"/>
     <hr />

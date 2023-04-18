@@ -18,6 +18,7 @@
                                                         showEcoEffectDocumentation ||
                                                         showSpreadWays ||
                                                         showConclusion;
+    var isNr = Model.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
 }
 
 <div id="@nameof(Constants.HeadingsNo.ExpertSummary)">
@@ -30,6 +31,7 @@
             <h3>
                 Generelt om 
                 @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
+            <p is-visible="!isNr">Livsmiljø: @Model.Environment.DisplayName()</p>
             <p class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)
             </p>

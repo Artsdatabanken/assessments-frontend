@@ -2,10 +2,15 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
 
 @{
-    var natureTypes = Model.Assessment.ImpactedNatureTypes;
-    var isSvalbard = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
-    var showMicroHabitats = Model.Assessment.MicroHabitat != null && Model.Assessment.MicroHabitat.Count() != 0;
+    var assessment = Model.Assessment;
+    var natureTypes = assessment.ImpactedNatureTypes;
+    var isSvalbard = assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
+    var showMicroHabitats = assessment.MicroHabitat != null && assessment.MicroHabitat.Count() != 0;
     var showNatureTypes = natureTypes != null && natureTypes.Count > 0;
+    var hasCoastLineSections = assessment.CoastLineSections != null;
+    var hasCurrentBioClimateZones = assessment.CurrentBioClimateZones != null;
+    var hasArcticBioClimateZones = assessment.ArcticBioClimateZones != null;
+    var showRegionalNatureVariationList = hasCoastLineSections || hasArcticBioClimateZones || hasCurrentBioClimateZones;
 
     var hasCurrentTimeHorizonTypes = natureTypes.FirstOrDefault(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.now) != null;
     var hasFutureTimeHorizonTypes = natureTypes.FirstOrDefault(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.future) != null;
@@ -116,6 +121,40 @@
                     </tr>
                 }
             </table>
+        </div>
+
+        <div is-visible="showRegionalNatureVariationList">
+            <h3>Regional naturvariasjon</h3>
+            <p>
+                Regional naturvariasjon omfatter variasjon i makroklimatiske forhold og/eller andre miljøforhold som gir opphav til mønstre på stor romlig skala (les mer <a href="https://artsdatabanken.no/Pages/182001/Regional_naturvariasjon">her</a>). Her inngår bioklimatiske soner og seksjoner og/eller kystvannssoner og -seksjoner hvor arten finnes i dag, eller antas å kunne finnes i framtiden (innenfor vurderingsperioden).
+            </p>
+                <div is-visible="@hasCoastLineSections">
+                    <p>Utbredelse i kystvannssoner og -seksjoner:</p>
+                    @foreach (var coastLineSection in assessment.CoastLineSections) 
+                    {
+                        <ul is-visible="coastLineSection.ZoneList.Any(x => !string.IsNullOrEmpty(x))">
+                            <li>@coastLineSection.ClimateZone.DisplayName(): @coastLineSection.ZoneList.Where(x => !string.IsNullOrEmpty(x)).Select(x => x.ToLowerInvariant()).JoinAnd(", ", " og ").</li>
+                        </ul>    
+                    }
+                </div>
+                <div is-visible="@hasCurrentBioClimateZones">
+                    <p>Utbredelse i bioklimatiske soner og seksjoner:</p>
+                    @foreach (var currentBioClimateZone in assessment.CurrentBioClimateZones)
+                    {
+                        <ul is-visible="currentBioClimateZone.ZoneList.Any(x => !string.IsNullOrEmpty(x))">
+                            <li>@currentBioClimateZone.ClimateZone.DisplayName(): @currentBioClimateZone.ZoneList.Where(x => !string.IsNullOrEmpty(x)).Select(x => x.ToLowerInvariant()).JoinAnd(", ", " og ").</li>
+                        </ul>
+                    }
+                </div>
+                <div is-visible="@hasArcticBioClimateZones">
+                    <p>Utbredelse i bioklimatiske soner og seksjoner i Arktis:</p>
+                    @foreach (var arcticBioClimateZone in assessment.ArcticBioClimateZones)
+                    {
+                        <ul is-visible="arcticBioClimateZone.ZoneList.Any(x => !string.IsNullOrEmpty(x))">
+                            <li>@arcticBioClimateZone.ClimateZone.DisplayName(): @arcticBioClimateZone.ZoneList.Where(x => !string.IsNullOrEmpty(x)).Select(x => x.ToLowerInvariant()).JoinAnd(", ", " og ").</li>
+                        </ul>
+                    }
+                </div>
         </div>
     </div>
 

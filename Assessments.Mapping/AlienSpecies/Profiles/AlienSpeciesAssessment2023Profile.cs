@@ -1,9 +1,11 @@
 ﻿using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using AutoMapper;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Assessments.Mapping.AlienSpecies.Profiles
@@ -230,6 +232,9 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.AllSubTaxaAssessedSeparatelyDescription, opt => opt.MapFrom(src => src.AllSubTaxaAssessedSeparatelyDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.HybridWithoutOwnRiskAssessmentDescription, opt => opt.MapFrom(src => src.IsHybridWithoutOwnRiskAssessmentDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.SpeciesStatus, opt => opt.PreCondition(src => src.SpeciesStatus is not null))
+                .ForMember(dest => dest.CoastLineSections, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CoastLineSections.Any(x => x.Skagerrak || x.None || x.OpenCoastLine)))
+                .ForMember(dest => dest.CurrentBioClimateZones, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CurrentBioClimateZones.Any(x => x.StrongOceanic || x.ClearOceanic || x.WeakOceanic || x.TransferSection || x.WeakContinental) && src.Terrestrial))
+                .ForMember(dest => dest.ArcticBioClimateZones, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.ArcticBioClimateZones.Any(x => x.WeakOceanic || x.TransferSection || x.WeakContinental || x.ClearContinental)))
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);
@@ -298,9 +303,16 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 {
                     opt.PreCondition(src => src.Oceania || src.Africa || src.Asia || src.Europe || src.NorthAndCentralAmerica || src.SouthAmerica);
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetNaturalOriginContinent(src.Oceania, src.Africa, src.Asia, src.Europe, src.NorthAndCentralAmerica, src.SouthAmerica));
-                })
-                ;
+                });
 
+            CreateMap<FA4.CoastLineSection, AlienSpeciesAssessment2023CoastLineSection>(MemberList.None)
+                .ForMember(dest => dest.ZoneList, opt => opt.MapFrom(src => new List<string> { src.None ? "Ingen" : null, src.OpenCoastLine ? "Åpen kystlinje" : null, src.Skagerrak ? "Skagerrak" : null }));
+
+            CreateMap<FA4.BioClimateZones, AlienSpeciesAssessment2023CurrentBioClimateZones>(MemberList.None)
+                .ForMember(dest => dest.ZoneList, opt => opt.MapFrom(src => new List<string> { src.StrongOceanic ? "Sterkt oseanisk seksjon" : null, src.ClearOceanic ? "Klart oseanisk seksjon" : null, src.WeakOceanic ? "Svakt oseanisk seksjon" : null, src.TransferSection ? "Overgangsseksjon" : null, src.WeakContinental ? "Svakt kontinental seksjon" : null }));
+
+            CreateMap<FA4.BioClimateZonesArctic, AlienSpeciesAssessment2023ArcticBioClimateZones>(MemberList.None)
+                .ForMember(dest => dest.ZoneList, opt => opt.MapFrom(src => new List<string> { src.WeakOceanic ? "Svakt oseanisk seksjon" : null, src.TransferSection ? "Overgangsseksjon" : null, src.ClearContinental ? "Klart kontinental seksjon" : null, src.WeakContinental ? "Svakt kontinental seksjon" : null }));
         }
     }
 }

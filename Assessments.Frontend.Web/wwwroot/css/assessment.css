@@ -940,10 +940,10 @@ span.area i {
 }
 @media only screen and (min-width: 751px) {
 
-    .nature-table-setup td:nth-child(3),
-    .nature-table-setup th:nth-child(3),
-    .nature-table-setup td:nth-child(5),
-    .nature-table-setup th:nth-child(5) {
+    .nature-table-setup td:nth-child(2),
+    .nature-table-setup th:nth-child(2),
+    .nature-table-setup td:nth-child(4),
+    .nature-table-setup th:nth-child(4) {
         width: 11%
     }
 }

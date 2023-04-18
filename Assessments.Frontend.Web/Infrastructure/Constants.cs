@@ -335,8 +335,10 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string ImpactedNatureTypesDescription = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten i Norge. Hvis arten fører til endringer i naturtypen er det angitt.";
         public const string ImpactedNatureTypesDescriptionSvalbard = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten på Svalbard. Hvis arten fører til endringer i naturtypen er det angitt.";
-        public const string ImpactedNatureTypesTableTitle = "Valgte truede, sjeldne og øvrige naturtyper ";
-        public const string ImpactedNatureTypesTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens(eventuelt framtidige) påvirkning i naturtypen og anslått andel av naturtypens areal som blir eller vil bli påvirket (F- og G-kriteriet).";
+        public const string ImpactedNatureTypesCurrentTableTitle = "Truede, sjeldne eller øvrige naturtyper arten er observert i. ";
+        public const string ImpactedNatureTypesFutureTableTitle = "Truede, sjeldne eller øvrige naturtyper som er potensielle habitater for arten i Norge. ";
+        public const string ImpactedNatureTypesCurrentTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i, samt artens påvirkning i naturtypen og anslått andel av naturtypens areal som blir påvirket (F- og G-kriteriet).";
+        public const string ImpactedNatureTypesFutureTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens framtidige påvirkning i naturtypen og anslått andel av naturtypens areal som vil bli påvirket (F- og G-kriteriet).";
         public const string ImpactedNatureTypesTableColumn1 = "naturtype";
         public const string ImpactedNatureTypesTableColumn2 = "tidshorisont";
         public const string ImpactedNatureTypesTableColumn3 = "kolonisert <br/>areal (%)";

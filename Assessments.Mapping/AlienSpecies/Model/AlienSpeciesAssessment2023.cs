@@ -643,5 +643,20 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Hybrid species without its own assessment. Reasoning
         /// </summary>
         public string HybridWithoutOwnRiskAssessmentDescription { get; set; }
+
+        /// <summary>
+        /// Regional nature variation (coastal zones and sections)
+        /// </summary>
+        public List<AlienSpeciesAssessment2023CoastLineSection> CoastLineSections { get; set; }
+
+        /// <summary>
+        /// Regional nature variation (bioclimatic zones and sections in mainland Norway)
+        /// </summary>
+        public List<AlienSpeciesAssessment2023CurrentBioClimateZones> CurrentBioClimateZones { get; set; }
+
+        /// <summary>
+        /// Regional nature variation (bioclimatic zones and sections in the arctic)
+        /// </summary>
+        public List<AlienSpeciesAssessment2023ArcticBioClimateZones> ArcticBioClimateZones { get; set; }
     }
 }

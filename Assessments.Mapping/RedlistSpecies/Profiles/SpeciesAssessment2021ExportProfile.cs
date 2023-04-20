@@ -100,7 +100,7 @@ namespace Assessments.Mapping.RedlistSpecies.Profiles
             if (regionOccurrence == null)
                 return string.Empty;
 
-            if (new List<string> { "LC", "NA", "NE" }.Any(s => s.StartsWith(category)))
+            if (new List<string> { "LC", "LCº", "NA", "NE" }.Any(s => s.StartsWith(category)))
                 return string.Empty;
 
             return regionOccurrence.State switch

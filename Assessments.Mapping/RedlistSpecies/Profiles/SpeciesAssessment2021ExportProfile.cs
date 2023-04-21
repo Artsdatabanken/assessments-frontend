@@ -42,29 +42,29 @@ namespace Assessments.Mapping.RedlistSpecies.Profiles
                 .ForMember(dest => dest.ProportionOfMaxPopulation, opt => opt.MapFrom(src => src.ProportionOfMaxPopulation))
                 .ForMember(dest => dest.MainHabitat, opt => opt.MapFrom(src => ResolveMainHabitat(src.MainHabitat)))
                 .ForMember(dest => dest.ImpactFactors, opt => opt.MapFrom(src => string.Join(";", src.ImpactFactors.Select(x => $"{string.Join(" > ", x.FactorPath)} > {x.Factor}_{x.TimeScope}_{x.PopulationScope}_{x.Severity}"))))
-                .ForMember(dest => dest.Ostfold, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.OsloOgAkershus, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Hedmark, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Oppland, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Buskerud, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Vestfold, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Telemark, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.AustAgder, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.VestAgder, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Rogaland, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Hordaland, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.SognOgFjordane, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.MoreOgRomsdal, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Trondelag, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Nordland, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Troms, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Finnmark, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.JanMayen, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Nordsjoen, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Norskehavet, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.BarentshavetNordOgPolhavet, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.BarentshavetSor, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())))
-                .ForMember(dest => dest.Gronlandshavet, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName())));
+                .ForMember(dest => dest.Ostfold, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.OsloOgAkershus, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Hedmark, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Oppland, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Buskerud, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Vestfold, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Telemark, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.AustAgder, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.VestAgder, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Rogaland, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Hordaland, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.SognOgFjordane, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.MoreOgRomsdal, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Trondelag, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Nordland, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Troms, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Finnmark, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.JanMayen, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Nordsjoen, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Norskehavet, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.BarentshavetNordOgPolhavet, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.BarentshavetSor, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)))
+                .ForMember(dest => dest.Gronlandshavet, opt => opt.MapFrom(src => ResolveRegionState(src.RegionOccurrences, opt.DestinationMember.DisplayName(), src.Category)));
         }
 
         private static string ConvertRangToNorwegian(string taxonRank)
@@ -93,11 +93,14 @@ namespace Assessments.Mapping.RedlistSpecies.Profiles
             return string.Join(";", mainHabitats.Select(GetProperDescription).ToList());
         }
 
-        private static string ResolveRegionState(IEnumerable<SpeciesAssessment2021RegionOccurrence> regionOccurrences, string name)
+        private static string ResolveRegionState(IEnumerable<SpeciesAssessment2021RegionOccurrence> regionOccurrences, string name, string category)
         {
             var regionOccurrence = regionOccurrences.FirstOrDefault(x => x.Fylke == name);
 
             if (regionOccurrence == null)
+                return string.Empty;
+
+            if (new List<string> { "LC", "LCº", "NA", "NE" }.Any(s => s.StartsWith(category)))
                 return string.Empty;
 
             return regionOccurrence.State switch

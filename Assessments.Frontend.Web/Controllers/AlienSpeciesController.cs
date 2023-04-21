@@ -11,6 +11,7 @@ using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers

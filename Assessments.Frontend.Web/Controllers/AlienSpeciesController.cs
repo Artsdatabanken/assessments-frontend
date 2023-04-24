@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
@@ -60,9 +59,9 @@ namespace Assessments.Frontend.Web.Controllers
 
             var expertGroupMembers = await DataRepository.GetData<AlienSpeciesAssessment2023ExpertGroupMember>(DataFilenames.AlienSpeciesExpertCommitteeMembers);
 
-            var assessmentExpertGroupMembers = await expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
+            var assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
                 .OrderBy(x => x.ExpertGroup)
-                .ThenBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToListAsync();
+                .ThenBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToList();
 
             var viewModel = new AlienSpeciesDetailViewModel(assessment)
             {

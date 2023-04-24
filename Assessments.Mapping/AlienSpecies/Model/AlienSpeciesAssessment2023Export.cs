@@ -128,7 +128,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         //TODO: skill felt mellom dørstokkarter og selvstendig reproduserende for fremtidige forekomstareal?
         [DisplayName("Fremtidig forekomstareal lavt anslag")]
         [Description("Artens antatte forekomstareal (lavt anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public int? RiskAssessmentAOOfutureLow { get; set; }
+        public int? AOOfutureLow { get; set; }
 
         [DisplayName("Fremtidig forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
@@ -136,31 +136,31 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
         [DisplayName("Fremtidig forekomstareal høyt anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public int? RiskAssessmentAOOfutureHigh { get; set; }
+        public int? AOOfutureHigh { get; set; }
 
         [DisplayName("Ant. forekomster fra én introduksjon lavt anslag")]
         [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (lavt anslag)")]
-        public int? RiskAssessmentOccurrences1Low { get; set; }
+        public int? Occurrences1Low { get; set; }
 
         [DisplayName("Ant. forekomster fra én introduksjon beste anslag")]
         [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (beste anslag)")]
-        public int? RiskAssessmentOccurrences1Best { get; set; }
+        public int? Occurrences1Best { get; set; }
 
         [DisplayName("Ant. forekomster fra én introduksjon høyt anslag")]
         [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (høyt anslag)")]
-        public int? RiskAssessmentOccurrences1High { get; set; }
+        public int? Occurrences1High { get; set; }
 
         [DisplayName("Ant. ytterligere introduksjoner lavt anslag")]
         [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (lavt anslag)")]
-        public int? RiskAssessmentIntroductionsLow { get; set; }
+        public int? IntroductionsLow { get; set; }
 
         [DisplayName("Ant. ytterligere introduksjoner beste anslag")]
         [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (beste anslag)")]
-        public int? RiskAssessmentIntroductionsBest { get; set; }
+        public int? IntroductionsBest { get; set; }
 
         [DisplayName("Ant. ytterligere introduksjoner høyt anslag")]
         [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (høyt anslag)")]
-        public int? RiskAssessmentIntroductionsHigh { get; set; }
+        public int? IntroductionsHigh { get; set; }
 
         [DisplayName("Kom til vurderingsområdet fra")]
         [Description("Angir hvorfra arten ankom vurderingsområdet")]

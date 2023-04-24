@@ -120,9 +120,9 @@
     void GetSpeciesTableDesktop(List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> impacts)
     {
         <table class="numbers-table">
-            <caption class="table-title">Artens negative effekter på øvrige rødlistevurderte arter</caption>
+            <caption class="table-title">Artens negative effekter på øvrige stedegne arter</caption>
             <tr>
-                <td><b>Rødlistevurdert art</b></td>
+                <td><b>Stedegen art</b></td>
                 <td><b>Kategori i Rødlista 2021</b></td>
                 <td><b>Er arten en nøkkelart?</b></td>
                 <td><b>Interaksjonens styrke</b></td>
@@ -163,7 +163,7 @@
         @foreach (var impact in impacts)
         {
             <table class="numbers-table">
-                <caption class="table-title">Rødlistevurdert art: @impact.VernacularName @Html.Raw(Helpers.FormatScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
+                <caption class="table-title">Stedegen art: @impact.VernacularName @Html.Raw(Helpers.FormatScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
                 <tr>
                     <td>kategori i Rødlista 2021</td>
                     <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
@@ -278,7 +278,7 @@
     void GetFGTable(bool shouldBeThreatened)
     {
         <table class="numbers-table">
-            <caption class="table-title">Øvrige naturtyper  som påvirkes av arten</caption>
+            <caption class="table-title">Naturtyper som påvirkes av arten</caption>
             <tr>
                 <td><b>Naturtype</b></td>
                 <td><b>Tidshorisont</b></td>
@@ -326,7 +326,7 @@
     {
         <div class="collapsible_header">
             <span>
-                <b><span class="collapsible_header_letter">@letter.</span> @criterion.CriteriaLetter.DisplayName() </b> <br />
+                <b><span class="collapsible_header_letter">@letter.</span></b> @criterion.CriteriaLetter.DisplayName() 
                 <span> @AlienSpeciesHelpers.GetLetterFullText(criterion, false) @Constants.ScoreExplanationScore @criterion.Value.</span>
             </span> 
             <button onclick="toggleCollapsible(this)">
@@ -632,7 +632,8 @@
         </b>
     </p>
 
-    <b>@Constants.determeningCriteriaHeading</b>
+    <b is-visible="isDecisiveCriteria">@Constants.determeningCriteriaHeading</b>
+    <b is-visible="!isDecisiveCriteria">@Constants.otherCriteriaHeading</b>  
     <p is-visible="showNoEcologicalEffect">
         <p>@Constants.noEcoEffect</p>
     </p>
@@ -693,7 +694,7 @@
             <div class="collapsible_content">
                 <div is-visible="@assessment.SpeciesSpeciesInteractions  != null && @assessment.SpeciesSpeciesInteractions .Count() != 0">
                     <p>
-                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med øvrige rødlistevurderte arter, dvs. arter som hverken er truede eller nøkkelarter . Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
+                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med øvrige stedegne arter, dvs. arter som hverken er truede eller nøkkelarter . Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
                     </p>
                     <div class="mobile_hide">
                         @{
@@ -777,9 +778,9 @@
                 <div class="collapsible_content">
                     <div>
                         <table class="numbers-table" is-visible="showHTable">
-                            <caption class="table-title"><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke rødlistevurderte arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
+                            <caption class="table-title"><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke stedegne arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
                             <tr>
-                                <td><b>Rødlistevurdert art</b></td>
+                                <td><b>Stedegen art</b></td>
                                 <td><b>Kategori i Rødlista 2021</b></td>
                                 <td><b>Er arten en nøkkelart?</b></td>
                                 <td><b>Geografisk omfang</b></td>
@@ -825,9 +826,9 @@
                 <div class="collapsible_content">
                     <div>
                         <table class="numbers-table" is-visible="showITable">
-                            <caption class="table-title"><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til rødlistevurderte verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
+                            <caption class="table-title"><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til stedegne verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
                             <tr>
-                                <td><b>Rødlistevurdert art</b></td>
+                                <td><b>Stedegen art</b></td>
                                 <td><b>Kategori i Rødlista 2021</b></td>
                                 <td><b>Er arten en nøkkelart?</b></td>
                                 <td><b>Parasittens vitenskapelige navn</b></td>

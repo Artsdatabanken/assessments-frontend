@@ -138,8 +138,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     description = value switch
                     {
                         1 => "ingen overføring",
-                        2 => "begrenset til rødlistevurdert art",
-                        3 => "storskala til rødlistevurdert art ELLER begrenset til truet art eller nøkkelart",
+                        2 => "begrenset til stedegen art",
+                        3 => "storskala til stedegen art ELLER begrenset til truet art eller nøkkelart",
                         4 => "storskala til truet art eller nøkkelart",
                         _ => description
                     };
@@ -182,7 +182,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "";
             if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
             {
-                letterText += "("+ Constants.withUuncertainty + " ";
+                letterText += " ("+ Constants.withUuncertainty + " ";
             }
             if (GetUncertaintyLow(criterion) != 0)
             {

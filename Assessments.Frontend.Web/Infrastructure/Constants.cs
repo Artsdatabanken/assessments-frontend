@@ -374,5 +374,105 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string furtherSpreadWaysTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige spredningsveier fra norsk natur til norsk natur er angitt for arten.  ";
         public const string noFurtherSpreadWays = "Det er ikke angitt spredningsmåter i norsk natur for denne arten";
 
+
+        /* Criteria Explanation */
+        public const string speciesEvaluatedTo = "Arten er vurdert til ";
+        public const string noRisk = "ingen kjent risiko";
+        public const string noRiskExplanation = "NK og har dermed ingen avgjørende kriterier.";
+
+        public const string criteriaScoresAt = "Kriteriene arten skårer høyest på for hver av de to aksene. ";
+        public const string readMoreAboutCriterias = "Les mer om kriteriene";
+
+        public const string xAxisExplanation = "Artens invasjonspotensial bestemmes av tre kriterier: Artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet). Invasjonspotensialet bestemmer artens plassering langs risikomatrisens x-akse.";
+        public const string yAxisExplanation = "Artens økologiske effekt bestemmes av seks kriterier: Artens effekter på stedegne arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av stedegne arter (H-kriteriet) og overføring av parasitter eller patogener til stedegne arter (I-kriteriet). Artens økologiske effekter bestemmer artens plassering langs risikomatrisens y-akse.";
+
+        public const string seeOtherTab = "Se fanen Øvrige kriterier.";
+        public const string noDecisiveCriteriaXAxis = "Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen.";
+
+        public const string showDetailsButton = "Vis detaljer";
+        public const string hideDetailsButton = "Skjul detaljer";
+        public const string determeningCriteriaHeading = "Avgjørende kriterier";
+        public const string otherCriteriaHeading = "Øvrige kriterier";
+        public const string estimationMethod = "Estimeringsmetode:";
+        public const string ScoreExplanationScore = "Dette tilsvarer skår";
+        public const string JustScore = "skår";
+
+        public const string basedOnEstimatesPlural = "Basert på de beste anslagene på ";
+        public const string basedOnEstimatesSingular = "Basert på det beste anslaget på";
+        public const string basedOnArea = "forekomstareal";
+        public const string basedOnAreaSingular = "forekomstarealet";
+        public const string basedOnArea10years = "forekomster i løpet av 10 år";
+        public const string today = "i dag";
+        public const string moreIntroductions = "ytterligere introduksjon(er) i samme tidsperiode ";
+        public const string and = "og";
+        public const string andIn50 = "og om 50 år";
+        public const string aCriteriaScoredAs = "er A-kriteriet skåret som";
+        public const string bCriteriaScoredAs = "er B-kriteriet skåret som ";
+        public const string aCriteriaPreScoredAs = "ble A-kriteriet forhåndsskåret som";
+        public const string withUuncertainty = "med usikkerhet";
+        public const string medianLifeSpan = "Dette innebærer at artens mediane levetid er ";
+        public const string riskOfDeath50 = "eller at sannsynligheten for utdøing innen 50 år er på ";
+        public const string adjustedTo = "Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier ";
+        public const string adjustedUncertainty = "Begrunnelse for justering av skår og/eller usikkerhet:";
+
+        public const string demoKeyNumbers = "Demografiske nøkkeltall";
+        public const string currentPopSize = "Nåværende populasjonsstørrelse (N, i antall individer):";
+        public const string growthRate = "Vekstrate";
+        public const string environmentVar = "Miljøvarians";
+        public const string demographicVar = "Demografisk varians";
+        public const string sustainability = "Bæreevne (K, i antall individer): ";
+        public const string extinctLimit = "Terskel for kvasiutdøing (C, i antall individer): ";
+        public const string years = "år";
+        public const string yearCaps = "År";
+        public const string to = "til";
+        public const string on = "på";
+        public const string whichIs = "som er";
+        public const string downTo = "ned mot";
+        public const string upTo = "opp mot";
+        public const string corrected = "korrigert for tiltak";
+        public const string mPerYear = "m/år";
+        public const string speciesHas = "Arten har";
+        public const string medianLifeEst = "Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til ";
+
+        public const string modelAndProgram = "Beskrivelse av modeller og programvare som er brukt: ";
+        public const string estMedianLifeSpanThisYear = "Estimert median levetid (i år)";
+        public const string lowEstimate = "lavt anslag";
+        public const string highEstimate = "høyt anslag";
+
+        public const string expansionSpeed = "Ekspansjonshastighet";
+        public const string expansionSpeedGuess = "Det beste anslaget på artens ekspansjonshastighet er";
+        public const string expansionSpeedIs = "er ekspansjonshastigheten anslått til";
+        public const string expansionSpeedEst = "er ekspansjonshastigheten estimert til";
+        public const string expansion = "ekspansjon";
+
+        public const string isScore = "Dette tilsvarer skår";
+        public const string atBCrit = "på B-kriteriet";
+        public const string methodDescriptionUnaidedFuture = "Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra forventet endring i forekomstareal framover i tid.";
+        public const string methodDescriptionReproducingUnaided = "Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra endringen i forekomstareal mellom to år tilbake i tid, hvor antall år mellom første og andre år, er på mellom 10 og 20 år. Følgende data ligger til grunn:";
+        public const string commentData = "Kommentar til datagrunnlaget:";
+        public const string basedOnIncrease = "Basert på økningen i artens forekomstareal i perioden fra";
+        public const string andA = "og et";
+        public const string darkNumber = "mørketall på";
+        public const string knownArea = "Kjent forekomstareal";
+        public const string areaDarkNumbers = "Forekomstarealets mørketall";
+        public const string average = "Gjennomsnittlig (m/år)";
+
+        public const string noEcoEffect = "Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.";
+        public const string effectAfterCriterium = "Økologiske effekter etter kriterium";
+        public const string evaluatedAsUnlikely = "er vurdert som fraværende (usannsynlige)";
+
+        public const string spatioTemporalTableTitle = "Parametervalg for estimering av ekspansjonshastighet ";
+        public const string readMoreMethod = "les mer om metoden her";
+        public const string model = "Modell";
+        public const string sitesListed = "Lokalitetene i datafila er oppført";
+
+
+
+
+
+
+
+
+
     }
 }

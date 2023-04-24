@@ -569,3 +569,15 @@
     background-color: #201f1f;
     border: 1px solid #ccc;
 }
+
+.criteria-summary-list .collapsible {
+    background: inherit;
+}
+
+.criteria-summary-list li {
+    background: inherit;
+}
+
+.collapsible_header_letter {
+    color: grey;
+}

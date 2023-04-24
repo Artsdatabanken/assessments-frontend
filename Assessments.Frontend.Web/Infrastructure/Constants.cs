@@ -384,9 +384,9 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string readMoreAboutCriterias = "Les mer om kriteriene";
 
         public const string xAxisExplanation = "Artens invasjonspotensial bestemmes av tre kriterier: Artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet). Invasjonspotensialet bestemmer artens plassering langs risikomatrisens x-akse.";
-        public const string yAxisExplanation = "Artens økologiske effekt bestemmes av seks kriterier: Artens effekter på rødlistevurderte arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av rødlistevurderte arter (H-kriteriet) og overføring av parasitter eller patogener til rødlistevurderte arter (I-kriteriet). Artens økologiske effekter bestemmer artens plassering langs risikomatrisens y-akse.";
+        public const string yAxisExplanation = "Artens økologiske effekt bestemmes av seks kriterier: Artens effekter på stedegne arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av stedegne arter (H-kriteriet) og overføring av parasitter eller patogener til stedegne arter (I-kriteriet). Artens økologiske effekter bestemmer artens plassering langs risikomatrisens y-akse.";
 
-        public const string seeOtherTab = "Se fanen Øvrige brukte kriterier.";
+        public const string seeOtherTab = "Se fanen Øvrige kriterier.";
         public const string noDecisiveCriteriaXAxis = "Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen.";
 
         public const string showDetailsButton = "Vis detaljer";

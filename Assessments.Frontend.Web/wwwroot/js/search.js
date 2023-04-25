@@ -86,18 +86,23 @@ const formatListElements = (el, searchstring) => {
     return name;
 }
 
-function makeListItem(icon, listname, speciesGroup, category, right_action, notassesment, el, id, matchedname, addclass) {
+function makeListItem(icon, listname, speciesGroup, category, right_action, notassesment, el, id, matchedname) {
     const li = document.createElement("li");
-    li.tabIndex = 0;    
+    let searchString = el.ScientificName;
+    li.tabIndex = 0;
+
+    if (el.TaxonCategory != taxonCategories[22] || el.TaxonCategory != taxonCategories[23] || el.TaxonCategory != taxonCategories[24] || el.TaxonCategory != taxonCategories[25]) {
+        searchString += ` (${el.TaxonCategory})`;
+    } 
 
     if (notassesment) {
         li.classList.add("search_autocomplete");      
         li.onclick = () => {
-            searchForTaxa(el.ScientificName);
+            searchForTaxa(searchString);
         }
         li.onkeyup = (e) => {
             if (e.code === "Enter") {
-                searchForTaxa(el.ScientificName);
+                searchForTaxa(searchString);
             }
         }
         li.innerHTML = icon + listname + speciesGroup + category + right_action;
@@ -116,8 +121,8 @@ function makeListItem(icon, listname, speciesGroup, category, right_action, nota
     autocompleteList.appendChild(li);
 }
 
-function searchForTaxa(sciname) {
-    searchField.value = sciname;
+function searchForTaxa(searchString) {
+    searchField.value = searchString;
     document.getElementById("search_and_filter_form").submit();
 }
 
@@ -145,7 +150,7 @@ const createList = (json,searchstring) => {
             for (let i in assessments) {
                 // For each assessment in a taxonomic item
                 const id = assessments[i].id;
-                let addclass, matchedname = "";
+                let matchedname = "";
 
                 if (el.matchedname) {
                     // IF Speciesname does not match the search string, add comparison 
@@ -153,7 +158,6 @@ const createList = (json,searchstring) => {
                     let name = el.PopularName + " " + el.ScientificName;
                     if (!name.includes(el.matchedname)) {        
                         matchedname = "<span class='search_matchedname'>" + '"' + el.matchedname + '"' + "</span>";
-                        addclass = "synonymgrid";                        
                     }
                 }
                 right_action = `<span class="material-icons right_icon">keyboard_arrow_right</span>`;
@@ -180,7 +184,7 @@ const createList = (json,searchstring) => {
                         right_action = '<span class="right_action">' + areaname + "</span >" + right_action;
                     }
                 }                
-                makeListItem(icon, listname, speciesGroup, category, right_action, false, el, id, matchedname, addclass);
+                makeListItem(icon, listname, speciesGroup, category, right_action, false, el, id, matchedname);
             }
         } 
     });

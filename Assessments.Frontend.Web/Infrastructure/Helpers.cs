@@ -207,7 +207,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             {
                 if (Constants.TaxonCategoriesNbToEn.TryGetValue(rank, out string rankValue))
                 {
-                    return query.Where(x => x.VurdertVitenskapeligNavnHierarki.Replace('/', ' ').Split().Reverse().Skip(1).ToList()[0].ToLowerInvariant() == name);
+                    return query.Where(x => x.VurdertVitenskapeligNavnHierarki.Replace('/', ' ').Split().Reverse().Skip(1).ToList().Any(y => y.ToLowerInvariant() == name));
                 }
             }
 

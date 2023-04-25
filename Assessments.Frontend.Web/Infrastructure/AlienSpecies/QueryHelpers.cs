@@ -89,7 +89,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 rank = searchString.Substring(rankIndexAt + 1, rankIndexEnd - 1 - rankIndexAt);
                 if (rank.Length > 2)
                 {
-                    rank = rank[0].ToString().ToUpperInvariant() + rank.Substring(1).ToLowerInvariant();
+                    rank = rank[0].ToString().ToUpperInvariant() + rank[1..].ToLowerInvariant();
                 }
                 searchString = searchString[..rankIndexAt].Trim().ToLowerInvariant();
             }
@@ -97,8 +97,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             // If taxonomic rank is not valid, the normal search will be used instead
             if (!string.IsNullOrEmpty(rank))
             {
-                string rankValue;
-                if (Constants.TaxonCategoriesNbToEn.TryGetValue(rank, out rankValue))
+                if (Constants.TaxonCategoriesNbToEn.TryGetValue(rank, out string rankValue))
                 {
                     if (Enum.TryParse(typeof(AlienSpeciesAssessment2023ScientificNameRank), rankValue, true, out var newRank))
                     {

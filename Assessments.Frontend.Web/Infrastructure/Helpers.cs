@@ -188,6 +188,30 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static IQueryable<SpeciesAssessment2021> GetQueryByName(IQueryable<SpeciesAssessment2021> query, string name)
         {
+            // Searching for a specific taxonomic rank
+            var rankIndexAt = name.IndexOf('(');
+            var rankIndexEnd = name.IndexOf(')');
+            var rank = String.Empty;
+            if (rankIndexAt > 0 && rankIndexEnd > 0)
+            {
+                rank = name.Substring(rankIndexAt + 1, rankIndexEnd - 1 - rankIndexAt);
+                if (rank.Length > 2)
+                {
+                    rank = rank[0].ToString().ToUpperInvariant() + rank[1..].ToLowerInvariant();
+                }
+                name = name[..rankIndexAt].Trim().ToLowerInvariant();
+            }
+
+            // If taxonomic rank is not valid, the normal search will be used instead
+            if (!string.IsNullOrEmpty(rank))
+            {
+                if (Constants.TaxonCategoriesNbToEn.TryGetValue(rank, out string rankValue))
+                {
+                    return query.Where(x => x.VurdertVitenskapeligNavnHierarki.Replace('/', ' ').Split().Reverse().Skip(1).ToList()[0].ToLowerInvariant() == name);
+                }
+            }
+
+            // Normal search
             var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
 
             return query.Where(x =>

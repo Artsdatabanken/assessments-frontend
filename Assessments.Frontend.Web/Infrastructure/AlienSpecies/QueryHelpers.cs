@@ -78,19 +78,48 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return query;
         }
 
-        private static IQueryable<AlienSpeciesAssessment2023> ApplySearch(string searchString, IQueryable<AlienSpeciesAssessment2023> query)
+        public static IQueryable<AlienSpeciesAssessment2023> ApplySearch(string searchString, IQueryable<AlienSpeciesAssessment2023> query)
         {
+            // Searching for a specific taxonomic rank
+            var rankIndexAt = searchString.IndexOf('(');
+            var rankIndexEnd = searchString.IndexOf(')');
+            var rank = String.Empty;
+            if (rankIndexAt > 0 && rankIndexEnd > 0)
+            {
+                rank = searchString.Substring(rankIndexAt + 1, rankIndexEnd - 1 - rankIndexAt);
+                if (rank.Length > 2)
+                {
+                    rank = rank[0].ToString().ToUpperInvariant() + rank[1..].ToLowerInvariant();
+                }
+                searchString = searchString[..rankIndexAt].Trim().ToLowerInvariant();
+            }
+
+            // If taxonomic rank is not valid, the normal search will be used instead
+            if (!string.IsNullOrEmpty(rank))
+            {
+                if (Constants.TaxonCategoriesNbToEn.TryGetValue(rank, out string rankValue))
+                {
+                    if (Enum.TryParse(typeof(AlienSpeciesAssessment2023ScientificNameRank), rankValue, true, out var newRank))
+                    {
+                        AlienSpeciesAssessment2023ScientificNameRank rankEnum = (AlienSpeciesAssessment2023ScientificNameRank)newRank;
+                        return query.Where(x => x.NameHiearchy.Any(y => y.ScientificNameRank == rankEnum && y.ScientificName.ToLowerInvariant() == searchString));
+                    }
+                }
+            }
+
+            // Normal search
+            searchString = searchString.Trim().ToLowerInvariant();
             var containsSubSpecies = query.Where(x =>
                 !string.IsNullOrEmpty(x.VernacularName) &&
-                x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())).Select(x => x.ScientificName.ScientificName).ToArray();
+                x.VernacularName.ToLowerInvariant().Contains(searchString)).Select(x => x.ScientificName.ScientificName).ToArray();
 
             return query.Where(x =>
-                x.ScientificName.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
+                x.ScientificName.ScientificName.ToLowerInvariant().Contains(searchString) ||
                 containsSubSpecies.Any(hit => x.ScientificName.ScientificName.Contains(hit)) || // Search on species also includes sub species
                 !string.IsNullOrEmpty(x.VernacularName) &&
-                x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
-                x.NameHiearchy.Any(x => x.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())) ||
-                x.SpeciesGroup.ToLowerInvariant().Contains(searchString.ToLowerInvariant()));
+                x.VernacularName.ToLowerInvariant().Contains(searchString) ||
+                x.NameHiearchy.Any(x => x.ScientificName.ToLowerInvariant().Contains(searchString)) ||
+                x.SpeciesGroup.ToLowerInvariant().Contains(searchString));
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplyCategoryChange(string[] changes, IQueryable<AlienSpeciesAssessment2023> query)

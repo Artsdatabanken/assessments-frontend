@@ -72,7 +72,7 @@
 
 /* LIST PRESENTATION */
 
-.redlist li a {
+.main_list_view li a {
     line-height: 1;
     font-size: 12pt;
     position: relative;
@@ -84,7 +84,7 @@
     box-sizing: border-box;
 }
 
-.redlist li {
+.main_list_view li {
     width: 100%;
     list-style-type: none;
     max-width: 100%;
@@ -134,7 +134,7 @@ li a span.element_icon {
 /* ANYTHING GRID */
 
 .listheader,
-.redlist li a {
+.main_list_view li a {
     display: inline-grid;
     padding: 5px 0;
     width: 100%;
@@ -145,19 +145,24 @@ li a span.element_icon {
     grid-template-columns: 1fr 2fr 2fr 153px;
 }
 
-.redlist li a {
+.main_list_view li a {
     grid-template-columns: 1fr 4fr 100px 53px;
-} 
+}
+
+.main_list_view li.door_knocker a {
+    grid-template-columns: 1fr 4fr 90px 100px 53px;
+}
 
 .categoryname {
     text-align: right;
     padding-right: 5px;
 }
+
 .categorytag {
-    text-align:right;
+    text-align: right;
 }
 
-.redlist .category_tag {
+.main_list_view .category_tag {
     width: 41px;
     display: block;
     height: 41px;
@@ -181,31 +186,31 @@ li a span.element_icon {
     overflow-wrap: break-word;
 }
 
-.redlist .amfibier,
-.redlist .edderkoppdyr,
-.redlist .kakerlakker,
-.redlist .nebbmunner,
-.redlist .stormaneter {
+.main_list_view .amfibier,
+.main_list_view .edderkoppdyr,
+.main_list_view .kakerlakker,
+.main_list_view .nebbmunner,
+.main_list_view .stormaneter {
     min-height: 74px;
 }
 
-.redlist li.S {
+.main_list_view li.S {
     background: #edf4f7;
 }
 
-.svalbarcontainer{
+.svalbarcontainer {
     display: none;
 }
 
 
-.redlist li.S a .svalbarcontainer {
+.main_list_view li.S a .svalbarcontainer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100px;
     height: 50px;
     overflow: hidden;
-    display:block;
+    display: block;
 }
 
 .svalbard {
@@ -246,15 +251,16 @@ li a span.element_icon {
 
 @media only screen and (max-width: 750px) {
 
-    .element_species{
-        padding-left:5px;
+    .element_species {
+        padding-left: 5px;
     }
-    .redlist li a {
+
+    .main_list_view li a {
         padding: 4px 0;
     }
 
     .listheader {
-        display:none;
+        display: none;
     }
 
     .element_species .list_cell {
@@ -266,7 +272,7 @@ li a span.element_icon {
         color: #7B766B;
     }
 
-    .redlist li a {
+    .main_list_view li a {
         grid-template-columns: 1fr 4fr 100px 53px;
     }
 
@@ -281,13 +287,13 @@ li a span.element_icon {
         font-size: 12px;
     }
 
-    .redlist li a {
+    .main_list_view li a {
         grid-template-columns: 18% 48% 22% 15%;
         padding-left: 0;
         padding-right: 0;
     }
 
-    .redlist .category_tag {
+    .main_list_view .category_tag {
         max-width: 100%;
     }
 }
@@ -295,13 +301,13 @@ li a span.element_icon {
 
 @media only screen and (max-width: 320px) {
 
-    .redlist li a {
+    .main_list_view li a {
         display: inline-block;
-        justify-content:space-between;
-        flex-wrap:wrap;
-        height:auto;
-        padding:5px;
-        padding-bottom:10px;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 5px;
+        padding-bottom: 10px;
     }
 
     .element_species {
@@ -312,13 +318,13 @@ li a span.element_icon {
         font-size: 13pt;
     }
 
-    .redlist .category_tag {
+    .main_list_view .category_tag {
         display: inline-block;
-        width:26px;
-        height:26px;
+        width: 26px;
+        height: 26px;
     }
 
-    .category_tag_label {       
+    .category_tag_label {
         font-size: 15px;
         line-height: 26px;
     }
@@ -330,9 +336,9 @@ li a span.element_icon {
         height: auto;
     }
 
-    .element_icon img{
-        display:none;
-    }
+        .element_icon img {
+            display: none;
+        }
 
     .categoryname {
         order: 3;
@@ -342,14 +348,13 @@ li a span.element_icon {
         order: 2;
     }
 
-    .redlist li a.S .svalbard {
+    .main_list_view li a.S .svalbard {
         left: -145px;
     }
 
-    .redlist li a{
-        text-align:center;
+    .main_list_view li a {
+        text-align: center;
     }
-   
 }
 
 
@@ -362,13 +367,11 @@ li a span.element_icon {
 
     .element_popular_name {
         word-break: break-word;
-
     }
 
     .element_species .list_cell {
         width: 50%;
     }
-
 }
 
 
@@ -387,7 +390,7 @@ li a span.element_icon {
     text-align: right;
 }
 
-.redlist .listheader {
+.main_list_view .listheader {
     border-bottom: 1px solid #4c4a48;
     padding-bottom: 5px;
     padding-right: 5px;
@@ -406,7 +409,7 @@ li a span.element_icon {
     .viewselector {
         padding-left: 0;
         padding-top: 0;
-        border:0;
+        border: 0;
     }
 
 
@@ -414,12 +417,12 @@ li a span.element_icon {
         flex-direction: column;
     }
 
-    .redlist {
+    .main_list_view {
         width: 100%;
     }
 
     li a span.element_icon {
-    padding-right: 10px;
+        padding-right: 10px;
     }
 
     .num_of_resutls {
@@ -446,9 +449,30 @@ li a span.element_icon {
     padding: 0 5px;
 }
 
+.degrees {
+    font-size: 12px;
+    display: block;
+    color: #4c4a48;
+}
+
+.list_doorknocker span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.list_doorknocker .material-symbols-outlined {
+    font-size: 30px;
+}
+
 @media (max-width: 500px) {
     .mobile_hide {
         display: none;
+    }
+
+    .main_list_view li.door_knocker a {
+        grid-template-columns: 1fr 4fr 100px 53px;
     }
 }
 
@@ -456,10 +480,4 @@ li a span.element_icon {
     .desktop_hide {
         display: none;
     }
-}
-
-.degrees {
-    font-size: 12px;
-    display: block;
-    color: #4c4a48;
 }

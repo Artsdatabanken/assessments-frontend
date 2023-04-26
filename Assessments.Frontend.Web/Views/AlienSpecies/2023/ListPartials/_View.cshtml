@@ -8,6 +8,7 @@
         Category = x.Category.DisplayName(),
         CategoryShort = x.Category.ToString(),
         Id = x.Id,
+        IsDoorKnocker = x.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker,
         ScientificNameFormatted = x.ScientificName.ScientificNameFormatted,
         SpeciesGroup = x.SpeciesGroup,
         SpeciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, x.SpeciesGroup)?.ImageUrl,
@@ -16,6 +17,7 @@
 
     var listViewViewModel = new ListViewViewModel()
     {
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
         NoResultString =  Constants.AlienSpecies2023NoListViewResults,
         Results = results,
         View = Model.View

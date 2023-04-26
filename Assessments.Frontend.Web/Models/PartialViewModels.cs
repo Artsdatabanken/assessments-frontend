@@ -354,6 +354,8 @@ namespace Assessments.Frontend.Web.Models
     {
         public class Result
         {
+            public bool IsDoorKnocker { get; set; } = false;
+
             public string EvaluationContext { get; set; }
 
             public string Category { get; set; }
@@ -372,6 +374,8 @@ namespace Assessments.Frontend.Web.Models
 
             public string VernacularName { get; set; }
         }
+
+        public AssessmentType AssessmentType { get; set; }
 
         public string NoResultString { get; set; }
 

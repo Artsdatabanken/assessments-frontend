@@ -236,6 +236,10 @@ li.active  .category_item.NR {
     color: #1c1c1c;
 }
 
+.NR {
+    border: 1px solid #1c1c1c;
+}
+
 .criteria_displayer li{
     flex:1;
 }

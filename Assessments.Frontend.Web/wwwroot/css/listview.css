@@ -464,6 +464,7 @@ li a span.element_icon {
 
 .list_doorknocker .material-symbols-outlined {
     font-size: 30px;
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 48;
 }
 
 @media (max-width: 500px) {

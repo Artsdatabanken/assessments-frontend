@@ -28,11 +28,11 @@ namespace Assessments.Frontend.Web.Models
                 Category = assessment.Category,
                 ChangedFromAlienDescription = assessment.ChangedFromAlienDescription,
                 ConnectedToHigherLowerTaxonDescription = assessment.ConnectedToHigherLowerTaxonDescription,
-                CriteriaDocumentation = assessment.RiskAssessmentCriteriaDocumentation,
-                CriteriaDocumentationDomesticSpread = assessment.RiskAssessmentCriteriaDocumentationDomesticSpread,
-                CriteriaDocumentationEcoEffect = assessment.RiskAssessmentCriteriaDocumentationEcoEffect,
-                CriteriaDocumentationInvasionPotential = assessment.RiskAssessmentCriteriaDocumentationInvasionPotential,
-                CriteriaDocumentationSpeciesStatus = assessment.RiskAssessmentCriteriaDocumentationSpeciesStatus,
+                CriteriaDocumentation = assessment.CriteriaDocumentation,
+                CriteriaDocumentationDomesticSpread = assessment.CriteriaDocumentationDomesticSpread,
+                CriteriaDocumentationEcoEffect = assessment.CriteriaDocumentationEcoEffect,
+                CriteriaDocumentationInvasionPotential = assessment.CriteriaDocumentationInvasionPotential,
+                CriteriaDocumentationSpeciesStatus = assessment.CriteriaDocumentationSpeciesStatus,
                 ChangedFromAlien = assessment.ChangedFromAlien,
                 Environment = assessment.Environment,
                 EvaluationContext = assessment.EvaluationContext,
@@ -78,8 +78,8 @@ namespace Assessments.Frontend.Web.Models
             {
                 AlienSpeciesCategory = assessment.AlienSpeciesCategory,
                 AreaOfOccupancyFutureBest = assessment.AOOfutureBest,
-                AreaOfOccupancyFutureHigh = assessment.RiskAssessmentAOOfutureHigh,
-                AreaOfOccupancyFutureLow = assessment.RiskAssessmentAOOfutureLow,
+                AreaOfOccupancyFutureHigh = assessment.AOOfutureHigh,
+                AreaOfOccupancyFutureLow = assessment.AOOfutureLow,
                 AreaOfOccupancyInStronglyAlteredEcosystems = assessment.AreaOfOccupancyInStronglyAlteredEcosystems,
                 AreaOfOccupancyKnown = assessment.AOOknown,
                 AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
@@ -91,12 +91,12 @@ namespace Assessments.Frontend.Web.Models
                 NameRank = assessment.ScientificName.ScientificNameRank,
                 RegionOccurrences = assessment.RegionOccurrences,
                 FreshWaterRegionModel = assessment.FreshWaterRegionModel,
-                RiskAssessmentIntroductionsLow = assessment.RiskAssessmentIntroductionsLow,
-                RiskAssessmentIntroductionsBest = assessment.RiskAssessmentIntroductionsBest,
-                RiskAssessmentIntroductionsHigh = assessment.RiskAssessmentIntroductionsHigh,
-                RiskAssessmentOccurrences1Low = assessment.RiskAssessmentOccurrences1Low,
-                RiskAssessmentOccurrences1Best = assessment.RiskAssessmentOccurrences1Best,
-                RiskAssessmentOccurrences1High = assessment.RiskAssessmentOccurrences1High
+                RiskAssessmentIntroductionsLow = assessment.IntroductionsLow,
+                RiskAssessmentIntroductionsBest = assessment.IntroductionsBest,
+                RiskAssessmentIntroductionsHigh = assessment.IntroductionsHigh,
+                RiskAssessmentOccurrences1Low = assessment.Occurrences1Low,
+                RiskAssessmentOccurrences1Best = assessment.Occurrences1Best,
+                RiskAssessmentOccurrences1High = assessment.Occurrences1High
             };
 
             SideBarContentViewModel = new SideBarContentViewModel

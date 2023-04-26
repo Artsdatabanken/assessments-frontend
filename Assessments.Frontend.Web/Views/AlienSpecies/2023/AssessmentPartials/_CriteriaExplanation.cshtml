@@ -396,9 +396,9 @@
                     
                     <span is-visible="showSimplifiedEstimateAcceptedDoorKnockerOrEffectWithoutReproduction || showSimplifiedEstimateNotAcceptedDoorKnockerOrEffectWithoutReproduction">
                         @Constants.basedOnEstimatesSingular
-                        @assessment.RiskAssessmentOccurrences1Best?.ToString("N0")
+                        @assessment.Occurrences1Best?.ToString("N0")
                         @Constants.basedOnArea10years @Constants.and
-                        @assessment.RiskAssessmentIntroductionsBest?.ToString("N0")
+                        @assessment.IntroductionsBest?.ToString("N0")
                         @Constants.moreIntroductions                       
                     </span>
 
@@ -572,8 +572,8 @@
                     </p>
                 </div>
                 <p is-visible="isEstimatedIncreaseInAOODoorKnockers">                   
-                    @Constants.basedOnEstimatesSingular  @assessment.RiskAssessmentOccurrences1Best?.ToString("N0") 
-                    @Constants.basedOnArea10years @Constants.and @assessment.RiskAssessmentIntroductionsBest?.ToString("N0") 
+                    @Constants.basedOnEstimatesSingular  @assessment.Occurrences1Best?.ToString("N0") 
+                    @Constants.basedOnArea10years @Constants.and @assessment.IntroductionsBest?.ToString("N0") 
                     @Constants.moreIntroductions @Constants.bCriteriaScoredAs @uncertaintyB.Value (@Constants.withUuncertainty
                     @AlienSpeciesHelpers.GetUncertaintyValueMinMax(uncertaintyB.Value, AlienSpeciesHelpers.GetUncertaintyLow(uncertaintyB))
                     – 

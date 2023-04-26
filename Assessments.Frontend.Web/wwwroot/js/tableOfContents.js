@@ -4,12 +4,12 @@ const tableOfContentsSmallScreen = document.getElementById('tableOfContentsSmall
 const tableOfContentsOuter = document.getElementById('tableOfContentsOuter');
 
 const hideTableOfContentsSmallScreen = () => {
-    tableOfContentsSmallScreen.classList.add('table-of-contents-small-screen-show');
-    tableOfContentsOuter.classList.add('table-of-contents-sticky');
+    tableOfContentsSmallScreen?.classList.add('table-of-contents-small-screen-show');
+    tableOfContentsOuter?.classList.add('table-of-contents-sticky');
 }
 
 const showTableOfContentButton = () => {
-    tableOfContentButton.classList.remove('table-of-contents-small-screen-button-hide');
+    tableOfContentButton?.classList.remove('table-of-contents-small-screen-button-hide');
 }
 
 const initializeTableOfContents = () => {

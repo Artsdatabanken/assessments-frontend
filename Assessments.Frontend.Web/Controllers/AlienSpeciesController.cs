@@ -126,7 +126,7 @@ namespace Assessments.Frontend.Web.Controllers
                                                     query.Any(y => y.ScientificName.ScientificNameId == x.ScientificNameId)).ToList();                // or match on scientific name id: exact match on species/subsp./var.
 
             // Add assessments if they are in alien species list, but not in artskart. "Subsp." and "var." are not included in scientific names in artskart.
-            var alienSpeciesHits = query.Where(x => x.ScientificName.ScientificName.Trim().ToLower().Contains(name)).ToArray();
+            var alienSpeciesHits = QueryHelpers.ApplySearch(search, query);
 
             foreach (var hit in alienSpeciesHits)
             {
@@ -137,10 +137,7 @@ namespace Assessments.Frontend.Web.Controllers
                     PopularName = hit.VernacularName,
                     MatchedName = hit.ScientificName.ScientificName,
                     ScientificName = hit.ScientificName.ScientificName,
-                    TaxonCategory = hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Species) ? Constants.TaxonCategoriesEn.Species :
-                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.SubSpecies) ? Constants.TaxonCategoriesEn.SubSpecies :
-                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Variety) ? Constants.TaxonCategoriesEn.Variety :
-                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Form) ? Constants.TaxonCategoriesEn.Form : 0
+                    TaxonCategory = (int)hit.ScientificName.ScientificNameRank
                 });
             }
 

@@ -1,6 +1,6 @@
 ﻿@model ControlButtonsViewModel
 
-@functions{
+@{
     string GetViewClass(string element, string value)
     {
         if (String.IsNullOrEmpty(element) && value == "list")
@@ -27,4 +27,3 @@
 }
 
 <span class="num_of_resutls desktop_hide">@Model.ItemCount treff</span>
-

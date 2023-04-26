@@ -1,8 +1,6 @@
-@model AlienSpeciesListViewModel
+@model ListViewViewModel
 
-@if (Model.Results.PageCount > 1
-    @*&& Model.View != "stat"*@
-)
+@if (Model.Results.PageCount > 1 && Model.View != "stat")
 {
     <p class="page_count potit">
         Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")

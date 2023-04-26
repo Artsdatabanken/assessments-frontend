@@ -3,6 +3,7 @@ using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -347,5 +348,35 @@ namespace Assessments.Frontend.Web.Models
         public string SpeciesGroupImageUrl { get; set; }
 
         public string SpeciesGroupInfoUrl { get; set; }
+    }
+
+    public class ListViewViewModel
+    {
+        public class Result
+        {
+            public string EvaluationContext { get; set; }
+
+            public string Category { get; set; }
+
+            public string CategoryShort { get; set; }
+
+            public string Degrees { get; set; }
+
+            public int Id { get; set; }
+
+            public string ScientificNameFormatted { get; set; }
+
+            public string SpeciesGroup { get; set; }
+
+            public string SpeciesGroupIconUrl { get; set; }
+
+            public string VernacularName { get; set; }
+        }
+
+        public string NoResultString { get; set; }
+
+        public IPagedList<Result> Results { get; set; }
+
+        public string View { get; set; }
     }
 }

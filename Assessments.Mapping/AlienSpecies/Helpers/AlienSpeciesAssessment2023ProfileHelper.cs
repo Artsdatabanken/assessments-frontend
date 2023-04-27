@@ -923,8 +923,6 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 103280,
                 103403,
                 102634,
-                102635,
-                128903,
                 129589,
                 103588,
                 103590

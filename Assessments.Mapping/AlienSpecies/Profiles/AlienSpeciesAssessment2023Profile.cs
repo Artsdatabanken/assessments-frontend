@@ -110,7 +110,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.RegionOccurrences, opt =>
                 {
                     opt.PreCondition(src => new[] { "AlienSpecie", "DoorKnocker", "EffectWithoutReproduction" }.Any(x => src.AlienSpeciesCategory.Contains(x)));
-                    opt.MapFrom(src => src.Fylkesforekomster.Where(x => x.State2 == 0));
+                    opt.MapFrom(src => src.ExpertGroup.Contains("Svalbard") ? src.Fylkesforekomster.Where(x => x.State2 == 0 && x.Fylke == "Sv") : src.Fylkesforekomster.Where(x => x.State2 == 0 & x.Fylke != "Sv"));
                 })
                 .ForMember(dest => dest.FreshWaterRegionModel, opt =>
                 {

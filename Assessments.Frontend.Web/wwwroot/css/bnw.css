@@ -235,7 +235,7 @@
 .darktheme .viewselector,
 .darktheme .controls button.active,
 .darktheme .filter_group ul,
-.darktheme .redlist .listheader,
+.darktheme .main_list_view .listheader,
 .darktheme .controls button.active,
 .darktheme .search_dropdown,
 .darktheme .controls .list_actions,
@@ -345,7 +345,7 @@
 .darktheme .button.tertiary,
 .darktheme .main button.tertiary,
 .darktheme .sidebarmenu li h3,
-.darktheme .sidebarmenu .redlist h3 {
+.darktheme .sidebarmenu .main_list_view h3 {
     color: #f97474;
     border-color: #f97474;
 }
@@ -368,8 +368,8 @@
 
 /* BORDERS */
 
-.darktheme .controls button.active{
-    border-bottom:transparent;
+.darktheme .controls button.active {
+    border-bottom: transparent;
 }
 
 /* SEMI-GRAY-BORDERS */
@@ -401,12 +401,12 @@
 
 .darktheme .sidebarmenu ul,
 .darktheme .sidebarmenu li a,
-.darktheme .redlist li {
+.darktheme .main_list_view li {
     border-color: #464646;
 }
 
-.darktheme .filter_group button{
-    border-color:#514f4f;
+.darktheme .filter_group button {
+    border-color: #514f4f;
 }
 
 .darktheme .button.primary,
@@ -433,19 +433,20 @@
         padding: 4px;
         border-radius: 50%;
     }
+
     .darktheme .speciesgroup_name {
         background: #424141;
     }
 }
 
 .darktheme .search_speciesicon {
-    background:white;
-    border-radius:50%;
+    background: white;
+    border-radius: 50%;
 }
 
 /* SPECIAL STUFF */
 .darktheme .S .speciesgroup_name,
-.darktheme .redlist li.S {
+.darktheme .main_list_view li.S {
     background: #0f122d;
 }
 
@@ -580,4 +581,14 @@
 
 .collapsible_header_letter {
     color: grey;
+}
+
+@media (min-width: 1400px) {
+    .darktheme .pagination-wrapper {
+        background: inherit;
+    }
+}
+
+.darktheme .PagedList-pageCountAndLocation.disabled a {
+    color: inherit;
 }

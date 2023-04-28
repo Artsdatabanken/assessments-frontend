@@ -583,6 +583,12 @@
     color: grey;
 }
 
+@media (min-width: 1400px) {
+    .darktheme .pagination-wrapper {
+        background: inherit;
+    }
+}
+
 .darktheme .PagedList-pageCountAndLocation.disabled a {
     color: inherit;
 }

@@ -4,10 +4,6 @@
     var doorknockerClass = "door_knocker";
 }
 
-<div class="mobile_padding paginator-top">
-    <partial name="/Views/Shared/_Paginator.cshtml" />
-</div>
-
 <ul class="@Model.AssessmentType.ToString().ToLowerInvariant() main_list_view" id="@Model.AssessmentType.ToString()">
     <li class="listheader @( Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 ? doorknockerClass : string.Empty )" id="listheader">
         <span></span>

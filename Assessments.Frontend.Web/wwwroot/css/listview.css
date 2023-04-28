@@ -1,60 +1,68 @@
 ﻿
 /* PAGINATOR FOR LIST PAGE*/
 
+.pagination-wrapper {
+    padding: 20px 0;
+}
+
+.pagination-part {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-part.first-last li:first-child{
+    margin-right: 10px;
+}
+
 .pagination {
     display: flex;
     flex-direction: row;
     justify-content: center;
     list-style: none;
     flex-wrap: wrap;
-    margin-top: 20px;
 }
 
-.page_count {
-    width: 100%;
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: -10px;
+.paginator-top .pagination-wrapper {
+    padding: 0 0 5px 0;
 }
 
-.page-item:not(:first-child) .page-link {
-    margin-left: -1px;
+.PagedList-pageCountAndLocation {
+    display: flex;
+    margin: 0 10px;
 }
 
-.page-item {
-    width: 35px;
-    text-align: center;
-    border: 0;
-    height:24px;
-    margin-bottom:5px;
-}
-
-.page-link {
+.PagedList-pageCountAndLocation.disabled a {
     color: #4c4a48;
-    background-color: #fff;
-    border: 1px solid #4c4a48;
-    display: block;
+}
+
+.PagedList-pageCountAndLocation.disabled a:hover {
+    cursor: default;
+}
+
+li.page-item a,
+li.page-item a.page-link {
+    color: inherit;
+    background: inherit;
+}
+
+li.page-item a.page-link:hover {
+    color: #8f4997;
+}
+
+.pagination-wrapper a {
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    height: 100%;
-    line-height: 26px;
-    box-sizing: content-box;
 }
 
-
-.active .page-link {
-    color: #fff;
-    background-color: #4c4a48;
-    border-color: #4c4a48;
-}
-
-.page-link:hover {
-    background-color: gray;
-    border-color: #4c4a48;
-    color: white;
+.paginator-link-text {
+    text-decoration: underline;
 }
 
 /* ICON */
-
 .element_icon {
     width: 45px;
     height: 0;
@@ -103,6 +111,7 @@ li a span.element_icon {
 
 .viewselector {
     width: 100%;
+    height: fit-content;
     border-left: 1px solid lightgrey;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -143,6 +152,10 @@ li a span.element_icon {
 
 .listheader {
     grid-template-columns: 1fr 2fr 2fr 153px;
+}
+
+.listheader.door_knocker {
+    grid-template-columns: 1fr 2fr auto 2fr 153px;
 }
 
 .main_list_view li a {
@@ -474,6 +487,10 @@ li a span.element_icon {
 
     .main_list_view li.door_knocker a {
         grid-template-columns: 1fr 4fr 100px 53px;
+    }
+
+    .listheader.door_knocker {
+        grid-template-columns: 1fr 2fr 2fr 153px;
     }
 }
 

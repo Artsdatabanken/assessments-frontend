@@ -2,14 +2,60 @@
 
 @if (Model.Results.PageCount > 1 && Model.View != "stat")
 {
-    <p class="page_count potit">
-        Viser side @Model.Results.PageNumber av @Model.Results.PageCount.ToString("N0")
-    </p>
+    var startHit = Model.Results.PageNumber * 25 - 24;
+    var endHit = startHit + @Model.Results.Count - 1;
+    var totalCount = Model.Results.TotalItemCount.ToString("N0");
 
-    @Html.PagedListPager(Model.Results, page => Context.Request.QueryString.AddParameters(new { Page = page }), new PagedListRenderOptions
+    
+    <div class="pagination-wrapper">
+        <div class="pagination-part">
+            @Html.PagedListPager(Model.Results, page => Context.Request.QueryString.AddParameters(new { Page = page }), new PagedListRenderOptions
+            {
+                PageClasses = new[] { "page-link" },
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" },
+                LinkToPreviousPageFormat = "<span class='material-icons'>keyboard_arrow_left</span><span class='paginator-link-text'> forrige</span>",
+                LinkToNextPageFormat = "<span class='paginator-link-text'>neste </span><span class='material-icons'>keyboard_arrow_right</span>",
+                ItemSliceAndTotalFormat = "Viser treff {0} - {1} av {2}",
+                DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+                DisplayLinkToLastPage = PagedListDisplayMode.Never,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToIndividualPages = false,
+                DisplayItemSliceAndTotal = true
+            })
+        </div>
+        <div class="pagination-part first-last">
+            @Html.PagedListPager(Model.Results, page => Context.Request.QueryString.AddParameters(new { Page = page }), new PagedListRenderOptions
+            {
+                PageClasses = new[] { "page-link" },
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" },
+                LinkToLastPageFormat = "<span class='paginator-link-text'>siste side </span><span class='material-icons'>keyboard_arrow_right</span>",
+                LinkToFirstPageFormat = "<span class='material-icons'>keyboard_arrow_left</span><span class='paginator-link-text'> til start</span>",
+                DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+                DisplayLinkToNextPage = PagedListDisplayMode.Never,
+                DisplayLinkToIndividualPages = false,
+            })
+        </div>
+    </div>
+
+@*    @Html.PagedListPager(Model.Results, page => Context.Request.QueryString.AddParameters(new { Page = page }), new PagedListRenderOptions
     {
         PageClasses = new[] { "page-link" },
         UlElementClasses = new[] { "pagination" },
-        LiElementClasses = new[] { "page-item" }
-    })
+        LiElementClasses = new[] { "page-item" },
+        LinkToPreviousPageFormat = "forrige",
+        LinkToNextPageFormat = "neste",
+        LinkToLastPageFormat = "siste",
+        LinkToFirstPageFormat = "start",
+        DisplayLinkToFirstPage = PagedListDisplayMode.Never,
+        DisplayLinkToLastPage = PagedListDisplayMode.Never,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = PagedListDisplayMode.Always,
+        DisplayLinkToIndividualPages = false,
+        DisplayItemSliceAndTotal = true
+    })*@
 }

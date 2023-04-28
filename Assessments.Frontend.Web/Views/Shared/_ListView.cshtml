@@ -4,11 +4,16 @@
     var doorknockerClass = "door_knocker";
 }
 
+<div class="mobile_padding paginator-top">
+    <partial name="/Views/Shared/_Paginator.cshtml" />
+</div>
+
 <ul class="@Model.AssessmentType.ToString().ToLowerInvariant() main_list_view" id="@Model.AssessmentType.ToString()">
-    <li class="listheader" id="listheader">
+    <li class="listheader @( Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 ? doorknockerClass : string.Empty )" id="listheader">
         <span></span>
         <span class="list_cell">Artsnavn</span>
         <span class="list_cell">Populærnavn</span>
+        <span is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023" class="mobile_hide list_doorknocker"></span>
         <span class="list_cell">Kategori</span>
     </li>
 

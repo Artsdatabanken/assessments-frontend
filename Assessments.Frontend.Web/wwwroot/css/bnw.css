@@ -582,3 +582,7 @@
 .collapsible_header_letter {
     color: grey;
 }
+
+.darktheme .PagedList-pageCountAndLocation.disabled a {
+    color: inherit;
+}

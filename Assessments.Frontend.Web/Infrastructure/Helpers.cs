@@ -270,7 +270,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string FindDegrees(string category, bool parenthesis)
         {
-            string text = "";
+            string text = string.Empty;
             if (category.Length > 2)
             {
                 text = "nedgradert";

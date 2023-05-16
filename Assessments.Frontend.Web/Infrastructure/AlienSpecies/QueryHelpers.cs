@@ -365,7 +365,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         public List<RiskCategory> GetRiskCategories()
         {
-            var distinctCategories = _query.Select(x => x.Category).Distinct();
+            var distinctCategories = new List<AlienSpeciesAssessment2023Category>((IEnumerable<AlienSpeciesAssessment2023Category>)Enum.GetValues(typeof(AlienSpeciesAssessment2023Category))).Where(x => x != AlienSpeciesAssessment2023Category.NR);
+
             return distinctCategories.Select(x => new RiskCategory
             {
                 Category = x,

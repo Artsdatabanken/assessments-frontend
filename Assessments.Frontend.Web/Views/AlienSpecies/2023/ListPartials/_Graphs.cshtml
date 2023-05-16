@@ -1,5 +1,6 @@
 @model AlienSpeciesListViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
+@using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
     var categories = Model.Statistics.Riskcategories;
@@ -8,6 +9,16 @@
     int GetHeight(int max, int currect)
     {
         return currect * 100 / max;
+    }
+
+    int GetTotal()
+    {
+        return Model.Statistics.Riskcategories.Sum(x => x.Count);
+    }
+
+    int GetHighRisk()
+    {
+        return Model.Statistics.Riskcategories.Where(x => x.Category == AlienSpeciesAssessment2023Category.HI || x.Category == AlienSpeciesAssessment2023Category.SE).Sum(x => x.Count);
     }
 }
 
@@ -19,7 +30,7 @@
             <li class="statelement">
                 <div class="heightbar_blank">
                     <div class="heightbar_indicator @key.Category.ToString()" style="height: @(GetHeight(largestCategoryCount, key.Count))%">
-                        <span class="percent">@key.Count</span>
+                        <span class="percent">@key.Count.ToString("N0")</span>
                     </div>
                 </div>
                 <span class="statbox">
@@ -29,7 +40,7 @@
             </li>
         }
     </ul>
-    <div>Antall vurderinger i hver av de fem risikokategoriene, fra ingen kjent risiko NK til svært høy risiko SE. Utvalget ditt omfatter n vurderinger, hvorav x er vurdert å være høyrisikoarter, dvs. de utgjør enten en høy risiko, eller en svært høy risiko for norsk natur.</div>
+    <p>@Constants.figureCategoryStart @(Model.Statistics.Riskcategories.First().Category.DisplayName().ToLowerInvariant()) @(Model.Statistics.Riskcategories.First().Category.ToString()) til @(Model.Statistics.Riskcategories.Last().Category.DisplayName().ToLowerInvariant()) @(Model.Statistics.Riskcategories.Last().Category.ToString()). Utvalget ditt omfatter @GetTotal().ToString("N0") vurderinger, hvorav @GetHighRisk().ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
 
     @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>

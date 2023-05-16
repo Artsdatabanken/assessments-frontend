@@ -466,7 +466,9 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string model = "Modell";
         public const string sitesListed = "Lokalitetene i datafila er oppført";
 
-
+        public const string figureCategoryStart = "Antall vurderinger i hver av de fem risikokategoriene, fra";
+        public const string figureCategoryMiddle = "er vurdert å være høyrisikoarter, dvs. de utgjør enten en";
+        public const string figureCategoryEnd = "for norsk natur";
 
 
 

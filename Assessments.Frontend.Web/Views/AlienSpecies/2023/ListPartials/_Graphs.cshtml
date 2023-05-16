@@ -2,28 +2,34 @@
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
 
 @{
-    var kays = new int[]{1, 2, 3};
-}
+    var categories = Model.Statistics.Riskcategories;
+    var largestCategoryCount = categories.Select(x => x.Count).Max();
 
+    int GetHeight(int max, int currect)
+    {
+        return currect * 100 / max;
+    }
+}
 
 <div class="page_section graphs">
     <h3>Antall vurderinger per risikokategori</h3>
-    <div class="graph color_graph">
-        @foreach (var key in kays)
+    <ul class="graph color_graph">
+        @foreach (var key in categories)
         {
-            <div class="statelement">
+            <li class="statelement">
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="height: 10%">
-                        <span class="percent">tall</span>
+                    <div class="heightbar_indicator @key.Category.ToString()" style="height: @(GetHeight(largestCategoryCount, key.Count))%">
+                        <span class="percent">@key.Count</span>
                     </div>
                 </div>
                 <span class="statbox">
-                    nynomo
+                    @key.Category
                 </span>
-                momo
-            </div>
+                @key.Category.DisplayName()
+            </li>
         }
-    </div>
+    </ul>
+    <div>Antall vurderinger i hver av de fem risikokategoriene, fra ingen kjent risiko NK til svært høy risiko SE. Utvalget ditt omfatter n vurderinger, hvorav x er vurdert å være høyrisikoarter, dvs. de utgjør enten en høy risiko, eller en svært høy risiko for norsk natur.</div>
 
     @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>

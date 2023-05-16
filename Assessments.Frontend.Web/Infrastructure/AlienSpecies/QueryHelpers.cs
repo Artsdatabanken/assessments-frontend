@@ -3,7 +3,9 @@ using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using static Assessments.Frontend.Web.Models.AlienSpeciesStatistics2023;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -339,6 +341,36 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     newQuery = newQuery.Concat(assessments);
             }
             return newQuery.Distinct();
+        }
+    }
+
+    public class Statistics
+    {
+        private IQueryable<AlienSpeciesAssessment2023> _query;
+
+        public Statistics(IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            // NR and TaxonEvaluatedAtAnotherLevel should never appear in the statistics figures
+            _query = query.Where(x => x.Category != AlienSpeciesAssessment2023Category.NR && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel);
+        }
+
+        public AlienSpeciesStatistics2023 GetStatistics()
+        {
+            var statistics = new AlienSpeciesStatistics2023();
+
+            statistics.Riskcategories = this.GetRiskCategories();
+
+            return statistics;
+        }
+
+        public List<RiskCategory> GetRiskCategories()
+        {
+            var distinctCategories = _query.Select(x => x.Category).Distinct();
+            return distinctCategories.Select(x => new RiskCategory
+            {
+                Category = x,
+                Count = _query.Where(y => y.Category == x).Count()
+            }).OrderBy(x => x.Category.ToString(), new AlienSpeciesCategoryComparer()).ToList();
         }
     }
 }

@@ -7,7 +7,7 @@
 <div class="sidebar_image_info">
     <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden"/>
     <br />
-    <a href="@taxon_url" class="link-styled">
+    <a href="@taxon_url" class="link-styled taxon-page-link">
         Til @Helpers.FixSpeciesLevel("{art}ssiden", Model.TaxonRank)
     </a>
 
@@ -29,4 +29,5 @@
             Forbudslista hos Lovdata.no <span class="material-icons">open_in_new</span>
         </a>
     </div>
+    <div class="@("species-images-" + Model.ScientificNameId)"></div>
 </div>

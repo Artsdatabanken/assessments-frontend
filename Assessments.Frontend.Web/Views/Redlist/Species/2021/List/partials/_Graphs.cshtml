@@ -101,10 +101,10 @@
     <h3>@ViewBag.glossary["statistics"]["category"]["title"]</h3>
 
 
-    <div class="graph color_graph">
+    <ul class="graph color_graph">
         @foreach (var key in category.Keys)
         {
-            <div class="statelement">
+            <li class="statelement">
                 <div class="heightbar_blank">
                     <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key, @Model.Statistics.Categories))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.Categories)</span>
@@ -115,9 +115,9 @@
                     @key 
                 </span>
                 @{categoryDescription(key);}
-            </div>
+            </li>
         }
-    </div>
+    </ul>
     <p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>
     <div class="graph greyscale">

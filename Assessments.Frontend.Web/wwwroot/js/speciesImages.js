@@ -10,9 +10,9 @@ const renderSpeciesImage = (targetElement, element) => {
     element.dataset.src = '';
     element.style.height = 'auto';
     element.style.width = '200px';
-    element.style['margin-top'] = '20px';
     element.style.padding = '0';
     const elementClone = element.parentElement.parentElement.cloneNode(true);
+    elementClone.style['margin-bottom'] = '20px';
     targetElement.appendChild(elementClone);
 }
 
@@ -30,10 +30,22 @@ const updateImageMeta = (imageMeta) => {
     });
 }
 
-const updateTaxonLink = (linkElement) => {
-    const imageLastElementHrefArray = linkElement.href.split('/taxon');
-    imageLastElementHrefArray[0] = adbLink;
-    linkElement.href = imageLastElementHrefArray.join('/taxon');
+const removeTaxonLink = (imageText) => {
+    imageText[2].remove();
+    imageText[1].remove();
+}
+
+const renderHeader = (element) => {
+    const header = document.createElement('h3');
+    header.innerText = 'Bilder av arten';
+    element.appendChild(header);
+}
+
+const addLinkToTaxonPage = (element, url) => {
+    const link = document.createElement('a');
+    link.href = url;
+    link.innerText = 'Se flere bilder av arten her';
+    element.appendChild(link);
 }
 
 const getAssessmentImages = () => {
@@ -55,13 +67,18 @@ const getAssessmentImages = () => {
                 const targetElement = document.getElementsByClassName(targetClassName)[0];
 
                 Array.prototype.forEach.call(images, (el, index) => {
-                    if (index > 3) return;
+                    if (index == 0) {
+                        renderHeader(targetElement);
+                    }
+
+                    if (index > 3) {
+                        addLinkToTaxonPage(targetElement, url);
+                        return;
+                    }
 
                     const imageText = el.parentElement.parentElement.children[1].children;
                     const imageFirstElements = imageText[0].children[0].children;
-                    const imageLastElement = imageText[2];
-
-                    updateTaxonLink(imageLastElement);
+                    removeTaxonLink(imageText);
                     updateImageMeta(imageFirstElements);
                     renderSpeciesImage(targetElement, el);
                 });

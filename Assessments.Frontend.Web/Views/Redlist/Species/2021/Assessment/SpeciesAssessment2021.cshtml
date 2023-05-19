@@ -69,6 +69,7 @@
 
     var sideBarContentViewModel = new SideBarContentViewModel()
     {
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         AssessmentYear = Model.AssessmentYear,
         Category = @ViewBag.categories[Model.Category.Substring(0, 2)]["presentationstring"],
         CategoryShort = Model.Category,

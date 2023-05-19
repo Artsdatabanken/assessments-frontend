@@ -944,3 +944,7 @@ button {
 .error {
     color: #cf3e1c;
 }
+
+.underline {
+    text-decoration: underline;
+}

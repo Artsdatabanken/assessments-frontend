@@ -7,6 +7,7 @@ const renderSpeciesImage = (targetElement, element) => {
     element.style = "";
     element.alt = "Bilde av arten";
     element.src = `${datasetSrc}?mode=460x460`;
+    element.onerror = `this.src='${datasetSrc}'`;
     element.dataset.src = '';
     element.style.height = 'auto';
     element.style.width = 'auto';

@@ -26,6 +26,10 @@
 }
 
 <div id="viewselector" class="viewselector @Model.View">
-    @*<partial name="/Views/AlienSpecies/2023/ListPartials/_Graphs.cshtml" />*@
-    <partial name="/Views/Shared/_ListView.cshtml" model="listViewViewModel" />
+    <div is-visible="@( Model.View == "stat") ">
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_Graphs.cshtml" />
+    </div>
+    <div is-visible="@( Model.View != "stat") ">
+        <partial name="/Views/Shared/_ListView.cshtml" model="listViewViewModel" />
+    </div>
 </div>

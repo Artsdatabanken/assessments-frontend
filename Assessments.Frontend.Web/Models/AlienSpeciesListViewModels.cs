@@ -1,4 +1,5 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
 using System.Collections.Generic;
 using X.PagedList;
@@ -91,17 +92,13 @@ namespace Assessments.Frontend.Web.Models
 
     public class AlienSpeciesStatistics2023
     {
-        // These are temporary and taken from redlist2021. Alien species might need other statistics
-        public Dictionary<string, int> Categories { get; set; }
+        public class RiskCategory
+        {
+            public AlienSpeciesAssessment2023Category Category { get; set; }
 
-        public Dictionary<string, int> Criteria { get; set; }
+            public int Count { get; set; }
+        }
 
-        public Dictionary<string, int> Habitat { get; set; }
-
-        public Dictionary<string, int> ImpactFactors { get; set; }
-
-        public Dictionary<string, int> Region { get; set; }
-
-        public List<string> RegionNames { get; set; }
+        public List<RiskCategory> Riskcategories { get; set; }
     }
 }

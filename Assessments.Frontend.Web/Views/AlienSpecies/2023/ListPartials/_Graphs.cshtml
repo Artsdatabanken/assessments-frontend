@@ -1,120 +1,48 @@
 @model AlienSpeciesListViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
-
+@using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
+    var categories = Model.Statistics.Riskcategories;
+    var largestCategoryCount = categories.Select(x => x.Count).Max();
 
-    // Calculating max and total values for use in graph drawing
-    int category_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category
-    int category_max = Model.Statistics.Categories.Values.DefaultIfEmpty(0).Max();
-    int criteria_total = Model.Statistics.Criteria.Sum(x => x.Value); // #of assesments with a criteria
-    int criteria_max = Model.Statistics.Criteria.Values.DefaultIfEmpty(0).Max();
-    int habitat_total = Model.Statistics.Habitat.Sum(x => x.Value); // #of assesments with a criteria
-    int habitat_max = Model.Statistics.Habitat.Values.DefaultIfEmpty(0).Max();
-
-    int region_total = Model.Statistics.Region.Sum(x => x.Value); // #of assesments with a criteria
-    int region_max = Model.Statistics.Region.Values.DefaultIfEmpty(0).Max();
-
-    int impact_total = Model.Statistics.ImpactFactors.Sum(x => x.Value); // #of assesments with a criteria
-    int impact_max = Model.Statistics.ImpactFactors.Values.DefaultIfEmpty(0).Max();
-
-
-
-    // OVERALL STATS - TODO. WHile waiting - use category, as it should be consistent with nr of assesments
-    int total = category_total;
-
-
-    // Obtaining the proper order and amount of items in case there are things with 0 or null values
-    Dictionary<string, object> category = ViewBag.categories.ToObject<Dictionary<string, object>>();
-
-    Dictionary<string, object> criteria = ViewBag.kriterier.ToObject<Dictionary<string, object>>();
-
-    Dictionary<string, Dictionary<string, object>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, object>>>();
-
-
-
-
-
-}
-
-@functions{
-    string percentage(float max, float now)
+    int GetHeight(int max, int currect)
     {
-        if (max == 0)
-        {
-            return "0";
-        }
-        string calculated = (now / max * 100).ToString("0.00");
-
-        calculated = calculated.Replace(",", ".");
-        return calculated + "%";
-    }
-}
-
-@functions{
-    string average(float utvalg, float verdi)
-    {
-        if (utvalg == 0)
-        {
-            return "0";
-        }
-        string calculated = (verdi / utvalg).ToString("0.00");
-
-        calculated = calculated.Replace(",", ".");
-        return calculated;
-    }
-}
-
-@functions{
-    int getNumber(string dictkey, Dictionary<string, int> chosenlist)
-    {
-
-        if (chosenlist.ContainsKey(dictkey))
-        {
-            return chosenlist[dictkey];
-        }
-
-        return 0;
-
+        return currect * 100 / max;
     }
 
-
-    // DESCRIPTION
-    void categoryDescription(string category)
+    int GetTotal()
     {
-        if (!string.IsNullOrEmpty(category) && category.Length > 0)
-        {
-            if (@ViewBag.categories.ContainsKey(category))
-            {
-                string final_string = @ViewBag.categories[category]["presentationstring"];
-                //final_string = final_string.ToLower();
-                // No idea why hyphens won't hyphenate one specific word only... 
-                <span class="stat_subtitle">@final_string</span>
-                }
-            }
-        }
-}
+        return Model.Statistics.Riskcategories.Sum(x => x.Count);
+    }
 
+    int GetHighRisk()
+    {
+        return Model.Statistics.Riskcategories.Where(x => x.Category == AlienSpeciesAssessment2023Category.HI || x.Category == AlienSpeciesAssessment2023Category.SE).Sum(x => x.Count);
+    }
+}
 
 <div class="page_section graphs">
-    <h3>@ViewBag.glossary["statistics"]["category"]["title"]</h3>
-    <div class="graph color_graph">
-        @foreach (var key in category.Keys)
+    <h3>Antall vurderinger per risikokategori</h3>
+    <ul class="graph color_graph">
+        @foreach (var key in categories)
         {
-            <div class="statelement">
+            <li class="statelement">
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key, @Model.Statistics.Categories))">
-                        <span class="percent">@getNumber(@key, @Model.Statistics.Categories)</span>
+                    <div class="heightbar_indicator @key.Category.ToString()" style="height: @(GetHeight(largestCategoryCount, key.Count))%">
+                        <span class="percent">@key.Count.ToString("N0")</span>
                     </div>
                 </div>
                 <span class="statbox">
-                    @key 
+                    @key.Category
                 </span>
-                @{categoryDescription(key);}
-            </div>
+                @key.Category.DisplayName()
+            </li>
         }
-    </div>
-    <p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
+    </ul>
+    <p>@Constants.figureCategoryStart <i>@(Model.Statistics.Riskcategories.First().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.Riskcategories.First().Category.ToString()) til <i>@(Model.Statistics.Riskcategories.Last().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.Riskcategories.Last().Category.ToString()). Utvalget ditt omfatter @GetTotal().ToString("N0") vurderinger, hvorav @GetHighRisk().ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
+
+    @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>
     <div class="graph greyscale">
         @foreach (string key in criteria.Keys)
@@ -184,6 +112,5 @@
                 </div>
             </div>
         }
-    </div>
-    <p>@ViewBag.glossary["statistics"]["impactfactor"]["description"]</p>
+    </div>*@
 </div>

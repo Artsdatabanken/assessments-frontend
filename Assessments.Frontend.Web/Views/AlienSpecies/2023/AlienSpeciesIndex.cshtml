@@ -26,29 +26,15 @@
     };
 
     ViewData["Title"] = "Fremmedartslista 2023";
+
+    List<AlienSpeciesDetailViewModel> koko = new List<AlienSpeciesDetailViewModel>();
+    foreach(var el in Model.Results)
+    {
+        koko.Add(new AlienSpeciesDetailViewModel(el));
+    }
 }
 
-<div class="pagecontainer">
-    <partial name="/Views/Shared/_PageMenu.cshtml" model="@pageMenuViewModel" />
-
-    <div class="content-placer bigmid">
-        <div class="mid-content">
-            <div class="title_with_image">
-                <div class="title_with_header">
-                    <partial name="/Views/Shared/_Header.cshtml" model="@pageHeaderViewModel" />
-                </div>
-                <div class="title_with_ingress">
-                    @*<img src="https://design.artsdatabanken.no/list-icons/FA.png" alt="Bilde av en mandarinand" />*@
-                    <partial name="/Views/Shared/_Introduction.cshtml" model="@introductionViewModel" />
-                </div>
-            </div>
-
-            <form id="search_and_filter_form" aps-action="" method="get">
-                <partial name="/Views/AlienSpecies/2023/ListPartials/_Search.cshtml" />
-                <partial name="/Views/AlienSpecies/2023/ListPartials/_Filters.cshtml" />
-            </form>
-
-            <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel"/>
-        </div>
-    </div>
-</div>
+@foreach(var res in koko)
+{
+    <partial name="/Views/AlienSpecies/2023/AlienSpeciesDetail.cshtml" model="res"/>
+}

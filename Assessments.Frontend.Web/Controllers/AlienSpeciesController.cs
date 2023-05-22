@@ -42,7 +42,7 @@ namespace Assessments.Frontend.Web.Controllers
             if (export)
                 return GetExport(query);
 
-            viewModel.Results = query.ToPagedList(page ?? 1, DefaultPageSize);
+            viewModel.Results = query.ToPagedList(page ?? 1, 3000);
 
             return View("2023/AlienSpeciesIndex", viewModel);
         }

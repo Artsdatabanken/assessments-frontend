@@ -11,6 +11,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     {
         public static IQueryable<AlienSpeciesAssessment2023> ApplyParameters(AlienSpeciesListParameters parameters, IQueryable<AlienSpeciesAssessment2023> query)
         {
+            query = query.Where(x => x.Category != AlienSpeciesAssessment2023Category.NR);
+
             if (!string.IsNullOrEmpty(parameters.Name))
                 query = ApplySearch(parameters.Name, query);
 

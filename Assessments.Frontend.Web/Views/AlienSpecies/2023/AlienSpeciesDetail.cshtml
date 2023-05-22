@@ -186,16 +186,16 @@
     };
 }
 
-<partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Breadcrumb.cshtml" />
+@*<partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Breadcrumb.cshtml" />*@
 
 <div class="pagecontainer">
-    <partial name="/Views/Shared/_PageMenu.cshtml" model="Model.PageMenuViewModel" />
+    @*<partial name="/Views/Shared/_PageMenu.cshtml" model="Model.PageMenuViewModel" />*@
 
-    <div class="content-placer bigmid">
+    <div class="content-placer ">
         <div class="mid-content with_sidebar">
             <partial name="/Views/Shared/_AssessmentPageHeader.cshtml" model="assessmentPageHeaderViewModel" />
             <div class="mobile_padding">
-                <div id="tableOfContentsOuter">
+                @*<div id="tableOfContentsOuter">
                     <input type="checkbox" id="showTableOfContentList" class="button table-of-contents-small-screen-input" />
                     <label id="tableOfContentsLabel" for="showTableOfContentList" aria-label="Innholdsfortegnelse" class="button table-of-contents-small-screen-button table-of-contents-small-screen-button-hide">
                         <span class="material-icons">
@@ -206,13 +206,13 @@
                     <div id="tableOfContentsSmallScreen" onclick="closeTableOfContents(event)">
                         <partial name="/Views/Shared/_TableOfContents.cshtml" model="Model.PageMenuViewModel.TableOfContentsViewModel" />
                     </div>
-                </div>
+                </div>*@
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 <div is-visible="!isNr && !isEvaluatedAtAnotherLevel">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>
                 </div>
-                <div class="page_section" is-visible="showExpertStatement">
+                @*<div class="page_section" is-visible="showExpertStatement">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ExpertStatement.cshtml" model="Model.ExpertStatementViewModel" />
                 </div>
                 <div class="page-section" is-visible="showAssessmentReasoning">
@@ -250,7 +250,7 @@
                 </div>
                 <div class="page-section" is-visible="showCitationForAssessment">
                     <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
-                </div>
+                </div>*@
             </div>
         </div>
         <div class="side mobile_padding">

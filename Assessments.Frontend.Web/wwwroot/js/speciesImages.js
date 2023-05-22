@@ -6,13 +6,16 @@ const renderSpeciesImage = (targetElement, element) => {
     const datasetSrc = element.dataset.src;
     element.style = "";
     element.alt = "Bilde av arten";
-    element.src = `${datasetSrc}?mode=320x320`;
+    element.src = `${datasetSrc}?mode=460x460`;
     element.dataset.src = '';
     element.style.height = 'auto';
-    element.style.width = '200px';
+    element.style.width = 'auto';
+    //element.style['max-width'] = '200px';
+    element.style['max-height'] = '350px';
     element.style.padding = '0';
+    //element.style['margin-left'] = '10px';
     const elementClone = element.parentElement.parentElement.cloneNode(true);
-    elementClone.style['margin-bottom'] = '20px';
+    //elementClone.style['margin-bottom'] = '20px';
     targetElement.appendChild(elementClone);
 }
 
@@ -37,7 +40,7 @@ const removeTaxonLink = (imageText) => {
 
 const renderHeader = (element) => {
     const header = document.createElement('h3');
-    header.innerText = 'Bilder av arten';
+    header.innerText = 'Bilde av arten';
     element.appendChild(header);
 }
 
@@ -71,8 +74,8 @@ const getAssessmentImages = () => {
                         renderHeader(targetElement);
                     }
 
-                    if (index > 3) {
-                        addLinkToTaxonPage(targetElement, url);
+                    if (index > 0) {
+                        //addLinkToTaxonPage(targetElement, url);
                         return;
                     }
 

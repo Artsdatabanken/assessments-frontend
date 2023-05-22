@@ -3,23 +3,23 @@
     string urlSafeScientificName = Model.ScientificName.Replace(" ", "%20");
     string taxon_url = "https://artsdatabanken.no/taxon/" + urlSafeScientificName + "/" + Model.ScientificNameId;
 }
-
 <div class="sidebar_image_info">
-    <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden"/>
-    <br />
+    @*<img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden"/>
+    <br />*@
     <a href="@taxon_url" class="link-styled taxon-page-link">
         Til @Helpers.FixSpeciesLevel("{art}ssiden", Model.TaxonRank)
     </a>
 
-    <div is-visible="@Model.PreviousAssessments.Any()">
-        <hr />
+    <div class="sidebar_image_info-previous">
+        @*<hr />*@
         <partial name="/Views/Shared/_Development.cshtml" />
-        <hr />
-        <partial name="/Views/Shared/_Links.cshtml" />
+        @*<hr />
+        <partial name="/Views/Shared/_Links.cshtml" />*@
     </div>
 
-    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023">
-        <hr/>
+
+    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023" class="alien-species-forskrift sidebar_image_info-regulation">
+        @*<hr/>*@
         <h3>Forskrift om fremmede organismer</h3>
         <div>
             <p>
@@ -31,5 +31,5 @@
             </a>
         </div>
     </div>
-    <div class="@("species-images-" + Model.ScientificNameId)"></div>
+    <div class="species-images @("species-images-" + Model.ScientificNameId)"></div>
 </div>

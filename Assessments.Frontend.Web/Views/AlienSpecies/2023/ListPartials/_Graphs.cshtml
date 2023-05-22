@@ -40,7 +40,7 @@
             </li>
         }
     </ul>
-    <p>@Constants.figureCategoryStart @(Model.Statistics.Riskcategories.First().Category.DisplayName().ToLowerInvariant()) @(Model.Statistics.Riskcategories.First().Category.ToString()) til @(Model.Statistics.Riskcategories.Last().Category.DisplayName().ToLowerInvariant()) @(Model.Statistics.Riskcategories.Last().Category.ToString()). Utvalget ditt omfatter @GetTotal().ToString("N0") vurderinger, hvorav @GetHighRisk().ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
+    <p>@Constants.figureCategoryStart <i>@(Model.Statistics.Riskcategories.First().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.Riskcategories.First().Category.ToString()) til <i>@(Model.Statistics.Riskcategories.Last().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.Riskcategories.Last().Category.ToString()). Utvalget ditt omfatter @GetTotal().ToString("N0") vurderinger, hvorav @GetHighRisk().ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
 
     @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>

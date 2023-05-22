@@ -131,7 +131,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                                 .ThenBy(x => x.PopularName);
                     break;
                 case (true, nameof(SpeciesAssessment2021.Category)):
-                    query = query.OrderBy(x => x.Category, new CategoryComparer());
+                    query = query.OrderBy(x => x.Category, new RedlistCategoryComparer());
                     break;
                 case (true, nameof(SpeciesAssessment2021.SpeciesGroup)):
                     query = query.OrderBy(x => x.SpeciesGroup);
@@ -156,7 +156,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                     query = query
                         .OrderByDescending(x => x.PopularName.ToLower() == name ||
                         x.ScientificName.ToLower() == name)
-                        .ThenBy(x => x.Category, new CategoryComparer());
+                        .ThenBy(x => x.Category, new RedlistCategoryComparer());
                     break;
                 case (false, nameof(SpeciesAssessment2021.SpeciesGroup)):
                     query = query
@@ -369,18 +369,39 @@ namespace Assessments.Frontend.Web.Infrastructure
         }
     }
 
-    public class CategoryComparer : IComparer<string>
+    public class RedlistCategoryComparer : IComparer<string>
     {
         private readonly string[] categories = new string[]
         {
                     "RE", "CR", "EN", "VU", "NT", "DD", "LC", "NA", "NE"
         };
+
         public int Compare(string x, string y)
         {
             if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
                 return 0;
 
             return Array.IndexOf(categories, x[..2]) - Array.IndexOf(categories, y[..2]);
+        }
+    }
+
+    public class AlienSpeciesCategoryComparer : IComparer<string>
+    {
+        private readonly List<string> listOrder = new()
+        {
+            AlienSpeciesAssessment2023Category.NR.ToString(),
+            AlienSpeciesAssessment2023Category.LO.ToString(),
+            AlienSpeciesAssessment2023Category.PH.ToString(),
+            AlienSpeciesAssessment2023Category.HI.ToString(),
+            AlienSpeciesAssessment2023Category.SE.ToString()
+        };
+
+        public int Compare(string x, string y)
+        {
+            if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
+                return 0;
+
+            return listOrder.IndexOf(x) - listOrder.IndexOf(y);
         }
     }
 }

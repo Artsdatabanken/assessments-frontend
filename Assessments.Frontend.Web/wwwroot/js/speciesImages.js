@@ -11,8 +11,8 @@ const renderSpeciesImage = (targetElement, element) => {
     element.dataset.src = '';
     element.style.height = 'auto';
     element.style.width = 'auto';
-    //element.style['max-width'] = '200px';
-    element.style['max-height'] = '350px';
+    //element.style['max-width'] = '400px';
+    element.style['max-height'] = '400px';
     element.style.padding = '0';
     //element.style['margin-left'] = '10px';
     const elementClone = element.parentElement.parentElement.cloneNode(true);
@@ -28,15 +28,17 @@ const updateImageMeta = (imageMeta) => {
         const srcArray = imgElement.src.split('/Content')
         srcArray[0] = adbLink;
         imgElement.src = srcArray.join('/Content');
-        imgElement.style.width = '25px';
+        imgElement.style.width = '30px';
         imgElement.style.background = 'transparent';
         imgElement.style['vertical-align'] = 'text-bottom';
     });
 }
 
 const removeTaxonLink = (imageText) => {
-    imageText[2].remove();
-    imageText[1].remove();
+    if (imageText.length > 1) {
+        imageText[2].remove();
+        imageText[1].remove();
+    }
 }
 
 const renderHeader = (element) => {
@@ -58,7 +60,7 @@ const getAssessmentImages = () => {
         return el.href;
     });
 
-    Array.prototype.forEach.call(taxonPagesUrls, (url) => {
+    Array.prototype.forEach.call(taxonPagesUrls, (url, ind) => {
         fetch(url)
             .then((res) => {
                 return res.text();
@@ -71,9 +73,9 @@ const getAssessmentImages = () => {
                 const targetElement = document.getElementsByClassName(targetClassName)[0];
 
                 Array.prototype.forEach.call(images, (el, index) => {
-                    if (index == 0) {
-                        renderHeader(targetElement);
-                    }
+                    //if (index == 0) {
+                    //    renderHeader(targetElement);
+                    //}
 
                     if (index > 0) {
                         //addLinkToTaxonPage(targetElement, url);

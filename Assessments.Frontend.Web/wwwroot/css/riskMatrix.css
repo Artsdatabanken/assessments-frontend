@@ -9,9 +9,12 @@
     display: inline-grid;
     grid-template-columns: 20px 1fr;
     margin:0;
-    overflow-x:auto;
+    /*overflow-x:auto;*/
     max-width:100%;
+}
 
+.matrix-bottom-text {
+    margin-top: 15px;
 }
 
 .risk-matrix {
@@ -19,23 +22,39 @@
     flex-direction: column;
 }
 
+li.risk-level > span {
+    font-size: 22px !important;
+}
+
 .risk-matrix ul {
     display: inline-grid;
-    grid-template-columns: repeat(5, 60px);
+    grid-template-columns: repeat(5, 70px);
     list-style: none;
+}
+
+.rotate30 {
+    transform: rotate(-15deg);
+}
+
+.risk-level-matrix .legend {
+    padding-left: 66px;
+}
+
+.risk-level-matrix .legend.rotate-legend {
+    padding-top: 66px;
 }
 
 
 /* element containers */
 .risk-matrix li {
-    height: 60px;
-    line-height: 60px;
+    height: 70px;
+    line-height: 70px;
     text-align: center;
 }
 
 .risk-level {
     background: black;
-    border: 1px solid black;
+    border: 2px solid black;
     border-bottom-width: 0px;
 }
 
@@ -44,7 +63,7 @@
 }
 
 .bottom-border .risk-level {
-    border-width: 1px
+    border-width: 2px
 }
 
 .risk-level span {
@@ -61,7 +80,7 @@
 .risk-matrix li.uncertain span {
     border: 2px solid white;
     font-size: 20px;
-    line-height: 54px;
+    line-height: 65px;
 }
 
 .risk-matrix li.uncertain span {
@@ -134,7 +153,7 @@
 @media only screen and (max-width: 355px) {
 
     .risk-matrix ul {
-        grid-template-columns: 60px repeat(4, 40px);
+        grid-template-columns: 70px repeat(4, 40px);
     }
 
     .risk-matrix li {
@@ -151,7 +170,7 @@
     .bottom-legend .description {
         writing-mode: vertical-rl;
         transform: scale(-1, -1);
-        height: 80px;
+        height: 70px;
         text-align: right
     }
     

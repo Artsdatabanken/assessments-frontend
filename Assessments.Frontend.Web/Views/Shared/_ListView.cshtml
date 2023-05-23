@@ -17,7 +17,7 @@
     {
         @foreach (var item in Model.Results)
         {
-            var showIsDoorKnocker = @Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 && item.IsDoorKnocker;
+            var showIsDoorKnockerOrHasEffectWithoutReproduction = @Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 && (item.IsDoorKnocker || item.HasEffectWithoutReproduction);
 
             <li class="list @item.SpeciesGroup.ToLower() @item.EvaluationContext @( Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 ? doorknockerClass : string.Empty )">
                 <a asp-action="Detail" asp-route-id="@item.Id">
@@ -39,7 +39,7 @@
                     </span>
 
                     <span is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023" class="mobile_hide list_doorknocker">
-                        <span is-visible="showIsDoorKnocker">
+                        <span is-visible="showIsDoorKnockerOrHasEffectWithoutReproduction">
                             <span class="material-symbols-outlined">
                                 door_open
                             </span>

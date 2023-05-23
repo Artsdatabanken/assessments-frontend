@@ -41,6 +41,11 @@ namespace Assessments.Frontend.Web.Controllers
 
             if (export)
                 return GetExport(query);
+            if (viewModel.View == "stat")
+            {
+                var statistics = new Statistics(query);
+                viewModel.Statistics = statistics.GetStatistics();
+            }
 
             viewModel.Results = query.ToPagedList(page ?? 1, DefaultPageSize);
 

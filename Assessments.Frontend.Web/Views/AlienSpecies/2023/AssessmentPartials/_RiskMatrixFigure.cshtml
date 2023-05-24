@@ -1,0 +1,54 @@
+﻿@model AlienSpeciesListViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums
+@using System;
+
+<h3>Antall vurderinger for hver kombinasjon av invasjonspotensial og økologisk effekt</h3>
+
+<div class="risk-matrix-container">
+    <div class="risk-level-matrix">
+        <span class="legend rotate-legend">@Constants.yAxisLabel<span class="non-css-only"> (y-aksen)</span></span>
+        <div class="risk-matrix">
+            <b class="non-css-only"><br />y = 4</b>
+            <ul>                    
+                <li class="description"><span class="non-css-only">@Constants.yAxisLabel: </span><span>4</span>@AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Great.DisplayName().ToLowerInvariant()</li>
+                <li class="risk-level ph"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 1: kategori </span><div>PH </div><div>@Model.Statistics.RiskMatrix[0][3]</div></li>
+                <li class="risk-level hi"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 2: kategori </span><div>HI</div><div>@Model.Statistics.RiskMatrix[1][3]</div></li>
+                <li class="risk-level se"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 3: kategori </span><div>SE</div><div>@Model.Statistics.RiskMatrix[2][3]</div></li>
+                <li class="risk-level se"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 4: kategori </span><div>SE</div><div>@Model.Statistics.RiskMatrix[3][3]</div></li>
+            </ul>
+            <b class="non-css-only"><br />y = 3</b>
+            <ul>
+                <li class="description"><span class="non-css-only">@Constants.yAxisLabel: </span><span>3</span>@AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Medium.DisplayName().ToLowerInvariant()</li>
+                <li class="risk-level lo"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 1: kategori </span><div>LO</div><div>@Model.Statistics.RiskMatrix[0][2]</div></li>
+                <li class="risk-level hi"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 2: kategori </span><div>HI</div><div>@Model.Statistics.RiskMatrix[1][2]</div></li>
+                <li class="risk-level hi"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 3: kategori </span><div>HI</div><div>@Model.Statistics.RiskMatrix[2][2]</div></li>
+                <li class="risk-level se"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 4: kategori </span><div>SE</div><div>@Model.Statistics.RiskMatrix[3][2]</div></li>
+            </ul>
+            <b class="non-css-only"><br />y = 2</b>
+            <ul>
+                <li class="description"><span class="non-css-only">@Constants.yAxisLabel: </span><span>2</span>@AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.Small.DisplayName().ToLowerInvariant()</li>
+                <li class="risk-level lo"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 1: kategori </span><div>LO</div><div>@Model.Statistics.RiskMatrix[0][1]</div></li>
+                <li class="risk-level lo"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 2: kategori </span><div>LO</div><div>@Model.Statistics.RiskMatrix[1][1]</div></li>
+                <li class="risk-level lo"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 3: kategori </span><div>LO</div><div>@Model.Statistics.RiskMatrix[2][1]</div></li>
+                <li class="risk-level hi"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 4: kategori </span><div>HI</div><div>@Model.Statistics.RiskMatrix[3][1]</div></li>
+            </ul>
+            <b class="non-css-only"><br />y = 1</b>
+            <ul class="bottom-border">
+                <li class="description"><span class="non-css-only">@Constants.yAxisLabel: </span><span>1</span>@AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect.NotKnown.DisplayName().ToLowerInvariant()</li>
+                <li class="risk-level nk"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 1: kategori </span><div>NK</div><div>@Model.Statistics.RiskMatrix[0][0]</div></li>
+                <li class="risk-level lo"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 2: kategori </span><div>LO</div><div>@Model.Statistics.RiskMatrix[1][0]</div></li>
+                <li class="risk-level lo"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 3: kategori </span><div>LO</div><div>@Model.Statistics.RiskMatrix[2][0]</div></li>
+                <li class="risk-level ph"><span class="non-css-only">For @Constants.xAxisLabel (x-aksen) = 4: kategori </span><div>PH</div><div>@Model.Statistics.RiskMatrix[3][0]</div></li>
+            </ul>
+            <b class="non-css-only"><br />Tallforklaring for x-aksen:</b>
+            <ul class="bottom-legend">
+                <li></li>
+                <li class="description"><div>1</div><div>@AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Small.DisplayName().ToLowerInvariant()</div></li>
+                <li class="description"><div>2</div><div>@AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Limited.DisplayName().ToLowerInvariant()</div></li>
+                <li class="description"><div>3</div><div>@AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Moderate.DisplayName().ToLowerInvariant()</div></li>
+                <li class="description"><div>4</div><div>@AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential.Great.DisplayName().ToLowerInvariant()</div></li>
+            </ul>
+            <span class="legend">@Constants.xAxisLabel</span>
+        </div>
+    </div>
+</div>

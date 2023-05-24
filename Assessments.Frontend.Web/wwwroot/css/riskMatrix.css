@@ -28,9 +28,12 @@
 
 /* element containers */
 .risk-matrix li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 60px;
-    line-height: 60px;
-    text-align: center;
+    width: 60px;
 }
 
 .risk-level {
@@ -46,25 +49,27 @@
 .bottom-border .risk-level {
     border-width: 1px
 }
-
-.risk-level span {
+/*
+.risk-level > span,
+.risk-level > div {
     display: block;
     height: 100%;
-}
+    width: 100%;
+}*/
 
-.risk-matrix li.active span {
+.risk-matrix li.active {
     font-weight: bold;
     text-decoration: underline;
 }
 
-.risk-matrix li.active span,
-.risk-matrix li.uncertain span {
+.risk-matrix li.active,
+.risk-matrix li.uncertain {
     border: 2px solid white;
     font-size: 20px;
     line-height: 54px;
 }
 
-.risk-matrix li.uncertain span {
+.risk-matrix li.uncertain {
     border-style: dashed;
 }
 
@@ -88,33 +93,31 @@
     text-align: center
 }
 
-
 /* colours */
-.risk-matrix .nk span {
+.risk-matrix .nk {
     background: #94A360;
     color: #201f1f
 }
 
-.risk-matrix .lo span {
+.risk-matrix .lo {
     background: #5C9A94;
     color: #201f1f
 }
 
-.risk-matrix .ph span {
+.risk-matrix .ph {
     background: #296473;
     color: white;
 }
 
-.risk-matrix .hi span {
+.risk-matrix .hi {
     background: #2E4073;
     color: white;
 }
 
-.risk-matrix .se span {
+.risk-matrix .se {
     background: #4F1052;
     color: white;
 }
-
 
 .risk-matrix-container {
     width: 100%;
@@ -130,9 +133,7 @@
     padding:20px 0;
 }
 
-
 @media only screen and (max-width: 355px) {
-
     .risk-matrix ul {
         grid-template-columns: 60px repeat(4, 40px);
     }

@@ -99,6 +99,7 @@ namespace Assessments.Frontend.Web.Models
             public int Count { get; set; }
         }
 
-        public List<RiskCategory> Riskcategories { get; set; }
+        public List<RiskCategory> RiskCategories { get; set; }
+        public List<List<int>> RiskMatrix { get; set; }
     }
 }

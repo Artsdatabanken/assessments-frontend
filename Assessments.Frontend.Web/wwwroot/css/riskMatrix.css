@@ -46,8 +46,12 @@
     border-right: none
 }
 
-.risk-matrix-figure .risk-level {
-    font-size: 16px;
+div.risk-level-number {
+    font-size: 18px;
+}
+
+div.risk-level-category {
+    font-size: 14px;
 }
 
 .bottom-border .risk-level div {

@@ -36,7 +36,6 @@ if (filters) {
         "show_swnat",
         "show_swspr",
         "show_regionallyalien",
-        "show_rar",
         "show_nta",
         "show_ntn",
     ];

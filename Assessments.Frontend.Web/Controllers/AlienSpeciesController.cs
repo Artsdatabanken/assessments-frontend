@@ -63,10 +63,16 @@ namespace Assessments.Frontend.Web.Controllers
                 return NotFound();
 
             var expertGroupMembers = await DataRepository.GetData<AlienSpeciesAssessment2023ExpertGroupMember>(DataFilenames.AlienSpeciesExpertCommitteeMembers);
+            
+            // members by assessment id (if available)
+            var assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.Id == assessment.Id).OrderBy(x => x.CitationOrder).ToList();
 
-            var assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
-                .OrderBy(x => x.ExpertGroup)
-                .ThenBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToList();
+            // members by expertgroup
+            if (!assessmentExpertGroupMembers.Any())
+            {
+                assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
+                    .OrderBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToList();
+            }
 
             var viewModel = new AlienSpeciesDetailViewModel(assessment)
             {

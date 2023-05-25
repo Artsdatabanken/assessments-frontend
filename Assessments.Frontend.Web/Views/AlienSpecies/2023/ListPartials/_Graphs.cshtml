@@ -8,28 +8,14 @@
 
 <div class="page_section graphs">
     <h3>Antall vurderinger per risikokategori</h3>
-    <ul class="graph color_graph">
-        @foreach (var key in categories)
-        {
-            <li class="statelement">
-                <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key.NameShort" style="height: @(Helpers.GetBarChartHeight(Helpers.GetLargestCount(categories), key.Count))%">
-                        <span class="percent">@key.Count.ToString("N0")</span>
-                    </div>
-                </div>
-                <span class="statbox">
-                    @key.NameShort
-                </span>
-                @key.Name
-            </li>
-        }
-    </ul>
+    <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartVertical.cshtml" model="Model.Statistics.Riskcategories" />
     <p>@Constants.figureCategoryStart <i>@(categories.First().Name.ToLowerInvariant())</i> @(categories.First().Name) til <i>@(categories.Last().Name.ToLowerInvariant())</i> @(categories.Last().Name). Utvalget ditt omfatter @Helpers.GetBarChartTotal(categories).ToString("N0") vurderinger, hvorav @Helpers.GetBarChartHighRisk(categories).ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
 
     <hr/>
 
+    <h3>Antall vurderinger per artsgruppe</h3>
     <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpeciesGroups"/>
-
+    <p>Antall vurderinger i hver artsgruppe. Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.BarChartDatas) vurderinger.</p>
 
     @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>

@@ -91,7 +91,9 @@ namespace Assessments.Frontend.Web.Models
 
     public class AlienSpeciesStatistics2023
     {
-        public BarChart Riskcategories { get; set; }
+        public BarChart RiskCategories { get; set; }
+
+        public List<List<int>> RiskMatrix { get; set; }
 
         public BarChart SpeciesGroups { get; set; }
     }

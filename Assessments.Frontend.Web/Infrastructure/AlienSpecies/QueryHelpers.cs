@@ -358,8 +358,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var statistics = new AlienSpeciesStatistics2023();
 
-            statistics.Riskcategories = this.GetRiskCategories();
             statistics.SpeciesGroups = this.GetSpeciesGroups();
+            statistics.RiskCategories = this.GetRiskCategories();
+            statistics.RiskMatrix = this.GetRiskMatrixValues();
 
             return statistics;
         }
@@ -469,6 +470,24 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             speciesBarChart.BarChartDatas = speciesBarChart.BarChartDatas.OrderByDescending(x => x.Count).DistinctBy(x => x.Name).ToList();
 
             return speciesBarChart;
+        }
+
+        public List<List<int>> GetRiskMatrixValues()
+        {
+            var riskMatrix = new List<List<int>>()
+            {
+                new List<int>() {0, 0, 0, 0},
+                new List<int>() {0, 0, 0, 0},
+                new List<int>() {0, 0, 0, 0},
+                new List<int>() {0, 0, 0, 0}
+            };
+
+            foreach (var assessment in _query)
+            {
+                riskMatrix[(int)assessment.ScoreInvasionPotential - 1][(int)assessment.ScoreEcologicalEffect - 1] += 1;
+            }
+
+            return riskMatrix;
         }
     }
 }

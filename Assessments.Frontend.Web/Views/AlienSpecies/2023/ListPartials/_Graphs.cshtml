@@ -3,22 +3,26 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-    var categories = Model.Statistics.Riskcategories;
+    var categories = Model.Statistics.RiskCategories;
     var largestCategoryCount = categories.Select(x => x.Count).Max();
 
     int GetHeight(int max, int currect)
     {
-        return currect * 100 / max;
+        if (max > 0)
+        {
+            return currect * 100 / max;
+        }
+        return 0;
     }
 
     int GetTotal()
     {
-        return Model.Statistics.Riskcategories.Sum(x => x.Count);
+        return Model.Statistics.RiskCategories.Sum(x => x.Count);
     }
 
     int GetHighRisk()
     {
-        return Model.Statistics.Riskcategories.Where(x => x.Category == AlienSpeciesAssessment2023Category.HI || x.Category == AlienSpeciesAssessment2023Category.SE).Sum(x => x.Count);
+        return Model.Statistics.RiskCategories.Where(x => x.Category == AlienSpeciesAssessment2023Category.HI || x.Category == AlienSpeciesAssessment2023Category.SE).Sum(x => x.Count);
     }
 }
 
@@ -40,7 +44,13 @@
             </li>
         }
     </ul>
-    <p>@Constants.figureCategoryStart <i>@(Model.Statistics.Riskcategories.First().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.Riskcategories.First().Category.ToString()) til <i>@(Model.Statistics.Riskcategories.Last().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.Riskcategories.Last().Category.ToString()). Utvalget ditt omfatter @GetTotal().ToString("N0") vurderinger, hvorav @GetHighRisk().ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
+    <p>@Constants.figureCategoryStart <i>@(Model.Statistics.RiskCategories.First().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.RiskCategories.First().Category.ToString()) til <i>@(Model.Statistics.RiskCategories.Last().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.RiskCategories.Last().Category.ToString()). Utvalget ditt omfatter @GetTotal().ToString("N0") vurderinger, hvorav @GetHighRisk().ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
+
+    <hr/>
+
+    <h3>Antall vurderinger for hver kombinasjon av invasjonspotensial og økologisk effekt</h3>
+    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrixFigure.cshtml" />
+    <p>@Html.Raw(Constants.riskMatrixFigureText) Utvalget ditt omfatter @GetTotal() vurderinger.</p>
 
     @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>

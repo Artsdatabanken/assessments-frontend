@@ -9,6 +9,7 @@
         CategoryShort = x.Category.ToString(),
         Id = x.Id,
         IsDoorKnocker = x.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker,
+        HasEffectWithoutReproduction = x.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction,
         ScientificNameFormatted = x.ScientificName.ScientificNameFormatted,
         SpeciesGroup = x.SpeciesGroup,
         SpeciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, x.SpeciesGroup)?.ImageUrl,

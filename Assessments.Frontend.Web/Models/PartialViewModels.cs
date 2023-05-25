@@ -361,6 +361,8 @@ namespace Assessments.Frontend.Web.Models
 
             public string EvaluationContext { get; set; }
 
+            public bool HasEffectWithoutReproduction { get; set; } = false;
+
             public string Category { get; set; }
 
             public string CategoryShort { get; set; }

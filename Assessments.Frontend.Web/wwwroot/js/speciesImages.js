@@ -68,22 +68,23 @@ const getAssessmentImages = () => {
                 const targetClassName = 'species-images-' + url.split('/').reverse()[0];
                 const targetElement = document.getElementsByClassName(targetClassName)[0];
 
-                Array.prototype.forEach.call(images, (el, index) => {
-                    if (index == 0) {
+                for (let i = 0; i < images.length; i++) {
+                    if (i == 0) {
                         renderHeader(targetElement);
                     }
 
-                    if (index > 3) {
+                    if (i > 3) {
                         addLinkToTaxonPage(targetElement, url);
                         return;
                     }
 
-                    const imageText = el.parentElement.parentElement.children[1].children;
+
+                    const imageText = images[i].parentElement.parentElement.children[1].children;
                     const imageFirstElements = imageText[0].children[0].children;
                     removeTaxonLink(imageText);
                     updateImageMeta(imageFirstElements);
-                    renderSpeciesImage(targetElement, el);
-                });
+                    renderSpeciesImage(targetElement, images[i]);
+                }
             })
             .catch(() => {
                 return;

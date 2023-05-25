@@ -383,7 +383,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             var distinctSpeciesGroups = new List<AlienSpeciesAssessment2023SpeciesGroups>((IEnumerable<AlienSpeciesAssessment2023SpeciesGroups>)Enum.GetValues(typeof(AlienSpeciesAssessment2023SpeciesGroups)));
             return new BarChart()
             {
-                BarChartDatas = distinctSpeciesGroups.Select(x => new BarChart.BarChartData
+                BarChartDatas = distinctSpeciesGroups.Where(x => x != AlienSpeciesAssessment2023SpeciesGroups.Insecta && x != AlienSpeciesAssessment2023SpeciesGroups.Crustacea).Select(x => new BarChart.BarChartData
                 {
                     Name = x.DisplayName(),
                     Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()

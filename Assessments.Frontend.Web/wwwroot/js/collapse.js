@@ -21,20 +21,20 @@ const hideClassName = 'hide-element';
 const collapsibleClassName = 'collapsible';
 
 const toggleCollapsible = buttonElement => {
-    const mainElement = buttonElement.parentNode.parentNode;
-    const collapsibleContentElement = mainElement.children[1];
-    const isCollapsed = collapsibleContentElement.classList.contains(hideClassName);
-    const expandLessIcon = buttonElement.children[0];
-    const expandMoreIcon = buttonElement.children[1];
+    const mainElement = buttonElement?.parentNode?.parentNode;
+    const collapsibleContentElement = mainElement?.children[1];
+    const isCollapsed = collapsibleContentElement?.classList.contains(hideClassName);
+    const expandLessIcon = buttonElement?.children[0];
+    const expandMoreIcon = buttonElement?.children[1];
 
     if (isCollapsed) {
         collapsibleContentElement.classList.remove(hideClassName);
         expandLessIcon.classList.remove(hideClassName);
         expandMoreIcon.classList.add(hideClassName);
     } else {
-        collapsibleContentElement.classList.add(hideClassName);
-        expandLessIcon.classList.add(hideClassName);
-        expandMoreIcon.classList.remove(hideClassName);
+        collapsibleContentElement?.classList.add(hideClassName);
+        expandLessIcon?.classList.add(hideClassName);
+        expandMoreIcon?.classList.remove(hideClassName);
     }
 }
 
@@ -42,7 +42,7 @@ const initialCollapse = () => {
     const collapsibleMainElements = document.getElementsByClassName(collapsibleClassName);
     Array.prototype.forEach.call(collapsibleMainElements, element => {
         const collapsibleContent = element.children[1];
-        collapsibleContent.classList.add(hideClassName);
+        collapsibleContent?.classList.add(hideClassName);
     });
 }
 
@@ -50,7 +50,7 @@ const revealToggleCollapsibleButtons = () => {
     const collapsibleMainElements = document.getElementsByClassName(collapsibleClassName);
     Array.prototype.forEach.call(collapsibleMainElements, element => {
         const buttonElement = element.children[0].children[1];
-        buttonElement.classList.remove(hideClassName);
+        buttonElement?.classList.remove(hideClassName);
         toggleCollapsible(buttonElement);
     });
 }

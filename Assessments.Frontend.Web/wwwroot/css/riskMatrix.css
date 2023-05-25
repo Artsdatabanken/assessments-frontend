@@ -143,6 +143,10 @@ div.risk-level-category {
     gap:20px;
 }
 
+.risk-matrix-figure {
+    margin-bottom: 20px;
+}
+
 .risk-matrix-container .flex-me {
     flex:1;
     min-width:50%;

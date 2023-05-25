@@ -48,8 +48,9 @@
 
     <hr/>
 
+    <h3>Antall vurderinger for hver kombinasjon av invasjonspotensial og økologisk effekt</h3>
     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrixFigure.cshtml" />
-
+    <p>@Constants.riskMatrixFigureText Utvalget ditt omfatter @GetTotal() vurderinger.</p>
 
     @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>

@@ -472,7 +472,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return speciesBarChart;
         }
 
-        public List<List<int>> GetRiskMatrixValues()
+        private List<List<int>> GetRiskMatrixValues()
         {
             var riskMatrix = new List<List<int>>()
             {
@@ -488,6 +488,37 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return riskMatrix;
+        }
+
+        private BarChart GetDecisiveCriteria()
+        {
+            var decisiveCriteria = new List<AlienSpeciesAssessment2023CriteriaLetter>((IEnumerable<AlienSpeciesAssessment2023CriteriaLetter>)Enum.GetValues(typeof(AlienSpeciesAssessment2023CriteriaLetter)));
+            var abDecisiveCriteria = decisiveCriteria.Where(x => x == AlienSpeciesAssessment2023CriteriaLetter.A || x == AlienSpeciesAssessment2023CriteriaLetter.B);
+            var AxBText = "A×B – artens levetid i Norge × ekspansjonshastighet";
+
+            var AxB = abDecisiveCriteria.Where(x => x != AlienSpeciesAssessment2023CriteriaLetter.A && x != AlienSpeciesAssessment2023CriteriaLetter.B).Select(x => new BarChart.BarChartData
+            {
+                Name = AxBText,
+                Count = _query.Where(y => y.DecisiveCriteria == x.ToString()).Count()
+            }).ToList();
+
+            var aXbBarChartData = new BarChart.BarChartData()
+            {
+                Name = AxBText,
+                Count = AxB.Sum(x => x.Count)
+            };
+
+            var allDecisiveCriteria = new BarChart()
+            {
+                BarChartDatas = decisiveCriteria.Where(x => x != AlienSpeciesAssessment2023CriteriaLetter.A && x != AlienSpeciesAssessment2023CriteriaLetter.B).Select(x => new BarChart.BarChartData
+                {
+                    Name = x.ToString() + x.DisplayName(),
+                    Count = _query.Where(y => y.DecisiveCriteria == x.ToString()).Count()
+                }).OrderBy(x => x.NameShort.ToString(), new AlienSpeciesCategoryComparer()).ToList()
+            };
+
+            allDecisiveCriteria.BarChartDatas.Add(aXbBarChartData);
+            return allDecisiveCriteria;
         }
     }
 }

@@ -472,8 +472,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string riskMatrixFigureHeader = "Antall vurderinger for hver kombinasjon av invasjonspotensial og økologisk effekt";
         public const string riskMatrixFigureText = "Når en fremmed art risikovurderes, vurderes både artens <i>invasjonspotensial</i> og artens negative <i>økologiske effekter</i> i norsk natur. Vurderingen resulterer dermed i to skår, én for artens invasjonspotensial (1 – 4) og én for artens økologiske effekter (1 – 4). Kombinasjonen av disse to skårene gir artens plassering i risikomatrisen og bestemmer risikokategori (NK: <i>ingen kjent risiko</i>, LO: <i>lav risiko</i>, PH: <i>potensielt høy risiko</i>, HI: <i>høy risiko</i>, SE: <i>svært høy risiko</i>). Tallet i en celle viser antall vurderinger i utvalget med gitte kombinasjon av økologisk effekt og invasjonspotensial.";
-
-
+        public const string decisiveCriteriaFigureHeader = "Antall vurderinger per avgjørende kriterium";
+        public const string decisiveCriteriaFigureText = "Artens risiko i norsk natur vurderes mot totalt ni kriterier: Kriteriene A - C beskriver artens invasjonspotensial og kriteriene D – I beskriver artens økologiske effekter. Kriteriet(ene) som skårer høyest for invasjonspotensial og økologisk effekt bestemmer risikokategorien. Én vurdering kan ha flere avgjørende kriterier, og totalantallet kan derfor overstige antall vurderinger i utvalget. Arter i kategorien ingen kjent risiko er ekskludert. Utvalget ditt omfatter n vurderinger med totalt x avgjørende kriterier (y vurderinger i utvalget har ingen kjent risiko).";
 
 
 

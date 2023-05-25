@@ -384,11 +384,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             return data.Where(x => x.NameShort == AlienSpeciesAssessment2023Category.HI.ToString() || x.NameShort == AlienSpeciesAssessment2023Category.SE.ToString()).Sum(x => x.Count);
         }
-
-        public static int GetLargestCount(List<BarChart.BarChartData> data)
-        {
-            return data.Select(x => x.Count).Max();
-        }
     }
 
     public class RedlistCategoryComparer : IComparer<string>

@@ -32,9 +32,11 @@ namespace Assessments.Frontend.Web.Models
             public string NameShort { get; set; }
 
             public int Count { get; set; }
-        }
 
+        }
         public List<BarChartData> BarChartDatas { get; set; }
+
+        public int MaxAmount { get; set; }
     }
 
     public class CategoryBarListElement

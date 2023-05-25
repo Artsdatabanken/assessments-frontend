@@ -23,6 +23,20 @@ namespace Assessments.Frontend.Web.Models
         public SpeciesGroupViewModel SpeciesGroupViewModel { get; set; }
     }
 
+    public class BarChart
+    {
+        public class BarChartData
+        {
+            public string Name { get; set; }
+
+            public string NameShort { get; set; }
+
+            public int Count { get; set; }
+        }
+
+        public List<BarChartData> BarChartDatas { get; set; }
+    }
+
     public class CategoryBarListElement
     {
         public string Name { get; set; }

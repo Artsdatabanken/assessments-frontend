@@ -5,7 +5,7 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Assessments.Frontend.Web.Models.AlienSpeciesStatistics2023;
+using BarChart = Assessments.Frontend.Web.Models.BarChart;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -359,19 +359,36 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             var statistics = new AlienSpeciesStatistics2023();
 
             statistics.Riskcategories = this.GetRiskCategories();
+            statistics.SpeciesGroups = this.GetSpeciesGroups();
 
             return statistics;
         }
 
-        public List<RiskCategory> GetRiskCategories()
+        private BarChart GetRiskCategories()
         {
             var distinctCategories = new List<AlienSpeciesAssessment2023Category>((IEnumerable<AlienSpeciesAssessment2023Category>)Enum.GetValues(typeof(AlienSpeciesAssessment2023Category))).Where(x => x != AlienSpeciesAssessment2023Category.NR);
 
-            return distinctCategories.Select(x => new RiskCategory
+            return new BarChart()
             {
-                Category = x,
-                Count = _query.Where(y => y.Category == x).Count()
-            }).OrderBy(x => x.Category.ToString(), new AlienSpeciesCategoryComparer()).ToList();
+                BarChartDatas = distinctCategories.Select(x => new BarChart.BarChartData
+                {
+                    Name = x.DisplayName(),
+                    NameShort = x.ToString(),
+                    Count = _query.Where(y => y.Category == x).Count()
+                }).OrderBy(x => x.NameShort.ToString(), new AlienSpeciesCategoryComparer()).ToList()
+            };
+        }
+        private BarChart GetSpeciesGroups()
+        {
+            var distinctSpeciesGroups = new List<AlienSpeciesAssessment2023SpeciesGroups>((IEnumerable<AlienSpeciesAssessment2023SpeciesGroups>)Enum.GetValues(typeof(AlienSpeciesAssessment2023SpeciesGroups)));
+            return new BarChart()
+            {
+                BarChartDatas = distinctSpeciesGroups.Select(x => new BarChart.BarChartData
+                {
+                    Name = x.DisplayName(),
+                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                }).OrderByDescending(x => x.Count).DistinctBy(x => x.Name).ToList()
+            };
         }
     }
 }

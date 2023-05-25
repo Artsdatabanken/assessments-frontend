@@ -244,4 +244,34 @@
         font-size: 12pt;
         padding: 2px;
     }
+
+}
+    
+.bar-chart {
+    width: 100%;
+}
+
+.bar-chart-element {
+    display: flex;
+    margin: 5px 0;
+    width: 100%;
+    list-style-type: none;
+}
+
+.bar-chart-bar-wrapper {
+    display: flex;
+    width: calc(100% - 180px);
+}
+
+.bar-chart-bar {
+    height: 20px;
+    margin-right: 5px;
+    background-color: darkcyan;
+    border: 1px solid black;
+}
+
+.bar-chart-name {
+    width: 180px;
+    margin-right: 10px;
+    text-align: right;
 }

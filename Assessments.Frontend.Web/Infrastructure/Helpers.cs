@@ -4,6 +4,7 @@ using Assessments.Mapping.RedlistSpecies;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure
@@ -366,6 +367,27 @@ namespace Assessments.Frontend.Web.Infrastructure
                 _ => "Art"
             };
             return Helpers.FixSpeciesLevel(replaceString, stringRank);
+        }
+
+        public static string GetBarChartHeight(int max, int currect)
+        {
+            var value = (float)(currect * 100.0 / max);
+            return value.ToString("F", CultureInfo.InvariantCulture);
+        }
+
+        public static int GetBarChartTotal(List<BarChart.BarChartData> data)
+        {
+            return data.Sum(x => x.Count);
+        }
+
+        public static int GetBarChartHighRisk(List<BarChart.BarChartData> data)
+        {
+            return data.Where(x => x.NameShort == AlienSpeciesAssessment2023Category.HI.ToString() || x.NameShort == AlienSpeciesAssessment2023Category.SE.ToString()).Sum(x => x.Count);
+        }
+
+        public static int GetLargestCount(List<BarChart.BarChartData> data)
+        {
+            return data.Select(x => x.Count).Max();
         }
     }
 

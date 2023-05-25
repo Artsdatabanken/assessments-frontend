@@ -3,23 +3,7 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-    var categories = Model.Statistics.Riskcategories;
-    var largestCategoryCount = categories.Select(x => x.Count).Max();
-
-    int GetHeight(int max, int currect)
-    {
-        return currect * 100 / max;
-    }
-
-    int GetTotal()
-    {
-        return Model.Statistics.Riskcategories.Sum(x => x.Count);
-    }
-
-    int GetHighRisk()
-    {
-        return Model.Statistics.Riskcategories.Where(x => x.Category == AlienSpeciesAssessment2023Category.HI || x.Category == AlienSpeciesAssessment2023Category.SE).Sum(x => x.Count);
-    }
+    var categories = Model.Statistics.Riskcategories.BarChartDatas;
 }
 
 <div class="page_section graphs">
@@ -29,18 +13,23 @@
         {
             <li class="statelement">
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key.Category.ToString()" style="height: @(GetHeight(largestCategoryCount, key.Count))%">
+                    <div class="heightbar_indicator @key.NameShort" style="height: @(Helpers.GetBarChartHeight(Helpers.GetLargestCount(categories), key.Count))%">
                         <span class="percent">@key.Count.ToString("N0")</span>
                     </div>
                 </div>
                 <span class="statbox">
-                    @key.Category
+                    @key.NameShort
                 </span>
-                @key.Category.DisplayName()
+                @key.Name
             </li>
         }
     </ul>
-    <p>@Constants.figureCategoryStart <i>@(Model.Statistics.Riskcategories.First().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.Riskcategories.First().Category.ToString()) til <i>@(Model.Statistics.Riskcategories.Last().Category.DisplayName().ToLowerInvariant())</i> @(Model.Statistics.Riskcategories.Last().Category.ToString()). Utvalget ditt omfatter @GetTotal().ToString("N0") vurderinger, hvorav @GetHighRisk().ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
+    <p>@Constants.figureCategoryStart <i>@(categories.First().Name.ToLowerInvariant())</i> @(categories.First().Name) til <i>@(categories.Last().Name.ToLowerInvariant())</i> @(categories.Last().Name). Utvalget ditt omfatter @Helpers.GetBarChartTotal(categories).ToString("N0") vurderinger, hvorav @Helpers.GetBarChartHighRisk(categories).ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
+
+    <hr/>
+
+    <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpeciesGroups"/>
+
 
     @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>

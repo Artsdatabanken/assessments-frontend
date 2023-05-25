@@ -101,6 +101,7 @@ namespace Assessments.Frontend.Web.Models
 
             SideBarContentViewModel = new SideBarContentViewModel
             {
+                AssessmentType = Infrastructure.Enums.AssessmentType.AlienSpecies2023,
                 AssessmentYear = 2023,
                 Category = assessment.Category.DisplayName(),
                 CategoryShort = assessment.Category.ToString(),

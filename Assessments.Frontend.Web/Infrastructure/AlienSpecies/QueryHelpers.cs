@@ -381,14 +381,94 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         private BarChart GetSpeciesGroups()
         {
             var distinctSpeciesGroups = new List<AlienSpeciesAssessment2023SpeciesGroups>((IEnumerable<AlienSpeciesAssessment2023SpeciesGroups>)Enum.GetValues(typeof(AlienSpeciesAssessment2023SpeciesGroups)));
-            return new BarChart()
+            var singleAlgae = "Alger";
+            var singleCrayfish = AlienSpeciesAssessment2023SpeciesGroups.Crustacea.DisplayName();
+            var singleInsect = AlienSpeciesAssessment2023SpeciesGroups.Insecta.DisplayName();
+            var algae = new AlienSpeciesAssessment2023SpeciesGroups[]
             {
-                BarChartDatas = distinctSpeciesGroups.Where(x => x != AlienSpeciesAssessment2023SpeciesGroups.Insecta && x != AlienSpeciesAssessment2023SpeciesGroups.Crustacea).Select(x => new BarChart.BarChartData
+                AlienSpeciesAssessment2023SpeciesGroups.Rhodophyta,
+                AlienSpeciesAssessment2023SpeciesGroups.Phaeophyceae,
+                AlienSpeciesAssessment2023SpeciesGroups.Chlorophyta
+            };
+            var crayfish = new AlienSpeciesAssessment2023SpeciesGroups[]
+            {
+                AlienSpeciesAssessment2023SpeciesGroups.Malacostraca,
+                AlienSpeciesAssessment2023SpeciesGroups.Branchiopoda,
+                AlienSpeciesAssessment2023SpeciesGroups.Copepoda,
+                AlienSpeciesAssessment2023SpeciesGroups.Thecostraca
+            };
+            var insects = new AlienSpeciesAssessment2023SpeciesGroups[]
+            {
+                AlienSpeciesAssessment2023SpeciesGroups.Coleoptera,
+                AlienSpeciesAssessment2023SpeciesGroups.Zygentoma,
+                AlienSpeciesAssessment2023SpeciesGroups.Phthiraptera,
+                AlienSpeciesAssessment2023SpeciesGroups.Hemiptera,
+                AlienSpeciesAssessment2023SpeciesGroups.Lepidoptera,
+                AlienSpeciesAssessment2023SpeciesGroups.Psocoptera,
+                AlienSpeciesAssessment2023SpeciesGroups.Diptera,
+                AlienSpeciesAssessment2023SpeciesGroups.Thysanoptera,
+                AlienSpeciesAssessment2023SpeciesGroups.Hymenoptera
+            };
+
+            var algaeBarChart = new BarChart()
+            {
+                BarChartDatas = distinctSpeciesGroups.Where(x => algae.Any(y => x == y)).Select(x => new BarChart.BarChartData
+                {
+                    Name = singleAlgae,
+                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                }).ToList()
+            };
+
+            var crayfishBarChart = new BarChart()
+            {
+                BarChartDatas = distinctSpeciesGroups.Where(x => crayfish.Any(y => x == y)).Select(x => new BarChart.BarChartData
+                {
+                    Name = singleCrayfish,
+                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                }).ToList()
+            };
+
+            var insectsBarChart = new BarChart()
+            {
+                BarChartDatas = distinctSpeciesGroups.Where(x => insects.Any(y => x == y)).Select(x => new BarChart.BarChartData
+                {
+                    Name = singleInsect,
+                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                }).ToList()
+            };
+
+            var speciesBarChart = new BarChart()
+            {
+                BarChartDatas = distinctSpeciesGroups.Where(x => !algae.Contains(x) && !crayfish.Contains(x) && !insects.Contains(x)).Select(x => new BarChart.BarChartData
                 {
                     Name = x.DisplayName(),
                     Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
-                }).OrderByDescending(x => x.Count).DistinctBy(x => x.Name).ToList()
+                }).ToList()
             };
+
+            var algaeBarChartData = new BarChart.BarChartData()
+            {
+                Name = singleAlgae,
+                Count = algaeBarChart.BarChartDatas.Sum(x => x.Count)
+            };
+            var crayFishBarChartData = new BarChart.BarChartData()
+            {
+                Name = singleCrayfish,
+                Count = crayfishBarChart.BarChartDatas.Sum(x => x.Count)
+            };
+            var insectsBarChartData = new BarChart.BarChartData()
+            {
+                Name = singleInsect,
+                Count = insectsBarChart.BarChartDatas.Sum(x => x.Count)
+            };
+
+            speciesBarChart.BarChartDatas.Add(algaeBarChartData);
+            speciesBarChart.BarChartDatas.Add(crayFishBarChartData);
+            speciesBarChart.BarChartDatas.Add(insectsBarChartData);
+
+            speciesBarChart.BarChartDatas = speciesBarChart.BarChartDatas.OrderByDescending(x => x.Count).DistinctBy(x => x.Name).ToList();
+
+            return speciesBarChart;
         }
     }
 }

@@ -36,8 +36,10 @@ const removeTaxonLink = (imageText) => {
 }
 
 const renderHeader = (element) => {
+    const separatorLine = document.createElement('hr');
     const header = document.createElement('h3');
     header.innerText = 'Bilder av arten';
+    element.appendChild(separatorLine);
     element.appendChild(header);
 }
 

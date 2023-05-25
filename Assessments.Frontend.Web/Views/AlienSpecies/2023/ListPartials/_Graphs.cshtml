@@ -13,16 +13,16 @@
 
     <hr/>
 
-    <h3>Antall vurderinger per artsgruppe</h3>
-    <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpeciesGroups"/>
-    <p>Antall vurderinger i hver artsgruppe. Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.BarChartDatas) vurderinger.</p>
-    
-    <hr/>
-
     <h3>@Constants.riskMatrixFigureHeader</h3>
     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrixFigure.cshtml" />
     <p>@Html.Raw(Constants.riskMatrixFigureText) Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.RiskCategories.BarChartDatas) vurderinger.</p>
 
+    <hr/>
+
+    <h3>Antall vurderinger per artsgruppe</h3>
+    <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpeciesGroups"/>
+    <p>Antall vurderinger i hver artsgruppe. Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.BarChartDatas) vurderinger.</p>
+    
     @*<p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>
     <div class="graph greyscale">

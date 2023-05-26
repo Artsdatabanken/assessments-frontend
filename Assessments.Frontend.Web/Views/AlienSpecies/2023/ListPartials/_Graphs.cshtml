@@ -44,5 +44,5 @@
         <div class="bar-chart-info-box bar-chart-info-box-2"><p>@Constants.yAxisLabel</p></div>
         <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="ecologicalEffect" />
     </div>
-    <p>@Constants.decisiveCriteriaFigureText1 @Helpers.GetBarChartTotal(categories).ToString("N0") @Constants.decisiveCriteriaFigureText2 @Helpers.GetBarChartTotal(Model.Statistics.DecisiveCriteria.BarChartDatas).ToString("N0") @Constants.decisiveCriteriaFigureText3 @categories.FirstOrDefault(x => x.NameShort == "NK").Count @Constants.decisiveCriteriaFigureText4</p>
+    <p>@Html.Raw(@Constants.decisiveCriteriaFigureText1) @Helpers.GetBarChartTotal(categories).ToString("N0") @Constants.decisiveCriteriaFigureText2 @Helpers.GetBarChartTotal(Model.Statistics.DecisiveCriteria.BarChartDatas).ToString("N0") @Constants.decisiveCriteriaFigureText3@categories.FirstOrDefault(x => x.NameShort == "NK").Count @Html.Raw(@Constants.decisiveCriteriaFigureText4)</p>
 </div>

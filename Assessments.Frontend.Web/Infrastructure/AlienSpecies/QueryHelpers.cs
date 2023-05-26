@@ -498,7 +498,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         private BarChart GetDecisiveCriteria()
         {
             var decisiveCriteria = new List<AlienSpeciesAssessment2023CriteriaLetter>((IEnumerable<AlienSpeciesAssessment2023CriteriaLetter>)Enum.GetValues(typeof(AlienSpeciesAssessment2023CriteriaLetter)));
-            var AxBText = "A×B – artens levetid i Norge × ekspansjonshastighet";
+            var AxBText = "A×B Levetid × Ekspansjonshastighet";
 
             var AxB = decisiveCriteria.Where(x => x == AlienSpeciesAssessment2023CriteriaLetter.A || x == AlienSpeciesAssessment2023CriteriaLetter.B).Select(x => new BarChart.BarChartData
             {

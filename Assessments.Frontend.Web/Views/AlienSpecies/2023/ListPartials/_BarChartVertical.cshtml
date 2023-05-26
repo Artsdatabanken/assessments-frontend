@@ -1,0 +1,23 @@
+﻿@model BarChart
+@using System.Globalization
+
+@{
+    var count = Model.BarChartDatas.Sum(x => x.Count);
+}
+
+<ul class="graph color_graph">
+    @foreach (var data in Model.BarChartDatas)
+    {
+        <li class="statelement">
+            <div class="heightbar_blank">
+                <div class="heightbar_indicator @data.NameShort" style="height: @(Helpers.GetBarChartHeight(Helpers.GetLargestCount(Model.BarChartDatas), data.Count))%">
+                    <span class="percent">@data.Count.ToString("N0")</span>
+                </div>
+            </div>
+            <span class="statbox">
+                @data.NameShort
+            </span>
+            @data.Name
+        </li>
+    }
+</ul>

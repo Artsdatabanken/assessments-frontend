@@ -1,5 +1,4 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
 using System;
 using System.Collections.Generic;
 using X.PagedList;
@@ -92,14 +91,10 @@ namespace Assessments.Frontend.Web.Models
 
     public class AlienSpeciesStatistics2023
     {
-        public class RiskCategory
-        {
-            public AlienSpeciesAssessment2023Category Category { get; set; }
+        public BarChart RiskCategories { get; set; }
 
-            public int Count { get; set; }
-        }
-
-        public List<RiskCategory> RiskCategories { get; set; }
         public List<List<int>> RiskMatrix { get; set; }
+
+        public BarChart SpeciesGroups { get; set; }
     }
 }

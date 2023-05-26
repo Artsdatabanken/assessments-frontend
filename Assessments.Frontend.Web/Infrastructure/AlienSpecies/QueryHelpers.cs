@@ -532,7 +532,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         private BarChart GetNatureTypesEffect()
         {
             var threatenedMajorTypeGroups = new List<AlienSpeciesAssessment2023MajorTypeGroup>();
-            foreach (var assessment in _unfilteredQuery)
+            foreach (var assessment in _unfilteredQuery.Where(x => x.Category != AlienSpeciesAssessment2023Category.NR && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel))
             {
                 var typeGroups = assessment.ImpactedNatureTypes.Where(x => x.IsThreatened).Select(x => x.MajorTypeGroup);
                 threatenedMajorTypeGroups = threatenedMajorTypeGroups.Concat(typeGroups).ToList();
@@ -545,8 +545,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 {
                     Name = x.DisplayName(),
                     Count = _query.Where(y => y.ImpactedNatureTypes.Any(z => z.MajorTypeGroup == x)).Count()
-                }).ToList()
+                }).OrderByDescending(x => x.Count).ToList()
             };
+            natureTypesEffects.MaxAmount = natureTypesEffects.BarChartDatas.MaxBy(x => x.Count).Count;
 
             return natureTypesEffects;
         }

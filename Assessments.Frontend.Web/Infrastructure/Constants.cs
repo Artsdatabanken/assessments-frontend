@@ -477,7 +477,11 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string decisiveCriteriaFigureText2 = "vurderinger med totalt";
         public const string decisiveCriteriaFigureText3 = "avgjørende kriterier (";
         public const string decisiveCriteriaFigureText4 = "vurderinger i utvalget har <i>ingen kjent risiko</i>).";
-
+        public const string natureTypesEffectsHeader = "Arter i truede eller sjeldne naturtyper";
+        public const string natureTypesEffectsFigureHeader1 = "Antall vurderinger per natursystem eller landform";
+        public const string natureTypesEffectsFigureHeader2 = "";
+        public const string natureTypesEffectsText1 = "Antall vurderinger per natursystem eller landform med truede eller sjeldne naturtyper (Rødlista for Naturtyper 2018). Den vurderte arten kan være observert i et natursystem eller landform i dag, eller den forventes å kolonisere natursystemet eller landformen i fremtiden. Hvert natursystem og landform telles kun én gang per vurdering, selv om en art kan finnes i flere truede eller sjeldne naturtyper innenfor hver (se neste figur).";
+        public const string natureTypesEffectsText2 = "";
 
 
     }

@@ -36,6 +36,7 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index(AlienSpeciesListViewModel viewModel, int? page, bool export)
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
+            var unfilteredQuery = query;
 
             query = QueryHelpers.ApplyParameters(viewModel, query);
 
@@ -43,7 +44,7 @@ namespace Assessments.Frontend.Web.Controllers
                 return GetExport(query);
             if (viewModel.View == "stat")
             {
-                var statistics = new Statistics(query);
+                var statistics = new Statistics(query, unfilteredQuery);
                 viewModel.Statistics = statistics.GetStatistics();
             }
 
@@ -63,7 +64,7 @@ namespace Assessments.Frontend.Web.Controllers
                 return NotFound();
 
             var expertGroupMembers = await DataRepository.GetData<AlienSpeciesAssessment2023ExpertGroupMember>(DataFilenames.AlienSpeciesExpertCommitteeMembers);
-            
+
             // members by assessment id (if available)
             var assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.Id == assessment.Id).OrderBy(x => x.CitationOrder).ToList();
 

@@ -98,5 +98,7 @@ namespace Assessments.Frontend.Web.Models
         public List<List<int>> RiskMatrix { get; set; }
 
         public BarChart SpeciesGroups { get; set; }
+
+        public BarChart NatureTypesEffect { get; set; }
     }
 }

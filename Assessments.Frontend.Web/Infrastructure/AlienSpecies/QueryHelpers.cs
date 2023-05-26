@@ -346,12 +346,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Statistics
     {
-        private IQueryable<AlienSpeciesAssessment2023> _query;
+        private readonly IQueryable<AlienSpeciesAssessment2023> _query;
+        private readonly IQueryable<AlienSpeciesAssessment2023> _unfilteredQuery;
 
-        public Statistics(IQueryable<AlienSpeciesAssessment2023> query)
+        public Statistics(IQueryable<AlienSpeciesAssessment2023> query, IQueryable<AlienSpeciesAssessment2023> unfilteredQuery)
         {
             // NR and TaxonEvaluatedAtAnotherLevel should never appear in the statistics figures
             _query = query.Where(x => x.Category != AlienSpeciesAssessment2023Category.NR && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel);
+            _unfilteredQuery = unfilteredQuery;
         }
 
         public AlienSpeciesStatistics2023 GetStatistics()
@@ -362,6 +364,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             statistics.RiskCategories = this.GetRiskCategories();
             statistics.RiskMatrix = this.GetRiskMatrixValues();
             statistics.SpeciesGroups = this.GetSpeciesGroups();
+            statistics.NatureTypesEffect = this.GetNatureTypesEffect();
 
             return statistics;
         }
@@ -524,6 +527,28 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             allDecisiveCriteria.BarChartDatas.Insert(0, aXbBarChartData);
             allDecisiveCriteria.MaxAmount = allDecisiveCriteria.BarChartDatas.MaxBy(x => x.Count).Count;
             return allDecisiveCriteria;
+        }
+
+        private BarChart GetNatureTypesEffect()
+        {
+            var threatenedMajorTypeGroups = new List<AlienSpeciesAssessment2023MajorTypeGroup>();
+            foreach (var assessment in _unfilteredQuery)
+            {
+                var typeGroups = assessment.ImpactedNatureTypes.Where(x => x.IsThreatened).Select(x => x.MajorTypeGroup);
+                threatenedMajorTypeGroups = threatenedMajorTypeGroups.Concat(typeGroups).ToList();
+            }
+            threatenedMajorTypeGroups = threatenedMajorTypeGroups.Distinct().ToList();
+
+            var natureTypesEffects = new BarChart()
+            {
+                BarChartDatas = threatenedMajorTypeGroups.Select(x => new BarChart.BarChartData()
+                {
+                    Name = x.DisplayName(),
+                    Count = _query.Where(y => y.ImpactedNatureTypes.Any(z => z.MajorTypeGroup == x)).Count()
+                }).ToList()
+            };
+
+            return natureTypesEffects;
         }
     }
 }

@@ -358,9 +358,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var statistics = new AlienSpeciesStatistics2023();
 
-            statistics.SpeciesGroups = this.GetSpeciesGroups();
+            statistics.DecisiveCriteria = this.GetDecisiveCriteria();
             statistics.RiskCategories = this.GetRiskCategories();
             statistics.RiskMatrix = this.GetRiskMatrixValues();
+            statistics.SpeciesGroups = this.GetSpeciesGroups();
 
             return statistics;
         }
@@ -369,14 +370,17 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             var distinctCategories = new List<AlienSpeciesAssessment2023Category>((IEnumerable<AlienSpeciesAssessment2023Category>)Enum.GetValues(typeof(AlienSpeciesAssessment2023Category))).Where(x => x != AlienSpeciesAssessment2023Category.NR);
 
+            var barChartDatas = distinctCategories.Select(x => new BarChart.BarChartData
+            {
+                Name = x.DisplayName(),
+                NameShort = x.ToString(),
+                Count = _query.Where(y => y.Category == x).Count()
+            }).OrderBy(x => x.NameShort.ToString(), new AlienSpeciesCategoryComparer()).ToList();
+
             return new BarChart()
             {
-                BarChartDatas = distinctCategories.Select(x => new BarChart.BarChartData
-                {
-                    Name = x.DisplayName(),
-                    NameShort = x.ToString(),
-                    Count = _query.Where(y => y.Category == x).Count()
-                }).OrderBy(x => x.NameShort.ToString(), new AlienSpeciesCategoryComparer()).ToList()
+                BarChartDatas = barChartDatas,
+                MaxAmount = barChartDatas.MaxBy(x => x.Count).Count
             };
         }
         private BarChart GetSpeciesGroups()
@@ -468,11 +472,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             speciesBarChart.BarChartDatas.Add(insectsBarChartData);
 
             speciesBarChart.BarChartDatas = speciesBarChart.BarChartDatas.OrderByDescending(x => x.Count).DistinctBy(x => x.Name).ToList();
+            speciesBarChart.MaxAmount = speciesBarChart.BarChartDatas.MaxBy(x => x.Count).Count;
 
             return speciesBarChart;
         }
 
-        public List<List<int>> GetRiskMatrixValues()
+        private List<List<int>> GetRiskMatrixValues()
         {
             var riskMatrix = new List<List<int>>()
             {
@@ -488,6 +493,37 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return riskMatrix;
+        }
+
+        private BarChart GetDecisiveCriteria()
+        {
+            var decisiveCriteria = new List<AlienSpeciesAssessment2023CriteriaLetter>((IEnumerable<AlienSpeciesAssessment2023CriteriaLetter>)Enum.GetValues(typeof(AlienSpeciesAssessment2023CriteriaLetter)));
+            var AxBText = "A×B Levetid × Ekspansjonshastighet";
+
+            var AxB = decisiveCriteria.Where(x => x == AlienSpeciesAssessment2023CriteriaLetter.A || x == AlienSpeciesAssessment2023CriteriaLetter.B).Select(x => new BarChart.BarChartData
+            {
+                Name = AxBText,
+                Count = _query.Where(y => y.DecisiveCriteria.Contains(x.ToString())).Count()
+            }).ToList();
+
+            var aXbBarChartData = new BarChart.BarChartData()
+            {
+                Name = AxBText,
+                Count = AxB.Sum(x => x.Count)
+            };
+
+            var allDecisiveCriteria = new BarChart()
+            {
+                BarChartDatas = decisiveCriteria.Where(x => x != AlienSpeciesAssessment2023CriteriaLetter.A && x != AlienSpeciesAssessment2023CriteriaLetter.B).Select(x => new BarChart.BarChartData
+                {
+                    Name = $"{x.ToString()} {x.DisplayName()}",
+                    Count = _query.Where(y => y.DecisiveCriteria.Contains(x.ToString())).Count()
+                }).OrderBy(x => x.Name).ToList()
+            };
+
+            allDecisiveCriteria.BarChartDatas.Insert(0, aXbBarChartData);
+            allDecisiveCriteria.MaxAmount = allDecisiveCriteria.BarChartDatas.MaxBy(x => x.Count).Count;
+            return allDecisiveCriteria;
         }
     }
 }

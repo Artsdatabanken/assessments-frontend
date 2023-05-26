@@ -4,6 +4,16 @@
 
 @{
     var categories = Model.Statistics.RiskCategories.BarChartDatas;
+    var invasionPotential = new BarChart()
+    {
+        BarChartDatas = Model.Statistics.DecisiveCriteria.BarChartDatas.Take(2).ToList(),
+        MaxAmount = Model.Statistics.DecisiveCriteria.MaxAmount
+    };
+    var ecologicalEffect = new BarChart()
+    {
+        BarChartDatas = Model.Statistics.DecisiveCriteria.BarChartDatas.Skip(2).ToList(),
+        MaxAmount = Model.Statistics.DecisiveCriteria.MaxAmount
+    };
 }
 
 <div class="page_section graphs">
@@ -22,4 +32,17 @@
     <h3>Antall vurderinger per artsgruppe</h3>
     <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpeciesGroups"/>
     <p>Antall vurderinger i hver artsgruppe. Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.BarChartDatas) vurderinger.</p>
+
+    <hr/>
+
+    <h3>@Constants.decisiveCriteriaFigureHeader</h3>
+    <div class="bar-chart-decisive-criteria">
+        <div class="bar-chart-info-box bar-chart-info-box-1"><p>Invasjons-potensial</p></div>
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="invasionPotential" />
+    </div>
+    <div class="bar-chart-decisive-criteria">
+        <div class="bar-chart-info-box bar-chart-info-box-2"><p>@Constants.yAxisLabel</p></div>
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="ecologicalEffect" />
+    </div>
+    <p>@Html.Raw(@Constants.decisiveCriteriaFigureText1) @Helpers.GetBarChartTotal(categories).ToString("N0") @Constants.decisiveCriteriaFigureText2 @Helpers.GetBarChartTotal(Model.Statistics.DecisiveCriteria.BarChartDatas).ToString("N0") @Constants.decisiveCriteriaFigureText3@categories.FirstOrDefault(x => x.NameShort == "NK").Count @Html.Raw(@Constants.decisiveCriteriaFigureText4)</p>
 </div>

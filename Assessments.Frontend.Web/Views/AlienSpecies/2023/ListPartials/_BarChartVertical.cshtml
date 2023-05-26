@@ -5,12 +5,12 @@
     var count = Model.BarChartDatas.Sum(x => x.Count);
 }
 
-<ul class="graph color_graph">
+<ul class="graph color_graph bar-chart">
     @foreach (var data in Model.BarChartDatas)
     {
         <li class="statelement">
             <div class="heightbar_blank">
-                <div class="heightbar_indicator @data.NameShort" style="height: @(Helpers.GetBarChartHeight(Helpers.GetLargestCount(Model.BarChartDatas), data.Count))%">
+                <div class="heightbar_indicator @data.NameShort" style="height: @(Helpers.GetBarChartHeight(Model.MaxAmount, data.Count))%">
                     <span class="percent">@data.Count.ToString("N0")</span>
                 </div>
             </div>

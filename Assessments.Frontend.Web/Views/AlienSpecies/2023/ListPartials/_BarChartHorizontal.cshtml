@@ -11,7 +11,7 @@
         <li class="bar-chart-element">
             <div class="bar-chart-name">@speciesGroup.Name</div>
             <div class="bar-chart-bar-wrapper">
-                <div class="bar-chart-bar" style="width: @(Helpers.GetBarChartHeight(Helpers.GetLargestCount(Model.BarChartDatas), speciesGroup.Count))%"></div>
+                <div class="bar-chart-bar" style="width: @(Helpers.GetBarChartHeight(Model.MaxAmount, speciesGroup.Count))%"></div>
                 <div class="bar-chart-count">@speciesGroup.Count</div>
             </div>
         </li>

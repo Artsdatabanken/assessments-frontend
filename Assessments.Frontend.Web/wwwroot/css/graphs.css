@@ -272,6 +272,10 @@
     border: 1px solid black;
 }
 
+.bar-chart-decisive-criteria .bar-chart-bar {
+    height: 40px;
+}
+
 .bar-chart-name {
     width: 180px;
     margin-right: 10px;

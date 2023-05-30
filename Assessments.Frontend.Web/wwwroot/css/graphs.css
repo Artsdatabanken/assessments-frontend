@@ -254,6 +254,7 @@
 
 .bar-chart-element {
     display: flex;
+    align-items: center;
     margin: 5px 0;
     width: 100%;
     list-style-type: none;
@@ -274,6 +275,10 @@
 
 .bar-chart-decisive-criteria .bar-chart-bar {
     height: 40px;
+}
+
+.bar-chart-nature-types .bar-chart-bar {
+    height: 30px;
 }
 
 .bar-chart-name {

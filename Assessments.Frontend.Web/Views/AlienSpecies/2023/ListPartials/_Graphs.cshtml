@@ -45,4 +45,13 @@
         <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="ecologicalEffect" />
     </div>
     <p>@Html.Raw(@Constants.decisiveCriteriaFigureText1) @Helpers.GetBarChartTotal(categories).ToString("N0") @Constants.decisiveCriteriaFigureText2 @Helpers.GetBarChartTotal(Model.Statistics.DecisiveCriteria.BarChartDatas).ToString("N0") @Constants.decisiveCriteriaFigureText3@categories.FirstOrDefault(x => x.NameShort == "NK").Count @Html.Raw(@Constants.decisiveCriteriaFigureText4)</p>
+
+    <hr/>
+
+    <h3>@Constants.natureTypesEffectsHeader</h3>
+    <h4>@Constants.natureTypesEffectsFigureHeader1</h4>
+    <div class="bar-chart-nature-types">
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.NatureTypesEffect" />
+    </div>
+    <p>@Constants.natureTypesEffectsText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.BarChartDatas) vurderinger.</p>
 </div>

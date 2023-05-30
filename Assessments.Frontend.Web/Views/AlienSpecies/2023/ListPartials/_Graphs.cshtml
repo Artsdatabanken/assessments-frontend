@@ -3,16 +3,16 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-    var categories = Model.Statistics.RiskCategories.BarChartDatas;
+    var categories = Model.Statistics.RiskCategories.Data;
     var invasionPotential = new BarChart()
     {
-        BarChartDatas = Model.Statistics.DecisiveCriteria.BarChartDatas.Take(2).ToList(),
-        MaxAmount = Model.Statistics.DecisiveCriteria.MaxAmount
+        Data = Model.Statistics.DecisiveCriteria.Data.Take(2).ToList(),
+        MaxValue = Model.Statistics.DecisiveCriteria.MaxValue
     };
     var ecologicalEffect = new BarChart()
     {
-        BarChartDatas = Model.Statistics.DecisiveCriteria.BarChartDatas.Skip(2).ToList(),
-        MaxAmount = Model.Statistics.DecisiveCriteria.MaxAmount
+        Data = Model.Statistics.DecisiveCriteria.Data.Skip(2).ToList(),
+        MaxValue = Model.Statistics.DecisiveCriteria.MaxValue
     };
 }
 
@@ -25,13 +25,13 @@
 
     <h3>@Constants.riskMatrixFigureHeader</h3>
     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrixFigure.cshtml" />
-    <p>@Html.Raw(Constants.riskMatrixFigureText) Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.RiskCategories.BarChartDatas) vurderinger.</p>
+    <p>@Html.Raw(Constants.riskMatrixFigureText) Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.RiskCategories.Data) vurderinger.</p>
 
     <hr/>
 
     <h3>Antall vurderinger per artsgruppe</h3>
     <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpeciesGroups"/>
-    <p>Antall vurderinger i hver artsgruppe. Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.BarChartDatas) vurderinger.</p>
+    <p>Antall vurderinger i hver artsgruppe. Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 
     <hr/>
 
@@ -44,14 +44,23 @@
         <div class="bar-chart-info-box bar-chart-info-box-2"><p>@Constants.yAxisLabel</p></div>
         <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="ecologicalEffect" />
     </div>
-    <p>@Html.Raw(@Constants.decisiveCriteriaFigureText1) @Helpers.GetBarChartTotal(categories).ToString("N0") @Constants.decisiveCriteriaFigureText2 @Helpers.GetBarChartTotal(Model.Statistics.DecisiveCriteria.BarChartDatas).ToString("N0") @Constants.decisiveCriteriaFigureText3@categories.FirstOrDefault(x => x.NameShort == "NK").Count @Html.Raw(@Constants.decisiveCriteriaFigureText4)</p>
+    <p>@Html.Raw(@Constants.decisiveCriteriaFigureText1) @Helpers.GetBarChartTotal(categories).ToString("N0") @Constants.decisiveCriteriaFigureText2 @Helpers.GetBarChartTotal(Model.Statistics.DecisiveCriteria.Data).ToString("N0") @Constants.decisiveCriteriaFigureText3@categories.FirstOrDefault(x => x.NameShort == "NK").Count @Html.Raw(@Constants.decisiveCriteriaFigureText4)</p>
 
     <hr/>
 
     <h3>@Constants.natureTypesEffectsHeader</h3>
     <h4>@Constants.natureTypesEffectsFigureHeader1</h4>
-    <div class="bar-chart-nature-types">
-        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.NatureTypesEffect" />
+    <div class="bar-chart-major-nature-types">
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.MajorNatureTypesEffect" />
     </div>
-    <p>@Constants.natureTypesEffectsText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.BarChartDatas) vurderinger.</p>
+    <p>@Constants.natureTypesEffectsText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+    <h4>@Constants.natureTypesEffectsFigureHeader2</h4>
+    @for (var i = 0; i < Model.Statistics.NatureTypesEffect.Count; i++)
+    {
+        <div class="bar-chart-nature-types">
+            <div class="bar-chart-info-box bar-chart-info-box-nature-types-@i">@Model.Statistics.NatureTypesEffect[i].Name</div>
+            <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.NatureTypesEffect[i]" />
+        </div>
+    }
+    <p>@Constants.natureTypesEffectsText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger og totalt @Model.Statistics.NatureTypesEffect.SelectMany(x => x.Data).Sum(x => x.Count) observasjoner i sjeldne eller truede naturtyper.</p>
 </div>

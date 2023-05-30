@@ -364,6 +364,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             statistics.RiskCategories = this.GetRiskCategories();
             statistics.RiskMatrix = this.GetRiskMatrixValues();
             statistics.SpeciesGroups = this.GetSpeciesGroups();
+            statistics.MajorNatureTypesEffect = this.GetMajorNatureTypesEffect();
             statistics.NatureTypesEffect = this.GetNatureTypesEffect();
 
             return statistics;
@@ -382,10 +383,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             return new BarChart()
             {
-                BarChartDatas = barChartDatas,
-                MaxAmount = barChartDatas.MaxBy(x => x.Count).Count
+                Data = barChartDatas,
+                MaxValue = barChartDatas.MaxBy(x => x.Count).Count
             };
         }
+
         private BarChart GetSpeciesGroups()
         {
             var distinctSpeciesGroups = new List<AlienSpeciesAssessment2023SpeciesGroups>((IEnumerable<AlienSpeciesAssessment2023SpeciesGroups>)Enum.GetValues(typeof(AlienSpeciesAssessment2023SpeciesGroups)));
@@ -420,7 +422,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             var algaeBarChart = new BarChart()
             {
-                BarChartDatas = distinctSpeciesGroups.Where(x => algae.Any(y => x == y)).Select(x => new BarChart.BarChartData
+                Data = distinctSpeciesGroups.Where(x => algae.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleAlgae,
                     Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
@@ -429,7 +431,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             var crayfishBarChart = new BarChart()
             {
-                BarChartDatas = distinctSpeciesGroups.Where(x => crayfish.Any(y => x == y)).Select(x => new BarChart.BarChartData
+                Data = distinctSpeciesGroups.Where(x => crayfish.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleCrayfish,
                     Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
@@ -438,7 +440,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             var insectsBarChart = new BarChart()
             {
-                BarChartDatas = distinctSpeciesGroups.Where(x => insects.Any(y => x == y)).Select(x => new BarChart.BarChartData
+                Data = distinctSpeciesGroups.Where(x => insects.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleInsect,
                     Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
@@ -447,7 +449,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             var speciesBarChart = new BarChart()
             {
-                BarChartDatas = distinctSpeciesGroups.Where(x => !algae.Contains(x) && !crayfish.Contains(x) && !insects.Contains(x)).Select(x => new BarChart.BarChartData
+                Data = distinctSpeciesGroups.Where(x => !algae.Contains(x) && !crayfish.Contains(x) && !insects.Contains(x)).Select(x => new BarChart.BarChartData
                 {
                     Name = x.DisplayName(),
                     Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
@@ -457,25 +459,25 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             var algaeBarChartData = new BarChart.BarChartData()
             {
                 Name = singleAlgae,
-                Count = algaeBarChart.BarChartDatas.Sum(x => x.Count)
+                Count = algaeBarChart.Data.Sum(x => x.Count)
             };
             var crayFishBarChartData = new BarChart.BarChartData()
             {
                 Name = singleCrayfish,
-                Count = crayfishBarChart.BarChartDatas.Sum(x => x.Count)
+                Count = crayfishBarChart.Data.Sum(x => x.Count)
             };
             var insectsBarChartData = new BarChart.BarChartData()
             {
                 Name = singleInsect,
-                Count = insectsBarChart.BarChartDatas.Sum(x => x.Count)
+                Count = insectsBarChart.Data.Sum(x => x.Count)
             };
 
-            speciesBarChart.BarChartDatas.Add(algaeBarChartData);
-            speciesBarChart.BarChartDatas.Add(crayFishBarChartData);
-            speciesBarChart.BarChartDatas.Add(insectsBarChartData);
+            speciesBarChart.Data.Add(algaeBarChartData);
+            speciesBarChart.Data.Add(crayFishBarChartData);
+            speciesBarChart.Data.Add(insectsBarChartData);
 
-            speciesBarChart.BarChartDatas = speciesBarChart.BarChartDatas.OrderByDescending(x => x.Count).DistinctBy(x => x.Name).ToList();
-            speciesBarChart.MaxAmount = speciesBarChart.BarChartDatas.MaxBy(x => x.Count).Count;
+            speciesBarChart.Data = speciesBarChart.Data.OrderByDescending(x => x.Count).DistinctBy(x => x.Name).ToList();
+            speciesBarChart.MaxValue = speciesBarChart.Data.MaxBy(x => x.Count).Count;
 
             return speciesBarChart;
         }
@@ -517,19 +519,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             var allDecisiveCriteria = new BarChart()
             {
-                BarChartDatas = decisiveCriteria.Where(x => x != AlienSpeciesAssessment2023CriteriaLetter.A && x != AlienSpeciesAssessment2023CriteriaLetter.B).Select(x => new BarChart.BarChartData
+                Data = decisiveCriteria.Where(x => x != AlienSpeciesAssessment2023CriteriaLetter.A && x != AlienSpeciesAssessment2023CriteriaLetter.B).Select(x => new BarChart.BarChartData
                 {
                     Name = $"{x.ToString()} {x.DisplayName()}",
                     Count = _query.Where(y => y.DecisiveCriteria.Contains(x.ToString())).Count()
                 }).OrderBy(x => x.Name).ToList()
             };
 
-            allDecisiveCriteria.BarChartDatas.Insert(0, aXbBarChartData);
-            allDecisiveCriteria.MaxAmount = allDecisiveCriteria.BarChartDatas.MaxBy(x => x.Count).Count;
+            allDecisiveCriteria.Data.Insert(0, aXbBarChartData);
+            allDecisiveCriteria.MaxValue = allDecisiveCriteria.Data.MaxBy(x => x.Count).Count;
             return allDecisiveCriteria;
         }
 
-        private BarChart GetNatureTypesEffect()
+        private BarChart GetMajorNatureTypesEffect()
         {
             var threatenedMajorTypeGroups = new List<AlienSpeciesAssessment2023MajorTypeGroup>();
             foreach (var assessment in _unfilteredQuery.Where(x => x.Category != AlienSpeciesAssessment2023Category.NR && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel))
@@ -539,17 +541,58 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
             threatenedMajorTypeGroups = threatenedMajorTypeGroups.Distinct().ToList();
 
-            var natureTypesEffects = new BarChart()
+            var majorNatureTypesEffects = new BarChart()
             {
-                BarChartDatas = threatenedMajorTypeGroups.Select(x => new BarChart.BarChartData()
+                Data = threatenedMajorTypeGroups.Select(x => new BarChart.BarChartData()
                 {
                     Name = x.DisplayName(),
                     Count = _query.Where(y => y.ImpactedNatureTypes.Any(z => z.MajorTypeGroup == x)).Count()
                 }).OrderByDescending(x => x.Count).ToList()
             };
-            natureTypesEffects.MaxAmount = natureTypesEffects.BarChartDatas.MaxBy(x => x.Count).Count;
+            majorNatureTypesEffects.MaxValue = majorNatureTypesEffects.Data.MaxBy(x => x.Count).Count;
 
-            return natureTypesEffects;
+            return majorNatureTypesEffects;
+        }
+
+        private List<BarChart> GetNatureTypesEffect()
+        {
+            var unfilteredQuery = _unfilteredQuery.Where(x => x.Category != AlienSpeciesAssessment2023Category.NR && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel);
+
+            var impactedNatureTypes = unfilteredQuery.SelectMany(x => x.ImpactedNatureTypes).Where(x => x.IsThreatened);
+
+            var barCharts = new List<BarChart>();
+
+            foreach (var impactedNatureType in impactedNatureTypes.GroupBy(x => x.MajorTypeGroup).OrderBy(x => x.Key))
+            {
+                var data = impactedNatureType.GroupBy(x => x.Name).Select(y => new
+                {
+                    Name = y.Key,
+                    Count = _query.SelectMany(y => y.ImpactedNatureTypes).Where(z => z.Name == y.Key).Count()
+                });
+
+                var barChart = new BarChart
+                {
+                    Name = impactedNatureType.Key.DisplayName()
+                };
+
+                foreach (var item in data.OrderBy(x => x.Name))
+                {
+                    barChart.Data.Add(new()
+                    {
+                        Name = item.Name,
+                        Count = item.Count
+                    });
+                }
+
+                barCharts.Add(barChart);
+            }
+
+            foreach (var chart in barCharts)
+            {
+                chart.MaxValue = barCharts.SelectMany(x => x.Data).Max(y => y.Count);
+            }
+
+            return barCharts;
         }
     }
 }

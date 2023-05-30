@@ -2,16 +2,16 @@
 @using System.Globalization
 
 @{
-    var count = Model.BarChartDatas.Sum(x => x.Count);
+    var count = Model.Data.Sum(x => x.Count);
 }
 
 <ul class="bar-chart">
-    @foreach (var speciesGroup in Model.BarChartDatas)
+    @foreach (var speciesGroup in Model.Data)
     {
         <li class="bar-chart-element">
             <div class="bar-chart-name">@speciesGroup.Name</div>
             <div class="bar-chart-bar-wrapper">
-                <div class="bar-chart-bar" style="width: @(Helpers.GetBarChartHeight(Model.MaxAmount, speciesGroup.Count))%"></div>
+                <div class="bar-chart-bar" style="width: @(Helpers.GetBarChartHeight(Model.MaxValue, speciesGroup.Count))%"></div>
                 <div class="bar-chart-count">@speciesGroup.Count</div>
             </div>
         </li>

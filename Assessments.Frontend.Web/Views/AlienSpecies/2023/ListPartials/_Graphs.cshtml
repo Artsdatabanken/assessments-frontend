@@ -17,6 +17,8 @@
 }
 
 <div class="page_section graphs">
+    <p>@Constants.FigureMainText</p>
+
     <h3>Antall vurderinger per risikokategori</h3>
     <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartVertical.cshtml" model="Model.Statistics.RiskCategories" />
     <p>@Constants.figureCategoryStart <i>@(categories.First().Name.ToLowerInvariant())</i> @(categories.First().NameShort) til <i>@(categories.Last().Name.ToLowerInvariant())</i> @(categories.Last().NameShort). Utvalget ditt omfatter @Helpers.GetBarChartTotal(categories).ToString("N0") vurderinger, hvorav @Helpers.GetBarChartHighRisk(categories).ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
@@ -54,6 +56,7 @@
         <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.MajorNatureTypesEffect" />
     </div>
     <p>@Constants.natureTypesEffectsText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+
     <h4>@Constants.natureTypesEffectsFigureHeader2</h4>
     @for (var i = 0; i < Model.Statistics.NatureTypesEffect.Count; i++)
     {

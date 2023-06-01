@@ -32,6 +32,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             statistics.NatureTypesEffect = this.GetNatureTypesEffect();
             statistics.SpreadWays = this.GetSpreadWays();
             statistics.SpreadWaysIntroduction = this.GetSpreadWaysIntroduction();
+            statistics.EstablishmentClass = this.GetEstablishmentClass();
 
             return statistics;
         }
@@ -303,6 +304,42 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return barCharts.OrderBy(x => x.Name).ToList();
+        }
+
+        private List<BarChart> GetEstablishmentClass()
+        {
+            var reproductiveEstablishmentClasses = new List<AlienSpeciesAssessment2023SpeciesStatus>((IEnumerable<AlienSpeciesAssessment2023SpeciesStatus>)Enum.GetValues(typeof(AlienSpeciesAssessment2023SpeciesStatus))).Skip(6).ToList();
+
+            var doorKnockerEstablishmentClasses = new List<AlienSpeciesAssessment2023SpeciesStatus>((IEnumerable<AlienSpeciesAssessment2023SpeciesStatus>)Enum.GetValues(typeof(AlienSpeciesAssessment2023SpeciesStatus))).Skip(1).Take(5).ToList();
+
+            var barCharts = new List<BarChart>()
+            {
+                new BarChart()
+                {
+                    Name = "Reproduserende",
+                    Data = _unfilteredQuery.Where(x => reproductiveEstablishmentClasses.Contains(x.SpeciesStatus)).Select(x => new BarChart.BarChartData()
+                    {
+                        Name = x.SpeciesStatus.DisplayName(),
+                        Count = _query.Where(y => y.SpeciesStatus == x.SpeciesStatus).Count()
+                    }).ToList()
+                },
+                new BarChart()
+                {
+                    Name = "Dørstokkart",
+                    Data = _unfilteredQuery.Where(x => doorKnockerEstablishmentClasses.Contains(x.SpeciesStatus)).Select(x => new BarChart.BarChartData()
+                    {
+                        Name = x.SpeciesStatus.DisplayName(),
+                        Count = _query.Where(y => y.SpeciesStatus == x.SpeciesStatus).Count()
+                    }).ToList()
+                }
+            };
+
+            foreach (var barChart in barCharts)
+            {
+                barChart.MaxValue = barCharts.Max(x => x.Data.Max(y => y.Count));
+            }
+
+            return barCharts;
         }
     }
 }

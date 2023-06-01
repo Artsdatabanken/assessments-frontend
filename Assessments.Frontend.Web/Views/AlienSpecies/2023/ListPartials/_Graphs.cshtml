@@ -36,11 +36,11 @@
     <hr/>
 
     <h3>@Constants.decisiveCriteriaFigureHeader</h3>
-    <div class="bar-chart-decisive-criteria">
+    <div class="bar-chart-decisive-criteria bar-chart-sub-chart">
         <div class="bar-chart-info-box bar-chart-info-box-1"><p>Invasjons-potensial</p></div>
         <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="invasionPotential" />
     </div>
-    <div class="bar-chart-decisive-criteria">
+    <div class="bar-chart-decisive-criteria bar-chart-sub-chart">
         <div class="bar-chart-info-box bar-chart-info-box-2"><p>@Constants.yAxisLabel</p></div>
         <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="ecologicalEffect" />
     </div>
@@ -57,7 +57,7 @@
     <h4>@Constants.natureTypesEffectsFigureHeader2</h4>
     @for (var i = 0; i < Model.Statistics.NatureTypesEffect.Count; i++)
     {
-        <div class="bar-chart-nature-types">
+        <div class="bar-chart-nature-types bar-chart-sub-chart">
             <div class="bar-chart-info-box bar-chart-info-box-nature-types-@i">@Model.Statistics.NatureTypesEffect[i].Name</div>
             <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.NatureTypesEffect[i]" />
         </div>

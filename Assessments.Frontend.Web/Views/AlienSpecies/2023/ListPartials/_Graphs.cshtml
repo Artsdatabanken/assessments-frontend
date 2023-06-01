@@ -85,4 +85,16 @@
         </div>
     }
     <p>@Constants.spreadWaysFigureText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+
+    <hr/>
+
+    <h3>@Constants.establishmentClassHeader</h3>
+    @for (var i = 0; i < Model.Statistics.EstablishmentClass.Count; i++)
+    {
+        <div class="bar-chart-sub-chart bar-chart-establishment-class">
+            <div class="bar-chart-info-box bar-chart-info-box-establishment-class-@i"><p>@Model.Statistics.EstablishmentClass[i].Name</p></div>
+            <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.EstablishmentClass[i]" />
+        </div>
+    }
+    <p>@Constants.establishmentClassFigureText Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 </div>

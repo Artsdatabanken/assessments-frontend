@@ -317,7 +317,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 new BarChart()
                 {
                     Name = "Reproduserende",
-                    Data = _unfilteredQuery.Where(x => reproductiveEstablishmentClasses.Contains(x.SpeciesStatus)).Select(x => new BarChart.BarChartData()
+                    Data = _unfilteredQuery.Where(x => reproductiveEstablishmentClasses.Contains(x.SpeciesStatus)).DistinctBy(x => x.SpeciesStatus).Select(x => new BarChart.BarChartData()
                     {
                         Name = x.SpeciesStatus.DisplayName(),
                         Count = _query.Where(y => y.SpeciesStatus == x.SpeciesStatus).Count()
@@ -326,7 +326,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 new BarChart()
                 {
                     Name = "Dørstokkart",
-                    Data = _unfilteredQuery.Where(x => doorKnockerEstablishmentClasses.Contains(x.SpeciesStatus)).Select(x => new BarChart.BarChartData()
+                    Data = _unfilteredQuery.Where(x => doorKnockerEstablishmentClasses.Contains(x.SpeciesStatus)).DistinctBy(x => x.SpeciesStatus).Select(x => new BarChart.BarChartData()
                     {
                         Name = x.SpeciesStatus.DisplayName(),
                         Count = _query.Where(y => y.SpeciesStatus == x.SpeciesStatus).Count()

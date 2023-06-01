@@ -215,6 +215,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string CurrentPresenceComment { get; set; }
 
+        public string ArtskartObservationChangesDescription { get; set; }
+
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
     }
 

@@ -260,6 +260,18 @@
     list-style-type: none;
 }
 
+.bar-chart-element-smaller {
+    width: 75%;
+}
+
+.bar-chart-element-small {
+    width: 60%;
+}
+
+.bar-chart-element-smallest {
+    width: 40%;
+}
+
 .bar-chart-bar-wrapper {
     display: flex;
     align-items: center;
@@ -386,5 +398,17 @@
     .bar-chart-info-box p {
         transform: inherit;
         margin: 0;
+    }
+
+    .bar-chart-element-smaller {
+        width: inherit;
+    }
+
+    .bar-chart-element-small {
+        width: 90%;
+    }
+
+    .bar-chart-element-smallest {
+        width: 70%;
     }
 }

@@ -3,12 +3,30 @@
 
 @{
     var count = Model.Data.Sum(x => x.Count);
+
+    string HasFewResultsClass()
+    {
+        var className = string.Empty;
+        if (Model.MaxValue == 1)
+        {
+            className = "bar-chart-element-smallest";
+        }
+        else if (Model.MaxValue < 20 && Model.MaxValue >= 10)
+        {
+            className = "bar-chart-element-smaller";
+        }
+        else if (Model.MaxValue < 10)
+        {
+            className = "bar-chart-element-small";
+        }
+        return className;
+    }
 }
 
 <ul class="bar-chart">
     @foreach (var speciesGroup in Model.Data)
     {
-        <li class="bar-chart-element">
+        <li class="bar-chart-element @HasFewResultsClass()">
             <div class="bar-chart-name">@speciesGroup.Name</div>
             <div class="bar-chart-bar-wrapper">
                 <div class="bar-chart-bar" style="width: @(Helpers.GetBarChartHeight(Model.MaxValue, speciesGroup.Count))%"></div>

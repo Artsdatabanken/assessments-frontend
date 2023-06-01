@@ -262,7 +262,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         private BarChart GetSpreadWays()
         {
-            var allSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).ToList();
+            var allSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).Take(6).ToList();
 
             var barChart = new BarChart()
             {

@@ -228,10 +228,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             foreach (var impactedNatureType in impactedNatureTypes.GroupBy(x => x.MajorTypeGroup).OrderBy(x => x.Key))
             {
-                var data = impactedNatureType.GroupBy(x => x.Name).Select(y => new
+                var data = impactedNatureType.GroupBy(x => x.Name).Select(x => new
                 {
-                    Name = y.Key,
-                    Count = _query.SelectMany(y => y.ImpactedNatureTypes).Where(z => z.Name == y.Key).Count()
+                    Name = x.Key,
+                    Count = _query.SelectMany(y => y.ImpactedNatureTypes.DistinctBy(z => z.Name)).Where(y => y.Name == x.Key).Count()
                 });
 
                 var barChart = new BarChart

@@ -71,6 +71,18 @@
 
     <h3>@Constants.spreadWaysHeader</h3>
     <h4>@Constants.spreadWaysFigureHeader1</h4>
-    <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpreadWays" />
+    <div class="bar-chart-major-spread-ways">
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpreadWays" />
+    </div>
     <p>@Constants.spreadWaysFigureText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+
+    <h4>@Constants.spreadWaysFigureHeader2</h4>
+    @for(var i = 0; i < Model.Statistics.SpreadWaysIntroduction.Count; i++)
+    {
+        <div class="bar-chart-spread-ways bar-chart-sub-chart">
+            <div class="bar-chart-info-box bar-chart-info-box-spread-ways-@i">@Model.Statistics.SpreadWaysIntroduction[i].Name</div>
+            <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpreadWaysIntroduction[i]" />
+        </div>
+    }
+    <p>@Constants.spreadWaysFigureText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 </div>

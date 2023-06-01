@@ -30,6 +30,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             statistics.SpeciesGroups = this.GetSpeciesGroups();
             statistics.MajorNatureTypesEffect = this.GetMajorNatureTypesEffect();
             statistics.NatureTypesEffect = this.GetNatureTypesEffect();
+            statistics.SpreadWays = this.GetSpreadWays();
 
             return statistics;
         }
@@ -257,6 +258,22 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return barCharts;
+        }
+
+        private BarChart GetSpreadWays()
+        {
+            var allSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).ToList();
+
+            var barChart = new BarChart()
+            {
+                Data = allSpreadWays.Select(x => new BarChart.BarChartData()
+                {
+                    Name = x.DisplayName(),
+                    Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways).Where(y => y.MainCategory == x).Count()
+                }).OrderByDescending(x => x.Count).ToList()
+            };
+            barChart.MaxValue = barChart.Data.Max(x => x.Count);
+            return barChart;
         }
     }
 }

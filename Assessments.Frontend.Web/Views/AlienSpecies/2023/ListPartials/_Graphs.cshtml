@@ -63,4 +63,11 @@
         </div>
     }
     <p>@Constants.natureTypesEffectsText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger og totalt @Model.Statistics.NatureTypesEffect.SelectMany(x => x.Data).Sum(x => x.Count) observasjoner i sjeldne eller truede naturtyper.</p>
+
+    <hr/>
+
+    <h3>@Constants.spreadWaysHeader</h3>
+    <h4>@Constants.spreadWaysFigureHeader1</h4>
+    <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpreadWays" />
+    <p>@Constants.spreadWaysFigureText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 </div>

@@ -482,6 +482,11 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string natureTypesEffectsFigureHeader2 = "Antall vurderinger per sjeldne eller truede naturtype";
         public const string natureTypesEffectsText1 = "Antall vurderinger per natursystem eller landform med truede eller sjeldne naturtyper (Rødlista for Naturtyper 2018). Den vurderte arten kan være observert i et natursystem eller landform i dag, eller den forventes å kolonisere natursystemet eller landformen i fremtiden. Hvert natursystem og landform telles kun én gang per vurdering, selv om en art kan finnes i flere truede eller sjeldne naturtyper innenfor hver (se neste figur).";
         public const string natureTypesEffectsText2 = "Antall vurderinger per sjeldne eller truede naturtype fordelt på natursystem og landform (Rødlista for Naturtyper 2018). Den vurderte arten kan være observert i naturtypen i dag, eller den forventes å kolonisere naturtypen i fremtiden. Én art kan være i flere naturtyper, og totalantallet kan derfor overstige antall vurderinger i utvalget. Merk at et lavt antall observasjoner i en naturtype kan skyldes at naturtypen er lite kartlagt, eller at kartleggingsdata ikke er tilgjengelig.";
+        public const string spreadWaysHeader = "Spredningsveier til norsk natur";
+        public const string spreadWaysFigureHeader1 = "Antall vurderinger per hovedspredningsvei til norsk natur";
+        public const string spreadWaysFigureHeader2 = "Antall vurderinger per spredningsvei til norsk natur";
+        public const string spreadWaysFigureText1 = "Antall vurderinger i utvalget per hovedspredningsvei til natur. En fremmed art kan ha flere hovedspredningsveier til naturen, og det totale antallet kan derfor overstige antall vurderinger.";
+        public const string spreadWaysFigureText2 = "Antall vurderinger per spredningsvei til norsk natur fordelt på hovedspredningsvei. En fremmed art kan ha flere spredningsveier til naturen, og det totale antallet kan derfor overstige antall vurderinger.";
 
 
     }

@@ -1503,7 +1503,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Filters = AlienSpecies2023SpeciesStatusFilters,
             FilterDescription = "",
             FilterButtonName = "etableringsklassefiltre",
-            FilterButtonText = "Etableringsklasse i dag"
+            FilterButtonText = "Etableringsstatus i dag"
         };
     }
 

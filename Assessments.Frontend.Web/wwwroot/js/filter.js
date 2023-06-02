@@ -104,7 +104,6 @@ if (filters) {
     }
 
     function startup() {
-        scrollToPreviousPosition();
         // Remove no javascript tag, making js-availiable styling apply
         if (document.getElementById("open_filter")) {
             document.getElementById("open_filter").classList.remove("no_js");
@@ -122,6 +121,7 @@ if (filters) {
             handleFirstTime();
         }
         initialCollapsibleCheck();
+        scrollToPreviousPosition();
     }
 
     // EVENTS 

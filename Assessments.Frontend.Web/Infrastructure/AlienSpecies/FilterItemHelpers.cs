@@ -899,6 +899,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Varietet = 24,
             Form = 25,
 
+            [Display(Name = "Hybrid")]
+            tth,
+
             [Display(Name = "Taksonomisk nivå")]
             ttn,
 
@@ -935,6 +938,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanksFilters =
         {
+            new()
+            {
+            Name = TaxonRankEnum.tth.DisplayName(),
+            NameShort = TaxonRankEnum.tth.ToString()
+            },
             new()
             {
                 Name = TaxonRankEnum.ttn.DisplayName(),

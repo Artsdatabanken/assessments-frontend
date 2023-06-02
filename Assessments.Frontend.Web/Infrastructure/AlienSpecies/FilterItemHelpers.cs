@@ -921,6 +921,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
+            Name = TaxonRankEnum.tth.DisplayName(),
+            NameShort = TaxonRankEnum.tth.ToString()
+            },
+            new()
+            {
                 Name = nameof(TaxonRankEnum.Underart),
                 NameShort = TaxonRankEnum.Underart.GetHashCode().ToString()
             },
@@ -933,16 +938,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
             Name = nameof(TaxonRankEnum.Form),
             NameShort = TaxonRankEnum.Form.GetHashCode().ToString()
-            }
+            },
         };
 
         public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanksFilters =
         {
-            new()
-            {
-            Name = TaxonRankEnum.tth.DisplayName(),
-            NameShort = TaxonRankEnum.tth.ToString()
-            },
             new()
             {
                 Name = TaxonRankEnum.ttn.DisplayName(),

@@ -260,6 +260,18 @@
     list-style-type: none;
 }
 
+.bar-chart-element-smaller {
+    width: 75%;
+}
+
+.bar-chart-element-small {
+    width: 60%;
+}
+
+.bar-chart-element-smallest {
+    width: 40%;
+}
+
 .bar-chart-bar-wrapper {
     display: flex;
     align-items: center;
@@ -277,12 +289,17 @@
     height: 40px;
 }
 
-.bar-chart-nature-types .bar-chart-bar {
+.bar-chart-major-nature-types .bar-chart-bar {
     height: 30px;
+}
+
+.bar-chart-nature-types .bar-chart-bar {
+    height: 35px;
 }
 
 .bar-chart-name {
     width: 180px;
+    min-width: 180px;
     margin-right: 10px;
     text-align: right;
 }
@@ -292,14 +309,14 @@
     flex-direction: row;
 }
 
-.bar-chart-decisive-criteria {
+.bar-chart-sub-chart {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin: 20px 0;
 }
 
-.bar-chart-decisive-criteria .bar-chart {
+.bar-chart-sub-chart .bar-chart {
     margin-bottom: 0;
 }
 
@@ -309,8 +326,44 @@
     justify-content: center;
     align-items: center;
     border: 1px solid black;
-    background: #aaa;
+    background: #aaa6;
     margin-right: 10px;
+}
+
+.bar-chart-nature-types .bar-chart-info-box {
+    width: 160px;
+}
+
+.bar-chart-info-box-nature-types-0 {
+    height: 160px;
+}
+
+.bar-chart-info-box-nature-types-1 {
+    height: 330px;
+}
+
+.bar-chart-info-box-nature-types-2 {
+    height: 100px;
+}
+
+.bar-chart-info-box-nature-types-3 {
+    height: 120px;
+}
+
+.bar-chart-info-box-nature-types-4 {
+    height: 50px;
+}
+
+.bar-chart-info-box-nature-types-5 {
+    height: 250px;
+}
+
+.bar-chart-info-box-nature-types-6 {
+    height: 360px;
+}
+
+.bar-chart-info-box-nature-types-7 {
+    height: 450px;
 }
 
 .bar-chart-info-box-1 {
@@ -323,4 +376,39 @@
 
 .bar-chart-info-box p {
     transform: rotate(-90deg);
+}
+
+.bar-chart-nature-types .bar-chart-info-box p {
+    transform: inherit;
+}
+
+@media only screen and (max-width: 480px) {
+    .bar-chart-sub-chart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .bar-chart-sub-chart .bar-chart-info-box {
+        height: 30px;
+        width: 100%;
+    }
+
+    .bar-chart-info-box p {
+        transform: inherit;
+        margin: 0;
+    }
+
+    .bar-chart-element-smaller {
+        width: inherit;
+    }
+
+    .bar-chart-element-small {
+        width: 90%;
+    }
+
+    .bar-chart-element-smallest {
+        width: 70%;
+    }
 }

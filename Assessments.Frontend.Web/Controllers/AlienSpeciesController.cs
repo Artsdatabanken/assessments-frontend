@@ -44,7 +44,7 @@ namespace Assessments.Frontend.Web.Controllers
                 return GetExport(query);
             if (viewModel.View == "stat")
             {
-                var statistics = new Statistics(query, unfilteredQuery);
+                var statistics = new StatisticsHelper(query, unfilteredQuery);
                 viewModel.Statistics = statistics.GetStatistics();
             }
 

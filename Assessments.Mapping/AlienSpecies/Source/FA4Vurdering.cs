@@ -294,6 +294,10 @@ namespace Assessments.Mapping.AlienSpecies.Source
         public string Connected { get; set; }
 
         public CTaxon ConnectedTaxon { get; set; }
+        /// <summary>
+        /// List of all connected taxons
+        /// </summary>
+        public CTaxon[] ConnectedTaxons { get; set; }
 
         public string SpeciesStatus { get; set; }
 

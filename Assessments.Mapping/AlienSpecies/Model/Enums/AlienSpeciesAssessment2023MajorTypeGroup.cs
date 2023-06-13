@@ -34,7 +34,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Svalbard")]
         SvalbardThreatned,
 
-        [Display(Name = "V\u00E5tmark")]
+        [Display(Name = "Våtmark")]
         WetlandsThreatned,
 
         [Display(Name = "Limniske vannmasser")]

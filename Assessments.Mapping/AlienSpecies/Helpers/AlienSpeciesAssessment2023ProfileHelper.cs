@@ -972,7 +972,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 "Semi-naturlig" => AlienSpeciesAssessment2023MajorTypeGroup.SemiNaturalThreatned,
                 "Skog" => AlienSpeciesAssessment2023MajorTypeGroup.ForestThreatned,
                 "Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.SvalbardThreatned,
-                "Våtmark" => AlienSpeciesAssessment2023MajorTypeGroup.WetlandsThreatned,
+                "V\u00E5tmark" => AlienSpeciesAssessment2023MajorTypeGroup.WetlandsThreatned,
                 "Limniske vannmasser" => AlienSpeciesAssessment2023MajorTypeGroup.LimnicWaterbodySystems,
                 "Marine vannmasser" => AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterbodySystems,
                 "Snø- og issystemer" => AlienSpeciesAssessment2023MajorTypeGroup.SnowAndIceSystems,
@@ -980,7 +980,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 "Saltvannsbunnsystemer" => AlienSpeciesAssessment2023MajorTypeGroup.MarineSeabedSystems,
                 "Elvebunnsystemer" => AlienSpeciesAssessment2023MajorTypeGroup.RiverBottomSystems,
                 "Fastmarkssystemer" => AlienSpeciesAssessment2023MajorTypeGroup.TerrestrialSystems,
-                "Våtmarkssystemer" => AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems,
+                "V\u00E5tmarkssystemer" => AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems,
                 _ => AlienSpeciesAssessment2023MajorTypeGroup.Unknown,
             };
         }

@@ -58,13 +58,15 @@
     <p>@Constants.natureTypesEffectsText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 
     <h4>@Constants.natureTypesEffectsFigureHeader2</h4>
-    @for (var i = 0; i < Model.Statistics.NatureTypesEffect.Count; i++)
-    {
-        <div class="bar-chart-nature-types bar-chart-sub-chart">
-            <div class="bar-chart-info-box bar-chart-info-box-nature-types-@i">@Model.Statistics.NatureTypesEffect[i].Name</div>
-            <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.NatureTypesEffect[i]" />
-        </div>
-    }
+    <div class="bar-chart-double-column">
+        @for (var i = 0; i < Model.Statistics.NatureTypesEffect.Count; i++)
+        {
+            <div class="bar-chart-nature-types bar-chart-sub-chart">
+                <div class="bar-chart-info-box">@Model.Statistics.NatureTypesEffect[i].Name</div>
+                <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.NatureTypesEffect[i]" />
+            </div>
+        }
+    </div>
     <p>@Constants.natureTypesEffectsText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger og totalt @Model.Statistics.NatureTypesEffect.SelectMany(x => x.Data).Sum(x => x.Count) observasjoner i sjeldne eller truede naturtyper.</p>
 
     <hr/>
@@ -77,13 +79,15 @@
     <p>@Constants.spreadWaysFigureText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 
     <h4>@Constants.spreadWaysFigureHeader2</h4>
-    @for(var i = 0; i < Model.Statistics.SpreadWaysIntroduction.Count; i++)
-    {
-        <div class="bar-chart-spread-ways bar-chart-sub-chart">
-            <div class="bar-chart-info-box bar-chart-info-box-spread-ways-@i">@Model.Statistics.SpreadWaysIntroduction[i].Name</div>
-            <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpreadWaysIntroduction[i]" />
-        </div>
-    }
+    <div class="bar-chart-double-column">
+        @for(var i = 0; i < Model.Statistics.SpreadWaysIntroduction.Count; i++)
+        {
+            <div class="bar-chart-spread-ways bar-chart-sub-chart">
+                <div class="bar-chart-info-box bar-chart-info-box-spread-ways-@i">@Model.Statistics.SpreadWaysIntroduction[i].Name</div>
+                <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpreadWaysIntroduction[i]" />
+            </div>
+        }
+    </div>
     <p>@Constants.spreadWaysFigureText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 
     <hr/>
@@ -92,7 +96,7 @@
     @for (var i = 0; i < Model.Statistics.EstablishmentClass.Count; i++)
     {
         <div class="bar-chart-sub-chart bar-chart-establishment-class">
-            <div class="bar-chart-info-box bar-chart-info-box-establishment-class-@i"><p>@Model.Statistics.EstablishmentClass[i].Name</p></div>
+            <div class="bar-chart-info-box"><p>@Model.Statistics.EstablishmentClass[i].Name</p></div>
             <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.EstablishmentClass[i]" />
         </div>
     }

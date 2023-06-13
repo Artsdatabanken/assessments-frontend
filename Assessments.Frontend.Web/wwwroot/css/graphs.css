@@ -328,9 +328,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     border: 1px solid black;
     background: #aaa6;
     margin-right: 10px;
+}
+
+.bar-chart-major-spread-ways,
+.bar-chart-major-nature-types {
+    margin: 20px 0;
 }
 
 .bar-chart-nature-types .bar-chart-info-box,
@@ -379,11 +385,11 @@
 }
 
 .bar-chart-info-box-spread-ways-0 {
-    height: 550px;
+    height: 350px;
 }
 
 .bar-chart-info-box-spread-ways-1 {
-    height: 50px;
+    height: 700px;
 }
 
 .bar-chart-info-box-spread-ways-2 {
@@ -391,15 +397,15 @@
 }
 
 .bar-chart-info-box-spread-ways-3 {
-    height: 150px;
+    height: 550px;
 }
 
 .bar-chart-info-box-spread-ways-4 {
-    height: 700px;
+    height: 150px;
 }
 
 .bar-chart-info-box-spread-ways-5 {
-    height: 350px;
+    height: 50px;
 }
 
 .bar-chart-info-box-establishment-class-0 {

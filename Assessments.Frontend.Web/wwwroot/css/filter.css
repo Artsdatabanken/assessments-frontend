@@ -29,6 +29,10 @@
         min-width: 81px;
         right: 0;
     }
+
+    .empty_filters {
+        min-height: 76px;
+    }
 }
 
 .controls button {

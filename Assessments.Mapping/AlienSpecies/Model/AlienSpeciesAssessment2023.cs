@@ -658,5 +658,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Regional nature variation (bioclimatic zones and sections in the arctic)
         /// </summary>
         public List<AlienSpeciesAssessment2023ArcticBioClimateZones> ArcticBioClimateZones { get; set; }
+
+        /// <summary>
+        /// Description of occurrences that has been added to or removed from the dataset and why
+        /// </summary>
+        public string ArtskartObservationChangesDescription { get; set; }
     }
 }

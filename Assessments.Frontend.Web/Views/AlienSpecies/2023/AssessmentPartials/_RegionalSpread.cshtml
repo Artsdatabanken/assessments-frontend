@@ -15,7 +15,6 @@
     var showInteractiveMap = isAlienSpecie && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
 
-
     var hasWaterAreas = Model.FreshWaterRegionModel.IsWaterArea;
     var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
     {
@@ -89,7 +88,6 @@
                     <td>@Model.AreaOfOccupancyKnown km<sup>2</sup></td>
                     <td></td>
                 </tr>
-
                 <tr>
                     <td>Antatt lavt anslag</td>
                     <td>@Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
@@ -106,6 +104,7 @@
                     <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
                 </tr>
             </table>
+            <p is-visible="@(!string.IsNullOrEmpty(Model.ArtskartObservationChangesDescription))">@Html.Raw(Model.ArtskartObservationChangesDescription)</p>
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>

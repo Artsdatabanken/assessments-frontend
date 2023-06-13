@@ -96,5 +96,5 @@
             <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.EstablishmentClass[i]" />
         </div>
     }
-    <p>@Constants.establishmentClassFigureText Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+    <p>@Html.Raw(Constants.establishmentClassFigureText) Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 </div>

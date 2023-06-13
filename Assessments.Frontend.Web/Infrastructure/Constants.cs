@@ -490,6 +490,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string spreadWaysFigureText1 = "Antall vurderinger i utvalget per hovedspredningsvei til natur. En fremmed art kan ha flere hovedspredningsveier til naturen, og det totale antallet kan derfor overstige antall vurderinger.";
         public const string spreadWaysFigureText2 = "Antall vurderinger per spredningsvei til norsk natur fordelt på hovedspredningsvei. En fremmed art kan ha flere spredningsveier til naturen, og det totale antallet kan derfor overstige antall vurderinger.";
         public const string establishmentClassHeader = "Artens etableringsstatus i dag";
-        public const string establishmentClassFigureText = "En fremmed arts etableringsstatus, altså hvor godt etablert arten er i dag, klassifiseres gjennom et standardisert system med etableringsklasser. Den høyeste etableringsklassen arten oppfyller i dag - det være etablert eller å kun finnes utenlands - avgjør artens etableringsstatus.";
+        public const string establishmentClassFigureText = "En fremmed arts etableringsstatus, altså hvor godt etablert arten er i dag, klassifiseres gjennom et standardisert system med etableringsklasser. Den <i>høyeste</i> etableringsklassen arten oppfyller i dag - det være etablert eller å kun finnes utenlands - avgjør artens etableringsstatus.";
     }
 }

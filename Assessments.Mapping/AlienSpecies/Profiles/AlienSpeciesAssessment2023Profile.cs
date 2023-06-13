@@ -235,6 +235,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.CoastLineSections, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CoastLineSections.Any(x => x.Skagerrak || x.None || x.OpenCoastLine)))
                 .ForMember(dest => dest.CurrentBioClimateZones, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CurrentBioClimateZones.Any(x => x.StrongOceanic || x.ClearOceanic || x.WeakOceanic || x.TransferSection || x.WeakContinental) && src.Terrestrial))
                 .ForMember(dest => dest.ArcticBioClimateZones, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.ArcticBioClimateZones.Any(x => x.WeakOceanic || x.TransferSection || x.WeakContinental || x.ClearContinental)))
+                .ForMember(dest => dest.ArtskartObservationChangesDescription, opt =>
+                {
+                    opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() || src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien.ToString());
+                    opt.MapFrom(src => src.ArtskartManuellKommentar.StripUnwantedHtml());
+                })
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

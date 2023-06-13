@@ -30,6 +30,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             statistics.SpeciesGroups = this.GetSpeciesGroups();
             statistics.MajorNatureTypesEffect = this.GetMajorNatureTypesEffect();
             statistics.NatureTypesEffect = this.GetNatureTypesEffect();
+            statistics.SpreadWays = this.GetSpreadWays();
+            statistics.SpreadWaysIntroduction = this.GetSpreadWaysIntroduction();
 
             return statistics;
         }
@@ -257,6 +259,50 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
 
             return barCharts;
+        }
+
+        private BarChart GetSpreadWays()
+        {
+            var allSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).Take(6).ToList();
+
+            var barChart = new BarChart()
+            {
+                Data = allSpreadWays.Select(x => new BarChart.BarChartData()
+                {
+                    Name = x.DisplayName(),
+                    Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways.DistinctBy(z => z.Category)).Where(y => y.MainCategory == x && y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Count()
+                }).OrderByDescending(x => x.Count).ToList()
+            };
+            barChart.MaxValue = barChart.Data.Max(x => x.Count);
+            return barChart;
+        }
+
+        private List<BarChart> GetSpreadWaysIntroduction()
+        {
+            var allMainSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).Take(6).ToList();
+
+            var barCharts = new List<BarChart>();
+
+            foreach (var spreadWay in allMainSpreadWays)
+            {
+                var barChart = new BarChart()
+                {
+                    Name = spreadWay.DisplayName(),
+                    Data = _unfilteredQuery.SelectMany(x => x.IntroductionAndSpreadPathways.Where(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == spreadWay)).DistinctBy(x => x.Category).Select(x => new BarChart.BarChartData()
+                    {
+                        Name = x.Category,
+                        Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways.DistinctBy(z => z.Category)).Where(z => z.Category == x.Category && z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Count()
+                    }).OrderBy(x => x.Name).ToList()
+                };
+                barCharts.Add(barChart);
+            }
+
+            foreach (var barChart in barCharts)
+            {
+                barChart.MaxValue = barCharts.Max(x => x.Data.Max(y => y.Count));
+            }
+
+            return barCharts.ToList();
         }
     }
 }

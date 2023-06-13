@@ -85,6 +85,7 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
                 AreaOfOccupancyTotalHigh = assessment.AOOtotalHigh,
                 AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
+                ArtskartObservationChangesDescription = assessment.ArtskartObservationChangesDescription,
                 Category = assessment.Category,
                 CurrentPresenceComment = assessment.CurrentPresenceComment,
                 IsSvalbard = assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S,

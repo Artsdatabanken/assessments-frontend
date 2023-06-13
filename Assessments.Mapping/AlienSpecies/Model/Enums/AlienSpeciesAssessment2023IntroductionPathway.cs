@@ -87,8 +87,14 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             [Display(Name = "")]
             Unknown,
 
+            [Display(Name = "Tilsiktet utsetting")]
+            Released,
+
             [Display(Name = "Rømning/forvilling")]
             Escaped,
+
+            [Display(Name = "Forurensning av vare")]
+            Transportpolution,
 
             [Display(Name = "Blindpassasjer med transport")]
             Stowaway,
@@ -96,14 +102,8 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             [Display(Name = "Korridor")]
             Corridor,
 
-            [Display(Name = "Tilsiktet utsetting")]
-            Released,
-
             [Display(Name = "Egenspredning")]
             NaturalDispersal,
-
-            [Display(Name = "Forurensning av vare")]
-            Transportpolution,
 
             [Display(Name = "Direkte import")]
             ImportDirect

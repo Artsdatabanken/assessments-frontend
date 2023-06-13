@@ -302,7 +302,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 barChart.MaxValue = barCharts.Max(x => x.Data.Max(y => y.Count));
             }
 
-            return barCharts.OrderBy(x => x.Name).ToList();
+            return barCharts.ToList();
         }
     }
 }

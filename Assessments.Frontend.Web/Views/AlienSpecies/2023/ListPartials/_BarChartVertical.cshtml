@@ -2,15 +2,15 @@
 @using System.Globalization
 
 @{
-    var count = Model.BarChartDatas.Sum(x => x.Count);
+    var count = Model.Data.Sum(x => x.Count);
 }
 
 <ul class="graph color_graph bar-chart">
-    @foreach (var data in Model.BarChartDatas)
+    @foreach (var data in Model.Data)
     {
         <li class="statelement">
             <div class="heightbar_blank">
-                <div class="heightbar_indicator @data.NameShort" style="height: @(Helpers.GetBarChartHeight(Model.MaxAmount, data.Count))%">
+                <div class="heightbar_indicator @data.NameShort" style="height: @(Helpers.GetBarChartHeight(Model.MaxValue, data.Count))%">
                     <span class="percent">@data.Count.ToString("N0")</span>
                 </div>
             </div>

@@ -421,4 +421,24 @@ namespace Assessments.Frontend.Web.Infrastructure
             return listOrder.IndexOf(x) - listOrder.IndexOf(y);
         }
     }
+
+    public class AlienSpeciesSpeciesStatusComparer : IComparer<string>
+    {
+        private readonly List<string> listOrder = new()
+        {
+            AlienSpeciesAssessment2023SpeciesStatus.C1.ToString(),
+            AlienSpeciesAssessment2023SpeciesStatus.C0.ToString(),
+            AlienSpeciesAssessment2023SpeciesStatus.B2.ToString(),
+            AlienSpeciesAssessment2023SpeciesStatus.B1.ToString(),
+            AlienSpeciesAssessment2023SpeciesStatus.A.ToString()
+        };
+
+        public int Compare(string x, string y)
+        {
+            if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
+                return 0;
+
+            return listOrder.IndexOf(x) - listOrder.IndexOf(y);
+        }
+    }
 }

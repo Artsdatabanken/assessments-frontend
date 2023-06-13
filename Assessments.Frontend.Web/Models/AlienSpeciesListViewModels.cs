@@ -99,6 +99,14 @@ namespace Assessments.Frontend.Web.Models
 
         public BarChart SpeciesGroups { get; set; }
 
-        public BarChart NatureTypesEffect { get; set; }
+        public BarChart MajorNatureTypesEffect { get; set; }
+
+        public List<BarChart> NatureTypesEffect { get; set; }
+
+        public BarChart SpreadWays { get; set; }
+
+        public List<BarChart> SpreadWaysIntroduction { get; set; }
+
+        public List<BarChart> EstablishmentClass { get; set; }
     }
 }

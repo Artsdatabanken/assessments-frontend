@@ -285,7 +285,8 @@
     border: 1px solid black;
 }
 
-.bar-chart-decisive-criteria .bar-chart-bar {
+.bar-chart-decisive-criteria .bar-chart-bar,
+.bar-chart-establishment-class .bar-chart-bar {
     height: 40px;
 }
 
@@ -407,8 +408,17 @@
     height: 50px;
 }
 
+.bar-chart-info-box-establishment-class-0 {
+    height: 140px;
+}
+
+.bar-chart-info-box-establishment-class-1 {
+    height: 240px;
+}
+
 .bar-chart-info-box p {
     transform: rotate(-90deg);
+    margin-bottom: 0;
 }
 
 .bar-chart-nature-types .bar-chart-info-box p {

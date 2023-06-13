@@ -106,5 +106,7 @@ namespace Assessments.Frontend.Web.Models
         public BarChart SpreadWays { get; set; }
 
         public List<BarChart> SpreadWaysIntroduction { get; set; }
+
+        public List<BarChart> EstablishmentClass { get; set; }
     }
 }

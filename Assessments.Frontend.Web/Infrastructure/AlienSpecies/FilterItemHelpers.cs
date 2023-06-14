@@ -899,6 +899,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Varietet = 24,
             Form = 25,
 
+            [Display(Name = "Hybrid")]
+            tth,
+
             [Display(Name = "Taksonomisk nivå")]
             ttn,
 
@@ -918,6 +921,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
+            Name = TaxonRankEnum.tth.DisplayName(),
+            NameShort = TaxonRankEnum.tth.ToString()
+            },
+            new()
+            {
                 Name = nameof(TaxonRankEnum.Underart),
                 NameShort = TaxonRankEnum.Underart.GetHashCode().ToString()
             },
@@ -930,7 +938,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
             Name = nameof(TaxonRankEnum.Form),
             NameShort = TaxonRankEnum.Form.GetHashCode().ToString()
-            }
+            },
         };
 
         public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanksFilters =

@@ -235,6 +235,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 {
                     nameof(TaxonRank.TaxonRankEnum.tva) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
                     nameof(TaxonRank.TaxonRankEnum.tvi) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
+                    nameof(TaxonRank.TaxonRankEnum.tth) => query.Where(x => x.ScientificName.ScientificName.Contains('×')),
                     _ => isInt ? query.Where(x => ((int)x.ScientificName.ScientificNameRank) == result) : null
                 };
                 if (assessments != null)

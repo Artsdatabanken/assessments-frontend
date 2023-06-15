@@ -92,7 +92,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         [Display(Name = "Endret tolkning av retningslinjer")]
         ccet,
 
-        [Display(Name = "Endret status (taksnonomi, til/fra stedegen)")]
+        [Display(Name = "Endret status (taksonomi, til/fra stedegen)")]
         cces,
 
         [Display(Name = "Vurdert for første gang")]
@@ -1511,7 +1511,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Filters = AlienSpecies2023SpeciesStatusFilters,
             FilterDescription = "",
             FilterButtonName = "etableringsklassefiltre",
-            FilterButtonText = "Etableringsklasse i dag"
+            FilterButtonText = "Etableringsstatus i dag"
         };
     }
 

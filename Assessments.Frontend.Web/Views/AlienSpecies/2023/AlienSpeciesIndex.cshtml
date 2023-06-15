@@ -27,14 +27,31 @@
 
     ViewData["Title"] = "Fremmedartslista 2023";
 
-    List<AlienSpeciesDetailViewModel> koko = new List<AlienSpeciesDetailViewModel>();
-    foreach(var el in Model.Results)
+    bool MakeMarginLeftSide(int counter)
     {
-        koko.Add(new AlienSpeciesDetailViewModel(el));
+        return (counter % 4) switch
+        {
+            0 => true,
+            1 => true,
+            2 => false,
+            3 => false,
+            _ => false
+        };
+    }
+
+    List<AlienSpeciesDetailViewModel> koko = new List<AlienSpeciesDetailViewModel>();
+    for (var i = 0; i < Model.Results.Count; i++)
+    {
+        var model = Model.Results[i];
+        koko.Add(new AlienSpeciesDetailViewModel(model));
     }
 }
 
-@foreach(var res in koko)
+@for (var i = 0; i < koko.Count; i++)
 {
-    <partial name="/Views/AlienSpecies/2023/AlienSpeciesDetail.cshtml" model="res"/>
+    <div class="flex-pdf-space @(MakeMarginLeftSide(i) ? "" : "make-margin-right-side")">
+        <div is-visible="MakeMarginLeftSide(i)" class="page-side-margin"></div>
+        <partial name="/Views/AlienSpecies/2023/AlienSpeciesDetail.cshtml" model="koko[i]"/>
+        <div is-visible="!MakeMarginLeftSide(i)" class="page-side-margin"></div>
+    </div>
 }

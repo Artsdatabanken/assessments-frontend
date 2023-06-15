@@ -15,6 +15,7 @@
         AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
         ScientificNameViewModel = new ScientificNameViewModel()
         {
+            AssessmentId = assessment.Id,
             PopularName = assessment.VernacularName,
             ScientificName = assessment.ScientificName.ScientificNameFormatted,
             ScientificNameFormatted = true,

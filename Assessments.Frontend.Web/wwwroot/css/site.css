@@ -3,6 +3,18 @@
     overflow-x: hidden;
 }
 
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+div,
+span {
+    font-family: 'Chivo', sans-serif;
+}
+
 ul.category_displayer {
     width: 60%;
 }
@@ -21,6 +33,13 @@ ul.category_displayer {
     right: 20px;
 }
 
+.make-margin-right-side .sidebar_image_info-previous {
+    position: absolute;
+    margin-top: -430px;
+    width: 280px;
+    right: 120px;
+}
+
 .sidebar_image_info-regulation {
     position: absolute;
     margin-top: -280px;
@@ -28,8 +47,15 @@ ul.category_displayer {
     width: 280px;
 }
 
+.make-margin-right-side .sidebar_image_info-regulation {
+    position: absolute;
+    margin-top: -280px;
+    right: 120px;
+    width: 280px;
+}
+
 .flex-me p {
-    width: 580px;
+    width: 500px;
 }
 
 .main-content {
@@ -52,7 +78,7 @@ small.text-muted,
 
 li > span,
 li.description {
-    font-size: 18px !important;
+    font-size: 16px !important;
 }
 
 .content-placer {
@@ -63,7 +89,14 @@ li.description {
     position: absolute;
     right: 20px;
     max-width: 460px;
-    margin-top: -900px;
+    margin-top: -850px;
+}
+
+.make-margin-right-side .species-images {
+    position: absolute;
+    right: 120px;
+    max-width: 460px;
+    margin-top: -850px;
 }
 
 .page-header {
@@ -360,7 +393,7 @@ option {
 }
 
 .page-header {
-    max-width: 60%;
+    max-width: 65%;
     border-bottom: 0;
 }
 
@@ -1011,4 +1044,21 @@ button {
 
 .underline {
     text-decoration: underline;
+}
+
+.flex-pdf-space {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.page-side-margin {
+    height: 0px;
+    width: 100px;
+    background: blue;
+}
+
+.header-div {
+    display: flex;
+    flex-direction: row;
 }

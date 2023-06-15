@@ -146,7 +146,6 @@ li.risk-level > span {
 .risk-matrix-container .flex-me {
     flex:1;
     min-width:50%;
-    padding:20px 0;
 }
 
 

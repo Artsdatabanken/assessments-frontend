@@ -18,12 +18,15 @@
             distributionName = "vurdert_S";
         }
     }
+
+    string description = ViewBag.glossary[distributionName]["description"];
+    if (Model.Category == "NA" || Model.Category == "NE")
+        description = description.Replace("Vurderingen gjelder", "Gjelder");
 }
 
 <div class="page_section @distributionName">
     <h2>Vurderingsområde og @Helpers.FixSpeciesLevel("{art}ens", Model.TaxonRank) utbredelse</h2>
     <p>
-        @{string description = ViewBag.glossary[distributionName]["description"];}        
         @Helpers.FixSpeciesLevel(description, Model.TaxonRank)
     </p>
 

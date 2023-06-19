@@ -340,7 +340,10 @@ namespace Assessments.Frontend.Web.Models
         public string ScientificName { get; set; }
 
         public string ScientificNameAuthor { get; set; }
+
         public bool ScientificNameFormatted { get; set; } = false;
+
+        public bool ShowAssessmentOf { get; set; } = true;
     }
 
     public class SidebarContentViewModel

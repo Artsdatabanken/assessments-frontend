@@ -107,7 +107,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     return String.Empty;
                 case nameof(parameters.TaxonRank):
                     if (parameters.TaxonRank?.Any() == true)
+                    {
+                        if (parameters.TaxonRank.Contains("ttn"))
+                            return $"{parameters.TaxonRank.Length - 1}";
                         return $"{parameters.TaxonRank.Length}";
+                    }
                     return String.Empty;
                 case nameof(parameters.NotAssessed):
                     if (parameters.NotAssessed?.Any() == true)

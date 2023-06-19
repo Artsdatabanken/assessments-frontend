@@ -22,7 +22,8 @@
         {
             PopularName = Model.PopularName,
             ScientificName = Model.ScientificName,
-            ScientificNameAuthor = Model.ScientificNameAuthor
+            ScientificNameAuthor = Model.ScientificNameAuthor,
+            ShowAssessmentOf = Model.Category != "NE" && Model.Category != "NA"
         },
         SpeciesGroupViewModel = new SpeciesGroupViewModel()
         {

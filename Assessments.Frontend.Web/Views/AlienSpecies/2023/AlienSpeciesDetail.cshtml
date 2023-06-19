@@ -18,7 +18,8 @@
             PopularName = assessment.VernacularName,
             ScientificName = assessment.ScientificName.ScientificNameFormatted,
             ScientificNameFormatted = true,
-            ScientificNameAuthor = assessment.ScientificName.ScientificNameAuthor
+            ScientificNameAuthor = assessment.ScientificName.ScientificNameAuthor,
+            ShowAssessmentOf = assessment.Category != AlienSpeciesAssessment2023Category.NR
         },
         SpeciesGroupViewModel = new SpeciesGroupViewModel()
         {

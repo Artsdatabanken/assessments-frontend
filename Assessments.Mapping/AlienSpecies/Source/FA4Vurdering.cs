@@ -55,6 +55,7 @@ namespace Assessments.Mapping.AlienSpecies.Source
         [JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
         public int TaxonID { get; set; }
         public string ScientificName { get; set; }
+        public string ScientificNameFormatted { get; set; }
         //[JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
         [JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
         public int ScientificNameId { get; set; }

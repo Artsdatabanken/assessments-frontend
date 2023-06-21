@@ -1,6 +1,10 @@
 ﻿@model SpeciesGroupViewModel
 
 <div class="speciesgroup_container">
+    <p>
+        Utført av <a href="@Model.SpeciesGroupInfoUrl" class="lowercase">ekspertkomité for @Model.ExpertCommittee </a> <br />
+        <partial name="/Views/Shared/_PublishedDate.cshtml" />
+    </p>
     <div class="species_group_image">
         <div class="image_background">
             @if (!String.IsNullOrEmpty(Model.SpeciesGroupImageUrl))
@@ -9,8 +13,4 @@
             }
         </div>
     </div>
-    <p>
-        Behandlet av <a href="@Model.SpeciesGroupInfoUrl" class="lowercase">ekspertkomité for @Model.ExpertCommittee </a> <br />
-        <partial name="/Views/Shared/_PublishedDate.cshtml" />
-    </p>
 </div>

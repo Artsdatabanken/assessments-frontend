@@ -3,15 +3,34 @@
 
 @{
     var hasSvalbardStyle =Model.AssessmentArea == "Svalbard";
+    var showAssessedTogether = Model.ConnectedTaxons?.Length != 0;
 }
 
 <div class="page-header">
-    <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.ScientificNameViewModel"/>
-    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel"/>
-    <br/>
+    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel" />
+    <div is-visible="showAssessedTogether">
+        <br/>
+        <p>
+            Vurderes sammen med @for (var i = 0; i < Model.ConnectedTaxons.Length; i++)
+            {
+                if (i + 1 == Model.ConnectedTaxons.Length)
+                {
+                    <span><a asp-action="Detail" asp-route-id="@Model.ConnectedTaxons[i].AssessmentId">@Html.Raw(Model.ConnectedTaxons[i].ScientificNameFormatted)</a>.</span>
+                }
+                else if (i + 2 == Model.ConnectedTaxons.Length)
+                {
+                    <span><a asp-action="Detail" asp-route-id="@Model.ConnectedTaxons[i].AssessmentId">@Html.Raw(Model.ConnectedTaxons[i].ScientificNameFormatted)</a> og </span>
+                }
+                else
+                {
+                    <span><a asp-action="Detail" asp-route-id="@Model.ConnectedTaxons[i].AssessmentId">@Html.Raw(Model.ConnectedTaxons[i].ScientificNameFormatted)</a>, </span>
+                }
+            }
+        </p>
+    </div>
     <span>Gjelder for  </span>
     <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
         @Model.AssessmentArea.
         </span>
-    <hr />
 </div>
+<hr />

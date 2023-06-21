@@ -1,4 +1,5 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Mapping.AlienSpecies.Source;
 using System.Collections.Generic;
 using static Assessments.Mapping.AlienSpecies.Source.FA4;
 
@@ -36,6 +37,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Explanation for why the taxon is evaluated at another taxonomic rank. Free text field.
         /// </summary>
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
+
+        /// <summary>
+        /// An array containing information about the taxons this species is assessed together with. These assessments will share most information, including category.
+        /// </summary>
+        public CTaxon[] ConnectedTaxons { get; set; }
 
         /// <summary>
         /// List including all criteria (A-I), their score and uncertainty

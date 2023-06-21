@@ -1,6 +1,7 @@
 using Assessments.Frontend.Web.Infrastructure.Enums;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Mapping.AlienSpecies.Source;
 using System;
 using System.Collections.Generic;
 using X.PagedList;
@@ -17,6 +18,8 @@ namespace Assessments.Frontend.Web.Models
     public class AssessmentPageHeaderViewModel
     {
         public string AssessmentArea { get; set; }
+
+        public CTaxon[] ConnectedTaxons { get; set; }
 
         public ScientificNameViewModel ScientificNameViewModel { get; set; }
 

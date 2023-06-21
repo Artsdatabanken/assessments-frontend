@@ -13,6 +13,7 @@
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
         AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
+        ConnectedTaxons = assessment.ConnectedTaxons,
         ScientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = assessment.VernacularName,

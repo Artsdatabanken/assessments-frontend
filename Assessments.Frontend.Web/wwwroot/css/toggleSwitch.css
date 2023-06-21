@@ -41,7 +41,7 @@
 }
 
 input:checked ~ .slider_container .slider {
-    background-color: #098293;
+    background-color: #0283A1;
     border-color: #3d3b3a;
 }
 

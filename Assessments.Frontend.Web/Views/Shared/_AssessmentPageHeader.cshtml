@@ -7,10 +7,11 @@
 
 <div class="page-header">
     <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.ScientificNameViewModel"/>
+    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel"/>
+    <br/>
     <span>Gjelder for  </span>
     <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
         @Model.AssessmentArea.
         </span>
-    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel"/>
     <hr />
 </div>

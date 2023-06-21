@@ -60,7 +60,6 @@
     box-shadow: rgba(0, 0, 0, 0.075) 0px 1px 1px 0px inset;
     box-sizing: border-box;
     color: rgb(85, 85, 85);
-    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 15px;
     font-weight: 400;
     height: 45px;
@@ -211,7 +210,6 @@
 
 .hit_count_text {
     display: block;
-    font-family: 'Roboto Condensed', sans-serif;
     font-weight: normal;
     color: #0f0f0f;
     font-size: 21px;

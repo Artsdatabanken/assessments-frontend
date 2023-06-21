@@ -6,13 +6,13 @@ const renderSpeciesImage = (targetElement, element) => {
     const datasetSrc = element.dataset.src;
     element.style = "";
     element.alt = "Bilde av arten";
-    element.src = `${datasetSrc}?mode=460x460`;
+    element.src = `${datasetSrc}?mode=350x350`;
     element.onerror = `this.src='${datasetSrc}'`;
     element.dataset.src = '';
     element.style.height = 'auto';
     element.style.width = 'auto';
-    //element.style['max-width'] = '400px';
-    element.style['max-height'] = '400px';
+    element.style['width'] = '280px';
+    element.style['height'] = '280px';
     element.style.padding = '0';
     //element.style['margin-left'] = '10px';
     const elementClone = element.parentElement.parentElement.cloneNode(true);

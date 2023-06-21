@@ -16,6 +16,10 @@ namespace Assessments.Frontend.Web.Models
 
     public class AssessmentPageHeaderViewModel
     {
+        public int ScientificNameId { get; set; }
+
+        public int AssessmentId { get; set; }
+
         public string AssessmentArea { get; set; }
 
         public ScientificNameViewModel ScientificNameViewModel { get; set; }
@@ -315,8 +319,6 @@ namespace Assessments.Frontend.Web.Models
 
     public class ScientificNameViewModel
     {
-        public int AssessmentId { get; set; }
-
         public string PopularName { get; set; }
 
         public string ScientificName { get; set; }

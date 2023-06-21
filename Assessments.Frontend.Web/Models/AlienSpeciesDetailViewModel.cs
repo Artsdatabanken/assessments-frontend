@@ -113,7 +113,7 @@ namespace Assessments.Frontend.Web.Models
                     Year = x.RevisionYear
                 }).ToArray(),
                 ScientificName = assessment.ScientificName.ScientificName,
-                ScientificNameId = assessment.ScientificName.ScientificNameId.Value,
+                ScientificNameId = (int)assessment.ScientificName.ScientificNameId,
                 TaxonRank = assessment.ScientificName.ScientificNameRank, // TODO: get scientificNameRank when it exists in the model
                 SpeciesIsOnBannedList = AlienSpeciesAssessment2023ProfileHelper.AlienSpeciesBanList().Contains(assessment.ScientificName.ScientificNameId.Value)
             };

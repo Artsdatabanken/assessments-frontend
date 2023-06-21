@@ -12,15 +12,16 @@
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
+        AssessmentId = assessment.Id,
         AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
         ScientificNameViewModel = new ScientificNameViewModel()
         {
-            AssessmentId = assessment.Id,
             PopularName = assessment.VernacularName,
             ScientificName = assessment.ScientificName.ScientificNameFormatted,
             ScientificNameFormatted = true,
             ScientificNameAuthor = assessment.ScientificName.ScientificNameAuthor
         },
+        ScientificNameId = (int)assessment.ScientificName.ScientificNameId,
         SpeciesGroupViewModel = new SpeciesGroupViewModel()
         {
             AssessmentYear = 2023, // TODO: create this field in assessment model
@@ -211,6 +212,8 @@
                 <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 <div is-visible="!isNr && !isEvaluatedAtAnotherLevel">
+                    <br />
+                    <br />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>
                 </div>
                 @*<div class="page_section" is-visible="showExpertStatement">

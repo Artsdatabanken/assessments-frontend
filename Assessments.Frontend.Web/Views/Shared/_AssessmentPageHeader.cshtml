@@ -1,16 +1,30 @@
 ﻿@model AssessmentPageHeaderViewModel
 @using Assessments.Mapping.AlienSpecies.Model.Enums
+@using QRCoder;
+@using System.Drawing;
 
 @{
     var hasSvalbardStyle =Model.AssessmentArea == "Svalbard";
+    var url = "https://artsdatabanken.no/fremmedartslista/2023/" + Model.AssessmentId;
+    QRCodeGenerator qrGenerator = new QRCodeGenerator();
+    QRCodeData qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
+    SvgQRCode qrCode = new SvgQRCode(qrCodeData);
+    string qrCodeAsSvg = qrCode.GetGraphic(2);
 }
 
 <div class="page-header">
-    <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.ScientificNameViewModel"/>
-    <span>Gjelder for  </span>
-    <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
-        @Model.AssessmentArea.
-        </span>
-    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel"/>
+    <div>
+        <div class="top-space"></div>
+        <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.ScientificNameViewModel"/>
+        <span>Gjelder for  </span>
+        <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
+            @Model.AssessmentArea.
+            </span>
+    </div>
+        <div class="qr-wrapper">
+            <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel"/>
+            <span class="qr-code">@Html.Raw(qrCodeAsSvg)</span>
+        </div>
+        <div class="species-images @("species-images-" + Model.ScientificNameId)"></div>
     <hr />
 </div>

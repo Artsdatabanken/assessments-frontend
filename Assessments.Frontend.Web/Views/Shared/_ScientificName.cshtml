@@ -1,22 +1,10 @@
 ﻿@model ScientificNameViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
-@using QRCoder;
-@using System.Drawing;
-
-@{
-    var url = "https://artsdatabanken.no/fremmedartslista/2023/" + Model.AssessmentId;
-    QRCodeGenerator qrGenerator = new QRCodeGenerator();
-    QRCodeData qrCodeData = qrGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
-    SvgQRCode qrCode = new SvgQRCode(qrCodeData);
-    string qrCodeAsSvg = qrCode.GetGraphic(2);
-}
 
 <div class="header-div">
     <h1>
-        <span class="small-heading-part">Vurdering av </span>
-        <span is-visible="!string.IsNullOrEmpty(Model.PopularName)">@Model.PopularName</span>
+        <span is-visible="!string.IsNullOrEmpty(Model.PopularName)">@(Model.PopularName.Substring(0, 1).ToUpper() + Model.PopularName.Substring(1))</span>
         <span>@Html.Raw(Model.ScientificNameFormatted ? Model.ScientificName : FormatScientificNameElement(Model.ScientificName))
         @Model.ScientificNameAuthor</span>
     </h1>
-    <span class="qr-code">@Html.Raw(qrCodeAsSvg)</span>
 </div>

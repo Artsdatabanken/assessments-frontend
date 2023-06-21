@@ -354,7 +354,7 @@
 }
 
 .bar-chart-info-box-establishment-class-0 {
-    height: 140px;
+    height: 130px;
 }
 
 .bar-chart-info-box-establishment-class-1 {
@@ -369,7 +369,6 @@
 .bar-chart-nature-types .bar-chart-info-box p {
     transform: inherit;
 }
-
 
 .bar-chart-double-column {
     display: flex;

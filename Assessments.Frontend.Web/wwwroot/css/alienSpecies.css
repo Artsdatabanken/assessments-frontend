@@ -224,3 +224,7 @@ li ul{
 .prettier-ol{
     padding-top: 8px 
 }
+
+.expanded_icon {
+    white-space: nowrap;
+}

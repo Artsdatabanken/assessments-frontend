@@ -235,6 +235,9 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string xAxisLabel = "Invasjonspotensial";
         public const string yAxisLabel = "Økologisk effekt";
 
+        public const string invasionPotential = "invasjonspotensial";
+        public const string ecologicalEffect = "økologiske effekt";
+
         public static readonly Dictionary<string, string> categoryFromMatrix = new()
         {
             { "14", "ph" },
@@ -380,11 +383,11 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string noRisk = "ingen kjent risiko";
         public const string noRiskExplanation = "NK og har dermed ingen avgjørende kriterier.";
 
-        public const string criteriaScoresAt = "Kriteriene arten skårer høyest på for hver av de to aksene. ";
+        public const string criteriaExplanationString = "Artens risikokategori bestemmes av artens høyeste skår på invasjonspotensial (x-aksen i risikomatrisa) og på økologisk effekt (y-aksen i risikomatrisa). Kriteriet(ene) arten skårer høyest på for hver av aksene i matrisa er artens avgjørende kriterier.";
         public const string readMoreAboutCriterias = "Les mer om kriteriene";
 
-        public const string xAxisExplanation = "Artens invasjonspotensial bestemmes av tre kriterier: Artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet). Invasjonspotensialet bestemmer artens plassering langs risikomatrisens x-akse.";
-        public const string yAxisExplanation = "Artens økologiske effekt bestemmes av seks kriterier: Artens effekter på stedegne arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av stedegne arter (H-kriteriet) og overføring av parasitter eller patogener til stedegne arter (I-kriteriet). Artens økologiske effekter bestemmer artens plassering langs risikomatrisens y-akse.";
+        public const string xAxisExplanation = "<b>Artens invasjonspotensial</b> bestemmes av tre kriterier: Artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet).";
+        public const string yAxisExplanation = "<b>Artens økologiske effekt</b> bestemmes av seks kriterier: Artens effekter på stedegne arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av stedegne arter (H-kriteriet) og overføring av parasitter eller patogener til stedegne arter (I-kriteriet).";
 
         public const string seeOtherTab = "Se fanen Øvrige kriterier.";
         public const string noDecisiveCriteriaXAxis = "Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen.";

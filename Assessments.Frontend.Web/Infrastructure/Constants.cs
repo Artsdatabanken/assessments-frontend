@@ -294,7 +294,9 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023PageMenuAssessmentAreaText = "områder der arten er regionalt fremmed i Norge (uten Svalbard)";
 
-        public const string AlienSpecies2023FirstPublished = "18.08.2023"; // TODO: Need publishing date
+        public const string AlienSpecies2023FirstPublished = "11.08.2023"; // TODO: Need publishing date
+
+        public const string AlienSpecies2023FirstPublishedYear = "2023";
 
         public const int AlienSpecies2023PageMenuContentId = 239657; //239645; //239644; //239646;
 
@@ -310,7 +312,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023CitationHeading = "Siden siteres som:";
 
-        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 24. november). Fremmede arter i Norge - med økologisk risiko 2023."; // TODO: insert correct publishing date for citation
+        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 11. august). Fremmede arter i Norge - med økologisk risiko 2023."; // TODO: insert correct publishing date for citation
 
         public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
                                                                                                                                                                                                                                                                                " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";

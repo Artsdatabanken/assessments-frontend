@@ -3,7 +3,7 @@
 
 @{
     var hasSvalbardStyle =Model.AssessmentArea == "Svalbard";
-    var showAssessedTogether = Model.ConnectedTaxons?.Length != 0;
+    var showAssessedTogether = Model.ConnectedTaxons != null && Model.ConnectedTaxons.Length != 0;
 }
 
 <div class="page-header">

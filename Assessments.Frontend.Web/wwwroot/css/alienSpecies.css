@@ -103,6 +103,7 @@ li ul{
     display:flex;
     flex-wrap:wrap;
     width:100%;
+    align-items: end;
 }
 
 .map-box-container {
@@ -113,9 +114,13 @@ li ul{
     min-width:250px;
 }
 
+.map-legend {
+    text-align: initial;
+}
+
 .map-description{
-    text-align:left;
-    padding:8px;
+    text-align: left;
+    padding: 8px 5px 8px 0;
 }
 
 .tabbed_element_container .map-legend {
@@ -218,4 +223,8 @@ li ul{
 
 .prettier-ol{
     padding-top: 8px 
+}
+
+.expanded_icon {
+    white-space: nowrap;
 }

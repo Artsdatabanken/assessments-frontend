@@ -48,7 +48,68 @@
 }
 
 <div class="map-box-container">
-     
+    <div class="map-description">
+        <b>@Model.MapText</b>
+        <br />
+        <br />
+        <span>
+            @{
+                // Split list for map of today:
+                List<AlienSpeciesAssessment2023RegionOccurrence> knownToday;
+                List<AlienSpeciesAssessment2023RegionOccurrence> assumedToday;
+
+                if (Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence)
+                {
+                    knownToday = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList();
+                    assumedToday = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true && x.IsKnown == false).ToList();
+
+
+                    <span>
+                        <br />
+                        <b>Kjent utberedelse</b>
+                        <br />
+                        <span is-visible="knownToday.Count == 0">Arten er ikke kjent i noen områder</span>
+                        @{
+                            makeFormattedList(knownToday);
+                        }
+                        <br />
+                        <br />
+                        <b>Antatt utberedelse</b>
+                        <br />
+                        <span is-visible="assumedToday.Count == 0 && knownToday.Count == 0">Det antas at arten ikke finnes i noen områder</span>
+                        <span is-visible="assumedToday.Count == 0 && knownToday.Count > 0">Arten er antatt å kun finnes i de kjente områdene</span>
+                        @{
+                            makeFormattedList(assumedToday);
+                        }
+                    </span>
+                }
+                else
+                {
+                    makeFormattedList(@Model.RegionOccurrences);
+                    <span is-visible="Model.RegionOccurrences.Count == 0">Det antas ingen utberedelse om 50 år <!-- TODO: Hide map? --></span>
+                }
+            }
+        </span>
+    </div>
+
+    <div is-visible="Model.ShowLegend">
+        <br/>
+        <table class="map-legend">
+            <tr>
+                <td class="indicator is_known_today"></td>
+                <td>Kjent utberedelse</td>
+            </tr>
+            <tr>
+                <td class="indicator is_assumed"></td>
+                <td>Antatt utberedelse</td>
+            </tr>
+            <tr>
+                <td class="indicator no_occurrence"></td>
+                <td>Ikke kjent eller antatt</td>
+            </tr>
+        </table>
+    </div>
+
     <svg viewBox="@viewBoxValues"
          xmlns="http://www.w3.org/2000/svg"
          xmlns:svg="http://www.w3.org/2000/svg">
@@ -70,8 +131,8 @@
                 <title>Grønlandshavet</title>
             </path>
             <path d="m 39.816255,221.31424 20.160422,-3.13606 23.29649,34.94473 -3.136063,-0.44801 -3.360076,3.80807 v 2.68806 l -6.720142,4.03208 -21.056439,8.28818 -10.52822,3.13607 -2.688057,-6.72015 -1.344028,-15.23231 -1.120023,-2.68806 4.032084,-9.18419 2.464052,-4.7041 z"
-                  id="Nordsjøen" class="sea @className("Nordsjøen")">
-                <title>Nordsjøen</title>
+                  id="Nordsjøen_og_Skagerrak" class="sea @className("Nordsjøen og Skagerrak")">
+                <title>Nordsjøen og Skagerrak</title>
             </path>
         </g>
         <g class="nautic">
@@ -235,55 +296,4 @@
             </path>
         </g>
     </svg>
-
-    <ul class="map-legend">    
-        <li>            
-            <span>Kjent utberedelse</span>
-            <span class="indicator is_known_today"></span>
-        </li>
-        <li>
-            <span>Antatt utberedelse</span>
-            <span class="indicator is_assumed"></span>            
-        </li>
-        <li>
-            <span>Ikke kjent eller antatt</span>
-            <span class="indicator no_occurrence"></span>
-        </li>
-    </ul>
-
-    <div class="map-description"> 
-        <b>@Model.MapText</b><br/>
-        <span>
-            @{
-                // Split list for map of today:
-                List<AlienSpeciesAssessment2023RegionOccurrence> knownToday;
-                List<AlienSpeciesAssessment2023RegionOccurrence> assumedToday;
-
-                if (Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence)
-                {
-                    knownToday = Model.RegionOccurrences.Where(x => x.IsKnown == true).ToList();
-                    assumedToday = Model.RegionOccurrences.Where(x => x.IsAssumedToday == true && x.IsKnown == false).ToList();
-
-
-                    <span>
-                        <br/>
-                        <b>Kjent utberedelse</b><br/>
-                        <span is-visible="knownToday.Count == 0">Arten er ikke kjent i noen områder</span>
-                        @{makeFormattedList(knownToday);}
-                        <br/><br/>
-                        <b>Antatt utberedelse</b><br/>
-                        <span is-visible="assumedToday.Count == 0 && knownToday.Count == 0">Det antas at arten ikke finnes i noen områder</span>
-                        <span is-visible="assumedToday.Count == 0 && knownToday.Count > 0">Arten er antatt å kun finnes i de kjente områdene</span>
-                        @{makeFormattedList(assumedToday);}
-                    </span>
-                }
-
-                else
-                {                    
-                    makeFormattedList(@Model.RegionOccurrences);
-                    <span is-visible="Model.RegionOccurrences.Count == 0">Det antas ingen utberedelse om 50 år <!-- TODO: Hide map? --></span>
-                }
-            }
-        </span>
-    </div>
 </div>

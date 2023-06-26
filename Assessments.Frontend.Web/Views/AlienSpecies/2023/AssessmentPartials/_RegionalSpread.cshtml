@@ -40,7 +40,8 @@
                 FreshWaterNaturalOccurence = waterRegionsNaturalOccurence,
                 MapName = "known_or_assumed_today",
                 MapText = Constants.AlienSpecies2023KnownOrAssumedOccurrence,
-                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true || x.IsAssumedToday == true).ToList()
+                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true || x.IsAssumedToday == true).ToList(),
+                ShowLegend = !isDoorKnockerOrEffectNoRep
             };
 
     var isAssumedInFuture = new MapViewModel
@@ -49,7 +50,8 @@
                 FreshWaterNaturalOccurence = waterRegionsNaturalOccurence,
                 MapName = "is_assumed_in_future",
                 MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
-                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
+                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList(),
+                ShowLegend = isDoorKnockerOrEffectNoRep
             };
 
     var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
@@ -153,12 +155,13 @@
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isDoorKnocker || isEffectWithoutReproduction)">Andel av antatt forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isDoorKnockerOrEffectNoRep">
                 <h3>Regionvis utbredelse</h3>
+                <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>
                 <div is-visible="!Model.IsSvalbard && hasKnownOrAssumedOccurrence" class="map N">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>
-                <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>
             </div>
             <div is-visible="showCurrentPresenceComment">
+                <br/>
                 <p>
                     @Html.Raw(Model.CurrentPresenceComment)
                 </p>

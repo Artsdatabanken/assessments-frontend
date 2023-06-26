@@ -355,19 +355,9 @@
     @Constants.speciesEvaluatedTo  <i>@Constants.noRisk</i> @Constants.noRiskExplanation
 </div>
 
+<h3>@Constants.xAxisLabel</h3>
+
 <div is-visible="!showIsNk || !isDecisiveCriteria">
-    <p>
-       @Constants.criteriaScoresAt 
-        <a href="https://artsdatabanken.no/Pages/339785/Risikokategorier_og_kriterier">
-            @Constants.readMoreAboutCriterias
-            @{
-                /*TODO: add link when there is one*/
-            }
-        </a>
-    </p>
-    <h3>@Constants.xAxisLabel</h3>
-    <p>@Constants.xAxisExplanation</p>
-    
     <p is-visible="isDecisiveCriteria">
         <b>@Constants.speciesHas @assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant() 
             @Constants.xAxisLabel.ToLower() (@Constants.JustScore @((int)assessment.ScoreInvasionPotential))
@@ -624,7 +614,6 @@
     </ul>
 
     <h3>@Constants.yAxisLabel</h3>
-    <p>@Constants.yAxisExplanation</p>   
 
     <p is-visible="isDecisiveCriteria">
         <b>@Constants.speciesHas @assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant() 

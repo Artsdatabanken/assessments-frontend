@@ -238,6 +238,8 @@ namespace Assessments.Frontend.Web.Models
         public string MapDescription { get; set; }
 
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
+
+        public bool ShowLegend { get; set; } = false;
     }
 
     public class ReferenceViewModel

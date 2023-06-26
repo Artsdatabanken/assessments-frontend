@@ -20,7 +20,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Ingen kjent risiko")]
         NK,
 
-        [Display(Name = "Ikke risikovurdert")]
+        [Display(Name = "Ikke risiko-vurdert")]
         NR
     }
 }

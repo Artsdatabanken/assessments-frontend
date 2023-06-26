@@ -14,13 +14,12 @@ const renderSpeciesImage = (targetElement, element) => {
     element.style['width'] = '280px';
     element.style['height'] = '280px';
     element.style.padding = '0';
-    //element.style['margin-left'] = '10px';
     const elementClone = element.parentElement.parentElement.cloneNode(true);
-    //elementClone.style['margin-bottom'] = '20px';
     targetElement.appendChild(elementClone);
 }
 
 const updateImageMeta = (imageMeta) => {
+    imageMeta[0].remove();
     Array.prototype.forEach.call(imageMeta, (imgElement) => {
         if (imgElement.tagName != 'IMG') {
             return;
@@ -28,10 +27,11 @@ const updateImageMeta = (imageMeta) => {
         const srcArray = imgElement.src.split('/Content')
         srcArray[0] = adbLink;
         imgElement.src = srcArray.join('/Content');
-        imgElement.style.width = '30px';
+        imgElement.style.width = '20px';
         imgElement.style.background = 'transparent';
         imgElement.style['vertical-align'] = 'text-bottom';
     });
+    imageMeta[1].style['margin-left'] = '2px';
 }
 
 const removeTaxonLink = (imageText) => {
@@ -73,16 +73,18 @@ const getAssessmentImages = () => {
                 const targetElement = document.getElementsByClassName(targetClassName)[0];
 
                 Array.prototype.forEach.call(images, (el, index) => {
-                    //if (index == 0) {
-                    //    renderHeader(targetElement);
-                    //}
-
                     if (index > 0) {
-                        //addLinkToTaxonPage(targetElement, url);
                         return;
                     }
 
                     const imageText = el.parentElement.parentElement.children[1].children;
+                    let items = Array.prototype.slice.call(imageText[0].children[0].children);
+                    items.unshift(items.pop());
+
+                    imageText[0].children[0].appendChild(items[0]);
+                    imageText[0].children[0].appendChild(items[1]);
+                    imageText[0].children[0].appendChild(items[2]);
+
                     const imageFirstElements = imageText[0].children[0].children;
                     removeTaxonLink(imageText);
                     updateImageMeta(imageFirstElements);

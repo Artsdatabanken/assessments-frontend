@@ -13,6 +13,7 @@ p,
 div,
 span {
     font-family: 'Chivo', sans-serif;
+    color: #262F31;
 }
 
 ul.category_displayer {
@@ -79,7 +80,7 @@ ul.category_displayer {
 small.text-muted,
 a {
     text-decoration: none !important;
-    color: black;
+    color: #262F31;
 }
 
 a,
@@ -761,10 +762,14 @@ button {
     }
 }
 
-.capitalized{
+li > span.capitalized {
     display:inline-block;
+    font-size: 20px !important;
 }
 
+li > b.text_content {
+    font-size: 20px !important;
+}
 .capitalized:first-letter {
     text-transform: uppercase;
 }
@@ -1089,4 +1094,8 @@ button {
 
 .flex-pdf-space {
     height: 915px;
+}
+
+.text-muted::before {
+    content: 'Foto: ';
 }

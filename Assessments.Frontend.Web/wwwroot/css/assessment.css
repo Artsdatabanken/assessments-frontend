@@ -644,6 +644,7 @@ span.area i {
     .history_list li {        
         display: block;
         max-width:300px;
+        margin-bottom: 5px;
     }
 }
 
@@ -664,6 +665,8 @@ span.area i {
     line-height: 25px;
     padding: 0;
     text-align: center;
+    padding-top: -5px;
+    margin-top: -3px;
 }
 
 /* CRITERIA CONTENT */

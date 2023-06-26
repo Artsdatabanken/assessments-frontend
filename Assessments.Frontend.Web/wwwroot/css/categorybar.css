@@ -44,15 +44,15 @@
     margin:auto;
 }
 
-.category_displayer span {
-    font-size: 8pt;
-    display: block;
-    line-height: 1;
-    width: 100%;
-    color: #4c4a48;
-    text-align: center;
-    padding-top: 5px;
-}
+    .category_displayer span {
+        font-size: 8pt;
+        display: block;
+        line-height: 1;
+        width: 100%;
+        color: #262F31;
+        text-align: center;
+        padding-top: 5px;
+    }
 
 .category_displayer .category_item span {
     margin: auto;

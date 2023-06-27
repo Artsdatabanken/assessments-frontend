@@ -7,10 +7,12 @@
 }
 
 <div class="page-header">
-    <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.ScientificNameViewModel"/>
+    <partial name="/Views/Shared/_ScientificName.cshtml" model="Model.ScientificNameViewModel" />
+    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel" />
     <div is-visible="showAssessedTogether">
+        <br/>
         <p>
-            Vurderes sammen med @for(var i = 0; i < Model.ConnectedTaxons.Length; i++)
+            Vurderes sammen med @for (var i = 0; i < Model.ConnectedTaxons.Length; i++)
             {
                 if (i + 1 == Model.ConnectedTaxons.Length)
                 {
@@ -30,7 +32,6 @@
     <span>Gjelder for  </span>
     <span class="@(hasSvalbardStyle ? "svalbard-heading" : string.Empty)">
         @Model.AssessmentArea.
-    </span>
-    <partial name="/Views/Shared/_SpeciesGroup.cshtml" model="Model.SpeciesGroupViewModel"/>
-    <hr />
+        </span>
 </div>
+<hr />

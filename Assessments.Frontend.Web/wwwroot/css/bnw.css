@@ -1,5 +1,9 @@
 /* BUTTONs FOR THEME SELECTING */
 
+.darktheme body {
+    color: #FFF9F0;
+}
+
 #headermenu {
     z-index: 13;
 }
@@ -27,7 +31,6 @@
     line-height: 1.42857143;
     white-space: nowrap;
     font-size: 16px;
-    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
     margin: 8px 0;
     display: block;
     text-decoration: none;
@@ -300,7 +303,7 @@
 .darktheme .page-link,
 .darktheme .percent,
 .darktheme p {
-    color: white;
+    color: #FFF9F0;
 }
 
 .darktheme .category_displayer .active .NR span {
@@ -351,7 +354,7 @@
 }
 
 .darktheme .sidebarmenu .alien-species h3 {
-    color: #b372bb;
+    color: #262F31;
     border-color: #b372bb;
 }
 

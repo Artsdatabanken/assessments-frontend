@@ -115,8 +115,16 @@ div.risk-level-category {
     color: #201f1f
 }
 
+.risk-matrix .nk span {
+    color: #201f1f;
+}
+
 .risk-matrix .lo {
     background: #5C9A94;
+    color: #201f1f
+}
+
+.risk-matrix .lo span {
     color: #201f1f
 }
 
@@ -125,13 +133,25 @@ div.risk-level-category {
     color: white;
 }
 
+.risk-matrix .ph span {
+    color: white;
+}
+
 .risk-matrix .hi {
     background: #2E4073;
     color: white;
 }
 
+.risk-matrix .hi span {
+    color: white;
+}
+
 .risk-matrix .se {
     background: #4F1052;
+    color: white;
+}
+
+.risk-matrix .se span {
     color: white;
 }
 

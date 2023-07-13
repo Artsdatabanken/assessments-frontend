@@ -29,14 +29,33 @@
 
     bool MakeMarginLeftSide(int counter)
     {
-        return (counter % 4) switch
+        //kleng til 
+        bool venstre = true ;
+
+        if (venstre)
         {
-            0 => true,
-            1 => true,
-            2 => false,
-            3 => false,
-            _ => false
-        };
+            return (counter % 4) switch
+            {
+                0 => false,
+                1 => false,
+                2 => true,
+                3 => true,
+                _ => false
+            };
+        }
+        else
+        {
+            return (counter % 4) switch
+            {
+                0 => true,
+                1 => true,
+                2 => false,
+                3 => false,
+                _ => false
+            };
+        }
+
+        
     }
 
     List<AlienSpeciesDetailViewModel> koko = new List<AlienSpeciesDetailViewModel>();

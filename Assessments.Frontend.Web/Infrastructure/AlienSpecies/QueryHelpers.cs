@@ -77,7 +77,13 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             //else if (parameters.SortBy.Equals(nameof(AlienSpeciesAssessment2023.Category), StringComparison.InvariantCultureIgnoreCase))
             //    query = query.OrderBy(x => x.Category);
 
-            query = query.OrderBy(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction).ThenBy(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien).ThenBy(x => x.Category).ThenBy(x => x.ScientificName.ScientificName).Take(240);
+            //query = query.OrderBy(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction).ThenBy(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien).ThenBy(x => x.Category).ThenBy(x => x.ScientificName.ScientificName).Take(240);
+
+            //query = query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction);
+            query = query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien);
+            query = query.Where(x => x.Category == AlienSpeciesAssessment2023Category.NK).OrderBy(x => x.ScientificName.ScientificName);
+
+            var countt = query.Count();
 
             return query;
         }

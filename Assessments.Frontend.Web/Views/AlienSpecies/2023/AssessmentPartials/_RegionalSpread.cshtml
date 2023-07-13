@@ -14,6 +14,7 @@
     var isDoorKnockerOrEffectNoRep = isDoorKnocker || isEffectWithoutReproduction;
     var showInteractiveMap = isAlienSpecie && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
+    var showAreaOfOccupancyYearRange = (isAlienSpecie || isRegionallyAlien) && Model.AreaOfOccupancyKnownYearOne != null && Model.AreaOfOccupancyKnownYearTwo != null;
 
     var hasWaterAreas = Model.FreshWaterRegionModel.IsWaterArea;
     var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
@@ -79,6 +80,11 @@
     <div id="domestic_spread">
         <div id="show_occurence_area">
             <h3>Forekomstareal</h3>
+            <p>
+                Forekomstarealet til en @Helpers.FixSpeciesLevel("{art}", Model.NameRank) tilsvarer antallet forekomster (2 km x 2 km ruter) der @Helpers.FixSpeciesLevel("{art}en", Model.NameRank) lever.
+                <a href="https://www.artsdatabanken.no/Pages/342783?Key=1606381145&changed=1686559335">Les mer om forekomstareal her.</a>
+            </p>
+            <p is-visible="showAreaOfOccupancyYearRange">Kjent forekomstareal er basert på perioden @Model.AreaOfOccupancyKnownYearOne til @Model.AreaOfOccupancyKnownYearTwo.</p>
             <table class="numbers-table" is-visible="isAlienSpecie || isRegionallyAlien">
                 <tr>
                     <th>Forekomstareal</th>

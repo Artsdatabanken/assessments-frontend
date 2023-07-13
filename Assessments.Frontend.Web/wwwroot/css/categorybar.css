@@ -228,6 +228,10 @@ li.active  .category_item.NR {
     color: white;
 }
 
+span.percent {
+    color: #262F31;
+}
+
 .active .RE span,
 .active .CR span,
 .active .EN span,

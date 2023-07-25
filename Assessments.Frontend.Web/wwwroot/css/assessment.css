@@ -872,6 +872,10 @@ span.area i {
     hyphens: auto;
 }
 
+.big-data-table tr:last-child td {
+    border-bottom: 1px solid grey;
+}
+
 .big-data-table th {
     border-color: grey;
     font-size: 14px;

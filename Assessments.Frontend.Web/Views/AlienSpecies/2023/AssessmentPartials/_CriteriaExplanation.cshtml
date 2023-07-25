@@ -119,18 +119,18 @@
 
     void GetSpeciesTableDesktop(List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> impacts)
     {
-        <table class="numbers-table">
+        <table class="big-data-table">
             <caption class="table-title">Artens negative effekter på øvrige stedegne arter</caption>
             <tr>
-                <td><b>Stedegen art</b></td>
-                <td><b>Kategori i Rødlista 2021</b></td>
-                <td><b>Er arten en nøkkelart?</b></td>
-                <td><b>Interaksjonens styrke</b></td>
-                <td><b>Geografisk omfang</b></td>
-                <td><b>Type interaksjon</b></td>
+                <th>Stedegen art</th>
+                <th>Kategori i Rødlista 2021</th>
+                <th>Er arten en nøkkelart?</th>
+                <th>Interaksjonens styrke</th>
+                <th>Geografisk omfang</th>
+                <th>Type interaksjon</th>
                 @if (impacts.Any(x => x.Background.Count() != 0))
                 {
-                    <td><b>Vurderingsgrunnlag</b></td>
+                    <th>Vurderingsgrunnlag</th>
                 }
             </tr>
             @foreach (var impact in impacts)
@@ -162,7 +162,7 @@
     {
         @foreach (var impact in impacts)
         {
-            <table class="numbers-table">
+            <table class="big-data-table">
                 <caption class="table-title">Stedegen art: @impact.VernacularName @Html.Raw(Helpers.FormatScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
                 <tr>
                     <td>kategori i Rødlista 2021</td>
@@ -204,15 +204,15 @@
 
     void GetNatureTypeTableDesktop(List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> impacts)
     {
-        <table class="numbers-table">
+        <table class="big-data-table">
             <caption class="table-title">Artens negative effekter på grupper av arter (samfunn)</caption>
             <tr>
-                <td><b>Berørt naturtype (med gruppen av påvirkede arter)</b></td>
-                <td><b>Påvirkes nøkkelarter eller truede arter?</b></td>
-                <td><b>Interaksjonens styrke</b></td>
-                <td><b>Geografisk omfang</b></td>
-                <td><b>Type interaksjon</b></td>
-                <td><b>Vurderingsgrunnlag</b></td>
+                <th>Berørt naturtype (med gruppen av påvirkede arter)</th>
+                <th>Påvirkes nøkkelarter eller truede arter?</th>
+                <th>Interaksjonens styrke</th>
+                <th>Geografisk omfang</th>
+                <th>Type interaksjon</th>
+                <th>Vurderingsgrunnlag</th>
             </tr>
             @foreach (var impact in impacts)
             {
@@ -239,7 +239,7 @@
     {
         foreach (var impact in impacts)
         {
-            <table class="numbers-table">
+            <table class="big-data-table">
                 <caption class="table-title">Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
                 <tr>
                     <td>påvirkes nøkkelarter eller truede arter?</td>
@@ -277,14 +277,14 @@
 
     void GetFGTable(bool shouldBeThreatened)
     {
-        <table class="numbers-table">
+        <table class="big-data-table">
             <caption class="table-title">Naturtyper som påvirkes av arten</caption>
             <tr>
-                <td><b>Naturtype</b></td>
-                <td><b>Tidshorisont</b></td>
-                <td><b>Tydelig tilstandsendring</b></td>
-                <td><b>Tydelig påvirka areal (%)</b></td>
-                <td><b>Vurderingsgrunnlag</b></td>
+                <th>Naturtype</th>
+                <th>Tidshorisont</th>
+                <th>Tydelig tilstandsendring</th>
+                <th>Tydelig påvirka areal (%)</th>
+                <th>Vurderingsgrunnlag</th>
             </tr>
             @foreach (var natureType in assessment.ImpactedNatureTypes.Where(x => x.IsThreatened == shouldBeThreatened && HasAffectedArea(x.AffectedArea)))
             {
@@ -424,7 +424,7 @@
                     @assessment.MedianLifetimeSimplifiedEstimationAdjustScoreReason
                 </p>                                
                 <div is-visible="showNumericalEstimation">
-                    <table class="numbers-table" is-visible="showNumericalEstimation">
+                    <table class="big-data-table" is-visible="showNumericalEstimation">
                         <caption class="table-title"><b>@Constants.demoKeyNumbers</b></caption>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
                             <td>@Constants.currentPopSize </td>
@@ -458,7 +458,7 @@
                 </div>
                 <div is-visible="showViableAnalysis">
                     <p>@Constants.modelAndProgram @assessment.MedianLifetimeViabilityAnalysisDescription</p>
-                    <table class="numbers-table">
+                    <table class="big-data-table">
                         <caption class="table-title">@Constants.demoKeyNumbers</caption>
                         <tr is-visible="assessment.MedianLifetimeBestEstimate != 0">
                             <td>@Constants.estMedianLifeSpanThisYear: </td>
@@ -483,7 +483,7 @@
             <div class="collapsible_content">
                 @{GetEstimationMethod(assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant());}
                 <div is-visible="isSpatiotemporalDataset">
-                    <table class="numbers-table">
+                    <table class="big-data-table">
                         <caption class="table-title">
                             @Constants.spatioTemporalTableTitle                            
                             (@Constants.readMoreMethod: <a href="https://view.nina.no/expansion/" target="_blank">@Constants.expansion</a>)
@@ -502,7 +502,7 @@
                         </tr>
                     </table>
                     <br />
-                    <table class="numbers-table">
+                    <table class="big-data-table">
                         <caption class="table-title">@Constants.expansionSpeed</caption>
                         <tr>
                             <td>@Constants.average: </td>
@@ -520,11 +520,11 @@
                 </div>
                 <div is-visible="isEstimatedIncreaseInAOOReproducingUnaided">
                     <p>@Constants.methodDescriptionReproducingUnaided</p>
-                    <table class="numbers-table">
+                    <table class="big-data-table">
                         <tr>
-                            <td>@Constants.yearCaps</td>
-                            <td>@Constants.knownArea (km<sup>2</sup>)</td>
-                            <td>@Constants.knownArea (km<sup>2</sup>) @Constants.corrected</td>
+                            <th>@Constants.yearCaps</th>
+                            <th>@Constants.knownArea (km<sup>2</sup>)</th>
+                            <th>@Constants.knownArea (km<sup>2</sup>) @Constants.corrected</th>
                         </tr>
                         <tr>
                             <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
@@ -578,13 +578,13 @@
                     GetListForCategory(uncertaintyC, AlienSpeciesAssessment2023CriteriaLetter.C.ToString());
                 }
                 <div class="collapsible_content">
-                    <table class="numbers-table">
+                    <table class="big-data-table">
                         <caption class="table-title"><b>Kolonisert naturtypeareal.</b> Anslått prosentandel kolonisert areal i de naturtypene arten er observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner. </caption>
                         <tr>
-                            <td><b>Naturtype</b></td>
-                            <td><b>Tidshorisont</b></td>
-                            <td><b>Tydelig påvirka areal (%)</b></td>
-                            <td><b>Vurderingsgrunnlag</b></td>
+                            <th>Naturtype</th>
+                            <th>Tidshorisont</th>
+                            <th>Tydelig påvirka areal (%)</th>
+                            <th>Vurderingsgrunnlag</th>
                         </tr>
                         @foreach (var natureType in assessment.ImpactedNatureTypes)
                         {
@@ -766,14 +766,14 @@
                 }
                 <div class="collapsible_content">
                     <div>
-                        <table class="numbers-table" is-visible="showHTable">
+                        <table class="big-data-table" is-visible="showHTable">
                             <caption class="table-title"><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke stedegne arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
                             <tr>
-                                <td><b>Stedegen art</b></td>
-                                <td><b>Kategori i Rødlista 2021</b></td>
-                                <td><b>Er arten en nøkkelart?</b></td>
-                                <td><b>Geografisk omfang</b></td>
-                                <td><b>Vurderingsgrunnlag</b></td>
+                                <th>Stedegen art</th>
+                                <th>Kategori i Rødlista 2021</th>
+                                <th>Er arten en nøkkelart?</th>
+                                <th>Geografisk omfang</th>
+                                <th>Vurderingsgrunnlag</th>
                             </tr>
                             @foreach (var contaminant in assessment.GeneticContamination)
                             {
@@ -814,17 +814,17 @@
                 }
                 <div class="collapsible_content">
                     <div>
-                        <table class="numbers-table" is-visible="showITable">
+                        <table class="big-data-table" is-visible="showITable">
                             <caption class="table-title"><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til stedegne verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
                             <tr>
-                                <td><b>Stedegen art</b></td>
-                                <td><b>Kategori i Rødlista 2021</b></td>
-                                <td><b>Er arten en nøkkelart?</b></td>
-                                <td><b>Parasittens vitenskapelige navn</b></td>
-                                <td><b>Parasittens status</b></td>
-                                <td><b>Parasittens delkategori</b></td>
-                                <td><b>Geografisk omfang</b></td>
-                                <td><b>Vurderingsgrunnlag</b></td>
+                                <th>Stedegen art</th>
+                                <th>Kategori i Rødlista 2021</th>
+                                <th>Er arten en nøkkelart?</th>
+                                <th>Parasittens vitenskapelige navn</th>
+                                <th>Parasittens status</th>
+                                <th>Parasittens delkategori</th>
+                                <th>Geografisk omfang</th>
+                                <th>Vurderingsgrunnlag</th>
                             </tr>
                             @foreach (var transmission in assessment.ParasitePathogenTransmission)
                             {

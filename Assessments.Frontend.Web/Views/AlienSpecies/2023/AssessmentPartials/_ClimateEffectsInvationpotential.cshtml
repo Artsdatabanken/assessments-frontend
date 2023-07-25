@@ -38,6 +38,8 @@
                             
     <div is-visible="(hasClimateEffectsInvasionpotential || hasClimateEffectsEcoEffect) && hasRiskAssessmentClimateEffectsDocumentation">
         <h3>Betydningen av klimaendringer:</h3>
-        <p>@Model.Assessment.ClimateEffectsDocumentation</p>
+        <p>
+            @Html.Raw(@Model.Assessment.ClimateEffectsDocumentation)
+        </p>
     </div>
 </div>

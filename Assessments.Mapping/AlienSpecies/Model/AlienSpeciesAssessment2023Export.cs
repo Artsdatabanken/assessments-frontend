@@ -9,6 +9,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [Description("Id for 2023 vurderingen")]
         public int Id { get; set; }
 
+        [DisplayName("Vurderingsområde")]
+        [Description("Er arten vurdert for Norge eller Svalbard")]
+        public string AssessmentArea { get; set; }
+
         [DisplayName("Ekspertkomité")]
         [Description("Ekspertgruppen bak 2023-vurderingen")]
         public string ExpertGroup { get; set; }

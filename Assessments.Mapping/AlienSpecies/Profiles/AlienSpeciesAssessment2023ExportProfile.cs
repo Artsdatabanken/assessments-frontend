@@ -30,6 +30,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ScientificNameAuthor, opt => opt.MapFrom(src => src.ScientificName.ScientificNameAuthor))
                 .ForMember(dest => dest.TaxonHierarcy, opt => opt.MapFrom(src => string.Join("\\", src.NameHiearchy.Select(x=>x.ScientificName).ToArray())))
                 .ForMember(dest => dest.Ecosystems, opt => opt.MapFrom(src => string.Join("; ", src.ImpactedNatureTypes.DefaultIfEmpty().Select(x => x.Name).Distinct().ToArray())))
+                .ForMember(dest => dest.AssessmentArea, opt => opt.MapFrom(src => src.EvaluationContext.DisplayName()))
                 ;
         }
     }

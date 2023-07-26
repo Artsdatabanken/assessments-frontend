@@ -286,6 +286,16 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public int AOOfutureHigh { get; set; }
 
         /// <summary>
+        /// Period where the occurrence area is measured in. This is the start year.
+        /// </summary>
+        public int AOOknownYearOne { get; set; }
+
+        /// <summary>
+        /// Period where the occurrence area is measured in. This is the end year.
+        /// </summary>
+        public int AOOknownYearTwo { get; set; }
+
+        /// <summary>
         /// The reasoning or assumptions behind future area of occupancy and regional distribution. 
         /// </summary>
         public string CurrentPresenceComment { get; set; }

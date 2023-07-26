@@ -85,6 +85,8 @@ namespace Assessments.Frontend.Web.Models
                 AreaOfOccupancyTotalBest = assessment.AOOtotalBest,
                 AreaOfOccupancyTotalHigh = assessment.AOOtotalHigh,
                 AreaOfOccupancyTotalLow = assessment.AOOtotalLow,
+                AreaOfOccupancyKnownYearOne = assessment.AOOknownYearOne,
+                AreaOfOccupancyKnownYearTwo = assessment.AOOknownYearTwo,
                 ArtskartObservationChangesDescription = assessment.ArtskartObservationChangesDescription,
                 Category = assessment.Category,
                 CurrentPresenceComment = assessment.CurrentPresenceComment,

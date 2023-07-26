@@ -126,7 +126,7 @@ button.menuitems {
 
 option {
     background-color: #fff;
-    color: black;
+    color: #262F31;
 }
 
 @media only screen and (max-width: 750px) {
@@ -340,7 +340,7 @@ button {
     touch-action: manipulation;
     cursor: pointer;
     background: #ddd;
-    color: #000;
+    color: #262F31;
     border: none;
     display: inline-block;
     border-radius: 2px;
@@ -442,7 +442,7 @@ button {
     border: 1px solid #7f726b;
     border-bottom-color: white;
     border-left-color: lightgray;
-    color: black;
+    color: #262F31;
     background: white;
 }
 
@@ -871,7 +871,7 @@ button {
     padding: 15px;
     background: #ffaf31;
     text-align: center;
-    color: black;
+    color: #262F31;
     width: 100%;
     font-size: initial;
     margin-bottom: 20px;
@@ -896,7 +896,7 @@ button {
 }
 
 .themeselectordropdown .themebutton {
-    color: #000;
+    color: #262F31;
 }
 
 .themebutton .material-icons {

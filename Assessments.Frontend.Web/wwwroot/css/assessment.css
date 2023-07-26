@@ -240,7 +240,7 @@ li.region p {
 }
 
 .habitat_element p, .habitat_element a {
-    color: black;
+    color: #262F31;
     font-size: 8pt;
 }
 
@@ -278,7 +278,7 @@ span.material-icons.less {
 /* EXPERT Assessment */
 .expert_Assessment h3 {
     font-size: 12pt;
-    color: black;
+    color: #262F31;
     font-family: inherit;
     font-weight: bold;
     margin: auto;
@@ -375,7 +375,7 @@ no_distribution {
 }
 
 .regionlist.legend .region span{
-    color: black;
+    color: #262F31;
 }
 
 /* MOBILE SIZE: 550px til 650px  */

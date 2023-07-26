@@ -71,6 +71,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.AOOfutureLow, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "low")))
                 .ForMember(dest => dest.AOOfutureBest, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "best")))
                 .ForMember(dest => dest.AOOfutureHigh, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "high")))
+                .ForMember(dest => dest.AOOknownYearOne, opt => opt.MapFrom(src => src.RiskAssessment.AOOendyear1))
+                .ForMember(dest => dest.AOOknownYearTwo, opt => opt.MapFrom(src => src.RiskAssessment.AOOendyear2))
                 .ForMember(dest => dest.CurrentPresenceComment, opt => opt.MapFrom(src => src.CurrentPresenceComment.StripUnwantedHtml()))
                 .ForMember(dest => dest.Occurrences1Low, opt =>
                 {

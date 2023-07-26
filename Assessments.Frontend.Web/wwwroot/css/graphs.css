@@ -52,13 +52,15 @@
 
 .heightbar_blank,
 .heightbar_indicator {
-    display: block;   
+    display: flex;
+    justify-content: center;
     position: relative;
     width: 100%;
 }
 
 
 .graph .heightbar_indicator {
+    width: 70%;
     bottom: 0;
     margin-bottom: 0;
     margin-top: auto;
@@ -84,10 +86,10 @@
 
 .percent {
     position: absolute;
-    top: -15px;
+    top: -20px;
     color: black;
     left: 0px;
-    font-size: 8pt;
+    font-size: 12pt;
     text-align: center;
     width: 100%;
 }
@@ -193,10 +195,6 @@
 }
 
 @media only screen and (min-width: 281px) and (max-width: 400px){
-    .color_graph .statelement {
-        max-width: 10.5vw;
-    }
-
     .color_graph .stat_subtitle {
         font-size: 9px;
         vertical-align: top;
@@ -252,6 +250,10 @@
     margin-bottom: 20px;
 }
 
+.alien-species .bar-chart {
+    max-width: 600px;
+}
+
 .bar-chart-element {
     display: flex;
     align-items: center;
@@ -283,7 +285,6 @@
     height: 20px;
     margin-right: 5px;
     background-color: #A6BBCB;
-    border: 1px solid #262F31;
 }
 
 .bar-chart-decisive-criteria .bar-chart-bar,

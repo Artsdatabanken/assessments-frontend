@@ -202,7 +202,7 @@ li.active  .category_item.NR {
 }
 
 .LO {
-    background: #5C9A94;
+    background: #5c9c94;
 }
 
 .NK {
@@ -226,6 +226,10 @@ li.active  .category_item.NR {
 .LO span,
 .NK  span {
     color: white;
+}
+
+span.percent {
+    color: #262F31;
 }
 
 .active .RE span,

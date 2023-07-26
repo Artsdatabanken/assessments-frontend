@@ -196,6 +196,10 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public int? AreaOfOccupancyKnownYearOne { get; set; }
+
+        public int? AreaOfOccupancyKnownYearTwo { get; set; }
+
         public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; }
 
         public bool IsSvalbard { get; set; }

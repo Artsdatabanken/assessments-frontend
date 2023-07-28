@@ -123,8 +123,8 @@
             <caption class="table-title">Artens negative effekter på øvrige stedegne arter</caption>
             <tr>
                 <th>Stedegen art</th>
-                <th>Kategori i Rødlista 2021</th>
-                <th>Er arten en nøkkelart?</th>
+                <th>@Html.Raw(@Constants.redListCategoryTable)</th>
+                <th>@Constants.keyStoneSpeciesTable</th>
                 <th>Interaksjonens styrke</th>
                 <th>Geografisk omfang</th>
                 <th>Type interaksjon</th>
@@ -165,11 +165,11 @@
             <table class="big-data-table">
                 <caption class="table-title">Stedegen art: @impact.VernacularName @Html.Raw(Helpers.FormatScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
                 <tr>
-                    <td>kategori i Rødlista 2021</td>
+                    <td>@Html.Raw(@Constants.redListCategoryTable)</td>
                     <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
                 </tr>
                 <tr>
-                    <td>er arten en nøkkelart?</td>
+                    <td>@Constants.keyStoneSpeciesTable</td>
                     <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
                 </tr>
                 <tr>
@@ -770,8 +770,8 @@
                             <caption class="table-title"><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke stedegne arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
                             <tr>
                                 <th>Stedegen art</th>
-                                <th>Kategori i Rødlista 2021</th>
-                                <th>Er arten en nøkkelart?</th>
+                                <th>@Html.Raw(@Constants.redListCategoryTable)</th>
+                                <th>@Constants.keyStoneSpeciesTable</th>
                                 <th>Geografisk omfang</th>
                                 <th>Vurderingsgrunnlag</th>
                             </tr>
@@ -818,8 +818,8 @@
                             <caption class="table-title"><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til stedegne verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
                             <tr>
                                 <th>Stedegen art</th>
-                                <th>Kategori i Rødlista 2021</th>
-                                <th>Er arten en nøkkelart?</th>
+                                <th>@Html.Raw(@Constants.redListCategoryTable)</th>
+                                <th>@Constants.keyStoneSpeciesTable</th>
                                 <th>Parasittens vitenskapelige navn</th>
                                 <th>Parasittens status</th>
                                 <th>Parasittens delkategori</th>

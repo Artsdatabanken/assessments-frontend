@@ -342,7 +342,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string ImpactedNatureTypesDescriptionSvalbard = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten på Svalbard. Hvis arten fører til endringer i naturtypen er det angitt.";
         public const string ImpactedNatureTypesCurrentTableTitle = "Truede, sjeldne eller øvrige naturtyper arten er observert i. ";
         public const string ImpactedNatureTypesFutureTableTitle = "Truede, sjeldne eller øvrige naturtyper som er potensielle habitater for arten i Norge. ";
-        public const string ImpactedNatureTypesCurrentTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i, samt artens påvirkning i naturtypen og anslått andel av naturtypens areal som blir påvirket (F- og G-kriteriet).";
+        public const string ImpactedNatureTypesCurrentTableDescription = "Tabellen viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i, samt artens påvirkning i naturtypen og anslått andel av naturtypens areal som blir påvirket (F- og G-kriteriet).";
         public const string ImpactedNatureTypesFutureTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens framtidige påvirkning i naturtypen og anslått andel av naturtypens areal som vil bli påvirket (F- og G-kriteriet).";
         public const string ImpactedNatureTypesTableColumn1 = "naturtype";
         public const string ImpactedNatureTypesTableColumn2 = "tidshorisont";
@@ -471,9 +471,20 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string model = "Modell";
         public const string sitesListed = "Lokalitetene i datafila er oppført";
 
-        /*Tables*/
-        public const string keyStoneSpeciesTable = "Nøkkelart?";
-        public const string redListCategoryTable = "Kategori <br/>Rødlista 2021";
+        /*Criteria Tables*/
+        public const string keyStoneSpeciesTableColumn = "Nøkkelart?";
+        public const string redListCategoryTableColumn = "Kategori <br/>Rødlista 2021";
+        public const string criteriaDSpeciesTableTitle = "Artens negative effekter på trua arter eller nøkkelarter.";
+        public const string criteriaDSpeciesTableDescription = "Tabellen viser hvilken type interaksjon den fremmede arten har med stedegne trua arter eller nøkkelarter, samt interaksjonens styre og omfang. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.";
+        public const string criteriaESpeciesTableTitle = "Artens negative effekter på stedegne arter (ikke trua eller sjelden).";
+        public const string criteriaESpeciesTableDescription = "Tabellen viser hvilken type interaksjon den fremmede arten har med stedegne arter, samt interaksjonens styre og omfang. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.";
+        public const string criteriaFNaturetypesTableTitle = "Truede eller sjeldne naturtyper som påvirkes av arten.";
+        public const string criteriaGNaturetypesTableTitle = "Naturtyper (ikke trua eller sjelden) som påvirkes av arten.";
+        public const string criteriaFAndGNaturetypesTableDescription = "Tabellen viser hvilke(n) naturtype(r) som påvirkes av den fremmede arten nå eller i framtida. Type tilstandsendring, hvor stor del av naturtypearealet som påvirkes og vurderingsgrunnlag er gitt for hver naturtype. Se retningslinjene for beskrivelse av tydelig tilstandsendring.";
+        public const string criteriaHIntrogressionTableTitle = "Overføring av genetisk materiale.";
+        public const string criteriaHIntrogressionTableDescription = "Tabellen viser hvilke stedegne arter som blir, eller kan bli, genetisk forurenset av den fremmede arten. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.";
+        public const string criteriaIParasitesTableTitle = "Overføring av parasitter og patogener.";
+        public const string criteriaIParasitesTableDescription = "Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til stedegne verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert.";
 
         public const string FigureMainText = "Her finner du resultater fra Fremmedartslista 2023 presentert i figurer. Figurene er reaktive, og viser kun resultater for det utvalget du har gjort i filteret. Om ingen filterutvalg er gjort, vises resultater for alle risikovurderte arter, både for Fastlands-Norge og Svalbard. Arter som ikke er risikovurderte (NR-arter) er ekskludert fra datagrunnlaget i alle figurer, det samme gjelder underarter og kultivarer som er inkludert i vurderingen av moderarten.";
 

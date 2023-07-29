@@ -117,14 +117,26 @@
         return true;
     }
 
-    void GetSpeciesTableDesktop(List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> impacts)
+    void GetSpeciesTableDesktop(List<AlienSpeciesAssessment2023SpeciesSpeciesInteraction> impacts, bool shouldBeThreatened)
     {
         <table class="big-data-table">
-            <caption class="table-title">Artens negative effekter på øvrige stedegne arter</caption>
+            <caption class="table-title">
+                @if (shouldBeThreatened)
+                {
+                    <b>@Constants.criteriaDSpeciesTableTitle</b>
+                    @Constants.criteriaDSpeciesTableDescription
+                }
+                @if (!shouldBeThreatened)
+                {
+                    <b>@Constants.criteriaESpeciesTableTitle</b>
+                    @Constants.criteriaESpeciesTableDescription
+                } 
+                
+            </caption>
             <tr>
                 <th>Stedegen art</th>
-                <th>@Html.Raw(@Constants.redListCategoryTable)</th>
-                <th>@Constants.keyStoneSpeciesTable</th>
+                <th>@Html.Raw(@Constants.redListCategoryTableColumn)</th>
+                <th>@Constants.keyStoneSpeciesTableColumn</th>
                 <th>Interaksjonens styrke</th>
                 <th>Geografisk omfang</th>
                 <th>Type interaksjon</th>
@@ -165,11 +177,11 @@
             <table class="big-data-table">
                 <caption class="table-title">Stedegen art: @impact.VernacularName @Html.Raw(Helpers.FormatScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
                 <tr>
-                    <td>@Html.Raw(@Constants.redListCategoryTable)</td>
+                    <td>@Html.Raw(@Constants.redListCategoryTableColumn)</td>
                     <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
                 </tr>
                 <tr>
-                    <td>@Constants.keyStoneSpeciesTable</td>
+                    <td>@Constants.keyStoneSpeciesTableColumn</td>
                     <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
                 </tr>
                 <tr>
@@ -278,7 +290,17 @@
     void GetFGTable(bool shouldBeThreatened)
     {
         <table class="big-data-table">
-            <caption class="table-title">Naturtyper som påvirkes av arten</caption>
+             <caption class="table-title">
+                @if (shouldBeThreatened)
+                {
+                    <b>@Constants.criteriaFNaturetypesTableTitle</b>
+                }
+                @if (!shouldBeThreatened)
+                {
+                    <b>@Constants.criteriaGNaturetypesTableTitle</b>
+                } 
+                @Constants.criteriaFAndGNaturetypesTableDescription
+             </caption>
             <tr>
                 <th>Naturtype</th>
                 <th>Tidshorisont</th>
@@ -633,12 +655,9 @@
             }
             <div class="collapsible_content">
                 <div is-visible="@assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && @assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0">
-                    <p>
-                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med følgende truede arter og nøkkelarter. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
-                    </p>
                     <div class="mobile_hide">
                         @{
-                            GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractionsThreatenedSpecies);
+                            GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractionsThreatenedSpecies, true);
                         }
                     </div>
                     <div class="only_mobile">
@@ -682,12 +701,9 @@
             }
             <div class="collapsible_content">
                 <div is-visible="@assessment.SpeciesSpeciesInteractions  != null && @assessment.SpeciesSpeciesInteractions .Count() != 0">
-                    <p>
-                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med øvrige stedegne arter, dvs. arter som hverken er truede eller nøkkelarter . Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
-                    </p>
                     <div class="mobile_hide">
                         @{
-                            GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractions);
+                            GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractions, false);
                         }
                     </div>
                     <div class="only_mobile">
@@ -767,11 +783,14 @@
                 <div class="collapsible_content">
                     <div>
                         <table class="big-data-table" is-visible="showHTable">
-                            <caption class="table-title"><b>Overføring av genetisk materiale.</b>  Tabellen viser hvilke stedegne arter den fremmede arten er vurdert å føre til genetisk forurensning av. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.</caption>
+                            <caption class="table-title">
+                                <b>@Constants.criteriaHIntrogressionTableTitle</b>
+                                @Constants.criteriaHIntrogressionTableDescription 
+                            </caption>
                             <tr>
                                 <th>Stedegen art</th>
-                                <th>@Html.Raw(@Constants.redListCategoryTable)</th>
-                                <th>@Constants.keyStoneSpeciesTable</th>
+                                <th>@Html.Raw(@Constants.redListCategoryTableColumn)</th>
+                                <th>@Constants.keyStoneSpeciesTableColumn</th>
                                 <th>Geografisk omfang</th>
                                 <th>Vurderingsgrunnlag</th>
                             </tr>
@@ -815,11 +834,14 @@
                 <div class="collapsible_content">
                     <div>
                         <table class="big-data-table" is-visible="showITable">
-                            <caption class="table-title"><b>Overføring av parasitter og patogener.</b> Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til stedegne verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert. </caption>
+                            <caption class="table-title">
+                                <b>@Constants.criteriaIParasitesTableTitle</b>
+                                @Constants.criteriaIParasitesTableDescription 
+                            </caption>
                             <tr>
                                 <th>Stedegen art</th>
-                                <th>@Html.Raw(@Constants.redListCategoryTable)</th>
-                                <th>@Constants.keyStoneSpeciesTable</th>
+                                <th>@Html.Raw(@Constants.redListCategoryTableColumn)</th>
+                                <th>@Constants.keyStoneSpeciesTableColumn</th>
                                 <th>Parasittens vitenskapelige navn</th>
                                 <th>Parasittens status</th>
                                 <th>Parasittens delkategori</th>

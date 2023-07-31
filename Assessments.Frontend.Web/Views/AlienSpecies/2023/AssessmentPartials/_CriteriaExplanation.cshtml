@@ -123,26 +123,26 @@
             <caption class="table-title">
                 @if (shouldBeThreatened)
                 {
-                    <b>@Constants.criteriaDSpeciesTableTitle</b>
-                    @Constants.criteriaDSpeciesTableDescription
+                    <b>@Constants.AlienSpeciesTables.CriteriaDSpeciesTableTitle</b>
+                    @Constants.AlienSpeciesTables.CriteriaDSpeciesTableDescription
                 }
                 @if (!shouldBeThreatened)
                 {
-                    <b>@Constants.criteriaESpeciesTableTitle</b>
-                    @Constants.criteriaESpeciesTableDescription
+                    <b>@Constants.AlienSpeciesTables.CriteriaESpeciesTableTitle</b>
+                    @Constants.AlienSpeciesTables.CriteriaESpeciesTableDescription
                 } 
                 
             </caption>
             <tr>
                 <th>Stedegen art</th>
-                <th>@Html.Raw(@Constants.redListCategoryTableColumn)</th>
-                <th>@Constants.keyStoneSpeciesTableColumn</th>
-                <th>Interaksjonens styrke</th>
-                <th>Geografisk omfang</th>
-                <th>Type interaksjon</th>
+                <th>@Html.Raw(@Constants.AlienSpeciesTables.RedListCategoryTableColumn)</th>
+                <th>@Constants.AlienSpeciesTables.KeyStoneSpeciesTableColumn</th>
+                <th>@Constants.AlienSpeciesTables.InteractionStrengthTableColumn</th>
+                <th>@Constants.AlienSpeciesTables.ScaleTableColumn</th>
+                <th>@Constants.AlienSpeciesTables.InteractionTypeTableColumn</th>
                 @if (impacts.Any(x => x.Background.Count() != 0))
                 {
-                    <th>Vurderingsgrunnlag</th>
+                    <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
                 }
             </tr>
             @foreach (var impact in impacts)
@@ -177,11 +177,11 @@
             <table class="big-data-table">
                 <caption class="table-title">Stedegen art: @impact.VernacularName @Html.Raw(Helpers.FormatScientificNameElement(impact.ScientificName)) @impact.ScientificNameAuthor</caption>
                 <tr>
-                    <td>@Html.Raw(@Constants.redListCategoryTableColumn)</td>
+                    <td>@Html.Raw(@Constants.AlienSpeciesTables.RedListCategoryTableColumn)</td>
                     <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
                 </tr>
                 <tr>
-                    <td>@Constants.keyStoneSpeciesTableColumn</td>
+                    <td>@Constants.AlienSpeciesTables.KeyStoneSpeciesTableColumn</td>
                     <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
                 </tr>
                 <tr>
@@ -214,17 +214,29 @@
         }
     }
 
-    void GetNatureTypeTableDesktop(List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> impacts)
+    void GetNatureTypeTableDesktop(List<AlienSpeciesAssessment2023SpeciesNaturetypeInteraction> impacts, bool shouldBeThreatened)
     {
         <table class="big-data-table">
-            <caption class="table-title">Artens negative effekter på grupper av arter (samfunn)</caption>
+            <caption class="table-title">
+                @if (shouldBeThreatened)
+                {
+                    <b>@Constants.AlienSpeciesTables.CriteriaDSpeciesNaturetypesTableTitle</b>
+                    @Constants.AlienSpeciesTables.CriteriaDSpeciesNaturetypesTableDescription
+                }
+                @if (!shouldBeThreatened)
+                {
+                    <b>@Constants.AlienSpeciesTables.CriteriaESpeciesNaturetypesTableTitle</b>
+                    @Constants.AlienSpeciesTables.CriteriaESpeciesNaturetypesTableDescription
+                } 
+                
+            </caption>
             <tr>
-                <th>Berørt naturtype (med gruppen av påvirkede arter)</th>
-                <th>Påvirkes nøkkelarter eller truede arter?</th>
-                <th>Interaksjonens styrke</th>
-                <th>Geografisk omfang</th>
-                <th>Type interaksjon</th>
-                <th>Vurderingsgrunnlag</th>
+                <th>@Html.Raw(Constants.AlienSpeciesTables.NaturetypeDAndETableColumn1)</th>
+                <th>@Html.Raw(Constants.AlienSpeciesTables.NaturetypeDAndETableColumn2)</th>
+                <th>@Constants.AlienSpeciesTables.InteractionStrengthTableColumn</th>
+                <th>@Constants.AlienSpeciesTables.ScaleTableColumn</th>
+                <th>@Constants.AlienSpeciesTables.InteractionTypeTableColumn</th>
+                <th>@Html.Raw(Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
             </tr>
             @foreach (var impact in impacts)
             {
@@ -293,20 +305,20 @@
              <caption class="table-title">
                 @if (shouldBeThreatened)
                 {
-                    <b>@Constants.criteriaFNaturetypesTableTitle</b>
+                    <b>@Constants.AlienSpeciesTables.CriteriaFNaturetypesTableTitle</b>
                 }
                 @if (!shouldBeThreatened)
                 {
-                    <b>@Constants.criteriaGNaturetypesTableTitle</b>
+                    <b>@Constants.AlienSpeciesTables.CriteriaGNaturetypesTableTitle</b>
                 } 
-                @Constants.criteriaFAndGNaturetypesTableDescription
+                @Constants.AlienSpeciesTables.CriteriaFAndGNaturetypesTableDescription
              </caption>
             <tr>
-                <th>Naturtype</th>
-                <th>Tidshorisont</th>
-                <th>Tydelig tilstandsendring</th>
-                <th>Tydelig påvirka areal (%)</th>
-                <th>Vurderingsgrunnlag</th>
+                <th>@Constants.AlienSpeciesTables.NaturetypeNameTableColumn</th>
+                <th>@Constants.AlienSpeciesTables.TimehorizonTableColumn</th>
+                <th>@Html.Raw(@Constants.AlienSpeciesTables.StateChangeTableColumn)</th>
+                <th>@Html.Raw(@Constants.AlienSpeciesTables.AffectedAreaTableColumn)</th>
+                <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
             </tr>
             @foreach (var natureType in assessment.ImpactedNatureTypes.Where(x => x.IsThreatened == shouldBeThreatened && HasAffectedArea(x.AffectedArea)))
             {
@@ -367,7 +379,7 @@
     void GetEstimationMethod(string estimationMethod)
     {
         <span class="estimation-method">
-            <b>@Constants.estimationMethod</b><br/>
+            @Constants.estimationMethod 
             <span>@estimationMethod</span>
         </span>
     }
@@ -505,48 +517,64 @@
             <div class="collapsible_content">
                 @{GetEstimationMethod(assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant());}
                 <div is-visible="isSpatiotemporalDataset">
+                    <br />
                     <table class="big-data-table">
                         <caption class="table-title">
-                            @Constants.spatioTemporalTableTitle                            
-                            (@Constants.readMoreMethod: <a href="https://view.nina.no/expansion/" target="_blank">@Constants.expansion</a>)
+                         <b>@Constants.AlienSpeciesTables.CriteriaBExpansionSpeedSpatioTemporalParameterTableTitle</b> 
+                        @Constants.AlienSpeciesTables.CriteriaBExpansionSpeedSpatioTemporalParameterTableDescription <a href="https://view.nina.no/expansion/" target="_blank">@Constants.expansion</a>.
                         </caption>
+                        <tr>
+                            <th>@Constants.AlienSpeciesTables.ExpansionSpeedParameterColumn1</th>
+                            <th>@Constants.AlienSpeciesTables.ExpansionSpeedParameterColumn2</th>
+                        </tr>
                         <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange)">
-                            <td>@Constants.areaDarkNumbers: </td>
+                            <td>@Constants.AlienSpeciesTables.AreaDarkNumbers</td>
                             <td>@assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange</td>
                         </tr>
                         <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName())">
-                            <td>@Constants.model: </td>
-                            <td>@assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName()</td>
+                            <td>@Constants.AlienSpeciesTables.Model</td>
+                            <td>@assessment.ExpansionSpeedSpatioTemporalDatasetModel.DisplayName().ToLower()</td>
                         </tr>
                         <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing.DisplayName())">
-                            <td>@Constants.sitesListed: </td>
+                            <td>@Constants.AlienSpeciesTables.SitesListed</td>
                             <td>@assessment.ExpansionSpeedSpatioTemporalDatasetOccurrenceListing.DisplayName()</td>
                         </tr>
                     </table>
                     <br />
                     <table class="big-data-table">
-                        <caption class="table-title">@Constants.expansionSpeed</caption>
+                        <caption class="table-title">
+                            <b>@Constants.AlienSpeciesTables.CriteriaBExpansionSpeedSpatioTemporalResultTableTitle</b>
+                            @Constants.AlienSpeciesTables.CriteriaBExpansionSpeedSpatioTemporalResultTableDescription
+                        </caption>
                         <tr>
-                            <td>@Constants.average: </td>
+                            <th>@Constants.AlienSpeciesTables.ExpansionSpeedResultColumn1</th>
+                            <th>@Constants.AlienSpeciesTables.ExpansionSpeedResultColumn2</th>
+                        </tr>
+                        <tr>
+                            <td>@Constants.AlienSpeciesTables.AverageExpansionSpeedRow </td>
                             <td>@assessment.ExpansionSpeedBestEstimate.ToString("N0")</td>
                         </tr>
                         <tr>
-                            <td>@Constants.average @Constants.lowEstimate: </td>
+                            <td>@Constants.AlienSpeciesTables.LowExpansionSpeedRow </td>
                             <td>@assessment.ExpansionSpeedLowEstimate.ToString("N0")</td>
                         </tr>
                         <tr>
-                            <td>@Constants.average @Constants.highEstimate: </td>
+                            <td>@Constants.AlienSpeciesTables.HighExpansionSpeedRow </td>
                             <td>@assessment.ExpansionSpeedHighEstimate.ToString("N0")</td>
                         </tr>
                     </table>
                 </div>
                 <div is-visible="isEstimatedIncreaseInAOOReproducingUnaided">
-                    <p>@Constants.methodDescriptionReproducingUnaided</p>
+                    <br />
                     <table class="big-data-table">
+                        <caption class="table-title">
+                            <b>@Constants.AlienSpeciesTables.CriteriaBExpansionSpeedIncreaseAOOTableTitle</b>
+                            @Constants.AlienSpeciesTables.CriteriaBExpansionSpeedIncreaseAOOTableDescription
+                        </caption>
                         <tr>
-                            <th>@Constants.yearCaps</th>
-                            <th>@Constants.knownArea (km<sup>2</sup>)</th>
-                            <th>@Constants.knownArea (km<sup>2</sup>) @Constants.corrected</th>
+                            <th>@Constants.AlienSpeciesTables.ExpansionSpeedAOOColumn1</th>
+                            <th>@Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownArea)</th>
+                            <th>@Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownAreaCorrected)</th>
                         </tr>
                         <tr>
                             <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
@@ -601,12 +629,15 @@
                 }
                 <div class="collapsible_content">
                     <table class="big-data-table">
-                        <caption class="table-title"><b>Kolonisert naturtypeareal.</b> Anslått prosentandel kolonisert areal i de naturtypene arten er observert i eller regnes med å observeres i innen 50 år eller 5 generasjoner. </caption>
+                        <caption class="table-title">
+                            <b>@Constants.AlienSpeciesTables.CriteriaCNaturetypesTableTitle</b>
+                            @Constants.AlienSpeciesTables.CriteriaCNaturetypesTableDescription
+                        </caption>
                         <tr>
-                            <th>Naturtype</th>
-                            <th>Tidshorisont</th>
-                            <th>Tydelig påvirka areal (%)</th>
-                            <th>Vurderingsgrunnlag</th>
+                            <th>@Constants.AlienSpeciesTables.NaturetypeNameTableColumn</th>
+                            <th>@Constants.AlienSpeciesTables.TimehorizonTableColumn</th>
+                            <th>@Html.Raw(@Constants.AlienSpeciesTables.ColonizedAreaTableColumn)</th>
+                            <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
                         </tr>
                         @foreach (var natureType in assessment.ImpactedNatureTypes)
                         {
@@ -667,12 +698,9 @@
                     </div>
                 </div>
                 <div is-visible="@assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && @assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0">
-                    <p>
-                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter som inkluderer truede arter eller nøkkelarter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
-                    </p>
                     <div class="mobile_hide">
                         @{
-                            GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractionsThreatenedSpecies);
+                            GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractionsThreatenedSpecies, true);
                         }
                     </div>
                     <div class="only_mobile">
@@ -713,12 +741,9 @@
                     </div>
                 </div>
                 <div is-visible="@assessment.SpeciesNaturetypeInteractions != null && @assessment.SpeciesNaturetypeInteractions.Count() != 0">
-                    <p>
-                        Arten er vurdert å ha følgende negative interaksjoner (type interaksjon) med grupper av arter i følgende naturtyper. Kun effekter som er dokumentert i Norge; eller i utlandet (enten for arten selv eller for en nært beslektet og sammenlignbar art), hvor effekten er sannsynlig å opptre i Norge i løpet av 50 år, er inkludert.
-                    </p>
                     <div class="mobile_hide">
                         @{
-                            GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractions);
+                            GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractions, false);
                         }
                     </div>
                     <div class="only_mobile">
@@ -784,13 +809,13 @@
                     <div>
                         <table class="big-data-table" is-visible="showHTable">
                             <caption class="table-title">
-                                <b>@Constants.criteriaHIntrogressionTableTitle</b>
-                                @Constants.criteriaHIntrogressionTableDescription 
+                                <b>@Constants.AlienSpeciesTables.CriteriaHIntrogressionTableTitle</b>
+                                @Constants.AlienSpeciesTables.CriteriaHIntrogressionTableDescription 
                             </caption>
                             <tr>
                                 <th>Stedegen art</th>
-                                <th>@Html.Raw(@Constants.redListCategoryTableColumn)</th>
-                                <th>@Constants.keyStoneSpeciesTableColumn</th>
+                                <th>@Html.Raw(@Constants.AlienSpeciesTables.RedListCategoryTableColumn)</th>
+                                <th>@Constants.AlienSpeciesTables.KeyStoneSpeciesTableColumn</th>
                                 <th>Geografisk omfang</th>
                                 <th>Vurderingsgrunnlag</th>
                             </tr>
@@ -835,13 +860,13 @@
                     <div>
                         <table class="big-data-table" is-visible="showITable">
                             <caption class="table-title">
-                                <b>@Constants.criteriaIParasitesTableTitle</b>
-                                @Constants.criteriaIParasitesTableDescription 
+                                <b>@Constants.AlienSpeciesTables.CriteriaIParasitesTableTitle</b>
+                                @Constants.AlienSpeciesTables.CriteriaIParasitesTableDescription 
                             </caption>
                             <tr>
                                 <th>Stedegen art</th>
-                                <th>@Html.Raw(@Constants.redListCategoryTableColumn)</th>
-                                <th>@Constants.keyStoneSpeciesTableColumn</th>
+                                <th>@Html.Raw(@Constants.AlienSpeciesTables.RedListCategoryTableColumn)</th>
+                                <th>@Constants.AlienSpeciesTables.KeyStoneSpeciesTableColumn</th>
                                 <th>Parasittens vitenskapelige navn</th>
                                 <th>Parasittens status</th>
                                 <th>Parasittens delkategori</th>

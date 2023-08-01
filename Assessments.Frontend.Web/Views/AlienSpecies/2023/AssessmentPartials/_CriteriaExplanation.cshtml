@@ -315,7 +315,7 @@
              </caption>
             <tr>
                 <th>@Constants.AlienSpeciesTables.NaturetypeNameTableColumn</th>
-                <th>@Constants.AlienSpeciesTables.TimehorizonTableColumn</th>
+                <th>@Constants.AlienSpeciesTables.TimeHorizonTableColumn</th>
                 <th>@Html.Raw(@Constants.AlienSpeciesTables.StateChangeTableColumn)</th>
                 <th>@Html.Raw(@Constants.AlienSpeciesTables.AffectedAreaTableColumn)</th>
                 <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
@@ -459,29 +459,36 @@
                 </p>                                
                 <div is-visible="showNumericalEstimation">
                     <table class="big-data-table" is-visible="showNumericalEstimation">
-                        <caption class="table-title"><b>@Constants.demoKeyNumbers</b></caption>
+                        <caption class="table-title">
+                            <b>@Constants.AlienSpeciesTables.CriteriaAMedianLifespanNumericalEstimationTableTitle</b>
+                            @Constants.AlienSpeciesTables.CriteriaAMedianLifespanNumericalEstimationTableDescription<a href="https://www.artsdatabanken.no/Files/42948/" target="_blank">@Constants.AlienSpeciesTables.CriteriaANumericalEstimationTableLinkText</a>.
+                        </caption>
+                        <tr>
+                            <th>@Constants.AlienSpeciesTables.MedianLifespanAndExpansionSpeedParameterColumn1</th>
+                            <th>@Constants.AlienSpeciesTables.MedianLifespanAndExpansionSpeedParameterColumn2</th>
+                        </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationPopulationSize != 0">
-                            <td>@Constants.currentPopSize </td>
+                            <td>@Constants.AlienSpeciesTables.CurrentPopSize </td>
                             <td>@assessment.MedianLifetimeNumericalEstimationPopulationSize.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
-                            <td>@Constants.growthRate (&lambda;): </td>
+                            <td>@Constants.AlienSpeciesTables.GrowthRate (&lambda;) </td>
                             <td>@assessment.MedianLifetimeNumericalEstimationGrowthRate.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
-                            <td>@Constants.environmentVar (&sigma;<sub>e</sub><sup>2</sup>): </td>
+                            <td>@Constants.AlienSpeciesTables.EnvironmentVar (&sigma;<sub>e</sub><sup>2</sup>) </td>
                             <td>@assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance?.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
-                            <td>@Constants.demographicVar (&sigma;<sub>d</sub><sup>2</sup>): </td>
+                            <td>@Constants.AlienSpeciesTables.DemographicVar (&sigma;<sub>d</sub><sup>2</sup>) </td>
                             <td>@assessment.MedianLifetimeNumericalEstimationDemographicVariance?.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
-                            <td>@Constants.sustainability</td>
+                            <td>@Constants.AlienSpeciesTables.CarryingCapasity</td>
                             <td>@assessment.MedianLifetimeNumericalEstimationCarryingCapacity?.ToString("N0")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationExtinctionThreshold != null">
-                            <td>@Constants.extinctLimit</td>
+                            <td>@Constants.AlienSpeciesTables.QuasiExtinctionThreshold</td>
                             <td>@assessment.MedianLifetimeNumericalEstimationExtinctionThreshold?.ToString("N0")</td>
                         </tr>
                     </table>
@@ -493,7 +500,7 @@
                 <div is-visible="showViableAnalysis">
                     <p>@Constants.modelAndProgram @assessment.MedianLifetimeViabilityAnalysisDescription</p>
                     <table class="big-data-table">
-                        <caption class="table-title">@Constants.demoKeyNumbers</caption>
+                        <caption class="table-title">@Constants.AlienSpeciesTables.CriteriaAMedianLifespanNumericalEstimationTableTitle</caption>
                         <tr is-visible="assessment.MedianLifetimeBestEstimate != 0">
                             <td>@Constants.estMedianLifeSpanThisYear: </td>
                             <td>@assessment.MedianLifetimeBestEstimate.ToString("N0")</td>
@@ -524,8 +531,8 @@
                         @Constants.AlienSpeciesTables.CriteriaBExpansionSpeedSpatioTemporalParameterTableDescription <a href="https://view.nina.no/expansion/" target="_blank">@Constants.expansion</a>.
                         </caption>
                         <tr>
-                            <th>@Constants.AlienSpeciesTables.ExpansionSpeedParameterColumn1</th>
-                            <th>@Constants.AlienSpeciesTables.ExpansionSpeedParameterColumn2</th>
+                            <th>@Constants.AlienSpeciesTables.MedianLifespanAndExpansionSpeedParameterColumn1</th>
+                            <th>@Constants.AlienSpeciesTables.MedianLifespanAndExpansionSpeedParameterColumn2</th>
                         </tr>
                         <tr is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedSpatioTemporalDatasetDarkFigureRange)">
                             <td>@Constants.AlienSpeciesTables.AreaDarkNumbers</td>
@@ -635,7 +642,7 @@
                         </caption>
                         <tr>
                             <th>@Constants.AlienSpeciesTables.NaturetypeNameTableColumn</th>
-                            <th>@Constants.AlienSpeciesTables.TimehorizonTableColumn</th>
+                            <th>@Constants.AlienSpeciesTables.TimeHorizonTableColumn</th>
                             <th>@Html.Raw(@Constants.AlienSpeciesTables.ColonizedAreaTableColumn)</th>
                             <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
                         </tr>

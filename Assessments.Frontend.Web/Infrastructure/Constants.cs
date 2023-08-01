@@ -410,13 +410,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string adjustedTo = "Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier ";
         public const string adjustedUncertainty = "Begrunnelse for justering av skår og/eller usikkerhet:";
 
-        public const string demoKeyNumbers = "Demografiske nøkkeltall";
-        public const string currentPopSize = "Nåværende populasjonsstørrelse (N, i antall individer):";
-        public const string growthRate = "Vekstrate";
-        public const string environmentVar = "Miljøvarians";
-        public const string demographicVar = "Demografisk varians";
-        public const string sustainability = "Bæreevne (K, i antall individer): ";
-        public const string extinctLimit = "Terskel for kvasiutdøing (C, i antall individer): ";
         public const string years = "år";
         public const string to = "til";
         public const string on = "på";
@@ -458,15 +451,25 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public class AlienSpeciesTables
         {
-            /*Generel*/
-            public const string TimehorizonTableColumn = "Tidshorisont";
+            /*General*/
+            public const string TimeHorizonTableColumn = "Tidshorisont";
             public const string BackgroundTableColumn = "Vurderings<span>&#8208;</span><br/>grunnlag";
 
-            /*A and B*/
+            /*Criteria A and B*/
+            public const string CriteriaAMedianLifespanNumericalEstimationTableTitle = "Artens demografiske nøkkeltall.";
+            public const string CriteriaAMedianLifespanNumericalEstimationTableDescription = "Tabellen viser artens demografiske nøkkeltall brukt for å estimere den fremmede artens levetid i Norge. Les mer om parameterne i ";
+            public const string CriteriaANumericalEstimationTableLinkText = "retningslinjene";
+            public const string CurrentPopSize = "Nåværende populasjonsstørrelse (N, i antall individer)";
+            public const string GrowthRate = "Vekstrate";
+            public const string EnvironmentVar = "Miljøvarians";
+            public const string DemographicVar = "Demografisk varians";
+            public const string CarryingCapasity = "Bæreevne (K, i antall individer)";
+            public const string QuasiExtinctionThreshold = "Terskel for kvasiutdøing (C, i antall individer)";
+
             public const string CriteriaBExpansionSpeedSpatioTemporalParameterTableTitle = "Modell og parametere.";
             public const string CriteriaBExpansionSpeedSpatioTemporalParameterTableDescription = "Tabellen viser hvilke parametere og antagelser som er brukt for estimering av ekspansjonshastighet. Les mer om metoden her: ";
-            public const string ExpansionSpeedParameterColumn1 = "Parameter";
-            public const string ExpansionSpeedParameterColumn2 = "Verdi";
+            public const string MedianLifespanAndExpansionSpeedParameterColumn1 = "Parameter";
+            public const string MedianLifespanAndExpansionSpeedParameterColumn2 = "Verdi";
             public const string AreaDarkNumbers = "forekomstarealets mørketall";
             public const string Model = "modell";
             public const string SitesListed = "lokalitetene i datafila er oppført";

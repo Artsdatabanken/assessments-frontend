@@ -19,20 +19,20 @@
     {
         <table class="big-data-table nature-table-setup">
             <tr>
-                <th>@Constants.ImpactedNatureTypesTableColumn1 </th>
-                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn3) </th>
-                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn4) </th>
-                <th>@Html.Raw(Constants.ImpactedNatureTypesTableColumn5) </th>
-                <th>@Constants.ImpactedNatureTypesTableColumn6 </th>
+                <th>@Constants.AlienSpeciesTables.NaturetypeNameTableColumn </th>
+                <th>@Html.Raw(Constants.AlienSpeciesTables.ColonizedAreaTableColumn) </th>
+                <th>@Html.Raw(Constants.AlienSpeciesTables.StateChangeTableColumn) </th>
+                <th>@Html.Raw(Constants.AlienSpeciesTables.AffectedAreaTableColumn) </th>
+                <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn) </th>
             </tr>
             @{
                 foreach (var natureType in natureTypesList)
                 {
                     <tr>
-                        <td><b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn1:</b>@natureType.Name</td>
-                        <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn3):</b>@natureType.ColonizedArea</td>
+                        <td><b class="only_mobile">@Constants.AlienSpeciesTables.NaturetypeNameTableColumn:</b>@natureType.Name</td>
+                        <td><b class="only_mobile">@Helpers.removeLineBreaksForMobile(Constants.AlienSpeciesTables.ColonizedAreaTableColumn):</b>@natureType.ColonizedArea</td>
                         <td>
-                            <b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn4):</b>
+                            <b class="only_mobile">@removeLineBreaksForMobile(Constants.AlienSpeciesTables.StateChangeTableColumn):</b>
                             @{
                                 if (natureType.StateChange != null)
                                 {
@@ -47,9 +47,9 @@
                                 }
                             }
                         </td>
-                        <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.ImpactedNatureTypesTableColumn5):</b>@natureType.AffectedArea</td>
+                        <td><b class="only_mobile">@removeLineBreaksForMobile(Constants.AlienSpeciesTables.AffectedAreaTableColumn):</b>@natureType.AffectedArea</td>
                         <td>
-                            <b class="only_mobile">@Constants.ImpactedNatureTypesTableColumn6:</b>
+                            <b class="only_mobile">@Helpers.removeLineBreaksForMobile(@Constants.AlienSpeciesTables.BackgroundTableColumn):</b>
                             @{
                                 <ul>
                                     @{
@@ -85,16 +85,16 @@
         <div is-visible="showNatureTypes">
             <div is-visible="hasCurrentTimeHorizonTypes">
                 <p class="big-data-table table-description">
-                    <b>@Constants.ImpactedNatureTypesCurrentTableTitle</b>
-                    @Constants.ImpactedNatureTypesCurrentTableDescription
+                    <b>@Constants.AlienSpeciesTables.ImpactedNatureTypesCurrentTableTitle</b>
+                    @Constants.AlienSpeciesTables.ImpactedNatureTypesCurrentTableDescription
                 </p>
                 @{ GetNatureTypeTable(natureTypes.Where(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.now)); }
             </div>
             <br>
             <div is-visible="hasFutureTimeHorizonTypes">
                 <p class="big-data-table table-description">
-                    <b>@Constants.ImpactedNatureTypesFutureTableTitle</b>
-                    @Constants.ImpactedNatureTypesFutureTableDescription
+                    <b>@Constants.AlienSpeciesTables.ImpactedNatureTypesFutureTableTitle</b>
+                    @Constants.AlienSpeciesTables.ImpactedNatureTypesFutureTableDescription
                 </p>
                 @{ GetNatureTypeTable(natureTypes.Where(x => x.TimeHorizon == AlienSpeciesAssessment2023TimeHorizon.future)); }
             </div>

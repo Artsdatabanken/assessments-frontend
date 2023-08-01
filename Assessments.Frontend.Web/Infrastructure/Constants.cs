@@ -340,17 +340,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string ImpactedNatureTypesDescription = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten i Norge. Hvis arten fører til endringer i naturtypen er det angitt.";
         public const string ImpactedNatureTypesDescriptionSvalbard = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten på Svalbard. Hvis arten fører til endringer i naturtypen er det angitt.";
-        public const string ImpactedNatureTypesCurrentTableTitle = "Truede, sjeldne eller øvrige naturtyper arten er observert i. ";
-        public const string ImpactedNatureTypesFutureTableTitle = "Truede, sjeldne eller øvrige naturtyper som er potensielle habitater for arten i Norge. ";
-        public const string ImpactedNatureTypesCurrentTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i, samt artens påvirkning i naturtypen og anslått andel av naturtypens areal som blir påvirket (F- og G-kriteriet).";
-        public const string ImpactedNatureTypesFutureTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens framtidige påvirkning i naturtypen og anslått andel av naturtypens areal som vil bli påvirket (F- og G-kriteriet).";
-        public const string ImpactedNatureTypesTableColumn1 = "naturtype";
-        public const string ImpactedNatureTypesTableColumn2 = "tidshorisont";
-        public const string ImpactedNatureTypesTableColumn3 = "kolonisert <br/>areal (%)";
-        public const string ImpactedNatureTypesTableColumn4 = "tydelig <br/>tilstandsendring";
-        public const string ImpactedNatureTypesTableColumn5 = "tydelig <br/>påvirka <br/>areal (%)";
-        public const string ImpactedNatureTypesTableColumn6 = "vurderingsgrunnlag";
-
+        
         public const string CategoryChangeNotAssessed2018 = "Denne arten er risikovurdert for første gang i 2023.";
         public const string CategoryChangeShowSameAs2018 = "Denne arten er vurdert til samme risikokategori som i Fremmedartslista 2018 (forrige revisjon).";
         public const string CategoryChangeReasonsForChangeDescription = "Utfyllende beskrivelse av årsaken(e) for endret risikokategori:";
@@ -379,8 +369,8 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string furtherSpreadWaysTableDescription = "Følgende aktuelle, fortidige og sannsynlig fremtidige spredningsveier fra norsk natur til norsk natur er angitt for arten.  ";
         public const string noFurtherSpreadWays = "Det er ikke angitt spredningsmåter i norsk natur for denne arten";
 
-
         /* Criteria Explanation */
+
         public const string speciesEvaluatedTo = "Arten er vurdert til ";
         public const string noRisk = "ingen kjent risiko";
         public const string noRiskExplanation = "NK og har dermed ingen avgjørende kriterier.";
@@ -420,21 +410,12 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string adjustedTo = "Med bakgrunn i retningslinjene ble skår og/eller usikkerhet justert til gjeldende verdier ";
         public const string adjustedUncertainty = "Begrunnelse for justering av skår og/eller usikkerhet:";
 
-        public const string demoKeyNumbers = "Demografiske nøkkeltall";
-        public const string currentPopSize = "Nåværende populasjonsstørrelse (N, i antall individer):";
-        public const string growthRate = "Vekstrate";
-        public const string environmentVar = "Miljøvarians";
-        public const string demographicVar = "Demografisk varians";
-        public const string sustainability = "Bæreevne (K, i antall individer): ";
-        public const string extinctLimit = "Terskel for kvasiutdøing (C, i antall individer): ";
         public const string years = "år";
-        public const string yearCaps = "År";
         public const string to = "til";
         public const string on = "på";
         public const string whichIs = "som er";
         public const string downTo = "ned mot";
         public const string upTo = "opp mot";
-        public const string corrected = "korrigert for tiltak";
         public const string mPerYear = "m/år";
         public const string speciesHas = "Arten har";
         public const string medianLifeEst = "Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til ";
@@ -444,7 +425,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string lowEstimate = "lavt anslag";
         public const string highEstimate = "høyt anslag";
 
-        public const string expansionSpeed = "Ekspansjonshastighet";
+        
         public const string expansionSpeedGuess = "Det beste anslaget på artens ekspansjonshastighet er";
         public const string expansionSpeedIs = "er ekspansjonshastigheten anslått til";
         public const string expansionSpeedEst = "er ekspansjonshastigheten estimert til";
@@ -453,23 +434,101 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string isScore = "Dette tilsvarer skår";
         public const string atBCrit = "på B-kriteriet";
         public const string methodDescriptionUnaidedFuture = "Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra forventet endring i forekomstareal framover i tid.";
-        public const string methodDescriptionReproducingUnaided = "Denne estimeringsmetoden anslår ekspansjonshastigheten ut fra endringen i forekomstareal mellom to år tilbake i tid, hvor antall år mellom første og andre år, er på mellom 10 og 20 år. Følgende data ligger til grunn:";
         public const string commentData = "Kommentar til datagrunnlaget:";
         public const string basedOnIncrease = "Basert på økningen i artens forekomstareal i perioden fra";
         public const string andA = "og et";
         public const string darkNumber = "mørketall på";
-        public const string knownArea = "Kjent forekomstareal";
-        public const string areaDarkNumbers = "Forekomstarealets mørketall";
-        public const string average = "Gjennomsnittlig (m/år)";
+        
+        
+       
 
         public const string noEcoEffect = "Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.";
         public const string effectAfterCriterium = "Økologiske effekter etter kriterium";
         public const string evaluatedAsUnlikely = "er vurdert som fraværende (usannsynlige)";
 
-        public const string spatioTemporalTableTitle = "Parametervalg for estimering av ekspansjonshastighet ";
-        public const string readMoreMethod = "les mer om metoden her";
-        public const string model = "Modell";
-        public const string sitesListed = "Lokalitetene i datafila er oppført";
+        
+
+
+        public class AlienSpeciesTables
+        {
+            /*General*/
+            public const string TimeHorizonTableColumn = "Tidshorisont";
+            public const string BackgroundTableColumn = "Vurderings<span>&#8208;</span><br/>grunnlag";
+
+            /*Criteria A and B*/
+            public const string CriteriaAMedianLifespanNumericalEstimationTableTitle = "Artens demografiske nøkkeltall.";
+            public const string CriteriaAMedianLifespanNumericalEstimationTableDescription = "Tabellen viser artens demografiske nøkkeltall brukt for å estimere den fremmede artens levetid i Norge. Les mer om parameterne i ";
+            public const string CriteriaANumericalEstimationTableLinkText = "retningslinjene";
+            public const string CurrentPopSize = "Nåværende populasjonsstørrelse (N, i antall individer)";
+            public const string GrowthRate = "Vekstrate";
+            public const string EnvironmentVar = "Miljøvarians";
+            public const string DemographicVar = "Demografisk varians";
+            public const string CarryingCapasity = "Bæreevne (K, i antall individer)";
+            public const string QuasiExtinctionThreshold = "Terskel for kvasiutdøing (C, i antall individer)";
+
+            public const string CriteriaBExpansionSpeedSpatioTemporalParameterTableTitle = "Modell og parametere.";
+            public const string CriteriaBExpansionSpeedSpatioTemporalParameterTableDescription = "Tabellen viser hvilke parametere og antagelser som er brukt for estimering av ekspansjonshastighet. Les mer om metoden her: ";
+            public const string MedianLifespanAndExpansionSpeedParameterColumn1 = "Parameter";
+            public const string MedianLifespanAndExpansionSpeedParameterColumn2 = "Verdi";
+            public const string AreaDarkNumbers = "forekomstarealets mørketall";
+            public const string Model = "modell";
+            public const string SitesListed = "lokalitetene i datafila er oppført";
+            public const string CriteriaBExpansionSpeedSpatioTemporalResultTableTitle = "Artens ekspansjonshastighet.";
+            public const string CriteriaBExpansionSpeedSpatioTemporalResultTableDescription = "Tabellen viser artens estimerte ekspansjonshastighet (m/år) med bakgrunn i parametervalgene angitt over, samt datasett med tid- og stedfesta observasjoner av arten.";
+            public const string ExpansionSpeedResultColumn1 = "Ekspansjonshastighet";
+            public const string ExpansionSpeedResultColumn2 = "Estimert verdi (m/år)";
+            public const string AverageExpansionSpeedRow = "beste anslag";
+            public const string LowExpansionSpeedRow = "lavt anslag";
+            public const string HighExpansionSpeedRow = "høyt anslag";
+
+            public const string CriteriaBExpansionSpeedIncreaseAOOTableTitle = "Artens endring i forekomstareal.";
+            public const string CriteriaBExpansionSpeedIncreaseAOOTableDescription = "Tabellen viser artens kjente forekomstareal ved to ulike år.";
+            public const string ExpansionSpeedAOOColumn1 = "År";
+            public const string ExpansionSpeedAOOKnownArea = "Kjent forekomstareal (km<sup>2</sup>)";
+            public const string ExpansionSpeedAOOKnownAreaCorrected = "Kjent forekomstareal (km<sup>2</sup>) <br/>korrigert for tiltak";
+
+            /*Criteria D, E, H and I*/
+            public const string CriteriaDSpeciesNaturetypesTableTitle = "Artens negative effekter på grupper av arter (inkludert trua arter eller nøkkelarter).";
+            public const string CriteriaDSpeciesNaturetypesTableDescription = "Tabellen viser hvilken type interaksjon den fremmede arten har med grupper av stedegne arter (hvor minst én av artene er trua eller nøkkelart), samt interaksjonens styre og omfang. Den negative interaksjonen med stedegne arter er gitt for hver naturtype. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.";
+            public const string CriteriaESpeciesNaturetypesTableTitle = "Artens negative effekter på grupper av stedegne arter.";
+            public const string CriteriaESpeciesNaturetypesTableDescription = "Tabellen viser hvilken type interaksjon den fremmede arten har med grupper av stedegne arter, samt interaksjonens styre og omfang. Den negative interaksjonen med stedegne arter er gitt for hver naturtype. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.";
+            public const string CriteriaDSpeciesTableTitle = "Artens negative effekter på trua arter eller nøkkelarter.";
+            public const string CriteriaDSpeciesTableDescription = "Tabellen viser hvilken type interaksjon den fremmede arten har med stedegne trua arter eller nøkkelarter, samt interaksjonens styre og omfang. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.";
+
+            public const string CriteriaESpeciesTableTitle = "Artens negative effekter på stedegne arter (ikke trua eller sjelden).";
+            public const string CriteriaESpeciesTableDescription = "Tabellen viser hvilken type interaksjon den fremmede arten har med stedegne arter, samt interaksjonens styre og omfang. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.";
+
+            public const string CriteriaHIntrogressionTableTitle = "Overføring av genetisk materiale.";
+            public const string CriteriaHIntrogressionTableDescription = "Tabellen viser hvilke stedegne arter som blir, eller kan bli, genetisk forurenset av den fremmede arten. Med genetisk forurensning menes introgresjon, hybridisering alene er ikke tilstrekkelig. Kun genetisk forurensing som er dokumentert eller sannsynlig er inkludert.";
+            public const string CriteriaIParasitesTableTitle = "Overføring av parasitter og patogener.";
+            public const string CriteriaIParasitesTableDescription = "Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til stedegne verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert.";
+
+            public const string KeyStoneSpeciesTableColumn = "Nøkkelart?";
+            public const string RedListCategoryTableColumn = "Kategori <br/>Rødlista 2021";
+            public const string InteractionStrengthTableColumn = "Interaksjonens styrke";
+            public const string ScaleTableColumn = "Geografisk omfang";
+            public const string InteractionTypeTableColumn = "Type interaksjon";
+            public const string NaturetypeDAndETableColumn1 = "Påvirkede <br/>arter i";
+            public const string NaturetypeDAndETableColumn2 = "Nøkkelarter <br/>eller truede <br/>arter?";
+
+            /*Criteria C, F, G and impacted naturetypes*/
+            public const string CriteriaCNaturetypesTableTitle = "Artens koloniserte naturtypeareal.";
+            public const string CriteriaCNaturetypesTableDescription = "Tabellen viser hvilke(n) naturtype(r) den fremmede arten koloniserer nå eller i framtida. Andel kolonisert areal (%) av totalt naturtypeareal og vurderingsgrunnlag er gitt for hver naturtype.";
+            public const string CriteriaFNaturetypesTableTitle = "Artens negative effekter på truede eller sjeldne naturtyper.";
+            public const string CriteriaGNaturetypesTableTitle = "Artens negative effekter på naturtyper (ikke trua eller sjelden).";
+            public const string CriteriaFAndGNaturetypesTableDescription = "Tabellen viser hvilke(n) naturtype(r) som påvirkes av den fremmede arten nå eller i framtida. Type tilstandsendring, hvor stor del av naturtypearealet som påvirkes og vurderingsgrunnlag er gitt for hver naturtype. Se retningslinjene for beskrivelse av tydelig tilstandsendring.";
+            public const string ImpactedNatureTypesCurrentTableTitle = "Truede, sjeldne eller øvrige naturtyper arten er observert i. ";
+            public const string ImpactedNatureTypesFutureTableTitle = "Truede, sjeldne eller øvrige naturtyper som er potensielle habitater for arten i Norge. ";
+            public const string ImpactedNatureTypesCurrentTableDescription = "Tabellen viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i, samt artens påvirkning i naturtypen og anslått andel av naturtypens areal som blir påvirket (F- og G-kriteriet).";
+            public const string ImpactedNatureTypesFutureTableDescription = "Oversikten viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens framtidige påvirkning i naturtypen og anslått andel av naturtypens areal som vil bli påvirket (F- og G-kriteriet).";
+            public const string NaturetypeNameTableColumn = "naturtype";
+            public const string ColonizedAreaTableColumn = "kolonisert <br/>areal (%)";
+            public const string StateChangeTableColumn = "tydelig <br/>tilstandsendring";
+            public const string AffectedAreaTableColumn = "tydelig <br/>påvirka <br/>areal (%)";
+            public const string ImpactedNatureTypesTableColumn6 = "vurderingsgrunnlag";
+
+        }
+        
 
         public const string FigureMainText = "Her finner du resultater fra Fremmedartslista 2023 presentert i figurer. Figurene er reaktive, og viser kun resultater for det utvalget du har gjort i filteret. Om ingen filterutvalg er gjort, vises resultater for alle risikovurderte arter, både for Fastlands-Norge og Svalbard. Arter som ikke er risikovurderte (NR-arter) er ekskludert fra datagrunnlaget i alle figurer, det samme gjelder underarter og kultivarer som er inkludert i vurderingen av moderarten.";
 

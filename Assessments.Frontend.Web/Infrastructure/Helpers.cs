@@ -252,7 +252,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string removeLineBreaksForMobile(string text)
         {
-            return text.Replace("<br/>", "");
+            return text.Replace("<br/>", "").Replace("<span>&#8208;</span>", "");
         }
 
         public static Dictionary<string, string> GetAllTaxonRanks()

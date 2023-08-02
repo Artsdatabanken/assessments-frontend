@@ -7,7 +7,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Fastlands-Norge med havområder")]
         N,
 
-        [Display(Name = "Svalbard med havområder")]
+        [Display(Name = "Svalbard med kystsone")]
         S
     }
 }

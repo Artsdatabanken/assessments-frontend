@@ -544,6 +544,12 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string FirstObsTableColumn2 = "Årstall for første observasjon";
             public const string FirstObsTableColumn3 = "Usikkerhet i årstall <br/>(> ± 5 år)";
 
+            /*Vedlegg*/
+            public const string AttachmentsTableTitle = "Filvedlegg til vurderingen.";
+            public const string AttachmentsTableDescription = "Tabellen viser filer som inngår som datagrunnlag for vurderingen av den fremmede arten. Hvert vedlegg inkluderer en lenke for nedlasting.";
+            public const string AttachmentsTableColumn1 = "Filnavn";
+            public const string AttachmentsTableColumn2 = "Beskrivelse";
+            public const string AttachmentsTableColumn3 = "Lenke for nedlasting";
         }
 
 

@@ -537,8 +537,15 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string AooDoorknockersTableColumn3 = "Antall ytterligere introduksjoner til norsk natur";
             public const string AooDoorknockersTableColumn4 = "Forekomstareal etter 10 år";
 
+            /*First observation*/
+            public const string FirstObsTableTitle = "Artens første observasjoner.";
+            public const string FirstObsTableDescription = "Tabellen viser årstall for første observasjonen av arten for hver aktuelle etableringsstatus.";
+            public const string FirstObsTableColumn1 = "Etableringsstatus";
+            public const string FirstObsTableColumn2 = "Årstall for første observasjon";
+            public const string FirstObsTableColumn3 = "Usikkerhet i årstall <br/>(> ± 5 år)";
+
         }
-        
+
 
         public const string FigureMainText = "Her finner du resultater fra Fremmedartslista 2023 presentert i figurer. Figurene er reaktive, og viser kun resultater for det utvalget du har gjort i filteret. Om ingen filterutvalg er gjort, vises resultater for alle risikovurderte arter, både for Fastlands-Norge og Svalbard. Arter som ikke er risikovurderte (NR-arter) er ekskludert fra datagrunnlaget i alle figurer, det samme gjelder underarter og kultivarer som er inkludert i vurderingen av moderarten.";
 

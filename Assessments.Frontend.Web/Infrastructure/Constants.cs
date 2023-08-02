@@ -511,7 +511,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string NaturetypeDAndETableColumn1 = "Påvirkede <br/>arter i";
             public const string NaturetypeDAndETableColumn2 = "Nøkkelarter <br/>eller truede <br/>arter?";
 
-            /*Criteria C, F, G and impacted naturetypes*/
+            /*Criteria C, F, G and impacted naturetypes (incl. microhabitats)*/
             public const string CriteriaCNaturetypesTableTitle = "Artens koloniserte naturtypeareal.";
             public const string CriteriaCNaturetypesTableDescription = "Tabellen viser hvilke(n) naturtype(r) den fremmede arten koloniserer nå eller i framtida. Andel kolonisert areal (%) av totalt naturtypeareal og vurderingsgrunnlag er gitt for hver naturtype.";
             public const string CriteriaFNaturetypesTableTitle = "Artens negative effekter på truede eller sjeldne naturtyper.";
@@ -526,6 +526,10 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string StateChangeTableColumn = "tydelig <br/>tilstandsendring";
             public const string AffectedAreaTableColumn = "tydelig <br/>påvirka <br/>areal (%)";
             public const string ImpactedNatureTypesTableColumn6 = "vurderingsgrunnlag";
+            public const string MicroHabitatsTableTitle = "Artens livsmedier.";
+            public const string MicroHabitatsTableDescription = "Tabellen viser hvilke livsmedier den fremmede arten bruker nå eller i framtida. Hvis arten bruker en annen art som livsmedium er dette gitt.";
+            public const string MicroHabitatsTableColumn1 = "Livsmedium";
+            public const string MicroHabitatsTableColumn2 = "Art/Takson";
 
             /*area of occupancy (AOO)*/
             public const string AooTableTitle = "Artens forekomstareal.";

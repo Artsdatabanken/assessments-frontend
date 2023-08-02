@@ -77,9 +77,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     public enum CategoryChangeEnum
     {
         // ReSharper disable InconsistentNaming
-        [Display(Name = "Reell endring")]
-        ccre,
-
         [Display(Name = "Ny kunnskap")]
         ccnk,
 
@@ -109,11 +106,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     {
         private static readonly Filter.FilterItem[] DifferFrom2018 =
         {
-            new()
-            {
-                Name = CategoryChangeEnum.ccre.DisplayName(),
-                NameShort = CategoryChangeEnum.ccre.ToString()
-            },
             new()
             {
                 Name = CategoryChangeEnum.ccnk.DisplayName(),
@@ -713,10 +705,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     {
         public enum RegionallyAlienEnum
         {
-            [Display(Name = "Ekskluder regionalt fremmede arter i filtertreff")]
+            [Display(Name = "Ekskluder regionalt fremmede arter")]
             Rae,
 
-            [Display(Name = "Kun vis regionalt fremmede arter i filtertreff")]
+            [Display(Name = "Kun vis regionalt fremmede arter")]
             Rai,
 
             [Display(Name = "Regionvis utbredelse")]

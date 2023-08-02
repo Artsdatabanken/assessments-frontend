@@ -105,12 +105,15 @@
             <p>
                 For noen arter er det mer riktig å angi <a href="https://www.artsdatabanken.no/Pages/137826/Livsmedium">livsmedium</a> enn naturtyper. Et eksempel er parasittiske arter som lever i og på dyr, eller arter som lever i dyremøkk, og hvor naturtypen dyret eller møkka befinner seg i betyr lite. Livsmedium har ingen effekter på artens risikokategori.
             </p>
-            <table class="numbers-table">
-                <caption class="table-title"><b>Artens livsmedium.</b>For hvert livsmedium er det angitt om situasjonen gjelder i dag eller i fremtiden (tidshorisont). Hvis arten bruker en annen art som livsmedium er dette angitt (art/takson). </caption>
+            <table class="big-data-table">
+                <caption class="table-title">
+                    <b>@Constants.AlienSpeciesTables.MicroHabitatsTableTitle</b>
+                    @Constants.AlienSpeciesTables.MicroHabitatsTableDescription 
+                </caption>
                 <tr>
-                    <td>Livsmedium</td>
-                    <td>Art/Takson</td>
-                    <td>Tidshorisont</td>
+                    <th>@Constants.AlienSpeciesTables.MicroHabitatsTableColumn1</th>
+                    <th>@Constants.AlienSpeciesTables.MicroHabitatsTableColumn2</th>
+                    <th>@Constants.AlienSpeciesTables.TimeHorizonTableColumn</th>
                 </tr>
                 @foreach (var habitat in Model.Assessment.MicroHabitat)
                 {

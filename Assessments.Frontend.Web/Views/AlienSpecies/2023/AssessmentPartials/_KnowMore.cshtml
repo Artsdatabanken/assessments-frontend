@@ -86,12 +86,15 @@
         </div>
         <div is-visible="showFirstObservation">
             <h3>Første observasjon av arten @( isRegionallyAlien ? "der den er regionalt fremmed" : areaText )</h3>
-            <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="numbers-table small-table">
-                <tbody>
+            <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="big-data-table">
+                <caption class="table-title">
+                    <b>@Constants.AlienSpeciesTables.FirstObsTableTitle</b>
+                    @Constants.AlienSpeciesTables.FirstObsTableDescription 
+                </caption>
                     <tr>
-                        <td>Første observasjon av:</td>
-                        <td>Årstall</td>
-                        <td>Usikkerhet i årstall (> ± 5 år)</td>
+                        <th>@Constants.AlienSpeciesTables.FirstObsTableColumn1</th>
+                        <th>@Constants.AlienSpeciesTables.FirstObsTableColumn2</th>
+                        <th>@Html.Raw(@Constants.AlienSpeciesTables.FirstObsTableColumn3)</th>
                     </tr>
                     @foreach(var record in Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway)
                     {
@@ -101,7 +104,6 @@
                             <td>@( record.isUncertaintyYear ? "Ja" : "Nei" )</td>
                         </tr>
                     }
-                </tbody>
             </table>
             <p is-visible="!string.IsNullOrEmpty(Model.Assessment.YearsFirstRecord.Description)">
                 @Html.Raw(Model.Assessment.YearsFirstRecord.Description)

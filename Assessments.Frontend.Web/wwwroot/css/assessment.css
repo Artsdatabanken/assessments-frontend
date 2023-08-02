@@ -846,6 +846,7 @@ span.area i {
     border: 1px solid grey;
     width: 100%;
     table-layout: fixed;
+    margin-bottom: 20px;
 }
 
 .darktheme .big-data-table {

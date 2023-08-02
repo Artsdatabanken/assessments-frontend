@@ -966,7 +966,6 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 "Ferskvann" => AlienSpeciesAssessment2023MajorTypeGroup.FreshWaterThreatned,
                 "Fjell og berg" => AlienSpeciesAssessment2023MajorTypeGroup.MountainsThreatned,
                 "Landform" => AlienSpeciesAssessment2023MajorTypeGroup.LandformThreatned,
-                "Marint dypvann" => AlienSpeciesAssessment2023MajorTypeGroup.MarineDeepWaterThreatned,
                 "Marint gruntvann" => AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterThreatned,
                 "Marint gruntvann, Svalbard" => AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterSvalbardThreatned,
                 "Semi-naturlig" => AlienSpeciesAssessment2023MajorTypeGroup.SemiNaturalThreatned,

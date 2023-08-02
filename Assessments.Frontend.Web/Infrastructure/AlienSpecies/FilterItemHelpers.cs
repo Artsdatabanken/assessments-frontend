@@ -713,10 +713,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     {
         public enum RegionallyAlienEnum
         {
-            [Display(Name = "Ekskluder regionalt fremmede arter i filtertreff")]
+            [Display(Name = "Ekskluder regionalt fremmede arter")]
             Rae,
 
-            [Display(Name = "Kun vis regionalt fremmede arter i filtertreff")]
+            [Display(Name = "Kun vis regionalt fremmede arter")]
             Rai,
 
             [Display(Name = "Regionvis utbredelse")]

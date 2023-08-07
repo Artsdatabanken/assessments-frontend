@@ -28,7 +28,7 @@
                     <div class="element_icon list_cell">
                         @if (!string.IsNullOrEmpty(item.SpeciesGroup))
                         {
-                            <img src="@item.SpeciesGroupIconUrl" alt="@item.SpeciesGroup" />
+                            <img src="@item.SpeciesGroupIconUrl" onerror="this.style.display = 'none';"  alt="@item.SpeciesGroup" />
                             <span class="speciesgroup_name">@item.SpeciesGroup.ToLowerInvariant()</span>
                         }
                     </div>

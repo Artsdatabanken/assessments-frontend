@@ -159,7 +159,7 @@ li a span.element_icon {
 .element_icon {
     display: flex;
     flex-direction: column;
-    height: 50px;
+    height: 58px;
     min-width: 51px;
 }
 

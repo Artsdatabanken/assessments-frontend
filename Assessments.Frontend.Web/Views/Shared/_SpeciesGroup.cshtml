@@ -5,7 +5,7 @@
         <div class="image_background">
             @if (!String.IsNullOrEmpty(Model.SpeciesGroupImageUrl))
             {
-                <img src="@Model.SpeciesGroupImageUrl" alt="@Model.SpeciesGroup" />
+                <img src="@Model.SpeciesGroupImageUrl" onerror="this.style.display = 'none';" alt="@Model.SpeciesGroup" />
             }
         </div>
     </div>

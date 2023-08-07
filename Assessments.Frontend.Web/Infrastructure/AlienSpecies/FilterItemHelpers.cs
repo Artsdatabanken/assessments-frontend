@@ -1080,7 +1080,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Storkrepser",
                 NameShort = "sst",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/storkrepser",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Storkrepser.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Malacostraca)
             },
             new()
@@ -1088,7 +1088,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Bladfotinger",
                 NameShort = "sbf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bladfotinger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Bladfotinger.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Branchiopoda)
             },
             new()
@@ -1096,7 +1096,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Hoppekreps",
                 NameShort = "sho",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/copepoda",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Copepoda.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Copepoda)
             },
             new()
@@ -1104,7 +1104,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Rankefotinger",
                 NameShort = "srf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/thecostraca",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Thecostraca.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Thecostraca)
             }
         };
@@ -1222,7 +1222,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Kammaneter",
                 NameShort = "ska",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Stormaneter.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Ctenophora)
             },
             new()
@@ -1230,7 +1230,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Kappedyr",
                 NameShort = "skd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Sekkdyr.svg",
                 Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Ascidiacea)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Tunicata)}"
             },
             new()

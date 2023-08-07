@@ -330,8 +330,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 {
                     assessments = regionFilter switch
                     {
-                        nameof(RegionallyAlien.RegionallyAlienEnum.Rae) => query.Where(x => x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien),
-                        nameof(RegionallyAlien.RegionallyAlienEnum.Rai) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien),
+                        nameof(RegionallyAlien.RegionallyAlienEnum.Rae) => query.Where(x => x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlienEstablishedBefore1800),
+                        nameof(RegionallyAlien.RegionallyAlienEnum.Rai) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlienEstablishedBefore1800),
                         _ => null
                     };
                 }

@@ -35,7 +35,7 @@ if (filters) {
         "show_swimp",
         "show_swnat",
         "show_swspr",
-        "show_regionallyalien",
+        "show_taxonrank",
         "show_nta",
         "show_ntn",
     ];

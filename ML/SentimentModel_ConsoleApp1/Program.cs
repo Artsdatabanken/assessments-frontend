@@ -1,7 +1,7 @@
 ﻿using SentimentModel_ConsoleApp1;
 
-var baseDir = "C:\\temp\\ml\\";
-var fileName = "originalfilToConvert.xlsx";
+var baseDir = System.AppContext.BaseDirectory ; //"C:\\temp\\ml\\";
+var fileName = "Sambucus racemosa.csv";
 var prependString = "sanitized_";
 var convertedFileName = "convertedFile.csv";
 var targettingFields = new List<string>() { "Samkopiert lokalitet \\ økologi / kvantitet" };

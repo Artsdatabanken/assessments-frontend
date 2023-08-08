@@ -1,5 +1,4 @@
 ﻿{
-  "TrainingTime": 600,
   "Scenario": "Classification",
   "DataSource": {
     "Type": "TabularFile",
@@ -15,7 +14,7 @@
         "ColumnDataFormat": "String",
         "IsCategorical": false,
         "Type": "Column",
-        "Version": 2
+        "Version": 4
       },
       {
         "ColumnName": "0/1",
@@ -23,7 +22,7 @@
         "ColumnDataFormat": "Boolean",
         "IsCategorical": false,
         "Type": "Column",
-        "Version": 2
+        "Version": 4
       }
     ]
   },
@@ -32,550 +31,61 @@
     "Version": 1
   },
   "RunHistory": {
-    "Version": 1,
+    "Version": 3,
     "Type": "Result",
     "Trials": [
       {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.9479999542236328
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.97928482066824107,
-        "RuntimeInSeconds": 2.1619999408721924
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.978785252443463,
-        "RuntimeInSeconds": 2.0309998989105225
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.982758406746456,
-        "RuntimeInSeconds": 1.7740000486373901
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.98076182779306653,
-        "RuntimeInSeconds": 3.00600004196167
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.97690228339823515,
-        "RuntimeInSeconds": 2.9639999866485596
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.97951523541478491,
-        "RuntimeInSeconds": 2.0910000801086426
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4539999961853027
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.3959999084472656
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.97742585540791926,
-        "RuntimeInSeconds": 2.1140000820159912
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.97850552758673126,
-        "RuntimeInSeconds": 1.2640000581741333
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.97758276885825968,
-        "RuntimeInSeconds": 2.937000036239624
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4089999198913574
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.97922802156070843,
-        "RuntimeInSeconds": 2.0510001182556152
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4189999103546143
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.97898405379445408,
-        "RuntimeInSeconds": 1.24399995803833
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.8659999370574951
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.98040257993759661,
-        "RuntimeInSeconds": 2.9440000057220459
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.97917637452057293,
-        "RuntimeInSeconds": 2.9609999656677246
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.97811842293686779,
-        "RuntimeInSeconds": 2.255000114440918
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4030001163482666
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.9794771672168443,
-        "RuntimeInSeconds": 2.4200000762939453
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.97901643177112518,
-        "RuntimeInSeconds": 2.1819999217987061
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.97987405284160245,
-        "RuntimeInSeconds": 2.9530000686645508
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.98394029345217615,
-        "RuntimeInSeconds": 1.3999999761581421
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.9802283493452375,
-        "RuntimeInSeconds": 2.2669999599456787
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4279999732971191
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.97851514118787875,
-        "RuntimeInSeconds": 3.0750000476837158
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.97968249669660179,
-        "RuntimeInSeconds": 14.449999809265137
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.960420925219608,
-        "RuntimeInSeconds": 56.287998199462891
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.974191631766115,
-        "RuntimeInSeconds": 2.440000057220459
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.98076220848900653,
-        "RuntimeInSeconds": 1.312999963760376
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.9719149286982145,
-        "RuntimeInSeconds": 1.996999979019165
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.97848903887366312,
-        "RuntimeInSeconds": 2.999000072479248
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.97532475135221408,
-        "RuntimeInSeconds": 2.4649999141693115
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.97960563023170055,
-        "RuntimeInSeconds": 2.7599999904632568
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.96943605043166214,
-        "RuntimeInSeconds": 3.6480000019073486
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.98012348759209866,
-        "RuntimeInSeconds": 9.3090000152587891
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.7070000171661377
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.97818408693484815,
-        "RuntimeInSeconds": 2.2960000038146973
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.983039650337916,
-        "RuntimeInSeconds": 1.281000018119812
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.97532475135221408,
-        "RuntimeInSeconds": 2.5209999084472656
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.981497301321934,
-        "RuntimeInSeconds": 3.1340000629425049
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.97921433940673841,
-        "RuntimeInSeconds": 2.61299991607666
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.98324501490456417,
-        "RuntimeInSeconds": 23.844999313354492
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4030001163482666
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.5409998893737793
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.98011237097385462,
-        "RuntimeInSeconds": 5.1649999618530273
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.96394805388298366,
-        "RuntimeInSeconds": 3.1640000343322754
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.97918145159986769,
-        "RuntimeInSeconds": 2.1040000915527344
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.98412790597296451,
-        "RuntimeInSeconds": 4.9710001945495605
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.97896567850176752,
-        "RuntimeInSeconds": 6.0409998893737793
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.5550000667572021
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.97532475135221408,
-        "RuntimeInSeconds": 2.5169999599456787
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.97896406029551986,
-        "RuntimeInSeconds": 2.2579998970031738
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 20.599000930786133
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.979250884343249,
-        "RuntimeInSeconds": 2.3650000095367432
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 3.059999942779541
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.97970767601075648,
-        "RuntimeInSeconds": 2.9760000705718994
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4860000610351563
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.98257559073155909,
-        "RuntimeInSeconds": 1.3509999513626099
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.97985381726843779,
-        "RuntimeInSeconds": 2.5969998836517334
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.98055146554867068,
-        "RuntimeInSeconds": 3.0929999351501465
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4619998931884766
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.97532475135221408,
-        "RuntimeInSeconds": 2.5199999809265137
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LbfgsLogisticRegressionBinary",
-        "Score": 0.98577209099942653,
-        "RuntimeInSeconds": 1.6059999465942383
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastTreeBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.0950000286102295
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "FastForestBinary",
-        "Score": 0.97899694810239057,
-        "RuntimeInSeconds": 4.8880000114440918
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.5940001010894775
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "LightGbmBinary",
-        "Score": 0.98149775503586356,
-        "RuntimeInSeconds": 3.3469998836517334
-      },
-      {
-        "Version": 0,
+        "Version": 1,
         "Type": "Trial",
         "TrainerName": "LbfgsLogisticRegressionBinary",
         "Score": 0.987169161745862,
-        "RuntimeInSeconds": 3.7790000438690186
-      },
-      {
-        "Version": 0,
-        "Type": "Trial",
-        "TrainerName": "SdcaLogisticRegressionBinary",
-        "Score": 0.9606307170269458,
-        "RuntimeInSeconds": 2.4570000171661377
+        "RuntimeInSeconds": 3.7790000438690186,
+        "Parameter": {
+          "_SCHEMA_": "e0*e1*e2*e3",
+          "e0": {
+            "InputColumnName": "Sånn ting",
+            "OutputColumnName": "Sånn ting"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Sånn ting"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnNames": [
+              "Features"
+            ],
+            "InputColumnNames": [
+              "Features"
+            ]
+          },
+          "e3": {
+            "L1Regularization": 0.385479718,
+            "L2Regularization": 0.03125,
+            "LabelColumnName": "0/1",
+            "FeatureColumnName": "Features"
+          }
+        }
       }
     ],
-    "Pipeline": {
-      "parameter": {
-        "0": {
-          "InputColumnName": "Sånn ting",
-          "OutputColumnName": "Sånn ting"
-        },
-        "1": {
-          "InputColumnNames": [
-            "Sånn ting"
-          ],
-          "OutputColumnName": "Features"
-        },
-        "2": {
-          "OutputColumnNames": [
-            "Features"
-          ],
-          "InputColumnNames": [
-            "Features"
-          ]
-        },
-        "3": {
-          "L1Regularization": 0.385479718,
-          "L2Regularization": 0.03125,
-          "LabelColumnName": "0/1",
-          "FeatureColumnName": "Features"
-        }
-      },
-      "estimators": [
-        "FeaturizeText",
-        "Concatenate",
-        "NormalizeMinMax",
-        "LbfgsLogisticRegressionBinary"
-      ]
+    "Estimators": {
+      "e0": "FeaturizeText",
+      "e1": "Concatenate",
+      "e2": "NormalizeMinMax",
+      "e3": "LbfgsLogisticRegressionBinary"
     },
-    "MetricName": "Accuracy"
+    "Schema": "e0*e1*e2*e3",
+    "MetricName": "Accuracy",
+    "ModelFilePath": ""
   },
   "Type": "TrainingConfig",
-  "Version": 2
+  "Version": 4,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Type": "ClassificationTrainingOption",
+    "TrainingTime": 600,
+    "LabelColumn": "0/1"
+  }
 }

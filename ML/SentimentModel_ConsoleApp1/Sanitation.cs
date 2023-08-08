@@ -9,14 +9,15 @@ namespace SentimentModel_ConsoleApp1
             var hitCount = 0;
             var progressCount = 0;
             var actualProgress = 0.0;
-            var recordsLength = recordsEnumerable.ToList().Count;
-            var recordsList = recordsEnumerable.ToList();
+            var recordsList = recordsEnumerable.ToArray();
+            var recordsLength = recordsList.Length;
+            
             if (debugLevel == DebugLevel.VerboseLogging)
                 Console.WriteLine($"Progress {progressCount} av {recordsLength}: 0.0 %");
 
             // Add headers as first line
 
-            for (var i = 0; i < recordsEnumerable.Count(); i++)
+            for (var i = 0; i < recordsLength; i++)
             {
                 // Need to cast to Dictionary to be able to get keys kontaining spaces
                 IDictionary<string, object> recordDict = (IDictionary<string, object>)recordsList[i];
@@ -25,6 +26,8 @@ namespace SentimentModel_ConsoleApp1
                     try
                     {
                         var sanitizeString = recordDict[fieldName]?.ToString() ?? string.Empty;
+
+                        if (string.IsNullOrWhiteSpace(sanitizeString)) continue;
 
                         var sampleData = new SentimentModel.ModelInput()
                         {
@@ -56,7 +59,7 @@ namespace SentimentModel_ConsoleApp1
                                 Console.WriteLine($"Progress {progressCount} av {recordsLength}: {actualProgress * 100}%");
                         }
                     }
-                    recordsList[i] = recordDict;
+                    //recordsList[i] = recordDict; // trengs denne...
                 }
             }
             if (debugLevel != DebugLevel.NoLogging)

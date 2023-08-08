@@ -1,5 +1,8 @@
 ﻿using CsvHelper;
 using System.Globalization;
+using System.Reflection.Metadata.Ecma335;
+using CsvHelper.Configuration;
+using System.Text.RegularExpressions;
 
 namespace SentimentModel_ConsoleApp1
 {
@@ -18,17 +21,15 @@ namespace SentimentModel_ConsoleApp1
 
             try
             {
-                var reader = new StreamReader(basePath + fileName, System.Text.Encoding.GetEncoding("iso-8859-1"));
-                var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture);
-                var records = csvReader.GetRecords<dynamic>();
-                var recordsList = new List<dynamic>();
+                var reader = new StreamReader(basePath + fileName, System.Text.Encoding.UTF8); // .GetEncoding("iso-8859-1"));
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture);
+                config.Delimiter = ";";
+                var csvReader = new CsvReader(reader, config);
+                
 
-                foreach (var line in records)
-                {
-                    recordsList.Add(line);
-                }
-                reader.Close();
-                return recordsList;
+                var records = csvReader.GetRecords<dynamic>().ToList();
+
+                return records;
             }
             catch (Exception e)
             {
@@ -52,7 +53,17 @@ namespace SentimentModel_ConsoleApp1
             try
             {
                 var writer = new StreamWriter(basePath + fileName, false, System.Text.Encoding.UTF8);
-                var csvWriter = new CsvWriter(writer, CultureInfo.InvariantCulture);
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    Delimiter = ";",
+                    //Quote = '"',
+                    //ShouldQuote = args =>
+                    //{
+                    //    if (!Regex.IsMatch(args.Field, @"^\d+$")) return true;
+                    //    return false;
+                    //}
+                };
+                var csvWriter = new CsvWriter(writer, config);
 
                 csvWriter.WriteRecords(lines);
 

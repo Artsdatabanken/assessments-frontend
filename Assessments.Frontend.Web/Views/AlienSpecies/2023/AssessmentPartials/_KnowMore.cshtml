@@ -75,9 +75,9 @@
     </div>
     <div>
         <div is-visible="showEstablishmentClass">
-            <h3>Etableringsklasse @areaText</h3>
+            <h3>Etableringsstatus @areaText</h3>
             <p>
-                Etableringsklasse beskriver de ulike trinnene den vurderte @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) kan ha nådd, fra å kun finnes utenlands til å være etablert i naturen.
+                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) etableringsstatus bestemmes av den høyeste  etableringsklassen @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) har @areaText i dag, fra å kun finnes utenlands til å være etablert i naturen med videre spredning.
             </p>
             <p>
                 @GetSpeciesStatusText()
@@ -85,7 +85,7 @@
             <p>@Html.Raw(Model.Assessment.UncertaintyStatusDescription)</p>
         </div>
         <div is-visible="showFirstObservation">
-            <h3>Første observasjon av arten @( isRegionallyAlien ? "der den er regionalt fremmed" : areaText )</h3>
+            <h4>Første observasjon av arten @( isRegionallyAlien ? "der den er regionalt fremmed" : areaText )</h4>
             <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="big-data-table">
                 <caption class="table-title">
                     <b>@Constants.AlienSpeciesTables.FirstObsTableTitle</b>

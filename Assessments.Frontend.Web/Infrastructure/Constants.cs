@@ -294,7 +294,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023PageMenuAssessmentAreaText = "områder der arten er regionalt fremmed i Norge (uten Svalbard)";
 
-        public const string AlienSpecies2023FirstPublished = "11.08.2023"; // TODO: Need publishing date
+        public const string AlienSpecies2023FirstPublished = "11.08.2023";
 
         public const string AlienSpecies2023FirstPublishedYear = "2023";
 
@@ -306,13 +306,13 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023HeaderText = "Fremmedartslista 2023";
 
-        public const string AlienSpecies2023HeaderByline = "Publisert: 22. februar 2023"; // TODO: change to correct publishing date when we know
+        public const string AlienSpecies2023HeaderByline = "Publisert: 11. august 2023";
 
         public const string AlienSpecies2023PageManuExpandButtonText = "Fremmede arter";
 
         public const string AlienSpecies2023CitationHeading = "Siden siteres som:";
 
-        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 11. august). Fremmede arter i Norge - med økologisk risiko 2023."; // TODO: insert correct publishing date for citation
+        public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 11. august). Fremmede arter i Norge - med økologisk risiko 2023.";
 
         public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
                                                                                                                                                                                                                                                                                " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
@@ -340,7 +340,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string ImpactedNatureTypesDescription = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten i Norge. Hvis arten fører til endringer i naturtypen er det angitt.";
         public const string ImpactedNatureTypesDescriptionSvalbard = "Naturtyper arten er observert i og/eller som er potensielle habitater for arten på Svalbard. Hvis arten fører til endringer i naturtypen er det angitt.";
-        
+
         public const string CategoryChangeNotAssessed2018 = "Denne arten er risikovurdert for første gang i 2023.";
         public const string CategoryChangeShowSameAs2018 = "Denne arten er vurdert til samme risikokategori som i Fremmedartslista 2018 (forrige revisjon).";
         public const string CategoryChangeReasonsForChangeDescription = "Utfyllende beskrivelse av årsaken(e) for endret risikokategori:";
@@ -425,7 +425,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string lowEstimate = "lavt anslag";
         public const string highEstimate = "høyt anslag";
 
-        
+
         public const string expansionSpeedGuess = "Det beste anslaget på artens ekspansjonshastighet er";
         public const string expansionSpeedIs = "er ekspansjonshastigheten anslått til";
         public const string expansionSpeedEst = "er ekspansjonshastigheten estimert til";
@@ -438,15 +438,15 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string basedOnIncrease = "Basert på økningen i artens forekomstareal i perioden fra";
         public const string andA = "og et";
         public const string darkNumber = "mørketall på";
-        
-        
-       
+
+
+
 
         public const string noEcoEffect = "Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.";
         public const string effectAfterCriterium = "Økologiske effekter etter kriterium";
         public const string evaluatedAsUnlikely = "er vurdert som fraværende (usannsynlige)";
 
-        
+
 
 
         public class AlienSpeciesTables

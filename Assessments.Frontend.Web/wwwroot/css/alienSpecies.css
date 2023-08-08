@@ -29,11 +29,11 @@
 }
 
 .header {
-    background: #5e3063;
+    background: #4c4a48;
 }
 
 .header button.menuitems:not(:active,:focus,:hover) {
-    background: #3d1f41;
+    background: #3d3b3a;
 }
 
 /* ACTIVE LINK COLOUR */
@@ -45,8 +45,8 @@
 .darktheme .button.tertiary,
 .darktheme .main button.tertiary,
 .darktheme .sidebarmenu li h3 {
-    color: #dc9dff;
-    border-color: #dc9dff;
+    color: #FFF9F0;
+    border-color: #FFF9F0;
 }
 
 /* ACTIVE BORDER */
@@ -68,14 +68,14 @@
 
 @media only screen and (max-width: 766px) {
     .header .themeselectordropdown, #headermenu {
-        background: #5e3063;
+        background: #4c4a48;
         border-top: 1px solid #b372bb;
     }
 
     .header .themeselectordropdown ul,
     .header .themeselectordropdown li {
         color: white;
-        background: #5e3063;
+        background: #4c4a48;
     }
 }
 

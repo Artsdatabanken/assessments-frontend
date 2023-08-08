@@ -905,7 +905,7 @@ span.area i {
     }
 
     .big-data-table td:first-child {
-        background: #5e3063;
+        background: #4c4a48;
         color: white;
     }
 
@@ -1132,8 +1132,4 @@ table caption.table-title {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-}
-
-.sidebarmenu > ul {
-    background: #FFF9F0;
 }

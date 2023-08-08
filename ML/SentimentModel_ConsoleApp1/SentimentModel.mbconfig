@@ -1,0 +1,91 @@
+﻿{
+  "Scenario": "Classification",
+  "DataSource": {
+    "Type": "TabularFile",
+    "Version": 1,
+    "FilePath": "C:\\Users\\mas\\OneDrive - artsdatabanken.no\\Dokumenter\\ml_new_model2.csv",
+    "Delimiter": ",",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "Sånn ting",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "0/1",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "Boolean",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "LbfgsLogisticRegressionBinary",
+        "Score": 0.987169161745862,
+        "RuntimeInSeconds": 3.7790000438690186,
+        "Parameter": {
+          "_SCHEMA_": "e0*e1*e2*e3",
+          "e0": {
+            "InputColumnName": "Sånn ting",
+            "OutputColumnName": "Sånn ting"
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Sånn ting"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e2": {
+            "OutputColumnNames": [
+              "Features"
+            ],
+            "InputColumnNames": [
+              "Features"
+            ]
+          },
+          "e3": {
+            "L1Regularization": 0.385479718,
+            "L2Regularization": 0.03125,
+            "LabelColumnName": "0/1",
+            "FeatureColumnName": "Features"
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "FeaturizeText",
+      "e1": "Concatenate",
+      "e2": "NormalizeMinMax",
+      "e3": "LbfgsLogisticRegressionBinary"
+    },
+    "Schema": "e0*e1*e2*e3",
+    "MetricName": "Accuracy",
+    "ModelFilePath": ""
+  },
+  "Type": "TrainingConfig",
+  "Version": 4,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Type": "ClassificationTrainingOption",
+    "TrainingTime": 600,
+    "LabelColumn": "0/1"
+  }
+}

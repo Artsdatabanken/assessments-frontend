@@ -4,6 +4,7 @@ using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
 using Assessments.Transformation.Database.Fab4;
 using Assessments.Transformation.Helpers;
+using Assessments.Transformation.TextSanitizer;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +42,9 @@ namespace Assessments.Transformation
                 { 2157, 464 },
                 { 2625, 2616 }
             };
+
+        private static List<string> _targettingFields = new List<string>() { "Samkopiert lokalitet \\ økologi / kvantitet" };
+        private static string _replaceWith = "**Innholdet er skjult av personvernhensyn. Vennligst ta kontakt med Artsdatabanken for mer info.**";
 
         public static async Task TransformDataModels(IConfigurationRoot configuration, bool upload)
         {
@@ -152,7 +156,11 @@ namespace Assessments.Transformation
                     continue;
 
                 if (upload)
-                    await Storage.UploadFile(configuration, DataFilenames.CalculateAlienSpecies2023AttachmentFilePath(attachment.Id, attachment.FileName), attachment.AttachmentFile.File);
+                {
+                    var sanitizedAttachmentFile = SanitizedAttachmentFile(attachment);
+
+                    await Storage.UploadFile(configuration, DataFilenames.CalculateAlienSpecies2023AttachmentFilePath(attachment.Id, attachment.FileName), sanitizedAttachmentFile);
+                }
 
                 attachmentCount++;
                 Progress.ProgressBar.Tick();
@@ -160,6 +168,41 @@ namespace Assessments.Transformation
 
             Progress.ProgressBar.Message = $"Opplasting fullført, {attachmentCount} vedlegg ble lagret";
             Progress.ProgressBar.Dispose();
+        }
+
+        private static byte[] SanitizedAttachmentFile(Database.Fab4.Models.Attachment attachment)
+        {
+            var originalFile = attachment.AttachmentFile.File;
+            
+            if (attachment.FileName == "ArtskartData.zip" || !attachment.FileName.EndsWith(".csv"))
+            {
+                return originalFile;
+            }
+
+            
+            var recordsList = CsvFileHandler.ReadFile(originalFile);
+            if (recordsList == null || recordsList.Count() == 0)
+                return originalFile;
+            var hasField = false;
+            var recordDict = (IDictionary<string, object>)recordsList.First();
+            foreach (var fieldName in _targettingFields.Where(fieldName => recordDict.ContainsKey(fieldName)))
+            {
+                hasField = true;
+            }
+
+            if (!hasField)
+            {
+                return originalFile;
+            }
+
+            var sanitizedRecordsList = Sanitation.Sanitize(recordsList, _targettingFields, _replaceWith, out bool anyThingReplaced);
+            
+            if (anyThingReplaced == false)
+            {
+                return originalFile;
+            }
+            
+            return CsvFileHandler.WriteFile(sanitizedRecordsList);
         }
 
 

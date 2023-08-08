@@ -1,34 +1,59 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <UserSecretsId>97aa48d2-2ad4-4d00-a422-ddc464f0cf8b</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<UserSecretsId>97aa48d2-2ad4-4d00-a422-ddc464f0cf8b</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.16.0" />
-    <PackageReference Include="ByteSize" Version="2.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.16">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
-    <PackageReference Include="ShellProgressBar" Version="5.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+	  <None Remove="TextSanitizer\SentimentModel.zip" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
-    <ProjectReference Include="..\Assessments.Shared\Assessments.Shared.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <Content Include="TextSanitizer\SentimentModel.zip" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.16.0" />
+		<PackageReference Include="ByteSize" Version="2.1.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.16" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.16">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+		<PackageReference Include="Microsoft.ML" Version="1.7.1" />
+		<PackageReference Include="ShellProgressBar" Version="5.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
+		<ProjectReference Include="..\Assessments.Shared\Assessments.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="TextSanitizer\SentimentModel.zip">
+			<DependentUpon>SentimentModel.mbconfig</DependentUpon>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="TextSanitizer\SentimentModel.consumption.cs">
+	    <DependentUpon>SentimentModel.mbconfig</DependentUpon>
+	  </Compile>
+	  <Compile Update="TextSanitizer\SentimentModel.training.cs">
+	    <DependentUpon>SentimentModel.mbconfig</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 
 </Project>

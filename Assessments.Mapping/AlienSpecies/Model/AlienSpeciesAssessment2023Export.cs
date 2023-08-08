@@ -9,9 +9,17 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [Description("Id for 2023 vurderingen")]
         public int Id { get; set; }
 
+        [DisplayName("Vurderingsområde")]
+        [Description("Er arten vurdert for Norge eller Svalbard")]
+        public string AssessmentArea { get; set; }
+
         [DisplayName("Ekspertkomité")]
         [Description("Ekspertgruppen bak 2023-vurderingen")]
         public string ExpertGroup { get; set; }
+
+        [DisplayName("Artsgruppe")]
+        [Description("Artsgruppen arten tilhører")]
+        public string SpeciesGroup { get; set; }
 
         [DisplayName("Taksonomisk sti")]
         [Description("Taksonomisk sti for arten")]
@@ -49,6 +57,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [Description("Utslagsgivende kriterier i 2023 etter GEIAAS metoden")]
         public string DecisiveCriteria { get; set; }
 
+        [DisplayName("Risikokategori 2018")]
+        [Description("Endelig kategori i 2018 etter GEIAAS kategorier and kriterier")]
+        public string PreviousAssessmentCategory2018 { get; set; }
+
         [DisplayName("Skår Invasjonspotensial")]
         [Description("Artens delkategori (1-4) på invasjonsaksen i risikomatrisen. Denne bestemmes av artens invasjonspotensial")]
         public int? ScoreInvasionPotential { get; set; }
@@ -57,114 +69,90 @@ namespace Assessments.Mapping.AlienSpecies.Model
         [Description("Artens delkategori (1-4) på effektaksen i risikomatrisen. Denne bestemmes av artens økologiske effekt")]
         public int? ScoreEcologicalEffect { get; set; }
 
-        [DisplayName("Estimeringsmetode A-kriteriet")]
-        [Description("Valgt estimeringsmetode for A-kriteriet, artens mediane levetid i Norge")]
-        public string MedianLifetimeEstimationMethod { get; set; }
+        [DisplayName("Skår A-kriteriet")]
+        [Description("Artens delkategori (1-4) på A-kriteriet, artens mediane levetid i Norge")]
+        public int? CriterionAScore { get; set; }
 
-        [DisplayName("Forenklet Anslag akseptert")]
-        [Description("Er den automatisk estimerte utregningen av artens mediane levetid i Norge basert på metoden forenklet anslag akseptert?")]
-        public bool? IsAcceptedSimplifiedEstimate { get; set; }
+        [DisplayName("Skår B-kriteriet")]
+        [Description("Artens delkategori (1-4) på B-kriteriet, artens ekspansjonshastighet i norsk natur")]
+        public int? CriterionBScore { get; set; }
 
-        [DisplayName("Estimeringsmetode B-kriteriet")]
-        [Description("Valgt estimeringsmetode for B-kriteriet, artens ekspansjonshastighet i norsk natur")]
-        public string ExpansionSpeedEstimationMethod { get; set; }
+        [DisplayName("Skår C-kriteriet")]
+        [Description("Artens delkategori (1-4) på C-kriteriet, kolonisert naturtypeareal")]
+        public int? CriterionCScore { get; set; }
 
-        [DisplayName("Ekspansjonshastighet (lavt anslag)")]
-        [Description("Artens ekspansjonshastighet i norsk natur (lavt anslag)")]
-        public long ExpansionSpeedLowEstimate { get; set; }
+        [DisplayName("Skår D-kriteriet")]
+        [Description("Artens delkategori (1-4) på D-kriteriet, artens negative effekter på trua arter og nøkkelarter")]
+        public int? CriterionDScore { get; set; }
+
+
+        [DisplayName("Skår E-kriteriet")]
+        [Description("Artens delkategori (1-4) på E-kriteriet, artens negative effekter på stedegne arter (ikke trua eller nøkkelarter)")]
+        public int? CriterionEScore { get; set; }
+
+
+        [DisplayName("Skår F-kriteriet")]
+        [Description("Artens delkategori (1-4) på F-kriteriet, artens negative effekter på trua eller sjeldne naturtyper")]
+        public int? CriterionFScore { get; set; }
+
+
+        [DisplayName("Skår G-kriteriet")]
+        [Description("Artens delkategori (1-4) på G-kriteriet, artens negative effekter på naturtyper (ikke trua eller sjelden)")]
+        public int? CriterionGScore { get; set; }
+
+
+        [DisplayName("Skår H-kriteriet")]
+        [Description("Artens delkategori (1-4) på H-kriteriet, overføring av genetisk materiale til stedegen art")]
+        public int? CriterionHScore { get; set; }
+
+
+        [DisplayName("Skår I-kriteriet")]
+        [Description("Artens delkategori (1-4) på I-kriteriet, overføring av parasitter eller patogener til stedegen art")]
+        public int? CriterionIScore { get; set; }
+
+        [DisplayName("Artens levetid i Norge (beste anslag)")]
+        [Description("Artens mediane levetid i norsk natur (beste anslag)")]
+        public long? MedianLifetimeBestEstimate { get; set; }
 
         [DisplayName("Ekspansjonshastighet (beste anslag)")]
         [Description("Artens ekspansjonshastighet i norsk natur (beste anslag)")]
-        public long ExpansionSpeedBestEstimate { get; set; }
-
-        [DisplayName("Ekspansjonshastighet (høyt anslag)")]
-        [Description("Artens ekspansjonshastighet i norsk natur (høyt anslag)")]
-        public long ExpansionSpeedHighEstimate { get; set; }
+        public long? ExpansionSpeedBestEstimate { get; set; }
 
         [DisplayName("Geografisk variasjon i risiko")]
         [Description("Arter med en viss utstrekning i forekomstarealet kan, som en respons på ulike miljøbetingelser, ha ulik påvirkning i naturen. Spørsmålet viser til om arten kunne fått en lavere risikokategori i deler av sitt potensielle forekomstareal")]
-        public bool? GeographicVariationInCategory { get; set; }
+        public string GeographicVariationInCategory { get; set; }
 
         [DisplayName("Årsak til geografisk variasjon i risiko")]
         [Description("Angitte årsaker for hvorfor arten vurderes til å ha geografisk variasjon i risiko")]
         public string GeographicalVariation { get; set; }
 
-        [DisplayName("Geografisk variasjon i risiko Beskrivelse")]
-        [Description("Nærmere begrunnelse for artens geografiske variasjon i risiko")]
-        public string GeographicalVariationDocumentation { get; set; }
-
         [DisplayName("Klimaeffekter invasjonspotensial")]
         [Description("Angir om skåren på invasjonsaksen ville vært lavere i fravær av pågående eller framtidige klimaendringer")]
-        public bool? ClimateEffectsInvasionPotential { get; set; }
+        public string ClimateEffectsInvasionPotential { get; set; }
 
         [DisplayName("Klimaeffekter økologisk effekt")]
         [Description("Angir om skåren på effektaksen ville vært lavere i fravær av pågående eller framtidige klimaendringer")]
-        public bool? ClimateEffectsEcoEffect { get; set; }
-
-        [DisplayName("Klimaeffekter Beskrivelse")]
-        [Description("Nærmere begrunnelse for påvirkning av pågående eller framtidige klimaendringer på artens delkategori på aksene")]
-        public string ClimateEffectsDocumentation { get; set; }
-
-        [DisplayName("Risikokategori 2018")]
-        [Description("Endelig kategori i 2018 etter GEIAAS kategorier and kriterier")]
-        public string PreviousAssessmentCategory2018 { get; set; }
+        public string ClimateEffectsEcoEffect { get; set; }
 
         [DisplayName("Kjent forekomstareal")]
         [Description("Artens kjente forekomstareal i dag")]
         public int? AOOknown { get; set; }
 
-        [DisplayName("Antatt forekomstareal lavt anslag")]
-        [Description("Artens antatte forekomstareal i dag (lavt anslag)")]
-        public int? AOOtotalLow { get; set; }
-
         [DisplayName("Antatt forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal i dag (beste anslag)")]
         public int? AOOtotalBest { get; set; }
-
-        [DisplayName("Antatt forekomstareal høyt anslag")]
-        [Description("Artens antatte forekomstareal i dag (høyt anslag)")]
-        public int? AOOtotalHigh { get; set; }
-
-        //TODO: skill felt mellom dørstokkarter og selvstendig reproduserende for fremtidige forekomstareal?
-        [DisplayName("Fremtidig forekomstareal lavt anslag")]
-        [Description("Artens antatte forekomstareal (lavt anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public int? RiskAssessmentAOOfutureLow { get; set; }
 
         [DisplayName("Fremtidig forekomstareal beste anslag")]
         [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
         public int? AOOfutureBest { get; set; }
 
-        [DisplayName("Fremtidig forekomstareal høyt anslag")]
-        [Description("Artens antatte forekomstareal (beste anslag) ti år etter første introduksjon (dørstokkarter) eller om 50 år (selvstendig reproduserende arter)")]
-        public int? RiskAssessmentAOOfutureHigh { get; set; }
-
-        [DisplayName("Ant. forekomster fra én introduksjon lavt anslag")]
-        [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (lavt anslag)")]
-        public int? RiskAssessmentOccurrences1Low { get; set; }
-
         [DisplayName("Ant. forekomster fra én introduksjon beste anslag")]
         [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (beste anslag)")]
-        public int? RiskAssessmentOccurrences1Best { get; set; }
-
-        [DisplayName("Ant. forekomster fra én introduksjon høyt anslag")]
-        [Description("Antallet forekomster (2 km x 2 km-ruter) dørstokkarten kan kolonisere i løpet av en 10 års-periode basert på én introduksjon til norsk natur (høyt anslag)")]
-        public int? RiskAssessmentOccurrences1High { get; set; }
-
-        [DisplayName("Ant. ytterligere introduksjoner lavt anslag")]
-        [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (lavt anslag)")]
-        public int? RiskAssessmentIntroductionsLow { get; set; }
+        public int? Occurrences1Best { get; set; }
 
         [DisplayName("Ant. ytterligere introduksjoner beste anslag")]
         [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (beste anslag)")]
-        public int? RiskAssessmentIntroductionsBest { get; set; }
-
-        [DisplayName("Ant. ytterligere introduksjoner høyt anslag")]
-        [Description("Antallet ytterligere introduksjoner til norsk natur dørstokkarten antas å få i løpet av en 10 års-periode (høyt anslag)")]
-        public int? RiskAssessmentIntroductionsHigh { get; set; }
-
-        [DisplayName("Kom til vurderingsområdet fra")]
-        [Description("Angir hvorfra arten ankom vurderingsområdet")]
-        public string ArrivedCountryFrom { get; set; }
+        public int? IntroductionsBest { get; set; }
 
         [DisplayName("Naturtyper")]
         [Description("Naturtyper arten koloniserer eller påvirker i dag, eller forventes å kolonisere/påvirke i løpet av vurderingsperioden")]

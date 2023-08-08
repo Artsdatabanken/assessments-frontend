@@ -1,189 +1,104 @@
 @model AlienSpeciesListViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
-
+@using Assessments.Mapping.AlienSpecies.Model.Enums
 
 @{
-
-    // Calculating max and total values for use in graph drawing
-    int category_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category
-    int category_max = Model.Statistics.Categories.Values.DefaultIfEmpty(0).Max();
-    int criteria_total = Model.Statistics.Criteria.Sum(x => x.Value); // #of assesments with a criteria
-    int criteria_max = Model.Statistics.Criteria.Values.DefaultIfEmpty(0).Max();
-    int habitat_total = Model.Statistics.Habitat.Sum(x => x.Value); // #of assesments with a criteria
-    int habitat_max = Model.Statistics.Habitat.Values.DefaultIfEmpty(0).Max();
-
-    int region_total = Model.Statistics.Region.Sum(x => x.Value); // #of assesments with a criteria
-    int region_max = Model.Statistics.Region.Values.DefaultIfEmpty(0).Max();
-
-    int impact_total = Model.Statistics.ImpactFactors.Sum(x => x.Value); // #of assesments with a criteria
-    int impact_max = Model.Statistics.ImpactFactors.Values.DefaultIfEmpty(0).Max();
-
-
-
-    // OVERALL STATS - TODO. WHile waiting - use category, as it should be consistent with nr of assesments
-    int total = category_total;
-
-
-    // Obtaining the proper order and amount of items in case there are things with 0 or null values
-    Dictionary<string, object> category = ViewBag.categories.ToObject<Dictionary<string, object>>();
-
-    Dictionary<string, object> criteria = ViewBag.kriterier.ToObject<Dictionary<string, object>>();
-
-    Dictionary<string, Dictionary<string, object>> habitat = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, object>>>();
-
-
-
-
-
-}
-
-@functions{
-    string percentage(float max, float now)
+    var categories = Model.Statistics.RiskCategories.Data;
+    var invasionPotential = new BarChart()
     {
-        if (max == 0)
-        {
-            return "0";
-        }
-        string calculated = (now / max * 100).ToString("0.00");
-
-        calculated = calculated.Replace(",", ".");
-        return calculated + "%";
-    }
-}
-
-@functions{
-    string average(float utvalg, float verdi)
+        Data = Model.Statistics.DecisiveCriteria.Data.Take(2).ToList(),
+        MaxValue = Model.Statistics.DecisiveCriteria.MaxValue
+    };
+    var ecologicalEffect = new BarChart()
     {
-        if (utvalg == 0)
-        {
-            return "0";
-        }
-        string calculated = (verdi / utvalg).ToString("0.00");
-
-        calculated = calculated.Replace(",", ".");
-        return calculated;
-    }
+        Data = Model.Statistics.DecisiveCriteria.Data.Skip(2).ToList(),
+        MaxValue = Model.Statistics.DecisiveCriteria.MaxValue
+    };
 }
-
-@functions{
-    int getNumber(string dictkey, Dictionary<string, int> chosenlist)
-    {
-
-        if (chosenlist.ContainsKey(dictkey))
-        {
-            return chosenlist[dictkey];
-        }
-
-        return 0;
-
-    }
-
-
-    // DESCRIPTION
-    void categoryDescription(string category)
-    {
-        if (!string.IsNullOrEmpty(category) && category.Length > 0)
-        {
-            if (@ViewBag.categories.ContainsKey(category))
-            {
-                string final_string = @ViewBag.categories[category]["presentationstring"];
-                //final_string = final_string.ToLower();
-                // No idea why hyphens won't hyphenate one specific word only... 
-                <span class="stat_subtitle">@final_string</span>
-                }
-            }
-        }
-}
-
 
 <div class="page_section graphs">
-    <h3>@ViewBag.glossary["statistics"]["category"]["title"]</h3>
-    <div class="graph color_graph">
-        @foreach (var key in category.Keys)
-        {
-            <div class="statelement">
-                <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key, @Model.Statistics.Categories))">
-                        <span class="percent">@getNumber(@key, @Model.Statistics.Categories)</span>
-                    </div>
-                </div>
-                <span class="statbox">
-                    @key 
-                </span>
-                @{categoryDescription(key);}
-            </div>
-        }
-    </div>
-    <p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
-    <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>
-    <div class="graph greyscale">
-        @foreach (string key in criteria.Keys)
-        {
-            <div class="statelement">
-                <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="height:@percentage(@criteria_max, @getNumber(@key,@Model.Statistics.Criteria))">
-                        <span class="percent">@getNumber(@key, @Model.Statistics.Criteria)</span>
-                    </div>
-                </div>
-                <span class="statbox @key">
-                    @key
-                </span>
-            </div>
-        }
-    </div>
-    <p>@ViewBag.glossary["statistics"]["criteria"]["description"]</p>
-    <h3>@ViewBag.glossary["statistics"]["habitat"]["title"]</h3>
-    <div class="down_graph greyscale">
-        @foreach (string key in habitat.Keys)
-        {
-            <div class="statelement">
-                <span class="statbox @key">
-                    @habitat[@key]["shortname"]
-                </span>
-                <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="width:@percentage(@habitat_max, @getNumber(@key,@Model.Statistics.Habitat))">
-                        <span class="percent">@getNumber(@key, @Model.Statistics.Habitat)</span>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-    <p>@ViewBag.glossary["statistics"]["habitat"]["description"]</p>
-    <h3>@ViewBag.glossary["statistics"]["region"]["title"]</h3>
-    <div class="down_graph greyscale">
-        @foreach (string key in Model.Statistics.Region.Keys)
-        {
-            <div class="statelement">
-                <span class="statbox @key">
-                    @key
-                </span>
+    <p>@Constants.FigureMainText</p>
 
-                <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="width: @percentage(impact_max, @getNumber(@key, @Model.Statistics.Region))">
-                        <span class="percent">@getNumber(@key, @Model.Statistics.Region)</span>
-                    </div>
-                </div>
-            </div>
-        }
-    </div>
-    <p>@ViewBag.glossary["statistics"]["region"]["description"]</p>
+    <h3>Antall vurderinger per risikokategori</h3>
+    <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartVertical.cshtml" model="Model.Statistics.RiskCategories" />
+    <p>@Constants.figureCategoryStart <i>@(categories.First().Name.ToLowerInvariant())</i> @(categories.First().NameShort) til <i>@(categories.Last().Name.ToLowerInvariant())</i> @(categories.Last().NameShort). Utvalget ditt omfatter @Helpers.GetBarChartTotal(categories).ToString("N0") vurderinger, hvorav @Helpers.GetBarChartHighRisk(categories).ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
 
-    <h3>@ViewBag.glossary["statistics"]["impactfactor"]["title"]</h3>
-    <div class="down_graph greyscale">
-        @foreach (string key in Model.Statistics.ImpactFactors.Keys)
+    <hr/>
+
+    <h3>@Constants.riskMatrixFigureHeader</h3>
+    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrixFigure.cshtml" />
+    <p>@Html.Raw(Constants.riskMatrixFigureText) Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.RiskCategories.Data) vurderinger.</p>
+
+    <hr/>
+
+    <h3>Antall vurderinger per artsgruppe</h3>
+    <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpeciesGroups"/>
+    <p>Antall vurderinger i hver artsgruppe. Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+
+    <hr/>
+
+    <h3>@Constants.decisiveCriteriaFigureHeader</h3>
+    <div class="bar-chart-decisive-criteria bar-chart-sub-chart">
+        <div class="bar-chart-info-box bar-chart-info-box-1"><p>Invasjons-potensial</p></div>
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="invasionPotential" />
+    </div>
+    <div class="bar-chart-decisive-criteria bar-chart-sub-chart">
+        <div class="bar-chart-info-box bar-chart-info-box-2"><p>@Constants.yAxisLabel</p></div>
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="ecologicalEffect" />
+    </div>
+    <p>@Html.Raw(@Constants.decisiveCriteriaFigureText1) @Helpers.GetBarChartTotal(categories).ToString("N0") @Constants.decisiveCriteriaFigureText2 @Helpers.GetBarChartTotal(Model.Statistics.DecisiveCriteria.Data).ToString("N0") @Constants.decisiveCriteriaFigureText3@categories.FirstOrDefault(x => x.NameShort == "NK").Count @Html.Raw(@Constants.decisiveCriteriaFigureText4)</p>
+
+    <hr/>
+
+    <h3>@Constants.natureTypesEffectsHeader</h3>
+    <h4>@Constants.natureTypesEffectsFigureHeader1</h4>
+    <div class="bar-chart-major-nature-types">
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.MajorNatureTypesEffect" />
+    </div>
+    <p>@Constants.natureTypesEffectsText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+
+    <h4>@Constants.natureTypesEffectsFigureHeader2</h4>
+    <div class="bar-chart-double-column">
+        @for (var i = 0; i < Model.Statistics.NatureTypesEffect.Count; i++)
         {
-            <div class="statelement">
-                <span class="statbox @key">
-                    @key
-                </span>
-
-                <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="width:@percentage(@region_max, @getNumber(@key,@Model.Statistics.ImpactFactors))">
-                        <span class="percent">@getNumber(@key, @Model.Statistics.ImpactFactors)</span>
-                    </div>
-                </div>
+            <div class="bar-chart-nature-types bar-chart-sub-chart">
+                <div class="bar-chart-info-box">@Model.Statistics.NatureTypesEffect[i].Name</div>
+                <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.NatureTypesEffect[i]" />
             </div>
         }
     </div>
-    <p>@ViewBag.glossary["statistics"]["impactfactor"]["description"]</p>
+    <p>@Constants.natureTypesEffectsText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger og totalt @Model.Statistics.NatureTypesEffect.SelectMany(x => x.Data).Sum(x => x.Count) observasjoner i sjeldne eller truede naturtyper.</p>
+
+    <hr/>
+
+    <h3>@Constants.spreadWaysHeader</h3>
+    <h4>@Constants.spreadWaysFigureHeader1</h4>
+    <div class="bar-chart-major-spread-ways">
+        <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpreadWays" />
+    </div>
+    <p>@Constants.spreadWaysFigureText1 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+
+    <h4>@Constants.spreadWaysFigureHeader2</h4>
+    <div class="bar-chart-double-column">
+        @for(var i = 0; i < Model.Statistics.SpreadWaysIntroduction.Count; i++)
+        {
+            <div class="bar-chart-spread-ways bar-chart-sub-chart">
+                <div class="bar-chart-info-box bar-chart-info-box-spread-ways-@i">@Model.Statistics.SpreadWaysIntroduction[i].Name</div>
+                <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpreadWaysIntroduction[i]" />
+            </div>
+        }
+    </div>
+    <p>@Constants.spreadWaysFigureText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
+
+    <hr/>
+
+    <h3>@Constants.establishmentClassHeader</h3>
+    @for (var i = 0; i < Model.Statistics.EstablishmentClass.Count; i++)
+    {
+        <div class="bar-chart-sub-chart bar-chart-establishment-class">
+            <div class="bar-chart-info-box bar-chart-info-box-establishment-class-@i"><p>@Model.Statistics.EstablishmentClass[i].Name</p></div>
+            <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.EstablishmentClass[i]" />
+        </div>
+    }
+    <p>@Html.Raw(Constants.establishmentClassFigureText) Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 </div>

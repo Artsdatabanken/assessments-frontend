@@ -55,6 +55,7 @@ namespace Assessments.Mapping.AlienSpecies.Source
         [JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
         public int TaxonID { get; set; }
         public string ScientificName { get; set; }
+        public string ScientificNameFormatted { get; set; }
         //[JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
         [JsonConverter(typeof(JsonHelpers.CrazyIntJsonConverter))]
         public int ScientificNameId { get; set; }
@@ -70,7 +71,7 @@ namespace Assessments.Mapping.AlienSpecies.Source
         public string TaxonSearchString { get; set; }
 
         public string TaxonRank { get; set; }
-        
+
         /// <summary>
         /// Connected assessment
         /// </summary>
@@ -294,6 +295,10 @@ namespace Assessments.Mapping.AlienSpecies.Source
         public string Connected { get; set; }
 
         public CTaxon ConnectedTaxon { get; set; }
+        /// <summary>
+        /// List of all connected taxons
+        /// </summary>
+        public CTaxon[] ConnectedTaxons { get; set; }
 
         public string SpeciesStatus { get; set; }
 

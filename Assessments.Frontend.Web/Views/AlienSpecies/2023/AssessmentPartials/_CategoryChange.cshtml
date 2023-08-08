@@ -11,10 +11,9 @@
     var showMain = !((isNr && (sameAs2018 || !has2018Assessmnet)) || isEvaluatedAtAnotherLevel || isMisidentified);
     var showNotAssessed2018 = category2018 == null || wasNr2018;    
     var showSameAs2018 = !isNr && sameAs2018;
-    var category2018WithName = category2018 != null ? $"<i>{category2018.DisplayName().ToLower()}</i> - {category2018}" : string.Empty;
-    var category2023WithName = $"<i>{Model.Assessment.Category.DisplayName().ToLower()}</i> - {Model.Assessment.Category}";
-    var showRealChange = Model.Assessment.ReasonForChangeOfCategory.Contains("realChange");
-    var showNewKnowledge = Model.Assessment.ReasonForChangeOfCategory.Contains("newInformation");
+    var category2018WithName = category2018 != null ? $"<i>{category2018.DisplayName().ToLower()}</i> {category2018}" : string.Empty;
+    var category2023WithName = $"<i>{Model.Assessment.Category.DisplayName().ToLower()}</i> {Model.Assessment.Category}";
+    var showNewKnowledge = new[] { "realChange", "newInformation" }.Any(x => Model.Assessment.ReasonForChangeOfCategory.Contains(x));
     var showNewInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("newInterpretation");
     var showChangedCriteria = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteria");
     var showChangedCriteriaInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteriaInterpretation");
@@ -36,7 +35,6 @@
     <div is-visible="!showNotAssessed2018 && !showSameAs2018">
         <p>Kategorien for denne arten er endret fra @Html.Raw(category2018WithName) til @Html.Raw(category2023WithName) siden Fremmedartslista 2018 (forrige revisjon). Dette skyldes:</p>
         <ul>
-            <li is-visible="showRealChange">Reel endring i utbredelse, forekomstareal og/eller økologiske effekter</li>
             <li is-visible="showNewKnowledge">Ny kunnskap</li>
             <li is-visible="showNewInterpretation">Ny tolkning av tidligere data</li>
             <li is-visible="showChangedCriteria">Endrede avgrensninger eller retningslinjer</li>
@@ -49,5 +47,4 @@
         @Constants.CategoryChangeReasonsForChangeDescription
         <p>@Html.Raw(Model.Assessment.ReasonsForChangeOfCategoryDescription)</p>
     </div>
-    
 </div>

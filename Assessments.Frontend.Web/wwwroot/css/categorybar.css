@@ -55,7 +55,6 @@
 }
 
 .category_displayer .category_item span {
-    font-family: "roboto condensed";
     margin: auto;
     padding-top:0;
     text-align: center;
@@ -203,7 +202,7 @@ li.active  .category_item.NR {
 }
 
 .LO {
-    background: #5C9A94;
+    background: #5c9c94;
 }
 
 .NK {
@@ -214,19 +213,37 @@ li.active  .category_item.NR {
     background: #FFFFFF;
 }
 
-.RE ,
-.CR ,
-.EN ,
-.VU ,
-.DD,
-.LC,
-.NT,
+.RE span,
+.CR span,
+.EN span,
+.VU span,
+.DD span,
+.LC span,
+.NT span,
+.SE span,
+.HI span,
+.PH span,
+.LO span,
+.NK  span {
+    color: white;
+}
 
-.SE,
-.HI,
-.PH,
-.LO,
-.NK {
+span.percent {
+    color: #262F31;
+}
+
+.active .RE span,
+.active .CR span,
+.active .EN span,
+.active .VU span,
+.active .DD span,
+.active .LC span,
+.active .NT span,
+.active .SE span,
+.active .HI span,
+.active .PH span,
+.active .LO span,
+.active .NK span {
     color: white;
 }
 
@@ -234,6 +251,10 @@ li.active  .category_item.NR {
 .NE,
 .NR {
     color: #1c1c1c;
+}
+
+.NR {
+    border: 1px solid #1c1c1c;
 }
 
 .criteria_displayer li{

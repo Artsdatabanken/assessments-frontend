@@ -13,12 +13,14 @@
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
         AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
+        ConnectedTaxons = assessment.ConnectedTaxons,
         ScientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = assessment.VernacularName,
             ScientificName = assessment.ScientificName.ScientificNameFormatted,
             ScientificNameFormatted = true,
-            ScientificNameAuthor = assessment.ScientificName.ScientificNameAuthor
+            ScientificNameAuthor = assessment.ScientificName.ScientificNameAuthor,
+            ShowAssessmentOf = assessment.Category != AlienSpeciesAssessment2023Category.NR
         },
         SpeciesGroupViewModel = new SpeciesGroupViewModel()
         {
@@ -36,10 +38,10 @@
 
     var citationViewModel = new CitationForAssessmentViewModel
     {
-        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {assessment.ScientificName.ScientificNameFormatted} for {assessment.EvaluationContext.DisplayName()}",
+        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {assessment.ScientificName.ScientificNameFormatted} for {assessment.EvaluationContext.DisplayName()}.",
         AssessmentYear = 2023, // TODO: add year when it comes into model
         ExpertCommittee = assessment.ExpertGroup,
-        FirstPublished = Constants.RedlistSpecies2021FirstPublished,
+        FirstPublished = Constants.AlienSpecies2023FirstPublishedYear,
         HasBackToTopLink = true,
         PublicationText = $"{Constants.AlienSpecies2023PageMenuHeaderText}.  {Constants.Artsdatabanken}.",
         RevisionDate = new DateTime(), // TODO: add if we handle revisions in this list
@@ -63,7 +65,6 @@
     {
         AlienSpeciesCategory = assessment.AlienSpeciesCategory,
         Category = assessment.Category,
-        Environment = assessment.Environment,
         EvaluationContext = assessment.EvaluationContext,
         ListName = Constants.AlienSpecies2023PageMenuHeaderText,
         ParentAssessmentId = assessment.ParentAssessmentId,
@@ -95,7 +96,7 @@
     var showRegionalSpread = !isNr && !isEvaluatedAtAnotherLevel;
     var showAttachments = !isEvaluatedAtAnotherLevel && assessment.Attachments != null && assessment.Attachments.Count() != 0;
     var showImpactedNatureTypes = !isNr && !isEvaluatedAtAnotherLevel;
-    var showKnowMore = true;
+    var showKnowMore = !(assessment.Category == AlienSpeciesAssessment2023Category.NR && (assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie || Model.Assessment.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.NotIndicated));
     var showReference = assessment.References != null && assessment.References.Count() > 0;
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
     var showTableOfContents = assessment.Category != AlienSpeciesAssessment2023Category.NR;

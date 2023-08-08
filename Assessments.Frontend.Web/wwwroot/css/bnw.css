@@ -1,5 +1,9 @@
 /* BUTTONs FOR THEME SELECTING */
 
+.darktheme body {
+    color: #FFF9F0;
+}
+
 #headermenu {
     z-index: 13;
 }
@@ -27,7 +31,6 @@
     line-height: 1.42857143;
     white-space: nowrap;
     font-size: 16px;
-    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
     margin: 8px 0;
     display: block;
     text-decoration: none;
@@ -235,7 +238,7 @@
 .darktheme .viewselector,
 .darktheme .controls button.active,
 .darktheme .filter_group ul,
-.darktheme .redlist .listheader,
+.darktheme .main_list_view .listheader,
 .darktheme .controls button.active,
 .darktheme .search_dropdown,
 .darktheme .controls .list_actions,
@@ -263,7 +266,6 @@
 .darktheme .category_displayer .notactive .category_item {
     background: #570808;
 }
-
 
 /* RED BACKGROUND */
 .darktheme .page-link,
@@ -301,11 +303,15 @@
 .darktheme .page-link,
 .darktheme .percent,
 .darktheme p {
-    color: white;
+    color: #FFF9F0;
+}
+
+.darktheme .category_displayer .active .NR span {
+    color: #1c1c1c;
 }
 
 .darktheme .category_displayer .NR span {
-    color: #1c1c1c;
+    color: white;
 }
 
 /* TODO: Fix white text too high contrast being almost painfully white */
@@ -329,7 +335,7 @@
 .darktheme h4,
 .darktheme h5,
 .darktheme .element_popular_name {
-    color: #a8a4a4;
+    color: #FFF9F0;
 }
 
 /* ACTIVE LINK COLOUR */
@@ -342,13 +348,13 @@
 .darktheme .button.tertiary,
 .darktheme .main button.tertiary,
 .darktheme .sidebarmenu li h3,
-.darktheme .sidebarmenu .redlist h3 {
+.darktheme .sidebarmenu .main_list_view h3 {
     color: #f97474;
     border-color: #f97474;
 }
 
 .darktheme .sidebarmenu .alien-species h3 {
-    color: #b372bb;
+    color: #262F31;
     border-color: #b372bb;
 }
 
@@ -365,8 +371,8 @@
 
 /* BORDERS */
 
-.darktheme .controls button.active{
-    border-bottom:transparent;
+.darktheme .controls button.active {
+    border-bottom: transparent;
 }
 
 /* SEMI-GRAY-BORDERS */
@@ -398,12 +404,12 @@
 
 .darktheme .sidebarmenu ul,
 .darktheme .sidebarmenu li a,
-.darktheme .redlist li {
+.darktheme .main_list_view li {
     border-color: #464646;
 }
 
-.darktheme .filter_group button{
-    border-color:#514f4f;
+.darktheme .filter_group button {
+    border-color: #514f4f;
 }
 
 .darktheme .button.primary,
@@ -430,19 +436,20 @@
         padding: 4px;
         border-radius: 50%;
     }
+
     .darktheme .speciesgroup_name {
         background: #424141;
     }
 }
 
 .darktheme .search_speciesicon {
-    background:white;
-    border-radius:50%;
+    background: white;
+    border-radius: 50%;
 }
 
 /* SPECIAL STUFF */
 .darktheme .S .speciesgroup_name,
-.darktheme .redlist li.S {
+.darktheme .main_list_view li.S {
     background: #0f122d;
 }
 
@@ -565,4 +572,26 @@
 .darktheme .mobile_padding .table-of-contents {
     background-color: #201f1f;
     border: 1px solid #ccc;
+}
+
+.criteria-summary-list .collapsible {
+    background: inherit;
+}
+
+.criteria-summary-list li {
+    background: inherit;
+}
+
+.collapsible_header_letter {
+    color: grey;
+}
+
+@media (min-width: 1400px) {
+    .darktheme .pagination-wrapper {
+        background: inherit;
+    }
+}
+
+.darktheme .PagedList-pageCountAndLocation.disabled a {
+    color: inherit;
 }

@@ -28,6 +28,9 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Etablert per år 1800")]
         UncertainBefore1800,
 
+        [Display(Name = "Regionalt fremmed og etablert per år 1800")]
+        RegionallyAlienEstablishedBefore1800,
+
         [Display(Name = "Tidligere feilbestemt")]
         MisIdentified,
 

@@ -14,23 +14,9 @@
     var isDoorKnockerOrEffectNoRep = isDoorKnocker || isEffectWithoutReproduction;
     var showInteractiveMap = isAlienSpecie && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
-
-    var knownOrAssumedToday = new MapViewModel
-    {
-        MapName = "known_or_assumed_today",
-        MapText = Constants.AlienSpecies2023KnownOrAssumedOccurrence,
-        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true ||  x.IsAssumedToday == true).ToList()
-    };
-
-    var isAssumedInFuture = new MapViewModel
-    {
-        MapName = "is_assumed_in_future",
-        MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
-        RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
-    };
+    var showAreaOfOccupancyYearRange = (isAlienSpecie || isRegionallyAlien) && Model.AreaOfOccupancyKnownYearOne != null && Model.AreaOfOccupancyKnownYearTwo != null;
 
     var hasWaterAreas = Model.FreshWaterRegionModel.IsWaterArea;
-    var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
     var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
     {
         WaterRegionName = x.Key,
@@ -48,6 +34,28 @@
         IsAssumedInFuture = x.Any(y => y.IsAssumedInFuture == true),
         WaterAreas = x.ToList()
     }).OrderBy(x => x.WaterRegionName).ToList();
+
+    var knownOrAssumedToday = new MapViewModel
+            {
+                FreshWaterRegions = Model.FreshWaterRegionModel.FreshWaterRegions.Where(x => x.IsKnown || x.IsAssumedToday).ToList(),
+                FreshWaterNaturalOccurence = waterRegionsNaturalOccurence,
+                MapName = "known_or_assumed_today",
+                MapText = Constants.AlienSpecies2023KnownOrAssumedOccurrence,
+                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true || x.IsAssumedToday == true).ToList(),
+                ShowLegend = !isDoorKnockerOrEffectNoRep
+            };
+
+    var isAssumedInFuture = new MapViewModel
+            {
+                FreshWaterRegions = Model.FreshWaterRegionModel.FreshWaterRegions.Where(x => x.IsAssumedInFuture).ToList(),
+                FreshWaterNaturalOccurence = waterRegionsNaturalOccurence,
+                MapName = "is_assumed_in_future",
+                MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
+                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList(),
+                ShowLegend = isDoorKnockerOrEffectNoRep
+            };
+
+    var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
 
     string GetWaterRegions(List<AlienSpeciesAssessment2023FreshWaterRegion> regions)
     {
@@ -72,18 +80,26 @@
     <div id="domestic_spread">
         <div id="show_occurence_area">
             <h3>Forekomstareal</h3>
-            <table class="numbers-table" is-visible="isAlienSpecie || isRegionallyAlien">
+            <p>
+                Forekomstarealet til en @Helpers.FixSpeciesLevel("{art}", Model.NameRank) tilsvarer antallet forekomster (2 km x 2 km ruter) der @Helpers.FixSpeciesLevel("{art}en", Model.NameRank) lever.
+                <a href="https://www.artsdatabanken.no/Pages/342783">Les mer om forekomstareal her.</a>
+            </p>
+            <table class="big-data-table" is-visible="isAlienSpecie || isRegionallyAlien">
+                <caption class="table-title">
+                    <b>@Constants.AlienSpeciesTables.AooTableTitle</b>
+                    @Constants.AlienSpeciesTables.AooTableDescription 
+                    @if(showAreaOfOccupancyYearRange) {@Constants.AlienSpeciesTables.AooTableDescription2}@Model.AreaOfOccupancyKnownYearOne til @Model.AreaOfOccupancyKnownYearTwo.
+                </caption>
                 <tr>
                     <th>Forekomstareal</th>
                     <th>I dag </th>
-                    <th>Fremtidig (50 år) </th>
+                    <th>Fremtidig (50 år)</th>
                 </tr>
                 <tr>
                     <td>Kjent  </td>
                     <td>@Model.AreaOfOccupancyKnown km<sup>2</sup></td>
                     <td></td>
                 </tr>
-
                 <tr>
                     <td>Antatt lavt anslag</td>
                     <td>@Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
@@ -100,48 +116,66 @@
                     <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
                 </tr>
             </table>
-            <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isDoorKnocker || isEffectWithoutReproduction)">Andel av antatt forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
+            <p is-visible="@(!string.IsNullOrEmpty(Model.ArtskartObservationChangesDescription))">@Html.Raw(Model.ArtskartObservationChangesDescription)</p>
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
-                <div is-visible="!Model.IsSvalbard" class="map double_map">
+                <div is-visible="!Model.IsSvalbard && !isRegionallyAlien" class="map double_map">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="knownOrAssumedToday" />
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>
             </div>
-            <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
+            <div is-visible="@isRegionallyAlien">
+                <h3>Regionvis utbredelse</h3>
+                <div is-visible="!Model.IsSvalbard && !Model.FreshWaterRegionModel.IsWaterArea" class="map double_map">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterRegions.cshtml" model="knownOrAssumedToday" />
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterRegions.cshtml" model="isAssumedInFuture" />
+                </div>
+                <div is-visible="!Model.IsSvalbard && Model.FreshWaterRegionModel.IsWaterArea" class="map double_map">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterAreas.cshtml" model="knownOrAssumedToday" />
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterAreas.cshtml" model="isAssumedInFuture" />
+                </div>
+            </div>
+            <table class="big-data-table" is-visible="isDoorKnockerOrEffectNoRep">
+                <caption class="table-title">
+                    <b>@Constants.AlienSpeciesTables.AooTableTitle</b>
+                    @Constants.AlienSpeciesTables.AooDoorknockersTableDescription
+                </caption>
                 <tr>
-                    <th>Antatt i løpet av en periode på 10 år</th>
-                    <th>Antall forekomster fra én introduksjon  </th>
-                    <th>Antall ytterligere introduksjoner til norsk natur </th>
-                    <th>Forekomstareal etter 10 år </th>
+                    <th>@Constants.AlienSpeciesTables.AooTableColumn1</th>
+                    <th>@Constants.AlienSpeciesTables.AooDoorknockersTableColumn2</th>
+                    <th>@Constants.AlienSpeciesTables.AooDoorknockersTableColumn3</th>
+                    <th>@Constants.AlienSpeciesTables.AooDoorknockersTableColumn4</th>
                 </tr>
                 <tr>
-                    <td>Lavt anslag</td>
+                    <td>@Constants.AlienSpeciesTables.LowRow</td>
                     <td>@Model.RiskAssessmentOccurrences1Low </td>
                     <td>@Model.RiskAssessmentIntroductionsLow </td>
                     <td>@Model.AreaOfOccupancyFutureLow  km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Beste anslag</td>
+                    <td>@Constants.AlienSpeciesTables.AverageRow</td>
                     <td>@Model.RiskAssessmentOccurrences1Best </td>
                     <td>@Model.RiskAssessmentIntroductionsBest </td>
                     <td>@Model.AreaOfOccupancyFutureBest  km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Høyt anslag</td>
+                    <td>@Constants.AlienSpeciesTables.HighRow</td>
                     <td>@Model.RiskAssessmentOccurrences1High </td>
                     <td>@Model.RiskAssessmentIntroductionsHigh </td>
                     <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
                 </tr>
             </table>
+            <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isDoorKnocker || isEffectWithoutReproduction)">Andel av antatt forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isDoorKnockerOrEffectNoRep">
+                <h3>Regionvis utbredelse</h3>
+                <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>
                 <div is-visible="!Model.IsSvalbard && hasKnownOrAssumedOccurrence" class="map N">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>
-                <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>
             </div>
             <div is-visible="showCurrentPresenceComment">
+                <br/>
                 <p>
                     @Html.Raw(Model.CurrentPresenceComment)
                 </p>

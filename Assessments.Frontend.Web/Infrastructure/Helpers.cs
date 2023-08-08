@@ -4,6 +4,7 @@ using Assessments.Mapping.RedlistSpecies;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Globalization;
 using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure
@@ -131,7 +132,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                                 .ThenBy(x => x.PopularName);
                     break;
                 case (true, nameof(SpeciesAssessment2021.Category)):
-                    query = query.OrderBy(x => x.Category, new CategoryComparer());
+                    query = query.OrderBy(x => x.Category, new RedlistCategoryComparer());
                     break;
                 case (true, nameof(SpeciesAssessment2021.SpeciesGroup)):
                     query = query.OrderBy(x => x.SpeciesGroup);
@@ -156,7 +157,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                     query = query
                         .OrderByDescending(x => x.PopularName.ToLower() == name ||
                         x.ScientificName.ToLower() == name)
-                        .ThenBy(x => x.Category, new CategoryComparer());
+                        .ThenBy(x => x.Category, new RedlistCategoryComparer());
                     break;
                 case (false, nameof(SpeciesAssessment2021.SpeciesGroup)):
                     query = query
@@ -188,6 +189,30 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static IQueryable<SpeciesAssessment2021> GetQueryByName(IQueryable<SpeciesAssessment2021> query, string name)
         {
+            // Searching for a specific taxonomic rank
+            var rankIndexAt = name.IndexOf('(');
+            var rankIndexEnd = name.IndexOf(')');
+            var rank = String.Empty;
+            if (rankIndexAt > 0 && rankIndexEnd > 0)
+            {
+                rank = name.Substring(rankIndexAt + 1, rankIndexEnd - 1 - rankIndexAt);
+                if (rank.Length > 2)
+                {
+                    rank = rank[0].ToString().ToUpperInvariant() + rank[1..].ToLowerInvariant();
+                }
+                name = name[..rankIndexAt].Trim().ToLowerInvariant();
+            }
+
+            // If taxonomic rank is not valid, the normal search will be used instead
+            if (!string.IsNullOrEmpty(rank))
+            {
+                if (Constants.TaxonCategoriesNbToEn.TryGetValue(rank, out string rankValue))
+                {
+                    return query.Where(x => x.VurdertVitenskapeligNavnHierarki.Replace('/', ' ').Split().Reverse().Skip(1).ToList().Any(y => y.ToLowerInvariant() == name));
+                }
+            }
+
+            // Normal search
             var speciesHitScientificNames = query.Where(x => x.PopularName.ToLower().Contains(name)).Select(x => x.ScientificName).ToArray();
 
             return query.Where(x =>
@@ -227,7 +252,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string removeLineBreaksForMobile(string text)
         {
-            return text.Replace("<br/>", "");
+            return text.Replace("<br/>", "").Replace("<span>&#8208;</span>", "");
         }
 
         public static Dictionary<string, string> GetAllTaxonRanks()
@@ -246,7 +271,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string FindDegrees(string category, bool parenthesis)
         {
-            string text = "";
+            string text = string.Empty;
             if (category.Length > 2)
             {
                 text = "nedgradert";
@@ -343,20 +368,77 @@ namespace Assessments.Frontend.Web.Infrastructure
             };
             return Helpers.FixSpeciesLevel(replaceString, stringRank);
         }
+
+        public static string GetBarChartHeight(int max, int currect)
+        {
+            var value = (float)(currect * 100.0 / max);
+            return value.ToString("F", CultureInfo.InvariantCulture);
+        }
+
+        public static int GetBarChartTotal(List<BarChart.BarChartData> data)
+        {
+            return data.Sum(x => x.Count);
+        }
+
+        public static int GetBarChartHighRisk(List<BarChart.BarChartData> data)
+        {
+            return data.Where(x => x.NameShort == AlienSpeciesAssessment2023Category.HI.ToString() || x.NameShort == AlienSpeciesAssessment2023Category.SE.ToString()).Sum(x => x.Count);
+        }
     }
 
-    public class CategoryComparer : IComparer<string>
+    public class RedlistCategoryComparer : IComparer<string>
     {
         private readonly string[] categories = new string[]
         {
                     "RE", "CR", "EN", "VU", "NT", "DD", "LC", "NA", "NE"
         };
+
         public int Compare(string x, string y)
         {
             if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
                 return 0;
 
             return Array.IndexOf(categories, x[..2]) - Array.IndexOf(categories, y[..2]);
+        }
+    }
+
+    public class AlienSpeciesCategoryComparer : IComparer<string>
+    {
+        private readonly List<string> listOrder = new()
+        {
+            AlienSpeciesAssessment2023Category.NR.ToString(),
+            AlienSpeciesAssessment2023Category.LO.ToString(),
+            AlienSpeciesAssessment2023Category.PH.ToString(),
+            AlienSpeciesAssessment2023Category.HI.ToString(),
+            AlienSpeciesAssessment2023Category.SE.ToString()
+        };
+
+        public int Compare(string x, string y)
+        {
+            if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
+                return 0;
+
+            return listOrder.IndexOf(x) - listOrder.IndexOf(y);
+        }
+    }
+
+    public class AlienSpeciesSpeciesStatusComparer : IComparer<string>
+    {
+        private readonly List<string> listOrder = new()
+        {
+            AlienSpeciesAssessment2023SpeciesStatus.C1.ToString(),
+            AlienSpeciesAssessment2023SpeciesStatus.C0.ToString(),
+            AlienSpeciesAssessment2023SpeciesStatus.B2.ToString(),
+            AlienSpeciesAssessment2023SpeciesStatus.B1.ToString(),
+            AlienSpeciesAssessment2023SpeciesStatus.A.ToString()
+        };
+
+        public int Compare(string x, string y)
+        {
+            if (string.IsNullOrEmpty(x) || string.IsNullOrEmpty(y))
+                return 0;
+
+            return listOrder.IndexOf(x) - listOrder.IndexOf(y);
         }
     }
 }

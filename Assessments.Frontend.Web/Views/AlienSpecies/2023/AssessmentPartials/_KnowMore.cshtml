@@ -5,6 +5,7 @@
     var areaText = Model.Assessment.EvaluationContext == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023EvaluationContext.N ? "i Norge" : "på Svalbard";
     var isRegionallyAlien = Model.Assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien;
     var isDoorKnocker = Model.Assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker;
+    var isNrButNotAlienSpecie = Model.Assessment.Category == AlienSpeciesAssessment2023Category.NR && Model.Assessment.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie;
 
     string ComingFromText()
     {
@@ -19,6 +20,9 @@
     var isLimnic = Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.Limnisk || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.LimMar || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.LimTer || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.LimMarTer;
     var isTerrestrial = Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.Terrestrisk || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.MarTer || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.LimTer || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.LimMarTer;
     var isMarine = Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.Marint || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.LimMar || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.MarTer || Model.Assessment.Environment == AlienSpeciesAssessment2023Environment.LimMarTer;
+
+    var showEstablishmentClass = !(Model.Assessment.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.NotIndicated && !string.IsNullOrEmpty(Model.Assessment.UncertaintyStatusDescription));
+    var showFirstObservation = Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0 || !string.IsNullOrEmpty(Model.Assessment.YearsFirstRecord.Description) || !string.IsNullOrEmpty(Model.Assessment.ArrivedCountryFromDetails);
 
     string GetSpeciesStatusText()
     {
@@ -70,41 +74,47 @@
         <h2>@Constants.HeadingsNo.KnowMore @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank)</h2>
     </div>
     <div>
-        <h3>Etableringsklasse @areaText</h3>
-        <p>
-            Etableringsklasse beskriver de ulike trinnene den vurderte @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) kan ha nådd, fra å kun finnes utenlands til å være etablert i naturen.
-        </p>
-        <p>
-            @GetSpeciesStatusText()
-        </p>
-        <p>@Html.Raw(Model.Assessment.UncertaintyStatusDescription)</p>
-        <h3>Første observasjon av arten @( isRegionallyAlien ? "der den er regionalt fremmed" : areaText )</h3>
-        <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="numbers-table small-table">
-            <tbody>
-                <tr>
-                    <td>Første observasjon av:</td>
-                    <td>Årstall</td>
-                    <td>Usikkerhet i årstall (> ± 5 år)</td>
-                </tr>
-                @foreach(var record in Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway)
-                {
+        <div is-visible="showEstablishmentClass">
+            <h3>Etableringsklasse @areaText</h3>
+            <p>
+                Etableringsklasse beskriver de ulike trinnene den vurderte @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) kan ha nådd, fra å kun finnes utenlands til å være etablert i naturen.
+            </p>
+            <p>
+                @GetSpeciesStatusText()
+            </p>
+            <p>@Html.Raw(Model.Assessment.UncertaintyStatusDescription)</p>
+        </div>
+        <div is-visible="showFirstObservation">
+            <h3>Første observasjon av arten @( isRegionallyAlien ? "der den er regionalt fremmed" : areaText )</h3>
+            <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="big-data-table">
+                <caption class="table-title">
+                    <b>@Constants.AlienSpeciesTables.FirstObsTableTitle</b>
+                    @Constants.AlienSpeciesTables.FirstObsTableDescription 
+                </caption>
                     <tr>
-                        <td>@record.recordType.DisplayName()</td>
-                        <td>@record.year</td>
-                        <td>@( record.isUncertaintyYear ? "Ja" : "Nei" )</td>
+                        <th>@Constants.AlienSpeciesTables.FirstObsTableColumn1</th>
+                        <th>@Constants.AlienSpeciesTables.FirstObsTableColumn2</th>
+                        <th>@Html.Raw(@Constants.AlienSpeciesTables.FirstObsTableColumn3)</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <p is-visible="!string.IsNullOrEmpty(Model.Assessment.YearsFirstRecord.Description)">
-            @Html.Raw(Model.Assessment.YearsFirstRecord.Description)
-        </p>
-        <p>
-            @(GetCameToNorwayFrom()) @Model.Assessment.ArrivedCountryFrom.Select(x => x.DisplayName()).JoinAnd(", ", " og ").ToLowerInvariant()
-        </p>
-        <p>@Html.Raw(Model.Assessment.ArrivedCountryFromDetails)</p>
+                    @foreach(var record in Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway)
+                    {
+                        <tr>
+                            <td>@record.recordType.DisplayName()</td>
+                            <td>@record.year</td>
+                            <td>@( record.isUncertaintyYear ? "Ja" : "Nei" )</td>
+                        </tr>
+                    }
+            </table>
+            <p is-visible="!string.IsNullOrEmpty(Model.Assessment.YearsFirstRecord.Description)">
+                @Html.Raw(Model.Assessment.YearsFirstRecord.Description)
+            </p>
+            <p is-visible="!isNrButNotAlienSpecie && Model.Assessment.ArrivedCountryFrom != null && Model.Assessment.ArrivedCountryFrom.Count > 0">
+                @(GetCameToNorwayFrom()) @Model.Assessment.ArrivedCountryFrom.Select(x => x.DisplayName()).JoinAnd(", ", " og ").ToLowerInvariant()
+            </p>
+            <p>@Model.Assessment.ArrivedCountryFromDetails</p>
+        </div>
     </div>
-    <div>
+    <div is-visible="!isNrButNotAlienSpecie">
         <h3>Global utbredelse</h3>
         <h4>@Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) naturlige utbredelse.</h4>
         <p>
@@ -161,7 +171,7 @@
             <p>@Html.Raw(Model.Assessment.CurrentInternationalExistenceMarineAreasDetails)</p>
         </div>
     </div>
-    <div>
+    <div is-visible="!isNrButNotAlienSpecie">
         <h3>Reproduksjon og generasjonstid</h3>
         <p>@GetReproductionString()</p>
         <p is-visible="Model.Assessment.GenerationTime != null">Generasjonstid (i år): @Model.Assessment.GenerationTime.</p>

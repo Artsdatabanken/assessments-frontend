@@ -41,7 +41,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     return String.Empty;
                 case nameof(parameters.Category):
                     if (parameters.Category?.Any() == true)
+                    {
+                        if (parameters.Category.Contains(nameof(parameters.Category)))
+                            return $"{parameters.Category.Length - 1}";
                         return $"{parameters.Category.Length}";
+                    }
                     return String.Empty;
                 case nameof(parameters.EcologicalEffect):
                     if (parameters.EcologicalEffect?.Any() == true)
@@ -53,7 +57,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     return String.Empty;
                 case nameof(parameters.NatureTypes):
                     if (parameters.NatureTypes?.Any() == true)
-                        return $"{parameters.NatureTypes.Length}";
+                    {
+                        var counter = parameters.NatureTypes.Length;
+                        if (parameters.NatureTypes.Contains("Nta"))
+                            counter--;
+                        if (parameters.NatureTypes.Contains("Ntn"))
+                            counter--;
+                        return $"{counter}";
+                    }
                     return String.Empty;
                 case nameof(parameters.InvasionPotential):
                     if (parameters.InvasionPotential?.Any() == true)
@@ -61,23 +72,46 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     return String.Empty;
                 case nameof(parameters.CategoryChanged):
                     if (parameters.CategoryChanged?.Any() == true)
+                    {
+                        if (parameters.CategoryChanged.Contains("ccke"))
+                            return $"{parameters.CategoryChanged.Length - 1}";
                         return $"{parameters.CategoryChanged.Length}";
+                    }
                     return String.Empty;
                 case nameof(parameters.DecisiveCriterias):
                     if (parameters.DecisiveCriterias?.Any() == true)
+                    {
+                        if (parameters.DecisiveCriterias.Contains("dcok"))
+                            return $"{parameters.DecisiveCriterias.Length - 1}";
                         return $"{parameters.DecisiveCriterias.Length}";
+                    }
                     return String.Empty;
                 case nameof(parameters.SpeciesStatus):
                     if (parameters.SpeciesStatus?.Any() == true)
+                    {
+                        if (parameters.SpeciesStatus.Contains("eds"))
+                            return $"{parameters.SpeciesStatus.Length - 1}";
                         return $"{parameters.SpeciesStatus.Length}";
+                    }
                     return String.Empty;
                 case nameof(parameters.SpreadWays):
                     if (parameters.SpreadWays?.Any() == true)
-                        return $"{parameters.SpreadWays.Length}";
+                    {
+                        var counter = parameters.SpreadWays.Length;
+                        if (parameters.SpreadWays.Contains("Swnat"))
+                            counter--;
+                        if (parameters.SpreadWays.Contains("Swspr"))
+                            counter--;
+                        return $"{counter}";
+                    }
                     return String.Empty;
                 case nameof(parameters.TaxonRank):
                     if (parameters.TaxonRank?.Any() == true)
+                    {
+                        if (parameters.TaxonRank.Contains("ttn"))
+                            return $"{parameters.TaxonRank.Length - 1}";
                         return $"{parameters.TaxonRank.Length}";
+                    }
                     return String.Empty;
                 case nameof(parameters.NotAssessed):
                     if (parameters.NotAssessed?.Any() == true)
@@ -104,11 +138,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     return String.Empty;
                 case nameof(parameters.RegionallyAlien):
                     if (parameters.RegionallyAlien?.Any() == true)
+                    {
+                        if (parameters.RegionallyAlien.Contains("Rar"))
+                            return $"{parameters.RegionallyAlien.Length - 1}";
                         return $"{parameters.RegionallyAlien.Length}";
+                    }
                     return String.Empty;
                 case nameof(parameters.Regions):
                     if (parameters.Regions?.Any() == true)
+                    {
+                        if (parameters.Regions.Contains(nameof(parameters.Regions)))
+                            return $"{parameters.Regions.Length - 1}";
                         return $"{parameters.Regions.Length}";
+                    }
                     return String.Empty;
                 case nameof(parameters.Criterias):
                     if (parameters.Criterias?.Any() == true)

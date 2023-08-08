@@ -36,11 +36,17 @@ namespace Assessments.Frontend.Web.Controllers
         public async Task<IActionResult> Index(AlienSpeciesListViewModel viewModel, int? page, bool export)
         {
             var query = await DataRepository.GetAlienSpeciesAssessments();
+            var unfilteredQuery = query;
 
             query = QueryHelpers.ApplyParameters(viewModel, query);
 
             if (export)
                 return GetExport(query);
+            if (viewModel.View == "stat")
+            {
+                var statistics = new StatisticsHelper(query, unfilteredQuery);
+                viewModel.Statistics = statistics.GetStatistics();
+            }
 
             viewModel.Results = query.ToPagedList(page ?? 1, DefaultPageSize);
 
@@ -59,9 +65,15 @@ namespace Assessments.Frontend.Web.Controllers
 
             var expertGroupMembers = await DataRepository.GetData<AlienSpeciesAssessment2023ExpertGroupMember>(DataFilenames.AlienSpeciesExpertCommitteeMembers);
 
-            var assessmentExpertGroupMembers = await expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
-                .OrderBy(x => x.ExpertGroup)
-                .ThenBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToListAsync();
+            // members by assessment id (if available)
+            var assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.Id == assessment.Id).OrderBy(x => x.CitationOrder).ToList();
+
+            // members by expertgroup
+            if (!assessmentExpertGroupMembers.Any())
+            {
+                assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
+                    .OrderBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToList();
+            }
 
             var viewModel = new AlienSpeciesDetailViewModel(assessment)
             {
@@ -126,7 +138,7 @@ namespace Assessments.Frontend.Web.Controllers
                                                     query.Any(y => y.ScientificName.ScientificNameId == x.ScientificNameId)).ToList();                // or match on scientific name id: exact match on species/subsp./var.
 
             // Add assessments if they are in alien species list, but not in artskart. "Subsp." and "var." are not included in scientific names in artskart.
-            var alienSpeciesHits = query.Where(x => x.ScientificName.ScientificName.Trim().ToLower().Contains(name)).ToArray();
+            var alienSpeciesHits = QueryHelpers.ApplySearch(search, query);
 
             foreach (var hit in alienSpeciesHits)
             {
@@ -137,10 +149,7 @@ namespace Assessments.Frontend.Web.Controllers
                     PopularName = hit.VernacularName,
                     MatchedName = hit.ScientificName.ScientificName,
                     ScientificName = hit.ScientificName.ScientificName,
-                    TaxonCategory = hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Species) ? Constants.TaxonCategoriesEn.Species :
-                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.SubSpecies) ? Constants.TaxonCategoriesEn.SubSpecies :
-                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Variety) ? Constants.TaxonCategoriesEn.Variety :
-                                    hit.ScientificName.ScientificNameRank.DisplayName() == nameof(Constants.TaxonCategoriesEn.Form) ? Constants.TaxonCategoriesEn.Form : 0
+                    TaxonCategory = (int)hit.ScientificName.ScientificNameRank
                 });
             }
 

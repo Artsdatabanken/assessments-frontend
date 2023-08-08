@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Assessments.Mapping.AlienSpecies.Model;
+﻿using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Profiles;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Shared.Helpers;
@@ -14,6 +8,12 @@ using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ShellProgressBar;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Assessments.Transformation
@@ -28,8 +28,6 @@ namespace Assessments.Transformation
                 { 2637, 2120 },
                 { 1027, 2354 },
                 { 1026, 2354 },
-                { 1293, 2367 },
-                { 1292, 2367 },
                 { 1835, 1825 },
                 { 2206, 595  },
                 { 2015, 830  },
@@ -40,7 +38,8 @@ namespace Assessments.Transformation
                 {  850, 7355 },
                 { 6068, 1451 },
                 { 2158, 464  },
-
+                { 2157, 464 },
+                { 2625, 2616 }
             };
 
         public static async Task TransformDataModels(IConfigurationRoot configuration, bool upload)
@@ -55,8 +54,8 @@ namespace Assessments.Transformation
 
             var excludedExpertGroups = new List<string> { "Testedyr", "Ikke-marine invertebrater" };
 
-            var databaseAssessments = _dbContext.Assessments.AsNoTracking().Include(x=>x.Attachments.Where(y=>y.IsDeleted == false))
-                .Where(x => (bool) !x.IsDeleted && !excludedExpertGroups.Contains(x.Expertgroup));
+            var databaseAssessments = _dbContext.Assessments.AsNoTracking().Include(x => x.Attachments.Where(y => y.IsDeleted == false))
+                .Where(x => (bool)!x.IsDeleted && !excludedExpertGroups.Contains(x.Expertgroup));
 
             var totalCount = await databaseAssessments.CountAsync();
 
@@ -75,10 +74,10 @@ namespace Assessments.Transformation
                     continue;
 
                 // datasett 
-                fa4.Attachmemnts = assessment.Attachments.Where(x=> !x.IsDeleted).Select(x => new Attachment()
+                fa4.Attachmemnts = assessment.Attachments.Where(x => !x.IsDeleted).Select(x => new Attachment()
                 {
-                    Id = x.Id, 
-                    Description = !string.IsNullOrWhiteSpace(x.Description) ? x.Description : x.Name, 
+                    Id = x.Id,
+                    Description = !string.IsNullOrWhiteSpace(x.Description) ? x.Description : x.Name,
                     FileName = x.FileName,
                     MimeType = x.Type
                 }).ToArray();
@@ -132,10 +131,10 @@ namespace Assessments.Transformation
             var excludedExpertGroups = new List<string> { "Testedyr", "Ikke-marine invertebrater" };
 
             var databaseAttachments = _dbContext.Attachments
-                .Include(x=>x.Assessment)
-                .Include(x=>x.AttachmentFile)
+                .Include(x => x.Assessment)
+                .Include(x => x.AttachmentFile)
                 .AsNoTracking()
-                .Where(x => (bool)!x.Assessment.IsDeleted 
+                .Where(x => (bool)!x.Assessment.IsDeleted
                             && !excludedExpertGroups.Contains(x.Assessment.Expertgroup)
                             && x.IsDeleted == false);
 
@@ -158,7 +157,7 @@ namespace Assessments.Transformation
                 attachmentCount++;
                 Progress.ProgressBar.Tick();
             }
-            
+
             Progress.ProgressBar.Message = $"Opplasting fullført, {attachmentCount} vedlegg ble lagret";
             Progress.ProgressBar.Dispose();
         }
@@ -181,7 +180,7 @@ namespace Assessments.Transformation
             // ekskluderer vurderinger som er "ikke fremmed" i 2023 og 2018
             if (fa4.AlienSpeciesCategory == "NotAlienSpecie" &&
                 fa4.PreviousAssessments.FirstOrDefault(x => x.RevisionYear == 2018) is
-                    { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
+                { MainCategory: "NotApplicable", MainSubCategory: "notAlienSpecie" })
             {
                 Progress.ProgressBar.Tick();
                 return true;
@@ -195,7 +194,7 @@ namespace Assessments.Transformation
             }
 
             // ekskluderer vurderinger med pattedyr som er husdyrraser
-            if (new[]{ 4937, 4963, 4964, 4965, 5217 }.Contains(fa4.Id))
+            if (new[] { 4937, 4963, 4964, 4965, 5217 }.Contains(fa4.Id))
             {
                 Progress.ProgressBar.Tick();
                 return true;

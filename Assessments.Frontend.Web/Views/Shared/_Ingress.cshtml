@@ -13,7 +13,6 @@
 }
 
 <div class="page_section">
-    <p is-visible="!isNr">Livsmiljø: @Model.Environment.DisplayName()</p>
     <p is-visible="isEvaluatedAtAnotherLevel">
         @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() (les vurderingen <a asp-action="Detail" asp-route-id="@Model.ParentAssessmentId">her</a>).
     </p>

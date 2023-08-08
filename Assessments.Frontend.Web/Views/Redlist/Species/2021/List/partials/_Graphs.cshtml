@@ -7,15 +7,13 @@
     // Calculating max and total values for use in graph drawing
     int category_total = Model.Statistics.Categories.Sum(x => x.Value); // #of assesments with a category
     int category_max = Model.Statistics.Categories.Values.DefaultIfEmpty(0).Max();
-    int criteria_total = Model.Statistics.Criteria.Sum(x => x.Value); // #of assesments with a criteria
+
     int criteria_max = Model.Statistics.Criteria.Values.DefaultIfEmpty(0).Max();
-    int habitat_total = Model.Statistics.Habitat.Sum(x => x.Value); // #of assesments with a criteria
+
     int habitat_max = Model.Statistics.Habitat.Values.DefaultIfEmpty(0).Max();
 
-    int region_total = Model.Statistics.Region.Sum(x => x.Value); // #of assesments with a criteria
     int region_max = Model.Statistics.Region.Values.DefaultIfEmpty(0).Max();
 
-    int impact_total = Model.Statistics.ImpactFactors.Sum(x => x.Value); // #of assesments with a criteria
     int impact_max = Model.Statistics.ImpactFactors.Values.DefaultIfEmpty(0).Max();
 
 
@@ -101,10 +99,10 @@
     <h3>@ViewBag.glossary["statistics"]["category"]["title"]</h3>
 
 
-    <div class="graph color_graph">
+    <ul class="graph color_graph">
         @foreach (var key in category.Keys)
         {
-            <div class="statelement">
+            <li class="statelement">
                 <div class="heightbar_blank">
                     <div class="heightbar_indicator @key" style="height:@percentage(@category_max, @getNumber(@key, @Model.Statistics.Categories))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.Categories)</span>
@@ -115,10 +113,11 @@
                     @key 
                 </span>
                 @{categoryDescription(key);}
-            </div>
+            </li>
         }
-    </div>
+    </ul>
     <p>@ViewBag.glossary["statistics"]["category"]["description"] @FormatNumeric(category_total.ToString()).</p>
+
     <h3>@ViewBag.glossary["statistics"]["criteria"]["title"]</h3>
     <div class="graph greyscale">
         @foreach (string key in criteria.Keys)
@@ -137,6 +136,7 @@
         }
     </div>
     <p>@ViewBag.glossary["statistics"]["criteria"]["description"]</p>
+
     <h3>@ViewBag.glossary["statistics"]["habitat"]["title"]</h3>
     <div class="down_graph greyscale">
         @foreach (string key in habitat.Keys)
@@ -155,6 +155,7 @@
         }
     </div>
     <p>@ViewBag.glossary["statistics"]["habitat"]["description"]</p>
+
     <h3>@ViewBag.glossary["statistics"]["region"]["title"]</h3>
     <div class="down_graph greyscale">
         @foreach (string key in Model.Statistics.Region.Keys)
@@ -165,7 +166,7 @@
                 </span>
 
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="width: @percentage(impact_max, @getNumber(@key, @Model.Statistics.Region))">
+                    <div class="heightbar_indicator @key" style="width: @percentage(region_max, @getNumber(@key, @Model.Statistics.Region))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.Region)</span>
                     </div>
                 </div>
@@ -184,7 +185,7 @@
                 </span>
 
                 <div class="heightbar_blank">
-                    <div class="heightbar_indicator @key" style="width:@percentage(@region_max, @getNumber(@key,@Model.Statistics.ImpactFactors))">
+                    <div class="heightbar_indicator @key" style="width:@percentage(impact_max, @getNumber(@key,@Model.Statistics.ImpactFactors))">
                         <span class="percent">@getNumber(@key, @Model.Statistics.ImpactFactors)</span>
                     </div>
                 </div>

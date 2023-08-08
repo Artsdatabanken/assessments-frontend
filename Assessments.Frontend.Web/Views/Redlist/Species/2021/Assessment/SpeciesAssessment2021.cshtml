@@ -22,7 +22,8 @@
         {
             PopularName = Model.PopularName,
             ScientificName = Model.ScientificName,
-            ScientificNameAuthor = Model.ScientificNameAuthor
+            ScientificNameAuthor = Model.ScientificNameAuthor,
+            ShowAssessmentOf = Model.Category != "NE" && Model.Category != "NA"
         },
         SpeciesGroupViewModel = new SpeciesGroupViewModel()
         {
@@ -69,6 +70,7 @@
 
     var sideBarContentViewModel = new SideBarContentViewModel()
     {
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         AssessmentYear = Model.AssessmentYear,
         Category = @ViewBag.categories[Model.Category.Substring(0, 2)]["presentationstring"],
         CategoryShort = Model.Category,

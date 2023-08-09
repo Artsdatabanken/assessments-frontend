@@ -345,7 +345,11 @@ namespace Assessments.Frontend.Web.Models
     {
         public AssessmentType AssessmentType { get; set; }
 
+        public ListOrAssessmentView ListOrAssessmentView { get; set; }
+
         public int PageMenuContentId { get; set; }
+
+        public int PageMenuSubContentId { get; set; }
 
         public string PageMenuExpandButtonText { get; set; }
 

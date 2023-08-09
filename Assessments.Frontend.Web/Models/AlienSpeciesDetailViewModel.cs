@@ -58,7 +58,9 @@ namespace Assessments.Frontend.Web.Models
             PageMenuViewModel = new PageMenuViewModel
             {
                 AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
+                ListOrAssessmentView = Infrastructure.Enums.ListOrAssessmentView.Assessment,
                 PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+                PageMenuSubContentId = Constants.AlienSpecies2023SubPageMenuContentId,
                 PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
                 PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
             };

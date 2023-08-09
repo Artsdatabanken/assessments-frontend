@@ -96,24 +96,24 @@
                     <th>Fremtidig (50 år)</th>
                 </tr>
                 <tr>
-                    <td>Kjent  </td>
-                    <td>@Model.AreaOfOccupancyKnown km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Forekomstareal:</b> Kjent  </td>
+                    <td><b class="only_mobile"> I dag:</b> @Model.AreaOfOccupancyKnown km<sup>2</sup></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Antatt lavt anslag</td>
-                    <td>@Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
-                    <td>@Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Forekomstareal:</b> Antatt lavt anslag</td>
+                    <td><b class="only_mobile"> I dag:</b> @Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Fremtidig (50 år):</b> @Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Antatt beste anslag</td>
-                    <td>@Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
-                    <td>@Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Forekomstareal:</b> Antatt beste anslag</td>
+                    <td><b class="only_mobile"> I dag:</b> @Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Fremtidig (50 år):</b>@Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Antatt høyt anslag</td>
-                    <td>@Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
-                    <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Forekomstareal:</b> Antatt høyt anslag</td>
+                    <td><b class="only_mobile"> I dag:</b> @Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Fremtidig (50 år):</b>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
                 </tr>
             </table>
             <p is-visible="@(!string.IsNullOrEmpty(Model.ArtskartObservationChangesDescription))">@Html.Raw(Model.ArtskartObservationChangesDescription)</p>

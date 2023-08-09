@@ -19,6 +19,7 @@
     }
 }
 @using Assessments.Frontend.Web.Infrastructure.Services
+@using Assessments.Frontend.Web.Infrastructure.Enums
 @inject ArtsdatabankenApiService _artsdatabankenApiService
 
 @{
@@ -53,9 +54,9 @@
             <li>
                 @if (key == "Fremmedartslista 2023")
                 {
-                    <a is-visible="isAlienSpecies2023" class="active-menuitem" asp-controller="AlienSpecies" asp-action="Index">
+                    <a is-visible="isAlienSpecies2023" class="@(Model.ListOrAssessmentView == ListOrAssessmentView.Index ? "active-menuitem" : "")" asp-controller="AlienSpecies" asp-action="Index">
                         <span>@key </span>
-                        <span class="material-icons">keyboard_arrow_right</span>
+                        <span is-visible="Model.ListOrAssessmentView == ListOrAssessmentView.Assessment" class="material-icons">keyboard_arrow_right</span>
                     </a>
                     @if (subMenuItems.Any())
                     {

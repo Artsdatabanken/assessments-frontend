@@ -1,16 +1,13 @@
 @media only screen and (min-width: 941px) {
 
     .sidebarmenu {
-        max-width: 200px;
-        width: 100%;
-        padding: 0;
         max-height: 100vh;
         overflow-y: auto;
     }
 
     .content-placer {
         padding-top: 33px;
-        width: calc(75% + 1996px);
+        width: 75%;
         display: flex;
         flex-wrap: wrap;
     }
@@ -223,4 +220,24 @@ ul {
 
 .expanded_icon {
     white-space: nowrap;
+}
+
+.sidebarmenu li a.active-menuitem {
+    background-color: #f6f6f6;
+}
+
+.sidebarmenu li a.active-menuitem:hover {
+    background-color: lightgrey;
+}
+
+.sidebarmenu li a.active-menuitem span:first-child {
+    color: #4c4a48;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+ul.submenu-list {
+    border-right: 0;
+    padding-right: 0;
+    margin-left: 1em;
 }

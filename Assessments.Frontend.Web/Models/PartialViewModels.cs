@@ -17,13 +17,25 @@ namespace Assessments.Frontend.Web.Models
 
     public class AssessmentPageHeaderViewModel
     {
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
         public string AssessmentArea { get; set; }
 
+        public AlienSpeciesAssessment2023Category Category { get; set; }
+
         public CTaxon[] ConnectedTaxons { get; set; }
+
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
+
+        public int? ParentAssessmentId { get; set; }
+
+        public AlienSpeciesAssessment2023ScientificNameRank ScientificNameRank { get; set; }
 
         public ScientificNameViewModel ScientificNameViewModel { get; set; }
 
         public SpeciesGroupViewModel SpeciesGroupViewModel { get; set; }
+
+        public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
     }
 
     public class BarChart
@@ -161,11 +173,11 @@ namespace Assessments.Frontend.Web.Models
 
     public class IngressViewModel
     {
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
-
-        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public string ListName { get; set; }
 

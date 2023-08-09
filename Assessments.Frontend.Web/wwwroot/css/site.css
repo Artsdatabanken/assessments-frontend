@@ -6,7 +6,10 @@
 h1,
 h2,
 h3,
-body {
+h4,
+body,
+p ,
+span {
     color: #262F31;
 }
 
@@ -534,7 +537,7 @@ button {
 
 .sidebarmenu li a {
     text-decoration: none;
-    color: #4c4a48;
+    color: #262F31;
     height: 100%;
     display: block;
     width: 100%;

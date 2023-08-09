@@ -4,6 +4,20 @@
 @{
     var hasSvalbardStyle =Model.AssessmentArea == "Svalbard";
     var showAssessedTogether = Model.ConnectedTaxons != null && Model.ConnectedTaxons.Length != 0;
+
+    var isNr = Model.Category == AlienSpeciesAssessment2023Category.NR;
+
+    var ingressViewModel = new IngressViewModel()
+    {
+        AlienSpeciesCategory = Model.AlienSpeciesCategory,
+        Category = Model.Category,
+        EvaluationContext = Model.EvaluationContext,
+        ListName = Constants.AlienSpecies2023PageMenuHeaderText,
+        ParentAssessmentId = Model.ParentAssessmentId,
+        SpeciesStatus = Model.SpeciesStatus,
+        Status = Model.SpeciesStatus.DisplayName(),
+        TaxonRank = Model.ScientificNameRank
+    };
 }
 
 <div class="page-header">
@@ -34,4 +48,10 @@
         @Model.AssessmentArea.
         </span>
 </div>
+
+<div is-visible="!isNr">
+    <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel" />
+</div>
+
+
 <hr />

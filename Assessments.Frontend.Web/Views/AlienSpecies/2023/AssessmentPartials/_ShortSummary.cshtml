@@ -1,0 +1,3 @@
+﻿@model AlienSpeciesDetailViewModel
+
+<p>@Helpers.FixSpeciesLevel("{Art}en", Model.Assessment.ScientificName.ScientificNameRank) er vurdert til <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i>. Den har @Model.Assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant() @Constants.xAxisLabel.ToLowerInvariant() og @Model.Assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant() @Constants.yAxisLabel.ToLowerInvariant().</p>

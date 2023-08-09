@@ -335,6 +335,8 @@ namespace Assessments.Frontend.Web.Models
 
         public int PageMenuContentId { get; set; }
 
+        public int PageMenuSubContentId { get; set; }
+
         public string PageMenuExpandButtonText { get; set; }
 
         public string PageMenuHeaderText { get; set; }

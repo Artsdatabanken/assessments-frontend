@@ -1,15 +1,30 @@
 ﻿@model PageMenuViewModel
+
+@functions {
+    private async Task<List<KeyValuePair<string, string>>> GetMenuItems(int menuId)
+    {
+        List<KeyValuePair<string, string>> menuItems = new List<KeyValuePair<string, string>>();
+        if (menuId > 0)
+        {
+            var content =
+                await _artsdatabankenApiService.Get<ArtsdatabankenApiContent>($"Content/{menuId}");
+            if (content != null)
+            {
+                menuItems = content.References
+                    .Select(x => new KeyValuePair<string, string>(x.Heading, $"https://artsdatabanken.no{x.Url}")).ToList();
+            }
+        }
+
+        return menuItems;
+    }
+}
 @using Assessments.Frontend.Web.Infrastructure.Services
 @inject ArtsdatabankenApiService _artsdatabankenApiService
 
 @{
-    var menuItems = new List<KeyValuePair<string, string>>();
-    var content = await _artsdatabankenApiService.Get<ArtsdatabankenApiContent>($"Content/{Model.PageMenuContentId}");
-    if (content != null)
-    {
-        // https://database.artsdatabanken.no/cms/node/314303/edit?destination=node/314304
-        menuItems = content.References.Select(x => new KeyValuePair<string, string>(x.Heading, $"https://artsdatabanken.no{x.Url}")).ToList();
-    }
+    var menuItems = await GetMenuItems(Model.PageMenuContentId);
+    var subMenuItems =  await GetMenuItems(Model.PageMenuSubContentId);
+
     var isRedlist2021 = Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021;
     var isAlienSpecies2023 = Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023;
 }
@@ -26,7 +41,7 @@
                     <span class="material-icons pad-top">keyboard_arrow_right</span>
                 </h3>
             </a>
-            <a is-visible="isAlienSpecies2023" class="menuheaderlink" asp-controller="AlienSpecies" asp-action="Index">
+            <a is-visible="isAlienSpecies2023" class="menuheaderlink" href="https://artsdatabanken.no/fremmedearter">
                 <h3>
                     <span>@Model.PageMenuExpandButtonText</span>
                     <span class="material-icons pad-top">keyboard_arrow_right</span>
@@ -36,10 +51,34 @@
         @foreach (var (key, value) in menuItems)
         {
             <li>
+                @if (key == "Fremmedartslista 2023")
+                {
+                    <a is-visible="isAlienSpecies2023" class="menuheaderlink" asp-controller="AlienSpecies" asp-action="Index">
+                        <span>@key </span>
+                        <span class="material-icons">keyboard_arrow_right</span>
+                    </a>
+                    @if (subMenuItems.Any())
+                    {
+                        <ul>
+                        @foreach (var (skey, svalue) in subMenuItems)
+                        {
+                            <li>
+                                <a href="@svalue">
+                                    <span>@skey </span>
+                                    <span class="material-icons">keyboard_arrow_right</span>
+                                </a>
+                            </li>
+                        }
+                        </ul>                        
+                    }
+                }
+                else
+                {
                 <a href="@value">
                     <span>@key </span>
                     <span class="material-icons">keyboard_arrow_right</span>
                 </a>
+                }
             </li>
         }
     </ul>

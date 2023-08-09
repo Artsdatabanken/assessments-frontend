@@ -298,7 +298,9 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023FirstPublishedYear = "2023";
 
-        public const int AlienSpecies2023PageMenuContentId = 239657; //239645; //239644; //239646;
+        public const int AlienSpecies2023PageMenuContentId = 239657; 
+
+        public const int AlienSpecies2023SubPageMenuContentId = 343208;
 
         public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023";
 

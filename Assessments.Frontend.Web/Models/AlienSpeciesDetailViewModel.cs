@@ -59,6 +59,7 @@ namespace Assessments.Frontend.Web.Models
             {
                 AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
                 PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+                PageMenuSubContentId = Constants.AlienSpecies2023SubPageMenuContentId,
                 PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
                 PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
             };

@@ -584,14 +584,14 @@
                             <th>@Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownAreaCorrected)</th>
                         </tr>
                         <tr>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO.ToString("N0")</td>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr.ToString("N0")</td>
+                            <td><b class="only_mobile"> @Constants.AlienSpeciesTables.ExpansionSpeedAOOColumn1: </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
+                            <td><b class="only_mobile"> @Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownArea): </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO.ToString("N0")</td>
+                            <td><b class="only_mobile"> @Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownAreaCorrected): </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr.ToString("N0")</td>
                         </tr>
                         <tr>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear</td>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOO.ToString("N0")</td>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr.ToString("N0")</td>
+                            <td><b class="only_mobile"> @Constants.AlienSpeciesTables.ExpansionSpeedAOOColumn1: </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear</td>
+                            <td><b class="only_mobile"> @Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownArea): </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOO.ToString("N0")</td>
+                            <td><b class="only_mobile"> @Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownAreaCorrected): </b>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr.ToString("N0")</td>
                         </tr>
                     </table>
                     <p is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedEstimatedIncreaseInAOODescription)">

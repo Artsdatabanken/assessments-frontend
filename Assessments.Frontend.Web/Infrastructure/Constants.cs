@@ -52,7 +52,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string Attachments = "Filvedlegg";
             public static readonly string ImpactedNatureTypes = "Naturtypetilhørighet";
             public static readonly string SpreadWays = "Spredningsmåter";
-            public static readonly string KnowMore = "Vil du vite mer om";
+            public static readonly string KnowMore = "Mer om";
             public static readonly string References = "Referanser";
         }
 

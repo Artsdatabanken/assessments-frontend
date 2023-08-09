@@ -218,6 +218,9 @@
                 <div is-visible="isNr">
                     <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
                 </div>
+                <div is-visible="!isNr">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ShortSummary.cshtml" />
+                </div>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 <div is-visible="!isNr && !isEvaluatedAtAnotherLevel">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>

@@ -12,8 +12,13 @@
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
+        AlienSpeciesCategory = assessment.AlienSpeciesCategory,
         AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
+        Category = assessment.Category,
         ConnectedTaxons = assessment.ConnectedTaxons,
+        EvaluationContext = assessment.EvaluationContext,
+        ParentAssessmentId = assessment.ParentAssessmentId,
+        ScientificNameRank = assessment.ScientificName.ScientificNameRank,
         ScientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = assessment.VernacularName,
@@ -33,7 +38,8 @@
             SpeciesGroupImageUrl = speciesGroupImageUrl,
             SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene",
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
-        }
+        },
+        SpeciesStatus = assessment.SpeciesStatus
     };
 
     var citationViewModel = new CitationForAssessmentViewModel
@@ -209,7 +215,9 @@
                         <partial name="/Views/Shared/_TableOfContents.cshtml" model="Model.PageMenuViewModel.TableOfContentsViewModel" />
                     </div>
                 </div>
-                <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
+                <div is-visible="isNr">
+                    <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
+                </div>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 <div is-visible="!isNr && !isEvaluatedAtAnotherLevel">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>

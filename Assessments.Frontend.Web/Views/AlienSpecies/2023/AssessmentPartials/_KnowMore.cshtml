@@ -83,35 +83,34 @@
                 @GetSpeciesStatusText()
             </p>
             <p>@Html.Raw(Model.Assessment.UncertaintyStatusDescription)</p>
-        </div>
-        <div is-visible="showFirstObservation">
-            <h4>Første observasjon av arten @( isRegionallyAlien ? "der den er regionalt fremmed" : areaText )</h4>
-            <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="big-data-table">
-                <caption class="table-title">
-                    <b>@Constants.AlienSpeciesTables.FirstObsTableTitle</b>
-                    @Constants.AlienSpeciesTables.FirstObsTableDescription 
-                </caption>
-                    <tr>
-                        <th>@Constants.AlienSpeciesTables.FirstObsTableColumn1</th>
-                        <th>@Constants.AlienSpeciesTables.FirstObsTableColumn2</th>
-                        <th>@Html.Raw(@Constants.AlienSpeciesTables.FirstObsTableColumn3)</th>
-                    </tr>
-                    @foreach(var record in Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway)
-                    {
+            <div is-visible="showFirstObservation">
+                <table is-visible="Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway.Count > 0" class="big-data-table">
+                    <caption class="table-title">
+                        <b>@Constants.AlienSpeciesTables.FirstObsTableTitle</b>
+                        @Constants.AlienSpeciesTables.FirstObsTableDescription 
+                    </caption>
                         <tr>
-                            <td>@record.recordType.DisplayName()</td>
-                            <td>@record.year</td>
-                            <td>@( record.isUncertaintyYear ? "Ja" : "Nei" )</td>
+                            <th>@Constants.AlienSpeciesTables.FirstObsTableColumn1</th>
+                            <th>@Constants.AlienSpeciesTables.FirstObsTableColumn2</th>
+                            <th>@Html.Raw(@Constants.AlienSpeciesTables.FirstObsTableColumn3)</th>
                         </tr>
-                    }
-            </table>
-            <p is-visible="!string.IsNullOrEmpty(Model.Assessment.YearsFirstRecord.Description)">
-                @Html.Raw(Model.Assessment.YearsFirstRecord.Description)
-            </p>
-            <p is-visible="!isNrButNotAlienSpecie && Model.Assessment.ArrivedCountryFrom != null && Model.Assessment.ArrivedCountryFrom.Count > 0">
-                @(GetCameToNorwayFrom()) @Model.Assessment.ArrivedCountryFrom.Select(x => x.DisplayName()).JoinAnd(", ", " og ").ToLowerInvariant()
-            </p>
-            <p>@Model.Assessment.ArrivedCountryFromDetails</p>
+                        @foreach(var record in Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway)
+                        {
+                            <tr>
+                                <td>@record.recordType.DisplayName()</td>
+                                <td>@record.year</td>
+                                <td>@( record.isUncertaintyYear ? "Ja" : "Nei" )</td>
+                            </tr>
+                        }
+                </table>
+                <p is-visible="!string.IsNullOrEmpty(Model.Assessment.YearsFirstRecord.Description)">
+                    @Html.Raw(Model.Assessment.YearsFirstRecord.Description)
+                </p>
+                <p is-visible="!isNrButNotAlienSpecie && Model.Assessment.ArrivedCountryFrom != null && Model.Assessment.ArrivedCountryFrom.Count > 0">
+                    @(GetCameToNorwayFrom()) @Model.Assessment.ArrivedCountryFrom.Select(x => x.DisplayName()).JoinAnd(", ", " og ").ToLowerInvariant()
+                </p>
+                <p>@Model.Assessment.ArrivedCountryFromDetails</p>
+            </div>
         </div>
     </div>
     <div is-visible="!isNrButNotAlienSpecie">

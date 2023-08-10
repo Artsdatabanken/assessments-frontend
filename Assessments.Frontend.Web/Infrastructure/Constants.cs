@@ -52,7 +52,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string Attachments = "Filvedlegg";
             public static readonly string ImpactedNatureTypes = "Naturtypetilhørighet";
             public static readonly string SpreadWays = "Spredningsmåter";
-            public static readonly string KnowMore = "Vil du vite mer om";
+            public static readonly string KnowMore = "Mer om";
             public static readonly string References = "Referanser";
         }
 
@@ -298,7 +298,9 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023FirstPublishedYear = "2023";
 
-        public const int AlienSpecies2023PageMenuContentId = 239657; //239645; //239644; //239646;
+        public const int AlienSpecies2023PageMenuContentId = 239657; 
+
+        public const int AlienSpecies2023SubPageMenuContentId = 343208;
 
         public const string AlienSpecies2023PageMenuHeaderText = "Fremmedartslista 2023";
 

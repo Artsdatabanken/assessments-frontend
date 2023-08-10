@@ -10,4 +10,10 @@ namespace Assessments.Frontend.Web.Infrastructure.Enums
         [Display(Name = "Rødlista for arter 2021")]
         RedlistSpecies2021
     }
+
+    public enum ListOrAssessmentView
+    {
+        Index,
+        Assessment
+    }
 }

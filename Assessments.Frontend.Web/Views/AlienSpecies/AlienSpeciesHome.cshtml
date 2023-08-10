@@ -21,11 +21,10 @@
                 <h2>Gjeldende fremmedartsliste</h2>
 
                 <p class="page_section">
-                    <!-- TODO before release: insert dates -->
-                    Gjeldende fremmedartsliste ble lansert xx.xx.xxxx, og vil være den gjeldende fremmedartslista frem til neste revisjon i 2029.
+                    Gjeldende fremmedartsliste ble lansert 11.08.2023, og vil være den gjeldende fremmedartslista frem til neste revisjon i 2029.
                 </p>
                 <p>
-                    <a asp-controller="AlienSpecies" asp-action="Index" class="button primary alien-species" asp-route-RegionallyAlien="Rae">
+                    <a asp-controller="AlienSpecies" asp-action="Index" class="button primary alien-species" asp-route-TaxonRank="tvi">
                         @ViewData["Title"] 2023
                         <span class="material-icons">keyboard_arrow_right</span>
                     </a>
@@ -35,7 +34,7 @@
                 <p class="page_section">
                     <ul>
                         <li>
-                            <a asp-controller="AlienSpecies" asp-action="Index" class="button secondary" asp-route-RegionallyAlien="Rae">
+                            <a asp-controller="AlienSpecies" asp-action="Index" class="button secondary" asp-route-TaxonRank="tvi">
                                 @ViewData["Title"] 2023
                                 <span class="material-icons">keyboard_arrow_right</span>
                             </a>

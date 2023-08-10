@@ -12,13 +12,20 @@
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
+        AlienSpeciesCategory = assessment.AlienSpeciesCategory,
         AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
+        Category = assessment.Category,
+        ConnectedTaxons = assessment.ConnectedTaxons,
+        EvaluationContext = assessment.EvaluationContext,
+        ParentAssessmentId = assessment.ParentAssessmentId,
+        ScientificNameRank = assessment.ScientificName.ScientificNameRank,
         ScientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = assessment.VernacularName,
             ScientificName = assessment.ScientificName.ScientificNameFormatted,
             ScientificNameFormatted = true,
-            ScientificNameAuthor = assessment.ScientificName.ScientificNameAuthor
+            ScientificNameAuthor = assessment.ScientificName.ScientificNameAuthor,
+            ShowAssessmentOf = assessment.Category != AlienSpeciesAssessment2023Category.NR
         },
         SpeciesGroupViewModel = new SpeciesGroupViewModel()
         {
@@ -31,15 +38,16 @@
             SpeciesGroupImageUrl = speciesGroupImageUrl,
             SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene",
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
-        }
+        },
+        SpeciesStatus = assessment.SpeciesStatus
     };
 
     var citationViewModel = new CitationForAssessmentViewModel
     {
-        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {assessment.ScientificName.ScientificNameFormatted} for {assessment.EvaluationContext.DisplayName()}",
+        AssessmentName = $"{assessment.SpeciesGroup}: Vurdering av {assessment.VernacularName} {assessment.ScientificName.ScientificNameFormatted} for {assessment.EvaluationContext.DisplayName()}.",
         AssessmentYear = 2023, // TODO: add year when it comes into model
         ExpertCommittee = assessment.ExpertGroup,
-        FirstPublished = Constants.RedlistSpecies2021FirstPublished,
+        FirstPublished = Constants.AlienSpecies2023FirstPublishedYear,
         HasBackToTopLink = true,
         PublicationText = $"{Constants.AlienSpecies2023PageMenuHeaderText}.  {Constants.Artsdatabanken}.",
         RevisionDate = new DateTime(), // TODO: add if we handle revisions in this list
@@ -207,7 +215,12 @@
                         <partial name="/Views/Shared/_TableOfContents.cshtml" model="Model.PageMenuViewModel.TableOfContentsViewModel" />
                     </div>
                 </div>
-                <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
+                <div is-visible="isNr">
+                    <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel"/>
+                </div>
+                <div is-visible="!isNr">
+                    <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_ShortSummary.cshtml" />
+                </div>
                 <partial name="/Views/Shared/_CategoryDescription.cshtml" model="categoryDescriptionViewModel"/>
                 <div is-visible="!isNr && !isEvaluatedAtAnotherLevel">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrix.cshtml"/>

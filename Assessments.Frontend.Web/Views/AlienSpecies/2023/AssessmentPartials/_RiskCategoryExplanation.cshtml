@@ -25,7 +25,12 @@
     <div class="page_section_header">
         <h2>@Constants.HeadingsNo.RiskCategoryExplanation</h2>
     </div>
-    <p>Artens risikokategori bestemmes av artens skår på to akser, invasjonspotensial (x-aksen) og økologisk effekt (y-aksen).</p>
+    <p>@Constants.criteriaExplanationString <a href="https://artsdatabanken.no/Pages/339785/Risikokategorier_og_kriterier">@Constants.readMoreAboutCriterias</a>.</p>
+
+    <p>@Html.Raw(Constants.xAxisExplanation)</p>
+
+    <p>@Html.Raw(Constants.yAxisExplanation)</p>
+
     <div id="risk_category_explanation">
         <button id="risk_category_explanation_button_1" class="changetab active" onclick="selectTab('risk_category_explanation_button_1', 'risk_category_explanation_tab_block_1' , 'risk_category_explanation' )">Avgjørende kriterier</button>
         <button id="risk_category_explanation_button_2" class="changetab" onclick="selectTab('risk_category_explanation_button_2', 'risk_category_explanation_tab_block_2' , 'risk_category_explanation' )">Øvrige kriterier</button>

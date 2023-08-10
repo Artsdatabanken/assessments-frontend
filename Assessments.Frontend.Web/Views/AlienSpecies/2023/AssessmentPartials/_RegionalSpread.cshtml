@@ -14,7 +14,7 @@
     var isDoorKnockerOrEffectNoRep = isDoorKnocker || isEffectWithoutReproduction;
     var showInteractiveMap = isAlienSpecie && false; // TODO: switch false with has used artskart and downloaded a zip file
     var showCurrentPresenceComment = !string.IsNullOrEmpty(Model.CurrentPresenceComment);
-
+    var showAreaOfOccupancyYearRange = (isAlienSpecie || isRegionallyAlien) && Model.AreaOfOccupancyKnownYearOne != null && Model.AreaOfOccupancyKnownYearTwo != null;
 
     var hasWaterAreas = Model.FreshWaterRegionModel.IsWaterArea;
     var waterRegionsRegionallyAlien = Model.FreshWaterRegionModel.FreshWaterRegions?.Where(x => x.IsIncludedInAssessmentArea == true)?.GroupBy(x => x.WaterRegionName).Select(x => new AlienSpeciesAssessment2023FreshWaterRegion()
@@ -41,7 +41,8 @@
                 FreshWaterNaturalOccurence = waterRegionsNaturalOccurence,
                 MapName = "known_or_assumed_today",
                 MapText = Constants.AlienSpecies2023KnownOrAssumedOccurrence,
-                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true || x.IsAssumedToday == true).ToList()
+                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsKnown == true || x.IsAssumedToday == true).ToList(),
+                ShowLegend = !isDoorKnockerOrEffectNoRep
             };
 
     var isAssumedInFuture = new MapViewModel
@@ -50,7 +51,8 @@
                 FreshWaterNaturalOccurence = waterRegionsNaturalOccurence,
                 MapName = "is_assumed_in_future",
                 MapText = Constants.AlienSpecies2023AssumedInFutureOccurrence,
-                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList()
+                RegionOccurrences = Model.RegionOccurrences.Where(x => x.IsAssumedInFuture == true).ToList(),
+                ShowLegend = isDoorKnockerOrEffectNoRep
             };
 
     var hasKnownOrAssumedOccurrence = knownOrAssumedToday.RegionOccurrences.Count != 0 || isAssumedInFuture.RegionOccurrences.Count != 0;
@@ -78,34 +80,47 @@
     <div id="domestic_spread">
         <div id="show_occurence_area">
             <h3>Forekomstareal</h3>
-            <table class="numbers-table" is-visible="isAlienSpecie || isRegionallyAlien">
+            <p>
+                Forekomstarealet til en @Helpers.FixSpeciesLevel("{art}", Model.NameRank) tilsvarer antallet forekomster (2 km x 2 km ruter) der @Helpers.FixSpeciesLevel("{art}en", Model.NameRank) lever.
+                <a href="https://www.artsdatabanken.no/Pages/342783">Les mer om forekomstareal her.</a>
+            </p>
+            <table class="big-data-table" is-visible="isAlienSpecie || isRegionallyAlien">
+                <caption class="table-title">
+                    <b>@Constants.AlienSpeciesTables.AooTableTitle</b>
+                    @Constants.AlienSpeciesTables.AooTableDescription
+                    @if (showAreaOfOccupancyYearRange)
+                    {
+                        @Constants.AlienSpeciesTables.AooTableDescription2
+                    }@Model.AreaOfOccupancyKnownYearOne til @Model.AreaOfOccupancyKnownYearTwo.
+                </caption>
                 <tr>
                     <th>Forekomstareal</th>
                     <th>I dag </th>
-                    <th>Fremtidig (50 år) </th>
+                    <th>Fremtidig (50 år)</th>
                 </tr>
                 <tr>
-                    <td>Kjent  </td>
-                    <td>@Model.AreaOfOccupancyKnown km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Forekomstareal:</b> Kjent  </td>
+                    <td><b class="only_mobile"> I dag:</b> @Model.AreaOfOccupancyKnown km<sup>2</sup></td>
                     <td></td>
                 </tr>
-
                 <tr>
-                    <td>Antatt lavt anslag</td>
-                    <td>@Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
-                    <td>@Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Forekomstareal:</b> Antatt lavt anslag</td>
+                    <td><b class="only_mobile"> I dag:</b> @Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Fremtidig (50 år):</b> @Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Antatt beste anslag</td>
-                    <td>@Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
-                    <td>@Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Forekomstareal:</b> Antatt beste anslag</td>
+                    <td><b class="only_mobile"> I dag:</b> @Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Fremtidig (50 år):</b>@Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Antatt høyt anslag</td>
-                    <td>@Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
-                    <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Forekomstareal:</b> Antatt høyt anslag</td>
+                    <td><b class="only_mobile"> I dag:</b> @Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
+                    <td><b class="only_mobile"> Fremtidig (50 år):</b>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
                 </tr>
             </table>
+
+            <p is-visible="@(!string.IsNullOrEmpty(Model.ArtskartObservationChangesDescription))">@Html.Raw(Model.ArtskartObservationChangesDescription)</p>
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
@@ -125,55 +140,62 @@
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_MapWaterAreas.cshtml" model="isAssumedInFuture" />
                 </div>
             </div>
-            <table class="numbers-table" is-visible="isDoorKnockerOrEffectNoRep">
+
+            <table class="big-data-table" is-visible="isDoorKnockerOrEffectNoRep">
+                <caption class="table-title">
+                    <b>@Constants.AlienSpeciesTables.AooTableTitle</b>
+                    @Constants.AlienSpeciesTables.AooDoorknockersTableDescription
+                </caption>
                 <tr>
-                    <th>Antatt i løpet av en periode på 10 år</th>
-                    <th>Antall forekomster fra én introduksjon  </th>
-                    <th>Antall ytterligere introduksjoner til norsk natur </th>
-                    <th>Forekomstareal etter 10 år </th>
+                    <th>@Constants.AlienSpeciesTables.AooTableColumn1</th>
+                    <th>@Constants.AlienSpeciesTables.AooDoorknockersTableColumn2</th>
+                    <th>@Constants.AlienSpeciesTables.AooDoorknockersTableColumn3</th>
+                    <th>@Constants.AlienSpeciesTables.AooDoorknockersTableColumn4</th>
                 </tr>
                 <tr>
-                    <td>Lavt anslag</td>
-                    <td>@Model.RiskAssessmentOccurrences1Low </td>
-                    <td>@Model.RiskAssessmentIntroductionsLow </td>
-                    <td>@Model.AreaOfOccupancyFutureLow  km<sup>2</sup></td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooTableColumn1:</b>@Constants.AlienSpeciesTables.LowRow</td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn2:</b>@Model.RiskAssessmentOccurrences1Low </td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn3:</b>@Model.RiskAssessmentIntroductionsLow </td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn4:</b>@Model.AreaOfOccupancyFutureLow  km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Beste anslag</td>
-                    <td>@Model.RiskAssessmentOccurrences1Best </td>
-                    <td>@Model.RiskAssessmentIntroductionsBest </td>
-                    <td>@Model.AreaOfOccupancyFutureBest  km<sup>2</sup></td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooTableColumn1:</b>@Constants.AlienSpeciesTables.AverageRow</td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn2:</b>@Model.RiskAssessmentOccurrences1Best </td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn3:</b>@Model.RiskAssessmentIntroductionsBest </td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn4:</b>@Model.AreaOfOccupancyFutureBest  km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Høyt anslag</td>
-                    <td>@Model.RiskAssessmentOccurrences1High </td>
-                    <td>@Model.RiskAssessmentIntroductionsHigh </td>
-                    <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooTableColumn1:</b>@Constants.AlienSpeciesTables.HighRow</td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn2:</b>@Model.RiskAssessmentOccurrences1High </td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn3:</b>@Model.RiskAssessmentIntroductionsHigh </td>
+                    <td><b class="only_mobile"> @Constants.AlienSpeciesTables.AooDoorknockersTableColumn4:</b>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
                 </tr>
             </table>
+
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isDoorKnocker || isEffectWithoutReproduction)">Andel av antatt forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isDoorKnockerOrEffectNoRep">
                 <h3>Regionvis utbredelse</h3>
+                <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>
                 <div is-visible="!Model.IsSvalbard && hasKnownOrAssumedOccurrence" class="map N">
                     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_Map2018.cshtml" model="isAssumedInFuture" />
                 </div>
-                <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>
             </div>
             <div is-visible="showCurrentPresenceComment">
+                <br/>
                 <p>
                     @Html.Raw(Model.CurrentPresenceComment)
                 </p>
             </div>
             <div is-visible="isRegionallyAlien">
-                <table class="numbers-table">
+                <table class="big-data-table">
                     <caption class="table-title">Vannregioner hvor arten har enten kjent utbredelse, antatt utbredelse i dag eller antatt utbredelse om 50 år.</caption>
                     <tbody>
                         <tr>
-                            <td>Vannregion</td>
-                            <td is-visible="hasWaterAreas">Vannområde</td>
-                            <td>Kjent utbredelse</td>
-                            <td>Antatt utbredelse i dag</td>
-                            <td>Antatt utbredelse om 50 år</td>
+                            <th>Vannregion</th>
+                            <th is-visible="hasWaterAreas">Vannområde</th>
+                            <th>Kjent utbredelse</th>
+                            <th>Antatt utbredelse i dag</th>
+                            <th>Antatt utbredelse om 50 år</th>
                         </tr>
                         @foreach (var waterRegion in waterRegionsRegionallyAlien)
                         {
@@ -190,34 +212,34 @@
                                     <span class="collapse_water_area water-area-no-js">Alle vannområder</span>
                                 </td>
                                 <td>
-                                    <span is-visible="waterRegion.IsKnown"><span class="material-icons success">done</span>Ja</span>
-                                    <span is-visible="!waterRegion.IsKnown"><span class="material-icons error">close</span>Nei</span>
+                                    <span is-visible="waterRegion.IsKnown"><b class="only_mobile">Kjent utbredelse:</b><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsKnown"><b class="only_mobile">Kjent utbredelse:</b><span class="material-icons error">close</span>Nei</span>
                                 </td>
                                 <td>
-                                    <span is-visible="waterRegion.IsAssumedToday"><span class="material-icons success">done</span>Ja</span>
-                                    <span is-visible="!waterRegion.IsAssumedToday"><span class="material-icons error">close</span>Nei</span>
+                                    <span is-visible="waterRegion.IsAssumedToday"><b class="only_mobile">Antatt utbredelse i dag:</b><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsAssumedToday"><b class="only_mobile">Antatt utbredelse i dag:</b><span class="material-icons error">close</span>Nei</span>
                                 </td>
                                 <td>
-                                    <span is-visible="waterRegion.IsAssumedInFuture"><span class="material-icons success">done</span>Ja</span>
-                                    <span is-visible="!waterRegion.IsAssumedInFuture"><span class="material-icons error">close</span>Nei</span>
+                                    <span is-visible="waterRegion.IsAssumedInFuture"><b class="only_mobile">Antatt utbredelse om 50 år:</b><span class="material-icons success">done</span>Ja</span>
+                                    <span is-visible="!waterRegion.IsAssumedInFuture"><b class="only_mobile">Antatt utbredelse om 50 år:</b><span class="material-icons error">close</span>Nei</span>
                                 </td>
                             </tr>
                             foreach (var waterArea in waterRegion.WaterAreas)
                             {
                                 <tr class="@waterRegion.WaterRegionName.Replace(" ", "_") water-area">
                                     <td>@waterArea.WaterRegionName</td>
-                                    <td>@waterArea.Name</td>
+                                    <td><b class="only_mobile">Vannområde:</b>@waterArea.Name</td>
                                     <td>
-                                        <span is-visible="waterArea.IsKnown"><span class="material-icons success">done</span>Ja</span>
-                                        <span is-visible="!waterArea.IsKnown"><span class="material-icons error">close</span>Nei</span>
+                                        <span is-visible="waterArea.IsKnown"><b class="only_mobile">Kjent utbredelse:</b><span class="material-icons success">done</span>Ja</span>
+                                        <span is-visible="!waterArea.IsKnown"><b class="only_mobile">Kjent utbredelse:</b><span class="material-icons error">close</span>Nei</span>
                                     </td>
                                     <td>
-                                        <span is-visible="waterArea.IsAssumedToday"><span class="material-icons success">done</span>Ja</span>
-                                        <span is-visible="!waterArea.IsAssumedToday"><span class="material-icons error">close</span>Nei</span>
+                                        <span is-visible="waterArea.IsAssumedToday"><b class="only_mobile">Antatt utbredelse i dag:</b><span class="material-icons success">done</span>Ja</span>
+                                        <span is-visible="!waterArea.IsAssumedToday"><b class="only_mobile">Antatt utbredelse i dag:</b><span class="material-icons error">close</span>Nei</span>
                                     </td>
                                     <td>
-                                        <span is-visible="waterArea.IsAssumedInFuture"><span class="material-icons success">done</span>Ja</span>
-                                        <span is-visible="!waterArea.IsAssumedInFuture"><span class="material-icons error">close</span>Nei</span>
+                                        <span is-visible="waterArea.IsAssumedInFuture"><b class="only_mobile">Antatt utbredelse om 50 år:</b><span class="material-icons success">done</span>Ja</span>
+                                        <span is-visible="!waterArea.IsAssumedInFuture"><b class="only_mobile">Antatt utbredelse om 50 år:</b><span class="material-icons error">close</span>Nei</span>
                                     </td>
                                 </tr>
                             }

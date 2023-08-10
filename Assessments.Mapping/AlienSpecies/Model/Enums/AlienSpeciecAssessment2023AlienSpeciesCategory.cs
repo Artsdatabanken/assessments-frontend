@@ -28,10 +28,13 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Etablert per år 1800")]
         UncertainBefore1800,
 
+        [Display(Name = "Regionalt fremmed og etablert per år 1800")]
+        RegionallyAlienEstablishedBefore1800,
+
         [Display(Name = "Tidligere feilbestemt")]
         MisIdentified,
 
-        [Display(Name = "Ikke vurdert fordi det foreligger separate vurderinger av infraspesifikke taksa")]
+        [Display(Name = "Foreligger separate vurderinger av infraspesifikke taksa")]
         AllSubTaxaAssessedSeparately,
 
         [Display(Name = "Utenfor avgrensningen")]

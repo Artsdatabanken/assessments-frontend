@@ -16,9 +16,6 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Landform")]
         LandformThreatned,
 
-        [Display(Name = "Marint dypvann")]
-        MarineDeepWaterThreatned,
-
         [Display(Name = "Marint gruntvann")]
         MarineWaterThreatned,
 

@@ -37,6 +37,28 @@
 }
 
 <div class="map-box-container regionally_alien">
+    <div is-visible="Model.ShowLegend">
+        <table class="map-legend">
+            <tr is-visible="Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence">
+                <td class="indicator is_known_today"></td>
+                <td>Kjent utbredelse</td>
+            </tr>
+            <tr>
+                <td class="indicator is_assumed"></td>
+                <td>Antatt utbredelse</td>
+            </tr>
+            <tr>
+                <td class="indicator no_occurrence"></td>
+                <td>@(Model.MapText == Constants.AlienSpecies2023AssumedInFutureOccurrence ? "Ikke antatt utbredelse" : "Ikke kjent eller antatt utbredelse")</td>
+            </tr>
+            <tr>
+                <td class="indicator not_evaluated"></td>
+                <td>Naturlig utbredelse</td>
+            </tr>
+        </table>
+        <br/>
+    </div>
+
     <svg viewBox="0 0 800 600">
         <g class="land">
             <path d="m 390.78,415.79 c 0.24263,1.79231 -2.78867,4.09345 -5.19,2.27 -1.40644,1.32822 0.16875,3.67108 -1.8,1.32 -1.20474,-1.7832 -5.9884,-4.42733 -4.58,0.09 -0.0734,2.31813 5.07697,7.06981 1.57,7.61 -1.34648,-1.02985 -1.82537,-3.73654 -3.15,-3.34 -0.0851,-3.3498 -2.86255,-6.91754 -5.07,-3.31 -2.12784,3.23121 5.83463,7.23499 1.68,8.65 0.0601,3.59209 0.60803,6.08588 3.17,7.18 -0.0142,2.55908 2.17616,3.90136 0.26,6.12 3.20492,3.07302 1.90412,7.80653 5.6,10.03 0.33848,2.32073 -0.0212,3.35651 1.05,5.89 -1.39559,3.04893 3.34596,4.12535 4.17,5.01 1.66165,2.80823 -2.16542,2.75333 -1.16,4.88 -3.38481,1.75067 0.82702,5.30987 1.75,7.33 4.63138,2.60273 11.89655,0.7904 12.88,-5.38 2.57422,-4.35962 -4.53597,-1.25269 -3.23,-5.64 -0.35458,-1.93319 -3.96243,-2.02062 -3.93,-3.78 -2.59049,-4.09576 -2.44695,-10.66369 -5.85,-14.19 -1.68294,-1.11004 -2.44348,-3.76891 -3.21,-5.33 1.81018,-1.01174 3.74886,-0.64394 3.52,-3.33 -2.47852,-3.80585 1.41145,-6.67743 1.27,-10.39 2.6518,1.69845 4.68548,0.29202 1.57,-1.88 4.30994,1.85829 -0.70587,-7.56573 -1.32,-9.81 z"
@@ -518,24 +540,7 @@
         </g>
     </svg>
 
-    <ul class="map-legend">
-        <li is-visible="Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence">
-            <span>Kjent utberedelse</span>
-            <span class="indicator is_known_today"></span>
-        </li>
-        <li>
-            <span>Antatt utberedelse</span>
-            <span class="indicator is_assumed"></span>
-        </li>
-        <li>
-            <span>@(Model.MapText == Constants.AlienSpecies2023AssumedInFutureOccurrence ? "Ikke antatt utbredelse" : "Ikke kjent eller antatt utbredelse")</span>
-            <span class="indicator no_occurrence"></span>
-        </li>
-        <li>
-            <span>Naturlig utbredelse</span>
-            <span class="indicator not_evaluated"></span>
-        </li>
-    </ul>
+    
 
     <div class="map-description">
         <b>@Model.MapText</b><br />

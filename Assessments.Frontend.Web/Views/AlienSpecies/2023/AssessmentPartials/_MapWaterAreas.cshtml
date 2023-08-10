@@ -37,6 +37,27 @@
 }
 
 <div class="map-box-container regionally_alien">
+    <div is-visible="Model.ShowLegend">
+        <table class="map-legend">
+            <tr is-visible="Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence">
+                <td>Kjent utbredelse</td>
+                <td class="indicator is_known_today"></td>
+            </tr>
+            <tr>
+                <td>Antatt utbredelse</td>
+                <td class="indicator is_assumed"></td>
+            </tr>
+            <tr>
+                <td>@(Model.MapText == Constants.AlienSpecies2023AssumedInFutureOccurrence ? "Ikke antatt utbredelse" : "Ikke kjent eller antatt utbredelse")</td>
+                <td class="indicator no_occurrence"></td>
+            </tr>
+            <tr>
+                <td>Naturlig utbredelse</td>
+                <td class="indicator not_evaluated"></td>
+            </tr>
+        </table>
+        <br/>
+    </div>
 
     <svg  viewBox="0 0 800 600">
         <g id="g941">
@@ -967,26 +988,6 @@
             </g>
         </g>
     </svg>
-
-
-    <ul class="map-legend">
-        <li is-visible="Model.MapText == Constants.AlienSpecies2023KnownOrAssumedOccurrence">
-            <span>Kjent utberedelse</span>
-            <span class="indicator is_known_today"></span>
-        </li>
-        <li>
-            <span>Antatt utberedelse</span>
-            <span class="indicator is_assumed"></span>
-        </li>
-        <li>
-            <span>@(Model.MapText == Constants.AlienSpecies2023AssumedInFutureOccurrence ? "Ikke antatt utbredelse" : "Ikke kjent eller antatt utbredelse")</span>
-            <span class="indicator no_occurrence"></span>
-        </li>
-        <li>
-            <span>Naturlig utbredelse</span>
-            <span class="indicator not_evaluated"></span>
-        </li>
-    </ul>
 
     <div class="map-description">
         <b>@Model.MapText</b><br />

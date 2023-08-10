@@ -1,4 +1,5 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Mapping.AlienSpecies.Source;
 using System.Collections.Generic;
 using static Assessments.Mapping.AlienSpecies.Source.FA4;
 
@@ -36,6 +37,11 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Explanation for why the taxon is evaluated at another taxonomic rank. Free text field.
         /// </summary>
         public string ConnectedToHigherLowerTaxonDescription { get; set; }
+
+        /// <summary>
+        /// An array containing information about the taxons this species is assessed together with. These assessments will share most information, including category.
+        /// </summary>
+        public CTaxon[] ConnectedTaxons { get; set; }
 
         /// <summary>
         /// List including all criteria (A-I), their score and uncertainty
@@ -187,27 +193,27 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Short conclusion/summary of the impact assessment. Free text field
         /// </summary>
-        public string RiskAssessmentCriteriaDocumentation { get; set; }
+        public string CriteriaDocumentation { get; set; }
 
         /// <summary>
         /// Description of the species' distribution in Norway. Free text field
         /// </summary>
-        public string RiskAssessmentCriteriaDocumentationDomesticSpread { get; set; }
+        public string CriteriaDocumentationDomesticSpread { get; set; }
 
         /// <summary>
         /// Description and documentation of the species' ecological effects. Free text field
         /// </summary>
-        public string RiskAssessmentCriteriaDocumentationEcoEffect { get; set; }
+        public string CriteriaDocumentationEcoEffect { get; set; }
 
         /// <summary>
         /// Description and documentation of the species' invasion potential. Free text field
         /// </summary>
-        public string RiskAssessmentCriteriaDocumentationInvasionPotential { get; set; }
+        public string CriteriaDocumentationInvasionPotential { get; set; }
 
         /// <summary>
         /// Description of relevant aspects of taxonomy, the species life history and ecology. Free text field
         /// </summary>
-        public string RiskAssessmentCriteriaDocumentationSpeciesStatus { get; set; }
+        public string CriteriaDocumentationSpeciesStatus { get; set; }
 
         /// <summary>
         /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 
@@ -267,7 +273,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Low estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
         /// </summary>
-        public int RiskAssessmentAOOfutureLow { get; set; }
+        public int AOOfutureLow { get; set; }
 
         /// <summary>
         /// Best estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
@@ -277,7 +283,17 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// High estimate of area of occupancy (AOO) in  10 (doorknockers) to 50 (alien species that reproduce unaided now) years from now. 
         /// </summary>
-        public int RiskAssessmentAOOfutureHigh { get; set; }
+        public int AOOfutureHigh { get; set; }
+
+        /// <summary>
+        /// Period where the occurrence area is measured in. This is the start year.
+        /// </summary>
+        public int AOOknownYearOne { get; set; }
+
+        /// <summary>
+        /// Period where the occurrence area is measured in. This is the end year.
+        /// </summary>
+        public int AOOknownYearTwo { get; set; }
 
         /// <summary>
         /// The reasoning or assumptions behind future area of occupancy and regional distribution. 
@@ -287,32 +303,32 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// Number of occurrences stemming from a single introduction event 10 years after the introduction took place (low estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
-        public int? RiskAssessmentOccurrences1Low { get; set; }
+        public int? Occurrences1Low { get; set; }
 
         /// <summary>
         /// Number of occurrences stemming from a single introduction event 10 years after the introduction took place (best estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
-        public int? RiskAssessmentOccurrences1Best { get; set; }
+        public int? Occurrences1Best { get; set; }
 
         /// <summary>
         /// Number of occurrences stemming from a single introduction event 10 years after the introduction took place (high estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
-        public int? RiskAssessmentOccurrences1High { get; set; }
+        public int? Occurrences1High { get; set; }
 
         /// <summary>
         /// Number of introductions (minus one) during a 10 years period (low estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
-        public int? RiskAssessmentIntroductionsLow { get; set; }
+        public int? IntroductionsLow { get; set; }
 
         /// <summary>
         /// Number of introductions (minus one) during a 10 years period (best estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
-        public int? RiskAssessmentIntroductionsBest { get; set; }
+        public int? IntroductionsBest { get; set; }
 
         /// <summary>
         /// Number of introductions (minus one) during a 10 years period (high estimate). Used to estimate future AOO for doorknockers. 
         /// </summary>
-        public int? RiskAssessmentIntroductionsHigh { get; set; }
+        public int? IntroductionsHigh { get; set; }
 
         /// <summary>
         /// The available methods to estimate the population lifetime of a species (or its likelihood of extinction) in Norway.
@@ -658,5 +674,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Regional nature variation (bioclimatic zones and sections in the arctic)
         /// </summary>
         public List<AlienSpeciesAssessment2023ArcticBioClimateZones> ArcticBioClimateZones { get; set; }
+
+        /// <summary>
+        /// Description of occurrences that has been added to or removed from the dataset and why
+        /// </summary>
+        public string ArtskartObservationChangesDescription { get; set; }
     }
 }

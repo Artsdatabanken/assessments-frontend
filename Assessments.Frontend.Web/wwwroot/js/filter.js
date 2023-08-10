@@ -35,8 +35,7 @@ if (filters) {
         "show_swimp",
         "show_swnat",
         "show_swspr",
-        "show_regionallyalien",
-        "show_rar",
+        "show_taxonrank",
         "show_nta",
         "show_ntn",
     ];
@@ -105,7 +104,6 @@ if (filters) {
     }
 
     function startup() {
-        scrollToPreviousPosition();
         // Remove no javascript tag, making js-availiable styling apply
         if (document.getElementById("open_filter")) {
             document.getElementById("open_filter").classList.remove("no_js");
@@ -123,6 +121,7 @@ if (filters) {
             handleFirstTime();
         }
         initialCollapsibleCheck();
+        scrollToPreviousPosition();
     }
 
     // EVENTS 

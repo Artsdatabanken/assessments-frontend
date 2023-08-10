@@ -13,6 +13,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Artsdatabanken</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Chivo">
     <link rel="stylesheet" href="https://design.artsdatabanken.no/style/style-reset.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://design.artsdatabanken.no/style/layout.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://design.artsdatabanken.no/style/header-footer.css" asp-append-version="true" />
@@ -32,6 +33,7 @@
     <link rel="stylesheet" href="~/css/buttons-and-chips.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/map.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="~/js/cookies.js" asp-append-version="true"></script>
     <script src="https://design.artsdatabanken.no/script/header.js"></script>
     <script src="https://design.artsdatabanken.no/script/footer.js"></script>
@@ -47,15 +49,16 @@
 
                 @RenderBody()
                 <script src="~/js/site.js" asp-append-version="true"></script>
+                <script src="~/js/collapse.js" asp-append-version="true"></script>
                 <script src="~/js/filter.js" asp-append-version="true"></script>
                 <script src="~/js/search.js" asp-append-version="true"></script>
                 <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
                 <script src="~/js/toggleStatView.js" asp-append-version="true"></script>
                 <script src="~/js/assessmentTabs.js" asp-append-version="true"></script>
-                <script src="~/js/collapse.js" asp-append-version="true"></script>
                 <script src="~/js/themes.js" asp-append-version="true"></script>
                 <script src="~/js/tableCollapse.js" asp-append-version="true"></script>
                 <script src="~/js/tableOfContents.js" asp-append-version="true"></script>
+                <script src="~/js/speciesImages.js" asp-append-version="true"></script>
                 @await RenderSectionAsync("Scripts", required: false)
             </div>
 

@@ -1,8 +1,10 @@
 using Assessments.Frontend.Web.Infrastructure.Enums;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
+using Assessments.Mapping.AlienSpecies.Source;
 using System;
 using System.Collections.Generic;
+using X.PagedList;
 
 namespace Assessments.Frontend.Web.Models
 {
@@ -15,11 +17,43 @@ namespace Assessments.Frontend.Web.Models
 
     public class AssessmentPageHeaderViewModel
     {
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
         public string AssessmentArea { get; set; }
+
+        public AlienSpeciesAssessment2023Category Category { get; set; }
+
+        public CTaxon[] ConnectedTaxons { get; set; }
+
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
+
+        public int? ParentAssessmentId { get; set; }
+
+        public AlienSpeciesAssessment2023ScientificNameRank ScientificNameRank { get; set; }
 
         public ScientificNameViewModel ScientificNameViewModel { get; set; }
 
         public SpeciesGroupViewModel SpeciesGroupViewModel { get; set; }
+
+        public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
+    }
+
+    public class BarChart
+    {
+        public class BarChartData
+        {
+            public string Name { get; set; }
+
+            public string NameShort { get; set; }
+
+            public int Count { get; set; }
+        }
+
+        public string Name { get; set; }
+
+        public List<BarChartData> Data { get; set; } = new();
+
+        public int MaxValue { get; set; }
     }
 
     public class CategoryBarListElement
@@ -139,11 +173,11 @@ namespace Assessments.Frontend.Web.Models
 
     public class IngressViewModel
     {
+        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
+
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
 
         public AlienSpeciesAssessment2023Category Category { get; set; }
-
-        public AlienSpeciecAssessment2023AlienSpeciesCategory AlienSpeciesCategory { get; set; }
 
         public string ListName { get; set; }
 
@@ -174,6 +208,10 @@ namespace Assessments.Frontend.Web.Models
 
         public int? AreaOfOccupancyTotalLow { get; set; }
 
+        public int? AreaOfOccupancyKnownYearOne { get; set; }
+
+        public int? AreaOfOccupancyKnownYearTwo { get; set; }
+
         public AlienSpeciesAssessment2023FreshWaterRegionModel FreshWaterRegionModel { get; set; }
 
         public bool IsSvalbard { get; set; }
@@ -198,6 +236,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string CurrentPresenceComment { get; set; }
 
+        public string ArtskartObservationChangesDescription { get; set; }
+
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
     }
 
@@ -214,6 +254,8 @@ namespace Assessments.Frontend.Web.Models
         public string MapDescription { get; set; }
 
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
+
+        public bool ShowLegend { get; set; } = false;
     }
 
     public class ReferenceViewModel
@@ -246,10 +288,15 @@ namespace Assessments.Frontend.Web.Models
 
         public int ScientificNameId { get; set; }
 
+        public AlienSpeciesAssessment2023ScientificName[] NameHierarchy { get; set; }
+
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
         public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
+
         public bool SpeciesIsOnBannedList { get; set; }
+
+        public AssessmentType AssessmentType { get; set; }
     }
 
     public class TableOfContentsViewModel
@@ -300,7 +347,11 @@ namespace Assessments.Frontend.Web.Models
     {
         public AssessmentType AssessmentType { get; set; }
 
+        public ListOrAssessmentView ListOrAssessmentView { get; set; }
+
         public int PageMenuContentId { get; set; }
+
+        public int PageMenuSubContentId { get; set; }
 
         public string PageMenuExpandButtonText { get; set; }
 
@@ -316,7 +367,10 @@ namespace Assessments.Frontend.Web.Models
         public string ScientificName { get; set; }
 
         public string ScientificNameAuthor { get; set; }
+
         public bool ScientificNameFormatted { get; set; } = false;
+
+        public bool ShowAssessmentOf { get; set; } = true;
     }
 
     public class SidebarContentViewModel
@@ -347,5 +401,41 @@ namespace Assessments.Frontend.Web.Models
         public string SpeciesGroupImageUrl { get; set; }
 
         public string SpeciesGroupInfoUrl { get; set; }
+    }
+
+    public class ListViewViewModel
+    {
+        public class Result
+        {
+            public bool IsDoorKnocker { get; set; } = false;
+
+            public string EvaluationContext { get; set; }
+
+            public bool HasEffectWithoutReproduction { get; set; } = false;
+
+            public string Category { get; set; }
+
+            public string CategoryShort { get; set; }
+
+            public string Degrees { get; set; }
+
+            public int Id { get; set; }
+
+            public string ScientificNameFormatted { get; set; }
+
+            public string SpeciesGroup { get; set; }
+
+            public string SpeciesGroupIconUrl { get; set; }
+
+            public string VernacularName { get; set; }
+        }
+
+        public AssessmentType AssessmentType { get; set; }
+
+        public string NoResultString { get; set; }
+
+        public IPagedList<Result> Results { get; set; }
+
+        public string View { get; set; }
     }
 }

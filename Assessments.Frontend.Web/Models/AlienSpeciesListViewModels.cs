@@ -91,17 +91,22 @@ namespace Assessments.Frontend.Web.Models
 
     public class AlienSpeciesStatistics2023
     {
-        // These are temporary and taken from redlist2021. Alien species might need other statistics
-        public Dictionary<string, int> Categories { get; set; }
+        public BarChart DecisiveCriteria { get; set; }
 
-        public Dictionary<string, int> Criteria { get; set; }
+        public BarChart RiskCategories { get; set; }
 
-        public Dictionary<string, int> Habitat { get; set; }
+        public List<List<int>> RiskMatrix { get; set; }
 
-        public Dictionary<string, int> ImpactFactors { get; set; }
+        public BarChart SpeciesGroups { get; set; }
 
-        public Dictionary<string, int> Region { get; set; }
+        public BarChart MajorNatureTypesEffect { get; set; }
 
-        public List<string> RegionNames { get; set; }
+        public List<BarChart> NatureTypesEffect { get; set; }
+
+        public BarChart SpreadWays { get; set; }
+
+        public List<BarChart> SpreadWaysIntroduction { get; set; }
+
+        public List<BarChart> EstablishmentClass { get; set; }
     }
 }

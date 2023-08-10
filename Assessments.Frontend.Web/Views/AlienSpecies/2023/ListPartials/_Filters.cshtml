@@ -9,6 +9,10 @@
 @{
     ViewData["EnableExport"] = !Options.Value.AlienSpecies2023.IsHearing;
 
+    var startHit = Model.Results.PageNumber * 25 - 24;
+    var endHit = startHit + @Model.Results.Count - 1;
+    var totalCount = Model.Results.TotalItemCount.ToString("N0");
+
     var AllAreas = Areas.AlienSpecies2023Areas;
     var AllCategories = Categories.AlienSpecies2023Categories;
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
@@ -157,7 +161,6 @@
 <div class="empty_filters">
     <p class="hit_count_text">
         <span class="searchstring">
-            @FormatNumeric(Model.Results.TotalItemCount.ToString()) treff
             @if (GetActiveSelectionCount(Model) != 0
 || !string.IsNullOrEmpty(GetActiveSelection(Model)))
             {
@@ -207,6 +210,8 @@
 
 <!-- CONTROL BUTTONS and toggles-->
 <div class="controls">
+    <span class="desktop_hide hit-counter">Viser treff @startHit - @endHit av @totalCount</span>
+    <span class="desktop_hide">Sorter etter: </span>
     <div class="list_control_buttons">
         <button class="toggle_filter only_mobile list_actions no_js" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
             @if (GetActiveSelectionCount(Model) != 0)
@@ -218,6 +223,8 @@
 
         @if (Model.View != "stat")
         {
+            <span class="mobile_hide hit-counter">Viser @startHit til @endHit av totalt @totalCount treff.</span>
+            <span class="mobile_hide">Sorter etter: </span>
             <select asp-for="SortBy" id="sort_results" class="sort_by list_actions" onchange="this.form.submit()">
                 <option value="@nameof(AlienSpeciesAssessment2023.ScientificName)">Artsnavn</option>
                 <option value="@nameof(AlienSpeciesAssessment2023.VernacularName)">Populærnavn</option>
@@ -245,11 +252,11 @@
                                     MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories);
                                     MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials);
                                     MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects);
+                                    MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias);
+                                    MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged);
                                     MakeFilterGroup(nameof(Model.GeographicVariations), Model.GeographicVariations, AllGeographicVariation);
                                     MakeFilterGroup(nameof(Model.ClimateEffects), Model.ClimateEffects, AllClimateEffects);
-                                    MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias);
                                     MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus);
-                                    MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged);
                                     MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies);
                                     MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
                                     MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);

@@ -288,6 +288,8 @@ namespace Assessments.Frontend.Web.Models
 
         public int ScientificNameId { get; set; }
 
+        public AlienSpeciesAssessment2023ScientificName[] NameHierarchy { get; set; }
+
         public SideBarPreviousAssessment[] PreviousAssessments { get; set; }
 
         public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }

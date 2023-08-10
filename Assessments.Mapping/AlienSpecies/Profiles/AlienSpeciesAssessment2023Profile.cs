@@ -30,11 +30,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.ClimateEffectsEcoEffect, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffects(src.Category, src.Criteria, "eco", src.RiskAssessment)))
                 .ForMember(dest => dest.ClimateEffectsDocumentation, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetClimateEffectsDoc(src.Category, src.Criteria, src.RiskAssessment, src.RiskAssessment.ClimateEffectsDocumentation)))
                 .ForMember(dest => dest.SpeciesGroup, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetSpeciesGroup(src.TaxonHierarcy)))
-                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentation.StripUnwantedHtml()))
-                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentationSpeciesStatus, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationSpeciesStatus.StripUnwantedHtml()))
-                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentationDomesticSpread, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationDomesticSpread.StripUnwantedHtml()))
-                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentationEcoEffect, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationEcoEffect.StripUnwantedHtml()))
-                .ForMember(dest => dest.RiskAssessmentCriteriaDocumentationInvasionPotential, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationInvationPotential.StripUnwantedHtml()))
+                .ForMember(dest => dest.CriteriaDocumentation, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentation.StripUnwantedHtml()))
+                .ForMember(dest => dest.CriteriaDocumentationSpeciesStatus, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationSpeciesStatus.StripUnwantedHtml()))
+                .ForMember(dest => dest.CriteriaDocumentationDomesticSpread, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationDomesticSpread.StripUnwantedHtml()))
+                .ForMember(dest => dest.CriteriaDocumentationEcoEffect, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationEcoEffect.StripUnwantedHtml()))
+                .ForMember(dest => dest.CriteriaDocumentationInvasionPotential, opt => opt.MapFrom(src => src.RiskAssessment.CriteriaDocumentationInvationPotential.StripUnwantedHtml()))
                 .ForMember(dest => dest.UncertaintyStatusDescription, opt => opt.MapFrom(src => src.UncertainityStatusDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.HasIndoorProduction, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetHasIndoorProduction(src.IndoorProduktion)))
                 .ForMember(dest => dest.SpreadIndoorFurtherInfo, opt => opt.MapFrom(src => src.SpreadIndoorFurtherInfo.StripUnwantedHtml()))
@@ -68,36 +68,38 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.RiskAssessment.AOOtotalHighInput);
                 })
                 .ForMember(dest => dest.AlienSpeciesDescription, opt => opt.MapFrom(src => src.IsAlien.StripUnwantedHtml()))
-                .ForMember(dest => dest.RiskAssessmentAOOfutureLow, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "low")))
+                .ForMember(dest => dest.AOOfutureLow, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "low")))
                 .ForMember(dest => dest.AOOfutureBest, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "best")))
-                .ForMember(dest => dest.RiskAssessmentAOOfutureHigh, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "high")))
+                .ForMember(dest => dest.AOOfutureHigh, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetAOOfuture(src, src.RiskAssessment, "high")))
+                .ForMember(dest => dest.AOOknownYearOne, opt => opt.MapFrom(src => src.RiskAssessment.AOOendyear1))
+                .ForMember(dest => dest.AOOknownYearTwo, opt => opt.MapFrom(src => src.RiskAssessment.AOOendyear2))
                 .ForMember(dest => dest.CurrentPresenceComment, opt => opt.MapFrom(src => src.CurrentPresenceComment.StripUnwantedHtml()))
-                .ForMember(dest => dest.RiskAssessmentOccurrences1Low, opt =>
+                .ForMember(dest => dest.Occurrences1Low, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => src.RiskAssessment.Occurrences1Low);
                 })
-                .ForMember(dest => dest.RiskAssessmentOccurrences1Best, opt =>
+                .ForMember(dest => dest.Occurrences1Best, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => src.RiskAssessment.Occurrences1Best);
                 })
-                .ForMember(dest => dest.RiskAssessmentOccurrences1High, opt =>
+                .ForMember(dest => dest.Occurrences1High, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => src.RiskAssessment.Occurrences1High);
                 })
-                .ForMember(dest => dest.RiskAssessmentIntroductionsLow, opt =>
+                .ForMember(dest => dest.IntroductionsLow, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsLow(src.RiskAssessment));
                 })
-                .ForMember(dest => dest.RiskAssessmentIntroductionsBest, opt =>
+                .ForMember(dest => dest.IntroductionsBest, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => src.RiskAssessment.IntroductionsBest);
                 })
-                .ForMember(dest => dest.RiskAssessmentIntroductionsHigh, opt =>
+                .ForMember(dest => dest.IntroductionsHigh, opt =>
                 {
                     opt.PreCondition(src => src.AssessmentConclusion == "AssessedDoorknocker");
                     opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.IntroductionsHigh(src.RiskAssessment));
@@ -110,7 +112,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.RegionOccurrences, opt =>
                 {
                     opt.PreCondition(src => new[] { "AlienSpecie", "DoorKnocker", "EffectWithoutReproduction" }.Any(x => src.AlienSpeciesCategory.Contains(x)));
-                    opt.MapFrom(src => src.Fylkesforekomster.Where(x => x.State2 == 0));
+                    opt.MapFrom(src => src.ExpertGroup.Contains("Svalbard") ? src.Fylkesforekomster.Where(x => x.State2 == 0 && x.Fylke == "Sv") : src.Fylkesforekomster.Where(x => x.State2 == 0 & x.Fylke != "Sv"));
                 })
                 .ForMember(dest => dest.FreshWaterRegionModel, opt =>
                 {
@@ -231,10 +233,15 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.AreaOfOccupancyInStronglyAlteredEcosystems, opt => opt.MapFrom(src => src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.HasValue ? "Value" + src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.ToString() : "Value0"))
                 .ForMember(dest => dest.AllSubTaxaAssessedSeparatelyDescription, opt => opt.MapFrom(src => src.AllSubTaxaAssessedSeparatelyDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.HybridWithoutOwnRiskAssessmentDescription, opt => opt.MapFrom(src => src.IsHybridWithoutOwnRiskAssessmentDescription.StripUnwantedHtml()))
-                .ForMember(dest => dest.SpeciesStatus, opt => opt.PreCondition(src => src.SpeciesStatus is not null))
+                .ForMember(dest => dest.SpeciesStatus, opt => opt.PreCondition(src => src.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie.ToString() && src.SpeciesStatus is not null))
                 .ForMember(dest => dest.CoastLineSections, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CoastLineSections.Any(x => x.Skagerrak || x.None || x.OpenCoastLine)))
                 .ForMember(dest => dest.CurrentBioClimateZones, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CurrentBioClimateZones.Any(x => x.StrongOceanic || x.ClearOceanic || x.WeakOceanic || x.TransferSection || x.WeakContinental) && src.Terrestrial))
                 .ForMember(dest => dest.ArcticBioClimateZones, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.ArcticBioClimateZones.Any(x => x.WeakOceanic || x.TransferSection || x.WeakContinental || x.ClearContinental)))
+                .ForMember(dest => dest.ArtskartObservationChangesDescription, opt =>
+                {
+                    opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() || src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien.ToString());
+                    opt.MapFrom(src => src.ArtskartManuellKommentar.StripUnwantedHtml());
+                })
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

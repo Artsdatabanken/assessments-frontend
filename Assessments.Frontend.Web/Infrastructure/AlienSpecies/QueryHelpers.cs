@@ -3,6 +3,7 @@ using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
@@ -78,19 +79,48 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return query;
         }
 
-        private static IQueryable<AlienSpeciesAssessment2023> ApplySearch(string searchString, IQueryable<AlienSpeciesAssessment2023> query)
+        public static IQueryable<AlienSpeciesAssessment2023> ApplySearch(string searchString, IQueryable<AlienSpeciesAssessment2023> query)
         {
+            // Searching for a specific taxonomic rank
+            var rankIndexAt = searchString.IndexOf('(');
+            var rankIndexEnd = searchString.IndexOf(')');
+            var rank = String.Empty;
+            if (rankIndexAt > 0 && rankIndexEnd > 0)
+            {
+                rank = searchString.Substring(rankIndexAt + 1, rankIndexEnd - 1 - rankIndexAt);
+                if (rank.Length > 2)
+                {
+                    rank = rank[0].ToString().ToUpperInvariant() + rank[1..].ToLowerInvariant();
+                }
+                searchString = searchString[..rankIndexAt].Trim().ToLowerInvariant();
+            }
+
+            // If taxonomic rank is not valid, the normal search will be used instead
+            if (!string.IsNullOrEmpty(rank))
+            {
+                if (Constants.TaxonCategoriesNbToEn.TryGetValue(rank, out string rankValue))
+                {
+                    if (Enum.TryParse(typeof(AlienSpeciesAssessment2023ScientificNameRank), rankValue, true, out var newRank))
+                    {
+                        AlienSpeciesAssessment2023ScientificNameRank rankEnum = (AlienSpeciesAssessment2023ScientificNameRank)newRank;
+                        return query.Where(x => x.NameHiearchy.Any(y => y.ScientificNameRank == rankEnum && y.ScientificName.ToLowerInvariant() == searchString));
+                    }
+                }
+            }
+
+            // Normal search
+            searchString = searchString.Trim().ToLowerInvariant();
             var containsSubSpecies = query.Where(x =>
                 !string.IsNullOrEmpty(x.VernacularName) &&
-                x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())).Select(x => x.ScientificName.ScientificName).ToArray();
+                x.VernacularName.ToLowerInvariant().Contains(searchString)).Select(x => x.ScientificName.ScientificName).ToArray();
 
             return query.Where(x =>
-                x.ScientificName.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
+                x.ScientificName.ScientificName.ToLowerInvariant().Contains(searchString) ||
                 containsSubSpecies.Any(hit => x.ScientificName.ScientificName.Contains(hit)) || // Search on species also includes sub species
                 !string.IsNullOrEmpty(x.VernacularName) &&
-                x.VernacularName.ToLowerInvariant().Contains(searchString.ToLowerInvariant()) ||
-                x.NameHiearchy.Any(x => x.ScientificName.ToLowerInvariant().Contains(searchString.ToLowerInvariant())) ||
-                x.SpeciesGroup.ToLowerInvariant().Contains(searchString.ToLowerInvariant()));
+                x.VernacularName.ToLowerInvariant().Contains(searchString) ||
+                x.NameHiearchy.Any(x => x.ScientificName.ToLowerInvariant().Contains(searchString)) ||
+                x.SpeciesGroup.ToLowerInvariant().Contains(searchString));
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplyCategoryChange(string[] changes, IQueryable<AlienSpeciesAssessment2023> query)
@@ -109,8 +139,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 {
                     nameof(CategoryChangeEnum.ccvf) => query.Where(x => (x.PreviousAssessments.Count == 0 || x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category == AlienSpeciesAssessment2023Category.NR)) && x.Category != AlienSpeciesAssessment2023Category.NR),
                     nameof(CategoryChangeEnum.ccsk) => query.Where(x => x.PreviousAssessments.Count > 0 && x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category == y.Category)),
-                    nameof(CategoryChangeEnum.ccre) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(realChange))),
-                    nameof(CategoryChangeEnum.ccnk) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(newInformation))),
+                    nameof(CategoryChangeEnum.ccnk) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && (x.ReasonForChangeOfCategory.Contains(newInformation) || x.ReasonForChangeOfCategory.Contains(realChange)))),
                     nameof(CategoryChangeEnum.ccnt) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(newInterpretation))),
                     nameof(CategoryChangeEnum.ccea) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(changedCriteria))),
                     nameof(CategoryChangeEnum.ccet) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(changedCriteriaInterpretation))),
@@ -205,6 +234,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 {
                     nameof(TaxonRank.TaxonRankEnum.tva) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
                     nameof(TaxonRank.TaxonRankEnum.tvi) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
+                    nameof(TaxonRank.TaxonRankEnum.tth) => query.Where(x => x.ScientificName.ScientificName.Contains('×')),
                     _ => isInt ? query.Where(x => ((int)x.ScientificName.ScientificNameRank) == result) : null
                 };
                 if (assessments != null)
@@ -300,8 +330,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 {
                     assessments = regionFilter switch
                     {
-                        nameof(RegionallyAlien.RegionallyAlienEnum.Rae) => query.Where(x => x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien),
-                        nameof(RegionallyAlien.RegionallyAlienEnum.Rai) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien),
+                        nameof(RegionallyAlien.RegionallyAlienEnum.Rae) => query.Where(x => x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlienEstablishedBefore1800),
+                        nameof(RegionallyAlien.RegionallyAlienEnum.Rai) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlienEstablishedBefore1800),
                         _ => null
                     };
                 }

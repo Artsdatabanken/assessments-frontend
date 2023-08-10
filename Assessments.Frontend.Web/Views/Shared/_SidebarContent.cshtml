@@ -1,13 +1,28 @@
 ﻿@model SideBarContentViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums;
+
 @{
     string urlSafeScientificName = Model.ScientificName.Replace(" ", "%20");
     string taxon_url = "https://artsdatabanken.no/taxon/" + urlSafeScientificName + "/" + Model.ScientificNameId;
+
+    bool ShowRegulationElement()
+    {
+        if (Model.NameHierarchy == null)
+            return true;
+
+        if (Model.Category == AlienSpeciesAssessment2023Category.NR.DisplayName())
+            return false;
+
+        var hideForGenuses = new string[] { "Abies", "Picea", "Larix", "Pinus" };
+
+        return Model.NameHierarchy.FirstOrDefault(x => x.ScientificNameRank == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ScientificNameRank.Genus && hideForGenuses.Contains(x.ScientificName)) == null;
+    }
 }
 
 <div class="sidebar_image_info">
     <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden"/>
     <br />
-    <a href="@taxon_url" class="link-styled">
+    <a href="@taxon_url" class="link-styled taxon-page-link">
         Til @Helpers.FixSpeciesLevel("{art}ssiden", Model.TaxonRank)
     </a>
 
@@ -18,15 +33,18 @@
         <partial name="/Views/Shared/_Links.cshtml" />
     </div>
 
-    <hr is-visible="@Model.SpeciesIsOnBannedList"/>
-    <h3 is-visible="@Model.SpeciesIsOnBannedList">Forskrift om fremmede organismer</h3>
-    <div is-visible="@Model.SpeciesIsOnBannedList">
-
-        <p>Denne arten er oppført på Klima- og miljødepartementets liste over arter det er 
-            forbudt å innføre, sette ut og omsette, jf. § 5 og § 9.
-        </p>
-        <a href="https://lovdata.no/dokument/SF/forskrift/2015-06-19-716#KAPITTEL_9" class="link-styled">
-            Forbudslista hos Lovdata.no <span class="material-icons">open_in_new</span>
-        </a>
+    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 && ShowRegulationElement()">
+        <hr/>
+        <h3>Forskrift om fremmede organismer</h3>
+        <div>
+            <p>
+                Denne @Helpers.FixSpeciesLevel("{art}en", Model.TaxonRank) er <span is-visible="!Model.SpeciesIsOnBannedList"  class="underline">ikke</span> oppført på Klima- og miljødepartementets liste over arter det er
+                forbudt å innføre, sette ut og omsette, jf. § 5 og § 9.
+            </p>
+            <a href="https://lovdata.no/dokument/SF/forskrift/2015-06-19-716#KAPITTEL_9" class="link-styled">
+                Forbudslista hos Lovdata.no <span class="material-icons">open_in_new</span>
+            </a>
+        </div>
     </div>
+    <div class="@("species-images-" + Model.ScientificNameId)"></div>
 </div>

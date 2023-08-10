@@ -26,7 +26,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Tests", "Assessments.Tests\Assessments.Tests.csproj", "{A268EDE0-4060-42E3-90AD-E97558A410E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assessments.Data", "Assessments.Data\Assessments.Data.csproj", "{2B7D3328-8C3A-40ED-9932-66B07374394B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Data", "Assessments.Data\Assessments.Data.csproj", "{2B7D3328-8C3A-40ED-9932-66B07374394B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ML", "ML", "{A4A32A2F-CF27-4FC8-BFD9-63C6116D56E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -64,6 +66,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5A14CBF8-ED21-4DB0-9A21-0ABE1173B3DB} = {5ABC60EC-61F1-4433-888B-46DEB60B2464}
+		{A4A32A2F-CF27-4FC8-BFD9-63C6116D56E7} = {5ABC60EC-61F1-4433-888B-46DEB60B2464}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1A2FDC22-2339-438F-8175-603BF5C7BAAB}

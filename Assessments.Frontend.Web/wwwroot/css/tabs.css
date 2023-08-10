@@ -256,3 +256,42 @@ ul.second {
 .full_list .tabbed_element_container .opened_element .opened_element .opened_element .open_icon {
     display: none;
 }
+
+/* CRITERIA EXPLANATION */
+
+.tabbed_element_container .criteria-summary-list,
+.criteria-summary-list {
+    border: none;
+}
+
+.criteria-summary-list .collapsible,
+.criteria-summary-list .collapsible_header {
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.criteria-summary-list .collapsible_header {
+    padding-left: 8px;
+}
+
+.criteria-summary-list li {
+    border: 0;
+    padding: 0;
+    background: #f0f0f0;
+}
+
+.criteria-summary-list .collapsible {
+    margin: 5px 0;
+}
+
+.criteria-summary-list .collapsible .collapsible_content {
+    padding: 8px;
+    border: 1px solid lightgray;
+    margin-bottom: 10px;
+}
+.tabbed_element_container .criteria-summary-list p{
+    padding:0;
+    margin-top:8px;
+    margin-bottom:8px;
+}

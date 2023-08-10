@@ -77,9 +77,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     public enum CategoryChangeEnum
     {
         // ReSharper disable InconsistentNaming
-        [Display(Name = "Reell endring")]
-        ccre,
-
         [Display(Name = "Ny kunnskap")]
         ccnk,
 
@@ -92,7 +89,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         [Display(Name = "Endret tolkning av retningslinjer")]
         ccet,
 
-        [Display(Name = "Endret status (taksnonomi, til/fra stedegen)")]
+        [Display(Name = "Endret status (taksonomi, til/fra stedegen)")]
         cces,
 
         [Display(Name = "Vurdert for første gang")]
@@ -109,11 +106,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     {
         private static readonly Filter.FilterItem[] DifferFrom2018 =
         {
-            new()
-            {
-                Name = CategoryChangeEnum.ccre.DisplayName(),
-                NameShort = CategoryChangeEnum.ccre.ToString()
-            },
             new()
             {
                 Name = CategoryChangeEnum.ccnk.DisplayName(),
@@ -713,10 +705,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     {
         public enum RegionallyAlienEnum
         {
-            [Display(Name = "Ekskluder regionalt fremmede arter i filtertreff")]
+            [Display(Name = "Ekskluder regionalt fremmede arter")]
             Rae,
 
-            [Display(Name = "Kun vis regionalt fremmede arter i filtertreff")]
+            [Display(Name = "Kun vis regionalt fremmede arter")]
             Rai,
 
             [Display(Name = "Regionvis utbredelse")]
@@ -899,6 +891,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Varietet = 24,
             Form = 25,
 
+            [Display(Name = "Hybrid")]
+            tth,
+
             [Display(Name = "Taksonomisk nivå")]
             ttn,
 
@@ -918,6 +913,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
+            Name = TaxonRankEnum.tth.DisplayName(),
+            NameShort = TaxonRankEnum.tth.ToString()
+            },
+            new()
+            {
                 Name = nameof(TaxonRankEnum.Underart),
                 NameShort = TaxonRankEnum.Underart.GetHashCode().ToString()
             },
@@ -930,7 +930,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
             Name = nameof(TaxonRankEnum.Form),
             NameShort = TaxonRankEnum.Form.GetHashCode().ToString()
-            }
+            },
         };
 
         public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanksFilters =
@@ -1080,7 +1080,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Storkrepser",
                 NameShort = "sst",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/storkrepser",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Storkrepser.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Malacostraca)
             },
             new()
@@ -1088,7 +1088,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Bladfotinger",
                 NameShort = "sbf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bladfotinger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Bladfotinger.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Branchiopoda)
             },
             new()
@@ -1096,7 +1096,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Hoppekreps",
                 NameShort = "sho",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/copepoda",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Copepoda.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Copepoda)
             },
             new()
@@ -1104,7 +1104,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Rankefotinger",
                 NameShort = "srf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/thecostraca",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Thecostraca.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Thecostraca)
             }
         };
@@ -1222,7 +1222,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Kammaneter",
                 NameShort = "ska",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Stormaneter.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Ctenophora)
             },
             new()
@@ -1230,7 +1230,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Name = "Kappedyr",
                 NameShort = "skd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Kammaneter.svg",
+                ImageUrl = "https://design.artsdatabanken.no/icons/Sekkdyr.svg",
                 Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Ascidiacea)}, {nameof(AlienSpeciesAssessment2023SpeciesGroups.Tunicata)}"
             },
             new()
@@ -1503,7 +1503,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Filters = AlienSpecies2023SpeciesStatusFilters,
             FilterDescription = "",
             FilterButtonName = "etableringsklassefiltre",
-            FilterButtonText = "Etableringsklasse i dag"
+            FilterButtonText = "Etableringsstatus i dag"
         };
     }
 

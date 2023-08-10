@@ -3,11 +3,15 @@
 <div class="page_section_header">
     <h2 id="@nameof(Constants.HeadingsNo.Attachments)">@Constants.HeadingsNo.Attachments</h2>
 </div>
-<table class="numbers-table align-normal">
+<table class="big-data-table">
+    <caption class="table-title">
+        <b>@Constants.AlienSpeciesTables.AttachmentsTableTitle</b>
+        @Constants.AlienSpeciesTables.AttachmentsTableDescription 
+    </caption>
     <tr>
-        <td><b>Filnavn</b></td>
-        <td><b>Beskrivelse</b></td>
-        <td><b>Lenke for nedlasting</b></td>
+        <th>@Constants.AlienSpeciesTables.AttachmentsTableColumn1</th>
+        <th>@Constants.AlienSpeciesTables.AttachmentsTableColumn2</th>
+        <th>@Constants.AlienSpeciesTables.AttachmentsTableColumn3</th>
     </tr>
     @foreach (var attachment in Model.Attachments)
     {

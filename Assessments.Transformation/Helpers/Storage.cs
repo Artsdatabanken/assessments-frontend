@@ -56,6 +56,16 @@ namespace Assessments.Transformation.Helpers
                 await using var stream = new MemoryStream(value);
                 await blobClient.UploadAsync(stream, overwrite: true);
             }
+            else
+            {
+                var prop = await blobClient.GetPropertiesAsync();
+                if (prop.Value.ContentLength != value.Length)
+                {
+                    // endret!
+                    await using var stream = new MemoryStream(value);
+                    await blobClient.UploadAsync(stream, overwrite: true);
+                }
+            }
         }
     }
 }

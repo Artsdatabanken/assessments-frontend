@@ -36,7 +36,6 @@
 /* GRAPHIC ELEMENT FOR CATEGORY */
 .graphic_element.material-icons,
 .graphic_element {
-    font-family: "roboto condensed";
     display: inline-block;
     border-radius: 2px;
     padding: 15px;
@@ -241,7 +240,7 @@ li.region p {
 }
 
 .habitat_element p, .habitat_element a {
-    color: black;
+    color: #262F31;
     font-size: 8pt;
 }
 
@@ -279,7 +278,7 @@ span.material-icons.less {
 /* EXPERT Assessment */
 .expert_Assessment h3 {
     font-size: 12pt;
-    color: black;
+    color: #262F31;
     font-family: inherit;
     font-weight: bold;
     margin: auto;
@@ -376,7 +375,7 @@ no_distribution {
 }
 
 .regionlist.legend .region span{
-    color: black;
+    color: #262F31;
 }
 
 /* MOBILE SIZE: 550px til 650px  */
@@ -720,7 +719,6 @@ span.area i {
 
 .full_list_title,
 .summary_title {
-    font-family: 'Roboto Condensed', sans-serif;
     font-size: 14pt;
     padding-bottom: 10px;
 
@@ -772,6 +770,10 @@ span.area i {
     padding: 8px;
 }
 
+.collapsible_header_letter {
+    color: grey;
+}
+
 .expanded .collapsible_header {
     border-bottom: 1px solid lightgrey;
 }
@@ -781,18 +783,31 @@ span.area i {
     border-color: white;
 }
 
+.collapsible_header button:not(:hover),
+.collapsible_header button {
+    background: #ddd;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
 .darktheme .collapsible_header button:not(:hover),
 .collapsible_header button {
     background: none;
     border: 2px solid transparent;
-    border-radius: 50%;
-    font-size: 24px;
-    margin: 0;
+    border-radius: 20px;
+    margin-bottom: 5px;
+}
+
+.collapsed_icon {
+    white-space: nowrap;
 }
 
 .collapsible_header button .material-icons {
     font-size: inherit;
-    vertical-align: middle;
+    font-size: 24px;
 }
 
 /* OVERRIDE P STYLING */
@@ -831,6 +846,7 @@ span.area i {
     border: 1px solid grey;
     width: 100%;
     table-layout: fixed;
+    margin-bottom: 20px;
 }
 
 .darktheme .big-data-table {
@@ -841,6 +857,7 @@ span.area i {
 .big-data-table td {
     padding: 8px;
     text-align: left;
+    font-size: 16px;
 }
 
 .big-data-table th:first-letter {
@@ -857,9 +874,12 @@ span.area i {
     hyphens: auto;
 }
 
+.big-data-table tr:last-child td {
+    border-bottom: 1px solid grey;
+}
+
 .big-data-table th {
     border-color: grey;
-    font-size: 14px;
 }
 
 @media only screen and (max-width: 750px) {
@@ -885,7 +905,7 @@ span.area i {
     }
 
     .big-data-table td:first-child {
-        background: #5e3063;
+        background: #4c4a48;
         color: white;
     }
 
@@ -904,10 +924,6 @@ span.area i {
 
     .big-data-table td:first-child .only_mobile{
        color:white;
-    }
-
-    .big-data-table ul{
-        margin-left:15px;
     }
 
     .big-data-table tr {
@@ -992,10 +1008,22 @@ table caption.table-title {
     display: flex;
     align-items: center;
     width: fit-content;
-    padding: 6px;
-    border: 1px solid #000;
-    border-radius: 2px;
+    padding: 10px;
+    border: 1px solid #0283A1;
+    border-radius: 50px;
     background: #fff;
+}
+
+.table-of-contents-small-screen-button:focus {
+    background: #F6F6F6;
+    color: #005B72;
+    border-color: #005B72;
+}
+
+.table-of-contents-small-screen-button:active {
+    background: #005B72;
+    color: #FFFFFF;
+    border-color: #005B72;
 }
 
 .table-of-contents-small-screen-button-hide {
@@ -1067,12 +1095,11 @@ table caption.table-title {
 
 .table-of-contents-big-screen h3 {
     font-weight: normal;
-    font-family: "Roboto Condensed", sans-serif;
     color: #4c4a48;
     font-size: 22.5px;
 }
 
-.water-area-hide,
+tr.water-area-hide,
 .collapse_water_area.water-area-hide,
 .water-area-hide.material-icons {
     display: none;
@@ -1101,4 +1128,27 @@ table caption.table-title {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+@media only screen and (max-width: 750px) {
+    .water-area {
+        margin-top: -8px;
+    }
+
+    .water-area td:first-child {
+        display: none;
+    }
+
+    .water-area td:nth-child(2) {
+        background: rgba(128, 128, 128,0.6)
+    }
+
+    .water-area td:nth-child(2) b {
+        color: #262F31;
+    }
+
+    .collapse_water_area button {
+        background: #555;
+        color: white;
+    }
 }

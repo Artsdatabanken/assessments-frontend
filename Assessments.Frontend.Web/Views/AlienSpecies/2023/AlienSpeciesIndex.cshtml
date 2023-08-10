@@ -1,8 +1,4 @@
 ﻿@model AlienSpeciesListViewModel
-@using Assessments.Shared.Options
-@using Microsoft.Extensions.Options
-
-@inject IOptions<ApplicationOptions> Options
 
 @{
     CitationForListViewModel citationViewModel = new CitationForListViewModel
@@ -24,14 +20,14 @@
     PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
     {
         AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
+        ListOrAssessmentView = Assessments.Frontend.Web.Infrastructure.Enums.ListOrAssessmentView.Index,
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
+        PageMenuSubContentId = Constants.AlienSpecies2023SubPageMenuContentId,
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
     };
 
     ViewData["Title"] = "Fremmedartslista 2023";
-
-    var enableCitation = !Options.Value.AlienSpecies2023.IsHearing;
 }
 
 <div class="pagecontainer">
@@ -54,9 +50,7 @@
                 <partial name="/Views/AlienSpecies/2023/ListPartials/_Filters.cshtml" />
             </form>
 
-            <div is-visible="enableCitation">
-                <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel"/>
-            </div>
+            <partial name="/Views/Shared/_CitationForList.cshtml" model="citationViewModel"/>
         </div>
     </div>
 </div>

@@ -194,14 +194,6 @@ ul {
     white-space: nowrap;
 }
 
-.sidebarmenu li a.active-menuitem {
-    background-color: #f6f6f6;
-}
-
-.sidebarmenu li a.active-menuitem:hover {
-    background-color: lightgrey;
-}
-
 .sidebarmenu li a.active-menuitem span:first-child {
     color: #4c4a48;
     font-weight: 700;

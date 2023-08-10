@@ -1005,3 +1005,12 @@ a,
 footer a {
     color: #017590;
 }
+
+.sidebarmenu li a.active-menuitem {
+    background-color: #f5e7d3;
+}
+
+ul a:hover,
+.sidebarmenu li a.active-menuitem:hover {
+    background-color: #f5e7d3;cursor: pointer;
+}

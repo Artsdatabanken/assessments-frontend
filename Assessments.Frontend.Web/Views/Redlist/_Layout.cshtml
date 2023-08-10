@@ -23,7 +23,6 @@
      <link rel="stylesheet" href="~/css/buttons-and-chips.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
     <script src="~/js/cookies.js" asp-append-version="true"></script>
-    <script src="https://design.artsdatabanken.no/script/header.js"></script>
     <script src="https://design.artsdatabanken.no/script/footer.js"></script>
     <meta name="description" content="Norsk rødliste for arter 2021 er en oversikt over arter som har risiko for å dø ut fra Norge. Rødlista er utarbeidet av Artsdatabanken i samarbeid med fageksperter. " />
 
@@ -37,13 +36,14 @@
             <div class="main-content width-adjuster">
 
                 @RenderBody()
-                <script src="~/js/site.js" asp-append-version="true"></script>
-                <script src="~/js/filter.js" asp-append-version="true"></script>
-                <script src="~/js/search.js" asp-append-version="true"></script>
-                <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
-                <script src="~/js/toggleStatView.js" asp-append-version="true"></script>
-                <script src="~/js/assessmentTabs.js" asp-append-version="true"></script>
-                <script src="~/js/themes.js" asp-append-version="true"></script>
+                <script src="~/js/site.js" asp-append-version="true" async></script>
+                <script src="~/js/filter.js" asp-append-version="true" async></script>
+                <script src="~/js/search.js" asp-append-version="true" async></script>
+                <script src="~/js/toggleSwitch.js" asp-append-version="true" async></script>
+                <script src="~/js/toggleStatView.js" asp-append-version="true" async></script>
+                <script src="~/js/assessmentTabs.js" asp-append-version="true" async></script>
+                <script src="~/js/themes.js" asp-append-version="true" async></script>
+                <script src="~/js/header.js" asp-append-version="true" async></script>
                 @await RenderSectionAsync("Scripts", required: false)
             </div>
 

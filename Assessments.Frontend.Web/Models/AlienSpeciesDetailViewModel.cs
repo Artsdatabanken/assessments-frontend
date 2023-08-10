@@ -110,6 +110,7 @@ namespace Assessments.Frontend.Web.Models
                 AssessmentYear = 2023,
                 Category = assessment.Category.DisplayName(),
                 CategoryShort = assessment.Category.ToString(),
+                NameHierarchy = assessment.NameHiearchy,
                 PreviousAssessments = assessment.PreviousAssessments!.Select(x => new SideBarContentViewModel.SideBarPreviousAssessment
                 {
                     Category = x.Category.DisplayName(),

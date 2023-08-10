@@ -595,3 +595,13 @@
 .darktheme .PagedList-pageCountAndLocation.disabled a {
     color: inherit;
 }
+
+@media only screen and (max-width: 750px) {
+    .darktheme .water-area td:nth-child(2) {
+        background: rgba(128, 128, 128,0.2)
+    }
+
+    .darktheme .water-area td:nth-child(2) b {
+        color: white;
+    }
+}

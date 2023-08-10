@@ -8,15 +8,6 @@
     z-index: 13;
 }
 
-.themeselector {
-    position: absolute;
-    top: 0;
-    right: 1px;
-    width: 68px;
-    padding: 0;
-    z-index: 3;
-}
-
 .themeselectordropdown {
     z-index: 13;
     display:none;
@@ -410,11 +401,6 @@
 
 .darktheme .filter_group button {
     border-color: #514f4f;
-}
-
-.darktheme .button.primary,
-.darktheme .main button.primary {
-    border: 1px solid #b372bb;
 }
 
 .darktheme .search_dropdown {

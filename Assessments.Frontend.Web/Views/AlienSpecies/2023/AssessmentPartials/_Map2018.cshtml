@@ -66,7 +66,7 @@
 
                     <span>
                         <br />
-                        <b>Kjent utberedelse</b>
+                        <b>Kjent utbredelse</b>
                         <br />
                         <span is-visible="knownToday.Count == 0">Arten er ikke kjent i noen områder</span>
                         @{
@@ -74,7 +74,7 @@
                         }
                         <br />
                         <br />
-                        <b>Antatt utberedelse</b>
+                        <b>Antatt utbredelse</b>
                         <br />
                         <span is-visible="assumedToday.Count == 0 && knownToday.Count == 0">Det antas at arten ikke finnes i noen områder</span>
                         <span is-visible="assumedToday.Count == 0 && knownToday.Count > 0">Arten er antatt å kun finnes i de kjente områdene</span>
@@ -86,7 +86,7 @@
                 else
                 {
                     makeFormattedList(@Model.RegionOccurrences);
-                    <span is-visible="Model.RegionOccurrences.Count == 0">Det antas ingen utberedelse om 50 år <!-- TODO: Hide map? --></span>
+                    <span is-visible="Model.RegionOccurrences.Count == 0">Det antas ingen utbredelse om 50 år <!-- TODO: Hide map? --></span>
                 }
             }
         </span>
@@ -97,11 +97,11 @@
         <table class="map-legend">
             <tr>
                 <td class="indicator is_known_today"></td>
-                <td>Kjent utberedelse</td>
+                <td>Kjent utbredelse</td>
             </tr>
             <tr>
                 <td class="indicator is_assumed"></td>
-                <td>Antatt utberedelse</td>
+                <td>Antatt utbredelse</td>
             </tr>
             <tr>
                 <td class="indicator no_occurrence"></td>

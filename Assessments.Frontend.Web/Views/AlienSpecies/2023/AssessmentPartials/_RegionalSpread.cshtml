@@ -84,7 +84,8 @@
                 Forekomstarealet til en @Helpers.FixSpeciesLevel("{art}", Model.NameRank) tilsvarer antallet forekomster (2 km x 2 km ruter) der @Helpers.FixSpeciesLevel("{art}en", Model.NameRank) lever.
                 <a href="https://www.artsdatabanken.no/Pages/342783">Les mer om forekomstareal her.</a>
             </p>
-            <table class="big-data-table" is-visible="isAlienSpecie || isRegionallyAlien">
+
+            <table class="big-data-table hideonmobile" is-visible="isAlienSpecie || isRegionallyAlien">
                 <caption class="table-title">
                     <b>@Constants.AlienSpeciesTables.AooTableTitle</b>
                     @Constants.AlienSpeciesTables.AooTableDescription 
@@ -96,26 +97,63 @@
                     <th>Fremtidig (50 år)</th>
                 </tr>
                 <tr>
-                    <td>Kjent  </td>
+                    <td>kjent  </td>
                     <td>@Model.AreaOfOccupancyKnown km<sup>2</sup></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>Antatt lavt anslag</td>
+                    <td>antatt lavt anslag</td>
                     <td>@Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
                     <td>@Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Antatt beste anslag</td>
+                    <td>antatt beste anslag</td>
                     <td>@Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
                     <td>@Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
                 </tr>
                 <tr>
-                    <td>Antatt høyt anslag</td>
+                    <td>antatt høyt anslag</td>
                     <td>@Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
                     <td>@Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
                 </tr>
             </table>
+
+            <table class="big-data-table only_mobile" is-visible="isAlienSpecie || isRegionallyAlien">
+                <caption class="table-title">
+                    <b>@Constants.AlienSpeciesTables.AooTableTitle</b>
+                    @Constants.AlienSpeciesTables.AooTableDescription
+                    @if (showAreaOfOccupancyYearRange)
+                    {
+                        @Constants.AlienSpeciesTables.AooTableDescription2
+                    }@Model.AreaOfOccupancyKnownYearOne til @Model.AreaOfOccupancyKnownYearTwo.
+                </caption>
+                <tr>
+                    <th>Forekomstareal</th>
+                    <th>I dag </th>
+                    <th>Fremtidig (50 år)</th>
+                </tr>
+                <tr>
+                    <td>Kjent</td>
+                    <td>I dag: @Model.AreaOfOccupancyKnown km<sup>2</sup></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Antatt lavt anslag</td>
+                    <td>I dag: @Model.AreaOfOccupancyTotalLow km<sup>2</sup></td>
+                    <td>Fremtidig (50 år): @Model.AreaOfOccupancyFutureLow km<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td>Antatt beste anslag</td>
+                    <td>I dag: @Model.AreaOfOccupancyTotalBest km<sup>2</sup></td>
+                    <td>Fremtidig (50 år): @Model.AreaOfOccupancyFutureBest km<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td>Antatt høyt anslag</td>
+                    <td>I dag: @Model.AreaOfOccupancyTotalHigh km<sup>2</sup></td>
+                    <td>Fremtidig (50 år): @Model.AreaOfOccupancyFutureHigh km<sup>2</sup></td>
+                </tr>
+            </table>
+
             <p is-visible="@(!string.IsNullOrEmpty(Model.ArtskartObservationChangesDescription))">@Html.Raw(Model.ArtskartObservationChangesDescription)</p>
             <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
@@ -181,15 +219,15 @@
                 </p>
             </div>
             <div is-visible="isRegionallyAlien">
-                <table class="numbers-table">
+                <table class="big-data-table">
                     <caption class="table-title">Vannregioner hvor arten har enten kjent utbredelse, antatt utbredelse i dag eller antatt utbredelse om 50 år.</caption>
                     <tbody>
                         <tr>
-                            <td>Vannregion</td>
-                            <td is-visible="hasWaterAreas">Vannområde</td>
-                            <td>Kjent utbredelse</td>
-                            <td>Antatt utbredelse i dag</td>
-                            <td>Antatt utbredelse om 50 år</td>
+                            <th>Vannregion</th>
+                            <th is-visible="hasWaterAreas">Vannområde</th>
+                            <th>Kjent utbredelse</th>
+                            <th>Antatt utbredelse i dag</th>
+                            <th>Antatt utbredelse om 50 år</th>
                         </tr>
                         @foreach (var waterRegion in waterRegionsRegionallyAlien)
                         {

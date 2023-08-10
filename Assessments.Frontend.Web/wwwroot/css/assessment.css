@@ -1103,7 +1103,7 @@ table caption.table-title {
     font-size: 22.5px;
 }
 
-.water-area-hide,
+tr.water-area-hide,
 .collapse_water_area.water-area-hide,
 .water-area-hide.material-icons {
     display: none;
@@ -1132,4 +1132,27 @@ table caption.table-title {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+@media only screen and (max-width: 750px) {
+    .water-area {
+        margin-top: -8px;
+    }
+
+    .water-area td:first-child {
+        display: none;
+    }
+
+    .water-area td:nth-child(2) {
+        background: rgba(128, 128, 128,0.6)
+    }
+
+    .water-area td:nth-child(2) b {
+        color: #262F31;
+    }
+
+    .collapse_water_area button {
+        background: #555;
+        color: white;
+    }
 }

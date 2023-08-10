@@ -182,10 +182,10 @@ button:not(.icon-button).material-icons {
 }
 
 .chips {
-    background: #DEE0E0;
+    background: #f5e7d3;
     width: fit-content;
     max-width: fit-content;
-    border-color: #DEE0E0;
+    border-color: #f5e7d3;
     display: inline-block;
     position: relative;
     padding: 12px 14px;

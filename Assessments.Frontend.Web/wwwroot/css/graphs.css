@@ -284,7 +284,7 @@
 .bar-chart-bar {
     height: 20px;
     margin-right: 5px;
-    background-color: #A6BBCB;
+    background-color: #4b6f79;
 }
 
 .bar-chart-decisive-criteria .bar-chart-bar,
@@ -330,7 +330,7 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    background: #F6F6F6;
+    background: #f5e7d3;
     margin-right: 10px;
 }
 

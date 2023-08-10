@@ -35,7 +35,7 @@ p,
 div,
 span,
 .menuitems {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Chivo', sans-serif;
 }
 
 .heyCookie {
@@ -65,10 +65,10 @@ span,
     https://github.com/Artsdatabanken/grafiskprofil/wiki
 */
 
-
+.main-content,
 .main {
     position: relative;
-    background: #f9f9f9;
+    background: #fff9f0;
 }
 
 h1 {
@@ -354,7 +354,7 @@ button {
     vertical-align: middle;
     touch-action: manipulation;
     cursor: pointer;
-    background: #ddd;
+    background: #f5e7d3;
     color: #262F31;
     border: none;
     display: inline-block;

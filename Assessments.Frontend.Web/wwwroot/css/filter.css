@@ -45,8 +45,8 @@
 .controls button.active {
     border: 1px solid #7f726b;
     color: black;
-    background: white;
-    border-bottom-color: white;
+    background: #fff9f0;
+    border-bottom-color: #fff9f0;
     border-left-color: lightgray;
 }
 
@@ -66,7 +66,7 @@
     width: 150px;
     max-width: 150px;
     height: 30px;
-    background: white;
+    background: #fff9f0;
     border: 1px solid black;
     text-align: center;
     margin: 0;
@@ -388,7 +388,7 @@ button.list_header {
 
     #show_all_insects {
         display: inline-block;
-        white-space: nowrap;
+        #fff9f0-space: nowrap;
     }
 } 
 
@@ -404,7 +404,7 @@ button.list_header {
 }
 
 .filter_group ul {
-    background: #F5F5F5;
+    background: #f5e7d3;
     padding: 5px;
 }
 
@@ -437,7 +437,7 @@ button.list_header {
 
 .filter_group button {
     width: 100%;
-    background: white;
+    background: #fff9f0;
     text-align: left;
     border: 1px solid lightgrey;
     padding: 10px;
@@ -453,7 +453,7 @@ button.list_header {
 .filter_group button:active {
     cursor: pointer;
     background: #7f726b;
-    color:white;
+    color:#fff9f0;
 }
 
 
@@ -466,13 +466,13 @@ button.list_header {
     margin: 0 5px;
     background: #7f726b;
     border-radius: 2px;
-    color: white;
+    color: #fff9f0;
     font-size: 10pt;
     min-width: 22px;
     height: 22px;
     background-clip: padding-box;
     background: #777368;
-    color: white;
+    color: #fff9f0;
     text-align: center;
     height: 20px;
     display: inline-block;
@@ -482,7 +482,7 @@ button.list_header {
 .filter_group button:focus .filternumber,
 .filter_group button:active .filternumber {
     color: #7f726b;
-    background: white;
+    background: #fff9f0;
 }
 
 .filternumber:empty {

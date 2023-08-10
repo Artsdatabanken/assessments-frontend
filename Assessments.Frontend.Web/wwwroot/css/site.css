@@ -3,6 +3,10 @@
     overflow-x: hidden;
 }
 
+body {
+    background: #fff9f0;
+}
+
 h1,
 h2,
 h3,
@@ -35,7 +39,7 @@ p,
 div,
 span,
 .menuitems {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Chivo', sans-serif;
 }
 
 .heyCookie {
@@ -52,11 +56,11 @@ span,
 .darktheme .heyCookie {
     position: fixed;
     width: 100%;
-    background: black;
+    background: #2C2738;
     bottom: 0;
     padding: 10px;
     text-align: center;
-    color: white;
+    color: #fff9f0;
     border-color: #a83333;
 }
 
@@ -65,10 +69,10 @@ span,
     https://github.com/Artsdatabanken/grafiskprofil/wiki
 */
 
-
+.main-content,
 .main {
     position: relative;
-    background: #f9f9f9;
+    background: #fff9f0;
 }
 
 h1 {
@@ -94,7 +98,7 @@ button.menuitems {
 /* PAGE CRUMB*/
 .breadcrumbs li.currentcrumb {
     text-decoration: none;
-    color: grey;
+    color: #555555;
 }
 
 /* TEMPORARY CODE NEEDS TO BE THOUGHT ABOUT*/
@@ -117,16 +121,16 @@ button.menuitems {
 
 .redlistlink {
     background: #8b0000;
-    color: white;
+    color: #fff9f0;
 }
 
 .fremmedartlink {
     background: #5e3063;
-    color: white;
+    color: #fff9f0;
 }
 
 .fremmedartlink img {
-    background: white;
+    background: #fff9f0;
     border-radius: 50%;
 }
 
@@ -281,7 +285,7 @@ option {
         padding: 0;
         border: 1px solid lightgrey;
         padding-bottom: 0;
-        background:white;
+        background:#fff9f0;
     }
 
     .citation {
@@ -354,7 +358,7 @@ button {
     vertical-align: middle;
     touch-action: manipulation;
     cursor: pointer;
-    background: #ddd;
+    background: #f5e7d3;
     color: #262F31;
     border: none;
     display: inline-block;
@@ -389,8 +393,8 @@ button {
     width: 150px;
     max-width: 150px;
     height: 35px;
-    background: white;
-    border: 1px solid black;
+    background: #fff9f0;
+    border: 1px solid #2C2738;
     text-align: center;
     margin: 0;
     margin-right: 0px;
@@ -455,10 +459,10 @@ button {
 
 .main .changetab.active {
     border: 1px solid #7f726b;
-    border-bottom-color: white;
+    border-bottom-color: #fff9f0;
     border-left-color: lightgray;
     color: #262F31;
-    background: white;
+    background: #fff9f0;
 }
 
 .tabbed_element_container {    
@@ -513,7 +517,6 @@ button {
 
 .title_header .tertiary {
     height: 53px;
-    color: white;
     background: transparent;
     border: none;
     margin-right: 0px;
@@ -593,17 +596,11 @@ button {
 
 /* HEADER */
 
-.header {
-    background: #901616;
-}
-
+.menuitems:active, .menuitems:focus, .menuitems:hover,
+.header,
 .header .menuitems {
-    background: #751111;
-}
-
-.menuitems:active, .menuitems:focus, .menuitems:hover {
-    background: #ededed;
-    color: black;
+    background: #fff9f0;
+    color: #2C2738;
 }
 
 .header nav {
@@ -632,7 +629,7 @@ button {
         margin-left: auto;
         margin-right: auto;
         overflow: visible;
-        color: white;
+        color: #fff9f0;
         text-align: center;
         font-size: 20pt;
         height: 50px;
@@ -645,14 +642,15 @@ button {
 
     .title_header {
         width: 100%;
-        background: darkred;
         margin: 0;
         padding: 10px;
-        color: white;
         text-align: center;
         font-size: 20pt;
         position: relative;
-        background-image: linear-gradient(#820404, #931a1a);
+        color: #2C2738;
+        border-bottom: 2px solid #2C2738;
+        margin-top: -2px;
+        border-top: 2px solid #fff9f0;
     }
 
     .title_header {
@@ -726,10 +724,19 @@ button {
     text-transform:lowercase;
 }
 
-.header-logo {
-    box-sizing: border-box;
+.header {
+    height: 100%;
+    border-bottom: 2px solid #2C2738;
 }
 
+.header-logo {
+    box-sizing: border-box;
+    background:transparent;
+}
+
+.header-logo img {
+    width: 100%;
+}
 
 /* FRONT PAGE TITLE AREA */
 
@@ -924,13 +931,13 @@ button {
 }
 #darkmodebutton.darktheme {
     background: transparent;
-    color:black;
+    color:#2C2738;
 }
 
 #darkmodebutton.darktheme:hover,
 .themebutton:hover {
     cursor: pointer;
-    color: black;
+    color: #2C2738;
     background-color: #f5f5f5;
 }
 
@@ -980,4 +987,30 @@ button {
 
 .underline {
     text-decoration: underline;
+}
+
+#navbar-mobile {
+    color: #2C2738
+}
+
+footer {
+    background: #fff9f0;
+    color: #2C2738;
+    border-color: #017590;
+    border-top: 1px solid;
+}
+
+a,
+.breadcrumbs li a,
+footer a {
+    color: #017590;
+}
+
+.sidebarmenu li a.active-menuitem {
+    background-color: #f5e7d3;
+}
+
+ul a:hover,
+.sidebarmenu li a.active-menuitem:hover {
+    background-color: #f5e7d3;cursor: pointer;
 }

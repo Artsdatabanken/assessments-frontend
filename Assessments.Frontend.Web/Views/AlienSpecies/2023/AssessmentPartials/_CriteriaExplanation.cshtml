@@ -584,14 +584,14 @@
                             <th>@Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownAreaCorrected)</th>
                         </tr>
                         <tr>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO.ToString("N0")</td>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr.ToString("N0")</td>
+                            <td><b class="only_mobile"> @Constants.AlienSpeciesTables.ExpansionSpeedAOOColumn1: </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstYear</td>
+                            <td><b class="only_mobile"> @Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownArea): </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOO.ToString("N0")</td>
+                            <td><b class="only_mobile"> @Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownAreaCorrected): </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOFirstAOOCorr.ToString("N0")</td>
                         </tr>
                         <tr>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear</td>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOO.ToString("N0")</td>
-                            <td>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr.ToString("N0")</td>
+                            <td><b class="only_mobile"> @Constants.AlienSpeciesTables.ExpansionSpeedAOOColumn1: </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOLastYear</td>
+                            <td><b class="only_mobile"> @Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownArea): </b> @assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOO.ToString("N0")</td>
+                            <td><b class="only_mobile"> @Html.Raw(@Constants.AlienSpeciesTables.ExpansionSpeedAOOKnownAreaCorrected): </b>@assessment.ExpansionSpeedEstimatedIncreaseInAOOLastAOOCorr.ToString("N0")</td>
                         </tr>
                     </table>
                     <p is-visible="!string.IsNullOrEmpty(assessment.ExpansionSpeedEstimatedIncreaseInAOODescription)">
@@ -649,10 +649,10 @@
                         @foreach (var natureType in assessment.ImpactedNatureTypes)
                         {
                             <tr>
-                                <td>@natureType.Name</td>
-                                <td>@natureType.TimeHorizon.DisplayName()</td>
-                                <td>@natureType.ColonizedArea</td>
-                                <td>
+                                <td><b class="only_mobile"> @Constants.AlienSpeciesTables.NaturetypeNameTableColumn:</b>@natureType.Name</td>
+                                <td><b class="only_mobile"> @Constants.AlienSpeciesTables.TimeHorizonTableColumn:</b>@natureType.TimeHorizon.DisplayName()</td>
+                                <td><b class="only_mobile"> @Helpers.removeLineBreaksForMobile(@Constants.AlienSpeciesTables.ColonizedAreaTableColumn):</b>@natureType.ColonizedArea</td>
+                                <td><b class="only_mobile"> @Helpers.removeLineBreaksForMobile(@Constants.AlienSpeciesTables.BackgroundTableColumn):</b>
                                     <ul>
                                         @foreach (var background in natureType.Background)
                                         {

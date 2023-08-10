@@ -5,19 +5,23 @@ window.addEventListener('load', function () {
 
 window.addEventListener('click', function (e) {
     // Closes dropdown menu when clicking outside it. 
-    if (document.getElementById('headermenu')) {
-        if (!document.getElementById('headermenu').contains(e.target)) {
+    if (document.getElementById('artsdatabanken-navbar-collapse')) {
+        if (!document.getElementById('artsdatabanken-navbar-collapse').contains(e.target)) {
+            const menuButton = document.getElementById("dropdown-header-menu-button");
             if (document.getElementById("dropdown-header-menu")) {
                 document.getElementById("dropdown-header-menu").style.display = "none";
+                menuButton.ariaExpanded = false;
             }
         }
 
         if (e.target.id == "navbar-mobile") {
-            let drop = document.getElementById("headermenu");
-            if (drop.className == "hide") {
-                drop.className = "show"
+            const drop = document.getElementById("artsdatabanken-navbar-collapse");
+            if (drop.classList.contains('open')) {
+                drop.classList.remove('open');
+                menuButton.ariaExpanded = false;
             } else {
-                drop.className = "hide"
+                drop.classList.add('open');
+                menuButton.ariaExpanded = true;
             }
         }
     }
@@ -42,7 +46,9 @@ function getHeaderMenu() {
 
                     const menuButton = document.createElement('button');
                     menuButton.classList.add('dropdown-toggle');
+                    menuButton.id = 'dropdown-header-menu-button';
                     menuButton.ariaHasPopup = true;
+                    menuButton.ariaExpanded = false;
                     menuButton.innerHTML = 'Meny';
                     menuButton.appendChild(menuButtonChevron);
 
@@ -57,8 +63,8 @@ function getHeaderMenu() {
                     menuDiv.appendChild(menuUl);
 
                     try {
-                        document.getElementById('headermenu').appendChild(menuButton);
-                        document.getElementById('headermenu').appendChild(menuDiv);
+                        document.getElementById('artsdatabanken-navbar-collapse').appendChild(menuButton);
+                        document.getElementById('artsdatabanken-navbar-collapse').appendChild(menuDiv);
                     } catch (e) {
                         constole.error('unable to add header menu');
                     }
@@ -74,7 +80,7 @@ function getHeaderMenu() {
                             // Add to page
                             let spacer = document.createElement('div');
                             spacer.className = "englishspacer";
-                            appendData('headermenu', spacer);
+                            appendData('artsdatabanken-navbar-collapse', spacer);
                             return null;
                         }
 
@@ -134,30 +140,26 @@ function getHeaderMenu() {
 
                     menuButton.addEventListener('click', function () {
                         const dropDown = document.getElementById('dropdown-header-menu');
+                        const menuButton = document.getElementById("dropdown-header-menu-button");
+
                         if (dropDown.style.display == 'none') {
                             dropDown.style.display = 'block';
+                            dropDown.classList.add('open');
+                            menuButton.ariaExpanded = true;
                         } else {
                             dropDown.style.display = 'none';
+                            dropDown.classList.remove('open');
+                            menuButton.ariaExpanded = false;
                         }
-                        console.log('hei', dropDown.style.display)
                     });
                 } catch (err) {
-                    console.error("failed at headermenu", err)
+                    console.error("failed at artsdatabanken-navbar-collapse", err)
                 }
             })
-            .catch((err) => {
-                console.error("failed obtaining headermenu")
+            .catch(() => {
+                console.error("failed obtaining artsdatabanken-navbar-collapse")
             })
     } catch {
-        console.error("error in headermenu")
+        console.error("error in artsdatabanken-navbar-collapse")
     }
-}
-
-function $(id) {
-    if (id[0] == ".") {
-        return document.getElementsByClassName(id.substring(1));
-    } else if (id[0] == "#") {
-        return document.getElementById(id.substring(1));
-    }
-    return document.getElementById(id);
 }

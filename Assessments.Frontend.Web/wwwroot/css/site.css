@@ -722,7 +722,8 @@ button {
 }
 
 .header-logo img {
-    width: 100%;
+    width: 280px;
+    float: left;
 }
 
 /* FRONT PAGE TITLE AREA */
@@ -1002,5 +1003,7 @@ ul a:hover,
     background-color: #f5e7d3;cursor: pointer;
 }
 
-
+.width-adjuster {
+    width: 100%;
+}
 

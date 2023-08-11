@@ -1014,3 +1014,74 @@ ul a:hover,
 .sidebarmenu li a.active-menuitem:hover {
     background-color: #f5e7d3;cursor: pointer;
 }
+
+
+
+/* OVERRIDES SOM SKAL FJERNES NÅR VI FÅR FIKSA HEADER ORDENTLIG: */
+
+.header {
+    height: 120px;
+    border-width:1px;
+}
+
+.header-logo {
+    width: 280px;
+    margin-top: 21px;
+    margin-bottom: 31px;
+}
+
+#headermenu> .menuitems:first-child {
+    display: none;
+}
+
+
+@media (max-width: 767px) {
+    .header-logo {
+        display: contents
+    }
+    .header-logo img{
+    width: 209px;
+    margin:20px 0px;
+
+    }
+}
+
+@media only screen and (min-width:767px) and (max-width: 940px) {
+    button.menuitems {
+        margin-top: 14px;
+    }
+
+    .header button.menuitems.themeselector {
+        margin-top: -18px;
+    }
+}
+
+@media only screen and (min-width:941px) {
+    button.menuitems {
+        margin-top: 22px;
+    }    
+}
+
+
+@media only screen and (max-width:940px) {
+
+    .header {
+        height: 120px;
+        border: none;
+    }
+
+    .title_header {
+        border-top: 1px solid #262F31;
+        background: #f5e7d3;
+        border-bottom: none;
+    }
+}
+
+.menuitems {
+    border: none;
+    text-decoration: none;
+    font-family: 'Chivo', sans-serif;
+    padding: 4px 8px;
+    font-size: 16px;
+    border-radius: 20px;
+}

@@ -48,20 +48,20 @@ span,
     bottom: 0;
     padding: 10px;
     text-align: center;
-    background: #c3ebf0;
-    border-top: 1px solid #098293;
-    z-index:12;
+    background: #f5e7d3;
+    border-top: 1px solid #3d3b3a;
+    z-index: 12;
 }
 
 .darktheme .heyCookie {
     position: fixed;
     width: 100%;
-    background: #2C2738;
+    background: #2b2b2b;
     bottom: 0;
     padding: 10px;
     text-align: center;
     color: #fff9f0;
-    border-color: #a83333;
+    border-color: #f5e7d3;
 }
 
 /* 
@@ -394,7 +394,7 @@ button {
     max-width: 150px;
     height: 35px;
     background: #fff9f0;
-    border: 1px solid #2C2738;
+    border: 1px solid #2b2b2b;
     text-align: center;
     margin: 0;
     margin-right: 0px;
@@ -402,16 +402,14 @@ button {
 
 .button.active,
 .main button.active {
-    background: #7f726b;
-    color: #fff;
+    background: #7f726b;   
     border: none;
 }
 
 .button:hover,
 .main button:hover {
-    background: #4c4a48;
-    color: #fff;
     cursor: pointer;
+    opacity:0.9;
 }
 
 .main .closebutton {
@@ -600,7 +598,7 @@ button {
 .header,
 .header .menuitems {
     background: #fff9f0;
-    color: #2C2738;
+    color: #2b2b2b;
 }
 
 .header nav {
@@ -647,8 +645,8 @@ button {
         text-align: center;
         font-size: 20pt;
         position: relative;
-        color: #2C2738;
-        border-bottom: 2px solid #2C2738;
+        color: #2b2b2b;
+        border-bottom: 2px solid #2b2b2b;
         margin-top: -2px;
         border-top: 2px solid #fff9f0;
     }
@@ -726,7 +724,7 @@ button {
 
 .header {
     height: 100%;
-    border-bottom: 2px solid #2C2738;
+    border-bottom: 2px solid #2b2b2b;
 }
 
 .header-logo {
@@ -931,13 +929,13 @@ button {
 }
 #darkmodebutton.darktheme {
     background: transparent;
-    color:#2C2738;
+    color:#2b2b2b;
 }
 
 #darkmodebutton.darktheme:hover,
 .themebutton:hover {
     cursor: pointer;
-    color: #2C2738;
+    color: #2b2b2b;
     background-color: #f5f5f5;
 }
 
@@ -990,12 +988,12 @@ button {
 }
 
 #navbar-mobile {
-    color: #2C2738
+    color: #2b2b2b
 }
 
 footer {
     background: #fff9f0;
-    color: #2C2738;
+    color: #2b2b2b;
     border-color: #017590;
     border-top: 1px solid;
 }
@@ -1013,4 +1011,124 @@ footer a {
 ul a:hover,
 .sidebarmenu li a.active-menuitem:hover {
     background-color: #f5e7d3;cursor: pointer;
+}
+
+/* OVERRIDES SOM SKAL FJERNES NÅR VI FÅR FIKSA HEADER ORDENTLIG: */
+
+.header {
+    height: 120px;
+    border-width:1px;
+}
+
+.header-logo {
+    width: 280px;
+    margin-top: 21px;
+    margin-bottom: 31px;
+}
+
+#headermenu> .menuitems:first-child {
+    display: none;
+}
+
+
+@media (max-width: 767px) {
+    .header-logo {
+        display: contents
+    }
+    .header-logo img{
+    width: 209px;
+    margin:20px 0px;
+
+    }
+}
+
+@media only screen and (min-width:767px) and (max-width: 940px) {
+    button.menuitems {
+        margin-top: 14px;
+    }
+
+    .header button.menuitems.themeselector {
+        margin-top: -18px;
+    }
+}
+
+@media only screen and (min-width:941px) {
+    button.menuitems {
+        margin-top: 22px;
+    }    
+}
+
+
+@media only screen and (max-width:940px) {
+
+    .header {
+        height: 120px;
+        border: none;
+        border-bottom: 1px solid #262F31;
+    }
+
+    .title_header {
+        border-top: none;
+        background: #f5e7d3;
+        border-bottom: none;
+        margin: 8px;
+        margin-bottom: 0;
+        width: calc(100% - 16px)
+    }
+}
+
+.menuitems {
+    border: none;
+    text-decoration: none;
+    font-family: 'Chivo', sans-serif;
+    padding: 4px 8px;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.dropdown li a {
+    color: #262f31;
+}
+.dropdown {
+    background: #fff9f0;
+    border: 1px solid #262f31;
+    color: #262f31;
+}
+
+
+@media only screen and (max-width:768px) {
+    #headermenu {
+        top: 119px;
+        border: 0;
+        border-bottom: 1px solid #262f31
+    }
+
+    #navbar-mobile {
+        display: none;
+    }
+
+    #headermenu.hide {
+        display: block;
+        width: fit-content;
+        top: 0px;
+        margin-top: 31px;
+        border: medium;
+        background: none;
+        right: 41px;
+    }
+
+    .dropdown {
+        position: absolute;
+        left: auto;
+        right: 0px;
+        max-width:calc(100vw - 16px);
+    }
+
+    .menuitems{
+        position:initial
+    }
+}
+
+.darktheme footer a{
+    color:initial;
 }

@@ -47,12 +47,14 @@
 .darktheme .page-link,
 .darktheme .button.primary,
 .darktheme .main button.primary {
-    background: #8f4997;
+    background: #f5e7d3;
+    color: #262F31;
 }
 
 .darktheme .button.primary {
     border: 1px solid #b372bb;
-    background: #8f4997;
+    background: #f5e7d3;
+    color: #262F31;
 }
 
 ul {
@@ -96,6 +98,9 @@ ul {
     margin-left: auto;
 }
 
+.ingress {
+    color: #262F31;
+}
 
 .collapsible {
     margin-top: 0;
@@ -195,7 +200,7 @@ ul {
 }
 
 .sidebarmenu li a.active-menuitem span:first-child {
-    color: #4c4a48;
+    color: #262F31;
     font-weight: 700;
     text-decoration: underline;
 }
@@ -204,4 +209,8 @@ ul.submenu-list {
     border-right: 0;
     padding-right: 0;
     margin-left: 1em;
+}
+
+.title_with_ingress{
+    width:100%
 }

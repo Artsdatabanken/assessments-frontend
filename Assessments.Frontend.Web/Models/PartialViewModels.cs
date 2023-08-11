@@ -21,6 +21,8 @@ namespace Assessments.Frontend.Web.Models
 
         public string AssessmentArea { get; set; }
 
+        public AssessmentType AssessmentType { get; set; }
+
         public AlienSpeciesAssessment2023Category Category { get; set; }
 
         public CTaxon[] ConnectedTaxons { get; set; }

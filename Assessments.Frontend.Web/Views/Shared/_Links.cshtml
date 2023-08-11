@@ -15,7 +15,7 @@
 <h3>Videre lesning</h3>
 
 <ul class="history_list">
-    @foreach (var prev in Model.PreviousAssessments) // tidligere vurderinger
+    @foreach (var prev in Model.PreviousAssessments.Where(x => x.Year != 2012)) // tidligere vurderinger
     {
         <li>
             <a target="_blank" href="@prev.Url" class="link-styled">

@@ -45,8 +45,8 @@
 
     .header .themeselectordropdown,
     #headermenu {
-        background: #680c0c;
-        border-top: 1px solid #a83333;
+        background: #FFF9F0;
+        border: 1px solid #a83333;
     }
 
     .header .themeselector {
@@ -66,7 +66,7 @@
     .header .themeselectordropdown ul ,
     .header .themeselectordropdown li {
         color: white;
-        background: #751111;
+        background: #FFF9F0;
         font-weight:normal;
         margin-top:1px;
     }
@@ -582,8 +582,17 @@
     background: inherit;
 }
 
+.darktheme .sidebarmenu button.button.tertiary {
+    color: #262F31;
+}
+
 .collapsible_header_letter {
     color: grey;
+}
+
+.darktheme .bar-chart-info-box,
+.darktheme .bar-chart-info-box p {
+    color: #262F31;
 }
 
 @media (min-width: 1400px) {
@@ -594,4 +603,14 @@
 
 .darktheme .PagedList-pageCountAndLocation.disabled a {
     color: inherit;
+}
+
+@media only screen and (max-width: 750px) {
+    .darktheme .water-area td:nth-child(2) {
+        background: rgba(128, 128, 128,0.2)
+    }
+
+    .darktheme .water-area td:nth-child(2) b {
+        color: white;
+    }
 }

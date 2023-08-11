@@ -1,7 +1,22 @@
 ﻿@model SideBarContentViewModel
+@using Assessments.Mapping.AlienSpecies.Model.Enums;
+
 @{
     string urlSafeScientificName = Model.ScientificName.Replace(" ", "%20");
     string taxon_url = "https://artsdatabanken.no/taxon/" + urlSafeScientificName + "/" + Model.ScientificNameId;
+
+    bool ShowRegulationElement()
+    {
+        if (Model.NameHierarchy == null)
+            return true;
+
+        if (Model.Category == AlienSpeciesAssessment2023Category.NR.DisplayName())
+            return false;
+
+        var hideForGenuses = new string[] { "Abies", "Picea", "Larix", "Pinus" };
+
+        return Model.NameHierarchy.FirstOrDefault(x => x.ScientificNameRank == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ScientificNameRank.Genus && hideForGenuses.Contains(x.ScientificName)) == null;
+    }
 }
 
 <div class="sidebar_image_info">
@@ -18,7 +33,7 @@
         <partial name="/Views/Shared/_Links.cshtml" />
     </div>
 
-    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023">
+    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 && ShowRegulationElement()">
         <hr/>
         <h3>Forskrift om fremmede organismer</h3>
         <div>

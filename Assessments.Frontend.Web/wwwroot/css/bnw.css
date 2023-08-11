@@ -582,6 +582,10 @@
     background: inherit;
 }
 
+.darktheme .sidebarmenu button.button.tertiary {
+    color: #262F31;
+}
+
 .collapsible_header_letter {
     color: grey;
 }

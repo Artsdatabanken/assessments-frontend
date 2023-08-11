@@ -18,6 +18,7 @@
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
         AssessmentArea = Model.AssessmentArea == "S" ? "Svalbard" : "Norge",
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         ScientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = Model.PopularName,

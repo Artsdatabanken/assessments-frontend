@@ -6,6 +6,7 @@ using Assessments.Shared.Helpers;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -184,76 +185,83 @@ namespace Assessments.Frontend.Web.Controllers
             var name = search.Trim().ToLower();
             var query = await DataRepository.GetSpeciesAssessments();
 
-            var artskartResult = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
-
-            // Remove species not present in 'rødlista for arter'
-            var suggestions = artskartResult.Where(x =>
-                                                    (x.TaxonCategory != Constants.TaxonCategoriesEn.Species &&                          // Not species
-                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&                        // Not subspecies
-                                                    x.TaxonCategory != Constants.TaxonCategoriesEn.Variety) &&                          // Not variety
-                                                    query.Any(y => y.VurdertVitenskapeligNavnHierarki.Contains(x.ScientificName)) ||    // Check if none of the above -> exists in taxonomic rank
-                                                    query.Any(y => y.ScientificNameId == x.ScientificNameId)).ToList();                // or match on scientific name id: exact match on species/subsp./var.
-
-            // Add assessments if they are in redlist, but not in artskart. "Subsp." and "var." are not included in scientific names in artskart.
-            var redlistHits = query.Where(x => x.ScientificName.Trim().ToLower().Contains(name)).ToArray();
-
-            foreach (var hit in redlistHits)
+            try
             {
-                if (suggestions.Any(x => x.ScientificNameId.Equals(hit.ScientificNameId))) continue;
-                suggestions.Add(new ArtskartTaxon
-                {
-                    ScientificNameId = hit.ScientificNameId,
-                    PopularName = hit.PopularName,
-                    MatchedName = hit.ScientificName,
-                    ScientificName = hit.ScientificName,
-                    TaxonCategory = hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.Species) ? Constants.TaxonCategoriesEn.Species :
-                                    hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.SubSpecies) ? Constants.TaxonCategoriesEn.SubSpecies :
-                                    hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.Variety) ? Constants.TaxonCategoriesEn.Variety : 0
-                });
-            }
+                var artskartResult = await _artskartApiService.Get<List<ArtskartTaxon>>($"data/SearchTaxons?maxCount=20&name={name}");
 
-            // Add assessmentIds to species, subspecies and variety
-            foreach (var item in suggestions.Select((hit, i) => new { i, hit }))
-            {
-                if (
-                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Species ||
-                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.SubSpecies ||
-                    item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Variety
-                    )
-                {
-                    var ids = query
-                        .Where(x => x.ScientificNameId == item.hit.ScientificNameId)
-                        .Select(x => new
-                        {
-                            id = x.Id,
-                            area = x.AssessmentArea,
-                            category = x.Category,
-                            speciesGroup = x.SpeciesGroup,
-                            speciesGroupIconUrl = speciesgroupDict[x.SpeciesGroup]["image"],
-                            scientificName = x.ScientificName
-                        })
-                        .ToArray();
+                // Remove species not present in 'rødlista for arter'
+                var suggestions = artskartResult.Where(x =>
+                                                        (x.TaxonCategory != Constants.TaxonCategoriesEn.Species &&                          // Not species
+                                                        x.TaxonCategory != Constants.TaxonCategoriesEn.SubSpecies &&                        // Not subspecies
+                                                        x.TaxonCategory != Constants.TaxonCategoriesEn.Variety) &&                          // Not variety
+                                                        query.Any(y => y.VurdertVitenskapeligNavnHierarki.Contains(x.ScientificName)) ||    // Check if none of the above -> exists in taxonomic rank
+                                                        query.Any(y => y.ScientificNameId == x.ScientificNameId)).ToList();                // or match on scientific name id: exact match on species/subsp./var.
 
-                    item.hit.assessments = ids;
-                    if (ids.Length != 1) continue;
-                    if (item.hit.MatchedName == item.hit.ScientificName)// artskart har ikke underartsepitet o.l. men vi har det her
+                // Add assessments if they are in redlist, but not in artskart. "Subsp." and "var." are not included in scientific names in artskart.
+                var redlistHits = query.Where(x => x.ScientificName.Trim().ToLower().Contains(name)).ToArray();
+
+                foreach (var hit in redlistHits)
+                {
+                    if (suggestions.Any(x => x.ScientificNameId.Equals(hit.ScientificNameId))) continue;
+                    suggestions.Add(new ArtskartTaxon
                     {
-                        item.hit.MatchedName = ids[0].scientificName;
-                    }
-                    item.hit.ScientificName = ids[0].scientificName;
+                        ScientificNameId = hit.ScientificNameId,
+                        PopularName = hit.PopularName,
+                        MatchedName = hit.ScientificName,
+                        ScientificName = hit.ScientificName,
+                        TaxonCategory = hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.Species) ? Constants.TaxonCategoriesEn.Species :
+                                        hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.SubSpecies) ? Constants.TaxonCategoriesEn.SubSpecies :
+                                        hit.TaxonRank == nameof(Constants.TaxonCategoriesEn.Variety) ? Constants.TaxonCategoriesEn.Variety : 0
+                    });
                 }
-            }
 
-            if (artskartResult.Any() && suggestions.Any() != true)
-            {
-                return Json(new List<object>() { new { message = "Her får du treff, men ingen av artene er behandlet i Rødlista for arter 2021" } });
-            }
-            else if (artskartResult.Any() != true && suggestions.Any() != true)
-            {
-                return Json(new List<object>() { new { message = "Her får du ingen treff." } });
-            }
+                // Add assessmentIds to species, subspecies and variety
+                foreach (var item in suggestions.Select((hit, i) => new { i, hit }))
+                {
+                    if (
+                        item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Species ||
+                        item.hit.TaxonCategory == Constants.TaxonCategoriesEn.SubSpecies ||
+                        item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Variety
+                        )
+                    {
+                        var ids = query
+                            .Where(x => x.ScientificNameId == item.hit.ScientificNameId)
+                            .Select(x => new
+                            {
+                                id = x.Id,
+                                area = x.AssessmentArea,
+                                category = x.Category,
+                                speciesGroup = x.SpeciesGroup,
+                                speciesGroupIconUrl = speciesgroupDict[x.SpeciesGroup]["image"],
+                                scientificName = x.ScientificName
+                            })
+                            .ToArray();
 
-            return Json(suggestions);
+                        item.hit.assessments = ids;
+                        if (ids.Length != 1) continue;
+                        if (item.hit.MatchedName == item.hit.ScientificName)// artskart har ikke underartsepitet o.l. men vi har det her
+                        {
+                            item.hit.MatchedName = ids[0].scientificName;
+                        }
+                        item.hit.ScientificName = ids[0].scientificName;
+                    }
+                }
+
+                if (artskartResult.Any() && suggestions.Any() != true)
+                {
+                    return Json(new List<object>() { new { message = "Her får du treff, men ingen av artene er behandlet i Rødlista for arter 2021" } });
+                }
+                else if (artskartResult.Any() != true && suggestions.Any() != true)
+                {
+                    return Json(new List<object>() { new { message = "Her får du ingen treff." } });
+                }
+
+                return Json(suggestions);
+            }
+            catch (Exception e)
+            {
+                return Json(new List<object>() { new { message = "Det oppsto en feil med søkeforslaget. Forsøk å utføre søket i stedet ved å trykke enter eller bruke søkeknappen." } });
+            }
         }
 
         [Route("2021/{id:required}")]

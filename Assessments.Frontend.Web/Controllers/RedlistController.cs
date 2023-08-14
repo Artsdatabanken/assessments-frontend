@@ -179,6 +179,11 @@ namespace Assessments.Frontend.Web.Controllers
         [HttpGet, Route("2021/suggestions")]
         public async Task<IActionResult> Suggestion([FromQueryAttribute] string search)
         {
+            if (string.IsNullOrEmpty(search))
+            {
+                return BadRequest("Søket kan ikke være tomt.");
+            }
+
             var jsonSpeciesGroup = await GetResource("wwwroot/json/speciesgroup.json");
             Dictionary<string, Dictionary<string, string>> speciesgroupDict = jsonSpeciesGroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
 
@@ -260,7 +265,7 @@ namespace Assessments.Frontend.Web.Controllers
             }
             catch (Exception e)
             {
-                return Json(new List<object>() { new { message = "Det oppsto en feil med søkeforslaget. Forsøk å utføre søket i stedet ved å trykke enter eller bruke søkeknappen." } });
+                return Json(new List<object>() { });
             }
         }
 

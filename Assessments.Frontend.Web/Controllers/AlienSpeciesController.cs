@@ -122,7 +122,13 @@ namespace Assessments.Frontend.Web.Controllers
         [HttpGet, Route("2023/suggestions")]
         public async Task<IActionResult> Suggestion([FromQueryAttribute] string search)
         {
+            if (string.IsNullOrEmpty(search))
+            {
+                return BadRequest("Søket kan ikke være tomt.");
+            }
+
             var name = search.Trim().ToLower();
+
             var query = await DataRepository.GetAlienSpeciesAssessments();
 
             // At the moment the artskart hits are used to indicate to the user that there exists taxons with the searched name, but that it may not be present in the alien species list. 
@@ -202,7 +208,7 @@ namespace Assessments.Frontend.Web.Controllers
             }
             catch (Exception e)
             {
-                return Json(new List<object>() { new { message = "En feil oppsto i søkeforslaget. Forsøk å utføre søket ved å trykke på søkeknappen." } });
+                return Json(new List<object>() { });
             }
         }
     }

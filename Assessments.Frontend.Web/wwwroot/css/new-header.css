@@ -19,6 +19,7 @@
     border-bottom: 2px solid #2b2b2b;
     height: 120px;
     border-width: 1px;
+    background: #fff9f0
 }
 
 @media only screen and (max-width:940px) {
@@ -279,3 +280,36 @@ button.dropdown-toggle {
     font-weight: normal;
 }
 
+
+
+/* DARK THEME */
+
+footer a {
+    color: #017590;
+}
+
+.darktheme footer a {
+    color: #99BDC6;
+}
+
+.darktheme button {
+    color: #faf1e4;
+}
+
+.darktheme .footer,
+.darktheme .top,
+.darktheme .center,
+.darktheme .bottom,
+.darktheme .header {
+    background: #262f31;
+    color: #faf1e4;
+    border-color: #faf1e4;
+}
+
+.header-logo {
+    background: #f5e7d3;
+}
+
+.darktheme .header-site-description {
+    color: #2C2738;
+}

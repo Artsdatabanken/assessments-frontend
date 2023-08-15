@@ -230,7 +230,8 @@ button.dropdown-toggle {
 .dropdown li,
 .header-mega-menu li {
     margin: 15px 0;
-    width: 100%
+    width: 100%;
+    text-align: left;
 }
 
 .dropdown-menu .header-mega-link-element {
@@ -245,7 +246,7 @@ button.dropdown-toggle {
     background: #f5e7d3;
     padding: 4px;
     margin: -4px;
-    width: calc(100% + 8px);
+    width:100%;
 }
 
 

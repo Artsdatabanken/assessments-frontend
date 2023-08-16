@@ -14,8 +14,13 @@
             return false;
 
         var hideForGenuses = new string[] { "Abies", "Picea", "Larix", "Pinus" };
+        var hideForSpecies = new string[] { "Cairina moschata", "Anser cygnoides" };
 
-        return Model.NameHierarchy.FirstOrDefault(x => x.ScientificNameRank == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ScientificNameRank.Genus && hideForGenuses.Contains(x.ScientificName)) == null;
+        var isGenusMatch = Model.NameHierarchy.Any(x => x.ScientificNameRank == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ScientificNameRank.Genus && hideForGenuses.Contains(x.ScientificName));
+        var isSpeciesMatch = hideForSpecies.Contains(Model.ScientificName);
+        var isSvalbardMatch =  Model.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
+
+        return !(isGenusMatch || isSpeciesMatch || isSvalbardMatch);
     }
 }
 

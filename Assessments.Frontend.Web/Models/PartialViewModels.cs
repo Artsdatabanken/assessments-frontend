@@ -299,6 +299,8 @@ namespace Assessments.Frontend.Web.Models
         public bool SpeciesIsOnBannedList { get; set; }
 
         public AssessmentType AssessmentType { get; set; }
+
+        public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
     }
 
     public class TableOfContentsViewModel

@@ -251,6 +251,30 @@ button:not(.icon-button).material-icons {
     border: #F2F6F8;
 }
 
+
+
+/* DARK THEME */
+
+.darktheme .primary,
+.darktheme .secondary, 
+.darktheme .ghost,
+.darktheme .text-button{
+    color:white;
+}
+
+.darktheme .ghost,
+.darktheme .main button.ghost {
+    border-color: white;
+    background: transparent;
+}
+
+
+
+
+
+
+
+
 /**
  * Chips are based on button-styles, and cannot be used without it.
  */

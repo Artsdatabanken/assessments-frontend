@@ -708,9 +708,7 @@ ul a:hover,
 }
 
 
-.darktheme footer a{
-    color:initial;
-}
+
 
 /* OVERRIDES SOM SKAL FJERNES NÅR VI FÅR FIKSA HEADER ORDENTLIG: */
 @media only screen and (min-width: 750px) {
@@ -723,4 +721,9 @@ ul a:hover,
     .main .hideonmobile {
         display: none;
     }
+}
+
+.breadcrumbs li{
+    color:inherit;
+    font:inherit;
 }

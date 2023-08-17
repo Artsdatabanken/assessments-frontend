@@ -336,31 +336,3 @@ button.dropdown-toggle {
 }
 
 
-/* DARK THEME */
-
-
-.darktheme button {
-    color: #faf1e4;
-}
-
-.darktheme .footer,
-.darktheme .top,
-.darktheme .center,
-.darktheme .bottom,
-.darktheme .header {
-    background: #262f31;
-    color: #faf1e4;
-    border-color: #faf1e4;
-}
-
-.darktheme .header-mega-link-text {
-    color: #fff9f0;
-}
-.darktheme .themeselectordropdown .themebutton,
-.darktheme .dropdown,
-.darktheme .header-mega-menu {
-    background: #262f31;
-    color: #fff9f0;
-    border-color: #fff9f0;
-}
-

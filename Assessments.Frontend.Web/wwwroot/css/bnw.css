@@ -154,22 +154,16 @@
 .darktheme .listheader,
 .darktheme .viewselector,
 .darktheme .controls button.active,
-.darktheme .filter_group ul,
 .darktheme .main_list_view .listheader,
 .darktheme .controls button.active,
 .darktheme .search_dropdown,
 .darktheme .controls .list_actions,
 .darktheme.highcontrast .controls button.active {
-    background: #2b2b2b;
-}
-
-@media only screen and (max-width: 940px) {
-    .darktheme .side {
-        background: #2b2b2b;
-    }
+    background: #262f31;
 }
 
 /* TRANSPARENT ITEMS */
+.darktheme .main .filter_group button,
 .darktheme .active .page-link,
 .darktheme .main .filter_group button,
 .darktheme .button.tertiary,
@@ -180,45 +174,23 @@
 }
 
 /* Other button bg */
+.darktheme .controls button,
 .darktheme .controls .list_actions,
-.darktheme .button,
-.darktheme .main button:not(.icon-button) {
+.darktheme .button{
     background: #484848;
+    border-color: #9d9d9d;
+}
+
+.darktheme .main button:not(.icon-button) {
     border-color: #9d9d9d;
 }
 
 
 /* WHITE FONT COLOR*/
-.darktheme,
-.darktheme header,
-.darktheme .controls .list_actions,
-.darktheme .list-search,
-.darktheme .main-content,
-.darktheme .filter_group button,
-.darktheme .sidebarmenu li a,
-.darktheme .button.primary,
-.darktheme .main button.primary,
-.darktheme .main button:not(.icon-button),
-.darktheme .button,
-.darktheme .controls button.active,
-.darktheme .category_displayer span,
-.darktheme .regionlist.legend .region span,
-.darktheme .main .changetab.active,
-.darktheme .tabbed_element_container li.active,
-.darktheme .impact_table,
-.darktheme .page-link,
-.darktheme .percent,
-.darktheme p {
-    color: #FFF9F0;
+.darktheme, .darktheme header, .darktheme .controls .list_actions, .darktheme .list-search, .darktheme .main-content, .darktheme .sidebarmenu li a, .darktheme .button.primary, .darktheme .main button.primary, .darktheme .main button:not(.icon-button), .darktheme .button, .darktheme .controls button.active, .darktheme .category_displayer .tag, .darktheme .regionlist.legend .region span, .darktheme .main .changetab.active, .darktheme .tabbed_element_container li.active, .darktheme .impact_table, .darktheme .page-link, .darktheme .percent, .darktheme p {
+color: #FFF9F0;
 }
 
-.darktheme .category_displayer .active .NR span {
-    color: #1c1c1c;
-}
-
-.darktheme .category_displayer .NR span {
-    color: white;
-}
 
 /* TODO: Fix white text too high contrast being almost painfully white */
 
@@ -255,8 +227,8 @@
 .darktheme .main button.tertiary,
 .darktheme .sidebarmenu li h3,
 .darktheme .sidebarmenu .main_list_view h3 {
-    color: #f97474;
-    border-color: #f97474;
+    color: inherit;
+    border-color: inherit;
 }
 
 .darktheme .sidebarmenu .alien-species h3 {
@@ -276,6 +248,7 @@
 }
 
 /* BORDERS */
+
 
 .darktheme .controls button.active {
     border-bottom: transparent;
@@ -429,7 +402,7 @@
 
 .darktheme.highcontrast .controls button.active,
 .darktheme .controls button.active {
-    border-bottom: 1px solid #2b2b2b;
+    border-bottom: 1px solid #262f31;
     border-left-color: #7f726b;
 }
 
@@ -461,11 +434,7 @@
 }
 
 /* RED BACKGROUND */
-.darktheme.highcontrast .page-link,
-.darktheme.highcontrast .button.primary,
-.darktheme.highcontrast .main button.primary {
-    background: #8a0014;
-}
+
 
 .darktheme .success {
     color: #7ae57a;
@@ -521,17 +490,16 @@
     }
 }
 
-.darktheme .category_displayer .NR span,
-.darktheme .category_displayer .category_item span {
-    color: #262f31
-}
-
 .darktheme .big-data-table {
     background: #262f31
 }
 .criteria-summary-list .collapsible .collapsible_content {
     background: #846031;
 }
+
+
+/* DARKTHEME LINKS */
+.darktheme .footer .some-container a,
 .darktheme .breadcrumbs li a,
 .darktheme a,
 .darktheme footer a {
@@ -539,3 +507,43 @@
 }
 
 /* OCEAN: #262f31 */
+
+
+/* DARK THEME */
+
+
+.darktheme button {
+    color: #faf1e4;
+}
+
+.darktheme .footer .some-container,
+.darktheme .footer,
+.darktheme .top,
+.darktheme .center,
+.darktheme .bottom,
+.darktheme .header {
+    background: #262f31;
+    color: #faf1e4;
+    border-color: #faf1e4;
+}
+
+
+.darktheme .header-mega-link-text {
+    color: #fff9f0;
+}
+
+.darktheme .themeselectordropdown .themebutton,
+.darktheme .dropdown,
+.darktheme .header-mega-menu {
+    background: #262f31;
+    color: #fff9f0;
+    border-color: #fff9f0;
+}
+
+.darktheme .sidebarmenu button.button.tertiary {
+    color: #f5e7d3;
+}
+.darktheme .title_header {
+    background: #484848;
+    
+}

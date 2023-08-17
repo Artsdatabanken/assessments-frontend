@@ -53,7 +53,7 @@
 .heightbar_blank,
 .heightbar_indicator {
     display: flex;
-    justify-content: center;
+    /*justify-content: center; */
     position: relative;
     width: 100%;
 }

@@ -341,10 +341,6 @@ button.list_header {
     display: none;
 }
 
-.filter_info_text {
-    margin: 5px;
-}
-
 @media only screen and (max-width: 750px) {
 
     .show_filters {
@@ -370,7 +366,7 @@ button.list_header {
 
     .filter_background {
         height: 100%;
-        background: #f5e7d3;
+        background: #fff9f0;
         border: 1px solid lightgray;
         width: 90%;
         max-width: 90vw;
@@ -418,19 +414,15 @@ button.list_header {
 
 /* FILTER GROUP */
 
-.filter_group {
-    margin-top: -1px;
-}
-
+.filter_info_text,
 .filter_group ul {
-    background: #f5e7d3;
     padding: 5px;
+    padding-left:20px
 }
 
 @media only screen and (max-width: 750px) {
 
     .filter_groups {
-        background-color: #f5e7d3;
         padding-top: 15px;
     }
 
@@ -439,12 +431,6 @@ button.list_header {
         padding: 0px;
         padding-right: 5px;
     }
-
-    .filter_group ul {
-        background: #f5e7d3;
-        padding: 5px;
-    }
-
 }
 
 
@@ -458,13 +444,14 @@ button.list_header {
     width: 100%;
     background: #fff9f0;
     text-align: left;
-    border: 1px solid lightgrey;
+    border: 0;
+    border-bottom: 1px solid lightgrey;
     padding: 10px;
-    border-right: 0;
-    border-left: 0;
     margin: 0;
     font-weight: normal;
     text-transform: none;
+    padding-left: 0;
+    font-weight: bold;
 }
 
 .filter_group button:hover,

@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="~/css/bnw.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="~/js/cookies.js" asp-append-version="true"></script>
-    <script src="https://design.artsdatabanken.no/script/header.js"></script>
     <script src="https://design.artsdatabanken.no/script/footer.js"></script>
 </head>
 
@@ -23,10 +22,11 @@
     <div class="main">
         <div class="main-content width-adjuster">
             @RenderBody()
-            <script src="~/js/site.js" asp-append-version="true"></script>
-            <script src="~/js/filter.js" asp-append-version="true"></script>
-            <script src="~/js/toggleSwitch.js" asp-append-version="true"></script>
-            <script src="~/js/themes.js" asp-append-version="true"></script>
+            <script src="~/js/site.js" asp-append-version="true" async></script>
+            <script src="~/js/filter.js" asp-append-version="true" async></script>
+            <script src="~/js/toggleSwitch.js" asp-append-version="true" async></script>
+            <script src="~/js/themes.js" asp-append-version="true" async></script>
+            <script src="~/js/header.js" asp-append-version="true" async></script>
 
             @await RenderSectionAsync("Scripts", required: false)
         </div>

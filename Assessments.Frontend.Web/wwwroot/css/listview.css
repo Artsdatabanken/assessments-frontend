@@ -319,10 +319,7 @@ only screen and (min-width:941px) and (max-width:1150px){
         word-wrap: break-word;
         overflow-wrap: break-word;
     }
-
-
 }
-
 
 
 @media only screen and (max-width: 400px) {

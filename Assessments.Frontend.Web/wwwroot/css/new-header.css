@@ -1,3 +1,4 @@
+
 /* HEADER */
 
 
@@ -139,7 +140,27 @@
     margin: auto;
 }
 
+.themebutton {
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    border: none;
+    color: inherit;
+    vertical-align: baseline;
+}
 
+.themeselectordropdown .themebutton {
+    color: #262F31;
+}
+
+.themebutton .material-icons {
+    vertical-align: middle;
+}
+
+.themebutton .material-icons.toggle {
+    vertical-align: middle;
+    font-size: 34pt;
+}
 
 #themeselectorbutton,
 button.dropdown-toggle {
@@ -186,8 +207,16 @@ button.dropdown-toggle {
 }
 
 .themeselectordropdown{
-    margin-right:-50px;
     max-width:300px;
+}
+
+@media (max-width: 460px) {
+
+    .themeselectordropdown {
+        left: auto;
+        right: -92px;
+        max-width: calc(100vw - 16px);
+    }
 }
 
 .dropdown-list {
@@ -208,6 +237,7 @@ button.dropdown-toggle {
     .dropdown-list {
         max-width: 100%;
     }
+
 }
 
 .dropdown-menu {
@@ -284,10 +314,10 @@ button.dropdown-toggle {
 #navbar-mobile{
     display:none;
 }
+
+
 /* DARK THEME */
-footer a {
-    color: #017590;
-}
+
 
 .darktheme footer a {
     color: #99BDC6;

@@ -229,9 +229,8 @@ option {
     .side {
         padding: 30px;
         margin-top: 50px;
-        background: #f2f1f1;
         width: 100vw;
-        margin-bottom: -14px;
+        border-top: 1px solid #faf1e4;
         margin-left: -30px;
     }
 
@@ -312,8 +311,6 @@ option {
 
 /* other stuff*/
 
-
-
 .species_main_colour {
     fill: #4c4a48 !important;
 }
@@ -331,104 +328,6 @@ option {
 */
 
 
-button {
-    padding: 6px 12px;
-    font-size: 15px;
-    line-height: 1.42857143;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    text-align: center;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    background: #f5e7d3;
-    color: #262F31;
-    border: none;
-    display: inline-block;
-    border-radius: 2px;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    margin: 2px;
-    border: 1px solid #a6a6a6;
-    margin-bottom: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    font-weight: normal;
-}
-
-
-.button .material-icons,
-.main button .material-icons {
-    vertical-align: bottom;
-    font-size: 16pt;
-}
-
-.button.primary,
-.main button.primary {
-    background: #3d3b3a;
-    color: #fff;
-    border: none;
-}
-
-
-.button.tertiary,
-.main button.tertiary {
-    width: 150px;
-    max-width: 150px;
-    height: 35px;
-    background: #fff9f0;
-    border: 1px solid #2b2b2b;
-    text-align: center;
-    margin: 0;
-    margin-right: 0px;
-}
-
-.button.active,
-.main button.active {
-    background: #7f726b;   
-    border: none;
-}
-
-.button:hover,
-.main button:hover {
-    cursor: pointer;
-    opacity:0.9;
-}
-
-.main .closebutton {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 0px;
-    border: 0px;
-    background: none;
-    border-radius: 2px;
-}
-
-.main button.tinybutton,
-.main .tinybutton {
-    width: max-content;
-    padding: 3px 6px;
-    max-width: initial;
-    margin: 6px;
-    height: auto;
-}
-
-.link-styled{
-    display:block;
-}
-
-.disabled {
-    color: #d7d7d7;
-    border-color: #d7d7d7;
-    background:none;
-}
-
-.rightbutton {
-    display: inline-block;
-    float: right;
-}
 
 /* TAB STUFF */
 
@@ -716,26 +615,16 @@ button {
     text-decoration:none;
 }
 
-
-.chips:first-letter {
-    text-transform:uppercase;
-}
 .englishspacer{
     visibility:hidden;
 }
 
-.chips:first-letter {
-    text-transform: uppercase;
-}
 
 .searchstring {
     margin-top: 10px;
     display: block;
 }
 
-.main button.tinybutton.search_related {
-    margin-top: 0px;
-}
 
 .noscroll {
     overflow: hidden;
@@ -776,55 +665,6 @@ button {
     vertical-align:bottom;
 }
 
-.themebutton {
-    width: 100%;
-    margin: 0;
-    background: transparent;
-    border: none;
-    color: inherit;
-    vertical-align: baseline;
-}
-
-.themeselectordropdown .themebutton {
-    color: #262F31;
-}
-
-.themebutton .material-icons {
-    vertical-align: middle;
-}
-
-.themebutton .material-icons.toggle {
-    vertical-align: middle;
-    font-size: 34pt;
-}
-#darkmodebutton.darktheme {
-    background: transparent;
-    color:#2b2b2b;
-}
-
-#darkmodebutton.darktheme:hover,
-.themebutton:hover {
-    cursor: pointer;
-    color: #2b2b2b;
-    background-color: #f5f5f5;
-}
-
-.title_header a:active,
-.title_header a:focus {
-    text-decoration: underline
-}
-
-.darktheme.title_header a,
-.title_header a {
-    text-decoration: none;
-}
-
-.short_title,
-.full_title {
-    font-size: 18px;
-}
-
-
 .success {
     color: #16a979;
 }
@@ -838,6 +678,11 @@ button {
 }
 
 
+/* FOOTER */
+
+footer a {
+    color: #017590;
+}
 
 footer {
     background: #fff9f0;
@@ -861,12 +706,10 @@ ul a:hover,
     background-color: #f5e7d3;cursor: pointer;
 }
 
+
+
+
 /* OVERRIDES SOM SKAL FJERNES NÅR VI FÅR FIKSA HEADER ORDENTLIG: */
-
-.darktheme footer a{
-    color:initial;
-}
-
 @media only screen and (min-width: 750px) {
     .only_mobile {
         display: none;
@@ -878,3 +721,13 @@ ul a:hover,
         display: none;
     }
 }
+
+.breadcrumbs li{
+    color:inherit;
+    font:inherit;
+}
+
+.bottom > div {
+    min-height: 63px;
+}
+

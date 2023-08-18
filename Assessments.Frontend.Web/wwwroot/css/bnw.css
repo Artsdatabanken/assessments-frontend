@@ -16,7 +16,7 @@
 .highcontrast .NE,
 .highcontrast .NT {
     color: white;
-    background: black;
+    background: #262f31;
 }
 
 .highcontrast input:checked + .slider {
@@ -81,7 +81,7 @@
 .highcontrast .main .changetab,
 .highcontrast .main .changetab.active,
 .highcontrast .tabbed_element_container {
-    border-color: black;
+    border-color: #262f31;
 }
 
 .highcontrast .controls button.active,
@@ -125,19 +125,19 @@
 }
 
 .darktheme .vurdert_N .svalbard_land {
-    stroke: black;
+    stroke: #262f31;
 }
 
 /* PURE BLACK BACKGROUND */
 .darktheme,
 .darktheme .main {
-    background: black;
+    background: #262f31;
 }
 
 @media only screen and (max-width: 750px) {
     .darktheme .filter_background,
     .darktheme .filter_groups {
-        background: black;
+        background: #262f31;
     }
 
 }
@@ -147,29 +147,23 @@
 .darktheme .main .changetab.active,
 .darktheme .list-search,
 .darktheme .main-content {
-    background: #201f1f;
+    background: #262f31;
 }
 
 /* SEMI-GRAY BACKGROUND */
 .darktheme .listheader,
 .darktheme .viewselector,
 .darktheme .controls button.active,
-.darktheme .filter_group ul,
 .darktheme .main_list_view .listheader,
 .darktheme .controls button.active,
 .darktheme .search_dropdown,
 .darktheme .controls .list_actions,
 .darktheme.highcontrast .controls button.active {
-    background: #2b2b2b;
-}
-
-@media only screen and (max-width: 940px) {
-    .darktheme .side {
-        background: #2b2b2b;
-    }
+    background: #262f31;
 }
 
 /* TRANSPARENT ITEMS */
+.darktheme .main .filter_group button,
 .darktheme .active .page-link,
 .darktheme .main .filter_group button,
 .darktheme .button.tertiary,
@@ -179,57 +173,31 @@
     background: transparent;
 }
 
-/* WINE RED */
-.darktheme .category_displayer .notactive .category_item {
-    background: #570808;
-}
-
-/* RED BACKGROUND */
-.darktheme .page-link,
-.darktheme .button.primary,
-.darktheme .main button.primary {
-    background: #ca1c35;
-}
-
 /* Other button bg */
+.darktheme .controls button,
 .darktheme .controls .list_actions,
-.darktheme .button,
-.darktheme .main button:not(.icon-button) {
+.darktheme .button{
     background: #484848;
     border-color: #9d9d9d;
 }
 
+.darktheme .main button:not(.icon-button) {
+    border-color: #9d9d9d;
+}
+
+
 /* WHITE FONT COLOR*/
-.darktheme,
-.darktheme header,
-.darktheme .controls .list_actions,
-.darktheme .list-search,
-.darktheme .main-content,
-.darktheme .filter_group button,
-.darktheme .sidebarmenu li a,
-.darktheme .button.primary,
-.darktheme .main button.primary,
-.darktheme .main button:not(.icon-button),
-.darktheme .button,
-.darktheme .controls button.active,
-.darktheme .category_displayer span,
-.darktheme .regionlist.legend .region span,
-.darktheme .main .changetab.active,
-.darktheme .tabbed_element_container li.active,
-.darktheme .impact_table,
-.darktheme .page-link,
-.darktheme .percent,
-.darktheme p {
-    color: #FFF9F0;
+.darktheme, .darktheme header, .darktheme .controls .list_actions, .darktheme .list-search, .darktheme .main-content, .darktheme .sidebarmenu li a, .darktheme .button.primary, .darktheme .main button.primary, .darktheme .main button:not(.icon-button), .darktheme .button, .darktheme .controls button.active, .darktheme .category_displayer .tag, .darktheme .regionlist.legend .region span, .darktheme .main .changetab.active, .darktheme .tabbed_element_container li.active, .darktheme .impact_table, .darktheme .page-link, .darktheme .percent, .darktheme p {
+color: #FFF9F0;
 }
 
-.darktheme .category_displayer .active .NR span {
-    color: #1c1c1c;
+.darktheme .main .changetab:not(.active) {
+    color: #262F31
 }
 
-.darktheme .category_displayer .NR span {
-    color: white;
-}
+    .darktheme .main button.close_filters {
+        color: #262F31;
+    }
 
 /* TODO: Fix white text too high contrast being almost painfully white */
 
@@ -266,8 +234,8 @@
 .darktheme .main button.tertiary,
 .darktheme .sidebarmenu li h3,
 .darktheme .sidebarmenu .main_list_view h3 {
-    color: #f97474;
-    border-color: #f97474;
+    color: inherit;
+    border-color: inherit;
 }
 
 .darktheme .sidebarmenu .alien-species h3 {
@@ -283,10 +251,11 @@
 .darktheme .list:hover .element_popular_name,
 .darktheme .list-search input,
 .darktheme .tabbed_element_container .thresholdlist.active {
-    color: black;
+    color: #262f31;
 }
 
 /* BORDERS */
+
 
 .darktheme .controls button.active {
     border-bottom: transparent;
@@ -295,7 +264,7 @@
 /* SEMI-GRAY-BORDERS */
 .darktheme .darktheme .controls button.active,
 .darktheme .listheader {
-    border-color: black;
+    border-color: #262f31;
 }
 
 /* WHITE BORDER */
@@ -331,7 +300,7 @@
 
 .darktheme .button.primary,
 .darktheme .main button.primary {
-    border: 1px solid #201f1f;
+    border: 1px solid #262f31;
 }
 
 .darktheme .search_dropdown {
@@ -371,7 +340,7 @@
 }
 
 .darktheme .main .changetab.active {
-    border-bottom-color: #201f1f;
+    border-bottom-color: #262f31;
 }
 
 .darktheme .category_displayer::before{
@@ -440,7 +409,7 @@
 
 .darktheme.highcontrast .controls button.active,
 .darktheme .controls button.active {
-    border-bottom: 1px solid #2b2b2b;
+    border-bottom: 1px solid #262f31;
     border-left-color: #7f726b;
 }
 
@@ -468,15 +437,11 @@
 }
 
 .darktheme.highcontrast .category_displayer .active .category_item span{
-    color: black;
+    color: #262f31;
 }
 
 /* RED BACKGROUND */
-.darktheme.highcontrast .page-link,
-.darktheme.highcontrast .button.primary,
-.darktheme.highcontrast .main button.primary {
-    background: #8a0014;
-}
+
 
 .darktheme .success {
     color: #7ae57a;
@@ -487,7 +452,7 @@
 }
 
 .darktheme .mobile_padding .table-of-contents {
-    background-color: #201f1f;
+    background-color: #262f31;
     border: 1px solid #ccc;
 }
 
@@ -530,4 +495,62 @@
     .darktheme .water-area td:nth-child(2) b {
         color: white;
     }
+}
+
+.darktheme .big-data-table {
+    background: #262f31
+}
+.darktheme .criteria-summary-list .collapsible .collapsible_content {
+    background: #846031;
+}
+
+
+/* DARKTHEME LINKS */
+.darktheme .footer .some-container a,
+.darktheme .breadcrumbs li a,
+.darktheme a,
+.darktheme footer a {
+    color: #34B3D2;
+}
+
+/* OCEAN: #262f31 */
+
+
+/* DARK THEME */
+
+
+.darktheme button {
+    color: #faf1e4;
+}
+
+.darktheme .footer .some-container,
+.darktheme .footer,
+.darktheme .top,
+.darktheme .center,
+.darktheme .bottom,
+.darktheme .header {
+    background: #262f31;
+    color: #faf1e4;
+    border-color: #faf1e4;
+}
+
+
+.darktheme .header-mega-link-text {
+    color: #fff9f0;
+}
+
+.darktheme .themeselectordropdown .themebutton,
+.darktheme .dropdown,
+.darktheme .header-mega-menu {
+    background: #262f31;
+    color: #fff9f0;
+    border-color: #fff9f0;
+}
+
+.darktheme .sidebarmenu button.button.tertiary {
+    color: #f5e7d3;
+}
+.darktheme .title_header {
+    background: #484848;
+    
 }

@@ -3,13 +3,108 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+/* Fra RL 2021*/
+
+button {
+    padding: 6px 12px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background: #f5e7d3;
+    color: #262F31;
+    border: none;
+    display: inline-block;
+    border-radius: 2px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin: 2px;
+    border: 1px solid #a6a6a6;
+    margin-bottom: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-weight: normal;
+}
+
+
+.secondary {
+    background: #CCDEE3;
+    border-color: #ccdee3;
+}
+
+.button .material-icons,
+.main button .material-icons {
+    vertical-align: bottom;
+    font-size: 16pt;
+}
+
+.button.active,
+.main button.active {
+    background: #7f726b;
+    border: none;
+}
+
+.button:hover,
+.main button:hover {
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.main .closebutton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 0px;
+    border: 0px;
+    background: none;
+    border-radius: 2px;
+}
+
+.main button.tinybutton,
+.main .tinybutton {
+    width: max-content;
+    padding: 3px 6px;
+    max-width: initial;
+    margin: 6px;
+    height: auto;
+}
+
+.link-styled {
+    display: block;
+}
+
+.disabled {
+    color: #d7d7d7;
+    border-color: #d7d7d7;
+    background: none;
+}
+
+.rightbutton {
+    display: inline-block;
+    float: right;
+}
+
+
+.chips:first-letter {
+    text-transform: uppercase;
+}
+
+
+.main button.tinybutton.search_related {
+    margin-top: 0px;
+}
+
+/* FRA ARTSOBS 3 */
+
 /* Focus outline
 // Had to override bootstrap reboot css which directly targets button. Ugly stuff.*/
 button:focus-visible,
 button:focus:not(:focus-visible),
-.timepicker-toggle-button:focus,
-.timepicker-button:focus,
-.datepicker-footer-btn:focus,
 .primary:focus,
 .secondary:focus,
 .text-button:focus,
@@ -80,9 +175,6 @@ button:not(.icon-button).material-icons {
     border-color: #E6EFF1;
 }
 
-
-.timepicker-button,
-.datepicker-footer-btn,
 .text-button,
 .ghost {
     text-decoration: underline;
@@ -90,10 +182,6 @@ button:not(.icon-button).material-icons {
     border-color: transparent;
     background: transparent;
 }
-
-
-.timepicker-button:hover,
-.datepicker-footer-btn:hover,
 .text-button:hover,
 .ghost:hover,
 .ghost:active,
@@ -111,9 +199,6 @@ button:not(.icon-button).material-icons {
     text-decoration: none;
 }
 
-.timepicker-toggle-button:focus,
-.timepicker-button:focus,
-.datepicker-footer-btn:focus,
 .primary:focus,
 .secondary:focus,
 .primary:focus-visible,
@@ -121,15 +206,10 @@ button:not(.icon-button).material-icons {
     border-color: #FFFFFF;
 }
 
-.datepicker-toggle-button,
-.timepicker-toggle-button,
 .icon-button {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-}
-
-.icon-button {
     padding: 0;
     margin: 0;
     min-width: 40px;
@@ -171,6 +251,30 @@ button:not(.icon-button).material-icons {
     border: #F2F6F8;
 }
 
+
+
+/* DARK THEME */
+
+.darktheme .primary,
+.darktheme .secondary,
+.darktheme .ghost,
+.darktheme .text-button {
+    color: inherit;
+}
+
+.darktheme .ghost,
+.darktheme .main button.ghost {
+    border-color: white;
+    background: transparent;
+}
+
+
+
+
+
+
+
+
 /**
  * Chips are based on button-styles, and cannot be used without it.
  */
@@ -182,10 +286,10 @@ button:not(.icon-button).material-icons {
 }
 
 .chips {
-    background: #f5e7d3;
+    background: #dee0e0;
     width: fit-content;
     max-width: fit-content;
-    border-color: #f5e7d3;
+    border-color: #dee0e0;
     display: inline-block;
     position: relative;
     padding: 12px 14px;

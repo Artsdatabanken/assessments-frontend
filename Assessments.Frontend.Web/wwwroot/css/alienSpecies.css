@@ -29,7 +29,6 @@
 .darktheme .list:hover .speciesgroup_name,
 .darktheme .search_matchedname,
 .darktheme .search_match,
-.darktheme a,
 .darktheme .breadcrumbs li,
 .darktheme .button.tertiary,
 .darktheme .main button.tertiary,
@@ -41,20 +40,6 @@
 /* ACTIVE BORDER */
 .darktheme .see_all .habitat_element.active {
     border-color: #b372bb;
-}
-
-/* PURPLE BACKGROUND */
-.darktheme .page-link,
-.darktheme .button.primary,
-.darktheme .main button.primary {
-    background: #f5e7d3;
-    color: #262F31;
-}
-
-.darktheme .button.primary {
-    border: 1px solid #b372bb;
-    background: #f5e7d3;
-    color: #262F31;
 }
 
 ul {

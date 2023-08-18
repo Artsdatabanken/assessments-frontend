@@ -213,7 +213,7 @@
     <span class="desktop_hide hit-counter">Viser treff @startHit - @endHit av @totalCount</span>
     <span class="desktop_hide">Sorter etter: </span>
     <div class="list_control_buttons">
-        <button class="toggle_filter only_mobile list_actions no_js" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
+        <button class="adb-button toggle_filter only_mobile list_actions no_js ghost" id="open_filter" value="open_filters" name="Åpne filter" type="button" onclick="openFilters()">
             @if (GetActiveSelectionCount(Model) != 0)
             {
                 <span class="filternumber">@GetActiveSelectionCount(Model)</span>

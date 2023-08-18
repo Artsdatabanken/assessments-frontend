@@ -287,9 +287,10 @@ ul.second {
 
 .criteria-summary-list .collapsible .collapsible_content {
     padding: 8px;
-    border: 1px solid lightgray;
     margin-bottom: 10px;
+    background: #f5e7d3;
 }
+
 .tabbed_element_container .criteria-summary-list p{
     padding:0;
     margin-top:8px;

@@ -878,7 +878,6 @@ span.area i {
 
     .big-data-table td {
         display: block;
-        background: rgba(128, 128, 128,0.3);
         border: 1px solid rgba(128, 128, 128,0.5);
         margin-top: -1px;
     }
@@ -899,7 +898,7 @@ span.area i {
     }
 
     .darktheme .big-data-table .only_mobile {
-        color: #959595;
+        color: #FFF9F0;
     }
 
     .big-data-table .only_mobile:first-letter {

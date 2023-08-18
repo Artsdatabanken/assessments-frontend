@@ -67,12 +67,22 @@
 
 @media (max-width: 767px) {
     .header-logo {
-        display: contents
+        width: initial;
+        margin: 0;
+        margin-left: 5px;
     }
 
     .header-logo img {
         width: 209px;
         margin: 20px 0px;
+    }
+
+    .darktheme #headermenu {
+        box-shadow: none;
+    }
+
+    #headermenu.hide {
+        margin-right: 5px;
     }
 }
 

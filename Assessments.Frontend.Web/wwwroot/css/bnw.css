@@ -191,6 +191,13 @@
 color: #FFF9F0;
 }
 
+.darktheme .main .changetab:not(.active) {
+    color: #262F31
+}
+
+    .darktheme .main button.close_filters {
+        color: #262F31;
+    }
 
 /* TODO: Fix white text too high contrast being almost painfully white */
 
@@ -493,7 +500,7 @@ color: #FFF9F0;
 .darktheme .big-data-table {
     background: #262f31
 }
-.criteria-summary-list .collapsible .collapsible_content {
+.darktheme .criteria-summary-list .collapsible .collapsible_content {
     background: #846031;
 }
 

@@ -37,12 +37,11 @@
 
 .controls button {
     margin-bottom: -1px;
-    border: 1px solid #7f726b;
     margin-left: 0;
     margin-right: 4px;
 }
 
-.controls button.active {
+.main .controls button.active {
     border: 1px solid #7f726b;
     color: black;
     background: #fff9f0;
@@ -65,16 +64,20 @@
 .controls .list_actions {
     width: 150px;
     max-width: 150px;
-    height: 30px;
-    background: white;
-    border: 1px solid black;
+    height: 30px;    
     text-align: center;
     margin: 0;
     position: relative;
 }
 
-.controls .list_actions:first-child{
-    margin-right:2px;
+.controls select {
+    background: white;
+    border: 1px solid black;
+}
+
+.controls .list_actions:first-child {
+    margin-right: 2px;
+    height: inherit;
 }
 
 .controls .list_actions:last-child {
@@ -104,6 +107,7 @@
     float: inherit;
     margin-bottom: inherit;
     margin-right: inherit;
+    padding-bottom: 8px;
 }
 
 .list_control_buttons span.hit-counter {
@@ -198,11 +202,6 @@
     }
 }
 
-
-
-.controls .list_actions:first-child {
-    background: #f5e7d3
-}
 
 /* MOBILE OPEN MODAL */
 
@@ -342,10 +341,6 @@ button.list_header {
     display: none;
 }
 
-.filter_info_text {
-    margin: 5px;
-}
-
 @media only screen and (max-width: 750px) {
 
     .show_filters {
@@ -371,7 +366,7 @@ button.list_header {
 
     .filter_background {
         height: 100%;
-        background: #f5e7d3;
+        background: #fff9f0;
         border: 1px solid lightgray;
         width: 90%;
         max-width: 90vw;
@@ -419,19 +414,15 @@ button.list_header {
 
 /* FILTER GROUP */
 
-.filter_group {
-    margin-top: -1px;
-}
-
+.filter_info_text,
 .filter_group ul {
-    background: #f5e7d3;
     padding: 5px;
+    padding-left:20px
 }
 
 @media only screen and (max-width: 750px) {
 
     .filter_groups {
-        background-color: #f5e7d3;
         padding-top: 15px;
     }
 
@@ -440,12 +431,6 @@ button.list_header {
         padding: 0px;
         padding-right: 5px;
     }
-
-    .filter_group ul {
-        background: #f5e7d3;
-        padding: 5px;
-    }
-
 }
 
 
@@ -459,13 +444,14 @@ button.list_header {
     width: 100%;
     background: #fff9f0;
     text-align: left;
-    border: 1px solid lightgrey;
+    border: 0;
+    border-bottom: 1px solid lightgrey;
     padding: 10px;
-    border-right: 0;
-    border-left: 0;
     margin: 0;
     font-weight: normal;
     text-transform: none;
+    padding-left: 0;
+    font-weight: bold;
 }
 
 .filter_group button:hover,

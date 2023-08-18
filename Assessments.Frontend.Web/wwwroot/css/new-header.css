@@ -1,3 +1,4 @@
+
 /* HEADER */
 
 
@@ -49,14 +50,39 @@
     width: 100%;
 }
 
+.header-logo .darktheme-logo {
+    display: none;
+}
+
+.header-logo .default-logo {
+    display: block;
+}
+
+.darktheme .header-logo .darktheme-logo {
+    display: block;
+}
+.darktheme .header-logo .default-logo{
+    display:none;
+}
+
 @media (max-width: 767px) {
     .header-logo {
-        display: contents
+        width: initial;
+        margin: 0;
+        margin-left: 5px;
     }
 
     .header-logo img {
         width: 209px;
         margin: 20px 0px;
+    }
+
+    .darktheme #headermenu {
+        box-shadow: none;
+    }
+
+    #headermenu.hide {
+        margin-right: 5px;
     }
 }
 
@@ -139,7 +165,27 @@
     margin: auto;
 }
 
+.themebutton {
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    border: none;
+    color: inherit;
+    vertical-align: baseline;
+}
 
+.themeselectordropdown .themebutton {
+    color: #262F31;
+}
+
+.themebutton .material-icons {
+    vertical-align: middle;
+}
+
+.themebutton .material-icons.toggle {
+    vertical-align: middle;
+    font-size: 34pt;
+}
 
 #themeselectorbutton,
 button.dropdown-toggle {
@@ -185,9 +231,22 @@ button.dropdown-toggle {
     max-width: 860px;
 }
 
+.dropdown ul,
+.header-mega-menu ul {
+    list-style: none;
+}
+
 .themeselectordropdown{
-    margin-right:-50px;
     max-width:300px;
+}
+
+@media (max-width: 460px) {
+
+    .themeselectordropdown {
+        left: auto;
+        right: -92px;
+        max-width: calc(100vw - 16px);
+    }
 }
 
 .dropdown-list {
@@ -208,6 +267,7 @@ button.dropdown-toggle {
     .dropdown-list {
         max-width: 100%;
     }
+
 }
 
 .dropdown-menu {
@@ -284,34 +344,5 @@ button.dropdown-toggle {
 #navbar-mobile{
     display:none;
 }
-/* DARK THEME */
-footer a {
-    color: #017590;
-}
 
-.darktheme footer a {
-    color: #99BDC6;
-}
-
-.darktheme button {
-    color: #faf1e4;
-}
-
-.darktheme .footer,
-.darktheme .top,
-.darktheme .center,
-.darktheme .bottom,
-.darktheme .header {
-    background: #262f31;
-    color: #faf1e4;
-    border-color: #faf1e4;
-}
-
-.darktheme .header-logo img{
-    background: #f5e7d3;
-}
-
-.darktheme .header-site-description {
-    color: #2C2738;
-}
 

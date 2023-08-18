@@ -783,20 +783,7 @@ span.area i {
 
 .collapsible_header button:not(:hover),
 .collapsible_header button {
-    background: #ddd;
-    border: 2px solid transparent;
-    border-radius: 20px;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-}
-
-.darktheme .collapsible_header button:not(:hover),
-.collapsible_header button {
-    background: none;
-    border: 2px solid transparent;
-    border-radius: 20px;
-    margin-bottom: 5px;
+   margin-left:8px;
 }
 
 .collapsed_icon {
@@ -817,14 +804,14 @@ span.area i {
 }
 
 .collapsible {
-    border: 1px solid lightgrey;
+    border: 1px solid #f5e7d3;
     margin-top: 40px;
 }
 
 .collapsible .collapsible_content {
     padding: 20px;
-    padding-bottom:5px;
-    border-top: 1px solid lightgrey;
+    padding-bottom: 5px;
+    border-top: 1px solid #f5e7d3;
 }
 
 .darktheme .collapsible .collapsible_content {
@@ -891,7 +878,6 @@ span.area i {
 
     .big-data-table td {
         display: block;
-        background: rgba(128, 128, 128,0.3);
         border: 1px solid rgba(128, 128, 128,0.5);
         margin-top: -1px;
     }
@@ -912,7 +898,7 @@ span.area i {
     }
 
     .darktheme .big-data-table .only_mobile {
-        color: #959595;
+        color: #FFF9F0;
     }
 
     .big-data-table .only_mobile:first-letter {

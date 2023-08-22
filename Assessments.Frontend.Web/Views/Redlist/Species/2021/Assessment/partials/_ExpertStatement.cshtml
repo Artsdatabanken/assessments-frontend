@@ -32,11 +32,12 @@
         kriteriedok = kriteriedok.Replace("<b >", "<b>");
 
         // Turn u and b into headings
+        kriteriedok = kriteriedok.Replace("<p><u>", "<p><h3>");
+        kriteriedok = kriteriedok.Replace("</u></p>", "</h3></p>");
+        kriteriedok = kriteriedok.Replace("<b><u>", "<p><h3>");
+        kriteriedok = kriteriedok.Replace("</u></b>", "</h3></p>");
         kriteriedok = kriteriedok.Replace("<b>", "<h3>");
         kriteriedok = kriteriedok.Replace("</b>", "</h3>");
-        kriteriedok = kriteriedok.Replace("<u>", "<h3>");
-        kriteriedok = kriteriedok.Replace("</u>", "</h3>");
-        kriteriedok = kriteriedok.Replace("</h3>", "</h3>");
 
 
         // Fix specific cases it went wrong

@@ -7,14 +7,12 @@
 
 /* Container div for anything search*/
 .list-search {
-    text-align: center;
     padding: 10px 0;
     width: 100%;
     padding-bottom: 0;
     border-radius: 2px;
     border-top: 1px solid lightgray;
     padding-top: 20px;
-    margin: 10px;
 }
 
 
@@ -37,11 +35,10 @@
     flex-direction: column;
     width: 100%;
     vertical-align: top;
-    margin: 0;
+    margin: 5px 0 10px 0;
     height: 45px;
     width: 100%;
     max-width: 100%;
-    margin: auto;
     background: pink;
 }
 

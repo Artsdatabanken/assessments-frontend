@@ -282,13 +282,13 @@
             <p>
                 @if (!string.IsNullOrEmpty(quantile.Calculated))
                 {
-                    <span>Estimert verdi: @FormatNumeric(quantile.Calculated) @Html.Raw(unit).</span><br />
+                    <span>Estimert verdi: @FormatNumeric(quantile.Calculated) @Html.Raw(unit).</span><br>
 
                 }
                 
                  @if (!string.IsNullOrEmpty(min)&& !string.IsNullOrEmpty(max))
                  {
-                    <span>Verdien antas å ligge mellom @FormatNumeric(min) @Html.Raw(unit) og @FormatNumeric(max) @Html.Raw(unit).</span><br />
+                    <span>Verdien antas å ligge mellom @FormatNumeric(min) @Html.Raw(unit) og @FormatNumeric(max) @Html.Raw(unit).</span><br>
 
                 }
                 @if (estimated.Length > 0 && @estimated != "-")
@@ -436,13 +436,13 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
         <h3>@heading</h3>
         <p>
             @Html.Raw(description)
-            <br />
+            <br>
             <a href="https://www.artsdatabanken.no/Pages/314252/Metode#316484" class="link-styled">Gå til metode</a>
         </p>
        
         <h4>@ViewBag.glossary["criteria"]["subheading"]</h4>
         <p>@Model.CriteriaSummarized
-        <br />
+        <br>
          <a href="https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316490" class="link-styled">Gå til ordliste</a>
         </p>
         
@@ -575,7 +575,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                 @{expandOrBullet(true);}
                                                 <span class="text_text clickable">
                                                     Konklusjon for C-kriteriet
-                                                    <br />
+                                                    <br>
                                                 </span>
                                             </span>
 
@@ -716,7 +716,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                             @{expandOrBullet(true);}
                                             <span class="text_text clickable">
                                                 Konklusjon for B-kriteriet
-                                                <br />
+                                                <br>
                                             </span>
                                         </span>
 

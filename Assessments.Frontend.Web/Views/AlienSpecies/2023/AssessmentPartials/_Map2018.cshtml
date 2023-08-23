@@ -50,8 +50,8 @@
 <div class="map-box-container">
     <div class="map-description">
         <b>@Model.MapText</b>
-        <br />
-        <br />
+        <br>
+        <br>
         <span>
             @{
                 // Split list for map of today:
@@ -65,17 +65,17 @@
 
 
                     <span>
-                        <br />
+                        <br>
                         <b>Kjent utbredelse</b>
-                        <br />
+                        <br>
                         <span is-visible="knownToday.Count == 0">Arten er ikke kjent i noen områder</span>
                         @{
                             makeFormattedList(knownToday);
                         }
-                        <br />
-                        <br />
+                        <br>
+                        <br>
                         <b>Antatt utbredelse</b>
-                        <br />
+                        <br>
                         <span is-visible="assumedToday.Count == 0 && knownToday.Count == 0">Det antas at arten ikke finnes i noen områder</span>
                         <span is-visible="assumedToday.Count == 0 && knownToday.Count > 0">Arten er antatt å kun finnes i de kjente områdene</span>
                         @{
@@ -93,7 +93,7 @@
     </div>
 
     <div is-visible="Model.ShowLegend">
-        <br/>
+        <br>
         <table class="map-legend">
             <tr>
                 <td class="indicator is_known_today"></td>

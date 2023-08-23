@@ -35,7 +35,7 @@
                     value = item.Replace("scroll_", "");
         }
         id = id.Replace(" ", "_");
-        <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
+        <input id="@id" type="checkbox" class="@_class" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)>
     }
     void InputTag(string name, string[] elements, string value)
     {
@@ -279,13 +279,13 @@
                                             <!-- Todo: add some js onclick to remove cheched categories when removing all redlist etc -->
                                             <li class="checkbox">
                                                 <label for="redlisted_check">
-                                                    <input id="redlisted_check" type="checkbox" asp-for="Redlisted" class="submitOnclick" />
+                                                    <input id="redlisted_check" type="checkbox" asp-for="Redlisted" class="submitOnclick">
                                                     <span class="label_text">@SearchAndFilter.ChooseRedlisted</span>
                                                 </label>
                                             </li>
                                             <li class="checkbox">
                                                 <label for="endangered_check">
-                                                    <input id="endangered_check" type="checkbox" asp-for="Endangered" class="submitOnclick" />
+                                                    <input id="endangered_check" type="checkbox" asp-for="Endangered" class="submitOnclick">
                                                     <span class="label_text">@SearchAndFilter.ChooseEndangered</span>
                                                 </label>
                                             </li>
@@ -344,7 +344,7 @@
                                         <ul>
                                             <li class="checkbox">
                                                 <label for="PresumedExtinct">
-                                                    <input type="checkbox" class="submitOnclick" asp-for="PresumedExtinct" />
+                                                    <input type="checkbox" class="submitOnclick" asp-for="PresumedExtinct">
                                                     <span class="label_text">Trolig utdødd</span>
                                                 </label>
                                             </li>

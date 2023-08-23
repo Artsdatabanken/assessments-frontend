@@ -206,7 +206,7 @@ namespace Assessments.Frontend.Web.Controllers
 
                 return Json(suggestions);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return Json(new List<object>() { });
             }

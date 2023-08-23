@@ -15,7 +15,7 @@
                 // IN cases with big blocks of text with no line breaks, detect when a sentence ends in
                 // parenhesis and create line break. These sentences are often of concluding nature
                 // such as references or summarising some content, which is a nice time to take a break.
-                kriteriedok = kriteriedok.Replace(").", ").<br/>");
+                kriteriedok = kriteriedok.Replace(").", ").<br>");
             }
         }
 
@@ -32,11 +32,12 @@
         kriteriedok = kriteriedok.Replace("<b >", "<b>");
 
         // Turn u and b into headings
+        kriteriedok = kriteriedok.Replace("<p><u>", "<p><h3>");
+        kriteriedok = kriteriedok.Replace("</u></p>", "</h3></p>");
+        kriteriedok = kriteriedok.Replace("<b><u>", "<p><h3>");
+        kriteriedok = kriteriedok.Replace("</u></b>", "</h3></p>");
         kriteriedok = kriteriedok.Replace("<b>", "<h3>");
         kriteriedok = kriteriedok.Replace("</b>", "</h3>");
-        kriteriedok = kriteriedok.Replace("<u>", "<h3>");
-        kriteriedok = kriteriedok.Replace("</u>", "</h3>");
-        kriteriedok = kriteriedok.Replace("</h3>", "</h3>");
 
 
         // Fix specific cases it went wrong
@@ -49,8 +50,10 @@
         kriteriedok = kriteriedok.Replace("<i> </i>", " ");
 
         // Br into paragraphs, remove duplicates and those with spaces inside
-        kriteriedok = kriteriedok.Replace("<br/><br/>", "<br/>");
+        kriteriedok = kriteriedok.Replace("<br/><br/>", "<br>");
+        kriteriedok = kriteriedok.Replace("<br><br>", "<br>");
         kriteriedok = kriteriedok.Replace("<br/>", "</p><p>");
+        kriteriedok = kriteriedok.Replace("<br>", "</p><p>");
         kriteriedok = kriteriedok.Replace("<p> ", "<p>");
         kriteriedok = kriteriedok.Replace(" </p>", "</p>");
         kriteriedok = "<p>" + kriteriedok + "</p>";
@@ -72,7 +75,6 @@
 
         <div class="expert_Assessment">
             <div class="expert_text">
-                @*@kriteriedok<br />*@
                 @Html.Raw(kriteriedok)
             </div>
         </div>

@@ -351,7 +351,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string PathwaysMainCategory = "hovedkategori";
         public const string PathwaysCategory = "kategori";
         public const string PathwaysInfluenceFactor = "hyppighet";
-        public const string PathwaysMagnitude = "antall <br/>individer";
+        public const string PathwaysMagnitude = "antall <br>individer";
         public const string PathwaysTimeOfIncident = "tidsrom";
 
         public const string hasIndoorProtectionTitle = "Til innendørs- eller produksjonsareal";
@@ -455,7 +455,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             /*General*/
             public const string TimeHorizonTableColumn = "Tidshorisont";
-            public const string BackgroundTableColumn = "Vurderings<span>&#8208;</span><br/>grunnlag";
+            public const string BackgroundTableColumn = "Vurderings<span>&#8208;</span><br>grunnlag";
             public const string AverageRow = "beste anslag";
             public const string LowRow = "lavt anslag";
             public const string HighRow = "høyt anslag";
@@ -487,7 +487,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string CriteriaBExpansionSpeedIncreaseAOOTableDescription = "Tabellen viser artens kjente forekomstareal ved to ulike år.";
             public const string ExpansionSpeedAOOColumn1 = "År";
             public const string ExpansionSpeedAOOKnownArea = "Kjent forekomstareal (km<sup>2</sup>)";
-            public const string ExpansionSpeedAOOKnownAreaCorrected = "Kjent forekomstareal (km<sup>2</sup>) <br/>korrigert for tiltak";
+            public const string ExpansionSpeedAOOKnownAreaCorrected = "Kjent forekomstareal (km<sup>2</sup>) <br>korrigert for tiltak";
 
             /*Criteria D, E, H and I*/
             public const string CriteriaDSpeciesNaturetypesTableTitle = "Artens negative effekter på grupper av arter (inkludert trua arter eller nøkkelarter).";
@@ -506,12 +506,12 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string CriteriaIParasitesTableDescription = "Tabellen viser hvilke parasitter eller patogener (inkludert bakterier og virus) arten er vurdert å overføre til stedegne verter, om parasitten er kjent for verten eller ei, samt om parasitten er fremmed eller stedegen. Den økologiske effekten av overføringen kan ikke være større enn den økologiske effekten parasitten selv vurderes å ha etter kriteriene D til H. Kun overføringer av parasitter og patogener som er dokumentert eller sannsynlig er inkludert.";
 
             public const string KeyStoneSpeciesTableColumn = "Nøkkelart?";
-            public const string RedListCategoryTableColumn = "Kategori <br/>Rødlista 2021";
+            public const string RedListCategoryTableColumn = "Kategori <br>Rødlista 2021";
             public const string InteractionStrengthTableColumn = "Interaksjonens styrke";
             public const string ScaleTableColumn = "Geografisk omfang";
             public const string InteractionTypeTableColumn = "Type interaksjon";
-            public const string NaturetypeDAndETableColumn1 = "Påvirkede <br/>arter i";
-            public const string NaturetypeDAndETableColumn2 = "Nøkkelarter <br/>eller truede <br/>arter?";
+            public const string NaturetypeDAndETableColumn1 = "Påvirkede <br>arter i";
+            public const string NaturetypeDAndETableColumn2 = "Nøkkelarter <br>eller truede <br>arter?";
 
             /*Criteria C, F, G and impacted naturetypes (incl. microhabitats)*/
             public const string CriteriaCNaturetypesTableTitle = "Artens koloniserte naturtypeareal.";
@@ -524,9 +524,9 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string ImpactedNatureTypesCurrentTableDescription = "Tabellen viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten er  observert i, samt artens påvirkning i naturtypen og anslått andel av naturtypens areal som blir påvirket (F- og G-kriteriet).";
             public const string ImpactedNatureTypesFutureTableDescription = "Tabellen viser anslått kolonisert areal (C-kriteriet) i de naturtypene arten regnes med å observeres i innen 50 år eller 5 generasjoner (det av tallene som er størst), samt artens framtidige påvirkning i naturtypen og anslått andel av naturtypens areal som vil bli påvirket (F- og G-kriteriet).";
             public const string NaturetypeNameTableColumn = "naturtype";
-            public const string ColonizedAreaTableColumn = "kolonisert <br/>areal (%)";
-            public const string StateChangeTableColumn = "tydelig <br/>tilstandsendring";
-            public const string AffectedAreaTableColumn = "tydelig <br/>påvirka <br/>areal (%)";
+            public const string ColonizedAreaTableColumn = "kolonisert <br>areal (%)";
+            public const string StateChangeTableColumn = "tydelig <br>tilstandsendring";
+            public const string AffectedAreaTableColumn = "tydelig <br>påvirka <br>areal (%)";
             public const string ImpactedNatureTypesTableColumn6 = "vurderingsgrunnlag";
             public const string MicroHabitatsTableTitle = "Artens livsmedier.";
             public const string MicroHabitatsTableDescription = "Tabellen viser hvilke livsmedier den fremmede arten bruker nå eller i framtida. Hvis arten bruker en annen art som livsmedium er dette gitt.";
@@ -548,7 +548,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             public const string FirstObsTableDescription = "Tabellen viser årstall for første observasjonen av arten for hver aktuelle etableringsstatus.";
             public const string FirstObsTableColumn1 = "Etableringsstatus";
             public const string FirstObsTableColumn2 = "Årstall for første observasjon";
-            public const string FirstObsTableColumn3 = "Usikkerhet i årstall <br/>(> ± 5 år)";
+            public const string FirstObsTableColumn3 = "Usikkerhet i årstall <br>(> ± 5 år)";
 
             /*Vedlegg*/
             public const string AttachmentsTableTitle = "Filvedlegg til vurderingen.";

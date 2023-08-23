@@ -5,12 +5,12 @@
         <div class="image_background">
             @if (!String.IsNullOrEmpty(Model.SpeciesGroupImageUrl))
             {
-                <img src="@Model.SpeciesGroupImageUrl" onerror="this.style.display = 'none';" alt="@Model.SpeciesGroup" />
+                <img src="@Model.SpeciesGroupImageUrl" onerror="this.style.display = 'none';" alt="@Model.SpeciesGroup">
             }
         </div>
     </div>
     <p>
-        Utført av <a href="@Model.SpeciesGroupInfoUrl" class="lowercase">ekspertkomité for @Model.ExpertCommittee </a> <br />
+        Utført av <a href="@Model.SpeciesGroupInfoUrl" class="lowercase">ekspertkomité for @Model.ExpertCommittee </a> <br>
         <partial name="/Views/Shared/_PublishedDate.cshtml" />
     </p>
 </div>

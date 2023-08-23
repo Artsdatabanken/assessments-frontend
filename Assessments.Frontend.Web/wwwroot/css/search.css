@@ -35,11 +35,20 @@
     flex-direction: column;
     width: 100%;
     vertical-align: top;
-    margin: 5px 0 10px 0;
+    margin: 5px 0 4px 0;
     height: 45px;
     width: 100%;
     max-width: 100%;
     background: pink;
+}
+
+.search-help-text {
+    font-size: 10pt;
+    color: #646464;
+}
+
+.darktheme .search-help-text {
+    color: #bbb7b7;
 }
 
 @media only screen and (max-width: 410px) {

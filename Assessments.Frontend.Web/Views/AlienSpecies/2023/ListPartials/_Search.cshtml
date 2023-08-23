@@ -4,7 +4,7 @@
     <label for="Name"><b>Søk i Fremmedartslista 2023</b></label>
     <div class="searchfield">
         <div class="searchfield_and_button">
-            <input asp-for="Name" autocomplete="off" />
+            <input asp-for="Name" autocomplete="off">
             <button class="primary" type="submit">
                 <span class="material-icons">
                     search
@@ -14,5 +14,5 @@
         </div>
         <ul id="autocomplete_list_ul" class="search_dropdown"></ul>
     </div>
-    <small>F.eks. 'Pinus (slekt)' for alle arter i slekta Pinus.</small>
+    <small class="search-help-text">F.eks. 'Pinus (slekt)' for alle arter i slekta Pinus.</small>
 </div>

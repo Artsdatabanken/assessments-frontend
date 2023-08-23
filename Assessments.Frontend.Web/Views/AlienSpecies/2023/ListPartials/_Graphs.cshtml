@@ -23,19 +23,19 @@
     <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartVertical.cshtml" model="Model.Statistics.RiskCategories" />
     <p>@Constants.figureCategoryStart <i>@(categories.First().Name.ToLowerInvariant())</i> @(categories.First().NameShort) til <i>@(categories.Last().Name.ToLowerInvariant())</i> @(categories.Last().NameShort). Utvalget ditt omfatter @Helpers.GetBarChartTotal(categories).ToString("N0") vurderinger, hvorav @Helpers.GetBarChartHighRisk(categories).ToString("N0") @Constants.figureCategoryMiddle @AlienSpeciesAssessment2023Category.HI.DisplayName().ToLowerInvariant(), eller en @AlienSpeciesAssessment2023Category.SE.DisplayName().ToLowerInvariant() @Constants.figureCategoryEnd.</p>
 
-    <hr/>
+    <hr>
 
     <h3>@Constants.riskMatrixFigureHeader</h3>
     <partial name="/Views/AlienSpecies/2023/AssessmentPartials/_RiskMatrixFigure.cshtml" />
     <p>@Html.Raw(Constants.riskMatrixFigureText) Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.RiskCategories.Data) vurderinger.</p>
 
-    <hr/>
+    <hr>
 
     <h3>Antall vurderinger per artsgruppe</h3>
     <partial name="/Views/AlienSpecies/2023/ListPartials/_BarChartHorizontal.cshtml" model="Model.Statistics.SpeciesGroups"/>
     <p>Antall vurderinger i hver artsgruppe. Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 
-    <hr/>
+    <hr>
 
     <h3>@Constants.decisiveCriteriaFigureHeader</h3>
     <div class="bar-chart-decisive-criteria bar-chart-sub-chart">
@@ -48,7 +48,7 @@
     </div>
     <p>@Html.Raw(@Constants.decisiveCriteriaFigureText1) @Helpers.GetBarChartTotal(categories).ToString("N0") @Constants.decisiveCriteriaFigureText2 @Helpers.GetBarChartTotal(Model.Statistics.DecisiveCriteria.Data).ToString("N0") @Constants.decisiveCriteriaFigureText3@categories.FirstOrDefault(x => x.NameShort == "NK").Count @Html.Raw(@Constants.decisiveCriteriaFigureText4)</p>
 
-    <hr/>
+    <hr>
 
     <h3>@Constants.natureTypesEffectsHeader</h3>
     <h4>@Constants.natureTypesEffectsFigureHeader1</h4>
@@ -69,7 +69,7 @@
     </div>
     <p>@Constants.natureTypesEffectsText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger og totalt @Model.Statistics.NatureTypesEffect.SelectMany(x => x.Data).Sum(x => x.Count) observasjoner i sjeldne eller truede naturtyper.</p>
 
-    <hr/>
+    <hr>
 
     <h3>@Constants.spreadWaysHeader</h3>
     <h4>@Constants.spreadWaysFigureHeader1</h4>
@@ -90,7 +90,7 @@
     </div>
     <p>@Constants.spreadWaysFigureText2 Utvalget ditt omfatter @Helpers.GetBarChartTotal(Model.Statistics.SpeciesGroups.Data) vurderinger.</p>
 
-    <hr/>
+    <hr>
 
     <h3>@Constants.establishmentClassHeader</h3>
     @for (var i = 0; i < Model.Statistics.EstablishmentClass.Count; i++)

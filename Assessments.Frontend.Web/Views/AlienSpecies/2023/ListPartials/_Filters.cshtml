@@ -51,7 +51,7 @@
                     value = item.Replace("scroll_", "");
         }
         id = id.Replace(" ", "_");
-        <input id="@id" type="checkbox" class="@className" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty) />
+        <input id="@id" type="checkbox" class="@className" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)>
     }
 
     void InputTag(string name, string[] elements, string value)

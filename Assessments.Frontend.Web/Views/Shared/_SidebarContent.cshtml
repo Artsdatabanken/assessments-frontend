@@ -25,21 +25,21 @@
 }
 
 <div class="sidebar_image_info">
-    <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden"/>
-    <br />
+    <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden">
+    <br>
     <a href="@taxon_url" class="link-styled taxon-page-link">
         Til @Helpers.FixSpeciesLevel("{art}ssiden", Model.TaxonRank)
     </a>
 
     <div is-visible="@Model.PreviousAssessments.Any()">
-        <hr />
+        <hr>
         <partial name="/Views/Shared/_Development.cshtml" />
-        <hr />
+        <hr>
         <partial name="/Views/Shared/_Links.cshtml" />
     </div>
 
     <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 && ShowRegulationElement()">
-        <hr/>
+        <hr>
         <h3>Forskrift om fremmede organismer</h3>
         <div>
             <p>

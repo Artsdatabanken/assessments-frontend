@@ -175,7 +175,7 @@
                 <span>
                     @if (!string.IsNullOrEmpty(Filter.GetActiveSelection(Model)))
                     {
-                        string searchstring = " for " + '"' + @Filter.GetActiveSelection(Model) + '"';
+                        string searchstring = "Viser treff for " + '"' + @Filter.GetActiveSelection(Model) + '"';
                         <span>@searchstring</span>
                         <button class="button tinybutton tertiary search_related" name="remove_search" value="true">
                             <span class="material-icons">close</span>Fjern søk

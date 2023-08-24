@@ -167,7 +167,7 @@
                 <span>
                     @if (!string.IsNullOrEmpty(GetActiveSelection(Model)))
                     {
-                        string searchstring = " for " + '"' + @GetActiveSelection(Model) + '"';
+                        string searchstring = "Viser treff for " + '"' + @GetActiveSelection(Model) + '"';
                         <span>@searchstring</span>
                         <a href="@Context.Request.QueryString.RemoveParameters(new[] { nameof(AlienSpeciesListParameters.Name), "Page" })" class="button tinybutton tertiary search_related">
                             <span class="material-icons">close</span>Fjern søk

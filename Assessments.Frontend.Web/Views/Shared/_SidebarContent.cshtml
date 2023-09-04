@@ -13,14 +13,21 @@
         if (Model.Category == AlienSpeciesAssessment2023Category.NR.DisplayName())
             return false;
 
+        if (Model.SpeciesIsOnBannedList)
+            return true;
+
+        string speciesGroupToInclude = "Karplanter";
+        if (Model.SpeciesGroup != speciesGroupToInclude)
+            return false;
+
         var hideForGenuses = new string[] { "Abies", "Picea", "Larix", "Pinus" };
-        var hideForSpecies = new string[] { "Cairina moschata", "Anser cygnoides" };
+        //var hideForSpecies = new string[] { "Cairina moschata", "Anser cygnoides" }; //not deleted because we expect more changes to this part later.
 
         var isGenusMatch = Model.NameHierarchy.Any(x => x.ScientificNameRank == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023ScientificNameRank.Genus && hideForGenuses.Contains(x.ScientificName));
-        var isSpeciesMatch = hideForSpecies.Contains(Model.ScientificName);
+        //var isSpeciesMatch = hideForSpecies.Contains(Model.ScientificName);
         var isSvalbardMatch =  Model.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S;
 
-        return !(isGenusMatch || isSpeciesMatch || isSvalbardMatch);
+        return !(isGenusMatch  || isSvalbardMatch); //|| isSpeciesMatch
     }
 }
 
@@ -44,7 +51,7 @@
         <div>
             <p>
                 Denne @Helpers.FixSpeciesLevel("{art}en", Model.TaxonRank) er <span is-visible="!Model.SpeciesIsOnBannedList"  class="underline">ikke</span> oppført på Klima- og miljødepartementets liste over arter det er
-                forbudt å innføre, sette ut og omsette, jf. § 5 og § 9.
+                forbudt å innføre, sette ut og omsette, jf. § 5 og § 9. Merk at @Helpers.FixSpeciesLevel("{art}en", Model.TaxonRank) kan være regulert på annen måte.
             </p>
             <a href="https://lovdata.no/dokument/SF/forskrift/2015-06-19-716#KAPITTEL_9" class="link-styled">
                 Forbudslista hos Lovdata.no <span class="material-icons">open_in_new</span>

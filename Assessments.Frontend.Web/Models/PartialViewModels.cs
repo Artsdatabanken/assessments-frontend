@@ -301,6 +301,8 @@ namespace Assessments.Frontend.Web.Models
         public AssessmentType AssessmentType { get; set; }
 
         public AlienSpeciesAssessment2023EvaluationContext EvaluationContext { get; set; }
+
+        public string SpeciesGroup { get; set; }
     }
 
     public class TableOfContentsViewModel

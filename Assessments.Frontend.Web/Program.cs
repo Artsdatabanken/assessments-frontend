@@ -1,17 +1,21 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text.Json.Serialization;
 using Assessments.Data;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
 using Assessments.Frontend.Web.Infrastructure.Api;
+using Assessments.Frontend.Web.Infrastructure.Middleware;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Assessments.Shared.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,16 +29,34 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
 
 builder.Services.AddControllersWithViews()
-    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+    .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
+    .AddViewLocalization();
+
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var cultures = new List<CultureInfo>
+    {
+        new("no"),
+        new("en")
+    };
+
+    options.DefaultRequestCulture = new RequestCulture(cultures.First());
+
+    options.SupportedCultures = cultures;
+    options.SupportedUICultures = cultures;
+    options.RequestCultureProviders.Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
+});
+
+builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 
 builder.Services.AddDbContext<AssessmentsDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"), providerOptions => providerOptions.EnableRetryOnFailure());
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException(), providerOptions => providerOptions.EnableRetryOnFailure());
 });
 
 builder.Host.UseNLog();
-
-builder.Services.AddDbContext<AssessmentsDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -74,6 +96,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseRequestLocalization();
+
+app.UseRequestLocalizationCookies();
+
 app.UseResponseCompression();
 
 app.UseStaticFiles(new StaticFileOptions
@@ -98,8 +124,6 @@ var cachedFilesFolder = Path.Combine(app.Environment.ContentRootPath, Constants.
 
 if (!Directory.Exists(cachedFilesFolder))
     Directory.CreateDirectory(cachedFilesFolder);
-
-CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
 
 if (!app.Environment.IsProduction()) // Disable swagger in production
     SwaggerSetup.Configure(app);

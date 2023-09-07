@@ -46,7 +46,7 @@
         <partial name="/Views/AlienSpecies/2023/_AlienSpeciesHeader.cshtml" model="@headerViewModel" />
         <div class="main">
             <div class="main-content width-adjuster">
-
+                <vc:culture-picker />
                 @RenderBody()
                 <script src="~/js/site.js" asp-append-version="true"></script>
                 <script src="~/js/collapse.js" asp-append-version="true" async></script>

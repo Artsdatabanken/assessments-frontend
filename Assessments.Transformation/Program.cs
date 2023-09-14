@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Assessments.Transformation.Helpers;
 using Microsoft.Extensions.Configuration;
+using Raven.Abstractions.Data;
 
 namespace Assessments.Transformation
 {
@@ -37,6 +38,7 @@ namespace Assessments.Transformation
                 "Fremmedartslista 2023 - til filer lokalt",
                 "Fremmedartslista 2023 - last opp i Azure",
                 "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure",
+                "Publiser dynamicProperties til TaxonApi",
                 "Avslutt"
             };
 
@@ -65,6 +67,9 @@ namespace Assessments.Transformation
                     case "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure":
                         await TransformAlienSpecies.UploadAttachments(configuration, upload: true);
                         Environment.Exit(0);
+                        break;
+                    case "Publiser dynamicProperties til TaxonApi":
+                        //await //Note: create and enter method in PublishDynamicProperties.cs here
                         break;
                     case "Avslutt":
                         Environment.Exit(0);

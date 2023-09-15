@@ -38,5 +38,15 @@
 	  <ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
 	  <ProjectReference Include="..\Assessments.Shared\Assessments.Shared.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resources\Views\AlienSpecies\2023\AlienSpeciesIndex.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>AlienSpeciesIndex.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	
 	
 </Project>

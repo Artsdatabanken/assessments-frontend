@@ -1,4 +1,8 @@
-﻿@model AlienSpeciesListViewModel
+﻿@using Views.AlienSpecies._2023
+
+@inject IStringLocalizer<AlienSpeciesIndex> Localizer
+
+@model AlienSpeciesListViewModel
 
 @{
     CitationForListViewModel citationViewModel = new CitationForListViewModel
@@ -14,7 +18,8 @@
 
     IntroductionViewModel introductionViewModel = new IntroductionViewModel
     {
-        Introduction = Constants.AlienSpecies2023Introduction
+        Introduction = Localizer["intro"]
+        //Introduction = Constants.AlienSpecies2023Introduction
     };
 
     PageMenuViewModel pageMenuViewModel = new PageMenuViewModel

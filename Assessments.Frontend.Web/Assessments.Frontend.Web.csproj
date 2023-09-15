@@ -47,6 +47,17 @@
 	  </Compile>
 	</ItemGroup>
 
-	
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Views\AlienSpecies\2023\AlienSpeciesIndex.en.resx">
+	    <DependentUpon>AlienSpeciesIndex.resx</DependentUpon>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Views\AlienSpecies\2023\AlienSpeciesIndex.no.resx">
+	    <DependentUpon>AlienSpeciesIndex.resx</DependentUpon>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Views\AlienSpecies\2023\AlienSpeciesIndex.resx">
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	    <LastGenOutput>AlienSpeciesIndex.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
 	
 </Project>

@@ -9,4 +9,22 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.51" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CategoryResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023CategoryResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CategoryResource.en.resx">
+      <DependentUpon>AlienSpeciesAssessment2023CategoryResource.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CategoryResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023CategoryResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 
 namespace Assessments.Shared.Helpers
 {
@@ -37,7 +38,17 @@ namespace Assessments.Shared.Helpers
         public static string DisplayName(this Enum value)
         {
             var attribute = value.GetAttribute<DisplayAttribute>();
-            return attribute == null ? value.ToString() : attribute.Name;
+
+            switch (attribute)
+            {
+                case { ResourceType: not null, Name: not null }:
+                {
+                    var manager = new ResourceManager(attribute.ResourceType);
+                    return manager.GetString(attribute.Name) ?? throw new InvalidOperationException();
+                }
+                default:
+                    return attribute.Name ?? value.ToString();
+            }
         }
 
         public static IEnumerable<T> ToEnumerable<T>(this IEnumerable<string> array)

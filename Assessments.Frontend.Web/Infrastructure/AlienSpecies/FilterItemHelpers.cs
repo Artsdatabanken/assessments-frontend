@@ -56,7 +56,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             FilterButtonText = "Økologisk effekt (risikomatrisens y-akse)"
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023CategoriesFilters = Enum.GetValues<AlienSpeciesAssessment2023Category>()
+        private readonly Filter.FilterItem[] _alienSpecies2023CategoriesFilters = Enum.GetValues<AlienSpeciesAssessment2023Category>()
             .Where(x => x != AlienSpeciesAssessment2023Category.NR)
             .Select(x => new Filter.FilterItem
             {
@@ -65,13 +65,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Description = x.DisplayName()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023Categories = new()
-        {
-            Filters = AlienSpecies2023CategoriesFilters,
-            FilterDescription = "",
-            FilterButtonName = "kategorifiltre",
-            FilterButtonText = "Risikokategori"
-        };
+        public Filter.FilterAndMetaData AlienSpecies2023Categories() =>
+            new()
+            {
+                Filters = _alienSpecies2023CategoriesFilters,
+                FilterDescription = "",
+                FilterButtonName = "kategorifiltre",
+                FilterButtonText = "Risikokategori"
+            };
     }
 
     public enum CategoryChangeEnum

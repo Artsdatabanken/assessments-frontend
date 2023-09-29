@@ -14,7 +14,7 @@
     var totalCount = Model.Results.TotalItemCount.ToString("N0");
 
     var AllAreas = Areas.AlienSpecies2023Areas;
-    var AllCategories = Categories.AlienSpecies2023Categories;
+    var AllCategories = new Categories().AlienSpecies2023Categories();
     var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
     var AllClimateEffects = ClimateEffects.AlienSpecies2023ClimateEffects;
     var AllDeciciveCriterias = DeciciveCriteria.AlienSpecies2023DeciciveCriteria;

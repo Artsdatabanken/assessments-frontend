@@ -120,4 +120,19 @@
   <data name="SE" xml:space="preserve">
     <value>Svært høy risiko</value>
   </data>
+  <data name="HI" xml:space="preserve">
+    <value>Høy risiko</value>
+  </data>
+  <data name="PH" xml:space="preserve">
+    <value>Potensielt høy risiko</value>
+  </data>
+  <data name="LO" xml:space="preserve">
+    <value>Lav risiko</value>
+  </data>
+  <data name="NK" xml:space="preserve">
+    <value>Ingen kjent risiko</value>
+  </data>
+  <data name="NR" xml:space="preserve">
+    <value>Ikke risikovurdert</value>
+  </data>
 </root>

@@ -9,18 +9,18 @@ public enum AlienSpeciesAssessment2023Category
     [Display(Name = nameof(AlienSpeciesAssessment2023CategoryResource.SE), ResourceType = typeof(AlienSpeciesAssessment2023CategoryResource))] 
     SE,
 
-    [Display(Name = "Høy risiko")]
+    [Display(Name = nameof(AlienSpeciesAssessment2023CategoryResource.HI), ResourceType = typeof(AlienSpeciesAssessment2023CategoryResource))]
     HI,
 
-    [Display(Name = "Potensielt høy risiko")]
+    [Display(Name = nameof(AlienSpeciesAssessment2023CategoryResource.PH), ResourceType = typeof(AlienSpeciesAssessment2023CategoryResource))]
     PH,
 
-    [Display(Name = "Lav risiko")]
+    [Display(Name = nameof(AlienSpeciesAssessment2023CategoryResource.LO), ResourceType = typeof(AlienSpeciesAssessment2023CategoryResource))]
     LO,
 
-    [Display(Name = "Ingen kjent risiko")]
+    [Display(Name = nameof(AlienSpeciesAssessment2023CategoryResource.NK), ResourceType = typeof(AlienSpeciesAssessment2023CategoryResource))]
     NK,
 
-    [Display(Name = "Ikke risikovurdert")]
+    [Display(Name = nameof(AlienSpeciesAssessment2023CategoryResource.NR), ResourceType = typeof(AlienSpeciesAssessment2023CategoryResource))]
     NR
 }

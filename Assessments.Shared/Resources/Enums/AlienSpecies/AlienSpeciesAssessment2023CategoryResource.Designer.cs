@@ -64,10 +64,67 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         /// <summary>
         ///   Looks up a localized string similar to Svært høy risiko.
         /// </summary>
-        public static string SE {
+        public static string SE 
+        {
             get {
                 return ResourceManager.GetString("SE", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Høy risiko.
+        /// </summary>
+        public static string HI 
+        {
+            get
+            {
+                return ResourceManager.GetString("HI", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Potensielt høy risiko.
+        /// </summary>
+        public static string PH
+        {
+            get
+            {
+                return ResourceManager.GetString("PH", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Lav risiko.
+        /// </summary>
+        public static string LO
+        {
+            get
+            {
+                return ResourceManager.GetString("LO", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Ingen kjent risiko.
+        /// </summary>
+        public static string NK
+        {
+            get
+            {
+                return ResourceManager.GetString("NK", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Ikke risikovurdert.
+        /// </summary>
+        public static string NR
+        {
+            get
+            {
+                return ResourceManager.GetString("NR", resourceCulture);
+            }
+        }
+        
     }
 }

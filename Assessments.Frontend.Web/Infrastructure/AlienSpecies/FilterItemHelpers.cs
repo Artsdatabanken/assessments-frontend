@@ -1521,29 +1521,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             MisIdentified = AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified
         }
 
-        private readonly Filter.FilterItem[] _alienSpecies2023NotAssessedFilters =
-        {
+        public static Filter.FilterAndMetaData AlienSpecies2023NotAssessed() => 
             new()
             {
-                Name = AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie.DisplayName(),
-                NameShort = nameof(NotAssessedAlienSpeciesCategory.NotAlienSpecies)
-            },
-            new()
-            {
-                Name = AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800.DisplayName(),
-                NameShort = nameof(NotAssessedAlienSpeciesCategory.UncertainBefore1800)
-            },
-            new()
-            {
-                Name = AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified.DisplayName(),
-                NameShort = nameof(NotAssessedAlienSpeciesCategory.MisIdentified)
-            }
-        };
-
-        public Filter.FilterAndMetaData AlienSpecies2023NotAssessed() => 
-            new()
-            {
-                Filters = _alienSpecies2023NotAssessedFilters,
+                Filters = Enum.GetValues<NotAssessedAlienSpeciesCategory>().Select(x => new Filter.FilterItem { Name = ((AlienSpeciecAssessment2023AlienSpeciesCategory) x).DisplayName(), NameShort = x.ToString() }).ToArray(),
                 FilterDescription = "",
                 FilterButtonName = "'ikke vurdert'-filtre",
                 FilterButtonText = "Ikke-risikovurderte arter"

@@ -1,5 +1,6 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
+using Assessments.Shared.Resources.Enums.AlienSpecies;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -898,10 +899,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             [Display(Name = "Taksonomisk nivå")]
             ttn,
 
-            [Display(Name = "Vurderes på et annet taksonomisk nivå ")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.evaluated_at_another_level), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
             tva,
 
-            [Display(Name = "Vurderes ikke på et annet taksonomisk nivå ")]
+            [Display(Name = "Vurderes ikke på et annet taksonomisk nivå")]
             tvi
         }
 
@@ -1510,44 +1511,23 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class NotAssessed
     {
-        public enum NotAssessedEnum
+        public enum NotAssessedAlienSpeciesCategory
         {
             // ReSharper disable InconsistentNaming
-            [Display(Name = "Ikke fremmed")]
-            Nan,
+            NotAlienSpecies = AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie,
 
-            [Display(Name = "Etablert per år 1800")]
-            Nau,
+            UncertainBefore1800 = AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800,
 
-            [Display(Name = "Tidligere feilbestemt")]
-            Nam
+            MisIdentified = AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified
         }
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023NotAssessedFilters =
-        {
+        public static Filter.FilterAndMetaData AlienSpecies2023NotAssessed() => 
             new()
             {
-                Name = NotAssessedEnum.Nan.DisplayName(),
-                NameShort = nameof(NotAssessedEnum.Nan)
-            },
-            new()
-            {
-                Name = NotAssessedEnum.Nau.DisplayName(),
-                NameShort = nameof(NotAssessedEnum.Nau)
-            },
-            new()
-            {
-                Name = NotAssessedEnum.Nam.DisplayName(),
-                NameShort = nameof(NotAssessedEnum.Nam)
-            }
-        };
-
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023NotAssessed = new()
-        {
-            Filters = AlienSpecies2023NotAssessedFilters,
-            FilterDescription = "",
-            FilterButtonName = "'ikke vurdert'-filtre",
-            FilterButtonText = "Ikke-risikovurderte arter"
-        };
+                Filters = Enum.GetValues<NotAssessedAlienSpeciesCategory>().Select(x => new Filter.FilterItem { Name = ((AlienSpeciecAssessment2023AlienSpeciesCategory) x).DisplayName(), NameShort = x.ToString() }).ToArray(),
+                FilterDescription = "",
+                FilterButtonName = "'ikke vurdert'-filtre",
+                FilterButtonText = "Ikke-risikovurderte arter"
+            };
     }
 }

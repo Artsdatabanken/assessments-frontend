@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,7 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="about" xml:space="preserve">
-    <value>The Alien Species List shows the ecological impact of alien species on  natural diversity in Norway.  It is prepared by Artsdatabanken in collabortation with subject matter experts.</value>
+  <data name="alien_species" xml:space="preserve">
+    <value>Reproducing unaidedly</value>
+  </data>
+  <data name="doorknocker" xml:space="preserve">
+    <value>Doorknocker</value>
+  </data>
+  <data name="effect_without_reproduction" xml:space="preserve">
+    <value>Ecological effects despite not reproducing unaidedly</value>
+  </data>
+  <data name="regionally_alien" xml:space="preserve">
+    <value>Regionally alien</value>
+  </data>
+  <data name="not_alien_species" xml:space="preserve">
+    <value>Not alien</value>
+  </data>
+  <data name="evaluated_at_another_level" xml:space="preserve">
+    <value>Risk-assessed at another taxonomic level</value>
+  </data>
+  <data name="established_at_1800" xml:space="preserve">
+    <value>Established by year 1800</value>
+  </data>
+  <data name="regionally_alien_established_at_1800" xml:space="preserve">
+    <value>Regionally alien and established by year 1800</value>
+  </data>
+  <data name="misidentified" xml:space="preserve">
+    <value>Misidentified in previous assessment</value>
+  </data>
+  <data name="all_subtaxa_assessed_separately" xml:space="preserve">
+    <value>Separate assessments of all subtaxa are available</value>
+  </data>
+  <data name="hybrid_without_own_risk_assessment" xml:space="preserve">
+    <value>Outside the delimination</value>
   </data>
 </root>

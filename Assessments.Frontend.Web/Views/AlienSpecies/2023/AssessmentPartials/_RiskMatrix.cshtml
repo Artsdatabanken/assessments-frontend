@@ -10,9 +10,9 @@
 
             Dashed/Dotted Line - Uncertainty
             -> one step up/down from risk risk-levelegory
-             x-axis: A-C criteria. 
-             y-axis: D-I criteria
-             */
+    x-axis: A-C criteria. 
+    y-axis: D-I criteria
+    */
 
     // Risk risk-levelegory placement
     var x = Array.IndexOf(Enum.GetValues(typeof(AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential)), Model.Assessment.ScoreInvasionPotential);
@@ -61,6 +61,33 @@
         }
     }
 
+    List<AlienSpeciesAssessment2023Category> findAllUncertaintyCategories(int x, int y, int xHigh, int xLow, int yHigh, int yLow, List<AlienSpeciesAssessment2023Category> uncertaintiesList)
+    {
+        var current = GetCategoryFromUncertaintyNumber(x, y);
+        var xUp = GetCategoryFromUncertaintyNumber(xHigh, y);
+        var xDown = GetCategoryFromUncertaintyNumber(xLow, y);
+        var yUp = GetCategoryFromUncertaintyNumber(x, yHigh);
+        var yDown = GetCategoryFromUncertaintyNumber(x, yLow);
+
+        if (xUp != current)
+        {
+            uncertaintiesList.Add(xUp);
+        }
+        if (xDown != current)
+        {
+            uncertaintiesList.Add(xDown);
+        }
+        if (yUp != current)
+        {
+            uncertaintiesList.Add(yUp);
+        }
+        if (yDown != current)
+        {
+            uncertaintiesList.Add(yDown);
+        }
+
+        return uncertaintiesList;
+    }
 
     // ~*~ x Uncertainty - Invation Potential ~*~
 
@@ -188,34 +215,19 @@
     int xLowerUncertainty =  x_conclusion.Contains("<")?x-1:x;
 
     // Obtain nice lists
-    List<string> uncertaintiesList = new List<string>();  
+    var uncertaintiesList = new List<AlienSpeciesAssessment2023Category>();
 
-    List<string> findAllUncertaintyCategories(int x, int y, int xHigh, int xLow, int yHigh, int yLow, List<string> uncertaintiesList)
+    AlienSpeciesAssessment2023Category GetCategoryFromUncertaintyNumber(int x, int y)
     {
-        string current = @Constants.categoryFromMatrix["" + x + y];
-        string xUp = @Constants.categoryFromMatrix["" + xHigh + y];
-        string xDown =@Constants.categoryFromMatrix[ "" + xLow + y ];
-        string yUp =  @Constants.categoryFromMatrix["" + x + yHigh];
-        string yDown =  @Constants.categoryFromMatrix["" + x + yLow];
-
-        if(xUp != current)
+        string uncertainty = $"{x}{y}";
+        return uncertainty switch
         {
-            uncertaintiesList.Add(xUp);
-        }
-        if(xDown != current)
-        {
-            uncertaintiesList.Add(xDown);
-        }
-        if(yUp != current)
-        {
-            uncertaintiesList.Add(yUp);
-        }
-        if(yDown != current)
-        {
-            uncertaintiesList.Add(yDown);
-        }
-
-        return uncertaintiesList;
+            "11" => AlienSpeciesAssessment2023Category.NK,
+            "12" or "13" or "21" or "22" or "31" or "32" => AlienSpeciesAssessment2023Category.LO,
+            "14" or "41" => AlienSpeciesAssessment2023Category.PH,
+            "23" or "24" or "33" or "42" => AlienSpeciesAssessment2023Category.HI,
+            _ => AlienSpeciesAssessment2023Category.SE
+        };
     }
 
     uncertaintiesList = findAllUncertaintyCategories(x, y, xHigherUncertainty, xLowerUncertainty, yHigherUncertainty, yLowerUncertainty,uncertaintiesList);
@@ -226,9 +238,7 @@
     var xAxisCriteria = Model.Assessment.Criteria.Where(x => xAxisLetters.Contains(x.CriteriaLetter.ToString()) && Model.Assessment.DecisiveCriteria.Contains(x.CriteriaLetter.ToString()) || ((x.CriteriaLetter.ToString() == "A" || x.CriteriaLetter.ToString() == "B") && Model.Assessment.DecisiveCriteria.Any(y => y == 'A' || y == 'B'))).ToList();
 
     var yAxisCriteria = Model.Assessment.Criteria.Where(x => yAxisLetters.Contains(x.CriteriaLetter.ToString()) && Model.Assessment.DecisiveCriteria.Contains(x.CriteriaLetter.ToString())).ToList();
-}
 
-@functions{
     string className(int current_x, int current_y, int place_x, int place_y,int highestUncertainty_y, int lowestUncertainty_y,int highestUncertainty_x, int lowestUncertainty_x){
 
 
@@ -278,12 +288,9 @@
             classN = "active";            
         }
 
-        string categoryKey = "" + current_x + current_y;
-        return "risk-level " +  @Constants.categoryFromMatrix[categoryKey] + " " + classN;
+        return "risk-level " + GetCategoryFromUncertaintyNumber(current_x, current_y).ToString().ToLowerInvariant() + " " + classN;
     }
-}
 
-@functions{
     string findStatus(int current_x, int current_y, int place_x, int place_y,int highestUncertainty_y, int lowestUncertainty_y,int highestUncertainty_x, int lowestUncertainty_x){
 
         string name = className(current_x, current_y, place_x, place_y, highestUncertainty_y, lowestUncertainty_y, highestUncertainty_x, lowestUncertainty_x);
@@ -367,7 +374,7 @@
         Also it would look nicer. yeh. All uncertainty x,y's are now input in the findAllUncertaintyCategories use of the matrix lookup.*@
         <p>
             @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificName.ScientificNameRank) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> 
-            @Model.Assessment.Category<span is-visible="uncertaintiesList.Count == 0">.</span><span is-visible="uncertaintiesList.Count>0">, med usikkerhet til @Html.Raw(uncertaintiesList.Select(x => $"<i>{Constants.categoryStringFromCode[x].ToLowerInvariant()}</i> {x.ToUpper()}").JoinAnd(", ", " og ")).</span>
+            @Model.Assessment.Category<span is-visible="uncertaintiesList.Count == 0">.</span><span is-visible="uncertaintiesList.Count>0">, med usikkerhet til @Html.Raw(uncertaintiesList.Select(x => $"<i>{x.DisplayName().ToLowerInvariant()}</i> {x.ToString()}").JoinAnd(", ", " og ")).</span>
             <span>
                 Risikoen er @(Model.Assessment.GeographicVariationInCategory == true ? "lavere i deler av" : "den samme i hele")  @Helpers.FixSpeciesLevel("{art}ens", Model.Assessment.ScientificName.ScientificNameRank) potensielle utbredelse.
             </span>

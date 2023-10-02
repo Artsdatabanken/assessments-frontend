@@ -118,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="about" xml:space="preserve">
-    <value>TODO</value>
+    <value>The Alien Species List shows the ecological impact of alien species on  natural diversity in Norway.  It is prepared by Artsdatabanken in collabortation with subject matter experts.</value>
   </data>
 </root>

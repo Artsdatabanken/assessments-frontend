@@ -1,10 +1,57 @@
-﻿html {
+﻿/* Style reset start */
+
+html, body, div, span,
+h1, h2, h3, h4, h5, h6, p, pre, img,
+small, strong, b, i, ol, ul, li,
+footer, header {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 1.25;
+}
+
+nav ul {
+    list-style: none;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #cccccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+input, select {
+    vertical-align: middle;
+}
+
+/* Style reset end */
+
+
+html {
     max-width: 100%;
     overflow-x: hidden;
 }
 
 body {
-    background: #fff9f0;
+    background: #fffcf7;
 }
 
 h1,
@@ -59,7 +106,7 @@ span,
 .main-content,
 .main {
     position: relative;
-    background: #fff9f0;
+    background: #fffcf7;
 }
 
 h1 {
@@ -346,9 +393,10 @@ option {
     background: #fff9f0;
 }
 
-.tabbed_element_container {    
+.tabbed_element_container {
+    background: #fff;
     padding: 10px;
-    border: 1px solid lightgrey;
+    border: 1px solid #f5e7d3;
     padding-top: 30px;
     border-top-color: #7f726b;
     margin-top:0;

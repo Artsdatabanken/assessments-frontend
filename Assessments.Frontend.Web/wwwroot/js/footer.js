@@ -1,14 +1,11 @@
-
-
-var address = "342287";
-var some = "342288";
-var readmore = "342286";
+var footerAddress = "342287";
+var footerSome = "342288";
+var footerReadmore = "341268";
 
 
 // Lets pretend this is a part of the main site
 function getFooter(node,place) {
     try {
-        console.log("making footer")
         // Obtaining the relevant doi to look up.
         let url = "https://www.artsdatabanken.no/api/Content/" + node;
         fetch(url)
@@ -49,8 +46,7 @@ function getFooter(node,place) {
 
 // Startup
 window.addEventListener('load', function () {
-    console.log("loaded script footer")
-    getFooter(address, 'address');
-    getFooter(some, 'some');
-    getFooter(readmore, 'readmore');
+    getFooter(footerAddress, 'address');
+    getFooter(footerSome, 'some');
+    getFooter(footerReadmore, 'readmore');
 })

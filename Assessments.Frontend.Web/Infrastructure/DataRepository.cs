@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Assessments.Mapping.AlienSpecies.Model;
@@ -14,6 +15,7 @@ using AutoMapper;
 using Azure.Storage.Blobs;
 using CsvHelper;
 using CsvHelper.Configuration;
+using DocumentFormat.OpenXml.Wordprocessing;
 using LazyCache;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +32,10 @@ namespace Assessments.Frontend.Web.Infrastructure
         private readonly ILogger<DataRepository> _logger;
         private readonly IMapper _mapper;
         private readonly IOptions<ApplicationOptions> _options;
+        private readonly ILoggerFactory _loggerFactory;
+        private readonly string _path;
+        private IAppCache appCache;
+        private IConfiguration configuration;
 
         private static CsvConfiguration CsvConfiguration => new(CultureInfo.InvariantCulture) { Delimiter = ";" };
 
@@ -39,16 +45,42 @@ namespace Assessments.Frontend.Web.Infrastructure
             _mapper = mapper;
             _logger = logger;
             _environment = environment;
+            _path = Path.Combine(_environment.ContentRootPath, Constants.CacheFolder);
             _configuration = configuration;
             _appCache = appCache;
             _appCache.DefaultCachePolicy.DefaultCacheDurationSeconds = 86400; // 24 hours
+        }
+
+        //Constructor that initializes the class properties without using DI and IWebHostEnvironment as this is only available during runtime
+        //This constructor can then be used from outside project scope
+        public DataRepository(IAppCache appCache, IConfiguration configuration, ILogger<DataRepository> logger, IMapper mapper, IOptions<ApplicationOptions> options)
+        {
+            _options = options;
+            _mapper = mapper;
+            _logger = logger;
+
+            // Get the path to the cache files in Assessments.Frontend.Web project
+            _path = Assembly.GetExecutingAssembly().Location;
+            string delimeter = "Assessments.Transformation";
+            _path = _path.Split(delimeter)[0];
+            _path = Path.Combine(_path, "Assessments.Frontend.Web", Constants.CacheFolder);
+
+            _configuration = configuration;
+            _appCache = appCache;
+            _appCache.DefaultCachePolicy.DefaultCacheDurationSeconds = 86400; // 24 hours
+        }
+
+        public DataRepository(IAppCache appCache, IConfiguration configuration)
+        {
+            this.appCache = appCache;
+            this.configuration = configuration;
         }
 
         public Task<IQueryable<T>> GetData<T>(string name)
         {
             async Task<IQueryable<T>> DeserializeData()
             {
-                var fileName = Path.Combine(_environment.ContentRootPath, Constants.CacheFolder, name);
+                var fileName = Path.Combine(_path, name);
                 string fileContent;
 
                 if (File.Exists(fileName)) // use cached file
@@ -81,6 +113,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
             return _appCache.GetOrAddAsync($"{nameof(DataRepository)}-{name}", DeserializeData);
         }
+
 
         public Task<IQueryable<SpeciesAssessment2021>> GetSpeciesAssessments()
         {

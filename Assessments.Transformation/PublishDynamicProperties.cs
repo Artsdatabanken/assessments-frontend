@@ -1,147 +1,158 @@
-﻿using CsvHelper.Configuration;
-using CsvHelper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Transformation.Models;
 using System.Text;
 using System.Threading.Tasks;
 using Raven.Client;
 using Raven.Client.Document;
 using static Assessments.Mapping.RedlistSpecies.Source.Rodliste2019;
+using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Shared.Helpers;
+using System.Runtime;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Hosting;
+using Assessments.Shared.Options;
+using LazyCache;
+using AutoMapper;
 
 namespace Assessments.Transformation
 {
-    internal class PublishDynamicProperties
+    public class PublishDynamicProperties
     {
-        private static void ImportRedlist2021(IDocumentStore store)
+        private readonly DataRepository _dataRepository;
+        private readonly IOptions<ApplicationOptions> _options;
+        private readonly IConfiguration _configuration;
+        private readonly ILogger<DataRepository> _logger;
+        private readonly IMapper _mapper;
+        private IAppCache _appCache;
+
+        public PublishDynamicProperties(IConfiguration configuration)
+        {
+            ApplicationOptions applicationOptions = new ApplicationOptions
+            {
+                AlienSpecies2023 = new AlienSpecies2023Options
+                {
+                    Enabled = true,
+                    IsHearing = true,
+                    TransformAssessments = true
+                },
+                Species2021 = new Species2021Options
+                {
+                    TransformAssessments = true
+                }
+            };
+            
+            _options = Options.Create(applicationOptions);
+
+            //The AutoMapper method AddMaps parameter refers to the assembly files in the Assessment.Mapping project. It will find the maps contained.
+            var mapperConfiguration = new MapperConfiguration(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
+            _mapper = new Mapper(mapperConfiguration);
+           
+            _configuration = configuration;
+            _appCache = new CachingService();
+            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+            var _logger = loggerFactory.CreateLogger<DataRepository>();
+ 
+
+            _dataRepository = new DataRepository(_appCache, configuration, _logger, _mapper, _options );
+        }
+
+
+        public async Task ImportRedlist2021()
         {
             var batch = new List<DynamicProperty>();
             //var httpClient = new HttpClient();
             //var client = new RedlistApi.Client("https://assessments-fe.test.artsdatabanken.no/", httpClient);
             //var result = client.Api_Species2021Async().GetAwaiter().GetResult();
-            using (var reader = new StreamReader("rødliste-2021.csv")) // todo - erstatt med bruk av api
-            using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.GetCultureInfo("nb-NO"))
-            {
-                DetectDelimiter = true,
-                PrepareHeaderForMatch = args1 => args1.Header.Replace(" ", "_").ToLower()
-            }))
-            {
-                var records = csv.GetRecords<dynamic>();
-                foreach (var record in records)
-                {
-                    string reference = ("ScientificNames/" + record.vitenskapelig_navn_id.ToString());
-                    var prop = new DynamicProperty()
-                    {
-                        Id = "DynamicProperty/Rodliste2021-" + record.id_for_vurderingen,
-                        References = new[] { reference },
-                        Properties = new[]
-                        {
-                            new DynamicProperty.Property()
-                            {
-                                Name = "Kategori", Value = record.kategori_2021.Substring(0, 2),
-                                Properties = new[]
-                                {
-                                    new DynamicProperty.Property() { Name = "Kontekst", Value = "Rødliste 2021" },
-                                    new DynamicProperty.Property()
-                                        { Name = "scientificNameID", Value = record.vitenskapelig_navn_id },
-                                    new DynamicProperty.Property()
-                                        { Name = "EkspertGruppe", Value = record.ekspertkomité },
-                                    new DynamicProperty.Property()
-                                        { Name = "Område", Value = record.vurderingsområde },
-                                    new DynamicProperty.Property() { Name = "Aar", Value = "2021" },
-                                    new DynamicProperty.Property()
-                                    {
-                                        Name = "Url",
-                                        Value = "https://artsdatabanken.no/lister/rodlisteforarter/2021/" +
-                                                record.id_for_vurderingen
-                                    },
-                                }
-                            },
-                        }
-                    };
-                    batch.Add(prop);
-                    if (batch.Count <= 999) continue;
-                    SaveBatch(batch, store);
-                    batch = new List<DynamicProperty>();
-                }
-            }
 
-            if (batch.Count > 0)
+            var AlienSpeciesAssessments = await _dataRepository.GetSpeciesAssessments();
+
+            var alienSpeciesAssessmentsTransformed = AlienSpeciesAssessments.Select(x => new DynamicProperty
             {
-                SaveBatch(batch, store);
-            }
+                Id = x.Id.ToString(),
+                References = new[] { "ScientificNames/" + x.ScientificNameId.ToString() },
+                Properties = new[]
+                {
+                    new DynamicProperty.Property
+                    {
+                        Name = "Kategori",
+                        Value = x.Category.ToString().Substring(0, 2),
+                        Properties = new []
+                        {
+                            new DynamicProperty.Property() { Name = "Kontekst", Value = "Rødliste 2021" },
+                            new DynamicProperty.Property() { Name = "scientificNameID", Value = x.ScientificNameId.ToString() },
+                            new DynamicProperty.Property() { Name = "EkspertGruppe", Value = x.ExpertCommittee },
+                            new DynamicProperty.Property() { Name = "Område", Value = x.AssessmentArea },
+                            new DynamicProperty.Property() { Name = "Aar", Value = "2021" },
+                            new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/rodlisteforarter/2021/" + x.Id.ToString()
+                            }
+                        }
+                    }
+                }
+            });
         }
-        private static void ImportAlienList2023(IDocumentStore store)
+
+
+        public async Task ImportAlienList2023()
         {
             var batch = new List<DynamicProperty>();
-            using (var reader = new StreamReader("fremmedartslista-2023.csv")) // todo - erstatt med bruk av api
-            using (var csv = new CsvReader(reader, new CsvConfiguration(CultureInfo.GetCultureInfo("nb-NO"))
+
+            var AlienSpeciesAssessments = await _dataRepository.GetAlienSpeciesAssessments();
+
+            var alienSpeciesAssessmentsTransformed = AlienSpeciesAssessments.Select(x => new DynamicProperty
             {
-                DetectDelimiter = true,
-                PrepareHeaderForMatch = args1 => args1.Header.Replace(" ", "_").ToLower()
-            }))
-            {
-                var records = csv.GetRecords<dynamic>();
-                foreach (var record in records)
+                Id = x.Id.ToString(),
+                References = new[] { "ScientificNames/" + x.ScientificName.ScientificNameId.ToString() },
+                Properties = new[]
                 {
-                    var vitenskapeligNavnId = record.vitenskapelig_navn_id;
-                    var idForVurderingen = record.id_for_vurderingen;
-
-                    string reference = ("ScientificNames/" + vitenskapeligNavnId.ToString());
-                    var prop = new DynamicProperty()
+                    new DynamicProperty.Property
                     {
-                        Id = "DynamicProperty/FremmedArt2023-" + idForVurderingen,
-                        References = new[] { reference },
-                        Properties = new[]
+                        Name = "Kategori",
+                        Value = x.Category.ToString().Substring(0, 2),
+                        Properties = new []
                         {
-                            new DynamicProperty.Property()
-                            {
-                                Name = "Kategori", Value = record.risikokategori_2023.Substring(0, 2),
-                                Properties = new[]
-                                {
-                                    new DynamicProperty.Property() { Name = "Kontekst", Value = "Fremmedart 2023" },
-                                    new DynamicProperty.Property()
-                                        { Name = "scientificNameID", Value = vitenskapeligNavnId },
-                                    new DynamicProperty.Property()
-                                        { Name = "EkspertGruppe", Value = record.ekspertkomité },
-                                    new DynamicProperty.Property()
-                                        { Name = "Område", Value = record.vurderingsområde == "Fastlands-Norge med havområder" ? "Norge" : "Svalbard" },
-                                    new DynamicProperty.Property() { Name = "Aar", Value = "2023" },
-                                    new DynamicProperty.Property()
-                                    {
-                                        Name = "Url",
-                                        Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" +
-                                                idForVurderingen
-                                    },
-                                    new DynamicProperty.Property() {Name = "Fremmedartsstatus" , Value = record.fremmedartsstatus}
-                                }
-                            },
+                            new DynamicProperty.Property() { Name = "Kontekst", Value = "Fremmedart 2023" },
+                            new DynamicProperty.Property() { Name = "scientificNameID", Value = x.ScientificName.ScientificNameId.ToString() },
+                            new DynamicProperty.Property() { Name = "EkspertGruppe", Value = x.ExpertGroup },
+                            new DynamicProperty.Property() { Name = "Område", Value = x.EvaluationContext.DisplayName()  },
+                            new DynamicProperty.Property() { Name = "Aar", Value = "2023" },
+                            new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" + x.Id.ToString()
+                            }
                         }
-                    };
-                    batch.Add(prop);
-                    if (batch.Count <= 999) continue;
-                    SaveBatch(batch, store);
-                    batch = new List<DynamicProperty>();
+                    }
                 }
-            }
-
-            if (batch.Count > 0)
-            {
-                SaveBatch(batch, store);
-            }
-        }
-
-        private static void SaveBatch(List<DynamicProperty> batch, IDocumentStore documentStore)
-        {
-            using var session = documentStore.OpenSession();
-            foreach (var dynamicProperty in batch)
-            {
-                session.Store(dynamicProperty);
-            }
-            session.SaveChanges();
+            });
         }
     }
+
+
+
+    public class StoreHolder
+    {
+        private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
+
+        public static IDocumentStore Store
+        {
+            get { return store.Value; }
+        }
+
+        private static IDocumentStore CreateStore()
+        {
+            IDocumentStore store = new DocumentStore()
+            {
+                ConnectionStringName = "DatabankRavenDB"
+            }.Initialize();
+
+            return store;
+        }
+    }
+
+
 }
+

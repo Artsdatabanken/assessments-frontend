@@ -12,7 +12,7 @@ namespace Assessments.Transformation.Helpers
     {
         private static BlobContainerClient _blobContainer;
         
-        public static async Task Upload(IConfigurationRoot configuration, string key, string value)
+        public static async Task UploadToBlob(IConfigurationRoot configuration, string key, string value)
         {
             var connectionString = configuration.GetConnectionString("AzureBlobStorage");
             

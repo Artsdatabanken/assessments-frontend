@@ -1,61 +1,62 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Assessments.Shared.Resources.Enums.AlienSpecies;
+using System.ComponentModel.DataAnnotations;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023MajorTypeGroup
     {
-        [Display(Name = "ukjent")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.unknown), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         Unknown,
 
-        [Display(Name = "Ferskvann")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.freshwater_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         FreshWaterThreatned,
 
-        [Display(Name = "Fjell og berg")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.mountains_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         MountainsThreatned,
 
-        [Display(Name = "Landform")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.landform_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         LandformThreatned,
 
-        [Display(Name = "Marint gruntvann")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.marine_water_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         MarineWaterThreatned,
 
-        [Display(Name = "Marint gruntvann, Svalbard")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.marine_water_Svalbard_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         MarineWaterSvalbardThreatned,
 
-        [Display(Name = "Semi-naturlig")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.semi_natural_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         SemiNaturalThreatned,
 
-        [Display(Name = "Skog")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.forest_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         ForestThreatned,
 
-        [Display(Name = "Svalbard")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.Svalbard_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         SvalbardThreatned,
 
-        [Display(Name = "Våtmark")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.wetlands_threatned), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         WetlandsThreatned,
 
-        [Display(Name = "Limniske vannmasser")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.limnic_waterbody_systems), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         LimnicWaterbodySystems,
 
-        [Display(Name = "Marine vannmasser")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.marine_waterbody_systems), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         MarineWaterbodySystems,
 
-        [Display(Name = "Snø- og issystemer")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.snow_ice_systems), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         SnowAndIceSystems,
 
-        [Display(Name = "Innsjøbunnsystemer")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.freshwater_bottom_systems), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         FreshwaterBottomSystems,
 
-        [Display(Name = "Saltvannsbunnsystemer")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.marine_seabed_systems), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         MarineSeabedSystems,
 
-        [Display(Name = "Elvebunnsystemer")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.river_bottom_systems), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         RiverBottomSystems,
 
-        [Display(Name = "Fastmarkssystemer")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.terrestrial_systems), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         TerrestrialSystems,
 
-        [Display(Name = "Våtmarkssystemer")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023MajorTypeGroupResource.wetland_systems), ResourceType = typeof(AlienSpeciesAssessment2023MajorTypeGroupResource))]
         WetlandSystems,
 
     }

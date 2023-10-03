@@ -25,6 +25,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AlienSpeciesAssessment2023CategoryResource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023EvaluationContextResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023EvaluationContextResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MajorTypeGroupResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023MajorTypeGroupResource.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +52,14 @@
     <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CategoryResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AlienSpeciesAssessment2023CategoryResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023EvaluationContextResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023EvaluationContextResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MajorTypeGroupResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023MajorTypeGroupResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

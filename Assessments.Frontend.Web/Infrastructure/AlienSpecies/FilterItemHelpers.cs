@@ -1,7 +1,9 @@
-﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Mapping.AlienSpecies.Model;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using Assessments.Shared.Resources.Enums.AlienSpecies;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
@@ -9,20 +11,21 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class Areas
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023AreasFilters = Enum.GetValues<AlienSpeciesAssessment2023EvaluationContext>()
+        private readonly Filter.FilterItem[] AlienSpecies2023AreasFilters = Enum.GetValues<AlienSpeciesAssessment2023EvaluationContext>()
             .Select(x => new Filter.FilterItem
             {
                 Name = x.DisplayName(),
                 NameShort = x.ToString()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023Areas = new()
-        {
-            Filters = AlienSpecies2023AreasFilters,
-            FilterDescription = "",
-            FilterButtonName = "områdefiltre",
-            FilterButtonText = "Område"
-        };
+        public Filter.FilterAndMetaData AlienSpecies2023Areas() =>
+            new()
+            {
+                Filters = AlienSpecies2023AreasFilters,
+                FilterDescription = "",
+                FilterButtonName = "områdefiltre",
+                FilterButtonText = "Område"
+            };
     }
 
     public class Categories
@@ -473,53 +476,56 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             AlienSpeciesAssessment2023MajorTypeGroup.TerrestrialSystems.DisplayName(),
             AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems.DisplayName(),
          };
+        
+        public static Filter.FilterAndMetaData AlienSpecies2023AlteredEcosystems() => 
+            new()
+            {
+                Filters = Enum.GetValues<AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems>()
+                    .Select(x => new Filter.FilterItem
+                    {
+                        Name = x.DisplayName().ToUpper()[0] + x.DisplayName()[1..],
+                        NameShort = x.ToString()
+                    }).ToArray(),
+                FilterDescription = ""
+            };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023AlteredEcosystems = Enum.GetValues<AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems>()
-        .Select(x => new Filter.FilterItem
+        public static Filter.FilterAndMetaData AlienSpecies2023AlteredMajorTypeGroupTypes() =>
+            new()
+            {
+                Filters = Enum.GetValues<AlienSpeciesAssessment2023MajorTypeGroup>()
+                    .Select(x => new Filter.FilterItem
+                    {
+                        Name = x.DisplayName(),
+                        NameShort = x.ToString()
+                    }).Skip(1).Where(x => !isNotThreatened.Contains(x.Name)).ToArray(),
+                FilterDescription = ""
+            };
+
+        private readonly Filter.FilterItem[] AlienSpecies2023NatureTypesFilters =
         {
-            Name = x.DisplayName().ToUpper()[0] + x.DisplayName()[1..],
-            NameShort = x.ToString()
-        }).ToArray();
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023AlteredMajorTypeGroupTypes = Enum.GetValues<AlienSpeciesAssessment2023MajorTypeGroup>()
-        .Select(x => new Filter.FilterItem
-        {
-            Name = x.DisplayName(),
-            NameShort = x.ToString()
-        }).Skip(1).Where(x => !isNotThreatened.Contains(x.Name)).ToArray();
-
-        public static readonly Filter.FilterItem[] AlienSpecies2023NatureTypesFilters =
-        {
-
-        new ()
+            new ()
             {
                 Name = "Forekomstareal i sterkt endra natur",
                 NameShort = "Nta",
-                SubGroup = new ()
-                {
-                    Filters = AlienSpecies2023AlteredEcosystems,
-                    FilterDescription = ""
-                }
-},
+                SubGroup = AlienSpecies2023AlteredEcosystems()
+            },
             new()
             {
                 Name = "Forekomst i truede eller sjeldne naturtyper",
                 NameShort = "Ntn",
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023AlteredMajorTypeGroupTypes,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023AlteredMajorTypeGroupTypes()
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023NatureTypes = new()
-        {
-            Filters = AlienSpecies2023NatureTypesFilters,
-            FilterDescription = "",
-            FilterButtonName = "'naturtyper'-filtre",
-            FilterButtonText = "Naturtyper"
-        };
+        public Filter.FilterAndMetaData AlienSpecies2023NatureTypes() => 
+            new()
+            {
+                Filters = AlienSpecies2023NatureTypesFilters,
+                FilterDescription = "",
+                FilterButtonName = "'naturtyper'-filtre",
+                FilterButtonText = "Naturtyper"
+            };
     }
 
     public class SpreadWays

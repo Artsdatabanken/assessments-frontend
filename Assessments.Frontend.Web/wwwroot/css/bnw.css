@@ -552,5 +552,8 @@ color: #FFF9F0;
 }
 .darktheme .title_header {
     background: #484848;
-    
+}
+
+.darktheme .sidebar_image_info img {
+    background: #d9d9d9;
 }

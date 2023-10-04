@@ -37,8 +37,15 @@
 
 li.page-item a,
 li.page-item a.page-link {
+    padding: 10px;
     color: inherit;
     background: inherit;
+}
+
+li.page-item a:hover,
+li.page-item a.page-link:hover {
+    border: 1px solid #4c4a48;
+    border-radius: 5px;
 }
 
 .page-item {

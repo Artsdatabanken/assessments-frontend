@@ -10,7 +10,7 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
 WORKDIR /app
 ENV ASPNETCORE_URLS="http://+:3001"
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Assessments.Frontend.Web/Assessments.Frontend.Web.csproj", "Assessments.Frontend.Web/"]
 RUN dotnet restore "Assessments.Frontend.Web/Assessments.Frontend.Web.csproj"

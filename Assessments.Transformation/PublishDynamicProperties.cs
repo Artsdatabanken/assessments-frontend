@@ -74,8 +74,8 @@ namespace Assessments.Transformation
             var AlienSpeciesAssessments = await _dataRepository.GetSpeciesAssessments();
 
             var alienSpeciesAssessmentsTransformed = AlienSpeciesAssessments.Select(x => new DynamicProperty
-            {
-                Id = x.Id.ToString(),
+            {                
+                Id = "DynamicProperty/Rodliste2021-" + x.Id.ToString(),
                 References = new[] { "ScientificNames/" + x.ScientificNameId.ToString() },
                 Properties = new[]
                 {
@@ -107,7 +107,7 @@ namespace Assessments.Transformation
 
             var alienSpeciesAssessmentsTransformed = AlienSpeciesAssessments.Select(x => new DynamicProperty
             {
-                Id = x.Id.ToString(),
+                Id = "DynamicProperty/FremmedArt2023-" + x.Id.ToString(),
                 References = new[] { "ScientificNames/" + x.ScientificName.ScientificNameId.ToString() },
                 Properties = new[]
                 {
@@ -151,6 +151,16 @@ namespace Assessments.Transformation
 
             return store;
         }
+    }
+
+    private static void SaveBatch(List<DynamicProperty> batch, IDocumentStore documentStore)
+    {
+        using var session = documentStore.OpenSession();
+        foreach (var dynamicProperty in batch)
+        {
+            session.Store(dynamicProperty);
+        }
+        session.SaveChanges();
     }
 
 

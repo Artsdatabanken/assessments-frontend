@@ -30,35 +30,37 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Categories
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023InvasionPotentialFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential>()
+        private readonly Filter.FilterItem[] AlienSpecies2023InvasionPotentialFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential>()
             .Select(x => new Filter.FilterItem
             {
                 NameShort = x.Description(),
                 Name = x.DisplayName()
             }).Skip(1).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023InvasionPotential = new()
-        {
-            Filters = AlienSpecies2023InvasionPotentialFilters,
-            FilterDescription = "Artens levedyktighet og evne til å ekspandere",
-            FilterButtonName = "invasjonspotensialfiltre",
-            FilterButtonText = "Invasjonspotensial (risikomatrisens x-akse)"
-        };
+        public Filter.FilterAndMetaData AlienSpecies2023InvasionPotential() =>
+            new()
+            {
+                Filters = AlienSpecies2023InvasionPotentialFilters,
+                FilterDescription = "Artens levedyktighet og evne til å ekspandere",
+                FilterButtonName = "invasjonspotensialfiltre",
+                FilterButtonText = "Invasjonspotensial (risikomatrisens x-akse)"
+            };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffectFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect>()
+        private readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffectFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect>()
             .Select(x => new Filter.FilterItem
             {
                 NameShort = x.Description(),
                 Name = x.DisplayName()
             }).Skip(1).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023EcologicalEffect = new()
-        {
-            Filters = AlienSpecies2023EcologicalEffectFilters,
-            FilterDescription = "Påvirkning på arter og naturtyper i Norge",
-            FilterButtonName = "okologiskeffektfiltre",
-            FilterButtonText = "Økologisk effekt (risikomatrisens y-akse)"
-        };
+        public Filter.FilterAndMetaData AlienSpecies2023EcologicalEffect() => 
+            new()
+            {
+                Filters = AlienSpecies2023EcologicalEffectFilters,
+                FilterDescription = "Påvirkning på arter og naturtyper i Norge",
+                FilterButtonName = "okologiskeffektfiltre",
+                FilterButtonText = "Økologisk effekt (risikomatrisens y-akse)"
+            };
 
         private readonly Filter.FilterItem[] _alienSpecies2023CategoriesFilters = Enum.GetValues<AlienSpeciesAssessment2023Category>()
             .Where(x => x != AlienSpeciesAssessment2023Category.NR)
@@ -173,142 +175,94 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class DeciciveCriteria
     {
-        public enum DecisiveCriteriaEnum
+        public enum DecisiveCriteriaInvasion
         {
-            [Display(Name = "A")]
-            dcexa,
-
-            [Display(Name = "B")]
-            dcexb,
-
-            [Display(Name = "AB")]
-            dcipab,
-
-            [Display(Name = "C")]
-            dcipc,
-
-            [Display(Name = "D")]
-            dceed,
-
-            [Display(Name = "E")]
-            dcipe,
-
-            [Display(Name = "F")]
-            dceef,
-
-            [Display(Name = "G")]
-            dcipg,
-
-            [Display(Name = "H")]
-            dceeh,
-
-            [Display(Name = "I")]
-            dcipi,
+            A = AlienSpeciesAssessment2023CriteriaLetter.A,
+            B = AlienSpeciesAssessment2023CriteriaLetter.B,
+            C = AlienSpeciesAssessment2023CriteriaLetter.C,
+            [Display(Name = "A×B hvor høyeste skår er...")] //TODO: move to resource
+            AxBdescribsion,
+            [Display(Name = "A×B - Median levetid x Ekspansjonshastighet")] //TODO: move to resource
+            AxB,
         };
 
-        public static readonly Filter.FilterItem[] ExistanceTimeAndExpansionSpeed =
+        public enum DecisiveCriteriaEcologicalEffect
         {
-            new()
-            {
-                Name = "A – artens levetid i Norge",
-                NameShort = nameof(DecisiveCriteriaEnum.dcexa)
-            },
-            new()
-            {
-                Name = "B – ekspansjonshastighet",
-                NameShort = nameof(DecisiveCriteriaEnum.dcexb)
-            }
+            D = AlienSpeciesAssessment2023CriteriaLetter.D,
+            E = AlienSpeciesAssessment2023CriteriaLetter.E,
+            F = AlienSpeciesAssessment2023CriteriaLetter.F,
+            G = AlienSpeciesAssessment2023CriteriaLetter.G,
+            H = AlienSpeciesAssessment2023CriteriaLetter.H,
+            I = AlienSpeciesAssessment2023CriteriaLetter.I
         };
 
-        public static readonly Filter.FilterItem[] InvationPotential =
+        public static Filter.FilterAndMetaData MedianLifeTimeAndExpansionSpeed() =>
+            new()
+            {
+                Filters = 
+                    Enum.GetValues<DecisiveCriteriaInvasion>().Where(x => x is DecisiveCriteriaInvasion.A or DecisiveCriteriaInvasion.B)
+                    .Select(x => new Filter.FilterItem
+                    {
+                        Name = x.ToString() + " - " + ((AlienSpeciesAssessment2023CriteriaLetter)x).DisplayName(),
+                        NameShort = x.ToString()
+                    }).ToArray()
+                ,
+                FilterDescription = ""
+            };
+
+        private static Filter.FilterAndMetaData InvationPotential() =>
+           new()
+           {
+               Filters = Enum.GetValues<DecisiveCriteriaInvasion>().Where(x => x != DecisiveCriteriaInvasion.A & x != DecisiveCriteriaInvasion.B)
+               .Select(x => new Filter.FilterItem
+                   {
+                        Name = x != DecisiveCriteriaInvasion.C ?  x.DisplayName()
+                        : x.ToString() + " - " + ((AlienSpeciesAssessment2023CriteriaLetter)x).DisplayName(),
+                        NameShort = x.ToString(),
+                        SubGroup = x == DecisiveCriteriaInvasion.AxBdescribsion ? MedianLifeTimeAndExpansionSpeed() : null
+                   }
+               ).Reverse().ToArray(),
+                   
+               FilterDescription = "" 
+           };
+
+        public static Filter.FilterAndMetaData EcologicalEffect() =>
+        new()
         {
-            new()
-            {
-                Name = "A×B – artens levetid i Norge × ekspansjonshastighet",
-                NameShort = nameof(DecisiveCriteriaEnum.dcipab)
-            },
-            new()
-            {
-                Name = "A×B hvor høyeste skår er...",
-                NameShort = "dcipah",
-                SubGroup = new()
-                {
-                    Filters = ExistanceTimeAndExpansionSpeed,
-                    FilterDescription = ""
-                }
-            },
-            new()
-            {
-                Name = "C – kolonisert areal",
-                NameShort = nameof(DecisiveCriteriaEnum.dcipc)
-            }
+            Filters = Enum.GetValues<DecisiveCriteriaEcologicalEffect>()
+                    .Select(x => new Filter.FilterItem
+                    {
+                        Name = x.ToString() + " - " + ((AlienSpeciesAssessment2023CriteriaLetter) x).DisplayName(),
+                        NameShort = x.ToString()
+                    }).ToArray(),
+            FilterDescription = ""
         };
 
-        public static readonly Filter.FilterItem[] EcologicalEffect =
-        {
-            new()
-            {
-                Name = "D – effekt på truede arter eller nøkkelarter",
-                NameShort = nameof(DecisiveCriteriaEnum.dceed)
-            },
-            new()
-            {
-                Name = "E – effekt på øvrige arter",
-                NameShort = nameof(DecisiveCriteriaEnum.dcipe)
-            },
-            new()
-            {
-                Name = "F – effekt på truede eller sjeldne naturtyper",
-                NameShort = nameof(DecisiveCriteriaEnum.dceef)
-            },
-            new()
-            {
-                Name = "G – effekt på øvrige naturtyper",
-                NameShort = nameof(DecisiveCriteriaEnum.dcipg)
-            },
-            new()
-            {
-                Name = "H – overføring av genetisk materiale",
-                NameShort = nameof(DecisiveCriteriaEnum.dceeh)
-            },
-            new()
-            {
-                Name = "I – overføring av parasitter eller patogener",
-                NameShort = nameof(DecisiveCriteriaEnum.dcipi)
-            }
-        };
-
-        public static readonly Filter.FilterItem[] AlienSpecies2023DeciciveCriteriaFilters =
+        public readonly Filter.FilterItem[] AlienSpecies2023DeciciveCriteriaFilters =
         {
             new()
             {
                 Name = "Invasjonspotensial",
                 NameShort = "dcin",
-                SubGroup = new()
-                {
-                    Filters = InvationPotential,
-                    FilterDescription = ""
-                }
+                SubGroup = InvationPotential()
             },
             new()
             {
                 Name = "Økologisk effekt",
                 NameShort = "dcok",
-                SubGroup = new()
-                {
-                    Filters = EcologicalEffect,
-                    FilterDescription = ""
-                }
+                SubGroup = EcologicalEffect()
+                   
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023DeciciveCriteria = new()
-        {
-            Filters = AlienSpecies2023DeciciveCriteriaFilters,
-            FilterDescription = "",
-            FilterButtonName = "avgjorende kriterier-filtre",
-            FilterButtonText = "Avgjørende kriterier for kategori"
-        };
+        public Filter.FilterAndMetaData AlienSpecies2023DeciciveCriteria() =>
+            new()
+            {
+                Filters = AlienSpecies2023DeciciveCriteriaFilters,
+                FilterDescription = "",
+                FilterButtonName = "avgjorende kriterier-filtre",
+                FilterButtonText = "Avgjørende kriterier for kategori"
+            };
     }
 
     public class Environments

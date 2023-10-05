@@ -64,7 +64,7 @@ namespace Assessments.Transformation
         }
 
 
-        public async Task ImportRedlist2021()
+        public async Task<List<DynamicProperty>> ImportRedlist2021()
         {
             var batch = new List<DynamicProperty>();
             //var httpClient = new HttpClient();
@@ -73,7 +73,7 @@ namespace Assessments.Transformation
 
             var AlienSpeciesAssessments = await _dataRepository.GetSpeciesAssessments();
 
-            var alienSpeciesAssessmentsTransformed = AlienSpeciesAssessments.Select(x => new DynamicProperty
+            return AlienSpeciesAssessments.Select(x => new DynamicProperty
             {                
                 Id = "DynamicProperty/Rodliste2021-" + x.Id.ToString(),
                 References = new[] { "ScientificNames/" + x.ScientificNameId.ToString() },
@@ -95,17 +95,18 @@ namespace Assessments.Transformation
                         }
                     }
                 }
-            });
+            }).
+            ToList();
         }
 
 
-        public async Task ImportAlienList2023()
+        public async Task<List<DynamicProperty>> ImportAlienList2023()
         {
             var batch = new List<DynamicProperty>();
 
             var AlienSpeciesAssessments = await _dataRepository.GetAlienSpeciesAssessments();
 
-            var alienSpeciesAssessmentsTransformed = AlienSpeciesAssessments.Select(x => new DynamicProperty
+            return  AlienSpeciesAssessments.Select(x => new DynamicProperty
             {
                 Id = "DynamicProperty/FremmedArt2023-" + x.Id.ToString(),
                 References = new[] { "ScientificNames/" + x.ScientificName.ScientificNameId.ToString() },
@@ -127,42 +128,9 @@ namespace Assessments.Transformation
                         }
                     }
                 }
-            });
+            }).
+            ToList();
         }
     }
-
-
-
-    public class StoreHolder
-    {
-        private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
-
-        public static IDocumentStore Store
-        {
-            get { return store.Value; }
-        }
-
-        private static IDocumentStore CreateStore()
-        {
-            IDocumentStore store = new DocumentStore()
-            {
-                ConnectionStringName = "DatabankRavenDB"
-            }.Initialize();
-
-            return store;
-        }
-    }
-
-    private static void SaveBatch(List<DynamicProperty> batch, IDocumentStore documentStore)
-    {
-        using var session = documentStore.OpenSession();
-        foreach (var dynamicProperty in batch)
-        {
-            session.Store(dynamicProperty);
-        }
-        session.SaveChanges();
-    }
-
-
 }
 

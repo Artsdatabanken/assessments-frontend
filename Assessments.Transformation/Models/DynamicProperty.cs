@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assessments.Transformation.Models
 {
-    internal class DynamicProperty
+    public class DynamicProperty
     {
         public class Property
         {

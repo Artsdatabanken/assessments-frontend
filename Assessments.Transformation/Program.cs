@@ -75,8 +75,8 @@ while (true)
 
             IAppCache appCache = new CachingService();
             var publishDynamicProperties = new PublishDynamicProperties(configuration);
-            await publishDynamicProperties.ImportAlienList2023();
-            await publishDynamicProperties.ImportRedlist2021();
+            var dynamicProperties = await publishDynamicProperties.ImportAlienList2023();
+            dynamicProperties.AddRange( await publishDynamicProperties.ImportRedlist2021() );
 
             Environment.Exit(0);
             break;
@@ -89,25 +89,9 @@ while (true)
 namespace Assessments.Transformation
 {
 
-    //public class PublishDynamicProperties
+    //class Program
     //{
-    //    private readonly IOptions<ApplicationOptions> _options;
-    //    private readonly IConfiguration _configuration;
-
-    //    public PublishDynamicProperties(IOptions<ApplicationOptions> options, IConfiguration configuration, DataRepository dataRepository)
-    //    {
-    //        _options = options;
-    //        _configuration = configuration;
-    //        _dataRepository = dataRepository;
-    //    }
-
-    //    public async Task runThis()
-    //    {
-    //        IAppCache appCache = new CachingService();
-    //        var publishDynamicProperties = new PublishDynamicProperties(new DataRepository(appCache, _configuration));
-    //        await publishDynamicProperties.ImportAlienList2023();
-    //        await publishDynamicProperties.ImportRedlist2021();
-    //    }
+    //    private string test = "hello"; //this is never reached
     //}
 
 
@@ -115,36 +99,18 @@ namespace Assessments.Transformation
     // The `DocumentStoreHolder` class holds a single Document Store instance.
     public class DocumentStoreHolder
     {
-        // Use Lazy<IDocumentStore> to initialize the document store lazily. 
-        // This ensures that it is created only once - when first accessing the public `Store` property.
-        private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>();
+        private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
 
-        public static IDocumentStore Store => store.Value;
+        public static IDocumentStore Store
+        {
+            get { return store.Value; }
+        }
 
         private static IDocumentStore CreateStore()
         {
             IDocumentStore store = new DocumentStore()
             {
-                DefaultDatabase = "Databank1",
-                // Define the cluster node URLs (required)
-                //Url = "http://it-webadb03.it.ntnu.no:8181/", //"http://it-webadbtest01.it.ntnu.no:8181/", //"http://it-webadb03.it.ntnu.no:8181/",
-                Url = "http://localhost:8080",
-                ///*some additional nodes of this cluster*/ },
-
-                // Set conventions as necessary (optional)
-                Conventions =
-                {
-                    MaxNumberOfRequestsPerSession = 10,
-                    //UseOptimisticConcurrency = true
-                },
-
-                // Define a default database (optional)
-                //Database = "Artskart2Core",
-
-                // Define a client certificate (optional)
-                //Certificate = new X509Certificate2("C:\\path_to_your_pfx_file\\cert.pfx"),
-
-                // Initialize the Document Store
+                ConnectionStringName = "DatabankRavenDB"
             }.Initialize();
 
             return store;

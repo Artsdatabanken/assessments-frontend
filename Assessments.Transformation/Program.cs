@@ -4,18 +4,15 @@ using System.Globalization;
 using System.IO;
 using Assessments.Transformation.Helpers;
 using Microsoft.Extensions.Configuration;
-using Raven.Client.Document;
-using Raven.Client;
 using Assessments.Transformation;
-
-
-Console.Clear();
-Console.CursorVisible = false;
 
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
     .AddUserSecrets<Program>()
     .Build();
+
+Console.Clear();
+Console.CursorVisible = false;
 
 var dataFolder = configuration.GetValue<string>("FilesFolder");
 
@@ -65,47 +62,11 @@ while (true)
             Environment.Exit(0);
             break;
         case "Publiser dynamicProperties til TaxonApi":
-
-            var publishDynamicProperties = new PublishDynamicProperties(configuration);
-            var dynamicProperties = await publishDynamicProperties.ImportAlienList2023();
-            dynamicProperties.AddRange( await publishDynamicProperties.ImportRedlist2021() );
-
+            await PublishDynamicProperties.UploadDynamicPropertiesToTaxonApi(configuration);
             Environment.Exit(0);
             break;
         case "Avslutt":
             Environment.Exit(0);
             break;
-    }
-}
-
-namespace Assessments.Transformation
-{
-
-    //class Program
-    //{
-    //    private string test = "hello"; //this is never reached
-    //}
-
-
-
-    // The `DocumentStoreHolder` class holds a single Document Store instance.
-    public class DocumentStoreHolder
-    {
-        private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
-
-        public static IDocumentStore Store
-        {
-            get { return store.Value; }
-        }
-
-        private static IDocumentStore CreateStore()
-        {
-            IDocumentStore store = new DocumentStore()
-            {
-                ConnectionStringName = "DatabankRavenDB"
-            }.Initialize();
-
-            return store;
-        }
     }
 }

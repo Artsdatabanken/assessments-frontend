@@ -13,6 +13,9 @@ using Assessments.Transformation.Helpers;
 using LazyCache;
 using AutoMapper;
 using Assessments.Mapping.RedlistSpecies;
+using Raven.Client.Document;
+using Raven.Client;
+using System;
 
 namespace Assessments.Transformation
 {
@@ -87,6 +90,33 @@ namespace Assessments.Transformation
                 }
             }).
             ToList();
+        }
+
+        public static async Task UploadDynamicPropertiesToTaxonApi(IConfigurationRoot configuration)
+        {
+            var publishDynamicProperties = new PublishDynamicProperties(configuration);
+            var dynamicProperties = await publishDynamicProperties.ImportAlienList2023();
+            dynamicProperties.AddRange(await publishDynamicProperties.ImportRedlist2021());
+        }
+        // The `DocumentStoreHolder` class holds a single Document Store instance.
+        public class DocumentStoreHolder
+        {
+            private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
+
+            public static IDocumentStore Store
+            {
+                get { return store.Value; }
+            }
+
+            private static IDocumentStore CreateStore()
+            {
+                IDocumentStore store = new DocumentStore()
+                {
+                    ConnectionStringName = "DatabankRavenDB"
+                }.Initialize();
+
+                return store;
+            }
         }
     }
 }

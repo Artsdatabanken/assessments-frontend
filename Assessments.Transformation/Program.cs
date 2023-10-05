@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Threading.Tasks;
 using Assessments.Transformation.Helpers;
-using Assessments.Shared.Options;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Raven.Abstractions.Data;
 using Raven.Client.Document;
 using Raven.Client;
-using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Transformation;
-using LazyCache;
-
 
 
 Console.Clear();
@@ -73,7 +66,6 @@ while (true)
             break;
         case "Publiser dynamicProperties til TaxonApi":
 
-            IAppCache appCache = new CachingService();
             var publishDynamicProperties = new PublishDynamicProperties(configuration);
             var dynamicProperties = await publishDynamicProperties.ImportAlienList2023();
             dynamicProperties.AddRange( await publishDynamicProperties.ImportRedlist2021() );

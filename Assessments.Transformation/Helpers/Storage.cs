@@ -36,6 +36,24 @@ namespace Assessments.Transformation.Helpers
             await _blobContainer.GetBlobClient(key).UploadAsync(stream, progressHandler: progressHandler);
         }
 
+        public static async Task<string> DownloadFromBlob(IConfigurationRoot configuration, string key)
+        {
+            var connectionString = configuration.GetConnectionString("AzureBlobStorage");
+
+            if (string.IsNullOrEmpty(connectionString))
+                throw new Exception("ConnectionStrings:AzureBlobStorage (app secret) mangler");
+
+            _blobContainer = new BlobContainerClient(connectionString, "assessments");
+
+            await _blobContainer.CreateIfNotExistsAsync();
+
+            var blob = _blobContainer.GetBlobClient(key);
+            var response = await blob.DownloadContentAsync();
+
+            var fileContent = response.Value.Content.ToString();
+            return fileContent;
+        }
+
         public static async Task UploadFile(IConfigurationRoot configuration, string path, byte[] value)
         {
             if (_blobContainer == null)

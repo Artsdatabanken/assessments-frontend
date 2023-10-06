@@ -17,7 +17,6 @@
 	<ItemGroup>
 		<PackageReference Include="Azure.Storage.Blobs" Version="12.17.0" />
 		<PackageReference Include="ByteSize" Version="2.1.1" />
-		<PackageReference Include="LazyCache.AspNetCore" Version="2.4.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.21" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.21">
 			<PrivateAssets>all</PrivateAssets>
@@ -32,7 +31,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Assessments.Frontend.Web\Assessments.Frontend.Web.csproj" />
 		<ProjectReference Include="..\Assessments.Mapping\Assessments.Mapping.csproj" />
 		<ProjectReference Include="..\Assessments.Shared\Assessments.Shared.csproj" />
 	</ItemGroup>

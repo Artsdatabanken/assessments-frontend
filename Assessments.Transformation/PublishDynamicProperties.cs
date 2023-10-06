@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Assessments.Shared.Options;
 using Assessments.Transformation.Helpers;
-using LazyCache;
 using AutoMapper;
 using Assessments.Mapping.RedlistSpecies;
 using Raven.Client.Document;
@@ -84,8 +83,7 @@ namespace Assessments.Transformation
                             new DynamicProperty.Property() { Name = "Område", Value = x.EvaluationContext.DisplayName()  },
                             new DynamicProperty.Property() { Name = "Aar", Value = "2023" },
                             new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" + x.Id.ToString() },
-                            new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.ToString()}
-                            }
+                            new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.ToString()}                            
                         }
                     }
                 }

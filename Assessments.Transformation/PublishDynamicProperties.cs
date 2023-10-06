@@ -123,7 +123,8 @@ namespace Assessments.Transformation
                             new DynamicProperty.Property() { Name = "EkspertGruppe", Value = x.ExpertGroup },
                             new DynamicProperty.Property() { Name = "Område", Value = x.EvaluationContext.DisplayName()  },
                             new DynamicProperty.Property() { Name = "Aar", Value = "2023" },
-                            new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" + x.Id.ToString()
+                            new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" + x.Id.ToString() },
+                            new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.ToString()}
                             }
                         }
                     }

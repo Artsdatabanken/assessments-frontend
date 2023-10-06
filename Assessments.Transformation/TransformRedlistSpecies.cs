@@ -86,7 +86,7 @@ namespace Assessments.Transformation
                             innerAssessment.Id = rodliste2019.Id;
 
                             if (rodliste2019.Revisions == null) rodliste2019.Revisions = new List<Rodliste2019>();
-                                rodliste2019.Revisions.Add(innerAssessment);
+                            rodliste2019.Revisions.Add(innerAssessment);
                         }
                     }
 

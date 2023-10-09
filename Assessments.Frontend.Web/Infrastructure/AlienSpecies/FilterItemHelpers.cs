@@ -420,24 +420,26 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     public class NatureTypes
     {
         // Must remove non-threatened nature types from the filter
-        private static readonly string[] isNotThreatened = new string[] {
-            AlienSpeciesAssessment2023MajorTypeGroup.LimnicWaterbodySystems.DisplayName(),
-            AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterbodySystems.DisplayName(),
-            AlienSpeciesAssessment2023MajorTypeGroup.SnowAndIceSystems.DisplayName(),
-            AlienSpeciesAssessment2023MajorTypeGroup.FreshwaterBottomSystems.DisplayName(),
-            AlienSpeciesAssessment2023MajorTypeGroup.MarineSeabedSystems.DisplayName(),
-            AlienSpeciesAssessment2023MajorTypeGroup.RiverBottomSystems.DisplayName(),
-            AlienSpeciesAssessment2023MajorTypeGroup.TerrestrialSystems.DisplayName(),
-            AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems.DisplayName(),
-         };
-        
+        public enum ImpactedNaturetypesThreatened
+        {
+            FreshWaterThreatned = AlienSpeciesAssessment2023MajorTypeGroup.FreshWaterThreatned,
+            MountainsThreatned = AlienSpeciesAssessment2023MajorTypeGroup.MountainsThreatned,
+            LandformThreatned = AlienSpeciesAssessment2023MajorTypeGroup.LandformThreatned,
+            MarineWaterThreatned = AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterThreatned,
+            MarineWaterSvalbardThreatned = AlienSpeciesAssessment2023MajorTypeGroup.MarineWaterSvalbardThreatned,
+            SemiNaturalThreatned = AlienSpeciesAssessment2023MajorTypeGroup.SemiNaturalThreatned,
+            ForestThreatned = AlienSpeciesAssessment2023MajorTypeGroup.ForestThreatned,
+            SvalbardThreatned = AlienSpeciesAssessment2023MajorTypeGroup.SvalbardThreatned,
+            WetlandsThreatned = AlienSpeciesAssessment2023MajorTypeGroup.WetlandsThreatned
+        }
+
         public static Filter.FilterAndMetaData AlienSpecies2023AlteredEcosystems() => 
             new()
             {
                 Filters = Enum.GetValues<AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems>()
                     .Select(x => new Filter.FilterItem
                     {
-                        Name = x.DisplayName().ToUpper()[0] + x.DisplayName()[1..],
+                        Name = x.DisplayName(),
                         NameShort = x.ToString()
                     }).ToArray(),
                 FilterDescription = ""
@@ -446,12 +448,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public static Filter.FilterAndMetaData AlienSpecies2023AlteredMajorTypeGroupTypes() =>
             new()
             {
-                Filters = Enum.GetValues<AlienSpeciesAssessment2023MajorTypeGroup>()
+                Filters = Enum.GetValues<ImpactedNaturetypesThreatened>()
                     .Select(x => new Filter.FilterItem
                     {
-                        Name = x.DisplayName(),
+                        Name = ((AlienSpeciesAssessment2023MajorTypeGroup)x).DisplayName(),
                         NameShort = x.ToString()
-                    }).Skip(1).Where(x => !isNotThreatened.Contains(x.Name)).ToArray(),
+                    }).ToArray(),
                 FilterDescription = ""
             };
 

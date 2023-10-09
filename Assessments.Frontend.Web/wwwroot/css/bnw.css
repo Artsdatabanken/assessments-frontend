@@ -501,7 +501,7 @@ color: #FFF9F0;
     background: #262f31
 }
 .darktheme .criteria-summary-list .collapsible .collapsible_content {
-    background: #846031;
+    background: #3b4345;
 }
 
 
@@ -552,5 +552,8 @@ color: #FFF9F0;
 }
 .darktheme .title_header {
     background: #484848;
-    
+}
+
+.darktheme .sidebar_image_info img {
+    background: #d9d9d9;
 }

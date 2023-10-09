@@ -97,13 +97,13 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Kappedyr")]
         Tunicata,
 
-        [Display(Name = "Karplanter")]
+        [Display(Name = "Planter")]
         Magnoliophyta,
 
-        [Display(Name = "Karplanter")]
+        [Display(Name = "Planter")]
         Pinophyta,
 
-        [Display(Name = "Karplanter")]
+        [Display(Name = "Planter")]
         Pteridophyta,
 
         [Display(Name = "Krepsdyr")]

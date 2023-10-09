@@ -61,6 +61,10 @@
     border-left: 1px solid #dfdddd;
 }
 
+.tabbed_element_container ul ul {
+    border-left: none;
+}
+
 ul.fourth,
 ul.second {
     border-color: lightgrey;

@@ -444,11 +444,14 @@ option {
     .sidebarmenu button,
     .title_header .sidebarmenu {
         display: block;
-        height:0px;
+        height: 0px;
+        left: 0;
+        right: initial;
     }
 
     .sidebarmenu button {
-        margin-left: auto;
+        margin-left: initial !important;
+        position: relative;
     }
 
     .sidebarmenu {

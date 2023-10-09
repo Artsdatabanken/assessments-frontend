@@ -347,12 +347,16 @@ option {
 }
 
 .tabbed_element_container {
-    background: #fff;
     padding: 10px;
-    border: 1px solid #f5e7d3;
+    border: 1px solid lightgrey;
+    /* 
+        This would help visibility
+        border: 1px solid #f5e7d3; 
+        background: #fff;
+    */
     padding-top: 30px;
     border-top-color: #7f726b;
-    margin-top:0;
+    margin-top: 0;
 }
 
 .sidebarmenu span:first-child {

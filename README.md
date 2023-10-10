@@ -13,7 +13,7 @@
 | https://assessments-fe-dev.test.artsdatabanken.no | Staging | develop (default)
 | https://assessments-fe.test.artsdatabanken.no | Staging | test
 | https://assessments-fe.artsdatabanken.no | Production | master
-| https://beta.artsdatabanken.no/lister/ | Production | test
+| https://beta.artsdatabanken.no/lister/ | Staging | test
 | https://artsdatabanken.no/lister/ | Production | master
 
 https://beta.artsdatabanken.no/lister og  https://artsdatabanken.no/lister er tilgjengelig utenfor kontor eller uten vpn.
@@ -59,7 +59,7 @@ rem Bygg og publish en release av nettsiden:
 dotnet publish Assessments-frontend.sln -c Release
 
 rem Kopier den ferdig bygde applikasjone 
-robocopy "Assessments.Frontend.Web\bin\Release\net6.0\publish" ...destinasjon...
+robocopy "Assessments.Frontend.Web\bin\Release\net7.0\publish" ...destinasjon...
 ```
 - Registrer Environmentvariabel ConnectionStrings:AzureBlobStorage f.eks. i IIS - Server - Configuration Editor - system.webServer/aspNetCore/environmentVariables - da som ASPNETCORE_ConnectionStrings__AzureBlobStorage
 - Legg til website eller applikasjon under website som peker på denne katalogen og som har app-pool for 'No managed code' (.net core)

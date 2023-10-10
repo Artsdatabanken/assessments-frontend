@@ -599,7 +599,8 @@ span.area i {
     }
 
 .sidebar_image_info img {
-    background: #fff;
+    height: auto;
+    width: 100px;
     padding: 5px;
     border-radius: 2px;
     margin-top: 5px;

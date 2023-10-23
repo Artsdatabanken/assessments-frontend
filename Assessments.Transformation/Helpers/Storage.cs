@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
+using Raven.Client.Document;
+using Raven.Client;
 
 namespace Assessments.Transformation.Helpers
 {
@@ -85,5 +87,44 @@ namespace Assessments.Transformation.Helpers
                 }
             }
         }
+    }
+
+    public class DocumentStoreHolder
+    {
+        private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
+
+        public static IDocumentStore Store
+        {
+            get { return store.Value; }
+        }
+
+        private static IDocumentStore CreateStore()
+        {
+            IDocumentStore store = new DocumentStore()
+            {  
+                Url = "http://it-webadbtest01.it.ntnu.no:8181",
+                DefaultDatabase = "DynamicPropertiesTest"
+                //DefaultDatabase = "DynamicPropertiesTest",
+                //ConnectionStringName = "DatabankRavenDB",
+                
+            }.Initialize();
+
+            return store;
+        }
+
+        public static IDocumentSession RavenSession
+        {
+            get
+            {
+                if (ravenSession == null)
+                {
+                    ravenSession = Store.OpenSession();
+                    //ravenSession.Advanced.MaxNumberOfRequestsPerSession = 100;
+                }
+                return ravenSession;
+            }
+        }
+
+        private static IDocumentSession ravenSession;
     }
 }

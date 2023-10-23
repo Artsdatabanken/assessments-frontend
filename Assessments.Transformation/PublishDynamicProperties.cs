@@ -15,6 +15,8 @@ using Assessments.Mapping.RedlistSpecies;
 using Raven.Client.Document;
 using Raven.Client;
 using System;
+using Raven.Abstractions.Commands;
+using static Assessments.Mapping.RedlistSpecies.Source.Rodliste2019;
 
 namespace Assessments.Transformation
 {
@@ -94,29 +96,73 @@ namespace Assessments.Transformation
         public static async Task UploadDynamicPropertiesToTaxonApi(IConfigurationRoot configuration)
         {
             var publishDynamicProperties = new PublishDynamicProperties(configuration);
-            var dynamicProperties = await publishDynamicProperties.ImportAlienList2023();
-            dynamicProperties.AddRange(await publishDynamicProperties.ImportRedlist2021());
+            var newDynamicProperties = await publishDynamicProperties.ImportAlienList2023();
+            newDynamicProperties.AddRange(await publishDynamicProperties.ImportRedlist2021());
+
+
+            var DocumentStore = DocumentStoreHolder.Store;
+            var ravenSession = DocumentStoreHolder.RavenSession;
+
+            //ravenSession.Load<DynamicProperty>("\"DynamicProperty/FremmedArt2023-\"");//NOTE: we might need a Databank.Domain.Content.Node type here from data.artsdatabanken.no
+
+
+            // Delete dynamicProperties in RavenDb that do not exist in the latest dynamicProperty collection
+
+            // GET dynamicProperties from RavenDb pertaining alien species 2023 assessments
+            var queryAlienSpecies2023 = ravenSession.Advanced.DocumentQuery<DynamicProperty>("Raven/DocumentsByEntityName")
+                .WhereStartsWith("__document_id", "DynamicProperty/FremmedArt2023-");
+
+            var queryRedlistedSpecies2021 = ravenSession.Advanced.DocumentQuery<DynamicProperty>("Raven/DocumentsByEntityName")
+                .WhereStartsWith("__document_id", "DynamicProperty/Rodliste2021-");
+
+            var existingDynamicProperties = queryAlienSpecies2023.Union(queryRedlistedSpecies2021).ToList();
+
+            //Delete this list of dynamicProperties from RavenDb
+            var obsoleteDynamicProperties = newDynamicProperties.Except(existingDynamicProperties).ToList();
+      
+
+            //Store DynamicProperties in RavenDb
+            ravenSession.Store(newDynamicProperties);
+            ravenSession.SaveChanges();
         }
         // The `DocumentStoreHolder` class holds a single Document Store instance.
-        public class DocumentStoreHolder
+
+        private static void DeleteDocumentsById(string[] toDeleteDocumentIds, IDocumentStore documentstore)
         {
-            private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
-
-            public static IDocumentStore Store
+            var pointer = 0;
+            const int Batchsize = 500;
+            var errorcount = 0;
+            while (true)
             {
-                get { return store.Value; }
-            }
-
-            private static IDocumentStore CreateStore()
-            {
-                IDocumentStore store = new DocumentStore()
+                var batch = toDeleteDocumentIds.Skip(pointer).Take(Batchsize).Distinct().ToArray();
+                if (!batch.Any()) break;
+                try
                 {
-                    ConnectionStringName = "DatabankRavenDB"
-                }.Initialize();
+                    //var ses = this.DocumentCacheStore.Session;
+                    var commandlist = batch.Select(deletedRecordId => new DeleteCommandData { Key = deletedRecordId })
+                        .Cast<ICommandData>().ToList();
+                    using (var session = documentstore.OpenSession())
+                    {
+                        session.Advanced.DocumentStore.DatabaseCommands.Batch(commandlist);
+                        session.SaveChanges();
+                    }
 
-                return store;
+                    pointer += Batchsize;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    //logger.Error(e, e.Message);
+                    errorcount++;
+                    if (errorcount > 20)
+                    {
+                        //logger.Error(e, "For mange feil (mer enn 20) på sletting av Document via id - hopper ut");
+                        throw new Exception("For mange feil (mer enn 20) på sletting av Document via id - hopper ut", e);
+                    }
+                }
             }
         }
+
     }
 }
 

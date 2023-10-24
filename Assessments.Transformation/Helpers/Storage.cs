@@ -104,7 +104,6 @@ namespace Assessments.Transformation.Helpers
             {  
                 Url = "http://it-webadbtest01.it.ntnu.no:8181",
                 DefaultDatabase = "DynamicPropertiesTest"
-                //DefaultDatabase = "DynamicPropertiesTest",
                 //ConnectionStringName = "DatabankRavenDB",
                 
             }.Initialize();

@@ -106,23 +106,27 @@ namespace Assessments.Transformation
             //ravenSession.Load<DynamicProperty>("\"DynamicProperty/FremmedArt2023-\"");//NOTE: we might need a Databank.Domain.Content.Node type here from data.artsdatabanken.no
 
 
-            // Delete dynamicProperties in RavenDb that do not exist in the latest dynamicProperty collection
+            //// Delete dynamicProperties in RavenDb that do not exist in the latest dynamicProperty collection
 
-            // GET dynamicProperties from RavenDb pertaining alien species 2023 assessments
-            var queryAlienSpecies2023 = ravenSession.Advanced.DocumentQuery<DynamicProperty>("Raven/DocumentsByEntityName")
-                .WhereStartsWith("__document_id", "DynamicProperty/FremmedArt2023-");
+            //// GET dynamicProperties from RavenDb pertaining alien species 2023 assessments
+            //var queryAlienSpecies2023 = ravenSession.Advanced.DocumentQuery<DynamicProperty>("Raven/DocumentsByEntityName")
+            //    .WhereStartsWith("__document_id", "DynamicProperty/FremmedArt2023-");
 
-            var queryRedlistedSpecies2021 = ravenSession.Advanced.DocumentQuery<DynamicProperty>("Raven/DocumentsByEntityName")
-                .WhereStartsWith("__document_id", "DynamicProperty/Rodliste2021-");
+            //var queryRedlistedSpecies2021 = ravenSession.Advanced.DocumentQuery<DynamicProperty>("Raven/DocumentsByEntityName")
+            //    .WhereStartsWith("__document_id", "DynamicProperty/Rodliste2021-");
 
-            var existingDynamicProperties = queryAlienSpecies2023.Union(queryRedlistedSpecies2021).ToList();
+            //var existingDynamicProperties = queryAlienSpecies2023.Union(queryRedlistedSpecies2021).ToList(); // = 0 
 
-            //Delete this list of dynamicProperties from RavenDb
-            var obsoleteDynamicProperties = newDynamicProperties.Except(existingDynamicProperties).ToList();
+            ////TODO: Delete this list of dynamicProperties from RavenDb
+            //var obsoleteDynamicProperties = newDynamicProperties.Except(existingDynamicProperties).ToList();
       
 
             //Store DynamicProperties in RavenDb
-            ravenSession.Store(newDynamicProperties);
+            foreach (var dynamicProperty in newDynamicProperties)
+            {
+                ravenSession.Store(dynamicProperty);
+            }
+    
             ravenSession.SaveChanges();
         }
         // The `DocumentStoreHolder` class holds a single Document Store instance.

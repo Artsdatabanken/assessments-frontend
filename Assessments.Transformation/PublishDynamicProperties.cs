@@ -110,16 +110,16 @@ namespace Assessments.Transformation
 
             //// GET dynamicProperties from RavenDb pertaining alien species 2023 assessments
             //var queryAlienSpecies2023 = ravenSession.Advanced.DocumentQuery<DynamicProperty>("Raven/DocumentsByEntityName")
-            //    .WhereStartsWith("__document_id", "DynamicProperty/FremmedArt2023-");
+            //    .WhereStartsWith("__document_id", "DynamicProperty/FremmedArt2023-").ToList();
 
             //var queryRedlistedSpecies2021 = ravenSession.Advanced.DocumentQuery<DynamicProperty>("Raven/DocumentsByEntityName")
-            //    .WhereStartsWith("__document_id", "DynamicProperty/Rodliste2021-");
+            //    .WhereStartsWith("__document_id", "DynamicProperty/Rodliste2021-").ToList();
 
-            //var existingDynamicProperties = queryAlienSpecies2023.Union(queryRedlistedSpecies2021).ToList(); // = 0 
+            //var existingDynamicProperties = queryAlienSpecies2023.Union(queryRedlistedSpecies2021).ToList();
 
             ////TODO: Delete this list of dynamicProperties from RavenDb
             //var obsoleteDynamicProperties = newDynamicProperties.Except(existingDynamicProperties).ToList();
-      
+
 
             //Store DynamicProperties in RavenDb
             foreach (var dynamicProperty in newDynamicProperties)
@@ -138,12 +138,12 @@ namespace Assessments.Transformation
             var errorcount = 0;
             while (true)
             {
-                var batch = toDeleteDocumentIds.Skip(pointer).Take(Batchsize).Distinct().ToArray();
-                if (!batch.Any()) break;
+                var batchIdsToDelete = toDeleteDocumentIds.Skip(pointer).Take(Batchsize).Distinct().ToArray();
+                if (!batchIdsToDelete.Any()) break;
                 try
                 {
                     //var ses = this.DocumentCacheStore.Session;
-                    var commandlist = batch.Select(deletedRecordId => new DeleteCommandData { Key = deletedRecordId })
+                    var commandlist = batchIdsToDelete.Select(deletedRecordId => new DeleteCommandData { Key = deletedRecordId })
                         .Cast<ICommandData>().ToList();
                     using (var session = documentstore.OpenSession())
                     {

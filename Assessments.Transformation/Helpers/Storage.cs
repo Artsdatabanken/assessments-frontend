@@ -13,11 +13,11 @@ namespace Assessments.Transformation.Helpers
     public static class Storage
     {
         private static BlobContainerClient _blobContainer;
-        
+
         public static async Task UploadToBlob(IConfigurationRoot configuration, string key, string value)
         {
             var connectionString = configuration.GetConnectionString("AzureBlobStorage");
-            
+
             if (string.IsNullOrEmpty(connectionString))
                 throw new Exception("ConnectionStrings:AzureBlobStorage (app secret) mangler");
 
@@ -100,15 +100,25 @@ namespace Assessments.Transformation.Helpers
 
         private static IDocumentStore CreateStore()
         {
+            IConfigurationRoot configuration = GetConfiguration();
+
             IDocumentStore store = new DocumentStore()
-            {  
-                Url = "http://it-webadbtest01.it.ntnu.no:8181",
-                DefaultDatabase = "DynamicPropertiesTest"
-                //ConnectionStringName = "DatabankRavenDB",
-                
+            {
+
+                Url = configuration.GetConnectionString("RavenDBUrl"),
+                DefaultDatabase = configuration.GetConnectionString("RavenDB")
+
             }.Initialize();
 
             return store;
+        }
+
+        private static IConfigurationRoot GetConfiguration()
+        {
+            return new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets<Program>()
+                .Build();
         }
 
         public static IDocumentSession RavenSession
@@ -118,7 +128,6 @@ namespace Assessments.Transformation.Helpers
                 if (ravenSession == null)
                 {
                     ravenSession = Store.OpenSession();
-                    //ravenSession.Advanced.MaxNumberOfRequestsPerSession = 100;
                 }
                 return ravenSession;
             }

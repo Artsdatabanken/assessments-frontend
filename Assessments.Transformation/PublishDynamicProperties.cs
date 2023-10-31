@@ -17,6 +17,7 @@ using Raven.Client;
 using System;
 using Raven.Abstractions.Commands;
 using static Assessments.Mapping.RedlistSpecies.Source.Rodliste2019;
+using Raven.Abstractions.Extensions;
 
 namespace Assessments.Transformation
 {
@@ -99,12 +100,14 @@ namespace Assessments.Transformation
             var newDynamicProperties = await publishDynamicProperties.ImportAlienList2023();
             newDynamicProperties.AddRange(await publishDynamicProperties.ImportRedlist2021());
 
-
             var DocumentStore = DocumentStoreHolder.Store;
             var ravenSession = DocumentStoreHolder.RavenSession;
 
             //ravenSession.Load<DynamicProperty>("\"DynamicProperty/FremmedArt2023-\"");//NOTE: we might need a Databank.Domain.Content.Node type here from data.artsdatabanken.no
 
+            
+            var getRedlistet2021 = DeleteDocuments(ravenSession, "DynamicProperty/Rodliste2021");
+            var getAlienSpecies2023 = DeleteDocuments(ravenSession, "DynamicProperty/Fremmedart2023"); //ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith("DynamicProperty/Fremmedart2023")).Skip(pointer).Take(batchSize).ToArray();
 
             //// Delete dynamicProperties in RavenDb that do not exist in the latest dynamicProperty collection
 
@@ -122,51 +125,35 @@ namespace Assessments.Transformation
 
 
             //Store DynamicProperties in RavenDb
-            foreach (var dynamicProperty in newDynamicProperties)
-            {
-                ravenSession.Store(dynamicProperty);
-            }
-    
+            //foreach (var dynamicProperty in newDynamicProperties)
+            //{
+            //    ravenSession.Store(dynamicProperty);
+            //}
+
             ravenSession.SaveChanges();
         }
-        // The `DocumentStoreHolder` class holds a single Document Store instance.
 
-        private static void DeleteDocumentsById(string[] toDeleteDocumentIds, IDocumentStore documentstore)
+        private static List<DynamicProperty> DeleteDocuments(IDocumentSession ravenSession, string firstPartOfDocumentName)
         {
-            var pointer = 0;
-            const int Batchsize = 500;
-            var errorcount = 0;
+            int pointer = 0;
+            const int batchSize = 1024;
+
+            List<DynamicProperty> getRedlistet2021;
             while (true)
             {
-                var batchIdsToDelete = toDeleteDocumentIds.Skip(pointer).Take(Batchsize).Distinct().ToArray();
-                if (!batchIdsToDelete.Any()) break;
-                try
-                {
-                    //var ses = this.DocumentCacheStore.Session;
-                    var commandlist = batchIdsToDelete.Select(deletedRecordId => new DeleteCommandData { Key = deletedRecordId })
-                        .Cast<ICommandData>().ToList();
-                    using (var session = documentstore.OpenSession())
-                    {
-                        session.Advanced.DocumentStore.DatabaseCommands.Batch(commandlist);
-                        session.SaveChanges();
-                    }
+                //Page through the dynamicPropertis as RavenDb server per default has a limit of 128 = 2^7 result (batchSize)
+                getRedlistet2021 = ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith(firstPartOfDocumentName)).Skip(pointer).Take(batchSize).ToList();
 
-                    pointer += Batchsize;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    //logger.Error(e, e.Message);
-                    errorcount++;
-                    if (errorcount > 20)
-                    {
-                        //logger.Error(e, "For mange feil (mer enn 20) på sletting av Document via id - hopper ut");
-                        throw new Exception("For mange feil (mer enn 20) på sletting av Document via id - hopper ut", e);
-                    }
-                }
+                if (!getRedlistet2021.Any()) break;
+
+                foreach (var item in getRedlistet2021)
+                    ravenSession.Delete<DynamicProperty>(item);
+
+                pointer += batchSize;
             }
-        }
 
+            return getRedlistet2021;
+        }
     }
 }
 

@@ -104,11 +104,13 @@ namespace Assessments.Transformation.Helpers
 
             IDocumentStore store = new DocumentStore()
             {
-
                 Url = configuration.GetConnectionString("RavenDBUrl"),
-                DefaultDatabase = configuration.GetConnectionString("RavenDB")
+                DefaultDatabase = configuration.GetConnectionString("RavenDB"),
+                
 
             }.Initialize();
+
+            store.Conventions.MaxNumberOfRequestsPerSession = 100;
 
             return store;
         }

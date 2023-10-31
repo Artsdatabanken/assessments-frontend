@@ -110,7 +110,7 @@ namespace Assessments.Transformation.Helpers
 
             }.Initialize();
 
-            store.Conventions.MaxNumberOfRequestsPerSession = 100;
+            store.Conventions.MaxNumberOfRequestsPerSession = 100; //Raven default is 30
 
             return store;
         }

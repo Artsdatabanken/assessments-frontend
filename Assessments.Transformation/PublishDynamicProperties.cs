@@ -86,7 +86,7 @@ namespace Assessments.Transformation
                             new DynamicProperty.Property() { Name = "Område", Value = x.EvaluationContext.DisplayName()  },
                             new DynamicProperty.Property() { Name = "Aar", Value = "2023" },
                             new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" + x.Id.ToString() },
-                            new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.ToString()}                            
+                            new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.ToString()} //TODO, IMPORTANT! - check that this tranformation is correct
                         }
                     }
                 }
@@ -97,17 +97,17 @@ namespace Assessments.Transformation
         public static async Task UploadDynamicPropertiesToTaxonApi(IConfigurationRoot configuration)
         {
             var publishDynamicProperties = new PublishDynamicProperties(configuration);
-            var newDynamicProperties = await publishDynamicProperties.ImportAlienList2023();
-            newDynamicProperties.AddRange(await publishDynamicProperties.ImportRedlist2021());
+            var dynamicPropertiesFromStorageAccount = await publishDynamicProperties.ImportAlienList2023();
+            dynamicPropertiesFromStorageAccount.AddRange(await publishDynamicProperties.ImportRedlist2021());
 
             var DocumentStore = DocumentStoreHolder.Store;
             var ravenSession = DocumentStoreHolder.RavenSession;
 
             //ravenSession.Load<DynamicProperty>("\"DynamicProperty/FremmedArt2023-\"");//NOTE: we might need a Databank.Domain.Content.Node type here from data.artsdatabanken.no
 
-            
-            var getRedlistet2021 = DeleteDocuments(ravenSession, "DynamicProperty/Rodliste2021");
-            var getAlienSpecies2023 = DeleteDocuments(ravenSession, "DynamicProperty/Fremmedart2023"); //ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith("DynamicProperty/Fremmedart2023")).Skip(pointer).Take(batchSize).ToArray();
+
+            DeleteExistingDynamicProperties(ravenSession, "DynamicProperty/Rodliste2021");
+            DeleteExistingDynamicProperties(ravenSession, "DynamicProperty/Fremmedart2023"); //ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith("DynamicProperty/Fremmedart2023")).Skip(pointer).Take(batchSize).ToArray();
 
             //// Delete dynamicProperties in RavenDb that do not exist in the latest dynamicProperty collection
 
@@ -125,15 +125,20 @@ namespace Assessments.Transformation
 
 
             //Store DynamicProperties in RavenDb
-            //foreach (var dynamicProperty in newDynamicProperties)
-            //{
-            //    ravenSession.Store(dynamicProperty);
-            //}
+            StoreDynamicProperties(dynamicPropertiesFromStorageAccount, ravenSession);
 
             ravenSession.SaveChanges();
         }
 
-        private static List<DynamicProperty> DeleteDocuments(IDocumentSession ravenSession, string firstPartOfDocumentName)
+        private static void StoreDynamicProperties(List<DynamicProperty> newDynamicProperties, IDocumentSession ravenSession)
+        {
+            foreach (var dynamicProperty in newDynamicProperties)
+            {
+                ravenSession.Store(dynamicProperty);
+            }
+        }
+
+        private static void DeleteExistingDynamicProperties(IDocumentSession ravenSession, string firstPartOfDocumentName)
         {
             int pointer = 0;
             const int batchSize = 1024;
@@ -151,8 +156,6 @@ namespace Assessments.Transformation
 
                 pointer += batchSize;
             }
-
-            return getRedlistet2021;
         }
     }
 }

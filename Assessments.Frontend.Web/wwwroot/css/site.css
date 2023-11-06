@@ -4,7 +4,7 @@
 }
 
 body {
-    background: #fff9f0;
+    background: #fffcf7;
 }
 
 h1,
@@ -59,7 +59,7 @@ span,
 .main-content,
 .main {
     position: relative;
-    background: #fff9f0;
+    background: #fffcf7;
 }
 
 h1 {
@@ -346,12 +346,17 @@ option {
     background: #fff9f0;
 }
 
-.tabbed_element_container {    
+.tabbed_element_container {
     padding: 10px;
     border: 1px solid lightgrey;
+    /* 
+        This would help visibility
+        border: 1px solid #f5e7d3; 
+        background: #fff;
+    */
     padding-top: 30px;
     border-top-color: #7f726b;
-    margin-top:0;
+    margin-top: 0;
 }
 
 .sidebarmenu span:first-child {
@@ -439,11 +444,14 @@ option {
     .sidebarmenu button,
     .title_header .sidebarmenu {
         display: block;
-        height:0px;
+        height: 0px;
+        left: 0;
+        right: initial;
     }
 
     .sidebarmenu button {
-        margin-left: auto;
+        margin-left: initial !important;
+        position: relative;
     }
 
     .sidebarmenu {

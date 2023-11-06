@@ -1199,7 +1199,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Karplanter",
+                Name = "Planter",
                 NameShort = "skp",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/karplanter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Karplanter.svg",

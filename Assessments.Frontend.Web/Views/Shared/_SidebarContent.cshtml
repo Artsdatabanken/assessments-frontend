@@ -16,7 +16,7 @@
         if (Model.SpeciesIsOnBannedList)
             return true;
 
-        string speciesGroupToInclude = "Karplanter";
+        string speciesGroupToInclude = "Planter";
         if (Model.SpeciesGroup != speciesGroupToInclude)
             return false;
 
@@ -51,7 +51,7 @@
         <div>
             <p>
                 Denne @Helpers.FixSpeciesLevel("{art}en", Model.TaxonRank) er <span is-visible="!Model.SpeciesIsOnBannedList"  class="underline">ikke</span> oppført på Klima- og miljødepartementets liste over arter det er
-                forbudt å innføre, sette ut og omsette, jf. § 5 og § 9. Merk at @Helpers.FixSpeciesLevel("{art}en", Model.TaxonRank) kan være regulert på annen måte.
+                forbudt å innføre, sette ut og omsette, jf. § 5 og § 9. <span is-visible="!Model.SpeciesIsOnBannedList"> Merk at @Helpers.FixSpeciesLevel("{art}en", Model.TaxonRank) kan være regulert på annen måte.</span>
             </p>
             <a href="https://lovdata.no/dokument/SF/forskrift/2015-06-19-716#KAPITTEL_9" class="link-styled">
                 Forbudslista hos Lovdata.no <span class="material-icons">open_in_new</span>

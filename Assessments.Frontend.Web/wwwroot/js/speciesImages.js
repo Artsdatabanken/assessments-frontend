@@ -31,8 +31,10 @@ const updateImageMeta = (imageMeta) => {
 }
 
 const removeTaxonLink = (imageText) => {
-    imageText[2].remove();
-    imageText[1].remove();
+    if (imageText?.length > 1) {
+        imageText[2].remove();
+        imageText[1].remove();
+    }
 }
 
 const renderHeader = (element) => {

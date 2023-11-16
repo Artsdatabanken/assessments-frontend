@@ -26,7 +26,7 @@ public class RequestLocalizationCookiesMiddleware : IMiddleware
 
             if (feature != null)
             {
-                // bruker må hagodtatt cookies for å kunne lagre valgt språk
+                // bruker må ha godtatt cookies for å kunne lagre valgt språk
                 if (CookiesHelper.UserAcceptedCookies(context))
                     context.Response.Cookies.Append(Provider.CookieName, CookieRequestCultureProvider.MakeCookieValue(feature.RequestCulture));
             }

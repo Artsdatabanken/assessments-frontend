@@ -120,4 +120,7 @@
   <data name="choose-language" xml:space="preserve">
     <value>Velg språk</value>
   </data>
+  <data name="must-accept-cookies" xml:space="preserve">
+    <value>Informasjonskapsler må godtas for å huske valgt språk</value>
+  </data>
 </root>

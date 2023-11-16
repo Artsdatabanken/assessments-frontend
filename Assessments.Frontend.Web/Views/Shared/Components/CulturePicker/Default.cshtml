@@ -1,5 +1,6 @@
 ﻿@model Assessments.Frontend.Web.Views.Shared.Components.CulturePicker.CulturePickerModel
 @inject IViewLocalizer Localizer
+
 <form>
     <label for="culture-picker">
         @Localizer["choose-language"]
@@ -7,9 +8,12 @@
     <select id="culture-picker" name="culture" onchange="this.parentElement.submit();">
         @foreach (var culture in Model.SupportedCultures)
         {
-            <option value="@culture.Name"selected="@(Model.CurrentUICulture.Name == culture.Name)">
-                @culture.DisplayName - @culture.NativeName
+            <option value="@culture.Name" selected="@(Model.CurrentUICulture.Name == culture.Name)">
+                @culture.DisplayName@(culture.NativeName == culture.DisplayName ? string.Empty : $" - {culture.NativeName}")
             </option>
         }
     </select>
 </form>
+<em is-visible="!CookiesHelper.UserAcceptedCookies(Context)">
+    @Localizer["must-accept-cookies"]
+</em>

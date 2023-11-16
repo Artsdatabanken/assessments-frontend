@@ -7,7 +7,7 @@ using Microsoft.Extensions.Options;
 
 namespace Assessments.Frontend.Web.Infrastructure.Middleware;
 
-// husker valgt språk ved navigering til ulike sider
+// husker valgt språk ved navigering til ulike sider med hjelp av cookies
 
 public class RequestLocalizationCookiesMiddleware : IMiddleware
 {
@@ -26,7 +26,9 @@ public class RequestLocalizationCookiesMiddleware : IMiddleware
 
             if (feature != null)
             {
-                context.Response.Cookies.Append(Provider.CookieName, CookieRequestCultureProvider.MakeCookieValue(feature.RequestCulture));
+                // bruker må hagodtatt cookies for å kunne lagre valgt språk
+                if (CookiesHelper.UserAcceptedCookies(context))
+                    context.Response.Cookies.Append(Provider.CookieName, CookieRequestCultureProvider.MakeCookieValue(feature.RequestCulture));
             }
         }
 

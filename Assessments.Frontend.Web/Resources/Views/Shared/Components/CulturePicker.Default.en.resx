@@ -120,4 +120,7 @@
   <data name="choose-language" xml:space="preserve">
     <value>Choose language</value>
   </data>
+  <data name="must-accept-cookies" xml:space="preserve">
+    <value>Cookies must be accepted to remember the selected language</value>
+  </data>
 </root>

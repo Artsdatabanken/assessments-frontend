@@ -40,11 +40,11 @@
 .category_displayer .category_item {
     height: 40px;
     width: 40px;
-    border-radius: 2px;
+    border-radius: 50%;
     margin:auto;
 }
 
-.category_displayer span {
+.category_displayer .tag {
     font-size: 8pt;
     display: block;
     line-height: 1;
@@ -54,20 +54,16 @@
     padding-top: 5px;
 }
 
-.category_displayer .category_item span {
-    margin: auto;
-    padding-top:0;
-    text-align: center;
-    font-size: 22px;
-    vertical-align: middle;
-    color: inherit;
-    line-height: 40px;
+.category_displayer .category_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }
 
 .category_displayer li.active {
     width: 66px;
     padding-top:0;
-    font-weight:bold;
 }
 
 .category_displayer li.active .category_item {
@@ -80,9 +76,8 @@
     font-size:12pt;
 }
 
-.category_displayer li.active .category_item span {
-    line-height: 64px;
-    font-size: 24pt;
+.category_displayer li.active .category_item {
+    font-size: 22pt;
 }
 
 @media only screen and (max-width: 510px) {
@@ -97,11 +92,10 @@
     .category_displayer .category_item {
         width: 25px;
         height: 25px;
-    }
-    .category_displayer .category_item span {
         font-size: 12pt;
         line-height: 25px;
     }
+
     .category_displayer .notactive .tag{
        display:none;
     }
@@ -121,9 +115,6 @@
     .category_displayer li.active .category_item {
         height: 50px;
         width: 50px;
-    }
-
-    .category_displayer li.active .category_item span {
         line-height: 40px;
         font-size: 18pt;
     }
@@ -131,9 +122,6 @@
     .category_displayer .category_item {
         width: 19px;
         height: 19px;
-    }
-
-    .category_displayer .category_item span {
         font-size: 9pt;
         line-height: 19px;
     }
@@ -213,18 +201,18 @@ li.active  .category_item.NR {
     background: #FFFFFF;
 }
 
-.RE span,
-.CR span,
-.EN span,
-.VU span,
-.DD span,
-.LC span,
-.NT span,
-.SE span,
-.HI span,
-.PH span,
-.LO span,
-.NK  span {
+.RE,
+.CR,
+.EN,
+.VU,
+.DD,
+.LC,
+.NT,
+.SE,
+.HI,
+.PH,
+.LO,
+.NK {
     color: white;
 }
 
@@ -232,18 +220,18 @@ span.percent {
     color: #262F31;
 }
 
-.active .RE span,
-.active .CR span,
-.active .EN span,
-.active .VU span,
-.active .DD span,
-.active .LC span,
-.active .NT span,
-.active .SE span,
-.active .HI span,
-.active .PH span,
-.active .LO span,
-.active .NK span {
+.active .RE,
+.active .CR,
+.active .EN,
+.active .VU,
+.active .DD,
+.active .LC,
+.active .NT,
+.active .SE,
+.active .HI,
+.active .PH,
+.active .LO,
+.active .NK {
     color: white;
 }
 

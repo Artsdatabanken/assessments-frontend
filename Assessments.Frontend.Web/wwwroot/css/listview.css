@@ -203,16 +203,11 @@ li a span.element_icon {
 
 .main_list_view .category_tag {
     width: 41px;
-    display: block;
     height: 41px;
-}
-
-.category_tag_label {
-    margin: auto;
-    display: block;
-    text-align: center;
-    font-size: 20px;
-    line-height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
 .list_cell {
@@ -367,9 +362,8 @@ only screen and (min-width:941px) and (max-width:1150px){
         height: 26px;
     }
 
-    .category_tag_label {
+    .category_tag {
         font-size: 15px;
-        line-height: 26px;
     }
 
     .element_icon {

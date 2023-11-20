@@ -18,7 +18,7 @@
                 {
                     <li class="@GetActiveElement(category.NameShort)">
                         <div class="category_item  @category.NameShort">
-                        <span>@(GetActiveElement(category.NameShort) == active ? Model.CategoryShort : category.NameShort)</span>
+                            @(GetActiveElement(category.NameShort) == active ? Model.CategoryShort : category.NameShort)
                         </div>
                         <span class="tag">@category.Name</span>
                     </li>

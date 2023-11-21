@@ -338,10 +338,6 @@ color: #FFF9F0;
     border-bottom-color: #262f31;
 }
 
-.darktheme .category_displayer::before{
-    background:white;
-}
-
 .darktheme .list-search,
 .darktheme hr {
     border-color: #403d3d;

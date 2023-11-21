@@ -185,11 +185,11 @@ li a span.element_icon {
 }
 
 .main_list_view li a {
-    grid-template-columns: 1fr 4fr 105px 53px;
+    grid-template-columns: 1fr 4fr 115px 53px;
 }
 
 .main_list_view li.door_knocker a {
-    grid-template-columns: 1fr 4fr 54px 100px 53px;
+    grid-template-columns: 1fr 4fr 54px 109px 53px;
 }
 
 .categoryname {

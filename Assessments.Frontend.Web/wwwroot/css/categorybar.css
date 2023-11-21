@@ -28,7 +28,7 @@
 }
 
 .category_displayer.RedlistSpecies2021::before {
-    background: linear-gradient(to right, #fff0 19%, #60beb2 30%, #f7a520, #ed6c26, #e94f33, #d80f27, #99191a, #5a5b5d);
+    background: linear-gradient(to right, #fff0 19%, #61a360 30%, #6c6c6c, #aac000, #e6c000, #eb8107, #d61900, #000000);
 }
 
 .category_displayer li {
@@ -48,7 +48,7 @@
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    margin:auto;
+    margin: auto;
 }
 
 .category_displayer .tag {
@@ -70,7 +70,7 @@
 
 .category_displayer li.active {
     width: 66px;
-    padding-top:0;
+    padding-top: 0;
 }
 
 .category_displayer li.active .category_item {
@@ -80,18 +80,19 @@
 }
 
 .category_displayer li.active span {
-    font-size:12pt;
+    font-size: 12pt;
 }
 
 @media only screen and (max-width: 510px) {
-    .category_displayer::before {       
+    .category_displayer::before {
         top: 34px;
     }
 
     .category_displayer li {
         width: 25px;
-        padding-top:20px;
+        padding-top: 20px;
     }
+
     .category_displayer .category_item {
         width: 30px;
         height: 30px;
@@ -99,10 +100,9 @@
         line-height: 25px;
     }
 
-    .category_displayer .notactive .tag{
-       display:none;
+    .category_displayer .notactive .tag {
+        display: none;
     }
-
 }
 
 @media only screen and (max-width: 345px) {
@@ -111,7 +111,7 @@
         top: 30px;
     }
 
-    .category_displayer li{
+    .category_displayer li {
         margin: 3px;
     }
 
@@ -162,39 +162,39 @@
 
 /* Redlist */
 .category_displayer .notactive .category_item.RE {
-    border: 1px solid #5a5b5d;
+    border: 1px solid #000000;
 }
 
 .category_displayer .notactive .category_item.CR {
-    border: 1px solid #99191a;
+    border: 1px solid #d61900;
 }
 
 .category_displayer .notactive .category_item.EN {
-    border: 1px solid #d80f27;
+    border: 1px solid #eb8107;
 }
 
 .category_displayer .notactive .category_item.VU {
-    border: 1px solid #e94f33;
+    border: 1px solid #e6c000;
 }
 
 .category_displayer .notactive .category_item.NT {
-    border: 1px solid #ed6c26;
+    border: 1px solid #aac000;
 }
 
 .category_displayer .notactive .category_item.DD {
-    border: 1px solid #f7a520;
+    border: 1px solid #6c6c6c;
 }
 
 .category_displayer .notactive .category_item.LC {
-    border: 1px solid #60beb2;
+    border: 1px solid #61a360;
 }
 
 .category_displayer .notactive .category_item.NA {
-    border: 1px solid #939598;
+    border: 1px solid #000;
 }
 
 .category_displayer .notactive .category_item.NE {
-    border: 1px solid #d1d3d4;
+    border: 1px solid #000;
 }
 
 li.active .category_item.NR {
@@ -205,39 +205,39 @@ li.active .category_item.NR {
 
 
 .RE {
-    background: #5a5b5d;
+    background: #000000;
 }
 
 .CR {
-    background: #99191a;
+    background: #d61900;
 }
 
 .EN {
-    background: #d80f27;
+    background: #eb8107;
 }
 
 .VU {
-    background: #e94f33;
+    background: #e6c000;
 }
 
 .NT {
-    background: #ed6c26;
+    background: #aac000;
 }
 
 .DD {
-    background: #f7a520;
+    background: #6c6c6c;
 }
 
 .LC {
-    background: #60beb2;
+    background: #61a360;
 }
 
 .NA {
-    background: #939598;
+    background: #ffffff;
 }
 
 .NE {
-    background: #d1d3d4;
+    background: #ffffff;
 }
 
 .SE {
@@ -309,9 +309,6 @@ span.percent {
 .NE,
 .NR {
     color: #1c1c1c;
-}
-
-.NR {
     border: 1px solid #1c1c1c;
 }
 

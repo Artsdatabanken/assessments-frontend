@@ -24,10 +24,12 @@
 }
 
 .category_displayer.AlienSpecies2023::before {
+    background: black;
     background: linear-gradient(to right, #fff0 12%, #94A360 28%, #5c9c94, #296473, #2E4073, #4F1052);
 }
 
 .category_displayer.RedlistSpecies2021::before {
+    background: black;
     background: linear-gradient(to right, #fff0 19%, #61a360 30%, #6c6c6c, #aac000, #e6c000, #eb8107, #d61900, #000000);
 }
 

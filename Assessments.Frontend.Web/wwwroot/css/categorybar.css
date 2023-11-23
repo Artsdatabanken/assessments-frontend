@@ -268,17 +268,20 @@ li.active .category_item.NR {
 
 .RE,
 .CR,
-.EN,
-.VU,
 .DD,
-.LC,
-.NT,
 .SE,
 .HI,
-.PH,
+.PH {
+    color: white;
+}
+
+.EN,
+.VU,
+.NT,
+.LC,
 .LO,
 .NK {
-    color: white;
+    color: black;
 }
 
 span.percent {
@@ -290,21 +293,6 @@ span.percent {
     width: 0;
     margin: 0;
     padding: 0;
-}
-
-.active .RE,
-.active .CR,
-.active .EN,
-.active .VU,
-.active .DD,
-.active .LC,
-.active .NT,
-.active .SE,
-.active .HI,
-.active .PH,
-.active .LO,
-.active .NK {
-    color: white;
 }
 
 .NA,

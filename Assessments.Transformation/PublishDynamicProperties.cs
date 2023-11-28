@@ -109,13 +109,16 @@ namespace Assessments.Transformation
             var existingDynamicProperties = GetExistingDynamicProperties(ravenSession, "DynamicProperty/Rodliste2021");
             existingDynamicProperties.AddRange(GetExistingDynamicProperties(ravenSession, "DynamicProperty/Fremmedart2023")); //ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith("DynamicProperty/Fremmedart2023")).Skip(pointer).Take(batchSize).ToArray();
 
-            var comparer = new DynamicPropertyIDComparer();
-            var obsoletDynamicProperties = existingDynamicProperties.Except(dynamicPropertiesFromStorageAccount, comparer).ToList();
+            var comparerId = new DynamicPropertyIDComparer();
+            var obsoletDynamicProperties = existingDynamicProperties.Except(dynamicPropertiesFromStorageAccount, comparerId).ToList();
 
             DeleteDynamicProperties(ravenSession, obsoletDynamicProperties);
 
+            var compareDynamicProperties = new DynamicPropertyObjectComparer();
+            var NewOrChangedDynamicProperties = dynamicPropertiesFromStorageAccount.Except(existingDynamicProperties, compareDynamicProperties).ToList();
+
             //Store DynamicProperties in RavenDb
-            StoreDynamicProperties(dynamicPropertiesFromStorageAccount, ravenSession); //NOTE, check if existing dynamicProperties in Raven are overwritten? Nope, an error is generated as the Id already exist and can not be stored again!
+            StoreDynamicProperties(NewOrChangedDynamicProperties, ravenSession); //NOTE, check if existing dynamicProperties in Raven are overwritten? Nope, an error is generated as the Id already exist and can not be stored again!
 
             ravenSession.SaveChanges();
         }

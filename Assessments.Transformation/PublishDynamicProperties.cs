@@ -109,16 +109,23 @@ namespace Assessments.Transformation
             var existingDynamicProperties = GetExistingDynamicProperties(ravenSession, "DynamicProperty/Rodliste2021");
             existingDynamicProperties.AddRange(GetExistingDynamicProperties(ravenSession, "DynamicProperty/Fremmedart2023")); //ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith("DynamicProperty/Fremmedart2023")).Skip(pointer).Take(batchSize).ToArray();
 
-            var comparerId = new DynamicPropertyIDComparer();
+            var comparerId = new DynamicPropertyIDComparer();            
             var obsoletDynamicProperties = existingDynamicProperties.Except(dynamicPropertiesFromStorageAccount, comparerId).ToList();
 
+            //Delete dynamicProperties stored in RavenDb that do not exist in Storage Account
             DeleteDynamicProperties(ravenSession, obsoletDynamicProperties);
+
+            var newDynamicProperties = dynamicPropertiesFromStorageAccount.Except(existingDynamicProperties, comparerId).ToList();
 
             var compareDynamicProperties = new DynamicPropertyObjectComparer();
             var NewOrChangedDynamicProperties = dynamicPropertiesFromStorageAccount.Except(existingDynamicProperties, compareDynamicProperties).ToList();
+            var changedDynamicProperties = NewOrChangedDynamicProperties.Except(newDynamicProperties, comparerId).ToList();
 
-            //Store DynamicProperties in RavenDb
-            StoreDynamicProperties(NewOrChangedDynamicProperties, ravenSession); //NOTE, check if existing dynamicProperties in Raven are overwritten? Nope, an error is generated as the Id already exist and can not be stored again!
+            var idsToDelete = changedDynamicProperties.Select(x => x.Id).ToArray();
+            DeleteDynamicPropertiesByIds(ravenSession, idsToDelete);
+
+            //Store DynamicProperties to RavenDb that are different or new in storage account
+            StoreDynamicProperties(NewOrChangedDynamicProperties, ravenSession); //NOTE, check if existing dynamicProperties in Raven are overwritten? Nope, an error is generated as the Id already exist and can not overwritten.
 
             ravenSession.SaveChanges();
         }
@@ -213,6 +220,12 @@ namespace Assessments.Transformation
             // Delete dynamicProperties in RavenDb that do not exist in the latest dynamicProperty collection
             foreach (var item in obsoletDynamicProperties)
                 ravenSession.Delete<DynamicProperty>(item);
+        }
+
+        private static void DeleteDynamicPropertiesByIds(IDocumentSession ravenSession, string[] ids)
+        {
+            foreach (var item in ids)
+                ravenSession.Delete(item);
         }
 
         private static void StoreDynamicProperties(List<DynamicProperty> newDynamicProperties, IDocumentSession ravenSession)

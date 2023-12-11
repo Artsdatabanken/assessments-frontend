@@ -98,4 +98,23 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             FilterButtonText = "Regioner og havområder"
         };
     }
+
+    public class Habitats
+    {
+        public static readonly Filter.FilterItem[] RedlistSpecies2021HabitatFilters = Enum.GetValues<RedlistSpeciesAssessment2021Habitats>()
+            .Select(x => new Filter.FilterItem
+            {
+                NameShort = x.ToString(),
+                Name = x.DisplayName(),
+                Description = x.DisplayName()
+            }).ToArray();
+
+        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Habitats = new()
+        {
+            Filters = RedlistSpecies2021HabitatFilters,
+            FilterDescription = "",
+            FilterButtonName = "habitatfiltre",
+            FilterButtonText = "Hovedhabitat"
+        };
+    }
 }

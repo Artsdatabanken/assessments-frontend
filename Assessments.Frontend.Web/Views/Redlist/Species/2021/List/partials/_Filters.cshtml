@@ -4,7 +4,7 @@
 @using System.Linq;
 
 @{
-    var AllAreas = ViewBag.AllAreas;
+    var AllAreas = Areas.AlienSpecies2023Areas;
     Dictionary<string, Dictionary<string, string>> AllCategories = ViewBag.categories.ToObject<Dictionary<string, Dictionary<string, string>>>();
     var AllCriterias = ViewBag.AllCriterias;
     var AllEuroPop = ViewBag.AllEuroPop;

@@ -26,7 +26,6 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new();
-        private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
         private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         private readonly ArtskartApiService _artskartApiService;

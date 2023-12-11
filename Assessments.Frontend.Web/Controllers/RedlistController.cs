@@ -63,9 +63,6 @@ namespace Assessments.Frontend.Web.Controllers
 
             ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
 
-            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
-
-
             // Pagination
             const int pageSize = 25;
             var pageNumber = page ?? 1;
@@ -98,8 +95,6 @@ namespace Assessments.Frontend.Web.Controllers
             // Filter
 
             // Areas
-            ViewBag.AllAreas = _allAreas;
-
             if (viewModel.Area?.Any() == true)
                 query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
 

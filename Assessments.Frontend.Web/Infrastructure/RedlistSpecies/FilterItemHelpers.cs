@@ -43,4 +43,23 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             FilterButtonText = "Kategori"
         };
     }
+
+    public class Criteria
+    {
+        public static readonly Filter.FilterItem[] RedlistSpecies2021CriteriaFilters = Enum.GetValues<RedlistSpeciesAssessment2021Criteria>()
+            .Select(x => new Filter.FilterItem
+            {
+                NameShort = x.ToString(),
+                Name = x.DisplayName(),
+                Description = x.DisplayName()
+            }).ToArray();
+
+        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Criteria = new()
+        {
+            Filters = RedlistSpecies2021CriteriaFilters,
+            FilterDescription = "",
+            FilterButtonName = "kriteriefiltre",
+            FilterButtonText = "Kriterier"
+        };
+    }
 }

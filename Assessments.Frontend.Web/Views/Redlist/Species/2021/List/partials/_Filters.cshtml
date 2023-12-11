@@ -4,9 +4,9 @@
 @using System.Linq;
 
 @{
-    var AllAreas = Areas.AlienSpecies2023Areas;
-    var AllCategories = Categories.AlienSpecies2023Categories;
-    var AllCriterias = ViewBag.AllCriterias;
+    var AllAreas = Areas.RedlistSpecies2021Areas;
+    var AllCategories = Categories.RedlistSpecies2021Categories;
+    var AllCriterias = Criteria.RedlistSpecies2021Criteria;
     var AllEuroPop = ViewBag.AllEuroPop;
     var AllRegions = ViewBag.AllRegions;
     Dictionary<string, Dictionary<string, string>> AllHabitats = ViewBag.habitat.ToObject<Dictionary<string, Dictionary<string, string>>>();

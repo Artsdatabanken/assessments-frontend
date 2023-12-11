@@ -67,8 +67,6 @@ namespace Assessments.Frontend.Web.Controllers
 
             var query = await DataRepository.GetSpeciesAssessments();
 
-            ViewBag.AllTaxonRanks = Helpers.GetAllTaxonRanks();
-
             // Søk
             if (!string.IsNullOrEmpty(viewModel.Name))
             {

@@ -11,13 +11,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 {
     public static class Helpers
     {
-        private static readonly Dictionary<string, string> _ranks = new()
-        {
-            { "Species", "Art" },
-            { "SubSpecies", "Underart" },
-            { "Variety", "Varietet" }
-        };
-
         public static string FormatNumeric(string value)
         {
             if (int.TryParse(value, out int result))
@@ -253,11 +246,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         public static string removeLineBreaksForMobile(string text)
         {
             return text.Replace("<br/>", "").Replace("<span>&#8208;</span>", "");
-        }
-
-        public static Dictionary<string, string> GetAllTaxonRanks()
-        {
-            return _ranks;
         }
 
         public static bool IsNotEmpty(string key)

@@ -117,4 +117,23 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             FilterButtonText = "Hovedhabitat"
         };
     }
+
+    public class TaxonRank
+    {
+        public static readonly Filter.FilterItem[] RedlistSpecies2021TaxonRankFilters = Enum.GetValues<RedlistSpeciesAssessment2021TaxonRank>()
+            .Select(x => new Filter.FilterItem
+            {
+                NameShort = x.ToString(),
+                Name = x.DisplayName(),
+                Description = x.DisplayName()
+            }).ToArray();
+
+        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Habitats = new()
+        {
+            Filters = RedlistSpecies2021TaxonRankFilters,
+            FilterDescription = "",
+            FilterButtonName = "taksonomisknivåfiltre",
+            FilterButtonText = "Taksonomisk nivå"
+        };
+    }
 }

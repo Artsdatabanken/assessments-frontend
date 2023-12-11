@@ -79,4 +79,23 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             FilterButtonText = "Andel av europeisk populasjon"
         };
     }
+
+    public class Regions
+    {
+        public static readonly Filter.FilterItem[] RedlistSpecies2021RegionsFilters = Enum.GetValues<RedlistSpeciesAssessment2021Regions>()
+            .Select(x => new Filter.FilterItem
+            {
+                NameShort = ((int) x).ToString(),
+                Name = x.DisplayName(),
+                Description = x.DisplayName()
+            }).ToArray();
+
+        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Regions = new()
+        {
+            Filters = RedlistSpecies2021RegionsFilters,
+            FilterDescription = "",
+            FilterButtonName = "regionsfiltre",
+            FilterButtonText = "Regioner og havområder"
+        };
+    }
 }

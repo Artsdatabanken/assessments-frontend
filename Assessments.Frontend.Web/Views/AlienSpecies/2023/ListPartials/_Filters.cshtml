@@ -3,6 +3,8 @@
 @using System.Linq;
 @using Assessments.Shared.Options
 @using Microsoft.Extensions.Options
+@using Assessments.Frontend.Web.Infrastructure
+@using static Assessments.Frontend.Web.Infrastructure.FilterHelpers
 
 @inject IOptions<ApplicationOptions> Options
 
@@ -84,7 +86,7 @@
         </button>
     }
 
-    void MakeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, Filter.FilterAndMetaData filterItems, string buttonText, string buttonName, string outerClassName)
+    void MakeFilterGroup(string filterName, string modelName, bool isSubGroup, string[] filterModel, FilterAndMetaData filterItems, string buttonText, string buttonName, string outerClassName)
     {
         string className = isSubGroup ? $"filter_subgroup filter_{filterName.ToLower()}" : $"filter_{filterName.ToLower()}";
 
@@ -128,7 +130,7 @@
         </li>
     }
 
-    void MakeFilterGroup(string filterName, string[] filterModel, Filter.FilterAndMetaData filterItems)
+    void MakeFilterGroup(string filterName, string[] filterModel, FilterAndMetaData filterItems)
     {
         MakeFilterGroup(filterName, filterName, false, filterModel, filterItems, filterItems.FilterButtonText, filterItems.FilterButtonName, string.Empty);
     }
@@ -141,19 +143,16 @@
                 <span class="material-icons ">close</span>
             </button>
         </li>
-
-
     }
 
-    void MakeFilterChips(string[] filterModel, Filter.FilterItem[] filterItems)
+    void MakeFilterChips(string[] filterModel, FilterItem[] filterItems)
     {
         foreach (var filter in filterModel)
         {
-            string buttonText = GetChipText(filter, filterItems);
+            string buttonText = AlienSpeciesFilterHelpers.GetChipText(filter, filterItems);
             if (!string.IsNullOrEmpty(buttonText))
                 RenderChip(buttonText, filter);
         }
-
     }
 }
 

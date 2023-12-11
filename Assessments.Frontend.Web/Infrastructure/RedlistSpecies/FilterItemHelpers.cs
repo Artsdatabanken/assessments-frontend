@@ -3,19 +3,20 @@ using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
 using System.Linq;
+using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
 {
-    public class Areas
+    public class RedlistAreas
     {
-        public static readonly Filter.FilterItem[] RedlistSpecies2021AreasFilters = Enum.GetValues<RedlistSpeciesAssessment2021EvaluationContext>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] RedlistSpecies2021AreasFilters = Enum.GetValues<RedlistSpeciesAssessment2021EvaluationContext>()
+            .Select(x => new FilterItem
             {
                 Name = x.DisplayName(),
                 NameShort = x.ToString()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Areas = new()
+        public static readonly FilterAndMetaData RedlistSpecies2021Areas = new()
         {
             Filters = RedlistSpecies2021AreasFilters,
             FilterDescription = "",
@@ -24,17 +25,17 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
         };
     }
 
-    public class Categories
+    public class RedlistCategories
     {
-        public static readonly Filter.FilterItem[] RedlistSpecies2021CategoriesFilters = Enum.GetValues<RedlistSpeciesAssessment2021Category>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] RedlistSpecies2021CategoriesFilters = Enum.GetValues<RedlistSpeciesAssessment2021Category>()
+            .Select(x => new FilterItem
             {
                 NameShort = x.ToString(),
                 Name = x.DisplayName(),
                 Description = x.DisplayName()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Categories = new()
+        public static readonly FilterAndMetaData RedlistSpecies2021Categories = new()
         {
             Filters = RedlistSpecies2021CategoriesFilters,
             FilterDescription = "",
@@ -43,17 +44,17 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
         };
     }
 
-    public class Criteria
+    public class RedlistCriteria
     {
-        public static readonly Filter.FilterItem[] RedlistSpecies2021CriteriaFilters = Enum.GetValues<RedlistSpeciesAssessment2021Criteria>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] RedlistSpecies2021CriteriaFilters = Enum.GetValues<RedlistSpeciesAssessment2021Criteria>()
+            .Select(x => new FilterItem
             {
                 NameShort = x.ToString(),
                 Name = x.DisplayName(),
                 Description = x.DisplayName()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Criteria = new()
+        public static readonly FilterAndMetaData RedlistSpecies2021Criteria = new()
         {
             Filters = RedlistSpecies2021CriteriaFilters,
             FilterDescription = "",
@@ -62,17 +63,17 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
         };
     }
 
-    public class EuropeanPopulation
+    public class RedlistEuropeanPopulation
     {
-        public static readonly Filter.FilterItem[] RedlistSpecies2021EuropeanPopulationFilters = Enum.GetValues<RedlistSpeciesAssessment2021EuropeanPopulation>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] RedlistSpecies2021EuropeanPopulationFilters = Enum.GetValues<RedlistSpeciesAssessment2021EuropeanPopulation>()
+            .Select(x => new FilterItem
             {
                 NameShort = x.ToString(),
                 Name = x.DisplayName(),
                 Description = x.DisplayName()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData RedlistSpecies2021EuropeanPopulation = new()
+        public static readonly FilterAndMetaData RedlistSpecies2021EuropeanPopulation = new()
         {
             Filters = RedlistSpecies2021EuropeanPopulationFilters,
             FilterDescription = "",
@@ -81,17 +82,17 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
         };
     }
 
-    public class Regions
+    public class RedlistRegions
     {
-        public static readonly Filter.FilterItem[] RedlistSpecies2021RegionsFilters = Enum.GetValues<RedlistSpeciesAssessment2021Regions>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] RedlistSpecies2021RegionsFilters = Enum.GetValues<RedlistSpeciesAssessment2021Regions>()
+            .Select(x => new FilterItem
             {
                 NameShort = ((int) x).ToString(),
                 Name = x.DisplayName(),
                 Description = x.DisplayName()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Regions = new()
+        public static readonly FilterAndMetaData RedlistSpecies2021Regions = new()
         {
             Filters = RedlistSpecies2021RegionsFilters,
             FilterDescription = "",
@@ -100,17 +101,17 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
         };
     }
 
-    public class Habitats
+    public class RedlistHabitats
     {
-        public static readonly Filter.FilterItem[] RedlistSpecies2021HabitatFilters = Enum.GetValues<RedlistSpeciesAssessment2021Habitats>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] RedlistSpecies2021HabitatFilters = Enum.GetValues<RedlistSpeciesAssessment2021Habitats>()
+            .Select(x => new FilterItem
             {
                 NameShort = x.ToString(),
                 Name = x.DisplayName(),
                 Description = x.DisplayName()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Habitats = new()
+        public static readonly FilterAndMetaData RedlistSpecies2021Habitats = new()
         {
             Filters = RedlistSpecies2021HabitatFilters,
             FilterDescription = "",
@@ -119,17 +120,17 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
         };
     }
 
-    public class TaxonRank
+    public class RedlistTaxonRank
     {
-        public static readonly Filter.FilterItem[] RedlistSpecies2021TaxonRankFilters = Enum.GetValues<RedlistSpeciesAssessment2021TaxonRank>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] RedlistSpecies2021TaxonRankFilters = Enum.GetValues<RedlistSpeciesAssessment2021TaxonRank>()
+            .Select(x => new FilterItem
             {
                 NameShort = x.ToString(),
                 Name = x.DisplayName(),
                 Description = x.DisplayName()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData RedlistSpecies2021Habitats = new()
+        public static readonly FilterAndMetaData RedlistSpecies2021Habitats = new()
         {
             Filters = RedlistSpecies2021TaxonRankFilters,
             FilterDescription = "",
@@ -138,9 +139,9 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
         };
     }
 
-    public class SpeciesGroups
+    public class RedlistSpeciesGroups
     {
-        private static readonly Filter.FilterItem[] RedlistSpecies2021Insects =
+        private static readonly FilterItem[] RedlistSpecies2021Insects =
         {
             new()
             {
@@ -224,7 +225,7 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] RedlistSpecies2021SpeciesGroupsFilters =
+        public static readonly FilterItem[] RedlistSpecies2021SpeciesGroupsFilters =
         {
             new()
             {
@@ -353,12 +354,32 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             },
         };
 
-        public static readonly Filter.FilterAndMetaData RedlistSpecies2021SpeciesGroups = new()
+        public static readonly FilterAndMetaData RedlistSpecies2021SpeciesGroups = new()
         {
             Filters = RedlistSpecies2021SpeciesGroupsFilters,
             FilterDescription = "",
             FilterButtonName = "artsgruppefiltre",
             FilterButtonText = "Artspgruppe"
+        };
+    }
+
+    public class PresumedExtinct
+    {
+        public static readonly FilterItem[] RedlistSpecies2021PresumedExtinctFilters =
+        {
+            new()
+            {
+                Name = "Trolig utdødd",
+                NameShort = "True",
+            },
+        };
+
+        public static readonly FilterAndMetaData RedlistSpecies2021PresumedExtinct = new()
+        {
+            Filters = RedlistSpecies2021PresumedExtinctFilters,
+            FilterDescription = "",
+            FilterButtonName = "utdøddfiltre",
+            FilterButtonText = "Trolig utdødd"
         };
     }
 }

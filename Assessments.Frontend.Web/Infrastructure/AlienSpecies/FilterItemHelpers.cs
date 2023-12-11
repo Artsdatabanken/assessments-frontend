@@ -3,19 +3,21 @@ using Assessments.Shared.Helpers;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Assessments.Frontend.Web.Infrastructure;
+using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class Areas
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023AreasFilters = Enum.GetValues<AlienSpeciesAssessment2023EvaluationContext>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] AlienSpecies2023AreasFilters = Enum.GetValues<AlienSpeciesAssessment2023EvaluationContext>()
+            .Select(x => new FilterItem
             {
                 Name = x.DisplayName(),
                 NameShort = x.ToString()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023Areas = new()
+        public static readonly FilterAndMetaData AlienSpecies2023Areas = new()
         {
             Filters = AlienSpecies2023AreasFilters,
             FilterDescription = "",
@@ -26,14 +28,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Categories
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023InvasionPotentialFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] AlienSpecies2023InvasionPotentialFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.InvasionPotential>()
+            .Select(x => new FilterItem
             {
                 NameShort = x.Description(),
                 Name = x.DisplayName()
             }).Skip(1).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023InvasionPotential = new()
+        public static readonly FilterAndMetaData AlienSpecies2023InvasionPotential = new()
         {
             Filters = AlienSpecies2023InvasionPotentialFilters,
             FilterDescription = "Artens levedyktighet og evne til å ekspandere",
@@ -41,14 +43,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             FilterButtonText = "Invasjonspotensial (risikomatrisens x-akse)"
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023EcologicalEffectFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] AlienSpecies2023EcologicalEffectFilters = Enum.GetValues<AlienSpeciesAssessment2023MatrixAxisScore.EcologicalEffect>()
+            .Select(x => new FilterItem
             {
                 NameShort = x.Description(),
                 Name = x.DisplayName()
             }).Skip(1).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023EcologicalEffect = new()
+        public static readonly FilterAndMetaData AlienSpecies2023EcologicalEffect = new()
         {
             Filters = AlienSpecies2023EcologicalEffectFilters,
             FilterDescription = "Påvirkning på arter og naturtyper i Norge",
@@ -56,16 +58,16 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             FilterButtonText = "Økologisk effekt (risikomatrisens y-akse)"
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023CategoriesFilters = Enum.GetValues<AlienSpeciesAssessment2023Category>()
+        public static readonly FilterItem[] AlienSpecies2023CategoriesFilters = Enum.GetValues<AlienSpeciesAssessment2023Category>()
             .Where(x => x != AlienSpeciesAssessment2023Category.NR)
-            .Select(x => new Filter.FilterItem
+            .Select(x => new FilterItem
             {
                 NameShort = x.ToString(),
                 Name = x.DisplayName(),
                 Description = x.DisplayName()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023Categories = new()
+        public static readonly FilterAndMetaData AlienSpecies2023Categories = new()
         {
             Filters = AlienSpecies2023CategoriesFilters,
             FilterDescription = "",
@@ -104,7 +106,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class CategoryChange
     {
-        private static readonly Filter.FilterItem[] DifferFrom2018 =
+        private static readonly FilterItem[] DifferFrom2018 =
         {
             new()
             {
@@ -133,7 +135,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023CategoryChangedFilters =
+        public static readonly FilterItem[] AlienSpecies2023CategoryChangedFilters =
         {
             new()
             {
@@ -157,7 +159,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023CategoryChanged = new()
+        public static readonly FilterAndMetaData AlienSpecies2023CategoryChanged = new()
         {
             Filters = AlienSpecies2023CategoryChangedFilters,
             FilterDescription = "",
@@ -201,7 +203,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             dcipi,
         };
 
-        public static readonly Filter.FilterItem[] ExistanceTimeAndExpansionSpeed =
+        public static readonly FilterItem[] ExistanceTimeAndExpansionSpeed =
         {
             new()
             {
@@ -215,7 +217,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] InvationPotential =
+        public static readonly FilterItem[] InvationPotential =
         {
             new()
             {
@@ -239,7 +241,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] EcologicalEffect =
+        public static readonly FilterItem[] EcologicalEffect =
         {
             new()
             {
@@ -273,7 +275,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023DeciciveCriteriaFilters =
+        public static readonly FilterItem[] AlienSpecies2023DeciciveCriteriaFilters =
         {
             new()
             {
@@ -297,7 +299,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023DeciciveCriteria = new()
+        public static readonly FilterAndMetaData AlienSpecies2023DeciciveCriteria = new()
         {
             Filters = AlienSpecies2023DeciciveCriteriaFilters,
             FilterDescription = "",
@@ -312,7 +314,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public const string Limnic = "Eli";
         public const string Terrestrial = "Ete";
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023EnvironmentFilters =
+        public static readonly FilterItem[] AlienSpecies2023EnvironmentFilters =
         {
             new()
             {
@@ -331,7 +333,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023Environment = new()
+        public static readonly FilterAndMetaData AlienSpecies2023Environment = new()
         {
             Filters = AlienSpecies2023EnvironmentFilters,
             FilterDescription = "",
@@ -351,7 +353,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Gvn,
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023GeographicVariationFilters =
+        public static readonly FilterItem[] AlienSpecies2023GeographicVariationFilters =
         {
             new ()
             {
@@ -365,7 +367,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023GeographicVariation = new()
+        public static readonly FilterAndMetaData AlienSpecies2023GeographicVariation = new()
         {
             Filters = AlienSpecies2023GeographicVariationFilters,
             FilterDescription = "",
@@ -397,7 +399,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Cei,
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023ClimateEffectsFiltersAffected =
+        public static readonly FilterItem[] AlienSpecies2023ClimateEffectsFiltersAffected =
         {
             new ()
             {
@@ -411,7 +413,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023ClimateEffectsFiltersNotAffected =
+        public static readonly FilterItem[] AlienSpecies2023ClimateEffectsFiltersNotAffected =
         {
             new ()
             {
@@ -425,7 +427,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023ClimateEffectsFilters =
+        public static readonly FilterItem[] AlienSpecies2023ClimateEffectsFilters =
         {
             new ()
             {
@@ -449,7 +451,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023ClimateEffects = new()
+        public static readonly FilterAndMetaData AlienSpecies2023ClimateEffects = new()
         {
             Filters = AlienSpecies2023ClimateEffectsFilters,
             FilterDescription = "",
@@ -472,21 +474,21 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems.DisplayName(),
          };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023AlteredEcosystems = Enum.GetValues<AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems>()
-        .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] AlienSpecies2023AlteredEcosystems = Enum.GetValues<AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystems>()
+        .Select(x => new FilterItem
         {
             Name = x.DisplayName().ToUpper()[0] + x.DisplayName()[1..],
             NameShort = x.ToString()
         }).ToArray();
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023AlteredMajorTypeGroupTypes = Enum.GetValues<AlienSpeciesAssessment2023MajorTypeGroup>()
-        .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] AlienSpecies2023AlteredMajorTypeGroupTypes = Enum.GetValues<AlienSpeciesAssessment2023MajorTypeGroup>()
+        .Select(x => new FilterItem
         {
             Name = x.DisplayName(),
             NameShort = x.ToString()
         }).Skip(1).Where(x => !isNotThreatened.Contains(x.Name)).ToArray();
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023NatureTypesFilters =
+        public static readonly FilterItem[] AlienSpecies2023NatureTypesFilters =
         {
 
         new ()
@@ -511,7 +513,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023NatureTypes = new()
+        public static readonly FilterAndMetaData AlienSpecies2023NatureTypes = new()
         {
             Filters = AlienSpecies2023NatureTypesFilters,
             FilterDescription = "",
@@ -576,7 +578,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Swspr,
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersImportPathways =
+        public static readonly FilterItem[] AlienSpecies2023SpreadWaysFiltersImportPathways =
         {
             new ()
             {
@@ -595,7 +597,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersIntroduction =
+        public static readonly FilterItem[] AlienSpecies2023SpreadWaysFiltersIntroduction =
         {
             new ()
             {
@@ -629,7 +631,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFiltersSpread =
+        public static readonly FilterItem[] AlienSpecies2023SpreadWaysFiltersSpread =
         {
             new ()
             {
@@ -658,7 +660,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023SpreadWaysFilters =
+        public static readonly FilterItem[] AlienSpecies2023SpreadWaysFilters =
         {
             new ()
             {
@@ -692,7 +694,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023SpreadWays = new()
+        public static readonly FilterAndMetaData AlienSpecies2023SpreadWays = new()
         {
             Filters = AlienSpecies2023SpreadWaysFilters,
             FilterDescription = "",
@@ -764,7 +766,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         }
 
-        public static readonly Filter.FilterItem[] RegionalSpread =
+        public static readonly FilterItem[] RegionalSpread =
         {
             new()
             {
@@ -849,7 +851,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023RegionallyAlienFilters =
+        public static readonly FilterItem[] AlienSpecies2023RegionallyAlienFilters =
         {
             new()
             {
@@ -873,7 +875,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023RegionallyAlien = new()
+        public static readonly FilterAndMetaData AlienSpecies2023RegionallyAlien = new()
         {
             Filters = AlienSpecies2023RegionallyAlienFilters,
             FilterDescription = "",
@@ -904,7 +906,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             tvi
         }
 
-        public static readonly Filter.FilterItem[] TaxonRanks2023 =
+        public static readonly FilterItem[] TaxonRanks2023 =
         {
             new()
             {
@@ -933,7 +935,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023TaxonRanksFilters =
+        public static readonly FilterItem[] AlienSpecies2023TaxonRanksFilters =
         {
             new()
             {
@@ -957,7 +959,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023TaxonRanks = new()
+        public static readonly FilterAndMetaData AlienSpecies2023TaxonRanks = new()
         {
             Filters = AlienSpecies2023TaxonRanksFilters,
             FilterDescription = "",
@@ -969,7 +971,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     public class SpeciesGroups
     {
         // All NameShort for speciesGroup starts with 's' to not confuse them with other short names. 
-        private static readonly Filter.FilterItem[] AlienSpecies2023Algae =
+        private static readonly FilterItem[] AlienSpecies2023Algae =
         {
             new()
             {
@@ -997,7 +999,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        private static readonly Filter.FilterItem[] AlienSpecies2023Insects =
+        private static readonly FilterItem[] AlienSpecies2023Insects =
         {
             new()
             {
@@ -1073,7 +1075,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023Crustacean =
+        public static readonly FilterItem[] AlienSpecies2023Crustacean =
         {
             new()
             {
@@ -1109,7 +1111,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesGroupsFilters =
+        public static readonly FilterItem[] AlienSpecies2023SpeciesGroupsFilters =
         {
             new()
             {
@@ -1344,7 +1346,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023SpeciesGroups = new()
+        public static readonly FilterAndMetaData AlienSpecies2023SpeciesGroups = new()
         {
             Filters = AlienSpecies2023SpeciesGroupsFilters,
             FilterDescription = "",
@@ -1355,14 +1357,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Regions
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023RegionsFilters = Enum.GetValues<AlienSpeciesAssessment2023Region>()
-            .Select(x => new Filter.FilterItem
+        public static readonly FilterItem[] AlienSpecies2023RegionsFilters = Enum.GetValues<AlienSpeciesAssessment2023Region>()
+            .Select(x => new FilterItem
             {
                 Name = x.DisplayName(),
                 NameShort = x.ToString()
             }).ToArray();
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023Regions = new()
+        public static readonly FilterAndMetaData AlienSpecies2023Regions = new()
         {
             Filters = AlienSpecies2023RegionsFilters,
             FilterDescription = "Regioner med kjent, antatt eller forventet forekomst",
@@ -1373,7 +1375,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Habitat
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023HabitatsFilters =
+        public static readonly FilterItem[] AlienSpecies2023HabitatsFilters =
         {
             new()
             {
@@ -1409,7 +1411,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023Habitats = new()
+        public static readonly FilterAndMetaData AlienSpecies2023Habitats = new()
         {
             Filters = AlienSpecies2023HabitatsFilters,
             FilterDescription = "",
@@ -1420,21 +1422,21 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class ProductionSpecies
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023ProductionSpeciesFilters =
+        public static readonly FilterItem[] AlienSpecies2023ProductionSpeciesFilters =
         {
-            new Filter.FilterItem()
+            new FilterItem()
             {
                 Name = "Tidligere eller nåværende bruksart",
                 NameShort = true.ToString()
             },
-            new Filter.FilterItem()
+            new FilterItem()
             {
                 Name = "Ikke bruksart",
                 NameShort = false.ToString()
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023ProductionSpecies = new()
+        public static readonly FilterAndMetaData AlienSpecies2023ProductionSpecies = new()
         {
             Filters = AlienSpecies2023ProductionSpeciesFilters,
             FilterDescription = "",
@@ -1445,7 +1447,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class SpeciesStatus
     {
-        public static readonly Filter.FilterItem[] AlienSpecies2023Doorknockers =
+        public static readonly FilterItem[] AlienSpecies2023Doorknockers =
         {
             new()
             {
@@ -1474,7 +1476,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023SpeciesStatusFilters =
+        public static readonly FilterItem[] AlienSpecies2023SpeciesStatusFilters =
         {
             new()
             {
@@ -1498,7 +1500,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023SpeciesStatus = new()
+        public static readonly FilterAndMetaData AlienSpecies2023SpeciesStatus = new()
         {
             Filters = AlienSpecies2023SpeciesStatusFilters,
             FilterDescription = "",
@@ -1522,7 +1524,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             Nam
         }
 
-        public static readonly Filter.FilterItem[] AlienSpecies2023NotAssessedFilters =
+        public static readonly FilterItem[] AlienSpecies2023NotAssessedFilters =
         {
             new()
             {
@@ -1541,7 +1543,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly Filter.FilterAndMetaData AlienSpecies2023NotAssessed = new()
+        public static readonly FilterAndMetaData AlienSpecies2023NotAssessed = new()
         {
             Filters = AlienSpecies2023NotAssessedFilters,
             FilterDescription = "",

@@ -1,4 +1,5 @@
 ﻿using Assessments.Frontend.Web.Infrastructure.RedlistSpecies.Enums;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
 using System.Linq;
@@ -134,6 +135,230 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             FilterDescription = "",
             FilterButtonName = "taksonomisknivåfiltre",
             FilterButtonText = "Taksonomisk nivå"
+        };
+    }
+
+    public class SpeciesGroups
+    {
+        private static readonly Filter.FilterItem[] RedlistSpecies2021Insects =
+        {
+            new()
+            {
+                Name = "Biller",
+                NameShort = "Biller",
+            },
+            new()
+            {
+                Name = "Døgnfluer",
+                NameShort = "Døgnfluer",
+            },
+            new()
+            {
+                Name = "Kakerlakker",
+                NameShort = "Kakerlakker",
+            },
+            new()
+            {
+                Name = "Kamelhalsfluer",
+                NameShort = "Kamelhalsfluer",
+            },
+            new()
+            {
+                Name = "Mudderfluer",
+                NameShort = "Mudderfluer",
+            },
+            new()
+            {
+                Name = "Nebbfluer",
+                NameShort = "Nebbfluer",
+            },
+            new()
+            {
+                Name = "Nebbmunner",
+                NameShort = "Nebbmunner",
+            },
+            new()
+            {
+                Name = "Nettvinger",
+                NameShort = "Nettvinger",
+            },
+            new()
+            {
+                Name = "Rettvinger",
+                NameShort = "Rettvinger",
+            },
+            new()
+            {
+                Name = "Saksedyr",
+                NameShort = "Saksedyr",
+            },
+            new()
+            {
+                Name = "Sommerfugler",
+                NameShort = "Sommerfugler",
+            },
+            new()
+            {
+                Name = "Steinfluer",
+                NameShort = "Steinfluer",
+            },
+            new()
+            {
+                Name = "Tovinger",
+                NameShort = "Tovinger",
+            },
+            new()
+            {
+                Name = "Vepser",
+                NameShort = "Vepser",
+            },
+            new()
+            {
+                Name = "Vårfluer",
+                NameShort = "Vårfluer",
+            },
+            new()
+            {
+                Name = "Øyenstikkere",
+                NameShort = "Øyenstikkere",
+            }
+        };
+
+        public static readonly Filter.FilterItem[] RedlistSpecies2021SpeciesGroupsFilters =
+        {
+            new()
+            {
+                Name = "Alger",
+                NameShort = "Alger",
+            },
+            new()
+            {
+                Name = "Amfibier og reptiler",
+                NameShort = "Amfibier og reptiler",
+            },
+            new()
+            {
+                Name = "Armfotinger",
+                NameShort = "Armfotinger",
+            },
+            new()
+            {
+                Name = "Bløtdyr",
+                NameShort = "Bløtdyr",
+            },
+            new()
+            {
+                Name = "Edderkoppdyr",
+                NameShort = "Edderkoppdyr",
+            },
+            new()
+            {
+                Name = "Fisker",
+                NameShort = "Fisker",
+            },
+            new()
+            {
+                Name = "Fugler",
+                NameShort = "Fugler",
+            },
+            new()
+            {
+                Name = "Hydrozoer",
+                NameShort = "Hydrozoer",
+            },
+            new()
+            {
+                Name = "Insekter",
+                NameShort = "Insekter",
+                SubGroup = new()
+                {
+                    Filters = RedlistSpecies2021Insects,
+                    FilterDescription = ""
+                }
+            },
+            new()
+            {
+                Name = "Karplanter",
+                NameShort = "Karplanter",
+            },
+            new()
+            {
+                Name = "Koralldyr",
+                NameShort = "Koralldyr",
+            },
+            new()
+            {
+                Name = "Krepsdyr",
+                NameShort = "Krepsdyr",
+            },
+            new()
+            {
+                Name = "Larver",
+                NameShort = "Larver",
+            },
+            new()
+            {
+                Name = "Leddormer",
+                NameShort = "Leddormer",
+            },
+            new()
+            {
+                Name = "Mangefotinger",
+                NameShort = "Mangefotinger",
+            },
+            new()
+            {
+                Name = "Mosdyr",
+                NameShort = "Mosdyr",
+            },
+            new()
+            {
+                Name = "Moser",
+                NameShort = "Moser",
+            },
+            new()
+            {
+                Name = "Pattedyr",
+                NameShort = "Pattedyr",
+            },
+            new()
+            {
+                Name = "Pigghuder",
+                NameShort = "Pigghuder",
+            },
+            new()
+            {
+                Name = "Sekkdyr",
+                NameShort = "Sekkdyr",
+            },
+            new()
+            {
+                Name = "Sopper",
+                NameShort = "Sopper",
+            },
+            new()
+            {
+                Name = "Spretthaler",
+                NameShort = "Spretthaler",
+            },
+            new()
+            {
+                Name = "Stormaneter",
+                NameShort = "Stormaneter",
+            },
+            new()
+            {
+                Name = "Svamper",
+                NameShort = "Svamper",
+            },
+        };
+
+        public static readonly Filter.FilterAndMetaData RedlistSpecies2021SpeciesGroups = new()
+        {
+            Filters = RedlistSpecies2021SpeciesGroupsFilters,
+            FilterDescription = "",
+            FilterButtonName = "artsgruppefiltre",
+            FilterButtonText = "Artspgruppe"
         };
     }
 }

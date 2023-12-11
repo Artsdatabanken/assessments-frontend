@@ -11,8 +11,7 @@
     var AllRegions = Regions.RedlistSpecies2021Regions;
     var AllHabitats = Habitats.RedlistSpecies2021Habitats;
     var AllTaxonRanks = TaxonRank.RedlistSpecies2021Habitats;
-    string[] AllSpeciesGroups = ViewBag.AllSpeciesGroups;
-    string[] AllInsects = ViewBag.AllInsects;
+    var AllSpeciesGroups = SpeciesGroups.RedlistSpecies2021SpeciesGroups;
 
     var startHit = Model.Redlist2021Results.PageNumber * 25 - 24;
     var endHit = startHit + @Model.Redlist2021Results.Count - 1;

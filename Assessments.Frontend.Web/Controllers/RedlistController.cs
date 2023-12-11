@@ -26,7 +26,6 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new();
-        private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         private readonly ArtskartApiService _artskartApiService;
 
 
@@ -135,7 +134,6 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.TaxonRank.Contains(x.TaxonRank));
 
             // European population percentages
-            ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;
             string[] chosenEuropeanPopulation = Helpers.FindEuropeanPopProcentages(viewModel.EuroPop);
 
             if (chosenEuropeanPopulation?.Any() == true)

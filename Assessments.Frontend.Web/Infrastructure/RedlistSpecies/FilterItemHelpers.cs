@@ -60,4 +60,23 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             FilterButtonText = "Kriterier"
         };
     }
+
+    public class EuropeanPopulation
+    {
+        public static readonly Filter.FilterItem[] RedlistSpecies2021EuropeanPopulationFilters = Enum.GetValues<RedlistSpeciesAssessment2021EuropeanPopulation>()
+            .Select(x => new Filter.FilterItem
+            {
+                NameShort = x.ToString(),
+                Name = x.DisplayName(),
+                Description = x.DisplayName()
+            }).ToArray();
+
+        public static readonly Filter.FilterAndMetaData RedlistSpecies2021EuropeanPopulation = new()
+        {
+            Filters = RedlistSpecies2021EuropeanPopulationFilters,
+            FilterDescription = "",
+            FilterButtonName = "europeiskandelpopulasjonsfiltre",
+            FilterButtonText = "Andel av europeisk populasjon"
+        };
+    }
 }

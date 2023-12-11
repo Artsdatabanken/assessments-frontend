@@ -26,7 +26,6 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new();
-        private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
         private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         private readonly ArtskartApiService _artskartApiService;
 
@@ -105,8 +104,6 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));
 
             // Criterias
-            ViewBag.AllCriterias = _allCriterias;
-
             if (viewModel.Criterias?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && viewModel.Criterias.Any(y => x.CriteriaSummarized.Contains(y)));
 

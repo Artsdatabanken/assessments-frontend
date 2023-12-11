@@ -1,9 +1,7 @@
 ﻿using Assessments.Frontend.Web.Infrastructure.RedlistSpecies.Enums;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using System;
 using System.Linq;
-using static Assessments.Frontend.Web.Infrastructure.RedlistSpecies.Enums.Enums;
 
 namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
 {

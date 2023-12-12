@@ -6,8 +6,6 @@ const filters = document.getElementById("filters");
 
 if (filters) {
     const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
-    const insectFilters = document.getElementsByClassName("insect_input");
-    const insectInput = document.getElementById("Insekter");
     const redlistCheckbox = document.getElementById("redlisted_check");
     const endangeredCheckbox = document.getElementById("endangered_check");
     const init = document.getElementById("initial_check");
@@ -26,7 +24,7 @@ if (filters) {
         "show_eds",
         "show_sal",
         "show_ccke",
-        "show_insects",
+        "show_insekter",
         "show_skr",
         "show_sin",
         "show_ttn",
@@ -35,7 +33,6 @@ if (filters) {
         "show_swimp",
         "show_swnat",
         "show_swspr",
-        "show_taxonrank",
         "show_nta",
         "show_ntn",
     ];
@@ -203,9 +200,6 @@ if (filters) {
             });
         }
         // redlist species 2021
-        if (shouldToggleMarkAll("insect_input")) {
-            insectInput.checked = true;
-        }
         if (shouldToggleMarkRedOrEnd(redlisted)) {
             redlistCheckbox.checked = true;
         }
@@ -263,7 +257,7 @@ if (filters) {
         }
         const classNames = Array.prototype.filter.call(el.classList, name => name.indexOf('_input') != -1);
 
-        if (classNames.length && !classNames.includes('insect_input')) {
+        if (classNames.length) {
             classNames.forEach(name => {
                 const idIndex = name.indexOf('_input');
                 const filterId = name.substring(0, idIndex);
@@ -271,9 +265,7 @@ if (filters) {
             })
         }
         // redlist species 2021
-        else if (el.classList[0] === "insect_input") {
-            toggleSingleFilter(el, "Insekter");
-        } else if (endangered.some(category => el.id.indexOf(category) != -1)) {
+        if (endangered.some(category => el.id.indexOf(category) != -1)) {
             toggleSingleFilter(el, "endangered_check");
             toggleSingleFilter(el, "redlisted_check");
         } else if (redlisted.some(category => el.id.indexOf(category) != -1)) {
@@ -287,8 +279,6 @@ if (filters) {
             toggleRedlistedCategories();
         } else if (el.id === "endangered_check") {
             toggleEndangeredCategories();
-        } else if (el.id === "Insekter") {
-            toggleSubGroup(insectFilters, insectInput);
         } else {
             if (addOrRemove == "add") {
                 updateToggleAll(el);

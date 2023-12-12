@@ -26,6 +26,7 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
                         return $"{Model.TaxonRank.Length}";
                     return string.Empty;
                 case "SpeciesGroups":
+                    if (Model.SpeciesGroups?.Any() == true)
                     {
                         var count = Model.SpeciesGroups.Length;
                         if (Model.SpeciesGroups.Contains("Insects"))
@@ -34,6 +35,7 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
                             count--;
                         return $"{count}";
                     }
+                    return string.Empty;
                 case "Habitats":
                     if (Model.Habitats?.Any() == true)
                         return $"{Model.Habitats.Length}";

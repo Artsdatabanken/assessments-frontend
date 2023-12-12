@@ -28,7 +28,6 @@ namespace Assessments.Frontend.Web.Controllers
         private static readonly Dictionary<string, JObject> _resourceCache = new();
         private readonly ArtskartApiService _artskartApiService;
 
-
         [Route("2021")]
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
         {
@@ -60,6 +59,9 @@ namespace Assessments.Frontend.Web.Controllers
             ViewBag.kriterier = await GetResource("wwwroot/json/kriterier.json");
 
             ViewBag.habitat = await GetResource("wwwroot/json/habitat.json");
+
+            ViewBag.categories = await GetResource("wwwroot/json/categories.json");
+
 
             // Pagination
             const int pageSize = 25;

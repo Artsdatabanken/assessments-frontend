@@ -175,7 +175,9 @@ namespace Assessments.Frontend.Web.Infrastructure
             List<string> regions = new();
             foreach (var region in selectedRegions)
             {
-                regions.Add(allRegions[region]);
+                // Mark all button har "Regions", and is not a region
+                if (region != "Regions")
+                    regions.Add(allRegions[region]);
             }
             return regions.ToArray();
         }

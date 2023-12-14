@@ -19,6 +19,7 @@ using Raven.Abstractions.Commands;
 using static Assessments.Mapping.RedlistSpecies.Source.Rodliste2019;
 using Raven.Abstractions.Extensions;
 using System.Diagnostics.CodeAnalysis;
+using System.Collections;
 
 namespace Assessments.Transformation
 {
@@ -101,13 +102,10 @@ namespace Assessments.Transformation
             var dynamicPropertiesFromStorageAccount = await publishDynamicProperties.ImportAlienList2023();
             dynamicPropertiesFromStorageAccount.AddRange(await publishDynamicProperties.ImportRedlist2021());
 
-            var ravenSession = DocumentStoreHolder.RavenSession;
-
-            //ravenSession.Load<DynamicProperty>("\"DynamicProperty/FremmedArt2023-\"");//NOTE: we might need a Databank.Domain.Content.Node type here from data.artsdatabanken.no
-
+            var ravenSession = DocumentStoreHolder.RavenSession;        
 
             var existingDynamicProperties = GetExistingDynamicProperties(ravenSession, "DynamicProperty/Rodliste2021");
-            existingDynamicProperties.AddRange(GetExistingDynamicProperties(ravenSession, "DynamicProperty/Fremmedart2023")); //ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith("DynamicProperty/Fremmedart2023")).Skip(pointer).Take(batchSize).ToArray();
+            existingDynamicProperties.AddRange(GetExistingDynamicProperties(ravenSession, "DynamicProperty/Fremmedart2023")); 
 
             var comparerId = new DynamicPropertyIDComparer();            
             var obsoletDynamicProperties = existingDynamicProperties.Except(dynamicPropertiesFromStorageAccount, comparerId).ToList();
@@ -125,7 +123,7 @@ namespace Assessments.Transformation
             DeleteDynamicPropertiesByIds(ravenSession, idsToDelete);
 
             //Store DynamicProperties to RavenDb that are different or new in storage account
-            StoreDynamicProperties(NewOrChangedDynamicProperties, ravenSession); //NOTE, check if existing dynamicProperties in Raven are overwritten? Nope, an error is generated as the Id already exist and can not overwritten.
+            StoreDynamicProperties(NewOrChangedDynamicProperties, ravenSession);
 
             ravenSession.SaveChanges();
         }
@@ -168,7 +166,12 @@ namespace Assessments.Transformation
             {
                 if (obj == null) { return 0; }
 
-                return obj.Id.GetHashCode();
+                int hashId = obj.Id.GetHashCode();
+                int hashReferences = ((IStructuralEquatable)obj.References).GetHashCode(EqualityComparer<string>.Default);
+                //int hashPropertiesOld = HashCode.Combine(StructuralComparisons.StructuralEqualityComparer.GetHashCode(obj.Properties));
+                int hashProperties = ((IStructuralEquatable)obj.Properties).GetHashCode(StructuralComparisons.StructuralEqualityComparer);
+
+                return hashId ^ hashReferences ^hashProperties;
             }
         }
 
@@ -247,7 +250,7 @@ namespace Assessments.Transformation
             while (true)
             {
                 //Page through the dynamicPropertis as RavenDb server per default has a limit of 128 = 2^7 result (batchSize)
-                assessmentsBatch = ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith(firstPartOfDocumentName)).Skip(pointer).Take(batchSize).ToList();
+                assessmentsBatch = ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith(firstPartOfDocumentName))?.Skip(pointer).Take(batchSize).ToList();
                 
                 if (!assessmentsBatch.Any()) break;
 

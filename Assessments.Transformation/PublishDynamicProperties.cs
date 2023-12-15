@@ -159,7 +159,9 @@ namespace Assessments.Transformation
                     return false;
                 }
 
-                return x.Id == y.Id && CompareArrays(x.References, y.References) && CompareProperties(x.Properties, y.Properties);
+                return x.Id == y.Id && 
+                    ((IStructuralEquatable)x.References).Equals(y.References, EqualityComparer<string>.Default) && 
+                    ((IStructuralEquatable)x.Properties).Equals(y.Properties, StructuralComparisons.StructuralEqualityComparer);
             }
 
             public int GetHashCode([DisallowNull] DynamicProperty obj)

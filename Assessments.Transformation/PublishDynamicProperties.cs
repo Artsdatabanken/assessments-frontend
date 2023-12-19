@@ -173,51 +173,8 @@ namespace Assessments.Transformation
                 //int hashPropertiesOld = HashCode.Combine(StructuralComparisons.StructuralEqualityComparer.GetHashCode(obj.Properties));
                 int hashProperties = ((IStructuralEquatable)obj.Properties).GetHashCode(StructuralComparisons.StructuralEqualityComparer);
 
-                return hashId ^ hashReferences ^hashProperties;
+                return HashCode.Combine(hashId, hashReferences, hashProperties);
             }
-        }
-
-        private static bool CompareArrays(string[] x, string[] y)
-        {
-            // Check if both arrays are null
-            if (x == null && y == null)
-                return true;
-            // Check if either array is null
-            if (x == null || y == null)
-                return false;
-            // Check if both arrays have the same length
-            if (x.Length != y.Length)
-                return false;
-            // Loop through the elements of both arrays
-            for (int i = 0; i < x.Length; i++)
-            {
-                // Compare the elements using the default string comparer
-                if (!string.Equals(x[i], y[i]))
-                    return false;
-            }
-            // If no difference is found, return true
-            return true;
-        }
-
-        private static bool CompareProperties(DynamicProperty.Property[] x, DynamicProperty.Property[] y)
-        {
-            bool areEqual = true;
-
-            if (x == y) return true;
-            if (x == null || y == null || x.Length != y.Length) return false;
-
-            
-            // Compare the elements using the Equals method
-            for (int i = 0; i > x.Length; i++)
-            {
-                if ( x[i].Name != y[i].Name || x[i].Value != y[i].Value || !CompareProperties(x[i].Properties, y[i].Properties) )
-                {
-                    areEqual = false;
-                    break;
-                }
-            }
-
-            return areEqual;
         }
 
         private static void DeleteDynamicProperties(IDocumentSession ravenSession, List<DynamicProperty> obsoletDynamicProperties)

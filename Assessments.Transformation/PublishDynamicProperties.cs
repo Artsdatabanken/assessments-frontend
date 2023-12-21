@@ -159,9 +159,9 @@ namespace Assessments.Transformation
                     return false;
                 }
 
-                return x.Id == y.Id && 
-                    ((IStructuralEquatable)x.References).Equals(y.References, EqualityComparer<string>.Default) && 
-                    ((IStructuralEquatable)x.Properties).Equals(y.Properties, StructuralComparisons.StructuralEqualityComparer);
+                return x.Id == y.Id &&
+                    ((IStructuralEquatable)x.References).Equals(y.References, EqualityComparer<string>.Default) &&
+                    CheckPropertiesEquality(x.Properties, y.Properties);
             }
 
             public int GetHashCode([DisallowNull] DynamicProperty obj)
@@ -169,12 +169,30 @@ namespace Assessments.Transformation
                 if (obj == null) { return 0; }
 
                 int hashId = obj.Id.GetHashCode();
-                int hashReferences = ((IStructuralEquatable)obj.References).GetHashCode(EqualityComparer<string>.Default);
-                //int hashPropertiesOld = HashCode.Combine(StructuralComparisons.StructuralEqualityComparer.GetHashCode(obj.Properties));
-                int hashProperties = ((IStructuralEquatable)obj.Properties).GetHashCode(StructuralComparisons.StructuralEqualityComparer);
+                int hashReferences = ((IStructuralEquatable)obj.References).GetHashCode(EqualityComparer<string>.Default);                
+                int hashProperties = ((IStructuralEquatable)obj.Properties).GetHashCode(StructuralComparisons.StructuralEqualityComparer); //NOTE: Fails here, hashProperties does not return the same code for the same values of properties.
+                int HashPropertiesNew = obj.Properties?.Select(p => p.Name?.GetHashCode() + p.Value?.GetHashCode() + p.Properties?.Select(p2 => p2.Name?.GetHashCode() + p2.Value?.GetHashCode() ?? 0).Sum()).Sum() ?? 0; //NOTE: calculates hash codes 2 levels down into the recurrent property object, this should be sufficient for assessments
 
-                return HashCode.Combine(hashId, hashReferences, hashProperties);
+                return HashCode.Combine(hashId, hashReferences, HashPropertiesNew);                
             }
+        }
+
+        private static bool CheckPropertiesEquality(DynamicProperty.Property[] xProps, DynamicProperty.Property[] yProps)
+        {
+            if (xProps == yProps) return true;
+            if (xProps is null || yProps is null) return false;
+            if (xProps.Length != yProps.Length) return false;
+
+            for (int i = 0; i < xProps.Length; i++)
+            {
+                if (xProps[i].Name != yProps[i].Name || xProps[i].Value != yProps[i].Value)
+                    return false;
+
+                if (!CheckPropertiesEquality(xProps[i].Properties, yProps[i].Properties))
+                    return false;
+            }
+
+            return true;
         }
 
         private static void DeleteDynamicProperties(IDocumentSession ravenSession, List<DynamicProperty> obsoletDynamicProperties)
@@ -219,6 +237,27 @@ namespace Assessments.Transformation
             }
 
             return allAssessments;
+        }
+
+        private static bool CompareProperties(DynamicProperty.Property[] x, DynamicProperty.Property[] y)
+        {
+            bool areEqual = true;
+
+            if (x == y) return true;
+            if (x == null || y == null || x.Length != y.Length) return false;
+
+
+            // Compare the elements using the Equals method
+            for (int i = 0; i > x.Length; i++)
+            {
+                if (x[i].Name != y[i].Name || x[i].Value != y[i].Value || !CompareProperties(x[i].Properties, y[i].Properties))
+                {
+                    areEqual = false;
+                    break;
+                }
+            }
+
+            return areEqual;
         }
     }
 }

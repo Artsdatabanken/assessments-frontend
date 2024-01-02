@@ -170,10 +170,9 @@ namespace Assessments.Transformation
 
                 int hashId = obj.Id.GetHashCode();
                 int hashReferences = ((IStructuralEquatable)obj.References).GetHashCode(EqualityComparer<string>.Default);                
-                int hashProperties = ((IStructuralEquatable)obj.Properties).GetHashCode(StructuralComparisons.StructuralEqualityComparer); //NOTE: Fails here, hashProperties does not return the same code for the same values of properties.
-                int HashPropertiesNew = obj.Properties?.Select(p => p.Name?.GetHashCode() + p.Value?.GetHashCode() + p.Properties?.Select(p2 => p2.Name?.GetHashCode() + p2.Value?.GetHashCode() ?? 0).Sum()).Sum() ?? 0; //NOTE: calculates hash codes 2 levels down into the recurrent property object, this should be sufficient for assessments
+                int HashProperties = obj.Properties?.Select(p => p.Name?.GetHashCode() + p.Value?.GetHashCode() + p.Properties?.Select(p2 => p2.Name?.GetHashCode() + p2.Value?.GetHashCode() ?? 0).Sum()).Sum() ?? 0; //NOTE: calculates hash codes 2 levels down into the recurrent Property object, this should be sufficient for assessments
 
-                return HashCode.Combine(hashId, hashReferences, HashPropertiesNew);                
+                return HashCode.Combine(hashId, hashReferences, HashProperties);                
             }
         }
 
@@ -237,27 +236,6 @@ namespace Assessments.Transformation
             }
 
             return allAssessments;
-        }
-
-        private static bool CompareProperties(DynamicProperty.Property[] x, DynamicProperty.Property[] y)
-        {
-            bool areEqual = true;
-
-            if (x == y) return true;
-            if (x == null || y == null || x.Length != y.Length) return false;
-
-
-            // Compare the elements using the Equals method
-            for (int i = 0; i > x.Length; i++)
-            {
-                if (x[i].Name != y[i].Name || x[i].Value != y[i].Value || !CompareProperties(x[i].Properties, y[i].Properties))
-                {
-                    areEqual = false;
-                    break;
-                }
-            }
-
-            return areEqual;
         }
     }
 }

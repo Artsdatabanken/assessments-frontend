@@ -58,5 +58,50 @@ namespace Assessments.Transformation.Tests
             // Assert
             Assert.AreNotEqual(hashCode1, hashCode2);
         }
+
+        [TestMethod]
+        public void Equals_WhenCalledWithEqualObjects_ReturnsTrue()
+        {
+            // Arrange
+            var comparer = new DynamicPropertyObjectComparer();
+            var obj1 = new DynamicProperty { Id = "1", References = new[] { "ref1", "ref2" }, Properties = new[] { new DynamicProperty.Property { Name = "prop1", Value = "value1" } } };
+            var obj2 = new DynamicProperty { Id = "1", References = new[] { "ref1", "ref2" }, Properties = new[] { new DynamicProperty.Property { Name = "prop1", Value = "value1" } } };
+
+            // Act
+            var result = comparer.Equals(obj1, obj2);
+
+            // Assert
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void Equals_WhenCalledWithDifferentObjects_ReturnsFalse()
+        {
+            // Arrange
+            var comparer = new DynamicPropertyObjectComparer();
+            var obj1 = new DynamicProperty { Id = "1", References = new[] { "ref1", "ref2" }, Properties = new[] { new DynamicProperty.Property { Name = "prop1", Value = "value1" } } };
+            var obj2 = new DynamicProperty { Id = "2", References = new[] { "ref1", "ref2" }, Properties = new[] { new DynamicProperty.Property { Name = "prop1", Value = "value1" } } };
+
+            // Act
+            var result = comparer.Equals(obj1, obj2);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void Equals_WhenCalledWithDifferentObjectsWhereProperyDiffersTwoLevelsDown_ReturnsFalse()
+        {
+            // Arrange
+            var comparer = new DynamicPropertyObjectComparer();
+            var obj1 = new DynamicProperty { Id = "1", References = new[] { "ref1", "ref2" }, Properties = new[] { new DynamicProperty.Property { Name = "prop1", Value = "value1", Properties = new[] { new DynamicProperty.Property { Name = "prop1", Value="1" } } } } };
+            var obj2 = new DynamicProperty { Id = "1", References = new[] { "ref1", "ref2" }, Properties = new[] { new DynamicProperty.Property { Name = "prop1", Value = "value1", Properties = new[] { new DynamicProperty.Property { Name = "prop2", Value = "2" } } } } };
+
+            // Act
+            var result = comparer.Equals(obj1, obj2);
+
+            // Assert
+            Assert.IsFalse(result);
+        }
     }
 }

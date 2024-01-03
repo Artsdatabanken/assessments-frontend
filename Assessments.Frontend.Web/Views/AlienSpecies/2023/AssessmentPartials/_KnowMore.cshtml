@@ -109,7 +109,7 @@
                 <p is-visible="!isNrButNotAlienSpecie && Model.Assessment.ArrivedCountryFrom != null && Model.Assessment.ArrivedCountryFrom.Count > 0">
                     @(GetCameToNorwayFrom()) @Model.Assessment.ArrivedCountryFrom.Select(x => x.DisplayName()).JoinAnd(", ", " og ").ToLowerInvariant()
                 </p>
-                <p>@Model.Assessment.ArrivedCountryFromDetails</p>
+                <p>@Html.Raw(Model.Assessment.ArrivedCountryFromDetails)</p>
             </div>
         </div>
     </div>

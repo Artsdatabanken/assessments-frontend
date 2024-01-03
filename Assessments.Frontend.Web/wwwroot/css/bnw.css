@@ -14,7 +14,6 @@
 .highcontrast .LC,
 .highcontrast .NA,
 .highcontrast .NE,
-.highcontrast .NR,
 .highcontrast .NT {
     color: white;
     background: #262f31;
@@ -268,6 +267,12 @@ color: #FFF9F0;
     border-color: #262f31;
 }
 
+/* WHITE BORDER */
+.darktheme .category_displayer li.active .category_item,
+.darktheme .category_displayer .notactive .category_item {
+    border-color: white;
+}
+
 /* ACTIVE BORDER */
 .darktheme .see_all .habitat_element.active {
     border-color: #f97474;
@@ -336,6 +341,10 @@ color: #FFF9F0;
 
 .darktheme .main .changetab.active {
     border-bottom-color: #262f31;
+}
+
+.darktheme .category_displayer::before{
+    background:white;
 }
 
 .darktheme .list-search,
@@ -427,7 +436,7 @@ color: #FFF9F0;
     border-color: #f9d754
 }
 
-.darktheme.highcontrast .category_displayer .active .category_item {
+.darktheme.highcontrast .category_displayer .active .category_item span{
     color: #262f31;
 }
 

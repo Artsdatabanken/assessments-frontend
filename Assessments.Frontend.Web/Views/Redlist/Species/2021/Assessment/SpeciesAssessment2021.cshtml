@@ -89,7 +89,6 @@
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
     {
-        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         CategoryShort = Model.Category,
         CategoryBar = new CategoryBarListElement[]
         {
@@ -138,7 +137,7 @@
                 Name = "Ikke vurdert",
                 NameShort = "NE"
             },
-        }.Reverse().ToArray(),
+        },
         MethodUrl = "https://www.artsdatabanken.no/rodlisteforarter2021/Metode#316483"
     };
 

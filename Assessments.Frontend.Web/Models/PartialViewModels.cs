@@ -67,8 +67,6 @@ namespace Assessments.Frontend.Web.Models
 
     public class CategoryDescriptionViewModel
     {
-        public AssessmentType AssessmentType { get; set; }
-
         public string CategoryShort { get; set; }
 
         public CategoryBarListElement[] CategoryBar { get; set; }

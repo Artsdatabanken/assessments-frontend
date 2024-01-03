@@ -13,20 +13,16 @@
 
 <div class="page_section">
     <div class="page_section">
-        <ul class="category_displayer @Model.AssessmentType.ToString()">
+        <ul class="category_displayer">
                 @foreach (var category in Model.CategoryBar)
                 {
                     <li class="@GetActiveElement(category.NameShort)">
                         <div class="category_item  @category.NameShort">
-                            @(GetActiveElement(category.NameShort) == active ? Model.CategoryShort : category.NameShort)
+                        <span>@(GetActiveElement(category.NameShort) == active ? Model.CategoryShort : category.NameShort)</span>
                         </div>
                         <span class="tag">@category.Name</span>
                     </li>
-                    @if(category.NameShort == "NR" || category.NameShort == "NA")
-                    {
-                        <li class="no-space"></li>
-                    }
-            }
+                }
         </ul>
     </div>
     <a href="@Model.MethodUrl" class="link-styled">

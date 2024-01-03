@@ -59,6 +59,7 @@
 
     var categoryDescriptionViewModel = new CategoryDescriptionViewModel()
     {
+        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
         CategoryShort = assessment.Category.ToString(),
         CategoryBar = Enum.GetValues<AlienSpeciesAssessment2023Category>().Select(x => new CategoryBarListElement()
         {

@@ -11,16 +11,26 @@
     overflow-x: visible;
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
 }
 
 .category_displayer::before {
     content: "";
-    background: #4c4a48;
     position: absolute;
     top: 38px;
     right: 10px;
-    height: 1px;
+    height: 5px;
     left: 10px;
+}
+
+.category_displayer.AlienSpecies2023::before {
+    background: black;
+    background: linear-gradient(to right, #fff0 12%, #94A360 28%, #5c9c94, #296473, #2E4073, #4F1052);
+}
+
+.category_displayer.RedlistSpecies2021::before {
+    background: black;
+    background: linear-gradient(to right, #fff0 19%, #61a360 30%, #6c6c6c, #aac000, #e6c000, #eb8107, #d61900, #000000);
 }
 
 .category_displayer li {
@@ -33,18 +43,17 @@
     margin-bottom: 20px;
     height: auto;
     position: relative;
-    margin: 3px;
-    width: 40px;
+    width: 50px;
 }
 
 .category_displayer .category_item {
-    height: 40px;
-    width: 40px;
-    border-radius: 2px;
-    margin:auto;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: auto;
 }
 
-.category_displayer span {
+.category_displayer .tag {
     font-size: 8pt;
     display: block;
     line-height: 1;
@@ -54,58 +63,53 @@
     padding-top: 5px;
 }
 
-.category_displayer .category_item span {
-    margin: auto;
-    padding-top:0;
-    text-align: center;
-    font-size: 22px;
-    vertical-align: middle;
-    color: inherit;
-    line-height: 40px;
+.category_displayer .category_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
 }
 
 .category_displayer li.active {
-    width: 66px;
-    padding-top:0;
-    font-weight:bold;
+    width: 75px;
+    padding-top: 0;
 }
 
 .category_displayer li.active .category_item {
     border: 3px solid transparent;
-    height: 66px;
-    width: 66px;
+    height: 75px;
+    width: 75px;
+}
+
+.category_displayer li.active .category_item.NA,
+.category_displayer li.active .category_item.NE {
+    border: 1px solid #525756;
 }
 
 .category_displayer li.active span {
-    font-size:12pt;
-}
-
-.category_displayer li.active .category_item span {
-    line-height: 64px;
-    font-size: 24pt;
+    font-size: 12pt;
 }
 
 @media only screen and (max-width: 510px) {
-    .category_displayer::before {       
+    .category_displayer::before {
         top: 34px;
     }
 
     .category_displayer li {
-        width: 25px;
-        padding-top:20px;
+        width: 36px;
+        padding-top: 20px;
     }
+
     .category_displayer .category_item {
-        width: 25px;
-        height: 25px;
-    }
-    .category_displayer .category_item span {
+        width: 36px;
+        height: 36px;
         font-size: 12pt;
         line-height: 25px;
     }
-    .category_displayer .notactive .tag{
-       display:none;
-    }
 
+    .category_displayer .notactive .tag {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 345px) {
@@ -114,16 +118,13 @@
         top: 30px;
     }
 
-    .category_displayer li{
-        margin:1px;
+    .category_displayer li {
+        margin: 3px;
     }
 
     .category_displayer li.active .category_item {
         height: 50px;
         width: 50px;
-    }
-
-    .category_displayer li.active .category_item span {
         line-height: 40px;
         font-size: 18pt;
     }
@@ -131,22 +132,79 @@
     .category_displayer .category_item {
         width: 19px;
         height: 19px;
-    }
-
-    .category_displayer .category_item span {
         font-size: 9pt;
         line-height: 19px;
     }
 }
 
-.category_displayer .isactive .category_item,
 .category_displayer .notactive .category_item {
     background: white;
     color: #4c4a48;
+}
+
+/* Alien */
+.category_displayer .notactive .category_item.NR {
     border: 1px solid #4c4a48;
 }
 
-li.active  .category_item.NR {
+.category_displayer .notactive .category_item.NK {
+    border: 1px solid #94A360;
+}
+
+.category_displayer .notactive .category_item.LO {
+    border: 1px solid #5c9c94;
+}
+
+.category_displayer .notactive .category_item.PH {
+    border: 1px solid #296473;
+}
+
+.category_displayer .notactive .category_item.HI {
+    border: 1px solid #2E4073;
+}
+
+.category_displayer .notactive .category_item.SE {
+    border: 1px solid #4F1052;
+}
+
+/* Redlist */
+.category_displayer .notactive .category_item.RE {
+    border: 1px solid #000000;
+}
+
+.category_displayer .notactive .category_item.CR {
+    border: 1px solid #d61900;
+}
+
+.category_displayer .notactive .category_item.EN {
+    border: 1px solid #eb8107;
+}
+
+.category_displayer .notactive .category_item.VU {
+    border: 1px solid #e6c000;
+}
+
+.category_displayer .notactive .category_item.NT {
+    border: 1px solid #aac000;
+}
+
+.category_displayer .notactive .category_item.DD {
+    border: 1px solid #6c6c6c;
+}
+
+.category_displayer .notactive .category_item.LC {
+    border: 1px solid #61a360;
+}
+
+.category_displayer .notactive .category_item.NA {
+    border: 1px solid #525756;
+}
+
+.category_displayer .notactive .category_item.NE {
+    border: 1px solid #525756;
+}
+
+li.active .category_item.NR {
     border: 1px solid #4c4a48;
 }
 
@@ -154,39 +212,39 @@ li.active  .category_item.NR {
 
 
 .RE {
-    background: #5a5b5d;
+    background: #000000;
 }
 
 .CR {
-    background: #99191a;
+    background: #d61900;
 }
 
 .EN {
-    background: #d80f27;
+    background: #eb8107;
 }
 
 .VU {
-    background: #e94f33;
+    background: #e6c000;
 }
 
 .NT {
-    background: #ed6c26;
+    background: #aac000;
 }
 
 .DD {
-    background: #f7a520;
+    background: #6c6c6c;
 }
 
 .LC {
-    background: #60beb2;
+    background: #61a360;
 }
 
 .NA {
-    background: #939598;
+    background: #ffffff;
 }
 
 .NE {
-    background: #d1d3d4;
+    background: #ffffff;
 }
 
 .SE {
@@ -213,47 +271,39 @@ li.active  .category_item.NR {
     background: #FFFFFF;
 }
 
-.RE span,
-.CR span,
-.EN span,
-.VU span,
-.DD span,
-.LC span,
-.NT span,
-.SE span,
-.HI span,
-.PH span,
-.LO span,
-.NK  span {
+.RE,
+.CR,
+.DD,
+.SE,
+.HI,
+.PH {
     color: white;
+}
+
+.EN,
+.VU,
+.NT,
+.LC,
+.LO,
+.NK {
+    color: black;
 }
 
 span.percent {
     color: #262F31;
 }
 
-.active .RE span,
-.active .CR span,
-.active .EN span,
-.active .VU span,
-.active .DD span,
-.active .LC span,
-.active .NT span,
-.active .SE span,
-.active .HI span,
-.active .PH span,
-.active .LO span,
-.active .NK span {
-    color: white;
+.category_displayer .no-space {
+    height: 0;
+    width: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .NA,
 .NE,
 .NR {
     color: #1c1c1c;
-}
-
-.NR {
     border: 1px solid #1c1c1c;
 }
 

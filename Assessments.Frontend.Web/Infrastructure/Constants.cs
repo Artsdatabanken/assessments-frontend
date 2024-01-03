@@ -238,37 +238,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string invasionPotential = "invasjonspotensial";
         public const string ecologicalEffect = "økologiske effekt";
 
-        public static readonly Dictionary<string, string> categoryFromMatrix = new()
-        {
-            { "14", "ph" },
-            { "24", "hi" },
-            { "34", "se" },
-            { "44", "se" },
-            { "13", "lo" },
-            { "23", "hi" },
-            { "33", "hi" },
-            { "43", "se" },
-            { "12", "lo" },
-            { "22", "lo" },
-            { "32", "lo" },
-            { "42", "hi" },
-            { "11", "nk" },
-            { "21", "lo" },
-            { "31", "lo" },
-            { "41", "ph" },
-        };
-
-        public static readonly Dictionary<string, string> categoryStringFromCode = new()
-        {
-            { "nr", "Ikke risikovurdert" },
-            { "nk", "Ingen kjent risiko" },
-            { "lo", "Lav risiko" },
-            { "ph", "Potensielt høy risiko" },
-            { "hi", "Høy risiko" },
-            { "se", "Svært høy risiko" },
-        };
-
-
         public const string Artsdatabanken = "Artsdatabanken";
 
         // Redlist species constants
@@ -306,8 +275,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023PageMenuHeaderTextShort = "Fremmedartslista";
 
-        public const string AlienSpecies2023HeaderText = "Fremmedartslista 2023";
-
         public const string AlienSpecies2023HeaderByline = "Publisert: 11. august 2023";
 
         public const string AlienSpecies2023PageManuExpandButtonText = "Fremmede arter";
@@ -315,9 +282,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string AlienSpecies2023CitationHeading = "Siden siteres som:";
 
         public const string AlienSpecies2023CitationString = "Artsdatabanken (2023, 11. august). Fremmede arter i Norge - med økologisk risiko 2023.";
-
-        public const string AlienSpecies2023Introduction = "Fremmedartslista viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge." +
-                                                                                                                                                                                                                                                                               " Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.";
 
         public const string AlienSpecies2023NoListViewResults = "Kombinasjonen av søk og filter gir ingen treff i Fremmedartslista for 2023.";
 

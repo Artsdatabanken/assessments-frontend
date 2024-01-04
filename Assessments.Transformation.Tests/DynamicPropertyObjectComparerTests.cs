@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Assessments.Transformation.DynamicProperties;
 using Assessments.Transformation.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Assessments.Transformation.PublishDynamicProperties;

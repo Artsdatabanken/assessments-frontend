@@ -232,7 +232,7 @@ namespace Assessments.Transformation
 
                 allAssessments.AddRange(assessmentsBatch);
 
-                pointer += batchSize;
+                pointer += assessmentsBatch.Count; // ravendb batchLimit may be set lower at server - safer to asume this
             }
 
             return allAssessments;

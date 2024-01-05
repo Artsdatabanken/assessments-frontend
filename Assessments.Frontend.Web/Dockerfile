@@ -1,5 +1,5 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 
 # Install System.Drawing native dependencies (required by ClosedXML)
 RUN apt-get update && apt-get install -y libgdiplus
@@ -10,7 +10,7 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 
 WORKDIR /app
 ENV ASPNETCORE_URLS="http://+:3001"
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["Assessments.Frontend.Web/Assessments.Frontend.Web.csproj", "Assessments.Frontend.Web/"]
 RUN dotnet restore "Assessments.Frontend.Web/Assessments.Frontend.Web.csproj"

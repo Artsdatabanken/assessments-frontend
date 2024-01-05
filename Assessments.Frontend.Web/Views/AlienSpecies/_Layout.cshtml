@@ -46,7 +46,9 @@
         <partial name="/Views/AlienSpecies/2023/_AlienSpeciesHeader.cshtml" model="@headerViewModel" />
         <div class="main">
             <div class="main-content width-adjuster">
-
+                <environment exclude="Production">
+                    <vc:culture-picker />
+                </environment>
                 @RenderBody()
                 <script src="~/js/site.js" asp-append-version="true"></script>
                 <script src="~/js/collapse.js" asp-append-version="true" async></script>
@@ -58,7 +60,7 @@
                 <script src="~/js/themes.js" asp-append-version="true" async></script>
                 <script src="~/js/tableCollapse.js" asp-append-version="true" async></script>
                 <script src="~/js/tableOfContents.js" asp-append-version="true" async></script>
-                <script src="~/js/speciesImages.js" asp-append-version="true" async></script>      
+                <script src="~/js/speciesImages.js" asp-append-version="true" async></script>
                 <script src="~/js/footer.js" asp-append-version="true" async></script>
                 <script src="~/js/header.js" asp-append-version="true" async></script>
                 @await RenderSectionAsync("Scripts", required: false)

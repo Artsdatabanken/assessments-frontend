@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Localization;
 using X.PagedList;
 
 namespace Assessments.Frontend.Web.Controllers
@@ -23,9 +24,11 @@ namespace Assessments.Frontend.Web.Controllers
         private readonly ArtskartApiService _artskartApiService;
         private readonly AttachmentRepository _attachmentRepository;
         private readonly AlienSpecies2023Options _alienSpecies2023Options;
+        private readonly IStringLocalizer<AlienSpeciesController> _localizer;
 
-        public AlienSpeciesController(IOptions<ApplicationOptions> options, AttachmentRepository attachmentRepository, ArtskartApiService artskartApiService)
+        public AlienSpeciesController(IOptions<ApplicationOptions> options, AttachmentRepository attachmentRepository, ArtskartApiService artskartApiService, IStringLocalizer<AlienSpeciesController> localizer)
         {
+            _localizer = localizer;
             _alienSpecies2023Options = options.Value.AlienSpecies2023;
             _attachmentRepository = attachmentRepository;
             _artskartApiService = artskartApiService;
@@ -120,11 +123,11 @@ namespace Assessments.Frontend.Web.Controllers
         }
 
         [HttpGet, Route("2023/suggestions")]
-        public async Task<IActionResult> Suggestion([FromQueryAttribute] string search)
+        public async Task<IActionResult> Suggestion([FromQuery] string search)
         {
             if (string.IsNullOrEmpty(search))
             {
-                return BadRequest("Søket kan ikke være tomt.");
+                return BadRequest(_localizer["search-validation"].Value);
             }
 
             var name = search.Trim().ToLower();

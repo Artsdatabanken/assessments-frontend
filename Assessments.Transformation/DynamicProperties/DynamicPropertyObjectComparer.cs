@@ -35,11 +35,14 @@ namespace Assessments.Transformation.DynamicProperties
             int hashId = obj.Id.GetHashCode();
             int hashReferences = ((IStructuralEquatable)obj.References).GetHashCode(EqualityComparer<string>.Default);
             // got Exception thrown: 'System.OverflowException' on some dynamicproperty summing an unknown number of int's leads to this .... 
-            long HashProperties = (long)obj.Properties?.Select(p => (long)p.Name?.GetHashCode() 
-                                                                    + (long)p.Value?.GetHashCode() 
-                                                                    + (long)p.Properties?.Select(p2 =>
-                                                                        (long)p2.Name?.GetHashCode() +
-                                                                        (long)p2.Value?.GetHashCode()).Sum()).Sum(); //NOTE: calculates hash codes 2 levels down into the recurrent Property object, this should be sufficient for assessments
+            long HashProperties = (long)obj.Properties?.Select(p => (p.Name != null ? (long)p.Name.GetHashCode() : (long)0) 
+                                                                    + (p.Value != null ? (long)p.Value.GetHashCode() : (long)0)
+                                                                    + (p.Properties != null ? 
+                                                                        (long)(p.Properties.Select(p2 =>
+                                                                        (p2.Name != null ? (long)p2.Name.GetHashCode() : (long)0)
+                                                                        + (p2.Value != null ? (long)p2.Value.GetHashCode() : (long)0))).Sum()
+                                                                        : (long)0
+                                                                        )).Sum(); //NOTE: calculates hash codes 2 levels down into the recurrent Property object, this should be sufficient for assessments
 
             return HashCode.Combine(hashId, hashReferences, HashProperties);
         }

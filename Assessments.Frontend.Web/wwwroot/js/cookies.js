@@ -92,7 +92,7 @@ function hasAcceptedCookies() {
         ga('create', 'UA-74815937-4', { 'cookieExpires': cookieDurationSeconds, 'cookieUpdate': 'false', 'cookieFlags': 'Secure' });
         ga('send', 'pageview');
         themeCookie();
-        document.getElementById('heyCookie').style.display = "none";
+        location.reload();        
     }
 }
 

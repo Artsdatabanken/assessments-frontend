@@ -403,7 +403,7 @@ button.list_header {
 
     #show_all_insects {
         display: inline-block;
-        #fff9f0-space: nowrap;
+        white-space: nowrap;
     }
 } 
 

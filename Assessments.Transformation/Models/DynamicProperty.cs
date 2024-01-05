@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assessments.Transformation.Models
+﻿// ReSharper disable once CheckNamespace
+namespace Databank.Domain.Taxonomy // keep namespace from Databank - to avoid trouble down the line if someone is dependent on namespace on the other side of ravendb
 {
     public class DynamicProperty
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Assessments.Transformation.Models;
+using Databank.Domain.Taxonomy;
 
 namespace Assessments.Transformation.DynamicProperties
 {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Assessments.Transformation.Models;
+using Databank.Domain.Taxonomy;
 
 namespace Assessments.Transformation.DynamicProperties
 {
@@ -34,7 +34,12 @@ namespace Assessments.Transformation.DynamicProperties
 
             int hashId = obj.Id.GetHashCode();
             int hashReferences = ((IStructuralEquatable)obj.References).GetHashCode(EqualityComparer<string>.Default);
-            int HashProperties = obj.Properties?.Select(p => p.Name?.GetHashCode() + p.Value?.GetHashCode() + p.Properties?.Select(p2 => p2.Name?.GetHashCode() + p2.Value?.GetHashCode() ?? 0).Sum()).Sum() ?? 0; //NOTE: calculates hash codes 2 levels down into the recurrent Property object, this should be sufficient for assessments
+            // got Exception thrown: 'System.OverflowException' on some dynamicproperty summing an unknown number of int's leads to this .... 
+            long HashProperties = (long)obj.Properties?.Select(p => (long)p.Name?.GetHashCode() 
+                                                                    + (long)p.Value?.GetHashCode() 
+                                                                    + (long)p.Properties?.Select(p2 =>
+                                                                        (long)p2.Name?.GetHashCode() +
+                                                                        (long)p2.Value?.GetHashCode()).Sum()).Sum(); //NOTE: calculates hash codes 2 levels down into the recurrent Property object, this should be sufficient for assessments
 
             return HashCode.Combine(hashId, hashReferences, HashProperties);
         }

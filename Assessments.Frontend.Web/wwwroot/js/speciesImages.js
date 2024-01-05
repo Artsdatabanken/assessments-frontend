@@ -80,14 +80,14 @@ const getAssessmentImages = () => {
                 images.length && renderHeader(targetElement);
 
 
-                images.forEach((el, i) => {
-                    if (i > 3) {
+                for (let i = 0; i < images.length; i++) {
+                    if (i == 4) {
                         addLinkToTaxonPage(targetElement, url);
                         return;
                     }
-                    const imageText = el.children;
-                    renderSpeciesImage(targetElement, el);
-                });
+                    const imageText = images[i].children;
+                    renderSpeciesImage(targetElement, images[i]);
+                };
             })
             .catch(() => {
                 return;

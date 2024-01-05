@@ -103,8 +103,6 @@ namespace Assessments.Transformation
             //Delete dynamicProperties stored in RavenDb that do not exist in Storage Account
             DeleteDynamicProperties(ravenSession, obsoletDynamicProperties);
 
-            var newDynamicProperties = dynamicPropertiesFromStorageAccount.Except(existingDynamicProperties, comparerId).ToList();
-
             var compareDynamicProperties = new DynamicPropertyObjectComparer();
             var NewOrChangedDynamicProperties = dynamicPropertiesFromStorageAccount.Except(existingDynamicProperties, compareDynamicProperties).ToList();
 

@@ -4,6 +4,7 @@ using Assessments.Mapping.AlienSpecies.Model;
 using System.Threading.Tasks;
 using Assessments.Shared.Helpers;
 using System.Text.Json;
+using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Microsoft.Extensions.Configuration;
 using Assessments.Transformation.Helpers;
 using Assessments.Mapping.RedlistSpecies;
@@ -42,7 +43,7 @@ namespace Assessments.Transformation
                             new DynamicProperty.Property() { Name = "Kontekst", Value = "Rødliste 2021" },
                             new DynamicProperty.Property() { Name = "scientificNameID", Value = x.ScientificNameId.ToString() },
                             new DynamicProperty.Property() { Name = "EkspertGruppe", Value = x.ExpertCommittee },
-                            new DynamicProperty.Property() { Name = "Område", Value = x.AssessmentArea },
+                            new DynamicProperty.Property() { Name = "Område", Value = x.AssessmentArea == "N"  ? "Norge" : "Svalbard" },
                             new DynamicProperty.Property() { Name = "Aar", Value = "2021" },
                             new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/rodlisteforarter/2021/" + x.Id.ToString()
                             }
@@ -73,10 +74,10 @@ namespace Assessments.Transformation
                                 new DynamicProperty.Property() { Name = "Kontekst", Value = "Fremmedart 2023" },
                                 new DynamicProperty.Property() { Name = "scientificNameID", Value = x.ScientificName.ScientificNameId.ToString() },
                                 new DynamicProperty.Property() { Name = "EkspertGruppe", Value = x.ExpertGroup },
-                                new DynamicProperty.Property() { Name = "Område", Value = x.EvaluationContext.DisplayName()  },
+                                new DynamicProperty.Property() { Name = "Område", Value = x.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.N ? "Norge" : "Svalbard" }, // must match expected values being in use
                                 new DynamicProperty.Property() { Name = "Aar", Value = "2023" },
                                 new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" + x.Id.ToString() },
-                                new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.ToString()}
+                                new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.DisplayName()}
                             }
                         }
                     }

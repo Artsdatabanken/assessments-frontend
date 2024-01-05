@@ -107,10 +107,9 @@ namespace Assessments.Transformation
 
             var compareDynamicProperties = new DynamicPropertyObjectComparer();
             var NewOrChangedDynamicProperties = dynamicPropertiesFromStorageAccount.Except(existingDynamicProperties, compareDynamicProperties).ToList();
-            var changedDynamicProperties = NewOrChangedDynamicProperties.Except(newDynamicProperties, comparerId).ToList();
 
-            var idsToDelete = changedDynamicProperties.Select(x => x.Id).ToArray();
-            DeleteDynamicPropertiesByIds(ravenSession, idsToDelete);
+            // avoid problems with dynamicproperties already in the session by id
+            ravenSession.Advanced.Clear();
 
             //Store DynamicProperties to RavenDb that are different or new in storage account
             StoreDynamicProperties(NewOrChangedDynamicProperties, ravenSession);

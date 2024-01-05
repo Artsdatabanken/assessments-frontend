@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Assessments.Mapping.AlienSpecies.Model;
-using Assessments.Transformation.Models;
 using System.Threading.Tasks;
 using Assessments.Shared.Helpers;
 using System.Text.Json;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Assessments.Transformation.Helpers;
 using Assessments.Mapping.RedlistSpecies;
 using Assessments.Transformation.DynamicProperties;
+using Databank.Domain.Taxonomy;
 using Raven.Client;
 
 namespace Assessments.Transformation
@@ -58,30 +58,31 @@ namespace Assessments.Transformation
             var fileContent = await Storage.DownloadFromBlob(_configuration, DataFilenames.AlienSpecies2023);
             var AlienSpeciesAssessments = JsonSerializer.Deserialize<IList<AlienSpeciesAssessment2023>>(fileContent)?.AsQueryable();
 
-            return  AlienSpeciesAssessments.Select(x => new DynamicProperty
-            {
-                Id = "DynamicProperty/FremmedArt2023-" + x.Id.ToString(),
-                References = new[] { "ScientificNames/" + x.ScientificName.ScientificNameId.ToString() },
-                Properties = new[]
+            var list = AlienSpeciesAssessments.Select(x => new DynamicProperty
                 {
-                    new DynamicProperty.Property
+                    Id = "DynamicProperty/FremmedArt2023-" + x.Id.ToString(),
+                    References = new[] { "ScientificNames/" + x.ScientificName.ScientificNameId.ToString() },
+                    Properties = new[]
                     {
-                        Name = "Kategori",
-                        Value = x.Category.ToString().Substring(0, 2),
-                        Properties = new []
+                        new DynamicProperty.Property
                         {
-                            new DynamicProperty.Property() { Name = "Kontekst", Value = "Fremmedart 2023" },
-                            new DynamicProperty.Property() { Name = "scientificNameID", Value = x.ScientificName.ScientificNameId.ToString() },
-                            new DynamicProperty.Property() { Name = "EkspertGruppe", Value = x.ExpertGroup },
-                            new DynamicProperty.Property() { Name = "Område", Value = x.EvaluationContext.DisplayName()  },
-                            new DynamicProperty.Property() { Name = "Aar", Value = "2023" },
-                            new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" + x.Id.ToString() },
-                            new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.ToString()}
+                            Name = "Kategori",
+                            Value = x.Category.ToString().Substring(0, 2),
+                            Properties = new []
+                            {
+                                new DynamicProperty.Property() { Name = "Kontekst", Value = "Fremmedart 2023" },
+                                new DynamicProperty.Property() { Name = "scientificNameID", Value = x.ScientificName.ScientificNameId.ToString() },
+                                new DynamicProperty.Property() { Name = "EkspertGruppe", Value = x.ExpertGroup },
+                                new DynamicProperty.Property() { Name = "Område", Value = x.EvaluationContext.DisplayName()  },
+                                new DynamicProperty.Property() { Name = "Aar", Value = "2023" },
+                                new DynamicProperty.Property() { Name = "Url", Value = "https://artsdatabanken.no/lister/fremmedartslista/2023/" + x.Id.ToString() },
+                                new DynamicProperty.Property() { Name = "Fremmedartsstatus" , Value = x.AlienSpeciesCategory.ToString()}
+                            }
                         }
                     }
-                }
-            }).
-            ToList();
+                }).
+                ToList();
+            return  list;
         }
 
         public static async Task UploadDynamicPropertiesToTaxonApi(IConfigurationRoot configuration)

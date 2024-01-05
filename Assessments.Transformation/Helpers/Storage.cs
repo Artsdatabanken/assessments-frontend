@@ -7,6 +7,7 @@ using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
 using Raven.Client.Document;
 using Raven.Client;
+using System.Net;
 
 namespace Assessments.Transformation.Helpers
 {
@@ -102,17 +103,24 @@ namespace Assessments.Transformation.Helpers
         {
             IConfigurationRoot configuration = GetConfiguration();
 
-            IDocumentStore store = new DocumentStore()
+            var documentStore = new DocumentStore()
             {
                 Url = configuration.GetConnectionString("RavenDBUrl"),
                 DefaultDatabase = configuration.GetConnectionString("RavenDB"),
-                
+            };
 
-            }.Initialize();
+            var user = configuration.GetConnectionString("RavenDBUser");
+            if (!string.IsNullOrWhiteSpace(user))
+            {
+                var cred = user.Split(':');
+                documentStore.Credentials = new NetworkCredential(cred[0], cred[1]);
+            }
 
-            store.Conventions.MaxNumberOfRequestsPerSession = 100; //Raven default is 30
+            documentStore.Initialize();
 
-            return store;
+            documentStore.Conventions.MaxNumberOfRequestsPerSession = 100; //Raven default is 30
+
+            return documentStore;
         }
 
         private static IConfigurationRoot GetConfiguration()

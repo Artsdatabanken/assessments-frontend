@@ -2,75 +2,71 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Threading.Tasks;
 using Assessments.Transformation.Helpers;
 using Microsoft.Extensions.Configuration;
+using Assessments.Transformation;
 
-namespace Assessments.Transformation
-{
-    internal class Program
-    {
-        private static async Task Main()
-        {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddUserSecrets<Program>()
-                .Build();
-            
-            Console.Clear();
-            Console.CursorVisible = false;
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .AddUserSecrets<Program>()
+    .Build();
 
-            var dataFolder = configuration.GetValue<string>("FilesFolder");
+Console.Clear();
+Console.CursorVisible = false;
 
-            if (string.IsNullOrEmpty(dataFolder))
-                throw new Exception("Innstilling for 'FilesFolder' mangler");
+var dataFolder = configuration.GetValue<string>("FilesFolder");
 
-            if (!Directory.Exists(dataFolder))
-                Directory.CreateDirectory(dataFolder);
+if (string.IsNullOrEmpty(dataFolder))
+    throw new Exception("Innstilling for 'FilesFolder' mangler");
 
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
+if (!Directory.Exists(dataFolder))
+    Directory.CreateDirectory(dataFolder);
 
-            var menuItems = new List<string>
+CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
+
+var menuItems = new List<string>
             {
                 "Rødlista 2021 - til filer lokalt",
                 "Rødlista 2021 - last opp i Azure",
                 "Fremmedartslista 2023 - til filer lokalt",
                 "Fremmedartslista 2023 - last opp i Azure",
                 "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure",
+                "Publiser dynamicProperties til TaxonApi",
                 "Avslutt"
             };
 
-            while (true)
-            {
-                var item = Menu.Setup(menuItems);
+while (true)
+{
+    var item = Menu.Setup(menuItems);
 
-                switch (item)
-                {
-                    case "Rødlista 2021 - til filer lokalt":
-                        await TransformRedlistSpecies.TransformDataModels(configuration);
-                        Environment.Exit(0);
-                        break;
-                    case "Rødlista 2021 - last opp i Azure":
-                        await TransformRedlistSpecies.TransformDataModels(configuration, upload: true);
-                        Environment.Exit(0);
-                        break;
-                    case "Fremmedartslista 2023 - til filer lokalt":
-                        await TransformAlienSpecies.TransformDataModels(configuration, upload: false);
-                        Environment.Exit(0);
-                        break;
-                    case "Fremmedartslista 2023 - last opp i Azure":
-                        await TransformAlienSpecies.TransformDataModels(configuration, upload: true);
-                        Environment.Exit(0);
-                        break;
-                    case "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure":
-                        await TransformAlienSpecies.UploadAttachments(configuration, upload: true);
-                        Environment.Exit(0);
-                        break;
-                    case "Avslutt":
-                        Environment.Exit(0);
-                        break;
-                }
-            }
-        }
+    switch (item)
+    {
+        case "Rødlista 2021 - til filer lokalt":
+            await TransformRedlistSpecies.TransformDataModels(configuration);
+            Environment.Exit(0);
+            break;
+        case "Rødlista 2021 - last opp i Azure":
+            await TransformRedlistSpecies.TransformDataModels(configuration, upload: true);
+            Environment.Exit(0);
+            break;
+        case "Fremmedartslista 2023 - til filer lokalt":
+            await TransformAlienSpecies.TransformDataModels(configuration, upload: false);
+            Environment.Exit(0);
+            break;
+        case "Fremmedartslista 2023 - last opp i Azure":
+            await TransformAlienSpecies.TransformDataModels(configuration, upload: true);
+            Environment.Exit(0);
+            break;
+        case "Fremmedartslista 2023 - last opp vedlegg til vurderinger til Azure":
+            await TransformAlienSpecies.UploadAttachments(configuration, upload: true);
+            Environment.Exit(0);
+            break;
+        case "Publiser dynamicProperties til TaxonApi":
+            await PublishDynamicProperties.UploadDynamicPropertiesToTaxonApi(configuration);
+            Environment.Exit(0);
+            break;
+        case "Avslutt":
+            Environment.Exit(0);
+            break;
     }
 }

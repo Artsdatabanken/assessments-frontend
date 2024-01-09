@@ -49,7 +49,7 @@ namespace Assessments.Transformation.DynamicProperties
 
         private static bool CheckPropertiesEquality(DynamicProperty.Property[] xProps, DynamicProperty.Property[] yProps)
         {
-            if (xProps == yProps) return true;
+            if (xProps != yProps) return false;
             if (xProps is null || yProps is null) return false;
             if (xProps.Length != yProps.Length) return false;
 

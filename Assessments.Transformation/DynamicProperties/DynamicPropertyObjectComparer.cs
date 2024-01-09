@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Databank.Domain.Taxonomy;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Assessments.Transformation.DynamicProperties
 {
@@ -49,18 +50,20 @@ namespace Assessments.Transformation.DynamicProperties
 
         private static bool CheckPropertiesEquality(DynamicProperty.Property[] xProps, DynamicProperty.Property[] yProps)
         {
-            if (xProps != yProps) return false;
-            if (xProps is null || yProps is null) return false;
-            if (xProps.Length != yProps.Length) return false;
+            if (xProps == yProps) return true;
+            if (xProps is null ^ yProps is null) return false;
+            
+            if (!xProps.IsNullOrEmpty() && !yProps.IsNullOrEmpty())
+                for (int i = 0; i < xProps.Length; i++)
+                {
+                    if (xProps.Length != yProps.Length) return false;
 
-            for (int i = 0; i < xProps.Length; i++)
-            {
-                if (xProps[i].Name != yProps[i].Name || xProps[i].Value != yProps[i].Value)
-                    return false;
+                    if (xProps[i].Name != yProps[i].Name || xProps[i].Value != yProps[i].Value)
+                        return false;
 
-                if (!CheckPropertiesEquality(xProps[i].Properties, yProps[i].Properties))
-                    return false;
-            }
+                    if (!CheckPropertiesEquality(xProps[i].Properties, yProps[i].Properties))
+                        return false;
+                }
 
             return true;
         }

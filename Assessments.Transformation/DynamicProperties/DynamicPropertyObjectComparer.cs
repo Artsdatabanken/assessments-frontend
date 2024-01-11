@@ -52,18 +52,17 @@ namespace Assessments.Transformation.DynamicProperties
         {
             if (xProps == yProps) return true;
             if (xProps is null ^ yProps is null) return false;
-            
-            if (!xProps.IsNullOrEmpty() && !yProps.IsNullOrEmpty())
-                for (int i = 0; i < xProps.Length; i++)
-                {
-                    if (xProps.Length != yProps.Length) return false;
+            if (xProps.Length != yProps.Length) return false;
 
-                    if (xProps[i].Name != yProps[i].Name || xProps[i].Value != yProps[i].Value)
-                        return false;
 
-                    if (!CheckPropertiesEquality(xProps[i].Properties, yProps[i].Properties))
-                        return false;
-                }
+            for (int i = 0; i < xProps.Length; i++)
+            {
+                if (xProps[i].Name != yProps[i].Name || xProps[i].Value != yProps[i].Value)
+                    return false;
+
+                if (!CheckPropertiesEquality(xProps[i].Properties, yProps[i].Properties))
+                    return false;
+            }
 
             return true;
         }

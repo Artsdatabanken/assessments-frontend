@@ -6,4 +6,77 @@
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.52" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023AlienSpeciesCategoryResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023AlienSpeciesCategoryResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystemsResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystemsResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CategoryResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023CategoryResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CriteriaLetterResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023CriteriaLetterResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023EvaluationContextResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023EvaluationContextResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MajorTypeGroupResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023MajorTypeGroupResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MatrixAxisScoreResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023MatrixAxisScoreResource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023AlienSpeciesCategoryResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023AlienSpeciesCategoryResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystemsResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023AreaOfOccupancyInStronglyAlteredEcosystemsResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CategoryResource.en.resx">
+      <DependentUpon>AlienSpeciesAssessment2023CategoryResource.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CategoryResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023CategoryResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023CriteriaLetterResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023CriteriaLetterResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023EvaluationContextResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023EvaluationContextResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MajorTypeGroupResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023MajorTypeGroupResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MatrixAxisScoreResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023MatrixAxisScoreResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

@@ -115,7 +115,7 @@ namespace Assessments.Transformation
                 await File.WriteAllTextAsync(Path.Combine(configuration.GetValue<string>("FilesFolder"), key), value);
 
                 if (upload)
-                    await Storage.Upload(configuration, key, value);
+                    await Storage.UploadToBlob(configuration, key, value);
             }
 
             Progress.ProgressBar.Message = $"Transformering fullført, {sourceItems.Count} vurderinger ble lagret";

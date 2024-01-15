@@ -79,10 +79,12 @@ namespace Assessments.Transformation
                         foreach (var innerItem in list)
                         {
                             rodliste2019.RevisionDate = innerItem.FutureRevisionDate;
+
                             var innerAssessment = innerItem.Assessment;
                             innerAssessment.RevisionDate = innerItem.RevDate;
                             innerAssessment.Revision = innerItem.Revision;
                             innerAssessment.Id = rodliste2019.Id;
+
                             if (rodliste2019.Revisions == null) rodliste2019.Revisions = new List<Rodliste2019>();
                             rodliste2019.Revisions.Add(innerAssessment);
                         }
@@ -104,6 +106,7 @@ namespace Assessments.Transformation
 
             Progress.ProgressBar.Message = "Serialiserer og lagrer filer (tar litt tid)";
 
+
             var files = new Dictionary<string, string>
             {
                 {
@@ -119,7 +122,7 @@ namespace Assessments.Transformation
                 await File.WriteAllTextAsync(Path.Combine(configuration.GetValue<string>("FilesFolder"), key), value);
 
                 if (upload)
-                    await Storage.Upload(configuration, key, value);
+                    await Storage.UploadToBlob(configuration, key, value);
             }
 
             Progress.ProgressBar.Message = "Transformering fullført";

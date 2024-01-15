@@ -739,3 +739,7 @@ ul a:hover,
     min-height: 63px;
 }
 
+.language-selector {
+    padding-left: 15px;
+    margin-bottom: 15px;
+}

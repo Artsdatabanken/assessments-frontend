@@ -68,6 +68,9 @@ robocopy "Assessments.Frontend.Web\bin\Release\net7.0\publish" ...destinasjon...
 
 Det er laget jobber i Jenkins som stopper application pools sletter gammel cache og starter opp application pool. På det viset kan man få bygget ny cache, uten å bygge løsningen på nytt. Disse jobbene heter `assessments-fe-drift-fix-cache` og `assessments-fe-test-fix-cache` i "assessments-fe"
 
+## Bidra til prosjektet
+I [wikien](https://github.com/Artsdatabanken/assessments-frontend/wiki) står det mer om hvordan vi bruker git.
+
 ## Videre dokumentasjon - se "les meg"-filene for hvert prosjekt
 
 - [Assessments.Frontend.Web](https://github.com/Artsdatabanken/assessments-frontend/blob/develop/Assessments.Frontend.Web/README.md)

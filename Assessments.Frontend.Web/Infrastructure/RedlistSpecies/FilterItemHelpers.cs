@@ -359,7 +359,7 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             Filters = RedlistSpecies2021SpeciesGroupsFilters,
             FilterDescription = "",
             FilterButtonName = "artsgruppefiltre",
-            FilterButtonText = "Artspgruppe"
+            FilterButtonText = "Artsgruppe"
         };
     }
 

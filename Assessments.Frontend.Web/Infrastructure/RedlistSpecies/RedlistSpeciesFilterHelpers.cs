@@ -15,21 +15,36 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             {
                 case "Area":
                     if (Model.Area?.Any() == true)
+                    {
+                        // Removes the value added by "mark all"
+                        if (Model.Area.Contains(nameof(Model.Area)))
+                            return $"{Model.Area.Length - 1}";
                         return $"{Model.Area.Length}";
+                    }
                     return string.Empty;
                 case "Category":
                     if (Model.Category?.Any() == true)
+                    {
+                        // Removes the value added by "mark all"
+                        if (Model.Category.Contains(nameof(Model.Category)))
+                            return $"{Model.Category.Length - 1}";
                         return $"{Model.Category.Length}";
+                    }
                     return string.Empty;
                 case "TaxonRank":
                     if (Model.TaxonRank?.Any() == true)
+                    {
+                        // Removes the value added by "mark all"
+                        if (Model.TaxonRank.Contains(nameof(Model.TaxonRank)))
+                            return $"{Model.TaxonRank.Length - 1}";
                         return $"{Model.TaxonRank.Length}";
+                    }
                     return string.Empty;
                 case "SpeciesGroups":
                     if (Model.SpeciesGroups?.Any() == true)
                     {
                         var count = Model.SpeciesGroups.Length;
-                        if (Model.SpeciesGroups.Contains("Insects"))
+                        if (Model.SpeciesGroups.Contains("Insekter"))
                             count--;
                         if (Model.SpeciesGroups.Contains(nameof(Model.SpeciesGroups)))
                             count--;
@@ -38,19 +53,39 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
                     return string.Empty;
                 case "Habitats":
                     if (Model.Habitats?.Any() == true)
+                    {
+                        // Removes the value added by "mark all"
+                        if (Model.Habitats.Contains(nameof(Model.Habitats)))
+                            return $"{Model.Habitats.Length - 1}";
                         return $"{Model.Habitats.Length}";
+                    }
                     return string.Empty;
                 case "Regions":
                     if (Model.Regions?.Any() == true)
+                    {
+                        // Removes the value added by "mark all"
+                        if (Model.Regions.Contains(nameof(Model.Regions)))
+                            return $"{Model.Regions.Length - 1}";
                         return $"{Model.Regions.Length}";
+                    }
                     return string.Empty;
                 case "EuroPop":
                     if (Model.EuroPop?.Any() == true)
+                    {
+                        // Removes the value added by "mark all"
+                        if (Model.EuroPop.Contains(nameof(Model.EuroPop)))
+                            return $"{Model.EuroPop.Length - 1}";
                         return $"{Model.EuroPop.Length}";
+                    }
                     return string.Empty;
                 case "Criterias":
                     if (Model.Criterias?.Any() == true)
+                    {
+                        // Removes the value added by "mark all"
+                        if (Model.Criterias.Contains(nameof(Model.Criterias)))
+                            return $"{Model.Criterias.Length - 1}";
                         return $"{Model.Criterias.Length}";
+                    }
                     return string.Empty;
                 case "PresumedExtinct":
                     if (Model.PresumedExtinct == true)

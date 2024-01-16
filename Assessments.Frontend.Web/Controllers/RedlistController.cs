@@ -108,7 +108,13 @@ namespace Assessments.Frontend.Web.Controllers
 
             // Habitat
             if (viewModel.Habitats?.Any() == true)
-                query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
+            {
+                // The model names are not compatible with enum naming rules. We need to consider this.
+                if (viewModel.Habitats.Contains("Fastmark"))
+                    query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y) || x.MainHabitat.Contains("Semi-naturlig fastmark")));
+                else
+                    query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
+            }
 
             // Regions
             ViewBag.AllRegions = Helpers.GetRegionsDict();

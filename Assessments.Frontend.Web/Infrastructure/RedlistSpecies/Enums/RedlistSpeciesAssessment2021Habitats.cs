@@ -35,7 +35,7 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies.Enums
         Saltvannssystemer,
         
         [Display(Name = "Semi-naturlig mark")]
-        fastmark,
+        Fastmark,
         
         [Display(Name = "Sterkt endret mark")]
         SterktEndretFastmark,

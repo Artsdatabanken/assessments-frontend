@@ -97,7 +97,7 @@
                         foreach (var el in filterItems.Filters)
                         {
                             value = el.NameShort;
-                            label = filterName == nameof(Model.Category) ? $"{el.NameShort} - {el.Description}" : el.Name;
+                            label = (filterName == nameof(Model.Category) && value != "RED" && value != "END") ? $"{el.NameShort} - {el.Description}" : el.Name;
                             string extraOuterClassName = $"{outerClassName} {filterName}_input";
                             if (el.SubGroup != null)
                             {

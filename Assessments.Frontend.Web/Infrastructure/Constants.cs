@@ -8,20 +8,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AssessmentsMappingAssembly = "Assessments.Mapping";
 
-        public static readonly Dictionary<string, string> AllAreas = new()
-        {
-            {"Norge", "N"},
-            {"Svalbard", "S"}
-        };
-
-        public static readonly Dictionary<string, string> AllCriterias = new()
-        {
-            {"A", "populasjonsreduksjon"},
-            {"B", "lite areal"},
-            {"C", "liten populasjon"},
-            {"D", "svært liten populasjon eller forekomst"}
-        };
-
         public class HeadingsNo
         {
             public static class SubHeadings

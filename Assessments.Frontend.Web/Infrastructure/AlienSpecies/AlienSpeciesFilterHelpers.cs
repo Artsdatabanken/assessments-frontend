@@ -1,10 +1,12 @@
 ﻿using Assessments.Frontend.Web.Models;
 using System;
 using System.Linq;
+using Assessments.Frontend.Web.Infrastructure;
+using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
-    public class FilterHelpers : IFilter<AlienSpeciesListParameters>
+    public class AlienSpeciesFilterHelpers : IFilter<AlienSpeciesListParameters>
     {
         public string IGetActiveFilters(string filterType, AlienSpeciesListParameters parameters)
         {
@@ -26,7 +28,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return GetActiveSelectionElement(parameters);
         }
 
-        public string IGetChipText(string filter, Filter.FilterItem[] filterItems)
+        public string IGetChipText(string filter, FilterItem[] filterItems)
         {
             return GetChipText(filter, filterItems);
         }
@@ -230,11 +232,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return selectionlist;
         }
 
-        public static string GetChipText(string filter, Filter.FilterItem[] filterItems)
+        public static string GetChipText(string filter, FilterItem[] filterItems)
         {
             for (int i = 0; i < filterItems.Length; i++)
             {
-                Filter.FilterItem item = filterItems[i];
+                FilterItem item = filterItems[i];
                 if (item.NameShort == filter)
                 {
                     return item.Name;

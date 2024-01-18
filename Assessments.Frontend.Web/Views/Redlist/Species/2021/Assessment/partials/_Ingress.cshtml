@@ -1,7 +1,7 @@
 ﻿@model SpeciesAssessment2021
 @{
     // Obtain which criteria are used and their titles.
-    var subcriteria = Criteria.sortCriteria(Model.CriteriaSummarized);
+    var subcriteria = CriteriaHelpers.sortCriteria(Model.CriteriaSummarized);
     string sentence = String.Empty;
     string[] cri = { "A", "B", "C", "D" };
 

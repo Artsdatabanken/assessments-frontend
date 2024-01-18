@@ -1,4 +1,6 @@
-﻿namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
+﻿using Assessments.Frontend.Web.Infrastructure.RedlistSpecies;
+
+namespace Assessments.Frontend.Web.Infrastructure
 {
     public interface IFilter<T>
     {
@@ -10,6 +12,6 @@
 
         string[] IGetActiveSelectionElement(T obj);
 
-        string IGetChipText(string s, Filter.FilterItem[] f);
+        string IGetChipText(string s, FilterHelpers.FilterItem[] f);
     }
 }

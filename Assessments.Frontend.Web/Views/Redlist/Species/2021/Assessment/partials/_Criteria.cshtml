@@ -100,7 +100,7 @@
     Dictionary<string, Dictionary<string, object>> criteria = ViewBag.kriterier.ToObject<Dictionary<string, Dictionary<string, object>>>();
 
     // CRITERIA SUMMARIZED SORTED BY SUBCRITERIA
-    var subcriteria = Criteria.sortCriteria(Model.CriteriaSummarized);
+    var subcriteria = CriteriaHelpers.sortCriteria(Model.CriteriaSummarized);
     string options = "";
     if (subcriteria["B"].Contains("+"))
     {
@@ -479,14 +479,14 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
             </li>
             @foreach (var (key, value) in criteria)
             {
-                string isactive = @Criteria.inString(key, @Model.CriteriaSummarized);
+                string isactive = CriteriaHelpers.inString(key, @Model.CriteriaSummarized);
                 string valtitle = @Helpers.FixSpeciesLevel(value["title"].ToString(), Model.TaxonRank);
                 <li class="@isactive">
                     <span class="text_container clickable" onclick="expandCriteria(this, 'opened_element') ">
                         @{ expandOrBullet(true);}
                         <span class="title_field">                           
                             @key - @valtitle
-                            @{ iconChooser(Criteria.inString(key, Model.CriteriaSummarized)); }
+                            @{ iconChooser(CriteriaHelpers.inString(key, Model.CriteriaSummarized)); }
                         </span>
                     </span>
                     @{ hasKey("description", @value);}
@@ -502,7 +502,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             {
 
                                 string vtitle = @Helpers.FixSpeciesLevel(v["title"].ToString(), Model.TaxonRank);
-                                var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
+                                var subcriteria_isactive = CriteriaHelpers.inString(k, subcriteria[key]);
                                 <li class=" @subcriteria_isactive">
                                     <span class="text_container">
                                         <span class="text_collection">
@@ -522,7 +522,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
                                             @if (v.ContainsKey("subsub"))
                                             {
-                                                string[] currentlist = Criteria.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
+                                                string[] currentlist = CriteriaHelpers.obtainSubCriteriaList(subcriteria[key].Split(";"), k);
                                                 var subdict = parseDictNested(@v["subsub"].ToString());
                                                 @if (currentlist.Length > 0)
                                                 {
@@ -537,13 +537,13 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
 
                                                             string subvaltitle = @Helpers.FixSpeciesLevel(subval["title"].ToString(), Model.TaxonRank);
                                                             string modelkey = k + subkey;
-                                                            <li class="@Criteria.inList(subkey, currentlist)">
+                                                            <li class="@CriteriaHelpers.inList(subkey, currentlist)">
                                                                 <span class="text_container">
                                                                     <span class="text_collection">
                                                                         <span class="title_field">
                                                                             @{expandOrBullet(false);}
                                                                             <span class="text_text">
-                                                                                @subkey - <span>@subvaltitle @{ iconChooser(Criteria.inList(subkey, currentlist)); }</span>
+                                                                                @subkey - <span>@subvaltitle @{ iconChooser(CriteriaHelpers.inList(subkey, currentlist)); }</span>
                                                                             </span>
                                                                         </span>
                                                                         @{ getQuantile(subval, modelkey, modelkey);}
@@ -567,7 +567,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                         if (key == "C")
                         {
                             <ul class="second">
-                                @{var activeC = @Criteria.inString("C", @Model.CriteriaSummarized); }
+                                @{var activeC = CriteriaHelpers.inString("C", @Model.CriteriaSummarized); }
                                 <li class="@activeC">
                                     <span class="text_container">
                                         <span class="text_collection">
@@ -621,7 +621,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                     @if (@value.ContainsKey("options"))
                     {
                         <ul class="second">
-                            <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
+                            <li class="@CriteriaHelpers.inString("B", @Model.CriteriaSummarized)">
                                 <span class="text_container">
                                     <span class="text_collection">
                                         <span class="title_field clickable" onclick="expandCriteria(this, 'opened_element')">
@@ -639,7 +639,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                 @foreach (var (k, v) in thesubcriteria)
                                                 {
                                                     string vtitle = @v["title"].ToString();
-                                                    var subcriteria_isactive = @Criteria.inString(k, subcriteria[key]);
+                                                    var subcriteria_isactive = CriteriaHelpers.inString(k, subcriteria[key]);
                                                     <li class=" @subcriteria_isactive">
                                                         <span class="text_container">
                                                             <span class="text_collection">
@@ -667,7 +667,7 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                                                 }
                                                                             }
                                                                             current_element = current_element.Replace(k, "");
-                                                                            current_element = Criteria.removeOuterParenthesis(current_element);
+                                                                            current_element = CriteriaHelpers.removeOuterParenthesis(current_element);
                                                                             var clean_list = current_element.Split(",");
                                                                             var subdict = parseDictNested(@v["sub"].ToString());
                                                                         }
@@ -681,14 +681,14 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                                                                             {
                                                                                 clickable = "clickable";
                                                                             }
-                                                                            <li class="listitem_criteria @Criteria.inList(subkey, clean_list)">
+                                                                            <li class="listitem_criteria @CriteriaHelpers.inList(subkey, clean_list)">
                                                                                 <span class="text_container">
                                                                                     <span class="text_collection">
                                                                                         <span class="text_text @clickable" onclick="expandCriteria(this, 'opened_element')">
                                                                                             @{expandOrBullet(clickable == "clickable");}
                                                                                             @subkey - @Helpers.FixSpeciesLevel(vsubtitle, Model.TaxonRank)
                                                                                         </span>
-                                                                                        @{ iconChooser(Criteria.inList(subkey, clean_list)); }
+                                                                                        @{ iconChooser(CriteriaHelpers.inList(subkey, clean_list)); }
                                                                                     </span>
 
                                                                                 </span>
@@ -708,8 +708,8 @@ Model.Category.Contains("VU") || Model.Category.Contains("NT")))
                             </li>
                         </ul>
                         <ul class="second">
-                            @{var activeB = @Criteria.inString("B", @Model.CriteriaSummarized); }
-                            <li class="@Criteria.inString("B", @Model.CriteriaSummarized)">
+                            @{var activeB = CriteriaHelpers.inString("B", @Model.CriteriaSummarized); }
+                            <li class="@CriteriaHelpers.inString("B", @Model.CriteriaSummarized)">
                                 <span class="text_container">
                                     <span class="text_collection">
                                         <span class="title_field" onclick="expandCriteria(this, 'opened_element')">

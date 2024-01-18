@@ -1,5 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Fremmedartslista";
+﻿@inject IViewLocalizer Localizer
+@inject IStringLocalizer<SharedResources> LocalizerShared
+
+@{
+    ViewData["Title"] = LocalizerShared["alien-species-list"];
 }
 
 <div class="pagecontainer alien-species">
@@ -7,14 +10,8 @@
     <div class="content-placer bigmid">
         <div class="mid-content">
             <div class="page-header">
-                <h1>
-                    @ViewData["Title"]
-                </h1>
-
-                <p>
-                    @ViewData["Title"] viser hvilken økologisk risiko fremmede arter kan utgjøre for naturmangfoldet i Norge.
-                    Den er utarbeidet av Artsdatabanken i samarbeid med fageksperter.
-                </p>
+                <h1>@ViewData["Title"]</h1>
+                <p>@Localizer["about"]</p>
             </div>
             <div class="mobile_padding">
 
@@ -29,7 +26,7 @@
                         <span class="material-icons">keyboard_arrow_right</span>
                     </a>
                 </p>
-                
+
                 <h2>Alle fremmedartslistene</h2>
                 <p class="page_section">
                     <ul>

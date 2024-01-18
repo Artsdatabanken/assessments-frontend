@@ -4,12 +4,13 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class AlienSpeciesHelpers
     {
-        public static Filter.FilterItem GetSpeciesGroup(Filter.FilterItem[] speciesGroups, string speciesGroupName)
+        public static FilterItem GetSpeciesGroup(FilterItem[] speciesGroups, string speciesGroupName)
         {
             foreach (var speciesGroup in speciesGroups)
             {
@@ -38,7 +39,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             foreach (var species in speciesGroups)
             {
-                Filter.FilterItem speciesGroup = species;
+                FilterItem speciesGroup = species;
                 if (speciesGroup.NameShort == shortName)
                 {
                     return speciesGroup.Name;

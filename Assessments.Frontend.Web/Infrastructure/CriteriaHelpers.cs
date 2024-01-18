@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Assessments.Frontend.Web.Infrastructure
 {
-    public static class Criteria
+    public static class CriteriaHelpers
     {
         public static string handleCCriteria(string current_element, string key)
         {
@@ -65,8 +65,8 @@ namespace Assessments.Frontend.Web.Infrastructure
                 }
             }
             current_element = current_element.Replace(k, ""); // remove main criteria, leaving nested subcriteria
-            current_element = Criteria.removeOuterParenthesis(current_element);
-            current_element = Criteria.handleCCriteria(current_element, k);
+            current_element = CriteriaHelpers.removeOuterParenthesis(current_element);
+            current_element = CriteriaHelpers.handleCCriteria(current_element, k);
             return current_element.Split(";");
         }
 
@@ -79,7 +79,7 @@ namespace Assessments.Frontend.Web.Infrastructure
         {
             string b_subcriteria = "";
 
-            b = Criteria.subCriteria("B", b);
+            b = CriteriaHelpers.subCriteria("B", b);
             if (b.Contains("B1"))
             {
                 b_subcriteria += "B1;";
@@ -143,10 +143,10 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
 
             // Sort criteria contents
-            a = Criteria.subCriteria("A", a); // A CRITERIA - OPTIONS AND SUBCRITERIA ARE NOT SEPARATE ENTITIES
-            c = Criteria.subCriteria("C", c); // C CRITERIA - All options are only relevant for C2 - handle in code.
-            d = Criteria.subCriteria("D", d); // D CRITERIA: - ONLY subcriteria.
-            b = Criteria.sortBCriteria(b);    // B CRITERIA - OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES, options may contain sub-options
+            a = CriteriaHelpers.subCriteria("A", a); // A CRITERIA - OPTIONS AND SUBCRITERIA ARE NOT SEPARATE ENTITIES
+            c = CriteriaHelpers.subCriteria("C", c); // C CRITERIA - All options are only relevant for C2 - handle in code.
+            d = CriteriaHelpers.subCriteria("D", d); // D CRITERIA: - ONLY subcriteria.
+            b = CriteriaHelpers.sortBCriteria(b);    // B CRITERIA - OPTIONS AND SUBCRITERIA ARE SEPARATE ENTITIES, options may contain sub-options
 
             // The dictionaries used in the view <- two dicts made sense back when A was thought to have options as well. Now not as much
 

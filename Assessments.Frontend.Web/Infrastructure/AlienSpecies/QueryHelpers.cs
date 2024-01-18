@@ -159,16 +159,16 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 var assessments = criteria switch
                 {
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcexa) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcexa.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcexb) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcexb.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipab) => query.Where(x => DeciciveCriteria.DecisiveCriteriaEnum.dcipab.DisplayName().Any(y => x.DecisiveCriteria.Contains(y))),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipc) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipc.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceed) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceed.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipe) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipe.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceef) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceef.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipg) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipg.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dceeh) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dceeh.DisplayName())),
-                    nameof(DeciciveCriteria.DecisiveCriteriaEnum.dcipi) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaEnum.dcipi.DisplayName())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaInvasion.A) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaInvasion.A.ToString())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaInvasion.B) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaInvasion.B.ToString())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaInvasion.AxB) => query.Where(x => DeciciveCriteria.DecisiveCriteriaInvasion.AxB.ToString().Any(y => x.DecisiveCriteria.Contains(y))),
+                    nameof(DeciciveCriteria.DecisiveCriteriaInvasion.C) => query.Where(x => x.DecisiveCriteria.Contains(DeciciveCriteria.DecisiveCriteriaInvasion.C.ToString())),
+                    nameof(AlienSpeciesAssessment2023CriteriaLetter.D) => query.Where(x => x.DecisiveCriteria.Contains(AlienSpeciesAssessment2023CriteriaLetter.D.ToString())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEcologicalEffect.E) => query.Where(x => x.DecisiveCriteria.Contains(AlienSpeciesAssessment2023CriteriaLetter.E.ToString())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEcologicalEffect.F) => query.Where(x => x.DecisiveCriteria.Contains(AlienSpeciesAssessment2023CriteriaLetter.F.ToString())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEcologicalEffect.G) => query.Where(x => x.DecisiveCriteria.Contains(AlienSpeciesAssessment2023CriteriaLetter.G.ToString())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEcologicalEffect.H) => query.Where(x => x.DecisiveCriteria.Contains(AlienSpeciesAssessment2023CriteriaLetter.H.ToString())),
+                    nameof(DeciciveCriteria.DecisiveCriteriaEcologicalEffect.I) => query.Where(x => x.DecisiveCriteria.Contains(AlienSpeciesAssessment2023CriteriaLetter.I.ToString())),
                     _ => null
                 };
                 if (assessments != null)
@@ -203,9 +203,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 var assessments = type switch
                 {
-                    nameof(NotAssessed.NotAssessedEnum.Nan) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie),
-                    nameof(NotAssessed.NotAssessedEnum.Nau) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800),
-                    nameof(NotAssessed.NotAssessedEnum.Nam) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified),
+                    nameof(NotAssessed.NotAssessedAlienSpeciesCategory.NotAlienSpecies) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie),
+                    nameof(NotAssessed.NotAssessedAlienSpeciesCategory.UncertainBefore1800) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800),
+                    nameof(NotAssessed.NotAssessedAlienSpeciesCategory.MisIdentified) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified),
                     _ => null
                 };
                 if (assessments != null)

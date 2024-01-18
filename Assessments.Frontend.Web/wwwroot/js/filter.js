@@ -6,10 +6,8 @@ const filters = document.getElementById("filters");
 
 if (filters) {
     const isCheckInputs = document.getElementsByClassName("collapse_checkbox");
-    const insectFilters = document.getElementsByClassName("insect_input");
-    const insectInput = document.getElementById("Insekter");
-    const redlistCheckbox = document.getElementById("redlisted_check");
-    const endangeredCheckbox = document.getElementById("endangered_check");
+    const redlistCheckbox = document.getElementById("RED");
+    const endangeredCheckbox = document.getElementById("END");
     const init = document.getElementById("initial_check");
     const scrollTo = document.getElementById("remember_scroll");
 
@@ -26,7 +24,7 @@ if (filters) {
         "show_eds",
         "show_sal",
         "show_ccke",
-        "show_insects",
+        "show_insekter",
         "show_skr",
         "show_sin",
         "show_ttn",
@@ -35,7 +33,6 @@ if (filters) {
         "show_swimp",
         "show_swnat",
         "show_swspr",
-        "show_taxonrank",
         "show_nta",
         "show_ntn",
     ];
@@ -190,7 +187,7 @@ if (filters) {
 
     function shouldToggleMarkRedOrEnd(list) {
         return Array.prototype.every.call(list, (item) => {
-            return document.getElementById("input_" + item)?.checked === true;
+            return document.getElementById(item)?.checked === true;
         })
     }
 
@@ -203,9 +200,6 @@ if (filters) {
             });
         }
         // redlist species 2021
-        if (shouldToggleMarkAll("insect_input")) {
-            insectInput.checked = true;
-        }
         if (shouldToggleMarkRedOrEnd(redlisted)) {
             redlistCheckbox.checked = true;
         }
@@ -219,22 +213,23 @@ if (filters) {
         const primaryToggleElement = document.getElementById(primaryToggleElementId).checked;
         what.forEach(el => {
             if (primaryToggleElement) {
-                document.getElementById("input_" + el).checked = true;
+                document.getElementById(el).checked = true;
             } else {
                 if (secondaryToggleElement) {
                     document.getElementById(secondaryToggleElementId).checked = false;
                 }
-                document.getElementById("input_" + el).checked = false;
+                document.getElementById(el).checked = false;
             }
         })
+        allChildrenMarkedTriggerMarkAll();
     }
 
     function toggleRedlistedCategories() {
-        toggleAllOfType(redlisted, "redlisted_check", "endangered_check");
+        toggleAllOfType(redlisted, "RED", "END");
     }
 
     function toggleEndangeredCategories() {
-        toggleAllOfType(endangered, "endangered_check", "redlisted_check");
+        toggleAllOfType(endangered, "END", "RED");
     }
 
     function toggleSubGroup(filters, input) {
@@ -263,32 +258,29 @@ if (filters) {
         }
         const classNames = Array.prototype.filter.call(el.classList, name => name.indexOf('_input') != -1);
 
-        if (classNames.length && !classNames.includes('insect_input')) {
+        if (classNames.length) {
             classNames.forEach(name => {
                 const idIndex = name.indexOf('_input');
                 const filterId = name.substring(0, idIndex);
                 toggleSingleFilter(el, filterId);
             })
         }
+
         // redlist species 2021
-        else if (el.classList[0] === "insect_input") {
-            toggleSingleFilter(el, "Insekter");
-        } else if (endangered.some(category => el.id.indexOf(category) != -1)) {
-            toggleSingleFilter(el, "endangered_check");
-            toggleSingleFilter(el, "redlisted_check");
+        if (endangered.some(category => el.id.indexOf(category) != -1)) {
+            toggleSingleFilter(el, "END");
+            toggleSingleFilter(el, "RED");
         } else if (redlisted.some(category => el.id.indexOf(category) != -1)) {
-            toggleSingleFilter(el, "redlisted_check");
+            toggleSingleFilter(el, "RED");
         }
     }
 
     // Clickevents for the toggles
     function onClickAction(el, addOrRemove) {
-        if (el.id === "redlisted_check") {
+        if (el.id === "RED") {
             toggleRedlistedCategories();
-        } else if (el.id === "endangered_check") {
+        } else if (el.id === "END") {
             toggleEndangeredCategories();
-        } else if (el.id === "Insekter") {
-            toggleSubGroup(insectFilters, insectInput);
         } else {
             if (addOrRemove == "add") {
                 updateToggleAll(el);

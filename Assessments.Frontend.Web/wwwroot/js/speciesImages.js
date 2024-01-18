@@ -2,39 +2,46 @@
 
 const adbLink = 'https://artsdatabanken.no';
 
-const renderSpeciesImage = (targetElement, element) => {
-    const datasetSrc = element.dataset.src;
-    element.style = "";
-    element.alt = "Bilde av arten";
-    element.src = `${datasetSrc}?mode=320x320`;
-    element.dataset.src = '';
-    element.style.height = 'auto';
-    element.style.width = '200px';
-    element.style.padding = '0';
-    const elementClone = element.parentElement.parentElement.cloneNode(true);
-    elementClone.style['margin-bottom'] = '20px';
-    targetElement.appendChild(elementClone);
+const getImageList = (doc) => {
+    const imageClassName = 'js-lazy-taxonimage'
+    return Array.prototype.map.call(doc.getElementsByClassName(imageClassName), el => el.parentElement.parentElement);
 }
 
-const updateImageMeta = (imageMeta) => {
-    Array.prototype.forEach.call(imageMeta, (imgElement) => {
-        if (imgElement.tagName != 'IMG') {
-            return;
+const updateMetaData = (element) => {
+    element.href = `https://artsdatabanken.no/Pages${element.href.split('Media')[1]}`
+
+    Array.prototype.map.call(element.children[0].children, child => {
+        if (child.nodeName == 'IMG') {
+            const location = child.src.split('/Content')[1];
+            child.src = `https://www.artsdatabanken.no/Content${location}`;
+            child.style.width = '26px';
+            child.style['padding-bottom'] = '0';
         }
-        const srcArray = imgElement.src.split('/Content')
-        srcArray[0] = adbLink;
-        imgElement.src = srcArray.join('/Content');
-        imgElement.style.width = '25px';
-        imgElement.style.background = 'transparent';
-        imgElement.style['vertical-align'] = 'text-bottom';
+        return child;
     });
+    return element;
 }
 
-const removeTaxonLink = (imageText) => {
-    if (imageText?.length > 1) {
-        imageText[2].remove();
-        imageText[1].remove();
-    }
+const renderSpeciesImage = (targetElement, element) => {
+    const imagewrapper = document.createElement('div');
+    const img = document.createElement('img');
+
+    const datasetSrc = element.children[0].children[0].children[0].attributes.srcset.value.split('?')[0];
+    img.alt = "Bilde av arten";
+
+    img.src = `https://www.artsdatabanken.no${datasetSrc}?mode=320x320`;
+    img.dataset.src = '';
+    img.style.height = 'auto';
+    img.style.width = '200px';
+    img.style.padding = '0';
+    imagewrapper.style['margin-bottom'] = '20px';
+
+    const metaData = updateMetaData(element.children[1].children[0])
+    
+    imagewrapper.appendChild(img);
+    imagewrapper.appendChild(element.children[1].children[0]);
+    console.log('\nmeta', imagewrapper)
+    targetElement.appendChild(imagewrapper);
 }
 
 const renderHeader = (element) => {
@@ -66,27 +73,21 @@ const getAssessmentImages = () => {
             .then((text) => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(text, 'text/html');
-                const images = doc.getElementsByClassName("js-lazy-taxonimage")
+                const images = getImageList(doc);
                 const targetClassName = 'species-images-' + url.split('/').reverse()[0];
                 const targetElement = document.getElementsByClassName(targetClassName)[0];
 
-                for (let i = 0; i < images.length; i++) {
-                    if (i == 0) {
-                        renderHeader(targetElement);
-                    }
+                images.length && renderHeader(targetElement);
 
-                    if (i > 3) {
+
+                for (let i = 0; i < images.length; i++) {
+                    if (i == 4) {
                         addLinkToTaxonPage(targetElement, url);
                         return;
                     }
-
-
-                    const imageText = images[i].parentElement.parentElement.children[1].children;
-                    const imageFirstElements = imageText[0].children[0].children;
-                    removeTaxonLink(imageText);
-                    updateImageMeta(imageFirstElements);
+                    const imageText = images[i].children;
                     renderSpeciesImage(targetElement, images[i]);
-                }
+                };
             })
             .catch(() => {
                 return;

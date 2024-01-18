@@ -1,43 +1,44 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Assessments.Shared.Resources.Enums.AlienSpecies;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciecAssessment2023AlienSpeciesCategory
     {
-        [Display(Name = "Selvstendig reproduserende")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.alien_species), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         AlienSpecie,
 
-        [Display(Name = "Dørstokkart")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.doorknocker), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         DoorKnocker,
 
-        [Display(Name = "Økologisk effekt uten selvstendig reproduksjon innen 50 år")] //treated like a doorknocker and will be visualised with "Dørstokkart" in the filter meny, but use this displayname in the species assessment site. 
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.effect_without_reproduction), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))] //treated like a doorknocker and will be visualised with "Dørstokkart" in the filter meny, but use this displayname in the species assessment site. 
         EffectWithoutReproduction,
 
         /// <summary>
         /// These are only alien in parts of Norway (they are resident species of Norway) and are therefore excluded from the filter on assessment area (EvaluationContext). 
         /// </summary>
-        [Display(Name = "Regionalt fremmed")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.regionally_alien), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         RegionallyAlien,
 
-        [Display(Name = "Ikke fremmed")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.not_alien_species), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         NotAlienSpecie,
 
-        [Display(Name = "Vurderes på et annet taksonomisk nivå")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.evaluated_at_another_level), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         TaxonEvaluatedAtAnotherLevel,
 
-        [Display(Name = "Etablert per år 1800")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.established_at_1800), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         UncertainBefore1800,
 
-        [Display(Name = "Regionalt fremmed og etablert per år 1800")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.regionally_alien_established_at_1800), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         RegionallyAlienEstablishedBefore1800,
 
-        [Display(Name = "Tidligere feilbestemt")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.misidentified), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         MisIdentified,
 
-        [Display(Name = "Foreligger separate vurderinger av infraspesifikke taksa")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.all_subtaxa_assessed_separately), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         AllSubTaxaAssessedSeparately,
 
-        [Display(Name = "Utenfor avgrensningen")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.hybrid_without_own_risk_assessment), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
         HybridWithoutOwnRiskAssessment
     }
 }

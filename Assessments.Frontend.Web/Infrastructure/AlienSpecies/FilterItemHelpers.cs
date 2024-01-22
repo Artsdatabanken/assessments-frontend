@@ -106,7 +106,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             FilterDescription = ""
         };
 
-        public static readonly FilterItem[] AlienSpecies2023CategoryChangedFilters =
+        public readonly FilterItem[] AlienSpecies2023CategoryChangedFilters =
         {
             new()
             {
@@ -126,13 +126,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly FilterAndMetaData AlienSpecies2023CategoryChanged = new()
-        {
-            Filters = AlienSpecies2023CategoryChangedFilters,
-            FilterDescription = "",
-            FilterButtonName = "kategoriendringsfiltre",
-            FilterButtonText = "Endring i risikokategori"
-        };
+        public FilterAndMetaData AlienSpecies2023CategoryChanged() => 
+            new()
+            {
+                Filters = AlienSpecies2023CategoryChangedFilters,
+                FilterDescription = "",
+                FilterButtonName = "kategoriendringsfiltre",
+                FilterButtonText = "Endring i risikokategori"
+            };
     }
 
     public class DeciciveCriteria

@@ -54,7 +54,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string DecisiveCriteria { get; set; }
 
         /// <summary>
-        /// Fritekstfelt for å beskrive årsak til endring i kategori siden 2018
+        /// Explaination for why the taxon has changed impact category since last revision. Free text field. 
         /// </summary>
         public string ReasonsForChangeOfCategoryDescription { get; set; }
 
@@ -181,7 +181,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string VernacularName { get; set; }
 
         /// <summary>
-        /// Wether the species' score on the effect axis would be lower in the absence of current or future climate changes 
+        /// Whether the species' score on the effect axis would be lower in the absence of current or future climate changes 
         /// </summary>
         public bool? ClimateEffectsEcoEffect { get; set; }
 
@@ -216,7 +216,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string CriteriaDocumentationSpeciesStatus { get; set; }
 
         /// <summary>
-        /// Wether the species' score on the invation axis would be lower in the absence of current or future climate changes 
+        /// Whether the species' score on the invation axis would be lower in the absence of current or future climate changes 
         /// </summary>
         public bool? ClimateEffectsInvasionpotential { get; set; }
 
@@ -231,22 +231,22 @@ namespace Assessments.Mapping.AlienSpecies.Model
         public string GeographicalVariationDocumentation { get; set; }
 
         /// <summary>
-        /// Wether the species has a lower impact category in parts of the species’ range
+        /// Whether the species has a lower impact category in parts of the species’ range
         /// </summary>
         public bool? GeographicVariationInCategory { get; set; }
 
         /// <summary>
         /// Reasons for why a species' category has changed since the last assessment. List with up to 6 elements.
         /// </summary>
-        public List<string> ReasonForChangeOfCategory { get; set; }
+        public List<AlienSpeciesAssessment2023ReasonForChangeOfCategory> ReasonForChangeOfCategory { get; set; }
 
         /// <summary>
-        /// Wether the species' may reproduce asexually or not
+        /// Whether the species' may reproduce asexually or not
         /// </summary>
         public bool ReproductionAsexual { get; set; }
 
         /// <summary>
-        /// Wether the species' may reproduce sexually or not
+        /// Whether the species' may reproduce sexually or not
         /// </summary>
         public bool ReproductionSexual { get; set; }
 

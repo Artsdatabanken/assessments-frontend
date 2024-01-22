@@ -1,12 +1,9 @@
-﻿using Assessments.Mapping.AlienSpecies.Model;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using Assessments.Shared.Resources.Enums.AlienSpecies;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Assessments.Frontend.Web.Infrastructure;
 using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
@@ -85,22 +82,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public enum CategoryChangeEnum
     {
-        // ReSharper disable InconsistentNaming
-        [Display(Name = "Ny kunnskap")]
-        ccnk,
-
-        [Display(Name = "Ny tolkning av tidligere data")]
-        ccnt,
-
-        [Display(Name = "Endrede avgrensninger eller retningslinjer")]
-        ccea,
-
-        [Display(Name = "Endret tolkning av retningslinjer")]
-        ccet,
-
-        [Display(Name = "Endret status (taksonomi, til/fra stedegen)")]
-        cces,
-
         [Display(Name = "Vurdert for første gang")]
         ccvf,
 
@@ -113,33 +94,16 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class CategoryChange
     {
-        private static readonly FilterItem[] DifferFrom2018 =
+        private static FilterAndMetaData DifferFrom2018() =>
+        new()
         {
-            new()
-            {
-                Name = CategoryChangeEnum.ccnk.DisplayName(),
-                NameShort = CategoryChangeEnum.ccnk.ToString()
-            },
-            new()
-            {
-                Name = CategoryChangeEnum.ccnt.DisplayName(),
-                NameShort = CategoryChangeEnum.ccnt.ToString()
-            },
-            new()
-            {
-                Name = CategoryChangeEnum.ccea.DisplayName(),
-                NameShort = CategoryChangeEnum.ccea.ToString()
-            },
-            new()
-            {
-                Name = CategoryChangeEnum.ccet.DisplayName(),
-                NameShort = CategoryChangeEnum.ccet.ToString()
-            },
-            new()
-            {
-                Name = CategoryChangeEnum.cces.DisplayName(),
-                NameShort = CategoryChangeEnum.cces.ToString()
-            }
+            Filters = Enum.GetValues<AlienSpeciesAssessment2023ReasonForChangeOfCategory>()
+                    .Select(x => new FilterItem
+                    {
+                        Name = x.DisplayName(),
+                        NameShort = x.ToString()
+                    }).ToArray(),
+            FilterDescription = ""
         };
 
         public static readonly FilterItem[] AlienSpecies2023CategoryChangedFilters =
@@ -153,11 +117,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = CategoryChangeEnum.ccke.DisplayName(),
                 NameShort = CategoryChangeEnum.ccke.ToString(),
-                SubGroup = new()
-                {
-                    Filters = DifferFrom2018,
-                    FilterDescription = ""
-                }
+                SubGroup = DifferFrom2018()
             },
             new()
             {

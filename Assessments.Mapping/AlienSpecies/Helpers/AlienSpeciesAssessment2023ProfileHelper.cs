@@ -985,5 +985,35 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 _ => AlienSpeciesAssessment2023MajorTypeGroup.Unknown,
             };
         }
+
+        internal static List<AlienSpeciesAssessment2023ReasonForChangeOfCategory> GetReasonForChangeOfCategory(List<string> reasonForChangeOfCategory)
+        {
+            var reasons = new List<AlienSpeciesAssessment2023ReasonForChangeOfCategory>();
+
+            if (reasonForChangeOfCategory is null || reasonForChangeOfCategory.Count == 0)
+            {
+                return reasons;
+            }
+
+            if (new[] { "realChange", "newInformation" }.All(y => reasonForChangeOfCategory.Contains(y)))
+            {
+                reasonForChangeOfCategory.RemoveAll(x => ((string)x) == "newInformation");
+            }
+
+            foreach (var reason in reasonForChangeOfCategory)
+            {
+               var oneReason = reason switch
+                {
+                    "realChange" or "newInformation" => AlienSpeciesAssessment2023ReasonForChangeOfCategory.NewKnowledge,
+                    "newInterpretation" => AlienSpeciesAssessment2023ReasonForChangeOfCategory.NewInterpretation,
+                    "changedCriteria" => AlienSpeciesAssessment2023ReasonForChangeOfCategory.ChangedGuidelines,
+                    "changedCriteriaInterpretation" => AlienSpeciesAssessment2023ReasonForChangeOfCategory.ChangedGuidelinesInterpretation,
+                    _ => AlienSpeciesAssessment2023ReasonForChangeOfCategory.ChangedStatus
+                    
+                 };
+                reasons.Add(oneReason);
+            }
+            return reasons;
+        }
     }
 }

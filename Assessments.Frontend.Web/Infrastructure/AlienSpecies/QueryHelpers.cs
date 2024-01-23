@@ -5,6 +5,7 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Assessments.Frontend.Web.Infrastructure.AlienSpecies.SpeciesStatus;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -210,10 +211,26 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplySpeciesStatus(string[] speciesStatus, IQueryable<AlienSpeciesAssessment2023> query)
         {
-            const string doorKnockerShort = "eda";
-
-            return query.Where(x => speciesStatus.Contains(x.SpeciesStatus.ToString()) ||
-                                    (speciesStatus.Contains(doorKnockerShort) && (x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction)));
+            IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+            const string doorKnockerShort = "eds";
+            foreach (var status in speciesStatus)
+            {
+                var assessments = status switch
+                {
+                    nameof(AlienSpeciesAssessment2023SpeciesStatus.C3) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C3),
+                    nameof(AlienSpeciesAssessment2023SpeciesStatus.C2) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C2),
+                    doorKnockerShort => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction), //nameof (SpeciesStatusEnum.Doorknockers) 
+                    nameof(AlienSpeciesAssessment2023SpeciesStatus.C1) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C1),
+                    nameof(AlienSpeciesAssessment2023SpeciesStatus.C0) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C0),
+                    nameof(AlienSpeciesAssessment2023SpeciesStatus.B2) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.B2),
+                    nameof(AlienSpeciesAssessment2023SpeciesStatus.B1) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.B1),
+                    nameof(AlienSpeciesAssessment2023SpeciesStatus.Abroad) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.Abroad),
+                    _ => null
+                };
+                if (assessments != null)
+                    newQuery = newQuery.Concat(assessments);
+            }
+            return newQuery.Distinct();
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplyTaxonRank(string[] rankFilters, IQueryable<AlienSpeciesAssessment2023> query)

@@ -1,9 +1,11 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using Assessments.Shared.Resources.Enums.AlienSpecies;
+using CsvHelper.Configuration.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using static Assessments.Frontend.Web.Infrastructure.AlienSpecies.DeciciveCriteria;
 using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
@@ -1372,36 +1374,21 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class SpeciesStatus
     {
-        public static readonly FilterItem[] AlienSpecies2023Doorknockers =
-        {
+        public static FilterAndMetaData AlienSpecies2023Doorknockers() =>
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.C1.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.C1)
-            },
-            new()
-            {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.C0.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.C0)
-            },
-            new()
-            {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.B2.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.B2)
-            },
-            new()
-            {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.B1.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.B1)
-            },
-            new()
-            {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.A.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.A)
-            }
-        };
+                Filters =
+                    Enum.GetValues<AlienSpeciesAssessment2023SpeciesStatus>().Where(x => x is not (AlienSpeciesAssessment2023SpeciesStatus.C3 or AlienSpeciesAssessment2023SpeciesStatus.C2 or AlienSpeciesAssessment2023SpeciesStatus.NotIndicated))
+                    .Select(x => new FilterItem
+                    {
+                        Name = x.DisplayName(),
+                        NameShort = x.ToString()
+                    }).Reverse().ToArray()
+                ,
+                FilterDescription = ""
+            };
 
-        public static readonly FilterItem[] AlienSpecies2023SpeciesStatusFilters =
+        public readonly FilterItem[] AlienSpecies2023SpeciesStatusFilters =
         {
             new()
             {
@@ -1417,21 +1404,18 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = "Dørstokkarter",
                 NameShort = "eds",
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023Doorknockers,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023Doorknockers()
             }
         };
 
-        public static readonly FilterAndMetaData AlienSpecies2023SpeciesStatus = new()
-        {
-            Filters = AlienSpecies2023SpeciesStatusFilters,
-            FilterDescription = "",
-            FilterButtonName = "etableringsklassefiltre",
-            FilterButtonText = "Etableringsstatus i dag"
-        };
+        public FilterAndMetaData AlienSpecies2023SpeciesStatus() => 
+            new()
+            {
+                Filters = AlienSpecies2023SpeciesStatusFilters,
+                FilterDescription = "",
+                FilterButtonName = "etableringsklassefiltre",
+                FilterButtonText = "Etableringsstatus i dag"
+            };
     }
 
     public class NotAssessed

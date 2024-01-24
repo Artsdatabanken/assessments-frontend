@@ -1,6 +1,7 @@
 ﻿using Assessments.Shared.Resources.Enums.AlienSpecies;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Assessments.Shared.Helpers;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
@@ -26,9 +27,9 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource))]
         [Description(nameof(AlienSpeciesAssessment2023SpeciesStatusResource.documented_Norwegian_nature_description))]
         C0,
-
+        
         [Display(Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.survive_winter_outdoors), ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource))]
-        [Description(nameof(AlienSpeciesAssessment2023SpeciesStatusResource.survive_winter_outdoors_description))]
+        [LocalizedDescription(nameof(AlienSpeciesAssessment2023SpeciesStatusResource.survive_winter_outdoors), typeof(AlienSpeciesAssessment2023SpeciesStatusResource))]
         C1,
 
         [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.alien_species), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]

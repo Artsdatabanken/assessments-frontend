@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
 using X.PagedList;
+using Microsoft.Extensions.Logging;
 
 namespace Assessments.Frontend.Web.Controllers
 {
@@ -209,8 +210,9 @@ namespace Assessments.Frontend.Web.Controllers
 
                 return Json(suggestions);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Logger.LogError(ex, "An error occurred: {message}", ex.Message);
                 return Json(new List<object>() { });
             }
         }

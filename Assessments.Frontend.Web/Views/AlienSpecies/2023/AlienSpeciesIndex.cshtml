@@ -1,4 +1,8 @@
-﻿@model AlienSpeciesListViewModel
+﻿@using Assessments.Frontend.Web.Views.AlienSpecies._2023
+
+@inject IStringLocalizer<AlienSpeciesIndex> Localizer
+
+@model AlienSpeciesListViewModel
 
 @{
     CitationForListViewModel citationViewModel = new CitationForListViewModel
@@ -8,13 +12,14 @@
 
     PageHeaderViewModel pageHeaderViewModel = new PageHeaderViewModel
     {
-        HeaderText = Constants.AlienSpecies2023HeaderText,
+        HeaderText = Localizer["list_title_year"],
         HeaderByline = Constants.AlienSpecies2023HeaderByline
     };
 
     IntroductionViewModel introductionViewModel = new IntroductionViewModel
     {
-        Introduction = Constants.AlienSpecies2023Introduction
+        Introduction = Localizer["intro"]
+        //Introduction = Constants.AlienSpecies2023Introduction
     };
 
     PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
@@ -27,7 +32,7 @@
         PageMenuHeaderText = Constants.AlienSpecies2023PageMenuHeaderText
     };
 
-    ViewData["Title"] = "Fremmedartslista 2023";
+    ViewData["Title"] = Localizer["list_title_year"];
 }
 
 <div class="pagecontainer">

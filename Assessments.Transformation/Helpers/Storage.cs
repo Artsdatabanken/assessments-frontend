@@ -5,17 +5,20 @@ using System.Threading.Tasks;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.Extensions.Configuration;
+using Raven.Client.Document;
+using Raven.Client;
+using System.Net;
 
 namespace Assessments.Transformation.Helpers
 {
     public static class Storage
     {
         private static BlobContainerClient _blobContainer;
-        
-        public static async Task Upload(IConfigurationRoot configuration, string key, string value)
+
+        public static async Task UploadToBlob(IConfigurationRoot configuration, string key, string value)
         {
             var connectionString = configuration.GetConnectionString("AzureBlobStorage");
-            
+
             if (string.IsNullOrEmpty(connectionString))
                 throw new Exception("ConnectionStrings:AzureBlobStorage (app secret) mangler");
 
@@ -34,6 +37,24 @@ namespace Assessments.Transformation.Helpers
 
             await using var stream = new MemoryStream(bytesToUpload);
             await _blobContainer.GetBlobClient(key).UploadAsync(stream, progressHandler: progressHandler);
+        }
+
+        public static async Task<string> DownloadFromBlob(IConfigurationRoot configuration, string key)
+        {
+            var connectionString = configuration.GetConnectionString("AzureBlobStorage");
+
+            if (string.IsNullOrEmpty(connectionString))
+                throw new Exception("ConnectionStrings:AzureBlobStorage (app secret) mangler");
+
+            _blobContainer = new BlobContainerClient(connectionString, "assessments");
+
+            await _blobContainer.CreateIfNotExistsAsync();
+
+            var blob = _blobContainer.GetBlobClient(key);
+            var response = await blob.DownloadContentAsync();
+
+            var fileContent = response.Value.Content.ToString();
+            return fileContent;
         }
 
         public static async Task UploadFile(IConfigurationRoot configuration, string path, byte[] value)
@@ -67,5 +88,61 @@ namespace Assessments.Transformation.Helpers
                 }
             }
         }
+    }
+
+    public class DocumentStoreHolder
+    {
+        private static Lazy<IDocumentStore> store = new Lazy<IDocumentStore>(CreateStore);
+
+        public static IDocumentStore Store
+        {
+            get { return store.Value; }
+        }
+
+        private static IDocumentStore CreateStore()
+        {
+            IConfigurationRoot configuration = GetConfiguration();
+
+            var documentStore = new DocumentStore()
+            {
+                Url = configuration.GetConnectionString("RavenDBUrl"),
+                DefaultDatabase = configuration.GetConnectionString("RavenDB"),
+            };
+
+            var user = configuration.GetConnectionString("RavenDBUser");
+            if (!string.IsNullOrWhiteSpace(user))
+            {
+                var cred = user.Split(':');
+                documentStore.Credentials = new NetworkCredential(cred[0], cred[1]);
+            }
+
+            documentStore.Initialize();
+
+            documentStore.Conventions.MaxNumberOfRequestsPerSession = 100; //Raven default is 30
+
+            return documentStore;
+        }
+
+        private static IConfigurationRoot GetConfiguration()
+        {
+            return new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .AddUserSecrets<Program>()
+                .Build();
+        }
+
+        public static IDocumentSession RavenSession
+        {
+            get
+            {
+                if (ravenSession == null)
+                {
+                    ravenSession = Store.OpenSession();
+                }
+                return ravenSession;
+            }
+        }
+
+        private static IDocumentSession ravenSession;
     }
 }

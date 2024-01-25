@@ -26,11 +26,7 @@ namespace Assessments.Frontend.Web.Controllers
         public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new();
-        private static readonly Dictionary<string, string> _allAreas = Constants.AllAreas;
-        private static readonly Dictionary<string, string> _allCriterias = Constants.AllCriterias;
-        private static readonly Dictionary<string, string> _allEuropeanPopulationPercentages = Constants.AllEuropeanPopulationPercentages;
         private readonly ArtskartApiService _artskartApiService;
-
 
         [Route("2021")]
         public async Task<IActionResult> Index2021([FromQueryAttribute] RL2021ViewModel viewModel, int? page, bool export)
@@ -73,8 +69,6 @@ namespace Assessments.Frontend.Web.Controllers
 
             var query = await DataRepository.GetSpeciesAssessments();
 
-            ViewBag.AllTaxonRanks = Helpers.GetAllTaxonRanks();
-
             // Søk
             if (!string.IsNullOrEmpty(viewModel.Name))
             {
@@ -99,8 +93,6 @@ namespace Assessments.Frontend.Web.Controllers
             // Filter
 
             // Areas
-            ViewBag.AllAreas = _allAreas;
-
             if (viewModel.Area?.Any() == true)
                 query = query.Where(x => viewModel.Area.Contains(x.AssessmentArea));
 
@@ -111,14 +103,18 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => !string.IsNullOrEmpty(x.Category) && viewModel.Category.Any(y => x.Category.Contains(y)));
 
             // Criterias
-            ViewBag.AllCriterias = _allCriterias;
-
             if (viewModel.Criterias?.Any() == true)
                 query = query.Where(x => !string.IsNullOrEmpty(x.CriteriaSummarized) && viewModel.Criterias.Any(y => x.CriteriaSummarized.Contains(y)));
 
             // Habitat
             if (viewModel.Habitats?.Any() == true)
-                query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
+            {
+                // The model names are not compatible with enum naming rules. We need to consider this.
+                if (viewModel.Habitats.Contains("Fastmark"))
+                    query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y) || x.MainHabitat.Contains("Semi-naturlig fastmark")));
+                else
+                    query = query.Where(x => viewModel.Habitats.Any(y => x.MainHabitat.Contains(y)));
+            }
 
             // Regions
             ViewBag.AllRegions = Helpers.GetRegionsDict();
@@ -144,7 +140,6 @@ namespace Assessments.Frontend.Web.Controllers
                 query = query.Where(x => viewModel.TaxonRank.Contains(x.TaxonRank));
 
             // European population percentages
-            ViewBag.AllEuroPop = _allEuropeanPopulationPercentages;
             string[] chosenEuropeanPopulation = Helpers.FindEuropeanPopProcentages(viewModel.EuroPop);
 
             if (chosenEuropeanPopulation?.Any() == true)

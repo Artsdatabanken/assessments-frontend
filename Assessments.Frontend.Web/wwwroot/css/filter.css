@@ -275,23 +275,19 @@ li.checkbox label {
 }
 
 .filter_groups ul.Alger_filters,
-.filter_groups ul.insect_filters,
 .filter_groups ul.Insekter_filters,
 .filter_groups ul.Krepsdyr_filters {
     padding-right: 0;
 }
 
-div.filter_insects,
 div.filter_subgroup {
     margin-left: 15px;
 }
 
-.list_header,
-.list_header_insects {
+.list_header {
     background-color: transparent;
 }
 
-.filter_insects,
 .filter_subgroup,
 .mark_all {
     border-bottom: 1px solid lightgray;
@@ -301,10 +297,6 @@ div.filter_subgroup {
 
 label.switch_list_element {
     margin: 5px 0;
-}
-
-#list_header_insects {
-    padding-right: 3px;
 }
 
 .list_header_text {
@@ -335,10 +327,6 @@ button.list_header {
 
 .filter_header .material-icons {
     padding-right: 5px;
-}
-
-#show_all_insects {
-    display: none;
 }
 
 @media only screen and (max-width: 750px) {
@@ -396,14 +384,8 @@ button.list_header {
         text-align: center;
     }
 
-    .filter_insects,
     .filter_subgroup {
         margin-bottom: 10px;
-    }
-
-    #show_all_insects {
-        display: inline-block;
-        #fff9f0-space: nowrap;
     }
 } 
 
@@ -598,9 +580,9 @@ button.list_header {
 .only_js .filter_regionallyalien,
 .only_js .filter_regions,
 .only_js .filter_waterregions,
-.only_js .filter_european_population,
-.only_js .filter_criteria,
-.only_js .filter_extinct,
+.only_js .filter_europop,
+.only_js .filter_criterias,
+.only_js .filter_presumedextinct,
 .only_js .filter_habitat,
 .only_js .filter_habitats,
 .only_js .filter_species_groups,
@@ -622,7 +604,7 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_dcok ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_dcipah ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_eds ~ .filter_subgroup,
-.only_js input[type=checkbox]:not(:checked)#show_insects ~ .filter_insects,
+.only_js input[type=checkbox]:not(:checked)#show_insekter ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sal ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_sin ~ .filter_subgroup,
 .only_js input[type=checkbox]:not(:checked)#show_skr ~ .filter_subgroup,
@@ -648,12 +630,12 @@ button.list_header {
 .only_js input[type=checkbox]:not(:checked)#show_regionallyalien ~ .filter_regionallyalien,
 .only_js input[type=checkbox]:not(:checked)#show_regions ~ .filter_regions,
 .only_js input[type=checkbox]:not(:checked)#show_waterregions ~ .filter_waterregions,
-.only_js input[type=checkbox]:not(:checked)#show_european_population ~ .filter_european_population,
-.only_js input[type=checkbox]:not(:checked)#show_criteria ~ .filter_criteria,
+.only_js input[type=checkbox]:not(:checked)#show_europop ~ .filter_europop,
+.only_js input[type=checkbox]:not(:checked)#show_criterias ~ .filter_criterias,
 .only_js input[type=checkbox]:not(:checked)#show_speciesstatus ~ .filter_speciesstatus,
 .only_js input[type=checkbox]:not(:checked)#show_habitat ~ .filter_habitat,
 .only_js input[type=checkbox]:not(:checked)#show_habitats ~ .filter_habitats,
-.only_js input[type=checkbox]:not(:checked)#show_extinct ~ .filter_extinct,
+.only_js input[type=checkbox]:not(:checked)#show_presumedextinct ~ .filter_presumedextinct,
 .only_js input[type=checkbox]:not(:checked)#show_species_groups ~ .filter_species_groups,
 .only_js input[type=checkbox]:not(:checked)#show_speciesgroups ~ .filter_speciesgroups,
 .only_js input[type=checkbox]:not(:checked)#show_productionspecies ~ .filter_productionspecies,

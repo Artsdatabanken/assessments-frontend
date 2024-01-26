@@ -44,7 +44,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = ApplyNotAssessed(parameters.NotAssessed, query);
 
             if (parameters.SpeciesStatus.Any())
-                query = ApplySpeciesStatus(parameters.SpeciesStatus, query);
+                query = query.Where(x => parameters.SpeciesStatus.Contains(x.SpeciesStatus.ToString()));
 
             if (parameters.ProductionSpecies.Any())
                 query = query.Where(x => parameters.ProductionSpecies.Contains(x.ProductionSpecies.ToString()));
@@ -171,7 +171,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
             return newQuery.Distinct();
         }
-
+ 
         private static IQueryable<AlienSpeciesAssessment2023> ApplyEnvironments(string[] environments, IQueryable<AlienSpeciesAssessment2023> query)
         {
             IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
@@ -201,30 +201,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     nameof(NotAssessed.NotAssessedAlienSpeciesCategory.NotAlienSpecies) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie),
                     nameof(NotAssessed.NotAssessedAlienSpeciesCategory.UncertainBefore1800) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800),
                     nameof(NotAssessed.NotAssessedAlienSpeciesCategory.MisIdentified) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified),
-                    _ => null
-                };
-                if (assessments != null)
-                    newQuery = newQuery.Concat(assessments);
-            }
-            return newQuery.Distinct();
-        }
-
-        private static IQueryable<AlienSpeciesAssessment2023> ApplySpeciesStatus(string[] speciesStatus, IQueryable<AlienSpeciesAssessment2023> query)
-        {
-            IQueryable<AlienSpeciesAssessment2023> newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
-            const string doorKnockerShort = "eds";
-            foreach (var status in speciesStatus)
-            {
-                var assessments = status switch
-                {
-                    nameof(AlienSpeciesAssessment2023SpeciesStatus.C3) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C3),
-                    nameof(AlienSpeciesAssessment2023SpeciesStatus.C2) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C2),
-                    doorKnockerShort => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction), //nameof (SpeciesStatusEnum.Doorknockers) 
-                    nameof(AlienSpeciesAssessment2023SpeciesStatus.C1) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C1),
-                    nameof(AlienSpeciesAssessment2023SpeciesStatus.C0) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C0),
-                    nameof(AlienSpeciesAssessment2023SpeciesStatus.B2) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.B2),
-                    nameof(AlienSpeciesAssessment2023SpeciesStatus.B1) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.B1),
-                    nameof(AlienSpeciesAssessment2023SpeciesStatus.Abroad) => query.Where(x => x.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.Abroad),
                     _ => null
                 };
                 if (assessments != null)

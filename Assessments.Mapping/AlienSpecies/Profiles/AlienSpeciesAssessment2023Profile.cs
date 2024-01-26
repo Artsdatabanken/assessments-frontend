@@ -236,7 +236,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.SpeciesStatus, opt =>
                 {
                     opt.PreCondition(src => src.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie.ToString() && src.SpeciesStatus is not null);
-                    opt.MapFrom(x => x.SpeciesStatus == "A" ? "Abroad" : x.SpeciesStatus);
+                    opt.MapFrom(x => x.SpeciesStatus == "A" ? AlienSpeciesAssessment2023SpeciesStatus.Abroad.ToString() : x.SpeciesStatus);
                 })
                     
                 .ForMember(dest => dest.CoastLineSections, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CoastLineSections.Any(x => x.Skagerrak || x.None || x.OpenCoastLine)))

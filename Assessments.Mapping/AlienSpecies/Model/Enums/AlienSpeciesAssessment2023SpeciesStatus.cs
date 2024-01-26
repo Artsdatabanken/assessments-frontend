@@ -11,7 +11,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 
         [Display(Name = "Ikke i Norge")]
         [Description("ikke forekommer i Norge")]
-        A,
+        Abroad,
 
         [Display(Name = "Innendørs")]
         [Description("forekommer innendørs eller i lukkede installasjoner")]

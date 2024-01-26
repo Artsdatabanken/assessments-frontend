@@ -1435,8 +1435,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.A.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.A)
+                Name = AlienSpeciesAssessment2023SpeciesStatus.Abroad.DisplayName(),
+                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.Abroad)
             }
         };
 

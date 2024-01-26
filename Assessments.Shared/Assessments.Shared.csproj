@@ -97,7 +97,7 @@
       <LastGenOutput>AlienSpeciesAssessment2023ReasonForChangeOfCategoryResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023SpeciesGroupsResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AlienSpeciesAssessment2023SpeciesGroupsResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023SpeciesStatusResource.resx">

@@ -161,6 +161,15 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to selvstendig reproduserende.
+        /// </summary>
+        public static string reproduces_unaidedly {
+            get {
+                return ResourceManager.GetString("reproduces_unaidedly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to er selvstendig reproduserende.
         /// </summary>
         public static string reproduces_unaidedly_description {

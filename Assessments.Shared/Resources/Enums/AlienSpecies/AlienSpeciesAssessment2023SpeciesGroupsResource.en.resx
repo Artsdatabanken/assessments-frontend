@@ -117,49 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="not_indicated" xml:space="preserve">
-    <value>Not indicated</value>
+  <data name="coleoptera" xml:space="preserve">
+    <value>Beetles</value>
   </data>
-  <data name="not_in_Norway" xml:space="preserve">
-    <value>Not in Norway</value>
+  <data name="zygentoma" xml:space="preserve">
+    <value>Bristletails</value>
   </data>
-  <data name="not_in_Norway_description" xml:space="preserve">
-    <value>does not occur in Norway</value>
+  <data name="phthiraptera" xml:space="preserve">
+    <value>Lice</value>
   </data>
-  <data name="indoors" xml:space="preserve">
-    <value>Indoors</value>
+  <data name="hemiptera" xml:space="preserve">
+    <value>Hemipterans</value>
   </data>
-  <data name="indoors_description" xml:space="preserve">
-    <value>occurs in indoor environments</value>
+  <data name="lepidoptera" xml:space="preserve">
+    <value>Butterflies and moths</value>
   </data>
-  <data name="outdoors_production_area" xml:space="preserve">
-    <value>Outdoors on its own production area</value>
+  <data name="psocoptera" xml:space="preserve">
+    <value>Bark lice</value>
   </data>
-  <data name="outdoors_production_area_description" xml:space="preserve">
-    <value>occurs outdoors on its own production area</value>
+  <data name="diptera" xml:space="preserve">
+    <value>True flies</value>
   </data>
-  <data name="documented_Norwegian_nature_description" xml:space="preserve">
-    <value>has been documented in Norwegian nature</value>
+  <data name="thysanoptera" xml:space="preserve">
+    <value>Thrips</value>
   </data>
-  <data name="documented_Norwegian_nature" xml:space="preserve">
-    <value>Observed in Norwegian nature</value>
+  <data name="hymenoptera" xml:space="preserve">
+    <value>Hymenopterans</value>
   </data>
-  <data name="survive_winter_outdoors" xml:space="preserve">
-    <value>Survive winter outdoors</value>
+  <data name="phaeophyceae" xml:space="preserve">
+    <value>Brown algae</value>
   </data>
-  <data name="survive_winter_outdoors_description" xml:space="preserve">
-    <value>can survive the winter outdoors and without human help</value>
+  <data name="chlorophyta" xml:space="preserve">
+    <value>Green algae</value>
   </data>
-  <data name="reproduces_unaidedly_description" xml:space="preserve">
-    <value>reproduces unaidedly</value>
+  <data name="rhodophyta" xml:space="preserve">
+    <value>Red algae</value>
   </data>
-  <data name="established" xml:space="preserve">
-    <value>Established</value>
+  <data name="malacostraca" xml:space="preserve">
+    <value>Malacostracans</value>
   </data>
-  <data name="established_description" xml:space="preserve">
-    <value>is established</value>
+  <data name="branchiopoda" xml:space="preserve">
+    <value>Branchiopods</value>
   </data>
-  <data name="reproduces_unaidedly" xml:space="preserve">
-    <value>Reproducing unaidedly</value>
+  <data name="copepoda" xml:space="preserve">
+    <value>Copepods</value>
+  </data>
+  <data name="amphibia" xml:space="preserve">
+    <value>Amphibians</value>
+  </data>
+  <data name="bacteria" xml:space="preserve">
+    <value>Bacteria</value>
+  </data>
+  <data name="mollusca" xml:space="preserve">
+    <value>Molluscs</value>
+  </data>
+  <data name="arachnida" xml:space="preserve">
+    <value>Arachnids</value>
   </data>
 </root>

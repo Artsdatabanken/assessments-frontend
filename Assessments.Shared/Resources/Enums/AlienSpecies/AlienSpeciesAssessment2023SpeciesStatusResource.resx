@@ -139,4 +139,7 @@
   <data name="established_description" xml:space="preserve">
     <value>er etablert</value>
   </data>
+  <data name="reproduces_unaidedly" xml:space="preserve">
+    <value>selvstendig reproduserende</value>
+  </data>
 </root>

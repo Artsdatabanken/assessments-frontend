@@ -421,7 +421,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             AlienSpeciesAssessment2023SpeciesStatus.C0.ToString(),
             AlienSpeciesAssessment2023SpeciesStatus.B2.ToString(),
             AlienSpeciesAssessment2023SpeciesStatus.B1.ToString(),
-            AlienSpeciesAssessment2023SpeciesStatus.A.ToString()
+            AlienSpeciesAssessment2023SpeciesStatus.Abroad.ToString()
         };
 
         public int Compare(string x, string y)

@@ -174,4 +174,49 @@
   <data name="arachnida" xml:space="preserve">
     <value>Arachnids</value>
   </data>
+  <data name="thecostraca" xml:space="preserve">
+    <value>Barnacles</value>
+  </data>
+  <data name="oomycota" xml:space="preserve">
+    <value>Oomycetes</value>
+  </data>
+  <data name="actinopterygii" xml:space="preserve">
+    <value>Fish</value>
+  </data>
+  <data name="platyhelminthes" xml:space="preserve">
+    <value>Flatworms</value>
+  </data>
+  <data name="aves" xml:space="preserve">
+    <value>Birds</value>
+  </data>
+  <data name="pycnogonida" xml:space="preserve">
+    <value>Sea spiders</value>
+  </data>
+  <data name="rotifera" xml:space="preserve">
+    <value>Rotifers</value>
+  </data>
+  <data name="insecta" xml:space="preserve">
+    <value>Insects</value>
+  </data>
+  <data name="ctenophora" xml:space="preserve">
+    <value>Comb jellies</value>
+  </data>
+  <data name="ascidiacea_tunicata" xml:space="preserve">
+    <value>Tunicates</value>
+  </data>
+  <data name="magnoliophyta_pinophyta_pteridophyta" xml:space="preserve">
+    <value>Plants</value>
+  </data>
+  <data name="crustacea" xml:space="preserve">
+    <value>Crustaceans</value>
+  </data>
+  <data name="annelida" xml:space="preserve">
+    <value>Segmented worms</value>
+  </data>
+  <data name="myriapoda_chilopoda_diplopoda_dauropoda_symphyla" xml:space="preserve">
+    <value>Myriapods</value>
+  </data>
+  <data name="ectoprocta_entoprocta" xml:space="preserve">
+    <value>Moss animals and entoprocts</value>
+  </data>
 </root>

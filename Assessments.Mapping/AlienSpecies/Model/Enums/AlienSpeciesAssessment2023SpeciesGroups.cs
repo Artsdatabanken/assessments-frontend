@@ -5,6 +5,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023SpeciesGroups
     {
+        Unknown,
         [Display(Name = nameof(AlienSpeciesAssessment2023SpeciesGroupsResource.phaeophyceae), ResourceType = typeof(AlienSpeciesAssessment2023SpeciesGroupsResource))]
         Phaeophyceae,
 

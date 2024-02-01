@@ -296,7 +296,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return climateDoc.StripUnwantedHtml();
         }
 
-        internal static string GetSpeciesGroup(string taxonHierarchy)
+        internal static AlienSpeciesAssessment2023SpeciesGroups GetSpeciesGroup(string taxonHierarchy)
         {
             // Reversing the list to get a match as low as possible in the taxon hierarchy.
             var scientificNames = taxonHierarchy.Split("/").Reverse();
@@ -304,10 +304,10 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 if (Enum.TryParse(name, out AlienSpeciesAssessment2023SpeciesGroups speciesGroup))
                 {
-                    return speciesGroup.DisplayName();
+                    return speciesGroup;
                 }
             }
-            return String.Empty;
+            return AlienSpeciesAssessment2023SpeciesGroups.Unknown;
         }
 
         internal static int GetTaxonRank(string taxonRank)

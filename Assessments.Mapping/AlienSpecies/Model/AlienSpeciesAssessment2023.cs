@@ -136,7 +136,7 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// <summary>
         /// The species group name, based on the taxon hierarchy
         /// </summary>
-        public string SpeciesGroup { get; set; }
+        public AlienSpeciesAssessment2023SpeciesGroups SpeciesGroup { get; set; }
 
         /// <summary>
         /// Establishment category in Norway today from A-C3. The alien species may not be in Norway, be represented in Norway by sporadic, ephemeral occurrences, or by populations that are established

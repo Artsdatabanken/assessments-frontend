@@ -897,148 +897,79 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class SpeciesGroups
     {
-        // All NameShort for speciesGroup starts with 's' to not confuse them with other short names. 
-        private static readonly FilterItem[] AlienSpecies2023Algae =
+        private static FilterAndMetaData AlienSpecies2023Algae() =>
+            new()
+            { 
+                Filters = 
+                Enum.GetValues<AlienSpeciesAssessment2023SpeciesGroups>()
+                .Where(x => x is AlienSpeciesAssessment2023SpeciesGroups.Phaeophyceae or AlienSpeciesAssessment2023SpeciesGroups.Chlorophyta or AlienSpeciesAssessment2023SpeciesGroups.Rhodophyta)
+                .Select(x => new FilterItem
+                {
+                    NameShort = x.ToString(),
+                    Name = x.DisplayName(),
+                    Description = nameof(x),
+                    InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
+                    ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
+                }).OrderBy(x => x.Name).ToArray(),
+                FilterDescription = ""
+            };
+
+        //Norwegian names used in this subset-enum to be able to use values in ImageUrl under AlienSpecies2023Insects(). 
+        public enum InsectSpeciesGroup
+            {
+                Biller = AlienSpeciesAssessment2023SpeciesGroups.Coleoptera, 
+                Børstehale =  AlienSpeciesAssessment2023SpeciesGroups.Zygentoma,
+                LusogLopper =    AlienSpeciesAssessment2023SpeciesGroups.Phthiraptera,
+                Nebbmunner =    AlienSpeciesAssessment2023SpeciesGroups.Hemiptera,
+                Sommerfugler = AlienSpeciesAssessment2023SpeciesGroups.Lepidoptera,
+                Støvlus = AlienSpeciesAssessment2023SpeciesGroups.Psocoptera,
+                Tovinger = AlienSpeciesAssessment2023SpeciesGroups.Diptera,
+                Trips = AlienSpeciesAssessment2023SpeciesGroups.Thysanoptera,
+                Vepser = AlienSpeciesAssessment2023SpeciesGroups.Hymenoptera
+            };
+
+    private static FilterAndMetaData AlienSpecies2023Insects() =>
+            new()
+            {
+                Filters =
+                Enum.GetValues<InsectSpeciesGroup>()
+                .Select(x => new FilterItem
+                {
+                    NameShort = ((AlienSpeciesAssessment2023SpeciesGroups)x).ToString(),
+                    Name = ((AlienSpeciesAssessment2023SpeciesGroups)x).DisplayName(),
+                    Description = nameof(x),
+                    InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/" + x.ToString().ToLower(),
+                    ImageUrl = "https://design.artsdatabanken.no/icons/" + x.ToString() + ".svg",
+                }).OrderBy(x => x.Name).ToArray(),
+                FilterDescription = ""
+            };
+
+        public enum CrustaceanSpeciesGroup
         {
-            new()
-            {
-                Name = "Brunalger",
-                NameShort = "sbr",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Phaeophyceae)
-            },
-            new()
-            {
-                Name = "Grønnalger",
-                NameShort = "sga",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Chlorophyta)
-            },
-            new()
-            {
-                Name = "Rødalger",
-                NameShort = "sra",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Rhodophyta)
-            }
+            Malacostraca = AlienSpeciesAssessment2023SpeciesGroups.Malacostraca,
+            Branchiopoda = AlienSpeciesAssessment2023SpeciesGroups.Branchiopoda,
+            Copepoda = AlienSpeciesAssessment2023SpeciesGroups.Copepoda,
+            Thecostraca = AlienSpeciesAssessment2023SpeciesGroups.Thecostraca
         };
 
-        private static readonly FilterItem[] AlienSpecies2023Insects =
-        {
+        private static FilterAndMetaData AlienSpecies2023Crustacean() =>
             new()
             {
-                Name = "Biller",
-                NameShort = "sbi",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/biller",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Biller.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Coleoptera)
-            },
-            new()
-            {
-                Name = "Børstehaler",
-                NameShort = "sbo",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/b%c3%b8rstehaler",
-                ImageUrl = "https://design.artsdatabanken.no/icons/B%c3%b8rstehale.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Zygentoma)
-            },
-            new()
-            {
-                Name = "Lus",
-                NameShort = "sll",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/lusoglopper",
-                ImageUrl = "https://design.artsdatabanken.no/icons/LusogLopper.svg",
-                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Phthiraptera)}"
-            },
-            new()
-            {
-                Name = "Nebbmunner",
-                NameShort = "sne",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/nebbmunner",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Nebbmunner.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Hemiptera)
-            },
-            new()
-            {
-                Name = "Sommerfugler",
-                NameShort = "ssf",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/sommerfugler",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Sommerfugler.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Lepidoptera)
-            },
-            new()
-            {
-                Name = "Støvlus",
-                NameShort = "ssl",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/st%c3%b8vlus",
-                ImageUrl = "https://design.artsdatabanken.no/icons/St%c3%b8vlus.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Psocoptera)
-            },
-            new()
-            {
-                Name = "Tovinger",
-                NameShort = "sto",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/tovinger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Tovinger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Diptera)
-            },
-            new()
-            {
-                Name = "Trips",
-                NameShort = "str",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/trips",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Trips.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Thysanoptera)
-            },
-            new()
-            {
-                Name = "Vepser",
-                NameShort = "sve",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/vepser",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Vepser.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Hymenoptera)
-            }
-        };
+                Filters =
+                Enum.GetValues<CrustaceanSpeciesGroup>()
+                .Select(x => new FilterItem
+                {
+                    NameShort = x.ToString(),
+                    Name = ((AlienSpeciesAssessment2023SpeciesGroups)x).DisplayName(),
+                    Description = nameof(x),
+                    InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/" + x.ToString().ToLower(), //this url will probably never work (it use scientific name), but none of the urls with Norwegian names worked either as the pages don't exist for these species.. 
+                    ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
+                }).OrderBy(x => x.Name).ToArray(),
+                FilterDescription = ""
+            };
 
-        public static readonly FilterItem[] AlienSpecies2023Crustacean =
-        {
-            new()
-            {
-                Name = "Storkrepser",
-                NameShort = "sst",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/storkrepser",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Malacostraca)
-            },
-            new()
-            {
-                Name = "Bladfotinger",
-                NameShort = "sbf",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bladfotinger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Branchiopoda)
-            },
-            new()
-            {
-                Name = "Hoppekreps",
-                NameShort = "sho",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/copepoda",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Copepoda)
-            },
-            new()
-            {
-                Name = "Rankefotinger",
-                NameShort = "srf",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/thecostraca",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Thecostraca)
-            }
-        };
-
-        public static readonly FilterItem[] AlienSpecies2023SpeciesGroupsFilters =
+        
+        public readonly FilterItem[] AlienSpecies2023SpeciesGroupsFilters =
         {
             new()
             {
@@ -1047,11 +978,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
                 Description = "Rhodophyta, Chlorophyta, Phaeophyceae",
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023Algae,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023Algae()
             },
             new()
             {
@@ -1140,11 +1067,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/insekter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Insekter.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Insecta),
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023Insects,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023Insects()
             },
             new()
             {
@@ -1177,11 +1100,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/krepsdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Crustacea),
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023Crustacean,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023Crustacean()
             },
             new()
             {
@@ -1273,13 +1192,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly FilterAndMetaData AlienSpecies2023SpeciesGroups = new()
-        {
-            Filters = AlienSpecies2023SpeciesGroupsFilters,
-            FilterDescription = "",
-            FilterButtonName = "artsgruppefiltre",
-            FilterButtonText = "Artsgrupper"
-        };
+        public FilterAndMetaData AlienSpecies2023SpeciesGroups() => 
+            new()
+            {
+                Filters = AlienSpecies2023SpeciesGroupsFilters,
+                FilterDescription = "",
+                FilterButtonName = "artsgruppefiltre",
+                FilterButtonText = "Artsgrupper"
+            };
     }
 
     public class Regions

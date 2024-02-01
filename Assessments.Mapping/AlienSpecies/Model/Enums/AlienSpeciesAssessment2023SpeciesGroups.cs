@@ -6,6 +6,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
     public enum AlienSpeciesAssessment2023SpeciesGroups
     {
         Unknown,
+
         [Display(Name = nameof(AlienSpeciesAssessment2023SpeciesGroupsResource.phaeophyceae), ResourceType = typeof(AlienSpeciesAssessment2023SpeciesGroupsResource))]
         Phaeophyceae,
 
@@ -54,8 +55,8 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = nameof(AlienSpeciesAssessment2023SpeciesGroupsResource.thecostraca), ResourceType = typeof(AlienSpeciesAssessment2023SpeciesGroupsResource))]
         Thecostraca,
 
-        //[Display(Name = "Alger")]
-        //Rhodophyta, Chlorophyta, Phaeophyceae,
+        [Display(Name = nameof(AlienSpeciesAssessment2023SpeciesGroupsResource.rhodophyta_chlorophyta_phaeophyceae), ResourceType = typeof(AlienSpeciesAssessment2023SpeciesGroupsResource))]
+        Rhodophyta_Chlorophyta_Phaeophyceae,
 
         [Display(Name = nameof(AlienSpeciesAssessment2023SpeciesGroupsResource.amphibia), ResourceType = typeof(AlienSpeciesAssessment2023SpeciesGroupsResource))]
         Amphibia,

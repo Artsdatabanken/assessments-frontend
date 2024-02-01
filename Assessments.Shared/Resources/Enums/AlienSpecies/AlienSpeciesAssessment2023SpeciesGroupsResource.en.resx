@@ -243,4 +243,7 @@
   <data name="fungi" xml:space="preserve">
     <value>Fungi</value>
   </data>
+  <data name="rhodophyta_chlorophyta_phaeophyceae" xml:space="preserve">
+    <value>Algae</value>
+  </data>
 </root>

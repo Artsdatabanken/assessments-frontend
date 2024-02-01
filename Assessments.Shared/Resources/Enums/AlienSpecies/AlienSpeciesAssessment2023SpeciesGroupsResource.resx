@@ -223,4 +223,7 @@
   <data name="fungi" xml:space="preserve">
     <value>Sopper</value>
   </data>
+  <data name="rhodophyta_chlorophyta_phaeophyceae" xml:space="preserve">
+    <value>Alger</value>
+  </data>
 </root>

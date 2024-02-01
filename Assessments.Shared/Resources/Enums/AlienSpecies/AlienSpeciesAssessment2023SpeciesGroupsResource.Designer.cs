@@ -404,6 +404,15 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alger.
+        /// </summary>
+        public static string rhodophyta_chlorophyta_phaeophyceae {
+            get {
+                return ResourceManager.GetString("rhodophyta_chlorophyta_phaeophyceae", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hjuldyr.
         /// </summary>
         public static string rotifera {

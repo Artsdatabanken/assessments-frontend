@@ -92,7 +92,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => algae.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleAlgae,
-                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
                 }).ToList()
             };
 
@@ -101,7 +101,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => crayfish.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleCrayfish,
-                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
                 }).ToList()
             };
 
@@ -110,7 +110,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => insects.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleInsect,
-                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
                 }).ToList()
             };
 
@@ -119,7 +119,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => !algae.Contains(x) && !crayfish.Contains(x) && !insects.Contains(x)).Select(x => new BarChart.BarChartData
                 {
                     Name = x.DisplayName(),
-                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
                 }).ToList()
             };
 

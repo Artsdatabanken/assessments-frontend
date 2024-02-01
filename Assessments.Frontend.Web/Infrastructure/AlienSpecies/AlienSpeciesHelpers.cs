@@ -10,9 +10,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class AlienSpeciesHelpers
     {
-        public static FilterItem GetSpeciesGroup(FilterItem[] speciesGroups, string speciesGroupName)
+        public static FilterItem GetSpeciesGroup(FilterAndMetaData speciesGroups, string speciesGroupName)
         {
-            foreach (var speciesGroup in speciesGroups)
+            foreach (var speciesGroup in speciesGroups.Filters)
             {
                 if (speciesGroup.Name == speciesGroupName)
                 {
@@ -35,7 +35,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         public static string GetSpeciesGroupByShortName(string shortName)
         {
-            var speciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters;
+            var speciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups().Filters;
 
             foreach (var species in speciesGroups)
             {

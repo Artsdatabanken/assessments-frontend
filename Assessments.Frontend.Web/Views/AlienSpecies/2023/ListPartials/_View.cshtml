@@ -2,6 +2,7 @@
 @using X.PagedList;
 
 @{
+    var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
     var results = (IPagedList<ListViewViewModel.Result>)Model.Results.Select(x => new ListViewViewModel.Result()
     {
         EvaluationContext = x.EvaluationContext.ToString(),
@@ -11,8 +12,8 @@
         IsDoorKnocker = x.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker,
         HasEffectWithoutReproduction = x.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction,
         ScientificNameFormatted = x.ScientificName.ScientificNameFormatted,
-        SpeciesGroup = x.SpeciesGroup,
-        SpeciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, x.SpeciesGroup)?.ImageUrl,
+        SpeciesGroup = x.SpeciesGroup.DisplayName(),
+                SpeciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(AllSpeciesGroups, x.SpeciesGroup.DisplayName())?.ImageUrl,
         VernacularName = x.VernacularName
     });
 

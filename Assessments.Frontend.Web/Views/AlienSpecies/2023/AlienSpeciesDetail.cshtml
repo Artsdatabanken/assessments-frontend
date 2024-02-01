@@ -7,7 +7,8 @@
     var assessment = Model.Assessment;
     ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023";
     var evaluationContextText = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S ? "på Svalbard" : "i Norge";
-    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
+    var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
+    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(AllSpeciesGroups, assessment.SpeciesGroup.DisplayName());
     var speciesGroupImageUrl = speciesGroup?.ImageUrl;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
@@ -35,7 +36,7 @@
             FirstPublishedDateString = "11.08.2023",
             //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
             RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
-            SpeciesGroup = assessment.SpeciesGroup,
+            SpeciesGroup = assessment.SpeciesGroup.DisplayName(),
             SpeciesGroupImageUrl = speciesGroupImageUrl,
             SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene",
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()

@@ -56,7 +56,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.Where(x => x.RegionOccurrences.Any(y => parameters.Regions.Contains(y.Region.ToString()) && (y.IsAssumedInFuture || y.IsAssumedToday || y.IsKnown)));
 
             if (parameters.SpeciesGroups.Any())
-                query = query.Where(x => parameters.SpeciesGroups.Any(y => AlienSpeciesHelpers.GetSpeciesGroupByShortName(y) == x.SpeciesGroup));
+                query = query.Where(x => parameters.SpeciesGroups.Any(y => AlienSpeciesHelpers.GetSpeciesGroupByShortName(y) == x.SpeciesGroup.DisplayName()));
 
             if (parameters.SpreadWays.Any())
                 query = ApplySpreadWays(parameters.SpreadWays, query);
@@ -121,7 +121,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 !string.IsNullOrEmpty(x.VernacularName) &&
                 x.VernacularName.ToLowerInvariant().Contains(searchString) ||
                 x.NameHiearchy.Any(x => x.ScientificName.ToLowerInvariant().Contains(searchString)) ||
-                x.SpeciesGroup.ToLowerInvariant().Contains(searchString));
+                x.SpeciesGroup.DisplayName().ToLowerInvariant().Contains(searchString));
         }
 
         private static IQueryable<AlienSpeciesAssessment2023> ApplyCategoryChange(string[] changes, IQueryable<AlienSpeciesAssessment2023> query)

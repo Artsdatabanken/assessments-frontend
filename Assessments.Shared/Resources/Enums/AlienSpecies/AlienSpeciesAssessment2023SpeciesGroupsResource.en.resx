@@ -127,7 +127,7 @@
     <value>Lice</value>
   </data>
   <data name="hemiptera" xml:space="preserve">
-    <value>Hemipterans</value>
+    <value>True bugs</value>
   </data>
   <data name="lepidoptera" xml:space="preserve">
     <value>Butterflies and moths</value>
@@ -218,5 +218,29 @@
   </data>
   <data name="ectoprocta_entoprocta" xml:space="preserve">
     <value>Moss animals and entoprocts</value>
+  </data>
+  <data name="bryophyta_marchantiophyta" xml:space="preserve">
+    <value>Mosses</value>
+  </data>
+  <data name="mammalia" xml:space="preserve">
+    <value>Mammals</value>
+  </data>
+  <data name="cnidaria" xml:space="preserve">
+    <value>Cnidarians</value>
+  </data>
+  <data name="echinodermata" xml:space="preserve">
+    <value>Echinoderms</value>
+  </data>
+  <data name="reptilia" xml:space="preserve">
+    <value>Reptils</value>
+  </data>
+  <data name="nematoda" xml:space="preserve">
+    <value>Roundworms</value>
+  </data>
+  <data name="porifera" xml:space="preserve">
+    <value>Sponges</value>
+  </data>
+  <data name="fungi" xml:space="preserve">
+    <value>Fungi</value>
   </data>
 </root>

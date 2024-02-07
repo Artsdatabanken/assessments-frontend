@@ -32,6 +32,13 @@ namespace Assessments.Shared.Helpers
         public static string Description(this Enum value)
         {
             var attribute = value.GetAttribute<DisplayAttribute>();
+
+            if (attribute == null)
+            {
+                var descriptionAttribute = value.GetAttribute<DescriptionAttribute>();
+                return descriptionAttribute == null ? value.ToString() : descriptionAttribute.Description;
+            }
+
             switch (attribute)
             {
                 case { ResourceType: not null, Description: not null }:

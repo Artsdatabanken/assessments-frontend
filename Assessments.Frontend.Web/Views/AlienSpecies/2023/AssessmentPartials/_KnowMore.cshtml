@@ -27,7 +27,7 @@
     string GetSpeciesStatusText()
     {
         var text = $"Den vurderte {Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank)} ";
-        if (Model.Assessment.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.A)
+        if (Model.Assessment.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.Abroad)
             return $"{text} forekommer ikke {areaText}.";
         if (Model.Assessment.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C3)
             return $"{text} {Model.Assessment.SpeciesStatus.Description()}. Etter introduksjon har {Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank)} selv spredd seg til minst ti forekomster der den er etablert.";

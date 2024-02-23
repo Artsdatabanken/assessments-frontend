@@ -233,7 +233,11 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 .ForMember(dest => dest.AreaOfOccupancyInStronglyAlteredEcosystems, opt => opt.MapFrom(src => src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.HasValue ? "Value" + src.RiskAssessment.SpreadHistoryDomesticAreaInStronglyChangedNatureTypes.ToString() : "Value0"))
                 .ForMember(dest => dest.AllSubTaxaAssessedSeparatelyDescription, opt => opt.MapFrom(src => src.AllSubTaxaAssessedSeparatelyDescription.StripUnwantedHtml()))
                 .ForMember(dest => dest.HybridWithoutOwnRiskAssessmentDescription, opt => opt.MapFrom(src => src.IsHybridWithoutOwnRiskAssessmentDescription.StripUnwantedHtml()))
-                .ForMember(dest => dest.SpeciesStatus, opt => opt.PreCondition(src => src.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie.ToString() && src.SpeciesStatus is not null))
+                .ForMember(dest => dest.SpeciesStatus, opt =>
+                {
+                    opt.PreCondition(src => src.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie.ToString() && src.SpeciesStatus is not null);
+                    opt.MapFrom(x => x.SpeciesStatus == "A" ? AlienSpeciesAssessment2023SpeciesStatus.Abroad.ToString() : x.SpeciesStatus);
+                })
                 .ForMember(dest => dest.CoastLineSections, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CoastLineSections.Any(x => x.Skagerrak || x.None || x.OpenCoastLine)))
                 .ForMember(dest => dest.CurrentBioClimateZones, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.CurrentBioClimateZones.Any(x => x.StrongOceanic || x.ClearOceanic || x.WeakOceanic || x.TransferSection || x.WeakContinental) && src.Terrestrial))
                 .ForMember(dest => dest.ArcticBioClimateZones, opt => opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() && src.ArcticBioClimateZones.Any(x => x.WeakOceanic || x.TransferSection || x.WeakContinental || x.ClearContinental)))

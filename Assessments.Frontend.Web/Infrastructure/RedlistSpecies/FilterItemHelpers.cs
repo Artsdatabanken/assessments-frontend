@@ -294,8 +294,8 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
             },
             new()
             {
-                Name = "Larver",
-                NameShort = "Larver",
+                Name = "Laver",
+                NameShort = "Laver",
             },
             new()
             {

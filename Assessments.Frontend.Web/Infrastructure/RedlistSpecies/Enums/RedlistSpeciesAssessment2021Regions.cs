@@ -61,7 +61,7 @@ namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies.Enums
         [Display(Name = "Jan Mayen")]
         JaM,
 
-        [Display(Name = "Nordsjøen")]
+        [Display(Name = "Skagerrak og Nordsjøen")]
         NoSj,
 
         [Display(Name = "Norskehavet")]

@@ -494,6 +494,10 @@ color: #FFF9F0;
     .darktheme .water-area td:nth-child(2) b {
         color: white;
     }
+
+    .darktheme .adb-header .adb-header-logo .darktheme-logo {
+        margin-left: 20px;
+    }
 }
 
 .darktheme .big-data-table {
@@ -563,6 +567,8 @@ color: #FFF9F0;
 
 .darktheme .adb-header-logo .darktheme-logo {
     display: block;
+    max-width: 230px;
+    margin-left: 30px;
 }
 
 .darktheme .adb-header-logo .default-logo {

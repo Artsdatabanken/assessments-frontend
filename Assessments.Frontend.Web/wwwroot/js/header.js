@@ -63,7 +63,7 @@ function getHeaderMenu() {
                         constole.error('unable to add header menu');
                     }
 
-                    for (let i in apimenus) {
+                    for (let i = 0; i < apimenus.length; i++) {
                         let submenu = apimenus[i];
                         let id = submenu.Values.toString().replace(" ", "");
 
@@ -95,7 +95,16 @@ function getHeaderMenu() {
 
                             const anchorItem = document.createElement('a');
                             anchorItem.classList.add('header-mega-link-element');
-                            anchorItem.href = 'https://artsdatabanken.no' + item.Url;
+
+                            if (i == 0) {
+                                anchorItem.href = 'https://artsdatabanken.no' + item.Url;
+                            } else {
+                                if (item.Records[0]?.Values[0]?.indexOf('artsdatabanken.no') != -1) {
+                                    anchorItem.href = item.Records[0].Values[0];
+                                } else {
+                                    anchorItem.href = item.Records[1].Values[0];
+                                }
+                            }
 
                             const anchorItemContent = document.createElement('div');
                             anchorItemContent.classList.add('header-mega-link-text');
@@ -139,7 +148,6 @@ function getHeaderMenu() {
                         } else {
                             dropDown.style.display = 'none';
                         }
-                        console.log('hei', dropDown.style.display)
                     });
                 } catch (err) {
                     console.error("failed at headermenu", err)

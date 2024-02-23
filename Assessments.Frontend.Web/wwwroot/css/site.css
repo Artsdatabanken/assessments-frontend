@@ -256,7 +256,7 @@ option {
         right: 10px;
         left: auto;
         top: -30px;
-        z-index: 2;
+        z-index: 13;
         height: 10px;
     }
 
@@ -455,8 +455,8 @@ option {
     }
 
     .sidebarmenu {
-        max-width: 200px;
-        width:200px;
+        max-width: 100%;
+        width: 100%;
         height: auto;
         padding: 0;
         top: 0;

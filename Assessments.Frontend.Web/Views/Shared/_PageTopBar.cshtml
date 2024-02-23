@@ -1,15 +1,30 @@
-﻿<header class="header">
-    <div class="width-adjuster">
-        <a href="https://artsdatabanken.no" class="header-logo">
-            <img class="default-logo" alt="Artsdatabanken" src="https://design.artsdatabanken.no/icons/adb-logo/Artsdatabanken_Logo-CMYK-H-Colour@2x.png">
-            <img class="darktheme-logo" alt="Artsdatabanken" src="https://mobil.artsobservasjoner.no/assets/logo/Artsdatabanken_Logo_White.svg">
-        </a>
-        <button id="navbar-mobile" class='material-icons'>menu</button>
-        
+﻿<header class="adb-header">
+    <a href="https://artsdatabanken.no" class="adb-header-logo">
+        <img class="default-logo" alt="Artsdatabanken-logo" src="https://design.artsdatabanken.no/icons/adb-logo/Artsdatabanken_Logo-CMYK-H-Colour@2x.png">
+        <img class="darktheme-logo" alt="Artsdatabanken-logo" src="https://mobil.artsobservasjoner.no/assets/logo/Artsdatabanken_Logo_White.svg">
+    </a>
+
+    <div class="header-right-side">
+        <div id="adb_header_search" class="adb-header-search closed">
+            <form action="https://artsdatabanken.no/search/front">
+                <input name="q" type="text" placeholder="Søk her" />
+                <input style="display: none" name="all" value="1" />
+                <button type="submit">
+                    Søk
+                </button>
+            </form>
+        </div>
+        <div class="adb-header-search-mobile">
+            <button id="adb_header_search_mobile" class="open-search-button" onclick="toggleSearch()">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+                <span>Søk</span>
+            </button>
+        </div>
         <div id="theme_elements">
             <button id="themeselectorbutton" class="themeselector menuitems" onclick="expandThemeButtons()">
                 <span class="hideonmobile">Tema </span>
-                <span class="material-icons only_mobile">contrast </span>
                 <span class="material-icons hideonmobile">expand_more</span>
             </button>
             <div id="themeselectordropdown" class="themeselectordropdown dropdown">
@@ -43,7 +58,6 @@
                 </ul>
             </div>
         </div>
-        <nav id="headermenu" class="hide">
-        </nav>
+        <nav class="header-menu-line" id="adb-headermenu"></nav>
     </div>
 </header>

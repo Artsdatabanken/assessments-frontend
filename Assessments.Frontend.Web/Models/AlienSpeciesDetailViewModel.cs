@@ -122,7 +122,7 @@ namespace Assessments.Frontend.Web.Models
                 ScientificName = assessment.ScientificName.ScientificName,
                 ScientificNameId = assessment.ScientificName.ScientificNameId.Value,
                 TaxonRank = assessment.ScientificName.ScientificNameRank, // TODO: get scientificNameRank when it exists in the model
-                SpeciesGroup = assessment.SpeciesGroup,
+                SpeciesGroup = assessment.SpeciesGroup.DisplayName(),
                 SpeciesIsOnBannedList = AlienSpeciesAssessment2023ProfileHelper.AlienSpeciesBanList().Contains(assessment.ScientificName.ScientificNameId.Value)
             };
         }

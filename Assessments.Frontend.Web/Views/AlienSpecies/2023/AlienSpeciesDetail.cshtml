@@ -7,8 +7,7 @@
     var assessment = Model.Assessment;
     ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023";
     var evaluationContextText = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S ? "på Svalbard" : "i Norge";
-    var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
-    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(AllSpeciesGroups, assessment.SpeciesGroup.DisplayName());
+    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(assessment.SpeciesGroup.DisplayName());
     var speciesGroupImageUrl = speciesGroup?.ImageUrl;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()

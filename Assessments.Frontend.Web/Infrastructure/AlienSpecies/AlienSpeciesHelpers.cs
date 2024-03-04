@@ -10,8 +10,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class AlienSpeciesHelpers
     {
-        public static FilterItem GetSpeciesGroup(FilterAndMetaData speciesGroups, string speciesGroupName)
+        public static FilterItem GetSpeciesGroup(string speciesGroupName)
         {
+            var speciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
             foreach (var speciesGroup in speciesGroups.Filters)
             {
                 if (speciesGroup.Name == speciesGroupName)

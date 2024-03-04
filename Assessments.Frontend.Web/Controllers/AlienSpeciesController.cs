@@ -175,7 +175,6 @@ namespace Assessments.Frontend.Web.Controllers
                         item.hit.TaxonCategory == Constants.TaxonCategoriesEn.Form
                         )
                     {
-                        var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
                         var ids = query
                             .Where(x => x.ScientificName.ScientificNameId == item.hit.ScientificNameId)
                             .Select(x => new
@@ -184,7 +183,7 @@ namespace Assessments.Frontend.Web.Controllers
                                 area = x.EvaluationContext,
                                 category = x.Category,
                                 speciesGroup = x.SpeciesGroup,
-                                speciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(AllSpeciesGroups, x.SpeciesGroup.DisplayName()).ImageUrl,
+                                speciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(x.SpeciesGroup.DisplayName()).ImageUrl,
                                 scientificName = x.ScientificName.ScientificName
                             })
                             .ToArray();

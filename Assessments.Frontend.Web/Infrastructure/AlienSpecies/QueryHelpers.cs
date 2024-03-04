@@ -5,7 +5,6 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Assessments.Frontend.Web.Infrastructure.AlienSpecies.SpeciesStatus;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -56,7 +55,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.Where(x => x.RegionOccurrences.Any(y => parameters.Regions.Contains(y.Region.ToString()) && (y.IsAssumedInFuture || y.IsAssumedToday || y.IsKnown)));
 
             if (parameters.SpeciesGroups.Any())
-                query = query.Where(x => parameters.SpeciesGroups.Any(y => y == x.SpeciesGroup.ToString()));
+                query = ApplySpeciesGroups(parameters.SpeciesGroups, query);
 
             if (parameters.SpreadWays.Any())
                 query = ApplySpreadWays(parameters.SpreadWays, query);
@@ -327,6 +326,27 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     newQuery = newQuery.Concat(assessments);
             }
             return newQuery.Distinct();
+        }
+
+        private static IQueryable<AlienSpeciesAssessment2023> ApplySpeciesGroups(string[] speciesGroupFilters, IQueryable<AlienSpeciesAssessment2023> query)
+        {
+            var newQuery = Enumerable.Empty<AlienSpeciesAssessment2023>().AsQueryable();
+
+            foreach(var filter in speciesGroupFilters)
+            {
+                // the trhee letter strings represents collections of species groups 
+                newQuery =  newQuery.Concat(filter switch
+                {
+                    "skd" => query.Where(x => x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Ascidiacea || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Tunicata),
+                    "smb" => query.Where(x => x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Ectoprocta || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Entoprocta),
+                    "smo" => query.Where(x => x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Bryophyta || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Marchantiophyta),
+                    "smf" => query.Where(x => x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Myriapoda || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Chilopoda || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Diplopoda),
+                    "skp" => query.Where(x => x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Magnoliophyta || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Pinophyta || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Pteridophyta),
+                    _ => query.Where(x => speciesGroupFilters.Any(y => y == x.SpeciesGroup.ToString()))
+                });
+            }
+
+            return newQuery;
         }
     }
 }

@@ -342,7 +342,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     "smo" => query.Where(x => x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Bryophyta || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Marchantiophyta),
                     "smf" => query.Where(x => x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Myriapoda || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Chilopoda || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Diplopoda),
                     "skp" => query.Where(x => x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Magnoliophyta || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Pinophyta || x.SpeciesGroup == AlienSpeciesAssessment2023SpeciesGroups.Pteridophyta),
-                    _ => query.Where(x => speciesGroupFilters.Any(y => y == x.SpeciesGroup.ToString()))
+                    _ => query.Where(x => filter == x.SpeciesGroup.ToString())
                 });
             }
 

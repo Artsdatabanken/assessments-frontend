@@ -56,7 +56,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 query = query.Where(x => x.RegionOccurrences.Any(y => parameters.Regions.Contains(y.Region.ToString()) && (y.IsAssumedInFuture || y.IsAssumedToday || y.IsKnown)));
 
             if (parameters.SpeciesGroups.Any())
-                query = query.Where(x => parameters.SpeciesGroups.Any(y => AlienSpeciesHelpers.GetSpeciesGroupByShortName(y) == x.SpeciesGroup.DisplayName()));
+                query = query.Where(x => parameters.SpeciesGroups.Any(y => y == x.SpeciesGroup.ToString()));
 
             if (parameters.SpreadWays.Any())
                 query = ApplySpreadWays(parameters.SpreadWays, query);

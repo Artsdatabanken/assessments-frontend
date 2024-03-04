@@ -34,32 +34,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return null;
         }
 
-        public static string GetSpeciesGroupByShortName(string shortName)
-        {
-            var speciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups().Filters;
-
-            foreach (var species in speciesGroups)
-            {
-                FilterItem speciesGroup = species;
-                if (speciesGroup.NameShort == shortName)
-                {
-                    return speciesGroup.Name;
-                }
-
-                if (speciesGroup.SubGroup != null)
-                {
-                    foreach (var subGroup in species.SubGroup.Filters)
-                    {
-                        if (subGroup.NameShort == shortName)
-                        {
-                            return subGroup.Name;
-                        }
-                    }
-                }
-            }
-            return string.Empty;
-        }
-
         public static string CriteriaDescription(AlienSpeciesAssessment2023CriteriaLetter letter, int value)
         {
             var description = string.Empty;

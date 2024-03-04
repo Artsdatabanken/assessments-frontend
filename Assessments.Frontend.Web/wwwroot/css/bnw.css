@@ -4,7 +4,6 @@
     color: #FFF9F0;
 }
 
-
 /* HIGH CONTRAST THEME */
 .highcontrast .RE,
 .highcontrast .CR,
@@ -495,6 +494,10 @@ color: #FFF9F0;
     .darktheme .water-area td:nth-child(2) b {
         color: white;
     }
+
+    .darktheme .adb-header .adb-header-logo .darktheme-logo {
+        margin-left: 20px;
+    }
 }
 
 .darktheme .big-data-table {
@@ -528,7 +531,7 @@ color: #FFF9F0;
 .darktheme .top,
 .darktheme .center,
 .darktheme .bottom,
-.darktheme .header {
+.darktheme .adb-header {
     background: #262f31;
     color: #faf1e4;
     border-color: #faf1e4;
@@ -556,4 +559,30 @@ color: #FFF9F0;
 
 .darktheme .sidebar_image_info img {
     background: #d9d9d9;
+}
+
+.adb-header-logo .darktheme-logo {
+    display: none;
+}
+
+.darktheme .adb-header-logo .darktheme-logo {
+    display: block;
+    max-width: 230px;
+    margin-left: 30px;
+}
+
+.darktheme .adb-header-logo .default-logo {
+    display: none;
+}
+
+.darktheme #adb_header_search {
+    background: #262f31;
+}
+
+.darktheme .adb-footer,
+.darktheme .adb-footer .top .center,
+.darktheme .adb-footer .middle .center,
+.darktheme .adb-footer .middle .some-container {
+    background: #262f31;
+    border-color: #faf1e4;
 }

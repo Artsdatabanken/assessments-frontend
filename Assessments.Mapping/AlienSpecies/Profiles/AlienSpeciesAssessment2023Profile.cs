@@ -246,6 +246,8 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.PreCondition(src => src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AlienSpecie.ToString() || src.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien.ToString());
                     opt.MapFrom(src => src.ArtskartManuellKommentar.StripUnwantedHtml());
                 })
+                .ForMember(dest => dest.ReasonForChangeOfCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetReasonForChangeOfCategory(src.ReasonForChangeOfCategory)))
+                
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 
             CreateMap<FA4.PreviousAssessment, AlienSpeciesAssessment2023PreviousAssessment>(MemberList.None);

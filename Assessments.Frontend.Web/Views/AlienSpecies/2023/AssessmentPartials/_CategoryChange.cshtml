@@ -13,11 +13,6 @@
     var showSameAs2018 = !isNr && sameAs2018;
     var category2018WithName = category2018 != null ? $"<i>{category2018.DisplayName().ToLower()}</i> {category2018}" : string.Empty;
     var category2023WithName = $"<i>{Model.Assessment.Category.DisplayName().ToLower()}</i> {Model.Assessment.Category}";
-    var showNewKnowledge = new[] { "realChange", "newInformation" }.Any(x => Model.Assessment.ReasonForChangeOfCategory.Contains(x));
-    var showNewInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("newInterpretation");
-    var showChangedCriteria = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteria");
-    var showChangedCriteriaInterpretation = Model.Assessment.ReasonForChangeOfCategory.Contains("changedCriteriaInterpretation");
-    var showChangedStatus = Model.Assessment.ReasonForChangeOfCategory.Contains("changedStatus");
     var showReasonsForChangeDescription = (!wasNr2018 && !showSameAs2018 && !string.IsNullOrEmpty(Model.Assessment.ReasonsForChangeOfCategoryDescription) && false); // this is disabled as for now.
 }
 
@@ -35,11 +30,10 @@
     <div is-visible="!showNotAssessed2018 && !showSameAs2018">
         <p>Kategorien for denne arten er endret fra @Html.Raw(category2018WithName) til @Html.Raw(category2023WithName) siden Fremmedartslista 2018 (forrige revisjon). Dette skyldes:</p>
         <ul>
-            <li is-visible="showNewKnowledge">Ny kunnskap</li>
-            <li is-visible="showNewInterpretation">Ny tolkning av tidligere data</li>
-            <li is-visible="showChangedCriteria">Endrede avgrensninger eller retningslinjer</li>
-            <li is-visible="showChangedCriteriaInterpretation">Endret tolkning av retningslinjer</li>
-            <li is-visible="showChangedStatus">Endret status (inkl. taksonomi, til stedegen)</li>
+            @foreach (var variation in Model.Assessment.ReasonForChangeOfCategory)
+            {
+                <li>@variation.DisplayName()</li>
+            }
         </ul>
         <br>
     </div>

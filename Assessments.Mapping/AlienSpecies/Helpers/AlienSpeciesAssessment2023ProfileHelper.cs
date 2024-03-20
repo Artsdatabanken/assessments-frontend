@@ -296,7 +296,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             return climateDoc.StripUnwantedHtml();
         }
 
-        internal static string GetSpeciesGroup(string taxonHierarchy)
+        internal static AlienSpeciesAssessment2023SpeciesGroups GetSpeciesGroup(string taxonHierarchy)
         {
             // Reversing the list to get a match as low as possible in the taxon hierarchy.
             var scientificNames = taxonHierarchy.Split("/").Reverse();
@@ -304,10 +304,10 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             {
                 if (Enum.TryParse(name, out AlienSpeciesAssessment2023SpeciesGroups speciesGroup))
                 {
-                    return speciesGroup.DisplayName();
+                    return speciesGroup;
                 }
             }
-            return String.Empty;
+            return AlienSpeciesAssessment2023SpeciesGroups.Unknown;
         }
 
         internal static int GetTaxonRank(string taxonRank)
@@ -984,6 +984,36 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                 "V\u00E5tmarkssystemer" => AlienSpeciesAssessment2023MajorTypeGroup.WetlandSystems,
                 _ => AlienSpeciesAssessment2023MajorTypeGroup.Unknown,
             };
+        }
+
+        internal static List<AlienSpeciesAssessment2023ReasonForChangeOfCategory> GetReasonForChangeOfCategory(List<string> reasonForChangeOfCategory)
+        {
+            var reasons = new List<AlienSpeciesAssessment2023ReasonForChangeOfCategory>();
+
+            if (reasonForChangeOfCategory is null || reasonForChangeOfCategory.Count == 0)
+            {
+                return reasons;
+            }
+
+            if (new[] { "realChange", "newInformation" }.All(y => reasonForChangeOfCategory.Contains(y)))
+            {
+                reasonForChangeOfCategory.RemoveAll(x => ((string)x) == "newInformation");
+            }
+
+            foreach (var reason in reasonForChangeOfCategory)
+            {
+               var oneReason = reason switch
+                {
+                    "realChange" or "newInformation" => AlienSpeciesAssessment2023ReasonForChangeOfCategory.NewKnowledge,
+                    "newInterpretation" => AlienSpeciesAssessment2023ReasonForChangeOfCategory.NewInterpretation,
+                    "changedCriteria" => AlienSpeciesAssessment2023ReasonForChangeOfCategory.ChangedGuidelines,
+                    "changedCriteriaInterpretation" => AlienSpeciesAssessment2023ReasonForChangeOfCategory.ChangedGuidelinesInterpretation,
+                    _ => AlienSpeciesAssessment2023ReasonForChangeOfCategory.ChangedStatus
+                    
+                 };
+                reasons.Add(oneReason);
+            }
+            return reasons;
         }
     }
 }

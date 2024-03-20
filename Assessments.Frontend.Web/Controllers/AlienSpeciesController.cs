@@ -183,7 +183,7 @@ namespace Assessments.Frontend.Web.Controllers
                                 area = x.EvaluationContext,
                                 category = x.Category,
                                 speciesGroup = x.SpeciesGroup,
-                                speciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, x.SpeciesGroup).ImageUrl,
+                                speciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(x.SpeciesGroup.DisplayName()).ImageUrl,
                                 scientificName = x.ScientificName.ScientificName
                             })
                             .ToArray();

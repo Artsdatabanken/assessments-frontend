@@ -1,12 +1,11 @@
-﻿using Assessments.Mapping.AlienSpecies.Model;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
 using Assessments.Shared.Resources.Enums.AlienSpecies;
+using CsvHelper.Configuration.Attributes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Assessments.Frontend.Web.Infrastructure;
+using static Assessments.Frontend.Web.Infrastructure.AlienSpecies.DeciciveCriteria;
 using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
@@ -85,22 +84,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public enum CategoryChangeEnum
     {
-        // ReSharper disable InconsistentNaming
-        [Display(Name = "Ny kunnskap")]
-        ccnk,
-
-        [Display(Name = "Ny tolkning av tidligere data")]
-        ccnt,
-
-        [Display(Name = "Endrede avgrensninger eller retningslinjer")]
-        ccea,
-
-        [Display(Name = "Endret tolkning av retningslinjer")]
-        ccet,
-
-        [Display(Name = "Endret status (taksonomi, til/fra stedegen)")]
-        cces,
-
         [Display(Name = "Vurdert for første gang")]
         ccvf,
 
@@ -113,36 +96,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class CategoryChange
     {
-        private static readonly FilterItem[] DifferFrom2018 =
+        private static FilterAndMetaData DifferFrom2018() =>
+        new()
         {
-            new()
-            {
-                Name = CategoryChangeEnum.ccnk.DisplayName(),
-                NameShort = CategoryChangeEnum.ccnk.ToString()
-            },
-            new()
-            {
-                Name = CategoryChangeEnum.ccnt.DisplayName(),
-                NameShort = CategoryChangeEnum.ccnt.ToString()
-            },
-            new()
-            {
-                Name = CategoryChangeEnum.ccea.DisplayName(),
-                NameShort = CategoryChangeEnum.ccea.ToString()
-            },
-            new()
-            {
-                Name = CategoryChangeEnum.ccet.DisplayName(),
-                NameShort = CategoryChangeEnum.ccet.ToString()
-            },
-            new()
-            {
-                Name = CategoryChangeEnum.cces.DisplayName(),
-                NameShort = CategoryChangeEnum.cces.ToString()
-            }
+            Filters = Enum.GetValues<AlienSpeciesAssessment2023ReasonForChangeOfCategory>()
+                    .Select(x => new FilterItem
+                    {
+                        Name = x.DisplayName(),
+                        NameShort = x.ToString()
+                    }).ToArray(),
+            FilterDescription = ""
         };
 
-        public static readonly FilterItem[] AlienSpecies2023CategoryChangedFilters =
+        public readonly FilterItem[] AlienSpecies2023CategoryChangedFilters =
         {
             new()
             {
@@ -153,11 +119,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = CategoryChangeEnum.ccke.DisplayName(),
                 NameShort = CategoryChangeEnum.ccke.ToString(),
-                SubGroup = new()
-                {
-                    Filters = DifferFrom2018,
-                    FilterDescription = ""
-                }
+                SubGroup = DifferFrom2018()
             },
             new()
             {
@@ -166,13 +128,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
         };
 
-        public static readonly FilterAndMetaData AlienSpecies2023CategoryChanged = new()
-        {
-            Filters = AlienSpecies2023CategoryChangedFilters,
-            FilterDescription = "",
-            FilterButtonName = "kategoriendringsfiltre",
-            FilterButtonText = "Endring i risikokategori"
-        };
+        public FilterAndMetaData AlienSpecies2023CategoryChanged() => 
+            new()
+            {
+                Filters = AlienSpecies2023CategoryChangedFilters,
+                FilterDescription = "",
+                FilterButtonName = "kategoriendringsfiltre",
+                FilterButtonText = "Endring i risikokategori"
+            };
     }
 
     public class DeciciveCriteria
@@ -934,266 +897,189 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class SpeciesGroups
     {
-        // All NameShort for speciesGroup starts with 's' to not confuse them with other short names. 
-        private static readonly FilterItem[] AlienSpecies2023Algae =
+        private static FilterAndMetaData AlienSpecies2023Algae() =>
+            new()
+            { 
+                Filters = 
+                Enum.GetValues<AlienSpeciesAssessment2023SpeciesGroups>()
+                .Where(x => x is AlienSpeciesAssessment2023SpeciesGroups.Phaeophyceae or AlienSpeciesAssessment2023SpeciesGroups.Chlorophyta or AlienSpeciesAssessment2023SpeciesGroups.Rhodophyta)
+                .Select(x => new FilterItem
+                {
+                    NameShort = x.ToString(),
+                    Name = x.DisplayName(),
+                    Description = nameof(x),
+                    InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
+                    ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
+                }).OrderBy(x => x.Name).ToArray(),
+                FilterDescription = ""
+            };
+
+        //Norwegian names used in this subset-enum to be able to use values in ImageUrl under AlienSpecies2023Insects(). 
+        public enum InsectSpeciesGroup
+            {
+                Biller = AlienSpeciesAssessment2023SpeciesGroups.Coleoptera, 
+                Børstehale =  AlienSpeciesAssessment2023SpeciesGroups.Zygentoma,
+                LusogLopper =    AlienSpeciesAssessment2023SpeciesGroups.Phthiraptera,
+                Nebbmunner =    AlienSpeciesAssessment2023SpeciesGroups.Hemiptera,
+                Sommerfugler = AlienSpeciesAssessment2023SpeciesGroups.Lepidoptera,
+                Støvlus = AlienSpeciesAssessment2023SpeciesGroups.Psocoptera,
+                Tovinger = AlienSpeciesAssessment2023SpeciesGroups.Diptera,
+                Trips = AlienSpeciesAssessment2023SpeciesGroups.Thysanoptera,
+                Vepser = AlienSpeciesAssessment2023SpeciesGroups.Hymenoptera
+            };
+
+    private static FilterAndMetaData AlienSpecies2023Insects() =>
+            new()
+            {
+                Filters =
+                Enum.GetValues<InsectSpeciesGroup>()
+                .Select(x => new FilterItem
+                {
+                    NameShort = ((AlienSpeciesAssessment2023SpeciesGroups)x).ToString(),
+                    Name = ((AlienSpeciesAssessment2023SpeciesGroups)x).DisplayName(),
+                    Description = nameof(x),
+                    InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/" + x.ToString().ToLower(),
+                    ImageUrl = "https://design.artsdatabanken.no/icons/" + x.ToString() + ".svg",
+                }).OrderBy(x => x.Name).ToArray(),
+                FilterDescription = ""
+            };
+
+        public enum CrustaceanSpeciesGroup
         {
-            new()
-            {
-                Name = "Brunalger",
-                NameShort = "sbr",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Phaeophyceae)
-            },
-            new()
-            {
-                Name = "Grønnalger",
-                NameShort = "sga",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Chlorophyta)
-            },
-            new()
-            {
-                Name = "Rødalger",
-                NameShort = "sra",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Rhodophyta)
-            }
+            Malacostraca = AlienSpeciesAssessment2023SpeciesGroups.Malacostraca,
+            Branchiopoda = AlienSpeciesAssessment2023SpeciesGroups.Branchiopoda,
+            Copepoda = AlienSpeciesAssessment2023SpeciesGroups.Copepoda,
+            Thecostraca = AlienSpeciesAssessment2023SpeciesGroups.Thecostraca
         };
 
-        private static readonly FilterItem[] AlienSpecies2023Insects =
-        {
+        private static FilterAndMetaData AlienSpecies2023Crustacean() =>
             new()
             {
-                Name = "Biller",
-                NameShort = "sbi",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/biller",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Biller.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Coleoptera)
-            },
-            new()
-            {
-                Name = "Børstehaler",
-                NameShort = "sbo",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/b%c3%b8rstehaler",
-                ImageUrl = "https://design.artsdatabanken.no/icons/B%c3%b8rstehale.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Zygentoma)
-            },
-            new()
-            {
-                Name = "Lus",
-                NameShort = "sll",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/lusoglopper",
-                ImageUrl = "https://design.artsdatabanken.no/icons/LusogLopper.svg",
-                Description = $"{nameof(AlienSpeciesAssessment2023SpeciesGroups.Phthiraptera)}"
-            },
-            new()
-            {
-                Name = "Nebbmunner",
-                NameShort = "sne",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/nebbmunner",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Nebbmunner.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Hemiptera)
-            },
-            new()
-            {
-                Name = "Sommerfugler",
-                NameShort = "ssf",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/sommerfugler",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Sommerfugler.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Lepidoptera)
-            },
-            new()
-            {
-                Name = "Støvlus",
-                NameShort = "ssl",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/st%c3%b8vlus",
-                ImageUrl = "https://design.artsdatabanken.no/icons/St%c3%b8vlus.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Psocoptera)
-            },
-            new()
-            {
-                Name = "Tovinger",
-                NameShort = "sto",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/tovinger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Tovinger.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Diptera)
-            },
-            new()
-            {
-                Name = "Trips",
-                NameShort = "str",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/trips",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Trips.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Thysanoptera)
-            },
-            new()
-            {
-                Name = "Vepser",
-                NameShort = "sve",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/vepser",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Vepser.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Hymenoptera)
-            }
-        };
+                Filters =
+                Enum.GetValues<CrustaceanSpeciesGroup>()
+                .Select(x => new FilterItem
+                {
+                    NameShort = x.ToString(),
+                    Name = ((AlienSpeciesAssessment2023SpeciesGroups)x).DisplayName(),
+                    Description = nameof(x),
+                    InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/" + x.ToString().ToLower(), //this url will probably never work (it use scientific name), but none of the urls with Norwegian names worked either as the pages don't exist for these species.. 
+                    ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
+                }).OrderBy(x => x.Name).ToArray(),
+                FilterDescription = ""
+            };
 
-        public static readonly FilterItem[] AlienSpecies2023Crustacean =
+        
+        public readonly FilterItem[] AlienSpecies2023SpeciesGroupsFilters =
         {
             new()
             {
-                Name = "Storkrepser",
-                NameShort = "sst",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/storkrepser",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Malacostraca)
-            },
-            new()
-            {
-                Name = "Bladfotinger",
-                NameShort = "sbf",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bladfotinger",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Branchiopoda)
-            },
-            new()
-            {
-                Name = "Hoppekreps",
-                NameShort = "sho",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/copepoda",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Copepoda)
-            },
-            new()
-            {
-                Name = "Rankefotinger",
-                NameShort = "srf",
-                InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/thecostraca",
-                ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
-                Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Thecostraca)
-            }
-        };
-
-        public static readonly FilterItem[] AlienSpecies2023SpeciesGroupsFilters =
-        {
-            new()
-            {
-                Name = "Alger",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Rhodophyta_Chlorophyta_Phaeophyceae.DisplayName(),
                 NameShort = "sal",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/alger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Alger.svg",
                 Description = "Rhodophyta, Chlorophyta, Phaeophyceae",
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023Algae,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023Algae()
             },
             new()
             {
-                Name = "Amfibier",
-                NameShort = "sam",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Amphibia.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Amphibia.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/amfibier",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Amfibier.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Amphibia)
             },
             new()
             {
-                Name = "Bakterier",
-                NameShort = "sba",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Bacteria.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Bacteria.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bakterier",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bakterier.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Bacteria)
             },
             new()
             {
-                Name = "Bløtdyr",
-                NameShort = "sbl",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Mollusca.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Mollusca.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/bl%c3%b8tdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Bl%c3%b8tdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Mollusca)
             },
             new()
             {
-                Name = "Edderkoppdyr",
-                NameShort = "sed",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Arachnida.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Arachnida.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/edderkoppdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Edderkoppdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Arachnida)
             },
             new()
             {
-                Name = "Eggsporesopper",
-                NameShort = "seg",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Oomycota.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Oomycota.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/eggsporesopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Eggsporesopper.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Oomycota)
             },
             new()
             {
-                Name = "Fisker",
-                NameShort = "sfi",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Actinopterygii.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Actinopterygii.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/fisker",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Fisker.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Actinopterygii)
             },
             new()
             {
-                Name = "Flatormer",
-                NameShort = "sfl",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Platyhelminthes.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Platyhelminthes.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/flatormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Flatorm.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Platyhelminthes)
             },
             new()
             {
-                Name = "Fugler",
-                NameShort = "sfu",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Aves.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Aves.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/fugler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Fugler.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Aves)
             },
             new()
             {
-                Name = "Havedderkopper",
-                NameShort = "sha",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Pycnogonida.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Pycnogonida.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/havedderkopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Havedderkopper.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Pycnogonida)
             },
             new()
             {
-                Name = "Hjuldyr",
-                NameShort = "shj",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Rotifera.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Rotifera.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/hjuldyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Hjuldyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Rotifera)
             },
             new()
             {
-                Name = "Insekter",
-                NameShort = "sin",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Insecta.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Insecta.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/insekter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Insekter.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Insecta),
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023Insects,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023Insects()
             },
             new()
             {
-                Name = "Kammaneter",
-                NameShort = "ska",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Ctenophora.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Ctenophora.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Stormaneter.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Ctenophora)
             },
             new()
             {
-                Name = "Kappedyr",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Ascidiacea.DisplayName(),
                 NameShort = "skd",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/kammaneter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Sekkdyr.svg",
@@ -1201,7 +1087,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Planter",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Magnoliophyta.DisplayName(),
                 NameShort = "skp",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/karplanter",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Karplanter.svg",
@@ -1209,28 +1095,24 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Krepsdyr",
-                NameShort = "skr",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Crustacea.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Crustacea.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/krepsdyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Krepsdyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Crustacea),
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023Crustacean,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023Crustacean()
             },
             new()
             {
-                Name = "Leddormer",
-                NameShort = "sle",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Annelida.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Annelida.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/leddormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Leddormer.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Annelida)
             },
             new()
             {
-                Name = "Mangefotinger",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Myriapoda.DisplayName(),
                 NameShort = "smf",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mangefotinger",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mangefotinger.svg",
@@ -1238,7 +1120,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Mosdyr og begerormer",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Ectoprocta.DisplayName(),
                 NameShort = "smb",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/mosdyrogbegerormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Mosdyr.svg",
@@ -1246,7 +1128,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Moser",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Bryophyta.DisplayName(),
                 NameShort = "smo",
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/moser",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Moser.svg",
@@ -1254,69 +1136,70 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             },
             new()
             {
-                Name = "Nesledyr",
-                NameShort = "snd",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Cnidaria.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Cnidaria.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/nesledyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Nesledyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Cnidaria)
             },
             new()
             {
-                Name = "Pattedyr",
-                NameShort = "spd",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Mammalia.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Mammalia.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pattedyr",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Pattedyr.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Mammalia)
             },
             new()
             {
-                Name = "Pigghuder",
-                NameShort = "spi",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Echinodermata.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Echinodermata.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/pigghuder",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Pigghuder.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Echinodermata)
             },
             new()
             {
-                Name = "Reptiler",
-                NameShort = "sre",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Reptilia.DisplayName(), 
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Reptilia.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/reptiler",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Reptiler.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Reptilia)
             },
             new()
             {
-                Name = "Rundormer",
-                NameShort = "sru",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Nematoda.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Nematoda.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/rundormer",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Rundormer.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Nematoda)
             },
             new()
             {
-                Name = "Svamper",
-                NameShort = "ssv",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Porifera.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Porifera.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/svamper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Svamper.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Porifera)
             },
             new()
             {
-                Name = "Sopper",
-                NameShort = "sso",
+                Name = AlienSpeciesAssessment2023SpeciesGroups.Fungi.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023SpeciesGroups.Fungi.ToString(),
                 InfoUrl = "https://artsdatabanken.no/fremmedartsliste2023/Artsgruppene/sopper",
                 ImageUrl = "https://design.artsdatabanken.no/icons/Sopper.svg",
                 Description = nameof(AlienSpeciesAssessment2023SpeciesGroups.Fungi)
             }
         };
 
-        public static readonly FilterAndMetaData AlienSpecies2023SpeciesGroups = new()
-        {
-            Filters = AlienSpecies2023SpeciesGroupsFilters,
-            FilterDescription = "",
-            FilterButtonName = "artsgruppefiltre",
-            FilterButtonText = "Artsgrupper"
-        };
+        public FilterAndMetaData AlienSpecies2023SpeciesGroups() => 
+            new()
+            {
+                Filters = AlienSpecies2023SpeciesGroupsFilters.OrderBy(x => x.Name).ToArray(),
+                FilterDescription = "",
+                FilterButtonName = "artsgruppefiltre",
+                FilterButtonText = "Artsgrupper"
+            };
     }
 
     public class Regions
@@ -1411,36 +1294,21 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class SpeciesStatus
     {
-        public static readonly FilterItem[] AlienSpecies2023Doorknockers =
-        {
+        public static FilterAndMetaData AlienSpecies2023Doorknockers() =>
             new()
             {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.C1.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.C1)
-            },
-            new()
-            {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.C0.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.C0)
-            },
-            new()
-            {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.B2.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.B2)
-            },
-            new()
-            {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.B1.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.B1)
-            },
-            new()
-            {
-                Name = AlienSpeciesAssessment2023SpeciesStatus.Abroad.DisplayName(),
-                NameShort = nameof(AlienSpeciesAssessment2023SpeciesStatus.Abroad)
-            }
-        };
+                Filters =
+                    Enum.GetValues<AlienSpeciesAssessment2023SpeciesStatus>().Where(x => x is not (AlienSpeciesAssessment2023SpeciesStatus.C3 or AlienSpeciesAssessment2023SpeciesStatus.C2 or AlienSpeciesAssessment2023SpeciesStatus.NotIndicated))
+                    .Select(x => new FilterItem
+                    {
+                        Name = x.DisplayName(),
+                        NameShort = x.ToString()
+                    }).Reverse().ToArray()
+                ,
+                FilterDescription = ""
+            };
 
-        public static readonly FilterItem[] AlienSpecies2023SpeciesStatusFilters =
+        public readonly FilterItem[] AlienSpecies2023SpeciesStatusFilters =
         {
             new()
             {
@@ -1456,21 +1324,18 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 Name = "Dørstokkarter",
                 NameShort = "eds",
-                SubGroup = new()
-                {
-                    Filters = AlienSpecies2023Doorknockers,
-                    FilterDescription = ""
-                }
+                SubGroup = AlienSpecies2023Doorknockers()
             }
         };
 
-        public static readonly FilterAndMetaData AlienSpecies2023SpeciesStatus = new()
-        {
-            Filters = AlienSpecies2023SpeciesStatusFilters,
-            FilterDescription = "",
-            FilterButtonName = "etableringsklassefiltre",
-            FilterButtonText = "Etableringsstatus i dag"
-        };
+        public FilterAndMetaData AlienSpecies2023SpeciesStatus() => 
+            new()
+            {
+                Filters = AlienSpecies2023SpeciesStatusFilters,
+                FilterDescription = "",
+                FilterButtonName = "etableringsklassefiltre",
+                FilterButtonText = "Etableringsstatus i dag"
+            };
     }
 
     public class NotAssessed

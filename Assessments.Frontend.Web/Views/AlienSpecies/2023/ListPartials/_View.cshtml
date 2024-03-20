@@ -11,8 +11,8 @@
         IsDoorKnocker = x.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.DoorKnocker,
         HasEffectWithoutReproduction = x.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.EffectWithoutReproduction,
         ScientificNameFormatted = x.ScientificName.ScientificNameFormatted,
-        SpeciesGroup = x.SpeciesGroup,
-        SpeciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, x.SpeciesGroup)?.ImageUrl,
+        SpeciesGroup = x.SpeciesGroup.DisplayName(),
+                SpeciesGroupIconUrl = AlienSpeciesHelpers.GetSpeciesGroup(x.SpeciesGroup.DisplayName())?.ImageUrl,
         VernacularName = x.VernacularName
     });
 

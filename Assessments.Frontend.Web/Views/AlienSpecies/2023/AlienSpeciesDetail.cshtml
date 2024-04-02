@@ -40,7 +40,8 @@
             SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene",
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         },
-        SpeciesStatus = assessment.SpeciesStatus
+        SpeciesStatus = assessment.SpeciesStatus,
+        ScientificName = assessment.ScientificName
     };
 
     var citationViewModel = new CitationForAssessmentViewModel
@@ -77,7 +78,8 @@
         ParentAssessmentId = assessment.ParentAssessmentId,
         SpeciesStatus = assessment.SpeciesStatus,
         Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
-        TaxonRank = assessment.ScientificName.ScientificNameRank
+        TaxonRank = assessment.ScientificName.ScientificNameRank,
+        ScientificName = assessment.ScientificName.ScientificName
     };
 
     var isNr = assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
@@ -170,7 +172,7 @@
             new ()
             {
                 ElementId = nameof(Constants.HeadingsNo.KnowMore),
-                Title = $"{Constants.HeadingsNo.KnowMore} {Helpers.FixSpeciesLevel("{art}en", assessment.ScientificName.ScientificNameRank)}",
+                Title = $"{Constants.HeadingsNo.KnowMore} {Helpers.FixSpeciesLevelWithTranslation("{arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName)}",
                 ShouldShow = showKnowMore
             },
             new ()

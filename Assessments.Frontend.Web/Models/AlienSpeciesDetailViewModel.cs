@@ -52,7 +52,8 @@ namespace Assessments.Frontend.Web.Models
                 Summary = assessment.GeographicalVariationDocumentation,
                 TaxonRank = assessment.ScientificName.ScientificNameRank,
                 UncertaintyEstablishmentTimeDescription = assessment.UncertaintyEstablishmentTimeDescription,
-                UncertaintyStatusDescription = assessment.UncertaintyStatusDescription
+                UncertaintyStatusDescription = assessment.UncertaintyStatusDescription,
+                ScientificName = assessment.ScientificName.ScientificName
             };
 
             PageMenuViewModel = new PageMenuViewModel
@@ -94,6 +95,7 @@ namespace Assessments.Frontend.Web.Models
                 CurrentPresenceComment = assessment.CurrentPresenceComment,
                 IsSvalbard = assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S,
                 NameRank = assessment.ScientificName.ScientificNameRank,
+                ScientificName = assessment.ScientificName.ScientificName,
                 RegionOccurrences = assessment.RegionOccurrences,
                 FreshWaterRegionModel = assessment.FreshWaterRegionModel,
                 RiskAssessmentIntroductionsLow = assessment.IntroductionsLow,

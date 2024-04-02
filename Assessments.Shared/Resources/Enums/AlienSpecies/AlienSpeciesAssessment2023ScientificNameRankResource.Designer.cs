@@ -80,7 +80,34 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ikke inkludert i vurdering på annet taksonomisk nivå.
+        ///   Looks up a localized string similar to Takson.
+        /// </summary>
+        public static string form_description {
+            get {
+                return ResourceManager.GetString("form_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hybrid.
+        /// </summary>
+        public static string hybrid {
+            get {
+                return ResourceManager.GetString("hybrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hybriden.
+        /// </summary>
+        public static string hybrid_description {
+            get {
+                return ResourceManager.GetString("hybrid_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ekskluder taksa inkludert i vurdering på annet taksonomisk nivå.
         /// </summary>
         public static string not_assessed_at_another_rank {
             get {
@@ -98,11 +125,29 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Arten.
+        /// </summary>
+        public static string species_description {
+            get {
+                return ResourceManager.GetString("species_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Underart.
         /// </summary>
         public static string subspecies {
             get {
                 return ResourceManager.GetString("subspecies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Underarten.
+        /// </summary>
+        public static string subspecies_description {
+            get {
+                return ResourceManager.GetString("subspecies_description", resourceCulture);
             }
         }
         
@@ -121,6 +166,15 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         public static string variety {
             get {
                 return ResourceManager.GetString("variety", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Varieteten.
+        /// </summary>
+        public static string variety_description {
+            get {
+                return ResourceManager.GetString("variety_description", resourceCulture);
             }
         }
     }

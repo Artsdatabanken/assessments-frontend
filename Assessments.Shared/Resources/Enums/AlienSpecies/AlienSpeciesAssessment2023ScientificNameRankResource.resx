@@ -113,9 +113,27 @@
     <value>Inkludert i vurdering på annet taksonomisk nivå</value>
   </data>
   <data name="not_assessed_at_another_rank" xml:space="preserve">
-    <value>Ikke inkludert i vurdering på annet taksonomisk nivå</value>
+    <value>Ekskluder taksa inkludert i vurdering på annet taksonomisk nivå</value>
   </data>
   <data name="form" xml:space="preserve">
     <value>Form</value>
+  </data>
+  <data name="hybrid" xml:space="preserve">
+    <value>Hybrid</value>
+  </data>
+  <data name="species_description" xml:space="preserve">
+    <value>Arten</value>
+  </data>
+  <data name="subspecies_description" xml:space="preserve">
+    <value>Underarten</value>
+  </data>
+  <data name="variety_description" xml:space="preserve">
+    <value>Varieteten</value>
+  </data>
+  <data name="form_description" xml:space="preserve">
+    <value>Takson</value>
+  </data>
+  <data name="hybrid_description" xml:space="preserve">
+    <value>Hybriden</value>
   </data>
 </root>

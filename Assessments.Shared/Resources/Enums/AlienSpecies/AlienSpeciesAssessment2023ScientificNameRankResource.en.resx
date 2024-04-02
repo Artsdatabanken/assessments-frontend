@@ -130,12 +130,30 @@
     <value>Taxonomic rank</value>
   </data>
   <data name="not_assessed_at_another_rank" xml:space="preserve">
-    <value>Not included in assessment at another taxonomic rank</value>
+    <value>Exclude taxa included in assessment at another taxonomic rank</value>
   </data>
   <data name="form" xml:space="preserve">
     <value>Form</value>
   </data>
   <data name="assessed_at_another_rank" xml:space="preserve">
     <value>Included in assessment at another taxonomic rank</value>
+  </data>
+  <data name="hybrid" xml:space="preserve">
+    <value>Hybrid</value>
+  </data>
+  <data name="species_description" xml:space="preserve">
+    <value>The species</value>
+  </data>
+  <data name="subspecies_description" xml:space="preserve">
+    <value>The subspecies</value>
+  </data>
+  <data name="variety_description" xml:space="preserve">
+    <value>The variety</value>
+  </data>
+  <data name="form_description" xml:space="preserve">
+    <value>Taxon</value>
+  </data>
+  <data name="hybrid_description" xml:space="preserve">
+    <value>The hybrid</value>
   </data>
 </root>

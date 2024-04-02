@@ -815,84 +815,47 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
     {
         public enum TaxonRankEnum
         {
-            Art = 22,
-            Underart = 23,
-            Varietet = 24,
-            Form = 25,
-
-            [Display(Name = "Hybrid")]
-            tth,
-
-            [Display(Name = "Taksonomisk nivå")]
-            ttn,
-
-            [Display(Name = nameof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource.evaluated_at_another_level), ResourceType = typeof(AlienSpeciesAssessment2023AlienSpeciesCategoryResource))]
-            tva,
-
-            [Display(Name = "Vurderes ikke på et annet taksonomisk nivå")]
-            tvi
+            Species = AlienSpeciesAssessment2023ScientificNameRank.Species,
+            tth = AlienSpeciesAssessment2023ScientificNameRank.tth,
+            SubSpecies = AlienSpeciesAssessment2023ScientificNameRank.SubSpecies,
+            Variety = AlienSpeciesAssessment2023ScientificNameRank.Variety,
+            Form = AlienSpeciesAssessment2023ScientificNameRank.Form
         }
 
-        public static readonly FilterItem[] TaxonRanks2023 =
-        {
+        public static FilterAndMetaData AlienSpeciesTaxonRanks2023() =>
             new()
             {
-                Name = nameof(TaxonRankEnum.Art),
-                NameShort = TaxonRankEnum.Art.GetHashCode().ToString()
-            },
-            new()
-            {
-            Name = TaxonRankEnum.tth.DisplayName(),
-            NameShort = TaxonRankEnum.tth.ToString()
-            },
-            new()
-            {
-                Name = nameof(TaxonRankEnum.Underart),
-                NameShort = TaxonRankEnum.Underart.GetHashCode().ToString()
-            },
-            new()
-            {
-                Name = nameof(TaxonRankEnum.Varietet),
-                NameShort = TaxonRankEnum.Varietet.GetHashCode().ToString()
-            },
-            new()
-            {
-            Name = nameof(TaxonRankEnum.Form),
-            NameShort = TaxonRankEnum.Form.GetHashCode().ToString()
-            },
-        };
+                Filters = Enum.GetValues<TaxonRankEnum>().Select(x => new FilterItem { Name = ((AlienSpeciesAssessment2023ScientificNameRank)x).DisplayName(), NameShort = x.ToString() }).ToArray()
+            };
 
-        public static readonly FilterItem[] AlienSpecies2023TaxonRanksFilters =
+        public readonly FilterItem[] AlienSpecies2023TaxonRanksFilters =
         {
             new()
             {
-                Name = TaxonRankEnum.ttn.DisplayName(),
-                NameShort = TaxonRankEnum.ttn.ToString(),
-                SubGroup = new()
-                {
-                    Filters = TaxonRanks2023,
-                    FilterDescription = ""
-                }
+                Name = AlienSpeciesAssessment2023ScientificNameRank.ttn.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023ScientificNameRank.ttn.ToString(),
+                SubGroup = AlienSpeciesTaxonRanks2023()
             },
             new()
             {
-                Name = TaxonRankEnum.tva.DisplayName(),
-                NameShort = TaxonRankEnum.tva.ToString()
+                Name = AlienSpeciesAssessment2023ScientificNameRank.tva.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023ScientificNameRank.tva.ToString()
             },
             new()
             {
-                Name = TaxonRankEnum.tvi.DisplayName(),
-                NameShort = TaxonRankEnum.tvi.ToString()
+                Name = AlienSpeciesAssessment2023ScientificNameRank.tvi.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023ScientificNameRank.tvi.ToString()
             }
         };
 
-        public static readonly FilterAndMetaData AlienSpecies2023TaxonRanks = new()
-        {
-            Filters = AlienSpecies2023TaxonRanksFilters,
-            FilterDescription = "",
-            FilterButtonName = "'taksonomisk nivå'-filtre",
-            FilterButtonText = "Taksonomi"
-        };
+        public FilterAndMetaData AlienSpecies2023TaxonRanks() => 
+            new()
+            {
+                Filters = AlienSpecies2023TaxonRanksFilters,
+                FilterDescription = "",
+                FilterButtonName = "'taksonomisk nivå'-filtre",
+                FilterButtonText = "Taksonomi"
+            };
     }
 
     public class SpeciesGroups

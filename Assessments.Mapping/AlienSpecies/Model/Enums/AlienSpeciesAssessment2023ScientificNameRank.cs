@@ -31,17 +31,20 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         Genus = 19,
         SubGenus = 20,
         Section = 21,
-        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.species), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.species), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.species_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         Species = 22,
 
-        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.subspecies), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.subspecies), Description =  nameof(AlienSpeciesAssessment2023ScientificNameRankResource.subspecies_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         SubSpecies = 23,
 
-        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.variety), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.variety), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.variety_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         Variety = 24,
 
-        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.form), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.form), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.form_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         Form = 25,
+
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.hybrid), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.hybrid_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        tth,
 
         [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.taxonomic_rank), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         ttn,

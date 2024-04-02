@@ -120,4 +120,7 @@
   <data name="alien-species-list" xml:space="preserve">
     <value>Fremmedartslista</value>
   </data>
+  <data name="to_species_page" xml:space="preserve">
+    <value>Til artssiden</value>
+  </data>
 </root>

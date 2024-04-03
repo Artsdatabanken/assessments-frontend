@@ -110,10 +110,10 @@
     <value>Taksonomisk nivå</value>
   </data>
   <data name="assessed_at_another_rank" xml:space="preserve">
-    <value>Inkludert i vurdering på annet taksonomisk nivå</value>
+    <value>Vis taksa som inngår i vurdering på høyere taksonomisk nivå</value>
   </data>
   <data name="not_assessed_at_another_rank" xml:space="preserve">
-    <value>Ekskluder taksa inkludert i vurdering på annet taksonomisk nivå</value>
+    <value>Ekskluder taksa som inngår i vurdering på høyere taksonomisk nivå</value>
   </data>
   <data name="form" xml:space="preserve">
     <value>Form</value>

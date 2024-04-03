@@ -130,13 +130,13 @@
     <value>Taxonomic rank</value>
   </data>
   <data name="not_assessed_at_another_rank" xml:space="preserve">
-    <value>Exclude taxa included in assessment at another taxonomic rank</value>
+    <value>Exclude taxa included in assessment at higher taxonomic rank</value>
   </data>
   <data name="form" xml:space="preserve">
     <value>Form</value>
   </data>
   <data name="assessed_at_another_rank" xml:space="preserve">
-    <value>Included in assessment at another taxonomic rank</value>
+    <value>Show taxa included in assessment at higher taxonomic rank</value>
   </data>
   <data name="hybrid" xml:space="preserve">
     <value>Hybrid</value>

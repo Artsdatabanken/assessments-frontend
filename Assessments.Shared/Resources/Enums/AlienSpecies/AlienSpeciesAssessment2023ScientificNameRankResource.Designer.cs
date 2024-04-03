@@ -62,7 +62,7 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inkludert i vurdering på annet taksonomisk nivå.
+        ///   Looks up a localized string similar to Vis taksa som inngår i vurdering på høyere taksonomisk nivå.
         /// </summary>
         public static string assessed_at_another_rank {
             get {
@@ -107,7 +107,7 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ekskluder taksa inkludert i vurdering på annet taksonomisk nivå.
+        ///   Looks up a localized string similar to Ekskluder taksa som inngår i vurdering på høyere taksonomisk nivå.
         /// </summary>
         public static string not_assessed_at_another_rank {
             get {

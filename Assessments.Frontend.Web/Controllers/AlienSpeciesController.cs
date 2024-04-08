@@ -75,7 +75,7 @@ namespace Assessments.Frontend.Web.Controllers
             // members by expertgroup
             if (!assessmentExpertGroupMembers.Any())
             {
-                assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup)
+                assessmentExpertGroupMembers = expertGroupMembers.Where(x => x.ExpertGroup == assessment.ExpertGroup).DistinctBy(x => x.FullName)
                     .OrderBy(x => new List<string> { "Leder", "Medlem" }.IndexOf(x.ExpertGroupRole)).ThenBy(x => x.LastName).ToList();
             }
 

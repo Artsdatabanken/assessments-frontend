@@ -77,6 +77,8 @@ namespace Assessments.Transformation
                 if (fa4 == null || AssessmentToBeExcluded(fa4))
                     continue;
 
+                FixImpactCategory(fa4);
+
                 // datasett 
                 fa4.Attachmemnts = assessment.Attachments.Where(x => !x.IsDeleted).Select(x => new Attachment()
                 {
@@ -213,8 +215,8 @@ namespace Assessments.Transformation
         /// <returns></returns>
         private static bool AssessmentToBeExcluded(FA4 fa4)
         {
-            // ekskluderer vurderinger som ligger under horisontskanning eller ikke har kategori
-            if (fa4.HorizonDoScanning || string.IsNullOrEmpty(fa4.Category))
+            // ekskluderer vurderinger som ikke har kategori
+            if (string.IsNullOrEmpty(fa4.Category))
             {
                 Progress.ProgressBar.Tick();
                 return true;
@@ -229,13 +231,6 @@ namespace Assessments.Transformation
                 return true;
             }
 
-            // ekskluderer vurderinger som ikke er ferdigstilte
-            if (!fa4.EvaluationStatus.Equals("finished", StringComparison.OrdinalIgnoreCase))
-            {
-                Progress.ProgressBar.Tick();
-                return true;
-            }
-
             // ekskluderer vurderinger med pattedyr som er husdyrraser
             if (new[] { 4937, 4963, 4964, 4965, 5217 }.Contains(fa4.Id))
             {
@@ -244,6 +239,16 @@ namespace Assessments.Transformation
             }
 
             return false;
+        }
+
+        private static void FixImpactCategory(FA4 assessment)
+        {
+            if (assessment.HorizonDoScanning)
+            {
+                assessment.Category = "NR";
+                assessment.AssessmentConclusion = "WillNotBeRiskAssessed";
+                assessment.AlienSpeciesCategory = "HorizonScannedButNoRiskAssessment";
+            }
         }
 
         private static void FixSubSpeciesLinkedToSpecies(List<AlienSpeciesAssessment2023> targetItems, List<FA4> sourceItems)

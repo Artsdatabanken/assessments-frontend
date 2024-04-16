@@ -816,7 +816,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public enum TaxonRankEnum
         {
             Species = AlienSpeciesAssessment2023ScientificNameRank.Species,
-            tth = AlienSpeciesAssessment2023ScientificNameRank.tth,
+            Hybrid = AlienSpeciesAssessment2023ScientificNameRank.Hybrid,
             SubSpecies = AlienSpeciesAssessment2023ScientificNameRank.SubSpecies,
             Variety = AlienSpeciesAssessment2023ScientificNameRank.Variety,
             Form = AlienSpeciesAssessment2023ScientificNameRank.Form
@@ -832,19 +832,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         {
             new()
             {
-                Name = AlienSpeciesAssessment2023ScientificNameRank.ttn.DisplayName(),
-                NameShort = AlienSpeciesAssessment2023ScientificNameRank.ttn.ToString(),
+                Name = AlienSpeciesAssessment2023ScientificNameRank.TaxonomicRank.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023ScientificNameRank.TaxonomicRank.ToString(),
                 SubGroup = AlienSpeciesTaxonRanks2023()
             },
             new()
             {
-                Name = AlienSpeciesAssessment2023ScientificNameRank.tva.DisplayName(),
-                NameShort = AlienSpeciesAssessment2023ScientificNameRank.tva.ToString()
+                Name = AlienSpeciesAssessment2023ScientificNameRank.AssessedAtAnotherRank.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023ScientificNameRank.AssessedAtAnotherRank.ToString()
             },
             new()
             {
-                Name = AlienSpeciesAssessment2023ScientificNameRank.tvi.DisplayName(),
-                NameShort = AlienSpeciesAssessment2023ScientificNameRank.tvi.ToString()
+                Name = AlienSpeciesAssessment2023ScientificNameRank.AssessedAtSameRank.DisplayName(),
+                NameShort = AlienSpeciesAssessment2023ScientificNameRank.AssessedAtSameRank.ToString()
             }
         };
 

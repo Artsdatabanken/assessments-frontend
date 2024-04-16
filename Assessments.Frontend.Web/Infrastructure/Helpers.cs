@@ -338,7 +338,7 @@ namespace Assessments.Frontend.Web.Infrastructure
             var species = AlienSpeciesAssessment2023ScientificNameRank.Species;
             var variety = AlienSpeciesAssessment2023ScientificNameRank.Variety;
             var form = AlienSpeciesAssessment2023ScientificNameRank.Form;
-            var hybrid = AlienSpeciesAssessment2023ScientificNameRank.tth;
+            var hybrid = AlienSpeciesAssessment2023ScientificNameRank.Hybrid;
             bool isHybrid = scientificName.Contains('×');
             bool isNorwegianLanguage = CultureInfo.CurrentUICulture.Name == "no";
 

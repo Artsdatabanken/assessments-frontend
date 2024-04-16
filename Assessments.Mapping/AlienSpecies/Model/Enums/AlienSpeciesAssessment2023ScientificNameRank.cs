@@ -44,15 +44,15 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         Form = 25,
 
         [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.hybrid), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.hybrid_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
-        tth,
+        Hybrid,
 
         [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.taxonomic_rank), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
-        ttn,
+        TaxonomicRank,
 
         [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.assessed_at_another_rank), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
-        tva,
+        AssessedAtAnotherRank,
 
         [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.not_assessed_at_another_rank), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
-        tvi
+        AssessedAtSameRank
     }
 }

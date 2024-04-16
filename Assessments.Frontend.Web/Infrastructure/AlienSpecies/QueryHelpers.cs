@@ -218,9 +218,9 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 var assessments = filter switch
                 {
-                    nameof(AlienSpeciesAssessment2023ScientificNameRank.tva) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
-                    nameof(AlienSpeciesAssessment2023ScientificNameRank.tvi) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
-                    nameof(AlienSpeciesAssessment2023ScientificNameRank.tth) => query.Where(x => x.ScientificName.ScientificName.Contains('×')),
+                    nameof(AlienSpeciesAssessment2023ScientificNameRank.AssessedAtAnotherRank) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
+                    nameof(AlienSpeciesAssessment2023ScientificNameRank.AssessedAtSameRank) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
+                    nameof(AlienSpeciesAssessment2023ScientificNameRank.Hybrid) => query.Where(x => x.ScientificName.ScientificName.Contains('×')),
                     _ => query.Where(x => x.ScientificName.ScientificNameRank.ToString() == filter)
                 };
                 if (assessments != null)

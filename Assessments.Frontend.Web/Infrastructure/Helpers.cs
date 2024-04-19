@@ -334,24 +334,13 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string FixSpeciesLevelWithTranslation(string replacestring, AlienSpeciesAssessment2023ScientificNameRank rank, string scientificName)
         { 
-            var subSpecies = AlienSpeciesAssessment2023ScientificNameRank.SubSpecies;
-            var species = AlienSpeciesAssessment2023ScientificNameRank.Species;
             var variety = AlienSpeciesAssessment2023ScientificNameRank.Variety;
             var form = AlienSpeciesAssessment2023ScientificNameRank.Form;
             var hybrid = AlienSpeciesAssessment2023ScientificNameRank.Hybrid;
             bool isHybrid = scientificName.Contains('×');
             bool isNorwegianLanguage = CultureInfo.CurrentUICulture.Name == "no";
 
-            if (rank == subSpecies)
-            {
-                replacestring = replacestring.Replace("{artens}", isNorwegianLanguage ? $"{subSpecies.Description().ToLower()}s" : $"{subSpecies.Description().ToLower()}'");
-                replacestring = replacestring.Replace("{Artens}", isNorwegianLanguage ? $"{subSpecies.Description()}s" : $"{subSpecies.Description()}'");
-                replacestring = replacestring.Replace("{arten}", subSpecies.Description().ToLower());
-                replacestring = replacestring.Replace("{Arten}", subSpecies.Description());
-                replacestring = replacestring.Replace("{art}", subSpecies.DisplayName().ToLower());
-                replacestring = replacestring.Replace("{Art}", subSpecies.DisplayName());
-            }
-            else if (rank == variety)
+            if (rank == variety)
             {
                 replacestring = replacestring.Replace("{artens}", isNorwegianLanguage ? $"{variety.Description().ToLower()}s" : $"{variety.Description().ToLower()}s");
                 replacestring = replacestring.Replace("{Artens}", isNorwegianLanguage ? $"{variety.Description()}s" : $"{variety.Description()}s");
@@ -380,12 +369,12 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
             else
             {
-                replacestring = replacestring.Replace("{artens}", isNorwegianLanguage ? $"{species.Description().ToLower()}s" : $"{species.Description().ToLower()}'");
-                replacestring = replacestring.Replace("{Artens}", isNorwegianLanguage ? $"{species.Description()}s" : $"{species.Description()}'");
-                replacestring = replacestring.Replace("{arten}", species.Description().ToLower());
-                replacestring = replacestring.Replace("{Arten}", species.Description());
-                replacestring = replacestring.Replace("{art}", species.DisplayName().ToLower());
-                replacestring = replacestring.Replace("{Art}", species.DisplayName());
+                replacestring = replacestring.Replace("{artens}", isNorwegianLanguage ? $"{rank.Description().ToLower()}s" : $"{rank.Description().ToLower()}'");
+                replacestring = replacestring.Replace("{Artens}", isNorwegianLanguage ? $"{rank.Description()}s" : $"{rank.Description()}'");
+                replacestring = replacestring.Replace("{arten}", rank.Description().ToLower());
+                replacestring = replacestring.Replace("{Arten}", rank.Description());
+                replacestring = replacestring.Replace("{art}", rank.DisplayName().ToLower());
+                replacestring = replacestring.Replace("{Art}", rank.DisplayName());
             }
             return replacestring;
         }

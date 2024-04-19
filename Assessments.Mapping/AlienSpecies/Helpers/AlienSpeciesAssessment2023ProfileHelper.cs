@@ -1015,5 +1015,15 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             }
             return reasons;
         }
+
+        internal static DateTime GetRevisionDate(int assessmentId)
+        {
+            var dateObject = new DateTime();
+            return assessmentId switch
+            {
+                2526 => new DateTime(2024, 04, 22), //TODO: change date to the date it is published - when that happens..
+                _ => dateObject
+            };
+        }
     }
 }

@@ -301,9 +301,9 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string GetRevisionDate(DateTime RevisionDate, string firspublished)
         {
-            if (RevisionDate.Date.ToShortDateString() != firspublished && RevisionDate != default)
+            if (RevisionDate.Date.ToString("dd.MM.yyyy") != firspublished && RevisionDate != default)
             {
-                return RevisionDate.Date.ToShortDateString();
+                return RevisionDate.Date.ToString("dd.MM.yyyy");
             }
             return string.Empty;
         }

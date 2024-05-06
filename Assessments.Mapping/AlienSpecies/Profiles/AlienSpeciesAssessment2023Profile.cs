@@ -247,6 +247,7 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                     opt.MapFrom(src => src.ArtskartManuellKommentar.StripUnwantedHtml());
                 })
                 .ForMember(dest => dest.ReasonForChangeOfCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetReasonForChangeOfCategory(src.ReasonForChangeOfCategory)))
+                .ForMember(dest => dest.RevisionDate, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetRevisionDate(src.Id)))
                 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 

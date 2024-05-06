@@ -283,10 +283,6 @@ span.material-icons.less {
     padding: 0;
 }
 
-.expert_text {
-    line-height: 172%;
-}
-
 /* REFERENCES */
 .reference {
     display: block;
@@ -586,6 +582,10 @@ span.area i {
     margin-top: 15px;
     font-size: 14px;
     font-family: 'Space Mono';
+}
+
+.speciesgroup_container p {
+    line-height: 140%;
 }
 
 .published {

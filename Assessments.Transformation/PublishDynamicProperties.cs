@@ -147,7 +147,7 @@ namespace Assessments.Transformation
             while (true)
             {
                 //Page through the dynamicPropertis as RavenDb server per default has a limit of 128 = 2^7 result (batchSize)
-                assessmentsBatch = ravenSession.Query<DynamicProperty>().Where(x => x.Id.StartsWith(firstPartOfDocumentName))?.Skip(pointer).Take(batchSize).ToList();
+                assessmentsBatch = ravenSession.Query<DynamicProperty>().Customize(x=>x.WaitForNonStaleResultsAsOfNow()).Where(x => x.Id.StartsWith(firstPartOfDocumentName))?.Skip(pointer).Take(batchSize).ToList();
                 
                 if (!assessmentsBatch.Any()) break;
 

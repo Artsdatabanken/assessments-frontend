@@ -1,6 +1,8 @@
 ﻿using Assessments.Frontend.Web.Models;
+using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Mapping.RedlistSpecies;
+using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -311,7 +313,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             var subSpecies = "Underart";
             var species = "Art";
             var variety = "Varietet";
-            var form = "Form";
 
             if (rang == "SubSpecies" || rang == subSpecies)
             {
@@ -323,11 +324,6 @@ namespace Assessments.Frontend.Web.Infrastructure
                 replacestring = replacestring.Replace("{art}", variety.ToLower());
                 replacestring = replacestring.Replace("{Art}", variety);
             }
-            else if (rang == form)
-            {
-                replacestring = replacestring.Replace("{art}", form.ToLower());
-                replacestring = replacestring.Replace("{Art}", form);
-            }
             else
             {
                 replacestring = replacestring.Replace("{art}", species.ToLower());
@@ -335,29 +331,52 @@ namespace Assessments.Frontend.Web.Infrastructure
             }
             return replacestring;
         }
-        public static string FixSpeciesLevel(string replaceString, int rank)
-        {
-            var stringRank = rank switch
+
+        public static string FixSpeciesLevelWithTranslation(string replacestring, AlienSpeciesAssessment2023ScientificNameRank rank, string scientificName)
+        { 
+            var variety = AlienSpeciesAssessment2023ScientificNameRank.Variety;
+            var form = AlienSpeciesAssessment2023ScientificNameRank.Form;
+            var hybrid = AlienSpeciesAssessment2023ScientificNameRank.Hybrid;
+            bool isHybrid = scientificName.Contains('×');
+            bool isNorwegianLanguage = CultureInfo.CurrentUICulture.Name == "no";
+
+            if (rank == variety)
             {
-                22 => "Art",
-                23 => "Underart",
-                24 => "Varietet",
-                25 => "Form",
-                _ => "Art"
-            };
-            return Helpers.FixSpeciesLevel(replaceString, stringRank);
-        }
-        public static string FixSpeciesLevel(string replaceString, AlienSpeciesAssessment2023ScientificNameRank rank)
-        {
-            var stringRank = rank switch
+                replacestring = replacestring.Replace("{artens}", isNorwegianLanguage ? $"{variety.Description().ToLower()}s" : $"{variety.Description().ToLower()}s");
+                replacestring = replacestring.Replace("{Artens}", isNorwegianLanguage ? $"{variety.Description()}s" : $"{variety.Description()}s");
+                replacestring = replacestring.Replace("{arten}", variety.Description().ToLower());
+                replacestring = replacestring.Replace("{Arten}", variety.Description());
+                replacestring = replacestring.Replace("{art}", variety.DisplayName().ToLower());
+                replacestring = replacestring.Replace("{Art}", variety.DisplayName());
+            }
+            else if (rank == form)
             {
-                AlienSpeciesAssessment2023ScientificNameRank.Species => "Art",
-                AlienSpeciesAssessment2023ScientificNameRank.SubSpecies => "Underart",
-                AlienSpeciesAssessment2023ScientificNameRank.Variety => "Varietet",
-                AlienSpeciesAssessment2023ScientificNameRank.Form => "Form",
-                _ => "Art"
-            };
-            return Helpers.FixSpeciesLevel(replaceString, stringRank);
+                replacestring = replacestring.Replace("{artens}", isNorwegianLanguage ? $"{form.Description().ToLower()}ets" : $"the {form.Description().ToLower()}s");
+                replacestring = replacestring.Replace("{Artens}", isNorwegianLanguage ? $"{form.Description()}ets" : $"The {form.Description().ToLower()}s");
+                replacestring = replacestring.Replace("{arten}", isNorwegianLanguage ? $"{form.Description().ToLower()}et" : $"the {form.Description().ToLower()}");
+                replacestring = replacestring.Replace("{Arten}", isNorwegianLanguage ? $"{form.Description()}et" : $"The {form.Description().ToLower()}");
+                replacestring = replacestring.Replace("{art}", form.Description().ToLower());
+                replacestring = replacestring.Replace("{Art}", form.Description());
+            }
+            else if (isHybrid)
+            {
+                replacestring = replacestring.Replace("{artens}", $"{hybrid.Description().ToLower()}s");
+                replacestring = replacestring.Replace("{Artens}", $"{hybrid.Description()}s");
+                replacestring = replacestring.Replace("{arten}", hybrid.Description().ToLower());
+                replacestring = replacestring.Replace("{Arten}", hybrid.Description());
+                replacestring = replacestring.Replace("{art}", hybrid.DisplayName().ToLower());
+                replacestring = replacestring.Replace("{Art}", hybrid.DisplayName());
+            }
+            else
+            {
+                replacestring = replacestring.Replace("{artens}", isNorwegianLanguage ? $"{rank.Description().ToLower()}s" : $"{rank.Description().ToLower()}'");
+                replacestring = replacestring.Replace("{Artens}", isNorwegianLanguage ? $"{rank.Description()}s" : $"{rank.Description()}'");
+                replacestring = replacestring.Replace("{arten}", rank.Description().ToLower());
+                replacestring = replacestring.Replace("{Arten}", rank.Description());
+                replacestring = replacestring.Replace("{art}", rank.DisplayName().ToLower());
+                replacestring = replacestring.Replace("{Art}", rank.DisplayName());
+            }
+            return replacestring;
         }
 
         public static string GetBarChartHeight(int max, int currect)

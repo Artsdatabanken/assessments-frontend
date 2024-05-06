@@ -38,6 +38,7 @@ namespace Assessments.Frontend.Web.Models
         public SpeciesGroupViewModel SpeciesGroupViewModel { get; set; }
 
         public AlienSpeciesAssessment2023SpeciesStatus SpeciesStatus { get; set; }
+        public AlienSpeciesAssessment2023ScientificName ScientificName { get; set; }
     }
 
     public class BarChart
@@ -171,6 +172,8 @@ namespace Assessments.Frontend.Web.Models
         public string UncertaintyStatusDescription { get; set; }
 
         public string UncertaintyEstablishmentTimeDescription { get; set; }
+
+        public string ScientificName { get; set; } 
     }
 
     public class IngressViewModel
@@ -190,6 +193,8 @@ namespace Assessments.Frontend.Web.Models
         public string Status { get; set; }
 
         public AlienSpeciesAssessment2023ScientificNameRank TaxonRank { get; set; }
+        //public AlienSpeciesAssessment2023ScientificName[] ScientificName { get; set; }
+        public string ScientificName { get; set; }
     }
 
     public class RegionalSpreadViewModel
@@ -241,6 +246,7 @@ namespace Assessments.Frontend.Web.Models
         public string ArtskartObservationChangesDescription { get; set; }
 
         public List<AlienSpeciesAssessment2023RegionOccurrence> RegionOccurrences { get; set; }
+        public string ScientificName { get; set; }
     }
 
     public class MapViewModel

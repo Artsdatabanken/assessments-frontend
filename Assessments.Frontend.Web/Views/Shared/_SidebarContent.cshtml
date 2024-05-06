@@ -1,5 +1,6 @@
 ﻿@model SideBarContentViewModel
 @using Assessments.Mapping.AlienSpecies.Model.Enums;
+@inject IStringLocalizer<SharedResources> Localizer
 
 @{
     string urlSafeScientificName = Model.ScientificName.Replace(" ", "%20");
@@ -34,10 +35,16 @@
 <div class="sidebar_image_info">
     <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden">
     <br>
-    <a href="@taxon_url" class="link-styled taxon-page-link">
-        Til @Helpers.FixSpeciesLevel("{art}ssiden", Model.TaxonRank)
-    </a>
-
+    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023">
+        <a href="@taxon_url" class="link-styled taxon-page-link">
+            @Localizer["to_species_page"]
+        </a>
+    </div>
+    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021">
+        <a href="@taxon_url" class="link-styled taxon-page-link">
+            Til artssiden
+        </a>
+    </div>
     <div is-visible="@Model.PreviousAssessments.Any()">
         <hr>
         <partial name="/Views/Shared/_Development.cshtml" />
@@ -50,8 +57,8 @@
         <h3>Forskrift om fremmede organismer</h3>
         <div>
             <p>
-                Denne @Helpers.FixSpeciesLevel("{art}en", Model.TaxonRank) er <span is-visible="!Model.SpeciesIsOnBannedList"  class="underline">ikke</span> oppført på Klima- og miljødepartementets liste over arter det er
-                forbudt å innføre, sette ut og omsette, jf. § 5 og § 9. <span is-visible="!Model.SpeciesIsOnBannedList"> Merk at @Helpers.FixSpeciesLevel("{art}en", Model.TaxonRank) kan være regulert på annen måte.</span>
+                Denne @Helpers.FixSpeciesLevelWithTranslation("{arten}", Model.TaxonRank, Model.ScientificName) er <span is-visible="!Model.SpeciesIsOnBannedList"  class="underline">ikke</span> oppført på Klima- og miljødepartementets liste over arter det er
+                forbudt å innføre, sette ut og omsette, jf. § 5 og § 9. <span is-visible="!Model.SpeciesIsOnBannedList"> Merk at @Helpers.FixSpeciesLevelWithTranslation("{arten}", Model.TaxonRank, Model.ScientificName) kan være regulert på annen måte.</span>
             </p>
             <a href="https://lovdata.no/dokument/SF/forskrift/2015-06-19-716#KAPITTEL_9" class="link-styled">
                 Forbudslista hos Lovdata.no <span class="material-icons">open_in_new</span>

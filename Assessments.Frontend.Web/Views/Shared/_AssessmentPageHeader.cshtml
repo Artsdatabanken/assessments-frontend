@@ -16,7 +16,8 @@
         ParentAssessmentId = Model.ParentAssessmentId,
         SpeciesStatus = Model.SpeciesStatus,
         Status = Model.SpeciesStatus.DisplayName(),
-        TaxonRank = Model.ScientificNameRank
+        TaxonRank = Model.ScientificNameRank,
+        ScientificName = Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 ? Model.ScientificName.ScientificName : ""
     };
 }
 

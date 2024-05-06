@@ -577,13 +577,16 @@ span.area i {
     height:100%;
 }
 
-.speciesgroup_container p{
-    margin-top:15px;
+.speciesgroup_container p {
+    margin-top: 15px;
+    font-size: 14px;
+    font-family: 'Space Mono';
 }
 
-.date {
-    font-size: 12pt;
-    color: grey;
+.datestring {
+    margin-top: 15px;
+    font-size: 14px;
+    font-family: 'Space Mono';
 }
 
 .side h3{

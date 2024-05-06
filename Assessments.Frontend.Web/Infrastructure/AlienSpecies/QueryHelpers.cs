@@ -5,6 +5,7 @@ using Assessments.Shared.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Assessments.Frontend.Web.Models.ListViewViewModel;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
@@ -215,13 +216,12 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             foreach (var filter in rankFilters)
             {
-                var isInt = int.TryParse(filter, out int result);
                 var assessments = filter switch
                 {
-                    nameof(TaxonRank.TaxonRankEnum.tva) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
-                    nameof(TaxonRank.TaxonRankEnum.tvi) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
-                    nameof(TaxonRank.TaxonRankEnum.tth) => query.Where(x => x.ScientificName.ScientificName.Contains('×')),
-                    _ => isInt ? query.Where(x => ((int)x.ScientificName.ScientificNameRank) == result) : null
+                    nameof(AlienSpeciesAssessment2023ScientificNameRank.AssessedAtAnotherRank) => query.Where(x => x.AlienSpeciesCategory == evaluatedAtAnotherLevel),
+                    nameof(AlienSpeciesAssessment2023ScientificNameRank.AssessedAtSameRank) => query.Where(x => x.AlienSpeciesCategory != evaluatedAtAnotherLevel),
+                    nameof(AlienSpeciesAssessment2023ScientificNameRank.Hybrid) => query.Where(x => x.ScientificName.ScientificName.Contains('×')),
+                    _ => query.Where(x => x.ScientificName.ScientificNameRank.ToString() == filter)
                 };
                 if (assessments != null)
                     newQuery = newQuery.Concat(assessments);

@@ -26,11 +26,11 @@
 
     string GetSpeciesStatusText()
     {
-        var text = $"Den vurderte {Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank)} ";
+        var text = $"{Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName)} ";
         if (Model.Assessment.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.Abroad)
             return $"{text} forekommer ikke {areaText}.";
         if (Model.Assessment.SpeciesStatus == AlienSpeciesAssessment2023SpeciesStatus.C3)
-            return $"{text} {Model.Assessment.SpeciesStatus.Description()}. Etter introduksjon har {Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank)} selv spredd seg til minst ti forekomster der den er etablert.";
+            return $"{text} {Model.Assessment.SpeciesStatus.Description()}. Etter introduksjon har {Helpers.FixSpeciesLevelWithTranslation("{arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName)} selv spredd seg til minst ti forekomster der den er etablert.";
         return $"{text} {Model.Assessment.SpeciesStatus.Description().Replace("i Norge", areaText)}.";
     }
 
@@ -38,7 +38,7 @@
     {
         var hasSexual = Model.Assessment.ReproductionSexual;
         var hasAsexual = Model.Assessment.ReproductionAsexual;
-        var speciesLevel = Helpers.FixSpeciesLevel("{Art}en", Model.Assessment.ScientificName.ScientificNameRank);
+        var speciesLevel = Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName);
         if (hasSexual && !hasAsexual)
             return $"{speciesLevel} har seksuell reproduksjon.";
         else if (!hasSexual && hasAsexual)
@@ -62,22 +62,22 @@
     string GetCameToNorwayFrom()
     {
         if (isRegionallyAlien)
-            return $"{Helpers.FixSpeciesLevel("{Art}en", Model.Assessment.ScientificName.ScientificNameRank)} kom til området der den er regionalt fremmed fra:";
+            return $"{Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName)} kom til området der den er regionalt fremmed fra:";
         if (isDoorKnocker)
-            return $"{Helpers.FixSpeciesLevel("{Art}en", Model.Assessment.ScientificName.ScientificNameRank)} kan komme til {ComingFromText()} fra:";
-        return $"{Helpers.FixSpeciesLevel("{Art}en", Model.Assessment.ScientificName.ScientificNameRank)} kom til {ComingFromText()} fra:";
+            return $"{Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName)} kan komme til {ComingFromText()} fra:";
+        return $"{Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName)} kom til {ComingFromText()} fra:";
     }
 }
 
 <div id="@nameof(Constants.HeadingsNo.KnowMore)">
     <div class="page_section_header">
-        <h2>@Constants.HeadingsNo.KnowMore @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank)</h2>
+        <h2>@Constants.HeadingsNo.KnowMore @Helpers.FixSpeciesLevelWithTranslation("{arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName)</h2>
     </div>
     <div>
         <div is-visible="showEstablishmentClass">
             <h3>Etableringsstatus @areaText</h3>
             <p>
-                @Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) etableringsstatus bestemmes av den høyeste  etableringsklassen @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) har @areaText i dag, fra å kun finnes utenlands til å være etablert i naturen med videre spredning.
+                @Helpers.FixSpeciesLevelWithTranslation("{Artens}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName) etableringsstatus bestemmes av den høyeste  etableringsklassen @Helpers.FixSpeciesLevelWithTranslation("{arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName) har @areaText i dag, fra å kun finnes utenlands til å være etablert i naturen med videre spredning.
             </p>
             <p>
                 @GetSpeciesStatusText()
@@ -115,7 +115,7 @@
     </div>
     <div is-visible="!isNrButNotAlienSpecie">
         <h3>Global utbredelse</h3>
-        <h4>@Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) naturlige utbredelse.</h4>
+        <h4>@Helpers.FixSpeciesLevelWithTranslation("{Artens}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName) naturlige utbredelse.</h4>
         <p>
             Naturlig utbredelse omfatter de områdene arten forekommer i uten at det ligger menneskelig transport bak (dvs. alle former for tilsikta eller utilsikta forflytning av arten).
         </p>
@@ -143,8 +143,8 @@
             </p>
             <p>@Html.Raw(Model.Assessment.NaturalOriginMarineDetails)</p>
         </div>
-        <h4>@Helpers.FixSpeciesLevel("{Art}ens", Model.Assessment.ScientificName.ScientificNameRank) nåværende utbredelse</h4>
-        <p>Nåværende utbredelse viser @Helpers.FixSpeciesLevel("{art}ens", Model.Assessment.ScientificName.ScientificNameRank) totale utbredelse. Det vil si områder der @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank) finnes naturlig (se naturlig utbredelse) og områder som er et resultat av menneskelig forflytning, tilsikta eller utilsikta, av @Helpers.FixSpeciesLevel("{art}en", Model.Assessment.ScientificName.ScientificNameRank). </p>
+        <h4>@Helpers.FixSpeciesLevelWithTranslation("{Artens}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName) nåværende utbredelse</h4>
+        <p>Nåværende utbredelse viser @Helpers.FixSpeciesLevelWithTranslation("{artens}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName) totale utbredelse. Det vil si områder der @Helpers.FixSpeciesLevelWithTranslation("{arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName) finnes naturlig (se naturlig utbredelse) og områder som er et resultat av menneskelig forflytning, tilsikta eller utilsikta, av @Helpers.FixSpeciesLevelWithTranslation("{arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName). </p>
         <div is-visible="isLimnic || isTerrestrial">
             <div is-visible="Model.Assessment.CurrentInternationalExistenceAreas != null || Model.Assessment.CurrentInternationalExistenceAreas.Count != 0">
                 <p>@GetLimnicOrTerrestrialExpansion()</p>

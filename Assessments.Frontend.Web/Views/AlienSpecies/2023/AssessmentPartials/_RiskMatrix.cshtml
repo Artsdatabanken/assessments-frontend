@@ -373,10 +373,10 @@
         The same info should preferrably be availiable in the main text, to aid users who cannot view the image optimally.
         Also it would look nicer. yeh. All uncertainty x,y's are now input in the findAllUncertaintyCategories use of the matrix lookup.*@
         <p>
-            @Helpers.FixSpeciesLevel("{Art}en", (int)Model.Assessment.ScientificName.ScientificNameRank) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i> 
+            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName) har <i>@Model.Assessment.Category.DisplayName().ToLowerInvariant()</i>
             @Model.Assessment.Category<span is-visible="uncertaintiesList.Count == 0">.</span><span is-visible="uncertaintiesList.Count>0">, med usikkerhet til @Html.Raw(uncertaintiesList.Select(x => $"<i>{x.DisplayName().ToLowerInvariant()}</i> {x.ToString()}").JoinAnd(", ", " og ")).</span>
             <span>
-                Risikoen er @(Model.Assessment.GeographicVariationInCategory == true ? "lavere i deler av" : "den samme i hele")  @Helpers.FixSpeciesLevel("{art}ens", Model.Assessment.ScientificName.ScientificNameRank) potensielle utbredelse.
+                Risikoen er @(Model.Assessment.GeographicVariationInCategory == true ? "lavere i deler av" : "den samme i hele")  @Helpers.FixSpeciesLevelWithTranslation("{artens}", Model.Assessment.ScientificName.ScientificNameRank, Model.Assessment.ScientificName.ScientificName) potensielle utbredelse.
             </span>
         </p>
         <div>

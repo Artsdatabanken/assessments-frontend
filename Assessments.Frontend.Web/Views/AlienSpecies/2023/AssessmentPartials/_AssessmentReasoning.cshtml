@@ -24,7 +24,7 @@
             </p>
             <div is-visible="@showChangedAssessment">
                 <p is-visible="@showChangedFromAlien">
-                    @Helpers.FixSpeciesLevel("{Art}en", (int)Model.TaxonRank) er @Html.Raw(Model.ChangedFromAlien.DisplayName()).
+                    @Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.TaxonRank, Model.ScientificName) er @Html.Raw(Model.ChangedFromAlien.DisplayName()).
                 </p>
                 <p is-visible="showChangedFromAlienDescription">
                     @Html.Raw(Model.ChangedFromAlienDescription)

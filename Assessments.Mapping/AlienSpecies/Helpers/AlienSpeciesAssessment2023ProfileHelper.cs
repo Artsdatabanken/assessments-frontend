@@ -1021,7 +1021,7 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
             var dateObject = new DateTime();
             return assessmentId switch
             {
-                2526 => new DateTime(2024, 04, 22), //TODO: change date to the date it is published - when that happens..
+                2526 => new DateTime(2024, 05, 06),
                 _ => dateObject
             };
         }

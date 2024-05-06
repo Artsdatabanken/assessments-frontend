@@ -7,6 +7,11 @@ body {
     background: #fffcf7;
 }
 
+
+body p {
+    line-height: 155%;
+}
+
 h1,
 h2,
 h3,
@@ -256,7 +261,7 @@ option {
         right: 10px;
         left: auto;
         top: -30px;
-        z-index: 2;
+        z-index: 13;
         height: 10px;
     }
 
@@ -321,16 +326,91 @@ option {
     margin-bottom: 0;
 }
 
+#dropdown-header-menu,
+#themeselectordropdown {
+    z-index: 1000;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+}
+
+#themeselectordropdown {
+    max-width: 300px;
+    width: 100vw;
+    display: none;
+}
+
+@media only screen and (min-width: 750px) {
+    #themeselectorbutton .material-icons.only_mobile {
+        display: none;
+    }
+
+    #themeselectordropdown {
+        right: 90px;
+    }
+}
+
+#themeselectorbutton,
+#toggle-dropdown-button,
+#adb_header_search_mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.adb-header .header-right-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+@media only screen and (max-width: 750px) {
+    .adb-header div.header-right-side {
+        flex-direction: column;
+    }
+}
+
+.adb-header .header-right-side button {
+    margin: 0;
+}
+
+#themeselectordropdown li {
+    margin: 15px 0;
+}
+
+#themeselectordropdown .themebutton {
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    border: none;
+    vertical-align: baseline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#themeselectordropdown .themebutton > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#themeselectordropdown .themebutton .material-icons.toggle {
+    vertical-align: middle;
+    font-size: 34pt;
+}
+
+#adb_header_search {
+    z-index: 1000;
+}
 
 /* 
     other stuff
     Buttons on page have .main in front, to avoid clashing with footer and header code.
 */
-
-
-
 /* TAB STUFF */
-
 .main .changetab {
     border-color: #7f726b;
     margin-bottom: -1px;
@@ -455,8 +535,8 @@ option {
     }
 
     .sidebarmenu {
-        max-width: 200px;
-        width:200px;
+        max-width: 100%;
+        width: 100%;
         height: auto;
         padding: 0;
         top: 0;

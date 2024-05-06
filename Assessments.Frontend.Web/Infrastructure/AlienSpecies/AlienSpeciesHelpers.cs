@@ -10,9 +10,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class AlienSpeciesHelpers
     {
-        public static FilterItem GetSpeciesGroup(FilterItem[] speciesGroups, string speciesGroupName)
+        public static FilterItem GetSpeciesGroup(string speciesGroupName)
         {
-            foreach (var speciesGroup in speciesGroups)
+            var speciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
+            foreach (var speciesGroup in speciesGroups.Filters)
             {
                 if (speciesGroup.Name == speciesGroupName)
                 {
@@ -31,32 +32,6 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 }
             }
             return null;
-        }
-
-        public static string GetSpeciesGroupByShortName(string shortName)
-        {
-            var speciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters;
-
-            foreach (var species in speciesGroups)
-            {
-                FilterItem speciesGroup = species;
-                if (speciesGroup.NameShort == shortName)
-                {
-                    return speciesGroup.Name;
-                }
-
-                if (speciesGroup.SubGroup != null)
-                {
-                    foreach (var subGroup in species.SubGroup.Filters)
-                    {
-                        if (subGroup.NameShort == shortName)
-                        {
-                            return subGroup.Name;
-                        }
-                    }
-                }
-            }
-            return string.Empty;
         }
 
         public static string CriteriaDescription(AlienSpeciesAssessment2023CriteriaLetter letter, int value)

@@ -577,13 +577,29 @@ span.area i {
     height:100%;
 }
 
-.speciesgroup_container p{
-    margin-top:15px;
+.speciesgroup_container span,
+.speciesgroup_container a {
+    margin-top: 15px;
+    font-size: 14px;
+    font-family: 'Space Mono';
 }
 
-.date {
-    font-size: 8pt;
-    color: grey;
+.speciesgroup_container p {
+    line-height: 140%;
+}
+
+.published {
+    margin: 15px 0;
+}
+
+.speciesgroup_container {
+    margin-bottom: 15px;
+}
+
+.datestring {
+    margin-top: 15px;
+    font-size: 14px;
+    font-family: 'Space Mono';
 }
 
 .side h3{

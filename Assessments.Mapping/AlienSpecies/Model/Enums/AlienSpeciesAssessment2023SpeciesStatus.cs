@@ -1,40 +1,34 @@
-﻿using System.ComponentModel;
+﻿using Assessments.Shared.Resources.Enums.AlienSpecies;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023SpeciesStatus
     {
-        [Display(Name = "Ikke angitt")]
+        [Display(ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource), Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.not_indicated))]
         [Description("")]
         NotIndicated,
 
-        [Display(Name = "Ikke i Norge")]
-        [Description("ikke forekommer i Norge")]
+        [Display(ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource), Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.not_in_Norway), Description = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.not_in_Norway_description))] 
         Abroad,
 
-        [Display(Name = "Innendørs")]
-        [Description("forekommer innendørs eller i lukkede installasjoner")]
+        [Display(ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource), Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.indoors), Description = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.indoors_description))]
         B1,
 
-        [Display(Name = "Utendørs i eget produksjonsareal")]
-        [Description("forekommer utendørs i eget produksjonsareal")]
+        [Display(ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource), Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.outdoors_production_area), Description = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.outdoors_production_area_description))]
         B2,
 
-        [Display(Name = "Observert i norsk natur")]
-        [Description("er dokumentert fra norsk natur")]
+        [Display(ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource), Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.documented_Norwegian_nature), Description = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.documented_Norwegian_nature_description))]
         C0,
-
-        [Display(Name = "Overlever vinteren utendørs")]
-        [Description("kan overleve vinteren utendørs og uten hjelp")]
+        
+        [Display(ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource), Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.survive_winter_outdoors), Description = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.survive_winter_outdoors_description))]
         C1,
 
-        [Display(Name = "Selvstendig reproduserende")]
-        [Description("er selvstendig reproduserende")]
+        [Display(ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource), Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.reproduces_unaidedly), Description = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.reproduces_unaidedly_description))]
         C2,
 
-        [Display(Name = "Etablert")]
-        [Description("er etablert")]
+        [Display(ResourceType = typeof(AlienSpeciesAssessment2023SpeciesStatusResource), Name = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.established), Description = nameof(AlienSpeciesAssessment2023SpeciesStatusResource.established_description))]
         C3
     }
 }

@@ -58,7 +58,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         private BarChart GetSpeciesGroups()
         {
             var distinctSpeciesGroups = new List<AlienSpeciesAssessment2023SpeciesGroups>((IEnumerable<AlienSpeciesAssessment2023SpeciesGroups>)Enum.GetValues(typeof(AlienSpeciesAssessment2023SpeciesGroups)));
-            var singleAlgae = "Alger";
+            var singleAlgae = AlienSpeciesAssessment2023SpeciesGroups.Rhodophyta_Chlorophyta_Phaeophyceae.DisplayName();
             var singleCrayfish = AlienSpeciesAssessment2023SpeciesGroups.Crustacea.DisplayName();
             var singleInsect = AlienSpeciesAssessment2023SpeciesGroups.Insecta.DisplayName();
             var algae = new AlienSpeciesAssessment2023SpeciesGroups[]
@@ -92,7 +92,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => algae.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleAlgae,
-                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
                 }).ToList()
             };
 
@@ -101,7 +101,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => crayfish.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleCrayfish,
-                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
                 }).ToList()
             };
 
@@ -110,16 +110,16 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => insects.Any(y => x == y)).Select(x => new BarChart.BarChartData
                 {
                     Name = singleInsect,
-                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
                 }).ToList()
             };
 
             var speciesBarChart = new BarChart()
             {
-                Data = distinctSpeciesGroups.Where(x => !algae.Contains(x) && !crayfish.Contains(x) && !insects.Contains(x)).Select(x => new BarChart.BarChartData
+                Data = distinctSpeciesGroups.Where(x => x is not AlienSpeciesAssessment2023SpeciesGroups.Unknown && !algae.Contains(x) && !crayfish.Contains(x) && !insects.Contains(x)).Select(x => new BarChart.BarChartData
                 {
                     Name = x.DisplayName(),
-                    Count = _query.Where(y => y.SpeciesGroup == x.DisplayName()).Count()
+                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
                 }).ToList()
             };
 

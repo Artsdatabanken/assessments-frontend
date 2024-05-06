@@ -17,7 +17,7 @@
 
     var AllAreas = new Areas().AlienSpecies2023Areas();
     var AllCategories = new Categories().AlienSpecies2023Categories();
-    var AllCategoriesChanged = CategoryChange.AlienSpecies2023CategoryChanged;
+    var AllCategoriesChanged = new CategoryChange().AlienSpecies2023CategoryChanged();
     var AllClimateEffects = ClimateEffects.AlienSpecies2023ClimateEffects;
     var AllDeciciveCriterias = new DeciciveCriteria().AlienSpecies2023DeciciveCriteria();
     var AllEcologicalEffects = new Categories().AlienSpecies2023EcologicalEffect();
@@ -30,10 +30,10 @@
     var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
     var AllRegionallyAlien = RegionallyAlien.AlienSpecies2023RegionallyAlien;
     var AllRegions = Regions.AlienSpecies2023Regions;
-    var AllSpeciesGroups = SpeciesGroups.AlienSpecies2023SpeciesGroups;
-    var AllSpeciesStatus = SpeciesStatus.AlienSpecies2023SpeciesStatus;
+    var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
+    var AllSpeciesStatus = new SpeciesStatus().AlienSpecies2023SpeciesStatus();
     var AllSpreadWays = SpreadWays.AlienSpecies2023SpreadWays;
-    var AllTaxonRanks = TaxonRank.AlienSpecies2023TaxonRanks;
+    var AllTaxonRanks = new TaxonRank().AlienSpecies2023TaxonRanks();
 
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
     {

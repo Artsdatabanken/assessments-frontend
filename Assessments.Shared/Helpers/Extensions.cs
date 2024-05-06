@@ -31,8 +31,24 @@ namespace Assessments.Shared.Helpers
 
         public static string Description(this Enum value)
         {
-            var attribute = value.GetAttribute<DescriptionAttribute>();
-            return attribute == null ? value.ToString() : attribute.Description;
+            var attribute = value.GetAttribute<DisplayAttribute>();
+
+            if (attribute == null)
+            {
+                var descriptionAttribute = value.GetAttribute<DescriptionAttribute>();
+                return descriptionAttribute == null ? value.ToString() : descriptionAttribute.Description;
+            }
+
+            switch (attribute)
+            {
+                case { ResourceType: not null, Description: not null }:
+                {
+                    var manager = new ResourceManager(attribute.ResourceType);
+                    return manager.GetString(attribute.Description) ?? throw new InvalidOperationException();
+                }
+                default:
+                    return attribute.Description ?? value.ToString();
+            }
         }
 
         public static string DisplayName(this Enum value)

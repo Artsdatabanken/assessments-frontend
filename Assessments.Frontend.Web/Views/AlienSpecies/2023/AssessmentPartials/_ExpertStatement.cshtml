@@ -30,7 +30,7 @@
         <div is-visible="@showSpeciesStatusDocumentation">               
             <h3>
                 Generelt om 
-                @Helpers.FixSpeciesLevel("{art}en", (int)Model.TaxonRank)</h3>
+                @Helpers.FixSpeciesLevelWithTranslation("{arten}", Model.TaxonRank, Model.ScientificName)</h3>
             <p is-visible="!isNr">Livsmiljø: @Model.Environment.DisplayName()</p>
             <p class="expert_text">
                 @Html.Raw(Model.CriteriaDocumentationSpeciesStatus)

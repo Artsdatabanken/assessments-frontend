@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,10 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="alien-species-list" xml:space="preserve">
-    <value>Fremmedartslista</value>
+  <data name="not_indicated" xml:space="preserve">
+    <value>Not indicated</value>
   </data>
-  <data name="to_species_page" xml:space="preserve">
-    <value>Til artssiden</value>
+  <data name="not_in_Norway" xml:space="preserve">
+    <value>Not in Norway</value>
+  </data>
+  <data name="not_in_Norway_description" xml:space="preserve">
+    <value>does not occur in Norway</value>
+  </data>
+  <data name="indoors" xml:space="preserve">
+    <value>Indoors</value>
+  </data>
+  <data name="indoors_description" xml:space="preserve">
+    <value>occurs in indoor environments</value>
+  </data>
+  <data name="outdoors_production_area" xml:space="preserve">
+    <value>Outdoors on its own production area</value>
+  </data>
+  <data name="outdoors_production_area_description" xml:space="preserve">
+    <value>occurs outdoors on its own production area</value>
+  </data>
+  <data name="documented_Norwegian_nature_description" xml:space="preserve">
+    <value>has been documented in Norwegian nature</value>
+  </data>
+  <data name="documented_Norwegian_nature" xml:space="preserve">
+    <value>Observed in Norwegian nature</value>
+  </data>
+  <data name="survive_winter_outdoors" xml:space="preserve">
+    <value>Survive winter outdoors</value>
+  </data>
+  <data name="survive_winter_outdoors_description" xml:space="preserve">
+    <value>can survive the winter outdoors and without human help</value>
+  </data>
+  <data name="reproduces_unaidedly_description" xml:space="preserve">
+    <value>reproduces unaidedly</value>
+  </data>
+  <data name="established" xml:space="preserve">
+    <value>Established</value>
+  </data>
+  <data name="established_description" xml:space="preserve">
+    <value>is established</value>
+  </data>
+  <data name="reproduces_unaidedly" xml:space="preserve">
+    <value>Reproducing unaidedly</value>
   </data>
 </root>

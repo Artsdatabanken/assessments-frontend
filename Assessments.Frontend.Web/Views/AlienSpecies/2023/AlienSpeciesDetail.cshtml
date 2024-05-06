@@ -7,7 +7,7 @@
     var assessment = Model.Assessment;
     ViewData["Title"] = assessment.ScientificName.ScientificName + " - Fremmedartslista 2023";
     var evaluationContextText = Model.Assessment.EvaluationContext == AlienSpeciesAssessment2023EvaluationContext.S ? "på Svalbard" : "i Norge";
-    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(SpeciesGroups.AlienSpecies2023SpeciesGroups.Filters, assessment.SpeciesGroup);
+    var speciesGroup = AlienSpeciesHelpers.GetSpeciesGroup(assessment.SpeciesGroup.DisplayName());
     var speciesGroupImageUrl = speciesGroup?.ImageUrl;
 
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
@@ -32,15 +32,16 @@
         {
             AssessmentYear = 2023, // TODO: create this field in assessment model
             ExpertCommittee = assessment.ExpertGroup,
-            FirstPublishedDateString = "11.08.2023",
-            //RevisionDate = assessment.LastUpdatedAt, // TODO: check if this is revision date
+            FirstPublishedDateString = Constants.AlienSpecies2023FirstPublished,
+            RevisionDate = assessment.RevisionDate, // TODO: check if this is revision date
             RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
-            SpeciesGroup = assessment.SpeciesGroup,
+            SpeciesGroup = assessment.SpeciesGroup.DisplayName(),
             SpeciesGroupImageUrl = speciesGroupImageUrl,
             SpeciesGroupInfoUrl = "https://artsdatabanken.no/Pages/328670/Ekspertkomiteene",
             PreviousAssessmentYear = assessment.PreviousAssessments.Where(x => x.RevisionYear < 0).OrderByDescending(x => x.RevisionYear).Select(x => x.RevisionYear).FirstOrDefault()
         },
-        SpeciesStatus = assessment.SpeciesStatus
+        SpeciesStatus = assessment.SpeciesStatus,
+        ScientificName = assessment.ScientificName
     };
 
     var citationViewModel = new CitationForAssessmentViewModel
@@ -77,7 +78,8 @@
         ParentAssessmentId = assessment.ParentAssessmentId,
         SpeciesStatus = assessment.SpeciesStatus,
         Status = assessment.EstablishmentCategory + assessment.AlienSpeciesCategory,
-        TaxonRank = assessment.ScientificName.ScientificNameRank
+        TaxonRank = assessment.ScientificName.ScientificNameRank,
+        ScientificName = assessment.ScientificName.ScientificName
     };
 
     var isNr = assessment.Category == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciesAssessment2023Category.NR;
@@ -170,7 +172,7 @@
             new ()
             {
                 ElementId = nameof(Constants.HeadingsNo.KnowMore),
-                Title = $"{Constants.HeadingsNo.KnowMore} {Helpers.FixSpeciesLevel("{art}en", assessment.ScientificName.ScientificNameRank)}",
+                Title = $"{Constants.HeadingsNo.KnowMore} {Helpers.FixSpeciesLevelWithTranslation("{arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName)}",
                 ShouldShow = showKnowMore
             },
             new ()

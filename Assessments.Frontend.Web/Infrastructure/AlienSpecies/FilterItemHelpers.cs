@@ -1167,20 +1167,21 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
     public class Regions
     {
-        public static readonly FilterItem[] AlienSpecies2023RegionsFilters = Enum.GetValues<AlienSpeciesAssessment2023Region>()
+        public readonly FilterItem[] AlienSpecies2023RegionsFilters = Enum.GetValues<AlienSpeciesAssessment2023Region>()
             .Select(x => new FilterItem
             {
                 Name = x.DisplayName(),
                 NameShort = x.ToString()
             }).ToArray();
 
-        public static readonly FilterAndMetaData AlienSpecies2023Regions = new()
-        {
-            Filters = AlienSpecies2023RegionsFilters,
-            FilterDescription = "Regioner med kjent, antatt eller forventet forekomst",
-            FilterButtonName = "regionfiltre",
-            FilterButtonText = "Regioner og havområder"
-        };
+        public FilterAndMetaData AlienSpecies2023Regions() =>
+            new()
+            {
+                Filters = AlienSpecies2023RegionsFilters,
+                FilterDescription = "Regioner med kjent, antatt eller forventet forekomst",
+                FilterButtonName = "regionfiltre",
+                FilterButtonText = "Regioner og havområder"
+            };
     }
 
     public class Habitat

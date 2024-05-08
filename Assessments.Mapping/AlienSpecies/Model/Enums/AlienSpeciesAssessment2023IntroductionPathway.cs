@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Assessments.Shared.Resources.Enums.AlienSpecies;
+using System.ComponentModel.DataAnnotations;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
@@ -21,19 +22,19 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             [Display(Name = "")]
             NotChosen,
 
-            [Display(Name = "Ukjent")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023ArrivedCountryFromResource.unknown), ResourceType = typeof(AlienSpeciesAssessment2023ArrivedCountryFromResource))]
             Unknown,
 
-            [Display(Name = "Tallrike ganger pr. år")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.numerous_yearly), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
             NumerousYearly,
 
-            [Display(Name = "Ca. årlig")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.yearly), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
             Yearly,
 
-            [Display(Name = "Flere ganger pr. 10. år")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.several_per_ten_years), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
             SeveralPr10years,
 
-            [Display(Name = "Sjeldnere enn hvert 10. år")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.rarer_than_ten_years), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
             RarerThan10years
         }
 
@@ -42,7 +43,7 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             [Display(Name = "")]
             NotChosen,
 
-            [Display(Name = "Ukjent")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023ArrivedCountryFromResource.unknown), ResourceType = typeof(AlienSpeciesAssessment2023ArrivedCountryFromResource))]
             Unknown,
 
             [Display(Name = "1")]
@@ -66,19 +67,19 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             [Display(Name = "")]
             NotChosen,
 
-            [Display(Name = "Kun historisk")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.historic), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
             Historic,
 
-            [Display(Name = "Opphørt, men kan inntreffe igjen")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.ceased), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
             Ceased,
 
-            [Display(Name = "Pågående")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.ongoing), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
             Ongoing,
 
-            [Display(Name = "Kun i fremtiden")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.future), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
             Future,
 
-            [Display(Name = "Ukjent")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023ArrivedCountryFromResource.unknown), ResourceType = typeof(AlienSpeciesAssessment2023ArrivedCountryFromResource))]
             Unknown
         }
 
@@ -87,26 +88,27 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
             [Display(Name = "")]
             Unknown,
 
-            [Display(Name = "Tilsiktet utsetting")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.import), Description = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.import), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))]
+            ImportDirect,
+
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.intentionally_released), Description = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.intentionally_released), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))] 
             Released,
 
-            [Display(Name = "Rømning/forvilling")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.escape), Description = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.escape), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))] 
             Escaped,
 
-            [Display(Name = "Forurensning av vare")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.contaminant), Description = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.contaminant_description), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))] 
             Transportpolution,
 
-            [Display(Name = "Blindpassasjer med transport")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.stowaway),  Description = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.stowaway_description), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))] 
             Stowaway,
 
-            [Display(Name = "Korridor")]
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.corridor), Description = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.corridor_description), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))] 
             Corridor,
 
-            [Display(Name = "Egenspredning")]
-            NaturalDispersal,
+            [Display(Name = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.natural_dispersal), Description = nameof(AlienSpeciesAssessment2023IntroductionPathwayResource.natural_dispersal), ResourceType = typeof(AlienSpeciesAssessment2023IntroductionPathwayResource))] 
+            NaturalDispersal
 
-            [Display(Name = "Direkte import")]
-            ImportDirect
         }
     }
 }

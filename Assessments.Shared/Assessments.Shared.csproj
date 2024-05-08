@@ -38,6 +38,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AlienSpeciesAssessment2023EvaluationContextResource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023IntroductionPathwayResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023IntroductionPathwayResource.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MajorTypeGroupResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -102,6 +107,10 @@
     <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023EvaluationContextResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AlienSpeciesAssessment2023EvaluationContextResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023IntroductionPathwayResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023IntroductionPathwayResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MajorTypeGroupResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -117,4 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="intentionally_released" xml:space="preserve">
+    <value>Tilsiktet utsetting</value>
+  </data>
+  <data name="escape" xml:space="preserve">
+    <value>Rømning/forvilling</value>
+  </data>
+  <data name="contaminant" xml:space="preserve">
+    <value>Forurensning av vare</value>
+  </data>
+  <data name="stowaway" xml:space="preserve">
+    <value>Blindpassasjer med transport</value>
+  </data>
+  <data name="stowaway_description" xml:space="preserve">
+    <value>Som blindpassasjer</value>
+  </data>
+  <data name="contaminant_description" xml:space="preserve">
+    <value>Som forurensning av vare</value>
+  </data>
+  <data name="import" xml:space="preserve">
+    <value>Direkte import</value>
+  </data>
+  <data name="natural_dispersal" xml:space="preserve">
+    <value>Egenspredning</value>
+  </data>
+  <data name="corridor" xml:space="preserve">
+    <value>Korridor</value>
+  </data>
+  <data name="corridor_description" xml:space="preserve">
+    <value>Via menneskeskapt korridor</value>
+  </data>
+  <data name="numerous_yearly" xml:space="preserve">
+    <value>Tallrike ganger pr. år</value>
+  </data>
+  <data name="yearly" xml:space="preserve">
+    <value>Ca. årlig</value>
+  </data>
+  <data name="several_per_ten_years" xml:space="preserve">
+    <value>Flere ganger pr. 10. år</value>
+  </data>
+  <data name="rarer_than_ten_years" xml:space="preserve">
+    <value>Sjeldnere enn hvert 10. år</value>
+  </data>
+  <data name="historic" xml:space="preserve">
+    <value>Kun historisk</value>
+  </data>
+  <data name="ceased" xml:space="preserve">
+    <value>Opphørt, men kan inntreffe igjen</value>
+  </data>
+  <data name="ongoing" xml:space="preserve">
+    <value>Pågående</value>
+  </data>
+  <data name="future" xml:space="preserve">
+    <value>Kun i fremtiden</value>
+  </data>
 </root>

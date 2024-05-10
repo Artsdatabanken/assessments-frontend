@@ -236,32 +236,33 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
         public const string Limnic = "Eli";
         public const string Terrestrial = "Ete";
 
-        public static readonly FilterItem[] AlienSpecies2023EnvironmentFilters =
+        public readonly FilterItem[] AlienSpecies2023EnvironmentFilters =
         {
             new()
             {
-                Name = nameof(AlienSpeciesAssessment2023Environment.Marint),
+                Name = AlienSpeciesAssessment2023Environment.Marint.DisplayName(),
                 NameShort = "Ema",
             },
             new()
             {
-                Name = nameof(AlienSpeciesAssessment2023Environment.Limnisk),
+                Name = AlienSpeciesAssessment2023Environment.Limnisk.DisplayName(),
                 NameShort = "Eli",
             },
             new()
             {
-                Name = nameof(AlienSpeciesAssessment2023Environment.Terrestrisk),
+                Name = AlienSpeciesAssessment2023Environment.Terrestrisk.DisplayName(),
                 NameShort = "Ete",
             }
         };
 
-        public static readonly FilterAndMetaData AlienSpecies2023Environment = new()
-        {
-            Filters = AlienSpecies2023EnvironmentFilters,
-            FilterDescription = "",
-            FilterButtonName = "livsmiljø-filtre",
-            FilterButtonText = "Livsmiljø"
-        };
+        public FilterAndMetaData AlienSpecies2023Environment() =>
+            new()
+            {
+                Filters = AlienSpecies2023EnvironmentFilters,
+                FilterDescription = "",
+                FilterButtonName = "livsmiljø-filtre",
+                FilterButtonText = "Livsmiljø"
+            };
     }
 
     public class GeographicVariation

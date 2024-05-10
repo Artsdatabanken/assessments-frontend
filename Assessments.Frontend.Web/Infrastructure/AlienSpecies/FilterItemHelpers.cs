@@ -26,7 +26,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Filters = AlienSpecies2023AreasFilters,
                 FilterDescription = "",
                 FilterButtonName = "områdefiltre",
-                FilterButtonText = "Område"
+                FilterButtonText = ResourceManagerHelper.Shared.GetString("area")
             };
     }
 

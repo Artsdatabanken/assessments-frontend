@@ -1,17 +1,22 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
-using Assessments.Shared.Resources.Enums.AlienSpecies;
-using CsvHelper.Configuration.Attributes;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using static Assessments.Frontend.Web.Infrastructure.AlienSpecies.DeciciveCriteria;
 using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
+using Microsoft.Extensions.Localization;
 
 namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 {
     public class Areas
     {
+        private readonly IStringLocalizer<SharedResources> _sharedResourcesLocalizer;
+
+        public Areas(IStringLocalizer<SharedResources> sharedResourcesLocalizer)
+        {
+            _sharedResourcesLocalizer = sharedResourcesLocalizer;
+        }
+
         private readonly FilterItem[] AlienSpecies2023AreasFilters = Enum.GetValues<AlienSpeciesAssessment2023EvaluationContext>()
             .Select(x => new FilterItem
             {
@@ -19,14 +24,13 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 NameShort = x.ToString()
             }).ToArray();
 
-
         public FilterAndMetaData AlienSpecies2023Areas() =>
             new()
             {
                 Filters = AlienSpecies2023AreasFilters,
                 FilterDescription = "",
                 FilterButtonName = "områdefiltre",
-                FilterButtonText = "Område"
+                FilterButtonText = _sharedResourcesLocalizer["area"] //"Område"
             };
     }
 

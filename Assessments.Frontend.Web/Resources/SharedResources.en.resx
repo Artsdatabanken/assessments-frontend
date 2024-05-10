@@ -120,6 +120,9 @@
   <data name="alien-species-list" xml:space="preserve">
     <value>Alien species list</value>
   </data>
+  <data name="area" xml:space="preserve">
+    <value>Area</value>
+  </data>
   <data name="to_species_page" xml:space="preserve">
     <value>To species page</value>
   </data>

@@ -264,14 +264,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         private BarChart GetSpreadWays()
         {
-            var allSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).Take(6).ToList();
+            var allSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(2).Take(6).ToList();
 
             var barChart = new BarChart()
             {
                 Data = allSpreadWays.Select(x => new BarChart.BarChartData()
                 {
                     Name = x.DisplayName(),
-                    Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways.DistinctBy(z => z.Category)).Where(y => y.MainCategory == x && y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Count()
+                    Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways.Where(z => z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && z.MainCategory == x).DistinctBy(z => z.MainCategory)).Count()
                 }).OrderByDescending(x => x.Count).ToList()
             };
             barChart.MaxValue = barChart.Data.Max(x => x.Count);
@@ -280,7 +280,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         private List<BarChart> GetSpreadWaysIntroduction()
         {
-            var allMainSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).Take(6).ToList();
+            var allMainSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(2).Take(6).ToList();
 
             var barCharts = new List<BarChart>();
 

@@ -43,6 +43,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AlienSpeciesAssessment2023EvaluationContextResource.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023IntroductionPathwayResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023IntroductionPathwayResource.resx</DependentUpon>
+    </Compile>
     <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MajorTypeGroupResource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -57,6 +62,11 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AlienSpeciesAssessment2023ReasonForChangeOfCategoryResource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023RegionResource.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AlienSpeciesAssessment2023RegionResource.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023ScientificNameRankResource.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -107,6 +117,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AlienSpeciesAssessment2023EvaluationContextResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023IntroductionPathwayResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023IntroductionPathwayResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023MajorTypeGroupResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AlienSpeciesAssessment2023MajorTypeGroupResource.Designer.cs</LastGenOutput>
@@ -118,6 +132,10 @@
     <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023ReasonForChangeOfCategoryResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AlienSpeciesAssessment2023ReasonForChangeOfCategoryResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023RegionResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AlienSpeciesAssessment2023RegionResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\Enums\AlienSpecies\AlienSpeciesAssessment2023ScientificNameRankResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -18,17 +18,16 @@
     var AllAreas = new Areas().AlienSpecies2023Areas();
     var AllCategories = new Categories().AlienSpecies2023Categories();
     var AllCategoriesChanged = new CategoryChange().AlienSpecies2023CategoryChanged();
-    var AllClimateEffects = ClimateEffects.AlienSpecies2023ClimateEffects;
+    var AllClimateEffects = new ClimateEffects().AlienSpecies2023ClimateEffects();
     var AllDeciciveCriterias = new DeciciveCriteria().AlienSpecies2023DeciciveCriteria();
     var AllEcologicalEffects = new Categories().AlienSpecies2023EcologicalEffect();
     var AllEnvironments = new Environments().AlienSpecies2023Environment();
-    var AllGeographicVariation = GeographicVariation.AlienSpecies2023GeographicVariation;
-    var AllHabitats = Habitat.AlienSpecies2023Habitats;
+    var AllGeographicVariation = new GeographicVariation().AlienSpecies2023GeographicVariation();
     var AllInvasionPotentials = new Categories().AlienSpecies2023InvasionPotential();
     var AllNatureTypes = new NatureTypes().AlienSpecies2023NatureTypes();
-    var AllNotAssessed = NotAssessed.AlienSpecies2023NotAssessed();
-    var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
-    var AllRegionallyAlien = RegionallyAlien.AlienSpecies2023RegionallyAlien;
+    var AllNotAssessed = new NotAssessed().AlienSpecies2023NotAssessed();
+    var AllProductionSpecies = new ProductionSpecies().AlienSpecies2023ProductionSpecies();
+    var AllRegionallyAlien = new RegionallyAlien().AlienSpecies2023RegionallyAlien();
     var AllRegions = new Regions().AlienSpecies2023Regions();
     var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
     var AllSpeciesStatus = new SpeciesStatus().AlienSpecies2023SpeciesStatus();
@@ -108,7 +107,7 @@
                         string markAllClassName = "mark_all";
 
                         if (filterItems.Filters.Length > 4)
-                            MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
+                            MakeCheckBoxLi(filterName, new Constants.SearchAndFiltersAlienSpecies().ChooseAll, modelName, filterModel, markAllClassName, outerClassName);
 
                         foreach (var el in filterItems.Filters)
                         {
@@ -194,7 +193,6 @@
                             MakeFilterChips(Model.ClimateEffects, AllClimateEffects.Filters);
                             MakeFilterChips(Model.SpreadWays, AllSpreadWays.Filters);
                             MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
-                            MakeFilterChips(Model.Habitats, AllHabitats.Filters);
                             MakeFilterChips(Model.Regions, AllRegions.Filters);
                         }
                     </ul>

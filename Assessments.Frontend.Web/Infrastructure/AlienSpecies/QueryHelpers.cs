@@ -132,8 +132,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 var assessments = change switch
                 {
-                    nameof(CategoryChangeEnum.ccvf) => query.Where(x => (x.PreviousAssessments.Count == 0 || x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category == AlienSpeciesAssessment2023Category.NR)) && x.Category != AlienSpeciesAssessment2023Category.NR),
-                    nameof(CategoryChangeEnum.ccsk) => query.Where(x => x.PreviousAssessments.Count > 0 && x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category == y.Category)),
+                    nameof(Constants.SearchAndFiltersAlienSpecies.AssessedFirstTime) => query.Where(x => (x.PreviousAssessments.Count == 0 || x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category == AlienSpeciesAssessment2023Category.NR)) && x.Category != AlienSpeciesAssessment2023Category.NR),
+                    nameof(Constants.SearchAndFiltersAlienSpecies.AssessedChangedCategory) => query.Where(x => x.PreviousAssessments.Count > 0 && x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category == y.Category)),
                     nameof(AlienSpeciesAssessment2023ReasonForChangeOfCategory.NewKnowledge) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(AlienSpeciesAssessment2023ReasonForChangeOfCategory.NewKnowledge))),
                     nameof(AlienSpeciesAssessment2023ReasonForChangeOfCategory.NewInterpretation) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(AlienSpeciesAssessment2023ReasonForChangeOfCategory.NewInterpretation))),
                     nameof(AlienSpeciesAssessment2023ReasonForChangeOfCategory.ChangedGuidelines) => query.Where(x => x.PreviousAssessments.Any(y => y.RevisionYear == 2018 && y.Category != AlienSpeciesAssessment2023Category.NR && x.Category != y.Category && x.ReasonForChangeOfCategory.Contains(AlienSpeciesAssessment2023ReasonForChangeOfCategory.ChangedGuidelines))),
@@ -237,8 +237,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 var assessments = variation switch
                 {
-                    nameof(GeographicVariation.GeographicVariationEnum.Gvv) => query.Where(x => x.GeographicVariationInCategory == true),
-                    nameof(GeographicVariation.GeographicVariationEnum.Gvn) => query.Where(x => x.GeographicVariationInCategory == false),
+                    nameof(Constants.SearchAndFiltersAlienSpecies.GeographicVariationNotEqual) => query.Where(x => x.GeographicVariationInCategory == true),
+                    nameof(Constants.SearchAndFiltersAlienSpecies.GeographicVariationEqual) => query.Where(x => x.GeographicVariationInCategory == false),
                     _ => null
                 };
 
@@ -256,10 +256,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             {
                 var assessments = effect switch
                 {
-                    nameof(ClimateEffects.ClimateEffectsEnum.Cepi) => query.Where(x => x.ClimateEffectsInvasionpotential == true),
-                    nameof(ClimateEffects.ClimateEffectsEnum.Cepo) => query.Where(x => x.ClimateEffectsEcoEffect == true),
-                    nameof(ClimateEffects.ClimateEffectsEnum.Ceii) => query.Where(x => x.ClimateEffectsInvasionpotential == false),
-                    nameof(ClimateEffects.ClimateEffectsEnum.Ceio) => query.Where(x => x.ClimateEffectsEcoEffect == false),
+                    nameof(Constants.SearchAndFiltersAlienSpecies.ClimateInvasionPotentialAffected) => query.Where(x => x.ClimateEffectsInvasionpotential == true),
+                    nameof(Constants.SearchAndFiltersAlienSpecies.ClimateEcologicalEffectAffected) => query.Where(x => x.ClimateEffectsEcoEffect == true),
+                    nameof(Constants.SearchAndFiltersAlienSpecies.ClimateInvasionPotentialNotAffected) => query.Where(x => x.ClimateEffectsInvasionpotential == false),
+                    nameof(Constants.SearchAndFiltersAlienSpecies.ClimateEcologicalEffectNotAffected) => query.Where(x => x.ClimateEffectsEcoEffect == false),
                     _ => null
                 };
 
@@ -301,8 +301,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             foreach (var regionFilter in regionFilters)
             {
                 IQueryable<AlienSpeciesAssessment2023> assessments;
-                // Rae and Rai are not regions, so they are treated differently
-                if (regionFilter != nameof(RegionallyAlien.RegionallyAlienEnum.Rae) && regionFilter != nameof(RegionallyAlien.RegionallyAlienEnum.Rai) && Enum.TryParse(regionFilter, out RegionallyAlien.RegionallyAlienEnum filterEnum))
+                // ExcludeRegionallyAlien and OnlyRegionallyAlien are not regions, so they are treated differently
+                if (regionFilter != nameof(Constants.SearchAndFiltersAlienSpecies.ExcludeRegionallyAlien) && regionFilter != nameof(Constants.SearchAndFiltersAlienSpecies.OnlyRegionallyAlien) && Enum.TryParse(regionFilter, out RegionallyAlien.RegionallyAlienEnum filterEnum))
                 {
                     assessments = query.Where(x => x.FreshWaterRegionModel.FreshWaterRegions.Any(y => y.WaterRegionName == filterEnum.DisplayName() && y.IsIncludedInAssessmentArea == true && (y.IsKnown || y.IsAssumedToday || y.IsAssumedInFuture)));
                 }
@@ -310,8 +310,8 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 {
                     assessments = regionFilter switch
                     {
-                        nameof(RegionallyAlien.RegionallyAlienEnum.Rae) => query.Where(x => x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlienEstablishedBefore1800),
-                        nameof(RegionallyAlien.RegionallyAlienEnum.Rai) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlienEstablishedBefore1800),
+                        nameof(Constants.SearchAndFiltersAlienSpecies.ExcludeRegionallyAlien) => query.Where(x => x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien && x.AlienSpeciesCategory != AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlienEstablishedBefore1800),
+                        nameof(Constants.SearchAndFiltersAlienSpecies.OnlyRegionallyAlien) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien || x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlienEstablishedBefore1800),
                         _ => null
                     };
                 }

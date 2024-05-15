@@ -61,11 +61,47 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A×B - Median levetid × Ekspansjonshastighet.
+        /// </summary>
+        public static string A_B {
+            get {
+                return ResourceManager.GetString("A_B", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A×B hvor høyeste skår er....
+        /// </summary>
+        public static string A_B_highest_score {
+            get {
+                return ResourceManager.GetString("A_B_highest_score", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fremmedartslista.
         /// </summary>
         public static string alien_species_list {
             get {
                 return ResourceManager.GetString("alien-species-list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forekomstareal i sterkt endra natur.
+        /// </summary>
+        public static string aoo_strongly_altered_nature {
+            get {
+                return ResourceManager.GetString("aoo_strongly_altered_nature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forekomst i truede eller sjeldne naturtyper.
+        /// </summary>
+        public static string aoo_threatened_ecosystems {
+            get {
+                return ResourceManager.GetString("aoo_threatened_ecosystems", resourceCulture);
             }
         }
         
@@ -79,11 +115,407 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Kategorien er endret fra 2018.
+        /// </summary>
+        public static string category_changed {
+            get {
+                return ResourceManager.GetString("category_changed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Samme kategori som i 2018.
+        /// </summary>
+        public static string category_not_changed {
+            get {
+                return ResourceManager.GetString("category_not_changed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Endring i risikokategori.
+        /// </summary>
+        public static string change_in_category {
+            get {
+                return ResourceManager.GetString("change_in_category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merk alle.
+        /// </summary>
+        public static string choose_all {
+            get {
+                return ResourceManager.GetString("choose_all", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Påvirket av klimaendringer.
+        /// </summary>
+        public static string climate_affected {
+            get {
+                return ResourceManager.GetString("climate_affected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Betydning av klimaendringer for risiko.
+        /// </summary>
+        public static string climate_impact {
+            get {
+                return ResourceManager.GetString("climate_impact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ikke påvirket av klimaendringer.
+        /// </summary>
+        public static string climate_not_affected {
+            get {
+                return ResourceManager.GetString("climate_not_affected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avgjørende kriterier for kategori.
+        /// </summary>
+        public static string decisive_criteria {
+            get {
+                return ResourceManager.GetString("decisive_criteria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dørstokkarter.
+        /// </summary>
+        public static string doorknockers {
+            get {
+                return ResourceManager.GetString("doorknockers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Økologisk effekt.
+        /// </summary>
+        public static string ecological_effect {
+            get {
+                return ResourceManager.GetString("ecological_effect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Økologisk effekt påvirket av klimaendringer.
+        /// </summary>
+        public static string ecological_effect_climate_affected {
+            get {
+                return ResourceManager.GetString("ecological_effect_climate_affected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Økologisk effekt ikke påvirket av klimaendringer.
+        /// </summary>
+        public static string ecological_effect_climate_not_affected {
+            get {
+                return ResourceManager.GetString("ecological_effect_climate_not_affected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Påvirkning på arter og naturtyper i Norge.
+        /// </summary>
+        public static string ecological_effect_description {
+            get {
+                return ResourceManager.GetString("ecological_effect_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Økologisk effekt (risikomatrisens y-akse).
+        /// </summary>
+        public static string ecological_effect_y_axis {
+            get {
+                return ResourceManager.GetString("ecological_effect_y_axis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Naturtyper.
+        /// </summary>
+        public static string ecosystems {
+            get {
+                return ResourceManager.GetString("ecosystems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Etableringsstatus i dag.
+        /// </summary>
+        public static string establishment_category {
+            get {
+                return ResourceManager.GetString("establishment_category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vurdert for første gang.
+        /// </summary>
+        public static string first_time_assessed {
+            get {
+                return ResourceManager.GetString("first_time_assessed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Geografisk variasjon i risiko.
+        /// </summary>
+        public static string geographic_var {
+            get {
+                return ResourceManager.GetString("geographic_var", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Risikoen er den samme innenfor artens potensielle forekomstareal.
+        /// </summary>
+        public static string geographic_var_equal {
+            get {
+                return ResourceManager.GetString("geographic_var_equal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Risikoen er ulik innenfor artens potensielle forekomstareal.
+        /// </summary>
+        public static string geographic_var_unequal {
+            get {
+                return ResourceManager.GetString("geographic_var_unequal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Risikokategori.
+        /// </summary>
+        public static string impact_category {
+            get {
+                return ResourceManager.GetString("impact_category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import til produksjons- eller innendørsareal.
+        /// </summary>
+        public static string import {
+            get {
+                return ResourceManager.GetString("import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Introduksjon til naturen.
+        /// </summary>
+        public static string introduction {
+            get {
+                return ResourceManager.GetString("introduction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invasjonspotensial.
+        /// </summary>
+        public static string invasion_potential {
+            get {
+                return ResourceManager.GetString("invasion_potential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invasjonspotensial påvirket av klimaendringer.
+        /// </summary>
+        public static string invasion_potential_climate_affected {
+            get {
+                return ResourceManager.GetString("invasion_potential_climate_affected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invasjonspotensial ikke påvirket av klimaendringer.
+        /// </summary>
+        public static string invasion_potential_climate_not_affected {
+            get {
+                return ResourceManager.GetString("invasion_potential_climate_not_affected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artens levedyktighet og evne til å ekspandere.
+        /// </summary>
+        public static string invasion_potential_description {
+            get {
+                return ResourceManager.GetString("invasion_potential_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invasjonspotensial (risikomatrisens x-akse).
+        /// </summary>
+        public static string invasion_potential_x_axis {
+            get {
+                return ResourceManager.GetString("invasion_potential_x_axis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tidligere eller nåværende bruksart.
+        /// </summary>
+        public static string is_production_species {
+            get {
+                return ResourceManager.GetString("is_production_species", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Livsmiljø.
+        /// </summary>
+        public static string lifestyle {
+            get {
+                return ResourceManager.GetString("lifestyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ikke-risikovurderte arter.
+        /// </summary>
+        public static string not_assessed_species {
+            get {
+                return ResourceManager.GetString("not_assessed_species", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ikke bruksart.
+        /// </summary>
+        public static string not_production_species {
+            get {
+                return ResourceManager.GetString("not_production_species", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spredningsmåter.
+        /// </summary>
+        public static string pathways {
+            get {
+                return ResourceManager.GetString("pathways", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bruksart.
+        /// </summary>
+        public static string production_species {
+            get {
+                return ResourceManager.GetString("production_species", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regionalt fremmede arter.
+        /// </summary>
+        public static string regionally_alien {
+            get {
+                return ResourceManager.GetString("regionally_alien", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ekskluder regionalt fremmede arter.
+        /// </summary>
+        public static string regionally_alien_exclude {
+            get {
+                return ResourceManager.GetString("regionally_alien_exclude", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kun vis regionalt fremmede arter.
+        /// </summary>
+        public static string regionally_alien_only {
+            get {
+                return ResourceManager.GetString("regionally_alien_only", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regionvis utbredelse.
+        /// </summary>
+        public static string regionally_distribution {
+            get {
+                return ResourceManager.GetString("regionally_distribution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regioner med kjent, antatt eller forventet forekomst.
+        /// </summary>
+        public static string regions_expected_occurrence {
+            get {
+                return ResourceManager.GetString("regions_expected_occurrence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Regioner og havområder.
+        /// </summary>
+        public static string regions_oceans {
+            get {
+                return ResourceManager.GetString("regions_oceans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artsgrupper.
+        /// </summary>
+        public static string species_groups {
+            get {
+                return ResourceManager.GetString("species_groups", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spredning i naturen.
+        /// </summary>
+        public static string spread {
+            get {
+                return ResourceManager.GetString("spread", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taksonomi.
+        /// </summary>
+        public static string taxonomy {
+            get {
+                return ResourceManager.GetString("taxonomy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Til artssiden.
         /// </summary>
         public static string to_species_page {
             get {
                 return ResourceManager.GetString("to_species_page", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vannregioner.
+        /// </summary>
+        public static string water_regions {
+            get {
+                return ResourceManager.GetString("water_regions", resourceCulture);
             }
         }
     }

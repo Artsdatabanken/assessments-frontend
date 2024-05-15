@@ -65,9 +65,9 @@
     {        
         string id = value.Replace(" ", "_");
         <li class="checkbox">
-            <label for="@id" class="@labelClassName">
+            <label for="@(id + name)" class="@labelClassName">
                 @{
-                    InputTag(value, $"{inputClassName} submitOnclick", name, model, value);
+                    InputTag(id + name, $"{inputClassName} submitOnclick", name, model, value);
                 }
                 <span class="label_text">@label</span>
             </label>

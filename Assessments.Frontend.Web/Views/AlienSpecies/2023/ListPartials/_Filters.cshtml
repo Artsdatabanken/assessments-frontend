@@ -56,11 +56,6 @@
         <input id="@id" type="checkbox" class="@className" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)>
     }
 
-    void InputTag(string name, string[] elements, string value)
-    {
-        InputTag(value, "submitOnclick", name, elements, value);
-    }
-
     void MakeCheckBoxLi(string value, string label, string name, string[] model, string labelClassName, string inputClassName)
     {        
         string id = value.Replace(" ", "_");

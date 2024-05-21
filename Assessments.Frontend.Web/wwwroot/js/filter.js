@@ -252,7 +252,11 @@ if (filters) {
             const shouldToggleSubGroup = Array.prototype.some.call(markAllInputs, input => input.id === el.id);
 
             if (shouldToggleSubGroup) {
-                const subFilters = document.getElementsByClassName(`${el.id}_input`);
+                let subFilters = document.getElementsByClassName(`${el.id}_input`);
+                // Alien species list has different ids due to language support. Hence, we try using value instead.
+                if (!subFilters.length) {
+                    subFilters = document.getElementsByClassName(`${el.value}_input`);
+                }
                 toggleSubGroup(subFilters, el);
             }
         }

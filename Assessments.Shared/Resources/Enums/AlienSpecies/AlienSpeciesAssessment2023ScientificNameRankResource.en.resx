@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="species" xml:space="preserve">
+    <value>Species</value>
+  </data>
+  <data name="subspecies" xml:space="preserve">
+    <value>Subspecies</value>
+  </data>
+  <data name="variety" xml:space="preserve">
+    <value>Variety</value>
+  </data>
+  <data name="taxonomic_rank" xml:space="preserve">
+    <value>Taxonomic rank</value>
+  </data>
+  <data name="not_assessed_at_another_rank" xml:space="preserve">
+    <value>Exclude taxa included in assessment at higher taxonomic rank</value>
+  </data>
+  <data name="form" xml:space="preserve">
+    <value>Form</value>
+  </data>
+  <data name="assessed_at_another_rank" xml:space="preserve">
+    <value>Show taxa included in assessment at higher taxonomic rank</value>
+  </data>
+  <data name="hybrid" xml:space="preserve">
+    <value>Hybrid</value>
+  </data>
+  <data name="species_description" xml:space="preserve">
+    <value>The species</value>
+  </data>
+  <data name="subspecies_description" xml:space="preserve">
+    <value>The subspecies</value>
+  </data>
+  <data name="variety_description" xml:space="preserve">
+    <value>The variety</value>
+  </data>
+  <data name="form_description" xml:space="preserve">
+    <value>Taxon</value>
+  </data>
+  <data name="hybrid_description" xml:space="preserve">
+    <value>The hybrid</value>
+  </data>
 </root>

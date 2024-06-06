@@ -120,4 +120,154 @@
   <data name="alien-species-list" xml:space="preserve">
     <value>Fremmedartslista</value>
   </data>
+  <data name="area" xml:space="preserve">
+    <value>Område</value>
+  </data>
+  <data name="to_species_page" xml:space="preserve">
+    <value>Til artssiden</value>
+  </data>
+  <data name="invasion_potential_x_axis" xml:space="preserve">
+    <value>Invasjonspotensial (risikomatrisens x-akse)</value>
+  </data>
+  <data name="invasion_potential_description" xml:space="preserve">
+    <value>Artens levedyktighet og evne til å ekspandere</value>
+  </data>
+  <data name="ecological_effect_y_axis" xml:space="preserve">
+    <value>Økologisk effekt (risikomatrisens y-akse)</value>
+  </data>
+  <data name="ecological_effect_description" xml:space="preserve">
+    <value>Påvirkning på arter og naturtyper i Norge</value>
+  </data>
+  <data name="impact_category" xml:space="preserve">
+    <value>Risikokategori</value>
+  </data>
+  <data name="first_time_assessed" xml:space="preserve">
+    <value>Vurdert for første gang</value>
+  </data>
+  <data name="category_changed" xml:space="preserve">
+    <value>Kategorien er endret fra 2018</value>
+  </data>
+  <data name="category_not_changed" xml:space="preserve">
+    <value>Samme kategori som i 2018</value>
+  </data>
+  <data name="change_in_category" xml:space="preserve">
+    <value>Endring i risikokategori</value>
+  </data>
+  <data name="A_B_highest_score" xml:space="preserve">
+    <value>A×B hvor høyeste skår er...</value>
+  </data>
+  <data name="A_B" xml:space="preserve">
+    <value>A×B - Median levetid × Ekspansjonshastighet</value>
+  </data>
+  <data name="invasion_potential" xml:space="preserve">
+    <value>Invasjonspotensial</value>
+  </data>
+  <data name="ecological_effect" xml:space="preserve">
+    <value>Økologisk effekt</value>
+  </data>
+  <data name="decisive_criteria" xml:space="preserve">
+    <value>Avgjørende kriterier for kategori</value>
+  </data>
+  <data name="lifestyle" xml:space="preserve">
+    <value>Livsmiljø</value>
+  </data>
+  <data name="geographic_var_unequal" xml:space="preserve">
+    <value>Risikoen er ulik innenfor artens potensielle forekomstareal</value>
+  </data>
+  <data name="geographic_var_equal" xml:space="preserve">
+    <value>Risikoen er den samme innenfor artens potensielle forekomstareal</value>
+  </data>
+  <data name="geographic_var" xml:space="preserve">
+    <value>Geografisk variasjon i risiko</value>
+  </data>
+  <data name="invasion_potential_climate_affected" xml:space="preserve">
+    <value>Invasjonspotensial påvirket av klimaendringer</value>
+  </data>
+  <data name="ecological_effect_climate_affected" xml:space="preserve">
+    <value>Økologisk effekt påvirket av klimaendringer</value>
+  </data>
+  <data name="invasion_potential_climate_not_affected" xml:space="preserve">
+    <value>Invasjonspotensial ikke påvirket av klimaendringer</value>
+  </data>
+  <data name="ecological_effect_climate_not_affected" xml:space="preserve">
+    <value>Økologisk effekt ikke påvirket av klimaendringer</value>
+  </data>
+  <data name="climate_affected" xml:space="preserve">
+    <value>Påvirket av klimaendringer</value>
+  </data>
+  <data name="climate_not_affected" xml:space="preserve">
+    <value>Ikke påvirket av klimaendringer</value>
+  </data>
+  <data name="climate_impact" xml:space="preserve">
+    <value>Betydning av klimaendringer for risiko</value>
+  </data>
+  <data name="aoo_strongly_altered_nature" xml:space="preserve">
+    <value>Forekomstareal i sterkt endra natur</value>
+  </data>
+  <data name="aoo_threatened_ecosystems" xml:space="preserve">
+    <value>Forekomst i truede eller sjeldne naturtyper</value>
+  </data>
+  <data name="ecosystems" xml:space="preserve">
+    <value>Naturtyper</value>
+  </data>
+  <data name="import" xml:space="preserve">
+    <value>Import til produksjons- eller innendørsareal</value>
+  </data>
+  <data name="introduction" xml:space="preserve">
+    <value>Introduksjon til naturen</value>
+  </data>
+  <data name="spread" xml:space="preserve">
+    <value>Spredning i naturen</value>
+  </data>
+  <data name="pathways" xml:space="preserve">
+    <value>Spredningsmåter</value>
+  </data>
+  <data name="regionally_alien_exclude" xml:space="preserve">
+    <value>Ekskluder regionalt fremmede arter</value>
+  </data>
+  <data name="regionally_alien_only" xml:space="preserve">
+    <value>Kun vis regionalt fremmede arter</value>
+  </data>
+  <data name="regionally_distribution" xml:space="preserve">
+    <value>Regionvis utbredelse</value>
+  </data>
+  <data name="water_regions" xml:space="preserve">
+    <value>Vannregioner</value>
+  </data>
+  <data name="regionally_alien" xml:space="preserve">
+    <value>Regionalt fremmede arter</value>
+  </data>
+  <data name="taxonomy" xml:space="preserve">
+    <value>Taksonomi</value>
+  </data>
+  <data name="species_groups" xml:space="preserve">
+    <value>Artsgrupper</value>
+  </data>
+  <data name="regions_expected_occurrence" xml:space="preserve">
+    <value>Regioner med kjent, antatt eller forventet forekomst</value>
+  </data>
+  <data name="regions_oceans" xml:space="preserve">
+    <value>Regioner og havområder</value>
+  </data>
+  <data name="is_production_species" xml:space="preserve">
+    <value>Tidligere eller nåværende bruksart</value>
+  </data>
+  <data name="not_production_species" xml:space="preserve">
+    <value>Ikke bruksart</value>
+  </data>
+  <data name="production_species" xml:space="preserve">
+    <value>Bruksart</value>
+  </data>
+  <data name="doorknockers" xml:space="preserve">
+    <value>Dørstokkarter</value>
+  </data>
+  <data name="establishment_category" xml:space="preserve">
+    <value>Etableringsstatus i dag</value>
+  </data>
+  <data name="not_assessed_species" xml:space="preserve">
+    <value>Ikke-risikovurderte arter</value>
+  </data>
+  <data name="choose_all" xml:space="preserve">
+    <value>Merk alle</value>
+  </data>
 </root>

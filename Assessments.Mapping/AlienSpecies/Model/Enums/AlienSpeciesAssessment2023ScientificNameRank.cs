@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Assessments.Shared.Resources.Enums.AlienSpecies;
+using System.ComponentModel.DataAnnotations;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
@@ -30,24 +31,28 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         Genus = 19,
         SubGenus = 20,
         Section = 21,
-        [Display(Name = "Art")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.species), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.species_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         Species = 22,
 
-        [Display(Name = "Underart")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.subspecies), Description =  nameof(AlienSpeciesAssessment2023ScientificNameRankResource.subspecies_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         SubSpecies = 23,
 
-        [Display(Name = "Varietet")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.variety), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.variety_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         Variety = 24,
 
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.form), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.form_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
         Form = 25,
 
-        [Display(Name = "Taksonomisk nivå")]
-        ttn,
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.hybrid), Description = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.hybrid_description), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        Hybrid,
 
-        [Display(Name = "Vurderes på et annet taksonomisk nivå ")]
-        tva,
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.taxonomic_rank), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        TaxonomicRank,
 
-        [Display(Name = "Vurderes ikke på et annet taksonomisk nivå ")]
-        tvi
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.assessed_at_another_rank), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        AssessedAtAnotherRank,
+
+        [Display(Name = nameof(AlienSpeciesAssessment2023ScientificNameRankResource.not_assessed_at_another_rank), ResourceType = typeof(AlienSpeciesAssessment2023ScientificNameRankResource))]
+        AssessedAtSameRank
     }
 }

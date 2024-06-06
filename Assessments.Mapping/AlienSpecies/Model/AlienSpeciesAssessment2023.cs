@@ -1,5 +1,6 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Mapping.AlienSpecies.Source;
+using System;
 using System.Collections.Generic;
 using static Assessments.Mapping.AlienSpecies.Source.FA4;
 
@@ -679,5 +680,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Description of occurrences that has been added to or removed from the dataset and why
         /// </summary>
         public string ArtskartObservationChangesDescription { get; set; }
+
+        /// <summary>
+        /// Date of revision of an assessment
+        /// </summary>
+        public DateTime RevisionDate { get; set; }
     }
 }

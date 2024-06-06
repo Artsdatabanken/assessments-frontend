@@ -44,7 +44,7 @@ namespace Assessments.Shared.Helpers
                 case { ResourceType: not null, Description: not null }:
                 {
                     var manager = new ResourceManager(attribute.ResourceType);
-                    return manager.GetString(attribute.Description) ?? throw new InvalidOperationException();
+                    return manager.GetString(attribute.Description);
                 }
                 default:
                     return attribute.Description ?? value.ToString();
@@ -60,7 +60,7 @@ namespace Assessments.Shared.Helpers
                 case { ResourceType: not null, Name: not null }:
                 {
                     var manager = new ResourceManager(attribute.ResourceType);
-                    return manager.GetString(attribute.Name) ?? throw new InvalidOperationException();
+                    return manager.GetString(attribute.Name);
                 }
                 default:
                     return attribute.Name ?? value.ToString();

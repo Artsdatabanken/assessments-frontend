@@ -63,7 +63,7 @@ namespace Assessments.Shared.Helpers
                     return manager.GetString(attribute.Name);
                 }
                 default:
-                    return attribute.Name ?? value.ToString();
+                    return attribute?.Name ?? value.ToString();
             }
         }
 

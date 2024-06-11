@@ -119,7 +119,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => x is not AlienSpeciesAssessment2023SpeciesGroups.Unknown && !algae.Contains(x) && !crayfish.Contains(x) && !insects.Contains(x)).Select(x => new BarChart.BarChartData
                 {
                     Name = x.DisplayName(),
-                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
+                    Count = _query.Where(y => y.SpeciesGroup.DisplayName() == x.DisplayName()).Count()
                 }).ToList()
             };
 

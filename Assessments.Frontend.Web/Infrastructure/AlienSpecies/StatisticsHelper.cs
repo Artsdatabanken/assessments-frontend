@@ -284,6 +284,20 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             var barCharts = new List<BarChart>();
 
+            var uniqueIntroductionPathwaysPerSpecies = new List<string>();
+
+            var introductionPathwaysSpecies = _query.Select(y => new
+            {
+                introductionAndSpreadPathways = y.IntroductionAndSpreadPathways.Where(z => z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Select(z => z.Category).ToArray(),
+                id = y.Id
+            }).ToList(); 
+
+            foreach (var id in introductionPathwaysSpecies)
+            {
+                var uniquePathways = id.introductionAndSpreadPathways.Distinct().ToList();
+                uniqueIntroductionPathwaysPerSpecies.AddRange( uniquePathways );
+            };
+
             foreach (var spreadWay in allMainSpreadWays)
             {
                 var barChart = new BarChart()
@@ -292,7 +306,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     Data = _unfilteredQuery.SelectMany(x => x.IntroductionAndSpreadPathways.Where(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == spreadWay)).DistinctBy(x => x.Category).Select(x => new BarChart.BarChartData()
                     {
                         Name = x.Category,
-                        Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways.DistinctBy(z => z.Category)).Where(z => z.Category == x.Category && z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Count()
+                        Count = uniqueIntroductionPathwaysPerSpecies.Where(item => x.Category.Equals(item)).Count()
                     }).OrderBy(x => x.Name).ToList()
                 };
                 barCharts.Add(barChart);

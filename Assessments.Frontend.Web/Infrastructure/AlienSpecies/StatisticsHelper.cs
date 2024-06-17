@@ -286,15 +286,11 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
             var uniqueIntroductionPathwaysPerSpecies = new List<string>();
 
-            var introductionPathwaysSpecies = _query.Select(y => new
-            {
-                introductionAndSpreadPathways = y.IntroductionAndSpreadPathways.Where(z => z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Select(z => z.Category).ToArray(),
-                id = y.Id
-            }).ToList(); 
+            var introductionPathwaysSpecies = _query.Select(y =>  y.IntroductionAndSpreadPathways.Where(z => z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Select(z => z.Category).ToArray()).ToList();
 
-            foreach (var id in introductionPathwaysSpecies)
+            foreach (var speciesPathways in introductionPathwaysSpecies)
             {
-                var uniquePathways = id.introductionAndSpreadPathways.Distinct().ToList();
+                var uniquePathways = speciesPathways.Distinct().ToList();
                 uniqueIntroductionPathwaysPerSpecies.AddRange( uniquePathways );
             };
 

@@ -308,9 +308,10 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 barCharts.Add(barChart);
             }
 
+            var maxValue = barCharts.Where(x => x.Data.Any()).Max(x => x.Data.Max(y => y.Count));
             foreach (var barChart in barCharts)
             {
-                barChart.MaxValue = barCharts.Max(x => x.Data.Max(y => y.Count));
+                barChart.MaxValue = maxValue;
             }
 
             return barCharts.ToList();

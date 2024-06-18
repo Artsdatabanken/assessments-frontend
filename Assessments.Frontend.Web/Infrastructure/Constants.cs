@@ -30,7 +30,6 @@ namespace Assessments.Frontend.Web.Infrastructure
             public static readonly string TableOfContents = "Innhold på siden";
             public static readonly string ExpertSummary = "Ekspertenes oppsummering";
             public static readonly string AssesmentReasoning = "Begrunnelse";
-            public static readonly string RiskCategoryExplanation = "Hva forklarer artens risikokategori";
             public static readonly string CategoryChange = "Endring av risikokategori fra 2018";
             public static readonly string ClimateEffectsInvationpotential = "Effekt av klimaendringer";
             public static readonly string GeographicVariationInCategory = "Geografisk variasjon i risiko";
@@ -380,12 +379,6 @@ namespace Assessments.Frontend.Web.Infrastructure
         public const string speciesEvaluatedTo = "Arten er vurdert til ";
         public const string noRisk = "ingen kjent risiko";
         public const string noRiskExplanation = "NK og har dermed ingen avgjørende kriterier.";
-
-        //public const string criteriaExplanationString = "Artens risikokategori bestemmes av artens høyeste skår på invasjonspotensial (x-aksen i risikomatrisa) og på økologisk effekt (y-aksen i risikomatrisa). Kriteriet(ene) arten skårer høyest på for hver av aksene i matrisa er artens avgjørende kriterier.";
-        //public const string readMoreAboutCriterias = "Les mer om kriteriene";
-
-        public const string xAxisExplanation = "<b>Artens invasjonspotensial</b> bestemmes av tre kriterier: Artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet).";
-        public const string yAxisExplanation = "<b>Artens økologiske effekt</b> bestemmes av seks kriterier: Artens effekter på stedegne arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av stedegne arter (H-kriteriet) og overføring av parasitter eller patogener til stedegne arter (I-kriteriet).";
 
         public const string seeOtherTab = "Se fanen Øvrige kriterier.";
         public const string noDecisiveCriteriaXAxis = "Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen.";

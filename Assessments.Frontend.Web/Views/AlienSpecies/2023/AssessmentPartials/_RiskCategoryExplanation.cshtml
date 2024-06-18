@@ -1,5 +1,7 @@
 ﻿@model AlienSpeciesDetailViewModel
 @using Assessments.Mapping.AlienSpecies.Model.Enums
+@inject IStringLocalizer<SharedResourcesAlienSpecies> Localizer
+@* @inject IHtmlLocalizer<SharedResourcesAlienSpecies> LocalizerHtml *@
 
 @{
     var criteriaLetters = "ABCDEFGHI";
@@ -25,7 +27,7 @@
     <div class="page_section_header">
         <h2>@Constants.HeadingsNo.RiskCategoryExplanation</h2>
     </div>
-    <p>@Constants.criteriaExplanationString <a href="https://artsdatabanken.no/Pages/342811">@Constants.readMoreAboutCriterias</a>.</p>
+    <p> @Localizer["body_criteria_explanation_general_text"] <a href="https://artsdatabanken.no/Pages/342811"> @Localizer["body_link_to_criteria_page_text"]</a>.</p>
 
     <p>@Html.Raw(Constants.xAxisExplanation)</p>
 

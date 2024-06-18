@@ -120,4 +120,10 @@
   <data name="alien-species-list" xml:space="preserve">
     <value>Fremmedartslista</value>
   </data>
+  <data name="body_criteria_explanation_general_text" xml:space="preserve">
+    <value>Artens risikokategori bestemmes av artens høyeste skår på invasjonspotensial (x-aksen i risikomatrisa) og på økologisk effekt (y-aksen i risikomatrisa). Kriteriet(ene) arten skårer høyest på for hver av aksene i matrisa er artens avgjørende kriterier.</value>
+  </data>
+  <data name="body_link_to_criteria_page_text" xml:space="preserve">
+    <value>Les mer om kriteriene</value>
+  </data>
 </root>

@@ -120,4 +120,10 @@
   <data name="alien-species-list" xml:space="preserve">
     <value>Alien species list</value>
   </data>
+  <data name="body_criteria_explanation_general_text" xml:space="preserve">
+    <value>The impact category of a species is determined by the species' highest score on invasion potential (x-axis in the impact matrix) and ecological effect (y-axis in the impact matrix). The criterion(s) the species scores highest on for each of the axes in the matrix are the species' decisive criteria.</value>
+  </data>
+  <data name="body_link_to_criteria_page_text" xml:space="preserve">
+    <value>Read more about the criteria</value>
+  </data>
 </root>

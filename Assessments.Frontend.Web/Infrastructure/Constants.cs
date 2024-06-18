@@ -247,6 +247,60 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         // Alien species constants
 
+        public class SearchAndFiltersAlienSpecies
+        {
+            public string ChooseArea = Resources.SharedResources.area;
+            public string InvasionPotentialAxis = Resources.SharedResources.invasion_potential_x_axis;
+            public string InvasionPotentialDescription = Resources.SharedResources.invasion_potential_description;
+            public string EcologicalEffectAxis = Resources.SharedResources.ecological_effect_y_axis;
+            public string EcologicalEffectDescription = Resources.SharedResources.ecological_effect_description;
+            public string ImpactCategory = Resources.SharedResources.impact_category;
+            public string AssessedFirstTime = Resources.SharedResources.first_time_assessed;
+            public string AssessedChangedCategory = Resources.SharedResources.category_changed;
+            public string AssessedSameCategory = Resources.SharedResources.category_not_changed;
+            public string AssessedChangedCategoryFilter = Resources.SharedResources.change_in_category;
+            public string AxBDescription = Resources.SharedResources.A_B_highest_score;
+            public string AxB = Resources.SharedResources.A_B;
+            public string InvasionPotential = Resources.SharedResources.invasion_potential;
+            public string EcologicalEffect = Resources.SharedResources.ecological_effect;
+            public string DecisiveCriteria = Resources.SharedResources.decisive_criteria;
+            public string Lifestyle = Resources.SharedResources.lifestyle;
+            public string GeographicVariationNotEqual = Resources.SharedResources.geographic_var_unequal;
+            public string GeographicVariationEqual = Resources.SharedResources.geographic_var_equal;
+            public string GeographicVariation = Resources.SharedResources.geographic_var;
+            public string ClimateInvasionPotentialAffected = Resources.SharedResources.invasion_potential_climate_affected;
+            public string ClimateEcologicalEffectAffected = Resources.SharedResources.ecological_effect_climate_affected;
+            public string ClimateInvasionPotentialNotAffected = Resources.SharedResources.invasion_potential_climate_not_affected;
+            public string ClimateEcologicalEffectNotAffected = Resources.SharedResources.ecological_effect_climate_not_affected;
+            public string ClimateAffected = Resources.SharedResources.climate_affected;
+            public string ClimateNotAffected = Resources.SharedResources.climate_not_affected;
+            public string ClimateImpact = Resources.SharedResources.climate_impact;
+            public string OccurrenceStronglyAlteredNature = Resources.SharedResources.aoo_strongly_altered_nature;
+            public string OccurrenceThreatenedEcosystem = Resources.SharedResources.aoo_threatened_ecosystems;
+            public string Ecosystems = Resources.SharedResources.ecosystems;
+            public string Importation = Resources.SharedResources.import;
+            public string Introduction = Resources.SharedResources.introduction;
+            public string Spread = Resources.SharedResources.spread;
+            public string Pathways = Resources.SharedResources.pathways;
+            public string ExcludeRegionallyAlien = Resources.SharedResources.regionally_alien_exclude;
+            public string OnlyRegionallyAlien = Resources.SharedResources.regionally_alien_only;
+            public string RegionOccurrence = Resources.SharedResources.regionally_distribution;
+            public string WaterRegions = Resources.SharedResources.water_regions;
+            public string RegionallyAlien = Resources.SharedResources.regionally_alien;
+            public string Taxonomy = Resources.SharedResources.taxonomy;
+            public string SpeciesGroups = Resources.SharedResources.species_groups;
+            public string RegionsOccurrenceExpected = Resources.SharedResources.regions_expected_occurrence;
+            public string RegionsOceans = Resources.SharedResources.regions_oceans;
+            public string IsProductionSpecies = Resources.SharedResources.is_production_species;
+            public string NotProductionSpecies = Resources.SharedResources.not_production_species;
+            public string ProductionSpecies = Resources.SharedResources.production_species;
+            public string DoorKnockers = Resources.SharedResources.doorknockers;
+            public string EstablishmentCategory = Resources.SharedResources.establishment_category;
+            public string NotRiskAssessedSpecies = Resources.SharedResources.not_assessed_species;
+            public string ChooseAll = Resources.SharedResources.choose_all;
+
+        }
+
         public const string AlienSpecies2023PageMenuAssessmentAreaText = "områder der arten er regionalt fremmed i Norge (uten Svalbard)";
 
         public const string AlienSpecies2023FirstPublished = "11.08.2023";

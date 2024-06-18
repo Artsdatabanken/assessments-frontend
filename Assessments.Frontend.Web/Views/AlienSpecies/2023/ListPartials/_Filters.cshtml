@@ -18,21 +18,20 @@
     var AllAreas = new Areas().AlienSpecies2023Areas();
     var AllCategories = new Categories().AlienSpecies2023Categories();
     var AllCategoriesChanged = new CategoryChange().AlienSpecies2023CategoryChanged();
-    var AllClimateEffects = ClimateEffects.AlienSpecies2023ClimateEffects;
+    var AllClimateEffects = new ClimateEffects().AlienSpecies2023ClimateEffects();
     var AllDeciciveCriterias = new DeciciveCriteria().AlienSpecies2023DeciciveCriteria();
     var AllEcologicalEffects = new Categories().AlienSpecies2023EcologicalEffect();
-    var AllEnvironments = Environments.AlienSpecies2023Environment;
-    var AllGeographicVariation = GeographicVariation.AlienSpecies2023GeographicVariation;
-    var AllHabitats = Habitat.AlienSpecies2023Habitats;
+    var AllEnvironments = new Environments().AlienSpecies2023Environment();
+    var AllGeographicVariation = new GeographicVariation().AlienSpecies2023GeographicVariation();
     var AllInvasionPotentials = new Categories().AlienSpecies2023InvasionPotential();
     var AllNatureTypes = new NatureTypes().AlienSpecies2023NatureTypes();
-    var AllNotAssessed = NotAssessed.AlienSpecies2023NotAssessed();
-    var AllProductionSpecies = ProductionSpecies.AlienSpecies2023ProductionSpecies;
-    var AllRegionallyAlien = RegionallyAlien.AlienSpecies2023RegionallyAlien;
-    var AllRegions = Regions.AlienSpecies2023Regions;
+    var AllNotAssessed = new NotAssessed().AlienSpecies2023NotAssessed();
+    var AllProductionSpecies = new ProductionSpecies().AlienSpecies2023ProductionSpecies();
+    var AllRegionallyAlien = new RegionallyAlien().AlienSpecies2023RegionallyAlien();
+    var AllRegions = new Regions().AlienSpecies2023Regions();
     var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
     var AllSpeciesStatus = new SpeciesStatus().AlienSpecies2023SpeciesStatus();
-    var AllSpreadWays = SpreadWays.AlienSpecies2023SpreadWays;
+    var AllSpreadWays = new SpreadWays().AlienSpecies2023SpreadWays();
     var AllTaxonRanks = new TaxonRank().AlienSpecies2023TaxonRanks();
 
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
@@ -56,18 +55,13 @@
         <input id="@id" type="checkbox" class="@className" name=@name value="@value" @(elements.Contains(value) ? " checked=checked" : String.Empty)>
     }
 
-    void InputTag(string name, string[] elements, string value)
-    {
-        InputTag(value, "submitOnclick", name, elements, value);
-    }
-
     void MakeCheckBoxLi(string value, string label, string name, string[] model, string labelClassName, string inputClassName)
     {        
         string id = value.Replace(" ", "_");
         <li class="checkbox">
-            <label for="@id" class="@labelClassName">
+            <label for="@(id + name)" class="@labelClassName">
                 @{
-                    InputTag(value, $"{inputClassName} submitOnclick", name, model, value);
+                    InputTag(id + name, $"{inputClassName} submitOnclick", name, model, value);
                 }
                 <span class="label_text">@label</span>
             </label>
@@ -108,7 +102,7 @@
                         string markAllClassName = "mark_all";
 
                         if (filterItems.Filters.Length > 4)
-                            MakeCheckBoxLi(filterName, "Merk alle", modelName, filterModel, markAllClassName, outerClassName);
+                            MakeCheckBoxLi(filterName, new Constants.SearchAndFiltersAlienSpecies().ChooseAll, modelName, filterModel, markAllClassName, outerClassName);
 
                         foreach (var el in filterItems.Filters)
                         {
@@ -135,23 +129,24 @@
         MakeFilterGroup(filterName, filterName, false, filterModel, filterItems, filterItems.FilterButtonText, filterItems.FilterButtonName, string.Empty);
     }
 
-    void RenderChip(string buttontext, string filterValue)
+    void RenderChip(string buttontext, string targetId)
     {
         <li class="chips">
         <span class="chips-text">@buttontext</span>
-            <button class="text-button chips-close-button btn icon-button" onclick="submitClickedElement('@filterValue')" type="submit">
+            <button class="text-button chips-close-button btn icon-button" onclick="submitClickedElement('@targetId')" type="submit">
                 <span class="material-icons ">close</span>
             </button>
         </li>
     }
 
-    void MakeFilterChips(string[] filterModel, FilterItem[] filterItems)
+    void MakeFilterChips(string[] filterModel, FilterItem[] filterItems, string filterGroupName)
     {
         foreach (var filter in filterModel)
         {
             string buttonText = AlienSpeciesFilterHelpers.GetChipText(filter, filterItems);
+            string targetId = filter + filterGroupName;
             if (!string.IsNullOrEmpty(buttonText))
-                RenderChip(buttonText, filter);
+                RenderChip(buttonText, targetId);
         }
     }
 }
@@ -177,25 +172,24 @@
                     <ul>
                         @if (GetActiveSelectionCount(Model) > 0)
                         {
-                            MakeFilterChips(Model.Area, AllAreas.Filters);
-                            MakeFilterChips(Model.Category, AllCategories.Filters);
-                            MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters);
-                            MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters);
-                            MakeFilterChips(Model.NatureTypes, AllNatureTypes.Filters);
-                            MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters);
-                            MakeFilterChips(Model.Environment, AllEnvironments.Filters);
-                            MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters);
-                            MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters);
-                            MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters);
-                            MakeFilterChips(Model.NotAssessed, AllNotAssessed.Filters);
-                            MakeFilterChips(Model.RegionallyAlien, AllRegionallyAlien.Filters);
-                            MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters);
-                            MakeFilterChips(Model.GeographicVariations, AllGeographicVariation.Filters);
-                            MakeFilterChips(Model.ClimateEffects, AllClimateEffects.Filters);
-                            MakeFilterChips(Model.SpreadWays, AllSpreadWays.Filters);
-                            MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
-                            MakeFilterChips(Model.Habitats, AllHabitats.Filters);
-                            MakeFilterChips(Model.Regions, AllRegions.Filters);
+                            MakeFilterChips(Model.Area, AllAreas.Filters, nameof(Model.Area));
+                            MakeFilterChips(Model.Category, AllCategories.Filters, nameof(Model.Category));
+                            MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters, nameof(Model.CategoryChanged));
+                            MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters, nameof(Model.InvasionPotential));
+                            MakeFilterChips(Model.NatureTypes, AllNatureTypes.Filters, nameof(Model.NatureTypes));
+                            MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters, nameof(Model.EcologicalEffect));
+                            MakeFilterChips(Model.Environment, AllEnvironments.Filters, nameof(Model.Environment));
+                            MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters, nameof(Model.DecisiveCriterias));
+                            MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters, nameof(Model.SpeciesStatus));
+                            MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters, nameof(Model.ProductionSpecies));
+                            MakeFilterChips(Model.NotAssessed, AllNotAssessed.Filters, nameof(Model.NotAssessed));
+                            MakeFilterChips(Model.RegionallyAlien, AllRegionallyAlien.Filters, nameof(Model.RegionallyAlien));
+                            MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters, nameof(Model.SpeciesGroups));
+                            MakeFilterChips(Model.GeographicVariations, AllGeographicVariation.Filters, nameof(Model.GeographicVariations));
+                            MakeFilterChips(Model.ClimateEffects, AllClimateEffects.Filters, nameof(Model.ClimateEffects));
+                            MakeFilterChips(Model.SpreadWays, AllSpreadWays.Filters, nameof(Model.SpreadWays));
+                            MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters, nameof(Model.TaxonRank));
+                            MakeFilterChips(Model.Regions, AllRegions.Filters, nameof(Model.Regions));
                         }
                     </ul>
                     <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">

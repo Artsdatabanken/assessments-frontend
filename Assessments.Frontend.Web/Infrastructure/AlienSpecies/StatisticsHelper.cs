@@ -119,7 +119,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 Data = distinctSpeciesGroups.Where(x => x is not AlienSpeciesAssessment2023SpeciesGroups.Unknown && !algae.Contains(x) && !crayfish.Contains(x) && !insects.Contains(x)).Select(x => new BarChart.BarChartData
                 {
                     Name = x.DisplayName(),
-                    Count = _query.Where(y => y.SpeciesGroup == x).Count()
+                    Count = _query.Where(y => y.SpeciesGroup.DisplayName() == x.DisplayName()).Count()
                 }).ToList()
             };
 
@@ -264,14 +264,14 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         private BarChart GetSpreadWays()
         {
-            var allSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).Take(6).ToList();
+            var allSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(2).Take(6).ToList();
 
             var barChart = new BarChart()
             {
                 Data = allSpreadWays.Select(x => new BarChart.BarChartData()
                 {
                     Name = x.DisplayName(),
-                    Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways.DistinctBy(z => z.Category)).Where(y => y.MainCategory == x && y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Count()
+                    Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways.Where(z => z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && z.MainCategory == x).DistinctBy(z => z.MainCategory)).Count()
                 }).OrderByDescending(x => x.Count).ToList()
             };
             barChart.MaxValue = barChart.Data.Max(x => x.Count);
@@ -280,9 +280,19 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
 
         private List<BarChart> GetSpreadWaysIntroduction()
         {
-            var allMainSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(1).Take(6).ToList();
+            var allMainSpreadWays = new List<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>((IEnumerable<AlienSpeciesAssessment2023IntroductionPathway.MainCategory>)Enum.GetValues(typeof(AlienSpeciesAssessment2023IntroductionPathway.MainCategory))).Skip(2).Take(6).ToList();
 
             var barCharts = new List<BarChart>();
+
+            var uniqueIntroductionPathwaysPerSpecies = new List<string>();
+
+            var introductionPathwaysSpecies = _query.Select(y =>  y.IntroductionAndSpreadPathways.Where(z => z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Select(z => z.Category).ToArray()).ToList();
+
+            foreach (var speciesPathways in introductionPathwaysSpecies)
+            {
+                var uniquePathways = speciesPathways.Distinct().ToList();
+                uniqueIntroductionPathwaysPerSpecies.AddRange( uniquePathways );
+            };
 
             foreach (var spreadWay in allMainSpreadWays)
             {
@@ -292,7 +302,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     Data = _unfilteredQuery.SelectMany(x => x.IntroductionAndSpreadPathways.Where(y => y.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction && y.MainCategory == spreadWay)).DistinctBy(x => x.Category).Select(x => new BarChart.BarChartData()
                     {
                         Name = x.Category,
-                        Count = _query.SelectMany(y => y.IntroductionAndSpreadPathways.DistinctBy(z => z.Category)).Where(z => z.Category == x.Category && z.IntroductionSpread == AlienSpeciesAssessment2023IntroductionPathway.IntroductionSpread.Introduction).Count()
+                        Count = uniqueIntroductionPathwaysPerSpecies.Where(item => x.Category.Equals(item)).Count()
                     }).OrderBy(x => x.Name).ToList()
                 };
                 barCharts.Add(barChart);

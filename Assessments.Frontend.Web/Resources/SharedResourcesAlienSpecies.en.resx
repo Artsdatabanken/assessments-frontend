@@ -120,10 +120,25 @@
   <data name="alien-species-list" xml:space="preserve">
     <value>Alien species list</value>
   </data>
-  <data name="body_criteria_explanation_general_text" xml:space="preserve">
+  <data name="criteria_explanation_intro_text" xml:space="preserve">
     <value>The impact category of a species is determined by the species' highest score on invasion potential (x-axis in the impact matrix) and ecological effect (y-axis in the impact matrix). The criterion(s) the species scores highest on for each of the axes in the matrix are the species' decisive criteria.</value>
   </data>
-  <data name="body_link_to_criteria_page_text" xml:space="preserve">
+  <data name="link_to_criteria_page_text" xml:space="preserve">
     <value>Read more about the criteria</value>
+  </data>
+  <data name="category_explaination_x_axis_explaination" xml:space="preserve">
+    <value>&lt;b&gt;The species' invasion potential&lt;/b&gt; is determined by three criteria: The species' median lifetime in Norway (Criterion A), the species' expansion speed (Criterion B), and the proportion of the total area of an ecosystem colonised by the alien species (Criterion C).</value>
+  </data>
+  <data name="category_explaination_y_axis_explaination" xml:space="preserve">
+    <value>&lt;b&gt;The species' ecological effect&lt;/b&gt; is determined by six criteria: The species' effects on native species (Criteria D and E), the species' effects on ecosystems (Criteria F and G), transfer of genetic material to native species (Criterion H), and transmission of parasites or pathogens to native species (Criterion I).</value>
+  </data>
+  <data name="category_explaination_heading" xml:space="preserve">
+    <value>What determines the species' impact category</value>
+  </data>
+  <data name="category_explanation_decisive_criteria" xml:space="preserve">
+    <value>Decisive criteria</value>
+  </data>
+  <data name="category_explaination_non_decisive_criteria" xml:space="preserve">
+    <value>Non-decisive criteria</value>
   </data>
 </root>

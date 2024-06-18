@@ -692,7 +692,7 @@
                 GetListForCategory(uncertaintyD, AlienSpeciesAssessment2023CriteriaLetter.D.ToString());
             }
             <div class="collapsible_content">
-                <div is-visible="@assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && @assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0">
+                <div is-visible="@(assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0)">
                     <div class="mobile_hide">
                         @{
                             GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractionsThreatenedSpecies, true);
@@ -704,7 +704,7 @@
                         }
                     </div>
                 </div>
-                <div is-visible="@assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && @assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0">
+                <div is-visible="@(assessment.SpeciesNaturetypeInteractionsThreatenedSpecies != null && assessment.SpeciesNaturetypeInteractionsThreatenedSpecies.Count() != 0)">
                     <div class="mobile_hide">
                         @{
                             GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractionsThreatenedSpecies, true);
@@ -735,7 +735,7 @@
                 GetListForCategory(uncertaintyE, AlienSpeciesAssessment2023CriteriaLetter.E.ToString());
             }
             <div class="collapsible_content">
-                <div is-visible="@assessment.SpeciesSpeciesInteractions  != null && @assessment.SpeciesSpeciesInteractions .Count() != 0">
+                <div is-visible="@(assessment.SpeciesSpeciesInteractions  != null && assessment.SpeciesSpeciesInteractions .Count() != 0)">
                     <div class="mobile_hide">
                         @{
                             GetSpeciesTableDesktop(assessment.SpeciesSpeciesInteractions, false);
@@ -747,7 +747,7 @@
                         }
                     </div>
                 </div>
-                <div is-visible="@assessment.SpeciesNaturetypeInteractions != null && @assessment.SpeciesNaturetypeInteractions.Count() != 0">
+                <div is-visible="@(assessment.SpeciesNaturetypeInteractions != null && assessment.SpeciesNaturetypeInteractions.Count() != 0)">
                     <div class="mobile_hide">
                         @{
                             GetNatureTypeTableDesktop(assessment.SpeciesNaturetypeInteractions, false);

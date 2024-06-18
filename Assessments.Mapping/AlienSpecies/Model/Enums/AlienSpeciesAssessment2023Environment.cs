@@ -1,31 +1,32 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Assessments.Shared.Resources.Enums.AlienSpecies;
+using System.ComponentModel.DataAnnotations;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
     public enum AlienSpeciesAssessment2023Environment
     {
-        [Display(Name = "ukjent livsmiljø")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023EnvironmentResource.unknown), ResourceType = typeof(AlienSpeciesAssessment2023EnvironmentResource))]
         Unknown,
 
-        [Display(Name = "limnisk")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023EnvironmentResource.limnic), ResourceType = typeof(AlienSpeciesAssessment2023EnvironmentResource))]
         Limnisk,
 
-        [Display(Name = "marint")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023EnvironmentResource.marine), ResourceType = typeof(AlienSpeciesAssessment2023EnvironmentResource))]
         Marint,
 
-        [Display(Name = "terrestrisk")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023EnvironmentResource.terrestric), ResourceType = typeof(AlienSpeciesAssessment2023EnvironmentResource))]
         Terrestrisk,
 
-        [Display(Name = "limnisk og marint")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023EnvironmentResource.limnic_marine), ResourceType = typeof(AlienSpeciesAssessment2023EnvironmentResource))]
         LimMar,
 
-        [Display(Name = "limnisk og terrestrisk")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023EnvironmentResource.limnic_terrestrial), ResourceType = typeof(AlienSpeciesAssessment2023EnvironmentResource))]
         LimTer,
 
-        [Display(Name = "marint og terrestrisk")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023EnvironmentResource.marine_terrestrial), ResourceType = typeof(AlienSpeciesAssessment2023EnvironmentResource))]
         MarTer,
 
-        [Display(Name = "limnisk, marint og terrestrisk")]
+        [Display(Name = nameof(AlienSpeciesAssessment2023EnvironmentResource.all_lifestyles), ResourceType = typeof(AlienSpeciesAssessment2023EnvironmentResource))]
         LimMarTer
     }
 }

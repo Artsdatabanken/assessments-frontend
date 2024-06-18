@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Assessments.Shared.Resources.Enums.AlienSpecies;
+using System.ComponentModel.DataAnnotations;
 
 namespace Assessments.Mapping.AlienSpecies.Model.Enums
 {
@@ -22,12 +23,12 @@ namespace Assessments.Mapping.AlienSpecies.Model.Enums
         [Display(Name = "Nordland")] No,
         [Display(Name = "Troms")] Tr,
         [Display(Name = "Finnmark")] Fi,
-        [Display(Name = "Svalbard med kystsone")] Sv,
+        [Display(Name = nameof(AlienSpeciesAssessment2023EvaluationContextResource.Svalbard), ResourceType = typeof(AlienSpeciesAssessment2023EvaluationContextResource))] Sv,
         [Display(Name = "Jan Mayen")] Jm,
-        [Display(Name = "Nordsjøen og Skagerrak")] Ns,
-        [Display(Name = "Norskehavet")] Nh,
-        [Display(Name = "Grønlandshavet")] Gh,
-        [Display(Name = "Barentshavet nord og Polhavet")] Bn,
-        [Display(Name = "Barentshavet sør")] Bs
+        [Display(Name = nameof(AlienSpeciesAssessment2023RegionResource.north_sea), ResourceType = typeof(AlienSpeciesAssessment2023RegionResource))] Ns,
+        [Display(Name = nameof(AlienSpeciesAssessment2023RegionResource.norwegian_ocean), ResourceType = typeof(AlienSpeciesAssessment2023RegionResource))] Nh,
+        [Display(Name = nameof(AlienSpeciesAssessment2023RegionResource.greenland_sea), ResourceType = typeof(AlienSpeciesAssessment2023RegionResource))] Gh,
+        [Display(Name = nameof(AlienSpeciesAssessment2023RegionResource.barents_north_polar), ResourceType = typeof(AlienSpeciesAssessment2023RegionResource))] Bn,
+        [Display(Name = nameof(AlienSpeciesAssessment2023RegionResource.barents_south), ResourceType = typeof(AlienSpeciesAssessment2023RegionResource))] Bs
     }
 }

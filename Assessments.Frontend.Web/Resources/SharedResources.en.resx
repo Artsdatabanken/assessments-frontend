@@ -120,7 +120,154 @@
   <data name="alien-species-list" xml:space="preserve">
     <value>Alien species list</value>
   </data>
+  <data name="area" xml:space="preserve">
+    <value>Area</value>
+  </data>
   <data name="to_species_page" xml:space="preserve">
     <value>To species page</value>
+  </data>
+  <data name="invasion_potential_x_axis" xml:space="preserve">
+    <value>Invasion potential (impact matrix x-axis)</value>
+  </data>
+  <data name="invasion_potential_description" xml:space="preserve">
+    <value>The species' lifetime and ability to expand</value>
+  </data>
+  <data name="ecological_effect_y_axis" xml:space="preserve">
+    <value>Ecological effect (impact matrix y-axis)</value>
+  </data>
+  <data name="ecological_effect_description" xml:space="preserve">
+    <value>Impact on species and ecosystems in Norway</value>
+  </data>
+  <data name="impact_category" xml:space="preserve">
+    <value>Impact category</value>
+  </data>
+  <data name="first_time_assessed" xml:space="preserve">
+    <value>Assessed for the first time</value>
+  </data>
+  <data name="category_changed" xml:space="preserve">
+    <value>Category has changed since 2018</value>
+  </data>
+  <data name="category_not_changed" xml:space="preserve">
+    <value>Category not changed since 2018</value>
+  </data>
+  <data name="change_in_category" xml:space="preserve">
+    <value>Change in impact category</value>
+  </data>
+  <data name="A_B_highest_score" xml:space="preserve">
+    <value>A×B  where the highest score are...</value>
+  </data>
+  <data name="A_B" xml:space="preserve">
+    <value>A×B  - Median lifetime × Expansion speed</value>
+  </data>
+  <data name="invasion_potential" xml:space="preserve">
+    <value>Invasion potential</value>
+  </data>
+  <data name="ecological_effect" xml:space="preserve">
+    <value>Ecological effect</value>
+  </data>
+  <data name="decisive_criteria" xml:space="preserve">
+    <value>Decisive criteria for category</value>
+  </data>
+  <data name="lifestyle" xml:space="preserve">
+    <value>Lifestyle</value>
+  </data>
+  <data name="geographic_var_unequal" xml:space="preserve">
+    <value>Impact differs within the species' potential area of occurrence</value>
+  </data>
+  <data name="geographic_var_equal" xml:space="preserve">
+    <value>Impact equal throughout the species' potential area of occurrence</value>
+  </data>
+  <data name="geographic_var" xml:space="preserve">
+    <value>Geographic variation in impact</value>
+  </data>
+  <data name="invasion_potential_climate_affected" xml:space="preserve">
+    <value>Invasion potential affected by climate change</value>
+  </data>
+  <data name="ecological_effect_climate_affected" xml:space="preserve">
+    <value>Ecological effect affected by climate change</value>
+  </data>
+  <data name="invasion_potential_climate_not_affected" xml:space="preserve">
+    <value>Invasion potential not affected by climate change</value>
+  </data>
+  <data name="ecological_effect_climate_not_affected" xml:space="preserve">
+    <value>Ecological effect not affected by climate change</value>
+  </data>
+  <data name="climate_affected" xml:space="preserve">
+    <value>Affected by climate change</value>
+  </data>
+  <data name="climate_not_affected" xml:space="preserve">
+    <value>Not affected by climate change</value>
+  </data>
+  <data name="climate_impact" xml:space="preserve">
+    <value>Importance of climate change for impact</value>
+  </data>
+  <data name="aoo_strongly_altered_nature" xml:space="preserve">
+    <value>Area of occurrence in strongly altered ecosystems</value>
+  </data>
+  <data name="aoo_threatened_ecosystems" xml:space="preserve">
+    <value>Occurrence in threatened or rare ecosystems</value>
+  </data>
+  <data name="ecosystems" xml:space="preserve">
+    <value>Ecosystems</value>
+  </data>
+  <data name="import" xml:space="preserve">
+    <value>Import to production or indoor area</value>
+  </data>
+  <data name="introduction" xml:space="preserve">
+    <value>Introduction to nature</value>
+  </data>
+  <data name="spread" xml:space="preserve">
+    <value>Spread in nature</value>
+  </data>
+  <data name="pathways" xml:space="preserve">
+    <value>Pathways of spread</value>
+  </data>
+  <data name="regionally_alien_exclude" xml:space="preserve">
+    <value>Exclude regionally alien species</value>
+  </data>
+  <data name="regionally_alien_only" xml:space="preserve">
+    <value>Show regionally alien species</value>
+  </data>
+  <data name="regionally_distribution" xml:space="preserve">
+    <value>Regional distribution</value>
+  </data>
+  <data name="water_regions" xml:space="preserve">
+    <value>Water regions</value>
+  </data>
+  <data name="regionally_alien" xml:space="preserve">
+    <value>Regionally alien species</value>
+  </data>
+  <data name="taxonomy" xml:space="preserve">
+    <value>Taxonomy</value>
+  </data>
+  <data name="species_groups" xml:space="preserve">
+    <value>Species groups</value>
+  </data>
+  <data name="regions_expected_occurrence" xml:space="preserve">
+    <value>Regions with known, assumed or expected occurrence</value>
+  </data>
+  <data name="regions_oceans" xml:space="preserve">
+    <value>Regions and oceans</value>
+  </data>
+  <data name="is_production_species" xml:space="preserve">
+    <value>Production species (historical or present)</value>
+  </data>
+  <data name="not_production_species" xml:space="preserve">
+    <value>Not production species</value>
+  </data>
+  <data name="production_species" xml:space="preserve">
+    <value>Production species</value>
+  </data>
+  <data name="doorknockers" xml:space="preserve">
+    <value>Door knocker species</value>
+  </data>
+  <data name="establishment_category" xml:space="preserve">
+    <value>Establishment category today</value>
+  </data>
+  <data name="not_assessed_species" xml:space="preserve">
+    <value>Not risk assessed species</value>
+  </data>
+  <data name="choose_all" xml:space="preserve">
+    <value>Select all</value>
   </data>
 </root>

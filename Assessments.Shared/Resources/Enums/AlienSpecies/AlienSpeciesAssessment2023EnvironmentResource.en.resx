@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="limnic" xml:space="preserve">
+    <value>limnic</value>
+  </data>
+  <data name="marine" xml:space="preserve">
+    <value>marine</value>
+  </data>
+  <data name="terrestric" xml:space="preserve">
+    <value>terrestrial</value>
+  </data>
+  <data name="unknown" xml:space="preserve">
+    <value>unknown lifestyle</value>
+  </data>
+  <data name="limnic_marine" xml:space="preserve">
+    <value>limnic and marine</value>
+  </data>
+  <data name="limnic_terrestrial" xml:space="preserve">
+    <value>limnic and terrestrial</value>
+  </data>
+  <data name="all_lifestyles" xml:space="preserve">
+    <value>limnic, marine and terrestrial</value>
+  </data>
+  <data name="marine_terrestrial" xml:space="preserve">
+    <value>marine and terrestrial</value>
+  </data>
 </root>

@@ -20,19 +20,19 @@ if (filters) {
         "show_area",
         "show_dcin",
         "show_dcok",
-        "show_dcipah",
+        "show_axbdescription",
         "show_eds",
         "show_sal",
-        "show_ccke",
+        "show_assessedchangedcategory",
         "show_insekter",
         "show_crustacea",
         "show_insecta",
-        "show_ttn",
-        "show_cep",
-        "show_cei",
-        "show_swimp",
-        "show_swnat",
-        "show_swspr",
+        "show_taxonomicrank",
+        "show_climateaffected",
+        "show_climatenotaffected",
+        "show_importation",,
+        "show_introduction",
+        "show_spread",
         "show_nta",
         "show_ntn",
     ];
@@ -252,7 +252,11 @@ if (filters) {
             const shouldToggleSubGroup = Array.prototype.some.call(markAllInputs, input => input.id === el.id);
 
             if (shouldToggleSubGroup) {
-                const subFilters = document.getElementsByClassName(`${el.id}_input`);
+                let subFilters = document.getElementsByClassName(`${el.id}_input`);
+                // Alien species list has different ids due to language support. Hence, we try using value instead.
+                if (!subFilters.length) {
+                    subFilters = document.getElementsByClassName(`${el.value}_input`);
+                }
                 toggleSubGroup(subFilters, el);
             }
         }

@@ -249,7 +249,7 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public static string removeLineBreaksForMobile(string text)
         {
-            return text.Replace("<br/>", "").Replace("<span>&#8208;</span>", "");
+            return text.Replace("<br/>", "").Replace("<span>&#8208;</span>", "").Replace("<br>", "");
         }
 
         public static bool IsNotEmpty(string key)

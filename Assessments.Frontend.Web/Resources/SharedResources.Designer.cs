@@ -187,6 +187,15 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avgjørende kriterier.
+        /// </summary>
+        public static string decisive_criteria_short {
+            get {
+                return ResourceManager.GetString("decisive_criteria_short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dørstokkarter.
         /// </summary>
         public static string doorknockers {
@@ -241,6 +250,15 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to naturtype.
+        /// </summary>
+        public static string ecosystem {
+            get {
+                return ResourceManager.GetString("ecosystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Naturtyper.
         /// </summary>
         public static string ecosystems {
@@ -291,6 +309,15 @@ namespace Assessments.Frontend.Web.Resources {
         public static string geographic_var_unequal {
             get {
                 return ResourceManager.GetString("geographic_var_unequal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to har.
+        /// </summary>
+        public static string has {
+            get {
+                return ResourceManager.GetString("has", resourceCulture);
             }
         }
         
@@ -385,6 +412,15 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Øvrige kriterier.
+        /// </summary>
+        public static string non_decisive_criteria {
+            get {
+                return ResourceManager.GetString("non_decisive_criteria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ikke-risikovurderte arter.
         /// </summary>
         public static string not_assessed_species {
@@ -471,6 +507,15 @@ namespace Assessments.Frontend.Web.Resources {
         public static string regions_oceans {
             get {
                 return ResourceManager.GetString("regions_oceans", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to skår.
+        /// </summary>
+        public static string score {
+            get {
+                return ResourceManager.GetString("score", resourceCulture);
             }
         }
         

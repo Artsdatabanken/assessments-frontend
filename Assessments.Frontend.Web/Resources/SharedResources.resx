@@ -270,4 +270,19 @@
   <data name="choose_all" xml:space="preserve">
     <value>Merk alle</value>
   </data>
+  <data name="has" xml:space="preserve">
+    <value>har</value>
+  </data>
+  <data name="score" xml:space="preserve">
+    <value>skår</value>
+  </data>
+  <data name="decisive_criteria_short" xml:space="preserve">
+    <value>Avgjørende kriterier</value>
+  </data>
+  <data name="non_decisive_criteria" xml:space="preserve">
+    <value>Øvrige kriterier</value>
+  </data>
+  <data name="ecosystem" xml:space="preserve">
+    <value>naturtype</value>
+  </data>
 </root>

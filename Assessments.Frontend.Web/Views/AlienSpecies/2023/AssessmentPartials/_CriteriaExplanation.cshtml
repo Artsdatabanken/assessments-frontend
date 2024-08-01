@@ -1,5 +1,8 @@
 ﻿@model CriteriaExplanationViewModel
 @using Assessments.Mapping.AlienSpecies.Model.Enums
+@inject IStringLocalizer<SharedResourcesAlienSpecies> Localizer
+@inject IStringLocalizer<SharedResources> LocalizerShared
+@inject IHtmlLocalizer<SharedResourcesAlienSpecies> LocalizerHtml
 
 @{
     var isDecisiveCriteria = Model.Criteria == Model.AlienSpeciesDetailViewModel.Assessment.DecisiveCriteria;
@@ -123,26 +126,26 @@
             <caption class="table-title">
                 @if (shouldBeThreatened)
                 {
-                    <b>@Constants.AlienSpeciesTables.CriteriaDSpeciesTableTitle</b>
-                    @Constants.AlienSpeciesTables.CriteriaDSpeciesTableDescription
+                    <b>@Localizer["alien_species_tables_D_criteria_table_title"]</b>
+                    @Localizer["alien_species_tables_D_criteria_table_text"]
                 }
                 @if (!shouldBeThreatened)
                 {
-                    <b>@Constants.AlienSpeciesTables.CriteriaESpeciesTableTitle</b>
-                    @Constants.AlienSpeciesTables.CriteriaESpeciesTableDescription
+                    <b>@Localizer["alien_species_tables_E_criteria_table_title"]</b>
+                    @Localizer["alien_species_tables_E_criteria_table_text"]
                 } 
                 
             </caption>
             <tr>
-                <th>Stedegen art</th>
-                <th>@Html.Raw(@Constants.AlienSpeciesTables.RedListCategoryTableColumn)</th>
-                <th>@Constants.AlienSpeciesTables.KeyStoneSpeciesTableColumn</th>
-                <th>@Constants.AlienSpeciesTables.InteractionStrengthTableColumn</th>
-                <th>@Constants.AlienSpeciesTables.ScaleTableColumn</th>
-                <th>@Constants.AlienSpeciesTables.InteractionTypeTableColumn</th>
+                <th>@Localizer["native_species"]</th>
+                <th>@LocalizerHtml["red_list_category_2021_html"]</th>
+                <th>@Localizer["keystone_species"]</th>
+                <th>@Localizer["interaction_strength"]</th>
+                <th>@Localizer["geographical_extent"]</th>
+                <th>@Localizer["interaction_type"]</th>
                 @if (impacts.Any(x => x.Background.Count() != 0))
                 {
-                    <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
+                    <th>@LocalizerHtml["documentation_type"]</th>
                 }
             </tr>
             @foreach (var impact in impacts)
@@ -181,7 +184,7 @@
                     <td>@impact.RedListCategory - @impact.RedListCategory.DisplayName()</td>
                 </tr>
                 <tr>
-                    <td>@Constants.AlienSpeciesTables.KeyStoneSpeciesTableColumn</td>
+                    <td>@Localizer["keystone_species"]</td>
                     <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
                 </tr>
                 <tr>
@@ -220,23 +223,23 @@
             <caption class="table-title">
                 @if (shouldBeThreatened)
                 {
-                    <b>@Constants.AlienSpeciesTables.CriteriaDSpeciesNaturetypesTableTitle</b>
-                    @Constants.AlienSpeciesTables.CriteriaDSpeciesNaturetypesTableDescription
+                    <b>@Localizer["alien_species_tables_D_criteria_society_table_title"]</b>
+                    @Localizer["alien_species_tables_D_criteria_society_table_description"]
                 }
                 @if (!shouldBeThreatened)
                 {
-                    <b>@Constants.AlienSpeciesTables.CriteriaESpeciesNaturetypesTableTitle</b>
-                    @Constants.AlienSpeciesTables.CriteriaESpeciesNaturetypesTableDescription
+                    <b>@Localizer["alien_species_tables_E_criteria_society_table_title"]</b>
+                    @Localizer["alien_species_tables_E_criteria_society_table_description"]
                 } 
                 
             </caption>
             <tr>
-                <th>@Html.Raw(Constants.AlienSpeciesTables.NaturetypeDAndETableColumn1)</th>
-                <th>@Html.Raw(Constants.AlienSpeciesTables.NaturetypeDAndETableColumn2)</th>
-                <th>@Constants.AlienSpeciesTables.InteractionStrengthTableColumn</th>
-                <th>@Constants.AlienSpeciesTables.ScaleTableColumn</th>
-                <th>@Constants.AlienSpeciesTables.InteractionTypeTableColumn</th>
-                <th>@Html.Raw(Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
+                <th>@LocalizerHtml["affected_species_naturetype"]</th>
+                <th>@LocalizerHtml["keystone_or_threatened"]</th>
+                <th>@Localizer["interaction_strength"]</th>
+                <th>@Localizer["geographical_extent"]</th>
+                <th>@Localizer["interaction_type"]</th>
+                <th>@LocalizerHtml["documentation_type"]</th>
             </tr>
             @foreach (var impact in impacts)
             {
@@ -264,27 +267,27 @@
         foreach (var impact in impacts)
         {
             <table class="big-data-table">
-                <caption class="table-title">Berørt naturtype (med gruppen av påvirkede arter): @impact.Name</caption>
+                <caption class="table-title">@Helpers.removeLineBreaksForMobile(@Localizer["affected_species_naturetype"].Value): @impact.Name</caption>
                 <tr>
-                    <td>påvirkes nøkkelarter eller truede arter?</td>
+                    <td>@Helpers.removeLineBreaksForMobile(@Localizer["keystone_or_threatened"].Value)</td> /* påvirkes nøkkelarter eller truede arter? */
                     <td>@(impact.KeyStoneSpecie ? "ja" : "nei")</td>
                 </tr>
                 <tr>
-                    <td>interaksjonens styrke</td>
+                    <td>@Localizer["interaction_strength"]</td>
                     <td>@impact.InteractionStrength.DisplayName()</td>
                 </tr>
                 <tr>
-                    <td>geografisk omfang</td>
+                    <td>@Localizer["geographical_extent"]</td>
                     <td>@impact.Scale.DisplayName()</td>
                 </tr>
                 <tr>
-                    <td>type interaksjon</td>
+                    <td>@Localizer["interaction_type"]</td>
                     <td>@impact.InteractionType.DisplayName()</td>
                 </tr>
                 @if (@impact.Background.Count() != 0)
                 {
                     <tr>
-                        <td>vurderingsgrunnlag</td>
+                        <td>@Helpers.removeLineBreaksForMobile(@Localizer["documentation_type"].Value)</td>
                         <td>
                             <ul>
                                 @foreach (var background in impact.Background)
@@ -305,20 +308,20 @@
              <caption class="table-title">
                 @if (shouldBeThreatened)
                 {
-                    <b>@Constants.AlienSpeciesTables.CriteriaFNaturetypesTableTitle</b>
+                    <b>@Localizer["alien_species_tables_F_criteria_table_title"]</b>
                 }
                 @if (!shouldBeThreatened)
                 {
-                    <b>@Constants.AlienSpeciesTables.CriteriaGNaturetypesTableTitle</b>
+                    <b>@Localizer["alien_species_tables_G_criteria_table_title"]</b>
                 } 
-                @Constants.AlienSpeciesTables.CriteriaFAndGNaturetypesTableDescription
+                @Localizer["alien_species_tables_F_G_criteria_table_description"]
              </caption>
             <tr>
-                <th>@Constants.AlienSpeciesTables.NaturetypeNameTableColumn</th>
-                <th>@Constants.AlienSpeciesTables.TimeHorizonTableColumn</th>
-                <th>@Html.Raw(@Constants.AlienSpeciesTables.StateChangeTableColumn)</th>
-                <th>@Html.Raw(@Constants.AlienSpeciesTables.AffectedAreaTableColumn)</th>
-                <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
+                <th>@LocalizerShared["ecosystem"]</th>
+                <th>@Localizer["time_horizon"]</th>
+                <th>@LocalizerHtml["state_change"]</th>
+                <th>@LocalizerHtml["affected_area"]</th>
+                <th>@LocalizerHtml["documentation_type"]</th>
             </tr>
             @foreach (var natureType in assessment.ImpactedNatureTypes.Where(x => x.IsThreatened == shouldBeThreatened && HasAffectedArea(x.AffectedArea)))
             {
@@ -361,7 +364,7 @@
         <div class="collapsible_header">
             <span>
                 <b><span class="collapsible_header_letter">@letter.</span></b> @criterion.CriteriaLetter.DisplayName() 
-                <span> @AlienSpeciesHelpers.GetLetterFullText(criterion, false) @Constants.ScoreExplanationScore @criterion.Value.</span>
+                <span> @AlienSpeciesHelpers.GetLetterFullText(criterion, false)  @Localizer["corresponds_to"] @LocalizerShared["score"] @criterion.Value.</span> 
             </span> 
             <button onclick="toggleCollapsible(this)" class="adb-button ghost">
                 <span class="expanded_icon">
@@ -386,20 +389,21 @@
 }
 
 <div is-visible="showIsNk && isDecisiveCriteria">
-    @Constants.speciesEvaluatedTo  <i>@Constants.noRisk</i> @Constants.noRiskExplanation
+    @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @Localizer["assessed_to"] <i>@AlienSpeciesAssessment2023Category.NK.DisplayName().ToLower()</i> @Localizer["NK_no_decisive"]
 </div>
 
-<h3>@Constants.xAxisLabel</h3>
-
 <div is-visible="!showIsNk || !isDecisiveCriteria">
+
+    <h3>@LocalizerShared["invasion_potential"]</h3>
     <p is-visible="isDecisiveCriteria">
-        <b>@Constants.speciesHas @assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant() 
-            @Constants.xAxisLabel.ToLower() (@Constants.JustScore @((int)assessment.ScoreInvasionPotential))
+        <b>
+            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @LocalizerShared["has"] @assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant()
+            @LocalizerShared["invasion_potential"].Value.ToLower() (@LocalizerShared["score"] @((int)assessment.ScoreInvasionPotential))
         </b>
     </p>
 
-    <b is-visible="isDecisiveCriteria">@Constants.determeningCriteriaHeading</b>
-    <b is-visible="!isDecisiveCriteria">@Constants.otherCriteriaHeading</b>
+    <b is-visible="isDecisiveCriteria">@LocalizerShared["decisive_criteria_short"]</b>
+    <b is-visible="!isDecisiveCriteria">@LocalizerShared["non_decisive_criteria"]</b>
     <p is-visible="showLowInvasionPotential && isDecisiveCriteria">
          @Constants.noDecisiveCriteriaXAxis
         <span>@Constants.seeOtherTab</span>
@@ -615,7 +619,7 @@
                         (@assessment.AOOtotalBest?.ToString("N0") km<sup>2</sup>) @Constants.andIn50
                         (@assessment.AOOfutureBest.ToString("N0") km<sup>2</sup>)  @Constants.expansionSpeedIs
                         @assessment.ExpansionSpeedBestEstimate.ToString("N0") @Constants.mPerYear. 
-                        @Constants.isScore @uncertaintyB.Value @Constants.atBCrit.
+                        @Localizer["corresponds_to"] @LocalizerShared["score"] @uncertaintyB.Value @Constants.atBCrit.
                     </p>
                 </div>
                 <p is-visible="isEstimatedIncreaseInAOODoorKnockers">                   
@@ -642,17 +646,18 @@
                         </caption>
                         <tr>
                             <th>@Constants.AlienSpeciesTables.NaturetypeNameTableColumn</th>
-                            <th>@Constants.AlienSpeciesTables.TimeHorizonTableColumn</th>
+                            <th>@Localizer["time_horizon"]</th>
                             <th>@Html.Raw(@Constants.AlienSpeciesTables.ColonizedAreaTableColumn)</th>
-                            <th>@Html.Raw(@Constants.AlienSpeciesTables.BackgroundTableColumn)</th>
+                            <th>@LocalizerHtml["documentation_type"]</th>
                         </tr>
                         @foreach (var natureType in assessment.ImpactedNatureTypes)
                         {
                             <tr>
                                 <td><b class="only_mobile"> @Constants.AlienSpeciesTables.NaturetypeNameTableColumn:</b>@natureType.Name</td>
-                                <td><b class="only_mobile"> @Constants.AlienSpeciesTables.TimeHorizonTableColumn:</b>@natureType.TimeHorizon.DisplayName()</td>
+                                <td><b class="only_mobile"> @Localizer["time_horizon"]:</b>@natureType.TimeHorizon.DisplayName()</td>
                                 <td><b class="only_mobile"> @Helpers.removeLineBreaksForMobile(@Constants.AlienSpeciesTables.ColonizedAreaTableColumn):</b>@natureType.ColonizedArea</td>
-                                <td><b class="only_mobile"> @Helpers.removeLineBreaksForMobile(@Constants.AlienSpeciesTables.BackgroundTableColumn):</b>
+                                <td>
+                                    <b class="only_mobile"> @Helpers.removeLineBreaksForMobile(@Localizer["documentation_type"]):</b>
                                     <ul>
                                         @foreach (var background in natureType.Background)
                                         {
@@ -673,16 +678,17 @@
         </li>
     </ul>
 
-    <h3>@Constants.yAxisLabel</h3>
+    <h3>@LocalizerShared["ecological_effect"]</h3>
 
     <p is-visible="isDecisiveCriteria">
-        <b>@Constants.speciesHas @assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant() 
-            @Constants.yAxisLabel.ToLower() (@Constants.JustScore @((int)assessment.ScoreEcologicalEffect))
+        <b>
+            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @LocalizerShared["has"] @assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant()
+            @LocalizerShared["ecological_effect"].Value.ToLower() (@LocalizerShared["score"] @((int)assessment.ScoreEcologicalEffect))
         </b>
     </p>
 
-    <b is-visible="isDecisiveCriteria">@Constants.determeningCriteriaHeading</b>
-    <b is-visible="!isDecisiveCriteria">@Constants.otherCriteriaHeading</b>  
+    <b is-visible="isDecisiveCriteria">@LocalizerShared["decisive_criteria_short"]</b>
+    <b is-visible="!isDecisiveCriteria">@LocalizerShared["non_decisive_criteria"]</b>
     <p is-visible="showNoEcologicalEffect">
         <p>@Constants.noEcoEffect</p>
     </p>
@@ -820,9 +826,9 @@
                                 @Constants.AlienSpeciesTables.CriteriaHIntrogressionTableDescription 
                             </caption>
                             <tr>
-                                <th>Stedegen art</th>
-                                <th>@Html.Raw(@Constants.AlienSpeciesTables.RedListCategoryTableColumn)</th>
-                                <th>@Constants.AlienSpeciesTables.KeyStoneSpeciesTableColumn</th>
+                                <th>@Localizer["native_species"]</th>
+                                <th>@LocalizerHtml["red_list_category_2021_html"]</th>
+                                <th>@Localizer["keystone_species"]</th>
                                 <th>Geografisk omfang</th>
                                 <th>Vurderingsgrunnlag</th>
                             </tr>
@@ -871,9 +877,9 @@
                                 @Constants.AlienSpeciesTables.CriteriaIParasitesTableDescription 
                             </caption>
                             <tr>
-                                <th>Stedegen art</th>
-                                <th>@Html.Raw(@Constants.AlienSpeciesTables.RedListCategoryTableColumn)</th>
-                                <th>@Constants.AlienSpeciesTables.KeyStoneSpeciesTableColumn</th>
+                                <th>@Localizer["native_species"]</th>
+                                <th>@LocalizerHtml["red_list_category_2021_html"]</th>
+                                <th>@Localizer["keystone_species"]</th>
                                 <th>Parasittens vitenskapelige navn</th>
                                 <th>Parasittens status</th>
                                 <th>Parasittens delkategori</th>

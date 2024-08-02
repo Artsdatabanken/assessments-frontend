@@ -285,4 +285,115 @@
   <data name="ecosystem" xml:space="preserve">
     <value>naturtype</value>
   </data>
+  <data name="which_is" xml:space="preserve">
+    <value>som er</value>
+  </data>
+  <data name="of" xml:space="preserve">
+    <value>på</value>
+  </data>
+  <data name="less_than_five_percent" xml:space="preserve">
+    <value>mindre enn 5%</value>
+  </data>
+  <data name="min_five_percent" xml:space="preserve">
+    <value>minimum 5%</value>
+  </data>
+  <data name="less_than_ten_years" xml:space="preserve">
+    <value>mindre enn 10 år</value>
+  </data>
+  <data name="between_ten_59_years" xml:space="preserve">
+    <value>mellom 10 og 59 år</value>
+  </data>
+  <data name="between_60_649_years" xml:space="preserve">
+    <value>mellom 60 og 649 år</value>
+  </data>
+  <data name="minimum_650_years" xml:space="preserve">
+    <value>minimum 650 år</value>
+  </data>
+  <data name="less_than_50_myear" xml:space="preserve">
+    <value>mindre enn 50 m/år</value>
+  </data>
+  <data name="between_50_159_myear" xml:space="preserve">
+    <value>mellom 50 og 159 m/år</value>
+  </data>
+  <data name="between_160_499_myear" xml:space="preserve">
+    <value>mellom 160 og 499 m/år</value>
+  </data>
+  <data name="minimum_500_myear" xml:space="preserve">
+    <value>minimum 500 m/år</value>
+  </data>
+  <data name="minimum_ten_percent" xml:space="preserve">
+    <value>minimum 10%</value>
+  </data>
+  <data name="minimum_20_percent" xml:space="preserve">
+    <value>minimum 20%</value>
+  </data>
+  <data name="absent" xml:space="preserve">
+    <value>fraværende</value>
+  </data>
+  <data name="weak_confined" xml:space="preserve">
+    <value>svak styrke og begrenset omfang</value>
+  </data>
+  <data name="weak_large_scale_or_moderate_confined" xml:space="preserve">
+    <value>svak styrke og storskala omfang ELLER moderat styrke og begrenset omfang</value>
+  </data>
+  <data name="moderate_large_scale_or_displacement" xml:space="preserve">
+    <value>moderat styrke og storskala omfang ELLER fortrengning</value>
+  </data>
+  <data name="weak_or_moderate_confined" xml:space="preserve">
+    <value>svak styrke ELLER moderat styrke og begrenset omfang</value>
+  </data>
+  <data name="moderate_large_scale" xml:space="preserve">
+    <value>moderat styrke og storskala omfang</value>
+  </data>
+  <data name="confined_displacement" xml:space="preserve">
+    <value>fortrengning i begrenset omfang</value>
+  </data>
+  <data name="large_scale_displacement" xml:space="preserve">
+    <value>fortrengning i storskala omfang</value>
+  </data>
+  <data name="zero_percent" xml:space="preserve">
+    <value>0%</value>
+  </data>
+  <data name="over_zero_percent" xml:space="preserve">
+    <value>over 0%</value>
+  </data>
+  <data name="min_two_percent" xml:space="preserve">
+    <value>minimum 2%</value>
+  </data>
+  <data name="no_transfer" xml:space="preserve">
+    <value>ingen overføring</value>
+  </data>
+  <data name="confined_native_species" xml:space="preserve">
+    <value>begrenset overføring til stedegen art</value>
+  </data>
+  <data name="large_scale_non_threatened_OR_confined_threatened" xml:space="preserve">
+    <value>storskala overføring  til stedegen art ELLER begrenset til truet art eller nøkkelart</value>
+  </data>
+  <data name="large_scale_threatened" xml:space="preserve">
+    <value>storskala overføring til truet art eller nøkkelart</value>
+  </data>
+  <data name="absent_OR_confined_known_host" xml:space="preserve">
+    <value>ingen overføring ELLER begrenset overføring av eksisterende parasitt til eksisterende vert</value>
+  </data>
+  <data name="large_scale_known_host_OR_confined_new_host" xml:space="preserve">
+    <value>storskala av eksisterende parasitt til eksisterende vert ELLER begrenset til ny vert</value>
+  </data>
+  <data name="large_scale_new_host_OR_confined_threathened_new_host" xml:space="preserve">
+    <value>storskala av eksisterende parasitt til ny vert ELLER begrenset til ny truet vert</value>
+  </data>
+  <data name="large_scale_new_threatened_host_OR_doorknocker_parasite" xml:space="preserve">
+    <value>storskala av eksisterende parasitt til ny truet vert ELLER overføring av en dørstokkart-parasitt</value>
+  </data>
+  <data name="with_uncertainty" xml:space="preserve">
+    <value>med usikkerhet</value>
+  </data>
+  <data name="down_to" xml:space="preserve">
+    <value>ned mot</value>
+  </data>
+  <data name="and" xml:space="preserve">
+    <value>og</value>
+  </data>
+  <data name="up_to" xml:space="preserve">
+    <value>opp mot</value>
+  </data>
 </root>

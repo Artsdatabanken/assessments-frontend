@@ -402,10 +402,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string years = "år";
         public const string to = "til";
-        public const string on = "på";
-        public const string whichIs = "som er";
-        public const string downTo = "ned mot";
-        public const string upTo = "opp mot";
         public const string mPerYear = "m/år";
         public const string medianLifeEst = "Basert på de demografiske nøkkeltallene er det beste anslaget for artens mediane levetid i Norge estimert til ";
 

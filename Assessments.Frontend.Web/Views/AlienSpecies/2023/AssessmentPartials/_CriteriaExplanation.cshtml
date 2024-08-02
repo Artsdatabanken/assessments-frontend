@@ -363,8 +363,8 @@
     {
         <div class="collapsible_header">
             <span>
-                <b><span class="collapsible_header_letter">@letter.</span></b> @criterion.CriteriaLetter.DisplayName() 
-                <span> @AlienSpeciesHelpers.GetLetterFullText(criterion, false)  @Localizer["corresponds_to"] @LocalizerShared["score"] @criterion.Value.</span> 
+                <b><span class="collapsible_header_letter">@letter.</span></b>
+                <span> @AlienSpeciesHelpers.GetLetterFullText(criterion)  @Localizer["corresponds_to"] @LocalizerShared["score"] @criterion.Value.</span>
             </span> 
             <button onclick="toggleCollapsible(this)" class="adb-button ghost">
                 <span class="expanded_icon">

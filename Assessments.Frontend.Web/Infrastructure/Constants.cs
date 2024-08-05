@@ -424,7 +424,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
 
 
-        public const string noEcoEffect = "Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.";
 
 
 

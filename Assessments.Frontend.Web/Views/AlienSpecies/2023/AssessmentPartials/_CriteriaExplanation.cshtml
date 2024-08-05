@@ -397,7 +397,7 @@
     <h3>@LocalizerShared["invasion_potential"]</h3>
     <p is-visible="isDecisiveCriteria">
         <b>
-            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @Localizer["assess_to"] @LocalizerShared["score"] @((int)assessment.ScoreInvasionPotential) @Localizer["on_invasion_axis"]
+            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @Localizer["assess_to"] @Localizer["axis_score"] @((int)assessment.ScoreInvasionPotential) @Localizer["on_invasion_axis"]
         </b>
     </p>
 
@@ -681,14 +681,14 @@
 
     <p is-visible="isDecisiveCriteria">
         <b>
-            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @Localizer["assess_to"] @LocalizerShared["score"] @((int)assessment.ScoreEcologicalEffect) @Localizer["on_eco_effect_axis"]
+            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @Localizer["assess_to"] @Localizer["axis_score"] @((int)assessment.ScoreEcologicalEffect) @Localizer["on_eco_effect_axis"]
         </b>
     </p>
 
     <b is-visible="isDecisiveCriteria">@LocalizerShared["decisive_criteria_short"]</b>
     <b is-visible="!isDecisiveCriteria">@LocalizerShared["non_decisive_criteria"]</b>
     <p is-visible="showNoEcologicalEffect">
-        <p>@Constants.noEcoEffect</p>
+        <p>@Localizer["eco_effect_no_decisive"]</p>
     </p>
     <ul class="criteria-summary-list">
         <li is-visible="criteriaHasD && !showIsNk && hasContentD" class="collapsible initially_closed">           

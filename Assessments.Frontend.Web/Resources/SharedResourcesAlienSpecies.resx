@@ -223,7 +223,7 @@
     <value>er vurdert som fraværende (usannsynlig).</value>
   </data>
   <data name="invasion_pot_no_decisive" xml:space="preserve">
-    <value>Artens invasjonspotensial tilsvarer laveste mulige skår og arten har derfor ingen avgjørende kriterier på invasjonsaksen.</value>
+    <value>Artens delkategori invasjonspotensial tilsvarer laveste mulige delkategori og arten har derfor ingen avgjørende kriterier på invasjonsaksen.</value>
   </data>
   <data name="go_to_non_decisive" xml:space="preserve">
     <value>Se fanen Øvrige kriterier.</value>
@@ -239,5 +239,11 @@
   </data>
   <data name="category_explaination_decisive_criteria" xml:space="preserve">
     <value>Kriteriet(ene) arten skårer høyest på for hver av aksene i matrisa (invasjonspotensial og økologisk effekt) kalles artens &lt;i&gt;avgjørende kriterier&lt;/i&gt;.</value>
+  </data>
+  <data name="eco_effect_no_decisive" xml:space="preserve">
+    <value>Artens delkategori for økologisk effekt tilsvarer laveste mulige delkategori og arten har dermed ingen avgjørende kriterier på effektaksen.</value>
+  </data>
+  <data name="axis_score" xml:space="preserve">
+    <value>delkategori</value>
   </data>
 </root>

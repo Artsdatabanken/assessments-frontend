@@ -223,7 +223,7 @@
     <value>Invasion potential by criterium</value>
   </data>
   <data name="invasion_pot_no_decisive" xml:space="preserve">
-    <value>The species' invasion potential corresponds to the lowest score possible, meaning the species has no decisive criteria on the invasion axis.</value>
+    <value>The species' score for invasion potential is the lowest score possible, meaning the species has no decisive criteria on the invasion axis.</value>
   </data>
   <data name="go_to_non_decisive" xml:space="preserve">
     <value>See the tab Non-decisive criteria.</value>
@@ -239,5 +239,11 @@
   </data>
   <data name="category_explaination_decisive_criteria" xml:space="preserve">
     <value>The criterion(s) with the highest score on each of the axes in the matrix (invasion potential and ecological effect) are the species' &lt;i&gt;decisive criteria&lt;/i&gt;.</value>
+  </data>
+  <data name="eco_effect_no_decisive" xml:space="preserve">
+    <value>The species' score for ecological effect is the lowest score possible, meaning the species has no decisive criteria on the effect axis.</value>
+  </data>
+  <data name="axis_score" xml:space="preserve">
+    <value>score</value>
   </data>
 </root>

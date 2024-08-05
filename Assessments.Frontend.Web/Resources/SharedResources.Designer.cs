@@ -101,7 +101,7 @@ namespace Assessments.Frontend.Web.Resources {
         /// </summary>
         public static string alien_species_list {
             get {
-                return ResourceManager.GetString("alien-species-list", resourceCulture);
+                return ResourceManager.GetString("alien_species_list", resourceCulture);
             }
         }
         

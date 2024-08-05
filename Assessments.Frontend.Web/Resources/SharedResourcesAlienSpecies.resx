@@ -210,4 +210,22 @@
   <data name="NK_no_decisive" xml:space="preserve">
     <value>NK og har dermed ingen avgjørende kriterier.</value>
   </data>
+  <data name="eco_effects_by_criteria" xml:space="preserve">
+    <value>Økologiske effekter etter kriterium</value>
+  </data>
+  <data name="evaluated_absent" xml:space="preserve">
+    <value>er vurdert som fraværende (usannsynlige).</value>
+  </data>
+  <data name="invasion_pot_by_criteria" xml:space="preserve">
+    <value>Invasjonspotensial etter kriterium</value>
+  </data>
+  <data name="evaluated_absent_inv" xml:space="preserve">
+    <value>er vurdert som fraværende (usannsynlig).</value>
+  </data>
+  <data name="invasion_pot_no_decisive" xml:space="preserve">
+    <value>Artens invasjonspotensial tilsvarer laveste mulige skår og arten har derfor ingen avgjørende kriterier på invasjonsaksen.</value>
+  </data>
+  <data name="go_to_non_decisive" xml:space="preserve">
+    <value>Se fanen Øvrige kriterier.</value>
+  </data>
 </root>

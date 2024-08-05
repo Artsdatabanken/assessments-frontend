@@ -405,8 +405,8 @@
     <b is-visible="isDecisiveCriteria">@LocalizerShared["decisive_criteria_short"]</b>
     <b is-visible="!isDecisiveCriteria">@LocalizerShared["non_decisive_criteria"]</b>
     <p is-visible="showLowInvasionPotential && isDecisiveCriteria">
-         @Constants.noDecisiveCriteriaXAxis
-        <span>@Constants.seeOtherTab</span>
+         @Localizer["invasion_pot_no_decisive"]
+        <span>@Localizer["go_to_non_decisive"]</span>
     </p>
     <ul class="criteria-summary-list">
         <li is-visible="criteriaHasA || criteriaHasB"  class="collapsible initially_closed">
@@ -673,7 +673,7 @@
         </li>
         <li is-visible="!isDecisiveCriteria">
             <p is-visible="UnusedCriteriaInvationPotential().Length > 0">
-                Invasjonspotensial etter @UnusedCriteriaInvationPotential() er vurdert som fraværende (usannsynlig).
+                Localizer["invasion_pot_by_criteria"] @UnusedCriteriaInvationPotential() Localizer["evaluated_absent_inv"]
             </p>
         </li>
     </ul>
@@ -923,8 +923,8 @@
 
         <li is-visible="!isDecisiveCriteria && UnusedCriteriaEcologicalEffect().Length > 0" class="collapsible initially_closed">
             <div class="collapsible_header">
-                @Constants.effectAfterCriterium @UnusedCriteriaEcologicalEffect() 
-                @Constants.evaluatedAsUnlikely
+                @Localizer["eco_effects_by_criteria"] @UnusedCriteriaEcologicalEffect() 
+                @Localizer["evaluated_absent"]
             </div>
         </li>
     </ul>

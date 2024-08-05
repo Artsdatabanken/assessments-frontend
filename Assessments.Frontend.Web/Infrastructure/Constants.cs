@@ -375,8 +375,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         /* Criteria Explanation */
 
-        public const string seeOtherTab = "Se fanen Øvrige kriterier.";
-        public const string noDecisiveCriteriaXAxis = "Arten har lite invasjonspotensial og har dermed ingen utslag på kriterier på invasjonsaksen.";
 
         public const string showDetailsButton = "Vis detaljer";
         public const string hideDetailsButton = "Skjul detaljer";
@@ -427,8 +425,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
 
         public const string noEcoEffect = "Arten har ingen kjent økologisk effekt og har dermed ingen utslag på kriterier på effektaksen.";
-        public const string effectAfterCriterium = "Økologiske effekter etter kriterium";
-        public const string evaluatedAsUnlikely = "er vurdert som fraværende (usannsynlige)";
 
 
 

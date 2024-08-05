@@ -210,4 +210,22 @@
   <data name="NK_no_decisive" xml:space="preserve">
     <value>NK and has no desicive criteria.</value>
   </data>
+  <data name="eco_effects_by_criteria" xml:space="preserve">
+    <value>Ecological effects by criterium</value>
+  </data>
+  <data name="evaluated_absent" xml:space="preserve">
+    <value>are considered absent (unlikely).</value>
+  </data>
+  <data name="evaluated_absent_inv" xml:space="preserve">
+    <value>is considered absent (unlikely).</value>
+  </data>
+  <data name="invasion_pot_by_criteria" xml:space="preserve">
+    <value>Invasion potential by criterium</value>
+  </data>
+  <data name="invasion_pot_no_decisive" xml:space="preserve">
+    <value>The species' invasion potential corresponds to the lowest score possible, meaning the species has no decisive criteria on the invasion axis.</value>
+  </data>
+  <data name="go_to_non_decisive" xml:space="preserve">
+    <value>See the tab Non-decisive criteria.</value>
+  </data>
 </root>

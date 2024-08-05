@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="category_explaination_intro_text" xml:space="preserve">
-    <value>The impact category of a species is determined by the species' highest score on invasion potential (x-axis in the impact matrix) and ecological effect (y-axis in the impact matrix). The criterion(s) the species scores highest on for each of the axes in the matrix are the species' decisive criteria.</value>
+    <value>The impact category of a species is determined by the species' invasion potential, combined with its negative ecological effect.</value>
   </data>
   <data name="link_to_criteria_page_text" xml:space="preserve">
     <value>Read more about the criteria</value>
   </data>
   <data name="category_explaination_x_axis_explaination" xml:space="preserve">
-    <value>&lt;b&gt;The species' invasion potential&lt;/b&gt; is determined by three criteria: The species' median lifetime in Norway (criterion A), the species' expansion speed (criterion B), and the proportion of the total area of an ecosystem colonised by the alien species (criterion C).</value>
+    <value>&lt;b&gt;The species' invasion potential&lt;/b&gt; (x-axis in the impact matrix) is determined by three criteria: the species' median lifetime in Norway (criterion A), the species' expansion speed (criterion B), and the proportion of the total area of an ecosystem colonised by the alien species (criterion C).</value>
   </data>
   <data name="category_explaination_y_axis_explaination" xml:space="preserve">
-    <value>&lt;b&gt;The species' ecological effect&lt;/b&gt; is determined by six criteria: The species' effects on native species (criteria D and E), the species' effects on nature types (criteria F and G), transfer of genetic material to native species (criterion H), and transmission of parasites or pathogens to native species (criterion I).</value>
+    <value>&lt;b&gt;The species' ecological effect&lt;/b&gt; (y-axis in the impact matrix) is determined by six criteria: the species' effects on native species (criteria D and E), the species' effects on ecosystems (criteria F and G), transfer of genetic material to native species (criterion H), and transmission of parasites or pathogens to native species (criterion I).</value>
   </data>
   <data name="category_explaination_heading" xml:space="preserve">
     <value>What determines the species' impact category</value>
@@ -236,5 +236,8 @@
   </data>
   <data name="on_eco_effect_axis" xml:space="preserve">
     <value>on the ecological effect axis</value>
+  </data>
+  <data name="category_explaination_decisive_criteria" xml:space="preserve">
+    <value>The criterion(s) with the highest score on each of the axes in the matrix (invasion potential and ecological effect) are the species' &lt;i&gt;decisive criteria&lt;/i&gt;.</value>
   </data>
 </root>

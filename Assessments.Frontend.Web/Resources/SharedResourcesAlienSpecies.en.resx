@@ -124,10 +124,10 @@
     <value>Read more about the criteria</value>
   </data>
   <data name="category_explaination_x_axis_explaination" xml:space="preserve">
-    <value>&lt;b&gt;The species' invasion potential&lt;/b&gt; (x-axis in the impact matrix) is determined by three criteria: the species' median lifetime in Norway (criterion A), the species' expansion speed (criterion B), and the proportion of the total area of an ecosystem colonised by the alien species (criterion C).</value>
+    <value>The species' &lt;b&gt;invasion potential&lt;/b&gt; (x-axis in the impact matrix) is determined by three criteria: the species' median lifetime in Norway (criterion A), the species' expansion speed (criterion B), and the proportion of the total area of an ecosystem colonised by the alien species (criterion C).</value>
   </data>
   <data name="category_explaination_y_axis_explaination" xml:space="preserve">
-    <value>&lt;b&gt;The species' ecological effect&lt;/b&gt; (y-axis in the impact matrix) is determined by six criteria: the species' effects on native species (criteria D and E), the species' effects on ecosystems (criteria F and G), transfer of genetic material to native species (criterion H), and transmission of parasites or pathogens to native species (criterion I).</value>
+    <value>The species' &lt;b&gt;ecological effect&lt;/b&gt; (y-axis in the impact matrix) is determined by six criteria: the species' effects on native species (criteria D and E), the species' effects on ecosystems (criteria F and G), transfer of genetic material to native species (criterion H), and transmission of parasites or pathogens to native species (criterion I).</value>
   </data>
   <data name="category_explaination_heading" xml:space="preserve">
     <value>What determines the species' impact category</value>

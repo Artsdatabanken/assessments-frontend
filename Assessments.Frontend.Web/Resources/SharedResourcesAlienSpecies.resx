@@ -124,10 +124,10 @@
     <value>Les mer om kriteriene</value>
   </data>
   <data name="category_explaination_x_axis_explaination" xml:space="preserve">
-    <value>&lt;b&gt;Artens invasjonspotensial&lt;/b&gt; (x-aksen i risikomatrisa) bestemmes av tre kriterier: artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet).</value>
+    <value>Artens &lt;b&gt;invasjonspotensial&lt;/b&gt; (x-aksen i risikomatrisa) bestemmes av tre kriterier: artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet).</value>
   </data>
   <data name="category_explaination_y_axis_explaination" xml:space="preserve">
-    <value>&lt;b&gt;Artens økologiske effekt&lt;/b&gt; (y-aksen i risikomatrisa) bestemmes av seks kriterier: artens effekter på stedegne arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av stedegne arter (H-kriteriet) og overføring av parasitter eller patogener til stedegne arter (I-kriteriet).</value>
+    <value>Artens &lt;b&gt;økologiske effekt&lt;/b&gt; (y-aksen i risikomatrisa) bestemmes av seks kriterier: artens effekter på stedegne arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av stedegne arter (H-kriteriet) og overføring av parasitter eller patogener til stedegne arter (I-kriteriet).</value>
   </data>
   <data name="category_explaination_heading" xml:space="preserve">
     <value>Hva bestemmer artens risikokategori</value>

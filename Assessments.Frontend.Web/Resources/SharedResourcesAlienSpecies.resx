@@ -228,4 +228,13 @@
   <data name="go_to_non_decisive" xml:space="preserve">
     <value>Se fanen Øvrige kriterier.</value>
   </data>
+  <data name="assess_to" xml:space="preserve">
+    <value>vurderes til</value>
+  </data>
+  <data name="on_invasion_axis" xml:space="preserve">
+    <value>på invasjonsaksen</value>
+  </data>
+  <data name="on_eco_effect_axis" xml:space="preserve">
+    <value>på økologisk effekt aksen</value>
+  </data>
 </root>

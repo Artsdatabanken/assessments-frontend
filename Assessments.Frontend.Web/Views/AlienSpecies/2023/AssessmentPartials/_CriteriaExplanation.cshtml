@@ -397,8 +397,7 @@
     <h3>@LocalizerShared["invasion_potential"]</h3>
     <p is-visible="isDecisiveCriteria">
         <b>
-            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @LocalizerShared["has"] @assessment.ScoreInvasionPotential.DisplayName().ToLowerInvariant()
-            @LocalizerShared["invasion_potential"].Value.ToLower() (@LocalizerShared["score"] @((int)assessment.ScoreInvasionPotential))
+            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @Localizer["assess_to"] @LocalizerShared["score"] @((int)assessment.ScoreInvasionPotential) @Localizer["on_invasion_axis"]
         </b>
     </p>
 
@@ -682,8 +681,7 @@
 
     <p is-visible="isDecisiveCriteria">
         <b>
-            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @LocalizerShared["has"] @assessment.ScoreEcologicalEffect.DisplayName().ToLowerInvariant()
-            @LocalizerShared["ecological_effect"].Value.ToLower() (@LocalizerShared["score"] @((int)assessment.ScoreEcologicalEffect))
+            @Helpers.FixSpeciesLevelWithTranslation("{Arten}", assessment.ScientificName.ScientificNameRank, assessment.ScientificName.ScientificName) @Localizer["assess_to"] @LocalizerShared["score"] @((int)assessment.ScoreEcologicalEffect) @Localizer["on_eco_effect_axis"]
         </b>
     </p>
 

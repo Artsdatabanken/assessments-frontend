@@ -228,4 +228,13 @@
   <data name="go_to_non_decisive" xml:space="preserve">
     <value>See the tab Non-decisive criteria.</value>
   </data>
+  <data name="assess_to" xml:space="preserve">
+    <value>is assessed to</value>
+  </data>
+  <data name="on_invasion_axis" xml:space="preserve">
+    <value>on the invasion axis</value>
+  </data>
+  <data name="on_eco_effect_axis" xml:space="preserve">
+    <value>on the ecological effect axis</value>
+  </data>
 </root>

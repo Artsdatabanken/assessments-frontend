@@ -39,6 +39,12 @@ namespace Assessments.Frontend.Web.Controllers
         [Route("2023")]
         public async Task<IActionResult> Index(AlienSpeciesListViewModel viewModel, int? page, bool export)
         {
+            // hotfix - permanent redirect to fix google cache
+            if (viewModel.TaxonRank.Any() && viewModel.TaxonRank[0] == "tvi")
+            {
+                return RedirectPermanent("https://artsdatabanken.no/lister/fremmedartslista/2023?TaxonRank=AssessedAtSameRank");
+            }
+
             var query = await DataRepository.GetAlienSpeciesAssessments();
             var unfilteredQuery = query;
 

@@ -23,6 +23,7 @@ if (!Directory.Exists(dataFolder))
     Directory.CreateDirectory(dataFolder);
 
 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("nb-NO");
+CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("nb-NO");
 
 var menuItems = new List<string>
             {

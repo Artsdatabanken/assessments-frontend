@@ -117,7 +117,133 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="alien-species-list" xml:space="preserve">
-    <value>Fremmedartslista</value>
+  <data name="category_explaination_intro_text" xml:space="preserve">
+    <value>Artens risikokategori bestemmes av artens invasjonspotensial, kombinert med artens negative økologiske effekt i naturen.</value>
+  </data>
+  <data name="link_to_criteria_page_text" xml:space="preserve">
+    <value>Les mer om kriteriene</value>
+  </data>
+  <data name="category_explaination_x_axis_explaination" xml:space="preserve">
+    <value>Artens &lt;b&gt;invasjonspotensial&lt;/b&gt; (x-aksen i risikomatrisa) bestemmes av tre kriterier: artens mediane levetid i Norge (A-kriteriet), artens ekspansjonshastighet (B-kriteriet) og størrelsen på naturtypeareal som arten koloniserer (C-kriteriet).</value>
+  </data>
+  <data name="category_explaination_y_axis_explaination" xml:space="preserve">
+    <value>Artens &lt;b&gt;økologiske effekt&lt;/b&gt; (y-aksen i risikomatrisa) bestemmes av seks kriterier: artens effekter på stedegne arter (D- og E-kriteriet), artens effekter på naturtyper (F- og G-kriteriet), genetisk forurensning av stedegne arter (H-kriteriet) og overføring av parasitter eller patogener til stedegne arter (I-kriteriet).</value>
+  </data>
+  <data name="category_explaination_heading" xml:space="preserve">
+    <value>Hva bestemmer artens risikokategori</value>
+  </data>
+  <data name="alien_species_tables_D_criteria_table_title" xml:space="preserve">
+    <value>Artens negative effekter på trua arter eller nøkkelarter.</value>
+  </data>
+  <data name="alien_species_tables_D_criteria_table_text" xml:space="preserve">
+    <value>Tabellen viser hvilken type interaksjon den fremmede arten har med stedegne trua arter eller nøkkelarter, samt interaksjonens styre og omfang. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.</value>
+  </data>
+  <data name="alien_species_tables_E_criteria_table_title" xml:space="preserve">
+    <value>Artens negative effekter på stedegne arter (ikke trua eller sjelden).</value>
+  </data>
+  <data name="alien_species_tables_E_criteria_table_text" xml:space="preserve">
+    <value>Tabellen viser hvilken type interaksjon den fremmede arten har med stedegne arter, samt interaksjonens styre og omfang. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.</value>
+  </data>
+  <data name="native_species" xml:space="preserve">
+    <value>stedegen art</value>
+  </data>
+  <data name="red_list_category_2021_html" xml:space="preserve">
+    <value>kategori &lt;br&gt;Rødlista 2021</value>
+  </data>
+  <data name="keystone_species" xml:space="preserve">
+    <value>nøkkelart?</value>
+  </data>
+  <data name="interaction_strength" xml:space="preserve">
+    <value>interaksjonens styrke</value>
+  </data>
+  <data name="geographical_extent" xml:space="preserve">
+    <value>geografisk omfang</value>
+  </data>
+  <data name="interaction_type" xml:space="preserve">
+    <value>type interaksjon</value>
+  </data>
+  <data name="documentation_type" xml:space="preserve">
+    <value>vurderings&lt;span&gt;&amp;#8208;&lt;/span&gt;&lt;br&gt;grunnlag</value>
+  </data>
+  <data name="alien_species_tables_D_criteria_society_table_description" xml:space="preserve">
+    <value>Tabellen viser hvilken type interaksjon den fremmede arten har med grupper av stedegne arter (hvor minst én av artene er trua eller nøkkelart), samt interaksjonens styre og omfang. Den negative interaksjonen med grupper av arter er indikert gjennom påvirket naturtype. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.</value>
+  </data>
+  <data name="alien_species_tables_D_criteria_society_table_title" xml:space="preserve">
+    <value>Artens negative effekter på grupper av arter (inkludert trua arter eller nøkkelarter).</value>
+  </data>
+  <data name="alien_species_tables_E_criteria_society_table_title" xml:space="preserve">
+    <value>Artens negative effekter på grupper av stedegne arter.</value>
+  </data>
+  <data name="alien_species_tables_E_criteria_society_table_description" xml:space="preserve">
+    <value>Tabellen viser hvilken type interaksjon den fremmede arten har med grupper av stedegne arter, samt interaksjonens styre og omfang. Den negative interaksjonen med grupper av arter er indikert gjennom påvirket naturtype. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.</value>
+  </data>
+  <data name="affected_species_naturetype" xml:space="preserve">
+    <value>Påvirkede &lt;br&gt;arter i</value>
+  </data>
+  <data name="keystone_or_threatened" xml:space="preserve">
+    <value>nøkkelarter &lt;br&gt;eller truede &lt;br&gt;arter?</value>
+  </data>
+  <data name="alien_species_tables_F_criteria_table_title" xml:space="preserve">
+    <value>Artens negative effekter på truede eller sjeldne naturtyper.</value>
+  </data>
+  <data name="alien_species_tables_G_criteria_table_title" xml:space="preserve">
+    <value>Artens negative effekter på naturtyper (ikke trua eller sjelden).</value>
+  </data>
+  <data name="alien_species_tables_F_G_criteria_table_description" xml:space="preserve">
+    <value>Tabellen viser hvilke(n) naturtype(r) som påvirkes av den fremmede arten nå eller i framtida. Type tilstandsendring, hvor stor del av naturtypearealet som påvirkes og vurderingsgrunnlag er gitt for hver naturtype. Se retningslinjene for beskrivelse av tydelig tilstandsendring.</value>
+  </data>
+  <data name="time_horizon" xml:space="preserve">
+    <value>tidshorisont</value>
+  </data>
+  <data name="state_change" xml:space="preserve">
+    <value>tydelig &lt;br&gt;tilstandsendring</value>
+  </data>
+  <data name="affected_area" xml:space="preserve">
+    <value>tydelig &lt;br&gt;påvirka &lt;br&gt;areal (%)</value>
+  </data>
+  <data name="corresponds_to" xml:space="preserve">
+    <value>Dette tilsvarer</value>
+  </data>
+  <data name="assessed_to" xml:space="preserve">
+    <value>er vurdert til </value>
+  </data>
+  <data name="NK_no_decisive" xml:space="preserve">
+    <value>NK og har dermed ingen avgjørende kriterier.</value>
+  </data>
+  <data name="eco_effects_by_criteria" xml:space="preserve">
+    <value>Økologiske effekter etter kriterium</value>
+  </data>
+  <data name="evaluated_absent" xml:space="preserve">
+    <value>er vurdert som fraværende (usannsynlige).</value>
+  </data>
+  <data name="invasion_pot_by_criteria" xml:space="preserve">
+    <value>Invasjonspotensial etter kriterium</value>
+  </data>
+  <data name="evaluated_absent_inv" xml:space="preserve">
+    <value>er vurdert som fraværende (usannsynlig).</value>
+  </data>
+  <data name="invasion_pot_no_decisive" xml:space="preserve">
+    <value>Artens delkategori invasjonspotensial tilsvarer laveste mulige delkategori og arten har derfor ingen avgjørende kriterier på invasjonsaksen.</value>
+  </data>
+  <data name="go_to_non_decisive" xml:space="preserve">
+    <value>Se fanen Øvrige kriterier.</value>
+  </data>
+  <data name="assess_to" xml:space="preserve">
+    <value>vurderes til</value>
+  </data>
+  <data name="on_invasion_axis" xml:space="preserve">
+    <value>på invasjonsaksen</value>
+  </data>
+  <data name="on_eco_effect_axis" xml:space="preserve">
+    <value>på økologisk effekt aksen</value>
+  </data>
+  <data name="category_explaination_decisive_criteria" xml:space="preserve">
+    <value>Kriteriet(ene) arten skårer høyest på for hver av aksene i matrisa (invasjonspotensial og økologisk effekt) kalles artens &lt;i&gt;avgjørende kriterier&lt;/i&gt;.</value>
+  </data>
+  <data name="eco_effect_no_decisive" xml:space="preserve">
+    <value>Artens delkategori for økologisk effekt tilsvarer laveste mulige delkategori og arten har dermed ingen avgjørende kriterier på effektaksen.</value>
+  </data>
+  <data name="axis_score" xml:space="preserve">
+    <value>delkategori</value>
   </data>
 </root>

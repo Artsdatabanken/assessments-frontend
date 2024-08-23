@@ -43,90 +43,81 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                 case AlienSpeciesAssessment2023CriteriaLetter.A:
                     description = value switch
                     {
-                        1 => "mindre enn 10 år",
-                        2 => "mellom 10 og 59 år",
-                        3 => "mellom 60 og 649 år",
-                        4 => "minimum 650 år",
+                        1 => Resources.SharedResources.less_than_ten_years,
+                        2 => Resources.SharedResources.between_ten_59_years,
+                        3 => Resources.SharedResources.between_60_649_years,
+                        4 => Resources.SharedResources.minimum_650_years,
                         _ => description
                     };
                     break;
                 case AlienSpeciesAssessment2023CriteriaLetter.B:
                     description = value switch
                     {
-                        1 => "mindre enn 50 m/år",
-                        2 => "mellom 50 og 159 m/år",
-                        3 => "mellom 160 og 499 m/år",
-                        4 => "minimum 500 m/år",
+                        1 => Resources.SharedResources.less_than_50_myear,
+                        2 => Resources.SharedResources.between_50_159_myear,
+                        3 => Resources.SharedResources.between_160_499_myear,
+                        4 => Resources.SharedResources.minimum_500_myear,
                         _ => description
                     };
                     break;
                 case AlienSpeciesAssessment2023CriteriaLetter.C:
+                case AlienSpeciesAssessment2023CriteriaLetter.G:
                     description = value switch
                     {
-                        1 => "mindre enn 5%",
-                        2 => "minimum 5%",
-                        3 => "minimum 10%",
-                        4 => "minimum 20%",
+                        1 => Resources.SharedResources.less_than_five_percent,
+                        2 => Resources.SharedResources.min_five_percent,
+                        3 => Resources.SharedResources.minimum_ten_percent,
+                        4 => Resources.SharedResources.minimum_20_percent,
                         _ => description
                     };
                     break;
                 case AlienSpeciesAssessment2023CriteriaLetter.D:
                     description = value switch
                     {
-                        1 => "fraværende",
-                        2 => "svak styrke og begrenset omfang",
-                        3 => "svak styrke og storskala omfang ELLER moderat styrke og begrenset omfang",
-                        4 => "moderat styrke og storskala omfang ELLER fortrengning",
+                        1 => Resources.SharedResources.absent,
+                        2 => Resources.SharedResources.weak_confined,
+                        3 => Resources.SharedResources.weak_large_scale_or_moderate_confined,
+                        4 => Resources.SharedResources.moderate_large_scale_or_displacement,
                         _ => description
                     };
                     break;
                 case AlienSpeciesAssessment2023CriteriaLetter.E:
                     description = value switch
                     {
-                        1 => "svak styrke ELLER moderat styrke og begrenset omfang",
-                        2 => "moderat styrke og storskala omfang",
-                        3 => "fortrengning i begrenset omfang",
-                        4 => "fortrengning i storskala omfang",
+                        1 => Resources.SharedResources.weak_or_moderate_confined,
+                        2 => Resources.SharedResources.moderate_large_scale,
+                        3 => Resources.SharedResources.confined_displacement,
+                        4 => Resources.SharedResources.large_scale_displacement,
                         _ => description
                     };
                     break;
                 case AlienSpeciesAssessment2023CriteriaLetter.F:
                     description = value switch
                     {
-                        1 => "0%",
-                        2 => "over 0%",
-                        3 => "minimum 2%",
-                        4 => "minimum 5%",
-                        _ => description
-                    };
-                    break;
-                case AlienSpeciesAssessment2023CriteriaLetter.G:
-                    description = value switch
-                    {
-                        1 => "mindre enn 5%",
-                        2 => "minimum 5%",
-                        3 => "minimum 10%",
-                        4 => "minimum 20%",
+                        1 => Resources.SharedResources.zero_percent,
+                        2 => Resources.SharedResources.over_zero_percent,
+                        3 => Resources.SharedResources.min_two_percent,
+                        4 => Resources.SharedResources.min_five_percent,
                         _ => description
                     };
                     break;
                 case AlienSpeciesAssessment2023CriteriaLetter.H:
                     description = value switch
                     {
-                        1 => "ingen overføring",
-                        2 => "begrenset til stedegen art",
-                        3 => "storskala til stedegen art ELLER begrenset til truet art eller nøkkelart",
-                        4 => "storskala til truet art eller nøkkelart",
+                        1 => Resources.SharedResources.no_transfer,
+                        2 => Resources.SharedResources.confined_native_species,
+                        3 => Resources.SharedResources.large_scale_non_threatened_OR_confined_threatened,
+                        4 => Resources.SharedResources.large_scale_threatened,
                         _ => description
                     };
                     break;
                 case AlienSpeciesAssessment2023CriteriaLetter.I:
                     description = value switch
                     {
-                        1 => "ingen overføring ELLER begrenset til art som allerede er vert for denne parasitten",
-                        2 => "storskala til art som allerede er vert for denne parasitten ELLER begrenset til ny vert",
-                        3 => "storskala av eksisterende parasitt til ny vert ELLER begrenset til ny truet vert",
-                        4 => "storskala av eksisterende parasitt til ny truet vert ELLER storskala eller begrenset av en fremmed parasitt",
+                        1 => Resources.SharedResources.absent_OR_confined_known_host,
+                        2 => Resources.SharedResources.large_scale_known_host_OR_confined_new_host,
+                        3 => Resources.SharedResources.large_scale_new_host_OR_confined_threathened_new_host,
+                        4 => Resources.SharedResources.large_scale_new_threatened_host_OR_doorknocker_parasite,
                         _ => description
                     };
                     break;
@@ -150,29 +141,29 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             return criterion.UncertaintyValues.Where(x => x < criterion.Value).FirstOrDefault();
         }
 
-        public static string GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion, bool isDifferent)
+        public static string GetLetterFullText(AlienSpeciesAssessment2023Criterion criterion)
         {
             var letterText = "";
-            letterText += isDifferent == true ? " " + Constants.whichIs + " " : " "+ Constants.on +" ";
+            letterText += criterion.CriteriaLetter.DisplayName() + ": ";
             letterText += CriteriaDescription(criterion.CriteriaLetter, criterion.Value);
             letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) == 0 ? "." : "";
             if (GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0)
             {
-                letterText += " ("+ Constants.withUuncertainty + " ";
+                letterText += " ("+ Resources.SharedResources.with_uncertainty + " ";
             }
             if (GetUncertaintyLow(criterion) != 0)
             {
-                letterText += Constants.downTo + " ";
+                letterText += Resources.SharedResources.down_to + " ";
                 letterText += CriteriaDescription(criterion.CriteriaLetter, AlienSpeciesHelpers.GetUncertaintyLow(criterion));
                 letterText += GetUncertaintyHigh(criterion) == 0 && GetUncertaintyLow(criterion) != 0 ? ")." : "";
             }
             if (GetUncertaintyHigh(criterion) != 0 && GetUncertaintyLow(criterion) != 0)
             {
-                letterText += " " + Constants.and + " ";
+                letterText += " " + Resources.SharedResources.and + " ";
             }
             if (AlienSpeciesHelpers.GetUncertaintyHigh(criterion) != 0)
             {
-                letterText += Constants.upTo + " ";
+                letterText += Resources.SharedResources.up_to + " ";
                 letterText += CriteriaDescription(criterion.CriteriaLetter, GetUncertaintyHigh(criterion));
                 letterText += GetUncertaintyHigh(criterion) != 0 || GetUncertaintyLow(criterion) != 0 ? ")." : "";
             }

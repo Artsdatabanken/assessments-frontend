@@ -247,6 +247,6 @@
     <value>delkategori</value>
   </data>
   <data name="did_not_pass_horizon_scanning" xml:space="preserve">
-    <value>ikke gikk videre fra horisontskanningen</value>
+    <value>utenfor avgrensningen for risikovurdering</value>
   </data>
 </root>

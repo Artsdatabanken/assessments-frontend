@@ -92,7 +92,7 @@
 
     var showExpertStatement = !isNr && !isEvaluatedAtAnotherLevel;
     var isHorizonScanned = Model.Assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.HorizonScannedButNoRiskAssessment;
-    var showAssessmentReasoning = !isHorizonScanned && (isNr || isEvaluatedAtAnotherLevel) &&
+    var showAssessmentReasoning = isHorizonScanned || (isNr || isEvaluatedAtAnotherLevel) &&
         (!string.IsNullOrEmpty(Model.ExpertStatementViewModel.MisidentifiedDescription) ||
         !string.IsNullOrEmpty(Model.ExpertStatementViewModel.AllSubTaxaAssessedSeparately) ||
         !string.IsNullOrEmpty(Model.ExpertStatementViewModel.HybridWithoutOwnRiskAssessmentDescription) ||
@@ -112,7 +112,6 @@
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
     var showTableOfContents = assessment.Category != AlienSpeciesAssessment2023Category.NR;
     var showCitationForAssessment = Model.ExpertGroupMembers.Any();
-    var showHorizonScanning = assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.HorizonScannedButNoRiskAssessment;
 
     Model.PageMenuViewModel.TableOfContentsViewModel = new TableOfContentsViewModel
     {

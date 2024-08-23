@@ -150,9 +150,6 @@
   <data name="hybrid_without_own_risk_assessment" xml:space="preserve">
     <value>Outside the delimination</value>
   </data>
-  <data name="horizon_scanned_but_not_assessed" xml:space="preserve">
-    <value>Horizon scanned</value>
-  </data>
   <data name="horizon_scanned_but_no_risk_assessment" xml:space="preserve">
     <value>Horizon scanned</value>
   </data>

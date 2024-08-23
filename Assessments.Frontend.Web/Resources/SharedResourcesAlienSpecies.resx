@@ -246,4 +246,7 @@
   <data name="axis_score" xml:space="preserve">
     <value>delkategori</value>
   </data>
+  <data name="did_not_pass_horizon_scanning" xml:space="preserve">
+    <value>ikke gikk videre fra horisontskanningen</value>
+  </data>
 </root>

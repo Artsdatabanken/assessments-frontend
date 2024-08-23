@@ -246,4 +246,7 @@
   <data name="axis_score" xml:space="preserve">
     <value>score</value>
   </data>
+  <data name="did_not_pass_horizon_scanning" xml:space="preserve">
+    <value>did not pass the horizon scanning</value>
+  </data>
 </root>

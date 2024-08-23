@@ -117,7 +117,133 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="alien-species-list" xml:space="preserve">
-    <value>Alien species list</value>
+  <data name="category_explaination_intro_text" xml:space="preserve">
+    <value>The impact category of a species is determined by the species' invasion potential, combined with its negative ecological effect.</value>
+  </data>
+  <data name="link_to_criteria_page_text" xml:space="preserve">
+    <value>Read more about the criteria</value>
+  </data>
+  <data name="category_explaination_x_axis_explaination" xml:space="preserve">
+    <value>The species' &lt;b&gt;invasion potential&lt;/b&gt; (x-axis in the impact matrix) is determined by three criteria: the species' median lifetime in Norway (criterion A), the species' expansion speed (criterion B), and the proportion of the total area of an ecosystem colonised by the alien species (criterion C).</value>
+  </data>
+  <data name="category_explaination_y_axis_explaination" xml:space="preserve">
+    <value>The species' &lt;b&gt;ecological effect&lt;/b&gt; (y-axis in the impact matrix) is determined by six criteria: the species' effects on native species (criteria D and E), the species' effects on ecosystems (criteria F and G), transfer of genetic material to native species (criterion H), and transmission of parasites or pathogens to native species (criterion I).</value>
+  </data>
+  <data name="category_explaination_heading" xml:space="preserve">
+    <value>What determines the species' impact category</value>
+  </data>
+  <data name="alien_species_tables_D_criteria_table_title" xml:space="preserve">
+    <value>The species' negative effects on threatened or keystone species.</value>
+  </data>
+  <data name="alien_species_tables_D_criteria_table_text" xml:space="preserve">
+    <value>The table shows the interaction(s) the alien species has with threatened or keystone species, as well as the interactions' strength and geographical extent. Only effects that are documented in Norway; or documented elsewhere (or for a closely related species) and likely to occur in Norway within 50 years, are included.</value>
+  </data>
+  <data name="alien_species_tables_E_criteria_table_title" xml:space="preserve">
+    <value>The species' negative effects on native species that are neither threatened nor keystone.</value>
+  </data>
+  <data name="alien_species_tables_E_criteria_table_text" xml:space="preserve">
+    <value>The table shows the interaction(s) the alien species has with native species, as well as the interactions' strength and geographical extent. Only effects that are documented in Norway; or documented elsewhere (or for a closely related species) and likely to occur in Norway within 50 years, are included.</value>
+  </data>
+  <data name="native_species" xml:space="preserve">
+    <value>native species</value>
+  </data>
+  <data name="red_list_category_2021_html" xml:space="preserve">
+    <value>category &lt;br&gt;Red List 2021</value>
+  </data>
+  <data name="keystone_species" xml:space="preserve">
+    <value>keystone species?</value>
+  </data>
+  <data name="interaction_strength" xml:space="preserve">
+    <value>strength of interaction</value>
+  </data>
+  <data name="geographical_extent" xml:space="preserve">
+    <value>geographical extent</value>
+  </data>
+  <data name="interaction_type" xml:space="preserve">
+    <value>type of interaction</value>
+  </data>
+  <data name="documentation_type" xml:space="preserve">
+    <value>type of documentation</value>
+  </data>
+  <data name="alien_species_tables_D_criteria_society_table_description" xml:space="preserve">
+    <value>The table shows the interaction(s) the alien species has with societies of native species (where at least one of the species are either threatened or keystone), as well as the interactions' strength and geographical extent. The negative interaction with a society of species is indicated by the impacted ecosystem. Only effects that are documented in Norway; or documented elsewhere (or for a closely related species) and likely to occur in Norway within 50 years, are included.</value>
+  </data>
+  <data name="alien_species_tables_D_criteria_society_table_title" xml:space="preserve">
+    <value>The species' negative effects on societies of native species, including threatened or keystone species.</value>
+  </data>
+  <data name="alien_species_tables_E_criteria_society_table_description" xml:space="preserve">
+    <value>The table shows the interaction(s) the alien species has with societies of native species, as well as the interactions' strength and geographical extent. The negative interaction with a society of species is indicated by the impacted ecosystem. Only effects that are documented in Norway; or documented elsewhere (or for a closely related species) and likely to occur in Norway within 50 years, are included.</value>
+  </data>
+  <data name="alien_species_tables_E_criteria_society_table_title" xml:space="preserve">
+    <value>The species' negative effects on societies of native species.</value>
+  </data>
+  <data name="affected_species_naturetype" xml:space="preserve">
+    <value>Affected &lt;br&gt;species in</value>
+  </data>
+  <data name="keystone_or_threatened" xml:space="preserve">
+    <value>threatened &lt;br&gt;or keystone &lt;br&gt;species?</value>
+  </data>
+  <data name="alien_species_tables_F_criteria_table_title" xml:space="preserve">
+    <value>The species' negative effects on threatened or rare nature types.</value>
+  </data>
+  <data name="alien_species_tables_G_criteria_table_title" xml:space="preserve">
+    <value>The species' negative effects on nature types that are neither threatened nor rare.</value>
+  </data>
+  <data name="alien_species_tables_F_G_criteria_table_description" xml:space="preserve">
+    <value>The table shows the nature type(s) affected by the alien species now or in the future. Type of state change, the proportion of the nature type's area that are affected and the documentation type is given for each nature type. See guidelines for a description of substantial state change.</value>
+  </data>
+  <data name="time_horizon" xml:space="preserve">
+    <value>time horizon</value>
+  </data>
+  <data name="state_change" xml:space="preserve">
+    <value>substantial &lt;br&gt;state shange</value>
+  </data>
+  <data name="affected_area" xml:space="preserve">
+    <value>substantially &lt;br&gt;affected &lt;br&gt;area (%)</value>
+  </data>
+  <data name="corresponds_to" xml:space="preserve">
+    <value>This corresponds to</value>
+  </data>
+  <data name="assessed_to" xml:space="preserve">
+    <value>is assessed to </value>
+  </data>
+  <data name="NK_no_decisive" xml:space="preserve">
+    <value>NK and has no desicive criteria.</value>
+  </data>
+  <data name="eco_effects_by_criteria" xml:space="preserve">
+    <value>Ecological effects by criterium</value>
+  </data>
+  <data name="evaluated_absent" xml:space="preserve">
+    <value>are considered absent (unlikely).</value>
+  </data>
+  <data name="evaluated_absent_inv" xml:space="preserve">
+    <value>is considered absent (unlikely).</value>
+  </data>
+  <data name="invasion_pot_by_criteria" xml:space="preserve">
+    <value>Invasion potential by criterium</value>
+  </data>
+  <data name="invasion_pot_no_decisive" xml:space="preserve">
+    <value>The species' score for invasion potential is the lowest score possible, meaning the species has no decisive criteria on the invasion axis.</value>
+  </data>
+  <data name="go_to_non_decisive" xml:space="preserve">
+    <value>See the tab Non-decisive criteria.</value>
+  </data>
+  <data name="assess_to" xml:space="preserve">
+    <value>is assessed to</value>
+  </data>
+  <data name="on_invasion_axis" xml:space="preserve">
+    <value>on the invasion axis</value>
+  </data>
+  <data name="on_eco_effect_axis" xml:space="preserve">
+    <value>on the ecological effect axis</value>
+  </data>
+  <data name="category_explaination_decisive_criteria" xml:space="preserve">
+    <value>The criterion(s) with the highest score on each of the axes in the matrix (invasion potential and ecological effect) are the species' &lt;i&gt;decisive criteria&lt;/i&gt;.</value>
+  </data>
+  <data name="eco_effect_no_decisive" xml:space="preserve">
+    <value>The species' score for ecological effect is the lowest score possible, meaning the species has no decisive criteria on the effect axis.</value>
+  </data>
+  <data name="axis_score" xml:space="preserve">
+    <value>score</value>
   </data>
 </root>

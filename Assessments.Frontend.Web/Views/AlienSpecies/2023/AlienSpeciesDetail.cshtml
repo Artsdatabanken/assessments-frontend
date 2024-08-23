@@ -2,6 +2,7 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Assessments.Data.Models
+@inject IStringLocalizer<SharedResourcesAlienSpecies> Localizer
 
 @{
     var assessment = Model.Assessment;
@@ -130,8 +131,8 @@
             },
             new ()
             {
-                ElementId = nameof(Constants.HeadingsNo.RiskCategoryExplanation),
-                Title = Constants.HeadingsNo.RiskCategoryExplanation,
+                ElementId = @Localizer["category_explaination_heading"].Name,
+                Title = @Localizer["category_explaination_heading"],
                 ShouldShow = showRiskCategoryExplanation
             },
             new ()

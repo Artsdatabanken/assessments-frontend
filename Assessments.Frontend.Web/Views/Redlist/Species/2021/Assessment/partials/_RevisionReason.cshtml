@@ -1,5 +1,5 @@
 ﻿@model SpeciesAssessment2021
-@if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
+@if (!string.IsNullOrEmpty(Model.RevisionReason.StripHtml()))
 {
 <div>
     <span class="material-icons" style="float:left;display:inline-block; padding:10px;">
@@ -10,7 +10,7 @@
     <i style="display:none;">NB - Vurderingen er justert etter publisering: </i>
     <b>Justeringer etter publisering</b>
     <p>
-        @Model.RevisionReason
+        @Html.Raw(Model.RevisionReason)
         <a is-visible="Model.Revisions.Any()" asp-action="Detail" asp-route-id="@Model.Id" asp-route-revisionid="1">Gå til første utgave</a>
     </p>        
 </div>      

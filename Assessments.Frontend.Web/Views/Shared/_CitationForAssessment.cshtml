@@ -1,8 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Http.Extensions
+@using System.Globalization
 @model CitationForAssessmentViewModel
 
 @{
     // Date
+    var downloadDate = $"Nedlastet {DateTime.Now.ToShortDateString()}";
     var firspublished = Helpers.GetPublishedDate(Model.AssessmentYear, Model.YearPreviousAssessment, Model.FirstPublished);
     var revisiondate = Helpers.GetRevisionDate(Model.RevisionDate, firspublished);
     var date = firspublished;
@@ -23,6 +25,7 @@
         (@date).
         @Html.Raw(Model.AssessmentName)
         @Model.PublicationText
-        @Context.Request.GetDisplayUrl().Split('?')[0]
+        @Context.Request.GetDisplayUrl().Split('?')[0].
+        @downloadDate
     </p>
 }

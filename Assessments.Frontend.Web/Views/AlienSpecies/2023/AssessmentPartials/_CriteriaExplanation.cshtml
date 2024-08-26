@@ -361,22 +361,14 @@
 
     void GetListForCategory(AlienSpeciesAssessment2023Criterion criterion, string letter)
     {
-        <div class="collapsible_header">
+        <button onclick="toggleAccordion(this)" class="adb-accordion-button">
             <span>
                 <b><span class="collapsible_header_letter">@letter.</span></b>
                 <span> @AlienSpeciesHelpers.GetLetterFullText(criterion)  @Localizer["corresponds_to"] @LocalizerShared["score"] @criterion.Value.</span>
-            </span> 
-            <button onclick="toggleCollapsible(this)" class="adb-button ghost">
-                <span class="expanded_icon">
-                    <span>Se mindre</span>
-                    <span class="material-icons">expand_less</span>
-                </span>
-                <span class="collapsed_icon">
-                    <span>Se mer</span>
-                    <span class="material-icons">expand_more</span>
-                </span>
-            </button>
-        </div>
+            </span>
+            <span class="material-symbols-outlined add">expand_more</span>
+            <span class="material-symbols-outlined remove">expand_less</span>
+        </button>
     }
 
     void GetEstimationMethod(string estimationMethod)
@@ -408,11 +400,11 @@
         <span>@Localizer["go_to_non_decisive"]</span>
     </p>
     <ul class="criteria-summary-list">
-        <li is-visible="criteriaHasA || criteriaHasB"  class="collapsible initially_closed">
+        <li is-visible="criteriaHasA || criteriaHasB"  class="adb-accordion accordion-primary">
             @{
                 GetListForCategory(uncertaintyA, AlienSpeciesAssessment2023CriteriaLetter.A.ToString());
             }
-            <div class="collapsible_content">                
+            <div class="adb-accordion-content">                
                 @{GetEstimationMethod(assessment.MedianLifetimeEstimationMethod.DisplayName().ToLowerInvariant());}                
                 <p class="summary-estimated">
                     <span is-visible="showSimplifiedEstimateAcceptedAlien || showSimplifiedEstimateNotAcceptedAlien">
@@ -520,11 +512,11 @@
                 </div>
             </div>            
         </li>
-        <li is-visible="criteriaHasA || criteriaHasB" class="collapsible initially_closed">            
+        <li is-visible="criteriaHasA || criteriaHasB" class="adb-accordion accordion-primary">            
             @{
                 GetListForCategory(uncertaintyB, AlienSpeciesAssessment2023CriteriaLetter.B.ToString());
             }
-            <div class="collapsible_content">
+            <div class="adb-accordion-content">
                 @{GetEstimationMethod(assessment.ExpansionSpeedEstimationMethod.DisplayName().ToLowerInvariant());}
                 <div is-visible="isSpatiotemporalDataset">
                     <br>
@@ -633,11 +625,11 @@
             </div>            
         </li>
         <li is-visible="criteriaHasC">
-            <div is-visible="hasContentC" class="collapsible initially_closed">
+            <div is-visible="hasContentC" class="adb-accordion accordion-primary">
                 @{
                     GetListForCategory(uncertaintyC, AlienSpeciesAssessment2023CriteriaLetter.C.ToString());
                 }
-                <div class="collapsible_content">
+                <div class="adb-accordion-content">
                     <table class="big-data-table">
                         <caption class="table-title">
                             <b>@Constants.AlienSpeciesTables.CriteriaCNaturetypesTableTitle</b>
@@ -691,11 +683,11 @@
         <p>@Localizer["eco_effect_no_decisive"]</p>
     </p>
     <ul class="criteria-summary-list">
-        <li is-visible="criteriaHasD && !showIsNk && hasContentD" class="collapsible initially_closed">           
+        <li is-visible="criteriaHasD && !showIsNk && hasContentD" class="adb-accordion accordion-primary">           
             @{
                 GetListForCategory(uncertaintyD, AlienSpeciesAssessment2023CriteriaLetter.D.ToString());
             }
-            <div class="collapsible_content">
+            <div class="adb-accordion-content">
                 <div is-visible="@(assessment.SpeciesSpeciesInteractionsThreatenedSpecies != null && assessment.SpeciesSpeciesInteractionsThreatenedSpecies.Count() != 0)">
                     <div class="mobile_hide">
                         @{
@@ -734,11 +726,11 @@
             </div>
         </li>
 
-        <li is-visible="criteriaHasE && !showIsNk && hasContentE" class="collapsible initially_closed">           
+        <li is-visible="criteriaHasE && !showIsNk && hasContentE" class="adb-accordion accordion-primary">           
             @{
                 GetListForCategory(uncertaintyE, AlienSpeciesAssessment2023CriteriaLetter.E.ToString());
             }
-            <div class="collapsible_content">
+            <div class="adb-accordion-content">
                 <div is-visible="@(assessment.SpeciesSpeciesInteractions  != null && assessment.SpeciesSpeciesInteractions .Count() != 0)">
                     <div class="mobile_hide">
                         @{
@@ -777,11 +769,11 @@
             </div>
         </li>
 
-        <li is-visible="criteriaHasF && !showIsNk && hasContentF" class="collapsible initially_closed">           
+        <li is-visible="criteriaHasF && !showIsNk && hasContentF" class="adb-accordion accordion-primary">           
             @{
                 GetListForCategory(uncertaintyF, AlienSpeciesAssessment2023CriteriaLetter.F.ToString());
             }
-            <div class="collapsible_content">
+            <div class="adb-accordion-content">
                 <div is-visible="showFTable">
                     @{
                         GetFGTable(true);
@@ -794,11 +786,11 @@
         </li>
 
         <li is-visible="criteriaHasG">
-            <div is-visible="!showIsNk && hasContentG" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentG" class="adb-accordion accordion-primary">
                 @{
                     GetListForCategory(uncertaintyG, AlienSpeciesAssessment2023CriteriaLetter.G.ToString());
                 }
-                <div class="collapsible_content">
+                <div class="adb-accordion-content">
                     <div is-visible="showGTable">
                         @{
                             GetFGTable(false);
@@ -812,11 +804,11 @@
         </li>
 
         <li is-visible="criteriaHasH">
-            <div is-visible="!showIsNk && hasContentH" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentH" class="adb-accordion accordion-primary">
                 @{
                     GetListForCategory(uncertaintyH, AlienSpeciesAssessment2023CriteriaLetter.H.ToString());
                 }
-                <div class="collapsible_content">
+                <div class="adb-accordion-content">
                     <div>
                         <table class="big-data-table" is-visible="showHTable">
                             <caption class="table-title">
@@ -863,11 +855,11 @@
         </li>
 
         <li is-visible="criteriaHasI">
-            <div is-visible="!showIsNk && hasContentI" class="collapsible initially_closed">
+            <div is-visible="!showIsNk && hasContentI" class="adb-accordion accordion-primary">
                 @{
                     GetListForCategory(uncertaintyI, AlienSpeciesAssessment2023CriteriaLetter.I.ToString());
                 }
-                <div class="collapsible_content">
+                <div class="adb-accordion-content">
                     <div>
                         <table class="big-data-table" is-visible="showITable">
                             <caption class="table-title">
@@ -919,7 +911,7 @@
             </div>
         </li>
 
-        <li is-visible="!isDecisiveCriteria && UnusedCriteriaEcologicalEffect().Length > 0" class="collapsible initially_closed">
+        <li is-visible="!isDecisiveCriteria && UnusedCriteriaEcologicalEffect().Length > 0" class="adb-accordion accordion-primary">
             <div class="collapsible_header">
                 @Localizer["eco_effects_by_criteria"] @UnusedCriteriaEcologicalEffect() 
                 @Localizer["evaluated_absent"]

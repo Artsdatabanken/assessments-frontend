@@ -11,6 +11,7 @@
 
 .adb-accordion-small-button,
 .adb-accordion-button {
+    font-size: 12pt;
     display: flex;
     width: 100%;
     height: 75px;

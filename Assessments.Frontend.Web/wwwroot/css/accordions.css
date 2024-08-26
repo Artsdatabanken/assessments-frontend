@@ -1,0 +1,296 @@
+﻿/* Hentet fra styles/accordions.sass i Natur i Norge 3 og oversatt til css. */
+
+.adb-accordions,
+.adb-single-accordion {
+    margin: 55px 0;
+}
+
+.adb-accordion-ingress {
+    margin: 20px 0;
+}
+
+.adb-accordion-small-button,
+.adb-accordion-button {
+    display: flex;
+    width: 100%;
+    height: 75px;
+    padding: 20px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    border: 0;
+    border-bottom: 1px solid #005B72;
+}
+
+.adb-accordion-button-variable {
+    background-color: inherit;
+    border: 1px solid #005B72;
+}
+
+.adb-accordion-button-variable-special {
+    background-color: inherit;
+    height: auto;
+}
+
+.adb-accordion-button-variable-special .accordion-title-heading {
+    text-align: initial;
+}
+
+.adb-accordion-button.adb-accordion-button-variable-special {
+    padding: 0 25px;
+}
+
+.adb-accordion-button {
+    padding: 25px;
+}
+
+.adb-accordion-small-button {
+    height: 61px;
+    background: inherit;
+    max-width: 300px;
+}
+
+.accordion-primary .adb-accordion-button {
+    background: #FFF9F0;
+}
+
+.accordion-secondary .adb-accordion-button {
+    background: #F7F9FB;
+}
+
+.accordion-secondary .adb-accordion-button:hover,
+.accordion-secondary .adb-accordion-button:focus {
+    cursor: pointer;
+    background: #f6f6f6;
+}
+
+.accordion-primary .adb-accordion-small-button:hover,
+.accordion-primary .adb-accordion-small-button:focus,
+.accordion-primary .adb-accordion-button:hover,
+.accordion-primary.open  .adb-accordion-button:hover{
+    cursor: pointer;
+    background: #f6f6f6;
+}
+
+.accordion-primary .adb-accordion-button:focus,
+.accordion-primary.open .adb-accordion-button {
+    background: #FBF5ED;
+}
+
+.adb-single-accordion {
+    margin: 0;
+}
+
+    .adb-single-accordion .adb-accordion-button {
+        background: initial;
+    }
+
+.adb-accordion.References .adb-accordion-button {
+    background: white;
+}
+
+    .adb-accordion.References.open .adb-accordion-button,
+    .adb-accordion.References .adb-accordion-button:hover,
+    .adb-accordion.References .adb-accordion-button:focus {
+        background: #f6f6f6;
+    }
+
+.adb-accordion-small .remove,
+.adb-accordion .remove {
+    display: none;
+}
+
+.adb-accordion .adb-accordion-small-content,
+.adb-accordion .adb-accordion-content,
+.adb-accordion-small .adb-accordion-small-content,
+.adb-accordion-small .adb-accordion-content {
+    display: none;
+}
+
+.adb-accordion-small.open {
+    border-left: 1px solid #D9D9D9;
+}
+
+    .adb-accordion-small.open.search-bar {
+        max-width: 300px;
+        border: 1px solid #D9D9D9;
+    }
+
+        .adb-accordion-small.open.search-bar .adb-accordion-small-content {
+            padding: 10px;
+        }
+
+    .adb-accordion-small.open .adb-accordion-small-button,
+    .adb-accordion.open .adb-accordion-small-button {
+        color: #fff;
+        background-color: #005B72;
+    }
+
+        .adb-accordion-small.open .adb-accordion-small-button .Label_14,
+        .adb-accordion.open .adb-accordion-small-button .Label_14 {
+            color: #fff;
+        }
+
+    .adb-accordion-small.open .adb-accordion-button,
+    .adb-accordion.open .adb-accordion-button {
+        color: #262f31;
+        padding-left: 30px;
+    }
+
+    .adb-accordion-small.open .adb-accordion-button-variable,
+    .adb-accordion-small.open .adb-accordion-button-variable-special,
+    .adb-accordion.open .adb-accordion-button-variable,
+    .adb-accordion.open .adb-accordion-button-variable-special {
+        background-color: #f6f6f6;
+        border: 0;
+        border-bottom: 1px solid #005B72;
+    }
+
+.adb-accordion.open .adb-accordion-small-content,
+.adb-accordion.open .adb-accordion-content,
+.adb-accordion-small.open .adb-accordion-small-content,
+.adb-accordion-small.open .adb-accordion-content {
+    display: block;
+    margin-bottom: 20px;
+}
+
+.adb-accordion-small.open .adb-accordion-small-content,
+.adb-accordion.open .adb-accordion-small-content {
+    padding-left: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+    max-width: 300px;
+}
+
+.adb-accordion-small.open .add,
+.adb-accordion.open .add {
+    display: none;
+}
+
+.adb-accordion-small.open .remove,
+.adb-accordion.open .remove {
+    display: block;
+}
+
+.adb-accordion.open .adb-accordion-button-variable-special .accordion-title .accordion-title-code {
+    color: #005B72;
+}
+
+.adb-accordion.open .adb-accordion-button-variable-special .accordion-title .Heading_20_bold {
+    color: #005B72;
+}
+
+.adb-accordion-button-title-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.adb-accordion-button-title-with-icon span:first-child {
+    margin-right: 15px;
+}
+
+.adb-accordion-content-variable {
+    display: flex;
+    flex-direction: column;
+}
+
+.adb-accordion-content-variable .accordion-left {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    border-bottom: 1px solid #D9D9D9;
+    padding: 5px 0;
+}
+
+.adb-accordion-content-variable .accordion-left .accordion-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0;
+}
+
+.adb-accordion-content-variable .accordion-left .accordion-title-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background: #DFEDE9;
+}
+
+.adb-accordion-content-variable .accordion-left .accordion-title-code {
+    font-size: 15px;
+    margin: 0 0 -8px 4px;
+}
+
+
+.accordion-left {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.accordion-left .accordion-title {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.accordion-left .accordion-title-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    min-width: 45px;
+    width: 45px;
+    border-radius: 50%;
+    background: #DFEDE9;
+}
+
+.accordion-left .accordion-title-code {
+    font-size: 15px;
+    margin: 0 0 -8px 4px;
+}
+
+@media (max-width: 750px) {
+    .adb-accordion .material-icons-outlined {
+        font-size: 20px;
+    }
+
+    .adb-accordions {
+        margin: 55px 15px;
+    }
+
+    .adb-single-accordion {
+        margin: 0 15px;
+    }
+
+    .adb-accordion-small {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .adb-accordion-small.open {
+        margin-bottom: 70px;
+    }
+
+    .adb-accordion-small.open .adb-accordion-small-content {
+        max-width: inherit;
+    }
+
+    .adb-accordion-small-button {
+        max-width: initial;
+    }
+
+    .adb-accordion-small.open.search-bar {
+        max-width: inherit;
+    }
+}

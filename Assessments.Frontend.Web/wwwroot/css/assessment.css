@@ -1152,3 +1152,14 @@ tr.water-area-hide,
         color: white;
     }
 }
+
+.horizon-scanned-lists {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0 25px;
+}
+
+.horizon-scanned-lists li {
+    padding-left: 10px;
+}

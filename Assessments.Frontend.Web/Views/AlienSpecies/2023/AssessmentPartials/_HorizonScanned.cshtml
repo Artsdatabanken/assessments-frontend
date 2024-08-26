@@ -1,14 +1,23 @@
-﻿@model ExpertStatementViewModel
+﻿@using Assessments.Mapping.AlienSpecies.Model.Enums
+@model ExpertStatementViewModel
+
+@{
+    var establishmentPotential = Enum.GetValues<AlienSpeciesAssessment2023HorizonEstablismentPotential>()
+                    .Select(x => x.DisplayName());
+    var ecologicalEffect = Enum.GetValues<AlienSpeciesAssessment2023HorizonEcologicalEffect>()
+    .Select(x => x.DisplayName());
+}
+
 <div>
     <p>
         Arten er vurdert som en potensiell dørstokkart i <a href="blabla">Horisontskanning av fremmede arter</a>. Resultatet viser at arten ikke er en dørstokkart for Norge fordi kombinasjonen av etableringspotensial og negative økologiske effekter ikke skårer høyt nok. Den skal derfor ikke risikovurderes.
     </p>
 
     <h3>Etableringspotensial</h3>
-    <p>Antall forekomster 10 år etter én introduksjon ble vurdert til: [VIS GJELDENDE VERDI HER.]  </p>
+    <p>Antall forekomster 10 år etter én introduksjon ble vurdert til: @Model.HorizonEstablismentPotential?.DisplayName()  </p>
 
     <h3>Økologisk effekt</h3>
-    <p>Vesentlige negative økologiske effekter knyttet til arten er: [VIS GJELDENDE VERDI HER]</p>
+    <p>Vesentlige negative økologiske effekter knyttet til arten er: @Model.HorizonEcologicalEffect?.DisplayName()</p>
     <div class="adb-accordion accordion-primary">
         <button class="adb-accordion-button Label_18" onclick="toggleAccordion(this)">
             <span>Se mulige verdier for etableringspotensial og økologisk effekt</span>
@@ -16,7 +25,26 @@
             <span class="material-symbols-outlined remove">expand_less</span>
         </button>
         <div class="adb-accordion-content Body_M">
-            add content here
+            <div class="horizon-scanned-lists">
+                <div>
+                    <h4>Etableringspotensial</h4>
+                    <ol>
+                        @foreach(var potential in establishmentPotential)
+                        {
+                            <li>@potential</li>
+                        }
+                    </ol>
+                </div>
+                <div>
+                    <h4>Økologiske effekter</h4>
+                    <ol>
+                        @foreach (var effect in ecologicalEffect)
+                        {
+                            <li>@effect</li>
+                        }
+                    </ol>
+                </div>
+            </div>
         </div>
     </div>
 </div>

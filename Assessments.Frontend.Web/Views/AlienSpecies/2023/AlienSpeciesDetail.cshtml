@@ -33,7 +33,7 @@
         {
             AssessmentYear = 2023, // TODO: create this field in assessment model
             ExpertCommittee = assessment.ExpertGroup,
-            FirstPublishedDateString = Constants.AlienSpecies2023FirstPublished,
+            FirstPublishedDateString = assessment.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.HorizonScannedButNoRiskAssessment ? Constants.AlienSpecies2023FirstPublishedHorizonScanned :  Constants.AlienSpecies2023FirstPublished,
             RevisionDate = assessment.RevisionDate, // TODO: check if this is revision date
             RevisionReason = "", // TODO: create a field for this, if we need revisions at all for alien species
             SpeciesGroup = assessment.SpeciesGroup.DisplayName(),

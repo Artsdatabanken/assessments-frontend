@@ -303,6 +303,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public const string AlienSpecies2023FirstPublished = "11.08.2023";
 
+        public const string AlienSpecies2023FirstPublishedHorizonScanned = "23.09.2024";
+
         public const string AlienSpecies2023FirstPublishedYear = "2023";
 
         public const int AlienSpecies2023PageMenuContentId = 239657; 

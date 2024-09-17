@@ -101,7 +101,7 @@
         !string.IsNullOrEmpty(Model.ExpertStatementViewModel.ConnectedToHigherLowerTaxonDescription) ||
         !string.IsNullOrEmpty(Model.ExpertStatementViewModel.UncertaintyEstablishmentTimeDescription));
     var showRiskCategoryExplanation = !isNr && !isEvaluatedAtAnotherLevel;
-    var showCategoryChange = !((isNr && (sameAs2018 || !has2018Assessmnet)) || isEvaluatedAtAnotherLevel || isMisidentified);
+    var showCategoryChange = !((isNr && (sameAs2018 || !has2018Assessmnet)) || isEvaluatedAtAnotherLevel || isMisidentified || isHorizonScanned);
     var showClimateEffectsInvationpotential = !isNr && !isEvaluatedAtAnotherLevel;
     var showGeographicVariationInCategory = !isNr && !isEvaluatedAtAnotherLevel;
     var showRegionalSpread = !isNr && !isEvaluatedAtAnotherLevel;

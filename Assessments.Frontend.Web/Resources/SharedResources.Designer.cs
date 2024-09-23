@@ -79,11 +79,38 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fraværende.
+        /// </summary>
+        public static string absent {
+            get {
+                return ResourceManager.GetString("absent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ingen overføring ELLER begrenset overføring av eksisterende parasitt til eksisterende vert.
+        /// </summary>
+        public static string absent_OR_confined_known_host {
+            get {
+                return ResourceManager.GetString("absent_OR_confined_known_host", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fremmedartslista.
         /// </summary>
         public static string alien_species_list {
             get {
-                return ResourceManager.GetString("alien-species-list", resourceCulture);
+                return ResourceManager.GetString("alien_species_list", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to og.
+        /// </summary>
+        public static string and {
+            get {
+                return ResourceManager.GetString("and", resourceCulture);
             }
         }
         
@@ -111,6 +138,42 @@ namespace Assessments.Frontend.Web.Resources {
         public static string area {
             get {
                 return ResourceManager.GetString("area", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mellom 160 og 499 m/år.
+        /// </summary>
+        public static string between_160_499_myear {
+            get {
+                return ResourceManager.GetString("between_160_499_myear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mellom 50 og 159 m/år.
+        /// </summary>
+        public static string between_50_159_myear {
+            get {
+                return ResourceManager.GetString("between_50_159_myear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mellom 60 og 649 år.
+        /// </summary>
+        public static string between_60_649_years {
+            get {
+                return ResourceManager.GetString("between_60_649_years", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mellom 10 og 59 år.
+        /// </summary>
+        public static string between_ten_59_years {
+            get {
+                return ResourceManager.GetString("between_ten_59_years", resourceCulture);
             }
         }
         
@@ -178,6 +241,24 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fortrengning i begrenset omfang.
+        /// </summary>
+        public static string confined_displacement {
+            get {
+                return ResourceManager.GetString("confined_displacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to begrenset overføring til stedegen art.
+        /// </summary>
+        public static string confined_native_species {
+            get {
+                return ResourceManager.GetString("confined_native_species", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avgjørende kriterier for kategori.
         /// </summary>
         public static string decisive_criteria {
@@ -187,11 +268,29 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avgjørende kriterier.
+        /// </summary>
+        public static string decisive_criteria_short {
+            get {
+                return ResourceManager.GetString("decisive_criteria_short", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dørstokkarter.
         /// </summary>
         public static string doorknockers {
             get {
                 return ResourceManager.GetString("doorknockers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ned mot.
+        /// </summary>
+        public static string down_to {
+            get {
+                return ResourceManager.GetString("down_to", resourceCulture);
             }
         }
         
@@ -237,6 +336,15 @@ namespace Assessments.Frontend.Web.Resources {
         public static string ecological_effect_y_axis {
             get {
                 return ResourceManager.GetString("ecological_effect_y_axis", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to naturtype.
+        /// </summary>
+        public static string ecosystem {
+            get {
+                return ResourceManager.GetString("ecosystem", resourceCulture);
             }
         }
         
@@ -291,6 +399,15 @@ namespace Assessments.Frontend.Web.Resources {
         public static string geographic_var_unequal {
             get {
                 return ResourceManager.GetString("geographic_var_unequal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to har.
+        /// </summary>
+        public static string has {
+            get {
+                return ResourceManager.GetString("has", resourceCulture);
             }
         }
         
@@ -376,11 +493,182 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to fortrengning i storskala omfang.
+        /// </summary>
+        public static string large_scale_displacement {
+            get {
+                return ResourceManager.GetString("large_scale_displacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to storskala av eksisterende parasitt til eksisterende vert ELLER begrenset til ny vert.
+        /// </summary>
+        public static string large_scale_known_host_OR_confined_new_host {
+            get {
+                return ResourceManager.GetString("large_scale_known_host_OR_confined_new_host", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to storskala av eksisterende parasitt til ny vert ELLER begrenset til ny truet vert.
+        /// </summary>
+        public static string large_scale_new_host_OR_confined_threathened_new_host {
+            get {
+                return ResourceManager.GetString("large_scale_new_host_OR_confined_threathened_new_host", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to storskala av eksisterende parasitt til ny truet vert ELLER overføring av en dørstokkart-parasitt.
+        /// </summary>
+        public static string large_scale_new_threatened_host_OR_doorknocker_parasite {
+            get {
+                return ResourceManager.GetString("large_scale_new_threatened_host_OR_doorknocker_parasite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to storskala overføring  til stedegen art ELLER begrenset til truet art eller nøkkelart.
+        /// </summary>
+        public static string large_scale_non_threatened_OR_confined_threatened {
+            get {
+                return ResourceManager.GetString("large_scale_non_threatened_OR_confined_threatened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to storskala overføring til truet art eller nøkkelart.
+        /// </summary>
+        public static string large_scale_threatened {
+            get {
+                return ResourceManager.GetString("large_scale_threatened", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mindre enn 50 m/år.
+        /// </summary>
+        public static string less_than_50_myear {
+            get {
+                return ResourceManager.GetString("less_than_50_myear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mindre enn 5%.
+        /// </summary>
+        public static string less_than_five_percent {
+            get {
+                return ResourceManager.GetString("less_than_five_percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mindre enn 10 år.
+        /// </summary>
+        public static string less_than_ten_years {
+            get {
+                return ResourceManager.GetString("less_than_ten_years", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Livsmiljø.
         /// </summary>
         public static string lifestyle {
             get {
                 return ResourceManager.GetString("lifestyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minimum 5%.
+        /// </summary>
+        public static string min_five_percent {
+            get {
+                return ResourceManager.GetString("min_five_percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minimum 2%.
+        /// </summary>
+        public static string min_two_percent {
+            get {
+                return ResourceManager.GetString("min_two_percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minimum 20%.
+        /// </summary>
+        public static string minimum_20_percent {
+            get {
+                return ResourceManager.GetString("minimum_20_percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minimum 500 m/år.
+        /// </summary>
+        public static string minimum_500_myear {
+            get {
+                return ResourceManager.GetString("minimum_500_myear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minimum 650 år.
+        /// </summary>
+        public static string minimum_650_years {
+            get {
+                return ResourceManager.GetString("minimum_650_years", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minimum 10%.
+        /// </summary>
+        public static string minimum_ten_percent {
+            get {
+                return ResourceManager.GetString("minimum_ten_percent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to moderat styrke og storskala omfang.
+        /// </summary>
+        public static string moderate_large_scale {
+            get {
+                return ResourceManager.GetString("moderate_large_scale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to moderat styrke og storskala omfang ELLER fortrengning.
+        /// </summary>
+        public static string moderate_large_scale_or_displacement {
+            get {
+                return ResourceManager.GetString("moderate_large_scale_or_displacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ingen overføring.
+        /// </summary>
+        public static string no_transfer {
+            get {
+                return ResourceManager.GetString("no_transfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Øvrige kriterier.
+        /// </summary>
+        public static string non_decisive_criteria {
+            get {
+                return ResourceManager.GetString("non_decisive_criteria", resourceCulture);
             }
         }
         
@@ -399,6 +687,24 @@ namespace Assessments.Frontend.Web.Resources {
         public static string not_production_species {
             get {
                 return ResourceManager.GetString("not_production_species", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to på.
+        /// </summary>
+        public static string of {
+            get {
+                return ResourceManager.GetString("of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to over 0%.
+        /// </summary>
+        public static string over_zero_percent {
+            get {
+                return ResourceManager.GetString("over_zero_percent", resourceCulture);
             }
         }
         
@@ -475,6 +781,15 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to skår.
+        /// </summary>
+        public static string score {
+            get {
+                return ResourceManager.GetString("score", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Artsgrupper.
         /// </summary>
         public static string species_groups {
@@ -511,11 +826,74 @@ namespace Assessments.Frontend.Web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to opp mot.
+        /// </summary>
+        public static string up_to {
+            get {
+                return ResourceManager.GetString("up_to", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vannregioner.
         /// </summary>
         public static string water_regions {
             get {
                 return ResourceManager.GetString("water_regions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to svak styrke og begrenset omfang.
+        /// </summary>
+        public static string weak_confined {
+            get {
+                return ResourceManager.GetString("weak_confined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to svak styrke og storskala omfang ELLER moderat styrke og begrenset omfang.
+        /// </summary>
+        public static string weak_large_scale_or_moderate_confined {
+            get {
+                return ResourceManager.GetString("weak_large_scale_or_moderate_confined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to svak styrke ELLER moderat styrke og begrenset omfang.
+        /// </summary>
+        public static string weak_or_moderate_confined {
+            get {
+                return ResourceManager.GetString("weak_or_moderate_confined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to som er.
+        /// </summary>
+        public static string which_is {
+            get {
+                return ResourceManager.GetString("which_is", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to med usikkerhet.
+        /// </summary>
+        public static string with_uncertainty {
+            get {
+                return ResourceManager.GetString("with_uncertainty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0%.
+        /// </summary>
+        public static string zero_percent {
+            get {
+                return ResourceManager.GetString("zero_percent", resourceCulture);
             }
         }
     }

@@ -250,18 +250,5 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
             }
             return String.Empty;
         }
-
-        public class SearchAndFilterNames
-        {
-            public const string GeographicRiskVariation = "Geografisk variasjon i risiko";
-            public const string ClimateChangeRisk = "Betydning av klimaendringer for risiko";
-            public const string FirstTimeAssessment = "Risikovurdert for første gang";
-            public const string ChooseCriteria = "Avgjørende kriterier for risikokategori";
-            public const string KnownOrExpectedInRegion = "Regioner med kjent eller forventet forekomst";
-            public const string NaturType = "Naturtype";
-            public const string WaysOfSpreading = "Spredningsmåter";
-            public const string RegionallyAlienSpecies = "Regionalt fremmede arter";
-            public const string NonAssessedSpecies = "Ikke risikovurderte arter";
-        }
     }
 }

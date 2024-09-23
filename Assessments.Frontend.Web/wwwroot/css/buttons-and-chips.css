@@ -74,6 +74,10 @@ button {
     height: auto;
 }
 
+.collapsible_header {
+    margin: 0;
+}
+
 .link-styled {
     display: block;
 }

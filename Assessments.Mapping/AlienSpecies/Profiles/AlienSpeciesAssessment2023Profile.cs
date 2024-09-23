@@ -248,6 +248,16 @@ namespace Assessments.Mapping.AlienSpecies.Profiles
                 })
                 .ForMember(dest => dest.ReasonForChangeOfCategory, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetReasonForChangeOfCategory(src.ReasonForChangeOfCategory)))
                 .ForMember(dest => dest.RevisionDate, opt => opt.MapFrom(src => AlienSpeciesAssessment2023ProfileHelper.GetRevisionDate(src.Id)))
+
+                // horisontskanning
+                .ForMember(dest => dest.HorizonEstablismentPotential, opt =>
+                {
+                    opt.PreCondition(src => src.HorizonDoScanning);
+                })
+                .ForMember(dest => dest.HorizonEcologicalEffect, opt =>
+                {
+                    opt.PreCondition(src => src.HorizonDoScanning);
+                })
                 
                 .AfterMap((_, dest) => dest.PreviousAssessments = AlienSpeciesAssessment2023ProfileHelper.GetPreviousAssessments(dest.PreviousAssessments));
 

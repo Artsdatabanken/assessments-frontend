@@ -685,5 +685,9 @@ namespace Assessments.Mapping.AlienSpecies.Model
         /// Date of revision of an assessment
         /// </summary>
         public DateTime RevisionDate { get; set; }
+
+        public AlienSpeciesAssessment2023HorizonEstablismentPotential? HorizonEstablismentPotential { get; set; }
+
+        public AlienSpeciesAssessment2023HorizonEcologicalEffect? HorizonEcologicalEffect { get; set; }
     }
 }

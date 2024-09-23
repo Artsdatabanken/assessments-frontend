@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="alien-species-list" xml:space="preserve">
+  <data name="alien_species_list" xml:space="preserve">
     <value>Alien species list</value>
   </data>
   <data name="area" xml:space="preserve">
@@ -208,7 +208,7 @@
     <value>Occurrence in threatened or rare ecosystems</value>
   </data>
   <data name="ecosystems" xml:space="preserve">
-    <value>Ecosystems</value>
+    <value>Nature types</value>
   </data>
   <data name="import" xml:space="preserve">
     <value>Import to production or indoor area</value>
@@ -269,5 +269,131 @@
   </data>
   <data name="choose_all" xml:space="preserve">
     <value>Select all</value>
+  </data>
+  <data name="has" xml:space="preserve">
+    <value>has</value>
+  </data>
+  <data name="score" xml:space="preserve">
+    <value>score</value>
+  </data>
+  <data name="decisive_criteria_short" xml:space="preserve">
+    <value>Decisive criteria</value>
+  </data>
+  <data name="non_decisive_criteria" xml:space="preserve">
+    <value>Non-decisive criteria</value>
+  </data>
+  <data name="ecosystem" xml:space="preserve">
+    <value>nature type</value>
+  </data>
+  <data name="which_is" xml:space="preserve">
+    <value>which is</value>
+  </data>
+  <data name="of" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="less_than_five_percent" xml:space="preserve">
+    <value>less than 5%</value>
+  </data>
+  <data name="min_five_percent" xml:space="preserve">
+    <value>minimum 5%</value>
+  </data>
+  <data name="less_than_ten_years" xml:space="preserve">
+    <value>less than 10 years</value>
+  </data>
+  <data name="between_ten_59_years" xml:space="preserve">
+    <value>between 10 and 59 years</value>
+  </data>
+  <data name="between_60_649_years" xml:space="preserve">
+    <value>between 60 and 649 years</value>
+  </data>
+  <data name="minimum_650_years" xml:space="preserve">
+    <value>minimum 650 years</value>
+  </data>
+  <data name="less_than_50_myear" xml:space="preserve">
+    <value>less than 50 m/year</value>
+  </data>
+  <data name="between_50_159_myear" xml:space="preserve">
+    <value>between 50 and 159 m/year</value>
+  </data>
+  <data name="between_160_499_myear" xml:space="preserve">
+    <value>between 160 and 499 m/year</value>
+  </data>
+  <data name="minimum_500_myear" xml:space="preserve">
+    <value>minimum 500 m/year</value>
+  </data>
+  <data name="minimum_ten_percent" xml:space="preserve">
+    <value>minimum 10%</value>
+  </data>
+  <data name="minimum_20_percent" xml:space="preserve">
+    <value>minimum 20%</value>
+  </data>
+  <data name="absent" xml:space="preserve">
+    <value>absent</value>
+  </data>
+  <data name="weak_confined" xml:space="preserve">
+    <value>weak strength and confined extent</value>
+  </data>
+  <data name="weak_large_scale_or_moderate_confined" xml:space="preserve">
+    <value>weak strength and large-scale extent OR moderate strength and confined extent</value>
+  </data>
+  <data name="moderate_large_scale_or_displacement" xml:space="preserve">
+    <value>moderate strength and large-scale extent OR displacement</value>
+  </data>
+  <data name="weak_or_moderate_confined" xml:space="preserve">
+    <value>weak strength OR moderate strength and confined extent</value>
+  </data>
+  <data name="moderate_large_scale" xml:space="preserve">
+    <value>moderate strength and large-scale extent</value>
+  </data>
+  <data name="confined_displacement" xml:space="preserve">
+    <value>geographically confined displacement</value>
+  </data>
+  <data name="large_scale_displacement" xml:space="preserve">
+    <value>large-scale displacement</value>
+  </data>
+  <data name="zero_percent" xml:space="preserve">
+    <value>0%</value>
+  </data>
+  <data name="over_zero_percent" xml:space="preserve">
+    <value>above 0%</value>
+  </data>
+  <data name="min_two_percent" xml:space="preserve">
+    <value>minimum 2%</value>
+  </data>
+  <data name="no_transfer" xml:space="preserve">
+    <value>no transfer</value>
+  </data>
+  <data name="confined_native_species" xml:space="preserve">
+    <value>geographically confined transfer to non-threatened species</value>
+  </data>
+  <data name="large_scale_non_threatened_OR_confined_threatened" xml:space="preserve">
+    <value>large scale transfer to non-threatened species OR confined to keystone or threatened species</value>
+  </data>
+  <data name="large_scale_threatened" xml:space="preserve">
+    <value>large scale transfer to keystone or threatened species</value>
+  </data>
+  <data name="absent_OR_confined_known_host" xml:space="preserve">
+    <value>no transmission OR confined transmission of existing parasite to existing host</value>
+  </data>
+  <data name="large_scale_known_host_OR_confined_new_host" xml:space="preserve">
+    <value>large scale of existing parasite to existent host OR confined to new host</value>
+  </data>
+  <data name="large_scale_new_host_OR_confined_threathened_new_host" xml:space="preserve">
+    <value>large scale of existing parasite to new host OR confined to new threatened host</value>
+  </data>
+  <data name="large_scale_new_threatened_host_OR_doorknocker_parasite" xml:space="preserve">
+    <value>large scale of existing parasite to new threatened host OR transmission of door knocker parasite</value>
+  </data>
+  <data name="with_uncertainty" xml:space="preserve">
+    <value>with uncertainty</value>
+  </data>
+  <data name="down_to" xml:space="preserve">
+    <value>down to</value>
+  </data>
+  <data name="and" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="up_to" xml:space="preserve">
+    <value>up to</value>
   </data>
 </root>

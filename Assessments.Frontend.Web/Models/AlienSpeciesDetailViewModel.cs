@@ -37,6 +37,8 @@ namespace Assessments.Frontend.Web.Models
                 Environment = assessment.Environment,
                 EvaluationContext = assessment.EvaluationContext,
                 HasIndoorProduction = assessment.HasIndoorProduction,
+                HorizonEcologicalEffect = assessment.HorizonEcologicalEffect,
+                HorizonEstablismentPotential = assessment.HorizonEstablismentPotential,
                 HybridWithoutOwnRiskAssessmentDescription = assessment.HybridWithoutOwnRiskAssessmentDescription,
                 ImportPathways = assessment.ImportPathways,
                 MisidentifiedDescription = assessment.MisIdentifiedDescription,

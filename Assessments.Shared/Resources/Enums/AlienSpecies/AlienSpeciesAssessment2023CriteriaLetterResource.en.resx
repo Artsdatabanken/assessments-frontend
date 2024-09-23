@@ -124,19 +124,19 @@
     <value>Transfer of genetic material</value>
   </data>
   <data name="G_effects_other_ecosystems" xml:space="preserve">
-    <value>Effects on other ecosystems</value>
+    <value>Effects on non-threatened nature types</value>
   </data>
   <data name="F_effects_threatened_ecosystems" xml:space="preserve">
-    <value>Effects on threatened or rare ecosystems</value>
+    <value>Effects on threatened or rare nature types</value>
   </data>
   <data name="E_effects_other_species" xml:space="preserve">
-    <value>Effects on other species</value>
+    <value>Effects on non-threatened native species</value>
   </data>
   <data name="D_effects_threatened_species" xml:space="preserve">
     <value>Effects on threatened or keystone species</value>
   </data>
   <data name="C_colonized_area" xml:space="preserve">
-    <value>Colonisation of ecosystems</value>
+    <value>Colonisation of nature types</value>
   </data>
   <data name="B_expansion_speed" xml:space="preserve">
     <value>Expansion speed</value>

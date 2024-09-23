@@ -201,6 +201,7 @@ namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
                     nameof(NotAssessed.NotAssessedAlienSpeciesCategory.NotAlienSpecies) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.NotAlienSpecie),
                     nameof(NotAssessed.NotAssessedAlienSpeciesCategory.UncertainBefore1800) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.UncertainBefore1800),
                     nameof(NotAssessed.NotAssessedAlienSpeciesCategory.MisIdentified) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.MisIdentified),
+                    nameof(NotAssessed.NotAssessedAlienSpeciesCategory.HorizonScanned) => query.Where(x => x.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.HorizonScannedButNoRiskAssessment),
                     _ => null
                 };
                 if (assessments != null)

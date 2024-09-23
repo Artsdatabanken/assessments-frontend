@@ -173,7 +173,11 @@ namespace Assessments.Frontend.Web.Models
 
         public string UncertaintyEstablishmentTimeDescription { get; set; }
 
-        public string ScientificName { get; set; } 
+        public string ScientificName { get; set; }
+
+        public AlienSpeciesAssessment2023HorizonEstablismentPotential? HorizonEstablismentPotential { get; set; }
+
+        public AlienSpeciesAssessment2023HorizonEcologicalEffect? HorizonEcologicalEffect { get; set; }
     }
 
     public class IngressViewModel

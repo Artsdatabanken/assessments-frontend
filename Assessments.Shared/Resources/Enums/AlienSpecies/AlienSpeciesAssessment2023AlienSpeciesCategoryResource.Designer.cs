@@ -116,6 +116,15 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Horisontskannet.
+        /// </summary>
+        public static string horizon_scanned_but_no_risk_assessment {
+            get {
+                return ResourceManager.GetString("horizon_scanned_but_no_risk_assessment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Utenfor avgrensningen.
         /// </summary>
         public static string hybrid_without_own_risk_assessment {

@@ -4,7 +4,7 @@
 
 ### Make areas in the assessment page collapsible
 
-Follow the recipe found in top of the file "Assessments.Frontend.Web/wwwroot/js/collapse.js". 
+Follow the recipe found in top of the file "Assessments.Frontend.Web/wwwroot/js/accordions.js". 
 
 ### Adding a filter to the list view
 

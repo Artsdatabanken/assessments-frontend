@@ -98,6 +98,15 @@ namespace Assessments.Shared.Resources.Enums.AlienSpecies {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ikke gikk videre fra horisontskanningen.
+        /// </summary>
+        public static string horizon_scanned {
+            get {
+                return ResourceManager.GetString("horizon_scanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Innendørs.
         /// </summary>
         public static string indoors {

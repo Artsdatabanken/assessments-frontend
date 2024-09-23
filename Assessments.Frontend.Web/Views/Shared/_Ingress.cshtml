@@ -1,5 +1,6 @@
 ﻿@model IngressViewModel
 @using Assessments.Mapping.AlienSpecies.Model.Enums
+@inject IStringLocalizer<SharedResourcesAlienSpecies> Localizer
 
 @{
     var isNr = Model.Category == AlienSpeciesAssessment2023Category.NR;
@@ -15,8 +16,9 @@
     var evaluatedOnAnotherLevelString = "den";
     var notEvaluatedOnAnotherLevelString = "den er";
     var allSubTaxaAssessedSeparatelyString = "det";
-    var evaluetedString = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel ? evaluatedOnAnotherLevelString : 
+    var evaluatedString = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.TaxonEvaluatedAtAnotherLevel ? evaluatedOnAnotherLevelString : 
         Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.AllSubTaxaAssessedSeparately ? allSubTaxaAssessedSeparatelyString : notEvaluatedOnAnotherLevelString;
+    var statusText = Model.AlienSpeciesCategory == AlienSpeciecAssessment2023AlienSpeciesCategory.HorizonScannedButNoRiskAssessment ? @Localizer["did_not_pass_horizon_scanning"] : Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant();
 }
 
 <div is-visible="!isNr" class="page_section">
@@ -39,10 +41,10 @@
 
 <div is-visible="isNr" class="page_section">
     <p is-visible="isEvaluatedAtAnotherLevel">
-        @Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.TaxonRank, Model.ScientificName) @notAssessedText @evaluetedString @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() (les vurderingen <a asp-action="Detail" asp-route-id="@Model.ParentAssessmentId">her</a>).
+        @Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.TaxonRank, Model.ScientificName) @notAssessedText @evaluatedString @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant() (les vurderingen <a asp-action="Detail" asp-route-id="@Model.ParentAssessmentId">her</a>).
     </p>
     <p is-visible="isNr && !isEvaluatedAtAnotherLevel">
-        @Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.TaxonRank, Model.ScientificName) @notAssessedText @evaluetedString @Model.AlienSpeciesCategory.DisplayName().ToLowerInvariant().
+        @Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.TaxonRank, Model.ScientificName) @notAssessedText @evaluatedString @statusText.ToLowerInvariant().
     </p>
     <p is-visible="isNoneOfTheAbove">
         @Helpers.FixSpeciesLevelWithTranslation("{Arten}", Model.TaxonRank, Model.ScientificName) @notAssessedText @Model.SpeciesStatus.Description().

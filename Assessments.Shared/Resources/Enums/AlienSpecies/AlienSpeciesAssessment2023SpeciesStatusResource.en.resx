@@ -162,4 +162,7 @@
   <data name="reproduces_unaidedly" xml:space="preserve">
     <value>Reproducing unaidedly</value>
   </data>
+  <data name="horizon_scanned" xml:space="preserve">
+    <value>did not pass through the horizon scanning</value>
+  </data>
 </root>

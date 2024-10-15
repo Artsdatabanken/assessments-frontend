@@ -184,11 +184,34 @@
     border-color: #9d9d9d;
 }
 
-
-/* WHITE FONT COLOR*/
-.darktheme, .darktheme header, .darktheme .controls .list_actions, .darktheme .list-search, .darktheme .main-content, .darktheme .sidebarmenu li a, .darktheme .button.primary, .darktheme .main button.primary, .darktheme .main button:not(.icon-button), .darktheme .button, .darktheme .controls button.active, .darktheme .category_displayer .tag, .darktheme .regionlist.legend .region span, .darktheme .main .changetab.active, .darktheme .tabbed_element_container li.active, .darktheme .impact_table, .darktheme .page-link, .darktheme .percent, .darktheme p {
-color: #FFF9F0;
+.darktheme .accordion-primary .adb-accordion-button,
+.darktheme .accordion-secondary .adb-accordion-button,
+.darktheme .accordion-primary .adb-accordion-button:active,
+.darktheme .accordion-secondary .adb-accordion-button:active,
+.darktheme .accordion-primary .adb-accordion-button:focus,
+.darktheme .accordion-secondary .adb-accordion-button:focus,
+.darktheme .accordion-primary.open .adb-accordion-button,
+.darktheme .accordion-secondary.open .adb-accordion-button,
+.darktheme .accordion-primary.open .adb-accordion-button:active,
+.darktheme .accordion-secondary.open .adb-accordion-button:active,
+.darktheme .accordion-primary.open .adb-accordion-button:focus,
+.darktheme .accordion-secondary.open .adb-accordion-button:focus {
+    background: #484848;
 }
+
+    .darktheme .accordion-primary .adb-accordion-button:hover,
+    .darktheme .accordion-secondary .adb-accordion-button:hover,
+    .darktheme .accordion-primary.open .adb-accordion-button:hover,
+    .darktheme .accordion-secondary.open .adb-accordion-button:hover {
+        background: transparent;
+        border: 1px solid #9d9d9d;
+        color: #FFF9F0;
+    }
+
+    /* WHITE FONT COLOR*/
+    .darktheme, .darktheme header, .darktheme .controls .list_actions, .darktheme .list-search, .darktheme .main-content, .darktheme .sidebarmenu li a, .darktheme .button.primary, .darktheme .main button.primary, .darktheme .main button:not(.icon-button), .darktheme .button, .darktheme .controls button.active, .darktheme .category_displayer .tag, .darktheme .regionlist.legend .region span, .darktheme .main .changetab.active, .darktheme .tabbed_element_container li.active, .darktheme .impact_table, .darktheme .page-link, .darktheme .percent, .darktheme p {
+        color: #FFF9F0;
+    }
 
 .darktheme .main .changetab:not(.active) {
     color: #262F31

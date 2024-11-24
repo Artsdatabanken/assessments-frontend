@@ -17,6 +17,7 @@
 | https://artsdatabanken.no/lister/ | Production | master
 
 https://beta.artsdatabanken.no/lister og  https://artsdatabanken.no/lister er tilgjengelig utenfor kontor eller uten vpn.
+Det er verdt å merke seg at begge disse bruker produksjonsdata. Beta peker altså ikke mot testdata.
 
 ## Teknologi
 

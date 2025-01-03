@@ -1,0 +1,25 @@
+using System.Linq;
+using System.Threading.Tasks;
+using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Frontend.Web.Infrastructure.Api;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Routing.Controllers;
+
+namespace Assessments.Frontend.Web.Controllers.Api;
+
+[ApiKeyRequired]
+public class SpeciesAssessment2021Controller(DataRepository repository) : ODataController
+{
+    [EnableQuery(MaxTop = 100, PageSize = 100)]
+    public async Task<ActionResult> Get() => Ok(await repository.GetSpeciesAssessments());
+    
+    [EnableQuery]
+    public async Task<ActionResult> Get(int key)
+    {
+        var query = await repository.GetSpeciesAssessments();
+        var assessment = query.FirstOrDefault(x => x.Id.Equals(key));
+
+        return assessment != null ? Ok(assessment) : NotFound();
+    }
+}

@@ -97,9 +97,9 @@
                         @foreach(var record in Model.Assessment.YearsFirstRecord.ObservedEstablishmentInNorway)
                         {
                             <tr>
-                                <td>@record.recordType.DisplayName().ToLowerInvariant()</td>
-                                <td><b class="only_mobile">@Constants.AlienSpeciesTables.FirstObsTableColumn2:</b>@record.year</td>
-                                <td><b class="only_mobile">@Html.Raw(@Constants.AlienSpeciesTables.FirstObsTableColumn3):</b>@( record.isUncertaintyYear ? "ja" : "nei" )</td>
+                                <td>@record.Item1.DisplayName().ToLowerInvariant()</td>
+                                <td><b class="only_mobile">@Constants.AlienSpeciesTables.FirstObsTableColumn2:</b>@record.Item2</td>
+                                <td><b class="only_mobile">@Html.Raw(@Constants.AlienSpeciesTables.FirstObsTableColumn3):</b>@( record.Item3 ? "ja" : "nei" )</td>
                             </tr>
                         }
                 </table>

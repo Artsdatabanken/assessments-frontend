@@ -84,6 +84,10 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public Task<IQueryable<SpeciesAssessment2021>> GetSpeciesAssessments()
         {
+            var speciesAssessments = _appCache.GetOrAddAsync(nameof(GetSpeciesAssessments), Get);
+            
+            return speciesAssessments;
+
             async Task<IQueryable<SpeciesAssessment2021>> Get()
             {
                 return _options.Value.Species2021.TransformAssessments
@@ -93,12 +97,14 @@ namespace Assessments.Frontend.Web.Infrastructure
                     // returnerer modell som allerede er transformert
                     await GetData<SpeciesAssessment2021>(DataFilenames.Species2021);
             }
-
-            return _appCache.GetOrAddAsync($"{nameof(GetSpeciesAssessments)}", Get);
         }
 
         public Task<IQueryable<AlienSpeciesAssessment2023>> GetAlienSpeciesAssessments()
         {
+            var alienSpeciesAssessments = _appCache.GetOrAddAsync(nameof(GetAlienSpeciesAssessments), Get);
+            
+            return alienSpeciesAssessments;
+
             async Task<IQueryable<AlienSpeciesAssessment2023>> Get()
             {
                 return _options.Value.AlienSpecies2023.TransformAssessments
@@ -108,8 +114,6 @@ namespace Assessments.Frontend.Web.Infrastructure
                     // returnerer modell som allerede er transformert
                     await GetData<AlienSpeciesAssessment2023>(DataFilenames.AlienSpecies2023);
             }
-
-            return _appCache.GetOrAddAsync($"{nameof(GetSpeciesAssessments)}", Get);
         }
     }
 }

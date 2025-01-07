@@ -12,10 +12,10 @@ namespace Assessments.Mapping.AlienSpecies.Model
 
     public class AlienSpeciesAssessment2023YearFirstRecordItem
     {
-        public  AlienSpeciesAssessment2023YearFirstRecordType Item1 { get; set; }
+        public AlienSpeciesAssessment2023YearFirstRecordType RecordType { get; set; }
 
-        public  int Item2 { get; set; }
+        public int Year { get; set; }
 
-        public  bool Item3 { get; set; }
+        public bool IsUncertaintyYear { get; set; }
     }
 }

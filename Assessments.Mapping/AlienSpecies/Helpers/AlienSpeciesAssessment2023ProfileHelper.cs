@@ -836,9 +836,9 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                         bool isUncertaintyYearValue = (bool)firstObservationUncertaintyProperty.GetValue(riskAssessment);
                         yearEstablishmentType.Add(new AlienSpeciesAssessment2023YearFirstRecordItem()
                         {
-                            Item1 = establishmentTypeName, 
-                            Item2 = (int)yearFirstValue, 
-                            Item3 = isUncertaintyYearValue
+                            RecordType = establishmentTypeName, 
+                            Year = (int)yearFirstValue, 
+                            IsUncertaintyYear = isUncertaintyYearValue
                         });
                     }
                 }

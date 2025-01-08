@@ -32,6 +32,11 @@ var cookieDurationString = cookieDuration.toUTCString(); // setCookie uses this 
     m.parentNode.insertBefore(a, m);
 
 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+(function(c,l,a,r,i,t,y){
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "oizcojljrc");
 
 // expand read more
 function learnAboutCookies() {
@@ -92,6 +97,7 @@ function hasAcceptedCookies() {
         ga('create', 'UA-74815937-4', { 'cookieExpires': cookieDurationSeconds, 'cookieUpdate': 'false', 'cookieFlags': 'Secure' });
         ga('send', 'pageview');
         themeCookie();
+        window.clarity('consent');
         location.reload();        
     }
 }
@@ -103,6 +109,7 @@ function hasRejectedCookies() {
         sessionStorage['acceptedcookies'] = acceptedcookies;
         document.getElementById('heyCookie').style.display = "none";
         // TODO: SHOULD LOOP THRU AND DELETE ALL COOKIES.
+        window.clarity('consent', false);
     }
 }
 

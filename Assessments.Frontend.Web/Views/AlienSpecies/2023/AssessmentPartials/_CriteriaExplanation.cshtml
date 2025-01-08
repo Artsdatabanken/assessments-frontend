@@ -468,15 +468,15 @@
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationGrowthRate != 0">
                             <td>@Constants.AlienSpeciesTables.GrowthRate (&lambda;) </td>
-                            <td>@assessment.MedianLifetimeNumericalEstimationGrowthRate.ToString("N0")</td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationGrowthRate.ToString("G")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance != null">
                             <td>@Constants.AlienSpeciesTables.EnvironmentVar (&sigma;<sub>e</sub><sup>2</sup>) </td>
-                            <td>@assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance?.ToString("N0")</td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationEnvironmentalVariance?.ToString("G")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationDemographicVariance != null">
                             <td>@Constants.AlienSpeciesTables.DemographicVar (&sigma;<sub>d</sub><sup>2</sup>) </td>
-                            <td>@assessment.MedianLifetimeNumericalEstimationDemographicVariance?.ToString("N0")</td>
+                            <td>@assessment.MedianLifetimeNumericalEstimationDemographicVariance?.ToString("G")</td>
                         </tr>
                         <tr is-visible="assessment.MedianLifetimeNumericalEstimationCarryingCapacity != null">
                             <td>@Constants.AlienSpeciesTables.CarryingCapasity</td>

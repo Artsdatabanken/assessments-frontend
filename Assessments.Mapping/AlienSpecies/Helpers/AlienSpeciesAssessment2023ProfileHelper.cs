@@ -804,16 +804,16 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
         }
 
 
-        internal static List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)> GetYearsFirstObserved(RiskAssessment riskAssessment, string establishmentCategory)
+        internal static List<AlienSpeciesAssessment2023YearFirstRecordItem> GetYearsFirstObserved(RiskAssessment riskAssessment, string establishmentCategory)
         {
             if (establishmentCategory is "A") //species not yet in Norway cannot have observations in Norway
             {
-                return new List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)>();
+                return new List<AlienSpeciesAssessment2023YearFirstRecordItem>();
             }
 
             else
             {
-                var yearEstablishmentType = new List<(AlienSpeciesAssessment2023YearFirstRecordType, int, bool)>();
+                var yearEstablishmentType = new List<AlienSpeciesAssessment2023YearFirstRecordItem>();
 
                 foreach (var firstObservationProperty in riskAssessmentPropertiesFirstObservations)
                 {
@@ -834,7 +834,12 @@ namespace Assessments.Mapping.AlienSpecies.Helpers
                         };
                         var firstObservationUncertaintyProperty = riskAssessmentProperties.Where(x => x.Name == firstObservationProperty.Name + "Insecure").Single();
                         bool isUncertaintyYearValue = (bool)firstObservationUncertaintyProperty.GetValue(riskAssessment);
-                        yearEstablishmentType.Add((establishmentTypeName, (int)yearFirstValue, isUncertaintyYearValue));
+                        yearEstablishmentType.Add(new AlienSpeciesAssessment2023YearFirstRecordItem()
+                        {
+                            RecordType = establishmentTypeName, 
+                            Year = (int)yearFirstValue, 
+                            IsUncertaintyYear = isUncertaintyYearValue
+                        });
                     }
                 }
 

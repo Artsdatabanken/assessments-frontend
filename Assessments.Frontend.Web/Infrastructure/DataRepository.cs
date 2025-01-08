@@ -46,6 +46,8 @@ namespace Assessments.Frontend.Web.Infrastructure
 
         public Task<IQueryable<T>> GetData<T>(string name)
         {
+            return _appCache.GetOrAddAsync($"{nameof(DataRepository)}-{name}", DeserializeData);
+
             async Task<IQueryable<T>> DeserializeData()
             {
                 var fileName = Path.Combine(_environment.ContentRootPath, Constants.CacheFolder, name);
@@ -78,8 +80,6 @@ namespace Assessments.Frontend.Web.Infrastructure
 
                 return csv.GetRecords<T>().ToList().AsQueryable();
             }
-
-            return _appCache.GetOrAddAsync($"{nameof(DataRepository)}-{name}", DeserializeData);
         }
 
         public Task<IQueryable<SpeciesAssessment2021>> GetSpeciesAssessments()

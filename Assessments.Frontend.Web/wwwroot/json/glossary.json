@@ -22,7 +22,7 @@
   },
   "habitat": {
     "tagline": "Habitat",
-    "description": "{Art}ens <a href=\"https://www.artsdatabanken.no/Pages/314252/Metode#316492\">habitat</a> er dens viktigste leveområder. I vurderingene er det laget noen predefinerte habitat basert på inndeling etter <a href=\"https://artsdatabanken.no/NiN/Natursystem/Typeinndeling\">Natur i Norge (NiN)</a> systemet."
+    "description": "{Art}ens <a href=\"https://artsdatabanken.no/Pages/314252/Metode#316492\">habitat</a> er dens viktigste leveområder. I vurderingene er det laget noen predefinerte habitat basert på inndeling etter <a href=\"https://artsdatabanken.no/NiN/Natursystem/Typeinndeling\">Natur i Norge (NiN)</a> systemet."
   },
   "region": {
     "tagline": "Regioner og havområder ",
@@ -108,7 +108,7 @@
     },
     "FremmedArtNA": {
       "title": "Fremmed{art}",
-      "description": "{Art}en er fremmed og vurdert som selvstendig reproduserende etter år 1800, eller {art}en er fremmed og antas å kunne reprodusere selvstendig innen 50 år (<a href=\"http://www.artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokk{art}</a>). "
+      "description": "{Art}en er fremmed og vurdert som selvstendig reproduserende etter år 1800, eller {art}en er fremmed og antas å kunne reprodusere selvstendig innen 50 år (<a href=\"http://artsdatabanken.no/Pages/241513/Fleire_artar_bankar_paa\">dørstokk{art}</a>). "
     },
     "ObservertReproduserendeIkkeEtablertNA": {
       "title": "Ikke etablert reproduserende",

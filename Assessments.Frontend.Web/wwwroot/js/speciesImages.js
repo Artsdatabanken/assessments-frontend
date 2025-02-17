@@ -13,7 +13,7 @@ const updateMetaData = (element) => {
     Array.prototype.map.call(element.children[0].children, child => {
         if (child.nodeName == 'IMG') {
             const location = child.src.split('/Content')[1];
-            child.src = `https://www.artsdatabanken.no/Content${location}`;
+            child.src = `https://artsdatabanken.no/Content${location}`;
             child.style.width = '26px';
             child.style['padding-bottom'] = '0';
         }
@@ -29,7 +29,7 @@ const renderSpeciesImage = (targetElement, element) => {
     const datasetSrc = element.children[0].children[0].children[0].attributes.srcset.value.split('?')[0];
     img.alt = "Bilde av arten";
 
-    img.src = `https://www.artsdatabanken.no${datasetSrc}?mode=320x320`;
+    img.src = `https://artsdatabanken.no${datasetSrc}?mode=320x320`;
     img.dataset.src = '';
     img.style.height = 'auto';
     img.style.width = '200px';

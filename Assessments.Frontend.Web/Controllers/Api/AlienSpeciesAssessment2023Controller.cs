@@ -1,15 +1,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Assessments.Frontend.Web.Infrastructure;
-using Assessments.Frontend.Web.Infrastructure.Api;
-using Assessments.Mapping.AlienSpecies.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 
 namespace Assessments.Frontend.Web.Controllers.Api;
 
-[ApiKeyRequired]
 public class AlienSpeciesAssessment2023Controller(DataRepository repository) : ODataController
 {
     [EnableQuery(MaxTop = 100, PageSize = 100)]

@@ -10,10 +10,7 @@ public static class ODataHelper
 {
     public static void Options(ODataOptions options)
     {
-        options
-            .EnableQueryFeatures()
-            .SetMaxTop(100)
-            .AddRouteComponents("odata", GetModel());
+        options.EnableQueryFeatures().SetMaxTop(100).AddRouteComponents("odata", GetModel());
     }
 
     private static IEdmModel GetModel()

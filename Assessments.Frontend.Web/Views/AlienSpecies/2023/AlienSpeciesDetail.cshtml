@@ -2,7 +2,11 @@
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Assessments.Data.Models
+@using Assessments.Shared.Options
+@using Microsoft.Extensions.Options
 @inject IStringLocalizer<SharedResourcesAlienSpecies> Localizer
+
+@inject IOptions<ApplicationOptions> Options
 
 @{
     var assessment = Model.Assessment;
@@ -112,6 +116,7 @@
     var showSpreadWays = !isNr && !isEvaluatedAtAnotherLevel;
     var showTableOfContents = assessment.Category != AlienSpeciesAssessment2023Category.NR;
     var showCitationForAssessment = Model.ExpertGroupMembers.Any();
+    var showFeedback = Options.Value.AlienSpecies2023.IsHearing;
 
     Model.PageMenuViewModel.TableOfContentsViewModel = new TableOfContentsViewModel
     {
@@ -268,6 +273,9 @@
                 </div>
                 <div class="page-section" is-visible="showCitationForAssessment">
                     <partial name="/Views/Shared/_CitationForAssessment.cshtml" model="citationViewModel" />
+                </div>
+                <div class="page-section" id="Feedback" is-visible="@showFeedback">
+                    <partial name="/Views/Shared/_Feedback.cshtml" model="new FeedbackFormViewModel { Year = 2023, AssessmentId = assessment.Id, ExpertGroup = assessment.ExpertGroup, Type = FeedbackType.AlienSpecies, HasBackToTopLink = true }" />
                 </div>
             </div>
         </div>

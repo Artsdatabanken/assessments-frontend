@@ -1,122 +1,49 @@
-/* 
- * Cookies for Google Analytics and their handling
- * Using session-storage to remember which user preference. 
- * These fall under criteria B for not needing warning as they are 1. session and B. remembers choice across page.
- * TODO: Follow best practices: https://www.cookieyes.com/google-analytics-cookie-banner/
- */
+window.addEventListener('CookieInformationConsentGiven', function (event) {
+    if (CookieInformation.getConsentGivenFor('cookie_cat_marketing')) {
 
-var acceptedcookies = null;
-var readValue = sessionStorage['acceptedcookies'];
-var acceptedcookie = getCookie("acceptedcookie");
+        // Place cookie-setting script here.
+        // Or some other javascript function you want to fire on consent.
+        // Google Analytics tracking
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] ||
+                function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
 
-// Duration for all persistent cookies should be the same.
-// Set to 365 days (12 months), based on GDPR cookie consent rules.
-var cookieDurationDays = 365;
-var cookieDurationSeconds = cookieDurationDays * 24 * 60 * 60; // GA uses seconds
-var cookieDuration = new Date();
-cookieDuration.setTime(cookieDuration.getTime() + (cookieDurationSeconds * 1000));
-var cookieDurationString = cookieDuration.toUTCString(); // setCookie uses this one.
-
-
-// Google Analytics tracking
-(function (i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] ||
-        function () {
-            (i[r].q = i[r].q || []).push(arguments);
-        }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m);
-
-})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-(function(c,l,a,r,i,t,y){
-    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
-    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "oizcojljrc");
-
-// expand read more
-function learnAboutCookies() {
-    if (document.getElementById('moreCookieInfo')){
-        if (document.getElementById('moreCookieInfo').style.display == "none") {
-            document.getElementById('moreCookieInfo').style.display = "block";
-        } else {
-            document.getElementById('moreCookieInfo').style.display = "none";
-        }
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
     }
-}
+}, false);
 
-// Make a new cookie
-function setCookie(cname, cvalue,cduration) {   
-    let expires = "expires=" + cduration;
-    const secure = "Secure"
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";" + secure + ";path=/";
-}
+window.addEventListener('CookieInformationConsentGiven', function (event) {
+    if (CookieInformation.getConsentGivenFor('cookie_cat_statistic')) {
 
-// Read a cookie
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
+        // Place cookie-setting script here.
+        // Or some other javascript function you want to fire on consent.
+
+        // clarity
+        (function (c, l, a, r, i, t, y) {
+            c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+            t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+            y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "oizcojljrc");
+
+        // test matomo
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function () {
+            var u = "//hoemtestmatomo.gentleplant-dc3ffafd.norwayeast.azurecontainerapps.io/";
+            _paq.push(['setTrackerUrl', u + 'matomo.php']);
+            _paq.push(['setSiteId', '1']);
+            var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+            g.async = true; g.src = u + 'matomo.js'; s.parentNode.insertBefore(g, s);
+        })();
     }
-    return "";
-}
-
-// User choice triggers tracking or rejecting tracking.
-function acceptCookies(accepted) {
-    if (accepted) {        
-        hasAcceptedCookies();
-    } else {
-        hasRejectedCookies();
-    }   
-}
-
-function themeCookie() {
-    if (document.body) {
-        let currenttheme = document.body.classList || " ";
-        setCookie("theme", currenttheme, cookieDurationString);
-    }
-}
-
-// When cookies are accepted, make'em all, and with the same duration
-function hasAcceptedCookies() {
-    if (document.getElementById('heyCookie')) { // Only run on page with cookieWarning
-        acceptedcookies = "yes";
-        setCookie("acceptedcookie", acceptedcookies, cookieDurationString); // Remember choice for x days.    
-        ga('create', 'UA-74815937-4', { 'cookieExpires': cookieDurationSeconds, 'cookieUpdate': 'false', 'cookieFlags': 'Secure' });
-        ga('send', 'pageview');
-        themeCookie();
-        window.clarity('consent');
-        location.reload();        
-    }
-}
-
-// When cookies are rejected, remember choice for now with sessionstorage
-function hasRejectedCookies() {
-    if (document.getElementById('heyCookie')) {// Only run on page with cookieWarning      
-        acceptedcookies = "no";
-        sessionStorage['acceptedcookies'] = acceptedcookies;
-        document.getElementById('heyCookie').style.display = "none";
-        // TODO: SHOULD LOOP THRU AND DELETE ALL COOKIES.
-        window.clarity('consent', false);
-    }
-}
-
-// Hide cookiewarning if already accepted this session
-window.onload = function () {
-    if (readValue || acceptedcookie == "yes") {
-        // if sessionstorage set or cookieconsent given, hide warning
-        document.getElementById('heyCookie').style.display = "none";       
-    }
-};
+}, false);

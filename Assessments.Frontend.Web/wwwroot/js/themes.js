@@ -3,7 +3,7 @@
  - Checks manually set user preference as default (browser,os)
  */
 
-var cookiesave = false;
+var cookiesave = true;
 
 // Open/Close Menu
 function expandThemeButtons() {
@@ -15,10 +15,10 @@ function expandThemeButtons() {
     }
 }
 
-// Handle theme changes
-if (window.hasOwnProperty('acceptedcookie') && acceptedcookie == "yes") {
-    cookiesave = true;
-} 
+//// Handle theme changes
+//if (window.hasOwnProperty('acceptedcookie') && acceptedcookie == "yes") {
+//    cookiesave = true;
+//} 
 
 function toggleOnOff(thisbutton, activeornot) {
     if (thisbutton != null) {

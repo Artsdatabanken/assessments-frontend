@@ -4,10 +4,8 @@ using Assessments.Web.Infrastructure.Services;
 using Assessments.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
-using Assessments.Shared.Options;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Localization;
 using X.PagedList.Extensions;
 
@@ -20,7 +18,7 @@ namespace Assessments.Web.Controllers
         private readonly AttachmentRepository _attachmentRepository;
         private readonly IStringLocalizer<AlienSpeciesController> _localizer;
 
-        public AlienSpeciesController(IOptions<ApplicationOptions> options, AttachmentRepository attachmentRepository, ArtskartApiService artskartApiService, IStringLocalizer<AlienSpeciesController> localizer)
+        public AlienSpeciesController(AttachmentRepository attachmentRepository, ArtskartApiService artskartApiService, IStringLocalizer<AlienSpeciesController> localizer)
         {
             _localizer = localizer;
             _attachmentRepository = attachmentRepository;

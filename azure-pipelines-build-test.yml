@@ -1,7 +1,11 @@
-# ASP.NET
-# Build and test ASP.NET projects.
+# Build and test
 
-trigger: none
+trigger:
+  branches:
+    include:
+      - develop
+pr:
+- develop
 
 pool:
   vmImage: 'ubuntu-latest'

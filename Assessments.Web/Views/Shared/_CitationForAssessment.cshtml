@@ -1,17 +1,19 @@
-﻿@using Microsoft.AspNetCore.Http.Extensions
-@using System.Globalization
+﻿@using Assessments.Shared.Options
+@using Microsoft.AspNetCore.Http.Extensions
+@using Microsoft.Extensions.Options
 @model CitationForAssessmentViewModel
+@inject IOptions<ApplicationOptions> Options
 
 @{
-    // Date
     var downloadDate = $"Nedlastet {DateTime.Now.ToShortDateString()}";
-    var firspublished = Helpers.GetPublishedDate(Model.AssessmentYear, Model.YearPreviousAssessment, Model.FirstPublished);
-    var revisiondate = Helpers.GetRevisionDate(Model.RevisionDate, firspublished);
-    var date = firspublished;
+    var firstpublished = Helpers.GetPublishedDate(Model.AssessmentYear, Model.YearPreviousAssessment, Model.FirstPublished);
+    var revisiondate = Helpers.GetRevisionDate(Model.RevisionDate, firstpublished);
+    var date = firstpublished;
     if (!string.IsNullOrWhiteSpace(Model.RevisionReason))
     {
         date = revisiondate;
     }
+    var url = new Uri(Options.Value.BaseUrl, Context.Request.GetEncodedPathAndQuery().Split('?', '#')[0]).ToString();
 }
 
 @if (!string.IsNullOrEmpty(Model.ExpertGroupMembers))
@@ -25,7 +27,6 @@
         (@date).
         @Html.Raw(Model.AssessmentName)
         @Model.PublicationText
-        @Context.Request.GetDisplayUrl().Split('?')[0].
-        @downloadDate
+        @url. @downloadDate
     </p>
 }

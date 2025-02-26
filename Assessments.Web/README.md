@@ -1,4 +1,4 @@
-# assessments-frontend - also known as the  web app
+# Assessments.Web - also known as the  web app
 
 ## How to
 

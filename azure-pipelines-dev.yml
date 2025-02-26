@@ -8,7 +8,7 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
-  solutionPath: '**/*.csproj'
+  solutionPath: '**/Assessments.Frontend.Web.csproj'
 
 steps:
   - task: DotNetCoreCLI@2

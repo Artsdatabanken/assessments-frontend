@@ -1,6 +1,6 @@
 # Build and test
 
-trigger:
+trigger: none
 pr:
   branches:
     include:

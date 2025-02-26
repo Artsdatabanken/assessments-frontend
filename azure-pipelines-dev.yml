@@ -3,7 +3,9 @@
 trigger:
   branches:
     include:
-      - assessments-test
+      - develop
+pr:
+- develop
 
 pool:
   vmImage: 'ubuntu-latest'

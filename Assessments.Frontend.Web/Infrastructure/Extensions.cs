@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using System.Web;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing;
-using System.Linq;
 
-namespace Assessments.Frontend.Web.Infrastructure
+namespace Assessments.Web.Infrastructure
 {
     public static class Extensions
     {

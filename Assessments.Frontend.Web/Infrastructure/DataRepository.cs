@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Source;
 using Assessments.Mapping.RedlistSpecies;
@@ -15,12 +11,9 @@ using Azure.Storage.Blobs;
 using CsvHelper;
 using CsvHelper.Configuration;
 using LazyCache;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Assessments.Frontend.Web.Infrastructure
+namespace Assessments.Web.Infrastructure
 {
     public class DataRepository
     {

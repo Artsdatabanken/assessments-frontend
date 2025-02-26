@@ -35,12 +35,12 @@
 <div class="sidebar_image_info">
     <img src="https://design.artsdatabanken.no/list-icons/taxon-icon.png" alt="Logobilde for artssiden">
     <br>
-    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023">
+    <div is-visible="Model.AssessmentType == Assessments.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023">
         <a href="@taxon_url" class="link-styled taxon-page-link">
             @Localizer["to_species_page"]
         </a>
     </div>
-    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021">
+    <div is-visible="Model.AssessmentType == Assessments.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021">
         <a href="@taxon_url" class="link-styled taxon-page-link">
             Til artssiden
         </a>
@@ -52,7 +52,7 @@
         <partial name="/Views/Shared/_Links.cshtml" />
     </div>
 
-    <div is-visible="Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 && ShowRegulationElement()">
+    <div is-visible="Model.AssessmentType == Assessments.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 && ShowRegulationElement()">
         <hr>
         <h3>Forskrift om fremmede organismer</h3>
         <div>

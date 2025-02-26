@@ -1,11 +1,7 @@
-using Assessments.Frontend.Web.Models;
-using DocumentFormat.OpenXml.Spreadsheet;
-using System;
-using System.Linq;
-using static Assessments.Frontend.Web.Infrastructure.Constants;
-using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
+using Assessments.Web.Models;
+using static Assessments.Web.Infrastructure.FilterHelpers;
 
-namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
+namespace Assessments.Web.Infrastructure.RedlistSpecies
 {
     public static class RedlistSpeciesFilterHelpers
     {

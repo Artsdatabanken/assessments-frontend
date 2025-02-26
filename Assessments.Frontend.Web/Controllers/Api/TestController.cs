@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Assessments.Frontend.Web.Controllers.Api;
+namespace Assessments.Web.Controllers.Api;
 
 [ApiController]
 [Route("api/[controller]")]

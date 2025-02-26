@@ -1,9 +1,7 @@
 ﻿using Assessments.Data.Models;
-using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Assessments.Frontend.Web.Models
+namespace Assessments.Web.Models
 {
     public class FeedbackFormViewModel
     {

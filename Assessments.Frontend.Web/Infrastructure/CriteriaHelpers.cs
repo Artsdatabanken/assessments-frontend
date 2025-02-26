@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Assessments.Frontend.Web.Infrastructure
+﻿namespace Assessments.Web.Infrastructure
 {
     public static class CriteriaHelpers
     {

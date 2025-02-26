@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Http;
-
-namespace Assessments.Frontend.Web.Infrastructure;
+﻿namespace Assessments.Web.Infrastructure;
 
 public static class CookiesHelper
 {

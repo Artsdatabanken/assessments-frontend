@@ -1,10 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-
-namespace Assessments.Frontend.Web.Infrastructure.Services
+﻿namespace Assessments.Web.Infrastructure.Services
 {
     public class ArtskartApiService
     {

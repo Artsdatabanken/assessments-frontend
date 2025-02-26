@@ -15,7 +15,7 @@
     {
         AlienSpeciesCategory = assessment.AlienSpeciesCategory,
         AssessmentArea = assessment.AlienSpeciesCategory == Assessments.Mapping.AlienSpecies.Model.Enums.AlienSpeciecAssessment2023AlienSpeciesCategory.RegionallyAlien ? Constants.AlienSpecies2023PageMenuAssessmentAreaText : assessment.EvaluationContext.DisplayName(),
-        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
+        AssessmentType = Assessments.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
         Category = assessment.Category,
         ConnectedTaxons = assessment.ConnectedTaxons,
         EvaluationContext = assessment.EvaluationContext,

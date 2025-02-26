@@ -1,34 +1,28 @@
-﻿using Assessments.Frontend.Web.Infrastructure;
-using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
-using Assessments.Frontend.Web.Infrastructure.Services;
-using Assessments.Frontend.Web.Models;
+﻿using Assessments.Web.Infrastructure;
+using Assessments.Web.Infrastructure.AlienSpecies;
+using Assessments.Web.Infrastructure.Services;
+using Assessments.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Shared.Helpers;
 using Assessments.Shared.Options;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
 using X.PagedList.Extensions;
 
-namespace Assessments.Frontend.Web.Controllers
+namespace Assessments.Web.Controllers
 {
     [Route("fremmedartslista")]
     public class AlienSpeciesController : BaseController<AlienSpeciesController>
     {
         private readonly ArtskartApiService _artskartApiService;
         private readonly AttachmentRepository _attachmentRepository;
-        private readonly AlienSpecies2023Options _alienSpecies2023Options;
         private readonly IStringLocalizer<AlienSpeciesController> _localizer;
 
         public AlienSpeciesController(IOptions<ApplicationOptions> options, AttachmentRepository attachmentRepository, ArtskartApiService artskartApiService, IStringLocalizer<AlienSpeciesController> localizer)
         {
             _localizer = localizer;
-            _alienSpecies2023Options = options.Value.AlienSpecies2023;
             _attachmentRepository = attachmentRepository;
             _artskartApiService = artskartApiService;
         }

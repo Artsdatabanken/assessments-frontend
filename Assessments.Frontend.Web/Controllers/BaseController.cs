@@ -1,13 +1,9 @@
-﻿using Assessments.Frontend.Web.Infrastructure;
+﻿using Assessments.Web.Infrastructure;
 using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
-namespace Assessments.Frontend.Web.Controllers
+namespace Assessments.Web.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi=true)]
     public abstract class BaseController<T> : Controller where T : BaseController<T>
     {
         private IWebHostEnvironment _environment;

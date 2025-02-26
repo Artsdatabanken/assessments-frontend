@@ -1,6 +1,4 @@
-﻿using Assessments.Frontend.Web.Infrastructure.RedlistSpecies;
-
-namespace Assessments.Frontend.Web.Infrastructure
+﻿namespace Assessments.Web.Infrastructure
 {
     public interface IFilter<T>
     {

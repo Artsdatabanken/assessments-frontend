@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Frontend.Web", "Assessments.Frontend.Web\Assessments.Frontend.Web.csproj", "{9D7AD847-DBF7-40D3-981C-13CCF229EE53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Web", "Assessments.Frontend.Web\Assessments.Web.csproj", "{9D7AD847-DBF7-40D3-981C-13CCF229EE53}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Mapping", "Assessments.Mapping\Assessments.Mapping.csproj", "{27BFFD0F-B02F-4DC9-B409-691342F0CFC0}"
 EndProject

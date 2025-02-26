@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Assessments.Shared.Helpers;
+﻿using Assessments.Shared.Helpers;
 using CsvHelper.Configuration.Attributes;
 
-namespace Assessments.Frontend.Web.Infrastructure.Services
+namespace Assessments.Web.Infrastructure.Services
 {
     public class ExpertCommitteeMemberService
     {

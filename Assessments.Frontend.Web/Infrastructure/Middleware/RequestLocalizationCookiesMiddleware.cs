@@ -1,12 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Localization;
+﻿using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 
-namespace Assessments.Frontend.Web.Infrastructure.Middleware;
-
+namespace Assessments.Web.Infrastructure.Middleware;
 // husker valgt språk ved navigering til ulike sider med hjelp av cookies
 
 public class RequestLocalizationCookiesMiddleware : IMiddleware

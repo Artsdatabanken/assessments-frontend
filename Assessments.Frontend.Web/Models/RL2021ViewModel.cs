@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Assessments.Mapping.RedlistSpecies;
+﻿using Assessments.Mapping.RedlistSpecies;
 using X.PagedList;
 
-namespace Assessments.Frontend.Web.Models
+namespace Assessments.Web.Models
 {
     public class RL2021ViewModel
     {

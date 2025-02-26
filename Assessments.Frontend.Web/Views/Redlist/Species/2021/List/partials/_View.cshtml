@@ -1,5 +1,5 @@
 @model RL2021ViewModel
-@using static Assessments.Frontend.Web.Infrastructure.Helpers
+@using static Assessments.Web.Infrastructure.Helpers
 @using X.PagedList.Extensions
 
 @{
@@ -19,7 +19,7 @@
 
     var listViewViewModel = new ListViewViewModel
     {
-        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
+        AssessmentType = Assessments.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         NoResultString = ViewBag.glossary["oneliners"]["noResults"],
         Results = results,
         View = Model.View

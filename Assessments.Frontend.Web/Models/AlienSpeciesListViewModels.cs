@@ -1,9 +1,7 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model;
-using System;
-using System.Collections.Generic;
 using X.PagedList;
 
-namespace Assessments.Frontend.Web.Models
+namespace Assessments.Web.Models
 {
     public class AlienSpeciesListViewModel : AlienSpeciesListParameters
     {

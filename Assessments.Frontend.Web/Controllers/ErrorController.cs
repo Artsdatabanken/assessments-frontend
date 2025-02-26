@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Assessments.Frontend.Web.Controllers;
+namespace Assessments.Web.Controllers;
 
 [Route("Error")]
 [ApiExplorerSettings(IgnoreApi = true)]

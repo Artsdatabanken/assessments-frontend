@@ -1,11 +1,8 @@
-﻿using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Xml;
-using Assessments.Frontend.Web.Infrastructure;
+﻿using System.Xml;
+using Assessments.Web.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Assessments.Frontend.Web.Controllers
+namespace Assessments.Web.Controllers
 {
     public class HomeController : BaseController<HomeController>
     {
@@ -13,8 +10,7 @@ namespace Assessments.Frontend.Web.Controllers
         {
             return View();
         }
-
-
+        
         [Route("sitemap")]
         public async Task<FileResult> SiteMap()
         {

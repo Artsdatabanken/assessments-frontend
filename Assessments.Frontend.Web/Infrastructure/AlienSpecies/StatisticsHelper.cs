@@ -1,12 +1,9 @@
-﻿using Assessments.Frontend.Web.Models;
+﻿using Assessments.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
+namespace Assessments.Web.Infrastructure.AlienSpecies
 {
     public class StatisticsHelper
     {

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data;
-using System.IO;
-using System.Linq;
-using Assessments.Frontend.Web.Infrastructure.Services;
+using Assessments.Web.Infrastructure.Services;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.RedlistSpecies;
 using ClosedXML.Excel;
 using ClosedXML.Graphics;
 
-namespace Assessments.Frontend.Web.Infrastructure
+namespace Assessments.Web.Infrastructure
 {
     public static class ExportHelper
     {

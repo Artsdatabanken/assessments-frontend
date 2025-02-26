@@ -1,4 +1,8 @@
-﻿@model PageMenuViewModel
+﻿@using Assessments.Web.Infrastructure.Services
+@using Assessments.Web.Infrastructure.Enums
+@inject ArtsdatabankenApiService _artsdatabankenApiService
+
+@model PageMenuViewModel
 
 @functions {
     private async Task<List<KeyValuePair<string, string>>> GetMenuItems(int menuId)
@@ -18,16 +22,14 @@
         return menuItems;
     }
 }
-@using Assessments.Frontend.Web.Infrastructure.Services
-@using Assessments.Frontend.Web.Infrastructure.Enums
-@inject ArtsdatabankenApiService _artsdatabankenApiService
+
 
 @{
     var menuItems = await GetMenuItems(Model.PageMenuContentId);
     var subMenuItems =  await GetMenuItems(Model.PageMenuSubContentId);
 
-    var isRedlist2021 = Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021;
-    var isAlienSpecies2023 = Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023;
+    var isRedlist2021 = Model.AssessmentType == Assessments.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021;
+    var isAlienSpecies2023 = Model.AssessmentType == Assessments.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023;
 }
 
 <div class="sidebarmenu">

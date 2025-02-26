@@ -1,4 +1,4 @@
-﻿namespace Assessments.Frontend.Web.Infrastructure
+﻿namespace Assessments.Web.Infrastructure
 {
     public class FilterHelpers
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Assessments.Frontend.Web.Infrastructure.Enums
+namespace Assessments.Web.Infrastructure.Enums
 {
     public enum AssessmentType
     {

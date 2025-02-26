@@ -1,10 +1,7 @@
-﻿using Assessments.Frontend.Web.Models;
-using System;
-using System.Linq;
-using Assessments.Frontend.Web.Infrastructure;
-using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
+﻿using Assessments.Web.Models;
+using static Assessments.Web.Infrastructure.FilterHelpers;
 
-namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
+namespace Assessments.Web.Infrastructure.AlienSpecies
 {
     public class AlienSpeciesFilterHelpers : IFilter<AlienSpeciesListParameters>
     {

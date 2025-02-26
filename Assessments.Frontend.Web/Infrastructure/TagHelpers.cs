@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNetCore.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace Assessments.Frontend.Web.Infrastructure
+namespace Assessments.Web.Infrastructure
 {
     [HtmlTargetElement("*", Attributes = "is-visible")]
     public class VisibilityTagHelper : TagHelper

@@ -1,5 +1,5 @@
 ﻿@model SpeciesAssessment2021
-@using Assessments.Frontend.Web.Infrastructure.Services
+@using Assessments.Web.Infrastructure.Services
 @using Assessments.Mapping.AlienSpecies.Model.Enums
 @inject ExpertCommitteeMemberService ExpertCommitteeMemberService
 
@@ -18,7 +18,7 @@
     var assessmentPageHeaderViewModel = new AssessmentPageHeaderViewModel()
     {
         AssessmentArea = Model.AssessmentArea == "S" ? "Svalbard" : "Norge",
-        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
+        AssessmentType = Assessments.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         ScientificNameViewModel = new ScientificNameViewModel()
         {
             PopularName = Model.PopularName,
@@ -63,7 +63,7 @@
 
     var pageMenuViewModel = new PageMenuViewModel
     {
-        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
+        AssessmentType = Assessments.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         PageMenuContentId = Constants.RedlistSpecies2021PageMenuContentId,
         PageMenuExpandButtonText = Constants.RedlistSpecies2021PageMenuHeaderText,
         PageMenuHeaderText = Constants.RedlistSpecies2021PageMenuHeaderText
@@ -71,7 +71,7 @@
 
     var sideBarContentViewModel = new SideBarContentViewModel()
     {
-        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
+        AssessmentType = Assessments.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
         AssessmentYear = Model.AssessmentYear,
         Category = @ViewBag.categories[Model.Category.Substring(0, 2)]["presentationstring"],
         CategoryShort = Model.Category,

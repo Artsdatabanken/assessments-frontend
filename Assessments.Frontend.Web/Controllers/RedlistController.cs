@@ -1,19 +1,15 @@
-using Assessments.Frontend.Web.Infrastructure;
-using Assessments.Frontend.Web.Infrastructure.Services;
-using Assessments.Frontend.Web.Models;
+using Assessments.Web.Infrastructure;
+using Assessments.Web.Infrastructure.Services;
+using Assessments.Web.Models;
 using Assessments.Mapping.RedlistSpecies;
 using Assessments.Shared.Helpers;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using X.PagedList.Extensions;
 
-namespace Assessments.Frontend.Web.Controllers
+namespace Assessments.Web.Controllers
 {
     [Route("rodlisteforarter")]
     public class RedlistController : BaseController<RedlistController>

@@ -2,7 +2,7 @@ using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
 
-namespace Assessments.Frontend.Web.Infrastructure;
+namespace Assessments.Web.Infrastructure;
 
 /// <summary> 
 /// Custom TelemetryInitializer that overrides the default sdk behavior of treating response code 404 (not found) as failed request

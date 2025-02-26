@@ -1,11 +1,6 @@
-﻿using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-using LazyCache;
-using Microsoft.Extensions.Logging;
+﻿using LazyCache;
 
-namespace Assessments.Frontend.Web.Infrastructure.Services
+namespace Assessments.Web.Infrastructure.Services
 {
     public class ArtsdatabankenApiService
     {

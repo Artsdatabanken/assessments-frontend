@@ -17,7 +17,7 @@
         SpeciesStatus = Model.SpeciesStatus,
         Status = Model.SpeciesStatus.DisplayName(),
         TaxonRank = Model.ScientificNameRank,
-        ScientificName = Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 ? Model.ScientificName.ScientificName : ""
+        ScientificName = Model.AssessmentType == Assessments.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023 ? Model.ScientificName.ScientificName : ""
     };
 }
 
@@ -50,7 +50,7 @@
         </span>
 </div>
 
-<div is-visible="!isNr && Model.AssessmentType == Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023">
+<div is-visible="!isNr && Model.AssessmentType == Assessments.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023">
     <partial name="/Views/Shared/_Ingress.cshtml" model="ingressViewModel" />
 </div>
 

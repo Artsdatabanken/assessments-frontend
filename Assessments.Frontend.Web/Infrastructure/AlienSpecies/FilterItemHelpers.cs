@@ -1,15 +1,9 @@
 ﻿using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
-using Assessments.Shared.Resources.Enums.AlienSpecies;
-using CsvHelper.Configuration.Attributes;
-using DocumentFormat.OpenXml.Wordprocessing;
-using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using static Assessments.Frontend.Web.Infrastructure.AlienSpecies.DeciciveCriteria;
-using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
+using static Assessments.Web.Infrastructure.FilterHelpers;
 
-namespace Assessments.Frontend.Web.Infrastructure.AlienSpecies
+namespace Assessments.Web.Infrastructure.AlienSpecies
 {
     public class Areas
     {

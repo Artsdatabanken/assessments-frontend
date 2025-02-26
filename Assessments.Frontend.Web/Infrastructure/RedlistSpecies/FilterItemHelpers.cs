@@ -1,11 +1,8 @@
-﻿using Assessments.Frontend.Web.Infrastructure.RedlistSpecies.Enums;
-using Assessments.Mapping.AlienSpecies.Model.Enums;
+﻿using Assessments.Web.Infrastructure.RedlistSpecies.Enums;
 using Assessments.Shared.Helpers;
-using System;
-using System.Linq;
-using static Assessments.Frontend.Web.Infrastructure.FilterHelpers;
+using static Assessments.Web.Infrastructure.FilterHelpers;
 
-namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies
+namespace Assessments.Web.Infrastructure.RedlistSpecies
 {
     public class RedlistAreas
     {

@@ -1,4 +1,4 @@
-﻿@using Assessments.Frontend.Web.Views.AlienSpecies._2023
+﻿@using Assessments.Web.Views.AlienSpecies._2023
 
 @inject IStringLocalizer<AlienSpeciesIndex> Localizer
 
@@ -24,8 +24,8 @@
 
     PageMenuViewModel pageMenuViewModel = new PageMenuViewModel
     {
-        AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
-        ListOrAssessmentView = Assessments.Frontend.Web.Infrastructure.Enums.ListOrAssessmentView.Index,
+        AssessmentType = Assessments.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
+        ListOrAssessmentView = Assessments.Web.Infrastructure.Enums.ListOrAssessmentView.Index,
         PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
         PageMenuSubContentId = Constants.AlienSpecies2023SubPageMenuContentId,
         PageMenuExpandButtonText = Constants.AlienSpecies2023PageManuExpandButtonText,

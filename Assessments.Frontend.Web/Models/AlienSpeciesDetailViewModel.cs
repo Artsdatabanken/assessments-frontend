@@ -1,12 +1,10 @@
-﻿using Assessments.Frontend.Web.Infrastructure;
+﻿using Assessments.Web.Infrastructure;
 using Assessments.Mapping.AlienSpecies.Helpers;
 using Assessments.Mapping.AlienSpecies.Model;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Shared.Helpers;
-using System.Collections.Generic;
-using System.Linq;
 
-namespace Assessments.Frontend.Web.Models
+namespace Assessments.Web.Models
 {
     public class AlienSpeciesDetailViewModel
     {
@@ -60,7 +58,7 @@ namespace Assessments.Frontend.Web.Models
 
             PageMenuViewModel = new PageMenuViewModel
             {
-                AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.AlienSpecies2023,
+                AssessmentType = Infrastructure.Enums.AssessmentType.AlienSpecies2023,
                 ListOrAssessmentView = Infrastructure.Enums.ListOrAssessmentView.Assessment,
                 PageMenuContentId = Constants.AlienSpecies2023PageMenuContentId,
                 PageMenuSubContentId = Constants.AlienSpecies2023SubPageMenuContentId,

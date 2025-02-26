@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 
-namespace Assessments.Frontend.Web.Views.Shared.Components.CulturePicker;
+namespace Assessments.Web.Views.Shared.Components.CulturePicker;
 
 public class CulturePickerModel
 {

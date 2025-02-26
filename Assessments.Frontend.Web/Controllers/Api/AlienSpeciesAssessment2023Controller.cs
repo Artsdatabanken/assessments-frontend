@@ -1,11 +1,9 @@
-using System.Linq;
-using System.Threading.Tasks;
-using Assessments.Frontend.Web.Infrastructure;
+using Assessments.Web.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.AspNetCore.OData.Routing.Controllers;
 
-namespace Assessments.Frontend.Web.Controllers.Api;
+namespace Assessments.Web.Controllers.Api;
 
 public class AlienSpeciesAssessment2023Controller(DataRepository repository) : ODataController
 {

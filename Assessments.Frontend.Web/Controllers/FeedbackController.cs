@@ -1,22 +1,16 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Net;
 using Assessments.Data;
 using Assessments.Data.Models;
-using Assessments.Frontend.Web.Models;
+using Assessments.Web.Models;
 using Assessments.Shared.Helpers;
 using Azure.Storage.Blobs;
 using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 
-namespace Assessments.Frontend.Web.Controllers
+namespace Assessments.Web.Controllers
 {
     public class FeedbackController : BaseController<FeedbackController>
     {

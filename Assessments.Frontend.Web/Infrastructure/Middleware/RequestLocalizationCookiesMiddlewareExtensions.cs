@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-
-namespace Assessments.Frontend.Web.Infrastructure.Middleware
+﻿namespace Assessments.Web.Infrastructure.Middleware
 {
     public static class RequestLocalizationCookiesMiddlewareExtensions
     {

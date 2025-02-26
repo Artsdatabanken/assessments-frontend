@@ -1,6 +1,6 @@
 ﻿// hjelpeklasser for oversetting av delte språkressurser i løsningen
 
-namespace Assessments.Frontend.Web
+namespace Assessments.Web
 {
     // delte språkressurser for hele løsningen
     public class SharedResources { }
@@ -10,7 +10,7 @@ namespace Assessments.Frontend.Web
 }
 
 // fiks for ressursfiler i mapper med kun tall
-namespace Assessments.Frontend.Web.Views.AlienSpecies._2023
+namespace Assessments.Web.Views.AlienSpecies._2023
 {
     public class AlienSpeciesIndex { }
 }

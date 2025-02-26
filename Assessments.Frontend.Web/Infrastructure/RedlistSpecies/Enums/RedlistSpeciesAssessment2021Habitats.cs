@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Assessments.Frontend.Web.Infrastructure.RedlistSpecies.Enums
+namespace Assessments.Web.Infrastructure.RedlistSpecies.Enums
 {
     public enum RedlistSpeciesAssessment2021Habitats
     {

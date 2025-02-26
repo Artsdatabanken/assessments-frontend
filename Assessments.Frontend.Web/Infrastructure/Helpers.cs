@@ -1,15 +1,11 @@
-﻿using Assessments.Frontend.Web.Models;
-using Assessments.Mapping.AlienSpecies.Model;
+﻿using Assessments.Web.Models;
 using Assessments.Mapping.AlienSpecies.Model.Enums;
 using Assessments.Mapping.RedlistSpecies;
 using Assessments.Shared.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
-using System.Linq;
 
-namespace Assessments.Frontend.Web.Infrastructure
+namespace Assessments.Web.Infrastructure
 {
     public static class Helpers
     {

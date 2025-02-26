@@ -31,4 +31,4 @@ steps:
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'Assessments'
-      publishLocation: "Container"
+      publishLocation: 'Container'

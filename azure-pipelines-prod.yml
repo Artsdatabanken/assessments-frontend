@@ -1,4 +1,4 @@
-# Build production
+# Build and publish production
 
 trigger:
   branches:

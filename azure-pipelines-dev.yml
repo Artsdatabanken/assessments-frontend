@@ -1,4 +1,4 @@
-# Build develop
+# Build and publish staging/test
 
 trigger:
   branches:

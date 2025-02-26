@@ -14,22 +14,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{5ABC60EC-61F1-4433-888B-46DEB60B2464}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		azure-pipelines.yml = azure-pipelines.yml
+		azure-pipelines-build-test.yml = azure-pipelines-build-test.yml
+		azure-pipelines-prod.yml = azure-pipelines-prod.yml
 		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{5A14CBF8-ED21-4DB0-9A21-0ABE1173B3DB}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\develop.yml = .github\workflows\develop.yml
-		.github\workflows\main.yml = .github\workflows\main.yml
-		.github\workflows\test.yml = .github\workflows\test.yml
+		azure-pipelines-dev.yml = azure-pipelines-dev.yml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Tests", "Assessments.Tests\Assessments.Tests.csproj", "{A268EDE0-4060-42E3-90AD-E97558A410E7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assessments.Data", "Assessments.Data\Assessments.Data.csproj", "{2B7D3328-8C3A-40ED-9932-66B07374394B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ML", "ML", "{A4A32A2F-CF27-4FC8-BFD9-63C6116D56E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assessments.Transformation.Tests", "Assessments.Transformation.Tests\Assessments.Transformation.Tests.csproj", "{14703783-E9F4-43DD-93AB-E400C69028EE}"
 EndProject
@@ -71,16 +64,12 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5A14CBF8-ED21-4DB0-9A21-0ABE1173B3DB} = {5ABC60EC-61F1-4433-888B-46DEB60B2464}
-		{A4A32A2F-CF27-4FC8-BFD9-63C6116D56E7} = {5ABC60EC-61F1-4433-888B-46DEB60B2464}
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {1A2FDC22-2339-438F-8175-603BF5C7BAAB}
-		RESX_NeutralResourcesLanguage = nb
-		RESX_AutoApplyExistingTranslations = True
-		RESX_PrefixTranslations = True
-		RESX_MoveToResources = {"Items":[{"Extensions":".cs,.vb","Patterns":"$Namespace.$File.$Key|$File.$Key|StringResourceKey.$Key|$Namespace.StringResourceKey.$Key|nameof($File.$Key), ResourceType = typeof($File)|ErrorMessageResourceType = typeof($File), ErrorMessageResourceName = nameof($File.$Key)"},{"Extensions":".cshtml,.vbhtml","Patterns":"Localizer[\"$Key\"]|LocalizerShared[\"$Key\"]|@$Namespace.$File.$Key|@$File.$Key|@StringResourceKey.$Key|@$Namespace.StringResourceKey.$Key"},{"Extensions":".cpp,.c,.hxx,.h","Patterns":"$File::$Key"},{"Extensions":".aspx,.ascx","Patterns":"<%$ Resources:$File,$Key %>|<%= $File.$Key %>|<%= $Namespace.$File.$Key %>"},{"Extensions":".xaml","Patterns":"\"{x:Static properties:$File.$Key}\""},{"Extensions":".ts","Patterns":"resources.$Key"},{"Extensions":".html","Patterns":"{{ resources.$Key }}"}]}
 		RESX_Rules = {"EnabledRules":["StringFormat","WhiteSpaceLead","WhiteSpaceTail","PunctuationLead","PunctuationTail"]}
+		RESX_MoveToResources = {"Items":[{"Extensions":".cs,.vb","Patterns":"$Namespace.$File.$Key|$File.$Key|StringResourceKey.$Key|$Namespace.StringResourceKey.$Key|nameof($File.$Key), ResourceType = typeof($File)|ErrorMessageResourceType = typeof($File), ErrorMessageResourceName = nameof($File.$Key)"},{"Extensions":".cshtml,.vbhtml","Patterns":"Localizer[\"$Key\"]|LocalizerShared[\"$Key\"]|@$Namespace.$File.$Key|@$File.$Key|@StringResourceKey.$Key|@$Namespace.StringResourceKey.$Key"},{"Extensions":".cpp,.c,.hxx,.h","Patterns":"$File::$Key"},{"Extensions":".aspx,.ascx","Patterns":"<%$ Resources:$File,$Key %>|<%= $File.$Key %>|<%= $Namespace.$File.$Key %>"},{"Extensions":".xaml","Patterns":"\"{x:Static properties:$File.$Key}\""},{"Extensions":".ts","Patterns":"resources.$Key"},{"Extensions":".html","Patterns":"{{ resources.$Key }}"}]}
+		RESX_PrefixTranslations = True
+		RESX_AutoApplyExistingTranslations = True
+		RESX_NeutralResourcesLanguage = nb
+		SolutionGuid = {1A2FDC22-2339-438F-8175-603BF5C7BAAB}
 	EndGlobalSection
 EndGlobal

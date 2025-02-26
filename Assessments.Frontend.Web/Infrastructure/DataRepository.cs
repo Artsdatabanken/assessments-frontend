@@ -59,8 +59,13 @@ namespace Assessments.Frontend.Web.Infrastructure
                 }
                 else // download file
                 {
+                    _logger.LogDebug("Start downloading '{name}'", name);
+
                     var connectionString = _configuration["ConnectionStrings:AzureBlobStorage"];
-                    if (string.IsNullOrWhiteSpace(connectionString)) throw new System.Exception("Missing required config for azure blog storage: ConnectionStrings:AzureBlobStorage");
+                    
+                    if (string.IsNullOrWhiteSpace(connectionString)) 
+                        throw new System.Exception("Missing required config for azure blog storage: ConnectionStrings:AzureBlobStorage");
+
                     var blob = new BlobContainerClient(connectionString, "assessments").GetBlobClient(name);
                     var response = await blob.DownloadContentAsync();
 
@@ -69,7 +74,7 @@ namespace Assessments.Frontend.Web.Infrastructure
                     await using var writer = new StreamWriter(fileName);
                     await writer.WriteAsync(fileContent);
 
-                    _logger.LogInformation($"Downloaded {fileName}");
+                    _logger.LogDebug("Download '{name}' complete, account name: {accountName}", name, blob.AccountName);
                 }
 
                 if (!name.EndsWith(".csv")) // handle json

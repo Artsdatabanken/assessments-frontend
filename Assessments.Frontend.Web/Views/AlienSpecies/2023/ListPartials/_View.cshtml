@@ -1,8 +1,8 @@
 @model AlienSpeciesListViewModel
-@using X.PagedList;
+@using X.PagedList.Extensions
 
 @{
-    var results = (IPagedList<ListViewViewModel.Result>)Model.Results.Select(x => new ListViewViewModel.Result()
+    var results = Model.Results.Select(x => new ListViewViewModel.Result
     {
         EvaluationContext = x.EvaluationContext.ToString(),
         Category = x.Category.DisplayName(),

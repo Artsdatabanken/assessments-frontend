@@ -3,14 +3,11 @@
 @using System.Linq;
 @using Assessments.Shared.Options
 @using Microsoft.Extensions.Options
-@using Assessments.Frontend.Web.Infrastructure
 @using static Assessments.Frontend.Web.Infrastructure.FilterHelpers
 
 @inject IOptions<ApplicationOptions> Options
 
 @{
-    ViewData["EnableExport"] = !Options.Value.AlienSpecies2023.IsHearing;
-
     var startHit = Model.Results.PageNumber * 25 - 24;
     var endHit = startHit + @Model.Results.Count - 1;
     var totalCount = Model.Results.TotalItemCount.ToString("N0");
@@ -38,7 +35,6 @@
     {
         View = Model.View,
         ItemCount = Model.Results.TotalItemCount,
-        EnableStatistics = !Options.Value.AlienSpecies2023.IsHearing
     };
 }
 

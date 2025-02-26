@@ -121,7 +121,7 @@
             </table>
 
             <p is-visible="@(!string.IsNullOrEmpty(Model.ArtskartObservationChangesDescription))">@Html.Raw(Model.ArtskartObservationChangesDescription)</p>
-            <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
+            <p is-visible="(isAlienSpecie || isRegionallyAlien)">Andel av kjent forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isAlienSpecie">
                 <h3>Regionvis utbredelse</h3>
                 <div is-visible="!Model.IsSvalbard && !isRegionallyAlien" class="map double_map">
@@ -172,7 +172,7 @@
                 </tr>
             </table>
 
-            <p is-visible="!Options.Value.AlienSpecies2023.IsHearing && (isDoorKnocker || isEffectWithoutReproduction)">Andel av antatt forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
+            <p is-visible="(isDoorKnocker || isEffectWithoutReproduction)">Andel av antatt forekomstareal i sterkt endra natur er på @Model.AreaOfOccupancyInStronglyAlteredEcosystems.DisplayName().</p>
             <div is-visible="@isDoorKnockerOrEffectNoRep">
                 <h3>Regionvis utbredelse</h3>
                 <p is-visible="!hasKnownOrAssumedOccurrence">Antatt utbredelse om 50 år: Ingen angitte områder.</p>

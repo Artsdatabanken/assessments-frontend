@@ -13,11 +13,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Localization;
-using X.PagedList;
+using X.PagedList.Extensions;
 
 namespace Assessments.Frontend.Web.Controllers
 {
-    [EnableAlienSpecies2023]
     [Route("fremmedartslista")]
     public class AlienSpeciesController : BaseController<AlienSpeciesController>
     {
@@ -117,9 +116,6 @@ namespace Assessments.Frontend.Web.Controllers
 
         private IActionResult GetExport(IEnumerable<AlienSpeciesAssessment2023> query)
         {
-            if (_alienSpecies2023Options.IsHearing)
-                return NotFound();
-
             var assessmentsForExport = Mapper.Map<IEnumerable<AlienSpeciesAssessment2023Export>>(query.ToList());
 
             return new FileStreamResult(ExportHelper.GenerateAlienSpeciesAssessment2023Export(assessmentsForExport, Request.GetDisplayUrl()), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")

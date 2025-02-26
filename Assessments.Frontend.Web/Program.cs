@@ -7,10 +7,11 @@ using System.Text.Json.Serialization;
 using Assessments.Data;
 using Assessments.Frontend.Web.Infrastructure;
 using Assessments.Frontend.Web.Infrastructure.AlienSpecies;
-using Assessments.Frontend.Web.Infrastructure.Api;
 using Assessments.Frontend.Web.Infrastructure.Middleware;
 using Assessments.Frontend.Web.Infrastructure.Services;
 using Assessments.Shared.Options;
+using Azure.Identity;
+using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.DataProtection;
@@ -23,9 +24,22 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NLog.Web;
+using RobotsTxt;
 using SendGrid.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseNLog();
+
+if (!builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddAzureKeyVault(
+        new Uri($"https://{builder.Configuration["KeyVault:Name"]}.vault.azure.net/"),
+        new DefaultAzureCredential());
+
+    builder.Services.AddApplicationInsightsTelemetry();
+    builder.Services.AddSingleton<ITelemetryInitializer, TelemetryInitializer>();
+}
 
 builder.Services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
 
@@ -45,7 +59,6 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     };
 
     options.DefaultRequestCulture = new RequestCulture(cultures.First());
-
     options.SupportedCultures = cultures;
     options.SupportedUICultures = cultures;
     options.RequestCultureProviders.Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
@@ -55,10 +68,8 @@ builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 
 builder.Services.AddDbContext<AssessmentsDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException(), providerOptions => providerOptions.EnableRetryOnFailure());
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException(), providerOptions => providerOptions.MigrationsAssembly(typeof(AssessmentsDbContext).Assembly.FullName).EnableRetryOnFailure());
 });
-
-builder.Host.UseNLog();
 
 builder.Services.AddLazyCache();
 
@@ -74,9 +85,7 @@ builder.Services.AddHttpClient<ArtskartApiService>();
 
 builder.Services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
 
-builder.Services.AddSwagger(builder.Environment);
-
-builder.Services.AddResponseCompression();
+builder.Services.AddResponseCompression(options => options.EnableForHttps = true);
 
 builder.Services.AddSendGrid(options => { options.ApiKey = builder.Configuration["SendGridApiKey"]; });
 
@@ -91,37 +100,31 @@ else
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 }
 
+if (!builder.Environment.IsProduction())
+    builder.Services.AddStaticRobotsTxt(options => options.DenyAll());
+
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Error");
-    app.UseStatusCodePagesWithReExecute("/Error/{0}");
-    app.UseHsts();
-}
-else
+if (app.Environment.IsDevelopment())
 {
     app.UseODataRouteDebug();
 }
+else
+{
+    app.UseExceptionHandler("/Error");
+    app.UseHsts();
+    app.UseResponseCompression();
+}
 
-app.UseHttpsRedirection();
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.UseRequestLocalization();
 
 app.UseRequestLocalizationCookies();
 
-app.UseResponseCompression();
+app.MapStaticAssets();
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    OnPrepareResponse = ctx =>
-    {
-        // Cache static files for 30 days
-        ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=86400");
-        ctx.Context.Response.Headers.Append("Expires",
-            DateTime.UtcNow.AddDays(1).ToString("R", CultureInfo.InvariantCulture));
-    }
-});
+app.UseRobotsTxt();
 
 app.UseCookiePolicy(new CookiePolicyOptions
 {
@@ -135,9 +138,7 @@ var cachedFilesFolder = Path.Combine(app.Environment.ContentRootPath, Constants.
 if (!Directory.Exists(cachedFilesFolder))
     Directory.CreateDirectory(cachedFilesFolder);
 
-SwaggerSetup.Configure(app);
-
-app.MapDefaultControllerRoute();
+app.MapDefaultControllerRoute().WithStaticAssets();
 
 ExportHelper.Setup();
 

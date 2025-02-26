@@ -1,14 +1,14 @@
 @model RL2021ViewModel
 @using static Assessments.Frontend.Web.Infrastructure.Helpers
-@using X.PagedList;
+@using X.PagedList.Extensions
 
 @{
     Dictionary<string, Dictionary<string, string>> speciesgroup = ViewBag.speciesgroup.ToObject<Dictionary<string, Dictionary<string, string>>>();
 
-    var results = (IPagedList<ListViewViewModel.Result>)Model.Redlist2021Results.Select(x => new ListViewViewModel.Result()
+    var results = Model.Redlist2021Results.Select(x => new ListViewViewModel.Result
     {
         EvaluationContext = x.AssessmentArea,
-        Category = ViewBag.categories[x.Category.Substring(0, 2)]["presentationstring"],
+        Category = ViewBag.categories[x.Category[..2]]["presentationstring"],
         CategoryShort = x.Category,
         Id = x.Id,
         ScientificNameFormatted = FormatScientificNameElement(x.ScientificName),
@@ -17,10 +17,10 @@
         VernacularName = x.PopularName
     });
 
-    var listViewViewModel = new ListViewViewModel()
+    var listViewViewModel = new ListViewViewModel
     {
         AssessmentType = Assessments.Frontend.Web.Infrastructure.Enums.AssessmentType.RedlistSpecies2021,
-        NoResultString =  ViewBag.glossary["oneliners"]["noResults"],
+        NoResultString = ViewBag.glossary["oneliners"]["noResults"],
         Results = results,
         View = Model.View
     };

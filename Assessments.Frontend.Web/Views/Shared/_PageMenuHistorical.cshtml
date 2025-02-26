@@ -1,18 +1,10 @@
-﻿@using Microsoft.Extensions.Options
-@using Assessments.Shared.Options
-
-@inject IOptions<ApplicationOptions> Options
-
-@{
+﻿@{
     ViewData["Fremmedartslista"] = "Fremmedartslista";
     ViewData["Rødlista"] = "Rødlista";
-
-    var enableAlienSpecies2023 = Options.Value.AlienSpecies2023.Enabled;
 }
 
 <div class="sidebarmenu">
     <button class="button tertiary" onclick="expandParent(this, 'expand')">Sidemeny </button>
-
     <ul>
         <li>
             <a class="menuheaderlink redlist" asp-controller="Redlist" asp-action="RodlisteForArter">
@@ -66,43 +58,20 @@
             </a>
         </li>
     </ul>
-
     <ul>
         <li>
-            @if (enableAlienSpecies2023)
-            {
-                <a class="menuheaderlink alien-species" asp-controller="AlienSpecies" asp-action="Home">
-                    <h3>
-                        <span>Fremmedarter</span>
-                        <span class="material-icons pad-top">keyboard_arrow_right</span>
-                    </h3>
-                </a>
-            }
-            else
-            {
-                <div class="menuheaderlink alien-species">
-                    <h3>
-                        <span>Fremmedarter</span>
-                    </h3>
-                </div>
-            }
+            <a class="menuheaderlink alien-species" asp-controller="AlienSpecies" asp-action="Home">
+                <h3>
+                    <span>Fremmedarter</span>
+                    <span class="material-icons pad-top">keyboard_arrow_right</span>
+                </h3>
+            </a>
         </li>
-
-        @if (enableAlienSpecies2023)
-        {
-            <li>
-                <a asp-controller="AlienSpecies" asp-action="Index" asp-route-TaxonRank="AssessedAtSameRank">
-                    <span>@ViewData["Fremmedartslista"] 2023</span>
-                    <span class="material-icons">keyboard_arrow_right</span>
-                </a>
-            </li>
-        }
         <li>
-            <a href="https://artsdatabanken.no/fremmedartslista2018">
-                <span>@ViewData["Fremmedartslista"] 2018 </span>
+            <a asp-controller="AlienSpecies" asp-action="Index" asp-route-TaxonRank="AssessedAtSameRank">
+                <span>@ViewData["Fremmedartslista"] 2023</span>
                 <span class="material-icons">keyboard_arrow_right</span>
             </a>
         </li>
-
     </ul>
 </div>

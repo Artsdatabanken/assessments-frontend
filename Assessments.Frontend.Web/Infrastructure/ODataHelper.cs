@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 
-namespace Assessments.Frontend.Web.Infrastructure.Api;
+namespace Assessments.Frontend.Web.Infrastructure;
 
 public static class ODataHelper
 {

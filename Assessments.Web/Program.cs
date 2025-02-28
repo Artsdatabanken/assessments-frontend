@@ -75,8 +75,6 @@ builder.Services.AddHttpClient<ArtskartApiService>();
 
 builder.Services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
 
-builder.Services.AddResponseCompression(options => options.EnableForHttps = true);
-
 builder.Services.AddSendGrid(options => { options.ApiKey = builder.Configuration["SendGridApiKey"]; });
 
 builder.Services.Configure<ApplicationOptions>(builder.Configuration.GetSection(nameof(ApplicationOptions)));
@@ -90,8 +88,13 @@ else
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 }
 
-if (!builder.Environment.IsProduction())
-    builder.Services.AddStaticRobotsTxt(options => options.DenyAll());
+builder.Services.AddStaticRobotsTxt(options =>
+{
+    if (!builder.Environment.IsProduction())
+        options.DenyAll();
+
+    return options;
+});
 
 var app = builder.Build();
 
@@ -103,7 +106,6 @@ else
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
-    app.UseResponseCompression();
 }
 
 app.UseStatusCodePagesWithReExecute("/Error/{0}");
@@ -113,8 +115,6 @@ app.UseRequestLocalization();
 app.UseRequestLocalizationCookies();
 
 app.MapStaticAssets();
-
-app.UseRobotsTxt();
 
 app.UseCookiePolicy(new CookiePolicyOptions
 {
@@ -129,6 +129,8 @@ if (!Directory.Exists(cachedFilesFolder))
     Directory.CreateDirectory(cachedFilesFolder);
 
 app.MapDefaultControllerRoute().WithStaticAssets();
+
+app.UseRobotsTxt();
 
 ExportHelper.Setup();
 

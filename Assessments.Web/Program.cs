@@ -75,6 +75,8 @@ builder.Services.AddHttpClient<ArtskartApiService>();
 
 builder.Services.AddAutoMapper(cfg => cfg.AddMaps(Constants.AssessmentsMappingAssembly));
 
+builder.Services.AddResponseCompression(options => options.EnableForHttps = true);
+
 builder.Services.AddSendGrid(options => { options.ApiKey = builder.Configuration["SendGridApiKey"]; });
 
 builder.Services.Configure<ApplicationOptions>(builder.Configuration.GetSection(nameof(ApplicationOptions)));
@@ -106,6 +108,7 @@ else
 {
     app.UseExceptionHandler("/Error");
     app.UseHsts();
+    app.UseResponseCompression();
 }
 
 app.UseStatusCodePagesWithReExecute("/Error/{0}");

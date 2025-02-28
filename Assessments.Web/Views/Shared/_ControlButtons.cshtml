@@ -19,10 +19,6 @@
         <span class="material-icons">grid_on</span> Grid
     </button>*@
 
-@if (Model.EnableStatistics)
-{
-    <button id="stat_view_button" @GetViewClass(Model.View, "stat") type="submit" name="View" value="stat">
-        <span class="material-icons">bar_chart</span> Figurer
-    </button>
-}
-
+<button id="stat_view_button" @GetViewClass(Model.View, "stat") type="submit" name="View" value="stat">
+    <span class="material-icons">bar_chart</span> Figurer
+</button>

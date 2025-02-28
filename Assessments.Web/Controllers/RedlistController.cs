@@ -18,7 +18,6 @@ namespace Assessments.Web.Controllers
         {
             _artskartApiService = artskartApiService;
         }
-
         public IActionResult RodlisteForArter() => View("Species/Rodlisteforarter");
 
         private static readonly Dictionary<string, JObject> _resourceCache = new();
@@ -160,9 +159,14 @@ namespace Assessments.Web.Controllers
                 };
             }
 
-            viewModel.Redlist2021Results = query.ToPagedList(pageNumber, pageSize);
-
-            SetupStatisticsViewModel(query.ToList(), viewModel);
+            if (!string.IsNullOrEmpty(viewModel.View) && viewModel.View.Equals("stat"))
+            {
+                SetupStatisticsViewModel(query.ToList(), viewModel);
+            }
+            else
+            {
+                viewModel.Redlist2021Results = query.ToPagedList(pageNumber, pageSize);
+            }
 
             return View("Species/2021/List/List", viewModel);
         }

@@ -1,29 +1,25 @@
-@model RL2021ViewModel;
-@using static Assessments.Web.Infrastructure.Constants;
-@using static Assessments.Web.Infrastructure.Helpers;
-@using Assessments.Web.Infrastructure.RedlistSpecies;
-@using Assessments.Web.Infrastructure;
 @using System.Linq;
+@model RL2021ViewModel;
 
 @{
-    var AllAreas = RedlistAreas.RedlistSpecies2021Areas;
-    var AllCategories = RedlistCategories.RedlistSpecies2021Categories;
-    var AllCriterias = RedlistCriteria.RedlistSpecies2021Criteria;
-    var AllEuroPop = RedlistEuropeanPopulation.RedlistSpecies2021EuropeanPopulation;
-    var AllRegions = RedlistRegions.RedlistSpecies2021Regions;
-    var AllHabitats = RedlistHabitats.RedlistSpecies2021Habitats;
-    var AllTaxonRanks = RedlistTaxonRank.RedlistSpecies2021Habitats;
-    var AllSpeciesGroups = RedlistSpeciesGroups.RedlistSpecies2021SpeciesGroups;
-    var AllPresumedExtinct = PresumedExtinct.RedlistSpecies2021PresumedExtinct;
+    var allAreas = RedlistAreas.RedlistSpecies2021Areas;
+    var allCategories = RedlistCategories.RedlistSpecies2021Categories;
+    var allCriterias = RedlistCriteria.RedlistSpecies2021Criteria;
+    var allEuroPop = RedlistEuropeanPopulation.RedlistSpecies2021EuropeanPopulation;
+    var allRegions = RedlistRegions.RedlistSpecies2021Regions;
+    var allHabitats = RedlistHabitats.RedlistSpecies2021Habitats;
+    var allTaxonRanks = RedlistTaxonRank.RedlistSpecies2021Habitats;
+    var allSpeciesGroups = RedlistSpeciesGroups.RedlistSpecies2021SpeciesGroups;
+    var allPresumedExtinct = PresumedExtinct.RedlistSpecies2021PresumedExtinct;
 
-    var startHit = Model.Redlist2021Results.PageNumber * 25 - 24;
-    var endHit = startHit + @Model.Redlist2021Results.Count - 1;
-    var totalCount = Model.Redlist2021Results.TotalItemCount.ToString("N0");
+    var startHit = Model.Redlist2021Results?.PageNumber * 25 - 24 ?? 0;
+    var endHit = startHit + Model.Redlist2021Results?.Count - 1 ?? 0;
+    var totalCount = Model.Redlist2021Results?.TotalItemCount.ToString("N0") ?? string.Empty;
 
-    ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
+    var controlButtonsViewModel = new ControlButtonsViewModel
     {
-        View = Model.View,
-        ItemCount = Model.Redlist2021Results.TotalItemCount,
+        View = Model.View, 
+        ItemCount = Model.Redlist2021Results?.TotalItemCount ?? 0
     };
 }
 
@@ -161,15 +157,15 @@
                     <ul>
                         @if (RedlistSpeciesFilterHelpers.GetActiveSelectionCount(Model) > 0)
                         {
-                            MakeFilterChips(Model.Area, AllAreas.Filters);
-                            MakeFilterChips(Model.Category, AllCategories.Filters);
-                            MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters);
-                            MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters);
-                            MakeFilterChips(Model.Habitats, AllHabitats.Filters);
-                            MakeFilterChips(Model.Regions, AllRegions.Filters);
-                            MakeFilterChips(Model.EuroPop, AllEuroPop.Filters);
-                            MakeFilterChips(Model.Criterias, AllCriterias.Filters);
-                            MakeFilterChips(new string[]{ Model.PresumedExtinct.ToString()}, AllPresumedExtinct.Filters);
+                            MakeFilterChips(Model.Area, allAreas.Filters);
+                            MakeFilterChips(Model.Category, allCategories.Filters);
+                            MakeFilterChips(Model.SpeciesGroups, allSpeciesGroups.Filters);
+                            MakeFilterChips(Model.TaxonRank, allTaxonRanks.Filters);
+                            MakeFilterChips(Model.Habitats, allHabitats.Filters);
+                            MakeFilterChips(Model.Regions, allRegions.Filters);
+                            MakeFilterChips(Model.EuroPop, allEuroPop.Filters);
+                            MakeFilterChips(Model.Criterias, allCriterias.Filters);
+                            MakeFilterChips(new string[]{ Model.PresumedExtinct.ToString()}, allPresumedExtinct.Filters);
                             }
                     </ul>
                     @{
@@ -229,15 +225,15 @@
                         <div class="filter_scroll_area">
                             <ul>
                                 @{
-                                    MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas);
-                                    MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories);
-                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
-                                    MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
-                                    MakeFilterGroup(nameof(Model.Habitats), Model.Habitats, AllHabitats);
-                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
-                                    MakeFilterGroup(nameof(Model.EuroPop), Model.EuroPop, AllEuroPop);
-                                    MakeFilterGroup(nameof(Model.Criterias), Model.Criterias, AllCriterias);
-                                    MakeFilterGroup(nameof(Model.PresumedExtinct), new string[] { Model.PresumedExtinct.ToString() }, AllPresumedExtinct);
+                                    MakeFilterGroup(nameof(Model.Area), Model.Area, allAreas);
+                                    MakeFilterGroup(nameof(Model.Category), Model.Category, allCategories);
+                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, allTaxonRanks);
+                                    MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, allSpeciesGroups);
+                                    MakeFilterGroup(nameof(Model.Habitats), Model.Habitats, allHabitats);
+                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, allRegions);
+                                    MakeFilterGroup(nameof(Model.EuroPop), Model.EuroPop, allEuroPop);
+                                    MakeFilterGroup(nameof(Model.Criterias), Model.Criterias, allCriterias);
+                                    MakeFilterGroup(nameof(Model.PresumedExtinct), new string[] { Model.PresumedExtinct.ToString() }, allPresumedExtinct);
                                 }
                             </ul>
                         </div>

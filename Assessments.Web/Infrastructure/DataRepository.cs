@@ -49,6 +49,7 @@ namespace Assessments.Web.Infrastructure
                 if (File.Exists(fileName)) // use cached file
                 {
                     fileContent = await File.ReadAllTextAsync(fileName);
+                    _logger.LogDebug("Using cached '{name}'", name);
                 }
                 else // download file
                 {
@@ -56,8 +57,8 @@ namespace Assessments.Web.Infrastructure
 
                     var connectionString = _configuration["ConnectionStrings:AzureBlobStorage"];
                     
-                    if (string.IsNullOrWhiteSpace(connectionString)) 
-                        throw new System.Exception("Missing required config for azure blog storage: ConnectionStrings:AzureBlobStorage");
+                    if (string.IsNullOrEmpty(connectionString)) 
+                        throw new Exception("Missing required config for azure blog storage: ConnectionStrings:AzureBlobStorage");
 
                     var blob = new BlobContainerClient(connectionString, "assessments").GetBlobClient(name);
                     var response = await blob.DownloadContentAsync();

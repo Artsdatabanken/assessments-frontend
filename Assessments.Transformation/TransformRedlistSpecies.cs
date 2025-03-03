@@ -29,7 +29,7 @@ namespace Assessments.Transformation
                 throw new Exception("ConnectionStrings:Rodliste2020 (app secret) mangler");
 
             var optionsBuilder = new DbContextOptionsBuilder<Rodliste2020Context>()
-                .UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions .CommandTimeout(60));
+                .UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.CommandTimeout(120));
 
             _dbContext = new Rodliste2020Context(optionsBuilder.Options);
 

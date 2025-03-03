@@ -34,11 +34,9 @@ if (!builder.Environment.IsDevelopment())
 
 builder.Services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
 
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
-    .AddViewLocalization()
+    .AddViewLocalization(options => options.ResourcesPath = "Resources")
     .AddOData(ODataHelper.Options);
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>

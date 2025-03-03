@@ -4,6 +4,8 @@ trigger:
   branches:
     include:
       - develop
+pr:
+- develop
 
 pool:
   vmImage: 'ubuntu-latest'

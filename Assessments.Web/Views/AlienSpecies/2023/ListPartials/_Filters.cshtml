@@ -1,16 +1,12 @@
-@model AlienSpeciesListViewModel;
-
 @using System.Linq;
-@using Assessments.Shared.Options
-@using Microsoft.Extensions.Options
 @using static Assessments.Web.Infrastructure.FilterHelpers
 
-@inject IOptions<ApplicationOptions> Options
+@model AlienSpeciesListViewModel;
 
 @{
-    var startHit = Model.Results.PageNumber * 25 - 24;
-    var endHit = startHit + @Model.Results.Count - 1;
-    var totalCount = Model.Results.TotalItemCount.ToString("N0");
+    var startHit = Model.Results?.PageNumber * 25 - 24 ?? 0;
+    var endHit = startHit + Model.Results?.Count - 1 ?? 0;
+    var totalCount = Model.Results?.TotalItemCount.ToString("N0") ?? string.Empty;
 
     var AllAreas = new Areas().AlienSpecies2023Areas();
     var AllCategories = new Categories().AlienSpecies2023Categories();
@@ -34,7 +30,7 @@
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
     {
         View = Model.View,
-        ItemCount = Model.Results.TotalItemCount,
+        ItemCount = Model.Results?.TotalItemCount ?? 0,
     };
 }
 

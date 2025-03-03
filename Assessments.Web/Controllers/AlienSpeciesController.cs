@@ -43,13 +43,16 @@ namespace Assessments.Web.Controllers
 
             if (export)
                 return GetExport(query);
+            
             if (viewModel.View == "stat")
             {
                 var statistics = new StatisticsHelper(query, unfilteredQuery);
                 viewModel.Statistics = statistics.GetStatistics();
             }
-
-            viewModel.Results = query.ToPagedList(page ?? 1, DefaultPageSize);
+            else
+            {
+                viewModel.Results = query.ToPagedList(page ?? 1, DefaultPageSize);
+            }
 
             return View("2023/AlienSpeciesIndex", viewModel);
         }

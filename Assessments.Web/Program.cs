@@ -34,18 +34,18 @@ if (!builder.Environment.IsDevelopment())
 
 builder.Services.Configure<RouteOptions>(options => { options.LowercaseUrls = true; });
 
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()))
     .AddViewLocalization()
     .AddOData(ODataHelper.Options);
 
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
-
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var cultures = new List<CultureInfo>
     {
-        new("no"),
+        new("nb-NO"),
         new("en")
     };
 
@@ -101,8 +101,7 @@ builder.Services.AddStaticRobotsTxt(options =>
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto |
-                               ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedHost;
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedHost;
 
     options.ForwardedHostHeaderName = "X-Original-Host";
 

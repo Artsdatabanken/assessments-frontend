@@ -40,21 +40,24 @@ builder.Services.AddControllersWithViews()
     .AddViewLocalization(options => options.ResourcesPath = "Resources")
     .AddOData(ODataHelper.Options);
 
+var cultures = new List<CultureInfo>
+{
+    new("no"),
+    new("en")
+};
+
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
-    var cultures = new List<CultureInfo>
-    {
-        new("no"),
-        new("en")
-    };
-
     options.DefaultRequestCulture = new RequestCulture(cultures.First());
     options.SupportedCultures = cultures;
     options.SupportedUICultures = cultures;
     options.RequestCultureProviders.Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
 });
 
-builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
+CultureInfo.DefaultThreadCurrentCulture = cultures.First();
+CultureInfo.DefaultThreadCurrentUICulture = cultures.First();
+
+//builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 
 builder.Services.AddDbContext<AssessmentsDbContext>(options =>
 {
@@ -127,7 +130,7 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.UseRequestLocalization();
 
-app.UseRequestLocalizationCookies();
+//app.UseRequestLocalizationCookies();
 
 app.MapStaticAssets();
 

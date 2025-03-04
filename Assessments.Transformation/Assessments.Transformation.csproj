@@ -19,7 +19,7 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.10" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
 		<PackageReference Include="RavenDB.Client" Version="3.5.10-patch-35311" />
 	</ItemGroup>
 	<ItemGroup>

@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using Assessments.Data;
 using Assessments.Web.Infrastructure;
 using Assessments.Web.Infrastructure.AlienSpecies;
-using Assessments.Web.Infrastructure.Middleware;
 using Assessments.Web.Infrastructure.Services;
 using Assessments.Shared.Options;
 using Azure.Identity;
@@ -14,7 +13,6 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
-using RobotsTxt;
 using SendGrid.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.HttpOverrides;
 
@@ -29,7 +27,7 @@ if (!builder.Environment.IsDevelopment())
         new DefaultAzureCredential());
 
     builder.Services.AddApplicationInsightsTelemetry();
-    builder.Services.AddServiceProfiler();
+    //builder.Services.AddServiceProfiler();
     builder.Services.AddSingleton<ITelemetryInitializer, TelemetryInitializer>();
 }
 
@@ -40,22 +38,19 @@ builder.Services.AddControllersWithViews()
     .AddViewLocalization(options => options.ResourcesPath = "Resources")
     .AddOData(ODataHelper.Options);
 
-var cultures = new List<CultureInfo>
-{
-    new("no"),
-    new("en")
-};
-
 builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
+    var cultures = new List<CultureInfo>
+    {
+        new("no"),
+        new("en")
+    };
+
     options.DefaultRequestCulture = new RequestCulture(cultures.First());
     options.SupportedCultures = cultures;
     options.SupportedUICultures = cultures;
     options.RequestCultureProviders.Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
 });
-
-CultureInfo.DefaultThreadCurrentCulture = cultures.First();
-CultureInfo.DefaultThreadCurrentUICulture = cultures.First();
 
 //builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 
@@ -93,13 +88,13 @@ else
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 }
 
-builder.Services.AddStaticRobotsTxt(options =>
-{
-    if (!builder.Environment.IsProduction())
-        options.DenyAll();
+//builder.Services.AddStaticRobotsTxt(options =>
+//{
+//    if (!builder.Environment.IsProduction())
+//        options.DenyAll();
 
-    return options;
-});
+//    return options;
+//});
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -148,7 +143,7 @@ if (!Directory.Exists(cachedFilesFolder))
 
 app.MapDefaultControllerRoute().WithStaticAssets();
 
-app.UseRobotsTxt();
+//app.UseRobotsTxt();
 
 ExportHelper.Setup();
 

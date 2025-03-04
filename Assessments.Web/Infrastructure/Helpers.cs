@@ -9,6 +9,13 @@ namespace Assessments.Web.Infrastructure
 {
     public static class Helpers
     {
+        private static readonly string CurrentCulture;
+
+        static Helpers()
+        {
+            CurrentCulture = Thread.CurrentThread.CurrentUICulture.ToString();
+        }
+
         public static string FormatNumeric(string value)
         {
             if (int.TryParse(value, out int result))
@@ -334,7 +341,7 @@ namespace Assessments.Web.Infrastructure
             var form = AlienSpeciesAssessment2023ScientificNameRank.Form;
             var hybrid = AlienSpeciesAssessment2023ScientificNameRank.Hybrid;
             bool isHybrid = scientificName.Contains('×');
-            bool isNorwegianLanguage = CultureInfo.CurrentUICulture.Name == "no";
+            bool isNorwegianLanguage = CurrentCulture == "no";
 
             if (rank == variety)
             {

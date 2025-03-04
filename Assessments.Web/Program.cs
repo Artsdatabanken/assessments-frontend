@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using Assessments.Data;
 using Assessments.Web.Infrastructure;
 using Assessments.Web.Infrastructure.AlienSpecies;
+using Assessments.Web.Infrastructure.Middleware;
 using Assessments.Web.Infrastructure.Services;
 using Assessments.Shared.Options;
 using Azure.Identity;
@@ -13,6 +14,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.OData;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
+using RobotsTxt;
 using SendGrid.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.HttpOverrides;
 
@@ -27,7 +29,6 @@ if (!builder.Environment.IsDevelopment())
         new DefaultAzureCredential());
 
     builder.Services.AddApplicationInsightsTelemetry();
-    //builder.Services.AddServiceProfiler();
     builder.Services.AddSingleton<ITelemetryInitializer, TelemetryInitializer>();
 }
 
@@ -47,12 +48,14 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     };
 
     options.DefaultRequestCulture = new RequestCulture(cultures.First());
+    
     options.SupportedCultures = cultures;
     options.SupportedUICultures = cultures;
+    
     options.RequestCultureProviders.Remove(typeof(AcceptLanguageHeaderRequestCultureProvider));
 });
 
-//builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
+builder.Services.AddScoped<RequestLocalizationCookiesMiddleware>();
 
 builder.Services.AddDbContext<AssessmentsDbContext>(options =>
 {
@@ -88,13 +91,13 @@ else
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 }
 
-//builder.Services.AddStaticRobotsTxt(options =>
-//{
-//    if (!builder.Environment.IsProduction())
-//        options.DenyAll();
+builder.Services.AddStaticRobotsTxt(options =>
+{
+    if (!builder.Environment.IsProduction())
+        options.DenyAll();
 
-//    return options;
-//});
+    return options;
+});
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -125,7 +128,7 @@ app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.UseRequestLocalization();
 
-//app.UseRequestLocalizationCookies();
+app.UseRequestLocalizationCookies();
 
 app.MapStaticAssets();
 
@@ -143,7 +146,7 @@ if (!Directory.Exists(cachedFilesFolder))
 
 app.MapDefaultControllerRoute().WithStaticAssets();
 
-//app.UseRobotsTxt();
+app.UseRobotsTxt();
 
 ExportHelper.Setup();
 

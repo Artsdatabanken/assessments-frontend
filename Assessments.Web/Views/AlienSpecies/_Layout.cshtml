@@ -47,9 +47,9 @@
         <partial name="/Views/AlienSpecies/2023/_AlienSpeciesHeader.cshtml" model="@headerViewModel" />
         <div class="main">
             <div class="main-content width-adjuster">
-                @* <environment exclude="Production">
+                <environment exclude="Production">
                     <vc:culture-picker />
-                </environment> *@
+                </environment>
                 @RenderBody()
                 <script src="~/js/site.js"></script>
                 <script src="~/js/accordions.js" async></script>

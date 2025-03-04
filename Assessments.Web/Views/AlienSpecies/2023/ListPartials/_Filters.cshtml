@@ -8,24 +8,24 @@
     var endHit = startHit + Model.Results?.Count - 1 ?? 0;
     var totalCount = Model.Results?.TotalItemCount.ToString("N0") ?? string.Empty;
 
-    var AllAreas = new Areas().AlienSpecies2023Areas();
-    var AllCategories = new Categories().AlienSpecies2023Categories();
-    var AllCategoriesChanged = new CategoryChange().AlienSpecies2023CategoryChanged();
-    var AllClimateEffects = new ClimateEffects().AlienSpecies2023ClimateEffects();
-    var AllDeciciveCriterias = new DeciciveCriteria().AlienSpecies2023DeciciveCriteria();
-    var AllEcologicalEffects = new Categories().AlienSpecies2023EcologicalEffect();
-    var AllEnvironments = new Environments().AlienSpecies2023Environment();
-    var AllGeographicVariation = new GeographicVariation().AlienSpecies2023GeographicVariation();
-    var AllInvasionPotentials = new Categories().AlienSpecies2023InvasionPotential();
-    var AllNatureTypes = new NatureTypes().AlienSpecies2023NatureTypes();
-    var AllNotAssessed = new NotAssessed().AlienSpecies2023NotAssessed();
-    var AllProductionSpecies = new ProductionSpecies().AlienSpecies2023ProductionSpecies();
-    var AllRegionallyAlien = new RegionallyAlien().AlienSpecies2023RegionallyAlien();
-    var AllRegions = new Regions().AlienSpecies2023Regions();
-    var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
-    var AllSpeciesStatus = new SpeciesStatus().AlienSpecies2023SpeciesStatus();
-    var AllSpreadWays = new SpreadWays().AlienSpecies2023SpreadWays();
-    var AllTaxonRanks = new TaxonRank().AlienSpecies2023TaxonRanks();
+    // var AllAreas = new Areas().AlienSpecies2023Areas();
+    // var AllCategories = new Categories().AlienSpecies2023Categories();
+    // var AllCategoriesChanged = new CategoryChange().AlienSpecies2023CategoryChanged();
+    // var AllClimateEffects = new ClimateEffects().AlienSpecies2023ClimateEffects();
+    // var AllDeciciveCriterias = new DeciciveCriteria().AlienSpecies2023DeciciveCriteria();
+    // var AllEcologicalEffects = new Categories().AlienSpecies2023EcologicalEffect();
+    // var AllEnvironments = new Environments().AlienSpecies2023Environment();
+    // var AllGeographicVariation = new GeographicVariation().AlienSpecies2023GeographicVariation();
+    // var AllInvasionPotentials = new Categories().AlienSpecies2023InvasionPotential();
+    // var AllNatureTypes = new NatureTypes().AlienSpecies2023NatureTypes();
+    // var AllNotAssessed = new NotAssessed().AlienSpecies2023NotAssessed();
+    // var AllProductionSpecies = new ProductionSpecies().AlienSpecies2023ProductionSpecies();
+    // var AllRegionallyAlien = new RegionallyAlien().AlienSpecies2023RegionallyAlien();
+    // var AllRegions = new Regions().AlienSpecies2023Regions();
+    // var AllSpeciesGroups = new SpeciesGroups().AlienSpecies2023SpeciesGroups();
+    // var AllSpeciesStatus = new SpeciesStatus().AlienSpecies2023SpeciesStatus();
+    // var AllSpreadWays = new SpreadWays().AlienSpecies2023SpreadWays();
+    // var AllTaxonRanks = new TaxonRank().AlienSpecies2023TaxonRanks();
 
     ControlButtonsViewModel controlButtonsViewModel = new ControlButtonsViewModel
     {
@@ -143,55 +143,59 @@
     }
 }
 
+
+@*
 <!--- # of hits in search and their corresponding filter-chips -->
-<div class="empty_filters">
-    <p class="hit_count_text">
-        <span class="searchstring">
-            @if (GetActiveSelectionCount(Model) != 0
-|| !string.IsNullOrEmpty(GetActiveSelection(Model)))
-            {
-                <span>
-                    @if (!string.IsNullOrEmpty(GetActiveSelection(Model)))
-                    {
-                        string searchstring = "Viser treff for " + '"' + @GetActiveSelection(Model) + '"';
-                        <span>@searchstring</span>
-                        <a href="@Context.Request.QueryString.RemoveParameters(new[] { nameof(AlienSpeciesListParameters.Name), "Page" })" class="button tinybutton tertiary search_related">
-                            <span class="material-icons">close</span>Fjern søk
-                        </a>
-                    }
-                </span>
-                <div class="filterbox">
-                    <ul>
-                        @if (GetActiveSelectionCount(Model) > 0)
-                        {
-                            MakeFilterChips(Model.Area, AllAreas.Filters, nameof(Model.Area));
-                            MakeFilterChips(Model.Category, AllCategories.Filters, nameof(Model.Category));
-                            MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters, nameof(Model.CategoryChanged));
-                            MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters, nameof(Model.InvasionPotential));
-                            MakeFilterChips(Model.NatureTypes, AllNatureTypes.Filters, nameof(Model.NatureTypes));
-                            MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters, nameof(Model.EcologicalEffect));
-                            MakeFilterChips(Model.Environment, AllEnvironments.Filters, nameof(Model.Environment));
-                            MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters, nameof(Model.DecisiveCriterias));
-                            MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters, nameof(Model.SpeciesStatus));
-                            MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters, nameof(Model.ProductionSpecies));
-                            MakeFilterChips(Model.NotAssessed, AllNotAssessed.Filters, nameof(Model.NotAssessed));
-                            MakeFilterChips(Model.RegionallyAlien, AllRegionallyAlien.Filters, nameof(Model.RegionallyAlien));
-                            MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters, nameof(Model.SpeciesGroups));
-                            MakeFilterChips(Model.GeographicVariations, AllGeographicVariation.Filters, nameof(Model.GeographicVariations));
-                            MakeFilterChips(Model.ClimateEffects, AllClimateEffects.Filters, nameof(Model.ClimateEffects));
-                            MakeFilterChips(Model.SpreadWays, AllSpreadWays.Filters, nameof(Model.SpreadWays));
-                            MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters, nameof(Model.TaxonRank));
-                            MakeFilterChips(Model.Regions, AllRegions.Filters, nameof(Model.Regions));
-                        }
-                    </ul>
-                    <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">
-                        <span class="material-icons">close</span>Fjern alle filter
-                    </a>
-                </div>
-            }
-        </span>
-    </p>
-</div>
+   <div class="empty_filters">
+       <p class="hit_count_text">
+           <span class="searchstring">
+               @if (GetActiveSelectionCount(Model) != 0
+   || !string.IsNullOrEmpty(GetActiveSelection(Model)))
+               {
+                   <span>
+                       @if (!string.IsNullOrEmpty(GetActiveSelection(Model)))
+                       {
+                           string searchstring = "Viser treff for " + '"' + @GetActiveSelection(Model) + '"';
+                           <span>@searchstring</span>
+                           <a href="@Context.Request.QueryString.RemoveParameters(new[] { nameof(AlienSpeciesListParameters.Name), "Page" })" class="button tinybutton tertiary search_related">
+                               <span class="material-icons">close</span>Fjern søk
+                           </a>
+                       }
+                   </span>
+                   <div class="filterbox">
+                       <ul>
+                           @if (GetActiveSelectionCount(Model) > 0)
+                           {
+                               MakeFilterChips(Model.Area, AllAreas.Filters, nameof(Model.Area));
+                               MakeFilterChips(Model.Category, AllCategories.Filters, nameof(Model.Category));
+                               MakeFilterChips(Model.CategoryChanged, AllCategoriesChanged.Filters, nameof(Model.CategoryChanged));
+                               MakeFilterChips(Model.InvasionPotential, AllInvasionPotentials.Filters, nameof(Model.InvasionPotential));
+                               MakeFilterChips(Model.NatureTypes, AllNatureTypes.Filters, nameof(Model.NatureTypes));
+                               MakeFilterChips(Model.EcologicalEffect, AllEcologicalEffects.Filters, nameof(Model.EcologicalEffect));
+                               MakeFilterChips(Model.Environment, AllEnvironments.Filters, nameof(Model.Environment));
+                               MakeFilterChips(Model.DecisiveCriterias, AllDeciciveCriterias.Filters, nameof(Model.DecisiveCriterias));
+                               MakeFilterChips(Model.SpeciesStatus, AllSpeciesStatus.Filters, nameof(Model.SpeciesStatus));
+                               MakeFilterChips(Model.ProductionSpecies, AllProductionSpecies.Filters, nameof(Model.ProductionSpecies));
+                               MakeFilterChips(Model.NotAssessed, AllNotAssessed.Filters, nameof(Model.NotAssessed));
+                               MakeFilterChips(Model.RegionallyAlien, AllRegionallyAlien.Filters, nameof(Model.RegionallyAlien));
+                               MakeFilterChips(Model.SpeciesGroups, AllSpeciesGroups.Filters, nameof(Model.SpeciesGroups));
+                               MakeFilterChips(Model.GeographicVariations, AllGeographicVariation.Filters, nameof(Model.GeographicVariations));
+                               MakeFilterChips(Model.ClimateEffects, AllClimateEffects.Filters, nameof(Model.ClimateEffects));
+                               MakeFilterChips(Model.SpreadWays, AllSpreadWays.Filters, nameof(Model.SpreadWays));
+                               MakeFilterChips(Model.TaxonRank, AllTaxonRanks.Filters, nameof(Model.TaxonRank));
+                               MakeFilterChips(Model.Regions, AllRegions.Filters, nameof(Model.Regions));
+                           }
+                       </ul>
+                       <a is-visible="@GetActiveSelectionCount(Model) > 1" href="@Context.Request.QueryString.RemoveParameters(Model.FilterParameters.Concat(new [] {"Page"}))" class="button tinybutton tertiary search_related">
+                           <span class="material-icons">close</span>Fjern alle filter
+                       </a>
+                   </div>
+               }
+           </span>
+       </p>
+   </div>
+*@
+
 
 <!-- CONTROL BUTTONS and toggles-->
 <div class="controls">
@@ -225,40 +229,43 @@
         @{ InputTag("initial_check", "meta_checkbox", "Meta", Model.Meta, "Visited");}
         @{ InputTag("remember_scroll", "meta_checkbox", "Meta", Model.Meta, "0");}
         <!-- View controls -->
+        @*
         <div id="filters" class="filteX no_js hide_on_smallscreen">
-            <div id="filter_modal_background">
-                <div id="filters_scrollable" class="filter_background">
-                    <div class="filter_groups">
-                        <partial name="/Views/Shared/_FilterHeader.cshtml" />
-                        <div class="filter_scroll_area">
-                            <ul>
-                                @{
-                                    MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas);
-                                    MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories);
-                                    MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials);
-                                    MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects);
-                                    MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias);
-                                    MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged);
-                                    MakeFilterGroup(nameof(Model.GeographicVariations), Model.GeographicVariations, AllGeographicVariation);
-                                    MakeFilterGroup(nameof(Model.ClimateEffects), Model.ClimateEffects, AllClimateEffects);
-                                    MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus);
-                                    MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies);
-                                    MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
-                                    MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
-                                    MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
-                                    MakeFilterGroup(nameof(Model.Environment), Model.Environment, AllEnvironments);
-                                    MakeFilterGroup(nameof(Model.NatureTypes), Model.NatureTypes, AllNatureTypes);
-                                    MakeFilterGroup(nameof(Model.SpreadWays), Model.SpreadWays, AllSpreadWays);
-                                    MakeFilterGroup(nameof(Model.RegionallyAlien), Model.RegionallyAlien, AllRegionallyAlien);
-                                    MakeFilterGroup(nameof(Model.NotAssessed), Model.NotAssessed, AllNotAssessed);
-                                }
-                            </ul>
-                        </div>
-                        <partial name="/Views/Shared/_FilterMobileButtons.cshtml" view-data="ViewData" />
-                    </div>
-                </div>
-            </div>
-        </div>
+       <div id="filter_modal_background">
+           <div id="filters_scrollable" class="filter_background">
+               <div class="filter_groups">
+                   <partial name="/Views/Shared/_FilterHeader.cshtml" />
+                   <div class="filter_scroll_area">
+                       <ul>
+                           @{
+                               MakeFilterGroup(nameof(Model.Area), Model.Area, AllAreas);
+                               MakeFilterGroup(nameof(Model.Category), Model.Category, AllCategories);
+                               MakeFilterGroup(nameof(Model.InvasionPotential), Model.InvasionPotential, AllInvasionPotentials);
+                               MakeFilterGroup(nameof(Model.EcologicalEffect), Model.EcologicalEffect, AllEcologicalEffects);
+                               MakeFilterGroup(nameof(Model.DecisiveCriterias), Model.DecisiveCriterias, AllDeciciveCriterias);
+                               MakeFilterGroup(nameof(Model.CategoryChanged), Model.CategoryChanged, AllCategoriesChanged);
+                               MakeFilterGroup(nameof(Model.GeographicVariations), Model.GeographicVariations, AllGeographicVariation);
+                               MakeFilterGroup(nameof(Model.ClimateEffects), Model.ClimateEffects, AllClimateEffects);
+                               MakeFilterGroup(nameof(Model.SpeciesStatus), Model.SpeciesStatus, AllSpeciesStatus);
+                               MakeFilterGroup(nameof(Model.ProductionSpecies), Model.ProductionSpecies, AllProductionSpecies);
+                               MakeFilterGroup(nameof(Model.SpeciesGroups), Model.SpeciesGroups, AllSpeciesGroups);
+                               MakeFilterGroup(nameof(Model.TaxonRank), Model.TaxonRank, AllTaxonRanks);
+                               MakeFilterGroup(nameof(Model.Regions), Model.Regions, AllRegions);
+                               MakeFilterGroup(nameof(Model.Environment), Model.Environment, AllEnvironments);
+                               MakeFilterGroup(nameof(Model.NatureTypes), Model.NatureTypes, AllNatureTypes);
+                               MakeFilterGroup(nameof(Model.SpreadWays), Model.SpreadWays, AllSpreadWays);
+                               MakeFilterGroup(nameof(Model.RegionallyAlien), Model.RegionallyAlien, AllRegionallyAlien);
+                               MakeFilterGroup(nameof(Model.NotAssessed), Model.NotAssessed, AllNotAssessed);
+                           }
+                       </ul>
+                   </div>
+                   <partial name="/Views/Shared/_FilterMobileButtons.cshtml" view-data="ViewData" />
+               </div>
+           </div>
+       </div>
+   </div>
+
+        *@
     </div>
     <partial name="/Views/AlienSpecies/2023/ListPartials/_View.cshtml" />
 </div>

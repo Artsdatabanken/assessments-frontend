@@ -163,7 +163,7 @@
     <value>type interaksjon</value>
   </data>
   <data name="documentation_type" xml:space="preserve">
-    <value>vurderings&lt;span&gt;&amp;#8208;&lt;/span&gt;&lt;br&gt;grunnlag</value>
+    <value>vurderings-grunnlag</value>
   </data>
   <data name="alien_species_tables_D_criteria_society_table_description" xml:space="preserve">
     <value>Tabellen viser hvilken type interaksjon den fremmede arten har med grupper av stedegne arter (hvor minst én av artene er trua eller nøkkelart), samt interaksjonens styre og omfang. Den negative interaksjonen med grupper av arter er indikert gjennom påvirket naturtype. Kun effekter som er dokumentert i Norge eller i utlandet (for arten selv eller en sammenlignbar art), eller som sannsynlig vil opptre i Norge i løpet av 50 år, er inkludert.</value>

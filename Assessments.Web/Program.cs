@@ -29,6 +29,7 @@ if (!builder.Environment.IsDevelopment())
         new DefaultAzureCredential());
 
     builder.Services.AddApplicationInsightsTelemetry();
+    builder.Services.AddServiceProfiler();
     builder.Services.AddSingleton<ITelemetryInitializer, TelemetryInitializer>();
 }
 
@@ -43,7 +44,7 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
 {
     var cultures = new List<CultureInfo>
     {
-        new("nb-NO"),
+        new("no"),
         new("en")
     };
 

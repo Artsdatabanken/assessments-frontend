@@ -39,32 +39,36 @@ namespace Assessments.Shared.Helpers
                 return descriptionAttribute == null ? value.ToString() : descriptionAttribute.Description;
             }
 
-            switch (attribute)
-            {
-                case { ResourceType: not null, Description: not null }:
-                {
-                    var manager = new ResourceManager(attribute.ResourceType);
-                    return manager.GetString(attribute.Description);
-                }
-                default:
-                    return attribute.Description ?? value.ToString();
-            }
+            return attribute.Description ?? value.ToString();
+
+            //switch (attribute)
+            //{
+            //    case { ResourceType: not null, Description: not null }:
+            //    {
+            //        var manager = new ResourceManager(attribute.ResourceType);
+            //        return manager.GetString(attribute.Description);
+            //    }
+            //    default:
+            //        return attribute.Description ?? value.ToString();
+            //}
         }
 
         public static string DisplayName(this Enum value)
         {
             var attribute = value.GetAttribute<DisplayAttribute>();
 
-            switch (attribute)
-            {
-                case { ResourceType: not null, Name: not null }:
-                {
-                    var manager = new ResourceManager(attribute.ResourceType);
-                    return manager.GetString(attribute.Name);
-                }
-                default:
-                    return attribute?.Name ?? value.ToString();
-            }
+            return attribute?.Name ?? value.ToString();
+
+            //switch (attribute)
+            //{
+            //    case { ResourceType: not null, Name: not null }:
+            //    {
+            //        var manager = new ResourceManager(attribute.ResourceType);
+            //        return manager.GetString(attribute.Name);
+            //    }
+            //    default:
+            //        return attribute?.Name ?? value.ToString();
+            //}
         }
 
         public static IEnumerable<T> ToEnumerable<T>(this IEnumerable<string> array)
